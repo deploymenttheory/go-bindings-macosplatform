@@ -5,80 +5,102 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about a frame on a webpage.
+// WKFrameInfo is an idiomatic wrapper over the Objective-C class WKFrameInfo.
 //
-// WKFrameInfo wraps [raw.WKFrameInfo] with a fluent Go API.
+// An object that contains information about a frame on a webpage.
 type WKFrameInfo struct {
-	inner *raw.WKFrameInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKFrameInfo].
-func (x *WKFrameInfo) Unwrap() *raw.WKFrameInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKFrameInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// WKFrameInfoFromID adopts an existing object pointer as a WKFrameInfo (nil for 0).
+// WKFrameInfoFromID adopts an existing Objective-C object as a WKFrameInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func WKFrameInfoFromID(id objc.ID) *WKFrameInfo {
 	if id == 0 {
 		return nil
 	}
-	return &WKFrameInfo{inner: raw.WKFrameInfoFromID(id)}
+	x := &WKFrameInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKFrameInfo creates a new [WKFrameInfo].
+// wKFrameInfoAdopt wraps an Objective-C object that this code just created as a
+// WKFrameInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKFrameInfoAdopt(id objc.ID) *WKFrameInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &WKFrameInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKFrameInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKFrameInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKFrameInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKFrameInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKFrameInfo creates a new WKFrameInfo.
 func NewWKFrameInfo() *WKFrameInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKFrameInfo")), objc.RegisterName("new"))
-	return &WKFrameInfo{inner: raw.WKFrameInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKFrameInfo")), objc.RegisterName("new"))
+	return wKFrameInfoAdopt(_id)
 }
 
-// @abstract A Boolean value indicating whether the frame is the main frame or a subframe.
-//
-// IsMainFrame calls the underlying IsMainFrame.
+// IsMainFrame a Boolean value indicating whether the frame is the main frame or a subframe.
 func (x *WKFrameInfo) IsMainFrame() bool {
-	return x.inner.IsMainFrame()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMainFrame"))
+	return _r
 }
 
-// @abstract The frame's current request.
-//
-// Request calls the underlying Request.
-func (x *WKFrameInfo) Request() *foundation.NSURLRequest {
-	return x.inner.Request()
+// Request the frame's current request.
+func (x *WKFrameInfo) Request() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The frame's current security origin.
-//
-// SecurityOrigin calls the underlying SecurityOrigin.
+// SecurityOrigin the frame's current security origin.
 func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
-	_r := x.inner.SecurityOrigin()
-	if _r == nil {
-		return nil
-	}
-	return &WKSecurityOrigin{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityOrigin"))
+	return WKSecurityOriginFromID(_r)
 }
 
-// @abstract The web view of the webpage that contains this frame.
-//
-// WebView calls the underlying WebView.
+// WebView the web view of the webpage that contains this frame.
 func (x *WKFrameInfo) WebView() *WKWebView {
-	_r := x.inner.WebView()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
+	return WKWebViewFromID(_r)
 }
 
 // WKFrameInfoable is the interface implemented by [WKFrameInfo], for mocking and DI.
 type WKFrameInfoable interface {
-	Unwrap() *raw.WKFrameInfo
+	obj.Object
 	IsMainFrame() bool
-	Request() *foundation.NSURLRequest
+	Request() obj.Object
 	SecurityOrigin() *WKSecurityOrigin
 	WebView() *WKWebView
 }

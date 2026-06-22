@@ -5,19 +5,16 @@
 package uniformtypeidentifiers
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// \brief The tag class for filename extensions such as \c "txt". The leading period character is not part of the filename extension and should not be included in the tag.
-// UTTagClassFilenameExtension returns the string constant UTTagClassFilenameExtension as an objc.ID, for use as a dictionary key or selector argument.
-func UTTagClassFilenameExtension() objc.ID {
-	return purego.CFConstant(raw.UTTagClassFilenameExtension())
+// UTTagClassFilenameExtension returns the string constant UTTagClassFilenameExtension, for use as a dictionary key or argument.
+func UTTagClassFilenameExtension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UTTagClassFilenameExtension")))
 }
 
-// \brief The tag class for MIME types such as \c "text/plain".
-// UTTagClassMIMEType returns the string constant UTTagClassMIMEType as an objc.ID, for use as a dictionary key or selector argument.
-func UTTagClassMIMEType() objc.ID {
-	return purego.CFConstant(raw.UTTagClassMIMEType())
+// UTTagClassMIMEType returns the string constant UTTagClassMIMEType, for use as a dictionary key or argument.
+func UTTagClassMIMEType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UTTagClassMIMEType")))
 }

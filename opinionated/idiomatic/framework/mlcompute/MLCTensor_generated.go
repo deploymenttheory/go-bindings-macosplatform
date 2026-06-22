@@ -5,229 +5,202 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The data object you use throughout the framework.
+// Tensor is an idiomatic wrapper over the Objective-C class MLCTensor.
 //
-// Tensor wraps [raw.MLCTensor] with a fluent Go API.
+// The data object you use throughout the framework.
 type Tensor struct {
-	inner *raw.MLCTensor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCTensor].
-func (x *Tensor) Unwrap() *raw.MLCTensor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Tensor) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorFromID adopts an existing object pointer as a Tensor (nil for 0).
+// TensorFromID adopts an existing Objective-C object as a Tensor
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorFromID(id objc.ID) *Tensor {
 	if id == 0 {
 		return nil
 	}
-	return &Tensor{inner: raw.MLCTensorFromID(id)}
-}
-
-// NewTensor creates a new [Tensor].
-func NewTensor() *Tensor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTensor")), objc.RegisterName("new"))
-	return &Tensor{inner: raw.MLCTensorFromID(_id)}
-}
-
-// A string that identifes this tensor.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *Tensor) WithLabel(label string) *Tensor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &Tensor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Synchronizes the data in host memory.
-//
-// SynchronizeData calls the underlying SynchronizeData.
+// tensorAdopt wraps an Objective-C object that this code just created as a
+// Tensor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorAdopt(id objc.ID) *Tensor {
+	if id == 0 {
+		return nil
+	}
+	x := &Tensor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Tensor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Tensor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Tensor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Tensor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTensor creates a new Tensor.
+func NewTensor() *Tensor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("new"))
+	return tensorAdopt(_id)
+}
+
+// WithLabel a string that identifes this tensor.
+func (x *Tensor) WithLabel(label string) *Tensor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// SynchronizeData synchronizes the data in host memory.
 func (x *Tensor) SynchronizeData() bool {
-	return x.inner.SynchronizeData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeData"))
+	return _r
 }
 
-// Synchronizes the optimizer data in host memory.
-//
-// SynchronizeOptimizerData calls the underlying SynchronizeOptimizerData.
+// SynchronizeOptimizerData synchronizes the optimizer data in host memory.
 func (x *Tensor) SynchronizeOptimizerData() bool {
-	return x.inner.SynchronizeOptimizerData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeOptimizerData"))
+	return _r
 }
 
-// Copies tensor data from device memory to user-specified memory.
-//
-// CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice calls the underlying CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice.
-func (x *Tensor) CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length uint, synchronizeWithDevice bool) bool {
-	return x.inner.CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_, length, synchronizeWithDevice)
+// BindAndWriteDataToDevice associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.
+func (x *Tensor) BindAndWriteDataToDevice(data *TensorData, device *Device) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:toDevice:"), objref.IDOf(data), objref.IDOf(device))
+	return _r
 }
 
-// Associates the given data to the tensor, and if the device is a GPU, also copies the data to the device memory.
-//
-// BindAndWriteDataToDevice calls the underlying BindAndWriteDataToDevice.
-func (x *Tensor) BindAndWriteDataToDevice(data *raw.MLCTensorData, device *raw.MLCDevice) bool {
-	return x.inner.BindAndWriteDataToDevice(data, device)
+// BindOptimizerDataDeviceData associates the optimizer and device data buffers you specify to the tensor.
+func (x *Tensor) BindOptimizerDataDeviceData(data []*TensorData, deviceData []*TensorOptimizerDeviceData) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindOptimizerData:deviceData:"), purego.SliceToNSArray(data, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(deviceData, func(_v *TensorOptimizerDeviceData) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Associates the optimizer and device data buffers you specify to the tensor.
-//
-// BindOptimizerDataDeviceData calls the underlying BindOptimizerDataDeviceData.
-func (x *Tensor) BindOptimizerDataDeviceData(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData]) bool {
-	return x.inner.BindOptimizerDataDeviceData(data, deviceData)
+// TensorByQuantizingToTypeScaleBias converts a 32-bit floating-point tensor with the scale and bias you specify.
+func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ DataType, scale float32, bias int) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByQuantizingToType:scale:bias:"), type_, scale, bias)
+	return TensorFromID(_r)
 }
 
-// Converts a 32-bit floating-point tensor with the scale and bias you specify.
-//
-// TensorByQuantizingToTypeScaleBias calls the underlying TensorByQuantizingToTypeScaleBias.
-func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *Tensor {
-	_r := x.inner.TensorByQuantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorByQuantizingToTypeScaleBiasAxis converts a 32-bit floating-point tensor with the scale and bias you specify.
+func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByQuantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
+	return TensorFromID(_r)
 }
 
-// Converts a 32-bit floating-point tensor with the scale and bias you specify.
-//
-// TensorByQuantizingToTypeScaleBiasAxis calls the underlying TensorByQuantizingToTypeScaleBiasAxis.
-func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
-	_r := x.inner.TensorByQuantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorByDequantizingToTypeScaleBias converts a tensor you quantize to a 32-bit floating-point tensor.
+func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ DataType, scale *Tensor, bias *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByDequantizingToType:scale:bias:"), type_, objref.IDOf(scale), objref.IDOf(bias))
+	return TensorFromID(_r)
 }
 
-// Converts a tensor you quantize to a 32-bit floating-point tensor.
-//
-// TensorByDequantizingToTypeScaleBias calls the underlying TensorByDequantizingToTypeScaleBias.
-func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor {
-	_r := x.inner.TensorByDequantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorByDequantizingToTypeScaleBiasAxis converts a tensor you quantize to a 32-bit floating-point tensor.
+func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensorByDequantizingToType:scale:bias:axis:"), type_, objref.IDOf(scale), objref.IDOf(bias), axis)
+	return TensorFromID(_r)
 }
 
-// Converts a tensor you quantize to a 32-bit floating-point tensor.
-//
-// TensorByDequantizingToTypeScaleBiasAxis calls the underlying TensorByDequantizingToTypeScaleBiasAxis.
-func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
-	_r := x.inner.TensorByDequantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+// TensorID the tensor ID A unique number to identify each tensor.  Assigned when the tensor is created.
+func (x *Tensor) TensorID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tensorID"))
+	return _r
 }
 
-// @property   tensorID @abstract   The tensor ID @discussion A unique number to identify each tensor.  Assigned when the tensor is created.
-//
-// TensorID calls the underlying TensorID.
-func (x *Tensor) TensorID() uint {
-	return x.inner.TensorID()
-}
-
-// @property   descriptor @abstract   The tensor descriptor
-//
-// Descriptor calls the underlying Descriptor.
+// Descriptor the tensor descriptor
 func (x *Tensor) Descriptor() *TensorDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &TensorDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return TensorDescriptorFromID(_r)
 }
 
-// @property   data @abstract   The tensor data
-//
-// Data calls the underlying Data.
-func (x *Tensor) Data() *foundation.NSData {
-	return x.inner.Data()
+// Data the tensor data
+func (x *Tensor) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// @property   label @abstract   A string to help identify this object.
-//
-// Label calls the underlying Label.
+// Label a string to help identify this object.
 func (x *Tensor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *Tensor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property   device @abstract   The device associated with this tensor.
-//
-// Device calls the underlying Device.
+// Device the device associated with this tensor.
 func (x *Tensor) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
 }
 
-// @property   optimizer buffers to use if tensor is used as a parameter @abstract   These are the host side optimizer (momentum and velocity) buffers which developers can query and initialize @discussion When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
+// OptimizerData these are the host side optimizer (momentum and velocity) buffers which developers can query and initialize When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
 //
 // OptimizerData returns the collection as a Go slice.
 func (x *Tensor) OptimizerData() []*TensorData {
-	arr := x.inner.OptimizerData()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorData {
-		return &TensorData{inner: raw.MLCTensorDataFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizerData"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorData { return TensorDataFromID(_id) })
 }
 
-// @property   optimizer device buffers to use if tensor is used as a parameter @abstract   These are the device side optimizer (momentum and velocity) buffers which developers can query
+// OptimizerDeviceData these are the device side optimizer (momentum and velocity) buffers which developers can query
 //
 // OptimizerDeviceData returns the collection as a Go slice.
 func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
-	arr := x.inner.OptimizerDeviceData()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TensorOptimizerDeviceData {
-		return &TensorOptimizerDeviceData{inner: raw.MLCTensorOptimizerDeviceDataFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizerDeviceData"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorOptimizerDeviceData { return TensorOptimizerDeviceDataFromID(_id) })
 }
 
-// @abstract   Returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
-//
-// HasValidNumerics calls the underlying HasValidNumerics.
+// HasValidNumerics returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
 func (x *Tensor) HasValidNumerics() bool {
-	return x.inner.HasValidNumerics()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasValidNumerics"))
+	return _r
 }
 
 // Tensorable is the interface implemented by [Tensor], for mocking and DI.
 type Tensorable interface {
-	Unwrap() *raw.MLCTensor
+	obj.Object
 	WithLabel(label string) *Tensor
 	SynchronizeData() bool
 	SynchronizeOptimizerData() bool
-	CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length uint, synchronizeWithDevice bool) bool
-	BindAndWriteDataToDevice(data *raw.MLCTensorData, device *raw.MLCDevice) bool
-	BindOptimizerDataDeviceData(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData]) bool
-	TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *Tensor
-	TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
-	TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor
-	TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
-	TensorID() uint
+	BindAndWriteDataToDevice(data *TensorData, device *Device) bool
+	BindOptimizerDataDeviceData(data []*TensorData, deviceData []*TensorOptimizerDeviceData) bool
+	TensorByQuantizingToTypeScaleBias(type_ DataType, scale float32, bias int) *Tensor
+	TensorByQuantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor
+	TensorByDequantizingToTypeScaleBias(type_ DataType, scale *Tensor, bias *Tensor) *Tensor
+	TensorByDequantizingToTypeScaleBiasAxis(type_ DataType, scale *Tensor, bias *Tensor, axis int) *Tensor
+	TensorID() int
 	Descriptor() *TensorDescriptor
-	Data() *foundation.NSData
+	Data() obj.Object
 	Label() string
 	SetLabel(label string)
 	Device() *Device

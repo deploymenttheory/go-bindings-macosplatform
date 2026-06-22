@@ -5,325 +5,249 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A point of view for rendering a stereoscopic display of a 3D scene.
+// StereoscopicCamera is an idiomatic wrapper over the Objective-C class MDLStereoscopicCamera.
 //
-// StereoscopicCamera wraps [raw.MDLStereoscopicCamera] with a fluent Go API.
+// It embeds [Camera], promoting that type's methods.
+//
+// A point of view for rendering a stereoscopic display of a 3D scene.
 type StereoscopicCamera struct {
-	inner *raw.MDLStereoscopicCamera
+	Camera
 }
 
-// Unwrap returns the underlying [raw.MDLStereoscopicCamera].
-func (x *StereoscopicCamera) Unwrap() *raw.MDLStereoscopicCamera { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StereoscopicCamera) ID() objc.ID { return x.inner.Ptr() }
-
-// StereoscopicCameraFromID adopts an existing object pointer as a StereoscopicCamera (nil for 0).
+// StereoscopicCameraFromID adopts an existing Objective-C object as a StereoscopicCamera
+// (nil for 0), retaining it and registering a release finalizer.
 func StereoscopicCameraFromID(id objc.ID) *StereoscopicCamera {
 	if id == 0 {
 		return nil
 	}
-	return &StereoscopicCamera{inner: raw.MDLStereoscopicCameraFromID(id)}
+	x := &StereoscopicCamera{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStereoscopicCamera creates a new [StereoscopicCamera].
+// stereoscopicCameraAdopt wraps an Objective-C object that this code just created as a
+// StereoscopicCamera (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stereoscopicCameraAdopt(id objc.ID) *StereoscopicCamera {
+	if id == 0 {
+		return nil
+	}
+	x := &StereoscopicCamera{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewStereoscopicCamera creates a new StereoscopicCamera.
 func NewStereoscopicCamera() *StereoscopicCamera {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLStereoscopicCamera")), objc.RegisterName("new"))
-	return &StereoscopicCamera{inner: raw.MDLStereoscopicCameraFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLStereoscopicCamera")), objc.RegisterName("new"))
+	return stereoscopicCameraAdopt(_id)
 }
 
-// The distance, in millimeters, between the stereoscopic camera’s two viewpoints.
-//
-// WithInterPupillaryDistance sets the interPupillaryDistance property and returns the receiver for chaining.
+// WithInterPupillaryDistance the distance, in millimeters, between the stereoscopic camera’s two viewpoints.
 func (x *StereoscopicCamera) WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera {
-	x.inner.SetInterPupillaryDistance(interPupillaryDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterPupillaryDistance:"), interPupillaryDistance)
 	return x
 }
 
-// The angle, in degrees, at which the camera’s left viewpoint faces toward a central focal point.
-//
-// WithLeftVergence sets the leftVergence property and returns the receiver for chaining.
+// WithLeftVergence the angle, in degrees, at which the camera’s left viewpoint faces toward a central focal point.
 func (x *StereoscopicCamera) WithLeftVergence(leftVergence float32) *StereoscopicCamera {
-	x.inner.SetLeftVergence(leftVergence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftVergence:"), leftVergence)
 	return x
 }
 
-// The angle, in degrees, at which the camera’s right viewpoint faces toward a central focal point.
-//
-// WithRightVergence sets the rightVergence property and returns the receiver for chaining.
+// WithRightVergence the angle, in degrees, at which the camera’s right viewpoint faces toward a central focal point.
 func (x *StereoscopicCamera) WithRightVergence(rightVergence float32) *StereoscopicCamera {
-	x.inner.SetRightVergence(rightVergence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightVergence:"), rightVergence)
 	return x
 }
 
-// The amount, as a fraction of image width, by which the images from the camera’s two viewpoints overlap.
-//
-// WithOverlap sets the overlap property and returns the receiver for chaining.
+// WithOverlap the amount, as a fraction of image width, by which the images from the camera’s two viewpoints overlap.
 func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
-	x.inner.SetOverlap(overlap)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
 	return x
 }
 
-// The style of projection transform used by the camera.
-//
-// WithProjection sets the projection property and returns the receiver for chaining.
-func (x *StereoscopicCamera) WithProjection(projection MDLCameraProjection) *StereoscopicCamera {
-	x.inner.MDLCamera.SetProjection(raw.MDLCameraProjection(projection))
+// WithProjection the style of projection transform used by the camera.
+func (x *StereoscopicCamera) WithProjection(projection CameraProjection) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjection:"), projection)
 	return x
 }
 
-// The camera’s near depth limit.
-//
-// WithNearVisibilityDistance sets the nearVisibilityDistance property and returns the receiver for chaining.
+// WithNearVisibilityDistance the camera’s near depth limit.
 func (x *StereoscopicCamera) WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetNearVisibilityDistance(nearVisibilityDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNearVisibilityDistance:"), nearVisibilityDistance)
 	return x
 }
 
-// The camera’s far depth limit.
-//
-// WithFarVisibilityDistance sets the farVisibilityDistance property and returns the receiver for chaining.
+// WithFarVisibilityDistance the camera’s far depth limit.
 func (x *StereoscopicCamera) WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFarVisibilityDistance(farVisibilityDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFarVisibilityDistance:"), farVisibilityDistance)
 	return x
 }
 
-// The scale factor to meters from the world coordinate system containing the camera.
-//
-// WithWorldToMetersConversionScale sets the worldToMetersConversionScale property and returns the receiver for chaining.
+// WithWorldToMetersConversionScale the scale factor to meters from the world coordinate system containing the camera.
 func (x *StereoscopicCamera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetWorldToMetersConversionScale(worldToMetersConversionScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldToMetersConversionScale:"), worldToMetersConversionScale)
 	return x
 }
 
-// The first coefficient for determining the radial distortion applied to pixels rendered using the camera.
-//
-// WithBarrelDistortion sets the barrelDistortion property and returns the receiver for chaining.
+// WithBarrelDistortion the first coefficient for determining the radial distortion applied to pixels rendered using the camera.
 func (x *StereoscopicCamera) WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetBarrelDistortion(barrelDistortion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBarrelDistortion:"), barrelDistortion)
 	return x
 }
 
-// The second coefficient for determining the radial distortion applied to pixels rendered using the camera.
-//
-// WithFisheyeDistortion sets the fisheyeDistortion property and returns the receiver for chaining.
+// WithFisheyeDistortion the second coefficient for determining the radial distortion applied to pixels rendered using the camera.
 func (x *StereoscopicCamera) WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFisheyeDistortion(fisheyeDistortion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFisheyeDistortion:"), fisheyeDistortion)
 	return x
 }
 
-// The amount of radial light attenuation around the edges of an image rendered using the camera.
-//
-// WithOpticalVignetting sets the opticalVignetting property and returns the receiver for chaining.
+// WithOpticalVignetting the amount of radial light attenuation around the edges of an image rendered using the camera.
 func (x *StereoscopicCamera) WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetOpticalVignetting(opticalVignetting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpticalVignetting:"), opticalVignetting)
 	return x
 }
 
-// The amount of radial color shift around the edges of an image rendered using the camera.
-//
-// WithChromaticAberration sets the chromaticAberration property and returns the receiver for chaining.
+// WithChromaticAberration the amount of radial color shift around the edges of an image rendered using the camera.
 func (x *StereoscopicCamera) WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetChromaticAberration(chromaticAberration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChromaticAberration:"), chromaticAberration)
 	return x
 }
 
-// The focal length, in millimeters, of the camera’s simulated lens.
-//
-// WithFocalLength sets the focalLength property and returns the receiver for chaining.
+// WithFocalLength the focal length, in millimeters, of the camera’s simulated lens.
 func (x *StereoscopicCamera) WithFocalLength(focalLength float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFocalLength(focalLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
 	return x
 }
 
-// The distance, in meters, at which the lens is focused.
-//
-// WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
+// WithFocusDistance the distance, in meters, at which the lens is focused.
 func (x *StereoscopicCamera) WithFocusDistance(focusDistance float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFocusDistance(focusDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
 	return x
 }
 
-// The camera’s field of view, in degrees.
-//
-// WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
+// WithFieldOfView the camera’s field of view, in degrees.
 func (x *StereoscopicCamera) WithFieldOfView(fieldOfView float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFieldOfView(fieldOfView)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
 	return x
 }
 
-// The relative aperture ratio of the camera’s simulated lens.
-//
-// WithFStop sets the fStop property and returns the receiver for chaining.
+// WithFStop the relative aperture ratio of the camera’s simulated lens.
 func (x *StereoscopicCamera) WithFStop(fStop float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetFStop(fStop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
 	return x
 }
 
-// The number of blades in the camera’s simulated aperture.
-//
-// WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
-func (x *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount uint) *StereoscopicCamera {
-	x.inner.MDLCamera.SetApertureBladeCount(apertureBladeCount)
+// WithApertureBladeCount the number of blades in the camera’s simulated aperture.
+func (x *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount int) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
 	return x
 }
 
-// The maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
-//
-// WithMaximumCircleOfConfusion sets the maximumCircleOfConfusion property and returns the receiver for chaining.
+// WithMaximumCircleOfConfusion the maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
 func (x *StereoscopicCamera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetMaximumCircleOfConfusion(maximumCircleOfConfusion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCircleOfConfusion:"), maximumCircleOfConfusion)
 	return x
 }
 
-// The duration, in seconds, for which the camera’s simulated shutter is open during each frame.
-//
-// WithShutterOpenInterval sets the shutterOpenInterval property and returns the receiver for chaining.
+// WithShutterOpenInterval the duration, in seconds, for which the camera’s simulated shutter is open during each frame.
 func (x *StereoscopicCamera) WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera {
-	x.inner.MDLCamera.SetShutterOpenInterval(shutterOpenInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterOpenInterval:"), shutterOpenInterval)
 	return x
 }
 
-// The height, in millimeters, of the camera’s simulated imaging surface.
-//
-// WithSensorVerticalAperture sets the sensorVerticalAperture property and returns the receiver for chaining.
+// WithSensorVerticalAperture the height, in millimeters, of the camera’s simulated imaging surface.
 func (x *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetSensorVerticalAperture(sensorVerticalAperture)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorVerticalAperture:"), sensorVerticalAperture)
 	return x
 }
 
-// The ratio of width to height for the camera’s simulated imaging surface.
-//
-// WithSensorAspect sets the sensorAspect property and returns the receiver for chaining.
+// WithSensorAspect the ratio of width to height for the camera’s simulated imaging surface.
 func (x *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
-	x.inner.MDLCamera.SetSensorAspect(sensorAspect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorAspect:"), sensorAspect)
 	return x
 }
 
-// The parent object that contains this object.
-//
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent the parent object that contains this object.
 func (x *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
-	x.inner.MDLCamera.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
-// The primary object, if applicable, of which this object is an instance.
-//
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance the primary object, if applicable, of which this object is an instance.
 func (x *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
-	x.inner.MDLCamera.MDLObject.SetInstance(instance.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *StereoscopicCamera) WithTransform(transform raw.MDLTransformComponent) *StereoscopicCamera {
-	x.inner.MDLCamera.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *StereoscopicCamera) WithChildren(children raw.MDLObjectContainerComponent) *StereoscopicCamera {
-	x.inner.MDLCamera.MDLObject.SetChildren(children)
-	return x
-}
-
-// A Boolean value indicating whether this object should be used in rendering.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value indicating whether this object should be used in rendering.
 func (x *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
-	x.inner.MDLCamera.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Inter-pupillary distance in mm. Default is 63mm.
-//
-// InterPupillaryDistance calls the underlying InterPupillaryDistance.
+// InterPupillaryDistance inter-pupillary distance in mm. Default is 63mm.
 func (x *StereoscopicCamera) InterPupillaryDistance() float32 {
-	return x.inner.InterPupillaryDistance()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("interPupillaryDistance"))
+	return _r
 }
 
-// SetInterPupillaryDistance calls the underlying SetInterPupillaryDistance.
+// SetInterPupillaryDistance wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) SetInterPupillaryDistance(interPupillaryDistance float32) {
-	x.inner.SetInterPupillaryDistance(interPupillaryDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterPupillaryDistance:"), interPupillaryDistance)
 }
 
-// LeftVergence calls the underlying LeftVergence.
+// LeftVergence wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) LeftVergence() float32 {
-	return x.inner.LeftVergence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("leftVergence"))
+	return _r
 }
 
-// SetLeftVergence calls the underlying SetLeftVergence.
+// SetLeftVergence wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) SetLeftVergence(leftVergence float32) {
-	x.inner.SetLeftVergence(leftVergence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftVergence:"), leftVergence)
 }
 
-// RightVergence calls the underlying RightVergence.
+// RightVergence wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) RightVergence() float32 {
-	return x.inner.RightVergence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rightVergence"))
+	return _r
 }
 
-// SetRightVergence calls the underlying SetRightVergence.
+// SetRightVergence wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) SetRightVergence(rightVergence float32) {
-	x.inner.SetRightVergence(rightVergence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightVergence:"), rightVergence)
 }
 
-// The amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
-//
-// Overlap calls the underlying Overlap.
+// Overlap the amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
 func (x *StereoscopicCamera) Overlap() float32 {
-	return x.inner.Overlap()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overlap"))
+	return _r
 }
 
-// SetOverlap calls the underlying SetOverlap.
+// SetOverlap wraps the corresponding Objective-C method.
 func (x *StereoscopicCamera) SetOverlap(overlap float32) {
-	x.inner.SetOverlap(overlap)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
 }
-
-// Convenience utilities to create view and projection matrices. The view matrix calculations requires that the world to meters conversion scale be set. @see worldToMetersConversionScale
-//
-// LeftViewMatrix calls the underlying LeftViewMatrix.
-func (x *StereoscopicCamera) LeftViewMatrix() unsafe.Pointer {
-	return x.inner.LeftViewMatrix()
-}
-
-// RightViewMatrix calls the underlying RightViewMatrix.
-func (x *StereoscopicCamera) RightViewMatrix() unsafe.Pointer {
-	return x.inner.RightViewMatrix()
-}
-
-// LeftProjectionMatrix calls the underlying LeftProjectionMatrix.
-func (x *StereoscopicCamera) LeftProjectionMatrix() unsafe.Pointer {
-	return x.inner.LeftProjectionMatrix()
-}
-
-// RightProjectionMatrix calls the underlying RightProjectionMatrix.
-func (x *StereoscopicCamera) RightProjectionMatrix() unsafe.Pointer {
-	return x.inner.RightProjectionMatrix()
-}
-
-func (x *StereoscopicCamera) asCamera() *raw.MDLCamera { return &x.inner.MDLCamera }
-
-func (x *StereoscopicCamera) asObject() *raw.MDLObject { return &x.inner.MDLCamera.MDLObject }
 
 // StereoscopicCameraable is the interface implemented by [StereoscopicCamera], for mocking and DI.
 type StereoscopicCameraable interface {
-	Unwrap() *raw.MDLStereoscopicCamera
+	obj.Object
 	WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera
 	WithLeftVergence(leftVergence float32) *StereoscopicCamera
 	WithRightVergence(rightVergence float32) *StereoscopicCamera
 	WithOverlap(overlap float32) *StereoscopicCamera
-	WithProjection(projection MDLCameraProjection) *StereoscopicCamera
+	WithProjection(projection CameraProjection) *StereoscopicCamera
 	WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera
 	WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera
 	WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera
@@ -335,15 +259,13 @@ type StereoscopicCameraable interface {
 	WithFocusDistance(focusDistance float32) *StereoscopicCamera
 	WithFieldOfView(fieldOfView float32) *StereoscopicCamera
 	WithFStop(fStop float32) *StereoscopicCamera
-	WithApertureBladeCount(apertureBladeCount uint) *StereoscopicCamera
+	WithApertureBladeCount(apertureBladeCount int) *StereoscopicCamera
 	WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera
 	WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera
 	WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera
 	WithSensorAspect(sensorAspect float32) *StereoscopicCamera
 	WithParent(parent ObjectProvider) *StereoscopicCamera
 	WithInstance(instance ObjectProvider) *StereoscopicCamera
-	WithTransform(transform raw.MDLTransformComponent) *StereoscopicCamera
-	WithChildren(children raw.MDLObjectContainerComponent) *StereoscopicCamera
 	WithHidden(hidden bool) *StereoscopicCamera
 	InterPupillaryDistance() float32
 	SetInterPupillaryDistance(interPupillaryDistance float32)
@@ -353,10 +275,10 @@ type StereoscopicCameraable interface {
 	SetRightVergence(rightVergence float32)
 	Overlap() float32
 	SetOverlap(overlap float32)
-	LeftViewMatrix() unsafe.Pointer
-	RightViewMatrix() unsafe.Pointer
-	LeftProjectionMatrix() unsafe.Pointer
-	RightProjectionMatrix() unsafe.Pointer
 }
 
 var _ StereoscopicCameraable = (*StereoscopicCamera)(nil)
+
+var _ CameraProvider = (*StereoscopicCamera)(nil)
+
+var _ ObjectProvider = (*StereoscopicCamera)(nil)

@@ -5,119 +5,85 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that resizes and changes the aspect ratio of an image using Lanczos resampling.
+// ImageLanczosScale is an idiomatic wrapper over the Objective-C class MPSImageLanczosScale.
 //
-// ImageLanczosScale wraps [raw.MPSImageLanczosScale] with a fluent Go API.
+// It embeds [ImageScale], promoting that type's methods.
+//
+// A filter that resizes and changes the aspect ratio of an image using Lanczos resampling.
 type ImageLanczosScale struct {
-	inner *raw.MPSImageLanczosScale
+	ImageScale
 }
 
-// Unwrap returns the underlying [raw.MPSImageLanczosScale].
-func (x *ImageLanczosScale) Unwrap() *raw.MPSImageLanczosScale { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageLanczosScale) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageLanczosScaleFromID adopts an existing object pointer as a ImageLanczosScale (nil for 0).
+// ImageLanczosScaleFromID adopts an existing Objective-C object as a ImageLanczosScale
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageLanczosScaleFromID(id objc.ID) *ImageLanczosScale {
 	if id == 0 {
 		return nil
 	}
-	return &ImageLanczosScale{inner: raw.MPSImageLanczosScaleFromID(id)}
-}
-
-// NewImageLanczosScaleWithDevice creates a new [ImageLanczosScale].
-func NewImageLanczosScaleWithDevice(device metal.MTLDevice) *ImageLanczosScale {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLanczosScale")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageLanczosScale{inner: raw.MPSImageLanczosScaleFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageLanczosScaleWithCoderDevice creates a new [ImageLanczosScale].
-func NewImageLanczosScaleWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageLanczosScale {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLanczosScale")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageLanczosScale{inner: raw.MPSImageLanczosScaleFromID(_id)}
-}
-
-// @property   scaleTransform @abstract   An optional transform that describes how to scale and translate the source image @discussion If the scaleTransform is NULL, then any image scaling factor such as MPSImageLanczosScale will rescale the image so that the source image fits exactly into the destination texture.  If the transform is not NULL, then the transform is used for determining how to map the source image to the destination. Default: NULL When the scaleTransform is set to non-NULL, the values pointed to by the new scaleTransform are copied to object storage, and the pointer is updated to point to internal storage. Do not attempt to free it.  You may free your copy of the MPSScaleTransform as soon as the property set operation is complete. When calculating a scaleTransform, use the limits of the bounding box for the intended source region of interest and the destination clipRect. Adjustments for pixel center coordinates are handled internally to the function.  For example, the scale transform to convert the entire source image to the entire destination image size (clipRect = MPSRectNoClip) would be: @code scaleTransform.scaleX = (double) dest.width / source.width; scaleTransform.scaleY = (double) dest.height / source.height; scaleTransform.translateX = scaleTransform.translateY = 0.0; @endcode The translation parameters allow you to adjust the region of the source image used to create the destination image. They are in destination coordinates. To place the top left corner of the destination clipRect to represent the position {x,y} in source coordinates, we solve for the translation based on the standard scale matrix operation for each axis: @code dest_position = source_position * scale + translation; translation = dest_position - source_position * scale; @endcode For the top left corner of the clipRect, the dest_position is considered to be {0,0}. This gives us a translation of: @code scaleTransform.translateX = -source_origin.x * scaleTransform.scaleX; scaleTransform.translateY = -source_origin.y * scaleTransform.scaleY; @endcode One would typically use non-zero translations to do tiling, or provide a resized view into a internal segment of an image. NOTE:  Changing the Lanczos scale factor may trigger recalculation of signficant state internal to the object when the filter is encoded to the command buffer. The scale factor is scaleTransform->scaleX,Y, or the ratio of source and destination image sizes if scaleTransform is NULL. Reuse a MPSImageLanczosScale object for frequently used scalings to avoid redundantly recreating expensive resampling state.
-//
-// WithScaleTransform sets the scaleTransform property and returns the receiver for chaining.
-func (x *ImageLanczosScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageLanczosScale {
-	x.inner.MPSImageScale.SetScaleTransform(scaleTransform)
+	x := &ImageLanczosScale{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// imageLanczosScaleAdopt wraps an Objective-C object that this code just created as a
+// ImageLanczosScale (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageLanczosScaleAdopt(id objc.ID) *ImageLanczosScale {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageLanczosScale{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageLanczosScale creates a new ImageLanczosScale.
+func NewImageLanczosScale() *ImageLanczosScale {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLanczosScale")), objc.RegisterName("new"))
+	return imageLanczosScaleAdopt(_id)
+}
+
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageLanczosScale) WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale {
-	x.inner.MPSImageScale.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageLanczosScale) WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale {
-	x.inner.MPSImageScale.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageLanczosScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLanczosScale {
-	x.inner.MPSImageScale.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageLanczosScale) WithOptions(options mpscore.MPSKernelOptions) *ImageLanczosScale {
-	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageLanczosScale) WithLabel(label string) *ImageLanczosScale {
-	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageLanczosScale) asImageScale() *mpsimage.MPSImageScale { return &x.inner.MPSImageScale }
-
-func (x *ImageLanczosScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageScale.MPSUnaryImageKernel
-}
-
-func (x *ImageLanczosScale) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
 type ImageLanczosScaleable interface {
-	Unwrap() *raw.MPSImageLanczosScale
-	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageLanczosScale
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale
 	WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLanczosScale
-	WithOptions(options mpscore.MPSKernelOptions) *ImageLanczosScale
 	WithLabel(label string) *ImageLanczosScale
 }
 
 var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)
+
+var _ ImageScaleProvider = (*ImageLanczosScale)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageLanczosScale)(nil)
+
+var _ KernelProvider = (*ImageLanczosScale)(nil)

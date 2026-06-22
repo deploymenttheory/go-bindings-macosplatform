@@ -5,92 +5,100 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A text block that appears as a cell in a text table.
+// TextTableBlock is an idiomatic wrapper over the Objective-C class NSTextTableBlock.
 //
-// TextTableBlock wraps [raw.NSTextTableBlock] with a fluent Go API.
+// It embeds [TextBlock], promoting that type's methods.
+//
+// A text block that appears as a cell in a text table.
 type TextTableBlock struct {
-	inner *raw.NSTextTableBlock
+	TextBlock
 }
 
-// Unwrap returns the underlying [raw.NSTextTableBlock].
-func (x *TextTableBlock) Unwrap() *raw.NSTextTableBlock { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextTableBlock) ID() objc.ID { return x.inner.Ptr() }
-
-// TextTableBlockFromID adopts an existing object pointer as a TextTableBlock (nil for 0).
+// TextTableBlockFromID adopts an existing Objective-C object as a TextTableBlock
+// (nil for 0), retaining it and registering a release finalizer.
 func TextTableBlockFromID(id objc.ID) *TextTableBlock {
 	if id == 0 {
 		return nil
 	}
-	return &TextTableBlock{inner: raw.NSTextTableBlockFromID(id)}
-}
-
-// Returns an initialized text table block.
-//
-// NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan creates a new [TextTableBlock].
-func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *raw.NSTextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTableBlock")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), table.Ptr(), row, rowSpan, col, colSpan)
-	return &TextTableBlock{inner: raw.NSTextTableBlockFromID(_id)}
-}
-
-// The vertical alignment of the text block.
-//
-// WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
-func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTableBlock {
-	x.inner.NSTextBlock.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
+	x := &TextTableBlock{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The background color of the text block.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
-	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor.Unwrap())
-	return x
-}
-
-// Table calls the underlying Table.
-func (x *TextTableBlock) Table() *TextTable {
-	_r := x.inner.Table()
-	if _r == nil {
+// textTableBlockAdopt wraps an Objective-C object that this code just created as a
+// TextTableBlock (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textTableBlockAdopt(id objc.ID) *TextTableBlock {
+	if id == 0 {
 		return nil
 	}
-	return &TextTable{inner: _r}
+	x := &TextTableBlock{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// StartingRow calls the underlying StartingRow.
+// NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan returns an initialized text table block.
+func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table *TextTable, row int, rowSpan int, col int, colSpan int) *TextTableBlock {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTableBlock")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:"), objref.IDOf(table), row, rowSpan, col, colSpan)
+	return textTableBlockAdopt(_id)
+}
+
+// WithVerticalAlignment the vertical alignment of the text block.
+func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
+	return x
+}
+
+// WithBackgroundColor the background color of the text block.
+func (x *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTableBlock {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return x
+}
+
+// Table wraps the corresponding Objective-C method.
+func (x *TextTableBlock) Table() *TextTable {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("table"))
+	return TextTableFromID(_r)
+}
+
+// StartingRow wraps the corresponding Objective-C method.
 func (x *TextTableBlock) StartingRow() int {
-	return x.inner.StartingRow()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingRow"))
+	return _r
 }
 
-// RowSpan calls the underlying RowSpan.
+// RowSpan wraps the corresponding Objective-C method.
 func (x *TextTableBlock) RowSpan() int {
-	return x.inner.RowSpan()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowSpan"))
+	return _r
 }
 
-// StartingColumn calls the underlying StartingColumn.
+// StartingColumn wraps the corresponding Objective-C method.
 func (x *TextTableBlock) StartingColumn() int {
-	return x.inner.StartingColumn()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startingColumn"))
+	return _r
 }
 
-// ColumnSpan calls the underlying ColumnSpan.
+// ColumnSpan wraps the corresponding Objective-C method.
 func (x *TextTableBlock) ColumnSpan() int {
-	return x.inner.ColumnSpan()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnSpan"))
+	return _r
 }
-
-func (x *TextTableBlock) asTextBlock() *raw.NSTextBlock { return &x.inner.NSTextBlock }
 
 // TextTableBlockable is the interface implemented by [TextTableBlock], for mocking and DI.
 type TextTableBlockable interface {
-	Unwrap() *raw.NSTextTableBlock
-	WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTableBlock
+	obj.Object
+	WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextTableBlock
 	WithBackgroundColor(backgroundColor *Color) *TextTableBlock
 	Table() *TextTable
 	StartingRow() int
@@ -100,3 +108,5 @@ type TextTableBlockable interface {
 }
 
 var _ TextTableBlockable = (*TextTableBlock)(nil)
+
+var _ TextBlockProvider = (*TextTableBlock)(nil)

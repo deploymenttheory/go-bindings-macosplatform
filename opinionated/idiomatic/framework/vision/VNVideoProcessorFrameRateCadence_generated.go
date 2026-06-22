@@ -5,54 +5,66 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a frame-based cadence for processing a video stream.
+// VideoProcessorFrameRateCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorFrameRateCadence.
 //
-// VideoProcessorFrameRateCadence wraps [raw.VNVideoProcessorFrameRateCadence] with a fluent Go API.
+// It embeds [VideoProcessorCadence], promoting that type's methods.
+//
+// An object that defines a frame-based cadence for processing a video stream.
 type VideoProcessorFrameRateCadence struct {
-	inner *raw.VNVideoProcessorFrameRateCadence
+	VideoProcessorCadence
 }
 
-// Unwrap returns the underlying [raw.VNVideoProcessorFrameRateCadence].
-func (x *VideoProcessorFrameRateCadence) Unwrap() *raw.VNVideoProcessorFrameRateCadence {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoProcessorFrameRateCadence) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoProcessorFrameRateCadenceFromID adopts an existing object pointer as a VideoProcessorFrameRateCadence (nil for 0).
+// VideoProcessorFrameRateCadenceFromID adopts an existing Objective-C object as a VideoProcessorFrameRateCadence
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoProcessorFrameRateCadenceFromID(id objc.ID) *VideoProcessorFrameRateCadence {
 	if id == 0 {
 		return nil
 	}
-	return &VideoProcessorFrameRateCadence{inner: raw.VNVideoProcessorFrameRateCadenceFromID(id)}
+	x := &VideoProcessorFrameRateCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVideoProcessorFrameRateCadenceWithFrameRate creates a new [VideoProcessorFrameRateCadence].
+// videoProcessorFrameRateCadenceAdopt wraps an Objective-C object that this code just created as a
+// VideoProcessorFrameRateCadence (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoProcessorFrameRateCadenceAdopt(id objc.ID) *VideoProcessorFrameRateCadence {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoProcessorFrameRateCadence{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVideoProcessorFrameRateCadenceWithFrameRate creates a new VideoProcessorFrameRateCadence.
 func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcessorFrameRateCadence {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVideoProcessorFrameRateCadence")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessorFrameRateCadence")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameRate:"), frameRate)
-	return &VideoProcessorFrameRateCadence{inner: raw.VNVideoProcessorFrameRateCadenceFromID(_id)}
+	return videoProcessorFrameRateCadenceAdopt(_id)
 }
 
-// FrameRate calls the underlying FrameRate.
+// FrameRate wraps the corresponding Objective-C method.
 func (x *VideoProcessorFrameRateCadence) FrameRate() int {
-	return x.inner.FrameRate()
-}
-
-func (x *VideoProcessorFrameRateCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence {
-	return &x.inner.VNVideoProcessorCadence
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameRate"))
+	return _r
 }
 
 // VideoProcessorFrameRateCadenceable is the interface implemented by [VideoProcessorFrameRateCadence], for mocking and DI.
 type VideoProcessorFrameRateCadenceable interface {
-	Unwrap() *raw.VNVideoProcessorFrameRateCadence
+	obj.Object
 	FrameRate() int
 }
 
 var _ VideoProcessorFrameRateCadenceable = (*VideoProcessorFrameRateCadence)(nil)
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorFrameRateCadence)(nil)

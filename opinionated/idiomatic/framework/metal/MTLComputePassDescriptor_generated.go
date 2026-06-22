@@ -5,75 +5,102 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of how to dispatch execution of pass commands and GPU performance sampling.
+// ComputePassDescriptor is an idiomatic wrapper over the Objective-C class MTLComputePassDescriptor.
 //
-// ComputePassDescriptor wraps [raw.MTLComputePassDescriptor] with a fluent Go API.
+// A description of how to dispatch execution of pass commands and GPU performance sampling.
 type ComputePassDescriptor struct {
-	inner *raw.MTLComputePassDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLComputePassDescriptor].
-func (x *ComputePassDescriptor) Unwrap() *raw.MTLComputePassDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePassDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePassDescriptorFromID adopts an existing object pointer as a ComputePassDescriptor (nil for 0).
+// ComputePassDescriptorFromID adopts an existing Objective-C object as a ComputePassDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePassDescriptorFromID(id objc.ID) *ComputePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePassDescriptor{inner: raw.MTLComputePassDescriptorFromID(id)}
-}
-
-// NewComputePassDescriptor creates a new [ComputePassDescriptor].
-func NewComputePassDescriptor() *ComputePassDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLComputePassDescriptor")), objc.RegisterName("new"))
-	return &ComputePassDescriptor{inner: raw.MTLComputePassDescriptorFromID(_id)}
-}
-
-// The strategy for dispatching any compute commands encoded in the compute pass.
-//
-// WithDispatchType sets the dispatchType property and returns the receiver for chaining.
-func (x *ComputePassDescriptor) WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor {
-	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
+	x := &ComputePassDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property dispatchType @abstract The dispatch type of the compute command encoder.
-//
-// DispatchType calls the underlying DispatchType.
-func (x *ComputePassDescriptor) DispatchType() MTLDispatchType {
-	return MTLDispatchType(x.inner.DispatchType())
-}
-
-// SetDispatchType calls the underlying SetDispatchType.
-func (x *ComputePassDescriptor) SetDispatchType(dispatchType MTLDispatchType) {
-	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
-}
-
-// @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
-//
-// SampleBufferAttachments calls the underlying SampleBufferAttachments.
-func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
-	_r := x.inner.SampleBufferAttachments()
-	if _r == nil {
+// computePassDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ComputePassDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePassDescriptorAdopt(id objc.ID) *ComputePassDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &ComputePassSampleBufferAttachmentDescriptorArray{inner: _r}
+	x := &ComputePassDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComputePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComputePassDescriptor creates a new ComputePassDescriptor.
+func NewComputePassDescriptor() *ComputePassDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePassDescriptor")), objc.RegisterName("new"))
+	return computePassDescriptorAdopt(_id)
+}
+
+// WithDispatchType the strategy for dispatching any compute commands encoded in the compute pass.
+func (x *ComputePassDescriptor) WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
+	return x
+}
+
+// DispatchType the dispatch type of the compute command encoder.
+func (x *ComputePassDescriptor) DispatchType() DispatchType {
+	_r := objc.Send[DispatchType](objref.IDOf(x), objc.RegisterName("dispatchType"))
+	return _r
+}
+
+// SetDispatchType wraps the corresponding Objective-C method.
+func (x *ComputePassDescriptor) SetDispatchType(dispatchType DispatchType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchType:"), dispatchType)
+}
+
+// SampleBufferAttachments an array of sample buffers and associated sample indices.
+func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+	return ComputePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // ComputePassDescriptorable is the interface implemented by [ComputePassDescriptor], for mocking and DI.
 type ComputePassDescriptorable interface {
-	Unwrap() *raw.MTLComputePassDescriptor
-	WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor
-	DispatchType() MTLDispatchType
-	SetDispatchType(dispatchType MTLDispatchType)
+	obj.Object
+	WithDispatchType(dispatchType DispatchType) *ComputePassDescriptor
+	DispatchType() DispatchType
+	SetDispatchType(dispatchType DispatchType)
 	SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray
 }
 

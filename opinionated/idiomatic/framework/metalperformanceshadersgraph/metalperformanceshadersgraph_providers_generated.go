@@ -5,20 +5,23 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// GraphObjectProvider is implemented by GraphObject and any idiomatic type wrapping a MPSGraphObject subclass.
+// GraphObjectProvider is accepted wherever a MPSGraphObject (or one of its subclasses) is expected.
 type GraphObjectProvider interface {
-	asGraphObject() *raw.MPSGraphObject
+	objref.Object
+	isGraphObject()
 }
 
-// GraphOperationProvider is implemented by GraphOperation and any idiomatic type wrapping a MPSGraphOperation subclass.
+// GraphOperationProvider is accepted wherever a MPSGraphOperation (or one of its subclasses) is expected.
 type GraphOperationProvider interface {
-	asGraphOperation() *raw.MPSGraphOperation
+	objref.Object
+	isGraphOperation()
 }
 
-// GraphTypeProvider is implemented by GraphType and any idiomatic type wrapping a MPSGraphType subclass.
+// GraphTypeProvider is accepted wherever a MPSGraphType (or one of its subclasses) is expected.
 type GraphTypeProvider interface {
-	asGraphType() *raw.MPSGraphType
+	objref.Object
+	isGraphType()
 }

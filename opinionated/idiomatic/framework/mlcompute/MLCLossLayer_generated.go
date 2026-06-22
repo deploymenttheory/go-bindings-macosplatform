@@ -5,84 +5,74 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that estimates the inaccuracies of the model to reduce the loss on the next evaluation.
+// LossLayer is an idiomatic wrapper over the Objective-C class MLCLossLayer.
 //
-// LossLayer wraps [raw.MLCLossLayer] with a fluent Go API.
+// LossLayer is an abstract base — you do not construct it directly. Construct one of [YOLOLossLayer] and pass it where a LossLayer is accepted.
+//
+// A layer that estimates the inaccuracies of the model to reduce the loss on the next evaluation.
 type LossLayer struct {
-	inner *raw.MLCLossLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCLossLayer].
-func (x *LossLayer) Unwrap() *raw.MLCLossLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LossLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// LossLayerFromID adopts an existing object pointer as a LossLayer (nil for 0).
+// LossLayerFromID adopts an existing Objective-C object as a LossLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func LossLayerFromID(id objc.ID) *LossLayer {
 	if id == 0 {
 		return nil
 	}
-	return &LossLayer{inner: raw.MLCLossLayerFromID(id)}
+	x := &LossLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLossLayer creates a new [LossLayer].
-func NewLossLayer() *LossLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCLossLayer")), objc.RegisterName("new"))
-	return &LossLayer{inner: raw.MLCLossLayerFromID(_id)}
+// lossLayerAdopt wraps an Objective-C object that this code just created as a
+// LossLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lossLayerAdopt(id objc.ID) *LossLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &LossLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *LossLayer) WithLabel(label string) *LossLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   descriptor @abstract   The loss descriptor
-//
-// Descriptor calls the underlying Descriptor.
+// Descriptor the loss descriptor
 func (x *LossLayer) Descriptor() *LossDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &LossDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return LossDescriptorFromID(_r)
 }
 
-// @property   weights @abstract   The loss label weights tensor
-//
-// Weights calls the underlying Weights.
+// Weights the loss label weights tensor
 func (x *LossLayer) Weights() *Tensor {
-	_r := x.inner.Weights()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return TensorFromID(_r)
 }
-
-func (x *LossLayer) asLossLayer() *raw.MLCLossLayer { return x.inner }
-
-func (x *LossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // LossLayerable is the interface implemented by [LossLayer], for mocking and DI.
 type LossLayerable interface {
-	Unwrap() *raw.MLCLossLayer
+	obj.Object
 	WithLabel(label string) *LossLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer
 	Descriptor() *LossDescriptor
@@ -90,3 +80,12 @@ type LossLayerable interface {
 }
 
 var _ LossLayerable = (*LossLayer)(nil)
+
+// isLossLayer marks LossLayer — and, by embedding promotion, its
+// subclasses — as a member of the LossLayer hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *LossLayer) isLossLayer() {}
+
+var _ LossLayerProvider = (*LossLayer)(nil)
+
+var _ LayerProvider = (*LossLayer)(nil)

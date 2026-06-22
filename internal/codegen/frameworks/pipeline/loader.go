@@ -31,6 +31,9 @@ type Registry struct {
 	StructIndex       map[string]string // struct name → owning framework
 	CFTypeIndex       map[string]string // CF opaque typedef → owning framework
 	ClassIndex        map[string]meta.Class
+	// EmittableStructs is the set of value-struct Go names the idiomatic layer
+	// emits a definition for (computed lazily once during idiomatic generation).
+	EmittableStructs map[string]bool
 	// UnavailableClasses is the set of ObjC class names that have IsUnavailable=true.
 	// The mapper degrades references to these classes to objc.ID.
 	UnavailableClasses map[string]bool

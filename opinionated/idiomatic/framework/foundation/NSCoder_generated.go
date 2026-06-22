@@ -5,631 +5,452 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An abstract class that serves as the basis for objects that enable archiving and distribution of other objects.
+// Coder is an idiomatic wrapper over the Objective-C class NSCoder.
 //
-// Coder wraps [raw.NSCoder] with a fluent Go API.
+// Coder is an abstract base — you do not construct it directly. Construct one of [Archiver], [KeyedArchiver], [KeyedUnarchiver], [PortCoder], [Unarchiver], [XPCCoder] and pass it where a Coder is accepted.
+//
+// An abstract class that serves as the basis for objects that enable archiving and distribution of other objects.
 type Coder struct {
-	inner *raw.NSCoder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCoder].
-func (x *Coder) Unwrap() *raw.NSCoder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Coder) ID() objc.ID { return x.inner.Ptr() }
-
-// CoderFromID adopts an existing object pointer as a Coder (nil for 0).
+// CoderFromID adopts an existing Objective-C object as a Coder
+// (nil for 0), retaining it and registering a release finalizer.
 func CoderFromID(id objc.ID) *Coder {
 	if id == 0 {
 		return nil
 	}
-	return &Coder{inner: raw.NSCoderFromID(id)}
-}
-
-// NewCoder creates a new [Coder].
-func NewCoder() *Coder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCoder")), objc.RegisterName("new"))
-	return &Coder{inner: raw.NSCoderFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Coder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Coder {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Coder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Encodes a value of the given type at the given address.
-//
-// EncodeValueOfObjCTypeAt calls the underlying EncodeValueOfObjCTypeAt.
-func (x *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
-	x.inner.EncodeValueOfObjCTypeAt(type_, addr)
-}
-
-// Encodes a given data object.
-//
-// EncodeDataObject calls the underlying EncodeDataObject.
-func (x *Coder) EncodeDataObject(data *raw.NSData) {
-	x.inner.EncodeDataObject(data)
-}
-
-// Decodes and returns an NSData object that was previously encoded with encodeDataObject:. Subclasses must override this method.
-//
-// DecodeDataObject calls the underlying DecodeDataObject.
-func (x *Coder) DecodeDataObject() *Data {
-	_r := x.inner.DecodeDataObject()
-	if _r == nil {
+// coderAdopt wraps an Objective-C object that this code just created as a
+// Coder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coderAdopt(id objc.ID) *Coder {
+	if id == 0 {
 		return nil
 	}
-	return &Data{inner: _r}
+	x := &Coder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Decodes a single value of a known type from the specified data buffer.
-//
-// DecodeValueOfObjCTypeAtSize calls the underlying DecodeValueOfObjCTypeAtSize.
-func (x *Coder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint) {
-	x.inner.DecodeValueOfObjCTypeAtSize(type_, data, size)
+// Description returns the object's -description text.
+func (x *Coder) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// This method is present for historical reasons and is not used with keyed archivers.
-//
-// VersionForClassName calls the underlying VersionForClassName.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Coder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Coder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Coder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Coder) WithScriptingProperties(scriptingProperties obj.Object) *Coder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// EncodeDataObject encodes a given data object.
+func (x *Coder) EncodeDataObject(data *Data) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeDataObject:"), objref.IDOf(data))
+}
+
+// DecodeDataObject decodes and returns an NSData object that was previously encoded with encodeDataObject:. Subclasses must override this method.
+func (x *Coder) DecodeDataObject() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeDataObject"))
+	return DataFromID(_r)
+}
+
+// VersionForClassName this method is present for historical reasons and is not used with keyed archivers.
 func (x *Coder) VersionForClassName(className string) int {
-	return x.inner.VersionForClassName(foundation.NSStringStringWithUTF8String(className))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("versionForClassName:"), purego.NSString(className))
+	return _r
 }
 
-// Encodes an object.
-//
-// EncodeObject calls the underlying EncodeObject.
-func (x *Coder) EncodeObject(object objc.ID) {
-	x.inner.EncodeObject(object)
+// EncodeObject encodes an object.
+func (x *Coder) EncodeObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeObject:"), objref.IDOf(object))
 }
 
-// An encoding method for subclasses to override to encode an interconnected group of objects, starting with the provided root object.
-//
-// EncodeRootObject calls the underlying EncodeRootObject.
-func (x *Coder) EncodeRootObject(rootObject objc.ID) {
-	x.inner.EncodeRootObject(rootObject)
+// EncodeRootObject an encoding method for subclasses to override to encode an interconnected group of objects, starting with the provided root object.
+func (x *Coder) EncodeRootObject(rootObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRootObject:"), objref.IDOf(rootObject))
 }
 
-// An encoding method for subclasses to override such that it creates a copy, rather than a proxy, when decoded.
-//
-// EncodeBycopyObject calls the underlying EncodeBycopyObject.
-func (x *Coder) EncodeBycopyObject(anObject objc.ID) {
-	x.inner.EncodeBycopyObject(anObject)
+// EncodeBycopyObject an encoding method for subclasses to override such that it creates a copy, rather than a proxy, when decoded.
+func (x *Coder) EncodeBycopyObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeBycopyObject:"), objref.IDOf(anObject))
 }
 
-// An encoding method for subclasses to override such that it creates a proxy, rather than a copy, when decoded.
-//
-// EncodeByrefObject calls the underlying EncodeByrefObject.
-func (x *Coder) EncodeByrefObject(anObject objc.ID) {
-	x.inner.EncodeByrefObject(anObject)
+// EncodeByrefObject an encoding method for subclasses to override such that it creates a proxy, rather than a copy, when decoded.
+func (x *Coder) EncodeByrefObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeByrefObject:"), objref.IDOf(anObject))
 }
 
-// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it.
-//
-// EncodeConditionalObject calls the underlying EncodeConditionalObject.
-func (x *Coder) EncodeConditionalObject(object objc.ID) {
-	x.inner.EncodeConditionalObject(object)
+// EncodeConditionalObject an encoding method for subclasses to override to conditionally encode an object, preserving common references to it.
+func (x *Coder) EncodeConditionalObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeConditionalObject:"), objref.IDOf(object))
 }
 
-// Encodes an array of the given Objective-C type, provided the number of items and a pointer.
-//
-// EncodeArrayOfObjCTypeCountAt calls the underlying EncodeArrayOfObjCTypeCountAt.
-func (x *Coder) EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer) {
-	x.inner.EncodeArrayOfObjCTypeCountAt(type_, count, array)
+// DecodeObject decodes and returns an object that was previously encoded with any of the encode…Object methods.
+func (x *Coder) DecodeObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeObject"))
+	return obj.Wrap(_r)
 }
 
-// Encodes a buffer of data of an unspecified type.
-//
-// EncodeBytesLength calls the underlying EncodeBytesLength.
-func (x *Coder) EncodeBytesLength(byteaddr unsafe.Pointer, length uint) {
-	x.inner.EncodeBytesLength(byteaddr, length)
+// DecodeTopLevelObjectAndReturnError decodes a previously-encoded object, populating an error if decoding fails.
+func (x *Coder) DecodeTopLevelObjectAndReturnError() (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeTopLevelObjectAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Decodes and returns an object that was previously encoded with any of the encode…Object methods.
-//
-// DecodeObject calls the underlying DecodeObject.
-func (x *Coder) DecodeObject() objc.ID {
-	return x.inner.DecodeObject()
+// EncodePropertyList encodes a property list.
+func (x *Coder) EncodePropertyList(aPropertyList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodePropertyList:"), objref.IDOf(aPropertyList))
 }
 
-// Decodes a previously-encoded object, populating an error if decoding fails.
-//
-// DecodeTopLevelObjectAndReturnError calls the underlying DecodeTopLevelObjectAndReturnError.
-func (x *Coder) DecodeTopLevelObjectAndReturnError() (objc.ID, error) {
-	return x.inner.DecodeTopLevelObjectAndReturnError()
+// DecodePropertyList decodes a property list that was previously encoded with encodePropertyList:.
+func (x *Coder) DecodePropertyList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodePropertyList"))
+	return obj.Wrap(_r)
 }
 
-// Decodes an array of count items, whose Objective-C type is given by itemType.
-//
-// DecodeArrayOfObjCTypeCountAt calls the underlying DecodeArrayOfObjCTypeCountAt.
-func (x *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer) {
-	x.inner.DecodeArrayOfObjCTypeCountAt(itemType, count, array)
+// EncodeObjectForKey encodes an object and associates it with the string key.
+func (x *Coder) EncodeObjectForKey(object obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeObject:forKey:"), objref.IDOf(object), purego.NSString(key))
 }
 
-// Decodes a buffer of data whose types are unspecified.
-//
-// DecodeBytesWithReturnedLength calls the underlying DecodeBytesWithReturnedLength.
-func (x *Coder) DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer {
-	return x.inner.DecodeBytesWithReturnedLength(lengthp)
+// EncodeConditionalObjectForKey an encoding method for subclasses to override to conditionally encode an object, preserving common references to it, only if it has been unconditionally encoded.
+func (x *Coder) EncodeConditionalObjectForKey(object obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeConditionalObject:forKey:"), objref.IDOf(object), purego.NSString(key))
 }
 
-// Encodes a property list.
-//
-// EncodePropertyList calls the underlying EncodePropertyList.
-func (x *Coder) EncodePropertyList(aPropertyList objc.ID) {
-	x.inner.EncodePropertyList(aPropertyList)
-}
-
-// Decodes a property list that was previously encoded with encodePropertyList:.
-//
-// DecodePropertyList calls the underlying DecodePropertyList.
-func (x *Coder) DecodePropertyList() objc.ID {
-	return x.inner.DecodePropertyList()
-}
-
-// This method is present for historical reasons and has no effect.
-//
-// SetObjectZone calls the underlying SetObjectZone.
-func (x *Coder) SetObjectZone(zone unsafe.Pointer) {
-	x.inner.SetObjectZone(zone)
-}
-
-// This method is present for historical reasons and has no effect.
-//
-// ObjectZone calls the underlying ObjectZone.
-func (x *Coder) ObjectZone() unsafe.Pointer {
-	return x.inner.ObjectZone()
-}
-
-// Encodes an object and associates it with the string key.
-//
-// EncodeObjectForKey calls the underlying EncodeObjectForKey.
-func (x *Coder) EncodeObjectForKey(object objc.ID, key string) {
-	x.inner.EncodeObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
-}
-
-// An encoding method for subclasses to override to conditionally encode an object, preserving common references to it, only if it has been unconditionally encoded.
-//
-// EncodeConditionalObjectForKey calls the underlying EncodeConditionalObjectForKey.
-func (x *Coder) EncodeConditionalObjectForKey(object objc.ID, key string) {
-	x.inner.EncodeConditionalObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
-}
-
-// Encodes a Boolean value and associates it with the string key.
-//
-// EncodeBoolForKey calls the underlying EncodeBoolForKey.
+// EncodeBoolForKey encodes a Boolean value and associates it with the string key.
 func (x *Coder) EncodeBoolForKey(value bool, key string) {
-	x.inner.EncodeBoolForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeBool:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a C integer value and associates it with the string key.
-//
-// EncodeIntForKey calls the underlying EncodeIntForKey.
+// EncodeIntForKey encodes a C integer value and associates it with the string key.
 func (x *Coder) EncodeIntForKey(value int, key string) {
-	x.inner.EncodeIntForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeInt:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a 32-bit integer value and associates it with the string key.
-//
-// EncodeInt32ForKey calls the underlying EncodeInt32ForKey.
+// EncodeInt32ForKey encodes a 32-bit integer value and associates it with the string key.
 func (x *Coder) EncodeInt32ForKey(value int32, key string) {
-	x.inner.EncodeInt32ForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeInt32:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a 64-bit integer value and associates it with the string key.
-//
-// EncodeInt64ForKey calls the underlying EncodeInt64ForKey.
+// EncodeInt64ForKey encodes a 64-bit integer value and associates it with the string key.
 func (x *Coder) EncodeInt64ForKey(value int64, key string) {
-	x.inner.EncodeInt64ForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeInt64:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a floating point value and associates it with the string key.
-//
-// EncodeFloatForKey calls the underlying EncodeFloatForKey.
+// EncodeFloatForKey encodes a floating point value and associates it with the string key.
 func (x *Coder) EncodeFloatForKey(value float32, key string) {
-	x.inner.EncodeFloatForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeFloat:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a double-precision floating point value and associates it with the string key.
-//
-// EncodeDoubleForKey calls the underlying EncodeDoubleForKey.
+// EncodeDoubleForKey encodes a double-precision floating point value and associates it with the string key.
 func (x *Coder) EncodeDoubleForKey(value float64, key string) {
-	x.inner.EncodeDoubleForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeDouble:forKey:"), value, purego.NSString(key))
 }
 
-// Encodes a buffer of data, given its length and a pointer, and associates it with a string key.
-//
-// EncodeBytesLengthForKey calls the underlying EncodeBytesLengthForKey.
-func (x *Coder) EncodeBytesLengthForKey(bytes_ *uint8, length uint, key string) {
-	x.inner.EncodeBytesLengthForKey(bytes_, length, foundation.NSStringStringWithUTF8String(key))
+// EncodeBytesLengthForKey encodes a buffer of data, given its length and a pointer, and associates it with a string key.
+func (x *Coder) EncodeBytesLengthForKey(length int, key string) (bytes_ uint8) {
+	var _out0 uint8
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeBytes:length:forKey:"), unsafe.Pointer(&_out0), length, purego.NSString(key))
+	return _out0
 }
 
-// Returns a Boolean value that indicates whether an encoded value is available for a string.
-//
-// ContainsValueForKey calls the underlying ContainsValueForKey.
+// ContainsValueForKey returns a Boolean value that indicates whether an encoded value is available for a string.
 func (x *Coder) ContainsValueForKey(key string) bool {
-	return x.inner.ContainsValueForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsValueForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns a previously-encoded object that was previously encoded with encodeObject:forKey: or encodeConditionalObject:forKey: and associated with the string key.
-//
-// DecodeObjectForKey calls the underlying DecodeObjectForKey.
-func (x *Coder) DecodeObjectForKey(key string) objc.ID {
-	return x.inner.DecodeObjectForKey(foundation.NSStringStringWithUTF8String(key))
+// DecodeObjectForKey decodes and returns a previously-encoded object that was previously encoded with encodeObject:forKey: or encodeConditionalObject:forKey: and associated with the string key.
+func (x *Coder) DecodeObjectForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeObjectForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Decodes the previously-encoded object associated by a key, populating an error if decoding fails.
-//
-// DecodeTopLevelObjectForKeyError calls the underlying DecodeTopLevelObjectForKeyError.
-func (x *Coder) DecodeTopLevelObjectForKeyError(key string) (objc.ID, error) {
-	return x.inner.DecodeTopLevelObjectForKeyError(foundation.NSStringStringWithUTF8String(key))
+// DecodeTopLevelObjectForKeyError decodes the previously-encoded object associated by a key, populating an error if decoding fails.
+func (x *Coder) DecodeTopLevelObjectForKeyError(key string) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeTopLevelObjectForKey:error:"), purego.NSString(key), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
-//
-// DecodeBoolForKey calls the underlying DecodeBoolForKey.
+// DecodeBoolForKey decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
 func (x *Coder) DecodeBoolForKey(key string) bool {
-	return x.inner.DecodeBoolForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("decodeBoolForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns an int value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
-//
-// DecodeIntForKey calls the underlying DecodeIntForKey.
+// DecodeIntForKey decodes and returns an int value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (x *Coder) DecodeIntForKey(key string) int {
-	return x.inner.DecodeIntForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("decodeIntForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns a 32-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
-//
-// DecodeInt32ForKey calls the underlying DecodeInt32ForKey.
+// DecodeInt32ForKey decodes and returns a 32-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (x *Coder) DecodeInt32ForKey(key string) int32 {
-	return x.inner.DecodeInt32ForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("decodeInt32ForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns a 64-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
-//
-// DecodeInt64ForKey calls the underlying DecodeInt64ForKey.
+// DecodeInt64ForKey decodes and returns a 64-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (x *Coder) DecodeInt64ForKey(key string) int64 {
-	return x.inner.DecodeInt64ForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("decodeInt64ForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns a float value that was previously encoded with encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
-//
-// DecodeFloatForKey calls the underlying DecodeFloatForKey.
+// DecodeFloatForKey decodes and returns a float value that was previously encoded with encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (x *Coder) DecodeFloatForKey(key string) float32 {
-	return x.inner.DecodeFloatForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("decodeFloatForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns a double value that was previously encoded with either encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
-//
-// DecodeDoubleForKey calls the underlying DecodeDoubleForKey.
+// DecodeDoubleForKey decodes and returns a double value that was previously encoded with either encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (x *Coder) DecodeDoubleForKey(key string) float64 {
-	return x.inner.DecodeDoubleForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decodeDoubleForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes a buffer of data that was previously encoded with encodeBytes:length:forKey: and associated with the string key.
-//
-// DecodeBytesForKeyReturnedLength calls the underlying DecodeBytesForKeyReturnedLength.
-func (x *Coder) DecodeBytesForKeyReturnedLength(key string, lengthp *uint) unsafe.Pointer {
-	return x.inner.DecodeBytesForKeyReturnedLength(foundation.NSStringStringWithUTF8String(key), lengthp)
-}
-
-// Decode bytes from the decoder. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
-//
-// DecodeBytesWithMinimumLength calls the underlying DecodeBytesWithMinimumLength.
-func (x *Coder) DecodeBytesWithMinimumLength(length uint) unsafe.Pointer {
-	return x.inner.DecodeBytesWithMinimumLength(length)
-}
-
-// Decode bytes from the decoder for a given key. The length of the bytes must be greater than or equal to the length parameter. If the result exists, but is of insufficient length, then the decoder uses failWithError to fail the entire decode operation. The result of that is configurable on a per-NSCoder basis using NSDecodingFailurePolicy.
-//
-// DecodeBytesForKeyMinimumLength calls the underlying DecodeBytesForKeyMinimumLength.
-func (x *Coder) DecodeBytesForKeyMinimumLength(key string, length uint) unsafe.Pointer {
-	return x.inner.DecodeBytesForKeyMinimumLength(foundation.NSStringStringWithUTF8String(key), length)
-}
-
-// Encodes an integer value and associates it with the string key.
-//
-// EncodeIntegerForKey calls the underlying EncodeIntegerForKey.
+// EncodeIntegerForKey encodes an integer value and associates it with the string key.
 func (x *Coder) EncodeIntegerForKey(value int, key string) {
-	x.inner.EncodeIntegerForKey(value, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeInteger:forKey:"), value, purego.NSString(key))
 }
 
-// Decodes and returns an NSInteger value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
-//
-// DecodeIntegerForKey calls the underlying DecodeIntegerForKey.
+// DecodeIntegerForKey decodes and returns an NSInteger value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (x *Coder) DecodeIntegerForKey(key string) int {
-	return x.inner.DecodeIntegerForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("decodeIntegerForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes an object for the key, restricted to the specified class.
-//
-// DecodeObjectOfClassForKey calls the underlying DecodeObjectOfClassForKey.
-func (x *Coder) DecodeObjectOfClassForKey(aClass objc.Class, key string) objc.ID {
-	return x.inner.DecodeObjectOfClassForKey(aClass, foundation.NSStringStringWithUTF8String(key))
+// DecodeObjectOfClassesForKey decodes an object for the key, restricted to the specified classes.
+func (x *Coder) DecodeObjectOfClassesForKey(classes obj.Object, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeObjectOfClasses:forKey:"), objref.IDOf(classes), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Decode an object as an expected type, failing if the archived type does not match.
-//
-// DecodeTopLevelObjectOfClassForKeyError calls the underlying DecodeTopLevelObjectOfClassForKeyError.
-func (x *Coder) DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key string) (objc.ID, error) {
-	return x.inner.DecodeTopLevelObjectOfClassForKeyError(aClass, foundation.NSStringStringWithUTF8String(key))
+// DecodeTopLevelObjectOfClassesForKeyError decode an object as one of several expected types, failing if the archived type does not match.
+func (x *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes obj.Object, key string) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeTopLevelObjectOfClasses:forKey:error:"), objref.IDOf(classes), purego.NSString(key), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection class (no nested arrays or arrays of dictionaries, etc) from the coder.
-//
-// DecodeArrayOfObjectsOfClassForKey calls the underlying DecodeArrayOfObjectsOfClassForKey.
-func (x *Coder) DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key string) *raw.NSArray[objc.ID] {
-	return x.inner.DecodeArrayOfObjectsOfClassForKey(cls, foundation.NSStringStringWithUTF8String(key))
+// DecodeArrayOfObjectsOfClassesForKey decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder.
+func (x *Coder) DecodeArrayOfObjectsOfClassesForKey(classes obj.Object, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeArrayOfObjectsOfClasses:forKey:"), objref.IDOf(classes), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary<keyCls,objectCls> , with keys of type given in \c keyCls and objects of the given non-collection class \c objectCls (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the coder.
-//
-// DecodeDictionaryWithKeysOfClassObjectsOfClassForKey calls the underlying DecodeDictionaryWithKeysOfClassObjectsOfClassForKey.
-func (x *Coder) DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key string) *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls, objectCls, foundation.NSStringStringWithUTF8String(key))
+// DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder.
+func (x *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses obj.Object, objectClasses obj.Object, key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeDictionaryWithKeysOfClasses:objectsOfClasses:forKey:"), objref.IDOf(keyClasses), objref.IDOf(objectClasses), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Decodes an object for the key, restricted to the specified classes.
-//
-// DecodeObjectOfClassesForKey calls the underlying DecodeObjectOfClassesForKey.
-func (x *Coder) DecodeObjectOfClassesForKey(classes *raw.NSSet[objc.Class], key string) objc.ID {
-	return x.inner.DecodeObjectOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
+// DecodePropertyListForKey returns a decoded property list for the specified key.
+func (x *Coder) DecodePropertyListForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodePropertyListForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Decode an object as one of several expected types, failing if the archived type does not match.
-//
-// DecodeTopLevelObjectOfClassesForKeyError calls the underlying DecodeTopLevelObjectOfClassesForKeyError.
-func (x *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes *raw.NSSet[objc.Class], key string) (objc.ID, error) {
-	return x.inner.DecodeTopLevelObjectOfClassesForKeyError(classes, foundation.NSStringStringWithUTF8String(key))
+// SystemVersion wraps the corresponding Objective-C method.
+func (x *Coder) SystemVersion() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("systemVersion"))
+	return _r
 }
 
-// Decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder.
-//
-// DecodeArrayOfObjectsOfClassesForKey calls the underlying DecodeArrayOfObjectsOfClassesForKey.
-func (x *Coder) DecodeArrayOfObjectsOfClassesForKey(classes *raw.NSSet[objc.Class], key string) *raw.NSArray[objc.ID] {
-	return x.inner.DecodeArrayOfObjectsOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
-}
-
-// Decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder.
-//
-// DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey calls the underlying DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey.
-func (x *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *raw.NSSet[objc.Class], objectClasses *raw.NSSet[objc.Class], key string) *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses, objectClasses, foundation.NSStringStringWithUTF8String(key))
-}
-
-// Returns a decoded property list for the specified key.
-//
-// DecodePropertyListForKey calls the underlying DecodePropertyListForKey.
-func (x *Coder) DecodePropertyListForKey(key string) objc.ID {
-	return x.inner.DecodePropertyListForKey(foundation.NSStringStringWithUTF8String(key))
-}
-
-// Signals to this coder that the decode operation has failed.
-//
-// FailWithError calls the underlying FailWithError.
-func (x *Coder) FailWithError(error_ unsafe.Pointer) {
-	x.inner.FailWithError(error_)
-}
-
-// SystemVersion calls the underlying SystemVersion.
-func (x *Coder) SystemVersion() uint {
-	return x.inner.SystemVersion()
-}
-
-// AllowsKeyedCoding calls the underlying AllowsKeyedCoding.
+// AllowsKeyedCoding wraps the corresponding Objective-C method.
 func (x *Coder) AllowsKeyedCoding() bool {
-	return x.inner.AllowsKeyedCoding()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsKeyedCoding"))
+	return _r
 }
 
-// RequiresSecureCoding calls the underlying RequiresSecureCoding.
+// RequiresSecureCoding wraps the corresponding Objective-C method.
 func (x *Coder) RequiresSecureCoding() bool {
-	return x.inner.RequiresSecureCoding()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSecureCoding"))
+	return _r
 }
 
-// AllowedClasses calls the underlying AllowedClasses.
-func (x *Coder) AllowedClasses() *raw.NSSet[objc.Class] {
-	return x.inner.AllowedClasses()
+// AllowedClasses wraps the corresponding Objective-C method.
+func (x *Coder) AllowedClasses() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedClasses"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). @discussion The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
-//
-// DecodingFailurePolicy calls the underlying DecodingFailurePolicy.
-func (x *Coder) DecodingFailurePolicy() NSDecodingFailurePolicy {
-	return NSDecodingFailurePolicy(x.inner.DecodingFailurePolicy())
+// DecodingFailurePolicy defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
+func (x *Coder) DecodingFailurePolicy() DecodingFailurePolicy {
+	_r := objc.Send[DecodingFailurePolicy](objref.IDOf(x), objc.RegisterName("decodingFailurePolicy"))
+	return _r
 }
 
-// @abstract The current error (if there is one) for the current TopLevel decode. @discussion The meaning of this property changes based on the result of the decodingFailurePolicy property: For NSDecodingFailurePolicyRaiseException, this property will always be nil. For NSDecodingFailurePolicySetErrorAndReturn, this property can be non-nil, and if so, indicates that there was a failure while decoding the archive (specifically its the very first error encountered). While .error is non-nil, all attempts to decode data from this coder will return a nil/zero-equivalent value. This error is consumed by a TopLevel decode API (which resets this coder back to a being able to potentially decode data).
-//
-// Error calls the underlying Error.
-func (x *Coder) Error() unsafe.Pointer {
-	return x.inner.Error()
+// EncodeNXObject encodes an old-style object onto the coder.
+func (x *Coder) EncodeNXObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeNXObject:"), objref.IDOf(object))
 }
 
-// Encodes an old-style object onto the coder.
-//
-// EncodeNXObject calls the underlying EncodeNXObject.
-func (x *Coder) EncodeNXObject(object objc.ID) {
-	x.inner.EncodeNXObject(object)
+// DecodeNXObject decodes an object previously written with encodeNXObject:.
+func (x *Coder) DecodeNXObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeNXObject"))
+	return obj.Wrap(_r)
 }
 
-// Decodes an object previously written with encodeNXObject:.
-//
-// DecodeNXObject calls the underlying DecodeNXObject.
-func (x *Coder) DecodeNXObject() objc.ID {
-	return x.inner.DecodeNXObject()
-}
-
-// Decodes a single value, whose Objective-C type is given by valueType.
-//
-// DecodeValueOfObjCTypeAt calls the underlying DecodeValueOfObjCTypeAt.
-func (x *Coder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
-	x.inner.DecodeValueOfObjCTypeAt(type_, data)
-}
-
-// Encodes a point.
-//
-// EncodePoint calls the underlying EncodePoint.
+// EncodePoint encodes a point.
 func (x *Coder) EncodePoint(point corefoundation.CGPoint) {
-	x.inner.EncodePoint(point)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodePoint:"), point)
 }
 
-// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:.
-//
-// DecodePoint calls the underlying DecodePoint.
+// DecodePoint decodes and returns an NSPoint structure that was previously encoded with encodePoint:.
 func (x *Coder) DecodePoint() corefoundation.CGPoint {
-	return x.inner.DecodePoint()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("decodePoint"))
+	return _r
 }
 
-// Encodes a size structure.
-//
-// EncodeSize calls the underlying EncodeSize.
+// EncodeSize encodes a size structure.
 func (x *Coder) EncodeSize(size corefoundation.CGSize) {
-	x.inner.EncodeSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeSize:"), size)
 }
 
-// Decodes and returns an NSSize structure that was previously encoded with encodeSize:.
-//
-// DecodeSize calls the underlying DecodeSize.
+// DecodeSize decodes and returns an NSSize structure that was previously encoded with encodeSize:.
 func (x *Coder) DecodeSize() corefoundation.CGSize {
-	return x.inner.DecodeSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("decodeSize"))
+	return _r
 }
 
-// Encodes a rectangle structure.
-//
-// EncodeRect calls the underlying EncodeRect.
+// EncodeRect encodes a rectangle structure.
 func (x *Coder) EncodeRect(rect corefoundation.CGRect) {
-	x.inner.EncodeRect(rect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRect:"), rect)
 }
 
-// Decodes and returns an NSRect structure that was previously encoded with encodeRect:.
-//
-// DecodeRect calls the underlying DecodeRect.
+// DecodeRect decodes and returns an NSRect structure that was previously encoded with encodeRect:.
 func (x *Coder) DecodeRect() corefoundation.CGRect {
-	return x.inner.DecodeRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("decodeRect"))
+	return _r
 }
 
-// Encodes a point and associates it with the string key.
-//
-// EncodePointForKey calls the underlying EncodePointForKey.
+// EncodePointForKey encodes a point and associates it with the string key.
 func (x *Coder) EncodePointForKey(point corefoundation.CGPoint, key string) {
-	x.inner.EncodePointForKey(point, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodePoint:forKey:"), point, purego.NSString(key))
 }
 
-// Encodes a size structure and associates it with the given string key.
-//
-// EncodeSizeForKey calls the underlying EncodeSizeForKey.
+// EncodeSizeForKey encodes a size structure and associates it with the given string key.
 func (x *Coder) EncodeSizeForKey(size corefoundation.CGSize, key string) {
-	x.inner.EncodeSizeForKey(size, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeSize:forKey:"), size, purego.NSString(key))
 }
 
-// Encodes a rectangle structure and associates it with the string key.
-//
-// EncodeRectForKey calls the underlying EncodeRectForKey.
+// EncodeRectForKey encodes a rectangle structure and associates it with the string key.
 func (x *Coder) EncodeRectForKey(rect corefoundation.CGRect, key string) {
-	x.inner.EncodeRectForKey(rect, foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRect:forKey:"), rect, purego.NSString(key))
 }
 
-// Decodes and returns an NSPoint structure that was previously encoded with encodePoint:forKey:.
-//
-// DecodePointForKey calls the underlying DecodePointForKey.
+// DecodePointForKey decodes and returns an NSPoint structure that was previously encoded with encodePoint:forKey:.
 func (x *Coder) DecodePointForKey(key string) corefoundation.CGPoint {
-	return x.inner.DecodePointForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("decodePointForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns an NSSize structure that was previously encoded with encodeSize:forKey:.
-//
-// DecodeSizeForKey calls the underlying DecodeSizeForKey.
+// DecodeSizeForKey decodes and returns an NSSize structure that was previously encoded with encodeSize:forKey:.
 func (x *Coder) DecodeSizeForKey(key string) corefoundation.CGSize {
-	return x.inner.DecodeSizeForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("decodeSizeForKey:"), purego.NSString(key))
+	return _r
 }
 
-// Decodes and returns an NSRect structure that was previously encoded with encodeRect:forKey:.
-//
-// DecodeRectForKey calls the underlying DecodeRectForKey.
+// DecodeRectForKey decodes and returns an NSRect structure that was previously encoded with encodeRect:forKey:.
 func (x *Coder) DecodeRectForKey(key string) corefoundation.CGRect {
-	return x.inner.DecodeRectForKey(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("decodeRectForKey:"), purego.NSString(key))
+	return _r
 }
-
-func (x *Coder) asCoder() *raw.NSCoder { return x.inner }
-
-func (x *Coder) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Coderable is the interface implemented by [Coder], for mocking and DI.
 type Coderable interface {
-	Unwrap() *raw.NSCoder
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Coder
-	EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer)
-	EncodeDataObject(data *raw.NSData)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Coder
+	EncodeDataObject(data *Data)
 	DecodeDataObject() *Data
-	DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint)
 	VersionForClassName(className string) int
-	EncodeObject(object objc.ID)
-	EncodeRootObject(rootObject objc.ID)
-	EncodeBycopyObject(anObject objc.ID)
-	EncodeByrefObject(anObject objc.ID)
-	EncodeConditionalObject(object objc.ID)
-	EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer)
-	EncodeBytesLength(byteaddr unsafe.Pointer, length uint)
-	DecodeObject() objc.ID
-	DecodeTopLevelObjectAndReturnError() (objc.ID, error)
-	DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer)
-	DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer
-	EncodePropertyList(aPropertyList objc.ID)
-	DecodePropertyList() objc.ID
-	SetObjectZone(zone unsafe.Pointer)
-	ObjectZone() unsafe.Pointer
-	EncodeObjectForKey(object objc.ID, key string)
-	EncodeConditionalObjectForKey(object objc.ID, key string)
+	EncodeObject(object obj.Object)
+	EncodeRootObject(rootObject obj.Object)
+	EncodeBycopyObject(anObject obj.Object)
+	EncodeByrefObject(anObject obj.Object)
+	EncodeConditionalObject(object obj.Object)
+	DecodeObject() obj.Object
+	DecodeTopLevelObjectAndReturnError() (result obj.Object, err error)
+	EncodePropertyList(aPropertyList obj.Object)
+	DecodePropertyList() obj.Object
+	EncodeObjectForKey(object obj.Object, key string)
+	EncodeConditionalObjectForKey(object obj.Object, key string)
 	EncodeBoolForKey(value bool, key string)
 	EncodeIntForKey(value int, key string)
 	EncodeInt32ForKey(value int32, key string)
 	EncodeInt64ForKey(value int64, key string)
 	EncodeFloatForKey(value float32, key string)
 	EncodeDoubleForKey(value float64, key string)
-	EncodeBytesLengthForKey(bytes_ *uint8, length uint, key string)
+	EncodeBytesLengthForKey(length int, key string) (bytes_ uint8)
 	ContainsValueForKey(key string) bool
-	DecodeObjectForKey(key string) objc.ID
-	DecodeTopLevelObjectForKeyError(key string) (objc.ID, error)
+	DecodeObjectForKey(key string) obj.Object
+	DecodeTopLevelObjectForKeyError(key string) (result obj.Object, err error)
 	DecodeBoolForKey(key string) bool
 	DecodeIntForKey(key string) int
 	DecodeInt32ForKey(key string) int32
 	DecodeInt64ForKey(key string) int64
 	DecodeFloatForKey(key string) float32
 	DecodeDoubleForKey(key string) float64
-	DecodeBytesForKeyReturnedLength(key string, lengthp *uint) unsafe.Pointer
-	DecodeBytesWithMinimumLength(length uint) unsafe.Pointer
-	DecodeBytesForKeyMinimumLength(key string, length uint) unsafe.Pointer
 	EncodeIntegerForKey(value int, key string)
 	DecodeIntegerForKey(key string) int
-	DecodeObjectOfClassForKey(aClass objc.Class, key string) objc.ID
-	DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key string) (objc.ID, error)
-	DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key string) *raw.NSArray[objc.ID]
-	DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key string) *raw.NSDictionary[objc.ID, objc.ID]
-	DecodeObjectOfClassesForKey(classes *raw.NSSet[objc.Class], key string) objc.ID
-	DecodeTopLevelObjectOfClassesForKeyError(classes *raw.NSSet[objc.Class], key string) (objc.ID, error)
-	DecodeArrayOfObjectsOfClassesForKey(classes *raw.NSSet[objc.Class], key string) *raw.NSArray[objc.ID]
-	DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *raw.NSSet[objc.Class], objectClasses *raw.NSSet[objc.Class], key string) *raw.NSDictionary[objc.ID, objc.ID]
-	DecodePropertyListForKey(key string) objc.ID
-	FailWithError(error_ unsafe.Pointer)
-	SystemVersion() uint
+	DecodeObjectOfClassesForKey(classes obj.Object, key string) obj.Object
+	DecodeTopLevelObjectOfClassesForKeyError(classes obj.Object, key string) (result obj.Object, err error)
+	DecodeArrayOfObjectsOfClassesForKey(classes obj.Object, key string) obj.Object
+	DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses obj.Object, objectClasses obj.Object, key string) obj.Object
+	DecodePropertyListForKey(key string) obj.Object
+	SystemVersion() int
 	AllowsKeyedCoding() bool
 	RequiresSecureCoding() bool
-	AllowedClasses() *raw.NSSet[objc.Class]
-	DecodingFailurePolicy() NSDecodingFailurePolicy
-	Error() unsafe.Pointer
-	EncodeNXObject(object objc.ID)
-	DecodeNXObject() objc.ID
-	DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer)
+	AllowedClasses() obj.Object
+	DecodingFailurePolicy() DecodingFailurePolicy
+	EncodeNXObject(object obj.Object)
+	DecodeNXObject() obj.Object
 	EncodePoint(point corefoundation.CGPoint)
 	DecodePoint() corefoundation.CGPoint
 	EncodeSize(size corefoundation.CGSize)
@@ -645,3 +466,10 @@ type Coderable interface {
 }
 
 var _ Coderable = (*Coder)(nil)
+
+// isCoder marks Coder — and, by embedding promotion, its
+// subclasses — as a member of the Coder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Coder) isCoder() {}
+
+var _ CoderProvider = (*Coder)(nil)

@@ -5,75 +5,103 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// This class represents an artist, such as the performer of a song.
+// LibArtist is an idiomatic wrapper over the Objective-C class ITLibArtist.
 //
-// LibArtist wraps [raw.ITLibArtist] with a fluent Go API.
+// This class represents an artist, such as the performer of a song.
 type LibArtist struct {
-	inner *raw.ITLibArtist
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibArtist].
-func (x *LibArtist) Unwrap() *raw.ITLibArtist { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibArtist) ID() objc.ID { return x.inner.Ptr() }
-
-// LibArtistFromID adopts an existing object pointer as a LibArtist (nil for 0).
+// LibArtistFromID adopts an existing Objective-C object as a LibArtist
+// (nil for 0), retaining it and registering a release finalizer.
 func LibArtistFromID(id objc.ID) *LibArtist {
 	if id == 0 {
 		return nil
 	}
-	return &LibArtist{inner: raw.ITLibArtistFromID(id)}
+	x := &LibArtist{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLibArtist creates a new [LibArtist].
+// libArtistAdopt wraps an Objective-C object that this code just created as a
+// LibArtist (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libArtistAdopt(id objc.ID) *LibArtist {
+	if id == 0 {
+		return nil
+	}
+	x := &LibArtist{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibArtist) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibArtist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibArtist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LibArtist) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLibArtist creates a new LibArtist.
 func NewLibArtist() *LibArtist {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibArtist")), objc.RegisterName("new"))
-	return &LibArtist{inner: raw.ITLibArtistFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibArtist")), objc.RegisterName("new"))
+	return libArtistAdopt(_id)
 }
 
-// @abstract The name of this artist.
-//
-// Name calls the underlying Name.
+// Name the name of this artist.
 func (x *LibArtist) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The name of this artist that should be used for sorting purposes.
-//
-// SortName calls the underlying SortName.
+// SortName the name of this artist that should be used for sorting purposes.
 func (x *LibArtist) SortName() string {
-	_r := x.inner.SortName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The unique identifier of this artist.
-//
-// PersistentID calls the underlying PersistentID.
-func (x *LibArtist) PersistentID() *foundation.NSNumber {
-	return x.inner.PersistentID()
+// PersistentID the unique identifier of this artist.
+func (x *LibArtist) PersistentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
+	return obj.Wrap(_r)
 }
 
 // LibArtistable is the interface implemented by [LibArtist], for mocking and DI.
 type LibArtistable interface {
-	Unwrap() *raw.ITLibArtist
+	obj.Object
 	Name() string
 	SortName() string
-	PersistentID() *foundation.NSNumber
+	PersistentID() obj.Object
 }
 
 var _ LibArtistable = (*LibArtist)(nil)

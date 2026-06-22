@@ -5,67 +5,72 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the Rotate animation to symbol images.
+// SymbolRotateEffect is an idiomatic wrapper over the Objective-C class NSSymbolRotateEffect.
 //
-// SymbolRotateEffect wraps [raw.NSSymbolRotateEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the Rotate animation to symbol images.
 type SymbolRotateEffect struct {
-	inner *raw.NSSymbolRotateEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolRotateEffect].
-func (x *SymbolRotateEffect) Unwrap() *raw.NSSymbolRotateEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolRotateEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolRotateEffectFromID adopts an existing object pointer as a SymbolRotateEffect (nil for 0).
+// SymbolRotateEffectFromID adopts an existing Objective-C object as a SymbolRotateEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolRotateEffectFromID(id objc.ID) *SymbolRotateEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolRotateEffect{inner: raw.NSSymbolRotateEffectFromID(id)}
+	x := &SymbolRotateEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolRotateEffect creates a new [SymbolRotateEffect].
+// symbolRotateEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolRotateEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolRotateEffectAdopt(id objc.ID) *SymbolRotateEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolRotateEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolRotateEffect creates a new SymbolRotateEffect.
 func NewSymbolRotateEffect() *SymbolRotateEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolRotateEffect")), objc.RegisterName("new"))
-	return &SymbolRotateEffect{inner: raw.NSSymbolRotateEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolRotateEffect")), objc.RegisterName("new"))
+	return symbolRotateEffectAdopt(_id)
 }
 
-// Returns a copy of the effect that animates incrementally, by layer.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
 func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolRotateEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolRotateEffectFromID(_r)
 }
 
-// Returns a copy of the effect that animates all layers of the symbol simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (x *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolRotateEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolRotateEffectFromID(_r)
 }
-
-func (x *SymbolRotateEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolRotateEffectable is the interface implemented by [SymbolRotateEffect], for mocking and DI.
 type SymbolRotateEffectable interface {
-	Unwrap() *raw.NSSymbolRotateEffect
+	obj.Object
 	EffectWithByLayer() *SymbolRotateEffect
 	EffectWithWholeSymbol() *SymbolRotateEffect
 }
 
 var _ SymbolRotateEffectable = (*SymbolRotateEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolRotateEffect)(nil)

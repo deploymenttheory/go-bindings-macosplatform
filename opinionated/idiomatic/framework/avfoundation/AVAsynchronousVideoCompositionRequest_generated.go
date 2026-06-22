@@ -5,179 +5,134 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains information a video compositor needs to render an output pixel buffer.
+// AsynchronousVideoCompositionRequest is an idiomatic wrapper over the Objective-C class AVAsynchronousVideoCompositionRequest.
 //
-// AsynchronousVideoCompositionRequest wraps [raw.AVAsynchronousVideoCompositionRequest] with a fluent Go API.
+// An object that contains information a video compositor needs to render an output pixel buffer.
 type AsynchronousVideoCompositionRequest struct {
-	inner *raw.AVAsynchronousVideoCompositionRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAsynchronousVideoCompositionRequest].
-func (x *AsynchronousVideoCompositionRequest) Unwrap() *raw.AVAsynchronousVideoCompositionRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AsynchronousVideoCompositionRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AsynchronousVideoCompositionRequestFromID adopts an existing object pointer as a AsynchronousVideoCompositionRequest (nil for 0).
+// AsynchronousVideoCompositionRequestFromID adopts an existing Objective-C object as a AsynchronousVideoCompositionRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AsynchronousVideoCompositionRequestFromID(id objc.ID) *AsynchronousVideoCompositionRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AsynchronousVideoCompositionRequest{inner: raw.AVAsynchronousVideoCompositionRequestFromID(id)}
+	x := &AsynchronousVideoCompositionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAsynchronousVideoCompositionRequest creates a new [AsynchronousVideoCompositionRequest].
+// asynchronousVideoCompositionRequestAdopt wraps an Objective-C object that this code just created as a
+// AsynchronousVideoCompositionRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func asynchronousVideoCompositionRequestAdopt(id objc.ID) *AsynchronousVideoCompositionRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AsynchronousVideoCompositionRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AsynchronousVideoCompositionRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AsynchronousVideoCompositionRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AsynchronousVideoCompositionRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AsynchronousVideoCompositionRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAsynchronousVideoCompositionRequest creates a new AsynchronousVideoCompositionRequest.
 func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAsynchronousVideoCompositionRequest")), objc.RegisterName("new"))
-	return &AsynchronousVideoCompositionRequest{inner: raw.AVAsynchronousVideoCompositionRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAsynchronousVideoCompositionRequest")), objc.RegisterName("new"))
+	return asynchronousVideoCompositionRequestAdopt(_id)
 }
 
-// Returns a source pixel buffer for the track that contains the specified identifier.
-//
-// SourceFrameByTrackID calls the underlying SourceFrameByTrackID.
-func (x *AsynchronousVideoCompositionRequest) SourceFrameByTrackID(trackID int32) unsafe.Pointer {
-	return x.inner.SourceFrameByTrackID(trackID)
+// SourceSampleBufferByTrackID returns a source sample buffer for the track that contains the specified identifier.
+func (x *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceSampleBufferByTrackID:"), trackID)
+	return obj.Wrap(_r)
 }
 
-// Returns a source sample buffer for the track that contains the specified identifier.
-//
-// SourceSampleBufferByTrackID calls the underlying SourceSampleBufferByTrackID.
-func (x *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer {
-	return x.inner.SourceSampleBufferByTrackID(trackID)
-}
-
-// Returns a source timed metadata group for the track that contains the specified identifier.
-//
-// SourceTimedMetadataByTrackID calls the underlying SourceTimedMetadataByTrackID.
+// SourceTimedMetadataByTrackID returns a source timed metadata group for the track that contains the specified identifier.
 func (x *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup {
-	_r := x.inner.SourceTimedMetadataByTrackID(trackID)
-	if _r == nil {
-		return nil
-	}
-	return &TimedMetadataGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTimedMetadataByTrackID:"), trackID)
+	return TimedMetadataGroupFromID(_r)
 }
 
-// Finishes the request to compose the frame.
-//
-// FinishWithComposedVideoFrame calls the underlying FinishWithComposedVideoFrame.
-func (x *AsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
-	x.inner.FinishWithComposedVideoFrame(composedVideoFrame)
-}
-
-// Finishes the request with an error.
-//
-// FinishWithError calls the underlying FinishWithError.
-func (x *AsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
-	x.inner.FinishWithError(error_)
-}
-
-// Cancels the request to compose a video frame.
-//
-// FinishCancelledRequest calls the underlying FinishCancelledRequest.
+// FinishCancelledRequest cancels the request to compose a video frame.
 func (x *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
-	x.inner.FinishCancelledRequest()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishCancelledRequest"))
 }
 
-// Returns the source CMTaggedBufferGroupRef for the given track ID.
-//
-// SourceTaggedBufferGroupByTrackID calls the underlying SourceTaggedBufferGroupByTrackID.
-func (x *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer {
-	return x.inner.SourceTaggedBufferGroupByTrackID(trackID)
+// SourceTaggedBufferGroupByTrackID returns the source CMTaggedBufferGroupRef for the given track ID.
+func (x *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTaggedBufferGroupByTrackID:"), trackID)
+	return obj.Wrap(_r)
 }
 
-// The method that the custom compositor calls when composition succeeds.
-//
-// FinishWithComposedTaggedBufferGroup calls the underlying FinishWithComposedTaggedBufferGroup.
-func (x *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer) {
-	x.inner.FinishWithComposedTaggedBufferGroup(taggedBufferGroup)
+// FinishWithComposedTaggedBufferGroup the method that the custom compositor calls when composition succeeds.
+func (x *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishWithComposedTaggedBufferGroup:"), objref.IDOf(taggedBufferGroup))
 }
 
-// Associates the pixel buffer with the specified spatial configuration.
-//
-// AttachSpatialVideoConfigurationToPixelBuffer calls the underlying AttachSpatialVideoConfigurationToPixelBuffer.
-func (x *AsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *raw.AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {
-	x.inner.AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration, pixelBuffer)
-}
-
-// The AVVideoCompositionRenderContext making the request
-//
-// RenderContext calls the underlying RenderContext.
+// RenderContext the AVVideoCompositionRenderContext making the request
 func (x *AsynchronousVideoCompositionRequest) RenderContext() *VideoCompositionRenderContext {
-	_r := x.inner.RenderContext()
-	if _r == nil {
-		return nil
-	}
-	return &VideoCompositionRenderContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderContext"))
+	return VideoCompositionRenderContextFromID(_r)
 }
 
-// The time for which the frame should be composed
-//
-// CompositionTime calls the underlying CompositionTime.
-func (x *AsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMTime {
-	return x.inner.CompositionTime()
-}
-
-// Track IDs of all the source video buffers that are available to compose the frame.
+// SourceTrackIDs track IDs of all the source video buffers that are available to compose the frame.
 //
 // SourceTrackIDs returns the collection as a Go slice.
-func (x *AsynchronousVideoCompositionRequest) SourceTrackIDs() []*foundation.NSNumber {
-	arr := x.inner.SourceTrackIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AsynchronousVideoCompositionRequest) SourceTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTrackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Track IDs of all the source sample data buffers that are available to compose the frame.
+// SourceSampleDataTrackIDs track IDs of all the source sample data buffers that are available to compose the frame.
 //
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
-func (x *AsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() []*foundation.NSNumber {
-	arr := x.inner.SourceSampleDataTrackIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
-}
-
-// The AVVideoCompositionInstruction to use to compose the frame.
-//
-// VideoCompositionInstruction calls the underlying VideoCompositionInstruction.
-func (x *AsynchronousVideoCompositionRequest) VideoCompositionInstruction() raw.AVVideoCompositionInstructionProtocol {
-	return x.inner.VideoCompositionInstruction()
+func (x *AsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceSampleDataTrackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AsynchronousVideoCompositionRequestable is the interface implemented by [AsynchronousVideoCompositionRequest], for mocking and DI.
 type AsynchronousVideoCompositionRequestable interface {
-	Unwrap() *raw.AVAsynchronousVideoCompositionRequest
-	SourceFrameByTrackID(trackID int32) unsafe.Pointer
-	SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer
+	obj.Object
+	SourceSampleBufferByTrackID(trackID int32) obj.Object
 	SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup
-	FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer)
-	FinishWithError(error_ unsafe.Pointer)
 	FinishCancelledRequest()
-	SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer
-	FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer)
-	AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *raw.AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer)
+	SourceTaggedBufferGroupByTrackID(trackID int32) obj.Object
+	FinishWithComposedTaggedBufferGroup(taggedBufferGroup obj.Object)
 	RenderContext() *VideoCompositionRenderContext
-	CompositionTime() coremedia.CMTime
-	SourceTrackIDs() []*foundation.NSNumber
-	SourceSampleDataTrackIDs() []*foundation.NSNumber
-	VideoCompositionInstruction() raw.AVVideoCompositionInstructionProtocol
+	SourceTrackIDs() []obj.Object
+	SourceSampleDataTrackIDs() []obj.Object
 }
 
 var _ AsynchronousVideoCompositionRequestable = (*AsynchronousVideoCompositionRequest)(nil)

@@ -5,185 +5,184 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that describes a sample buffer creation request.
+// SampleBufferRequest is an idiomatic wrapper over the Objective-C class AVSampleBufferRequest.
 //
-// SampleBufferRequest wraps [raw.AVSampleBufferRequest] with a fluent Go API.
+// An object that describes a sample buffer creation request.
 type SampleBufferRequest struct {
-	inner *raw.AVSampleBufferRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleBufferRequest].
-func (x *SampleBufferRequest) Unwrap() *raw.AVSampleBufferRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleBufferRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleBufferRequestFromID adopts an existing object pointer as a SampleBufferRequest (nil for 0).
+// SampleBufferRequestFromID adopts an existing Objective-C object as a SampleBufferRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleBufferRequestFromID(id objc.ID) *SampleBufferRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SampleBufferRequest{inner: raw.AVSampleBufferRequestFromID(id)}
-}
-
-// Creates a newly allocated sample buffer request with the specified sample cursor.
-//
-// NewSampleBufferRequestWithStartCursor creates a new [SampleBufferRequest].
-func NewSampleBufferRequestWithStartCursor(startCursor *raw.AVSampleCursor) *SampleBufferRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleBufferRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartCursor:"), startCursor.Ptr())
-	return &SampleBufferRequest{inner: raw.AVSampleBufferRequestFromID(_id)}
-}
-
-// The buffer sample direction.
-//
-// WithDirection sets the direction property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithDirection(direction AVSampleBufferRequestDirection) *SampleBufferRequest {
-	x.inner.SetDirection(raw.AVSampleBufferRequestDirection(direction))
+	x := &SampleBufferRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The limiting position for sample loading.
-//
-// WithLimitCursor sets the limitCursor property and returns the receiver for chaining.
+// sampleBufferRequestAdopt wraps an Objective-C object that this code just created as a
+// SampleBufferRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleBufferRequestAdopt(id objc.ID) *SampleBufferRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SampleBufferRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleBufferRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleBufferRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleBufferRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SampleBufferRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSampleBufferRequestWithStartCursor creates a newly allocated sample buffer request with the specified sample cursor.
+func NewSampleBufferRequestWithStartCursor(startCursor *SampleCursor) *SampleBufferRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartCursor:"), objref.IDOf(startCursor))
+	return sampleBufferRequestAdopt(_id)
+}
+
+// WithDirection the buffer sample direction.
+func (x *SampleBufferRequest) WithDirection(direction SampleBufferRequestDirection) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
+	return x
+}
+
+// WithLimitCursor the limiting position for sample loading.
 func (x *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
-	x.inner.SetLimitCursor(limitCursor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
 	return x
 }
 
-// The preferred minimum number of samples to load.
-//
-// WithPreferredMinSampleCount sets the preferredMinSampleCount property and returns the receiver for chaining.
+// WithPreferredMinSampleCount the preferred minimum number of samples to load.
 func (x *SampleBufferRequest) WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest {
-	x.inner.SetPreferredMinSampleCount(preferredMinSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMinSampleCount:"), preferredMinSampleCount)
 	return x
 }
 
-// The maximum number of samples to load.
-//
-// WithMaxSampleCount sets the maxSampleCount property and returns the receiver for chaining.
+// WithMaxSampleCount the maximum number of samples to load.
 func (x *SampleBufferRequest) WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest {
-	x.inner.SetMaxSampleCount(maxSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSampleCount:"), maxSampleCount)
 	return x
 }
 
-// The sample buffer request mode.
-//
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithMode(mode AVSampleBufferRequestMode) *SampleBufferRequest {
-	x.inner.SetMode(raw.AVSampleBufferRequestMode(mode))
+// WithMode the sample buffer request mode.
+func (x *SampleBufferRequest) WithMode(mode SampleBufferRequestMode) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// The deadline for sample data and output PTS for the sample buffer.
-//
-// WithOverrideTime sets the overrideTime property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest {
-	x.inner.SetOverrideTime(overrideTime)
-	return x
-}
-
-// StartCursor calls the underlying StartCursor.
+// StartCursor wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) StartCursor() *SampleCursor {
-	_r := x.inner.StartCursor()
-	if _r == nil {
-		return nil
-	}
-	return &SampleCursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startCursor"))
+	return SampleCursorFromID(_r)
 }
 
-// Direction calls the underlying Direction.
-func (x *SampleBufferRequest) Direction() AVSampleBufferRequestDirection {
-	return AVSampleBufferRequestDirection(x.inner.Direction())
+// Direction wraps the corresponding Objective-C method.
+func (x *SampleBufferRequest) Direction() SampleBufferRequestDirection {
+	_r := objc.Send[SampleBufferRequestDirection](objref.IDOf(x), objc.RegisterName("direction"))
+	return _r
 }
 
-// SetDirection calls the underlying SetDirection.
-func (x *SampleBufferRequest) SetDirection(direction AVSampleBufferRequestDirection) {
-	x.inner.SetDirection(raw.AVSampleBufferRequestDirection(direction))
+// SetDirection wraps the corresponding Objective-C method.
+func (x *SampleBufferRequest) SetDirection(direction SampleBufferRequestDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
 }
 
-// LimitCursor calls the underlying LimitCursor.
+// LimitCursor wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) LimitCursor() *SampleCursor {
-	_r := x.inner.LimitCursor()
-	if _r == nil {
-		return nil
-	}
-	return &SampleCursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limitCursor"))
+	return SampleCursorFromID(_r)
 }
 
-// SetLimitCursor calls the underlying SetLimitCursor.
-func (x *SampleBufferRequest) SetLimitCursor(limitCursor *raw.AVSampleCursor) {
-	x.inner.SetLimitCursor(limitCursor)
+// SetLimitCursor wraps the corresponding Objective-C method.
+func (x *SampleBufferRequest) SetLimitCursor(limitCursor *SampleCursor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
 }
 
-// PreferredMinSampleCount calls the underlying PreferredMinSampleCount.
+// PreferredMinSampleCount wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) PreferredMinSampleCount() int {
-	return x.inner.PreferredMinSampleCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredMinSampleCount"))
+	return _r
 }
 
-// SetPreferredMinSampleCount calls the underlying SetPreferredMinSampleCount.
+// SetPreferredMinSampleCount wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) SetPreferredMinSampleCount(preferredMinSampleCount int) {
-	x.inner.SetPreferredMinSampleCount(preferredMinSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMinSampleCount:"), preferredMinSampleCount)
 }
 
-// MaxSampleCount calls the underlying MaxSampleCount.
+// MaxSampleCount wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) MaxSampleCount() int {
-	return x.inner.MaxSampleCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSampleCount"))
+	return _r
 }
 
-// SetMaxSampleCount calls the underlying SetMaxSampleCount.
+// SetMaxSampleCount wraps the corresponding Objective-C method.
 func (x *SampleBufferRequest) SetMaxSampleCount(maxSampleCount int) {
-	x.inner.SetMaxSampleCount(maxSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSampleCount:"), maxSampleCount)
 }
 
-// Mode calls the underlying Mode.
-func (x *SampleBufferRequest) Mode() AVSampleBufferRequestMode {
-	return AVSampleBufferRequestMode(x.inner.Mode())
+// Mode wraps the corresponding Objective-C method.
+func (x *SampleBufferRequest) Mode() SampleBufferRequestMode {
+	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// SetMode calls the underlying SetMode.
-func (x *SampleBufferRequest) SetMode(mode AVSampleBufferRequestMode) {
-	x.inner.SetMode(raw.AVSampleBufferRequestMode(mode))
-}
-
-// OverrideTime calls the underlying OverrideTime.
-func (x *SampleBufferRequest) OverrideTime() coremedia.CMTime {
-	return x.inner.OverrideTime()
-}
-
-// SetOverrideTime calls the underlying SetOverrideTime.
-func (x *SampleBufferRequest) SetOverrideTime(overrideTime coremedia.CMTime) {
-	x.inner.SetOverrideTime(overrideTime)
+// SetMode wraps the corresponding Objective-C method.
+func (x *SampleBufferRequest) SetMode(mode SampleBufferRequestMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
 // SampleBufferRequestable is the interface implemented by [SampleBufferRequest], for mocking and DI.
 type SampleBufferRequestable interface {
-	Unwrap() *raw.AVSampleBufferRequest
-	WithDirection(direction AVSampleBufferRequestDirection) *SampleBufferRequest
+	obj.Object
+	WithDirection(direction SampleBufferRequestDirection) *SampleBufferRequest
 	WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest
 	WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest
 	WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest
-	WithMode(mode AVSampleBufferRequestMode) *SampleBufferRequest
-	WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest
+	WithMode(mode SampleBufferRequestMode) *SampleBufferRequest
 	StartCursor() *SampleCursor
-	Direction() AVSampleBufferRequestDirection
-	SetDirection(direction AVSampleBufferRequestDirection)
+	Direction() SampleBufferRequestDirection
+	SetDirection(direction SampleBufferRequestDirection)
 	LimitCursor() *SampleCursor
-	SetLimitCursor(limitCursor *raw.AVSampleCursor)
+	SetLimitCursor(limitCursor *SampleCursor)
 	PreferredMinSampleCount() int
 	SetPreferredMinSampleCount(preferredMinSampleCount int)
 	MaxSampleCount() int
 	SetMaxSampleCount(maxSampleCount int)
-	Mode() AVSampleBufferRequestMode
-	SetMode(mode AVSampleBufferRequestMode)
-	OverrideTime() coremedia.CMTime
-	SetOverrideTime(overrideTime coremedia.CMTime)
+	Mode() SampleBufferRequestMode
+	SetMode(mode SampleBufferRequestMode)
 }
 
 var _ SampleBufferRequestable = (*SampleBufferRequest)(nil)

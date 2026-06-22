@@ -5,96 +5,128 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The layout of a scrubber item.
+// ScrubberLayoutAttributes is an idiomatic wrapper over the Objective-C class NSScrubberLayoutAttributes.
 //
-// ScrubberLayoutAttributes wraps [raw.NSScrubberLayoutAttributes] with a fluent Go API.
+// The layout of a scrubber item.
 type ScrubberLayoutAttributes struct {
-	inner *raw.NSScrubberLayoutAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScrubberLayoutAttributes].
-func (x *ScrubberLayoutAttributes) Unwrap() *raw.NSScrubberLayoutAttributes { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrubberLayoutAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrubberLayoutAttributesFromID adopts an existing object pointer as a ScrubberLayoutAttributes (nil for 0).
+// ScrubberLayoutAttributesFromID adopts an existing Objective-C object as a ScrubberLayoutAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrubberLayoutAttributesFromID(id objc.ID) *ScrubberLayoutAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &ScrubberLayoutAttributes{inner: raw.NSScrubberLayoutAttributesFromID(id)}
+	x := &ScrubberLayoutAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScrubberLayoutAttributes creates a new [ScrubberLayoutAttributes].
+// scrubberLayoutAttributesAdopt wraps an Objective-C object that this code just created as a
+// ScrubberLayoutAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrubberLayoutAttributesAdopt(id objc.ID) *ScrubberLayoutAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &ScrubberLayoutAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScrubberLayoutAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScrubberLayoutAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScrubberLayoutAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScrubberLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScrubberLayoutAttributes creates a new ScrubberLayoutAttributes.
 func NewScrubberLayoutAttributes() *ScrubberLayoutAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberLayoutAttributes")), objc.RegisterName("new"))
-	return &ScrubberLayoutAttributes{inner: raw.NSScrubberLayoutAttributesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberLayoutAttributes")), objc.RegisterName("new"))
+	return scrubberLayoutAttributesAdopt(_id)
 }
 
-// The index of the scrubber item that is represented by the item’s layout attributes.
-//
-// WithItemIndex sets the itemIndex property and returns the receiver for chaining.
+// WithItemIndex the index of the scrubber item that is represented by the item’s layout attributes.
 func (x *ScrubberLayoutAttributes) WithItemIndex(itemIndex int) *ScrubberLayoutAttributes {
-	x.inner.SetItemIndex(itemIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemIndex:"), itemIndex)
 	return x
 }
 
-// The frame of the scrubber item.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the frame of the scrubber item.
 func (x *ScrubberLayoutAttributes) WithFrame(frame corefoundation.CGRect) *ScrubberLayoutAttributes {
-	x.inner.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// The item’s alpha value.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the item’s alpha value.
 func (x *ScrubberLayoutAttributes) WithAlpha(alpha float64) *ScrubberLayoutAttributes {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// ItemIndex calls the underlying ItemIndex.
+// ItemIndex wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) ItemIndex() int {
-	return x.inner.ItemIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("itemIndex"))
+	return _r
 }
 
-// SetItemIndex calls the underlying SetItemIndex.
+// SetItemIndex wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) SetItemIndex(itemIndex int) {
-	x.inner.SetItemIndex(itemIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemIndex:"), itemIndex)
 }
 
-// Frame calls the underlying Frame.
+// Frame wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+	return _r
 }
 
-// SetFrame calls the underlying SetFrame.
+// SetFrame wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) SetFrame(frame corefoundation.CGRect) {
-	x.inner.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
-// Alpha calls the underlying Alpha.
+// Alpha wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *ScrubberLayoutAttributes) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // ScrubberLayoutAttributesable is the interface implemented by [ScrubberLayoutAttributes], for mocking and DI.
 type ScrubberLayoutAttributesable interface {
-	Unwrap() *raw.NSScrubberLayoutAttributes
+	obj.Object
 	WithItemIndex(itemIndex int) *ScrubberLayoutAttributes
 	WithFrame(frame corefoundation.CGRect) *ScrubberLayoutAttributes
 	WithAlpha(alpha float64) *ScrubberLayoutAttributes

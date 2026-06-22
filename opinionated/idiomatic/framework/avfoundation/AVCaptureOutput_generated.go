@@ -5,125 +5,131 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract superclass for objects that provide media output destinations for a capture session.
+// CaptureOutput is an idiomatic wrapper over the Objective-C class AVCaptureOutput.
 //
-// CaptureOutput wraps [raw.AVCaptureOutput] with a fluent Go API.
+// CaptureOutput is an abstract base — you do not construct it directly. Construct one of [CaptureAudioDataOutput], [CaptureAudioPreviewOutput], [CaptureFileOutput], [CaptureMetadataOutput], [CapturePhotoOutput], [CaptureStillImageOutput], [CaptureVideoDataOutput] and pass it where a CaptureOutput is accepted.
+//
+// An abstract superclass for objects that provide media output destinations for a capture session.
 type CaptureOutput struct {
-	inner *raw.AVCaptureOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureOutput].
-func (x *CaptureOutput) Unwrap() *raw.AVCaptureOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureOutputFromID adopts an existing object pointer as a CaptureOutput (nil for 0).
+// CaptureOutputFromID adopts an existing Objective-C object as a CaptureOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureOutputFromID(id objc.ID) *CaptureOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureOutput{inner: raw.AVCaptureOutputFromID(id)}
-}
-
-// NewCaptureOutput creates a new [CaptureOutput].
-func NewCaptureOutput() *CaptureOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureOutput")), objc.RegisterName("new"))
-	return &CaptureOutput{inner: raw.AVCaptureOutputFromID(_id)}
-}
-
-// A Boolean value that indicates whether to defer starting this capture output.
-//
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
-func (x *CaptureOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureOutput {
-	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
+	x := &CaptureOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns the first connection with an input port of a specified media type.
-//
-// ConnectionWithMediaType calls the underlying ConnectionWithMediaType.
-func (x *CaptureOutput) ConnectionWithMediaType(mediaType *foundation.NSString) *CaptureConnection {
-	_r := x.inner.ConnectionWithMediaType(mediaType)
-	if _r == nil {
+// captureOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureOutputAdopt(id objc.ID) *CaptureOutput {
+	if id == 0 {
 		return nil
 	}
-	return &CaptureConnection{inner: _r}
+	x := &CaptureOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Converts a metadata object’s visual properties to layer coordinates.
-//
-// TransformedMetadataObjectForMetadataObjectConnection calls the underlying TransformedMetadataObjectForMetadataObjectConnection.
-func (x *CaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(metadataObject *raw.AVMetadataObject, connection *raw.AVCaptureConnection) *MetadataObject {
-	_r := x.inner.TransformedMetadataObjectForMetadataObjectConnection(metadataObject, connection)
-	if _r == nil {
-		return nil
-	}
-	return &MetadataObject{inner: _r}
+// Description returns the object's -description text.
+func (x *CaptureOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Converts a rectangle in the capture output object’s coordinate system to one in the coordinate system used for metadata outputs.
-//
-// MetadataOutputRectOfInterestForRect calls the underlying MetadataOutputRectOfInterestForRect.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
+func (x *CaptureOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return x
+}
+
+// ConnectionWithMediaType returns the first connection with an input port of a specified media type.
+func (x *CaptureOutput) ConnectionWithMediaType(mediaType obj.Object) *CaptureConnection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionWithMediaType:"), objref.IDOf(mediaType))
+	return CaptureConnectionFromID(_r)
+}
+
+// TransformedMetadataObjectForMetadataObjectConnection converts a metadata object’s visual properties to layer coordinates.
+func (x *CaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(metadataObject *MetadataObject, connection *CaptureConnection) *MetadataObject {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformedMetadataObjectForMetadataObject:connection:"), objref.IDOf(metadataObject), objref.IDOf(connection))
+	return MetadataObjectFromID(_r)
+}
+
+// MetadataOutputRectOfInterestForRect converts a rectangle in the capture output object’s coordinate system to one in the coordinate system used for metadata outputs.
 func (x *CaptureOutput) MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.MetadataOutputRectOfInterestForRect(rectInOutputCoordinates)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("metadataOutputRectOfInterestForRect:"), rectInOutputCoordinates)
+	return _r
 }
 
-// Converts a rectangle in the coordinate system used for metadata outputs to one in the capture output object’s coordinate system.
-//
-// RectForMetadataOutputRectOfInterest calls the underlying RectForMetadataOutputRectOfInterest.
+// RectForMetadataOutputRectOfInterest converts a rectangle in the coordinate system used for metadata outputs to one in the capture output object’s coordinate system.
 func (x *CaptureOutput) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForMetadataOutputRectOfInterest:"), rectInMetadataOutputCoordinates)
+	return _r
 }
 
-// @property connections @abstract The connections that describe the flow of media data to the receiver from AVCaptureInputs. @discussion The value of this property is an NSArray of AVCaptureConnection objects, each describing the mapping between the receiver and the AVCaptureInputPorts of one or more AVCaptureInputs.
+// Connections the connections that describe the flow of media data to the receiver from AVCaptureInputs. The value of this property is an NSArray of AVCaptureConnection objects, each describing the mapping between the receiver and the AVCaptureInputPorts of one or more AVCaptureInputs.
 //
 // Connections returns the collection as a Go slice.
 func (x *CaptureOutput) Connections() []*CaptureConnection {
-	arr := x.inner.Connections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptureConnection {
-		return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureConnection { return CaptureConnectionFromID(_id) })
 }
 
-// A `BOOL` value that indicates whether the output supports deferred start. You can only set the “deferredStartEnabled“ property value to `true` if the output supports deferred start.
-//
-// IsDeferredStartSupported calls the underlying IsDeferredStartSupported.
+// IsDeferredStartSupported a `BOOL` value that indicates whether the output supports deferred start. You can only set the “deferredStartEnabled“ property value to `true` if the output supports deferred start.
 func (x *CaptureOutput) IsDeferredStartSupported() bool {
-	return x.inner.IsDeferredStartSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeferredStartSupported"))
+	return _r
 }
 
-// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
-//
-// IsDeferredStartEnabled calls the underlying IsDeferredStartEnabled.
+// IsDeferredStartEnabled a `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
 func (x *CaptureOutput) IsDeferredStartEnabled() bool {
-	return x.inner.IsDeferredStartEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeferredStartEnabled"))
+	return _r
 }
 
-// SetDeferredStartEnabled calls the underlying SetDeferredStartEnabled.
+// SetDeferredStartEnabled wraps the corresponding Objective-C method.
 func (x *CaptureOutput) SetDeferredStartEnabled(deferredStartEnabled bool) {
-	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 }
-
-func (x *CaptureOutput) asCaptureOutput() *raw.AVCaptureOutput { return x.inner }
 
 // CaptureOutputable is the interface implemented by [CaptureOutput], for mocking and DI.
 type CaptureOutputable interface {
-	Unwrap() *raw.AVCaptureOutput
+	obj.Object
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureOutput
-	ConnectionWithMediaType(mediaType *foundation.NSString) *CaptureConnection
-	TransformedMetadataObjectForMetadataObjectConnection(metadataObject *raw.AVMetadataObject, connection *raw.AVCaptureConnection) *MetadataObject
+	ConnectionWithMediaType(mediaType obj.Object) *CaptureConnection
+	TransformedMetadataObjectForMetadataObjectConnection(metadataObject *MetadataObject, connection *CaptureConnection) *MetadataObject
 	MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
 	RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
 	Connections() []*CaptureConnection
@@ -133,3 +139,10 @@ type CaptureOutputable interface {
 }
 
 var _ CaptureOutputable = (*CaptureOutput)(nil)
+
+// isCaptureOutput marks CaptureOutput — and, by embedding promotion, its
+// subclasses — as a member of the CaptureOutput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CaptureOutput) isCaptureOutput() {}
+
+var _ CaptureOutputProvider = (*CaptureOutput)(nil)

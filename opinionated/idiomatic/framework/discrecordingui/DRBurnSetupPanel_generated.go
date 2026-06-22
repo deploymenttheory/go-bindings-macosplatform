@@ -5,125 +5,119 @@
 package discrecordingui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class		DRBurnSetupPanel @abstract 	Manages a panel that allows users to specify the parameters of an burn. @discussion	This class supports choosing the the device to use, whether or not to verify the burned data and how to handle the burned disc when it completes.
+// BurnSetupPanel is an idiomatic wrapper over the Objective-C class DRBurnSetupPanel.
 //
-// BurnSetupPanel wraps [raw.DRBurnSetupPanel] with a fluent Go API.
+// It embeds [SetupPanel], promoting that type's methods.
+//
+// Manages a panel that allows users to specify the parameters of an burn. This class supports choosing the the device to use, whether or not to verify the burned data and how to handle the burned disc when it completes.
 type BurnSetupPanel struct {
-	inner *raw.DRBurnSetupPanel
+	SetupPanel
 }
 
-// Unwrap returns the underlying [raw.DRBurnSetupPanel].
-func (x *BurnSetupPanel) Unwrap() *raw.DRBurnSetupPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BurnSetupPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// BurnSetupPanelFromID adopts an existing object pointer as a BurnSetupPanel (nil for 0).
+// BurnSetupPanelFromID adopts an existing Objective-C object as a BurnSetupPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func BurnSetupPanelFromID(id objc.ID) *BurnSetupPanel {
 	if id == 0 {
 		return nil
 	}
-	return &BurnSetupPanel{inner: raw.DRBurnSetupPanelFromID(id)}
+	x := &BurnSetupPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBurnSetupPanel creates a new [BurnSetupPanel].
+// burnSetupPanelAdopt wraps an Objective-C object that this code just created as a
+// BurnSetupPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func burnSetupPanelAdopt(id objc.ID) *BurnSetupPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &BurnSetupPanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBurnSetupPanel creates a new BurnSetupPanel.
 func NewBurnSetupPanel() *BurnSetupPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DRBurnSetupPanel")), objc.RegisterName("new"))
-	return &BurnSetupPanel{inner: raw.DRBurnSetupPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DRBurnSetupPanel")), objc.RegisterName("new"))
+	return burnSetupPanelAdopt(_id)
 }
 
-// @method		setDefaultButtonTitle: @abstract	Sets the title for the receiver's default button to title. @discussion	Normally, the default button is &ldquo;Burn&rdquo;.
-//
-// SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
+// SetDefaultButtonTitle sets the title for the receiver's default button to title. Normally, the default button is &ldquo;Burn&rdquo;.
 func (x *BurnSetupPanel) SetDefaultButtonTitle(title string) {
-	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 }
 
-// @method		setCanSelectTestBurn: @abstract	Specifies whether the user can choose to make a test burn. @discussion	This method controls whether a checkbox should be added to the receiver that allows the user to set the burn to be a test burn. By default, the test burn button is not displayed. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to show the test burn checkbox, <i>NO</i> to hide it.
-//
-// SetCanSelectTestBurn calls the underlying SetCanSelectTestBurn.
+// SetCanSelectTestBurn specifies whether the user can choose to make a test burn. This method controls whether a checkbox should be added to the receiver that allows the user to set the burn to be a test burn. By default, the test burn button is not displayed. This method must be called before the panel is displayed.
 func (x *BurnSetupPanel) SetCanSelectTestBurn(flag bool) {
-	x.inner.SetCanSelectTestBurn(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSelectTestBurn:"), flag)
 }
 
-// @method		setCanSelectAppendableMedia: @abstract	Specifies whether the user can choose to leave the disc appendable. @discussion	This method controls whether the appendable checkbox is enabled. If the data being writen to disc does not lend itself to having more data appended on to it, you can disable the ability of the user to leave the disc open. This method must be called before the panel is displayed. @param		flag	<i>YES</i> to enable the appendable checkbox, <i>NO</i> to disable.
-//
-// SetCanSelectAppendableMedia calls the underlying SetCanSelectAppendableMedia.
+// SetCanSelectAppendableMedia specifies whether the user can choose to leave the disc appendable. This method controls whether the appendable checkbox is enabled. If the data being writen to disc does not lend itself to having more data appended on to it, you can disable the ability of the user to leave the disc open. This method must be called before the panel is displayed.
 func (x *BurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
-	x.inner.SetCanSelectAppendableMedia(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSelectAppendableMedia:"), flag)
 }
 
-// @method		burnObject @abstract	Creates and returns a new DRBurn object that's configured to write data to the currently selected device. @discussion	The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session ( @link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link ) because the burn object information is only updated just before the modal session ends. @result  	A new DRBurn object.
-//
-// BurnObject calls the underlying BurnObject.
-func (x *BurnSetupPanel) BurnObject() *discrecording.DRBurn {
-	return x.inner.BurnObject()
+// BurnObject creates and returns a new DRBurn object that's configured to write data to the currently selected device. The new DRBurn object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
+func (x *BurnSetupPanel) BurnObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burnObject"))
+	return obj.Wrap(_r)
 }
 
-// @method		expand: @abstract	Invoked when the user clicks the panel's expand button.
-//
-// Expand calls the underlying Expand.
-func (x *BurnSetupPanel) Expand(sender objc.ID) {
-	x.inner.Expand(sender)
+// Expand invoked when the user clicks the panel's expand button.
+func (x *BurnSetupPanel) Expand(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expand:"), objref.IDOf(sender))
 }
 
-// @method		burnSpeed: @abstract	Invoked when the user clicks the panel's burn speed popup button.
-//
-// BurnSpeed calls the underlying BurnSpeed.
-func (x *BurnSetupPanel) BurnSpeed(sender objc.ID) {
-	x.inner.BurnSpeed(sender)
+// BurnSpeed invoked when the user clicks the panel's burn speed popup button.
+func (x *BurnSetupPanel) BurnSpeed(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burnSpeed:"), objref.IDOf(sender))
 }
 
-// @method		appendable: @abstract	Invoked when the user clicks the panel's appendable checkbox.
-//
-// Appendable calls the underlying Appendable.
-func (x *BurnSetupPanel) Appendable(sender objc.ID) {
-	x.inner.Appendable(sender)
+// Appendable invoked when the user clicks the panel's appendable checkbox.
+func (x *BurnSetupPanel) Appendable(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendable:"), objref.IDOf(sender))
 }
 
-// @method		completionAction: @abstract	Invoked when the user clicks one of the panel's completion action radio buttons.
-//
-// CompletionAction calls the underlying CompletionAction.
-func (x *BurnSetupPanel) CompletionAction(sender objc.ID) {
-	x.inner.CompletionAction(sender)
+// CompletionAction invoked when the user clicks one of the panel's completion action radio buttons.
+func (x *BurnSetupPanel) CompletionAction(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionAction:"), objref.IDOf(sender))
 }
 
-// @method		testBurn: @abstract	Invoked when the user clicks the panel's test burn checkbox.
-//
-// TestBurn calls the underlying TestBurn.
-func (x *BurnSetupPanel) TestBurn(sender objc.ID) {
-	x.inner.TestBurn(sender)
+// TestBurn invoked when the user clicks the panel's test burn checkbox.
+func (x *BurnSetupPanel) TestBurn(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testBurn:"), objref.IDOf(sender))
 }
 
-// @method		verifyBurn: @abstract	Invoked when the user clicks the panel's verify burn checkbox.
-//
-// VerifyBurn calls the underlying VerifyBurn.
-func (x *BurnSetupPanel) VerifyBurn(sender objc.ID) {
-	x.inner.VerifyBurn(sender)
+// VerifyBurn invoked when the user clicks the panel's verify burn checkbox.
+func (x *BurnSetupPanel) VerifyBurn(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verifyBurn:"), objref.IDOf(sender))
 }
-
-func (x *BurnSetupPanel) asSetupPanel() *raw.DRSetupPanel { return &x.inner.DRSetupPanel }
 
 // BurnSetupPanelable is the interface implemented by [BurnSetupPanel], for mocking and DI.
 type BurnSetupPanelable interface {
-	Unwrap() *raw.DRBurnSetupPanel
+	obj.Object
 	SetDefaultButtonTitle(title string)
 	SetCanSelectTestBurn(flag bool)
 	SetCanSelectAppendableMedia(flag bool)
-	BurnObject() *discrecording.DRBurn
-	Expand(sender objc.ID)
-	BurnSpeed(sender objc.ID)
-	Appendable(sender objc.ID)
-	CompletionAction(sender objc.ID)
-	TestBurn(sender objc.ID)
-	VerifyBurn(sender objc.ID)
+	BurnObject() obj.Object
+	Expand(sender obj.Object)
+	BurnSpeed(sender obj.Object)
+	Appendable(sender obj.Object)
+	CompletionAction(sender obj.Object)
+	TestBurn(sender obj.Object)
+	VerifyBurn(sender obj.Object)
 }
 
 var _ BurnSetupPanelable = (*BurnSetupPanel)(nil)
+
+var _ SetupPanelProvider = (*BurnSetupPanel)(nil)

@@ -5,161 +5,82 @@
 package localauthentication
 
 import (
-	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The private portion of an asymmetric key pair.
+// PrivateKey is an idiomatic wrapper over the Objective-C class LAPrivateKey.
 //
-// PrivateKey wraps [raw.LAPrivateKey] with a fluent Go API.
+// The private portion of an asymmetric key pair.
 type PrivateKey struct {
-	inner *raw.LAPrivateKey
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAPrivateKey].
-func (x *PrivateKey) Unwrap() *raw.LAPrivateKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PrivateKey) ID() objc.ID { return x.inner.Ptr() }
-
-// PrivateKeyFromID adopts an existing object pointer as a PrivateKey (nil for 0).
+// PrivateKeyFromID adopts an existing Objective-C object as a PrivateKey
+// (nil for 0), retaining it and registering a release finalizer.
 func PrivateKeyFromID(id objc.ID) *PrivateKey {
 	if id == 0 {
 		return nil
 	}
-	return &PrivateKey{inner: raw.LAPrivateKeyFromID(id)}
+	x := &PrivateKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPrivateKey creates a new [PrivateKey].
-func NewPrivateKey() *PrivateKey {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAPrivateKey")), objc.RegisterName("new"))
-	return &PrivateKey{inner: raw.LAPrivateKeyFromID(_id)}
-}
-
-// Generates a digital signature for the data you supply.
-//
-// SignDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
-	type _result struct {
-		val *foundation.NSData
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.SignDataSecKeyAlgorithmCompletion(data, algorithm, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *foundation.NSData
-		return _zero, ctx.Err()
-	}
-}
-
-// Checks whether the algorithm you supply is valid for signing data with the key.
-//
-// CanSignUsingSecKeyAlgorithm calls the underlying CanSignUsingSecKeyAlgorithm.
-func (x *PrivateKey) CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.CanSignUsingSecKeyAlgorithm(algorithm)
-}
-
-// Decrypts the data you supply with a given algorithm.
-//
-// DecryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
-	type _result struct {
-		val *foundation.NSData
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.DecryptDataSecKeyAlgorithmCompletion(data, algorithm, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *foundation.NSData
-		return _zero, ctx.Err()
-	}
-}
-
-// Checks whether the algorithm you supply is valid for decrypting data with the key.
-//
-// CanDecryptUsingSecKeyAlgorithm calls the underlying CanDecryptUsingSecKeyAlgorithm.
-func (x *PrivateKey) CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.CanDecryptUsingSecKeyAlgorithm(algorithm)
-}
-
-// Performs a Diffie-Hellman style key exchange operation.
-//
-// ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey *foundation.NSData, algorithm unsafe.Pointer, parameters *foundation.NSDictionary[objc.ID, objc.ID]) (*foundation.NSData, error) {
-	type _result struct {
-		val *foundation.NSData
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(publicKey, algorithm, parameters, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *foundation.NSData
-		return _zero, ctx.Err()
-	}
-}
-
-// Checks whether the algorithm you supply is valid for performing key exchanges.
-//
-// CanExchangeKeysUsingSecKeyAlgorithm calls the underlying CanExchangeKeysUsingSecKeyAlgorithm.
-func (x *PrivateKey) CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.CanExchangeKeysUsingSecKeyAlgorithm(algorithm)
-}
-
-// @brief Offers the public key counterpart of a @c LAPrivateKey instance
-//
-// PublicKey calls the underlying PublicKey.
-func (x *PrivateKey) PublicKey() *PublicKey {
-	_r := x.inner.PublicKey()
-	if _r == nil {
+// privateKeyAdopt wraps an Objective-C object that this code just created as a
+// PrivateKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func privateKeyAdopt(id objc.ID) *PrivateKey {
+	if id == 0 {
 		return nil
 	}
-	return &PublicKey{inner: _r}
+	x := &PrivateKey{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PrivateKey) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PrivateKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PrivateKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PrivateKey) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPrivateKey creates a new PrivateKey.
+func NewPrivateKey() *PrivateKey {
+	_id := objc.Send[objc.ID](objc.ID(_class("LAPrivateKey")), objc.RegisterName("new"))
+	return privateKeyAdopt(_id)
+}
+
+// PublicKey offers the public key counterpart of a
+func (x *PrivateKey) PublicKey() *PublicKey {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
+	return PublicKeyFromID(_r)
 }
 
 // PrivateKeyable is the interface implemented by [PrivateKey], for mocking and DI.
 type PrivateKeyable interface {
-	Unwrap() *raw.LAPrivateKey
-	SignDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error)
-	CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
-	DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error)
-	CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
-	ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey *foundation.NSData, algorithm unsafe.Pointer, parameters *foundation.NSDictionary[objc.ID, objc.ID]) (*foundation.NSData, error)
-	CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool
+	obj.Object
 	PublicKey() *PublicKey
 }
 

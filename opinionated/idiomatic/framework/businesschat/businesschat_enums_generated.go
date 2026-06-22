@@ -9,20 +9,22 @@ import (
 )
 
 // Deprecated: since macOS 13.0.
-type BCChatButtonStyle int64
+type ChatButtonStyle int64
 
 const (
-	BCChatButtonStyleLight BCChatButtonStyle = 0
-	BCChatButtonStyleDark  BCChatButtonStyle = 1
+	ChatButtonStyleLight ChatButtonStyle = 0
+	ChatButtonStyleDark  ChatButtonStyle = 1
 )
 
-func (e BCChatButtonStyle) String() string {
+// String returns the ChatButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ChatButtonStyle) String() string {
 	switch e {
-	case BCChatButtonStyleLight:
-		return "BCChatButtonStyleLight"
-	case BCChatButtonStyleDark:
-		return "BCChatButtonStyleDark"
+	case ChatButtonStyleLight:
+		return "ChatButtonStyleLight"
+	case ChatButtonStyleDark:
+		return "ChatButtonStyleDark"
 	default:
-		return fmt.Sprintf("BCChatButtonStyle(%d)", int64(e))
+		return fmt.Sprintf("ChatButtonStyle(%d)", int64(e))
 	}
 }

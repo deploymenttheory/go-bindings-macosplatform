@@ -5,47 +5,58 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates the delegate should drop all contacts and groups before handling change events.
+// ChangeHistoryDropEverythingEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryDropEverythingEvent.
 //
-// ChangeHistoryDropEverythingEvent wraps [raw.CNChangeHistoryDropEverythingEvent] with a fluent Go API.
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that indicates the delegate should drop all contacts and groups before handling change events.
 type ChangeHistoryDropEverythingEvent struct {
-	inner *raw.CNChangeHistoryDropEverythingEvent
+	ChangeHistoryEvent
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryDropEverythingEvent].
-func (x *ChangeHistoryDropEverythingEvent) Unwrap() *raw.CNChangeHistoryDropEverythingEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryDropEverythingEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryDropEverythingEventFromID adopts an existing object pointer as a ChangeHistoryDropEverythingEvent (nil for 0).
+// ChangeHistoryDropEverythingEventFromID adopts an existing Objective-C object as a ChangeHistoryDropEverythingEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryDropEverythingEventFromID(id objc.ID) *ChangeHistoryDropEverythingEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryDropEverythingEvent{inner: raw.CNChangeHistoryDropEverythingEventFromID(id)}
+	x := &ChangeHistoryDropEverythingEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryDropEverythingEvent creates a new [ChangeHistoryDropEverythingEvent].
+// changeHistoryDropEverythingEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryDropEverythingEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryDropEverythingEventAdopt(id objc.ID) *ChangeHistoryDropEverythingEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryDropEverythingEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeHistoryDropEverythingEvent creates a new ChangeHistoryDropEverythingEvent.
 func NewChangeHistoryDropEverythingEvent() *ChangeHistoryDropEverythingEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryDropEverythingEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryDropEverythingEvent{inner: raw.CNChangeHistoryDropEverythingEventFromID(_id)}
-}
-
-func (x *ChangeHistoryDropEverythingEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryDropEverythingEvent")), objc.RegisterName("new"))
+	return changeHistoryDropEverythingEventAdopt(_id)
 }
 
 // ChangeHistoryDropEverythingEventable is the interface implemented by [ChangeHistoryDropEverythingEvent], for mocking and DI.
 type ChangeHistoryDropEverythingEventable interface {
-	Unwrap() *raw.CNChangeHistoryDropEverythingEvent
+	obj.Object
 }
 
 var _ ChangeHistoryDropEverythingEventable = (*ChangeHistoryDropEverythingEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryDropEverythingEvent)(nil)

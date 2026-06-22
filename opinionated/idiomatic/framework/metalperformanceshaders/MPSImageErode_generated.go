@@ -5,100 +5,85 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that finds the minimum pixel value in a rectangular region by applying an erosion function.
+// ImageErode is an idiomatic wrapper over the Objective-C class MPSImageErode.
 //
-// ImageErode wraps [raw.MPSImageErode] with a fluent Go API.
+// It embeds [ImageDilate], promoting that type's methods.
+//
+// A filter that finds the minimum pixel value in a rectangular region by applying an erosion function.
 type ImageErode struct {
-	inner *raw.MPSImageErode
+	ImageDilate
 }
 
-// Unwrap returns the underlying [raw.MPSImageErode].
-func (x *ImageErode) Unwrap() *raw.MPSImageErode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageErode) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageErodeFromID adopts an existing object pointer as a ImageErode (nil for 0).
+// ImageErodeFromID adopts an existing Objective-C object as a ImageErode
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageErodeFromID(id objc.ID) *ImageErode {
 	if id == 0 {
 		return nil
 	}
-	return &ImageErode{inner: raw.MPSImageErodeFromID(id)}
+	x := &ImageErode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageErode creates a new [ImageErode].
+// imageErodeAdopt wraps an Objective-C object that this code just created as a
+// ImageErode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageErodeAdopt(id objc.ID) *ImageErode {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageErode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageErode creates a new ImageErode.
 func NewImageErode() *ImageErode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageErode")), objc.RegisterName("new"))
-	return &ImageErode{inner: raw.MPSImageErodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageErode")), objc.RegisterName("new"))
+	return imageErodeAdopt(_id)
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageErode) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageErode) WithOptions(options mpscore.MPSKernelOptions) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageErode) WithLabel(label string) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageErode) asImageDilate() *mpsimage.MPSImageDilate { return &x.inner.MPSImageDilate }
-
-func (x *ImageErode) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageDilate.MPSUnaryImageKernel
-}
-
-func (x *ImageErode) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageDilate.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
-	Unwrap() *raw.MPSImageErode
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageErode
 	WithClipRect(clipRect metal.MTLRegion) *ImageErode
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode
-	WithOptions(options mpscore.MPSKernelOptions) *ImageErode
 	WithLabel(label string) *ImageErode
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)
+
+var _ ImageDilateProvider = (*ImageErode)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageErode)(nil)
+
+var _ KernelProvider = (*ImageErode)(nil)

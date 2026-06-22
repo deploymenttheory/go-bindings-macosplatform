@@ -5,58 +5,90 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
+// PressureConfiguration is an idiomatic wrapper over the Objective-C class NSPressureConfiguration.
 //
-// PressureConfiguration wraps [raw.NSPressureConfiguration] with a fluent Go API.
+// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
 type PressureConfiguration struct {
-	inner *raw.NSPressureConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPressureConfiguration].
-func (x *PressureConfiguration) Unwrap() *raw.NSPressureConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PressureConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PressureConfigurationFromID adopts an existing object pointer as a PressureConfiguration (nil for 0).
+// PressureConfigurationFromID adopts an existing Objective-C object as a PressureConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PressureConfigurationFromID(id objc.ID) *PressureConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(id)}
+	x := &PressureConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a pressure configuration object with a specified pressure behavior.
-//
-// NewPressureConfigurationWithPressureBehavior creates a new [PressureConfiguration].
-func NewPressureConfigurationWithPressureBehavior(pressureBehavior NSPressureBehavior) *PressureConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPressureConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPressureBehavior:"), raw.NSPressureBehavior(pressureBehavior))
-	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(_id)}
+// pressureConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PressureConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pressureConfigurationAdopt(id objc.ID) *PressureConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &PressureConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Changes the pressure configuration of the trackpad to the initialized pressure configuration.
-//
-// Set calls the underlying Set.
+// Description returns the object's -description text.
+func (x *PressureConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PressureConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PressureConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PressureConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPressureConfigurationWithPressureBehavior initializes a pressure configuration object with a specified pressure behavior.
+func NewPressureConfigurationWithPressureBehavior(pressureBehavior PressureBehavior) *PressureConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPressureConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPressureBehavior:"), pressureBehavior)
+	return pressureConfigurationAdopt(_id)
+}
+
+// Set changes the pressure configuration of the trackpad to the initialized pressure configuration.
 func (x *PressureConfiguration) Set() {
-	x.inner.Set()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 }
 
-// PressureBehavior calls the underlying PressureBehavior.
-func (x *PressureConfiguration) PressureBehavior() NSPressureBehavior {
-	return NSPressureBehavior(x.inner.PressureBehavior())
+// PressureBehavior wraps the corresponding Objective-C method.
+func (x *PressureConfiguration) PressureBehavior() PressureBehavior {
+	_r := objc.Send[PressureBehavior](objref.IDOf(x), objc.RegisterName("pressureBehavior"))
+	return _r
 }
 
 // PressureConfigurationable is the interface implemented by [PressureConfiguration], for mocking and DI.
 type PressureConfigurationable interface {
-	Unwrap() *raw.NSPressureConfiguration
+	obj.Object
 	Set()
-	PressureBehavior() NSPressureBehavior
+	PressureBehavior() PressureBehavior
 }
 
 var _ PressureConfigurationable = (*PressureConfiguration)(nil)

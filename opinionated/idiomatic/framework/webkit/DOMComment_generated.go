@@ -5,74 +5,78 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMComment wraps [raw.DOMComment] with a fluent Go API.
+// DOMComment is an idiomatic wrapper over the Objective-C class DOMComment.
+//
+// It embeds [DOMCharacterData], promoting that type's methods.
 type DOMComment struct {
-	inner *raw.DOMComment
+	DOMCharacterData
 }
 
-// Unwrap returns the underlying [raw.DOMComment].
-func (x *DOMComment) Unwrap() *raw.DOMComment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMComment) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCommentFromID adopts an existing object pointer as a DOMComment (nil for 0).
+// DOMCommentFromID adopts an existing Objective-C object as a DOMComment
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCommentFromID(id objc.ID) *DOMComment {
 	if id == 0 {
 		return nil
 	}
-	return &DOMComment{inner: raw.DOMCommentFromID(id)}
+	x := &DOMComment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMComment creates a new [DOMComment].
+// dOMCommentAdopt wraps an Objective-C object that this code just created as a
+// DOMComment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCommentAdopt(id objc.ID) *DOMComment {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMComment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMComment creates a new DOMComment.
 func NewDOMComment() *DOMComment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMComment")), objc.RegisterName("new"))
-	return &DOMComment{inner: raw.DOMCommentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMComment")), objc.RegisterName("new"))
+	return dOMCommentAdopt(_id)
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithData(data string) *DOMComment {
-	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
-	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithPrefix(prefix string) *DOMComment {
-	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMComment) WithTextContent(textContent string) *DOMComment {
-	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
-}
-
-func (x *DOMComment) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
-
-func (x *DOMComment) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
-
-func (x *DOMComment) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
-
-func (x *DOMComment) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
 }
 
 // DOMCommentable is the interface implemented by [DOMComment], for mocking and DI.
 type DOMCommentable interface {
-	Unwrap() *raw.DOMComment
+	obj.Object
 	WithData(data string) *DOMComment
 	WithNodeValue(nodeValue string) *DOMComment
 	WithPrefix(prefix string) *DOMComment
@@ -80,3 +84,11 @@ type DOMCommentable interface {
 }
 
 var _ DOMCommentable = (*DOMComment)(nil)
+
+var _ DOMCharacterDataProvider = (*DOMComment)(nil)
+
+var _ DOMNodeProvider = (*DOMComment)(nil)
+
+var _ DOMObjectProvider = (*DOMComment)(nil)
+
+var _ WebScriptObjectProvider = (*DOMComment)(nil)

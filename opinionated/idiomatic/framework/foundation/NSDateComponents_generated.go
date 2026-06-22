@@ -5,446 +5,445 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.
+// DateComponents is an idiomatic wrapper over the Objective-C class NSDateComponents.
 //
-// DateComponents wraps [raw.NSDateComponents] with a fluent Go API.
+// An object that specifies a date or time in terms of units (such as year, month, day, hour, and minute) to be evaluated in a calendar system and time zone.
 type DateComponents struct {
-	inner *raw.NSDateComponents
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDateComponents].
-func (x *DateComponents) Unwrap() *raw.NSDateComponents { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DateComponents) ID() objc.ID { return x.inner.Ptr() }
-
-// DateComponentsFromID adopts an existing object pointer as a DateComponents (nil for 0).
+// DateComponentsFromID adopts an existing Objective-C object as a DateComponents
+// (nil for 0), retaining it and registering a release finalizer.
 func DateComponentsFromID(id objc.ID) *DateComponents {
 	if id == 0 {
 		return nil
 	}
-	return &DateComponents{inner: raw.NSDateComponentsFromID(id)}
+	x := &DateComponents{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDateComponents creates a new [DateComponents].
+// dateComponentsAdopt wraps an Objective-C object that this code just created as a
+// DateComponents (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dateComponentsAdopt(id objc.ID) *DateComponents {
+	if id == 0 {
+		return nil
+	}
+	x := &DateComponents{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DateComponents) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DateComponents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DateComponents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *DateComponents) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDateComponents creates a new DateComponents.
 func NewDateComponents() *DateComponents {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateComponents")), objc.RegisterName("new"))
-	return &DateComponents{inner: raw.NSDateComponentsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDateComponents")), objc.RegisterName("new"))
+	return dateComponentsAdopt(_id)
 }
 
-// The calendar used to interpret the date components.
-//
-// WithCalendar sets the calendar property and returns the receiver for chaining.
+// WithCalendar the calendar used to interpret the date components.
 func (x *DateComponents) WithCalendar(calendar *Calendar) *DateComponents {
-	x.inner.SetCalendar(calendar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// The time zone used to interpret the date components.
-//
-// WithTimeZone sets the timeZone property and returns the receiver for chaining.
+// WithTimeZone the time zone used to interpret the date components.
 func (x *DateComponents) WithTimeZone(timeZone *TimeZone) *DateComponents {
-	x.inner.SetTimeZone(timeZone.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// The number of eras.
-//
-// WithEra sets the era property and returns the receiver for chaining.
+// WithEra the number of eras.
 func (x *DateComponents) WithEra(era int) *DateComponents {
-	x.inner.SetEra(era)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEra:"), era)
 	return x
 }
 
-// The number of years.
-//
-// WithYear sets the year property and returns the receiver for chaining.
+// WithYear the number of years.
 func (x *DateComponents) WithYear(year int) *DateComponents {
-	x.inner.SetYear(year)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYear:"), year)
 	return x
 }
 
-// The number of months.
-//
-// WithMonth sets the month property and returns the receiver for chaining.
+// WithMonth the number of months.
 func (x *DateComponents) WithMonth(month int) *DateComponents {
-	x.inner.SetMonth(month)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonth:"), month)
 	return x
 }
 
-// The number of days.
-//
-// WithDay sets the day property and returns the receiver for chaining.
+// WithDay the number of days.
 func (x *DateComponents) WithDay(day int) *DateComponents {
-	x.inner.SetDay(day)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDay:"), day)
 	return x
 }
 
-// The number of hour units for the receiver.
-//
-// WithHour sets the hour property and returns the receiver for chaining.
+// WithHour the number of hour units for the receiver.
 func (x *DateComponents) WithHour(hour int) *DateComponents {
-	x.inner.SetHour(hour)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHour:"), hour)
 	return x
 }
 
-// The number of minute units for the receiver.
-//
-// WithMinute sets the minute property and returns the receiver for chaining.
+// WithMinute the number of minute units for the receiver.
 func (x *DateComponents) WithMinute(minute int) *DateComponents {
-	x.inner.SetMinute(minute)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinute:"), minute)
 	return x
 }
 
-// The number of second units for the receiver.
-//
-// WithSecond sets the second property and returns the receiver for chaining.
+// WithSecond the number of second units for the receiver.
 func (x *DateComponents) WithSecond(second int) *DateComponents {
-	x.inner.SetSecond(second)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
 	return x
 }
 
-// The number of nanosecond units for the receiver.
-//
-// WithNanosecond sets the nanosecond property and returns the receiver for chaining.
+// WithNanosecond the number of nanosecond units for the receiver.
 func (x *DateComponents) WithNanosecond(nanosecond int) *DateComponents {
-	x.inner.SetNanosecond(nanosecond)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNanosecond:"), nanosecond)
 	return x
 }
 
-// The number of the weekdays.
-//
-// WithWeekday sets the weekday property and returns the receiver for chaining.
+// WithWeekday the number of the weekdays.
 func (x *DateComponents) WithWeekday(weekday int) *DateComponents {
-	x.inner.SetWeekday(weekday)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekday:"), weekday)
 	return x
 }
 
-// The ordinal number of weekdays.
-//
-// WithWeekdayOrdinal sets the weekdayOrdinal property and returns the receiver for chaining.
+// WithWeekdayOrdinal the ordinal number of weekdays.
 func (x *DateComponents) WithWeekdayOrdinal(weekdayOrdinal int) *DateComponents {
-	x.inner.SetWeekdayOrdinal(weekdayOrdinal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdayOrdinal:"), weekdayOrdinal)
 	return x
 }
 
-// The number of quarters.
-//
-// WithQuarter sets the quarter property and returns the receiver for chaining.
+// WithQuarter the number of quarters.
 func (x *DateComponents) WithQuarter(quarter int) *DateComponents {
-	x.inner.SetQuarter(quarter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarter:"), quarter)
 	return x
 }
 
-// The week number of the months.
-//
-// WithWeekOfMonth sets the weekOfMonth property and returns the receiver for chaining.
+// WithWeekOfMonth the week number of the months.
 func (x *DateComponents) WithWeekOfMonth(weekOfMonth int) *DateComponents {
-	x.inner.SetWeekOfMonth(weekOfMonth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekOfMonth:"), weekOfMonth)
 	return x
 }
 
-// The ISO 8601 week date of the year.
-//
-// WithWeekOfYear sets the weekOfYear property and returns the receiver for chaining.
+// WithWeekOfYear the ISO 8601 week date of the year.
 func (x *DateComponents) WithWeekOfYear(weekOfYear int) *DateComponents {
-	x.inner.SetWeekOfYear(weekOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekOfYear:"), weekOfYear)
 	return x
 }
 
-// The ISO 8601 week-numbering year.
-//
-// WithYearForWeekOfYear sets the yearForWeekOfYear property and returns the receiver for chaining.
+// WithYearForWeekOfYear the ISO 8601 week-numbering year.
 func (x *DateComponents) WithYearForWeekOfYear(yearForWeekOfYear int) *DateComponents {
-	x.inner.SetYearForWeekOfYear(yearForWeekOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearForWeekOfYear:"), yearForWeekOfYear)
 	return x
 }
 
-// The day of the year value of the date components.
-//
-// WithDayOfYear sets the dayOfYear property and returns the receiver for chaining.
+// WithDayOfYear the day of the year value of the date components.
 func (x *DateComponents) WithDayOfYear(dayOfYear int) *DateComponents {
-	x.inner.SetDayOfYear(dayOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfYear:"), dayOfYear)
 	return x
 }
 
-// A Boolean value that indicates whether the month is a leap month.
-//
-// WithLeapMonth sets the leapMonth property and returns the receiver for chaining.
+// WithLeapMonth a Boolean value that indicates whether the month is a leap month.
 func (x *DateComponents) WithLeapMonth(leapMonth bool) *DateComponents {
-	x.inner.SetLeapMonth(leapMonth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeapMonth:"), leapMonth)
 	return x
 }
 
-// WithRepeatedDay sets the repeatedDay property and returns the receiver for chaining.
+// WithRepeatedDay sets the property and returns the receiver so calls can be chained.
 func (x *DateComponents) WithRepeatedDay(repeatedDay bool) *DateComponents {
-	x.inner.SetRepeatedDay(repeatedDay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatedDay:"), repeatedDay)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DateComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponents {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *DateComponents) WithScriptingProperties(scriptingProperties obj.Object) *DateComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the number of weeks.
-//
-// Week calls the underlying Week.
+// Week returns the number of weeks.
 func (x *DateComponents) Week() int {
-	return x.inner.Week()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("week"))
+	return _r
 }
 
-// Sets the number of weeks.
-//
-// SetWeek calls the underlying SetWeek.
+// SetWeek sets the number of weeks.
 func (x *DateComponents) SetWeek(v int) {
-	x.inner.SetWeek(v)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeek:"), v)
 }
 
-// Sets a value for a given calendar unit.
-//
-// SetValueForComponent calls the underlying SetValueForComponent.
-func (x *DateComponents) SetValueForComponent(value int, unit NSCalendarUnit) {
-	x.inner.SetValueForComponent(value, raw.NSCalendarUnit(unit))
+// SetValueForComponent sets a value for a given calendar unit.
+func (x *DateComponents) SetValueForComponent(value int, unit CalendarUnit) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forComponent:"), value, unit)
 }
 
-// Returns the value for a given calendar unit.
-//
-// ValueForComponent calls the underlying ValueForComponent.
-func (x *DateComponents) ValueForComponent(unit NSCalendarUnit) int {
-	return x.inner.ValueForComponent(raw.NSCalendarUnit(unit))
+// ValueForComponent returns the value for a given calendar unit.
+func (x *DateComponents) ValueForComponent(unit CalendarUnit) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("valueForComponent:"), unit)
+	return _r
 }
 
-// Returns a Boolean value that indicates whether the current combination of properties represents a date which exists in the specified calendar.
-//
-// IsValidDateInCalendar calls the underlying IsValidDateInCalendar.
-func (x *DateComponents) IsValidDateInCalendar(calendar *raw.NSCalendar) bool {
-	return x.inner.IsValidDateInCalendar(calendar)
+// IsValidDateInCalendar returns a Boolean value that indicates whether the current combination of properties represents a date which exists in the specified calendar.
+func (x *DateComponents) IsValidDateInCalendar(calendar *Calendar) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValidDateInCalendar:"), objref.IDOf(calendar))
+	return _r
 }
 
-// Calendar calls the underlying Calendar.
+// Calendar wraps the corresponding Objective-C method.
 func (x *DateComponents) Calendar() *Calendar {
-	_r := x.inner.Calendar()
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+	return CalendarFromID(_r)
 }
 
-// SetCalendar calls the underlying SetCalendar.
-func (x *DateComponents) SetCalendar(calendar *raw.NSCalendar) {
-	x.inner.SetCalendar(calendar)
+// SetCalendar wraps the corresponding Objective-C method.
+func (x *DateComponents) SetCalendar(calendar *Calendar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
-// TimeZone calls the underlying TimeZone.
+// TimeZone wraps the corresponding Objective-C method.
 func (x *DateComponents) TimeZone() *TimeZone {
-	_r := x.inner.TimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// SetTimeZone calls the underlying SetTimeZone.
-func (x *DateComponents) SetTimeZone(timeZone *raw.NSTimeZone) {
-	x.inner.SetTimeZone(timeZone)
+// SetTimeZone wraps the corresponding Objective-C method.
+func (x *DateComponents) SetTimeZone(timeZone *TimeZone) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
-// Era calls the underlying Era.
+// Era wraps the corresponding Objective-C method.
 func (x *DateComponents) Era() int {
-	return x.inner.Era()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("era"))
+	return _r
 }
 
-// SetEra calls the underlying SetEra.
+// SetEra wraps the corresponding Objective-C method.
 func (x *DateComponents) SetEra(era int) {
-	x.inner.SetEra(era)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEra:"), era)
 }
 
-// Year calls the underlying Year.
+// Year wraps the corresponding Objective-C method.
 func (x *DateComponents) Year() int {
-	return x.inner.Year()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("year"))
+	return _r
 }
 
-// SetYear calls the underlying SetYear.
+// SetYear wraps the corresponding Objective-C method.
 func (x *DateComponents) SetYear(year int) {
-	x.inner.SetYear(year)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYear:"), year)
 }
 
-// Month calls the underlying Month.
+// Month wraps the corresponding Objective-C method.
 func (x *DateComponents) Month() int {
-	return x.inner.Month()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("month"))
+	return _r
 }
 
-// SetMonth calls the underlying SetMonth.
+// SetMonth wraps the corresponding Objective-C method.
 func (x *DateComponents) SetMonth(month int) {
-	x.inner.SetMonth(month)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonth:"), month)
 }
 
-// Day calls the underlying Day.
+// Day wraps the corresponding Objective-C method.
 func (x *DateComponents) Day() int {
-	return x.inner.Day()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("day"))
+	return _r
 }
 
-// SetDay calls the underlying SetDay.
+// SetDay wraps the corresponding Objective-C method.
 func (x *DateComponents) SetDay(day int) {
-	x.inner.SetDay(day)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDay:"), day)
 }
 
-// Hour calls the underlying Hour.
+// Hour wraps the corresponding Objective-C method.
 func (x *DateComponents) Hour() int {
-	return x.inner.Hour()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hour"))
+	return _r
 }
 
-// SetHour calls the underlying SetHour.
+// SetHour wraps the corresponding Objective-C method.
 func (x *DateComponents) SetHour(hour int) {
-	x.inner.SetHour(hour)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHour:"), hour)
 }
 
-// Minute calls the underlying Minute.
+// Minute wraps the corresponding Objective-C method.
 func (x *DateComponents) Minute() int {
-	return x.inner.Minute()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minute"))
+	return _r
 }
 
-// SetMinute calls the underlying SetMinute.
+// SetMinute wraps the corresponding Objective-C method.
 func (x *DateComponents) SetMinute(minute int) {
-	x.inner.SetMinute(minute)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinute:"), minute)
 }
 
-// Second calls the underlying Second.
+// Second wraps the corresponding Objective-C method.
 func (x *DateComponents) Second() int {
-	return x.inner.Second()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("second"))
+	return _r
 }
 
-// SetSecond calls the underlying SetSecond.
+// SetSecond wraps the corresponding Objective-C method.
 func (x *DateComponents) SetSecond(second int) {
-	x.inner.SetSecond(second)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecond:"), second)
 }
 
-// Nanosecond calls the underlying Nanosecond.
+// Nanosecond wraps the corresponding Objective-C method.
 func (x *DateComponents) Nanosecond() int {
-	return x.inner.Nanosecond()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nanosecond"))
+	return _r
 }
 
-// SetNanosecond calls the underlying SetNanosecond.
+// SetNanosecond wraps the corresponding Objective-C method.
 func (x *DateComponents) SetNanosecond(nanosecond int) {
-	x.inner.SetNanosecond(nanosecond)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNanosecond:"), nanosecond)
 }
 
-// Weekday calls the underlying Weekday.
+// Weekday wraps the corresponding Objective-C method.
 func (x *DateComponents) Weekday() int {
-	return x.inner.Weekday()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekday"))
+	return _r
 }
 
-// SetWeekday calls the underlying SetWeekday.
+// SetWeekday wraps the corresponding Objective-C method.
 func (x *DateComponents) SetWeekday(weekday int) {
-	x.inner.SetWeekday(weekday)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekday:"), weekday)
 }
 
-// WeekdayOrdinal calls the underlying WeekdayOrdinal.
+// WeekdayOrdinal wraps the corresponding Objective-C method.
 func (x *DateComponents) WeekdayOrdinal() int {
-	return x.inner.WeekdayOrdinal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekdayOrdinal"))
+	return _r
 }
 
-// SetWeekdayOrdinal calls the underlying SetWeekdayOrdinal.
+// SetWeekdayOrdinal wraps the corresponding Objective-C method.
 func (x *DateComponents) SetWeekdayOrdinal(weekdayOrdinal int) {
-	x.inner.SetWeekdayOrdinal(weekdayOrdinal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdayOrdinal:"), weekdayOrdinal)
 }
 
-// Quarter calls the underlying Quarter.
+// Quarter wraps the corresponding Objective-C method.
 func (x *DateComponents) Quarter() int {
-	return x.inner.Quarter()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quarter"))
+	return _r
 }
 
-// SetQuarter calls the underlying SetQuarter.
+// SetQuarter wraps the corresponding Objective-C method.
 func (x *DateComponents) SetQuarter(quarter int) {
-	x.inner.SetQuarter(quarter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarter:"), quarter)
 }
 
-// WeekOfMonth calls the underlying WeekOfMonth.
+// WeekOfMonth wraps the corresponding Objective-C method.
 func (x *DateComponents) WeekOfMonth() int {
-	return x.inner.WeekOfMonth()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekOfMonth"))
+	return _r
 }
 
-// SetWeekOfMonth calls the underlying SetWeekOfMonth.
+// SetWeekOfMonth wraps the corresponding Objective-C method.
 func (x *DateComponents) SetWeekOfMonth(weekOfMonth int) {
-	x.inner.SetWeekOfMonth(weekOfMonth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekOfMonth:"), weekOfMonth)
 }
 
-// WeekOfYear calls the underlying WeekOfYear.
+// WeekOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) WeekOfYear() int {
-	return x.inner.WeekOfYear()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekOfYear"))
+	return _r
 }
 
-// SetWeekOfYear calls the underlying SetWeekOfYear.
+// SetWeekOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) SetWeekOfYear(weekOfYear int) {
-	x.inner.SetWeekOfYear(weekOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekOfYear:"), weekOfYear)
 }
 
-// YearForWeekOfYear calls the underlying YearForWeekOfYear.
+// YearForWeekOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) YearForWeekOfYear() int {
-	return x.inner.YearForWeekOfYear()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("yearForWeekOfYear"))
+	return _r
 }
 
-// SetYearForWeekOfYear calls the underlying SetYearForWeekOfYear.
+// SetYearForWeekOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) SetYearForWeekOfYear(yearForWeekOfYear int) {
-	x.inner.SetYearForWeekOfYear(yearForWeekOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYearForWeekOfYear:"), yearForWeekOfYear)
 }
 
-// DayOfYear calls the underlying DayOfYear.
+// DayOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) DayOfYear() int {
-	return x.inner.DayOfYear()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfYear"))
+	return _r
 }
 
-// SetDayOfYear calls the underlying SetDayOfYear.
+// SetDayOfYear wraps the corresponding Objective-C method.
 func (x *DateComponents) SetDayOfYear(dayOfYear int) {
-	x.inner.SetDayOfYear(dayOfYear)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfYear:"), dayOfYear)
 }
 
-// IsLeapMonth calls the underlying IsLeapMonth.
+// IsLeapMonth wraps the corresponding Objective-C method.
 func (x *DateComponents) IsLeapMonth() bool {
-	return x.inner.IsLeapMonth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLeapMonth"))
+	return _r
 }
 
-// SetLeapMonth calls the underlying SetLeapMonth.
+// SetLeapMonth wraps the corresponding Objective-C method.
 func (x *DateComponents) SetLeapMonth(leapMonth bool) {
-	x.inner.SetLeapMonth(leapMonth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeapMonth:"), leapMonth)
 }
 
-// IsRepeatedDay calls the underlying IsRepeatedDay.
+// IsRepeatedDay wraps the corresponding Objective-C method.
 func (x *DateComponents) IsRepeatedDay() bool {
-	return x.inner.IsRepeatedDay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRepeatedDay"))
+	return _r
 }
 
-// SetRepeatedDay calls the underlying SetRepeatedDay.
+// SetRepeatedDay wraps the corresponding Objective-C method.
 func (x *DateComponents) SetRepeatedDay(repeatedDay bool) {
-	x.inner.SetRepeatedDay(repeatedDay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatedDay:"), repeatedDay)
 }
 
-// Date calls the underlying Date.
+// Date wraps the corresponding Objective-C method.
 func (x *DateComponents) Date() *Date {
-	_r := x.inner.Date()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return DateFromID(_r)
 }
 
-// IsValidDate calls the underlying IsValidDate.
+// IsValidDate wraps the corresponding Objective-C method.
 func (x *DateComponents) IsValidDate() bool {
-	return x.inner.IsValidDate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValidDate"))
+	return _r
 }
-
-func (x *DateComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // DateComponentsable is the interface implemented by [DateComponents], for mocking and DI.
 type DateComponentsable interface {
-	Unwrap() *raw.NSDateComponents
+	obj.Object
 	WithCalendar(calendar *Calendar) *DateComponents
 	WithTimeZone(timeZone *TimeZone) *DateComponents
 	WithEra(era int) *DateComponents
@@ -464,16 +463,16 @@ type DateComponentsable interface {
 	WithDayOfYear(dayOfYear int) *DateComponents
 	WithLeapMonth(leapMonth bool) *DateComponents
 	WithRepeatedDay(repeatedDay bool) *DateComponents
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponents
+	WithScriptingProperties(scriptingProperties obj.Object) *DateComponents
 	Week() int
 	SetWeek(v int)
-	SetValueForComponent(value int, unit NSCalendarUnit)
-	ValueForComponent(unit NSCalendarUnit) int
-	IsValidDateInCalendar(calendar *raw.NSCalendar) bool
+	SetValueForComponent(value int, unit CalendarUnit)
+	ValueForComponent(unit CalendarUnit) int
+	IsValidDateInCalendar(calendar *Calendar) bool
 	Calendar() *Calendar
-	SetCalendar(calendar *raw.NSCalendar)
+	SetCalendar(calendar *Calendar)
 	TimeZone() *TimeZone
-	SetTimeZone(timeZone *raw.NSTimeZone)
+	SetTimeZone(timeZone *TimeZone)
 	Era() int
 	SetEra(era int)
 	Year() int

@@ -5,59 +5,70 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNMultiaryGradientState wraps [raw.MPSNNMultiaryGradientState] with a fluent Go API.
+// NNMultiaryGradientState is an idiomatic wrapper over the Objective-C class MPSNNMultiaryGradientState.
+//
+// It embeds [State], promoting that type's methods.
 type NNMultiaryGradientState struct {
-	inner *raw.MPSNNMultiaryGradientState
+	State
 }
 
-// Unwrap returns the underlying [raw.MPSNNMultiaryGradientState].
-func (x *NNMultiaryGradientState) Unwrap() *raw.MPSNNMultiaryGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNMultiaryGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// NNMultiaryGradientStateFromID adopts an existing object pointer as a NNMultiaryGradientState (nil for 0).
+// NNMultiaryGradientStateFromID adopts an existing Objective-C object as a NNMultiaryGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func NNMultiaryGradientStateFromID(id objc.ID) *NNMultiaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &NNMultiaryGradientState{inner: raw.MPSNNMultiaryGradientStateFromID(id)}
+	x := &NNMultiaryGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNMultiaryGradientState creates a new [NNMultiaryGradientState].
+// nNMultiaryGradientStateAdopt wraps an Objective-C object that this code just created as a
+// NNMultiaryGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNMultiaryGradientStateAdopt(id objc.ID) *NNMultiaryGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &NNMultiaryGradientState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNMultiaryGradientState creates a new NNMultiaryGradientState.
 func NewNNMultiaryGradientState() *NNMultiaryGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNMultiaryGradientState")), objc.RegisterName("new"))
-	return &NNMultiaryGradientState{inner: raw.MPSNNMultiaryGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNMultiaryGradientState")), objc.RegisterName("new"))
+	return nNMultiaryGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *NNMultiaryGradientState) WithReadCount(readCount uint) *NNMultiaryGradientState {
-	x.inner.MPSState.SetReadCount(readCount)
+// WithReadCount sets the property and returns the receiver so calls can be chained.
+func (x *NNMultiaryGradientState) WithReadCount(readCount int) *NNMultiaryGradientState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *NNMultiaryGradientState) WithLabel(label string) *NNMultiaryGradientState {
-	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *NNMultiaryGradientState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // NNMultiaryGradientStateable is the interface implemented by [NNMultiaryGradientState], for mocking and DI.
 type NNMultiaryGradientStateable interface {
-	Unwrap() *raw.MPSNNMultiaryGradientState
-	WithReadCount(readCount uint) *NNMultiaryGradientState
+	obj.Object
+	WithReadCount(readCount int) *NNMultiaryGradientState
 	WithLabel(label string) *NNMultiaryGradientState
 }
 
 var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)
+
+var _ StateProvider = (*NNMultiaryGradientState)(nil)

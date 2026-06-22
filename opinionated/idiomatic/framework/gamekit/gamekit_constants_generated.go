@@ -5,54 +5,39 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// GKErrorDomain returns the string constant GKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func GKErrorDomain() objc.ID {
-	if _r := raw.GKErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GKErrorDomain returns the string constant GKErrorDomain, for use as a dictionary key or argument.
+func GKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GKErrorDomain"))) }
+
+// GKPlayerIDNoLongerAvailable returns the string constant GKPlayerIDNoLongerAvailable, for use as a dictionary key or argument.
+func GKPlayerIDNoLongerAvailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerIDNoLongerAvailable")))
 }
 
-// Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
-// GKPlayerIDNoLongerAvailable returns the string constant GKPlayerIDNoLongerAvailable as an objc.ID, for use as a dictionary key or selector argument.
-func GKPlayerIDNoLongerAvailable() objc.ID {
-	return purego.CFConstant(raw.GKPlayerIDNoLongerAvailable())
+// GKPlayerDidChangeNotificationName returns the string constant GKPlayerDidChangeNotificationName, for use as a dictionary key or argument.
+func GKPlayerDidChangeNotificationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerDidChangeNotificationName")))
 }
 
-// Notification will be posted whenever the player details changes. The object of the notification will be the player.
-// GKPlayerDidChangeNotificationName returns the string constant GKPlayerDidChangeNotificationName as an objc.ID, for use as a dictionary key or selector argument.
-func GKPlayerDidChangeNotificationName() objc.ID {
-	if _r := raw.GKPlayerDidChangeNotificationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GKGameSessionErrorDomain returns the string constant GKGameSessionErrorDomain, for use as a dictionary key or argument.
+func GKGameSessionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKGameSessionErrorDomain")))
 }
 
-// GKGameSessionErrorDomain returns the string constant GKGameSessionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func GKGameSessionErrorDomain() objc.ID {
-	return purego.CFConstant(raw.GKGameSessionErrorDomain())
+// GKPlayerAuthenticationDidChangeNotificationName returns the string constant GKPlayerAuthenticationDidChangeNotificationName, for use as a dictionary key or argument.
+func GKPlayerAuthenticationDidChangeNotificationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKPlayerAuthenticationDidChangeNotificationName")))
 }
 
-// Notification will be posted whenever authentication status changes.
-// GKPlayerAuthenticationDidChangeNotificationName returns the string constant GKPlayerAuthenticationDidChangeNotificationName as an objc.ID, for use as a dictionary key or selector argument.
-func GKPlayerAuthenticationDidChangeNotificationName() objc.ID {
-	if _r := raw.GKPlayerAuthenticationDidChangeNotificationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// GKVoiceChatServiceErrorDomain returns the string constant GKVoiceChatServiceErrorDomain, for use as a dictionary key or argument.
+func GKVoiceChatServiceErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKVoiceChatServiceErrorDomain")))
 }
 
-// GKVoiceChatServiceErrorDomain returns the string constant GKVoiceChatServiceErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func GKVoiceChatServiceErrorDomain() objc.ID {
-	return purego.CFConstant(raw.GKVoiceChatServiceErrorDomain())
-}
-
-// GKSessionErrorDomain returns the string constant GKSessionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func GKSessionErrorDomain() objc.ID {
-	return purego.CFConstant(raw.GKSessionErrorDomain())
+// GKSessionErrorDomain returns the string constant GKSessionErrorDomain, for use as a dictionary key or argument.
+func GKSessionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GKSessionErrorDomain")))
 }

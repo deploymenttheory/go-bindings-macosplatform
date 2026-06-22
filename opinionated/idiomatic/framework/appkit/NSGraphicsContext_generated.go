@@ -5,226 +5,243 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a graphics context.
+// GraphicsContext is an idiomatic wrapper over the Objective-C class NSGraphicsContext.
 //
-// GraphicsContext wraps [raw.NSGraphicsContext] with a fluent Go API.
+// An object that represents a graphics context.
 type GraphicsContext struct {
-	inner *raw.NSGraphicsContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGraphicsContext].
-func (x *GraphicsContext) Unwrap() *raw.NSGraphicsContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphicsContext) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphicsContextFromID adopts an existing object pointer as a GraphicsContext (nil for 0).
+// GraphicsContextFromID adopts an existing Objective-C object as a GraphicsContext
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphicsContextFromID(id objc.ID) *GraphicsContext {
 	if id == 0 {
 		return nil
 	}
-	return &GraphicsContext{inner: raw.NSGraphicsContextFromID(id)}
+	x := &GraphicsContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGraphicsContext creates a new [GraphicsContext].
+// graphicsContextAdopt wraps an Objective-C object that this code just created as a
+// GraphicsContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphicsContextAdopt(id objc.ID) *GraphicsContext {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphicsContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphicsContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphicsContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphicsContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GraphicsContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGraphicsContext creates a new GraphicsContext.
 func NewGraphicsContext() *GraphicsContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGraphicsContext")), objc.RegisterName("new"))
-	return &GraphicsContext{inner: raw.NSGraphicsContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("new"))
+	return graphicsContextAdopt(_id)
 }
 
-// A Boolean value that indicates whether the graphics context uses antialiasing.
-//
-// WithShouldAntialias sets the shouldAntialias property and returns the receiver for chaining.
+// WithShouldAntialias a Boolean value that indicates whether the graphics context uses antialiasing.
 func (x *GraphicsContext) WithShouldAntialias(shouldAntialias bool) *GraphicsContext {
-	x.inner.SetShouldAntialias(shouldAntialias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntialias:"), shouldAntialias)
 	return x
 }
 
-// A constant that specifies the graphics context’s interpolation, or image smoothing, behavior.
-//
-// WithImageInterpolation sets the imageInterpolation property and returns the receiver for chaining.
-func (x *GraphicsContext) WithImageInterpolation(imageInterpolation NSImageInterpolation) *GraphicsContext {
-	x.inner.SetImageInterpolation(raw.NSImageInterpolation(imageInterpolation))
+// WithImageInterpolation a constant that specifies the graphics context’s interpolation, or image smoothing, behavior.
+func (x *GraphicsContext) WithImageInterpolation(imageInterpolation ImageInterpolation) *GraphicsContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageInterpolation:"), imageInterpolation)
 	return x
 }
 
-// The amount to offset the pattern color when filling the graphics context.
-//
-// WithPatternPhase sets the patternPhase property and returns the receiver for chaining.
+// WithPatternPhase the amount to offset the pattern color when filling the graphics context.
 func (x *GraphicsContext) WithPatternPhase(patternPhase corefoundation.CGPoint) *GraphicsContext {
-	x.inner.SetPatternPhase(patternPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPatternPhase:"), patternPhase)
 	return x
 }
 
-// The graphics context’s global compositing operation setting.
-//
-// WithCompositingOperation sets the compositingOperation property and returns the receiver for chaining.
-func (x *GraphicsContext) WithCompositingOperation(compositingOperation NSCompositingOperation) *GraphicsContext {
-	x.inner.SetCompositingOperation(raw.NSCompositingOperation(compositingOperation))
+// WithCompositingOperation the graphics context’s global compositing operation setting.
+func (x *GraphicsContext) WithCompositingOperation(compositingOperation CompositingOperation) *GraphicsContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingOperation:"), compositingOperation)
 	return x
 }
 
-// The color rendering intent in the graphics context’s graphics state.
-//
-// WithColorRenderingIntent sets the colorRenderingIntent property and returns the receiver for chaining.
-func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) *GraphicsContext {
-	x.inner.SetColorRenderingIntent(raw.NSColorRenderingIntent(colorRenderingIntent))
+// WithColorRenderingIntent the color rendering intent in the graphics context’s graphics state.
+func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent ColorRenderingIntent) *GraphicsContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorRenderingIntent:"), colorRenderingIntent)
 	return x
 }
 
-// Saves the current graphics state and creates a new graphics state on the top of the stack.
-//
-// SaveGraphicsState calls the underlying SaveGraphicsState.
+// SaveGraphicsState saves the current graphics state and creates a new graphics state on the top of the stack.
 func (x *GraphicsContext) SaveGraphicsState() {
-	x.inner.SaveGraphicsState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveGraphicsState"))
 }
 
-// Removes the context’s graphics state from the top of the graphics state stack and makes the next graphics state the current graphics state.
-//
-// RestoreGraphicsState calls the underlying RestoreGraphicsState.
+// RestoreGraphicsState removes the context’s graphics state from the top of the graphics state stack and makes the next graphics state the current graphics state.
 func (x *GraphicsContext) RestoreGraphicsState() {
-	x.inner.RestoreGraphicsState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreGraphicsState"))
 }
 
-// Forces any buffered operations or data to be sent to the graphics context’s destination.
-//
-// FlushGraphics calls the underlying FlushGraphics.
+// FlushGraphics forces any buffered operations or data to be sent to the graphics context’s destination.
 func (x *GraphicsContext) FlushGraphics() {
-	x.inner.FlushGraphics()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushGraphics"))
 }
 
-// Attributes calls the underlying Attributes.
-func (x *GraphicsContext) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Attributes()
+// Attributes wraps the corresponding Objective-C method.
+func (x *GraphicsContext) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
-// IsDrawingToScreen calls the underlying IsDrawingToScreen.
+// IsDrawingToScreen wraps the corresponding Objective-C method.
 func (x *GraphicsContext) IsDrawingToScreen() bool {
-	return x.inner.IsDrawingToScreen()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDrawingToScreen"))
+	return _r
 }
 
-// CGContext calls the underlying CGContext.
-func (x *GraphicsContext) CGContext() unsafe.Pointer {
-	return x.inner.CGContext()
+// CGContext wraps the corresponding Objective-C method.
+func (x *GraphicsContext) CGContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGContext"))
+	return obj.Wrap(_r)
 }
 
-// IsFlipped calls the underlying IsFlipped.
+// IsFlipped wraps the corresponding Objective-C method.
 func (x *GraphicsContext) IsFlipped() bool {
-	return x.inner.IsFlipped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlipped"))
+	return _r
 }
 
-// ShouldAntialias calls the underlying ShouldAntialias.
+// ShouldAntialias wraps the corresponding Objective-C method.
 func (x *GraphicsContext) ShouldAntialias() bool {
-	return x.inner.ShouldAntialias()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAntialias"))
+	return _r
 }
 
-// SetShouldAntialias calls the underlying SetShouldAntialias.
+// SetShouldAntialias wraps the corresponding Objective-C method.
 func (x *GraphicsContext) SetShouldAntialias(shouldAntialias bool) {
-	x.inner.SetShouldAntialias(shouldAntialias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntialias:"), shouldAntialias)
 }
 
-// ImageInterpolation calls the underlying ImageInterpolation.
-func (x *GraphicsContext) ImageInterpolation() NSImageInterpolation {
-	return NSImageInterpolation(x.inner.ImageInterpolation())
+// ImageInterpolation wraps the corresponding Objective-C method.
+func (x *GraphicsContext) ImageInterpolation() ImageInterpolation {
+	_r := objc.Send[ImageInterpolation](objref.IDOf(x), objc.RegisterName("imageInterpolation"))
+	return _r
 }
 
-// SetImageInterpolation calls the underlying SetImageInterpolation.
-func (x *GraphicsContext) SetImageInterpolation(imageInterpolation NSImageInterpolation) {
-	x.inner.SetImageInterpolation(raw.NSImageInterpolation(imageInterpolation))
+// SetImageInterpolation wraps the corresponding Objective-C method.
+func (x *GraphicsContext) SetImageInterpolation(imageInterpolation ImageInterpolation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageInterpolation:"), imageInterpolation)
 }
 
-// PatternPhase calls the underlying PatternPhase.
+// PatternPhase wraps the corresponding Objective-C method.
 func (x *GraphicsContext) PatternPhase() corefoundation.CGPoint {
-	return x.inner.PatternPhase()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("patternPhase"))
+	return _r
 }
 
-// SetPatternPhase calls the underlying SetPatternPhase.
+// SetPatternPhase wraps the corresponding Objective-C method.
 func (x *GraphicsContext) SetPatternPhase(patternPhase corefoundation.CGPoint) {
-	x.inner.SetPatternPhase(patternPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPatternPhase:"), patternPhase)
 }
 
-// CompositingOperation calls the underlying CompositingOperation.
-func (x *GraphicsContext) CompositingOperation() NSCompositingOperation {
-	return NSCompositingOperation(x.inner.CompositingOperation())
+// CompositingOperation wraps the corresponding Objective-C method.
+func (x *GraphicsContext) CompositingOperation() CompositingOperation {
+	_r := objc.Send[CompositingOperation](objref.IDOf(x), objc.RegisterName("compositingOperation"))
+	return _r
 }
 
-// SetCompositingOperation calls the underlying SetCompositingOperation.
-func (x *GraphicsContext) SetCompositingOperation(compositingOperation NSCompositingOperation) {
-	x.inner.SetCompositingOperation(raw.NSCompositingOperation(compositingOperation))
+// SetCompositingOperation wraps the corresponding Objective-C method.
+func (x *GraphicsContext) SetCompositingOperation(compositingOperation CompositingOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingOperation:"), compositingOperation)
 }
 
-// ColorRenderingIntent calls the underlying ColorRenderingIntent.
-func (x *GraphicsContext) ColorRenderingIntent() NSColorRenderingIntent {
-	return NSColorRenderingIntent(x.inner.ColorRenderingIntent())
+// ColorRenderingIntent wraps the corresponding Objective-C method.
+func (x *GraphicsContext) ColorRenderingIntent() ColorRenderingIntent {
+	_r := objc.Send[ColorRenderingIntent](objref.IDOf(x), objc.RegisterName("colorRenderingIntent"))
+	return _r
 }
 
-// SetColorRenderingIntent calls the underlying SetColorRenderingIntent.
-func (x *GraphicsContext) SetColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) {
-	x.inner.SetColorRenderingIntent(raw.NSColorRenderingIntent(colorRenderingIntent))
+// SetColorRenderingIntent wraps the corresponding Objective-C method.
+func (x *GraphicsContext) SetColorRenderingIntent(colorRenderingIntent ColorRenderingIntent) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorRenderingIntent:"), colorRenderingIntent)
 }
 
-// CIContext calls the underlying CIContext.
-func (x *GraphicsContext) CIContext() *coreimage.CIContext {
-	return x.inner.CIContext()
+// CIContext wraps the corresponding Objective-C method.
+func (x *GraphicsContext) CIContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CIContext"))
+	return obj.Wrap(_r)
 }
 
-// Returns the object used by the context to track the hierarchy of views with locked focus.
-//
-// FocusStack calls the underlying FocusStack.
-func (x *GraphicsContext) FocusStack() objc.ID {
-	return x.inner.FocusStack()
+// FocusStack returns the object used by the context to track the hierarchy of views with locked focus.
+func (x *GraphicsContext) FocusStack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStack"))
+	return obj.Wrap(_r)
 }
 
-// Sets the object used by the receiver to track the hierarchy of views with locked focus.
-//
-// SetFocusStack calls the underlying SetFocusStack.
-func (x *GraphicsContext) SetFocusStack(stack objc.ID) {
-	x.inner.SetFocusStack(stack)
-}
-
-// GraphicsPort calls the underlying GraphicsPort.
-func (x *GraphicsContext) GraphicsPort() unsafe.Pointer {
-	return x.inner.GraphicsPort()
+// SetFocusStack sets the object used by the receiver to track the hierarchy of views with locked focus.
+func (x *GraphicsContext) SetFocusStack(stack obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusStack:"), objref.IDOf(stack))
 }
 
 // GraphicsContextable is the interface implemented by [GraphicsContext], for mocking and DI.
 type GraphicsContextable interface {
-	Unwrap() *raw.NSGraphicsContext
+	obj.Object
 	WithShouldAntialias(shouldAntialias bool) *GraphicsContext
-	WithImageInterpolation(imageInterpolation NSImageInterpolation) *GraphicsContext
+	WithImageInterpolation(imageInterpolation ImageInterpolation) *GraphicsContext
 	WithPatternPhase(patternPhase corefoundation.CGPoint) *GraphicsContext
-	WithCompositingOperation(compositingOperation NSCompositingOperation) *GraphicsContext
-	WithColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) *GraphicsContext
+	WithCompositingOperation(compositingOperation CompositingOperation) *GraphicsContext
+	WithColorRenderingIntent(colorRenderingIntent ColorRenderingIntent) *GraphicsContext
 	SaveGraphicsState()
 	RestoreGraphicsState()
 	FlushGraphics()
-	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Attributes() obj.Object
 	IsDrawingToScreen() bool
-	CGContext() unsafe.Pointer
+	CGContext() obj.Object
 	IsFlipped() bool
 	ShouldAntialias() bool
 	SetShouldAntialias(shouldAntialias bool)
-	ImageInterpolation() NSImageInterpolation
-	SetImageInterpolation(imageInterpolation NSImageInterpolation)
+	ImageInterpolation() ImageInterpolation
+	SetImageInterpolation(imageInterpolation ImageInterpolation)
 	PatternPhase() corefoundation.CGPoint
 	SetPatternPhase(patternPhase corefoundation.CGPoint)
-	CompositingOperation() NSCompositingOperation
-	SetCompositingOperation(compositingOperation NSCompositingOperation)
-	ColorRenderingIntent() NSColorRenderingIntent
-	SetColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent)
-	CIContext() *coreimage.CIContext
-	FocusStack() objc.ID
-	SetFocusStack(stack objc.ID)
-	GraphicsPort() unsafe.Pointer
+	CompositingOperation() CompositingOperation
+	SetCompositingOperation(compositingOperation CompositingOperation)
+	ColorRenderingIntent() ColorRenderingIntent
+	SetColorRenderingIntent(colorRenderingIntent ColorRenderingIntent)
+	CIContext() obj.Object
+	FocusStack() obj.Object
+	SetFocusStack(stack obj.Object)
 }
 
 var _ GraphicsContextable = (*GraphicsContext)(nil)

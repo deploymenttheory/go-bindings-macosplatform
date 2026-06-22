@@ -5,56 +5,67 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
+// RecognizedPoint is an idiomatic wrapper over the Objective-C class VNRecognizedPoint.
 //
-// RecognizedPoint wraps [raw.VNRecognizedPoint] with a fluent Go API.
+// It embeds [DetectedPoint], promoting that type's methods.
+//
+// An object that represents a normalized point in an image, along with an identifier label and a confidence value.
 type RecognizedPoint struct {
-	inner *raw.VNRecognizedPoint
+	DetectedPoint
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedPoint].
-func (x *RecognizedPoint) Unwrap() *raw.VNRecognizedPoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedPoint) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedPointFromID adopts an existing object pointer as a RecognizedPoint (nil for 0).
+// RecognizedPointFromID adopts an existing Objective-C object as a RecognizedPoint
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedPointFromID(id objc.ID) *RecognizedPoint {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedPoint{inner: raw.VNRecognizedPointFromID(id)}
+	x := &RecognizedPoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedPoint creates a new [RecognizedPoint].
-func NewRecognizedPoint() *RecognizedPoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedPoint")), objc.RegisterName("new"))
-	return &RecognizedPoint{inner: raw.VNRecognizedPointFromID(_id)}
-}
-
-// Identifier calls the underlying Identifier.
-func (x *RecognizedPoint) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
+// recognizedPointAdopt wraps an Objective-C object that this code just created as a
+// RecognizedPoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedPointAdopt(id objc.ID) *RecognizedPoint {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &RecognizedPoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *RecognizedPoint) asDetectedPoint() *raw.VNDetectedPoint { return &x.inner.VNDetectedPoint }
+// NewRecognizedPoint creates a new RecognizedPoint.
+func NewRecognizedPoint() *RecognizedPoint {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedPoint")), objc.RegisterName("new"))
+	return recognizedPointAdopt(_id)
+}
 
-func (x *RecognizedPoint) asPoint() *raw.VNPoint { return &x.inner.VNDetectedPoint.VNPoint }
+// Identifier wraps the corresponding Objective-C method.
+func (x *RecognizedPoint) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
 
 // RecognizedPointable is the interface implemented by [RecognizedPoint], for mocking and DI.
 type RecognizedPointable interface {
-	Unwrap() *raw.VNRecognizedPoint
-	Identifier() string
+	obj.Object
+	Identifier() obj.Object
 }
 
 var _ RecognizedPointable = (*RecognizedPoint)(nil)
+
+var _ DetectedPointProvider = (*RecognizedPoint)(nil)
+
+var _ PointProvider = (*RecognizedPoint)(nil)

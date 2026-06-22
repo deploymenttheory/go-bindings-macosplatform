@@ -5,562 +5,503 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCAFillModeForwards returns the string constant kCAFillModeForwards as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillModeForwards() objc.ID {
-	return purego.CFConstant(raw.KCAFillModeForwards())
+// KCAFillModeForwards returns the string constant kCAFillModeForwards, for use as a dictionary key or argument.
+func KCAFillModeForwards() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFillModeForwards")))
 }
 
-// KCAFillModeBackwards returns the string constant kCAFillModeBackwards as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillModeBackwards() objc.ID {
-	return purego.CFConstant(raw.KCAFillModeBackwards())
+// KCAFillModeBackwards returns the string constant kCAFillModeBackwards, for use as a dictionary key or argument.
+func KCAFillModeBackwards() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFillModeBackwards")))
 }
 
-// KCAFillModeBoth returns the string constant kCAFillModeBoth as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillModeBoth() objc.ID {
-	return purego.CFConstant(raw.KCAFillModeBoth())
-}
+// KCAFillModeBoth returns the string constant kCAFillModeBoth, for use as a dictionary key or argument.
+func KCAFillModeBoth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAFillModeBoth"))) }
 
-// KCAFillModeRemoved returns the string constant kCAFillModeRemoved as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillModeRemoved() objc.ID {
-	return purego.CFConstant(raw.KCAFillModeRemoved())
+// KCAFillModeRemoved returns the string constant kCAFillModeRemoved, for use as a dictionary key or argument.
+func KCAFillModeRemoved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFillModeRemoved")))
 }
 
-// CAToneMapModeAutomatic returns the string constant CAToneMapModeAutomatic as an objc.ID, for use as a dictionary key or selector argument.
-func CAToneMapModeAutomatic() objc.ID {
-	return purego.CFConstant(raw.CAToneMapModeAutomatic())
+// CAToneMapModeAutomatic returns the string constant CAToneMapModeAutomatic, for use as a dictionary key or argument.
+func CAToneMapModeAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CAToneMapModeAutomatic")))
 }
 
-// CAToneMapModeNever returns the string constant CAToneMapModeNever as an objc.ID, for use as a dictionary key or selector argument.
-func CAToneMapModeNever() objc.ID {
-	return purego.CFConstant(raw.CAToneMapModeNever())
+// CAToneMapModeNever returns the string constant CAToneMapModeNever, for use as a dictionary key or argument.
+func CAToneMapModeNever() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CAToneMapModeNever")))
 }
 
-// CAToneMapModeIfSupported returns the string constant CAToneMapModeIfSupported as an objc.ID, for use as a dictionary key or selector argument.
-func CAToneMapModeIfSupported() objc.ID {
-	return purego.CFConstant(raw.CAToneMapModeIfSupported())
+// CAToneMapModeIfSupported returns the string constant CAToneMapModeIfSupported, for use as a dictionary key or argument.
+func CAToneMapModeIfSupported() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CAToneMapModeIfSupported")))
 }
 
-// CADynamicRangeAutomatic returns the string constant CADynamicRangeAutomatic as an objc.ID, for use as a dictionary key or selector argument.
-func CADynamicRangeAutomatic() objc.ID {
-	return purego.CFConstant(raw.CADynamicRangeAutomatic())
+// CADynamicRangeAutomatic returns the string constant CADynamicRangeAutomatic, for use as a dictionary key or argument.
+func CADynamicRangeAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CADynamicRangeAutomatic")))
 }
 
-// CADynamicRangeStandard returns the string constant CADynamicRangeStandard as an objc.ID, for use as a dictionary key or selector argument.
-func CADynamicRangeStandard() objc.ID {
-	return purego.CFConstant(raw.CADynamicRangeStandard())
+// CADynamicRangeStandard returns the string constant CADynamicRangeStandard, for use as a dictionary key or argument.
+func CADynamicRangeStandard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CADynamicRangeStandard")))
 }
 
-// CADynamicRangeConstrainedHigh returns the string constant CADynamicRangeConstrainedHigh as an objc.ID, for use as a dictionary key or selector argument.
-func CADynamicRangeConstrainedHigh() objc.ID {
-	return purego.CFConstant(raw.CADynamicRangeConstrainedHigh())
+// CADynamicRangeConstrainedHigh returns the string constant CADynamicRangeConstrainedHigh, for use as a dictionary key or argument.
+func CADynamicRangeConstrainedHigh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CADynamicRangeConstrainedHigh")))
 }
 
-// CADynamicRangeHigh returns the string constant CADynamicRangeHigh as an objc.ID, for use as a dictionary key or selector argument.
-func CADynamicRangeHigh() objc.ID {
-	return purego.CFConstant(raw.CADynamicRangeHigh())
+// CADynamicRangeHigh returns the string constant CADynamicRangeHigh, for use as a dictionary key or argument.
+func CADynamicRangeHigh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CADynamicRangeHigh")))
 }
 
-// KCAGravityCenter returns the string constant kCAGravityCenter as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityCenter() objc.ID {
-	return purego.CFConstant(raw.KCAGravityCenter())
-}
+// KCAGravityCenter returns the string constant kCAGravityCenter, for use as a dictionary key or argument.
+func KCAGravityCenter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityCenter"))) }
 
-// KCAGravityTop returns the string constant kCAGravityTop as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityTop() objc.ID {
-	return purego.CFConstant(raw.KCAGravityTop())
-}
+// KCAGravityTop returns the string constant kCAGravityTop, for use as a dictionary key or argument.
+func KCAGravityTop() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityTop"))) }
 
-// KCAGravityBottom returns the string constant kCAGravityBottom as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityBottom() objc.ID {
-	return purego.CFConstant(raw.KCAGravityBottom())
-}
+// KCAGravityBottom returns the string constant kCAGravityBottom, for use as a dictionary key or argument.
+func KCAGravityBottom() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityBottom"))) }
 
-// KCAGravityLeft returns the string constant kCAGravityLeft as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityLeft() objc.ID {
-	return purego.CFConstant(raw.KCAGravityLeft())
-}
+// KCAGravityLeft returns the string constant kCAGravityLeft, for use as a dictionary key or argument.
+func KCAGravityLeft() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityLeft"))) }
 
-// KCAGravityRight returns the string constant kCAGravityRight as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityRight() objc.ID {
-	return purego.CFConstant(raw.KCAGravityRight())
-}
+// KCAGravityRight returns the string constant kCAGravityRight, for use as a dictionary key or argument.
+func KCAGravityRight() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityRight"))) }
 
-// KCAGravityTopLeft returns the string constant kCAGravityTopLeft as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityTopLeft() objc.ID {
-	return purego.CFConstant(raw.KCAGravityTopLeft())
-}
+// KCAGravityTopLeft returns the string constant kCAGravityTopLeft, for use as a dictionary key or argument.
+func KCAGravityTopLeft() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityTopLeft"))) }
 
-// KCAGravityTopRight returns the string constant kCAGravityTopRight as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityTopRight() objc.ID {
-	return purego.CFConstant(raw.KCAGravityTopRight())
+// KCAGravityTopRight returns the string constant kCAGravityTopRight, for use as a dictionary key or argument.
+func KCAGravityTopRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGravityTopRight")))
 }
 
-// KCAGravityBottomLeft returns the string constant kCAGravityBottomLeft as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityBottomLeft() objc.ID {
-	return purego.CFConstant(raw.KCAGravityBottomLeft())
+// KCAGravityBottomLeft returns the string constant kCAGravityBottomLeft, for use as a dictionary key or argument.
+func KCAGravityBottomLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGravityBottomLeft")))
 }
 
-// KCAGravityBottomRight returns the string constant kCAGravityBottomRight as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityBottomRight() objc.ID {
-	return purego.CFConstant(raw.KCAGravityBottomRight())
+// KCAGravityBottomRight returns the string constant kCAGravityBottomRight, for use as a dictionary key or argument.
+func KCAGravityBottomRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGravityBottomRight")))
 }
 
-// KCAGravityResize returns the string constant kCAGravityResize as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityResize() objc.ID {
-	return purego.CFConstant(raw.KCAGravityResize())
-}
+// KCAGravityResize returns the string constant kCAGravityResize, for use as a dictionary key or argument.
+func KCAGravityResize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAGravityResize"))) }
 
-// KCAGravityResizeAspect returns the string constant kCAGravityResizeAspect as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityResizeAspect() objc.ID {
-	return purego.CFConstant(raw.KCAGravityResizeAspect())
+// KCAGravityResizeAspect returns the string constant kCAGravityResizeAspect, for use as a dictionary key or argument.
+func KCAGravityResizeAspect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGravityResizeAspect")))
 }
 
-// KCAGravityResizeAspectFill returns the string constant kCAGravityResizeAspectFill as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGravityResizeAspectFill() objc.ID {
-	return purego.CFConstant(raw.KCAGravityResizeAspectFill())
+// KCAGravityResizeAspectFill returns the string constant kCAGravityResizeAspectFill, for use as a dictionary key or argument.
+func KCAGravityResizeAspectFill() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGravityResizeAspectFill")))
 }
 
-// KCAContentsFormatRGBA8Uint returns the string constant kCAContentsFormatRGBA8Uint as an objc.ID, for use as a dictionary key or selector argument.
-func KCAContentsFormatRGBA8Uint() objc.ID {
-	return purego.CFConstant(raw.KCAContentsFormatRGBA8Uint())
+// KCAContentsFormatRGBA8Uint returns the string constant kCAContentsFormatRGBA8Uint, for use as a dictionary key or argument.
+func KCAContentsFormatRGBA8Uint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAContentsFormatRGBA8Uint")))
 }
 
-// KCAContentsFormatRGBA16Float returns the string constant kCAContentsFormatRGBA16Float as an objc.ID, for use as a dictionary key or selector argument.
-func KCAContentsFormatRGBA16Float() objc.ID {
-	return purego.CFConstant(raw.KCAContentsFormatRGBA16Float())
+// KCAContentsFormatRGBA16Float returns the string constant kCAContentsFormatRGBA16Float, for use as a dictionary key or argument.
+func KCAContentsFormatRGBA16Float() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAContentsFormatRGBA16Float")))
 }
 
-// KCAContentsFormatGray8Uint returns the string constant kCAContentsFormatGray8Uint as an objc.ID, for use as a dictionary key or selector argument.
-func KCAContentsFormatGray8Uint() objc.ID {
-	return purego.CFConstant(raw.KCAContentsFormatGray8Uint())
+// KCAContentsFormatGray8Uint returns the string constant kCAContentsFormatGray8Uint, for use as a dictionary key or argument.
+func KCAContentsFormatGray8Uint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAContentsFormatGray8Uint")))
 }
 
-// KCAContentsFormatAutomatic returns the string constant kCAContentsFormatAutomatic as an objc.ID, for use as a dictionary key or selector argument.
-func KCAContentsFormatAutomatic() objc.ID {
-	return purego.CFConstant(raw.KCAContentsFormatAutomatic())
+// KCAContentsFormatAutomatic returns the string constant kCAContentsFormatAutomatic, for use as a dictionary key or argument.
+func KCAContentsFormatAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAContentsFormatAutomatic")))
 }
 
-// KCAFilterNearest returns the string constant kCAFilterNearest as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFilterNearest() objc.ID {
-	return purego.CFConstant(raw.KCAFilterNearest())
-}
+// KCAFilterNearest returns the string constant kCAFilterNearest, for use as a dictionary key or argument.
+func KCAFilterNearest() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAFilterNearest"))) }
 
-// KCAFilterLinear returns the string constant kCAFilterLinear as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFilterLinear() objc.ID {
-	return purego.CFConstant(raw.KCAFilterLinear())
-}
+// KCAFilterLinear returns the string constant kCAFilterLinear, for use as a dictionary key or argument.
+func KCAFilterLinear() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAFilterLinear"))) }
 
-// KCAFilterTrilinear returns the string constant kCAFilterTrilinear as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFilterTrilinear() objc.ID {
-	return purego.CFConstant(raw.KCAFilterTrilinear())
+// KCAFilterTrilinear returns the string constant kCAFilterTrilinear, for use as a dictionary key or argument.
+func KCAFilterTrilinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFilterTrilinear")))
 }
 
-// KCACornerCurveCircular returns the string constant kCACornerCurveCircular as an objc.ID, for use as a dictionary key or selector argument.
-func KCACornerCurveCircular() objc.ID {
-	return purego.CFConstant(raw.KCACornerCurveCircular())
+// KCACornerCurveCircular returns the string constant kCACornerCurveCircular, for use as a dictionary key or argument.
+func KCACornerCurveCircular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCACornerCurveCircular")))
 }
 
-// KCACornerCurveContinuous returns the string constant kCACornerCurveContinuous as an objc.ID, for use as a dictionary key or selector argument.
-func KCACornerCurveContinuous() objc.ID {
-	return purego.CFConstant(raw.KCACornerCurveContinuous())
+// KCACornerCurveContinuous returns the string constant kCACornerCurveContinuous, for use as a dictionary key or argument.
+func KCACornerCurveContinuous() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCACornerCurveContinuous")))
 }
 
-// KCAOnOrderIn returns the string constant kCAOnOrderIn as an objc.ID, for use as a dictionary key or selector argument.
-func KCAOnOrderIn() objc.ID {
-	return purego.CFConstant(raw.KCAOnOrderIn())
-}
+// KCAOnOrderIn returns the string constant kCAOnOrderIn, for use as a dictionary key or argument.
+func KCAOnOrderIn() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAOnOrderIn"))) }
 
-// KCAOnOrderOut returns the string constant kCAOnOrderOut as an objc.ID, for use as a dictionary key or selector argument.
-func KCAOnOrderOut() objc.ID {
-	return purego.CFConstant(raw.KCAOnOrderOut())
-}
+// KCAOnOrderOut returns the string constant kCAOnOrderOut, for use as a dictionary key or argument.
+func KCAOnOrderOut() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAOnOrderOut"))) }
 
-// KCATransition returns the string constant kCATransition as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransition() objc.ID {
-	return purego.CFConstant(raw.KCATransition())
-}
+// KCATransition returns the string constant kCATransition, for use as a dictionary key or argument.
+func KCATransition() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCATransition"))) }
 
-// KCAAnimationLinear returns the string constant kCAAnimationLinear as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationLinear() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationLinear())
+// KCAAnimationLinear returns the string constant kCAAnimationLinear, for use as a dictionary key or argument.
+func KCAAnimationLinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationLinear")))
 }
 
-// KCAAnimationDiscrete returns the string constant kCAAnimationDiscrete as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationDiscrete() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationDiscrete())
+// KCAAnimationDiscrete returns the string constant kCAAnimationDiscrete, for use as a dictionary key or argument.
+func KCAAnimationDiscrete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationDiscrete")))
 }
 
-// KCAAnimationPaced returns the string constant kCAAnimationPaced as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationPaced() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationPaced())
-}
+// KCAAnimationPaced returns the string constant kCAAnimationPaced, for use as a dictionary key or argument.
+func KCAAnimationPaced() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationPaced"))) }
 
-// KCAAnimationCubic returns the string constant kCAAnimationCubic as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationCubic() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationCubic())
-}
+// KCAAnimationCubic returns the string constant kCAAnimationCubic, for use as a dictionary key or argument.
+func KCAAnimationCubic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationCubic"))) }
 
-// KCAAnimationCubicPaced returns the string constant kCAAnimationCubicPaced as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationCubicPaced() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationCubicPaced())
+// KCAAnimationCubicPaced returns the string constant kCAAnimationCubicPaced, for use as a dictionary key or argument.
+func KCAAnimationCubicPaced() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationCubicPaced")))
 }
 
-// KCAAnimationRotateAuto returns the string constant kCAAnimationRotateAuto as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationRotateAuto() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationRotateAuto())
+// KCAAnimationRotateAuto returns the string constant kCAAnimationRotateAuto, for use as a dictionary key or argument.
+func KCAAnimationRotateAuto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationRotateAuto")))
 }
 
-// KCAAnimationRotateAutoReverse returns the string constant kCAAnimationRotateAutoReverse as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAnimationRotateAutoReverse() objc.ID {
-	return purego.CFConstant(raw.KCAAnimationRotateAutoReverse())
+// KCAAnimationRotateAutoReverse returns the string constant kCAAnimationRotateAutoReverse, for use as a dictionary key or argument.
+func KCAAnimationRotateAutoReverse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAnimationRotateAutoReverse")))
 }
 
-// KCATransitionFade returns the string constant kCATransitionFade as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionFade() objc.ID {
-	return purego.CFConstant(raw.KCATransitionFade())
-}
+// KCATransitionFade returns the string constant kCATransitionFade, for use as a dictionary key or argument.
+func KCATransitionFade() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCATransitionFade"))) }
 
-// KCATransitionMoveIn returns the string constant kCATransitionMoveIn as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionMoveIn() objc.ID {
-	return purego.CFConstant(raw.KCATransitionMoveIn())
+// KCATransitionMoveIn returns the string constant kCATransitionMoveIn, for use as a dictionary key or argument.
+func KCATransitionMoveIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionMoveIn")))
 }
 
-// KCATransitionPush returns the string constant kCATransitionPush as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionPush() objc.ID {
-	return purego.CFConstant(raw.KCATransitionPush())
-}
+// KCATransitionPush returns the string constant kCATransitionPush, for use as a dictionary key or argument.
+func KCATransitionPush() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCATransitionPush"))) }
 
-// KCATransitionReveal returns the string constant kCATransitionReveal as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionReveal() objc.ID {
-	return purego.CFConstant(raw.KCATransitionReveal())
+// KCATransitionReveal returns the string constant kCATransitionReveal, for use as a dictionary key or argument.
+func KCATransitionReveal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionReveal")))
 }
 
-// KCATransitionFromRight returns the string constant kCATransitionFromRight as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionFromRight() objc.ID {
-	return purego.CFConstant(raw.KCATransitionFromRight())
+// KCATransitionFromRight returns the string constant kCATransitionFromRight, for use as a dictionary key or argument.
+func KCATransitionFromRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionFromRight")))
 }
 
-// KCATransitionFromLeft returns the string constant kCATransitionFromLeft as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionFromLeft() objc.ID {
-	return purego.CFConstant(raw.KCATransitionFromLeft())
+// KCATransitionFromLeft returns the string constant kCATransitionFromLeft, for use as a dictionary key or argument.
+func KCATransitionFromLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionFromLeft")))
 }
 
-// KCATransitionFromTop returns the string constant kCATransitionFromTop as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionFromTop() objc.ID {
-	return purego.CFConstant(raw.KCATransitionFromTop())
+// KCATransitionFromTop returns the string constant kCATransitionFromTop, for use as a dictionary key or argument.
+func KCATransitionFromTop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionFromTop")))
 }
 
-// KCATransitionFromBottom returns the string constant kCATransitionFromBottom as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransitionFromBottom() objc.ID {
-	return purego.CFConstant(raw.KCATransitionFromBottom())
+// KCATransitionFromBottom returns the string constant kCATransitionFromBottom, for use as a dictionary key or argument.
+func KCATransitionFromBottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransitionFromBottom")))
 }
 
-// KCAEmitterLayerPoint returns the string constant kCAEmitterLayerPoint as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerPoint() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerPoint())
+// KCAEmitterLayerPoint returns the string constant kCAEmitterLayerPoint, for use as a dictionary key or argument.
+func KCAEmitterLayerPoint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerPoint")))
 }
 
-// KCAEmitterLayerLine returns the string constant kCAEmitterLayerLine as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerLine() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerLine())
+// KCAEmitterLayerLine returns the string constant kCAEmitterLayerLine, for use as a dictionary key or argument.
+func KCAEmitterLayerLine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerLine")))
 }
 
-// KCAEmitterLayerRectangle returns the string constant kCAEmitterLayerRectangle as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerRectangle() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerRectangle())
+// KCAEmitterLayerRectangle returns the string constant kCAEmitterLayerRectangle, for use as a dictionary key or argument.
+func KCAEmitterLayerRectangle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerRectangle")))
 }
 
-// KCAEmitterLayerCuboid returns the string constant kCAEmitterLayerCuboid as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerCuboid() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerCuboid())
+// KCAEmitterLayerCuboid returns the string constant kCAEmitterLayerCuboid, for use as a dictionary key or argument.
+func KCAEmitterLayerCuboid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerCuboid")))
 }
 
-// KCAEmitterLayerCircle returns the string constant kCAEmitterLayerCircle as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerCircle() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerCircle())
+// KCAEmitterLayerCircle returns the string constant kCAEmitterLayerCircle, for use as a dictionary key or argument.
+func KCAEmitterLayerCircle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerCircle")))
 }
 
-// KCAEmitterLayerSphere returns the string constant kCAEmitterLayerSphere as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerSphere() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerSphere())
+// KCAEmitterLayerSphere returns the string constant kCAEmitterLayerSphere, for use as a dictionary key or argument.
+func KCAEmitterLayerSphere() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerSphere")))
 }
 
-// KCAEmitterLayerPoints returns the string constant kCAEmitterLayerPoints as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerPoints() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerPoints())
+// KCAEmitterLayerPoints returns the string constant kCAEmitterLayerPoints, for use as a dictionary key or argument.
+func KCAEmitterLayerPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerPoints")))
 }
 
-// KCAEmitterLayerOutline returns the string constant kCAEmitterLayerOutline as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerOutline() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerOutline())
+// KCAEmitterLayerOutline returns the string constant kCAEmitterLayerOutline, for use as a dictionary key or argument.
+func KCAEmitterLayerOutline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerOutline")))
 }
 
-// KCAEmitterLayerSurface returns the string constant kCAEmitterLayerSurface as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerSurface() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerSurface())
+// KCAEmitterLayerSurface returns the string constant kCAEmitterLayerSurface, for use as a dictionary key or argument.
+func KCAEmitterLayerSurface() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerSurface")))
 }
 
-// KCAEmitterLayerVolume returns the string constant kCAEmitterLayerVolume as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerVolume() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerVolume())
+// KCAEmitterLayerVolume returns the string constant kCAEmitterLayerVolume, for use as a dictionary key or argument.
+func KCAEmitterLayerVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerVolume")))
 }
 
-// KCAEmitterLayerUnordered returns the string constant kCAEmitterLayerUnordered as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerUnordered() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerUnordered())
+// KCAEmitterLayerUnordered returns the string constant kCAEmitterLayerUnordered, for use as a dictionary key or argument.
+func KCAEmitterLayerUnordered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerUnordered")))
 }
 
-// KCAEmitterLayerOldestFirst returns the string constant kCAEmitterLayerOldestFirst as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerOldestFirst() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerOldestFirst())
+// KCAEmitterLayerOldestFirst returns the string constant kCAEmitterLayerOldestFirst, for use as a dictionary key or argument.
+func KCAEmitterLayerOldestFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerOldestFirst")))
 }
 
-// KCAEmitterLayerOldestLast returns the string constant kCAEmitterLayerOldestLast as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerOldestLast() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerOldestLast())
+// KCAEmitterLayerOldestLast returns the string constant kCAEmitterLayerOldestLast, for use as a dictionary key or argument.
+func KCAEmitterLayerOldestLast() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerOldestLast")))
 }
 
-// KCAEmitterLayerBackToFront returns the string constant kCAEmitterLayerBackToFront as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerBackToFront() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerBackToFront())
+// KCAEmitterLayerBackToFront returns the string constant kCAEmitterLayerBackToFront, for use as a dictionary key or argument.
+func KCAEmitterLayerBackToFront() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerBackToFront")))
 }
 
-// KCAEmitterLayerAdditive returns the string constant kCAEmitterLayerAdditive as an objc.ID, for use as a dictionary key or selector argument.
-func KCAEmitterLayerAdditive() objc.ID {
-	return purego.CFConstant(raw.KCAEmitterLayerAdditive())
+// KCAEmitterLayerAdditive returns the string constant kCAEmitterLayerAdditive, for use as a dictionary key or argument.
+func KCAEmitterLayerAdditive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAEmitterLayerAdditive")))
 }
 
-// KCAMediaTimingFunctionLinear returns the string constant kCAMediaTimingFunctionLinear as an objc.ID, for use as a dictionary key or selector argument.
-func KCAMediaTimingFunctionLinear() objc.ID {
-	return purego.CFConstant(raw.KCAMediaTimingFunctionLinear())
+// KCAMediaTimingFunctionLinear returns the string constant kCAMediaTimingFunctionLinear, for use as a dictionary key or argument.
+func KCAMediaTimingFunctionLinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAMediaTimingFunctionLinear")))
 }
 
-// KCAMediaTimingFunctionEaseIn returns the string constant kCAMediaTimingFunctionEaseIn as an objc.ID, for use as a dictionary key or selector argument.
-func KCAMediaTimingFunctionEaseIn() objc.ID {
-	return purego.CFConstant(raw.KCAMediaTimingFunctionEaseIn())
+// KCAMediaTimingFunctionEaseIn returns the string constant kCAMediaTimingFunctionEaseIn, for use as a dictionary key or argument.
+func KCAMediaTimingFunctionEaseIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAMediaTimingFunctionEaseIn")))
 }
 
-// KCAMediaTimingFunctionEaseOut returns the string constant kCAMediaTimingFunctionEaseOut as an objc.ID, for use as a dictionary key or selector argument.
-func KCAMediaTimingFunctionEaseOut() objc.ID {
-	return purego.CFConstant(raw.KCAMediaTimingFunctionEaseOut())
+// KCAMediaTimingFunctionEaseOut returns the string constant kCAMediaTimingFunctionEaseOut, for use as a dictionary key or argument.
+func KCAMediaTimingFunctionEaseOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAMediaTimingFunctionEaseOut")))
 }
 
-// KCAMediaTimingFunctionEaseInEaseOut returns the string constant kCAMediaTimingFunctionEaseInEaseOut as an objc.ID, for use as a dictionary key or selector argument.
-func KCAMediaTimingFunctionEaseInEaseOut() objc.ID {
-	return purego.CFConstant(raw.KCAMediaTimingFunctionEaseInEaseOut())
+// KCAMediaTimingFunctionEaseInEaseOut returns the string constant kCAMediaTimingFunctionEaseInEaseOut, for use as a dictionary key or argument.
+func KCAMediaTimingFunctionEaseInEaseOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAMediaTimingFunctionEaseInEaseOut")))
 }
 
-// KCAMediaTimingFunctionDefault returns the string constant kCAMediaTimingFunctionDefault as an objc.ID, for use as a dictionary key or selector argument.
-func KCAMediaTimingFunctionDefault() objc.ID {
-	return purego.CFConstant(raw.KCAMediaTimingFunctionDefault())
+// KCAMediaTimingFunctionDefault returns the string constant kCAMediaTimingFunctionDefault, for use as a dictionary key or argument.
+func KCAMediaTimingFunctionDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAMediaTimingFunctionDefault")))
 }
 
-// KCAGradientLayerAxial returns the string constant kCAGradientLayerAxial as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGradientLayerAxial() objc.ID {
-	return purego.CFConstant(raw.KCAGradientLayerAxial())
+// KCAGradientLayerAxial returns the string constant kCAGradientLayerAxial, for use as a dictionary key or argument.
+func KCAGradientLayerAxial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGradientLayerAxial")))
 }
 
-// KCAGradientLayerRadial returns the string constant kCAGradientLayerRadial as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGradientLayerRadial() objc.ID {
-	return purego.CFConstant(raw.KCAGradientLayerRadial())
+// KCAGradientLayerRadial returns the string constant kCAGradientLayerRadial, for use as a dictionary key or argument.
+func KCAGradientLayerRadial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGradientLayerRadial")))
 }
 
-// KCAGradientLayerConic returns the string constant kCAGradientLayerConic as an objc.ID, for use as a dictionary key or selector argument.
-func KCAGradientLayerConic() objc.ID {
-	return purego.CFConstant(raw.KCAGradientLayerConic())
+// KCAGradientLayerConic returns the string constant kCAGradientLayerConic, for use as a dictionary key or argument.
+func KCAGradientLayerConic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAGradientLayerConic")))
 }
 
-// KCARendererColorSpace returns the string constant kCARendererColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func KCARendererColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCARendererColorSpace())
+// KCARendererColorSpace returns the string constant kCARendererColorSpace, for use as a dictionary key or argument.
+func KCARendererColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCARendererColorSpace")))
 }
 
-// KCARendererMetalCommandQueue returns the string constant kCARendererMetalCommandQueue as an objc.ID, for use as a dictionary key or selector argument.
-func KCARendererMetalCommandQueue() objc.ID {
-	return purego.CFConstant(raw.KCARendererMetalCommandQueue())
+// KCARendererMetalCommandQueue returns the string constant kCARendererMetalCommandQueue, for use as a dictionary key or argument.
+func KCARendererMetalCommandQueue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCARendererMetalCommandQueue")))
 }
 
-// KCAScrollNone returns the string constant kCAScrollNone as an objc.ID, for use as a dictionary key or selector argument.
-func KCAScrollNone() objc.ID {
-	return purego.CFConstant(raw.KCAScrollNone())
-}
+// KCAScrollNone returns the string constant kCAScrollNone, for use as a dictionary key or argument.
+func KCAScrollNone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAScrollNone"))) }
 
-// KCAScrollVertically returns the string constant kCAScrollVertically as an objc.ID, for use as a dictionary key or selector argument.
-func KCAScrollVertically() objc.ID {
-	return purego.CFConstant(raw.KCAScrollVertically())
+// KCAScrollVertically returns the string constant kCAScrollVertically, for use as a dictionary key or argument.
+func KCAScrollVertically() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAScrollVertically")))
 }
 
-// KCAScrollHorizontally returns the string constant kCAScrollHorizontally as an objc.ID, for use as a dictionary key or selector argument.
-func KCAScrollHorizontally() objc.ID {
-	return purego.CFConstant(raw.KCAScrollHorizontally())
+// KCAScrollHorizontally returns the string constant kCAScrollHorizontally, for use as a dictionary key or argument.
+func KCAScrollHorizontally() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAScrollHorizontally")))
 }
 
-// KCAScrollBoth returns the string constant kCAScrollBoth as an objc.ID, for use as a dictionary key or selector argument.
-func KCAScrollBoth() objc.ID {
-	return purego.CFConstant(raw.KCAScrollBoth())
-}
+// KCAScrollBoth returns the string constant kCAScrollBoth, for use as a dictionary key or argument.
+func KCAScrollBoth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAScrollBoth"))) }
 
-// KCAFillRuleNonZero returns the string constant kCAFillRuleNonZero as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillRuleNonZero() objc.ID {
-	return purego.CFConstant(raw.KCAFillRuleNonZero())
+// KCAFillRuleNonZero returns the string constant kCAFillRuleNonZero, for use as a dictionary key or argument.
+func KCAFillRuleNonZero() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFillRuleNonZero")))
 }
 
-// KCAFillRuleEvenOdd returns the string constant kCAFillRuleEvenOdd as an objc.ID, for use as a dictionary key or selector argument.
-func KCAFillRuleEvenOdd() objc.ID {
-	return purego.CFConstant(raw.KCAFillRuleEvenOdd())
+// KCAFillRuleEvenOdd returns the string constant kCAFillRuleEvenOdd, for use as a dictionary key or argument.
+func KCAFillRuleEvenOdd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAFillRuleEvenOdd")))
 }
 
-// KCALineJoinMiter returns the string constant kCALineJoinMiter as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineJoinMiter() objc.ID {
-	return purego.CFConstant(raw.KCALineJoinMiter())
-}
+// KCALineJoinMiter returns the string constant kCALineJoinMiter, for use as a dictionary key or argument.
+func KCALineJoinMiter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineJoinMiter"))) }
 
-// KCALineJoinRound returns the string constant kCALineJoinRound as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineJoinRound() objc.ID {
-	return purego.CFConstant(raw.KCALineJoinRound())
-}
+// KCALineJoinRound returns the string constant kCALineJoinRound, for use as a dictionary key or argument.
+func KCALineJoinRound() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineJoinRound"))) }
 
-// KCALineJoinBevel returns the string constant kCALineJoinBevel as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineJoinBevel() objc.ID {
-	return purego.CFConstant(raw.KCALineJoinBevel())
-}
+// KCALineJoinBevel returns the string constant kCALineJoinBevel, for use as a dictionary key or argument.
+func KCALineJoinBevel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineJoinBevel"))) }
 
-// KCALineCapButt returns the string constant kCALineCapButt as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineCapButt() objc.ID {
-	return purego.CFConstant(raw.KCALineCapButt())
-}
+// KCALineCapButt returns the string constant kCALineCapButt, for use as a dictionary key or argument.
+func KCALineCapButt() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineCapButt"))) }
 
-// KCALineCapRound returns the string constant kCALineCapRound as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineCapRound() objc.ID {
-	return purego.CFConstant(raw.KCALineCapRound())
-}
+// KCALineCapRound returns the string constant kCALineCapRound, for use as a dictionary key or argument.
+func KCALineCapRound() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineCapRound"))) }
 
-// KCALineCapSquare returns the string constant kCALineCapSquare as an objc.ID, for use as a dictionary key or selector argument.
-func KCALineCapSquare() objc.ID {
-	return purego.CFConstant(raw.KCALineCapSquare())
-}
+// KCALineCapSquare returns the string constant kCALineCapSquare, for use as a dictionary key or argument.
+func KCALineCapSquare() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCALineCapSquare"))) }
 
-// KCATruncationNone returns the string constant kCATruncationNone as an objc.ID, for use as a dictionary key or selector argument.
-func KCATruncationNone() objc.ID {
-	return purego.CFConstant(raw.KCATruncationNone())
-}
+// KCATruncationNone returns the string constant kCATruncationNone, for use as a dictionary key or argument.
+func KCATruncationNone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCATruncationNone"))) }
 
-// KCATruncationStart returns the string constant kCATruncationStart as an objc.ID, for use as a dictionary key or selector argument.
-func KCATruncationStart() objc.ID {
-	return purego.CFConstant(raw.KCATruncationStart())
+// KCATruncationStart returns the string constant kCATruncationStart, for use as a dictionary key or argument.
+func KCATruncationStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATruncationStart")))
 }
 
-// KCATruncationEnd returns the string constant kCATruncationEnd as an objc.ID, for use as a dictionary key or selector argument.
-func KCATruncationEnd() objc.ID {
-	return purego.CFConstant(raw.KCATruncationEnd())
-}
+// KCATruncationEnd returns the string constant kCATruncationEnd, for use as a dictionary key or argument.
+func KCATruncationEnd() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCATruncationEnd"))) }
 
-// KCATruncationMiddle returns the string constant kCATruncationMiddle as an objc.ID, for use as a dictionary key or selector argument.
-func KCATruncationMiddle() objc.ID {
-	return purego.CFConstant(raw.KCATruncationMiddle())
+// KCATruncationMiddle returns the string constant kCATruncationMiddle, for use as a dictionary key or argument.
+func KCATruncationMiddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATruncationMiddle")))
 }
 
-// KCAAlignmentNatural returns the string constant kCAAlignmentNatural as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAlignmentNatural() objc.ID {
-	return purego.CFConstant(raw.KCAAlignmentNatural())
+// KCAAlignmentNatural returns the string constant kCAAlignmentNatural, for use as a dictionary key or argument.
+func KCAAlignmentNatural() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAlignmentNatural")))
 }
 
-// KCAAlignmentLeft returns the string constant kCAAlignmentLeft as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAlignmentLeft() objc.ID {
-	return purego.CFConstant(raw.KCAAlignmentLeft())
-}
+// KCAAlignmentLeft returns the string constant kCAAlignmentLeft, for use as a dictionary key or argument.
+func KCAAlignmentLeft() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAAlignmentLeft"))) }
 
-// KCAAlignmentRight returns the string constant kCAAlignmentRight as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAlignmentRight() objc.ID {
-	return purego.CFConstant(raw.KCAAlignmentRight())
-}
+// KCAAlignmentRight returns the string constant kCAAlignmentRight, for use as a dictionary key or argument.
+func KCAAlignmentRight() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCAAlignmentRight"))) }
 
-// KCAAlignmentCenter returns the string constant kCAAlignmentCenter as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAlignmentCenter() objc.ID {
-	return purego.CFConstant(raw.KCAAlignmentCenter())
+// KCAAlignmentCenter returns the string constant kCAAlignmentCenter, for use as a dictionary key or argument.
+func KCAAlignmentCenter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAlignmentCenter")))
 }
 
-// KCAAlignmentJustified returns the string constant kCAAlignmentJustified as an objc.ID, for use as a dictionary key or selector argument.
-func KCAAlignmentJustified() objc.ID {
-	return purego.CFConstant(raw.KCAAlignmentJustified())
+// KCAAlignmentJustified returns the string constant kCAAlignmentJustified, for use as a dictionary key or argument.
+func KCAAlignmentJustified() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAAlignmentJustified")))
 }
 
-// KCATransactionAnimationDuration returns the string constant kCATransactionAnimationDuration as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransactionAnimationDuration() objc.ID {
-	return purego.CFConstant(raw.KCATransactionAnimationDuration())
+// KCATransactionAnimationDuration returns the string constant kCATransactionAnimationDuration, for use as a dictionary key or argument.
+func KCATransactionAnimationDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransactionAnimationDuration")))
 }
 
-// KCATransactionDisableActions returns the string constant kCATransactionDisableActions as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransactionDisableActions() objc.ID {
-	return purego.CFConstant(raw.KCATransactionDisableActions())
+// KCATransactionDisableActions returns the string constant kCATransactionDisableActions, for use as a dictionary key or argument.
+func KCATransactionDisableActions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransactionDisableActions")))
 }
 
-// KCATransactionAnimationTimingFunction returns the string constant kCATransactionAnimationTimingFunction as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransactionAnimationTimingFunction() objc.ID {
-	return purego.CFConstant(raw.KCATransactionAnimationTimingFunction())
+// KCATransactionAnimationTimingFunction returns the string constant kCATransactionAnimationTimingFunction, for use as a dictionary key or argument.
+func KCATransactionAnimationTimingFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransactionAnimationTimingFunction")))
 }
 
-// KCATransactionCompletionBlock returns the string constant kCATransactionCompletionBlock as an objc.ID, for use as a dictionary key or selector argument.
-func KCATransactionCompletionBlock() objc.ID {
-	return purego.CFConstant(raw.KCATransactionCompletionBlock())
+// KCATransactionCompletionBlock returns the string constant kCATransactionCompletionBlock, for use as a dictionary key or argument.
+func KCATransactionCompletionBlock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCATransactionCompletionBlock")))
 }
 
-// KCAValueFunctionRotateX returns the string constant kCAValueFunctionRotateX as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionRotateX() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionRotateX())
+// KCAValueFunctionRotateX returns the string constant kCAValueFunctionRotateX, for use as a dictionary key or argument.
+func KCAValueFunctionRotateX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionRotateX")))
 }
 
-// KCAValueFunctionRotateY returns the string constant kCAValueFunctionRotateY as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionRotateY() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionRotateY())
+// KCAValueFunctionRotateY returns the string constant kCAValueFunctionRotateY, for use as a dictionary key or argument.
+func KCAValueFunctionRotateY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionRotateY")))
 }
 
-// KCAValueFunctionRotateZ returns the string constant kCAValueFunctionRotateZ as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionRotateZ() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionRotateZ())
+// KCAValueFunctionRotateZ returns the string constant kCAValueFunctionRotateZ, for use as a dictionary key or argument.
+func KCAValueFunctionRotateZ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionRotateZ")))
 }
 
-// KCAValueFunctionScale returns the string constant kCAValueFunctionScale as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionScale() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionScale())
+// KCAValueFunctionScale returns the string constant kCAValueFunctionScale, for use as a dictionary key or argument.
+func KCAValueFunctionScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionScale")))
 }
 
-// KCAValueFunctionScaleX returns the string constant kCAValueFunctionScaleX as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionScaleX() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionScaleX())
+// KCAValueFunctionScaleX returns the string constant kCAValueFunctionScaleX, for use as a dictionary key or argument.
+func KCAValueFunctionScaleX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionScaleX")))
 }
 
-// KCAValueFunctionScaleY returns the string constant kCAValueFunctionScaleY as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionScaleY() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionScaleY())
+// KCAValueFunctionScaleY returns the string constant kCAValueFunctionScaleY, for use as a dictionary key or argument.
+func KCAValueFunctionScaleY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionScaleY")))
 }
 
-// KCAValueFunctionScaleZ returns the string constant kCAValueFunctionScaleZ as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionScaleZ() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionScaleZ())
+// KCAValueFunctionScaleZ returns the string constant kCAValueFunctionScaleZ, for use as a dictionary key or argument.
+func KCAValueFunctionScaleZ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionScaleZ")))
 }
 
-// KCAValueFunctionTranslate returns the string constant kCAValueFunctionTranslate as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionTranslate() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionTranslate())
+// KCAValueFunctionTranslate returns the string constant kCAValueFunctionTranslate, for use as a dictionary key or argument.
+func KCAValueFunctionTranslate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionTranslate")))
 }
 
-// KCAValueFunctionTranslateX returns the string constant kCAValueFunctionTranslateX as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionTranslateX() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionTranslateX())
+// KCAValueFunctionTranslateX returns the string constant kCAValueFunctionTranslateX, for use as a dictionary key or argument.
+func KCAValueFunctionTranslateX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionTranslateX")))
 }
 
-// KCAValueFunctionTranslateY returns the string constant kCAValueFunctionTranslateY as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionTranslateY() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionTranslateY())
+// KCAValueFunctionTranslateY returns the string constant kCAValueFunctionTranslateY, for use as a dictionary key or argument.
+func KCAValueFunctionTranslateY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionTranslateY")))
 }
 
-// KCAValueFunctionTranslateZ returns the string constant kCAValueFunctionTranslateZ as an objc.ID, for use as a dictionary key or selector argument.
-func KCAValueFunctionTranslateZ() objc.ID {
-	return purego.CFConstant(raw.KCAValueFunctionTranslateZ())
+// KCAValueFunctionTranslateZ returns the string constant kCAValueFunctionTranslateZ, for use as a dictionary key or argument.
+func KCAValueFunctionTranslateZ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionTranslateZ")))
 }

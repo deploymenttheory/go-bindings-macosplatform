@@ -6,82 +6,98 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An operation that manages the concurrent execution of one or more blocks.
+// BlockOperation is an idiomatic wrapper over the Objective-C class NSBlockOperation.
 //
-// BlockOperation wraps [raw.NSBlockOperation] with a fluent Go API.
+// It embeds [Operation], promoting that type's methods.
+//
+// An operation that manages the concurrent execution of one or more blocks.
 type BlockOperation struct {
-	inner *raw.NSBlockOperation
+	Operation
 }
 
-// Unwrap returns the underlying [raw.NSBlockOperation].
-func (x *BlockOperation) Unwrap() *raw.NSBlockOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BlockOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// BlockOperationFromID adopts an existing object pointer as a BlockOperation (nil for 0).
+// BlockOperationFromID adopts an existing Objective-C object as a BlockOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func BlockOperationFromID(id objc.ID) *BlockOperation {
 	if id == 0 {
 		return nil
 	}
-	return &BlockOperation{inner: raw.NSBlockOperationFromID(id)}
+	x := &BlockOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBlockOperation creates a new [BlockOperation].
+// blockOperationAdopt wraps an Objective-C object that this code just created as a
+// BlockOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func blockOperationAdopt(id objc.ID) *BlockOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &BlockOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBlockOperation creates a new BlockOperation.
 func NewBlockOperation() *BlockOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBlockOperation")), objc.RegisterName("new"))
-	return &BlockOperation{inner: raw.NSBlockOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSBlockOperation")), objc.RegisterName("new"))
+	return blockOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
-func (x *BlockOperation) WithQueuePriority(queuePriority NSOperationQueuePriority) *BlockOperation {
-	x.inner.NSOperation.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
+// WithQueuePriority sets the property and returns the receiver so calls can be chained.
+func (x *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return x
 }
 
-// WithCompletionBlock sets the completionBlock property and returns the receiver for chaining.
+// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
-	x.inner.NSOperation.SetCompletionBlock(completionBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return x
 }
 
-// WithThreadPriority sets the threadPriority property and returns the receiver for chaining.
+// WithThreadPriority sets the property and returns the receiver so calls can be chained.
 func (x *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
-	x.inner.NSOperation.SetThreadPriority(threadPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return x
 }
 
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *BlockOperation) WithQualityOfService(qualityOfService NSQualityOfService) *BlockOperation {
-	x.inner.NSOperation.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+func (x *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
-func (x *BlockOperation) WithName(name string) *BlockOperation {
-	x.inner.NSOperation.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets the property and returns the receiver so calls can be chained.
+func (x *BlockOperation) WithName(name StringProvider) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *BlockOperation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BlockOperation {
-	x.inner.NSOperation.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// AddExecutionBlock wraps the corresponding Objective-C method.
+//
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.AddExecutionBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addExecutionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -90,26 +106,18 @@ func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	}
 }
 
-// ExecutionBlocks calls the underlying ExecutionBlocks.
-func (x *BlockOperation) ExecutionBlocks() unsafe.Pointer {
-	return x.inner.ExecutionBlocks()
-}
-
-func (x *BlockOperation) asOperation() *raw.NSOperation { return &x.inner.NSOperation }
-
-func (x *BlockOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.NSObject }
-
 // BlockOperationable is the interface implemented by [BlockOperation], for mocking and DI.
 type BlockOperationable interface {
-	Unwrap() *raw.NSBlockOperation
-	WithQueuePriority(queuePriority NSOperationQueuePriority) *BlockOperation
+	obj.Object
+	WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation
 	WithCompletionBlock(completionBlock func()) *BlockOperation
 	WithThreadPriority(threadPriority float64) *BlockOperation
-	WithQualityOfService(qualityOfService NSQualityOfService) *BlockOperation
-	WithName(name string) *BlockOperation
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BlockOperation
+	WithQualityOfService(qualityOfService QualityOfService) *BlockOperation
+	WithName(name StringProvider) *BlockOperation
+	WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation
 	AddExecutionBlock(ctx context.Context) error
-	ExecutionBlocks() unsafe.Pointer
 }
 
 var _ BlockOperationable = (*BlockOperation)(nil)
+
+var _ OperationProvider = (*BlockOperation)(nil)

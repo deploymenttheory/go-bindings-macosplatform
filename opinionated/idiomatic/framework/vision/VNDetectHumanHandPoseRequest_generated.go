@@ -5,145 +5,137 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A request that detects a human hand pose.
+// DetectHumanHandPoseRequest is an idiomatic wrapper over the Objective-C class VNDetectHumanHandPoseRequest.
 //
-// DetectHumanHandPoseRequest wraps [raw.VNDetectHumanHandPoseRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that detects a human hand pose.
 type DetectHumanHandPoseRequest struct {
-	inner *raw.VNDetectHumanHandPoseRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectHumanHandPoseRequest].
-func (x *DetectHumanHandPoseRequest) Unwrap() *raw.VNDetectHumanHandPoseRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectHumanHandPoseRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectHumanHandPoseRequestFromID adopts an existing object pointer as a DetectHumanHandPoseRequest (nil for 0).
+// DetectHumanHandPoseRequestFromID adopts an existing Objective-C object as a DetectHumanHandPoseRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectHumanHandPoseRequestFromID(id objc.ID) *DetectHumanHandPoseRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectHumanHandPoseRequest{inner: raw.VNDetectHumanHandPoseRequestFromID(id)}
+	x := &DetectHumanHandPoseRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectHumanHandPoseRequest creates a new [DetectHumanHandPoseRequest].
+// detectHumanHandPoseRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectHumanHandPoseRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectHumanHandPoseRequestAdopt(id objc.ID) *DetectHumanHandPoseRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectHumanHandPoseRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectHumanHandPoseRequest creates a new DetectHumanHandPoseRequest.
 func NewDetectHumanHandPoseRequest() *DetectHumanHandPoseRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectHumanHandPoseRequest")), objc.RegisterName("new"))
-	return &DetectHumanHandPoseRequest{inner: raw.VNDetectHumanHandPoseRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanHandPoseRequest")), objc.RegisterName("new"))
+	return detectHumanHandPoseRequestAdopt(_id)
 }
 
-// The maximum number of hands to detect in an image.
-//
-// WithMaximumHandCount sets the maximumHandCount property and returns the receiver for chaining.
-func (x *DetectHumanHandPoseRequest) WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest {
-	x.inner.SetMaximumHandCount(maximumHandCount)
+// WithMaximumHandCount the maximum number of hands to detect in an image.
+func (x *DetectHumanHandPoseRequest) WithMaximumHandCount(maximumHandCount int) *DetectHumanHandPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumHandCount:"), maximumHandCount)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectHumanHandPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanHandPoseRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectHumanHandPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanHandPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectHumanHandPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanHandPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectHumanHandPoseRequest) WithRevision(revision uint) *DetectHumanHandPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectHumanHandPoseRequest) WithRevision(revision int) *DetectHumanHandPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Retrieves the supported joint names.
+// SupportedJointNames retrieves the supported joint names.
 //
 // SupportedJointNames returns the collection as a Go slice.
-func (x *DetectHumanHandPoseRequest) SupportedJointNames() ([]*foundation.NSString, error) {
-	arr, err := x.inner.SupportedJointNamesAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *DetectHumanHandPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	}), nil
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Retrieves the supported joint group names.
+// SupportedJointsGroupNames retrieves the supported joint group names.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
-func (x *DetectHumanHandPoseRequest) SupportedJointsGroupNames() ([]*foundation.NSString, error) {
-	arr, err := x.inner.SupportedJointsGroupNamesAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *DetectHumanHandPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	}), nil
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// @brief Defines an upper bounds to the maximum number of hands that will be processed for key points in an image. @discussion The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.
-//
-// MaximumHandCount calls the underlying MaximumHandCount.
-func (x *DetectHumanHandPoseRequest) MaximumHandCount() uint {
-	return x.inner.MaximumHandCount()
+// MaximumHandCount defines an upper bounds to the maximum number of hands that will be processed for key points in an image. The complexity in key points determination is scalable by the number of hands to be processed.  All hands detected in an image will be ordered by relative size, with only the N largest ones having key points determined.  The default value for this property is 2. The maximum value for VNDetectHumanHandPoseRequestRevision1 is 6.
+func (x *DetectHumanHandPoseRequest) MaximumHandCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumHandCount"))
+	return _r
 }
 
-// SetMaximumHandCount calls the underlying SetMaximumHandCount.
-func (x *DetectHumanHandPoseRequest) SetMaximumHandCount(maximumHandCount uint) {
-	x.inner.SetMaximumHandCount(maximumHandCount)
-}
-
-func (x *DetectHumanHandPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectHumanHandPoseRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+// SetMaximumHandCount wraps the corresponding Objective-C method.
+func (x *DetectHumanHandPoseRequest) SetMaximumHandCount(maximumHandCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumHandCount:"), maximumHandCount)
 }
 
 // DetectHumanHandPoseRequestable is the interface implemented by [DetectHumanHandPoseRequest], for mocking and DI.
 type DetectHumanHandPoseRequestable interface {
-	Unwrap() *raw.VNDetectHumanHandPoseRequest
-	WithMaximumHandCount(maximumHandCount uint) *DetectHumanHandPoseRequest
+	obj.Object
+	WithMaximumHandCount(maximumHandCount int) *DetectHumanHandPoseRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHumanHandPoseRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHumanHandPoseRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectHumanHandPoseRequest
-	WithRevision(revision uint) *DetectHumanHandPoseRequest
-	SupportedJointNames() ([]*foundation.NSString, error)
-	SupportedJointsGroupNames() ([]*foundation.NSString, error)
-	MaximumHandCount() uint
-	SetMaximumHandCount(maximumHandCount uint)
+	WithRevision(revision int) *DetectHumanHandPoseRequest
+	SupportedJointNames() ([]obj.Object, error)
+	SupportedJointsGroupNames() ([]obj.Object, error)
+	MaximumHandCount() int
+	SetMaximumHandCount(maximumHandCount int)
 }
 
 var _ DetectHumanHandPoseRequestable = (*DetectHumanHandPoseRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectHumanHandPoseRequest)(nil)
+
+var _ RequestProvider = (*DetectHumanHandPoseRequest)(nil)

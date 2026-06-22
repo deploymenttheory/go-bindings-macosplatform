@@ -5,57 +5,65 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
+// VirtioConsoleDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioConsoleDeviceConfiguration.
 //
-// VirtioConsoleDeviceConfiguration wraps [raw.VZVirtioConsoleDeviceConfiguration] with a fluent Go API.
+// It embeds [ConsoleDeviceConfiguration], promoting that type's methods.
+//
+// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
 type VirtioConsoleDeviceConfiguration struct {
-	inner *raw.VZVirtioConsoleDeviceConfiguration
+	ConsoleDeviceConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioConsoleDeviceConfiguration].
-func (x *VirtioConsoleDeviceConfiguration) Unwrap() *raw.VZVirtioConsoleDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioConsoleDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioConsoleDeviceConfigurationFromID adopts an existing object pointer as a VirtioConsoleDeviceConfiguration (nil for 0).
+// VirtioConsoleDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioConsoleDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioConsoleDeviceConfigurationFromID(id objc.ID) *VirtioConsoleDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioConsoleDeviceConfiguration{inner: raw.VZVirtioConsoleDeviceConfigurationFromID(id)}
+	x := &VirtioConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioConsoleDeviceConfiguration creates a new [VirtioConsoleDeviceConfiguration].
-func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioConsoleDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioConsoleDeviceConfiguration{inner: raw.VZVirtioConsoleDeviceConfigurationFromID(_id)}
-}
-
-// Ports calls the underlying Ports.
-func (x *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
-	_r := x.inner.Ports()
-	if _r == nil {
+// virtioConsoleDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioConsoleDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioConsoleDeviceConfigurationAdopt(id objc.ID) *VirtioConsoleDeviceConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &VirtioConsolePortConfigurationArray{inner: _r}
+	x := &VirtioConsoleDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *VirtioConsoleDeviceConfiguration) asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration {
-	return &x.inner.VZConsoleDeviceConfiguration
+// NewVirtioConsoleDeviceConfiguration creates a new VirtioConsoleDeviceConfiguration.
+func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsoleDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioConsoleDeviceConfigurationAdopt(_id)
+}
+
+// Ports wraps the corresponding Objective-C method.
+func (x *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
+	return VirtioConsolePortConfigurationArrayFromID(_r)
 }
 
 // VirtioConsoleDeviceConfigurationable is the interface implemented by [VirtioConsoleDeviceConfiguration], for mocking and DI.
 type VirtioConsoleDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioConsoleDeviceConfiguration
+	obj.Object
 	Ports() *VirtioConsolePortConfigurationArray
 }
 
 var _ VirtioConsoleDeviceConfigurationable = (*VirtioConsoleDeviceConfiguration)(nil)
+
+var _ ConsoleDeviceConfigurationProvider = (*VirtioConsoleDeviceConfiguration)(nil)

@@ -5,39 +5,74 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROnboardingPayloadParser wraps [raw.MTROnboardingPayloadParser] with a fluent Go API.
+// MTROnboardingPayloadParser is an idiomatic wrapper over the Objective-C class MTROnboardingPayloadParser.
 type MTROnboardingPayloadParser struct {
-	inner *raw.MTROnboardingPayloadParser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROnboardingPayloadParser].
-func (x *MTROnboardingPayloadParser) Unwrap() *raw.MTROnboardingPayloadParser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROnboardingPayloadParser) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROnboardingPayloadParserFromID adopts an existing object pointer as a MTROnboardingPayloadParser (nil for 0).
+// MTROnboardingPayloadParserFromID adopts an existing Objective-C object as a MTROnboardingPayloadParser
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROnboardingPayloadParserFromID(id objc.ID) *MTROnboardingPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	return &MTROnboardingPayloadParser{inner: raw.MTROnboardingPayloadParserFromID(id)}
+	x := &MTROnboardingPayloadParser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTROnboardingPayloadParser creates a new [MTROnboardingPayloadParser].
+// mTROnboardingPayloadParserAdopt wraps an Objective-C object that this code just created as a
+// MTROnboardingPayloadParser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROnboardingPayloadParserAdopt(id objc.ID) *MTROnboardingPayloadParser {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROnboardingPayloadParser{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROnboardingPayloadParser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROnboardingPayloadParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROnboardingPayloadParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROnboardingPayloadParser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROnboardingPayloadParser creates a new MTROnboardingPayloadParser.
 func NewMTROnboardingPayloadParser() *MTROnboardingPayloadParser {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROnboardingPayloadParser")), objc.RegisterName("new"))
-	return &MTROnboardingPayloadParser{inner: raw.MTROnboardingPayloadParserFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROnboardingPayloadParser")), objc.RegisterName("new"))
+	return mTROnboardingPayloadParserAdopt(_id)
 }
 
 // MTROnboardingPayloadParserable is the interface implemented by [MTROnboardingPayloadParser], for mocking and DI.
 type MTROnboardingPayloadParserable interface {
-	Unwrap() *raw.MTROnboardingPayloadParser
+	obj.Object
 }
 
 var _ MTROnboardingPayloadParserable = (*MTROnboardingPayloadParser)(nil)

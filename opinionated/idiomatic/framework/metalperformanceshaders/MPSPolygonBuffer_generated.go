@@ -5,224 +5,161 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// PolygonBuffer wraps [raw.MPSPolygonBuffer] with a fluent Go API.
+// PolygonBuffer is an idiomatic wrapper over the Objective-C class MPSPolygonBuffer.
 type PolygonBuffer struct {
-	inner *raw.MPSPolygonBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSPolygonBuffer].
-func (x *PolygonBuffer) Unwrap() *raw.MPSPolygonBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PolygonBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// PolygonBufferFromID adopts an existing object pointer as a PolygonBuffer (nil for 0).
+// PolygonBufferFromID adopts an existing Objective-C object as a PolygonBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func PolygonBufferFromID(id objc.ID) *PolygonBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(id)}
-}
-
-// NewPolygonBuffer creates a new [PolygonBuffer].
-func NewPolygonBuffer() *PolygonBuffer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPolygonBuffer")), objc.RegisterName("new"))
-	return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(_id)}
-}
-
-// @brief Initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
-//
-// NewPolygonBufferWithCoder creates a new [PolygonBuffer].
-func NewPolygonBufferWithCoder(aDecoder *foundation.NSCoder) *PolygonBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPolygonBuffer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(_id)}
-}
-
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex.
-//
-// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonBuffer {
-	x.inner.SetVertexBuffer(vertexBuffer)
+	x := &PolygonBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithVertexBufferOffset(vertexBufferOffset uint) *PolygonBuffer {
-	x.inner.SetVertexBufferOffset(vertexBufferOffset)
-	return x
-}
-
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil.
-//
-// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonBuffer {
-	x.inner.SetIndexBuffer(indexBuffer)
-	return x
-}
-
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
-//
-// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithIndexBufferOffset(indexBufferOffset uint) *PolygonBuffer {
-	x.inner.SetIndexBufferOffset(indexBufferOffset)
-	return x
-}
-
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used.
-//
-// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonBuffer {
-	x.inner.SetMaskBuffer(maskBuffer)
-	return x
-}
-
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithMaskBufferOffset(maskBufferOffset uint) *PolygonBuffer {
-	x.inner.SetMaskBufferOffset(maskBufferOffset)
-	return x
-}
-
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure.
-//
-// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
-func (x *PolygonBuffer) WithPolygonCount(polygonCount uint) *PolygonBuffer {
-	x.inner.SetPolygonCount(polygonCount)
-	return x
-}
-
-// @brief Create a a copy of this polygon buffer @discussion Buffer properties of the polygon buffer such as the vertex buffer, instance, buffer, etc. are set to nil. Copy these buffers and assign them to the new polygon buffer or reassign the existing buffers to the new polygon buffer. @param zone This parameter is ignored. Memory zones are no longer used by Objective-C.
-//
-// CopyWithZone calls the underlying CopyWithZone.
-func (x *PolygonBuffer) CopyWithZone(zone unsafe.Pointer) *PolygonBuffer {
-	_r := x.inner.CopyWithZone(zone)
-	if _r == nil {
+// polygonBufferAdopt wraps an Objective-C object that this code just created as a
+// PolygonBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polygonBufferAdopt(id objc.ID) *PolygonBuffer {
+	if id == 0 {
 		return nil
 	}
-	return &PolygonBuffer{inner: _r}
+	x := &PolygonBuffer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex.
-//
-// VertexBuffer calls the underlying VertexBuffer.
-func (x *PolygonBuffer) VertexBuffer() metal.MTLBuffer {
-	return x.inner.VertexBuffer()
+// Description returns the object's -description text.
+func (x *PolygonBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetVertexBuffer calls the underlying SetVertexBuffer.
-func (x *PolygonBuffer) SetVertexBuffer(vertexBuffer metal.MTLBuffer) {
-	x.inner.SetVertexBuffer(vertexBuffer)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PolygonBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// VertexBufferOffset calls the underlying VertexBufferOffset.
-func (x *PolygonBuffer) VertexBufferOffset() uint {
-	return x.inner.VertexBufferOffset()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PolygonBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetVertexBufferOffset calls the underlying SetVertexBufferOffset.
-func (x *PolygonBuffer) SetVertexBufferOffset(vertexBufferOffset uint) {
-	x.inner.SetVertexBufferOffset(vertexBufferOffset)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PolygonBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil.
-//
-// IndexBuffer calls the underlying IndexBuffer.
-func (x *PolygonBuffer) IndexBuffer() metal.MTLBuffer {
-	return x.inner.IndexBuffer()
+// NewPolygonBuffer creates a new PolygonBuffer.
+func NewPolygonBuffer() *PolygonBuffer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("new"))
+	return polygonBufferAdopt(_id)
 }
 
-// SetIndexBuffer calls the underlying SetIndexBuffer.
-func (x *PolygonBuffer) SetIndexBuffer(indexBuffer metal.MTLBuffer) {
-	x.inner.SetIndexBuffer(indexBuffer)
+// NewPolygonBufferWithCoder initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
+func NewPolygonBufferWithCoder(aDecoder obj.Object) *PolygonBuffer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return polygonBufferAdopt(_id)
 }
 
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
-//
-// IndexBufferOffset calls the underlying IndexBufferOffset.
-func (x *PolygonBuffer) IndexBufferOffset() uint {
-	return x.inner.IndexBufferOffset()
+// WithVertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+func (x *PolygonBuffer) WithVertexBufferOffset(vertexBufferOffset int) *PolygonBuffer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
+	return x
 }
 
-// SetIndexBufferOffset calls the underlying SetIndexBufferOffset.
-func (x *PolygonBuffer) SetIndexBufferOffset(indexBufferOffset uint) {
-	x.inner.SetIndexBufferOffset(indexBufferOffset)
+// WithIndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonBuffer) WithIndexBufferOffset(indexBufferOffset int) *PolygonBuffer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+	return x
 }
 
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used.
-//
-// MaskBuffer calls the underlying MaskBuffer.
-func (x *PolygonBuffer) MaskBuffer() metal.MTLBuffer {
-	return x.inner.MaskBuffer()
+// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+func (x *PolygonBuffer) WithMaskBufferOffset(maskBufferOffset int) *PolygonBuffer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
+	return x
 }
 
-// SetMaskBuffer calls the underlying SetMaskBuffer.
-func (x *PolygonBuffer) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
-	x.inner.SetMaskBuffer(maskBuffer)
+// WithPolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonBuffer) WithPolygonCount(polygonCount int) *PolygonBuffer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
+	return x
 }
 
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
-//
-// MaskBufferOffset calls the underlying MaskBufferOffset.
-func (x *PolygonBuffer) MaskBufferOffset() uint {
-	return x.inner.MaskBufferOffset()
+// VertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+func (x *PolygonBuffer) VertexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexBufferOffset"))
+	return _r
 }
 
-// SetMaskBufferOffset calls the underlying SetMaskBufferOffset.
-func (x *PolygonBuffer) SetMaskBufferOffset(maskBufferOffset uint) {
-	x.inner.SetMaskBufferOffset(maskBufferOffset)
+// SetVertexBufferOffset wraps the corresponding Objective-C method.
+func (x *PolygonBuffer) SetVertexBufferOffset(vertexBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 }
 
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure.
-//
-// PolygonCount calls the underlying PolygonCount.
-func (x *PolygonBuffer) PolygonCount() uint {
-	return x.inner.PolygonCount()
+// IndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonBuffer) IndexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferOffset"))
+	return _r
 }
 
-// SetPolygonCount calls the underlying SetPolygonCount.
-func (x *PolygonBuffer) SetPolygonCount(polygonCount uint) {
-	x.inner.SetPolygonCount(polygonCount)
+// SetIndexBufferOffset wraps the corresponding Objective-C method.
+func (x *PolygonBuffer) SetIndexBufferOffset(indexBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+}
+
+// MaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+func (x *PolygonBuffer) MaskBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maskBufferOffset"))
+	return _r
+}
+
+// SetMaskBufferOffset wraps the corresponding Objective-C method.
+func (x *PolygonBuffer) SetMaskBufferOffset(maskBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
+}
+
+// PolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonBuffer) PolygonCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("polygonCount"))
+	return _r
+}
+
+// SetPolygonCount wraps the corresponding Objective-C method.
+func (x *PolygonBuffer) SetPolygonCount(polygonCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 }
 
 // PolygonBufferable is the interface implemented by [PolygonBuffer], for mocking and DI.
 type PolygonBufferable interface {
-	Unwrap() *raw.MPSPolygonBuffer
-	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonBuffer
-	WithVertexBufferOffset(vertexBufferOffset uint) *PolygonBuffer
-	WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonBuffer
-	WithIndexBufferOffset(indexBufferOffset uint) *PolygonBuffer
-	WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonBuffer
-	WithMaskBufferOffset(maskBufferOffset uint) *PolygonBuffer
-	WithPolygonCount(polygonCount uint) *PolygonBuffer
-	CopyWithZone(zone unsafe.Pointer) *PolygonBuffer
-	VertexBuffer() metal.MTLBuffer
-	SetVertexBuffer(vertexBuffer metal.MTLBuffer)
-	VertexBufferOffset() uint
-	SetVertexBufferOffset(vertexBufferOffset uint)
-	IndexBuffer() metal.MTLBuffer
-	SetIndexBuffer(indexBuffer metal.MTLBuffer)
-	IndexBufferOffset() uint
-	SetIndexBufferOffset(indexBufferOffset uint)
-	MaskBuffer() metal.MTLBuffer
-	SetMaskBuffer(maskBuffer metal.MTLBuffer)
-	MaskBufferOffset() uint
-	SetMaskBufferOffset(maskBufferOffset uint)
-	PolygonCount() uint
-	SetPolygonCount(polygonCount uint)
+	obj.Object
+	WithVertexBufferOffset(vertexBufferOffset int) *PolygonBuffer
+	WithIndexBufferOffset(indexBufferOffset int) *PolygonBuffer
+	WithMaskBufferOffset(maskBufferOffset int) *PolygonBuffer
+	WithPolygonCount(polygonCount int) *PolygonBuffer
+	VertexBufferOffset() int
+	SetVertexBufferOffset(vertexBufferOffset int)
+	IndexBufferOffset() int
+	SetIndexBufferOffset(indexBufferOffset int)
+	MaskBufferOffset() int
+	SetMaskBufferOffset(maskBufferOffset int)
+	PolygonCount() int
+	SetPolygonCount(polygonCount int)
 }
 
 var _ PolygonBufferable = (*PolygonBuffer)(nil)

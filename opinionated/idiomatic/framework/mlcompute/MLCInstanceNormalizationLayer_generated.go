@@ -5,150 +5,125 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that normalizes all features of one channel.
+// InstanceNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCInstanceNormalizationLayer.
 //
-// InstanceNormalizationLayer wraps [raw.MLCInstanceNormalizationLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that normalizes all features of one channel.
 type InstanceNormalizationLayer struct {
-	inner *raw.MLCInstanceNormalizationLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCInstanceNormalizationLayer].
-func (x *InstanceNormalizationLayer) Unwrap() *raw.MLCInstanceNormalizationLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InstanceNormalizationLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// InstanceNormalizationLayerFromID adopts an existing object pointer as a InstanceNormalizationLayer (nil for 0).
+// InstanceNormalizationLayerFromID adopts an existing Objective-C object as a InstanceNormalizationLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func InstanceNormalizationLayerFromID(id objc.ID) *InstanceNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	return &InstanceNormalizationLayer{inner: raw.MLCInstanceNormalizationLayerFromID(id)}
+	x := &InstanceNormalizationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInstanceNormalizationLayer creates a new [InstanceNormalizationLayer].
+// instanceNormalizationLayerAdopt wraps an Objective-C object that this code just created as a
+// InstanceNormalizationLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func instanceNormalizationLayerAdopt(id objc.ID) *InstanceNormalizationLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &InstanceNormalizationLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewInstanceNormalizationLayer creates a new InstanceNormalizationLayer.
 func NewInstanceNormalizationLayer() *InstanceNormalizationLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCInstanceNormalizationLayer")), objc.RegisterName("new"))
-	return &InstanceNormalizationLayer{inner: raw.MLCInstanceNormalizationLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("new"))
+	return instanceNormalizationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *InstanceNormalizationLayer) WithLabel(label string) *InstanceNormalizationLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *InstanceNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   featureChannelCount @abstract   The number of feature channels
-//
-// FeatureChannelCount calls the underlying FeatureChannelCount.
-func (x *InstanceNormalizationLayer) FeatureChannelCount() uint {
-	return x.inner.FeatureChannelCount()
+// FeatureChannelCount the number of feature channels
+func (x *InstanceNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+	return _r
 }
 
-// @property   mean @abstract   The running mean tensor
-//
-// Mean calls the underlying Mean.
+// Mean the running mean tensor
 func (x *InstanceNormalizationLayer) Mean() *Tensor {
-	_r := x.inner.Mean()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mean"))
+	return TensorFromID(_r)
 }
 
-// @property   variance @abstract   The running variance tensor
-//
-// Variance calls the underlying Variance.
+// Variance the running variance tensor
 func (x *InstanceNormalizationLayer) Variance() *Tensor {
-	_r := x.inner.Variance()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variance"))
+	return TensorFromID(_r)
 }
 
-// @property   beta @abstract   The beta tensor
-//
-// Beta calls the underlying Beta.
+// Beta the beta tensor
 func (x *InstanceNormalizationLayer) Beta() *Tensor {
-	_r := x.inner.Beta()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+	return TensorFromID(_r)
 }
 
-// @property   gamma @abstract   The gamma tensor
-//
-// Gamma calls the underlying Gamma.
+// Gamma the gamma tensor
 func (x *InstanceNormalizationLayer) Gamma() *Tensor {
-	_r := x.inner.Gamma()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+	return TensorFromID(_r)
 }
 
-// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
-//
-// BetaParameter calls the underlying BetaParameter.
+// BetaParameter the beta tensor parameter used for optimizer update
 func (x *InstanceNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := x.inner.BetaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
-//
-// GammaParameter calls the underlying GammaParameter.
+// GammaParameter the gamma tensor parameter used for optimizer update
 func (x *InstanceNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := x.inner.GammaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   varianceEpsilon @abstract   A value used for numerical stability
-//
-// VarianceEpsilon calls the underlying VarianceEpsilon.
+// VarianceEpsilon a value used for numerical stability
 func (x *InstanceNormalizationLayer) VarianceEpsilon() float32 {
-	return x.inner.VarianceEpsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+	return _r
 }
 
-// @property   momentum @abstract   The value used for the running mean and variance computation @discussion The default is 0.99f.
-//
-// Momentum calls the underlying Momentum.
+// Momentum the value used for the running mean and variance computation The default is 0.99f.
 func (x *InstanceNormalizationLayer) Momentum() float32 {
-	return x.inner.Momentum()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentum"))
+	return _r
 }
-
-func (x *InstanceNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // InstanceNormalizationLayerable is the interface implemented by [InstanceNormalizationLayer], for mocking and DI.
 type InstanceNormalizationLayerable interface {
-	Unwrap() *raw.MLCInstanceNormalizationLayer
+	obj.Object
 	WithLabel(label string) *InstanceNormalizationLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer
-	FeatureChannelCount() uint
+	FeatureChannelCount() int
 	Mean() *Tensor
 	Variance() *Tensor
 	Beta() *Tensor
@@ -160,3 +135,5 @@ type InstanceNormalizationLayerable interface {
 }
 
 var _ InstanceNormalizationLayerable = (*InstanceNormalizationLayer)(nil)
+
+var _ LayerProvider = (*InstanceNormalizationLayer)(nil)

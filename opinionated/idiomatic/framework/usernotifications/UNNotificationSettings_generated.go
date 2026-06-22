@@ -5,113 +5,160 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object for managing notification-related settings and the authorization status of your app.
+// NotificationSettings is an idiomatic wrapper over the Objective-C class UNNotificationSettings.
 //
-// NotificationSettings wraps [raw.UNNotificationSettings] with a fluent Go API.
+// The object for managing notification-related settings and the authorization status of your app.
 type NotificationSettings struct {
-	inner *raw.UNNotificationSettings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationSettings].
-func (x *NotificationSettings) Unwrap() *raw.UNNotificationSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationSettingsFromID adopts an existing object pointer as a NotificationSettings (nil for 0).
+// NotificationSettingsFromID adopts an existing Objective-C object as a NotificationSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationSettingsFromID(id objc.ID) *NotificationSettings {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationSettings{inner: raw.UNNotificationSettingsFromID(id)}
+	x := &NotificationSettings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationSettings creates a new [NotificationSettings].
+// notificationSettingsAdopt wraps an Objective-C object that this code just created as a
+// NotificationSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationSettingsAdopt(id objc.ID) *NotificationSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationSettings{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationSettings) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NotificationSettings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNotificationSettings creates a new NotificationSettings.
 func NewNotificationSettings() *NotificationSettings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationSettings")), objc.RegisterName("new"))
-	return &NotificationSettings{inner: raw.UNNotificationSettingsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationSettings")), objc.RegisterName("new"))
+	return notificationSettingsAdopt(_id)
 }
 
-// AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *NotificationSettings) AuthorizationStatus() UNAuthorizationStatus {
-	return UNAuthorizationStatus(x.inner.AuthorizationStatus())
+// AuthorizationStatus wraps the corresponding Objective-C method.
+func (x *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// SoundSetting calls the underlying SoundSetting.
-func (x *NotificationSettings) SoundSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.SoundSetting())
+// SoundSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) SoundSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("soundSetting"))
+	return _r
 }
 
-// BadgeSetting calls the underlying BadgeSetting.
-func (x *NotificationSettings) BadgeSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.BadgeSetting())
+// BadgeSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) BadgeSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("badgeSetting"))
+	return _r
 }
 
-// AlertSetting calls the underlying AlertSetting.
-func (x *NotificationSettings) AlertSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.AlertSetting())
+// AlertSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) AlertSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("alertSetting"))
+	return _r
 }
 
-// NotificationCenterSetting calls the underlying NotificationCenterSetting.
-func (x *NotificationSettings) NotificationCenterSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.NotificationCenterSetting())
+// NotificationCenterSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) NotificationCenterSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("notificationCenterSetting"))
+	return _r
 }
 
-// LockScreenSetting calls the underlying LockScreenSetting.
-func (x *NotificationSettings) LockScreenSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.LockScreenSetting())
+// LockScreenSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) LockScreenSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("lockScreenSetting"))
+	return _r
 }
 
-// ShowPreviewsSetting calls the underlying ShowPreviewsSetting.
-func (x *NotificationSettings) ShowPreviewsSetting() UNShowPreviewsSetting {
-	return UNShowPreviewsSetting(x.inner.ShowPreviewsSetting())
+// ShowPreviewsSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
+	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(x), objc.RegisterName("showPreviewsSetting"))
+	return _r
 }
 
-// CriticalAlertSetting calls the underlying CriticalAlertSetting.
-func (x *NotificationSettings) CriticalAlertSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.CriticalAlertSetting())
+// CriticalAlertSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) CriticalAlertSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("criticalAlertSetting"))
+	return _r
 }
 
-// ProvidesAppNotificationSettings calls the underlying ProvidesAppNotificationSettings.
+// ProvidesAppNotificationSettings wraps the corresponding Objective-C method.
 func (x *NotificationSettings) ProvidesAppNotificationSettings() bool {
-	return x.inner.ProvidesAppNotificationSettings()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesAppNotificationSettings"))
+	return _r
 }
 
-// TimeSensitiveSetting calls the underlying TimeSensitiveSetting.
-func (x *NotificationSettings) TimeSensitiveSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.TimeSensitiveSetting())
+// TimeSensitiveSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("timeSensitiveSetting"))
+	return _r
 }
 
-// ScheduledDeliverySetting calls the underlying ScheduledDeliverySetting.
-func (x *NotificationSettings) ScheduledDeliverySetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.ScheduledDeliverySetting())
+// ScheduledDeliverySetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("scheduledDeliverySetting"))
+	return _r
 }
 
-// DirectMessagesSetting calls the underlying DirectMessagesSetting.
-func (x *NotificationSettings) DirectMessagesSetting() UNNotificationSetting {
-	return UNNotificationSetting(x.inner.DirectMessagesSetting())
+// DirectMessagesSetting wraps the corresponding Objective-C method.
+func (x *NotificationSettings) DirectMessagesSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("directMessagesSetting"))
+	return _r
 }
 
 // NotificationSettingsable is the interface implemented by [NotificationSettings], for mocking and DI.
 type NotificationSettingsable interface {
-	Unwrap() *raw.UNNotificationSettings
-	AuthorizationStatus() UNAuthorizationStatus
-	SoundSetting() UNNotificationSetting
-	BadgeSetting() UNNotificationSetting
-	AlertSetting() UNNotificationSetting
-	NotificationCenterSetting() UNNotificationSetting
-	LockScreenSetting() UNNotificationSetting
-	ShowPreviewsSetting() UNShowPreviewsSetting
-	CriticalAlertSetting() UNNotificationSetting
+	obj.Object
+	AuthorizationStatus() AuthorizationStatus
+	SoundSetting() NotificationSetting
+	BadgeSetting() NotificationSetting
+	AlertSetting() NotificationSetting
+	NotificationCenterSetting() NotificationSetting
+	LockScreenSetting() NotificationSetting
+	ShowPreviewsSetting() ShowPreviewsSetting
+	CriticalAlertSetting() NotificationSetting
 	ProvidesAppNotificationSettings() bool
-	TimeSensitiveSetting() UNNotificationSetting
-	ScheduledDeliverySetting() UNNotificationSetting
-	DirectMessagesSetting() UNNotificationSetting
+	TimeSensitiveSetting() NotificationSetting
+	ScheduledDeliverySetting() NotificationSetting
+	DirectMessagesSetting() NotificationSetting
 }
 
 var _ NotificationSettingsable = (*NotificationSettings)(nil)

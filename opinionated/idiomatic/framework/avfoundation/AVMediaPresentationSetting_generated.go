@@ -5,67 +5,93 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSetting represents a selectable setting for controlling the presentation of the media.
+// MediaPresentationSetting is an idiomatic wrapper over the Objective-C class AVMediaPresentationSetting.
 //
-// MediaPresentationSetting wraps [raw.AVMediaPresentationSetting] with a fluent Go API.
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSetting represents a selectable setting for controlling the presentation of the media.
 type MediaPresentationSetting struct {
-	inner *raw.AVMediaPresentationSetting
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMediaPresentationSetting].
-func (x *MediaPresentationSetting) Unwrap() *raw.AVMediaPresentationSetting { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaPresentationSetting) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaPresentationSettingFromID adopts an existing object pointer as a MediaPresentationSetting (nil for 0).
+// MediaPresentationSettingFromID adopts an existing Objective-C object as a MediaPresentationSetting
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaPresentationSettingFromID(id objc.ID) *MediaPresentationSetting {
 	if id == 0 {
 		return nil
 	}
-	return &MediaPresentationSetting{inner: raw.AVMediaPresentationSettingFromID(id)}
+	x := &MediaPresentationSetting{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMediaPresentationSetting creates a new [MediaPresentationSetting].
+// mediaPresentationSettingAdopt wraps an Objective-C object that this code just created as a
+// MediaPresentationSetting (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaPresentationSettingAdopt(id objc.ID) *MediaPresentationSetting {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaPresentationSetting{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaPresentationSetting) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaPresentationSetting) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaPresentationSetting) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MediaPresentationSetting) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMediaPresentationSetting creates a new MediaPresentationSetting.
 func NewMediaPresentationSetting() *MediaPresentationSetting {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaPresentationSetting")), objc.RegisterName("new"))
-	return &MediaPresentationSetting{inner: raw.AVMediaPresentationSettingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaPresentationSetting")), objc.RegisterName("new"))
+	return mediaPresentationSettingAdopt(_id)
 }
 
-// Returns the display name for the selectable setting that best matches the specified locale identifier.
-//
-// DisplayNameForLocaleIdentifier calls the underlying DisplayNameForLocaleIdentifier.
+// DisplayNameForLocaleIdentifier returns the display name for the selectable setting that best matches the specified locale identifier.
 func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
-	_r := x.inner.DisplayNameForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForLocaleIdentifier:"), purego.NSString(localeIdentifier))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Provides the media characteristic that corresponds to the selectable setting.
-//
-// MediaCharacteristic calls the underlying MediaCharacteristic.
-func (x *MediaPresentationSetting) MediaCharacteristic() string {
-	_r := x.inner.MediaCharacteristic()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// MediaCharacteristic provides the media characteristic that corresponds to the selectable setting.
+func (x *MediaPresentationSetting) MediaCharacteristic() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaCharacteristic"))
+	return obj.Wrap(_r)
 }
 
 // MediaPresentationSettingable is the interface implemented by [MediaPresentationSetting], for mocking and DI.
 type MediaPresentationSettingable interface {
-	Unwrap() *raw.AVMediaPresentationSetting
+	obj.Object
 	DisplayNameForLocaleIdentifier(localeIdentifier string) string
-	MediaCharacteristic() string
+	MediaCharacteristic() obj.Object
 }
 
 var _ MediaPresentationSettingable = (*MediaPresentationSetting)(nil)

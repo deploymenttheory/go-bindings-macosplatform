@@ -5,112 +5,137 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
+// URLResponse is an idiomatic wrapper over the Objective-C class NSURLResponse.
 //
-// URLResponse wraps [raw.NSURLResponse] with a fluent Go API.
+// URLResponse is an abstract base — you do not construct it directly. Construct one of [HTTPURLResponse] and pass it where a URLResponse is accepted.
+//
+// The metadata associated with the response to a URL load request, independent of protocol and URL scheme.
 type URLResponse struct {
-	inner *raw.NSURLResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLResponse].
-func (x *URLResponse) Unwrap() *raw.NSURLResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// URLResponseFromID adopts an existing object pointer as a URLResponse (nil for 0).
+// URLResponseFromID adopts an existing Objective-C object as a URLResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func URLResponseFromID(id objc.ID) *URLResponse {
 	if id == 0 {
 		return nil
 	}
-	return &URLResponse{inner: raw.NSURLResponseFromID(id)}
-}
-
-// @method initWithURL:MIMEType:expectedContentLength:textEncodingName: @abstract Initialize an NSURLResponse with the provided values. @param URL the URL @param MIMEType the MIME content type of the response @param length the expected content length of the associated data @param name the name of the text encoding for the associated data, if applicable, else nil @result The initialized NSURLResponse. @discussion This is the designated initializer for NSURLResponse.
-//
-// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName creates a new [URLResponse].
-func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL string, mIMEType string, length int, name string) *URLResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(mIMEType).Ptr(), length, foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &URLResponse{inner: raw.NSURLResponseFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLResponse {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract Returns the URL of the receiver. @result The URL of the receiver.
-//
-// URL calls the underlying URL.
+// uRLResponseAdopt wraps an Objective-C object that this code just created as a
+// URLResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLResponseAdopt(id objc.ID) *URLResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &URLResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *URLResponse) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName initialize an NSURLResponse with the provided values. This is the designated initializer for NSURLResponse.
+func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL string, mIMEType string, length int, name string) *URLResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:"), rt.FileURL(uRL), purego.NSString(mIMEType), length, purego.NSString(name))
+	return uRLResponseAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLResponse) WithScriptingProperties(scriptingProperties obj.Object) *URLResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// URL returns the URL of the receiver.
 func (x *URLResponse) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
 }
 
-// @abstract Returns the MIME type of the receiver. @discussion The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information. @result The MIME type of the receiver.
-//
-// MIMEType calls the underlying MIMEType.
-func (x *URLResponse) MIMEType() *String {
-	_r := x.inner.MIMEType()
-	if _r == nil {
-		return nil
+// MIMEType returns the MIME type of the receiver. The MIME type is based on the information provided from an origin source. However, that value may be changed or corrected by a protocol implementation if it can be determined that the origin server or source reported the information incorrectly or imprecisely. An attempt to guess the MIME type may be made if the origin source did not report any such information.
+func (x *URLResponse) MIMEType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the expected content length of the receiver. @discussion Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data. @result The expected content length of the receiver, or -1 if there is no expectation that can be arrived at regarding expected content length.
-//
-// ExpectedContentLength calls the underlying ExpectedContentLength.
+// ExpectedContentLength returns the expected content length of the receiver. Some protocol implementations report a content length as part of delivering load metadata, but not all protocols guarantee the amount of data that will be delivered in actuality. Hence, this method returns an expected amount. Clients should use this value as an advisory, and should be prepared to deal with either more or less data.
 func (x *URLResponse) ExpectedContentLength() int64 {
-	return x.inner.ExpectedContentLength()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedContentLength"))
+	return _r
 }
 
-// @abstract Returns the name of the text encoding of the receiver. @discussion This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework. @result The name of the text encoding of the receiver, or nil if no text encoding was specified.
-//
-// TextEncodingName calls the underlying TextEncodingName.
-func (x *URLResponse) TextEncodingName() *String {
-	_r := x.inner.TextEncodingName()
-	if _r == nil {
-		return nil
+// TextEncodingName returns the name of the text encoding of the receiver. This name will be the actual string reported by the origin source during the course of performing a protocol-specific URL load. Clients can inspect this string and convert it to an NSStringEncoding or CFStringEncoding using the methods and functions made available in the appropriate framework.
+func (x *URLResponse) TextEncodingName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns a suggested filename if the resource were saved to disk. @discussion The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename. @result A suggested filename to use if saving the resource to disk.
-//
-// SuggestedFilename calls the underlying SuggestedFilename.
-func (x *URLResponse) SuggestedFilename() *String {
-	_r := x.inner.SuggestedFilename()
-	if _r == nil {
-		return nil
+// SuggestedFilename returns a suggested filename if the resource were saved to disk. The method first checks if the server has specified a filename using the content disposition header. If no valid filename is specified using that mechanism, this method checks the last path component of the URL. If no valid filename can be obtained using the last path component, this method uses the URL's host as the filename. If the URL's host can't be converted to a valid filename, the filename "unknown" is used. In most cases, this method appends the proper file extension based on the MIME type. This method always returns a valid filename.
+func (x *URLResponse) SuggestedFilename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suggestedFilename"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *URLResponse) asURLResponse() *raw.NSURLResponse { return x.inner }
-
-func (x *URLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLResponseable is the interface implemented by [URLResponse], for mocking and DI.
 type URLResponseable interface {
-	Unwrap() *raw.NSURLResponse
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLResponse
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLResponse
 	URL() *URL
-	MIMEType() *String
+	MIMEType() string
 	ExpectedContentLength() int64
-	TextEncodingName() *String
-	SuggestedFilename() *String
+	TextEncodingName() string
+	SuggestedFilename() string
 }
 
 var _ URLResponseable = (*URLResponse)(nil)
+
+// isURLResponse marks URLResponse — and, by embedding promotion, its
+// subclasses — as a member of the URLResponse hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *URLResponse) isURLResponse() {}
+
+var _ URLResponseProvider = (*URLResponse)(nil)

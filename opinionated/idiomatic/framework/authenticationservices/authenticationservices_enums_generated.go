@@ -10,88 +10,69 @@ import (
 )
 
 // A style for the authorization button.
-type ASAuthorizationAppleIDButtonStyle int64
+type AuthorizationAppleIDButtonStyle int64
 
 const (
-	ASAuthorizationAppleIDButtonStyleWhite        ASAuthorizationAppleIDButtonStyle = 0
-	ASAuthorizationAppleIDButtonStyleWhiteOutline ASAuthorizationAppleIDButtonStyle = 1
-	ASAuthorizationAppleIDButtonStyleBlack        ASAuthorizationAppleIDButtonStyle = 2
+	AuthorizationAppleIDButtonStyleWhite        AuthorizationAppleIDButtonStyle = 0
+	AuthorizationAppleIDButtonStyleWhiteOutline AuthorizationAppleIDButtonStyle = 1
+	AuthorizationAppleIDButtonStyleBlack        AuthorizationAppleIDButtonStyle = 2
 )
 
-func (e ASAuthorizationAppleIDButtonStyle) String() string {
+// String returns the AuthorizationAppleIDButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationAppleIDButtonStyle) String() string {
 	switch e {
-	case ASAuthorizationAppleIDButtonStyleWhite:
-		return "ASAuthorizationAppleIDButtonStyleWhite"
-	case ASAuthorizationAppleIDButtonStyleWhiteOutline:
-		return "ASAuthorizationAppleIDButtonStyleWhiteOutline"
-	case ASAuthorizationAppleIDButtonStyleBlack:
-		return "ASAuthorizationAppleIDButtonStyleBlack"
+	case AuthorizationAppleIDButtonStyleWhite:
+		return "AuthorizationAppleIDButtonStyleWhite"
+	case AuthorizationAppleIDButtonStyleWhiteOutline:
+		return "AuthorizationAppleIDButtonStyleWhiteOutline"
+	case AuthorizationAppleIDButtonStyleBlack:
+		return "AuthorizationAppleIDButtonStyleBlack"
 	default:
-		return fmt.Sprintf("ASAuthorizationAppleIDButtonStyle(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationAppleIDButtonStyle(%d)", int64(e))
 	}
 }
 
 // A type for the authorization button.
-type ASAuthorizationAppleIDButtonType int64
+type AuthorizationAppleIDButtonType int64
 
 const (
-	ASAuthorizationAppleIDButtonTypeSignIn   ASAuthorizationAppleIDButtonType = 0
-	ASAuthorizationAppleIDButtonTypeContinue ASAuthorizationAppleIDButtonType = 1
-	ASAuthorizationAppleIDButtonTypeSignUp   ASAuthorizationAppleIDButtonType = 2
-	ASAuthorizationAppleIDButtonTypeDefault  ASAuthorizationAppleIDButtonType = 0
+	AuthorizationAppleIDButtonTypeSignIn   AuthorizationAppleIDButtonType = 0
+	AuthorizationAppleIDButtonTypeContinue AuthorizationAppleIDButtonType = 1
+	AuthorizationAppleIDButtonTypeSignUp   AuthorizationAppleIDButtonType = 2
+	AuthorizationAppleIDButtonTypeDefault  AuthorizationAppleIDButtonType = 0
 )
 
-func (e ASAuthorizationAppleIDButtonType) String() string {
+// String returns the AuthorizationAppleIDButtonType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationAppleIDButtonType) String() string {
 	switch e {
-	case ASAuthorizationAppleIDButtonTypeSignIn:
-		return "ASAuthorizationAppleIDButtonTypeSignIn"
-	case ASAuthorizationAppleIDButtonTypeContinue:
-		return "ASAuthorizationAppleIDButtonTypeContinue"
-	case ASAuthorizationAppleIDButtonTypeSignUp:
-		return "ASAuthorizationAppleIDButtonTypeSignUp"
+	case AuthorizationAppleIDButtonTypeSignIn:
+		return "AuthorizationAppleIDButtonTypeSignIn"
+	case AuthorizationAppleIDButtonTypeContinue:
+		return "AuthorizationAppleIDButtonTypeContinue"
+	case AuthorizationAppleIDButtonTypeSignUp:
+		return "AuthorizationAppleIDButtonTypeSignUp"
 	default:
-		return fmt.Sprintf("ASAuthorizationAppleIDButtonType(%d)", int64(e))
-	}
-}
-
-// Possible values for the credential state of a user.
-type ASAuthorizationAppleIDProviderCredentialState int64
-
-const (
-	ASAuthorizationAppleIDProviderCredentialRevoked     ASAuthorizationAppleIDProviderCredentialState = 0
-	ASAuthorizationAppleIDProviderCredentialAuthorized  ASAuthorizationAppleIDProviderCredentialState = 1
-	ASAuthorizationAppleIDProviderCredentialNotFound    ASAuthorizationAppleIDProviderCredentialState = 2
-	ASAuthorizationAppleIDProviderCredentialTransferred ASAuthorizationAppleIDProviderCredentialState = 3
-)
-
-func (e ASAuthorizationAppleIDProviderCredentialState) String() string {
-	switch e {
-	case ASAuthorizationAppleIDProviderCredentialRevoked:
-		return "ASAuthorizationAppleIDProviderCredentialRevoked"
-	case ASAuthorizationAppleIDProviderCredentialAuthorized:
-		return "ASAuthorizationAppleIDProviderCredentialAuthorized"
-	case ASAuthorizationAppleIDProviderCredentialNotFound:
-		return "ASAuthorizationAppleIDProviderCredentialNotFound"
-	case ASAuthorizationAppleIDProviderCredentialTransferred:
-		return "ASAuthorizationAppleIDProviderCredentialTransferred"
-	default:
-		return fmt.Sprintf("ASAuthorizationAppleIDProviderCredentialState(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationAppleIDButtonType(%d)", int64(e))
 	}
 }
 
 // Options that modify how a controller performs authorization requests.
 // Bitmask — values may be combined with |.
-type ASAuthorizationControllerRequestOptions uint64
+type AuthorizationControllerRequestOptions uint64
 
 const (
 	// When used for sign-in requests, tell the authorization controller that it should only be presented if there are credentials immediately available on the local device. When used for registration requests, tell the authorization controller that it should only be presented if the local device is currently set up to fulfill at least one of the request types.
-	ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials ASAuthorizationControllerRequestOptions = 1
+	AuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials AuthorizationControllerRequestOptions = 1
 )
 
-func (e ASAuthorizationControllerRequestOptions) String() string {
+// String returns the AuthorizationControllerRequestOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationControllerRequestOptions) String() string {
 	var parts []string
-	if e&ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials != 0 {
-		parts = append(parts, "ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials")
+	if e&AuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials != 0 {
+		parts = append(parts, "AuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -99,138 +80,148 @@ func (e ASAuthorizationControllerRequestOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle int64
+type AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle int64
 
 const (
 	// Perform a request using the standard presentation style. This is the default style.
-	ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle = 0
+	AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle = 0
 	// Perform a conditional request. This style of request is meant to opportunistically add passkeys to existing password-based accounts, at the discretion of the user's credential manager. It should be performed shortly after a user has signed in with a password. If the user is using a password and passkey manager, and certain internal conditions of that credential manager are met (e.g. the user signed in recently with a matching password-based account and does not yet have a passkey for this account), then this request may proceed automatically, without further user interaction. If any of the internal conditions are not met, this request will return an error without showing any UI to the user, and may be retried the next time they sign in.
-	ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle = 1
+	AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle = 1
 )
 
-func (e ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) String() string {
+// String returns the AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) String() string {
 	switch e {
-	case ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard:
-		return "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard"
-	case ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional:
-		return "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional"
+	case AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard:
+		return "AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleStandard"
+	case AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional:
+		return "AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyleConditional"
 	default:
-		return fmt.Sprintf("ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(%d)", int64(e))
 	}
 }
 
 // The platform single sign-on method for the user.
-type ASAuthorizationProviderExtensionAuthenticationMethod int64
+type AuthorizationProviderExtensionAuthenticationMethod int64
 
 const (
 	// Password authentication.
-	ASAuthorizationProviderExtensionAuthenticationMethodPassword ASAuthorizationProviderExtensionAuthenticationMethod = 1
+	AuthorizationProviderExtensionAuthenticationMethodPassword AuthorizationProviderExtensionAuthenticationMethod = 1
 	// Secure Enclave key authentication.
-	ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey ASAuthorizationProviderExtensionAuthenticationMethod = 2
-	ASAuthorizationProviderExtensionAuthenticationMethodSmartCard            ASAuthorizationProviderExtensionAuthenticationMethod = 3
+	AuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey AuthorizationProviderExtensionAuthenticationMethod = 2
+	AuthorizationProviderExtensionAuthenticationMethodSmartCard            AuthorizationProviderExtensionAuthenticationMethod = 3
 )
 
-func (e ASAuthorizationProviderExtensionAuthenticationMethod) String() string {
+// String returns the AuthorizationProviderExtensionAuthenticationMethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationProviderExtensionAuthenticationMethod) String() string {
 	switch e {
-	case ASAuthorizationProviderExtensionAuthenticationMethodPassword:
-		return "ASAuthorizationProviderExtensionAuthenticationMethodPassword"
-	case ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey:
-		return "ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey"
-	case ASAuthorizationProviderExtensionAuthenticationMethodSmartCard:
-		return "ASAuthorizationProviderExtensionAuthenticationMethodSmartCard"
+	case AuthorizationProviderExtensionAuthenticationMethodPassword:
+		return "AuthorizationProviderExtensionAuthenticationMethodPassword"
+	case AuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey:
+		return "AuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey"
+	case AuthorizationProviderExtensionAuthenticationMethodSmartCard:
+		return "AuthorizationProviderExtensionAuthenticationMethodSmartCard"
 	default:
-		return fmt.Sprintf("ASAuthorizationProviderExtensionAuthenticationMethod(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationProviderExtensionAuthenticationMethod(%d)", int64(e))
 	}
 }
 
-type ASAuthorizationProviderExtensionFederationType int64
+type AuthorizationProviderExtensionFederationType int64
 
 const (
-	ASAuthorizationProviderExtensionFederationTypeNone           ASAuthorizationProviderExtensionFederationType = 0
-	ASAuthorizationProviderExtensionFederationTypeWSTrust        ASAuthorizationProviderExtensionFederationType = 1
-	ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust ASAuthorizationProviderExtensionFederationType = 2
+	AuthorizationProviderExtensionFederationTypeNone           AuthorizationProviderExtensionFederationType = 0
+	AuthorizationProviderExtensionFederationTypeWSTrust        AuthorizationProviderExtensionFederationType = 1
+	AuthorizationProviderExtensionFederationTypeDynamicWSTrust AuthorizationProviderExtensionFederationType = 2
 )
 
-func (e ASAuthorizationProviderExtensionFederationType) String() string {
+// String returns the AuthorizationProviderExtensionFederationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationProviderExtensionFederationType) String() string {
 	switch e {
-	case ASAuthorizationProviderExtensionFederationTypeNone:
-		return "ASAuthorizationProviderExtensionFederationTypeNone"
-	case ASAuthorizationProviderExtensionFederationTypeWSTrust:
-		return "ASAuthorizationProviderExtensionFederationTypeWSTrust"
-	case ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust:
-		return "ASAuthorizationProviderExtensionFederationTypeDynamicWSTrust"
+	case AuthorizationProviderExtensionFederationTypeNone:
+		return "AuthorizationProviderExtensionFederationTypeNone"
+	case AuthorizationProviderExtensionFederationTypeWSTrust:
+		return "AuthorizationProviderExtensionFederationTypeWSTrust"
+	case AuthorizationProviderExtensionFederationTypeDynamicWSTrust:
+		return "AuthorizationProviderExtensionFederationTypeDynamicWSTrust"
 	default:
-		return fmt.Sprintf("ASAuthorizationProviderExtensionFederationType(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationProviderExtensionFederationType(%d)", int64(e))
 	}
 }
 
 // The key types for platform single sign-on.
-type ASAuthorizationProviderExtensionKeyType int64
+type AuthorizationProviderExtensionKeyType int64
 
 const (
 	// The user device signing key.
-	ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning ASAuthorizationProviderExtensionKeyType = 1
+	AuthorizationProviderExtensionKeyTypeUserDeviceSigning AuthorizationProviderExtensionKeyType = 1
 	// The user device encryption key.
-	ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption ASAuthorizationProviderExtensionKeyType = 2
+	AuthorizationProviderExtensionKeyTypeUserDeviceEncryption AuthorizationProviderExtensionKeyType = 2
 	// The user Secure Enclave key.
-	ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey ASAuthorizationProviderExtensionKeyType = 3
+	AuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey AuthorizationProviderExtensionKeyType = 3
 	// The shared device signing key.
-	ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning ASAuthorizationProviderExtensionKeyType = 4
+	AuthorizationProviderExtensionKeyTypeSharedDeviceSigning AuthorizationProviderExtensionKeyType = 4
 	// The shared device encryption key.
-	ASAuthorizationProviderExtensionKeyTypeSharedDeviceEncryption ASAuthorizationProviderExtensionKeyType = 5
+	AuthorizationProviderExtensionKeyTypeSharedDeviceEncryption AuthorizationProviderExtensionKeyType = 5
 	// The currentdevice signing key.
-	ASAuthorizationProviderExtensionKeyTypeCurrentDeviceSigning ASAuthorizationProviderExtensionKeyType = 10
+	AuthorizationProviderExtensionKeyTypeCurrentDeviceSigning AuthorizationProviderExtensionKeyType = 10
 	// The current device encryption key.
-	ASAuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption ASAuthorizationProviderExtensionKeyType = 11
-	ASAuthorizationProviderExtensionKeyTypeUserSmartCard           ASAuthorizationProviderExtensionKeyType = 20
+	AuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption AuthorizationProviderExtensionKeyType = 11
+	AuthorizationProviderExtensionKeyTypeUserSmartCard           AuthorizationProviderExtensionKeyType = 20
 )
 
-func (e ASAuthorizationProviderExtensionKeyType) String() string {
+// String returns the AuthorizationProviderExtensionKeyType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationProviderExtensionKeyType) String() string {
 	switch e {
-	case ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning:
-		return "ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning"
-	case ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption:
-		return "ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption"
-	case ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey:
-		return "ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey"
-	case ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning:
-		return "ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning"
-	case ASAuthorizationProviderExtensionKeyTypeSharedDeviceEncryption:
-		return "ASAuthorizationProviderExtensionKeyTypeSharedDeviceEncryption"
-	case ASAuthorizationProviderExtensionKeyTypeCurrentDeviceSigning:
-		return "ASAuthorizationProviderExtensionKeyTypeCurrentDeviceSigning"
-	case ASAuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption:
-		return "ASAuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption"
-	case ASAuthorizationProviderExtensionKeyTypeUserSmartCard:
-		return "ASAuthorizationProviderExtensionKeyTypeUserSmartCard"
+	case AuthorizationProviderExtensionKeyTypeUserDeviceSigning:
+		return "AuthorizationProviderExtensionKeyTypeUserDeviceSigning"
+	case AuthorizationProviderExtensionKeyTypeUserDeviceEncryption:
+		return "AuthorizationProviderExtensionKeyTypeUserDeviceEncryption"
+	case AuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey:
+		return "AuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey"
+	case AuthorizationProviderExtensionKeyTypeSharedDeviceSigning:
+		return "AuthorizationProviderExtensionKeyTypeSharedDeviceSigning"
+	case AuthorizationProviderExtensionKeyTypeSharedDeviceEncryption:
+		return "AuthorizationProviderExtensionKeyTypeSharedDeviceEncryption"
+	case AuthorizationProviderExtensionKeyTypeCurrentDeviceSigning:
+		return "AuthorizationProviderExtensionKeyTypeCurrentDeviceSigning"
+	case AuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption:
+		return "AuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption"
+	case AuthorizationProviderExtensionKeyTypeUserSmartCard:
+		return "AuthorizationProviderExtensionKeyTypeUserSmartCard"
 	default:
-		return fmt.Sprintf("ASAuthorizationProviderExtensionKeyType(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationProviderExtensionKeyType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy uint64
+type AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy uint64
 
 const (
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 1
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny        ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 2
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock        ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 4
-	ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback         ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 8
+	AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 1
+	AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny        AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 2
+	AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock        AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 4
+	AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback         AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy = 8
 )
 
-func (e ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) String() string {
+// String returns the AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) String() string {
 	var parts []string
-	if e&ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet != 0 {
-		parts = append(parts, "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet")
+	if e&AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet != 0 {
+		parts = append(parts, "AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchCurrentSet")
 	}
-	if e&ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny != 0 {
-		parts = append(parts, "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny")
+	if e&AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny != 0 {
+		parts = append(parts, "AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyTouchIDOrWatchAny")
 	}
-	if e&ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock != 0 {
-		parts = append(parts, "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock")
+	if e&AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock != 0 {
+		parts = append(parts, "AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyReuseDuringUnlock")
 	}
-	if e&ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback != 0 {
-		parts = append(parts, "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback")
+	if e&AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback != 0 {
+		parts = append(parts, "AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicyPasswordFallback")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -238,132 +229,144 @@ func (e ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) Str
 	return strings.Join(parts, "|")
 }
 
-type ASAuthorizationPublicKeyCredentialAttachment int64
+type AuthorizationPublicKeyCredentialAttachment int64
 
 const (
-	ASAuthorizationPublicKeyCredentialAttachmentPlatform      ASAuthorizationPublicKeyCredentialAttachment = 0
-	ASAuthorizationPublicKeyCredentialAttachmentCrossPlatform ASAuthorizationPublicKeyCredentialAttachment = 1
+	AuthorizationPublicKeyCredentialAttachmentPlatform      AuthorizationPublicKeyCredentialAttachment = 0
+	AuthorizationPublicKeyCredentialAttachmentCrossPlatform AuthorizationPublicKeyCredentialAttachment = 1
 )
 
-func (e ASAuthorizationPublicKeyCredentialAttachment) String() string {
+// String returns the AuthorizationPublicKeyCredentialAttachment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationPublicKeyCredentialAttachment) String() string {
 	switch e {
-	case ASAuthorizationPublicKeyCredentialAttachmentPlatform:
-		return "ASAuthorizationPublicKeyCredentialAttachmentPlatform"
-	case ASAuthorizationPublicKeyCredentialAttachmentCrossPlatform:
-		return "ASAuthorizationPublicKeyCredentialAttachmentCrossPlatform"
+	case AuthorizationPublicKeyCredentialAttachmentPlatform:
+		return "AuthorizationPublicKeyCredentialAttachmentPlatform"
+	case AuthorizationPublicKeyCredentialAttachmentCrossPlatform:
+		return "AuthorizationPublicKeyCredentialAttachmentCrossPlatform"
 	default:
-		return fmt.Sprintf("ASAuthorizationPublicKeyCredentialAttachment(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationPublicKeyCredentialAttachment(%d)", int64(e))
 	}
 }
 
 // A type that represents the operation of the large blob assertion.
-type ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation int64
+type AuthorizationPublicKeyCredentialLargeBlobAssertionOperation int64
 
 const (
 	// An operation to read data from the blob.
-	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
+	AuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead AuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 0
 	// An operation to write data to the blob.
-	ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
+	AuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite AuthorizationPublicKeyCredentialLargeBlobAssertionOperation = 1
 )
 
-func (e ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() string {
+// String returns the AuthorizationPublicKeyCredentialLargeBlobAssertionOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationPublicKeyCredentialLargeBlobAssertionOperation) String() string {
 	switch e {
-	case ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead:
-		return "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead"
-	case ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite:
-		return "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite"
+	case AuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead:
+		return "AuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead"
+	case AuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite:
+		return "AuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite"
 	default:
-		return fmt.Sprintf("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationPublicKeyCredentialLargeBlobAssertionOperation(%d)", int64(e))
 	}
 }
 
 // An enumeration of large binary object support requirement values.
-type ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement int64
+type AuthorizationPublicKeyCredentialLargeBlobSupportRequirement int64
 
 const (
 	// A value that indicates the app requires large binary object support.
-	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
+	AuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired AuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 0
 	// A value that indicates the app needs large binary object support.
-	ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
+	AuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred AuthorizationPublicKeyCredentialLargeBlobSupportRequirement = 1
 )
 
-func (e ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() string {
+// String returns the AuthorizationPublicKeyCredentialLargeBlobSupportRequirement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) String() string {
 	switch e {
-	case ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired:
-		return "ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired"
-	case ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred:
-		return "ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred"
+	case AuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired:
+		return "AuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired"
+	case AuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred:
+		return "AuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred"
 	default:
-		return fmt.Sprintf("ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationPublicKeyCredentialLargeBlobSupportRequirement(%d)", int64(e))
 	}
 }
 
 // An enumeration of values that indicate whether the browser app has access to a person’s passkeys.
-type ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
+type AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState int64
 
 const (
-	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized    ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 0
-	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied        ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 1
-	ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 2
+	AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized    AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 0
+	AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied        AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 1
+	AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState = 2
 )
 
-func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) String() string {
+// String returns the AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) String() string {
 	switch e {
-	case ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized:
-		return "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized"
-	case ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied:
-		return "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied"
-	case ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined:
-		return "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined"
+	case AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized:
+		return "AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateAuthorized"
+	case AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied:
+		return "AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateDenied"
+	case AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined:
+		return "AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationStateNotDetermined"
 	default:
-		return fmt.Sprintf("ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(%d)", int64(e))
 	}
 }
 
 // Constants that represent credential identity store error codes.
-type ASCredentialIdentityStoreErrorCode int64
+type CredentialIdentityStoreErrorCode int64
 
 const (
-	ASCredentialIdentityStoreErrorCodeInternalError ASCredentialIdentityStoreErrorCode = 0
-	ASCredentialIdentityStoreErrorCodeStoreDisabled ASCredentialIdentityStoreErrorCode = 1
-	ASCredentialIdentityStoreErrorCodeStoreBusy     ASCredentialIdentityStoreErrorCode = 2
+	CredentialIdentityStoreErrorCodeInternalError CredentialIdentityStoreErrorCode = 0
+	CredentialIdentityStoreErrorCodeStoreDisabled CredentialIdentityStoreErrorCode = 1
+	CredentialIdentityStoreErrorCodeStoreBusy     CredentialIdentityStoreErrorCode = 2
 )
 
-func (e ASCredentialIdentityStoreErrorCode) String() string {
+// String returns the CredentialIdentityStoreErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CredentialIdentityStoreErrorCode) String() string {
 	switch e {
-	case ASCredentialIdentityStoreErrorCodeInternalError:
-		return "ASCredentialIdentityStoreErrorCodeInternalError"
-	case ASCredentialIdentityStoreErrorCodeStoreDisabled:
-		return "ASCredentialIdentityStoreErrorCodeStoreDisabled"
-	case ASCredentialIdentityStoreErrorCodeStoreBusy:
-		return "ASCredentialIdentityStoreErrorCodeStoreBusy"
+	case CredentialIdentityStoreErrorCodeInternalError:
+		return "CredentialIdentityStoreErrorCodeInternalError"
+	case CredentialIdentityStoreErrorCodeStoreDisabled:
+		return "CredentialIdentityStoreErrorCodeStoreDisabled"
+	case CredentialIdentityStoreErrorCodeStoreBusy:
+		return "CredentialIdentityStoreErrorCodeStoreBusy"
 	default:
-		return fmt.Sprintf("ASCredentialIdentityStoreErrorCode(%d)", int64(e))
+		return fmt.Sprintf("CredentialIdentityStoreErrorCode(%d)", int64(e))
 	}
 }
 
 // The defined identity types for use in retrieving credentials.
 // Bitmask — values may be combined with |.
-type ASCredentialIdentityTypes uint64
+type CredentialIdentityTypes uint64
 
 const (
 	// A value that matches all identity types.
-	ASCredentialIdentityTypesAll         ASCredentialIdentityTypes = 0
-	ASCredentialIdentityTypesPassword    ASCredentialIdentityTypes = 1
-	ASCredentialIdentityTypesPasskey     ASCredentialIdentityTypes = 2
-	ASCredentialIdentityTypesOneTimeCode ASCredentialIdentityTypes = 4
+	CredentialIdentityTypesAll         CredentialIdentityTypes = 0
+	CredentialIdentityTypesPassword    CredentialIdentityTypes = 1
+	CredentialIdentityTypesPasskey     CredentialIdentityTypes = 2
+	CredentialIdentityTypesOneTimeCode CredentialIdentityTypes = 4
 )
 
-func (e ASCredentialIdentityTypes) String() string {
+// String returns the CredentialIdentityTypes constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CredentialIdentityTypes) String() string {
 	var parts []string
-	if e&ASCredentialIdentityTypesPassword != 0 {
-		parts = append(parts, "ASCredentialIdentityTypesPassword")
+	if e&CredentialIdentityTypesPassword != 0 {
+		parts = append(parts, "CredentialIdentityTypesPassword")
 	}
-	if e&ASCredentialIdentityTypesPasskey != 0 {
-		parts = append(parts, "ASCredentialIdentityTypesPasskey")
+	if e&CredentialIdentityTypesPasskey != 0 {
+		parts = append(parts, "CredentialIdentityTypesPasskey")
 	}
-	if e&ASCredentialIdentityTypesOneTimeCode != 0 {
-		parts = append(parts, "ASCredentialIdentityTypesOneTimeCode")
+	if e&CredentialIdentityTypesOneTimeCode != 0 {
+		parts = append(parts, "CredentialIdentityTypesOneTimeCode")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -372,142 +375,154 @@ func (e ASCredentialIdentityTypes) String() string {
 }
 
 // Possible values for the service identifier type.
-type ASCredentialServiceIdentifierType int64
+type CredentialServiceIdentifierType int64
 
 const (
-	ASCredentialServiceIdentifierTypeDomain ASCredentialServiceIdentifierType = 0
-	ASCredentialServiceIdentifierTypeURL    ASCredentialServiceIdentifierType = 1
+	CredentialServiceIdentifierTypeDomain CredentialServiceIdentifierType = 0
+	CredentialServiceIdentifierTypeURL    CredentialServiceIdentifierType = 1
 	// The service identifier represents an App ID. When a service identifier of this type is provided to your extension for saving a password, the ASCredentialServiceIdentifier object will have a non-nil `displayName` property that contains a user friendly name for the app.
-	ASCredentialServiceIdentifierTypeApp ASCredentialServiceIdentifierType = 2
+	CredentialServiceIdentifierTypeApp CredentialServiceIdentifierType = 2
 )
 
-func (e ASCredentialServiceIdentifierType) String() string {
+// String returns the CredentialServiceIdentifierType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CredentialServiceIdentifierType) String() string {
 	switch e {
-	case ASCredentialServiceIdentifierTypeDomain:
-		return "ASCredentialServiceIdentifierTypeDomain"
-	case ASCredentialServiceIdentifierTypeURL:
-		return "ASCredentialServiceIdentifierTypeURL"
-	case ASCredentialServiceIdentifierTypeApp:
-		return "ASCredentialServiceIdentifierTypeApp"
+	case CredentialServiceIdentifierTypeDomain:
+		return "CredentialServiceIdentifierTypeDomain"
+	case CredentialServiceIdentifierTypeURL:
+		return "CredentialServiceIdentifierTypeURL"
+	case CredentialServiceIdentifierTypeApp:
+		return "CredentialServiceIdentifierTypeApp"
 	default:
-		return fmt.Sprintf("ASCredentialServiceIdentifierType(%d)", int64(e))
+		return fmt.Sprintf("CredentialServiceIdentifierType(%d)", int64(e))
 	}
 }
 
 // The codes for a credential provider extension error.
-type ASExtensionErrorCode int64
+type ExtensionErrorCode int64
 
 const (
-	ASExtensionErrorCodeFailed                     ASExtensionErrorCode = 0
-	ASExtensionErrorCodeUserCanceled               ASExtensionErrorCode = 1
-	ASExtensionErrorCodeUserInteractionRequired    ASExtensionErrorCode = 100
-	ASExtensionErrorCodeCredentialIdentityNotFound ASExtensionErrorCode = 101
-	// This error should only be used for a passkey registration request, if the @c excludedCredentials property matches a known passkey.
-	ASExtensionErrorCodeMatchedExcludedCredential ASExtensionErrorCode = 102
+	ExtensionErrorCodeFailed                     ExtensionErrorCode = 0
+	ExtensionErrorCodeUserCanceled               ExtensionErrorCode = 1
+	ExtensionErrorCodeUserInteractionRequired    ExtensionErrorCode = 100
+	ExtensionErrorCodeCredentialIdentityNotFound ExtensionErrorCode = 101
+	// This error should only be used for a passkey registration request, if the
+	ExtensionErrorCodeMatchedExcludedCredential ExtensionErrorCode = 102
 )
 
-func (e ASExtensionErrorCode) String() string {
+// String returns the ExtensionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ExtensionErrorCode) String() string {
 	switch e {
-	case ASExtensionErrorCodeFailed:
-		return "ASExtensionErrorCodeFailed"
-	case ASExtensionErrorCodeUserCanceled:
-		return "ASExtensionErrorCodeUserCanceled"
-	case ASExtensionErrorCodeUserInteractionRequired:
-		return "ASExtensionErrorCodeUserInteractionRequired"
-	case ASExtensionErrorCodeCredentialIdentityNotFound:
-		return "ASExtensionErrorCodeCredentialIdentityNotFound"
-	case ASExtensionErrorCodeMatchedExcludedCredential:
-		return "ASExtensionErrorCodeMatchedExcludedCredential"
+	case ExtensionErrorCodeFailed:
+		return "ExtensionErrorCodeFailed"
+	case ExtensionErrorCodeUserCanceled:
+		return "ExtensionErrorCodeUserCanceled"
+	case ExtensionErrorCodeUserInteractionRequired:
+		return "ExtensionErrorCodeUserInteractionRequired"
+	case ExtensionErrorCodeCredentialIdentityNotFound:
+		return "ExtensionErrorCodeCredentialIdentityNotFound"
+	case ExtensionErrorCodeMatchedExcludedCredential:
+		return "ExtensionErrorCodeMatchedExcludedCredential"
 	default:
-		return fmt.Sprintf("ASExtensionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ExtensionErrorCode(%d)", int64(e))
 	}
 }
 
-type ASPublicKeyCredentialClientDataCrossOriginValue int64
+type PublicKeyCredentialClientDataCrossOriginValue int64
 
 const (
-	ASPublicKeyCredentialClientDataCrossOriginValueNotSet                  ASPublicKeyCredentialClientDataCrossOriginValue = 0
-	ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin             ASPublicKeyCredentialClientDataCrossOriginValue = 1
-	ASPublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors ASPublicKeyCredentialClientDataCrossOriginValue = 2
+	PublicKeyCredentialClientDataCrossOriginValueNotSet                  PublicKeyCredentialClientDataCrossOriginValue = 0
+	PublicKeyCredentialClientDataCrossOriginValueCrossOrigin             PublicKeyCredentialClientDataCrossOriginValue = 1
+	PublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors PublicKeyCredentialClientDataCrossOriginValue = 2
 )
 
-func (e ASPublicKeyCredentialClientDataCrossOriginValue) String() string {
+// String returns the PublicKeyCredentialClientDataCrossOriginValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PublicKeyCredentialClientDataCrossOriginValue) String() string {
 	switch e {
-	case ASPublicKeyCredentialClientDataCrossOriginValueNotSet:
-		return "ASPublicKeyCredentialClientDataCrossOriginValueNotSet"
-	case ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin:
-		return "ASPublicKeyCredentialClientDataCrossOriginValueCrossOrigin"
-	case ASPublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors:
-		return "ASPublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors"
+	case PublicKeyCredentialClientDataCrossOriginValueNotSet:
+		return "PublicKeyCredentialClientDataCrossOriginValueNotSet"
+	case PublicKeyCredentialClientDataCrossOriginValueCrossOrigin:
+		return "PublicKeyCredentialClientDataCrossOriginValueCrossOrigin"
+	case PublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors:
+		return "PublicKeyCredentialClientDataCrossOriginValueSameOriginWithAncestors"
 	default:
-		return fmt.Sprintf("ASPublicKeyCredentialClientDataCrossOriginValue(%d)", int64(e))
+		return fmt.Sprintf("PublicKeyCredentialClientDataCrossOriginValue(%d)", int64(e))
 	}
 }
 
-type ASUserAgeRange int64
+type UserAgeRange int64
 
 const (
-	ASUserAgeRangeUnknown  ASUserAgeRange = 0
-	ASUserAgeRangeChild    ASUserAgeRange = 1
-	ASUserAgeRangeNotChild ASUserAgeRange = 2
+	UserAgeRangeUnknown  UserAgeRange = 0
+	UserAgeRangeChild    UserAgeRange = 1
+	UserAgeRangeNotChild UserAgeRange = 2
 )
 
-func (e ASUserAgeRange) String() string {
+// String returns the UserAgeRange constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserAgeRange) String() string {
 	switch e {
-	case ASUserAgeRangeUnknown:
-		return "ASUserAgeRangeUnknown"
-	case ASUserAgeRangeChild:
-		return "ASUserAgeRangeChild"
-	case ASUserAgeRangeNotChild:
-		return "ASUserAgeRangeNotChild"
+	case UserAgeRangeUnknown:
+		return "UserAgeRangeUnknown"
+	case UserAgeRangeChild:
+		return "UserAgeRangeChild"
+	case UserAgeRangeNotChild:
+		return "UserAgeRangeNotChild"
 	default:
-		return fmt.Sprintf("ASUserAgeRange(%d)", int64(e))
+		return fmt.Sprintf("UserAgeRange(%d)", int64(e))
 	}
 }
 
 // Possible values for the real user indicator.
-type ASUserDetectionStatus int64
+type UserDetectionStatus int64
 
 const (
 	// The system can’t determine this user’s status as a real person.
-	ASUserDetectionStatusUnsupported ASUserDetectionStatus = 0
+	UserDetectionStatusUnsupported UserDetectionStatus = 0
 	// The system hasn’t determined whether the user might be a real person.
-	ASUserDetectionStatusUnknown ASUserDetectionStatus = 1
+	UserDetectionStatusUnknown UserDetectionStatus = 1
 	// The user appears to be a real person.
-	ASUserDetectionStatusLikelyReal ASUserDetectionStatus = 2
+	UserDetectionStatusLikelyReal UserDetectionStatus = 2
 )
 
-func (e ASUserDetectionStatus) String() string {
+// String returns the UserDetectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserDetectionStatus) String() string {
 	switch e {
-	case ASUserDetectionStatusUnsupported:
-		return "ASUserDetectionStatusUnsupported"
-	case ASUserDetectionStatusUnknown:
-		return "ASUserDetectionStatusUnknown"
-	case ASUserDetectionStatusLikelyReal:
-		return "ASUserDetectionStatusLikelyReal"
+	case UserDetectionStatusUnsupported:
+		return "UserDetectionStatusUnsupported"
+	case UserDetectionStatusUnknown:
+		return "UserDetectionStatusUnknown"
+	case UserDetectionStatusLikelyReal:
+		return "UserDetectionStatusLikelyReal"
 	default:
-		return fmt.Sprintf("ASUserDetectionStatus(%d)", int64(e))
+		return fmt.Sprintf("UserDetectionStatus(%d)", int64(e))
 	}
 }
 
 // The error code for a web authentication session error.
-type ASWebAuthenticationSessionErrorCode int64
+type WebAuthenticationSessionErrorCode int64
 
 const (
-	ASWebAuthenticationSessionErrorCodeCanceledLogin                  ASWebAuthenticationSessionErrorCode = 1
-	ASWebAuthenticationSessionErrorCodePresentationContextNotProvided ASWebAuthenticationSessionErrorCode = 2
-	ASWebAuthenticationSessionErrorCodePresentationContextInvalid     ASWebAuthenticationSessionErrorCode = 3
+	WebAuthenticationSessionErrorCodeCanceledLogin                  WebAuthenticationSessionErrorCode = 1
+	WebAuthenticationSessionErrorCodePresentationContextNotProvided WebAuthenticationSessionErrorCode = 2
+	WebAuthenticationSessionErrorCodePresentationContextInvalid     WebAuthenticationSessionErrorCode = 3
 )
 
-func (e ASWebAuthenticationSessionErrorCode) String() string {
+// String returns the WebAuthenticationSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WebAuthenticationSessionErrorCode) String() string {
 	switch e {
-	case ASWebAuthenticationSessionErrorCodeCanceledLogin:
-		return "ASWebAuthenticationSessionErrorCodeCanceledLogin"
-	case ASWebAuthenticationSessionErrorCodePresentationContextNotProvided:
-		return "ASWebAuthenticationSessionErrorCodePresentationContextNotProvided"
-	case ASWebAuthenticationSessionErrorCodePresentationContextInvalid:
-		return "ASWebAuthenticationSessionErrorCodePresentationContextInvalid"
+	case WebAuthenticationSessionErrorCodeCanceledLogin:
+		return "WebAuthenticationSessionErrorCodeCanceledLogin"
+	case WebAuthenticationSessionErrorCodePresentationContextNotProvided:
+		return "WebAuthenticationSessionErrorCodePresentationContextNotProvided"
+	case WebAuthenticationSessionErrorCodePresentationContextInvalid:
+		return "WebAuthenticationSessionErrorCodePresentationContextInvalid"
 	default:
-		return fmt.Sprintf("ASWebAuthenticationSessionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("WebAuthenticationSessionErrorCode(%d)", int64(e))
 	}
 }

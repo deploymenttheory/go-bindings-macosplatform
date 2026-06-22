@@ -5,81 +5,87 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
+// MetricEventStream is an idiomatic wrapper over the Objective-C class AVMetricEventStream.
 //
-// MetricEventStream wraps [raw.AVMetricEventStream] with a fluent Go API.
+// An object that allows clients to add publishers and then subscribe to specific metric event classes from those publishers.
 type MetricEventStream struct {
-	inner *raw.AVMetricEventStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricEventStream].
-func (x *MetricEventStream) Unwrap() *raw.AVMetricEventStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricEventStream) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricEventStreamFromID adopts an existing object pointer as a MetricEventStream (nil for 0).
+// MetricEventStreamFromID adopts an existing Objective-C object as a MetricEventStream
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricEventStreamFromID(id objc.ID) *MetricEventStream {
 	if id == 0 {
 		return nil
 	}
-	return &MetricEventStream{inner: raw.AVMetricEventStreamFromID(id)}
+	x := &MetricEventStream{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricEventStream creates a new [MetricEventStream].
+// metricEventStreamAdopt wraps an Objective-C object that this code just created as a
+// MetricEventStream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricEventStreamAdopt(id objc.ID) *MetricEventStream {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricEventStream{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricEventStream) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricEventStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricEventStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricEventStream) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetricEventStream creates a new MetricEventStream.
 func NewMetricEventStream() *MetricEventStream {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricEventStream")), objc.RegisterName("new"))
-	return &MetricEventStream{inner: raw.AVMetricEventStreamFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricEventStream")), objc.RegisterName("new"))
+	return metricEventStreamAdopt(_id)
 }
 
-// The publisher should be an AVFoundation instance conforming to AVMetricEventStreamPublisher.
-//
-// AddPublisher calls the underlying AddPublisher.
-func (x *MetricEventStream) AddPublisher(publisher raw.AVMetricEventStreamPublisher) bool {
-	return x.inner.AddPublisher(publisher)
+// SubscribeToMetricEvents subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
+func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToMetricEvents:"), purego.SliceToNSArray(metricEventClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Set a subscriber delegate. - Parameter subscriber: A subscriber delegate object conforming to AVMetricEventStreamSubscriber. - Parameter queue: Dispatch queue for the delegate callbacks.
-//
-// SetSubscriberQueue calls the underlying SetSubscriberQueue.
-func (x *MetricEventStream) SetSubscriberQueue(subscriber raw.AVMetricEventStreamSubscriber, queue *foundation.NSObject) bool {
-	return x.inner.SetSubscriberQueue(subscriber, queue)
-}
-
-// Subscribe to a specific metric event class. - Parameter metricEventClass: Type of metric event class to subscribe to.
-//
-// SubscribeToMetricEvent calls the underlying SubscribeToMetricEvent.
-func (x *MetricEventStream) SubscribeToMetricEvent(metricEventClass objc.Class) {
-	x.inner.SubscribeToMetricEvent(metricEventClass)
-}
-
-// Subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
-//
-// SubscribeToMetricEvents calls the underlying SubscribeToMetricEvents.
-func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class]) {
-	x.inner.SubscribeToMetricEvents(metricEventClasses)
-}
-
-// Subscribe to all metric event classes.
-//
-// SubscribeToAllMetricEvents calls the underlying SubscribeToAllMetricEvents.
+// SubscribeToAllMetricEvents subscribe to all metric event classes.
 func (x *MetricEventStream) SubscribeToAllMetricEvents() {
-	x.inner.SubscribeToAllMetricEvents()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeToAllMetricEvents"))
 }
 
 // MetricEventStreamable is the interface implemented by [MetricEventStream], for mocking and DI.
 type MetricEventStreamable interface {
-	Unwrap() *raw.AVMetricEventStream
-	AddPublisher(publisher raw.AVMetricEventStreamPublisher) bool
-	SetSubscriberQueue(subscriber raw.AVMetricEventStreamSubscriber, queue *foundation.NSObject) bool
-	SubscribeToMetricEvent(metricEventClass objc.Class)
-	SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class])
+	obj.Object
+	SubscribeToMetricEvents(metricEventClasses []obj.Object)
 	SubscribeToAllMetricEvents()
 }
 

@@ -5,173 +5,156 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that configures the attributes and behavior of a sync engine.
+// SyncEngineConfiguration is an idiomatic wrapper over the Objective-C class CKSyncEngineConfiguration.
 //
-// SyncEngineConfiguration wraps [raw.CKSyncEngineConfiguration] with a fluent Go API.
+// A type that configures the attributes and behavior of a sync engine.
 type SyncEngineConfiguration struct {
-	inner *raw.CKSyncEngineConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineConfiguration].
-func (x *SyncEngineConfiguration) Unwrap() *raw.CKSyncEngineConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineConfigurationFromID adopts an existing object pointer as a SyncEngineConfiguration (nil for 0).
+// SyncEngineConfigurationFromID adopts an existing Objective-C object as a SyncEngineConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineConfigurationFromID(id objc.ID) *SyncEngineConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineConfiguration{inner: raw.CKSyncEngineConfigurationFromID(id)}
+	x := &SyncEngineConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a configuration for the specified database and serialized state.
-//
-// NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate creates a new [SyncEngineConfiguration].
-func NewSyncEngineConfigurationWithDatabaseStateSerializationDelegate(database *raw.CKDatabase, stateSerialization *raw.CKSyncEngineStateSerialization, delegate raw.CKSyncEngineDelegate) *SyncEngineConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDatabase:stateSerialization:delegate:"), database.Ptr(), stateSerialization.Ptr(), delegate)
-	return &SyncEngineConfiguration{inner: raw.CKSyncEngineConfigurationFromID(_id)}
+// syncEngineConfigurationAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineConfigurationAdopt(id objc.ID) *SyncEngineConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The associated database.
-//
-// WithDatabase sets the database property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *SyncEngineConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncEngineConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncEngineConfiguration creates a new SyncEngineConfiguration.
+func NewSyncEngineConfiguration() *SyncEngineConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineConfiguration")), objc.RegisterName("new"))
+	return syncEngineConfigurationAdopt(_id)
+}
+
+// WithDatabase the associated database.
 func (x *SyncEngineConfiguration) WithDatabase(database *Database) *SyncEngineConfiguration {
-	x.inner.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
-// The sync engine’s serialized state.
-//
-// WithStateSerialization sets the stateSerialization property and returns the receiver for chaining.
+// WithStateSerialization the sync engine’s serialized state.
 func (x *SyncEngineConfiguration) WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration {
-	x.inner.SetStateSerialization(stateSerialization.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateSerialization:"), objref.IDOf(stateSerialization))
 	return x
 }
 
-// The object that provides the records to sync and handles any related events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SyncEngineConfiguration) WithDelegate(delegate raw.CKSyncEngineDelegate) *SyncEngineConfiguration {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that determines whether the engine syncs automatically.
-//
-// WithAutomaticallySync sets the automaticallySync property and returns the receiver for chaining.
+// WithAutomaticallySync a Boolean value that determines whether the engine syncs automatically.
 func (x *SyncEngineConfiguration) WithAutomaticallySync(automaticallySync bool) *SyncEngineConfiguration {
-	x.inner.SetAutomaticallySync(automaticallySync)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySync:"), automaticallySync)
 	return x
 }
 
-// The subscription identifier for the associated database.
-//
-// WithSubscriptionID sets the subscriptionID property and returns the receiver for chaining.
-func (x *SyncEngineConfiguration) WithSubscriptionID(subscriptionID *foundation.NSString) *SyncEngineConfiguration {
-	x.inner.SetSubscriptionID(subscriptionID)
+// WithSubscriptionID the subscription identifier for the associated database.
+func (x *SyncEngineConfiguration) WithSubscriptionID(subscriptionID obj.Object) *SyncEngineConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionID:"), objref.IDOf(subscriptionID))
 	return x
 }
 
-// The associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database. - Important: When using CloudKit's production environment, don't create multiple sync engines that target the same database. You can, however, do this in the development environment to help testing — for example, to simulate multiple devices syncing back, and forth.
-//
-// Database calls the underlying Database.
+// Database the associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database. - Important: When using CloudKit's production environment, don't create multiple sync engines that target the same database. You can, however, do this in the development environment to help testing — for example, to simulate multiple devices syncing back, and forth.
 func (x *SyncEngineConfiguration) Database() *Database {
-	_r := x.inner.Database()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("database"))
+	return DatabaseFromID(_r)
 }
 
-// SetDatabase calls the underlying SetDatabase.
-func (x *SyncEngineConfiguration) SetDatabase(database *raw.CKDatabase) {
-	x.inner.SetDatabase(database)
+// SetDatabase wraps the corresponding Objective-C method.
+func (x *SyncEngineConfiguration) SetDatabase(database *Database) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 }
 
-// The sync engine's serialized state. This property returns the value you specify for the initializer's `stateSerialization` parameter. If you choose to set this property after initialization, assign the state from the most recent “CKSyncEngineStateUpdateEvent“ handled by your delegate. However, If this is the first initialization of the associated sync engine, specify `nil` instead. The default value is `nil`.
-//
-// StateSerialization calls the underlying StateSerialization.
+// StateSerialization the sync engine's serialized state. This property returns the value you specify for the initializer's `stateSerialization` parameter. If you choose to set this property after initialization, assign the state from the most recent “CKSyncEngineStateUpdateEvent“ handled by your delegate. However, If this is the first initialization of the associated sync engine, specify `nil` instead. The default value is `nil`.
 func (x *SyncEngineConfiguration) StateSerialization() *SyncEngineStateSerialization {
-	_r := x.inner.StateSerialization()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineStateSerialization{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateSerialization"))
+	return SyncEngineStateSerializationFromID(_r)
 }
 
-// SetStateSerialization calls the underlying SetStateSerialization.
-func (x *SyncEngineConfiguration) SetStateSerialization(stateSerialization *raw.CKSyncEngineStateSerialization) {
-	x.inner.SetStateSerialization(stateSerialization)
+// SetStateSerialization wraps the corresponding Objective-C method.
+func (x *SyncEngineConfiguration) SetStateSerialization(stateSerialization *SyncEngineStateSerialization) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateSerialization:"), objref.IDOf(stateSerialization))
 }
 
-// The object that provides the records to sync and handles any related events.
-//
-// Delegate calls the underlying Delegate.
-func (x *SyncEngineConfiguration) Delegate() raw.CKSyncEngineDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SyncEngineConfiguration) SetDelegate(delegate raw.CKSyncEngineDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// A Boolean value that determines whether the engine syncs automatically. By default, the sync engine uses the system scheduler to automatically schedule both send and fetch operations. If an operation fails due to a recoverable error, such as a network failure, or when the server is enforcing request limits, the engine reschedules those operations as necessary. Unless you have a specific need, prefer to use the default behavior in your app. If you set this property's value to <doc://com.apple.documentation/documentation/swift/false>, use “CKSyncEngine/fetchChangesWithCompletionHandler:“ and “CKSyncEngine/sendChangesWithCompletionHandler:“ to invoke immediate sync operations, allowing for more control over when your app syncs its records. For example, you may want to sync at a specific time of day, or deterministically simulate certain conditions in your unit tests. The default value is <doc://com.apple.documentation/documentation/swift/true>.
-//
-// AutomaticallySync calls the underlying AutomaticallySync.
+// AutomaticallySync a Boolean value that determines whether the engine syncs automatically. By default, the sync engine uses the system scheduler to automatically schedule both send and fetch operations. If an operation fails due to a recoverable error, such as a network failure, or when the server is enforcing request limits, the engine reschedules those operations as necessary. Unless you have a specific need, prefer to use the default behavior in your app. If you set this property's value to <doc://com.apple.documentation/documentation/swift/false>, use “CKSyncEngine/fetchChangesWithCompletionHandler:“ and “CKSyncEngine/sendChangesWithCompletionHandler:“ to invoke immediate sync operations, allowing for more control over when your app syncs its records. For example, you may want to sync at a specific time of day, or deterministically simulate certain conditions in your unit tests. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *SyncEngineConfiguration) AutomaticallySync() bool {
-	return x.inner.AutomaticallySync()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallySync"))
+	return _r
 }
 
-// SetAutomaticallySync calls the underlying SetAutomaticallySync.
+// SetAutomaticallySync wraps the corresponding Objective-C method.
 func (x *SyncEngineConfiguration) SetAutomaticallySync(automaticallySync bool) {
-	x.inner.SetAutomaticallySync(automaticallySync)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySync:"), automaticallySync)
 }
 
-// The subscription identifier for the associated database. By default, a sync engine attempts to discover an existing subscription for the synced database. If one isn't found, the engine creates an internal “CKDatabaseSubscription“ and uses that to receive notifications about remote record changes. If you require the sync engine to use a specific database subscription, assign that subscription's identifier to this property. Doing so enables your app to be backwards compatible if you're migrating to “CKSyncEngine-4b4w9“ from a custom CloudKit sync implementation. The default value is `nil`.
-//
-// SubscriptionID calls the underlying SubscriptionID.
-func (x *SyncEngineConfiguration) SubscriptionID() string {
-	_r := x.inner.SubscriptionID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// SubscriptionID the subscription identifier for the associated database. By default, a sync engine attempts to discover an existing subscription for the synced database. If one isn't found, the engine creates an internal “CKDatabaseSubscription“ and uses that to receive notifications about remote record changes. If you require the sync engine to use a specific database subscription, assign that subscription's identifier to this property. Doing so enables your app to be backwards compatible if you're migrating to “CKSyncEngine-4b4w9“ from a custom CloudKit sync implementation. The default value is `nil`.
+func (x *SyncEngineConfiguration) SubscriptionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionID"))
+	return obj.Wrap(_r)
 }
 
-// SetSubscriptionID calls the underlying SetSubscriptionID.
-func (x *SyncEngineConfiguration) SetSubscriptionID(subscriptionID *foundation.NSString) {
-	x.inner.SetSubscriptionID(subscriptionID)
+// SetSubscriptionID wraps the corresponding Objective-C method.
+func (x *SyncEngineConfiguration) SetSubscriptionID(subscriptionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionID:"), objref.IDOf(subscriptionID))
 }
 
 // SyncEngineConfigurationable is the interface implemented by [SyncEngineConfiguration], for mocking and DI.
 type SyncEngineConfigurationable interface {
-	Unwrap() *raw.CKSyncEngineConfiguration
+	obj.Object
 	WithDatabase(database *Database) *SyncEngineConfiguration
 	WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration
-	WithDelegate(delegate raw.CKSyncEngineDelegate) *SyncEngineConfiguration
 	WithAutomaticallySync(automaticallySync bool) *SyncEngineConfiguration
-	WithSubscriptionID(subscriptionID *foundation.NSString) *SyncEngineConfiguration
+	WithSubscriptionID(subscriptionID obj.Object) *SyncEngineConfiguration
 	Database() *Database
-	SetDatabase(database *raw.CKDatabase)
+	SetDatabase(database *Database)
 	StateSerialization() *SyncEngineStateSerialization
-	SetStateSerialization(stateSerialization *raw.CKSyncEngineStateSerialization)
-	Delegate() raw.CKSyncEngineDelegate
-	SetDelegate(delegate raw.CKSyncEngineDelegate)
+	SetStateSerialization(stateSerialization *SyncEngineStateSerialization)
 	AutomaticallySync() bool
 	SetAutomaticallySync(automaticallySync bool)
-	SubscriptionID() string
-	SetSubscriptionID(subscriptionID *foundation.NSString)
+	SubscriptionID() obj.Object
+	SetSubscriptionID(subscriptionID obj.Object)
 }
 
 var _ SyncEngineConfigurationable = (*SyncEngineConfiguration)(nil)

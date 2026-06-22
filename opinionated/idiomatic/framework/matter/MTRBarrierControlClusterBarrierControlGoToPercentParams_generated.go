@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBarrierControlClusterBarrierControlGoToPercentParams wraps [raw.MTRBarrierControlClusterBarrierControlGoToPercentParams] with a fluent Go API.
+// MTRBarrierControlClusterBarrierControlGoToPercentParams is an idiomatic wrapper over the Objective-C class MTRBarrierControlClusterBarrierControlGoToPercentParams.
 type MTRBarrierControlClusterBarrierControlGoToPercentParams struct {
-	inner *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBarrierControlClusterBarrierControlGoToPercentParams].
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) Unwrap() *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID adopts an existing object pointer as a MTRBarrierControlClusterBarrierControlGoToPercentParams (nil for 0).
+// MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID adopts an existing Objective-C object as a MTRBarrierControlClusterBarrierControlGoToPercentParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID(id objc.ID) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBarrierControlClusterBarrierControlGoToPercentParams{inner: raw.MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID(id)}
+	x := &MTRBarrierControlClusterBarrierControlGoToPercentParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBarrierControlClusterBarrierControlGoToPercentParams creates a new [MTRBarrierControlClusterBarrierControlGoToPercentParams].
+// mTRBarrierControlClusterBarrierControlGoToPercentParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRBarrierControlClusterBarrierControlGoToPercentParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBarrierControlClusterBarrierControlGoToPercentParamsAdopt(id objc.ID) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBarrierControlClusterBarrierControlGoToPercentParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRBarrierControlClusterBarrierControlGoToPercentParams creates a new MTRBarrierControlClusterBarrierControlGoToPercentParams.
 func NewMTRBarrierControlClusterBarrierControlGoToPercentParams() *MTRBarrierControlClusterBarrierControlGoToPercentParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBarrierControlClusterBarrierControlGoToPercentParams")), objc.RegisterName("new"))
-	return &MTRBarrierControlClusterBarrierControlGoToPercentParams{inner: raw.MTRBarrierControlClusterBarrierControlGoToPercentParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBarrierControlClusterBarrierControlGoToPercentParams")), objc.RegisterName("new"))
+	return mTRBarrierControlClusterBarrierControlGoToPercentParamsAdopt(_id)
 }
 
-// WithPercentOpen sets the percentOpen property and returns the receiver for chaining.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithPercentOpen(percentOpen *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
-	x.inner.SetPercentOpen(percentOpen)
+// WithPercentOpen sets the property and returns the receiver so calls can be chained.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithPercentOpen(percentOpen obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentOpen:"), objref.IDOf(percentOpen))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// PercentOpen calls the underlying PercentOpen.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) PercentOpen() *foundation.NSNumber {
-	return x.inner.PercentOpen()
+// PercentOpen wraps the corresponding Objective-C method.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) PercentOpen() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentOpen"))
+	return obj.Wrap(_r)
 }
 
-// SetPercentOpen calls the underlying SetPercentOpen.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetPercentOpen(percentOpen *foundation.NSNumber) {
-	x.inner.SetPercentOpen(percentOpen)
+// SetPercentOpen wraps the corresponding Objective-C method.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetPercentOpen(percentOpen obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentOpen:"), objref.IDOf(percentOpen))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRBarrierControlClusterBarrierControlGoToPercentParamsable is the interface implemented by [MTRBarrierControlClusterBarrierControlGoToPercentParams], for mocking and DI.
 type MTRBarrierControlClusterBarrierControlGoToPercentParamsable interface {
-	Unwrap() *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams
-	WithPercentOpen(percentOpen *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
-	PercentOpen() *foundation.NSNumber
-	SetPercentOpen(percentOpen *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithPercentOpen(percentOpen obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	PercentOpen() obj.Object
+	SetPercentOpen(percentOpen obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRBarrierControlClusterBarrierControlGoToPercentParamsable = (*MTRBarrierControlClusterBarrierControlGoToPercentParams)(nil)

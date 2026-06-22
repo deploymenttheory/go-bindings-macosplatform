@@ -5,143 +5,141 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that is run by a node to change its structure or content.
+// Action is an idiomatic wrapper over the Objective-C class SKAction.
 //
-// Action wraps [raw.SKAction] with a fluent Go API.
+// An object that is run by a node to change its structure or content.
 type Action struct {
-	inner *raw.SKAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKAction].
-func (x *Action) Unwrap() *raw.SKAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Action) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionFromID adopts an existing object pointer as a Action (nil for 0).
+// ActionFromID adopts an existing Objective-C object as a Action
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionFromID(id objc.ID) *Action {
 	if id == 0 {
 		return nil
 	}
-	return &Action{inner: raw.SKActionFromID(id)}
-}
-
-// NewAction creates a new [Action].
-func NewAction() *Action {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAction")), objc.RegisterName("new"))
-	return &Action{inner: raw.SKActionFromID(_id)}
-}
-
-// The duration required to complete an action.
-//
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *Action) WithDuration(duration float64) *Action {
-	x.inner.SetDuration(duration)
+	x := &Action{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A setting that controls the speed curve of an animation.
-//
-// WithTimingMode sets the timingMode property and returns the receiver for chaining.
-func (x *Action) WithTimingMode(timingMode SKActionTimingMode) *Action {
-	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
-	return x
-}
-
-// A block used to customize the timing function.
-//
-// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
-	x.inner.SetTimingFunction(timingFunction)
-	return x
-}
-
-// A speed factor that modifies how fast an action runs.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
-func (x *Action) WithSpeed(speed float64) *Action {
-	x.inner.SetSpeed(speed)
-	return x
-}
-
-// Creates an action that reverses the behavior of another action @return This method always returns an action object; however, not all actions are reversible
-//
-// ReversedAction calls the underlying ReversedAction.
-func (x *Action) ReversedAction() *Action {
-	_r := x.inner.ReversedAction()
-	if _r == nil {
+// actionAdopt wraps an Objective-C object that this code just created as a
+// Action (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionAdopt(id objc.ID) *Action {
+	if id == 0 {
 		return nil
 	}
-	return &Action{inner: _r}
+	x := &Action{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The duration required to complete an action, in seconds.
-//
-// Duration calls the underlying Duration.
+// Description returns the object's -description text.
+func (x *Action) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Action) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAction creates a new Action.
+func NewAction() *Action {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("new"))
+	return actionAdopt(_id)
+}
+
+// WithDuration the duration required to complete an action.
+func (x *Action) WithDuration(duration float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
+	return x
+}
+
+// WithTimingMode a setting that controls the speed curve of an animation.
+func (x *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
+	return x
+}
+
+// WithSpeed a speed factor that modifies how fast an action runs.
+func (x *Action) WithSpeed(speed float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
+	return x
+}
+
+// ReversedAction creates an action that reverses the behavior of another action
+func (x *Action) ReversedAction() *Action {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedAction"))
+	return ActionFromID(_r)
+}
+
+// Duration the duration required to complete an action, in seconds.
 func (x *Action) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// SetDuration calls the underlying SetDuration.
+// SetDuration wraps the corresponding Objective-C method.
 func (x *Action) SetDuration(duration float64) {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
 
-// The timing mode used to execute an action @see SKActionTimingMode
-//
-// TimingMode calls the underlying TimingMode.
-func (x *Action) TimingMode() SKActionTimingMode {
-	return SKActionTimingMode(x.inner.TimingMode())
+// TimingMode the timing mode used to execute an action
+func (x *Action) TimingMode() ActionTimingMode {
+	_r := objc.Send[ActionTimingMode](objref.IDOf(x), objc.RegisterName("timingMode"))
+	return _r
 }
 
-// SetTimingMode calls the underlying SetTimingMode.
-func (x *Action) SetTimingMode(timingMode SKActionTimingMode) {
-	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
+// SetTimingMode wraps the corresponding Objective-C method.
+func (x *Action) SetTimingMode(timingMode ActionTimingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
 }
 
-// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SKActionTimingFunction
-//
-// TimingFunction calls the underlying TimingFunction.
-func (x *Action) TimingFunction() objc.Block {
-	return x.inner.TimingFunction()
-}
-
-// SetTimingFunction calls the underlying SetTimingFunction.
-func (x *Action) SetTimingFunction(timingFunction objc.Block) {
-	x.inner.SetTimingFunction(timingFunction)
-}
-
-// A speed factor that modifies how fast an action runs. Default value is 1.0
-//
-// Speed calls the underlying Speed.
+// Speed a speed factor that modifies how fast an action runs. Default value is 1.0
 func (x *Action) Speed() float64 {
-	return x.inner.Speed()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+	return _r
 }
 
-// SetSpeed calls the underlying SetSpeed.
+// SetSpeed wraps the corresponding Objective-C method.
 func (x *Action) SetSpeed(speed float64) {
-	x.inner.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
 // Actionable is the interface implemented by [Action], for mocking and DI.
 type Actionable interface {
-	Unwrap() *raw.SKAction
+	obj.Object
 	WithDuration(duration float64) *Action
-	WithTimingMode(timingMode SKActionTimingMode) *Action
-	WithTimingFunction(timingFunction objc.Block) *Action
+	WithTimingMode(timingMode ActionTimingMode) *Action
 	WithSpeed(speed float64) *Action
 	ReversedAction() *Action
 	Duration() float64
 	SetDuration(duration float64)
-	TimingMode() SKActionTimingMode
-	SetTimingMode(timingMode SKActionTimingMode)
-	TimingFunction() objc.Block
-	SetTimingFunction(timingFunction objc.Block)
+	TimingMode() ActionTimingMode
+	SetTimingMode(timingMode ActionTimingMode)
 	Speed() float64
 	SetSpeed(speed float64)
 }

@@ -5,32 +5,32 @@
 package netfs
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/netfs"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// NetFSCopyURLForRemountingVolume calls [raw.NetFSCopyURLForRemountingVolume] (C function NetFSCopyURLForRemountingVolume).
-func NetFSCopyURLForRemountingVolume(localPathURL unsafe.Pointer) unsafe.Pointer {
-	return raw.NetFSCopyURLForRemountingVolume(localPathURL)
+var _fnNetFSCopyURLForRemountingVolume func(objc.ID) objc.ID
+
+// NetFSCopyURLForRemountingVolume calls the NetFS framework function NetFSCopyURLForRemountingVolume.
+func NetFSCopyURLForRemountingVolume(localPathURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetFSCopyURLForRemountingVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnNetFSCopyURLForRemountingVolume, _lib, "NetFSCopyURLForRemountingVolume")
+	}
+	_ret := _fnNetFSCopyURLForRemountingVolume(objref.IDOf(localPathURL))
+	return obj.Wrap(_ret)
 }
 
-// NetFSMountURLAsync calls [raw.NetFSMountURLAsync] (C function NetFSMountURLAsync).
-func NetFSMountURLAsync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, requestID unsafe.Pointer, dispatchq *foundation.NSObject, mount_report func(int, unsafe.Pointer, unsafe.Pointer)) int {
-	return raw.NetFSMountURLAsync(url, mountpath, user, passwd, open_options, mount_options, requestID, dispatchq, mount_report)
-}
+var _fnNetFSMountURLProbe func(objc.ID) objc.ID
 
-// NetFSMountURLCancel calls [raw.NetFSMountURLCancel] (C function NetFSMountURLCancel).
-func NetFSMountURLCancel(requestID unsafe.Pointer) int {
-	return raw.NetFSMountURLCancel(requestID)
-}
-
-// NetFSMountURLProbe calls [raw.NetFSMountURLProbe] (C function NetFSMountURLProbe).
-func NetFSMountURLProbe(hostname unsafe.Pointer) unsafe.Pointer {
-	return raw.NetFSMountURLProbe(hostname)
-}
-
-// NetFSMountURLSync calls [raw.NetFSMountURLSync] (C function NetFSMountURLSync).
-func NetFSMountURLSync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, mountpoints unsafe.Pointer) int {
-	return raw.NetFSMountURLSync(url, mountpath, user, passwd, open_options, mount_options, mountpoints)
+// NetFSMountURLProbe calls the NetFS framework function NetFSMountURLProbe.
+func NetFSMountURLProbe(hostname obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetFSMountURLProbe == nil {
+		ebipurego.RegisterLibFunc(&_fnNetFSMountURLProbe, _lib, "NetFSMountURLProbe")
+	}
+	_ret := _fnNetFSMountURLProbe(objref.IDOf(hostname))
+	return obj.Wrap(_ret)
 }

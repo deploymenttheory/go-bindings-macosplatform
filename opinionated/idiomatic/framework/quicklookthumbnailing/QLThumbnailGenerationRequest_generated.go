@@ -5,134 +5,159 @@
 package quicklookthumbnailing
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request to generate a thumbnail for a file.
+// ThumbnailGenerationRequest is an idiomatic wrapper over the Objective-C class QLThumbnailGenerationRequest.
 //
-// ThumbnailGenerationRequest wraps [raw.QLThumbnailGenerationRequest] with a fluent Go API.
+// A request to generate a thumbnail for a file.
 type ThumbnailGenerationRequest struct {
-	inner *raw.QLThumbnailGenerationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLThumbnailGenerationRequest].
-func (x *ThumbnailGenerationRequest) Unwrap() *raw.QLThumbnailGenerationRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ThumbnailGenerationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ThumbnailGenerationRequestFromID adopts an existing object pointer as a ThumbnailGenerationRequest (nil for 0).
+// ThumbnailGenerationRequestFromID adopts an existing Objective-C object as a ThumbnailGenerationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ThumbnailGenerationRequestFromID(id objc.ID) *ThumbnailGenerationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ThumbnailGenerationRequest{inner: raw.QLThumbnailGenerationRequestFromID(id)}
-}
-
-// @param url The url of the file on disk for which a thumbnail is requested. @param size The desired size of the thumbnails that should be generated. @param scale The desired scale of the thumbnails that should be generated. This will usually be the scale of the screen. You can for instance pass a scale different from the one of the screen if you would like to save generated thumbnails to a server to later download them on devices with a different screen scale. @param representationTypes The desired successive representations of the thumbnail that should be generated when possible.
-//
-// NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes creates a new [ThumbnailGenerationRequest].
-func NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes(url string, size corefoundation.CGSize, scale float64, representationTypes QLThumbnailGenerationRequestRepresentationTypes) *ThumbnailGenerationRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailGenerationRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtURL:size:scale:representationTypes:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), size, scale, raw.QLThumbnailGenerationRequestRepresentationTypes(representationTypes))
-	return &ThumbnailGenerationRequest{inner: raw.QLThumbnailGenerationRequestFromID(_id)}
-}
-
-// The content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
-//
-// WithContentType sets the contentType property and returns the receiver for chaining.
-func (x *ThumbnailGenerationRequest) WithContentType(contentType *uniformtypeidentifiers.UTType) *ThumbnailGenerationRequest {
-	x.inner.SetContentType(contentType)
+	x := &ThumbnailGenerationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale. If set and it is not possible to generate thumbnails of minimumDimension for any of the requested QLThumbnailGenerationRequestRepresentationTypes, no thumbnail will be provided.
-//
-// WithMinimumDimension sets the minimumDimension property and returns the receiver for chaining.
+// thumbnailGenerationRequestAdopt wraps an Objective-C object that this code just created as a
+// ThumbnailGenerationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func thumbnailGenerationRequestAdopt(id objc.ID) *ThumbnailGenerationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ThumbnailGenerationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ThumbnailGenerationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ThumbnailGenerationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ThumbnailGenerationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ThumbnailGenerationRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes creates a new ThumbnailGenerationRequest.
+func NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes(url string, size corefoundation.CGSize, scale float64, representationTypes ThumbnailGenerationRequestRepresentationTypes) *ThumbnailGenerationRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerationRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtURL:size:scale:representationTypes:"), rt.FileURL(url), size, scale, representationTypes)
+	return thumbnailGenerationRequestAdopt(_id)
+}
+
+// WithContentType the content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
+func (x *ThumbnailGenerationRequest) WithContentType(contentType obj.Object) *ThumbnailGenerationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
+	return x
+}
+
+// WithMinimumDimension defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale. If set and it is not possible to generate thumbnails of minimumDimension for any of the requested QLThumbnailGenerationRequestRepresentationTypes, no thumbnail will be provided.
 func (x *ThumbnailGenerationRequest) WithMinimumDimension(minimumDimension float64) *ThumbnailGenerationRequest {
-	x.inner.SetMinimumDimension(minimumDimension)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDimension:"), minimumDimension)
 	return x
 }
 
-// If set to YES, this will generate something appropriate for display as a file icon, meaning that the thumbnail might be embedded in a frame, show a curled corner, draw a background and/or a drop shadow, as appropriate for the platform. If set to NO, this will generate a raw undecorated thumbnail. Defaults to NO.
-//
-// WithIconMode sets the iconMode property and returns the receiver for chaining.
+// WithIconMode if set to YES, this will generate something appropriate for display as a file icon, meaning that the thumbnail might be embedded in a frame, show a curled corner, draw a background and/or a drop shadow, as appropriate for the platform. If set to NO, this will generate a raw undecorated thumbnail. Defaults to NO.
 func (x *ThumbnailGenerationRequest) WithIconMode(iconMode bool) *ThumbnailGenerationRequest {
-	x.inner.SetIconMode(iconMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconMode:"), iconMode)
 	return x
 }
 
-// The content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
-//
-// ContentType calls the underlying ContentType.
-func (x *ThumbnailGenerationRequest) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// ContentType the content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type.
+func (x *ThumbnailGenerationRequest) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// SetContentType calls the underlying SetContentType.
-func (x *ThumbnailGenerationRequest) SetContentType(contentType *uniformtypeidentifiers.UTType) {
-	x.inner.SetContentType(contentType)
+// SetContentType wraps the corresponding Objective-C method.
+func (x *ThumbnailGenerationRequest) SetContentType(contentType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 }
 
-// Defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale. If set and it is not possible to generate thumbnails of minimumDimension for any of the requested QLThumbnailGenerationRequestRepresentationTypes, no thumbnail will be provided.
-//
-// MinimumDimension calls the underlying MinimumDimension.
+// MinimumDimension defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale. If set and it is not possible to generate thumbnails of minimumDimension for any of the requested QLThumbnailGenerationRequestRepresentationTypes, no thumbnail will be provided.
 func (x *ThumbnailGenerationRequest) MinimumDimension() float64 {
-	return x.inner.MinimumDimension()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumDimension"))
+	return _r
 }
 
-// SetMinimumDimension calls the underlying SetMinimumDimension.
+// SetMinimumDimension wraps the corresponding Objective-C method.
 func (x *ThumbnailGenerationRequest) SetMinimumDimension(minimumDimension float64) {
-	x.inner.SetMinimumDimension(minimumDimension)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDimension:"), minimumDimension)
 }
 
-// If set to YES, this will generate something appropriate for display as a file icon, meaning that the thumbnail might be embedded in a frame, show a curled corner, draw a background and/or a drop shadow, as appropriate for the platform. If set to NO, this will generate a raw undecorated thumbnail. Defaults to NO.
-//
-// IconMode calls the underlying IconMode.
+// IconMode if set to YES, this will generate something appropriate for display as a file icon, meaning that the thumbnail might be embedded in a frame, show a curled corner, draw a background and/or a drop shadow, as appropriate for the platform. If set to NO, this will generate a raw undecorated thumbnail. Defaults to NO.
 func (x *ThumbnailGenerationRequest) IconMode() bool {
-	return x.inner.IconMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("iconMode"))
+	return _r
 }
 
-// SetIconMode calls the underlying SetIconMode.
+// SetIconMode wraps the corresponding Objective-C method.
 func (x *ThumbnailGenerationRequest) SetIconMode(iconMode bool) {
-	x.inner.SetIconMode(iconMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconMode:"), iconMode)
 }
 
-// Size calls the underlying Size.
+// Size wraps the corresponding Objective-C method.
 func (x *ThumbnailGenerationRequest) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// Scale calls the underlying Scale.
+// Scale wraps the corresponding Objective-C method.
 func (x *ThumbnailGenerationRequest) Scale() float64 {
-	return x.inner.Scale()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
+	return _r
 }
 
-// RepresentationTypes calls the underlying RepresentationTypes.
-func (x *ThumbnailGenerationRequest) RepresentationTypes() QLThumbnailGenerationRequestRepresentationTypes {
-	return QLThumbnailGenerationRequestRepresentationTypes(x.inner.RepresentationTypes())
+// RepresentationTypes wraps the corresponding Objective-C method.
+func (x *ThumbnailGenerationRequest) RepresentationTypes() ThumbnailGenerationRequestRepresentationTypes {
+	_r := objc.Send[ThumbnailGenerationRequestRepresentationTypes](objref.IDOf(x), objc.RegisterName("representationTypes"))
+	return _r
 }
 
 // ThumbnailGenerationRequestable is the interface implemented by [ThumbnailGenerationRequest], for mocking and DI.
 type ThumbnailGenerationRequestable interface {
-	Unwrap() *raw.QLThumbnailGenerationRequest
-	WithContentType(contentType *uniformtypeidentifiers.UTType) *ThumbnailGenerationRequest
+	obj.Object
+	WithContentType(contentType obj.Object) *ThumbnailGenerationRequest
 	WithMinimumDimension(minimumDimension float64) *ThumbnailGenerationRequest
 	WithIconMode(iconMode bool) *ThumbnailGenerationRequest
-	ContentType() *uniformtypeidentifiers.UTType
-	SetContentType(contentType *uniformtypeidentifiers.UTType)
+	ContentType() obj.Object
+	SetContentType(contentType obj.Object)
 	MinimumDimension() float64
 	SetMinimumDimension(minimumDimension float64)
 	IconMode() bool
 	SetIconMode(iconMode bool)
 	Size() corefoundation.CGSize
 	Scale() float64
-	RepresentationTypes() QLThumbnailGenerationRequestRepresentationTypes
+	RepresentationTypes() ThumbnailGenerationRequestRepresentationTypes
 }
 
 var _ ThumbnailGenerationRequestable = (*ThumbnailGenerationRequest)(nil)

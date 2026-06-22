@@ -10,465 +10,472 @@ import (
 )
 
 // Options for aborting pending input/output requests.
-type IOUSBHostAbortOption uint64
+type HostAbortOption uint64
 
 const (
 	// The option to abort input/output requests asynchronously.
-	IOUSBHostAbortOptionAsynchronous IOUSBHostAbortOption = 0
+	HostAbortOptionAsynchronous HostAbortOption = 0
 	// The option to abort input/output requests synchronously.
-	IOUSBHostAbortOptionSynchronous IOUSBHostAbortOption = 1
+	HostAbortOptionSynchronous HostAbortOption = 1
 )
 
-func (e IOUSBHostAbortOption) String() string {
+// String returns the HostAbortOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostAbortOption) String() string {
 	switch e {
-	case IOUSBHostAbortOptionAsynchronous:
-		return "IOUSBHostAbortOptionAsynchronous"
-	case IOUSBHostAbortOptionSynchronous:
-		return "IOUSBHostAbortOptionSynchronous"
+	case HostAbortOptionAsynchronous:
+		return "HostAbortOptionAsynchronous"
+	case HostAbortOptionSynchronous:
+		return "HostAbortOptionSynchronous"
 	default:
-		return fmt.Sprintf("IOUSBHostAbortOption(%d)", int64(e))
+		return fmt.Sprintf("HostAbortOption(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIControllerState @brief       Host controller state managed by IOUSBHostCIControllerStateMachine @discussion  IOUSBHostCIControllerStateOff is the initial state of a newly created IOUSBHostCIControllerStateMachine instance, and represents a completely quiesced controller.  All root ports must be in the IOUSBHostCIPortStateOff state. IOUSBHostCIControllerStatePaused represents a controller that is idle.  In this state the controller is not processing IO requests, but can detect port changes such as connect events or remote wakes.  Root ports must not be in the IOUSBHostCIPortStateActive state. IOUSBHostCIControllerStateActive represents a controller that is fully functional and able to service IO requests.  Root ports may be in the IOUSBHostCIPortStateActive state.
-type IOUSBHostCIControllerState int64
+// Host controller state managed by IOUSBHostCIControllerStateMachine IOUSBHostCIControllerStateOff is the initial state of a newly created IOUSBHostCIControllerStateMachine instance, and represents a completely quiesced controller.  All root ports must be in the IOUSBHostCIPortStateOff state. IOUSBHostCIControllerStatePaused represents a controller that is idle.  In this state the controller is not processing IO requests, but can detect port changes such as connect events or remote wakes.  Root ports must not be in the IOUSBHostCIPortStateActive state. IOUSBHostCIControllerStateActive represents a controller that is fully functional and able to service IO requests.  Root ports may be in the IOUSBHostCIPortStateActive state.
+type HostCIControllerState int64
 
 const (
-	IOUSBHostCIControllerStateOff    IOUSBHostCIControllerState = 0
-	IOUSBHostCIControllerStatePaused IOUSBHostCIControllerState = 1
-	IOUSBHostCIControllerStateActive IOUSBHostCIControllerState = 2
+	HostCIControllerStateOff    HostCIControllerState = 0
+	HostCIControllerStatePaused HostCIControllerState = 1
+	HostCIControllerStateActive HostCIControllerState = 2
 )
 
-func (e IOUSBHostCIControllerState) String() string {
+// String returns the HostCIControllerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIControllerState) String() string {
 	switch e {
-	case IOUSBHostCIControllerStateOff:
-		return "IOUSBHostCIControllerStateOff"
-	case IOUSBHostCIControllerStatePaused:
-		return "IOUSBHostCIControllerStatePaused"
-	case IOUSBHostCIControllerStateActive:
-		return "IOUSBHostCIControllerStateActive"
+	case HostCIControllerStateOff:
+		return "HostCIControllerStateOff"
+	case HostCIControllerStatePaused:
+		return "HostCIControllerStatePaused"
+	case HostCIControllerStateActive:
+		return "HostCIControllerStateActive"
 	default:
-		return fmt.Sprintf("IOUSBHostCIControllerState(%d)", int64(e))
+		return fmt.Sprintf("HostCIControllerState(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIDeviceSpeed @brief       Values to represent a connected device speed, to be used in IOUSBHostCIMessages and IOUSBHostsCIPortStatus
-type IOUSBHostCIDeviceSpeed int64
+// Values to represent a connected device speed, to be used in IOUSBHostCIMessages and IOUSBHostsCIPortStatus
+type HostCIDeviceSpeed int64
 
 const (
-	IOUSBHostCIDeviceSpeedNone         IOUSBHostCIDeviceSpeed = 0
-	IOUSBHostCIDeviceSpeedFull         IOUSBHostCIDeviceSpeed = 1
-	IOUSBHostCIDeviceSpeedLow          IOUSBHostCIDeviceSpeed = 2
-	IOUSBHostCIDeviceSpeedHigh         IOUSBHostCIDeviceSpeed = 3
-	IOUSBHostCIDeviceSpeedSuper        IOUSBHostCIDeviceSpeed = 4
-	IOUSBHostCIDeviceSpeedSuperPlus    IOUSBHostCIDeviceSpeed = 5
-	IOUSBHostCIDeviceSpeedSuperPlusBy2 IOUSBHostCIDeviceSpeed = 6
-	IOUSBHostCIDeviceSpeedOther        IOUSBHostCIDeviceSpeed = 7
+	HostCIDeviceSpeedNone         HostCIDeviceSpeed = 0
+	HostCIDeviceSpeedFull         HostCIDeviceSpeed = 1
+	HostCIDeviceSpeedLow          HostCIDeviceSpeed = 2
+	HostCIDeviceSpeedHigh         HostCIDeviceSpeed = 3
+	HostCIDeviceSpeedSuper        HostCIDeviceSpeed = 4
+	HostCIDeviceSpeedSuperPlus    HostCIDeviceSpeed = 5
+	HostCIDeviceSpeedSuperPlusBy2 HostCIDeviceSpeed = 6
+	HostCIDeviceSpeedOther        HostCIDeviceSpeed = 7
 )
 
-func (e IOUSBHostCIDeviceSpeed) String() string {
+// String returns the HostCIDeviceSpeed constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIDeviceSpeed) String() string {
 	switch e {
-	case IOUSBHostCIDeviceSpeedNone:
-		return "IOUSBHostCIDeviceSpeedNone"
-	case IOUSBHostCIDeviceSpeedFull:
-		return "IOUSBHostCIDeviceSpeedFull"
-	case IOUSBHostCIDeviceSpeedLow:
-		return "IOUSBHostCIDeviceSpeedLow"
-	case IOUSBHostCIDeviceSpeedHigh:
-		return "IOUSBHostCIDeviceSpeedHigh"
-	case IOUSBHostCIDeviceSpeedSuper:
-		return "IOUSBHostCIDeviceSpeedSuper"
-	case IOUSBHostCIDeviceSpeedSuperPlus:
-		return "IOUSBHostCIDeviceSpeedSuperPlus"
-	case IOUSBHostCIDeviceSpeedSuperPlusBy2:
-		return "IOUSBHostCIDeviceSpeedSuperPlusBy2"
-	case IOUSBHostCIDeviceSpeedOther:
-		return "IOUSBHostCIDeviceSpeedOther"
+	case HostCIDeviceSpeedNone:
+		return "HostCIDeviceSpeedNone"
+	case HostCIDeviceSpeedFull:
+		return "HostCIDeviceSpeedFull"
+	case HostCIDeviceSpeedLow:
+		return "HostCIDeviceSpeedLow"
+	case HostCIDeviceSpeedHigh:
+		return "HostCIDeviceSpeedHigh"
+	case HostCIDeviceSpeedSuper:
+		return "HostCIDeviceSpeedSuper"
+	case HostCIDeviceSpeedSuperPlus:
+		return "HostCIDeviceSpeedSuperPlus"
+	case HostCIDeviceSpeedSuperPlusBy2:
+		return "HostCIDeviceSpeedSuperPlusBy2"
+	case HostCIDeviceSpeedOther:
+		return "HostCIDeviceSpeedOther"
 	default:
-		return fmt.Sprintf("IOUSBHostCIDeviceSpeed(%d)", int64(e))
+		return fmt.Sprintf("HostCIDeviceSpeed(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIDeviceState @brief       Device state managed by IOUSBHostCIDeviceStateMachine @discussion  IOUSBHostCIDeviceStateDestroyed represents a device that is no longer usable, and whose resources will be destroyed and freed IOUSBHostCIDeviceStatePaused represents a device that may have IO requests enqueued, but they are not active on the bus.  The state is closely correlated to IOUSBHostCIPortStateSuspended, and endpoints associated with this device may not be in the IOUSBHostCIEndpointStateActive state. IOUSBHostCIDeviceStateActive is the initial sate of a newly created IOUSBHsotCIDeviceStateMachine, and represents a device that can be processing IO requests.  Endpoints associated with this device may be in the IOUSBHostCIEndpointStateActive state.
-type IOUSBHostCIDeviceState int64
+// Device state managed by IOUSBHostCIDeviceStateMachine IOUSBHostCIDeviceStateDestroyed represents a device that is no longer usable, and whose resources will be destroyed and freed IOUSBHostCIDeviceStatePaused represents a device that may have IO requests enqueued, but they are not active on the bus.  The state is closely correlated to IOUSBHostCIPortStateSuspended, and endpoints associated with this device may not be in the IOUSBHostCIEndpointStateActive state. IOUSBHostCIDeviceStateActive is the initial sate of a newly created IOUSBHsotCIDeviceStateMachine, and represents a device that can be processing IO requests.  Endpoints associated with this device may be in the IOUSBHostCIEndpointStateActive state.
+type HostCIDeviceState int64
 
 const (
-	IOUSBHostCIDeviceStateDestroyed IOUSBHostCIDeviceState = 0
-	IOUSBHostCIDeviceStatePaused    IOUSBHostCIDeviceState = 1
-	IOUSBHostCIDeviceStateActive    IOUSBHostCIDeviceState = 2
+	HostCIDeviceStateDestroyed HostCIDeviceState = 0
+	HostCIDeviceStatePaused    HostCIDeviceState = 1
+	HostCIDeviceStateActive    HostCIDeviceState = 2
 )
 
-func (e IOUSBHostCIDeviceState) String() string {
+// String returns the HostCIDeviceState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIDeviceState) String() string {
 	switch e {
-	case IOUSBHostCIDeviceStateDestroyed:
-		return "IOUSBHostCIDeviceStateDestroyed"
-	case IOUSBHostCIDeviceStatePaused:
-		return "IOUSBHostCIDeviceStatePaused"
-	case IOUSBHostCIDeviceStateActive:
-		return "IOUSBHostCIDeviceStateActive"
+	case HostCIDeviceStateDestroyed:
+		return "HostCIDeviceStateDestroyed"
+	case HostCIDeviceStatePaused:
+		return "HostCIDeviceStatePaused"
+	case HostCIDeviceStateActive:
+		return "HostCIDeviceStateActive"
 	default:
-		return fmt.Sprintf("IOUSBHostCIDeviceState(%d)", int64(e))
+		return fmt.Sprintf("HostCIDeviceState(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIEndpointState @brief       Endpoint state managed by IOUSBHostCIEndpointStateMachine @discussion  IOUSBHostCIEndpointStateDestroyed represents an endpoint that is no longer usable, and whose resources will be destroyed and freed. IOUSBHostCIEndpointStateHalted represents an endpoint that has encountered an IO error.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStatePaused is the initial state of a newly created IOUSBHostCIEndpointStateMachine, and represents an endpoint that is not currently servicing IO requests.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStateActive represents an endpoint that is currently servicing an IO request, or is idle after successfully servicing its queue of IO requests.  In this state the client may access transfer structures and IO buffers.
-type IOUSBHostCIEndpointState int64
+// Endpoint state managed by IOUSBHostCIEndpointStateMachine IOUSBHostCIEndpointStateDestroyed represents an endpoint that is no longer usable, and whose resources will be destroyed and freed. IOUSBHostCIEndpointStateHalted represents an endpoint that has encountered an IO error.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStatePaused is the initial state of a newly created IOUSBHostCIEndpointStateMachine, and represents an endpoint that is not currently servicing IO requests.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStateActive represents an endpoint that is currently servicing an IO request, or is idle after successfully servicing its queue of IO requests.  In this state the client may access transfer structures and IO buffers.
+type HostCIEndpointState int64
 
 const (
-	IOUSBHostCIEndpointStateDestroyed IOUSBHostCIEndpointState = 0
-	IOUSBHostCIEndpointStateHalted    IOUSBHostCIEndpointState = 1
-	IOUSBHostCIEndpointStatePaused    IOUSBHostCIEndpointState = 2
-	IOUSBHostCIEndpointStateActive    IOUSBHostCIEndpointState = 3
+	HostCIEndpointStateDestroyed HostCIEndpointState = 0
+	HostCIEndpointStateHalted    HostCIEndpointState = 1
+	HostCIEndpointStatePaused    HostCIEndpointState = 2
+	HostCIEndpointStateActive    HostCIEndpointState = 3
 )
 
-func (e IOUSBHostCIEndpointState) String() string {
+// String returns the HostCIEndpointState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIEndpointState) String() string {
 	switch e {
-	case IOUSBHostCIEndpointStateDestroyed:
-		return "IOUSBHostCIEndpointStateDestroyed"
-	case IOUSBHostCIEndpointStateHalted:
-		return "IOUSBHostCIEndpointStateHalted"
-	case IOUSBHostCIEndpointStatePaused:
-		return "IOUSBHostCIEndpointStatePaused"
-	case IOUSBHostCIEndpointStateActive:
-		return "IOUSBHostCIEndpointStateActive"
+	case HostCIEndpointStateDestroyed:
+		return "HostCIEndpointStateDestroyed"
+	case HostCIEndpointStateHalted:
+		return "HostCIEndpointStateHalted"
+	case HostCIEndpointStatePaused:
+		return "HostCIEndpointStatePaused"
+	case HostCIEndpointStateActive:
+		return "HostCIEndpointStateActive"
 	default:
-		return fmt.Sprintf("IOUSBHostCIEndpointState(%d)", int64(e))
+		return fmt.Sprintf("HostCIEndpointState(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIExceptionType @brief       Exception specifier included as message argument to <code>kUSBHostMessageControllerException</code> @discussion  The kernel driver sends a <code>kUSBHostMessageControllerException</code> message to its clients when a fatal problem has occurred, with a refCon of the IOUSBHostController instance and a <code>IOUSBHostCIExceptionType</code> in the message arguments. When any <code>kUSBHostMessageControllerException</code> message is received, the specified IOUSBHostControllerInterface must be destroyed.
-type IOUSBHostCIExceptionType int64
+// Exception specifier included as message argument to <code>kUSBHostMessageControllerException</code> The kernel driver sends a <code>kUSBHostMessageControllerException</code> message to its clients when a fatal problem has occurred, with a refCon of the IOUSBHostController instance and a <code>IOUSBHostCIExceptionType</code> in the message arguments. When any <code>kUSBHostMessageControllerException</code> message is received, the specified IOUSBHostControllerInterface must be destroyed.
+type HostCIExceptionType int64
 
 const (
-	IOUSBHostCIExceptionTypeUnknown               IOUSBHostCIExceptionType = 0
-	IOUSBHostCIExceptionTypeCapabilitiesInvalid   IOUSBHostCIExceptionType = 1
-	IOUSBHostCIExceptionTypeTerminated            IOUSBHostCIExceptionType = 2
-	IOUSBHostCIExceptionTypeCommandReadCollision  IOUSBHostCIExceptionType = 3
-	IOUSBHostCIExceptionTypeCommandWriteFailed    IOUSBHostCIExceptionType = 4
-	IOUSBHostCIExceptionTypeCommandTimeout        IOUSBHostCIExceptionType = 5
-	IOUSBHostCIExceptionTypeCommandFailure        IOUSBHostCIExceptionType = 6
-	IOUSBHostCIExceptionTypeInterruptInvalid      IOUSBHostCIExceptionType = 7
-	IOUSBHostCIExceptionTypeInterruptOverflow     IOUSBHostCIExceptionType = 8
-	IOUSBHostCIExceptionTypeDoorbellReadCollision IOUSBHostCIExceptionType = 9
-	IOUSBHostCIExceptionTypeDoorbellOverflow      IOUSBHostCIExceptionType = 10
-	IOUSBHostCIExceptionTypeProtocolError         IOUSBHostCIExceptionType = 11
-	IOUSBHostCIExceptionTypeFrameUpdateError      IOUSBHostCIExceptionType = 12
+	HostCIExceptionTypeUnknown               HostCIExceptionType = 0
+	HostCIExceptionTypeCapabilitiesInvalid   HostCIExceptionType = 1
+	HostCIExceptionTypeTerminated            HostCIExceptionType = 2
+	HostCIExceptionTypeCommandReadCollision  HostCIExceptionType = 3
+	HostCIExceptionTypeCommandWriteFailed    HostCIExceptionType = 4
+	HostCIExceptionTypeCommandTimeout        HostCIExceptionType = 5
+	HostCIExceptionTypeCommandFailure        HostCIExceptionType = 6
+	HostCIExceptionTypeInterruptInvalid      HostCIExceptionType = 7
+	HostCIExceptionTypeInterruptOverflow     HostCIExceptionType = 8
+	HostCIExceptionTypeDoorbellReadCollision HostCIExceptionType = 9
+	HostCIExceptionTypeDoorbellOverflow      HostCIExceptionType = 10
+	HostCIExceptionTypeProtocolError         HostCIExceptionType = 11
+	HostCIExceptionTypeFrameUpdateError      HostCIExceptionType = 12
 )
 
-func (e IOUSBHostCIExceptionType) String() string {
+// String returns the HostCIExceptionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIExceptionType) String() string {
 	switch e {
-	case IOUSBHostCIExceptionTypeUnknown:
-		return "IOUSBHostCIExceptionTypeUnknown"
-	case IOUSBHostCIExceptionTypeCapabilitiesInvalid:
-		return "IOUSBHostCIExceptionTypeCapabilitiesInvalid"
-	case IOUSBHostCIExceptionTypeTerminated:
-		return "IOUSBHostCIExceptionTypeTerminated"
-	case IOUSBHostCIExceptionTypeCommandReadCollision:
-		return "IOUSBHostCIExceptionTypeCommandReadCollision"
-	case IOUSBHostCIExceptionTypeCommandWriteFailed:
-		return "IOUSBHostCIExceptionTypeCommandWriteFailed"
-	case IOUSBHostCIExceptionTypeCommandTimeout:
-		return "IOUSBHostCIExceptionTypeCommandTimeout"
-	case IOUSBHostCIExceptionTypeCommandFailure:
-		return "IOUSBHostCIExceptionTypeCommandFailure"
-	case IOUSBHostCIExceptionTypeInterruptInvalid:
-		return "IOUSBHostCIExceptionTypeInterruptInvalid"
-	case IOUSBHostCIExceptionTypeInterruptOverflow:
-		return "IOUSBHostCIExceptionTypeInterruptOverflow"
-	case IOUSBHostCIExceptionTypeDoorbellReadCollision:
-		return "IOUSBHostCIExceptionTypeDoorbellReadCollision"
-	case IOUSBHostCIExceptionTypeDoorbellOverflow:
-		return "IOUSBHostCIExceptionTypeDoorbellOverflow"
-	case IOUSBHostCIExceptionTypeProtocolError:
-		return "IOUSBHostCIExceptionTypeProtocolError"
-	case IOUSBHostCIExceptionTypeFrameUpdateError:
-		return "IOUSBHostCIExceptionTypeFrameUpdateError"
+	case HostCIExceptionTypeUnknown:
+		return "HostCIExceptionTypeUnknown"
+	case HostCIExceptionTypeCapabilitiesInvalid:
+		return "HostCIExceptionTypeCapabilitiesInvalid"
+	case HostCIExceptionTypeTerminated:
+		return "HostCIExceptionTypeTerminated"
+	case HostCIExceptionTypeCommandReadCollision:
+		return "HostCIExceptionTypeCommandReadCollision"
+	case HostCIExceptionTypeCommandWriteFailed:
+		return "HostCIExceptionTypeCommandWriteFailed"
+	case HostCIExceptionTypeCommandTimeout:
+		return "HostCIExceptionTypeCommandTimeout"
+	case HostCIExceptionTypeCommandFailure:
+		return "HostCIExceptionTypeCommandFailure"
+	case HostCIExceptionTypeInterruptInvalid:
+		return "HostCIExceptionTypeInterruptInvalid"
+	case HostCIExceptionTypeInterruptOverflow:
+		return "HostCIExceptionTypeInterruptOverflow"
+	case HostCIExceptionTypeDoorbellReadCollision:
+		return "HostCIExceptionTypeDoorbellReadCollision"
+	case HostCIExceptionTypeDoorbellOverflow:
+		return "HostCIExceptionTypeDoorbellOverflow"
+	case HostCIExceptionTypeProtocolError:
+		return "HostCIExceptionTypeProtocolError"
+	case HostCIExceptionTypeFrameUpdateError:
+		return "HostCIExceptionTypeFrameUpdateError"
 	default:
-		return fmt.Sprintf("IOUSBHostCIExceptionType(%d)", int64(e))
+		return fmt.Sprintf("HostCIExceptionType(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCILinkState @brief       Values to represent a port's link state, to be used in IOUSBHostCIMessages and IOUSBHostCIPortStatus
-type IOUSBHostCILinkState int64
+// Values to represent a port's link state, to be used in IOUSBHostCIMessages and IOUSBHostCIPortStatus
+type HostCILinkState int64
 
 const (
-	IOUSBHostCILinkStateU0         IOUSBHostCILinkState = 0
-	IOUSBHostCILinkStateU1         IOUSBHostCILinkState = 1
-	IOUSBHostCILinkStateU2         IOUSBHostCILinkState = 2
-	IOUSBHostCILinkStateU3         IOUSBHostCILinkState = 3
-	IOUSBHostCILinkStateDisabled   IOUSBHostCILinkState = 4
-	IOUSBHostCILinkStateRxDetect   IOUSBHostCILinkState = 5
-	IOUSBHostCILinkStateInactive   IOUSBHostCILinkState = 6
-	IOUSBHostCILinkStatePolling    IOUSBHostCILinkState = 7
-	IOUSBHostCILinkStateRecovery   IOUSBHostCILinkState = 8
-	IOUSBHostCILinkStateReset      IOUSBHostCILinkState = 9
-	IOUSBHostCILinkStateCompliance IOUSBHostCILinkState = 10
-	IOUSBHostCILinkStateTest       IOUSBHostCILinkState = 11
-	IOUSBHostCILinkStateResume     IOUSBHostCILinkState = 15
+	HostCILinkStateU0         HostCILinkState = 0
+	HostCILinkStateU1         HostCILinkState = 1
+	HostCILinkStateU2         HostCILinkState = 2
+	HostCILinkStateU3         HostCILinkState = 3
+	HostCILinkStateDisabled   HostCILinkState = 4
+	HostCILinkStateRxDetect   HostCILinkState = 5
+	HostCILinkStateInactive   HostCILinkState = 6
+	HostCILinkStatePolling    HostCILinkState = 7
+	HostCILinkStateRecovery   HostCILinkState = 8
+	HostCILinkStateReset      HostCILinkState = 9
+	HostCILinkStateCompliance HostCILinkState = 10
+	HostCILinkStateTest       HostCILinkState = 11
+	HostCILinkStateResume     HostCILinkState = 15
 )
 
-func (e IOUSBHostCILinkState) String() string {
+// String returns the HostCILinkState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCILinkState) String() string {
 	switch e {
-	case IOUSBHostCILinkStateU0:
-		return "IOUSBHostCILinkStateU0"
-	case IOUSBHostCILinkStateU1:
-		return "IOUSBHostCILinkStateU1"
-	case IOUSBHostCILinkStateU2:
-		return "IOUSBHostCILinkStateU2"
-	case IOUSBHostCILinkStateU3:
-		return "IOUSBHostCILinkStateU3"
-	case IOUSBHostCILinkStateDisabled:
-		return "IOUSBHostCILinkStateDisabled"
-	case IOUSBHostCILinkStateRxDetect:
-		return "IOUSBHostCILinkStateRxDetect"
-	case IOUSBHostCILinkStateInactive:
-		return "IOUSBHostCILinkStateInactive"
-	case IOUSBHostCILinkStatePolling:
-		return "IOUSBHostCILinkStatePolling"
-	case IOUSBHostCILinkStateRecovery:
-		return "IOUSBHostCILinkStateRecovery"
-	case IOUSBHostCILinkStateReset:
-		return "IOUSBHostCILinkStateReset"
-	case IOUSBHostCILinkStateCompliance:
-		return "IOUSBHostCILinkStateCompliance"
-	case IOUSBHostCILinkStateTest:
-		return "IOUSBHostCILinkStateTest"
-	case IOUSBHostCILinkStateResume:
-		return "IOUSBHostCILinkStateResume"
+	case HostCILinkStateU0:
+		return "HostCILinkStateU0"
+	case HostCILinkStateU1:
+		return "HostCILinkStateU1"
+	case HostCILinkStateU2:
+		return "HostCILinkStateU2"
+	case HostCILinkStateU3:
+		return "HostCILinkStateU3"
+	case HostCILinkStateDisabled:
+		return "HostCILinkStateDisabled"
+	case HostCILinkStateRxDetect:
+		return "HostCILinkStateRxDetect"
+	case HostCILinkStateInactive:
+		return "HostCILinkStateInactive"
+	case HostCILinkStatePolling:
+		return "HostCILinkStatePolling"
+	case HostCILinkStateRecovery:
+		return "HostCILinkStateRecovery"
+	case HostCILinkStateReset:
+		return "HostCILinkStateReset"
+	case HostCILinkStateCompliance:
+		return "HostCILinkStateCompliance"
+	case HostCILinkStateTest:
+		return "HostCILinkStateTest"
+	case HostCILinkStateResume:
+		return "HostCILinkStateResume"
 	default:
-		return fmt.Sprintf("IOUSBHostCILinkState(%d)", int64(e))
+		return fmt.Sprintf("HostCILinkState(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIMessageStatus @brief       Values to be populated in IOUSBHostCIMessageControlStatus of an IOUSBHostCIMessage structure
-type IOUSBHostCIMessageStatus int64
+// Values to be populated in IOUSBHostCIMessageControlStatus of an IOUSBHostCIMessage structure
+type HostCIMessageStatus int64
 
 const (
-	IOUSBHostCIMessageStatusReserved           IOUSBHostCIMessageStatus = 0
-	IOUSBHostCIMessageStatusSuccess            IOUSBHostCIMessageStatus = 1
-	IOUSBHostCIMessageStatusOffline            IOUSBHostCIMessageStatus = 2
-	IOUSBHostCIMessageStatusNotPermitted       IOUSBHostCIMessageStatus = 3
-	IOUSBHostCIMessageStatusBadArgument        IOUSBHostCIMessageStatus = 4
-	IOUSBHostCIMessageStatusTimeout            IOUSBHostCIMessageStatus = 5
-	IOUSBHostCIMessageStatusNoResources        IOUSBHostCIMessageStatus = 6
-	IOUSBHostCIMessageStatusEndpointStopped    IOUSBHostCIMessageStatus = 7
-	IOUSBHostCIMessageStatusProtocolError      IOUSBHostCIMessageStatus = 8
-	IOUSBHostCIMessageStatusTransactionError   IOUSBHostCIMessageStatus = 9
-	IOUSBHostCIMessageStatusOverrunError       IOUSBHostCIMessageStatus = 10
-	IOUSBHostCIMessageStatusStallError         IOUSBHostCIMessageStatus = 11
-	IOUSBHostCIMessageStatusMissedServiceError IOUSBHostCIMessageStatus = 12
-	IOUSBHostCIMessageStatusError              IOUSBHostCIMessageStatus = 13
+	HostCIMessageStatusReserved           HostCIMessageStatus = 0
+	HostCIMessageStatusSuccess            HostCIMessageStatus = 1
+	HostCIMessageStatusOffline            HostCIMessageStatus = 2
+	HostCIMessageStatusNotPermitted       HostCIMessageStatus = 3
+	HostCIMessageStatusBadArgument        HostCIMessageStatus = 4
+	HostCIMessageStatusTimeout            HostCIMessageStatus = 5
+	HostCIMessageStatusNoResources        HostCIMessageStatus = 6
+	HostCIMessageStatusEndpointStopped    HostCIMessageStatus = 7
+	HostCIMessageStatusProtocolError      HostCIMessageStatus = 8
+	HostCIMessageStatusTransactionError   HostCIMessageStatus = 9
+	HostCIMessageStatusOverrunError       HostCIMessageStatus = 10
+	HostCIMessageStatusStallError         HostCIMessageStatus = 11
+	HostCIMessageStatusMissedServiceError HostCIMessageStatus = 12
+	HostCIMessageStatusError              HostCIMessageStatus = 13
 )
 
-func (e IOUSBHostCIMessageStatus) String() string {
+// String returns the HostCIMessageStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIMessageStatus) String() string {
 	switch e {
-	case IOUSBHostCIMessageStatusReserved:
-		return "IOUSBHostCIMessageStatusReserved"
-	case IOUSBHostCIMessageStatusSuccess:
-		return "IOUSBHostCIMessageStatusSuccess"
-	case IOUSBHostCIMessageStatusOffline:
-		return "IOUSBHostCIMessageStatusOffline"
-	case IOUSBHostCIMessageStatusNotPermitted:
-		return "IOUSBHostCIMessageStatusNotPermitted"
-	case IOUSBHostCIMessageStatusBadArgument:
-		return "IOUSBHostCIMessageStatusBadArgument"
-	case IOUSBHostCIMessageStatusTimeout:
-		return "IOUSBHostCIMessageStatusTimeout"
-	case IOUSBHostCIMessageStatusNoResources:
-		return "IOUSBHostCIMessageStatusNoResources"
-	case IOUSBHostCIMessageStatusEndpointStopped:
-		return "IOUSBHostCIMessageStatusEndpointStopped"
-	case IOUSBHostCIMessageStatusProtocolError:
-		return "IOUSBHostCIMessageStatusProtocolError"
-	case IOUSBHostCIMessageStatusTransactionError:
-		return "IOUSBHostCIMessageStatusTransactionError"
-	case IOUSBHostCIMessageStatusOverrunError:
-		return "IOUSBHostCIMessageStatusOverrunError"
-	case IOUSBHostCIMessageStatusStallError:
-		return "IOUSBHostCIMessageStatusStallError"
-	case IOUSBHostCIMessageStatusMissedServiceError:
-		return "IOUSBHostCIMessageStatusMissedServiceError"
-	case IOUSBHostCIMessageStatusError:
-		return "IOUSBHostCIMessageStatusError"
+	case HostCIMessageStatusReserved:
+		return "HostCIMessageStatusReserved"
+	case HostCIMessageStatusSuccess:
+		return "HostCIMessageStatusSuccess"
+	case HostCIMessageStatusOffline:
+		return "HostCIMessageStatusOffline"
+	case HostCIMessageStatusNotPermitted:
+		return "HostCIMessageStatusNotPermitted"
+	case HostCIMessageStatusBadArgument:
+		return "HostCIMessageStatusBadArgument"
+	case HostCIMessageStatusTimeout:
+		return "HostCIMessageStatusTimeout"
+	case HostCIMessageStatusNoResources:
+		return "HostCIMessageStatusNoResources"
+	case HostCIMessageStatusEndpointStopped:
+		return "HostCIMessageStatusEndpointStopped"
+	case HostCIMessageStatusProtocolError:
+		return "HostCIMessageStatusProtocolError"
+	case HostCIMessageStatusTransactionError:
+		return "HostCIMessageStatusTransactionError"
+	case HostCIMessageStatusOverrunError:
+		return "HostCIMessageStatusOverrunError"
+	case HostCIMessageStatusStallError:
+		return "HostCIMessageStatusStallError"
+	case HostCIMessageStatusMissedServiceError:
+		return "HostCIMessageStatusMissedServiceError"
+	case HostCIMessageStatusError:
+		return "HostCIMessageStatusError"
 	default:
-		return fmt.Sprintf("IOUSBHostCIMessageStatus(%d)", int64(e))
+		return fmt.Sprintf("HostCIMessageStatus(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIMessageType @brief       Values to be populated in IOUSBHostCIMessageControlType of an IOUSBHostCIMessage structure
-type IOUSBHostCIMessageType int64
+// Values to be populated in IOUSBHostCIMessageControlType of an IOUSBHostCIMessage structure
+type HostCIMessageType int64
 
 const (
-	IOUSBHostCIMessageTypeControllerCapabilities  IOUSBHostCIMessageType = 0
-	IOUSBHostCIMessageTypePortCapabilities        IOUSBHostCIMessageType = 1
-	IOUSBHostCIMessageTypePortEvent               IOUSBHostCIMessageType = 8
-	IOUSBHostCIMessageTypeFrameNumberUpdate       IOUSBHostCIMessageType = 9
-	IOUSBHostCIMessageTypeFrameTimestampUpdate    IOUSBHostCIMessageType = 10
-	IOUSBHostCIMessageTypeCommandMin              IOUSBHostCIMessageType = 16
-	IOUSBHostCIMessageTypeControllerPowerOn       IOUSBHostCIMessageType = 16
-	IOUSBHostCIMessageTypeControllerPowerOff      IOUSBHostCIMessageType = 17
-	IOUSBHostCIMessageTypeControllerStart         IOUSBHostCIMessageType = 18
-	IOUSBHostCIMessageTypeControllerPause         IOUSBHostCIMessageType = 19
-	IOUSBHostCIMessageTypeControllerFrameNumber   IOUSBHostCIMessageType = 20
-	IOUSBHostCIMessageTypePortPowerOn             IOUSBHostCIMessageType = 24
-	IOUSBHostCIMessageTypePortPowerOff            IOUSBHostCIMessageType = 25
-	IOUSBHostCIMessageTypePortResume              IOUSBHostCIMessageType = 26
-	IOUSBHostCIMessageTypePortSuspend             IOUSBHostCIMessageType = 27
-	IOUSBHostCIMessageTypePortReset               IOUSBHostCIMessageType = 28
-	IOUSBHostCIMessageTypePortDisable             IOUSBHostCIMessageType = 29
-	IOUSBHostCIMessageTypePortStatus              IOUSBHostCIMessageType = 30
-	IOUSBHostCIMessageTypeDeviceCreate            IOUSBHostCIMessageType = 32
-	IOUSBHostCIMessageTypeDeviceDestroy           IOUSBHostCIMessageType = 33
-	IOUSBHostCIMessageTypeDeviceStart             IOUSBHostCIMessageType = 34
-	IOUSBHostCIMessageTypeDevicePause             IOUSBHostCIMessageType = 35
-	IOUSBHostCIMessageTypeDeviceUpdate            IOUSBHostCIMessageType = 36
-	IOUSBHostCIMessageTypeEndpointCreate          IOUSBHostCIMessageType = 40
-	IOUSBHostCIMessageTypeEndpointDestroy         IOUSBHostCIMessageType = 41
-	IOUSBHostCIMessageTypeEndpoint_reserved_      IOUSBHostCIMessageType = 42
-	IOUSBHostCIMessageTypeEndpointPause           IOUSBHostCIMessageType = 43
-	IOUSBHostCIMessageTypeEndpointUpdate          IOUSBHostCIMessageType = 44
-	IOUSBHostCIMessageTypeEndpointReset           IOUSBHostCIMessageType = 45
-	IOUSBHostCIMessageTypeEndpointSetNextTransfer IOUSBHostCIMessageType = 46
-	IOUSBHostCIMessageTypeCommandMax              IOUSBHostCIMessageType = 55
-	IOUSBHostCIMessageTypeSetupTransfer           IOUSBHostCIMessageType = 56
-	IOUSBHostCIMessageTypeNormalTransfer          IOUSBHostCIMessageType = 57
-	IOUSBHostCIMessageTypeStatusTransfer          IOUSBHostCIMessageType = 58
-	IOUSBHostCIMessageTypeIsochronousTransfer     IOUSBHostCIMessageType = 59
-	IOUSBHostCIMessageTypeLink                    IOUSBHostCIMessageType = 60
-	IOUSBHostCIMessageTypeTransferComplete        IOUSBHostCIMessageType = 61
+	HostCIMessageTypeControllerCapabilities  HostCIMessageType = 0
+	HostCIMessageTypePortCapabilities        HostCIMessageType = 1
+	HostCIMessageTypePortEvent               HostCIMessageType = 8
+	HostCIMessageTypeFrameNumberUpdate       HostCIMessageType = 9
+	HostCIMessageTypeFrameTimestampUpdate    HostCIMessageType = 10
+	HostCIMessageTypeCommandMin              HostCIMessageType = 16
+	HostCIMessageTypeControllerPowerOn       HostCIMessageType = 16
+	HostCIMessageTypeControllerPowerOff      HostCIMessageType = 17
+	HostCIMessageTypeControllerStart         HostCIMessageType = 18
+	HostCIMessageTypeControllerPause         HostCIMessageType = 19
+	HostCIMessageTypeControllerFrameNumber   HostCIMessageType = 20
+	HostCIMessageTypePortPowerOn             HostCIMessageType = 24
+	HostCIMessageTypePortPowerOff            HostCIMessageType = 25
+	HostCIMessageTypePortResume              HostCIMessageType = 26
+	HostCIMessageTypePortSuspend             HostCIMessageType = 27
+	HostCIMessageTypePortReset               HostCIMessageType = 28
+	HostCIMessageTypePortDisable             HostCIMessageType = 29
+	HostCIMessageTypePortStatus              HostCIMessageType = 30
+	HostCIMessageTypeDeviceCreate            HostCIMessageType = 32
+	HostCIMessageTypeDeviceDestroy           HostCIMessageType = 33
+	HostCIMessageTypeDeviceStart             HostCIMessageType = 34
+	HostCIMessageTypeDevicePause             HostCIMessageType = 35
+	HostCIMessageTypeDeviceUpdate            HostCIMessageType = 36
+	HostCIMessageTypeEndpointCreate          HostCIMessageType = 40
+	HostCIMessageTypeEndpointDestroy         HostCIMessageType = 41
+	HostCIMessageTypeEndpoint_reserved_      HostCIMessageType = 42
+	HostCIMessageTypeEndpointPause           HostCIMessageType = 43
+	HostCIMessageTypeEndpointUpdate          HostCIMessageType = 44
+	HostCIMessageTypeEndpointReset           HostCIMessageType = 45
+	HostCIMessageTypeEndpointSetNextTransfer HostCIMessageType = 46
+	HostCIMessageTypeCommandMax              HostCIMessageType = 55
+	HostCIMessageTypeSetupTransfer           HostCIMessageType = 56
+	HostCIMessageTypeNormalTransfer          HostCIMessageType = 57
+	HostCIMessageTypeStatusTransfer          HostCIMessageType = 58
+	HostCIMessageTypeIsochronousTransfer     HostCIMessageType = 59
+	HostCIMessageTypeLink                    HostCIMessageType = 60
+	HostCIMessageTypeTransferComplete        HostCIMessageType = 61
 )
 
-func (e IOUSBHostCIMessageType) String() string {
+// String returns the HostCIMessageType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIMessageType) String() string {
 	switch e {
-	case IOUSBHostCIMessageTypeControllerCapabilities:
-		return "IOUSBHostCIMessageTypeControllerCapabilities"
-	case IOUSBHostCIMessageTypePortCapabilities:
-		return "IOUSBHostCIMessageTypePortCapabilities"
-	case IOUSBHostCIMessageTypePortEvent:
-		return "IOUSBHostCIMessageTypePortEvent"
-	case IOUSBHostCIMessageTypeFrameNumberUpdate:
-		return "IOUSBHostCIMessageTypeFrameNumberUpdate"
-	case IOUSBHostCIMessageTypeFrameTimestampUpdate:
-		return "IOUSBHostCIMessageTypeFrameTimestampUpdate"
-	case IOUSBHostCIMessageTypeCommandMin:
-		return "IOUSBHostCIMessageTypeCommandMin"
-	case IOUSBHostCIMessageTypeControllerPowerOff:
-		return "IOUSBHostCIMessageTypeControllerPowerOff"
-	case IOUSBHostCIMessageTypeControllerStart:
-		return "IOUSBHostCIMessageTypeControllerStart"
-	case IOUSBHostCIMessageTypeControllerPause:
-		return "IOUSBHostCIMessageTypeControllerPause"
-	case IOUSBHostCIMessageTypeControllerFrameNumber:
-		return "IOUSBHostCIMessageTypeControllerFrameNumber"
-	case IOUSBHostCIMessageTypePortPowerOn:
-		return "IOUSBHostCIMessageTypePortPowerOn"
-	case IOUSBHostCIMessageTypePortPowerOff:
-		return "IOUSBHostCIMessageTypePortPowerOff"
-	case IOUSBHostCIMessageTypePortResume:
-		return "IOUSBHostCIMessageTypePortResume"
-	case IOUSBHostCIMessageTypePortSuspend:
-		return "IOUSBHostCIMessageTypePortSuspend"
-	case IOUSBHostCIMessageTypePortReset:
-		return "IOUSBHostCIMessageTypePortReset"
-	case IOUSBHostCIMessageTypePortDisable:
-		return "IOUSBHostCIMessageTypePortDisable"
-	case IOUSBHostCIMessageTypePortStatus:
-		return "IOUSBHostCIMessageTypePortStatus"
-	case IOUSBHostCIMessageTypeDeviceCreate:
-		return "IOUSBHostCIMessageTypeDeviceCreate"
-	case IOUSBHostCIMessageTypeDeviceDestroy:
-		return "IOUSBHostCIMessageTypeDeviceDestroy"
-	case IOUSBHostCIMessageTypeDeviceStart:
-		return "IOUSBHostCIMessageTypeDeviceStart"
-	case IOUSBHostCIMessageTypeDevicePause:
-		return "IOUSBHostCIMessageTypeDevicePause"
-	case IOUSBHostCIMessageTypeDeviceUpdate:
-		return "IOUSBHostCIMessageTypeDeviceUpdate"
-	case IOUSBHostCIMessageTypeEndpointCreate:
-		return "IOUSBHostCIMessageTypeEndpointCreate"
-	case IOUSBHostCIMessageTypeEndpointDestroy:
-		return "IOUSBHostCIMessageTypeEndpointDestroy"
-	case IOUSBHostCIMessageTypeEndpoint_reserved_:
-		return "IOUSBHostCIMessageTypeEndpoint_reserved_"
-	case IOUSBHostCIMessageTypeEndpointPause:
-		return "IOUSBHostCIMessageTypeEndpointPause"
-	case IOUSBHostCIMessageTypeEndpointUpdate:
-		return "IOUSBHostCIMessageTypeEndpointUpdate"
-	case IOUSBHostCIMessageTypeEndpointReset:
-		return "IOUSBHostCIMessageTypeEndpointReset"
-	case IOUSBHostCIMessageTypeEndpointSetNextTransfer:
-		return "IOUSBHostCIMessageTypeEndpointSetNextTransfer"
-	case IOUSBHostCIMessageTypeCommandMax:
-		return "IOUSBHostCIMessageTypeCommandMax"
-	case IOUSBHostCIMessageTypeSetupTransfer:
-		return "IOUSBHostCIMessageTypeSetupTransfer"
-	case IOUSBHostCIMessageTypeNormalTransfer:
-		return "IOUSBHostCIMessageTypeNormalTransfer"
-	case IOUSBHostCIMessageTypeStatusTransfer:
-		return "IOUSBHostCIMessageTypeStatusTransfer"
-	case IOUSBHostCIMessageTypeIsochronousTransfer:
-		return "IOUSBHostCIMessageTypeIsochronousTransfer"
-	case IOUSBHostCIMessageTypeLink:
-		return "IOUSBHostCIMessageTypeLink"
-	case IOUSBHostCIMessageTypeTransferComplete:
-		return "IOUSBHostCIMessageTypeTransferComplete"
+	case HostCIMessageTypeControllerCapabilities:
+		return "HostCIMessageTypeControllerCapabilities"
+	case HostCIMessageTypePortCapabilities:
+		return "HostCIMessageTypePortCapabilities"
+	case HostCIMessageTypePortEvent:
+		return "HostCIMessageTypePortEvent"
+	case HostCIMessageTypeFrameNumberUpdate:
+		return "HostCIMessageTypeFrameNumberUpdate"
+	case HostCIMessageTypeFrameTimestampUpdate:
+		return "HostCIMessageTypeFrameTimestampUpdate"
+	case HostCIMessageTypeCommandMin:
+		return "HostCIMessageTypeCommandMin"
+	case HostCIMessageTypeControllerPowerOff:
+		return "HostCIMessageTypeControllerPowerOff"
+	case HostCIMessageTypeControllerStart:
+		return "HostCIMessageTypeControllerStart"
+	case HostCIMessageTypeControllerPause:
+		return "HostCIMessageTypeControllerPause"
+	case HostCIMessageTypeControllerFrameNumber:
+		return "HostCIMessageTypeControllerFrameNumber"
+	case HostCIMessageTypePortPowerOn:
+		return "HostCIMessageTypePortPowerOn"
+	case HostCIMessageTypePortPowerOff:
+		return "HostCIMessageTypePortPowerOff"
+	case HostCIMessageTypePortResume:
+		return "HostCIMessageTypePortResume"
+	case HostCIMessageTypePortSuspend:
+		return "HostCIMessageTypePortSuspend"
+	case HostCIMessageTypePortReset:
+		return "HostCIMessageTypePortReset"
+	case HostCIMessageTypePortDisable:
+		return "HostCIMessageTypePortDisable"
+	case HostCIMessageTypePortStatus:
+		return "HostCIMessageTypePortStatus"
+	case HostCIMessageTypeDeviceCreate:
+		return "HostCIMessageTypeDeviceCreate"
+	case HostCIMessageTypeDeviceDestroy:
+		return "HostCIMessageTypeDeviceDestroy"
+	case HostCIMessageTypeDeviceStart:
+		return "HostCIMessageTypeDeviceStart"
+	case HostCIMessageTypeDevicePause:
+		return "HostCIMessageTypeDevicePause"
+	case HostCIMessageTypeDeviceUpdate:
+		return "HostCIMessageTypeDeviceUpdate"
+	case HostCIMessageTypeEndpointCreate:
+		return "HostCIMessageTypeEndpointCreate"
+	case HostCIMessageTypeEndpointDestroy:
+		return "HostCIMessageTypeEndpointDestroy"
+	case HostCIMessageTypeEndpoint_reserved_:
+		return "HostCIMessageTypeEndpoint_reserved_"
+	case HostCIMessageTypeEndpointPause:
+		return "HostCIMessageTypeEndpointPause"
+	case HostCIMessageTypeEndpointUpdate:
+		return "HostCIMessageTypeEndpointUpdate"
+	case HostCIMessageTypeEndpointReset:
+		return "HostCIMessageTypeEndpointReset"
+	case HostCIMessageTypeEndpointSetNextTransfer:
+		return "HostCIMessageTypeEndpointSetNextTransfer"
+	case HostCIMessageTypeCommandMax:
+		return "HostCIMessageTypeCommandMax"
+	case HostCIMessageTypeSetupTransfer:
+		return "HostCIMessageTypeSetupTransfer"
+	case HostCIMessageTypeNormalTransfer:
+		return "HostCIMessageTypeNormalTransfer"
+	case HostCIMessageTypeStatusTransfer:
+		return "HostCIMessageTypeStatusTransfer"
+	case HostCIMessageTypeIsochronousTransfer:
+		return "HostCIMessageTypeIsochronousTransfer"
+	case HostCIMessageTypeLink:
+		return "HostCIMessageTypeLink"
+	case HostCIMessageTypeTransferComplete:
+		return "HostCIMessageTypeTransferComplete"
 	default:
-		return fmt.Sprintf("IOUSBHostCIMessageType(%d)", int64(e))
+		return fmt.Sprintf("HostCIMessageType(%d)", int64(e))
 	}
 }
 
-// @enum        IOUSBHostCIPortState @brief       Port state managed by IOUSBHostCIPortStateMachine @discussion  IOUSBHostCIPortStateOff is the initial state of a newly created IOUSBHostCIPortStateMachine and represents an unpowered port which is unable to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStatePowered represents a powered port which is able to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStateSuspended represents a port with a downstream device that is in a low-power state such as U3 or L2.  The port is able to detect events such as remote wakes, and is not actively transmitting data.  Downstream devices must be in the IOUSBHostCIDeviceStatePaused state. IOUSBHostCIPortStateActive represents a port with a downstream device that is able to immediately transfer data.  The downstream device may be in the IOUSBHostCIDeviceStateActive state.
-type IOUSBHostCIPortState int64
+// Port state managed by IOUSBHostCIPortStateMachine IOUSBHostCIPortStateOff is the initial state of a newly created IOUSBHostCIPortStateMachine and represents an unpowered port which is unable to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStatePowered represents a powered port which is able to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStateSuspended represents a port with a downstream device that is in a low-power state such as U3 or L2.  The port is able to detect events such as remote wakes, and is not actively transmitting data.  Downstream devices must be in the IOUSBHostCIDeviceStatePaused state. IOUSBHostCIPortStateActive represents a port with a downstream device that is able to immediately transfer data.  The downstream device may be in the IOUSBHostCIDeviceStateActive state.
+type HostCIPortState int64
 
 const (
-	IOUSBHostCIPortStateOff       IOUSBHostCIPortState = 0
-	IOUSBHostCIPortStatePowered   IOUSBHostCIPortState = 1
-	IOUSBHostCIPortStateSuspended IOUSBHostCIPortState = 2
-	IOUSBHostCIPortStateActive    IOUSBHostCIPortState = 3
+	HostCIPortStateOff       HostCIPortState = 0
+	HostCIPortStatePowered   HostCIPortState = 1
+	HostCIPortStateSuspended HostCIPortState = 2
+	HostCIPortStateActive    HostCIPortState = 3
 )
 
-func (e IOUSBHostCIPortState) String() string {
+// String returns the HostCIPortState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostCIPortState) String() string {
 	switch e {
-	case IOUSBHostCIPortStateOff:
-		return "IOUSBHostCIPortStateOff"
-	case IOUSBHostCIPortStatePowered:
-		return "IOUSBHostCIPortStatePowered"
-	case IOUSBHostCIPortStateSuspended:
-		return "IOUSBHostCIPortStateSuspended"
-	case IOUSBHostCIPortStateActive:
-		return "IOUSBHostCIPortStateActive"
+	case HostCIPortStateOff:
+		return "HostCIPortStateOff"
+	case HostCIPortStatePowered:
+		return "HostCIPortStatePowered"
+	case HostCIPortStateSuspended:
+		return "HostCIPortStateSuspended"
+	case HostCIPortStateActive:
+		return "HostCIPortStateActive"
 	default:
-		return fmt.Sprintf("IOUSBHostCIPortState(%d)", int64(e))
+		return fmt.Sprintf("HostCIPortState(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type IOUSBHostIsochronousTransferOptions int64
+type HostObjectDestroyOptions uint64
 
 const (
-	IOUSBHostIsochronousTransferOptionsNone IOUSBHostIsochronousTransferOptions = 0
+	HostObjectDestroyOptionsNone            HostObjectDestroyOptions = 0
+	HostObjectDestroyOptionsDeviceSurrender HostObjectDestroyOptions = 1
 )
 
-func (e IOUSBHostIsochronousTransferOptions) String() string {
+// String returns the HostObjectDestroyOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostObjectDestroyOptions) String() string {
 	var parts []string
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Bitmask — values may be combined with |.
-type IOUSBHostObjectDestroyOptions uint64
-
-const (
-	IOUSBHostObjectDestroyOptionsNone            IOUSBHostObjectDestroyOptions = 0
-	IOUSBHostObjectDestroyOptionsDeviceSurrender IOUSBHostObjectDestroyOptions = 1
-)
-
-func (e IOUSBHostObjectDestroyOptions) String() string {
-	var parts []string
-	if e&IOUSBHostObjectDestroyOptionsDeviceSurrender != 0 {
-		parts = append(parts, "IOUSBHostObjectDestroyOptionsDeviceSurrender")
+	if e&HostObjectDestroyOptionsDeviceSurrender != 0 {
+		parts = append(parts, "HostObjectDestroyOptionsDeviceSurrender")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -478,23 +485,25 @@ func (e IOUSBHostObjectDestroyOptions) String() string {
 
 // Options for initializing the host object.
 // Bitmask — values may be combined with |.
-type IOUSBHostObjectInitOptions uint64
+type HostObjectInitOptions uint64
 
 const (
 	// The default argument for initializing the host object.
-	IOUSBHostObjectInitOptionsNone IOUSBHostObjectInitOptions = 0
+	HostObjectInitOptionsNone HostObjectInitOptions = 0
 	// The option to capture the device and terminate existing drivers.
-	IOUSBHostObjectInitOptionsDeviceCapture IOUSBHostObjectInitOptions = 1
-	IOUSBHostObjectInitOptionsDeviceSeize   IOUSBHostObjectInitOptions = 2
+	HostObjectInitOptionsDeviceCapture HostObjectInitOptions = 1
+	HostObjectInitOptionsDeviceSeize   HostObjectInitOptions = 2
 )
 
-func (e IOUSBHostObjectInitOptions) String() string {
+// String returns the HostObjectInitOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostObjectInitOptions) String() string {
 	var parts []string
-	if e&IOUSBHostObjectInitOptionsDeviceCapture != 0 {
-		parts = append(parts, "IOUSBHostObjectInitOptionsDeviceCapture")
+	if e&HostObjectInitOptionsDeviceCapture != 0 {
+		parts = append(parts, "HostObjectInitOptionsDeviceCapture")
 	}
-	if e&IOUSBHostObjectInitOptionsDeviceSeize != 0 {
-		parts = append(parts, "IOUSBHostObjectInitOptionsDeviceSeize")
+	if e&HostObjectInitOptionsDeviceSeize != 0 {
+		parts = append(parts, "HostObjectInitOptionsDeviceSeize")
 	}
 	if len(parts) == 0 {
 		return "0"

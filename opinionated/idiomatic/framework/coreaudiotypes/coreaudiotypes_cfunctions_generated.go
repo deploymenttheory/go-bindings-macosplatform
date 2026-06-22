@@ -5,10 +5,16 @@
 package coreaudiotypes
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// AudioChannelLayoutTag_GetNumberOfChannels calls [raw.AudioChannelLayoutTag_GetNumberOfChannels] (C function AudioChannelLayoutTag_GetNumberOfChannels).
-func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag uint) uint {
-	return raw.AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag)
+var _fnAudioChannelLayoutTag_GetNumberOfChannels func(int) int
+
+// AudioChannelLayoutTag_GetNumberOfChannels calls the CoreAudioTypes framework function AudioChannelLayoutTag_GetNumberOfChannels.
+func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioChannelLayoutTag_GetNumberOfChannels == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioChannelLayoutTag_GetNumberOfChannels, _lib, "AudioChannelLayoutTag_GetNumberOfChannels")
+	}
+	return _fnAudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag)
 }

@@ -6,83 +6,98 @@ package photos
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An editing session for modifying the photo, video, and audio content of a Live Photo.
+// LivePhotoEditingContext is an idiomatic wrapper over the Objective-C class PHLivePhotoEditingContext.
 //
-// LivePhotoEditingContext wraps [raw.PHLivePhotoEditingContext] with a fluent Go API.
+// An editing session for modifying the photo, video, and audio content of a Live Photo.
 type LivePhotoEditingContext struct {
-	inner *raw.PHLivePhotoEditingContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHLivePhotoEditingContext].
-func (x *LivePhotoEditingContext) Unwrap() *raw.PHLivePhotoEditingContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LivePhotoEditingContext) ID() objc.ID { return x.inner.Ptr() }
-
-// LivePhotoEditingContextFromID adopts an existing object pointer as a LivePhotoEditingContext (nil for 0).
+// LivePhotoEditingContextFromID adopts an existing Objective-C object as a LivePhotoEditingContext
+// (nil for 0), retaining it and registering a release finalizer.
 func LivePhotoEditingContextFromID(id objc.ID) *LivePhotoEditingContext {
 	if id == 0 {
 		return nil
 	}
-	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(id)}
-}
-
-// Creates a Live Photo editing context for the specified editing input.
-//
-// NewLivePhotoEditingContextWithLivePhotoEditingInput creates a new [LivePhotoEditingContext].
-func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *raw.PHContentEditingInput) *LivePhotoEditingContext {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLivePhotoEditingContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLivePhotoEditingInput:"), livePhotoInput.Ptr())
-	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(_id)}
-}
-
-// A block to be called by Photos for processing each frame of the Live Photo’s visual content.
-//
-// WithFrameProcessor sets the frameProcessor property and returns the receiver for chaining.
-func (x *LivePhotoEditingContext) WithFrameProcessor(frameProcessor objc.Block) *LivePhotoEditingContext {
-	x.inner.SetFrameProcessor(frameProcessor)
+	x := &LivePhotoEditingContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The audio gain to apply to the processed Live Photo.
-//
-// WithAudioVolume sets the audioVolume property and returns the receiver for chaining.
+// livePhotoEditingContextAdopt wraps an Objective-C object that this code just created as a
+// LivePhotoEditingContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func livePhotoEditingContextAdopt(id objc.ID) *LivePhotoEditingContext {
+	if id == 0 {
+		return nil
+	}
+	x := &LivePhotoEditingContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LivePhotoEditingContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LivePhotoEditingContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LivePhotoEditingContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LivePhotoEditingContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLivePhotoEditingContextWithLivePhotoEditingInput creates a Live Photo editing context for the specified editing input.
+func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *ContentEditingInput) *LivePhotoEditingContext {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHLivePhotoEditingContext")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLivePhotoEditingInput:"), objref.IDOf(livePhotoInput))
+	return livePhotoEditingContextAdopt(_id)
+}
+
+// WithAudioVolume the audio gain to apply to the processed Live Photo.
 func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhotoEditingContext {
-	x.inner.SetAudioVolume(audioVolume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
 	return x
 }
 
-// Processes a Live Photo with your edits for viewing.
+// PrepareLivePhotoForPlaybackWithTargetSizeOptions processes a Live Photo with your edits for viewing.
 //
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
-func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error) {
+func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (result *LivePhoto, err error) {
 	type _result struct {
 		val *LivePhoto
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler(targetSize, options, func(_p0 *raw.PHLivePhoto, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &LivePhoto{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = LivePhotoFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:"), targetSize, objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -92,90 +107,37 @@ func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptio
 	}
 }
 
-// Processes and saves a full-quality Live Photo as the output of your editing session.
-//
-// SaveLivePhotoToOutputOptionsCompletionHandler calls the underlying SaveLivePhotoToOutputOptionsCompletionHandler.
-func (x *LivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer)) {
-	x.inner.SaveLivePhotoToOutputOptionsCompletionHandler(output, options, handler)
-}
-
-// Aborts any Live Photo processing in progress.
-//
-// Cancel calls the underlying Cancel.
+// Cancel aborts any Live Photo processing in progress.
 func (x *LivePhotoEditingContext) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// The original full-size image from the input live photo
-//
-// FullSizeImage calls the underlying FullSizeImage.
-func (x *LivePhotoEditingContext) FullSizeImage() *coreimage.CIImage {
-	return x.inner.FullSizeImage()
+// FullSizeImage the original full-size image from the input live photo
+func (x *LivePhotoEditingContext) FullSizeImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullSizeImage"))
+	return obj.Wrap(_r)
 }
 
-// The duration of the live photo
-//
-// Duration calls the underlying Duration.
-func (x *LivePhotoEditingContext) Duration() coremedia.CMTime {
-	return x.inner.Duration()
-}
-
-// The time of the still image within the live photo
-//
-// PhotoTime calls the underlying PhotoTime.
-func (x *LivePhotoEditingContext) PhotoTime() coremedia.CMTime {
-	return x.inner.PhotoTime()
-}
-
-// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
-//
-// FrameProcessor calls the underlying FrameProcessor.
-func (x *LivePhotoEditingContext) FrameProcessor() objc.Block {
-	return x.inner.FrameProcessor()
-}
-
-// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
-//
-// SetFrameProcessor calls the underlying SetFrameProcessor.
-func (x *LivePhotoEditingContext) SetFrameProcessor(frameProcessor objc.Block) {
-	x.inner.SetFrameProcessor(frameProcessor)
-}
-
-// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
-//
-// AudioVolume calls the underlying AudioVolume.
+// AudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
 func (x *LivePhotoEditingContext) AudioVolume() float32 {
-	return x.inner.AudioVolume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("audioVolume"))
+	return _r
 }
 
-// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
-//
-// SetAudioVolume calls the underlying SetAudioVolume.
+// SetAudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
 func (x *LivePhotoEditingContext) SetAudioVolume(audioVolume float32) {
-	x.inner.SetAudioVolume(audioVolume)
-}
-
-// Orientation calls the underlying Orientation.
-func (x *LivePhotoEditingContext) Orientation() imageio.CGImagePropertyOrientation {
-	return x.inner.Orientation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioVolume:"), audioVolume)
 }
 
 // LivePhotoEditingContextable is the interface implemented by [LivePhotoEditingContext], for mocking and DI.
 type LivePhotoEditingContextable interface {
-	Unwrap() *raw.PHLivePhotoEditingContext
-	WithFrameProcessor(frameProcessor objc.Block) *LivePhotoEditingContext
+	obj.Object
 	WithAudioVolume(audioVolume float32) *LivePhotoEditingContext
-	PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error)
-	SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer))
+	PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options obj.Object) (*LivePhoto, error)
 	Cancel()
-	FullSizeImage() *coreimage.CIImage
-	Duration() coremedia.CMTime
-	PhotoTime() coremedia.CMTime
-	FrameProcessor() objc.Block
-	SetFrameProcessor(frameProcessor objc.Block)
+	FullSizeImage() obj.Object
 	AudioVolume() float32
 	SetAudioVolume(audioVolume float32)
-	Orientation() imageio.CGImagePropertyOrientation
 }
 
 var _ LivePhotoEditingContextable = (*LivePhotoEditingContext)(nil)

@@ -5,79 +5,86 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a tensor in the shading language in a struct or array.
+// TensorReferenceType is an idiomatic wrapper over the Objective-C class MTLTensorReferenceType.
 //
-// TensorReferenceType wraps [raw.MTLTensorReferenceType] with a fluent Go API.
+// It embeds [Type], promoting that type's methods.
+//
+// An object that represents a tensor in the shading language in a struct or array.
 type TensorReferenceType struct {
-	inner *raw.MTLTensorReferenceType
+	Type
 }
 
-// Unwrap returns the underlying [raw.MTLTensorReferenceType].
-func (x *TensorReferenceType) Unwrap() *raw.MTLTensorReferenceType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorReferenceType) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorReferenceTypeFromID adopts an existing object pointer as a TensorReferenceType (nil for 0).
+// TensorReferenceTypeFromID adopts an existing Objective-C object as a TensorReferenceType
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorReferenceTypeFromID(id objc.ID) *TensorReferenceType {
 	if id == 0 {
 		return nil
 	}
-	return &TensorReferenceType{inner: raw.MTLTensorReferenceTypeFromID(id)}
+	x := &TensorReferenceType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTensorReferenceType creates a new [TensorReferenceType].
-func NewTensorReferenceType() *TensorReferenceType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTensorReferenceType")), objc.RegisterName("new"))
-	return &TensorReferenceType{inner: raw.MTLTensorReferenceTypeFromID(_id)}
-}
-
-// The underlying data format of the tensor.
-//
-// TensorDataType calls the underlying TensorDataType.
-func (x *TensorReferenceType) TensorDataType() MTLTensorDataType {
-	return MTLTensorDataType(x.inner.TensorDataType())
-}
-
-// The data format you use for indexing into the tensor.
-//
-// IndexType calls the underlying IndexType.
-func (x *TensorReferenceType) IndexType() MTLDataType {
-	return MTLDataType(x.inner.IndexType())
-}
-
-// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
-//
-// Dimensions calls the underlying Dimensions.
-func (x *TensorReferenceType) Dimensions() *TensorExtents {
-	_r := x.inner.Dimensions()
-	if _r == nil {
+// tensorReferenceTypeAdopt wraps an Objective-C object that this code just created as a
+// TensorReferenceType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorReferenceTypeAdopt(id objc.ID) *TensorReferenceType {
+	if id == 0 {
 		return nil
 	}
-	return &TensorExtents{inner: _r}
+	x := &TensorReferenceType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// A value that represents the read/write permissions of the tensor.
-//
-// Access calls the underlying Access.
-func (x *TensorReferenceType) Access() MTLBindingAccess {
-	return MTLBindingAccess(x.inner.Access())
+// NewTensorReferenceType creates a new TensorReferenceType.
+func NewTensorReferenceType() *TensorReferenceType {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTensorReferenceType")), objc.RegisterName("new"))
+	return tensorReferenceTypeAdopt(_id)
 }
 
-func (x *TensorReferenceType) asType() *raw.MTLType { return &x.inner.MTLType }
+// TensorDataType the underlying data format of the tensor.
+func (x *TensorReferenceType) TensorDataType() TensorDataType {
+	_r := objc.Send[TensorDataType](objref.IDOf(x), objc.RegisterName("tensorDataType"))
+	return _r
+}
+
+// IndexType the data format you use for indexing into the tensor.
+func (x *TensorReferenceType) IndexType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("indexType"))
+	return _r
+}
+
+// Dimensions the array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
+func (x *TensorReferenceType) Dimensions() *TensorExtents {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+	return TensorExtentsFromID(_r)
+}
+
+// Access a value that represents the read/write permissions of the tensor.
+func (x *TensorReferenceType) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+	return _r
+}
 
 // TensorReferenceTypeable is the interface implemented by [TensorReferenceType], for mocking and DI.
 type TensorReferenceTypeable interface {
-	Unwrap() *raw.MTLTensorReferenceType
-	TensorDataType() MTLTensorDataType
-	IndexType() MTLDataType
+	obj.Object
+	TensorDataType() TensorDataType
+	IndexType() DataType
 	Dimensions() *TensorExtents
-	Access() MTLBindingAccess
+	Access() BindingAccess
 }
 
 var _ TensorReferenceTypeable = (*TensorReferenceType)(nil)
+
+var _ TypeProvider = (*TensorReferenceType)(nil)

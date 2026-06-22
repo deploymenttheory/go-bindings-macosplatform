@@ -22,6 +22,8 @@ const (
 	DDDeviceCategoryAccessorySetup      DDDeviceCategory = 6
 )
 
+// String returns the DDDeviceCategory constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceCategory) String() string {
 	switch e {
 	case DDDeviceCategoryHiFiSpeaker:
@@ -52,6 +54,8 @@ const (
 	DDDeviceMediaPlaybackStatePlaying   DDDeviceMediaPlaybackState = 2
 )
 
+// String returns the DDDeviceMediaPlaybackState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceMediaPlaybackState) String() string {
 	switch e {
 	case DDDeviceMediaPlaybackStateNoContent:
@@ -73,6 +77,8 @@ const (
 	DDDeviceProtocolDIAL    DDDeviceProtocol = 1
 )
 
+// String returns the DDDeviceProtocol constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceProtocol) String() string {
 	switch e {
 	case DDDeviceProtocolInvalid:
@@ -100,6 +106,8 @@ const (
 	DDDeviceStateInvalidating DDDeviceState = 30
 )
 
+// String returns the DDDeviceState constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceState) String() string {
 	switch e {
 	case DDDeviceStateInvalid:
@@ -127,6 +135,8 @@ const (
 	DDDeviceSupportsBluetoothHID DDDeviceSupports = 8
 )
 
+// String returns the DDDeviceSupports constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceSupports) String() string {
 	var parts []string
 	if e&DDDeviceSupportsBluetoothPairingLE != 0 {
@@ -151,6 +161,8 @@ const (
 	DDDeviceWiFiAwareServiceRolePublisher  DDDeviceWiFiAwareServiceRole = 20
 )
 
+// String returns the DDDeviceWiFiAwareServiceRole constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDDeviceWiFiAwareServiceRole) String() string {
 	switch e {
 	case DDDeviceWiFiAwareServiceRoleSubscriber:
@@ -177,6 +189,8 @@ const (
 	DDErrorCodeNext               DDErrorCode = 350007
 )
 
+// String returns the DDErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDErrorCode) String() string {
 	switch e {
 	case DDErrorCodeSuccess:
@@ -212,6 +226,8 @@ const (
 	DDEventTypeDeviceChanged DDEventType = 42
 )
 
+// String returns the DDEventType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e DDEventType) String() string {
 	switch e {
 	case DDEventTypeUnknown:

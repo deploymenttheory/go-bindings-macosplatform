@@ -5,121 +5,96 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Your app’s response to a request for reservation details.
+// GetReservationDetailsIntentResponse is an idiomatic wrapper over the Objective-C class INGetReservationDetailsIntentResponse.
 //
-// GetReservationDetailsIntentResponse wraps [raw.INGetReservationDetailsIntentResponse] with a fluent Go API.
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to a request for reservation details.
 type GetReservationDetailsIntentResponse struct {
-	inner *raw.INGetReservationDetailsIntentResponse
+	IntentResponse
 }
 
-// Unwrap returns the underlying [raw.INGetReservationDetailsIntentResponse].
-func (x *GetReservationDetailsIntentResponse) Unwrap() *raw.INGetReservationDetailsIntentResponse {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GetReservationDetailsIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// GetReservationDetailsIntentResponseFromID adopts an existing object pointer as a GetReservationDetailsIntentResponse (nil for 0).
+// GetReservationDetailsIntentResponseFromID adopts an existing Objective-C object as a GetReservationDetailsIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func GetReservationDetailsIntentResponseFromID(id objc.ID) *GetReservationDetailsIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &GetReservationDetailsIntentResponse{inner: raw.INGetReservationDetailsIntentResponseFromID(id)}
-}
-
-// Creates the response object with the specified code and user activity object.
-//
-// NewGetReservationDetailsIntentResponseWithCodeUserActivity creates a new [GetReservationDetailsIntentResponse].
-func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INGetReservationDetailsIntentResponseCode(code), userActivity.Ptr())
-	return &GetReservationDetailsIntentResponse{inner: raw.INGetReservationDetailsIntentResponseFromID(_id)}
-}
-
-// An array containing reservations reqeusted by the user.
-//
-// WithReservations sets the collection, converting the Go slice to an NSArray.
-func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetReservations(foundation.NSArrayFromID[*raw.INReservation](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asReservation().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.INReservation](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetReservations(_arr)
+	x := &GetReservationDetailsIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
-	return x
-}
-
-// Code calls the underlying Code.
-func (x *GetReservationDetailsIntentResponse) Code() INGetReservationDetailsIntentResponseCode {
-	return INGetReservationDetailsIntentResponseCode(x.inner.Code())
-}
-
-// Reservations returns the collection as a Go slice.
-func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
-	arr := x.inner.Reservations()
-	if arr == nil {
+// getReservationDetailsIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// GetReservationDetailsIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func getReservationDetailsIntentResponseAdopt(id objc.ID) *GetReservationDetailsIntentResponse {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Reservation {
-		return &Reservation{inner: raw.INReservationFromID(purego.Retain(_id))}
-	})
+	x := &GetReservationDetailsIntentResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetReservations calls the underlying SetReservations.
-func (x *GetReservationDetailsIntentResponse) SetReservations(reservations ...ReservationProvider) {
-	_ptrs := make([]objc.ID, len(reservations))
-	for _i, _v := range reservations {
-		_ptrs[_i] = _v.asReservation().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.INReservation]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.INReservation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.INReservation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetReservations(_arg0)
+// NewGetReservationDetailsIntentResponseWithCodeUserActivity creates the response object with the specified code and user activity object.
+func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code GetReservationDetailsIntentResponseCode, userActivity obj.Object) *GetReservationDetailsIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return getReservationDetailsIntentResponseAdopt(_id)
 }
 
-func (x *GetReservationDetailsIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+// WithReservations an array containing reservations reqeusted by the user.
+func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
+	_arr := purego.SliceToNSArray(items, func(_v ReservationProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), _arr)
+	return x
+}
+
+// WithUserActivity the user activity object to use when launching the app.
+func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// Code wraps the corresponding Objective-C method.
+func (x *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
+	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
+}
+
+// Reservations wraps the corresponding Objective-C method.
+//
+// Reservations returns the collection as a Go slice.
+func (x *GetReservationDetailsIntentResponse) Reservations() []*Reservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Reservation { return ReservationFromID(_id) })
+}
+
+// SetReservations wraps the corresponding Objective-C method.
+func (x *GetReservationDetailsIntentResponse) SetReservations(reservations []*Reservation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservations:"), purego.SliceToNSArray(reservations, func(_v *Reservation) objc.ID { return objref.IDOf(_v) }))
 }
 
 // GetReservationDetailsIntentResponseable is the interface implemented by [GetReservationDetailsIntentResponse], for mocking and DI.
 type GetReservationDetailsIntentResponseable interface {
-	Unwrap() *raw.INGetReservationDetailsIntentResponse
+	obj.Object
 	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse
-	Code() INGetReservationDetailsIntentResponseCode
+	WithUserActivity(userActivity obj.Object) *GetReservationDetailsIntentResponse
+	Code() GetReservationDetailsIntentResponseCode
 	Reservations() []*Reservation
-	SetReservations(reservations ...ReservationProvider)
+	SetReservations(reservations []*Reservation)
 }
 
 var _ GetReservationDetailsIntentResponseable = (*GetReservationDetailsIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*GetReservationDetailsIntentResponse)(nil)

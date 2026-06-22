@@ -5,62 +5,64 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNGradientFilterNode wraps [raw.MPSNNGradientFilterNode] with a fluent Go API.
+// NNGradientFilterNode is an idiomatic wrapper over the Objective-C class MPSNNGradientFilterNode.
+//
+// NNGradientFilterNode is an abstract base — you do not construct it directly. Construct one of [CNNBatchNormalizationGradientNode], [CNNConvolutionGradientNode], [CNNCrossChannelNormalizationGradientNode], [CNNDropoutGradientNode], [CNNGroupNormalizationGradientNode], [CNNInstanceNormalizationGradientNode], [CNNLocalContrastNormalizationGradientNode], [CNNLogSoftMaxGradientNode], [CNNNeuronGradientNode], [CNNPoolingGradientNode], [CNNSoftMaxGradientNode], [CNNSpatialNormalizationGradientNode], [CNNUpsamplingBilinearGradientNode], [CNNUpsamplingNearestGradientNode], [NNArithmeticGradientNode], [NNConcatenationGradientNode], [NNGramMatrixCalculationGradientNode], [NNLossGradientNode], [NNPadGradientNode], [NNReductionSpatialMeanGradientNode], [NNReshapeGradientNode] and pass it where a NNGradientFilterNode is accepted.
 type NNGradientFilterNode struct {
-	inner *raw.MPSNNGradientFilterNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNGradientFilterNode].
-func (x *NNGradientFilterNode) Unwrap() *raw.MPSNNGradientFilterNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGradientFilterNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGradientFilterNodeFromID adopts an existing object pointer as a NNGradientFilterNode (nil for 0).
+// NNGradientFilterNodeFromID adopts an existing Objective-C object as a NNGradientFilterNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGradientFilterNodeFromID(id objc.ID) *NNGradientFilterNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNGradientFilterNode{inner: raw.MPSNNGradientFilterNodeFromID(id)}
-}
-
-// NewNNGradientFilterNode creates a new [NNGradientFilterNode].
-func NewNNGradientFilterNode() *NNGradientFilterNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGradientFilterNode")), objc.RegisterName("new"))
-	return &NNGradientFilterNode{inner: raw.MPSNNGradientFilterNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNGradientFilterNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGradientFilterNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNGradientFilterNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// nNGradientFilterNodeAdopt wraps an Objective-C object that this code just created as a
+// NNGradientFilterNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGradientFilterNodeAdopt(id objc.ID) *NNGradientFilterNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGradientFilterNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNGradientFilterNode) WithLabel(label string) *NNGradientFilterNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *NNGradientFilterNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return x.inner }
-
-func (x *NNGradientFilterNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNGradientFilterNodeable is the interface implemented by [NNGradientFilterNode], for mocking and DI.
 type NNGradientFilterNodeable interface {
-	Unwrap() *raw.MPSNNGradientFilterNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGradientFilterNode
+	obj.Object
 	WithLabel(label string) *NNGradientFilterNode
 }
 
 var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)
+
+// isNNGradientFilterNode marks NNGradientFilterNode — and, by embedding promotion, its
+// subclasses — as a member of the NNGradientFilterNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NNGradientFilterNode) isNNGradientFilterNode() {}
+
+var _ NNGradientFilterNodeProvider = (*NNGradientFilterNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNGradientFilterNode)(nil)

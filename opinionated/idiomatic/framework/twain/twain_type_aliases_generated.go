@@ -4,132 +4,89 @@
 
 package twain
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/twain"
-)
+type TW_CAPEXT struct {
+	Cap        uint16
+	Properties uint16
+}
 
-// TW_ARRAY is a type alias for the raw TW_ARRAY value-type struct.
-type TW_ARRAY = raw.TW_ARRAY
+type TW_CIEPOINT struct {
+	X TW_FIX32
+	Y TW_FIX32
+	Z TW_FIX32
+}
 
-// TW_AUDIOINFO is a type alias for the raw TW_AUDIOINFO value-type struct.
-type TW_AUDIOINFO = raw.TW_AUDIOINFO
+type TW_DECODEFUNCTION struct {
+	StartIn     TW_FIX32
+	BreakIn     TW_FIX32
+	EndIn       TW_FIX32
+	StartOut    TW_FIX32
+	BreakOut    TW_FIX32
+	EndOut      TW_FIX32
+	Gamma       TW_FIX32
+	SampleCount TW_FIX32
+}
 
-// TW_CALLBACK is a type alias for the raw TW_CALLBACK value-type struct.
-type TW_CALLBACK = raw.TW_CALLBACK
+type TW_ELEMENT8 struct {
+	Index    uint8
+	Channel1 uint8
+	Channel2 uint8
+	Channel3 uint8
+}
 
-// TW_CAPABILITY is a type alias for the raw TW_CAPABILITY value-type struct.
-type TW_CAPABILITY = raw.TW_CAPABILITY
+type TW_FIX32 struct {
+	Whole int16
+	Frac  uint16
+}
 
-// TW_CAPEXT is a type alias for the raw TW_CAPEXT value-type struct.
-type TW_CAPEXT = raw.TW_CAPEXT
+type TW_FRAME struct {
+	Left   TW_FIX32
+	Top    TW_FIX32
+	Right  TW_FIX32
+	Bottom TW_FIX32
+}
 
-// TW_CIECOLOR is a type alias for the raw TW_CIECOLOR value-type struct.
-type TW_CIECOLOR = raw.TW_CIECOLOR
+type TW_IMAGELAYOUT struct {
+	Frame          TW_FRAME
+	DocumentNumber uint
+	PageNumber     uint
+	FrameNumber    uint
+}
 
-// TW_CIEPOINT is a type alias for the raw TW_CIEPOINT value-type struct.
-type TW_CIEPOINT = raw.TW_CIEPOINT
+type TW_INFO struct {
+	InfoID   uint16
+	ItemType uint16
+	NumItems uint16
+	CondCode uint16
+	Item     uint
+}
 
-// TW_CUSTOMDSDATA is a type alias for the raw TW_CUSTOMDSDATA value-type struct.
-type TW_CUSTOMDSDATA = raw.TW_CUSTOMDSDATA
+type TW_ONEVALUE struct {
+	ItemType uint16
+	Item     uint
+}
 
-// TW_DECODEFUNCTION is a type alias for the raw TW_DECODEFUNCTION value-type struct.
-type TW_DECODEFUNCTION = raw.TW_DECODEFUNCTION
+type TW_RANGE struct {
+	ItemType     uint16
+	MinValue     uint
+	MaxValue     uint
+	StepSize     uint
+	DefaultValue uint
+	CurrentValue uint
+}
 
-// TW_DEVICEEVENT is a type alias for the raw TW_DEVICEEVENT value-type struct.
-type TW_DEVICEEVENT = raw.TW_DEVICEEVENT
+type TW_SETUPMEMXFER struct {
+	MinBufSize uint
+	MaxBufSize uint
+	Preferred  uint
+}
 
-// TW_ELEMENT8 is a type alias for the raw TW_ELEMENT8 value-type struct.
-type TW_ELEMENT8 = raw.TW_ELEMENT8
+type TW_STATUS struct {
+	ConditionCode uint16
+	Reserved      uint16
+}
 
-// TW_ENUMERATION is a type alias for the raw TW_ENUMERATION value-type struct.
-type TW_ENUMERATION = raw.TW_ENUMERATION
-
-// TW_EVENT is a type alias for the raw TW_EVENT value-type struct.
-type TW_EVENT = raw.TW_EVENT
-
-// TW_EXTIMAGEINFO is a type alias for the raw TW_EXTIMAGEINFO value-type struct.
-type TW_EXTIMAGEINFO = raw.TW_EXTIMAGEINFO
-
-// TW_FILESYSTEM is a type alias for the raw TW_FILESYSTEM value-type struct.
-type TW_FILESYSTEM = raw.TW_FILESYSTEM
-
-// TW_FIX32 is a type alias for the raw TW_FIX32 value-type struct.
-type TW_FIX32 = raw.TW_FIX32
-
-// TW_FRAME is a type alias for the raw TW_FRAME value-type struct.
-type TW_FRAME = raw.TW_FRAME
-
-// TW_GRAYRESPONSE is a type alias for the raw TW_GRAYRESPONSE value-type struct.
-type TW_GRAYRESPONSE = raw.TW_GRAYRESPONSE
-
-// TW_IDENTITY is a type alias for the raw TW_IDENTITY value-type struct.
-type TW_IDENTITY = raw.TW_IDENTITY
-
-// TW_IMAGEINFO is a type alias for the raw TW_IMAGEINFO value-type struct.
-type TW_IMAGEINFO = raw.TW_IMAGEINFO
-
-// TW_IMAGELAYOUT is a type alias for the raw TW_IMAGELAYOUT value-type struct.
-type TW_IMAGELAYOUT = raw.TW_IMAGELAYOUT
-
-// TW_IMAGEMEMXFER is a type alias for the raw TW_IMAGEMEMXFER value-type struct.
-type TW_IMAGEMEMXFER = raw.TW_IMAGEMEMXFER
-
-// TW_INFO is a type alias for the raw TW_INFO value-type struct.
-type TW_INFO = raw.TW_INFO
-
-// TW_JPEGCOMPRESSION is a type alias for the raw TW_JPEGCOMPRESSION value-type struct.
-type TW_JPEGCOMPRESSION = raw.TW_JPEGCOMPRESSION
-
-// TW_MEMORY is a type alias for the raw TW_MEMORY value-type struct.
-type TW_MEMORY = raw.TW_MEMORY
-
-// TW_ONEVALUE is a type alias for the raw TW_ONEVALUE value-type struct.
-type TW_ONEVALUE = raw.TW_ONEVALUE
-
-// TW_PALETTE8 is a type alias for the raw TW_PALETTE8 value-type struct.
-type TW_PALETTE8 = raw.TW_PALETTE8
-
-// TW_PASSTHRU is a type alias for the raw TW_PASSTHRU value-type struct.
-type TW_PASSTHRU = raw.TW_PASSTHRU
-
-// TW_PENDINGXFERS is a type alias for the raw TW_PENDINGXFERS value-type struct.
-type TW_PENDINGXFERS = raw.TW_PENDINGXFERS
-
-// TW_RANGE is a type alias for the raw TW_RANGE value-type struct.
-type TW_RANGE = raw.TW_RANGE
-
-// TW_RGBRESPONSE is a type alias for the raw TW_RGBRESPONSE value-type struct.
-type TW_RGBRESPONSE = raw.TW_RGBRESPONSE
-
-// TW_SETUPAUDIOFILEXFER is a type alias for the raw TW_SETUPAUDIOFILEXFER value-type struct.
-type TW_SETUPAUDIOFILEXFER = raw.TW_SETUPAUDIOFILEXFER
-
-// TW_SETUPFILEXFER is a type alias for the raw TW_SETUPFILEXFER value-type struct.
-type TW_SETUPFILEXFER = raw.TW_SETUPFILEXFER
-
-// TW_SETUPFILEXFER2 is a type alias for the raw TW_SETUPFILEXFER2 value-type struct.
-type TW_SETUPFILEXFER2 = raw.TW_SETUPFILEXFER2
-
-// TW_SETUPMEMXFER is a type alias for the raw TW_SETUPMEMXFER value-type struct.
-type TW_SETUPMEMXFER = raw.TW_SETUPMEMXFER
-
-// TW_STATUS is a type alias for the raw TW_STATUS value-type struct.
-type TW_STATUS = raw.TW_STATUS
-
-// TW_TRANSFORMSTAGE is a type alias for the raw TW_TRANSFORMSTAGE value-type struct.
-type TW_TRANSFORMSTAGE = raw.TW_TRANSFORMSTAGE
-
-// TW_TWUNKDSENTRYPARAMS is a type alias for the raw TW_TWUNKDSENTRYPARAMS value-type struct.
-type TW_TWUNKDSENTRYPARAMS = raw.TW_TWUNKDSENTRYPARAMS
-
-// TW_TWUNKDSENTRYRETURN is a type alias for the raw TW_TWUNKDSENTRYRETURN value-type struct.
-type TW_TWUNKDSENTRYRETURN = raw.TW_TWUNKDSENTRYRETURN
-
-// TW_TWUNKIDENTITY is a type alias for the raw TW_TWUNKIDENTITY value-type struct.
-type TW_TWUNKIDENTITY = raw.TW_TWUNKIDENTITY
-
-// TW_USERINTERFACE is a type alias for the raw TW_USERINTERFACE value-type struct.
-type TW_USERINTERFACE = raw.TW_USERINTERFACE
-
-// TW_VERSION is a type alias for the raw TW_VERSION value-type struct.
-type TW_VERSION = raw.TW_VERSION
+type TW_TWUNKDSENTRYRETURN struct {
+	ReturnCode    uint16
+	ConditionCode uint16
+	PDataSize     int
+}

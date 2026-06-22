@@ -5,46 +5,82 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that tracks the loading progress of a webpage.
+// WKNavigation is an idiomatic wrapper over the Objective-C class WKNavigation.
 //
-// WKNavigation wraps [raw.WKNavigation] with a fluent Go API.
+// An object that tracks the loading progress of a webpage.
 type WKNavigation struct {
-	inner *raw.WKNavigation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKNavigation].
-func (x *WKNavigation) Unwrap() *raw.WKNavigation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKNavigation) ID() objc.ID { return x.inner.Ptr() }
-
-// WKNavigationFromID adopts an existing object pointer as a WKNavigation (nil for 0).
+// WKNavigationFromID adopts an existing Objective-C object as a WKNavigation
+// (nil for 0), retaining it and registering a release finalizer.
 func WKNavigationFromID(id objc.ID) *WKNavigation {
 	if id == 0 {
 		return nil
 	}
-	return &WKNavigation{inner: raw.WKNavigationFromID(id)}
+	x := &WKNavigation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKNavigation creates a new [WKNavigation].
+// wKNavigationAdopt wraps an Objective-C object that this code just created as a
+// WKNavigation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKNavigationAdopt(id objc.ID) *WKNavigation {
+	if id == 0 {
+		return nil
+	}
+	x := &WKNavigation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKNavigation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKNavigation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKNavigation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKNavigation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKNavigation creates a new WKNavigation.
 func NewWKNavigation() *WKNavigation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKNavigation")), objc.RegisterName("new"))
-	return &WKNavigation{inner: raw.WKNavigationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigation")), objc.RegisterName("new"))
+	return wKNavigationAdopt(_id)
 }
 
-// EffectiveContentMode calls the underlying EffectiveContentMode.
+// EffectiveContentMode wraps the corresponding Objective-C method.
 func (x *WKNavigation) EffectiveContentMode() WKContentMode {
-	return WKContentMode(x.inner.EffectiveContentMode())
+	_r := objc.Send[WKContentMode](objref.IDOf(x), objc.RegisterName("effectiveContentMode"))
+	return _r
 }
 
 // WKNavigationable is the interface implemented by [WKNavigation], for mocking and DI.
 type WKNavigationable interface {
-	Unwrap() *raw.WKNavigation
+	obj.Object
 	EffectiveContentMode() WKContentMode
 }
 

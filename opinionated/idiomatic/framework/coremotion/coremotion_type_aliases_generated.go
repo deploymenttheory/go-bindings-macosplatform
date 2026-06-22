@@ -4,24 +4,44 @@
 
 package coremotion
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-)
+// The type of a structure containing 3-axis acceleration values.
+type CMAcceleration struct {
+	X float64
+	Y float64
+	Z float64
+}
 
-// CMAcceleration is a type alias for the raw CMAcceleration value-type struct.
-type CMAcceleration = raw.CMAcceleration
+// A structure containing 3-axis magnetometer data
+type CMMagneticField struct {
+	X float64
+	Y float64
+	Z float64
+}
 
-// CMCalibratedMagneticField is a type alias for the raw CMCalibratedMagneticField value-type struct.
-type CMCalibratedMagneticField = raw.CMCalibratedMagneticField
+// The type for a quaternion representing a measurement of attitude.
+type CMQuaternion struct {
+	X float64
+	Y float64
+	Z float64
+	W float64
+}
 
-// CMMagneticField is a type alias for the raw CMMagneticField value-type struct.
-type CMMagneticField = raw.CMMagneticField
+// The type of a structure representing a rotation matrix.
+type CMRotationMatrix struct {
+	M11 float64
+	M12 float64
+	M13 float64
+	M21 float64
+	M22 float64
+	M23 float64
+	M31 float64
+	M32 float64
+	M33 float64
+}
 
-// CMQuaternion is a type alias for the raw CMQuaternion value-type struct.
-type CMQuaternion = raw.CMQuaternion
-
-// CMRotationMatrix is a type alias for the raw CMRotationMatrix value-type struct.
-type CMRotationMatrix = raw.CMRotationMatrix
-
-// CMRotationRate is a type alias for the raw CMRotationRate value-type struct.
-type CMRotationRate = raw.CMRotationRate
+// The type of structures representing a measurement of rotation rate.
+type CMRotationRate struct {
+	X float64
+	Y float64
+	Z float64
+}

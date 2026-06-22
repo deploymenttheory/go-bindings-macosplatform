@@ -5,12 +5,9 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CMErrorDomain returns the string constant CMErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CMErrorDomain() objc.ID {
-	return purego.CFConstant(raw.CMErrorDomain())
-}
+// CMErrorDomain returns the string constant CMErrorDomain, for use as a dictionary key or argument.
+func CMErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CMErrorDomain"))) }

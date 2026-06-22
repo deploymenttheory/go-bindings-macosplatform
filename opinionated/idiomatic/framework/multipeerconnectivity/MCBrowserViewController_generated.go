@@ -5,137 +5,138 @@
 package multipeerconnectivity
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
+// BrowserViewController is an idiomatic wrapper over the Objective-C class MCBrowserViewController.
 //
-// BrowserViewController wraps [raw.MCBrowserViewController] with a fluent Go API.
+// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
 type BrowserViewController struct {
-	inner *raw.MCBrowserViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MCBrowserViewController].
-func (x *BrowserViewController) Unwrap() *raw.MCBrowserViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BrowserViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// BrowserViewControllerFromID adopts an existing object pointer as a BrowserViewController (nil for 0).
+// BrowserViewControllerFromID adopts an existing Objective-C object as a BrowserViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func BrowserViewControllerFromID(id objc.ID) *BrowserViewController {
 	if id == 0 {
 		return nil
 	}
-	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(id)}
-}
-
-// Initializes a browser view controller using the provided service type and session.
-//
-// NewBrowserViewControllerWithServiceTypeSession creates a new [BrowserViewController].
-func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *raw.MCSession) *BrowserViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCBrowserViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:session:"), foundation.NSStringStringWithUTF8String(serviceType).Ptr(), session.Ptr())
-	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(_id)}
-}
-
-// Initializes a browser view controller with the provided browser and session.
-//
-// NewBrowserViewControllerWithBrowserSession creates a new [BrowserViewController].
-func NewBrowserViewControllerWithBrowserSession(browser *raw.MCNearbyServiceBrowser, session *raw.MCSession) *BrowserViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCBrowserViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrowser:session:"), browser.Ptr(), session.Ptr())
-	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(_id)}
-}
-
-// The delegate object that handles browser-view-controller-related events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *BrowserViewController) WithDelegate(delegate raw.MCBrowserViewControllerDelegate) *BrowserViewController {
-	x.inner.SetDelegate(delegate)
+	x := &BrowserViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The minimum number of peers that need to be in a session, including the local peer.
-//
-// WithMinimumNumberOfPeers sets the minimumNumberOfPeers property and returns the receiver for chaining.
-func (x *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers uint) *BrowserViewController {
-	x.inner.SetMinimumNumberOfPeers(minimumNumberOfPeers)
+// browserViewControllerAdopt wraps an Objective-C object that this code just created as a
+// BrowserViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func browserViewControllerAdopt(id objc.ID) *BrowserViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &BrowserViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The maximum number of peers allowed in a session, including the local peer.
-//
-// WithMaximumNumberOfPeers sets the maximumNumberOfPeers property and returns the receiver for chaining.
-func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers uint) *BrowserViewController {
-	x.inner.SetMaximumNumberOfPeers(maximumNumberOfPeers)
+// Description returns the object's -description text.
+func (x *BrowserViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BrowserViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BrowserViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BrowserViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBrowserViewControllerWithServiceTypeSession initializes a browser view controller using the provided service type and session.
+func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *Session) *BrowserViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:session:"), purego.NSString(serviceType), objref.IDOf(session))
+	return browserViewControllerAdopt(_id)
+}
+
+// NewBrowserViewControllerWithBrowserSession initializes a browser view controller with the provided browser and session.
+func NewBrowserViewControllerWithBrowserSession(browser *NearbyServiceBrowser, session *Session) *BrowserViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCBrowserViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrowser:session:"), objref.IDOf(browser), objref.IDOf(session))
+	return browserViewControllerAdopt(_id)
+}
+
+// WithMinimumNumberOfPeers the minimum number of peers that need to be in a session, including the local peer.
+func (x *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *BrowserViewController) Delegate() raw.MCBrowserViewControllerDelegate {
-	return x.inner.Delegate()
+// WithMaximumNumberOfPeers the maximum number of peers allowed in a session, including the local peer.
+func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *BrowserViewController) SetDelegate(delegate raw.MCBrowserViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Browser calls the underlying Browser.
+// Browser wraps the corresponding Objective-C method.
 func (x *BrowserViewController) Browser() *NearbyServiceBrowser {
-	_r := x.inner.Browser()
-	if _r == nil {
-		return nil
-	}
-	return &NearbyServiceBrowser{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("browser"))
+	return NearbyServiceBrowserFromID(_r)
 }
 
-// Session calls the underlying Session.
+// Session wraps the corresponding Objective-C method.
 func (x *BrowserViewController) Session() *Session {
-	_r := x.inner.Session()
-	if _r == nil {
-		return nil
-	}
-	return &Session{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+	return SessionFromID(_r)
 }
 
-// MinimumNumberOfPeers calls the underlying MinimumNumberOfPeers.
-func (x *BrowserViewController) MinimumNumberOfPeers() uint {
-	return x.inner.MinimumNumberOfPeers()
+// MinimumNumberOfPeers wraps the corresponding Objective-C method.
+func (x *BrowserViewController) MinimumNumberOfPeers() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumNumberOfPeers"))
+	return _r
 }
 
-// SetMinimumNumberOfPeers calls the underlying SetMinimumNumberOfPeers.
-func (x *BrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers uint) {
-	x.inner.SetMinimumNumberOfPeers(minimumNumberOfPeers)
+// SetMinimumNumberOfPeers wraps the corresponding Objective-C method.
+func (x *BrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumNumberOfPeers:"), minimumNumberOfPeers)
 }
 
-// MaximumNumberOfPeers calls the underlying MaximumNumberOfPeers.
-func (x *BrowserViewController) MaximumNumberOfPeers() uint {
-	return x.inner.MaximumNumberOfPeers()
+// MaximumNumberOfPeers wraps the corresponding Objective-C method.
+func (x *BrowserViewController) MaximumNumberOfPeers() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfPeers"))
+	return _r
 }
 
-// SetMaximumNumberOfPeers calls the underlying SetMaximumNumberOfPeers.
-func (x *BrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers uint) {
-	x.inner.SetMaximumNumberOfPeers(maximumNumberOfPeers)
+// SetMaximumNumberOfPeers wraps the corresponding Objective-C method.
+func (x *BrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfPeers:"), maximumNumberOfPeers)
 }
 
 // BrowserViewControllerable is the interface implemented by [BrowserViewController], for mocking and DI.
 type BrowserViewControllerable interface {
-	Unwrap() *raw.MCBrowserViewController
-	WithDelegate(delegate raw.MCBrowserViewControllerDelegate) *BrowserViewController
-	WithMinimumNumberOfPeers(minimumNumberOfPeers uint) *BrowserViewController
-	WithMaximumNumberOfPeers(maximumNumberOfPeers uint) *BrowserViewController
-	Delegate() raw.MCBrowserViewControllerDelegate
-	SetDelegate(delegate raw.MCBrowserViewControllerDelegate)
+	obj.Object
+	WithMinimumNumberOfPeers(minimumNumberOfPeers int) *BrowserViewController
+	WithMaximumNumberOfPeers(maximumNumberOfPeers int) *BrowserViewController
 	Browser() *NearbyServiceBrowser
 	Session() *Session
-	MinimumNumberOfPeers() uint
-	SetMinimumNumberOfPeers(minimumNumberOfPeers uint)
-	MaximumNumberOfPeers() uint
-	SetMaximumNumberOfPeers(maximumNumberOfPeers uint)
+	MinimumNumberOfPeers() int
+	SetMinimumNumberOfPeers(minimumNumberOfPeers int)
+	MaximumNumberOfPeers() int
+	SetMaximumNumberOfPeers(maximumNumberOfPeers int)
 }
 
 var _ BrowserViewControllerable = (*BrowserViewController)(nil)

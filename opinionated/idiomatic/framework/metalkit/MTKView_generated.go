@@ -5,510 +5,314 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A specialized view that creates, configures, and displays Metal objects.
+// View is an idiomatic wrapper over the Objective-C class MTKView.
 //
-// View wraps [raw.MTKView] with a fluent Go API.
+// A specialized view that creates, configures, and displays Metal objects.
 type View struct {
-	inner *raw.MTKView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKView].
-func (x *View) Unwrap() *raw.MTKView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *View) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewFromID adopts an existing object pointer as a View (nil for 0).
+// ViewFromID adopts an existing Objective-C object as a View
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewFromID(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	return &View{inner: raw.MTKViewFromID(id)}
-}
-
-// Initializes a view with the specified frame rectangle and Metal device.
-//
-// NewViewWithFrameDevice creates a new [View].
-func NewViewWithFrameDevice(frameRect corefoundation.CGRect, device metal.MTLDevice) *View {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:device:"), frameRect, device)
-	return &View{inner: raw.MTKViewFromID(_id)}
-}
-
-// Initializes a view from data in a given unarchiver.
-//
-// NewViewWithCoder creates a new [View].
-func NewViewWithCoder(coder *foundation.NSCoder) *View {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &View{inner: raw.MTKViewFromID(_id)}
-}
-
-// The view’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *View) WithDelegate(delegate raw.MTKViewDelegate) *View {
-	x.inner.SetDelegate(delegate)
+	x := &View{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The device object the view uses to create its Metal objects.
-//
-// WithDevice sets the device property and returns the receiver for chaining.
-func (x *View) WithDevice(device metal.MTLDevice) *View {
-	x.inner.SetDevice(device)
+// viewAdopt wraps an Objective-C object that this code just created as a
+// View (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewAdopt(id objc.ID) *View {
+	if id == 0 {
+		return nil
+	}
+	x := &View{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value that determines whether the drawable’s textures are used only for rendering.
-//
-// WithFramebufferOnly sets the framebufferOnly property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *View) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *View) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewViewWithCoder initializes a view from data in a given unarchiver.
+func NewViewWithCoder(coder obj.Object) *View {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTKView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return viewAdopt(_id)
+}
+
+// WithFramebufferOnly a Boolean value that determines whether the drawable’s textures are used only for rendering.
 func (x *View) WithFramebufferOnly(framebufferOnly bool) *View {
-	x.inner.SetFramebufferOnly(framebufferOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
 	return x
 }
 
-// The texture usage characteristics that the view uses when creating the depth and stencil textures.
-//
-// WithDepthStencilAttachmentTextureUsage sets the depthStencilAttachmentTextureUsage property and returns the receiver for chaining.
-func (x *View) WithDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) *View {
-	x.inner.SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage)
-	return x
-}
-
-// The texture usage characteristics that the view uses when creating multisample textures.
-//
-// WithMultisampleColorAttachmentTextureUsage sets the multisampleColorAttachmentTextureUsage property and returns the receiver for chaining.
-func (x *View) WithMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) *View {
-	x.inner.SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage)
-	return x
-}
-
-// A Boolean value that determines whether the view presents its content using a Core Animation transaction.
-//
-// WithPresentsWithTransaction sets the presentsWithTransaction property and returns the receiver for chaining.
+// WithPresentsWithTransaction a Boolean value that determines whether the view presents its content using a Core Animation transaction.
 func (x *View) WithPresentsWithTransaction(presentsWithTransaction bool) *View {
-	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
 	return x
 }
 
-// The color pixel format for the current drawable’s texture.
-//
-// WithColorPixelFormat sets the colorPixelFormat property and returns the receiver for chaining.
-func (x *View) WithColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) *View {
-	x.inner.SetColorPixelFormat(colorPixelFormat)
+// WithSampleCount the sample count used to generate the multisampleColorTexture object.
+func (x *View) WithSampleCount(sampleCount int) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 	return x
 }
 
-// The format used to generate the depthStencilTexture object.
-//
-// WithDepthStencilPixelFormat sets the depthStencilPixelFormat property and returns the receiver for chaining.
-func (x *View) WithDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) *View {
-	x.inner.SetDepthStencilPixelFormat(depthStencilPixelFormat)
-	return x
-}
-
-// The storage mode that the packed depth and stencil texture use.
-//
-// WithDepthStencilStorageMode sets the depthStencilStorageMode property and returns the receiver for chaining.
-func (x *View) WithDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) *View {
-	x.inner.SetDepthStencilStorageMode(depthStencilStorageMode)
-	return x
-}
-
-// The sample count used to generate the multisampleColorTexture object.
-//
-// WithSampleCount sets the sampleCount property and returns the receiver for chaining.
-func (x *View) WithSampleCount(sampleCount uint) *View {
-	x.inner.SetSampleCount(sampleCount)
-	return x
-}
-
-// The color to use to clear the color target when creating a render pass descriptor.
-//
-// WithClearColor sets the clearColor property and returns the receiver for chaining.
+// WithClearColor the color to use to clear the color target when creating a render pass descriptor.
 func (x *View) WithClearColor(clearColor metal.MTLClearColor) *View {
-	x.inner.SetClearColor(clearColor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearColor:"), clearColor)
 	return x
 }
 
-// The depth value to use to clear the depth target when creating a render pass descriptor.
-//
-// WithClearDepth sets the clearDepth property and returns the receiver for chaining.
+// WithClearDepth the depth value to use to clear the depth target when creating a render pass descriptor.
 func (x *View) WithClearDepth(clearDepth float64) *View {
-	x.inner.SetClearDepth(clearDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
 	return x
 }
 
-// The stencil value to use to clear the stencil target when creating a render pass descriptor.
-//
-// WithClearStencil sets the clearStencil property and returns the receiver for chaining.
+// WithClearStencil the stencil value to use to clear the stencil target when creating a render pass descriptor.
 func (x *View) WithClearStencil(clearStencil uint32) *View {
-	x.inner.SetClearStencil(clearStencil)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
 	return x
 }
 
-// The rate at which the view redraws its contents.
-//
-// WithPreferredFramesPerSecond sets the preferredFramesPerSecond property and returns the receiver for chaining.
+// WithPreferredFramesPerSecond the rate at which the view redraws its contents.
 func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
-	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
 	return x
 }
 
-// A Boolean value that indicates whether the view responds to setNeedsDisplay.
-//
-// WithEnableSetNeedsDisplay sets the enableSetNeedsDisplay property and returns the receiver for chaining.
+// WithEnableSetNeedsDisplay a Boolean value that indicates whether the view responds to setNeedsDisplay.
 func (x *View) WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View {
-	x.inner.SetEnableSetNeedsDisplay(enableSetNeedsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableSetNeedsDisplay:"), enableSetNeedsDisplay)
 	return x
 }
 
-// A Boolean value that controls whether to resize the drawable as the view changes size.
-//
-// WithAutoResizeDrawable sets the autoResizeDrawable property and returns the receiver for chaining.
+// WithAutoResizeDrawable a Boolean value that controls whether to resize the drawable as the view changes size.
 func (x *View) WithAutoResizeDrawable(autoResizeDrawable bool) *View {
-	x.inner.SetAutoResizeDrawable(autoResizeDrawable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResizeDrawable:"), autoResizeDrawable)
 	return x
 }
 
-// The current size of drawable textures.
-//
-// WithDrawableSize sets the drawableSize property and returns the receiver for chaining.
+// WithDrawableSize the current size of drawable textures.
 func (x *View) WithDrawableSize(drawableSize corefoundation.CGSize) *View {
-	x.inner.SetDrawableSize(drawableSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
 	return x
 }
 
-// A Boolean value that indicates whether the draw loop is paused.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that indicates whether the draw loop is paused.
 func (x *View) WithPaused(paused bool) *View {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// Releases the depthStencilTexture and multisampleColorTexture objects.
-//
-// ReleaseDrawables calls the underlying ReleaseDrawables.
+// WithColorspace the color space of the rendered content.
+func (x *View) WithColorspace(colorspace obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	return x
+}
+
+// ReleaseDrawables releases the depthStencilTexture and multisampleColorTexture objects.
 func (x *View) ReleaseDrawables() {
-	x.inner.ReleaseDrawables()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseDrawables"))
 }
 
-// Redraws the view’s contents immediately.
-//
-// Draw calls the underlying Draw.
+// Draw redraws the view’s contents immediately.
 func (x *View) Draw() {
-	x.inner.Draw()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draw"))
 }
 
-// @property delegate @abstract The delegate handling common view operations
-//
-// Delegate calls the underlying Delegate.
-func (x *View) Delegate() raw.MTKViewDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *View) SetDelegate(delegate raw.MTKViewDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property device @abstract The MTLDevice used to create Metal objects @discussion This must be explicitly set by the application unless it was passed into the initializer. Defaults to nil
-//
-// Device calls the underlying Device.
-func (x *View) Device() metal.MTLDevice {
-	return x.inner.Device()
-}
-
-// SetDevice calls the underlying SetDevice.
-func (x *View) SetDevice(device metal.MTLDevice) {
-	x.inner.SetDevice(device)
-}
-
-// @property currentDrawable @abstract The drawable to be used for the current frame. @discussion currentDrawable is updated at the end -draw (i.e. after the delegate's drawInMTKView method is called)
-//
-// CurrentDrawable calls the underlying CurrentDrawable.
-func (x *View) CurrentDrawable() quartzcore.CAMetalDrawable {
-	return x.inner.CurrentDrawable()
-}
-
-// @property framebufferOnly @abstract If the currentDrawable can be used for sampling or texture read operations @discussion This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
-//
-// FramebufferOnly calls the underlying FramebufferOnly.
+// FramebufferOnly if the currentDrawable can be used for sampling or texture read operations This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
 func (x *View) FramebufferOnly() bool {
-	return x.inner.FramebufferOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("framebufferOnly"))
+	return _r
 }
 
-// SetFramebufferOnly calls the underlying SetFramebufferOnly.
+// SetFramebufferOnly wraps the corresponding Objective-C method.
 func (x *View) SetFramebufferOnly(framebufferOnly bool) {
-	x.inner.SetFramebufferOnly(framebufferOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
 }
 
-// @property depthStencilAttachmentTextureUsage @abstract The usage flags set on the depth attachment. @discussion This property controls the texture usage flags set on the MTKView's depth-stencil attachment on creation.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the depth attachment, but any data currently in the depth attachment will be lost.
-//
-// DepthStencilAttachmentTextureUsage calls the underlying DepthStencilAttachmentTextureUsage.
-func (x *View) DepthStencilAttachmentTextureUsage() metal.MTLTextureUsage {
-	return x.inner.DepthStencilAttachmentTextureUsage()
-}
-
-// SetDepthStencilAttachmentTextureUsage calls the underlying SetDepthStencilAttachmentTextureUsage.
-func (x *View) SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) {
-	x.inner.SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage)
-}
-
-// @property multisampleColorAttachmentTextureUsage @abstract The texture usage flags for the multisample color attachment. @discussion This property controls the texture usage flags set on the the multisample color attachment attachment.  This value defaults to MTLTextureUsageRenderTarget. The recommended value for most applications is MTLTextureUsageRenderTarget. Changing this value re-creates the multisample color attachment, but any data currently in the multisample color attachment will be lost.
-//
-// MultisampleColorAttachmentTextureUsage calls the underlying MultisampleColorAttachmentTextureUsage.
-func (x *View) MultisampleColorAttachmentTextureUsage() metal.MTLTextureUsage {
-	return x.inner.MultisampleColorAttachmentTextureUsage()
-}
-
-// SetMultisampleColorAttachmentTextureUsage calls the underlying SetMultisampleColorAttachmentTextureUsage.
-func (x *View) SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) {
-	x.inner.SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage)
-}
-
-// @property presentsWithTransaction @abstract If the layer should be presented synchronously @discussion Defaults to NO. When NO, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When YES, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
-//
-// PresentsWithTransaction calls the underlying PresentsWithTransaction.
+// PresentsWithTransaction if the layer should be presented synchronously Defaults to NO. When NO, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When YES, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
 func (x *View) PresentsWithTransaction() bool {
-	return x.inner.PresentsWithTransaction()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentsWithTransaction"))
+	return _r
 }
 
-// SetPresentsWithTransaction calls the underlying SetPresentsWithTransaction.
+// SetPresentsWithTransaction wraps the corresponding Objective-C method.
 func (x *View) SetPresentsWithTransaction(presentsWithTransaction bool) {
-	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
 }
 
-// @property colorPixelFormat @abstract The pixelFormat for the drawable's texture.
-//
-// ColorPixelFormat calls the underlying ColorPixelFormat.
-func (x *View) ColorPixelFormat() metal.MTLPixelFormat {
-	return x.inner.ColorPixelFormat()
+// SampleCount the sample count used to to create multisampleColorTexture This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
+func (x *View) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+	return _r
 }
 
-// SetColorPixelFormat calls the underlying SetColorPixelFormat.
-func (x *View) SetColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) {
-	x.inner.SetColorPixelFormat(colorPixelFormat)
+// SetSampleCount wraps the corresponding Objective-C method.
+func (x *View) SetSampleCount(sampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 }
 
-// @property depthStencilPixelFormat @abstract The pixelFormat used to create depthStencilTexture
-//
-// DepthStencilPixelFormat calls the underlying DepthStencilPixelFormat.
-func (x *View) DepthStencilPixelFormat() metal.MTLPixelFormat {
-	return x.inner.DepthStencilPixelFormat()
-}
-
-// SetDepthStencilPixelFormat calls the underlying SetDepthStencilPixelFormat.
-func (x *View) SetDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) {
-	x.inner.SetDepthStencilPixelFormat(depthStencilPixelFormat)
-}
-
-// @property depthStencilStorageMode @abstract The storage mode for the depthStencilTexture. Defaults to MTLStorageModePrivate.
-//
-// DepthStencilStorageMode calls the underlying DepthStencilStorageMode.
-func (x *View) DepthStencilStorageMode() metal.MTLStorageMode {
-	return x.inner.DepthStencilStorageMode()
-}
-
-// SetDepthStencilStorageMode calls the underlying SetDepthStencilStorageMode.
-func (x *View) SetDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) {
-	x.inner.SetDepthStencilStorageMode(depthStencilStorageMode)
-}
-
-// @property sampleCount @abstract The sample count used to to create multisampleColorTexture @discussion This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
-//
-// SampleCount calls the underlying SampleCount.
-func (x *View) SampleCount() uint {
-	return x.inner.SampleCount()
-}
-
-// SetSampleCount calls the underlying SetSampleCount.
-func (x *View) SetSampleCount(sampleCount uint) {
-	x.inner.SetSampleCount(sampleCount)
-}
-
-// @property clearColor @abstract The clear color value used to generate the currentRenderPassDescriptor @discussion This defaults to (0.0, 0.0, 0.0, 1.0)
-//
-// ClearColor calls the underlying ClearColor.
+// ClearColor the clear color value used to generate the currentRenderPassDescriptor This defaults to (0.0, 0.0, 0.0, 1.0)
 func (x *View) ClearColor() metal.MTLClearColor {
-	return x.inner.ClearColor()
+	_r := objc.Send[metal.MTLClearColor](objref.IDOf(x), objc.RegisterName("clearColor"))
+	return _r
 }
 
-// SetClearColor calls the underlying SetClearColor.
+// SetClearColor wraps the corresponding Objective-C method.
 func (x *View) SetClearColor(clearColor metal.MTLClearColor) {
-	x.inner.SetClearColor(clearColor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearColor:"), clearColor)
 }
 
-// @property clearDepth @abstract The clear depth value used to generate the currentRenderPassDescriptor @discussion This defaults to 1.0
-//
-// ClearDepth calls the underlying ClearDepth.
+// ClearDepth the clear depth value used to generate the currentRenderPassDescriptor This defaults to 1.0
 func (x *View) ClearDepth() float64 {
-	return x.inner.ClearDepth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("clearDepth"))
+	return _r
 }
 
-// SetClearDepth calls the underlying SetClearDepth.
+// SetClearDepth wraps the corresponding Objective-C method.
 func (x *View) SetClearDepth(clearDepth float64) {
-	x.inner.SetClearDepth(clearDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
 }
 
-// @property clearStencil @abstract The clear stencil value used to generate currentRenderPassDescriptor @discussion This defaults to 0
-//
-// ClearStencil calls the underlying ClearStencil.
+// ClearStencil the clear stencil value used to generate currentRenderPassDescriptor This defaults to 0
 func (x *View) ClearStencil() uint32 {
-	return x.inner.ClearStencil()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clearStencil"))
+	return _r
 }
 
-// SetClearStencil calls the underlying SetClearStencil.
+// SetClearStencil wraps the corresponding Objective-C method.
 func (x *View) SetClearStencil(clearStencil uint32) {
-	x.inner.SetClearStencil(clearStencil)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
 }
 
-// @property depthStencilTexture @abstract A packed depth and stencil texture to be attached to a MTLRenderPassDescriptor @discussion The view will generate the depth buffer using the specified depthPixelFormat.  This will be nil if depthStencilPixelFormat is MTLPixelFormatInvalid.
-//
-// DepthStencilTexture calls the underlying DepthStencilTexture.
-func (x *View) DepthStencilTexture() metal.MTLTexture {
-	return x.inner.DepthStencilTexture()
+// CurrentRenderPassDescriptor a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+func (x *View) CurrentRenderPassDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentRenderPassDescriptor"))
+	return obj.Wrap(_r)
 }
 
-// @property multisampleColorTexture @abstract A multisample color texture that will be resolved into the currentDrawable's texture @discussion The view will generate the multisample color buffer using the specified colorPixelFormat.  This will be nil if sampleCount is less than or equal to 1.
-//
-// MultisampleColorTexture calls the underlying MultisampleColorTexture.
-func (x *View) MultisampleColorTexture() metal.MTLTexture {
-	return x.inner.MultisampleColorTexture()
+// CurrentMTL4RenderPassDescriptor a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+func (x *View) CurrentMTL4RenderPassDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentMTL4RenderPassDescriptor"))
+	return obj.Wrap(_r)
 }
 
-// @property currentRenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
-//
-// CurrentRenderPassDescriptor calls the underlying CurrentRenderPassDescriptor.
-func (x *View) CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor {
-	return x.inner.CurrentRenderPassDescriptor()
-}
-
-// @property currentMTL4RenderPassDescriptor @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
-//
-// CurrentMTL4RenderPassDescriptor calls the underlying CurrentMTL4RenderPassDescriptor.
-func (x *View) CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor {
-	return x.inner.CurrentMTL4RenderPassDescriptor()
-}
-
-// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
-//
-// PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
+// PreferredFramesPerSecond the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
 func (x *View) PreferredFramesPerSecond() int {
-	return x.inner.PreferredFramesPerSecond()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredFramesPerSecond"))
+	return _r
 }
 
-// SetPreferredFramesPerSecond calls the underlying SetPreferredFramesPerSecond.
+// SetPreferredFramesPerSecond wraps the corresponding Objective-C method.
 func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
 }
 
-// @property enableSetNeedsDisplay @abstract Controls whether the view responds to setNeedsDisplay. @discussion If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
-//
-// EnableSetNeedsDisplay calls the underlying EnableSetNeedsDisplay.
+// EnableSetNeedsDisplay controls whether the view responds to setNeedsDisplay. If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
 func (x *View) EnableSetNeedsDisplay() bool {
-	return x.inner.EnableSetNeedsDisplay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableSetNeedsDisplay"))
+	return _r
 }
 
-// SetEnableSetNeedsDisplay calls the underlying SetEnableSetNeedsDisplay.
+// SetEnableSetNeedsDisplay wraps the corresponding Objective-C method.
 func (x *View) SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool) {
-	x.inner.SetEnableSetNeedsDisplay(enableSetNeedsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableSetNeedsDisplay:"), enableSetNeedsDisplay)
 }
 
-// @property autoResizeDrawable @abstract Controls whether to resize the drawable as the view changes size. @discussion If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes.  If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
-//
-// AutoResizeDrawable calls the underlying AutoResizeDrawable.
+// AutoResizeDrawable controls whether to resize the drawable as the view changes size. If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes.  If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
 func (x *View) AutoResizeDrawable() bool {
-	return x.inner.AutoResizeDrawable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoResizeDrawable"))
+	return _r
 }
 
-// SetAutoResizeDrawable calls the underlying SetAutoResizeDrawable.
+// SetAutoResizeDrawable wraps the corresponding Objective-C method.
 func (x *View) SetAutoResizeDrawable(autoResizeDrawable bool) {
-	x.inner.SetAutoResizeDrawable(autoResizeDrawable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResizeDrawable:"), autoResizeDrawable)
 }
 
-// @property drawableSize @abstract The current size of drawable textures @discussion The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
-//
-// DrawableSize calls the underlying DrawableSize.
+// DrawableSize the current size of drawable textures The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
 func (x *View) DrawableSize() corefoundation.CGSize {
-	return x.inner.DrawableSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("drawableSize"))
+	return _r
 }
 
-// SetDrawableSize calls the underlying SetDrawableSize.
+// SetDrawableSize wraps the corresponding Objective-C method.
 func (x *View) SetDrawableSize(drawableSize corefoundation.CGSize) {
-	x.inner.SetDrawableSize(drawableSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
 }
 
-// @property preferredDrawableSize @abstract The preferred drawable size reported by the backing NSView to match a NSView's native resolution. @discussion this value can be observed via key-value observation to determine if the current native drawable size has changed.
-//
-// PreferredDrawableSize calls the underlying PreferredDrawableSize.
+// PreferredDrawableSize the preferred drawable size reported by the backing NSView to match a NSView's native resolution. this value can be observed via key-value observation to determine if the current native drawable size has changed.
 func (x *View) PreferredDrawableSize() corefoundation.CGSize {
-	return x.inner.PreferredDrawableSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredDrawableSize"))
+	return _r
 }
 
-// @property preferredDevice @abstract The preferred device is updated per-frame by the system in order to identify the most efficient GPU for presentation (e.g. the one being used for compositing). @discussion This value is determined by the underlying CAMetalLayer and this property is a convenience accessor for it.
-//
-// PreferredDevice calls the underlying PreferredDevice.
-func (x *View) PreferredDevice() metal.MTLDevice {
-	return x.inner.PreferredDevice()
-}
-
-// @property paused @abstract Controls whether the draw methods should countinue at preferredFramesPerSecond @discussion If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
-//
-// IsPaused calls the underlying IsPaused.
+// IsPaused controls whether the draw methods should countinue at preferredFramesPerSecond If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
 func (x *View) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
+// SetPaused wraps the corresponding Objective-C method.
 func (x *View) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// @property colorspace @abstract The colorspace of the rendered frames. ' @discussion If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
-//
-// Colorspace calls the underlying Colorspace.
-func (x *View) Colorspace() unsafe.Pointer {
-	return x.inner.Colorspace()
+// Colorspace the colorspace of the rendered frames. ' If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
+func (x *View) Colorspace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorspace"))
+	return obj.Wrap(_r)
 }
 
-// SetColorspace calls the underlying SetColorspace.
-func (x *View) SetColorspace(colorspace unsafe.Pointer) {
-	x.inner.SetColorspace(colorspace)
-}
-
-// @property residencySet @abstract Get the view's residency set. @discussion Get the view's residency set. The residency set contains all MTLTextures created by the view. Applications should use this residency set and the residency set of the view's underlying CAMetalLayer to ensure all required MTLTextures are resident before use.
-//
-// ResidencySet calls the underlying ResidencySet.
-func (x *View) ResidencySet() metal.MTLResidencySet {
-	return x.inner.ResidencySet()
+// SetColorspace wraps the corresponding Objective-C method.
+func (x *View) SetColorspace(colorspace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
 }
 
 // Viewable is the interface implemented by [View], for mocking and DI.
 type Viewable interface {
-	Unwrap() *raw.MTKView
-	WithDelegate(delegate raw.MTKViewDelegate) *View
-	WithDevice(device metal.MTLDevice) *View
+	obj.Object
 	WithFramebufferOnly(framebufferOnly bool) *View
-	WithDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) *View
-	WithMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) *View
 	WithPresentsWithTransaction(presentsWithTransaction bool) *View
-	WithColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) *View
-	WithDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) *View
-	WithDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) *View
-	WithSampleCount(sampleCount uint) *View
+	WithSampleCount(sampleCount int) *View
 	WithClearColor(clearColor metal.MTLClearColor) *View
 	WithClearDepth(clearDepth float64) *View
 	WithClearStencil(clearStencil uint32) *View
@@ -517,39 +321,23 @@ type Viewable interface {
 	WithAutoResizeDrawable(autoResizeDrawable bool) *View
 	WithDrawableSize(drawableSize corefoundation.CGSize) *View
 	WithPaused(paused bool) *View
+	WithColorspace(colorspace obj.Object) *View
 	ReleaseDrawables()
 	Draw()
-	Delegate() raw.MTKViewDelegate
-	SetDelegate(delegate raw.MTKViewDelegate)
-	Device() metal.MTLDevice
-	SetDevice(device metal.MTLDevice)
-	CurrentDrawable() quartzcore.CAMetalDrawable
 	FramebufferOnly() bool
 	SetFramebufferOnly(framebufferOnly bool)
-	DepthStencilAttachmentTextureUsage() metal.MTLTextureUsage
-	SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage)
-	MultisampleColorAttachmentTextureUsage() metal.MTLTextureUsage
-	SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage)
 	PresentsWithTransaction() bool
 	SetPresentsWithTransaction(presentsWithTransaction bool)
-	ColorPixelFormat() metal.MTLPixelFormat
-	SetColorPixelFormat(colorPixelFormat metal.MTLPixelFormat)
-	DepthStencilPixelFormat() metal.MTLPixelFormat
-	SetDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat)
-	DepthStencilStorageMode() metal.MTLStorageMode
-	SetDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode)
-	SampleCount() uint
-	SetSampleCount(sampleCount uint)
+	SampleCount() int
+	SetSampleCount(sampleCount int)
 	ClearColor() metal.MTLClearColor
 	SetClearColor(clearColor metal.MTLClearColor)
 	ClearDepth() float64
 	SetClearDepth(clearDepth float64)
 	ClearStencil() uint32
 	SetClearStencil(clearStencil uint32)
-	DepthStencilTexture() metal.MTLTexture
-	MultisampleColorTexture() metal.MTLTexture
-	CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor
-	CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor
+	CurrentRenderPassDescriptor() obj.Object
+	CurrentMTL4RenderPassDescriptor() obj.Object
 	PreferredFramesPerSecond() int
 	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
 	EnableSetNeedsDisplay() bool
@@ -559,12 +347,10 @@ type Viewable interface {
 	DrawableSize() corefoundation.CGSize
 	SetDrawableSize(drawableSize corefoundation.CGSize)
 	PreferredDrawableSize() corefoundation.CGSize
-	PreferredDevice() metal.MTLDevice
 	IsPaused() bool
 	SetPaused(paused bool)
-	Colorspace() unsafe.Pointer
-	SetColorspace(colorspace unsafe.Pointer)
-	ResidencySet() metal.MTLResidencySet
+	Colorspace() obj.Object
+	SetColorspace(colorspace obj.Object)
 }
 
 var _ Viewable = (*View)(nil)

@@ -5,76 +5,104 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A concrete class that you use to represent basic nodes in a Core Data atomic store.
+// AtomicStoreCacheNode is an idiomatic wrapper over the Objective-C class NSAtomicStoreCacheNode.
 //
-// AtomicStoreCacheNode wraps [raw.NSAtomicStoreCacheNode] with a fluent Go API.
+// A concrete class that you use to represent basic nodes in a Core Data atomic store.
 type AtomicStoreCacheNode struct {
-	inner *raw.NSAtomicStoreCacheNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAtomicStoreCacheNode].
-func (x *AtomicStoreCacheNode) Unwrap() *raw.NSAtomicStoreCacheNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AtomicStoreCacheNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AtomicStoreCacheNodeFromID adopts an existing object pointer as a AtomicStoreCacheNode (nil for 0).
+// AtomicStoreCacheNodeFromID adopts an existing Objective-C object as a AtomicStoreCacheNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AtomicStoreCacheNodeFromID(id objc.ID) *AtomicStoreCacheNode {
 	if id == 0 {
 		return nil
 	}
-	return &AtomicStoreCacheNode{inner: raw.NSAtomicStoreCacheNodeFromID(id)}
-}
-
-// Returns a cache node for the given managed object ID.
-//
-// NewAtomicStoreCacheNodeWithObjectID creates a new [AtomicStoreCacheNode].
-func NewAtomicStoreCacheNodeWithObjectID(moid *raw.NSManagedObjectID) *AtomicStoreCacheNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAtomicStoreCacheNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:"), moid.Ptr())
-	return &AtomicStoreCacheNode{inner: raw.NSAtomicStoreCacheNodeFromID(_id)}
-}
-
-// The property cache dictionary of the node.
-//
-// WithPropertyCache sets the propertyCache property and returns the receiver for chaining.
-func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AtomicStoreCacheNode {
-	x.inner.SetPropertyCache(propertyCache)
+	x := &AtomicStoreCacheNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ObjectID calls the underlying ObjectID.
-func (x *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
-	_r := x.inner.ObjectID()
-	if _r == nil {
+// atomicStoreCacheNodeAdopt wraps an Objective-C object that this code just created as a
+// AtomicStoreCacheNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func atomicStoreCacheNodeAdopt(id objc.ID) *AtomicStoreCacheNode {
+	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectID{inner: _r}
+	x := &AtomicStoreCacheNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PropertyCache calls the underlying PropertyCache.
-func (x *AtomicStoreCacheNode) PropertyCache() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.PropertyCache()
+// Description returns the object's -description text.
+func (x *AtomicStoreCacheNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetPropertyCache calls the underlying SetPropertyCache.
-func (x *AtomicStoreCacheNode) SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetPropertyCache(propertyCache)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AtomicStoreCacheNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AtomicStoreCacheNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AtomicStoreCacheNode) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAtomicStoreCacheNodeWithObjectID returns a cache node for the given managed object ID.
+func NewAtomicStoreCacheNodeWithObjectID(moid *ManagedObjectID) *AtomicStoreCacheNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAtomicStoreCacheNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:"), objref.IDOf(moid))
+	return atomicStoreCacheNodeAdopt(_id)
+}
+
+// WithPropertyCache the property cache dictionary of the node.
+func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
+	return x
+}
+
+// ObjectID wraps the corresponding Objective-C method.
+func (x *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+	return ManagedObjectIDFromID(_r)
+}
+
+// PropertyCache wraps the corresponding Objective-C method.
+func (x *AtomicStoreCacheNode) PropertyCache() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyCache"))
+	return obj.Wrap(_r)
+}
+
+// SetPropertyCache wraps the corresponding Objective-C method.
+func (x *AtomicStoreCacheNode) SetPropertyCache(propertyCache obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertyCache:"), objref.IDOf(propertyCache))
 }
 
 // AtomicStoreCacheNodeable is the interface implemented by [AtomicStoreCacheNode], for mocking and DI.
 type AtomicStoreCacheNodeable interface {
-	Unwrap() *raw.NSAtomicStoreCacheNode
-	WithPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AtomicStoreCacheNode
+	obj.Object
+	WithPropertyCache(propertyCache obj.Object) *AtomicStoreCacheNode
 	ObjectID() *ManagedObjectID
-	PropertyCache() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
-	SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+	PropertyCache() obj.Object
+	SetPropertyCache(propertyCache obj.Object)
 }
 
 var _ AtomicStoreCacheNodeable = (*AtomicStoreCacheNode)(nil)

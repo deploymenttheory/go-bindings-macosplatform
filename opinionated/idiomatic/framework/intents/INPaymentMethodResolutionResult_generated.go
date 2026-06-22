@@ -5,45 +5,58 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Describes the result of resolving a payment method.
+// PaymentMethodResolutionResult is an idiomatic wrapper over the Objective-C class INPaymentMethodResolutionResult.
 //
-// PaymentMethodResolutionResult wraps [raw.INPaymentMethodResolutionResult] with a fluent Go API.
+// It embeds [IntentResolutionResult], promoting that type's methods.
+//
+// Describes the result of resolving a payment method.
 type PaymentMethodResolutionResult struct {
-	inner *raw.INPaymentMethodResolutionResult
+	IntentResolutionResult
 }
 
-// Unwrap returns the underlying [raw.INPaymentMethodResolutionResult].
-func (x *PaymentMethodResolutionResult) Unwrap() *raw.INPaymentMethodResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentMethodResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentMethodResolutionResultFromID adopts an existing object pointer as a PaymentMethodResolutionResult (nil for 0).
+// PaymentMethodResolutionResultFromID adopts an existing Objective-C object as a PaymentMethodResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentMethodResolutionResultFromID(id objc.ID) *PaymentMethodResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentMethodResolutionResult{inner: raw.INPaymentMethodResolutionResultFromID(id)}
+	x := &PaymentMethodResolutionResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentMethodResolutionResult creates a new [PaymentMethodResolutionResult].
+// paymentMethodResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// PaymentMethodResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentMethodResolutionResultAdopt(id objc.ID) *PaymentMethodResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentMethodResolutionResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPaymentMethodResolutionResult creates a new PaymentMethodResolutionResult.
 func NewPaymentMethodResolutionResult() *PaymentMethodResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INPaymentMethodResolutionResult")), objc.RegisterName("new"))
-	return &PaymentMethodResolutionResult{inner: raw.INPaymentMethodResolutionResultFromID(_id)}
-}
-
-func (x *PaymentMethodResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INPaymentMethodResolutionResult")), objc.RegisterName("new"))
+	return paymentMethodResolutionResultAdopt(_id)
 }
 
 // PaymentMethodResolutionResultable is the interface implemented by [PaymentMethodResolutionResult], for mocking and DI.
 type PaymentMethodResolutionResultable interface {
-	Unwrap() *raw.INPaymentMethodResolutionResult
+	obj.Object
 }
 
 var _ PaymentMethodResolutionResultable = (*PaymentMethodResolutionResult)(nil)
+
+var _ IntentResolutionResultProvider = (*PaymentMethodResolutionResult)(nil)

@@ -5,53 +5,63 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestFabricScopedEventEvent wraps [raw.MTRTestClusterClusterTestFabricScopedEventEvent] with a fluent Go API.
+// MTRTestClusterClusterTestFabricScopedEventEvent is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestFabricScopedEventEvent.
+//
+// It embeds [MTRUnitTestingClusterTestFabricScopedEventEvent], promoting that type's methods.
 type MTRTestClusterClusterTestFabricScopedEventEvent struct {
-	inner *raw.MTRTestClusterClusterTestFabricScopedEventEvent
+	MTRUnitTestingClusterTestFabricScopedEventEvent
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestFabricScopedEventEvent].
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestFabricScopedEventEventFromID adopts an existing object pointer as a MTRTestClusterClusterTestFabricScopedEventEvent (nil for 0).
+// MTRTestClusterClusterTestFabricScopedEventEventFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestFabricScopedEventEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestFabricScopedEventEventFromID(id objc.ID) *MTRTestClusterClusterTestFabricScopedEventEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestFabricScopedEventEvent{inner: raw.MTRTestClusterClusterTestFabricScopedEventEventFromID(id)}
-}
-
-// NewMTRTestClusterClusterTestFabricScopedEventEvent creates a new [MTRTestClusterClusterTestFabricScopedEventEvent].
-func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterClusterTestFabricScopedEventEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestFabricScopedEventEvent")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestFabricScopedEventEvent{inner: raw.MTRTestClusterClusterTestFabricScopedEventEventFromID(_id)}
-}
-
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRTestClusterClusterTestFabricScopedEventEvent {
-	x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent.SetFabricIndex(fabricIndex)
+	x := &MTRTestClusterClusterTestFabricScopedEventEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent {
-	return &x.inner.MTRUnitTestingClusterTestFabricScopedEventEvent
+// mTRTestClusterClusterTestFabricScopedEventEventAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestFabricScopedEventEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestFabricScopedEventEventAdopt(id objc.ID) *MTRTestClusterClusterTestFabricScopedEventEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestFabricScopedEventEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRTestClusterClusterTestFabricScopedEventEvent creates a new MTRTestClusterClusterTestFabricScopedEventEvent.
+func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterClusterTestFabricScopedEventEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestFabricScopedEventEvent")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestFabricScopedEventEventAdopt(_id)
+}
+
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return x
 }
 
 // MTRTestClusterClusterTestFabricScopedEventEventable is the interface implemented by [MTRTestClusterClusterTestFabricScopedEventEvent], for mocking and DI.
 type MTRTestClusterClusterTestFabricScopedEventEventable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestFabricScopedEventEvent
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRTestClusterClusterTestFabricScopedEventEvent
+	obj.Object
+	WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent
 }
 
 var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)
+
+var _ MTRUnitTestingClusterTestFabricScopedEventEventProvider = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)

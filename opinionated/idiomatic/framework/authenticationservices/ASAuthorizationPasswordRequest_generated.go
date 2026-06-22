@@ -5,45 +5,58 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An authorization request that uses credentials stored in the keychain.
+// AuthorizationPasswordRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationPasswordRequest.
 //
-// AuthorizationPasswordRequest wraps [raw.ASAuthorizationPasswordRequest] with a fluent Go API.
+// It embeds [AuthorizationRequest], promoting that type's methods.
+//
+// An authorization request that uses credentials stored in the keychain.
 type AuthorizationPasswordRequest struct {
-	inner *raw.ASAuthorizationPasswordRequest
+	AuthorizationRequest
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPasswordRequest].
-func (x *AuthorizationPasswordRequest) Unwrap() *raw.ASAuthorizationPasswordRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPasswordRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPasswordRequestFromID adopts an existing object pointer as a AuthorizationPasswordRequest (nil for 0).
+// AuthorizationPasswordRequestFromID adopts an existing Objective-C object as a AuthorizationPasswordRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPasswordRequestFromID(id objc.ID) *AuthorizationPasswordRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPasswordRequest{inner: raw.ASAuthorizationPasswordRequestFromID(id)}
+	x := &AuthorizationPasswordRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPasswordRequest creates a new [AuthorizationPasswordRequest].
+// authorizationPasswordRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPasswordRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPasswordRequestAdopt(id objc.ID) *AuthorizationPasswordRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPasswordRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAuthorizationPasswordRequest creates a new AuthorizationPasswordRequest.
 func NewAuthorizationPasswordRequest() *AuthorizationPasswordRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPasswordRequest")), objc.RegisterName("new"))
-	return &AuthorizationPasswordRequest{inner: raw.ASAuthorizationPasswordRequestFromID(_id)}
-}
-
-func (x *AuthorizationPasswordRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
-	return &x.inner.ASAuthorizationRequest
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPasswordRequest")), objc.RegisterName("new"))
+	return authorizationPasswordRequestAdopt(_id)
 }
 
 // AuthorizationPasswordRequestable is the interface implemented by [AuthorizationPasswordRequest], for mocking and DI.
 type AuthorizationPasswordRequestable interface {
-	Unwrap() *raw.ASAuthorizationPasswordRequest
+	obj.Object
 }
 
 var _ AuthorizationPasswordRequestable = (*AuthorizationPasswordRequest)(nil)
+
+var _ AuthorizationRequestProvider = (*AuthorizationPasswordRequest)(nil)

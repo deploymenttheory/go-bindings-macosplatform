@@ -5,95 +5,103 @@
 package soundanalysis
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An analyzer that runs sound classification requests on an audio file.
+// AudioFileAnalyzer is an idiomatic wrapper over the Objective-C class SNAudioFileAnalyzer.
 //
-// AudioFileAnalyzer wraps [raw.SNAudioFileAnalyzer] with a fluent Go API.
+// An analyzer that runs sound classification requests on an audio file.
 type AudioFileAnalyzer struct {
-	inner *raw.SNAudioFileAnalyzer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SNAudioFileAnalyzer].
-func (x *AudioFileAnalyzer) Unwrap() *raw.SNAudioFileAnalyzer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioFileAnalyzer) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioFileAnalyzerFromID adopts an existing object pointer as a AudioFileAnalyzer (nil for 0).
+// AudioFileAnalyzerFromID adopts an existing Objective-C object as a AudioFileAnalyzer
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioFileAnalyzerFromID(id objc.ID) *AudioFileAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	return &AudioFileAnalyzer{inner: raw.SNAudioFileAnalyzerFromID(id)}
+	x := &AudioFileAnalyzer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new audio file analyzer.
-//
-// NewAudioFileAnalyzerWithURLError creates a new [AudioFileAnalyzer].
-func NewAudioFileAnalyzerWithURLError(url string) (*AudioFileAnalyzer, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SNAudioFileAnalyzer")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// audioFileAnalyzerAdopt wraps an Objective-C object that this code just created as a
+// AudioFileAnalyzer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioFileAnalyzerAdopt(id objc.ID) *AudioFileAnalyzer {
+	if id == 0 {
+		return nil
 	}
-	return &AudioFileAnalyzer{inner: raw.SNAudioFileAnalyzerFromID(_id)}, nil
+	x := &AudioFileAnalyzer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds a new analysis request to the audio file analyzer.
-//
-// AddRequestWithObserverError calls the underlying AddRequestWithObserverError.
-func (x *AudioFileAnalyzer) AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error) {
-	return x.inner.AddRequestWithObserverError(request, observer)
+// Description returns the object's -description text.
+func (x *AudioFileAnalyzer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes an existing request from the audio file analyzer.
-//
-// RemoveRequest calls the underlying RemoveRequest.
-func (x *AudioFileAnalyzer) RemoveRequest(request raw.SNRequest) {
-	x.inner.RemoveRequest(request)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioFileAnalyzer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Removes all the sound analysis requests from the audio file analyzer.
-//
-// RemoveAllRequests calls the underlying RemoveAllRequests.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioFileAnalyzer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioFileAnalyzer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioFileAnalyzerWithURLError creates a new audio file analyzer.
+func NewAudioFileAnalyzerWithURLError(url string) (result *AudioFileAnalyzer, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SNAudioFileAnalyzer")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return audioFileAnalyzerAdopt(_id), nil
+}
+
+// RemoveAllRequests removes all the sound analysis requests from the audio file analyzer.
 func (x *AudioFileAnalyzer) RemoveAllRequests() {
-	x.inner.RemoveAllRequests()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRequests"))
 }
 
-// Analyzes the audio file synchronously.
-//
-// Analyze calls the underlying Analyze.
+// Analyze analyzes the audio file synchronously.
 func (x *AudioFileAnalyzer) Analyze() {
-	x.inner.Analyze()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyze"))
 }
 
-// Analyzes the audio file asynchronously.
-//
-// AnalyzeWithCompletionHandler calls the underlying AnalyzeWithCompletionHandler.
+// AnalyzeWithCompletionHandler analyzes the audio file asynchronously.
 func (x *AudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
-	x.inner.AnalyzeWithCompletionHandler(completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// Cancels all the asynchronous sound analysis requests the analyzer is currently processing.
-//
-// CancelAnalysis calls the underlying CancelAnalysis.
+// CancelAnalysis cancels all the asynchronous sound analysis requests the analyzer is currently processing.
 func (x *AudioFileAnalyzer) CancelAnalysis() {
-	x.inner.CancelAnalysis()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelAnalysis"))
 }
 
 // AudioFileAnalyzerable is the interface implemented by [AudioFileAnalyzer], for mocking and DI.
 type AudioFileAnalyzerable interface {
-	Unwrap() *raw.SNAudioFileAnalyzer
-	AddRequestWithObserverError(request raw.SNRequest, observer raw.SNResultsObserving) (bool, error)
-	RemoveRequest(request raw.SNRequest)
+	obj.Object
 	RemoveAllRequests()
 	Analyze()
 	AnalyzeWithCompletionHandler(completionHandler func(bool))

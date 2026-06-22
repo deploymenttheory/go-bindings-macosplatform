@@ -5,25 +5,29 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ConstraintProvider is implemented by Constraint and any idiomatic type wrapping a SCNConstraint subclass.
+// ConstraintProvider is accepted wherever a SCNConstraint (or one of its subclasses) is expected.
 type ConstraintProvider interface {
-	asConstraint() *raw.SCNConstraint
+	objref.Object
+	isConstraint()
 }
 
-// GeometryProvider is implemented by Geometry and any idiomatic type wrapping a SCNGeometry subclass.
+// GeometryProvider is accepted wherever a SCNGeometry (or one of its subclasses) is expected.
 type GeometryProvider interface {
-	asGeometry() *raw.SCNGeometry
+	objref.Object
+	isGeometry()
 }
 
-// NodeProvider is implemented by Node and any idiomatic type wrapping a SCNNode subclass.
+// NodeProvider is accepted wherever a SCNNode (or one of its subclasses) is expected.
 type NodeProvider interface {
-	asNode() *raw.SCNNode
+	objref.Object
+	isNode()
 }
 
-// PhysicsBehaviorProvider is implemented by PhysicsBehavior and any idiomatic type wrapping a SCNPhysicsBehavior subclass.
+// PhysicsBehaviorProvider is accepted wherever a SCNPhysicsBehavior (or one of its subclasses) is expected.
 type PhysicsBehaviorProvider interface {
-	asPhysicsBehavior() *raw.SCNPhysicsBehavior
+	objref.Object
+	isPhysicsBehavior()
 }

@@ -5,135 +5,164 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTROperationalCredentialsClusterNOCResponseParams wraps [raw.MTROperationalCredentialsClusterNOCResponseParams] with a fluent Go API.
+// MTROperationalCredentialsClusterNOCResponseParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterNOCResponseParams.
 type MTROperationalCredentialsClusterNOCResponseParams struct {
-	inner *raw.MTROperationalCredentialsClusterNOCResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterNOCResponseParams].
-func (x *MTROperationalCredentialsClusterNOCResponseParams) Unwrap() *raw.MTROperationalCredentialsClusterNOCResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalCredentialsClusterNOCResponseParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterNOCResponseParams (nil for 0).
+// MTROperationalCredentialsClusterNOCResponseParamsFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterNOCResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterNOCResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterNOCResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterNOCResponseParams{inner: raw.MTROperationalCredentialsClusterNOCResponseParamsFromID(id)}
+	x := &MTROperationalCredentialsClusterNOCResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTROperationalCredentialsClusterNOCResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTROperationalCredentialsClusterNOCResponseParamsWithResponseValueError creates a new [MTROperationalCredentialsClusterNOCResponseParams].
-func NewMTROperationalCredentialsClusterNOCResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterNOCResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTROperationalCredentialsClusterNOCResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterNOCResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterNOCResponseParamsAdopt(id objc.ID) *MTROperationalCredentialsClusterNOCResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTROperationalCredentialsClusterNOCResponseParams{inner: raw.MTROperationalCredentialsClusterNOCResponseParamsFromID(_id)}, nil
-}
-
-// WithStatusCode sets the statusCode property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) WithStatusCode(statusCode *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams {
-	x.inner.SetStatusCode(statusCode)
+	x := &MTROperationalCredentialsClusterNOCResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams {
-	x.inner.SetFabricIndex(fabricIndex)
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTROperationalCredentialsClusterNOCResponseParamsWithResponseValueError initialize an MTROperationalCredentialsClusterNOCResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTROperationalCredentialsClusterNOCResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterNOCResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTROperationalCredentialsClusterNOCResponseParamsAdopt(_id), nil
+}
+
+// WithStatusCode sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) WithStatusCode(statusCode obj.Object) *MTROperationalCredentialsClusterNOCResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return x
 }
 
-// WithDebugText sets the debugText property and returns the receiver for chaining.
+// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return x
+}
+
+// WithDebugText sets the property and returns the receiver so calls can be chained.
 func (x *MTROperationalCredentialsClusterNOCResponseParams) WithDebugText(debugText string) *MTROperationalCredentialsClusterNOCResponseParams {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterNOCResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// StatusCode calls the underlying StatusCode.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) StatusCode() *foundation.NSNumber {
-	return x.inner.StatusCode()
+// StatusCode wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) StatusCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
+	return obj.Wrap(_r)
 }
 
-// SetStatusCode calls the underlying SetStatusCode.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) SetStatusCode(statusCode *foundation.NSNumber) {
-	x.inner.SetStatusCode(statusCode)
+// SetStatusCode wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetStatusCode(statusCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+// FabricIndex wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+// SetFabricIndex wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
-// DebugText calls the underlying DebugText.
+// DebugText wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterNOCResponseParams) DebugText() string {
-	_r := x.inner.DebugText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDebugText calls the underlying SetDebugText.
+// SetDebugText wraps the corresponding Objective-C method.
 func (x *MTROperationalCredentialsClusterNOCResponseParams) SetDebugText(debugText string) {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterNOCResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTROperationalCredentialsClusterNOCResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterNOCResponseParams], for mocking and DI.
 type MTROperationalCredentialsClusterNOCResponseParamsable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterNOCResponseParams
-	WithStatusCode(statusCode *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
+	obj.Object
+	WithStatusCode(statusCode obj.Object) *MTROperationalCredentialsClusterNOCResponseParams
+	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCResponseParams
 	WithDebugText(debugText string) *MTROperationalCredentialsClusterNOCResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
-	StatusCode() *foundation.NSNumber
-	SetStatusCode(statusCode *foundation.NSNumber)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterNOCResponseParams
+	StatusCode() obj.Object
+	SetStatusCode(statusCode obj.Object)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 	DebugText() string
 	SetDebugText(debugText string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterNOCResponseParamsable = (*MTROperationalCredentialsClusterNOCResponseParams)(nil)

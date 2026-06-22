@@ -5,61 +5,89 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An array of buffer layout descriptor objects.
+// BufferLayoutDescriptorArray is an idiomatic wrapper over the Objective-C class MTLBufferLayoutDescriptorArray.
 //
-// BufferLayoutDescriptorArray wraps [raw.MTLBufferLayoutDescriptorArray] with a fluent Go API.
+// An array of buffer layout descriptor objects.
 type BufferLayoutDescriptorArray struct {
-	inner *raw.MTLBufferLayoutDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLBufferLayoutDescriptorArray].
-func (x *BufferLayoutDescriptorArray) Unwrap() *raw.MTLBufferLayoutDescriptorArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BufferLayoutDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// BufferLayoutDescriptorArrayFromID adopts an existing object pointer as a BufferLayoutDescriptorArray (nil for 0).
+// BufferLayoutDescriptorArrayFromID adopts an existing Objective-C object as a BufferLayoutDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func BufferLayoutDescriptorArrayFromID(id objc.ID) *BufferLayoutDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &BufferLayoutDescriptorArray{inner: raw.MTLBufferLayoutDescriptorArrayFromID(id)}
+	x := &BufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBufferLayoutDescriptorArray creates a new [BufferLayoutDescriptorArray].
-func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLBufferLayoutDescriptorArray")), objc.RegisterName("new"))
-	return &BufferLayoutDescriptorArray{inner: raw.MTLBufferLayoutDescriptorArrayFromID(_id)}
-}
-
-// Returns the state of the specified buffer layout.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *BufferLayoutDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(index)
-	if _r == nil {
+// bufferLayoutDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// BufferLayoutDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bufferLayoutDescriptorArrayAdopt(id objc.ID) *BufferLayoutDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &BufferLayoutDescriptor{inner: _r}
+	x := &BufferLayoutDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the state of the specified buffer layout.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLBufferLayoutDescriptor, index uint) {
-	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)
+// Description returns the object's -description text.
+func (x *BufferLayoutDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BufferLayoutDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BufferLayoutDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BufferLayoutDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBufferLayoutDescriptorArray creates a new BufferLayoutDescriptorArray.
+func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLBufferLayoutDescriptorArray")), objc.RegisterName("new"))
+	return bufferLayoutDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript returns the state of the specified buffer layout.
+func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return BufferLayoutDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript sets the state of the specified buffer layout.
+func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(bufferDesc), index)
 }
 
 // BufferLayoutDescriptorArrayable is the interface implemented by [BufferLayoutDescriptorArray], for mocking and DI.
 type BufferLayoutDescriptorArrayable interface {
-	Unwrap() *raw.MTLBufferLayoutDescriptorArray
-	ObjectAtIndexedSubscript(index uint) *BufferLayoutDescriptor
-	SetObjectAtIndexedSubscript(bufferDesc *raw.MTLBufferLayoutDescriptor, index uint)
+	obj.Object
+	ObjectAtIndexedSubscript(index int) *BufferLayoutDescriptor
+	SetObjectAtIndexedSubscript(bufferDesc *BufferLayoutDescriptor, index int)
 }
 
 var _ BufferLayoutDescriptorArrayable = (*BufferLayoutDescriptorArray)(nil)

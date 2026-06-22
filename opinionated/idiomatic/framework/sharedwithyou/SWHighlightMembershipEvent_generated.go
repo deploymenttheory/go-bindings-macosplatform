@@ -5,52 +5,84 @@
 package sharedwithyou
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents membership activity for a highlight.
+// HighlightMembershipEvent is an idiomatic wrapper over the Objective-C class SWHighlightMembershipEvent.
 //
-// HighlightMembershipEvent wraps [raw.SWHighlightMembershipEvent] with a fluent Go API.
+// An object that represents membership activity for a highlight.
 type HighlightMembershipEvent struct {
-	inner *raw.SWHighlightMembershipEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWHighlightMembershipEvent].
-func (x *HighlightMembershipEvent) Unwrap() *raw.SWHighlightMembershipEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HighlightMembershipEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// HighlightMembershipEventFromID adopts an existing object pointer as a HighlightMembershipEvent (nil for 0).
+// HighlightMembershipEventFromID adopts an existing Objective-C object as a HighlightMembershipEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func HighlightMembershipEventFromID(id objc.ID) *HighlightMembershipEvent {
 	if id == 0 {
 		return nil
 	}
-	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(id)}
+	x := &HighlightMembershipEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and initializes a membership event.
-//
-// NewHighlightMembershipEventWithHighlightTrigger creates a new [HighlightMembershipEvent].
-func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightMembershipEventTrigger) *HighlightMembershipEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightMembershipEventTrigger(trigger))
-	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(_id)}
+// highlightMembershipEventAdopt wraps an Objective-C object that this code just created as a
+// HighlightMembershipEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func highlightMembershipEventAdopt(id objc.ID) *HighlightMembershipEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &HighlightMembershipEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The type of membership event for the highlight.
-//
-// MembershipEventTrigger calls the underlying MembershipEventTrigger.
-func (x *HighlightMembershipEvent) MembershipEventTrigger() SWHighlightMembershipEventTrigger {
-	return SWHighlightMembershipEventTrigger(x.inner.MembershipEventTrigger())
+// Description returns the object's -description text.
+func (x *HighlightMembershipEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HighlightMembershipEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HighlightMembershipEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HighlightMembershipEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHighlightMembershipEventWithHighlightTrigger creates and initializes a membership event.
+func NewHighlightMembershipEventWithHighlightTrigger(highlight *Highlight, trigger HighlightMembershipEventTrigger) *HighlightMembershipEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
+	return highlightMembershipEventAdopt(_id)
+}
+
+// MembershipEventTrigger the type of membership event for the highlight.
+func (x *HighlightMembershipEvent) MembershipEventTrigger() HighlightMembershipEventTrigger {
+	_r := objc.Send[HighlightMembershipEventTrigger](objref.IDOf(x), objc.RegisterName("membershipEventTrigger"))
+	return _r
 }
 
 // HighlightMembershipEventable is the interface implemented by [HighlightMembershipEvent], for mocking and DI.
 type HighlightMembershipEventable interface {
-	Unwrap() *raw.SWHighlightMembershipEvent
-	MembershipEventTrigger() SWHighlightMembershipEventTrigger
+	obj.Object
+	MembershipEventTrigger() HighlightMembershipEventTrigger
 }
 
 var _ HighlightMembershipEventable = (*HighlightMembershipEvent)(nil)

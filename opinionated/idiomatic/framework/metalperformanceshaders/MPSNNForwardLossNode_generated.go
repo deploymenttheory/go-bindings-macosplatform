@@ -5,175 +5,150 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a @ref MPSNNForwardLoss kernel
+// NNForwardLossNode is an idiomatic wrapper over the Objective-C class MPSNNForwardLossNode.
 //
-// NNForwardLossNode wraps [raw.MPSNNForwardLossNode] with a fluent Go API.
+// It embeds [NNFilterNode], promoting that type's methods.
+//
+// Node representing a
 type NNForwardLossNode struct {
-	inner *raw.MPSNNForwardLossNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNForwardLossNode].
-func (x *NNForwardLossNode) Unwrap() *raw.MPSNNForwardLossNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNForwardLossNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNForwardLossNodeFromID adopts an existing object pointer as a NNForwardLossNode (nil for 0).
+// NNForwardLossNodeFromID adopts an existing Objective-C object as a NNForwardLossNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNForwardLossNodeFromID(id objc.ID) *NNForwardLossNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNForwardLossNode{inner: raw.MPSNNForwardLossNodeFromID(id)}
-}
-
-// NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor creates a new [NNForwardLossNode].
-func NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, labels *mpsneuralnetwork.MPSNNImageNode, weights *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:weights:lossDescriptor:"), source.Ptr(), labels.Ptr(), weights.Ptr(), descriptor.Ptr())
-	return &NNForwardLossNode{inner: raw.MPSNNForwardLossNodeFromID(_id)}
-}
-
-// NewNNForwardLossNodeWithSourceLabelsLossDescriptor creates a new [NNForwardLossNode].
-func NewNNForwardLossNodeWithSourceLabelsLossDescriptor(source *mpsneuralnetwork.MPSNNImageNode, labels *mpsneuralnetwork.MPSNNImageNode, descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:lossDescriptor:"), source.Ptr(), labels.Ptr(), descriptor.Ptr())
-	return &NNForwardLossNode{inner: raw.MPSNNForwardLossNodeFromID(_id)}
-}
-
-// NewNNForwardLossNodeWithSourcesLossDescriptor creates a new [NNForwardLossNode].
-func NewNNForwardLossNodeWithSourcesLossDescriptor(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode], descriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *NNForwardLossNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:lossDescriptor:"), sourceNodes.Ptr(), descriptor.Ptr())
-	return &NNForwardLossNode{inner: raw.MPSNNForwardLossNodeFromID(_id)}
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time. Default value: nil.
-//
-// WithPropertyCallBack sets the propertyCallBack property and returns the receiver for chaining.
-func (x *NNForwardLossNode) WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNForwardLossNode {
-	x.inner.SetPropertyCallBack(propertyCallBack)
+	x := &NNForwardLossNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNForwardLossNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNForwardLossNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+// nNForwardLossNodeAdopt wraps an Objective-C object that this code just created as a
+// NNForwardLossNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNForwardLossNodeAdopt(id objc.ID) *NNForwardLossNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNForwardLossNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor creates a new NNForwardLossNode.
+func NewNNForwardLossNodeWithSourceLabelsWeightsLossDescriptor(source obj.Object, labels obj.Object, weights obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:weights:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(descriptor))
+	return nNForwardLossNodeAdopt(_id)
+}
+
+// NewNNForwardLossNodeWithSourceLabelsLossDescriptor creates a new NNForwardLossNode.
+func NewNNForwardLossNodeWithSourceLabelsLossDescriptor(source obj.Object, labels obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:labels:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(descriptor))
+	return nNForwardLossNodeAdopt(_id)
+}
+
+// NewNNForwardLossNodeWithSourcesLossDescriptor creates a new NNForwardLossNode.
+func NewNNForwardLossNodeWithSourcesLossDescriptor(sourceNodes []obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:lossDescriptor:"), purego.SliceToNSArray(sourceNodes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor))
+	return nNForwardLossNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// GradientFilterWithSources calls the underlying GradientFilterWithSources.
-func (x *NNForwardLossNode) GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode {
-	return x.inner.GradientFilterWithSources(sourceGradient)
+// GradientFilterWithSources wraps the corresponding Objective-C method.
+func (x *NNForwardLossNode) GradientFilterWithSources(sourceGradient []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// GradientFiltersWithSources calls the underlying GradientFiltersWithSources.
-func (x *NNForwardLossNode) GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
-	return x.inner.GradientFiltersWithSources(sourceGradient)
+// GradientFiltersWithSources wraps the corresponding Objective-C method.
+func (x *NNForwardLossNode) GradientFiltersWithSources(sourceGradient []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(sourceGradient, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// GradientFilterWithSource calls the underlying GradientFilterWithSource.
-func (x *NNForwardLossNode) GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode {
-	return x.inner.GradientFilterWithSource(sourceGradient)
+// GradientFilterWithSource wraps the corresponding Objective-C method.
+func (x *NNForwardLossNode) GradientFilterWithSource(sourceGradient obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(sourceGradient))
+	return obj.Wrap(_r)
 }
 
-// GradientFiltersWithSource calls the underlying GradientFiltersWithSource.
-func (x *NNForwardLossNode) GradientFiltersWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
-	return x.inner.GradientFiltersWithSource(sourceGradient)
+// GradientFiltersWithSource wraps the corresponding Objective-C method.
+func (x *NNForwardLossNode) GradientFiltersWithSource(sourceGradient obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(sourceGradient))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// LossType calls the underlying LossType.
-func (x *NNForwardLossNode) LossType() mpsneuralnetwork.MPSCNNLossType {
-	return x.inner.LossType()
+// NumberOfClasses wraps the corresponding Objective-C method.
+func (x *NNForwardLossNode) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+	return _r
 }
 
-// ReductionType calls the underlying ReductionType.
-func (x *NNForwardLossNode) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
-	return x.inner.ReductionType()
-}
-
-// NumberOfClasses calls the underlying NumberOfClasses.
-func (x *NNForwardLossNode) NumberOfClasses() uint {
-	return x.inner.NumberOfClasses()
-}
-
-// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+// ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (x *NNForwardLossNode) ReduceAcrossBatch() bool {
-	return x.inner.ReduceAcrossBatch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+	return _r
 }
 
-// Weight calls the underlying Weight.
+// Weight wraps the corresponding Objective-C method.
 func (x *NNForwardLossNode) Weight() float32 {
-	return x.inner.Weight()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
 
-// LabelSmoothing calls the underlying LabelSmoothing.
+// LabelSmoothing wraps the corresponding Objective-C method.
 func (x *NNForwardLossNode) LabelSmoothing() float32 {
-	return x.inner.LabelSmoothing()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+	return _r
 }
 
-// Epsilon calls the underlying Epsilon.
+// Epsilon wraps the corresponding Objective-C method.
 func (x *NNForwardLossNode) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// Delta calls the underlying Delta.
+// Delta wraps the corresponding Objective-C method.
 func (x *NNForwardLossNode) Delta() float32 {
-	return x.inner.Delta()
-}
-
-// @property   propertyCallBack @abstract   Optional callback option - setting this allows the scalar weight value to be changed dynamically at encode time. Default value: nil.
-//
-// PropertyCallBack calls the underlying PropertyCallBack.
-func (x *NNForwardLossNode) PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback {
-	return x.inner.PropertyCallBack()
-}
-
-// SetPropertyCallBack calls the underlying SetPropertyCallBack.
-func (x *NNForwardLossNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) {
-	x.inner.SetPropertyCallBack(propertyCallBack)
-}
-
-func (x *NNForwardLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
 // NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
 type NNForwardLossNodeable interface {
-	Unwrap() *raw.MPSNNForwardLossNode
-	WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNForwardLossNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNForwardLossNode
+	obj.Object
 	WithLabel(label string) *NNForwardLossNode
-	GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode
-	GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]
-	GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode
-	GradientFiltersWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]
-	LossType() mpsneuralnetwork.MPSCNNLossType
-	ReductionType() mpsneuralnetwork.MPSCNNReductionType
-	NumberOfClasses() uint
+	GradientFilterWithSources(sourceGradient []obj.Object) obj.Object
+	GradientFiltersWithSources(sourceGradient []obj.Object) []obj.Object
+	GradientFilterWithSource(sourceGradient obj.Object) obj.Object
+	GradientFiltersWithSource(sourceGradient obj.Object) []obj.Object
+	NumberOfClasses() int
 	ReduceAcrossBatch() bool
 	Weight() float32
 	LabelSmoothing() float32
 	Epsilon() float32
 	Delta() float32
-	PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback
-	SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback)
 }
 
 var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNForwardLossNode)(nil)

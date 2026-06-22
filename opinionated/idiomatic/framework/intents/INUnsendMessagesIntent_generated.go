@@ -5,72 +5,80 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// UnsendMessagesIntent wraps [raw.INUnsendMessagesIntent] with a fluent Go API.
+// UnsendMessagesIntent is an idiomatic wrapper over the Objective-C class INUnsendMessagesIntent.
+//
+// It embeds [Intent], promoting that type's methods.
 type UnsendMessagesIntent struct {
-	inner *raw.INUnsendMessagesIntent
+	Intent
 }
 
-// Unwrap returns the underlying [raw.INUnsendMessagesIntent].
-func (x *UnsendMessagesIntent) Unwrap() *raw.INUnsendMessagesIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnsendMessagesIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// UnsendMessagesIntentFromID adopts an existing object pointer as a UnsendMessagesIntent (nil for 0).
+// UnsendMessagesIntentFromID adopts an existing Objective-C object as a UnsendMessagesIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func UnsendMessagesIntentFromID(id objc.ID) *UnsendMessagesIntent {
 	if id == 0 {
 		return nil
 	}
-	return &UnsendMessagesIntent{inner: raw.INUnsendMessagesIntentFromID(id)}
-}
-
-// NewUnsendMessagesIntentWithMessageIdentifiers creates a new [UnsendMessagesIntent].
-func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers *foundation.NSArray[*foundation.NSString]) *UnsendMessagesIntent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUnsendMessagesIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMessageIdentifiers:"), messageIdentifiers.Ptr())
-	return &UnsendMessagesIntent{inner: raw.INUnsendMessagesIntentFromID(_id)}
-}
-
-// The intent’s display name.
-//
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
-func (x *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
-	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	x := &UnsendMessagesIntent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
-func (x *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
-	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
-	return x
-}
-
-// MessageIdentifiers returns the collection as a Go slice.
-func (x *UnsendMessagesIntent) MessageIdentifiers() []string {
-	arr := x.inner.MessageIdentifiers()
-	if arr == nil {
+// unsendMessagesIntentAdopt wraps an Objective-C object that this code just created as a
+// UnsendMessagesIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unsendMessagesIntentAdopt(id objc.ID) *UnsendMessagesIntent {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	x := &UnsendMessagesIntent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *UnsendMessagesIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+// NewUnsendMessagesIntentWithMessageIdentifiers creates a new UnsendMessagesIntent.
+func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers []string) *UnsendMessagesIntent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INUnsendMessagesIntent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMessageIdentifiers:"), purego.SliceToNSArray(messageIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return unsendMessagesIntentAdopt(_id)
+}
+
+// WithSuggestedInvocationPhrase the intent’s display name.
+func (x *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+func (x *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return x
+}
+
+// MessageIdentifiers wraps the corresponding Objective-C method.
+//
+// MessageIdentifiers returns the collection as a Go slice.
+func (x *UnsendMessagesIntent) MessageIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
 
 // UnsendMessagesIntentable is the interface implemented by [UnsendMessagesIntent], for mocking and DI.
 type UnsendMessagesIntentable interface {
-	Unwrap() *raw.INUnsendMessagesIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent
 	MessageIdentifiers() []string
 }
 
 var _ UnsendMessagesIntentable = (*UnsendMessagesIntent)(nil)
+
+var _ IntentProvider = (*UnsendMessagesIntent)(nil)

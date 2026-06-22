@@ -5,150 +5,191 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about an argument of a graphics or compute function.
+// Argument is an idiomatic wrapper over the Objective-C class MTLArgument.
 //
-// Argument wraps [raw.MTLArgument] with a fluent Go API.
+// Information about an argument of a graphics or compute function.
 type Argument struct {
-	inner *raw.MTLArgument
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLArgument].
-func (x *Argument) Unwrap() *raw.MTLArgument { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Argument) ID() objc.ID { return x.inner.Ptr() }
-
-// ArgumentFromID adopts an existing object pointer as a Argument (nil for 0).
+// ArgumentFromID adopts an existing Objective-C object as a Argument
+// (nil for 0), retaining it and registering a release finalizer.
 func ArgumentFromID(id objc.ID) *Argument {
 	if id == 0 {
 		return nil
 	}
-	return &Argument{inner: raw.MTLArgumentFromID(id)}
+	x := &Argument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArgument creates a new [Argument].
+// argumentAdopt wraps an Objective-C object that this code just created as a
+// Argument (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func argumentAdopt(id objc.ID) *Argument {
+	if id == 0 {
+		return nil
+	}
+	x := &Argument{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Argument) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Argument) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Argument) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Argument) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewArgument creates a new Argument.
 func NewArgument() *Argument {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLArgument")), objc.RegisterName("new"))
-	return &Argument{inner: raw.MTLArgumentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLArgument")), objc.RegisterName("new"))
+	return argumentAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Argument) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
-func (x *Argument) Type() MTLArgumentType {
-	return MTLArgumentType(x.inner.Type())
+// Type wraps the corresponding Objective-C method.
+func (x *Argument) Type() ArgumentType {
+	_r := objc.Send[ArgumentType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Access calls the underlying Access.
-func (x *Argument) Access() MTLBindingAccess {
-	return MTLBindingAccess(x.inner.Access())
+// Access wraps the corresponding Objective-C method.
+func (x *Argument) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+	return _r
 }
 
-// Index calls the underlying Index.
-func (x *Argument) Index() uint {
-	return x.inner.Index()
+// Index wraps the corresponding Objective-C method.
+func (x *Argument) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// IsActive calls the underlying IsActive.
+// IsActive wraps the corresponding Objective-C method.
 func (x *Argument) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// BufferAlignment calls the underlying BufferAlignment.
-func (x *Argument) BufferAlignment() uint {
-	return x.inner.BufferAlignment()
+// BufferAlignment wraps the corresponding Objective-C method.
+func (x *Argument) BufferAlignment() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferAlignment"))
+	return _r
 }
 
-// BufferDataSize calls the underlying BufferDataSize.
-func (x *Argument) BufferDataSize() uint {
-	return x.inner.BufferDataSize()
+// BufferDataSize wraps the corresponding Objective-C method.
+func (x *Argument) BufferDataSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferDataSize"))
+	return _r
 }
 
-// BufferDataType calls the underlying BufferDataType.
-func (x *Argument) BufferDataType() MTLDataType {
-	return MTLDataType(x.inner.BufferDataType())
+// BufferDataType wraps the corresponding Objective-C method.
+func (x *Argument) BufferDataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("bufferDataType"))
+	return _r
 }
 
-// BufferStructType calls the underlying BufferStructType.
+// BufferStructType wraps the corresponding Objective-C method.
 func (x *Argument) BufferStructType() *StructType {
-	_r := x.inner.BufferStructType()
-	if _r == nil {
-		return nil
-	}
-	return &StructType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferStructType"))
+	return StructTypeFromID(_r)
 }
 
-// BufferPointerType calls the underlying BufferPointerType.
+// BufferPointerType wraps the corresponding Objective-C method.
 func (x *Argument) BufferPointerType() *PointerType {
-	_r := x.inner.BufferPointerType()
-	if _r == nil {
-		return nil
-	}
-	return &PointerType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferPointerType"))
+	return PointerTypeFromID(_r)
 }
 
-// ThreadgroupMemoryAlignment calls the underlying ThreadgroupMemoryAlignment.
-func (x *Argument) ThreadgroupMemoryAlignment() uint {
-	return x.inner.ThreadgroupMemoryAlignment()
+// ThreadgroupMemoryAlignment wraps the corresponding Objective-C method.
+func (x *Argument) ThreadgroupMemoryAlignment() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("threadgroupMemoryAlignment"))
+	return _r
 }
 
-// ThreadgroupMemoryDataSize calls the underlying ThreadgroupMemoryDataSize.
-func (x *Argument) ThreadgroupMemoryDataSize() uint {
-	return x.inner.ThreadgroupMemoryDataSize()
+// ThreadgroupMemoryDataSize wraps the corresponding Objective-C method.
+func (x *Argument) ThreadgroupMemoryDataSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("threadgroupMemoryDataSize"))
+	return _r
 }
 
-// TextureType calls the underlying TextureType.
-func (x *Argument) TextureType() MTLTextureType {
-	return MTLTextureType(x.inner.TextureType())
+// TextureType wraps the corresponding Objective-C method.
+func (x *Argument) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+	return _r
 }
 
-// TextureDataType calls the underlying TextureDataType.
-func (x *Argument) TextureDataType() MTLDataType {
-	return MTLDataType(x.inner.TextureDataType())
+// TextureDataType wraps the corresponding Objective-C method.
+func (x *Argument) TextureDataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("textureDataType"))
+	return _r
 }
 
-// IsDepthTexture calls the underlying IsDepthTexture.
+// IsDepthTexture wraps the corresponding Objective-C method.
 func (x *Argument) IsDepthTexture() bool {
-	return x.inner.IsDepthTexture()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDepthTexture"))
+	return _r
 }
 
-// ArrayLength calls the underlying ArrayLength.
-func (x *Argument) ArrayLength() uint {
-	return x.inner.ArrayLength()
+// ArrayLength wraps the corresponding Objective-C method.
+func (x *Argument) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+	return _r
 }
 
 // Argumentable is the interface implemented by [Argument], for mocking and DI.
 type Argumentable interface {
-	Unwrap() *raw.MTLArgument
+	obj.Object
 	Name() string
-	Type() MTLArgumentType
-	Access() MTLBindingAccess
-	Index() uint
+	Type() ArgumentType
+	Access() BindingAccess
+	Index() int
 	IsActive() bool
-	BufferAlignment() uint
-	BufferDataSize() uint
-	BufferDataType() MTLDataType
+	BufferAlignment() int
+	BufferDataSize() int
+	BufferDataType() DataType
 	BufferStructType() *StructType
 	BufferPointerType() *PointerType
-	ThreadgroupMemoryAlignment() uint
-	ThreadgroupMemoryDataSize() uint
-	TextureType() MTLTextureType
-	TextureDataType() MTLDataType
+	ThreadgroupMemoryAlignment() int
+	ThreadgroupMemoryDataSize() int
+	TextureType() TextureType
+	TextureDataType() DataType
 	IsDepthTexture() bool
-	ArrayLength() uint
+	ArrayLength() int
 }
 
 var _ Argumentable = (*Argument)(nil)

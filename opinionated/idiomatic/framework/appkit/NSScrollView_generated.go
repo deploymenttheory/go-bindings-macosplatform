@@ -5,1157 +5,1017 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A view that displays a portion of a document view and provides scroll bars that allow the user to move the document view within the scroll view.
+// ScrollView is an idiomatic wrapper over the Objective-C class NSScrollView.
 //
-// ScrollView wraps [raw.NSScrollView] with a fluent Go API.
+// It embeds [View], promoting that type's methods.
+//
+// A view that displays a portion of a document view and provides scroll bars that allow the user to move the document view within the scroll view.
 type ScrollView struct {
-	inner *raw.NSScrollView
+	View
 }
 
-// Unwrap returns the underlying [raw.NSScrollView].
-func (x *ScrollView) Unwrap() *raw.NSScrollView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrollView) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrollViewFromID adopts an existing object pointer as a ScrollView (nil for 0).
+// ScrollViewFromID adopts an existing Objective-C object as a ScrollView
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrollViewFromID(id objc.ID) *ScrollView {
 	if id == 0 {
 		return nil
 	}
-	return &ScrollView{inner: raw.NSScrollViewFromID(id)}
+	x := &ScrollView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScrollViewWithFrame creates a new [ScrollView].
+// scrollViewAdopt wraps an Objective-C object that this code just created as a
+// ScrollView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrollViewAdopt(id objc.ID) *ScrollView {
+	if id == 0 {
+		return nil
+	}
+	x := &ScrollView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewScrollViewWithFrame creates a new ScrollView.
 func NewScrollViewWithFrame(frameRect corefoundation.CGRect) *ScrollView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrollView")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return &ScrollView{inner: raw.NSScrollViewFromID(_id)}
+	return scrollViewAdopt(_id)
 }
 
-// NewScrollViewWithCoder creates a new [ScrollView].
-func NewScrollViewWithCoder(coder *foundation.NSCoder) *ScrollView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrollView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ScrollView{inner: raw.NSScrollViewFromID(_id)}
+// NewScrollViewWithCoder creates a new ScrollView.
+func NewScrollViewWithCoder(coder obj.Object) *ScrollView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScrollView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return scrollViewAdopt(_id)
 }
 
-// The view the scroll view scrolls within its content view.
-//
-// WithDocumentView sets the documentView property and returns the receiver for chaining.
+// WithDocumentView the view the scroll view scrolls within its content view.
 func (x *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
-	x.inner.SetDocumentView(documentView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
 	return x
 }
 
-// The scroll view’s content view, the view that clips the document view.
-//
-// WithContentView sets the contentView property and returns the receiver for chaining.
+// WithContentView the scroll view’s content view, the view that clips the document view.
 func (x *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
-	x.inner.SetContentView(contentView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
-// The content view’s document cursor.
-//
-// WithDocumentCursor sets the documentCursor property and returns the receiver for chaining.
+// WithDocumentCursor the content view’s document cursor.
 func (x *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
-	x.inner.SetDocumentCursor(documentCursor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
 	return x
 }
 
-// A value that specifies the appearance of the scroll view’s border.
-//
-// WithBorderType sets the borderType property and returns the receiver for chaining.
-func (x *ScrollView) WithBorderType(borderType NSBorderType) *ScrollView {
-	x.inner.SetBorderType(raw.NSBorderType(borderType))
+// WithBorderType a value that specifies the appearance of the scroll view’s border.
+func (x *ScrollView) WithBorderType(borderType BorderType) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
 	return x
 }
 
-// The color of the content view’s background.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the color of the content view’s background.
 func (x *ScrollView) WithBackgroundColor(backgroundColor *Color) *ScrollView {
-	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// A Boolean that indicates whether the scroll view draws its background.
-//
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground a Boolean that indicates whether the scroll view draws its background.
 func (x *ScrollView) WithDrawsBackground(drawsBackground bool) *ScrollView {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view has a vertical scroller.
-//
-// WithHasVerticalScroller sets the hasVerticalScroller property and returns the receiver for chaining.
+// WithHasVerticalScroller a Boolean that indicates whether the scroll view has a vertical scroller.
 func (x *ScrollView) WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView {
-	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view has a horizontal scroller.
-//
-// WithHasHorizontalScroller sets the hasHorizontalScroller property and returns the receiver for chaining.
+// WithHasHorizontalScroller a Boolean that indicates whether the scroll view has a horizontal scroller.
 func (x *ScrollView) WithHasHorizontalScroller(hasHorizontalScroller bool) *ScrollView {
-	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
 	return x
 }
 
-// The scroll view’s vertical scroller.
-//
-// WithVerticalScroller sets the verticalScroller property and returns the receiver for chaining.
+// WithVerticalScroller the scroll view’s vertical scroller.
 func (x *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollView {
-	x.inner.SetVerticalScroller(verticalScroller.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalScroller:"), objref.IDOf(verticalScroller))
 	return x
 }
 
-// The scroll view’s horizontal scroller.
-//
-// WithHorizontalScroller sets the horizontalScroller property and returns the receiver for chaining.
+// WithHorizontalScroller the scroll view’s horizontal scroller.
 func (x *ScrollView) WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView {
-	x.inner.SetHorizontalScroller(horizontalScroller.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalScroller:"), objref.IDOf(horizontalScroller))
 	return x
 }
 
-// A Boolean that indicates whether the scroll view automatically hides its scroll bars when they are not needed.
-//
-// WithAutohidesScrollers sets the autohidesScrollers property and returns the receiver for chaining.
+// WithAutohidesScrollers a Boolean that indicates whether the scroll view automatically hides its scroll bars when they are not needed.
 func (x *ScrollView) WithAutohidesScrollers(autohidesScrollers bool) *ScrollView {
-	x.inner.SetAutohidesScrollers(autohidesScrollers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
 	return x
 }
 
-// The scroll view’s horizontal line by line scroll amount.
-//
-// WithHorizontalLineScroll sets the horizontalLineScroll property and returns the receiver for chaining.
+// WithHorizontalLineScroll the scroll view’s horizontal line by line scroll amount.
 func (x *ScrollView) WithHorizontalLineScroll(horizontalLineScroll float64) *ScrollView {
-	x.inner.SetHorizontalLineScroll(horizontalLineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalLineScroll:"), horizontalLineScroll)
 	return x
 }
 
-// The scroll view’s vertical line by line scroll amount.
-//
-// WithVerticalLineScroll sets the verticalLineScroll property and returns the receiver for chaining.
+// WithVerticalLineScroll the scroll view’s vertical line by line scroll amount.
 func (x *ScrollView) WithVerticalLineScroll(verticalLineScroll float64) *ScrollView {
-	x.inner.SetVerticalLineScroll(verticalLineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalLineScroll:"), verticalLineScroll)
 	return x
 }
 
-// The scroll view’s line by line scroll amount.
-//
-// WithLineScroll sets the lineScroll property and returns the receiver for chaining.
+// WithLineScroll the scroll view’s line by line scroll amount.
 func (x *ScrollView) WithLineScroll(lineScroll float64) *ScrollView {
-	x.inner.SetLineScroll(lineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineScroll:"), lineScroll)
 	return x
 }
 
-// The amount of the document view kept visible when scrolling horizontally page by page.
-//
-// WithHorizontalPageScroll sets the horizontalPageScroll property and returns the receiver for chaining.
+// WithHorizontalPageScroll the amount of the document view kept visible when scrolling horizontally page by page.
 func (x *ScrollView) WithHorizontalPageScroll(horizontalPageScroll float64) *ScrollView {
-	x.inner.SetHorizontalPageScroll(horizontalPageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalPageScroll:"), horizontalPageScroll)
 	return x
 }
 
-// The amount of the document view kept visible when scrolling vertically page by page.
-//
-// WithVerticalPageScroll sets the verticalPageScroll property and returns the receiver for chaining.
+// WithVerticalPageScroll the amount of the document view kept visible when scrolling vertically page by page.
 func (x *ScrollView) WithVerticalPageScroll(verticalPageScroll float64) *ScrollView {
-	x.inner.SetVerticalPageScroll(verticalPageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalPageScroll:"), verticalPageScroll)
 	return x
 }
 
-// The amount of the document view kept visible when scrolling page by page.
-//
-// WithPageScroll sets the pageScroll property and returns the receiver for chaining.
+// WithPageScroll the amount of the document view kept visible when scrolling page by page.
 func (x *ScrollView) WithPageScroll(pageScroll float64) *ScrollView {
-	x.inner.SetPageScroll(pageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageScroll:"), pageScroll)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view redraws its document view while scrolling continuously.
-//
-// WithScrollsDynamically sets the scrollsDynamically property and returns the receiver for chaining.
+// WithScrollsDynamically a Boolean that indicates whether the scroll view redraws its document view while scrolling continuously.
 func (x *ScrollView) WithScrollsDynamically(scrollsDynamically bool) *ScrollView {
-	x.inner.SetScrollsDynamically(scrollsDynamically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollsDynamically:"), scrollsDynamically)
 	return x
 }
 
-// The scroller style used by the scroll view.
-//
-// WithScrollerStyle sets the scrollerStyle property and returns the receiver for chaining.
-func (x *ScrollView) WithScrollerStyle(scrollerStyle NSScrollerStyle) *ScrollView {
-	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
+// WithScrollerStyle the scroller style used by the scroll view.
+func (x *ScrollView) WithScrollerStyle(scrollerStyle ScrollerStyle) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
 	return x
 }
 
-// The knob style of scroll views that use the overlay scroller style.
-//
-// WithScrollerKnobStyle sets the scrollerKnobStyle property and returns the receiver for chaining.
-func (x *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) *ScrollView {
-	x.inner.SetScrollerKnobStyle(raw.NSScrollerKnobStyle(scrollerKnobStyle))
+// WithScrollerKnobStyle the knob style of scroll views that use the overlay scroller style.
+func (x *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle ScrollerKnobStyle) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerKnobStyle:"), scrollerKnobStyle)
 	return x
 }
 
-// The scroll view’s horizontal scrolling elasticity mode.
-//
-// WithHorizontalScrollElasticity sets the horizontalScrollElasticity property and returns the receiver for chaining.
-func (x *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) *ScrollView {
-	x.inner.SetHorizontalScrollElasticity(raw.NSScrollElasticity(horizontalScrollElasticity))
+// WithHorizontalScrollElasticity the scroll view’s horizontal scrolling elasticity mode.
+func (x *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity ScrollElasticity) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalScrollElasticity:"), horizontalScrollElasticity)
 	return x
 }
 
-// The scroll view’s vertical scrolling elasticity mode.
-//
-// WithVerticalScrollElasticity sets the verticalScrollElasticity property and returns the receiver for chaining.
-func (x *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) *ScrollView {
-	x.inner.SetVerticalScrollElasticity(raw.NSScrollElasticity(verticalScrollElasticity))
+// WithVerticalScrollElasticity the scroll view’s vertical scrolling elasticity mode.
+func (x *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity ScrollElasticity) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalScrollElasticity:"), verticalScrollElasticity)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view uses a predominant scrolling axis for content.
-//
-// WithUsesPredominantAxisScrolling sets the usesPredominantAxisScrolling property and returns the receiver for chaining.
+// WithUsesPredominantAxisScrolling a Boolean that indicates whether the scroll view uses a predominant scrolling axis for content.
 func (x *ScrollView) WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView {
-	x.inner.SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPredominantAxisScrolling:"), usesPredominantAxisScrolling)
 	return x
 }
 
-// Allows the user to magnify the scroll view.
-//
-// WithAllowsMagnification sets the allowsMagnification property and returns the receiver for chaining.
+// WithAllowsMagnification allows the user to magnify the scroll view.
 func (x *ScrollView) WithAllowsMagnification(allowsMagnification bool) *ScrollView {
-	x.inner.SetAllowsMagnification(allowsMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
 	return x
 }
 
-// The amount by which the content is currently scaled.
-//
-// WithMagnification sets the magnification property and returns the receiver for chaining.
+// WithMagnification the amount by which the content is currently scaled.
 func (x *ScrollView) WithMagnification(magnification float64) *ScrollView {
-	x.inner.SetMagnification(magnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
 	return x
 }
 
-// The maximum value to which the content can be magnified.
-//
-// WithMaxMagnification sets the maxMagnification property and returns the receiver for chaining.
+// WithMaxMagnification the maximum value to which the content can be magnified.
 func (x *ScrollView) WithMaxMagnification(maxMagnification float64) *ScrollView {
-	x.inner.SetMaxMagnification(maxMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMagnification:"), maxMagnification)
 	return x
 }
 
-// The minimum value to which the content can be magnified.
-//
-// WithMinMagnification sets the minMagnification property and returns the receiver for chaining.
+// WithMinMagnification the minimum value to which the content can be magnified.
 func (x *ScrollView) WithMinMagnification(minMagnification float64) *ScrollView {
-	x.inner.SetMinMagnification(minMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinMagnification:"), minMagnification)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view automatically adjusts its content insets.
-//
-// WithAutomaticallyAdjustsContentInsets sets the automaticallyAdjustsContentInsets property and returns the receiver for chaining.
+// WithAutomaticallyAdjustsContentInsets a Boolean that indicates whether the scroll view automatically adjusts its content insets.
 func (x *ScrollView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ScrollView {
-	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
 	return x
 }
 
-// The distance that the scroll view’s subviews are inset from the enclosing scroll view during tiling.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
+// WithContentInsets the distance that the scroll view’s subviews are inset from the enclosing scroll view during tiling.
 func (x *ScrollView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ScrollView {
-	x.inner.SetContentInsets(contentInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentInsets:"), contentInsets)
 	return x
 }
 
-// The distance the scrollers are inset from the edge of the scroll view.
-//
-// WithScrollerInsets sets the scrollerInsets property and returns the receiver for chaining.
+// WithScrollerInsets the distance the scrollers are inset from the edge of the scroll view.
 func (x *ScrollView) WithScrollerInsets(scrollerInsets foundation.NSEdgeInsets) *ScrollView {
-	x.inner.SetScrollerInsets(scrollerInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerInsets:"), scrollerInsets)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view displays its rulers.
-//
-// WithRulersVisible sets the rulersVisible property and returns the receiver for chaining.
+// WithRulersVisible a Boolean that indicates whether the scroll view displays its rulers.
 func (x *ScrollView) WithRulersVisible(rulersVisible bool) *ScrollView {
-	x.inner.SetRulersVisible(rulersVisible)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRulersVisible:"), rulersVisible)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view keeps a horizontal ruler object.
-//
-// WithHasHorizontalRuler sets the hasHorizontalRuler property and returns the receiver for chaining.
+// WithHasHorizontalRuler a Boolean that indicates whether the scroll view keeps a horizontal ruler object.
 func (x *ScrollView) WithHasHorizontalRuler(hasHorizontalRuler bool) *ScrollView {
-	x.inner.SetHasHorizontalRuler(hasHorizontalRuler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalRuler:"), hasHorizontalRuler)
 	return x
 }
 
-// A Boolean that indicates whether the scroll view keeps a vertical ruler object.
-//
-// WithHasVerticalRuler sets the hasVerticalRuler property and returns the receiver for chaining.
+// WithHasVerticalRuler a Boolean that indicates whether the scroll view keeps a vertical ruler object.
 func (x *ScrollView) WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView {
-	x.inner.SetHasVerticalRuler(hasVerticalRuler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalRuler:"), hasVerticalRuler)
 	return x
 }
 
-// The scroll view’s horizontal ruler view.
-//
-// WithHorizontalRulerView sets the horizontalRulerView property and returns the receiver for chaining.
+// WithHorizontalRulerView the scroll view’s horizontal ruler view.
 func (x *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView {
-	x.inner.SetHorizontalRulerView(horizontalRulerView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalRulerView:"), objref.IDOf(horizontalRulerView))
 	return x
 }
 
-// The scroll view’s vertical ruler view.
-//
-// WithVerticalRulerView sets the verticalRulerView property and returns the receiver for chaining.
+// WithVerticalRulerView the scroll view’s vertical ruler view.
 func (x *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView {
-	x.inner.SetVerticalRulerView(verticalRulerView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalRulerView:"), objref.IDOf(verticalRulerView))
 	return x
 }
 
-// The position of the find bar.
-//
-// WithFindBarPosition sets the findBarPosition property and returns the receiver for chaining.
-func (x *ScrollView) WithFindBarPosition(findBarPosition NSScrollViewFindBarPosition) *ScrollView {
-	x.inner.SetFindBarPosition(raw.NSScrollViewFindBarPosition(findBarPosition))
+// WithFindBarPosition the position of the find bar.
+func (x *ScrollView) WithFindBarPosition(findBarPosition ScrollViewFindBarPosition) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindBarPosition:"), findBarPosition)
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithSubviews(items ...ViewProvider) *ScrollView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithHidden(hidden bool) *ScrollView {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrollView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrollView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *ScrollView) WithFrame(frame corefoundation.CGRect) *ScrollView {
-	x.inner.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithFrameRotation(frameRotation float64) *ScrollView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithFrameCenterRotation(frameCenterRotation float64) *ScrollView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithBoundsRotation(boundsRotation float64) *ScrollView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *ScrollView) WithBounds(bounds corefoundation.CGRect) *ScrollView {
-	x.inner.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrollView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *ScrollView) WithNeedsDisplay(needsDisplay bool) *ScrollView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrollView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrollView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrollView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithWantsLayer(wantsLayer bool) *ScrollView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *ScrollView) WithLayer(layer *quartzcore.CALayer) *ScrollView {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithLayer(layer obj.Object) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithNeedsLayout(needsLayout bool) *ScrollView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithAlphaValue(alphaValue float64) *ScrollView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrollView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ScrollView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithBackgroundFilters(items ...obj.Object) *ScrollView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ScrollView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrollView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithCompositingFilter(compositingFilter obj.Object) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ScrollView) WithContentFilters(items ...*coreimage.CIFilter) *ScrollView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithContentFilters(items ...obj.Object) *ScrollView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithShadow(shadow *Shadow) *ScrollView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithClipsToBounds(clipsToBounds bool) *ScrollView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithToolTip(toolTip string) *ScrollView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrollView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithNextKeyView(nextKeyView ViewProvider) *ScrollView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrollView) WithFocusRingType(focusRingType NSFocusRingType) *ScrollView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithFocusRingType(focusRingType FocusRingType) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrollView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrollView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *ScrollView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrollView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrollView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrollView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrollView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrollView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *ScrollView) WithMenu(menu *Menu) *ScrollView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ScrollView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ScrollView) WithUserActivity(userActivity obj.Object) *ScrollView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Lays out the components of the receiver: the content view, the scrollers, and the ruler views.
-//
-// Tile calls the underlying Tile.
+// Tile lays out the components of the receiver: the content view, the scrollers, and the ruler views.
 func (x *ScrollView) Tile() {
-	x.inner.Tile()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tile"))
 }
 
-// Flash the overlay scroll bars.
-//
-// FlashScrollers calls the underlying FlashScrollers.
+// FlashScrollers flash the overlay scroll bars.
 func (x *ScrollView) FlashScrollers() {
-	x.inner.FlashScrollers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flashScrollers"))
 }
 
-// Magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
-//
-// MagnifyToFitRect calls the underlying MagnifyToFitRect.
+// MagnifyToFitRect magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
 func (x *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
-	x.inner.MagnifyToFitRect(rect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnifyToFitRect:"), rect)
 }
 
-// Magnify the content by the given amount and center the result on the given point.
-//
-// SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
+// SetMagnificationCenteredAtPoint magnify the content by the given amount and center the result on the given point.
 func (x *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
-	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
 }
 
-// Adds a floating subview to the document view.
-//
-// AddFloatingSubviewForAxis calls the underlying AddFloatingSubviewForAxis.
-func (x *ScrollView) AddFloatingSubviewForAxis(view *raw.NSView, axis NSEventGestureAxis) {
-	x.inner.AddFloatingSubviewForAxis(view, raw.NSEventGestureAxis(axis))
+// AddFloatingSubviewForAxis adds a floating subview to the document view.
+func (x *ScrollView) AddFloatingSubviewForAxis(view *View, axis EventGestureAxis) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFloatingSubview:forAxis:"), objref.IDOf(view), axis)
 }
 
-// DocumentVisibleRect calls the underlying DocumentVisibleRect.
+// DocumentVisibleRect wraps the corresponding Objective-C method.
 func (x *ScrollView) DocumentVisibleRect() corefoundation.CGRect {
-	return x.inner.DocumentVisibleRect()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("documentVisibleRect"))
+	return _r
 }
 
-// ContentSize calls the underlying ContentSize.
+// ContentSize wraps the corresponding Objective-C method.
 func (x *ScrollView) ContentSize() corefoundation.CGSize {
-	return x.inner.ContentSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("contentSize"))
+	return _r
 }
 
-// DocumentView calls the underlying DocumentView.
+// DocumentView wraps the corresponding Objective-C method.
 func (x *ScrollView) DocumentView() *View {
-	_r := x.inner.DocumentView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
+	return ViewFromID(_r)
 }
 
-// SetDocumentView calls the underlying SetDocumentView.
-func (x *ScrollView) SetDocumentView(documentView *raw.NSView) {
-	x.inner.SetDocumentView(documentView)
+// SetDocumentView wraps the corresponding Objective-C method.
+func (x *ScrollView) SetDocumentView(documentView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
 }
 
-// ContentView calls the underlying ContentView.
+// ContentView wraps the corresponding Objective-C method.
 func (x *ScrollView) ContentView() *ClipView {
-	_r := x.inner.ContentView()
-	if _r == nil {
-		return nil
-	}
-	return &ClipView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+	return ClipViewFromID(_r)
 }
 
-// SetContentView calls the underlying SetContentView.
-func (x *ScrollView) SetContentView(contentView *raw.NSClipView) {
-	x.inner.SetContentView(contentView)
+// SetContentView wraps the corresponding Objective-C method.
+func (x *ScrollView) SetContentView(contentView *ClipView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
-// DocumentCursor calls the underlying DocumentCursor.
+// DocumentCursor wraps the corresponding Objective-C method.
 func (x *ScrollView) DocumentCursor() *Cursor {
-	_r := x.inner.DocumentCursor()
-	if _r == nil {
-		return nil
-	}
-	return &Cursor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentCursor"))
+	return CursorFromID(_r)
 }
 
-// SetDocumentCursor calls the underlying SetDocumentCursor.
-func (x *ScrollView) SetDocumentCursor(documentCursor *raw.NSCursor) {
-	x.inner.SetDocumentCursor(documentCursor)
+// SetDocumentCursor wraps the corresponding Objective-C method.
+func (x *ScrollView) SetDocumentCursor(documentCursor *Cursor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
 }
 
-// BorderType calls the underlying BorderType.
-func (x *ScrollView) BorderType() NSBorderType {
-	return NSBorderType(x.inner.BorderType())
+// BorderType wraps the corresponding Objective-C method.
+func (x *ScrollView) BorderType() BorderType {
+	_r := objc.Send[BorderType](objref.IDOf(x), objc.RegisterName("borderType"))
+	return _r
 }
 
-// SetBorderType calls the underlying SetBorderType.
-func (x *ScrollView) SetBorderType(borderType NSBorderType) {
-	x.inner.SetBorderType(raw.NSBorderType(borderType))
+// SetBorderType wraps the corresponding Objective-C method.
+func (x *ScrollView) SetBorderType(borderType BorderType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *ScrollView) BackgroundColor() *Color {
-	_r := x.inner.BackgroundColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return ColorFromID(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *ScrollView) SetBackgroundColor(backgroundColor *raw.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+// SetBackgroundColor wraps the corresponding Objective-C method.
+func (x *ScrollView) SetBackgroundColor(backgroundColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// DrawsBackground calls the underlying DrawsBackground.
+// DrawsBackground wraps the corresponding Objective-C method.
 func (x *ScrollView) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
-// SetDrawsBackground calls the underlying SetDrawsBackground.
+// SetDrawsBackground wraps the corresponding Objective-C method.
 func (x *ScrollView) SetDrawsBackground(drawsBackground bool) {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
-// HasVerticalScroller calls the underlying HasVerticalScroller.
+// HasVerticalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) HasVerticalScroller() bool {
-	return x.inner.HasVerticalScroller()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasVerticalScroller"))
+	return _r
 }
 
-// SetHasVerticalScroller calls the underlying SetHasVerticalScroller.
+// SetHasVerticalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHasVerticalScroller(hasVerticalScroller bool) {
-	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalScroller:"), hasVerticalScroller)
 }
 
-// HasHorizontalScroller calls the underlying HasHorizontalScroller.
+// HasHorizontalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) HasHorizontalScroller() bool {
-	return x.inner.HasHorizontalScroller()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHorizontalScroller"))
+	return _r
 }
 
-// SetHasHorizontalScroller calls the underlying SetHasHorizontalScroller.
+// SetHasHorizontalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
-	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalScroller:"), hasHorizontalScroller)
 }
 
-// VerticalScroller calls the underlying VerticalScroller.
+// VerticalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) VerticalScroller() *Scroller {
-	_r := x.inner.VerticalScroller()
-	if _r == nil {
-		return nil
-	}
-	return &Scroller{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalScroller"))
+	return ScrollerFromID(_r)
 }
 
-// SetVerticalScroller calls the underlying SetVerticalScroller.
-func (x *ScrollView) SetVerticalScroller(verticalScroller *raw.NSScroller) {
-	x.inner.SetVerticalScroller(verticalScroller)
+// SetVerticalScroller wraps the corresponding Objective-C method.
+func (x *ScrollView) SetVerticalScroller(verticalScroller *Scroller) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalScroller:"), objref.IDOf(verticalScroller))
 }
 
-// HorizontalScroller calls the underlying HorizontalScroller.
+// HorizontalScroller wraps the corresponding Objective-C method.
 func (x *ScrollView) HorizontalScroller() *Scroller {
-	_r := x.inner.HorizontalScroller()
-	if _r == nil {
-		return nil
-	}
-	return &Scroller{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontalScroller"))
+	return ScrollerFromID(_r)
 }
 
-// SetHorizontalScroller calls the underlying SetHorizontalScroller.
-func (x *ScrollView) SetHorizontalScroller(horizontalScroller *raw.NSScroller) {
-	x.inner.SetHorizontalScroller(horizontalScroller)
+// SetHorizontalScroller wraps the corresponding Objective-C method.
+func (x *ScrollView) SetHorizontalScroller(horizontalScroller *Scroller) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalScroller:"), objref.IDOf(horizontalScroller))
 }
 
-// AutohidesScrollers calls the underlying AutohidesScrollers.
+// AutohidesScrollers wraps the corresponding Objective-C method.
 func (x *ScrollView) AutohidesScrollers() bool {
-	return x.inner.AutohidesScrollers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autohidesScrollers"))
+	return _r
 }
 
-// SetAutohidesScrollers calls the underlying SetAutohidesScrollers.
+// SetAutohidesScrollers wraps the corresponding Objective-C method.
 func (x *ScrollView) SetAutohidesScrollers(autohidesScrollers bool) {
-	x.inner.SetAutohidesScrollers(autohidesScrollers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutohidesScrollers:"), autohidesScrollers)
 }
 
-// HorizontalLineScroll calls the underlying HorizontalLineScroll.
+// HorizontalLineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) HorizontalLineScroll() float64 {
-	return x.inner.HorizontalLineScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("horizontalLineScroll"))
+	return _r
 }
 
-// SetHorizontalLineScroll calls the underlying SetHorizontalLineScroll.
+// SetHorizontalLineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHorizontalLineScroll(horizontalLineScroll float64) {
-	x.inner.SetHorizontalLineScroll(horizontalLineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalLineScroll:"), horizontalLineScroll)
 }
 
-// VerticalLineScroll calls the underlying VerticalLineScroll.
+// VerticalLineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) VerticalLineScroll() float64 {
-	return x.inner.VerticalLineScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("verticalLineScroll"))
+	return _r
 }
 
-// SetVerticalLineScroll calls the underlying SetVerticalLineScroll.
+// SetVerticalLineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetVerticalLineScroll(verticalLineScroll float64) {
-	x.inner.SetVerticalLineScroll(verticalLineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalLineScroll:"), verticalLineScroll)
 }
 
-// LineScroll calls the underlying LineScroll.
+// LineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) LineScroll() float64 {
-	return x.inner.LineScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineScroll"))
+	return _r
 }
 
-// SetLineScroll calls the underlying SetLineScroll.
+// SetLineScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetLineScroll(lineScroll float64) {
-	x.inner.SetLineScroll(lineScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineScroll:"), lineScroll)
 }
 
-// HorizontalPageScroll calls the underlying HorizontalPageScroll.
+// HorizontalPageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) HorizontalPageScroll() float64 {
-	return x.inner.HorizontalPageScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("horizontalPageScroll"))
+	return _r
 }
 
-// SetHorizontalPageScroll calls the underlying SetHorizontalPageScroll.
+// SetHorizontalPageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHorizontalPageScroll(horizontalPageScroll float64) {
-	x.inner.SetHorizontalPageScroll(horizontalPageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalPageScroll:"), horizontalPageScroll)
 }
 
-// VerticalPageScroll calls the underlying VerticalPageScroll.
+// VerticalPageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) VerticalPageScroll() float64 {
-	return x.inner.VerticalPageScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("verticalPageScroll"))
+	return _r
 }
 
-// SetVerticalPageScroll calls the underlying SetVerticalPageScroll.
+// SetVerticalPageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetVerticalPageScroll(verticalPageScroll float64) {
-	x.inner.SetVerticalPageScroll(verticalPageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalPageScroll:"), verticalPageScroll)
 }
 
-// PageScroll calls the underlying PageScroll.
+// PageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) PageScroll() float64 {
-	return x.inner.PageScroll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pageScroll"))
+	return _r
 }
 
-// SetPageScroll calls the underlying SetPageScroll.
+// SetPageScroll wraps the corresponding Objective-C method.
 func (x *ScrollView) SetPageScroll(pageScroll float64) {
-	x.inner.SetPageScroll(pageScroll)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageScroll:"), pageScroll)
 }
 
-// ScrollsDynamically calls the underlying ScrollsDynamically.
+// ScrollsDynamically wraps the corresponding Objective-C method.
 func (x *ScrollView) ScrollsDynamically() bool {
-	return x.inner.ScrollsDynamically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scrollsDynamically"))
+	return _r
 }
 
-// SetScrollsDynamically calls the underlying SetScrollsDynamically.
+// SetScrollsDynamically wraps the corresponding Objective-C method.
 func (x *ScrollView) SetScrollsDynamically(scrollsDynamically bool) {
-	x.inner.SetScrollsDynamically(scrollsDynamically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollsDynamically:"), scrollsDynamically)
 }
 
-// ScrollerStyle calls the underlying ScrollerStyle.
-func (x *ScrollView) ScrollerStyle() NSScrollerStyle {
-	return NSScrollerStyle(x.inner.ScrollerStyle())
+// ScrollerStyle wraps the corresponding Objective-C method.
+func (x *ScrollView) ScrollerStyle() ScrollerStyle {
+	_r := objc.Send[ScrollerStyle](objref.IDOf(x), objc.RegisterName("scrollerStyle"))
+	return _r
 }
 
-// SetScrollerStyle calls the underlying SetScrollerStyle.
-func (x *ScrollView) SetScrollerStyle(scrollerStyle NSScrollerStyle) {
-	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
+// SetScrollerStyle wraps the corresponding Objective-C method.
+func (x *ScrollView) SetScrollerStyle(scrollerStyle ScrollerStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerStyle:"), scrollerStyle)
 }
 
-// ScrollerKnobStyle calls the underlying ScrollerKnobStyle.
-func (x *ScrollView) ScrollerKnobStyle() NSScrollerKnobStyle {
-	return NSScrollerKnobStyle(x.inner.ScrollerKnobStyle())
+// ScrollerKnobStyle wraps the corresponding Objective-C method.
+func (x *ScrollView) ScrollerKnobStyle() ScrollerKnobStyle {
+	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(x), objc.RegisterName("scrollerKnobStyle"))
+	return _r
 }
 
-// SetScrollerKnobStyle calls the underlying SetScrollerKnobStyle.
-func (x *ScrollView) SetScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) {
-	x.inner.SetScrollerKnobStyle(raw.NSScrollerKnobStyle(scrollerKnobStyle))
+// SetScrollerKnobStyle wraps the corresponding Objective-C method.
+func (x *ScrollView) SetScrollerKnobStyle(scrollerKnobStyle ScrollerKnobStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerKnobStyle:"), scrollerKnobStyle)
 }
 
-// HorizontalScrollElasticity calls the underlying HorizontalScrollElasticity.
-func (x *ScrollView) HorizontalScrollElasticity() NSScrollElasticity {
-	return NSScrollElasticity(x.inner.HorizontalScrollElasticity())
+// HorizontalScrollElasticity wraps the corresponding Objective-C method.
+func (x *ScrollView) HorizontalScrollElasticity() ScrollElasticity {
+	_r := objc.Send[ScrollElasticity](objref.IDOf(x), objc.RegisterName("horizontalScrollElasticity"))
+	return _r
 }
 
-// SetHorizontalScrollElasticity calls the underlying SetHorizontalScrollElasticity.
-func (x *ScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) {
-	x.inner.SetHorizontalScrollElasticity(raw.NSScrollElasticity(horizontalScrollElasticity))
+// SetHorizontalScrollElasticity wraps the corresponding Objective-C method.
+func (x *ScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity ScrollElasticity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalScrollElasticity:"), horizontalScrollElasticity)
 }
 
-// VerticalScrollElasticity calls the underlying VerticalScrollElasticity.
-func (x *ScrollView) VerticalScrollElasticity() NSScrollElasticity {
-	return NSScrollElasticity(x.inner.VerticalScrollElasticity())
+// VerticalScrollElasticity wraps the corresponding Objective-C method.
+func (x *ScrollView) VerticalScrollElasticity() ScrollElasticity {
+	_r := objc.Send[ScrollElasticity](objref.IDOf(x), objc.RegisterName("verticalScrollElasticity"))
+	return _r
 }
 
-// SetVerticalScrollElasticity calls the underlying SetVerticalScrollElasticity.
-func (x *ScrollView) SetVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) {
-	x.inner.SetVerticalScrollElasticity(raw.NSScrollElasticity(verticalScrollElasticity))
+// SetVerticalScrollElasticity wraps the corresponding Objective-C method.
+func (x *ScrollView) SetVerticalScrollElasticity(verticalScrollElasticity ScrollElasticity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalScrollElasticity:"), verticalScrollElasticity)
 }
 
-// UsesPredominantAxisScrolling calls the underlying UsesPredominantAxisScrolling.
+// UsesPredominantAxisScrolling wraps the corresponding Objective-C method.
 func (x *ScrollView) UsesPredominantAxisScrolling() bool {
-	return x.inner.UsesPredominantAxisScrolling()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesPredominantAxisScrolling"))
+	return _r
 }
 
-// SetUsesPredominantAxisScrolling calls the underlying SetUsesPredominantAxisScrolling.
+// SetUsesPredominantAxisScrolling wraps the corresponding Objective-C method.
 func (x *ScrollView) SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) {
-	x.inner.SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesPredominantAxisScrolling:"), usesPredominantAxisScrolling)
 }
 
-// AllowsMagnification calls the underlying AllowsMagnification.
+// AllowsMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) AllowsMagnification() bool {
-	return x.inner.AllowsMagnification()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMagnification"))
+	return _r
 }
 
-// SetAllowsMagnification calls the underlying SetAllowsMagnification.
+// SetAllowsMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) SetAllowsMagnification(allowsMagnification bool) {
-	x.inner.SetAllowsMagnification(allowsMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMagnification:"), allowsMagnification)
 }
 
-// Magnification calls the underlying Magnification.
+// Magnification wraps the corresponding Objective-C method.
 func (x *ScrollView) Magnification() float64 {
-	return x.inner.Magnification()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magnification"))
+	return _r
 }
 
-// SetMagnification calls the underlying SetMagnification.
+// SetMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) SetMagnification(magnification float64) {
-	x.inner.SetMagnification(magnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnification:"), magnification)
 }
 
-// MaxMagnification calls the underlying MaxMagnification.
+// MaxMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) MaxMagnification() float64 {
-	return x.inner.MaxMagnification()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxMagnification"))
+	return _r
 }
 
-// SetMaxMagnification calls the underlying SetMaxMagnification.
+// SetMaxMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) SetMaxMagnification(maxMagnification float64) {
-	x.inner.SetMaxMagnification(maxMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMagnification:"), maxMagnification)
 }
 
-// MinMagnification calls the underlying MinMagnification.
+// MinMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) MinMagnification() float64 {
-	return x.inner.MinMagnification()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minMagnification"))
+	return _r
 }
 
-// SetMinMagnification calls the underlying SetMinMagnification.
+// SetMinMagnification wraps the corresponding Objective-C method.
 func (x *ScrollView) SetMinMagnification(minMagnification float64) {
-	x.inner.SetMinMagnification(minMagnification)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinMagnification:"), minMagnification)
 }
 
-// AutomaticallyAdjustsContentInsets calls the underlying AutomaticallyAdjustsContentInsets.
+// AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) AutomaticallyAdjustsContentInsets() bool {
-	return x.inner.AutomaticallyAdjustsContentInsets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsContentInsets"))
+	return _r
 }
 
-// SetAutomaticallyAdjustsContentInsets calls the underlying SetAutomaticallyAdjustsContentInsets.
+// SetAutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
-	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
 }
 
-// ContentInsets calls the underlying ContentInsets.
+// ContentInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) ContentInsets() foundation.NSEdgeInsets {
-	return x.inner.ContentInsets()
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("contentInsets"))
+	return _r
 }
 
-// SetContentInsets calls the underlying SetContentInsets.
+// SetContentInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
-	x.inner.SetContentInsets(contentInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentInsets:"), contentInsets)
 }
 
-// ScrollerInsets calls the underlying ScrollerInsets.
+// ScrollerInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
-	return x.inner.ScrollerInsets()
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("scrollerInsets"))
+	return _r
 }
 
-// SetScrollerInsets calls the underlying SetScrollerInsets.
+// SetScrollerInsets wraps the corresponding Objective-C method.
 func (x *ScrollView) SetScrollerInsets(scrollerInsets foundation.NSEdgeInsets) {
-	x.inner.SetScrollerInsets(scrollerInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollerInsets:"), scrollerInsets)
 }
 
-// RulersVisible calls the underlying RulersVisible.
+// RulersVisible wraps the corresponding Objective-C method.
 func (x *ScrollView) RulersVisible() bool {
-	return x.inner.RulersVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rulersVisible"))
+	return _r
 }
 
-// SetRulersVisible calls the underlying SetRulersVisible.
+// SetRulersVisible wraps the corresponding Objective-C method.
 func (x *ScrollView) SetRulersVisible(rulersVisible bool) {
-	x.inner.SetRulersVisible(rulersVisible)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRulersVisible:"), rulersVisible)
 }
 
-// HasHorizontalRuler calls the underlying HasHorizontalRuler.
+// HasHorizontalRuler wraps the corresponding Objective-C method.
 func (x *ScrollView) HasHorizontalRuler() bool {
-	return x.inner.HasHorizontalRuler()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHorizontalRuler"))
+	return _r
 }
 
-// SetHasHorizontalRuler calls the underlying SetHasHorizontalRuler.
+// SetHasHorizontalRuler wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHasHorizontalRuler(hasHorizontalRuler bool) {
-	x.inner.SetHasHorizontalRuler(hasHorizontalRuler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasHorizontalRuler:"), hasHorizontalRuler)
 }
 
-// HasVerticalRuler calls the underlying HasVerticalRuler.
+// HasVerticalRuler wraps the corresponding Objective-C method.
 func (x *ScrollView) HasVerticalRuler() bool {
-	return x.inner.HasVerticalRuler()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasVerticalRuler"))
+	return _r
 }
 
-// SetHasVerticalRuler calls the underlying SetHasVerticalRuler.
+// SetHasVerticalRuler wraps the corresponding Objective-C method.
 func (x *ScrollView) SetHasVerticalRuler(hasVerticalRuler bool) {
-	x.inner.SetHasVerticalRuler(hasVerticalRuler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasVerticalRuler:"), hasVerticalRuler)
 }
 
-// HorizontalRulerView calls the underlying HorizontalRulerView.
+// HorizontalRulerView wraps the corresponding Objective-C method.
 func (x *ScrollView) HorizontalRulerView() *RulerView {
-	_r := x.inner.HorizontalRulerView()
-	if _r == nil {
-		return nil
-	}
-	return &RulerView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontalRulerView"))
+	return RulerViewFromID(_r)
 }
 
-// SetHorizontalRulerView calls the underlying SetHorizontalRulerView.
-func (x *ScrollView) SetHorizontalRulerView(horizontalRulerView *raw.NSRulerView) {
-	x.inner.SetHorizontalRulerView(horizontalRulerView)
+// SetHorizontalRulerView wraps the corresponding Objective-C method.
+func (x *ScrollView) SetHorizontalRulerView(horizontalRulerView *RulerView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalRulerView:"), objref.IDOf(horizontalRulerView))
 }
 
-// VerticalRulerView calls the underlying VerticalRulerView.
+// VerticalRulerView wraps the corresponding Objective-C method.
 func (x *ScrollView) VerticalRulerView() *RulerView {
-	_r := x.inner.VerticalRulerView()
-	if _r == nil {
-		return nil
-	}
-	return &RulerView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalRulerView"))
+	return RulerViewFromID(_r)
 }
 
-// SetVerticalRulerView calls the underlying SetVerticalRulerView.
-func (x *ScrollView) SetVerticalRulerView(verticalRulerView *raw.NSRulerView) {
-	x.inner.SetVerticalRulerView(verticalRulerView)
+// SetVerticalRulerView wraps the corresponding Objective-C method.
+func (x *ScrollView) SetVerticalRulerView(verticalRulerView *RulerView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalRulerView:"), objref.IDOf(verticalRulerView))
 }
 
-// FindBarPosition calls the underlying FindBarPosition.
-func (x *ScrollView) FindBarPosition() NSScrollViewFindBarPosition {
-	return NSScrollViewFindBarPosition(x.inner.FindBarPosition())
+// FindBarPosition wraps the corresponding Objective-C method.
+func (x *ScrollView) FindBarPosition() ScrollViewFindBarPosition {
+	_r := objc.Send[ScrollViewFindBarPosition](objref.IDOf(x), objc.RegisterName("findBarPosition"))
+	return _r
 }
 
-// SetFindBarPosition calls the underlying SetFindBarPosition.
-func (x *ScrollView) SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition) {
-	x.inner.SetFindBarPosition(raw.NSScrollViewFindBarPosition(findBarPosition))
+// SetFindBarPosition wraps the corresponding Objective-C method.
+func (x *ScrollView) SetFindBarPosition(findBarPosition ScrollViewFindBarPosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFindBarPosition:"), findBarPosition)
 }
-
-func (x *ScrollView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *ScrollView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // ScrollViewable is the interface implemented by [ScrollView], for mocking and DI.
 type ScrollViewable interface {
-	Unwrap() *raw.NSScrollView
+	obj.Object
 	WithDocumentView(documentView ViewProvider) *ScrollView
 	WithContentView(contentView *ClipView) *ScrollView
 	WithDocumentCursor(documentCursor *Cursor) *ScrollView
-	WithBorderType(borderType NSBorderType) *ScrollView
+	WithBorderType(borderType BorderType) *ScrollView
 	WithBackgroundColor(backgroundColor *Color) *ScrollView
 	WithDrawsBackground(drawsBackground bool) *ScrollView
 	WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView
@@ -1170,10 +1030,10 @@ type ScrollViewable interface {
 	WithVerticalPageScroll(verticalPageScroll float64) *ScrollView
 	WithPageScroll(pageScroll float64) *ScrollView
 	WithScrollsDynamically(scrollsDynamically bool) *ScrollView
-	WithScrollerStyle(scrollerStyle NSScrollerStyle) *ScrollView
-	WithScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) *ScrollView
-	WithHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) *ScrollView
-	WithVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) *ScrollView
+	WithScrollerStyle(scrollerStyle ScrollerStyle) *ScrollView
+	WithScrollerKnobStyle(scrollerKnobStyle ScrollerKnobStyle) *ScrollView
+	WithHorizontalScrollElasticity(horizontalScrollElasticity ScrollElasticity) *ScrollView
+	WithVerticalScrollElasticity(verticalScrollElasticity ScrollElasticity) *ScrollView
 	WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView
 	WithAllowsMagnification(allowsMagnification bool) *ScrollView
 	WithMagnification(magnification float64) *ScrollView
@@ -1187,12 +1047,12 @@ type ScrollViewable interface {
 	WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView
 	WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView
 	WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView
-	WithFindBarPosition(findBarPosition NSScrollViewFindBarPosition) *ScrollView
+	WithFindBarPosition(findBarPosition ScrollViewFindBarPosition) *ScrollView
 	WithSubviews(items ...ViewProvider) *ScrollView
 	WithHidden(hidden bool) *ScrollView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrollView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrollView
 	WithFrame(frame corefoundation.CGRect) *ScrollView
 	WithFrameRotation(frameRotation float64) *ScrollView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrollView
@@ -1202,27 +1062,27 @@ type ScrollViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrollView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrollView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrollView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrollView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrollView
 	WithWantsLayer(wantsLayer bool) *ScrollView
-	WithLayer(layer *quartzcore.CALayer) *ScrollView
+	WithLayer(layer obj.Object) *ScrollView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView
 	WithNeedsLayout(needsLayout bool) *ScrollView
 	WithAlphaValue(alphaValue float64) *ScrollView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrollView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrollView
-	WithContentFilters(items ...*coreimage.CIFilter) *ScrollView
+	WithBackgroundFilters(items ...obj.Object) *ScrollView
+	WithCompositingFilter(compositingFilter obj.Object) *ScrollView
+	WithContentFilters(items ...obj.Object) *ScrollView
 	WithShadow(shadow *Shadow) *ScrollView
 	WithClipsToBounds(clipsToBounds bool) *ScrollView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView
 	WithToolTip(toolTip string) *ScrollView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrollView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrollView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrollView
-	WithFocusRingType(focusRingType NSFocusRingType) *ScrollView
+	WithFocusRingType(focusRingType FocusRingType) *ScrollView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrollView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrollView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView
@@ -1235,25 +1095,25 @@ type ScrollViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView
 	WithNextResponder(nextResponder ResponderProvider) *ScrollView
 	WithMenu(menu *Menu) *ScrollView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView
+	WithUserActivity(userActivity obj.Object) *ScrollView
 	WithTouchBar(touchBar *TouchBar) *ScrollView
 	Tile()
 	FlashScrollers()
 	MagnifyToFitRect(rect corefoundation.CGRect)
 	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
-	AddFloatingSubviewForAxis(view *raw.NSView, axis NSEventGestureAxis)
+	AddFloatingSubviewForAxis(view *View, axis EventGestureAxis)
 	DocumentVisibleRect() corefoundation.CGRect
 	ContentSize() corefoundation.CGSize
 	DocumentView() *View
-	SetDocumentView(documentView *raw.NSView)
+	SetDocumentView(documentView *View)
 	ContentView() *ClipView
-	SetContentView(contentView *raw.NSClipView)
+	SetContentView(contentView *ClipView)
 	DocumentCursor() *Cursor
-	SetDocumentCursor(documentCursor *raw.NSCursor)
-	BorderType() NSBorderType
-	SetBorderType(borderType NSBorderType)
+	SetDocumentCursor(documentCursor *Cursor)
+	BorderType() BorderType
+	SetBorderType(borderType BorderType)
 	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *raw.NSColor)
+	SetBackgroundColor(backgroundColor *Color)
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
 	HasVerticalScroller() bool
@@ -1261,9 +1121,9 @@ type ScrollViewable interface {
 	HasHorizontalScroller() bool
 	SetHasHorizontalScroller(hasHorizontalScroller bool)
 	VerticalScroller() *Scroller
-	SetVerticalScroller(verticalScroller *raw.NSScroller)
+	SetVerticalScroller(verticalScroller *Scroller)
 	HorizontalScroller() *Scroller
-	SetHorizontalScroller(horizontalScroller *raw.NSScroller)
+	SetHorizontalScroller(horizontalScroller *Scroller)
 	AutohidesScrollers() bool
 	SetAutohidesScrollers(autohidesScrollers bool)
 	HorizontalLineScroll() float64
@@ -1280,14 +1140,14 @@ type ScrollViewable interface {
 	SetPageScroll(pageScroll float64)
 	ScrollsDynamically() bool
 	SetScrollsDynamically(scrollsDynamically bool)
-	ScrollerStyle() NSScrollerStyle
-	SetScrollerStyle(scrollerStyle NSScrollerStyle)
-	ScrollerKnobStyle() NSScrollerKnobStyle
-	SetScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle)
-	HorizontalScrollElasticity() NSScrollElasticity
-	SetHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity)
-	VerticalScrollElasticity() NSScrollElasticity
-	SetVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity)
+	ScrollerStyle() ScrollerStyle
+	SetScrollerStyle(scrollerStyle ScrollerStyle)
+	ScrollerKnobStyle() ScrollerKnobStyle
+	SetScrollerKnobStyle(scrollerKnobStyle ScrollerKnobStyle)
+	HorizontalScrollElasticity() ScrollElasticity
+	SetHorizontalScrollElasticity(horizontalScrollElasticity ScrollElasticity)
+	VerticalScrollElasticity() ScrollElasticity
+	SetVerticalScrollElasticity(verticalScrollElasticity ScrollElasticity)
 	UsesPredominantAxisScrolling() bool
 	SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool)
 	AllowsMagnification() bool
@@ -1311,11 +1171,15 @@ type ScrollViewable interface {
 	HasVerticalRuler() bool
 	SetHasVerticalRuler(hasVerticalRuler bool)
 	HorizontalRulerView() *RulerView
-	SetHorizontalRulerView(horizontalRulerView *raw.NSRulerView)
+	SetHorizontalRulerView(horizontalRulerView *RulerView)
 	VerticalRulerView() *RulerView
-	SetVerticalRulerView(verticalRulerView *raw.NSRulerView)
-	FindBarPosition() NSScrollViewFindBarPosition
-	SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition)
+	SetVerticalRulerView(verticalRulerView *RulerView)
+	FindBarPosition() ScrollViewFindBarPosition
+	SetFindBarPosition(findBarPosition ScrollViewFindBarPosition)
 }
 
 var _ ScrollViewable = (*ScrollView)(nil)
+
+var _ ViewProvider = (*ScrollView)(nil)
+
+var _ ResponderProvider = (*ScrollView)(nil)

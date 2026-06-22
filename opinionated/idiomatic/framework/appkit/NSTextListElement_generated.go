@@ -5,92 +5,96 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a text list node.
+// TextListElement is an idiomatic wrapper over the Objective-C class NSTextListElement.
 //
-// TextListElement wraps [raw.NSTextListElement] with a fluent Go API.
+// It embeds [TextParagraph], promoting that type's methods.
+//
+// A class that represents a text list node.
 type TextListElement struct {
-	inner *raw.NSTextListElement
+	TextParagraph
 }
 
-// Unwrap returns the underlying [raw.NSTextListElement].
-func (x *TextListElement) Unwrap() *raw.NSTextListElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextListElement) ID() objc.ID { return x.inner.Ptr() }
-
-// TextListElementFromID adopts an existing object pointer as a TextListElement (nil for 0).
+// TextListElementFromID adopts an existing Objective-C object as a TextListElement
+// (nil for 0), retaining it and registering a release finalizer.
 func TextListElementFromID(id objc.ID) *TextListElement {
 	if id == 0 {
 		return nil
 	}
-	return &TextListElement{inner: raw.NSTextListElementFromID(id)}
-}
-
-// Creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
-//
-// NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a new [TextListElement].
-func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *raw.NSTextListElement, textList *raw.NSTextList, contents *foundation.NSAttributedString, markerAttributes purego.IDer, children *foundation.NSArray[*raw.NSTextListElement]) *TextListElement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextListElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), parent.Ptr(), textList.Ptr(), contents.Ptr(), markerAttributes.ID(), children.Ptr())
-	return &TextListElement{inner: raw.NSTextListElementFromID(_id)}
-}
-
-// The value that represents the current content manager.
-//
-// WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
-func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
-	x.inner.NSTextParagraph.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
+	x := &TextListElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A range value that represents the range of the element inside the document.
-//
-// WithElementRange sets the elementRange property and returns the receiver for chaining.
-func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
-	x.inner.NSTextParagraph.NSTextElement.SetElementRange(elementRange.Unwrap())
-	return x
-}
-
-// TextList calls the underlying TextList.
-func (x *TextListElement) TextList() *TextList {
-	_r := x.inner.TextList()
-	if _r == nil {
+// textListElementAdopt wraps an Objective-C object that this code just created as a
+// TextListElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textListElementAdopt(id objc.ID) *TextListElement {
+	if id == 0 {
 		return nil
 	}
-	return &TextList{inner: _r}
+	x := &TextListElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Contents calls the underlying Contents.
-func (x *TextListElement) Contents() *foundation.NSAttributedString {
-	return x.inner.Contents()
+// NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
+func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *TextListElement, textList *TextList, contents obj.Object, markerAttributes obj.Object, children []*TextListElement) *TextListElement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextListElement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), objref.IDOf(parent), objref.IDOf(textList), objref.IDOf(contents), objref.IDOf(markerAttributes), purego.SliceToNSArray(children, func(_v *TextListElement) objc.ID { return objref.IDOf(_v) }))
+	return textListElementAdopt(_id)
 }
 
-// MarkerAttributes calls the underlying MarkerAttributes.
-func (x *TextListElement) MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.MarkerAttributes()
+// WithTextContentManager the value that represents the current content manager.
+func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
+	return x
 }
 
-func (x *TextListElement) asTextParagraph() *raw.NSTextParagraph { return &x.inner.NSTextParagraph }
+// WithElementRange a range value that represents the range of the element inside the document.
+func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
+	return x
+}
 
-func (x *TextListElement) asTextElement() *raw.NSTextElement {
-	return &x.inner.NSTextParagraph.NSTextElement
+// TextList wraps the corresponding Objective-C method.
+func (x *TextListElement) TextList() *TextList {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textList"))
+	return TextListFromID(_r)
+}
+
+// Contents wraps the corresponding Objective-C method.
+func (x *TextListElement) Contents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return obj.Wrap(_r)
+}
+
+// MarkerAttributes wraps the corresponding Objective-C method.
+func (x *TextListElement) MarkerAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerAttributes"))
+	return obj.Wrap(_r)
 }
 
 // TextListElementable is the interface implemented by [TextListElement], for mocking and DI.
 type TextListElementable interface {
-	Unwrap() *raw.NSTextListElement
+	obj.Object
 	WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement
 	WithElementRange(elementRange *TextRange) *TextListElement
 	TextList() *TextList
-	Contents() *foundation.NSAttributedString
-	MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Contents() obj.Object
+	MarkerAttributes() obj.Object
 }
 
 var _ TextListElementable = (*TextListElement)(nil)
+
+var _ TextParagraphProvider = (*TextListElement)(nil)
+
+var _ TextElementProvider = (*TextListElement)(nil)

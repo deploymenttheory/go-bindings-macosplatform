@@ -5,62 +5,76 @@
 package replaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller object that presents the macOS broadcast picker.
+// BroadcastActivityController is an idiomatic wrapper over the Objective-C class RPBroadcastActivityController.
 //
-// BroadcastActivityController wraps [raw.RPBroadcastActivityController] with a fluent Go API.
+// A controller object that presents the macOS broadcast picker.
 type BroadcastActivityController struct {
-	inner *raw.RPBroadcastActivityController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.RPBroadcastActivityController].
-func (x *BroadcastActivityController) Unwrap() *raw.RPBroadcastActivityController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BroadcastActivityController) ID() objc.ID { return x.inner.Ptr() }
-
-// BroadcastActivityControllerFromID adopts an existing object pointer as a BroadcastActivityController (nil for 0).
+// BroadcastActivityControllerFromID adopts an existing Objective-C object as a BroadcastActivityController
+// (nil for 0), retaining it and registering a release finalizer.
 func BroadcastActivityControllerFromID(id objc.ID) *BroadcastActivityController {
 	if id == 0 {
 		return nil
 	}
-	return &BroadcastActivityController{inner: raw.RPBroadcastActivityControllerFromID(id)}
-}
-
-// NewBroadcastActivityController creates a new [BroadcastActivityController].
-func NewBroadcastActivityController() *BroadcastActivityController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("RPBroadcastActivityController")), objc.RegisterName("new"))
-	return &BroadcastActivityController{inner: raw.RPBroadcastActivityControllerFromID(_id)}
-}
-
-// The broadcast activity controller’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *BroadcastActivityController) WithDelegate(delegate raw.RPBroadcastActivityControllerDelegate) *BroadcastActivityController {
-	x.inner.SetDelegate(delegate)
+	x := &BroadcastActivityController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *BroadcastActivityController) Delegate() raw.RPBroadcastActivityControllerDelegate {
-	return x.inner.Delegate()
+// broadcastActivityControllerAdopt wraps an Objective-C object that this code just created as a
+// BroadcastActivityController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func broadcastActivityControllerAdopt(id objc.ID) *BroadcastActivityController {
+	if id == 0 {
+		return nil
+	}
+	x := &BroadcastActivityController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *BroadcastActivityController) SetDelegate(delegate raw.RPBroadcastActivityControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *BroadcastActivityController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BroadcastActivityController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BroadcastActivityController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BroadcastActivityController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBroadcastActivityController creates a new BroadcastActivityController.
+func NewBroadcastActivityController() *BroadcastActivityController {
+	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastActivityController")), objc.RegisterName("new"))
+	return broadcastActivityControllerAdopt(_id)
 }
 
 // BroadcastActivityControllerable is the interface implemented by [BroadcastActivityController], for mocking and DI.
 type BroadcastActivityControllerable interface {
-	Unwrap() *raw.RPBroadcastActivityController
-	WithDelegate(delegate raw.RPBroadcastActivityControllerDelegate) *BroadcastActivityController
-	Delegate() raw.RPBroadcastActivityControllerDelegate
-	SetDelegate(delegate raw.RPBroadcastActivityControllerDelegate)
+	obj.Object
 }
 
 var _ BroadcastActivityControllerable = (*BroadcastActivityController)(nil)

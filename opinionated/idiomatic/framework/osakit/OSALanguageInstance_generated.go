@@ -5,83 +5,109 @@
 package osakit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// LanguageInstance wraps [raw.OSALanguageInstance] with a fluent Go API.
+// LanguageInstance is an idiomatic wrapper over the Objective-C class OSALanguageInstance.
 type LanguageInstance struct {
-	inner *raw.OSALanguageInstance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSALanguageInstance].
-func (x *LanguageInstance) Unwrap() *raw.OSALanguageInstance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LanguageInstance) ID() objc.ID { return x.inner.Ptr() }
-
-// LanguageInstanceFromID adopts an existing object pointer as a LanguageInstance (nil for 0).
+// LanguageInstanceFromID adopts an existing Objective-C object as a LanguageInstance
+// (nil for 0), retaining it and registering a release finalizer.
 func LanguageInstanceFromID(id objc.ID) *LanguageInstance {
 	if id == 0 {
 		return nil
 	}
-	return &LanguageInstance{inner: raw.OSALanguageInstanceFromID(id)}
-}
-
-// NewLanguageInstanceWithLanguage creates a new [LanguageInstance].
-func NewLanguageInstanceWithLanguage(language *raw.OSALanguage) *LanguageInstance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSALanguageInstance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguage:"), language.Ptr())
-	return &LanguageInstance{inner: raw.OSALanguageInstanceFromID(_id)}
-}
-
-// WithDefaultTarget sets the defaultTarget property and returns the receiver for chaining.
-func (x *LanguageInstance) WithDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) *LanguageInstance {
-	x.inner.SetDefaultTarget(defaultTarget)
+	x := &LanguageInstance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// RichTextFromDescriptor calls the underlying RichTextFromDescriptor.
-func (x *LanguageInstance) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString {
-	return x.inner.RichTextFromDescriptor(descriptor)
-}
-
-// Language calls the underlying Language.
-func (x *LanguageInstance) Language() *Language {
-	_r := x.inner.Language()
-	if _r == nil {
+// languageInstanceAdopt wraps an Objective-C object that this code just created as a
+// LanguageInstance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func languageInstanceAdopt(id objc.ID) *LanguageInstance {
+	if id == 0 {
 		return nil
 	}
-	return &Language{inner: _r}
+	x := &LanguageInstance{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ComponentInstance calls the underlying ComponentInstance.
-func (x *LanguageInstance) ComponentInstance() *carboncore.ComponentInstanceRecord {
-	return x.inner.ComponentInstance()
+// Description returns the object's -description text.
+func (x *LanguageInstance) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// DefaultTarget calls the underlying DefaultTarget.
-func (x *LanguageInstance) DefaultTarget() *foundation.NSAppleEventDescriptor {
-	return x.inner.DefaultTarget()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LanguageInstance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDefaultTarget calls the underlying SetDefaultTarget.
-func (x *LanguageInstance) SetDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) {
-	x.inner.SetDefaultTarget(defaultTarget)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LanguageInstance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LanguageInstance) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLanguageInstanceWithLanguage creates a new LanguageInstance.
+func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguage:"), objref.IDOf(language))
+	return languageInstanceAdopt(_id)
+}
+
+// WithDefaultTarget sets the property and returns the receiver so calls can be chained.
+func (x *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
+	return x
+}
+
+// RichTextFromDescriptor wraps the corresponding Objective-C method.
+func (x *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
+	return obj.Wrap(_r)
+}
+
+// Language wraps the corresponding Objective-C method.
+func (x *LanguageInstance) Language() *Language {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	return LanguageFromID(_r)
+}
+
+// DefaultTarget wraps the corresponding Objective-C method.
+func (x *LanguageInstance) DefaultTarget() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultTarget"))
+	return obj.Wrap(_r)
+}
+
+// SetDefaultTarget wraps the corresponding Objective-C method.
+func (x *LanguageInstance) SetDefaultTarget(defaultTarget obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
 }
 
 // LanguageInstanceable is the interface implemented by [LanguageInstance], for mocking and DI.
 type LanguageInstanceable interface {
-	Unwrap() *raw.OSALanguageInstance
-	WithDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) *LanguageInstance
-	RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString
+	obj.Object
+	WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance
+	RichTextFromDescriptor(descriptor obj.Object) obj.Object
 	Language() *Language
-	ComponentInstance() *carboncore.ComponentInstanceRecord
-	DefaultTarget() *foundation.NSAppleEventDescriptor
-	SetDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor)
+	DefaultTarget() obj.Object
+	SetDefaultTarget(defaultTarget obj.Object)
 }
 
 var _ LanguageInstanceable = (*LanguageInstance)(nil)

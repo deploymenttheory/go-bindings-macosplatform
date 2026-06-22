@@ -5,112 +5,126 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A pass with a credential that the device stores in a certified payment information chip.
+// SecureElementPass is an idiomatic wrapper over the Objective-C class PKSecureElementPass.
 //
-// SecureElementPass wraps [raw.PKSecureElementPass] with a fluent Go API.
+// SecureElementPass is an abstract base — you do not construct it directly. Construct one of [PaymentPass] and pass it where a SecureElementPass is accepted.
+//
+// A pass with a credential that the device stores in a certified payment information chip.
 type SecureElementPass struct {
-	inner *raw.PKSecureElementPass
+	Pass
 }
 
-// Unwrap returns the underlying [raw.PKSecureElementPass].
-func (x *SecureElementPass) Unwrap() *raw.PKSecureElementPass { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SecureElementPass) ID() objc.ID { return x.inner.Ptr() }
-
-// SecureElementPassFromID adopts an existing object pointer as a SecureElementPass (nil for 0).
+// SecureElementPassFromID adopts an existing Objective-C object as a SecureElementPass
+// (nil for 0), retaining it and registering a release finalizer.
 func SecureElementPassFromID(id objc.ID) *SecureElementPass {
 	if id == 0 {
 		return nil
 	}
-	return &SecureElementPass{inner: raw.PKSecureElementPassFromID(id)}
+	x := &SecureElementPass{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSecureElementPass creates a new [SecureElementPass].
-func NewSecureElementPass() *SecureElementPass {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKSecureElementPass")), objc.RegisterName("new"))
-	return &SecureElementPass{inner: raw.PKSecureElementPassFromID(_id)}
+// secureElementPassAdopt wraps an Objective-C object that this code just created as a
+// SecureElementPass (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func secureElementPassAdopt(id objc.ID) *SecureElementPass {
+	if id == 0 {
+		return nil
+	}
+	x := &SecureElementPass{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// PrimaryAccountIdentifier calls the underlying PrimaryAccountIdentifier.
+// PrimaryAccountIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PrimaryAccountIdentifier() string {
-	_r := x.inner.PrimaryAccountIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PrimaryAccountNumberSuffix calls the underlying PrimaryAccountNumberSuffix.
+// PrimaryAccountNumberSuffix wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
-	_r := x.inner.PrimaryAccountNumberSuffix()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryAccountNumberSuffix"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+// DeviceAccountIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DeviceAccountIdentifier() string {
-	_r := x.inner.DeviceAccountIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DeviceAccountNumberSuffix calls the underlying DeviceAccountNumberSuffix.
+// DeviceAccountNumberSuffix wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
-	_r := x.inner.DeviceAccountNumberSuffix()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountNumberSuffix"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PassActivationState calls the underlying PassActivationState.
-func (x *SecureElementPass) PassActivationState() PKSecureElementPassActivationState {
-	return PKSecureElementPassActivationState(x.inner.PassActivationState())
+// PassActivationState wraps the corresponding Objective-C method.
+func (x *SecureElementPass) PassActivationState() SecureElementPassActivationState {
+	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(x), objc.RegisterName("passActivationState"))
+	return _r
 }
 
-// DevicePassIdentifier calls the underlying DevicePassIdentifier.
+// DevicePassIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) DevicePassIdentifier() string {
-	_r := x.inner.DevicePassIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devicePassIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PairedTerminalIdentifier calls the underlying PairedTerminalIdentifier.
+// PairedTerminalIdentifier wraps the corresponding Objective-C method.
 func (x *SecureElementPass) PairedTerminalIdentifier() string {
-	_r := x.inner.PairedTerminalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pairedTerminalIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *SecureElementPass) asSecureElementPass() *raw.PKSecureElementPass { return x.inner }
-
-func (x *SecureElementPass) asPass() *raw.PKPass { return &x.inner.PKPass }
 
 // SecureElementPassable is the interface implemented by [SecureElementPass], for mocking and DI.
 type SecureElementPassable interface {
-	Unwrap() *raw.PKSecureElementPass
+	obj.Object
 	PrimaryAccountIdentifier() string
 	PrimaryAccountNumberSuffix() string
 	DeviceAccountIdentifier() string
 	DeviceAccountNumberSuffix() string
-	PassActivationState() PKSecureElementPassActivationState
+	PassActivationState() SecureElementPassActivationState
 	DevicePassIdentifier() string
 	PairedTerminalIdentifier() string
 }
 
 var _ SecureElementPassable = (*SecureElementPass)(nil)
+
+// isSecureElementPass marks SecureElementPass — and, by embedding promotion, its
+// subclasses — as a member of the SecureElementPass hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *SecureElementPass) isSecureElementPass() {}
+
+var _ SecureElementPassProvider = (*SecureElementPass)(nil)
+
+var _ PassProvider = (*SecureElementPass)(nil)

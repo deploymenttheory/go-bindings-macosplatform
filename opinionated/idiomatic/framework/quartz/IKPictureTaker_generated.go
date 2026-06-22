@@ -5,113 +5,114 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.
+// IKPictureTaker is an idiomatic wrapper over the Objective-C class IKPictureTaker.
 //
-// IKPictureTaker wraps [raw.IKPictureTaker] with a fluent Go API.
+// The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.
 type IKPictureTaker struct {
-	inner *raw.IKPictureTaker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKPictureTaker].
-func (x *IKPictureTaker) Unwrap() *raw.IKPictureTaker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKPictureTaker) ID() objc.ID { return x.inner.Ptr() }
-
-// IKPictureTakerFromID adopts an existing object pointer as a IKPictureTaker (nil for 0).
+// IKPictureTakerFromID adopts an existing Objective-C object as a IKPictureTaker
+// (nil for 0), retaining it and registering a release finalizer.
 func IKPictureTakerFromID(id objc.ID) *IKPictureTaker {
 	if id == 0 {
 		return nil
 	}
-	return &IKPictureTaker{inner: raw.IKPictureTakerFromID(id)}
+	x := &IKPictureTaker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIKPictureTaker creates a new [IKPictureTaker].
+// iKPictureTakerAdopt wraps an Objective-C object that this code just created as a
+// IKPictureTaker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKPictureTakerAdopt(id objc.ID) *IKPictureTaker {
+	if id == 0 {
+		return nil
+	}
+	x := &IKPictureTaker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKPictureTaker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKPictureTaker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKPictureTaker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IKPictureTaker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIKPictureTaker creates a new IKPictureTaker.
 func NewIKPictureTaker() *IKPictureTaker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKPictureTaker")), objc.RegisterName("new"))
-	return &IKPictureTaker{inner: raw.IKPictureTakerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKPictureTaker")), objc.RegisterName("new"))
+	return iKPictureTakerAdopt(_id)
 }
 
-// Opens a modal picture taker dialog.
-//
-// RunModal calls the underlying RunModal.
+// RunModal opens a modal picture taker dialog.
 func (x *IKPictureTaker) RunModal() int {
-	return x.inner.RunModal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
-// Opens a picture taker pane.
-//
-// BeginPictureTakerWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerWithDelegateDidEndSelectorContextInfo.
-func (x *IKPictureTaker) BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate, didEndSelector, contextInfo)
+// SetInputImage set the image input for the picture taker.
+func (x *IKPictureTaker) SetInputImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 }
 
-// Opens a picture taker as a sheet whose parent is the specified window.
-//
-// BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo.
-func (x *IKPictureTaker) BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow, delegate, didEndSelector, contextInfo)
+// InputImage returns the input image associated with the picture taker.
+func (x *IKPictureTaker) InputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImage"))
+	return obj.Wrap(_r)
 }
 
-// Displays the Open Recent popup menu associated with the picture taker.
-//
-// PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo calls the underlying PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo.
-func (x *IKPictureTaker) PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView, delegate, didEndSelector, contextInfo)
+// OutputImage returns the edited image.
+func (x *IKPictureTaker) OutputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
+	return obj.Wrap(_r)
 }
 
-// Set the image input for the picture taker.
-//
-// SetInputImage calls the underlying SetInputImage.
-func (x *IKPictureTaker) SetInputImage(image *appkit.NSImage) {
-	x.inner.SetInputImage(image)
-}
-
-// Returns the input image associated with the picture taker.
-//
-// InputImage calls the underlying InputImage.
-func (x *IKPictureTaker) InputImage() *appkit.NSImage {
-	return x.inner.InputImage()
-}
-
-// Returns the edited image.
-//
-// OutputImage calls the underlying OutputImage.
-func (x *IKPictureTaker) OutputImage() *appkit.NSImage {
-	return x.inner.OutputImage()
-}
-
-// Controls whether the receiver enables video mirroring during snapshots.
-//
-// SetMirroring calls the underlying SetMirroring.
+// SetMirroring controls whether the receiver enables video mirroring during snapshots.
 func (x *IKPictureTaker) SetMirroring(b bool) {
-	x.inner.SetMirroring(b)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMirroring:"), b)
 }
 
-// Returns whether video mirroring is enabled during snapshots.
-//
-// Mirroring calls the underlying Mirroring.
+// Mirroring returns whether video mirroring is enabled during snapshots.
 func (x *IKPictureTaker) Mirroring() bool {
-	return x.inner.Mirroring()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mirroring"))
+	return _r
 }
 
 // IKPictureTakerable is the interface implemented by [IKPictureTaker], for mocking and DI.
 type IKPictureTakerable interface {
-	Unwrap() *raw.IKPictureTaker
+	obj.Object
 	RunModal() int
-	BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	SetInputImage(image *appkit.NSImage)
-	InputImage() *appkit.NSImage
-	OutputImage() *appkit.NSImage
+	SetInputImage(image obj.Object)
+	InputImage() obj.Object
+	OutputImage() obj.Object
 	SetMirroring(b bool)
 	Mirroring() bool
 }

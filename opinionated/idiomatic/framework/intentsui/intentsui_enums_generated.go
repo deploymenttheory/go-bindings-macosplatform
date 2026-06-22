@@ -9,36 +9,38 @@ import (
 )
 
 // The styles for the Add to Siri button.
-type INUIAddVoiceShortcutButtonStyle uint64
+type AddVoiceShortcutButtonStyle uint64
 
 const (
 	// A button with a white background.
-	INUIAddVoiceShortcutButtonStyleWhite INUIAddVoiceShortcutButtonStyle = 0
+	AddVoiceShortcutButtonStyleWhite AddVoiceShortcutButtonStyle = 0
 	// A button with a white background, and a border outlining the button.
-	INUIAddVoiceShortcutButtonStyleWhiteOutline INUIAddVoiceShortcutButtonStyle = 1
+	AddVoiceShortcutButtonStyleWhiteOutline AddVoiceShortcutButtonStyle = 1
 	// A button with a black background.
-	INUIAddVoiceShortcutButtonStyleBlack INUIAddVoiceShortcutButtonStyle = 2
+	AddVoiceShortcutButtonStyleBlack AddVoiceShortcutButtonStyle = 2
 	// A button with a black background, and a border outlining the button.
-	INUIAddVoiceShortcutButtonStyleBlackOutline     INUIAddVoiceShortcutButtonStyle = 3
-	INUIAddVoiceShortcutButtonStyleAutomatic        INUIAddVoiceShortcutButtonStyle = 4
-	INUIAddVoiceShortcutButtonStyleAutomaticOutline INUIAddVoiceShortcutButtonStyle = 5
+	AddVoiceShortcutButtonStyleBlackOutline     AddVoiceShortcutButtonStyle = 3
+	AddVoiceShortcutButtonStyleAutomatic        AddVoiceShortcutButtonStyle = 4
+	AddVoiceShortcutButtonStyleAutomaticOutline AddVoiceShortcutButtonStyle = 5
 )
 
-func (e INUIAddVoiceShortcutButtonStyle) String() string {
+// String returns the AddVoiceShortcutButtonStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddVoiceShortcutButtonStyle) String() string {
 	switch e {
-	case INUIAddVoiceShortcutButtonStyleWhite:
-		return "INUIAddVoiceShortcutButtonStyleWhite"
-	case INUIAddVoiceShortcutButtonStyleWhiteOutline:
-		return "INUIAddVoiceShortcutButtonStyleWhiteOutline"
-	case INUIAddVoiceShortcutButtonStyleBlack:
-		return "INUIAddVoiceShortcutButtonStyleBlack"
-	case INUIAddVoiceShortcutButtonStyleBlackOutline:
-		return "INUIAddVoiceShortcutButtonStyleBlackOutline"
-	case INUIAddVoiceShortcutButtonStyleAutomatic:
-		return "INUIAddVoiceShortcutButtonStyleAutomatic"
-	case INUIAddVoiceShortcutButtonStyleAutomaticOutline:
-		return "INUIAddVoiceShortcutButtonStyleAutomaticOutline"
+	case AddVoiceShortcutButtonStyleWhite:
+		return "AddVoiceShortcutButtonStyleWhite"
+	case AddVoiceShortcutButtonStyleWhiteOutline:
+		return "AddVoiceShortcutButtonStyleWhiteOutline"
+	case AddVoiceShortcutButtonStyleBlack:
+		return "AddVoiceShortcutButtonStyleBlack"
+	case AddVoiceShortcutButtonStyleBlackOutline:
+		return "AddVoiceShortcutButtonStyleBlackOutline"
+	case AddVoiceShortcutButtonStyleAutomatic:
+		return "AddVoiceShortcutButtonStyleAutomatic"
+	case AddVoiceShortcutButtonStyleAutomaticOutline:
+		return "AddVoiceShortcutButtonStyleAutomaticOutline"
 	default:
-		return fmt.Sprintf("INUIAddVoiceShortcutButtonStyle(%d)", int64(e))
+		return fmt.Sprintf("AddVoiceShortcutButtonStyle(%d)", int64(e))
 	}
 }

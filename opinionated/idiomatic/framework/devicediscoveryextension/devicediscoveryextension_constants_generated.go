@@ -5,25 +5,19 @@
 package devicediscoveryextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicediscoveryextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// DDDeviceProtocolStringInvalid returns the string constant DDDeviceProtocolStringInvalid as an objc.ID, for use as a dictionary key or selector argument.
-func DDDeviceProtocolStringInvalid() objc.ID {
-	if _r := raw.DDDeviceProtocolStringInvalid(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// DDDeviceProtocolStringInvalid returns the string constant DDDeviceProtocolStringInvalid, for use as a dictionary key or argument.
+func DDDeviceProtocolStringInvalid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DDDeviceProtocolStringInvalid")))
 }
 
-// DDDeviceProtocolStringDIAL returns the string constant DDDeviceProtocolStringDIAL as an objc.ID, for use as a dictionary key or selector argument.
-func DDDeviceProtocolStringDIAL() objc.ID {
-	return purego.CFConstant(raw.DDDeviceProtocolStringDIAL())
+// DDDeviceProtocolStringDIAL returns the string constant DDDeviceProtocolStringDIAL, for use as a dictionary key or argument.
+func DDDeviceProtocolStringDIAL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("DDDeviceProtocolStringDIAL")))
 }
 
-// DDErrorDomain returns the string constant DDErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func DDErrorDomain() objc.ID {
-	return purego.CFConstant(raw.DDErrorDomain())
-}
+// DDErrorDomain returns the string constant DDErrorDomain, for use as a dictionary key or argument.
+func DDErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DDErrorDomain"))) }

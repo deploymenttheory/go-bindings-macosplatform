@@ -4,9 +4,11 @@
 
 package metadata
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metadata"
-)
-
-// MDQueryBatchingParams is a type alias for the raw MDQueryBatchingParams value-type struct.
-type MDQueryBatchingParams = raw.MDQueryBatchingParams
+type MDQueryBatchingParams struct {
+	First_max_num    uint
+	First_max_ms     uint
+	Progress_max_num uint
+	Progress_max_ms  uint
+	Update_max_num   uint
+	Update_max_ms    uint
+}

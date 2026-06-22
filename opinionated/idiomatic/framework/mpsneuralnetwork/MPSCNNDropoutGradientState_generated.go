@@ -5,52 +5,63 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNDropoutGradientState wraps [raw.MPSCNNDropoutGradientState] with a fluent Go API.
+// CNNDropoutGradientState is an idiomatic wrapper over the Objective-C class MPSCNNDropoutGradientState.
+//
+// It embeds [NNGradientState], promoting that type's methods.
 type CNNDropoutGradientState struct {
-	inner *raw.MPSCNNDropoutGradientState
+	NNGradientState
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDropoutGradientState].
-func (x *CNNDropoutGradientState) Unwrap() *raw.MPSCNNDropoutGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDropoutGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDropoutGradientStateFromID adopts an existing object pointer as a CNNDropoutGradientState (nil for 0).
+// CNNDropoutGradientStateFromID adopts an existing Objective-C object as a CNNDropoutGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDropoutGradientStateFromID(id objc.ID) *CNNDropoutGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDropoutGradientState{inner: raw.MPSCNNDropoutGradientStateFromID(id)}
+	x := &CNNDropoutGradientState{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNDropoutGradientState creates a new [CNNDropoutGradientState].
+// cNNDropoutGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNDropoutGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDropoutGradientStateAdopt(id objc.ID) *CNNDropoutGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDropoutGradientState{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNDropoutGradientState creates a new CNNDropoutGradientState.
 func NewCNNDropoutGradientState() *CNNDropoutGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropoutGradientState")), objc.RegisterName("new"))
-	return &CNNDropoutGradientState{inner: raw.MPSCNNDropoutGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientState")), objc.RegisterName("new"))
+	return cNNDropoutGradientStateAdopt(_id)
 }
 
-// @abstract   Mask data accessor method. @return     An autoreleased NSData object, containing the mask data. The mask data is populated in the -encode call, thus the contents are undefined until you -encode the filter. Use for debugging purposes only. In order to gaurantee that the mask data is correctly synchronized for CPU side access, it is the application's responsibility to call the [gradientState synchronizeOnCommandBuffer:] method before accessing the mask data.
-//
-// MaskData calls the underlying MaskData.
-func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
-	return x.inner.MaskData()
-}
-
-func (x *CNNDropoutGradientState) asNNGradientState() *raw.MPSNNGradientState {
-	return &x.inner.MPSNNGradientState
+// MaskData mask data accessor method.
+func (x *CNNDropoutGradientState) MaskData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maskData"))
+	return obj.Wrap(_r)
 }
 
 // CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
 type CNNDropoutGradientStateable interface {
-	Unwrap() *raw.MPSCNNDropoutGradientState
-	MaskData() *foundation.NSData
+	obj.Object
+	MaskData() obj.Object
 }
 
 var _ CNNDropoutGradientStateable = (*CNNDropoutGradientState)(nil)
+
+var _ NNGradientStateProvider = (*CNNDropoutGradientState)(nil)

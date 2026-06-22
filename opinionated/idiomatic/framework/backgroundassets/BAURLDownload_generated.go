@@ -5,74 +5,80 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a remote asset to download.
+// URLDownload is an idiomatic wrapper over the Objective-C class BAURLDownload.
 //
-// URLDownload wraps [raw.BAURLDownload] with a fluent Go API.
+// It embeds [Download], promoting that type's methods.
+//
+// An object that represents a remote asset to download.
 type URLDownload struct {
-	inner *raw.BAURLDownload
+	Download
 }
 
-// Unwrap returns the underlying [raw.BAURLDownload].
-func (x *URLDownload) Unwrap() *raw.BAURLDownload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLDownload) ID() objc.ID { return x.inner.Ptr() }
-
-// URLDownloadFromID adopts an existing object pointer as a URLDownload (nil for 0).
+// URLDownloadFromID adopts an existing Objective-C object as a URLDownload
+// (nil for 0), retaining it and registering a release finalizer.
 func URLDownloadFromID(id objc.ID) *URLDownload {
 	if id == 0 {
 		return nil
 	}
-	return &URLDownload{inner: raw.BAURLDownloadFromID(id)}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param fileSize The size of the file to download. This field must be accurate in order to show the user accurate progress during app installation. If the size does not match the file being downloaded, then the download will fail. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download.
-//
-// NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier creates a new [URLDownload].
-func NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier(identifier string, request *foundation.NSURLRequest, fileSize uint, applicationGroupIdentifier string) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:fileSize:applicationGroupIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), request.Ptr(), fileSize, foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr())
-	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
+// uRLDownloadAdopt wraps an Objective-C object that this code just created as a
+// URLDownload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLDownloadAdopt(id objc.ID) *URLDownload {
+	if id == 0 {
+		return nil
+	}
+	x := &URLDownload{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param essential Whether the download is essential. See @c BADownload.isEssential. Default is false. @param fileSize The size of the file to download. This field must be accurate in order to show the user accurate progress during app installation. If the size does not match the file being downloaded, then the download will fail. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download. @param priority A priority between @c BADownloaderPriorityMin - @c BADownloaderPriorityMax which is used to order the downloads for this process. It is recommended to use  @c BADownloaderPriorityDefault if download priority does not matter.
-//
-// NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority creates a new [URLDownload].
-func NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority(identifier string, request *foundation.NSURLRequest, essential bool, fileSize uint, applicationGroupIdentifier string, priority int) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:essential:fileSize:applicationGroupIdentifier:priority:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), request.Ptr(), essential, fileSize, foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), priority)
-	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
+// NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier constructs a download object to represent the download of a asset located inside of the provided
+func NewURLDownloadWithIdentifierRequestFileSizeApplicationGroupIdentifier(identifier string, request obj.Object, fileSize int, applicationGroupIdentifier string) *URLDownload {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:fileSize:applicationGroupIdentifier:"), purego.NSString(identifier), objref.IDOf(request), fileSize, purego.NSString(applicationGroupIdentifier))
+	return uRLDownloadAdopt(_id)
 }
 
-// Creates a download that uses the specified identifier and App Group.
-//
-// NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier creates a new [URLDownload].
-func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier string, request *foundation.NSURLRequest, applicationGroupIdentifier string) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), request.Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr())
-	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
+// NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority constructs a download object to represent the download of a asset located inside of the provided
+func NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentifierPriority(identifier string, request obj.Object, essential bool, fileSize int, applicationGroupIdentifier string, priority int) *URLDownload {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:essential:fileSize:applicationGroupIdentifier:priority:"), purego.NSString(identifier), objref.IDOf(request), essential, fileSize, purego.NSString(applicationGroupIdentifier), priority)
+	return uRLDownloadAdopt(_id)
 }
 
-// Creates a prioritized download that uses the specified identifier and App Group.
-//
-// NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority creates a new [URLDownload].
-func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(identifier string, request *foundation.NSURLRequest, applicationGroupIdentifier string, priority int) *URLDownload {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAURLDownload")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:priority:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), request.Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), priority)
-	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
+// NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier creates a download that uses the specified identifier and App Group.
+func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier string, request obj.Object, applicationGroupIdentifier string) *URLDownload {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:"), purego.NSString(identifier), objref.IDOf(request), purego.NSString(applicationGroupIdentifier))
+	return uRLDownloadAdopt(_id)
 }
 
-func (x *URLDownload) asDownload() *raw.BADownload { return &x.inner.BADownload }
+// NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority creates a prioritized download that uses the specified identifier and App Group.
+func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(identifier string, request obj.Object, applicationGroupIdentifier string, priority int) *URLDownload {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAURLDownload")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:request:applicationGroupIdentifier:priority:"), purego.NSString(identifier), objref.IDOf(request), purego.NSString(applicationGroupIdentifier), priority)
+	return uRLDownloadAdopt(_id)
+}
 
 // URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
 type URLDownloadable interface {
-	Unwrap() *raw.BAURLDownload
+	obj.Object
 }
 
 var _ URLDownloadable = (*URLDownload)(nil)
+
+var _ DownloadProvider = (*URLDownload)(nil)

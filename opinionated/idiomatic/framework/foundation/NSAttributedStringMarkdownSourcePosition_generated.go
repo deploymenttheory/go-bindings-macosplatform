@@ -5,84 +5,108 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The position of attributed string text in its original Markdown source string.
+// AttributedStringMarkdownSourcePosition is an idiomatic wrapper over the Objective-C class NSAttributedStringMarkdownSourcePosition.
 //
-// AttributedStringMarkdownSourcePosition wraps [raw.NSAttributedStringMarkdownSourcePosition] with a fluent Go API.
+// The position of attributed string text in its original Markdown source string.
 type AttributedStringMarkdownSourcePosition struct {
-	inner *raw.NSAttributedStringMarkdownSourcePosition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAttributedStringMarkdownSourcePosition].
-func (x *AttributedStringMarkdownSourcePosition) Unwrap() *raw.NSAttributedStringMarkdownSourcePosition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributedStringMarkdownSourcePosition) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributedStringMarkdownSourcePositionFromID adopts an existing object pointer as a AttributedStringMarkdownSourcePosition (nil for 0).
+// AttributedStringMarkdownSourcePositionFromID adopts an existing Objective-C object as a AttributedStringMarkdownSourcePosition
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributedStringMarkdownSourcePositionFromID(id objc.ID) *AttributedStringMarkdownSourcePosition {
 	if id == 0 {
 		return nil
 	}
-	return &AttributedStringMarkdownSourcePosition{inner: raw.NSAttributedStringMarkdownSourcePositionFromID(id)}
-}
-
-// Creates a Markdown source position instance from its start and end line and column.
-//
-// NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn creates a new [AttributedStringMarkdownSourcePosition].
-func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn(startLine int, startColumn int, endLine int, endColumn int) *AttributedStringMarkdownSourcePosition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedStringMarkdownSourcePosition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartLine:startColumn:endLine:endColumn:"), startLine, startColumn, endLine, endColumn)
-	return &AttributedStringMarkdownSourcePosition{inner: raw.NSAttributedStringMarkdownSourcePositionFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownSourcePosition {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &AttributedStringMarkdownSourcePosition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a range indicating the source portion within a Markdown string.
-//
-// RangeInString calls the underlying RangeInString.
-func (x *AttributedStringMarkdownSourcePosition) RangeInString(string_ string) raw.NSRange {
-	return x.inner.RangeInString(foundation.NSStringStringWithUTF8String(string_))
+// attributedStringMarkdownSourcePositionAdopt wraps an Objective-C object that this code just created as a
+// AttributedStringMarkdownSourcePosition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributedStringMarkdownSourcePositionAdopt(id objc.ID) *AttributedStringMarkdownSourcePosition {
+	if id == 0 {
+		return nil
+	}
+	x := &AttributedStringMarkdownSourcePosition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// StartLine calls the underlying StartLine.
+// Description returns the object's -description text.
+func (x *AttributedStringMarkdownSourcePosition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributedStringMarkdownSourcePosition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributedStringMarkdownSourcePosition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AttributedStringMarkdownSourcePosition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn creates a Markdown source position instance from its start and end line and column.
+func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn(startLine int, startColumn int, endLine int, endColumn int) *AttributedStringMarkdownSourcePosition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedStringMarkdownSourcePosition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartLine:startColumn:endLine:endColumn:"), startLine, startColumn, endLine, endColumn)
+	return attributedStringMarkdownSourcePositionAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// StartLine wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownSourcePosition) StartLine() int {
-	return x.inner.StartLine()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startLine"))
+	return _r
 }
 
-// StartColumn calls the underlying StartColumn.
+// StartColumn wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownSourcePosition) StartColumn() int {
-	return x.inner.StartColumn()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startColumn"))
+	return _r
 }
 
-// EndLine calls the underlying EndLine.
+// EndLine wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownSourcePosition) EndLine() int {
-	return x.inner.EndLine()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endLine"))
+	return _r
 }
 
-// EndColumn calls the underlying EndColumn.
+// EndColumn wraps the corresponding Objective-C method.
 func (x *AttributedStringMarkdownSourcePosition) EndColumn() int {
-	return x.inner.EndColumn()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endColumn"))
+	return _r
 }
-
-func (x *AttributedStringMarkdownSourcePosition) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AttributedStringMarkdownSourcePositionable is the interface implemented by [AttributedStringMarkdownSourcePosition], for mocking and DI.
 type AttributedStringMarkdownSourcePositionable interface {
-	Unwrap() *raw.NSAttributedStringMarkdownSourcePosition
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownSourcePosition
-	RangeInString(string_ string) raw.NSRange
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition
 	StartLine() int
 	StartColumn() int
 	EndLine() int

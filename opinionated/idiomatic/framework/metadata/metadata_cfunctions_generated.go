@@ -5,294 +5,540 @@
 package metadata
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accelerate"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metadata"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MDCopyLabelKinds calls [raw.MDCopyLabelKinds] (C function MDCopyLabelKinds).
-func MDCopyLabelKinds() unsafe.Pointer {
-	return raw.MDCopyLabelKinds()
+var _fnMDCopyLabelKinds func() objc.ID
+
+// MDCopyLabelKinds calls the Metadata framework function MDCopyLabelKinds.
+func MDCopyLabelKinds() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDCopyLabelKinds == nil {
+		ebipurego.RegisterLibFunc(&_fnMDCopyLabelKinds, _lib, "MDCopyLabelKinds")
+	}
+	_ret := _fnMDCopyLabelKinds()
+	return obj.Wrap(_ret)
 }
 
-// MDCopyLabelWithUUID calls [raw.MDCopyLabelWithUUID] (C function MDCopyLabelWithUUID).
-func MDCopyLabelWithUUID(labelUUID unsafe.Pointer) unsafe.Pointer {
-	return raw.MDCopyLabelWithUUID(labelUUID)
+var _fnMDCopyLabelWithUUID func(objc.ID) objc.ID
+
+// MDCopyLabelWithUUID calls the Metadata framework function MDCopyLabelWithUUID.
+func MDCopyLabelWithUUID(labelUUID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDCopyLabelWithUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnMDCopyLabelWithUUID, _lib, "MDCopyLabelWithUUID")
+	}
+	_ret := _fnMDCopyLabelWithUUID(objref.IDOf(labelUUID))
+	return obj.Wrap(_ret)
 }
 
-// MDCopyLabelsMatchingExpression calls [raw.MDCopyLabelsMatchingExpression] (C function MDCopyLabelsMatchingExpression).
-func MDCopyLabelsMatchingExpression(simpleQueryString unsafe.Pointer) unsafe.Pointer {
-	return raw.MDCopyLabelsMatchingExpression(simpleQueryString)
+var _fnMDCopyLabelsMatchingExpression func(objc.ID) objc.ID
+
+// MDCopyLabelsMatchingExpression calls the Metadata framework function MDCopyLabelsMatchingExpression.
+func MDCopyLabelsMatchingExpression(simpleQueryString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDCopyLabelsMatchingExpression == nil {
+		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsMatchingExpression, _lib, "MDCopyLabelsMatchingExpression")
+	}
+	_ret := _fnMDCopyLabelsMatchingExpression(objref.IDOf(simpleQueryString))
+	return obj.Wrap(_ret)
 }
 
-// MDCopyLabelsWithKind calls [raw.MDCopyLabelsWithKind] (C function MDCopyLabelsWithKind).
-func MDCopyLabelsWithKind(kind unsafe.Pointer) unsafe.Pointer {
-	return raw.MDCopyLabelsWithKind(kind)
+var _fnMDCopyLabelsWithKind func(objc.ID) objc.ID
+
+// MDCopyLabelsWithKind calls the Metadata framework function MDCopyLabelsWithKind.
+func MDCopyLabelsWithKind(kind obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDCopyLabelsWithKind == nil {
+		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsWithKind, _lib, "MDCopyLabelsWithKind")
+	}
+	_ret := _fnMDCopyLabelsWithKind(objref.IDOf(kind))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCopyAttribute calls [raw.MDItemCopyAttribute] (C function MDItemCopyAttribute).
-func MDItemCopyAttribute(item unsafe.Pointer, name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCopyAttribute(item, name)
+var _fnMDItemCopyAttribute func(objc.ID, objc.ID) objc.ID
+
+// MDItemCopyAttribute calls the Metadata framework function MDItemCopyAttribute.
+func MDItemCopyAttribute(item obj.Object, name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCopyAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttribute, _lib, "MDItemCopyAttribute")
+	}
+	_ret := _fnMDItemCopyAttribute(objref.IDOf(item), objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCopyAttributeNames calls [raw.MDItemCopyAttributeNames] (C function MDItemCopyAttributeNames).
-func MDItemCopyAttributeNames(item unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCopyAttributeNames(item)
+var _fnMDItemCopyAttributeNames func(objc.ID) objc.ID
+
+// MDItemCopyAttributeNames calls the Metadata framework function MDItemCopyAttributeNames.
+func MDItemCopyAttributeNames(item obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCopyAttributeNames == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributeNames, _lib, "MDItemCopyAttributeNames")
+	}
+	_ret := _fnMDItemCopyAttributeNames(objref.IDOf(item))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCopyAttributes calls [raw.MDItemCopyAttributes] (C function MDItemCopyAttributes).
-func MDItemCopyAttributes(item unsafe.Pointer, names unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCopyAttributes(item, names)
+var _fnMDItemCopyAttributes func(objc.ID, objc.ID) objc.ID
+
+// MDItemCopyAttributes calls the Metadata framework function MDItemCopyAttributes.
+func MDItemCopyAttributes(item obj.Object, names obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCopyAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributes, _lib, "MDItemCopyAttributes")
+	}
+	_ret := _fnMDItemCopyAttributes(objref.IDOf(item), objref.IDOf(names))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCopyLabels calls [raw.MDItemCopyLabels] (C function MDItemCopyLabels).
-func MDItemCopyLabels(item unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCopyLabels(item)
+var _fnMDItemCopyLabels func(objc.ID) objc.ID
+
+// MDItemCopyLabels calls the Metadata framework function MDItemCopyLabels.
+func MDItemCopyLabels(item obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCopyLabels == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCopyLabels, _lib, "MDItemCopyLabels")
+	}
+	_ret := _fnMDItemCopyLabels(objref.IDOf(item))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCreate calls [raw.MDItemCreate] (C function MDItemCreate).
-func MDItemCreate(allocator unsafe.Pointer, path unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCreate(allocator, path)
+var _fnMDItemCreate func(objc.ID, objc.ID) objc.ID
+
+// MDItemCreate calls the Metadata framework function MDItemCreate.
+func MDItemCreate(allocator obj.Object, path obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCreate, _lib, "MDItemCreate")
+	}
+	_ret := _fnMDItemCreate(objref.IDOf(allocator), objref.IDOf(path))
+	return obj.Wrap(_ret)
 }
 
-// MDItemCreateWithURL calls [raw.MDItemCreateWithURL] (C function MDItemCreateWithURL).
-func MDItemCreateWithURL(allocator unsafe.Pointer, url unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemCreateWithURL(allocator, url)
+var _fnMDItemCreateWithURL func(objc.ID, objc.ID) objc.ID
+
+// MDItemCreateWithURL calls the Metadata framework function MDItemCreateWithURL.
+func MDItemCreateWithURL(allocator obj.Object, url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemCreateWithURL, _lib, "MDItemCreateWithURL")
+	}
+	_ret := _fnMDItemCreateWithURL(objref.IDOf(allocator), objref.IDOf(url))
+	return obj.Wrap(_ret)
 }
 
-// MDItemGetCacheFileDescriptors calls [raw.MDItemGetCacheFileDescriptors] (C function MDItemGetCacheFileDescriptors).
-func MDItemGetCacheFileDescriptors(items unsafe.Pointer, completionHandler func(unsafe.Pointer)) {
-	raw.MDItemGetCacheFileDescriptors(items, completionHandler)
+var _fnMDItemGetTypeID func() int
+
+// MDItemGetTypeID calls the Metadata framework function MDItemGetTypeID.
+func MDItemGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemGetTypeID, _lib, "MDItemGetTypeID")
+	}
+	return _fnMDItemGetTypeID()
 }
 
-// MDItemGetTypeID calls [raw.MDItemGetTypeID] (C function MDItemGetTypeID).
-func MDItemGetTypeID() uint {
-	return raw.MDItemGetTypeID()
+var _fnMDItemRemoveLabel func(objc.ID, objc.ID) uint8
+
+// MDItemRemoveLabel calls the Metadata framework function MDItemRemoveLabel.
+func MDItemRemoveLabel(item obj.Object, label obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemRemoveLabel == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemRemoveLabel, _lib, "MDItemRemoveLabel")
+	}
+	return _fnMDItemRemoveLabel(objref.IDOf(item), objref.IDOf(label))
 }
 
-// MDItemRemoveLabel calls [raw.MDItemRemoveLabel] (C function MDItemRemoveLabel).
-func MDItemRemoveLabel(item unsafe.Pointer, label unsafe.Pointer) uint8 {
-	return raw.MDItemRemoveLabel(item, label)
+var _fnMDItemSetLabel func(objc.ID, objc.ID) uint8
+
+// MDItemSetLabel calls the Metadata framework function MDItemSetLabel.
+func MDItemSetLabel(item obj.Object, label obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemSetLabel == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemSetLabel, _lib, "MDItemSetLabel")
+	}
+	return _fnMDItemSetLabel(objref.IDOf(item), objref.IDOf(label))
 }
 
-// MDItemSetLabel calls [raw.MDItemSetLabel] (C function MDItemSetLabel).
-func MDItemSetLabel(item unsafe.Pointer, label unsafe.Pointer) uint8 {
-	return raw.MDItemSetLabel(item, label)
+var _fnMDItemsCopyAttributes func(objc.ID, objc.ID) objc.ID
+
+// MDItemsCopyAttributes calls the Metadata framework function MDItemsCopyAttributes.
+func MDItemsCopyAttributes(items obj.Object, names obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemsCopyAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemsCopyAttributes, _lib, "MDItemsCopyAttributes")
+	}
+	_ret := _fnMDItemsCopyAttributes(objref.IDOf(items), objref.IDOf(names))
+	return obj.Wrap(_ret)
 }
 
-// MDItemsCopyAttributes calls [raw.MDItemsCopyAttributes] (C function MDItemsCopyAttributes).
-func MDItemsCopyAttributes(items unsafe.Pointer, names unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemsCopyAttributes(items, names)
+var _fnMDItemsCreateWithURLs func(objc.ID, objc.ID) objc.ID
+
+// MDItemsCreateWithURLs calls the Metadata framework function MDItemsCreateWithURLs.
+func MDItemsCreateWithURLs(allocator obj.Object, urls obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemsCreateWithURLs == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemsCreateWithURLs, _lib, "MDItemsCreateWithURLs")
+	}
+	_ret := _fnMDItemsCreateWithURLs(objref.IDOf(allocator), objref.IDOf(urls))
+	return obj.Wrap(_ret)
 }
 
-// MDItemsCreateWithURLs calls [raw.MDItemsCreateWithURLs] (C function MDItemsCreateWithURLs).
-func MDItemsCreateWithURLs(allocator unsafe.Pointer, urls unsafe.Pointer) unsafe.Pointer {
-	return raw.MDItemsCreateWithURLs(allocator, urls)
+var _fnMDLabelCopyAttribute func(objc.ID, objc.ID) objc.ID
+
+// MDLabelCopyAttribute calls the Metadata framework function MDLabelCopyAttribute.
+func MDLabelCopyAttribute(label obj.Object, name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelCopyAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttribute, _lib, "MDLabelCopyAttribute")
+	}
+	_ret := _fnMDLabelCopyAttribute(objref.IDOf(label), objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// MDLabelCopyAttribute calls [raw.MDLabelCopyAttribute] (C function MDLabelCopyAttribute).
-func MDLabelCopyAttribute(label unsafe.Pointer, name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDLabelCopyAttribute(label, name)
+var _fnMDLabelCopyAttributeName func(objc.ID) objc.ID
+
+// MDLabelCopyAttributeName calls the Metadata framework function MDLabelCopyAttributeName.
+func MDLabelCopyAttributeName(label obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelCopyAttributeName == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttributeName, _lib, "MDLabelCopyAttributeName")
+	}
+	_ret := _fnMDLabelCopyAttributeName(objref.IDOf(label))
+	return obj.Wrap(_ret)
 }
 
-// MDLabelCopyAttributeName calls [raw.MDLabelCopyAttributeName] (C function MDLabelCopyAttributeName).
-func MDLabelCopyAttributeName(label unsafe.Pointer) unsafe.Pointer {
-	return raw.MDLabelCopyAttributeName(label)
+var _fnMDLabelDelete func(objc.ID) uint8
+
+// MDLabelDelete calls the Metadata framework function MDLabelDelete.
+func MDLabelDelete(label obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelDelete, _lib, "MDLabelDelete")
+	}
+	return _fnMDLabelDelete(objref.IDOf(label))
 }
 
-// MDLabelCreate calls [raw.MDLabelCreate] (C function MDLabelCreate).
-func MDLabelCreate(allocator unsafe.Pointer, displayName unsafe.Pointer, kind unsafe.Pointer, domain accelerate.MDLabelDomain) unsafe.Pointer {
-	return raw.MDLabelCreate(allocator, displayName, kind, domain)
+var _fnMDLabelGetTypeID func() int
+
+// MDLabelGetTypeID calls the Metadata framework function MDLabelGetTypeID.
+func MDLabelGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelGetTypeID, _lib, "MDLabelGetTypeID")
+	}
+	return _fnMDLabelGetTypeID()
 }
 
-// MDLabelDelete calls [raw.MDLabelDelete] (C function MDLabelDelete).
-func MDLabelDelete(label unsafe.Pointer) uint8 {
-	return raw.MDLabelDelete(label)
+var _fnMDLabelSetAttributes func(objc.ID, objc.ID) uint8
+
+// MDLabelSetAttributes calls the Metadata framework function MDLabelSetAttributes.
+func MDLabelSetAttributes(label obj.Object, attrs obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelSetAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelSetAttributes, _lib, "MDLabelSetAttributes")
+	}
+	return _fnMDLabelSetAttributes(objref.IDOf(label), objref.IDOf(attrs))
 }
 
-// MDLabelGetTypeID calls [raw.MDLabelGetTypeID] (C function MDLabelGetTypeID).
-func MDLabelGetTypeID() uint {
-	return raw.MDLabelGetTypeID()
+var _fnMDQueryCopyQueryString func(objc.ID) objc.ID
+
+// MDQueryCopyQueryString calls the Metadata framework function MDQueryCopyQueryString.
+func MDQueryCopyQueryString(query obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCopyQueryString == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCopyQueryString, _lib, "MDQueryCopyQueryString")
+	}
+	_ret := _fnMDQueryCopyQueryString(objref.IDOf(query))
+	return obj.Wrap(_ret)
 }
 
-// MDLabelSetAttributes calls [raw.MDLabelSetAttributes] (C function MDLabelSetAttributes).
-func MDLabelSetAttributes(label unsafe.Pointer, attrs unsafe.Pointer) uint8 {
-	return raw.MDLabelSetAttributes(label, attrs)
+var _fnMDQueryCopySortingAttributes func(objc.ID) objc.ID
+
+// MDQueryCopySortingAttributes calls the Metadata framework function MDQueryCopySortingAttributes.
+func MDQueryCopySortingAttributes(query obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCopySortingAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCopySortingAttributes, _lib, "MDQueryCopySortingAttributes")
+	}
+	_ret := _fnMDQueryCopySortingAttributes(objref.IDOf(query))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCopyQueryString calls [raw.MDQueryCopyQueryString] (C function MDQueryCopyQueryString).
-func MDQueryCopyQueryString(query unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCopyQueryString(query)
+var _fnMDQueryCopyValueListAttributes func(objc.ID) objc.ID
+
+// MDQueryCopyValueListAttributes calls the Metadata framework function MDQueryCopyValueListAttributes.
+func MDQueryCopyValueListAttributes(query obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCopyValueListAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValueListAttributes, _lib, "MDQueryCopyValueListAttributes")
+	}
+	_ret := _fnMDQueryCopyValueListAttributes(objref.IDOf(query))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCopySortingAttributes calls [raw.MDQueryCopySortingAttributes] (C function MDQueryCopySortingAttributes).
-func MDQueryCopySortingAttributes(query unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCopySortingAttributes(query)
+var _fnMDQueryCopyValuesOfAttribute func(objc.ID, objc.ID) objc.ID
+
+// MDQueryCopyValuesOfAttribute calls the Metadata framework function MDQueryCopyValuesOfAttribute.
+func MDQueryCopyValuesOfAttribute(query obj.Object, name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCopyValuesOfAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValuesOfAttribute, _lib, "MDQueryCopyValuesOfAttribute")
+	}
+	_ret := _fnMDQueryCopyValuesOfAttribute(objref.IDOf(query), objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCopyValueListAttributes calls [raw.MDQueryCopyValueListAttributes] (C function MDQueryCopyValueListAttributes).
-func MDQueryCopyValueListAttributes(query unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCopyValueListAttributes(query)
+var _fnMDQueryCreate func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// MDQueryCreate calls the Metadata framework function MDQueryCreate.
+func MDQueryCreate(allocator obj.Object, queryString obj.Object, valueListAttrs obj.Object, sortingAttrs obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCreate, _lib, "MDQueryCreate")
+	}
+	_ret := _fnMDQueryCreate(objref.IDOf(allocator), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCopyValuesOfAttribute calls [raw.MDQueryCopyValuesOfAttribute] (C function MDQueryCopyValuesOfAttribute).
-func MDQueryCopyValuesOfAttribute(query unsafe.Pointer, name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCopyValuesOfAttribute(query, name)
+var _fnMDQueryCreateForItems func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// MDQueryCreateForItems calls the Metadata framework function MDQueryCreateForItems.
+func MDQueryCreateForItems(allocator obj.Object, queryString obj.Object, valueListAttrs obj.Object, sortingAttrs obj.Object, items obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCreateForItems == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCreateForItems, _lib, "MDQueryCreateForItems")
+	}
+	_ret := _fnMDQueryCreateForItems(objref.IDOf(allocator), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs), objref.IDOf(items))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCreate calls [raw.MDQueryCreate] (C function MDQueryCreate).
-func MDQueryCreate(allocator unsafe.Pointer, queryString unsafe.Pointer, valueListAttrs unsafe.Pointer, sortingAttrs unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCreate(allocator, queryString, valueListAttrs, sortingAttrs)
+var _fnMDQueryCreateSubset func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// MDQueryCreateSubset calls the Metadata framework function MDQueryCreateSubset.
+func MDQueryCreateSubset(allocator obj.Object, query obj.Object, queryString obj.Object, valueListAttrs obj.Object, sortingAttrs obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryCreateSubset == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryCreateSubset, _lib, "MDQueryCreateSubset")
+	}
+	_ret := _fnMDQueryCreateSubset(objref.IDOf(allocator), objref.IDOf(query), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs))
+	return obj.Wrap(_ret)
 }
 
-// MDQueryCreateForItems calls [raw.MDQueryCreateForItems] (C function MDQueryCreateForItems).
-func MDQueryCreateForItems(allocator unsafe.Pointer, queryString unsafe.Pointer, valueListAttrs unsafe.Pointer, sortingAttrs unsafe.Pointer, items unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCreateForItems(allocator, queryString, valueListAttrs, sortingAttrs, items)
+var _fnMDQueryDisableUpdates func(objc.ID)
+
+// MDQueryDisableUpdates calls the Metadata framework function MDQueryDisableUpdates.
+func MDQueryDisableUpdates(query obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryDisableUpdates == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryDisableUpdates, _lib, "MDQueryDisableUpdates")
+	}
+	_fnMDQueryDisableUpdates(objref.IDOf(query))
 }
 
-// MDQueryCreateSubset calls [raw.MDQueryCreateSubset] (C function MDQueryCreateSubset).
-func MDQueryCreateSubset(allocator unsafe.Pointer, query unsafe.Pointer, queryString unsafe.Pointer, valueListAttrs unsafe.Pointer, sortingAttrs unsafe.Pointer) unsafe.Pointer {
-	return raw.MDQueryCreateSubset(allocator, query, queryString, valueListAttrs, sortingAttrs)
+var _fnMDQueryEnableUpdates func(objc.ID)
+
+// MDQueryEnableUpdates calls the Metadata framework function MDQueryEnableUpdates.
+func MDQueryEnableUpdates(query obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryEnableUpdates == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryEnableUpdates, _lib, "MDQueryEnableUpdates")
+	}
+	_fnMDQueryEnableUpdates(objref.IDOf(query))
 }
 
-// MDQueryDisableUpdates calls [raw.MDQueryDisableUpdates] (C function MDQueryDisableUpdates).
-func MDQueryDisableUpdates(query unsafe.Pointer) {
-	raw.MDQueryDisableUpdates(query)
+var _fnMDQueryExecute func(objc.ID, int) uint8
+
+// MDQueryExecute calls the Metadata framework function MDQueryExecute.
+func MDQueryExecute(query obj.Object, optionFlags int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryExecute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryExecute, _lib, "MDQueryExecute")
+	}
+	return _fnMDQueryExecute(objref.IDOf(query), optionFlags)
 }
 
-// MDQueryEnableUpdates calls [raw.MDQueryEnableUpdates] (C function MDQueryEnableUpdates).
-func MDQueryEnableUpdates(query unsafe.Pointer) {
-	raw.MDQueryEnableUpdates(query)
+var _fnMDQueryGetCountOfResultsWithAttributeValue func(objc.ID, objc.ID, objc.ID) int
+
+// MDQueryGetCountOfResultsWithAttributeValue calls the Metadata framework function MDQueryGetCountOfResultsWithAttributeValue.
+func MDQueryGetCountOfResultsWithAttributeValue(query obj.Object, name obj.Object, value obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetCountOfResultsWithAttributeValue == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetCountOfResultsWithAttributeValue, _lib, "MDQueryGetCountOfResultsWithAttributeValue")
+	}
+	return _fnMDQueryGetCountOfResultsWithAttributeValue(objref.IDOf(query), objref.IDOf(name), objref.IDOf(value))
 }
 
-// MDQueryExecute calls [raw.MDQueryExecute] (C function MDQueryExecute).
-func MDQueryExecute(query unsafe.Pointer, optionFlags uint) uint8 {
-	return raw.MDQueryExecute(query, optionFlags)
+var _fnMDQueryGetResultCount func(objc.ID) int
+
+// MDQueryGetResultCount calls the Metadata framework function MDQueryGetResultCount.
+func MDQueryGetResultCount(query obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetResultCount == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetResultCount, _lib, "MDQueryGetResultCount")
+	}
+	return _fnMDQueryGetResultCount(objref.IDOf(query))
 }
 
-// MDQueryGetAttributeValueOfResultAtIndex calls [raw.MDQueryGetAttributeValueOfResultAtIndex] (C function MDQueryGetAttributeValueOfResultAtIndex).
-func MDQueryGetAttributeValueOfResultAtIndex(query unsafe.Pointer, name unsafe.Pointer, idx int) unsafe.Pointer {
-	return raw.MDQueryGetAttributeValueOfResultAtIndex(query, name, idx)
+var _fnMDQueryGetSortOptionFlagsForAttribute func(objc.ID, objc.ID) uint32
+
+// MDQueryGetSortOptionFlagsForAttribute calls the Metadata framework function MDQueryGetSortOptionFlagsForAttribute.
+func MDQueryGetSortOptionFlagsForAttribute(query obj.Object, fieldName obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetSortOptionFlagsForAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetSortOptionFlagsForAttribute, _lib, "MDQueryGetSortOptionFlagsForAttribute")
+	}
+	return _fnMDQueryGetSortOptionFlagsForAttribute(objref.IDOf(query), objref.IDOf(fieldName))
 }
 
-// MDQueryGetBatchingParameters calls [raw.MDQueryGetBatchingParameters] (C function MDQueryGetBatchingParameters).
-func MDQueryGetBatchingParameters(query unsafe.Pointer) raw.MDQueryBatchingParams {
-	return raw.MDQueryGetBatchingParameters(query)
+var _fnMDQueryGetTypeID func() int
+
+// MDQueryGetTypeID calls the Metadata framework function MDQueryGetTypeID.
+func MDQueryGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetTypeID, _lib, "MDQueryGetTypeID")
+	}
+	return _fnMDQueryGetTypeID()
 }
 
-// MDQueryGetCountOfResultsWithAttributeValue calls [raw.MDQueryGetCountOfResultsWithAttributeValue] (C function MDQueryGetCountOfResultsWithAttributeValue).
-func MDQueryGetCountOfResultsWithAttributeValue(query unsafe.Pointer, name unsafe.Pointer, value unsafe.Pointer) int {
-	return raw.MDQueryGetCountOfResultsWithAttributeValue(query, name, value)
+var _fnMDQueryIsGatheringComplete func(objc.ID) uint8
+
+// MDQueryIsGatheringComplete calls the Metadata framework function MDQueryIsGatheringComplete.
+func MDQueryIsGatheringComplete(query obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryIsGatheringComplete == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryIsGatheringComplete, _lib, "MDQueryIsGatheringComplete")
+	}
+	return _fnMDQueryIsGatheringComplete(objref.IDOf(query))
 }
 
-// MDQueryGetIndexOfResult calls [raw.MDQueryGetIndexOfResult] (C function MDQueryGetIndexOfResult).
-func MDQueryGetIndexOfResult(query unsafe.Pointer, result unsafe.Pointer) int {
-	return raw.MDQueryGetIndexOfResult(query, result)
+var _fnMDQuerySetDispatchQueue func(objc.ID, objc.ID)
+
+// MDQuerySetDispatchQueue calls the Metadata framework function MDQuerySetDispatchQueue.
+func MDQuerySetDispatchQueue(query obj.Object, queue obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetDispatchQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetDispatchQueue, _lib, "MDQuerySetDispatchQueue")
+	}
+	_fnMDQuerySetDispatchQueue(objref.IDOf(query), objref.IDOf(queue))
 }
 
-// MDQueryGetResultAtIndex calls [raw.MDQueryGetResultAtIndex] (C function MDQueryGetResultAtIndex).
-func MDQueryGetResultAtIndex(query unsafe.Pointer, idx int) unsafe.Pointer {
-	return raw.MDQueryGetResultAtIndex(query, idx)
+var _fnMDQuerySetMaxCount func(objc.ID, int)
+
+// MDQuerySetMaxCount calls the Metadata framework function MDQuerySetMaxCount.
+func MDQuerySetMaxCount(query obj.Object, size int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetMaxCount == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetMaxCount, _lib, "MDQuerySetMaxCount")
+	}
+	_fnMDQuerySetMaxCount(objref.IDOf(query), size)
 }
 
-// MDQueryGetResultCount calls [raw.MDQueryGetResultCount] (C function MDQueryGetResultCount).
-func MDQueryGetResultCount(query unsafe.Pointer) int {
-	return raw.MDQueryGetResultCount(query)
+var _fnMDQuerySetSearchScope func(objc.ID, objc.ID, int)
+
+// MDQuerySetSearchScope calls the Metadata framework function MDQuerySetSearchScope.
+func MDQuerySetSearchScope(query obj.Object, scopeDirectories obj.Object, scopeOptions int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetSearchScope == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetSearchScope, _lib, "MDQuerySetSearchScope")
+	}
+	_fnMDQuerySetSearchScope(objref.IDOf(query), objref.IDOf(scopeDirectories), scopeOptions)
 }
 
-// MDQueryGetSortOptionFlagsForAttribute calls [raw.MDQueryGetSortOptionFlagsForAttribute] (C function MDQueryGetSortOptionFlagsForAttribute).
-func MDQueryGetSortOptionFlagsForAttribute(query unsafe.Pointer, fieldName unsafe.Pointer) uint32 {
-	return raw.MDQueryGetSortOptionFlagsForAttribute(query, fieldName)
+var _fnMDQuerySetSortOptionFlagsForAttribute func(objc.ID, objc.ID, uint32) uint8
+
+// MDQuerySetSortOptionFlagsForAttribute calls the Metadata framework function MDQuerySetSortOptionFlagsForAttribute.
+func MDQuerySetSortOptionFlagsForAttribute(query obj.Object, fieldName obj.Object, flags uint32) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetSortOptionFlagsForAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortOptionFlagsForAttribute, _lib, "MDQuerySetSortOptionFlagsForAttribute")
+	}
+	return _fnMDQuerySetSortOptionFlagsForAttribute(objref.IDOf(query), objref.IDOf(fieldName), flags)
 }
 
-// MDQueryGetTypeID calls [raw.MDQueryGetTypeID] (C function MDQueryGetTypeID).
-func MDQueryGetTypeID() uint {
-	return raw.MDQueryGetTypeID()
+var _fnMDQuerySetSortOrder func(objc.ID, objc.ID) uint8
+
+// MDQuerySetSortOrder calls the Metadata framework function MDQuerySetSortOrder.
+func MDQuerySetSortOrder(query obj.Object, sortingAttrs obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetSortOrder == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortOrder, _lib, "MDQuerySetSortOrder")
+	}
+	return _fnMDQuerySetSortOrder(objref.IDOf(query), objref.IDOf(sortingAttrs))
 }
 
-// MDQueryIsGatheringComplete calls [raw.MDQueryIsGatheringComplete] (C function MDQueryIsGatheringComplete).
-func MDQueryIsGatheringComplete(query unsafe.Pointer) uint8 {
-	return raw.MDQueryIsGatheringComplete(query)
+var _fnMDQueryStop func(objc.ID)
+
+// MDQueryStop calls the Metadata framework function MDQueryStop.
+func MDQueryStop(query obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryStop == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryStop, _lib, "MDQueryStop")
+	}
+	_fnMDQueryStop(objref.IDOf(query))
 }
 
-// MDQuerySetBatchingParameters calls [raw.MDQuerySetBatchingParameters] (C function MDQuerySetBatchingParameters).
-func MDQuerySetBatchingParameters(query unsafe.Pointer, params raw.MDQueryBatchingParams) {
-	raw.MDQuerySetBatchingParameters(query, params)
+var _fnMDSchemaCopyAllAttributes func() objc.ID
+
+// MDSchemaCopyAllAttributes calls the Metadata framework function MDSchemaCopyAllAttributes.
+func MDSchemaCopyAllAttributes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDSchemaCopyAllAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAllAttributes, _lib, "MDSchemaCopyAllAttributes")
+	}
+	_ret := _fnMDSchemaCopyAllAttributes()
+	return obj.Wrap(_ret)
 }
 
-// MDQuerySetCreateResultFunction calls [raw.MDQuerySetCreateResultFunction] (C function MDQuerySetCreateResultFunction).
-func MDQuerySetCreateResultFunction(query unsafe.Pointer, func_ unsafe.Pointer, context_ unsafe.Pointer, cb *corefoundation.CFArrayCallBacks) {
-	raw.MDQuerySetCreateResultFunction(query, func_, context_, cb)
+var _fnMDSchemaCopyAttributesForContentType func(objc.ID) objc.ID
+
+// MDSchemaCopyAttributesForContentType calls the Metadata framework function MDSchemaCopyAttributesForContentType.
+func MDSchemaCopyAttributesForContentType(contentTypeUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDSchemaCopyAttributesForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAttributesForContentType, _lib, "MDSchemaCopyAttributesForContentType")
+	}
+	_ret := _fnMDSchemaCopyAttributesForContentType(objref.IDOf(contentTypeUTI))
+	return obj.Wrap(_ret)
 }
 
-// MDQuerySetCreateValueFunction calls [raw.MDQuerySetCreateValueFunction] (C function MDQuerySetCreateValueFunction).
-func MDQuerySetCreateValueFunction(query unsafe.Pointer, func_ unsafe.Pointer, context_ unsafe.Pointer, cb *corefoundation.CFArrayCallBacks) {
-	raw.MDQuerySetCreateValueFunction(query, func_, context_, cb)
+var _fnMDSchemaCopyDisplayDescriptionForAttribute func(objc.ID) objc.ID
+
+// MDSchemaCopyDisplayDescriptionForAttribute calls the Metadata framework function MDSchemaCopyDisplayDescriptionForAttribute.
+func MDSchemaCopyDisplayDescriptionForAttribute(name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDSchemaCopyDisplayDescriptionForAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayDescriptionForAttribute, _lib, "MDSchemaCopyDisplayDescriptionForAttribute")
+	}
+	_ret := _fnMDSchemaCopyDisplayDescriptionForAttribute(objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// MDQuerySetDispatchQueue calls [raw.MDQuerySetDispatchQueue] (C function MDQuerySetDispatchQueue).
-func MDQuerySetDispatchQueue(query unsafe.Pointer, queue *foundation.NSObject) {
-	raw.MDQuerySetDispatchQueue(query, queue)
+var _fnMDSchemaCopyDisplayNameForAttribute func(objc.ID) objc.ID
+
+// MDSchemaCopyDisplayNameForAttribute calls the Metadata framework function MDSchemaCopyDisplayNameForAttribute.
+func MDSchemaCopyDisplayNameForAttribute(name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDSchemaCopyDisplayNameForAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayNameForAttribute, _lib, "MDSchemaCopyDisplayNameForAttribute")
+	}
+	_ret := _fnMDSchemaCopyDisplayNameForAttribute(objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// MDQuerySetMaxCount calls [raw.MDQuerySetMaxCount] (C function MDQuerySetMaxCount).
-func MDQuerySetMaxCount(query unsafe.Pointer, size int) {
-	raw.MDQuerySetMaxCount(query, size)
-}
+var _fnMDSchemaCopyMetaAttributesForAttribute func(objc.ID) objc.ID
 
-// MDQuerySetSearchScope calls [raw.MDQuerySetSearchScope] (C function MDQuerySetSearchScope).
-func MDQuerySetSearchScope(query unsafe.Pointer, scopeDirectories unsafe.Pointer, scopeOptions uint) {
-	raw.MDQuerySetSearchScope(query, scopeDirectories, scopeOptions)
-}
-
-// MDQuerySetSortComparator calls [raw.MDQuerySetSortComparator] (C function MDQuerySetSortComparator).
-func MDQuerySetSortComparator(query unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.MDQuerySetSortComparator(query, comparator, context_)
-}
-
-// MDQuerySetSortComparatorBlock calls [raw.MDQuerySetSortComparatorBlock] (C function MDQuerySetSortComparatorBlock).
-func MDQuerySetSortComparatorBlock(query unsafe.Pointer, comparator func(unsafe.Pointer, unsafe.Pointer) corefoundation.CFComparisonResult) {
-	raw.MDQuerySetSortComparatorBlock(query, comparator)
-}
-
-// MDQuerySetSortOptionFlagsForAttribute calls [raw.MDQuerySetSortOptionFlagsForAttribute] (C function MDQuerySetSortOptionFlagsForAttribute).
-func MDQuerySetSortOptionFlagsForAttribute(query unsafe.Pointer, fieldName unsafe.Pointer, flags uint32) uint8 {
-	return raw.MDQuerySetSortOptionFlagsForAttribute(query, fieldName, flags)
-}
-
-// MDQuerySetSortOrder calls [raw.MDQuerySetSortOrder] (C function MDQuerySetSortOrder).
-func MDQuerySetSortOrder(query unsafe.Pointer, sortingAttrs unsafe.Pointer) uint8 {
-	return raw.MDQuerySetSortOrder(query, sortingAttrs)
-}
-
-// MDQueryStop calls [raw.MDQueryStop] (C function MDQueryStop).
-func MDQueryStop(query unsafe.Pointer) {
-	raw.MDQueryStop(query)
-}
-
-// MDSchemaCopyAllAttributes calls [raw.MDSchemaCopyAllAttributes] (C function MDSchemaCopyAllAttributes).
-func MDSchemaCopyAllAttributes() unsafe.Pointer {
-	return raw.MDSchemaCopyAllAttributes()
-}
-
-// MDSchemaCopyAttributesForContentType calls [raw.MDSchemaCopyAttributesForContentType] (C function MDSchemaCopyAttributesForContentType).
-func MDSchemaCopyAttributesForContentType(contentTypeUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.MDSchemaCopyAttributesForContentType(contentTypeUTI)
-}
-
-// MDSchemaCopyDisplayDescriptionForAttribute calls [raw.MDSchemaCopyDisplayDescriptionForAttribute] (C function MDSchemaCopyDisplayDescriptionForAttribute).
-func MDSchemaCopyDisplayDescriptionForAttribute(name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDSchemaCopyDisplayDescriptionForAttribute(name)
-}
-
-// MDSchemaCopyDisplayNameForAttribute calls [raw.MDSchemaCopyDisplayNameForAttribute] (C function MDSchemaCopyDisplayNameForAttribute).
-func MDSchemaCopyDisplayNameForAttribute(name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDSchemaCopyDisplayNameForAttribute(name)
-}
-
-// MDSchemaCopyMetaAttributesForAttribute calls [raw.MDSchemaCopyMetaAttributesForAttribute] (C function MDSchemaCopyMetaAttributesForAttribute).
-func MDSchemaCopyMetaAttributesForAttribute(name unsafe.Pointer) unsafe.Pointer {
-	return raw.MDSchemaCopyMetaAttributesForAttribute(name)
+// MDSchemaCopyMetaAttributesForAttribute calls the Metadata framework function MDSchemaCopyMetaAttributesForAttribute.
+func MDSchemaCopyMetaAttributesForAttribute(name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDSchemaCopyMetaAttributesForAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyMetaAttributesForAttribute, _lib, "MDSchemaCopyMetaAttributesForAttribute")
+	}
+	_ret := _fnMDSchemaCopyMetaAttributesForAttribute(objref.IDOf(name))
+	return obj.Wrap(_ret)
 }

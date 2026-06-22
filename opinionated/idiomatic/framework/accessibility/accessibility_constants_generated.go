@@ -5,47 +5,44 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// AXTechnologyVoiceOver returns the string constant AXTechnologyVoiceOver as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyVoiceOver() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyVoiceOver())
+// AXTechnologyVoiceOver returns the string constant AXTechnologyVoiceOver, for use as a dictionary key or argument.
+func AXTechnologyVoiceOver() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyVoiceOver")))
 }
 
-// AXTechnologySwitchControl returns the string constant AXTechnologySwitchControl as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologySwitchControl() objc.ID {
-	return purego.CFConstant(raw.AXTechnologySwitchControl())
+// AXTechnologySwitchControl returns the string constant AXTechnologySwitchControl, for use as a dictionary key or argument.
+func AXTechnologySwitchControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologySwitchControl")))
 }
 
-// AXTechnologyVoiceControl returns the string constant AXTechnologyVoiceControl as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyVoiceControl() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyVoiceControl())
+// AXTechnologyVoiceControl returns the string constant AXTechnologyVoiceControl, for use as a dictionary key or argument.
+func AXTechnologyVoiceControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyVoiceControl")))
 }
 
-// AXTechnologyFullKeyboardAccess returns the string constant AXTechnologyFullKeyboardAccess as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyFullKeyboardAccess() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyFullKeyboardAccess())
+// AXTechnologyFullKeyboardAccess returns the string constant AXTechnologyFullKeyboardAccess, for use as a dictionary key or argument.
+func AXTechnologyFullKeyboardAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyFullKeyboardAccess")))
 }
 
-// AXTechnologySpeakScreen returns the string constant AXTechnologySpeakScreen as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologySpeakScreen() objc.ID {
-	return purego.CFConstant(raw.AXTechnologySpeakScreen())
+// AXTechnologySpeakScreen returns the string constant AXTechnologySpeakScreen, for use as a dictionary key or argument.
+func AXTechnologySpeakScreen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologySpeakScreen")))
 }
 
-// AXTechnologyAutomation returns the string constant AXTechnologyAutomation as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyAutomation() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyAutomation())
+// AXTechnologyAutomation returns the string constant AXTechnologyAutomation, for use as a dictionary key or argument.
+func AXTechnologyAutomation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyAutomation")))
 }
 
-// AXTechnologyHoverText returns the string constant AXTechnologyHoverText as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyHoverText() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyHoverText())
+// AXTechnologyHoverText returns the string constant AXTechnologyHoverText, for use as a dictionary key or argument.
+func AXTechnologyHoverText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyHoverText")))
 }
 
-// AXTechnologyZoom returns the string constant AXTechnologyZoom as an objc.ID, for use as a dictionary key or selector argument.
-func AXTechnologyZoom() objc.ID {
-	return purego.CFConstant(raw.AXTechnologyZoom())
-}
+// AXTechnologyZoom returns the string constant AXTechnologyZoom, for use as a dictionary key or argument.
+func AXTechnologyZoom() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyZoom"))) }

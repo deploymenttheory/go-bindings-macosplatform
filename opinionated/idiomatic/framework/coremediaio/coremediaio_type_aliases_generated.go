@@ -4,27 +4,16 @@
 
 package coremediaio
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-)
+// A CMIOObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission.
+type CMIOObjectPropertyAddress struct {
+	MSelector uint
+	MScope    uint
+	MElement  uint
+}
 
-// CMIODeviceAVCCommand is a type alias for the raw CMIODeviceAVCCommand value-type struct.
-type CMIODeviceAVCCommand = raw.CMIODeviceAVCCommand
-
-// CMIODeviceRS422Command is a type alias for the raw CMIODeviceRS422Command value-type struct.
-type CMIODeviceRS422Command = raw.CMIODeviceRS422Command
-
-// CMIODeviceSMPTETimeCallback is a type alias for the raw CMIODeviceSMPTETimeCallback value-type struct.
-type CMIODeviceSMPTETimeCallback = raw.CMIODeviceSMPTETimeCallback
-
-// CMIODeviceStreamConfiguration is a type alias for the raw CMIODeviceStreamConfiguration value-type struct.
-type CMIODeviceStreamConfiguration = raw.CMIODeviceStreamConfiguration
-
-// CMIOObjectPropertyAddress is a type alias for the raw CMIOObjectPropertyAddress value-type struct.
-type CMIOObjectPropertyAddress = raw.CMIOObjectPropertyAddress
-
-// CMIOStreamDeck is a type alias for the raw CMIOStreamDeck value-type struct.
-type CMIOStreamDeck = raw.CMIOStreamDeck
-
-// CMIOStreamScheduledOutputNotificationProcAndRefCon is a type alias for the raw CMIOStreamScheduledOutputNotificationProcAndRefCon value-type struct.
-type CMIOStreamScheduledOutputNotificationProcAndRefCon = raw.CMIOStreamScheduledOutputNotificationProcAndRefCon
+// This structure is returned in response to the kCMIOStreamPropertyDeck property queries.
+type CMIOStreamDeck struct {
+	MStatus uint
+	MState  uint
+	MState2 uint
+}

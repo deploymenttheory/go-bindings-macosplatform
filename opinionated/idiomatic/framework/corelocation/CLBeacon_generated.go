@@ -5,90 +5,124 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Information about an observed iBeacon device and its relative distance to a person’s device.
+// Beacon is an idiomatic wrapper over the Objective-C class CLBeacon.
 //
-// Beacon wraps [raw.CLBeacon] with a fluent Go API.
+// Information about an observed iBeacon device and its relative distance to a person’s device.
 type Beacon struct {
-	inner *raw.CLBeacon
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLBeacon].
-func (x *Beacon) Unwrap() *raw.CLBeacon { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Beacon) ID() objc.ID { return x.inner.Ptr() }
-
-// BeaconFromID adopts an existing object pointer as a Beacon (nil for 0).
+// BeaconFromID adopts an existing Objective-C object as a Beacon
+// (nil for 0), retaining it and registering a release finalizer.
 func BeaconFromID(id objc.ID) *Beacon {
 	if id == 0 {
 		return nil
 	}
-	return &Beacon{inner: raw.CLBeaconFromID(id)}
+	x := &Beacon{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBeacon creates a new [Beacon].
+// beaconAdopt wraps an Objective-C object that this code just created as a
+// Beacon (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func beaconAdopt(id objc.ID) *Beacon {
+	if id == 0 {
+		return nil
+	}
+	x := &Beacon{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Beacon) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Beacon) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Beacon) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Beacon) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBeacon creates a new Beacon.
 func NewBeacon() *Beacon {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeacon")), objc.RegisterName("new"))
-	return &Beacon{inner: raw.CLBeaconFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLBeacon")), objc.RegisterName("new"))
+	return beaconAdopt(_id)
 }
 
-// Timestamp calls the underlying Timestamp.
-func (x *Beacon) Timestamp() *foundation.NSDate {
-	return x.inner.Timestamp()
+// Timestamp wraps the corresponding Objective-C method.
+func (x *Beacon) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return obj.Wrap(_r)
 }
 
-// UUID calls the underlying UUID.
-func (x *Beacon) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+// UUID wraps the corresponding Objective-C method.
+func (x *Beacon) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// ProximityUUID calls the underlying ProximityUUID.
-func (x *Beacon) ProximityUUID() *foundation.NSUUID {
-	return x.inner.ProximityUUID()
+// ProximityUUID wraps the corresponding Objective-C method.
+func (x *Beacon) ProximityUUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proximityUUID"))
+	return obj.Wrap(_r)
 }
 
-// Major calls the underlying Major.
-func (x *Beacon) Major() *foundation.NSNumber {
-	return x.inner.Major()
+// Major wraps the corresponding Objective-C method.
+func (x *Beacon) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+	return obj.Wrap(_r)
 }
 
-// Minor calls the underlying Minor.
-func (x *Beacon) Minor() *foundation.NSNumber {
-	return x.inner.Minor()
+// Minor wraps the corresponding Objective-C method.
+func (x *Beacon) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+	return obj.Wrap(_r)
 }
 
-// Proximity calls the underlying Proximity.
-func (x *Beacon) Proximity() CLProximity {
-	return CLProximity(x.inner.Proximity())
+// Proximity wraps the corresponding Objective-C method.
+func (x *Beacon) Proximity() Proximity {
+	_r := objc.Send[Proximity](objref.IDOf(x), objc.RegisterName("proximity"))
+	return _r
 }
 
-// Accuracy calls the underlying Accuracy.
-func (x *Beacon) Accuracy() unsafe.Pointer {
-	return x.inner.Accuracy()
-}
-
-// Rssi calls the underlying Rssi.
+// Rssi wraps the corresponding Objective-C method.
 func (x *Beacon) Rssi() int {
-	return x.inner.Rssi()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rssi"))
+	return _r
 }
 
 // Beaconable is the interface implemented by [Beacon], for mocking and DI.
 type Beaconable interface {
-	Unwrap() *raw.CLBeacon
-	Timestamp() *foundation.NSDate
-	UUID() *foundation.NSUUID
-	ProximityUUID() *foundation.NSUUID
-	Major() *foundation.NSNumber
-	Minor() *foundation.NSNumber
-	Proximity() CLProximity
-	Accuracy() unsafe.Pointer
+	obj.Object
+	Timestamp() obj.Object
+	UUID() obj.Object
+	ProximityUUID() obj.Object
+	Major() obj.Object
+	Minor() obj.Object
+	Proximity() Proximity
 	Rssi() int
 }
 

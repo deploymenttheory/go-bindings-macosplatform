@@ -5,181 +5,176 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLHeadElement wraps [raw.DOMHTMLHeadElement] with a fluent Go API.
+// DOMHTMLHeadElement is an idiomatic wrapper over the Objective-C class DOMHTMLHeadElement.
+//
+// It embeds [DOMHTMLElement], promoting that type's methods.
 type DOMHTMLHeadElement struct {
-	inner *raw.DOMHTMLHeadElement
+	DOMHTMLElement
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLHeadElement].
-func (x *DOMHTMLHeadElement) Unwrap() *raw.DOMHTMLHeadElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLHeadElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLHeadElementFromID adopts an existing object pointer as a DOMHTMLHeadElement (nil for 0).
+// DOMHTMLHeadElementFromID adopts an existing Objective-C object as a DOMHTMLHeadElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLHeadElementFromID(id objc.ID) *DOMHTMLHeadElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLHeadElement{inner: raw.DOMHTMLHeadElementFromID(id)}
+	x := &DOMHTMLHeadElement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLHeadElement creates a new [DOMHTMLHeadElement].
+// dOMHTMLHeadElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLHeadElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLHeadElementAdopt(id objc.ID) *DOMHTMLHeadElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLHeadElement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMHTMLHeadElement creates a new DOMHTMLHeadElement.
 func NewDOMHTMLHeadElement() *DOMHTMLHeadElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLHeadElement")), objc.RegisterName("new"))
-	return &DOMHTMLHeadElement{inner: raw.DOMHTMLHeadElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLHeadElement")), objc.RegisterName("new"))
+	return dOMHTMLHeadElementAdopt(_id)
 }
 
-// WithProfile sets the profile property and returns the receiver for chaining.
+// WithProfile sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithProfile(profile string) *DOMHTMLHeadElement {
-	x.inner.SetProfile(foundation.NSStringStringWithUTF8String(profile))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfile:"), purego.NSString(profile))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithTitle(title string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithLang(lang string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithDir(dir string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithTabIndex(tabIndex int) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithAccessKey(accessKey string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithInnerText(innerText string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithOuterText(outerText string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithContentEditable(contentEditable string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithIdName(idName string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithScrollLeft(scrollLeft int) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithScrollTop(scrollTop int) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithInnerHTML(innerHTML string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithOuterHTML(outerHTML string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithClassName(className string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithNodeValue(nodeValue string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithPrefix(prefix string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMHTMLHeadElement) WithTextContent(textContent string) *DOMHTMLHeadElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Profile calls the underlying Profile.
+// Profile wraps the corresponding Objective-C method.
 func (x *DOMHTMLHeadElement) Profile() string {
-	_r := x.inner.Profile()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profile"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProfile calls the underlying SetProfile.
+// SetProfile wraps the corresponding Objective-C method.
 func (x *DOMHTMLHeadElement) SetProfile(profile string) {
-	x.inner.SetProfile(foundation.NSStringStringWithUTF8String(profile))
-}
-
-func (x *DOMHTMLHeadElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLHeadElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLHeadElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLHeadElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLHeadElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfile:"), purego.NSString(profile))
 }
 
 // DOMHTMLHeadElementable is the interface implemented by [DOMHTMLHeadElement], for mocking and DI.
 type DOMHTMLHeadElementable interface {
-	Unwrap() *raw.DOMHTMLHeadElement
+	obj.Object
 	WithProfile(profile string) *DOMHTMLHeadElement
 	WithTitle(title string) *DOMHTMLHeadElement
 	WithLang(lang string) *DOMHTMLHeadElement
@@ -203,3 +198,13 @@ type DOMHTMLHeadElementable interface {
 }
 
 var _ DOMHTMLHeadElementable = (*DOMHTMLHeadElement)(nil)
+
+var _ DOMHTMLElementProvider = (*DOMHTMLHeadElement)(nil)
+
+var _ DOMElementProvider = (*DOMHTMLHeadElement)(nil)
+
+var _ DOMNodeProvider = (*DOMHTMLHeadElement)(nil)
+
+var _ DOMObjectProvider = (*DOMHTMLHeadElement)(nil)
+
+var _ WebScriptObjectProvider = (*DOMHTMLHeadElement)(nil)

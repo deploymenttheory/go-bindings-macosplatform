@@ -5,75 +5,85 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that responds to requests to change the current shuffle mode used during playback.
+// ChangeShuffleModeCommand is an idiomatic wrapper over the Objective-C class MPChangeShuffleModeCommand.
 //
-// ChangeShuffleModeCommand wraps [raw.MPChangeShuffleModeCommand] with a fluent Go API.
+// It embeds [RemoteCommand], promoting that type's methods.
+//
+// An object that responds to requests to change the current shuffle mode used during playback.
 type ChangeShuffleModeCommand struct {
-	inner *raw.MPChangeShuffleModeCommand
+	RemoteCommand
 }
 
-// Unwrap returns the underlying [raw.MPChangeShuffleModeCommand].
-func (x *ChangeShuffleModeCommand) Unwrap() *raw.MPChangeShuffleModeCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeShuffleModeCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeShuffleModeCommandFromID adopts an existing object pointer as a ChangeShuffleModeCommand (nil for 0).
+// ChangeShuffleModeCommandFromID adopts an existing Objective-C object as a ChangeShuffleModeCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeShuffleModeCommandFromID(id objc.ID) *ChangeShuffleModeCommand {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeShuffleModeCommand{inner: raw.MPChangeShuffleModeCommandFromID(id)}
+	x := &ChangeShuffleModeCommand{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeShuffleModeCommand creates a new [ChangeShuffleModeCommand].
+// changeShuffleModeCommandAdopt wraps an Objective-C object that this code just created as a
+// ChangeShuffleModeCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeShuffleModeCommandAdopt(id objc.ID) *ChangeShuffleModeCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeShuffleModeCommand{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeShuffleModeCommand creates a new ChangeShuffleModeCommand.
 func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangeShuffleModeCommand")), objc.RegisterName("new"))
-	return &ChangeShuffleModeCommand{inner: raw.MPChangeShuffleModeCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangeShuffleModeCommand")), objc.RegisterName("new"))
+	return changeShuffleModeCommandAdopt(_id)
 }
 
-// The current shuffle mode for a media item.
-//
-// WithCurrentShuffleType sets the currentShuffleType property and returns the receiver for chaining.
-func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand {
-	x.inner.SetCurrentShuffleType(raw.MPShuffleType(currentShuffleType))
+// WithCurrentShuffleType the current shuffle mode for a media item.
+func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
 	return x
 }
 
-// A Boolean value that indicates whether a user can interact with the displayed element.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
 func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// CurrentShuffleType calls the underlying CurrentShuffleType.
-func (x *ChangeShuffleModeCommand) CurrentShuffleType() MPShuffleType {
-	return MPShuffleType(x.inner.CurrentShuffleType())
+// CurrentShuffleType wraps the corresponding Objective-C method.
+func (x *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
+	_r := objc.Send[ShuffleType](objref.IDOf(x), objc.RegisterName("currentShuffleType"))
+	return _r
 }
 
-// SetCurrentShuffleType calls the underlying SetCurrentShuffleType.
-func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType MPShuffleType) {
-	x.inner.SetCurrentShuffleType(raw.MPShuffleType(currentShuffleType))
-}
-
-func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
-	return &x.inner.MPRemoteCommand
+// SetCurrentShuffleType wraps the corresponding Objective-C method.
+func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType ShuffleType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentShuffleType:"), currentShuffleType)
 }
 
 // ChangeShuffleModeCommandable is the interface implemented by [ChangeShuffleModeCommand], for mocking and DI.
 type ChangeShuffleModeCommandable interface {
-	Unwrap() *raw.MPChangeShuffleModeCommand
-	WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand
+	obj.Object
+	WithCurrentShuffleType(currentShuffleType ShuffleType) *ChangeShuffleModeCommand
 	WithEnabled(enabled bool) *ChangeShuffleModeCommand
-	CurrentShuffleType() MPShuffleType
-	SetCurrentShuffleType(currentShuffleType MPShuffleType)
+	CurrentShuffleType() ShuffleType
+	SetCurrentShuffleType(currentShuffleType ShuffleType)
 }
 
 var _ ChangeShuffleModeCommandable = (*ChangeShuffleModeCommand)(nil)
+
+var _ RemoteCommandProvider = (*ChangeShuffleModeCommand)(nil)

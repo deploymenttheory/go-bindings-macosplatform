@@ -5,201 +5,128 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A control element that represents a button touch or press.
+// ControllerButtonInput is an idiomatic wrapper over the Objective-C class GCControllerButtonInput.
 //
-// ControllerButtonInput wraps [raw.GCControllerButtonInput] with a fluent Go API.
+// ControllerButtonInput is an abstract base — you do not construct it directly. Construct one of [DualSenseAdaptiveTrigger] and pass it where a ControllerButtonInput is accepted.
+//
+// A control element that represents a button touch or press.
 type ControllerButtonInput struct {
-	inner *raw.GCControllerButtonInput
+	ControllerElement
 }
 
-// Unwrap returns the underlying [raw.GCControllerButtonInput].
-func (x *ControllerButtonInput) Unwrap() *raw.GCControllerButtonInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerButtonInput) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerButtonInputFromID adopts an existing object pointer as a ControllerButtonInput (nil for 0).
+// ControllerButtonInputFromID adopts an existing Objective-C object as a ControllerButtonInput
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerButtonInputFromID(id objc.ID) *ControllerButtonInput {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerButtonInput{inner: raw.GCControllerButtonInputFromID(id)}
-}
-
-// NewControllerButtonInput creates a new [ControllerButtonInput].
-func NewControllerButtonInput() *ControllerButtonInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerButtonInput")), objc.RegisterName("new"))
-	return &ControllerButtonInput{inner: raw.GCControllerButtonInputFromID(_id)}
-}
-
-// The block that the element calls when the user changes the level of pressure on the button.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *ControllerButtonInput) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &ControllerButtonInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The block that the element calls when the user presses or releases the button.
-//
-// WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
-func (x *ControllerButtonInput) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput {
-	x.inner.SetPressedChangedHandler(pressedChangedHandler)
+// controllerButtonInputAdopt wraps an Objective-C object that this code just created as a
+// ControllerButtonInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerButtonInputAdopt(id objc.ID) *ControllerButtonInput {
+	if id == 0 {
+		return nil
+	}
+	x := &ControllerButtonInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The block that the element calls when the user touches the button.
-//
-// WithTouchedChangedHandler sets the touchedChangedHandler property and returns the receiver for chaining.
-func (x *ControllerButtonInput) WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput {
-	x.inner.SetTouchedChangedHandler(touchedChangedHandler)
-	return x
-}
-
-// The level of pressure the user is applying to the button.
-//
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue the level of pressure the user is applying to the button.
 func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// The preferred state for handling input when the user binds the element to a system gesture.
-//
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// WithPreferredSystemGestureState the preferred state for handling input when the user binds the element to a system gesture.
+func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
-// A system symbol for the element or the remapped element.
-//
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithSfSymbolsName a system symbol for the element or the remapped element.
 func (x *ControllerButtonInput) WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
-// The localized name for the element or the remapped element.
-//
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName the localized name for the element or the remapped element.
 func (x *ControllerButtonInput) WithLocalizedName(localizedName string) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
-// The element’s system symbol, not the remapped symbol.
-//
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName the element’s system symbol, not the remapped symbol.
 func (x *ControllerButtonInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
-// The element’s localized name, not the remapped name.
-//
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName the element’s localized name, not the remapped name.
 func (x *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
-// Sets the pressure value of a snapshot of a button.
-//
-// SetValue calls the underlying SetValue.
+// SetValue sets the pressure value of a snapshot of a button.
 func (x *ControllerButtonInput) SetValue(value float32) {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *ControllerButtonInput) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *ControllerButtonInput) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
-}
-
-// Set this block if you want to be notified when only the pressed state on this button changes. This will get called less often than the valueChangedHandler with the additional feature of the pressed state being different to the last time it was called.
-//
-// PressedChangedHandler calls the underlying PressedChangedHandler.
-func (x *ControllerButtonInput) PressedChangedHandler() objc.Block {
-	return x.inner.PressedChangedHandler()
-}
-
-// SetPressedChangedHandler calls the underlying SetPressedChangedHandler.
-func (x *ControllerButtonInput) SetPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) {
-	x.inner.SetPressedChangedHandler(pressedChangedHandler)
-}
-
-// TouchedChangedHandler calls the underlying TouchedChangedHandler.
-func (x *ControllerButtonInput) TouchedChangedHandler() objc.Block {
-	return x.inner.TouchedChangedHandler()
-}
-
-// SetTouchedChangedHandler calls the underlying SetTouchedChangedHandler.
-func (x *ControllerButtonInput) SetTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) {
-	x.inner.SetTouchedChangedHandler(touchedChangedHandler)
-}
-
-// A normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1]. @see valueChangedHandler @see pressed
-//
-// Value calls the underlying Value.
+// Value a normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1].
 func (x *ControllerButtonInput) Value() float32 {
-	return x.inner.Value()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// Buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0. @see pressedChangedHandler @see value
-//
-// IsPressed calls the underlying IsPressed.
+// IsPressed buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0.
 func (x *ControllerButtonInput) IsPressed() bool {
-	return x.inner.IsPressed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPressed"))
+	return _r
 }
 
-// Some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0. @see touchChangedHandler @see pressed
-//
-// IsTouched calls the underlying IsTouched.
+// IsTouched some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0.
 func (x *ControllerButtonInput) IsTouched() bool {
-	return x.inner.IsTouched()
-}
-
-func (x *ControllerButtonInput) asControllerButtonInput() *raw.GCControllerButtonInput {
-	return x.inner
-}
-
-func (x *ControllerButtonInput) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerElement
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTouched"))
+	return _r
 }
 
 // ControllerButtonInputable is the interface implemented by [ControllerButtonInput], for mocking and DI.
 type ControllerButtonInputable interface {
-	Unwrap() *raw.GCControllerButtonInput
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
-	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
-	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput
+	obj.Object
 	WithValue(value float32) *ControllerButtonInput
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerButtonInput
 	WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput
 	WithLocalizedName(localizedName string) *ControllerButtonInput
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput
 	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerButtonInput
 	SetValue(value float32)
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool))
-	PressedChangedHandler() objc.Block
-	SetPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool))
-	TouchedChangedHandler() objc.Block
-	SetTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool))
 	Value() float32
 	IsPressed() bool
 	IsTouched() bool
 }
 
 var _ ControllerButtonInputable = (*ControllerButtonInput)(nil)
+
+// isControllerButtonInput marks ControllerButtonInput — and, by embedding promotion, its
+// subclasses — as a member of the ControllerButtonInput hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ControllerButtonInput) isControllerButtonInput() {}
+
+var _ ControllerButtonInputProvider = (*ControllerButtonInput)(nil)
+
+var _ ControllerElementProvider = (*ControllerButtonInput)(nil)

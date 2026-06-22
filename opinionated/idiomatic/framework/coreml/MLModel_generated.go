@@ -5,158 +5,110 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An encapsulation of all the details of your machine learning model.
+// Model is an idiomatic wrapper over the Objective-C class MLModel.
 //
-// Model wraps [raw.MLModel] with a fluent Go API.
+// An encapsulation of all the details of your machine learning model.
 type Model struct {
-	inner *raw.MLModel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModel].
-func (x *Model) Unwrap() *raw.MLModel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Model) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelFromID adopts an existing object pointer as a Model (nil for 0).
+// ModelFromID adopts an existing Objective-C object as a Model
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelFromID(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	return &Model{inner: raw.MLModelFromID(id)}
+	x := &Model{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewModel creates a new [Model].
+// modelAdopt wraps an Objective-C object that this code just created as a
+// Model (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelAdopt(id objc.ID) *Model {
+	if id == 0 {
+		return nil
+	}
+	x := &Model{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Model) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Model) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Model) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Model) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModel creates a new Model.
 func NewModel() *Model {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModel")), objc.RegisterName("new"))
-	return &Model{inner: raw.MLModelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("new"))
+	return modelAdopt(_id)
 }
 
-// Generates a prediction from the feature values within the input feature provider.
-//
-// PredictionFromFeaturesError calls the underlying PredictionFromFeaturesError.
-func (x *Model) PredictionFromFeaturesError(input raw.MLFeatureProvider) (raw.MLFeatureProvider, error) {
-	return x.inner.PredictionFromFeaturesError(input)
+// ParameterValueForKeyError returns a model parameter value for a key.
+func (x *Model) ParameterValueForKeyError(key *ParameterKey) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterValueForKey:error:"), objref.IDOf(key), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// Generates a prediction from the feature values within the input feature provider using the prediction options.
-//
-// PredictionFromFeaturesOptionsError calls the underlying PredictionFromFeaturesOptionsError.
-func (x *Model) PredictionFromFeaturesOptionsError(input raw.MLFeatureProvider, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error) {
-	return x.inner.PredictionFromFeaturesOptionsError(input, options)
-}
-
-// Generates a prediction asynchronously from the feature values within the input feature provider.
-//
-// PredictionFromFeaturesCompletionHandler calls the underlying PredictionFromFeaturesCompletionHandler.
-func (x *Model) PredictionFromFeaturesCompletionHandler(input raw.MLFeatureProvider, completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.PredictionFromFeaturesCompletionHandler(input, completionHandler)
-}
-
-// Generates a prediction asynchronously from the feature values within the input feature provider using the prediction options.
-//
-// PredictionFromFeaturesOptionsCompletionHandler calls the underlying PredictionFromFeaturesOptionsCompletionHandler.
-func (x *Model) PredictionFromFeaturesOptionsCompletionHandler(input raw.MLFeatureProvider, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.PredictionFromFeaturesOptionsCompletionHandler(input, options, completionHandler)
-}
-
-// Generates predictions for each input feature provider within the batch provider.
-//
-// PredictionsFromBatchError calls the underlying PredictionsFromBatchError.
-func (x *Model) PredictionsFromBatchError(inputBatch raw.MLBatchProvider) (raw.MLBatchProvider, error) {
-	return x.inner.PredictionsFromBatchError(inputBatch)
-}
-
-// Generates a prediction for each input feature provider within the batch provider using the prediction options.
-//
-// PredictionsFromBatchOptionsError calls the underlying PredictionsFromBatchOptionsError.
-func (x *Model) PredictionsFromBatchOptionsError(inputBatch raw.MLBatchProvider, options *raw.MLPredictionOptions) (raw.MLBatchProvider, error) {
-	return x.inner.PredictionsFromBatchOptionsError(inputBatch, options)
-}
-
-// Returns a model parameter value for a key.
-//
-// ParameterValueForKeyError calls the underlying ParameterValueForKeyError.
-func (x *Model) ParameterValueForKeyError(key *raw.MLParameterKey) (objc.ID, error) {
-	return x.inner.ParameterValueForKeyError(key)
-}
-
-// A model holds a description of its required inputs and expected outputs.
-//
-// ModelDescription calls the underlying ModelDescription.
+// ModelDescription a model holds a description of its required inputs and expected outputs.
 func (x *Model) ModelDescription() *ModelDescription {
-	_r := x.inner.ModelDescription()
-	if _r == nil {
-		return nil
-	}
-	return &ModelDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDescription"))
+	return ModelDescriptionFromID(_r)
 }
 
-// The load-time parameters used to instantiate this MLModel object.
-//
-// Configuration calls the underlying Configuration.
+// Configuration the load-time parameters used to instantiate this MLModel object.
 func (x *Model) Configuration() *ModelConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &ModelConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return ModelConfigurationFromID(_r)
 }
 
-// Creates a new state object.
-//
-// NewState calls the underlying NewState.
+// NewState creates a new state object.
 func (x *Model) NewState() *State {
-	_r := x.inner.NewState()
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// Run a stateful prediction synchronously. Use this method to run predictions on a stateful model. ```swift let state = model.newState() let prediction = try model.prediction(from: inputFeatures, using: state) ``` - Parameters: - inputFeatures: The input features as declared in the model description. - state: The state object created by `newState()` method. - error: The output parameter to receive an error information on failure.
-//
-// PredictionFromFeaturesUsingStateError calls the underlying PredictionFromFeaturesUsingStateError.
-func (x *Model) PredictionFromFeaturesUsingStateError(inputFeatures raw.MLFeatureProvider, state *raw.MLState) (raw.MLFeatureProvider, error) {
-	return x.inner.PredictionFromFeaturesUsingStateError(inputFeatures, state)
-}
-
-// Run a stateful prediction synchronously with options. Use this method to run predictions on a stateful model. ```swift let state = model.newState() let prediction = try model.prediction(from: inputFeatures, using: state, options: predictionOptions) ``` - Parameters: - inputFeatures: The input features as declared in the model description. - state: The state object created by `newState()` method. - options: The prediction options. - error: The output parameter to receive an error information on failure.
-//
-// PredictionFromFeaturesUsingStateOptionsError calls the underlying PredictionFromFeaturesUsingStateOptionsError.
-func (x *Model) PredictionFromFeaturesUsingStateOptionsError(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error) {
-	return x.inner.PredictionFromFeaturesUsingStateOptionsError(inputFeatures, state, options)
-}
-
-// Run a stateful prediction asynchronously.
-//
-// PredictionFromFeaturesUsingStateOptionsCompletionHandler calls the underlying PredictionFromFeaturesUsingStateOptionsCompletionHandler.
-func (x *Model) PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures, state, options, completionHandler)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newState"))
+	return StateFromID(_r)
 }
 
 // Modelable is the interface implemented by [Model], for mocking and DI.
 type Modelable interface {
-	Unwrap() *raw.MLModel
-	PredictionFromFeaturesError(input raw.MLFeatureProvider) (raw.MLFeatureProvider, error)
-	PredictionFromFeaturesOptionsError(input raw.MLFeatureProvider, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error)
-	PredictionFromFeaturesCompletionHandler(input raw.MLFeatureProvider, completionHandler func(objc.ID, unsafe.Pointer))
-	PredictionFromFeaturesOptionsCompletionHandler(input raw.MLFeatureProvider, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer))
-	PredictionsFromBatchError(inputBatch raw.MLBatchProvider) (raw.MLBatchProvider, error)
-	PredictionsFromBatchOptionsError(inputBatch raw.MLBatchProvider, options *raw.MLPredictionOptions) (raw.MLBatchProvider, error)
-	ParameterValueForKeyError(key *raw.MLParameterKey) (objc.ID, error)
+	obj.Object
+	ParameterValueForKeyError(key *ParameterKey) (result obj.Object, err error)
 	ModelDescription() *ModelDescription
 	Configuration() *ModelConfiguration
 	NewState() *State
-	PredictionFromFeaturesUsingStateError(inputFeatures raw.MLFeatureProvider, state *raw.MLState) (raw.MLFeatureProvider, error)
-	PredictionFromFeaturesUsingStateOptionsError(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error)
-	PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer))
 }
 
 var _ Modelable = (*Model)(nil)

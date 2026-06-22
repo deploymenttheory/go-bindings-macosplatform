@@ -5,119 +5,100 @@
 package externalaccessory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains information about a single, connected hardware accessory.
+// Accessory is an idiomatic wrapper over the Objective-C class EAAccessory.
 //
-// Accessory wraps [raw.EAAccessory] with a fluent Go API.
+// An object that contains information about a single, connected hardware accessory.
 type Accessory struct {
-	inner *raw.EAAccessory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EAAccessory].
-func (x *Accessory) Unwrap() *raw.EAAccessory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Accessory) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessoryFromID adopts an existing object pointer as a Accessory (nil for 0).
+// AccessoryFromID adopts an existing Objective-C object as a Accessory
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessoryFromID(id objc.ID) *Accessory {
 	if id == 0 {
 		return nil
 	}
-	return &Accessory{inner: raw.EAAccessoryFromID(id)}
+	x := &Accessory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAccessory creates a new [Accessory].
+// accessoryAdopt wraps an Objective-C object that this code just created as a
+// Accessory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessoryAdopt(id objc.ID) *Accessory {
+	if id == 0 {
+		return nil
+	}
+	x := &Accessory{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Accessory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Accessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Accessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Accessory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccessory creates a new Accessory.
 func NewAccessory() *Accessory {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EAAccessory")), objc.RegisterName("new"))
-	return &Accessory{inner: raw.EAAccessoryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessory")), objc.RegisterName("new"))
+	return accessoryAdopt(_id)
 }
 
-// IsConnected calls the underlying IsConnected.
+// IsConnected wraps the corresponding Objective-C method.
 func (x *Accessory) IsConnected() bool {
-	return x.inner.IsConnected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+	return _r
 }
 
-// ConnectionID calls the underlying ConnectionID.
-func (x *Accessory) ConnectionID() uint {
-	return x.inner.ConnectionID()
+// ConnectionID wraps the corresponding Objective-C method.
+func (x *Accessory) ConnectionID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("connectionID"))
+	return _r
 }
 
-// Manufacturer calls the underlying Manufacturer.
-func (x *Accessory) Manufacturer() unsafe.Pointer {
-	return x.inner.Manufacturer()
-}
-
-// Name calls the underlying Name.
-func (x *Accessory) Name() unsafe.Pointer {
-	return x.inner.Name()
-}
-
-// ModelNumber calls the underlying ModelNumber.
-func (x *Accessory) ModelNumber() unsafe.Pointer {
-	return x.inner.ModelNumber()
-}
-
-// SerialNumber calls the underlying SerialNumber.
-func (x *Accessory) SerialNumber() unsafe.Pointer {
-	return x.inner.SerialNumber()
-}
-
-// FirmwareRevision calls the underlying FirmwareRevision.
-func (x *Accessory) FirmwareRevision() unsafe.Pointer {
-	return x.inner.FirmwareRevision()
-}
-
-// HardwareRevision calls the underlying HardwareRevision.
-func (x *Accessory) HardwareRevision() unsafe.Pointer {
-	return x.inner.HardwareRevision()
-}
-
-// DockType calls the underlying DockType.
+// DockType wraps the corresponding Objective-C method.
 func (x *Accessory) DockType() string {
-	_r := x.inner.DockType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// ProtocolStrings calls the underlying ProtocolStrings.
-func (x *Accessory) ProtocolStrings() unsafe.Pointer {
-	return x.inner.ProtocolStrings()
-}
-
-// Delegate calls the underlying Delegate.
-func (x *Accessory) Delegate() unsafe.Pointer {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Accessory) SetDelegate(delegate unsafe.Pointer) {
-	x.inner.SetDelegate(delegate)
+	return purego.GoString(_r)
 }
 
 // Accessoryable is the interface implemented by [Accessory], for mocking and DI.
 type Accessoryable interface {
-	Unwrap() *raw.EAAccessory
+	obj.Object
 	IsConnected() bool
-	ConnectionID() uint
-	Manufacturer() unsafe.Pointer
-	Name() unsafe.Pointer
-	ModelNumber() unsafe.Pointer
-	SerialNumber() unsafe.Pointer
-	FirmwareRevision() unsafe.Pointer
-	HardwareRevision() unsafe.Pointer
+	ConnectionID() int
 	DockType() string
-	ProtocolStrings() unsafe.Pointer
-	Delegate() unsafe.Pointer
-	SetDelegate(delegate unsafe.Pointer)
 }
 
 var _ Accessoryable = (*Accessory)(nil)

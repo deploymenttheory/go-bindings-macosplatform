@@ -5,122 +5,117 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A request that detects an animal body pose.
+// DetectAnimalBodyPoseRequest is an idiomatic wrapper over the Objective-C class VNDetectAnimalBodyPoseRequest.
 //
-// DetectAnimalBodyPoseRequest wraps [raw.VNDetectAnimalBodyPoseRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// A request that detects an animal body pose.
 type DetectAnimalBodyPoseRequest struct {
-	inner *raw.VNDetectAnimalBodyPoseRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectAnimalBodyPoseRequest].
-func (x *DetectAnimalBodyPoseRequest) Unwrap() *raw.VNDetectAnimalBodyPoseRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectAnimalBodyPoseRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectAnimalBodyPoseRequestFromID adopts an existing object pointer as a DetectAnimalBodyPoseRequest (nil for 0).
+// DetectAnimalBodyPoseRequestFromID adopts an existing Objective-C object as a DetectAnimalBodyPoseRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectAnimalBodyPoseRequestFromID(id objc.ID) *DetectAnimalBodyPoseRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectAnimalBodyPoseRequest{inner: raw.VNDetectAnimalBodyPoseRequestFromID(id)}
+	x := &DetectAnimalBodyPoseRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectAnimalBodyPoseRequest creates a new [DetectAnimalBodyPoseRequest].
+// detectAnimalBodyPoseRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectAnimalBodyPoseRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectAnimalBodyPoseRequestAdopt(id objc.ID) *DetectAnimalBodyPoseRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectAnimalBodyPoseRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectAnimalBodyPoseRequest creates a new DetectAnimalBodyPoseRequest.
 func NewDetectAnimalBodyPoseRequest() *DetectAnimalBodyPoseRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectAnimalBodyPoseRequest")), objc.RegisterName("new"))
-	return &DetectAnimalBodyPoseRequest{inner: raw.VNDetectAnimalBodyPoseRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectAnimalBodyPoseRequest")), objc.RegisterName("new"))
+	return detectAnimalBodyPoseRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectAnimalBodyPoseRequest) WithRevision(revision uint) *DetectAnimalBodyPoseRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectAnimalBodyPoseRequest) WithRevision(revision int) *DetectAnimalBodyPoseRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Retrieves the joint names the request supports.
+// SupportedJointNames retrieves the joint names the request supports.
 //
 // SupportedJointNames returns the collection as a Go slice.
-func (x *DetectAnimalBodyPoseRequest) SupportedJointNames() ([]*foundation.NSString, error) {
-	arr, err := x.inner.SupportedJointNamesAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *DetectAnimalBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	}), nil
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Retrieves the joint group names the request supports.
+// SupportedJointsGroupNames retrieves the joint group names the request supports.
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
-func (x *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation.NSString, error) {
-	arr, err := x.inner.SupportedJointsGroupNamesAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	}), nil
-}
-
-func (x *DetectAnimalBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectAnimalBodyPoseRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // DetectAnimalBodyPoseRequestable is the interface implemented by [DetectAnimalBodyPoseRequest], for mocking and DI.
 type DetectAnimalBodyPoseRequestable interface {
-	Unwrap() *raw.VNDetectAnimalBodyPoseRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest
-	WithRevision(revision uint) *DetectAnimalBodyPoseRequest
-	SupportedJointNames() ([]*foundation.NSString, error)
-	SupportedJointsGroupNames() ([]*foundation.NSString, error)
+	WithRevision(revision int) *DetectAnimalBodyPoseRequest
+	SupportedJointNames() ([]obj.Object, error)
+	SupportedJointsGroupNames() ([]obj.Object, error)
 }
 
 var _ DetectAnimalBodyPoseRequestable = (*DetectAnimalBodyPoseRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectAnimalBodyPoseRequest)(nil)
+
+var _ RequestProvider = (*DetectAnimalBodyPoseRequest)(nil)

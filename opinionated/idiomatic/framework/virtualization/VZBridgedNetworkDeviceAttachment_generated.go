@@ -5,60 +5,66 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network device that interacts directly with a physical network interface on the host computer.
+// BridgedNetworkDeviceAttachment is an idiomatic wrapper over the Objective-C class VZBridgedNetworkDeviceAttachment.
 //
-// BridgedNetworkDeviceAttachment wraps [raw.VZBridgedNetworkDeviceAttachment] with a fluent Go API.
+// It embeds [NetworkDeviceAttachment], promoting that type's methods.
+//
+// A network device that interacts directly with a physical network interface on the host computer.
 type BridgedNetworkDeviceAttachment struct {
-	inner *raw.VZBridgedNetworkDeviceAttachment
+	NetworkDeviceAttachment
 }
 
-// Unwrap returns the underlying [raw.VZBridgedNetworkDeviceAttachment].
-func (x *BridgedNetworkDeviceAttachment) Unwrap() *raw.VZBridgedNetworkDeviceAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BridgedNetworkDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// BridgedNetworkDeviceAttachmentFromID adopts an existing object pointer as a BridgedNetworkDeviceAttachment (nil for 0).
+// BridgedNetworkDeviceAttachmentFromID adopts an existing Objective-C object as a BridgedNetworkDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func BridgedNetworkDeviceAttachmentFromID(id objc.ID) *BridgedNetworkDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &BridgedNetworkDeviceAttachment{inner: raw.VZBridgedNetworkDeviceAttachmentFromID(id)}
+	x := &BridgedNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates the attachment from a bridged network interface object.
-//
-// NewBridgedNetworkDeviceAttachmentWithInterface creates a new [BridgedNetworkDeviceAttachment].
-func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *raw.VZBridgedNetworkInterface) *BridgedNetworkDeviceAttachment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZBridgedNetworkDeviceAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), interface_.Ptr())
-	return &BridgedNetworkDeviceAttachment{inner: raw.VZBridgedNetworkDeviceAttachmentFromID(_id)}
-}
-
-// Interface calls the underlying Interface.
-func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
-	_r := x.inner.Interface()
-	if _r == nil {
+// bridgedNetworkDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// BridgedNetworkDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bridgedNetworkDeviceAttachmentAdopt(id objc.ID) *BridgedNetworkDeviceAttachment {
+	if id == 0 {
 		return nil
 	}
-	return &BridgedNetworkInterface{inner: _r}
+	x := &BridgedNetworkDeviceAttachment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *BridgedNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment {
-	return &x.inner.VZNetworkDeviceAttachment
+// NewBridgedNetworkDeviceAttachmentWithInterface creates the attachment from a bridged network interface object.
+func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkInterface) *BridgedNetworkDeviceAttachment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkDeviceAttachment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(interface_))
+	return bridgedNetworkDeviceAttachmentAdopt(_id)
+}
+
+// Interface wraps the corresponding Objective-C method.
+func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+	return BridgedNetworkInterfaceFromID(_r)
 }
 
 // BridgedNetworkDeviceAttachmentable is the interface implemented by [BridgedNetworkDeviceAttachment], for mocking and DI.
 type BridgedNetworkDeviceAttachmentable interface {
-	Unwrap() *raw.VZBridgedNetworkDeviceAttachment
+	obj.Object
 	Interface() *BridgedNetworkInterface
 }
 
 var _ BridgedNetworkDeviceAttachmentable = (*BridgedNetworkDeviceAttachment)(nil)
+
+var _ NetworkDeviceAttachmentProvider = (*BridgedNetworkDeviceAttachment)(nil)

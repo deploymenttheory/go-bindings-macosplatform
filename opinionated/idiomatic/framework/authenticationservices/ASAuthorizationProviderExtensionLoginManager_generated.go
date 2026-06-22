@@ -6,112 +6,140 @@ package authenticationservices
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An interface to maintain platform single sign-on (SSO) during authentication and registration.
+// AuthorizationProviderExtensionLoginManager is an idiomatic wrapper over the Objective-C class ASAuthorizationProviderExtensionLoginManager.
 //
-// AuthorizationProviderExtensionLoginManager wraps [raw.ASAuthorizationProviderExtensionLoginManager] with a fluent Go API.
+// An interface to maintain platform single sign-on (SSO) during authentication and registration.
 type AuthorizationProviderExtensionLoginManager struct {
-	inner *raw.ASAuthorizationProviderExtensionLoginManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationProviderExtensionLoginManager].
-func (x *AuthorizationProviderExtensionLoginManager) Unwrap() *raw.ASAuthorizationProviderExtensionLoginManager {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationProviderExtensionLoginManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationProviderExtensionLoginManagerFromID adopts an existing object pointer as a AuthorizationProviderExtensionLoginManager (nil for 0).
+// AuthorizationProviderExtensionLoginManagerFromID adopts an existing Objective-C object as a AuthorizationProviderExtensionLoginManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationProviderExtensionLoginManagerFromID(id objc.ID) *AuthorizationProviderExtensionLoginManager {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationProviderExtensionLoginManager{inner: raw.ASAuthorizationProviderExtensionLoginManagerFromID(id)}
-}
-
-// NewAuthorizationProviderExtensionLoginManager creates a new [AuthorizationProviderExtensionLoginManager].
-func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExtensionLoginManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionLoginManager")), objc.RegisterName("new"))
-	return &AuthorizationProviderExtensionLoginManager{inner: raw.ASAuthorizationProviderExtensionLoginManagerFromID(_id)}
-}
-
-// The single sign-on response tokens for the current user and extension.
-//
-// WithSsoTokens sets the ssoTokens property and returns the receiver for chaining.
-func (x *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) *AuthorizationProviderExtensionLoginManager {
-	x.inner.SetSsoTokens(ssoTokens)
+	x := &AuthorizationProviderExtensionLoginManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Saves or replaces the user login configration. @param userLoginConfiguration The user login configration to use. @param error The error when there are validation errors or nil.
-//
-// SaveUserLoginConfigurationError calls the underlying SaveUserLoginConfigurationError.
-func (x *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfigurationError(userLoginConfiguration *raw.ASAuthorizationProviderExtensionUserLoginConfiguration) (bool, error) {
-	return x.inner.SaveUserLoginConfigurationError(userLoginConfiguration)
+// authorizationProviderExtensionLoginManagerAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationProviderExtensionLoginManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationProviderExtensionLoginManagerAdopt(id objc.ID) *AuthorizationProviderExtensionLoginManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationProviderExtensionLoginManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Saves or replaces the login configuration.
-//
-// SaveLoginConfigurationError calls the underlying SaveLoginConfigurationError.
-func (x *AuthorizationProviderExtensionLoginManager) SaveLoginConfigurationError(loginConfiguration *raw.ASAuthorizationProviderExtensionLoginConfiguration) (bool, error) {
-	return x.inner.SaveLoginConfigurationError(loginConfiguration)
+// Description returns the object's -description text.
+func (x *AuthorizationProviderExtensionLoginManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Saves the provided certificate for the key type.
-//
-// SaveCertificateKeyType calls the underlying SaveCertificateKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType) {
-	x.inner.SaveCertificateKeyType(certificate, raw.ASAuthorizationProviderExtensionKeyType(keyType))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationProviderExtensionLoginManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Retrieves the key for the specified platform single sign-on key type.
-//
-// CopyKeyForKeyType calls the underlying CopyKeyForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.CopyKeyForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationProviderExtensionLoginManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Retrieves the identity for the specified platform single sign-on key type.
-//
-// CopyIdentityForKeyType calls the underlying CopyIdentityForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.CopyIdentityForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationProviderExtensionLoginManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract Generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key. @param keyType The key type to retrieve.
-//
-// BeginKeyRotationForKeyType calls the underlying BeginKeyRotationForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.BeginKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
+// NewAuthorizationProviderExtensionLoginManager creates a new AuthorizationProviderExtensionLoginManager.
+func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExtensionLoginManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionLoginManager")), objc.RegisterName("new"))
+	return authorizationProviderExtensionLoginManagerAdopt(_id)
 }
 
-// @abstract Completes rotation for the key to replace the previous key. @param keyType The key type to retrieve.
-//
-// CompleteKeyRotationForKeyType calls the underlying CompleteKeyRotationForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) {
-	x.inner.CompleteKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
+// WithSsoTokens the single sign-on response tokens for the current user and extension.
+func (x *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens obj.Object) *AuthorizationProviderExtensionLoginManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsoTokens:"), objref.IDOf(ssoTokens))
+	return x
 }
 
-// Requests platform single sign-on to reauthenticate the current user.
+// SaveUserLoginConfiguration saves or replaces the user login configration.
+func (x *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfiguration(userLoginConfiguration *AuthorizationProviderExtensionUserLoginConfiguration) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveUserLoginConfiguration:error:"), objref.IDOf(userLoginConfiguration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// SaveLoginConfiguration saves or replaces the login configuration.
+func (x *AuthorizationProviderExtensionLoginManager) SaveLoginConfiguration(loginConfiguration *AuthorizationProviderExtensionLoginConfiguration) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveLoginConfiguration:error:"), objref.IDOf(loginConfiguration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// SaveCertificateKeyType saves the provided certificate for the key type.
+func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate obj.Object, keyType AuthorizationProviderExtensionKeyType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveCertificate:keyType:"), objref.IDOf(certificate), keyType)
+}
+
+// CopyKeyForKeyType retrieves the key for the specified platform single sign-on key type.
+func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyKeyForKeyType:"), keyType)
+	return obj.Wrap(_r)
+}
+
+// CopyIdentityForKeyType retrieves the identity for the specified platform single sign-on key type.
+func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyIdentityForKeyType:"), keyType)
+	return obj.Wrap(_r)
+}
+
+// BeginKeyRotationForKeyType generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key.
+func (x *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginKeyRotationForKeyType:"), keyType)
+	return obj.Wrap(_r)
+}
+
+// CompleteKeyRotationForKeyType completes rotation for the key to replace the previous key.
+func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeKeyRotationForKeyType:"), keyType)
+}
+
+// UserNeedsReauthenticationWithCompletion requests platform single sign-on to reauthenticate the current user.
 //
 // UserNeedsReauthenticationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.UserNeedsReauthenticationWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userNeedsReauthenticationWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -120,112 +148,97 @@ func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWi
 	}
 }
 
-// Invokes the device registration to run again so the current user can repair it.
-//
-// DeviceRegistrationsNeedsRepair calls the underlying DeviceRegistrationsNeedsRepair.
+// DeviceRegistrationsNeedsRepair invokes the device registration to run again so the current user can repair it.
 func (x *AuthorizationProviderExtensionLoginManager) DeviceRegistrationsNeedsRepair() {
-	x.inner.DeviceRegistrationsNeedsRepair()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceRegistrationsNeedsRepair"))
 }
 
-// Invokes the user registration to run again so the current user can repair it.
-//
-// UserRegistrationsNeedsRepair calls the underlying UserRegistrationsNeedsRepair.
+// UserRegistrationsNeedsRepair invokes the user registration to run again so the current user can repair it.
 func (x *AuthorizationProviderExtensionLoginManager) UserRegistrationsNeedsRepair() {
-	x.inner.UserRegistrationsNeedsRepair()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userRegistrationsNeedsRepair"))
 }
 
-// @abstract Requests that the decryption keys are repaired.
-//
-// DecryptionKeysNeedRepair calls the underlying DecryptionKeysNeedRepair.
+// DecryptionKeysNeedRepair requests that the decryption keys are repaired.
 func (x *AuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair() {
-	x.inner.DecryptionKeysNeedRepair()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decryptionKeysNeedRepair"))
 }
 
-// Creates new encryption, signing, and Secure Enclave keys for the user.
-//
-// ResetKeys calls the underlying ResetKeys.
+// ResetKeys creates new encryption, signing, and Secure Enclave keys for the user.
 func (x *AuthorizationProviderExtensionLoginManager) ResetKeys() {
-	x.inner.ResetKeys()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetKeys"))
 }
 
-// @abstract Creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
-//
-// ResetDeviceKeys calls the underlying ResetDeviceKeys.
+// ResetDeviceKeys creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
 func (x *AuthorizationProviderExtensionLoginManager) ResetDeviceKeys() {
-	x.inner.ResetDeviceKeys()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDeviceKeys"))
 }
 
-// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
-//
-// ResetUserSecureEnclaveKey calls the underlying ResetUserSecureEnclaveKey.
+// ResetUserSecureEnclaveKey creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
 func (x *AuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey() {
-	x.inner.ResetUserSecureEnclaveKey()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetUserSecureEnclaveKey"))
 }
 
-// @abstract Provides a new or cached attestation for the specified key type. @param keyType The key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
+// AttestKeyClientDataHashCompletion provides a new or cached attestation for the specified key type.
 //
 // AttestKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error) {
+func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AttestKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestKey:clientDataHash:completion:"), keyType, objref.IDOf(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// @abstract Provides a new or cached attestation for the specified pending key type. @param keyType The pending key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the pending key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
+// AttestPendingKeyClientDataHashCompletion provides a new or cached attestation for the specified pending key type.
 //
 // AttestPendingKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
-func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error) {
+func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestPendingKey:clientDataHash:completion:"), keyType, objref.IDOf(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Requests platform single sign-on to show the extension’s view controller to the user.
+// PresentRegistrationViewControllerWithCompletion requests platform single sign-on to show the extension’s view controller to the user.
 //
 // PresentRegistrationViewControllerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewControllerWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PresentRegistrationViewControllerWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentRegistrationViewControllerWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -234,102 +247,73 @@ func (x *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewCont
 	}
 }
 
-// @abstract Returns YES if the current device completed registration.
-//
-// IsDeviceRegistered calls the underlying IsDeviceRegistered.
+// IsDeviceRegistered returns YES if the current device completed registration.
 func (x *AuthorizationProviderExtensionLoginManager) IsDeviceRegistered() bool {
-	return x.inner.IsDeviceRegistered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceRegistered"))
+	return _r
 }
 
-// @abstract Returns YES if current user completed registration.
-//
-// IsUserRegistered calls the underlying IsUserRegistered.
+// IsUserRegistered returns YES if current user completed registration.
 func (x *AuthorizationProviderExtensionLoginManager) IsUserRegistered() bool {
-	return x.inner.IsUserRegistered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserRegistered"))
+	return _r
 }
 
-// @abstract Returns the device registration token from the MDM profile.
-//
-// RegistrationToken calls the underlying RegistrationToken.
+// RegistrationToken returns the device registration token from the MDM profile.
 func (x *AuthorizationProviderExtensionLoginManager) RegistrationToken() string {
-	_r := x.inner.RegistrationToken()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registrationToken"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the authentication method used for the device.
-//
-// AuthenticationMethod calls the underlying AuthenticationMethod.
-func (x *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() ASAuthorizationProviderExtensionAuthenticationMethod {
-	return ASAuthorizationProviderExtensionAuthenticationMethod(x.inner.AuthenticationMethod())
+// AuthenticationMethod returns the authentication method used for the device.
+func (x *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() AuthorizationProviderExtensionAuthenticationMethod {
+	_r := objc.Send[AuthorizationProviderExtensionAuthenticationMethod](objref.IDOf(x), objc.RegisterName("authenticationMethod"))
+	return _r
 }
 
-// @abstract Returns the extension data from the MDM profile.
-//
-// ExtensionData calls the underlying ExtensionData.
-func (x *AuthorizationProviderExtensionLoginManager) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.ExtensionData()
+// ExtensionData returns the extension data from the MDM profile.
+func (x *AuthorizationProviderExtensionLoginManager) ExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionData"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The user name to use when authenticating with the identity provider.
-//
-// LoginUserName calls the underlying LoginUserName.
-func (x *AuthorizationProviderExtensionLoginManager) LoginUserName() unsafe.Pointer {
-	return x.inner.LoginUserName()
-}
-
-// SetLoginUserName calls the underlying SetLoginUserName.
-func (x *AuthorizationProviderExtensionLoginManager) SetLoginUserName(loginUserName unsafe.Pointer) {
-	x.inner.SetLoginUserName(loginUserName)
-}
-
-// @abstract Retrieves the current user login configuration for the extension.
-//
-// UserLoginConfiguration calls the underlying UserLoginConfiguration.
+// UserLoginConfiguration retrieves the current user login configuration for the extension.
 func (x *AuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *AuthorizationProviderExtensionUserLoginConfiguration {
-	_r := x.inner.UserLoginConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationProviderExtensionUserLoginConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userLoginConfiguration"))
+	return AuthorizationProviderExtensionUserLoginConfigurationFromID(_r)
 }
 
-// @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
-//
-// SsoTokens calls the underlying SsoTokens.
-func (x *AuthorizationProviderExtensionLoginManager) SsoTokens() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.SsoTokens()
+// SsoTokens retrieves or sets the current SSO tokens response for the current user and extension.
+func (x *AuthorizationProviderExtensionLoginManager) SsoTokens() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssoTokens"))
+	return obj.Wrap(_r)
 }
 
-// SetSsoTokens calls the underlying SetSsoTokens.
-func (x *AuthorizationProviderExtensionLoginManager) SetSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetSsoTokens(ssoTokens)
+// SetSsoTokens wraps the corresponding Objective-C method.
+func (x *AuthorizationProviderExtensionLoginManager) SetSsoTokens(ssoTokens obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsoTokens:"), objref.IDOf(ssoTokens))
 }
 
-// @abstract Retrieves or sets the current login configuration for the extension.
-//
-// LoginConfiguration calls the underlying LoginConfiguration.
+// LoginConfiguration retrieves or sets the current login configuration for the extension.
 func (x *AuthorizationProviderExtensionLoginManager) LoginConfiguration() *AuthorizationProviderExtensionLoginConfiguration {
-	_r := x.inner.LoginConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationProviderExtensionLoginConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loginConfiguration"))
+	return AuthorizationProviderExtensionLoginConfigurationFromID(_r)
 }
 
 // AuthorizationProviderExtensionLoginManagerable is the interface implemented by [AuthorizationProviderExtensionLoginManager], for mocking and DI.
 type AuthorizationProviderExtensionLoginManagerable interface {
-	Unwrap() *raw.ASAuthorizationProviderExtensionLoginManager
-	WithSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) *AuthorizationProviderExtensionLoginManager
-	SaveUserLoginConfigurationError(userLoginConfiguration *raw.ASAuthorizationProviderExtensionUserLoginConfiguration) (bool, error)
-	SaveLoginConfigurationError(loginConfiguration *raw.ASAuthorizationProviderExtensionLoginConfiguration) (bool, error)
-	SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType)
-	CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	BeginKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	CompleteKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType)
+	obj.Object
+	WithSsoTokens(ssoTokens obj.Object) *AuthorizationProviderExtensionLoginManager
+	SaveUserLoginConfiguration(userLoginConfiguration *AuthorizationProviderExtensionUserLoginConfiguration) error
+	SaveLoginConfiguration(loginConfiguration *AuthorizationProviderExtensionLoginConfiguration) error
+	SaveCertificateKeyType(certificate obj.Object, keyType AuthorizationProviderExtensionKeyType)
+	CopyKeyForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object
+	CopyIdentityForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object
+	BeginKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object
+	CompleteKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType)
 	UserNeedsReauthenticationWithCompletion(ctx context.Context) error
 	DeviceRegistrationsNeedsRepair()
 	UserRegistrationsNeedsRepair()
@@ -337,19 +321,17 @@ type AuthorizationProviderExtensionLoginManagerable interface {
 	ResetKeys()
 	ResetDeviceKeys()
 	ResetUserSecureEnclaveKey()
-	AttestKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error)
-	AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData) (*foundation.NSArray[objc.ID], error)
+	AttestKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (obj.Object, error)
+	AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (obj.Object, error)
 	PresentRegistrationViewControllerWithCompletion(ctx context.Context) error
 	IsDeviceRegistered() bool
 	IsUserRegistered() bool
 	RegistrationToken() string
-	AuthenticationMethod() ASAuthorizationProviderExtensionAuthenticationMethod
-	ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID]
-	LoginUserName() unsafe.Pointer
-	SetLoginUserName(loginUserName unsafe.Pointer)
+	AuthenticationMethod() AuthorizationProviderExtensionAuthenticationMethod
+	ExtensionData() obj.Object
 	UserLoginConfiguration() *AuthorizationProviderExtensionUserLoginConfiguration
-	SsoTokens() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID])
+	SsoTokens() obj.Object
+	SetSsoTokens(ssoTokens obj.Object)
 	LoginConfiguration() *AuthorizationProviderExtensionLoginConfiguration
 }
 

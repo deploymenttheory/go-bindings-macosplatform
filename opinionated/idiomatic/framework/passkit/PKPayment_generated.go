@@ -5,77 +5,100 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
+// Payment is an idiomatic wrapper over the Objective-C class PKPayment.
 //
-// Payment wraps [raw.PKPayment] with a fluent Go API.
+// Represents the result of authorizing a payment request and contains payment information, encrypted in the payment token.
 type Payment struct {
-	inner *raw.PKPayment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPayment].
-func (x *Payment) Unwrap() *raw.PKPayment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Payment) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentFromID adopts an existing object pointer as a Payment (nil for 0).
+// PaymentFromID adopts an existing Objective-C object as a Payment
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentFromID(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	return &Payment{inner: raw.PKPaymentFromID(id)}
+	x := &Payment{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPayment creates a new [Payment].
+// paymentAdopt wraps an Objective-C object that this code just created as a
+// Payment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentAdopt(id objc.ID) *Payment {
+	if id == 0 {
+		return nil
+	}
+	x := &Payment{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Payment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Payment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Payment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Payment) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPayment creates a new Payment.
 func NewPayment() *Payment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPayment")), objc.RegisterName("new"))
-	return &Payment{inner: raw.PKPaymentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPayment")), objc.RegisterName("new"))
+	return paymentAdopt(_id)
 }
 
-// Token calls the underlying Token.
+// Token wraps the corresponding Objective-C method.
 func (x *Payment) Token() *PaymentToken {
-	_r := x.inner.Token()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return PaymentTokenFromID(_r)
 }
 
-// BillingContact calls the underlying BillingContact.
+// BillingContact wraps the corresponding Objective-C method.
 func (x *Payment) BillingContact() *Contact {
-	_r := x.inner.BillingContact()
-	if _r == nil {
-		return nil
-	}
-	return &Contact{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingContact"))
+	return ContactFromID(_r)
 }
 
-// ShippingContact calls the underlying ShippingContact.
+// ShippingContact wraps the corresponding Objective-C method.
 func (x *Payment) ShippingContact() *Contact {
-	_r := x.inner.ShippingContact()
-	if _r == nil {
-		return nil
-	}
-	return &Contact{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingContact"))
+	return ContactFromID(_r)
 }
 
-// ShippingMethod calls the underlying ShippingMethod.
+// ShippingMethod wraps the corresponding Objective-C method.
 func (x *Payment) ShippingMethod() *ShippingMethod {
-	_r := x.inner.ShippingMethod()
-	if _r == nil {
-		return nil
-	}
-	return &ShippingMethod{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingMethod"))
+	return ShippingMethodFromID(_r)
 }
 
 // Paymentable is the interface implemented by [Payment], for mocking and DI.
 type Paymentable interface {
-	Unwrap() *raw.PKPayment
+	obj.Object
 	Token() *PaymentToken
 	BillingContact() *Contact
 	ShippingContact() *Contact

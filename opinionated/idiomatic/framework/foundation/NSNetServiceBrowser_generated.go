@@ -5,123 +5,137 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A network service browser that finds published services on a network using multicast DNS.
+// NetServiceBrowser is an idiomatic wrapper over the Objective-C class NSNetServiceBrowser.
 //
-// NetServiceBrowser wraps [raw.NSNetServiceBrowser] with a fluent Go API.
+// A network service browser that finds published services on a network using multicast DNS.
 type NetServiceBrowser struct {
-	inner *raw.NSNetServiceBrowser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSNetServiceBrowser].
-func (x *NetServiceBrowser) Unwrap() *raw.NSNetServiceBrowser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetServiceBrowser) ID() objc.ID { return x.inner.Ptr() }
-
-// NetServiceBrowserFromID adopts an existing object pointer as a NetServiceBrowser (nil for 0).
+// NetServiceBrowserFromID adopts an existing Objective-C object as a NetServiceBrowser
+// (nil for 0), retaining it and registering a release finalizer.
 func NetServiceBrowserFromID(id objc.ID) *NetServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	return &NetServiceBrowser{inner: raw.NSNetServiceBrowserFromID(id)}
+	x := &NetServiceBrowser{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNetServiceBrowser creates a new [NetServiceBrowser].
+// netServiceBrowserAdopt wraps an Objective-C object that this code just created as a
+// NetServiceBrowser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func netServiceBrowserAdopt(id objc.ID) *NetServiceBrowser {
+	if id == 0 {
+		return nil
+	}
+	x := &NetServiceBrowser{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NetServiceBrowser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetServiceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetServiceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NetServiceBrowser) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNetServiceBrowser creates a new NetServiceBrowser.
 func NewNetServiceBrowser() *NetServiceBrowser {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNetServiceBrowser")), objc.RegisterName("new"))
-	return &NetServiceBrowser{inner: raw.NSNetServiceBrowserFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSNetServiceBrowser")), objc.RegisterName("new"))
+	return netServiceBrowserAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *NetServiceBrowser) WithDelegate(delegate raw.NSNetServiceBrowserDelegate) *NetServiceBrowser {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// WithIncludesPeerToPeer sets the includesPeerToPeer property and returns the receiver for chaining.
+// WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
 func (x *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
-	x.inner.SetIncludesPeerToPeer(includesPeerToPeer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *NetServiceBrowser) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetServiceBrowser {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
-func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+// ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
+func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.RemoveFromRunLoopForMode(aRunLoop, mode)
+// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
+func (x *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// SearchForBrowsableDomains calls the underlying SearchForBrowsableDomains.
+// SearchForBrowsableDomains wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForBrowsableDomains() {
-	x.inner.SearchForBrowsableDomains()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForBrowsableDomains"))
 }
 
-// SearchForRegistrationDomains calls the underlying SearchForRegistrationDomains.
+// SearchForRegistrationDomains wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForRegistrationDomains() {
-	x.inner.SearchForRegistrationDomains()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForRegistrationDomains"))
 }
 
-// SearchForServicesOfTypeInDomain calls the underlying SearchForServicesOfTypeInDomain.
+// SearchForServicesOfTypeInDomain wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
-	x.inner.SearchForServicesOfTypeInDomain(foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(domainString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
 }
 
-// Stop calls the underlying Stop.
+// Stop wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *NetServiceBrowser) Delegate() raw.NSNetServiceBrowserDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *NetServiceBrowser) SetDelegate(delegate raw.NSNetServiceBrowserDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IncludesPeerToPeer calls the underlying IncludesPeerToPeer.
+// IncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) IncludesPeerToPeer() bool {
-	return x.inner.IncludesPeerToPeer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPeerToPeer"))
+	return _r
 }
 
-// SetIncludesPeerToPeer calls the underlying SetIncludesPeerToPeer.
+// SetIncludesPeerToPeer wraps the corresponding Objective-C method.
 func (x *NetServiceBrowser) SetIncludesPeerToPeer(includesPeerToPeer bool) {
-	x.inner.SetIncludesPeerToPeer(includesPeerToPeer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 }
-
-func (x *NetServiceBrowser) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // NetServiceBrowserable is the interface implemented by [NetServiceBrowser], for mocking and DI.
 type NetServiceBrowserable interface {
-	Unwrap() *raw.NSNetServiceBrowser
-	WithDelegate(delegate raw.NSNetServiceBrowserDelegate) *NetServiceBrowser
+	obj.Object
 	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NetServiceBrowser
-	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
-	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
+	WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser
+	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
+	RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
 	SearchForBrowsableDomains()
 	SearchForRegistrationDomains()
 	SearchForServicesOfTypeInDomain(type_ string, domainString string)
 	Stop()
-	Delegate() raw.NSNetServiceBrowserDelegate
-	SetDelegate(delegate raw.NSNetServiceBrowserDelegate)
 	IncludesPeerToPeer() bool
 	SetIncludesPeerToPeer(includesPeerToPeer bool)
 }

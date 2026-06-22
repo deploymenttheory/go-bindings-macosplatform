@@ -5,102 +5,101 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the 3D points for a request.
+// RecognizedPoints3DObservation is an idiomatic wrapper over the Objective-C class VNRecognizedPoints3DObservation.
 //
-// RecognizedPoints3DObservation wraps [raw.VNRecognizedPoints3DObservation] with a fluent Go API.
+// RecognizedPoints3DObservation is an abstract base — you do not construct it directly. Construct one of [HumanBodyPose3DObservation] and pass it where a RecognizedPoints3DObservation is accepted.
+//
+// An observation that provides the 3D points for a request.
 type RecognizedPoints3DObservation struct {
-	inner *raw.VNRecognizedPoints3DObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedPoints3DObservation].
-func (x *RecognizedPoints3DObservation) Unwrap() *raw.VNRecognizedPoints3DObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedPoints3DObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedPoints3DObservationFromID adopts an existing object pointer as a RecognizedPoints3DObservation (nil for 0).
+// RecognizedPoints3DObservationFromID adopts an existing Objective-C object as a RecognizedPoints3DObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedPoints3DObservationFromID(id objc.ID) *RecognizedPoints3DObservation {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedPoints3DObservation{inner: raw.VNRecognizedPoints3DObservationFromID(id)}
+	x := &RecognizedPoints3DObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedPoints3DObservation creates a new [RecognizedPoints3DObservation].
-func NewRecognizedPoints3DObservation() *RecognizedPoints3DObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedPoints3DObservation")), objc.RegisterName("new"))
-	return &RecognizedPoints3DObservation{inner: raw.VNRecognizedPoints3DObservationFromID(_id)}
-}
-
-// Returns a point for a key you specify.
-//
-// RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
-func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error) {
-	_r, _err := x.inner.RecognizedPointForKeyError(pointKey)
-	if _err != nil {
-		return nil, _err
+// recognizedPoints3DObservationAdopt wraps an Objective-C object that this code just created as a
+// RecognizedPoints3DObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedPoints3DObservationAdopt(id objc.ID) *RecognizedPoints3DObservation {
+	if id == 0 {
+		return nil
 	}
-	if _r == nil {
-		return nil, nil
+	x := &RecognizedPoints3DObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// RecognizedPointForKeyError returns a point for a key you specify.
+func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint3D, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForKey:error:"), objref.IDOf(pointKey), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RecognizedPoint3D{inner: _r}, nil
+	return RecognizedPoint3DFromID(_r), nil
 }
 
-// Returns a point for a group key you specify.
-//
-// RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
-func (x *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error) {
-	return x.inner.RecognizedPointsForGroupKeyError(groupKey)
+// RecognizedPointsForGroupKeyError returns a point for a group key you specify.
+func (x *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForGroupKey:error:"), objref.IDOf(groupKey), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @brief Returns all of the point group keys available in the observation.
+// AvailableKeys returns all of the point group keys available in the observation.
 //
 // AvailableKeys returns the collection as a Go slice.
-func (x *RecognizedPoints3DObservation) AvailableKeys() []*foundation.NSString {
-	arr := x.inner.AvailableKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *RecognizedPoints3DObservation) AvailableKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
+// AvailableGroupKeys the availableGroupKeys property returns all of the point group labels usable with the observation.
 //
 // AvailableGroupKeys returns the collection as a Go slice.
-func (x *RecognizedPoints3DObservation) AvailableGroupKeys() []*foundation.NSString {
-	arr := x.inner.AvailableGroupKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
-}
-
-func (x *RecognizedPoints3DObservation) asRecognizedPoints3DObservation() *raw.VNRecognizedPoints3DObservation {
-	return x.inner
-}
-
-func (x *RecognizedPoints3DObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNObservation
+func (x *RecognizedPoints3DObservation) AvailableGroupKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableGroupKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecognizedPoints3DObservationable is the interface implemented by [RecognizedPoints3DObservation], for mocking and DI.
 type RecognizedPoints3DObservationable interface {
-	Unwrap() *raw.VNRecognizedPoints3DObservation
-	RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error)
-	RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error)
-	AvailableKeys() []*foundation.NSString
-	AvailableGroupKeys() []*foundation.NSString
+	obj.Object
+	RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint3D, err error)
+	RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error)
+	AvailableKeys() []obj.Object
+	AvailableGroupKeys() []obj.Object
 }
 
 var _ RecognizedPoints3DObservationable = (*RecognizedPoints3DObservation)(nil)
+
+// isRecognizedPoints3DObservation marks RecognizedPoints3DObservation — and, by embedding promotion, its
+// subclasses — as a member of the RecognizedPoints3DObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *RecognizedPoints3DObservation) isRecognizedPoints3DObservation() {}
+
+var _ RecognizedPoints3DObservationProvider = (*RecognizedPoints3DObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedPoints3DObservation)(nil)

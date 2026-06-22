@@ -5,135 +5,141 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A generic wrapper around an underlying value and the value’s type.
+// FeatureValue is an idiomatic wrapper over the Objective-C class MLFeatureValue.
 //
-// FeatureValue wraps [raw.MLFeatureValue] with a fluent Go API.
+// A generic wrapper around an underlying value and the value’s type.
 type FeatureValue struct {
-	inner *raw.MLFeatureValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLFeatureValue].
-func (x *FeatureValue) Unwrap() *raw.MLFeatureValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FeatureValue) ID() objc.ID { return x.inner.Ptr() }
-
-// FeatureValueFromID adopts an existing object pointer as a FeatureValue (nil for 0).
+// FeatureValueFromID adopts an existing Objective-C object as a FeatureValue
+// (nil for 0), retaining it and registering a release finalizer.
 func FeatureValueFromID(id objc.ID) *FeatureValue {
 	if id == 0 {
 		return nil
 	}
-	return &FeatureValue{inner: raw.MLFeatureValueFromID(id)}
+	x := &FeatureValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFeatureValue creates a new [FeatureValue].
+// featureValueAdopt wraps an Objective-C object that this code just created as a
+// FeatureValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func featureValueAdopt(id objc.ID) *FeatureValue {
+	if id == 0 {
+		return nil
+	}
+	x := &FeatureValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FeatureValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FeatureValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FeatureValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FeatureValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFeatureValue creates a new FeatureValue.
 func NewFeatureValue() *FeatureValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLFeatureValue")), objc.RegisterName("new"))
-	return &FeatureValue{inner: raw.MLFeatureValueFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("new"))
+	return featureValueAdopt(_id)
 }
 
-// Returns a Boolean value that indicates whether a feature value is equal to another.
-//
-// IsEqualToFeatureValue calls the underlying IsEqualToFeatureValue.
-func (x *FeatureValue) IsEqualToFeatureValue(value *raw.MLFeatureValue) bool {
-	return x.inner.IsEqualToFeatureValue(value)
+// IsEqualToFeatureValue returns a Boolean value that indicates whether a feature value is equal to another.
+func (x *FeatureValue) IsEqualToFeatureValue(value *FeatureValue) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToFeatureValue:"), objref.IDOf(value))
+	return _r
 }
 
-// Type of the value for which the corresponding property below is held
-//
-// Type calls the underlying Type.
-func (x *FeatureValue) Type() MLFeatureType {
-	return MLFeatureType(x.inner.Type())
+// Type type of the value for which the corresponding property below is held
+func (x *FeatureValue) Type() FeatureType {
+	_r := objc.Send[FeatureType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// True if the value represents a missing or undefined value
-//
-// IsUndefined calls the underlying IsUndefined.
+// IsUndefined true if the value represents a missing or undefined value
 func (x *FeatureValue) IsUndefined() bool {
-	return x.inner.IsUndefined()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUndefined"))
+	return _r
 }
 
-// Populated value if the type is MLFeatureTypeInt64
-//
-// Int64Value calls the underlying Int64Value.
+// Int64Value populated value if the type is MLFeatureTypeInt64
 func (x *FeatureValue) Int64Value() int64 {
-	return x.inner.Int64Value()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("int64Value"))
+	return _r
 }
 
-// Populated value if the type is MLFeatureTypeDouble
-//
-// DoubleValue calls the underlying DoubleValue.
+// DoubleValue populated value if the type is MLFeatureTypeDouble
 func (x *FeatureValue) DoubleValue() float64 {
-	return x.inner.DoubleValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+	return _r
 }
 
-// Populated value if the type is MLFeatureTypeString
-//
-// StringValue calls the underlying StringValue.
+// StringValue populated value if the type is MLFeatureTypeString
 func (x *FeatureValue) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Populated value if the type is MLFeatureTypeMultiArray
-//
-// MultiArrayValue calls the underlying MultiArrayValue.
+// MultiArrayValue populated value if the type is MLFeatureTypeMultiArray
 func (x *FeatureValue) MultiArrayValue() *MultiArray {
-	_r := x.inner.MultiArrayValue()
-	if _r == nil {
-		return nil
-	}
-	return &MultiArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiArrayValue"))
+	return MultiArrayFromID(_r)
 }
 
-// Populated value if the type is MLFeatureTypeDictionary
-//
-// DictionaryValue calls the underlying DictionaryValue.
-func (x *FeatureValue) DictionaryValue() *foundation.NSDictionary[objc.ID, *foundation.NSNumber] {
-	return x.inner.DictionaryValue()
+// DictionaryValue populated value if the type is MLFeatureTypeDictionary
+func (x *FeatureValue) DictionaryValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryValue"))
+	return obj.Wrap(_r)
 }
 
-// Populated value if the type is MLFeatureTypeImage
-//
-// ImageBufferValue calls the underlying ImageBufferValue.
-func (x *FeatureValue) ImageBufferValue() unsafe.Pointer {
-	return x.inner.ImageBufferValue()
-}
-
-// Populated value if the type is MLFeatureTypeSequence
-//
-// SequenceValue calls the underlying SequenceValue.
+// SequenceValue populated value if the type is MLFeatureTypeSequence
 func (x *FeatureValue) SequenceValue() *Sequence {
-	_r := x.inner.SequenceValue()
-	if _r == nil {
-		return nil
-	}
-	return &Sequence{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sequenceValue"))
+	return SequenceFromID(_r)
 }
 
 // FeatureValueable is the interface implemented by [FeatureValue], for mocking and DI.
 type FeatureValueable interface {
-	Unwrap() *raw.MLFeatureValue
-	IsEqualToFeatureValue(value *raw.MLFeatureValue) bool
-	Type() MLFeatureType
+	obj.Object
+	IsEqualToFeatureValue(value *FeatureValue) bool
+	Type() FeatureType
 	IsUndefined() bool
 	Int64Value() int64
 	DoubleValue() float64
 	StringValue() string
 	MultiArrayValue() *MultiArray
-	DictionaryValue() *foundation.NSDictionary[objc.ID, *foundation.NSNumber]
-	ImageBufferValue() unsafe.Pointer
+	DictionaryValue() obj.Object
 	SequenceValue() *Sequence
 }
 

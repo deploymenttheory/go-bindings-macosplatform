@@ -5,86 +5,97 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that supports using Core Image filters to process an individual video frame in a video composition.
+// AsynchronousCIImageFilteringRequest is an idiomatic wrapper over the Objective-C class AVAsynchronousCIImageFilteringRequest.
 //
-// AsynchronousCIImageFilteringRequest wraps [raw.AVAsynchronousCIImageFilteringRequest] with a fluent Go API.
+// An object that supports using Core Image filters to process an individual video frame in a video composition.
 type AsynchronousCIImageFilteringRequest struct {
-	inner *raw.AVAsynchronousCIImageFilteringRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAsynchronousCIImageFilteringRequest].
-func (x *AsynchronousCIImageFilteringRequest) Unwrap() *raw.AVAsynchronousCIImageFilteringRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AsynchronousCIImageFilteringRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AsynchronousCIImageFilteringRequestFromID adopts an existing object pointer as a AsynchronousCIImageFilteringRequest (nil for 0).
+// AsynchronousCIImageFilteringRequestFromID adopts an existing Objective-C object as a AsynchronousCIImageFilteringRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AsynchronousCIImageFilteringRequestFromID(id objc.ID) *AsynchronousCIImageFilteringRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AsynchronousCIImageFilteringRequest{inner: raw.AVAsynchronousCIImageFilteringRequestFromID(id)}
+	x := &AsynchronousCIImageFilteringRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAsynchronousCIImageFilteringRequest creates a new [AsynchronousCIImageFilteringRequest].
+// asynchronousCIImageFilteringRequestAdopt wraps an Objective-C object that this code just created as a
+// AsynchronousCIImageFilteringRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func asynchronousCIImageFilteringRequestAdopt(id objc.ID) *AsynchronousCIImageFilteringRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AsynchronousCIImageFilteringRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AsynchronousCIImageFilteringRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AsynchronousCIImageFilteringRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AsynchronousCIImageFilteringRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AsynchronousCIImageFilteringRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAsynchronousCIImageFilteringRequest creates a new AsynchronousCIImageFilteringRequest.
 func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAsynchronousCIImageFilteringRequest")), objc.RegisterName("new"))
-	return &AsynchronousCIImageFilteringRequest{inner: raw.AVAsynchronousCIImageFilteringRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAsynchronousCIImageFilteringRequest")), objc.RegisterName("new"))
+	return asynchronousCIImageFilteringRequestAdopt(_id)
 }
 
-// Provides the filtered video frame image to AVFoundation for further processing or display.
-//
-// FinishWithImageContext calls the underlying FinishWithImageContext.
-func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage objc.ID, context_ objc.ID) {
-	x.inner.FinishWithImageContext(filteredImage, context_)
+// FinishWithImageContext provides the filtered video frame image to AVFoundation for further processing or display.
+func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage obj.Object, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishWithImage:context:"), objref.IDOf(filteredImage), objref.IDOf(context_))
 }
 
-// Notifies AVFoundation that you cannot fulfill the image filtering request.
-//
-// FinishWithError calls the underlying FinishWithError.
-func (x *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
-	x.inner.FinishWithError(error_)
-}
-
-// Width and height for rendering frames.
-//
-// RenderSize calls the underlying RenderSize.
+// RenderSize width and height for rendering frames.
 func (x *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
-	return x.inner.RenderSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("renderSize"))
+	return _r
 }
 
-// The time for which the frame should be filtered
-//
-// CompositionTime calls the underlying CompositionTime.
-func (x *AsynchronousCIImageFilteringRequest) CompositionTime() coremedia.CMTime {
-	return x.inner.CompositionTime()
-}
-
-// CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
-//
-// SourceImage calls the underlying SourceImage.
-func (x *AsynchronousCIImageFilteringRequest) SourceImage() objc.ID {
-	return x.inner.SourceImage()
+// SourceImage CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
+func (x *AsynchronousCIImageFilteringRequest) SourceImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceImage"))
+	return obj.Wrap(_r)
 }
 
 // AsynchronousCIImageFilteringRequestable is the interface implemented by [AsynchronousCIImageFilteringRequest], for mocking and DI.
 type AsynchronousCIImageFilteringRequestable interface {
-	Unwrap() *raw.AVAsynchronousCIImageFilteringRequest
-	FinishWithImageContext(filteredImage objc.ID, context_ objc.ID)
-	FinishWithError(error_ unsafe.Pointer)
+	obj.Object
+	FinishWithImageContext(filteredImage obj.Object, context_ obj.Object)
 	RenderSize() corefoundation.CGSize
-	CompositionTime() coremedia.CMTime
-	SourceImage() objc.ID
+	SourceImage() obj.Object
 }
 
 var _ AsynchronousCIImageFilteringRequestable = (*AsynchronousCIImageFilteringRequest)(nil)

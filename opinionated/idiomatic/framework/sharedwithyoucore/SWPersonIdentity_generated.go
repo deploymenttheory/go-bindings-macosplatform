@@ -5,51 +5,82 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PersonIdentity wraps [raw.SWPersonIdentity] with a fluent Go API.
+// PersonIdentity is an idiomatic wrapper over the Objective-C class SWPersonIdentity.
 type PersonIdentity struct {
-	inner *raw.SWPersonIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWPersonIdentity].
-func (x *PersonIdentity) Unwrap() *raw.SWPersonIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersonIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonIdentityFromID adopts an existing object pointer as a PersonIdentity (nil for 0).
+// PersonIdentityFromID adopts an existing Objective-C object as a PersonIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonIdentityFromID(id objc.ID) *PersonIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &PersonIdentity{inner: raw.SWPersonIdentityFromID(id)}
+	x := &PersonIdentity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract An initializer @param rootHash The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
-//
-// NewPersonIdentityWithRootHash creates a new [PersonIdentity].
-func NewPersonIdentityWithRootHash(rootHash *foundation.NSData) *PersonIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWPersonIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootHash:"), rootHash.Ptr())
-	return &PersonIdentity{inner: raw.SWPersonIdentityFromID(_id)}
+// personIdentityAdopt wraps an Objective-C object that this code just created as a
+// PersonIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personIdentityAdopt(id objc.ID) *PersonIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &PersonIdentity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract The root hash of the tree that represents this individual's identity. @discussion The data contains a SHA256 hash of the user's combined public identities.
-//
-// RootHash calls the underlying RootHash.
-func (x *PersonIdentity) RootHash() *foundation.NSData {
-	return x.inner.RootHash()
+// Description returns the object's -description text.
+func (x *PersonIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersonIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersonIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PersonIdentity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonIdentityWithRootHash an initializer The data contains a SHA256 hash of the user's combined public identities.
+func NewPersonIdentityWithRootHash(rootHash obj.Object) *PersonIdentity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWPersonIdentity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootHash:"), objref.IDOf(rootHash))
+	return personIdentityAdopt(_id)
+}
+
+// RootHash the root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
+func (x *PersonIdentity) RootHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootHash"))
+	return obj.Wrap(_r)
 }
 
 // PersonIdentityable is the interface implemented by [PersonIdentity], for mocking and DI.
 type PersonIdentityable interface {
-	Unwrap() *raw.SWPersonIdentity
-	RootHash() *foundation.NSData
+	obj.Object
+	RootHash() obj.Object
 }
 
 var _ PersonIdentityable = (*PersonIdentity)(nil)

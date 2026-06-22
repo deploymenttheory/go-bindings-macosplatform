@@ -5,455 +5,435 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NSDetailedErrorsKey returns the string constant NSDetailedErrorsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDetailedErrorsKey() objc.ID {
-	return purego.CFConstant(raw.NSDetailedErrorsKey())
+// NSDetailedErrorsKey returns the string constant NSDetailedErrorsKey, for use as a dictionary key or argument.
+func NSDetailedErrorsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDetailedErrorsKey")))
 }
 
-// NSValidationObjectErrorKey returns the string constant NSValidationObjectErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidationObjectErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSValidationObjectErrorKey())
+// NSValidationObjectErrorKey returns the string constant NSValidationObjectErrorKey, for use as a dictionary key or argument.
+func NSValidationObjectErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidationObjectErrorKey")))
 }
 
-// NSValidationKeyErrorKey returns the string constant NSValidationKeyErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidationKeyErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSValidationKeyErrorKey())
+// NSValidationKeyErrorKey returns the string constant NSValidationKeyErrorKey, for use as a dictionary key or argument.
+func NSValidationKeyErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidationKeyErrorKey")))
 }
 
-// NSValidationPredicateErrorKey returns the string constant NSValidationPredicateErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidationPredicateErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSValidationPredicateErrorKey())
+// NSValidationPredicateErrorKey returns the string constant NSValidationPredicateErrorKey, for use as a dictionary key or argument.
+func NSValidationPredicateErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidationPredicateErrorKey")))
 }
 
-// NSValidationValueErrorKey returns the string constant NSValidationValueErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidationValueErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSValidationValueErrorKey())
+// NSValidationValueErrorKey returns the string constant NSValidationValueErrorKey, for use as a dictionary key or argument.
+func NSValidationValueErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidationValueErrorKey")))
 }
 
-// NSAffectedStoresErrorKey returns the string constant NSAffectedStoresErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAffectedStoresErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSAffectedStoresErrorKey())
+// NSAffectedStoresErrorKey returns the string constant NSAffectedStoresErrorKey, for use as a dictionary key or argument.
+func NSAffectedStoresErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAffectedStoresErrorKey")))
 }
 
-// NSAffectedObjectsErrorKey returns the string constant NSAffectedObjectsErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAffectedObjectsErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSAffectedObjectsErrorKey())
+// NSAffectedObjectsErrorKey returns the string constant NSAffectedObjectsErrorKey, for use as a dictionary key or argument.
+func NSAffectedObjectsErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAffectedObjectsErrorKey")))
 }
 
-// NSPersistentStoreSaveConflictsErrorKey returns the string constant NSPersistentStoreSaveConflictsErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreSaveConflictsErrorKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreSaveConflictsErrorKey())
+// NSPersistentStoreSaveConflictsErrorKey returns the string constant NSPersistentStoreSaveConflictsErrorKey, for use as a dictionary key or argument.
+func NSPersistentStoreSaveConflictsErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreSaveConflictsErrorKey")))
 }
 
-// NSSQLiteErrorDomain returns the string constant NSSQLiteErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NSSQLiteErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NSSQLiteErrorDomain())
+// NSSQLiteErrorDomain returns the string constant NSSQLiteErrorDomain, for use as a dictionary key or argument.
+func NSSQLiteErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSQLiteErrorDomain")))
 }
 
-// NSManagedObjectContextWillSaveNotification returns the string constant NSManagedObjectContextWillSaveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextWillSaveNotification() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextWillSaveNotification())
+// NSManagedObjectContextWillSaveNotification returns the string constant NSManagedObjectContextWillSaveNotification, for use as a dictionary key or argument.
+func NSManagedObjectContextWillSaveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextWillSaveNotification")))
 }
 
-// NSManagedObjectContextDidSaveNotification returns the string constant NSManagedObjectContextDidSaveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextDidSaveNotification() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextDidSaveNotification())
+// NSManagedObjectContextDidSaveNotification returns the string constant NSManagedObjectContextDidSaveNotification, for use as a dictionary key or argument.
+func NSManagedObjectContextDidSaveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextDidSaveNotification")))
 }
 
-// NSManagedObjectContextObjectsDidChangeNotification returns the string constant NSManagedObjectContextObjectsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextObjectsDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextObjectsDidChangeNotification())
+// NSManagedObjectContextObjectsDidChangeNotification returns the string constant NSManagedObjectContextObjectsDidChangeNotification, for use as a dictionary key or argument.
+func NSManagedObjectContextObjectsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextObjectsDidChangeNotification")))
 }
 
-// NSManagedObjectContextDidSaveObjectIDsNotification returns the string constant NSManagedObjectContextDidSaveObjectIDsNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextDidSaveObjectIDsNotification() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextDidSaveObjectIDsNotification())
+// NSManagedObjectContextDidSaveObjectIDsNotification returns the string constant NSManagedObjectContextDidSaveObjectIDsNotification, for use as a dictionary key or argument.
+func NSManagedObjectContextDidSaveObjectIDsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextDidSaveObjectIDsNotification")))
 }
 
-// NSManagedObjectContextDidMergeChangesObjectIDsNotification returns the string constant NSManagedObjectContextDidMergeChangesObjectIDsNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextDidMergeChangesObjectIDsNotification() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextDidMergeChangesObjectIDsNotification())
+// NSManagedObjectContextDidMergeChangesObjectIDsNotification returns the string constant NSManagedObjectContextDidMergeChangesObjectIDsNotification, for use as a dictionary key or argument.
+func NSManagedObjectContextDidMergeChangesObjectIDsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextDidMergeChangesObjectIDsNotification")))
 }
 
-// NSInsertedObjectsKey returns the string constant NSInsertedObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSInsertedObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSInsertedObjectsKey())
+// NSInsertedObjectsKey returns the string constant NSInsertedObjectsKey, for use as a dictionary key or argument.
+func NSInsertedObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInsertedObjectsKey")))
 }
 
-// NSUpdatedObjectsKey returns the string constant NSUpdatedObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSUpdatedObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSUpdatedObjectsKey())
+// NSUpdatedObjectsKey returns the string constant NSUpdatedObjectsKey, for use as a dictionary key or argument.
+func NSUpdatedObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUpdatedObjectsKey")))
 }
 
-// NSDeletedObjectsKey returns the string constant NSDeletedObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeletedObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSDeletedObjectsKey())
+// NSDeletedObjectsKey returns the string constant NSDeletedObjectsKey, for use as a dictionary key or argument.
+func NSDeletedObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeletedObjectsKey")))
 }
 
-// NSRefreshedObjectsKey returns the string constant NSRefreshedObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSRefreshedObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSRefreshedObjectsKey())
+// NSRefreshedObjectsKey returns the string constant NSRefreshedObjectsKey, for use as a dictionary key or argument.
+func NSRefreshedObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRefreshedObjectsKey")))
 }
 
-// NSInvalidatedObjectsKey returns the string constant NSInvalidatedObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSInvalidatedObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSInvalidatedObjectsKey())
+// NSInvalidatedObjectsKey returns the string constant NSInvalidatedObjectsKey, for use as a dictionary key or argument.
+func NSInvalidatedObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInvalidatedObjectsKey")))
 }
 
-// NSManagedObjectContextQueryGenerationKey returns the string constant NSManagedObjectContextQueryGenerationKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextQueryGenerationKey() objc.ID {
-	return purego.CFConstant(raw.NSManagedObjectContextQueryGenerationKey())
+// NSManagedObjectContextQueryGenerationKey returns the string constant NSManagedObjectContextQueryGenerationKey, for use as a dictionary key or argument.
+func NSManagedObjectContextQueryGenerationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextQueryGenerationKey")))
 }
 
-// NSInvalidatedAllObjectsKey returns the string constant NSInvalidatedAllObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSInvalidatedAllObjectsKey() objc.ID {
-	return purego.CFConstant(raw.NSInvalidatedAllObjectsKey())
+// NSInvalidatedAllObjectsKey returns the string constant NSInvalidatedAllObjectsKey, for use as a dictionary key or argument.
+func NSInvalidatedAllObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInvalidatedAllObjectsKey")))
 }
 
-// NSInsertedObjectIDsKey returns the string constant NSInsertedObjectIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSInsertedObjectIDsKey() objc.ID {
-	return purego.CFConstant(raw.NSInsertedObjectIDsKey())
+// NSInsertedObjectIDsKey returns the string constant NSInsertedObjectIDsKey, for use as a dictionary key or argument.
+func NSInsertedObjectIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInsertedObjectIDsKey")))
 }
 
-// NSUpdatedObjectIDsKey returns the string constant NSUpdatedObjectIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSUpdatedObjectIDsKey() objc.ID {
-	return purego.CFConstant(raw.NSUpdatedObjectIDsKey())
+// NSUpdatedObjectIDsKey returns the string constant NSUpdatedObjectIDsKey, for use as a dictionary key or argument.
+func NSUpdatedObjectIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUpdatedObjectIDsKey")))
 }
 
-// NSDeletedObjectIDsKey returns the string constant NSDeletedObjectIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeletedObjectIDsKey() objc.ID {
-	return purego.CFConstant(raw.NSDeletedObjectIDsKey())
+// NSDeletedObjectIDsKey returns the string constant NSDeletedObjectIDsKey, for use as a dictionary key or argument.
+func NSDeletedObjectIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeletedObjectIDsKey")))
 }
 
-// NSRefreshedObjectIDsKey returns the string constant NSRefreshedObjectIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSRefreshedObjectIDsKey() objc.ID {
-	return purego.CFConstant(raw.NSRefreshedObjectIDsKey())
+// NSRefreshedObjectIDsKey returns the string constant NSRefreshedObjectIDsKey, for use as a dictionary key or argument.
+func NSRefreshedObjectIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRefreshedObjectIDsKey")))
 }
 
-// NSInvalidatedObjectIDsKey returns the string constant NSInvalidatedObjectIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSInvalidatedObjectIDsKey() objc.ID {
-	return purego.CFConstant(raw.NSInvalidatedObjectIDsKey())
+// NSInvalidatedObjectIDsKey returns the string constant NSInvalidatedObjectIDsKey, for use as a dictionary key or argument.
+func NSInvalidatedObjectIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInvalidatedObjectIDsKey")))
 }
 
-// NSSQLiteStoreType returns the string constant NSSQLiteStoreType as an objc.ID, for use as a dictionary key or selector argument.
-func NSSQLiteStoreType() objc.ID {
-	return purego.CFConstant(raw.NSSQLiteStoreType())
-}
+// NSSQLiteStoreType returns the string constant NSSQLiteStoreType, for use as a dictionary key or argument.
+func NSSQLiteStoreType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSSQLiteStoreType"))) }
 
-// NSXMLStoreType returns the string constant NSXMLStoreType as an objc.ID, for use as a dictionary key or selector argument.
-func NSXMLStoreType() objc.ID {
-	return purego.CFConstant(raw.NSXMLStoreType())
-}
+// NSXMLStoreType returns the string constant NSXMLStoreType, for use as a dictionary key or argument.
+func NSXMLStoreType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSXMLStoreType"))) }
 
-// NSBinaryStoreType returns the string constant NSBinaryStoreType as an objc.ID, for use as a dictionary key or selector argument.
-func NSBinaryStoreType() objc.ID {
-	return purego.CFConstant(raw.NSBinaryStoreType())
-}
+// NSBinaryStoreType returns the string constant NSBinaryStoreType, for use as a dictionary key or argument.
+func NSBinaryStoreType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSBinaryStoreType"))) }
 
-// NSInMemoryStoreType returns the string constant NSInMemoryStoreType as an objc.ID, for use as a dictionary key or selector argument.
-func NSInMemoryStoreType() objc.ID {
-	return purego.CFConstant(raw.NSInMemoryStoreType())
+// NSInMemoryStoreType returns the string constant NSInMemoryStoreType, for use as a dictionary key or argument.
+func NSInMemoryStoreType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInMemoryStoreType")))
 }
 
-// NSStoreTypeKey returns the string constant NSStoreTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStoreTypeKey() objc.ID {
-	return purego.CFConstant(raw.NSStoreTypeKey())
-}
+// NSStoreTypeKey returns the string constant NSStoreTypeKey, for use as a dictionary key or argument.
+func NSStoreTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSStoreTypeKey"))) }
 
-// NSStoreUUIDKey returns the string constant NSStoreUUIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStoreUUIDKey() objc.ID {
-	return purego.CFConstant(raw.NSStoreUUIDKey())
-}
+// NSStoreUUIDKey returns the string constant NSStoreUUIDKey, for use as a dictionary key or argument.
+func NSStoreUUIDKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSStoreUUIDKey"))) }
 
-// NSPersistentStoreCoordinatorStoresWillChangeNotification returns the string constant NSPersistentStoreCoordinatorStoresWillChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreCoordinatorStoresWillChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreCoordinatorStoresWillChangeNotification())
+// NSPersistentStoreCoordinatorStoresWillChangeNotification returns the string constant NSPersistentStoreCoordinatorStoresWillChangeNotification, for use as a dictionary key or argument.
+func NSPersistentStoreCoordinatorStoresWillChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreCoordinatorStoresWillChangeNotification")))
 }
 
-// NSPersistentStoreCoordinatorStoresDidChangeNotification returns the string constant NSPersistentStoreCoordinatorStoresDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreCoordinatorStoresDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreCoordinatorStoresDidChangeNotification())
+// NSPersistentStoreCoordinatorStoresDidChangeNotification returns the string constant NSPersistentStoreCoordinatorStoresDidChangeNotification, for use as a dictionary key or argument.
+func NSPersistentStoreCoordinatorStoresDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreCoordinatorStoresDidChangeNotification")))
 }
 
-// NSPersistentStoreCoordinatorWillRemoveStoreNotification returns the string constant NSPersistentStoreCoordinatorWillRemoveStoreNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreCoordinatorWillRemoveStoreNotification() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreCoordinatorWillRemoveStoreNotification())
+// NSPersistentStoreCoordinatorWillRemoveStoreNotification returns the string constant NSPersistentStoreCoordinatorWillRemoveStoreNotification, for use as a dictionary key or argument.
+func NSPersistentStoreCoordinatorWillRemoveStoreNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreCoordinatorWillRemoveStoreNotification")))
 }
 
-// NSAddedPersistentStoresKey returns the string constant NSAddedPersistentStoresKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAddedPersistentStoresKey() objc.ID {
-	return purego.CFConstant(raw.NSAddedPersistentStoresKey())
+// NSAddedPersistentStoresKey returns the string constant NSAddedPersistentStoresKey, for use as a dictionary key or argument.
+func NSAddedPersistentStoresKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAddedPersistentStoresKey")))
 }
 
-// NSRemovedPersistentStoresKey returns the string constant NSRemovedPersistentStoresKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSRemovedPersistentStoresKey() objc.ID {
-	return purego.CFConstant(raw.NSRemovedPersistentStoresKey())
+// NSRemovedPersistentStoresKey returns the string constant NSRemovedPersistentStoresKey, for use as a dictionary key or argument.
+func NSRemovedPersistentStoresKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRemovedPersistentStoresKey")))
 }
 
-// NSUUIDChangedPersistentStoresKey returns the string constant NSUUIDChangedPersistentStoresKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSUUIDChangedPersistentStoresKey() objc.ID {
-	return purego.CFConstant(raw.NSUUIDChangedPersistentStoresKey())
+// NSUUIDChangedPersistentStoresKey returns the string constant NSUUIDChangedPersistentStoresKey, for use as a dictionary key or argument.
+func NSUUIDChangedPersistentStoresKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUUIDChangedPersistentStoresKey")))
 }
 
-// NSReadOnlyPersistentStoreOption returns the string constant NSReadOnlyPersistentStoreOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSReadOnlyPersistentStoreOption() objc.ID {
-	return purego.CFConstant(raw.NSReadOnlyPersistentStoreOption())
+// NSReadOnlyPersistentStoreOption returns the string constant NSReadOnlyPersistentStoreOption, for use as a dictionary key or argument.
+func NSReadOnlyPersistentStoreOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSReadOnlyPersistentStoreOption")))
 }
 
-// NSValidateXMLStoreOption returns the string constant NSValidateXMLStoreOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidateXMLStoreOption() objc.ID {
-	return purego.CFConstant(raw.NSValidateXMLStoreOption())
+// NSValidateXMLStoreOption returns the string constant NSValidateXMLStoreOption, for use as a dictionary key or argument.
+func NSValidateXMLStoreOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidateXMLStoreOption")))
 }
 
-// NSPersistentStoreTimeoutOption returns the string constant NSPersistentStoreTimeoutOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreTimeoutOption() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreTimeoutOption())
+// NSPersistentStoreTimeoutOption returns the string constant NSPersistentStoreTimeoutOption, for use as a dictionary key or argument.
+func NSPersistentStoreTimeoutOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreTimeoutOption")))
 }
 
-// NSSQLitePragmasOption returns the string constant NSSQLitePragmasOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSQLitePragmasOption() objc.ID {
-	return purego.CFConstant(raw.NSSQLitePragmasOption())
+// NSSQLitePragmasOption returns the string constant NSSQLitePragmasOption, for use as a dictionary key or argument.
+func NSSQLitePragmasOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSQLitePragmasOption")))
 }
 
-// NSSQLiteAnalyzeOption returns the string constant NSSQLiteAnalyzeOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSQLiteAnalyzeOption() objc.ID {
-	return purego.CFConstant(raw.NSSQLiteAnalyzeOption())
+// NSSQLiteAnalyzeOption returns the string constant NSSQLiteAnalyzeOption, for use as a dictionary key or argument.
+func NSSQLiteAnalyzeOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSQLiteAnalyzeOption")))
 }
 
-// NSSQLiteManualVacuumOption returns the string constant NSSQLiteManualVacuumOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSQLiteManualVacuumOption() objc.ID {
-	return purego.CFConstant(raw.NSSQLiteManualVacuumOption())
+// NSSQLiteManualVacuumOption returns the string constant NSSQLiteManualVacuumOption, for use as a dictionary key or argument.
+func NSSQLiteManualVacuumOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSQLiteManualVacuumOption")))
 }
 
-// NSIgnorePersistentStoreVersioningOption returns the string constant NSIgnorePersistentStoreVersioningOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSIgnorePersistentStoreVersioningOption() objc.ID {
-	return purego.CFConstant(raw.NSIgnorePersistentStoreVersioningOption())
+// NSIgnorePersistentStoreVersioningOption returns the string constant NSIgnorePersistentStoreVersioningOption, for use as a dictionary key or argument.
+func NSIgnorePersistentStoreVersioningOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSIgnorePersistentStoreVersioningOption")))
 }
 
-// NSMigratePersistentStoresAutomaticallyOption returns the string constant NSMigratePersistentStoresAutomaticallyOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigratePersistentStoresAutomaticallyOption() objc.ID {
-	return purego.CFConstant(raw.NSMigratePersistentStoresAutomaticallyOption())
+// NSMigratePersistentStoresAutomaticallyOption returns the string constant NSMigratePersistentStoresAutomaticallyOption, for use as a dictionary key or argument.
+func NSMigratePersistentStoresAutomaticallyOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigratePersistentStoresAutomaticallyOption")))
 }
 
-// NSInferMappingModelAutomaticallyOption returns the string constant NSInferMappingModelAutomaticallyOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSInferMappingModelAutomaticallyOption() objc.ID {
-	return purego.CFConstant(raw.NSInferMappingModelAutomaticallyOption())
+// NSInferMappingModelAutomaticallyOption returns the string constant NSInferMappingModelAutomaticallyOption, for use as a dictionary key or argument.
+func NSInferMappingModelAutomaticallyOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInferMappingModelAutomaticallyOption")))
 }
 
-// NSStoreModelVersionHashesKey returns the string constant NSStoreModelVersionHashesKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStoreModelVersionHashesKey() objc.ID {
-	return purego.CFConstant(raw.NSStoreModelVersionHashesKey())
+// NSStoreModelVersionHashesKey returns the string constant NSStoreModelVersionHashesKey, for use as a dictionary key or argument.
+func NSStoreModelVersionHashesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStoreModelVersionHashesKey")))
 }
 
-// NSStoreModelVersionIdentifiersKey returns the string constant NSStoreModelVersionIdentifiersKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStoreModelVersionIdentifiersKey() objc.ID {
-	return purego.CFConstant(raw.NSStoreModelVersionIdentifiersKey())
+// NSStoreModelVersionIdentifiersKey returns the string constant NSStoreModelVersionIdentifiersKey, for use as a dictionary key or argument.
+func NSStoreModelVersionIdentifiersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStoreModelVersionIdentifiersKey")))
 }
 
-// NSPersistentStoreOSCompatibility returns the string constant NSPersistentStoreOSCompatibility as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreOSCompatibility() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreOSCompatibility())
+// NSPersistentStoreOSCompatibility returns the string constant NSPersistentStoreOSCompatibility, for use as a dictionary key or argument.
+func NSPersistentStoreOSCompatibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreOSCompatibility")))
 }
 
-// NSPersistentStoreConnectionPoolMaxSizeKey returns the string constant NSPersistentStoreConnectionPoolMaxSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreConnectionPoolMaxSizeKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreConnectionPoolMaxSizeKey())
+// NSPersistentStoreConnectionPoolMaxSizeKey returns the string constant NSPersistentStoreConnectionPoolMaxSizeKey, for use as a dictionary key or argument.
+func NSPersistentStoreConnectionPoolMaxSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreConnectionPoolMaxSizeKey")))
 }
 
-// NSCoreDataCoreSpotlightExporter returns the string constant NSCoreDataCoreSpotlightExporter as an objc.ID, for use as a dictionary key or selector argument.
-func NSCoreDataCoreSpotlightExporter() objc.ID {
-	return purego.CFConstant(raw.NSCoreDataCoreSpotlightExporter())
+// NSCoreDataCoreSpotlightExporter returns the string constant NSCoreDataCoreSpotlightExporter, for use as a dictionary key or argument.
+func NSCoreDataCoreSpotlightExporter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCoreDataCoreSpotlightExporter")))
 }
 
-// NSPersistentStoreStagedMigrationManagerOptionKey returns the string constant NSPersistentStoreStagedMigrationManagerOptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreStagedMigrationManagerOptionKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreStagedMigrationManagerOptionKey())
+// NSPersistentStoreStagedMigrationManagerOptionKey returns the string constant NSPersistentStoreStagedMigrationManagerOptionKey, for use as a dictionary key or argument.
+func NSPersistentStoreStagedMigrationManagerOptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreStagedMigrationManagerOptionKey")))
 }
 
-// NSXMLExternalRecordType returns the string constant NSXMLExternalRecordType as an objc.ID, for use as a dictionary key or selector argument.
-func NSXMLExternalRecordType() objc.ID {
-	return purego.CFConstant(raw.NSXMLExternalRecordType())
+// NSXMLExternalRecordType returns the string constant NSXMLExternalRecordType, for use as a dictionary key or argument.
+func NSXMLExternalRecordType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSXMLExternalRecordType")))
 }
 
-// NSBinaryExternalRecordType returns the string constant NSBinaryExternalRecordType as an objc.ID, for use as a dictionary key or selector argument.
-func NSBinaryExternalRecordType() objc.ID {
-	return purego.CFConstant(raw.NSBinaryExternalRecordType())
+// NSBinaryExternalRecordType returns the string constant NSBinaryExternalRecordType, for use as a dictionary key or argument.
+func NSBinaryExternalRecordType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBinaryExternalRecordType")))
 }
 
-// NSExternalRecordsFileFormatOption returns the string constant NSExternalRecordsFileFormatOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSExternalRecordsFileFormatOption() objc.ID {
-	return purego.CFConstant(raw.NSExternalRecordsFileFormatOption())
+// NSExternalRecordsFileFormatOption returns the string constant NSExternalRecordsFileFormatOption, for use as a dictionary key or argument.
+func NSExternalRecordsFileFormatOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExternalRecordsFileFormatOption")))
 }
 
-// NSExternalRecordsDirectoryOption returns the string constant NSExternalRecordsDirectoryOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSExternalRecordsDirectoryOption() objc.ID {
-	return purego.CFConstant(raw.NSExternalRecordsDirectoryOption())
+// NSExternalRecordsDirectoryOption returns the string constant NSExternalRecordsDirectoryOption, for use as a dictionary key or argument.
+func NSExternalRecordsDirectoryOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExternalRecordsDirectoryOption")))
 }
 
-// NSExternalRecordExtensionOption returns the string constant NSExternalRecordExtensionOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSExternalRecordExtensionOption() objc.ID {
-	return purego.CFConstant(raw.NSExternalRecordExtensionOption())
+// NSExternalRecordExtensionOption returns the string constant NSExternalRecordExtensionOption, for use as a dictionary key or argument.
+func NSExternalRecordExtensionOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExternalRecordExtensionOption")))
 }
 
-// NSEntityNameInPathKey returns the string constant NSEntityNameInPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSEntityNameInPathKey() objc.ID {
-	return purego.CFConstant(raw.NSEntityNameInPathKey())
+// NSEntityNameInPathKey returns the string constant NSEntityNameInPathKey, for use as a dictionary key or argument.
+func NSEntityNameInPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSEntityNameInPathKey")))
 }
 
-// NSStoreUUIDInPathKey returns the string constant NSStoreUUIDInPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStoreUUIDInPathKey() objc.ID {
-	return purego.CFConstant(raw.NSStoreUUIDInPathKey())
+// NSStoreUUIDInPathKey returns the string constant NSStoreUUIDInPathKey, for use as a dictionary key or argument.
+func NSStoreUUIDInPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStoreUUIDInPathKey")))
 }
 
-// NSStorePathKey returns the string constant NSStorePathKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStorePathKey() objc.ID {
-	return purego.CFConstant(raw.NSStorePathKey())
-}
+// NSStorePathKey returns the string constant NSStorePathKey, for use as a dictionary key or argument.
+func NSStorePathKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSStorePathKey"))) }
 
-// NSModelPathKey returns the string constant NSModelPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSModelPathKey() objc.ID {
-	return purego.CFConstant(raw.NSModelPathKey())
-}
+// NSModelPathKey returns the string constant NSModelPathKey, for use as a dictionary key or argument.
+func NSModelPathKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSModelPathKey"))) }
 
-// NSObjectURIKey returns the string constant NSObjectURIKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSObjectURIKey() objc.ID {
-	return purego.CFConstant(raw.NSObjectURIKey())
-}
+// NSObjectURIKey returns the string constant NSObjectURIKey, for use as a dictionary key or argument.
+func NSObjectURIKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSObjectURIKey"))) }
 
-// NSPersistentStoreForceDestroyOption returns the string constant NSPersistentStoreForceDestroyOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreForceDestroyOption() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreForceDestroyOption())
+// NSPersistentStoreForceDestroyOption returns the string constant NSPersistentStoreForceDestroyOption, for use as a dictionary key or argument.
+func NSPersistentStoreForceDestroyOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreForceDestroyOption")))
 }
 
-// NSPersistentHistoryTrackingKey returns the string constant NSPersistentHistoryTrackingKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentHistoryTrackingKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentHistoryTrackingKey())
+// NSPersistentHistoryTrackingKey returns the string constant NSPersistentHistoryTrackingKey, for use as a dictionary key or argument.
+func NSPersistentHistoryTrackingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentHistoryTrackingKey")))
 }
 
-// NSBinaryStoreSecureDecodingClasses returns the string constant NSBinaryStoreSecureDecodingClasses as an objc.ID, for use as a dictionary key or selector argument.
-func NSBinaryStoreSecureDecodingClasses() objc.ID {
-	return purego.CFConstant(raw.NSBinaryStoreSecureDecodingClasses())
+// NSBinaryStoreSecureDecodingClasses returns the string constant NSBinaryStoreSecureDecodingClasses, for use as a dictionary key or argument.
+func NSBinaryStoreSecureDecodingClasses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBinaryStoreSecureDecodingClasses")))
 }
 
-// NSBinaryStoreInsecureDecodingCompatibilityOption returns the string constant NSBinaryStoreInsecureDecodingCompatibilityOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSBinaryStoreInsecureDecodingCompatibilityOption() objc.ID {
-	return purego.CFConstant(raw.NSBinaryStoreInsecureDecodingCompatibilityOption())
+// NSBinaryStoreInsecureDecodingCompatibilityOption returns the string constant NSBinaryStoreInsecureDecodingCompatibilityOption, for use as a dictionary key or argument.
+func NSBinaryStoreInsecureDecodingCompatibilityOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBinaryStoreInsecureDecodingCompatibilityOption")))
 }
 
-// NSPersistentStoreRemoteChangeNotificationPostOptionKey returns the string constant NSPersistentStoreRemoteChangeNotificationPostOptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreRemoteChangeNotificationPostOptionKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreRemoteChangeNotificationPostOptionKey())
+// NSPersistentStoreRemoteChangeNotificationPostOptionKey returns the string constant NSPersistentStoreRemoteChangeNotificationPostOptionKey, for use as a dictionary key or argument.
+func NSPersistentStoreRemoteChangeNotificationPostOptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreRemoteChangeNotificationPostOptionKey")))
 }
 
-// NSPersistentStoreRemoteChangeNotification returns the string constant NSPersistentStoreRemoteChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreRemoteChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreRemoteChangeNotification())
+// NSPersistentStoreRemoteChangeNotification returns the string constant NSPersistentStoreRemoteChangeNotification, for use as a dictionary key or argument.
+func NSPersistentStoreRemoteChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreRemoteChangeNotification")))
 }
 
-// NSPersistentStoreURLKey returns the string constant NSPersistentStoreURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreURLKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreURLKey())
+// NSPersistentStoreURLKey returns the string constant NSPersistentStoreURLKey, for use as a dictionary key or argument.
+func NSPersistentStoreURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreURLKey")))
 }
 
-// NSPersistentHistoryTokenKey returns the string constant NSPersistentHistoryTokenKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentHistoryTokenKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentHistoryTokenKey())
+// NSPersistentHistoryTokenKey returns the string constant NSPersistentHistoryTokenKey, for use as a dictionary key or argument.
+func NSPersistentHistoryTokenKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentHistoryTokenKey")))
 }
 
-// NSPersistentStoreDeferredLightweightMigrationOptionKey returns the string constant NSPersistentStoreDeferredLightweightMigrationOptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreDeferredLightweightMigrationOptionKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreDeferredLightweightMigrationOptionKey())
+// NSPersistentStoreDeferredLightweightMigrationOptionKey returns the string constant NSPersistentStoreDeferredLightweightMigrationOptionKey, for use as a dictionary key or argument.
+func NSPersistentStoreDeferredLightweightMigrationOptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreDeferredLightweightMigrationOptionKey")))
 }
 
-// NSPersistentStoreModelVersionChecksumKey returns the string constant NSPersistentStoreModelVersionChecksumKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreModelVersionChecksumKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreModelVersionChecksumKey())
+// NSPersistentStoreModelVersionChecksumKey returns the string constant NSPersistentStoreModelVersionChecksumKey, for use as a dictionary key or argument.
+func NSPersistentStoreModelVersionChecksumKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreModelVersionChecksumKey")))
 }
 
-// NSPersistentStoreUbiquitousContentNameKey returns the string constant NSPersistentStoreUbiquitousContentNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreUbiquitousContentNameKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreUbiquitousContentNameKey())
+// NSPersistentStoreUbiquitousContentNameKey returns the string constant NSPersistentStoreUbiquitousContentNameKey, for use as a dictionary key or argument.
+func NSPersistentStoreUbiquitousContentNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreUbiquitousContentNameKey")))
 }
 
-// NSPersistentStoreUbiquitousContentURLKey returns the string constant NSPersistentStoreUbiquitousContentURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreUbiquitousContentURLKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreUbiquitousContentURLKey())
+// NSPersistentStoreUbiquitousContentURLKey returns the string constant NSPersistentStoreUbiquitousContentURLKey, for use as a dictionary key or argument.
+func NSPersistentStoreUbiquitousContentURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreUbiquitousContentURLKey")))
 }
 
-// NSPersistentStoreDidImportUbiquitousContentChangesNotification returns the string constant NSPersistentStoreDidImportUbiquitousContentChangesNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreDidImportUbiquitousContentChangesNotification() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreDidImportUbiquitousContentChangesNotification())
+// NSPersistentStoreDidImportUbiquitousContentChangesNotification returns the string constant NSPersistentStoreDidImportUbiquitousContentChangesNotification, for use as a dictionary key or argument.
+func NSPersistentStoreDidImportUbiquitousContentChangesNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreDidImportUbiquitousContentChangesNotification")))
 }
 
-// NSPersistentStoreUbiquitousTransitionTypeKey returns the string constant NSPersistentStoreUbiquitousTransitionTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreUbiquitousTransitionTypeKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreUbiquitousTransitionTypeKey())
+// NSPersistentStoreUbiquitousTransitionTypeKey returns the string constant NSPersistentStoreUbiquitousTransitionTypeKey, for use as a dictionary key or argument.
+func NSPersistentStoreUbiquitousTransitionTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreUbiquitousTransitionTypeKey")))
 }
 
-// NSPersistentStoreUbiquitousPeerTokenOption returns the string constant NSPersistentStoreUbiquitousPeerTokenOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreUbiquitousPeerTokenOption() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreUbiquitousPeerTokenOption())
+// NSPersistentStoreUbiquitousPeerTokenOption returns the string constant NSPersistentStoreUbiquitousPeerTokenOption, for use as a dictionary key or argument.
+func NSPersistentStoreUbiquitousPeerTokenOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreUbiquitousPeerTokenOption")))
 }
 
-// NSPersistentStoreRemoveUbiquitousMetadataOption returns the string constant NSPersistentStoreRemoveUbiquitousMetadataOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreRemoveUbiquitousMetadataOption() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreRemoveUbiquitousMetadataOption())
+// NSPersistentStoreRemoveUbiquitousMetadataOption returns the string constant NSPersistentStoreRemoveUbiquitousMetadataOption, for use as a dictionary key or argument.
+func NSPersistentStoreRemoveUbiquitousMetadataOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreRemoveUbiquitousMetadataOption")))
 }
 
-// NSPersistentStoreUbiquitousContainerIdentifierKey returns the string constant NSPersistentStoreUbiquitousContainerIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreUbiquitousContainerIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreUbiquitousContainerIdentifierKey())
+// NSPersistentStoreUbiquitousContainerIdentifierKey returns the string constant NSPersistentStoreUbiquitousContainerIdentifierKey, for use as a dictionary key or argument.
+func NSPersistentStoreUbiquitousContainerIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreUbiquitousContainerIdentifierKey")))
 }
 
-// NSPersistentStoreRebuildFromUbiquitousContentOption returns the string constant NSPersistentStoreRebuildFromUbiquitousContentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentStoreRebuildFromUbiquitousContentOption() objc.ID {
-	return purego.CFConstant(raw.NSPersistentStoreRebuildFromUbiquitousContentOption())
+// NSPersistentStoreRebuildFromUbiquitousContentOption returns the string constant NSPersistentStoreRebuildFromUbiquitousContentOption, for use as a dictionary key or argument.
+func NSPersistentStoreRebuildFromUbiquitousContentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentStoreRebuildFromUbiquitousContentOption")))
 }
 
-// NSMigrationManagerKey returns the string constant NSMigrationManagerKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationManagerKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationManagerKey())
+// NSMigrationManagerKey returns the string constant NSMigrationManagerKey, for use as a dictionary key or argument.
+func NSMigrationManagerKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationManagerKey")))
 }
 
-// NSMigrationSourceObjectKey returns the string constant NSMigrationSourceObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationSourceObjectKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationSourceObjectKey())
+// NSMigrationSourceObjectKey returns the string constant NSMigrationSourceObjectKey, for use as a dictionary key or argument.
+func NSMigrationSourceObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationSourceObjectKey")))
 }
 
-// NSMigrationDestinationObjectKey returns the string constant NSMigrationDestinationObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationDestinationObjectKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationDestinationObjectKey())
+// NSMigrationDestinationObjectKey returns the string constant NSMigrationDestinationObjectKey, for use as a dictionary key or argument.
+func NSMigrationDestinationObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationDestinationObjectKey")))
 }
 
-// NSMigrationEntityMappingKey returns the string constant NSMigrationEntityMappingKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationEntityMappingKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationEntityMappingKey())
+// NSMigrationEntityMappingKey returns the string constant NSMigrationEntityMappingKey, for use as a dictionary key or argument.
+func NSMigrationEntityMappingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationEntityMappingKey")))
 }
 
-// NSMigrationPropertyMappingKey returns the string constant NSMigrationPropertyMappingKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationPropertyMappingKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationPropertyMappingKey())
+// NSMigrationPropertyMappingKey returns the string constant NSMigrationPropertyMappingKey, for use as a dictionary key or argument.
+func NSMigrationPropertyMappingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationPropertyMappingKey")))
 }
 
-// NSMigrationEntityPolicyKey returns the string constant NSMigrationEntityPolicyKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSMigrationEntityPolicyKey() objc.ID {
-	return purego.CFConstant(raw.NSMigrationEntityPolicyKey())
+// NSMigrationEntityPolicyKey returns the string constant NSMigrationEntityPolicyKey, for use as a dictionary key or argument.
+func NSMigrationEntityPolicyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMigrationEntityPolicyKey")))
 }
 
-// NSPersistentCloudKitContainerEventUserInfoKey returns the string constant NSPersistentCloudKitContainerEventUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPersistentCloudKitContainerEventUserInfoKey() objc.ID {
-	return purego.CFConstant(raw.NSPersistentCloudKitContainerEventUserInfoKey())
+// NSPersistentCloudKitContainerEventUserInfoKey returns the string constant NSPersistentCloudKitContainerEventUserInfoKey, for use as a dictionary key or argument.
+func NSPersistentCloudKitContainerEventUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPersistentCloudKitContainerEventUserInfoKey")))
 }
 
-// NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification returns the string constant NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() objc.ID {
-	if _r := raw.NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification returns the string constant NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification, for use as a dictionary key or argument.
+func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification")))
 }

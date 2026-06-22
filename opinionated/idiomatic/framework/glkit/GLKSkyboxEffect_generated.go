@@ -5,170 +5,175 @@
 package glkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A simple skybox visual effect for use in shader-based OpenGL rendering.
+// SkyboxEffect is an idiomatic wrapper over the Objective-C class GLKSkyboxEffect.
 //
-// SkyboxEffect wraps [raw.GLKSkyboxEffect] with a fluent Go API.
+// A simple skybox visual effect for use in shader-based OpenGL rendering.
 type SkyboxEffect struct {
-	inner *raw.GLKSkyboxEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKSkyboxEffect].
-func (x *SkyboxEffect) Unwrap() *raw.GLKSkyboxEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SkyboxEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SkyboxEffectFromID adopts an existing object pointer as a SkyboxEffect (nil for 0).
+// SkyboxEffectFromID adopts an existing Objective-C object as a SkyboxEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SkyboxEffectFromID(id objc.ID) *SkyboxEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SkyboxEffect{inner: raw.GLKSkyboxEffectFromID(id)}
+	x := &SkyboxEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSkyboxEffect creates a new [SkyboxEffect].
+// skyboxEffectAdopt wraps an Objective-C object that this code just created as a
+// SkyboxEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skyboxEffectAdopt(id objc.ID) *SkyboxEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SkyboxEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SkyboxEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SkyboxEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SkyboxEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SkyboxEffect) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSkyboxEffect creates a new SkyboxEffect.
 func NewSkyboxEffect() *SkyboxEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKSkyboxEffect")), objc.RegisterName("new"))
-	return &SkyboxEffect{inner: raw.GLKSkyboxEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKSkyboxEffect")), objc.RegisterName("new"))
+	return skyboxEffectAdopt(_id)
 }
 
-// The width of the skybox.
-//
-// WithXSize sets the xSize property and returns the receiver for chaining.
+// WithXSize the width of the skybox.
 func (x *SkyboxEffect) WithXSize(xSize float32) *SkyboxEffect {
-	x.inner.SetXSize(xSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXSize:"), xSize)
 	return x
 }
 
-// The height of the skybox.
-//
-// WithYSize sets the ySize property and returns the receiver for chaining.
+// WithYSize the height of the skybox.
 func (x *SkyboxEffect) WithYSize(ySize float32) *SkyboxEffect {
-	x.inner.SetYSize(ySize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYSize:"), ySize)
 	return x
 }
 
-// The depth of the skybox.
-//
-// WithZSize sets the zSize property and returns the receiver for chaining.
+// WithZSize the depth of the skybox.
 func (x *SkyboxEffect) WithZSize(zSize float32) *SkyboxEffect {
-	x.inner.SetZSize(zSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZSize:"), zSize)
 	return x
 }
 
-// A string used to name your effect.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string used to name your effect.
 func (x *SkyboxEffect) WithLabel(label string) *SkyboxEffect {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Prepares an effect for rendering.
-//
-// PrepareToDraw calls the underlying PrepareToDraw.
+// PrepareToDraw prepares an effect for rendering.
 func (x *SkyboxEffect) PrepareToDraw() {
-	x.inner.PrepareToDraw()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareToDraw"))
 }
 
-// Draws the skybox.
-//
-// Draw calls the underlying Draw.
+// Draw draws the skybox.
 func (x *SkyboxEffect) Draw() {
-	x.inner.Draw()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draw"))
 }
 
-// Center calls the underlying Center.
-func (x *SkyboxEffect) Center() unsafe.Pointer {
-	return x.inner.Center()
-}
-
-// SetCenter calls the underlying SetCenter.
-func (x *SkyboxEffect) SetCenter(center unsafe.Pointer) {
-	x.inner.SetCenter(center)
-}
-
-// XSize calls the underlying XSize.
+// XSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) XSize() float32 {
-	return x.inner.XSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("xSize"))
+	return _r
 }
 
-// SetXSize calls the underlying SetXSize.
+// SetXSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) SetXSize(xSize float32) {
-	x.inner.SetXSize(xSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXSize:"), xSize)
 }
 
-// YSize calls the underlying YSize.
+// YSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) YSize() float32 {
-	return x.inner.YSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ySize"))
+	return _r
 }
 
-// SetYSize calls the underlying SetYSize.
+// SetYSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) SetYSize(ySize float32) {
-	x.inner.SetYSize(ySize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYSize:"), ySize)
 }
 
-// ZSize calls the underlying ZSize.
+// ZSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) ZSize() float32 {
-	return x.inner.ZSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("zSize"))
+	return _r
 }
 
-// SetZSize calls the underlying SetZSize.
+// SetZSize wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) SetZSize(zSize float32) {
-	x.inner.SetZSize(zSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZSize:"), zSize)
 }
 
-// TextureCubeMap calls the underlying TextureCubeMap.
+// TextureCubeMap wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) TextureCubeMap() *EffectPropertyTexture {
-	_r := x.inner.TextureCubeMap()
-	if _r == nil {
-		return nil
-	}
-	return &EffectPropertyTexture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureCubeMap"))
+	return EffectPropertyTextureFromID(_r)
 }
 
-// Transform calls the underlying Transform.
+// Transform wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) Transform() *EffectPropertyTransform {
-	_r := x.inner.Transform()
-	if _r == nil {
-		return nil
-	}
-	return &EffectPropertyTransform{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
+	return EffectPropertyTransformFromID(_r)
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *SkyboxEffect) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // SkyboxEffectable is the interface implemented by [SkyboxEffect], for mocking and DI.
 type SkyboxEffectable interface {
-	Unwrap() *raw.GLKSkyboxEffect
+	obj.Object
 	WithXSize(xSize float32) *SkyboxEffect
 	WithYSize(ySize float32) *SkyboxEffect
 	WithZSize(zSize float32) *SkyboxEffect
 	WithLabel(label string) *SkyboxEffect
 	PrepareToDraw()
 	Draw()
-	Center() unsafe.Pointer
-	SetCenter(center unsafe.Pointer)
 	XSize() float32
 	SetXSize(xSize float32)
 	YSize() float32

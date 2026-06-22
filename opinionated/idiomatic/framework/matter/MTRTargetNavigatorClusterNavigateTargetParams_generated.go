@@ -5,131 +5,157 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTargetNavigatorClusterNavigateTargetParams wraps [raw.MTRTargetNavigatorClusterNavigateTargetParams] with a fluent Go API.
+// MTRTargetNavigatorClusterNavigateTargetParams is an idiomatic wrapper over the Objective-C class MTRTargetNavigatorClusterNavigateTargetParams.
 type MTRTargetNavigatorClusterNavigateTargetParams struct {
-	inner *raw.MTRTargetNavigatorClusterNavigateTargetParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTargetNavigatorClusterNavigateTargetParams].
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTargetNavigatorClusterNavigateTargetParamsFromID adopts an existing object pointer as a MTRTargetNavigatorClusterNavigateTargetParams (nil for 0).
+// MTRTargetNavigatorClusterNavigateTargetParamsFromID adopts an existing Objective-C object as a MTRTargetNavigatorClusterNavigateTargetParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTargetNavigatorClusterNavigateTargetParamsFromID(id objc.ID) *MTRTargetNavigatorClusterNavigateTargetParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTargetNavigatorClusterNavigateTargetParams{inner: raw.MTRTargetNavigatorClusterNavigateTargetParamsFromID(id)}
+	x := &MTRTargetNavigatorClusterNavigateTargetParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTargetNavigatorClusterNavigateTargetParams creates a new [MTRTargetNavigatorClusterNavigateTargetParams].
+// mTRTargetNavigatorClusterNavigateTargetParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTargetNavigatorClusterNavigateTargetParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTargetNavigatorClusterNavigateTargetParamsAdopt(id objc.ID) *MTRTargetNavigatorClusterNavigateTargetParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTargetNavigatorClusterNavigateTargetParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRTargetNavigatorClusterNavigateTargetParams creates a new MTRTargetNavigatorClusterNavigateTargetParams.
 func NewMTRTargetNavigatorClusterNavigateTargetParams() *MTRTargetNavigatorClusterNavigateTargetParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTargetNavigatorClusterNavigateTargetParams")), objc.RegisterName("new"))
-	return &MTRTargetNavigatorClusterNavigateTargetParams{inner: raw.MTRTargetNavigatorClusterNavigateTargetParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTargetNavigatorClusterNavigateTargetParams")), objc.RegisterName("new"))
+	return mTRTargetNavigatorClusterNavigateTargetParamsAdopt(_id)
 }
 
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithTarget(target *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams {
-	x.inner.SetTarget(target)
+// WithTarget sets the property and returns the receiver so calls can be chained.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithTarget(target obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithData(data string) *MTRTargetNavigatorClusterNavigateTargetParams {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Target calls the underlying Target.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) Target() *foundation.NSNumber {
-	return x.inner.Target()
+// Target wraps the corresponding Objective-C method.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return obj.Wrap(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTarget(target *foundation.NSNumber) {
-	x.inner.SetTarget(target)
+// SetTarget wraps the corresponding Objective-C method.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Data calls the underlying Data.
+// Data wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterNavigateTargetParams) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
+// SetData wraps the corresponding Objective-C method.
 func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRTargetNavigatorClusterNavigateTargetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRTargetNavigatorClusterNavigateTargetParamsable is the interface implemented by [MTRTargetNavigatorClusterNavigateTargetParams], for mocking and DI.
 type MTRTargetNavigatorClusterNavigateTargetParamsable interface {
-	Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetParams
-	WithTarget(target *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
+	obj.Object
+	WithTarget(target obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams
 	WithData(data string) *MTRTargetNavigatorClusterNavigateTargetParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetParams
-	Target() *foundation.NSNumber
-	SetTarget(target *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams
+	Target() obj.Object
+	SetTarget(target obj.Object)
 	Data() string
 	SetData(data string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRTargetNavigatorClusterNavigateTargetParamsable = (*MTRTargetNavigatorClusterNavigateTargetParams)(nil)

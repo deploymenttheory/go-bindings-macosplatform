@@ -5,83 +5,115 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMessagesClusterMessageResponseOptionStruct wraps [raw.MTRMessagesClusterMessageResponseOptionStruct] with a fluent Go API.
+// MTRMessagesClusterMessageResponseOptionStruct is an idiomatic wrapper over the Objective-C class MTRMessagesClusterMessageResponseOptionStruct.
 type MTRMessagesClusterMessageResponseOptionStruct struct {
-	inner *raw.MTRMessagesClusterMessageResponseOptionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMessagesClusterMessageResponseOptionStruct].
-func (x *MTRMessagesClusterMessageResponseOptionStruct) Unwrap() *raw.MTRMessagesClusterMessageResponseOptionStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMessagesClusterMessageResponseOptionStructFromID adopts an existing object pointer as a MTRMessagesClusterMessageResponseOptionStruct (nil for 0).
+// MTRMessagesClusterMessageResponseOptionStructFromID adopts an existing Objective-C object as a MTRMessagesClusterMessageResponseOptionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMessagesClusterMessageResponseOptionStructFromID(id objc.ID) *MTRMessagesClusterMessageResponseOptionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMessagesClusterMessageResponseOptionStruct{inner: raw.MTRMessagesClusterMessageResponseOptionStructFromID(id)}
+	x := &MTRMessagesClusterMessageResponseOptionStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMessagesClusterMessageResponseOptionStruct creates a new [MTRMessagesClusterMessageResponseOptionStruct].
+// mTRMessagesClusterMessageResponseOptionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRMessagesClusterMessageResponseOptionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMessagesClusterMessageResponseOptionStructAdopt(id objc.ID) *MTRMessagesClusterMessageResponseOptionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMessagesClusterMessageResponseOptionStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRMessagesClusterMessageResponseOptionStruct creates a new MTRMessagesClusterMessageResponseOptionStruct.
 func NewMTRMessagesClusterMessageResponseOptionStruct() *MTRMessagesClusterMessageResponseOptionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMessagesClusterMessageResponseOptionStruct")), objc.RegisterName("new"))
-	return &MTRMessagesClusterMessageResponseOptionStruct{inner: raw.MTRMessagesClusterMessageResponseOptionStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageResponseOptionStruct")), objc.RegisterName("new"))
+	return mTRMessagesClusterMessageResponseOptionStructAdopt(_id)
 }
 
-// WithMessageResponseID sets the messageResponseID property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID *foundation.NSNumber) *MTRMessagesClusterMessageResponseOptionStruct {
-	x.inner.SetMessageResponseID(messageResponseID)
+// WithMessageResponseID sets the property and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 	return x
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets the property and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// MessageResponseID calls the underlying MessageResponseID.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() *foundation.NSNumber {
-	return x.inner.MessageResponseID()
+// MessageResponseID wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageResponseID"))
+	return obj.Wrap(_r)
 }
 
-// SetMessageResponseID calls the underlying SetMessageResponseID.
-func (x *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(messageResponseID *foundation.NSNumber) {
-	x.inner.SetMessageResponseID(messageResponseID)
+// SetMessageResponseID wraps the corresponding Objective-C method.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(messageResponseID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *MTRMessagesClusterMessageResponseOptionStruct) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // MTRMessagesClusterMessageResponseOptionStructable is the interface implemented by [MTRMessagesClusterMessageResponseOptionStruct], for mocking and DI.
 type MTRMessagesClusterMessageResponseOptionStructable interface {
-	Unwrap() *raw.MTRMessagesClusterMessageResponseOptionStruct
-	WithMessageResponseID(messageResponseID *foundation.NSNumber) *MTRMessagesClusterMessageResponseOptionStruct
+	obj.Object
+	WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct
 	WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct
-	MessageResponseID() *foundation.NSNumber
-	SetMessageResponseID(messageResponseID *foundation.NSNumber)
+	MessageResponseID() obj.Object
+	SetMessageResponseID(messageResponseID obj.Object)
 	Label() string
 	SetLabel(label string)
 }

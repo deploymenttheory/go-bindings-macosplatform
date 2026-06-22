@@ -5,59 +5,93 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that delivers input either from the responder chain to views, or from game controllers to profiles.
+// EventViewController is an idiomatic wrapper over the Objective-C class GCEventViewController.
 //
-// EventViewController wraps [raw.GCEventViewController] with a fluent Go API.
+// A view controller that delivers input either from the responder chain to views, or from game controllers to profiles.
 type EventViewController struct {
-	inner *raw.GCEventViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCEventViewController].
-func (x *EventViewController) Unwrap() *raw.GCEventViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EventViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// EventViewControllerFromID adopts an existing object pointer as a EventViewController (nil for 0).
+// EventViewControllerFromID adopts an existing Objective-C object as a EventViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func EventViewControllerFromID(id objc.ID) *EventViewController {
 	if id == 0 {
 		return nil
 	}
-	return &EventViewController{inner: raw.GCEventViewControllerFromID(id)}
-}
-
-// NewEventViewController creates a new [EventViewController].
-func NewEventViewController() *EventViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCEventViewController")), objc.RegisterName("new"))
-	return &EventViewController{inner: raw.GCEventViewControllerFromID(_id)}
-}
-
-// A Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
-//
-// WithControllerUserInteractionEnabled sets the controllerUserInteractionEnabled property and returns the receiver for chaining.
-func (x *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
-	x.inner.SetControllerUserInteractionEnabled(controllerUserInteractionEnabled)
+	x := &EventViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ControllerUserInteractionEnabled calls the underlying ControllerUserInteractionEnabled.
-func (x *EventViewController) ControllerUserInteractionEnabled() bool {
-	return x.inner.ControllerUserInteractionEnabled()
+// eventViewControllerAdopt wraps an Objective-C object that this code just created as a
+// EventViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eventViewControllerAdopt(id objc.ID) *EventViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &EventViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetControllerUserInteractionEnabled calls the underlying SetControllerUserInteractionEnabled.
+// Description returns the object's -description text.
+func (x *EventViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EventViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EventViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *EventViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEventViewController creates a new EventViewController.
+func NewEventViewController() *EventViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCEventViewController")), objc.RegisterName("new"))
+	return eventViewControllerAdopt(_id)
+}
+
+// WithControllerUserInteractionEnabled a Boolean value that indicates whether the system delivers game controller input to profile objects or to views using the responder chain.
+func (x *EventViewController) WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
+	return x
+}
+
+// ControllerUserInteractionEnabled wraps the corresponding Objective-C method.
+func (x *EventViewController) ControllerUserInteractionEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("controllerUserInteractionEnabled"))
+	return _r
+}
+
+// SetControllerUserInteractionEnabled wraps the corresponding Objective-C method.
 func (x *EventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
-	x.inner.SetControllerUserInteractionEnabled(controllerUserInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerUserInteractionEnabled:"), controllerUserInteractionEnabled)
 }
 
 // EventViewControllerable is the interface implemented by [EventViewController], for mocking and DI.
 type EventViewControllerable interface {
-	Unwrap() *raw.GCEventViewController
+	obj.Object
 	WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController
 	ControllerUserInteractionEnabled() bool
 	SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool)

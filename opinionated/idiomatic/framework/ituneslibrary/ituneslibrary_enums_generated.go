@@ -9,388 +9,406 @@ import (
 )
 
 // These constants specify the possible formats of the data that imageDataFormat returns.
-type ITLibArtworkFormat uint64
+type LibArtworkFormat uint64
 
 const (
 	// The image data format is unknown.
-	ITLibArtworkFormatNone ITLibArtworkFormat = 0
+	LibArtworkFormatNone LibArtworkFormat = 0
 	// The image data corresponds to a bitmap image.
-	ITLibArtworkFormatBitmap ITLibArtworkFormat = 1
+	LibArtworkFormatBitmap LibArtworkFormat = 1
 	// The image data corresponds to a JPEG image.
-	ITLibArtworkFormatJPEG ITLibArtworkFormat = 2
+	LibArtworkFormatJPEG LibArtworkFormat = 2
 	// The image data corresponds to a JPEG2000 image.
-	ITLibArtworkFormatJPEG2000 ITLibArtworkFormat = 3
+	LibArtworkFormatJPEG2000 LibArtworkFormat = 3
 	// The image data corresponds to a GIF image.
-	ITLibArtworkFormatGIF ITLibArtworkFormat = 4
+	LibArtworkFormatGIF LibArtworkFormat = 4
 	// The image data corresponds to a PNG image.
-	ITLibArtworkFormatPNG ITLibArtworkFormat = 5
+	LibArtworkFormatPNG LibArtworkFormat = 5
 	// The image data corresponds to a bitmap image.
-	ITLibArtworkFormatBMP ITLibArtworkFormat = 6
+	LibArtworkFormatBMP LibArtworkFormat = 6
 	// The image data corresponds to a TIFF image.
-	ITLibArtworkFormatTIFF ITLibArtworkFormat = 7
+	LibArtworkFormatTIFF LibArtworkFormat = 7
 	// The image data corresponds to a PICT image.
-	ITLibArtworkFormatPICT ITLibArtworkFormat = 8
+	LibArtworkFormatPICT LibArtworkFormat = 8
 )
 
-func (e ITLibArtworkFormat) String() string {
+// String returns the LibArtworkFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibArtworkFormat) String() string {
 	switch e {
-	case ITLibArtworkFormatNone:
-		return "ITLibArtworkFormatNone"
-	case ITLibArtworkFormatBitmap:
-		return "ITLibArtworkFormatBitmap"
-	case ITLibArtworkFormatJPEG:
-		return "ITLibArtworkFormatJPEG"
-	case ITLibArtworkFormatJPEG2000:
-		return "ITLibArtworkFormatJPEG2000"
-	case ITLibArtworkFormatGIF:
-		return "ITLibArtworkFormatGIF"
-	case ITLibArtworkFormatPNG:
-		return "ITLibArtworkFormatPNG"
-	case ITLibArtworkFormatBMP:
-		return "ITLibArtworkFormatBMP"
-	case ITLibArtworkFormatTIFF:
-		return "ITLibArtworkFormatTIFF"
-	case ITLibArtworkFormatPICT:
-		return "ITLibArtworkFormatPICT"
+	case LibArtworkFormatNone:
+		return "LibArtworkFormatNone"
+	case LibArtworkFormatBitmap:
+		return "LibArtworkFormatBitmap"
+	case LibArtworkFormatJPEG:
+		return "LibArtworkFormatJPEG"
+	case LibArtworkFormatJPEG2000:
+		return "LibArtworkFormatJPEG2000"
+	case LibArtworkFormatGIF:
+		return "LibArtworkFormatGIF"
+	case LibArtworkFormatPNG:
+		return "LibArtworkFormatPNG"
+	case LibArtworkFormatBMP:
+		return "LibArtworkFormatBMP"
+	case LibArtworkFormatTIFF:
+		return "LibArtworkFormatTIFF"
+	case LibArtworkFormatPICT:
+		return "LibArtworkFormatPICT"
 	default:
-		return fmt.Sprintf("ITLibArtworkFormat(%d)", int64(e))
+		return fmt.Sprintf("LibArtworkFormat(%d)", int64(e))
 	}
 }
 
 // These constants specify the possible kinds of distinguished playlists.
-type ITLibDistinguishedPlaylistKind uint64
+type LibDistinguishedPlaylistKind uint64
 
 const (
 	// The playlist isn’t a distinguished playlist.
-	ITLibDistinguishedPlaylistKindNone ITLibDistinguishedPlaylistKind = 0
+	LibDistinguishedPlaylistKindNone LibDistinguishedPlaylistKind = 0
 	// The playlist contains all the movies in the iTunes library.
-	ITLibDistinguishedPlaylistKindMovies ITLibDistinguishedPlaylistKind = 1
+	LibDistinguishedPlaylistKindMovies LibDistinguishedPlaylistKind = 1
 	// The playlist contains all the TV shows in the iTunes library.
-	ITLibDistinguishedPlaylistKindTVShows ITLibDistinguishedPlaylistKind = 2
+	LibDistinguishedPlaylistKindTVShows LibDistinguishedPlaylistKind = 2
 	// The playlist contains all the music items in the iTunes library.
-	ITLibDistinguishedPlaylistKindMusic ITLibDistinguishedPlaylistKind = 3
+	LibDistinguishedPlaylistKindMusic LibDistinguishedPlaylistKind = 3
 	// The playlist contains all the audiobooks in the iTunes library.
-	ITLibDistinguishedPlaylistKindAudiobooks ITLibDistinguishedPlaylistKind = 4
+	LibDistinguishedPlaylistKindAudiobooks LibDistinguishedPlaylistKind = 4
 	// The playlist contains all the audiobooks in the iTunes library.
-	ITLibDistinguishedPlaylistKindBooks ITLibDistinguishedPlaylistKind = 4
+	LibDistinguishedPlaylistKindBooks LibDistinguishedPlaylistKind = 4
 	// The playlist contains all the iOS ringtones in the iTunes library.
-	ITLibDistinguishedPlaylistKindRingtones ITLibDistinguishedPlaylistKind = 5
+	LibDistinguishedPlaylistKindRingtones LibDistinguishedPlaylistKind = 5
 	// The playlist contains all the podcasts in the iTunes library.
-	ITLibDistinguishedPlaylistKindPodcasts ITLibDistinguishedPlaylistKind = 7
+	LibDistinguishedPlaylistKindPodcasts LibDistinguishedPlaylistKind = 7
 	// The playlist contains all the voice memos in the iTunes library.
-	ITLibDistinguishedPlaylistKindVoiceMemos ITLibDistinguishedPlaylistKind = 14
+	LibDistinguishedPlaylistKindVoiceMemos LibDistinguishedPlaylistKind = 14
 	// The playlist contains all the user’s purchases from the iTunes Store.
-	ITLibDistinguishedPlaylistKindPurchases ITLibDistinguishedPlaylistKind = 16
+	LibDistinguishedPlaylistKindPurchases LibDistinguishedPlaylistKind = 16
 	// The playlist contains all the user’s iTunes U items.
-	ITLibDistinguishedPlaylistKindiTunesU ITLibDistinguishedPlaylistKind = 26
+	LibDistinguishedPlaylistKindiTunesU LibDistinguishedPlaylistKind = 26
 	// The default Smart Playlist that iTunes creates of the user’s music from the 1990s.
-	ITLibDistinguishedPlaylistKind90sMusic ITLibDistinguishedPlaylistKind = 42
+	LibDistinguishedPlaylistKind90sMusic LibDistinguishedPlaylistKind = 42
 	// The default Smart Playlist that iTunes creates of the user’s top rated media items.
-	ITLibDistinguishedPlaylistKindMyTopRated ITLibDistinguishedPlaylistKind = 43
+	LibDistinguishedPlaylistKindMyTopRated LibDistinguishedPlaylistKind = 43
 	// The default Smart Playlist that iTunes creates of the user’s 25 most played media items.
-	ITLibDistinguishedPlaylistKindTop25MostPlayed ITLibDistinguishedPlaylistKind = 44
+	LibDistinguishedPlaylistKindTop25MostPlayed LibDistinguishedPlaylistKind = 44
 	// The default Smart Playlist that iTunes creates of the user’s most recently played media items.
-	ITLibDistinguishedPlaylistKindRecentlyPlayed ITLibDistinguishedPlaylistKind = 45
+	LibDistinguishedPlaylistKindRecentlyPlayed LibDistinguishedPlaylistKind = 45
 	// The default Smart Playlist that iTunes creates of the user’s most recently added media items.
-	ITLibDistinguishedPlaylistKindRecentlyAdded ITLibDistinguishedPlaylistKind = 46
+	LibDistinguishedPlaylistKindRecentlyAdded LibDistinguishedPlaylistKind = 46
 	// The default Smart Playlist that iTunes creates of the user’s music videos.
-	ITLibDistinguishedPlaylistKindMusicVideos ITLibDistinguishedPlaylistKind = 47
+	LibDistinguishedPlaylistKindMusicVideos LibDistinguishedPlaylistKind = 47
 	// The default Smart Playlist that iTunes creates of the user’s classical music.
-	ITLibDistinguishedPlaylistKindClassicalMusic ITLibDistinguishedPlaylistKind = 48
+	LibDistinguishedPlaylistKindClassicalMusic LibDistinguishedPlaylistKind = 48
 	// The playlist contains all the music videos in the iTunes library.
-	ITLibDistinguishedPlaylistKindLibraryMusicVideos ITLibDistinguishedPlaylistKind = 49
+	LibDistinguishedPlaylistKindLibraryMusicVideos LibDistinguishedPlaylistKind = 49
 	// The playlist contains all the user’s home videos in the iTunes library.
-	ITLibDistinguishedPlaylistKindHomeVideos ITLibDistinguishedPlaylistKind = 50
+	LibDistinguishedPlaylistKindHomeVideos LibDistinguishedPlaylistKind = 50
 	// The playlist contains all the user’s iOS apps in the iTunes library.
-	ITLibDistinguishedPlaylistKindApplications ITLibDistinguishedPlaylistKind = 51
+	LibDistinguishedPlaylistKindApplications LibDistinguishedPlaylistKind = 51
 	// The playlist contains all the user’s loved music.
-	ITLibDistinguishedPlaylistKindLovedSongs ITLibDistinguishedPlaylistKind = 52
+	LibDistinguishedPlaylistKindLovedSongs LibDistinguishedPlaylistKind = 52
 	// The default Smart Playlist that iTunes creates of the user’s music shows and movies.
-	ITLibDistinguishedPlaylistKindMusicShowsAndMovies ITLibDistinguishedPlaylistKind = 53
+	LibDistinguishedPlaylistKindMusicShowsAndMovies LibDistinguishedPlaylistKind = 53
 )
 
-func (e ITLibDistinguishedPlaylistKind) String() string {
+// String returns the LibDistinguishedPlaylistKind constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibDistinguishedPlaylistKind) String() string {
 	switch e {
-	case ITLibDistinguishedPlaylistKindNone:
-		return "ITLibDistinguishedPlaylistKindNone"
-	case ITLibDistinguishedPlaylistKindMovies:
-		return "ITLibDistinguishedPlaylistKindMovies"
-	case ITLibDistinguishedPlaylistKindTVShows:
-		return "ITLibDistinguishedPlaylistKindTVShows"
-	case ITLibDistinguishedPlaylistKindMusic:
-		return "ITLibDistinguishedPlaylistKindMusic"
-	case ITLibDistinguishedPlaylistKindAudiobooks:
-		return "ITLibDistinguishedPlaylistKindAudiobooks"
-	case ITLibDistinguishedPlaylistKindRingtones:
-		return "ITLibDistinguishedPlaylistKindRingtones"
-	case ITLibDistinguishedPlaylistKindPodcasts:
-		return "ITLibDistinguishedPlaylistKindPodcasts"
-	case ITLibDistinguishedPlaylistKindVoiceMemos:
-		return "ITLibDistinguishedPlaylistKindVoiceMemos"
-	case ITLibDistinguishedPlaylistKindPurchases:
-		return "ITLibDistinguishedPlaylistKindPurchases"
-	case ITLibDistinguishedPlaylistKindiTunesU:
-		return "ITLibDistinguishedPlaylistKindiTunesU"
-	case ITLibDistinguishedPlaylistKind90sMusic:
-		return "ITLibDistinguishedPlaylistKind90sMusic"
-	case ITLibDistinguishedPlaylistKindMyTopRated:
-		return "ITLibDistinguishedPlaylistKindMyTopRated"
-	case ITLibDistinguishedPlaylistKindTop25MostPlayed:
-		return "ITLibDistinguishedPlaylistKindTop25MostPlayed"
-	case ITLibDistinguishedPlaylistKindRecentlyPlayed:
-		return "ITLibDistinguishedPlaylistKindRecentlyPlayed"
-	case ITLibDistinguishedPlaylistKindRecentlyAdded:
-		return "ITLibDistinguishedPlaylistKindRecentlyAdded"
-	case ITLibDistinguishedPlaylistKindMusicVideos:
-		return "ITLibDistinguishedPlaylistKindMusicVideos"
-	case ITLibDistinguishedPlaylistKindClassicalMusic:
-		return "ITLibDistinguishedPlaylistKindClassicalMusic"
-	case ITLibDistinguishedPlaylistKindLibraryMusicVideos:
-		return "ITLibDistinguishedPlaylistKindLibraryMusicVideos"
-	case ITLibDistinguishedPlaylistKindHomeVideos:
-		return "ITLibDistinguishedPlaylistKindHomeVideos"
-	case ITLibDistinguishedPlaylistKindApplications:
-		return "ITLibDistinguishedPlaylistKindApplications"
-	case ITLibDistinguishedPlaylistKindLovedSongs:
-		return "ITLibDistinguishedPlaylistKindLovedSongs"
-	case ITLibDistinguishedPlaylistKindMusicShowsAndMovies:
-		return "ITLibDistinguishedPlaylistKindMusicShowsAndMovies"
+	case LibDistinguishedPlaylistKindNone:
+		return "LibDistinguishedPlaylistKindNone"
+	case LibDistinguishedPlaylistKindMovies:
+		return "LibDistinguishedPlaylistKindMovies"
+	case LibDistinguishedPlaylistKindTVShows:
+		return "LibDistinguishedPlaylistKindTVShows"
+	case LibDistinguishedPlaylistKindMusic:
+		return "LibDistinguishedPlaylistKindMusic"
+	case LibDistinguishedPlaylistKindAudiobooks:
+		return "LibDistinguishedPlaylistKindAudiobooks"
+	case LibDistinguishedPlaylistKindRingtones:
+		return "LibDistinguishedPlaylistKindRingtones"
+	case LibDistinguishedPlaylistKindPodcasts:
+		return "LibDistinguishedPlaylistKindPodcasts"
+	case LibDistinguishedPlaylistKindVoiceMemos:
+		return "LibDistinguishedPlaylistKindVoiceMemos"
+	case LibDistinguishedPlaylistKindPurchases:
+		return "LibDistinguishedPlaylistKindPurchases"
+	case LibDistinguishedPlaylistKindiTunesU:
+		return "LibDistinguishedPlaylistKindiTunesU"
+	case LibDistinguishedPlaylistKind90sMusic:
+		return "LibDistinguishedPlaylistKind90sMusic"
+	case LibDistinguishedPlaylistKindMyTopRated:
+		return "LibDistinguishedPlaylistKindMyTopRated"
+	case LibDistinguishedPlaylistKindTop25MostPlayed:
+		return "LibDistinguishedPlaylistKindTop25MostPlayed"
+	case LibDistinguishedPlaylistKindRecentlyPlayed:
+		return "LibDistinguishedPlaylistKindRecentlyPlayed"
+	case LibDistinguishedPlaylistKindRecentlyAdded:
+		return "LibDistinguishedPlaylistKindRecentlyAdded"
+	case LibDistinguishedPlaylistKindMusicVideos:
+		return "LibDistinguishedPlaylistKindMusicVideos"
+	case LibDistinguishedPlaylistKindClassicalMusic:
+		return "LibDistinguishedPlaylistKindClassicalMusic"
+	case LibDistinguishedPlaylistKindLibraryMusicVideos:
+		return "LibDistinguishedPlaylistKindLibraryMusicVideos"
+	case LibDistinguishedPlaylistKindHomeVideos:
+		return "LibDistinguishedPlaylistKindHomeVideos"
+	case LibDistinguishedPlaylistKindApplications:
+		return "LibDistinguishedPlaylistKindApplications"
+	case LibDistinguishedPlaylistKindLovedSongs:
+		return "LibDistinguishedPlaylistKindLovedSongs"
+	case LibDistinguishedPlaylistKindMusicShowsAndMovies:
+		return "LibDistinguishedPlaylistKindMusicShowsAndMovies"
 	default:
-		return fmt.Sprintf("ITLibDistinguishedPlaylistKind(%d)", int64(e))
+		return fmt.Sprintf("LibDistinguishedPlaylistKind(%d)", int64(e))
 	}
 }
 
 // These constants describe the features that an iTunes library supports.
-type ITLibExportFeature uint64
+type LibExportFeature uint64
 
 const (
 	// The iTunes library doesn’t support any export features.
-	ITLibExportFeatureNone ITLibExportFeature = 0
+	LibExportFeatureNone LibExportFeature = 0
 )
 
-func (e ITLibExportFeature) String() string {
+// String returns the LibExportFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibExportFeature) String() string {
 	switch e {
-	case ITLibExportFeatureNone:
-		return "ITLibExportFeatureNone"
+	case LibExportFeatureNone:
+		return "LibExportFeatureNone"
 	default:
-		return fmt.Sprintf("ITLibExportFeature(%d)", int64(e))
+		return fmt.Sprintf("LibExportFeature(%d)", int64(e))
 	}
 }
 
 // These constants describe initialization options for an iTunes library.
-type ITLibInitOptions uint64
+type LibInitOptions uint64
 
 const (
 	// No initialization options apply.
-	ITLibInitOptionNone ITLibInitOptions = 0
+	LibInitOptionNone LibInitOptions = 0
 	// iTunes library data loads upon request, rather than during initialization.
-	ITLibInitOptionLazyLoadData ITLibInitOptions = 1
+	LibInitOptionLazyLoadData LibInitOptions = 1
 )
 
-func (e ITLibInitOptions) String() string {
+// String returns the LibInitOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibInitOptions) String() string {
 	switch e {
-	case ITLibInitOptionNone:
-		return "ITLibInitOptionNone"
-	case ITLibInitOptionLazyLoadData:
-		return "ITLibInitOptionLazyLoadData"
+	case LibInitOptionNone:
+		return "LibInitOptionNone"
+	case LibInitOptionLazyLoadData:
+		return "LibInitOptionLazyLoadData"
 	default:
-		return fmt.Sprintf("ITLibInitOptions(%d)", int64(e))
+		return fmt.Sprintf("LibInitOptions(%d)", int64(e))
 	}
 }
 
 // These constants specify the location type of a media item.
-type ITLibMediaItemLocationType uint64
+type LibMediaItemLocationType uint64
 
 const (
 	// The media item location type is unknown.
-	ITLibMediaItemLocationTypeUnknown ITLibMediaItemLocationType = 0
+	LibMediaItemLocationTypeUnknown LibMediaItemLocationType = 0
 	// The media item location refers to a local file.
-	ITLibMediaItemLocationTypeFile ITLibMediaItemLocationType = 1
+	LibMediaItemLocationTypeFile LibMediaItemLocationType = 1
 	// The media item location refers to a URL, such as a podcast.
-	ITLibMediaItemLocationTypeURL ITLibMediaItemLocationType = 2
+	LibMediaItemLocationTypeURL LibMediaItemLocationType = 2
 	// The media item location refers to a remote file.
-	ITLibMediaItemLocationTypeRemote ITLibMediaItemLocationType = 3
+	LibMediaItemLocationTypeRemote LibMediaItemLocationType = 3
 )
 
-func (e ITLibMediaItemLocationType) String() string {
+// String returns the LibMediaItemLocationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibMediaItemLocationType) String() string {
 	switch e {
-	case ITLibMediaItemLocationTypeUnknown:
-		return "ITLibMediaItemLocationTypeUnknown"
-	case ITLibMediaItemLocationTypeFile:
-		return "ITLibMediaItemLocationTypeFile"
-	case ITLibMediaItemLocationTypeURL:
-		return "ITLibMediaItemLocationTypeURL"
-	case ITLibMediaItemLocationTypeRemote:
-		return "ITLibMediaItemLocationTypeRemote"
+	case LibMediaItemLocationTypeUnknown:
+		return "LibMediaItemLocationTypeUnknown"
+	case LibMediaItemLocationTypeFile:
+		return "LibMediaItemLocationTypeFile"
+	case LibMediaItemLocationTypeURL:
+		return "LibMediaItemLocationTypeURL"
+	case LibMediaItemLocationTypeRemote:
+		return "LibMediaItemLocationTypeRemote"
 	default:
-		return fmt.Sprintf("ITLibMediaItemLocationType(%d)", int64(e))
+		return fmt.Sprintf("LibMediaItemLocationType(%d)", int64(e))
 	}
 }
 
 // These constants specify the possible ratings of media item lyrics.
-type ITLibMediaItemLyricsContentRating uint64
+type LibMediaItemLyricsContentRating uint64
 
 const (
 	// There is no rating information for the media item lyrics.
-	ITLibMediaItemLyricsContentRatingNone ITLibMediaItemLyricsContentRating = 0
+	LibMediaItemLyricsContentRatingNone LibMediaItemLyricsContentRating = 0
 	// The media item lyrics contain explicit language.
-	ITLibMediaItemLyricsContentRatingExplicit ITLibMediaItemLyricsContentRating = 1
+	LibMediaItemLyricsContentRatingExplicit LibMediaItemLyricsContentRating = 1
 	// The media item lyrics don’t contain explicit language.
-	ITLibMediaItemLyricsContentRatingClean ITLibMediaItemLyricsContentRating = 2
+	LibMediaItemLyricsContentRatingClean LibMediaItemLyricsContentRating = 2
 )
 
-func (e ITLibMediaItemLyricsContentRating) String() string {
+// String returns the LibMediaItemLyricsContentRating constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibMediaItemLyricsContentRating) String() string {
 	switch e {
-	case ITLibMediaItemLyricsContentRatingNone:
-		return "ITLibMediaItemLyricsContentRatingNone"
-	case ITLibMediaItemLyricsContentRatingExplicit:
-		return "ITLibMediaItemLyricsContentRatingExplicit"
-	case ITLibMediaItemLyricsContentRatingClean:
-		return "ITLibMediaItemLyricsContentRatingClean"
+	case LibMediaItemLyricsContentRatingNone:
+		return "LibMediaItemLyricsContentRatingNone"
+	case LibMediaItemLyricsContentRatingExplicit:
+		return "LibMediaItemLyricsContentRatingExplicit"
+	case LibMediaItemLyricsContentRatingClean:
+		return "LibMediaItemLyricsContentRatingClean"
 	default:
-		return fmt.Sprintf("ITLibMediaItemLyricsContentRating(%d)", int64(e))
+		return fmt.Sprintf("LibMediaItemLyricsContentRating(%d)", int64(e))
 	}
 }
 
 // These constants specify the possible media kinds of a media item.
-type ITLibMediaItemMediaKind uint64
+type LibMediaItemMediaKind uint64
 
 const (
 	// The media item kind is unknown.
-	ITLibMediaItemMediaKindUnknown ITLibMediaItemMediaKind = 1
+	LibMediaItemMediaKindUnknown LibMediaItemMediaKind = 1
 	// The media item is a song.
-	ITLibMediaItemMediaKindSong ITLibMediaItemMediaKind = 2
+	LibMediaItemMediaKindSong LibMediaItemMediaKind = 2
 	// The media item is a movie.
-	ITLibMediaItemMediaKindMovie ITLibMediaItemMediaKind = 3
+	LibMediaItemMediaKindMovie LibMediaItemMediaKind = 3
 	// The media item is an audio or a video podcast.
-	ITLibMediaItemMediaKindPodcast ITLibMediaItemMediaKind = 4
+	LibMediaItemMediaKindPodcast LibMediaItemMediaKind = 4
 	// The media item is an audiobook.
-	ITLibMediaItemMediaKindAudiobook ITLibMediaItemMediaKind = 5
+	LibMediaItemMediaKindAudiobook LibMediaItemMediaKind = 5
 	// The media item is an unwrapped PDF file that’s part of a music album.
-	ITLibMediaItemMediaKindPDFBooklet ITLibMediaItemMediaKind = 6
+	LibMediaItemMediaKindPDFBooklet LibMediaItemMediaKind = 6
 	// The media item is a music video.
-	ITLibMediaItemMediaKindMusicVideo ITLibMediaItemMediaKind = 7
+	LibMediaItemMediaKindMusicVideo LibMediaItemMediaKind = 7
 	// The media item is a TV show.
-	ITLibMediaItemMediaKindTVShow ITLibMediaItemMediaKind = 8
+	LibMediaItemMediaKindTVShow LibMediaItemMediaKind = 8
 	// The media item is a QuickTime movie with embedded Flash.
-	ITLibMediaItemMediaKindInteractiveBooklet ITLibMediaItemMediaKind = 9
+	LibMediaItemMediaKindInteractiveBooklet LibMediaItemMediaKind = 9
 	// The media item is a non-iTunes Store movie.
-	ITLibMediaItemMediaKindHomeVideo ITLibMediaItemMediaKind = 12
+	LibMediaItemMediaKindHomeVideo LibMediaItemMediaKind = 12
 	// The media item is an iOS ringtone.
-	ITLibMediaItemMediaKindRingtone ITLibMediaItemMediaKind = 14
+	LibMediaItemMediaKindRingtone LibMediaItemMediaKind = 14
 	// The media item is an iTunes Extra or an iTunes LP item.
-	ITLibMediaItemMediaKindDigitalBooklet ITLibMediaItemMediaKind = 15
+	LibMediaItemMediaKindDigitalBooklet LibMediaItemMediaKind = 15
 	// The media item is an iOS app.
-	ITLibMediaItemMediaKindIOSApplication ITLibMediaItemMediaKind = 16
+	LibMediaItemMediaKindIOSApplication LibMediaItemMediaKind = 16
 	// The media item is a recorded voice memo.
-	ITLibMediaItemMediaKindVoiceMemo ITLibMediaItemMediaKind = 17
+	LibMediaItemMediaKindVoiceMemo LibMediaItemMediaKind = 17
 	// The media item is an iTunes U audio or video file.
-	ITLibMediaItemMediaKindiTunesU ITLibMediaItemMediaKind = 18
+	LibMediaItemMediaKindiTunesU LibMediaItemMediaKind = 18
 	// The media item is an EPUB file or an iBooks Author book.
-	ITLibMediaItemMediaKindBook ITLibMediaItemMediaKind = 19
+	LibMediaItemMediaKindBook LibMediaItemMediaKind = 19
 	// The media item is a PDF file that iTunes treats as a book unless the user overrides it.
-	ITLibMediaItemMediaKindPDFBook ITLibMediaItemMediaKind = 20
+	LibMediaItemMediaKindPDFBook LibMediaItemMediaKind = 20
 	// The media item is an audio tone that’s not a protected ringtone on an iOS device.
-	ITLibMediaItemMediaKindAlertTone ITLibMediaItemMediaKind = 21
+	LibMediaItemMediaKindAlertTone LibMediaItemMediaKind = 21
 )
 
-func (e ITLibMediaItemMediaKind) String() string {
+// String returns the LibMediaItemMediaKind constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibMediaItemMediaKind) String() string {
 	switch e {
-	case ITLibMediaItemMediaKindUnknown:
-		return "ITLibMediaItemMediaKindUnknown"
-	case ITLibMediaItemMediaKindSong:
-		return "ITLibMediaItemMediaKindSong"
-	case ITLibMediaItemMediaKindMovie:
-		return "ITLibMediaItemMediaKindMovie"
-	case ITLibMediaItemMediaKindPodcast:
-		return "ITLibMediaItemMediaKindPodcast"
-	case ITLibMediaItemMediaKindAudiobook:
-		return "ITLibMediaItemMediaKindAudiobook"
-	case ITLibMediaItemMediaKindPDFBooklet:
-		return "ITLibMediaItemMediaKindPDFBooklet"
-	case ITLibMediaItemMediaKindMusicVideo:
-		return "ITLibMediaItemMediaKindMusicVideo"
-	case ITLibMediaItemMediaKindTVShow:
-		return "ITLibMediaItemMediaKindTVShow"
-	case ITLibMediaItemMediaKindInteractiveBooklet:
-		return "ITLibMediaItemMediaKindInteractiveBooklet"
-	case ITLibMediaItemMediaKindHomeVideo:
-		return "ITLibMediaItemMediaKindHomeVideo"
-	case ITLibMediaItemMediaKindRingtone:
-		return "ITLibMediaItemMediaKindRingtone"
-	case ITLibMediaItemMediaKindDigitalBooklet:
-		return "ITLibMediaItemMediaKindDigitalBooklet"
-	case ITLibMediaItemMediaKindIOSApplication:
-		return "ITLibMediaItemMediaKindIOSApplication"
-	case ITLibMediaItemMediaKindVoiceMemo:
-		return "ITLibMediaItemMediaKindVoiceMemo"
-	case ITLibMediaItemMediaKindiTunesU:
-		return "ITLibMediaItemMediaKindiTunesU"
-	case ITLibMediaItemMediaKindBook:
-		return "ITLibMediaItemMediaKindBook"
-	case ITLibMediaItemMediaKindPDFBook:
-		return "ITLibMediaItemMediaKindPDFBook"
-	case ITLibMediaItemMediaKindAlertTone:
-		return "ITLibMediaItemMediaKindAlertTone"
+	case LibMediaItemMediaKindUnknown:
+		return "LibMediaItemMediaKindUnknown"
+	case LibMediaItemMediaKindSong:
+		return "LibMediaItemMediaKindSong"
+	case LibMediaItemMediaKindMovie:
+		return "LibMediaItemMediaKindMovie"
+	case LibMediaItemMediaKindPodcast:
+		return "LibMediaItemMediaKindPodcast"
+	case LibMediaItemMediaKindAudiobook:
+		return "LibMediaItemMediaKindAudiobook"
+	case LibMediaItemMediaKindPDFBooklet:
+		return "LibMediaItemMediaKindPDFBooklet"
+	case LibMediaItemMediaKindMusicVideo:
+		return "LibMediaItemMediaKindMusicVideo"
+	case LibMediaItemMediaKindTVShow:
+		return "LibMediaItemMediaKindTVShow"
+	case LibMediaItemMediaKindInteractiveBooklet:
+		return "LibMediaItemMediaKindInteractiveBooklet"
+	case LibMediaItemMediaKindHomeVideo:
+		return "LibMediaItemMediaKindHomeVideo"
+	case LibMediaItemMediaKindRingtone:
+		return "LibMediaItemMediaKindRingtone"
+	case LibMediaItemMediaKindDigitalBooklet:
+		return "LibMediaItemMediaKindDigitalBooklet"
+	case LibMediaItemMediaKindIOSApplication:
+		return "LibMediaItemMediaKindIOSApplication"
+	case LibMediaItemMediaKindVoiceMemo:
+		return "LibMediaItemMediaKindVoiceMemo"
+	case LibMediaItemMediaKindiTunesU:
+		return "LibMediaItemMediaKindiTunesU"
+	case LibMediaItemMediaKindBook:
+		return "LibMediaItemMediaKindBook"
+	case LibMediaItemMediaKindPDFBook:
+		return "LibMediaItemMediaKindPDFBook"
+	case LibMediaItemMediaKindAlertTone:
+		return "LibMediaItemMediaKindAlertTone"
 	default:
-		return fmt.Sprintf("ITLibMediaItemMediaKind(%d)", int64(e))
+		return fmt.Sprintf("LibMediaItemMediaKind(%d)", int64(e))
 	}
 }
 
 // These constants specify the play status of the media item.
-type ITLibMediaItemPlayStatus uint64
+type LibMediaItemPlayStatus uint64
 
 const (
 	// The user has played the media item or iTunes doesn’t track the play status for this kind of media item.
-	ITLibMediaItemPlayStatusNone ITLibMediaItemPlayStatus = 0
+	LibMediaItemPlayStatusNone LibMediaItemPlayStatus = 0
 	// The user has partially played the media item.
-	ITLibMediaItemPlayStatusPartiallyPlayed ITLibMediaItemPlayStatus = 1
+	LibMediaItemPlayStatusPartiallyPlayed LibMediaItemPlayStatus = 1
 	// The user hasn’t played the media item.
-	ITLibMediaItemPlayStatusUnplayed ITLibMediaItemPlayStatus = 2
+	LibMediaItemPlayStatusUnplayed LibMediaItemPlayStatus = 2
 )
 
-func (e ITLibMediaItemPlayStatus) String() string {
+// String returns the LibMediaItemPlayStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibMediaItemPlayStatus) String() string {
 	switch e {
-	case ITLibMediaItemPlayStatusNone:
-		return "ITLibMediaItemPlayStatusNone"
-	case ITLibMediaItemPlayStatusPartiallyPlayed:
-		return "ITLibMediaItemPlayStatusPartiallyPlayed"
-	case ITLibMediaItemPlayStatusUnplayed:
-		return "ITLibMediaItemPlayStatusUnplayed"
+	case LibMediaItemPlayStatusNone:
+		return "LibMediaItemPlayStatusNone"
+	case LibMediaItemPlayStatusPartiallyPlayed:
+		return "LibMediaItemPlayStatusPartiallyPlayed"
+	case LibMediaItemPlayStatusUnplayed:
+		return "LibMediaItemPlayStatusUnplayed"
 	default:
-		return fmt.Sprintf("ITLibMediaItemPlayStatus(%d)", int64(e))
+		return fmt.Sprintf("LibMediaItemPlayStatus(%d)", int64(e))
 	}
 }
 
 // These constants specify the possible kinds of playlists.
-type ITLibPlaylistKind uint64
+type LibPlaylistKind uint64
 
 const (
 	// A standard playlist that the user or iTunes creates, such as Music, Movies, Pop Mix, or My Awesome Playlist.
-	ITLibPlaylistKindRegular ITLibPlaylistKind = 0
+	LibPlaylistKindRegular LibPlaylistKind = 0
 	// A playlist with contents that iTunes generates by evaluating a set of rules, such as 90s Music or Songs from 1999.
-	ITLibPlaylistKindSmart ITLibPlaylistKind = 1
+	LibPlaylistKindSmart LibPlaylistKind = 1
 	// A playlist iTunes creates of songs that go well with a song the user specifies.
-	ITLibPlaylistKindGenius ITLibPlaylistKind = 2
+	LibPlaylistKindGenius LibPlaylistKind = 2
 	// A playlist folder that the user or iTunes creates, such as My Playlist Folder or Genius Mixes.
-	ITLibPlaylistKindFolder ITLibPlaylistKind = 3
+	LibPlaylistKindFolder LibPlaylistKind = 3
 	// An ongoing playlist in a particular genre—like a commercial-free radio station playing the user’s favorite songs—that iTunes creates from music in the user’s iTunes library.
-	ITLibPlaylistKindGeniusMix ITLibPlaylistKind = 4
+	LibPlaylistKindGeniusMix LibPlaylistKind = 4
 )
 
-func (e ITLibPlaylistKind) String() string {
+// String returns the LibPlaylistKind constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibPlaylistKind) String() string {
 	switch e {
-	case ITLibPlaylistKindRegular:
-		return "ITLibPlaylistKindRegular"
-	case ITLibPlaylistKindSmart:
-		return "ITLibPlaylistKindSmart"
-	case ITLibPlaylistKindGenius:
-		return "ITLibPlaylistKindGenius"
-	case ITLibPlaylistKindFolder:
-		return "ITLibPlaylistKindFolder"
-	case ITLibPlaylistKindGeniusMix:
-		return "ITLibPlaylistKindGeniusMix"
+	case LibPlaylistKindRegular:
+		return "LibPlaylistKindRegular"
+	case LibPlaylistKindSmart:
+		return "LibPlaylistKindSmart"
+	case LibPlaylistKindGenius:
+		return "LibPlaylistKindGenius"
+	case LibPlaylistKindFolder:
+		return "LibPlaylistKindFolder"
+	case LibPlaylistKindGeniusMix:
+		return "LibPlaylistKindGeniusMix"
 	default:
-		return fmt.Sprintf("ITLibPlaylistKind(%d)", int64(e))
+		return fmt.Sprintf("LibPlaylistKind(%d)", int64(e))
 	}
 }

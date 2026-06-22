@@ -6,67 +6,97 @@ package gamesave
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamesave"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A cloud-synced directory for game-save data.
+// SyncedDirectory is an idiomatic wrapper over the Objective-C class GSSyncedDirectory.
 //
-// SyncedDirectory wraps [raw.GSSyncedDirectory] with a fluent Go API.
+// A cloud-synced directory for game-save data.
 type SyncedDirectory struct {
-	inner *raw.GSSyncedDirectory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GSSyncedDirectory].
-func (x *SyncedDirectory) Unwrap() *raw.GSSyncedDirectory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncedDirectory) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncedDirectoryFromID adopts an existing object pointer as a SyncedDirectory (nil for 0).
+// SyncedDirectoryFromID adopts an existing Objective-C object as a SyncedDirectory
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncedDirectoryFromID(id objc.ID) *SyncedDirectory {
 	if id == 0 {
 		return nil
 	}
-	return &SyncedDirectory{inner: raw.GSSyncedDirectoryFromID(id)}
+	x := &SyncedDirectory{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSyncedDirectory creates a new [SyncedDirectory].
+// syncedDirectoryAdopt wraps an Objective-C object that this code just created as a
+// SyncedDirectory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncedDirectoryAdopt(id objc.ID) *SyncedDirectory {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncedDirectory{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncedDirectory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncedDirectory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncedDirectory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SyncedDirectory) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSyncedDirectory creates a new SyncedDirectory.
 func NewSyncedDirectory() *SyncedDirectory {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GSSyncedDirectory")), objc.RegisterName("new"))
-	return &SyncedDirectory{inner: raw.GSSyncedDirectoryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectory")), objc.RegisterName("new"))
+	return syncedDirectoryAdopt(_id)
 }
 
-// Closes the directory, and resumes syncing the directory to the cloud.
-//
-// Close calls the underlying Close.
+// Close closes the directory, and resumes syncing the directory to the cloud.
 func (x *SyncedDirectory) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// Triggers an upload of the directory for any changes that were pending.
-//
-// TriggerPendingUploadWithCompletionHandler calls the underlying TriggerPendingUploadWithCompletionHandler.
+// TriggerPendingUploadWithCompletionHandler triggers an upload of the directory for any changes that were pending.
 func (x *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
-	x.inner.TriggerPendingUploadWithCompletionHandler(completion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerPendingUploadWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Indicates that you resolved a conflict.
-//
-// ResolveConflictsWithVersion calls the underlying ResolveConflictsWithVersion.
-func (x *SyncedDirectory) ResolveConflictsWithVersion(version *raw.GSSyncedDirectoryVersion) {
-	x.inner.ResolveConflictsWithVersion(version)
+// ResolveConflictsWithVersion indicates that you resolved a conflict.
+func (x *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryVersion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveConflictsWithVersion:"), objref.IDOf(version))
 }
 
-// Waits for the directory sync to complete, without showing any user interface.
+// FinishSyncing waits for the directory sync to complete, without showing any user interface.
 //
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
 func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.FinishSyncingWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncingWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -75,23 +105,18 @@ func (x *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 	}
 }
 
-// The state of the directory.
-//
-// DirectoryState calls the underlying DirectoryState.
+// DirectoryState the state of the directory.
 func (x *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
-	_r := x.inner.DirectoryState()
-	if _r == nil {
-		return nil
-	}
-	return &SyncedDirectoryState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryState"))
+	return SyncedDirectoryStateFromID(_r)
 }
 
 // SyncedDirectoryable is the interface implemented by [SyncedDirectory], for mocking and DI.
 type SyncedDirectoryable interface {
-	Unwrap() *raw.GSSyncedDirectory
+	obj.Object
 	Close()
 	TriggerPendingUploadWithCompletionHandler(completion func(bool))
-	ResolveConflictsWithVersion(version *raw.GSSyncedDirectoryVersion)
+	ResolveConflictsWithVersion(version *SyncedDirectoryVersion)
 	FinishSyncing(ctx context.Context) error
 	DirectoryState() *SyncedDirectoryState
 }

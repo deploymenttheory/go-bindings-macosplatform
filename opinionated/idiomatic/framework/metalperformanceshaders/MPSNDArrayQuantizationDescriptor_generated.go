@@ -5,59 +5,77 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayQuantizationDescriptor wraps [raw.MPSNDArrayQuantizationDescriptor] with a fluent Go API.
+// NDArrayQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizationDescriptor.
+//
+// NDArrayQuantizationDescriptor is an abstract base — you do not construct it directly. Construct one of [NDArrayAffineQuantizationDescriptor], [NDArrayLUTQuantizationDescriptor] and pass it where a NDArrayQuantizationDescriptor is accepted.
 type NDArrayQuantizationDescriptor struct {
-	inner *raw.MPSNDArrayQuantizationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayQuantizationDescriptor].
-func (x *NDArrayQuantizationDescriptor) Unwrap() *raw.MPSNDArrayQuantizationDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayQuantizationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayQuantizationDescriptorFromID adopts an existing object pointer as a NDArrayQuantizationDescriptor (nil for 0).
+// NDArrayQuantizationDescriptorFromID adopts an existing Objective-C object as a NDArrayQuantizationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayQuantizationDescriptorFromID(id objc.ID) *NDArrayQuantizationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(id)}
+	x := &NDArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayQuantizationDescriptor creates a new [NDArrayQuantizationDescriptor].
-func NewNDArrayQuantizationDescriptor() *NDArrayQuantizationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
-	return &NDArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(_id)}
+// nDArrayQuantizationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// NDArrayQuantizationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayQuantizationDescriptorAdopt(id objc.ID) *NDArrayQuantizationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayQuantizationDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property  quantizationDataType @abstract  The datatype to use with quantization - the default is MPSDataTypeUint8
-//
-// QuantizationDataType calls the underlying QuantizationDataType.
-func (x *NDArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType {
-	return x.inner.QuantizationDataType()
+// Description returns the object's -description text.
+func (x *NDArrayQuantizationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property  quantizationScheme @abstract  The quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
-//
-// QuantizationScheme calls the underlying QuantizationScheme.
-func (x *NDArrayQuantizationDescriptor) QuantizationScheme() mpsndarray.MPSNDArrayQuantizationScheme {
-	return x.inner.QuantizationScheme()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayQuantizationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NDArrayQuantizationDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // NDArrayQuantizationDescriptorable is the interface implemented by [NDArrayQuantizationDescriptor], for mocking and DI.
 type NDArrayQuantizationDescriptorable interface {
-	Unwrap() *raw.MPSNDArrayQuantizationDescriptor
-	QuantizationDataType() mpscore.MPSDataType
-	QuantizationScheme() mpsndarray.MPSNDArrayQuantizationScheme
+	obj.Object
 }
 
 var _ NDArrayQuantizationDescriptorable = (*NDArrayQuantizationDescriptor)(nil)
+
+// isNDArrayQuantizationDescriptor marks NDArrayQuantizationDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayQuantizationDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayQuantizationDescriptor) isNDArrayQuantizationDescriptor() {}
+
+var _ NDArrayQuantizationDescriptorProvider = (*NDArrayQuantizationDescriptor)(nil)

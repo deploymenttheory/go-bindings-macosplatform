@@ -5,86 +5,113 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that you use to format a contact’s postal addresses.
+// PostalAddressFormatter is an idiomatic wrapper over the Objective-C class CNPostalAddressFormatter.
 //
-// PostalAddressFormatter wraps [raw.CNPostalAddressFormatter] with a fluent Go API.
+// An object that you use to format a contact’s postal addresses.
 type PostalAddressFormatter struct {
-	inner *raw.CNPostalAddressFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNPostalAddressFormatter].
-func (x *PostalAddressFormatter) Unwrap() *raw.CNPostalAddressFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PostalAddressFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// PostalAddressFormatterFromID adopts an existing object pointer as a PostalAddressFormatter (nil for 0).
+// PostalAddressFormatterFromID adopts an existing Objective-C object as a PostalAddressFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func PostalAddressFormatterFromID(id objc.ID) *PostalAddressFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &PostalAddressFormatter{inner: raw.CNPostalAddressFormatterFromID(id)}
-}
-
-// NewPostalAddressFormatter creates a new [PostalAddressFormatter].
-func NewPostalAddressFormatter() *PostalAddressFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNPostalAddressFormatter")), objc.RegisterName("new"))
-	return &PostalAddressFormatter{inner: raw.CNPostalAddressFormatterFromID(_id)}
-}
-
-// The style to apply when formatting strings.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *PostalAddressFormatter) WithStyle(style CNPostalAddressFormatterStyle) *PostalAddressFormatter {
-	x.inner.SetStyle(raw.CNPostalAddressFormatterStyle(style))
+	x := &PostalAddressFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a formatted postal address.
-//
-// StringFromPostalAddress calls the underlying StringFromPostalAddress.
-func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string {
-	_r := x.inner.StringFromPostalAddress(postalAddress)
-	if _r == nil {
+// postalAddressFormatterAdopt wraps an Objective-C object that this code just created as a
+// PostalAddressFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func postalAddressFormatterAdopt(id objc.ID) *PostalAddressFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &PostalAddressFormatter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PostalAddressFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PostalAddressFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PostalAddressFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PostalAddressFormatter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPostalAddressFormatter creates a new PostalAddressFormatter.
+func NewPostalAddressFormatter() *PostalAddressFormatter {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNPostalAddressFormatter")), objc.RegisterName("new"))
+	return postalAddressFormatterAdopt(_id)
+}
+
+// WithStyle the style to apply when formatting strings.
+func (x *PostalAddressFormatter) WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
+	return x
+}
+
+// StringFromPostalAddress returns a formatted postal address.
+func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAddress) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromPostalAddress:"), objref.IDOf(postalAddress))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns a formatted postal address as an attributed string.
-//
-// AttributedStringFromPostalAddressWithDefaultAttributes calls the underlying AttributedStringFromPostalAddressWithDefaultAttributes.
-func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	return x.inner.AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress, attributes)
+// AttributedStringFromPostalAddressWithDefaultAttributes returns a formatted postal address as an attributed string.
+func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromPostalAddress:withDefaultAttributes:"), objref.IDOf(postalAddress), objref.IDOf(attributes))
+	return obj.Wrap(_r)
 }
 
-// @abstract The style for a postal address formatter instance. @discussion The default value is CNPostalAddressFormatterStyleMailingAddress.
-//
-// Style calls the underlying Style.
-func (x *PostalAddressFormatter) Style() CNPostalAddressFormatterStyle {
-	return CNPostalAddressFormatterStyle(x.inner.Style())
+// Style the style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
+func (x *PostalAddressFormatter) Style() PostalAddressFormatterStyle {
+	_r := objc.Send[PostalAddressFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *PostalAddressFormatter) SetStyle(style CNPostalAddressFormatterStyle) {
-	x.inner.SetStyle(raw.CNPostalAddressFormatterStyle(style))
+// SetStyle wraps the corresponding Objective-C method.
+func (x *PostalAddressFormatter) SetStyle(style PostalAddressFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
 // PostalAddressFormatterable is the interface implemented by [PostalAddressFormatter], for mocking and DI.
 type PostalAddressFormatterable interface {
-	Unwrap() *raw.CNPostalAddressFormatter
-	WithStyle(style CNPostalAddressFormatterStyle) *PostalAddressFormatter
-	StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string
-	AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
-	Style() CNPostalAddressFormatterStyle
-	SetStyle(style CNPostalAddressFormatterStyle)
+	obj.Object
+	WithStyle(style PostalAddressFormatterStyle) *PostalAddressFormatter
+	StringFromPostalAddress(postalAddress *PostalAddress) string
+	AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object
+	Style() PostalAddressFormatterStyle
+	SetStyle(style PostalAddressFormatterStyle)
 }
 
 var _ PostalAddressFormatterable = (*PostalAddressFormatter)(nil)

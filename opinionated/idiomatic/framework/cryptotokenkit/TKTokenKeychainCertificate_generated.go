@@ -5,74 +5,80 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A token’s certificate as stored in the keychain.
+// TokenKeychainCertificate is an idiomatic wrapper over the Objective-C class TKTokenKeychainCertificate.
 //
-// TokenKeychainCertificate wraps [raw.TKTokenKeychainCertificate] with a fluent Go API.
+// It embeds [TokenKeychainItem], promoting that type's methods.
+//
+// A token’s certificate as stored in the keychain.
 type TokenKeychainCertificate struct {
-	inner *raw.TKTokenKeychainCertificate
+	TokenKeychainItem
 }
 
-// Unwrap returns the underlying [raw.TKTokenKeychainCertificate].
-func (x *TokenKeychainCertificate) Unwrap() *raw.TKTokenKeychainCertificate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenKeychainCertificate) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenKeychainCertificateFromID adopts an existing object pointer as a TokenKeychainCertificate (nil for 0).
+// TokenKeychainCertificateFromID adopts an existing Objective-C object as a TokenKeychainCertificate
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenKeychainCertificateFromID(id objc.ID) *TokenKeychainCertificate {
 	if id == 0 {
 		return nil
 	}
-	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(id)}
+	x := &TokenKeychainCertificate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
-//
-// NewTokenKeychainCertificateWithCertificateObjectID creates a new [TokenKeychainCertificate].
-func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TokenKeychainCertificate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainCertificate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), certificateRef, objectID)
-	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(_id)}
+// tokenKeychainCertificateAdopt wraps an Objective-C object that this code just created as a
+// TokenKeychainCertificate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenKeychainCertificateAdopt(id objc.ID) *TokenKeychainCertificate {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenKeychainCertificate{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The user-visible label for the keychain item.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewTokenKeychainCertificateWithCertificateObjectID initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
+func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef obj.Object, objectID obj.Object) *TokenKeychainCertificate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainCertificate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), objref.IDOf(certificateRef), objref.IDOf(objectID))
+	return tokenKeychainCertificateAdopt(_id)
+}
+
+// WithLabel the user-visible label for the keychain item.
 func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
-	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
-//
-// WithConstraints sets the constraints property and returns the receiver for chaining.
-func (x *TokenKeychainCertificate) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate {
-	x.inner.TKTokenKeychainItem.SetConstraints(constraints)
+// WithConstraints access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
+func (x *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *TokenKeychainCertificate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return x
 }
 
-// Data calls the underlying Data.
-func (x *TokenKeychainCertificate) Data() *foundation.NSData {
-	return x.inner.Data()
-}
-
-func (x *TokenKeychainCertificate) asTokenKeychainItem() *raw.TKTokenKeychainItem {
-	return &x.inner.TKTokenKeychainItem
+// Data wraps the corresponding Objective-C method.
+func (x *TokenKeychainCertificate) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // TokenKeychainCertificateable is the interface implemented by [TokenKeychainCertificate], for mocking and DI.
 type TokenKeychainCertificateable interface {
-	Unwrap() *raw.TKTokenKeychainCertificate
+	obj.Object
 	WithLabel(label string) *TokenKeychainCertificate
-	WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate
-	Data() *foundation.NSData
+	WithConstraints(constraints obj.Object) *TokenKeychainCertificate
+	Data() obj.Object
 }
 
 var _ TokenKeychainCertificateable = (*TokenKeychainCertificate)(nil)
+
+var _ TokenKeychainItemProvider = (*TokenKeychainCertificate)(nil)

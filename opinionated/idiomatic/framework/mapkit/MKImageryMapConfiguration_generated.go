@@ -5,63 +5,72 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The class that represents an imagery-based map presentation, such as one using satellite imagery.
+// ImageryMapConfiguration is an idiomatic wrapper over the Objective-C class MKImageryMapConfiguration.
 //
-// ImageryMapConfiguration wraps [raw.MKImageryMapConfiguration] with a fluent Go API.
+// It embeds [MapConfiguration], promoting that type's methods.
+//
+// The class that represents an imagery-based map presentation, such as one using satellite imagery.
 type ImageryMapConfiguration struct {
-	inner *raw.MKImageryMapConfiguration
+	MapConfiguration
 }
 
-// Unwrap returns the underlying [raw.MKImageryMapConfiguration].
-func (x *ImageryMapConfiguration) Unwrap() *raw.MKImageryMapConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageryMapConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageryMapConfigurationFromID adopts an existing object pointer as a ImageryMapConfiguration (nil for 0).
+// ImageryMapConfigurationFromID adopts an existing Objective-C object as a ImageryMapConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageryMapConfigurationFromID(id objc.ID) *ImageryMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(id)}
-}
-
-// NewImageryMapConfiguration creates a new [ImageryMapConfiguration].
-func NewImageryMapConfiguration() *ImageryMapConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKImageryMapConfiguration")), objc.RegisterName("new"))
-	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
-}
-
-// Creates a new imagery based map configuration with the specified elevation style.
-//
-// NewImageryMapConfigurationWithElevationStyle creates a new [ImageryMapConfiguration].
-func NewImageryMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKImageryMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
-	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
-}
-
-// The value that indicates the map’s elevation style.
-//
-// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
+	x := &ImageryMapConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *ImageryMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
-	return &x.inner.MKMapConfiguration
+// imageryMapConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ImageryMapConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageryMapConfigurationAdopt(id objc.ID) *ImageryMapConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageryMapConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageryMapConfiguration creates a new ImageryMapConfiguration.
+func NewImageryMapConfiguration() *ImageryMapConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKImageryMapConfiguration")), objc.RegisterName("new"))
+	return imageryMapConfigurationAdopt(_id)
+}
+
+// NewImageryMapConfigurationWithElevationStyle creates a new imagery based map configuration with the specified elevation style.
+func NewImageryMapConfigurationWithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKImageryMapConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	return imageryMapConfigurationAdopt(_id)
+}
+
+// WithElevationStyle the value that indicates the map’s elevation style.
+func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
+	return x
 }
 
 // ImageryMapConfigurationable is the interface implemented by [ImageryMapConfiguration], for mocking and DI.
 type ImageryMapConfigurationable interface {
-	Unwrap() *raw.MKImageryMapConfiguration
-	WithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration
+	obj.Object
+	WithElevationStyle(elevationStyle MapElevationStyle) *ImageryMapConfiguration
 }
 
 var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)
+
+var _ MapConfigurationProvider = (*ImageryMapConfiguration)(nil)

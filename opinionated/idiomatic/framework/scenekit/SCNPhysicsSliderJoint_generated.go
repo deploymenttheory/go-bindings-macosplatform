@@ -5,283 +5,204 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A physics behavior that connects two bodies and allows them to slide against each other and rotate around their connecting points.
+// PhysicsSliderJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsSliderJoint.
 //
-// PhysicsSliderJoint wraps [raw.SCNPhysicsSliderJoint] with a fluent Go API.
+// It embeds [PhysicsBehavior], promoting that type's methods.
+//
+// A physics behavior that connects two bodies and allows them to slide against each other and rotate around their connecting points.
 type PhysicsSliderJoint struct {
-	inner *raw.SCNPhysicsSliderJoint
+	PhysicsBehavior
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsSliderJoint].
-func (x *PhysicsSliderJoint) Unwrap() *raw.SCNPhysicsSliderJoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsSliderJoint) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsSliderJointFromID adopts an existing object pointer as a PhysicsSliderJoint (nil for 0).
+// PhysicsSliderJointFromID adopts an existing Objective-C object as a PhysicsSliderJoint
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsSliderJointFromID(id objc.ID) *PhysicsSliderJoint {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsSliderJoint{inner: raw.SCNPhysicsSliderJointFromID(id)}
+	x := &PhysicsSliderJoint{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsSliderJoint creates a new [PhysicsSliderJoint].
+// physicsSliderJointAdopt wraps an Objective-C object that this code just created as a
+// PhysicsSliderJoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsSliderJointAdopt(id objc.ID) *PhysicsSliderJoint {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsSliderJoint{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPhysicsSliderJoint creates a new PhysicsSliderJoint.
 func NewPhysicsSliderJoint() *PhysicsSliderJoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsSliderJoint")), objc.RegisterName("new"))
-	return &PhysicsSliderJoint{inner: raw.SCNPhysicsSliderJointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsSliderJoint")), objc.RegisterName("new"))
+	return physicsSliderJointAdopt(_id)
 }
 
-// The axis along which the first body can slide, relative to the node containing it.
-//
-// WithAxisA sets the axisA property and returns the receiver for chaining.
-func (x *PhysicsSliderJoint) WithAxisA(axisA raw.SCNVector3) *PhysicsSliderJoint {
-	x.inner.SetAxisA(axisA)
-	return x
-}
-
-// The point at which the joint connects, relative to the node containing the first body.
-//
-// WithAnchorA sets the anchorA property and returns the receiver for chaining.
-func (x *PhysicsSliderJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsSliderJoint {
-	x.inner.SetAnchorA(anchorA)
-	return x
-}
-
-// The axis along which the second body can slide, relative to the node containing it.
-//
-// WithAxisB sets the axisB property and returns the receiver for chaining.
-func (x *PhysicsSliderJoint) WithAxisB(axisB raw.SCNVector3) *PhysicsSliderJoint {
-	x.inner.SetAxisB(axisB)
-	return x
-}
-
-// The point at which the joint connects, relative to the node containing the second body.
-//
-// WithAnchorB sets the anchorB property and returns the receiver for chaining.
-func (x *PhysicsSliderJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsSliderJoint {
-	x.inner.SetAnchorB(anchorB)
-	return x
-}
-
-// The minimum distance between the anchor points of the two bodies, relative to their initial positions.
-//
-// WithMinimumLinearLimit sets the minimumLinearLimit property and returns the receiver for chaining.
+// WithMinimumLinearLimit the minimum distance between the anchor points of the two bodies, relative to their initial positions.
 func (x *PhysicsSliderJoint) WithMinimumLinearLimit(minimumLinearLimit float64) *PhysicsSliderJoint {
-	x.inner.SetMinimumLinearLimit(minimumLinearLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLinearLimit:"), minimumLinearLimit)
 	return x
 }
 
-// The maximum distance between the anchor points of the two bodies, relative to their initial positions.
-//
-// WithMaximumLinearLimit sets the maximumLinearLimit property and returns the receiver for chaining.
+// WithMaximumLinearLimit the maximum distance between the anchor points of the two bodies, relative to their initial positions.
 func (x *PhysicsSliderJoint) WithMaximumLinearLimit(maximumLinearLimit float64) *PhysicsSliderJoint {
-	x.inner.SetMaximumLinearLimit(maximumLinearLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearLimit:"), maximumLinearLimit)
 	return x
 }
 
-// The minimum rotation angle between the two bodies, measured in radians relative to their initial orientations.
-//
-// WithMinimumAngularLimit sets the minimumAngularLimit property and returns the receiver for chaining.
+// WithMinimumAngularLimit the minimum rotation angle between the two bodies, measured in radians relative to their initial orientations.
 func (x *PhysicsSliderJoint) WithMinimumAngularLimit(minimumAngularLimit float64) *PhysicsSliderJoint {
-	x.inner.SetMinimumAngularLimit(minimumAngularLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumAngularLimit:"), minimumAngularLimit)
 	return x
 }
 
-// The maximum rotation angle between the two bodies, measured in radians relative to their initial orientations.
-//
-// WithMaximumAngularLimit sets the maximumAngularLimit property and returns the receiver for chaining.
+// WithMaximumAngularLimit the maximum rotation angle between the two bodies, measured in radians relative to their initial orientations.
 func (x *PhysicsSliderJoint) WithMaximumAngularLimit(maximumAngularLimit float64) *PhysicsSliderJoint {
-	x.inner.SetMaximumAngularLimit(maximumAngularLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit:"), maximumAngularLimit)
 	return x
 }
 
-// The velocity at which the joint’s connected bodies should slide.
-//
-// WithMotorTargetLinearVelocity sets the motorTargetLinearVelocity property and returns the receiver for chaining.
+// WithMotorTargetLinearVelocity the velocity at which the joint’s connected bodies should slide.
 func (x *PhysicsSliderJoint) WithMotorTargetLinearVelocity(motorTargetLinearVelocity float64) *PhysicsSliderJoint {
-	x.inner.SetMotorTargetLinearVelocity(motorTargetLinearVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorTargetLinearVelocity:"), motorTargetLinearVelocity)
 	return x
 }
 
-// The maximum linear force that the joint can apply to its connected bodies, in newtons.
-//
-// WithMotorMaximumForce sets the motorMaximumForce property and returns the receiver for chaining.
+// WithMotorMaximumForce the maximum linear force that the joint can apply to its connected bodies, in newtons.
 func (x *PhysicsSliderJoint) WithMotorMaximumForce(motorMaximumForce float64) *PhysicsSliderJoint {
-	x.inner.SetMotorMaximumForce(motorMaximumForce)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorMaximumForce:"), motorMaximumForce)
 	return x
 }
 
-// The angular velocity at which the joint’s connected bodies should rotate around it.
-//
-// WithMotorTargetAngularVelocity sets the motorTargetAngularVelocity property and returns the receiver for chaining.
+// WithMotorTargetAngularVelocity the angular velocity at which the joint’s connected bodies should rotate around it.
 func (x *PhysicsSliderJoint) WithMotorTargetAngularVelocity(motorTargetAngularVelocity float64) *PhysicsSliderJoint {
-	x.inner.SetMotorTargetAngularVelocity(motorTargetAngularVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorTargetAngularVelocity:"), motorTargetAngularVelocity)
 	return x
 }
 
-// The maximum torque that the joint can apply to its connected bodies, in newton-meters.
-//
-// WithMotorMaximumTorque sets the motorMaximumTorque property and returns the receiver for chaining.
+// WithMotorMaximumTorque the maximum torque that the joint can apply to its connected bodies, in newton-meters.
 func (x *PhysicsSliderJoint) WithMotorMaximumTorque(motorMaximumTorque float64) *PhysicsSliderJoint {
-	x.inner.SetMotorMaximumTorque(motorMaximumTorque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorMaximumTorque:"), motorMaximumTorque)
 	return x
 }
 
-// BodyA calls the underlying BodyA.
+// BodyA wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) BodyA() *PhysicsBody {
-	_r := x.inner.BodyA()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+	return PhysicsBodyFromID(_r)
 }
 
-// AxisA calls the underlying AxisA.
-func (x *PhysicsSliderJoint) AxisA() raw.SCNVector3 {
-	return x.inner.AxisA()
-}
-
-// SetAxisA calls the underlying SetAxisA.
-func (x *PhysicsSliderJoint) SetAxisA(axisA raw.SCNVector3) {
-	x.inner.SetAxisA(axisA)
-}
-
-// AnchorA calls the underlying AnchorA.
-func (x *PhysicsSliderJoint) AnchorA() raw.SCNVector3 {
-	return x.inner.AnchorA()
-}
-
-// SetAnchorA calls the underlying SetAnchorA.
-func (x *PhysicsSliderJoint) SetAnchorA(anchorA raw.SCNVector3) {
-	x.inner.SetAnchorA(anchorA)
-}
-
-// BodyB calls the underlying BodyB.
+// BodyB wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) BodyB() *PhysicsBody {
-	_r := x.inner.BodyB()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+	return PhysicsBodyFromID(_r)
 }
 
-// AxisB calls the underlying AxisB.
-func (x *PhysicsSliderJoint) AxisB() raw.SCNVector3 {
-	return x.inner.AxisB()
-}
-
-// SetAxisB calls the underlying SetAxisB.
-func (x *PhysicsSliderJoint) SetAxisB(axisB raw.SCNVector3) {
-	x.inner.SetAxisB(axisB)
-}
-
-// AnchorB calls the underlying AnchorB.
-func (x *PhysicsSliderJoint) AnchorB() raw.SCNVector3 {
-	return x.inner.AnchorB()
-}
-
-// SetAnchorB calls the underlying SetAnchorB.
-func (x *PhysicsSliderJoint) SetAnchorB(anchorB raw.SCNVector3) {
-	x.inner.SetAnchorB(anchorB)
-}
-
-// MinimumLinearLimit calls the underlying MinimumLinearLimit.
+// MinimumLinearLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MinimumLinearLimit() float64 {
-	return x.inner.MinimumLinearLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLinearLimit"))
+	return _r
 }
 
-// SetMinimumLinearLimit calls the underlying SetMinimumLinearLimit.
+// SetMinimumLinearLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMinimumLinearLimit(minimumLinearLimit float64) {
-	x.inner.SetMinimumLinearLimit(minimumLinearLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLinearLimit:"), minimumLinearLimit)
 }
 
-// MaximumLinearLimit calls the underlying MaximumLinearLimit.
+// MaximumLinearLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MaximumLinearLimit() float64 {
-	return x.inner.MaximumLinearLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearLimit"))
+	return _r
 }
 
-// SetMaximumLinearLimit calls the underlying SetMaximumLinearLimit.
+// SetMaximumLinearLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMaximumLinearLimit(maximumLinearLimit float64) {
-	x.inner.SetMaximumLinearLimit(maximumLinearLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearLimit:"), maximumLinearLimit)
 }
 
-// MinimumAngularLimit calls the underlying MinimumAngularLimit.
+// MinimumAngularLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MinimumAngularLimit() float64 {
-	return x.inner.MinimumAngularLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumAngularLimit"))
+	return _r
 }
 
-// SetMinimumAngularLimit calls the underlying SetMinimumAngularLimit.
+// SetMinimumAngularLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMinimumAngularLimit(minimumAngularLimit float64) {
-	x.inner.SetMinimumAngularLimit(minimumAngularLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumAngularLimit:"), minimumAngularLimit)
 }
 
-// MaximumAngularLimit calls the underlying MaximumAngularLimit.
+// MaximumAngularLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MaximumAngularLimit() float64 {
-	return x.inner.MaximumAngularLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumAngularLimit"))
+	return _r
 }
 
-// SetMaximumAngularLimit calls the underlying SetMaximumAngularLimit.
+// SetMaximumAngularLimit wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMaximumAngularLimit(maximumAngularLimit float64) {
-	x.inner.SetMaximumAngularLimit(maximumAngularLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAngularLimit:"), maximumAngularLimit)
 }
 
-// MotorTargetLinearVelocity calls the underlying MotorTargetLinearVelocity.
+// MotorTargetLinearVelocity wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MotorTargetLinearVelocity() float64 {
-	return x.inner.MotorTargetLinearVelocity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("motorTargetLinearVelocity"))
+	return _r
 }
 
-// SetMotorTargetLinearVelocity calls the underlying SetMotorTargetLinearVelocity.
+// SetMotorTargetLinearVelocity wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMotorTargetLinearVelocity(motorTargetLinearVelocity float64) {
-	x.inner.SetMotorTargetLinearVelocity(motorTargetLinearVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorTargetLinearVelocity:"), motorTargetLinearVelocity)
 }
 
-// MotorMaximumForce calls the underlying MotorMaximumForce.
+// MotorMaximumForce wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MotorMaximumForce() float64 {
-	return x.inner.MotorMaximumForce()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("motorMaximumForce"))
+	return _r
 }
 
-// SetMotorMaximumForce calls the underlying SetMotorMaximumForce.
+// SetMotorMaximumForce wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMotorMaximumForce(motorMaximumForce float64) {
-	x.inner.SetMotorMaximumForce(motorMaximumForce)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorMaximumForce:"), motorMaximumForce)
 }
 
-// MotorTargetAngularVelocity calls the underlying MotorTargetAngularVelocity.
+// MotorTargetAngularVelocity wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MotorTargetAngularVelocity() float64 {
-	return x.inner.MotorTargetAngularVelocity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("motorTargetAngularVelocity"))
+	return _r
 }
 
-// SetMotorTargetAngularVelocity calls the underlying SetMotorTargetAngularVelocity.
+// SetMotorTargetAngularVelocity wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMotorTargetAngularVelocity(motorTargetAngularVelocity float64) {
-	x.inner.SetMotorTargetAngularVelocity(motorTargetAngularVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorTargetAngularVelocity:"), motorTargetAngularVelocity)
 }
 
-// MotorMaximumTorque calls the underlying MotorMaximumTorque.
+// MotorMaximumTorque wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) MotorMaximumTorque() float64 {
-	return x.inner.MotorMaximumTorque()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("motorMaximumTorque"))
+	return _r
 }
 
-// SetMotorMaximumTorque calls the underlying SetMotorMaximumTorque.
+// SetMotorMaximumTorque wraps the corresponding Objective-C method.
 func (x *PhysicsSliderJoint) SetMotorMaximumTorque(motorMaximumTorque float64) {
-	x.inner.SetMotorMaximumTorque(motorMaximumTorque)
-}
-
-func (x *PhysicsSliderJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
-	return &x.inner.SCNPhysicsBehavior
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotorMaximumTorque:"), motorMaximumTorque)
 }
 
 // PhysicsSliderJointable is the interface implemented by [PhysicsSliderJoint], for mocking and DI.
 type PhysicsSliderJointable interface {
-	Unwrap() *raw.SCNPhysicsSliderJoint
-	WithAxisA(axisA raw.SCNVector3) *PhysicsSliderJoint
-	WithAnchorA(anchorA raw.SCNVector3) *PhysicsSliderJoint
-	WithAxisB(axisB raw.SCNVector3) *PhysicsSliderJoint
-	WithAnchorB(anchorB raw.SCNVector3) *PhysicsSliderJoint
+	obj.Object
 	WithMinimumLinearLimit(minimumLinearLimit float64) *PhysicsSliderJoint
 	WithMaximumLinearLimit(maximumLinearLimit float64) *PhysicsSliderJoint
 	WithMinimumAngularLimit(minimumAngularLimit float64) *PhysicsSliderJoint
@@ -291,15 +212,7 @@ type PhysicsSliderJointable interface {
 	WithMotorTargetAngularVelocity(motorTargetAngularVelocity float64) *PhysicsSliderJoint
 	WithMotorMaximumTorque(motorMaximumTorque float64) *PhysicsSliderJoint
 	BodyA() *PhysicsBody
-	AxisA() raw.SCNVector3
-	SetAxisA(axisA raw.SCNVector3)
-	AnchorA() raw.SCNVector3
-	SetAnchorA(anchorA raw.SCNVector3)
 	BodyB() *PhysicsBody
-	AxisB() raw.SCNVector3
-	SetAxisB(axisB raw.SCNVector3)
-	AnchorB() raw.SCNVector3
-	SetAnchorB(anchorB raw.SCNVector3)
 	MinimumLinearLimit() float64
 	SetMinimumLinearLimit(minimumLinearLimit float64)
 	MaximumLinearLimit() float64
@@ -319,3 +232,5 @@ type PhysicsSliderJointable interface {
 }
 
 var _ PhysicsSliderJointable = (*PhysicsSliderJoint)(nil)
+
+var _ PhysicsBehaviorProvider = (*PhysicsSliderJoint)(nil)

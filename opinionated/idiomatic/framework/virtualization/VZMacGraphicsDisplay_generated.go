@@ -5,51 +5,65 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the graphics display on a Mac.
+// MacGraphicsDisplay is an idiomatic wrapper over the Objective-C class VZMacGraphicsDisplay.
 //
-// MacGraphicsDisplay wraps [raw.VZMacGraphicsDisplay] with a fluent Go API.
+// It embeds [GraphicsDisplay], promoting that type's methods.
+//
+// An object that represents the graphics display on a Mac.
 type MacGraphicsDisplay struct {
-	inner *raw.VZMacGraphicsDisplay
+	GraphicsDisplay
 }
 
-// Unwrap returns the underlying [raw.VZMacGraphicsDisplay].
-func (x *MacGraphicsDisplay) Unwrap() *raw.VZMacGraphicsDisplay { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacGraphicsDisplay) ID() objc.ID { return x.inner.Ptr() }
-
-// MacGraphicsDisplayFromID adopts an existing object pointer as a MacGraphicsDisplay (nil for 0).
+// MacGraphicsDisplayFromID adopts an existing Objective-C object as a MacGraphicsDisplay
+// (nil for 0), retaining it and registering a release finalizer.
 func MacGraphicsDisplayFromID(id objc.ID) *MacGraphicsDisplay {
 	if id == 0 {
 		return nil
 	}
-	return &MacGraphicsDisplay{inner: raw.VZMacGraphicsDisplayFromID(id)}
+	x := &MacGraphicsDisplay{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMacGraphicsDisplay creates a new [MacGraphicsDisplay].
+// macGraphicsDisplayAdopt wraps an Objective-C object that this code just created as a
+// MacGraphicsDisplay (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macGraphicsDisplayAdopt(id objc.ID) *MacGraphicsDisplay {
+	if id == 0 {
+		return nil
+	}
+	x := &MacGraphicsDisplay{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMacGraphicsDisplay creates a new MacGraphicsDisplay.
 func NewMacGraphicsDisplay() *MacGraphicsDisplay {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacGraphicsDisplay")), objc.RegisterName("new"))
-	return &MacGraphicsDisplay{inner: raw.VZMacGraphicsDisplayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplay")), objc.RegisterName("new"))
+	return macGraphicsDisplayAdopt(_id)
 }
 
-// PixelsPerInch calls the underlying PixelsPerInch.
+// PixelsPerInch wraps the corresponding Objective-C method.
 func (x *MacGraphicsDisplay) PixelsPerInch() int {
-	return x.inner.PixelsPerInch()
-}
-
-func (x *MacGraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay {
-	return &x.inner.VZGraphicsDisplay
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsPerInch"))
+	return _r
 }
 
 // MacGraphicsDisplayable is the interface implemented by [MacGraphicsDisplay], for mocking and DI.
 type MacGraphicsDisplayable interface {
-	Unwrap() *raw.VZMacGraphicsDisplay
+	obj.Object
 	PixelsPerInch() int
 }
 
 var _ MacGraphicsDisplayable = (*MacGraphicsDisplay)(nil)
+
+var _ GraphicsDisplayProvider = (*MacGraphicsDisplay)(nil)

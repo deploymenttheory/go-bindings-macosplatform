@@ -5,138 +5,126 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for animations in Core Animation.
+// Animation is an idiomatic wrapper over the Objective-C class CAAnimation.
 //
-// Animation wraps [raw.CAAnimation] with a fluent Go API.
+// Animation is an abstract base — you do not construct it directly. Construct one of [AnimationGroup], [PropertyAnimation], [Transition] and pass it where a Animation is accepted.
+//
+// The abstract superclass for animations in Core Animation.
 type Animation struct {
-	inner *raw.CAAnimation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAAnimation].
-func (x *Animation) Unwrap() *raw.CAAnimation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Animation) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationFromID adopts an existing object pointer as a Animation (nil for 0).
+// AnimationFromID adopts an existing Objective-C object as a Animation
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationFromID(id objc.ID) *Animation {
 	if id == 0 {
 		return nil
 	}
-	return &Animation{inner: raw.CAAnimationFromID(id)}
-}
-
-// NewAnimation creates a new [Animation].
-func NewAnimation() *Animation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAAnimation")), objc.RegisterName("new"))
-	return &Animation{inner: raw.CAAnimationFromID(_id)}
-}
-
-// An optional timing function defining the pacing of the animation.
-//
-// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
-func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
-	x.inner.SetTimingFunction(timingFunction.Unwrap())
+	x := &Animation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Specifies the receiver’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Animation) WithDelegate(delegate raw.CAAnimationDelegate) *Animation {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Determines if the animation is removed from the target layer’s animations upon completion.
-//
-// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
-func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
-	x.inner.SetRemovedOnCompletion(removedOnCompletion)
-	return x
-}
-
-// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
-func (x *Animation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Animation {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
-	return x
-}
-
-// Specifies whether the value of the property for a given key is archived.
-//
-// ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
-func (x *Animation) ShouldArchiveValueForKey(key string) bool {
-	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))
-}
-
-// TimingFunction calls the underlying TimingFunction.
-func (x *Animation) TimingFunction() *MediaTimingFunction {
-	_r := x.inner.TimingFunction()
-	if _r == nil {
+// animationAdopt wraps an Objective-C object that this code just created as a
+// Animation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationAdopt(id objc.ID) *Animation {
+	if id == 0 {
 		return nil
 	}
-	return &MediaTimingFunction{inner: _r}
+	x := &Animation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetTimingFunction calls the underlying SetTimingFunction.
-func (x *Animation) SetTimingFunction(timingFunction *raw.CAMediaTimingFunction) {
-	x.inner.SetTimingFunction(timingFunction)
+// Description returns the object's -description text.
+func (x *Animation) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Animation) Delegate() raw.CAAnimationDelegate {
-	return x.inner.Delegate()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Animation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Animation) SetDelegate(delegate raw.CAAnimationDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Animation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// IsRemovedOnCompletion calls the underlying IsRemovedOnCompletion.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Animation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithTimingFunction an optional timing function defining the pacing of the animation.
+func (x *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return x
+}
+
+// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
+func (x *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return x
+}
+
+// ShouldArchiveValueForKey specifies whether the value of the property for a given key is archived.
+func (x *Animation) ShouldArchiveValueForKey(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
+	return _r
+}
+
+// TimingFunction wraps the corresponding Objective-C method.
+func (x *Animation) TimingFunction() *MediaTimingFunction {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunction"))
+	return MediaTimingFunctionFromID(_r)
+}
+
+// SetTimingFunction wraps the corresponding Objective-C method.
+func (x *Animation) SetTimingFunction(timingFunction *MediaTimingFunction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+}
+
+// IsRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) IsRemovedOnCompletion() bool {
-	return x.inner.IsRemovedOnCompletion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemovedOnCompletion"))
+	return _r
 }
 
-// SetRemovedOnCompletion calls the underlying SetRemovedOnCompletion.
+// SetRemovedOnCompletion wraps the corresponding Objective-C method.
 func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
-	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 }
-
-// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
-func (x *Animation) PreferredFrameRateRange() raw.CAFrameRateRange {
-	return x.inner.PreferredFrameRateRange()
-}
-
-// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
-func (x *Animation) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
-}
-
-func (x *Animation) asAnimation() *raw.CAAnimation { return x.inner }
 
 // Animationable is the interface implemented by [Animation], for mocking and DI.
 type Animationable interface {
-	Unwrap() *raw.CAAnimation
+	obj.Object
 	WithTimingFunction(timingFunction *MediaTimingFunction) *Animation
-	WithDelegate(delegate raw.CAAnimationDelegate) *Animation
 	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
-	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *Animation
 	ShouldArchiveValueForKey(key string) bool
 	TimingFunction() *MediaTimingFunction
-	SetTimingFunction(timingFunction *raw.CAMediaTimingFunction)
-	Delegate() raw.CAAnimationDelegate
-	SetDelegate(delegate raw.CAAnimationDelegate)
+	SetTimingFunction(timingFunction *MediaTimingFunction)
 	IsRemovedOnCompletion() bool
 	SetRemovedOnCompletion(removedOnCompletion bool)
-	PreferredFrameRateRange() raw.CAFrameRateRange
-	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
 }
 
 var _ Animationable = (*Animation)(nil)
+
+// isAnimation marks Animation — and, by embedding promotion, its
+// subclasses — as a member of the Animation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Animation) isAnimation() {}
+
+var _ AnimationProvider = (*Animation)(nil)

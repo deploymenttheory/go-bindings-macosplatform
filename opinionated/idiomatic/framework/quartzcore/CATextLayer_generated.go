@@ -5,682 +5,571 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A layer that provides simple text layout and rendering of plain or attributed strings.
+// TextLayer is an idiomatic wrapper over the Objective-C class CATextLayer.
 //
-// TextLayer wraps [raw.CATextLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that provides simple text layout and rendering of plain or attributed strings.
 type TextLayer struct {
-	inner *raw.CATextLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.CATextLayer].
-func (x *TextLayer) Unwrap() *raw.CATextLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// TextLayerFromID adopts an existing object pointer as a TextLayer (nil for 0).
+// TextLayerFromID adopts an existing Objective-C object as a TextLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func TextLayerFromID(id objc.ID) *TextLayer {
 	if id == 0 {
 		return nil
 	}
-	return &TextLayer{inner: raw.CATextLayerFromID(id)}
+	x := &TextLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextLayer creates a new [TextLayer].
+// textLayerAdopt wraps an Objective-C object that this code just created as a
+// TextLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textLayerAdopt(id objc.ID) *TextLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &TextLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTextLayer creates a new TextLayer.
 func NewTextLayer() *TextLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CATextLayer")), objc.RegisterName("new"))
-	return &TextLayer{inner: raw.CATextLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CATextLayer")), objc.RegisterName("new"))
+	return textLayerAdopt(_id)
 }
 
-// The text to be rendered by the receiver.
-//
-// WithString sets the string_ property and returns the receiver for chaining.
-func (x *TextLayer) WithString(string_ objc.ID) *TextLayer {
-	x.inner.SetString(string_)
+// WithString the text to be rendered by the receiver.
+func (x *TextLayer) WithString(string_ obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
 	return x
 }
 
-// The font size used to render the receiver’s text. Animatable.
-//
-// WithFontSize sets the fontSize property and returns the receiver for chaining.
+// WithFont the font used to render the receiver’s text.
+func (x *TextLayer) WithFont(font obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return x
+}
+
+// WithFontSize the font size used to render the receiver’s text. Animatable.
 func (x *TextLayer) WithFontSize(fontSize float64) *TextLayer {
-	x.inner.SetFontSize(fontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
 	return x
 }
 
-// Determines whether the text is wrapped to fit within the receiver’s bounds.
-//
-// WithWrapped sets the wrapped property and returns the receiver for chaining.
+// WithForegroundColor the color used to render the receiver’s text. Animatable.
+func (x *TextLayer) WithForegroundColor(foregroundColor obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
+	return x
+}
+
+// WithWrapped determines whether the text is wrapped to fit within the receiver’s bounds.
 func (x *TextLayer) WithWrapped(wrapped bool) *TextLayer {
-	x.inner.SetWrapped(wrapped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapped:"), wrapped)
 	return x
 }
 
-// Determines how the text is truncated to fit within the receiver’s bounds.
-//
-// WithTruncationMode sets the truncationMode property and returns the receiver for chaining.
-func (x *TextLayer) WithTruncationMode(truncationMode *foundation.NSString) *TextLayer {
-	x.inner.SetTruncationMode(truncationMode)
+// WithTruncationMode determines how the text is truncated to fit within the receiver’s bounds.
+func (x *TextLayer) WithTruncationMode(truncationMode obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncationMode:"), objref.IDOf(truncationMode))
 	return x
 }
 
-// Determines how individual lines of text are horizontally aligned within the receiver’s bounds.
-//
-// WithAlignmentMode sets the alignmentMode property and returns the receiver for chaining.
-func (x *TextLayer) WithAlignmentMode(alignmentMode *foundation.NSString) *TextLayer {
-	x.inner.SetAlignmentMode(alignmentMode)
+// WithAlignmentMode determines how individual lines of text are horizontally aligned within the receiver’s bounds.
+func (x *TextLayer) WithAlignmentMode(alignmentMode obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentMode:"), objref.IDOf(alignmentMode))
 	return x
 }
 
-// Determines whether to allow subpixel quantization for the graphics context used for text rendering.
-//
-// WithAllowsFontSubpixelQuantization sets the allowsFontSubpixelQuantization property and returns the receiver for chaining.
+// WithAllowsFontSubpixelQuantization determines whether to allow subpixel quantization for the graphics context used for text rendering.
 func (x *TextLayer) WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer {
-	x.inner.SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFontSubpixelQuantization:"), allowsFontSubpixelQuantization)
 	return x
 }
 
-// The layer’s bounds rectangle. Animatable.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the layer’s bounds rectangle. Animatable.
 func (x *TextLayer) WithBounds(bounds corefoundation.CGRect) *TextLayer {
-	x.inner.CALayer.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// The layer’s position in its superlayer’s coordinate space. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
 func (x *TextLayer) WithPosition(position corefoundation.CGPoint) *TextLayer {
-	x.inner.CALayer.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The layer’s position on the z axis. Animatable.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the layer’s position on the z axis. Animatable.
 func (x *TextLayer) WithZPosition(zPosition float64) *TextLayer {
-	x.inner.CALayer.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// Defines the anchor point of the layer’s bounds rectangle. Animatable.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
 func (x *TextLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TextLayer {
-	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
 	return x
 }
 
-// The anchor point for the layer’s position along the z axis. Animatable.
-//
-// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
 func (x *TextLayer) WithAnchorPointZ(anchorPointZ float64) *TextLayer {
-	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
 	return x
 }
 
-// The transform applied to the layer’s contents. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *TextLayer) WithTransform(transform raw.CATransform3D) *TextLayer {
-	x.inner.CALayer.SetTransform(transform)
-	return x
-}
-
-// The layer’s frame rectangle.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the layer’s frame rectangle.
 func (x *TextLayer) WithFrame(frame corefoundation.CGRect) *TextLayer {
-	x.inner.CALayer.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// A Boolean indicating whether the layer is displayed. Animatable.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
 func (x *TextLayer) WithHidden(hidden bool) *TextLayer {
-	x.inner.CALayer.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-//
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
 func (x *TextLayer) WithDoubleSided(doubleSided bool) *TextLayer {
-	x.inner.CALayer.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 	return x
 }
 
-// A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-//
-// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
 func (x *TextLayer) WithGeometryFlipped(geometryFlipped bool) *TextLayer {
-	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
 	return x
 }
 
-// An array containing the layer’s sublayers.
-//
-// WithSublayers sets the collection, converting the Go slice to an NSArray.
+// WithSublayers an array containing the layer’s sublayers.
 func (x *TextLayer) WithSublayers(items ...LayerProvider) *TextLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asLayer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CALayer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetSublayers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
 	return x
 }
 
-// Specifies the transform to apply to sublayers when rendering. Animatable.
-//
-// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
-func (x *TextLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *TextLayer {
-	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
-	return x
-}
-
-// An optional layer whose alpha channel is used to mask the layer’s content.
-//
-// WithMask sets the mask property and returns the receiver for chaining.
+// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
 func (x *TextLayer) WithMask(mask LayerProvider) *TextLayer {
-	x.inner.CALayer.SetMask(mask.asLayer())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return x
 }
 
-// A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-//
-// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
 func (x *TextLayer) WithMasksToBounds(masksToBounds bool) *TextLayer {
-	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
 	return x
 }
 
-// An object that provides the contents of the layer. Animatable.
-//
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *TextLayer) WithContents(contents objc.ID) *TextLayer {
-	x.inner.CALayer.SetContents(contents)
+// WithContents an object that provides the contents of the layer. Animatable.
+func (x *TextLayer) WithContents(contents obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-//
-// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
 func (x *TextLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TextLayer {
-	x.inner.CALayer.SetContentsRect(contentsRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
 	return x
 }
 
-// A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-//
-// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
-func (x *TextLayer) WithContentsGravity(contentsGravity *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetContentsGravity(contentsGravity)
+// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (x *TextLayer) WithContentsGravity(contentsGravity obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return x
 }
 
-// The scale factor applied to the layer.
-//
-// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+// WithContentsScale the scale factor applied to the layer.
 func (x *TextLayer) WithContentsScale(contentsScale float64) *TextLayer {
-	x.inner.CALayer.SetContentsScale(contentsScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 	return x
 }
 
-// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-//
-// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
 func (x *TextLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TextLayer {
-	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
 	return x
 }
 
-// A hint for the desired storage format of the layer contents.
-//
-// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
-func (x *TextLayer) WithContentsFormat(contentsFormat *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetContentsFormat(contentsFormat)
+// WithContentsFormat a hint for the desired storage format of the layer contents.
+func (x *TextLayer) WithContentsFormat(contentsFormat obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return x
 }
 
-// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
 func (x *TextLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TextLayer {
-	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return x
 }
 
-// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
-func (x *TextLayer) WithToneMapMode(toneMapMode *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetToneMapMode(toneMapMode)
+// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+func (x *TextLayer) WithToneMapMode(toneMapMode obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return x
 }
 
-// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
-func (x *TextLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+func (x *TextLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return x
 }
 
-// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
 func (x *TextLayer) WithContentsHeadroom(contentsHeadroom float64) *TextLayer {
-	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return x
 }
 
-// The filter used when reducing the size of the content.
-//
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *TextLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+// WithMinificationFilter the filter used when reducing the size of the content.
+func (x *TextLayer) WithMinificationFilter(minificationFilter obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return x
 }
 
-// The filter used when increasing the size of the content.
-//
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *TextLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+// WithMagnificationFilter the filter used when increasing the size of the content.
+func (x *TextLayer) WithMagnificationFilter(magnificationFilter obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return x
 }
 
-// The bias factor used by the minification filter to determine the levels of detail.
-//
-// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
 func (x *TextLayer) WithMinificationFilterBias(minificationFilterBias float32) *TextLayer {
-	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 	return x
 }
 
-// A Boolean value indicating whether the layer contains completely opaque content.
-//
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
 func (x *TextLayer) WithOpaque(opaque bool) *TextLayer {
-	x.inner.CALayer.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
-// A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-//
-// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
 func (x *TextLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer {
-	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
 	return x
 }
 
-// A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-//
-// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
 func (x *TextLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer {
-	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
 	return x
 }
 
-// A bitmask defining how the edges of the receiver are rasterized.
-//
-// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TextLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
+// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
+func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
 	return x
 }
 
-// A Boolean indicating whether the layer is allowed to perform edge antialiasing.
-//
-// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
 func (x *TextLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer {
-	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
 	return x
 }
 
-// The radius to use when drawing rounded corners for the layer’s background. Animatable.
-//
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithBackgroundColor the background color of the receiver. Animatable.
+func (x *TextLayer) WithBackgroundColor(backgroundColor obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return x
+}
+
+// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
 func (x *TextLayer) WithCornerRadius(cornerRadius float64) *TextLayer {
-	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *TextLayer) WithMaskedCorners(maskedCorners CACornerMask) *TextLayer {
-	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
+// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+func (x *TextLayer) WithMaskedCorners(maskedCorners CornerMask) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return x
 }
 
-// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
-func (x *TextLayer) WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer {
-	x.inner.CALayer.SetCornerCurve(cornerCurve)
+// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+func (x *TextLayer) WithCornerCurve(cornerCurve obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return x
 }
 
-// The width of the layer’s border. Animatable.
-//
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+// WithBorderWidth the width of the layer’s border. Animatable.
 func (x *TextLayer) WithBorderWidth(borderWidth float64) *TextLayer {
-	x.inner.CALayer.SetBorderWidth(borderWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 	return x
 }
 
-// The opacity of the receiver. Animatable.
-//
-// WithOpacity sets the opacity property and returns the receiver for chaining.
+// WithBorderColor the color of the layer’s border. Animatable.
+func (x *TextLayer) WithBorderColor(borderColor obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return x
+}
+
+// WithOpacity the opacity of the receiver. Animatable.
 func (x *TextLayer) WithOpacity(opacity float32) *TextLayer {
-	x.inner.CALayer.SetOpacity(opacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
-// A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-//
-// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
 func (x *TextLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TextLayer {
-	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
 	return x
 }
 
-// A CoreImage filter used to composite the layer and the content behind it. Animatable.
-//
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *TextLayer) WithCompositingFilter(compositingFilter objc.ID) *TextLayer {
-	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (x *TextLayer) WithCompositingFilter(compositingFilter obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-//
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
 func (x *TextLayer) WithShouldRasterize(shouldRasterize bool) *TextLayer {
-	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
-// The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-//
-// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
 func (x *TextLayer) WithRasterizationScale(rasterizationScale float64) *TextLayer {
-	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
 	return x
 }
 
-// The opacity of the layer’s shadow. Animatable.
-//
-// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+// WithShadowColor the color of the layer’s shadow. Animatable.
+func (x *TextLayer) WithShadowColor(shadowColor obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return x
+}
+
+// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
 func (x *TextLayer) WithShadowOpacity(shadowOpacity float32) *TextLayer {
-	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
 	return x
 }
 
-// The offset (in points) of the layer’s shadow. Animatable.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
 func (x *TextLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer {
-	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
 	return x
 }
 
-// The blur radius (in points) used to render the layer’s shadow. Animatable.
-//
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
 func (x *TextLayer) WithShadowRadius(shadowRadius float64) *TextLayer {
-	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
 	return x
 }
 
-// A bitmask defining how the layer is resized when the bounds of its superlayer changes.
-//
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TextLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TextLayer {
-	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
+// WithShadowPath the shape of the layer’s shadow. Animatable.
+func (x *TextLayer) WithShadowPath(shadowPath obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return x
 }
 
-// The object responsible for laying out the layer’s sublayers.
-//
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *TextLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer {
-	x.inner.CALayer.SetLayoutManager(layoutManager)
+// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (x *TextLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// A dictionary containing layer actions.
-//
-// WithActions sets the actions property and returns the receiver for chaining.
-func (x *TextLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer {
-	x.inner.CALayer.SetActions(actions)
+// WithActions a dictionary containing layer actions.
+func (x *TextLayer) WithActions(actions obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
 	return x
 }
 
-// The name of the receiver.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the name of the receiver.
 func (x *TextLayer) WithName(name string) *TextLayer {
-	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The layer’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TextLayer) WithDelegate(delegate raw.CALayerDelegate) *TextLayer {
-	x.inner.CALayer.SetDelegate(delegate)
+// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (x *TextLayer) WithStyle(style obj.Object) *TextLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return x
 }
 
-// An optional dictionary used to store property values that aren’t explicitly defined by the layer.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *TextLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TextLayer {
-	x.inner.CALayer.SetStyle(style)
+// WithConstraints the constraints used to position current layer’s sublayers.
+func (x *TextLayer) WithConstraints(items ...*Constraint) *TextLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The constraints used to position current layer’s sublayers.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *TextLayer) WithConstraints(items ...*raw.CAConstraint) *TextLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetConstraints(_arr)
-	return x
+// SetString wraps the corresponding Objective-C method.
+func (x *TextLayer) SetString(string_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
 }
 
-// String calls the underlying String.
-func (x *TextLayer) String() objc.ID {
-	return x.inner.String()
+// Font wraps the corresponding Objective-C method.
+func (x *TextLayer) Font() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+	return obj.Wrap(_r)
 }
 
-// SetString calls the underlying SetString.
-func (x *TextLayer) SetString(string_ objc.ID) {
-	x.inner.SetString(string_)
+// SetFont wraps the corresponding Objective-C method.
+func (x *TextLayer) SetFont(font obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 }
 
-// Font calls the underlying Font.
-func (x *TextLayer) Font() unsafe.Pointer {
-	return x.inner.Font()
-}
-
-// SetFont calls the underlying SetFont.
-func (x *TextLayer) SetFont(font unsafe.Pointer) {
-	x.inner.SetFont(font)
-}
-
-// FontSize calls the underlying FontSize.
+// FontSize wraps the corresponding Objective-C method.
 func (x *TextLayer) FontSize() float64 {
-	return x.inner.FontSize()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fontSize"))
+	return _r
 }
 
-// SetFontSize calls the underlying SetFontSize.
+// SetFontSize wraps the corresponding Objective-C method.
 func (x *TextLayer) SetFontSize(fontSize float64) {
-	x.inner.SetFontSize(fontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
 }
 
-// ForegroundColor calls the underlying ForegroundColor.
-func (x *TextLayer) ForegroundColor() unsafe.Pointer {
-	return x.inner.ForegroundColor()
+// ForegroundColor wraps the corresponding Objective-C method.
+func (x *TextLayer) ForegroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetForegroundColor calls the underlying SetForegroundColor.
-func (x *TextLayer) SetForegroundColor(foregroundColor unsafe.Pointer) {
-	x.inner.SetForegroundColor(foregroundColor)
+// SetForegroundColor wraps the corresponding Objective-C method.
+func (x *TextLayer) SetForegroundColor(foregroundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
 }
 
-// IsWrapped calls the underlying IsWrapped.
+// IsWrapped wraps the corresponding Objective-C method.
 func (x *TextLayer) IsWrapped() bool {
-	return x.inner.IsWrapped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWrapped"))
+	return _r
 }
 
-// SetWrapped calls the underlying SetWrapped.
+// SetWrapped wraps the corresponding Objective-C method.
 func (x *TextLayer) SetWrapped(wrapped bool) {
-	x.inner.SetWrapped(wrapped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapped:"), wrapped)
 }
 
-// TruncationMode calls the underlying TruncationMode.
-func (x *TextLayer) TruncationMode() string {
-	_r := x.inner.TruncationMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// TruncationMode wraps the corresponding Objective-C method.
+func (x *TextLayer) TruncationMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("truncationMode"))
+	return obj.Wrap(_r)
 }
 
-// SetTruncationMode calls the underlying SetTruncationMode.
-func (x *TextLayer) SetTruncationMode(truncationMode *foundation.NSString) {
-	x.inner.SetTruncationMode(truncationMode)
+// SetTruncationMode wraps the corresponding Objective-C method.
+func (x *TextLayer) SetTruncationMode(truncationMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncationMode:"), objref.IDOf(truncationMode))
 }
 
-// AlignmentMode calls the underlying AlignmentMode.
-func (x *TextLayer) AlignmentMode() string {
-	_r := x.inner.AlignmentMode()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// AlignmentMode wraps the corresponding Objective-C method.
+func (x *TextLayer) AlignmentMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignmentMode"))
+	return obj.Wrap(_r)
 }
 
-// SetAlignmentMode calls the underlying SetAlignmentMode.
-func (x *TextLayer) SetAlignmentMode(alignmentMode *foundation.NSString) {
-	x.inner.SetAlignmentMode(alignmentMode)
+// SetAlignmentMode wraps the corresponding Objective-C method.
+func (x *TextLayer) SetAlignmentMode(alignmentMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentMode:"), objref.IDOf(alignmentMode))
 }
 
-// AllowsFontSubpixelQuantization calls the underlying AllowsFontSubpixelQuantization.
+// AllowsFontSubpixelQuantization wraps the corresponding Objective-C method.
 func (x *TextLayer) AllowsFontSubpixelQuantization() bool {
-	return x.inner.AllowsFontSubpixelQuantization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFontSubpixelQuantization"))
+	return _r
 }
 
-// SetAllowsFontSubpixelQuantization calls the underlying SetAllowsFontSubpixelQuantization.
+// SetAllowsFontSubpixelQuantization wraps the corresponding Objective-C method.
 func (x *TextLayer) SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) {
-	x.inner.SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsFontSubpixelQuantization:"), allowsFontSubpixelQuantization)
 }
-
-func (x *TextLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // TextLayerable is the interface implemented by [TextLayer], for mocking and DI.
 type TextLayerable interface {
-	Unwrap() *raw.CATextLayer
-	WithString(string_ objc.ID) *TextLayer
+	obj.Object
+	WithString(string_ obj.Object) *TextLayer
+	WithFont(font obj.Object) *TextLayer
 	WithFontSize(fontSize float64) *TextLayer
+	WithForegroundColor(foregroundColor obj.Object) *TextLayer
 	WithWrapped(wrapped bool) *TextLayer
-	WithTruncationMode(truncationMode *foundation.NSString) *TextLayer
-	WithAlignmentMode(alignmentMode *foundation.NSString) *TextLayer
+	WithTruncationMode(truncationMode obj.Object) *TextLayer
+	WithAlignmentMode(alignmentMode obj.Object) *TextLayer
 	WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer
 	WithBounds(bounds corefoundation.CGRect) *TextLayer
 	WithPosition(position corefoundation.CGPoint) *TextLayer
 	WithZPosition(zPosition float64) *TextLayer
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TextLayer
 	WithAnchorPointZ(anchorPointZ float64) *TextLayer
-	WithTransform(transform raw.CATransform3D) *TextLayer
 	WithFrame(frame corefoundation.CGRect) *TextLayer
 	WithHidden(hidden bool) *TextLayer
 	WithDoubleSided(doubleSided bool) *TextLayer
 	WithGeometryFlipped(geometryFlipped bool) *TextLayer
 	WithSublayers(items ...LayerProvider) *TextLayer
-	WithSublayerTransform(sublayerTransform raw.CATransform3D) *TextLayer
 	WithMask(mask LayerProvider) *TextLayer
 	WithMasksToBounds(masksToBounds bool) *TextLayer
-	WithContents(contents objc.ID) *TextLayer
+	WithContents(contents obj.Object) *TextLayer
 	WithContentsRect(contentsRect corefoundation.CGRect) *TextLayer
-	WithContentsGravity(contentsGravity *foundation.NSString) *TextLayer
+	WithContentsGravity(contentsGravity obj.Object) *TextLayer
 	WithContentsScale(contentsScale float64) *TextLayer
 	WithContentsCenter(contentsCenter corefoundation.CGRect) *TextLayer
-	WithContentsFormat(contentsFormat *foundation.NSString) *TextLayer
+	WithContentsFormat(contentsFormat obj.Object) *TextLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TextLayer
-	WithToneMapMode(toneMapMode *foundation.NSString) *TextLayer
-	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TextLayer
+	WithToneMapMode(toneMapMode obj.Object) *TextLayer
+	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TextLayer
 	WithContentsHeadroom(contentsHeadroom float64) *TextLayer
-	WithMinificationFilter(minificationFilter *foundation.NSString) *TextLayer
-	WithMagnificationFilter(magnificationFilter *foundation.NSString) *TextLayer
+	WithMinificationFilter(minificationFilter obj.Object) *TextLayer
+	WithMagnificationFilter(magnificationFilter obj.Object) *TextLayer
 	WithMinificationFilterBias(minificationFilterBias float32) *TextLayer
 	WithOpaque(opaque bool) *TextLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TextLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TextLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer
+	WithBackgroundColor(backgroundColor obj.Object) *TextLayer
 	WithCornerRadius(cornerRadius float64) *TextLayer
-	WithMaskedCorners(maskedCorners CACornerMask) *TextLayer
-	WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer
+	WithMaskedCorners(maskedCorners CornerMask) *TextLayer
+	WithCornerCurve(cornerCurve obj.Object) *TextLayer
 	WithBorderWidth(borderWidth float64) *TextLayer
+	WithBorderColor(borderColor obj.Object) *TextLayer
 	WithOpacity(opacity float32) *TextLayer
 	WithAllowsGroupOpacity(allowsGroupOpacity bool) *TextLayer
-	WithCompositingFilter(compositingFilter objc.ID) *TextLayer
+	WithCompositingFilter(compositingFilter obj.Object) *TextLayer
 	WithShouldRasterize(shouldRasterize bool) *TextLayer
 	WithRasterizationScale(rasterizationScale float64) *TextLayer
+	WithShadowColor(shadowColor obj.Object) *TextLayer
 	WithShadowOpacity(shadowOpacity float32) *TextLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer
 	WithShadowRadius(shadowRadius float64) *TextLayer
-	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TextLayer
-	WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer
-	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer
+	WithShadowPath(shadowPath obj.Object) *TextLayer
+	WithAutoresizingMask(autoresizingMask AutoresizingMask) *TextLayer
+	WithActions(actions obj.Object) *TextLayer
 	WithName(name string) *TextLayer
-	WithDelegate(delegate raw.CALayerDelegate) *TextLayer
-	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TextLayer
-	WithConstraints(items ...*raw.CAConstraint) *TextLayer
-	String() objc.ID
-	SetString(string_ objc.ID)
-	Font() unsafe.Pointer
-	SetFont(font unsafe.Pointer)
+	WithStyle(style obj.Object) *TextLayer
+	WithConstraints(items ...*Constraint) *TextLayer
+	SetString(string_ obj.Object)
+	Font() obj.Object
+	SetFont(font obj.Object)
 	FontSize() float64
 	SetFontSize(fontSize float64)
-	ForegroundColor() unsafe.Pointer
-	SetForegroundColor(foregroundColor unsafe.Pointer)
+	ForegroundColor() obj.Object
+	SetForegroundColor(foregroundColor obj.Object)
 	IsWrapped() bool
 	SetWrapped(wrapped bool)
-	TruncationMode() string
-	SetTruncationMode(truncationMode *foundation.NSString)
-	AlignmentMode() string
-	SetAlignmentMode(alignmentMode *foundation.NSString)
+	TruncationMode() obj.Object
+	SetTruncationMode(truncationMode obj.Object)
+	AlignmentMode() obj.Object
+	SetAlignmentMode(alignmentMode obj.Object)
 	AllowsFontSubpixelQuantization() bool
 	SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool)
 }
 
 var _ TextLayerable = (*TextLayer)(nil)
+
+var _ LayerProvider = (*TextLayer)(nil)

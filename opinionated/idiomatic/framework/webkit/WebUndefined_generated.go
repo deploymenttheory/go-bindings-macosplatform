@@ -5,41 +5,76 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
+// WebUndefined is an idiomatic wrapper over the Objective-C class WebUndefined.
 //
-// WebUndefined wraps [raw.WebUndefined] with a fluent Go API.
+// WebUndefined objects are simply used to represent the JavaScript “undefined” value in methods when bridging between JavaScript and Objective-C. For example, if you invoke a JavaScript function that returns the JavaScript “undefined” value, then a WebUndefined object is returned to the Objective-C calling context.
 type WebUndefined struct {
-	inner *raw.WebUndefined
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebUndefined].
-func (x *WebUndefined) Unwrap() *raw.WebUndefined { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebUndefined) ID() objc.ID { return x.inner.Ptr() }
-
-// WebUndefinedFromID adopts an existing object pointer as a WebUndefined (nil for 0).
+// WebUndefinedFromID adopts an existing Objective-C object as a WebUndefined
+// (nil for 0), retaining it and registering a release finalizer.
 func WebUndefinedFromID(id objc.ID) *WebUndefined {
 	if id == 0 {
 		return nil
 	}
-	return &WebUndefined{inner: raw.WebUndefinedFromID(id)}
+	x := &WebUndefined{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWebUndefined creates a new [WebUndefined].
+// webUndefinedAdopt wraps an Objective-C object that this code just created as a
+// WebUndefined (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webUndefinedAdopt(id objc.ID) *WebUndefined {
+	if id == 0 {
+		return nil
+	}
+	x := &WebUndefined{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebUndefined) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebUndefined) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebUndefined) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebUndefined) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebUndefined creates a new WebUndefined.
 func NewWebUndefined() *WebUndefined {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WebUndefined")), objc.RegisterName("new"))
-	return &WebUndefined{inner: raw.WebUndefinedFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WebUndefined")), objc.RegisterName("new"))
+	return webUndefinedAdopt(_id)
 }
 
 // WebUndefinedable is the interface implemented by [WebUndefined], for mocking and DI.
 type WebUndefinedable interface {
-	Unwrap() *raw.WebUndefined
+	obj.Object
 }
 
 var _ WebUndefinedable = (*WebUndefined)(nil)

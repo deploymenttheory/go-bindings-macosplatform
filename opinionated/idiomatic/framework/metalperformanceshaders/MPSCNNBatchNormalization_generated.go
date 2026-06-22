@@ -5,266 +5,143 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A batch normalization kernel.
+// CNNBatchNormalization is an idiomatic wrapper over the Objective-C class MPSCNNBatchNormalization.
 //
-// CNNBatchNormalization wraps [raw.MPSCNNBatchNormalization] with a fluent Go API.
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A batch normalization kernel.
 type CNNBatchNormalization struct {
-	inner *raw.MPSCNNBatchNormalization
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNBatchNormalization].
-func (x *CNNBatchNormalization) Unwrap() *raw.MPSCNNBatchNormalization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNBatchNormalization) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNBatchNormalizationFromID adopts an existing object pointer as a CNNBatchNormalization (nil for 0).
+// CNNBatchNormalizationFromID adopts an existing Objective-C object as a CNNBatchNormalization
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNBatchNormalizationFromID(id objc.ID) *CNNBatchNormalization {
 	if id == 0 {
 		return nil
 	}
-	return &CNNBatchNormalization{inner: raw.MPSCNNBatchNormalizationFromID(id)}
+	x := &CNNBatchNormalization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a batch normalization kernel using a data source. @param      device                          The MTLDevice on which this filter will be used @param      dataSource                      A pointer to a object that conforms to the MPSCNNBatchNormalizationDataSource protocol.  The data source provides filter weights and bias terms and, optionally, image statistics which may be used to perform the normalization. @return     A valid MPSCNNBatchNormalization object or nil, if failure.
-//
-// NewCNNBatchNormalizationWithDeviceDataSource creates a new [CNNBatchNormalization].
-func NewCNNBatchNormalizationWithDeviceDataSource(device metal.MTLDevice, dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource) *CNNBatchNormalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:dataSource:"), device, dataSource)
-	return &CNNBatchNormalization{inner: raw.MPSCNNBatchNormalizationFromID(_id)}
+// cNNBatchNormalizationAdopt wraps an Objective-C object that this code just created as a
+// CNNBatchNormalization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNBatchNormalizationAdopt(id objc.ID) *CNNBatchNormalization {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNBatchNormalization{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a batch normalization kernel using a data source and a neuron descriptor. @param      device                          The MTLDevice on which this filter will be used @param      dataSource                      A pointer to a object that conforms to the MPSCNNBatchNormalizationDataSource protocol.  The data source provides filter weights and bias terms and, optionally, image statistics which may be used to perform the normalization. @param      fusedNeuronDescriptor           A MPSNNNeuronDescriptor object which specifies a neuron activation function to be applied to the result of the batch normalization. @return     A valid MPSCNNBatchNormalization object or nil, if failure.
-//
-// NewCNNBatchNormalizationWithDeviceDataSourceFusedNeuronDescriptor creates a new [CNNBatchNormalization].
-func NewCNNBatchNormalizationWithDeviceDataSourceFusedNeuronDescriptor(device metal.MTLDevice, dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource, fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNBatchNormalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:dataSource:fusedNeuronDescriptor:"), device, dataSource, fusedNeuronDescriptor.Ptr())
-	return &CNNBatchNormalization{inner: raw.MPSCNNBatchNormalizationFromID(_id)}
+// NewCNNBatchNormalization creates a new CNNBatchNormalization.
+func NewCNNBatchNormalization() *CNNBatchNormalization {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNBatchNormalization")), objc.RegisterName("new"))
+	return cNNBatchNormalizationAdopt(_id)
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use a subclass of NSCoder that implements the <MPSDeviceProvider> protocol  to tell MPS the MTLDevice to use. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSCNNBatchNormalization object, or nil if failure.
-//
-// NewCNNBatchNormalizationWithCoderDevice creates a new [CNNBatchNormalization].
-func NewCNNBatchNormalizationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNBatchNormalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNBatchNormalization{inner: raw.MPSCNNBatchNormalizationFromID(_id)}
-}
-
-// @property   epsilon @abstract   The epsilon value used in the batch normalization formula to bias the variance when normalizing.
-//
-// WithEpsilon sets the epsilon property and returns the receiver for chaining.
+// WithEpsilon the epsilon value used in the batch normalization formula to bias the variance when normalizing.
 func (x *CNNBatchNormalization) WithEpsilon(epsilon float32) *CNNBatchNormalization {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 	return x
 }
 
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *CNNBatchNormalization) WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *CNNBatchNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *CNNBatchNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *CNNBatchNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNBatchNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBatchNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNBatchNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNBatchNormalization) WithLabel(label string) *CNNBatchNormalization {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Encode this kernel to a command buffer for a single image using a batch normalization state. @param      commandBuffer               A valid command buffer to receive the kernel. @param      sourceImage                 The source MPSImage. @param      batchNormalizationState     A MPSCNNBatchNormalizationState containing weights and/or statistics to use for the batch normalization. If the state is temporary its read count will be decremented. @param      destinationImage            An MPSImage to contain the resulting normalized and scaled image.
-//
-// EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage calls the underlying EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage.
-func (x *CNNBatchNormalization) EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer, sourceImage, batchNormalizationState, destinationImage)
-}
-
-// @abstract   Encode this kernel to a command buffer for a batch of images using a batch normalization state. @param      commandBuffer               A valid command buffer to receive the kernel. @param      sourceImages                The batch of source images. @param      batchNormalizationState     A MPSCNNBatchNormalizationState containing weights and/or statistics to use for the batch normalization. If the state is temporary its read count will be decremented. @param      destinationImages           The batch of images to contain the normalized and scaled result images.
-//
-// EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages.
-func (x *CNNBatchNormalization) EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImages unsafe.Pointer) {
-	x.inner.EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer, sourceImages, batchNormalizationState, destinationImages)
-}
-
-// @abstract       Return a temporary MPSCNNBatchNormalizationState object which may be used with a MPSCNNBatchNormalization filter.
-//
-// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
-func (x *CNNBatchNormalization) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNBatchNormalizationState {
-	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
-}
-
-// @abstract   Reinitialize the filter using a data source. @param      dataSource  The data source which will provide the weights and, optionally, the image batch statistics with which to normalize.
-//
-// ReloadDataSource calls the underlying ReloadDataSource.
-func (x *CNNBatchNormalization) ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource) {
-	x.inner.ReloadDataSource(dataSource)
-}
-
-// @abstract   Reinitialize the filter's gamma and beta values using the data source provided at kernel initialization.
-//
-// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+// ReloadGammaAndBetaFromDataSource reinitialize the filter's gamma and beta values using the data source provided at kernel initialization.
 func (x *CNNBatchNormalization) ReloadGammaAndBetaFromDataSource() {
-	x.inner.ReloadGammaAndBetaFromDataSource()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
 }
 
-// @abstract   Reinitialize the filter's mean and variance values using the data source provided at kernel initialization.
-//
-// ReloadMeanAndVarianceFromDataSource calls the underlying ReloadMeanAndVarianceFromDataSource.
+// ReloadMeanAndVarianceFromDataSource reinitialize the filter's mean and variance values using the data source provided at kernel initialization.
 func (x *CNNBatchNormalization) ReloadMeanAndVarianceFromDataSource() {
-	x.inner.ReloadMeanAndVarianceFromDataSource()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadMeanAndVarianceFromDataSource"))
 }
 
-// @abstract   Reload data using new gamma and beta terms contained within an MPSCNNNormalizationGammaAndBetaState object. @param      commandBuffer               The command buffer on which to encode the reload. @param      gammaAndBetaState           The state containing the updated weights which are to be reloaded.
-//
-// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
-func (x *CNNBatchNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
-	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+// NumberOfFeatureChannels the number of feature channels in an image to be normalized.
+func (x *CNNBatchNormalization) NumberOfFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfFeatureChannels"))
+	return _r
 }
 
-// @abstract   Reload data using new mean and variance terms contained within an MPSCNNNormalizationMeanAndVarianceState object. @param      commandBuffer               The command buffer on which to encode the reload. @param      meanAndVarianceState        The state containing the updated statistics which are to be reloaded.
-//
-// ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState calls the underlying ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState.
-func (x *CNNBatchNormalization) ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer metal.MTLCommandBuffer, meanAndVarianceState *mpsneuralnetwork.MPSCNNNormalizationMeanAndVarianceState) {
-	x.inner.ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer, meanAndVarianceState)
-}
-
-// @property   numberOfFeatureChannels @abstract   The number of feature channels in an image to be normalized.
-//
-// NumberOfFeatureChannels calls the underlying NumberOfFeatureChannels.
-func (x *CNNBatchNormalization) NumberOfFeatureChannels() uint {
-	return x.inner.NumberOfFeatureChannels()
-}
-
-// @property   epsilon @abstract   The epsilon value used in the batch normalization formula to bias the variance when normalizing.
-//
-// Epsilon calls the underlying Epsilon.
+// Epsilon the epsilon value used in the batch normalization formula to bias the variance when normalizing.
 func (x *CNNBatchNormalization) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// SetEpsilon calls the underlying SetEpsilon.
+// SetEpsilon wraps the corresponding Objective-C method.
 func (x *CNNBatchNormalization) SetEpsilon(epsilon float32) {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
-
-// @abstract   The data source the batch normalization was initialized with
-//
-// DataSource calls the underlying DataSource.
-func (x *CNNBatchNormalization) DataSource() mpsneuralnetwork.MPSCNNBatchNormalizationDataSource {
-	return x.inner.DataSource()
-}
-
-func (x *CNNBatchNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *CNNBatchNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // CNNBatchNormalizationable is the interface implemented by [CNNBatchNormalization], for mocking and DI.
 type CNNBatchNormalizationable interface {
-	Unwrap() *raw.MPSCNNBatchNormalization
+	obj.Object
 	WithEpsilon(epsilon float32) *CNNBatchNormalization
 	WithOffset(offset mpscore.MPSOffset) *CNNBatchNormalization
 	WithClipRect(clipRect metal.MTLRegion) *CNNBatchNormalization
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBatchNormalization
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBatchNormalization
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBatchNormalization
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBatchNormalization
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalization
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBatchNormalization
-	WithOptions(options mpscore.MPSKernelOptions) *CNNBatchNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNBatchNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNBatchNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNBatchNormalization
 	WithLabel(label string) *CNNBatchNormalization
-	EncodeToCommandBufferSourceImageBatchNormalizationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImage *mpscore.MPSImage)
-	EncodeBatchToCommandBufferSourceImagesBatchNormalizationStateDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, destinationImages unsafe.Pointer)
-	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNBatchNormalizationState
-	ReloadDataSource(dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource)
 	ReloadGammaAndBetaFromDataSource()
 	ReloadMeanAndVarianceFromDataSource()
-	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
-	ReloadMeanAndVarianceWithCommandBufferMeanAndVarianceState(commandBuffer metal.MTLCommandBuffer, meanAndVarianceState *mpsneuralnetwork.MPSCNNNormalizationMeanAndVarianceState)
-	NumberOfFeatureChannels() uint
+	NumberOfFeatureChannels() int
 	Epsilon() float32
 	SetEpsilon(epsilon float32)
-	DataSource() mpsneuralnetwork.MPSCNNBatchNormalizationDataSource
 }
 
 var _ CNNBatchNormalizationable = (*CNNBatchNormalization)(nil)
+
+var _ CNNKernelProvider = (*CNNBatchNormalization)(nil)
+
+var _ KernelProvider = (*CNNBatchNormalization)(nil)

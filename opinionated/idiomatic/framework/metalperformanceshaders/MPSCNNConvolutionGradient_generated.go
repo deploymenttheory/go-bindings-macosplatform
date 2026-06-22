@@ -5,353 +5,224 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A gradient convolution kernel.
+// CNNConvolutionGradient is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionGradient.
 //
-// CNNConvolutionGradient wraps [raw.MPSCNNConvolutionGradient] with a fluent Go API.
+// CNNConvolutionGradient is an abstract base — you do not construct it directly. Construct one of [CNNFullyConnectedGradient] and pass it where a CNNConvolutionGradient is accepted.
+//
+// A gradient convolution kernel.
 type CNNConvolutionGradient struct {
-	inner *raw.MPSCNNConvolutionGradient
+	CNNGradientKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionGradient].
-func (x *CNNConvolutionGradient) Unwrap() *raw.MPSCNNConvolutionGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionGradientFromID adopts an existing object pointer as a CNNConvolutionGradient (nil for 0).
+// CNNConvolutionGradientFromID adopts an existing Objective-C object as a CNNConvolutionGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionGradientFromID(id objc.ID) *CNNConvolutionGradient {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionGradient{inner: raw.MPSCNNConvolutionGradientFromID(id)}
-}
-
-// @abstract   Initializes a convolution gradient (with respect to weights and bias) object. @param      device                          The MTLDevice on which this MPSCNNConvolutionGradient filter will be used @param      weights                         A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. Note that same data source as provided to forward convolution should be used. @return     A valid MPSCNNConvolutionGradient object or nil, if failure.
-//
-// NewCNNConvolutionGradientWithDeviceWeights creates a new [CNNConvolutionGradient].
-func NewCNNConvolutionGradientWithDeviceWeights(device metal.MTLDevice, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *CNNConvolutionGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:weights:"), device, weights)
-	return &CNNConvolutionGradient{inner: raw.MPSCNNConvolutionGradientFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewCNNConvolutionGradientWithCoderDevice creates a new [CNNConvolutionGradient].
-func NewCNNConvolutionGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNConvolutionGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNConvolutionGradient{inner: raw.MPSCNNConvolutionGradientFromID(_id)}
-}
-
-// @property   gradientOption @abstract   Option to control which gradient to compute. Default is MPSCNNConvolutionGradientOptionAll which means both gradient with respect to data and gradient with respect to weight and bias are computed.
-//
-// WithGradientOption sets the gradientOption property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) *CNNConvolutionGradient {
-	x.inner.SetGradientOption(gradientOption)
+	x := &CNNConvolutionGradient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract    Property to control serialization of weights and bias. @discussion  During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
-//
-// WithSerializeWeightsAndBiases sets the serializeWeightsAndBiases property and returns the receiver for chaining.
+// cNNConvolutionGradientAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionGradientAdopt(id objc.ID) *CNNConvolutionGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNConvolutionGradient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithSerializeWeightsAndBiases property to control serialization of weights and bias. During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
 func (x *CNNConvolutionGradient) WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNConvolutionGradient {
-	x.inner.SetSerializeWeightsAndBiases(serializeWeightsAndBiases)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializeWeightsAndBiases:"), serializeWeightsAndBiases)
 	return x
 }
 
-// @property   kernelOffsetX @abstract   Offset in the kernel reference frame to position the kernel in the X dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-//
-// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+// WithKernelOffsetX offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (x *CNNConvolutionGradient) WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 	return x
 }
 
-// @property   kernelOffsetY @abstract   Offset in the kernel reference frame to position the kernel in the Y dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-//
-// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+// WithKernelOffsetY offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 func (x *CNNConvolutionGradient) WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *CNNConvolutionGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *CNNConvolutionGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
 func (x *CNNConvolutionGradient) WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (x *CNNConvolutionGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *CNNConvolutionGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-//
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (x *CNNConvolutionGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNConvolutionGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNConvolutionGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNConvolutionGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNConvolutionGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNConvolutionGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (x *CNNConvolutionGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNConvolutionGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNConvolutionGradient) WithLabel(label string) *CNNConvolutionGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
-//
-// ReloadWeightsAndBiasesFromDataSource calls the underlying ReloadWeightsAndBiasesFromDataSource.
+// ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (x *CNNConvolutionGradient) ReloadWeightsAndBiasesFromDataSource() {
-	x.inner.ReloadWeightsAndBiasesFromDataSource()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
-// @abstract   GPU side reload. Reload the updated weights and biases from update buffer produced by application enqueued metal kernel into internal weights and biases buffer. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object's gradientForWeights and gradientForBiases metal buffer. @param      commandBuffer      Metal command buffer on which application update kernel was enqueued consuming MPSCNNConvolutionGradientState's gradientForWeights and gradientForBiases buffer and producing updateBuffer metal buffer. @param      state              MPSCNNConvolutionWeightsAndBiasesState containing weights and biases buffers which have updated weights produced by application's update kernel.
-//
-// ReloadWeightsAndBiasesWithCommandBufferState calls the underlying ReloadWeightsAndBiasesWithCommandBufferState.
-func (x *CNNConvolutionGradient) ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
-	x.inner.ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer, state)
+// SourceGradientFeatureChannels the number of feature channels per pixel in the gradient image (primarySource) of encode call. This is same is outputFeatureChannels or the feature channels of destination image in forward convolution i.e. dataSource.descriptor.outputFeatureChannels
+func (x *CNNConvolutionGradient) SourceGradientFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceGradientFeatureChannels"))
+	return _r
 }
 
-// @property   sourceGradientFeatureChannels @abstract   The number of feature channels per pixel in the gradient image (primarySource) of encode call. This is same is outputFeatureChannels or the feature channels of destination image in forward convolution i.e. dataSource.descriptor.outputFeatureChannels
-//
-// SourceGradientFeatureChannels calls the underlying SourceGradientFeatureChannels.
-func (x *CNNConvolutionGradient) SourceGradientFeatureChannels() uint {
-	return x.inner.SourceGradientFeatureChannels()
+// SourceImageFeatureChannels the number of feature channels per pixel in the input image to forward convolution which is used here as secondarySource. This is same as dataSource.descriptor.inputFeatureChannels. This is also the number of feature channels in destinatin image here i.e. gradient with respect to data.
+func (x *CNNConvolutionGradient) SourceImageFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceImageFeatureChannels"))
+	return _r
 }
 
-// @property   sourceImageFeatureChannels @abstract   The number of feature channels per pixel in the input image to forward convolution which is used here as secondarySource. This is same as dataSource.descriptor.inputFeatureChannels. This is also the number of feature channels in destinatin image here i.e. gradient with respect to data.
-//
-// SourceImageFeatureChannels calls the underlying SourceImageFeatureChannels.
-func (x *CNNConvolutionGradient) SourceImageFeatureChannels() uint {
-	return x.inner.SourceImageFeatureChannels()
+// Groups number of groups input and output channels are divided into.
+func (x *CNNConvolutionGradient) Groups() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groups"))
+	return _r
 }
 
-// @property   groups @abstract   Number of groups input and output channels are divided into.
-//
-// Groups calls the underlying Groups.
-func (x *CNNConvolutionGradient) Groups() uint {
-	return x.inner.Groups()
+// ChannelMultiplier channel multiplier. For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution. Currently only channelMultiplier of 1 is supported i.e. inputChannels == outputChannels
+func (x *CNNConvolutionGradient) ChannelMultiplier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelMultiplier"))
+	return _r
 }
 
-// @abstract   Channel multiplier. @discussion For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution. Currently only channelMultiplier of 1 is supported i.e. inputChannels == outputChannels
-//
-// ChannelMultiplier calls the underlying ChannelMultiplier.
-func (x *CNNConvolutionGradient) ChannelMultiplier() uint {
-	return x.inner.ChannelMultiplier()
-}
-
-// @property   dataSource @abstract   dataSource with which gradient object was created
-//
-// DataSource calls the underlying DataSource.
-func (x *CNNConvolutionGradient) DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource {
-	return x.inner.DataSource()
-}
-
-// @property   gradientOption @abstract   Option to control which gradient to compute. Default is MPSCNNConvolutionGradientOptionAll which means both gradient with respect to data and gradient with respect to weight and bias are computed.
-//
-// GradientOption calls the underlying GradientOption.
-func (x *CNNConvolutionGradient) GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption {
-	return x.inner.GradientOption()
-}
-
-// SetGradientOption calls the underlying SetGradientOption.
-func (x *CNNConvolutionGradient) SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) {
-	x.inner.SetGradientOption(gradientOption)
-}
-
-// @abstract    Property to control serialization of weights and bias. @discussion  During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
-//
-// SerializeWeightsAndBiases calls the underlying SerializeWeightsAndBiases.
+// SerializeWeightsAndBiases property to control serialization of weights and bias. During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
 func (x *CNNConvolutionGradient) SerializeWeightsAndBiases() bool {
-	return x.inner.SerializeWeightsAndBiases()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serializeWeightsAndBiases"))
+	return _r
 }
 
-// @abstract    Property to control serialization of weights and bias. @discussion  During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
-//
-// SetSerializeWeightsAndBiases calls the underlying SetSerializeWeightsAndBiases.
+// SetSerializeWeightsAndBiases property to control serialization of weights and bias. During serialization of convolution object in -encodeWithCoder call, weights and biases are saved so that convolution object can be properly unserialized/restored in -initWithCoder call. If data source provied is NSSecureCoding compliant, data source is serialized else weights and biases are serialized. As weights/biases data may be several MB and these are same for both gradient and forward convolution object, application may already have weights/biases on disk through convolution, it can save disk space by setting this property false so convolution gradient object does not end up storing another copy of weights/biases. Default is NO. When application decides to set it to NO, it MUST call -(void) reloadWeightsAndBiasesFromDataSource after initWithCoder has initialized convolution object.
 func (x *CNNConvolutionGradient) SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool) {
-	x.inner.SetSerializeWeightsAndBiases(serializeWeightsAndBiases)
-}
-
-func (x *CNNConvolutionGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
-	return &x.inner.MPSCNNGradientKernel
-}
-
-func (x *CNNConvolutionGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
-	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
-}
-
-func (x *CNNConvolutionGradient) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializeWeightsAndBiases:"), serializeWeightsAndBiases)
 }
 
 // CNNConvolutionGradientable is the interface implemented by [CNNConvolutionGradient], for mocking and DI.
 type CNNConvolutionGradientable interface {
-	Unwrap() *raw.MPSCNNConvolutionGradient
-	WithGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) *CNNConvolutionGradient
+	obj.Object
 	WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNConvolutionGradient
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionGradient
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionGradient
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNConvolutionGradient
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNConvolutionGradient
 	WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNConvolutionGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNConvolutionGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNConvolutionGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNConvolutionGradient
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionGradient
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNConvolutionGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNConvolutionGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNConvolutionGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNConvolutionGradient
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNConvolutionGradient
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionGradient
-	WithOptions(options mpscore.MPSKernelOptions) *CNNConvolutionGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNConvolutionGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNConvolutionGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNConvolutionGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNConvolutionGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNConvolutionGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNConvolutionGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNConvolutionGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNConvolutionGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNConvolutionGradient
 	WithLabel(label string) *CNNConvolutionGradient
 	ReloadWeightsAndBiasesFromDataSource()
-	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
-	SourceGradientFeatureChannels() uint
-	SourceImageFeatureChannels() uint
-	Groups() uint
-	ChannelMultiplier() uint
-	DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource
-	GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption
-	SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption)
+	SourceGradientFeatureChannels() int
+	SourceImageFeatureChannels() int
+	Groups() int
+	ChannelMultiplier() int
 	SerializeWeightsAndBiases() bool
 	SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool)
 }
 
 var _ CNNConvolutionGradientable = (*CNNConvolutionGradient)(nil)
+
+// isCNNConvolutionGradient marks CNNConvolutionGradient — and, by embedding promotion, its
+// subclasses — as a member of the CNNConvolutionGradient hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNConvolutionGradient) isCNNConvolutionGradient() {}
+
+var _ CNNConvolutionGradientProvider = (*CNNConvolutionGradient)(nil)
+
+var _ CNNGradientKernelProvider = (*CNNConvolutionGradient)(nil)
+
+var _ CNNBinaryKernelProvider = (*CNNConvolutionGradient)(nil)
+
+var _ KernelProvider = (*CNNConvolutionGradient)(nil)

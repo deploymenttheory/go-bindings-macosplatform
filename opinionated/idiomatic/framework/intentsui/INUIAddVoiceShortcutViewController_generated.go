@@ -5,68 +5,77 @@
 package intentsui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intentsui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that guides the user through the steps for adding a shortcut to Siri.
+// AddVoiceShortcutViewController is an idiomatic wrapper over the Objective-C class INUIAddVoiceShortcutViewController.
 //
-// AddVoiceShortcutViewController wraps [raw.INUIAddVoiceShortcutViewController] with a fluent Go API.
+// A view controller that guides the user through the steps for adding a shortcut to Siri.
 type AddVoiceShortcutViewController struct {
-	inner *raw.INUIAddVoiceShortcutViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INUIAddVoiceShortcutViewController].
-func (x *AddVoiceShortcutViewController) Unwrap() *raw.INUIAddVoiceShortcutViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddVoiceShortcutViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// AddVoiceShortcutViewControllerFromID adopts an existing object pointer as a AddVoiceShortcutViewController (nil for 0).
+// AddVoiceShortcutViewControllerFromID adopts an existing Objective-C object as a AddVoiceShortcutViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func AddVoiceShortcutViewControllerFromID(id objc.ID) *AddVoiceShortcutViewController {
 	if id == 0 {
 		return nil
 	}
-	return &AddVoiceShortcutViewController{inner: raw.INUIAddVoiceShortcutViewControllerFromID(id)}
-}
-
-// Creates a view controller with a shortcut the user can add to Siri.
-//
-// NewAddVoiceShortcutViewControllerWithShortcut creates a new [AddVoiceShortcutViewController].
-func NewAddVoiceShortcutViewControllerWithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), shortcut.Ptr())
-	return &AddVoiceShortcutViewController{inner: raw.INUIAddVoiceShortcutViewControllerFromID(_id)}
-}
-
-// The object that retrieves notifications from the view controller.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AddVoiceShortcutViewController) WithDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) *AddVoiceShortcutViewController {
-	x.inner.SetDelegate(delegate)
+	x := &AddVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *AddVoiceShortcutViewController) Delegate() raw.INUIAddVoiceShortcutViewControllerDelegate {
-	return x.inner.Delegate()
+// addVoiceShortcutViewControllerAdopt wraps an Objective-C object that this code just created as a
+// AddVoiceShortcutViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addVoiceShortcutViewControllerAdopt(id objc.ID) *AddVoiceShortcutViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &AddVoiceShortcutViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *AddVoiceShortcutViewController) SetDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *AddVoiceShortcutViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddVoiceShortcutViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddVoiceShortcutViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddVoiceShortcutViewControllerWithShortcut creates a view controller with a shortcut the user can add to Siri.
+func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoiceShortcutViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShortcut:"), objref.IDOf(shortcut))
+	return addVoiceShortcutViewControllerAdopt(_id)
 }
 
 // AddVoiceShortcutViewControllerable is the interface implemented by [AddVoiceShortcutViewController], for mocking and DI.
 type AddVoiceShortcutViewControllerable interface {
-	Unwrap() *raw.INUIAddVoiceShortcutViewController
-	WithDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) *AddVoiceShortcutViewController
-	Delegate() raw.INUIAddVoiceShortcutViewControllerDelegate
-	SetDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate)
+	obj.Object
 }
 
 var _ AddVoiceShortcutViewControllerable = (*AddVoiceShortcutViewController)(nil)

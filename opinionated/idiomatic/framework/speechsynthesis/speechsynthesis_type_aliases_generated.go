@@ -4,39 +4,22 @@
 
 package speechsynthesis
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speechsynthesis"
-)
+type SpeechErrorInfo struct {
+	Count  int16
+	Oldest int16
+	OldPos int
+	Newest int16
+	NewPos int
+}
 
-// DelimiterInfo is a type alias for the raw DelimiterInfo value-type struct.
-type DelimiterInfo = raw.DelimiterInfo
+type SpeechStatusInfo struct {
+	OutputBusy     uint8
+	OutputPaused   uint8
+	InputBytesLeft int
+	PhonemeCode    int16
+}
 
-// PhonemeDescriptor is a type alias for the raw PhonemeDescriptor value-type struct.
-type PhonemeDescriptor = raw.PhonemeDescriptor
-
-// PhonemeInfo is a type alias for the raw PhonemeInfo value-type struct.
-type PhonemeInfo = raw.PhonemeInfo
-
-// SpeechChannelRecord is a type alias for the raw SpeechChannelRecord value-type struct.
-type SpeechChannelRecord = raw.SpeechChannelRecord
-
-// SpeechErrorInfo is a type alias for the raw SpeechErrorInfo value-type struct.
-type SpeechErrorInfo = raw.SpeechErrorInfo
-
-// SpeechStatusInfo is a type alias for the raw SpeechStatusInfo value-type struct.
-type SpeechStatusInfo = raw.SpeechStatusInfo
-
-// SpeechVersionInfo is a type alias for the raw SpeechVersionInfo value-type struct.
-type SpeechVersionInfo = raw.SpeechVersionInfo
-
-// SpeechXtndData is a type alias for the raw SpeechXtndData value-type struct.
-type SpeechXtndData = raw.SpeechXtndData
-
-// VoiceDescription is a type alias for the raw VoiceDescription value-type struct.
-type VoiceDescription = raw.VoiceDescription
-
-// VoiceFileInfo is a type alias for the raw VoiceFileInfo value-type struct.
-type VoiceFileInfo = raw.VoiceFileInfo
-
-// VoiceSpec is a type alias for the raw VoiceSpec value-type struct.
-type VoiceSpec = raw.VoiceSpec
+type VoiceSpec struct {
+	Creator uint
+	Id      uint
+}

@@ -5,46 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains information about the originator of a resource-loading request.
+// AssetResourceLoadingRequestor is an idiomatic wrapper over the Objective-C class AVAssetResourceLoadingRequestor.
 //
-// AssetResourceLoadingRequestor wraps [raw.AVAssetResourceLoadingRequestor] with a fluent Go API.
+// An object that contains information about the originator of a resource-loading request.
 type AssetResourceLoadingRequestor struct {
-	inner *raw.AVAssetResourceLoadingRequestor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetResourceLoadingRequestor].
-func (x *AssetResourceLoadingRequestor) Unwrap() *raw.AVAssetResourceLoadingRequestor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceLoadingRequestor) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceLoadingRequestorFromID adopts an existing object pointer as a AssetResourceLoadingRequestor (nil for 0).
+// AssetResourceLoadingRequestorFromID adopts an existing Objective-C object as a AssetResourceLoadingRequestor
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceLoadingRequestorFromID(id objc.ID) *AssetResourceLoadingRequestor {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceLoadingRequestor{inner: raw.AVAssetResourceLoadingRequestorFromID(id)}
+	x := &AssetResourceLoadingRequestor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceLoadingRequestor creates a new [AssetResourceLoadingRequestor].
+// assetResourceLoadingRequestorAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceLoadingRequestor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceLoadingRequestorAdopt(id objc.ID) *AssetResourceLoadingRequestor {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceLoadingRequestor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResourceLoadingRequestor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResourceLoadingRequestor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResourceLoadingRequestor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceLoadingRequestor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetResourceLoadingRequestor creates a new AssetResourceLoadingRequestor.
 func NewAssetResourceLoadingRequestor() *AssetResourceLoadingRequestor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetResourceLoadingRequestor")), objc.RegisterName("new"))
-	return &AssetResourceLoadingRequestor{inner: raw.AVAssetResourceLoadingRequestorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoadingRequestor")), objc.RegisterName("new"))
+	return assetResourceLoadingRequestorAdopt(_id)
 }
 
-// ProvidesExpiredSessionReports calls the underlying ProvidesExpiredSessionReports.
+// ProvidesExpiredSessionReports wraps the corresponding Objective-C method.
 func (x *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
-	return x.inner.ProvidesExpiredSessionReports()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesExpiredSessionReports"))
+	return _r
 }
 
 // AssetResourceLoadingRequestorable is the interface implemented by [AssetResourceLoadingRequestor], for mocking and DI.
 type AssetResourceLoadingRequestorable interface {
-	Unwrap() *raw.AVAssetResourceLoadingRequestor
+	obj.Object
 	ProvidesExpiredSessionReports() bool
 }
 

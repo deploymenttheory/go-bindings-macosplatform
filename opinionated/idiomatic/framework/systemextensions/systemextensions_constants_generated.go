@@ -5,30 +5,26 @@
 package systemextensions
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// OSSystemExtensionErrorDomain returns the string constant OSSystemExtensionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func OSSystemExtensionErrorDomain() objc.ID {
-	if _r := raw.OSSystemExtensionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// OSSystemExtensionErrorDomain returns the string constant OSSystemExtensionErrorDomain, for use as a dictionary key or argument.
+func OSSystemExtensionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSSystemExtensionErrorDomain")))
 }
 
-// OSBundleUsageDescriptionKey returns the string constant OSBundleUsageDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSBundleUsageDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.OSBundleUsageDescriptionKey())
+// OSBundleUsageDescriptionKey returns the string constant OSBundleUsageDescriptionKey, for use as a dictionary key or argument.
+func OSBundleUsageDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSBundleUsageDescriptionKey")))
 }
 
-// NSSystemExtensionUsageDescriptionKey returns the string constant NSSystemExtensionUsageDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSSystemExtensionUsageDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.NSSystemExtensionUsageDescriptionKey())
+// NSSystemExtensionUsageDescriptionKey returns the string constant NSSystemExtensionUsageDescriptionKey, for use as a dictionary key or argument.
+func NSSystemExtensionUsageDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSystemExtensionUsageDescriptionKey")))
 }
 
-// OSRelatedKernelExtensionKey returns the string constant OSRelatedKernelExtensionKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSRelatedKernelExtensionKey() objc.ID {
-	return purego.CFConstant(raw.OSRelatedKernelExtensionKey())
+// OSRelatedKernelExtensionKey returns the string constant OSRelatedKernelExtensionKey, for use as a dictionary key or argument.
+func OSRelatedKernelExtensionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSRelatedKernelExtensionKey")))
 }

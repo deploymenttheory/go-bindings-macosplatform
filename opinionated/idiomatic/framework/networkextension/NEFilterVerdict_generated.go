@@ -5,64 +5,99 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract base class for filter verdict classes.
+// NEFilterVerdict is an idiomatic wrapper over the Objective-C class NEFilterVerdict.
 //
-// NEFilterVerdict wraps [raw.NEFilterVerdict] with a fluent Go API.
+// NEFilterVerdict is an abstract base — you do not construct it directly. Construct one of [NEFilterDataVerdict], [NEFilterNewFlowVerdict] and pass it where a NEFilterVerdict is accepted.
+//
+// The abstract base class for filter verdict classes.
 type NEFilterVerdict struct {
-	inner *raw.NEFilterVerdict
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterVerdict].
-func (x *NEFilterVerdict) Unwrap() *raw.NEFilterVerdict { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterVerdict) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterVerdictFromID adopts an existing object pointer as a NEFilterVerdict (nil for 0).
+// NEFilterVerdictFromID adopts an existing Objective-C object as a NEFilterVerdict
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterVerdictFromID(id objc.ID) *NEFilterVerdict {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterVerdict{inner: raw.NEFilterVerdictFromID(id)}
-}
-
-// NewNEFilterVerdict creates a new [NEFilterVerdict].
-func NewNEFilterVerdict() *NEFilterVerdict {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterVerdict")), objc.RegisterName("new"))
-	return &NEFilterVerdict{inner: raw.NEFilterVerdictFromID(_id)}
-}
-
-// A Boolean value that indicates whether to send a report to the control provider when processing this verdict.
-//
-// WithShouldReport sets the shouldReport property and returns the receiver for chaining.
-func (x *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {
-	x.inner.SetShouldReport(shouldReport)
+	x := &NEFilterVerdict{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// ShouldReport calls the underlying ShouldReport.
+// nEFilterVerdictAdopt wraps an Objective-C object that this code just created as a
+// NEFilterVerdict (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterVerdictAdopt(id objc.ID) *NEFilterVerdict {
+	if id == 0 {
+		return nil
+	}
+	x := &NEFilterVerdict{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEFilterVerdict) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterVerdict) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterVerdict) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEFilterVerdict) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithShouldReport a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
+func (x *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
+	return x
+}
+
+// ShouldReport wraps the corresponding Objective-C method.
 func (x *NEFilterVerdict) ShouldReport() bool {
-	return x.inner.ShouldReport()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReport"))
+	return _r
 }
 
-// SetShouldReport calls the underlying SetShouldReport.
+// SetShouldReport wraps the corresponding Objective-C method.
 func (x *NEFilterVerdict) SetShouldReport(shouldReport bool) {
-	x.inner.SetShouldReport(shouldReport)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
 }
-
-func (x *NEFilterVerdict) asNEFilterVerdict() *raw.NEFilterVerdict { return x.inner }
 
 // NEFilterVerdictable is the interface implemented by [NEFilterVerdict], for mocking and DI.
 type NEFilterVerdictable interface {
-	Unwrap() *raw.NEFilterVerdict
+	obj.Object
 	WithShouldReport(shouldReport bool) *NEFilterVerdict
 	ShouldReport() bool
 	SetShouldReport(shouldReport bool)
 }
 
 var _ NEFilterVerdictable = (*NEFilterVerdict)(nil)
+
+// isNEFilterVerdict marks NEFilterVerdict — and, by embedding promotion, its
+// subclasses — as a member of the NEFilterVerdict hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEFilterVerdict) isNEFilterVerdict() {}
+
+var _ NEFilterVerdictProvider = (*NEFilterVerdict)(nil)

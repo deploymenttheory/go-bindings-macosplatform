@@ -5,130 +5,117 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An image-analysis request that uses a Core ML model to process images.
+// CoreMLRequest is an idiomatic wrapper over the Objective-C class VNCoreMLRequest.
 //
-// CoreMLRequest wraps [raw.VNCoreMLRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-analysis request that uses a Core ML model to process images.
 type CoreMLRequest struct {
-	inner *raw.VNCoreMLRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNCoreMLRequest].
-func (x *CoreMLRequest) Unwrap() *raw.VNCoreMLRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoreMLRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// CoreMLRequestFromID adopts an existing object pointer as a CoreMLRequest (nil for 0).
+// CoreMLRequestFromID adopts an existing Objective-C object as a CoreMLRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func CoreMLRequestFromID(id objc.ID) *CoreMLRequest {
 	if id == 0 {
 		return nil
 	}
-	return &CoreMLRequest{inner: raw.VNCoreMLRequestFromID(id)}
-}
-
-// Creates a model container to use with an image analysis request based on the model you provide.
-//
-// NewCoreMLRequestWithModel creates a new [CoreMLRequest].
-func NewCoreMLRequestWithModel(model *raw.VNCoreMLModel) *CoreMLRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCoreMLRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:"), model.Ptr())
-	return &CoreMLRequest{inner: raw.VNCoreMLRequestFromID(_id)}
-}
-
-// Creates a model container to use with an image analysis request based on the model you provide, with an optional completion handler.
-//
-// NewCoreMLRequestWithModelCompletionHandler creates a new [CoreMLRequest].
-func NewCoreMLRequestWithModelCompletionHandler(model *raw.VNCoreMLModel, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *CoreMLRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNCoreMLRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:completionHandler:"), model.Ptr(), completionHandler)
-	return &CoreMLRequest{inner: raw.VNCoreMLRequestFromID(_id)}
-}
-
-// An optional setting that tells the Vision algorithm how to scale an input image.
-//
-// WithImageCropAndScaleOption sets the imageCropAndScaleOption property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *CoreMLRequest {
-	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
+	x := &CoreMLRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
-	return x
-}
-
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
-	return x
-}
-
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
-	return x
-}
-
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithRevision(revision uint) *CoreMLRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
-	return x
-}
-
-// @brief The model from CoreML wrapped in a VNCoreMLModel.
-//
-// Model calls the underlying Model.
-func (x *CoreMLRequest) Model() *CoreMLModel {
-	_r := x.inner.Model()
-	if _r == nil {
+// coreMLRequestAdopt wraps an Objective-C object that this code just created as a
+// CoreMLRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coreMLRequestAdopt(id objc.ID) *CoreMLRequest {
+	if id == 0 {
 		return nil
 	}
-	return &CoreMLModel{inner: _r}
+	x := &CoreMLRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
-func (x *CoreMLRequest) ImageCropAndScaleOption() VNImageCropAndScaleOption {
-	return VNImageCropAndScaleOption(x.inner.ImageCropAndScaleOption())
+// NewCoreMLRequestWithModel creates a model container to use with an image analysis request based on the model you provide.
+func NewCoreMLRequestWithModel(model *CoreMLModel) *CoreMLRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCoreMLRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:"), objref.IDOf(model))
+	return coreMLRequestAdopt(_id)
 }
 
-// SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
-func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
-	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
+// WithImageCropAndScaleOption an optional setting that tells the Vision algorithm how to scale an input image.
+func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
+	return x
 }
 
-func (x *CoreMLRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
+func (x *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return x
 }
 
-func (x *CoreMLRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
+func (x *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (x *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return x
+}
+
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *CoreMLRequest) WithRevision(revision int) *CoreMLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
+	return x
+}
+
+// Model the model from CoreML wrapped in a VNCoreMLModel.
+func (x *CoreMLRequest) Model() *CoreMLModel {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+	return CoreMLModelFromID(_r)
+}
+
+// ImageCropAndScaleOption wraps the corresponding Objective-C method.
+func (x *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
+	return _r
+}
+
+// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
+func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
+}
 
 // CoreMLRequestable is the interface implemented by [CoreMLRequest], for mocking and DI.
 type CoreMLRequestable interface {
-	Unwrap() *raw.VNCoreMLRequest
-	WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *CoreMLRequest
+	obj.Object
+	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *CoreMLRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest
-	WithRevision(revision uint) *CoreMLRequest
+	WithRevision(revision int) *CoreMLRequest
 	Model() *CoreMLModel
-	ImageCropAndScaleOption() VNImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption)
+	ImageCropAndScaleOption() ImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption)
 }
 
 var _ CoreMLRequestable = (*CoreMLRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*CoreMLRequest)(nil)
+
+var _ RequestProvider = (*CoreMLRequest)(nil)

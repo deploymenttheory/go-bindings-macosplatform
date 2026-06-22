@@ -5,102 +5,132 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that provides formatted address strings.
+// AddressRepresentations is an idiomatic wrapper over the Objective-C class MKAddressRepresentations.
 //
-// AddressRepresentations wraps [raw.MKAddressRepresentations] with a fluent Go API.
+// A class that provides formatted address strings.
 type AddressRepresentations struct {
-	inner *raw.MKAddressRepresentations
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKAddressRepresentations].
-func (x *AddressRepresentations) Unwrap() *raw.MKAddressRepresentations { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddressRepresentations) ID() objc.ID { return x.inner.Ptr() }
-
-// AddressRepresentationsFromID adopts an existing object pointer as a AddressRepresentations (nil for 0).
+// AddressRepresentationsFromID adopts an existing Objective-C object as a AddressRepresentations
+// (nil for 0), retaining it and registering a release finalizer.
 func AddressRepresentationsFromID(id objc.ID) *AddressRepresentations {
 	if id == 0 {
 		return nil
 	}
-	return &AddressRepresentations{inner: raw.MKAddressRepresentationsFromID(id)}
+	x := &AddressRepresentations{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAddressRepresentations creates a new [AddressRepresentations].
+// addressRepresentationsAdopt wraps an Objective-C object that this code just created as a
+// AddressRepresentations (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addressRepresentationsAdopt(id objc.ID) *AddressRepresentations {
+	if id == 0 {
+		return nil
+	}
+	x := &AddressRepresentations{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddressRepresentations) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddressRepresentations) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddressRepresentations) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AddressRepresentations) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAddressRepresentations creates a new AddressRepresentations.
 func NewAddressRepresentations() *AddressRepresentations {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressRepresentations")), objc.RegisterName("new"))
-	return &AddressRepresentations{inner: raw.MKAddressRepresentationsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKAddressRepresentations")), objc.RegisterName("new"))
+	return addressRepresentationsAdopt(_id)
 }
 
-// Returns the the location’s full address, optionally including the country or on a single link without line breaks.
-//
-// FullAddressIncludingRegionSingleLine calls the underlying FullAddressIncludingRegionSingleLine.
+// FullAddressIncludingRegionSingleLine returns the the location’s full address, optionally including the country or on a single link without line breaks.
 func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
-	_r := x.inner.FullAddressIncludingRegionSingleLine(includingRegion, singleLine)
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullAddressIncludingRegion:singleLine:"), includingRegion, singleLine)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The city name and, optionally and if applicable, state and region to provide additional disambiguating context.
-//
-// CityWithContextUsingStyle calls the underlying CityWithContextUsingStyle.
-func (x *AddressRepresentations) CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) string {
-	_r := x.inner.CityWithContextUsingStyle(raw.MKAddressRepresentationsContextStyle(style))
-	if _r == nil {
+// CityWithContextUsingStyle the city name and, optionally and if applicable, state and region to provide additional disambiguating context.
+func (x *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContextUsingStyle:"), style)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CityName calls the underlying CityName.
+// CityName wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) CityName() string {
-	_r := x.inner.CityName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CityWithContext calls the underlying CityWithContext.
+// CityWithContext wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) CityWithContext() string {
-	_r := x.inner.CityWithContext()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cityWithContext"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RegionName calls the underlying RegionName.
+// RegionName wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) RegionName() string {
-	_r := x.inner.RegionName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RegionCode calls the underlying RegionCode.
+// RegionCode wraps the corresponding Objective-C method.
 func (x *AddressRepresentations) RegionCode() string {
-	_r := x.inner.RegionCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AddressRepresentationsable is the interface implemented by [AddressRepresentations], for mocking and DI.
 type AddressRepresentationsable interface {
-	Unwrap() *raw.MKAddressRepresentations
+	obj.Object
 	FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string
-	CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) string
+	CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string
 	CityName() string
 	CityWithContext() string
 	RegionName() string

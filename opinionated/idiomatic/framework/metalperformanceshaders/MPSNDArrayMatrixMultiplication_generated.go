@@ -5,122 +5,90 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayMatrixMultiplication wraps [raw.MPSNDArrayMatrixMultiplication] with a fluent Go API.
+// NDArrayMatrixMultiplication is an idiomatic wrapper over the Objective-C class MPSNDArrayMatrixMultiplication.
+//
+// NDArrayMatrixMultiplication is an abstract base — you do not construct it directly. Construct one of [NDArrayQuantizedMatrixMultiplication] and pass it where a NDArrayMatrixMultiplication is accepted.
 type NDArrayMatrixMultiplication struct {
-	inner *raw.MPSNDArrayMatrixMultiplication
+	NDArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayMatrixMultiplication].
-func (x *NDArrayMatrixMultiplication) Unwrap() *raw.MPSNDArrayMatrixMultiplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayMatrixMultiplication) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayMatrixMultiplicationFromID adopts an existing object pointer as a NDArrayMatrixMultiplication (nil for 0).
+// NDArrayMatrixMultiplicationFromID adopts an existing Objective-C object as a NDArrayMatrixMultiplication
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayMatrixMultiplicationFromID(id objc.ID) *NDArrayMatrixMultiplication {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayMatrixMultiplication{inner: raw.MPSNDArrayMatrixMultiplicationFromID(id)}
+	x := &NDArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayMatrixMultiplication creates a new [NDArrayMatrixMultiplication].
-func NewNDArrayMatrixMultiplication() *NDArrayMatrixMultiplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMatrixMultiplication")), objc.RegisterName("new"))
-	return &NDArrayMatrixMultiplication{inner: raw.MPSNDArrayMatrixMultiplicationFromID(_id)}
+// nDArrayMatrixMultiplicationAdopt wraps an Objective-C object that this code just created as a
+// NDArrayMatrixMultiplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayMatrixMultiplicationAdopt(id objc.ID) *NDArrayMatrixMultiplication {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayMatrixMultiplication{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) WithAlpha(alpha float64) *NDArrayMatrixMultiplication {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMultiplication {
-	x.inner.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMatrixMultiplication {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMatrixMultiplication {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// Alpha calls the underlying Alpha.
+// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *NDArrayMatrixMultiplication) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-//
-// Beta calls the underlying Beta.
+// Beta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (x *NDArrayMatrixMultiplication) Beta() float64 {
-	return x.inner.Beta()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta"))
+	return _r
 }
 
-// SetBeta calls the underlying SetBeta.
+// SetBeta wraps the corresponding Objective-C method.
 func (x *NDArrayMatrixMultiplication) SetBeta(beta float64) {
-	x.inner.SetBeta(beta)
-}
-
-func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayMatrixMultiplication) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
 
 // NDArrayMatrixMultiplicationable is the interface implemented by [NDArrayMatrixMultiplication], for mocking and DI.
 type NDArrayMatrixMultiplicationable interface {
-	Unwrap() *raw.MPSNDArrayMatrixMultiplication
+	obj.Object
 	WithAlpha(alpha float64) *NDArrayMatrixMultiplication
 	WithBeta(beta float64) *NDArrayMatrixMultiplication
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMatrixMultiplication
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMatrixMultiplication
 	WithLabel(label string) *NDArrayMatrixMultiplication
 	Alpha() float64
 	SetAlpha(alpha float64)
@@ -129,3 +97,16 @@ type NDArrayMatrixMultiplicationable interface {
 }
 
 var _ NDArrayMatrixMultiplicationable = (*NDArrayMatrixMultiplication)(nil)
+
+// isNDArrayMatrixMultiplication marks NDArrayMatrixMultiplication — and, by embedding promotion, its
+// subclasses — as a member of the NDArrayMatrixMultiplication hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NDArrayMatrixMultiplication) isNDArrayMatrixMultiplication() {}
+
+var _ NDArrayMatrixMultiplicationProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryKernelProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ NDArrayMultiaryBaseProvider = (*NDArrayMatrixMultiplication)(nil)
+
+var _ KernelProvider = (*NDArrayMatrixMultiplication)(nil)

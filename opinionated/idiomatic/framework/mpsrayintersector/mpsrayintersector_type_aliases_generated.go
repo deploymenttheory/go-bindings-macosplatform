@@ -4,51 +4,35 @@
 
 package mpsrayintersector
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
-)
+// Returned intersection result which contains the distance from the ray origin to the intersection point This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
+type MPSIntersectionDistance struct {
+	Distance float32
+}
 
-// MPSIntersectionDistance is a type alias for the raw MPSIntersectionDistance value-type struct.
-type MPSIntersectionDistance = raw.MPSIntersectionDistance
+// Intersection result which contains the distance from the ray origin to the intersection point and the index of the intersected primitive This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
+type MPSIntersectionDistancePrimitiveIndex struct {
+	Distance       float32
+	PrimitiveIndex uint
+}
 
-// MPSIntersectionDistancePrimitiveIndex is a type alias for the raw MPSIntersectionDistancePrimitiveIndex value-type struct.
-type MPSIntersectionDistancePrimitiveIndex = raw.MPSIntersectionDistancePrimitiveIndex
+// Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, and the polygon buffer index of the intersected primitive. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
+type MPSIntersectionDistancePrimitiveIndexBufferIndex struct {
+	Distance       float32
+	PrimitiveIndex uint
+	BufferIndex    uint
+}
 
-// MPSIntersectionDistancePrimitiveIndexBufferIndex is a type alias for the raw MPSIntersectionDistancePrimitiveIndexBufferIndex value-type struct.
-type MPSIntersectionDistancePrimitiveIndexBufferIndex = raw.MPSIntersectionDistancePrimitiveIndexBufferIndex
+// Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, the polygon buffer index of the intersected primitive, and the index of the intersected instance. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
+type MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex struct {
+	Distance       float32
+	PrimitiveIndex uint
+	BufferIndex    uint
+	InstanceIndex  uint
+}
 
-// MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates is a type alias for the raw MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates value-type struct.
-type MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates = raw.MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates
-
-// MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex is a type alias for the raw MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex value-type struct.
-type MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex = raw.MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex
-
-// MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates is a type alias for the raw MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates value-type struct.
-type MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates = raw.MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates
-
-// MPSIntersectionDistancePrimitiveIndexCoordinates is a type alias for the raw MPSIntersectionDistancePrimitiveIndexCoordinates value-type struct.
-type MPSIntersectionDistancePrimitiveIndexCoordinates = raw.MPSIntersectionDistancePrimitiveIndexCoordinates
-
-// MPSIntersectionDistancePrimitiveIndexInstanceIndex is a type alias for the raw MPSIntersectionDistancePrimitiveIndexInstanceIndex value-type struct.
-type MPSIntersectionDistancePrimitiveIndexInstanceIndex = raw.MPSIntersectionDistancePrimitiveIndexInstanceIndex
-
-// MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates is a type alias for the raw MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates value-type struct.
-type MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates = raw.MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates
-
-// MPSRayOriginDirection is a type alias for the raw MPSRayOriginDirection value-type struct.
-type MPSRayOriginDirection = raw.MPSRayOriginDirection
-
-// MPSRayOriginMaskDirectionMaxDistance is a type alias for the raw MPSRayOriginMaskDirectionMaxDistance value-type struct.
-type MPSRayOriginMaskDirectionMaxDistance = raw.MPSRayOriginMaskDirectionMaxDistance
-
-// MPSRayOriginMinDistanceDirectionMaxDistance is a type alias for the raw MPSRayOriginMinDistanceDirectionMaxDistance value-type struct.
-type MPSRayOriginMinDistanceDirectionMaxDistance = raw.MPSRayOriginMinDistanceDirectionMaxDistance
-
-// MPSRayPackedOriginDirection is a type alias for the raw MPSRayPackedOriginDirection value-type struct.
-type MPSRayPackedOriginDirection = raw.MPSRayPackedOriginDirection
-
-// MPSAxisAlignedBoundingBox is a type alias for the raw MPSAxisAlignedBoundingBox value-type struct.
-type MPSAxisAlignedBoundingBox = raw.MPSAxisAlignedBoundingBox
-
-// MPSPackedFloat3 is a type alias for the raw MPSPackedFloat3 value-type struct.
-type MPSPackedFloat3 = raw.MPSPackedFloat3
+// Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, and the index of the intersected instance. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
+type MPSIntersectionDistancePrimitiveIndexInstanceIndex struct {
+	Distance       float32
+	PrimitiveIndex uint
+	InstanceIndex  uint
+}

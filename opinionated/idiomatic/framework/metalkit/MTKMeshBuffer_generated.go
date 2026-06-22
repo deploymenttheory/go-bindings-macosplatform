@@ -5,95 +5,97 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
+// MeshBuffer is an idiomatic wrapper over the Objective-C class MTKMeshBuffer.
 //
-// MeshBuffer wraps [raw.MTKMeshBuffer] with a fluent Go API.
+// A buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
 type MeshBuffer struct {
-	inner *raw.MTKMeshBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKMeshBuffer].
-func (x *MeshBuffer) Unwrap() *raw.MTKMeshBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferFromID adopts an existing object pointer as a MeshBuffer (nil for 0).
+// MeshBufferFromID adopts an existing Objective-C object as a MeshBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferFromID(id objc.ID) *MeshBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBuffer{inner: raw.MTKMeshBufferFromID(id)}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMeshBuffer creates a new [MeshBuffer].
-func NewMeshBuffer() *MeshBuffer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMeshBuffer")), objc.RegisterName("new"))
-	return &MeshBuffer{inner: raw.MTKMeshBufferFromID(_id)}
-}
-
-// @method length @abstract Size in bytes of the buffer allocation.
-//
-// Length calls the underlying Length.
-func (x *MeshBuffer) Length() uint {
-	return x.inner.Length()
-}
-
-// @property allocator @abstract Allocator object used to create this buffer. @discussion This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
-//
-// Allocator calls the underlying Allocator.
-func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
-	_r := x.inner.Allocator()
-	if _r == nil {
+// meshBufferAdopt wraps an Objective-C object that this code just created as a
+// MeshBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferAdopt(id objc.ID) *MeshBuffer {
+	if id == 0 {
 		return nil
 	}
-	return &MeshBufferAllocator{inner: _r}
+	x := &MeshBuffer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property zone @abstract Zone from which this buffer was created (if it was created from a zone). @discussion A single MetalBuffer is allocated for each zone.  Each zone could have many MTKMeshBuffers, each with it's own offset.  If a MTKMeshBufferAllocator is used, Model I/O will attempt to load all vertex and index data of a single mesh into a single zone.  This allows the GPU to achieve a higher cache hit rate when drawing the mesh.  So although there maybe many MTKMeshBuffers for a model they will be backed with the same contigous MetalBuffer.
-//
-// Zone calls the underlying Zone.
-func (x *MeshBuffer) Zone() modelio.MDLMeshBufferZone {
-	return x.inner.Zone()
+// Description returns the object's -description text.
+func (x *MeshBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property buffer @abstract Metal Buffer backing vertex/index data. @discussion Many MTKMeshBuffers may reference the same buffer, but each with it's own offset.  (i.e. Many MTKMeshBuffers may be suballocated from a single buffer)
-//
-// Buffer calls the underlying Buffer.
-func (x *MeshBuffer) Buffer() metal.MTLBuffer {
-	return x.inner.Buffer()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property offset @abstract Byte offset of the data within the metal buffer.
-//
-// Offset calls the underlying Offset.
-func (x *MeshBuffer) Offset() uint {
-	return x.inner.Offset()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property type @abstract the intended type of the buffer
-//
-// Type calls the underlying Type.
-func (x *MeshBuffer) Type() modelio.MDLMeshBufferType {
-	return x.inner.Type()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MeshBuffer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMeshBuffer creates a new MeshBuffer.
+func NewMeshBuffer() *MeshBuffer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTKMeshBuffer")), objc.RegisterName("new"))
+	return meshBufferAdopt(_id)
+}
+
+// Length size in bytes of the buffer allocation.
+func (x *MeshBuffer) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
+}
+
+// Allocator allocator object used to create this buffer. This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
+func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allocator"))
+	return MeshBufferAllocatorFromID(_r)
+}
+
+// Offset byte offset of the data within the metal buffer.
+func (x *MeshBuffer) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
 // MeshBufferable is the interface implemented by [MeshBuffer], for mocking and DI.
 type MeshBufferable interface {
-	Unwrap() *raw.MTKMeshBuffer
-	Length() uint
+	obj.Object
+	Length() int
 	Allocator() *MeshBufferAllocator
-	Zone() modelio.MDLMeshBufferZone
-	Buffer() metal.MTLBuffer
-	Offset() uint
-	Type() modelio.MDLMeshBufferType
+	Offset() int
 }
 
 var _ MeshBufferable = (*MeshBuffer)(nil)

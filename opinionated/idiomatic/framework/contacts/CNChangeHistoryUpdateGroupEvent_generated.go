@@ -5,55 +5,65 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an updated group event.
+// ChangeHistoryUpdateGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryUpdateGroupEvent.
 //
-// ChangeHistoryUpdateGroupEvent wraps [raw.CNChangeHistoryUpdateGroupEvent] with a fluent Go API.
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents an updated group event.
 type ChangeHistoryUpdateGroupEvent struct {
-	inner *raw.CNChangeHistoryUpdateGroupEvent
+	ChangeHistoryEvent
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryUpdateGroupEvent].
-func (x *ChangeHistoryUpdateGroupEvent) Unwrap() *raw.CNChangeHistoryUpdateGroupEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryUpdateGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryUpdateGroupEventFromID adopts an existing object pointer as a ChangeHistoryUpdateGroupEvent (nil for 0).
+// ChangeHistoryUpdateGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryUpdateGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryUpdateGroupEventFromID(id objc.ID) *ChangeHistoryUpdateGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryUpdateGroupEvent{inner: raw.CNChangeHistoryUpdateGroupEventFromID(id)}
+	x := &ChangeHistoryUpdateGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryUpdateGroupEvent creates a new [ChangeHistoryUpdateGroupEvent].
-func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryUpdateGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryUpdateGroupEvent{inner: raw.CNChangeHistoryUpdateGroupEventFromID(_id)}
-}
-
-// Group calls the underlying Group.
-func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
-	_r := x.inner.Group()
-	if _r == nil {
+// changeHistoryUpdateGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryUpdateGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryUpdateGroupEventAdopt(id objc.ID) *ChangeHistoryUpdateGroupEvent {
+	if id == 0 {
 		return nil
 	}
-	return &Group{inner: _r}
+	x := &ChangeHistoryUpdateGroupEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ChangeHistoryUpdateGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+// NewChangeHistoryUpdateGroupEvent creates a new ChangeHistoryUpdateGroupEvent.
+func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryUpdateGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryUpdateGroupEventAdopt(_id)
+}
+
+// Group wraps the corresponding Objective-C method.
+func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return GroupFromID(_r)
 }
 
 // ChangeHistoryUpdateGroupEventable is the interface implemented by [ChangeHistoryUpdateGroupEvent], for mocking and DI.
 type ChangeHistoryUpdateGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryUpdateGroupEvent
+	obj.Object
 	Group() *Group
 }
 
 var _ ChangeHistoryUpdateGroupEventable = (*ChangeHistoryUpdateGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryUpdateGroupEvent)(nil)

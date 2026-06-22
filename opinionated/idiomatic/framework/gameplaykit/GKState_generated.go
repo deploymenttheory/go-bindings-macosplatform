@@ -5,84 +5,100 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for defining state-specific logic as part of a state machine.
+// State is an idiomatic wrapper over the Objective-C class GKState.
 //
-// State wraps [raw.GKState] with a fluent Go API.
+// The abstract superclass for defining state-specific logic as part of a state machine.
 type State struct {
-	inner *raw.GKState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKState].
-func (x *State) Unwrap() *raw.GKState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *State) ID() objc.ID { return x.inner.Ptr() }
-
-// StateFromID adopts an existing object pointer as a State (nil for 0).
+// StateFromID adopts an existing Objective-C object as a State
+// (nil for 0), retaining it and registering a release finalizer.
 func StateFromID(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	return &State{inner: raw.GKStateFromID(id)}
+	x := &State{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewState creates a new [State].
-func NewState() *State {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKState")), objc.RegisterName("new"))
-	return &State{inner: raw.GKStateFromID(_id)}
-}
-
-// Returns a Boolean value indicating whether a state machine currently in this state is allowed to transition into the specified state.
-//
-// IsValidNextState calls the underlying IsValidNextState.
-func (x *State) IsValidNextState(stateClass objc.Class) bool {
-	return x.inner.IsValidNextState(stateClass)
-}
-
-// Performs custom actions when a state machine transitions into this state.
-//
-// DidEnterWithPreviousState calls the underlying DidEnterWithPreviousState.
-func (x *State) DidEnterWithPreviousState(previousState *raw.GKState) {
-	x.inner.DidEnterWithPreviousState(previousState)
-}
-
-// Performs custom actions when a state machine updates while in this state.
-//
-// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
-func (x *State) UpdateWithDeltaTime(seconds float64) {
-	x.inner.UpdateWithDeltaTime(seconds)
-}
-
-// Performs custom actions when a state machine transitions out of this state.
-//
-// WillExitWithNextState calls the underlying WillExitWithNextState.
-func (x *State) WillExitWithNextState(nextState *raw.GKState) {
-	x.inner.WillExitWithNextState(nextState)
-}
-
-// The state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
-//
-// StateMachine calls the underlying StateMachine.
-func (x *State) StateMachine() *StateMachine {
-	_r := x.inner.StateMachine()
-	if _r == nil {
+// stateAdopt wraps an Objective-C object that this code just created as a
+// State (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateAdopt(id objc.ID) *State {
+	if id == 0 {
 		return nil
 	}
-	return &StateMachine{inner: _r}
+	x := &State{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *State) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *State) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *State) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *State) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewState creates a new State.
+func NewState() *State {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKState")), objc.RegisterName("new"))
+	return stateAdopt(_id)
+}
+
+// DidEnterWithPreviousState performs custom actions when a state machine transitions into this state.
+func (x *State) DidEnterWithPreviousState(previousState *State) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didEnterWithPreviousState:"), objref.IDOf(previousState))
+}
+
+// UpdateWithDeltaTime performs custom actions when a state machine updates while in this state.
+func (x *State) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+}
+
+// WillExitWithNextState performs custom actions when a state machine transitions out of this state.
+func (x *State) WillExitWithNextState(nextState *State) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willExitWithNextState:"), objref.IDOf(nextState))
+}
+
+// StateMachine the state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
+func (x *State) StateMachine() *StateMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateMachine"))
+	return StateMachineFromID(_r)
 }
 
 // Stateable is the interface implemented by [State], for mocking and DI.
 type Stateable interface {
-	Unwrap() *raw.GKState
-	IsValidNextState(stateClass objc.Class) bool
-	DidEnterWithPreviousState(previousState *raw.GKState)
+	obj.Object
+	DidEnterWithPreviousState(previousState *State)
 	UpdateWithDeltaTime(seconds float64)
-	WillExitWithNextState(nextState *raw.GKState)
+	WillExitWithNextState(nextState *State)
 	StateMachine() *StateMachine
 }
 

@@ -5,51 +5,84 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The user’s preference for receiving notifications.
+// FocusStatus is an idiomatic wrapper over the Objective-C class INFocusStatus.
 //
-// FocusStatus wraps [raw.INFocusStatus] with a fluent Go API.
+// The user’s preference for receiving notifications.
 type FocusStatus struct {
-	inner *raw.INFocusStatus
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INFocusStatus].
-func (x *FocusStatus) Unwrap() *raw.INFocusStatus { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FocusStatus) ID() objc.ID { return x.inner.Ptr() }
-
-// FocusStatusFromID adopts an existing object pointer as a FocusStatus (nil for 0).
+// FocusStatusFromID adopts an existing Objective-C object as a FocusStatus
+// (nil for 0), retaining it and registering a release finalizer.
 func FocusStatusFromID(id objc.ID) *FocusStatus {
 	if id == 0 {
 		return nil
 	}
-	return &FocusStatus{inner: raw.INFocusStatusFromID(id)}
+	x := &FocusStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that indicates the user’s ability to receive communication notifications.
-//
-// NewFocusStatusWithIsFocused creates a new [FocusStatus].
-func NewFocusStatusWithIsFocused(isFocused *foundation.NSNumber) *FocusStatus {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INFocusStatus")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIsFocused:"), isFocused.Ptr())
-	return &FocusStatus{inner: raw.INFocusStatusFromID(_id)}
+// focusStatusAdopt wraps an Objective-C object that this code just created as a
+// FocusStatus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func focusStatusAdopt(id objc.ID) *FocusStatus {
+	if id == 0 {
+		return nil
+	}
+	x := &FocusStatus{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// IsFocused calls the underlying IsFocused.
-func (x *FocusStatus) IsFocused() *foundation.NSNumber {
-	return x.inner.IsFocused()
+// Description returns the object's -description text.
+func (x *FocusStatus) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FocusStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FocusStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FocusStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFocusStatusWithIsFocused creates an object that indicates the user’s ability to receive communication notifications.
+func NewFocusStatusWithIsFocused(isFocused obj.Object) *FocusStatus {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INFocusStatus")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIsFocused:"), objref.IDOf(isFocused))
+	return focusStatusAdopt(_id)
+}
+
+// IsFocused wraps the corresponding Objective-C method.
+func (x *FocusStatus) IsFocused() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isFocused"))
+	return obj.Wrap(_r)
 }
 
 // FocusStatusable is the interface implemented by [FocusStatus], for mocking and DI.
 type FocusStatusable interface {
-	Unwrap() *raw.INFocusStatus
-	IsFocused() *foundation.NSNumber
+	obj.Object
+	IsFocused() obj.Object
 }
 
 var _ FocusStatusable = (*FocusStatus)(nil)

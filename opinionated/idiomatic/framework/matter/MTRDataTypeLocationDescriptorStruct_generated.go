@@ -5,104 +5,137 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDataTypeLocationDescriptorStruct wraps [raw.MTRDataTypeLocationDescriptorStruct] with a fluent Go API.
+// MTRDataTypeLocationDescriptorStruct is an idiomatic wrapper over the Objective-C class MTRDataTypeLocationDescriptorStruct.
 type MTRDataTypeLocationDescriptorStruct struct {
-	inner *raw.MTRDataTypeLocationDescriptorStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDataTypeLocationDescriptorStruct].
-func (x *MTRDataTypeLocationDescriptorStruct) Unwrap() *raw.MTRDataTypeLocationDescriptorStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDataTypeLocationDescriptorStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDataTypeLocationDescriptorStructFromID adopts an existing object pointer as a MTRDataTypeLocationDescriptorStruct (nil for 0).
+// MTRDataTypeLocationDescriptorStructFromID adopts an existing Objective-C object as a MTRDataTypeLocationDescriptorStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDataTypeLocationDescriptorStructFromID(id objc.ID) *MTRDataTypeLocationDescriptorStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDataTypeLocationDescriptorStruct{inner: raw.MTRDataTypeLocationDescriptorStructFromID(id)}
+	x := &MTRDataTypeLocationDescriptorStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDataTypeLocationDescriptorStruct creates a new [MTRDataTypeLocationDescriptorStruct].
+// mTRDataTypeLocationDescriptorStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDataTypeLocationDescriptorStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDataTypeLocationDescriptorStructAdopt(id objc.ID) *MTRDataTypeLocationDescriptorStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDataTypeLocationDescriptorStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDataTypeLocationDescriptorStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDataTypeLocationDescriptorStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDataTypeLocationDescriptorStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDataTypeLocationDescriptorStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDataTypeLocationDescriptorStruct creates a new MTRDataTypeLocationDescriptorStruct.
 func NewMTRDataTypeLocationDescriptorStruct() *MTRDataTypeLocationDescriptorStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDataTypeLocationDescriptorStruct")), objc.RegisterName("new"))
-	return &MTRDataTypeLocationDescriptorStruct{inner: raw.MTRDataTypeLocationDescriptorStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDataTypeLocationDescriptorStruct")), objc.RegisterName("new"))
+	return mTRDataTypeLocationDescriptorStructAdopt(_id)
 }
 
-// WithLocationName sets the locationName property and returns the receiver for chaining.
+// WithLocationName sets the property and returns the receiver so calls can be chained.
 func (x *MTRDataTypeLocationDescriptorStruct) WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct {
-	x.inner.SetLocationName(foundation.NSStringStringWithUTF8String(locationName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
 	return x
 }
 
-// WithFloorNumber sets the floorNumber property and returns the receiver for chaining.
-func (x *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct {
-	x.inner.SetFloorNumber(floorNumber)
+// WithFloorNumber sets the property and returns the receiver so calls can be chained.
+func (x *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 	return x
 }
 
-// WithAreaType sets the areaType property and returns the receiver for chaining.
-func (x *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct {
-	x.inner.SetAreaType(areaType)
+// WithAreaType sets the property and returns the receiver so calls can be chained.
+func (x *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
 	return x
 }
 
-// LocationName calls the underlying LocationName.
+// LocationName wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) LocationName() string {
-	_r := x.inner.LocationName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocationName calls the underlying SetLocationName.
+// SetLocationName wraps the corresponding Objective-C method.
 func (x *MTRDataTypeLocationDescriptorStruct) SetLocationName(locationName string) {
-	x.inner.SetLocationName(foundation.NSStringStringWithUTF8String(locationName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
 }
 
-// FloorNumber calls the underlying FloorNumber.
-func (x *MTRDataTypeLocationDescriptorStruct) FloorNumber() *foundation.NSNumber {
-	return x.inner.FloorNumber()
+// FloorNumber wraps the corresponding Objective-C method.
+func (x *MTRDataTypeLocationDescriptorStruct) FloorNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorNumber"))
+	return obj.Wrap(_r)
 }
 
-// SetFloorNumber calls the underlying SetFloorNumber.
-func (x *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber *foundation.NSNumber) {
-	x.inner.SetFloorNumber(floorNumber)
+// SetFloorNumber wraps the corresponding Objective-C method.
+func (x *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 }
 
-// AreaType calls the underlying AreaType.
-func (x *MTRDataTypeLocationDescriptorStruct) AreaType() *foundation.NSNumber {
-	return x.inner.AreaType()
+// AreaType wraps the corresponding Objective-C method.
+func (x *MTRDataTypeLocationDescriptorStruct) AreaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaType"))
+	return obj.Wrap(_r)
 }
 
-// SetAreaType calls the underlying SetAreaType.
-func (x *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType *foundation.NSNumber) {
-	x.inner.SetAreaType(areaType)
+// SetAreaType wraps the corresponding Objective-C method.
+func (x *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
 }
 
 // MTRDataTypeLocationDescriptorStructable is the interface implemented by [MTRDataTypeLocationDescriptorStruct], for mocking and DI.
 type MTRDataTypeLocationDescriptorStructable interface {
-	Unwrap() *raw.MTRDataTypeLocationDescriptorStruct
+	obj.Object
 	WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct
-	WithFloorNumber(floorNumber *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct
-	WithAreaType(areaType *foundation.NSNumber) *MTRDataTypeLocationDescriptorStruct
+	WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct
+	WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct
 	LocationName() string
 	SetLocationName(locationName string)
-	FloorNumber() *foundation.NSNumber
-	SetFloorNumber(floorNumber *foundation.NSNumber)
-	AreaType() *foundation.NSNumber
-	SetAreaType(areaType *foundation.NSNumber)
+	FloorNumber() obj.Object
+	SetFloorNumber(floorNumber obj.Object)
+	AreaType() obj.Object
+	SetAreaType(areaType obj.Object)
 }
 
 var _ MTRDataTypeLocationDescriptorStructable = (*MTRDataTypeLocationDescriptorStruct)(nil)

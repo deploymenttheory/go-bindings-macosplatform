@@ -5,66 +5,100 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPowerSourceClusterWiredFaultChangeType wraps [raw.MTRPowerSourceClusterWiredFaultChangeType] with a fluent Go API.
+// MTRPowerSourceClusterWiredFaultChangeType is an idiomatic wrapper over the Objective-C class MTRPowerSourceClusterWiredFaultChangeType.
 type MTRPowerSourceClusterWiredFaultChangeType struct {
-	inner *raw.MTRPowerSourceClusterWiredFaultChangeType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPowerSourceClusterWiredFaultChangeType].
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Unwrap() *raw.MTRPowerSourceClusterWiredFaultChangeType {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPowerSourceClusterWiredFaultChangeTypeFromID adopts an existing object pointer as a MTRPowerSourceClusterWiredFaultChangeType (nil for 0).
+// MTRPowerSourceClusterWiredFaultChangeTypeFromID adopts an existing Objective-C object as a MTRPowerSourceClusterWiredFaultChangeType
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPowerSourceClusterWiredFaultChangeTypeFromID(id objc.ID) *MTRPowerSourceClusterWiredFaultChangeType {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPowerSourceClusterWiredFaultChangeType{inner: raw.MTRPowerSourceClusterWiredFaultChangeTypeFromID(id)}
+	x := &MTRPowerSourceClusterWiredFaultChangeType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPowerSourceClusterWiredFaultChangeType creates a new [MTRPowerSourceClusterWiredFaultChangeType].
+// mTRPowerSourceClusterWiredFaultChangeTypeAdopt wraps an Objective-C object that this code just created as a
+// MTRPowerSourceClusterWiredFaultChangeType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPowerSourceClusterWiredFaultChangeTypeAdopt(id objc.ID) *MTRPowerSourceClusterWiredFaultChangeType {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPowerSourceClusterWiredFaultChangeType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRPowerSourceClusterWiredFaultChangeType creates a new MTRPowerSourceClusterWiredFaultChangeType.
 func NewMTRPowerSourceClusterWiredFaultChangeType() *MTRPowerSourceClusterWiredFaultChangeType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPowerSourceClusterWiredFaultChangeType")), objc.RegisterName("new"))
-	return &MTRPowerSourceClusterWiredFaultChangeType{inner: raw.MTRPowerSourceClusterWiredFaultChangeTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPowerSourceClusterWiredFaultChangeType")), objc.RegisterName("new"))
+	return mTRPowerSourceClusterWiredFaultChangeTypeAdopt(_id)
 }
 
-// Current calls the underlying Current.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Current() *foundation.NSArray[objc.ID] {
-	return x.inner.Current()
+// Current wraps the corresponding Objective-C method.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+	return obj.Wrap(_r)
 }
 
-// SetCurrent calls the underlying SetCurrent.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	x.inner.SetCurrent(current)
+// SetCurrent wraps the corresponding Objective-C method.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous calls the underlying Previous.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) Previous() *foundation.NSArray[objc.ID] {
-	return x.inner.Previous()
+// Previous wraps the corresponding Objective-C method.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+	return obj.Wrap(_r)
 }
 
-// SetPrevious calls the underlying SetPrevious.
-func (x *MTRPowerSourceClusterWiredFaultChangeType) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	x.inner.SetPrevious(previous)
+// SetPrevious wraps the corresponding Objective-C method.
+func (x *MTRPowerSourceClusterWiredFaultChangeType) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
 
 // MTRPowerSourceClusterWiredFaultChangeTypeable is the interface implemented by [MTRPowerSourceClusterWiredFaultChangeType], for mocking and DI.
 type MTRPowerSourceClusterWiredFaultChangeTypeable interface {
-	Unwrap() *raw.MTRPowerSourceClusterWiredFaultChangeType
-	Current() *foundation.NSArray[objc.ID]
-	SetCurrent(current *foundation.NSArray[objc.ID])
-	Previous() *foundation.NSArray[objc.ID]
-	SetPrevious(previous *foundation.NSArray[objc.ID])
+	obj.Object
+	Current() obj.Object
+	SetCurrent(current obj.Object)
+	Previous() obj.Object
+	SetPrevious(previous obj.Object)
 }
 
 var _ MTRPowerSourceClusterWiredFaultChangeTypeable = (*MTRPowerSourceClusterWiredFaultChangeType)(nil)

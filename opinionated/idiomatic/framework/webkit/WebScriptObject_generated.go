@@ -5,123 +5,142 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javascriptcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A WebScriptObject object is an Objective-C wrapper for a scripting object passed to your application from the scripting environment.
+// WebScriptObject is an idiomatic wrapper over the Objective-C class WebScriptObject.
 //
-// WebScriptObject wraps [raw.WebScriptObject] with a fluent Go API.
+// WebScriptObject is an abstract base — you do not construct it directly. Construct one of [DOMObject] and pass it where a WebScriptObject is accepted.
+//
+// A WebScriptObject object is an Objective-C wrapper for a scripting object passed to your application from the scripting environment.
 type WebScriptObject struct {
-	inner *raw.WebScriptObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebScriptObject].
-func (x *WebScriptObject) Unwrap() *raw.WebScriptObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebScriptObject) ID() objc.ID { return x.inner.Ptr() }
-
-// WebScriptObjectFromID adopts an existing object pointer as a WebScriptObject (nil for 0).
+// WebScriptObjectFromID adopts an existing Objective-C object as a WebScriptObject
+// (nil for 0), retaining it and registering a release finalizer.
 func WebScriptObjectFromID(id objc.ID) *WebScriptObject {
 	if id == 0 {
 		return nil
 	}
-	return &WebScriptObject{inner: raw.WebScriptObjectFromID(id)}
+	x := &WebScriptObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWebScriptObject creates a new [WebScriptObject].
-func NewWebScriptObject() *WebScriptObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WebScriptObject")), objc.RegisterName("new"))
-	return &WebScriptObject{inner: raw.WebScriptObjectFromID(_id)}
+// webScriptObjectAdopt wraps an Objective-C object that this code just created as a
+// WebScriptObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webScriptObjectAdopt(id objc.ID) *WebScriptObject {
+	if id == 0 {
+		return nil
+	}
+	x := &WebScriptObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns the JavaScript object corresponding to the receiver.
-//
-// JSObject calls the underlying JSObject.
-func (x *WebScriptObject) JSObject() unsafe.Pointer {
-	return x.inner.JSObject()
+// Description returns the object's -description text.
+func (x *WebScriptObject) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the result of executing a method in the scripting environment.
-//
-// CallWebScriptMethodWithArguments calls the underlying CallWebScriptMethodWithArguments.
-func (x *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments *foundation.NSArray[objc.ID]) objc.ID {
-	return x.inner.CallWebScriptMethodWithArguments(foundation.NSStringStringWithUTF8String(name), arguments)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebScriptObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns the result of evaluating a script in the scripting environment.
-//
-// EvaluateWebScript calls the underlying EvaluateWebScript.
-func (x *WebScriptObject) EvaluateWebScript(script string) objc.ID {
-	return x.inner.EvaluateWebScript(foundation.NSStringStringWithUTF8String(script))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebScriptObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Removes a property from a scripting environment.
-//
-// RemoveWebScriptKey calls the underlying RemoveWebScriptKey.
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebScriptObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// JSObject returns the JavaScript object corresponding to the receiver.
+func (x *WebScriptObject) JSObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSObject"))
+	return obj.Wrap(_r)
+}
+
+// CallWebScriptMethodWithArguments returns the result of executing a method in the scripting environment.
+func (x *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callWebScriptMethod:withArguments:"), purego.NSString(name), objref.IDOf(arguments))
+	return obj.Wrap(_r)
+}
+
+// EvaluateWebScript returns the result of evaluating a script in the scripting environment.
+func (x *WebScriptObject) EvaluateWebScript(script string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluateWebScript:"), purego.NSString(script))
+	return obj.Wrap(_r)
+}
+
+// RemoveWebScriptKey removes a property from a scripting environment.
 func (x *WebScriptObject) RemoveWebScriptKey(name string) {
-	x.inner.RemoveWebScriptKey(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeWebScriptKey:"), purego.NSString(name))
 }
 
-// Returns a string representation of the receiver.
-//
-// StringRepresentation calls the underlying StringRepresentation.
+// StringRepresentation returns a string representation of the receiver.
 func (x *WebScriptObject) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the value of a property at the specified index.
-//
-// WebScriptValueAtIndex calls the underlying WebScriptValueAtIndex.
-func (x *WebScriptObject) WebScriptValueAtIndex(index uint) objc.ID {
-	return x.inner.WebScriptValueAtIndex(index)
+// WebScriptValueAtIndex returns the value of a property at the specified index.
+func (x *WebScriptObject) WebScriptValueAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webScriptValueAtIndex:"), index)
+	return obj.Wrap(_r)
 }
 
-// Sets the value of a property at the specified index.
-//
-// SetWebScriptValueAtIndexValue calls the underlying SetWebScriptValueAtIndexValue.
-func (x *WebScriptObject) SetWebScriptValueAtIndexValue(index uint, value objc.ID) {
-	x.inner.SetWebScriptValueAtIndexValue(index, value)
+// SetWebScriptValueAtIndexValue sets the value of a property at the specified index.
+func (x *WebScriptObject) SetWebScriptValueAtIndexValue(index int, value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebScriptValueAtIndex:value:"), index, objref.IDOf(value))
 }
 
-// Raises a scripting environment exception in the context of the current object.
-//
-// SetException calls the underlying SetException.
+// SetException raises a scripting environment exception in the context of the current object.
 func (x *WebScriptObject) SetException(description string) {
-	x.inner.SetException(foundation.NSStringStringWithUTF8String(description))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setException:"), purego.NSString(description))
 }
 
-// @method JSValue @result The equivalent Objective-C JSValue for this WebScriptObject. @discussion Use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
-//
-// JSValue calls the underlying JSValue.
-func (x *WebScriptObject) JSValue() *javascriptcore.JSValue {
-	return x.inner.JSValue()
+// JSValue use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
+func (x *WebScriptObject) JSValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSValue"))
+	return obj.Wrap(_r)
 }
-
-func (x *WebScriptObject) asWebScriptObject() *raw.WebScriptObject { return x.inner }
 
 // WebScriptObjectable is the interface implemented by [WebScriptObject], for mocking and DI.
 type WebScriptObjectable interface {
-	Unwrap() *raw.WebScriptObject
-	JSObject() unsafe.Pointer
-	CallWebScriptMethodWithArguments(name string, arguments *foundation.NSArray[objc.ID]) objc.ID
-	EvaluateWebScript(script string) objc.ID
+	obj.Object
+	JSObject() obj.Object
+	CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object
+	EvaluateWebScript(script string) obj.Object
 	RemoveWebScriptKey(name string)
 	StringRepresentation() string
-	WebScriptValueAtIndex(index uint) objc.ID
-	SetWebScriptValueAtIndexValue(index uint, value objc.ID)
+	WebScriptValueAtIndex(index int) obj.Object
+	SetWebScriptValueAtIndexValue(index int, value obj.Object)
 	SetException(description string)
-	JSValue() *javascriptcore.JSValue
+	JSValue() obj.Object
 }
 
 var _ WebScriptObjectable = (*WebScriptObject)(nil)
+
+// isWebScriptObject marks WebScriptObject — and, by embedding promotion, its
+// subclasses — as a member of the WebScriptObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *WebScriptObject) isWebScriptObject() {}
+
+var _ WebScriptObjectProvider = (*WebScriptObject)(nil)

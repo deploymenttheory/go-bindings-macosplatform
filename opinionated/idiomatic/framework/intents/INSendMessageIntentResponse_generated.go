@@ -5,76 +5,86 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Your app’s response to a send message intent.
+// SendMessageIntentResponse is an idiomatic wrapper over the Objective-C class INSendMessageIntentResponse.
 //
-// SendMessageIntentResponse wraps [raw.INSendMessageIntentResponse] with a fluent Go API.
+// It embeds [IntentResponse], promoting that type's methods.
+//
+// Your app’s response to a send message intent.
 type SendMessageIntentResponse struct {
-	inner *raw.INSendMessageIntentResponse
+	IntentResponse
 }
 
-// Unwrap returns the underlying [raw.INSendMessageIntentResponse].
-func (x *SendMessageIntentResponse) Unwrap() *raw.INSendMessageIntentResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SendMessageIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// SendMessageIntentResponseFromID adopts an existing object pointer as a SendMessageIntentResponse (nil for 0).
+// SendMessageIntentResponseFromID adopts an existing Objective-C object as a SendMessageIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func SendMessageIntentResponseFromID(id objc.ID) *SendMessageIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(id)}
-}
-
-// Initializes the response object with the specified code and user activity object.
-//
-// NewSendMessageIntentResponseWithCodeUserActivity creates a new [SendMessageIntentResponse].
-func NewSendMessageIntentResponseWithCodeUserActivity(code INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INSendMessageIntentResponseCode(code), userActivity.Ptr())
-	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(_id)}
-}
-
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *SendMessageIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	x := &SendMessageIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Code calls the underlying Code.
-func (x *SendMessageIntentResponse) Code() INSendMessageIntentResponseCode {
-	return INSendMessageIntentResponseCode(x.inner.Code())
+// sendMessageIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// SendMessageIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sendMessageIntentResponseAdopt(id objc.ID) *SendMessageIntentResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &SendMessageIntentResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SentMessages calls the underlying SentMessages.
-func (x *SendMessageIntentResponse) SentMessages() *foundation.NSArray[objc.ID] {
-	return x.inner.SentMessages()
+// NewSendMessageIntentResponseWithCodeUserActivity initializes the response object with the specified code and user activity object.
+func NewSendMessageIntentResponseWithCodeUserActivity(code SendMessageIntentResponseCode, userActivity obj.Object) *SendMessageIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return sendMessageIntentResponseAdopt(_id)
 }
 
-// SetSentMessages calls the underlying SetSentMessages.
-func (x *SendMessageIntentResponse) SetSentMessages(sentMessages *foundation.NSArray[objc.ID]) {
-	x.inner.SetSentMessages(sentMessages)
+// WithUserActivity the user activity object to use when launching the app.
+func (x *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
 }
 
-func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+// Code wraps the corresponding Objective-C method.
+func (x *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
+	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
+}
+
+// SentMessages wraps the corresponding Objective-C method.
+func (x *SendMessageIntentResponse) SentMessages() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentMessages"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SetSentMessages wraps the corresponding Objective-C method.
+func (x *SendMessageIntentResponse) SetSentMessages(sentMessages []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSentMessages:"), purego.SliceToNSArray(sentMessages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SendMessageIntentResponseable is the interface implemented by [SendMessageIntentResponse], for mocking and DI.
 type SendMessageIntentResponseable interface {
-	Unwrap() *raw.INSendMessageIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse
-	Code() INSendMessageIntentResponseCode
-	SentMessages() *foundation.NSArray[objc.ID]
-	SetSentMessages(sentMessages *foundation.NSArray[objc.ID])
+	obj.Object
+	WithUserActivity(userActivity obj.Object) *SendMessageIntentResponse
+	Code() SendMessageIntentResponseCode
+	SentMessages() []obj.Object
+	SetSentMessages(sentMessages []obj.Object)
 }
 
 var _ SendMessageIntentResponseable = (*SendMessageIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*SendMessageIntentResponse)(nil)

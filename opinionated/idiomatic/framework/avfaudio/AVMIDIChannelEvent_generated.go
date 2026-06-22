@@ -5,66 +5,79 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A base class for all MIDI messages that operate on a single MIDI channel.
+// MIDIChannelEvent is an idiomatic wrapper over the Objective-C class AVMIDIChannelEvent.
 //
-// MIDIChannelEvent wraps [raw.AVMIDIChannelEvent] with a fluent Go API.
+// MIDIChannelEvent is an abstract base — you do not construct it directly. Construct one of [MIDIChannelPressureEvent], [MIDIControlChangeEvent], [MIDIPitchBendEvent], [MIDIPolyPressureEvent], [MIDIProgramChangeEvent] and pass it where a MIDIChannelEvent is accepted.
+//
+// A base class for all MIDI messages that operate on a single MIDI channel.
 type MIDIChannelEvent struct {
-	inner *raw.AVMIDIChannelEvent
+	MusicEvent
 }
 
-// Unwrap returns the underlying [raw.AVMIDIChannelEvent].
-func (x *MIDIChannelEvent) Unwrap() *raw.AVMIDIChannelEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIChannelEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIChannelEventFromID adopts an existing object pointer as a MIDIChannelEvent (nil for 0).
+// MIDIChannelEventFromID adopts an existing Objective-C object as a MIDIChannelEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIChannelEventFromID(id objc.ID) *MIDIChannelEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIChannelEvent{inner: raw.AVMIDIChannelEventFromID(id)}
-}
-
-// NewMIDIChannelEvent creates a new [MIDIChannelEvent].
-func NewMIDIChannelEvent() *MIDIChannelEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIChannelEvent")), objc.RegisterName("new"))
-	return &MIDIChannelEvent{inner: raw.AVMIDIChannelEventFromID(_id)}
-}
-
-// The MIDI channel.
-//
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIChannelEvent) WithChannel(channel uint) *MIDIChannelEvent {
-	x.inner.SetChannel(channel)
+	x := &MIDIChannelEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Channel calls the underlying Channel.
-func (x *MIDIChannelEvent) Channel() uint {
-	return x.inner.Channel()
+// mIDIChannelEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIChannelEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIChannelEventAdopt(id objc.ID) *MIDIChannelEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIChannelEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetChannel calls the underlying SetChannel.
-func (x *MIDIChannelEvent) SetChannel(channel uint) {
-	x.inner.SetChannel(channel)
+// WithChannel the MIDI channel.
+func (x *MIDIChannelEvent) WithChannel(channel int) *MIDIChannelEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
+	return x
 }
 
-func (x *MIDIChannelEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return x.inner }
+// Channel wraps the corresponding Objective-C method.
+func (x *MIDIChannelEvent) Channel() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channel"))
+	return _r
+}
 
-func (x *MIDIChannelEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+// SetChannel wraps the corresponding Objective-C method.
+func (x *MIDIChannelEvent) SetChannel(channel int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
+}
 
 // MIDIChannelEventable is the interface implemented by [MIDIChannelEvent], for mocking and DI.
 type MIDIChannelEventable interface {
-	Unwrap() *raw.AVMIDIChannelEvent
-	WithChannel(channel uint) *MIDIChannelEvent
-	Channel() uint
-	SetChannel(channel uint)
+	obj.Object
+	WithChannel(channel int) *MIDIChannelEvent
+	Channel() int
+	SetChannel(channel int)
 }
 
 var _ MIDIChannelEventable = (*MIDIChannelEvent)(nil)
+
+// isMIDIChannelEvent marks MIDIChannelEvent — and, by embedding promotion, its
+// subclasses — as a member of the MIDIChannelEvent hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MIDIChannelEvent) isMIDIChannelEvent() {}
+
+var _ MIDIChannelEventProvider = (*MIDIChannelEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIChannelEvent)(nil)

@@ -5,62 +5,69 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A request that detects and recognizes regions of text in an image.
+// RecognizedTextObservation is an idiomatic wrapper over the Objective-C class VNRecognizedTextObservation.
 //
-// RecognizedTextObservation wraps [raw.VNRecognizedTextObservation] with a fluent Go API.
+// It embeds [RectangleObservation], promoting that type's methods.
+//
+// A request that detects and recognizes regions of text in an image.
 type RecognizedTextObservation struct {
-	inner *raw.VNRecognizedTextObservation
+	RectangleObservation
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedTextObservation].
-func (x *RecognizedTextObservation) Unwrap() *raw.VNRecognizedTextObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedTextObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedTextObservationFromID adopts an existing object pointer as a RecognizedTextObservation (nil for 0).
+// RecognizedTextObservationFromID adopts an existing Objective-C object as a RecognizedTextObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedTextObservationFromID(id objc.ID) *RecognizedTextObservation {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedTextObservation{inner: raw.VNRecognizedTextObservationFromID(id)}
+	x := &RecognizedTextObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedTextObservation creates a new [RecognizedTextObservation].
+// recognizedTextObservationAdopt wraps an Objective-C object that this code just created as a
+// RecognizedTextObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedTextObservationAdopt(id objc.ID) *RecognizedTextObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &RecognizedTextObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewRecognizedTextObservation creates a new RecognizedTextObservation.
 func NewRecognizedTextObservation() *RecognizedTextObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedTextObservation")), objc.RegisterName("new"))
-	return &RecognizedTextObservation{inner: raw.VNRecognizedTextObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedTextObservation")), objc.RegisterName("new"))
+	return recognizedTextObservationAdopt(_id)
 }
 
-// Requests the n top candidates for a recognized text string.
-//
-// TopCandidates calls the underlying TopCandidates.
-func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount uint) *foundation.NSArray[*raw.VNRecognizedText] {
-	return x.inner.TopCandidates(maxCandidateCount)
-}
-
-func (x *RecognizedTextObservation) asRectangleObservation() *raw.VNRectangleObservation {
-	return &x.inner.VNRectangleObservation
-}
-
-func (x *RecognizedTextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation
-}
-
-func (x *RecognizedTextObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation
+// TopCandidates requests the n top candidates for a recognized text string.
+func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount int) []*RecognizedText {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topCandidates:"), maxCandidateCount)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RecognizedText { return RecognizedTextFromID(_id) })
 }
 
 // RecognizedTextObservationable is the interface implemented by [RecognizedTextObservation], for mocking and DI.
 type RecognizedTextObservationable interface {
-	Unwrap() *raw.VNRecognizedTextObservation
-	TopCandidates(maxCandidateCount uint) *foundation.NSArray[*raw.VNRecognizedText]
+	obj.Object
+	TopCandidates(maxCandidateCount int) []*RecognizedText
 }
 
 var _ RecognizedTextObservationable = (*RecognizedTextObservation)(nil)
+
+var _ RectangleObservationProvider = (*RecognizedTextObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*RecognizedTextObservation)(nil)
+
+var _ ObservationProvider = (*RecognizedTextObservation)(nil)

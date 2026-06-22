@@ -5,64 +5,95 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that can represent a detail about a payment card or other item.
+// LabeledValue is an idiomatic wrapper over the Objective-C class PKLabeledValue.
 //
-// LabeledValue wraps [raw.PKLabeledValue] with a fluent Go API.
+// An object that can represent a detail about a payment card or other item.
 type LabeledValue struct {
-	inner *raw.PKLabeledValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKLabeledValue].
-func (x *LabeledValue) Unwrap() *raw.PKLabeledValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LabeledValue) ID() objc.ID { return x.inner.Ptr() }
-
-// LabeledValueFromID adopts an existing object pointer as a LabeledValue (nil for 0).
+// LabeledValueFromID adopts an existing Objective-C object as a LabeledValue
+// (nil for 0), retaining it and registering a release finalizer.
 func LabeledValueFromID(id objc.ID) *LabeledValue {
 	if id == 0 {
 		return nil
 	}
-	return &LabeledValue{inner: raw.PKLabeledValueFromID(id)}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Instantiates a new labeled value object with the specified label and value strings.
-//
-// NewLabeledValueWithLabelValue creates a new [LabeledValue].
+// labeledValueAdopt wraps an Objective-C object that this code just created as a
+// LabeledValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func labeledValueAdopt(id objc.ID) *LabeledValue {
+	if id == 0 {
+		return nil
+	}
+	x := &LabeledValue{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LabeledValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LabeledValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LabeledValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LabeledValue) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLabeledValueWithLabelValue instantiates a new labeled value object with the specified label and value strings.
 func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKLabeledValue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), foundation.NSStringStringWithUTF8String(label).Ptr(), foundation.NSStringStringWithUTF8String(value).Ptr())
-	return &LabeledValue{inner: raw.PKLabeledValueFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKLabeledValue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), purego.NSString(label), purego.NSString(value))
+	return labeledValueAdopt(_id)
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *LabeledValue) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Value calls the underlying Value.
+// Value wraps the corresponding Objective-C method.
 func (x *LabeledValue) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // LabeledValueable is the interface implemented by [LabeledValue], for mocking and DI.
 type LabeledValueable interface {
-	Unwrap() *raw.PKLabeledValue
+	obj.Object
 	Label() string
 	Value() string
 }

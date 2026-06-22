@@ -5,117 +5,108 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A specialized predicate for comparing expressions.
+// ComparisonPredicate is an idiomatic wrapper over the Objective-C class NSComparisonPredicate.
 //
-// ComparisonPredicate wraps [raw.NSComparisonPredicate] with a fluent Go API.
+// It embeds [Predicate], promoting that type's methods.
+//
+// A specialized predicate for comparing expressions.
 type ComparisonPredicate struct {
-	inner *raw.NSComparisonPredicate
+	Predicate
 }
 
-// Unwrap returns the underlying [raw.NSComparisonPredicate].
-func (x *ComparisonPredicate) Unwrap() *raw.NSComparisonPredicate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComparisonPredicate) ID() objc.ID { return x.inner.Ptr() }
-
-// ComparisonPredicateFromID adopts an existing object pointer as a ComparisonPredicate (nil for 0).
+// ComparisonPredicateFromID adopts an existing Objective-C object as a ComparisonPredicate
+// (nil for 0), retaining it and registering a release finalizer.
 func ComparisonPredicateFromID(id objc.ID) *ComparisonPredicate {
 	if id == 0 {
 		return nil
 	}
-	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(id)}
-}
-
-// Creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
-//
-// NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a new [ComparisonPredicate].
-func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *ComparisonPredicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:"), lhs.Ptr(), rhs.Ptr(), raw.NSComparisonPredicateModifier(modifier), raw.NSPredicateOperatorType(type_), raw.NSComparisonPredicateOptions(options))
-	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
-}
-
-// Creates a predicate that you form by combining specified left and right expressions using a specified selector.
-//
-// NewComparisonPredicateWithLeftExpressionRightExpressionCustomSelector creates a new [ComparisonPredicate].
-func NewComparisonPredicateWithLeftExpressionRightExpressionCustomSelector(lhs *raw.NSExpression, rhs *raw.NSExpression, selector objc.SEL) *ComparisonPredicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:customSelector:"), lhs.Ptr(), rhs.Ptr(), selector)
-	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
-}
-
-// Creates a predicate by decoding from the coder you specify.
-//
-// NewComparisonPredicateWithCoder creates a new [ComparisonPredicate].
-func NewComparisonPredicateWithCoder(coder *raw.NSCoder) *ComparisonPredicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ComparisonPredicate {
-	x.inner.NSPredicate.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ComparisonPredicate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// PredicateOperatorType calls the underlying PredicateOperatorType.
-func (x *ComparisonPredicate) PredicateOperatorType() NSPredicateOperatorType {
-	return NSPredicateOperatorType(x.inner.PredicateOperatorType())
+// comparisonPredicateAdopt wraps an Objective-C object that this code just created as a
+// ComparisonPredicate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func comparisonPredicateAdopt(id objc.ID) *ComparisonPredicate {
+	if id == 0 {
+		return nil
+	}
+	x := &ComparisonPredicate{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// ComparisonPredicateModifier calls the underlying ComparisonPredicateModifier.
-func (x *ComparisonPredicate) ComparisonPredicateModifier() NSComparisonPredicateModifier {
-	return NSComparisonPredicateModifier(x.inner.ComparisonPredicateModifier())
+// NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a predicate to a specified type that you form by combining specified left and right expressions using a specified modifier and options.
+func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *Expression, rhs *Expression, modifier ComparisonPredicateModifier, type_ PredicateOperatorType, options ComparisonPredicateOptions) *ComparisonPredicate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:"), objref.IDOf(lhs), objref.IDOf(rhs), modifier, type_, options)
+	return comparisonPredicateAdopt(_id)
 }
 
-// LeftExpression calls the underlying LeftExpression.
+// NewComparisonPredicateWithCoder creates a predicate by decoding from the coder you specify.
+func NewComparisonPredicateWithCoder(coder *Coder) *ComparisonPredicate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return comparisonPredicateAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// PredicateOperatorType wraps the corresponding Objective-C method.
+func (x *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
+	_r := objc.Send[PredicateOperatorType](objref.IDOf(x), objc.RegisterName("predicateOperatorType"))
+	return _r
+}
+
+// ComparisonPredicateModifier wraps the corresponding Objective-C method.
+func (x *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
+	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(x), objc.RegisterName("comparisonPredicateModifier"))
+	return _r
+}
+
+// LeftExpression wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) LeftExpression() *Expression {
-	_r := x.inner.LeftExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
+	return ExpressionFromID(_r)
 }
 
-// RightExpression calls the underlying RightExpression.
+// RightExpression wraps the corresponding Objective-C method.
 func (x *ComparisonPredicate) RightExpression() *Expression {
-	_r := x.inner.RightExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
+	return ExpressionFromID(_r)
 }
 
-// CustomSelector calls the underlying CustomSelector.
-func (x *ComparisonPredicate) CustomSelector() objc.SEL {
-	return x.inner.CustomSelector()
+// Options wraps the corresponding Objective-C method.
+func (x *ComparisonPredicate) Options() ComparisonPredicateOptions {
+	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
-
-// Options calls the underlying Options.
-func (x *ComparisonPredicate) Options() NSComparisonPredicateOptions {
-	return NSComparisonPredicateOptions(x.inner.Options())
-}
-
-func (x *ComparisonPredicate) asPredicate() *raw.NSPredicate { return &x.inner.NSPredicate }
-
-func (x *ComparisonPredicate) asObject() *raw.NSObject { return &x.inner.NSPredicate.NSObject }
 
 // ComparisonPredicateable is the interface implemented by [ComparisonPredicate], for mocking and DI.
 type ComparisonPredicateable interface {
-	Unwrap() *raw.NSComparisonPredicate
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ComparisonPredicate
-	PredicateOperatorType() NSPredicateOperatorType
-	ComparisonPredicateModifier() NSComparisonPredicateModifier
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate
+	PredicateOperatorType() PredicateOperatorType
+	ComparisonPredicateModifier() ComparisonPredicateModifier
 	LeftExpression() *Expression
 	RightExpression() *Expression
-	CustomSelector() objc.SEL
-	Options() NSComparisonPredicateOptions
+	Options() ComparisonPredicateOptions
 }
 
 var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)
+
+var _ PredicateProvider = (*ComparisonPredicate)(nil)

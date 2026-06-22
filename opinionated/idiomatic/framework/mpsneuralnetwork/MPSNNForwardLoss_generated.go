@@ -5,235 +5,191 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NNForwardLoss wraps [raw.MPSNNForwardLoss] with a fluent Go API.
+// NNForwardLoss is an idiomatic wrapper over the Objective-C class MPSNNForwardLoss.
+//
+// It embeds [CNNKernel], promoting that type's methods.
 type NNForwardLoss struct {
-	inner *raw.MPSNNForwardLoss
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNNForwardLoss].
-func (x *NNForwardLoss) Unwrap() *raw.MPSNNForwardLoss { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNForwardLoss) ID() objc.ID { return x.inner.Ptr() }
-
-// NNForwardLossFromID adopts an existing object pointer as a NNForwardLoss (nil for 0).
+// NNForwardLossFromID adopts an existing Objective-C object as a NNForwardLoss
+// (nil for 0), retaining it and registering a release finalizer.
 func NNForwardLossFromID(id objc.ID) *NNForwardLoss {
 	if id == 0 {
 		return nil
 	}
-	return &NNForwardLoss{inner: raw.MPSNNForwardLossFromID(id)}
+	x := &NNForwardLoss{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize the loss forward pass filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSNNForwardLoss object or nil, if failure.
-//
-// NewNNForwardLossWithDeviceLossDescriptor creates a new [NNForwardLoss].
-func NewNNForwardLossWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *raw.MPSCNNLossDescriptor) *NNForwardLoss {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNForwardLoss")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:lossDescriptor:"), device, lossDescriptor.Ptr())
-	return &NNForwardLoss{inner: raw.MPSNNForwardLossFromID(_id)}
+// nNForwardLossAdopt wraps an Objective-C object that this code just created as a
+// NNForwardLoss (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNForwardLossAdopt(id objc.ID) *NNForwardLoss {
+	if id == 0 {
+		return nil
+	}
+	x := &NNForwardLoss{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract <NSSecureCoding> support
-//
-// NewNNForwardLossWithCoderDevice creates a new [NNForwardLoss].
-func NewNNForwardLossWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNForwardLoss {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNForwardLoss")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNForwardLoss{inner: raw.MPSNNForwardLossFromID(_id)}
+// NewNNForwardLoss creates a new NNForwardLoss.
+func NewNNForwardLoss() *NNForwardLoss {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLoss")), objc.RegisterName("new"))
+	return nNForwardLossAdopt(_id)
 }
 
-// WithWeight sets the weight property and returns the receiver for chaining.
+// WithWeight sets the property and returns the receiver so calls can be chained.
 func (x *NNForwardLoss) WithWeight(weight float32) *NNForwardLoss {
-	x.inner.SetWeight(weight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
 	return x
 }
 
-// WithLabelSmoothing sets the labelSmoothing property and returns the receiver for chaining.
+// WithLabelSmoothing sets the property and returns the receiver so calls can be chained.
 func (x *NNForwardLoss) WithLabelSmoothing(labelSmoothing float32) *NNForwardLoss {
-	x.inner.SetLabelSmoothing(labelSmoothing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
 	return x
 }
 
-// WithEpsilon sets the epsilon property and returns the receiver for chaining.
+// WithEpsilon sets the property and returns the receiver so calls can be chained.
 func (x *NNForwardLoss) WithEpsilon(epsilon float32) *NNForwardLoss {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 	return x
 }
 
-// WithDelta sets the delta property and returns the receiver for chaining.
+// WithDelta sets the property and returns the receiver so calls can be chained.
 func (x *NNForwardLoss) WithDelta(delta float32) *NNForwardLoss {
-	x.inner.SetDelta(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
 func (x *NNForwardLoss) WithOffset(offset mpscore.MPSOffset) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
 func (x *NNForwardLoss) WithClipRect(clipRect metal.MTLRegion) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (x *NNForwardLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNForwardLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *NNForwardLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNForwardLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNForwardLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNForwardLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
+// LossType see MPSCNNLossDescriptor for information about the following properties.
+func (x *NNForwardLoss) LossType() CNNLossType {
+	_r := objc.Send[CNNLossType](objref.IDOf(x), objc.RegisterName("lossType"))
+	return _r
 }
 
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithPadding(padding raw.MPSNNPadding) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
+// ReductionType wraps the corresponding Objective-C method.
+func (x *NNForwardLoss) ReductionType() CNNReductionType {
+	_r := objc.Send[CNNReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+	return _r
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNForwardLoss) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNForwardLoss {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages.
-func (x *NNForwardLoss) EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer) {
-	x.inner.EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer, sourceImages, labels, weights, destinationStates, destinationImages)
-}
-
-// EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary calls the underlying EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary.
-func (x *NNForwardLoss) EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool) unsafe.Pointer {
-	return x.inner.EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary(commandBuffer, sourceImages, labels, weights, outStates, isTemporary)
-}
-
-// See MPSCNNLossDescriptor for information about the following properties.
-//
-// LossType calls the underlying LossType.
-func (x *NNForwardLoss) LossType() MPSCNNLossType {
-	return MPSCNNLossType(x.inner.LossType())
-}
-
-// ReductionType calls the underlying ReductionType.
-func (x *NNForwardLoss) ReductionType() MPSCNNReductionType {
-	return MPSCNNReductionType(x.inner.ReductionType())
-}
-
-// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+// ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) ReduceAcrossBatch() bool {
-	return x.inner.ReduceAcrossBatch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+	return _r
 }
 
-// NumberOfClasses calls the underlying NumberOfClasses.
-func (x *NNForwardLoss) NumberOfClasses() uint {
-	return x.inner.NumberOfClasses()
+// NumberOfClasses wraps the corresponding Objective-C method.
+func (x *NNForwardLoss) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+	return _r
 }
 
-// Weight calls the underlying Weight.
+// Weight wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) Weight() float32 {
-	return x.inner.Weight()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
 
-// SetWeight calls the underlying SetWeight.
+// SetWeight wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) SetWeight(weight float32) {
-	x.inner.SetWeight(weight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
 }
 
-// LabelSmoothing calls the underlying LabelSmoothing.
+// LabelSmoothing wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) LabelSmoothing() float32 {
-	return x.inner.LabelSmoothing()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+	return _r
 }
 
-// SetLabelSmoothing calls the underlying SetLabelSmoothing.
+// SetLabelSmoothing wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) SetLabelSmoothing(labelSmoothing float32) {
-	x.inner.SetLabelSmoothing(labelSmoothing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
 }
 
-// Epsilon calls the underlying Epsilon.
+// Epsilon wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// SetEpsilon calls the underlying SetEpsilon.
+// SetEpsilon wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) SetEpsilon(epsilon float32) {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
 
-// Delta calls the underlying Delta.
+// Delta wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) Delta() float32 {
-	return x.inner.Delta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
-// SetDelta calls the underlying SetDelta.
+// SetDelta wraps the corresponding Objective-C method.
 func (x *NNForwardLoss) SetDelta(delta float32) {
-	x.inner.SetDelta(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 }
-
-func (x *NNForwardLoss) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 // NNForwardLossable is the interface implemented by [NNForwardLoss], for mocking and DI.
 type NNForwardLossable interface {
-	Unwrap() *raw.MPSNNForwardLoss
+	obj.Object
 	WithWeight(weight float32) *NNForwardLoss
 	WithLabelSmoothing(labelSmoothing float32) *NNForwardLoss
 	WithEpsilon(epsilon float32) *NNForwardLoss
 	WithDelta(delta float32) *NNForwardLoss
 	WithOffset(offset mpscore.MPSOffset) *NNForwardLoss
 	WithClipRect(clipRect metal.MTLRegion) *NNForwardLoss
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNForwardLoss
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNForwardLoss
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNForwardLoss
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNForwardLoss
-	WithPadding(padding raw.MPSNNPadding) *NNForwardLoss
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNForwardLoss
-	EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
-	EncodeBatchToCommandBufferSourceImagesLabelsWeightsDestinationStatesDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool) unsafe.Pointer
-	LossType() MPSCNNLossType
-	ReductionType() MPSCNNReductionType
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNForwardLoss
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNForwardLoss
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNForwardLoss
+	LossType() CNNLossType
+	ReductionType() CNNReductionType
 	ReduceAcrossBatch() bool
-	NumberOfClasses() uint
+	NumberOfClasses() int
 	Weight() float32
 	SetWeight(weight float32)
 	LabelSmoothing() float32
@@ -245,3 +201,5 @@ type NNForwardLossable interface {
 }
 
 var _ NNForwardLossable = (*NNForwardLoss)(nil)
+
+var _ CNNKernelProvider = (*NNForwardLoss)(nil)

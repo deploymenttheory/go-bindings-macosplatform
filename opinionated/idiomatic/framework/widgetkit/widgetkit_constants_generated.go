@@ -5,31 +5,26 @@
 package widgetkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/widgetkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// A key you use to access the widget's kind. The value matches the `kind` property specified in the widget’s configuration.
-// WGWidgetUserInfoKeyKind returns the string constant WGWidgetUserInfoKeyKind as an objc.ID, for use as a dictionary key or selector argument.
-func WGWidgetUserInfoKeyKind() objc.ID {
-	return purego.CFConstant(raw.WGWidgetUserInfoKeyKind())
+// WGWidgetUserInfoKeyKind returns the string constant WGWidgetUserInfoKeyKind, for use as a dictionary key or argument.
+func WGWidgetUserInfoKeyKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WGWidgetUserInfoKeyKind")))
 }
 
-// A key you use to access the widget's family.
-// WGWidgetUserInfoKeyFamily returns the string constant WGWidgetUserInfoKeyFamily as an objc.ID, for use as a dictionary key or selector argument.
-func WGWidgetUserInfoKeyFamily() objc.ID {
-	return purego.CFConstant(raw.WGWidgetUserInfoKeyFamily())
+// WGWidgetUserInfoKeyFamily returns the string constant WGWidgetUserInfoKeyFamily, for use as a dictionary key or argument.
+func WGWidgetUserInfoKeyFamily() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WGWidgetUserInfoKeyFamily")))
 }
 
-// A key you use to access the activity ID if the widget represents a Live Activity.
-// WGWidgetUserInfoKeyActivityID returns the string constant WGWidgetUserInfoKeyActivityID as an objc.ID, for use as a dictionary key or selector argument.
-func WGWidgetUserInfoKeyActivityID() objc.ID {
-	return purego.CFConstant(raw.WGWidgetUserInfoKeyActivityID())
+// WGWidgetUserInfoKeyActivityID returns the string constant WGWidgetUserInfoKeyActivityID, for use as a dictionary key or argument.
+func WGWidgetUserInfoKeyActivityID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WGWidgetUserInfoKeyActivityID")))
 }
 
-// A string that the system passes to the app on launch from a Live Activity that doesn't provide a URL. In many cases, you use  <doc://com.apple.documentation/documentation/swiftui/view/widgeturl(_:)> to allow users to tap a Live Activity and open a screen in the app with functionality that best fits the Live Activity. If you don't use the `widgetURL(_:)` modifier to provide a URL, the system launches your app and passes `NSUserActivityTypeLiveActivity` as the <doc://com.apple.documentation/documentation/foundation/nsuseractivity/1409611-activitytype> of <doc://com.apple.documentation/documentation/foundation/nsuseractivity> upon launch. Check for this value on launch to open a screen in your app that fits the context of the active Live Activity.
-// NSUserActivityTypeLiveActivity returns the string constant NSUserActivityTypeLiveActivity as an objc.ID, for use as a dictionary key or selector argument.
-func NSUserActivityTypeLiveActivity() objc.ID {
-	return purego.CFConstant(raw.NSUserActivityTypeLiveActivity())
+// NSUserActivityTypeLiveActivity returns the string constant NSUserActivityTypeLiveActivity, for use as a dictionary key or argument.
+func NSUserActivityTypeLiveActivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUserActivityTypeLiveActivity")))
 }

@@ -5,86 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An image-analysis request that determines the horizon angle in an image.
+// DetectHorizonRequest is an idiomatic wrapper over the Objective-C class VNDetectHorizonRequest.
 //
-// DetectHorizonRequest wraps [raw.VNDetectHorizonRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An image-analysis request that determines the horizon angle in an image.
 type DetectHorizonRequest struct {
-	inner *raw.VNDetectHorizonRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNDetectHorizonRequest].
-func (x *DetectHorizonRequest) Unwrap() *raw.VNDetectHorizonRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectHorizonRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectHorizonRequestFromID adopts an existing object pointer as a DetectHorizonRequest (nil for 0).
+// DetectHorizonRequestFromID adopts an existing Objective-C object as a DetectHorizonRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectHorizonRequestFromID(id objc.ID) *DetectHorizonRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DetectHorizonRequest{inner: raw.VNDetectHorizonRequestFromID(id)}
+	x := &DetectHorizonRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectHorizonRequest creates a new [DetectHorizonRequest].
+// detectHorizonRequestAdopt wraps an Objective-C object that this code just created as a
+// DetectHorizonRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectHorizonRequestAdopt(id objc.ID) *DetectHorizonRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectHorizonRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDetectHorizonRequest creates a new DetectHorizonRequest.
 func NewDetectHorizonRequest() *DetectHorizonRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectHorizonRequest")), objc.RegisterName("new"))
-	return &DetectHorizonRequest{inner: raw.VNDetectHorizonRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNDetectHorizonRequest")), objc.RegisterName("new"))
+	return detectHorizonRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *DetectHorizonRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *DetectHorizonRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *DetectHorizonRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *DetectHorizonRequest) WithRevision(revision uint) *DetectHorizonRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *DetectHorizonRequest) WithRevision(revision int) *DetectHorizonRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *DetectHorizonRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *DetectHorizonRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // DetectHorizonRequestable is the interface implemented by [DetectHorizonRequest], for mocking and DI.
 type DetectHorizonRequestable interface {
-	Unwrap() *raw.VNDetectHorizonRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest
-	WithRevision(revision uint) *DetectHorizonRequest
+	WithRevision(revision int) *DetectHorizonRequest
 }
 
 var _ DetectHorizonRequestable = (*DetectHorizonRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*DetectHorizonRequest)(nil)
+
+var _ RequestProvider = (*DetectHorizonRequest)(nil)

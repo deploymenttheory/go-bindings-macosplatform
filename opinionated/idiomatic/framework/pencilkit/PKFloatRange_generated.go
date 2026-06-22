@@ -5,54 +5,89 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A utility class that represents range components of a stroke.
+// FloatRange is an idiomatic wrapper over the Objective-C class PKFloatRange.
 //
-// FloatRange wraps [raw.PKFloatRange] with a fluent Go API.
+// A utility class that represents range components of a stroke.
 type FloatRange struct {
-	inner *raw.PKFloatRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKFloatRange].
-func (x *FloatRange) Unwrap() *raw.PKFloatRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FloatRange) ID() objc.ID { return x.inner.Ptr() }
-
-// FloatRangeFromID adopts an existing object pointer as a FloatRange (nil for 0).
+// FloatRangeFromID adopts an existing Objective-C object as a FloatRange
+// (nil for 0), retaining it and registering a release finalizer.
 func FloatRangeFromID(id objc.ID) *FloatRange {
 	if id == 0 {
 		return nil
 	}
-	return &FloatRange{inner: raw.PKFloatRangeFromID(id)}
+	x := &FloatRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// A utility class used to contain ranges returned by the PKStroke API.
-//
-// NewFloatRangeWithLowerBoundUpperBound creates a new [FloatRange].
+// floatRangeAdopt wraps an Objective-C object that this code just created as a
+// FloatRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func floatRangeAdopt(id objc.ID) *FloatRange {
+	if id == 0 {
+		return nil
+	}
+	x := &FloatRange{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FloatRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FloatRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FloatRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FloatRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFloatRangeWithLowerBoundUpperBound a utility class used to contain ranges returned by the PKStroke API.
 func NewFloatRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *FloatRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKFloatRange")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKFloatRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerBound:upperBound:"), lowerBound, upperBound)
-	return &FloatRange{inner: raw.PKFloatRangeFromID(_id)}
+	return floatRangeAdopt(_id)
 }
 
-// LowerBound calls the underlying LowerBound.
+// LowerBound wraps the corresponding Objective-C method.
 func (x *FloatRange) LowerBound() float64 {
-	return x.inner.LowerBound()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerBound"))
+	return _r
 }
 
-// UpperBound calls the underlying UpperBound.
+// UpperBound wraps the corresponding Objective-C method.
 func (x *FloatRange) UpperBound() float64 {
-	return x.inner.UpperBound()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperBound"))
+	return _r
 }
 
 // FloatRangeable is the interface implemented by [FloatRange], for mocking and DI.
 type FloatRangeable interface {
-	Unwrap() *raw.PKFloatRange
+	obj.Object
 	LowerBound() float64
 	UpperBound() float64
 }

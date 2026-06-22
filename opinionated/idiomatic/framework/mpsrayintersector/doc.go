@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package mpsrayintersector provides a fluent Go API over the macOS MPSRayIntersector framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AccelerationStructure: [InstanceAccelerationStructure], [PolygonAccelerationStructure]
+//   - PolygonAccelerationStructure: [QuadrilateralAccelerationStructure], [TriangleAccelerationStructure]
 package mpsrayintersector

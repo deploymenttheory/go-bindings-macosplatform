@@ -5,68 +5,96 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines a video processor’s configuration options.
+// VideoProcessorRequestProcessingOptions is an idiomatic wrapper over the Objective-C class VNVideoProcessorRequestProcessingOptions.
 //
-// VideoProcessorRequestProcessingOptions wraps [raw.VNVideoProcessorRequestProcessingOptions] with a fluent Go API.
+// An object that defines a video processor’s configuration options.
 type VideoProcessorRequestProcessingOptions struct {
-	inner *raw.VNVideoProcessorRequestProcessingOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNVideoProcessorRequestProcessingOptions].
-func (x *VideoProcessorRequestProcessingOptions) Unwrap() *raw.VNVideoProcessorRequestProcessingOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoProcessorRequestProcessingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoProcessorRequestProcessingOptionsFromID adopts an existing object pointer as a VideoProcessorRequestProcessingOptions (nil for 0).
+// VideoProcessorRequestProcessingOptionsFromID adopts an existing Objective-C object as a VideoProcessorRequestProcessingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoProcessorRequestProcessingOptionsFromID(id objc.ID) *VideoProcessorRequestProcessingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &VideoProcessorRequestProcessingOptions{inner: raw.VNVideoProcessorRequestProcessingOptionsFromID(id)}
-}
-
-// NewVideoProcessorRequestProcessingOptions creates a new [VideoProcessorRequestProcessingOptions].
-func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessingOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVideoProcessorRequestProcessingOptions")), objc.RegisterName("new"))
-	return &VideoProcessorRequestProcessingOptions{inner: raw.VNVideoProcessorRequestProcessingOptionsFromID(_id)}
-}
-
-// @brief The cadence at which the request should be performed. @discussion If this property is not defined, then every frame will be processed.
-//
-// WithCadence sets the cadence property and returns the receiver for chaining.
-func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
-	x.inner.SetCadence(cadence.asVideoProcessorCadence())
+	x := &VideoProcessorRequestProcessingOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Cadence calls the underlying Cadence.
-func (x *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
-	_r := x.inner.Cadence()
-	if _r == nil {
+// videoProcessorRequestProcessingOptionsAdopt wraps an Objective-C object that this code just created as a
+// VideoProcessorRequestProcessingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoProcessorRequestProcessingOptionsAdopt(id objc.ID) *VideoProcessorRequestProcessingOptions {
+	if id == 0 {
 		return nil
 	}
-	return &VideoProcessorCadence{inner: _r}
+	x := &VideoProcessorRequestProcessingOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetCadence calls the underlying SetCadence.
-func (x *VideoProcessorRequestProcessingOptions) SetCadence(cadence *raw.VNVideoProcessorCadence) {
-	x.inner.SetCadence(cadence)
+// Description returns the object's -description text.
+func (x *VideoProcessorRequestProcessingOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoProcessorRequestProcessingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoProcessorRequestProcessingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessorRequestProcessingOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVideoProcessorRequestProcessingOptions creates a new VideoProcessorRequestProcessingOptions.
+func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessingOptions {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNVideoProcessorRequestProcessingOptions")), objc.RegisterName("new"))
+	return videoProcessorRequestProcessingOptionsAdopt(_id)
+}
+
+// WithCadence the cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
+func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
+	return x
+}
+
+// Cadence wraps the corresponding Objective-C method.
+func (x *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cadence"))
+	return VideoProcessorCadenceFromID(_r)
+}
+
+// SetCadence wraps the corresponding Objective-C method.
+func (x *VideoProcessorRequestProcessingOptions) SetCadence(cadence *VideoProcessorCadence) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
 }
 
 // VideoProcessorRequestProcessingOptionsable is the interface implemented by [VideoProcessorRequestProcessingOptions], for mocking and DI.
 type VideoProcessorRequestProcessingOptionsable interface {
-	Unwrap() *raw.VNVideoProcessorRequestProcessingOptions
+	obj.Object
 	WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions
 	Cadence() *VideoProcessorCadence
-	SetCadence(cadence *raw.VNVideoProcessorCadence)
+	SetCadence(cadence *VideoProcessorCadence)
 }
 
 var _ VideoProcessorRequestProcessingOptionsable = (*VideoProcessorRequestProcessingOptions)(nil)

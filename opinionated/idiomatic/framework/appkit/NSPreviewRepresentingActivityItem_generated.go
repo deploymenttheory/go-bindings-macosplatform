@@ -5,56 +5,84 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that adds metadata to an item you share using the macOS share sheet.
+// PreviewRepresentingActivityItem is an idiomatic wrapper over the Objective-C class NSPreviewRepresentingActivityItem.
 //
-// PreviewRepresentingActivityItem wraps [raw.NSPreviewRepresentingActivityItem] with a fluent Go API.
+// A type that adds metadata to an item you share using the macOS share sheet.
 type PreviewRepresentingActivityItem struct {
-	inner *raw.NSPreviewRepresentingActivityItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPreviewRepresentingActivityItem].
-func (x *PreviewRepresentingActivityItem) Unwrap() *raw.NSPreviewRepresentingActivityItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewRepresentingActivityItem) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewRepresentingActivityItemFromID adopts an existing object pointer as a PreviewRepresentingActivityItem (nil for 0).
+// PreviewRepresentingActivityItemFromID adopts an existing Objective-C object as a PreviewRepresentingActivityItem
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewRepresentingActivityItemFromID(id objc.ID) *PreviewRepresentingActivityItem {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(id)}
+	x := &PreviewRepresentingActivityItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a metadata object with the title, image, and icon for a shareable item.
-//
-// NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a new [PreviewRepresentingActivityItem].
-func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item objc.ID, title string, image *raw.NSImage, icon *raw.NSImage) *PreviewRepresentingActivityItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:image:icon:"), item, foundation.NSStringStringWithUTF8String(title).Ptr(), image.Ptr(), icon.Ptr())
-	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(_id)}
+// previewRepresentingActivityItemAdopt wraps an Objective-C object that this code just created as a
+// PreviewRepresentingActivityItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewRepresentingActivityItemAdopt(id objc.ID) *PreviewRepresentingActivityItem {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewRepresentingActivityItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a metadata object that provides a title and images for a shareable item.
-//
-// NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a new [PreviewRepresentingActivityItem].
-func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(item objc.ID, title string, imageProvider *foundation.NSItemProvider, iconProvider *foundation.NSItemProvider) *PreviewRepresentingActivityItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:imageProvider:iconProvider:"), item, foundation.NSStringStringWithUTF8String(title).Ptr(), imageProvider.Ptr(), iconProvider.Ptr())
-	return &PreviewRepresentingActivityItem{inner: raw.NSPreviewRepresentingActivityItemFromID(_id)}
+// Description returns the object's -description text.
+func (x *PreviewRepresentingActivityItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewRepresentingActivityItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewRepresentingActivityItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PreviewRepresentingActivityItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a metadata object with the title, image, and icon for a shareable item.
+func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item obj.Object, title string, image *Image, icon *Image) *PreviewRepresentingActivityItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:image:icon:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(image), objref.IDOf(icon))
+	return previewRepresentingActivityItemAdopt(_id)
+}
+
+// NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a metadata object that provides a title and images for a shareable item.
+func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(item obj.Object, title string, imageProvider obj.Object, iconProvider obj.Object) *PreviewRepresentingActivityItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:imageProvider:iconProvider:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(imageProvider), objref.IDOf(iconProvider))
+	return previewRepresentingActivityItemAdopt(_id)
 }
 
 // PreviewRepresentingActivityItemable is the interface implemented by [PreviewRepresentingActivityItem], for mocking and DI.
 type PreviewRepresentingActivityItemable interface {
-	Unwrap() *raw.NSPreviewRepresentingActivityItem
+	obj.Object
 }
 
 var _ PreviewRepresentingActivityItemable = (*PreviewRepresentingActivityItem)(nil)

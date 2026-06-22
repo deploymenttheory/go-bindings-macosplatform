@@ -5,219 +5,176 @@
 package metalfx
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalfx"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of properties that configure a spatial scaling effect, and a factory method that creates the effect.
+// SpatialScalerDescriptor is an idiomatic wrapper over the Objective-C class MTLFXSpatialScalerDescriptor.
 //
-// SpatialScalerDescriptor wraps [raw.MTLFXSpatialScalerDescriptor] with a fluent Go API.
+// A set of properties that configure a spatial scaling effect, and a factory method that creates the effect.
 type SpatialScalerDescriptor struct {
-	inner *raw.MTLFXSpatialScalerDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFXSpatialScalerDescriptor].
-func (x *SpatialScalerDescriptor) Unwrap() *raw.MTLFXSpatialScalerDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpatialScalerDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// SpatialScalerDescriptorFromID adopts an existing object pointer as a SpatialScalerDescriptor (nil for 0).
+// SpatialScalerDescriptorFromID adopts an existing Objective-C object as a SpatialScalerDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func SpatialScalerDescriptorFromID(id objc.ID) *SpatialScalerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &SpatialScalerDescriptor{inner: raw.MTLFXSpatialScalerDescriptorFromID(id)}
+	x := &SpatialScalerDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpatialScalerDescriptor creates a new [SpatialScalerDescriptor].
+// spatialScalerDescriptorAdopt wraps an Objective-C object that this code just created as a
+// SpatialScalerDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spatialScalerDescriptorAdopt(id objc.ID) *SpatialScalerDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &SpatialScalerDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpatialScalerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpatialScalerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpatialScalerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SpatialScalerDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSpatialScalerDescriptor creates a new SpatialScalerDescriptor.
 func NewSpatialScalerDescriptor() *SpatialScalerDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFXSpatialScalerDescriptor")), objc.RegisterName("new"))
-	return &SpatialScalerDescriptor{inner: raw.MTLFXSpatialScalerDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFXSpatialScalerDescriptor")), objc.RegisterName("new"))
+	return spatialScalerDescriptorAdopt(_id)
 }
 
-// The pixel format of the input color texture for the spatial scaler you create with this descriptor.
-//
-// WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// WithInputWidth the width of the input color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) WithInputWidth(inputWidth int) *SpatialScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 	return x
 }
 
-// The pixel format of the output color texture for the spatial scaler you create with this descriptor.
-//
-// WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
+// WithInputHeight the height of the input color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) WithInputHeight(inputHeight int) *SpatialScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 	return x
 }
 
-// The width of the input color texture for the spatial scaler you create with this descriptor.
-//
-// WithInputWidth sets the inputWidth property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithInputWidth(inputWidth uint) *SpatialScalerDescriptor {
-	x.inner.SetInputWidth(inputWidth)
+// WithOutputWidth the width of the output color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) WithOutputWidth(outputWidth int) *SpatialScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 	return x
 }
 
-// The height of the input color texture for the spatial scaler you create with this descriptor.
-//
-// WithInputHeight sets the inputHeight property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithInputHeight(inputHeight uint) *SpatialScalerDescriptor {
-	x.inner.SetInputHeight(inputHeight)
+// WithOutputHeight the height of the output color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) WithOutputHeight(outputHeight int) *SpatialScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 	return x
 }
 
-// The width of the output color texture for the spatial scaler you create with this descriptor.
-//
-// WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithOutputWidth(outputWidth uint) *SpatialScalerDescriptor {
-	x.inner.SetOutputWidth(outputWidth)
+// WithColorProcessingMode the color space of the input color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode SpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorProcessingMode:"), colorProcessingMode)
 	return x
 }
 
-// The height of the output color texture for the spatial scaler you create with this descriptor.
-//
-// WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithOutputHeight(outputHeight uint) *SpatialScalerDescriptor {
-	x.inner.SetOutputHeight(outputHeight)
-	return x
+// InputWidth the width of the input color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) InputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputWidth"))
+	return _r
 }
 
-// The color space of the input color texture for the spatial scaler you create with this descriptor.
-//
-// WithColorProcessingMode sets the colorProcessingMode property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
-	x.inner.SetColorProcessingMode(raw.MTLFXSpatialScalerColorProcessingMode(colorProcessingMode))
-	return x
+// SetInputWidth wraps the corresponding Objective-C method.
+func (x *SpatialScalerDescriptor) SetInputWidth(inputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 }
 
-// Creates a spatial scaler instance from this descriptor’s current property values.
-//
-// NewSpatialScalerWithDevice calls the underlying NewSpatialScalerWithDevice.
-func (x *SpatialScalerDescriptor) NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler {
-	return x.inner.NewSpatialScalerWithDevice(device)
+// InputHeight the height of the input color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) InputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputHeight"))
+	return _r
 }
 
-// Creates a spatial scaler instance for a Metal device.
-//
-// NewSpatialScalerWithDeviceCompiler calls the underlying NewSpatialScalerWithDeviceCompiler.
-func (x *SpatialScalerDescriptor) NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler {
-	return x.inner.NewSpatialScalerWithDeviceCompiler(device, compiler)
+// SetInputHeight wraps the corresponding Objective-C method.
+func (x *SpatialScalerDescriptor) SetInputHeight(inputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 }
 
-// The pixel format of the input color texture for the spatial scaler you create with this descriptor.
-//
-// ColorTextureFormat calls the underlying ColorTextureFormat.
-func (x *SpatialScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ColorTextureFormat()
+// OutputWidth the width of the output color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) OutputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputWidth"))
+	return _r
 }
 
-// SetColorTextureFormat calls the underlying SetColorTextureFormat.
-func (x *SpatialScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
+// SetOutputWidth wraps the corresponding Objective-C method.
+func (x *SpatialScalerDescriptor) SetOutputWidth(outputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 }
 
-// The pixel format of the output texture for the spatial scaler you create with this descriptor.
-//
-// OutputTextureFormat calls the underlying OutputTextureFormat.
-func (x *SpatialScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
-	return x.inner.OutputTextureFormat()
+// OutputHeight the height of the output color texture for the spatial scaler you create with this descriptor.
+func (x *SpatialScalerDescriptor) OutputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputHeight"))
+	return _r
 }
 
-// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
-func (x *SpatialScalerDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
+// SetOutputHeight wraps the corresponding Objective-C method.
+func (x *SpatialScalerDescriptor) SetOutputHeight(outputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 }
 
-// The width of the input color texture for the spatial scaler you create with this descriptor.
-//
-// InputWidth calls the underlying InputWidth.
-func (x *SpatialScalerDescriptor) InputWidth() uint {
-	return x.inner.InputWidth()
+// ColorProcessingMode the color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
+func (x *SpatialScalerDescriptor) ColorProcessingMode() SpatialScalerColorProcessingMode {
+	_r := objc.Send[SpatialScalerColorProcessingMode](objref.IDOf(x), objc.RegisterName("colorProcessingMode"))
+	return _r
 }
 
-// SetInputWidth calls the underlying SetInputWidth.
-func (x *SpatialScalerDescriptor) SetInputWidth(inputWidth uint) {
-	x.inner.SetInputWidth(inputWidth)
-}
-
-// The height of the input color texture for the spatial scaler you create with this descriptor.
-//
-// InputHeight calls the underlying InputHeight.
-func (x *SpatialScalerDescriptor) InputHeight() uint {
-	return x.inner.InputHeight()
-}
-
-// SetInputHeight calls the underlying SetInputHeight.
-func (x *SpatialScalerDescriptor) SetInputHeight(inputHeight uint) {
-	x.inner.SetInputHeight(inputHeight)
-}
-
-// The width of the output color texture for the spatial scaler you create with this descriptor.
-//
-// OutputWidth calls the underlying OutputWidth.
-func (x *SpatialScalerDescriptor) OutputWidth() uint {
-	return x.inner.OutputWidth()
-}
-
-// SetOutputWidth calls the underlying SetOutputWidth.
-func (x *SpatialScalerDescriptor) SetOutputWidth(outputWidth uint) {
-	x.inner.SetOutputWidth(outputWidth)
-}
-
-// The height of the output color texture for the spatial scaler you create with this descriptor.
-//
-// OutputHeight calls the underlying OutputHeight.
-func (x *SpatialScalerDescriptor) OutputHeight() uint {
-	return x.inner.OutputHeight()
-}
-
-// SetOutputHeight calls the underlying SetOutputHeight.
-func (x *SpatialScalerDescriptor) SetOutputHeight(outputHeight uint) {
-	x.inner.SetOutputHeight(outputHeight)
-}
-
-// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
-//
-// ColorProcessingMode calls the underlying ColorProcessingMode.
-func (x *SpatialScalerDescriptor) ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode {
-	return MTLFXSpatialScalerColorProcessingMode(x.inner.ColorProcessingMode())
-}
-
-// SetColorProcessingMode calls the underlying SetColorProcessingMode.
-func (x *SpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) {
-	x.inner.SetColorProcessingMode(raw.MTLFXSpatialScalerColorProcessingMode(colorProcessingMode))
+// SetColorProcessingMode wraps the corresponding Objective-C method.
+func (x *SpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode SpatialScalerColorProcessingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorProcessingMode:"), colorProcessingMode)
 }
 
 // SpatialScalerDescriptorable is the interface implemented by [SpatialScalerDescriptor], for mocking and DI.
 type SpatialScalerDescriptorable interface {
-	Unwrap() *raw.MTLFXSpatialScalerDescriptor
-	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor
-	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor
-	WithInputWidth(inputWidth uint) *SpatialScalerDescriptor
-	WithInputHeight(inputHeight uint) *SpatialScalerDescriptor
-	WithOutputWidth(outputWidth uint) *SpatialScalerDescriptor
-	WithOutputHeight(outputHeight uint) *SpatialScalerDescriptor
-	WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor
-	NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler
-	NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler
-	ColorTextureFormat() metal.MTLPixelFormat
-	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
-	OutputTextureFormat() metal.MTLPixelFormat
-	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
-	InputWidth() uint
-	SetInputWidth(inputWidth uint)
-	InputHeight() uint
-	SetInputHeight(inputHeight uint)
-	OutputWidth() uint
-	SetOutputWidth(outputWidth uint)
-	OutputHeight() uint
-	SetOutputHeight(outputHeight uint)
-	ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode
-	SetColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode)
+	obj.Object
+	WithInputWidth(inputWidth int) *SpatialScalerDescriptor
+	WithInputHeight(inputHeight int) *SpatialScalerDescriptor
+	WithOutputWidth(outputWidth int) *SpatialScalerDescriptor
+	WithOutputHeight(outputHeight int) *SpatialScalerDescriptor
+	WithColorProcessingMode(colorProcessingMode SpatialScalerColorProcessingMode) *SpatialScalerDescriptor
+	InputWidth() int
+	SetInputWidth(inputWidth int)
+	InputHeight() int
+	SetInputHeight(inputHeight int)
+	OutputWidth() int
+	SetOutputWidth(outputWidth int)
+	OutputHeight() int
+	SetOutputHeight(outputHeight int)
+	ColorProcessingMode() SpatialScalerColorProcessingMode
+	SetColorProcessingMode(colorProcessingMode SpatialScalerColorProcessingMode)
 }
 
 var _ SpatialScalerDescriptorable = (*SpatialScalerDescriptor)(nil)

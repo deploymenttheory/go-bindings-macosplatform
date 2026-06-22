@@ -5,43 +5,58 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
+// MacOSBootLoader is an idiomatic wrapper over the Objective-C class VZMacOSBootLoader.
 //
-// MacOSBootLoader wraps [raw.VZMacOSBootLoader] with a fluent Go API.
+// It embeds [BootLoader], promoting that type's methods.
+//
+// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
 type MacOSBootLoader struct {
-	inner *raw.VZMacOSBootLoader
+	BootLoader
 }
 
-// Unwrap returns the underlying [raw.VZMacOSBootLoader].
-func (x *MacOSBootLoader) Unwrap() *raw.VZMacOSBootLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacOSBootLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// MacOSBootLoaderFromID adopts an existing object pointer as a MacOSBootLoader (nil for 0).
+// MacOSBootLoaderFromID adopts an existing Objective-C object as a MacOSBootLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func MacOSBootLoaderFromID(id objc.ID) *MacOSBootLoader {
 	if id == 0 {
 		return nil
 	}
-	return &MacOSBootLoader{inner: raw.VZMacOSBootLoaderFromID(id)}
+	x := &MacOSBootLoader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMacOSBootLoader creates a new [MacOSBootLoader].
+// macOSBootLoaderAdopt wraps an Objective-C object that this code just created as a
+// MacOSBootLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macOSBootLoaderAdopt(id objc.ID) *MacOSBootLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &MacOSBootLoader{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMacOSBootLoader creates a new MacOSBootLoader.
 func NewMacOSBootLoader() *MacOSBootLoader {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSBootLoader")), objc.RegisterName("new"))
-	return &MacOSBootLoader{inner: raw.VZMacOSBootLoaderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacOSBootLoader")), objc.RegisterName("new"))
+	return macOSBootLoaderAdopt(_id)
 }
-
-func (x *MacOSBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
 
 // MacOSBootLoaderable is the interface implemented by [MacOSBootLoader], for mocking and DI.
 type MacOSBootLoaderable interface {
-	Unwrap() *raw.VZMacOSBootLoader
+	obj.Object
 }
 
 var _ MacOSBootLoaderable = (*MacOSBootLoader)(nil)
+
+var _ BootLoaderProvider = (*MacOSBootLoader)(nil)

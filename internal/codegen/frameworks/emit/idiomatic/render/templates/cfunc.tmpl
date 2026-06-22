@@ -1,0 +1,47 @@
+{{/*
+    cfunc.tmpl renders a C-function wrapper: a package-level bound-function
+    variable, then a Go function that lazily binds the symbol and calls it. The
+    body tail (how the result and any error are produced) is selected by Kind,
+    which the gather phase resolves. No Go syntax is assembled by string
+    concatenation in the caller.
+*/}}
+{{define "cfuncs"}}{{range .}}{{template "cfunc" .}}{{end}}{{end}}
+{{define "cfunc"}}{{if .CommentFirst}}{{.CommentLine}}{{end}}var {{.VarName}} func({{join .ABIParams ", "}}) {{.ABIRet}}
+
+{{if not .CommentFirst}}{{.CommentLine}}{{end}}func {{.GoName}}({{join .SigParams ", "}}){{.RetSig}} {
+_loadOnce.Do(_loadLibrary)
+if {{.VarName}} == nil {
+ebipurego.RegisterLibFunc(&{{.VarName}}, _lib, {{.CName | printf "%q"}})
+}
+{{range .PreLines}}{{.}}
+{{end}}{{template "cfunc_tail" .}}
+}
+
+{{end}}
+{{define "cfunc_tail"}}
+{{- if eq .Kind 0}}{{.Call}}
+{{- else if eq .Kind 1}}_ret := {{.Call}}
+if _ret == 0 {
+return ""
+}
+return purego.GoString(_ret)
+{{- else if eq .Kind 2}}_ret := {{.Call}}
+return {{wrap .Wrap "_ret"}}
+{{- else if eq .Kind 3}}return {{.Call}}
+{{- else if eq .Kind 4}}_rc := {{.Call}}
+if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+return {{.FailRet}}
+}
+return {{.OkRet}}
+{{- else if eq .Kind 5}}_ok := {{.Call}}
+if {{.Fail}} {
+return errkit.FromCFError(_cfErr)
+}
+return nil
+{{- else}}_r := {{.Call}}
+if _cfErr != nil {
+return nil, errkit.FromCFError(_cfErr)
+}
+return obj.Wrap(_r), nil
+{{- end -}}
+{{end}}

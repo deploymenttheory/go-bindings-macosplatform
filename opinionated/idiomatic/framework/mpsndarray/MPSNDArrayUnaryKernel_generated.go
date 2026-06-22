@@ -5,133 +5,59 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayUnaryKernel wraps [raw.MPSNDArrayUnaryKernel] with a fluent Go API.
+// ArrayUnaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayUnaryKernel.
+//
+// ArrayUnaryKernel is an abstract base — you do not construct it directly. Construct one of [ArrayIdentity], [ArrayStridedSlice] and pass it where a ArrayUnaryKernel is accepted.
 type ArrayUnaryKernel struct {
-	inner *raw.MPSNDArrayUnaryKernel
+	ArrayMultiaryKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayUnaryKernel].
-func (x *ArrayUnaryKernel) Unwrap() *raw.MPSNDArrayUnaryKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayUnaryKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayUnaryKernelFromID adopts an existing object pointer as a ArrayUnaryKernel (nil for 0).
+// ArrayUnaryKernelFromID adopts an existing Objective-C object as a ArrayUnaryKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayUnaryKernelFromID(id objc.ID) *ArrayUnaryKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayUnaryKernel{inner: raw.MPSNDArrayUnaryKernelFromID(id)}
-}
-
-// NewArrayUnaryKernelWithDevice creates a new [ArrayUnaryKernel].
-func NewArrayUnaryKernelWithDevice(device metal.MTLDevice) *ArrayUnaryKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayUnaryKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ArrayUnaryKernel{inner: raw.MPSNDArrayUnaryKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayUnaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryKernel {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayUnaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArray calls the underlying EncodeToCommandBufferSourceArray.
-func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArray(cmdBuf, sourceArray)
-}
-
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @param      destination     The NDArray to receive the result
-//
-// EncodeToCommandBufferSourceArrayDestinationArray calls the underlying EncodeToCommandBufferSourceArrayDestinationArray.
-func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf, sourceArray, destination)
-}
-
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary.
-func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf, sourceArray, outGradientState, outputStateIsTemporary)
-}
-
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArray     The source for the filter in an NSArray. @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArrayResultStateDestinationArray.
-func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf, sourceArray, outGradientState, destination)
-}
-
-// @property  offsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
-//
-// Offsets calls the underlying Offsets.
-func (x *ArrayUnaryKernel) Offsets() raw.MPSNDArrayOffsets {
-	return x.inner.Offsets()
-}
-
-// @property  edgeMode @abstract  The edge mode used for a source NDArray Default: MPSImageEdgeModeZero
-//
-// EdgeMode calls the underlying EdgeMode.
-func (x *ArrayUnaryKernel) EdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.EdgeMode()
-}
-
-// @property  kernelSizes @abstract  The diameters of the point spread function in each dimension for a source NDArray Default: 1
-//
-// KernelSizes calls the underlying KernelSizes.
-func (x *ArrayUnaryKernel) KernelSizes() raw.MPSNDArraySizes {
-	return x.inner.KernelSizes()
-}
-
-// @property  kernelStrides @abstract  If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
-//
-// Strides calls the underlying Strides.
-func (x *ArrayUnaryKernel) Strides() raw.MPSNDArrayOffsets {
-	return x.inner.Strides()
-}
-
-// @property  dilationRate @abstract  The stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
-//
-// DilationRates calls the underlying DilationRates.
-func (x *ArrayUnaryKernel) DilationRates() raw.MPSNDArraySizes {
-	return x.inner.DilationRates()
-}
-
-func (x *ArrayUnaryKernel) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel { return x.inner }
-
-func (x *ArrayUnaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *ArrayUnaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+// arrayUnaryKernelAdopt wraps an Objective-C object that this code just created as a
+// ArrayUnaryKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayUnaryKernelAdopt(id objc.ID) *ArrayUnaryKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayUnaryKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
 // ArrayUnaryKernelable is the interface implemented by [ArrayUnaryKernel], for mocking and DI.
 type ArrayUnaryKernelable interface {
-	Unwrap() *raw.MPSNDArrayUnaryKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayUnaryKernel
-	EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
-	EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
-	Offsets() raw.MPSNDArrayOffsets
-	EdgeMode() mpscore.MPSImageEdgeMode
-	KernelSizes() raw.MPSNDArraySizes
-	Strides() raw.MPSNDArrayOffsets
-	DilationRates() raw.MPSNDArraySizes
+	obj.Object
 }
 
 var _ ArrayUnaryKernelable = (*ArrayUnaryKernel)(nil)
+
+// isArrayUnaryKernel marks ArrayUnaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the ArrayUnaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ArrayUnaryKernel) isArrayUnaryKernel() {}
+
+var _ ArrayUnaryKernelProvider = (*ArrayUnaryKernel)(nil)
+
+var _ ArrayMultiaryKernelProvider = (*ArrayUnaryKernel)(nil)
+
+var _ ArrayMultiaryBaseProvider = (*ArrayUnaryKernel)(nil)

@@ -5,62 +5,83 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque object that identifies a specific version of a domain.
+// FileProviderDomainVersion is an idiomatic wrapper over the Objective-C class NSFileProviderDomainVersion.
 //
-// FileProviderDomainVersion wraps [raw.NSFileProviderDomainVersion] with a fluent Go API.
+// An opaque object that identifies a specific version of a domain.
 type FileProviderDomainVersion struct {
-	inner *raw.NSFileProviderDomainVersion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderDomainVersion].
-func (x *FileProviderDomainVersion) Unwrap() *raw.NSFileProviderDomainVersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderDomainVersion) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderDomainVersionFromID adopts an existing object pointer as a FileProviderDomainVersion (nil for 0).
+// FileProviderDomainVersionFromID adopts an existing Objective-C object as a FileProviderDomainVersion
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderDomainVersionFromID(id objc.ID) *FileProviderDomainVersion {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderDomainVersion{inner: raw.NSFileProviderDomainVersionFromID(id)}
+	x := &FileProviderDomainVersion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileProviderDomainVersion creates a new [FileProviderDomainVersion].
-func NewFileProviderDomainVersion() *FileProviderDomainVersion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderDomainVersion")), objc.RegisterName("new"))
-	return &FileProviderDomainVersion{inner: raw.NSFileProviderDomainVersionFromID(_id)}
-}
-
-// Creates a new version that supersedes the current version.
-//
-// Next calls the underlying Next.
-func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
-	_r := x.inner.Next()
-	if _r == nil {
+// fileProviderDomainVersionAdopt wraps an Objective-C object that this code just created as a
+// FileProviderDomainVersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderDomainVersionAdopt(id objc.ID) *FileProviderDomainVersion {
+	if id == 0 {
 		return nil
 	}
-	return &FileProviderDomainVersion{inner: _r}
+	x := &FileProviderDomainVersion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Compares another domain version with this one.
-//
-// Compare calls the underlying Compare.
-func (x *FileProviderDomainVersion) Compare(otherVersion *raw.NSFileProviderDomainVersion) foundation.NSComparisonResult {
-	return x.inner.Compare(otherVersion)
+// Description returns the object's -description text.
+func (x *FileProviderDomainVersion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderDomainVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderDomainVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileProviderDomainVersion) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileProviderDomainVersion creates a new FileProviderDomainVersion.
+func NewFileProviderDomainVersion() *FileProviderDomainVersion {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomainVersion")), objc.RegisterName("new"))
+	return fileProviderDomainVersionAdopt(_id)
+}
+
+// Next creates a new version that supersedes the current version.
+func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("next"))
+	return FileProviderDomainVersionFromID(_r)
 }
 
 // FileProviderDomainVersionable is the interface implemented by [FileProviderDomainVersion], for mocking and DI.
 type FileProviderDomainVersionable interface {
-	Unwrap() *raw.NSFileProviderDomainVersion
+	obj.Object
 	Next() *FileProviderDomainVersion
-	Compare(otherVersion *raw.NSFileProviderDomainVersion) foundation.NSComparisonResult
 }
 
 var _ FileProviderDomainVersionable = (*FileProviderDomainVersion)(nil)

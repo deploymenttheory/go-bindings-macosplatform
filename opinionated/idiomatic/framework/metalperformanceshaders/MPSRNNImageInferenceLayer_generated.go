@@ -5,280 +5,165 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A recurrent neural network layer for inference on Metal Performance Shaders images.
+// RNNImageInferenceLayer is an idiomatic wrapper over the Objective-C class MPSRNNImageInferenceLayer.
 //
-// RNNImageInferenceLayer wraps [raw.MPSRNNImageInferenceLayer] with a fluent Go API.
+// It embeds [CNNKernel], promoting that type's methods.
+//
+// A recurrent neural network layer for inference on Metal Performance Shaders images.
 type RNNImageInferenceLayer struct {
-	inner *raw.MPSRNNImageInferenceLayer
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSRNNImageInferenceLayer].
-func (x *RNNImageInferenceLayer) Unwrap() *raw.MPSRNNImageInferenceLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNImageInferenceLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNImageInferenceLayerFromID adopts an existing object pointer as a RNNImageInferenceLayer (nil for 0).
+// RNNImageInferenceLayerFromID adopts an existing Objective-C object as a RNNImageInferenceLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNImageInferenceLayerFromID(id objc.ID) *RNNImageInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	return &RNNImageInferenceLayer{inner: raw.MPSRNNImageInferenceLayerFromID(id)}
-}
-
-// @abstract   Initializes a convolutional RNN kernel @param      device                          The MTLDevice on which this MPSRNNImageLayer filter will be used @param      rnnDescriptor                   The descriptor that defines the RNN layer @return     A valid MPSRNNImageInferenceLayer object or nil, if failure.
-//
-// NewRNNImageInferenceLayerWithDeviceRnnDescriptor creates a new [RNNImageInferenceLayer].
-func NewRNNImageInferenceLayerWithDeviceRnnDescriptor(device metal.MTLDevice, rnnDescriptor *mpsneuralnetwork.MPSRNNDescriptor) *RNNImageInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNImageInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rnnDescriptor:"), device, rnnDescriptor.Ptr())
-	return &RNNImageInferenceLayer{inner: raw.MPSRNNImageInferenceLayerFromID(_id)}
-}
-
-// @abstract   Initializes a kernel that implements a stack of convolutional RNN layers @param      device                          The MTLDevice on which this MPSRNNImageLayer filter will be used @param      rnnDescriptors                  An array of RNN descriptors that defines a stack of RNN layers, starting at index zero. The number of layers in stack is the number of entries in the array. All entries in the array must be valid MPSRNNDescriptors. @return     A valid MPSRNNImageInferenceLayer object or nil, if failure.
-//
-// NewRNNImageInferenceLayerWithDeviceRnnDescriptors creates a new [RNNImageInferenceLayer].
-func NewRNNImageInferenceLayerWithDeviceRnnDescriptors(device metal.MTLDevice, rnnDescriptors *foundation.NSArray[*mpsneuralnetwork.MPSRNNDescriptor]) *RNNImageInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNImageInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rnnDescriptors:"), device, rnnDescriptors.Ptr())
-	return &RNNImageInferenceLayer{inner: raw.MPSRNNImageInferenceLayerFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNImageInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNImageInferenceLayer @return     A new MPSRNNImageInferenceLayer object, or nil if failure.
-//
-// NewRNNImageInferenceLayerWithCoderDevice creates a new [RNNImageInferenceLayer].
-func NewRNNImageInferenceLayerWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *RNNImageInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNImageInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &RNNImageInferenceLayer{inner: raw.MPSRNNImageInferenceLayerFromID(_id)}
-}
-
-// @property   recurrentOutputIsTemporary @abstract   How output states from @ref encodeSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// WithRecurrentOutputIsTemporary sets the recurrentOutputIsTemporary property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+	x := &RNNImageInferenceLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property   storeAllIntermediateStates @abstract   If YES then calls to @ref encodeSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
-//
-// WithStoreAllIntermediateStates sets the storeAllIntermediateStates property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
-	return x
-}
-
-// @property   bidirectionalCombineMode @abstract   Defines how to combine the output-results, when encoding bidirectional layers using @ref encodeBidirectionalSequenceToCommandBuffer. Defaults to @ref MPSRNNBidirectionalCombineModeNone.
-//
-// WithBidirectionalCombineMode sets the bidirectionalCombineMode property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
-	return x
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
-	return x
-}
-
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
-	return x
-}
-
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithLabel(label string) *RNNImageInferenceLayer {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
-	return x
-}
-
-// EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates.
-func (x *RNNImageInferenceLayer) EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentImageState]) {
-	x.inner.EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceImages, destinationImages, recurrentInputState, recurrentOutputStates)
-}
-
-// EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages calls the underlying EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages.
-func (x *RNNImageInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage]) {
-	x.inner.EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer, sourceSequence, destinationForwardImages, destinationBackwardImages)
-}
-
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *RNNImageInferenceLayer) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNImageInferenceLayer {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
+// rNNImageInferenceLayerAdopt wraps an Objective-C object that this code just created as a
+// RNNImageInferenceLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNImageInferenceLayerAdopt(id objc.ID) *RNNImageInferenceLayer {
+	if id == 0 {
 		return nil
 	}
-	return &RNNImageInferenceLayer{inner: _r}
+	x := &RNNImageInferenceLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
-//
-// InputFeatureChannels calls the underlying InputFeatureChannels.
-func (x *RNNImageInferenceLayer) InputFeatureChannels() uint {
-	return x.inner.InputFeatureChannels()
+// NewRNNImageInferenceLayer creates a new RNNImageInferenceLayer.
+func NewRNNImageInferenceLayer() *RNNImageInferenceLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNImageInferenceLayer")), objc.RegisterName("new"))
+	return rNNImageInferenceLayerAdopt(_id)
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
-//
-// OutputFeatureChannels calls the underlying OutputFeatureChannels.
-func (x *RNNImageInferenceLayer) OutputFeatureChannels() uint {
-	return x.inner.OutputFeatureChannels()
+// WithRecurrentOutputIsTemporary how output states from
+func (x *RNNImageInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
+	return x
 }
 
-// @property   numberOfLayers @abstract   Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
-//
-// NumberOfLayers calls the underlying NumberOfLayers.
-func (x *RNNImageInferenceLayer) NumberOfLayers() uint {
-	return x.inner.NumberOfLayers()
+// WithStoreAllIntermediateStates if YES then calls to
+func (x *RNNImageInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
+	return x
 }
 
-// @property   recurrentOutputIsTemporary @abstract   How output states from @ref encodeSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
+func (x *RNNImageInferenceLayer) WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
+	return x
+}
+
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (x *RNNImageInferenceLayer) WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *RNNImageInferenceLayer) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *RNNImageInferenceLayer) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *RNNImageInferenceLayer) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithLabel the string that identifies the kernel.
+func (x *RNNImageInferenceLayer) WithLabel(label string) *RNNImageInferenceLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// InputFeatureChannels the number of feature channels per pixel in the input image.
+func (x *RNNImageInferenceLayer) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+	return _r
+}
+
+// OutputFeatureChannels the number of feature channels per pixel in the output image.
+func (x *RNNImageInferenceLayer) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+	return _r
+}
+
+// NumberOfLayers number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+func (x *RNNImageInferenceLayer) NumberOfLayers() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
+	return _r
+}
+
+// RecurrentOutputIsTemporary how output states from
 func (x *RNNImageInferenceLayer) RecurrentOutputIsTemporary() bool {
-	return x.inner.RecurrentOutputIsTemporary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
+	return _r
 }
 
-// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
+// SetRecurrentOutputIsTemporary wraps the corresponding Objective-C method.
 func (x *RNNImageInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// @property   storeAllIntermediateStates @abstract   If YES then calls to @ref encodeSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
-//
-// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+// StoreAllIntermediateStates if YES then calls to
 func (x *RNNImageInferenceLayer) StoreAllIntermediateStates() bool {
-	return x.inner.StoreAllIntermediateStates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
+	return _r
 }
 
-// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
+// SetStoreAllIntermediateStates wraps the corresponding Objective-C method.
 func (x *RNNImageInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
-}
-
-// @property   bidirectionalCombineMode @abstract   Defines how to combine the output-results, when encoding bidirectional layers using @ref encodeBidirectionalSequenceToCommandBuffer. Defaults to @ref MPSRNNBidirectionalCombineModeNone.
-//
-// BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
-func (x *RNNImageInferenceLayer) BidirectionalCombineMode() mpsneuralnetwork.MPSRNNBidirectionalCombineMode {
-	return x.inner.BidirectionalCombineMode()
-}
-
-// SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
-func (x *RNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
-}
-
-func (x *RNNImageInferenceLayer) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *RNNImageInferenceLayer) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
 
 // RNNImageInferenceLayerable is the interface implemented by [RNNImageInferenceLayer], for mocking and DI.
 type RNNImageInferenceLayerable interface {
-	Unwrap() *raw.MPSRNNImageInferenceLayer
+	obj.Object
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer
-	WithBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer
 	WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer
 	WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *RNNImageInferenceLayer
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *RNNImageInferenceLayer
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *RNNImageInferenceLayer
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *RNNImageInferenceLayer
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *RNNImageInferenceLayer
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *RNNImageInferenceLayer
-	WithOptions(options mpscore.MPSKernelOptions) *RNNImageInferenceLayer
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *RNNImageInferenceLayer
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *RNNImageInferenceLayer
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *RNNImageInferenceLayer
 	WithLabel(label string) *RNNImageInferenceLayer
-	EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentImageState])
-	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage])
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNImageInferenceLayer
-	InputFeatureChannels() uint
-	OutputFeatureChannels() uint
-	NumberOfLayers() uint
+	InputFeatureChannels() int
+	OutputFeatureChannels() int
+	NumberOfLayers() int
 	RecurrentOutputIsTemporary() bool
 	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
 	StoreAllIntermediateStates() bool
 	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-	BidirectionalCombineMode() mpsneuralnetwork.MPSRNNBidirectionalCombineMode
-	SetBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode)
 }
 
 var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)
+
+var _ CNNKernelProvider = (*RNNImageInferenceLayer)(nil)
+
+var _ KernelProvider = (*RNNImageInferenceLayer)(nil)

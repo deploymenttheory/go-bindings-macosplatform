@@ -5,30 +5,26 @@
 package securityinterface
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SFAuthorizationPluginViewUserNameKey returns the string constant SFAuthorizationPluginViewUserNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func SFAuthorizationPluginViewUserNameKey() objc.ID {
-	return purego.CFConstant(raw.SFAuthorizationPluginViewUserNameKey())
+// SFAuthorizationPluginViewUserNameKey returns the string constant SFAuthorizationPluginViewUserNameKey, for use as a dictionary key or argument.
+func SFAuthorizationPluginViewUserNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFAuthorizationPluginViewUserNameKey")))
 }
 
-// SFAuthorizationPluginViewUserShortNameKey returns the string constant SFAuthorizationPluginViewUserShortNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func SFAuthorizationPluginViewUserShortNameKey() objc.ID {
-	return purego.CFConstant(raw.SFAuthorizationPluginViewUserShortNameKey())
+// SFAuthorizationPluginViewUserShortNameKey returns the string constant SFAuthorizationPluginViewUserShortNameKey, for use as a dictionary key or argument.
+func SFAuthorizationPluginViewUserShortNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFAuthorizationPluginViewUserShortNameKey")))
 }
 
-// SFDisplayViewException returns the string constant SFDisplayViewException as an objc.ID, for use as a dictionary key or selector argument.
-func SFDisplayViewException() objc.ID {
-	return purego.CFConstant(raw.SFDisplayViewException())
+// SFDisplayViewException returns the string constant SFDisplayViewException, for use as a dictionary key or argument.
+func SFDisplayViewException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFDisplayViewException")))
 }
 
-// SFCertificateViewDisclosureStateDidChange returns the string constant SFCertificateViewDisclosureStateDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func SFCertificateViewDisclosureStateDidChange() objc.ID {
-	if _r := raw.SFCertificateViewDisclosureStateDidChange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SFCertificateViewDisclosureStateDidChange returns the string constant SFCertificateViewDisclosureStateDidChange, for use as a dictionary key or argument.
+func SFCertificateViewDisclosureStateDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFCertificateViewDisclosureStateDidChange")))
 }

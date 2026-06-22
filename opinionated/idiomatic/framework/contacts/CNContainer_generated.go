@@ -5,70 +5,103 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An immutable object that represents a collection of contacts.
+// Container is an idiomatic wrapper over the Objective-C class CNContainer.
 //
-// Container wraps [raw.CNContainer] with a fluent Go API.
+// An immutable object that represents a collection of contacts.
 type Container struct {
-	inner *raw.CNContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContainer].
-func (x *Container) Unwrap() *raw.CNContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Container) ID() objc.ID { return x.inner.Ptr() }
-
-// ContainerFromID adopts an existing object pointer as a Container (nil for 0).
+// ContainerFromID adopts an existing Objective-C object as a Container
+// (nil for 0), retaining it and registering a release finalizer.
 func ContainerFromID(id objc.ID) *Container {
 	if id == 0 {
 		return nil
 	}
-	return &Container{inner: raw.CNContainerFromID(id)}
+	x := &Container{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContainer creates a new [Container].
+// containerAdopt wraps an Objective-C object that this code just created as a
+// Container (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func containerAdopt(id objc.ID) *Container {
+	if id == 0 {
+		return nil
+	}
+	x := &Container{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Container) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Container) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Container) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Container) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContainer creates a new Container.
 func NewContainer() *Container {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContainer")), objc.RegisterName("new"))
-	return &Container{inner: raw.CNContainerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContainer")), objc.RegisterName("new"))
+	return containerAdopt(_id)
 }
 
-// The identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
-//
-// Identifier calls the underlying Identifier.
+// Identifier the identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
 func (x *Container) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Container) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
-func (x *Container) Type() CNContainerType {
-	return CNContainerType(x.inner.Type())
+// Type wraps the corresponding Objective-C method.
+func (x *Container) Type() ContainerType {
+	_r := objc.Send[ContainerType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // Containerable is the interface implemented by [Container], for mocking and DI.
 type Containerable interface {
-	Unwrap() *raw.CNContainer
+	obj.Object
 	Identifier() string
 	Name() string
-	Type() CNContainerType
+	Type() ContainerType
 }
 
 var _ Containerable = (*Container)(nil)

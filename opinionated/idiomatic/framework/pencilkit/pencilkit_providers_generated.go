@@ -5,15 +5,17 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ToolProvider is implemented by Tool and any idiomatic type wrapping a PKTool subclass.
+// ToolProvider is accepted wherever a PKTool (or one of its subclasses) is expected.
 type ToolProvider interface {
-	asTool() *raw.PKTool
+	objref.Object
+	isTool()
 }
 
-// ToolPickerItemProvider is implemented by ToolPickerItem and any idiomatic type wrapping a PKToolPickerItem subclass.
+// ToolPickerItemProvider is accepted wherever a PKToolPickerItem (or one of its subclasses) is expected.
 type ToolPickerItemProvider interface {
-	asToolPickerItem() *raw.PKToolPickerItem
+	objref.Object
+	isToolPickerItem()
 }

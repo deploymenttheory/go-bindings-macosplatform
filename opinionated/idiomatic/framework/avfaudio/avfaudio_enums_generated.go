@@ -10,346 +10,337 @@ import (
 )
 
 // Constants that indicate the app’s permission to record audio.
-type AVAudioApplicationRecordPermission int64
+type AudioApplicationRecordPermission int64
 
 const (
-	AVAudioApplicationRecordPermissionUndetermined AVAudioApplicationRecordPermission = 1970168948
-	AVAudioApplicationRecordPermissionDenied       AVAudioApplicationRecordPermission = 1684369017
-	AVAudioApplicationRecordPermissionGranted      AVAudioApplicationRecordPermission = 1735552628
+	AudioApplicationRecordPermissionUndetermined AudioApplicationRecordPermission = 1970168948
+	AudioApplicationRecordPermissionDenied       AudioApplicationRecordPermission = 1684369017
+	AudioApplicationRecordPermissionGranted      AudioApplicationRecordPermission = 1735552628
 )
 
-func (e AVAudioApplicationRecordPermission) String() string {
+// String returns the AudioApplicationRecordPermission constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioApplicationRecordPermission) String() string {
 	switch e {
-	case AVAudioApplicationRecordPermissionUndetermined:
-		return "AVAudioApplicationRecordPermissionUndetermined"
-	case AVAudioApplicationRecordPermissionDenied:
-		return "AVAudioApplicationRecordPermissionDenied"
-	case AVAudioApplicationRecordPermissionGranted:
-		return "AVAudioApplicationRecordPermissionGranted"
+	case AudioApplicationRecordPermissionUndetermined:
+		return "AudioApplicationRecordPermissionUndetermined"
+	case AudioApplicationRecordPermissionDenied:
+		return "AudioApplicationRecordPermissionDenied"
+	case AudioApplicationRecordPermissionGranted:
+		return "AudioApplicationRecordPermissionGranted"
 	default:
-		return fmt.Sprintf("AVAudioApplicationRecordPermission(%d)", int64(e))
+		return fmt.Sprintf("AudioApplicationRecordPermission(%d)", int64(e))
 	}
 }
 
 // The format options that describe common audio formats.
-type AVAudioCommonFormat uint64
+type AudioCommonFormat uint64
 
 const (
 	// A format other than one the enumeration specifies.
-	AVAudioOtherFormat AVAudioCommonFormat = 0
+	AudioOtherFormat AudioCommonFormat = 0
 	// A format that represents the standard format as native-endian floats.
-	AVAudioPCMFormatFloat32 AVAudioCommonFormat = 1
+	AudioPCMFormatFloat32 AudioCommonFormat = 1
 	// A format that represents native-endian doubles.
-	AVAudioPCMFormatFloat64 AVAudioCommonFormat = 2
+	AudioPCMFormatFloat64 AudioCommonFormat = 2
 	// A format that represents signed 16-bit native-endian integers.
-	AVAudioPCMFormatInt16 AVAudioCommonFormat = 3
+	AudioPCMFormatInt16 AudioCommonFormat = 3
 	// A format that represents signed 32-bit native-endian integers.
-	AVAudioPCMFormatInt32 AVAudioCommonFormat = 4
+	AudioPCMFormatInt32 AudioCommonFormat = 4
 )
 
-func (e AVAudioCommonFormat) String() string {
+// String returns the AudioCommonFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioCommonFormat) String() string {
 	switch e {
-	case AVAudioOtherFormat:
-		return "AVAudioOtherFormat"
-	case AVAudioPCMFormatFloat32:
-		return "AVAudioPCMFormatFloat32"
-	case AVAudioPCMFormatFloat64:
-		return "AVAudioPCMFormatFloat64"
-	case AVAudioPCMFormatInt16:
-		return "AVAudioPCMFormatInt16"
-	case AVAudioPCMFormatInt32:
-		return "AVAudioPCMFormatInt32"
+	case AudioOtherFormat:
+		return "AudioOtherFormat"
+	case AudioPCMFormatFloat32:
+		return "AudioPCMFormatFloat32"
+	case AudioPCMFormatFloat64:
+		return "AudioPCMFormatFloat64"
+	case AudioPCMFormatInt16:
+		return "AudioPCMFormatInt16"
+	case AudioPCMFormatInt32:
+		return "AudioPCMFormatInt32"
 	default:
-		return fmt.Sprintf("AVAudioCommonFormat(%d)", int64(e))
+		return fmt.Sprintf("AudioCommonFormat(%d)", int64(e))
 	}
 }
 
-type AVAudioContentSource int64
+type AudioContentSource int64
 
 const (
-	AVAudioContentSource_Unspecified                   AVAudioContentSource = -1
-	AVAudioContentSource_Reserved                      AVAudioContentSource = 0
-	AVAudioContentSource_AppleCapture_Traditional      AVAudioContentSource = 1
-	AVAudioContentSource_AppleCapture_Spatial          AVAudioContentSource = 2
-	AVAudioContentSource_AppleCapture_Spatial_Enhanced AVAudioContentSource = 3
-	AVAudioContentSource_AppleMusic_Traditional        AVAudioContentSource = 4
-	AVAudioContentSource_AppleMusic_Spatial            AVAudioContentSource = 5
-	AVAudioContentSource_AppleAV_Traditional_Offline   AVAudioContentSource = 6
-	AVAudioContentSource_AppleAV_Spatial_Offline       AVAudioContentSource = 7
-	AVAudioContentSource_AppleAV_Traditional_Live      AVAudioContentSource = 8
-	AVAudioContentSource_AppleAV_Spatial_Live          AVAudioContentSource = 9
-	AVAudioContentSource_ApplePassthrough              AVAudioContentSource = 10
-	AVAudioContentSource_Capture_Traditional           AVAudioContentSource = 33
-	AVAudioContentSource_Capture_Spatial               AVAudioContentSource = 34
-	AVAudioContentSource_Capture_Spatial_Enhanced      AVAudioContentSource = 35
-	AVAudioContentSource_Music_Traditional             AVAudioContentSource = 36
-	AVAudioContentSource_Music_Spatial                 AVAudioContentSource = 37
-	AVAudioContentSource_AV_Traditional_Offline        AVAudioContentSource = 38
-	AVAudioContentSource_AV_Spatial_Offline            AVAudioContentSource = 39
-	AVAudioContentSource_AV_Traditional_Live           AVAudioContentSource = 40
-	AVAudioContentSource_AV_Spatial_Live               AVAudioContentSource = 41
-	AVAudioContentSource_Passthrough                   AVAudioContentSource = 42
+	AudioContentSource_Unspecified                   AudioContentSource = -1
+	AudioContentSource_Reserved                      AudioContentSource = 0
+	AudioContentSource_AppleCapture_Traditional      AudioContentSource = 1
+	AudioContentSource_AppleCapture_Spatial          AudioContentSource = 2
+	AudioContentSource_AppleCapture_Spatial_Enhanced AudioContentSource = 3
+	AudioContentSource_AppleMusic_Traditional        AudioContentSource = 4
+	AudioContentSource_AppleMusic_Spatial            AudioContentSource = 5
+	AudioContentSource_AppleAV_Traditional_Offline   AudioContentSource = 6
+	AudioContentSource_AppleAV_Spatial_Offline       AudioContentSource = 7
+	AudioContentSource_AppleAV_Traditional_Live      AudioContentSource = 8
+	AudioContentSource_AppleAV_Spatial_Live          AudioContentSource = 9
+	AudioContentSource_ApplePassthrough              AudioContentSource = 10
+	AudioContentSource_Capture_Traditional           AudioContentSource = 33
+	AudioContentSource_Capture_Spatial               AudioContentSource = 34
+	AudioContentSource_Capture_Spatial_Enhanced      AudioContentSource = 35
+	AudioContentSource_Music_Traditional             AudioContentSource = 36
+	AudioContentSource_Music_Spatial                 AudioContentSource = 37
+	AudioContentSource_AV_Traditional_Offline        AudioContentSource = 38
+	AudioContentSource_AV_Spatial_Offline            AudioContentSource = 39
+	AudioContentSource_AV_Traditional_Live           AudioContentSource = 40
+	AudioContentSource_AV_Spatial_Live               AudioContentSource = 41
+	AudioContentSource_Passthrough                   AudioContentSource = 42
 )
 
-func (e AVAudioContentSource) String() string {
+// String returns the AudioContentSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioContentSource) String() string {
 	switch e {
-	case AVAudioContentSource_Unspecified:
-		return "AVAudioContentSource_Unspecified"
-	case AVAudioContentSource_Reserved:
-		return "AVAudioContentSource_Reserved"
-	case AVAudioContentSource_AppleCapture_Traditional:
-		return "AVAudioContentSource_AppleCapture_Traditional"
-	case AVAudioContentSource_AppleCapture_Spatial:
-		return "AVAudioContentSource_AppleCapture_Spatial"
-	case AVAudioContentSource_AppleCapture_Spatial_Enhanced:
-		return "AVAudioContentSource_AppleCapture_Spatial_Enhanced"
-	case AVAudioContentSource_AppleMusic_Traditional:
-		return "AVAudioContentSource_AppleMusic_Traditional"
-	case AVAudioContentSource_AppleMusic_Spatial:
-		return "AVAudioContentSource_AppleMusic_Spatial"
-	case AVAudioContentSource_AppleAV_Traditional_Offline:
-		return "AVAudioContentSource_AppleAV_Traditional_Offline"
-	case AVAudioContentSource_AppleAV_Spatial_Offline:
-		return "AVAudioContentSource_AppleAV_Spatial_Offline"
-	case AVAudioContentSource_AppleAV_Traditional_Live:
-		return "AVAudioContentSource_AppleAV_Traditional_Live"
-	case AVAudioContentSource_AppleAV_Spatial_Live:
-		return "AVAudioContentSource_AppleAV_Spatial_Live"
-	case AVAudioContentSource_ApplePassthrough:
-		return "AVAudioContentSource_ApplePassthrough"
-	case AVAudioContentSource_Capture_Traditional:
-		return "AVAudioContentSource_Capture_Traditional"
-	case AVAudioContentSource_Capture_Spatial:
-		return "AVAudioContentSource_Capture_Spatial"
-	case AVAudioContentSource_Capture_Spatial_Enhanced:
-		return "AVAudioContentSource_Capture_Spatial_Enhanced"
-	case AVAudioContentSource_Music_Traditional:
-		return "AVAudioContentSource_Music_Traditional"
-	case AVAudioContentSource_Music_Spatial:
-		return "AVAudioContentSource_Music_Spatial"
-	case AVAudioContentSource_AV_Traditional_Offline:
-		return "AVAudioContentSource_AV_Traditional_Offline"
-	case AVAudioContentSource_AV_Spatial_Offline:
-		return "AVAudioContentSource_AV_Spatial_Offline"
-	case AVAudioContentSource_AV_Traditional_Live:
-		return "AVAudioContentSource_AV_Traditional_Live"
-	case AVAudioContentSource_AV_Spatial_Live:
-		return "AVAudioContentSource_AV_Spatial_Live"
-	case AVAudioContentSource_Passthrough:
-		return "AVAudioContentSource_Passthrough"
+	case AudioContentSource_Unspecified:
+		return "AudioContentSource_Unspecified"
+	case AudioContentSource_Reserved:
+		return "AudioContentSource_Reserved"
+	case AudioContentSource_AppleCapture_Traditional:
+		return "AudioContentSource_AppleCapture_Traditional"
+	case AudioContentSource_AppleCapture_Spatial:
+		return "AudioContentSource_AppleCapture_Spatial"
+	case AudioContentSource_AppleCapture_Spatial_Enhanced:
+		return "AudioContentSource_AppleCapture_Spatial_Enhanced"
+	case AudioContentSource_AppleMusic_Traditional:
+		return "AudioContentSource_AppleMusic_Traditional"
+	case AudioContentSource_AppleMusic_Spatial:
+		return "AudioContentSource_AppleMusic_Spatial"
+	case AudioContentSource_AppleAV_Traditional_Offline:
+		return "AudioContentSource_AppleAV_Traditional_Offline"
+	case AudioContentSource_AppleAV_Spatial_Offline:
+		return "AudioContentSource_AppleAV_Spatial_Offline"
+	case AudioContentSource_AppleAV_Traditional_Live:
+		return "AudioContentSource_AppleAV_Traditional_Live"
+	case AudioContentSource_AppleAV_Spatial_Live:
+		return "AudioContentSource_AppleAV_Spatial_Live"
+	case AudioContentSource_ApplePassthrough:
+		return "AudioContentSource_ApplePassthrough"
+	case AudioContentSource_Capture_Traditional:
+		return "AudioContentSource_Capture_Traditional"
+	case AudioContentSource_Capture_Spatial:
+		return "AudioContentSource_Capture_Spatial"
+	case AudioContentSource_Capture_Spatial_Enhanced:
+		return "AudioContentSource_Capture_Spatial_Enhanced"
+	case AudioContentSource_Music_Traditional:
+		return "AudioContentSource_Music_Traditional"
+	case AudioContentSource_Music_Spatial:
+		return "AudioContentSource_Music_Spatial"
+	case AudioContentSource_AV_Traditional_Offline:
+		return "AudioContentSource_AV_Traditional_Offline"
+	case AudioContentSource_AV_Spatial_Offline:
+		return "AudioContentSource_AV_Spatial_Offline"
+	case AudioContentSource_AV_Traditional_Live:
+		return "AudioContentSource_AV_Traditional_Live"
+	case AudioContentSource_AV_Spatial_Live:
+		return "AudioContentSource_AV_Spatial_Live"
+	case AudioContentSource_Passthrough:
+		return "AudioContentSource_Passthrough"
 	default:
-		return fmt.Sprintf("AVAudioContentSource(%d)", int64(e))
-	}
-}
-
-// An option that indicates the return status of an audio converter method.
-type AVAudioConverterOutputStatus int64
-
-const (
-	// A status that indicates that the method returns all of the requested data.
-	AVAudioConverterOutputStatus_HaveData AVAudioConverterOutputStatus = 0
-	// A status that indicates the method doesn’t have enough input available to satisfy the request.
-	AVAudioConverterOutputStatus_InputRanDry AVAudioConverterOutputStatus = 1
-	// A status that indicates the method reaches the end of the stream, and doesn’t return any data.
-	AVAudioConverterOutputStatus_EndOfStream AVAudioConverterOutputStatus = 2
-	// A status that indicates the method encounters an error.
-	AVAudioConverterOutputStatus_Error AVAudioConverterOutputStatus = 3
-)
-
-func (e AVAudioConverterOutputStatus) String() string {
-	switch e {
-	case AVAudioConverterOutputStatus_HaveData:
-		return "AVAudioConverterOutputStatus_HaveData"
-	case AVAudioConverterOutputStatus_InputRanDry:
-		return "AVAudioConverterOutputStatus_InputRanDry"
-	case AVAudioConverterOutputStatus_EndOfStream:
-		return "AVAudioConverterOutputStatus_EndOfStream"
-	case AVAudioConverterOutputStatus_Error:
-		return "AVAudioConverterOutputStatus_Error"
-	default:
-		return fmt.Sprintf("AVAudioConverterOutputStatus(%d)", int64(e))
+		return fmt.Sprintf("AudioContentSource(%d)", int64(e))
 	}
 }
 
 // Options for the prime method property.
-type AVAudioConverterPrimeMethod int64
+type AudioConverterPrimeMethod int64
 
 const (
 	// An option to prime with leading and trailing input frames.
-	AVAudioConverterPrimeMethod_Pre AVAudioConverterPrimeMethod = 0
+	AudioConverterPrimeMethod_Pre AudioConverterPrimeMethod = 0
 	// An option to prime with trailing (zero latency) frames where the converter assumes the leading frames are silence.
-	AVAudioConverterPrimeMethod_Normal AVAudioConverterPrimeMethod = 1
+	AudioConverterPrimeMethod_Normal AudioConverterPrimeMethod = 1
 	// An option to prime the converter assumes leading and trailing frames are silence.
-	AVAudioConverterPrimeMethod_None AVAudioConverterPrimeMethod = 2
+	AudioConverterPrimeMethod_None AudioConverterPrimeMethod = 2
 )
 
-func (e AVAudioConverterPrimeMethod) String() string {
+// String returns the AudioConverterPrimeMethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioConverterPrimeMethod) String() string {
 	switch e {
-	case AVAudioConverterPrimeMethod_Pre:
-		return "AVAudioConverterPrimeMethod_Pre"
-	case AVAudioConverterPrimeMethod_Normal:
-		return "AVAudioConverterPrimeMethod_Normal"
-	case AVAudioConverterPrimeMethod_None:
-		return "AVAudioConverterPrimeMethod_None"
+	case AudioConverterPrimeMethod_Pre:
+		return "AudioConverterPrimeMethod_Pre"
+	case AudioConverterPrimeMethod_Normal:
+		return "AudioConverterPrimeMethod_Normal"
+	case AudioConverterPrimeMethod_None:
+		return "AudioConverterPrimeMethod_None"
 	default:
-		return fmt.Sprintf("AVAudioConverterPrimeMethod(%d)", int64(e))
+		return fmt.Sprintf("AudioConverterPrimeMethod(%d)", int64(e))
 	}
 }
 
-type AVAudioDynamicRangeControlConfiguration int64
+type AudioDynamicRangeControlConfiguration int64
 
 const (
-	AVAudioDynamicRangeControlConfiguration_None    AVAudioDynamicRangeControlConfiguration = 0
-	AVAudioDynamicRangeControlConfiguration_Music   AVAudioDynamicRangeControlConfiguration = 1
-	AVAudioDynamicRangeControlConfiguration_Speech  AVAudioDynamicRangeControlConfiguration = 2
-	AVAudioDynamicRangeControlConfiguration_Movie   AVAudioDynamicRangeControlConfiguration = 3
-	AVAudioDynamicRangeControlConfiguration_Capture AVAudioDynamicRangeControlConfiguration = 4
+	AudioDynamicRangeControlConfiguration_None    AudioDynamicRangeControlConfiguration = 0
+	AudioDynamicRangeControlConfiguration_Music   AudioDynamicRangeControlConfiguration = 1
+	AudioDynamicRangeControlConfiguration_Speech  AudioDynamicRangeControlConfiguration = 2
+	AudioDynamicRangeControlConfiguration_Movie   AudioDynamicRangeControlConfiguration = 3
+	AudioDynamicRangeControlConfiguration_Capture AudioDynamicRangeControlConfiguration = 4
 )
 
-func (e AVAudioDynamicRangeControlConfiguration) String() string {
+// String returns the AudioDynamicRangeControlConfiguration constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioDynamicRangeControlConfiguration) String() string {
 	switch e {
-	case AVAudioDynamicRangeControlConfiguration_None:
-		return "AVAudioDynamicRangeControlConfiguration_None"
-	case AVAudioDynamicRangeControlConfiguration_Music:
-		return "AVAudioDynamicRangeControlConfiguration_Music"
-	case AVAudioDynamicRangeControlConfiguration_Speech:
-		return "AVAudioDynamicRangeControlConfiguration_Speech"
-	case AVAudioDynamicRangeControlConfiguration_Movie:
-		return "AVAudioDynamicRangeControlConfiguration_Movie"
-	case AVAudioDynamicRangeControlConfiguration_Capture:
-		return "AVAudioDynamicRangeControlConfiguration_Capture"
+	case AudioDynamicRangeControlConfiguration_None:
+		return "AudioDynamicRangeControlConfiguration_None"
+	case AudioDynamicRangeControlConfiguration_Music:
+		return "AudioDynamicRangeControlConfiguration_Music"
+	case AudioDynamicRangeControlConfiguration_Speech:
+		return "AudioDynamicRangeControlConfiguration_Speech"
+	case AudioDynamicRangeControlConfiguration_Movie:
+		return "AudioDynamicRangeControlConfiguration_Movie"
+	case AudioDynamicRangeControlConfiguration_Capture:
+		return "AudioDynamicRangeControlConfiguration_Capture"
 	default:
-		return fmt.Sprintf("AVAudioDynamicRangeControlConfiguration(%d)", int64(e))
+		return fmt.Sprintf("AudioDynamicRangeControlConfiguration(%d)", int64(e))
 	}
 }
 
 // The two modes for manual rendering.
-type AVAudioEngineManualRenderingMode int64
+type AudioEngineManualRenderingMode int64
 
 const (
 	// An engine that operates in an offline mode.
-	AVAudioEngineManualRenderingModeOffline AVAudioEngineManualRenderingMode = 0
+	AudioEngineManualRenderingModeOffline AudioEngineManualRenderingMode = 0
 	// An engine that operates under real-time constraints and doesn’t make blocking calls while rendering.
-	AVAudioEngineManualRenderingModeRealtime AVAudioEngineManualRenderingMode = 1
+	AudioEngineManualRenderingModeRealtime AudioEngineManualRenderingMode = 1
 )
 
-func (e AVAudioEngineManualRenderingMode) String() string {
+// String returns the AudioEngineManualRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioEngineManualRenderingMode) String() string {
 	switch e {
-	case AVAudioEngineManualRenderingModeOffline:
-		return "AVAudioEngineManualRenderingModeOffline"
-	case AVAudioEngineManualRenderingModeRealtime:
-		return "AVAudioEngineManualRenderingModeRealtime"
+	case AudioEngineManualRenderingModeOffline:
+		return "AudioEngineManualRenderingModeOffline"
+	case AudioEngineManualRenderingModeRealtime:
+		return "AudioEngineManualRenderingModeRealtime"
 	default:
-		return fmt.Sprintf("AVAudioEngineManualRenderingMode(%d)", int64(e))
+		return fmt.Sprintf("AudioEngineManualRenderingMode(%d)", int64(e))
 	}
 }
 
 // Status codes that return from the render call to the engine operating in manual rendering mode.
-type AVAudioEngineManualRenderingStatus int64
+type AudioEngineManualRenderingStatus int64
 
 const (
 	// A problem that occurs during rendering and results in no data returning.
-	AVAudioEngineManualRenderingStatusError AVAudioEngineManualRenderingStatus = -1
+	AudioEngineManualRenderingStatusError AudioEngineManualRenderingStatus = -1
 	// A status that indicates the successful return of the requested data.
-	AVAudioEngineManualRenderingStatusSuccess AVAudioEngineManualRenderingStatus = 0
+	AudioEngineManualRenderingStatusSuccess AudioEngineManualRenderingStatus = 0
 	// A condition that occurs when the input node doesn’t return enough input data to satisfy the render request at the time of the request.
-	AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode AVAudioEngineManualRenderingStatus = 1
+	AudioEngineManualRenderingStatusInsufficientDataFromInputNode AudioEngineManualRenderingStatus = 1
 	// An operation that the system can’t perform under the current conditions.
-	AVAudioEngineManualRenderingStatusCannotDoInCurrentContext AVAudioEngineManualRenderingStatus = 2
+	AudioEngineManualRenderingStatusCannotDoInCurrentContext AudioEngineManualRenderingStatus = 2
 )
 
-func (e AVAudioEngineManualRenderingStatus) String() string {
+// String returns the AudioEngineManualRenderingStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioEngineManualRenderingStatus) String() string {
 	switch e {
-	case AVAudioEngineManualRenderingStatusError:
-		return "AVAudioEngineManualRenderingStatusError"
-	case AVAudioEngineManualRenderingStatusSuccess:
-		return "AVAudioEngineManualRenderingStatusSuccess"
-	case AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode:
-		return "AVAudioEngineManualRenderingStatusInsufficientDataFromInputNode"
-	case AVAudioEngineManualRenderingStatusCannotDoInCurrentContext:
-		return "AVAudioEngineManualRenderingStatusCannotDoInCurrentContext"
+	case AudioEngineManualRenderingStatusError:
+		return "AudioEngineManualRenderingStatusError"
+	case AudioEngineManualRenderingStatusSuccess:
+		return "AudioEngineManualRenderingStatusSuccess"
+	case AudioEngineManualRenderingStatusInsufficientDataFromInputNode:
+		return "AudioEngineManualRenderingStatusInsufficientDataFromInputNode"
+	case AudioEngineManualRenderingStatusCannotDoInCurrentContext:
+		return "AudioEngineManualRenderingStatusCannotDoInCurrentContext"
 	default:
-		return fmt.Sprintf("AVAudioEngineManualRenderingStatus(%d)", int64(e))
+		return fmt.Sprintf("AudioEngineManualRenderingStatus(%d)", int64(e))
 	}
 }
 
 // Types of distance attenuation models.
-type AVAudioEnvironmentDistanceAttenuationModel int64
+type AudioEnvironmentDistanceAttenuationModel int64
 
 const (
 	// An exponential model that describes the drop-off in gain as the source moves away from the listener.
-	AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModel = 1
+	AudioEnvironmentDistanceAttenuationModelExponential AudioEnvironmentDistanceAttenuationModel = 1
 	// An inverse model that describes the drop-off in gain as the source moves away from the listener.
-	AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModel = 2
+	AudioEnvironmentDistanceAttenuationModelInverse AudioEnvironmentDistanceAttenuationModel = 2
 	// A linear model that describes the drop-off in gain as the source moves away from the listener.
-	AVAudioEnvironmentDistanceAttenuationModelLinear AVAudioEnvironmentDistanceAttenuationModel = 3
+	AudioEnvironmentDistanceAttenuationModelLinear AudioEnvironmentDistanceAttenuationModel = 3
 )
 
-func (e AVAudioEnvironmentDistanceAttenuationModel) String() string {
+// String returns the AudioEnvironmentDistanceAttenuationModel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioEnvironmentDistanceAttenuationModel) String() string {
 	switch e {
-	case AVAudioEnvironmentDistanceAttenuationModelExponential:
-		return "AVAudioEnvironmentDistanceAttenuationModelExponential"
-	case AVAudioEnvironmentDistanceAttenuationModelInverse:
-		return "AVAudioEnvironmentDistanceAttenuationModelInverse"
-	case AVAudioEnvironmentDistanceAttenuationModelLinear:
-		return "AVAudioEnvironmentDistanceAttenuationModelLinear"
+	case AudioEnvironmentDistanceAttenuationModelExponential:
+		return "AudioEnvironmentDistanceAttenuationModelExponential"
+	case AudioEnvironmentDistanceAttenuationModelInverse:
+		return "AudioEnvironmentDistanceAttenuationModelInverse"
+	case AudioEnvironmentDistanceAttenuationModelLinear:
+		return "AudioEnvironmentDistanceAttenuationModelLinear"
 	default:
-		return fmt.Sprintf("AVAudioEnvironmentDistanceAttenuationModel(%d)", int64(e))
+		return fmt.Sprintf("AudioEnvironmentDistanceAttenuationModel(%d)", int64(e))
 	}
 }
 
 // The output types for using with the automatic 3D mixing rendering algorithm.
-type AVAudioEnvironmentOutputType int64
+type AudioEnvironmentOutputType int64
 
 const (
 	// Automatically detects the playback route and picks the correct output.
-	AVAudioEnvironmentOutputTypeAuto AVAudioEnvironmentOutputType = 0
+	AudioEnvironmentOutputTypeAuto AudioEnvironmentOutputType = 0
 	// Renders the audio output for headphones.
-	AVAudioEnvironmentOutputTypeHeadphones AVAudioEnvironmentOutputType = 1
+	AudioEnvironmentOutputTypeHeadphones AudioEnvironmentOutputType = 1
 	// Renders the audio output for built-in speakers on the current hardware.
-	AVAudioEnvironmentOutputTypeBuiltInSpeakers AVAudioEnvironmentOutputType = 2
+	AudioEnvironmentOutputTypeBuiltInSpeakers AudioEnvironmentOutputType = 2
 	// Renders the audio output for external speakers according to the audio environment node’s output channel layout.
-	AVAudioEnvironmentOutputTypeExternalSpeakers AVAudioEnvironmentOutputType = 3
+	AudioEnvironmentOutputTypeExternalSpeakers AudioEnvironmentOutputType = 3
 )
 
-func (e AVAudioEnvironmentOutputType) String() string {
+// String returns the AudioEnvironmentOutputType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioEnvironmentOutputType) String() string {
 	switch e {
-	case AVAudioEnvironmentOutputTypeAuto:
-		return "AVAudioEnvironmentOutputTypeAuto"
-	case AVAudioEnvironmentOutputTypeHeadphones:
-		return "AVAudioEnvironmentOutputTypeHeadphones"
-	case AVAudioEnvironmentOutputTypeBuiltInSpeakers:
-		return "AVAudioEnvironmentOutputTypeBuiltInSpeakers"
-	case AVAudioEnvironmentOutputTypeExternalSpeakers:
-		return "AVAudioEnvironmentOutputTypeExternalSpeakers"
+	case AudioEnvironmentOutputTypeAuto:
+		return "AudioEnvironmentOutputTypeAuto"
+	case AudioEnvironmentOutputTypeHeadphones:
+		return "AudioEnvironmentOutputTypeHeadphones"
+	case AudioEnvironmentOutputTypeBuiltInSpeakers:
+		return "AudioEnvironmentOutputTypeBuiltInSpeakers"
+	case AudioEnvironmentOutputTypeExternalSpeakers:
+		return "AudioEnvironmentOutputTypeExternalSpeakers"
 	default:
-		return fmt.Sprintf("AVAudioEnvironmentOutputType(%d)", int64(e))
+		return fmt.Sprintf("AudioEnvironmentOutputType(%d)", int64(e))
 	}
 }
 
 // The buffer options that control the playback scheduling.
 // Bitmask — values may be combined with |.
-type AVAudioPlayerNodeBufferOptions uint64
+type AudioPlayerNodeBufferOptions uint64
 
 const (
 	// An option that indicates the buffer loops indefinitely.
-	AVAudioPlayerNodeBufferLoops AVAudioPlayerNodeBufferOptions = 1
+	AudioPlayerNodeBufferLoops AudioPlayerNodeBufferOptions = 1
 	// An option that indicates the buffer interrupts any buffer in a playing state.
-	AVAudioPlayerNodeBufferInterrupts AVAudioPlayerNodeBufferOptions = 2
+	AudioPlayerNodeBufferInterrupts AudioPlayerNodeBufferOptions = 2
 	// An option that indicates the buffer interrupts any buffer in a playing state at its loop point.
-	AVAudioPlayerNodeBufferInterruptsAtLoop AVAudioPlayerNodeBufferOptions = 4
+	AudioPlayerNodeBufferInterruptsAtLoop AudioPlayerNodeBufferOptions = 4
 )
 
-func (e AVAudioPlayerNodeBufferOptions) String() string {
+// String returns the AudioPlayerNodeBufferOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioPlayerNodeBufferOptions) String() string {
 	var parts []string
-	if e&AVAudioPlayerNodeBufferLoops != 0 {
-		parts = append(parts, "AVAudioPlayerNodeBufferLoops")
+	if e&AudioPlayerNodeBufferLoops != 0 {
+		parts = append(parts, "AudioPlayerNodeBufferLoops")
 	}
-	if e&AVAudioPlayerNodeBufferInterrupts != 0 {
-		parts = append(parts, "AVAudioPlayerNodeBufferInterrupts")
+	if e&AudioPlayerNodeBufferInterrupts != 0 {
+		parts = append(parts, "AudioPlayerNodeBufferInterrupts")
 	}
-	if e&AVAudioPlayerNodeBufferInterruptsAtLoop != 0 {
-		parts = append(parts, "AVAudioPlayerNodeBufferInterruptsAtLoop")
+	if e&AudioPlayerNodeBufferInterruptsAtLoop != 0 {
+		parts = append(parts, "AudioPlayerNodeBufferInterruptsAtLoop")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -358,490 +349,485 @@ func (e AVAudioPlayerNodeBufferOptions) String() string {
 }
 
 // Constants that specify when the framework must invoke the completion handler.
-type AVAudioPlayerNodeCompletionCallbackType int64
+type AudioPlayerNodeCompletionCallbackType int64
 
 const (
 	// A completion handler that indicates the player consumes the buffer or file data.
-	AVAudioPlayerNodeCompletionDataConsumed AVAudioPlayerNodeCompletionCallbackType = 0
+	AudioPlayerNodeCompletionDataConsumed AudioPlayerNodeCompletionCallbackType = 0
 	// A completion handler that indicates the player renders the buffer or file data.
-	AVAudioPlayerNodeCompletionDataRendered AVAudioPlayerNodeCompletionCallbackType = 1
+	AudioPlayerNodeCompletionDataRendered AudioPlayerNodeCompletionCallbackType = 1
 	// A completion handler that indicates the player finishes the buffer or file data.
-	AVAudioPlayerNodeCompletionDataPlayedBack AVAudioPlayerNodeCompletionCallbackType = 2
+	AudioPlayerNodeCompletionDataPlayedBack AudioPlayerNodeCompletionCallbackType = 2
 )
 
-func (e AVAudioPlayerNodeCompletionCallbackType) String() string {
+// String returns the AudioPlayerNodeCompletionCallbackType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioPlayerNodeCompletionCallbackType) String() string {
 	switch e {
-	case AVAudioPlayerNodeCompletionDataConsumed:
-		return "AVAudioPlayerNodeCompletionDataConsumed"
-	case AVAudioPlayerNodeCompletionDataRendered:
-		return "AVAudioPlayerNodeCompletionDataRendered"
-	case AVAudioPlayerNodeCompletionDataPlayedBack:
-		return "AVAudioPlayerNodeCompletionDataPlayedBack"
+	case AudioPlayerNodeCompletionDataConsumed:
+		return "AudioPlayerNodeCompletionDataConsumed"
+	case AudioPlayerNodeCompletionDataRendered:
+		return "AudioPlayerNodeCompletionDataRendered"
+	case AudioPlayerNodeCompletionDataPlayedBack:
+		return "AudioPlayerNodeCompletionDataPlayedBack"
 	default:
-		return fmt.Sprintf("AVAudioPlayerNodeCompletionCallbackType(%d)", int64(e))
+		return fmt.Sprintf("AudioPlayerNodeCompletionCallbackType(%d)", int64(e))
 	}
 }
 
 // Categories that describe the general nature of your app’s audio use.
-type AVAudioRoutingArbitrationCategory int64
+type AudioRoutingArbitrationCategory int64
 
 const (
-	AVAudioRoutingArbitrationCategoryPlayback           AVAudioRoutingArbitrationCategory = 0
-	AVAudioRoutingArbitrationCategoryPlayAndRecord      AVAudioRoutingArbitrationCategory = 1
-	AVAudioRoutingArbitrationCategoryPlayAndRecordVoice AVAudioRoutingArbitrationCategory = 2
+	AudioRoutingArbitrationCategoryPlayback           AudioRoutingArbitrationCategory = 0
+	AudioRoutingArbitrationCategoryPlayAndRecord      AudioRoutingArbitrationCategory = 1
+	AudioRoutingArbitrationCategoryPlayAndRecordVoice AudioRoutingArbitrationCategory = 2
 )
 
-func (e AVAudioRoutingArbitrationCategory) String() string {
+// String returns the AudioRoutingArbitrationCategory constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioRoutingArbitrationCategory) String() string {
 	switch e {
-	case AVAudioRoutingArbitrationCategoryPlayback:
-		return "AVAudioRoutingArbitrationCategoryPlayback"
-	case AVAudioRoutingArbitrationCategoryPlayAndRecord:
-		return "AVAudioRoutingArbitrationCategoryPlayAndRecord"
-	case AVAudioRoutingArbitrationCategoryPlayAndRecordVoice:
-		return "AVAudioRoutingArbitrationCategoryPlayAndRecordVoice"
+	case AudioRoutingArbitrationCategoryPlayback:
+		return "AudioRoutingArbitrationCategoryPlayback"
+	case AudioRoutingArbitrationCategoryPlayAndRecord:
+		return "AudioRoutingArbitrationCategoryPlayAndRecord"
+	case AudioRoutingArbitrationCategoryPlayAndRecordVoice:
+		return "AudioRoutingArbitrationCategoryPlayAndRecordVoice"
 	default:
-		return fmt.Sprintf("AVAudioRoutingArbitrationCategory(%d)", int64(e))
+		return fmt.Sprintf("AudioRoutingArbitrationCategory(%d)", int64(e))
 	}
 }
 
 // Constants that represent preset audio distortions.
-type AVAudioUnitDistortionPreset int64
+type AudioUnitDistortionPreset int64
 
 const (
 	// A preset that represents a bit brush drums distortion.
-	AVAudioUnitDistortionPresetDrumsBitBrush AVAudioUnitDistortionPreset = 0
+	AudioUnitDistortionPresetDrumsBitBrush AudioUnitDistortionPreset = 0
 	// A preset that represents a buffer beat drums distortion.
-	AVAudioUnitDistortionPresetDrumsBufferBeats AVAudioUnitDistortionPreset = 1
+	AudioUnitDistortionPresetDrumsBufferBeats AudioUnitDistortionPreset = 1
 	// A preset that represents a low fidelity drums distortion.
-	AVAudioUnitDistortionPresetDrumsLoFi AVAudioUnitDistortionPreset = 2
+	AudioUnitDistortionPresetDrumsLoFi AudioUnitDistortionPreset = 2
 	// A preset that represents a broken speaker distortion.
-	AVAudioUnitDistortionPresetMultiBrokenSpeaker AVAudioUnitDistortionPreset = 3
+	AudioUnitDistortionPresetMultiBrokenSpeaker AudioUnitDistortionPreset = 3
 	// A preset that represents a cellphone concert distortion.
-	AVAudioUnitDistortionPresetMultiCellphoneConcert AVAudioUnitDistortionPreset = 4
+	AudioUnitDistortionPresetMultiCellphoneConcert AudioUnitDistortionPreset = 4
 	// A preset that represents a variant of the decimated distortion.
-	AVAudioUnitDistortionPresetMultiDecimated1 AVAudioUnitDistortionPreset = 5
+	AudioUnitDistortionPresetMultiDecimated1 AudioUnitDistortionPreset = 5
 	// A preset that represents a variant of the decimated distortion.
-	AVAudioUnitDistortionPresetMultiDecimated2 AVAudioUnitDistortionPreset = 6
+	AudioUnitDistortionPresetMultiDecimated2 AudioUnitDistortionPreset = 6
 	// A preset that represents a variant of the decimated distortion.
-	AVAudioUnitDistortionPresetMultiDecimated3 AVAudioUnitDistortionPreset = 7
+	AudioUnitDistortionPresetMultiDecimated3 AudioUnitDistortionPreset = 7
 	// A preset that represents a variant of the decimated distortion.
-	AVAudioUnitDistortionPresetMultiDecimated4 AVAudioUnitDistortionPreset = 8
+	AudioUnitDistortionPresetMultiDecimated4 AudioUnitDistortionPreset = 8
 	// A preset that represents a distorted funk distortion.
-	AVAudioUnitDistortionPresetMultiDistortedFunk AVAudioUnitDistortionPreset = 9
+	AudioUnitDistortionPresetMultiDistortedFunk AudioUnitDistortionPreset = 9
 	// A preset that represents a distorted cubed distortion.
-	AVAudioUnitDistortionPresetMultiDistortedCubed AVAudioUnitDistortionPreset = 10
+	AudioUnitDistortionPresetMultiDistortedCubed AudioUnitDistortionPreset = 10
 	// A preset that represents a distorted squared distortion.
-	AVAudioUnitDistortionPresetMultiDistortedSquared AVAudioUnitDistortionPreset = 11
+	AudioUnitDistortionPresetMultiDistortedSquared AudioUnitDistortionPreset = 11
 	// A preset that represents a variant of an echo distortion.
-	AVAudioUnitDistortionPresetMultiEcho1 AVAudioUnitDistortionPreset = 12
+	AudioUnitDistortionPresetMultiEcho1 AudioUnitDistortionPreset = 12
 	// A preset that represents a variant of an echo distortion.
-	AVAudioUnitDistortionPresetMultiEcho2 AVAudioUnitDistortionPreset = 13
+	AudioUnitDistortionPresetMultiEcho2 AudioUnitDistortionPreset = 13
 	// A preset that represents a variant of a tight echo distortion.
-	AVAudioUnitDistortionPresetMultiEchoTight1 AVAudioUnitDistortionPreset = 14
+	AudioUnitDistortionPresetMultiEchoTight1 AudioUnitDistortionPreset = 14
 	// A preset that represents a variant of a tight echo distortion.
-	AVAudioUnitDistortionPresetMultiEchoTight2 AVAudioUnitDistortionPreset = 15
+	AudioUnitDistortionPresetMultiEchoTight2 AudioUnitDistortionPreset = 15
 	// A preset that represents an everything-is-broken distortion.
-	AVAudioUnitDistortionPresetMultiEverythingIsBroken AVAudioUnitDistortionPreset = 16
+	AudioUnitDistortionPresetMultiEverythingIsBroken AudioUnitDistortionPreset = 16
 	// A preset that represents an alien chatter distortion.
-	AVAudioUnitDistortionPresetSpeechAlienChatter AVAudioUnitDistortionPreset = 17
+	AudioUnitDistortionPresetSpeechAlienChatter AudioUnitDistortionPreset = 17
 	// A preset that represents a cosmic interference distortion.
-	AVAudioUnitDistortionPresetSpeechCosmicInterference AVAudioUnitDistortionPreset = 18
+	AudioUnitDistortionPresetSpeechCosmicInterference AudioUnitDistortionPreset = 18
 	// A preset that represents a golden pi distortion.
-	AVAudioUnitDistortionPresetSpeechGoldenPi AVAudioUnitDistortionPreset = 19
+	AudioUnitDistortionPresetSpeechGoldenPi AudioUnitDistortionPreset = 19
 	// A preset that represents a radio tower distortion.
-	AVAudioUnitDistortionPresetSpeechRadioTower AVAudioUnitDistortionPreset = 20
+	AudioUnitDistortionPresetSpeechRadioTower AudioUnitDistortionPreset = 20
 	// A preset that represents a speech wave distortion.
-	AVAudioUnitDistortionPresetSpeechWaves AVAudioUnitDistortionPreset = 21
+	AudioUnitDistortionPresetSpeechWaves AudioUnitDistortionPreset = 21
 )
 
-func (e AVAudioUnitDistortionPreset) String() string {
+// String returns the AudioUnitDistortionPreset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioUnitDistortionPreset) String() string {
 	switch e {
-	case AVAudioUnitDistortionPresetDrumsBitBrush:
-		return "AVAudioUnitDistortionPresetDrumsBitBrush"
-	case AVAudioUnitDistortionPresetDrumsBufferBeats:
-		return "AVAudioUnitDistortionPresetDrumsBufferBeats"
-	case AVAudioUnitDistortionPresetDrumsLoFi:
-		return "AVAudioUnitDistortionPresetDrumsLoFi"
-	case AVAudioUnitDistortionPresetMultiBrokenSpeaker:
-		return "AVAudioUnitDistortionPresetMultiBrokenSpeaker"
-	case AVAudioUnitDistortionPresetMultiCellphoneConcert:
-		return "AVAudioUnitDistortionPresetMultiCellphoneConcert"
-	case AVAudioUnitDistortionPresetMultiDecimated1:
-		return "AVAudioUnitDistortionPresetMultiDecimated1"
-	case AVAudioUnitDistortionPresetMultiDecimated2:
-		return "AVAudioUnitDistortionPresetMultiDecimated2"
-	case AVAudioUnitDistortionPresetMultiDecimated3:
-		return "AVAudioUnitDistortionPresetMultiDecimated3"
-	case AVAudioUnitDistortionPresetMultiDecimated4:
-		return "AVAudioUnitDistortionPresetMultiDecimated4"
-	case AVAudioUnitDistortionPresetMultiDistortedFunk:
-		return "AVAudioUnitDistortionPresetMultiDistortedFunk"
-	case AVAudioUnitDistortionPresetMultiDistortedCubed:
-		return "AVAudioUnitDistortionPresetMultiDistortedCubed"
-	case AVAudioUnitDistortionPresetMultiDistortedSquared:
-		return "AVAudioUnitDistortionPresetMultiDistortedSquared"
-	case AVAudioUnitDistortionPresetMultiEcho1:
-		return "AVAudioUnitDistortionPresetMultiEcho1"
-	case AVAudioUnitDistortionPresetMultiEcho2:
-		return "AVAudioUnitDistortionPresetMultiEcho2"
-	case AVAudioUnitDistortionPresetMultiEchoTight1:
-		return "AVAudioUnitDistortionPresetMultiEchoTight1"
-	case AVAudioUnitDistortionPresetMultiEchoTight2:
-		return "AVAudioUnitDistortionPresetMultiEchoTight2"
-	case AVAudioUnitDistortionPresetMultiEverythingIsBroken:
-		return "AVAudioUnitDistortionPresetMultiEverythingIsBroken"
-	case AVAudioUnitDistortionPresetSpeechAlienChatter:
-		return "AVAudioUnitDistortionPresetSpeechAlienChatter"
-	case AVAudioUnitDistortionPresetSpeechCosmicInterference:
-		return "AVAudioUnitDistortionPresetSpeechCosmicInterference"
-	case AVAudioUnitDistortionPresetSpeechGoldenPi:
-		return "AVAudioUnitDistortionPresetSpeechGoldenPi"
-	case AVAudioUnitDistortionPresetSpeechRadioTower:
-		return "AVAudioUnitDistortionPresetSpeechRadioTower"
-	case AVAudioUnitDistortionPresetSpeechWaves:
-		return "AVAudioUnitDistortionPresetSpeechWaves"
+	case AudioUnitDistortionPresetDrumsBitBrush:
+		return "AudioUnitDistortionPresetDrumsBitBrush"
+	case AudioUnitDistortionPresetDrumsBufferBeats:
+		return "AudioUnitDistortionPresetDrumsBufferBeats"
+	case AudioUnitDistortionPresetDrumsLoFi:
+		return "AudioUnitDistortionPresetDrumsLoFi"
+	case AudioUnitDistortionPresetMultiBrokenSpeaker:
+		return "AudioUnitDistortionPresetMultiBrokenSpeaker"
+	case AudioUnitDistortionPresetMultiCellphoneConcert:
+		return "AudioUnitDistortionPresetMultiCellphoneConcert"
+	case AudioUnitDistortionPresetMultiDecimated1:
+		return "AudioUnitDistortionPresetMultiDecimated1"
+	case AudioUnitDistortionPresetMultiDecimated2:
+		return "AudioUnitDistortionPresetMultiDecimated2"
+	case AudioUnitDistortionPresetMultiDecimated3:
+		return "AudioUnitDistortionPresetMultiDecimated3"
+	case AudioUnitDistortionPresetMultiDecimated4:
+		return "AudioUnitDistortionPresetMultiDecimated4"
+	case AudioUnitDistortionPresetMultiDistortedFunk:
+		return "AudioUnitDistortionPresetMultiDistortedFunk"
+	case AudioUnitDistortionPresetMultiDistortedCubed:
+		return "AudioUnitDistortionPresetMultiDistortedCubed"
+	case AudioUnitDistortionPresetMultiDistortedSquared:
+		return "AudioUnitDistortionPresetMultiDistortedSquared"
+	case AudioUnitDistortionPresetMultiEcho1:
+		return "AudioUnitDistortionPresetMultiEcho1"
+	case AudioUnitDistortionPresetMultiEcho2:
+		return "AudioUnitDistortionPresetMultiEcho2"
+	case AudioUnitDistortionPresetMultiEchoTight1:
+		return "AudioUnitDistortionPresetMultiEchoTight1"
+	case AudioUnitDistortionPresetMultiEchoTight2:
+		return "AudioUnitDistortionPresetMultiEchoTight2"
+	case AudioUnitDistortionPresetMultiEverythingIsBroken:
+		return "AudioUnitDistortionPresetMultiEverythingIsBroken"
+	case AudioUnitDistortionPresetSpeechAlienChatter:
+		return "AudioUnitDistortionPresetSpeechAlienChatter"
+	case AudioUnitDistortionPresetSpeechCosmicInterference:
+		return "AudioUnitDistortionPresetSpeechCosmicInterference"
+	case AudioUnitDistortionPresetSpeechGoldenPi:
+		return "AudioUnitDistortionPresetSpeechGoldenPi"
+	case AudioUnitDistortionPresetSpeechRadioTower:
+		return "AudioUnitDistortionPresetSpeechRadioTower"
+	case AudioUnitDistortionPresetSpeechWaves:
+		return "AudioUnitDistortionPresetSpeechWaves"
 	default:
-		return fmt.Sprintf("AVAudioUnitDistortionPreset(%d)", int64(e))
+		return fmt.Sprintf("AudioUnitDistortionPreset(%d)", int64(e))
 	}
 }
 
 // Filter types available to use with the filter type property.
-type AVAudioUnitEQFilterType int64
+type AudioUnitEQFilterType int64
 
 const (
 	// A type that represents a parametric filter that derives from a Butterworth analog prototype.
-	AVAudioUnitEQFilterTypeParametric AVAudioUnitEQFilterType = 0
+	AudioUnitEQFilterTypeParametric AudioUnitEQFilterType = 0
 	// A type that represents a simple Butterworth second-order low-pass filter.
-	AVAudioUnitEQFilterTypeLowPass AVAudioUnitEQFilterType = 1
+	AudioUnitEQFilterTypeLowPass AudioUnitEQFilterType = 1
 	// A type that represents a simple Butterworth second-order high-pass filter.
-	AVAudioUnitEQFilterTypeHighPass AVAudioUnitEQFilterType = 2
+	AudioUnitEQFilterTypeHighPass AudioUnitEQFilterType = 2
 	// A type that represents a low-pass filter with resonance support using the bandwidth parameter.
-	AVAudioUnitEQFilterTypeResonantLowPass AVAudioUnitEQFilterType = 3
+	AudioUnitEQFilterTypeResonantLowPass AudioUnitEQFilterType = 3
 	// A type that represents a high-pass filter with resonance support using the bandwidth parameter.
-	AVAudioUnitEQFilterTypeResonantHighPass AVAudioUnitEQFilterType = 4
+	AudioUnitEQFilterTypeResonantHighPass AudioUnitEQFilterType = 4
 	// A type that represents a bandpass filter.
-	AVAudioUnitEQFilterTypeBandPass AVAudioUnitEQFilterType = 5
+	AudioUnitEQFilterTypeBandPass AudioUnitEQFilterType = 5
 	// A type that represents a band-stop filter, also known as a notch filter.
-	AVAudioUnitEQFilterTypeBandStop AVAudioUnitEQFilterType = 6
+	AudioUnitEQFilterTypeBandStop AudioUnitEQFilterType = 6
 	// A type that represents a low-shelf filter.
-	AVAudioUnitEQFilterTypeLowShelf AVAudioUnitEQFilterType = 7
+	AudioUnitEQFilterTypeLowShelf AudioUnitEQFilterType = 7
 	// A type that represents a high-shelf filter.
-	AVAudioUnitEQFilterTypeHighShelf AVAudioUnitEQFilterType = 8
+	AudioUnitEQFilterTypeHighShelf AudioUnitEQFilterType = 8
 	// A type that represents a low-shelf filter with resonance support using the bandwidth parameter.
-	AVAudioUnitEQFilterTypeResonantLowShelf AVAudioUnitEQFilterType = 9
+	AudioUnitEQFilterTypeResonantLowShelf AudioUnitEQFilterType = 9
 	// A type that represents a high-shelf filter with resonance support using the bandwidth parameter.
-	AVAudioUnitEQFilterTypeResonantHighShelf AVAudioUnitEQFilterType = 10
+	AudioUnitEQFilterTypeResonantHighShelf AudioUnitEQFilterType = 10
 )
 
-func (e AVAudioUnitEQFilterType) String() string {
+// String returns the AudioUnitEQFilterType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioUnitEQFilterType) String() string {
 	switch e {
-	case AVAudioUnitEQFilterTypeParametric:
-		return "AVAudioUnitEQFilterTypeParametric"
-	case AVAudioUnitEQFilterTypeLowPass:
-		return "AVAudioUnitEQFilterTypeLowPass"
-	case AVAudioUnitEQFilterTypeHighPass:
-		return "AVAudioUnitEQFilterTypeHighPass"
-	case AVAudioUnitEQFilterTypeResonantLowPass:
-		return "AVAudioUnitEQFilterTypeResonantLowPass"
-	case AVAudioUnitEQFilterTypeResonantHighPass:
-		return "AVAudioUnitEQFilterTypeResonantHighPass"
-	case AVAudioUnitEQFilterTypeBandPass:
-		return "AVAudioUnitEQFilterTypeBandPass"
-	case AVAudioUnitEQFilterTypeBandStop:
-		return "AVAudioUnitEQFilterTypeBandStop"
-	case AVAudioUnitEQFilterTypeLowShelf:
-		return "AVAudioUnitEQFilterTypeLowShelf"
-	case AVAudioUnitEQFilterTypeHighShelf:
-		return "AVAudioUnitEQFilterTypeHighShelf"
-	case AVAudioUnitEQFilterTypeResonantLowShelf:
-		return "AVAudioUnitEQFilterTypeResonantLowShelf"
-	case AVAudioUnitEQFilterTypeResonantHighShelf:
-		return "AVAudioUnitEQFilterTypeResonantHighShelf"
+	case AudioUnitEQFilterTypeParametric:
+		return "AudioUnitEQFilterTypeParametric"
+	case AudioUnitEQFilterTypeLowPass:
+		return "AudioUnitEQFilterTypeLowPass"
+	case AudioUnitEQFilterTypeHighPass:
+		return "AudioUnitEQFilterTypeHighPass"
+	case AudioUnitEQFilterTypeResonantLowPass:
+		return "AudioUnitEQFilterTypeResonantLowPass"
+	case AudioUnitEQFilterTypeResonantHighPass:
+		return "AudioUnitEQFilterTypeResonantHighPass"
+	case AudioUnitEQFilterTypeBandPass:
+		return "AudioUnitEQFilterTypeBandPass"
+	case AudioUnitEQFilterTypeBandStop:
+		return "AudioUnitEQFilterTypeBandStop"
+	case AudioUnitEQFilterTypeLowShelf:
+		return "AudioUnitEQFilterTypeLowShelf"
+	case AudioUnitEQFilterTypeHighShelf:
+		return "AudioUnitEQFilterTypeHighShelf"
+	case AudioUnitEQFilterTypeResonantLowShelf:
+		return "AudioUnitEQFilterTypeResonantLowShelf"
+	case AudioUnitEQFilterTypeResonantHighShelf:
+		return "AudioUnitEQFilterTypeResonantHighShelf"
 	default:
-		return fmt.Sprintf("AVAudioUnitEQFilterType(%d)", int64(e))
+		return fmt.Sprintf("AudioUnitEQFilterType(%d)", int64(e))
 	}
 }
 
 // Constants that represent preset reverbs.
-type AVAudioUnitReverbPreset int64
+type AudioUnitReverbPreset int64
 
 const (
 	// A preset that represents a reverb with the acoustic characteristics of a small-sized room environment.
-	AVAudioUnitReverbPresetSmallRoom AVAudioUnitReverbPreset = 0
+	AudioUnitReverbPresetSmallRoom AudioUnitReverbPreset = 0
 	// A preset that represents a reverb with the acoustic characteristics of a medium-sized room environment.
-	AVAudioUnitReverbPresetMediumRoom AVAudioUnitReverbPreset = 1
+	AudioUnitReverbPresetMediumRoom AudioUnitReverbPreset = 1
 	// A preset that represents a reverb with the acoustic characteristics of a large-sized room environment.
-	AVAudioUnitReverbPresetLargeRoom AVAudioUnitReverbPreset = 2
+	AudioUnitReverbPresetLargeRoom AudioUnitReverbPreset = 2
 	// A preset that represents a reverb with the acoustic characteristics of a medium-sized hall environment.
-	AVAudioUnitReverbPresetMediumHall AVAudioUnitReverbPreset = 3
+	AudioUnitReverbPresetMediumHall AudioUnitReverbPreset = 3
 	// A preset that represents a reverb with the acoustic characteristics of a large-sized hall environment.
-	AVAudioUnitReverbPresetLargeHall AVAudioUnitReverbPreset = 4
+	AudioUnitReverbPresetLargeHall AudioUnitReverbPreset = 4
 	// A preset that represents a reverb with the acoustic characteristics of a plate environment.
-	AVAudioUnitReverbPresetPlate AVAudioUnitReverbPreset = 5
+	AudioUnitReverbPresetPlate AudioUnitReverbPreset = 5
 	// A preset that represents a reverb with the acoustic characteristics of a medium-sized chamber environment.
-	AVAudioUnitReverbPresetMediumChamber AVAudioUnitReverbPreset = 6
+	AudioUnitReverbPresetMediumChamber AudioUnitReverbPreset = 6
 	// A preset that represents a reverb with the acoustic characteristics of a large-sized chamber environment.
-	AVAudioUnitReverbPresetLargeChamber AVAudioUnitReverbPreset = 7
+	AudioUnitReverbPresetLargeChamber AudioUnitReverbPreset = 7
 	// A preset that represents a reverb with the acoustic characteristics of a cathedral environment.
-	AVAudioUnitReverbPresetCathedral AVAudioUnitReverbPreset = 8
+	AudioUnitReverbPresetCathedral AudioUnitReverbPreset = 8
 	// A preset that represents a reverb with the acoustic characteristics of an alternative large-sized room environment.
-	AVAudioUnitReverbPresetLargeRoom2 AVAudioUnitReverbPreset = 9
+	AudioUnitReverbPresetLargeRoom2 AudioUnitReverbPreset = 9
 	// A preset that represents a reverb with the acoustic characteristics of an alternative medium-sized hall environment.
-	AVAudioUnitReverbPresetMediumHall2 AVAudioUnitReverbPreset = 10
+	AudioUnitReverbPresetMediumHall2 AudioUnitReverbPreset = 10
 	// A preset that represents a reverb with the acoustic characteristics of an alternative medium-sized hall environment.
-	AVAudioUnitReverbPresetMediumHall3 AVAudioUnitReverbPreset = 11
+	AudioUnitReverbPresetMediumHall3 AudioUnitReverbPreset = 11
 	// A preset that represents a reverb with the acoustic characteristics of an alternative large-sized hall environment.
-	AVAudioUnitReverbPresetLargeHall2 AVAudioUnitReverbPreset = 12
+	AudioUnitReverbPresetLargeHall2 AudioUnitReverbPreset = 12
 )
 
-func (e AVAudioUnitReverbPreset) String() string {
+// String returns the AudioUnitReverbPreset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioUnitReverbPreset) String() string {
 	switch e {
-	case AVAudioUnitReverbPresetSmallRoom:
-		return "AVAudioUnitReverbPresetSmallRoom"
-	case AVAudioUnitReverbPresetMediumRoom:
-		return "AVAudioUnitReverbPresetMediumRoom"
-	case AVAudioUnitReverbPresetLargeRoom:
-		return "AVAudioUnitReverbPresetLargeRoom"
-	case AVAudioUnitReverbPresetMediumHall:
-		return "AVAudioUnitReverbPresetMediumHall"
-	case AVAudioUnitReverbPresetLargeHall:
-		return "AVAudioUnitReverbPresetLargeHall"
-	case AVAudioUnitReverbPresetPlate:
-		return "AVAudioUnitReverbPresetPlate"
-	case AVAudioUnitReverbPresetMediumChamber:
-		return "AVAudioUnitReverbPresetMediumChamber"
-	case AVAudioUnitReverbPresetLargeChamber:
-		return "AVAudioUnitReverbPresetLargeChamber"
-	case AVAudioUnitReverbPresetCathedral:
-		return "AVAudioUnitReverbPresetCathedral"
-	case AVAudioUnitReverbPresetLargeRoom2:
-		return "AVAudioUnitReverbPresetLargeRoom2"
-	case AVAudioUnitReverbPresetMediumHall2:
-		return "AVAudioUnitReverbPresetMediumHall2"
-	case AVAudioUnitReverbPresetMediumHall3:
-		return "AVAudioUnitReverbPresetMediumHall3"
-	case AVAudioUnitReverbPresetLargeHall2:
-		return "AVAudioUnitReverbPresetLargeHall2"
+	case AudioUnitReverbPresetSmallRoom:
+		return "AudioUnitReverbPresetSmallRoom"
+	case AudioUnitReverbPresetMediumRoom:
+		return "AudioUnitReverbPresetMediumRoom"
+	case AudioUnitReverbPresetLargeRoom:
+		return "AudioUnitReverbPresetLargeRoom"
+	case AudioUnitReverbPresetMediumHall:
+		return "AudioUnitReverbPresetMediumHall"
+	case AudioUnitReverbPresetLargeHall:
+		return "AudioUnitReverbPresetLargeHall"
+	case AudioUnitReverbPresetPlate:
+		return "AudioUnitReverbPresetPlate"
+	case AudioUnitReverbPresetMediumChamber:
+		return "AudioUnitReverbPresetMediumChamber"
+	case AudioUnitReverbPresetLargeChamber:
+		return "AudioUnitReverbPresetLargeChamber"
+	case AudioUnitReverbPresetCathedral:
+		return "AudioUnitReverbPresetCathedral"
+	case AudioUnitReverbPresetLargeRoom2:
+		return "AudioUnitReverbPresetLargeRoom2"
+	case AudioUnitReverbPresetMediumHall2:
+		return "AudioUnitReverbPresetMediumHall2"
+	case AudioUnitReverbPresetMediumHall3:
+		return "AudioUnitReverbPresetMediumHall3"
+	case AudioUnitReverbPresetLargeHall2:
+		return "AudioUnitReverbPresetLargeHall2"
 	default:
-		return fmt.Sprintf("AVAudioUnitReverbPreset(%d)", int64(e))
-	}
-}
-
-// Types of speech activity events.
-type AVAudioVoiceProcessingSpeechActivityEvent int64
-
-const (
-	// Indicates the start of speech activity.
-	AVAudioVoiceProcessingSpeechActivityStarted AVAudioVoiceProcessingSpeechActivityEvent = 0
-	// Indicates the end of speech activity.
-	AVAudioVoiceProcessingSpeechActivityEnded AVAudioVoiceProcessingSpeechActivityEvent = 1
-)
-
-func (e AVAudioVoiceProcessingSpeechActivityEvent) String() string {
-	switch e {
-	case AVAudioVoiceProcessingSpeechActivityStarted:
-		return "AVAudioVoiceProcessingSpeechActivityStarted"
-	case AVAudioVoiceProcessingSpeechActivityEnded:
-		return "AVAudioVoiceProcessingSpeechActivityEnded"
-	default:
-		return fmt.Sprintf("AVAudioVoiceProcessingSpeechActivityEvent(%d)", int64(e))
+		return fmt.Sprintf("AudioUnitReverbPreset(%d)", int64(e))
 	}
 }
 
 // Constants that represents control change event types.
-type AVMIDIControlChangeMessageType int64
+type MIDIControlChangeMessageType int64
 
 const (
-	AVMIDIControlChangeMessageTypeBankSelect          AVMIDIControlChangeMessageType = 0
-	AVMIDIControlChangeMessageTypeModWheel            AVMIDIControlChangeMessageType = 1
-	AVMIDIControlChangeMessageTypeBreath              AVMIDIControlChangeMessageType = 2
-	AVMIDIControlChangeMessageTypeFoot                AVMIDIControlChangeMessageType = 4
-	AVMIDIControlChangeMessageTypePortamentoTime      AVMIDIControlChangeMessageType = 5
-	AVMIDIControlChangeMessageTypeDataEntry           AVMIDIControlChangeMessageType = 6
-	AVMIDIControlChangeMessageTypeVolume              AVMIDIControlChangeMessageType = 7
-	AVMIDIControlChangeMessageTypeBalance             AVMIDIControlChangeMessageType = 8
-	AVMIDIControlChangeMessageTypePan                 AVMIDIControlChangeMessageType = 10
-	AVMIDIControlChangeMessageTypeExpression          AVMIDIControlChangeMessageType = 11
-	AVMIDIControlChangeMessageTypeSustain             AVMIDIControlChangeMessageType = 64
-	AVMIDIControlChangeMessageTypePortamento          AVMIDIControlChangeMessageType = 65
-	AVMIDIControlChangeMessageTypeSostenuto           AVMIDIControlChangeMessageType = 66
-	AVMIDIControlChangeMessageTypeSoft                AVMIDIControlChangeMessageType = 67
-	AVMIDIControlChangeMessageTypeLegatoPedal         AVMIDIControlChangeMessageType = 68
-	AVMIDIControlChangeMessageTypeHold2Pedal          AVMIDIControlChangeMessageType = 69
-	AVMIDIControlChangeMessageTypeFilterResonance     AVMIDIControlChangeMessageType = 71
-	AVMIDIControlChangeMessageTypeReleaseTime         AVMIDIControlChangeMessageType = 72
-	AVMIDIControlChangeMessageTypeAttackTime          AVMIDIControlChangeMessageType = 73
-	AVMIDIControlChangeMessageTypeBrightness          AVMIDIControlChangeMessageType = 74
-	AVMIDIControlChangeMessageTypeDecayTime           AVMIDIControlChangeMessageType = 75
-	AVMIDIControlChangeMessageTypeVibratoRate         AVMIDIControlChangeMessageType = 76
-	AVMIDIControlChangeMessageTypeVibratoDepth        AVMIDIControlChangeMessageType = 77
-	AVMIDIControlChangeMessageTypeVibratoDelay        AVMIDIControlChangeMessageType = 78
-	AVMIDIControlChangeMessageTypeReverbLevel         AVMIDIControlChangeMessageType = 91
-	AVMIDIControlChangeMessageTypeChorusLevel         AVMIDIControlChangeMessageType = 93
-	AVMIDIControlChangeMessageTypeRPN_LSB             AVMIDIControlChangeMessageType = 100
-	AVMIDIControlChangeMessageTypeRPN_MSB             AVMIDIControlChangeMessageType = 101
-	AVMIDIControlChangeMessageTypeAllSoundOff         AVMIDIControlChangeMessageType = 120
-	AVMIDIControlChangeMessageTypeResetAllControllers AVMIDIControlChangeMessageType = 121
-	AVMIDIControlChangeMessageTypeAllNotesOff         AVMIDIControlChangeMessageType = 123
-	AVMIDIControlChangeMessageTypeOmniModeOff         AVMIDIControlChangeMessageType = 124
-	AVMIDIControlChangeMessageTypeOmniModeOn          AVMIDIControlChangeMessageType = 125
-	AVMIDIControlChangeMessageTypeMonoModeOn          AVMIDIControlChangeMessageType = 126
-	AVMIDIControlChangeMessageTypeMonoModeOff         AVMIDIControlChangeMessageType = 127
+	MIDIControlChangeMessageTypeBankSelect          MIDIControlChangeMessageType = 0
+	MIDIControlChangeMessageTypeModWheel            MIDIControlChangeMessageType = 1
+	MIDIControlChangeMessageTypeBreath              MIDIControlChangeMessageType = 2
+	MIDIControlChangeMessageTypeFoot                MIDIControlChangeMessageType = 4
+	MIDIControlChangeMessageTypePortamentoTime      MIDIControlChangeMessageType = 5
+	MIDIControlChangeMessageTypeDataEntry           MIDIControlChangeMessageType = 6
+	MIDIControlChangeMessageTypeVolume              MIDIControlChangeMessageType = 7
+	MIDIControlChangeMessageTypeBalance             MIDIControlChangeMessageType = 8
+	MIDIControlChangeMessageTypePan                 MIDIControlChangeMessageType = 10
+	MIDIControlChangeMessageTypeExpression          MIDIControlChangeMessageType = 11
+	MIDIControlChangeMessageTypeSustain             MIDIControlChangeMessageType = 64
+	MIDIControlChangeMessageTypePortamento          MIDIControlChangeMessageType = 65
+	MIDIControlChangeMessageTypeSostenuto           MIDIControlChangeMessageType = 66
+	MIDIControlChangeMessageTypeSoft                MIDIControlChangeMessageType = 67
+	MIDIControlChangeMessageTypeLegatoPedal         MIDIControlChangeMessageType = 68
+	MIDIControlChangeMessageTypeHold2Pedal          MIDIControlChangeMessageType = 69
+	MIDIControlChangeMessageTypeFilterResonance     MIDIControlChangeMessageType = 71
+	MIDIControlChangeMessageTypeReleaseTime         MIDIControlChangeMessageType = 72
+	MIDIControlChangeMessageTypeAttackTime          MIDIControlChangeMessageType = 73
+	MIDIControlChangeMessageTypeBrightness          MIDIControlChangeMessageType = 74
+	MIDIControlChangeMessageTypeDecayTime           MIDIControlChangeMessageType = 75
+	MIDIControlChangeMessageTypeVibratoRate         MIDIControlChangeMessageType = 76
+	MIDIControlChangeMessageTypeVibratoDepth        MIDIControlChangeMessageType = 77
+	MIDIControlChangeMessageTypeVibratoDelay        MIDIControlChangeMessageType = 78
+	MIDIControlChangeMessageTypeReverbLevel         MIDIControlChangeMessageType = 91
+	MIDIControlChangeMessageTypeChorusLevel         MIDIControlChangeMessageType = 93
+	MIDIControlChangeMessageTypeRPN_LSB             MIDIControlChangeMessageType = 100
+	MIDIControlChangeMessageTypeRPN_MSB             MIDIControlChangeMessageType = 101
+	MIDIControlChangeMessageTypeAllSoundOff         MIDIControlChangeMessageType = 120
+	MIDIControlChangeMessageTypeResetAllControllers MIDIControlChangeMessageType = 121
+	MIDIControlChangeMessageTypeAllNotesOff         MIDIControlChangeMessageType = 123
+	MIDIControlChangeMessageTypeOmniModeOff         MIDIControlChangeMessageType = 124
+	MIDIControlChangeMessageTypeOmniModeOn          MIDIControlChangeMessageType = 125
+	MIDIControlChangeMessageTypeMonoModeOn          MIDIControlChangeMessageType = 126
+	MIDIControlChangeMessageTypeMonoModeOff         MIDIControlChangeMessageType = 127
 )
 
-func (e AVMIDIControlChangeMessageType) String() string {
+// String returns the MIDIControlChangeMessageType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MIDIControlChangeMessageType) String() string {
 	switch e {
-	case AVMIDIControlChangeMessageTypeBankSelect:
-		return "AVMIDIControlChangeMessageTypeBankSelect"
-	case AVMIDIControlChangeMessageTypeModWheel:
-		return "AVMIDIControlChangeMessageTypeModWheel"
-	case AVMIDIControlChangeMessageTypeBreath:
-		return "AVMIDIControlChangeMessageTypeBreath"
-	case AVMIDIControlChangeMessageTypeFoot:
-		return "AVMIDIControlChangeMessageTypeFoot"
-	case AVMIDIControlChangeMessageTypePortamentoTime:
-		return "AVMIDIControlChangeMessageTypePortamentoTime"
-	case AVMIDIControlChangeMessageTypeDataEntry:
-		return "AVMIDIControlChangeMessageTypeDataEntry"
-	case AVMIDIControlChangeMessageTypeVolume:
-		return "AVMIDIControlChangeMessageTypeVolume"
-	case AVMIDIControlChangeMessageTypeBalance:
-		return "AVMIDIControlChangeMessageTypeBalance"
-	case AVMIDIControlChangeMessageTypePan:
-		return "AVMIDIControlChangeMessageTypePan"
-	case AVMIDIControlChangeMessageTypeExpression:
-		return "AVMIDIControlChangeMessageTypeExpression"
-	case AVMIDIControlChangeMessageTypeSustain:
-		return "AVMIDIControlChangeMessageTypeSustain"
-	case AVMIDIControlChangeMessageTypePortamento:
-		return "AVMIDIControlChangeMessageTypePortamento"
-	case AVMIDIControlChangeMessageTypeSostenuto:
-		return "AVMIDIControlChangeMessageTypeSostenuto"
-	case AVMIDIControlChangeMessageTypeSoft:
-		return "AVMIDIControlChangeMessageTypeSoft"
-	case AVMIDIControlChangeMessageTypeLegatoPedal:
-		return "AVMIDIControlChangeMessageTypeLegatoPedal"
-	case AVMIDIControlChangeMessageTypeHold2Pedal:
-		return "AVMIDIControlChangeMessageTypeHold2Pedal"
-	case AVMIDIControlChangeMessageTypeFilterResonance:
-		return "AVMIDIControlChangeMessageTypeFilterResonance"
-	case AVMIDIControlChangeMessageTypeReleaseTime:
-		return "AVMIDIControlChangeMessageTypeReleaseTime"
-	case AVMIDIControlChangeMessageTypeAttackTime:
-		return "AVMIDIControlChangeMessageTypeAttackTime"
-	case AVMIDIControlChangeMessageTypeBrightness:
-		return "AVMIDIControlChangeMessageTypeBrightness"
-	case AVMIDIControlChangeMessageTypeDecayTime:
-		return "AVMIDIControlChangeMessageTypeDecayTime"
-	case AVMIDIControlChangeMessageTypeVibratoRate:
-		return "AVMIDIControlChangeMessageTypeVibratoRate"
-	case AVMIDIControlChangeMessageTypeVibratoDepth:
-		return "AVMIDIControlChangeMessageTypeVibratoDepth"
-	case AVMIDIControlChangeMessageTypeVibratoDelay:
-		return "AVMIDIControlChangeMessageTypeVibratoDelay"
-	case AVMIDIControlChangeMessageTypeReverbLevel:
-		return "AVMIDIControlChangeMessageTypeReverbLevel"
-	case AVMIDIControlChangeMessageTypeChorusLevel:
-		return "AVMIDIControlChangeMessageTypeChorusLevel"
-	case AVMIDIControlChangeMessageTypeRPN_LSB:
-		return "AVMIDIControlChangeMessageTypeRPN_LSB"
-	case AVMIDIControlChangeMessageTypeRPN_MSB:
-		return "AVMIDIControlChangeMessageTypeRPN_MSB"
-	case AVMIDIControlChangeMessageTypeAllSoundOff:
-		return "AVMIDIControlChangeMessageTypeAllSoundOff"
-	case AVMIDIControlChangeMessageTypeResetAllControllers:
-		return "AVMIDIControlChangeMessageTypeResetAllControllers"
-	case AVMIDIControlChangeMessageTypeAllNotesOff:
-		return "AVMIDIControlChangeMessageTypeAllNotesOff"
-	case AVMIDIControlChangeMessageTypeOmniModeOff:
-		return "AVMIDIControlChangeMessageTypeOmniModeOff"
-	case AVMIDIControlChangeMessageTypeOmniModeOn:
-		return "AVMIDIControlChangeMessageTypeOmniModeOn"
-	case AVMIDIControlChangeMessageTypeMonoModeOn:
-		return "AVMIDIControlChangeMessageTypeMonoModeOn"
-	case AVMIDIControlChangeMessageTypeMonoModeOff:
-		return "AVMIDIControlChangeMessageTypeMonoModeOff"
+	case MIDIControlChangeMessageTypeBankSelect:
+		return "MIDIControlChangeMessageTypeBankSelect"
+	case MIDIControlChangeMessageTypeModWheel:
+		return "MIDIControlChangeMessageTypeModWheel"
+	case MIDIControlChangeMessageTypeBreath:
+		return "MIDIControlChangeMessageTypeBreath"
+	case MIDIControlChangeMessageTypeFoot:
+		return "MIDIControlChangeMessageTypeFoot"
+	case MIDIControlChangeMessageTypePortamentoTime:
+		return "MIDIControlChangeMessageTypePortamentoTime"
+	case MIDIControlChangeMessageTypeDataEntry:
+		return "MIDIControlChangeMessageTypeDataEntry"
+	case MIDIControlChangeMessageTypeVolume:
+		return "MIDIControlChangeMessageTypeVolume"
+	case MIDIControlChangeMessageTypeBalance:
+		return "MIDIControlChangeMessageTypeBalance"
+	case MIDIControlChangeMessageTypePan:
+		return "MIDIControlChangeMessageTypePan"
+	case MIDIControlChangeMessageTypeExpression:
+		return "MIDIControlChangeMessageTypeExpression"
+	case MIDIControlChangeMessageTypeSustain:
+		return "MIDIControlChangeMessageTypeSustain"
+	case MIDIControlChangeMessageTypePortamento:
+		return "MIDIControlChangeMessageTypePortamento"
+	case MIDIControlChangeMessageTypeSostenuto:
+		return "MIDIControlChangeMessageTypeSostenuto"
+	case MIDIControlChangeMessageTypeSoft:
+		return "MIDIControlChangeMessageTypeSoft"
+	case MIDIControlChangeMessageTypeLegatoPedal:
+		return "MIDIControlChangeMessageTypeLegatoPedal"
+	case MIDIControlChangeMessageTypeHold2Pedal:
+		return "MIDIControlChangeMessageTypeHold2Pedal"
+	case MIDIControlChangeMessageTypeFilterResonance:
+		return "MIDIControlChangeMessageTypeFilterResonance"
+	case MIDIControlChangeMessageTypeReleaseTime:
+		return "MIDIControlChangeMessageTypeReleaseTime"
+	case MIDIControlChangeMessageTypeAttackTime:
+		return "MIDIControlChangeMessageTypeAttackTime"
+	case MIDIControlChangeMessageTypeBrightness:
+		return "MIDIControlChangeMessageTypeBrightness"
+	case MIDIControlChangeMessageTypeDecayTime:
+		return "MIDIControlChangeMessageTypeDecayTime"
+	case MIDIControlChangeMessageTypeVibratoRate:
+		return "MIDIControlChangeMessageTypeVibratoRate"
+	case MIDIControlChangeMessageTypeVibratoDepth:
+		return "MIDIControlChangeMessageTypeVibratoDepth"
+	case MIDIControlChangeMessageTypeVibratoDelay:
+		return "MIDIControlChangeMessageTypeVibratoDelay"
+	case MIDIControlChangeMessageTypeReverbLevel:
+		return "MIDIControlChangeMessageTypeReverbLevel"
+	case MIDIControlChangeMessageTypeChorusLevel:
+		return "MIDIControlChangeMessageTypeChorusLevel"
+	case MIDIControlChangeMessageTypeRPN_LSB:
+		return "MIDIControlChangeMessageTypeRPN_LSB"
+	case MIDIControlChangeMessageTypeRPN_MSB:
+		return "MIDIControlChangeMessageTypeRPN_MSB"
+	case MIDIControlChangeMessageTypeAllSoundOff:
+		return "MIDIControlChangeMessageTypeAllSoundOff"
+	case MIDIControlChangeMessageTypeResetAllControllers:
+		return "MIDIControlChangeMessageTypeResetAllControllers"
+	case MIDIControlChangeMessageTypeAllNotesOff:
+		return "MIDIControlChangeMessageTypeAllNotesOff"
+	case MIDIControlChangeMessageTypeOmniModeOff:
+		return "MIDIControlChangeMessageTypeOmniModeOff"
+	case MIDIControlChangeMessageTypeOmniModeOn:
+		return "MIDIControlChangeMessageTypeOmniModeOn"
+	case MIDIControlChangeMessageTypeMonoModeOn:
+		return "MIDIControlChangeMessageTypeMonoModeOn"
+	case MIDIControlChangeMessageTypeMonoModeOff:
+		return "MIDIControlChangeMessageTypeMonoModeOff"
 	default:
-		return fmt.Sprintf("AVMIDIControlChangeMessageType(%d)", int64(e))
+		return fmt.Sprintf("MIDIControlChangeMessageType(%d)", int64(e))
 	}
 }
 
 // Constants that represent the types of meta events.
-type AVMIDIMetaEventType int64
+type MIDIMetaEventType int64
 
 const (
-	AVMIDIMetaEventTypeSequenceNumber   AVMIDIMetaEventType = 0
-	AVMIDIMetaEventTypeText             AVMIDIMetaEventType = 1
-	AVMIDIMetaEventTypeCopyright        AVMIDIMetaEventType = 2
-	AVMIDIMetaEventTypeTrackName        AVMIDIMetaEventType = 3
-	AVMIDIMetaEventTypeInstrument       AVMIDIMetaEventType = 4
-	AVMIDIMetaEventTypeLyric            AVMIDIMetaEventType = 5
-	AVMIDIMetaEventTypeMarker           AVMIDIMetaEventType = 6
-	AVMIDIMetaEventTypeCuePoint         AVMIDIMetaEventType = 7
-	AVMIDIMetaEventTypeMidiChannel      AVMIDIMetaEventType = 32
-	AVMIDIMetaEventTypeMidiPort         AVMIDIMetaEventType = 33
-	AVMIDIMetaEventTypeEndOfTrack       AVMIDIMetaEventType = 47
-	AVMIDIMetaEventTypeTempo            AVMIDIMetaEventType = 81
-	AVMIDIMetaEventTypeSmpteOffset      AVMIDIMetaEventType = 84
-	AVMIDIMetaEventTypeTimeSignature    AVMIDIMetaEventType = 88
-	AVMIDIMetaEventTypeKeySignature     AVMIDIMetaEventType = 89
-	AVMIDIMetaEventTypeProprietaryEvent AVMIDIMetaEventType = 127
+	MIDIMetaEventTypeSequenceNumber   MIDIMetaEventType = 0
+	MIDIMetaEventTypeText             MIDIMetaEventType = 1
+	MIDIMetaEventTypeCopyright        MIDIMetaEventType = 2
+	MIDIMetaEventTypeTrackName        MIDIMetaEventType = 3
+	MIDIMetaEventTypeInstrument       MIDIMetaEventType = 4
+	MIDIMetaEventTypeLyric            MIDIMetaEventType = 5
+	MIDIMetaEventTypeMarker           MIDIMetaEventType = 6
+	MIDIMetaEventTypeCuePoint         MIDIMetaEventType = 7
+	MIDIMetaEventTypeMidiChannel      MIDIMetaEventType = 32
+	MIDIMetaEventTypeMidiPort         MIDIMetaEventType = 33
+	MIDIMetaEventTypeEndOfTrack       MIDIMetaEventType = 47
+	MIDIMetaEventTypeTempo            MIDIMetaEventType = 81
+	MIDIMetaEventTypeSmpteOffset      MIDIMetaEventType = 84
+	MIDIMetaEventTypeTimeSignature    MIDIMetaEventType = 88
+	MIDIMetaEventTypeKeySignature     MIDIMetaEventType = 89
+	MIDIMetaEventTypeProprietaryEvent MIDIMetaEventType = 127
 )
 
-func (e AVMIDIMetaEventType) String() string {
+// String returns the MIDIMetaEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MIDIMetaEventType) String() string {
 	switch e {
-	case AVMIDIMetaEventTypeSequenceNumber:
-		return "AVMIDIMetaEventTypeSequenceNumber"
-	case AVMIDIMetaEventTypeText:
-		return "AVMIDIMetaEventTypeText"
-	case AVMIDIMetaEventTypeCopyright:
-		return "AVMIDIMetaEventTypeCopyright"
-	case AVMIDIMetaEventTypeTrackName:
-		return "AVMIDIMetaEventTypeTrackName"
-	case AVMIDIMetaEventTypeInstrument:
-		return "AVMIDIMetaEventTypeInstrument"
-	case AVMIDIMetaEventTypeLyric:
-		return "AVMIDIMetaEventTypeLyric"
-	case AVMIDIMetaEventTypeMarker:
-		return "AVMIDIMetaEventTypeMarker"
-	case AVMIDIMetaEventTypeCuePoint:
-		return "AVMIDIMetaEventTypeCuePoint"
-	case AVMIDIMetaEventTypeMidiChannel:
-		return "AVMIDIMetaEventTypeMidiChannel"
-	case AVMIDIMetaEventTypeMidiPort:
-		return "AVMIDIMetaEventTypeMidiPort"
-	case AVMIDIMetaEventTypeEndOfTrack:
-		return "AVMIDIMetaEventTypeEndOfTrack"
-	case AVMIDIMetaEventTypeTempo:
-		return "AVMIDIMetaEventTypeTempo"
-	case AVMIDIMetaEventTypeSmpteOffset:
-		return "AVMIDIMetaEventTypeSmpteOffset"
-	case AVMIDIMetaEventTypeTimeSignature:
-		return "AVMIDIMetaEventTypeTimeSignature"
-	case AVMIDIMetaEventTypeKeySignature:
-		return "AVMIDIMetaEventTypeKeySignature"
-	case AVMIDIMetaEventTypeProprietaryEvent:
-		return "AVMIDIMetaEventTypeProprietaryEvent"
+	case MIDIMetaEventTypeSequenceNumber:
+		return "MIDIMetaEventTypeSequenceNumber"
+	case MIDIMetaEventTypeText:
+		return "MIDIMetaEventTypeText"
+	case MIDIMetaEventTypeCopyright:
+		return "MIDIMetaEventTypeCopyright"
+	case MIDIMetaEventTypeTrackName:
+		return "MIDIMetaEventTypeTrackName"
+	case MIDIMetaEventTypeInstrument:
+		return "MIDIMetaEventTypeInstrument"
+	case MIDIMetaEventTypeLyric:
+		return "MIDIMetaEventTypeLyric"
+	case MIDIMetaEventTypeMarker:
+		return "MIDIMetaEventTypeMarker"
+	case MIDIMetaEventTypeCuePoint:
+		return "MIDIMetaEventTypeCuePoint"
+	case MIDIMetaEventTypeMidiChannel:
+		return "MIDIMetaEventTypeMidiChannel"
+	case MIDIMetaEventTypeMidiPort:
+		return "MIDIMetaEventTypeMidiPort"
+	case MIDIMetaEventTypeEndOfTrack:
+		return "MIDIMetaEventTypeEndOfTrack"
+	case MIDIMetaEventTypeTempo:
+		return "MIDIMetaEventTypeTempo"
+	case MIDIMetaEventTypeSmpteOffset:
+		return "MIDIMetaEventTypeSmpteOffset"
+	case MIDIMetaEventTypeTimeSignature:
+		return "MIDIMetaEventTypeTimeSignature"
+	case MIDIMetaEventTypeKeySignature:
+		return "MIDIMetaEventTypeKeySignature"
+	case MIDIMetaEventTypeProprietaryEvent:
+		return "MIDIMetaEventTypeProprietaryEvent"
 	default:
-		return fmt.Sprintf("AVMIDIMetaEventType(%d)", int64(e))
+		return fmt.Sprintf("MIDIMetaEventType(%d)", int64(e))
 	}
 }
 
 // A structure that defines whether data on different MIDI channels map to multiple tracks, or whether the framework preserves the tracks as they are.
 // Bitmask — values may be combined with |.
-type AVMusicSequenceLoadOptions uint64
+type MusicSequenceLoadOptions uint64
 
 const (
 	// An option that preserves the tracks as they are.
-	AVMusicSequenceLoadSMF_PreserveTracks AVMusicSequenceLoadOptions = 0
+	MusicSequenceLoadSMF_PreserveTracks MusicSequenceLoadOptions = 0
 	// An option that represents data on different MIDI channels mapped to multiple tracks.
-	AVMusicSequenceLoadSMF_ChannelsToTracks AVMusicSequenceLoadOptions = 1
+	MusicSequenceLoadSMF_ChannelsToTracks MusicSequenceLoadOptions = 1
 )
 
-func (e AVMusicSequenceLoadOptions) String() string {
+// String returns the MusicSequenceLoadOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MusicSequenceLoadOptions) String() string {
 	var parts []string
-	if e&AVMusicSequenceLoadSMF_ChannelsToTracks != 0 {
-		parts = append(parts, "AVMusicSequenceLoadSMF_ChannelsToTracks")
+	if e&MusicSequenceLoadSMF_ChannelsToTracks != 0 {
+		parts = append(parts, "MusicSequenceLoadSMF_ChannelsToTracks")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -850,153 +836,165 @@ func (e AVMusicSequenceLoadOptions) String() string {
 }
 
 // Specifies when to pause or stop speech.
-type AVSpeechBoundary int64
+type SpeechBoundary int64
 
 const (
 	// Indicates to pause or stop speech immediately.
-	AVSpeechBoundaryImmediate AVSpeechBoundary = 0
+	SpeechBoundaryImmediate SpeechBoundary = 0
 	// Indicates to pause or stop speech after the synthesizer finishes speaking the current word.
-	AVSpeechBoundaryWord AVSpeechBoundary = 1
+	SpeechBoundaryWord SpeechBoundary = 1
 )
 
-func (e AVSpeechBoundary) String() string {
+// String returns the SpeechBoundary constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechBoundary) String() string {
 	switch e {
-	case AVSpeechBoundaryImmediate:
-		return "AVSpeechBoundaryImmediate"
-	case AVSpeechBoundaryWord:
-		return "AVSpeechBoundaryWord"
+	case SpeechBoundaryImmediate:
+		return "SpeechBoundaryImmediate"
+	case SpeechBoundaryWord:
+		return "SpeechBoundaryWord"
 	default:
-		return fmt.Sprintf("AVSpeechBoundary(%d)", int64(e))
+		return fmt.Sprintf("SpeechBoundary(%d)", int64(e))
 	}
 }
 
 // Constants that describe the type of text.
-type AVSpeechSynthesisMarkerMark int64
+type SpeechSynthesisMarkerMark int64
 
 const (
-	AVSpeechSynthesisMarkerMarkPhoneme   AVSpeechSynthesisMarkerMark = 0
-	AVSpeechSynthesisMarkerMarkWord      AVSpeechSynthesisMarkerMark = 1
-	AVSpeechSynthesisMarkerMarkSentence  AVSpeechSynthesisMarkerMark = 2
-	AVSpeechSynthesisMarkerMarkParagraph AVSpeechSynthesisMarkerMark = 3
-	AVSpeechSynthesisMarkerMarkBookmark  AVSpeechSynthesisMarkerMark = 4
+	SpeechSynthesisMarkerMarkPhoneme   SpeechSynthesisMarkerMark = 0
+	SpeechSynthesisMarkerMarkWord      SpeechSynthesisMarkerMark = 1
+	SpeechSynthesisMarkerMarkSentence  SpeechSynthesisMarkerMark = 2
+	SpeechSynthesisMarkerMarkParagraph SpeechSynthesisMarkerMark = 3
+	SpeechSynthesisMarkerMarkBookmark  SpeechSynthesisMarkerMark = 4
 )
 
-func (e AVSpeechSynthesisMarkerMark) String() string {
+// String returns the SpeechSynthesisMarkerMark constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechSynthesisMarkerMark) String() string {
 	switch e {
-	case AVSpeechSynthesisMarkerMarkPhoneme:
-		return "AVSpeechSynthesisMarkerMarkPhoneme"
-	case AVSpeechSynthesisMarkerMarkWord:
-		return "AVSpeechSynthesisMarkerMarkWord"
-	case AVSpeechSynthesisMarkerMarkSentence:
-		return "AVSpeechSynthesisMarkerMarkSentence"
-	case AVSpeechSynthesisMarkerMarkParagraph:
-		return "AVSpeechSynthesisMarkerMarkParagraph"
-	case AVSpeechSynthesisMarkerMarkBookmark:
-		return "AVSpeechSynthesisMarkerMarkBookmark"
+	case SpeechSynthesisMarkerMarkPhoneme:
+		return "SpeechSynthesisMarkerMarkPhoneme"
+	case SpeechSynthesisMarkerMarkWord:
+		return "SpeechSynthesisMarkerMarkWord"
+	case SpeechSynthesisMarkerMarkSentence:
+		return "SpeechSynthesisMarkerMarkSentence"
+	case SpeechSynthesisMarkerMarkParagraph:
+		return "SpeechSynthesisMarkerMarkParagraph"
+	case SpeechSynthesisMarkerMarkBookmark:
+		return "SpeechSynthesisMarkerMarkBookmark"
 	default:
-		return fmt.Sprintf("AVSpeechSynthesisMarkerMark(%d)", int64(e))
+		return fmt.Sprintf("SpeechSynthesisMarkerMark(%d)", int64(e))
 	}
 }
 
 // An enumeration that models the personal voices authorization status.
-type AVSpeechSynthesisPersonalVoiceAuthorizationStatus uint64
+type SpeechSynthesisPersonalVoiceAuthorizationStatus uint64
 
 const (
 	// The app's authorization status has not yet been determined. When your app's status is not determined, calling the requestAuthorization: method prompts the user to grant or deny authorization.
-	AVSpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined AVSpeechSynthesisPersonalVoiceAuthorizationStatus = 0
+	SpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined SpeechSynthesisPersonalVoiceAuthorizationStatus = 0
 	// The user denied your app's request to use personal voices.
-	AVSpeechSynthesisPersonalVoiceAuthorizationStatusDenied AVSpeechSynthesisPersonalVoiceAuthorizationStatus = 1
+	SpeechSynthesisPersonalVoiceAuthorizationStatusDenied SpeechSynthesisPersonalVoiceAuthorizationStatus = 1
 	// Personal voices are unsupported on this device.
-	AVSpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported AVSpeechSynthesisPersonalVoiceAuthorizationStatus = 2
+	SpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported SpeechSynthesisPersonalVoiceAuthorizationStatus = 2
 	// The user granted your app's request to use personal voices.
-	AVSpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized AVSpeechSynthesisPersonalVoiceAuthorizationStatus = 3
+	SpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized SpeechSynthesisPersonalVoiceAuthorizationStatus = 3
 )
 
-func (e AVSpeechSynthesisPersonalVoiceAuthorizationStatus) String() string {
+// String returns the SpeechSynthesisPersonalVoiceAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechSynthesisPersonalVoiceAuthorizationStatus) String() string {
 	switch e {
-	case AVSpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined:
-		return "AVSpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined"
-	case AVSpeechSynthesisPersonalVoiceAuthorizationStatusDenied:
-		return "AVSpeechSynthesisPersonalVoiceAuthorizationStatusDenied"
-	case AVSpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported:
-		return "AVSpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported"
-	case AVSpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized:
-		return "AVSpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized"
+	case SpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined:
+		return "SpeechSynthesisPersonalVoiceAuthorizationStatusNotDetermined"
+	case SpeechSynthesisPersonalVoiceAuthorizationStatusDenied:
+		return "SpeechSynthesisPersonalVoiceAuthorizationStatusDenied"
+	case SpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported:
+		return "SpeechSynthesisPersonalVoiceAuthorizationStatusUnsupported"
+	case SpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized:
+		return "SpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("AVSpeechSynthesisPersonalVoiceAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("SpeechSynthesisPersonalVoiceAuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // The gender for a voice.
-type AVSpeechSynthesisVoiceGender int64
+type SpeechSynthesisVoiceGender int64
 
 const (
 	// The nonspecific gender option.
-	AVSpeechSynthesisVoiceGenderUnspecified AVSpeechSynthesisVoiceGender = 0
+	SpeechSynthesisVoiceGenderUnspecified SpeechSynthesisVoiceGender = 0
 	// The male voice option.
-	AVSpeechSynthesisVoiceGenderMale AVSpeechSynthesisVoiceGender = 1
+	SpeechSynthesisVoiceGenderMale SpeechSynthesisVoiceGender = 1
 	// The female voice option.
-	AVSpeechSynthesisVoiceGenderFemale AVSpeechSynthesisVoiceGender = 2
+	SpeechSynthesisVoiceGenderFemale SpeechSynthesisVoiceGender = 2
 )
 
-func (e AVSpeechSynthesisVoiceGender) String() string {
+// String returns the SpeechSynthesisVoiceGender constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechSynthesisVoiceGender) String() string {
 	switch e {
-	case AVSpeechSynthesisVoiceGenderUnspecified:
-		return "AVSpeechSynthesisVoiceGenderUnspecified"
-	case AVSpeechSynthesisVoiceGenderMale:
-		return "AVSpeechSynthesisVoiceGenderMale"
-	case AVSpeechSynthesisVoiceGenderFemale:
-		return "AVSpeechSynthesisVoiceGenderFemale"
+	case SpeechSynthesisVoiceGenderUnspecified:
+		return "SpeechSynthesisVoiceGenderUnspecified"
+	case SpeechSynthesisVoiceGenderMale:
+		return "SpeechSynthesisVoiceGenderMale"
+	case SpeechSynthesisVoiceGenderFemale:
+		return "SpeechSynthesisVoiceGenderFemale"
 	default:
-		return fmt.Sprintf("AVSpeechSynthesisVoiceGender(%d)", int64(e))
+		return fmt.Sprintf("SpeechSynthesisVoiceGender(%d)", int64(e))
 	}
 }
 
 // The speech quality of a voice.
-type AVSpeechSynthesisVoiceQuality int64
+type SpeechSynthesisVoiceQuality int64
 
 const (
 	// A basic quality voice that’s available on the device by default.
-	AVSpeechSynthesisVoiceQualityDefault AVSpeechSynthesisVoiceQuality = 1
+	SpeechSynthesisVoiceQualityDefault SpeechSynthesisVoiceQuality = 1
 	// An enhanced quality voice that you must download to use.
-	AVSpeechSynthesisVoiceQualityEnhanced AVSpeechSynthesisVoiceQuality = 2
+	SpeechSynthesisVoiceQualityEnhanced SpeechSynthesisVoiceQuality = 2
 	// A premium quality voice that you must download to use.
-	AVSpeechSynthesisVoiceQualityPremium AVSpeechSynthesisVoiceQuality = 3
+	SpeechSynthesisVoiceQualityPremium SpeechSynthesisVoiceQuality = 3
 )
 
-func (e AVSpeechSynthesisVoiceQuality) String() string {
+// String returns the SpeechSynthesisVoiceQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechSynthesisVoiceQuality) String() string {
 	switch e {
-	case AVSpeechSynthesisVoiceQualityDefault:
-		return "AVSpeechSynthesisVoiceQualityDefault"
-	case AVSpeechSynthesisVoiceQualityEnhanced:
-		return "AVSpeechSynthesisVoiceQualityEnhanced"
-	case AVSpeechSynthesisVoiceQualityPremium:
-		return "AVSpeechSynthesisVoiceQualityPremium"
+	case SpeechSynthesisVoiceQualityDefault:
+		return "SpeechSynthesisVoiceQualityDefault"
+	case SpeechSynthesisVoiceQualityEnhanced:
+		return "SpeechSynthesisVoiceQualityEnhanced"
+	case SpeechSynthesisVoiceQualityPremium:
+		return "SpeechSynthesisVoiceQualityPremium"
 	default:
-		return fmt.Sprintf("AVSpeechSynthesisVoiceQuality(%d)", int64(e))
+		return fmt.Sprintf("SpeechSynthesisVoiceQuality(%d)", int64(e))
 	}
 }
 
 // Traits that describe a voice.
 // Bitmask — values may be combined with |.
-type AVSpeechSynthesisVoiceTraits uint64
+type SpeechSynthesisVoiceTraits uint64
 
 const (
 	// The trait that indicates a voice is a regular voice.
-	AVSpeechSynthesisVoiceTraitNone AVSpeechSynthesisVoiceTraits = 0
+	SpeechSynthesisVoiceTraitNone SpeechSynthesisVoiceTraits = 0
 	// The voice is generally for novelty purposes, for example a character's voice in a game.
-	AVSpeechSynthesisVoiceTraitIsNoveltyVoice AVSpeechSynthesisVoiceTraits = 1
+	SpeechSynthesisVoiceTraitIsNoveltyVoice SpeechSynthesisVoiceTraits = 1
 	// The voice is was generated by, and belongs to the user. Voices with this trait will only be avilable when AVSpeechSynthesizer.personalVoiceAuthorizationStatus is AVSpeechSynthesisPersonalVoiceAuthorizationStatusAuthorized
-	AVSpeechSynthesisVoiceTraitIsPersonalVoice AVSpeechSynthesisVoiceTraits = 2
+	SpeechSynthesisVoiceTraitIsPersonalVoice SpeechSynthesisVoiceTraits = 2
 )
 
-func (e AVSpeechSynthesisVoiceTraits) String() string {
+// String returns the SpeechSynthesisVoiceTraits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpeechSynthesisVoiceTraits) String() string {
 	var parts []string
-	if e&AVSpeechSynthesisVoiceTraitIsNoveltyVoice != 0 {
-		parts = append(parts, "AVSpeechSynthesisVoiceTraitIsNoveltyVoice")
+	if e&SpeechSynthesisVoiceTraitIsNoveltyVoice != 0 {
+		parts = append(parts, "SpeechSynthesisVoiceTraitIsNoveltyVoice")
 	}
-	if e&AVSpeechSynthesisVoiceTraitIsPersonalVoice != 0 {
-		parts = append(parts, "AVSpeechSynthesisVoiceTraitIsPersonalVoice")
+	if e&SpeechSynthesisVoiceTraitIsPersonalVoice != 0 {
+		parts = append(parts, "SpeechSynthesisVoiceTraitIsPersonalVoice")
 	}
 	if len(parts) == 0 {
 		return "0"

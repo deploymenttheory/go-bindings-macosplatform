@@ -5,147 +5,174 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams wraps [raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams] with a fluent Go API.
+// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams is an idiomatic wrapper over the Objective-C class MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams.
 type MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams struct {
-	inner *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams].
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) Unwrap() *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID adopts an existing object pointer as a MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams (nil for 0).
+// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID adopts an existing Objective-C object as a MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID(id objc.ID) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams{inner: raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID(id)}
+	x := &MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams creates a new [MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams].
+// mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsAdopt(id objc.ID) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams creates a new MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams.
 func NewMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams() *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams")), objc.RegisterName("new"))
-	return &MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams{inner: raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams")), objc.RegisterName("new"))
+	return mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsAdopt(_id)
 }
 
-// WithAttributeId sets the attributeId property and returns the receiver for chaining.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithAttributeId(attributeId *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	x.inner.SetAttributeId(attributeId)
+// WithAttributeId sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithAttributeId(attributeId obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeId:"), objref.IDOf(attributeId))
 	return x
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithStartTime(startTime *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	x.inner.SetStartTime(startTime)
+// WithStartTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithStartTime(startTime obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithNumberOfIntervals sets the numberOfIntervals property and returns the receiver for chaining.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithNumberOfIntervals(numberOfIntervals *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	x.inner.SetNumberOfIntervals(numberOfIntervals)
+// WithNumberOfIntervals sets the property and returns the receiver so calls can be chained.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithNumberOfIntervals(numberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfIntervals:"), objref.IDOf(numberOfIntervals))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// AttributeId calls the underlying AttributeId.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeId() *foundation.NSNumber {
-	return x.inner.AttributeId()
+// AttributeId wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeId"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributeId calls the underlying SetAttributeId.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetAttributeId(attributeId *foundation.NSNumber) {
-	x.inner.SetAttributeId(attributeId)
+// SetAttributeId wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetAttributeId(attributeId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeId:"), objref.IDOf(attributeId))
 }
 
-// StartTime calls the underlying StartTime.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
+// StartTime wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
+// SetStartTime wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
-// NumberOfIntervals calls the underlying NumberOfIntervals.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() *foundation.NSNumber {
-	return x.inner.NumberOfIntervals()
+// NumberOfIntervals wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfIntervals"))
+	return obj.Wrap(_r)
 }
 
-// SetNumberOfIntervals calls the underlying SetNumberOfIntervals.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetNumberOfIntervals(numberOfIntervals *foundation.NSNumber) {
-	x.inner.SetNumberOfIntervals(numberOfIntervals)
+// SetNumberOfIntervals wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetNumberOfIntervals(numberOfIntervals obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfIntervals:"), objref.IDOf(numberOfIntervals))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable is the interface implemented by [MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams], for mocking and DI.
 type MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable interface {
-	Unwrap() *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	WithAttributeId(attributeId *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	WithStartTime(startTime *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	WithNumberOfIntervals(numberOfIntervals *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
-	AttributeId() *foundation.NSNumber
-	SetAttributeId(attributeId *foundation.NSNumber)
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	NumberOfIntervals() *foundation.NSNumber
-	SetNumberOfIntervals(numberOfIntervals *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithAttributeId(attributeId obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithStartTime(startTime obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithNumberOfIntervals(numberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+	AttributeId() obj.Object
+	SetAttributeId(attributeId obj.Object)
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	NumberOfIntervals() obj.Object
+	SetNumberOfIntervals(numberOfIntervals obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsable = (*MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams)(nil)

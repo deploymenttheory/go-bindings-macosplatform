@@ -5,62 +5,72 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
+// TimeIntervalNotificationTrigger is an idiomatic wrapper over the Objective-C class UNTimeIntervalNotificationTrigger.
 //
-// TimeIntervalNotificationTrigger wraps [raw.UNTimeIntervalNotificationTrigger] with a fluent Go API.
+// It embeds [NotificationTrigger], promoting that type's methods.
+//
+// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
 type TimeIntervalNotificationTrigger struct {
-	inner *raw.UNTimeIntervalNotificationTrigger
+	NotificationTrigger
 }
 
-// Unwrap returns the underlying [raw.UNTimeIntervalNotificationTrigger].
-func (x *TimeIntervalNotificationTrigger) Unwrap() *raw.UNTimeIntervalNotificationTrigger {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TimeIntervalNotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
-
-// TimeIntervalNotificationTriggerFromID adopts an existing object pointer as a TimeIntervalNotificationTrigger (nil for 0).
+// TimeIntervalNotificationTriggerFromID adopts an existing Objective-C object as a TimeIntervalNotificationTrigger
+// (nil for 0), retaining it and registering a release finalizer.
 func TimeIntervalNotificationTriggerFromID(id objc.ID) *TimeIntervalNotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	return &TimeIntervalNotificationTrigger{inner: raw.UNTimeIntervalNotificationTriggerFromID(id)}
+	x := &TimeIntervalNotificationTrigger{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTimeIntervalNotificationTrigger creates a new [TimeIntervalNotificationTrigger].
+// timeIntervalNotificationTriggerAdopt wraps an Objective-C object that this code just created as a
+// TimeIntervalNotificationTrigger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timeIntervalNotificationTriggerAdopt(id objc.ID) *TimeIntervalNotificationTrigger {
+	if id == 0 {
+		return nil
+	}
+	x := &TimeIntervalNotificationTrigger{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewTimeIntervalNotificationTrigger creates a new TimeIntervalNotificationTrigger.
 func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNTimeIntervalNotificationTrigger")), objc.RegisterName("new"))
-	return &TimeIntervalNotificationTrigger{inner: raw.UNTimeIntervalNotificationTriggerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNTimeIntervalNotificationTrigger")), objc.RegisterName("new"))
+	return timeIntervalNotificationTriggerAdopt(_id)
 }
 
-// The next date at which the trigger conditions are met.
-//
-// NextTriggerDate calls the underlying NextTriggerDate.
-func (x *TimeIntervalNotificationTrigger) NextTriggerDate() *foundation.NSDate {
-	return x.inner.NextTriggerDate()
+// NextTriggerDate the next date at which the trigger conditions are met.
+func (x *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
+	return obj.Wrap(_r)
 }
 
-// TimeInterval calls the underlying TimeInterval.
+// TimeInterval wraps the corresponding Objective-C method.
 func (x *TimeIntervalNotificationTrigger) TimeInterval() float64 {
-	return x.inner.TimeInterval()
-}
-
-func (x *TimeIntervalNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
-	return &x.inner.UNNotificationTrigger
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+	return _r
 }
 
 // TimeIntervalNotificationTriggerable is the interface implemented by [TimeIntervalNotificationTrigger], for mocking and DI.
 type TimeIntervalNotificationTriggerable interface {
-	Unwrap() *raw.UNTimeIntervalNotificationTrigger
-	NextTriggerDate() *foundation.NSDate
+	obj.Object
+	NextTriggerDate() obj.Object
 	TimeInterval() float64
 }
 
 var _ TimeIntervalNotificationTriggerable = (*TimeIntervalNotificationTrigger)(nil)
+
+var _ NotificationTriggerProvider = (*TimeIntervalNotificationTrigger)(nil)

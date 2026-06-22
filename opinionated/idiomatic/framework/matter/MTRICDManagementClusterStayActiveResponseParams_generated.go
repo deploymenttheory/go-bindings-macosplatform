@@ -5,70 +5,101 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRICDManagementClusterStayActiveResponseParams wraps [raw.MTRICDManagementClusterStayActiveResponseParams] with a fluent Go API.
+// MTRICDManagementClusterStayActiveResponseParams is an idiomatic wrapper over the Objective-C class MTRICDManagementClusterStayActiveResponseParams.
 type MTRICDManagementClusterStayActiveResponseParams struct {
-	inner *raw.MTRICDManagementClusterStayActiveResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRICDManagementClusterStayActiveResponseParams].
-func (x *MTRICDManagementClusterStayActiveResponseParams) Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRICDManagementClusterStayActiveResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRICDManagementClusterStayActiveResponseParamsFromID adopts an existing object pointer as a MTRICDManagementClusterStayActiveResponseParams (nil for 0).
+// MTRICDManagementClusterStayActiveResponseParamsFromID adopts an existing Objective-C object as a MTRICDManagementClusterStayActiveResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRICDManagementClusterStayActiveResponseParamsFromID(id objc.ID) *MTRICDManagementClusterStayActiveResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRICDManagementClusterStayActiveResponseParams{inner: raw.MTRICDManagementClusterStayActiveResponseParamsFromID(id)}
-}
-
-// Initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError creates a new [MTRICDManagementClusterStayActiveResponseParams].
-func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRICDManagementClusterStayActiveResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRICDManagementClusterStayActiveResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRICDManagementClusterStayActiveResponseParams{inner: raw.MTRICDManagementClusterStayActiveResponseParamsFromID(_id)}, nil
-}
-
-// WithPromisedActiveDuration sets the promisedActiveDuration property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRICDManagementClusterStayActiveResponseParams {
-	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+	x := &MTRICDManagementClusterStayActiveResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// PromisedActiveDuration calls the underlying PromisedActiveDuration.
-func (x *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() *foundation.NSNumber {
-	return x.inner.PromisedActiveDuration()
+// mTRICDManagementClusterStayActiveResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRICDManagementClusterStayActiveResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRICDManagementClusterStayActiveResponseParamsAdopt(id objc.ID) *MTRICDManagementClusterStayActiveResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRICDManagementClusterStayActiveResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPromisedActiveDuration calls the underlying SetPromisedActiveDuration.
-func (x *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
-	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+// Description returns the object's -description text.
+func (x *MTRICDManagementClusterStayActiveResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRICDManagementClusterStayActiveResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRICDManagementClusterStayActiveResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRICDManagementClusterStayActiveResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError initialize an MTRICDManagementClusterStayActiveResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRICDManagementClusterStayActiveResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterStayActiveResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRICDManagementClusterStayActiveResponseParamsAdopt(_id), nil
+}
+
+// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
+	return x
+}
+
+// PromisedActiveDuration wraps the corresponding Objective-C method.
+func (x *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedActiveDuration"))
+	return obj.Wrap(_r)
+}
+
+// SetPromisedActiveDuration wraps the corresponding Objective-C method.
+func (x *MTRICDManagementClusterStayActiveResponseParams) SetPromisedActiveDuration(promisedActiveDuration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 }
 
 // MTRICDManagementClusterStayActiveResponseParamsable is the interface implemented by [MTRICDManagementClusterStayActiveResponseParams], for mocking and DI.
 type MTRICDManagementClusterStayActiveResponseParamsable interface {
-	Unwrap() *raw.MTRICDManagementClusterStayActiveResponseParams
-	WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRICDManagementClusterStayActiveResponseParams
-	PromisedActiveDuration() *foundation.NSNumber
-	SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber)
+	obj.Object
+	WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams
+	PromisedActiveDuration() obj.Object
+	SetPromisedActiveDuration(promisedActiveDuration obj.Object)
 }
 
 var _ MTRICDManagementClusterStayActiveResponseParamsable = (*MTRICDManagementClusterStayActiveResponseParams)(nil)

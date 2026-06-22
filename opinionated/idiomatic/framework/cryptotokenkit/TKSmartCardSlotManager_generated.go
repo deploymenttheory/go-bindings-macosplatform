@@ -6,56 +6,88 @@ package cryptotokenkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An interface to all available smart card reader slots.
+// SmartCardSlotManager is an idiomatic wrapper over the Objective-C class TKSmartCardSlotManager.
 //
-// SmartCardSlotManager wraps [raw.TKSmartCardSlotManager] with a fluent Go API.
+// An interface to all available smart card reader slots.
 type SmartCardSlotManager struct {
-	inner *raw.TKSmartCardSlotManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardSlotManager].
-func (x *SmartCardSlotManager) Unwrap() *raw.TKSmartCardSlotManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardSlotManager) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardSlotManagerFromID adopts an existing object pointer as a SmartCardSlotManager (nil for 0).
+// SmartCardSlotManagerFromID adopts an existing Objective-C object as a SmartCardSlotManager
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardSlotManagerFromID(id objc.ID) *SmartCardSlotManager {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardSlotManager{inner: raw.TKSmartCardSlotManagerFromID(id)}
+	x := &SmartCardSlotManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardSlotManager creates a new [SmartCardSlotManager].
+// smartCardSlotManagerAdopt wraps an Objective-C object that this code just created as a
+// SmartCardSlotManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardSlotManagerAdopt(id objc.ID) *SmartCardSlotManager {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardSlotManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardSlotManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardSlotManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardSlotManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardSlotManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSmartCardSlotManager creates a new SmartCardSlotManager.
 func NewSmartCardSlotManager() *SmartCardSlotManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardSlotManager")), objc.RegisterName("new"))
-	return &SmartCardSlotManager{inner: raw.TKSmartCardSlotManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlotManager")), objc.RegisterName("new"))
+	return smartCardSlotManagerAdopt(_id)
 }
 
-// Asynchronously calls a block with a Smart Card reader slot for a specified name.
+// GetSlotWithNameReply asynchronously calls a block with a Smart Card reader slot for a specified name.
 //
 // GetSlotWithNameReply blocks until the operation completes or ctx is cancelled.
-func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error) {
+func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name string) (result *SmartCardSlot, err error) {
 	type _result struct {
 		val *SmartCardSlot
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetSlotWithNameReply(foundation.NSStringStringWithUTF8String(name), func(_p0 *raw.TKSmartCardSlot) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SmartCardSlot{inner: _p0}
-		}
+		_o.val = SmartCardSlotFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSlotWithName:reply:"), purego.NSString(name), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -65,33 +97,23 @@ func (x *SmartCardSlotManager) GetSlotWithNameReply(ctx context.Context, name st
 	}
 }
 
-// Returns the Smart Card slot with a given name.
-//
-// SlotNamed calls the underlying SlotNamed.
+// SlotNamed returns the Smart Card slot with a given name.
 func (x *SmartCardSlotManager) SlotNamed(name string) *SmartCardSlot {
-	_r := x.inner.SlotNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardSlot{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotNamed:"), purego.NSString(name))
+	return SmartCardSlotFromID(_r)
 }
 
-// Array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
+// SlotNames array of currently known slots in the system.  Slots are identified by NSString name instances.  Use KVO to be notified about slots arrivals and removals.
 //
 // SlotNames returns the collection as a Go slice.
 func (x *SmartCardSlotManager) SlotNames() []string {
-	arr := x.inner.SlotNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SmartCardSlotManagerable is the interface implemented by [SmartCardSlotManager], for mocking and DI.
 type SmartCardSlotManagerable interface {
-	Unwrap() *raw.TKSmartCardSlotManager
+	obj.Object
 	GetSlotWithNameReply(ctx context.Context, name string) (*SmartCardSlot, error)
 	SlotNamed(name string) *SmartCardSlot
 	SlotNames() []string

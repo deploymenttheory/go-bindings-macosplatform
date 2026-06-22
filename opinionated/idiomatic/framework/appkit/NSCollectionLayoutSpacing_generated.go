@@ -5,56 +5,94 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the space between or around items in a collection view.
+// CollectionLayoutSpacing is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSpacing.
 //
-// CollectionLayoutSpacing wraps [raw.NSCollectionLayoutSpacing] with a fluent Go API.
+// An object that defines the space between or around items in a collection view.
 type CollectionLayoutSpacing struct {
-	inner *raw.NSCollectionLayoutSpacing
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutSpacing].
-func (x *CollectionLayoutSpacing) Unwrap() *raw.NSCollectionLayoutSpacing { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutSpacing) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutSpacingFromID adopts an existing object pointer as a CollectionLayoutSpacing (nil for 0).
+// CollectionLayoutSpacingFromID adopts an existing Objective-C object as a CollectionLayoutSpacing
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutSpacingFromID(id objc.ID) *CollectionLayoutSpacing {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutSpacing{inner: raw.NSCollectionLayoutSpacingFromID(id)}
+	x := &CollectionLayoutSpacing{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutSpacing creates a new [CollectionLayoutSpacing].
+// collectionLayoutSpacingAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutSpacing (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutSpacingAdopt(id objc.ID) *CollectionLayoutSpacing {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutSpacing{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutSpacing) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutSpacing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutSpacing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CollectionLayoutSpacing) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCollectionLayoutSpacing creates a new CollectionLayoutSpacing.
 func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutSpacing")), objc.RegisterName("new"))
-	return &CollectionLayoutSpacing{inner: raw.NSCollectionLayoutSpacingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSpacing")), objc.RegisterName("new"))
+	return collectionLayoutSpacingAdopt(_id)
 }
 
-// Spacing calls the underlying Spacing.
+// Spacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) Spacing() float64 {
-	return x.inner.Spacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("spacing"))
+	return _r
 }
 
-// IsFlexibleSpacing calls the underlying IsFlexibleSpacing.
+// IsFlexibleSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
-	return x.inner.IsFlexibleSpacing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlexibleSpacing"))
+	return _r
 }
 
-// IsFixedSpacing calls the underlying IsFixedSpacing.
+// IsFixedSpacing wraps the corresponding Objective-C method.
 func (x *CollectionLayoutSpacing) IsFixedSpacing() bool {
-	return x.inner.IsFixedSpacing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedSpacing"))
+	return _r
 }
 
 // CollectionLayoutSpacingable is the interface implemented by [CollectionLayoutSpacing], for mocking and DI.
 type CollectionLayoutSpacingable interface {
-	Unwrap() *raw.NSCollectionLayoutSpacing
+	obj.Object
 	Spacing() float64
 	IsFlexibleSpacing() bool
 	IsFixedSpacing() bool

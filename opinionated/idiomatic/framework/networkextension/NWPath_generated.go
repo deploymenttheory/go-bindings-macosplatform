@@ -5,70 +5,101 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The path made by a network connection, including information about its viability.
+// NWPath is an idiomatic wrapper over the Objective-C class NWPath.
 //
-// NWPath wraps [raw.NWPath] with a fluent Go API.
+// The path made by a network connection, including information about its viability.
 type NWPath struct {
-	inner *raw.NWPath
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWPath].
-func (x *NWPath) Unwrap() *raw.NWPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWPath) ID() objc.ID { return x.inner.Ptr() }
-
-// NWPathFromID adopts an existing object pointer as a NWPath (nil for 0).
+// NWPathFromID adopts an existing Objective-C object as a NWPath
+// (nil for 0), retaining it and registering a release finalizer.
 func NWPathFromID(id objc.ID) *NWPath {
 	if id == 0 {
 		return nil
 	}
-	return &NWPath{inner: raw.NWPathFromID(id)}
+	x := &NWPath{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNWPath creates a new [NWPath].
+// nWPathAdopt wraps an Objective-C object that this code just created as a
+// NWPath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWPathAdopt(id objc.ID) *NWPath {
+	if id == 0 {
+		return nil
+	}
+	x := &NWPath{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWPath) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NWPath) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNWPath creates a new NWPath.
 func NewNWPath() *NWPath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWPath")), objc.RegisterName("new"))
-	return &NWPath{inner: raw.NWPathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NWPath")), objc.RegisterName("new"))
+	return nWPathAdopt(_id)
 }
 
-// Comparison method for NWPath objects.
-//
-// IsEqualToPath calls the underlying IsEqualToPath.
-func (x *NWPath) IsEqualToPath(path *raw.NWPath) bool {
-	return x.inner.IsEqualToPath(path)
+// IsEqualToPath comparison method for NWPath objects.
+func (x *NWPath) IsEqualToPath(path *NWPath) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToPath:"), objref.IDOf(path))
+	return _r
 }
 
-// @property status @discussion The evaluated NWPathStatus of the NWPath.
-//
-// Status calls the underlying Status.
+// Status the evaluated NWPathStatus of the NWPath.
 func (x *NWPath) Status() NWPathStatus {
-	return NWPathStatus(x.inner.Status())
+	_r := objc.Send[NWPathStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// @property expensive @discussion Returns YES if the path is considered expensive, as when using a cellular data plan.
-//
-// IsExpensive calls the underlying IsExpensive.
+// IsExpensive returns YES if the path is considered expensive, as when using a cellular data plan.
 func (x *NWPath) IsExpensive() bool {
-	return x.inner.IsExpensive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExpensive"))
+	return _r
 }
 
-// @property constrained @discussion Returns YES if the path is considered constrained, as when it is in save data mode.
-//
-// IsConstrained calls the underlying IsConstrained.
+// IsConstrained returns YES if the path is considered constrained, as when it is in save data mode.
 func (x *NWPath) IsConstrained() bool {
-	return x.inner.IsConstrained()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConstrained"))
+	return _r
 }
 
 // NWPathable is the interface implemented by [NWPath], for mocking and DI.
 type NWPathable interface {
-	Unwrap() *raw.NWPath
-	IsEqualToPath(path *raw.NWPath) bool
+	obj.Object
+	IsEqualToPath(path *NWPath) bool
 	Status() NWPathStatus
 	IsExpensive() bool
 	IsConstrained() bool

@@ -5,79 +5,79 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A symbol effect that applies the DrawOn animation to symbol images.
+// SymbolDrawOnEffect is an idiomatic wrapper over the Objective-C class NSSymbolDrawOnEffect.
 //
-// SymbolDrawOnEffect wraps [raw.NSSymbolDrawOnEffect] with a fluent Go API.
+// It embeds [SymbolEffect], promoting that type's methods.
+//
+// A symbol effect that applies the DrawOn animation to symbol images.
 type SymbolDrawOnEffect struct {
-	inner *raw.NSSymbolDrawOnEffect
+	SymbolEffect
 }
 
-// Unwrap returns the underlying [raw.NSSymbolDrawOnEffect].
-func (x *SymbolDrawOnEffect) Unwrap() *raw.NSSymbolDrawOnEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolDrawOnEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolDrawOnEffectFromID adopts an existing object pointer as a SymbolDrawOnEffect (nil for 0).
+// SymbolDrawOnEffectFromID adopts an existing Objective-C object as a SymbolDrawOnEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolDrawOnEffectFromID(id objc.ID) *SymbolDrawOnEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolDrawOnEffect{inner: raw.NSSymbolDrawOnEffectFromID(id)}
+	x := &SymbolDrawOnEffect{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolDrawOnEffect creates a new [SymbolDrawOnEffect].
+// symbolDrawOnEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolDrawOnEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolDrawOnEffectAdopt(id objc.ID) *SymbolDrawOnEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolDrawOnEffect{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSymbolDrawOnEffect creates a new SymbolDrawOnEffect.
 func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolDrawOnEffect")), objc.RegisterName("new"))
-	return &SymbolDrawOnEffect{inner: raw.NSSymbolDrawOnEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolDrawOnEffect")), objc.RegisterName("new"))
+	return symbolDrawOnEffectAdopt(_id)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
+// EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOnEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolDrawOnEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+// EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOnEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolDrawOnEffectFromID(_r)
 }
 
-// Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
-//
-// EffectWithIndividually calls the underlying EffectWithIndividually.
+// EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (x *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
-	_r := x.inner.EffectWithIndividually()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOnEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
+	return SymbolDrawOnEffectFromID(_r)
 }
-
-func (x *SymbolDrawOnEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolDrawOnEffectable is the interface implemented by [SymbolDrawOnEffect], for mocking and DI.
 type SymbolDrawOnEffectable interface {
-	Unwrap() *raw.NSSymbolDrawOnEffect
+	obj.Object
 	EffectWithByLayer() *SymbolDrawOnEffect
 	EffectWithWholeSymbol() *SymbolDrawOnEffect
 	EffectWithIndividually() *SymbolDrawOnEffect
 }
 
 var _ SymbolDrawOnEffectable = (*SymbolDrawOnEffect)(nil)
+
+var _ SymbolEffectProvider = (*SymbolDrawOnEffect)(nil)

@@ -5,60 +5,70 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRModeSelectClusterSemanticTag wraps [raw.MTRModeSelectClusterSemanticTag] with a fluent Go API.
+// MTRModeSelectClusterSemanticTag is an idiomatic wrapper over the Objective-C class MTRModeSelectClusterSemanticTag.
+//
+// It embeds [MTRModeSelectClusterSemanticTagStruct], promoting that type's methods.
 type MTRModeSelectClusterSemanticTag struct {
-	inner *raw.MTRModeSelectClusterSemanticTag
+	MTRModeSelectClusterSemanticTagStruct
 }
 
-// Unwrap returns the underlying [raw.MTRModeSelectClusterSemanticTag].
-func (x *MTRModeSelectClusterSemanticTag) Unwrap() *raw.MTRModeSelectClusterSemanticTag {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRModeSelectClusterSemanticTag) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRModeSelectClusterSemanticTagFromID adopts an existing object pointer as a MTRModeSelectClusterSemanticTag (nil for 0).
+// MTRModeSelectClusterSemanticTagFromID adopts an existing Objective-C object as a MTRModeSelectClusterSemanticTag
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRModeSelectClusterSemanticTagFromID(id objc.ID) *MTRModeSelectClusterSemanticTag {
 	if id == 0 {
 		return nil
 	}
-	return &MTRModeSelectClusterSemanticTag{inner: raw.MTRModeSelectClusterSemanticTagFromID(id)}
+	x := &MTRModeSelectClusterSemanticTag{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRModeSelectClusterSemanticTag creates a new [MTRModeSelectClusterSemanticTag].
+// mTRModeSelectClusterSemanticTagAdopt wraps an Objective-C object that this code just created as a
+// MTRModeSelectClusterSemanticTag (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRModeSelectClusterSemanticTagAdopt(id objc.ID) *MTRModeSelectClusterSemanticTag {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRModeSelectClusterSemanticTag{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRModeSelectClusterSemanticTag creates a new MTRModeSelectClusterSemanticTag.
 func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRModeSelectClusterSemanticTag")), objc.RegisterName("new"))
-	return &MTRModeSelectClusterSemanticTag{inner: raw.MTRModeSelectClusterSemanticTagFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRModeSelectClusterSemanticTag")), objc.RegisterName("new"))
+	return mTRModeSelectClusterSemanticTagAdopt(_id)
 }
 
-// WithMfgCode sets the mfgCode property and returns the receiver for chaining.
-func (x *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode *foundation.NSNumber) *MTRModeSelectClusterSemanticTag {
-	x.inner.MTRModeSelectClusterSemanticTagStruct.SetMfgCode(mfgCode)
+// WithMfgCode sets the property and returns the receiver so calls can be chained.
+func (x *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRModeSelectClusterSemanticTag) WithValue(value *foundation.NSNumber) *MTRModeSelectClusterSemanticTag {
-	x.inner.MTRModeSelectClusterSemanticTagStruct.SetValue(value)
+// WithValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRModeSelectClusterSemanticTag) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
-}
-
-func (x *MTRModeSelectClusterSemanticTag) asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct {
-	return &x.inner.MTRModeSelectClusterSemanticTagStruct
 }
 
 // MTRModeSelectClusterSemanticTagable is the interface implemented by [MTRModeSelectClusterSemanticTag], for mocking and DI.
 type MTRModeSelectClusterSemanticTagable interface {
-	Unwrap() *raw.MTRModeSelectClusterSemanticTag
-	WithMfgCode(mfgCode *foundation.NSNumber) *MTRModeSelectClusterSemanticTag
-	WithValue(value *foundation.NSNumber) *MTRModeSelectClusterSemanticTag
+	obj.Object
+	WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag
+	WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag
 }
 
 var _ MTRModeSelectClusterSemanticTagable = (*MTRModeSelectClusterSemanticTag)(nil)
+
+var _ MTRModeSelectClusterSemanticTagStructProvider = (*MTRModeSelectClusterSemanticTag)(nil)

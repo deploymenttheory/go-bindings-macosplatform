@@ -5,157 +5,178 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixBinaryKernel wraps [raw.MPSMatrixBinaryKernel] with a fluent Go API.
+// MatrixBinaryKernel is an idiomatic wrapper over the Objective-C class MPSMatrixBinaryKernel.
+//
+// MatrixBinaryKernel is an abstract base — you do not construct it directly. Construct one of [MatrixSoftMaxGradient], [MatrixSolveCholesky], [MatrixSolveLU], [MatrixSolveTriangular], [MatrixVectorMultiplication] and pass it where a MatrixBinaryKernel is accepted.
 type MatrixBinaryKernel struct {
-	inner *raw.MPSMatrixBinaryKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixBinaryKernel].
-func (x *MatrixBinaryKernel) Unwrap() *raw.MPSMatrixBinaryKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixBinaryKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixBinaryKernelFromID adopts an existing object pointer as a MatrixBinaryKernel (nil for 0).
+// MatrixBinaryKernelFromID adopts an existing Objective-C object as a MatrixBinaryKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixBinaryKernelFromID(id objc.ID) *MatrixBinaryKernel {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixBinaryKernel{inner: raw.MPSMatrixBinaryKernelFromID(id)}
+	x := &MatrixBinaryKernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixBinaryKernel creates a new [MatrixBinaryKernel].
-func NewMatrixBinaryKernel() *MatrixBinaryKernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixBinaryKernel")), objc.RegisterName("new"))
-	return &MatrixBinaryKernel{inner: raw.MPSMatrixBinaryKernelFromID(_id)}
+// matrixBinaryKernelAdopt wraps an Objective-C object that this code just created as a
+// MatrixBinaryKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixBinaryKernelAdopt(id objc.ID) *MatrixBinaryKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixBinaryKernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *MatrixBinaryKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixBinaryKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixBinaryKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MatrixBinaryKernel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
-	x.inner.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
 	return x
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
-	x.inner.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
 	return x
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel {
-	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 	return x
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixBinaryKernel) WithBatchStart(batchStart uint) *MatrixBinaryKernel {
-	x.inner.SetBatchStart(batchStart)
+// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (x *MatrixBinaryKernel) WithBatchStart(batchStart int) *MatrixBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixBinaryKernel) WithBatchSize(batchSize uint) *MatrixBinaryKernel {
-	x.inner.SetBatchSize(batchSize)
+// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (x *MatrixBinaryKernel) WithBatchSize(batchSize int) *MatrixBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// PrimarySourceMatrixOrigin calls the underlying PrimarySourceMatrixOrigin.
+// PrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) PrimarySourceMatrixOrigin() metal.MTLOrigin {
-	return x.inner.PrimarySourceMatrixOrigin()
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("primarySourceMatrixOrigin"))
+	return _r
 }
 
-// SetPrimarySourceMatrixOrigin calls the underlying SetPrimarySourceMatrixOrigin.
+// SetPrimarySourceMatrixOrigin wraps the corresponding Objective-C method.
 func (x *MatrixBinaryKernel) SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) {
-	x.inner.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// SecondarySourceMatrixOrigin calls the underlying SecondarySourceMatrixOrigin.
+// SecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) SecondarySourceMatrixOrigin() metal.MTLOrigin {
-	return x.inner.SecondarySourceMatrixOrigin()
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("secondarySourceMatrixOrigin"))
+	return _r
 }
 
-// SetSecondarySourceMatrixOrigin calls the underlying SetSecondarySourceMatrixOrigin.
+// SetSecondarySourceMatrixOrigin wraps the corresponding Objective-C method.
 func (x *MatrixBinaryKernel) SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) {
-	x.inner.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (x *MatrixBinaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
-	return x.inner.ResultMatrixOrigin()
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+	return _r
 }
 
-// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+// SetResultMatrixOrigin wraps the corresponding Objective-C method.
 func (x *MatrixBinaryKernel) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
-	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// BatchStart calls the underlying BatchStart.
-func (x *MatrixBinaryKernel) BatchStart() uint {
-	return x.inner.BatchStart()
+// BatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (x *MatrixBinaryKernel) BatchStart() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
+	return _r
 }
 
-// SetBatchStart calls the underlying SetBatchStart.
-func (x *MatrixBinaryKernel) SetBatchStart(batchStart uint) {
-	x.inner.SetBatchStart(batchStart)
+// SetBatchStart wraps the corresponding Objective-C method.
+func (x *MatrixBinaryKernel) SetBatchStart(batchStart int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 }
 
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// BatchSize calls the underlying BatchSize.
-func (x *MatrixBinaryKernel) BatchSize() uint {
-	return x.inner.BatchSize()
+// BatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (x *MatrixBinaryKernel) BatchSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
+	return _r
 }
 
-// SetBatchSize calls the underlying SetBatchSize.
-func (x *MatrixBinaryKernel) SetBatchSize(batchSize uint) {
-	x.inner.SetBatchSize(batchSize)
+// SetBatchSize wraps the corresponding Objective-C method.
+func (x *MatrixBinaryKernel) SetBatchSize(batchSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 }
-
-func (x *MatrixBinaryKernel) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return x.inner }
 
 // MatrixBinaryKernelable is the interface implemented by [MatrixBinaryKernel], for mocking and DI.
 type MatrixBinaryKernelable interface {
-	Unwrap() *raw.MPSMatrixBinaryKernel
+	obj.Object
 	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
 	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
-	WithBatchStart(batchStart uint) *MatrixBinaryKernel
-	WithBatchSize(batchSize uint) *MatrixBinaryKernel
+	WithBatchStart(batchStart int) *MatrixBinaryKernel
+	WithBatchSize(batchSize int) *MatrixBinaryKernel
 	PrimarySourceMatrixOrigin() metal.MTLOrigin
 	SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin)
 	SecondarySourceMatrixOrigin() metal.MTLOrigin
 	SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin)
 	ResultMatrixOrigin() metal.MTLOrigin
 	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
-	BatchStart() uint
-	SetBatchStart(batchStart uint)
-	BatchSize() uint
-	SetBatchSize(batchSize uint)
+	BatchStart() int
+	SetBatchStart(batchStart int)
+	BatchSize() int
+	SetBatchSize(batchSize int)
 }
 
 var _ MatrixBinaryKernelable = (*MatrixBinaryKernel)(nil)
+
+// isMatrixBinaryKernel marks MatrixBinaryKernel — and, by embedding promotion, its
+// subclasses — as a member of the MatrixBinaryKernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MatrixBinaryKernel) isMatrixBinaryKernel() {}
+
+var _ MatrixBinaryKernelProvider = (*MatrixBinaryKernel)(nil)

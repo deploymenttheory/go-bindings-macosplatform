@@ -5,80 +5,111 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The context an update task provides to your app’s completion and update progress handlers.
+// UpdateContext is an idiomatic wrapper over the Objective-C class MLUpdateContext.
 //
-// UpdateContext wraps [raw.MLUpdateContext] with a fluent Go API.
+// The context an update task provides to your app’s completion and update progress handlers.
 type UpdateContext struct {
-	inner *raw.MLUpdateContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLUpdateContext].
-func (x *UpdateContext) Unwrap() *raw.MLUpdateContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UpdateContext) ID() objc.ID { return x.inner.Ptr() }
-
-// UpdateContextFromID adopts an existing object pointer as a UpdateContext (nil for 0).
+// UpdateContextFromID adopts an existing Objective-C object as a UpdateContext
+// (nil for 0), retaining it and registering a release finalizer.
 func UpdateContextFromID(id objc.ID) *UpdateContext {
 	if id == 0 {
 		return nil
 	}
-	return &UpdateContext{inner: raw.MLUpdateContextFromID(id)}
+	x := &UpdateContext{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewUpdateContext creates a new [UpdateContext].
+// updateContextAdopt wraps an Objective-C object that this code just created as a
+// UpdateContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func updateContextAdopt(id objc.ID) *UpdateContext {
+	if id == 0 {
+		return nil
+	}
+	x := &UpdateContext{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UpdateContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UpdateContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UpdateContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *UpdateContext) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewUpdateContext creates a new UpdateContext.
 func NewUpdateContext() *UpdateContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateContext")), objc.RegisterName("new"))
-	return &UpdateContext{inner: raw.MLUpdateContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLUpdateContext")), objc.RegisterName("new"))
+	return updateContextAdopt(_id)
 }
 
-// Task calls the underlying Task.
+// Task wraps the corresponding Objective-C method.
 func (x *UpdateContext) Task() *UpdateTask {
-	_r := x.inner.Task()
-	if _r == nil {
-		return nil
-	}
-	return &UpdateTask{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
+	return UpdateTaskFromID(_r)
 }
 
-// Model calls the underlying Model.
+// Model wraps the corresponding Objective-C method.
 func (x *UpdateContext) Model() *Model {
-	_r := x.inner.Model()
-	if _r == nil {
-		return nil
-	}
-	return &Model{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+	return ModelFromID(_r)
 }
 
-// Event calls the underlying Event.
-func (x *UpdateContext) Event() MLUpdateProgressEvent {
-	return MLUpdateProgressEvent(x.inner.Event())
+// Event wraps the corresponding Objective-C method.
+func (x *UpdateContext) Event() UpdateProgressEvent {
+	_r := objc.Send[UpdateProgressEvent](objref.IDOf(x), objc.RegisterName("event"))
+	return _r
 }
 
-// Metrics calls the underlying Metrics.
-func (x *UpdateContext) Metrics() *foundation.NSDictionary[*raw.MLMetricKey, objc.ID] {
-	return x.inner.Metrics()
+// Metrics wraps the corresponding Objective-C method.
+func (x *UpdateContext) Metrics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metrics"))
+	return obj.Wrap(_r)
 }
 
-// Parameters calls the underlying Parameters.
-func (x *UpdateContext) Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID] {
-	return x.inner.Parameters()
+// Parameters wraps the corresponding Objective-C method.
+func (x *UpdateContext) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+	return obj.Wrap(_r)
 }
 
 // UpdateContextable is the interface implemented by [UpdateContext], for mocking and DI.
 type UpdateContextable interface {
-	Unwrap() *raw.MLUpdateContext
+	obj.Object
 	Task() *UpdateTask
 	Model() *Model
-	Event() MLUpdateProgressEvent
-	Metrics() *foundation.NSDictionary[*raw.MLMetricKey, objc.ID]
-	Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]
+	Event() UpdateProgressEvent
+	Metrics() obj.Object
+	Parameters() obj.Object
 }
 
 var _ UpdateContextable = (*UpdateContext)(nil)

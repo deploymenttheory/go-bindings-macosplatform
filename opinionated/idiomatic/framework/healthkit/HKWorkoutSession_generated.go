@@ -5,200 +5,179 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session that tracks a person’s workout.
+// WorkoutSession is an idiomatic wrapper over the Objective-C class HKWorkoutSession.
 //
-// WorkoutSession wraps [raw.HKWorkoutSession] with a fluent Go API.
+// A session that tracks a person’s workout.
 type WorkoutSession struct {
-	inner *raw.HKWorkoutSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutSession].
-func (x *WorkoutSession) Unwrap() *raw.HKWorkoutSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutSession) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutSessionFromID adopts an existing object pointer as a WorkoutSession (nil for 0).
+// WorkoutSessionFromID adopts an existing Objective-C object as a WorkoutSession
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutSessionFromID(id objc.ID) *WorkoutSession {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutSession{inner: raw.HKWorkoutSessionFromID(id)}
-}
-
-// NewWorkoutSession creates a new [WorkoutSession].
-func NewWorkoutSession() *WorkoutSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutSession")), objc.RegisterName("new"))
-	return &WorkoutSession{inner: raw.HKWorkoutSessionFromID(_id)}
-}
-
-// The workout session’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *WorkoutSession) WithDelegate(delegate raw.HKWorkoutSessionDelegate) *WorkoutSession {
-	x.inner.SetDelegate(delegate)
+	x := &WorkoutSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Prepares the workout session.
-//
-// Prepare calls the underlying Prepare.
+// workoutSessionAdopt wraps an Objective-C object that this code just created as a
+// WorkoutSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutSessionAdopt(id objc.ID) *WorkoutSession {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkoutSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWorkoutSession creates a new WorkoutSession.
+func NewWorkoutSession() *WorkoutSession {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutSession")), objc.RegisterName("new"))
+	return workoutSessionAdopt(_id)
+}
+
+// Prepare prepares the workout session.
 func (x *WorkoutSession) Prepare() {
-	x.inner.Prepare()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepare"))
 }
 
-// Starts the workout session activity, and sets the start date.
-//
-// StartActivityWithDate calls the underlying StartActivityWithDate.
-func (x *WorkoutSession) StartActivityWithDate(date *foundation.NSDate) {
-	x.inner.StartActivityWithDate(date)
+// StartActivityWithDate starts the workout session activity, and sets the start date.
+func (x *WorkoutSession) StartActivityWithDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startActivityWithDate:"), objref.IDOf(date))
 }
 
-// Stops the workout session activity, and sets the end date.
-//
-// StopActivityWithDate calls the underlying StopActivityWithDate.
-func (x *WorkoutSession) StopActivityWithDate(date *foundation.NSDate) {
-	x.inner.StopActivityWithDate(date)
+// StopActivityWithDate stops the workout session activity, and sets the end date.
+func (x *WorkoutSession) StopActivityWithDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopActivityWithDate:"), objref.IDOf(date))
 }
 
-// Ends the workout session.
-//
-// End calls the underlying End.
+// End ends the workout session.
 func (x *WorkoutSession) End() {
-	x.inner.End()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
 }
 
-// Pauses the workout session.
-//
-// Pause calls the underlying Pause.
+// Pause pauses the workout session.
 func (x *WorkoutSession) Pause() {
-	x.inner.Pause()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
-// Resumes the workout session.
-//
-// Resume calls the underlying Resume.
+// Resume resumes the workout session.
 func (x *WorkoutSession) Resume() {
-	x.inner.Resume()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
-// Begins a new workout activity in the workout session.
-//
-// BeginNewActivityWithConfigurationDateMetadata calls the underlying BeginNewActivityWithConfigurationDateMetadata.
-func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration, date, metadata)
+// BeginNewActivityWithConfigurationDateMetadata begins a new workout activity in the workout session.
+func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginNewActivityWithConfiguration:date:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(date), objref.IDOf(metadata))
 }
 
-// Ends the current workout activity.
-//
-// EndCurrentActivityOnDate calls the underlying EndCurrentActivityOnDate.
-func (x *WorkoutSession) EndCurrentActivityOnDate(date *foundation.NSDate) {
-	x.inner.EndCurrentActivityOnDate(date)
+// EndCurrentActivityOnDate ends the current workout activity.
+func (x *WorkoutSession) EndCurrentActivityOnDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endCurrentActivityOnDate:"), objref.IDOf(date))
 }
 
-// @property      activityType @abstract      Indicates the type of workout that will be performed during the session.
-//
-// ActivityType calls the underlying ActivityType.
-func (x *WorkoutSession) ActivityType() HKWorkoutActivityType {
-	return HKWorkoutActivityType(x.inner.ActivityType())
+// ActivityType indicates the type of workout that will be performed during the session.
+func (x *WorkoutSession) ActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
+	return _r
 }
 
-// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) where the workout will take place. @discussion    Knowing the location type allows for more accurate measurements and better performance.
-//
-// LocationType calls the underlying LocationType.
-func (x *WorkoutSession) LocationType() HKWorkoutSessionLocationType {
-	return HKWorkoutSessionLocationType(x.inner.LocationType())
+// LocationType indicates the type of location (indoors vs. outdoors) where the workout will take place. Knowing the location type allows for more accurate measurements and better performance.
+func (x *WorkoutSession) LocationType() WorkoutSessionLocationType {
+	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
+	return _r
 }
 
-// @property      workoutConfiguration @abstract      The configuration object describing the workout. @discussion    This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
-//
-// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+// WorkoutConfiguration the configuration object describing the workout. This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (x *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := x.inner.WorkoutConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+	return WorkoutConfigurationFromID(_r)
 }
 
-// @property      delegate @abstract      The session delegate, which receives @discussion    The session delegate object is the one implementing the methods that get called when the session state changes or a failure occurs in the session.
-//
-// Delegate calls the underlying Delegate.
-func (x *WorkoutSession) Delegate() raw.HKWorkoutSessionDelegate {
-	return x.inner.Delegate()
+// State indicates the current state of the workout session. Each time this value is updated, the delegate method workoutSession:didChangeToState:fromState:date: will be called.
+func (x *WorkoutSession) State() WorkoutSessionState {
+	_r := objc.Send[WorkoutSessionState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *WorkoutSession) SetDelegate(delegate raw.HKWorkoutSessionDelegate) {
-	x.inner.SetDelegate(delegate)
+// Type indicates the type of the workout session. A workout session created using an initializer will be primary, while a session retrieved with the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
+func (x *WorkoutSession) Type() WorkoutSessionType {
+	_r := objc.Send[WorkoutSessionType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property      state @abstract      Indicates the current state of the workout session. @discussion    Each time this value is updated, the delegate method workoutSession:didChangeToState:fromState:date: will be called.
-//
-// State calls the underlying State.
-func (x *WorkoutSession) State() HKWorkoutSessionState {
-	return HKWorkoutSessionState(x.inner.State())
+// StartDate indicates the date when the workout session started running. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
+func (x *WorkoutSession) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      type @abstract      Indicates the type of the workout session. @discussion    A workout session created using an initializer will be primary, while a session retrieved with the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
-//
-// Type calls the underlying Type.
-func (x *WorkoutSession) Type() HKWorkoutSessionType {
-	return HKWorkoutSessionType(x.inner.Type())
+// EndDate indicates the date when the workout session stopped. This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
+func (x *WorkoutSession) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      startDate @abstract      Indicates the date when the workout session started running. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateRunning.
-//
-// StartDate calls the underlying StartDate.
-func (x *WorkoutSession) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
-}
-
-// @property      endDate @abstract      Indicates the date when the workout session stopped. @discussion    This value is nil when a workout session is initialized. It is set when the workout session state changes to HKWorkoutSessionStateStopped.
-//
-// EndDate calls the underlying EndDate.
-func (x *WorkoutSession) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
-}
-
-// @property      currentActivity @abstract      The current workout activity. @discussion    This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
-//
-// CurrentActivity calls the underlying CurrentActivity.
+// CurrentActivity the current workout activity. This returns a copy of the session's current workout activity. It will return a copy of the main workout activity if no new activity has begun. Changes made to the returned object have no impact on the HKWorkoutSession.
 func (x *WorkoutSession) CurrentActivity() *WorkoutActivity {
-	_r := x.inner.CurrentActivity()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutActivity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentActivity"))
+	return WorkoutActivityFromID(_r)
 }
 
 // WorkoutSessionable is the interface implemented by [WorkoutSession], for mocking and DI.
 type WorkoutSessionable interface {
-	Unwrap() *raw.HKWorkoutSession
-	WithDelegate(delegate raw.HKWorkoutSessionDelegate) *WorkoutSession
+	obj.Object
 	Prepare()
-	StartActivityWithDate(date *foundation.NSDate)
-	StopActivityWithDate(date *foundation.NSDate)
+	StartActivityWithDate(date obj.Object)
+	StopActivityWithDate(date obj.Object)
 	End()
 	Pause()
 	Resume()
-	BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	EndCurrentActivityOnDate(date *foundation.NSDate)
-	ActivityType() HKWorkoutActivityType
-	LocationType() HKWorkoutSessionLocationType
+	BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *WorkoutConfiguration, date obj.Object, metadata obj.Object)
+	EndCurrentActivityOnDate(date obj.Object)
+	ActivityType() WorkoutActivityType
+	LocationType() WorkoutSessionLocationType
 	WorkoutConfiguration() *WorkoutConfiguration
-	Delegate() raw.HKWorkoutSessionDelegate
-	SetDelegate(delegate raw.HKWorkoutSessionDelegate)
-	State() HKWorkoutSessionState
-	Type() HKWorkoutSessionType
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
+	State() WorkoutSessionState
+	Type() WorkoutSessionType
+	StartDate() obj.Object
+	EndDate() obj.Object
 	CurrentActivity() *WorkoutActivity
 }
 

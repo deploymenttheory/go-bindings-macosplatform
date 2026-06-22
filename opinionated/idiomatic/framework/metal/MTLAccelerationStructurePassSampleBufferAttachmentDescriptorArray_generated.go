@@ -5,59 +5,87 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AccelerationStructurePassSampleBufferAttachmentDescriptorArray wraps [raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
+// AccelerationStructurePassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray.
 type AccelerationStructurePassSampleBufferAttachmentDescriptorArray struct {
-	inner *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray].
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a AccelerationStructurePassSampleBufferAttachmentDescriptorArray (nil for 0).
+// AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a AccelerationStructurePassSampleBufferAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(id)}
+	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray creates a new [AccelerationStructurePassSampleBufferAttachmentDescriptorArray].
-func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
-}
-
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
+// accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// AccelerationStructurePassSampleBufferAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructurePassSampleBufferAttachmentDescriptor{inner: _r}
+	x := &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+// Description returns the object's -description text.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray creates a new AccelerationStructurePassSampleBufferAttachmentDescriptorArray.
+func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(_id)
+}
+
+// ObjectAtIndexedSubscript wraps the corresponding Objective-C method.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return AccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_r)
+}
+
+// SetObjectAtIndexedSubscript wraps the corresponding Objective-C method.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [AccelerationStructurePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
 type AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable = (*AccelerationStructurePassSampleBufferAttachmentDescriptorArray)(nil)

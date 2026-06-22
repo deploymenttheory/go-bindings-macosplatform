@@ -5,253 +5,244 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An item in a tab view.
+// TabViewItem is an idiomatic wrapper over the Objective-C class NSTabViewItem.
 //
-// TabViewItem wraps [raw.NSTabViewItem] with a fluent Go API.
+// An item in a tab view.
 type TabViewItem struct {
-	inner *raw.NSTabViewItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTabViewItem].
-func (x *TabViewItem) Unwrap() *raw.NSTabViewItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TabViewItem) ID() objc.ID { return x.inner.Ptr() }
-
-// TabViewItemFromID adopts an existing object pointer as a TabViewItem (nil for 0).
+// TabViewItemFromID adopts an existing Objective-C object as a TabViewItem
+// (nil for 0), retaining it and registering a release finalizer.
 func TabViewItemFromID(id objc.ID) *TabViewItem {
 	if id == 0 {
 		return nil
 	}
-	return &TabViewItem{inner: raw.NSTabViewItemFromID(id)}
+	x := &TabViewItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTabViewItem creates a new [TabViewItem].
+// tabViewItemAdopt wraps an Objective-C object that this code just created as a
+// TabViewItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tabViewItemAdopt(id objc.ID) *TabViewItem {
+	if id == 0 {
+		return nil
+	}
+	x := &TabViewItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TabViewItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TabViewItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TabViewItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TabViewItem) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTabViewItem creates a new TabViewItem.
 func NewTabViewItem() *TabViewItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTabViewItem")), objc.RegisterName("new"))
-	return &TabViewItem{inner: raw.NSTabViewItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTabViewItem")), objc.RegisterName("new"))
+	return tabViewItemAdopt(_id)
 }
 
-// Performs default initialization for the receiver.
-//
-// NewTabViewItemWithIdentifier creates a new [TabViewItem].
-func NewTabViewItemWithIdentifier(identifier objc.ID) *TabViewItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTabViewItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), identifier)
-	return &TabViewItem{inner: raw.NSTabViewItemFromID(_id)}
+// NewTabViewItemWithIdentifier performs default initialization for the receiver.
+func NewTabViewItemWithIdentifier(identifier obj.Object) *TabViewItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTabViewItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+	return tabViewItemAdopt(_id)
 }
 
-// Sets the receiver’s optional identifier object to identifier.
-//
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *TabViewItem) WithIdentifier(identifier objc.ID) *TabViewItem {
-	x.inner.SetIdentifier(identifier)
+// WithIdentifier sets the receiver’s optional identifier object to identifier.
+func (x *TabViewItem) WithIdentifier(identifier obj.Object) *TabViewItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// Sets the background color for content in the view.
-//
-// WithColor sets the color property and returns the receiver for chaining.
+// WithColor sets the background color for content in the view.
 func (x *TabViewItem) WithColor(color *Color) *TabViewItem {
-	x.inner.SetColor(color.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// Sets the label text for the receiver to label.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets the label text for the receiver to label.
 func (x *TabViewItem) WithLabel(label string) *TabViewItem {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage gets and set the image for this tab view item. The image may only be used in certain tab view styles and options.
 func (x *TabViewItem) WithImage(image *Image) *TabViewItem {
-	x.inner.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// Sets the view associated with the receiver to view.
-//
-// WithView sets the view property and returns the receiver for chaining.
+// WithView sets the view associated with the receiver to view.
 func (x *TabViewItem) WithView(view ViewProvider) *TabViewItem {
-	x.inner.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
-//
-// WithViewController sets the viewController property and returns the receiver for chaining.
+// WithViewController the view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:
 func (x *TabViewItem) WithViewController(viewController ViewControllerProvider) *TabViewItem {
-	x.inner.SetViewController(viewController.asViewController())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 	return x
 }
 
-// Sets the initial first responder for the view associated with the receiver (the view that is displayed when a user clicks on the tab) to view.
-//
-// WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
+// WithInitialFirstResponder sets the initial first responder for the view associated with the receiver (the view that is displayed when a user clicks on the tab) to view.
 func (x *TabViewItem) WithInitialFirstResponder(initialFirstResponder ViewProvider) *TabViewItem {
-	x.inner.SetInitialFirstResponder(initialFirstResponder.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	return x
 }
 
-// Sets the tooltip displayed for the tab view item.
-//
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the tooltip displayed for the tab view item.
 func (x *TabViewItem) WithToolTip(toolTip string) *TabViewItem {
-	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// Draws the receiver’s label in tabRect, which is the area between the curved end caps.
-//
-// DrawLabelInRect calls the underlying DrawLabelInRect.
+// DrawLabelInRect draws the receiver’s label in tabRect, which is the area between the curved end caps.
 func (x *TabViewItem) DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect) {
-	x.inner.DrawLabelInRect(shouldTruncateLabel, labelRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawLabel:inRect:"), shouldTruncateLabel, labelRect)
 }
 
-// Calculates the size of the receiver’s label.
-//
-// SizeOfLabel calls the underlying SizeOfLabel.
+// SizeOfLabel calculates the size of the receiver’s label.
 func (x *TabViewItem) SizeOfLabel(computeMin bool) corefoundation.CGSize {
-	return x.inner.SizeOfLabel(computeMin)
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeOfLabel:"), computeMin)
+	return _r
 }
 
-// Identifier calls the underlying Identifier.
-func (x *TabViewItem) Identifier() objc.ID {
-	return x.inner.Identifier()
+// Identifier wraps the corresponding Objective-C method.
+func (x *TabViewItem) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
-func (x *TabViewItem) SetIdentifier(identifier objc.ID) {
-	x.inner.SetIdentifier(identifier)
+// SetIdentifier wraps the corresponding Objective-C method.
+func (x *TabViewItem) SetIdentifier(identifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 }
 
-// Color calls the underlying Color.
+// Color wraps the corresponding Objective-C method.
 func (x *TabViewItem) Color() *Color {
-	_r := x.inner.Color()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return ColorFromID(_r)
 }
 
-// SetColor calls the underlying SetColor.
-func (x *TabViewItem) SetColor(color *raw.NSColor) {
-	x.inner.SetColor(color)
+// SetColor wraps the corresponding Objective-C method.
+func (x *TabViewItem) SetColor(color *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *TabViewItem) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *TabViewItem) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
-//
-// Image calls the underlying Image.
+// Image gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
 func (x *TabViewItem) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
-//
-// SetImage calls the underlying SetImage.
-func (x *TabViewItem) SetImage(image *raw.NSImage) {
-	x.inner.SetImage(image)
+// SetImage gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
+func (x *TabViewItem) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// View calls the underlying View.
+// View wraps the corresponding Objective-C method.
 func (x *TabViewItem) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// SetView calls the underlying SetView.
-func (x *TabViewItem) SetView(view *raw.NSView) {
-	x.inner.SetView(view)
+// SetView wraps the corresponding Objective-C method.
+func (x *TabViewItem) SetView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
-// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
-//
-// ViewController calls the underlying ViewController.
+// ViewController the view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:
 func (x *TabViewItem) ViewController() *ViewController {
-	_r := x.inner.ViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewController"))
+	return ViewControllerFromID(_r)
 }
 
-// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
-//
-// SetViewController calls the underlying SetViewController.
-func (x *TabViewItem) SetViewController(viewController *raw.NSViewController) {
-	x.inner.SetViewController(viewController)
+// SetViewController the view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:
+func (x *TabViewItem) SetViewController(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 }
 
-// TabState calls the underlying TabState.
-func (x *TabViewItem) TabState() NSTabState {
-	return NSTabState(x.inner.TabState())
+// TabState wraps the corresponding Objective-C method.
+func (x *TabViewItem) TabState() TabState {
+	_r := objc.Send[TabState](objref.IDOf(x), objc.RegisterName("tabState"))
+	return _r
 }
 
-// TabView calls the underlying TabView.
+// TabView wraps the corresponding Objective-C method.
 func (x *TabViewItem) TabView() *TabView {
-	_r := x.inner.TabView()
-	if _r == nil {
-		return nil
-	}
-	return &TabView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabView"))
+	return TabViewFromID(_r)
 }
 
-// SetInitialFirstResponder calls the underlying SetInitialFirstResponder.
-func (x *TabViewItem) SetInitialFirstResponder(initialFirstResponder *raw.NSView) {
-	x.inner.SetInitialFirstResponder(initialFirstResponder)
+// SetInitialFirstResponder wraps the corresponding Objective-C method.
+func (x *TabViewItem) SetInitialFirstResponder(initialFirstResponder *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 }
 
-// ToolTip calls the underlying ToolTip.
+// ToolTip wraps the corresponding Objective-C method.
 func (x *TabViewItem) ToolTip() string {
-	_r := x.inner.ToolTip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetToolTip calls the underlying SetToolTip.
+// SetToolTip wraps the corresponding Objective-C method.
 func (x *TabViewItem) SetToolTip(toolTip string) {
-	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 }
 
 // TabViewItemable is the interface implemented by [TabViewItem], for mocking and DI.
 type TabViewItemable interface {
-	Unwrap() *raw.NSTabViewItem
-	WithIdentifier(identifier objc.ID) *TabViewItem
+	obj.Object
+	WithIdentifier(identifier obj.Object) *TabViewItem
 	WithColor(color *Color) *TabViewItem
 	WithLabel(label string) *TabViewItem
 	WithImage(image *Image) *TabViewItem
@@ -261,21 +252,21 @@ type TabViewItemable interface {
 	WithToolTip(toolTip string) *TabViewItem
 	DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect)
 	SizeOfLabel(computeMin bool) corefoundation.CGSize
-	Identifier() objc.ID
-	SetIdentifier(identifier objc.ID)
+	Identifier() obj.Object
+	SetIdentifier(identifier obj.Object)
 	Color() *Color
-	SetColor(color *raw.NSColor)
+	SetColor(color *Color)
 	Label() string
 	SetLabel(label string)
 	Image() *Image
-	SetImage(image *raw.NSImage)
+	SetImage(image *Image)
 	View() *View
-	SetView(view *raw.NSView)
+	SetView(view *View)
 	ViewController() *ViewController
-	SetViewController(viewController *raw.NSViewController)
-	TabState() NSTabState
+	SetViewController(viewController *ViewController)
+	TabState() TabState
 	TabView() *TabView
-	SetInitialFirstResponder(initialFirstResponder *raw.NSView)
+	SetInitialFirstResponder(initialFirstResponder *View)
 	ToolTip() string
 	SetToolTip(toolTip string)
 }

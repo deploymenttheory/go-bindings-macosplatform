@@ -5,70 +5,106 @@
 package syncservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ISyncChange wraps [raw.ISyncChange] with a fluent Go API.
+// ISyncChange is an idiomatic wrapper over the Objective-C class ISyncChange.
 type ISyncChange struct {
-	inner *raw.ISyncChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncChange].
-func (x *ISyncChange) Unwrap() *raw.ISyncChange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncChange) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncChangeFromID adopts an existing object pointer as a ISyncChange (nil for 0).
+// ISyncChangeFromID adopts an existing Objective-C object as a ISyncChange
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncChangeFromID(id objc.ID) *ISyncChange {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncChange{inner: raw.ISyncChangeFromID(id)}
+	x := &ISyncChange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewISyncChangeWithChangeTypeRecordIdentifierChanges creates a new [ISyncChange].
-func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes *foundation.NSArray[objc.ID]) *ISyncChange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChangeType:recordIdentifier:changes:"), type_, foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr(), changes.Ptr())
-	return &ISyncChange{inner: raw.ISyncChangeFromID(_id)}
+// iSyncChangeAdopt wraps an Objective-C object that this code just created as a
+// ISyncChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncChangeAdopt(id objc.ID) *ISyncChange {
+	if id == 0 {
+		return nil
+	}
+	x := &ISyncChange{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Type calls the underlying Type.
+// Description returns the object's -description text.
+func (x *ISyncChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ISyncChange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewISyncChangeWithChangeTypeRecordIdentifierChanges creates a new ISyncChange.
+func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) *ISyncChange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChangeType:recordIdentifier:changes:"), type_, purego.NSString(recordIdentifier), objref.IDOf(changes))
+	return iSyncChangeAdopt(_id)
+}
+
+// Type wraps the corresponding Objective-C method.
 func (x *ISyncChange) Type() int {
-	return x.inner.Type()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// RecordIdentifier calls the underlying RecordIdentifier.
+// RecordIdentifier wraps the corresponding Objective-C method.
 func (x *ISyncChange) RecordIdentifier() string {
-	_r := x.inner.RecordIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Record calls the underlying Record.
-func (x *ISyncChange) Record() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Record()
+// Record wraps the corresponding Objective-C method.
+func (x *ISyncChange) Record() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
+	return obj.Wrap(_r)
 }
 
-// Changes calls the underlying Changes.
-func (x *ISyncChange) Changes() *foundation.NSArray[objc.ID] {
-	return x.inner.Changes()
+// Changes wraps the corresponding Objective-C method.
+func (x *ISyncChange) Changes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
+	return obj.Wrap(_r)
 }
 
 // ISyncChangeable is the interface implemented by [ISyncChange], for mocking and DI.
 type ISyncChangeable interface {
-	Unwrap() *raw.ISyncChange
+	obj.Object
 	Type() int
 	RecordIdentifier() string
-	Record() *foundation.NSDictionary[objc.ID, objc.ID]
-	Changes() *foundation.NSArray[objc.ID]
+	Record() obj.Object
+	Changes() obj.Object
 }
 
 var _ ISyncChangeable = (*ISyncChange)(nil)

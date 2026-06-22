@@ -5,61 +5,85 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A texture handle that can be shared across process address space boundaries.
+// SharedTextureHandle is an idiomatic wrapper over the Objective-C class MTLSharedTextureHandle.
 //
-// SharedTextureHandle wraps [raw.MTLSharedTextureHandle] with a fluent Go API.
+// A texture handle that can be shared across process address space boundaries.
 type SharedTextureHandle struct {
-	inner *raw.MTLSharedTextureHandle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLSharedTextureHandle].
-func (x *SharedTextureHandle) Unwrap() *raw.MTLSharedTextureHandle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharedTextureHandle) ID() objc.ID { return x.inner.Ptr() }
-
-// SharedTextureHandleFromID adopts an existing object pointer as a SharedTextureHandle (nil for 0).
+// SharedTextureHandleFromID adopts an existing Objective-C object as a SharedTextureHandle
+// (nil for 0), retaining it and registering a release finalizer.
 func SharedTextureHandleFromID(id objc.ID) *SharedTextureHandle {
 	if id == 0 {
 		return nil
 	}
-	return &SharedTextureHandle{inner: raw.MTLSharedTextureHandleFromID(id)}
+	x := &SharedTextureHandle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSharedTextureHandle creates a new [SharedTextureHandle].
+// sharedTextureHandleAdopt wraps an Objective-C object that this code just created as a
+// SharedTextureHandle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharedTextureHandleAdopt(id objc.ID) *SharedTextureHandle {
+	if id == 0 {
+		return nil
+	}
+	x := &SharedTextureHandle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharedTextureHandle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharedTextureHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharedTextureHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SharedTextureHandle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSharedTextureHandle creates a new SharedTextureHandle.
 func NewSharedTextureHandle() *SharedTextureHandle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedTextureHandle")), objc.RegisterName("new"))
-	return &SharedTextureHandle{inner: raw.MTLSharedTextureHandleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedTextureHandle")), objc.RegisterName("new"))
+	return sharedTextureHandleAdopt(_id)
 }
 
-// @property device @abstract The device this texture was created against. @discussion This shared texture handle can only be used with this device.
-//
-// Device calls the underlying Device.
-func (x *SharedTextureHandle) Device() raw.MTLDevice {
-	return x.inner.Device()
-}
-
-// @property label @abstract A copy of the original texture's label property, if any
-//
-// Label calls the underlying Label.
+// Label a copy of the original texture's label property, if any
 func (x *SharedTextureHandle) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // SharedTextureHandleable is the interface implemented by [SharedTextureHandle], for mocking and DI.
 type SharedTextureHandleable interface {
-	Unwrap() *raw.MTLSharedTextureHandle
-	Device() raw.MTLDevice
+	obj.Object
 	Label() string
 }
 

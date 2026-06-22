@@ -5,129 +5,114 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that divides the channels into groups for normalization.
+// GroupNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCGroupNormalizationLayer.
 //
-// GroupNormalizationLayer wraps [raw.MLCGroupNormalizationLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that divides the channels into groups for normalization.
 type GroupNormalizationLayer struct {
-	inner *raw.MLCGroupNormalizationLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCGroupNormalizationLayer].
-func (x *GroupNormalizationLayer) Unwrap() *raw.MLCGroupNormalizationLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GroupNormalizationLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupNormalizationLayerFromID adopts an existing object pointer as a GroupNormalizationLayer (nil for 0).
+// GroupNormalizationLayerFromID adopts an existing Objective-C object as a GroupNormalizationLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupNormalizationLayerFromID(id objc.ID) *GroupNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	return &GroupNormalizationLayer{inner: raw.MLCGroupNormalizationLayerFromID(id)}
+	x := &GroupNormalizationLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGroupNormalizationLayer creates a new [GroupNormalizationLayer].
+// groupNormalizationLayerAdopt wraps an Objective-C object that this code just created as a
+// GroupNormalizationLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupNormalizationLayerAdopt(id objc.ID) *GroupNormalizationLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &GroupNormalizationLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGroupNormalizationLayer creates a new GroupNormalizationLayer.
 func NewGroupNormalizationLayer() *GroupNormalizationLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCGroupNormalizationLayer")), objc.RegisterName("new"))
-	return &GroupNormalizationLayer{inner: raw.MLCGroupNormalizationLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCGroupNormalizationLayer")), objc.RegisterName("new"))
+	return groupNormalizationLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   featureChannelCount @abstract   The number of feature channels
-//
-// FeatureChannelCount calls the underlying FeatureChannelCount.
-func (x *GroupNormalizationLayer) FeatureChannelCount() uint {
-	return x.inner.FeatureChannelCount()
+// FeatureChannelCount the number of feature channels
+func (x *GroupNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+	return _r
 }
 
-// @property   groupCount @abstract   The number of groups to separate the channels into
-//
-// GroupCount calls the underlying GroupCount.
-func (x *GroupNormalizationLayer) GroupCount() uint {
-	return x.inner.GroupCount()
+// GroupCount the number of groups to separate the channels into
+func (x *GroupNormalizationLayer) GroupCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupCount"))
+	return _r
 }
 
-// @property   beta @abstract   The beta tensor
-//
-// Beta calls the underlying Beta.
+// Beta the beta tensor
 func (x *GroupNormalizationLayer) Beta() *Tensor {
-	_r := x.inner.Beta()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+	return TensorFromID(_r)
 }
 
-// @property   gamma @abstract   The gamma tensor
-//
-// Gamma calls the underlying Gamma.
+// Gamma the gamma tensor
 func (x *GroupNormalizationLayer) Gamma() *Tensor {
-	_r := x.inner.Gamma()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+	return TensorFromID(_r)
 }
 
-// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
-//
-// BetaParameter calls the underlying BetaParameter.
+// BetaParameter the beta tensor parameter used for optimizer update
 func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := x.inner.BetaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
-//
-// GammaParameter calls the underlying GammaParameter.
+// GammaParameter the gamma tensor parameter used for optimizer update
 func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := x.inner.GammaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   varianceEpsilon @abstract   A value used for numerical stability
-//
-// VarianceEpsilon calls the underlying VarianceEpsilon.
+// VarianceEpsilon a value used for numerical stability
 func (x *GroupNormalizationLayer) VarianceEpsilon() float32 {
-	return x.inner.VarianceEpsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+	return _r
 }
-
-func (x *GroupNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // GroupNormalizationLayerable is the interface implemented by [GroupNormalizationLayer], for mocking and DI.
 type GroupNormalizationLayerable interface {
-	Unwrap() *raw.MLCGroupNormalizationLayer
+	obj.Object
 	WithLabel(label string) *GroupNormalizationLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer
-	FeatureChannelCount() uint
-	GroupCount() uint
+	FeatureChannelCount() int
+	GroupCount() int
 	Beta() *Tensor
 	Gamma() *Tensor
 	BetaParameter() *TensorParameter
@@ -136,3 +121,5 @@ type GroupNormalizationLayerable interface {
 }
 
 var _ GroupNormalizationLayerable = (*GroupNormalizationLayer)(nil)
+
+var _ LayerProvider = (*GroupNormalizationLayer)(nil)

@@ -5,61 +5,91 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MetricMediaRendition wraps [raw.AVMetricMediaRendition] with a fluent Go API.
+// MetricMediaRendition is an idiomatic wrapper over the Objective-C class AVMetricMediaRendition.
 type MetricMediaRendition struct {
-	inner *raw.AVMetricMediaRendition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricMediaRendition].
-func (x *MetricMediaRendition) Unwrap() *raw.AVMetricMediaRendition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricMediaRendition) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricMediaRenditionFromID adopts an existing object pointer as a MetricMediaRendition (nil for 0).
+// MetricMediaRenditionFromID adopts an existing Objective-C object as a MetricMediaRendition
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricMediaRenditionFromID(id objc.ID) *MetricMediaRendition {
 	if id == 0 {
 		return nil
 	}
-	return &MetricMediaRendition{inner: raw.AVMetricMediaRenditionFromID(id)}
+	x := &MetricMediaRendition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricMediaRendition creates a new [MetricMediaRendition].
+// metricMediaRenditionAdopt wraps an Objective-C object that this code just created as a
+// MetricMediaRendition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricMediaRenditionAdopt(id objc.ID) *MetricMediaRendition {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricMediaRendition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricMediaRendition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricMediaRendition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricMediaRendition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetricMediaRendition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetricMediaRendition creates a new MetricMediaRendition.
 func NewMetricMediaRendition() *MetricMediaRendition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricMediaRendition")), objc.RegisterName("new"))
-	return &MetricMediaRendition{inner: raw.AVMetricMediaRenditionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricMediaRendition")), objc.RegisterName("new"))
+	return metricMediaRenditionAdopt(_id)
 }
 
-// @property stableID @abstract Provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
-//
-// StableID calls the underlying StableID.
+// StableID provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
 func (x *MetricMediaRendition) StableID() string {
-	_r := x.inner.StableID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stableID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property URL @abstract Provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
-//
-// URL calls the underlying URL.
-func (x *MetricMediaRendition) URL() *foundation.NSURL {
-	return x.inner.URL()
+// URL provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
+func (x *MetricMediaRendition) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // MetricMediaRenditionable is the interface implemented by [MetricMediaRendition], for mocking and DI.
 type MetricMediaRenditionable interface {
-	Unwrap() *raw.AVMetricMediaRendition
+	obj.Object
 	StableID() string
-	URL() *foundation.NSURL
+	URL() obj.Object
 }
 
 var _ MetricMediaRenditionable = (*MetricMediaRendition)(nil)

@@ -5,98 +5,83 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that calculates the sum of squared pixels over a specified region in an image.
+// ImageIntegralOfSquares is an idiomatic wrapper over the Objective-C class MPSImageIntegralOfSquares.
 //
-// ImageIntegralOfSquares wraps [raw.MPSImageIntegralOfSquares] with a fluent Go API.
+// It embeds [UnaryImageKernel], promoting that type's methods.
+//
+// A filter that calculates the sum of squared pixels over a specified region in an image.
 type ImageIntegralOfSquares struct {
-	inner *raw.MPSImageIntegralOfSquares
+	UnaryImageKernel
 }
 
-// Unwrap returns the underlying [raw.MPSImageIntegralOfSquares].
-func (x *ImageIntegralOfSquares) Unwrap() *raw.MPSImageIntegralOfSquares { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageIntegralOfSquares) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageIntegralOfSquaresFromID adopts an existing object pointer as a ImageIntegralOfSquares (nil for 0).
+// ImageIntegralOfSquaresFromID adopts an existing Objective-C object as a ImageIntegralOfSquares
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageIntegralOfSquaresFromID(id objc.ID) *ImageIntegralOfSquares {
 	if id == 0 {
 		return nil
 	}
-	return &ImageIntegralOfSquares{inner: raw.MPSImageIntegralOfSquaresFromID(id)}
+	x := &ImageIntegralOfSquares{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageIntegralOfSquares creates a new [ImageIntegralOfSquares].
+// imageIntegralOfSquaresAdopt wraps an Objective-C object that this code just created as a
+// ImageIntegralOfSquares (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageIntegralOfSquaresAdopt(id objc.ID) *ImageIntegralOfSquares {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageIntegralOfSquares{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageIntegralOfSquares creates a new ImageIntegralOfSquares.
 func NewImageIntegralOfSquares() *ImageIntegralOfSquares {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageIntegralOfSquares")), objc.RegisterName("new"))
-	return &ImageIntegralOfSquares{inner: raw.MPSImageIntegralOfSquaresFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageIntegralOfSquares")), objc.RegisterName("new"))
+	return imageIntegralOfSquaresAdopt(_id)
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
 func (x *ImageIntegralOfSquares) WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
 func (x *ImageIntegralOfSquares) WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageIntegralOfSquares) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageIntegralOfSquares) WithOptions(options mpscore.MPSKernelOptions) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *ImageIntegralOfSquares) WithLabel(label string) *ImageIntegralOfSquares {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageIntegralOfSquares) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageIntegralOfSquares) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
 type ImageIntegralOfSquaresable interface {
-	Unwrap() *raw.MPSImageIntegralOfSquares
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares
 	WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegralOfSquares
-	WithOptions(options mpscore.MPSKernelOptions) *ImageIntegralOfSquares
 	WithLabel(label string) *ImageIntegralOfSquares
 }
 
 var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
+
+var _ UnaryImageKernelProvider = (*ImageIntegralOfSquares)(nil)
+
+var _ KernelProvider = (*ImageIntegralOfSquares)(nil)

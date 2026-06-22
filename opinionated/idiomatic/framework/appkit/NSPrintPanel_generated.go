@@ -5,236 +5,216 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The Print panel that queries the user for information about a print job.
+// PrintPanel is an idiomatic wrapper over the Objective-C class NSPrintPanel.
 //
-// PrintPanel wraps [raw.NSPrintPanel] with a fluent Go API.
+// The Print panel that queries the user for information about a print job.
 type PrintPanel struct {
-	inner *raw.NSPrintPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPrintPanel].
-func (x *PrintPanel) Unwrap() *raw.NSPrintPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PrintPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// PrintPanelFromID adopts an existing object pointer as a PrintPanel (nil for 0).
+// PrintPanelFromID adopts an existing Objective-C object as a PrintPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func PrintPanelFromID(id objc.ID) *PrintPanel {
 	if id == 0 {
 		return nil
 	}
-	return &PrintPanel{inner: raw.NSPrintPanelFromID(id)}
+	x := &PrintPanel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPrintPanel creates a new [PrintPanel].
+// printPanelAdopt wraps an Objective-C object that this code just created as a
+// PrintPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func printPanelAdopt(id objc.ID) *PrintPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &PrintPanel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PrintPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PrintPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PrintPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PrintPanel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPrintPanel creates a new PrintPanel.
 func NewPrintPanel() *PrintPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPrintPanel")), objc.RegisterName("new"))
-	return &PrintPanel{inner: raw.NSPrintPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPrintPanel")), objc.RegisterName("new"))
+	return printPanelAdopt(_id)
 }
 
-// The current configuration options for the Print panel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *PrintPanel) WithOptions(options NSPrintPanelOptions) *PrintPanel {
-	x.inner.SetOptions(raw.NSPrintPanelOptions(options))
+// WithOptions the current configuration options for the Print panel.
+func (x *PrintPanel) WithOptions(options PrintPanelOptions) *PrintPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
-// The HTML help anchor associated with the Print panel.
-//
-// WithHelpAnchor sets the helpAnchor property and returns the receiver for chaining.
-func (x *PrintPanel) WithHelpAnchor(helpAnchor *foundation.NSString) *PrintPanel {
-	x.inner.SetHelpAnchor(helpAnchor)
+// WithHelpAnchor the HTML help anchor associated with the Print panel.
+func (x *PrintPanel) WithHelpAnchor(helpAnchor obj.Object) *PrintPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
 	return x
 }
 
-// The type of settings that the print panel displays.
-//
-// WithJobStyleHint sets the jobStyleHint property and returns the receiver for chaining.
-func (x *PrintPanel) WithJobStyleHint(jobStyleHint *foundation.NSString) *PrintPanel {
-	x.inner.SetJobStyleHint(jobStyleHint)
+// WithJobStyleHint the type of settings that the print panel displays.
+func (x *PrintPanel) WithJobStyleHint(jobStyleHint obj.Object) *PrintPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobStyleHint:"), objref.IDOf(jobStyleHint))
 	return x
 }
 
-// Adds a custom controller to the Print panel to manage an accessory view.
-//
-// AddAccessoryController calls the underlying AddAccessoryController.
-func (x *PrintPanel) AddAccessoryController(accessoryController *raw.NSViewController) {
-	x.inner.AddAccessoryController(accessoryController)
+// AddAccessoryController adds a custom controller to the Print panel to manage an accessory view.
+func (x *PrintPanel) AddAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 }
 
-// Removes the specified controller and accessory view from the Print panel.
-//
-// RemoveAccessoryController calls the underlying RemoveAccessoryController.
-func (x *PrintPanel) RemoveAccessoryController(accessoryController *raw.NSViewController) {
-	x.inner.RemoveAccessoryController(accessoryController)
+// RemoveAccessoryController removes the specified controller and accessory view from the Print panel.
+func (x *PrintPanel) RemoveAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 }
 
-// Sets the title of the Print panel’s default button.
-//
-// SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
+// SetDefaultButtonTitle sets the title of the Print panel’s default button.
 func (x *PrintPanel) SetDefaultButtonTitle(defaultButtonTitle string) {
-	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(defaultButtonTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(defaultButtonTitle))
 }
 
-// Returns the title of the Print panel’s default button.
-//
-// DefaultButtonTitle calls the underlying DefaultButtonTitle.
+// DefaultButtonTitle returns the title of the Print panel’s default button.
 func (x *PrintPanel) DefaultButtonTitle() string {
-	_r := x.inner.DefaultButtonTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultButtonTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BeginSheetUsingPrintInfoOnWindowCompletionHandler calls the underlying BeginSheetUsingPrintInfoOnWindowCompletionHandler.
-func (x *PrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPrintPanelResult)) {
-	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPrintPanelResult) { handler(NSPrintPanelResult(_a0)) })
+// RunModalWithPrintInfo displays the Print panel and runs the modal loop using the specified printing information.
+func (x *PrintPanel) RunModalWithPrintInfo(printInfo *PrintInfo) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
+	return _r
 }
 
-// Displays a Print panel sheet and runs it modally for the specified window.
-//
-// BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
-func (x *PrintPanel) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo, docWindow, delegate, didEndSelector, contextInfo)
-}
-
-// Displays the Print panel and runs the modal loop using the specified printing information.
-//
-// RunModalWithPrintInfo calls the underlying RunModalWithPrintInfo.
-func (x *PrintPanel) RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int {
-	return x.inner.RunModalWithPrintInfo(printInfo)
-}
-
-// Displays the Print panel and begins the modal loop.
-//
-// RunModal calls the underlying RunModal.
+// RunModal displays the Print panel and begins the modal loop.
 func (x *PrintPanel) RunModal() int {
-	return x.inner.RunModal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
+// AccessoryControllers wraps the corresponding Objective-C method.
+//
 // AccessoryControllers returns the collection as a Go slice.
 func (x *PrintPanel) AccessoryControllers() []*ViewController {
-	arr := x.inner.AccessoryControllers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
-		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryControllers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// Options calls the underlying Options.
-func (x *PrintPanel) Options() NSPrintPanelOptions {
-	return NSPrintPanelOptions(x.inner.Options())
+// Options wraps the corresponding Objective-C method.
+func (x *PrintPanel) Options() PrintPanelOptions {
+	_r := objc.Send[PrintPanelOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// SetOptions calls the underlying SetOptions.
-func (x *PrintPanel) SetOptions(options NSPrintPanelOptions) {
-	x.inner.SetOptions(raw.NSPrintPanelOptions(options))
+// SetOptions wraps the corresponding Objective-C method.
+func (x *PrintPanel) SetOptions(options PrintPanelOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// HelpAnchor calls the underlying HelpAnchor.
-func (x *PrintPanel) HelpAnchor() string {
-	_r := x.inner.HelpAnchor()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// HelpAnchor wraps the corresponding Objective-C method.
+func (x *PrintPanel) HelpAnchor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+	return obj.Wrap(_r)
 }
 
-// SetHelpAnchor calls the underlying SetHelpAnchor.
-func (x *PrintPanel) SetHelpAnchor(helpAnchor *foundation.NSString) {
-	x.inner.SetHelpAnchor(helpAnchor)
+// SetHelpAnchor wraps the corresponding Objective-C method.
+func (x *PrintPanel) SetHelpAnchor(helpAnchor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
 }
 
-// JobStyleHint calls the underlying JobStyleHint.
-func (x *PrintPanel) JobStyleHint() string {
-	_r := x.inner.JobStyleHint()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// JobStyleHint wraps the corresponding Objective-C method.
+func (x *PrintPanel) JobStyleHint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jobStyleHint"))
+	return obj.Wrap(_r)
 }
 
-// SetJobStyleHint calls the underlying SetJobStyleHint.
-func (x *PrintPanel) SetJobStyleHint(jobStyleHint *foundation.NSString) {
-	x.inner.SetJobStyleHint(jobStyleHint)
+// SetJobStyleHint wraps the corresponding Objective-C method.
+func (x *PrintPanel) SetJobStyleHint(jobStyleHint obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJobStyleHint:"), objref.IDOf(jobStyleHint))
 }
 
-// PrintInfo calls the underlying PrintInfo.
+// PrintInfo wraps the corresponding Objective-C method.
 func (x *PrintPanel) PrintInfo() *PrintInfo {
-	_r := x.inner.PrintInfo()
-	if _r == nil {
-		return nil
-	}
-	return &PrintInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printInfo"))
+	return PrintInfoFromID(_r)
 }
 
-// Sets the accessory view for the Print panel.
-//
-// SetAccessoryView calls the underlying SetAccessoryView.
-func (x *PrintPanel) SetAccessoryView(accessoryView *raw.NSView) {
-	x.inner.SetAccessoryView(accessoryView)
+// SetAccessoryView sets the accessory view for the Print panel.
+func (x *PrintPanel) SetAccessoryView(accessoryView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
-// Returns the accessory view of the Print panel.
-//
-// AccessoryView calls the underlying AccessoryView.
+// AccessoryView returns the accessory view of the Print panel.
 func (x *PrintPanel) AccessoryView() *View {
-	_r := x.inner.AccessoryView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+	return ViewFromID(_r)
 }
 
-// Updates the Print panel with information from the current print operation object.
-//
-// UpdateFromPrintInfo calls the underlying UpdateFromPrintInfo.
+// UpdateFromPrintInfo updates the Print panel with information from the current print operation object.
 func (x *PrintPanel) UpdateFromPrintInfo() {
-	x.inner.UpdateFromPrintInfo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFromPrintInfo"))
 }
 
-// Writes the Print panel’s printing attributes to the current print operation object.
-//
-// FinalWritePrintInfo calls the underlying FinalWritePrintInfo.
+// FinalWritePrintInfo writes the Print panel’s printing attributes to the current print operation object.
 func (x *PrintPanel) FinalWritePrintInfo() {
-	x.inner.FinalWritePrintInfo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalWritePrintInfo"))
 }
 
 // PrintPanelable is the interface implemented by [PrintPanel], for mocking and DI.
 type PrintPanelable interface {
-	Unwrap() *raw.NSPrintPanel
-	WithOptions(options NSPrintPanelOptions) *PrintPanel
-	WithHelpAnchor(helpAnchor *foundation.NSString) *PrintPanel
-	WithJobStyleHint(jobStyleHint *foundation.NSString) *PrintPanel
-	AddAccessoryController(accessoryController *raw.NSViewController)
-	RemoveAccessoryController(accessoryController *raw.NSViewController)
+	obj.Object
+	WithOptions(options PrintPanelOptions) *PrintPanel
+	WithHelpAnchor(helpAnchor obj.Object) *PrintPanel
+	WithJobStyleHint(jobStyleHint obj.Object) *PrintPanel
+	AddAccessoryController(accessoryController *ViewController)
+	RemoveAccessoryController(accessoryController *ViewController)
 	SetDefaultButtonTitle(defaultButtonTitle string)
 	DefaultButtonTitle() string
-	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPrintPanelResult))
-	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
+	RunModalWithPrintInfo(printInfo *PrintInfo) int
 	RunModal() int
 	AccessoryControllers() []*ViewController
-	Options() NSPrintPanelOptions
-	SetOptions(options NSPrintPanelOptions)
-	HelpAnchor() string
-	SetHelpAnchor(helpAnchor *foundation.NSString)
-	JobStyleHint() string
-	SetJobStyleHint(jobStyleHint *foundation.NSString)
+	Options() PrintPanelOptions
+	SetOptions(options PrintPanelOptions)
+	HelpAnchor() obj.Object
+	SetHelpAnchor(helpAnchor obj.Object)
+	JobStyleHint() obj.Object
+	SetJobStyleHint(jobStyleHint obj.Object)
 	PrintInfo() *PrintInfo
-	SetAccessoryView(accessoryView *raw.NSView)
+	SetAccessoryView(accessoryView *View)
 	AccessoryView() *View
 	UpdateFromPrintInfo()
 	FinalWritePrintInfo()

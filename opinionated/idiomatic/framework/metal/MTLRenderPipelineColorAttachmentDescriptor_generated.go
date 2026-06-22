@@ -5,250 +5,256 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A color render target that specifies the color configuration and color operations for a render pipeline.
+// RenderPipelineColorAttachmentDescriptor is an idiomatic wrapper over the Objective-C class MTLRenderPipelineColorAttachmentDescriptor.
 //
-// RenderPipelineColorAttachmentDescriptor wraps [raw.MTLRenderPipelineColorAttachmentDescriptor] with a fluent Go API.
+// A color render target that specifies the color configuration and color operations for a render pipeline.
 type RenderPipelineColorAttachmentDescriptor struct {
-	inner *raw.MTLRenderPipelineColorAttachmentDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPipelineColorAttachmentDescriptor].
-func (x *RenderPipelineColorAttachmentDescriptor) Unwrap() *raw.MTLRenderPipelineColorAttachmentDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPipelineColorAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPipelineColorAttachmentDescriptorFromID adopts an existing object pointer as a RenderPipelineColorAttachmentDescriptor (nil for 0).
+// RenderPipelineColorAttachmentDescriptorFromID adopts an existing Objective-C object as a RenderPipelineColorAttachmentDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *RenderPipelineColorAttachmentDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPipelineColorAttachmentDescriptor{inner: raw.MTLRenderPipelineColorAttachmentDescriptorFromID(id)}
+	x := &RenderPipelineColorAttachmentDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPipelineColorAttachmentDescriptor creates a new [RenderPipelineColorAttachmentDescriptor].
+// renderPipelineColorAttachmentDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RenderPipelineColorAttachmentDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *RenderPipelineColorAttachmentDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderPipelineColorAttachmentDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderPipelineColorAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RenderPipelineColorAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRenderPipelineColorAttachmentDescriptor creates a new RenderPipelineColorAttachmentDescriptor.
 func NewRenderPipelineColorAttachmentDescriptor() *RenderPipelineColorAttachmentDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPipelineColorAttachmentDescriptor")), objc.RegisterName("new"))
-	return &RenderPipelineColorAttachmentDescriptor{inner: raw.MTLRenderPipelineColorAttachmentDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPipelineColorAttachmentDescriptor")), objc.RegisterName("new"))
+	return renderPipelineColorAttachmentDescriptorAdopt(_id)
 }
 
-// The pixel format of the color attachment’s texture.
-//
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// WithPixelFormat the pixel format of the color attachment’s texture.
+func (x *RenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat PixelFormat) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
-// A Boolean value that determines whether blending is enabled.
-//
-// WithBlendingEnabled sets the blendingEnabled property and returns the receiver for chaining.
+// WithBlendingEnabled a Boolean value that determines whether blending is enabled.
 func (x *RenderPipelineColorAttachmentDescriptor) WithBlendingEnabled(blendingEnabled bool) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetBlendingEnabled(blendingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendingEnabled:"), blendingEnabled)
 	return x
 }
 
-// The source blend factor (SBF) used by the RGB blend operation.
-//
-// WithSourceRGBBlendFactor sets the sourceRGBBlendFactor property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetSourceRGBBlendFactor(raw.MTLBlendFactor(sourceRGBBlendFactor))
+// WithSourceRGBBlendFactor the source blend factor (SBF) used by the RGB blend operation.
+func (x *RenderPipelineColorAttachmentDescriptor) WithSourceRGBBlendFactor(sourceRGBBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRGBBlendFactor:"), sourceRGBBlendFactor)
 	return x
 }
 
-// The destination blend factor (DBF) used by the RGB blend operation.
-//
-// WithDestinationRGBBlendFactor sets the destinationRGBBlendFactor property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetDestinationRGBBlendFactor(raw.MTLBlendFactor(destinationRGBBlendFactor))
+// WithDestinationRGBBlendFactor the destination blend factor (DBF) used by the RGB blend operation.
+func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationRGBBlendFactor(destinationRGBBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationRGBBlendFactor:"), destinationRGBBlendFactor)
 	return x
 }
 
-// The blend operation assigned for the RGB data.
-//
-// WithRgbBlendOperation sets the rgbBlendOperation property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithRgbBlendOperation(rgbBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetRgbBlendOperation(raw.MTLBlendOperation(rgbBlendOperation))
+// WithRgbBlendOperation the blend operation assigned for the RGB data.
+func (x *RenderPipelineColorAttachmentDescriptor) WithRgbBlendOperation(rgbBlendOperation BlendOperation) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRgbBlendOperation:"), rgbBlendOperation)
 	return x
 }
 
-// The source blend factor (SBF) used by the alpha blend operation.
-//
-// WithSourceAlphaBlendFactor sets the sourceAlphaBlendFactor property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetSourceAlphaBlendFactor(raw.MTLBlendFactor(sourceAlphaBlendFactor))
+// WithSourceAlphaBlendFactor the source blend factor (SBF) used by the alpha blend operation.
+func (x *RenderPipelineColorAttachmentDescriptor) WithSourceAlphaBlendFactor(sourceAlphaBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceAlphaBlendFactor:"), sourceAlphaBlendFactor)
 	return x
 }
 
-// The destination blend factor (DBF) used by the alpha blend operation.
-//
-// WithDestinationAlphaBlendFactor sets the destinationAlphaBlendFactor property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetDestinationAlphaBlendFactor(raw.MTLBlendFactor(destinationAlphaBlendFactor))
+// WithDestinationAlphaBlendFactor the destination blend factor (DBF) used by the alpha blend operation.
+func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationAlphaBlendFactor:"), destinationAlphaBlendFactor)
 	return x
 }
 
-// The blend operation assigned for the alpha data.
-//
-// WithAlphaBlendOperation sets the alphaBlendOperation property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithAlphaBlendOperation(alphaBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetAlphaBlendOperation(raw.MTLBlendOperation(alphaBlendOperation))
+// WithAlphaBlendOperation the blend operation assigned for the alpha data.
+func (x *RenderPipelineColorAttachmentDescriptor) WithAlphaBlendOperation(alphaBlendOperation BlendOperation) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaBlendOperation:"), alphaBlendOperation)
 	return x
 }
 
-// A bitmask that restricts which color channels are written into the texture.
-//
-// WithWriteMask sets the writeMask property and returns the receiver for chaining.
-func (x *RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMask MTLColorWriteMask) *RenderPipelineColorAttachmentDescriptor {
-	x.inner.SetWriteMask(raw.MTLColorWriteMask(writeMask))
+// WithWriteMask a bitmask that restricts which color channels are written into the texture.
+func (x *RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMask ColorWriteMask) *RenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWriteMask:"), writeMask)
 	return x
 }
 
-// Pixel format.  Defaults to MTLPixelFormatInvalid
-//
-// PixelFormat calls the underlying PixelFormat.
-func (x *RenderPipelineColorAttachmentDescriptor) PixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.PixelFormat())
+// PixelFormat pixel format.  Defaults to MTLPixelFormatInvalid
+func (x *RenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+	return _r
 }
 
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *RenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// SetPixelFormat wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }
 
-// Enable blending.  Defaults to NO.
-//
-// IsBlendingEnabled calls the underlying IsBlendingEnabled.
+// IsBlendingEnabled enable blending.  Defaults to NO.
 func (x *RenderPipelineColorAttachmentDescriptor) IsBlendingEnabled() bool {
-	return x.inner.IsBlendingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlendingEnabled"))
+	return _r
 }
 
-// SetBlendingEnabled calls the underlying SetBlendingEnabled.
+// SetBlendingEnabled wraps the corresponding Objective-C method.
 func (x *RenderPipelineColorAttachmentDescriptor) SetBlendingEnabled(blendingEnabled bool) {
-	x.inner.SetBlendingEnabled(blendingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendingEnabled:"), blendingEnabled)
 }
 
-// Defaults to MTLBlendFactorOne
-//
-// SourceRGBBlendFactor calls the underlying SourceRGBBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() MTLBlendFactor {
-	return MTLBlendFactor(x.inner.SourceRGBBlendFactor())
+// SourceRGBBlendFactor defaults to MTLBlendFactorOne
+func (x *RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() BlendFactor {
+	_r := objc.Send[BlendFactor](objref.IDOf(x), objc.RegisterName("sourceRGBBlendFactor"))
+	return _r
 }
 
-// SetSourceRGBBlendFactor calls the underlying SetSourceRGBBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SetSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor) {
-	x.inner.SetSourceRGBBlendFactor(raw.MTLBlendFactor(sourceRGBBlendFactor))
+// SetSourceRGBBlendFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetSourceRGBBlendFactor(sourceRGBBlendFactor BlendFactor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRGBBlendFactor:"), sourceRGBBlendFactor)
 }
 
-// Defaults to MTLBlendFactorZero
-//
-// DestinationRGBBlendFactor calls the underlying DestinationRGBBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() MTLBlendFactor {
-	return MTLBlendFactor(x.inner.DestinationRGBBlendFactor())
+// DestinationRGBBlendFactor defaults to MTLBlendFactorZero
+func (x *RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() BlendFactor {
+	_r := objc.Send[BlendFactor](objref.IDOf(x), objc.RegisterName("destinationRGBBlendFactor"))
+	return _r
 }
 
-// SetDestinationRGBBlendFactor calls the underlying SetDestinationRGBBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor) {
-	x.inner.SetDestinationRGBBlendFactor(raw.MTLBlendFactor(destinationRGBBlendFactor))
+// SetDestinationRGBBlendFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationRGBBlendFactor(destinationRGBBlendFactor BlendFactor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationRGBBlendFactor:"), destinationRGBBlendFactor)
 }
 
-// Defaults to MTLBlendOperationAdd
-//
-// RgbBlendOperation calls the underlying RgbBlendOperation.
-func (x *RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() MTLBlendOperation {
-	return MTLBlendOperation(x.inner.RgbBlendOperation())
+// RgbBlendOperation defaults to MTLBlendOperationAdd
+func (x *RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() BlendOperation {
+	_r := objc.Send[BlendOperation](objref.IDOf(x), objc.RegisterName("rgbBlendOperation"))
+	return _r
 }
 
-// SetRgbBlendOperation calls the underlying SetRgbBlendOperation.
-func (x *RenderPipelineColorAttachmentDescriptor) SetRgbBlendOperation(rgbBlendOperation MTLBlendOperation) {
-	x.inner.SetRgbBlendOperation(raw.MTLBlendOperation(rgbBlendOperation))
+// SetRgbBlendOperation wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetRgbBlendOperation(rgbBlendOperation BlendOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRgbBlendOperation:"), rgbBlendOperation)
 }
 
-// Defaults to MTLBlendFactorOne
-//
-// SourceAlphaBlendFactor calls the underlying SourceAlphaBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() MTLBlendFactor {
-	return MTLBlendFactor(x.inner.SourceAlphaBlendFactor())
+// SourceAlphaBlendFactor defaults to MTLBlendFactorOne
+func (x *RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() BlendFactor {
+	_r := objc.Send[BlendFactor](objref.IDOf(x), objc.RegisterName("sourceAlphaBlendFactor"))
+	return _r
 }
 
-// SetSourceAlphaBlendFactor calls the underlying SetSourceAlphaBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SetSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor) {
-	x.inner.SetSourceAlphaBlendFactor(raw.MTLBlendFactor(sourceAlphaBlendFactor))
+// SetSourceAlphaBlendFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetSourceAlphaBlendFactor(sourceAlphaBlendFactor BlendFactor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceAlphaBlendFactor:"), sourceAlphaBlendFactor)
 }
 
-// Defaults to MTLBlendFactorZero
-//
-// DestinationAlphaBlendFactor calls the underlying DestinationAlphaBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() MTLBlendFactor {
-	return MTLBlendFactor(x.inner.DestinationAlphaBlendFactor())
+// DestinationAlphaBlendFactor defaults to MTLBlendFactorZero
+func (x *RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() BlendFactor {
+	_r := objc.Send[BlendFactor](objref.IDOf(x), objc.RegisterName("destinationAlphaBlendFactor"))
+	return _r
 }
 
-// SetDestinationAlphaBlendFactor calls the underlying SetDestinationAlphaBlendFactor.
-func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor) {
-	x.inner.SetDestinationAlphaBlendFactor(raw.MTLBlendFactor(destinationAlphaBlendFactor))
+// SetDestinationAlphaBlendFactor wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationAlphaBlendFactor(destinationAlphaBlendFactor BlendFactor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationAlphaBlendFactor:"), destinationAlphaBlendFactor)
 }
 
-// Defaults to MTLBlendOperationAdd
-//
-// AlphaBlendOperation calls the underlying AlphaBlendOperation.
-func (x *RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() MTLBlendOperation {
-	return MTLBlendOperation(x.inner.AlphaBlendOperation())
+// AlphaBlendOperation defaults to MTLBlendOperationAdd
+func (x *RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() BlendOperation {
+	_r := objc.Send[BlendOperation](objref.IDOf(x), objc.RegisterName("alphaBlendOperation"))
+	return _r
 }
 
-// SetAlphaBlendOperation calls the underlying SetAlphaBlendOperation.
-func (x *RenderPipelineColorAttachmentDescriptor) SetAlphaBlendOperation(alphaBlendOperation MTLBlendOperation) {
-	x.inner.SetAlphaBlendOperation(raw.MTLBlendOperation(alphaBlendOperation))
+// SetAlphaBlendOperation wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetAlphaBlendOperation(alphaBlendOperation BlendOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaBlendOperation:"), alphaBlendOperation)
 }
 
-// Defaults to MTLColorWriteMaskAll
-//
-// WriteMask calls the underlying WriteMask.
-func (x *RenderPipelineColorAttachmentDescriptor) WriteMask() MTLColorWriteMask {
-	return MTLColorWriteMask(x.inner.WriteMask())
+// WriteMask defaults to MTLColorWriteMaskAll
+func (x *RenderPipelineColorAttachmentDescriptor) WriteMask() ColorWriteMask {
+	_r := objc.Send[ColorWriteMask](objref.IDOf(x), objc.RegisterName("writeMask"))
+	return _r
 }
 
-// SetWriteMask calls the underlying SetWriteMask.
-func (x *RenderPipelineColorAttachmentDescriptor) SetWriteMask(writeMask MTLColorWriteMask) {
-	x.inner.SetWriteMask(raw.MTLColorWriteMask(writeMask))
+// SetWriteMask wraps the corresponding Objective-C method.
+func (x *RenderPipelineColorAttachmentDescriptor) SetWriteMask(writeMask ColorWriteMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWriteMask:"), writeMask)
 }
 
 // RenderPipelineColorAttachmentDescriptorable is the interface implemented by [RenderPipelineColorAttachmentDescriptor], for mocking and DI.
 type RenderPipelineColorAttachmentDescriptorable interface {
-	Unwrap() *raw.MTLRenderPipelineColorAttachmentDescriptor
-	WithPixelFormat(pixelFormat MTLPixelFormat) *RenderPipelineColorAttachmentDescriptor
+	obj.Object
+	WithPixelFormat(pixelFormat PixelFormat) *RenderPipelineColorAttachmentDescriptor
 	WithBlendingEnabled(blendingEnabled bool) *RenderPipelineColorAttachmentDescriptor
-	WithSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor
-	WithDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor
-	WithRgbBlendOperation(rgbBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor
-	WithSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor
-	WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor
-	WithAlphaBlendOperation(alphaBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor
-	WithWriteMask(writeMask MTLColorWriteMask) *RenderPipelineColorAttachmentDescriptor
-	PixelFormat() MTLPixelFormat
-	SetPixelFormat(pixelFormat MTLPixelFormat)
+	WithSourceRGBBlendFactor(sourceRGBBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor
+	WithDestinationRGBBlendFactor(destinationRGBBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor
+	WithRgbBlendOperation(rgbBlendOperation BlendOperation) *RenderPipelineColorAttachmentDescriptor
+	WithSourceAlphaBlendFactor(sourceAlphaBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor
+	WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor BlendFactor) *RenderPipelineColorAttachmentDescriptor
+	WithAlphaBlendOperation(alphaBlendOperation BlendOperation) *RenderPipelineColorAttachmentDescriptor
+	WithWriteMask(writeMask ColorWriteMask) *RenderPipelineColorAttachmentDescriptor
+	PixelFormat() PixelFormat
+	SetPixelFormat(pixelFormat PixelFormat)
 	IsBlendingEnabled() bool
 	SetBlendingEnabled(blendingEnabled bool)
-	SourceRGBBlendFactor() MTLBlendFactor
-	SetSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor)
-	DestinationRGBBlendFactor() MTLBlendFactor
-	SetDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor)
-	RgbBlendOperation() MTLBlendOperation
-	SetRgbBlendOperation(rgbBlendOperation MTLBlendOperation)
-	SourceAlphaBlendFactor() MTLBlendFactor
-	SetSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor)
-	DestinationAlphaBlendFactor() MTLBlendFactor
-	SetDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor)
-	AlphaBlendOperation() MTLBlendOperation
-	SetAlphaBlendOperation(alphaBlendOperation MTLBlendOperation)
-	WriteMask() MTLColorWriteMask
-	SetWriteMask(writeMask MTLColorWriteMask)
+	SourceRGBBlendFactor() BlendFactor
+	SetSourceRGBBlendFactor(sourceRGBBlendFactor BlendFactor)
+	DestinationRGBBlendFactor() BlendFactor
+	SetDestinationRGBBlendFactor(destinationRGBBlendFactor BlendFactor)
+	RgbBlendOperation() BlendOperation
+	SetRgbBlendOperation(rgbBlendOperation BlendOperation)
+	SourceAlphaBlendFactor() BlendFactor
+	SetSourceAlphaBlendFactor(sourceAlphaBlendFactor BlendFactor)
+	DestinationAlphaBlendFactor() BlendFactor
+	SetDestinationAlphaBlendFactor(destinationAlphaBlendFactor BlendFactor)
+	AlphaBlendOperation() BlendOperation
+	SetAlphaBlendOperation(alphaBlendOperation BlendOperation)
+	WriteMask() ColorWriteMask
+	SetWriteMask(writeMask ColorWriteMask)
 }
 
 var _ RenderPipelineColorAttachmentDescriptorable = (*RenderPipelineColorAttachmentDescriptor)(nil)

@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package shazamkit provides a fluent Go API over the macOS ShazamKit framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Catalog: [CustomCatalog]
+//   - MediaItem: [MatchedMediaItem]
 package shazamkit

@@ -5,65 +5,37 @@
 package gameplaykit
 
 import (
-	"fmt"
 	"strings"
 )
 
 // Options for how to place graph nodes when generating the graph, used by the triangulationMode property.
 // Bitmask — values may be combined with |.
-type GKMeshGraphTriangulationMode uint64
+type MeshGraphTriangulationMode uint64
 
 const (
 	// An option to place graph nodes at each vertex in the generated mesh.
-	GKMeshGraphTriangulationModeVertices GKMeshGraphTriangulationMode = 1
+	MeshGraphTriangulationModeVertices MeshGraphTriangulationMode = 1
 	// An option to place graph nodes at the center of each polygon in the generated mesh.
-	GKMeshGraphTriangulationModeCenters GKMeshGraphTriangulationMode = 2
+	MeshGraphTriangulationModeCenters MeshGraphTriangulationMode = 2
 	// An option to place graph nodes at the midpoint of each in the generated mesh.
-	GKMeshGraphTriangulationModeEdgeMidpoints GKMeshGraphTriangulationMode = 4
+	MeshGraphTriangulationModeEdgeMidpoints MeshGraphTriangulationMode = 4
 )
 
-func (e GKMeshGraphTriangulationMode) String() string {
+// String returns the MeshGraphTriangulationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MeshGraphTriangulationMode) String() string {
 	var parts []string
-	if e&GKMeshGraphTriangulationModeVertices != 0 {
-		parts = append(parts, "GKMeshGraphTriangulationModeVertices")
+	if e&MeshGraphTriangulationModeVertices != 0 {
+		parts = append(parts, "MeshGraphTriangulationModeVertices")
 	}
-	if e&GKMeshGraphTriangulationModeCenters != 0 {
-		parts = append(parts, "GKMeshGraphTriangulationModeCenters")
+	if e&MeshGraphTriangulationModeCenters != 0 {
+		parts = append(parts, "MeshGraphTriangulationModeCenters")
 	}
-	if e&GKMeshGraphTriangulationModeEdgeMidpoints != 0 {
-		parts = append(parts, "GKMeshGraphTriangulationModeEdgeMidpoints")
+	if e&MeshGraphTriangulationModeEdgeMidpoints != 0 {
+		parts = append(parts, "MeshGraphTriangulationModeEdgeMidpoints")
 	}
 	if len(parts) == 0 {
 		return "0"
 	}
 	return strings.Join(parts, "|")
-}
-
-// Options that control how a tree balances its internal structure when adding elements, used with the addElement:boundingRectMin:boundingRectMax:splitStrategy: method.
-type GKRTreeSplitStrategy int64
-
-const (
-	// An option to split groups of elements in half based on the order they were added to the tree in.
-	GKRTreeSplitStrategyHalve GKRTreeSplitStrategy = 0
-	// An option to split groups of elements by finding a line that divides space so that half of the elements are on either side.
-	GKRTreeSplitStrategyLinear GKRTreeSplitStrategy = 1
-	// An option to split groups of elements by finding the subgroups that occupy the least area.
-	GKRTreeSplitStrategyQuadratic GKRTreeSplitStrategy = 2
-	// An option to split groups of elements by finding the subgroups whose areas overlap the least.
-	GKRTreeSplitStrategyReduceOverlap GKRTreeSplitStrategy = 3
-)
-
-func (e GKRTreeSplitStrategy) String() string {
-	switch e {
-	case GKRTreeSplitStrategyHalve:
-		return "GKRTreeSplitStrategyHalve"
-	case GKRTreeSplitStrategyLinear:
-		return "GKRTreeSplitStrategyLinear"
-	case GKRTreeSplitStrategyQuadratic:
-		return "GKRTreeSplitStrategyQuadratic"
-	case GKRTreeSplitStrategyReduceOverlap:
-		return "GKRTreeSplitStrategyReduceOverlap"
-	default:
-		return fmt.Sprintf("GKRTreeSplitStrategy(%d)", int64(e))
-	}
 }

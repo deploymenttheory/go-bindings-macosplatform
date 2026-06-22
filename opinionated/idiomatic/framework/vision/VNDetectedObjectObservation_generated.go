@@ -5,68 +5,74 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An observation that provides the position and extent of an image feature that an image- analysis request detects.
+// DetectedObjectObservation is an idiomatic wrapper over the Objective-C class VNDetectedObjectObservation.
 //
-// DetectedObjectObservation wraps [raw.VNDetectedObjectObservation] with a fluent Go API.
+// DetectedObjectObservation is an abstract base — you do not construct it directly. Construct one of [FaceObservation], [HumanObservation], [RecognizedObjectObservation], [RectangleObservation] and pass it where a DetectedObjectObservation is accepted.
+//
+// An observation that provides the position and extent of an image feature that an image- analysis request detects.
 type DetectedObjectObservation struct {
-	inner *raw.VNDetectedObjectObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNDetectedObjectObservation].
-func (x *DetectedObjectObservation) Unwrap() *raw.VNDetectedObjectObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectedObjectObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectedObjectObservationFromID adopts an existing object pointer as a DetectedObjectObservation (nil for 0).
+// DetectedObjectObservationFromID adopts an existing Objective-C object as a DetectedObjectObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectedObjectObservationFromID(id objc.ID) *DetectedObjectObservation {
 	if id == 0 {
 		return nil
 	}
-	return &DetectedObjectObservation{inner: raw.VNDetectedObjectObservationFromID(id)}
+	x := &DetectedObjectObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDetectedObjectObservation creates a new [DetectedObjectObservation].
-func NewDetectedObjectObservation() *DetectedObjectObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectedObjectObservation")), objc.RegisterName("new"))
-	return &DetectedObjectObservation{inner: raw.VNDetectedObjectObservationFromID(_id)}
-}
-
-// @brief The bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
-//
-// BoundingBox calls the underlying BoundingBox.
-func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
-	return x.inner.BoundingBox()
-}
-
-// @brief The resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
-//
-// GlobalSegmentationMask calls the underlying GlobalSegmentationMask.
-func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
-	_r := x.inner.GlobalSegmentationMask()
-	if _r == nil {
+// detectedObjectObservationAdopt wraps an Objective-C object that this code just created as a
+// DetectedObjectObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectedObjectObservationAdopt(id objc.ID) *DetectedObjectObservation {
+	if id == 0 {
 		return nil
 	}
-	return &PixelBufferObservation{inner: _r}
+	x := &DetectedObjectObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DetectedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return x.inner
+// BoundingBox the bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
+func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundingBox"))
+	return _r
 }
 
-func (x *DetectedObjectObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+// GlobalSegmentationMask the resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
+func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalSegmentationMask"))
+	return PixelBufferObservationFromID(_r)
+}
 
 // DetectedObjectObservationable is the interface implemented by [DetectedObjectObservation], for mocking and DI.
 type DetectedObjectObservationable interface {
-	Unwrap() *raw.VNDetectedObjectObservation
+	obj.Object
 	BoundingBox() corefoundation.CGRect
 	GlobalSegmentationMask() *PixelBufferObservation
 }
 
 var _ DetectedObjectObservationable = (*DetectedObjectObservation)(nil)
+
+// isDetectedObjectObservation marks DetectedObjectObservation — and, by embedding promotion, its
+// subclasses — as a member of the DetectedObjectObservation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DetectedObjectObservation) isDetectedObjectObservation() {}
+
+var _ DetectedObjectObservationProvider = (*DetectedObjectObservation)(nil)
+
+var _ ObservationProvider = (*DetectedObjectObservation)(nil)

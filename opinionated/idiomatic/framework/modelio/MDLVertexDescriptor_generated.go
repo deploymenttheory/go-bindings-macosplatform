@@ -5,187 +5,160 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A description of the structure, format, and layout for vertex data buffers associated with a mesh.
+// VertexDescriptor is an idiomatic wrapper over the Objective-C class MDLVertexDescriptor.
 //
-// VertexDescriptor wraps [raw.MDLVertexDescriptor] with a fluent Go API.
+// A description of the structure, format, and layout for vertex data buffers associated with a mesh.
 type VertexDescriptor struct {
-	inner *raw.MDLVertexDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLVertexDescriptor].
-func (x *VertexDescriptor) Unwrap() *raw.MDLVertexDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexDescriptorFromID adopts an existing object pointer as a VertexDescriptor (nil for 0).
+// VertexDescriptorFromID adopts an existing Objective-C object as a VertexDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexDescriptorFromID(id objc.ID) *VertexDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VertexDescriptor{inner: raw.MDLVertexDescriptorFromID(id)}
-}
-
-// Creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.
-//
-// NewVertexDescriptorWithVertexDescriptor creates a new [VertexDescriptor].
-func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *VertexDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVertexDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVertexDescriptor:"), vertexDescriptor.Ptr())
-	return &VertexDescriptor{inner: raw.MDLVertexDescriptorFromID(_id)}
-}
-
-// The list of vertex attributes described by the vertex descriptor.
-//
-// WithAttributes sets the collection, converting the Go slice to an NSMutableArray.
-func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *VertexDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAttributes(foundation.NSMutableArrayFromID[*raw.MDLVertexAttribute](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSMutableArrayFromID[*raw.MDLVertexAttribute](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAttributes(_arr)
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The list of vertex buffer layouts described by the vertex descriptor.
-//
-// WithLayouts sets the collection, converting the Go slice to an NSMutableArray.
-func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *VertexDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetLayouts(foundation.NSMutableArrayFromID[*raw.MDLVertexBufferLayout](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSMutableArrayFromID[*raw.MDLVertexBufferLayout](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetLayouts(_arr)
-	return x
-}
-
-// Returns the vertex attribute with the specified name in the vertex descriptor.
-//
-// AttributeNamed calls the underlying AttributeNamed.
-func (x *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
-	_r := x.inner.AttributeNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
+// vertexDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VertexDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &VertexAttribute{inner: _r}
+	x := &VertexDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.
-//
-// AddOrReplaceAttribute calls the underlying AddOrReplaceAttribute.
-func (x *VertexDescriptor) AddOrReplaceAttribute(attribute *raw.MDLVertexAttribute) {
-	x.inner.AddOrReplaceAttribute(attribute)
+// Description returns the object's -description text.
+func (x *VertexDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @method removeAttributeNamed: @abstract Remove the named attribute if it exists
-//
-// RemoveAttributeNamed calls the underlying RemoveAttributeNamed.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVertexDescriptorWithVertexDescriptor creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.
+func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *VertexDescriptor) *VertexDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVertexDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVertexDescriptor:"), objref.IDOf(vertexDescriptor))
+	return vertexDescriptorAdopt(_id)
+}
+
+// WithAttributes the list of vertex attributes described by the vertex descriptor.
+func (x *VertexDescriptor) WithAttributes(items ...*VertexAttribute) *VertexDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v *VertexAttribute) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), _arr)
+	return x
+}
+
+// WithLayouts the list of vertex buffer layouts described by the vertex descriptor.
+func (x *VertexDescriptor) WithLayouts(items ...*VertexBufferLayout) *VertexDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v *VertexBufferLayout) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayouts:"), _arr)
+	return x
+}
+
+// AttributeNamed returns the vertex attribute with the specified name in the vertex descriptor.
+func (x *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeNamed:"), purego.NSString(name))
+	return VertexAttributeFromID(_r)
+}
+
+// AddOrReplaceAttribute adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.
+func (x *VertexDescriptor) AddOrReplaceAttribute(attribute *VertexAttribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrReplaceAttribute:"), objref.IDOf(attribute))
+}
+
+// RemoveAttributeNamed remove the named attribute if it exists
 func (x *VertexDescriptor) RemoveAttributeNamed(name string) {
-	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAttributeNamed:"), purego.NSString(name))
 }
 
-// Resets a vertex descriptor to its default state.
-//
-// Reset calls the underlying Reset.
+// Reset resets a vertex descriptor to its default state.
 func (x *VertexDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.
-//
-// SetPackedStrides calls the underlying SetPackedStrides.
+// SetPackedStrides sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.
 func (x *VertexDescriptor) SetPackedStrides() {
-	x.inner.SetPackedStrides()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPackedStrides"))
 }
 
-// Sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.
-//
-// SetPackedOffsets calls the underlying SetPackedOffsets.
+// SetPackedOffsets sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.
 func (x *VertexDescriptor) SetPackedOffsets() {
-	x.inner.SetPackedOffsets()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPackedOffsets"))
 }
 
-// @property attributes @abstract An array of MDLVertexAttribute objects @discussion ay describing the current attribute state of vertex buffers in an MDLMesh mesh
+// Attributes an array of MDLVertexAttribute objects ay describing the current attribute state of vertex buffers in an MDLMesh mesh
 //
 // Attributes returns the collection as a Go slice.
 func (x *VertexDescriptor) Attributes() []*VertexAttribute {
-	arr := x.inner.Attributes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VertexAttribute {
-		return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VertexAttribute { return VertexAttributeFromID(_id) })
 }
 
-// SetAttributes calls the underlying SetAttributes.
-func (x *VertexDescriptor) SetAttributes(attributes *foundation.NSMutableArray[*raw.MDLVertexAttribute]) {
-	x.inner.SetAttributes(attributes)
+// SetAttributes wraps the corresponding Objective-C method.
+func (x *VertexDescriptor) SetAttributes(attributes []*VertexAttribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v *VertexAttribute) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property layouts @abstract An array of MDLVertexBufferLayout @discussion An array describing the current layout state of vertex buffers in an MDLMesh mesh
+// Layouts an array of MDLVertexBufferLayout An array describing the current layout state of vertex buffers in an MDLMesh mesh
 //
 // Layouts returns the collection as a Go slice.
 func (x *VertexDescriptor) Layouts() []*VertexBufferLayout {
-	arr := x.inner.Layouts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VertexBufferLayout {
-		return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VertexBufferLayout { return VertexBufferLayoutFromID(_id) })
 }
 
-// SetLayouts calls the underlying SetLayouts.
-func (x *VertexDescriptor) SetLayouts(layouts *foundation.NSMutableArray[*raw.MDLVertexBufferLayout]) {
-	x.inner.SetLayouts(layouts)
+// SetLayouts wraps the corresponding Objective-C method.
+func (x *VertexDescriptor) SetLayouts(layouts []*VertexBufferLayout) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayouts:"), purego.SliceToNSArray(layouts, func(_v *VertexBufferLayout) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VertexDescriptorable is the interface implemented by [VertexDescriptor], for mocking and DI.
 type VertexDescriptorable interface {
-	Unwrap() *raw.MDLVertexDescriptor
-	WithAttributes(items ...*raw.MDLVertexAttribute) *VertexDescriptor
-	WithLayouts(items ...*raw.MDLVertexBufferLayout) *VertexDescriptor
+	obj.Object
+	WithAttributes(items ...*VertexAttribute) *VertexDescriptor
+	WithLayouts(items ...*VertexBufferLayout) *VertexDescriptor
 	AttributeNamed(name string) *VertexAttribute
-	AddOrReplaceAttribute(attribute *raw.MDLVertexAttribute)
+	AddOrReplaceAttribute(attribute *VertexAttribute)
 	RemoveAttributeNamed(name string)
 	Reset()
 	SetPackedStrides()
 	SetPackedOffsets()
 	Attributes() []*VertexAttribute
-	SetAttributes(attributes *foundation.NSMutableArray[*raw.MDLVertexAttribute])
+	SetAttributes(attributes []*VertexAttribute)
 	Layouts() []*VertexBufferLayout
-	SetLayouts(layouts *foundation.NSMutableArray[*raw.MDLVertexBufferLayout])
+	SetLayouts(layouts []*VertexBufferLayout)
 }
 
 var _ VertexDescriptorable = (*VertexDescriptor)(nil)

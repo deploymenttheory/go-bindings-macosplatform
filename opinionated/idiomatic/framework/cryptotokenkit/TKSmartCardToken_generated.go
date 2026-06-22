@@ -5,64 +5,66 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a smart card based cryptographic token.
+// SmartCardToken is an idiomatic wrapper over the Objective-C class TKSmartCardToken.
 //
-// SmartCardToken wraps [raw.TKSmartCardToken] with a fluent Go API.
+// It embeds [Token], promoting that type's methods.
+//
+// A representation of a smart card based cryptographic token.
 type SmartCardToken struct {
-	inner *raw.TKSmartCardToken
+	Token
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardToken].
-func (x *SmartCardToken) Unwrap() *raw.TKSmartCardToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardToken) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardTokenFromID adopts an existing object pointer as a SmartCardToken (nil for 0).
+// SmartCardTokenFromID adopts an existing Objective-C object as a SmartCardToken
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardTokenFromID(id objc.ID) *SmartCardToken {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(id)}
-}
-
-// Initializes a smart card token with the specified smart card, application identifier, and token driver.
-//
-// NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver creates a new [SmartCardToken].
-func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *raw.TKSmartCard, aID *foundation.NSData, instanceID string, tokenDriver *raw.TKSmartCardTokenDriver) *SmartCardToken {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardToken")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSmartCard:AID:instanceID:tokenDriver:"), smartCard.Ptr(), aID.Ptr(), foundation.NSStringStringWithUTF8String(instanceID).Ptr(), tokenDriver.Ptr())
-	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(_id)}
-}
-
-// The token delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardToken) WithDelegate(delegate raw.TKTokenDelegate) *SmartCardToken {
-	x.inner.TKToken.SetDelegate(delegate)
+	x := &SmartCardToken{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @discussion This is AID which is specified in extension's plist NSExtensionAttributes as @c com.apple.ctk.aid attribute. If the attribute specifies array of multiple AIDs, this parameter represents AID which was found on the card and is already preselected.  If @c com.apple.ctk.aid is not present, no application is automatically preselected and value of this property is nil.
-//
-// AID calls the underlying AID.
-func (x *SmartCardToken) AID() *foundation.NSData {
-	return x.inner.AID()
+// smartCardTokenAdopt wraps an Objective-C object that this code just created as a
+// SmartCardToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardTokenAdopt(id objc.ID) *SmartCardToken {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardToken{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *SmartCardToken) asToken() *raw.TKToken { return &x.inner.TKToken }
+// NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver initializes a smart card token with the specified smart card, application identifier, and token driver.
+func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *SmartCard, aID obj.Object, instanceID string, tokenDriver *SmartCardTokenDriver) *SmartCardToken {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSmartCardToken")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSmartCard:AID:instanceID:tokenDriver:"), objref.IDOf(smartCard), objref.IDOf(aID), purego.NSString(instanceID), objref.IDOf(tokenDriver))
+	return smartCardTokenAdopt(_id)
+}
+
+// AID this is AID which is specified in extension's plist NSExtensionAttributes as
+func (x *SmartCardToken) AID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AID"))
+	return obj.Wrap(_r)
+}
 
 // SmartCardTokenable is the interface implemented by [SmartCardToken], for mocking and DI.
 type SmartCardTokenable interface {
-	Unwrap() *raw.TKSmartCardToken
-	WithDelegate(delegate raw.TKTokenDelegate) *SmartCardToken
-	AID() *foundation.NSData
+	obj.Object
+	AID() obj.Object
 }
 
 var _ SmartCardTokenable = (*SmartCardToken)(nil)
+
+var _ TokenProvider = (*SmartCardToken)(nil)

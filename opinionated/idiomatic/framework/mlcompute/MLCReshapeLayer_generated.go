@@ -5,77 +5,81 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that reshapes a tensor with the shape you specify.
+// ReshapeLayer is an idiomatic wrapper over the Objective-C class MLCReshapeLayer.
 //
-// ReshapeLayer wraps [raw.MLCReshapeLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that reshapes a tensor with the shape you specify.
 type ReshapeLayer struct {
-	inner *raw.MLCReshapeLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCReshapeLayer].
-func (x *ReshapeLayer) Unwrap() *raw.MLCReshapeLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReshapeLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ReshapeLayerFromID adopts an existing object pointer as a ReshapeLayer (nil for 0).
+// ReshapeLayerFromID adopts an existing Objective-C object as a ReshapeLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ReshapeLayerFromID(id objc.ID) *ReshapeLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ReshapeLayer{inner: raw.MLCReshapeLayerFromID(id)}
-}
-
-// NewReshapeLayer creates a new [ReshapeLayer].
-func NewReshapeLayer() *ReshapeLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCReshapeLayer")), objc.RegisterName("new"))
-	return &ReshapeLayer{inner: raw.MLCReshapeLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &ReshapeLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   shape @abstract   The target shape.
-//
-// Shape returns the collection as a Go slice.
-func (x *ReshapeLayer) Shape() []*foundation.NSNumber {
-	arr := x.inner.Shape()
-	if arr == nil {
+// reshapeLayerAdopt wraps an Objective-C object that this code just created as a
+// ReshapeLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reshapeLayerAdopt(id objc.ID) *ReshapeLayer {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &ReshapeLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ReshapeLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+// NewReshapeLayer creates a new ReshapeLayer.
+func NewReshapeLayer() *ReshapeLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCReshapeLayer")), objc.RegisterName("new"))
+	return reshapeLayerAdopt(_id)
+}
+
+// WithLabel a string that helps identify this layer.
+func (x *ReshapeLayer) WithLabel(label string) *ReshapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *ReshapeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// Shape the target shape.
+//
+// Shape returns the collection as a Go slice.
+func (x *ReshapeLayer) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
 
 // ReshapeLayerable is the interface implemented by [ReshapeLayer], for mocking and DI.
 type ReshapeLayerable interface {
-	Unwrap() *raw.MLCReshapeLayer
+	obj.Object
 	WithLabel(label string) *ReshapeLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReshapeLayer
-	Shape() []*foundation.NSNumber
+	Shape() []obj.Object
 }
 
 var _ ReshapeLayerable = (*ReshapeLayer)(nil)
+
+var _ LayerProvider = (*ReshapeLayer)(nil)

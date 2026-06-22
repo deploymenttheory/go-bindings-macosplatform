@@ -5,875 +5,727 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the user interface of a button or other clickable region of a view.
+// ButtonCell is an idiomatic wrapper over the Objective-C class NSButtonCell.
 //
-// ButtonCell wraps [raw.NSButtonCell] with a fluent Go API.
+// ButtonCell is an abstract base — you do not construct it directly. Construct one of [MenuItemCell] and pass it where a ButtonCell is accepted.
+//
+// An object that defines the user interface of a button or other clickable region of a view.
 type ButtonCell struct {
-	inner *raw.NSButtonCell
+	ActionCell
 }
 
-// Unwrap returns the underlying [raw.NSButtonCell].
-func (x *ButtonCell) Unwrap() *raw.NSButtonCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ButtonCell) ID() objc.ID { return x.inner.Ptr() }
-
-// ButtonCellFromID adopts an existing object pointer as a ButtonCell (nil for 0).
+// ButtonCellFromID adopts an existing Objective-C object as a ButtonCell
+// (nil for 0), retaining it and registering a release finalizer.
 func ButtonCellFromID(id objc.ID) *ButtonCell {
 	if id == 0 {
 		return nil
 	}
-	return &ButtonCell{inner: raw.NSButtonCellFromID(id)}
+	x := &ButtonCell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewButtonCellTextCell creates a new [ButtonCell].
+// buttonCellAdopt wraps an Objective-C object that this code just created as a
+// ButtonCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func buttonCellAdopt(id objc.ID) *ButtonCell {
+	if id == 0 {
+		return nil
+	}
+	x := &ButtonCell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewButtonCellTextCell creates a new ButtonCell.
 func NewButtonCellTextCell(string_ string) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &ButtonCell{inner: raw.NSButtonCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return buttonCellAdopt(_id)
 }
 
-// NewButtonCellImageCell creates a new [ButtonCell].
-func NewButtonCellImageCell(image *raw.NSImage) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), image.Ptr())
-	return &ButtonCell{inner: raw.NSButtonCellFromID(_id)}
+// NewButtonCellImageCell creates a new ButtonCell.
+func NewButtonCellImageCell(image *Image) *ButtonCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
+	return buttonCellAdopt(_id)
 }
 
-// NewButtonCellWithCoder creates a new [ButtonCell].
-func NewButtonCellWithCoder(coder *foundation.NSCoder) *ButtonCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSButtonCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ButtonCell{inner: raw.NSButtonCellFromID(_id)}
+// NewButtonCellWithCoder creates a new ButtonCell.
+func NewButtonCellWithCoder(coder obj.Object) *ButtonCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSButtonCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return buttonCellAdopt(_id)
 }
 
-// The appearance of the button’s border, if it has one.
-//
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *ButtonCell) WithBezelStyle(bezelStyle NSBezelStyle) *ButtonCell {
-	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
+// WithBezelStyle the appearance of the button’s border, if it has one.
+func (x *ButtonCell) WithBezelStyle(bezelStyle BezelStyle) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
-// A set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
-//
-// WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
-func (x *ButtonCell) WithHighlightsBy(highlightsBy NSCellStyleMask) *ButtonCell {
-	x.inner.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
+// WithHighlightsBy a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
+func (x *ButtonCell) WithHighlightsBy(highlightsBy CellStyleMask) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightsBy:"), highlightsBy)
 	return x
 }
 
-// The flags that indicate how the button cell shows its alternate state.
-//
-// WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
-func (x *ButtonCell) WithShowsStateBy(showsStateBy NSCellStyleMask) *ButtonCell {
-	x.inner.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
+// WithShowsStateBy the flags that indicate how the button cell shows its alternate state.
+func (x *ButtonCell) WithShowsStateBy(showsStateBy CellStyleMask) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateBy:"), showsStateBy)
 	return x
 }
 
-// The title displayed by the button when it’s in its normal state as an attributed string.
-//
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *ButtonCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell {
-	x.inner.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle the title displayed by the button when it’s in its normal state as an attributed string.
+func (x *ButtonCell) WithAttributedTitle(attributedTitle obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
-// The string displayed by the button when it’s in its alternate state.
-//
-// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+// WithAlternateTitle the string displayed by the button when it’s in its alternate state.
 func (x *ButtonCell) WithAlternateTitle(alternateTitle string) *ButtonCell {
-	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 	return x
 }
 
-// The title displayed by the button when it’s in its alternate state, as an attributed string.
-//
-// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
-func (x *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell {
-	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
+// WithAttributedAlternateTitle the title displayed by the button when it’s in its alternate state, as an attributed string.
+func (x *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	return x
 }
 
-// The image the button displays in its alternate state.
-//
-// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+// WithAlternateImage the image the button displays in its alternate state.
 func (x *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
-	x.inner.SetAlternateImage(alternateImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
-// The position of the button’s image relative to its title.
-//
-// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *ButtonCell) WithImagePosition(imagePosition NSCellImagePosition) *ButtonCell {
-	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
+// WithImagePosition the position of the button’s image relative to its title.
+func (x *ButtonCell) WithImagePosition(imagePosition CellImagePosition) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 	return x
 }
 
-// The scale factor for the button’s image.
-//
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ButtonCell) WithImageScaling(imageScaling NSImageScaling) *ButtonCell {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImageScaling the scale factor for the button’s image.
+func (x *ButtonCell) WithImageScaling(imageScaling ImageScaling) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
-// The button’s key-equivalent character.
-//
-// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+// WithKeyEquivalent the button’s key-equivalent character.
 func (x *ButtonCell) WithKeyEquivalent(keyEquivalent string) *ButtonCell {
-	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 	return x
 }
 
-// The mask that identifies the modifier keys for the button’s key equivalent.
-//
-// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *ButtonCell {
-	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
+// WithKeyEquivalentModifierMask the mask that identifies the modifier keys for the button’s key equivalent.
+func (x *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 	return x
 }
 
-// A Boolean value that indicates if the button is transparent.
-//
-// WithTransparent sets the transparent property and returns the receiver for chaining.
+// WithTransparent a Boolean value that indicates if the button is transparent.
 func (x *ButtonCell) WithTransparent(transparent bool) *ButtonCell {
-	x.inner.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
-// A Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
-//
-// WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
+// WithImageDimsWhenDisabled a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 func (x *ButtonCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell {
-	x.inner.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
 	return x
 }
 
-// A Boolean value that indicates if the button displays its border only when the pointer is over it.
-//
-// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+// WithShowsBorderOnlyWhileMouseInside a Boolean value that indicates if the button displays its border only when the pointer is over it.
 func (x *ButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell {
-	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 	return x
 }
 
-// The sound that’s played when the user presses the button (that is during a mouse-down event).
-//
-// WithSound sets the sound property and returns the receiver for chaining.
+// WithSound the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (x *ButtonCell) WithSound(sound *Sound) *ButtonCell {
-	x.inner.SetSound(sound.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	return x
 }
 
-// The background color of the button.
-//
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor the background color of the button.
 func (x *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
-	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// The gradient of the button’s border.
-//
-// WithGradientType sets the gradientType property and returns the receiver for chaining.
-func (x *ButtonCell) WithGradientType(gradientType NSGradientType) *ButtonCell {
-	x.inner.SetGradientType(raw.NSGradientType(gradientType))
+// WithGradientType the gradient of the button’s border.
+func (x *ButtonCell) WithGradientType(gradientType GradientType) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientType:"), gradientType)
 	return x
 }
 
-// The font used to draw the button’s key equivalent.
-//
-// WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
+// WithKeyEquivalentFont the font used to draw the button’s key equivalent.
 func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell {
-	x.inner.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	return x
 }
 
-// The view associated with the cell.
-//
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView the view associated with the cell.
 func (x *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
-// The type of the cell.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ButtonCell) WithType(type_ NSCellType) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType the type of the cell.
+func (x *ButtonCell) WithType(type_ CellType) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// The cell’s current state.
-//
-// WithState sets the state property and returns the receiver for chaining.
+// WithState the cell’s current state.
 func (x *ButtonCell) WithState(state int) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
-// The object that receives the cell’s action messages.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ButtonCell) WithTarget(target objc.ID) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
+// WithTarget the object that receives the cell’s action messages.
+func (x *ButtonCell) WithTarget(target obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ButtonCell) WithAction(action objc.SEL) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
-	return x
-}
-
-// A tag for identifying the cell.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag a tag for identifying the cell.
 func (x *ButtonCell) WithTag(tag int) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The cell’s title text.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the cell’s title text.
 func (x *ButtonCell) WithTitle(title string) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value indicating whether the cell is currently enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value indicating whether the cell is currently enabled.
 func (x *ButtonCell) WithEnabled(enabled bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 func (x *ButtonCell) WithContinuous(continuous bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value indicating whether the cell is editable.
-//
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable a Boolean value indicating whether the cell is editable.
 func (x *ButtonCell) WithEditable(editable bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
-// A Boolean value indicating whether the cell’s text can be selected.
-//
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
 func (x *ButtonCell) WithSelectable(selectable bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
-// A Boolean value indicating whether the cell draws itself outlined with a plain border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
 func (x *ButtonCell) WithBordered(bordered bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a bezeled border.
-//
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
 func (x *ButtonCell) WithBezeled(bezeled bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
-// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
-//
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
 func (x *ButtonCell) WithScrollable(scrollable bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
-// A Boolean value indicating whether the cell has a highlighted appearance.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
 func (x *ButtonCell) WithHighlighted(highlighted bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The alignment of the cell’s text.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ButtonCell) WithAlignment(alignment NSTextAlignment) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment of the cell’s text.
+func (x *ButtonCell) WithAlignment(alignment TextAlignment) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-//
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 func (x *ButtonCell) WithWraps(wraps bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// The font that the cell uses to display text.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font that the cell uses to display text.
 func (x *ButtonCell) WithFont(font *Font) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// The cell’s formatter object.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ButtonCell) WithFormatter(formatter *foundation.NSFormatter) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter the cell’s formatter object.
+func (x *ButtonCell) WithFormatter(formatter obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The cell’s value as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ButtonCell) WithObjectValue(objectValue objc.ID) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue the cell’s value as an Objective-C object.
+func (x *ButtonCell) WithObjectValue(objectValue obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The cell’s value as a string.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the cell’s value as a string.
 func (x *ButtonCell) WithStringValue(stringValue string) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The cell’s value as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the cell’s value as an integer.
 func (x *ButtonCell) WithIntValue(intValue int) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The cell’s value as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the cell’s value as a single-precision floating-point number.
 func (x *ButtonCell) WithFloatValue(floatValue float32) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The cell’s value as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the cell’s value as a double-precision floating-point number.
 func (x *ButtonCell) WithDoubleValue(doubleValue float64) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The cell’s value as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the cell’s value as an integer value.
 func (x *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The image displayed by the cell, if any.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image displayed by the cell, if any.
 func (x *ButtonCell) WithImage(image *Image) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The size of the cell.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ButtonCell) WithControlSize(controlSize NSControlSize) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the cell.
+func (x *ButtonCell) WithControlSize(controlSize ControlSize) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The object represented by the cell.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *ButtonCell) WithRepresentedObject(representedObject objc.ID) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject the object represented by the cell.
+func (x *ButtonCell) WithRepresentedObject(representedObject obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
-// The cell’s contextual menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu the cell’s contextual menu.
 func (x *ButtonCell) WithMenu(menu *Menu) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-//
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 func (x *ButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// The line break mode to use when drawing text in the cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ButtonCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use when drawing text in the cell.
+func (x *ButtonCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell assumes responsibility for undo operations.
-//
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
 func (x *ButtonCell) WithAllowsUndo(allowsUndo bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
-// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-//
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 func (x *ButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
-// The layout direction of the user interface.
-//
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection the layout direction of the user interface.
+func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 func (x *ButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// A Boolean value indicating whether the cell refuses the first responder status.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
 func (x *ButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-//
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 func (x *ButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
-// The type of focus ring to use with the associated view.
-//
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ButtonCell) WithFocusRingType(focusRingType NSFocusRingType) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType the type of focus ring to use with the associated view.
+func (x *ButtonCell) WithFocusRingType(focusRingType FocusRingType) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// The cell’s value as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ButtonCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the cell’s value as an attributed string.
+func (x *ButtonCell) WithAttributedStringValue(attributedStringValue obj.Object) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-//
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 func (x *ButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports the importation of images into its text.
-//
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
 func (x *ButtonCell) WithImportsGraphics(importsGraphics bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
-// A Boolean value indicating whether the cell supports three states instead of two.
-//
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
 func (x *ButtonCell) WithAllowsMixedState(allowsMixedState bool) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
-// The cell’s background style.
-//
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ButtonCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle the cell’s background style.
+func (x *ButtonCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
-// The cell’s control tint.
-//
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ButtonCell) WithControlTint(controlTint NSControlTint) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint the cell’s control tint.
+func (x *ButtonCell) WithControlTint(controlTint ControlTint) *ButtonCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Sets how the button highlights while pressed and how it shows its state.
-//
-// SetButtonType calls the underlying SetButtonType.
-func (x *ButtonCell) SetButtonType(type_ NSButtonType) {
-	x.inner.SetButtonType(raw.NSButtonType(type_))
+// SetButtonType sets how the button highlights while pressed and how it shows its state.
+func (x *ButtonCell) SetButtonType(type_ ButtonType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonType:"), type_)
 }
 
-// Sets the message delay and interval for the button.
-//
-// SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
+// SetPeriodicDelayInterval sets the message delay and interval for the button.
 func (x *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
-	x.inner.SetPeriodicDelayInterval(delay, interval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPeriodicDelay:interval:"), delay, interval)
 }
 
-// Draws the button’s border.
-//
-// MouseEntered calls the underlying MouseEntered.
-func (x *ButtonCell) MouseEntered(event *raw.NSEvent) {
-	x.inner.MouseEntered(event)
+// MouseEntered draws the button’s border.
+func (x *ButtonCell) MouseEntered(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 }
 
-// Erases the button’s border.
-//
-// MouseExited calls the underlying MouseExited.
-func (x *ButtonCell) MouseExited(event *raw.NSEvent) {
-	x.inner.MouseExited(event)
+// MouseExited erases the button’s border.
+func (x *ButtonCell) MouseExited(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
-// Draws the border of the button using the current bezel style.
-//
-// DrawBezelWithFrameInView calls the underlying DrawBezelWithFrameInView.
-func (x *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawBezelWithFrameInView(frame, controlView)
+// DrawBezelWithFrameInView draws the border of the button using the current bezel style.
+func (x *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBezelWithFrame:inView:"), frame, objref.IDOf(controlView))
 }
 
-// Draws the image associated with the button’s current state.
-//
-// DrawImageWithFrameInView calls the underlying DrawImageWithFrameInView.
-func (x *ButtonCell) DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawImageWithFrameInView(image, frame, controlView)
+// DrawImageWithFrameInView draws the image associated with the button’s current state.
+func (x *ButtonCell) DrawImageWithFrameInView(image *Image, frame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawImage:withFrame:inView:"), objref.IDOf(image), frame, objref.IDOf(controlView))
 }
 
-// Draws the button’s title centered vertically in a specified rectangle.
-//
-// DrawTitleWithFrameInView calls the underlying DrawTitleWithFrameInView.
-func (x *ButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect {
-	return x.inner.DrawTitleWithFrameInView(title, frame, controlView)
+// DrawTitleWithFrameInView draws the button’s title centered vertically in a specified rectangle.
+func (x *ButtonCell) DrawTitleWithFrameInView(title obj.Object, frame corefoundation.CGRect, controlView *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("drawTitle:withFrame:inView:"), objref.IDOf(title), frame, objref.IDOf(controlView))
+	return _r
 }
 
-// BezelStyle calls the underlying BezelStyle.
-func (x *ButtonCell) BezelStyle() NSBezelStyle {
-	return NSBezelStyle(x.inner.BezelStyle())
+// BezelStyle wraps the corresponding Objective-C method.
+func (x *ButtonCell) BezelStyle() BezelStyle {
+	_r := objc.Send[BezelStyle](objref.IDOf(x), objc.RegisterName("bezelStyle"))
+	return _r
 }
 
-// SetBezelStyle calls the underlying SetBezelStyle.
-func (x *ButtonCell) SetBezelStyle(bezelStyle NSBezelStyle) {
-	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
+// SetBezelStyle wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetBezelStyle(bezelStyle BezelStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 }
 
-// HighlightsBy calls the underlying HighlightsBy.
-func (x *ButtonCell) HighlightsBy() NSCellStyleMask {
-	return NSCellStyleMask(x.inner.HighlightsBy())
+// HighlightsBy wraps the corresponding Objective-C method.
+func (x *ButtonCell) HighlightsBy() CellStyleMask {
+	_r := objc.Send[CellStyleMask](objref.IDOf(x), objc.RegisterName("highlightsBy"))
+	return _r
 }
 
-// SetHighlightsBy calls the underlying SetHighlightsBy.
-func (x *ButtonCell) SetHighlightsBy(highlightsBy NSCellStyleMask) {
-	x.inner.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
+// SetHighlightsBy wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetHighlightsBy(highlightsBy CellStyleMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightsBy:"), highlightsBy)
 }
 
-// ShowsStateBy calls the underlying ShowsStateBy.
-func (x *ButtonCell) ShowsStateBy() NSCellStyleMask {
-	return NSCellStyleMask(x.inner.ShowsStateBy())
+// ShowsStateBy wraps the corresponding Objective-C method.
+func (x *ButtonCell) ShowsStateBy() CellStyleMask {
+	_r := objc.Send[CellStyleMask](objref.IDOf(x), objc.RegisterName("showsStateBy"))
+	return _r
 }
 
-// SetShowsStateBy calls the underlying SetShowsStateBy.
-func (x *ButtonCell) SetShowsStateBy(showsStateBy NSCellStyleMask) {
-	x.inner.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
+// SetShowsStateBy wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetShowsStateBy(showsStateBy CellStyleMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateBy:"), showsStateBy)
 }
 
-// AttributedTitle calls the underlying AttributedTitle.
-func (x *ButtonCell) AttributedTitle() *foundation.NSAttributedString {
-	return x.inner.AttributedTitle()
+// AttributedTitle wraps the corresponding Objective-C method.
+func (x *ButtonCell) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle calls the underlying SetAttributedTitle.
-func (x *ButtonCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	x.inner.SetAttributedTitle(attributedTitle)
+// SetAttributedTitle wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetAttributedTitle(attributedTitle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
-// AlternateTitle calls the underlying AlternateTitle.
+// AlternateTitle wraps the corresponding Objective-C method.
 func (x *ButtonCell) AlternateTitle() string {
-	_r := x.inner.AlternateTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAlternateTitle calls the underlying SetAlternateTitle.
+// SetAlternateTitle wraps the corresponding Objective-C method.
 func (x *ButtonCell) SetAlternateTitle(alternateTitle string) {
-	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 }
 
-// AttributedAlternateTitle calls the underlying AttributedAlternateTitle.
-func (x *ButtonCell) AttributedAlternateTitle() *foundation.NSAttributedString {
-	return x.inner.AttributedAlternateTitle()
+// AttributedAlternateTitle wraps the corresponding Objective-C method.
+func (x *ButtonCell) AttributedAlternateTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedAlternateTitle"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedAlternateTitle calls the underlying SetAttributedAlternateTitle.
-func (x *ButtonCell) SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) {
-	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
+// SetAttributedAlternateTitle wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetAttributedAlternateTitle(attributedAlternateTitle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 }
 
-// AlternateImage calls the underlying AlternateImage.
+// AlternateImage wraps the corresponding Objective-C method.
 func (x *ButtonCell) AlternateImage() *Image {
-	_r := x.inner.AlternateImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
+	return ImageFromID(_r)
 }
 
-// SetAlternateImage calls the underlying SetAlternateImage.
-func (x *ButtonCell) SetAlternateImage(alternateImage *raw.NSImage) {
-	x.inner.SetAlternateImage(alternateImage)
+// SetAlternateImage wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetAlternateImage(alternateImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 }
 
-// ImagePosition calls the underlying ImagePosition.
-func (x *ButtonCell) ImagePosition() NSCellImagePosition {
-	return NSCellImagePosition(x.inner.ImagePosition())
+// ImagePosition wraps the corresponding Objective-C method.
+func (x *ButtonCell) ImagePosition() CellImagePosition {
+	_r := objc.Send[CellImagePosition](objref.IDOf(x), objc.RegisterName("imagePosition"))
+	return _r
 }
 
-// SetImagePosition calls the underlying SetImagePosition.
-func (x *ButtonCell) SetImagePosition(imagePosition NSCellImagePosition) {
-	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
+// SetImagePosition wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetImagePosition(imagePosition CellImagePosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 }
 
-// ImageScaling calls the underlying ImageScaling.
-func (x *ButtonCell) ImageScaling() NSImageScaling {
-	return NSImageScaling(x.inner.ImageScaling())
+// ImageScaling wraps the corresponding Objective-C method.
+func (x *ButtonCell) ImageScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScaling"))
+	return _r
 }
 
-// SetImageScaling calls the underlying SetImageScaling.
-func (x *ButtonCell) SetImageScaling(imageScaling NSImageScaling) {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
+// SetImageScaling wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetImageScaling(imageScaling ImageScaling) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 }
 
-// SetKeyEquivalent calls the underlying SetKeyEquivalent.
+// SetKeyEquivalent wraps the corresponding Objective-C method.
 func (x *ButtonCell) SetKeyEquivalent(keyEquivalent string) {
-	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 }
 
-// KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
-func (x *ButtonCell) KeyEquivalentModifierMask() NSEventModifierFlags {
-	return NSEventModifierFlags(x.inner.KeyEquivalentModifierMask())
+// KeyEquivalentModifierMask wraps the corresponding Objective-C method.
+func (x *ButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
+	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("keyEquivalentModifierMask"))
+	return _r
 }
 
-// SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
-func (x *ButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
-	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
+// SetKeyEquivalentModifierMask wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 }
 
-// IsTransparent calls the underlying IsTransparent.
+// IsTransparent wraps the corresponding Objective-C method.
 func (x *ButtonCell) IsTransparent() bool {
-	return x.inner.IsTransparent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransparent"))
+	return _r
 }
 
-// SetTransparent calls the underlying SetTransparent.
+// SetTransparent wraps the corresponding Objective-C method.
 func (x *ButtonCell) SetTransparent(transparent bool) {
-	x.inner.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 }
 
-// ImageDimsWhenDisabled calls the underlying ImageDimsWhenDisabled.
+// ImageDimsWhenDisabled wraps the corresponding Objective-C method.
 func (x *ButtonCell) ImageDimsWhenDisabled() bool {
-	return x.inner.ImageDimsWhenDisabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("imageDimsWhenDisabled"))
+	return _r
 }
 
-// SetImageDimsWhenDisabled calls the underlying SetImageDimsWhenDisabled.
+// SetImageDimsWhenDisabled wraps the corresponding Objective-C method.
 func (x *ButtonCell) SetImageDimsWhenDisabled(imageDimsWhenDisabled bool) {
-	x.inner.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
 }
 
-// ShowsBorderOnlyWhileMouseInside calls the underlying ShowsBorderOnlyWhileMouseInside.
+// ShowsBorderOnlyWhileMouseInside wraps the corresponding Objective-C method.
 func (x *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
-	return x.inner.ShowsBorderOnlyWhileMouseInside()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsBorderOnlyWhileMouseInside"))
+	return _r
 }
 
-// SetShowsBorderOnlyWhileMouseInside calls the underlying SetShowsBorderOnlyWhileMouseInside.
+// SetShowsBorderOnlyWhileMouseInside wraps the corresponding Objective-C method.
 func (x *ButtonCell) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) {
-	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 }
 
-// Sound calls the underlying Sound.
+// Sound wraps the corresponding Objective-C method.
 func (x *ButtonCell) Sound() *Sound {
-	_r := x.inner.Sound()
-	if _r == nil {
-		return nil
-	}
-	return &Sound{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sound"))
+	return SoundFromID(_r)
 }
 
-// SetSound calls the underlying SetSound.
-func (x *ButtonCell) SetSound(sound *raw.NSSound) {
-	x.inner.SetSound(sound)
+// SetSound wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetSound(sound *Sound) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
+// BackgroundColor wraps the corresponding Objective-C method.
 func (x *ButtonCell) BackgroundColor() *Color {
-	_r := x.inner.BackgroundColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return ColorFromID(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *ButtonCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+// SetBackgroundColor wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetBackgroundColor(backgroundColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// Sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
-//
-// SetAlternateTitleWithMnemonic calls the underlying SetAlternateTitleWithMnemonic.
+// SetAlternateTitleWithMnemonic sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
 func (x *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) {
-	x.inner.SetAlternateTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
 
-// Sets the character in the alternate title that should be the “keyboard mnemonic.”
-//
-// SetAlternateMnemonicLocation calls the underlying SetAlternateMnemonicLocation.
-func (x *ButtonCell) SetAlternateMnemonicLocation(location uint) {
-	x.inner.SetAlternateMnemonicLocation(location)
+// SetAlternateMnemonicLocation sets the character in the alternate title that should be the “keyboard mnemonic.”
+func (x *ButtonCell) SetAlternateMnemonicLocation(location int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateMnemonicLocation:"), location)
 }
 
-// Returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
-//
-// AlternateMnemonicLocation calls the underlying AlternateMnemonicLocation.
-func (x *ButtonCell) AlternateMnemonicLocation() uint {
-	return x.inner.AlternateMnemonicLocation()
+// AlternateMnemonicLocation returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
+func (x *ButtonCell) AlternateMnemonicLocation() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alternateMnemonicLocation"))
+	return _r
 }
 
-// Returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
-//
-// AlternateMnemonic calls the underlying AlternateMnemonic.
+// AlternateMnemonic returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
 func (x *ButtonCell) AlternateMnemonic() string {
-	_r := x.inner.AlternateMnemonic()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateMnemonic"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Sets by name and size of the font used to draw the key equivalent.
-//
-// SetKeyEquivalentFontSize calls the underlying SetKeyEquivalentFontSize.
+// SetKeyEquivalentFontSize sets by name and size of the font used to draw the key equivalent.
 func (x *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64) {
-	x.inner.SetKeyEquivalentFontSize(foundation.NSStringStringWithUTF8String(fontName), fontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:size:"), purego.NSString(fontName), fontSize)
 }
 
-// GradientType calls the underlying GradientType.
-func (x *ButtonCell) GradientType() NSGradientType {
-	return NSGradientType(x.inner.GradientType())
+// GradientType wraps the corresponding Objective-C method.
+func (x *ButtonCell) GradientType() GradientType {
+	_r := objc.Send[GradientType](objref.IDOf(x), objc.RegisterName("gradientType"))
+	return _r
 }
 
-// SetGradientType calls the underlying SetGradientType.
-func (x *ButtonCell) SetGradientType(gradientType NSGradientType) {
-	x.inner.SetGradientType(raw.NSGradientType(gradientType))
+// SetGradientType wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetGradientType(gradientType GradientType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientType:"), gradientType)
 }
 
-// KeyEquivalentFont calls the underlying KeyEquivalentFont.
+// KeyEquivalentFont wraps the corresponding Objective-C method.
 func (x *ButtonCell) KeyEquivalentFont() *Font {
-	_r := x.inner.KeyEquivalentFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyEquivalentFont"))
+	return FontFromID(_r)
 }
 
-// SetKeyEquivalentFont calls the underlying SetKeyEquivalentFont.
-func (x *ButtonCell) SetKeyEquivalentFont(keyEquivalentFont *raw.NSFont) {
-	x.inner.SetKeyEquivalentFont(keyEquivalentFont)
+// SetKeyEquivalentFont wraps the corresponding Objective-C method.
+func (x *ButtonCell) SetKeyEquivalentFont(keyEquivalentFont *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 }
-
-func (x *ButtonCell) asButtonCell() *raw.NSButtonCell { return x.inner }
-
-func (x *ButtonCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *ButtonCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // ButtonCellable is the interface implemented by [ButtonCell], for mocking and DI.
 type ButtonCellable interface {
-	Unwrap() *raw.NSButtonCell
-	WithBezelStyle(bezelStyle NSBezelStyle) *ButtonCell
-	WithHighlightsBy(highlightsBy NSCellStyleMask) *ButtonCell
-	WithShowsStateBy(showsStateBy NSCellStyleMask) *ButtonCell
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell
+	obj.Object
+	WithBezelStyle(bezelStyle BezelStyle) *ButtonCell
+	WithHighlightsBy(highlightsBy CellStyleMask) *ButtonCell
+	WithShowsStateBy(showsStateBy CellStyleMask) *ButtonCell
+	WithAttributedTitle(attributedTitle obj.Object) *ButtonCell
 	WithAlternateTitle(alternateTitle string) *ButtonCell
-	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell
+	WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *ButtonCell
 	WithAlternateImage(alternateImage *Image) *ButtonCell
-	WithImagePosition(imagePosition NSCellImagePosition) *ButtonCell
-	WithImageScaling(imageScaling NSImageScaling) *ButtonCell
+	WithImagePosition(imagePosition CellImagePosition) *ButtonCell
+	WithImageScaling(imageScaling ImageScaling) *ButtonCell
 	WithKeyEquivalent(keyEquivalent string) *ButtonCell
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *ButtonCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *ButtonCell
 	WithTransparent(transparent bool) *ButtonCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell
 	WithSound(sound *Sound) *ButtonCell
 	WithBackgroundColor(backgroundColor *Color) *ButtonCell
-	WithGradientType(gradientType NSGradientType) *ButtonCell
+	WithGradientType(gradientType GradientType) *ButtonCell
 	WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell
 	WithControlView(controlView ViewProvider) *ButtonCell
-	WithType(type_ NSCellType) *ButtonCell
+	WithType(type_ CellType) *ButtonCell
 	WithState(state int) *ButtonCell
-	WithTarget(target objc.ID) *ButtonCell
-	WithAction(action objc.SEL) *ButtonCell
+	WithTarget(target obj.Object) *ButtonCell
 	WithTag(tag int) *ButtonCell
 	WithTitle(title string) *ButtonCell
 	WithEnabled(enabled bool) *ButtonCell
@@ -884,64 +736,64 @@ type ButtonCellable interface {
 	WithBezeled(bezeled bool) *ButtonCell
 	WithScrollable(scrollable bool) *ButtonCell
 	WithHighlighted(highlighted bool) *ButtonCell
-	WithAlignment(alignment NSTextAlignment) *ButtonCell
+	WithAlignment(alignment TextAlignment) *ButtonCell
 	WithWraps(wraps bool) *ButtonCell
 	WithFont(font *Font) *ButtonCell
-	WithFormatter(formatter *foundation.NSFormatter) *ButtonCell
-	WithObjectValue(objectValue objc.ID) *ButtonCell
+	WithFormatter(formatter obj.Object) *ButtonCell
+	WithObjectValue(objectValue obj.Object) *ButtonCell
 	WithStringValue(stringValue string) *ButtonCell
 	WithIntValue(intValue int) *ButtonCell
 	WithFloatValue(floatValue float32) *ButtonCell
 	WithDoubleValue(doubleValue float64) *ButtonCell
 	WithIntegerValue(integerValue int) *ButtonCell
 	WithImage(image *Image) *ButtonCell
-	WithControlSize(controlSize NSControlSize) *ButtonCell
-	WithRepresentedObject(representedObject objc.ID) *ButtonCell
+	WithControlSize(controlSize ControlSize) *ButtonCell
+	WithRepresentedObject(representedObject obj.Object) *ButtonCell
 	WithMenu(menu *Menu) *ButtonCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ButtonCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ButtonCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ButtonCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ButtonCell
 	WithAllowsUndo(allowsUndo bool) *ButtonCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ButtonCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ButtonCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell
-	WithFocusRingType(focusRingType NSFocusRingType) *ButtonCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell
+	WithFocusRingType(focusRingType FocusRingType) *ButtonCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *ButtonCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell
 	WithImportsGraphics(importsGraphics bool) *ButtonCell
 	WithAllowsMixedState(allowsMixedState bool) *ButtonCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ButtonCell
-	WithControlTint(controlTint NSControlTint) *ButtonCell
-	SetButtonType(type_ NSButtonType)
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ButtonCell
+	WithControlTint(controlTint ControlTint) *ButtonCell
+	SetButtonType(type_ ButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
-	MouseEntered(event *raw.NSEvent)
-	MouseExited(event *raw.NSEvent)
-	DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView)
-	DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView)
-	DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect
-	BezelStyle() NSBezelStyle
-	SetBezelStyle(bezelStyle NSBezelStyle)
-	HighlightsBy() NSCellStyleMask
-	SetHighlightsBy(highlightsBy NSCellStyleMask)
-	ShowsStateBy() NSCellStyleMask
-	SetShowsStateBy(showsStateBy NSCellStyleMask)
-	AttributedTitle() *foundation.NSAttributedString
-	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	MouseEntered(event *Event)
+	MouseExited(event *Event)
+	DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *View)
+	DrawImageWithFrameInView(image *Image, frame corefoundation.CGRect, controlView *View)
+	DrawTitleWithFrameInView(title obj.Object, frame corefoundation.CGRect, controlView *View) corefoundation.CGRect
+	BezelStyle() BezelStyle
+	SetBezelStyle(bezelStyle BezelStyle)
+	HighlightsBy() CellStyleMask
+	SetHighlightsBy(highlightsBy CellStyleMask)
+	ShowsStateBy() CellStyleMask
+	SetShowsStateBy(showsStateBy CellStyleMask)
+	AttributedTitle() obj.Object
+	SetAttributedTitle(attributedTitle obj.Object)
 	AlternateTitle() string
 	SetAlternateTitle(alternateTitle string)
-	AttributedAlternateTitle() *foundation.NSAttributedString
-	SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString)
+	AttributedAlternateTitle() obj.Object
+	SetAttributedAlternateTitle(attributedAlternateTitle obj.Object)
 	AlternateImage() *Image
-	SetAlternateImage(alternateImage *raw.NSImage)
-	ImagePosition() NSCellImagePosition
-	SetImagePosition(imagePosition NSCellImagePosition)
-	ImageScaling() NSImageScaling
-	SetImageScaling(imageScaling NSImageScaling)
+	SetAlternateImage(alternateImage *Image)
+	ImagePosition() CellImagePosition
+	SetImagePosition(imagePosition CellImagePosition)
+	ImageScaling() ImageScaling
+	SetImageScaling(imageScaling ImageScaling)
 	SetKeyEquivalent(keyEquivalent string)
-	KeyEquivalentModifierMask() NSEventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags)
+	KeyEquivalentModifierMask() EventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags)
 	IsTransparent() bool
 	SetTransparent(transparent bool)
 	ImageDimsWhenDisabled() bool
@@ -949,18 +801,29 @@ type ButtonCellable interface {
 	ShowsBorderOnlyWhileMouseInside() bool
 	SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool)
 	Sound() *Sound
-	SetSound(sound *raw.NSSound)
+	SetSound(sound *Sound)
 	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *raw.NSColor)
+	SetBackgroundColor(backgroundColor *Color)
 	SetAlternateTitleWithMnemonic(stringWithAmpersand string)
-	SetAlternateMnemonicLocation(location uint)
-	AlternateMnemonicLocation() uint
+	SetAlternateMnemonicLocation(location int)
+	AlternateMnemonicLocation() int
 	AlternateMnemonic() string
 	SetKeyEquivalentFontSize(fontName string, fontSize float64)
-	GradientType() NSGradientType
-	SetGradientType(gradientType NSGradientType)
+	GradientType() GradientType
+	SetGradientType(gradientType GradientType)
 	KeyEquivalentFont() *Font
-	SetKeyEquivalentFont(keyEquivalentFont *raw.NSFont)
+	SetKeyEquivalentFont(keyEquivalentFont *Font)
 }
 
 var _ ButtonCellable = (*ButtonCell)(nil)
+
+// isButtonCell marks ButtonCell — and, by embedding promotion, its
+// subclasses — as a member of the ButtonCell hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ButtonCell) isButtonCell() {}
+
+var _ ButtonCellProvider = (*ButtonCell)(nil)
+
+var _ ActionCellProvider = (*ButtonCell)(nil)
+
+var _ CellProvider = (*ButtonCell)(nil)

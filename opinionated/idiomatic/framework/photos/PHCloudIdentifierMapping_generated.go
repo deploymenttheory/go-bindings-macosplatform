@@ -5,62 +5,83 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
+// CloudIdentifierMapping is an idiomatic wrapper over the Objective-C class PHCloudIdentifierMapping.
 //
-// CloudIdentifierMapping wraps [raw.PHCloudIdentifierMapping] with a fluent Go API.
+// An object that contains the cloud identifier result from looking up a local identifier, or an error indicating why the lookup failed.
 type CloudIdentifierMapping struct {
-	inner *raw.PHCloudIdentifierMapping
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHCloudIdentifierMapping].
-func (x *CloudIdentifierMapping) Unwrap() *raw.PHCloudIdentifierMapping { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CloudIdentifierMapping) ID() objc.ID { return x.inner.Ptr() }
-
-// CloudIdentifierMappingFromID adopts an existing object pointer as a CloudIdentifierMapping (nil for 0).
+// CloudIdentifierMappingFromID adopts an existing Objective-C object as a CloudIdentifierMapping
+// (nil for 0), retaining it and registering a release finalizer.
 func CloudIdentifierMappingFromID(id objc.ID) *CloudIdentifierMapping {
 	if id == 0 {
 		return nil
 	}
-	return &CloudIdentifierMapping{inner: raw.PHCloudIdentifierMappingFromID(id)}
+	x := &CloudIdentifierMapping{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCloudIdentifierMapping creates a new [CloudIdentifierMapping].
-func NewCloudIdentifierMapping() *CloudIdentifierMapping {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCloudIdentifierMapping")), objc.RegisterName("new"))
-	return &CloudIdentifierMapping{inner: raw.PHCloudIdentifierMappingFromID(_id)}
-}
-
-// The cloud identifier of the resource found for this local identifier
-//
-// CloudIdentifier calls the underlying CloudIdentifier.
-func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
-	_r := x.inner.CloudIdentifier()
-	if _r == nil {
+// cloudIdentifierMappingAdopt wraps an Objective-C object that this code just created as a
+// CloudIdentifierMapping (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cloudIdentifierMappingAdopt(id objc.ID) *CloudIdentifierMapping {
+	if id == 0 {
 		return nil
 	}
-	return &CloudIdentifier{inner: _r}
+	x := &CloudIdentifierMapping{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
-//
-// Error calls the underlying Error.
-func (x *CloudIdentifierMapping) Error() unsafe.Pointer {
-	return x.inner.Error()
+// Description returns the object's -description text.
+func (x *CloudIdentifierMapping) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CloudIdentifierMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CloudIdentifierMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CloudIdentifierMapping) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCloudIdentifierMapping creates a new CloudIdentifierMapping.
+func NewCloudIdentifierMapping() *CloudIdentifierMapping {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifierMapping")), objc.RegisterName("new"))
+	return cloudIdentifierMappingAdopt(_id)
+}
+
+// CloudIdentifier the cloud identifier of the resource found for this local identifier
+func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifier"))
+	return CloudIdentifierFromID(_r)
 }
 
 // CloudIdentifierMappingable is the interface implemented by [CloudIdentifierMapping], for mocking and DI.
 type CloudIdentifierMappingable interface {
-	Unwrap() *raw.PHCloudIdentifierMapping
+	obj.Object
 	CloudIdentifier() *CloudIdentifier
-	Error() unsafe.Pointer
 }
 
 var _ CloudIdentifierMappingable = (*CloudIdentifierMapping)(nil)

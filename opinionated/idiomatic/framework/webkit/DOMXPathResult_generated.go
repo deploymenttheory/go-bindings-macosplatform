@@ -5,116 +5,124 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMXPathResult wraps [raw.DOMXPathResult] with a fluent Go API.
+// DOMXPathResult is an idiomatic wrapper over the Objective-C class DOMXPathResult.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMXPathResult struct {
-	inner *raw.DOMXPathResult
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMXPathResult].
-func (x *DOMXPathResult) Unwrap() *raw.DOMXPathResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMXPathResult) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMXPathResultFromID adopts an existing object pointer as a DOMXPathResult (nil for 0).
+// DOMXPathResultFromID adopts an existing Objective-C object as a DOMXPathResult
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMXPathResultFromID(id objc.ID) *DOMXPathResult {
 	if id == 0 {
 		return nil
 	}
-	return &DOMXPathResult{inner: raw.DOMXPathResultFromID(id)}
+	x := &DOMXPathResult{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMXPathResult creates a new [DOMXPathResult].
+// dOMXPathResultAdopt wraps an Objective-C object that this code just created as a
+// DOMXPathResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMXPathResultAdopt(id objc.ID) *DOMXPathResult {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMXPathResult{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMXPathResult creates a new DOMXPathResult.
 func NewDOMXPathResult() *DOMXPathResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMXPathResult")), objc.RegisterName("new"))
-	return &DOMXPathResult{inner: raw.DOMXPathResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMXPathResult")), objc.RegisterName("new"))
+	return dOMXPathResultAdopt(_id)
 }
 
-// IterateNext calls the underlying IterateNext.
+// IterateNext wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) IterateNext() *DOMNode {
-	_r := x.inner.IterateNext()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterateNext"))
+	return DOMNodeFromID(_r)
 }
 
-// SnapshotItem calls the underlying SnapshotItem.
-func (x *DOMXPathResult) SnapshotItem(index uint) *DOMNode {
-	_r := x.inner.SnapshotItem(index)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+// SnapshotItem wraps the corresponding Objective-C method.
+func (x *DOMXPathResult) SnapshotItem(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotItem:"), index)
+	return DOMNodeFromID(_r)
 }
 
-// ResultType calls the underlying ResultType.
+// ResultType wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) ResultType() uint16 {
-	return x.inner.ResultType()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
-// NumberValue calls the underlying NumberValue.
+// NumberValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) NumberValue() float64 {
-	return x.inner.NumberValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("numberValue"))
+	return _r
 }
 
-// StringValue calls the underlying StringValue.
+// StringValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BooleanValue calls the underlying BooleanValue.
+// BooleanValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) BooleanValue() bool {
-	return x.inner.BooleanValue()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("booleanValue"))
+	return _r
 }
 
-// SingleNodeValue calls the underlying SingleNodeValue.
+// SingleNodeValue wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) SingleNodeValue() *DOMNode {
-	_r := x.inner.SingleNodeValue()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("singleNodeValue"))
+	return DOMNodeFromID(_r)
 }
 
-// InvalidIteratorState calls the underlying InvalidIteratorState.
+// InvalidIteratorState wraps the corresponding Objective-C method.
 func (x *DOMXPathResult) InvalidIteratorState() bool {
-	return x.inner.InvalidIteratorState()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("invalidIteratorState"))
+	return _r
 }
 
-// SnapshotLength calls the underlying SnapshotLength.
-func (x *DOMXPathResult) SnapshotLength() uint {
-	return x.inner.SnapshotLength()
-}
-
-func (x *DOMXPathResult) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMXPathResult) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// SnapshotLength wraps the corresponding Objective-C method.
+func (x *DOMXPathResult) SnapshotLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("snapshotLength"))
+	return _r
 }
 
 // DOMXPathResultable is the interface implemented by [DOMXPathResult], for mocking and DI.
 type DOMXPathResultable interface {
-	Unwrap() *raw.DOMXPathResult
+	obj.Object
 	IterateNext() *DOMNode
-	SnapshotItem(index uint) *DOMNode
+	SnapshotItem(index int) *DOMNode
 	ResultType() uint16
 	NumberValue() float64
 	StringValue() string
 	BooleanValue() bool
 	SingleNodeValue() *DOMNode
 	InvalidIteratorState() bool
-	SnapshotLength() uint
+	SnapshotLength() int
 }
 
 var _ DOMXPathResultable = (*DOMXPathResult)(nil)
+
+var _ DOMObjectProvider = (*DOMXPathResult)(nil)
+
+var _ WebScriptObjectProvider = (*DOMXPathResult)(nil)

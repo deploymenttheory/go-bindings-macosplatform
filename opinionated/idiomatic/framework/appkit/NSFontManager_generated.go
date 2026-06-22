@@ -5,481 +5,412 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The center of activity for the font-conversion system.
+// FontManager is an idiomatic wrapper over the Objective-C class NSFontManager.
 //
-// FontManager wraps [raw.NSFontManager] with a fluent Go API.
+// The center of activity for the font-conversion system.
 type FontManager struct {
-	inner *raw.NSFontManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFontManager].
-func (x *FontManager) Unwrap() *raw.NSFontManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FontManager) ID() objc.ID { return x.inner.Ptr() }
-
-// FontManagerFromID adopts an existing object pointer as a FontManager (nil for 0).
+// FontManagerFromID adopts an existing Objective-C object as a FontManager
+// (nil for 0), retaining it and registering a release finalizer.
 func FontManagerFromID(id objc.ID) *FontManager {
 	if id == 0 {
 		return nil
 	}
-	return &FontManager{inner: raw.NSFontManagerFromID(id)}
+	x := &FontManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFontManager creates a new [FontManager].
+// fontManagerAdopt wraps an Objective-C object that this code just created as a
+// FontManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fontManagerAdopt(id objc.ID) *FontManager {
+	if id == 0 {
+		return nil
+	}
+	x := &FontManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FontManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FontManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FontManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FontManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFontManager creates a new FontManager.
 func NewFontManager() *FontManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFontManager")), objc.RegisterName("new"))
-	return &FontManager{inner: raw.NSFontManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFontManager")), objc.RegisterName("new"))
+	return fontManagerAdopt(_id)
 }
 
-// A Boolean value that indicates whether the font conversion system’s Font panel and Font menu items are enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the font conversion system’s Font panel and Font menu items are enabled.
 func (x *FontManager) WithEnabled(enabled bool) *FontManager {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The action sent to the first responder when the user selects a new font from the Font panel or chooses a command from the Font menu.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *FontManager) WithAction(action objc.SEL) *FontManager {
-	x.inner.SetAction(action)
+// WithDelegate sets the property and returns the receiver so calls can be chained.
+func (x *FontManager) WithDelegate(delegate obj.Object) *FontManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *FontManager) WithDelegate(delegate objc.ID) *FontManager {
-	x.inner.SetDelegate(delegate)
+// WithTarget the object that receives action messages related to the font manager.
+func (x *FontManager) WithTarget(target obj.Object) *FontManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The object that receives action messages related to the font manager.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *FontManager) WithTarget(target objc.ID) *FontManager {
-	x.inner.SetTarget(target)
-	return x
+// SetSelectedFontIsMultiple records the specified font as the currently selected font and updates the Font panel.
+func (x *FontManager) SetSelectedFontIsMultiple(fontObj *Font, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedFont:isMultiple:"), objref.IDOf(fontObj), flag)
 }
 
-// Records the specified font as the currently selected font and updates the Font panel.
-//
-// SetSelectedFontIsMultiple calls the underlying SetSelectedFontIsMultiple.
-func (x *FontManager) SetSelectedFontIsMultiple(fontObj *raw.NSFont, flag bool) {
-	x.inner.SetSelectedFontIsMultiple(fontObj, flag)
+// SetFontMenu records the given menu as the application’s Font menu.
+func (x *FontManager) SetFontMenu(newMenu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontMenu:"), objref.IDOf(newMenu))
 }
 
-// Records the given menu as the application’s Font menu.
-//
-// SetFontMenu calls the underlying SetFontMenu.
-func (x *FontManager) SetFontMenu(newMenu *raw.NSMenu) {
-	x.inner.SetFontMenu(newMenu)
-}
-
-// Returns the menu that’s connected to the font conversion system, creating it if necessary.
-//
-// FontMenu calls the underlying FontMenu.
+// FontMenu returns the menu that’s connected to the font conversion system, creating it if necessary.
 func (x *FontManager) FontMenu(create bool) *Menu {
-	_r := x.inner.FontMenu(create)
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontMenu:"), create)
+	return MenuFromID(_r)
 }
 
-// Returns the application’s shared Font panel object, creating it if necessary.
-//
-// FontPanel calls the underlying FontPanel.
+// FontPanel returns the application’s shared Font panel object, creating it if necessary.
 func (x *FontManager) FontPanel(create bool) *FontPanel {
-	_r := x.inner.FontPanel(create)
-	if _r == nil {
-		return nil
-	}
-	return &FontPanel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontPanel:"), create)
+	return FontPanelFromID(_r)
 }
 
-// Attempts to load a font with the specified characteristics.
-//
-// FontWithFamilyTraitsWeightSize calls the underlying FontWithFamilyTraitsWeightSize.
-func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits NSFontTraitMask, weight int, size float64) *Font {
-	_r := x.inner.FontWithFamilyTraitsWeightSize(foundation.NSStringStringWithUTF8String(family), raw.NSFontTraitMask(traits), weight, size)
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// FontWithFamilyTraitsWeightSize attempts to load a font with the specified characteristics.
+func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits FontTraitMask, weight int, size float64) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontWithFamily:traits:weight:size:"), purego.NSString(family), traits, weight, size)
+	return FontFromID(_r)
 }
 
-// Returns the traits of the given font.
-//
-// TraitsOfFont calls the underlying TraitsOfFont.
-func (x *FontManager) TraitsOfFont(fontObj *raw.NSFont) NSFontTraitMask {
-	return NSFontTraitMask(x.inner.TraitsOfFont(fontObj))
+// TraitsOfFont returns the traits of the given font.
+func (x *FontManager) TraitsOfFont(fontObj *Font) FontTraitMask {
+	_r := objc.Send[FontTraitMask](objref.IDOf(x), objc.RegisterName("traitsOfFont:"), objref.IDOf(fontObj))
+	return _r
 }
 
-// Returns an approximation of the specified font’s weight.
-//
-// WeightOfFont calls the underlying WeightOfFont.
-func (x *FontManager) WeightOfFont(fontObj *raw.NSFont) int {
-	return x.inner.WeightOfFont(fontObj)
+// WeightOfFont returns an approximation of the specified font’s weight.
+func (x *FontManager) WeightOfFont(fontObj *Font) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weightOfFont:"), objref.IDOf(fontObj))
+	return _r
 }
 
-// Returns an array with one entry for each available member of a font family.
-//
-// AvailableMembersOfFontFamily calls the underlying AvailableMembersOfFontFamily.
-func (x *FontManager) AvailableMembersOfFontFamily(fam string) *foundation.NSArray[objc.ID] {
-	return x.inner.AvailableMembersOfFontFamily(foundation.NSStringStringWithUTF8String(fam))
+// AvailableMembersOfFontFamily returns an array with one entry for each available member of a font family.
+func (x *FontManager) AvailableMembersOfFontFamily(fam string) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableMembersOfFontFamily:"), purego.NSString(fam))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Converts the given font according to the object that initiated a font change, typically the Font panel or Font menu.
-//
-// ConvertFont calls the underlying ConvertFont.
-func (x *FontManager) ConvertFont(fontObj *raw.NSFont) *Font {
-	_r := x.inner.ConvertFont(fontObj)
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFont converts the given font according to the object that initiated a font change, typically the Font panel or Font menu.
+func (x *FontManager) ConvertFont(fontObj *Font) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:"), objref.IDOf(fontObj))
+	return FontFromID(_r)
 }
 
-// Returns a font object whose traits are the same as those of the given font, except for the size, which is changed to the given size.
-//
-// ConvertFontToSize calls the underlying ConvertFontToSize.
-func (x *FontManager) ConvertFontToSize(fontObj *raw.NSFont, size float64) *Font {
-	_r := x.inner.ConvertFontToSize(fontObj, size)
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFontToSize returns a font object whose traits are the same as those of the given font, except for the size, which is changed to the given size.
+func (x *FontManager) ConvertFontToSize(fontObj *Font, size float64) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:toSize:"), objref.IDOf(fontObj), size)
+	return FontFromID(_r)
 }
 
-// Returns a font whose traits are as similar as possible to those of the given font except for the typeface, which is changed to the given typeface.
-//
-// ConvertFontToFace calls the underlying ConvertFontToFace.
-func (x *FontManager) ConvertFontToFace(fontObj *raw.NSFont, typeface string) *Font {
-	_r := x.inner.ConvertFontToFace(fontObj, foundation.NSStringStringWithUTF8String(typeface))
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFontToFace returns a font whose traits are as similar as possible to those of the given font except for the typeface, which is changed to the given typeface.
+func (x *FontManager) ConvertFontToFace(fontObj *Font, typeface string) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:toFace:"), objref.IDOf(fontObj), purego.NSString(typeface))
+	return FontFromID(_r)
 }
 
-// Returns a font whose traits are as similar as possible to those of the given font except for the font family, which is changed to the given family.
-//
-// ConvertFontToFamily calls the underlying ConvertFontToFamily.
-func (x *FontManager) ConvertFontToFamily(fontObj *raw.NSFont, family string) *Font {
-	_r := x.inner.ConvertFontToFamily(fontObj, foundation.NSStringStringWithUTF8String(family))
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFontToFamily returns a font whose traits are as similar as possible to those of the given font except for the font family, which is changed to the given family.
+func (x *FontManager) ConvertFontToFamily(fontObj *Font, family string) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:toFamily:"), objref.IDOf(fontObj), purego.NSString(family))
+	return FontFromID(_r)
 }
 
-// Returns a new version of the font object containing a single additional trait.
-//
-// ConvertFontToHaveTrait calls the underlying ConvertFontToHaveTrait.
-func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
-	_r := x.inner.ConvertFontToHaveTrait(fontObj, raw.NSFontTraitMask(trait))
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFontToHaveTrait returns a new version of the font object containing a single additional trait.
+func (x *FontManager) ConvertFontToHaveTrait(fontObj *Font, trait FontTraitMask) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:toHaveTrait:"), objref.IDOf(fontObj), trait)
+	return FontFromID(_r)
 }
 
-// Returns a new version of a font object without the specified traits.
-//
-// ConvertFontToNotHaveTrait calls the underlying ConvertFontToNotHaveTrait.
-func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
-	_r := x.inner.ConvertFontToNotHaveTrait(fontObj, raw.NSFontTraitMask(trait))
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertFontToNotHaveTrait returns a new version of a font object without the specified traits.
+func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *Font, trait FontTraitMask) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertFont:toNotHaveTrait:"), objref.IDOf(fontObj), trait)
+	return FontFromID(_r)
 }
 
-// Returns a font object whose weight is greater or lesser than that of the given font.
-//
-// ConvertWeightOfFont calls the underlying ConvertWeightOfFont.
-func (x *FontManager) ConvertWeightOfFont(upFlag bool, fontObj *raw.NSFont) *Font {
-	_r := x.inner.ConvertWeightOfFont(upFlag, fontObj)
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+// ConvertWeightOfFont returns a font object whose weight is greater or lesser than that of the given font.
+func (x *FontManager) ConvertWeightOfFont(upFlag bool, fontObj *Font) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertWeight:ofFont:"), upFlag, objref.IDOf(fontObj))
+	return FontFromID(_r)
 }
 
-// A Boolean value that indicates whether a responder handled the font manager’s action message.
-//
-// SendAction calls the underlying SendAction.
+// SendAction a Boolean value that indicates whether a responder handled the font manager’s action message.
 func (x *FontManager) SendAction() bool {
-	return x.inner.SendAction()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendAction"))
+	return _r
 }
 
-// Returns a localized string with the name of the specified font family and face, if one exists.
-//
-// LocalizedNameForFamilyFace calls the underlying LocalizedNameForFamilyFace.
+// LocalizedNameForFamilyFace returns a localized string with the name of the specified font family and face, if one exists.
 func (x *FontManager) LocalizedNameForFamilyFace(family string, faceKey string) string {
-	_r := x.inner.LocalizedNameForFamilyFace(foundation.NSStringStringWithUTF8String(family), foundation.NSStringStringWithUTF8String(faceKey))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameForFamily:face:"), purego.NSString(family), purego.NSString(faceKey))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Informs the Font panel that the specified font attributes changed for the selected text.
-//
-// SetSelectedAttributesIsMultiple calls the underlying SetSelectedAttributesIsMultiple.
-func (x *FontManager) SetSelectedAttributesIsMultiple(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], flag bool) {
-	x.inner.SetSelectedAttributesIsMultiple(attributes, flag)
+// SetSelectedAttributesIsMultiple informs the Font panel that the specified font attributes changed for the selected text.
+func (x *FontManager) SetSelectedAttributesIsMultiple(attributes obj.Object, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedAttributes:isMultiple:"), objref.IDOf(attributes), flag)
 }
 
-// Converts attributes in response to an object initiating an attribute change, typically the Font panel or Font menu.
-//
-// ConvertAttributes calls the underlying ConvertAttributes.
-func (x *FontManager) ConvertAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ConvertAttributes(attributes)
+// ConvertAttributes converts attributes in response to an object initiating an attribute change, typically the Font panel or Font menu.
+func (x *FontManager) ConvertAttributes(attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertAttributes:"), objref.IDOf(attributes))
+	return obj.Wrap(_r)
 }
 
-// AvailableFontNamesMatchingFontDescriptor calls the underlying AvailableFontNamesMatchingFontDescriptor.
-func (x *FontManager) AvailableFontNamesMatchingFontDescriptor(descriptor *raw.NSFontDescriptor) *foundation.NSArray[objc.ID] {
-	return x.inner.AvailableFontNamesMatchingFontDescriptor(descriptor)
+// AvailableFontNamesMatchingFontDescriptor wraps the corresponding Objective-C method.
+func (x *FontManager) AvailableFontNamesMatchingFontDescriptor(descriptor *FontDescriptor) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableFontNamesMatchingFontDescriptor:"), objref.IDOf(descriptor))
+	return obj.Wrap(_r)
 }
 
-// FontDescriptorsInCollection calls the underlying FontDescriptorsInCollection.
-func (x *FontManager) FontDescriptorsInCollection(collectionNames string) *foundation.NSArray[objc.ID] {
-	return x.inner.FontDescriptorsInCollection(foundation.NSStringStringWithUTF8String(collectionNames))
+// FontDescriptorsInCollection wraps the corresponding Objective-C method.
+func (x *FontManager) FontDescriptorsInCollection(collectionNames string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptorsInCollection:"), purego.NSString(collectionNames))
+	return obj.Wrap(_r)
 }
 
-// AddCollectionOptions calls the underlying AddCollectionOptions.
-func (x *FontManager) AddCollectionOptions(collectionName string, collectionOptions NSFontCollectionOptions) bool {
-	return x.inner.AddCollectionOptions(foundation.NSStringStringWithUTF8String(collectionName), raw.NSFontCollectionOptions(collectionOptions))
+// AddCollectionOptions wraps the corresponding Objective-C method.
+func (x *FontManager) AddCollectionOptions(collectionName string, collectionOptions FontCollectionOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addCollection:options:"), purego.NSString(collectionName), collectionOptions)
+	return _r
 }
 
-// RemoveCollection calls the underlying RemoveCollection.
+// RemoveCollection wraps the corresponding Objective-C method.
 func (x *FontManager) RemoveCollection(collectionName string) bool {
-	return x.inner.RemoveCollection(foundation.NSStringStringWithUTF8String(collectionName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeCollection:"), purego.NSString(collectionName))
+	return _r
 }
 
-// AddFontDescriptorsToCollection calls the underlying AddFontDescriptorsToCollection.
-func (x *FontManager) AddFontDescriptorsToCollection(descriptors *foundation.NSArray[objc.ID], collectionName string) {
-	x.inner.AddFontDescriptorsToCollection(descriptors, foundation.NSStringStringWithUTF8String(collectionName))
+// AddFontDescriptorsToCollection wraps the corresponding Objective-C method.
+func (x *FontManager) AddFontDescriptorsToCollection(descriptors obj.Object, collectionName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFontDescriptors:toCollection:"), objref.IDOf(descriptors), purego.NSString(collectionName))
 }
 
-// RemoveFontDescriptorFromCollection calls the underlying RemoveFontDescriptorFromCollection.
-func (x *FontManager) RemoveFontDescriptorFromCollection(descriptor *raw.NSFontDescriptor, collection string) {
-	x.inner.RemoveFontDescriptorFromCollection(descriptor, foundation.NSStringStringWithUTF8String(collection))
+// RemoveFontDescriptorFromCollection wraps the corresponding Objective-C method.
+func (x *FontManager) RemoveFontDescriptorFromCollection(descriptor *FontDescriptor, collection string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFontDescriptor:fromCollection:"), objref.IDOf(descriptor), purego.NSString(collection))
 }
 
-// Converts font traits to a new traits mask value.
-//
-// ConvertFontTraits calls the underlying ConvertFontTraits.
-func (x *FontManager) ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask {
-	return NSFontTraitMask(x.inner.ConvertFontTraits(raw.NSFontTraitMask(traits)))
+// ConvertFontTraits converts font traits to a new traits mask value.
+func (x *FontManager) ConvertFontTraits(traits FontTraitMask) FontTraitMask {
+	_r := objc.Send[FontTraitMask](objref.IDOf(x), objc.RegisterName("convertFontTraits:"), traits)
+	return _r
 }
 
-// IsMultiple calls the underlying IsMultiple.
+// IsMultiple wraps the corresponding Objective-C method.
 func (x *FontManager) IsMultiple() bool {
-	return x.inner.IsMultiple()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiple"))
+	return _r
 }
 
-// SelectedFont calls the underlying SelectedFont.
+// SelectedFont wraps the corresponding Objective-C method.
 func (x *FontManager) SelectedFont() *Font {
-	_r := x.inner.SelectedFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedFont"))
+	return FontFromID(_r)
 }
 
+// AvailableFonts wraps the corresponding Objective-C method.
+//
 // AvailableFonts returns the collection as a Go slice.
 func (x *FontManager) AvailableFonts() []string {
-	arr := x.inner.AvailableFonts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableFonts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// AvailableFontFamilies wraps the corresponding Objective-C method.
+//
 // AvailableFontFamilies returns the collection as a Go slice.
 func (x *FontManager) AvailableFontFamilies() []string {
-	arr := x.inner.AvailableFontFamilies()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableFontFamilies"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled wraps the corresponding Objective-C method.
 func (x *FontManager) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *FontManager) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Action calls the underlying Action.
-func (x *FontManager) Action() objc.SEL {
-	return x.inner.Action()
+// Delegate wraps the corresponding Objective-C method.
+func (x *FontManager) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetAction calls the underlying SetAction.
-func (x *FontManager) SetAction(action objc.SEL) {
-	x.inner.SetAction(action)
+// SetDelegate wraps the corresponding Objective-C method.
+func (x *FontManager) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *FontManager) Delegate() objc.ID {
-	return x.inner.Delegate()
+// CollectionNames wraps the corresponding Objective-C method.
+func (x *FontManager) CollectionNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectionNames"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *FontManager) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+// CurrentFontAction wraps the corresponding Objective-C method.
+func (x *FontManager) CurrentFontAction() FontAction {
+	_r := objc.Send[FontAction](objref.IDOf(x), objc.RegisterName("currentFontAction"))
+	return _r
 }
 
-// CollectionNames calls the underlying CollectionNames.
-func (x *FontManager) CollectionNames() *foundation.NSArray[objc.ID] {
-	return x.inner.CollectionNames()
+// Target wraps the corresponding Objective-C method.
+func (x *FontManager) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return obj.Wrap(_r)
 }
 
-// CurrentFontAction calls the underlying CurrentFontAction.
-func (x *FontManager) CurrentFontAction() NSFontAction {
-	return NSFontAction(x.inner.CurrentFontAction())
+// SetTarget wraps the corresponding Objective-C method.
+func (x *FontManager) SetTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// Target calls the underlying Target.
-func (x *FontManager) Target() objc.ID {
-	return x.inner.Target()
+// FontNamedHasTraits indicates whether the given font has all the specified traits.
+func (x *FontManager) FontNamedHasTraits(fName string, someTraits FontTraitMask) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fontNamed:hasTraits:"), purego.NSString(fName), someTraits)
+	return _r
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *FontManager) SetTarget(target objc.ID) {
-	x.inner.SetTarget(target)
+// AvailableFontNamesWithTraits returns the names of the fonts available in the system whose traits are described exactly by the given font trait mask (not the NSFont objects themselves).
+func (x *FontManager) AvailableFontNamesWithTraits(someTraits FontTraitMask) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableFontNamesWithTraits:"), someTraits)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Indicates whether the given font has all the specified traits.
-//
-// FontNamedHasTraits calls the underlying FontNamedHasTraits.
-func (x *FontManager) FontNamedHasTraits(fName string, someTraits NSFontTraitMask) bool {
-	return x.inner.FontNamedHasTraits(foundation.NSStringStringWithUTF8String(fName), raw.NSFontTraitMask(someTraits))
+// AddFontTrait adds a trait to the font.
+func (x *FontManager) AddFontTrait(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFontTrait:"), objref.IDOf(sender))
 }
 
-// Returns the names of the fonts available in the system whose traits are described exactly by the given font trait mask (not the NSFont objects themselves).
-//
-// AvailableFontNamesWithTraits calls the underlying AvailableFontNamesWithTraits.
-func (x *FontManager) AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.AvailableFontNamesWithTraits(raw.NSFontTraitMask(someTraits))
+// RemoveFontTrait removes a trait from the font.
+func (x *FontManager) RemoveFontTrait(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFontTrait:"), objref.IDOf(sender))
 }
 
-// Adds a trait to the font.
-//
-// AddFontTrait calls the underlying AddFontTrait.
-func (x *FontManager) AddFontTrait(sender objc.ID) {
-	x.inner.AddFontTrait(sender)
+// ModifyFontViaPanel modifies a font trait using input from the Font panel.
+func (x *FontManager) ModifyFontViaPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifyFontViaPanel:"), objref.IDOf(sender))
 }
 
-// Removes a trait from the font.
-//
-// RemoveFontTrait calls the underlying RemoveFontTrait.
-func (x *FontManager) RemoveFontTrait(sender objc.ID) {
-	x.inner.RemoveFontTrait(sender)
+// ModifyFont modifies a trait of the font.
+func (x *FontManager) ModifyFont(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifyFont:"), objref.IDOf(sender))
 }
 
-// Modifies a font trait using input from the Font panel.
-//
-// ModifyFontViaPanel calls the underlying ModifyFontViaPanel.
-func (x *FontManager) ModifyFontViaPanel(sender objc.ID) {
-	x.inner.ModifyFontViaPanel(sender)
+// OrderFrontFontPanel opens the Font panel, creating it if necessary, and displays that panel in front of the app’s windows.
+func (x *FontManager) OrderFrontFontPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontFontPanel:"), objref.IDOf(sender))
 }
 
-// Modifies a trait of the font.
-//
-// ModifyFont calls the underlying ModifyFont.
-func (x *FontManager) ModifyFont(sender objc.ID) {
-	x.inner.ModifyFont(sender)
-}
-
-// Opens the Font panel, creating it if necessary, and displays that panel in front of the app’s windows.
-//
-// OrderFrontFontPanel calls the underlying OrderFrontFontPanel.
-func (x *FontManager) OrderFrontFontPanel(sender objc.ID) {
-	x.inner.OrderFrontFontPanel(sender)
-}
-
-// Opens the Font Styles panel.
-//
-// OrderFrontStylesPanel calls the underlying OrderFrontStylesPanel.
-func (x *FontManager) OrderFrontStylesPanel(sender objc.ID) {
-	x.inner.OrderFrontStylesPanel(sender)
+// OrderFrontStylesPanel opens the Font Styles panel.
+func (x *FontManager) OrderFrontStylesPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontStylesPanel:"), objref.IDOf(sender))
 }
 
 // FontManagerable is the interface implemented by [FontManager], for mocking and DI.
 type FontManagerable interface {
-	Unwrap() *raw.NSFontManager
+	obj.Object
 	WithEnabled(enabled bool) *FontManager
-	WithAction(action objc.SEL) *FontManager
-	WithDelegate(delegate objc.ID) *FontManager
-	WithTarget(target objc.ID) *FontManager
-	SetSelectedFontIsMultiple(fontObj *raw.NSFont, flag bool)
-	SetFontMenu(newMenu *raw.NSMenu)
+	WithDelegate(delegate obj.Object) *FontManager
+	WithTarget(target obj.Object) *FontManager
+	SetSelectedFontIsMultiple(fontObj *Font, flag bool)
+	SetFontMenu(newMenu *Menu)
 	FontMenu(create bool) *Menu
 	FontPanel(create bool) *FontPanel
-	FontWithFamilyTraitsWeightSize(family string, traits NSFontTraitMask, weight int, size float64) *Font
-	TraitsOfFont(fontObj *raw.NSFont) NSFontTraitMask
-	WeightOfFont(fontObj *raw.NSFont) int
-	AvailableMembersOfFontFamily(fam string) *foundation.NSArray[objc.ID]
-	ConvertFont(fontObj *raw.NSFont) *Font
-	ConvertFontToSize(fontObj *raw.NSFont, size float64) *Font
-	ConvertFontToFace(fontObj *raw.NSFont, typeface string) *Font
-	ConvertFontToFamily(fontObj *raw.NSFont, family string) *Font
-	ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font
-	ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font
-	ConvertWeightOfFont(upFlag bool, fontObj *raw.NSFont) *Font
+	FontWithFamilyTraitsWeightSize(family string, traits FontTraitMask, weight int, size float64) *Font
+	TraitsOfFont(fontObj *Font) FontTraitMask
+	WeightOfFont(fontObj *Font) int
+	AvailableMembersOfFontFamily(fam string) []obj.Object
+	ConvertFont(fontObj *Font) *Font
+	ConvertFontToSize(fontObj *Font, size float64) *Font
+	ConvertFontToFace(fontObj *Font, typeface string) *Font
+	ConvertFontToFamily(fontObj *Font, family string) *Font
+	ConvertFontToHaveTrait(fontObj *Font, trait FontTraitMask) *Font
+	ConvertFontToNotHaveTrait(fontObj *Font, trait FontTraitMask) *Font
+	ConvertWeightOfFont(upFlag bool, fontObj *Font) *Font
 	SendAction() bool
 	LocalizedNameForFamilyFace(family string, faceKey string) string
-	SetSelectedAttributesIsMultiple(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], flag bool)
-	ConvertAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	AvailableFontNamesMatchingFontDescriptor(descriptor *raw.NSFontDescriptor) *foundation.NSArray[objc.ID]
-	FontDescriptorsInCollection(collectionNames string) *foundation.NSArray[objc.ID]
-	AddCollectionOptions(collectionName string, collectionOptions NSFontCollectionOptions) bool
+	SetSelectedAttributesIsMultiple(attributes obj.Object, flag bool)
+	ConvertAttributes(attributes obj.Object) obj.Object
+	AvailableFontNamesMatchingFontDescriptor(descriptor *FontDescriptor) obj.Object
+	FontDescriptorsInCollection(collectionNames string) obj.Object
+	AddCollectionOptions(collectionName string, collectionOptions FontCollectionOptions) bool
 	RemoveCollection(collectionName string) bool
-	AddFontDescriptorsToCollection(descriptors *foundation.NSArray[objc.ID], collectionName string)
-	RemoveFontDescriptorFromCollection(descriptor *raw.NSFontDescriptor, collection string)
-	ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask
+	AddFontDescriptorsToCollection(descriptors obj.Object, collectionName string)
+	RemoveFontDescriptorFromCollection(descriptor *FontDescriptor, collection string)
+	ConvertFontTraits(traits FontTraitMask) FontTraitMask
 	IsMultiple() bool
 	SelectedFont() *Font
 	AvailableFonts() []string
 	AvailableFontFamilies() []string
 	IsEnabled() bool
 	SetEnabled(enabled bool)
-	Action() objc.SEL
-	SetAction(action objc.SEL)
-	Delegate() objc.ID
-	SetDelegate(delegate objc.ID)
-	CollectionNames() *foundation.NSArray[objc.ID]
-	CurrentFontAction() NSFontAction
-	Target() objc.ID
-	SetTarget(target objc.ID)
-	FontNamedHasTraits(fName string, someTraits NSFontTraitMask) bool
-	AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString]
-	AddFontTrait(sender objc.ID)
-	RemoveFontTrait(sender objc.ID)
-	ModifyFontViaPanel(sender objc.ID)
-	ModifyFont(sender objc.ID)
-	OrderFrontFontPanel(sender objc.ID)
-	OrderFrontStylesPanel(sender objc.ID)
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
+	CollectionNames() obj.Object
+	CurrentFontAction() FontAction
+	Target() obj.Object
+	SetTarget(target obj.Object)
+	FontNamedHasTraits(fName string, someTraits FontTraitMask) bool
+	AvailableFontNamesWithTraits(someTraits FontTraitMask) []string
+	AddFontTrait(sender obj.Object)
+	RemoveFontTrait(sender obj.Object)
+	ModifyFontViaPanel(sender obj.Object)
+	ModifyFont(sender obj.Object)
+	OrderFrontFontPanel(sender obj.Object)
+	OrderFrontStylesPanel(sender obj.Object)
 }
 
 var _ FontManagerable = (*FontManager)(nil)

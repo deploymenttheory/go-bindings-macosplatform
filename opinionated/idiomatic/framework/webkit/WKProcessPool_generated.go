@@ -5,41 +5,76 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An opaque token that you use to run multiple web views in a single process.
+// WKProcessPool is an idiomatic wrapper over the Objective-C class WKProcessPool.
 //
-// WKProcessPool wraps [raw.WKProcessPool] with a fluent Go API.
+// An opaque token that you use to run multiple web views in a single process.
 type WKProcessPool struct {
-	inner *raw.WKProcessPool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKProcessPool].
-func (x *WKProcessPool) Unwrap() *raw.WKProcessPool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKProcessPool) ID() objc.ID { return x.inner.Ptr() }
-
-// WKProcessPoolFromID adopts an existing object pointer as a WKProcessPool (nil for 0).
+// WKProcessPoolFromID adopts an existing Objective-C object as a WKProcessPool
+// (nil for 0), retaining it and registering a release finalizer.
 func WKProcessPoolFromID(id objc.ID) *WKProcessPool {
 	if id == 0 {
 		return nil
 	}
-	return &WKProcessPool{inner: raw.WKProcessPoolFromID(id)}
+	x := &WKProcessPool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKProcessPool creates a new [WKProcessPool].
+// wKProcessPoolAdopt wraps an Objective-C object that this code just created as a
+// WKProcessPool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKProcessPoolAdopt(id objc.ID) *WKProcessPool {
+	if id == 0 {
+		return nil
+	}
+	x := &WKProcessPool{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKProcessPool) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKProcessPool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKProcessPool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKProcessPool) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKProcessPool creates a new WKProcessPool.
 func NewWKProcessPool() *WKProcessPool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKProcessPool")), objc.RegisterName("new"))
-	return &WKProcessPool{inner: raw.WKProcessPoolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKProcessPool")), objc.RegisterName("new"))
+	return wKProcessPoolAdopt(_id)
 }
 
 // WKProcessPoolable is the interface implemented by [WKProcessPool], for mocking and DI.
 type WKProcessPoolable interface {
-	Unwrap() *raw.WKProcessPool
+	obj.Object
 }
 
 var _ WKProcessPoolable = (*WKProcessPool)(nil)

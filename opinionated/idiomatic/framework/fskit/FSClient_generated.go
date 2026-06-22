@@ -6,71 +6,103 @@ package fskit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An interface for apps and daemons to interact with FSKit.
+// Client is an idiomatic wrapper over the Objective-C class FSClient.
 //
-// Client wraps [raw.FSClient] with a fluent Go API.
+// An interface for apps and daemons to interact with FSKit.
 type Client struct {
-	inner *raw.FSClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSClient].
-func (x *Client) Unwrap() *raw.FSClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Client) ID() objc.ID { return x.inner.Ptr() }
-
-// ClientFromID adopts an existing object pointer as a Client (nil for 0).
+// ClientFromID adopts an existing Objective-C object as a Client
+// (nil for 0), retaining it and registering a release finalizer.
 func ClientFromID(id objc.ID) *Client {
 	if id == 0 {
 		return nil
 	}
-	return &Client{inner: raw.FSClientFromID(id)}
+	x := &Client{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewClient creates a new [Client].
+// clientAdopt wraps an Objective-C object that this code just created as a
+// Client (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func clientAdopt(id objc.ID) *Client {
+	if id == 0 {
+		return nil
+	}
+	x := &Client{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Client) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Client) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Client) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Client) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewClient creates a new Client.
 func NewClient() *Client {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSClient")), objc.RegisterName("new"))
-	return &Client{inner: raw.FSClientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("new"))
+	return clientAdopt(_id)
 }
 
-// Asynchronously retrieves an list of installed file system modules.
+// FetchInstalledExtensions asynchronously retrieves an list of installed file system modules.
 //
 // FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
-func (x *Client) FetchInstalledExtensions(ctx context.Context) (*foundation.NSArray[*raw.FSModuleIdentity], error) {
+func (x *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.FSModuleIdentity]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchInstalledExtensionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.FSModuleIdentity], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchInstalledExtensionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.FSModuleIdentity]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Clientable is the interface implemented by [Client], for mocking and DI.
 type Clientable interface {
-	Unwrap() *raw.FSClient
-	FetchInstalledExtensions(ctx context.Context) (*foundation.NSArray[*raw.FSModuleIdentity], error)
+	obj.Object
+	FetchInstalledExtensions(ctx context.Context) (obj.Object, error)
 }
 
 var _ Clientable = (*Client)(nil)

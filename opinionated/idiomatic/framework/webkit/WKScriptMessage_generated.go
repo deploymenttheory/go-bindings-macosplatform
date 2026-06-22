@@ -5,94 +5,110 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that encapsulates a message sent by JavaScript code from a webpage.
+// WKScriptMessage is an idiomatic wrapper over the Objective-C class WKScriptMessage.
 //
-// WKScriptMessage wraps [raw.WKScriptMessage] with a fluent Go API.
+// An object that encapsulates a message sent by JavaScript code from a webpage.
 type WKScriptMessage struct {
-	inner *raw.WKScriptMessage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKScriptMessage].
-func (x *WKScriptMessage) Unwrap() *raw.WKScriptMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKScriptMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// WKScriptMessageFromID adopts an existing object pointer as a WKScriptMessage (nil for 0).
+// WKScriptMessageFromID adopts an existing Objective-C object as a WKScriptMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func WKScriptMessageFromID(id objc.ID) *WKScriptMessage {
 	if id == 0 {
 		return nil
 	}
-	return &WKScriptMessage{inner: raw.WKScriptMessageFromID(id)}
+	x := &WKScriptMessage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKScriptMessage creates a new [WKScriptMessage].
+// wKScriptMessageAdopt wraps an Objective-C object that this code just created as a
+// WKScriptMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKScriptMessageAdopt(id objc.ID) *WKScriptMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &WKScriptMessage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKScriptMessage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKScriptMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKScriptMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKScriptMessage) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKScriptMessage creates a new WKScriptMessage.
 func NewWKScriptMessage() *WKScriptMessage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKScriptMessage")), objc.RegisterName("new"))
-	return &WKScriptMessage{inner: raw.WKScriptMessageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKScriptMessage")), objc.RegisterName("new"))
+	return wKScriptMessageAdopt(_id)
 }
 
-// @abstract The body of the message. @discussion Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
-//
-// Body calls the underlying Body.
-func (x *WKScriptMessage) Body() objc.ID {
-	return x.inner.Body()
+// Body the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
+func (x *WKScriptMessage) Body() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("body"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The web view sending the message.
-//
-// WebView calls the underlying WebView.
+// WebView the web view sending the message.
 func (x *WKScriptMessage) WebView() *WKWebView {
-	_r := x.inner.WebView()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webView"))
+	return WKWebViewFromID(_r)
 }
 
-// @abstract The frame sending the message.
-//
-// FrameInfo calls the underlying FrameInfo.
+// FrameInfo the frame sending the message.
 func (x *WKScriptMessage) FrameInfo() *WKFrameInfo {
-	_r := x.inner.FrameInfo()
-	if _r == nil {
-		return nil
-	}
-	return &WKFrameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameInfo"))
+	return WKFrameInfoFromID(_r)
 }
 
-// @abstract The name of the message handler to which the message is sent.
-//
-// Name calls the underlying Name.
+// Name the name of the message handler to which the message is sent.
 func (x *WKScriptMessage) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The content world from which the message was sent.
-//
-// World calls the underlying World.
+// World the content world from which the message was sent.
 func (x *WKScriptMessage) World() *WKContentWorld {
-	_r := x.inner.World()
-	if _r == nil {
-		return nil
-	}
-	return &WKContentWorld{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("world"))
+	return WKContentWorldFromID(_r)
 }
 
 // WKScriptMessageable is the interface implemented by [WKScriptMessage], for mocking and DI.
 type WKScriptMessageable interface {
-	Unwrap() *raw.WKScriptMessage
-	Body() objc.ID
+	obj.Object
+	Body() obj.Object
 	WebView() *WKWebView
 	FrameInfo() *WKFrameInfo
 	Name() string

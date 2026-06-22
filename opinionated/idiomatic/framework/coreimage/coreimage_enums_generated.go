@@ -9,92 +9,98 @@ import (
 )
 
 // Constants indicating the Data Matrix code ECC version.
-type CIDataMatrixCodeECCVersion int64
+type DataMatrixCodeECCVersion int64
 
 const (
 	// Indicates error correction using convolutional code error correction with no data protection.
-	CIDataMatrixCodeECCVersion000 CIDataMatrixCodeECCVersion = 0
+	DataMatrixCodeECCVersion000 DataMatrixCodeECCVersion = 0
 	// Indicates 1/4 of the symbol is dedicated to convolutional code error correction.
-	CIDataMatrixCodeECCVersion050 CIDataMatrixCodeECCVersion = 50
+	DataMatrixCodeECCVersion050 DataMatrixCodeECCVersion = 50
 	// Indicates 1/3 of the symbol is dedicated to convolutional code error correction.
-	CIDataMatrixCodeECCVersion080 CIDataMatrixCodeECCVersion = 80
+	DataMatrixCodeECCVersion080 DataMatrixCodeECCVersion = 80
 	// Indicates 1/2 of the symbol is dedicated to convolutional code error correction.
-	CIDataMatrixCodeECCVersion100 CIDataMatrixCodeECCVersion = 100
+	DataMatrixCodeECCVersion100 DataMatrixCodeECCVersion = 100
 	// Indicates 3/4 of the symbol is dedicated to convolutional code error correction.
-	CIDataMatrixCodeECCVersion140 CIDataMatrixCodeECCVersion = 140
+	DataMatrixCodeECCVersion140 DataMatrixCodeECCVersion = 140
 	// Indicates error correction using Reed-Solomon error correction. Data protection overhead varies based on symbol size.
-	CIDataMatrixCodeECCVersion200 CIDataMatrixCodeECCVersion = 200
+	DataMatrixCodeECCVersion200 DataMatrixCodeECCVersion = 200
 )
 
-func (e CIDataMatrixCodeECCVersion) String() string {
+// String returns the DataMatrixCodeECCVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DataMatrixCodeECCVersion) String() string {
 	switch e {
-	case CIDataMatrixCodeECCVersion000:
-		return "CIDataMatrixCodeECCVersion000"
-	case CIDataMatrixCodeECCVersion050:
-		return "CIDataMatrixCodeECCVersion050"
-	case CIDataMatrixCodeECCVersion080:
-		return "CIDataMatrixCodeECCVersion080"
-	case CIDataMatrixCodeECCVersion100:
-		return "CIDataMatrixCodeECCVersion100"
-	case CIDataMatrixCodeECCVersion140:
-		return "CIDataMatrixCodeECCVersion140"
-	case CIDataMatrixCodeECCVersion200:
-		return "CIDataMatrixCodeECCVersion200"
+	case DataMatrixCodeECCVersion000:
+		return "DataMatrixCodeECCVersion000"
+	case DataMatrixCodeECCVersion050:
+		return "DataMatrixCodeECCVersion050"
+	case DataMatrixCodeECCVersion080:
+		return "DataMatrixCodeECCVersion080"
+	case DataMatrixCodeECCVersion100:
+		return "DataMatrixCodeECCVersion100"
+	case DataMatrixCodeECCVersion140:
+		return "DataMatrixCodeECCVersion140"
+	case DataMatrixCodeECCVersion200:
+		return "DataMatrixCodeECCVersion200"
 	default:
-		return fmt.Sprintf("CIDataMatrixCodeECCVersion(%d)", int64(e))
+		return fmt.Sprintf("DataMatrixCodeECCVersion(%d)", int64(e))
 	}
 }
 
 // Constants indicating the percentage of the symbol that is dedicated to error correction.
-type CIQRCodeErrorCorrectionLevel int64
+type QRCodeErrorCorrectionLevel int64
 
 const (
 	// Indicates that approximately 20% of the symbol data is dedicated to error correction.
-	CIQRCodeErrorCorrectionLevelL CIQRCodeErrorCorrectionLevel = 76
+	QRCodeErrorCorrectionLevelL QRCodeErrorCorrectionLevel = 76
 	// Indicates that approximately 37% of the symbol data is dedicated to error correction.
-	CIQRCodeErrorCorrectionLevelM CIQRCodeErrorCorrectionLevel = 77
+	QRCodeErrorCorrectionLevelM QRCodeErrorCorrectionLevel = 77
 	// Indicates that approximately 55% of the symbol data is dedicated to error correction.
-	CIQRCodeErrorCorrectionLevelQ CIQRCodeErrorCorrectionLevel = 81
+	QRCodeErrorCorrectionLevelQ QRCodeErrorCorrectionLevel = 81
 	// Indicates that approximately 65% of the symbol data is dedicated to error correction.
-	CIQRCodeErrorCorrectionLevelH CIQRCodeErrorCorrectionLevel = 72
+	QRCodeErrorCorrectionLevelH QRCodeErrorCorrectionLevel = 72
 )
 
-func (e CIQRCodeErrorCorrectionLevel) String() string {
+// String returns the QRCodeErrorCorrectionLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QRCodeErrorCorrectionLevel) String() string {
 	switch e {
-	case CIQRCodeErrorCorrectionLevelL:
-		return "CIQRCodeErrorCorrectionLevelL"
-	case CIQRCodeErrorCorrectionLevelM:
-		return "CIQRCodeErrorCorrectionLevelM"
-	case CIQRCodeErrorCorrectionLevelQ:
-		return "CIQRCodeErrorCorrectionLevelQ"
-	case CIQRCodeErrorCorrectionLevelH:
-		return "CIQRCodeErrorCorrectionLevelH"
+	case QRCodeErrorCorrectionLevelL:
+		return "QRCodeErrorCorrectionLevelL"
+	case QRCodeErrorCorrectionLevelM:
+		return "QRCodeErrorCorrectionLevelM"
+	case QRCodeErrorCorrectionLevelQ:
+		return "QRCodeErrorCorrectionLevelQ"
+	case QRCodeErrorCorrectionLevelH:
+		return "QRCodeErrorCorrectionLevelH"
 	default:
-		return fmt.Sprintf("CIQRCodeErrorCorrectionLevel(%d)", int64(e))
+		return fmt.Sprintf("QRCodeErrorCorrectionLevel(%d)", int64(e))
 	}
 }
 
 // Different ways of representing alpha.
-type CIRenderDestinationAlphaMode uint64
+type RenderDestinationAlphaMode uint64
 
 const (
 	// Designates a destination with no alpha compositing.
-	CIRenderDestinationAlphaNone CIRenderDestinationAlphaMode = 0
+	RenderDestinationAlphaNone RenderDestinationAlphaMode = 0
 	// Designates a destination that expects premultiplied alpha values.
-	CIRenderDestinationAlphaPremultiplied CIRenderDestinationAlphaMode = 1
+	RenderDestinationAlphaPremultiplied RenderDestinationAlphaMode = 1
 	// Designates a destination that expects non-premultiplied alpha values.
-	CIRenderDestinationAlphaUnpremultiplied CIRenderDestinationAlphaMode = 2
+	RenderDestinationAlphaUnpremultiplied RenderDestinationAlphaMode = 2
 )
 
-func (e CIRenderDestinationAlphaMode) String() string {
+// String returns the RenderDestinationAlphaMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RenderDestinationAlphaMode) String() string {
 	switch e {
-	case CIRenderDestinationAlphaNone:
-		return "CIRenderDestinationAlphaNone"
-	case CIRenderDestinationAlphaPremultiplied:
-		return "CIRenderDestinationAlphaPremultiplied"
-	case CIRenderDestinationAlphaUnpremultiplied:
-		return "CIRenderDestinationAlphaUnpremultiplied"
+	case RenderDestinationAlphaNone:
+		return "RenderDestinationAlphaNone"
+	case RenderDestinationAlphaPremultiplied:
+		return "RenderDestinationAlphaPremultiplied"
+	case RenderDestinationAlphaUnpremultiplied:
+		return "RenderDestinationAlphaUnpremultiplied"
 	default:
-		return fmt.Sprintf("CIRenderDestinationAlphaMode(%d)", int64(e))
+		return fmt.Sprintf("RenderDestinationAlphaMode(%d)", int64(e))
 	}
 }

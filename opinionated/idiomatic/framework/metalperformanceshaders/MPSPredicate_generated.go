@@ -5,68 +5,81 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Predicate wraps [raw.MPSPredicate] with a fluent Go API.
+// Predicate is an idiomatic wrapper over the Objective-C class MPSPredicate.
 type Predicate struct {
-	inner *raw.MPSPredicate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSPredicate].
-func (x *Predicate) Unwrap() *raw.MPSPredicate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Predicate) ID() objc.ID { return x.inner.Ptr() }
-
-// PredicateFromID adopts an existing object pointer as a Predicate (nil for 0).
+// PredicateFromID adopts an existing Objective-C object as a Predicate
+// (nil for 0), retaining it and registering a release finalizer.
 func PredicateFromID(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	return &Predicate{inner: raw.MPSPredicateFromID(id)}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a MPSPredicate object with a buffer and given offset. @param      buffer      The buffer to use as a predicate. @param      offset      Byteoffset to the predicate buffer where the predicate is stored. @result     A pointer to the newly initialized MPSPredicate object.
-//
-// NewPredicateWithBufferOffset creates a new [Predicate].
-func NewPredicateWithBufferOffset(buffer metal.MTLBuffer, offset uint) *Predicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:offset:"), buffer, offset)
-	return &Predicate{inner: raw.MPSPredicateFromID(_id)}
+// predicateAdopt wraps an Objective-C object that this code just created as a
+// Predicate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func predicateAdopt(id objc.ID) *Predicate {
+	if id == 0 {
+		return nil
+	}
+	x := &Predicate{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a MPSPredicate object for a given device. @discussion NOTE: The metal buffer used by the resulting MPSPredicate object may be shared among many MPSPredicate objects and therefore care must be used when writing to this buffer: writing to any other location in this buffer than the four bytes at the offset @ref predicateOffset results in undefined behavior. @param      device      The device the predicate is used with @result     A pointer to the newly initialized MPSPredicate object.
-//
-// NewPredicateWithDevice creates a new [Predicate].
-func NewPredicateWithDevice(device metal.MTLDevice) *Predicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &Predicate{inner: raw.MPSPredicateFromID(_id)}
+// Description returns the object's -description text.
+func (x *Predicate) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property predicateBuffer @abstract The buffer that is used as the predicate
-//
-// PredicateBuffer calls the underlying PredicateBuffer.
-func (x *Predicate) PredicateBuffer() metal.MTLBuffer {
-	return x.inner.PredicateBuffer()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Predicate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property   predicateOffset @abstract   Location of the predicate in bytes, must be multiple of four. @discussion If the uint32_t value stored at this location in @ref predicateBuffer is other than zero, then the predicate is considered to be true and the code is executed on the GPU. With this property a single MPSPredicate object can be used with multiple different predication operations. Default = 0;
-//
-// PredicateOffset calls the underlying PredicateOffset.
-func (x *Predicate) PredicateOffset() uint {
-	return x.inner.PredicateOffset()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Predicate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Predicate) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPredicate creates a new Predicate.
+func NewPredicate() *Predicate {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSPredicate")), objc.RegisterName("new"))
+	return predicateAdopt(_id)
+}
+
+// PredicateOffset location of the predicate in bytes, must be multiple of four. If the uint32_t value stored at this location in
+func (x *Predicate) PredicateOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("predicateOffset"))
+	return _r
 }
 
 // Predicateable is the interface implemented by [Predicate], for mocking and DI.
 type Predicateable interface {
-	Unwrap() *raw.MPSPredicate
-	PredicateBuffer() metal.MTLBuffer
-	PredicateOffset() uint
+	obj.Object
+	PredicateOffset() int
 }
 
 var _ Predicateable = (*Predicate)(nil)

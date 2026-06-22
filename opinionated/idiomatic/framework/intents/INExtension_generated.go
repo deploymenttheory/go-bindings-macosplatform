@@ -5,41 +5,76 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The entry point for an Intents extension.
+// Extension is an idiomatic wrapper over the Objective-C class INExtension.
 //
-// Extension wraps [raw.INExtension] with a fluent Go API.
+// The entry point for an Intents extension.
 type Extension struct {
-	inner *raw.INExtension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INExtension].
-func (x *Extension) Unwrap() *raw.INExtension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Extension) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionFromID adopts an existing object pointer as a Extension (nil for 0).
+// ExtensionFromID adopts an existing Objective-C object as a Extension
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionFromID(id objc.ID) *Extension {
 	if id == 0 {
 		return nil
 	}
-	return &Extension{inner: raw.INExtensionFromID(id)}
+	x := &Extension{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewExtension creates a new [Extension].
+// extensionAdopt wraps an Objective-C object that this code just created as a
+// Extension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionAdopt(id objc.ID) *Extension {
+	if id == 0 {
+		return nil
+	}
+	x := &Extension{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Extension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Extension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Extension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Extension) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtension creates a new Extension.
 func NewExtension() *Extension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INExtension")), objc.RegisterName("new"))
-	return &Extension{inner: raw.INExtensionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("INExtension")), objc.RegisterName("new"))
+	return extensionAdopt(_id)
 }
 
 // Extensionable is the interface implemented by [Extension], for mocking and DI.
 type Extensionable interface {
-	Unwrap() *raw.INExtension
+	obj.Object
 }
 
 var _ Extensionable = (*Extension)(nil)

@@ -6,101 +6,110 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL session task that stores downloaded data to a file.
+// URLSessionDownloadTask is an idiomatic wrapper over the Objective-C class NSURLSessionDownloadTask.
 //
-// URLSessionDownloadTask wraps [raw.NSURLSessionDownloadTask] with a fluent Go API.
+// It embeds [URLSessionTask], promoting that type's methods.
+//
+// A URL session task that stores downloaded data to a file.
 type URLSessionDownloadTask struct {
-	inner *raw.NSURLSessionDownloadTask
+	URLSessionTask
 }
 
-// Unwrap returns the underlying [raw.NSURLSessionDownloadTask].
-func (x *URLSessionDownloadTask) Unwrap() *raw.NSURLSessionDownloadTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLSessionDownloadTask) ID() objc.ID { return x.inner.Ptr() }
-
-// URLSessionDownloadTaskFromID adopts an existing object pointer as a URLSessionDownloadTask (nil for 0).
+// URLSessionDownloadTaskFromID adopts an existing Objective-C object as a URLSessionDownloadTask
+// (nil for 0), retaining it and registering a release finalizer.
 func URLSessionDownloadTaskFromID(id objc.ID) *URLSessionDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	return &URLSessionDownloadTask{inner: raw.NSURLSessionDownloadTaskFromID(id)}
+	x := &URLSessionDownloadTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewURLSessionDownloadTask creates a new [URLSessionDownloadTask].
+// uRLSessionDownloadTaskAdopt wraps an Objective-C object that this code just created as a
+// URLSessionDownloadTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLSessionDownloadTaskAdopt(id objc.ID) *URLSessionDownloadTask {
+	if id == 0 {
+		return nil
+	}
+	x := &URLSessionDownloadTask{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewURLSessionDownloadTask creates a new URLSessionDownloadTask.
 func NewURLSessionDownloadTask() *URLSessionDownloadTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionDownloadTask")), objc.RegisterName("new"))
-	return &URLSessionDownloadTask{inner: raw.NSURLSessionDownloadTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDownloadTask")), objc.RegisterName("new"))
+	return uRLSessionDownloadTaskAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *URLSessionDownloadTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetDelegate(delegate)
-	return x
-}
-
-// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDownloadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return x
 }
 
-// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return x
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDownloadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return x
 }
 
-// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
-func (x *URLSessionDownloadTask) WithTaskDescription(taskDescription string) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+func (x *URLSessionDownloadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return x
 }
 
-// WithPriority sets the priority property and returns the receiver for chaining.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDownloadTask) WithPriority(priority float32) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetPriority(priority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionDownloadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDownloadTask {
-	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
+// CancelByProducingResumeData wraps the corresponding Objective-C method.
+//
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (*Data, error) {
+func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
 	type _result struct {
 		val *Data
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CancelByProducingResumeData(func(_p0 *raw.NSData) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Data{inner: _p0}
-		}
+		_o.val = DataFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelByProducingResumeData:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -110,24 +119,19 @@ func (x *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context
 	}
 }
 
-func (x *URLSessionDownloadTask) asURLSessionTask() *raw.NSURLSessionTask {
-	return &x.inner.NSURLSessionTask
-}
-
-func (x *URLSessionDownloadTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
-
 // URLSessionDownloadTaskable is the interface implemented by [URLSessionDownloadTask], for mocking and DI.
 type URLSessionDownloadTaskable interface {
-	Unwrap() *raw.NSURLSessionDownloadTask
-	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDownloadTask
+	obj.Object
 	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask
 	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask
 	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask
-	WithTaskDescription(taskDescription string) *URLSessionDownloadTask
+	WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask
 	WithPriority(priority float32) *URLSessionDownloadTask
 	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDownloadTask
+	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask
 	CancelByProducingResumeData(ctx context.Context) (*Data, error)
 }
 
 var _ URLSessionDownloadTaskable = (*URLSessionDownloadTask)(nil)
+
+var _ URLSessionTaskProvider = (*URLSessionDownloadTask)(nil)

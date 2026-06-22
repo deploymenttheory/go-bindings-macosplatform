@@ -5,671 +5,449 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MKErrorDomain returns the string constant MKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MKErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MKErrorDomain())
-}
+// MKErrorDomain returns the string constant MKErrorDomain, for use as a dictionary key or argument.
+func MKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MKErrorDomain"))) }
 
-// MKPointOfInterestCategoryAnimalService returns the string constant MKPointOfInterestCategoryAnimalService as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryAnimalService() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryAnimalService(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryAnimalService returns the string constant MKPointOfInterestCategoryAnimalService, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAnimalService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAnimalService")))
 }
 
-// MKPointOfInterestCategoryAirport returns the string constant MKPointOfInterestCategoryAirport as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryAirport() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryAirport(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryAirport returns the string constant MKPointOfInterestCategoryAirport, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAirport() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAirport")))
 }
 
-// MKPointOfInterestCategoryAmusementPark returns the string constant MKPointOfInterestCategoryAmusementPark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryAmusementPark() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryAmusementPark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryAmusementPark returns the string constant MKPointOfInterestCategoryAmusementPark, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAmusementPark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAmusementPark")))
 }
 
-// MKPointOfInterestCategoryAquarium returns the string constant MKPointOfInterestCategoryAquarium as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryAquarium() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryAquarium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryAquarium returns the string constant MKPointOfInterestCategoryAquarium, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAquarium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAquarium")))
 }
 
-// MKPointOfInterestCategoryATM returns the string constant MKPointOfInterestCategoryATM as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryATM() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryATM(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryATM returns the string constant MKPointOfInterestCategoryATM, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryATM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryATM")))
 }
 
-// MKPointOfInterestCategoryAutomotiveRepair returns the string constant MKPointOfInterestCategoryAutomotiveRepair as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryAutomotiveRepair() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryAutomotiveRepair(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryAutomotiveRepair returns the string constant MKPointOfInterestCategoryAutomotiveRepair, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryAutomotiveRepair() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryAutomotiveRepair")))
 }
 
-// MKPointOfInterestCategoryBakery returns the string constant MKPointOfInterestCategoryBakery as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBakery() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBakery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBakery returns the string constant MKPointOfInterestCategoryBakery, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBakery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBakery")))
 }
 
-// MKPointOfInterestCategoryBank returns the string constant MKPointOfInterestCategoryBank as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBank() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBank(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBank returns the string constant MKPointOfInterestCategoryBank, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBank() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBank")))
 }
 
-// MKPointOfInterestCategoryBaseball returns the string constant MKPointOfInterestCategoryBaseball as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBaseball() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBaseball(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBaseball returns the string constant MKPointOfInterestCategoryBaseball, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBaseball() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBaseball")))
 }
 
-// MKPointOfInterestCategoryBasketball returns the string constant MKPointOfInterestCategoryBasketball as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBasketball() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBasketball(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBasketball returns the string constant MKPointOfInterestCategoryBasketball, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBasketball() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBasketball")))
 }
 
-// MKPointOfInterestCategoryBeach returns the string constant MKPointOfInterestCategoryBeach as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBeach() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBeach(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBeach returns the string constant MKPointOfInterestCategoryBeach, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBeach() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBeach")))
 }
 
-// MKPointOfInterestCategoryBeauty returns the string constant MKPointOfInterestCategoryBeauty as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBeauty() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBeauty(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBeauty returns the string constant MKPointOfInterestCategoryBeauty, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBeauty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBeauty")))
 }
 
-// MKPointOfInterestCategoryBowling returns the string constant MKPointOfInterestCategoryBowling as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBowling() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBowling(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBowling returns the string constant MKPointOfInterestCategoryBowling, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBowling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBowling")))
 }
 
-// MKPointOfInterestCategoryBrewery returns the string constant MKPointOfInterestCategoryBrewery as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryBrewery() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryBrewery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryBrewery returns the string constant MKPointOfInterestCategoryBrewery, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryBrewery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryBrewery")))
 }
 
-// MKPointOfInterestCategoryCafe returns the string constant MKPointOfInterestCategoryCafe as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryCafe() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryCafe(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryCafe returns the string constant MKPointOfInterestCategoryCafe, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryCafe() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCafe")))
 }
 
-// MKPointOfInterestCategoryCampground returns the string constant MKPointOfInterestCategoryCampground as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryCampground() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryCampground(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryCampground returns the string constant MKPointOfInterestCategoryCampground, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryCampground() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCampground")))
 }
 
-// MKPointOfInterestCategoryCarRental returns the string constant MKPointOfInterestCategoryCarRental as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryCarRental() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryCarRental(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryCarRental returns the string constant MKPointOfInterestCategoryCarRental, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryCarRental() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCarRental")))
 }
 
-// MKPointOfInterestCategoryCastle returns the string constant MKPointOfInterestCategoryCastle as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryCastle() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryCastle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryCastle returns the string constant MKPointOfInterestCategoryCastle, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryCastle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryCastle")))
 }
 
-// MKPointOfInterestCategoryConventionCenter returns the string constant MKPointOfInterestCategoryConventionCenter as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryConventionCenter() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryConventionCenter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryConventionCenter returns the string constant MKPointOfInterestCategoryConventionCenter, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryConventionCenter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryConventionCenter")))
 }
 
-// MKPointOfInterestCategoryDistillery returns the string constant MKPointOfInterestCategoryDistillery as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryDistillery() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryDistillery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryDistillery returns the string constant MKPointOfInterestCategoryDistillery, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryDistillery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryDistillery")))
 }
 
-// MKPointOfInterestCategoryEVCharger returns the string constant MKPointOfInterestCategoryEVCharger as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryEVCharger() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryEVCharger(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryEVCharger returns the string constant MKPointOfInterestCategoryEVCharger, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryEVCharger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryEVCharger")))
 }
 
-// MKPointOfInterestCategoryFairground returns the string constant MKPointOfInterestCategoryFairground as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFairground() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFairground(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFairground returns the string constant MKPointOfInterestCategoryFairground, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFairground() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFairground")))
 }
 
-// MKPointOfInterestCategoryFireStation returns the string constant MKPointOfInterestCategoryFireStation as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFireStation() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFireStation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFireStation returns the string constant MKPointOfInterestCategoryFireStation, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFireStation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFireStation")))
 }
 
-// MKPointOfInterestCategoryFishing returns the string constant MKPointOfInterestCategoryFishing as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFishing() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFishing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFishing returns the string constant MKPointOfInterestCategoryFishing, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFishing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFishing")))
 }
 
-// MKPointOfInterestCategoryFitnessCenter returns the string constant MKPointOfInterestCategoryFitnessCenter as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFitnessCenter() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFitnessCenter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFitnessCenter returns the string constant MKPointOfInterestCategoryFitnessCenter, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFitnessCenter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFitnessCenter")))
 }
 
-// MKPointOfInterestCategoryFoodMarket returns the string constant MKPointOfInterestCategoryFoodMarket as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFoodMarket() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFoodMarket(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFoodMarket returns the string constant MKPointOfInterestCategoryFoodMarket, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFoodMarket() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFoodMarket")))
 }
 
-// MKPointOfInterestCategoryFortress returns the string constant MKPointOfInterestCategoryFortress as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryFortress() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryFortress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryFortress returns the string constant MKPointOfInterestCategoryFortress, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryFortress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryFortress")))
 }
 
-// MKPointOfInterestCategoryGasStation returns the string constant MKPointOfInterestCategoryGasStation as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryGasStation() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryGasStation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryGasStation returns the string constant MKPointOfInterestCategoryGasStation, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryGasStation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryGasStation")))
 }
 
-// MKPointOfInterestCategoryGolf returns the string constant MKPointOfInterestCategoryGolf as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryGolf() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryGolf(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryGolf returns the string constant MKPointOfInterestCategoryGolf, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryGolf() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryGolf")))
 }
 
-// MKPointOfInterestCategoryGoKart returns the string constant MKPointOfInterestCategoryGoKart as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryGoKart() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryGoKart(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryGoKart returns the string constant MKPointOfInterestCategoryGoKart, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryGoKart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryGoKart")))
 }
 
-// MKPointOfInterestCategoryHiking returns the string constant MKPointOfInterestCategoryHiking as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryHiking() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryHiking(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryHiking returns the string constant MKPointOfInterestCategoryHiking, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryHiking() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryHiking")))
 }
 
-// MKPointOfInterestCategoryHospital returns the string constant MKPointOfInterestCategoryHospital as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryHospital() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryHospital(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryHospital returns the string constant MKPointOfInterestCategoryHospital, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryHospital() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryHospital")))
 }
 
-// MKPointOfInterestCategoryHotel returns the string constant MKPointOfInterestCategoryHotel as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryHotel() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryHotel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryHotel returns the string constant MKPointOfInterestCategoryHotel, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryHotel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryHotel")))
 }
 
-// MKPointOfInterestCategoryKayaking returns the string constant MKPointOfInterestCategoryKayaking as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryKayaking() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryKayaking(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryKayaking returns the string constant MKPointOfInterestCategoryKayaking, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryKayaking() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryKayaking")))
 }
 
-// MKPointOfInterestCategoryLandmark returns the string constant MKPointOfInterestCategoryLandmark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryLandmark() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryLandmark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryLandmark returns the string constant MKPointOfInterestCategoryLandmark, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryLandmark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryLandmark")))
 }
 
-// MKPointOfInterestCategoryLaundry returns the string constant MKPointOfInterestCategoryLaundry as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryLaundry() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryLaundry(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryLaundry returns the string constant MKPointOfInterestCategoryLaundry, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryLaundry() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryLaundry")))
 }
 
-// MKPointOfInterestCategoryLibrary returns the string constant MKPointOfInterestCategoryLibrary as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryLibrary() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryLibrary(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryLibrary returns the string constant MKPointOfInterestCategoryLibrary, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryLibrary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryLibrary")))
 }
 
-// MKPointOfInterestCategoryMailbox returns the string constant MKPointOfInterestCategoryMailbox as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMailbox() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMailbox(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMailbox returns the string constant MKPointOfInterestCategoryMailbox, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMailbox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMailbox")))
 }
 
-// MKPointOfInterestCategoryMarina returns the string constant MKPointOfInterestCategoryMarina as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMarina() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMarina(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMarina returns the string constant MKPointOfInterestCategoryMarina, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMarina() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMarina")))
 }
 
-// MKPointOfInterestCategoryMiniGolf returns the string constant MKPointOfInterestCategoryMiniGolf as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMiniGolf() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMiniGolf(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMiniGolf returns the string constant MKPointOfInterestCategoryMiniGolf, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMiniGolf() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMiniGolf")))
 }
 
-// MKPointOfInterestCategoryMovieTheater returns the string constant MKPointOfInterestCategoryMovieTheater as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMovieTheater() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMovieTheater(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMovieTheater returns the string constant MKPointOfInterestCategoryMovieTheater, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMovieTheater() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMovieTheater")))
 }
 
-// MKPointOfInterestCategoryMuseum returns the string constant MKPointOfInterestCategoryMuseum as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMuseum() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMuseum(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMuseum returns the string constant MKPointOfInterestCategoryMuseum, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMuseum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMuseum")))
 }
 
-// MKPointOfInterestCategoryMusicVenue returns the string constant MKPointOfInterestCategoryMusicVenue as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryMusicVenue() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryMusicVenue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryMusicVenue returns the string constant MKPointOfInterestCategoryMusicVenue, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryMusicVenue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryMusicVenue")))
 }
 
-// MKPointOfInterestCategoryNationalMonument returns the string constant MKPointOfInterestCategoryNationalMonument as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryNationalMonument() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryNationalMonument(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryNationalMonument returns the string constant MKPointOfInterestCategoryNationalMonument, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryNationalMonument() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryNationalMonument")))
 }
 
-// MKPointOfInterestCategoryNationalPark returns the string constant MKPointOfInterestCategoryNationalPark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryNationalPark() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryNationalPark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryNationalPark returns the string constant MKPointOfInterestCategoryNationalPark, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryNationalPark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryNationalPark")))
 }
 
-// MKPointOfInterestCategoryNightlife returns the string constant MKPointOfInterestCategoryNightlife as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryNightlife() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryNightlife(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryNightlife returns the string constant MKPointOfInterestCategoryNightlife, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryNightlife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryNightlife")))
 }
 
-// MKPointOfInterestCategoryPark returns the string constant MKPointOfInterestCategoryPark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPark() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPark returns the string constant MKPointOfInterestCategoryPark, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPark")))
 }
 
-// MKPointOfInterestCategoryParking returns the string constant MKPointOfInterestCategoryParking as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryParking() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryParking(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryParking returns the string constant MKPointOfInterestCategoryParking, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryParking() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryParking")))
 }
 
-// MKPointOfInterestCategoryPharmacy returns the string constant MKPointOfInterestCategoryPharmacy as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPharmacy() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPharmacy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPharmacy returns the string constant MKPointOfInterestCategoryPharmacy, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPharmacy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPharmacy")))
 }
 
-// MKPointOfInterestCategoryPlanetarium returns the string constant MKPointOfInterestCategoryPlanetarium as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPlanetarium() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPlanetarium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPlanetarium returns the string constant MKPointOfInterestCategoryPlanetarium, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPlanetarium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPlanetarium")))
 }
 
-// MKPointOfInterestCategoryPolice returns the string constant MKPointOfInterestCategoryPolice as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPolice() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPolice(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPolice returns the string constant MKPointOfInterestCategoryPolice, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPolice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPolice")))
 }
 
-// MKPointOfInterestCategoryPostOffice returns the string constant MKPointOfInterestCategoryPostOffice as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPostOffice() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPostOffice(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPostOffice returns the string constant MKPointOfInterestCategoryPostOffice, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPostOffice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPostOffice")))
 }
 
-// MKPointOfInterestCategoryPublicTransport returns the string constant MKPointOfInterestCategoryPublicTransport as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryPublicTransport() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryPublicTransport(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryPublicTransport returns the string constant MKPointOfInterestCategoryPublicTransport, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryPublicTransport() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryPublicTransport")))
 }
 
-// MKPointOfInterestCategoryRestaurant returns the string constant MKPointOfInterestCategoryRestaurant as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryRestaurant() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryRestaurant(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryRestaurant returns the string constant MKPointOfInterestCategoryRestaurant, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRestaurant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRestaurant")))
 }
 
-// MKPointOfInterestCategoryRestroom returns the string constant MKPointOfInterestCategoryRestroom as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryRestroom() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryRestroom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryRestroom returns the string constant MKPointOfInterestCategoryRestroom, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRestroom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRestroom")))
 }
 
-// MKPointOfInterestCategoryRockClimbing returns the string constant MKPointOfInterestCategoryRockClimbing as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryRockClimbing() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryRockClimbing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryRockClimbing returns the string constant MKPointOfInterestCategoryRockClimbing, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRockClimbing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRockClimbing")))
 }
 
-// MKPointOfInterestCategoryRVPark returns the string constant MKPointOfInterestCategoryRVPark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryRVPark() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryRVPark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryRVPark returns the string constant MKPointOfInterestCategoryRVPark, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryRVPark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryRVPark")))
 }
 
-// MKPointOfInterestCategorySchool returns the string constant MKPointOfInterestCategorySchool as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySchool() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySchool(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySchool returns the string constant MKPointOfInterestCategorySchool, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySchool() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySchool")))
 }
 
-// MKPointOfInterestCategorySkatePark returns the string constant MKPointOfInterestCategorySkatePark as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySkatePark() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySkatePark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySkatePark returns the string constant MKPointOfInterestCategorySkatePark, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySkatePark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySkatePark")))
 }
 
-// MKPointOfInterestCategorySkating returns the string constant MKPointOfInterestCategorySkating as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySkating() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySkating(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySkating returns the string constant MKPointOfInterestCategorySkating, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySkating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySkating")))
 }
 
-// MKPointOfInterestCategorySkiing returns the string constant MKPointOfInterestCategorySkiing as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySkiing() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySkiing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySkiing returns the string constant MKPointOfInterestCategorySkiing, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySkiing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySkiing")))
 }
 
-// MKPointOfInterestCategorySoccer returns the string constant MKPointOfInterestCategorySoccer as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySoccer() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySoccer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySoccer returns the string constant MKPointOfInterestCategorySoccer, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySoccer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySoccer")))
 }
 
-// MKPointOfInterestCategorySpa returns the string constant MKPointOfInterestCategorySpa as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySpa() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySpa(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySpa returns the string constant MKPointOfInterestCategorySpa, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySpa() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySpa")))
 }
 
-// MKPointOfInterestCategoryStadium returns the string constant MKPointOfInterestCategoryStadium as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryStadium() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryStadium(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryStadium returns the string constant MKPointOfInterestCategoryStadium, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryStadium() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryStadium")))
 }
 
-// MKPointOfInterestCategoryStore returns the string constant MKPointOfInterestCategoryStore as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryStore() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryStore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryStore returns the string constant MKPointOfInterestCategoryStore, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryStore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryStore")))
 }
 
-// MKPointOfInterestCategorySurfing returns the string constant MKPointOfInterestCategorySurfing as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySurfing() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySurfing(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySurfing returns the string constant MKPointOfInterestCategorySurfing, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySurfing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySurfing")))
 }
 
-// MKPointOfInterestCategorySwimming returns the string constant MKPointOfInterestCategorySwimming as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategorySwimming() objc.ID {
-	if _r := raw.MKPointOfInterestCategorySwimming(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategorySwimming returns the string constant MKPointOfInterestCategorySwimming, for use as a dictionary key or argument.
+func MKPointOfInterestCategorySwimming() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategorySwimming")))
 }
 
-// MKPointOfInterestCategoryTennis returns the string constant MKPointOfInterestCategoryTennis as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryTennis() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryTennis(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryTennis returns the string constant MKPointOfInterestCategoryTennis, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryTennis() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryTennis")))
 }
 
-// MKPointOfInterestCategoryTheater returns the string constant MKPointOfInterestCategoryTheater as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryTheater() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryTheater(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryTheater returns the string constant MKPointOfInterestCategoryTheater, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryTheater() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryTheater")))
 }
 
-// MKPointOfInterestCategoryUniversity returns the string constant MKPointOfInterestCategoryUniversity as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryUniversity() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryUniversity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryUniversity returns the string constant MKPointOfInterestCategoryUniversity, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryUniversity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryUniversity")))
 }
 
-// MKPointOfInterestCategoryWinery returns the string constant MKPointOfInterestCategoryWinery as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryWinery() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryWinery(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryWinery returns the string constant MKPointOfInterestCategoryWinery, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryWinery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryWinery")))
 }
 
-// MKPointOfInterestCategoryVolleyball returns the string constant MKPointOfInterestCategoryVolleyball as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryVolleyball() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryVolleyball(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryVolleyball returns the string constant MKPointOfInterestCategoryVolleyball, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryVolleyball() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryVolleyball")))
 }
 
-// MKPointOfInterestCategoryZoo returns the string constant MKPointOfInterestCategoryZoo as an objc.ID, for use as a dictionary key or selector argument.
-func MKPointOfInterestCategoryZoo() objc.ID {
-	if _r := raw.MKPointOfInterestCategoryZoo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MKPointOfInterestCategoryZoo returns the string constant MKPointOfInterestCategoryZoo, for use as a dictionary key or argument.
+func MKPointOfInterestCategoryZoo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKPointOfInterestCategoryZoo")))
 }
 
-// MKLaunchOptionsDirectionsModeKey returns the string constant MKLaunchOptionsDirectionsModeKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeKey())
+// MKLaunchOptionsDirectionsModeKey returns the string constant MKLaunchOptionsDirectionsModeKey, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeKey")))
 }
 
-// MKLaunchOptionsMapTypeKey returns the string constant MKLaunchOptionsMapTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsMapTypeKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsMapTypeKey())
+// MKLaunchOptionsMapTypeKey returns the string constant MKLaunchOptionsMapTypeKey, for use as a dictionary key or argument.
+func MKLaunchOptionsMapTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsMapTypeKey")))
 }
 
-// MKLaunchOptionsShowsTrafficKey returns the string constant MKLaunchOptionsShowsTrafficKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsShowsTrafficKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsShowsTrafficKey())
+// MKLaunchOptionsShowsTrafficKey returns the string constant MKLaunchOptionsShowsTrafficKey, for use as a dictionary key or argument.
+func MKLaunchOptionsShowsTrafficKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsShowsTrafficKey")))
 }
 
-// MKLaunchOptionsDirectionsModeDefault returns the string constant MKLaunchOptionsDirectionsModeDefault as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeDefault() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeDefault())
+// MKLaunchOptionsDirectionsModeDefault returns the string constant MKLaunchOptionsDirectionsModeDefault, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeDefault")))
 }
 
-// MKLaunchOptionsDirectionsModeDriving returns the string constant MKLaunchOptionsDirectionsModeDriving as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeDriving() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeDriving())
+// MKLaunchOptionsDirectionsModeDriving returns the string constant MKLaunchOptionsDirectionsModeDriving, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeDriving() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeDriving")))
 }
 
-// MKLaunchOptionsDirectionsModeWalking returns the string constant MKLaunchOptionsDirectionsModeWalking as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeWalking() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeWalking())
+// MKLaunchOptionsDirectionsModeWalking returns the string constant MKLaunchOptionsDirectionsModeWalking, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeWalking() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeWalking")))
 }
 
-// MKLaunchOptionsDirectionsModeTransit returns the string constant MKLaunchOptionsDirectionsModeTransit as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeTransit() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeTransit())
+// MKLaunchOptionsDirectionsModeTransit returns the string constant MKLaunchOptionsDirectionsModeTransit, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeTransit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeTransit")))
 }
 
-// MKLaunchOptionsDirectionsModeCycling returns the string constant MKLaunchOptionsDirectionsModeCycling as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsDirectionsModeCycling() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsDirectionsModeCycling())
+// MKLaunchOptionsDirectionsModeCycling returns the string constant MKLaunchOptionsDirectionsModeCycling, for use as a dictionary key or argument.
+func MKLaunchOptionsDirectionsModeCycling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsDirectionsModeCycling")))
 }
 
-// MKLaunchOptionsMapCenterKey returns the string constant MKLaunchOptionsMapCenterKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsMapCenterKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsMapCenterKey())
+// MKLaunchOptionsMapCenterKey returns the string constant MKLaunchOptionsMapCenterKey, for use as a dictionary key or argument.
+func MKLaunchOptionsMapCenterKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsMapCenterKey")))
 }
 
-// MKLaunchOptionsMapSpanKey returns the string constant MKLaunchOptionsMapSpanKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsMapSpanKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsMapSpanKey())
+// MKLaunchOptionsMapSpanKey returns the string constant MKLaunchOptionsMapSpanKey, for use as a dictionary key or argument.
+func MKLaunchOptionsMapSpanKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsMapSpanKey")))
 }
 
-// MKLaunchOptionsCameraKey returns the string constant MKLaunchOptionsCameraKey as an objc.ID, for use as a dictionary key or selector argument.
-func MKLaunchOptionsCameraKey() objc.ID {
-	return purego.CFConstant(raw.MKLaunchOptionsCameraKey())
+// MKLaunchOptionsCameraKey returns the string constant MKLaunchOptionsCameraKey, for use as a dictionary key or argument.
+func MKLaunchOptionsCameraKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKLaunchOptionsCameraKey")))
 }
 
-// MKMapItemTypeIdentifier returns the string constant MKMapItemTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MKMapItemTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MKMapItemTypeIdentifier())
+// MKMapItemTypeIdentifier returns the string constant MKMapItemTypeIdentifier, for use as a dictionary key or argument.
+func MKMapItemTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKMapItemTypeIdentifier")))
 }
 
-// MKAnnotationCalloutInfoDidChangeNotification returns the string constant MKAnnotationCalloutInfoDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func MKAnnotationCalloutInfoDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.MKAnnotationCalloutInfoDidChangeNotification())
+// MKAnnotationCalloutInfoDidChangeNotification returns the string constant MKAnnotationCalloutInfoDidChangeNotification, for use as a dictionary key or argument.
+func MKAnnotationCalloutInfoDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKAnnotationCalloutInfoDidChangeNotification")))
 }
 
-// MKMapViewDefaultAnnotationViewReuseIdentifier returns the string constant MKMapViewDefaultAnnotationViewReuseIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MKMapViewDefaultAnnotationViewReuseIdentifier() objc.ID {
-	return purego.CFConstant(raw.MKMapViewDefaultAnnotationViewReuseIdentifier())
+// MKMapViewDefaultAnnotationViewReuseIdentifier returns the string constant MKMapViewDefaultAnnotationViewReuseIdentifier, for use as a dictionary key or argument.
+func MKMapViewDefaultAnnotationViewReuseIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKMapViewDefaultAnnotationViewReuseIdentifier")))
 }
 
-// MKMapViewDefaultClusterAnnotationViewReuseIdentifier returns the string constant MKMapViewDefaultClusterAnnotationViewReuseIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MKMapViewDefaultClusterAnnotationViewReuseIdentifier() objc.ID {
-	return purego.CFConstant(raw.MKMapViewDefaultClusterAnnotationViewReuseIdentifier())
+// MKMapViewDefaultClusterAnnotationViewReuseIdentifier returns the string constant MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for use as a dictionary key or argument.
+func MKMapViewDefaultClusterAnnotationViewReuseIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MKMapViewDefaultClusterAnnotationViewReuseIdentifier")))
 }

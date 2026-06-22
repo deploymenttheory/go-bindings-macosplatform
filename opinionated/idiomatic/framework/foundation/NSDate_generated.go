@@ -5,229 +5,225 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a specific point in time, independent of any calendar or time zone.
+// Date is an idiomatic wrapper over the Objective-C class NSDate.
 //
-// Date wraps [raw.NSDate] with a fluent Go API.
+// Date is an abstract base — you do not construct it directly. Construct one of [CalendarDate] and pass it where a Date is accepted.
+//
+// A representation of a specific point in time, independent of any calendar or time zone.
 type Date struct {
-	inner *raw.NSDate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDate].
-func (x *Date) Unwrap() *raw.NSDate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Date) ID() objc.ID { return x.inner.Ptr() }
-
-// DateFromID adopts an existing object pointer as a Date (nil for 0).
+// DateFromID adopts an existing Objective-C object as a Date
+// (nil for 0), retaining it and registering a release finalizer.
 func DateFromID(id objc.ID) *Date {
 	if id == 0 {
 		return nil
 	}
-	return &Date{inner: raw.NSDateFromID(id)}
-}
-
-// NewDate creates a new [Date].
-func NewDate() *Date {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("new"))
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
-//
-// NewDateWithTimeIntervalSinceReferenceDate creates a new [Date].
-func NewDateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSinceReferenceDate:"), ti)
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized from data in the given unarchiver.
-//
-// NewDateWithCoder creates a new [Date].
-func NewDateWithCoder(coder *raw.NSCoder) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized relative to the current date and time by a given number of seconds.
-//
-// NewDateWithTimeIntervalSinceNow creates a new [Date].
-func NewDateWithTimeIntervalSinceNow(secs float64) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSinceNow:"), secs)
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
-//
-// NewDateWithTimeIntervalSince1970 creates a new [Date].
-func NewDateWithTimeIntervalSince1970(secs float64) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSince1970:"), secs)
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized relative to another given date by a given number of seconds.
-//
-// NewDateWithTimeIntervalSinceDate creates a new [Date].
-func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *raw.NSDate) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeInterval:sinceDate:"), secsToBeAdded, date.Ptr())
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// Returns a date object initialized with a date and time value specified by a given string in the international string representation format.
-//
-// NewDateWithString creates a new [Date].
-func NewDateWithString(description string) *Date {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(description).Ptr())
-	return &Date{inner: raw.NSDateFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Date) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Date {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Date{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// TimeIntervalSinceReferenceDate calls the underlying TimeIntervalSinceReferenceDate.
+// dateAdopt wraps an Objective-C object that this code just created as a
+// Date (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dateAdopt(id objc.ID) *Date {
+	if id == 0 {
+		return nil
+	}
+	x := &Date{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Date) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Date) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Date) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Date) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDateWithTimeIntervalSinceReferenceDate returns a date object initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
+func NewDateWithTimeIntervalSinceReferenceDate(ti float64) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSinceReferenceDate:"), ti)
+	return dateAdopt(_id)
+}
+
+// NewDateWithCoder returns a date object initialized from data in the given unarchiver.
+func NewDateWithCoder(coder *Coder) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return dateAdopt(_id)
+}
+
+// NewDateWithTimeIntervalSinceNow returns a date object initialized relative to the current date and time by a given number of seconds.
+func NewDateWithTimeIntervalSinceNow(secs float64) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSinceNow:"), secs)
+	return dateAdopt(_id)
+}
+
+// NewDateWithTimeIntervalSince1970 returns a date object initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
+func NewDateWithTimeIntervalSince1970(secs float64) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeIntervalSince1970:"), secs)
+	return dateAdopt(_id)
+}
+
+// NewDateWithTimeIntervalSinceDate returns a date object initialized relative to another given date by a given number of seconds.
+func NewDateWithTimeIntervalSinceDate(secsToBeAdded float64, date *Date) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeInterval:sinceDate:"), secsToBeAdded, objref.IDOf(date))
+	return dateAdopt(_id)
+}
+
+// NewDateWithString returns a date object initialized with a date and time value specified by a given string in the international string representation format.
+func NewDateWithString(description string) *Date {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(description))
+	return dateAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Date) WithScriptingProperties(scriptingProperties obj.Object) *Date {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// TimeIntervalSinceReferenceDate wraps the corresponding Objective-C method.
 func (x *Date) TimeIntervalSinceReferenceDate() float64 {
-	return x.inner.TimeIntervalSinceReferenceDate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeIntervalSinceReferenceDate"))
+	return _r
 }
 
-// Returns the interval between the receiver and another given date.
-//
-// TimeIntervalSinceDate calls the underlying TimeIntervalSinceDate.
-func (x *Date) TimeIntervalSinceDate(anotherDate *raw.NSDate) float64 {
-	return x.inner.TimeIntervalSinceDate(anotherDate)
+// TimeIntervalSinceDate returns the interval between the receiver and another given date.
+func (x *Date) TimeIntervalSinceDate(anotherDate *Date) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeIntervalSinceDate:"), objref.IDOf(anotherDate))
+	return _r
 }
 
-// Returns a new date object that is set to a given number of seconds relative to the receiver.
-//
-// AddTimeInterval calls the underlying AddTimeInterval.
-func (x *Date) AddTimeInterval(seconds float64) objc.ID {
-	return x.inner.AddTimeInterval(seconds)
+// AddTimeInterval returns a new date object that is set to a given number of seconds relative to the receiver.
+func (x *Date) AddTimeInterval(seconds float64) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTimeInterval:"), seconds)
+	return obj.Wrap(_r)
 }
 
-// Returns a new date object that is set to a given number of seconds relative to the receiver.
-//
-// DateByAddingTimeInterval calls the underlying DateByAddingTimeInterval.
+// DateByAddingTimeInterval returns a new date object that is set to a given number of seconds relative to the receiver.
 func (x *Date) DateByAddingTimeInterval(ti float64) *Date {
-	_r := x.inner.DateByAddingTimeInterval(ti)
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateByAddingTimeInterval:"), ti)
+	return DateFromID(_r)
+}
+
+// EarlierDate returns the earlier of the receiver and another given date.
+func (x *Date) EarlierDate(anotherDate *Date) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("earlierDate:"), objref.IDOf(anotherDate))
+	return DateFromID(_r)
+}
+
+// LaterDate returns the later of the receiver and another given date.
+func (x *Date) LaterDate(anotherDate *Date) *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("laterDate:"), objref.IDOf(anotherDate))
+	return DateFromID(_r)
+}
+
+// Compare indicates the temporal ordering of the receiver and another given date.
+func (x *Date) Compare(other *Date) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(other))
+	return _r
+}
+
+// IsEqualToDate returns a Boolean value that indicates whether a given object is a date that is exactly equal the receiver.
+func (x *Date) IsEqualToDate(otherDate *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToDate:"), objref.IDOf(otherDate))
+	return _r
+}
+
+// DescriptionWithLocale returns a string representation of the date using the given locale.
+func (x *Date) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &Date{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the earlier of the receiver and another given date.
-//
-// EarlierDate calls the underlying EarlierDate.
-func (x *Date) EarlierDate(anotherDate *raw.NSDate) *Date {
-	_r := x.inner.EarlierDate(anotherDate)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
-}
-
-// Returns the later of the receiver and another given date.
-//
-// LaterDate calls the underlying LaterDate.
-func (x *Date) LaterDate(anotherDate *raw.NSDate) *Date {
-	_r := x.inner.LaterDate(anotherDate)
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
-}
-
-// Indicates the temporal ordering of the receiver and another given date.
-//
-// Compare calls the underlying Compare.
-func (x *Date) Compare(other *raw.NSDate) NSComparisonResult {
-	return NSComparisonResult(x.inner.Compare(other))
-}
-
-// Returns a Boolean value that indicates whether a given object is a date that is exactly equal the receiver.
-//
-// IsEqualToDate calls the underlying IsEqualToDate.
-func (x *Date) IsEqualToDate(otherDate *raw.NSDate) bool {
-	return x.inner.IsEqualToDate(otherDate)
-}
-
-// Returns a string representation of the date using the given locale.
-//
-// DescriptionWithLocale calls the underlying DescriptionWithLocale.
-func (x *Date) DescriptionWithLocale(locale objc.ID) *String {
-	_r := x.inner.DescriptionWithLocale(locale)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// TimeIntervalSinceNow calls the underlying TimeIntervalSinceNow.
+// TimeIntervalSinceNow wraps the corresponding Objective-C method.
 func (x *Date) TimeIntervalSinceNow() float64 {
-	return x.inner.TimeIntervalSinceNow()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeIntervalSinceNow"))
+	return _r
 }
 
-// TimeIntervalSince1970 calls the underlying TimeIntervalSince1970.
+// TimeIntervalSince1970 wraps the corresponding Objective-C method.
 func (x *Date) TimeIntervalSince1970() float64 {
-	return x.inner.TimeIntervalSince1970()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeIntervalSince1970"))
+	return _r
 }
 
-// Converts the receiver to a calendar date with a given format string and time zone.
-//
-// DateWithCalendarFormatTimeZone calls the underlying DateWithCalendarFormatTimeZone.
-func (x *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTimeZone) *CalendarDate {
-	_r := x.inner.DateWithCalendarFormatTimeZone(foundation.NSStringStringWithUTF8String(format), aTimeZone)
-	if _r == nil {
-		return nil
+// DateWithCalendarFormatTimeZone converts the receiver to a calendar date with a given format string and time zone.
+func (x *Date) DateWithCalendarFormatTimeZone(format string, aTimeZone *TimeZone) *CalendarDate {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateWithCalendarFormat:timeZone:"), purego.NSString(format), objref.IDOf(aTimeZone))
+	return CalendarDateFromID(_r)
+}
+
+// DescriptionWithCalendarFormatTimeZoneLocale returns a string representation of the date formatted as specified by given conversion specifiers.
+func (x *Date) DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *TimeZone, locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithCalendarFormat:timeZone:locale:"), purego.NSString(format), objref.IDOf(aTimeZone), objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &CalendarDate{inner: _r}
+	return purego.GoString(_r)
 }
-
-// Returns a string representation of the date formatted as specified by given conversion specifiers.
-//
-// DescriptionWithCalendarFormatTimeZoneLocale calls the underlying DescriptionWithCalendarFormatTimeZoneLocale.
-func (x *Date) DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *raw.NSTimeZone, locale objc.ID) *String {
-	_r := x.inner.DescriptionWithCalendarFormatTimeZoneLocale(foundation.NSStringStringWithUTF8String(format), aTimeZone, locale)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-func (x *Date) asDate() *raw.NSDate { return x.inner }
-
-func (x *Date) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Dateable is the interface implemented by [Date], for mocking and DI.
 type Dateable interface {
-	Unwrap() *raw.NSDate
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Date
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Date
 	TimeIntervalSinceReferenceDate() float64
-	TimeIntervalSinceDate(anotherDate *raw.NSDate) float64
-	AddTimeInterval(seconds float64) objc.ID
+	TimeIntervalSinceDate(anotherDate *Date) float64
+	AddTimeInterval(seconds float64) obj.Object
 	DateByAddingTimeInterval(ti float64) *Date
-	EarlierDate(anotherDate *raw.NSDate) *Date
-	LaterDate(anotherDate *raw.NSDate) *Date
-	Compare(other *raw.NSDate) NSComparisonResult
-	IsEqualToDate(otherDate *raw.NSDate) bool
-	DescriptionWithLocale(locale objc.ID) *String
+	EarlierDate(anotherDate *Date) *Date
+	LaterDate(anotherDate *Date) *Date
+	Compare(other *Date) ComparisonResult
+	IsEqualToDate(otherDate *Date) bool
+	DescriptionWithLocale(locale obj.Object) string
 	TimeIntervalSinceNow() float64
 	TimeIntervalSince1970() float64
-	DateWithCalendarFormatTimeZone(format string, aTimeZone *raw.NSTimeZone) *CalendarDate
-	DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *raw.NSTimeZone, locale objc.ID) *String
+	DateWithCalendarFormatTimeZone(format string, aTimeZone *TimeZone) *CalendarDate
+	DescriptionWithCalendarFormatTimeZoneLocale(format string, aTimeZone *TimeZone, locale obj.Object) string
 }
 
 var _ Dateable = (*Date)(nil)
+
+// isDate marks Date — and, by embedding promotion, its
+// subclasses — as a member of the Date hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Date) isDate() {}
+
+var _ DateProvider = (*Date)(nil)

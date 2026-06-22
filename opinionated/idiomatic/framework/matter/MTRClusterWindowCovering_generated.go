@@ -5,353 +5,267 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterWindowCovering wraps [raw.MTRClusterWindowCovering] with a fluent Go API.
+// MTRClusterWindowCovering is an idiomatic wrapper over the Objective-C class MTRClusterWindowCovering.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterWindowCovering struct {
-	inner *raw.MTRClusterWindowCovering
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterWindowCovering].
-func (x *MTRClusterWindowCovering) Unwrap() *raw.MTRClusterWindowCovering { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterWindowCovering) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterWindowCoveringFromID adopts an existing object pointer as a MTRClusterWindowCovering (nil for 0).
+// MTRClusterWindowCoveringFromID adopts an existing Objective-C object as a MTRClusterWindowCovering
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterWindowCoveringFromID(id objc.ID) *MTRClusterWindowCovering {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterWindowCovering{inner: raw.MTRClusterWindowCoveringFromID(id)}
+	x := &MTRClusterWindowCovering{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-//
-// NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue creates a new [MTRClusterWindowCovering].
-func NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWindowCovering {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWindowCovering")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterWindowCovering{inner: raw.MTRClusterWindowCoveringFromID(_id)}
+// mTRClusterWindowCoveringAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterWindowCovering (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterWindowCoveringAdopt(id objc.ID) *MTRClusterWindowCovering {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterWindowCovering{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterWindowCoveringWithDeviceEndpointQueue creates a new [MTRClusterWindowCovering].
-func NewMTRClusterWindowCoveringWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWindowCovering {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWindowCovering")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterWindowCovering{inner: raw.MTRClusterWindowCoveringFromID(_id)}
+// NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterWindowCovering {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWindowCovering")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterWindowCoveringAdopt(_id)
 }
 
-// UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterUpOrOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterWindowCoveringWithDeviceEndpointQueue creates a new MTRClusterWindowCovering.
+func NewMTRClusterWindowCoveringWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterWindowCovering {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWindowCovering")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterWindowCoveringAdopt(_id)
 }
 
-// UpOrOpenWithExpectedValuesExpectedValueIntervalCompletion calls the underlying UpOrOpenWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) UpOrOpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.UpOrOpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributeTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterDownOrCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributePhysicalClosedLimitLiftWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// DownOrCloseWithExpectedValuesExpectedValueIntervalCompletion calls the underlying DownOrCloseWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) DownOrCloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.DownOrCloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributePhysicalClosedLimitTiltWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterStopMotionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeCurrentPositionLiftWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StopMotionWithExpectedValuesExpectedValueIntervalCompletion calls the underlying StopMotionWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) StopMotionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StopMotionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+// ReadAttributeCurrentPositionTiltWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToLiftValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeNumberOfActuationsLiftWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsLiftWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToLiftPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeNumberOfActuationsTiltWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsTiltWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToTiltValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeConfigStatusWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeConfigStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConfigStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterWindowCovering) GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToTiltPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// ReadAttributeCurrentPositionLiftPercentageWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTypeWithParams calls the underlying ReadAttributeTypeWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTypeWithParams(params)
+// ReadAttributeCurrentPositionTiltPercentageWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalClosedLimitLiftWithParams calls the underlying ReadAttributePhysicalClosedLimitLiftWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePhysicalClosedLimitLiftWithParams(params)
+// ReadAttributeOperationalStatusWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeOperationalStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalClosedLimitTiltWithParams calls the underlying ReadAttributePhysicalClosedLimitTiltWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePhysicalClosedLimitTiltWithParams(params)
+// ReadAttributeTargetPositionLiftPercent100thsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionLiftWithParams calls the underlying ReadAttributeCurrentPositionLiftWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionLiftWithParams(params)
+// ReadAttributeTargetPositionTiltPercent100thsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltWithParams calls the underlying ReadAttributeCurrentPositionTiltWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionTiltWithParams(params)
+// ReadAttributeEndProductTypeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeEndProductTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEndProductTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfActuationsLiftWithParams calls the underlying ReadAttributeNumberOfActuationsLiftWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNumberOfActuationsLiftWithParams(params)
+// ReadAttributeCurrentPositionLiftPercent100thsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfActuationsTiltWithParams calls the underlying ReadAttributeNumberOfActuationsTiltWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNumberOfActuationsTiltWithParams(params)
+// ReadAttributeCurrentPositionTiltPercent100thsWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeConfigStatusWithParams calls the underlying ReadAttributeConfigStatusWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeConfigStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeConfigStatusWithParams(params)
+// ReadAttributeInstalledOpenLimitLiftWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionLiftPercentageWithParams calls the underlying ReadAttributeCurrentPositionLiftPercentageWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionLiftPercentageWithParams(params)
+// ReadAttributeInstalledClosedLimitLiftWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltPercentageWithParams calls the underlying ReadAttributeCurrentPositionTiltPercentageWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionTiltPercentageWithParams(params)
+// ReadAttributeInstalledOpenLimitTiltWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStatusWithParams calls the underlying ReadAttributeOperationalStatusWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeOperationalStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationalStatusWithParams(params)
+// ReadAttributeInstalledClosedLimitTiltWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetPositionLiftPercent100thsWithParams calls the underlying ReadAttributeTargetPositionLiftPercent100thsWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTargetPositionLiftPercent100thsWithParams(params)
+// ReadAttributeModeWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetPositionTiltPercent100thsWithParams calls the underlying ReadAttributeTargetPositionTiltPercent100thsWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTargetPositionTiltPercent100thsWithParams(params)
+// WriteAttributeModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeEndProductTypeWithParams calls the underlying ReadAttributeEndProductTypeWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeEndProductTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeEndProductTypeWithParams(params)
+// WriteAttributeModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeCurrentPositionLiftPercent100thsWithParams calls the underlying ReadAttributeCurrentPositionLiftPercent100thsWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionLiftPercent100thsWithParams(params)
+// ReadAttributeSafetyStatusWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeSafetyStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSafetyStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltPercent100thsWithParams calls the underlying ReadAttributeCurrentPositionTiltPercent100thsWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPositionTiltPercent100thsWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledOpenLimitLiftWithParams calls the underlying ReadAttributeInstalledOpenLimitLiftWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInstalledOpenLimitLiftWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledClosedLimitLiftWithParams calls the underlying ReadAttributeInstalledClosedLimitLiftWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInstalledClosedLimitLiftWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledOpenLimitTiltWithParams calls the underlying ReadAttributeInstalledOpenLimitTiltWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInstalledOpenLimitTiltWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledClosedLimitTiltWithParams calls the underlying ReadAttributeInstalledClosedLimitTiltWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInstalledClosedLimitTiltWithParams(params)
-}
-
-// ReadAttributeModeWithParams calls the underlying ReadAttributeModeWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeModeWithParams(params)
-}
-
-// WriteAttributeModeWithValueExpectedValueInterval calls the underlying WriteAttributeModeWithValueExpectedValueInterval.
-func (x *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
-}
-
-// WriteAttributeModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-// ReadAttributeSafetyStatusWithParams calls the underlying ReadAttributeSafetyStatusWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeSafetyStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSafetyStatusWithParams(params)
-}
-
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterWindowCovering) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterUpOrOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// UpOrOpenWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying UpOrOpenWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) UpOrOpenWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.UpOrOpenWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterDownOrCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// DownOrCloseWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying DownOrCloseWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) DownOrCloseWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.DownOrCloseWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterStopMotionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// StopMotionWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StopMotionWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) StopMotionWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.StopMotionWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToLiftValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToLiftPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToTiltValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterWindowCovering) GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToTiltPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterWindowCovering) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterWindowCovering) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterWindowCovering) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterWindowCoveringable is the interface implemented by [MTRClusterWindowCovering], for mocking and DI.
 type MTRClusterWindowCoveringable interface {
-	Unwrap() *raw.MTRClusterWindowCovering
-	UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterUpOrOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	UpOrOpenWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterDownOrCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	DownOrCloseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterStopMotionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StopMotionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToLiftValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToLiftPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToTiltValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRWindowCoveringClusterGoToTiltPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePhysicalClosedLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePhysicalClosedLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNumberOfActuationsLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNumberOfActuationsTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeConfigStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionLiftPercentageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionTiltPercentageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOperationalStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTargetPositionLiftPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTargetPositionTiltPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeEndProductTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionLiftPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPositionTiltPercent100thsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInstalledOpenLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInstalledClosedLimitLiftWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInstalledOpenLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInstalledClosedLimitTiltWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeSafetyStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	UpOrOpenWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterUpOrOpenParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	UpOrOpenWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	DownOrCloseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterDownOrCloseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	DownOrCloseWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StopMotionWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterStopMotionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	StopMotionWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	GoToLiftValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToLiftValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	GoToLiftPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToLiftPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	GoToTiltValueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToTiltValueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	GoToTiltPercentageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRWindowCoveringClusterGoToTiltPercentageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePhysicalClosedLimitLiftWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePhysicalClosedLimitTiltWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionLiftWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionTiltWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNumberOfActuationsLiftWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNumberOfActuationsTiltWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeConfigStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionLiftPercentageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionTiltPercentageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOperationalStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTargetPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTargetPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeEndProductTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInstalledOpenLimitLiftWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInstalledClosedLimitLiftWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInstalledOpenLimitTiltWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInstalledClosedLimitTiltWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeSafetyStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterWindowCoveringable = (*MTRClusterWindowCovering)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterWindowCovering)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterWindowCovering)(nil)

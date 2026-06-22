@@ -5,146 +5,149 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that represents a request to supply a passkey credential.
+// PasskeyCredentialRequest is an idiomatic wrapper over the Objective-C class ASPasskeyCredentialRequest.
 //
-// PasskeyCredentialRequest wraps [raw.ASPasskeyCredentialRequest] with a fluent Go API.
+// A class that represents a request to supply a passkey credential.
 type PasskeyCredentialRequest struct {
-	inner *raw.ASPasskeyCredentialRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyCredentialRequest].
-func (x *PasskeyCredentialRequest) Unwrap() *raw.ASPasskeyCredentialRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyCredentialRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyCredentialRequestFromID adopts an existing object pointer as a PasskeyCredentialRequest (nil for 0).
+// PasskeyCredentialRequestFromID adopts an existing Objective-C object as a PasskeyCredentialRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyCredentialRequestFromID(id objc.ID) *PasskeyCredentialRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(id)}
-}
-
-// Initializes a passkey credential request.
-//
-// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms creates a new [PasskeyCredentialRequest].
-func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *PasskeyCredentialRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:"), credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr())
-	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
-}
-
-// Initializes a passkey credential request, providing additional passkey registration data.
-//
-// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput creates a new [PasskeyCredentialRequest].
-func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], assertionExtensionInput *raw.ASPasskeyAssertionCredentialExtensionInput) *PasskeyCredentialRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:assertionExtensionInput:"), credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr(), assertionExtensionInput.Ptr())
-	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
-}
-
-// Initializes a passkey credential request, providing additional passkey registration data.
-//
-// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput creates a new [PasskeyCredentialRequest].
-func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber], registrationExtensionInput *raw.ASPasskeyRegistrationCredentialExtensionInput) *PasskeyCredentialRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:registrationExtensionInput:"), credentialIdentity.Ptr(), clientDataHash.Ptr(), userVerificationPreference.Ptr(), supportedAlgorithms.Ptr(), registrationExtensionInput.Ptr())
-	return &PasskeyCredentialRequest{inner: raw.ASPasskeyCredentialRequestFromID(_id)}
-}
-
-// The relying party’s user verification preference.
-//
-// WithUserVerificationPreference sets the userVerificationPreference property and returns the receiver for chaining.
-func (x *PasskeyCredentialRequest) WithUserVerificationPreference(userVerificationPreference *foundation.NSString) *PasskeyCredentialRequest {
-	x.inner.SetUserVerificationPreference(userVerificationPreference)
+	x := &PasskeyCredentialRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract Hash of client data for credential provider to sign as part of the assertion/registration operation.
-//
-// ClientDataHash calls the underlying ClientDataHash.
-func (x *PasskeyCredentialRequest) ClientDataHash() *foundation.NSData {
-	return x.inner.ClientDataHash()
-}
-
-// @abstract A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
-//
-// UserVerificationPreference calls the underlying UserVerificationPreference.
-func (x *PasskeyCredentialRequest) UserVerificationPreference() string {
-	_r := x.inner.UserVerificationPreference()
-	if _r == nil {
-		return ""
+// passkeyCredentialRequestAdopt wraps an Objective-C object that this code just created as a
+// PasskeyCredentialRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyCredentialRequestAdopt(id objc.ID) *PasskeyCredentialRequest {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &PasskeyCredentialRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetUserVerificationPreference calls the underlying SetUserVerificationPreference.
-func (x *PasskeyCredentialRequest) SetUserVerificationPreference(userVerificationPreference *foundation.NSString) {
-	x.inner.SetUserVerificationPreference(userVerificationPreference)
+// Description returns the object's -description text.
+func (x *PasskeyCredentialRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract A list of signing algorithms supported by the relying party. Will be empty for assertion requests.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyCredentialRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyCredentialRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasskeyCredentialRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms initializes a passkey credential request.
+func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *PasskeyCredentialIdentity, clientDataHash obj.Object, userVerificationPreference obj.Object, supportedAlgorithms []obj.Object) *PasskeyCredentialRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:"), objref.IDOf(credentialIdentity), objref.IDOf(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return passkeyCredentialRequestAdopt(_id)
+}
+
+// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput initializes a passkey credential request, providing additional passkey registration data.
+func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsAssertionExtensionInput(credentialIdentity *PasskeyCredentialIdentity, clientDataHash obj.Object, userVerificationPreference obj.Object, supportedAlgorithms []obj.Object, assertionExtensionInput *PasskeyAssertionCredentialExtensionInput) *PasskeyCredentialRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:assertionExtensionInput:"), objref.IDOf(credentialIdentity), objref.IDOf(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(assertionExtensionInput))
+	return passkeyCredentialRequestAdopt(_id)
+}
+
+// NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput initializes a passkey credential request, providing additional passkey registration data.
+func NewPasskeyCredentialRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithmsRegistrationExtensionInput(credentialIdentity *PasskeyCredentialIdentity, clientDataHash obj.Object, userVerificationPreference obj.Object, supportedAlgorithms []obj.Object, registrationExtensionInput *PasskeyRegistrationCredentialExtensionInput) *PasskeyCredentialRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:registrationExtensionInput:"), objref.IDOf(credentialIdentity), objref.IDOf(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(registrationExtensionInput))
+	return passkeyCredentialRequestAdopt(_id)
+}
+
+// WithUserVerificationPreference the relying party’s user verification preference.
+func (x *PasskeyCredentialRequest) WithUserVerificationPreference(userVerificationPreference obj.Object) *PasskeyCredentialRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserVerificationPreference:"), objref.IDOf(userVerificationPreference))
+	return x
+}
+
+// ClientDataHash hash of client data for credential provider to sign as part of the assertion/registration operation.
+func (x *PasskeyCredentialRequest) ClientDataHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientDataHash"))
+	return obj.Wrap(_r)
+}
+
+// UserVerificationPreference a preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+func (x *PasskeyCredentialRequest) UserVerificationPreference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userVerificationPreference"))
+	return obj.Wrap(_r)
+}
+
+// SetUserVerificationPreference wraps the corresponding Objective-C method.
+func (x *PasskeyCredentialRequest) SetUserVerificationPreference(userVerificationPreference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserVerificationPreference:"), objref.IDOf(userVerificationPreference))
+}
+
+// SupportedAlgorithms a list of signing algorithms supported by the relying party. Will be empty for assertion requests.
 //
 // SupportedAlgorithms returns the collection as a Go slice.
-func (x *PasskeyCredentialRequest) SupportedAlgorithms() []*foundation.NSNumber {
-	arr := x.inner.SupportedAlgorithms()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *PasskeyCredentialRequest) SupportedAlgorithms() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedAlgorithms"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// ExcludedCredentials wraps the corresponding Objective-C method.
+//
 // ExcludedCredentials returns the collection as a Go slice.
 func (x *PasskeyCredentialRequest) ExcludedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
-	arr := x.inner.ExcludedCredentials()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
-		return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedCredentials"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
+		return AuthorizationPlatformPublicKeyCredentialDescriptorFromID(_id)
 	})
 }
 
-// @abstract Inputs for WebAuthn extensions used for passkey assertion. Will be nil for registration requests.
-//
-// AssertionExtensionInput calls the underlying AssertionExtensionInput.
+// AssertionExtensionInput inputs for WebAuthn extensions used for passkey assertion. Will be nil for registration requests.
 func (x *PasskeyCredentialRequest) AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput {
-	_r := x.inner.AssertionExtensionInput()
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyAssertionCredentialExtensionInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assertionExtensionInput"))
+	return PasskeyAssertionCredentialExtensionInputFromID(_r)
 }
 
-// @abstract Inputs for WebAuthn extensions used for passkey registration. Will be nil for assertion requests.
-//
-// RegistrationExtensionInput calls the underlying RegistrationExtensionInput.
+// RegistrationExtensionInput inputs for WebAuthn extensions used for passkey registration. Will be nil for assertion requests.
 func (x *PasskeyCredentialRequest) RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput {
-	_r := x.inner.RegistrationExtensionInput()
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyRegistrationCredentialExtensionInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registrationExtensionInput"))
+	return PasskeyRegistrationCredentialExtensionInputFromID(_r)
 }
 
 // PasskeyCredentialRequestable is the interface implemented by [PasskeyCredentialRequest], for mocking and DI.
 type PasskeyCredentialRequestable interface {
-	Unwrap() *raw.ASPasskeyCredentialRequest
-	WithUserVerificationPreference(userVerificationPreference *foundation.NSString) *PasskeyCredentialRequest
-	ClientDataHash() *foundation.NSData
-	UserVerificationPreference() string
-	SetUserVerificationPreference(userVerificationPreference *foundation.NSString)
-	SupportedAlgorithms() []*foundation.NSNumber
+	obj.Object
+	WithUserVerificationPreference(userVerificationPreference obj.Object) *PasskeyCredentialRequest
+	ClientDataHash() obj.Object
+	UserVerificationPreference() obj.Object
+	SetUserVerificationPreference(userVerificationPreference obj.Object)
+	SupportedAlgorithms() []obj.Object
 	ExcludedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor
 	AssertionExtensionInput() *PasskeyAssertionCredentialExtensionInput
 	RegistrationExtensionInput() *PasskeyRegistrationCredentialExtensionInput

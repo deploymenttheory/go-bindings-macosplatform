@@ -5,93 +5,135 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that contains all images requested by the client.
+// ScreenshotOutput is an idiomatic wrapper over the Objective-C class SCScreenshotOutput.
 //
-// ScreenshotOutput wraps [raw.SCScreenshotOutput] with a fluent Go API.
+// An object that contains all images requested by the client.
 type ScreenshotOutput struct {
-	inner *raw.SCScreenshotOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCScreenshotOutput].
-func (x *ScreenshotOutput) Unwrap() *raw.SCScreenshotOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenshotOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenshotOutputFromID adopts an existing object pointer as a ScreenshotOutput (nil for 0).
+// ScreenshotOutputFromID adopts an existing Objective-C object as a ScreenshotOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenshotOutputFromID(id objc.ID) *ScreenshotOutput {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenshotOutput{inner: raw.SCScreenshotOutputFromID(id)}
-}
-
-// NewScreenshotOutput creates a new [ScreenshotOutput].
-func NewScreenshotOutput() *ScreenshotOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCScreenshotOutput")), objc.RegisterName("new"))
-	return &ScreenshotOutput{inner: raw.SCScreenshotOutputFromID(_id)}
-}
-
-// A URL property that specifies the location of the saved image.
-//
-// WithFileURL sets the fileURL property and returns the receiver for chaining.
-func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
-	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+	x := &ScreenshotOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @abstract SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
-//
-// SdrImage calls the underlying SdrImage.
-func (x *ScreenshotOutput) SdrImage() unsafe.Pointer {
-	return x.inner.SdrImage()
+// screenshotOutputAdopt wraps an Objective-C object that this code just created as a
+// ScreenshotOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenshotOutputAdopt(id objc.ID) *ScreenshotOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenshotOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSdrImage calls the underlying SetSdrImage.
-func (x *ScreenshotOutput) SetSdrImage(sdrImage unsafe.Pointer) {
-	x.inner.SetSdrImage(sdrImage)
+// Description returns the object's -description text.
+func (x *ScreenshotOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
-//
-// HdrImage calls the underlying HdrImage.
-func (x *ScreenshotOutput) HdrImage() unsafe.Pointer {
-	return x.inner.HdrImage()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenshotOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetHdrImage calls the underlying SetHdrImage.
-func (x *ScreenshotOutput) SetHdrImage(hdrImage unsafe.Pointer) {
-	x.inner.SetHdrImage(hdrImage)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenshotOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
-//
-// FileURL calls the underlying FileURL.
-func (x *ScreenshotOutput) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenshotOutput) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetFileURL calls the underlying SetFileURL.
+// NewScreenshotOutput creates a new ScreenshotOutput.
+func NewScreenshotOutput() *ScreenshotOutput {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCScreenshotOutput")), objc.RegisterName("new"))
+	return screenshotOutputAdopt(_id)
+}
+
+// WithSdrImage an output property that specifies the standard dynamic range version of the screenshot.
+func (x *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
+	return x
+}
+
+// WithHdrImage an output property that specifies the high dynamic range version of the screenshot.
+func (x *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
+	return x
+}
+
+// WithFileURL a URL property that specifies the location of the saved image.
+func (x *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
+	return x
+}
+
+// SdrImage SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
+func (x *ScreenshotOutput) SdrImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sdrImage"))
+	return obj.Wrap(_r)
+}
+
+// SetSdrImage wraps the corresponding Objective-C method.
+func (x *ScreenshotOutput) SetSdrImage(sdrImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
+}
+
+// HdrImage SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
+func (x *ScreenshotOutput) HdrImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hdrImage"))
+	return obj.Wrap(_r)
+}
+
+// SetHdrImage wraps the corresponding Objective-C method.
+func (x *ScreenshotOutput) SetHdrImage(hdrImage obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
+}
+
+// FileURL SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil
+func (x *ScreenshotOutput) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
+}
+
+// SetFileURL wraps the corresponding Objective-C method.
 func (x *ScreenshotOutput) SetFileURL(fileURL string) {
-	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 }
 
 // ScreenshotOutputable is the interface implemented by [ScreenshotOutput], for mocking and DI.
 type ScreenshotOutputable interface {
-	Unwrap() *raw.SCScreenshotOutput
+	obj.Object
+	WithSdrImage(sdrImage obj.Object) *ScreenshotOutput
+	WithHdrImage(hdrImage obj.Object) *ScreenshotOutput
 	WithFileURL(fileURL string) *ScreenshotOutput
-	SdrImage() unsafe.Pointer
-	SetSdrImage(sdrImage unsafe.Pointer)
-	HdrImage() unsafe.Pointer
-	SetHdrImage(hdrImage unsafe.Pointer)
-	FileURL() *foundation.NSURL
+	SdrImage() obj.Object
+	SetSdrImage(sdrImage obj.Object)
+	HdrImage() obj.Object
+	SetHdrImage(hdrImage obj.Object)
+	FileURL() obj.Object
 	SetFileURL(fileURL string)
 }
 

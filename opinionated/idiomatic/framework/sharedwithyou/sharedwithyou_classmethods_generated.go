@@ -5,27 +5,28 @@
 package sharedwithyou
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// HighlightCollectionTitle calls the underlying SWHighlightCenterHighlightCollectionTitle.
+// HighlightCollectionTitle localized title to display with a collection of highlights Use this string as the title for a collection of shared highlight links displayed to the user.
 func HighlightCollectionTitle() string {
-	_r := raw.SWHighlightCenterHighlightCollectionTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("SWHighlightCenter")), objc.RegisterName("highlightCollectionTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsSystemCollaborationSupportAvailable calls the underlying SWHighlightCenterIsSystemCollaborationSupportAvailable.
+// IsSystemCollaborationSupportAvailable whether the current software version has full support for Messages collaboration features. Use this property at runtime to conditionally enable Messages collaboration features in your app. This property will be permantently set to YES on a software version with full support for these features.
 func IsSystemCollaborationSupportAvailable() bool {
-	return raw.SWHighlightCenterIsSystemCollaborationSupportAvailable()
+	_r := objc.Send[bool](objc.ID(_class("SWHighlightCenter")), objc.RegisterName("isSystemCollaborationSupportAvailable"))
+	return _r
 }
 
-// ShowAlertWithParticipantHighlightInWindow calls the underlying SWRemoveParticipantAlertShowAlertWithParticipantHighlightInWindow.
-func ShowAlertWithParticipantHighlightInWindow(participant *sharedwithyoucore.SWPerson, highlight *raw.SWCollaborationHighlight, window *appkit.NSWindow) {
-	raw.SWRemoveParticipantAlertShowAlertWithParticipantHighlightInWindow(participant, highlight, window)
+// ShowAlertWithParticipantHighlightInWindow wraps the corresponding Objective-C method.
+func ShowAlertWithParticipantHighlightInWindow(participant obj.Object, highlight *CollaborationHighlight, window obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("SWRemoveParticipantAlert")), objc.RegisterName("showAlertWithParticipant:highlight:inWindow:"), objref.IDOf(participant), objref.IDOf(highlight), objref.IDOf(window))
 }

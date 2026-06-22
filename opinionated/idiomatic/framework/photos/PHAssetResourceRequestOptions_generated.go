@@ -5,82 +5,108 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
+// AssetResourceRequestOptions is an idiomatic wrapper over the Objective-C class PHAssetResourceRequestOptions.
 //
-// AssetResourceRequestOptions wraps [raw.PHAssetResourceRequestOptions] with a fluent Go API.
+// A set of options affecting the delivery of underlying asset data that you request from the asset resource manager.
 type AssetResourceRequestOptions struct {
-	inner *raw.PHAssetResourceRequestOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetResourceRequestOptions].
-func (x *AssetResourceRequestOptions) Unwrap() *raw.PHAssetResourceRequestOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceRequestOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceRequestOptionsFromID adopts an existing object pointer as a AssetResourceRequestOptions (nil for 0).
+// AssetResourceRequestOptionsFromID adopts an existing Objective-C object as a AssetResourceRequestOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceRequestOptionsFromID(id objc.ID) *AssetResourceRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceRequestOptions{inner: raw.PHAssetResourceRequestOptionsFromID(id)}
+	x := &AssetResourceRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceRequestOptions creates a new [AssetResourceRequestOptions].
+// assetResourceRequestOptionsAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceRequestOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceRequestOptionsAdopt(id objc.ID) *AssetResourceRequestOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceRequestOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResourceRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResourceRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResourceRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetResourceRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetResourceRequestOptions creates a new AssetResourceRequestOptions.
 func NewAssetResourceRequestOptions() *AssetResourceRequestOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetResourceRequestOptions")), objc.RegisterName("new"))
-	return &AssetResourceRequestOptions{inner: raw.PHAssetResourceRequestOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceRequestOptions")), objc.RegisterName("new"))
+	return assetResourceRequestOptionsAdopt(_id)
 }
 
-// A Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
-//
-// WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
 func (x *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A block that Photos calls periodically while downloading the asset resource data.
-//
-// WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
+// WithProgressHandler a block that Photos calls periodically while downloading the asset resource data.
 func (x *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
 	return x
 }
 
-// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
-	return x.inner.IsNetworkAccessAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
 }
 
-// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
-// ProgressHandler calls the underlying ProgressHandler.
-func (x *AssetResourceRequestOptions) ProgressHandler() objc.Block {
-	return x.inner.ProgressHandler()
-}
-
-// SetProgressHandler calls the underlying SetProgressHandler.
+// SetProgressHandler wraps the corresponding Objective-C method.
 func (x *AssetResourceRequestOptions) SetProgressHandler(progressHandler func(float64)) {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
 }
 
 // AssetResourceRequestOptionsable is the interface implemented by [AssetResourceRequestOptions], for mocking and DI.
 type AssetResourceRequestOptionsable interface {
-	Unwrap() *raw.PHAssetResourceRequestOptions
+	obj.Object
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions
 	WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	ProgressHandler() objc.Block
 	SetProgressHandler(progressHandler func(float64))
 }
 

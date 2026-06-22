@@ -5,152 +5,162 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.
+// CertificateView is an idiomatic wrapper over the Objective-C class SFCertificateView.
 //
-// CertificateView wraps [raw.SFCertificateView] with a fluent Go API.
+// A view that displays the contents of a certificate, with options to display certificate details, display trust settings, and allow users to edit a certificate’s trust settings.
 type CertificateView struct {
-	inner *raw.SFCertificateView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFCertificateView].
-func (x *CertificateView) Unwrap() *raw.SFCertificateView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CertificateView) ID() objc.ID { return x.inner.Ptr() }
-
-// CertificateViewFromID adopts an existing object pointer as a CertificateView (nil for 0).
+// CertificateViewFromID adopts an existing Objective-C object as a CertificateView
+// (nil for 0), retaining it and registering a release finalizer.
 func CertificateViewFromID(id objc.ID) *CertificateView {
 	if id == 0 {
 		return nil
 	}
-	return &CertificateView{inner: raw.SFCertificateViewFromID(id)}
+	x := &CertificateView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCertificateView creates a new [CertificateView].
+// certificateViewAdopt wraps an Objective-C object that this code just created as a
+// CertificateView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func certificateViewAdopt(id objc.ID) *CertificateView {
+	if id == 0 {
+		return nil
+	}
+	x := &CertificateView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CertificateView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CertificateView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CertificateView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CertificateView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCertificateView creates a new CertificateView.
 func NewCertificateView() *CertificateView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFCertificateView")), objc.RegisterName("new"))
-	return &CertificateView{inner: raw.SFCertificateViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFCertificateView")), objc.RegisterName("new"))
+	return certificateViewAdopt(_id)
 }
 
-// Specifies the certificate that’s displayed in the view.
-//
-// SetCertificate calls the underlying SetCertificate.
-func (x *CertificateView) SetCertificate(certificate unsafe.Pointer) {
-	x.inner.SetCertificate(certificate)
+// SetCertificate specifies the certificate that’s displayed in the view.
+func (x *CertificateView) SetCertificate(certificate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
 }
 
-// Returns the certificate currently displayed in the view.
-//
-// Certificate calls the underlying Certificate.
-func (x *CertificateView) Certificate() unsafe.Pointer {
-	return x.inner.Certificate()
+// Certificate returns the certificate currently displayed in the view.
+func (x *CertificateView) Certificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
+	return obj.Wrap(_r)
 }
 
-// Specifies the policies to use when evaluating this certificate’s status.
-//
-// SetPolicies calls the underlying SetPolicies.
-func (x *CertificateView) SetPolicies(policies objc.ID) {
-	x.inner.SetPolicies(policies)
+// SetPolicies specifies the policies to use when evaluating this certificate’s status.
+func (x *CertificateView) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
-// Returns an array of policies used to evaluate the status of the displayed certificate.
-//
-// Policies calls the underlying Policies.
-func (x *CertificateView) Policies() *foundation.NSArray[objc.ID] {
-	return x.inner.Policies()
+// Policies returns an array of policies used to evaluate the status of the displayed certificate.
+func (x *CertificateView) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+	return obj.Wrap(_r)
 }
 
-// Specifies whether the user can edit the certificate’s trust settings.
-//
-// SetEditableTrust calls the underlying SetEditableTrust.
+// SetEditableTrust specifies whether the user can edit the certificate’s trust settings.
 func (x *CertificateView) SetEditableTrust(editable bool) {
-	x.inner.SetEditableTrust(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditableTrust:"), editable)
 }
 
-// Indicates if the view allows the user to edit the certificate’s trust.
-//
-// IsEditable calls the underlying IsEditable.
+// IsEditable indicates if the view allows the user to edit the certificate’s trust.
 func (x *CertificateView) IsEditable() bool {
-	return x.inner.IsEditable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
 }
 
-// Specifies whether the user can see the certificate’s trust settings.
-//
-// SetDisplayTrust calls the underlying SetDisplayTrust.
+// SetDisplayTrust specifies whether the user can see the certificate’s trust settings.
 func (x *CertificateView) SetDisplayTrust(display bool) {
-	x.inner.SetDisplayTrust(display)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayTrust:"), display)
 }
 
-// Indicates if the view currently shows the certificate’s trust settings.
-//
-// IsTrustDisplayed calls the underlying IsTrustDisplayed.
+// IsTrustDisplayed indicates if the view currently shows the certificate’s trust settings.
 func (x *CertificateView) IsTrustDisplayed() bool {
-	return x.inner.IsTrustDisplayed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrustDisplayed"))
+	return _r
 }
 
-// Saves the user’s current trust settings for the displayed certificate.
-//
-// SaveTrustSettings calls the underlying SaveTrustSettings.
+// SaveTrustSettings saves the user’s current trust settings for the displayed certificate.
 func (x *CertificateView) SaveTrustSettings() {
-	x.inner.SaveTrustSettings()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveTrustSettings"))
 }
 
-// Specifies whether the user can see the certificate details.
-//
-// SetDisplayDetails calls the underlying SetDisplayDetails.
+// SetDisplayDetails specifies whether the user can see the certificate details.
 func (x *CertificateView) SetDisplayDetails(display bool) {
-	x.inner.SetDisplayDetails(display)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDetails:"), display)
 }
 
-// Indicates if the view currently shows the certificate’s details.
-//
-// DetailsDisplayed calls the underlying DetailsDisplayed.
+// DetailsDisplayed indicates if the view currently shows the certificate’s details.
 func (x *CertificateView) DetailsDisplayed() bool {
-	return x.inner.DetailsDisplayed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisplayed"))
+	return _r
 }
 
-// Sets whether the certificate details subview is disclosed.
-//
-// SetDetailsDisclosed calls the underlying SetDetailsDisclosed.
+// SetDetailsDisclosed sets whether the certificate details subview is disclosed.
 func (x *CertificateView) SetDetailsDisclosed(disclosed bool) {
-	x.inner.SetDetailsDisclosed(disclosed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailsDisclosed:"), disclosed)
 }
 
-// Returns whether the view currently shows the certificate’s details.
-//
-// DetailsDisclosed calls the underlying DetailsDisclosed.
+// DetailsDisclosed returns whether the view currently shows the certificate’s details.
 func (x *CertificateView) DetailsDisclosed() bool {
-	return x.inner.DetailsDisclosed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisclosed"))
+	return _r
 }
 
-// Specifies whether the trust policy settings subview is disclosed.
-//
-// SetPoliciesDisclosed calls the underlying SetPoliciesDisclosed.
+// SetPoliciesDisclosed specifies whether the trust policy settings subview is disclosed.
 func (x *CertificateView) SetPoliciesDisclosed(disclosed bool) {
-	x.inner.SetPoliciesDisclosed(disclosed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoliciesDisclosed:"), disclosed)
 }
 
-// Returns whether the trust policy subview is disclosed.
-//
-// PoliciesDisclosed calls the underlying PoliciesDisclosed.
+// PoliciesDisclosed returns whether the trust policy subview is disclosed.
 func (x *CertificateView) PoliciesDisclosed() bool {
-	return x.inner.PoliciesDisclosed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("policiesDisclosed"))
+	return _r
 }
 
 // CertificateViewable is the interface implemented by [CertificateView], for mocking and DI.
 type CertificateViewable interface {
-	Unwrap() *raw.SFCertificateView
-	SetCertificate(certificate unsafe.Pointer)
-	Certificate() unsafe.Pointer
-	SetPolicies(policies objc.ID)
-	Policies() *foundation.NSArray[objc.ID]
+	obj.Object
+	SetCertificate(certificate obj.Object)
+	Certificate() obj.Object
+	SetPolicies(policies obj.Object)
+	Policies() obj.Object
 	SetEditableTrust(editable bool)
 	IsEditable() bool
 	SetDisplayTrust(display bool)

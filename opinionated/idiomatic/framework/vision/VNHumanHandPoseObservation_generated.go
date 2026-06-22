@@ -5,110 +5,109 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An observation that provides the hand points the analysis recognized.
+// HumanHandPoseObservation is an idiomatic wrapper over the Objective-C class VNHumanHandPoseObservation.
 //
-// HumanHandPoseObservation wraps [raw.VNHumanHandPoseObservation] with a fluent Go API.
+// It embeds [RecognizedPointsObservation], promoting that type's methods.
+//
+// An observation that provides the hand points the analysis recognized.
 type HumanHandPoseObservation struct {
-	inner *raw.VNHumanHandPoseObservation
+	RecognizedPointsObservation
 }
 
-// Unwrap returns the underlying [raw.VNHumanHandPoseObservation].
-func (x *HumanHandPoseObservation) Unwrap() *raw.VNHumanHandPoseObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HumanHandPoseObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// HumanHandPoseObservationFromID adopts an existing object pointer as a HumanHandPoseObservation (nil for 0).
+// HumanHandPoseObservationFromID adopts an existing Objective-C object as a HumanHandPoseObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func HumanHandPoseObservationFromID(id objc.ID) *HumanHandPoseObservation {
 	if id == 0 {
 		return nil
 	}
-	return &HumanHandPoseObservation{inner: raw.VNHumanHandPoseObservationFromID(id)}
+	x := &HumanHandPoseObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHumanHandPoseObservation creates a new [HumanHandPoseObservation].
+// humanHandPoseObservationAdopt wraps an Objective-C object that this code just created as a
+// HumanHandPoseObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func humanHandPoseObservationAdopt(id objc.ID) *HumanHandPoseObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &HumanHandPoseObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewHumanHandPoseObservation creates a new HumanHandPoseObservation.
 func NewHumanHandPoseObservation() *HumanHandPoseObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNHumanHandPoseObservation")), objc.RegisterName("new"))
-	return &HumanHandPoseObservation{inner: raw.VNHumanHandPoseObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNHumanHandPoseObservation")), objc.RegisterName("new"))
+	return humanHandPoseObservationAdopt(_id)
 }
 
-// Retrieves the recognized point for a joint name.
-//
-// RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
-func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
-	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
-	if _err != nil {
-		return nil, _err
+// RecognizedPointForJointNameError retrieves the recognized point for a joint name.
+func (x *HumanHandPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return RecognizedPointFromID(_r), nil
+}
+
+// RecognizedPointsForJointsGroupNameError retrieves the recognized points associated with the joint group name.
+func (x *HumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RecognizedPoint{inner: _r}, nil
+	return obj.Wrap(_r), nil
 }
 
-// Retrieves the recognized points associated with the joint group name.
-//
-// RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
-func (x *HumanHandPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
-	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
-}
-
-// @brief All of the joint names available in the observation.
+// AvailableJointNames all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *HumanHandPoseObservation) AvailableJointNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *HumanHandPoseObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @brief All of the joints group names available in the observation.
+// AvailableJointsGroupNames all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
-func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []*foundation.NSString {
-	arr := x.inner.AvailableJointsGroupNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointsGroupNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @brief The chirality of the hand.
-//
-// Chirality calls the underlying Chirality.
-func (x *HumanHandPoseObservation) Chirality() VNChirality {
-	return VNChirality(x.inner.Chirality())
-}
-
-func (x *HumanHandPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
-	return &x.inner.VNRecognizedPointsObservation
-}
-
-func (x *HumanHandPoseObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNRecognizedPointsObservation.VNObservation
+// Chirality the chirality of the hand.
+func (x *HumanHandPoseObservation) Chirality() Chirality {
+	_r := objc.Send[Chirality](objref.IDOf(x), objc.RegisterName("chirality"))
+	return _r
 }
 
 // HumanHandPoseObservationable is the interface implemented by [HumanHandPoseObservation], for mocking and DI.
 type HumanHandPoseObservationable interface {
-	Unwrap() *raw.VNHumanHandPoseObservation
-	RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error)
-	RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error)
-	AvailableJointNames() []*foundation.NSString
-	AvailableJointsGroupNames() []*foundation.NSString
-	Chirality() VNChirality
+	obj.Object
+	RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error)
+	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
+	AvailableJointNames() []obj.Object
+	AvailableJointsGroupNames() []obj.Object
+	Chirality() Chirality
 }
 
 var _ HumanHandPoseObservationable = (*HumanHandPoseObservation)(nil)
+
+var _ RecognizedPointsObservationProvider = (*HumanHandPoseObservation)(nil)
+
+var _ ObservationProvider = (*HumanHandPoseObservation)(nil)

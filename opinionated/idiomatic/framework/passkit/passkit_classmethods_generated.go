@@ -6,30 +6,29 @@ package passkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
+// ConfigurationForMetadataCompletion returns the identity document configuration.
+//
 // ConfigurationForMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func ConfigurationForMetadataCompletion(ctx context.Context, metadata *raw.PKIdentityDocumentMetadata) (*AddIdentityDocumentConfiguration, error) {
+func ConfigurationForMetadataCompletion(ctx context.Context, metadata *IdentityDocumentMetadata) (result *AddIdentityDocumentConfiguration, err error) {
 	type _result struct {
 		val *AddIdentityDocumentConfiguration
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.PKAddIdentityDocumentConfigurationConfigurationForMetadataCompletion(metadata, func(_p0 *raw.PKAddIdentityDocumentConfiguration, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AddIdentityDocumentConfiguration{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AddIdentityDocumentConfigurationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentConfiguration")), objc.RegisterName("configurationForMetadata:completion:"), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -39,32 +38,28 @@ func ConfigurationForMetadataCompletion(ctx context.Context, metadata *raw.PKIde
 	}
 }
 
-// PreviewWithPassThumbnailLocalizedDescription calls the underlying PKAddPassMetadataPreviewPreviewWithPassThumbnailLocalizedDescription.
-func PreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, description string) *AddPassMetadataPreview {
-	_r := raw.PKAddPassMetadataPreviewPreviewWithPassThumbnailLocalizedDescription(passThumbnail, foundation.NSStringStringWithUTF8String(description))
-	if _r == nil {
-		return nil
-	}
-	return &AddPassMetadataPreview{inner: _r}
+// PreviewWithPassThumbnailLocalizedDescription initializes properties you need to preview an object that represents the pass you add to Wallet.
+func PreviewWithPassThumbnailLocalizedDescription(passThumbnail obj.Object, description string) *AddPassMetadataPreview {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("previewWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail), purego.NSString(description))
+	return AddPassMetadataPreviewFromID(_r)
 }
 
+// ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion creates and error checks a new shareable pass-configuration object.
+//
 // ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion blocks until the operation completes or ctx is cancelled.
-func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], provisioningPolicyIdentifier string, action PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
+func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(ctx context.Context, passMetadata []*ShareablePassMetadata, provisioningPolicyIdentifier string, action AddShareablePassConfigurationPrimaryAction) (result *AddShareablePassConfiguration, err error) {
 	type _result struct {
 		val *AddShareablePassConfiguration
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(passMetadata, foundation.NSStringStringWithUTF8String(provisioningPolicyIdentifier), raw.PKAddShareablePassConfigurationPrimaryAction(action), func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AddShareablePassConfiguration{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AddShareablePassConfigurationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("PKAddShareablePassConfiguration")), objc.RegisterName("configurationForPassMetadata:provisioningPolicyIdentifier:primaryAction:completion:"), purego.SliceToNSArray(passMetadata, func(_v *ShareablePassMetadata) objc.ID { return objref.IDOf(_v) }), purego.NSString(provisioningPolicyIdentifier), action, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -74,23 +69,22 @@ func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionComple
 	}
 }
 
+// ConfigurationForPassMetadataPrimaryActionCompletion wraps the corresponding Objective-C method.
+//
 // ConfigurationForPassMetadataPrimaryActionCompletion blocks until the operation completes or ctx is cancelled.
-func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], action PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
+func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, passMetadata []*ShareablePassMetadata, action AddShareablePassConfigurationPrimaryAction) (result *AddShareablePassConfiguration, err error) {
 	type _result struct {
 		val *AddShareablePassConfiguration
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataPrimaryActionCompletion(passMetadata, raw.PKAddShareablePassConfigurationPrimaryAction(action), func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AddShareablePassConfiguration{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AddShareablePassConfigurationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("PKAddShareablePassConfiguration")), objc.RegisterName("configurationForPassMetadata:primaryAction:completion:"), purego.SliceToNSArray(passMetadata, func(_v *ShareablePassMetadata) objc.ID { return objref.IDOf(_v) }), action, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,220 +94,141 @@ func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, pa
 	}
 }
 
-// DisbursementContactInvalidErrorWithContactFieldLocalizedDescription calls the underlying PKDisbursementRequestDisbursementContactInvalidErrorWithContactFieldLocalizedDescription.
-func DisbursementContactInvalidErrorWithContactFieldLocalizedDescription(field *foundation.NSString, localizedDescription string) unsafe.Pointer {
-	return raw.PKDisbursementRequestDisbursementContactInvalidErrorWithContactFieldLocalizedDescription(field, foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-// DisbursementCardUnsupportedError calls the underlying PKDisbursementRequestDisbursementCardUnsupportedError.
-func DisbursementCardUnsupportedError() unsafe.Pointer {
-	return raw.PKDisbursementRequestDisbursementCardUnsupportedError()
-}
-
-// IsPassLibraryAvailable calls the underlying PKPassLibraryIsPassLibraryAvailable.
+// IsPassLibraryAvailable returns a Boolean value that indicates whether the pass library is available.
 func IsPassLibraryAvailable() bool {
-	return raw.PKPassLibraryIsPassLibraryAvailable()
+	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isPassLibraryAvailable"))
+	return _r
 }
 
-// RequestAutomaticPassPresentationSuppressionWithResponseHandler calls the underlying PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler.
-func RequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler func(PKAutomaticPassPresentationSuppressionResult)) uint {
-	return raw.PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler(func(_a0 raw.PKAutomaticPassPresentationSuppressionResult) {
-		responseHandler(PKAutomaticPassPresentationSuppressionResult(_a0))
-	})
+// EndAutomaticPassPresentationSuppressionWithRequestToken reenables the automatic display of the Apple Pay interface.
+func EndAutomaticPassPresentationSuppressionWithRequestToken(requestToken int) {
+	objc.Send[objc.ID](objc.ID(_class("PKPassLibrary")), objc.RegisterName("endAutomaticPassPresentationSuppressionWithRequestToken:"), requestToken)
 }
 
-// EndAutomaticPassPresentationSuppressionWithRequestToken calls the underlying PKPassLibraryEndAutomaticPassPresentationSuppressionWithRequestToken.
-func EndAutomaticPassPresentationSuppressionWithRequestToken(requestToken uint) {
-	raw.PKPassLibraryEndAutomaticPassPresentationSuppressionWithRequestToken(requestToken)
-}
-
-// IsSuppressingAutomaticPassPresentation calls the underlying PKPassLibraryIsSuppressingAutomaticPassPresentation.
+// IsSuppressingAutomaticPassPresentation returns a Boolean value that indicates whether the system suppresses the automatic presentation of Apple Pay passes.
 func IsSuppressingAutomaticPassPresentation() bool {
-	return raw.PKPassLibraryIsSuppressingAutomaticPassPresentation()
+	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isSuppressingAutomaticPassPresentation"))
+	return _r
 }
 
-// IsPaymentPassActivationAvailable calls the underlying PKPassLibraryIsPaymentPassActivationAvailable.
+// IsPaymentPassActivationAvailable wraps the corresponding Objective-C method.
 func IsPaymentPassActivationAvailable() bool {
-	return raw.PKPassLibraryIsPaymentPassActivationAvailable()
+	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isPaymentPassActivationAvailable"))
+	return _r
 }
 
-// CanMakePayments calls the underlying PKPaymentAuthorizationControllerCanMakePayments.
+// CanMakePayments returns whether the user can make payments.
 func CanMakePayments() bool {
-	return raw.PKPaymentAuthorizationControllerCanMakePayments()
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePayments"))
+	return _r
 }
 
-// CanMakePaymentsUsingNetworks calls the underlying PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworks.
-func CanMakePaymentsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	return raw.PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworks(supportedNetworks)
+// CanMakePaymentsUsingNetworks returns whether the user can make payments through the specified network.
+func CanMakePaymentsUsingNetworks(supportedNetworks []obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// CanMakePaymentsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworksCapabilities.
-func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
+// CanMakePaymentsUsingNetworksCapabilities returns whether the user can make payments using a card from the specified network with the specified capabilities.
+func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+	return _r
 }
 
-// SupportsDisbursements calls the underlying PKPaymentAuthorizationControllerSupportsDisbursements.
+// SupportsDisbursements returns a Boolean value that indicates whether this device can process disbursement requests.
 func SupportsDisbursements() bool {
-	return raw.PKPaymentAuthorizationControllerSupportsDisbursements()
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursements"))
+	return _r
 }
 
-// SupportsDisbursementsUsingNetworks calls the underlying PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworks.
-func SupportsDisbursementsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	return raw.PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworks(supportedNetworks)
+// SupportsDisbursementsUsingNetworks returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment network brands.
+func SupportsDisbursementsUsingNetworks(supportedNetworks []obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// SupportsDisbursementsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworksCapabilities.
-func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
+// SupportsDisbursementsUsingNetworksCapabilities returns a Boolean value indicating whether this device can process disbursement requests using the specified payment network brands and capabilities.
+func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerCanMakePayments calls the underlying PKPaymentAuthorizationViewControllerCanMakePayments.
+// PKPaymentAuthorizationViewControllerCanMakePayments returns whether the user can make payments.
 func PKPaymentAuthorizationViewControllerCanMakePayments() bool {
-	return raw.PKPaymentAuthorizationViewControllerCanMakePayments()
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePayments"))
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks calls the underlying PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks.
-func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	return raw.PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks)
+// PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks returns whether the user can make payments through the specified network.
+func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedNetworks []obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities.
-func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
+// PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities returns whether the user can make payments using a card from the specified network with the specified capabilities.
+func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilties MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("canMakePaymentsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilties)
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerSupportsDisbursements calls the underlying PKPaymentAuthorizationViewControllerSupportsDisbursements.
+// PKPaymentAuthorizationViewControllerSupportsDisbursements returns a Boolean value that indicates whether this device can process disbursement requests.
 func PKPaymentAuthorizationViewControllerSupportsDisbursements() bool {
-	return raw.PKPaymentAuthorizationViewControllerSupportsDisbursements()
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursements"))
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks calls the underlying PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks.
-func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) bool {
-	return raw.PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks)
+// PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks.
+func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supportedNetworks []obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities.
-func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilities PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilities))
+// PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities returns a Boolean value that indicates whether this device can process disbursement requests using the specified payment networks and merchant capabilities.
+func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks []obj.Object, capabilities MerchantCapability) bool {
+	_r := objc.Send[bool](objc.ID(_class("PKPaymentAuthorizationViewController")), objc.RegisterName("supportsDisbursementsUsingNetworks:capabilities:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), capabilities)
+	return _r
 }
 
-// ButtonWithTypeStyle calls the underlying PKPaymentButtonButtonWithTypeStyle.
-func ButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonStyle PKPaymentButtonStyle) *PaymentButton {
-	_r := raw.PKPaymentButtonButtonWithTypeStyle(raw.PKPaymentButtonType(buttonType), raw.PKPaymentButtonStyle(buttonStyle))
-	if _r == nil {
-		return nil
-	}
-	return &PaymentButton{inner: _r}
+// ButtonWithTypeStyle creates a new payment button with the specified type and style.
+func ButtonWithTypeStyle(buttonType PaymentButtonType, buttonStyle PaymentButtonStyle) *PaymentButton {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKPaymentButton")), objc.RegisterName("buttonWithType:style:"), buttonType, buttonStyle)
+	return PaymentButtonFromID(_r)
 }
 
+// AvailableNetworks returns the list of available payment methods that Apple Pay supports.
+//
 // AvailableNetworks returns the collection as a Go slice.
-func AvailableNetworks() []*foundation.NSString {
-	arr := raw.PKPaymentRequestAvailableNetworks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func AvailableNetworks() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("PKPaymentRequest")), objc.RegisterName("availableNetworks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PaymentContactInvalidErrorWithContactFieldLocalizedDescription calls the underlying PKPaymentRequestPaymentContactInvalidErrorWithContactFieldLocalizedDescription.
-func PaymentContactInvalidErrorWithContactFieldLocalizedDescription(field *foundation.NSString, localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentContactInvalidErrorWithContactFieldLocalizedDescription(field, foundation.NSStringStringWithUTF8String(localizedDescription))
+// SummaryItemWithLabelAmount initializes and returns a summary item with the given label and amount.
+func SummaryItemWithLabelAmount(label string, amount obj.Object) *PaymentSummaryItem {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKPaymentSummaryItem")), objc.RegisterName("summaryItemWithLabel:amount:"), purego.NSString(label), objref.IDOf(amount))
+	return PaymentSummaryItemFromID(_r)
 }
 
-// PaymentShippingAddressInvalidErrorWithKeyLocalizedDescription calls the underlying PKPaymentRequestPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription.
-func PaymentShippingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey string, localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentShippingAddressInvalidErrorWithKeyLocalizedDescription(foundation.NSStringStringWithUTF8String(postalAddressKey), foundation.NSStringStringWithUTF8String(localizedDescription))
+// SummaryItemWithLabelAmountType initializes and returns a summary item with the given label, amount, and type.
+func SummaryItemWithLabelAmountType(label string, amount obj.Object, type_ PaymentSummaryItemType) *PaymentSummaryItem {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKPaymentSummaryItem")), objc.RegisterName("summaryItemWithLabel:amount:type:"), purego.NSString(label), objref.IDOf(amount), type_)
+	return PaymentSummaryItemFromID(_r)
 }
 
-// PaymentBillingAddressInvalidErrorWithKeyLocalizedDescription calls the underlying PKPaymentRequestPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription.
-func PaymentBillingAddressInvalidErrorWithKeyLocalizedDescription(postalAddressKey string, localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentBillingAddressInvalidErrorWithKeyLocalizedDescription(foundation.NSStringStringWithUTF8String(postalAddressKey), foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-// PaymentShippingAddressUnserviceableErrorWithLocalizedDescription calls the underlying PKPaymentRequestPaymentShippingAddressUnserviceableErrorWithLocalizedDescription.
-func PaymentShippingAddressUnserviceableErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentShippingAddressUnserviceableErrorWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-// PaymentCouponCodeInvalidErrorWithLocalizedDescription calls the underlying PKPaymentRequestPaymentCouponCodeInvalidErrorWithLocalizedDescription.
-func PaymentCouponCodeInvalidErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentCouponCodeInvalidErrorWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-// PaymentCouponCodeExpiredErrorWithLocalizedDescription calls the underlying PKPaymentRequestPaymentCouponCodeExpiredErrorWithLocalizedDescription.
-func PaymentCouponCodeExpiredErrorWithLocalizedDescription(localizedDescription string) unsafe.Pointer {
-	return raw.PKPaymentRequestPaymentCouponCodeExpiredErrorWithLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
-}
-
-// SummaryItemWithLabelAmount calls the underlying PKPaymentSummaryItemSummaryItemWithLabelAmount.
-func SummaryItemWithLabelAmount(label string, amount *foundation.NSDecimalNumber) *PaymentSummaryItem {
-	_r := raw.PKPaymentSummaryItemSummaryItemWithLabelAmount(foundation.NSStringStringWithUTF8String(label), amount)
-	if _r == nil {
-		return nil
-	}
-	return &PaymentSummaryItem{inner: _r}
-}
-
-// SummaryItemWithLabelAmountType calls the underlying PKPaymentSummaryItemSummaryItemWithLabelAmountType.
-func SummaryItemWithLabelAmountType(label string, amount *foundation.NSDecimalNumber, type_ PKPaymentSummaryItemType) *PaymentSummaryItem {
-	_r := raw.PKPaymentSummaryItemSummaryItemWithLabelAmountType(foundation.NSStringStringWithUTF8String(label), amount, raw.PKPaymentSummaryItemType(type_))
-	if _r == nil {
-		return nil
-	}
-	return &PaymentSummaryItem{inner: _r}
-}
-
-// PreviewWithTemplateIdentifier calls the underlying PKShareablePassMetadataPreviewPreviewWithTemplateIdentifier.
+// PreviewWithTemplateIdentifier wraps the corresponding Objective-C method.
 func PreviewWithTemplateIdentifier(templateIdentifier string) *ShareablePassMetadataPreview {
-	_r := raw.PKShareablePassMetadataPreviewPreviewWithTemplateIdentifier(foundation.NSStringStringWithUTF8String(templateIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &ShareablePassMetadataPreview{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadataPreview")), objc.RegisterName("previewWithTemplateIdentifier:"), purego.NSString(templateIdentifier))
+	return ShareablePassMetadataPreviewFromID(_r)
 }
 
-// PassPropertiesForPass calls the underlying PKStoredValuePassPropertiesPassPropertiesForPass.
-func PassPropertiesForPass(pass *raw.PKPass) *StoredValuePassProperties {
-	_r := raw.PKStoredValuePassPropertiesPassPropertiesForPass(pass)
-	if _r == nil {
-		return nil
-	}
-	return &StoredValuePassProperties{inner: _r}
+// PassPropertiesForPass creates a stored-value pass properties object for the specified pass.
+func PassPropertiesForPass(pass *Pass) *StoredValuePassProperties {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassProperties")), objc.RegisterName("passPropertiesForPass:"), objref.IDOf(pass))
+	return StoredValuePassPropertiesFromID(_r)
 }
 
-// PKSuicaPassPropertiesPassPropertiesForPass calls the underlying PKSuicaPassPropertiesPassPropertiesForPass.
-func PKSuicaPassPropertiesPassPropertiesForPass(pass *raw.PKPass) *SuicaPassProperties {
-	_r := raw.PKSuicaPassPropertiesPassPropertiesForPass(pass)
-	if _r == nil {
-		return nil
-	}
-	return &SuicaPassProperties{inner: _r}
-}
-
-// SessionForPassDelegateCompletion blocks until the operation completes or ctx is cancelled.
-func SessionForPassDelegateCompletion(ctx context.Context, pass *raw.PKSecureElementPass, delegate raw.PKVehicleConnectionDelegate) (*VehicleConnectionSession, error) {
-	type _result struct {
-		val *VehicleConnectionSession
-		err error
-	}
-	_ch := make(chan _result, 1)
-	raw.PKVehicleConnectionSessionSessionForPassDelegateCompletion(pass, delegate, func(_p0 *raw.PKVehicleConnectionSession, _p1 unsafe.Pointer) {
-		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &VehicleConnectionSession{inner: _p0}
-		}
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *VehicleConnectionSession
-		return _zero, ctx.Err()
-	}
+// PKSuicaPassPropertiesPassPropertiesForPass instantiates a Suica pass properties object that contains the properties supported in the specified pass.
+func PKSuicaPassPropertiesPassPropertiesForPass(pass *Pass) *SuicaPassProperties {
+	_r := objc.Send[objc.ID](objc.ID(_class("PKSuicaPassProperties")), objc.RegisterName("passPropertiesForPass:"), objref.IDOf(pass))
+	return SuicaPassPropertiesFromID(_r)
 }

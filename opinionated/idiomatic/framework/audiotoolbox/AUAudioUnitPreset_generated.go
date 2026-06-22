@@ -5,87 +5,113 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that describes an interface for custom parameter settings provided by the audio unit developer.
+// AudioUnitPreset is an idiomatic wrapper over the Objective-C class AUAudioUnitPreset.
 //
-// AudioUnitPreset wraps [raw.AUAudioUnitPreset] with a fluent Go API.
+// A class that describes an interface for custom parameter settings provided by the audio unit developer.
 type AudioUnitPreset struct {
-	inner *raw.AUAudioUnitPreset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUAudioUnitPreset].
-func (x *AudioUnitPreset) Unwrap() *raw.AUAudioUnitPreset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitPreset) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitPresetFromID adopts an existing object pointer as a AudioUnitPreset (nil for 0).
+// AudioUnitPresetFromID adopts an existing Objective-C object as a AudioUnitPreset
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitPresetFromID(id objc.ID) *AudioUnitPreset {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(id)}
+	x := &AudioUnitPreset{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnitPreset creates a new [AudioUnitPreset].
+// audioUnitPresetAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitPreset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitPresetAdopt(id objc.ID) *AudioUnitPreset {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitPreset{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitPreset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitPreset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitPreset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitPreset) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioUnitPreset creates a new AudioUnitPreset.
 func NewAudioUnitPreset() *AudioUnitPreset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitPreset")), objc.RegisterName("new"))
-	return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitPreset")), objc.RegisterName("new"))
+	return audioUnitPresetAdopt(_id)
 }
 
-// The preset’s unique numeric identifier.
-//
-// WithNumber sets the number property and returns the receiver for chaining.
+// WithNumber the preset’s unique numeric identifier.
 func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
-	x.inner.SetNumber(number)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 	return x
 }
 
-// The preset’s name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the preset’s name.
 func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// @property	number @brief		The preset's unique numeric identifier.
-//
-// Number calls the underlying Number.
+// Number the preset's unique numeric identifier.
 func (x *AudioUnitPreset) Number() int {
-	return x.inner.Number()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("number"))
+	return _r
 }
 
-// SetNumber calls the underlying SetNumber.
+// SetNumber wraps the corresponding Objective-C method.
 func (x *AudioUnitPreset) SetNumber(number int) {
-	x.inner.SetNumber(number)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 }
 
-// @property	name @brief		The preset's name.
-//
-// Name calls the underlying Name.
+// Name the preset's name.
 func (x *AudioUnitPreset) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *AudioUnitPreset) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // AudioUnitPresetable is the interface implemented by [AudioUnitPreset], for mocking and DI.
 type AudioUnitPresetable interface {
-	Unwrap() *raw.AUAudioUnitPreset
+	obj.Object
 	WithNumber(number int) *AudioUnitPreset
 	WithName(name string) *AudioUnitPreset
 	Number() int

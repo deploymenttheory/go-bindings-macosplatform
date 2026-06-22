@@ -5,69 +5,93 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for analysis results.
+// Observation is an idiomatic wrapper over the Objective-C class VNObservation.
 //
-// Observation wraps [raw.VNObservation] with a fluent Go API.
+// Observation is an abstract base — you do not construct it directly. Construct one of [ClassificationObservation], [ContoursObservation], [CoreMLFeatureValueObservation], [DetectedObjectObservation], [FeaturePrintObservation], [HorizonObservation], [ImageAestheticsScoresObservation], [ImageAlignmentObservation], [InstanceMaskObservation], [PixelBufferObservation], [RecognizedPoints3DObservation], [RecognizedPointsObservation], [TrajectoryObservation] and pass it where a Observation is accepted.
+//
+// The abstract superclass for analysis results.
 type Observation struct {
-	inner *raw.VNObservation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNObservation].
-func (x *Observation) Unwrap() *raw.VNObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Observation) ID() objc.ID { return x.inner.Ptr() }
-
-// ObservationFromID adopts an existing object pointer as a Observation (nil for 0).
+// ObservationFromID adopts an existing Objective-C object as a Observation
+// (nil for 0), retaining it and registering a release finalizer.
 func ObservationFromID(id objc.ID) *Observation {
 	if id == 0 {
 		return nil
 	}
-	return &Observation{inner: raw.VNObservationFromID(id)}
+	x := &Observation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObservation creates a new [Observation].
-func NewObservation() *Observation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNObservation")), objc.RegisterName("new"))
-	return &Observation{inner: raw.VNObservationFromID(_id)}
+// observationAdopt wraps an Objective-C object that this code just created as a
+// Observation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func observationAdopt(id objc.ID) *Observation {
+	if id == 0 {
+		return nil
+	}
+	x := &Observation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief The unique identifier assigned to an observation.
-//
-// Uuid calls the underlying Uuid.
-func (x *Observation) Uuid() *foundation.NSUUID {
-	return x.inner.Uuid()
+// Description returns the object's -description text.
+func (x *Observation) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief The level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models @discussion Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
-//
-// Confidence calls the underlying Confidence.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Observation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Observation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Observation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Uuid the unique identifier assigned to an observation.
+func (x *Observation) Uuid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+	return obj.Wrap(_r)
+}
+
+// Confidence the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
 func (x *Observation) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
-
-// @brief The duration of the observation reporting when first detected and how long it is valid. @discussion The duration of the observation when used with a sequence of buffers. If a request does not support a timeRange or the timeRange is not known, the start time and duration will be set to 0.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *Observation) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-func (x *Observation) asObservation() *raw.VNObservation { return x.inner }
 
 // Observationable is the interface implemented by [Observation], for mocking and DI.
 type Observationable interface {
-	Unwrap() *raw.VNObservation
-	Uuid() *foundation.NSUUID
+	obj.Object
+	Uuid() obj.Object
 	Confidence() float32
-	TimeRange() coremedia.CMTimeRange
 }
 
 var _ Observationable = (*Observation)(nil)
+
+// isObservation marks Observation — and, by embedding promotion, its
+// subclasses — as a member of the Observation hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Observation) isObservation() {}
+
+var _ ObservationProvider = (*Observation)(nil)

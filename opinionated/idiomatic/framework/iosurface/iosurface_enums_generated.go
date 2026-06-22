@@ -22,6 +22,8 @@ const (
 	KIOSurfaceComponentNameChromaBlue IOSurfaceComponentName = 7
 )
 
+// String returns the IOSurfaceComponentName constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOSurfaceComponentName) String() string {
 	switch e {
 	case KIOSurfaceComponentNameUnknown:
@@ -54,6 +56,8 @@ const (
 	KIOSurfaceComponentRangeWideRange  IOSurfaceComponentRange = 3
 )
 
+// String returns the IOSurfaceComponentRange constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOSurfaceComponentRange) String() string {
 	switch e {
 	case KIOSurfaceComponentRangeUnknown:
@@ -79,6 +83,8 @@ const (
 	KIOSurfaceComponentTypeSignedNormalized IOSurfaceComponentType = 4
 )
 
+// String returns the IOSurfaceComponentType constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOSurfaceComponentType) String() string {
 	switch e {
 	case KIOSurfaceComponentTypeUnknown:
@@ -104,6 +110,8 @@ const (
 	KIOSurfaceLockAvoidSync IOSurfaceLockOptions = 2
 )
 
+// String returns the IOSurfaceLockOptions constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOSurfaceLockOptions) String() string {
 	var parts []string
 	if e&KIOSurfaceLockReadOnly != 0 {
@@ -128,6 +136,8 @@ const (
 	KIOSurfaceSubsampling411     IOSurfaceSubsampling = 4
 )
 
+// String returns the IOSurfaceSubsampling constant's name, or its numeric form when the
+// value is not a known constant.
 func (e IOSurfaceSubsampling) String() string {
 	switch e {
 	case KIOSurfaceSubsamplingUnknown:

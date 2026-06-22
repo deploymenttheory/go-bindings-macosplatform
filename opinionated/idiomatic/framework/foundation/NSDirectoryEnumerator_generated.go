@@ -5,88 +5,105 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that enumerates the contents of a directory.
+// DirectoryEnumerator is an idiomatic wrapper over the Objective-C class NSDirectoryEnumerator.
 //
-// DirectoryEnumerator wraps [raw.NSDirectoryEnumerator] with a fluent Go API.
+// It embeds [Enumerator], promoting that type's methods.
+//
+// An object that enumerates the contents of a directory.
 type DirectoryEnumerator struct {
-	inner *raw.NSDirectoryEnumerator[objc.ID]
+	Enumerator
 }
 
-// Unwrap returns the underlying [raw.NSDirectoryEnumerator].
-func (x *DirectoryEnumerator) Unwrap() *raw.NSDirectoryEnumerator[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectoryEnumerator) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectoryEnumeratorFromID adopts an existing object pointer as a DirectoryEnumerator (nil for 0).
+// DirectoryEnumeratorFromID adopts an existing Objective-C object as a DirectoryEnumerator
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectoryEnumeratorFromID(id objc.ID) *DirectoryEnumerator {
 	if id == 0 {
 		return nil
 	}
-	return &DirectoryEnumerator{inner: raw.NSDirectoryEnumeratorFromID[objc.ID](id)}
-}
-
-// NewDirectoryEnumerator creates a new [DirectoryEnumerator].
-func NewDirectoryEnumerator() *DirectoryEnumerator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDirectoryEnumerator")), objc.RegisterName("new"))
-	return &DirectoryEnumerator{inner: raw.NSDirectoryEnumeratorFromID[objc.ID](_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DirectoryEnumerator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DirectoryEnumerator {
-	x.inner.NSEnumerator.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &DirectoryEnumerator{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SkipDescendents calls the underlying SkipDescendents.
+// directoryEnumeratorAdopt wraps an Objective-C object that this code just created as a
+// DirectoryEnumerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directoryEnumeratorAdopt(id objc.ID) *DirectoryEnumerator {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectoryEnumerator{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDirectoryEnumerator creates a new DirectoryEnumerator.
+func NewDirectoryEnumerator() *DirectoryEnumerator {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDirectoryEnumerator")), objc.RegisterName("new"))
+	return directoryEnumeratorAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// SkipDescendents wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) SkipDescendents() {
-	x.inner.SkipDescendents()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendents"))
 }
 
-// SkipDescendants calls the underlying SkipDescendants.
+// SkipDescendants wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) SkipDescendants() {
-	x.inner.SkipDescendants()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendants"))
 }
 
-// FileAttributes calls the underlying FileAttributes.
-func (x *DirectoryEnumerator) FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.FileAttributes()
+// FileAttributes wraps the corresponding Objective-C method.
+func (x *DirectoryEnumerator) FileAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileAttributes"))
+	return obj.Wrap(_r)
 }
 
-// DirectoryAttributes calls the underlying DirectoryAttributes.
-func (x *DirectoryEnumerator) DirectoryAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.DirectoryAttributes()
+// DirectoryAttributes wraps the corresponding Objective-C method.
+func (x *DirectoryEnumerator) DirectoryAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryAttributes"))
+	return obj.Wrap(_r)
 }
 
-// IsEnumeratingDirectoryPostOrder calls the underlying IsEnumeratingDirectoryPostOrder.
+// IsEnumeratingDirectoryPostOrder wraps the corresponding Objective-C method.
 func (x *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
-	return x.inner.IsEnumeratingDirectoryPostOrder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
+	return _r
 }
 
-// Level calls the underlying Level.
-func (x *DirectoryEnumerator) Level() uint {
-	return x.inner.Level()
+// Level wraps the corresponding Objective-C method.
+func (x *DirectoryEnumerator) Level() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
+	return _r
 }
-
-func (x *DirectoryEnumerator) asEnumerator() *raw.NSEnumerator[objc.ID] { return &x.inner.NSEnumerator }
-
-func (x *DirectoryEnumerator) asObject() *raw.NSObject { return &x.inner.NSEnumerator.NSObject }
 
 // DirectoryEnumeratorable is the interface implemented by [DirectoryEnumerator], for mocking and DI.
 type DirectoryEnumeratorable interface {
-	Unwrap() *raw.NSDirectoryEnumerator[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DirectoryEnumerator
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator
 	SkipDescendents()
 	SkipDescendants()
-	FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
-	DirectoryAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
+	FileAttributes() obj.Object
+	DirectoryAttributes() obj.Object
 	IsEnumeratingDirectoryPostOrder() bool
-	Level() uint
+	Level() int
 }
 
 var _ DirectoryEnumeratorable = (*DirectoryEnumerator)(nil)
+
+var _ EnumeratorProvider = (*DirectoryEnumerator)(nil)

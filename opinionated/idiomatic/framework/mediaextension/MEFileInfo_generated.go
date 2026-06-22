@@ -5,115 +5,117 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains file properties from the media asset.
+// FileInfo is an idiomatic wrapper over the Objective-C class MEFileInfo.
 //
-// FileInfo wraps [raw.MEFileInfo] with a fluent Go API.
+// An object that contains file properties from the media asset.
 type FileInfo struct {
-	inner *raw.MEFileInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEFileInfo].
-func (x *FileInfo) Unwrap() *raw.MEFileInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// FileInfoFromID adopts an existing object pointer as a FileInfo (nil for 0).
+// FileInfoFromID adopts an existing Objective-C object as a FileInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func FileInfoFromID(id objc.ID) *FileInfo {
 	if id == 0 {
 		return nil
 	}
-	return &FileInfo{inner: raw.MEFileInfoFromID(id)}
+	x := &FileInfo{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFileInfo creates a new [FileInfo].
+// fileInfoAdopt wraps an Objective-C object that this code just created as a
+// FileInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileInfoAdopt(id objc.ID) *FileInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &FileInfo{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FileInfo) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFileInfo creates a new FileInfo.
 func NewFileInfo() *FileInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEFileInfo")), objc.RegisterName("new"))
-	return &FileInfo{inner: raw.MEFileInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEFileInfo")), objc.RegisterName("new"))
+	return fileInfoAdopt(_id)
 }
 
-// The duration of the media asset, if available.
-//
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
-	x.inner.SetDuration(duration)
+// WithFragmentsStatus indicates if the media asset contains fragments or is extendable by fragments.
+func (x *FileInfo) WithFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus) *FileInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentsStatus:"), fragmentsStatus)
 	return x
 }
 
-// Indicates if the media asset contains fragments or is extendable by fragments.
-//
-// WithFragmentsStatus sets the fragmentsStatus property and returns the receiver for chaining.
-func (x *FileInfo) WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo {
-	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
-	return x
-}
-
-// @property		sidecarFileName @abstract		The sidecar filename used by the MediaExtension. @discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
-//
-// WithSidecarFileName sets the sidecarFileName property and returns the receiver for chaining.
+// WithSidecarFileName the sidecar filename used by the MediaExtension. Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
 func (x *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
-	x.inner.SetSidecarFileName(foundation.NSStringStringWithUTF8String(sidecarFileName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSidecarFileName:"), purego.NSString(sidecarFileName))
 	return x
 }
 
-// @property		duration @abstract		The duration of the media asset if known, otherwise kCMTimeInvalid.
-//
-// Duration calls the underlying Duration.
-func (x *FileInfo) Duration() coremedia.CMTime {
-	return x.inner.Duration()
+// FragmentsStatus indicates if the media asset is capable of being extended by fragments or contains fragments See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
+func (x *FileInfo) FragmentsStatus() FileInfoFragmentsStatus {
+	_r := objc.Send[FileInfoFragmentsStatus](objref.IDOf(x), objc.RegisterName("fragmentsStatus"))
+	return _r
 }
 
-// SetDuration calls the underlying SetDuration.
-func (x *FileInfo) SetDuration(duration coremedia.CMTime) {
-	x.inner.SetDuration(duration)
+// SetFragmentsStatus wraps the corresponding Objective-C method.
+func (x *FileInfo) SetFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragmentsStatus:"), fragmentsStatus)
 }
 
-// @property		fragmentsStatus @abstract		Indicates if the media asset is capable of being extended by fragments or contains fragments @discussion		See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
-//
-// FragmentsStatus calls the underlying FragmentsStatus.
-func (x *FileInfo) FragmentsStatus() MEFileInfoFragmentsStatus {
-	return MEFileInfoFragmentsStatus(x.inner.FragmentsStatus())
-}
-
-// SetFragmentsStatus calls the underlying SetFragmentsStatus.
-func (x *FileInfo) SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) {
-	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
-}
-
-// @property		sidecarFileName @abstract		The sidecar filename used by the MediaExtension. @discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
-//
-// SidecarFileName calls the underlying SidecarFileName.
+// SidecarFileName the sidecar filename used by the MediaExtension. Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
 func (x *FileInfo) SidecarFileName() string {
-	_r := x.inner.SidecarFileName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sidecarFileName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSidecarFileName calls the underlying SetSidecarFileName.
+// SetSidecarFileName wraps the corresponding Objective-C method.
 func (x *FileInfo) SetSidecarFileName(sidecarFileName string) {
-	x.inner.SetSidecarFileName(foundation.NSStringStringWithUTF8String(sidecarFileName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSidecarFileName:"), purego.NSString(sidecarFileName))
 }
 
 // FileInfoable is the interface implemented by [FileInfo], for mocking and DI.
 type FileInfoable interface {
-	Unwrap() *raw.MEFileInfo
-	WithDuration(duration coremedia.CMTime) *FileInfo
-	WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo
+	obj.Object
+	WithFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus) *FileInfo
 	WithSidecarFileName(sidecarFileName string) *FileInfo
-	Duration() coremedia.CMTime
-	SetDuration(duration coremedia.CMTime)
-	FragmentsStatus() MEFileInfoFragmentsStatus
-	SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus)
+	FragmentsStatus() FileInfoFragmentsStatus
+	SetFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus)
 	SidecarFileName() string
 	SetSidecarFileName(sidecarFileName string)
 }

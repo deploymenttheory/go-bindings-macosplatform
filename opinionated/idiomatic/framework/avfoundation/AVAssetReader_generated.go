@@ -5,147 +5,131 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that reads media data from an asset.
+// AssetReader is an idiomatic wrapper over the Objective-C class AVAssetReader.
 //
-// AssetReader wraps [raw.AVAssetReader] with a fluent Go API.
+// An object that reads media data from an asset.
 type AssetReader struct {
-	inner *raw.AVAssetReader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetReader].
-func (x *AssetReader) Unwrap() *raw.AVAssetReader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReader) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderFromID adopts an existing object pointer as a AssetReader (nil for 0).
+// AssetReaderFromID adopts an existing Objective-C object as a AssetReader
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderFromID(id objc.ID) *AssetReader {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReader{inner: raw.AVAssetReaderFromID(id)}
-}
-
-// Creates an object to read media data from an asset.
-//
-// NewAssetReaderWithAssetError creates a new [AssetReader].
-func NewAssetReaderWithAssetError(asset *raw.AVAsset) (*AssetReader, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReader")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:error:"), asset.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AssetReader{inner: raw.AVAssetReaderFromID(_id)}, nil
-}
-
-// The time range within the asset to read.
-//
-// WithTimeRange sets the timeRange property and returns the receiver for chaining.
-func (x *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReader {
-	x.inner.SetTimeRange(timeRange)
+	x := &AssetReader{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Determines whether you can add the output to the asset reader.
-//
-// CanAddOutput calls the underlying CanAddOutput.
-func (x *AssetReader) CanAddOutput(output *raw.AVAssetReaderOutput) bool {
-	return x.inner.CanAddOutput(output)
-}
-
-// Adds an output to the reader.
-//
-// AddOutput calls the underlying AddOutput.
-func (x *AssetReader) AddOutput(output *raw.AVAssetReaderOutput) {
-	x.inner.AddOutput(output)
-}
-
-// Prepares the asset reader to start reading sample buffers from the asset.
-//
-// StartReading calls the underlying StartReading.
-func (x *AssetReader) StartReading() bool {
-	return x.inner.StartReading()
-}
-
-// Cancels any background work and stops the reader’s outputs from reading more samples.
-//
-// CancelReading calls the underlying CancelReading.
-func (x *AssetReader) CancelReading() {
-	x.inner.CancelReading()
-}
-
-// @property asset @abstract The asset from which the receiver's outputs read sample buffers. @discussion The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
-//
-// Asset calls the underlying Asset.
-func (x *AssetReader) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
+// assetReaderAdopt wraps an Objective-C object that this code just created as a
+// AssetReader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderAdopt(id objc.ID) *AssetReader {
+	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: _r}
+	x := &AssetReader{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property status @abstract The status of reading sample buffers from the receiver's asset. @discussion The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
-//
-// Status calls the underlying Status.
-func (x *AssetReader) Status() AVAssetReaderStatus {
-	return AVAssetReaderStatus(x.inner.Status())
+// Description returns the object's -description text.
+func (x *AssetReader) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property error @abstract If the receiver's status is AVAssetReaderStatusFailed, this describes the error that caused the failure. @discussion The value of this property is an NSError that describes what caused the receiver to no longer be able to read its asset. If the receiver's status is not AVAssetReaderStatusFailed, the value of this property is nil. This property is thread safe.
-//
-// Error calls the underlying Error.
-func (x *AssetReader) Error() unsafe.Pointer {
-	return x.inner.Error()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetReader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property timeRange @abstract Specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read. @discussion The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). This property throws an exception if a value is set after reading has started.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *AssetReader) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetReader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetTimeRange calls the underlying SetTimeRange.
-func (x *AssetReader) SetTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.SetTimeRange(timeRange)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetReader) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property outputs @abstract The outputs from which clients of receiver can read media data. @discussion The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
+// NewAssetReaderWithAssetError creates an object to read media data from an asset.
+func NewAssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReader")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:error:"), objref.IDOf(asset), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return assetReaderAdopt(_id), nil
+}
+
+// CanAddOutput determines whether you can add the output to the asset reader.
+func (x *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
+	return _r
+}
+
+// AddOutput adds an output to the reader.
+func (x *AssetReader) AddOutput(output *AssetReaderOutput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutput:"), objref.IDOf(output))
+}
+
+// StartReading prepares the asset reader to start reading sample buffers from the asset.
+func (x *AssetReader) StartReading() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startReading"))
+	return _r
+}
+
+// CancelReading cancels any background work and stops the reader’s outputs from reading more samples.
+func (x *AssetReader) CancelReading() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelReading"))
+}
+
+// Asset the asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
+func (x *AssetReader) Asset() *Asset {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
+}
+
+// Status the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
+func (x *AssetReader) Status() AssetReaderStatus {
+	_r := objc.Send[AssetReaderStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
+}
+
+// Outputs the outputs from which clients of receiver can read media data. The value of this property is an NSArray containing concrete instances of AVAssetReaderOutput. Outputs can be added to the receiver using the addOutput: method.
 //
 // Outputs returns the collection as a Go slice.
 func (x *AssetReader) Outputs() []*AssetReaderOutput {
-	arr := x.inner.Outputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetReaderOutput {
-		return &AssetReaderOutput{inner: raw.AVAssetReaderOutputFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetReaderOutput { return AssetReaderOutputFromID(_id) })
 }
 
 // AssetReaderable is the interface implemented by [AssetReader], for mocking and DI.
 type AssetReaderable interface {
-	Unwrap() *raw.AVAssetReader
-	WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReader
-	CanAddOutput(output *raw.AVAssetReaderOutput) bool
-	AddOutput(output *raw.AVAssetReaderOutput)
+	obj.Object
+	CanAddOutput(output *AssetReaderOutput) bool
+	AddOutput(output *AssetReaderOutput)
 	StartReading() bool
 	CancelReading()
 	Asset() *Asset
-	Status() AVAssetReaderStatus
-	Error() unsafe.Pointer
-	TimeRange() coremedia.CMTimeRange
-	SetTimeRange(timeRange coremedia.CMTimeRange)
+	Status() AssetReaderStatus
 	Outputs() []*AssetReaderOutput
 }
 

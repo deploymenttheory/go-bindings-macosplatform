@@ -5,86 +5,103 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class representing the compute plan of a model.
+// ComputePlan is an idiomatic wrapper over the Objective-C class MLComputePlan.
 //
-// ComputePlan wraps [raw.MLComputePlan] with a fluent Go API.
+// A class representing the compute plan of a model.
 type ComputePlan struct {
-	inner *raw.MLComputePlan
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLComputePlan].
-func (x *ComputePlan) Unwrap() *raw.MLComputePlan { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePlan) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePlanFromID adopts an existing object pointer as a ComputePlan (nil for 0).
+// ComputePlanFromID adopts an existing Objective-C object as a ComputePlan
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePlanFromID(id objc.ID) *ComputePlan {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePlan{inner: raw.MLComputePlanFromID(id)}
+	x := &ComputePlan{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComputePlan creates a new [ComputePlan].
+// computePlanAdopt wraps an Objective-C object that this code just created as a
+// ComputePlan (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePlanAdopt(id objc.ID) *ComputePlan {
+	if id == 0 {
+		return nil
+	}
+	x := &ComputePlan{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComputePlan) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePlan) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePlan) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePlan) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComputePlan creates a new ComputePlan.
 func NewComputePlan() *ComputePlan {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLComputePlan")), objc.RegisterName("new"))
-	return &ComputePlan{inner: raw.MLComputePlanFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLComputePlan")), objc.RegisterName("new"))
+	return computePlanAdopt(_id)
 }
 
-// Returns the estimated cost of executing an ML Program operation. @param operation An ML Program operation. @returns The estimated cost of executing the operation or nil if the cost couldn't be estimated.
-//
-// EstimatedCostOfMLProgramOperation calls the underlying EstimatedCostOfMLProgramOperation.
-func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanCost {
-	_r := x.inner.EstimatedCostOfMLProgramOperation(operation)
-	if _r == nil {
-		return nil
-	}
-	return &ComputePlanCost{inner: _r}
+// EstimatedCostOfMLProgramOperation returns the estimated cost of executing an ML Program operation.
+func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("estimatedCostOfMLProgramOperation:"), objref.IDOf(operation))
+	return ComputePlanCostFromID(_r)
 }
 
-// Returns the anticipated compute devices that would be used for executing a NeuralNetwork layer. @param layer A NeuralNetwork layer. @returns The anticipated compute devices that would be used for executing the layer or `nil` if the usage couldn't be determined.
-//
-// ComputeDeviceUsageForNeuralNetworkLayer calls the underlying ComputeDeviceUsageForNeuralNetworkLayer.
-func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
-	_r := x.inner.ComputeDeviceUsageForNeuralNetworkLayer(layer)
-	if _r == nil {
-		return nil
-	}
-	return &ComputePlanDeviceUsage{inner: _r}
+// ComputeDeviceUsageForNeuralNetworkLayer returns the anticipated compute devices that would be used for executing a NeuralNetwork layer.
+func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForNeuralNetworkLayer:"), objref.IDOf(layer))
+	return ComputePlanDeviceUsageFromID(_r)
 }
 
-// Returns The anticipated compute devices that would be used for executing an ML Program operation. @param operation  An ML Program operation. @returns The anticipated compute devices that would be used for executing the operation or `nil`if the usage couldn't be determined.
-//
-// ComputeDeviceUsageForMLProgramOperation calls the underlying ComputeDeviceUsageForMLProgramOperation.
-func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanDeviceUsage {
-	_r := x.inner.ComputeDeviceUsageForMLProgramOperation(operation)
-	if _r == nil {
-		return nil
-	}
-	return &ComputePlanDeviceUsage{inner: _r}
+// ComputeDeviceUsageForMLProgramOperation returns The anticipated compute devices that would be used for executing an ML Program operation.
+func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeDeviceUsageForMLProgramOperation:"), objref.IDOf(operation))
+	return ComputePlanDeviceUsageFromID(_r)
 }
 
-// ModelStructure calls the underlying ModelStructure.
+// ModelStructure wraps the corresponding Objective-C method.
 func (x *ComputePlan) ModelStructure() *ModelStructure {
-	_r := x.inner.ModelStructure()
-	if _r == nil {
-		return nil
-	}
-	return &ModelStructure{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelStructure"))
+	return ModelStructureFromID(_r)
 }
 
 // ComputePlanable is the interface implemented by [ComputePlan], for mocking and DI.
 type ComputePlanable interface {
-	Unwrap() *raw.MLComputePlan
-	EstimatedCostOfMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanCost
-	ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage
-	ComputeDeviceUsageForMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanDeviceUsage
+	obj.Object
+	EstimatedCostOfMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanCost
+	ComputeDeviceUsageForNeuralNetworkLayer(layer *ModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage
+	ComputeDeviceUsageForMLProgramOperation(operation *ModelStructureProgramOperation) *ComputePlanDeviceUsage
 	ModelStructure() *ModelStructure
 }
 

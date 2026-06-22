@@ -5,427 +5,248 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object to create and manage the tunnel provider’s VPN configuration.
+// NETunnelProviderManager is an idiomatic wrapper over the Objective-C class NETunnelProviderManager.
 //
-// NETunnelProviderManager wraps [raw.NETunnelProviderManager] with a fluent Go API.
+// NETunnelProviderManager is an abstract base — you do not construct it directly. Construct one of [NEAppProxyProviderManager] and pass it where a NETunnelProviderManager is accepted.
+//
+// An object to create and manage the tunnel provider’s VPN configuration.
 type NETunnelProviderManager struct {
-	inner *raw.NETunnelProviderManager
+	NEVPNManager
 }
 
-// Unwrap returns the underlying [raw.NETunnelProviderManager].
-func (x *NETunnelProviderManager) Unwrap() *raw.NETunnelProviderManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NETunnelProviderManager) ID() objc.ID { return x.inner.Ptr() }
-
-// NETunnelProviderManagerFromID adopts an existing object pointer as a NETunnelProviderManager (nil for 0).
+// NETunnelProviderManagerFromID adopts an existing Objective-C object as a NETunnelProviderManager
+// (nil for 0), retaining it and registering a release finalizer.
 func NETunnelProviderManagerFromID(id objc.ID) *NETunnelProviderManager {
 	if id == 0 {
 		return nil
 	}
-	return &NETunnelProviderManager{inner: raw.NETunnelProviderManagerFromID(id)}
-}
-
-// NewNETunnelProviderManager creates a new [NETunnelProviderManager].
-func NewNETunnelProviderManager() *NETunnelProviderManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NETunnelProviderManager")), objc.RegisterName("new"))
-	return &NETunnelProviderManager{inner: raw.NETunnelProviderManagerFromID(_id)}
-}
-
-// The website domains that the system routes connections from the Safari app through a per-app VPN.
-//
-// WithSafariDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithSafariDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSafariDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSafariDomains(_arr)
+	x := &NETunnelProviderManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The mail servers that the system routes connections from the Mail app through for a per-app VPN.
-//
-// WithMailDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithMailDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMailDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
+// nETunnelProviderManagerAdopt wraps an Objective-C object that this code just created as a
+// NETunnelProviderManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nETunnelProviderManagerAdopt(id objc.ID) *NETunnelProviderManager {
+	if id == 0 {
+		return nil
 	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMailDomains(_arr)
+	x := &NETunnelProviderManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
-//
-// WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCalendarDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCalendarDomains(_arr)
+// WithSafariDomains the website domains that the system routes connections from the Safari app through a per-app VPN.
+func (x *NETunnelProviderManager) WithSafariDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSafariDomains:"), _arr)
 	return x
 }
 
-// The contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
-//
-// WithContactsDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithContactsDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetContactsDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetContactsDomains(_arr)
+// WithMailDomains the mail servers that the system routes connections from the Mail app through for a per-app VPN.
+func (x *NETunnelProviderManager) WithMailDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailDomains:"), _arr)
 	return x
 }
 
-// The rules for specific apps in a per-app VPN.
-//
-// WithAppRules sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAppRules(foundation.NSArrayFromID[*raw.NEAppRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEAppRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAppRules(_arr)
+// WithCalendarDomains the calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
+func (x *NETunnelProviderManager) WithCalendarDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarDomains:"), _arr)
 	return x
 }
 
-// The domains that the system excludes from a per-app VPN.
-//
-// WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedDomains(_arr)
+// WithContactsDomains the contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
+func (x *NETunnelProviderManager) WithContactsDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactsDomains:"), _arr)
 	return x
 }
 
-// The domains that the system routes network traffic through for a per-app VPN.
-//
-// WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAssociatedDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAssociatedDomains(_arr)
+// WithAppRules the rules for specific apps in a per-app VPN.
+func (x *NETunnelProviderManager) WithAppRules(items ...*NEAppRule) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppRules:"), _arr)
 	return x
 }
 
-// An ordered list of Connect On Demand rules.
-//
-// WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
+// WithExcludedDomains the domains that the system excludes from a per-app VPN.
+func (x *NETunnelProviderManager) WithExcludedDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), _arr)
+	return x
+}
+
+// WithAssociatedDomains the domains that the system routes network traffic through for a per-app VPN.
+func (x *NETunnelProviderManager) WithAssociatedDomains(items ...obj.Object) *NETunnelProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociatedDomains:"), _arr)
+	return x
+}
+
+// WithOnDemandRules an ordered list of Connect On Demand rules.
 func (x *NETunnelProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEVPNManager.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEVPNManager.SetOnDemandRules(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// A Boolean used to toggle the Connect On Demand capability.
-//
-// WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
+// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
 func (x *NETunnelProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NETunnelProviderManager {
-	x.inner.NEVPNManager.SetOnDemandEnabled(onDemandEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 	return x
 }
 
-// A string containing the display name of the VPN configuration.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+// WithLocalizedDescription a string containing the display name of the VPN configuration.
 func (x *NETunnelProviderManager) WithLocalizedDescription(localizedDescription string) *NETunnelProviderManager {
-	x.inner.NEVPNManager.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocol sets the protocol property and returns the receiver for chaining.
+// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NETunnelProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager {
-	x.inner.NEVPNManager.SetProtocol(protocol.asNEVPNProtocol())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
+// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NETunnelProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager {
-	x.inner.NEVPNManager.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the VPN configuration.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
 func (x *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProviderManager {
-	x.inner.NEVPNManager.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Returns a copy of the app rules currently set in the configuration.
+// CopyAppRules returns a copy of the app rules currently set in the configuration.
 //
 // CopyAppRules returns the collection as a Go slice.
 func (x *NETunnelProviderManager) CopyAppRules() []*NEAppRule {
-	arr := x.inner.CopyAppRules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
-		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyAppRules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
-// @property routingMethod @discussion The method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
-//
-// RoutingMethod calls the underlying RoutingMethod.
+// RoutingMethod the method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
 func (x *NETunnelProviderManager) RoutingMethod() NETunnelProviderRoutingMethod {
-	return NETunnelProviderRoutingMethod(x.inner.RoutingMethod())
+	_r := objc.Send[NETunnelProviderRoutingMethod](objref.IDOf(x), objc.RegisterName("routingMethod"))
+	return _r
 }
 
-// @property safariDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled and the user navigates in Safari to a web site within one of these domains, the web site network traffic is routed through the per-app VPN.
+// SafariDomains an array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled and the user navigates in Safari to a web site within one of these domains, the web site network traffic is routed through the per-app VPN.
 //
 // SafariDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) SafariDomains() []string {
-	arr := x.inner.SafariDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("safariDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetSafariDomains calls the underlying SetSafariDomains.
-func (x *NETunnelProviderManager) SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSafariDomains(safariDomains)
+// SetSafariDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetSafariDomains(safariDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSafariDomains:"), purego.SliceToNSArray(safariDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property mailDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Mail app to mail servers within one of these domains are routed through the per-app VPN.
+// MailDomains an array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Mail app to mail servers within one of these domains are routed through the per-app VPN.
 //
 // MailDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) MailDomains() []string {
-	arr := x.inner.MailDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mailDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetMailDomains calls the underlying SetMailDomains.
-func (x *NETunnelProviderManager) SetMailDomains(mailDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetMailDomains(mailDomains)
+// SetMailDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetMailDomains(mailDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailDomains:"), purego.SliceToNSArray(mailDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property calendarDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Calendar app to calendar servers within one of these domains are routed through the per-app VPN.
+// CalendarDomains an array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Calendar app to calendar servers within one of these domains are routed through the per-app VPN.
 //
 // CalendarDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) CalendarDomains() []string {
-	arr := x.inner.CalendarDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetCalendarDomains calls the underlying SetCalendarDomains.
-func (x *NETunnelProviderManager) SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetCalendarDomains(calendarDomains)
+// SetCalendarDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetCalendarDomains(calendarDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarDomains:"), purego.SliceToNSArray(calendarDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property contactsDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Contacts app to contacts servers within one of these domains are routed through the per-app VPN.
+// ContactsDomains an array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Contacts app to contacts servers within one of these domains are routed through the per-app VPN.
 //
 // ContactsDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) ContactsDomains() []string {
-	arr := x.inner.ContactsDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactsDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetContactsDomains calls the underlying SetContactsDomains.
-func (x *NETunnelProviderManager) SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetContactsDomains(contactsDomains)
+// SetContactsDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetContactsDomains(contactsDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactsDomains:"), purego.SliceToNSArray(contactsDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property appRules @property An array of NEAppRule objects. Only applies to per-app VPN configurations. Network traffic originating from apps matching one of these rules is routed through the per-app VPN.
+// AppRules wraps the corresponding Objective-C method.
 //
 // AppRules returns the collection as a Go slice.
 func (x *NETunnelProviderManager) AppRules() []*NEAppRule {
-	arr := x.inner.AppRules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEAppRule {
-		return &NEAppRule{inner: raw.NEAppRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appRules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
-// SetAppRules calls the underlying SetAppRules.
-func (x *NETunnelProviderManager) SetAppRules(appRules *foundation.NSArray[*raw.NEAppRule]) {
-	x.inner.SetAppRules(appRules)
+// SetAppRules wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetAppRules(appRules []*NEAppRule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppRules:"), purego.SliceToNSArray(appRules, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property excludedDomains @property An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections to servers within one of these domains are excluded from the per-app VPN.
+// ExcludedDomains wraps the corresponding Objective-C method.
 //
 // ExcludedDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) ExcludedDomains() []string {
-	arr := x.inner.ExcludedDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetExcludedDomains calls the underlying SetExcludedDomains.
-func (x *NETunnelProviderManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetExcludedDomains(excludedDomains)
+// SetExcludedDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetExcludedDomains(excludedDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), purego.SliceToNSArray(excludedDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property associatedDomains @property An array of domain strings. Only applies to per-app VPN configurations. HTTP requests to download the Apple App Site Association files for domains in this list are routed through the per-app VPN.
+// AssociatedDomains wraps the corresponding Objective-C method.
 //
 // AssociatedDomains returns the collection as a Go slice.
 func (x *NETunnelProviderManager) AssociatedDomains() []string {
-	arr := x.inner.AssociatedDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associatedDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetAssociatedDomains calls the underlying SetAssociatedDomains.
-func (x *NETunnelProviderManager) SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetAssociatedDomains(associatedDomains)
+// SetAssociatedDomains wraps the corresponding Objective-C method.
+func (x *NETunnelProviderManager) SetAssociatedDomains(associatedDomains []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociatedDomains:"), purego.SliceToNSArray(associatedDomains, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
-
-func (x *NETunnelProviderManager) asNETunnelProviderManager() *raw.NETunnelProviderManager {
-	return x.inner
-}
-
-func (x *NETunnelProviderManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NEVPNManager }
 
 // NETunnelProviderManagerable is the interface implemented by [NETunnelProviderManager], for mocking and DI.
 type NETunnelProviderManagerable interface {
-	Unwrap() *raw.NETunnelProviderManager
-	WithSafariDomains(items ...*foundation.NSString) *NETunnelProviderManager
-	WithMailDomains(items ...*foundation.NSString) *NETunnelProviderManager
-	WithCalendarDomains(items ...*foundation.NSString) *NETunnelProviderManager
-	WithContactsDomains(items ...*foundation.NSString) *NETunnelProviderManager
-	WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager
-	WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager
-	WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	obj.Object
+	WithSafariDomains(items ...obj.Object) *NETunnelProviderManager
+	WithMailDomains(items ...obj.Object) *NETunnelProviderManager
+	WithCalendarDomains(items ...obj.Object) *NETunnelProviderManager
+	WithContactsDomains(items ...obj.Object) *NETunnelProviderManager
+	WithAppRules(items ...*NEAppRule) *NETunnelProviderManager
+	WithExcludedDomains(items ...obj.Object) *NETunnelProviderManager
+	WithAssociatedDomains(items ...obj.Object) *NETunnelProviderManager
 	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager
 	WithOnDemandEnabled(onDemandEnabled bool) *NETunnelProviderManager
 	WithLocalizedDescription(localizedDescription string) *NETunnelProviderManager
@@ -435,19 +256,28 @@ type NETunnelProviderManagerable interface {
 	CopyAppRules() []*NEAppRule
 	RoutingMethod() NETunnelProviderRoutingMethod
 	SafariDomains() []string
-	SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString])
+	SetSafariDomains(safariDomains []string)
 	MailDomains() []string
-	SetMailDomains(mailDomains *foundation.NSArray[*foundation.NSString])
+	SetMailDomains(mailDomains []string)
 	CalendarDomains() []string
-	SetCalendarDomains(calendarDomains *foundation.NSArray[*foundation.NSString])
+	SetCalendarDomains(calendarDomains []string)
 	ContactsDomains() []string
-	SetContactsDomains(contactsDomains *foundation.NSArray[*foundation.NSString])
+	SetContactsDomains(contactsDomains []string)
 	AppRules() []*NEAppRule
-	SetAppRules(appRules *foundation.NSArray[*raw.NEAppRule])
+	SetAppRules(appRules []*NEAppRule)
 	ExcludedDomains() []string
-	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])
+	SetExcludedDomains(excludedDomains []string)
 	AssociatedDomains() []string
-	SetAssociatedDomains(associatedDomains *foundation.NSArray[*foundation.NSString])
+	SetAssociatedDomains(associatedDomains []string)
 }
 
 var _ NETunnelProviderManagerable = (*NETunnelProviderManager)(nil)
+
+// isNETunnelProviderManager marks NETunnelProviderManager — and, by embedding promotion, its
+// subclasses — as a member of the NETunnelProviderManager hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NETunnelProviderManager) isNETunnelProviderManager() {}
+
+var _ NETunnelProviderManagerProvider = (*NETunnelProviderManager)(nil)
+
+var _ NEVPNManagerProvider = (*NETunnelProviderManager)(nil)

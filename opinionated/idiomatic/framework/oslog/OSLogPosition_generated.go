@@ -5,41 +5,76 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A representation of a point in a sequence of entries in the unified logging system.
+// LogPosition is an idiomatic wrapper over the Objective-C class OSLogPosition.
 //
-// LogPosition wraps [raw.OSLogPosition] with a fluent Go API.
+// A representation of a point in a sequence of entries in the unified logging system.
 type LogPosition struct {
-	inner *raw.OSLogPosition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogPosition].
-func (x *LogPosition) Unwrap() *raw.OSLogPosition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogPosition) ID() objc.ID { return x.inner.Ptr() }
-
-// LogPositionFromID adopts an existing object pointer as a LogPosition (nil for 0).
+// LogPositionFromID adopts an existing Objective-C object as a LogPosition
+// (nil for 0), retaining it and registering a release finalizer.
 func LogPositionFromID(id objc.ID) *LogPosition {
 	if id == 0 {
 		return nil
 	}
-	return &LogPosition{inner: raw.OSLogPositionFromID(id)}
+	x := &LogPosition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLogPosition creates a new [LogPosition].
+// logPositionAdopt wraps an Objective-C object that this code just created as a
+// LogPosition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logPositionAdopt(id objc.ID) *LogPosition {
+	if id == 0 {
+		return nil
+	}
+	x := &LogPosition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogPosition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogPosition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogPosition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *LogPosition) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewLogPosition creates a new LogPosition.
 func NewLogPosition() *LogPosition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogPosition")), objc.RegisterName("new"))
-	return &LogPosition{inner: raw.OSLogPositionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogPosition")), objc.RegisterName("new"))
+	return logPositionAdopt(_id)
 }
 
 // LogPositionable is the interface implemented by [LogPosition], for mocking and DI.
 type LogPositionable interface {
-	Unwrap() *raw.OSLogPosition
+	obj.Object
 }
 
 var _ LogPositionable = (*LogPosition)(nil)

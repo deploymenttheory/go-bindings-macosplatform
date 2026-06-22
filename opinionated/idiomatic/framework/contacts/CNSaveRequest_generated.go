@@ -5,169 +5,175 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that collects the changes you want to save to the user’s contacts database.
+// SaveRequest is an idiomatic wrapper over the Objective-C class CNSaveRequest.
 //
-// SaveRequest wraps [raw.CNSaveRequest] with a fluent Go API.
+// An object that collects the changes you want to save to the user’s contacts database.
 type SaveRequest struct {
-	inner *raw.CNSaveRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNSaveRequest].
-func (x *SaveRequest) Unwrap() *raw.CNSaveRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SaveRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SaveRequestFromID adopts an existing object pointer as a SaveRequest (nil for 0).
+// SaveRequestFromID adopts an existing Objective-C object as a SaveRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SaveRequestFromID(id objc.ID) *SaveRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SaveRequest{inner: raw.CNSaveRequestFromID(id)}
+	x := &SaveRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSaveRequest creates a new [SaveRequest].
+// saveRequestAdopt wraps an Objective-C object that this code just created as a
+// SaveRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func saveRequestAdopt(id objc.ID) *SaveRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SaveRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SaveRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SaveRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SaveRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SaveRequest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSaveRequest creates a new SaveRequest.
 func NewSaveRequest() *SaveRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNSaveRequest")), objc.RegisterName("new"))
-	return &SaveRequest{inner: raw.CNSaveRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNSaveRequest")), objc.RegisterName("new"))
+	return saveRequestAdopt(_id)
 }
 
-// A string that identifies the author of the transaction.
-//
-// WithTransactionAuthor sets the transactionAuthor property and returns the receiver for chaining.
+// WithTransactionAuthor a string that identifies the author of the transaction.
 func (x *SaveRequest) WithTransactionAuthor(transactionAuthor string) *SaveRequest {
-	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 	return x
 }
 
-// A Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.
-//
-// WithShouldRefetchContacts sets the shouldRefetchContacts property and returns the receiver for chaining.
+// WithShouldRefetchContacts a Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.
 func (x *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *SaveRequest {
-	x.inner.SetShouldRefetchContacts(shouldRefetchContacts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefetchContacts:"), shouldRefetchContacts)
 	return x
 }
 
-// Adds the specified contact to the contact store.
-//
-// AddContactToContainerWithIdentifier calls the underlying AddContactToContainerWithIdentifier.
-func (x *SaveRequest) AddContactToContainerWithIdentifier(contact *raw.CNMutableContact, identifier string) {
-	x.inner.AddContactToContainerWithIdentifier(contact, foundation.NSStringStringWithUTF8String(identifier))
+// AddContactToContainerWithIdentifier adds the specified contact to the contact store.
+func (x *SaveRequest) AddContactToContainerWithIdentifier(contact *MutableContact, identifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addContact:toContainerWithIdentifier:"), objref.IDOf(contact), purego.NSString(identifier))
 }
 
-// Updates an existing contact in the contact store.
-//
-// UpdateContact calls the underlying UpdateContact.
-func (x *SaveRequest) UpdateContact(contact *raw.CNMutableContact) {
-	x.inner.UpdateContact(contact)
+// UpdateContact updates an existing contact in the contact store.
+func (x *SaveRequest) UpdateContact(contact *MutableContact) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateContact:"), objref.IDOf(contact))
 }
 
-// Deletes a contact from the contact store.
-//
-// DeleteContact calls the underlying DeleteContact.
-func (x *SaveRequest) DeleteContact(contact *raw.CNMutableContact) {
-	x.inner.DeleteContact(contact)
+// DeleteContact deletes a contact from the contact store.
+func (x *SaveRequest) DeleteContact(contact *MutableContact) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteContact:"), objref.IDOf(contact))
 }
 
-// Adds a group to the contact store.
-//
-// AddGroupToContainerWithIdentifier calls the underlying AddGroupToContainerWithIdentifier.
-func (x *SaveRequest) AddGroupToContainerWithIdentifier(group *raw.CNMutableGroup, identifier string) {
-	x.inner.AddGroupToContainerWithIdentifier(group, foundation.NSStringStringWithUTF8String(identifier))
+// AddGroupToContainerWithIdentifier adds a group to the contact store.
+func (x *SaveRequest) AddGroupToContainerWithIdentifier(group *MutableGroup, identifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGroup:toContainerWithIdentifier:"), objref.IDOf(group), purego.NSString(identifier))
 }
 
-// Updates an existing group in the contact store.
-//
-// UpdateGroup calls the underlying UpdateGroup.
-func (x *SaveRequest) UpdateGroup(group *raw.CNMutableGroup) {
-	x.inner.UpdateGroup(group)
+// UpdateGroup updates an existing group in the contact store.
+func (x *SaveRequest) UpdateGroup(group *MutableGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateGroup:"), objref.IDOf(group))
 }
 
-// Deletes a group from the contact store.
-//
-// DeleteGroup calls the underlying DeleteGroup.
-func (x *SaveRequest) DeleteGroup(group *raw.CNMutableGroup) {
-	x.inner.DeleteGroup(group)
+// DeleteGroup deletes a group from the contact store.
+func (x *SaveRequest) DeleteGroup(group *MutableGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteGroup:"), objref.IDOf(group))
 }
 
-// Add the specified group to a parent group.
-//
-// AddSubgroupToGroup calls the underlying AddSubgroupToGroup.
-func (x *SaveRequest) AddSubgroupToGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
-	x.inner.AddSubgroupToGroup(subgroup, group)
+// AddSubgroupToGroup add the specified group to a parent group.
+func (x *SaveRequest) AddSubgroupToGroup(subgroup *Group, group *Group) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubgroup:toGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
-// Remove a subgroup from the specified parent group.
-//
-// RemoveSubgroupFromGroup calls the underlying RemoveSubgroupFromGroup.
-func (x *SaveRequest) RemoveSubgroupFromGroup(subgroup *raw.CNGroup, group *raw.CNGroup) {
-	x.inner.RemoveSubgroupFromGroup(subgroup, group)
+// RemoveSubgroupFromGroup remove a subgroup from the specified parent group.
+func (x *SaveRequest) RemoveSubgroupFromGroup(subgroup *Group, group *Group) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeSubgroup:fromGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
-// Adds a contact as a member of a group.
-//
-// AddMemberToGroup calls the underlying AddMemberToGroup.
-func (x *SaveRequest) AddMemberToGroup(contact *raw.CNContact, group *raw.CNGroup) {
-	x.inner.AddMemberToGroup(contact, group)
+// AddMemberToGroup adds a contact as a member of a group.
+func (x *SaveRequest) AddMemberToGroup(contact *Contact, group *Group) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMember:toGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
-// Removes a contact as a member of a group.
-//
-// RemoveMemberFromGroup calls the underlying RemoveMemberFromGroup.
-func (x *SaveRequest) RemoveMemberFromGroup(contact *raw.CNContact, group *raw.CNGroup) {
-	x.inner.RemoveMemberFromGroup(contact, group)
+// RemoveMemberFromGroup removes a contact as a member of a group.
+func (x *SaveRequest) RemoveMemberFromGroup(contact *Contact, group *Group) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeMember:fromGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
-// @abstract    The author of this transaction. @discussion  Use this, in conjunction with @c CNChangeHistoryFetchRequest.excludedTransactionAuthors, to suppress fetching of changes the author already knows about.
-//
-// TransactionAuthor calls the underlying TransactionAuthor.
+// TransactionAuthor the author of this transaction. Use this, in conjunction with
 func (x *SaveRequest) TransactionAuthor() string {
-	_r := x.inner.TransactionAuthor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionAuthor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTransactionAuthor calls the underlying SetTransactionAuthor.
+// SetTransactionAuthor wraps the corresponding Objective-C method.
 func (x *SaveRequest) SetTransactionAuthor(transactionAuthor string) {
-	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 }
 
-// @abstract    Should the contacts be refetched as part of executing the save request. @discussion  Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request. @note        If set to `NO` do not use the contacts after the executed save request as they may not be in a current state.
-//
-// ShouldRefetchContacts calls the underlying ShouldRefetchContacts.
+// ShouldRefetchContacts should the contacts be refetched as part of executing the save request. Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request.
 func (x *SaveRequest) ShouldRefetchContacts() bool {
-	return x.inner.ShouldRefetchContacts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRefetchContacts"))
+	return _r
 }
 
-// SetShouldRefetchContacts calls the underlying SetShouldRefetchContacts.
+// SetShouldRefetchContacts wraps the corresponding Objective-C method.
 func (x *SaveRequest) SetShouldRefetchContacts(shouldRefetchContacts bool) {
-	x.inner.SetShouldRefetchContacts(shouldRefetchContacts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefetchContacts:"), shouldRefetchContacts)
 }
 
 // SaveRequestable is the interface implemented by [SaveRequest], for mocking and DI.
 type SaveRequestable interface {
-	Unwrap() *raw.CNSaveRequest
+	obj.Object
 	WithTransactionAuthor(transactionAuthor string) *SaveRequest
 	WithShouldRefetchContacts(shouldRefetchContacts bool) *SaveRequest
-	AddContactToContainerWithIdentifier(contact *raw.CNMutableContact, identifier string)
-	UpdateContact(contact *raw.CNMutableContact)
-	DeleteContact(contact *raw.CNMutableContact)
-	AddGroupToContainerWithIdentifier(group *raw.CNMutableGroup, identifier string)
-	UpdateGroup(group *raw.CNMutableGroup)
-	DeleteGroup(group *raw.CNMutableGroup)
-	AddSubgroupToGroup(subgroup *raw.CNGroup, group *raw.CNGroup)
-	RemoveSubgroupFromGroup(subgroup *raw.CNGroup, group *raw.CNGroup)
-	AddMemberToGroup(contact *raw.CNContact, group *raw.CNGroup)
-	RemoveMemberFromGroup(contact *raw.CNContact, group *raw.CNGroup)
+	AddContactToContainerWithIdentifier(contact *MutableContact, identifier string)
+	UpdateContact(contact *MutableContact)
+	DeleteContact(contact *MutableContact)
+	AddGroupToContainerWithIdentifier(group *MutableGroup, identifier string)
+	UpdateGroup(group *MutableGroup)
+	DeleteGroup(group *MutableGroup)
+	AddSubgroupToGroup(subgroup *Group, group *Group)
+	RemoveSubgroupFromGroup(subgroup *Group, group *Group)
+	AddMemberToGroup(contact *Contact, group *Group)
+	RemoveMemberFromGroup(contact *Contact, group *Group)
 	TransactionAuthor() string
 	SetTransactionAuthor(transactionAuthor string)
 	ShouldRefetchContacts() bool

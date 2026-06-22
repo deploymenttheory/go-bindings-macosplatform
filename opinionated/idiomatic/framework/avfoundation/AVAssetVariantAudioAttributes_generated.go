@@ -5,69 +5,92 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the audio attributes for an asset variant.
+// AssetVariantAudioAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioAttributes.
 //
-// AssetVariantAudioAttributes wraps [raw.AVAssetVariantAudioAttributes] with a fluent Go API.
+// An object that defines the audio attributes for an asset variant.
 type AssetVariantAudioAttributes struct {
-	inner *raw.AVAssetVariantAudioAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariantAudioAttributes].
-func (x *AssetVariantAudioAttributes) Unwrap() *raw.AVAssetVariantAudioAttributes { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariantAudioAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantAudioAttributesFromID adopts an existing object pointer as a AssetVariantAudioAttributes (nil for 0).
+// AssetVariantAudioAttributesFromID adopts an existing Objective-C object as a AssetVariantAudioAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantAudioAttributesFromID(id objc.ID) *AssetVariantAudioAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariantAudioAttributes{inner: raw.AVAssetVariantAudioAttributesFromID(id)}
+	x := &AssetVariantAudioAttributes{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariantAudioAttributes creates a new [AssetVariantAudioAttributes].
-func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantAudioAttributes")), objc.RegisterName("new"))
-	return &AssetVariantAudioAttributes{inner: raw.AVAssetVariantAudioAttributesFromID(_id)}
-}
-
-// Provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
-//
-// RenditionSpecificAttributesForMediaOption calls the underlying RenditionSpecificAttributesForMediaOption.
-func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *raw.AVMediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
-	_r := x.inner.RenditionSpecificAttributesForMediaOption(mediaSelectionOption)
-	if _r == nil {
+// assetVariantAudioAttributesAdopt wraps an Objective-C object that this code just created as a
+// AssetVariantAudioAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantAudioAttributesAdopt(id objc.ID) *AssetVariantAudioAttributes {
+	if id == 0 {
 		return nil
 	}
-	return &AssetVariantAudioRenditionSpecificAttributes{inner: _r}
+	x := &AssetVariantAudioAttributes{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
+// Description returns the object's -description text.
+func (x *AssetVariantAudioAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariantAudioAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariantAudioAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantAudioAttributes) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetVariantAudioAttributes creates a new AssetVariantAudioAttributes.
+func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantAudioAttributes")), objc.RegisterName("new"))
+	return assetVariantAudioAttributesAdopt(_id)
+}
+
+// RenditionSpecificAttributesForMediaOption provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
+func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *MediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renditionSpecificAttributesForMediaOption:"), objref.IDOf(mediaSelectionOption))
+	return AssetVariantAudioRenditionSpecificAttributesFromID(_r)
+}
+
+// FormatIDs provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
 //
 // FormatIDs returns the collection as a Go slice.
-func (x *AssetVariantAudioAttributes) FormatIDs() []*foundation.NSNumber {
-	arr := x.inner.FormatIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AssetVariantAudioAttributes) FormatIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AssetVariantAudioAttributesable is the interface implemented by [AssetVariantAudioAttributes], for mocking and DI.
 type AssetVariantAudioAttributesable interface {
-	Unwrap() *raw.AVAssetVariantAudioAttributes
-	RenditionSpecificAttributesForMediaOption(mediaSelectionOption *raw.AVMediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes
-	FormatIDs() []*foundation.NSNumber
+	obj.Object
+	RenditionSpecificAttributesForMediaOption(mediaSelectionOption *MediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes
+	FormatIDs() []obj.Object
 }
 
 var _ AssetVariantAudioAttributesable = (*AssetVariantAudioAttributes)(nil)

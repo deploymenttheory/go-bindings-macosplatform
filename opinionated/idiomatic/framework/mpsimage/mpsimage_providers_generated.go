@@ -5,55 +5,65 @@
 package mpsimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BinaryImageKernelProvider is implemented by BinaryImageKernel and any idiomatic type wrapping a MPSBinaryImageKernel subclass.
+// BinaryImageKernelProvider is accepted wherever a MPSBinaryImageKernel (or one of its subclasses) is expected.
 type BinaryImageKernelProvider interface {
-	asBinaryImageKernel() *raw.MPSBinaryImageKernel
+	objref.Object
+	isBinaryImageKernel()
 }
 
-// ImageAreaMaxProvider is implemented by ImageAreaMax and any idiomatic type wrapping a MPSImageAreaMax subclass.
+// ImageAreaMaxProvider is accepted wherever a MPSImageAreaMax (or one of its subclasses) is expected.
 type ImageAreaMaxProvider interface {
-	asImageAreaMax() *raw.MPSImageAreaMax
+	objref.Object
+	isImageAreaMax()
 }
 
-// ImageArithmeticProvider is implemented by ImageArithmetic and any idiomatic type wrapping a MPSImageArithmetic subclass.
+// ImageArithmeticProvider is accepted wherever a MPSImageArithmetic (or one of its subclasses) is expected.
 type ImageArithmeticProvider interface {
-	asImageArithmetic() *raw.MPSImageArithmetic
+	objref.Object
+	isImageArithmetic()
 }
 
-// ImageBoxProvider is implemented by ImageBox and any idiomatic type wrapping a MPSImageBox subclass.
+// ImageBoxProvider is accepted wherever a MPSImageBox (or one of its subclasses) is expected.
 type ImageBoxProvider interface {
-	asImageBox() *raw.MPSImageBox
+	objref.Object
+	isImageBox()
 }
 
-// ImageDilateProvider is implemented by ImageDilate and any idiomatic type wrapping a MPSImageDilate subclass.
+// ImageDilateProvider is accepted wherever a MPSImageDilate (or one of its subclasses) is expected.
 type ImageDilateProvider interface {
-	asImageDilate() *raw.MPSImageDilate
+	objref.Object
+	isImageDilate()
 }
 
-// ImageLaplacianPyramidProvider is implemented by ImageLaplacianPyramid and any idiomatic type wrapping a MPSImageLaplacianPyramid subclass.
+// ImageLaplacianPyramidProvider is accepted wherever a MPSImageLaplacianPyramid (or one of its subclasses) is expected.
 type ImageLaplacianPyramidProvider interface {
-	asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid
+	objref.Object
+	isImageLaplacianPyramid()
 }
 
-// ImagePyramidProvider is implemented by ImagePyramid and any idiomatic type wrapping a MPSImagePyramid subclass.
+// ImagePyramidProvider is accepted wherever a MPSImagePyramid (or one of its subclasses) is expected.
 type ImagePyramidProvider interface {
-	asImagePyramid() *raw.MPSImagePyramid
+	objref.Object
+	isImagePyramid()
 }
 
-// ImageReduceUnaryProvider is implemented by ImageReduceUnary and any idiomatic type wrapping a MPSImageReduceUnary subclass.
+// ImageReduceUnaryProvider is accepted wherever a MPSImageReduceUnary (or one of its subclasses) is expected.
 type ImageReduceUnaryProvider interface {
-	asImageReduceUnary() *raw.MPSImageReduceUnary
+	objref.Object
+	isImageReduceUnary()
 }
 
-// ImageScaleProvider is implemented by ImageScale and any idiomatic type wrapping a MPSImageScale subclass.
+// ImageScaleProvider is accepted wherever a MPSImageScale (or one of its subclasses) is expected.
 type ImageScaleProvider interface {
-	asImageScale() *raw.MPSImageScale
+	objref.Object
+	isImageScale()
 }
 
-// UnaryImageKernelProvider is implemented by UnaryImageKernel and any idiomatic type wrapping a MPSUnaryImageKernel subclass.
+// UnaryImageKernelProvider is accepted wherever a MPSUnaryImageKernel (or one of its subclasses) is expected.
 type UnaryImageKernelProvider interface {
-	asUnaryImageKernel() *raw.MPSUnaryImageKernel
+	objref.Object
+	isUnaryImageKernel()
 }

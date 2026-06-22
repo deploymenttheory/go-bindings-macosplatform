@@ -5,196 +5,193 @@
 package eventkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A class that represents a calendar in EventKit.
+// Calendar is an idiomatic wrapper over the Objective-C class EKCalendar.
 //
-// Calendar wraps [raw.EKCalendar] with a fluent Go API.
+// It embeds [Object], promoting that type's methods.
+//
+// A class that represents a calendar in EventKit.
 type Calendar struct {
-	inner *raw.EKCalendar
+	Object
 }
 
-// Unwrap returns the underlying [raw.EKCalendar].
-func (x *Calendar) Unwrap() *raw.EKCalendar { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Calendar) ID() objc.ID { return x.inner.Ptr() }
-
-// CalendarFromID adopts an existing object pointer as a Calendar (nil for 0).
+// CalendarFromID adopts an existing Objective-C object as a Calendar
+// (nil for 0), retaining it and registering a release finalizer.
 func CalendarFromID(id objc.ID) *Calendar {
 	if id == 0 {
 		return nil
 	}
-	return &Calendar{inner: raw.EKCalendarFromID(id)}
-}
-
-// NewCalendar creates a new [Calendar].
-func NewCalendar() *Calendar {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKCalendar")), objc.RegisterName("new"))
-	return &Calendar{inner: raw.EKCalendarFromID(_id)}
-}
-
-// The source object representing the account to which this calendar belongs.
-//
-// WithSource sets the source property and returns the receiver for chaining.
-func (x *Calendar) WithSource(source *Source) *Calendar {
-	x.inner.SetSource(source.Unwrap())
+	x := &Calendar{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The calendar’s title.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *Calendar) WithTitle(title string) *Calendar {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-	return x
-}
-
-// The calendar’s color.
-//
-// WithColor sets the color property and returns the receiver for chaining.
-func (x *Calendar) WithColor(color *appkit.NSColor) *Calendar {
-	x.inner.SetColor(color)
-	return x
-}
-
-// @property   source @abstract   The source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. @discussion This will be nil for new calendars until you set it.
-//
-// Source calls the underlying Source.
-func (x *Calendar) Source() *Source {
-	_r := x.inner.Source()
-	if _r == nil {
+// calendarAdopt wraps an Objective-C object that this code just created as a
+// Calendar (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calendarAdopt(id objc.ID) *Calendar {
+	if id == 0 {
 		return nil
 	}
-	return &Source{inner: _r}
+	x := &Calendar{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSource calls the underlying SetSource.
-func (x *Calendar) SetSource(source *raw.EKSource) {
-	x.inner.SetSource(source)
+// NewCalendar creates a new Calendar.
+func NewCalendar() *Calendar {
+	_id := objc.Send[objc.ID](objc.ID(_class("EKCalendar")), objc.RegisterName("new"))
+	return calendarAdopt(_id)
 }
 
-// @property   calendarIdentifier @abstract   A unique identifier for the calendar. It is not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a calendar that is no longer fetchable by this property, e.g. by title, type, color, etc. Use [EKEventStore calendarWithIdentifier:] to look up the calendar by this value.
-//
-// CalendarIdentifier calls the underlying CalendarIdentifier.
+// WithSource the source object representing the account to which this calendar belongs.
+func (x *Calendar) WithSource(source *Source) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
+	return x
+}
+
+// WithTitle the calendar’s title.
+func (x *Calendar) WithTitle(title string) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+// WithCGColor the calendar’s color.
+func (x *Calendar) WithCGColor(cGColor obj.Object) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCGColor:"), objref.IDOf(cGColor))
+	return x
+}
+
+// WithColor the calendar’s color.
+func (x *Calendar) WithColor(color obj.Object) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return x
+}
+
+// Source the source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. This will be nil for new calendars until you set it.
+func (x *Calendar) Source() *Source {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	return SourceFromID(_r)
+}
+
+// SetSource wraps the corresponding Objective-C method.
+func (x *Calendar) SetSource(source *Source) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
+}
+
+// CalendarIdentifier a unique identifier for the calendar. It is not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a calendar that is no longer fetchable by this property, e.g. by title, type, color, etc. Use [EKEventStore calendarWithIdentifier:] to look up the calendar by this value.
 func (x *Calendar) CalendarIdentifier() string {
-	_r := x.inner.CalendarIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property   title @abstract   The title of the calendar.
-//
-// Title calls the underlying Title.
+// Title the title of the calendar.
 func (x *Calendar) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *Calendar) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// @property   type @abstract   The type of the calendar as a EKCalendarType. This is actually based on what source the calendar is in, as well as whether it is a subscribed calendar. @discussion CalDAV subscribed calendars have type EKCalendarTypeCalDAV with isSubscribed = YES.
-//
-// Type calls the underlying Type.
-func (x *Calendar) Type() EKCalendarType {
-	return EKCalendarType(x.inner.Type())
+// Type the type of the calendar as a EKCalendarType. This is actually based on what source the calendar is in, as well as whether it is a subscribed calendar. CalDAV subscribed calendars have type EKCalendarTypeCalDAV with isSubscribed = YES.
+func (x *Calendar) Type() CalendarType {
+	_r := objc.Send[CalendarType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property   allowsContentModifications @abstract   Represents whether you can this add, remove, or modify items in this calendar.
-//
-// AllowsContentModifications calls the underlying AllowsContentModifications.
+// AllowsContentModifications represents whether you can this add, remove, or modify items in this calendar.
 func (x *Calendar) AllowsContentModifications() bool {
-	return x.inner.AllowsContentModifications()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContentModifications"))
+	return _r
 }
 
-// @property   subscribed @abstract   YES if this calendar is a subscribed calendar.
-//
-// IsSubscribed calls the underlying IsSubscribed.
+// IsSubscribed YES if this calendar is a subscribed calendar.
 func (x *Calendar) IsSubscribed() bool {
-	return x.inner.IsSubscribed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubscribed"))
+	return _r
 }
 
-// @property   immutable @abstract   If this is set to YES, it means you cannot modify any attributes of the calendar or delete it. It does NOT imply that you cannot add events or reminders to the calendar.
-//
-// IsImmutable calls the underlying IsImmutable.
+// IsImmutable if this is set to YES, it means you cannot modify any attributes of the calendar or delete it. It does NOT imply that you cannot add events or reminders to the calendar.
 func (x *Calendar) IsImmutable() bool {
-	return x.inner.IsImmutable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isImmutable"))
+	return _r
 }
 
-// @property   color @abstract   Returns the calendar color as a CGColorRef. @discussion This will be nil for new calendars until you set it.
-//
-// CGColor calls the underlying CGColor.
-func (x *Calendar) CGColor() unsafe.Pointer {
-	return x.inner.CGColor()
+// CGColor returns the calendar color as a CGColorRef. This will be nil for new calendars until you set it.
+func (x *Calendar) CGColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGColor"))
+	return obj.Wrap(_r)
 }
 
-// SetCGColor calls the underlying SetCGColor.
-func (x *Calendar) SetCGColor(cGColor unsafe.Pointer) {
-	x.inner.SetCGColor(cGColor)
+// SetCGColor wraps the corresponding Objective-C method.
+func (x *Calendar) SetCGColor(cGColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCGColor:"), objref.IDOf(cGColor))
 }
 
-// @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.
-//
-// Color calls the underlying Color.
-func (x *Calendar) Color() *appkit.NSColor {
-	return x.inner.Color()
+// Color returns the calendar color as a NSColor. This will be nil for new calendars until you set it.
+func (x *Calendar) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
 }
 
-// SetColor calls the underlying SetColor.
-func (x *Calendar) SetColor(color *appkit.NSColor) {
-	x.inner.SetColor(color)
+// SetColor wraps the corresponding Objective-C method.
+func (x *Calendar) SetColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// @property   supportedEventAvailabilities @discussion Returns a bitfield of supported event availabilities, or EKCalendarEventAvailabilityNone if this calendar does not support setting availability on an event.
-//
-// SupportedEventAvailabilities calls the underlying SupportedEventAvailabilities.
-func (x *Calendar) SupportedEventAvailabilities() EKCalendarEventAvailabilityMask {
-	return EKCalendarEventAvailabilityMask(x.inner.SupportedEventAvailabilities())
+// SupportedEventAvailabilities returns a bitfield of supported event availabilities, or EKCalendarEventAvailabilityNone if this calendar does not support setting availability on an event.
+func (x *Calendar) SupportedEventAvailabilities() CalendarEventAvailabilityMask {
+	_r := objc.Send[CalendarEventAvailabilityMask](objref.IDOf(x), objc.RegisterName("supportedEventAvailabilities"))
+	return _r
 }
 
-// AllowedEntityTypes calls the underlying AllowedEntityTypes.
-func (x *Calendar) AllowedEntityTypes() EKEntityMask {
-	return EKEntityMask(x.inner.AllowedEntityTypes())
+// AllowedEntityTypes wraps the corresponding Objective-C method.
+func (x *Calendar) AllowedEntityTypes() EntityMask {
+	_r := objc.Send[EntityMask](objref.IDOf(x), objc.RegisterName("allowedEntityTypes"))
+	return _r
 }
-
-func (x *Calendar) asObject() *raw.EKObject { return &x.inner.EKObject }
 
 // Calendarable is the interface implemented by [Calendar], for mocking and DI.
 type Calendarable interface {
-	Unwrap() *raw.EKCalendar
+	obj.Object
 	WithSource(source *Source) *Calendar
 	WithTitle(title string) *Calendar
-	WithColor(color *appkit.NSColor) *Calendar
+	WithCGColor(cGColor obj.Object) *Calendar
+	WithColor(color obj.Object) *Calendar
 	Source() *Source
-	SetSource(source *raw.EKSource)
+	SetSource(source *Source)
 	CalendarIdentifier() string
 	Title() string
 	SetTitle(title string)
-	Type() EKCalendarType
+	Type() CalendarType
 	AllowsContentModifications() bool
 	IsSubscribed() bool
 	IsImmutable() bool
-	CGColor() unsafe.Pointer
-	SetCGColor(cGColor unsafe.Pointer)
-	Color() *appkit.NSColor
-	SetColor(color *appkit.NSColor)
-	SupportedEventAvailabilities() EKCalendarEventAvailabilityMask
-	AllowedEntityTypes() EKEntityMask
+	CGColor() obj.Object
+	SetCGColor(cGColor obj.Object)
+	Color() obj.Object
+	SetColor(color obj.Object)
+	SupportedEventAvailabilities() CalendarEventAvailabilityMask
+	AllowedEntityTypes() EntityMask
 }
 
 var _ Calendarable = (*Calendar)(nil)
+
+var _ ObjectProvider = (*Calendar)(nil)

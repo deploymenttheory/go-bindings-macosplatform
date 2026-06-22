@@ -6,60 +6,90 @@ package localauthentication
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A container for data protected by a right.
+// RightStore is an idiomatic wrapper over the Objective-C class LARightStore.
 //
-// RightStore wraps [raw.LARightStore] with a fluent Go API.
+// A container for data protected by a right.
 type RightStore struct {
-	inner *raw.LARightStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LARightStore].
-func (x *RightStore) Unwrap() *raw.LARightStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RightStore) ID() objc.ID { return x.inner.Ptr() }
-
-// RightStoreFromID adopts an existing object pointer as a RightStore (nil for 0).
+// RightStoreFromID adopts an existing Objective-C object as a RightStore
+// (nil for 0), retaining it and registering a release finalizer.
 func RightStoreFromID(id objc.ID) *RightStore {
 	if id == 0 {
 		return nil
 	}
-	return &RightStore{inner: raw.LARightStoreFromID(id)}
+	x := &RightStore{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRightStore creates a new [RightStore].
+// rightStoreAdopt wraps an Objective-C object that this code just created as a
+// RightStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rightStoreAdopt(id objc.ID) *RightStore {
+	if id == 0 {
+		return nil
+	}
+	x := &RightStore{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RightStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RightStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RightStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RightStore) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRightStore creates a new RightStore.
 func NewRightStore() *RightStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LARightStore")), objc.RegisterName("new"))
-	return &RightStore{inner: raw.LARightStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LARightStore")), objc.RegisterName("new"))
+	return rightStoreAdopt(_id)
 }
 
-// Fetches a previously stored right from the shared right store.
+// RightForIdentifierCompletion fetches a previously stored right from the shared right store.
 //
 // RightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (*PersistedRight, error) {
+func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RightForIdentifierCompletion(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.LAPersistedRight, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &PersistedRight{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = PersistedRightFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightForIdentifier:completion:"), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -69,25 +99,22 @@ func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifie
 	}
 }
 
-// Saves a right to a persistent right store.
+// SaveRightIdentifierCompletion saves a right to a persistent right store.
 //
 // SaveRightIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *raw.LARight, identifier string) (*PersistedRight, error) {
+func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *Right, identifier string) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SaveRightIdentifierCompletion(right, foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.LAPersistedRight, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &PersistedRight{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = PersistedRightFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveRight:identifier:completion:"), objref.IDOf(right), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -97,25 +124,22 @@ func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *r
 	}
 }
 
-// Saves a right to a persistent store along with secret data you supply.
+// SaveRightIdentifierSecretCompletion saves a right to a persistent store along with secret data you supply.
 //
 // SaveRightIdentifierSecretCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *raw.LARight, identifier string, secret *foundation.NSData) (*PersistedRight, error) {
+func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret obj.Object) (result *PersistedRight, err error) {
 	type _result struct {
 		val *PersistedRight
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SaveRightIdentifierSecretCompletion(right, foundation.NSStringStringWithUTF8String(identifier), secret, func(_p0 *raw.LAPersistedRight, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &PersistedRight{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = PersistedRightFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveRight:identifier:secret:completion:"), objref.IDOf(right), purego.NSString(identifier), objref.IDOf(secret), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -125,18 +149,17 @@ func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, ri
 	}
 }
 
-// Removes a right from the right store given an instance of that right.
+// RemoveRightCompletion removes a right from the right store given an instance of that right.
 //
 // RemoveRightCompletion blocks until the operation completes or ctx is cancelled.
-func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *raw.LAPersistedRight) error {
+func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *PersistedRight) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveRightCompletion(right, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRight:completion:"), objref.IDOf(right), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -145,18 +168,17 @@ func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *raw.LAPer
 	}
 }
 
-// Removes a right from the right store given its unique identifier.
+// RemoveRightForIdentifierCompletion removes a right from the right store given its unique identifier.
 //
 // RemoveRightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveRightForIdentifierCompletion(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRightForIdentifier:completion:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -165,18 +187,17 @@ func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, ide
 	}
 }
 
-// Removes all rights associated with this client from the right store.
+// RemoveAllRightsWithCompletion removes all rights associated with this client from the right store.
 //
 // RemoveAllRightsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveAllRightsWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllRightsWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -187,11 +208,11 @@ func (x *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {
 
 // RightStoreable is the interface implemented by [RightStore], for mocking and DI.
 type RightStoreable interface {
-	Unwrap() *raw.LARightStore
+	obj.Object
 	RightForIdentifierCompletion(ctx context.Context, identifier string) (*PersistedRight, error)
-	SaveRightIdentifierCompletion(ctx context.Context, right *raw.LARight, identifier string) (*PersistedRight, error)
-	SaveRightIdentifierSecretCompletion(ctx context.Context, right *raw.LARight, identifier string, secret *foundation.NSData) (*PersistedRight, error)
-	RemoveRightCompletion(ctx context.Context, right *raw.LAPersistedRight) error
+	SaveRightIdentifierCompletion(ctx context.Context, right *Right, identifier string) (*PersistedRight, error)
+	SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret obj.Object) (*PersistedRight, error)
+	RemoveRightCompletion(ctx context.Context, right *PersistedRight) error
 	RemoveRightForIdentifierCompletion(ctx context.Context, identifier string) error
 	RemoveAllRightsWithCompletion(ctx context.Context) error
 }

@@ -6,103 +6,110 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A URL session task that uploads data to the network in a request body.
+// URLSessionUploadTask is an idiomatic wrapper over the Objective-C class NSURLSessionUploadTask.
 //
-// URLSessionUploadTask wraps [raw.NSURLSessionUploadTask] with a fluent Go API.
+// It embeds [URLSessionDataTask], promoting that type's methods.
+//
+// A URL session task that uploads data to the network in a request body.
 type URLSessionUploadTask struct {
-	inner *raw.NSURLSessionUploadTask
+	URLSessionDataTask
 }
 
-// Unwrap returns the underlying [raw.NSURLSessionUploadTask].
-func (x *URLSessionUploadTask) Unwrap() *raw.NSURLSessionUploadTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLSessionUploadTask) ID() objc.ID { return x.inner.Ptr() }
-
-// URLSessionUploadTaskFromID adopts an existing object pointer as a URLSessionUploadTask (nil for 0).
+// URLSessionUploadTaskFromID adopts an existing Objective-C object as a URLSessionUploadTask
+// (nil for 0), retaining it and registering a release finalizer.
 func URLSessionUploadTaskFromID(id objc.ID) *URLSessionUploadTask {
 	if id == 0 {
 		return nil
 	}
-	return &URLSessionUploadTask{inner: raw.NSURLSessionUploadTaskFromID(id)}
+	x := &URLSessionUploadTask{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewURLSessionUploadTask creates a new [URLSessionUploadTask].
+// uRLSessionUploadTaskAdopt wraps an Objective-C object that this code just created as a
+// URLSessionUploadTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLSessionUploadTaskAdopt(id objc.ID) *URLSessionUploadTask {
+	if id == 0 {
+		return nil
+	}
+	x := &URLSessionUploadTask{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewURLSessionUploadTask creates a new URLSessionUploadTask.
 func NewURLSessionUploadTask() *URLSessionUploadTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionUploadTask")), objc.RegisterName("new"))
-	return &URLSessionUploadTask{inner: raw.NSURLSessionUploadTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionUploadTask")), objc.RegisterName("new"))
+	return uRLSessionUploadTaskAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *URLSessionUploadTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetDelegate(delegate)
-	return x
-}
-
-// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return x
 }
 
-// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionUploadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return x
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return x
 }
 
-// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
-func (x *URLSessionUploadTask) WithTaskDescription(taskDescription string) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+func (x *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return x
 }
 
-// WithPriority sets the priority property and returns the receiver for chaining.
+// WithPriority sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionUploadTask) WithPriority(priority float32) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetPriority(priority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
 func (x *URLSessionUploadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLSessionUploadTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionUploadTask {
-	x.inner.NSURLSessionDataTask.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *URLSessionUploadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Cancels an upload and calls the completion handler with resume data for later use. resumeData will be nil if the server does not support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ - Parameter completionHandler: The completion handler to call when the upload has been successfully canceled.
+// CancelByProducingResumeData cancels an upload and calls the completion handler with resume data for later use. resumeData will be nil if the server does not support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ - Parameter completionHandler: The completion handler to call when the upload has been successfully canceled.
 //
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (*Data, error) {
+func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {
 	type _result struct {
 		val *Data
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CancelByProducingResumeData(func(_p0 *raw.NSData) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Data{inner: _p0}
-		}
+		_o.val = DataFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelByProducingResumeData:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -112,30 +119,21 @@ func (x *URLSessionUploadTask) CancelByProducingResumeData(ctx context.Context) 
 	}
 }
 
-func (x *URLSessionUploadTask) asURLSessionDataTask() *raw.NSURLSessionDataTask {
-	return &x.inner.NSURLSessionDataTask
-}
-
-func (x *URLSessionUploadTask) asURLSessionTask() *raw.NSURLSessionTask {
-	return &x.inner.NSURLSessionDataTask.NSURLSessionTask
-}
-
-func (x *URLSessionUploadTask) asObject() *raw.NSObject {
-	return &x.inner.NSURLSessionDataTask.NSURLSessionTask.NSObject
-}
-
 // URLSessionUploadTaskable is the interface implemented by [URLSessionUploadTask], for mocking and DI.
 type URLSessionUploadTaskable interface {
-	Unwrap() *raw.NSURLSessionUploadTask
-	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionUploadTask
+	obj.Object
 	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask
 	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask
 	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask
-	WithTaskDescription(taskDescription string) *URLSessionUploadTask
+	WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask
 	WithPriority(priority float32) *URLSessionUploadTask
 	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionUploadTask
+	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask
 	CancelByProducingResumeData(ctx context.Context) (*Data, error)
 }
 
 var _ URLSessionUploadTaskable = (*URLSessionUploadTask)(nil)
+
+var _ URLSessionDataTaskProvider = (*URLSessionUploadTask)(nil)
+
+var _ URLSessionTaskProvider = (*URLSessionUploadTask)(nil)

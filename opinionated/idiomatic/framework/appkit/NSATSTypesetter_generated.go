@@ -5,115 +5,113 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A concrete typesetter object that places glyphs during the text layout process.
+// ATSTypesetter is an idiomatic wrapper over the Objective-C class NSATSTypesetter.
 //
-// ATSTypesetter wraps [raw.NSATSTypesetter] with a fluent Go API.
+// It embeds [Typesetter], promoting that type's methods.
+//
+// A concrete typesetter object that places glyphs during the text layout process.
 type ATSTypesetter struct {
-	inner *raw.NSATSTypesetter
+	Typesetter
 }
 
-// Unwrap returns the underlying [raw.NSATSTypesetter].
-func (x *ATSTypesetter) Unwrap() *raw.NSATSTypesetter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ATSTypesetter) ID() objc.ID { return x.inner.Ptr() }
-
-// ATSTypesetterFromID adopts an existing object pointer as a ATSTypesetter (nil for 0).
+// ATSTypesetterFromID adopts an existing Objective-C object as a ATSTypesetter
+// (nil for 0), retaining it and registering a release finalizer.
 func ATSTypesetterFromID(id objc.ID) *ATSTypesetter {
 	if id == 0 {
 		return nil
 	}
-	return &ATSTypesetter{inner: raw.NSATSTypesetterFromID(id)}
+	x := &ATSTypesetter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewATSTypesetter creates a new [ATSTypesetter].
+// aTSTypesetterAdopt wraps an Objective-C object that this code just created as a
+// ATSTypesetter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aTSTypesetterAdopt(id objc.ID) *ATSTypesetter {
+	if id == 0 {
+		return nil
+	}
+	x := &ATSTypesetter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewATSTypesetter creates a new ATSTypesetter.
 func NewATSTypesetter() *ATSTypesetter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSATSTypesetter")), objc.RegisterName("new"))
-	return &ATSTypesetter{inner: raw.NSATSTypesetterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSATSTypesetter")), objc.RegisterName("new"))
+	return aTSTypesetterAdopt(_id)
 }
 
-// Returns whether the typesetter uses the leading (or line gap) value specified in the font metric information of the current font.
-//
-// WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
+// WithUsesFontLeading returns whether the typesetter uses the leading (or line gap) value specified in the font metric information of the current font.
 func (x *ATSTypesetter) WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter {
-	x.inner.NSTypesetter.SetUsesFontLeading(usesFontLeading)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFontLeading:"), usesFontLeading)
 	return x
 }
 
-// Returns the current typesetter behavior.
-//
-// WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
-func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *ATSTypesetter {
-	x.inner.NSTypesetter.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
+// WithTypesetterBehavior returns the current typesetter behavior.
+func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior TypesetterBehavior) *ATSTypesetter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTypesetterBehavior:"), typesetterBehavior)
 	return x
 }
 
-// Returns the current hyphenation factor.
-//
-// WithHyphenationFactor sets the hyphenationFactor property and returns the receiver for chaining.
+// WithHyphenationFactor returns the current hyphenation factor.
 func (x *ATSTypesetter) WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter {
-	x.inner.NSTypesetter.SetHyphenationFactor(hyphenationFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
 	return x
 }
 
-// Returns the current line fragment padding, in points.
-//
-// WithLineFragmentPadding sets the lineFragmentPadding property and returns the receiver for chaining.
+// WithLineFragmentPadding returns the current line fragment padding, in points.
 func (x *ATSTypesetter) WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter {
-	x.inner.NSTypesetter.SetLineFragmentPadding(lineFragmentPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineFragmentPadding:"), lineFragmentPadding)
 	return x
 }
 
-// Returns whether bidirectional text processing is enabled.
-//
-// WithBidiProcessingEnabled sets the bidiProcessingEnabled property and returns the receiver for chaining.
+// WithBidiProcessingEnabled returns whether bidirectional text processing is enabled.
 func (x *ATSTypesetter) WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter {
-	x.inner.NSTypesetter.SetBidiProcessingEnabled(bidiProcessingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidiProcessingEnabled:"), bidiProcessingEnabled)
 	return x
 }
 
-// Returns the text backing store, usually an instance of NSTextStorage.
-//
-// WithAttributedString sets the attributedString property and returns the receiver for chaining.
-func (x *ATSTypesetter) WithAttributedString(attributedString *foundation.NSAttributedString) *ATSTypesetter {
-	x.inner.NSTypesetter.SetAttributedString(attributedString)
+// WithAttributedString returns the text backing store, usually an instance of NSTextStorage.
+func (x *ATSTypesetter) WithAttributedString(attributedString obj.Object) *ATSTypesetter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
 	return x
 }
 
-// This method has been deprecated. Use the NSTypesetter method getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter: instead.
-//
-// LineFragmentRectForProposedRectRemainingRect calls the underlying LineFragmentRectForProposedRectRemainingRect.
-func (x *ATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForProposedRectRemainingRect(proposedRect, remainingRect)
+// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.
+func (x *ATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool) {
+	var _out0 int
+	var _out1 int
+	var _out2 GlyphInscription
+	var _out3 bool
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:"), glyphsRange, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _r, _out0, _out1, _out2, _out3
 }
-
-// Extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.
-//
-// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits.
-func (x *ATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint {
-	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)
-}
-
-func (x *ATSTypesetter) asTypesetter() *raw.NSTypesetter { return &x.inner.NSTypesetter }
 
 // ATSTypesetterable is the interface implemented by [ATSTypesetter], for mocking and DI.
 type ATSTypesetterable interface {
-	Unwrap() *raw.NSATSTypesetter
+	obj.Object
 	WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter
-	WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *ATSTypesetter
+	WithTypesetterBehavior(typesetterBehavior TypesetterBehavior) *ATSTypesetter
 	WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter
 	WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter
 	WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter
-	WithAttributedString(attributedString *foundation.NSAttributedString) *ATSTypesetter
-	LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect
-	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint
+	WithAttributedString(attributedString obj.Object) *ATSTypesetter
+	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool)
 }
 
 var _ ATSTypesetterable = (*ATSTypesetter)(nil)
+
+var _ TypesetterProvider = (*ATSTypesetter)(nil)

@@ -5,41 +5,76 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object you use to convert to and from a vCard representation of the user’s contacts.
+// ContactVCardSerialization is an idiomatic wrapper over the Objective-C class CNContactVCardSerialization.
 //
-// ContactVCardSerialization wraps [raw.CNContactVCardSerialization] with a fluent Go API.
+// An object you use to convert to and from a vCard representation of the user’s contacts.
 type ContactVCardSerialization struct {
-	inner *raw.CNContactVCardSerialization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactVCardSerialization].
-func (x *ContactVCardSerialization) Unwrap() *raw.CNContactVCardSerialization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactVCardSerialization) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactVCardSerializationFromID adopts an existing object pointer as a ContactVCardSerialization (nil for 0).
+// ContactVCardSerializationFromID adopts an existing Objective-C object as a ContactVCardSerialization
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactVCardSerializationFromID(id objc.ID) *ContactVCardSerialization {
 	if id == 0 {
 		return nil
 	}
-	return &ContactVCardSerialization{inner: raw.CNContactVCardSerializationFromID(id)}
+	x := &ContactVCardSerialization{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContactVCardSerialization creates a new [ContactVCardSerialization].
+// contactVCardSerializationAdopt wraps an Objective-C object that this code just created as a
+// ContactVCardSerialization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactVCardSerializationAdopt(id objc.ID) *ContactVCardSerialization {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactVCardSerialization{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactVCardSerialization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactVCardSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactVCardSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContactVCardSerialization) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContactVCardSerialization creates a new ContactVCardSerialization.
 func NewContactVCardSerialization() *ContactVCardSerialization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactVCardSerialization")), objc.RegisterName("new"))
-	return &ContactVCardSerialization{inner: raw.CNContactVCardSerializationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactVCardSerialization")), objc.RegisterName("new"))
+	return contactVCardSerializationAdopt(_id)
 }
 
 // ContactVCardSerializationable is the interface implemented by [ContactVCardSerialization], for mocking and DI.
 type ContactVCardSerializationable interface {
-	Unwrap() *raw.CNContactVCardSerialization
+	obj.Object
 }
 
 var _ ContactVCardSerializationable = (*ContactVCardSerialization)(nil)

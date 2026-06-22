@@ -5,118 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterCostStruct wraps [raw.MTRDeviceEnergyManagementClusterCostStruct] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterCostStruct is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterCostStruct.
 type MTRDeviceEnergyManagementClusterCostStruct struct {
-	inner *raw.MTRDeviceEnergyManagementClusterCostStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterCostStruct].
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterCostStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterCostStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterCostStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterCostStructFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterCostStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterCostStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterCostStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterCostStruct{inner: raw.MTRDeviceEnergyManagementClusterCostStructFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterCostStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterCostStruct creates a new [MTRDeviceEnergyManagementClusterCostStruct].
+// mTRDeviceEnergyManagementClusterCostStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterCostStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterCostStructAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterCostStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterCostStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceEnergyManagementClusterCostStruct creates a new MTRDeviceEnergyManagementClusterCostStruct.
 func NewMTRDeviceEnergyManagementClusterCostStruct() *MTRDeviceEnergyManagementClusterCostStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterCostStruct")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterCostStruct{inner: raw.MTRDeviceEnergyManagementClusterCostStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterCostStruct")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterCostStructAdopt(_id)
 }
 
-// WithCostType sets the costType property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct {
-	x.inner.SetCostType(costType)
+// WithCostType sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCostType:"), objref.IDOf(costType))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct {
-	x.inner.SetValue(value)
+// WithValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithDecimalPoints sets the decimalPoints property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct {
-	x.inner.SetDecimalPoints(decimalPoints)
+// WithDecimalPoints sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
 	return x
 }
 
-// WithCurrency sets the currency property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct {
-	x.inner.SetCurrency(currency)
+// WithCurrency sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
 	return x
 }
 
-// CostType calls the underlying CostType.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) CostType() *foundation.NSNumber {
-	return x.inner.CostType()
+// CostType wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) CostType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("costType"))
+	return obj.Wrap(_r)
 }
 
-// SetCostType calls the underlying SetCostType.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCostType(costType *foundation.NSNumber) {
-	x.inner.SetCostType(costType)
+// SetCostType wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCostType(costType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCostType:"), objref.IDOf(costType))
 }
 
-// Value calls the underlying Value.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Value() *foundation.NSNumber {
-	return x.inner.Value()
+// Value wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetValue(value *foundation.NSNumber) {
-	x.inner.SetValue(value)
+// SetValue wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// DecimalPoints calls the underlying DecimalPoints.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() *foundation.NSNumber {
-	return x.inner.DecimalPoints()
+// DecimalPoints wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalPoints"))
+	return obj.Wrap(_r)
 }
 
-// SetDecimalPoints calls the underlying SetDecimalPoints.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetDecimalPoints(decimalPoints *foundation.NSNumber) {
-	x.inner.SetDecimalPoints(decimalPoints)
+// SetDecimalPoints wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetDecimalPoints(decimalPoints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
 }
 
-// Currency calls the underlying Currency.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) Currency() *foundation.NSNumber {
-	return x.inner.Currency()
+// Currency wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) Currency() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currency"))
+	return obj.Wrap(_r)
 }
 
-// SetCurrency calls the underlying SetCurrency.
-func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCurrency(currency *foundation.NSNumber) {
-	x.inner.SetCurrency(currency)
+// SetCurrency wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCurrency(currency obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
 }
 
 // MTRDeviceEnergyManagementClusterCostStructable is the interface implemented by [MTRDeviceEnergyManagementClusterCostStruct], for mocking and DI.
 type MTRDeviceEnergyManagementClusterCostStructable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterCostStruct
-	WithCostType(costType *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
-	WithValue(value *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
-	WithDecimalPoints(decimalPoints *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
-	WithCurrency(currency *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
-	CostType() *foundation.NSNumber
-	SetCostType(costType *foundation.NSNumber)
-	Value() *foundation.NSNumber
-	SetValue(value *foundation.NSNumber)
-	DecimalPoints() *foundation.NSNumber
-	SetDecimalPoints(decimalPoints *foundation.NSNumber)
-	Currency() *foundation.NSNumber
-	SetCurrency(currency *foundation.NSNumber)
+	obj.Object
+	WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
+	WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
+	WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
+	WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct
+	CostType() obj.Object
+	SetCostType(costType obj.Object)
+	Value() obj.Object
+	SetValue(value obj.Object)
+	DecimalPoints() obj.Object
+	SetDecimalPoints(decimalPoints obj.Object)
+	Currency() obj.Object
+	SetCurrency(currency obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterCostStructable = (*MTRDeviceEnergyManagementClusterCostStruct)(nil)

@@ -5,45 +5,79 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that defines the cadence at which to process video.
+// VideoProcessorCadence is an idiomatic wrapper over the Objective-C class VNVideoProcessorCadence.
 //
-// VideoProcessorCadence wraps [raw.VNVideoProcessorCadence] with a fluent Go API.
+// VideoProcessorCadence is an abstract base — you do not construct it directly. Construct one of [VideoProcessorFrameRateCadence], [VideoProcessorTimeIntervalCadence] and pass it where a VideoProcessorCadence is accepted.
+//
+// An object that defines the cadence at which to process video.
 type VideoProcessorCadence struct {
-	inner *raw.VNVideoProcessorCadence
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNVideoProcessorCadence].
-func (x *VideoProcessorCadence) Unwrap() *raw.VNVideoProcessorCadence { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoProcessorCadence) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoProcessorCadenceFromID adopts an existing object pointer as a VideoProcessorCadence (nil for 0).
+// VideoProcessorCadenceFromID adopts an existing Objective-C object as a VideoProcessorCadence
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoProcessorCadenceFromID(id objc.ID) *VideoProcessorCadence {
 	if id == 0 {
 		return nil
 	}
-	return &VideoProcessorCadence{inner: raw.VNVideoProcessorCadenceFromID(id)}
+	x := &VideoProcessorCadence{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVideoProcessorCadence creates a new [VideoProcessorCadence].
-func NewVideoProcessorCadence() *VideoProcessorCadence {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNVideoProcessorCadence")), objc.RegisterName("new"))
-	return &VideoProcessorCadence{inner: raw.VNVideoProcessorCadenceFromID(_id)}
+// videoProcessorCadenceAdopt wraps an Objective-C object that this code just created as a
+// VideoProcessorCadence (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoProcessorCadenceAdopt(id objc.ID) *VideoProcessorCadence {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoProcessorCadence{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *VideoProcessorCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence {
-	return x.inner
+// Description returns the object's -description text.
+func (x *VideoProcessorCadence) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoProcessorCadence) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoProcessorCadence) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VideoProcessorCadence) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
 // VideoProcessorCadenceable is the interface implemented by [VideoProcessorCadence], for mocking and DI.
 type VideoProcessorCadenceable interface {
-	Unwrap() *raw.VNVideoProcessorCadence
+	obj.Object
 }
 
 var _ VideoProcessorCadenceable = (*VideoProcessorCadence)(nil)
+
+// isVideoProcessorCadence marks VideoProcessorCadence — and, by embedding promotion, its
+// subclasses — as a member of the VideoProcessorCadence hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VideoProcessorCadence) isVideoProcessorCadence() {}
+
+var _ VideoProcessorCadenceProvider = (*VideoProcessorCadence)(nil)

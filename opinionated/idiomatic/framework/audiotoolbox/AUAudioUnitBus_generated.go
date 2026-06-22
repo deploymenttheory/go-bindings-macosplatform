@@ -5,271 +5,255 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A class that defines an input or output connection point on an audio unit.
+// AudioUnitBus is an idiomatic wrapper over the Objective-C class AUAudioUnitBus.
 //
-// AudioUnitBus wraps [raw.AUAudioUnitBus] with a fluent Go API.
+// A class that defines an input or output connection point on an audio unit.
 type AudioUnitBus struct {
-	inner *raw.AUAudioUnitBus
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUAudioUnitBus].
-func (x *AudioUnitBus) Unwrap() *raw.AUAudioUnitBus { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitBus) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitBusFromID adopts an existing object pointer as a AudioUnitBus (nil for 0).
+// AudioUnitBusFromID adopts an existing Objective-C object as a AudioUnitBus
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitBusFromID(id objc.ID) *AudioUnitBus {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitBus{inner: raw.AUAudioUnitBusFromID(id)}
+	x := &AudioUnitBus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a bus object with a specific format.
-//
-// NewAudioUnitBusWithFormatError creates a new [AudioUnitBus].
-func NewAudioUnitBusWithFormatError(format *avfaudio.AVAudioFormat) (*AudioUnitBus, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBus")), objc.RegisterName("alloc"))
+// audioUnitBusAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitBus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitBusAdopt(id objc.ID) *AudioUnitBus {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitBus{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitBus) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitBus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitBus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AudioUnitBus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAudioUnitBusWithFormatError initializes a bus object with a specific format.
+func NewAudioUnitBusWithFormatError(format obj.Object) (result *AudioUnitBus, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBus")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:error:"), format.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:error:"), objref.IDOf(format), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &AudioUnitBus{inner: raw.AUAudioUnitBusFromID(_id)}, nil
+	return audioUnitBusAdopt(_id), nil
 }
 
-// @property	shouldAllocateBuffer @brief		Controls the audio unit's allocation strategy for a bus. @discussion Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
-//
-// WithShouldAllocateBuffer sets the shouldAllocateBuffer property and returns the receiver for chaining.
+// WithShouldAllocateBuffer controls the audio unit's allocation strategy for a bus. Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
 func (x *AudioUnitBus) WithShouldAllocateBuffer(shouldAllocateBuffer bool) *AudioUnitBus {
-	x.inner.SetShouldAllocateBuffer(shouldAllocateBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAllocateBuffer:"), shouldAllocateBuffer)
 	return x
 }
 
-// Determines whether the bus is active.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled determines whether the bus is active.
 func (x *AudioUnitBus) WithEnabled(enabled bool) *AudioUnitBus {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A name for the bus.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a name for the bus.
 func (x *AudioUnitBus) WithName(name string) *AudioUnitBus {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// Information about latency in the audio unit’s processing context.
-//
-// WithContextPresentationLatency sets the contextPresentationLatency property and returns the receiver for chaining.
+// WithContextPresentationLatency information about latency in the audio unit’s processing context.
 func (x *AudioUnitBus) WithContextPresentationLatency(contextPresentationLatency float64) *AudioUnitBus {
-	x.inner.SetContextPresentationLatency(contextPresentationLatency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextPresentationLatency:"), contextPresentationLatency)
 	return x
 }
 
-// An array of numbers indicating the supported number of channels for this bus.
-//
-// WithSupportedChannelCounts sets the collection, converting the Go slice to an NSArray.
-func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupportedChannelCounts(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupportedChannelCounts(_arr)
+// WithSupportedChannelCounts an array of numbers indicating the supported number of channels for this bus.
+func (x *AudioUnitBus) WithSupportedChannelCounts(items ...obj.Object) *AudioUnitBus {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedChannelCounts:"), _arr)
 	return x
 }
 
-// The maximum number of channels supported for this bus.
-//
-// WithMaximumChannelCount sets the maximumChannelCount property and returns the receiver for chaining.
+// WithMaximumChannelCount the maximum number of channels supported for this bus.
 func (x *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *AudioUnitBus {
-	x.inner.SetMaximumChannelCount(maximumChannelCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumChannelCount:"), maximumChannelCount)
 	return x
 }
 
-// Sets the bus’s audio format.
-//
-// SetFormatError calls the underlying SetFormatError.
-func (x *AudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, error) {
-	return x.inner.SetFormatError(format)
+// SetFormat sets the bus’s audio format.
+func (x *AudioUnitBus) SetFormat(format obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setFormat:error:"), objref.IDOf(format), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property	format @brief		The audio format and channel layout of audio being transferred on the bus. @discussion Bridged to the v2 property kAudioUnitProperty_StreamFormat.
-//
-// Format calls the underlying Format.
-func (x *AudioUnitBus) Format() *avfaudio.AVAudioFormat {
-	return x.inner.Format()
+// Format the audio format and channel layout of audio being transferred on the bus. Bridged to the v2 property kAudioUnitProperty_StreamFormat.
+func (x *AudioUnitBus) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return obj.Wrap(_r)
 }
 
-// @property	shouldAllocateBuffer @brief		Controls the audio unit's allocation strategy for a bus. @discussion Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
-//
-// ShouldAllocateBuffer calls the underlying ShouldAllocateBuffer.
+// ShouldAllocateBuffer controls the audio unit's allocation strategy for a bus. Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
 func (x *AudioUnitBus) ShouldAllocateBuffer() bool {
-	return x.inner.ShouldAllocateBuffer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAllocateBuffer"))
+	return _r
 }
 
-// SetShouldAllocateBuffer calls the underlying SetShouldAllocateBuffer.
+// SetShouldAllocateBuffer wraps the corresponding Objective-C method.
 func (x *AudioUnitBus) SetShouldAllocateBuffer(shouldAllocateBuffer bool) {
-	x.inner.SetShouldAllocateBuffer(shouldAllocateBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAllocateBuffer:"), shouldAllocateBuffer)
 }
 
-// @property	enabled @brief		Whether the bus is active. @discussion Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
-//
-// IsEnabled calls the underlying IsEnabled.
+// IsEnabled whether the bus is active. Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
 func (x *AudioUnitBus) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
+// SetEnabled wraps the corresponding Objective-C method.
 func (x *AudioUnitBus) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// @property	name @brief		A name for the bus. Can be set by host.
-//
-// Name calls the underlying Name.
+// Name a name for the bus. Can be set by host.
 func (x *AudioUnitBus) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *AudioUnitBus) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property   index @brief      The index of this bus in the containing array.
-//
-// Index calls the underlying Index.
-func (x *AudioUnitBus) Index() uint {
-	return x.inner.Index()
+// Index the index of this bus in the containing array.
+func (x *AudioUnitBus) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// @property   busType @brief      The AUAudioUnitBusType.
-//
-// BusType calls the underlying BusType.
-func (x *AudioUnitBus) BusType() AUAudioUnitBusType {
-	return AUAudioUnitBusType(x.inner.BusType())
+// BusType the AUAudioUnitBusType.
+func (x *AudioUnitBus) BusType() AudioUnitBusType {
+	_r := objc.Send[AudioUnitBusType](objref.IDOf(x), objc.RegisterName("busType"))
+	return _r
 }
 
-// @property   ownerAudioUnit @brief      The audio unit that owns the bus.
-//
-// OwnerAudioUnit calls the underlying OwnerAudioUnit.
+// OwnerAudioUnit the audio unit that owns the bus.
 func (x *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
-	_r := x.inner.OwnerAudioUnit()
-	if _r == nil {
-		return nil
-	}
-	return &AudioUnit{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerAudioUnit"))
+	return AudioUnitFromID(_r)
 }
 
-// @property	supportedChannelLayoutTags @discussion This is an array of NSNumbers representing AudioChannelLayoutTag.
+// SupportedChannelLayoutTags this is an array of NSNumbers representing AudioChannelLayoutTag.
 //
 // SupportedChannelLayoutTags returns the collection as a Go slice.
-func (x *AudioUnitBus) SupportedChannelLayoutTags() []*foundation.NSNumber {
-	arr := x.inner.SupportedChannelLayoutTags()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioUnitBus) SupportedChannelLayoutTags() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedChannelLayoutTags"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property	contextPresentationLatency @brief		Information about latency in the audio unit's processing context. @discussion This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
-//
-// ContextPresentationLatency calls the underlying ContextPresentationLatency.
+// ContextPresentationLatency information about latency in the audio unit's processing context. This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
 func (x *AudioUnitBus) ContextPresentationLatency() float64 {
-	return x.inner.ContextPresentationLatency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contextPresentationLatency"))
+	return _r
 }
 
-// SetContextPresentationLatency calls the underlying SetContextPresentationLatency.
+// SetContextPresentationLatency wraps the corresponding Objective-C method.
 func (x *AudioUnitBus) SetContextPresentationLatency(contextPresentationLatency float64) {
-	x.inner.SetContextPresentationLatency(contextPresentationLatency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextPresentationLatency:"), contextPresentationLatency)
 }
 
-// @property	supportedChannelCounts @brief		An array of numbers giving the supported numbers of channels for this bus. @discussion If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
+// SupportedChannelCounts an array of numbers giving the supported numbers of channels for this bus. If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
 //
 // SupportedChannelCounts returns the collection as a Go slice.
-func (x *AudioUnitBus) SupportedChannelCounts() []*foundation.NSNumber {
-	arr := x.inner.SupportedChannelCounts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioUnitBus) SupportedChannelCounts() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedChannelCounts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSupportedChannelCounts calls the underlying SetSupportedChannelCounts.
-func (x *AudioUnitBus) SetSupportedChannelCounts(supportedChannelCounts *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetSupportedChannelCounts(supportedChannelCounts)
+// SetSupportedChannelCounts wraps the corresponding Objective-C method.
+func (x *AudioUnitBus) SetSupportedChannelCounts(supportedChannelCounts []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedChannelCounts:"), purego.SliceToNSArray(supportedChannelCounts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property	maximumChannelCount @brief		The maximum numbers of channels supported for this bus. @discussion If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
-//
-// MaximumChannelCount calls the underlying MaximumChannelCount.
+// MaximumChannelCount the maximum numbers of channels supported for this bus. If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
 func (x *AudioUnitBus) MaximumChannelCount() uint32 {
-	return x.inner.MaximumChannelCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumChannelCount"))
+	return _r
 }
 
-// SetMaximumChannelCount calls the underlying SetMaximumChannelCount.
+// SetMaximumChannelCount wraps the corresponding Objective-C method.
 func (x *AudioUnitBus) SetMaximumChannelCount(maximumChannelCount uint32) {
-	x.inner.SetMaximumChannelCount(maximumChannelCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumChannelCount:"), maximumChannelCount)
 }
 
 // AudioUnitBusable is the interface implemented by [AudioUnitBus], for mocking and DI.
 type AudioUnitBusable interface {
-	Unwrap() *raw.AUAudioUnitBus
+	obj.Object
 	WithShouldAllocateBuffer(shouldAllocateBuffer bool) *AudioUnitBus
 	WithEnabled(enabled bool) *AudioUnitBus
 	WithName(name string) *AudioUnitBus
 	WithContextPresentationLatency(contextPresentationLatency float64) *AudioUnitBus
-	WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus
+	WithSupportedChannelCounts(items ...obj.Object) *AudioUnitBus
 	WithMaximumChannelCount(maximumChannelCount uint32) *AudioUnitBus
-	SetFormatError(format *avfaudio.AVAudioFormat) (bool, error)
-	Format() *avfaudio.AVAudioFormat
+	SetFormat(format obj.Object) error
+	Format() obj.Object
 	ShouldAllocateBuffer() bool
 	SetShouldAllocateBuffer(shouldAllocateBuffer bool)
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 	Name() string
 	SetName(name string)
-	Index() uint
-	BusType() AUAudioUnitBusType
+	Index() int
+	BusType() AudioUnitBusType
 	OwnerAudioUnit() *AudioUnit
-	SupportedChannelLayoutTags() []*foundation.NSNumber
+	SupportedChannelLayoutTags() []obj.Object
 	ContextPresentationLatency() float64
 	SetContextPresentationLatency(contextPresentationLatency float64)
-	SupportedChannelCounts() []*foundation.NSNumber
-	SetSupportedChannelCounts(supportedChannelCounts *foundation.NSArray[*foundation.NSNumber])
+	SupportedChannelCounts() []obj.Object
+	SetSupportedChannelCounts(supportedChannelCounts []obj.Object)
 	MaximumChannelCount() uint32
 	SetMaximumChannelCount(maximumChannelCount uint32)
 }

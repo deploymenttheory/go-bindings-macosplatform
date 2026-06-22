@@ -9,26 +9,28 @@ import (
 )
 
 // Messages that describe a content blocker or Safari app extension error.
-type SFErrorCode int64
+type ErrorCode int64
 
 const (
 	// A Content Blocker or Safari app extension with the specified bundle identifier was not found, or the bundle identifier specified an extension that was not owned by you.
-	SFErrorNoExtensionFound SFErrorCode = 1
+	ErrorNoExtensionFound ErrorCode = 1
 	// The Content Blocker extension returned an NSExtensionItem that did not include an attachment.
-	SFErrorNoAttachmentFound SFErrorCode = 2
+	ErrorNoAttachmentFound ErrorCode = 2
 	// There was an error loading the content blocker extension.
-	SFErrorLoadingInterrupted SFErrorCode = 3
+	ErrorLoadingInterrupted ErrorCode = 3
 )
 
-func (e SFErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case SFErrorNoExtensionFound:
-		return "SFErrorNoExtensionFound"
-	case SFErrorNoAttachmentFound:
-		return "SFErrorNoAttachmentFound"
-	case SFErrorLoadingInterrupted:
-		return "SFErrorLoadingInterrupted"
+	case ErrorNoExtensionFound:
+		return "ErrorNoExtensionFound"
+	case ErrorNoAttachmentFound:
+		return "ErrorNoAttachmentFound"
+	case ErrorLoadingInterrupted:
+		return "ErrorLoadingInterrupted"
 	default:
-		return fmt.Sprintf("SFErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }

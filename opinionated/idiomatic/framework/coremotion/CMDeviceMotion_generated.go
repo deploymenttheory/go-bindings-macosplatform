@@ -5,89 +5,79 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
+// DeviceMotion is an idiomatic wrapper over the Objective-C class CMDeviceMotion.
 //
-// DeviceMotion wraps [raw.CMDeviceMotion] with a fluent Go API.
+// It embeds [LogItem], promoting that type's methods.
+//
+// Encapsulated measurements of the attitude, rotation rate, and acceleration of a device.
 type DeviceMotion struct {
-	inner *raw.CMDeviceMotion
+	LogItem
 }
 
-// Unwrap returns the underlying [raw.CMDeviceMotion].
-func (x *DeviceMotion) Unwrap() *raw.CMDeviceMotion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceMotion) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceMotionFromID adopts an existing object pointer as a DeviceMotion (nil for 0).
+// DeviceMotionFromID adopts an existing Objective-C object as a DeviceMotion
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceMotionFromID(id objc.ID) *DeviceMotion {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceMotion{inner: raw.CMDeviceMotionFromID(id)}
+	x := &DeviceMotion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDeviceMotion creates a new [DeviceMotion].
-func NewDeviceMotion() *DeviceMotion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMDeviceMotion")), objc.RegisterName("new"))
-	return &DeviceMotion{inner: raw.CMDeviceMotionFromID(_id)}
-}
-
-// Attitude calls the underlying Attitude.
-func (x *DeviceMotion) Attitude() *Attitude {
-	_r := x.inner.Attitude()
-	if _r == nil {
+// deviceMotionAdopt wraps an Objective-C object that this code just created as a
+// DeviceMotion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceMotionAdopt(id objc.ID) *DeviceMotion {
+	if id == 0 {
 		return nil
 	}
-	return &Attitude{inner: _r}
+	x := &DeviceMotion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// RotationRate calls the underlying RotationRate.
-func (x *DeviceMotion) RotationRate() raw.CMRotationRate {
-	return x.inner.RotationRate()
+// NewDeviceMotion creates a new DeviceMotion.
+func NewDeviceMotion() *DeviceMotion {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMDeviceMotion")), objc.RegisterName("new"))
+	return deviceMotionAdopt(_id)
 }
 
-// Gravity calls the underlying Gravity.
-func (x *DeviceMotion) Gravity() raw.CMAcceleration {
-	return x.inner.Gravity()
+// Attitude wraps the corresponding Objective-C method.
+func (x *DeviceMotion) Attitude() *Attitude {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attitude"))
+	return AttitudeFromID(_r)
 }
 
-// UserAcceleration calls the underlying UserAcceleration.
-func (x *DeviceMotion) UserAcceleration() raw.CMAcceleration {
-	return x.inner.UserAcceleration()
-}
-
-// MagneticField calls the underlying MagneticField.
-func (x *DeviceMotion) MagneticField() raw.CMCalibratedMagneticField {
-	return x.inner.MagneticField()
-}
-
-// Heading calls the underlying Heading.
+// Heading wraps the corresponding Objective-C method.
 func (x *DeviceMotion) Heading() float64 {
-	return x.inner.Heading()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("heading"))
+	return _r
 }
 
-// SensorLocation calls the underlying SensorLocation.
-func (x *DeviceMotion) SensorLocation() CMDeviceMotionSensorLocation {
-	return CMDeviceMotionSensorLocation(x.inner.SensorLocation())
+// SensorLocation wraps the corresponding Objective-C method.
+func (x *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
+	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(x), objc.RegisterName("sensorLocation"))
+	return _r
 }
-
-func (x *DeviceMotion) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
 
 // DeviceMotionable is the interface implemented by [DeviceMotion], for mocking and DI.
 type DeviceMotionable interface {
-	Unwrap() *raw.CMDeviceMotion
+	obj.Object
 	Attitude() *Attitude
-	RotationRate() raw.CMRotationRate
-	Gravity() raw.CMAcceleration
-	UserAcceleration() raw.CMAcceleration
-	MagneticField() raw.CMCalibratedMagneticField
 	Heading() float64
-	SensorLocation() CMDeviceMotionSensorLocation
+	SensorLocation() DeviceMotionSensorLocation
 }
 
 var _ DeviceMotionable = (*DeviceMotion)(nil)
+
+var _ LogItemProvider = (*DeviceMotion)(nil)

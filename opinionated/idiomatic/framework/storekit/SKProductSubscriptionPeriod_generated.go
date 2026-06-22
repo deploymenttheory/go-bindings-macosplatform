@@ -5,53 +5,90 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing the subscription period duration information.
+// ProductSubscriptionPeriod is an idiomatic wrapper over the Objective-C class SKProductSubscriptionPeriod.
 //
-// ProductSubscriptionPeriod wraps [raw.SKProductSubscriptionPeriod] with a fluent Go API.
+// An object containing the subscription period duration information.
 type ProductSubscriptionPeriod struct {
-	inner *raw.SKProductSubscriptionPeriod
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProductSubscriptionPeriod].
-func (x *ProductSubscriptionPeriod) Unwrap() *raw.SKProductSubscriptionPeriod { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProductSubscriptionPeriod) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductSubscriptionPeriodFromID adopts an existing object pointer as a ProductSubscriptionPeriod (nil for 0).
+// ProductSubscriptionPeriodFromID adopts an existing Objective-C object as a ProductSubscriptionPeriod
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductSubscriptionPeriodFromID(id objc.ID) *ProductSubscriptionPeriod {
 	if id == 0 {
 		return nil
 	}
-	return &ProductSubscriptionPeriod{inner: raw.SKProductSubscriptionPeriodFromID(id)}
+	x := &ProductSubscriptionPeriod{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewProductSubscriptionPeriod creates a new [ProductSubscriptionPeriod].
+// productSubscriptionPeriodAdopt wraps an Objective-C object that this code just created as a
+// ProductSubscriptionPeriod (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productSubscriptionPeriodAdopt(id objc.ID) *ProductSubscriptionPeriod {
+	if id == 0 {
+		return nil
+	}
+	x := &ProductSubscriptionPeriod{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProductSubscriptionPeriod) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProductSubscriptionPeriod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProductSubscriptionPeriod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProductSubscriptionPeriod) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewProductSubscriptionPeriod creates a new ProductSubscriptionPeriod.
 func NewProductSubscriptionPeriod() *ProductSubscriptionPeriod {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductSubscriptionPeriod")), objc.RegisterName("new"))
-	return &ProductSubscriptionPeriod{inner: raw.SKProductSubscriptionPeriodFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKProductSubscriptionPeriod")), objc.RegisterName("new"))
+	return productSubscriptionPeriodAdopt(_id)
 }
 
-// NumberOfUnits calls the underlying NumberOfUnits.
-func (x *ProductSubscriptionPeriod) NumberOfUnits() uint {
-	return x.inner.NumberOfUnits()
+// NumberOfUnits wraps the corresponding Objective-C method.
+func (x *ProductSubscriptionPeriod) NumberOfUnits() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfUnits"))
+	return _r
 }
 
-// Unit calls the underlying Unit.
-func (x *ProductSubscriptionPeriod) Unit() SKProductPeriodUnit {
-	return SKProductPeriodUnit(x.inner.Unit())
+// Unit wraps the corresponding Objective-C method.
+func (x *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
+	_r := objc.Send[ProductPeriodUnit](objref.IDOf(x), objc.RegisterName("unit"))
+	return _r
 }
 
 // ProductSubscriptionPeriodable is the interface implemented by [ProductSubscriptionPeriod], for mocking and DI.
 type ProductSubscriptionPeriodable interface {
-	Unwrap() *raw.SKProductSubscriptionPeriod
-	NumberOfUnits() uint
-	Unit() SKProductPeriodUnit
+	obj.Object
+	NumberOfUnits() int
+	Unit() ProductPeriodUnit
 }
 
 var _ ProductSubscriptionPeriodable = (*ProductSubscriptionPeriod)(nil)

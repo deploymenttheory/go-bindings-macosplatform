@@ -5,67 +5,73 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A node that plays all its children at the same time.
+// ContainerNodeDefinition is an idiomatic wrapper over the Objective-C class PHASEContainerNodeDefinition.
 //
-// ContainerNodeDefinition wraps [raw.PHASEContainerNodeDefinition] with a fluent Go API.
+// It embeds [SoundEventNodeDefinition], promoting that type's methods.
+//
+// A node that plays all its children at the same time.
 type ContainerNodeDefinition struct {
-	inner *raw.PHASEContainerNodeDefinition
+	SoundEventNodeDefinition
 }
 
-// Unwrap returns the underlying [raw.PHASEContainerNodeDefinition].
-func (x *ContainerNodeDefinition) Unwrap() *raw.PHASEContainerNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContainerNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// ContainerNodeDefinitionFromID adopts an existing object pointer as a ContainerNodeDefinition (nil for 0).
+// ContainerNodeDefinitionFromID adopts an existing Objective-C object as a ContainerNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func ContainerNodeDefinitionFromID(id objc.ID) *ContainerNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(id)}
+	x := &ContainerNodeDefinition{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContainerNodeDefinition creates a new [ContainerNodeDefinition].
+// containerNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// ContainerNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func containerNodeDefinitionAdopt(id objc.ID) *ContainerNodeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &ContainerNodeDefinition{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewContainerNodeDefinition creates a new ContainerNodeDefinition.
 func NewContainerNodeDefinition() *ContainerNodeDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEContainerNodeDefinition")), objc.RegisterName("new"))
-	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("new"))
+	return containerNodeDefinitionAdopt(_id)
 }
 
-// Creates a container node with the given name.
-//
-// NewContainerNodeDefinitionWithIdentifier creates a new [ContainerNodeDefinition].
+// NewContainerNodeDefinitionWithIdentifier creates a container node with the given name.
 func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEContainerNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return containerNodeDefinitionAdopt(_id)
 }
 
-// Adds a sound event node as a child.
-//
-// AddSubtree calls the underlying AddSubtree.
-func (x *ContainerNodeDefinition) AddSubtree(subtree *raw.PHASESoundEventNodeDefinition) {
-	x.inner.AddSubtree(subtree)
-}
-
-func (x *ContainerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition
-}
-
-func (x *ContainerNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+// AddSubtree adds a sound event node as a child.
+func (x *ContainerNodeDefinition) AddSubtree(subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:"), objref.IDOf(subtree))
 }
 
 // ContainerNodeDefinitionable is the interface implemented by [ContainerNodeDefinition], for mocking and DI.
 type ContainerNodeDefinitionable interface {
-	Unwrap() *raw.PHASEContainerNodeDefinition
-	AddSubtree(subtree *raw.PHASESoundEventNodeDefinition)
+	obj.Object
+	AddSubtree(subtree *SoundEventNodeDefinition)
 }
 
 var _ ContainerNodeDefinitionable = (*ContainerNodeDefinition)(nil)
+
+var _ SoundEventNodeDefinitionProvider = (*ContainerNodeDefinition)(nil)
+
+var _ DefinitionProvider = (*ContainerNodeDefinition)(nil)

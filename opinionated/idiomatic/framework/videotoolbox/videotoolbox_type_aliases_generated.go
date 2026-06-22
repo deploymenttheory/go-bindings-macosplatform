@@ -4,15 +4,14 @@
 
 package videotoolbox
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
-)
+// A structure that represents a 32-bit integer point value.
+type VTInt32Point struct {
+	X int32
+	Y int32
+}
 
-// VTDecompressionOutputCallbackRecord is a type alias for the raw VTDecompressionOutputCallbackRecord value-type struct.
-type VTDecompressionOutputCallbackRecord = raw.VTDecompressionOutputCallbackRecord
-
-// VTInt32Point is a type alias for the raw VTInt32Point value-type struct.
-type VTInt32Point = raw.VTInt32Point
-
-// VTInt32Size is a type alias for the raw VTInt32Size value-type struct.
-type VTInt32Size = raw.VTInt32Size
+// A structure that represents a 32-bit integer size value.
+type VTInt32Size struct {
+	Width  int32
+	Height int32
+}

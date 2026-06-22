@@ -5,238 +5,223 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A layout that displays a single section of items in a row and column grid.
+// CollectionViewGridLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewGridLayout.
 //
-// CollectionViewGridLayout wraps [raw.NSCollectionViewGridLayout] with a fluent Go API.
+// It embeds [CollectionViewLayout], promoting that type's methods.
+//
+// A layout that displays a single section of items in a row and column grid.
 type CollectionViewGridLayout struct {
-	inner *raw.NSCollectionViewGridLayout
+	CollectionViewLayout
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewGridLayout].
-func (x *CollectionViewGridLayout) Unwrap() *raw.NSCollectionViewGridLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewGridLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewGridLayoutFromID adopts an existing object pointer as a CollectionViewGridLayout (nil for 0).
+// CollectionViewGridLayoutFromID adopts an existing Objective-C object as a CollectionViewGridLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewGridLayoutFromID(id objc.ID) *CollectionViewGridLayout {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewGridLayout{inner: raw.NSCollectionViewGridLayoutFromID(id)}
-}
-
-// NewCollectionViewGridLayout creates a new [CollectionViewGridLayout].
-func NewCollectionViewGridLayout() *CollectionViewGridLayout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewGridLayout")), objc.RegisterName("new"))
-	return &CollectionViewGridLayout{inner: raw.NSCollectionViewGridLayoutFromID(_id)}
-}
-
-// The amount of empty space (in points) around the grid’s content.
-//
-// WithMargins sets the margins property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout {
-	x.inner.SetMargins(margins)
+	x := &CollectionViewGridLayout{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The minimum spacing (in points) to use between items in the same row or column.
-//
-// WithMinimumInteritemSpacing sets the minimumInteritemSpacing property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout {
-	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
-	return x
-}
-
-// The minimum spacing (in points) to use between rows or columns.
-//
-// WithMinimumLineSpacing sets the minimumLineSpacing property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout {
-	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
-	return x
-}
-
-// The maximum number of rows to display in the collection view’s visible area.
-//
-// WithMaximumNumberOfRows sets the maximumNumberOfRows property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMaximumNumberOfRows(maximumNumberOfRows uint) *CollectionViewGridLayout {
-	x.inner.SetMaximumNumberOfRows(maximumNumberOfRows)
-	return x
-}
-
-// The maximum number of columns to display in the collection view’s visible area.
-//
-// WithMaximumNumberOfColumns sets the maximumNumberOfColumns property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *CollectionViewGridLayout {
-	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
-	return x
-}
-
-// The smallest allowable size for an item’s view.
-//
-// WithMinimumItemSize sets the minimumItemSize property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
-	x.inner.SetMinimumItemSize(minimumItemSize)
-	return x
-}
-
-// The largest allowable size for an item’s view.
-//
-// WithMaximumItemSize sets the maximumItemSize property and returns the receiver for chaining.
-func (x *CollectionViewGridLayout) WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
-	x.inner.SetMaximumItemSize(maximumItemSize)
-	return x
-}
-
-// The array of background colors to use when drawing the grid.
-//
-// WithBackgroundColors sets the collection, converting the Go slice to an NSArray.
-func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*raw.NSColor) *CollectionViewGridLayout {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetBackgroundColors(foundation.NSArrayFromID[*raw.NSColor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSColor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetBackgroundColors(_arr)
-	return x
-}
-
-// Margins calls the underlying Margins.
-func (x *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
-	return x.inner.Margins()
-}
-
-// SetMargins calls the underlying SetMargins.
-func (x *CollectionViewGridLayout) SetMargins(margins foundation.NSEdgeInsets) {
-	x.inner.SetMargins(margins)
-}
-
-// MinimumInteritemSpacing calls the underlying MinimumInteritemSpacing.
-func (x *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
-	return x.inner.MinimumInteritemSpacing()
-}
-
-// SetMinimumInteritemSpacing calls the underlying SetMinimumInteritemSpacing.
-func (x *CollectionViewGridLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
-	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
-}
-
-// MinimumLineSpacing calls the underlying MinimumLineSpacing.
-func (x *CollectionViewGridLayout) MinimumLineSpacing() float64 {
-	return x.inner.MinimumLineSpacing()
-}
-
-// SetMinimumLineSpacing calls the underlying SetMinimumLineSpacing.
-func (x *CollectionViewGridLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
-	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
-}
-
-// MaximumNumberOfRows calls the underlying MaximumNumberOfRows.
-func (x *CollectionViewGridLayout) MaximumNumberOfRows() uint {
-	return x.inner.MaximumNumberOfRows()
-}
-
-// SetMaximumNumberOfRows calls the underlying SetMaximumNumberOfRows.
-func (x *CollectionViewGridLayout) SetMaximumNumberOfRows(maximumNumberOfRows uint) {
-	x.inner.SetMaximumNumberOfRows(maximumNumberOfRows)
-}
-
-// MaximumNumberOfColumns calls the underlying MaximumNumberOfColumns.
-func (x *CollectionViewGridLayout) MaximumNumberOfColumns() uint {
-	return x.inner.MaximumNumberOfColumns()
-}
-
-// SetMaximumNumberOfColumns calls the underlying SetMaximumNumberOfColumns.
-func (x *CollectionViewGridLayout) SetMaximumNumberOfColumns(maximumNumberOfColumns uint) {
-	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
-}
-
-// MinimumItemSize calls the underlying MinimumItemSize.
-func (x *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
-	return x.inner.MinimumItemSize()
-}
-
-// SetMinimumItemSize calls the underlying SetMinimumItemSize.
-func (x *CollectionViewGridLayout) SetMinimumItemSize(minimumItemSize corefoundation.CGSize) {
-	x.inner.SetMinimumItemSize(minimumItemSize)
-}
-
-// MaximumItemSize calls the underlying MaximumItemSize.
-func (x *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
-	return x.inner.MaximumItemSize()
-}
-
-// SetMaximumItemSize calls the underlying SetMaximumItemSize.
-func (x *CollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefoundation.CGSize) {
-	x.inner.SetMaximumItemSize(maximumItemSize)
-}
-
-// BackgroundColors returns the collection as a Go slice.
-func (x *CollectionViewGridLayout) BackgroundColors() []*Color {
-	arr := x.inner.BackgroundColors()
-	if arr == nil {
+// collectionViewGridLayoutAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewGridLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewGridLayoutAdopt(id objc.ID) *CollectionViewGridLayout {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
-		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
-	})
+	x := &CollectionViewGridLayout{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetBackgroundColors calls the underlying SetBackgroundColors.
-func (x *CollectionViewGridLayout) SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor]) {
-	x.inner.SetBackgroundColors(backgroundColors)
+// NewCollectionViewGridLayout creates a new CollectionViewGridLayout.
+func NewCollectionViewGridLayout() *CollectionViewGridLayout {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewGridLayout")), objc.RegisterName("new"))
+	return collectionViewGridLayoutAdopt(_id)
 }
 
-func (x *CollectionViewGridLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
-	return &x.inner.NSCollectionViewLayout
+// WithMargins the amount of empty space (in points) around the grid’s content.
+func (x *CollectionViewGridLayout) WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMargins:"), margins)
+	return x
+}
+
+// WithMinimumInteritemSpacing the minimum spacing (in points) to use between items in the same row or column.
+func (x *CollectionViewGridLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+	return x
+}
+
+// WithMinimumLineSpacing the minimum spacing (in points) to use between rows or columns.
+func (x *CollectionViewGridLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+	return x
+}
+
+// WithMaximumNumberOfRows the maximum number of rows to display in the collection view’s visible area.
+func (x *CollectionViewGridLayout) WithMaximumNumberOfRows(maximumNumberOfRows int) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfRows:"), maximumNumberOfRows)
+	return x
+}
+
+// WithMaximumNumberOfColumns the maximum number of columns to display in the collection view’s visible area.
+func (x *CollectionViewGridLayout) WithMaximumNumberOfColumns(maximumNumberOfColumns int) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+	return x
+}
+
+// WithMinimumItemSize the smallest allowable size for an item’s view.
+func (x *CollectionViewGridLayout) WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumItemSize:"), minimumItemSize)
+	return x
+}
+
+// WithMaximumItemSize the largest allowable size for an item’s view.
+func (x *CollectionViewGridLayout) WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumItemSize:"), maximumItemSize)
+	return x
+}
+
+// WithBackgroundColors the array of background colors to use when drawing the grid.
+func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*Color) *CollectionViewGridLayout {
+	_arr := purego.SliceToNSArray(items, func(_v *Color) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColors:"), _arr)
+	return x
+}
+
+// Margins wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("margins"))
+	return _r
+}
+
+// SetMargins wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMargins(margins foundation.NSEdgeInsets) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMargins:"), margins)
+}
+
+// MinimumInteritemSpacing wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumInteritemSpacing"))
+	return _r
+}
+
+// SetMinimumInteritemSpacing wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
+}
+
+// MinimumLineSpacing wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MinimumLineSpacing() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLineSpacing"))
+	return _r
+}
+
+// SetMinimumLineSpacing wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
+}
+
+// MaximumNumberOfRows wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MaximumNumberOfRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfRows"))
+	return _r
+}
+
+// SetMaximumNumberOfRows wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMaximumNumberOfRows(maximumNumberOfRows int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfRows:"), maximumNumberOfRows)
+}
+
+// MaximumNumberOfColumns wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MaximumNumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfColumns"))
+	return _r
+}
+
+// SetMaximumNumberOfColumns wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMaximumNumberOfColumns(maximumNumberOfColumns int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfColumns:"), maximumNumberOfColumns)
+}
+
+// MinimumItemSize wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minimumItemSize"))
+	return _r
+}
+
+// SetMinimumItemSize wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMinimumItemSize(minimumItemSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumItemSize:"), minimumItemSize)
+}
+
+// MaximumItemSize wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maximumItemSize"))
+	return _r
+}
+
+// SetMaximumItemSize wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumItemSize:"), maximumItemSize)
+}
+
+// BackgroundColors wraps the corresponding Objective-C method.
+//
+// BackgroundColors returns the collection as a Go slice.
+func (x *CollectionViewGridLayout) BackgroundColors() []*Color {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
+}
+
+// SetBackgroundColors wraps the corresponding Objective-C method.
+func (x *CollectionViewGridLayout) SetBackgroundColors(backgroundColors []*Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColors:"), purego.SliceToNSArray(backgroundColors, func(_v *Color) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CollectionViewGridLayoutable is the interface implemented by [CollectionViewGridLayout], for mocking and DI.
 type CollectionViewGridLayoutable interface {
-	Unwrap() *raw.NSCollectionViewGridLayout
+	obj.Object
 	WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout
 	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout
 	WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout
-	WithMaximumNumberOfRows(maximumNumberOfRows uint) *CollectionViewGridLayout
-	WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *CollectionViewGridLayout
+	WithMaximumNumberOfRows(maximumNumberOfRows int) *CollectionViewGridLayout
+	WithMaximumNumberOfColumns(maximumNumberOfColumns int) *CollectionViewGridLayout
 	WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout
 	WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout
-	WithBackgroundColors(items ...*raw.NSColor) *CollectionViewGridLayout
+	WithBackgroundColors(items ...*Color) *CollectionViewGridLayout
 	Margins() foundation.NSEdgeInsets
 	SetMargins(margins foundation.NSEdgeInsets)
 	MinimumInteritemSpacing() float64
 	SetMinimumInteritemSpacing(minimumInteritemSpacing float64)
 	MinimumLineSpacing() float64
 	SetMinimumLineSpacing(minimumLineSpacing float64)
-	MaximumNumberOfRows() uint
-	SetMaximumNumberOfRows(maximumNumberOfRows uint)
-	MaximumNumberOfColumns() uint
-	SetMaximumNumberOfColumns(maximumNumberOfColumns uint)
+	MaximumNumberOfRows() int
+	SetMaximumNumberOfRows(maximumNumberOfRows int)
+	MaximumNumberOfColumns() int
+	SetMaximumNumberOfColumns(maximumNumberOfColumns int)
 	MinimumItemSize() corefoundation.CGSize
 	SetMinimumItemSize(minimumItemSize corefoundation.CGSize)
 	MaximumItemSize() corefoundation.CGSize
 	SetMaximumItemSize(maximumItemSize corefoundation.CGSize)
 	BackgroundColors() []*Color
-	SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor])
+	SetBackgroundColors(backgroundColors []*Color)
 }
 
 var _ CollectionViewGridLayoutable = (*CollectionViewGridLayout)(nil)
+
+var _ CollectionViewLayoutProvider = (*CollectionViewGridLayout)(nil)

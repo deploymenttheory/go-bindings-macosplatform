@@ -5,65 +5,94 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that supports Cocoa’s reference-counted memory management system.
+// AutoreleasePool is an idiomatic wrapper over the Objective-C class NSAutoreleasePool.
 //
-// AutoreleasePool wraps [raw.NSAutoreleasePool] with a fluent Go API.
+// An object that supports Cocoa’s reference-counted memory management system.
 type AutoreleasePool struct {
-	inner *raw.NSAutoreleasePool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAutoreleasePool].
-func (x *AutoreleasePool) Unwrap() *raw.NSAutoreleasePool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AutoreleasePool) ID() objc.ID { return x.inner.Ptr() }
-
-// AutoreleasePoolFromID adopts an existing object pointer as a AutoreleasePool (nil for 0).
+// AutoreleasePoolFromID adopts an existing Objective-C object as a AutoreleasePool
+// (nil for 0), retaining it and registering a release finalizer.
 func AutoreleasePoolFromID(id objc.ID) *AutoreleasePool {
 	if id == 0 {
 		return nil
 	}
-	return &AutoreleasePool{inner: raw.NSAutoreleasePoolFromID(id)}
-}
-
-// NewAutoreleasePool creates a new [AutoreleasePool].
-func NewAutoreleasePool() *AutoreleasePool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAutoreleasePool")), objc.RegisterName("new"))
-	return &AutoreleasePool{inner: raw.NSAutoreleasePoolFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AutoreleasePool {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &AutoreleasePool{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Adds a given object to the receiver
-//
-// AddObject calls the underlying AddObject.
-func (x *AutoreleasePool) AddObject(anObject objc.ID) {
-	x.inner.AddObject(anObject)
+// autoreleasePoolAdopt wraps an Objective-C object that this code just created as a
+// AutoreleasePool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func autoreleasePoolAdopt(id objc.ID) *AutoreleasePool {
+	if id == 0 {
+		return nil
+	}
+	x := &AutoreleasePool{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// In a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
-//
-// Drain calls the underlying Drain.
+// Description returns the object's -description text.
+func (x *AutoreleasePool) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AutoreleasePool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AutoreleasePool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AutoreleasePool) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAutoreleasePool creates a new AutoreleasePool.
+func NewAutoreleasePool() *AutoreleasePool {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("new"))
+	return autoreleasePoolAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// AddObject adds a given object to the receiver
+func (x *AutoreleasePool) AddObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(anObject))
+}
+
+// Drain in a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
 func (x *AutoreleasePool) Drain() {
-	x.inner.Drain()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drain"))
 }
-
-func (x *AutoreleasePool) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AutoreleasePoolable is the interface implemented by [AutoreleasePool], for mocking and DI.
 type AutoreleasePoolable interface {
-	Unwrap() *raw.NSAutoreleasePool
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AutoreleasePool
-	AddObject(anObject objc.ID)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool
+	AddObject(anObject obj.Object)
 	Drain()
 }
 

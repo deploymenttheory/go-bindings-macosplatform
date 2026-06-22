@@ -5,73 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a conversion warning produced by a validator.
+// CaptionConversionWarning is an idiomatic wrapper over the Objective-C class AVCaptionConversionWarning.
 //
-// CaptionConversionWarning wraps [raw.AVCaptionConversionWarning] with a fluent Go API.
+// An object that represents a conversion warning produced by a validator.
 type CaptionConversionWarning struct {
-	inner *raw.AVCaptionConversionWarning
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionConversionWarning].
-func (x *CaptionConversionWarning) Unwrap() *raw.AVCaptionConversionWarning { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionConversionWarning) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionConversionWarningFromID adopts an existing object pointer as a CaptionConversionWarning (nil for 0).
+// CaptionConversionWarningFromID adopts an existing Objective-C object as a CaptionConversionWarning
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionConversionWarningFromID(id objc.ID) *CaptionConversionWarning {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(id)}
+	x := &CaptionConversionWarning{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionConversionWarning creates a new [CaptionConversionWarning].
-func NewCaptionConversionWarning() *CaptionConversionWarning {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionWarning")), objc.RegisterName("new"))
-	return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(_id)}
-}
-
-// @property      warningType @abstract      Indicates the type of warning provided by the receiver.
-//
-// WarningType calls the underlying WarningType.
-func (x *CaptionConversionWarning) WarningType() string {
-	_r := x.inner.WarningType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @property      rangeOfCaptions @abstract      Indicates the range of captions in the validator's captions array for which the specified warning has been issued. @discussion    Only captions with the same start time and duration will be referenced. If captions with different start times and durations exhibit similar problems, a separate instance of AVCaptionConversionWarning will be used to indicate each problematic case. If the referenced captions have multiple problems, a separate instance of AVCaptionConversionWarning will be issued to indicate each problem.
-//
-// RangeOfCaptions calls the underlying RangeOfCaptions.
-func (x *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
-	return x.inner.RangeOfCaptions()
-}
-
-// @property      adjustment @abstract      Indicates an adjustment to the indicated captions that can be applied in order to correct the problem. @discussion    If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
-//
-// Adjustment calls the underlying Adjustment.
-func (x *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
-	_r := x.inner.Adjustment()
-	if _r == nil {
+// captionConversionWarningAdopt wraps an Objective-C object that this code just created as a
+// CaptionConversionWarning (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionConversionWarningAdopt(id objc.ID) *CaptionConversionWarning {
+	if id == 0 {
 		return nil
 	}
-	return &CaptionConversionAdjustment{inner: _r}
+	x := &CaptionConversionWarning{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionConversionWarning) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionConversionWarning) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionConversionWarning) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptionConversionWarning) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCaptionConversionWarning creates a new CaptionConversionWarning.
+func NewCaptionConversionWarning() *CaptionConversionWarning {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionWarning")), objc.RegisterName("new"))
+	return captionConversionWarningAdopt(_id)
+}
+
+// WarningType indicates the type of warning provided by the receiver.
+func (x *CaptionConversionWarning) WarningType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("warningType"))
+	return obj.Wrap(_r)
+}
+
+// RangeOfCaptions indicates the range of captions in the validator's captions array for which the specified warning has been issued. Only captions with the same start time and duration will be referenced. If captions with different start times and durations exhibit similar problems, a separate instance of AVCaptionConversionWarning will be used to indicate each problematic case. If the referenced captions have multiple problems, a separate instance of AVCaptionConversionWarning will be issued to indicate each problem.
+func (x *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("rangeOfCaptions"))
+	return _r
+}
+
+// Adjustment indicates an adjustment to the indicated captions that can be applied in order to correct the problem. If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
+func (x *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustment"))
+	return CaptionConversionAdjustmentFromID(_r)
 }
 
 // CaptionConversionWarningable is the interface implemented by [CaptionConversionWarning], for mocking and DI.
 type CaptionConversionWarningable interface {
-	Unwrap() *raw.AVCaptionConversionWarning
-	WarningType() string
+	obj.Object
+	WarningType() obj.Object
 	RangeOfCaptions() foundation.NSRange
 	Adjustment() *CaptionConversionAdjustment
 }

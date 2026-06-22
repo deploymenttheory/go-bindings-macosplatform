@@ -5,159 +5,111 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A filter that resamples an existing MPS image.
+// CNNUpsampling is an idiomatic wrapper over the Objective-C class MPSCNNUpsampling.
 //
-// CNNUpsampling wraps [raw.MPSCNNUpsampling] with a fluent Go API.
+// CNNUpsampling is an abstract base — you do not construct it directly. Construct one of [CNNUpsamplingBilinear], [CNNUpsamplingNearest] and pass it where a CNNUpsampling is accepted.
+//
+// A filter that resamples an existing MPS image.
 type CNNUpsampling struct {
-	inner *raw.MPSCNNUpsampling
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSCNNUpsampling].
-func (x *CNNUpsampling) Unwrap() *raw.MPSCNNUpsampling { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNUpsampling) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNUpsamplingFromID adopts an existing object pointer as a CNNUpsampling (nil for 0).
+// CNNUpsamplingFromID adopts an existing Objective-C object as a CNNUpsampling
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNUpsamplingFromID(id objc.ID) *CNNUpsampling {
 	if id == 0 {
 		return nil
 	}
-	return &CNNUpsampling{inner: raw.MPSCNNUpsamplingFromID(id)}
+	x := &CNNUpsampling{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCNNUpsampling creates a new [CNNUpsampling].
-func NewCNNUpsampling() *CNNUpsampling {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNUpsampling")), objc.RegisterName("new"))
-	return &CNNUpsampling{inner: raw.MPSCNNUpsamplingFromID(_id)}
+// cNNUpsamplingAdopt wraps an Objective-C object that this code just created as a
+// CNNUpsampling (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNUpsamplingAdopt(id objc.ID) *CNNUpsampling {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNUpsampling{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *CNNUpsampling) WithOffset(offset mpscore.MPSOffset) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *CNNUpsampling) WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *CNNUpsampling) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsampling {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *CNNUpsampling) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsampling {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *CNNUpsampling) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsampling {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNUpsampling) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsampling {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *CNNUpsampling) WithLabel(label string) *CNNUpsampling {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   scaleFactorX @abstract   The upsampling scale factor for the x dimension. The default value is 1.
-//
-// ScaleFactorX calls the underlying ScaleFactorX.
+// ScaleFactorX the upsampling scale factor for the x dimension. The default value is 1.
 func (x *CNNUpsampling) ScaleFactorX() float64 {
-	return x.inner.ScaleFactorX()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+	return _r
 }
 
-// @property   scaleFactorY @abstract   The upsampling scale factor for the y dimension. The default value is 1.
-//
-// ScaleFactorY calls the underlying ScaleFactorY.
+// ScaleFactorY the upsampling scale factor for the y dimension. The default value is 1.
 func (x *CNNUpsampling) ScaleFactorY() float64 {
-	return x.inner.ScaleFactorY()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+	return _r
 }
 
-// @property   alignCorners @abstract   If YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is NO.
-//
-// AlignCorners calls the underlying AlignCorners.
+// AlignCorners if YES, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is NO.
 func (x *CNNUpsampling) AlignCorners() bool {
-	return x.inner.AlignCorners()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("alignCorners"))
+	return _r
 }
-
-func (x *CNNUpsampling) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *CNNUpsampling) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // CNNUpsamplingable is the interface implemented by [CNNUpsampling], for mocking and DI.
 type CNNUpsamplingable interface {
-	Unwrap() *raw.MPSCNNUpsampling
+	obj.Object
 	WithOffset(offset mpscore.MPSOffset) *CNNUpsampling
 	WithClipRect(clipRect metal.MTLRegion) *CNNUpsampling
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsampling
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsampling
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsampling
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsampling
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsampling
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsampling
-	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsampling
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsampling
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsampling
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsampling
 	WithLabel(label string) *CNNUpsampling
 	ScaleFactorX() float64
 	ScaleFactorY() float64
@@ -165,3 +117,14 @@ type CNNUpsamplingable interface {
 }
 
 var _ CNNUpsamplingable = (*CNNUpsampling)(nil)
+
+// isCNNUpsampling marks CNNUpsampling — and, by embedding promotion, its
+// subclasses — as a member of the CNNUpsampling hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNUpsampling) isCNNUpsampling() {}
+
+var _ CNNUpsamplingProvider = (*CNNUpsampling)(nil)
+
+var _ CNNKernelProvider = (*CNNUpsampling)(nil)
+
+var _ KernelProvider = (*CNNUpsampling)(nil)

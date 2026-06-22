@@ -5,190 +5,164 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The IPv4 settings of an IP layer network tunnel.
+// NEIPv4Settings is an idiomatic wrapper over the Objective-C class NEIPv4Settings.
 //
-// NEIPv4Settings wraps [raw.NEIPv4Settings] with a fluent Go API.
+// The IPv4 settings of an IP layer network tunnel.
 type NEIPv4Settings struct {
-	inner *raw.NEIPv4Settings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEIPv4Settings].
-func (x *NEIPv4Settings) Unwrap() *raw.NEIPv4Settings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEIPv4Settings) ID() objc.ID { return x.inner.Ptr() }
-
-// NEIPv4SettingsFromID adopts an existing object pointer as a NEIPv4Settings (nil for 0).
+// NEIPv4SettingsFromID adopts an existing Objective-C object as a NEIPv4Settings
+// (nil for 0), retaining it and registering a release finalizer.
 func NEIPv4SettingsFromID(id objc.ID) *NEIPv4Settings {
 	if id == 0 {
 		return nil
 	}
-	return &NEIPv4Settings{inner: raw.NEIPv4SettingsFromID(id)}
+	x := &NEIPv4Settings{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an IPv4 settings object.
-//
-// NewNEIPv4SettingsWithAddressesSubnetMasks creates a new [NEIPv4Settings].
-func NewNEIPv4SettingsWithAddressesSubnetMasks(addresses *foundation.NSArray[*foundation.NSString], subnetMasks *foundation.NSArray[*foundation.NSString]) *NEIPv4Settings {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEIPv4Settings")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddresses:subnetMasks:"), addresses.Ptr(), subnetMasks.Ptr())
-	return &NEIPv4Settings{inner: raw.NEIPv4SettingsFromID(_id)}
+// nEIPv4SettingsAdopt wraps an Objective-C object that this code just created as a
+// NEIPv4Settings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEIPv4SettingsAdopt(id objc.ID) *NEIPv4Settings {
+	if id == 0 {
+		return nil
+	}
+	x := &NEIPv4Settings{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The address of the next-hop gateway router represented as a dotted decimal string.
-//
-// WithRouter sets the router property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *NEIPv4Settings) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEIPv4Settings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEIPv4Settings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEIPv4Settings) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewNEIPv4SettingsWithAddressesSubnetMasks initializes an IPv4 settings object.
+func NewNEIPv4SettingsWithAddressesSubnetMasks(addresses []string, subnetMasks []string) *NEIPv4Settings {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NEIPv4Settings")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAddresses:subnetMasks:"), purego.SliceToNSArray(addresses, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(subnetMasks, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return nEIPv4SettingsAdopt(_id)
+}
+
+// WithRouter the address of the next-hop gateway router represented as a dotted decimal string.
 func (x *NEIPv4Settings) WithRouter(router string) *NEIPv4Settings {
-	x.inner.SetRouter(foundation.NSStringStringWithUTF8String(router))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouter:"), purego.NSString(router))
 	return x
 }
 
-// The IPv4 network traffic that the system routes to the TUN interface.
-//
-// WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
-func (x *NEIPv4Settings) WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetIncludedRoutes(foundation.NSArrayFromID[*raw.NEIPv4Route](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEIPv4Route](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetIncludedRoutes(_arr)
+// WithIncludedRoutes the IPv4 network traffic that the system routes to the TUN interface.
+func (x *NEIPv4Settings) WithIncludedRoutes(items ...*NEIPv4Route) *NEIPv4Settings {
+	_arr := purego.SliceToNSArray(items, func(_v *NEIPv4Route) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedRoutes:"), _arr)
 	return x
 }
 
-// The IPv4 network traffic that the system routes to the primary physical interface, not the TUN interface.
-//
-// WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
-func (x *NEIPv4Settings) WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExcludedRoutes(foundation.NSArrayFromID[*raw.NEIPv4Route](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEIPv4Route](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExcludedRoutes(_arr)
+// WithExcludedRoutes the IPv4 network traffic that the system routes to the primary physical interface, not the TUN interface.
+func (x *NEIPv4Settings) WithExcludedRoutes(items ...*NEIPv4Route) *NEIPv4Settings {
+	_arr := purego.SliceToNSArray(items, func(_v *NEIPv4Route) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedRoutes:"), _arr)
 	return x
 }
 
-// @property addresses @discussion An array of IPv4 addresses represented as dotted decimal strings. These addresses will be set on the virtual interface used by the VPN tunnel.
+// Addresses an array of IPv4 addresses represented as dotted decimal strings. These addresses will be set on the virtual interface used by the VPN tunnel.
 //
 // Addresses returns the collection as a Go slice.
 func (x *NEIPv4Settings) Addresses() []string {
-	arr := x.inner.Addresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property subnetMasks @discussion An array of IPv4 subnet masks represented as dotted decimal strings. These subnet masks will be set along with their corresponding addresses from the addresses array on the virtual interface used by the VPN tunnel.
+// SubnetMasks an array of IPv4 subnet masks represented as dotted decimal strings. These subnet masks will be set along with their corresponding addresses from the addresses array on the virtual interface used by the VPN tunnel.
 //
 // SubnetMasks returns the collection as a Go slice.
 func (x *NEIPv4Settings) SubnetMasks() []string {
-	arr := x.inner.SubnetMasks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subnetMasks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property router @discussion The address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
-//
-// Router calls the underlying Router.
+// Router the address of the next-hop gateway router represented as a dotted decimal string. This property is ignored for TUN interfaces.
 func (x *NEIPv4Settings) Router() string {
-	_r := x.inner.Router()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("router"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRouter calls the underlying SetRouter.
+// SetRouter wraps the corresponding Objective-C method.
 func (x *NEIPv4Settings) SetRouter(router string) {
-	x.inner.SetRouter(foundation.NSStringStringWithUTF8String(router))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRouter:"), purego.NSString(router))
 }
 
-// @property includedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+// IncludedRoutes an array of NEIPv4Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
 //
 // IncludedRoutes returns the collection as a Go slice.
 func (x *NEIPv4Settings) IncludedRoutes() []*NEIPv4Route {
-	arr := x.inner.IncludedRoutes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv4Route {
-		return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("includedRoutes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv4Route { return NEIPv4RouteFromID(_id) })
 }
 
-// SetIncludedRoutes calls the underlying SetIncludedRoutes.
-func (x *NEIPv4Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv4Route]) {
-	x.inner.SetIncludedRoutes(includedRoutes)
+// SetIncludedRoutes wraps the corresponding Objective-C method.
+func (x *NEIPv4Settings) SetIncludedRoutes(includedRoutes []*NEIPv4Route) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedRoutes:"), purego.SliceToNSArray(includedRoutes, func(_v *NEIPv4Route) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property excludedRoutes @discussion An array of NEIPv4Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+// ExcludedRoutes an array of NEIPv4Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
 //
 // ExcludedRoutes returns the collection as a Go slice.
 func (x *NEIPv4Settings) ExcludedRoutes() []*NEIPv4Route {
-	arr := x.inner.ExcludedRoutes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NEIPv4Route {
-		return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedRoutes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv4Route { return NEIPv4RouteFromID(_id) })
 }
 
-// SetExcludedRoutes calls the underlying SetExcludedRoutes.
-func (x *NEIPv4Settings) SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv4Route]) {
-	x.inner.SetExcludedRoutes(excludedRoutes)
+// SetExcludedRoutes wraps the corresponding Objective-C method.
+func (x *NEIPv4Settings) SetExcludedRoutes(excludedRoutes []*NEIPv4Route) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedRoutes:"), purego.SliceToNSArray(excludedRoutes, func(_v *NEIPv4Route) objc.ID { return objref.IDOf(_v) }))
 }
 
 // NEIPv4Settingsable is the interface implemented by [NEIPv4Settings], for mocking and DI.
 type NEIPv4Settingsable interface {
-	Unwrap() *raw.NEIPv4Settings
+	obj.Object
 	WithRouter(router string) *NEIPv4Settings
-	WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings
-	WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings
+	WithIncludedRoutes(items ...*NEIPv4Route) *NEIPv4Settings
+	WithExcludedRoutes(items ...*NEIPv4Route) *NEIPv4Settings
 	Addresses() []string
 	SubnetMasks() []string
 	Router() string
 	SetRouter(router string)
 	IncludedRoutes() []*NEIPv4Route
-	SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv4Route])
+	SetIncludedRoutes(includedRoutes []*NEIPv4Route)
 	ExcludedRoutes() []*NEIPv4Route
-	SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv4Route])
+	SetExcludedRoutes(excludedRoutes []*NEIPv4Route)
 }
 
 var _ NEIPv4Settingsable = (*NEIPv4Settings)(nil)

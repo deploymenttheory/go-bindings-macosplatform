@@ -5,41 +5,76 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages a view for compose session and message security handlers.
+// ExtensionViewController is an idiomatic wrapper over the Objective-C class MEExtensionViewController.
 //
-// ExtensionViewController wraps [raw.MEExtensionViewController] with a fluent Go API.
+// An object that manages a view for compose session and message security handlers.
 type ExtensionViewController struct {
-	inner *raw.MEExtensionViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEExtensionViewController].
-func (x *ExtensionViewController) Unwrap() *raw.MEExtensionViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionViewControllerFromID adopts an existing object pointer as a ExtensionViewController (nil for 0).
+// ExtensionViewControllerFromID adopts an existing Objective-C object as a ExtensionViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionViewControllerFromID(id objc.ID) *ExtensionViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionViewController{inner: raw.MEExtensionViewControllerFromID(id)}
+	x := &ExtensionViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewExtensionViewController creates a new [ExtensionViewController].
+// extensionViewControllerAdopt wraps an Objective-C object that this code just created as a
+// ExtensionViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionViewControllerAdopt(id objc.ID) *ExtensionViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewExtensionViewController creates a new ExtensionViewController.
 func NewExtensionViewController() *ExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEExtensionViewController")), objc.RegisterName("new"))
-	return &ExtensionViewController{inner: raw.MEExtensionViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionViewController")), objc.RegisterName("new"))
+	return extensionViewControllerAdopt(_id)
 }
 
 // ExtensionViewControllerable is the interface implemented by [ExtensionViewController], for mocking and DI.
 type ExtensionViewControllerable interface {
-	Unwrap() *raw.MEExtensionViewController
+	obj.Object
 }
 
 var _ ExtensionViewControllerable = (*ExtensionViewController)(nil)

@@ -5,252 +5,220 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that applies forces, such as gravitation, electromagnetism, and turbulence, to physics bodies within a certain area of effect.
+// PhysicsField is an idiomatic wrapper over the Objective-C class SCNPhysicsField.
 //
-// PhysicsField wraps [raw.SCNPhysicsField] with a fluent Go API.
+// An object that applies forces, such as gravitation, electromagnetism, and turbulence, to physics bodies within a certain area of effect.
 type PhysicsField struct {
-	inner *raw.SCNPhysicsField
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsField].
-func (x *PhysicsField) Unwrap() *raw.SCNPhysicsField { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsField) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsFieldFromID adopts an existing object pointer as a PhysicsField (nil for 0).
+// PhysicsFieldFromID adopts an existing Objective-C object as a PhysicsField
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsFieldFromID(id objc.ID) *PhysicsField {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsField{inner: raw.SCNPhysicsFieldFromID(id)}
+	x := &PhysicsField{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsField creates a new [PhysicsField].
+// physicsFieldAdopt wraps an Objective-C object that this code just created as a
+// PhysicsField (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsFieldAdopt(id objc.ID) *PhysicsField {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsField{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsField) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsField) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsField) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsField) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPhysicsField creates a new PhysicsField.
 func NewPhysicsField() *PhysicsField {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsField")), objc.RegisterName("new"))
-	return &PhysicsField{inner: raw.SCNPhysicsFieldFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("new"))
+	return physicsFieldAdopt(_id)
 }
 
-// A multiplier for the force that the field applies to objects in its area of effect.
-//
-// WithStrength sets the strength property and returns the receiver for chaining.
+// WithStrength a multiplier for the force that the field applies to objects in its area of effect.
 func (x *PhysicsField) WithStrength(strength float64) *PhysicsField {
-	x.inner.SetStrength(strength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrength:"), strength)
 	return x
 }
 
-// An exponent that determines how the field’s strength diminishes with distance.
-//
-// WithFalloffExponent sets the falloffExponent property and returns the receiver for chaining.
+// WithFalloffExponent an exponent that determines how the field’s strength diminishes with distance.
 func (x *PhysicsField) WithFalloffExponent(falloffExponent float64) *PhysicsField {
-	x.inner.SetFalloffExponent(falloffExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloffExponent:"), falloffExponent)
 	return x
 }
 
-// The minimum value for distance-based effects.
-//
-// WithMinimumDistance sets the minimumDistance property and returns the receiver for chaining.
+// WithMinimumDistance the minimum value for distance-based effects.
 func (x *PhysicsField) WithMinimumDistance(minimumDistance float64) *PhysicsField {
-	x.inner.SetMinimumDistance(minimumDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
 	return x
 }
 
-// A Boolean value that determines whether the field’s effect is enabled.
-//
-// WithActive sets the active property and returns the receiver for chaining.
+// WithActive a Boolean value that determines whether the field’s effect is enabled.
 func (x *PhysicsField) WithActive(active bool) *PhysicsField {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 	return x
 }
 
-// A Boolean value that determines whether the field overrides other fields whose areas of effect it overlaps.
-//
-// WithExclusive sets the exclusive property and returns the receiver for chaining.
+// WithExclusive a Boolean value that determines whether the field overrides other fields whose areas of effect it overlaps.
 func (x *PhysicsField) WithExclusive(exclusive bool) *PhysicsField {
-	x.inner.SetExclusive(exclusive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusive:"), exclusive)
 	return x
 }
 
-// A location marking the end of the field’s area of effect.
-//
-// WithHalfExtent sets the halfExtent property and returns the receiver for chaining.
-func (x *PhysicsField) WithHalfExtent(halfExtent raw.SCNVector3) *PhysicsField {
-	x.inner.SetHalfExtent(halfExtent)
-	return x
-}
-
-// A Boolean value that determines whether the field’s area of effect is shaped like a box or ellipsoid.
-//
-// WithUsesEllipsoidalExtent sets the usesEllipsoidalExtent property and returns the receiver for chaining.
+// WithUsesEllipsoidalExtent a Boolean value that determines whether the field’s area of effect is shaped like a box or ellipsoid.
 func (x *PhysicsField) WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField {
-	x.inner.SetUsesEllipsoidalExtent(usesEllipsoidalExtent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesEllipsoidalExtent:"), usesEllipsoidalExtent)
 	return x
 }
 
-// The area affected by the field, either inside or outside its region.
-//
-// WithScope sets the scope property and returns the receiver for chaining.
-func (x *PhysicsField) WithScope(scope SCNPhysicsFieldScope) *PhysicsField {
-	x.inner.SetScope(raw.SCNPhysicsFieldScope(scope))
+// WithScope the area affected by the field, either inside or outside its region.
+func (x *PhysicsField) WithScope(scope PhysicsFieldScope) *PhysicsField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 	return x
 }
 
-// The offset of the field’s center within its area of effect.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *PhysicsField) WithOffset(offset raw.SCNVector3) *PhysicsField {
-	x.inner.SetOffset(offset)
+// WithCategoryBitMask a mask that defines which categories this physics field belongs to.
+func (x *PhysicsField) WithCategoryBitMask(categoryBitMask int) *PhysicsField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
-// The field’s directional axis.
-//
-// WithDirection sets the direction property and returns the receiver for chaining.
-func (x *PhysicsField) WithDirection(direction raw.SCNVector3) *PhysicsField {
-	x.inner.SetDirection(direction)
-	return x
-}
-
-// A mask that defines which categories this physics field belongs to.
-//
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
-func (x *PhysicsField) WithCategoryBitMask(categoryBitMask uint) *PhysicsField {
-	x.inner.SetCategoryBitMask(categoryBitMask)
-	return x
-}
-
-// Strength calls the underlying Strength.
+// Strength wraps the corresponding Objective-C method.
 func (x *PhysicsField) Strength() float64 {
-	return x.inner.Strength()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strength"))
+	return _r
 }
 
-// SetStrength calls the underlying SetStrength.
+// SetStrength wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetStrength(strength float64) {
-	x.inner.SetStrength(strength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrength:"), strength)
 }
 
-// FalloffExponent calls the underlying FalloffExponent.
+// FalloffExponent wraps the corresponding Objective-C method.
 func (x *PhysicsField) FalloffExponent() float64 {
-	return x.inner.FalloffExponent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("falloffExponent"))
+	return _r
 }
 
-// SetFalloffExponent calls the underlying SetFalloffExponent.
+// SetFalloffExponent wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetFalloffExponent(falloffExponent float64) {
-	x.inner.SetFalloffExponent(falloffExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFalloffExponent:"), falloffExponent)
 }
 
-// MinimumDistance calls the underlying MinimumDistance.
+// MinimumDistance wraps the corresponding Objective-C method.
 func (x *PhysicsField) MinimumDistance() float64 {
-	return x.inner.MinimumDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumDistance"))
+	return _r
 }
 
-// SetMinimumDistance calls the underlying SetMinimumDistance.
+// SetMinimumDistance wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetMinimumDistance(minimumDistance float64) {
-	x.inner.SetMinimumDistance(minimumDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
 }
 
-// IsActive calls the underlying IsActive.
+// IsActive wraps the corresponding Objective-C method.
 func (x *PhysicsField) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// SetActive calls the underlying SetActive.
+// SetActive wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetActive(active bool) {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
-// IsExclusive calls the underlying IsExclusive.
+// IsExclusive wraps the corresponding Objective-C method.
 func (x *PhysicsField) IsExclusive() bool {
-	return x.inner.IsExclusive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExclusive"))
+	return _r
 }
 
-// SetExclusive calls the underlying SetExclusive.
+// SetExclusive wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetExclusive(exclusive bool) {
-	x.inner.SetExclusive(exclusive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusive:"), exclusive)
 }
 
-// HalfExtent calls the underlying HalfExtent.
-func (x *PhysicsField) HalfExtent() raw.SCNVector3 {
-	return x.inner.HalfExtent()
-}
-
-// SetHalfExtent calls the underlying SetHalfExtent.
-func (x *PhysicsField) SetHalfExtent(halfExtent raw.SCNVector3) {
-	x.inner.SetHalfExtent(halfExtent)
-}
-
-// UsesEllipsoidalExtent calls the underlying UsesEllipsoidalExtent.
+// UsesEllipsoidalExtent wraps the corresponding Objective-C method.
 func (x *PhysicsField) UsesEllipsoidalExtent() bool {
-	return x.inner.UsesEllipsoidalExtent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesEllipsoidalExtent"))
+	return _r
 }
 
-// SetUsesEllipsoidalExtent calls the underlying SetUsesEllipsoidalExtent.
+// SetUsesEllipsoidalExtent wraps the corresponding Objective-C method.
 func (x *PhysicsField) SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool) {
-	x.inner.SetUsesEllipsoidalExtent(usesEllipsoidalExtent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesEllipsoidalExtent:"), usesEllipsoidalExtent)
 }
 
-// Scope calls the underlying Scope.
-func (x *PhysicsField) Scope() SCNPhysicsFieldScope {
-	return SCNPhysicsFieldScope(x.inner.Scope())
+// Scope wraps the corresponding Objective-C method.
+func (x *PhysicsField) Scope() PhysicsFieldScope {
+	_r := objc.Send[PhysicsFieldScope](objref.IDOf(x), objc.RegisterName("scope"))
+	return _r
 }
 
-// SetScope calls the underlying SetScope.
-func (x *PhysicsField) SetScope(scope SCNPhysicsFieldScope) {
-	x.inner.SetScope(raw.SCNPhysicsFieldScope(scope))
+// SetScope wraps the corresponding Objective-C method.
+func (x *PhysicsField) SetScope(scope PhysicsFieldScope) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 }
 
-// Offset calls the underlying Offset.
-func (x *PhysicsField) Offset() raw.SCNVector3 {
-	return x.inner.Offset()
+// CategoryBitMask determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
+func (x *PhysicsField) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
 }
 
-// SetOffset calls the underlying SetOffset.
-func (x *PhysicsField) SetOffset(offset raw.SCNVector3) {
-	x.inner.SetOffset(offset)
-}
-
-// Direction calls the underlying Direction.
-func (x *PhysicsField) Direction() raw.SCNVector3 {
-	return x.inner.Direction()
-}
-
-// SetDirection calls the underlying SetDirection.
-func (x *PhysicsField) SetDirection(direction raw.SCNVector3) {
-	x.inner.SetDirection(direction)
-}
-
-// @property categoryBitMask @abstract Determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
-//
-// CategoryBitMask calls the underlying CategoryBitMask.
-func (x *PhysicsField) CategoryBitMask() uint {
-	return x.inner.CategoryBitMask()
-}
-
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
-func (x *PhysicsField) SetCategoryBitMask(categoryBitMask uint) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+// SetCategoryBitMask wraps the corresponding Objective-C method.
+func (x *PhysicsField) SetCategoryBitMask(categoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
 // PhysicsFieldable is the interface implemented by [PhysicsField], for mocking and DI.
 type PhysicsFieldable interface {
-	Unwrap() *raw.SCNPhysicsField
+	obj.Object
 	WithStrength(strength float64) *PhysicsField
 	WithFalloffExponent(falloffExponent float64) *PhysicsField
 	WithMinimumDistance(minimumDistance float64) *PhysicsField
 	WithActive(active bool) *PhysicsField
 	WithExclusive(exclusive bool) *PhysicsField
-	WithHalfExtent(halfExtent raw.SCNVector3) *PhysicsField
 	WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField
-	WithScope(scope SCNPhysicsFieldScope) *PhysicsField
-	WithOffset(offset raw.SCNVector3) *PhysicsField
-	WithDirection(direction raw.SCNVector3) *PhysicsField
-	WithCategoryBitMask(categoryBitMask uint) *PhysicsField
+	WithScope(scope PhysicsFieldScope) *PhysicsField
+	WithCategoryBitMask(categoryBitMask int) *PhysicsField
 	Strength() float64
 	SetStrength(strength float64)
 	FalloffExponent() float64
@@ -261,18 +229,12 @@ type PhysicsFieldable interface {
 	SetActive(active bool)
 	IsExclusive() bool
 	SetExclusive(exclusive bool)
-	HalfExtent() raw.SCNVector3
-	SetHalfExtent(halfExtent raw.SCNVector3)
 	UsesEllipsoidalExtent() bool
 	SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool)
-	Scope() SCNPhysicsFieldScope
-	SetScope(scope SCNPhysicsFieldScope)
-	Offset() raw.SCNVector3
-	SetOffset(offset raw.SCNVector3)
-	Direction() raw.SCNVector3
-	SetDirection(direction raw.SCNVector3)
-	CategoryBitMask() uint
-	SetCategoryBitMask(categoryBitMask uint)
+	Scope() PhysicsFieldScope
+	SetScope(scope PhysicsFieldScope)
+	CategoryBitMask() int
+	SetCategoryBitMask(categoryBitMask int)
 }
 
 var _ PhysicsFieldable = (*PhysicsField)(nil)

@@ -5,371 +5,291 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A modal dialog or sheet attached to a document window.
+// Alert is an idiomatic wrapper over the Objective-C class NSAlert.
 //
-// Alert wraps [raw.NSAlert] with a fluent Go API.
+// A modal dialog or sheet attached to a document window.
 type Alert struct {
-	inner *raw.NSAlert
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAlert].
-func (x *Alert) Unwrap() *raw.NSAlert { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Alert) ID() objc.ID { return x.inner.Ptr() }
-
-// AlertFromID adopts an existing object pointer as a Alert (nil for 0).
+// AlertFromID adopts an existing Objective-C object as a Alert
+// (nil for 0), retaining it and registering a release finalizer.
 func AlertFromID(id objc.ID) *Alert {
 	if id == 0 {
 		return nil
 	}
-	return &Alert{inner: raw.NSAlertFromID(id)}
+	x := &Alert{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAlert creates a new [Alert].
+// alertAdopt wraps an Objective-C object that this code just created as a
+// Alert (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func alertAdopt(id objc.ID) *Alert {
+	if id == 0 {
+		return nil
+	}
+	x := &Alert{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Alert) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Alert) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Alert) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Alert) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAlert creates a new Alert.
 func NewAlert() *Alert {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAlert")), objc.RegisterName("new"))
-	return &Alert{inner: raw.NSAlertFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("new"))
+	return alertAdopt(_id)
 }
 
-// The alert’s message text or title.
-//
-// WithMessageText sets the messageText property and returns the receiver for chaining.
+// WithMessageText the alert’s message text or title.
 func (x *Alert) WithMessageText(messageText string) *Alert {
-	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 	return x
 }
 
-// The alert’s informative text.
-//
-// WithInformativeText sets the informativeText property and returns the receiver for chaining.
+// WithInformativeText the alert’s informative text.
 func (x *Alert) WithInformativeText(informativeText string) *Alert {
-	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 	return x
 }
 
-// The custom icon displayed in the alert.
-//
-// WithIcon sets the icon property and returns the receiver for chaining.
+// WithIcon the custom icon displayed in the alert.
 func (x *Alert) WithIcon(icon *Image) *Alert {
-	x.inner.SetIcon(icon.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcon:"), objref.IDOf(icon))
 	return x
 }
 
-// Indicates the alert’s severity level.
-//
-// WithAlertStyle sets the alertStyle property and returns the receiver for chaining.
-func (x *Alert) WithAlertStyle(alertStyle NSAlertStyle) *Alert {
-	x.inner.SetAlertStyle(raw.NSAlertStyle(alertStyle))
+// WithAlertStyle indicates the alert’s severity level.
+func (x *Alert) WithAlertStyle(alertStyle AlertStyle) *Alert {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlertStyle:"), alertStyle)
 	return x
 }
 
-// Specifies whether the alert has a help button.
-//
-// WithShowsHelp sets the showsHelp property and returns the receiver for chaining.
+// WithShowsHelp specifies whether the alert has a help button.
 func (x *Alert) WithShowsHelp(showsHelp bool) *Alert {
-	x.inner.SetShowsHelp(showsHelp)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
 	return x
 }
 
-// The alert’s HTML help anchor.
-//
-// WithHelpAnchor sets the helpAnchor property and returns the receiver for chaining.
-func (x *Alert) WithHelpAnchor(helpAnchor *foundation.NSString) *Alert {
-	x.inner.SetHelpAnchor(helpAnchor)
+// WithHelpAnchor the alert’s HTML help anchor.
+func (x *Alert) WithHelpAnchor(helpAnchor obj.Object) *Alert {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
 	return x
 }
 
-// The alert’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Alert) WithDelegate(delegate raw.NSAlertDelegate) *Alert {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The alert’s accessory view.
-//
-// WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
+// WithAccessoryView the alert’s accessory view.
 func (x *Alert) WithAccessoryView(accessoryView ViewProvider) *Alert {
-	x.inner.SetAccessoryView(accessoryView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
-// Specifies whether the alert includes a suppression checkbox, which you can employ to allow a user to opt out of seeing the alert again.
-//
-// WithShowsSuppressionButton sets the showsSuppressionButton property and returns the receiver for chaining.
+// WithShowsSuppressionButton specifies whether the alert includes a suppression checkbox, which you can employ to allow a user to opt out of seeing the alert again.
 func (x *Alert) WithShowsSuppressionButton(showsSuppressionButton bool) *Alert {
-	x.inner.SetShowsSuppressionButton(showsSuppressionButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSuppressionButton:"), showsSuppressionButton)
 	return x
 }
 
-// Adds a button with a given title to the alert.
-//
-// AddButtonWithTitle calls the underlying AddButtonWithTitle.
+// AddButtonWithTitle adds a button with a given title to the alert.
 func (x *Alert) AddButtonWithTitle(title string) *Button {
-	_r := x.inner.AddButtonWithTitle(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &Button{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addButtonWithTitle:"), purego.NSString(title))
+	return ButtonFromID(_r)
 }
 
-// Specifies that the alert must do immediate layout instead of lazily just before display.
-//
-// Layout calls the underlying Layout.
+// Layout specifies that the alert must do immediate layout instead of lazily just before display.
 func (x *Alert) Layout() {
-	x.inner.Layout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layout"))
 }
 
-// Runs the alert as an app-modal dialog and returns the constant that identifies the button clicked.
-//
-// RunModal calls the underlying RunModal.
+// RunModal runs the alert as an app-modal dialog and returns the constant that identifies the button clicked.
 func (x *Alert) RunModal() int {
-	return x.inner.RunModal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
-// Runs the alert modally as a sheet attached to the specified window.
-//
-// BeginSheetModalForWindowCompletionHandler calls the underlying BeginSheetModalForWindowCompletionHandler.
-func (x *Alert) BeginSheetModalForWindowCompletionHandler(sheetWindow *raw.NSWindow, handler func(int)) {
-	x.inner.BeginSheetModalForWindowCompletionHandler(sheetWindow, handler)
+// BeginSheetModalForWindowCompletionHandler runs the alert modally as a sheet attached to the specified window.
+func (x *Alert) BeginSheetModalForWindowCompletionHandler(sheetWindow *Window, handler func(int)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSheetModalForWindow:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 }
 
-// The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
-//
-// MessageText calls the underlying MessageText.
+// MessageText the text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (x *Alert) MessageText() string {
-	_r := x.inner.MessageText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
-//
-// SetMessageText calls the underlying SetMessageText.
+// SetMessageText the text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
 func (x *Alert) SetMessageText(messageText string) {
-	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 }
 
-// The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
-//
-// InformativeText calls the underlying InformativeText.
+// InformativeText the descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (x *Alert) InformativeText() string {
-	_r := x.inner.InformativeText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
-//
-// SetInformativeText calls the underlying SetInformativeText.
+// SetInformativeText the descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
 func (x *Alert) SetInformativeText(informativeText string) {
-	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
-// The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
-//
-// Icon calls the underlying Icon.
+// Icon the custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
 func (x *Alert) Icon() *Image {
-	_r := x.inner.Icon()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+	return ImageFromID(_r)
 }
 
-// The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
-//
-// SetIcon calls the underlying SetIcon.
-func (x *Alert) SetIcon(icon *raw.NSImage) {
-	x.inner.SetIcon(icon)
+// SetIcon the custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
+func (x *Alert) SetIcon(icon *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcon:"), objref.IDOf(icon))
 }
 
-// The array of response buttons for the alert. The buttons are in the order in which they were added, and do not necessarily reflect the order they are arranged visually. The array does not include the default “OK” button that is shown in an alert presented without any buttons added with `-addButtonWithTitle:`.
+// Buttons the array of response buttons for the alert. The buttons are in the order in which they were added, and do not necessarily reflect the order they are arranged visually. The array does not include the default “OK” button that is shown in an alert presented without any buttons added with `-addButtonWithTitle:`.
 //
 // Buttons returns the collection as a Go slice.
 func (x *Alert) Buttons() []*Button {
-	arr := x.inner.Buttons()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Button {
-		return &Button{inner: raw.NSButtonFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttons"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Button { return ButtonFromID(_id) })
 }
 
-// Indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
-//
-// AlertStyle calls the underlying AlertStyle.
-func (x *Alert) AlertStyle() NSAlertStyle {
-	return NSAlertStyle(x.inner.AlertStyle())
+// AlertStyle indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
+func (x *Alert) AlertStyle() AlertStyle {
+	_r := objc.Send[AlertStyle](objref.IDOf(x), objc.RegisterName("alertStyle"))
+	return _r
 }
 
-// Indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
-//
-// SetAlertStyle calls the underlying SetAlertStyle.
-func (x *Alert) SetAlertStyle(alertStyle NSAlertStyle) {
-	x.inner.SetAlertStyle(raw.NSAlertStyle(alertStyle))
+// SetAlertStyle indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
+func (x *Alert) SetAlertStyle(alertStyle AlertStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlertStyle:"), alertStyle)
 }
 
-// Specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
-//
-// ShowsHelp calls the underlying ShowsHelp.
+// ShowsHelp specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
 func (x *Alert) ShowsHelp() bool {
-	return x.inner.ShowsHelp()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
+	return _r
 }
 
-// Specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
-//
-// SetShowsHelp calls the underlying SetShowsHelp.
+// SetShowsHelp specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
 func (x *Alert) SetShowsHelp(showsHelp bool) {
-	x.inner.SetShowsHelp(showsHelp)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
 }
 
-// The alert’s HTML help anchor used when the user clicks the alert’s help button
-//
-// HelpAnchor calls the underlying HelpAnchor.
-func (x *Alert) HelpAnchor() string {
-	_r := x.inner.HelpAnchor()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// HelpAnchor the alert’s HTML help anchor used when the user clicks the alert’s help button
+func (x *Alert) HelpAnchor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+	return obj.Wrap(_r)
 }
 
-// The alert’s HTML help anchor used when the user clicks the alert’s help button
-//
-// SetHelpAnchor calls the underlying SetHelpAnchor.
-func (x *Alert) SetHelpAnchor(helpAnchor *foundation.NSString) {
-	x.inner.SetHelpAnchor(helpAnchor)
+// SetHelpAnchor the alert’s HTML help anchor used when the user clicks the alert’s help button
+func (x *Alert) SetHelpAnchor(helpAnchor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), objref.IDOf(helpAnchor))
 }
 
-// The delegate of the receiver, currently only allows for custom help behavior of the alert. For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
-//
-// Delegate calls the underlying Delegate.
-func (x *Alert) Delegate() raw.NSAlertDelegate {
-	return x.inner.Delegate()
-}
-
-// The delegate of the receiver, currently only allows for custom help behavior of the alert. For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *Alert) SetDelegate(delegate raw.NSAlertDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
-//
-// AccessoryView calls the underlying AccessoryView.
+// AccessoryView the accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
 func (x *Alert) AccessoryView() *View {
-	_r := x.inner.AccessoryView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+	return ViewFromID(_r)
 }
 
-// The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
-//
-// SetAccessoryView calls the underlying SetAccessoryView.
-func (x *Alert) SetAccessoryView(accessoryView *raw.NSView) {
-	x.inner.SetAccessoryView(accessoryView)
+// SetAccessoryView the accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
+func (x *Alert) SetAccessoryView(accessoryView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
-// Specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title = @"Do not show this warning again"; To create an alert that responds to the selection state of the suppression checkbox, check `myAlert.suppressionButton.state`.
-//
-// ShowsSuppressionButton calls the underlying ShowsSuppressionButton.
+// ShowsSuppressionButton specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title =
 func (x *Alert) ShowsSuppressionButton() bool {
-	return x.inner.ShowsSuppressionButton()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsSuppressionButton"))
+	return _r
 }
 
-// Specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title = @"Do not show this warning again"; To create an alert that responds to the selection state of the suppression checkbox, check `myAlert.suppressionButton.state`.
-//
-// SetShowsSuppressionButton calls the underlying SetShowsSuppressionButton.
+// SetShowsSuppressionButton specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title =
 func (x *Alert) SetShowsSuppressionButton(showsSuppressionButton bool) {
-	x.inner.SetShowsSuppressionButton(showsSuppressionButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsSuppressionButton:"), showsSuppressionButton)
 }
 
-// The alert’s suppression checkbox. The checkbox may be customized, including the title and the initial state. Additionally, use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again. In order to show the suppression button in the alert panel, you must set `showsSuppressionButton` to `YES`.
-//
-// SuppressionButton calls the underlying SuppressionButton.
+// SuppressionButton the alert’s suppression checkbox. The checkbox may be customized, including the title and the initial state. Additionally, use this method to get the state of the button after the alert is dismissed, which may be stored in user defaults and checked before showing the alert again. In order to show the suppression button in the alert panel, you must set `showsSuppressionButton` to `YES`.
 func (x *Alert) SuppressionButton() *Button {
-	_r := x.inner.SuppressionButton()
-	if _r == nil {
-		return nil
-	}
-	return &Button{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suppressionButton"))
+	return ButtonFromID(_r)
 }
 
-// The app-modal panel or document-modal sheet that corresponds to the alert
-//
-// Window calls the underlying Window.
+// Window the app-modal panel or document-modal sheet that corresponds to the alert
 func (x *Alert) Window() *Window {
-	_r := x.inner.Window()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
-}
-
-// Runs the alert modally as an alert sheet attached to a specified window.
-//
-// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
-func (x *Alert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+	return WindowFromID(_r)
 }
 
 // Alertable is the interface implemented by [Alert], for mocking and DI.
 type Alertable interface {
-	Unwrap() *raw.NSAlert
+	obj.Object
 	WithMessageText(messageText string) *Alert
 	WithInformativeText(informativeText string) *Alert
 	WithIcon(icon *Image) *Alert
-	WithAlertStyle(alertStyle NSAlertStyle) *Alert
+	WithAlertStyle(alertStyle AlertStyle) *Alert
 	WithShowsHelp(showsHelp bool) *Alert
-	WithHelpAnchor(helpAnchor *foundation.NSString) *Alert
-	WithDelegate(delegate raw.NSAlertDelegate) *Alert
+	WithHelpAnchor(helpAnchor obj.Object) *Alert
 	WithAccessoryView(accessoryView ViewProvider) *Alert
 	WithShowsSuppressionButton(showsSuppressionButton bool) *Alert
 	AddButtonWithTitle(title string) *Button
 	Layout()
 	RunModal() int
-	BeginSheetModalForWindowCompletionHandler(sheetWindow *raw.NSWindow, handler func(int))
+	BeginSheetModalForWindowCompletionHandler(sheetWindow *Window, handler func(int))
 	MessageText() string
 	SetMessageText(messageText string)
 	InformativeText() string
 	SetInformativeText(informativeText string)
 	Icon() *Image
-	SetIcon(icon *raw.NSImage)
+	SetIcon(icon *Image)
 	Buttons() []*Button
-	AlertStyle() NSAlertStyle
-	SetAlertStyle(alertStyle NSAlertStyle)
+	AlertStyle() AlertStyle
+	SetAlertStyle(alertStyle AlertStyle)
 	ShowsHelp() bool
 	SetShowsHelp(showsHelp bool)
-	HelpAnchor() string
-	SetHelpAnchor(helpAnchor *foundation.NSString)
-	Delegate() raw.NSAlertDelegate
-	SetDelegate(delegate raw.NSAlertDelegate)
+	HelpAnchor() obj.Object
+	SetHelpAnchor(helpAnchor obj.Object)
 	AccessoryView() *View
-	SetAccessoryView(accessoryView *raw.NSView)
+	SetAccessoryView(accessoryView *View)
 	ShowsSuppressionButton() bool
 	SetShowsSuppressionButton(showsSuppressionButton bool)
 	SuppressionButton() *Button
 	Window() *Window
-	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
 }
 
 var _ Alertable = (*Alert)(nil)

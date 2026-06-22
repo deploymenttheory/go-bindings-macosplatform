@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for electric charge.
+// UnitElectricCharge is an idiomatic wrapper over the Objective-C class NSUnitElectricCharge.
 //
-// UnitElectricCharge wraps [raw.NSUnitElectricCharge] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for electric charge.
 type UnitElectricCharge struct {
-	inner *raw.NSUnitElectricCharge
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitElectricCharge].
-func (x *UnitElectricCharge) Unwrap() *raw.NSUnitElectricCharge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitElectricCharge) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitElectricChargeFromID adopts an existing object pointer as a UnitElectricCharge (nil for 0).
+// UnitElectricChargeFromID adopts an existing Objective-C object as a UnitElectricCharge
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitElectricChargeFromID(id objc.ID) *UnitElectricCharge {
 	if id == 0 {
 		return nil
 	}
-	return &UnitElectricCharge{inner: raw.NSUnitElectricChargeFromID(id)}
-}
-
-// NewUnitElectricCharge creates a new [UnitElectricCharge].
-func NewUnitElectricCharge() *UnitElectricCharge {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitElectricCharge")), objc.RegisterName("new"))
-	return &UnitElectricCharge{inner: raw.NSUnitElectricChargeFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitElectricCharge) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCharge {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitElectricCharge{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitElectricCharge) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitElectricChargeAdopt wraps an Objective-C object that this code just created as a
+// UnitElectricCharge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitElectricChargeAdopt(id objc.ID) *UnitElectricCharge {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitElectricCharge{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitElectricCharge) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitElectricCharge creates a new UnitElectricCharge.
+func NewUnitElectricCharge() *UnitElectricCharge {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("new"))
+	return unitElectricChargeAdopt(_id)
+}
 
-func (x *UnitElectricCharge) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitElectricCharge) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCharge {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitElectricChargeable is the interface implemented by [UnitElectricCharge], for mocking and DI.
 type UnitElectricChargeable interface {
-	Unwrap() *raw.NSUnitElectricCharge
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricCharge
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCharge
 }
 
 var _ UnitElectricChargeable = (*UnitElectricCharge)(nil)
+
+var _ DimensionProvider = (*UnitElectricCharge)(nil)
+
+var _ UnitProvider = (*UnitElectricCharge)(nil)

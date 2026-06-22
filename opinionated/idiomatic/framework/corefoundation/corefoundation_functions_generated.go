@@ -5,199 +5,250 @@
 package corefoundation
 
 import (
-	"fmt"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego/objcerrors"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// CFBundleLoadExecutableAndReturnError calls [raw.CFBundleLoadExecutableAndReturnError], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFBundleLoadExecutableAndReturnError(bundle unsafe.Pointer) error {
+// CFBundleLoadExecutableAndReturnError reports an error if the CoreFoundation framework function CFBundleLoadExecutableAndReturnError fails.
+var _fnCFBundleLoadExecutableAndReturnError func(objc.ID, unsafe.Pointer) uint8
+
+func CFBundleLoadExecutableAndReturnError(bundle obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleLoadExecutableAndReturnError == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleLoadExecutableAndReturnError, _lib, "CFBundleLoadExecutableAndReturnError")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CFBundleLoadExecutableAndReturnError(bundle, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFBundleLoadExecutableAndReturnError(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFBundleLoadExecutableAndReturnError")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CFBundlePreflightExecutable calls [raw.CFBundlePreflightExecutable], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFBundlePreflightExecutable(bundle unsafe.Pointer) error {
+// CFBundlePreflightExecutable reports an error if the CoreFoundation framework function CFBundlePreflightExecutable fails.
+var _fnCFBundlePreflightExecutable func(objc.ID, unsafe.Pointer) uint8
+
+func CFBundlePreflightExecutable(bundle obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundlePreflightExecutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _lib, "CFBundlePreflightExecutable")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CFBundlePreflightExecutable(bundle, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFBundlePreflightExecutable")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CFPropertyListCreateData calls [raw.CFPropertyListCreateData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFPropertyListCreateData(allocator unsafe.Pointer, propertyList unsafe.Pointer, format CFPropertyListFormat, options uint) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFPropertyListCreateData(allocator, propertyList, raw.CFPropertyListFormat(format), options, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFPropertyListCreateData")
+// CFPropertyListCreateData reports an error if the CoreFoundation framework function CFPropertyListCreateData fails.
+var _fnCFPropertyListCreateData func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
+
+func CFPropertyListCreateData(allocator obj.Object, propertyList obj.Object, format CFPropertyListFormat, options int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPropertyListCreateData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateData, _lib, "CFPropertyListCreateData")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFPropertyListCreateData(objref.IDOf(allocator), objref.IDOf(propertyList), format, options, unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFPropertyListCreateWithData calls [raw.CFPropertyListCreateWithData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFPropertyListCreateWithData(allocator unsafe.Pointer, data unsafe.Pointer, options uint, format *raw.CFPropertyListFormat) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFPropertyListCreateWithData(allocator, data, options, format, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFPropertyListCreateWithData")
+// CFPropertyListWrite reports an error if the CoreFoundation framework function CFPropertyListWrite fails.
+var _fnCFPropertyListWrite func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
+
+func CFPropertyListWrite(propertyList obj.Object, stream obj.Object, format CFPropertyListFormat, options int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPropertyListWrite == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPropertyListWrite, _lib, "CFPropertyListWrite")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFPropertyListWrite(objref.IDOf(propertyList), objref.IDOf(stream), format, options, unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFPropertyListCreateWithStream calls [raw.CFPropertyListCreateWithStream], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFPropertyListCreateWithStream(allocator unsafe.Pointer, stream unsafe.Pointer, streamLength int, options uint, format *raw.CFPropertyListFormat) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFPropertyListCreateWithStream(allocator, stream, streamLength, options, format, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFPropertyListCreateWithStream")
+// CFStringCreateStringWithValidatedFormat reports an error if the CoreFoundation framework function CFStringCreateStringWithValidatedFormat fails.
+var _fnCFStringCreateStringWithValidatedFormat func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFStringCreateStringWithValidatedFormat(alloc obj.Object, formatOptions obj.Object, validFormatSpecifiers obj.Object, format obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateStringWithValidatedFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormat, _lib, "CFStringCreateStringWithValidatedFormat")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFStringCreateStringWithValidatedFormat(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(validFormatSpecifiers), objref.IDOf(format), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFStringCreateStringWithValidatedFormat calls [raw.CFStringCreateStringWithValidatedFormat], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFStringCreateStringWithValidatedFormat(alloc unsafe.Pointer, formatOptions unsafe.Pointer, validFormatSpecifiers unsafe.Pointer, format unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFStringCreateStringWithValidatedFormat(alloc, formatOptions, validFormatSpecifiers, format, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFStringCreateStringWithValidatedFormat")
+// CFStringCreateStringWithValidatedFormatAndArguments reports an error if the CoreFoundation framework function CFStringCreateStringWithValidatedFormatAndArguments fails.
+var _fnCFStringCreateStringWithValidatedFormatAndArguments func(objc.ID, objc.ID, objc.ID, objc.ID, string, unsafe.Pointer) objc.ID
+
+func CFStringCreateStringWithValidatedFormatAndArguments(alloc obj.Object, formatOptions obj.Object, validFormatSpecifiers obj.Object, format obj.Object, arguments string) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateStringWithValidatedFormatAndArguments == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormatAndArguments, _lib, "CFStringCreateStringWithValidatedFormatAndArguments")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFStringCreateStringWithValidatedFormatAndArguments(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(validFormatSpecifiers), objref.IDOf(format), arguments, unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFStringCreateStringWithValidatedFormatAndArguments calls [raw.CFStringCreateStringWithValidatedFormatAndArguments], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFStringCreateStringWithValidatedFormatAndArguments(alloc unsafe.Pointer, formatOptions unsafe.Pointer, validFormatSpecifiers unsafe.Pointer, format unsafe.Pointer, arguments string) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFStringCreateStringWithValidatedFormatAndArguments(alloc, formatOptions, validFormatSpecifiers, format, arguments, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFStringCreateStringWithValidatedFormatAndArguments")
+// CFURLCopyResourcePropertiesForKeys reports an error if the CoreFoundation framework function CFURLCopyResourcePropertiesForKeys fails.
+var _fnCFURLCopyResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFURLCopyResourcePropertiesForKeys(url obj.Object, keys obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyResourcePropertiesForKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertiesForKeys, _lib, "CFURLCopyResourcePropertiesForKeys")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFURLCopyResourcePropertiesForKeys(objref.IDOf(url), objref.IDOf(keys), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFURLCopyResourcePropertiesForKeys calls [raw.CFURLCopyResourcePropertiesForKeys], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCopyResourcePropertiesForKeys(url unsafe.Pointer, keys unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCopyResourcePropertiesForKeys(url, keys, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCopyResourcePropertiesForKeys")
+// CFURLCreateBookmarkData reports an error if the CoreFoundation framework function CFURLCreateBookmarkData fails.
+var _fnCFURLCreateBookmarkData func(objc.ID, objc.ID, CFURLBookmarkCreationOptions, objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFURLCreateBookmarkData(allocator obj.Object, url obj.Object, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude obj.Object, relativeToURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateBookmarkData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkData, _lib, "CFURLCreateBookmarkData")
 	}
-	return _result, nil
+	var _cfErr unsafe.Pointer
+	_r := _fnCFURLCreateBookmarkData(objref.IDOf(allocator), objref.IDOf(url), options, objref.IDOf(resourcePropertiesToInclude), objref.IDOf(relativeToURL), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
 }
 
-// CFURLCopyResourcePropertyForKey calls [raw.CFURLCopyResourcePropertyForKey], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCopyResourcePropertyForKey(url unsafe.Pointer, key unsafe.Pointer, propertyValueTypeRefPtr unsafe.Pointer) error {
+// CFURLCreateBookmarkDataFromFile reports an error if the CoreFoundation framework function CFURLCreateBookmarkDataFromFile fails.
+var _fnCFURLCreateBookmarkDataFromFile func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFURLCreateBookmarkDataFromFile(allocator obj.Object, fileURL obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateBookmarkDataFromFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromFile, _lib, "CFURLCreateBookmarkDataFromFile")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CFURLCopyResourcePropertyForKey(url, key, propertyValueTypeRefPtr, unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCreateBookmarkDataFromFile(objref.IDOf(allocator), objref.IDOf(fileURL), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// CFURLCreateFilePathURL reports an error if the CoreFoundation framework function CFURLCreateFilePathURL fails.
+var _fnCFURLCreateFilePathURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFURLCreateFilePathURL(allocator obj.Object, url obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateFilePathURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateFilePathURL, _lib, "CFURLCreateFilePathURL")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnCFURLCreateFilePathURL(objref.IDOf(allocator), objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// CFURLCreateFileReferenceURL reports an error if the CoreFoundation framework function CFURLCreateFileReferenceURL fails.
+var _fnCFURLCreateFileReferenceURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func CFURLCreateFileReferenceURL(allocator obj.Object, url obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateFileReferenceURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateFileReferenceURL, _lib, "CFURLCreateFileReferenceURL")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnCFURLCreateFileReferenceURL(objref.IDOf(allocator), objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// CFURLResourceIsReachable reports an error if the CoreFoundation framework function CFURLResourceIsReachable fails.
+var _fnCFURLResourceIsReachable func(objc.ID, unsafe.Pointer) uint8
+
+func CFURLResourceIsReachable(url obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLResourceIsReachable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLResourceIsReachable, _lib, "CFURLResourceIsReachable")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnCFURLResourceIsReachable(objref.IDOf(url), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFURLCopyResourcePropertyForKey")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CFURLCreateBookmarkData calls [raw.CFURLCreateBookmarkData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateBookmarkData(allocator unsafe.Pointer, url unsafe.Pointer, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude unsafe.Pointer, relativeToURL unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateBookmarkData(allocator, url, raw.CFURLBookmarkCreationOptions(options), resourcePropertiesToInclude, relativeToURL, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateBookmarkData")
-	}
-	return _result, nil
-}
+// CFURLSetResourcePropertiesForKeys reports an error if the CoreFoundation framework function CFURLSetResourcePropertiesForKeys fails.
+var _fnCFURLSetResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) uint8
 
-// CFURLCreateBookmarkDataFromFile calls [raw.CFURLCreateBookmarkDataFromFile], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateBookmarkDataFromFile(allocator unsafe.Pointer, fileURL unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateBookmarkDataFromFile(allocator, fileURL, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateBookmarkDataFromFile")
+func CFURLSetResourcePropertiesForKeys(url obj.Object, keyedPropertyValues obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLSetResourcePropertiesForKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertiesForKeys, _lib, "CFURLSetResourcePropertiesForKeys")
 	}
-	return _result, nil
-}
-
-// CFURLCreateByResolvingBookmarkData calls [raw.CFURLCreateByResolvingBookmarkData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateByResolvingBookmarkData(allocator unsafe.Pointer, bookmark unsafe.Pointer, options CFURLBookmarkResolutionOptions, relativeToURL unsafe.Pointer, resourcePropertiesToInclude unsafe.Pointer, isStale *uint8) (unsafe.Pointer, error) {
 	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateByResolvingBookmarkData(allocator, bookmark, raw.CFURLBookmarkResolutionOptions(options), relativeToURL, resourcePropertiesToInclude, isStale, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateByResolvingBookmarkData")
-	}
-	return _result, nil
-}
-
-// CFURLCreateFilePathURL calls [raw.CFURLCreateFilePathURL], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateFilePathURL(allocator unsafe.Pointer, url unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateFilePathURL(allocator, url, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateFilePathURL")
-	}
-	return _result, nil
-}
-
-// CFURLCreateFileReferenceURL calls [raw.CFURLCreateFileReferenceURL], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateFileReferenceURL(allocator unsafe.Pointer, url unsafe.Pointer) (unsafe.Pointer, error) {
-	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateFileReferenceURL(allocator, url, unsafe.Pointer(&_cfErr))
-	if _result == nil {
-		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateFileReferenceURL")
-	}
-	return _result, nil
-}
-
-// CFURLResourceIsReachable calls [raw.CFURLResourceIsReachable], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLResourceIsReachable(url unsafe.Pointer) error {
-	var _cfErr unsafe.Pointer
-	_ok := raw.CFURLResourceIsReachable(url, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLSetResourcePropertiesForKeys(objref.IDOf(url), objref.IDOf(keyedPropertyValues), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFURLResourceIsReachable")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CFURLSetResourcePropertiesForKeys calls [raw.CFURLSetResourcePropertiesForKeys], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLSetResourcePropertiesForKeys(url unsafe.Pointer, keyedPropertyValues unsafe.Pointer) error {
+// CFURLSetResourcePropertyForKey reports an error if the CoreFoundation framework function CFURLSetResourcePropertyForKey fails.
+var _fnCFURLSetResourcePropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
+
+func CFURLSetResourcePropertyForKey(url obj.Object, key obj.Object, propertyValue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLSetResourcePropertyForKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _lib, "CFURLSetResourcePropertyForKey")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CFURLSetResourcePropertiesForKeys(url, keyedPropertyValues, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLSetResourcePropertyForKey(objref.IDOf(url), objref.IDOf(key), objref.IDOf(propertyValue), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFURLSetResourcePropertiesForKeys")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CFURLSetResourcePropertyForKey calls [raw.CFURLSetResourcePropertyForKey], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLSetResourcePropertyForKey(url unsafe.Pointer, key unsafe.Pointer, propertyValue unsafe.Pointer) error {
+// CFURLWriteBookmarkDataToFile reports an error if the CoreFoundation framework function CFURLWriteBookmarkDataToFile fails.
+var _fnCFURLWriteBookmarkDataToFile func(objc.ID, objc.ID, int, unsafe.Pointer) uint8
+
+func CFURLWriteBookmarkDataToFile(bookmarkRef obj.Object, fileURL obj.Object, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLWriteBookmarkDataToFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLWriteBookmarkDataToFile, _lib, "CFURLWriteBookmarkDataToFile")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CFURLSetResourcePropertyForKey(url, key, propertyValue, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLWriteBookmarkDataToFile(objref.IDOf(bookmarkRef), objref.IDOf(fileURL), options, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFURLSetResourcePropertyForKey")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
-}
-
-// CFURLWriteBookmarkDataToFile calls [raw.CFURLWriteBookmarkDataToFile], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLWriteBookmarkDataToFile(bookmarkRef unsafe.Pointer, fileURL unsafe.Pointer, options uint) error {
-	var _cfErr unsafe.Pointer
-	_ok := raw.CFURLWriteBookmarkDataToFile(bookmarkRef, fileURL, options, unsafe.Pointer(&_cfErr))
-	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CFURLWriteBookmarkDataToFile")
-	}
-	return nil
-}
-
-// _cfErrOrMsg converts a CFErrorRef to a structured Go error (domain, code,
-// description, failure reason). A CFErrorRef is an NSError, so it is read
-// through the NSError path with no CGo. Falls back to a plain message if no
-// error was populated.
-func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {
-	if ptr != nil {
-		return objcerrors.CFErrorToError(ptr)
-	}
-	return fmt.Errorf("[%s] operation failed", fn)
 }

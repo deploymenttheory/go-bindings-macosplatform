@@ -5,102 +5,94 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnswerCallIntentResponse wraps [raw.INAnswerCallIntentResponse] with a fluent Go API.
+// AnswerCallIntentResponse is an idiomatic wrapper over the Objective-C class INAnswerCallIntentResponse.
+//
+// It embeds [IntentResponse], promoting that type's methods.
 type AnswerCallIntentResponse struct {
-	inner *raw.INAnswerCallIntentResponse
+	IntentResponse
 }
 
-// Unwrap returns the underlying [raw.INAnswerCallIntentResponse].
-func (x *AnswerCallIntentResponse) Unwrap() *raw.INAnswerCallIntentResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnswerCallIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// AnswerCallIntentResponseFromID adopts an existing object pointer as a AnswerCallIntentResponse (nil for 0).
+// AnswerCallIntentResponseFromID adopts an existing Objective-C object as a AnswerCallIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func AnswerCallIntentResponseFromID(id objc.ID) *AnswerCallIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &AnswerCallIntentResponse{inner: raw.INAnswerCallIntentResponseFromID(id)}
-}
-
-// NewAnswerCallIntentResponseWithCodeUserActivity creates a new [AnswerCallIntentResponse].
-func NewAnswerCallIntentResponseWithCodeUserActivity(code INAnswerCallIntentResponseCode, userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAnswerCallIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INAnswerCallIntentResponseCode(code), userActivity.Ptr())
-	return &AnswerCallIntentResponse{inner: raw.INAnswerCallIntentResponseFromID(_id)}
-}
-
-// WithCallRecords sets the collection, converting the Go slice to an NSArray.
-func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCallRecords(foundation.NSArrayFromID[*raw.INCallRecord](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.INCallRecord](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCallRecords(_arr)
+	x := &AnswerCallIntentResponse{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The user activity object to use when launching the app.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *AnswerCallIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
-	return x
-}
-
-// Code calls the underlying Code.
-func (x *AnswerCallIntentResponse) Code() INAnswerCallIntentResponseCode {
-	return INAnswerCallIntentResponseCode(x.inner.Code())
-}
-
-// CallRecords returns the collection as a Go slice.
-func (x *AnswerCallIntentResponse) CallRecords() []*CallRecord {
-	arr := x.inner.CallRecords()
-	if arr == nil {
+// answerCallIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// AnswerCallIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func answerCallIntentResponseAdopt(id objc.ID) *AnswerCallIntentResponse {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CallRecord {
-		return &CallRecord{inner: raw.INCallRecordFromID(purego.Retain(_id))}
-	})
+	x := &AnswerCallIntentResponse{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetCallRecords calls the underlying SetCallRecords.
-func (x *AnswerCallIntentResponse) SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord]) {
-	x.inner.SetCallRecords(callRecords)
+// NewAnswerCallIntentResponseWithCodeUserActivity creates a new AnswerCallIntentResponse.
+func NewAnswerCallIntentResponseWithCodeUserActivity(code AnswerCallIntentResponseCode, userActivity obj.Object) *AnswerCallIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INAnswerCallIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return answerCallIntentResponseAdopt(_id)
 }
 
-func (x *AnswerCallIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+// WithCallRecords sets the property and returns the receiver so calls can be chained.
+func (x *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse {
+	_arr := purego.SliceToNSArray(items, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), _arr)
+	return x
+}
+
+// WithUserActivity the user activity object to use when launching the app.
+func (x *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return x
+}
+
+// Code wraps the corresponding Objective-C method.
+func (x *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
+	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
+}
+
+// CallRecords wraps the corresponding Objective-C method.
+//
+// CallRecords returns the collection as a Go slice.
+func (x *AnswerCallIntentResponse) CallRecords() []*CallRecord {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecords"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CallRecord { return CallRecordFromID(_id) })
+}
+
+// SetCallRecords wraps the corresponding Objective-C method.
+func (x *AnswerCallIntentResponse) SetCallRecords(callRecords []*CallRecord) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), purego.SliceToNSArray(callRecords, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AnswerCallIntentResponseable is the interface implemented by [AnswerCallIntentResponse], for mocking and DI.
 type AnswerCallIntentResponseable interface {
-	Unwrap() *raw.INAnswerCallIntentResponse
-	WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse
-	Code() INAnswerCallIntentResponseCode
+	obj.Object
+	WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse
+	WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse
+	Code() AnswerCallIntentResponseCode
 	CallRecords() []*CallRecord
-	SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord])
+	SetCallRecords(callRecords []*CallRecord)
 }
 
 var _ AnswerCallIntentResponseable = (*AnswerCallIntentResponse)(nil)
+
+var _ IntentResponseProvider = (*AnswerCallIntentResponse)(nil)

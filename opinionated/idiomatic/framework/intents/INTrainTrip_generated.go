@@ -5,118 +5,147 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a train trip.
+// TrainTrip is an idiomatic wrapper over the Objective-C class INTrainTrip.
 //
-// TrainTrip wraps [raw.INTrainTrip] with a fluent Go API.
+// The information that describes a train trip.
 type TrainTrip struct {
-	inner *raw.INTrainTrip
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INTrainTrip].
-func (x *TrainTrip) Unwrap() *raw.INTrainTrip { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrainTrip) ID() objc.ID { return x.inner.Ptr() }
-
-// TrainTripFromID adopts an existing object pointer as a TrainTrip (nil for 0).
+// TrainTripFromID adopts an existing Objective-C object as a TrainTrip
+// (nil for 0), retaining it and registering a release finalizer.
 func TrainTripFromID(id objc.ID) *TrainTrip {
 	if id == 0 {
 		return nil
 	}
-	return &TrainTrip{inner: raw.INTrainTripFromID(id)}
+	x := &TrainTrip{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new train trip with the specified contents and attributes.
-//
-// NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new [TrainTrip].
-func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider string, trainName string, trainNumber string, tripDuration *raw.INDateComponentsRange, departureStationLocation *corelocation.CLPlacemark, departurePlatform string, arrivalStationLocation *corelocation.CLPlacemark, arrivalPlatform string) *TrainTrip {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainTrip")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:trainName:trainNumber:tripDuration:departureStationLocation:departurePlatform:arrivalStationLocation:arrivalPlatform:"), foundation.NSStringStringWithUTF8String(provider).Ptr(), foundation.NSStringStringWithUTF8String(trainName).Ptr(), foundation.NSStringStringWithUTF8String(trainNumber).Ptr(), tripDuration.Ptr(), departureStationLocation.Ptr(), foundation.NSStringStringWithUTF8String(departurePlatform).Ptr(), arrivalStationLocation.Ptr(), foundation.NSStringStringWithUTF8String(arrivalPlatform).Ptr())
-	return &TrainTrip{inner: raw.INTrainTripFromID(_id)}
-}
-
-// Provider calls the underlying Provider.
-func (x *TrainTrip) Provider() string {
-	_r := x.inner.Provider()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// TrainName calls the underlying TrainName.
-func (x *TrainTrip) TrainName() string {
-	_r := x.inner.TrainName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// TrainNumber calls the underlying TrainNumber.
-func (x *TrainTrip) TrainNumber() string {
-	_r := x.inner.TrainNumber()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// TripDuration calls the underlying TripDuration.
-func (x *TrainTrip) TripDuration() *DateComponentsRange {
-	_r := x.inner.TripDuration()
-	if _r == nil {
+// trainTripAdopt wraps an Objective-C object that this code just created as a
+// TrainTrip (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trainTripAdopt(id objc.ID) *TrainTrip {
+	if id == 0 {
 		return nil
 	}
-	return &DateComponentsRange{inner: _r}
+	x := &TrainTrip{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DepartureStationLocation calls the underlying DepartureStationLocation.
-func (x *TrainTrip) DepartureStationLocation() *corelocation.CLPlacemark {
-	return x.inner.DepartureStationLocation()
+// Description returns the object's -description text.
+func (x *TrainTrip) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// DeparturePlatform calls the underlying DeparturePlatform.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TrainTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TrainTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TrainTrip) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new train trip with the specified contents and attributes.
+func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform(provider string, trainName string, trainNumber string, tripDuration *DateComponentsRange, departureStationLocation obj.Object, departurePlatform string, arrivalStationLocation obj.Object, arrivalPlatform string) *TrainTrip {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTrainTrip")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:trainName:trainNumber:tripDuration:departureStationLocation:departurePlatform:arrivalStationLocation:arrivalPlatform:"), purego.NSString(provider), purego.NSString(trainName), purego.NSString(trainNumber), objref.IDOf(tripDuration), objref.IDOf(departureStationLocation), purego.NSString(departurePlatform), objref.IDOf(arrivalStationLocation), purego.NSString(arrivalPlatform))
+	return trainTripAdopt(_id)
+}
+
+// Provider wraps the corresponding Objective-C method.
+func (x *TrainTrip) Provider() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// TrainName wraps the corresponding Objective-C method.
+func (x *TrainTrip) TrainName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// TrainNumber wraps the corresponding Objective-C method.
+func (x *TrainTrip) TrainNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainNumber"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// TripDuration wraps the corresponding Objective-C method.
+func (x *TrainTrip) TripDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+	return DateComponentsRangeFromID(_r)
+}
+
+// DepartureStationLocation wraps the corresponding Objective-C method.
+func (x *TrainTrip) DepartureStationLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureStationLocation"))
+	return obj.Wrap(_r)
+}
+
+// DeparturePlatform wraps the corresponding Objective-C method.
 func (x *TrainTrip) DeparturePlatform() string {
-	_r := x.inner.DeparturePlatform()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departurePlatform"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ArrivalStationLocation calls the underlying ArrivalStationLocation.
-func (x *TrainTrip) ArrivalStationLocation() *corelocation.CLPlacemark {
-	return x.inner.ArrivalStationLocation()
+// ArrivalStationLocation wraps the corresponding Objective-C method.
+func (x *TrainTrip) ArrivalStationLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalStationLocation"))
+	return obj.Wrap(_r)
 }
 
-// ArrivalPlatform calls the underlying ArrivalPlatform.
+// ArrivalPlatform wraps the corresponding Objective-C method.
 func (x *TrainTrip) ArrivalPlatform() string {
-	_r := x.inner.ArrivalPlatform()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalPlatform"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // TrainTripable is the interface implemented by [TrainTrip], for mocking and DI.
 type TrainTripable interface {
-	Unwrap() *raw.INTrainTrip
+	obj.Object
 	Provider() string
 	TrainName() string
 	TrainNumber() string
 	TripDuration() *DateComponentsRange
-	DepartureStationLocation() *corelocation.CLPlacemark
+	DepartureStationLocation() obj.Object
 	DeparturePlatform() string
-	ArrivalStationLocation() *corelocation.CLPlacemark
+	ArrivalStationLocation() obj.Object
 	ArrivalPlatform() string
 }
 

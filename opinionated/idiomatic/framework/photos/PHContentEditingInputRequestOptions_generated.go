@@ -5,105 +5,122 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A set of options affecting the delivery of image or video data when you request to edit the content of a Photos asset.
+// ContentEditingInputRequestOptions is an idiomatic wrapper over the Objective-C class PHContentEditingInputRequestOptions.
 //
-// ContentEditingInputRequestOptions wraps [raw.PHContentEditingInputRequestOptions] with a fluent Go API.
+// A set of options affecting the delivery of image or video data when you request to edit the content of a Photos asset.
 type ContentEditingInputRequestOptions struct {
-	inner *raw.PHContentEditingInputRequestOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHContentEditingInputRequestOptions].
-func (x *ContentEditingInputRequestOptions) Unwrap() *raw.PHContentEditingInputRequestOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentEditingInputRequestOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentEditingInputRequestOptionsFromID adopts an existing object pointer as a ContentEditingInputRequestOptions (nil for 0).
+// ContentEditingInputRequestOptionsFromID adopts an existing Objective-C object as a ContentEditingInputRequestOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentEditingInputRequestOptionsFromID(id objc.ID) *ContentEditingInputRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	return &ContentEditingInputRequestOptions{inner: raw.PHContentEditingInputRequestOptionsFromID(id)}
+	x := &ContentEditingInputRequestOptions{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContentEditingInputRequestOptions creates a new [ContentEditingInputRequestOptions].
+// contentEditingInputRequestOptionsAdopt wraps an Objective-C object that this code just created as a
+// ContentEditingInputRequestOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentEditingInputRequestOptionsAdopt(id objc.ID) *ContentEditingInputRequestOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &ContentEditingInputRequestOptions{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContentEditingInputRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentEditingInputRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentEditingInputRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentEditingInputRequestOptions) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentEditingInputRequestOptions creates a new ContentEditingInputRequestOptions.
 func NewContentEditingInputRequestOptions() *ContentEditingInputRequestOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingInputRequestOptions")), objc.RegisterName("new"))
-	return &ContentEditingInputRequestOptions{inner: raw.PHContentEditingInputRequestOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHContentEditingInputRequestOptions")), objc.RegisterName("new"))
+	return contentEditingInputRequestOptionsAdopt(_id)
 }
 
-// A block to be called when Photos needs to determine whether your app can continue previous edits made to an asset.
-//
-// WithCanHandleAdjustmentData sets the canHandleAdjustmentData property and returns the receiver for chaining.
-func (x *ContentEditingInputRequestOptions) WithCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) *ContentEditingInputRequestOptions {
-	x.inner.SetCanHandleAdjustmentData(canHandleAdjustmentData)
+// WithCanHandleAdjustmentData a block to be called when Photos needs to determine whether your app can continue previous edits made to an asset.
+func (x *ContentEditingInputRequestOptions) WithCanHandleAdjustmentData(canHandleAdjustmentData func(obj.Object) bool) *ContentEditingInputRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHandleAdjustmentData:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return canHandleAdjustmentData(obj.Wrap(_b0)) }))
 	return x
 }
 
-// A Boolean value that specifies whether Photos can download the asset from iCloud.
-//
-// WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
+// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the asset from iCloud.
 func (x *ContentEditingInputRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *ContentEditingInputRequestOptions {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
-// A block Photos calls periodically while downloading the asset.
-//
-// WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
+// WithProgressHandler a block Photos calls periodically while downloading the asset.
 func (x *ContentEditingInputRequestOptions) WithProgressHandler(progressHandler func(float64, *bool)) *ContentEditingInputRequestOptions {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 unsafe.Pointer) { progressHandler(_b0, (*bool)(_b1)) }))
 	return x
 }
 
-// CanHandleAdjustmentData calls the underlying CanHandleAdjustmentData.
-func (x *ContentEditingInputRequestOptions) CanHandleAdjustmentData() objc.Block {
-	return x.inner.CanHandleAdjustmentData()
+// SetCanHandleAdjustmentData wraps the corresponding Objective-C method.
+func (x *ContentEditingInputRequestOptions) SetCanHandleAdjustmentData(canHandleAdjustmentData func(obj.Object) bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanHandleAdjustmentData:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return canHandleAdjustmentData(obj.Wrap(_b0)) }))
 }
 
-// SetCanHandleAdjustmentData calls the underlying SetCanHandleAdjustmentData.
-func (x *ContentEditingInputRequestOptions) SetCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) {
-	x.inner.SetCanHandleAdjustmentData(canHandleAdjustmentData)
-}
-
-// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *ContentEditingInputRequestOptions) IsNetworkAccessAllowed() bool {
-	return x.inner.IsNetworkAccessAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
 }
 
-// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
 func (x *ContentEditingInputRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
-// ProgressHandler calls the underlying ProgressHandler.
-func (x *ContentEditingInputRequestOptions) ProgressHandler() objc.Block {
-	return x.inner.ProgressHandler()
-}
-
-// SetProgressHandler calls the underlying SetProgressHandler.
+// SetProgressHandler wraps the corresponding Objective-C method.
 func (x *ContentEditingInputRequestOptions) SetProgressHandler(progressHandler func(float64, *bool)) {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 unsafe.Pointer) { progressHandler(_b0, (*bool)(_b1)) }))
 }
 
 // ContentEditingInputRequestOptionsable is the interface implemented by [ContentEditingInputRequestOptions], for mocking and DI.
 type ContentEditingInputRequestOptionsable interface {
-	Unwrap() *raw.PHContentEditingInputRequestOptions
-	WithCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool) *ContentEditingInputRequestOptions
+	obj.Object
+	WithCanHandleAdjustmentData(canHandleAdjustmentData func(obj.Object) bool) *ContentEditingInputRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *ContentEditingInputRequestOptions
 	WithProgressHandler(progressHandler func(float64, *bool)) *ContentEditingInputRequestOptions
-	CanHandleAdjustmentData() objc.Block
-	SetCanHandleAdjustmentData(canHandleAdjustmentData func(*raw.PHAdjustmentData) bool)
+	SetCanHandleAdjustmentData(canHandleAdjustmentData func(obj.Object) bool)
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	ProgressHandler() objc.Block
 	SetProgressHandler(progressHandler func(float64, *bool))
 }
 

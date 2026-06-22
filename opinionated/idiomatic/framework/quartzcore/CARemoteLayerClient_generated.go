@@ -5,83 +5,110 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A legacy class for cross-process rendering.
+// RemoteLayerClient is an idiomatic wrapper over the Objective-C class CARemoteLayerClient.
 //
-// RemoteLayerClient wraps [raw.CARemoteLayerClient] with a fluent Go API.
+// A legacy class for cross-process rendering.
 type RemoteLayerClient struct {
-	inner *raw.CARemoteLayerClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CARemoteLayerClient].
-func (x *RemoteLayerClient) Unwrap() *raw.CARemoteLayerClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RemoteLayerClient) ID() objc.ID { return x.inner.Ptr() }
-
-// RemoteLayerClientFromID adopts an existing object pointer as a RemoteLayerClient (nil for 0).
+// RemoteLayerClientFromID adopts an existing Objective-C object as a RemoteLayerClient
+// (nil for 0), retaining it and registering a release finalizer.
 func RemoteLayerClientFromID(id objc.ID) *RemoteLayerClient {
 	if id == 0 {
 		return nil
 	}
-	return &RemoteLayerClient{inner: raw.CARemoteLayerClientFromID(id)}
-}
-
-// Creates a layer client from a server port.
-//
-// NewRemoteLayerClientWithServerPort creates a new [RemoteLayerClient].
-func NewRemoteLayerClientWithServerPort(port uint) *RemoteLayerClient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CARemoteLayerClient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServerPort:"), port)
-	return &RemoteLayerClient{inner: raw.CARemoteLayerClientFromID(_id)}
-}
-
-// The layer associated with the remote client.
-//
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
-	x.inner.SetLayer(layer.asLayer())
+	x := &RemoteLayerClient{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Invalidates a remote layer client.
-//
-// Invalidate calls the underlying Invalidate.
-func (x *RemoteLayerClient) Invalidate() {
-	x.inner.Invalidate()
-}
-
-// ClientId calls the underlying ClientId.
-func (x *RemoteLayerClient) ClientId() uint32 {
-	return x.inner.ClientId()
-}
-
-// Layer calls the underlying Layer.
-func (x *RemoteLayerClient) Layer() *Layer {
-	_r := x.inner.Layer()
-	if _r == nil {
+// remoteLayerClientAdopt wraps an Objective-C object that this code just created as a
+// RemoteLayerClient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func remoteLayerClientAdopt(id objc.ID) *RemoteLayerClient {
+	if id == 0 {
 		return nil
 	}
-	return &Layer{inner: _r}
+	x := &RemoteLayerClient{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLayer calls the underlying SetLayer.
-func (x *RemoteLayerClient) SetLayer(layer *raw.CALayer) {
-	x.inner.SetLayer(layer)
+// Description returns the object's -description text.
+func (x *RemoteLayerClient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RemoteLayerClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RemoteLayerClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *RemoteLayerClient) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewRemoteLayerClientWithServerPort creates a layer client from a server port.
+func NewRemoteLayerClientWithServerPort(port int) *RemoteLayerClient {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CARemoteLayerClient")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServerPort:"), port)
+	return remoteLayerClientAdopt(_id)
+}
+
+// WithLayer the layer associated with the remote client.
+func (x *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return x
+}
+
+// Invalidate invalidates a remote layer client.
+func (x *RemoteLayerClient) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+}
+
+// ClientId wraps the corresponding Objective-C method.
+func (x *RemoteLayerClient) ClientId() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clientId"))
+	return _r
+}
+
+// Layer wraps the corresponding Objective-C method.
+func (x *RemoteLayerClient) Layer() *Layer {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layer"))
+	return LayerFromID(_r)
+}
+
+// SetLayer wraps the corresponding Objective-C method.
+func (x *RemoteLayerClient) SetLayer(layer *Layer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 }
 
 // RemoteLayerClientable is the interface implemented by [RemoteLayerClient], for mocking and DI.
 type RemoteLayerClientable interface {
-	Unwrap() *raw.CARemoteLayerClient
+	obj.Object
 	WithLayer(layer LayerProvider) *RemoteLayerClient
 	Invalidate()
 	ClientId() uint32
 	Layer() *Layer
-	SetLayer(layer *raw.CALayer)
+	SetLayer(layer *Layer)
 }
 
 var _ RemoteLayerClientable = (*RemoteLayerClient)(nil)

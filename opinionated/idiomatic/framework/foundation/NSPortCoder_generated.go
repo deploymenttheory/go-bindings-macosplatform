@@ -5,111 +5,106 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A coder used to transmit object proxies (and sometimes objects themselves) between connections.
+// PortCoder is an idiomatic wrapper over the Objective-C class NSPortCoder.
 //
-// PortCoder wraps [raw.NSPortCoder] with a fluent Go API.
+// It embeds [Coder], promoting that type's methods.
+//
+// A coder used to transmit object proxies (and sometimes objects themselves) between connections.
 type PortCoder struct {
-	inner *raw.NSPortCoder
+	Coder
 }
 
-// Unwrap returns the underlying [raw.NSPortCoder].
-func (x *PortCoder) Unwrap() *raw.NSPortCoder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PortCoder) ID() objc.ID { return x.inner.Ptr() }
-
-// PortCoderFromID adopts an existing object pointer as a PortCoder (nil for 0).
+// PortCoderFromID adopts an existing Objective-C object as a PortCoder
+// (nil for 0), retaining it and registering a release finalizer.
 func PortCoderFromID(id objc.ID) *PortCoder {
 	if id == 0 {
 		return nil
 	}
-	return &PortCoder{inner: raw.NSPortCoderFromID(id)}
-}
-
-// Initializes and returns an NSPortCoder object.
-//
-// NewPortCoderWithReceivePortSendPortComponents creates a new [PortCoder].
-func NewPortCoderWithReceivePortSendPortComponents(rcvPort *raw.NSPort, sndPort *raw.NSPort, comps *raw.NSArray[objc.ID]) *PortCoder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPortCoder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:components:"), rcvPort.Ptr(), sndPort.Ptr(), comps.Ptr())
-	return &PortCoder{inner: raw.NSPortCoderFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PortCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortCoder {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &PortCoder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
-//
-// IsBycopy calls the underlying IsBycopy.
+// portCoderAdopt wraps an Objective-C object that this code just created as a
+// PortCoder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func portCoderAdopt(id objc.ID) *PortCoder {
+	if id == 0 {
+		return nil
+	}
+	x := &PortCoder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPortCoderWithReceivePortSendPortComponents initializes and returns an NSPortCoder object.
+func NewPortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port, comps obj.Object) *PortCoder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortCoder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:components:"), objref.IDOf(rcvPort), objref.IDOf(sndPort), objref.IDOf(comps))
+	return portCoderAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *PortCoder) WithScriptingProperties(scriptingProperties obj.Object) *PortCoder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// IsBycopy returns a Boolean value that indicates whether the receiver is encoding an object by copying it.
 func (x *PortCoder) IsBycopy() bool {
-	return x.inner.IsBycopy()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBycopy"))
+	return _r
 }
 
-// Returns a Boolean value that indicates whether the receiver is encoding an object by reference.
-//
-// IsByref calls the underlying IsByref.
+// IsByref returns a Boolean value that indicates whether the receiver is encoding an object by reference.
 func (x *PortCoder) IsByref() bool {
-	return x.inner.IsByref()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isByref"))
+	return _r
 }
 
-// Encodes a given port so it can be properly reconstituted in the receiving process or thread.
-//
-// EncodePortObject calls the underlying EncodePortObject.
-func (x *PortCoder) EncodePortObject(aport *raw.NSPort) {
-	x.inner.EncodePortObject(aport)
+// EncodePortObject encodes a given port so it can be properly reconstituted in the receiving process or thread.
+func (x *PortCoder) EncodePortObject(aport *Port) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodePortObject:"), objref.IDOf(aport))
 }
 
-// Decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
-//
-// DecodePortObject calls the underlying DecodePortObject.
+// DecodePortObject decodes and returns an NSPort object that was previously encoded with any of the general encode...Object: messages.
 func (x *PortCoder) DecodePortObject() *Port {
-	_r := x.inner.DecodePortObject()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodePortObject"))
+	return PortFromID(_r)
 }
 
-// Returns the NSConnection object that uses the receiver.
-//
-// Connection calls the underlying Connection.
+// Connection returns the NSConnection object that uses the receiver.
 func (x *PortCoder) Connection() *Connection {
-	_r := x.inner.Connection()
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+	return ConnectionFromID(_r)
 }
 
-// Processes and acts upon the distributed object message with which the receiver was initialized.
-//
-// Dispatch calls the underlying Dispatch.
+// Dispatch processes and acts upon the distributed object message with which the receiver was initialized.
 func (x *PortCoder) Dispatch() {
-	x.inner.Dispatch()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatch"))
 }
-
-func (x *PortCoder) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *PortCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // PortCoderable is the interface implemented by [PortCoder], for mocking and DI.
 type PortCoderable interface {
-	Unwrap() *raw.NSPortCoder
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortCoder
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *PortCoder
 	IsBycopy() bool
 	IsByref() bool
-	EncodePortObject(aport *raw.NSPort)
+	EncodePortObject(aport *Port)
 	DecodePortObject() *Port
 	Connection() *Connection
 	Dispatch()
 }
 
 var _ PortCoderable = (*PortCoder)(nil)
+
+var _ CoderProvider = (*PortCoder)(nil)

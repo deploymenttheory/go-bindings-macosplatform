@@ -6,72 +6,101 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that represents a collection of record zones and subscriptions.
+// Database is an idiomatic wrapper over the Objective-C class CKDatabase.
 //
-// Database wraps [raw.CKDatabase] with a fluent Go API.
+// An object that represents a collection of record zones and subscriptions.
 type Database struct {
-	inner *raw.CKDatabase
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKDatabase].
-func (x *Database) Unwrap() *raw.CKDatabase { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Database) ID() objc.ID { return x.inner.Ptr() }
-
-// DatabaseFromID adopts an existing object pointer as a Database (nil for 0).
+// DatabaseFromID adopts an existing Objective-C object as a Database
+// (nil for 0), retaining it and registering a release finalizer.
 func DatabaseFromID(id objc.ID) *Database {
 	if id == 0 {
 		return nil
 	}
-	return &Database{inner: raw.CKDatabaseFromID(id)}
+	x := &Database{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDatabase creates a new [Database].
+// databaseAdopt wraps an Objective-C object that this code just created as a
+// Database (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func databaseAdopt(id objc.ID) *Database {
+	if id == 0 {
+		return nil
+	}
+	x := &Database{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Database) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Database) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Database) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Database) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewDatabase creates a new Database.
 func NewDatabase() *Database {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabase")), objc.RegisterName("new"))
-	return &Database{inner: raw.CKDatabaseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabase")), objc.RegisterName("new"))
+	return databaseAdopt(_id)
 }
 
-// Executes the specified operation in the current database.
-//
-// AddOperation calls the underlying AddOperation.
-func (x *Database) AddOperation(operation *raw.CKDatabaseOperation) {
-	x.inner.AddOperation(operation)
+// AddOperation executes the specified operation in the current database.
+func (x *Database) AddOperation(operation *DatabaseOperation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *Database) DatabaseScope() CKDatabaseScope {
-	return CKDatabaseScope(x.inner.DatabaseScope())
+// DatabaseScope wraps the corresponding Objective-C method.
+func (x *Database) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return _r
 }
 
-// Fetches a specific record.
+// FetchRecordWithID fetches a specific record.
 //
 // FetchRecordWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*Record, error) {
+func (x *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchRecordWithIDCompletionHandler(recordID, func(_p0 *raw.CKRecord, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Record{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRecordWithID:completionHandler:"), objref.IDOf(recordID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,25 +110,22 @@ func (x *Database) FetchRecordWithID(ctx context.Context, recordID *raw.CKRecord
 	}
 }
 
-// Saves a specific record.
+// SaveRecord saves a specific record.
 //
 // SaveRecord blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveRecord(ctx context.Context, record *raw.CKRecord) (*Record, error) {
+func (x *Database) SaveRecord(ctx context.Context, record *Record) (result *Record, err error) {
 	type _result struct {
 		val *Record
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SaveRecordCompletionHandler(record, func(_p0 *raw.CKRecord, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Record{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveRecord:completionHandler:"), objref.IDOf(record), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -109,25 +135,22 @@ func (x *Database) SaveRecord(ctx context.Context, record *raw.CKRecord) (*Recor
 	}
 }
 
-// Deletes a specific record.
+// DeleteRecordWithID deletes a specific record.
 //
 // DeleteRecordWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*RecordID, error) {
+func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (result *RecordID, err error) {
 	type _result struct {
 		val *RecordID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DeleteRecordWithIDCompletionHandler(recordID, func(_p0 *raw.CKRecordID, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordID{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRecordWithID:completionHandler:"), objref.IDOf(recordID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -137,77 +160,72 @@ func (x *Database) DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecor
 	}
 }
 
-// Searches for records matching a predicate in the specified record zone.
+// PerformQueryInZoneWithID searches for records matching a predicate in the specified record zone.
 //
 // PerformQueryInZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *raw.CKQuery, zoneID *raw.CKRecordZoneID) (*foundation.NSArray[*raw.CKRecord], error) {
+func (x *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, zoneID *RecordZoneID) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CKRecord]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PerformQueryInZoneWithIDCompletionHandler(query, zoneID, func(_p0 *foundation.NSArray[*raw.CKRecord], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performQuery:inZoneWithID:completionHandler:"), objref.IDOf(query), objref.IDOf(zoneID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CKRecord]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Fetches all record zones from the current database.
+// FetchAllRecordZones fetches all record zones from the current database.
 //
 // FetchAllRecordZones blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchAllRecordZones(ctx context.Context) (*foundation.NSArray[*raw.CKRecordZone], error) {
+func (x *Database) FetchAllRecordZones(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CKRecordZone]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchAllRecordZonesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.CKRecordZone], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllRecordZonesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CKRecordZone]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Fetches a specific record zone.
+// FetchRecordZoneWithID fetches a specific record zone.
 //
 // FetchRecordZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZone, error) {
+func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZone, err error) {
 	type _result struct {
 		val *RecordZone
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchRecordZoneWithIDCompletionHandler(zoneID, func(_p0 *raw.CKRecordZone, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordZone{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordZoneFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRecordZoneWithID:completionHandler:"), objref.IDOf(zoneID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -217,25 +235,22 @@ func (x *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *raw.CKReco
 	}
 }
 
-// Saves a specific record zone.
+// SaveRecordZone saves a specific record zone.
 //
 // SaveRecordZone blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveRecordZone(ctx context.Context, zone *raw.CKRecordZone) (*RecordZone, error) {
+func (x *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (result *RecordZone, err error) {
 	type _result struct {
 		val *RecordZone
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SaveRecordZoneCompletionHandler(zone, func(_p0 *raw.CKRecordZone, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordZone{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordZoneFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveRecordZone:completionHandler:"), objref.IDOf(zone), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -245,25 +260,22 @@ func (x *Database) SaveRecordZone(ctx context.Context, zone *raw.CKRecordZone) (
 	}
 }
 
-// Deletes a specific record zone.
+// DeleteRecordZoneWithID deletes a specific record zone.
 //
 // DeleteRecordZoneWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZoneID, error) {
+func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DeleteRecordZoneWithIDCompletionHandler(zoneID, func(_p0 *raw.CKRecordZoneID, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRecordZoneWithID:completionHandler:"), objref.IDOf(zoneID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -273,25 +285,22 @@ func (x *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *raw.CKRec
 	}
 }
 
-// Fetches a specific subscription and delivers it to a completion handler.
+// FetchSubscriptionWithID fetches a specific subscription and delivers it to a completion handler.
 //
 // FetchSubscriptionWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (*Subscription, error) {
+func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result *Subscription, err error) {
 	type _result struct {
 		val *Subscription
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchSubscriptionWithIDCompletionHandler(subscriptionID, func(_p0 *raw.CKSubscription, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Subscription{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SubscriptionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchSubscriptionWithID:completionHandler:"), objref.IDOf(subscriptionID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -301,51 +310,47 @@ func (x *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID *
 	}
 }
 
-// Fetches all subscriptions from the current database.
+// FetchAllSubscriptions fetches all subscriptions from the current database.
 //
 // FetchAllSubscriptions blocks until the operation completes or ctx is cancelled.
-func (x *Database) FetchAllSubscriptions(ctx context.Context) (*foundation.NSArray[*raw.CKSubscription], error) {
+func (x *Database) FetchAllSubscriptions(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.CKSubscription]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchAllSubscriptionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.CKSubscription], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllSubscriptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.CKSubscription]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Saves a specific subscription.
+// SaveSubscription saves a specific subscription.
 //
 // SaveSubscription blocks until the operation completes or ctx is cancelled.
-func (x *Database) SaveSubscription(ctx context.Context, subscription *raw.CKSubscription) (*Subscription, error) {
+func (x *Database) SaveSubscription(ctx context.Context, subscription *Subscription) (result *Subscription, err error) {
 	type _result struct {
 		val *Subscription
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SaveSubscriptionCompletionHandler(subscription, func(_p0 *raw.CKSubscription, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Subscription{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SubscriptionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSubscription:completionHandler:"), objref.IDOf(subscription), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -355,25 +360,22 @@ func (x *Database) SaveSubscription(ctx context.Context, subscription *raw.CKSub
 	}
 }
 
-// Deletes a specific subscription and delivers the deleted subscription’s identifier to a completion handler.
+// DeleteSubscriptionWithID deletes a specific subscription and delivers the deleted subscription’s identifier to a completion handler.
 //
 // DeleteSubscriptionWithID blocks until the operation completes or ctx is cancelled.
-func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (string, error) {
+func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result string, err error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DeleteSubscriptionWithIDCompletionHandler(subscriptionID, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSubscriptionWithID:completionHandler:"), objref.IDOf(subscriptionID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -385,21 +387,21 @@ func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID 
 
 // Databaseable is the interface implemented by [Database], for mocking and DI.
 type Databaseable interface {
-	Unwrap() *raw.CKDatabase
-	AddOperation(operation *raw.CKDatabaseOperation)
-	DatabaseScope() CKDatabaseScope
-	FetchRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*Record, error)
-	SaveRecord(ctx context.Context, record *raw.CKRecord) (*Record, error)
-	DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*RecordID, error)
-	PerformQueryInZoneWithID(ctx context.Context, query *raw.CKQuery, zoneID *raw.CKRecordZoneID) (*foundation.NSArray[*raw.CKRecord], error)
-	FetchAllRecordZones(ctx context.Context) (*foundation.NSArray[*raw.CKRecordZone], error)
-	FetchRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZone, error)
-	SaveRecordZone(ctx context.Context, zone *raw.CKRecordZone) (*RecordZone, error)
-	DeleteRecordZoneWithID(ctx context.Context, zoneID *raw.CKRecordZoneID) (*RecordZoneID, error)
-	FetchSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (*Subscription, error)
-	FetchAllSubscriptions(ctx context.Context) (*foundation.NSArray[*raw.CKSubscription], error)
-	SaveSubscription(ctx context.Context, subscription *raw.CKSubscription) (*Subscription, error)
-	DeleteSubscriptionWithID(ctx context.Context, subscriptionID *foundation.NSString) (string, error)
+	obj.Object
+	AddOperation(operation *DatabaseOperation)
+	DatabaseScope() DatabaseScope
+	FetchRecordWithID(ctx context.Context, recordID *RecordID) (*Record, error)
+	SaveRecord(ctx context.Context, record *Record) (*Record, error)
+	DeleteRecordWithID(ctx context.Context, recordID *RecordID) (*RecordID, error)
+	PerformQueryInZoneWithID(ctx context.Context, query *Query, zoneID *RecordZoneID) (obj.Object, error)
+	FetchAllRecordZones(ctx context.Context) (obj.Object, error)
+	FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (*RecordZone, error)
+	SaveRecordZone(ctx context.Context, zone *RecordZone) (*RecordZone, error)
+	DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (*RecordZoneID, error)
+	FetchSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (*Subscription, error)
+	FetchAllSubscriptions(ctx context.Context) (obj.Object, error)
+	SaveSubscription(ctx context.Context, subscription *Subscription) (*Subscription, error)
+	DeleteSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (string, error)
 }
 
 var _ Databaseable = (*Database)(nil)

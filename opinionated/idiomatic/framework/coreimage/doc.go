@@ -3,4 +3,15 @@
 //go:build darwin
 
 // Package coreimage provides a fluent Go API over the macOS CoreImage framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - BarcodeDescriptor: [AztecCodeDescriptor], [DataMatrixCodeDescriptor], [PDF417CodeDescriptor], [QRCodeDescriptor]
+//   - ColorKernel: [BlendKernel]
+//   - Feature: [FaceFeature], [QRCodeFeature], [RectangleFeature], [TextFeature]
+//   - Filter: [RAWFilter]
+//   - Kernel: [ColorKernel], [WarpKernel]
 package coreimage

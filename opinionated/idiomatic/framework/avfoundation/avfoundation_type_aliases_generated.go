@@ -4,48 +4,72 @@
 
 package avfoundation
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-)
+// A structure that defines CIE 1931 xy chromaticity values.
+type AVCaptureWhiteBalanceChromaticityValues struct {
+	X float32
+	Y float32
+}
 
-// AVCaptionDimension is a type alias for the raw AVCaptionDimension value-type struct.
-type AVCaptionDimension = raw.AVCaptionDimension
+// A structure that defines RGB white balance gain values.
+type AVCaptureWhiteBalanceGains struct {
+	RedGain   float32
+	GreenGain float32
+	BlueGain  float32
+}
 
-// AVCaptionPoint is a type alias for the raw AVCaptionPoint value-type struct.
-type AVCaptionPoint = raw.AVCaptionPoint
+// A structure that defines temperature and tint values correlated to a white-balance color.
+type AVCaptureWhiteBalanceTemperatureAndTintValues struct {
+	Temperature float32
+	Tint        float32
+}
 
-// AVCaptionSize is a type alias for the raw AVCaptionSize value-type struct.
-type AVCaptionSize = raw.AVCaptionSize
+// A structure that defines edge processing region widths.
+type AVEdgeWidths struct {
+	Left   float64
+	Top    float64
+	Right  float64
+	Bottom float64
+}
 
-// AVCaptureTimecode is a type alias for the raw AVCaptureTimecode value-type struct.
-type AVCaptureTimecode = raw.AVCaptureTimecode
+// A structure that defines a pixel aspect ratio for a rendering context.
+type AVPixelAspectRatio struct {
+	HorizontalSpacing int
+	VerticalSpacing   int
+}
 
-// AVCaptureWhiteBalanceChromaticityValues is a type alias for the raw AVCaptureWhiteBalanceChromaticityValues value-type struct.
-type AVCaptureWhiteBalanceChromaticityValues = raw.AVCaptureWhiteBalanceChromaticityValues
+// A structure that describes the independent decodability of audio samples.
+type AVSampleCursorAudioDependencyInfo struct {
+	AudioSampleIsIndependentlyDecodable bool
+	AudioSamplePacketRefreshCount       int
+}
 
-// AVCaptureWhiteBalanceGains is a type alias for the raw AVCaptureWhiteBalanceGains value-type struct.
-type AVCaptureWhiteBalanceGains = raw.AVCaptureWhiteBalanceGains
+// A value that provides information about a chunk of media samples.
+type AVSampleCursorChunkInfo struct {
+	ChunkSampleCount                  int64
+	ChunkHasUniformSampleSizes        bool
+	ChunkHasUniformSampleDurations    bool
+	ChunkHasUniformFormatDescriptions bool
+}
 
-// AVCaptureWhiteBalanceTemperatureAndTintValues is a type alias for the raw AVCaptureWhiteBalanceTemperatureAndTintValues value-type struct.
-type AVCaptureWhiteBalanceTemperatureAndTintValues = raw.AVCaptureWhiteBalanceTemperatureAndTintValues
+// A value for describing dependencies between a media sample and other media samples in the same sample sequence.
+type AVSampleCursorDependencyInfo struct {
+	SampleIndicatesWhetherItHasDependentSamples bool
+	SampleHasDependentSamples                   bool
+	SampleIndicatesWhetherItDependsOnOthers     bool
+	SampleDependsOnOthers                       bool
+	SampleIndicatesWhetherItHasRedundantCoding  bool
+	SampleHasRedundantCoding                    bool
+}
 
-// AVEdgeWidths is a type alias for the raw AVEdgeWidths value-type struct.
-type AVEdgeWidths = raw.AVEdgeWidths
+// A structure that indicates the offset and length of storage for a media sample or its chunk.
+type AVSampleCursorStorageRange struct {
+	Offset int64
+	Length int64
+}
 
-// AVPixelAspectRatio is a type alias for the raw AVPixelAspectRatio value-type struct.
-type AVPixelAspectRatio = raw.AVPixelAspectRatio
-
-// AVSampleCursorAudioDependencyInfo is a type alias for the raw AVSampleCursorAudioDependencyInfo value-type struct.
-type AVSampleCursorAudioDependencyInfo = raw.AVSampleCursorAudioDependencyInfo
-
-// AVSampleCursorChunkInfo is a type alias for the raw AVSampleCursorChunkInfo value-type struct.
-type AVSampleCursorChunkInfo = raw.AVSampleCursorChunkInfo
-
-// AVSampleCursorDependencyInfo is a type alias for the raw AVSampleCursorDependencyInfo value-type struct.
-type AVSampleCursorDependencyInfo = raw.AVSampleCursorDependencyInfo
-
-// AVSampleCursorStorageRange is a type alias for the raw AVSampleCursorStorageRange value-type struct.
-type AVSampleCursorStorageRange = raw.AVSampleCursorStorageRange
-
-// AVSampleCursorSyncInfo is a type alias for the raw AVSampleCursorSyncInfo value-type struct.
-type AVSampleCursorSyncInfo = raw.AVSampleCursorSyncInfo
+// A structure that describes the attributes of media samples to consider when resynchronizing a decoder.
+type AVSampleCursorSyncInfo struct {
+	SampleIsFullSync    bool
+	SampleIsPartialSync bool
+	SampleIsDroppable   bool
+}

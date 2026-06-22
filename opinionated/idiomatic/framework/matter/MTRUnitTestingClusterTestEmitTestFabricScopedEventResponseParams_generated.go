@@ -5,99 +5,131 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams wraps [raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams] with a fluent Go API.
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.
+//
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams is an abstract base — you do not construct it directly. Construct one of [MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams] and pass it where a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams is accepted.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams struct {
-	inner *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams].
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams (nil for 0).
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id)}
+	x := &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initialize an MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-//
-// NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError creates a new [MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams].
-func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsAdopt(id objc.ID) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
+	if id == 0 {
+		return nil
 	}
-	return &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(_id)}, nil
-}
-
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
-	x.inner.SetValue(value)
+	x := &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsAdopt(_id), nil
+}
+
+// WithValue sets the property and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// Value calls the underlying Value.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() *foundation.NSNumber {
-	return x.inner.Value()
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetValue(value *foundation.NSNumber) {
-	x.inner.SetValue(value)
+// Value wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// SetValue wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
-	return x.inner
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams], for mocking and DI.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
-	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
-	Value() *foundation.NSNumber
-	SetValue(value *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithValue(value obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	Value() obj.Object
+	SetValue(value obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams)(nil)
+
+// isMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams marks MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams — and, by embedding promotion, its
+// subclasses — as a member of the MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) isMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() {
+}
+
+var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams)(nil)

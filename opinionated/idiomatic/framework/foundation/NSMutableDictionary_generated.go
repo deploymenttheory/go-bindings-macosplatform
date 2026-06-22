@@ -5,162 +5,144 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A dynamic collection of objects associated with unique keys.
+// MutableDictionary is an idiomatic wrapper over the Objective-C class NSMutableDictionary.
 //
-// MutableDictionary wraps [raw.NSMutableDictionary] with a fluent Go API.
+// It embeds [Dictionary], promoting that type's methods.
+//
+// A dynamic collection of objects associated with unique keys.
 type MutableDictionary struct {
-	inner *raw.NSMutableDictionary[objc.ID, objc.ID]
+	Dictionary
 }
 
-// Unwrap returns the underlying [raw.NSMutableDictionary].
-func (x *MutableDictionary) Unwrap() *raw.NSMutableDictionary[objc.ID, objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableDictionary) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableDictionaryFromID adopts an existing object pointer as a MutableDictionary (nil for 0).
+// MutableDictionaryFromID adopts an existing Objective-C object as a MutableDictionary
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableDictionaryFromID(id objc.ID) *MutableDictionary {
 	if id == 0 {
 		return nil
 	}
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](id)}
+	x := &MutableDictionary{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableDictionary creates a new [MutableDictionary].
+// mutableDictionaryAdopt wraps an Objective-C object that this code just created as a
+// MutableDictionary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableDictionaryAdopt(id objc.ID) *MutableDictionary {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableDictionary{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableDictionary creates a new MutableDictionary.
 func NewMutableDictionary() *MutableDictionary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("new"))
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("new"))
+	return mutableDictionaryAdopt(_id)
 }
 
-// Initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
-//
-// NewMutableDictionaryWithCapacity creates a new [MutableDictionary].
-func NewMutableDictionaryWithCapacity(numItems uint) *MutableDictionary {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("alloc"))
+// NewMutableDictionaryWithCapacity initializes a newly allocated mutable dictionary, allocating enough memory to hold numItems entries.
+func NewMutableDictionaryWithCapacity(numItems int) *MutableDictionary {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
+	return mutableDictionaryAdopt(_id)
 }
 
-// NewMutableDictionaryWithCoder creates a new [MutableDictionary].
-func NewMutableDictionaryWithCoder(coder *raw.NSCoder) *MutableDictionary {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
+// NewMutableDictionaryWithCoder creates a new MutableDictionary.
+func NewMutableDictionaryWithCoder(coder *Coder) *MutableDictionary {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return mutableDictionaryAdopt(_id)
 }
 
-// NewMutableDictionaryWithContentsOfFile creates a new [MutableDictionary].
+// NewMutableDictionaryWithContentsOfFile creates a new MutableDictionary.
 func NewMutableDictionaryWithContentsOfFile(path string) *MutableDictionary {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
+	return mutableDictionaryAdopt(_id)
 }
 
-// NewMutableDictionaryWithContentsOfURL creates a new [MutableDictionary].
+// NewMutableDictionaryWithContentsOfURL creates a new MutableDictionary.
 func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &MutableDictionary{inner: raw.NSMutableDictionaryFromID[objc.ID, objc.ID](_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
+	return mutableDictionaryAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableDictionary) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableDictionary {
-	x.inner.NSDictionary.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MutableDictionary) WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Removes a given key and its associated value from the dictionary.
-//
-// RemoveObjectForKey calls the underlying RemoveObjectForKey.
-func (x *MutableDictionary) RemoveObjectForKey(aKey objc.ID) {
-	x.inner.RemoveObjectForKey(aKey)
+// RemoveObjectForKey removes a given key and its associated value from the dictionary.
+func (x *MutableDictionary) RemoveObjectForKey(aKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
 }
 
-// Adds a given key-value pair to the dictionary.
-//
-// SetObjectForKey calls the underlying SetObjectForKey.
-func (x *MutableDictionary) SetObjectForKey(anObject objc.ID, aKey raw.NSCopying) {
-	x.inner.SetObjectForKey(anObject, aKey)
+// AddEntriesFromDictionary adds to the receiving dictionary the entries from another dictionary.
+func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
-// Adds to the receiving dictionary the entries from another dictionary.
-//
-// AddEntriesFromDictionary calls the underlying AddEntriesFromDictionary.
-func (x *MutableDictionary) AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.AddEntriesFromDictionary(otherDictionary)
-}
-
-// Empties the dictionary of its entries.
-//
-// RemoveAllObjects calls the underlying RemoveAllObjects.
+// RemoveAllObjects empties the dictionary of its entries.
 func (x *MutableDictionary) RemoveAllObjects() {
-	x.inner.RemoveAllObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
-// Removes from the dictionary entries specified by elements in a given array.
-//
-// RemoveObjectsForKeys calls the underlying RemoveObjectsForKeys.
-func (x *MutableDictionary) RemoveObjectsForKeys(keyArray *raw.NSArray[objc.ID]) {
-	x.inner.RemoveObjectsForKeys(keyArray)
+// RemoveObjectsForKeys removes from the dictionary entries specified by elements in a given array.
+func (x *MutableDictionary) RemoveObjectsForKeys(keyArray []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsForKeys:"), purego.SliceToNSArray(keyArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Sets the contents of the receiving dictionary to entries in a given dictionary.
-//
-// SetDictionary calls the underlying SetDictionary.
-func (x *MutableDictionary) SetDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetDictionary(otherDictionary)
+// SetDictionary sets the contents of the receiving dictionary to entries in a given dictionary.
+func (x *MutableDictionary) SetDictionary(otherDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDictionary:"), objref.IDOf(otherDictionary))
 }
 
-// Adds a given key-value pair to the dictionary.
-//
-// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
-func (x *MutableDictionary) SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCopying) {
-	x.inner.SetObjectForKeyedSubscript(obj, key)
-}
-
-func (x *MutableDictionary) asDictionary() *raw.NSDictionary[objc.ID, objc.ID] {
-	return &x.inner.NSDictionary
-}
-
-func (x *MutableDictionary) asObject() *raw.NSObject { return &x.inner.NSDictionary.NSObject }
-
-// Set inserts value for key (both object pointers, e.g. the CFStringRef
-// constant security.KSecClass()) and returns the receiver for chaining.
-func (x *MutableDictionary) Set(key, value objc.ID) *MutableDictionary {
-	objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
+// Set stores value under key (an object) and returns the receiver so calls can
+// be chained.
+func (x *MutableDictionary) Set(key, value obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
 	return x
 }
 
-// SetString inserts value under an NSString built from the Go string key and
-// returns the receiver for chaining.
-func (x *MutableDictionary) SetString(key string, value objc.ID) *MutableDictionary {
-	objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, purego.NSString(key))
+// SetString stores value under the given string key and returns the receiver so
+// calls can be chained.
+func (x *MutableDictionary) SetString(key string, value obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
 	return x
 }
 
-// Get returns the value stored under the Go string key as an objc.ID, or 0 when
-// absent.
-func (x *MutableDictionary) Get(key string) objc.ID {
-	return objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("objectForKey:"), purego.NSString(key))
+// Get returns the value stored under the given string key, or nil when there is
+// none.
+func (x *MutableDictionary) Get(key string) obj.Object {
+	return obj.Wrap(objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
 
 // MutableDictionaryable is the interface implemented by [MutableDictionary], for mocking and DI.
 type MutableDictionaryable interface {
-	Unwrap() *raw.NSMutableDictionary[objc.ID, objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableDictionary
-	RemoveObjectForKey(aKey objc.ID)
-	SetObjectForKey(anObject objc.ID, aKey raw.NSCopying)
-	AddEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary
+	RemoveObjectForKey(aKey obj.Object)
+	AddEntriesFromDictionary(otherDictionary obj.Object)
 	RemoveAllObjects()
-	RemoveObjectsForKeys(keyArray *raw.NSArray[objc.ID])
-	SetDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
-	SetObjectForKeyedSubscript(obj objc.ID, key raw.NSCopying)
+	RemoveObjectsForKeys(keyArray []obj.Object)
+	SetDictionary(otherDictionary obj.Object)
 }
 
 var _ MutableDictionaryable = (*MutableDictionary)(nil)
+
+var _ DictionaryProvider = (*MutableDictionary)(nil)

@@ -5,98 +5,84 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// PHPhotosErrorDomain returns the string constant PHPhotosErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PHPhotosErrorDomain() objc.ID {
-	if _r := raw.PHPhotosErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHPhotosErrorDomain returns the string constant PHPhotosErrorDomain, for use as a dictionary key or argument.
+func PHPhotosErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHPhotosErrorDomain")))
 }
 
-// Array of NSString values representing local identifiers related to the specific error
-// PHLocalIdentifiersErrorKey returns the string constant PHLocalIdentifiersErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHLocalIdentifiersErrorKey() objc.ID {
-	if _r := raw.PHLocalIdentifiersErrorKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHLocalIdentifiersErrorKey returns the string constant PHLocalIdentifiersErrorKey, for use as a dictionary key or argument.
+func PHLocalIdentifiersErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLocalIdentifiersErrorKey")))
 }
 
-// These keys may be found in the info dictionary delivered to a live photo request result handler block.
-// PHLivePhotoInfoErrorKey returns the string constant PHLivePhotoInfoErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHLivePhotoInfoErrorKey() objc.ID {
-	return purego.CFConstant(raw.PHLivePhotoInfoErrorKey())
+// PHLivePhotoInfoErrorKey returns the string constant PHLivePhotoInfoErrorKey, for use as a dictionary key or argument.
+func PHLivePhotoInfoErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoInfoErrorKey")))
 }
 
-// PHLivePhotoInfoIsDegradedKey returns the string constant PHLivePhotoInfoIsDegradedKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHLivePhotoInfoIsDegradedKey() objc.ID {
-	return purego.CFConstant(raw.PHLivePhotoInfoIsDegradedKey())
+// PHLivePhotoInfoIsDegradedKey returns the string constant PHLivePhotoInfoIsDegradedKey, for use as a dictionary key or argument.
+func PHLivePhotoInfoIsDegradedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoInfoIsDegradedKey")))
 }
 
-// PHLivePhotoInfoCancelledKey returns the string constant PHLivePhotoInfoCancelledKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHLivePhotoInfoCancelledKey() objc.ID {
-	return purego.CFConstant(raw.PHLivePhotoInfoCancelledKey())
+// PHLivePhotoInfoCancelledKey returns the string constant PHLivePhotoInfoCancelledKey, for use as a dictionary key or argument.
+func PHLivePhotoInfoCancelledKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoInfoCancelledKey")))
 }
 
-// PHContentEditingInputResultIsInCloudKey returns the string constant PHContentEditingInputResultIsInCloudKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHContentEditingInputResultIsInCloudKey() objc.ID {
-	return purego.CFConstant(raw.PHContentEditingInputResultIsInCloudKey())
+// PHContentEditingInputResultIsInCloudKey returns the string constant PHContentEditingInputResultIsInCloudKey, for use as a dictionary key or argument.
+func PHContentEditingInputResultIsInCloudKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHContentEditingInputResultIsInCloudKey")))
 }
 
-// PHContentEditingInputCancelledKey returns the string constant PHContentEditingInputCancelledKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHContentEditingInputCancelledKey() objc.ID {
-	return purego.CFConstant(raw.PHContentEditingInputCancelledKey())
+// PHContentEditingInputCancelledKey returns the string constant PHContentEditingInputCancelledKey, for use as a dictionary key or argument.
+func PHContentEditingInputCancelledKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHContentEditingInputCancelledKey")))
 }
 
-// PHContentEditingInputErrorKey returns the string constant PHContentEditingInputErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHContentEditingInputErrorKey() objc.ID {
-	return purego.CFConstant(raw.PHContentEditingInputErrorKey())
+// PHContentEditingInputErrorKey returns the string constant PHContentEditingInputErrorKey, for use as a dictionary key or argument.
+func PHContentEditingInputErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHContentEditingInputErrorKey")))
 }
 
-// Indicates whether processing should happen at playback time If set to NO (the default) the live photo will always be rendered before playback If set to YES, the editing context might still choose to render first for performance reasons This option is ignored by the saveLivePhotoToOutput method
-// PHLivePhotoShouldRenderAtPlaybackTime returns the string constant PHLivePhotoShouldRenderAtPlaybackTime as an objc.ID, for use as a dictionary key or selector argument.
-func PHLivePhotoShouldRenderAtPlaybackTime() objc.ID {
-	return purego.CFConstant(raw.PHLivePhotoShouldRenderAtPlaybackTime())
+// PHLivePhotoShouldRenderAtPlaybackTime returns the string constant PHLivePhotoShouldRenderAtPlaybackTime, for use as a dictionary key or argument.
+func PHLivePhotoShouldRenderAtPlaybackTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoShouldRenderAtPlaybackTime")))
 }
 
-// The error domain for all Live Photo Editing errors (Deprecated).
-// PHLivePhotoEditingErrorDomain returns the string constant PHLivePhotoEditingErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PHLivePhotoEditingErrorDomain() objc.ID {
-	return purego.CFConstant(raw.PHLivePhotoEditingErrorDomain())
+// PHLivePhotoEditingErrorDomain returns the string constant PHLivePhotoEditingErrorDomain, for use as a dictionary key or argument.
+func PHLivePhotoEditingErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLivePhotoEditingErrorDomain")))
 }
 
-// PHImageResultIsInCloudKey returns the string constant PHImageResultIsInCloudKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHImageResultIsInCloudKey() objc.ID {
-	return purego.CFConstant(raw.PHImageResultIsInCloudKey())
+// PHImageResultIsInCloudKey returns the string constant PHImageResultIsInCloudKey, for use as a dictionary key or argument.
+func PHImageResultIsInCloudKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHImageResultIsInCloudKey")))
 }
 
-// PHImageResultIsDegradedKey returns the string constant PHImageResultIsDegradedKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHImageResultIsDegradedKey() objc.ID {
-	return purego.CFConstant(raw.PHImageResultIsDegradedKey())
+// PHImageResultIsDegradedKey returns the string constant PHImageResultIsDegradedKey, for use as a dictionary key or argument.
+func PHImageResultIsDegradedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHImageResultIsDegradedKey")))
 }
 
-// PHImageResultRequestIDKey returns the string constant PHImageResultRequestIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHImageResultRequestIDKey() objc.ID {
-	return purego.CFConstant(raw.PHImageResultRequestIDKey())
+// PHImageResultRequestIDKey returns the string constant PHImageResultRequestIDKey, for use as a dictionary key or argument.
+func PHImageResultRequestIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHImageResultRequestIDKey")))
 }
 
-// PHImageCancelledKey returns the string constant PHImageCancelledKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHImageCancelledKey() objc.ID {
-	return purego.CFConstant(raw.PHImageCancelledKey())
+// PHImageCancelledKey returns the string constant PHImageCancelledKey, for use as a dictionary key or argument.
+func PHImageCancelledKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHImageCancelledKey")))
 }
 
-// PHImageErrorKey returns the string constant PHImageErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func PHImageErrorKey() objc.ID {
-	return purego.CFConstant(raw.PHImageErrorKey())
-}
+// PHImageErrorKey returns the string constant PHImageErrorKey, for use as a dictionary key or argument.
+func PHImageErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PHImageErrorKey"))) }
 
-// DEPRECATED: If the local object cannot be resolved from a global identifier, PHLocalIdentifierNotFound is provided in that array slot.
-// PHLocalIdentifierNotFound returns the string constant PHLocalIdentifierNotFound as an objc.ID, for use as a dictionary key or selector argument.
-func PHLocalIdentifierNotFound() objc.ID {
-	return purego.CFConstant(raw.PHLocalIdentifierNotFound())
+// PHLocalIdentifierNotFound returns the string constant PHLocalIdentifierNotFound, for use as a dictionary key or argument.
+func PHLocalIdentifierNotFound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHLocalIdentifierNotFound")))
 }

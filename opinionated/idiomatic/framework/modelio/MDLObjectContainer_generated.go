@@ -5,41 +5,76 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A default implementation for handling object hierarchy relationships in a 3D asset.
+// ObjectContainer is an idiomatic wrapper over the Objective-C class MDLObjectContainer.
 //
-// ObjectContainer wraps [raw.MDLObjectContainer] with a fluent Go API.
+// A default implementation for handling object hierarchy relationships in a 3D asset.
 type ObjectContainer struct {
-	inner *raw.MDLObjectContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLObjectContainer].
-func (x *ObjectContainer) Unwrap() *raw.MDLObjectContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectContainer) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectContainerFromID adopts an existing object pointer as a ObjectContainer (nil for 0).
+// ObjectContainerFromID adopts an existing Objective-C object as a ObjectContainer
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectContainerFromID(id objc.ID) *ObjectContainer {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectContainer{inner: raw.MDLObjectContainerFromID(id)}
+	x := &ObjectContainer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewObjectContainer creates a new [ObjectContainer].
+// objectContainerAdopt wraps an Objective-C object that this code just created as a
+// ObjectContainer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectContainerAdopt(id objc.ID) *ObjectContainer {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectContainer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ObjectContainer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ObjectContainer) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewObjectContainer creates a new ObjectContainer.
 func NewObjectContainer() *ObjectContainer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLObjectContainer")), objc.RegisterName("new"))
-	return &ObjectContainer{inner: raw.MDLObjectContainerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLObjectContainer")), objc.RegisterName("new"))
+	return objectContainerAdopt(_id)
 }
 
 // ObjectContainerable is the interface implemented by [ObjectContainer], for mocking and DI.
 type ObjectContainerable interface {
-	Unwrap() *raw.MDLObjectContainer
+	obj.Object
 }
 
 var _ ObjectContainerable = (*ObjectContainer)(nil)

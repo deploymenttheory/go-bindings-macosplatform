@@ -5,49 +5,65 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A remote device connected to a local app, which is acting as a peripheral.
+// Central is an idiomatic wrapper over the Objective-C class CBCentral.
 //
-// Central wraps [raw.CBCentral] with a fluent Go API.
+// It embeds [Peer], promoting that type's methods.
+//
+// A remote device connected to a local app, which is acting as a peripheral.
 type Central struct {
-	inner *raw.CBCentral
+	Peer
 }
 
-// Unwrap returns the underlying [raw.CBCentral].
-func (x *Central) Unwrap() *raw.CBCentral { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Central) ID() objc.ID { return x.inner.Ptr() }
-
-// CentralFromID adopts an existing object pointer as a Central (nil for 0).
+// CentralFromID adopts an existing Objective-C object as a Central
+// (nil for 0), retaining it and registering a release finalizer.
 func CentralFromID(id objc.ID) *Central {
 	if id == 0 {
 		return nil
 	}
-	return &Central{inner: raw.CBCentralFromID(id)}
+	x := &Central{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCentral creates a new [Central].
+// centralAdopt wraps an Objective-C object that this code just created as a
+// Central (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func centralAdopt(id objc.ID) *Central {
+	if id == 0 {
+		return nil
+	}
+	x := &Central{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCentral creates a new Central.
 func NewCentral() *Central {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentral")), objc.RegisterName("new"))
-	return &Central{inner: raw.CBCentralFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBCentral")), objc.RegisterName("new"))
+	return centralAdopt(_id)
 }
 
-// MaximumUpdateValueLength calls the underlying MaximumUpdateValueLength.
-func (x *Central) MaximumUpdateValueLength() uint {
-	return x.inner.MaximumUpdateValueLength()
+// MaximumUpdateValueLength wraps the corresponding Objective-C method.
+func (x *Central) MaximumUpdateValueLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumUpdateValueLength"))
+	return _r
 }
-
-func (x *Central) asPeer() *raw.CBPeer { return &x.inner.CBPeer }
 
 // Centralable is the interface implemented by [Central], for mocking and DI.
 type Centralable interface {
-	Unwrap() *raw.CBCentral
-	MaximumUpdateValueLength() uint
+	obj.Object
+	MaximumUpdateValueLength() int
 }
 
 var _ Centralable = (*Central)(nil)
+
+var _ PeerProvider = (*Central)(nil)

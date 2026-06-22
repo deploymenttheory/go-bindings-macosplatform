@@ -5,97 +5,123 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a person in the context of search results.
+// Person is an idiomatic wrapper over the Objective-C class CSPerson.
 //
-// Person wraps [raw.CSPerson] with a fluent Go API.
+// An object that represents a person in the context of search results.
 type Person struct {
-	inner *raw.CSPerson
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSPerson].
-func (x *Person) Unwrap() *raw.CSPerson { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Person) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonFromID adopts an existing object pointer as a Person (nil for 0).
+// PersonFromID adopts an existing Objective-C object as a Person
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	return &Person{inner: raw.CSPersonFromID(id)}
-}
-
-// Returns a new CSPerson object initialized with the specified display name and contact attributes.
-//
-// NewPersonWithDisplayNameHandlesHandleIdentifier creates a new [Person].
-func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles *foundation.NSArray[*foundation.NSString], handleIdentifier string) *Person {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:handles:handleIdentifier:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), handles.Ptr(), foundation.NSStringStringWithUTF8String(handleIdentifier).Ptr())
-	return &Person{inner: raw.CSPersonFromID(_id)}
-}
-
-// The identifier for the contact associated with the person.
-//
-// WithContactIdentifier sets the contactIdentifier property and returns the receiver for chaining.
-func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
-	x.inner.SetContactIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))
+	x := &Person{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// DisplayName calls the underlying DisplayName.
-func (x *Person) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Handles returns the collection as a Go slice.
-func (x *Person) Handles() []string {
-	arr := x.inner.Handles()
-	if arr == nil {
+// personAdopt wraps an Objective-C object that this code just created as a
+// Person (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personAdopt(id objc.ID) *Person {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	x := &Person{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// HandleIdentifier calls the underlying HandleIdentifier.
+// Description returns the object's -description text.
+func (x *Person) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Person) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Person) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Person) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPersonWithDisplayNameHandlesHandleIdentifier returns a new CSPerson object initialized with the specified display name and contact attributes.
+func NewPersonWithDisplayNameHandlesHandleIdentifier(displayName string, handles []string, handleIdentifier string) *Person {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CSPerson")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:handles:handleIdentifier:"), purego.NSString(displayName), purego.SliceToNSArray(handles, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(handleIdentifier))
+	return personAdopt(_id)
+}
+
+// WithContactIdentifier the identifier for the contact associated with the person.
+func (x *Person) WithContactIdentifier(contactIdentifier string) *Person {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
+	return x
+}
+
+// DisplayName wraps the corresponding Objective-C method.
+func (x *Person) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Handles wraps the corresponding Objective-C method.
+//
+// Handles returns the collection as a Go slice.
+func (x *Person) Handles() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// HandleIdentifier wraps the corresponding Objective-C method.
 func (x *Person) HandleIdentifier() string {
-	_r := x.inner.HandleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ContactIdentifier calls the underlying ContactIdentifier.
+// ContactIdentifier wraps the corresponding Objective-C method.
 func (x *Person) ContactIdentifier() string {
-	_r := x.inner.ContactIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetContactIdentifier calls the underlying SetContactIdentifier.
+// SetContactIdentifier wraps the corresponding Objective-C method.
 func (x *Person) SetContactIdentifier(contactIdentifier string) {
-	x.inner.SetContactIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactIdentifier:"), purego.NSString(contactIdentifier))
 }
 
 // Personable is the interface implemented by [Person], for mocking and DI.
 type Personable interface {
-	Unwrap() *raw.CSPerson
+	obj.Object
 	WithContactIdentifier(contactIdentifier string) *Person
 	DisplayName() string
 	Handles() []string

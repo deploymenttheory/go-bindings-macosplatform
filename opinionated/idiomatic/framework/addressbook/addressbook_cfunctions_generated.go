@@ -5,11 +5,22 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ABLocalizedPropertyOrLabel calls [raw.ABLocalizedPropertyOrLabel] (C function ABLocalizedPropertyOrLabel).
-func ABLocalizedPropertyOrLabel(propertyOrLabel *foundation.NSString) *foundation.NSString {
-	return raw.ABLocalizedPropertyOrLabel(propertyOrLabel)
+var _fnABLocalizedPropertyOrLabel func(objc.ID) objc.ID
+
+// ABLocalizedPropertyOrLabel calls the AddressBook framework function ABLocalizedPropertyOrLabel.
+func ABLocalizedPropertyOrLabel(propertyOrLabel string) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnABLocalizedPropertyOrLabel == nil {
+		ebipurego.RegisterLibFunc(&_fnABLocalizedPropertyOrLabel, _lib, "ABLocalizedPropertyOrLabel")
+	}
+	_ret := _fnABLocalizedPropertyOrLabel(purego.NSString(propertyOrLabel))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

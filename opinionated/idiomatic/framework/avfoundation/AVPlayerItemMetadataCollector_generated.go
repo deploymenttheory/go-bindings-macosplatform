@@ -5,73 +5,66 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object used to capture the date range metadata defined for an HTTP Live Streaming asset.
+// PlayerItemMetadataCollector is an idiomatic wrapper over the Objective-C class AVPlayerItemMetadataCollector.
 //
-// PlayerItemMetadataCollector wraps [raw.AVPlayerItemMetadataCollector] with a fluent Go API.
+// It embeds [PlayerItemMediaDataCollector], promoting that type's methods.
+//
+// An object used to capture the date range metadata defined for an HTTP Live Streaming asset.
 type PlayerItemMetadataCollector struct {
-	inner *raw.AVPlayerItemMetadataCollector
+	PlayerItemMediaDataCollector
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemMetadataCollector].
-func (x *PlayerItemMetadataCollector) Unwrap() *raw.AVPlayerItemMetadataCollector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemMetadataCollector) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemMetadataCollectorFromID adopts an existing object pointer as a PlayerItemMetadataCollector (nil for 0).
+// PlayerItemMetadataCollectorFromID adopts an existing Objective-C object as a PlayerItemMetadataCollector
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemMetadataCollectorFromID(id objc.ID) *PlayerItemMetadataCollector {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemMetadataCollector{inner: raw.AVPlayerItemMetadataCollectorFromID(id)}
+	x := &PlayerItemMetadataCollector{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a metadata collector to access a stream’s metadata groups matching the specified array of identifiers and classifying labels.
-//
-// NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels creates a new [PlayerItemMetadataCollector].
-func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers *foundation.NSArray[*foundation.NSString], classifyingLabels *foundation.NSArray[*foundation.NSString]) *PlayerItemMetadataCollector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemMetadataCollector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifiers:classifyingLabels:"), identifiers.Ptr(), classifyingLabels.Ptr())
-	return &PlayerItemMetadataCollector{inner: raw.AVPlayerItemMetadataCollectorFromID(_id)}
+// playerItemMetadataCollectorAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemMetadataCollector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemMetadataCollectorAdopt(id objc.ID) *PlayerItemMetadataCollector {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemMetadataCollector{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Sets the delegate and a dispatch queue on which the delegate will be called.
-//
-// SetDelegateQueue calls the underlying SetDelegateQueue.
-func (x *PlayerItemMetadataCollector) SetDelegateQueue(delegate raw.AVPlayerItemMetadataCollectorPushDelegate, delegateQueue *foundation.NSObject) {
-	x.inner.SetDelegateQueue(delegate, delegateQueue)
+// NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels creates a metadata collector to access a stream’s metadata groups matching the specified array of identifiers and classifying labels.
+func NewPlayerItemMetadataCollectorWithIdentifiersClassifyingLabels(identifiers []string, classifyingLabels []string) *PlayerItemMetadataCollector {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemMetadataCollector")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifiers:classifyingLabels:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(classifyingLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return playerItemMetadataCollectorAdopt(_id)
 }
 
-// @property		delegate @abstract		The receiver's delegate. @discussion The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.  This property is not key-value observable.
-//
-// Delegate calls the underlying Delegate.
-func (x *PlayerItemMetadataCollector) Delegate() raw.AVPlayerItemMetadataCollectorPushDelegate {
-	return x.inner.Delegate()
-}
-
-// @property		delegateQueue @abstract		The dispatch queue on which messages are sent to the delegate. @discussion This property is not key-value observable.
-//
-// DelegateQueue calls the underlying DelegateQueue.
-func (x *PlayerItemMetadataCollector) DelegateQueue() *foundation.NSObject {
-	return x.inner.DelegateQueue()
-}
-
-func (x *PlayerItemMetadataCollector) asPlayerItemMediaDataCollector() *raw.AVPlayerItemMediaDataCollector {
-	return &x.inner.AVPlayerItemMediaDataCollector
+// DelegateQueue the dispatch queue on which messages are sent to the delegate. This property is not key-value observable.
+func (x *PlayerItemMetadataCollector) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+	return obj.Wrap(_r)
 }
 
 // PlayerItemMetadataCollectorable is the interface implemented by [PlayerItemMetadataCollector], for mocking and DI.
 type PlayerItemMetadataCollectorable interface {
-	Unwrap() *raw.AVPlayerItemMetadataCollector
-	SetDelegateQueue(delegate raw.AVPlayerItemMetadataCollectorPushDelegate, delegateQueue *foundation.NSObject)
-	Delegate() raw.AVPlayerItemMetadataCollectorPushDelegate
-	DelegateQueue() *foundation.NSObject
+	obj.Object
+	DelegateQueue() obj.Object
 }
 
 var _ PlayerItemMetadataCollectorable = (*PlayerItemMetadataCollector)(nil)
+
+var _ PlayerItemMediaDataCollectorProvider = (*PlayerItemMetadataCollector)(nil)

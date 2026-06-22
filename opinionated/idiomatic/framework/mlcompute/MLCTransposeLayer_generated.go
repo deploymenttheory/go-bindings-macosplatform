@@ -5,77 +5,81 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that permutes the dimensions you specify.
+// TransposeLayer is an idiomatic wrapper over the Objective-C class MLCTransposeLayer.
 //
-// TransposeLayer wraps [raw.MLCTransposeLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that permutes the dimensions you specify.
 type TransposeLayer struct {
-	inner *raw.MLCTransposeLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCTransposeLayer].
-func (x *TransposeLayer) Unwrap() *raw.MLCTransposeLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransposeLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// TransposeLayerFromID adopts an existing object pointer as a TransposeLayer (nil for 0).
+// TransposeLayerFromID adopts an existing Objective-C object as a TransposeLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func TransposeLayerFromID(id objc.ID) *TransposeLayer {
 	if id == 0 {
 		return nil
 	}
-	return &TransposeLayer{inner: raw.MLCTransposeLayerFromID(id)}
-}
-
-// NewTransposeLayer creates a new [TransposeLayer].
-func NewTransposeLayer() *TransposeLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTransposeLayer")), objc.RegisterName("new"))
-	return &TransposeLayer{inner: raw.MLCTransposeLayerFromID(_id)}
-}
-
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *TransposeLayer) WithLabel(label string) *TransposeLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &TransposeLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
-func (x *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
-	return x
-}
-
-// @property   dimensions @abstract   Permutes the dimensions according to 'dimensions'. @discussion The returned tensor's dimension i will correspond to dimensions[i].
-//
-// Dimensions returns the collection as a Go slice.
-func (x *TransposeLayer) Dimensions() []*foundation.NSNumber {
-	arr := x.inner.Dimensions()
-	if arr == nil {
+// transposeLayerAdopt wraps an Objective-C object that this code just created as a
+// TransposeLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transposeLayerAdopt(id objc.ID) *TransposeLayer {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &TransposeLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *TransposeLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+// NewTransposeLayer creates a new TransposeLayer.
+func NewTransposeLayer() *TransposeLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTransposeLayer")), objc.RegisterName("new"))
+	return transposeLayerAdopt(_id)
+}
+
+// WithLabel a string that helps identify this layer.
+func (x *TransposeLayer) WithLabel(label string) *TransposeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (x *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return x
+}
+
+// Dimensions permutes the dimensions according to 'dimensions'. The returned tensor's dimension i will correspond to dimensions[i].
+//
+// Dimensions returns the collection as a Go slice.
+func (x *TransposeLayer) Dimensions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
 
 // TransposeLayerable is the interface implemented by [TransposeLayer], for mocking and DI.
 type TransposeLayerable interface {
-	Unwrap() *raw.MLCTransposeLayer
+	obj.Object
 	WithLabel(label string) *TransposeLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer
-	Dimensions() []*foundation.NSNumber
+	Dimensions() []obj.Object
 }
 
 var _ TransposeLayerable = (*TransposeLayer)(nil)
+
+var _ LayerProvider = (*TransposeLayer)(nil)

@@ -5,72 +5,101 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRThreadBorderRouterManagementClusterDatasetResponseParams wraps [raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams] with a fluent Go API.
+// MTRThreadBorderRouterManagementClusterDatasetResponseParams is an idiomatic wrapper over the Objective-C class MTRThreadBorderRouterManagementClusterDatasetResponseParams.
 type MTRThreadBorderRouterManagementClusterDatasetResponseParams struct {
-	inner *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams].
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID adopts an existing object pointer as a MTRThreadBorderRouterManagementClusterDatasetResponseParams (nil for 0).
+// MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID adopts an existing Objective-C object as a MTRThreadBorderRouterManagementClusterDatasetResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: raw.MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(id)}
-}
-
-// Initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-//
-// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError creates a new [MTRThreadBorderRouterManagementClusterDatasetResponseParams].
-func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadBorderRouterManagementClusterDatasetResponseParams")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: raw.MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(_id)}, nil
-}
-
-// WithDataset sets the dataset property and returns the receiver for chaining.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
-	x.inner.SetDataset(dataset)
+	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Dataset calls the underlying Dataset.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() *foundation.NSData {
-	return x.inner.Dataset()
+// mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadBorderRouterManagementClusterDatasetResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(id objc.ID) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadBorderRouterManagementClusterDatasetResponseParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetDataset calls the underlying SetDataset.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset *foundation.NSData) {
-	x.inner.SetDataset(dataset)
+// Description returns the object's -description text.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadBorderRouterManagementClusterDatasetResponseParams")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(_id), nil
+}
+
+// WithDataset sets the property and returns the receiver so calls can be chained.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
+	return x
+}
+
+// Dataset wraps the corresponding Objective-C method.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataset"))
+	return obj.Wrap(_r)
+}
+
+// SetDataset wraps the corresponding Objective-C method.
+func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
 }
 
 // MTRThreadBorderRouterManagementClusterDatasetResponseParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterDatasetResponseParams], for mocking and DI.
 type MTRThreadBorderRouterManagementClusterDatasetResponseParamsable interface {
-	Unwrap() *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams
-	WithDataset(dataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterDatasetResponseParams
-	Dataset() *foundation.NSData
-	SetDataset(dataset *foundation.NSData)
+	obj.Object
+	WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams
+	Dataset() obj.Object
+	SetDataset(dataset obj.Object)
 }
 
 var _ MTRThreadBorderRouterManagementClusterDatasetResponseParamsable = (*MTRThreadBorderRouterManagementClusterDatasetResponseParams)(nil)

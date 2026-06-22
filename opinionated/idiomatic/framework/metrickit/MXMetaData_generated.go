@@ -5,138 +5,162 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object containing system-level information about the device.
+// MetaData is an idiomatic wrapper over the Objective-C class MXMetaData.
 //
-// MetaData wraps [raw.MXMetaData] with a fluent Go API.
+// An object containing system-level information about the device.
 type MetaData struct {
-	inner *raw.MXMetaData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXMetaData].
-func (x *MetaData) Unwrap() *raw.MXMetaData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetaData) ID() objc.ID { return x.inner.Ptr() }
-
-// MetaDataFromID adopts an existing object pointer as a MetaData (nil for 0).
+// MetaDataFromID adopts an existing Objective-C object as a MetaData
+// (nil for 0), retaining it and registering a release finalizer.
 func MetaDataFromID(id objc.ID) *MetaData {
 	if id == 0 {
 		return nil
 	}
-	return &MetaData{inner: raw.MXMetaDataFromID(id)}
+	x := &MetaData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetaData creates a new [MetaData].
+// metaDataAdopt wraps an Objective-C object that this code just created as a
+// MetaData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metaDataAdopt(id objc.ID) *MetaData {
+	if id == 0 {
+		return nil
+	}
+	x := &MetaData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetaData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetaData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetaData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetaData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMetaData creates a new MetaData.
 func NewMetaData() *MetaData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXMetaData")), objc.RegisterName("new"))
-	return &MetaData{inner: raw.MXMetaDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXMetaData")), objc.RegisterName("new"))
+	return metaDataAdopt(_id)
 }
 
-// Returns the contents of the metadata in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *MetaData) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+// JSONRepresentation returns the contents of the metadata in JSON format.
+func (x *MetaData) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// Returns the contents of the metadata as a dictionary.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *MetaData) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+// DictionaryRepresentation returns the contents of the metadata as a dictionary.
+func (x *MetaData) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @property      regionFormat @abstract      An NSString designating the region format associated with the application.
-//
-// RegionFormat calls the underlying RegionFormat.
+// RegionFormat an NSString designating the region format associated with the application.
 func (x *MetaData) RegionFormat() string {
-	_r := x.inner.RegionFormat()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionFormat"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      osVersion @abstract      An NSString designating the OS version associated with the device.
-//
-// OsVersion calls the underlying OsVersion.
+// OsVersion an NSString designating the OS version associated with the device.
 func (x *MetaData) OsVersion() string {
-	_r := x.inner.OsVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("osVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      deviceType @abstract      An NSString designating the device type associated with this device.
-//
-// DeviceType calls the underlying DeviceType.
+// DeviceType an NSString designating the device type associated with this device.
 func (x *MetaData) DeviceType() string {
-	_r := x.inner.DeviceType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      applicationBuildVersion @abstract      An NSString designating the app build version.
-//
-// ApplicationBuildVersion calls the underlying ApplicationBuildVersion.
+// ApplicationBuildVersion an NSString designating the app build version.
 func (x *MetaData) ApplicationBuildVersion() string {
-	_r := x.inner.ApplicationBuildVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationBuildVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      platformArchitecture @abstract      An NSString designating the current architecture.
-//
-// PlatformArchitecture calls the underlying PlatformArchitecture.
+// PlatformArchitecture an NSString designating the current architecture.
 func (x *MetaData) PlatformArchitecture() string {
-	_r := x.inner.PlatformArchitecture()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("platformArchitecture"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LowPowerModeEnabled calls the underlying LowPowerModeEnabled.
+// LowPowerModeEnabled wraps the corresponding Objective-C method.
 func (x *MetaData) LowPowerModeEnabled() bool {
-	return x.inner.LowPowerModeEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lowPowerModeEnabled"))
+	return _r
 }
 
-// IsTestFlightApp calls the underlying IsTestFlightApp.
+// IsTestFlightApp wraps the corresponding Objective-C method.
 func (x *MetaData) IsTestFlightApp() bool {
-	return x.inner.IsTestFlightApp()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTestFlightApp"))
+	return _r
 }
 
-// Pid calls the underlying Pid.
+// Pid wraps the corresponding Objective-C method.
 func (x *MetaData) Pid() int {
-	return x.inner.Pid()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
+	return _r
 }
 
-// BundleIdentifier calls the underlying BundleIdentifier.
+// BundleIdentifier wraps the corresponding Objective-C method.
 func (x *MetaData) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // MetaDataable is the interface implemented by [MetaData], for mocking and DI.
 type MetaDataable interface {
-	Unwrap() *raw.MXMetaData
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 	RegionFormat() string
 	OsVersion() string
 	DeviceType() string

@@ -5,135 +5,151 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A pointer (also called a cursor).
+// Cursor is an idiomatic wrapper over the Objective-C class NSCursor.
 //
-// Cursor wraps [raw.NSCursor] with a fluent Go API.
+// A pointer (also called a cursor).
 type Cursor struct {
-	inner *raw.NSCursor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCursor].
-func (x *Cursor) Unwrap() *raw.NSCursor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Cursor) ID() objc.ID { return x.inner.Ptr() }
-
-// CursorFromID adopts an existing object pointer as a Cursor (nil for 0).
+// CursorFromID adopts an existing Objective-C object as a Cursor
+// (nil for 0), retaining it and registering a release finalizer.
 func CursorFromID(id objc.ID) *Cursor {
 	if id == 0 {
 		return nil
 	}
-	return &Cursor{inner: raw.NSCursorFromID(id)}
+	x := &Cursor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a cursor with the given image and hot spot.
-//
-// NewCursorWithImageHotSpot creates a new [Cursor].
-func NewCursorWithImageHotSpot(newImage *raw.NSImage, point corefoundation.CGPoint) *Cursor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCursor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:hotSpot:"), newImage.Ptr(), point)
-	return &Cursor{inner: raw.NSCursorFromID(_id)}
-}
-
-// NewCursorWithCoder creates a new [Cursor].
-func NewCursorWithCoder(coder *foundation.NSCoder) *Cursor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCursor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Cursor{inner: raw.NSCursorFromID(_id)}
-}
-
-// Initializes the cursor with the specified image and hot spot.
-//
-// NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot creates a new [Cursor].
-func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *raw.NSImage, fg *raw.NSColor, bg *raw.NSColor, hotSpot corefoundation.CGPoint) *Cursor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCursor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:foregroundColorHint:backgroundColorHint:hotSpot:"), newImage.Ptr(), fg.Ptr(), bg.Ptr(), hotSpot)
-	return &Cursor{inner: raw.NSCursorFromID(_id)}
-}
-
-// Sends a pop message to the receiver’s class.
-//
-// Pop calls the underlying Pop.
-func (x *Cursor) Pop() {
-	x.inner.Pop()
-}
-
-// Puts the receiver on top of the cursor stack and makes it the current cursor.
-//
-// Push calls the underlying Push.
-func (x *Cursor) Push() {
-	x.inner.Push()
-}
-
-// Makes the receiver the current cursor.
-//
-// Set calls the underlying Set.
-func (x *Cursor) Set() {
-	x.inner.Set()
-}
-
-// Image calls the underlying Image.
-func (x *Cursor) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
+// cursorAdopt wraps an Objective-C object that this code just created as a
+// Cursor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cursorAdopt(id objc.ID) *Cursor {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &Cursor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// HotSpot calls the underlying HotSpot.
+// Description returns the object's -description text.
+func (x *Cursor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Cursor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Cursor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Cursor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCursorWithImageHotSpot initializes a cursor with the given image and hot spot.
+func NewCursorWithImageHotSpot(newImage *Image, point corefoundation.CGPoint) *Cursor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:hotSpot:"), objref.IDOf(newImage), point)
+	return cursorAdopt(_id)
+}
+
+// NewCursorWithCoder creates a new Cursor.
+func NewCursorWithCoder(coder obj.Object) *Cursor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return cursorAdopt(_id)
+}
+
+// NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot initializes the cursor with the specified image and hot spot.
+func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *Image, fg *Color, bg *Color, hotSpot corefoundation.CGPoint) *Cursor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:foregroundColorHint:backgroundColorHint:hotSpot:"), objref.IDOf(newImage), objref.IDOf(fg), objref.IDOf(bg), hotSpot)
+	return cursorAdopt(_id)
+}
+
+// Pop sends a pop message to the receiver’s class.
+func (x *Cursor) Pop() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pop"))
+}
+
+// Push puts the receiver on top of the cursor stack and makes it the current cursor.
+func (x *Cursor) Push() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("push"))
+}
+
+// Set makes the receiver the current cursor.
+func (x *Cursor) Set() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
+}
+
+// Image wraps the corresponding Objective-C method.
+func (x *Cursor) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
+}
+
+// HotSpot wraps the corresponding Objective-C method.
 func (x *Cursor) HotSpot() corefoundation.CGPoint {
-	return x.inner.HotSpot()
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("hotSpot"))
+	return _r
 }
 
-// Sets whether the receiver accepts mouseExited: events.
-//
-// SetOnMouseExited calls the underlying SetOnMouseExited.
+// SetOnMouseExited sets whether the receiver accepts mouseExited: events.
 func (x *Cursor) SetOnMouseExited(flag bool) {
-	x.inner.SetOnMouseExited(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnMouseExited:"), flag)
 }
 
-// Specifies whether the receiver accepts mouseEntered: events.
-//
-// SetOnMouseEntered calls the underlying SetOnMouseEntered.
+// SetOnMouseEntered specifies whether the receiver accepts mouseEntered: events.
 func (x *Cursor) SetOnMouseEntered(flag bool) {
-	x.inner.SetOnMouseEntered(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnMouseEntered:"), flag)
 }
 
-// Automatically sent to the receiver when the cursor enters a cursor rectangle owned by the receiver.
-//
-// MouseEntered calls the underlying MouseEntered.
-func (x *Cursor) MouseEntered(event *raw.NSEvent) {
-	x.inner.MouseEntered(event)
+// MouseEntered automatically sent to the receiver when the cursor enters a cursor rectangle owned by the receiver.
+func (x *Cursor) MouseEntered(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 }
 
-// Automatically sent to the receiver when the cursor exits a cursor rectangle owned by the receiver.
-//
-// MouseExited calls the underlying MouseExited.
-func (x *Cursor) MouseExited(event *raw.NSEvent) {
-	x.inner.MouseExited(event)
+// MouseExited automatically sent to the receiver when the cursor exits a cursor rectangle owned by the receiver.
+func (x *Cursor) MouseExited(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
-// IsSetOnMouseExited calls the underlying IsSetOnMouseExited.
+// IsSetOnMouseExited wraps the corresponding Objective-C method.
 func (x *Cursor) IsSetOnMouseExited() bool {
-	return x.inner.IsSetOnMouseExited()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSetOnMouseExited"))
+	return _r
 }
 
-// IsSetOnMouseEntered calls the underlying IsSetOnMouseEntered.
+// IsSetOnMouseEntered wraps the corresponding Objective-C method.
 func (x *Cursor) IsSetOnMouseEntered() bool {
-	return x.inner.IsSetOnMouseEntered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSetOnMouseEntered"))
+	return _r
 }
 
 // Cursorable is the interface implemented by [Cursor], for mocking and DI.
 type Cursorable interface {
-	Unwrap() *raw.NSCursor
+	obj.Object
 	Pop()
 	Push()
 	Set()
@@ -141,8 +157,8 @@ type Cursorable interface {
 	HotSpot() corefoundation.CGPoint
 	SetOnMouseExited(flag bool)
 	SetOnMouseEntered(flag bool)
-	MouseEntered(event *raw.NSEvent)
-	MouseExited(event *raw.NSEvent)
+	MouseEntered(event *Event)
+	MouseExited(event *Event)
 	IsSetOnMouseExited() bool
 	IsSetOnMouseEntered() bool
 }

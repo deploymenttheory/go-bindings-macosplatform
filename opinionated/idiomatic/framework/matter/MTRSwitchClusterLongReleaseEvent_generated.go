@@ -5,61 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSwitchClusterLongReleaseEvent wraps [raw.MTRSwitchClusterLongReleaseEvent] with a fluent Go API.
+// MTRSwitchClusterLongReleaseEvent is an idiomatic wrapper over the Objective-C class MTRSwitchClusterLongReleaseEvent.
 type MTRSwitchClusterLongReleaseEvent struct {
-	inner *raw.MTRSwitchClusterLongReleaseEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSwitchClusterLongReleaseEvent].
-func (x *MTRSwitchClusterLongReleaseEvent) Unwrap() *raw.MTRSwitchClusterLongReleaseEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSwitchClusterLongReleaseEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSwitchClusterLongReleaseEventFromID adopts an existing object pointer as a MTRSwitchClusterLongReleaseEvent (nil for 0).
+// MTRSwitchClusterLongReleaseEventFromID adopts an existing Objective-C object as a MTRSwitchClusterLongReleaseEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSwitchClusterLongReleaseEventFromID(id objc.ID) *MTRSwitchClusterLongReleaseEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSwitchClusterLongReleaseEvent{inner: raw.MTRSwitchClusterLongReleaseEventFromID(id)}
-}
-
-// NewMTRSwitchClusterLongReleaseEvent creates a new [MTRSwitchClusterLongReleaseEvent].
-func NewMTRSwitchClusterLongReleaseEvent() *MTRSwitchClusterLongReleaseEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSwitchClusterLongReleaseEvent")), objc.RegisterName("new"))
-	return &MTRSwitchClusterLongReleaseEvent{inner: raw.MTRSwitchClusterLongReleaseEventFromID(_id)}
-}
-
-// WithPreviousPosition sets the previousPosition property and returns the receiver for chaining.
-func (x *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition *foundation.NSNumber) *MTRSwitchClusterLongReleaseEvent {
-	x.inner.SetPreviousPosition(previousPosition)
+	x := &MTRSwitchClusterLongReleaseEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// PreviousPosition calls the underlying PreviousPosition.
-func (x *MTRSwitchClusterLongReleaseEvent) PreviousPosition() *foundation.NSNumber {
-	return x.inner.PreviousPosition()
+// mTRSwitchClusterLongReleaseEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSwitchClusterLongReleaseEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSwitchClusterLongReleaseEventAdopt(id objc.ID) *MTRSwitchClusterLongReleaseEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSwitchClusterLongReleaseEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPreviousPosition calls the underlying SetPreviousPosition.
-func (x *MTRSwitchClusterLongReleaseEvent) SetPreviousPosition(previousPosition *foundation.NSNumber) {
-	x.inner.SetPreviousPosition(previousPosition)
+// Description returns the object's -description text.
+func (x *MTRSwitchClusterLongReleaseEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSwitchClusterLongReleaseEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSwitchClusterLongReleaseEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRSwitchClusterLongReleaseEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRSwitchClusterLongReleaseEvent creates a new MTRSwitchClusterLongReleaseEvent.
+func NewMTRSwitchClusterLongReleaseEvent() *MTRSwitchClusterLongReleaseEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterLongReleaseEvent")), objc.RegisterName("new"))
+	return mTRSwitchClusterLongReleaseEventAdopt(_id)
+}
+
+// WithPreviousPosition sets the property and returns the receiver so calls can be chained.
+func (x *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
+	return x
+}
+
+// PreviousPosition wraps the corresponding Objective-C method.
+func (x *MTRSwitchClusterLongReleaseEvent) PreviousPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousPosition"))
+	return obj.Wrap(_r)
+}
+
+// SetPreviousPosition wraps the corresponding Objective-C method.
+func (x *MTRSwitchClusterLongReleaseEvent) SetPreviousPosition(previousPosition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 }
 
 // MTRSwitchClusterLongReleaseEventable is the interface implemented by [MTRSwitchClusterLongReleaseEvent], for mocking and DI.
 type MTRSwitchClusterLongReleaseEventable interface {
-	Unwrap() *raw.MTRSwitchClusterLongReleaseEvent
-	WithPreviousPosition(previousPosition *foundation.NSNumber) *MTRSwitchClusterLongReleaseEvent
-	PreviousPosition() *foundation.NSNumber
-	SetPreviousPosition(previousPosition *foundation.NSNumber)
+	obj.Object
+	WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent
+	PreviousPosition() obj.Object
+	SetPreviousPosition(previousPosition obj.Object)
 }
 
 var _ MTRSwitchClusterLongReleaseEventable = (*MTRSwitchClusterLongReleaseEvent)(nil)

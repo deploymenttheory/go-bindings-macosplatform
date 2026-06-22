@@ -6,156 +6,179 @@ package healthkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A builder object for incrementally building a sample that contains multiple quantities.
+// QuantitySeriesSampleBuilder is an idiomatic wrapper over the Objective-C class HKQuantitySeriesSampleBuilder.
 //
-// QuantitySeriesSampleBuilder wraps [raw.HKQuantitySeriesSampleBuilder] with a fluent Go API.
+// A builder object for incrementally building a sample that contains multiple quantities.
 type QuantitySeriesSampleBuilder struct {
-	inner *raw.HKQuantitySeriesSampleBuilder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQuantitySeriesSampleBuilder].
-func (x *QuantitySeriesSampleBuilder) Unwrap() *raw.HKQuantitySeriesSampleBuilder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuantitySeriesSampleBuilder) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantitySeriesSampleBuilderFromID adopts an existing object pointer as a QuantitySeriesSampleBuilder (nil for 0).
+// QuantitySeriesSampleBuilderFromID adopts an existing Objective-C object as a QuantitySeriesSampleBuilder
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantitySeriesSampleBuilderFromID(id objc.ID) *QuantitySeriesSampleBuilder {
 	if id == 0 {
 		return nil
 	}
-	return &QuantitySeriesSampleBuilder{inner: raw.HKQuantitySeriesSampleBuilderFromID(id)}
+	x := &QuantitySeriesSampleBuilder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new quantity series builder.
-//
-// NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice creates a new [QuantitySeriesSampleBuilder].
-func NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice(healthStore *raw.HKHealthStore, quantityType *raw.HKQuantityType, startDate *foundation.NSDate, device *raw.HKDevice) *QuantitySeriesSampleBuilder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantitySeriesSampleBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:quantityType:startDate:device:"), healthStore.Ptr(), quantityType.Ptr(), startDate.Ptr(), device.Ptr())
-	return &QuantitySeriesSampleBuilder{inner: raw.HKQuantitySeriesSampleBuilderFromID(_id)}
+// quantitySeriesSampleBuilderAdopt wraps an Objective-C object that this code just created as a
+// QuantitySeriesSampleBuilder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantitySeriesSampleBuilderAdopt(id objc.ID) *QuantitySeriesSampleBuilder {
+	if id == 0 {
+		return nil
+	}
+	x := &QuantitySeriesSampleBuilder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Adds a new quantity to the series with the provided date interval.
-//
-// InsertQuantityDateIntervalError calls the underlying InsertQuantityDateIntervalError.
-func (x *QuantitySeriesSampleBuilder) InsertQuantityDateIntervalError(quantity *raw.HKQuantity, dateInterval *foundation.NSDateInterval) (bool, error) {
-	return x.inner.InsertQuantityDateIntervalError(quantity, dateInterval)
+// Description returns the object's -description text.
+func (x *QuantitySeriesSampleBuilder) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Adds a new quantity to the series at the provided date and time.
-//
-// InsertQuantityDateError calls the underlying InsertQuantityDateError.
-func (x *QuantitySeriesSampleBuilder) InsertQuantityDateError(quantity *raw.HKQuantity, date *foundation.NSDate) (bool, error) {
-	return x.inner.InsertQuantityDateError(quantity, date)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuantitySeriesSampleBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Finalizes the series with the provided end date, and returns the resulting quantity samples.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuantitySeriesSampleBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *QuantitySeriesSampleBuilder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice creates a new quantity series builder.
+func NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice(healthStore *HealthStore, quantityType *QuantityType, startDate obj.Object, device *Device) *QuantitySeriesSampleBuilder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleBuilder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:quantityType:startDate:device:"), objref.IDOf(healthStore), objref.IDOf(quantityType), objref.IDOf(startDate), objref.IDOf(device))
+	return quantitySeriesSampleBuilderAdopt(_id)
+}
+
+// InsertQuantityDateInterval adds a new quantity to the series with the provided date interval.
+func (x *QuantitySeriesSampleBuilder) InsertQuantityDateInterval(quantity *Quantity, dateInterval obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("insertQuantity:dateInterval:error:"), objref.IDOf(quantity), objref.IDOf(dateInterval), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertQuantityDate adds a new quantity to the series at the provided date and time.
+func (x *QuantitySeriesSampleBuilder) InsertQuantityDate(quantity *Quantity, date obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("insertQuantity:date:error:"), objref.IDOf(quantity), objref.IDOf(date), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// FinishSeriesWithMetadataEndDateCompletion finalizes the series with the provided end date, and returns the resulting quantity samples.
 //
 // FinishSeriesWithMetadataEndDateCompletion blocks until the operation completes or ctx is cancelled.
-func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], endDate *foundation.NSDate) (*foundation.NSArray[*raw.HKQuantitySample], error) {
+func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata obj.Object, endDate obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.HKQuantitySample]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FinishSeriesWithMetadataEndDateCompletion(metadata, endDate, func(_p0 *foundation.NSArray[*raw.HKQuantitySample], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSeriesWithMetadata:endDate:completion:"), objref.IDOf(metadata), objref.IDOf(endDate), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.HKQuantitySample]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Finalizes the series and returns the resulting quantity samples.
+// FinishSeriesWithMetadataCompletion finalizes the series and returns the resulting quantity samples.
 //
 // FinishSeriesWithMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*raw.HKQuantitySample], error) {
+func (x *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx context.Context, metadata obj.Object) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.HKQuantitySample]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FinishSeriesWithMetadataCompletion(metadata, func(_p0 *foundation.NSArray[*raw.HKQuantitySample], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSeriesWithMetadata:completion:"), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.HKQuantitySample]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Discards all previously collected data and invalidates the builder.
-//
-// Discard calls the underlying Discard.
+// Discard discards all previously collected data and invalidates the builder.
 func (x *QuantitySeriesSampleBuilder) Discard() {
-	x.inner.Discard()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discard"))
 }
 
-// @property      quantityType
-//
-// QuantityType calls the underlying QuantityType.
+// QuantityType wraps the corresponding Objective-C method.
 func (x *QuantitySeriesSampleBuilder) QuantityType() *QuantityType {
-	_r := x.inner.QuantityType()
-	if _r == nil {
-		return nil
-	}
-	return &QuantityType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityType"))
+	return QuantityTypeFromID(_r)
 }
 
-// @property      startDate
-//
-// StartDate calls the underlying StartDate.
-func (x *QuantitySeriesSampleBuilder) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// StartDate wraps the corresponding Objective-C method.
+func (x *QuantitySeriesSampleBuilder) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      device
-//
-// Device calls the underlying Device.
+// Device wraps the corresponding Objective-C method.
 func (x *QuantitySeriesSampleBuilder) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
 }
 
 // QuantitySeriesSampleBuilderable is the interface implemented by [QuantitySeriesSampleBuilder], for mocking and DI.
 type QuantitySeriesSampleBuilderable interface {
-	Unwrap() *raw.HKQuantitySeriesSampleBuilder
-	InsertQuantityDateIntervalError(quantity *raw.HKQuantity, dateInterval *foundation.NSDateInterval) (bool, error)
-	InsertQuantityDateError(quantity *raw.HKQuantity, date *foundation.NSDate) (bool, error)
-	FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], endDate *foundation.NSDate) (*foundation.NSArray[*raw.HKQuantitySample], error)
-	FinishSeriesWithMetadataCompletion(ctx context.Context, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[*raw.HKQuantitySample], error)
+	obj.Object
+	InsertQuantityDateInterval(quantity *Quantity, dateInterval obj.Object) error
+	InsertQuantityDate(quantity *Quantity, date obj.Object) error
+	FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata obj.Object, endDate obj.Object) (obj.Object, error)
+	FinishSeriesWithMetadataCompletion(ctx context.Context, metadata obj.Object) (obj.Object, error)
 	Discard()
 	QuantityType() *QuantityType
-	StartDate() *foundation.NSDate
+	StartDate() obj.Object
 	Device() *Device
 }
 

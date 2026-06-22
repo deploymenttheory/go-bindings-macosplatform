@@ -6,69 +6,98 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A workspace that can launch other apps and perform a variety of file-handling services.
+// Workspace is an idiomatic wrapper over the Objective-C class NSWorkspace.
 //
-// Workspace wraps [raw.NSWorkspace] with a fluent Go API.
+// A workspace that can launch other apps and perform a variety of file-handling services.
 type Workspace struct {
-	inner *raw.NSWorkspace
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWorkspace].
-func (x *Workspace) Unwrap() *raw.NSWorkspace { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Workspace) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkspaceFromID adopts an existing object pointer as a Workspace (nil for 0).
+// WorkspaceFromID adopts an existing Objective-C object as a Workspace
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkspaceFromID(id objc.ID) *Workspace {
 	if id == 0 {
 		return nil
 	}
-	return &Workspace{inner: raw.NSWorkspaceFromID(id)}
+	x := &Workspace{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWorkspace creates a new [Workspace].
+// workspaceAdopt wraps an Objective-C object that this code just created as a
+// Workspace (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workspaceAdopt(id objc.ID) *Workspace {
+	if id == 0 {
+		return nil
+	}
+	x := &Workspace{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Workspace) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Workspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Workspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Workspace) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWorkspace creates a new Workspace.
 func NewWorkspace() *Workspace {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWorkspace")), objc.RegisterName("new"))
-	return &Workspace{inner: raw.NSWorkspaceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWorkspace")), objc.RegisterName("new"))
+	return workspaceAdopt(_id)
 }
 
-// Opens the location at the specified URL.
-//
-// OpenURL calls the underlying OpenURL.
+// OpenURL opens the location at the specified URL.
 func (x *Workspace) OpenURL(url string) bool {
-	return x.inner.OpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openURL:"), rt.FileURL(url))
+	return _r
 }
 
-// Opens a URL asynchronously using the provided options.
+// OpenURLConfiguration opens a URL asynchronously using the provided options.
 //
 // OpenURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
+func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.OpenURLConfigurationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), configuration, func(_p0 *raw.NSRunningApplication, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RunningApplication{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:configuration:completionHandler:"), rt.FileURL(url), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -78,25 +107,22 @@ func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, config
 	}
 }
 
-// Opens one or more URLs asynchronously in the specified app using the provided options.
+// OpenURLsWithApplicationAtURLConfiguration opens one or more URLs asynchronously in the specified app using the provided options.
 //
 // OpenURLsWithApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls *foundation.NSArray[*foundation.NSURL], applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
+func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.OpenURLsWithApplicationAtURLConfigurationCompletionHandler(urls, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), configuration, func(_p0 *raw.NSRunningApplication, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RunningApplication{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURLs:withApplicationAtURL:configuration:completionHandler:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,25 +132,22 @@ func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 	}
 }
 
-// Launches the app at the specified URL and asynchronously reports back on the app’s status.
+// OpenApplicationAtURLConfiguration launches the app at the specified URL and asynchronously reports back on the app’s status.
 //
 // OpenApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
+func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (result *RunningApplication, err error) {
 	type _result struct {
 		val *RunningApplication
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.OpenApplicationAtURLConfigurationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), configuration, func(_p0 *raw.NSRunningApplication, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RunningApplication{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RunningApplicationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openApplicationAtURL:configuration:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(configuration), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -134,170 +157,129 @@ func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, appli
 	}
 }
 
-// Selects the file at the specified path.
-//
-// SelectFileInFileViewerRootedAtPath calls the underlying SelectFileInFileViewerRootedAtPath.
+// SelectFileInFileViewerRootedAtPath selects the file at the specified path.
 func (x *Workspace) SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool {
-	return x.inner.SelectFileInFileViewerRootedAtPath(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(rootFullPath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectFile:inFileViewerRootedAtPath:"), purego.NSString(fullPath), purego.NSString(rootFullPath))
+	return _r
 }
 
-// Activates the Finder, and opens one or more windows selecting the specified files.
-//
-// ActivateFileViewerSelectingURLs calls the underlying ActivateFileViewerSelectingURLs.
-func (x *Workspace) ActivateFileViewerSelectingURLs(fileURLs *foundation.NSArray[*foundation.NSURL]) {
-	x.inner.ActivateFileViewerSelectingURLs(fileURLs)
+// ActivateFileViewerSelectingURLs activates the Finder, and opens one or more windows selecting the specified files.
+func (x *Workspace) ActivateFileViewerSelectingURLs(fileURLs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateFileViewerSelectingURLs:"), purego.SliceToNSArray(fileURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Displays a Spotlight search results window in Finder for the specified query string.
-//
-// ShowSearchResultsForQueryString calls the underlying ShowSearchResultsForQueryString.
+// ShowSearchResultsForQueryString displays a Spotlight search results window in Finder for the specified query string.
 func (x *Workspace) ShowSearchResultsForQueryString(queryString string) bool {
-	return x.inner.ShowSearchResultsForQueryString(foundation.NSStringStringWithUTF8String(queryString))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showSearchResultsForQueryString:"), purego.NSString(queryString))
+	return _r
 }
 
-// Informs the workspace object that the file system changed at the specified path.
-//
-// NoteFileSystemChanged calls the underlying NoteFileSystemChanged.
+// NoteFileSystemChanged informs the workspace object that the file system changed at the specified path.
 func (x *Workspace) NoteFileSystemChanged(path string) {
-	x.inner.NoteFileSystemChanged(foundation.NSStringStringWithUTF8String(path))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteFileSystemChanged:"), purego.NSString(path))
 }
 
-// Determines whether the specified path is a file package.
-//
-// IsFilePackageAtPath calls the underlying IsFilePackageAtPath.
+// IsFilePackageAtPath determines whether the specified path is a file package.
 func (x *Workspace) IsFilePackageAtPath(fullPath string) bool {
-	return x.inner.IsFilePackageAtPath(foundation.NSStringStringWithUTF8String(fullPath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFilePackageAtPath:"), purego.NSString(fullPath))
+	return _r
 }
 
-// Returns an image containing the icon for the specified file.
-//
-// IconForFile calls the underlying IconForFile.
+// IconForFile returns an image containing the icon for the specified file.
 func (x *Workspace) IconForFile(fullPath string) *Image {
-	_r := x.inner.IconForFile(foundation.NSStringStringWithUTF8String(fullPath))
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFile:"), purego.NSString(fullPath))
+	return ImageFromID(_r)
 }
 
-// Returns an image containing the icon for the specified files.
-//
-// IconForFiles calls the underlying IconForFiles.
-func (x *Workspace) IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *Image {
-	_r := x.inner.IconForFiles(fullPaths)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// IconForFiles returns an image containing the icon for the specified files.
+func (x *Workspace) IconForFiles(fullPaths []string) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFiles:"), purego.SliceToNSArray(fullPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return ImageFromID(_r)
 }
 
-// Returns an image containing the icon for the specified content type.
-//
-// IconForContentType calls the underlying IconForContentType.
-func (x *Workspace) IconForContentType(contentType *uniformtypeidentifiers.UTType) *Image {
-	_r := x.inner.IconForContentType(contentType)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+// IconForContentType returns an image containing the icon for the specified content type.
+func (x *Workspace) IconForContentType(contentType obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForContentType:"), objref.IDOf(contentType))
+	return ImageFromID(_r)
 }
 
-// Sets the icon for the file or directory at the specified path.
-//
-// SetIconForFileOptions calls the underlying SetIconForFileOptions.
-func (x *Workspace) SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool {
-	return x.inner.SetIconForFileOptions(image, foundation.NSStringStringWithUTF8String(fullPath), raw.NSWorkspaceIconCreationOptions(options))
+// SetIconForFileOptions sets the icon for the file or directory at the specified path.
+func (x *Workspace) SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setIcon:forFile:options:"), objref.IDOf(image), purego.NSString(fullPath), options)
+	return _r
 }
 
-// Moves the specified URLs to the trash in the same manner as the Finder.
-//
-// RecycleURLsCompletionHandler calls the underlying RecycleURLsCompletionHandler.
-func (x *Workspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
-	x.inner.RecycleURLsCompletionHandler(uRLs, handler)
+// GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType returns information about the file system at the specified path.
+func (x *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool) {
+	var _out0 bool
+	var _out1 bool
+	var _out2 bool
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getFileSystemInfoForPath:isRemovable:isWritable:isUnmountable:description:type:"), purego.NSString(fullPath), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), purego.NSString(description), purego.NSString(fileSystemType))
+	return _r, _out0, _out1, _out2
 }
 
-// Duplicates the specified URLS asynchronously in the same manner as the Finder.
-//
-// DuplicateURLsCompletionHandler calls the underlying DuplicateURLsCompletionHandler.
-func (x *Workspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer)) {
-	x.inner.DuplicateURLsCompletionHandler(uRLs, handler)
-}
-
-// Returns information about the file system at the specified path.
-//
-// GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType calls the underlying GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType.
-func (x *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description string, fileSystemType string) bool {
-	return x.inner.GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(foundation.NSStringStringWithUTF8String(fullPath), removableFlag, writableFlag, unmountableFlag, foundation.NSStringStringWithUTF8String(description), foundation.NSStringStringWithUTF8String(fileSystemType))
-}
-
-// Unmounts and ejects the device at the specified path.
-//
-// UnmountAndEjectDeviceAtPath calls the underlying UnmountAndEjectDeviceAtPath.
+// UnmountAndEjectDeviceAtPath unmounts and ejects the device at the specified path.
 func (x *Workspace) UnmountAndEjectDeviceAtPath(path string) bool {
-	return x.inner.UnmountAndEjectDeviceAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unmountAndEjectDeviceAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// Attempts to eject the volume mounted at the given path.
-//
-// UnmountAndEjectDeviceAtURLError calls the underlying UnmountAndEjectDeviceAtURLError.
-func (x *Workspace) UnmountAndEjectDeviceAtURLError(url string) (bool, error) {
-	return x.inner.UnmountAndEjectDeviceAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// UnmountAndEjectDeviceAtURL attempts to eject the volume mounted at the given path.
+func (x *Workspace) UnmountAndEjectDeviceAtURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("unmountAndEjectDeviceAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Requests the system wait for the specified amount of time before turning off the power or logging out the user.
-//
-// ExtendPowerOffBy calls the underlying ExtendPowerOffBy.
+// ExtendPowerOffBy requests the system wait for the specified amount of time before turning off the power or logging out the user.
 func (x *Workspace) ExtendPowerOffBy(requested int) int {
-	return x.inner.ExtendPowerOffBy(requested)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendPowerOffBy:"), requested)
+	return _r
 }
 
-// Hides all applications other than the sender.
-//
-// HideOtherApplications calls the underlying HideOtherApplications.
+// HideOtherApplications hides all applications other than the sender.
 func (x *Workspace) HideOtherApplications() {
-	x.inner.HideOtherApplications()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideOtherApplications"))
 }
 
-// Returns the URL to the default app with the specified bundle identifier.
-//
-// URLForApplicationWithBundleIdentifier calls the underlying URLForApplicationWithBundleIdentifier.
-func (x *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) *foundation.NSURL {
-	return x.inner.URLForApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+// URLForApplicationWithBundleIdentifier returns the URL to the default app with the specified bundle identifier.
+func (x *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	return obj.Wrap(_r)
 }
 
-// Returns an array of URLs to all available applications that can open the specified bundle identifier.
-//
-// URLsForApplicationsWithBundleIdentifier calls the underlying URLsForApplicationsWithBundleIdentifier.
-func (x *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) *foundation.NSArray[*foundation.NSURL] {
-	return x.inner.URLsForApplicationsWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+// URLsForApplicationsWithBundleIdentifier returns an array of URLs to all available applications that can open the specified bundle identifier.
+func (x *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the URL to the default app to open the specified URL.
-//
-// URLForApplicationToOpenURL calls the underlying URLForApplicationToOpenURL.
-func (x *Workspace) URLForApplicationToOpenURL(url string) *foundation.NSURL {
-	return x.inner.URLForApplicationToOpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// URLForApplicationToOpenURL returns the URL to the default app to open the specified URL.
+func (x *Workspace) URLForApplicationToOpenURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationToOpenURL:"), rt.FileURL(url))
+	return obj.Wrap(_r)
 }
 
-// Returns an array of URLs to all available applications that can open the URL.
-//
-// URLsForApplicationsToOpenURL calls the underlying URLsForApplicationsToOpenURL.
-func (x *Workspace) URLsForApplicationsToOpenURL(url string) *foundation.NSArray[*foundation.NSURL] {
-	return x.inner.URLsForApplicationsToOpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+// URLsForApplicationsToOpenURL returns an array of URLs to all available applications that can open the URL.
+func (x *Workspace) URLsForApplicationsToOpenURL(url string) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsToOpenURL:"), rt.FileURL(url))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Sets the default app to use when opening files of a specific content type defined by a file URL.
+// SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL sets the default app to use when opening files of a specific content type defined by a file URL.
 //
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentTypeOfFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -306,18 +288,17 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx c
 	}
 }
 
-// Sets the default app to use when opening files of a specific scheme.
+// SetDefaultApplicationAtURLToOpenURLsWithScheme sets the default app to use when opening files of a specific scheme.
 //
 // SetDefaultApplicationAtURLToOpenURLsWithScheme blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDefaultApplicationAtURLToOpenURLsWithSchemeCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSStringStringWithUTF8String(urlScheme), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenURLsWithScheme:completionHandler:"), rt.FileURL(applicationURL), purego.NSString(urlScheme), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -326,18 +307,17 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.C
 	}
 }
 
-// Sets the default app to use when opening a specific file.
+// SetDefaultApplicationAtURLToOpenFileAtURL sets the default app to use when opening a specific file.
 //
 // SetDefaultApplicationAtURLToOpenFileAtURL blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDefaultApplicationAtURLToOpenFileAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenFileAtURL:completionHandler:"), rt.FileURL(applicationURL), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -346,32 +326,29 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Contex
 	}
 }
 
-// Returns the URL to the default app to open the specified content type.
-//
-// URLForApplicationToOpenContentType calls the underlying URLForApplicationToOpenContentType.
-func (x *Workspace) URLForApplicationToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSURL {
-	return x.inner.URLForApplicationToOpenContentType(contentType)
+// URLForApplicationToOpenContentType returns the URL to the default app to open the specified content type.
+func (x *Workspace) URLForApplicationToOpenContentType(contentType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForApplicationToOpenContentType:"), objref.IDOf(contentType))
+	return obj.Wrap(_r)
 }
 
-// Returns an array of URLs to all available applications that can open the specified content type.
-//
-// URLsForApplicationsToOpenContentType calls the underlying URLsForApplicationsToOpenContentType.
-func (x *Workspace) URLsForApplicationsToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSArray[*foundation.NSURL] {
-	return x.inner.URLsForApplicationsToOpenContentType(contentType)
+// URLsForApplicationsToOpenContentType returns an array of URLs to all available applications that can open the specified content type.
+func (x *Workspace) URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForApplicationsToOpenContentType:"), objref.IDOf(contentType))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Sets the default app to use when opening files of a specific content type.
+// SetDefaultApplicationAtURLToOpenContentType sets the default app to use when opening files of a specific content type.
 //
 // SetDefaultApplicationAtURLToOpenContentType blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType *uniformtypeidentifiers.UTType) error {
+func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDefaultApplicationAtURLToOpenContentTypeCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), contentType, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultApplicationAtURL:toOpenContentType:completionHandler:"), rt.FileURL(applicationURL), objref.IDOf(contentType), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -380,91 +357,78 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Cont
 	}
 }
 
-// NotificationCenter calls the underlying NotificationCenter.
-func (x *Workspace) NotificationCenter() *foundation.NSNotificationCenter {
-	return x.inner.NotificationCenter()
+// NotificationCenter wraps the corresponding Objective-C method.
+func (x *Workspace) NotificationCenter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationCenter"))
+	return obj.Wrap(_r)
 }
 
+// FileLabels wraps the corresponding Objective-C method.
+//
 // FileLabels returns the collection as a Go slice.
 func (x *Workspace) FileLabels() []string {
-	arr := x.inner.FileLabels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileLabels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// FileLabelColors wraps the corresponding Objective-C method.
+//
 // FileLabelColors returns the collection as a Go slice.
 func (x *Workspace) FileLabelColors() []*Color {
-	arr := x.inner.FileLabelColors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Color {
-		return &Color{inner: raw.NSColorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileLabelColors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
-// FrontmostApplication calls the underlying FrontmostApplication.
+// FrontmostApplication wraps the corresponding Objective-C method.
 func (x *Workspace) FrontmostApplication() *RunningApplication {
-	_r := x.inner.FrontmostApplication()
-	if _r == nil {
-		return nil
-	}
-	return &RunningApplication{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frontmostApplication"))
+	return RunningApplicationFromID(_r)
 }
 
-// MenuBarOwningApplication calls the underlying MenuBarOwningApplication.
+// MenuBarOwningApplication wraps the corresponding Objective-C method.
 func (x *Workspace) MenuBarOwningApplication() *RunningApplication {
-	_r := x.inner.MenuBarOwningApplication()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuBarOwningApplication"))
+	return RunningApplicationFromID(_r)
+}
+
+// SetDesktopImageURLForScreenOptions sets the desktop image for the given screen to the image at the specified URL.
+func (x *Workspace) SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setDesktopImageURL:forScreen:options:error:"), rt.FileURL(url), objref.IDOf(screen), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RunningApplication{inner: _r}
+	return nil
 }
 
-// Sets the desktop image for the given screen to the image at the specified URL.
-//
-// SetDesktopImageURLForScreenOptionsError calls the underlying SetDesktopImageURLForScreenOptionsError.
-func (x *Workspace) SetDesktopImageURLForScreenOptionsError(url string, screen *raw.NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
-	return x.inner.SetDesktopImageURLForScreenOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), screen, options)
+// DesktopImageURLForScreen returns the URL for the desktop image for the given screen.
+func (x *Workspace) DesktopImageURLForScreen(screen *Screen) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopImageURLForScreen:"), objref.IDOf(screen))
+	return obj.Wrap(_r)
 }
 
-// Returns the URL for the desktop image for the given screen.
-//
-// DesktopImageURLForScreen calls the underlying DesktopImageURLForScreen.
-func (x *Workspace) DesktopImageURLForScreen(screen *raw.NSScreen) *foundation.NSURL {
-	return x.inner.DesktopImageURLForScreen(screen)
+// DesktopImageOptionsForScreen returns the desktop image options for the given screen.
+func (x *Workspace) DesktopImageOptionsForScreen(screen *Screen) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopImageOptionsForScreen:"), objref.IDOf(screen))
+	return obj.Wrap(_r)
 }
 
-// Returns the desktop image options for the given screen.
-//
-// DesktopImageOptionsForScreen calls the underlying DesktopImageOptionsForScreen.
-func (x *Workspace) DesktopImageOptionsForScreen(screen *raw.NSScreen) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DesktopImageOptionsForScreen(screen)
-}
-
-// Requests authorization to perform a privileged file operation.
+// RequestAuthorizationOfType requests authorization to perform a privileged file operation.
 //
 // RequestAuthorizationOfType blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error) {
+func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (result *WorkspaceAuthorization, err error) {
 	type _result struct {
 		val *WorkspaceAuthorization
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestAuthorizationOfTypeCompletionHandler(raw.NSWorkspaceAuthorizationType(type_), func(_p0 *raw.NSWorkspaceAuthorization, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WorkspaceAuthorization{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WorkspaceAuthorizationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestAuthorizationOfType:completionHandler:"), type_, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -474,356 +438,357 @@ func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ NSWork
 	}
 }
 
-// OpenFile calls the underlying OpenFile.
+// OpenFile wraps the corresponding Objective-C method.
 func (x *Workspace) OpenFile(fullPath string) bool {
-	return x.inner.OpenFile(foundation.NSStringStringWithUTF8String(fullPath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:"), purego.NSString(fullPath))
+	return _r
 }
 
-// OpenFileWithApplication calls the underlying OpenFileWithApplication.
+// OpenFileWithApplication wraps the corresponding Objective-C method.
 func (x *Workspace) OpenFileWithApplication(fullPath string, appName string) bool {
-	return x.inner.OpenFileWithApplication(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(appName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:withApplication:"), purego.NSString(fullPath), purego.NSString(appName))
+	return _r
 }
 
-// OpenFileWithApplicationAndDeactivate calls the underlying OpenFileWithApplicationAndDeactivate.
+// OpenFileWithApplicationAndDeactivate wraps the corresponding Objective-C method.
 func (x *Workspace) OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool {
-	return x.inner.OpenFileWithApplicationAndDeactivate(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(appName), flag)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:withApplication:andDeactivate:"), purego.NSString(fullPath), purego.NSString(appName), flag)
+	return _r
 }
 
-// LaunchApplication calls the underlying LaunchApplication.
+// LaunchApplication wraps the corresponding Objective-C method.
 func (x *Workspace) LaunchApplication(appName string) bool {
-	return x.inner.LaunchApplication(foundation.NSStringStringWithUTF8String(appName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchApplication:"), purego.NSString(appName))
+	return _r
 }
 
-// LaunchApplicationAtURLOptionsConfigurationError calls the underlying LaunchApplicationAtURLOptionsConfigurationError.
-func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.LaunchApplicationAtURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSWorkspaceLaunchOptions(options), configuration)
-	if _err != nil {
-		return nil, _err
+// LaunchApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
+func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchApplicationAtURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RunningApplication{inner: _r}, nil
+	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLOptionsConfigurationError calls the underlying OpenURLOptionsConfigurationError.
-func (x *Workspace) OpenURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.OpenURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSWorkspaceLaunchOptions(options), configuration)
-	if _err != nil {
-		return nil, _err
+// OpenURLOptionsConfigurationError wraps the corresponding Objective-C method.
+func (x *Workspace) OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RunningApplication{inner: _r}, nil
+	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLsWithApplicationAtURLOptionsConfigurationError calls the underlying OpenURLsWithApplicationAtURLOptionsConfigurationError.
-func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.OpenURLsWithApplicationAtURLOptionsConfigurationError(urls, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), raw.NSWorkspaceLaunchOptions(options), configuration)
-	if _err != nil {
-		return nil, _err
+// OpenURLsWithApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
+func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RunningApplication{inner: _r}, nil
+	return RunningApplicationFromID(_r), nil
 }
 
-// LaunchApplicationShowIconAutolaunch calls the underlying LaunchApplicationShowIconAutolaunch.
+// LaunchApplicationShowIconAutolaunch wraps the corresponding Objective-C method.
 func (x *Workspace) LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool {
-	return x.inner.LaunchApplicationShowIconAutolaunch(foundation.NSStringStringWithUTF8String(appName), showIcon, autolaunch)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchApplication:showIcon:autolaunch:"), purego.NSString(appName), showIcon, autolaunch)
+	return _r
 }
 
-// FullPathForApplication calls the underlying FullPathForApplication.
+// FullPathForApplication wraps the corresponding Objective-C method.
 func (x *Workspace) FullPathForApplication(appName string) string {
-	_r := x.inner.FullPathForApplication(foundation.NSStringStringWithUTF8String(appName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullPathForApplication:"), purego.NSString(appName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AbsolutePathForAppBundleWithIdentifier calls the underlying AbsolutePathForAppBundleWithIdentifier.
+// AbsolutePathForAppBundleWithIdentifier wraps the corresponding Objective-C method.
 func (x *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string {
-	_r := x.inner.AbsolutePathForAppBundleWithIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absolutePathForAppBundleWithIdentifier:"), purego.NSString(bundleIdentifier))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier calls the underlying LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier.
-func (x *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool {
-	return x.inner.LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier), raw.NSWorkspaceLaunchOptions(options), descriptor, identifier)
+// LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier wraps the corresponding Objective-C method.
+func (x *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("launchAppWithBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifier:"), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), objref.IDOf(identifier))
+	return _r
 }
 
-// OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers calls the underlying OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers.
-func (x *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool {
-	return x.inner.OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls, foundation.NSStringStringWithUTF8String(bundleIdentifier), raw.NSWorkspaceLaunchOptions(options), descriptor, identifiers)
+// OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers wraps the corresponding Objective-C method.
+func (x *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// OpenTempFile calls the underlying OpenTempFile.
+// OpenTempFile wraps the corresponding Objective-C method.
 func (x *Workspace) OpenTempFile(fullPath string) bool {
-	return x.inner.OpenTempFile(foundation.NSStringStringWithUTF8String(fullPath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openTempFile:"), purego.NSString(fullPath))
+	return _r
 }
 
-// FindApplications calls the underlying FindApplications.
+// FindApplications wraps the corresponding Objective-C method.
 func (x *Workspace) FindApplications() {
-	x.inner.FindApplications()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findApplications"))
 }
 
-// NoteUserDefaultsChanged calls the underlying NoteUserDefaultsChanged.
+// NoteUserDefaultsChanged wraps the corresponding Objective-C method.
 func (x *Workspace) NoteUserDefaultsChanged() {
-	x.inner.NoteUserDefaultsChanged()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteUserDefaultsChanged"))
 }
 
-// SlideImageFromTo calls the underlying SlideImageFromTo.
-func (x *Workspace) SlideImageFromTo(image *raw.NSImage, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint) {
-	x.inner.SlideImageFromTo(image, fromPoint, toPoint)
+// SlideImageFromTo wraps the corresponding Objective-C method.
+func (x *Workspace) SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slideImage:from:to:"), objref.IDOf(image), fromPoint, toPoint)
 }
 
-// CheckForRemovableMedia calls the underlying CheckForRemovableMedia.
+// CheckForRemovableMedia wraps the corresponding Objective-C method.
 func (x *Workspace) CheckForRemovableMedia() {
-	x.inner.CheckForRemovableMedia()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkForRemovableMedia"))
 }
 
-// NoteFileSystemChanged2 calls the underlying NoteFileSystemChanged2.
+// NoteFileSystemChanged2 wraps the corresponding Objective-C method.
 func (x *Workspace) NoteFileSystemChanged2() {
-	x.inner.NoteFileSystemChanged2()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noteFileSystemChanged"))
 }
 
-// FileSystemChanged calls the underlying FileSystemChanged.
+// FileSystemChanged wraps the corresponding Objective-C method.
 func (x *Workspace) FileSystemChanged() bool {
-	return x.inner.FileSystemChanged()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileSystemChanged"))
+	return _r
 }
 
-// UserDefaultsChanged calls the underlying UserDefaultsChanged.
+// UserDefaultsChanged wraps the corresponding Objective-C method.
 func (x *Workspace) UserDefaultsChanged() bool {
-	return x.inner.UserDefaultsChanged()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("userDefaultsChanged"))
+	return _r
 }
 
-// MountNewRemovableMedia calls the underlying MountNewRemovableMedia.
-func (x *Workspace) MountNewRemovableMedia() *foundation.NSArray[objc.ID] {
-	return x.inner.MountNewRemovableMedia()
+// MountNewRemovableMedia wraps the corresponding Objective-C method.
+func (x *Workspace) MountNewRemovableMedia() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountNewRemovableMedia"))
+	return obj.Wrap(_r)
 }
 
-// ActiveApplication calls the underlying ActiveApplication.
-func (x *Workspace) ActiveApplication() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.ActiveApplication()
+// ActiveApplication wraps the corresponding Objective-C method.
+func (x *Workspace) ActiveApplication() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeApplication"))
+	return obj.Wrap(_r)
 }
 
-// MountedLocalVolumePaths calls the underlying MountedLocalVolumePaths.
-func (x *Workspace) MountedLocalVolumePaths() *foundation.NSArray[objc.ID] {
-	return x.inner.MountedLocalVolumePaths()
+// MountedLocalVolumePaths wraps the corresponding Objective-C method.
+func (x *Workspace) MountedLocalVolumePaths() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountedLocalVolumePaths"))
+	return obj.Wrap(_r)
 }
 
-// MountedRemovableMedia calls the underlying MountedRemovableMedia.
-func (x *Workspace) MountedRemovableMedia() *foundation.NSArray[objc.ID] {
-	return x.inner.MountedRemovableMedia()
+// MountedRemovableMedia wraps the corresponding Objective-C method.
+func (x *Workspace) MountedRemovableMedia() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountedRemovableMedia"))
+	return obj.Wrap(_r)
 }
 
-// LaunchedApplications calls the underlying LaunchedApplications.
-func (x *Workspace) LaunchedApplications() *foundation.NSArray[objc.ID] {
-	return x.inner.LaunchedApplications()
+// LaunchedApplications wraps the corresponding Objective-C method.
+func (x *Workspace) LaunchedApplications() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchedApplications"))
+	return obj.Wrap(_r)
 }
 
-// OpenFileFromImageAtInView calls the underlying OpenFileFromImageAtInView.
-func (x *Workspace) OpenFileFromImageAtInView(fullPath string, image *raw.NSImage, point corefoundation.CGPoint, view *raw.NSView) bool {
-	return x.inner.OpenFileFromImageAtInView(foundation.NSStringStringWithUTF8String(fullPath), image, point, view)
+// OpenFileFromImageAtInView wraps the corresponding Objective-C method.
+func (x *Workspace) OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openFile:fromImage:at:inView:"), purego.NSString(fullPath), objref.IDOf(image), point, objref.IDOf(view))
+	return _r
 }
 
-// PerformFileOperationSourceDestinationFilesTag calls the underlying PerformFileOperationSourceDestinationFilesTag.
-func (x *Workspace) PerformFileOperationSourceDestinationFilesTag(operation *foundation.NSString, source string, destination string, files *foundation.NSArray[objc.ID], tag *int64) bool {
-	return x.inner.PerformFileOperationSourceDestinationFilesTag(operation, foundation.NSStringStringWithUTF8String(source), foundation.NSStringStringWithUTF8String(destination), files, tag)
+// PerformFileOperationSourceDestinationFilesTag wraps the corresponding Objective-C method.
+func (x *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64) {
+	var _out0 int64
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performFileOperation:source:destination:files:tag:"), objref.IDOf(operation), purego.NSString(source), purego.NSString(destination), objref.IDOf(files), unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
-// Retrieves information about the specified file.
-//
-// GetInfoForFileApplicationType calls the underlying GetInfoForFileApplicationType.
+// GetInfoForFileApplicationType retrieves information about the specified file.
 func (x *Workspace) GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool {
-	return x.inner.GetInfoForFileApplicationType(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(appName), foundation.NSStringStringWithUTF8String(type_))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getInfoForFile:application:type:"), purego.NSString(fullPath), purego.NSString(appName), purego.NSString(type_))
+	return _r
 }
 
-// IconForFileType calls the underlying IconForFileType.
+// IconForFileType wraps the corresponding Objective-C method.
 func (x *Workspace) IconForFileType(fileType string) *Image {
-	_r := x.inner.IconForFileType(foundation.NSStringStringWithUTF8String(fileType))
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForFileType:"), purego.NSString(fileType))
+	return ImageFromID(_r)
 }
 
-// Returns the uniform type identifier of the specified file, if it can be determined.
-//
-// TypeOfFileError calls the underlying TypeOfFileError.
-func (x *Workspace) TypeOfFileError(absoluteFilePath string) (string, error) {
-	_r, _err := x.inner.TypeOfFileError(foundation.NSStringStringWithUTF8String(absoluteFilePath))
-	if _err != nil {
-		return "", _err
+// TypeOfFileError returns the uniform type identifier of the specified file, if it can be determined.
+func (x *Workspace) TypeOfFileError(absoluteFilePath string) (result string, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeOfFile:error:"), purego.NSString(absoluteFilePath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
+	if _r == 0 {
 		return "", nil
 	}
-	return purego.GoString(_r.Ptr()), nil
+	return purego.GoString(_r), nil
 }
 
-// Returns the localized description for the specified Uniform Type Identifier (UTI).
-//
-// LocalizedDescriptionForType calls the underlying LocalizedDescriptionForType.
+// LocalizedDescriptionForType returns the localized description for the specified Uniform Type Identifier (UTI).
 func (x *Workspace) LocalizedDescriptionForType(typeName string) string {
-	_r := x.inner.LocalizedDescriptionForType(foundation.NSStringStringWithUTF8String(typeName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescriptionForType:"), purego.NSString(typeName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
-//
-// PreferredFilenameExtensionForType calls the underlying PreferredFilenameExtensionForType.
+// PreferredFilenameExtensionForType returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
 func (x *Workspace) PreferredFilenameExtensionForType(typeName string) string {
-	_r := x.inner.PreferredFilenameExtensionForType(foundation.NSStringStringWithUTF8String(typeName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredFilenameExtensionForType:"), purego.NSString(typeName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
-//
-// FilenameExtensionIsValidForType calls the underlying FilenameExtensionIsValidForType.
+// FilenameExtensionIsValidForType returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
 func (x *Workspace) FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool {
-	return x.inner.FilenameExtensionIsValidForType(foundation.NSStringStringWithUTF8String(filenameExtension), foundation.NSStringStringWithUTF8String(typeName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("filenameExtension:isValidForType:"), purego.NSString(filenameExtension), purego.NSString(typeName))
+	return _r
 }
 
-// Returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
-//
-// TypeConformsToType calls the underlying TypeConformsToType.
+// TypeConformsToType returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
 func (x *Workspace) TypeConformsToType(firstTypeName string, secondTypeName string) bool {
-	return x.inner.TypeConformsToType(foundation.NSStringStringWithUTF8String(firstTypeName), foundation.NSStringStringWithUTF8String(secondTypeName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("type:conformsToType:"), purego.NSString(firstTypeName), purego.NSString(secondTypeName))
+	return _r
 }
 
-// AccessibilityDisplayShouldIncreaseContrast calls the underlying AccessibilityDisplayShouldIncreaseContrast.
+// AccessibilityDisplayShouldIncreaseContrast wraps the corresponding Objective-C method.
 func (x *Workspace) AccessibilityDisplayShouldIncreaseContrast() bool {
-	return x.inner.AccessibilityDisplayShouldIncreaseContrast()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldIncreaseContrast"))
+	return _r
 }
 
-// AccessibilityDisplayShouldDifferentiateWithoutColor calls the underlying AccessibilityDisplayShouldDifferentiateWithoutColor.
+// AccessibilityDisplayShouldDifferentiateWithoutColor wraps the corresponding Objective-C method.
 func (x *Workspace) AccessibilityDisplayShouldDifferentiateWithoutColor() bool {
-	return x.inner.AccessibilityDisplayShouldDifferentiateWithoutColor()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldDifferentiateWithoutColor"))
+	return _r
 }
 
-// AccessibilityDisplayShouldReduceTransparency calls the underlying AccessibilityDisplayShouldReduceTransparency.
+// AccessibilityDisplayShouldReduceTransparency wraps the corresponding Objective-C method.
 func (x *Workspace) AccessibilityDisplayShouldReduceTransparency() bool {
-	return x.inner.AccessibilityDisplayShouldReduceTransparency()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldReduceTransparency"))
+	return _r
 }
 
-// AccessibilityDisplayShouldReduceMotion calls the underlying AccessibilityDisplayShouldReduceMotion.
+// AccessibilityDisplayShouldReduceMotion wraps the corresponding Objective-C method.
 func (x *Workspace) AccessibilityDisplayShouldReduceMotion() bool {
-	return x.inner.AccessibilityDisplayShouldReduceMotion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldReduceMotion"))
+	return _r
 }
 
-// AccessibilityDisplayShouldInvertColors calls the underlying AccessibilityDisplayShouldInvertColors.
+// AccessibilityDisplayShouldInvertColors wraps the corresponding Objective-C method.
 func (x *Workspace) AccessibilityDisplayShouldInvertColors() bool {
-	return x.inner.AccessibilityDisplayShouldInvertColors()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessibilityDisplayShouldInvertColors"))
+	return _r
 }
 
-// IsVoiceOverEnabled calls the underlying IsVoiceOverEnabled.
+// IsVoiceOverEnabled wraps the corresponding Objective-C method.
 func (x *Workspace) IsVoiceOverEnabled() bool {
-	return x.inner.IsVoiceOverEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceOverEnabled"))
+	return _r
 }
 
-// IsSwitchControlEnabled calls the underlying IsSwitchControlEnabled.
+// IsSwitchControlEnabled wraps the corresponding Objective-C method.
 func (x *Workspace) IsSwitchControlEnabled() bool {
-	return x.inner.IsSwitchControlEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSwitchControlEnabled"))
+	return _r
 }
 
-// @return An array of `NSRunningApplication`s representing currently running applications. The order of the array is unspecified, but it is stable, meaning that the relative order of particular applications will not change across multiple calls to `runningApplications`. Similar to `NSRunningApplication`'s properties, this property will only change when the main run loop is run in a common mode.  Instead of polling, use key-value observing to be notified of changes to this array property. This property is thread safe, in that it may be called from background threads and the result is returned atomically.  This property is observable through KVO.
+// RunningApplications wraps the corresponding Objective-C method.
 //
 // RunningApplications returns the collection as a Go slice.
 func (x *Workspace) RunningApplications() []*RunningApplication {
-	arr := x.inner.RunningApplications()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RunningApplication {
-		return &RunningApplication{inner: raw.NSRunningApplicationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runningApplications"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
 
 // Workspaceable is the interface implemented by [Workspace], for mocking and DI.
 type Workspaceable interface {
-	Unwrap() *raw.NSWorkspace
+	obj.Object
 	OpenURL(url string) bool
-	OpenURLConfiguration(ctx context.Context, url string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error)
-	OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls *foundation.NSArray[*foundation.NSURL], applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error)
-	OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error)
+	OpenURLConfiguration(ctx context.Context, url string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
+	OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls []obj.Object, applicationURL string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
+	OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *WorkspaceOpenConfiguration) (*RunningApplication, error)
 	SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool
-	ActivateFileViewerSelectingURLs(fileURLs *foundation.NSArray[*foundation.NSURL])
+	ActivateFileViewerSelectingURLs(fileURLs []obj.Object)
 	ShowSearchResultsForQueryString(queryString string) bool
 	NoteFileSystemChanged(path string)
 	IsFilePackageAtPath(fullPath string) bool
 	IconForFile(fullPath string) *Image
-	IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *Image
-	IconForContentType(contentType *uniformtypeidentifiers.UTType) *Image
-	SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool
-	RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer))
-	DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler func(*foundation.NSDictionary[*foundation.NSURL, *foundation.NSURL], unsafe.Pointer))
-	GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description string, fileSystemType string) bool
+	IconForFiles(fullPaths []string) *Image
+	IconForContentType(contentType obj.Object) *Image
+	SetIconForFileOptions(image *Image, fullPath string, options WorkspaceIconCreationOptions) bool
+	GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, description string, fileSystemType string) (ok bool, removableFlag bool, writableFlag bool, unmountableFlag bool)
 	UnmountAndEjectDeviceAtPath(path string) bool
-	UnmountAndEjectDeviceAtURLError(url string) (bool, error)
+	UnmountAndEjectDeviceAtURL(url string) error
 	ExtendPowerOffBy(requested int) int
 	HideOtherApplications()
-	URLForApplicationWithBundleIdentifier(bundleIdentifier string) *foundation.NSURL
-	URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) *foundation.NSArray[*foundation.NSURL]
-	URLForApplicationToOpenURL(url string) *foundation.NSURL
-	URLsForApplicationsToOpenURL(url string) *foundation.NSArray[*foundation.NSURL]
+	URLForApplicationWithBundleIdentifier(bundleIdentifier string) obj.Object
+	URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) []obj.Object
+	URLForApplicationToOpenURL(url string) obj.Object
+	URLsForApplicationsToOpenURL(url string) []obj.Object
 	SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error
 	SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error
 	SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error
-	URLForApplicationToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSURL
-	URLsForApplicationsToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSArray[*foundation.NSURL]
-	SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType *uniformtypeidentifiers.UTType) error
-	NotificationCenter() *foundation.NSNotificationCenter
+	URLForApplicationToOpenContentType(contentType obj.Object) obj.Object
+	URLsForApplicationsToOpenContentType(contentType obj.Object) []obj.Object
+	SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType obj.Object) error
+	NotificationCenter() obj.Object
 	FileLabels() []string
 	FileLabelColors() []*Color
 	FrontmostApplication() *RunningApplication
 	MenuBarOwningApplication() *RunningApplication
-	SetDesktopImageURLForScreenOptionsError(url string, screen *raw.NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
-	DesktopImageURLForScreen(screen *raw.NSScreen) *foundation.NSURL
-	DesktopImageOptionsForScreen(screen *raw.NSScreen) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	RequestAuthorizationOfType(ctx context.Context, type_ NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error)
+	SetDesktopImageURLForScreenOptions(url string, screen *Screen, options obj.Object) error
+	DesktopImageURLForScreen(screen *Screen) obj.Object
+	DesktopImageOptionsForScreen(screen *Screen) obj.Object
+	RequestAuthorizationOfType(ctx context.Context, type_ WorkspaceAuthorizationType) (*WorkspaceAuthorization, error)
 	OpenFile(fullPath string) bool
 	OpenFileWithApplication(fullPath string, appName string) bool
 	OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool
 	LaunchApplication(appName string) bool
-	LaunchApplicationAtURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
-	OpenURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
-	OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
+	LaunchApplicationAtURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
+	OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
+	OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error)
 	LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool
 	FullPathForApplication(appName string) string
 	AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string
-	LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool
-	OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool
+	LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifier obj.Object) bool
+	OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool
 	OpenTempFile(fullPath string) bool
 	FindApplications()
 	NoteUserDefaultsChanged()
-	SlideImageFromTo(image *raw.NSImage, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint)
+	SlideImageFromTo(image *Image, fromPoint corefoundation.CGPoint, toPoint corefoundation.CGPoint)
 	CheckForRemovableMedia()
 	NoteFileSystemChanged2()
 	FileSystemChanged() bool
 	UserDefaultsChanged() bool
-	MountNewRemovableMedia() *foundation.NSArray[objc.ID]
-	ActiveApplication() *foundation.NSDictionary[objc.ID, objc.ID]
-	MountedLocalVolumePaths() *foundation.NSArray[objc.ID]
-	MountedRemovableMedia() *foundation.NSArray[objc.ID]
-	LaunchedApplications() *foundation.NSArray[objc.ID]
-	OpenFileFromImageAtInView(fullPath string, image *raw.NSImage, point corefoundation.CGPoint, view *raw.NSView) bool
-	PerformFileOperationSourceDestinationFilesTag(operation *foundation.NSString, source string, destination string, files *foundation.NSArray[objc.ID], tag *int64) bool
+	MountNewRemovableMedia() obj.Object
+	ActiveApplication() obj.Object
+	MountedLocalVolumePaths() obj.Object
+	MountedRemovableMedia() obj.Object
+	LaunchedApplications() obj.Object
+	OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool
+	PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64)
 	GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool
 	IconForFileType(fileType string) *Image
-	TypeOfFileError(absoluteFilePath string) (string, error)
+	TypeOfFileError(absoluteFilePath string) (result string, err error)
 	LocalizedDescriptionForType(typeName string) string
 	PreferredFilenameExtensionForType(typeName string) string
 	FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool

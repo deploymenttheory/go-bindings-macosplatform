@@ -5,588 +5,437 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A static ordered collection of objects.
+// Array is an idiomatic wrapper over the Objective-C class NSArray.
 //
-// Array wraps [raw.NSArray] with a fluent Go API.
+// Array is an abstract base — you do not construct it directly. Construct one of [MutableArray] and pass it where a Array is accepted.
+//
+// A static ordered collection of objects.
 type Array struct {
-	inner *raw.NSArray[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSArray].
-func (x *Array) Unwrap() *raw.NSArray[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Array) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayFromID adopts an existing object pointer as a Array (nil for 0).
+// ArrayFromID adopts an existing Objective-C object as a Array
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayFromID(id objc.ID) *Array {
 	if id == 0 {
 		return nil
 	}
-	return &Array{inner: raw.NSArrayFromID[objc.ID](id)}
-}
-
-// NewArray creates a new [Array].
-func NewArray() *Array {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("new"))
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated array to include a given number of objects from a given C array.
-//
-// NewArrayWithObjectsCount creates a new [Array].
-func NewArrayWithObjectsCount(objects unsafe.Pointer, cnt uint) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:count:"), objects, cnt)
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// NewArrayWithCoder creates a new [Array].
-func NewArrayWithCoder(coder *raw.NSCoder) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated array by placing in it the objects in the argument list.
-//
-// NewArrayWithObjects creates a new [Array].
-func NewArrayWithObjects(firstObj objc.ID) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), firstObj)
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated array by placing in it the objects contained in a given array.
-//
-// NewArrayWithArray creates a new [Array].
-func NewArrayWithArray(array *raw.NSArray[objc.ID]) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), array.Ptr())
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated array using anArray as the source of data objects for the array.
-//
-// NewArrayWithArrayCopyItems creates a new [Array].
-func NewArrayWithArrayCopyItems(array *raw.NSArray[objc.ID], flag bool) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), array.Ptr(), flag)
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// NewArrayWithContentsOfURLError creates a new [Array].
-func NewArrayWithContentsOfURLError(url string) (*Array, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}, nil
-}
-
-// Initializes a newly allocated array with the contents of the file specified by a given path.
-//
-// NewArrayWithContentsOfFile creates a new [Array].
-func NewArrayWithContentsOfFile(path string) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// Initializes a newly allocated array with the contents of the location specified by a given URL.
-//
-// NewArrayWithContentsOfURL creates a new [Array].
-func NewArrayWithContentsOfURL(url string) *Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Array) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Array {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Array{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns the object located at the specified index.
-//
-// ObjectAtIndex calls the underlying ObjectAtIndex.
-func (x *Array) ObjectAtIndex(index uint) objc.ID {
-	return x.inner.ObjectAtIndex(index)
-}
-
-// Count calls the underlying Count.
-func (x *Array) Count() uint {
-	return x.inner.Count()
-}
-
-// Returns a new array that is a copy of the receiving array with a given object added to the end.
-//
-// ArrayByAddingObject calls the underlying ArrayByAddingObject.
-func (x *Array) ArrayByAddingObject(anObject objc.ID) *raw.NSArray[objc.ID] {
-	return x.inner.ArrayByAddingObject(anObject)
-}
-
-// Returns a new array that is a copy of the receiving array with the objects contained in another array added to the end.
-//
-// ArrayByAddingObjectsFromArray calls the underlying ArrayByAddingObjectsFromArray.
-func (x *Array) ArrayByAddingObjectsFromArray(otherArray *raw.NSArray[objc.ID]) *raw.NSArray[objc.ID] {
-	return x.inner.ArrayByAddingObjectsFromArray(otherArray)
-}
-
-// Constructs and returns an NSString object that is the result of interposing a given separator between the elements of the array.
-//
-// ComponentsJoinedByString calls the underlying ComponentsJoinedByString.
-func (x *Array) ComponentsJoinedByString(separator string) *String {
-	_r := x.inner.ComponentsJoinedByString(foundation.NSStringStringWithUTF8String(separator))
-	if _r == nil {
+// arrayAdopt wraps an Objective-C object that this code just created as a
+// Array (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayAdopt(id objc.ID) *Array {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Array{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns a Boolean value that indicates whether a given object is present in the array.
-//
-// ContainsObject calls the underlying ContainsObject.
-func (x *Array) ContainsObject(anObject objc.ID) bool {
-	return x.inner.ContainsObject(anObject)
+// Description returns the object's -description text.
+func (x *Array) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns a string that represents the contents of the array, formatted as a property list.
-//
-// DescriptionWithLocale calls the underlying DescriptionWithLocale.
-func (x *Array) DescriptionWithLocale(locale objc.ID) *String {
-	_r := x.inner.DescriptionWithLocale(locale)
-	if _r == nil {
-		return nil
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Array) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Array) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Array) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewArrayWithCoder creates a new Array.
+func NewArrayWithCoder(coder *Coder) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return arrayAdopt(_id)
+}
+
+// NewArrayWithObjects initializes a newly allocated array by placing in it the objects in the argument list.
+func NewArrayWithObjects(firstObj obj.Object) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:"), objref.IDOf(firstObj))
+	return arrayAdopt(_id)
+}
+
+// NewArrayWithArray initializes a newly allocated array by placing in it the objects contained in a given array.
+func NewArrayWithArray(array []obj.Object) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return arrayAdopt(_id)
+}
+
+// NewArrayWithArrayCopyItems initializes a newly allocated array using anArray as the source of data objects for the array.
+func NewArrayWithArrayCopyItems(array []obj.Object, flag bool) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:copyItems:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
+	return arrayAdopt(_id)
+}
+
+// NewArrayWithContentsOfURLError creates a new Array.
+func NewArrayWithContentsOfURLError(url string) (result *Array, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return arrayAdopt(_id), nil
 }
 
-// Returns a string that represents the contents of the array, formatted as a property list.
-//
-// DescriptionWithLocaleIndent calls the underlying DescriptionWithLocaleIndent.
-func (x *Array) DescriptionWithLocaleIndent(locale objc.ID, level uint) *String {
-	_r := x.inner.DescriptionWithLocaleIndent(locale, level)
-	if _r == nil {
-		return nil
+// NewArrayWithContentsOfFile initializes a newly allocated array with the contents of the file specified by a given path.
+func NewArrayWithContentsOfFile(path string) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
+	return arrayAdopt(_id)
+}
+
+// NewArrayWithContentsOfURL initializes a newly allocated array with the contents of the location specified by a given URL.
+func NewArrayWithContentsOfURL(url string) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
+	return arrayAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *Array) WithScriptingProperties(scriptingProperties obj.Object) *Array {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// ObjectAtIndex returns the object located at the specified index.
+func (x *Array) ObjectAtIndex(index int) obj.Object {
+	errkit.CheckIndex(index, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
+	return obj.Wrap(_r)
+}
+
+// Count wraps the corresponding Objective-C method.
+func (x *Array) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
+}
+
+// ArrayByAddingObject returns a new array that is a copy of the receiving array with a given object added to the end.
+func (x *Array) ArrayByAddingObject(anObject obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByAddingObject:"), objref.IDOf(anObject))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ArrayByAddingObjectsFromArray returns a new array that is a copy of the receiving array with the objects contained in another array added to the end.
+func (x *Array) ArrayByAddingObjectsFromArray(otherArray []obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByAddingObjectsFromArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ComponentsJoinedByString constructs and returns an NSString object that is the result of interposing a given separator between the elements of the array.
+func (x *Array) ComponentsJoinedByString(separator string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsJoinedByString:"), purego.NSString(separator))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the first object contained in the receiving array that’s equal to an object in another given array.
-//
-// FirstObjectCommonWithArray calls the underlying FirstObjectCommonWithArray.
-func (x *Array) FirstObjectCommonWithArray(otherArray *raw.NSArray[objc.ID]) objc.ID {
-	return x.inner.FirstObjectCommonWithArray(otherArray)
+// ContainsObject returns a Boolean value that indicates whether a given object is present in the array.
+func (x *Array) ContainsObject(anObject obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
+	return _r
 }
 
-// Copies references to objects contained in the array that fall within the specified range to aBuffer.
-//
-// GetObjectsRange calls the underlying GetObjectsRange.
-func (x *Array) GetObjectsRange(objects unsafe.Pointer, range_ raw.NSRange) {
-	x.inner.GetObjectsRange(objects, range_)
-}
-
-// Returns the lowest index whose corresponding array value is equal to a given object.
-//
-// IndexOfObject calls the underlying IndexOfObject.
-func (x *Array) IndexOfObject(anObject objc.ID) uint {
-	return x.inner.IndexOfObject(anObject)
-}
-
-// Returns the lowest index within a specified range whose corresponding array value is equal to a given object .
-//
-// IndexOfObjectInRange calls the underlying IndexOfObjectInRange.
-func (x *Array) IndexOfObjectInRange(anObject objc.ID, range_ raw.NSRange) uint {
-	return x.inner.IndexOfObjectInRange(anObject, range_)
-}
-
-// Returns the lowest index whose corresponding array value is identical to a given object.
-//
-// IndexOfObjectIdenticalTo calls the underlying IndexOfObjectIdenticalTo.
-func (x *Array) IndexOfObjectIdenticalTo(anObject objc.ID) uint {
-	return x.inner.IndexOfObjectIdenticalTo(anObject)
-}
-
-// Returns the lowest index within a specified range whose corresponding array value is equal to a given object .
-//
-// IndexOfObjectIdenticalToInRange calls the underlying IndexOfObjectIdenticalToInRange.
-func (x *Array) IndexOfObjectIdenticalToInRange(anObject objc.ID, range_ raw.NSRange) uint {
-	return x.inner.IndexOfObjectIdenticalToInRange(anObject, range_)
-}
-
-// Compares the receiving array to another array.
-//
-// IsEqualToArray calls the underlying IsEqualToArray.
-func (x *Array) IsEqualToArray(otherArray *raw.NSArray[objc.ID]) bool {
-	return x.inner.IsEqualToArray(otherArray)
-}
-
-// Returns an enumerator object that lets you access each object in the array.
-//
-// ObjectEnumerator calls the underlying ObjectEnumerator.
-func (x *Array) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.ObjectEnumerator()
-}
-
-// Returns an enumerator object that lets you access each object in the array, in reverse order.
-//
-// ReverseObjectEnumerator calls the underlying ReverseObjectEnumerator.
-func (x *Array) ReverseObjectEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.ReverseObjectEnumerator()
-}
-
-// Returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
-//
-// SortedArrayUsingFunctionContext calls the underlying SortedArrayUsingFunctionContext.
-func (x *Array) SortedArrayUsingFunctionContext(comparator unsafe.Pointer, context_ unsafe.Pointer) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingFunctionContext(comparator, context_)
-}
-
-// Returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
-//
-// SortedArrayUsingFunctionContextHint calls the underlying SortedArrayUsingFunctionContextHint.
-func (x *Array) SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint *raw.NSData) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingFunctionContextHint(comparator, context_, hint)
-}
-
-// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given selector.
-//
-// SortedArrayUsingSelector calls the underlying SortedArrayUsingSelector.
-func (x *Array) SortedArrayUsingSelector(comparator objc.SEL) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingSelector(comparator)
-}
-
-// Returns a new array containing the receiving array’s elements that fall within the limits specified by a given range.
-//
-// SubarrayWithRange calls the underlying SubarrayWithRange.
-func (x *Array) SubarrayWithRange(range_ raw.NSRange) *raw.NSArray[objc.ID] {
-	return x.inner.SubarrayWithRange(range_)
-}
-
-// WriteToURLError calls the underlying WriteToURLError.
-func (x *Array) WriteToURLError(url string) (bool, error) {
-	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// Sends to each object in the array the message identified by a given selector, starting with the first object and continuing through the array to the last object.
-//
-// MakeObjectsPerformSelector calls the underlying MakeObjectsPerformSelector.
-func (x *Array) MakeObjectsPerformSelector(aSelector objc.SEL) {
-	x.inner.MakeObjectsPerformSelector(aSelector)
-}
-
-// Sends the aSelector message to each object in the array, starting with the first object and continuing through the array to the last object.
-//
-// MakeObjectsPerformSelectorWithObject calls the underlying MakeObjectsPerformSelectorWithObject.
-func (x *Array) MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID) {
-	x.inner.MakeObjectsPerformSelectorWithObject(aSelector, argument)
-}
-
-// Returns an array containing the objects in the array at the indexes specified by a given index set.
-//
-// ObjectsAtIndexes calls the underlying ObjectsAtIndexes.
-func (x *Array) ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID] {
-	return x.inner.ObjectsAtIndexes(indexes)
-}
-
-// Returns the object at the specified index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *Array) ObjectAtIndexedSubscript(idx uint) objc.ID {
-	return x.inner.ObjectAtIndexedSubscript(idx)
-}
-
-// Executes a given closure or block using each object in the array, starting with the first object and continuing through the array to the last object.
-//
-// EnumerateObjectsUsing calls the underlying EnumerateObjectsUsing.
-func (x *Array) EnumerateObjectsUsing(block objc.Block) {
-	x.inner.EnumerateObjectsUsing(block)
-}
-
-// Executes a given closure or block using each object in the array with the specified options.
-//
-// EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
-func (x *Array) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
-}
-
-// Executes a given block using the objects in the array at the specified indexes.
-//
-// EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
-func (x *Array) EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, raw.NSEnumerationOptions(opts), block)
-}
-
-// Returns the index of the first object in the array that passes a test in a given block.
-//
-// IndexOfObjectPassingTest calls the underlying IndexOfObjectPassingTest.
-func (x *Array) IndexOfObjectPassingTest(predicate objc.Block) uint {
-	return x.inner.IndexOfObjectPassingTest(predicate)
-}
-
-// Returns the index of an object in the array that passes a test in a given block for a given set of enumeration options.
-//
-// IndexOfObjectWithOptionsPassingTest calls the underlying IndexOfObjectWithOptionsPassingTest.
-func (x *Array) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
-}
-
-// Returns the index, from a given set of indexes, of the first object in the array that passes a test in a given block for a given set of enumeration options.
-//
-// IndexOfObjectAtIndexesOptionsPassingTest calls the underlying IndexOfObjectAtIndexesOptionsPassingTest.
-func (x *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
-}
-
-// Returns the indexes of objects in the array that pass a test in a given block.
-//
-// IndexesOfObjectsPassingTest calls the underlying IndexesOfObjectsPassingTest.
-func (x *Array) IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsPassingTest(predicate)
-	if _r == nil {
-		return nil
+// DescriptionWithLocale returns a string that represents the contents of the array, formatted as a property list.
+func (x *Array) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &IndexSet{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the indexes of objects in the array that pass a test in a given block for a given set of enumeration options.
-//
-// IndexesOfObjectsWithOptionsPassingTest calls the underlying IndexesOfObjectsWithOptionsPassingTest.
-func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
-	if _r == nil {
-		return nil
+// DescriptionWithLocaleIndent returns a string that represents the contents of the array, formatted as a property list.
+func (x *Array) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
+	if _r == 0 {
+		return ""
 	}
-	return &IndexSet{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the indexes, from a given set of indexes, of objects in the array that pass a test in a given block for a given set of enumeration options.
-//
-// IndexesOfObjectsAtIndexesOptionsPassingTest calls the underlying IndexesOfObjectsAtIndexesOptionsPassingTest.
-func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
-	if _r == nil {
-		return nil
+// FirstObjectCommonWithArray returns the first object contained in the receiving array that’s equal to an object in another given array.
+func (x *Array) FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObjectCommonWithArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
+}
+
+// IndexOfObject returns the lowest index whose corresponding array value is equal to a given object.
+func (x *Array) IndexOfObject(anObject obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObject:"), objref.IDOf(anObject))
+	return _r
+}
+
+// IndexOfObjectIdenticalTo returns the lowest index whose corresponding array value is identical to a given object.
+func (x *Array) IndexOfObjectIdenticalTo(anObject obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectIdenticalTo:"), objref.IDOf(anObject))
+	return _r
+}
+
+// IsEqualToArray compares the receiving array to another array.
+func (x *Array) IsEqualToArray(otherArray []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
+}
+
+// ObjectEnumerator returns an enumerator object that lets you access each object in the array.
+func (x *Array) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// ReverseObjectEnumerator returns an enumerator object that lets you access each object in the array, in reverse order.
+func (x *Array) ReverseObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverseObjectEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// WriteToURL wraps the corresponding Objective-C method.
+func (x *Array) WriteToURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &IndexSet{inner: _r}
+	return nil
 }
 
-// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
-//
-// SortedArrayUsingComparator calls the underlying SortedArrayUsingComparator.
-func (x *Array) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
+// ObjectsAtIndexes returns an array containing the objects in the array at the indexes specified by a given index set.
+func (x *Array) ObjectsAtIndexes(indexes *IndexSet) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsAtIndexes:"), objref.IDOf(indexes))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns an array that lists the receiving array’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
-//
-// SortedArrayWithOptionsUsingComparator calls the underlying SortedArrayWithOptionsUsingComparator.
-func (x *Array) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
+// ObjectAtIndexedSubscript returns the object at the specified index.
+func (x *Array) ObjectAtIndexedSubscript(idx int) obj.Object {
+	errkit.CheckIndex(idx, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return obj.Wrap(_r)
 }
 
-// Returns the index, within a specified range, of an object compared with elements in the array using a given NSComparator block.
-//
-// IndexOfObjectInSortedRangeOptionsUsingComparator calls the underlying IndexOfObjectInSortedRangeOptionsUsingComparator.
-func (x *Array) IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
-	return x.inner.IndexOfObjectInSortedRangeOptionsUsingComparator(obj, r, raw.NSBinarySearchingOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmp(_a0, _a1)) })
+// EnumerateObjectsUsing executes a given closure or block using each object in the array, starting with the first object and continuing through the array to the last object.
+func (x *Array) EnumerateObjectsUsing(block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// FirstObject calls the underlying FirstObject.
-func (x *Array) FirstObject() objc.ID {
-	return x.inner.FirstObject()
+// EnumerateObjectsWithOptionsUsing executes a given closure or block using each object in the array with the specified options.
+func (x *Array) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// LastObject calls the underlying LastObject.
-func (x *Array) LastObject() objc.ID {
-	return x.inner.LastObject()
+// EnumerateObjectsAtIndexesOptionsUsing executes a given block using the objects in the array at the specified indexes.
+func (x *Array) EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsAtIndexes:options:usingBlock:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// SortedArrayHint calls the underlying SortedArrayHint.
+// IndexOfObjectPassingTest returns the index of the first object in the array that passes a test in a given block.
+func (x *Array) IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexOfObjectWithOptionsPassingTest returns the index of an object in the array that passes a test in a given block for a given set of enumeration options.
+func (x *Array) IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexOfObjectAtIndexesOptionsPassingTest returns the index, from a given set of indexes, of the first object in the array that passes a test in a given block for a given set of enumeration options.
+func (x *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfObjectAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return _r
+}
+
+// IndexesOfObjectsPassingTest returns the indexes of objects in the array that pass a test in a given block.
+func (x *Array) IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// IndexesOfObjectsWithOptionsPassingTest returns the indexes of objects in the array that pass a test in a given block for a given set of enumeration options.
+func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// IndexesOfObjectsAtIndexesOptionsPassingTest returns the indexes, from a given set of indexes, of objects in the array that pass a test in a given block for a given set of enumeration options.
+func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexesOfObjectsAtIndexes:options:passingTest:"), objref.IDOf(s), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), _b1, (*bool)(_b2))
+	}))
+	return IndexSetFromID(_r)
+}
+
+// FirstObject wraps the corresponding Objective-C method.
+func (x *Array) FirstObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstObject"))
+	return obj.Wrap(_r)
+}
+
+// LastObject wraps the corresponding Objective-C method.
+func (x *Array) LastObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastObject"))
+	return obj.Wrap(_r)
+}
+
+// SortedArrayHint wraps the corresponding Objective-C method.
 func (x *Array) SortedArrayHint() *Data {
-	_r := x.inner.SortedArrayHint()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayHint"))
+	return DataFromID(_r)
 }
 
-// Compares two arrays, using the provided block and with options, to create a difference object that represents the changes between them.
-//
-// DifferenceFromArrayWithOptionsUsingEquivalenceTest calls the underlying DifferenceFromArrayWithOptionsUsingEquivalenceTest.
-func (x *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromArrayWithOptionsUsingEquivalenceTest(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options), block)
+// DifferenceFromArrayWithOptionsUsingEquivalenceTest compares two arrays, using the provided block and with options, to create a difference object that represents the changes between them.
+func (x *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:withOptions:usingEquivalenceTest:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) bool { return block(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return obj.Wrap(_r)
 }
 
-// Compares two arrays, with options, to create a difference object that represents the changes between them.
-//
-// DifferenceFromArrayWithOptions calls the underlying DifferenceFromArrayWithOptions.
-func (x *Array) DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromArrayWithOptions(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options))
+// DifferenceFromArrayWithOptions compares two arrays, with options, to create a difference object that represents the changes between them.
+func (x *Array) DifferenceFromArrayWithOptions(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:withOptions:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), options)
+	return obj.Wrap(_r)
 }
 
-// Compares two arrays to create a difference object that represents the changes between them.
-//
-// DifferenceFromArray calls the underlying DifferenceFromArray.
-func (x *Array) DifferenceFromArray(other *raw.NSArray[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromArray(other)
+// DifferenceFromArray compares two arrays to create a difference object that represents the changes between them.
+func (x *Array) DifferenceFromArray(other []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceFromArray:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// Creates a new array by applying a difference object to an existing array.
-//
-// ArrayByApplyingDifference calls the underlying ArrayByApplyingDifference.
-func (x *Array) ArrayByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSArray[objc.ID] {
-	return x.inner.ArrayByApplyingDifference(difference)
+// ArrayByApplyingDifference creates a new array by applying a difference object to an existing array.
+func (x *Array) ArrayByApplyingDifference(difference obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayByApplyingDifference:"), objref.IDOf(difference))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Copies all the objects contained in the array to aBuffer.
-//
-// GetObjects calls the underlying GetObjects.
-func (x *Array) GetObjects(objects unsafe.Pointer) {
-	x.inner.GetObjects(objects)
-}
-
-// Writes the contents of the array to a file at a given path.
-//
-// WriteToFileAtomically calls the underlying WriteToFileAtomically.
+// WriteToFileAtomically writes the contents of the array to a file at a given path.
 func (x *Array) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
-	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
+	return _r
 }
 
-// Writes the contents of the array to the location specified by a given URL.
-//
-// WriteToURLAtomically calls the underlying WriteToURLAtomically.
+// WriteToURLAtomically writes the contents of the array to the location specified by a given URL.
 func (x *Array) WriteToURLAtomically(url string, atomically bool) bool {
-	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
+	return _r
 }
 
-// Returns an array containing all the pathname elements in the receiving array that have filename extensions from a given array.
-//
-// PathsMatchingExtensions calls the underlying PathsMatchingExtensions.
-func (x *Array) PathsMatchingExtensions(filterTypes ...StringProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(filterTypes))
-	for _i, _v := range filterTypes {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.PathsMatchingExtensions(_arg0)
+// PathsMatchingExtensions returns an array containing all the pathname elements in the receiving array that have filename extensions from a given array.
+func (x *Array) PathsMatchingExtensions(filterTypes []string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathsMatchingExtensions:"), purego.SliceToNSArray(filterTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Registers an observer to receive key value observer notifications for the specified key-path relative to the objects at the indexes.
-//
-// AddObserverToObjectsAtIndexesForKeyPathOptionsContext calls the underlying AddObserverToObjectsAtIndexesForKeyPathOptionsContext.
-func (x *Array) AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer, indexes, foundation.NSStringStringWithUTF8String(keyPath), raw.NSKeyValueObservingOptions(options), context_)
+// RemoveObserverFromObjectsAtIndexesForKeyPath removes anObserver from all key value observer notifications associated with the specified keyPath relative to the array’s objects at indexes.
+func (x *Array) RemoveObserverFromObjectsAtIndexesForKeyPath(observer *Object, indexes *IndexSet, keyPath string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:"), objref.IDOf(observer), objref.IDOf(indexes), purego.NSString(keyPath))
 }
 
-// Raises an exception.
-//
-// RemoveObserverFromObjectsAtIndexesForKeyPathContext calls the underlying RemoveObserverFromObjectsAtIndexesForKeyPathContext.
-func (x *Array) RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, context_ unsafe.Pointer) {
-	x.inner.RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer, indexes, foundation.NSStringStringWithUTF8String(keyPath), context_)
+// SortedArrayUsingDescriptors returns a copy of the receiving array sorted as specified by a given array of sort descriptors.
+func (x *Array) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removes anObserver from all key value observer notifications associated with the specified keyPath relative to the array’s objects at indexes.
-//
-// RemoveObserverFromObjectsAtIndexesForKeyPath calls the underlying RemoveObserverFromObjectsAtIndexesForKeyPath.
-func (x *Array) RemoveObserverFromObjectsAtIndexesForKeyPath(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string) {
-	x.inner.RemoveObserverFromObjectsAtIndexesForKeyPath(observer, indexes, foundation.NSStringStringWithUTF8String(keyPath))
+// FilteredArrayUsingPredicate evaluates a given predicate against each object in the receiving array and returns a new array containing the objects for which the predicate returns true.
+func (x *Array) FilteredArrayUsingPredicate(predicate *Predicate) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filteredArrayUsingPredicate:"), objref.IDOf(predicate))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Returns a copy of the receiving array sorted as specified by a given array of sort descriptors.
-//
-// SortedArrayUsingDescriptors calls the underlying SortedArrayUsingDescriptors.
-func (x *Array) SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingDescriptors(sortDescriptors)
-}
-
-// Evaluates a given predicate against each object in the receiving array and returns a new array containing the objects for which the predicate returns true.
-//
-// FilteredArrayUsingPredicate calls the underlying FilteredArrayUsingPredicate.
-func (x *Array) FilteredArrayUsingPredicate(predicate *raw.NSPredicate) *raw.NSArray[objc.ID] {
-	return x.inner.FilteredArrayUsingPredicate(predicate)
-}
-
-func (x *Array) asArray() *raw.NSArray[objc.ID] { return x.inner }
-
-func (x *Array) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Arrayable is the interface implemented by [Array], for mocking and DI.
 type Arrayable interface {
-	Unwrap() *raw.NSArray[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Array
-	ObjectAtIndex(index uint) objc.ID
-	Count() uint
-	ArrayByAddingObject(anObject objc.ID) *raw.NSArray[objc.ID]
-	ArrayByAddingObjectsFromArray(otherArray *raw.NSArray[objc.ID]) *raw.NSArray[objc.ID]
-	ComponentsJoinedByString(separator string) *String
-	ContainsObject(anObject objc.ID) bool
-	DescriptionWithLocale(locale objc.ID) *String
-	DescriptionWithLocaleIndent(locale objc.ID, level uint) *String
-	FirstObjectCommonWithArray(otherArray *raw.NSArray[objc.ID]) objc.ID
-	GetObjectsRange(objects unsafe.Pointer, range_ raw.NSRange)
-	IndexOfObject(anObject objc.ID) uint
-	IndexOfObjectInRange(anObject objc.ID, range_ raw.NSRange) uint
-	IndexOfObjectIdenticalTo(anObject objc.ID) uint
-	IndexOfObjectIdenticalToInRange(anObject objc.ID, range_ raw.NSRange) uint
-	IsEqualToArray(otherArray *raw.NSArray[objc.ID]) bool
-	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
-	ReverseObjectEnumerator() *raw.NSEnumerator[objc.ID]
-	SortedArrayUsingFunctionContext(comparator unsafe.Pointer, context_ unsafe.Pointer) *raw.NSArray[objc.ID]
-	SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint *raw.NSData) *raw.NSArray[objc.ID]
-	SortedArrayUsingSelector(comparator objc.SEL) *raw.NSArray[objc.ID]
-	SubarrayWithRange(range_ raw.NSRange) *raw.NSArray[objc.ID]
-	WriteToURLError(url string) (bool, error)
-	MakeObjectsPerformSelector(aSelector objc.SEL)
-	MakeObjectsPerformSelectorWithObject(aSelector objc.SEL, argument objc.ID)
-	ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID]
-	ObjectAtIndexedSubscript(idx uint) objc.ID
-	EnumerateObjectsUsing(block objc.Block)
-	EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
-	EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block)
-	IndexOfObjectPassingTest(predicate objc.Block) uint
-	IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint
-	IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint
-	IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet
-	IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet
-	IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet
-	SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
-	SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
-	IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint
-	FirstObject() objc.ID
-	LastObject() objc.ID
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Array
+	ObjectAtIndex(index int) obj.Object
+	Count() int
+	ArrayByAddingObject(anObject obj.Object) []obj.Object
+	ArrayByAddingObjectsFromArray(otherArray []obj.Object) []obj.Object
+	ComponentsJoinedByString(separator string) string
+	ContainsObject(anObject obj.Object) bool
+	DescriptionWithLocale(locale obj.Object) string
+	DescriptionWithLocaleIndent(locale obj.Object, level int) string
+	FirstObjectCommonWithArray(otherArray []obj.Object) obj.Object
+	IndexOfObject(anObject obj.Object) int
+	IndexOfObjectIdenticalTo(anObject obj.Object) int
+	IsEqualToArray(otherArray []obj.Object) bool
+	ObjectEnumerator() obj.Object
+	ReverseObjectEnumerator() obj.Object
+	WriteToURL(url string) error
+	ObjectsAtIndexes(indexes *IndexSet) []obj.Object
+	ObjectAtIndexedSubscript(idx int) obj.Object
+	EnumerateObjectsUsing(block func(obj.Object, int, *bool))
+	EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, int, *bool))
+	EnumerateObjectsAtIndexesOptionsUsing(s *IndexSet, opts EnumerationOptions, block func(obj.Object, int, *bool))
+	IndexOfObjectPassingTest(predicate func(obj.Object, int, *bool) bool) int
+	IndexOfObjectWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
+	IndexOfObjectAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) int
+	IndexesOfObjectsPassingTest(predicate func(obj.Object, int, *bool) bool) *IndexSet
+	IndexesOfObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
+	IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts EnumerationOptions, predicate func(obj.Object, int, *bool) bool) *IndexSet
+	FirstObject() obj.Object
+	LastObject() obj.Object
 	SortedArrayHint() *Data
-	DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
-	DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID]
-	DifferenceFromArray(other *raw.NSArray[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID]
-	ArrayByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSArray[objc.ID]
-	GetObjects(objects unsafe.Pointer)
+	DifferenceFromArrayWithOptionsUsingEquivalenceTest(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions, block func(obj.Object, obj.Object) bool) obj.Object
+	DifferenceFromArrayWithOptions(other []obj.Object, options OrderedCollectionDifferenceCalculationOptions) obj.Object
+	DifferenceFromArray(other []obj.Object) obj.Object
+	ArrayByApplyingDifference(difference obj.Object) []obj.Object
 	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
 	WriteToURLAtomically(url string, atomically bool) bool
-	PathsMatchingExtensions(filterTypes ...StringProvider) *raw.NSArray[*raw.NSString]
-	AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
-	RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, context_ unsafe.Pointer)
-	RemoveObserverFromObjectsAtIndexesForKeyPath(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string)
-	SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID]
-	FilteredArrayUsingPredicate(predicate *raw.NSPredicate) *raw.NSArray[objc.ID]
+	PathsMatchingExtensions(filterTypes []string) []string
+	RemoveObserverFromObjectsAtIndexesForKeyPath(observer *Object, indexes *IndexSet, keyPath string)
+	SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object
+	FilteredArrayUsingPredicate(predicate *Predicate) []obj.Object
 }
 
 var _ Arrayable = (*Array)(nil)
+
+// isArray marks Array — and, by embedding promotion, its
+// subclasses — as a member of the Array hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Array) isArray() {}
+
+var _ ArrayProvider = (*Array)(nil)

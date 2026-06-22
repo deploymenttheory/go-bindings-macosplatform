@@ -5,203 +5,170 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
+// PhysicsWorld is an idiomatic wrapper over the Objective-C class SCNPhysicsWorld.
 //
-// PhysicsWorld wraps [raw.SCNPhysicsWorld] with a fluent Go API.
+// The global simulation of collisions, gravity, joints, and other physics effects in a scene.
 type PhysicsWorld struct {
-	inner *raw.SCNPhysicsWorld
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsWorld].
-func (x *PhysicsWorld) Unwrap() *raw.SCNPhysicsWorld { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsWorld) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsWorldFromID adopts an existing object pointer as a PhysicsWorld (nil for 0).
+// PhysicsWorldFromID adopts an existing Objective-C object as a PhysicsWorld
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsWorldFromID(id objc.ID) *PhysicsWorld {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsWorld{inner: raw.SCNPhysicsWorldFromID(id)}
-}
-
-// NewPhysicsWorld creates a new [PhysicsWorld].
-func NewPhysicsWorld() *PhysicsWorld {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsWorld")), objc.RegisterName("new"))
-	return &PhysicsWorld{inner: raw.SCNPhysicsWorldFromID(_id)}
-}
-
-// A vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
-//
-// WithGravity sets the gravity property and returns the receiver for chaining.
-func (x *PhysicsWorld) WithGravity(gravity raw.SCNVector3) *PhysicsWorld {
-	x.inner.SetGravity(gravity)
+	x := &PhysicsWorld{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The rate at which the simulation executes.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
-func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
-	x.inner.SetSpeed(speed)
-	return x
-}
-
-// The time interval between updates to the physics simulation.
-//
-// WithTimeStep sets the timeStep property and returns the receiver for chaining.
-func (x *PhysicsWorld) WithTimeStep(timeStep float64) *PhysicsWorld {
-	x.inner.SetTimeStep(timeStep)
-	return x
-}
-
-// A delegate that is called when two physics bodies come in contact with each other.
-//
-// WithContactDelegate sets the contactDelegate property and returns the receiver for chaining.
-func (x *PhysicsWorld) WithContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate) *PhysicsWorld {
-	x.inner.SetContactDelegate(contactDelegate)
-	return x
-}
-
-// Adds a behavior to the physics world.
-//
-// AddBehavior calls the underlying AddBehavior.
-func (x *PhysicsWorld) AddBehavior(behavior *raw.SCNPhysicsBehavior) {
-	x.inner.AddBehavior(behavior)
-}
-
-// Removes a behavior from the physics world.
-//
-// RemoveBehavior calls the underlying RemoveBehavior.
-func (x *PhysicsWorld) RemoveBehavior(behavior *raw.SCNPhysicsBehavior) {
-	x.inner.RemoveBehavior(behavior)
-}
-
-// Removes all behaviors affecting bodies in the physics world.
-//
-// RemoveAllBehaviors calls the underlying RemoveAllBehaviors.
-func (x *PhysicsWorld) RemoveAllBehaviors() {
-	x.inner.RemoveAllBehaviors()
-}
-
-// Searches for physics bodies along a line segment between two points in the physics world.
-//
-// RayTestWithSegmentFromPointToPointOptions calls the underlying RayTestWithSegmentFromPointToPointOptions.
-func (x *PhysicsWorld) RayTestWithSegmentFromPointToPointOptions(origin raw.SCNVector3, dest raw.SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNHitTestResult] {
-	return x.inner.RayTestWithSegmentFromPointToPointOptions(origin, dest, options)
-}
-
-// Checks for contacts between two physics bodies.
-//
-// ContactTestBetweenBodyAndBodyOptions calls the underlying ContactTestBetweenBodyAndBodyOptions.
-func (x *PhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *raw.SCNPhysicsBody, bodyB *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
-	return x.inner.ContactTestBetweenBodyAndBodyOptions(bodyA, bodyB, options)
-}
-
-// Checks for contacts between one physics body and any other bodies in the physics world.
-//
-// ContactTestWithBodyOptions calls the underlying ContactTestWithBodyOptions.
-func (x *PhysicsWorld) ContactTestWithBodyOptions(body *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
-	return x.inner.ContactTestWithBodyOptions(body, options)
-}
-
-// Searches for physics bodies in the space formed by moving a convex shape through the physics world.
-//
-// ConvexSweepTestWithShapeFromTransformToTransformOptions calls the underlying ConvexSweepTestWithShapeFromTransformToTransformOptions.
-func (x *PhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *raw.SCNPhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact] {
-	return x.inner.ConvexSweepTestWithShapeFromTransformToTransformOptions(shape, from, to, options)
-}
-
-// Forces the physics engine to reevaluate possible collisions between physics bodies.
-//
-// UpdateCollisionPairs calls the underlying UpdateCollisionPairs.
-func (x *PhysicsWorld) UpdateCollisionPairs() {
-	x.inner.UpdateCollisionPairs()
-}
-
-// Gravity calls the underlying Gravity.
-func (x *PhysicsWorld) Gravity() raw.SCNVector3 {
-	return x.inner.Gravity()
-}
-
-// SetGravity calls the underlying SetGravity.
-func (x *PhysicsWorld) SetGravity(gravity raw.SCNVector3) {
-	x.inner.SetGravity(gravity)
-}
-
-// Speed calls the underlying Speed.
-func (x *PhysicsWorld) Speed() float64 {
-	return x.inner.Speed()
-}
-
-// SetSpeed calls the underlying SetSpeed.
-func (x *PhysicsWorld) SetSpeed(speed float64) {
-	x.inner.SetSpeed(speed)
-}
-
-// TimeStep calls the underlying TimeStep.
-func (x *PhysicsWorld) TimeStep() float64 {
-	return x.inner.TimeStep()
-}
-
-// SetTimeStep calls the underlying SetTimeStep.
-func (x *PhysicsWorld) SetTimeStep(timeStep float64) {
-	x.inner.SetTimeStep(timeStep)
-}
-
-// ContactDelegate calls the underlying ContactDelegate.
-func (x *PhysicsWorld) ContactDelegate() raw.SCNPhysicsContactDelegate {
-	return x.inner.ContactDelegate()
-}
-
-// SetContactDelegate calls the underlying SetContactDelegate.
-func (x *PhysicsWorld) SetContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate) {
-	x.inner.SetContactDelegate(contactDelegate)
-}
-
-// AllBehaviors returns the collection as a Go slice.
-func (x *PhysicsWorld) AllBehaviors() []*PhysicsBehavior {
-	arr := x.inner.AllBehaviors()
-	if arr == nil {
+// physicsWorldAdopt wraps an Objective-C object that this code just created as a
+// PhysicsWorld (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsWorldAdopt(id objc.ID) *PhysicsWorld {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PhysicsBehavior {
-		return &PhysicsBehavior{inner: raw.SCNPhysicsBehaviorFromID(purego.Retain(_id))}
-	})
+	x := &PhysicsWorld{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsWorld) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsWorld) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsWorld) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PhysicsWorld) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPhysicsWorld creates a new PhysicsWorld.
+func NewPhysicsWorld() *PhysicsWorld {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsWorld")), objc.RegisterName("new"))
+	return physicsWorldAdopt(_id)
+}
+
+// WithSpeed the rate at which the simulation executes.
+func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
+	return x
+}
+
+// WithTimeStep the time interval between updates to the physics simulation.
+func (x *PhysicsWorld) WithTimeStep(timeStep float64) *PhysicsWorld {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
+	return x
+}
+
+// AddBehavior adds a behavior to the physics world.
+func (x *PhysicsWorld) AddBehavior(behavior *PhysicsBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBehavior:"), objref.IDOf(behavior))
+}
+
+// RemoveBehavior removes a behavior from the physics world.
+func (x *PhysicsWorld) RemoveBehavior(behavior *PhysicsBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
+}
+
+// RemoveAllBehaviors removes all behaviors affecting bodies in the physics world.
+func (x *PhysicsWorld) RemoveAllBehaviors() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllBehaviors"))
+}
+
+// ContactTestBetweenBodyAndBodyOptions checks for contacts between two physics bodies.
+func (x *PhysicsWorld) ContactTestBetweenBodyAndBodyOptions(bodyA *PhysicsBody, bodyB *PhysicsBody, options obj.Object) []*PhysicsContact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactTestBetweenBody:andBody:options:"), objref.IDOf(bodyA), objref.IDOf(bodyB), objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
+}
+
+// ContactTestWithBodyOptions checks for contacts between one physics body and any other bodies in the physics world.
+func (x *PhysicsWorld) ContactTestWithBodyOptions(body *PhysicsBody, options obj.Object) []*PhysicsContact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactTestWithBody:options:"), objref.IDOf(body), objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
+}
+
+// ConvexSweepTestWithShapeFromTransformToTransformOptions searches for physics bodies in the space formed by moving a convex shape through the physics world.
+func (x *PhysicsWorld) ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *PhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options obj.Object) []*PhysicsContact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convexSweepTestWithShape:fromTransform:toTransform:options:"), objref.IDOf(shape), from, to, objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PhysicsContact { return PhysicsContactFromID(_id) })
+}
+
+// UpdateCollisionPairs forces the physics engine to reevaluate possible collisions between physics bodies.
+func (x *PhysicsWorld) UpdateCollisionPairs() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCollisionPairs"))
+}
+
+// Speed wraps the corresponding Objective-C method.
+func (x *PhysicsWorld) Speed() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+	return _r
+}
+
+// SetSpeed wraps the corresponding Objective-C method.
+func (x *PhysicsWorld) SetSpeed(speed float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
+}
+
+// TimeStep wraps the corresponding Objective-C method.
+func (x *PhysicsWorld) TimeStep() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeStep"))
+	return _r
+}
+
+// SetTimeStep wraps the corresponding Objective-C method.
+func (x *PhysicsWorld) SetTimeStep(timeStep float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStep:"), timeStep)
+}
+
+// AllBehaviors wraps the corresponding Objective-C method.
+//
+// AllBehaviors returns the collection as a Go slice.
+func (x *PhysicsWorld) AllBehaviors() []*PhysicsBehavior {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allBehaviors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsBehavior { return PhysicsBehaviorFromID(_id) })
 }
 
 // PhysicsWorldable is the interface implemented by [PhysicsWorld], for mocking and DI.
 type PhysicsWorldable interface {
-	Unwrap() *raw.SCNPhysicsWorld
-	WithGravity(gravity raw.SCNVector3) *PhysicsWorld
+	obj.Object
 	WithSpeed(speed float64) *PhysicsWorld
 	WithTimeStep(timeStep float64) *PhysicsWorld
-	WithContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate) *PhysicsWorld
-	AddBehavior(behavior *raw.SCNPhysicsBehavior)
-	RemoveBehavior(behavior *raw.SCNPhysicsBehavior)
+	AddBehavior(behavior *PhysicsBehavior)
+	RemoveBehavior(behavior *PhysicsBehavior)
 	RemoveAllBehaviors()
-	RayTestWithSegmentFromPointToPointOptions(origin raw.SCNVector3, dest raw.SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNHitTestResult]
-	ContactTestBetweenBodyAndBodyOptions(bodyA *raw.SCNPhysicsBody, bodyB *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact]
-	ContactTestWithBodyOptions(body *raw.SCNPhysicsBody, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact]
-	ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *raw.SCNPhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNPhysicsContact]
+	ContactTestBetweenBodyAndBodyOptions(bodyA *PhysicsBody, bodyB *PhysicsBody, options obj.Object) []*PhysicsContact
+	ContactTestWithBodyOptions(body *PhysicsBody, options obj.Object) []*PhysicsContact
+	ConvexSweepTestWithShapeFromTransformToTransformOptions(shape *PhysicsShape, from quartzcore.CATransform3D, to quartzcore.CATransform3D, options obj.Object) []*PhysicsContact
 	UpdateCollisionPairs()
-	Gravity() raw.SCNVector3
-	SetGravity(gravity raw.SCNVector3)
 	Speed() float64
 	SetSpeed(speed float64)
 	TimeStep() float64
 	SetTimeStep(timeStep float64)
-	ContactDelegate() raw.SCNPhysicsContactDelegate
-	SetContactDelegate(contactDelegate raw.SCNPhysicsContactDelegate)
 	AllBehaviors() []*PhysicsBehavior
 }
 

@@ -5,138 +5,156 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
+// VertexAttributeData is an idiomatic wrapper over the Objective-C class MDLVertexAttributeData.
 //
-// VertexAttributeData wraps [raw.MDLVertexAttributeData] with a fluent Go API.
+// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
 type VertexAttributeData struct {
-	inner *raw.MDLVertexAttributeData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLVertexAttributeData].
-func (x *VertexAttributeData) Unwrap() *raw.MDLVertexAttributeData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexAttributeData) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexAttributeDataFromID adopts an existing object pointer as a VertexAttributeData (nil for 0).
+// VertexAttributeDataFromID adopts an existing Objective-C object as a VertexAttributeData
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexAttributeDataFromID(id objc.ID) *VertexAttributeData {
 	if id == 0 {
 		return nil
 	}
-	return &VertexAttributeData{inner: raw.MDLVertexAttributeDataFromID(id)}
-}
-
-// NewVertexAttributeData creates a new [VertexAttributeData].
-func NewVertexAttributeData() *VertexAttributeData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVertexAttributeData")), objc.RegisterName("new"))
-	return &VertexAttributeData{inner: raw.MDLVertexAttributeDataFromID(_id)}
-}
-
-// WithMap sets the map_ property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
-	x.inner.SetMap(map_.Unwrap())
+	x := &VertexAttributeData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The stride, in bytes, between vertex information for consecutive vertices in the data.
-//
-// WithStride sets the stride property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithStride(stride uint) *VertexAttributeData {
-	x.inner.SetStride(stride)
-	return x
-}
-
-// The format of per-vertex data for the attribute.
-//
-// WithFormat sets the format property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithFormat(format MDLVertexFormat) *VertexAttributeData {
-	x.inner.SetFormat(raw.MDLVertexFormat(format))
-	return x
-}
-
-// WithBufferSize sets the bufferSize property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithBufferSize(bufferSize uint) *VertexAttributeData {
-	x.inner.SetBufferSize(bufferSize)
-	return x
-}
-
-// Map calls the underlying Map.
-func (x *VertexAttributeData) Map() *MeshBufferMap {
-	_r := x.inner.Map()
-	if _r == nil {
+// vertexAttributeDataAdopt wraps an Objective-C object that this code just created as a
+// VertexAttributeData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexAttributeDataAdopt(id objc.ID) *VertexAttributeData {
+	if id == 0 {
 		return nil
 	}
-	return &MeshBufferMap{inner: _r}
+	x := &VertexAttributeData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMap calls the underlying SetMap.
-func (x *VertexAttributeData) SetMap(map_ *raw.MDLMeshBufferMap) {
-	x.inner.SetMap(map_)
+// Description returns the object's -description text.
+func (x *VertexAttributeData) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// DataStart calls the underlying DataStart.
-func (x *VertexAttributeData) DataStart() unsafe.Pointer {
-	return x.inner.DataStart()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexAttributeData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDataStart calls the underlying SetDataStart.
-func (x *VertexAttributeData) SetDataStart(dataStart unsafe.Pointer) {
-	x.inner.SetDataStart(dataStart)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexAttributeData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Stride calls the underlying Stride.
-func (x *VertexAttributeData) Stride() uint {
-	return x.inner.Stride()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VertexAttributeData) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetStride calls the underlying SetStride.
-func (x *VertexAttributeData) SetStride(stride uint) {
-	x.inner.SetStride(stride)
+// NewVertexAttributeData creates a new VertexAttributeData.
+func NewVertexAttributeData() *VertexAttributeData {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLVertexAttributeData")), objc.RegisterName("new"))
+	return vertexAttributeDataAdopt(_id)
 }
 
-// Format calls the underlying Format.
-func (x *VertexAttributeData) Format() MDLVertexFormat {
-	return MDLVertexFormat(x.inner.Format())
+// WithMap sets the property and returns the receiver so calls can be chained.
+func (x *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMap:"), objref.IDOf(map_))
+	return x
 }
 
-// SetFormat calls the underlying SetFormat.
-func (x *VertexAttributeData) SetFormat(format MDLVertexFormat) {
-	x.inner.SetFormat(raw.MDLVertexFormat(format))
+// WithStride the stride, in bytes, between vertex information for consecutive vertices in the data.
+func (x *VertexAttributeData) WithStride(stride int) *VertexAttributeData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
+	return x
 }
 
-// BufferSize calls the underlying BufferSize.
-func (x *VertexAttributeData) BufferSize() uint {
-	return x.inner.BufferSize()
+// WithFormat the format of per-vertex data for the attribute.
+func (x *VertexAttributeData) WithFormat(format VertexFormat) *VertexAttributeData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
+	return x
 }
 
-// SetBufferSize calls the underlying SetBufferSize.
-func (x *VertexAttributeData) SetBufferSize(bufferSize uint) {
-	x.inner.SetBufferSize(bufferSize)
+// WithBufferSize sets the property and returns the receiver so calls can be chained.
+func (x *VertexAttributeData) WithBufferSize(bufferSize int) *VertexAttributeData {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
+	return x
+}
+
+// Map wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) Map() *MeshBufferMap {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("map"))
+	return MeshBufferMapFromID(_r)
+}
+
+// SetMap wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) SetMap(map_ *MeshBufferMap) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMap:"), objref.IDOf(map_))
+}
+
+// Stride wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) Stride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+	return _r
+}
+
+// SetStride wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) SetStride(stride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
+}
+
+// Format wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) Format() VertexFormat {
+	_r := objc.Send[VertexFormat](objref.IDOf(x), objc.RegisterName("format"))
+	return _r
+}
+
+// SetFormat wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) SetFormat(format VertexFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
+}
+
+// BufferSize wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) BufferSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSize"))
+	return _r
+}
+
+// SetBufferSize wraps the corresponding Objective-C method.
+func (x *VertexAttributeData) SetBufferSize(bufferSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 }
 
 // VertexAttributeDataable is the interface implemented by [VertexAttributeData], for mocking and DI.
 type VertexAttributeDataable interface {
-	Unwrap() *raw.MDLVertexAttributeData
+	obj.Object
 	WithMap(map_ *MeshBufferMap) *VertexAttributeData
-	WithStride(stride uint) *VertexAttributeData
-	WithFormat(format MDLVertexFormat) *VertexAttributeData
-	WithBufferSize(bufferSize uint) *VertexAttributeData
+	WithStride(stride int) *VertexAttributeData
+	WithFormat(format VertexFormat) *VertexAttributeData
+	WithBufferSize(bufferSize int) *VertexAttributeData
 	Map() *MeshBufferMap
-	SetMap(map_ *raw.MDLMeshBufferMap)
-	DataStart() unsafe.Pointer
-	SetDataStart(dataStart unsafe.Pointer)
-	Stride() uint
-	SetStride(stride uint)
-	Format() MDLVertexFormat
-	SetFormat(format MDLVertexFormat)
-	BufferSize() uint
-	SetBufferSize(bufferSize uint)
+	SetMap(map_ *MeshBufferMap)
+	Stride() int
+	SetStride(stride int)
+	Format() VertexFormat
+	SetFormat(format VertexFormat)
+	BufferSize() int
+	SetBufferSize(bufferSize int)
 }
 
 var _ VertexAttributeDataable = (*VertexAttributeData)(nil)

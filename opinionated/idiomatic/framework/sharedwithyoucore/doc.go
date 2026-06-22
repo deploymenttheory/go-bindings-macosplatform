@@ -3,4 +3,13 @@
 //go:build darwin
 
 // Package sharedwithyoucore provides a fluent Go API over the macOS SharedWithYouCore framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Action: [StartCollaborationAction], [UpdateCollaborationParticipantsAction]
+//   - CollaborationOptionsGroup: [CollaborationOptionsPickerGroup]
+//   - PersonIdentityProof: [SignedPersonIdentityProof]
 package sharedwithyoucore

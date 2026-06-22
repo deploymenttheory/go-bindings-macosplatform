@@ -6,86 +6,103 @@ package replaykit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// The shared recorder object that provides the ability to record audio and video of your app.
+// ScreenRecorder is an idiomatic wrapper over the Objective-C class RPScreenRecorder.
 //
-// ScreenRecorder wraps [raw.RPScreenRecorder] with a fluent Go API.
+// The shared recorder object that provides the ability to record audio and video of your app.
 type ScreenRecorder struct {
-	inner *raw.RPScreenRecorder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.RPScreenRecorder].
-func (x *ScreenRecorder) Unwrap() *raw.RPScreenRecorder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenRecorder) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenRecorderFromID adopts an existing object pointer as a ScreenRecorder (nil for 0).
+// ScreenRecorderFromID adopts an existing Objective-C object as a ScreenRecorder
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenRecorderFromID(id objc.ID) *ScreenRecorder {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenRecorder{inner: raw.RPScreenRecorderFromID(id)}
+	x := &ScreenRecorder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewScreenRecorder creates a new [ScreenRecorder].
+// screenRecorderAdopt wraps an Objective-C object that this code just created as a
+// ScreenRecorder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenRecorderAdopt(id objc.ID) *ScreenRecorder {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenRecorder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenRecorder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenRecorder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenRecorder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScreenRecorder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScreenRecorder creates a new ScreenRecorder.
 func NewScreenRecorder() *ScreenRecorder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("RPScreenRecorder")), objc.RegisterName("new"))
-	return &ScreenRecorder{inner: raw.RPScreenRecorderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("RPScreenRecorder")), objc.RegisterName("new"))
+	return screenRecorderAdopt(_id)
 }
 
-// The delegate for the screen recorder.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ScreenRecorder) WithDelegate(delegate raw.RPScreenRecorderDelegate) *ScreenRecorder {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that indicates whether the microphone is currently enabled.
-//
-// WithMicrophoneEnabled sets the microphoneEnabled property and returns the receiver for chaining.
+// WithMicrophoneEnabled a Boolean value that indicates whether the microphone is currently enabled.
 func (x *ScreenRecorder) WithMicrophoneEnabled(microphoneEnabled bool) *ScreenRecorder {
-	x.inner.SetMicrophoneEnabled(microphoneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneEnabled:"), microphoneEnabled)
 	return x
 }
 
-// A Boolean value that indicates whether the camera is currently enabled.
-//
-// WithCameraEnabled sets the cameraEnabled property and returns the receiver for chaining.
+// WithCameraEnabled a Boolean value that indicates whether the camera is currently enabled.
 func (x *ScreenRecorder) WithCameraEnabled(cameraEnabled bool) *ScreenRecorder {
-	x.inner.SetCameraEnabled(cameraEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraEnabled:"), cameraEnabled)
 	return x
 }
 
-// The camera position to use.
-//
-// WithCameraPosition sets the cameraPosition property and returns the receiver for chaining.
-func (x *ScreenRecorder) WithCameraPosition(cameraPosition RPCameraPosition) *ScreenRecorder {
-	x.inner.SetCameraPosition(raw.RPCameraPosition(cameraPosition))
+// WithCameraPosition the camera position to use.
+func (x *ScreenRecorder) WithCameraPosition(cameraPosition CameraPosition) *ScreenRecorder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraPosition:"), cameraPosition)
 	return x
 }
 
-// Starts recording the app display.
+// StartRecordingWithHandler starts recording the app display.
 //
 // StartRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StartRecordingWithHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startRecordingWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -94,25 +111,22 @@ func (x *ScreenRecorder) StartRecordingWithHandler(ctx context.Context) error {
 	}
 }
 
-// Stops the current recording.
+// StopRecordingWithHandler stops the current recording.
 //
 // StopRecordingWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error) {
+func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (result *PreviewViewController, err error) {
 	type _result struct {
 		val *PreviewViewController
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopRecordingWithHandler(func(_p0 *raw.RPPreviewViewController, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &PreviewViewController{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = PreviewViewControllerFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRecordingWithHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -122,18 +136,17 @@ func (x *ScreenRecorder) StopRecordingWithHandler(ctx context.Context) (*Preview
 	}
 }
 
-// Stops the current recording and writes the movie to the specified output URL.
+// StopRecordingWithOutputURL stops the current recording and writes the movie to the specified output URL.
 //
 // StopRecordingWithOutputURL blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url string) error {
 	_ch := make(chan error, 1)
-	x.inner.StopRecordingWithOutputURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRecordingWithOutputURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -142,14 +155,15 @@ func (x *ScreenRecorder) StopRecordingWithOutputURL(ctx context.Context, url str
 	}
 }
 
-// Discards the current recording.
+// DiscardRecordingWithHandler discards the current recording.
 //
 // DiscardRecordingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.DiscardRecordingWithHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardRecordingWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -158,40 +172,17 @@ func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error 
 	}
 }
 
-// Starts screen and audio capture.
-//
-// StartCaptureWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error {
-	_ch := make(chan error, 1)
-	x.inner.StartCaptureWithHandlerCompletionHandler(func(_a0 unsafe.Pointer, _a1 raw.RPSampleBufferType, _a2 unsafe.Pointer) {
-		captureHandler(_a0, RPSampleBufferType(_a1), _a2)
-	}, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// Stops screen capture
+// StopCaptureWithHandler stops screen capture
 //
 // StopCaptureWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StopCaptureWithHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCaptureWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -200,18 +191,17 @@ func (x *ScreenRecorder) StopCaptureWithHandler(ctx context.Context) error {
 	}
 }
 
-// Starts buffering a clip recording.
+// StartClipBuffering starts buffering a clip recording.
 //
 // StartClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StartClipBufferingWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startClipBufferingWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -220,18 +210,17 @@ func (x *ScreenRecorder) StartClipBuffering(ctx context.Context) error {
 	}
 }
 
-// Stops buffering a clip recording.
+// StopClipBuffering stops buffering a clip recording.
 //
 // StopClipBuffering blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StopClipBufferingWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopClipBufferingWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -240,18 +229,17 @@ func (x *ScreenRecorder) StopClipBuffering(ctx context.Context) error {
 	}
 }
 
-// Exports a clip recording to a file.
+// ExportClipToURLDuration exports a clip recording to a file.
 //
 // ExportClipToURLDuration blocks until the operation completes or ctx is cancelled.
 func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string, duration float64) error {
 	_ch := make(chan error, 1)
-	x.inner.ExportClipToURLDurationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), duration, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportClipToURL:duration:completionHandler:"), rt.FileURL(url), duration, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -260,88 +248,80 @@ func (x *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url string
 	}
 }
 
-// Delegate calls the underlying Delegate.
-func (x *ScreenRecorder) Delegate() raw.RPScreenRecorderDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *ScreenRecorder) SetDelegate(delegate raw.RPScreenRecorderDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsAvailable calls the underlying IsAvailable.
+// IsAvailable wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsAvailable() bool {
-	return x.inner.IsAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAvailable"))
+	return _r
 }
 
-// IsRecording calls the underlying IsRecording.
+// IsRecording wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsRecording() bool {
-	return x.inner.IsRecording()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecording"))
+	return _r
 }
 
-// IsMicrophoneEnabled calls the underlying IsMicrophoneEnabled.
+// IsMicrophoneEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsMicrophoneEnabled() bool {
-	return x.inner.IsMicrophoneEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMicrophoneEnabled"))
+	return _r
 }
 
-// SetMicrophoneEnabled calls the underlying SetMicrophoneEnabled.
+// SetMicrophoneEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) SetMicrophoneEnabled(microphoneEnabled bool) {
-	x.inner.SetMicrophoneEnabled(microphoneEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMicrophoneEnabled:"), microphoneEnabled)
 }
 
-// IsCameraEnabled calls the underlying IsCameraEnabled.
+// IsCameraEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) IsCameraEnabled() bool {
-	return x.inner.IsCameraEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCameraEnabled"))
+	return _r
 }
 
-// SetCameraEnabled calls the underlying SetCameraEnabled.
+// SetCameraEnabled wraps the corresponding Objective-C method.
 func (x *ScreenRecorder) SetCameraEnabled(cameraEnabled bool) {
-	x.inner.SetCameraEnabled(cameraEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraEnabled:"), cameraEnabled)
 }
 
-// CameraPosition calls the underlying CameraPosition.
-func (x *ScreenRecorder) CameraPosition() RPCameraPosition {
-	return RPCameraPosition(x.inner.CameraPosition())
+// CameraPosition wraps the corresponding Objective-C method.
+func (x *ScreenRecorder) CameraPosition() CameraPosition {
+	_r := objc.Send[CameraPosition](objref.IDOf(x), objc.RegisterName("cameraPosition"))
+	return _r
 }
 
-// SetCameraPosition calls the underlying SetCameraPosition.
-func (x *ScreenRecorder) SetCameraPosition(cameraPosition RPCameraPosition) {
-	x.inner.SetCameraPosition(raw.RPCameraPosition(cameraPosition))
+// SetCameraPosition wraps the corresponding Objective-C method.
+func (x *ScreenRecorder) SetCameraPosition(cameraPosition CameraPosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraPosition:"), cameraPosition)
 }
 
-// CameraPreviewView calls the underlying CameraPreviewView.
-func (x *ScreenRecorder) CameraPreviewView() *appkit.NSView {
-	return x.inner.CameraPreviewView()
+// CameraPreviewView wraps the corresponding Objective-C method.
+func (x *ScreenRecorder) CameraPreviewView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraPreviewView"))
+	return obj.Wrap(_r)
 }
 
 // ScreenRecorderable is the interface implemented by [ScreenRecorder], for mocking and DI.
 type ScreenRecorderable interface {
-	Unwrap() *raw.RPScreenRecorder
-	WithDelegate(delegate raw.RPScreenRecorderDelegate) *ScreenRecorder
+	obj.Object
 	WithMicrophoneEnabled(microphoneEnabled bool) *ScreenRecorder
 	WithCameraEnabled(cameraEnabled bool) *ScreenRecorder
-	WithCameraPosition(cameraPosition RPCameraPosition) *ScreenRecorder
+	WithCameraPosition(cameraPosition CameraPosition) *ScreenRecorder
 	StartRecordingWithHandler(ctx context.Context) error
 	StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error)
 	StopRecordingWithOutputURL(ctx context.Context, url string) error
 	DiscardRecordingWithHandler(ctx context.Context) error
-	StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error
 	StopCaptureWithHandler(ctx context.Context) error
 	StartClipBuffering(ctx context.Context) error
 	StopClipBuffering(ctx context.Context) error
 	ExportClipToURLDuration(ctx context.Context, url string, duration float64) error
-	Delegate() raw.RPScreenRecorderDelegate
-	SetDelegate(delegate raw.RPScreenRecorderDelegate)
 	IsAvailable() bool
 	IsRecording() bool
 	IsMicrophoneEnabled() bool
 	SetMicrophoneEnabled(microphoneEnabled bool)
 	IsCameraEnabled() bool
 	SetCameraEnabled(cameraEnabled bool)
-	CameraPosition() RPCameraPosition
-	SetCameraPosition(cameraPosition RPCameraPosition)
-	CameraPreviewView() *appkit.NSView
+	CameraPosition() CameraPosition
+	SetCameraPosition(cameraPosition CameraPosition)
+	CameraPreviewView() obj.Object
 }
 
 var _ ScreenRecorderable = (*ScreenRecorder)(nil)

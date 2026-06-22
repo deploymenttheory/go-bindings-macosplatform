@@ -6,86 +6,115 @@ package intents
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Retrieve the user’s shortcuts and make shortcut suggestions.
+// VoiceShortcutCenter is an idiomatic wrapper over the Objective-C class INVoiceShortcutCenter.
 //
-// VoiceShortcutCenter wraps [raw.INVoiceShortcutCenter] with a fluent Go API.
+// Retrieve the user’s shortcuts and make shortcut suggestions.
 type VoiceShortcutCenter struct {
-	inner *raw.INVoiceShortcutCenter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INVoiceShortcutCenter].
-func (x *VoiceShortcutCenter) Unwrap() *raw.INVoiceShortcutCenter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoiceShortcutCenter) ID() objc.ID { return x.inner.Ptr() }
-
-// VoiceShortcutCenterFromID adopts an existing object pointer as a VoiceShortcutCenter (nil for 0).
+// VoiceShortcutCenterFromID adopts an existing Objective-C object as a VoiceShortcutCenter
+// (nil for 0), retaining it and registering a release finalizer.
 func VoiceShortcutCenterFromID(id objc.ID) *VoiceShortcutCenter {
 	if id == 0 {
 		return nil
 	}
-	return &VoiceShortcutCenter{inner: raw.INVoiceShortcutCenterFromID(id)}
+	x := &VoiceShortcutCenter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVoiceShortcutCenter creates a new [VoiceShortcutCenter].
+// voiceShortcutCenterAdopt wraps an Objective-C object that this code just created as a
+// VoiceShortcutCenter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voiceShortcutCenterAdopt(id objc.ID) *VoiceShortcutCenter {
+	if id == 0 {
+		return nil
+	}
+	x := &VoiceShortcutCenter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoiceShortcutCenter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoiceShortcutCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoiceShortcutCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *VoiceShortcutCenter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewVoiceShortcutCenter creates a new VoiceShortcutCenter.
 func NewVoiceShortcutCenter() *VoiceShortcutCenter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INVoiceShortcutCenter")), objc.RegisterName("new"))
-	return &VoiceShortcutCenter{inner: raw.INVoiceShortcutCenterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcutCenter")), objc.RegisterName("new"))
+	return voiceShortcutCenterAdopt(_id)
 }
 
-// Retrieves all shortcuts added to Siri for your app.
+// GetAllVoiceShortcutsWithCompletion retrieves all shortcuts added to Siri for your app.
 //
 // GetAllVoiceShortcutsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (*foundation.NSArray[*raw.INVoiceShortcut], error) {
+func (x *VoiceShortcutCenter) GetAllVoiceShortcutsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.INVoiceShortcut]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAllVoiceShortcutsWithCompletion(func(_p0 *foundation.NSArray[*raw.INVoiceShortcut], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllVoiceShortcutsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.INVoiceShortcut]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Retrieves a shortcut the user added to Siri.
+// GetVoiceShortcutWithIdentifierCompletion retrieves a shortcut the user added to Siri.
 //
 // GetVoiceShortcutWithIdentifierCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier *foundation.NSUUID) (*VoiceShortcut, error) {
+func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (result *VoiceShortcut, err error) {
 	type _result struct {
 		val *VoiceShortcut
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetVoiceShortcutWithIdentifierCompletion(identifier, func(_p0 *raw.INVoiceShortcut, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &VoiceShortcut{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = VoiceShortcutFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getVoiceShortcutWithIdentifier:completion:"), objref.IDOf(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -95,19 +124,17 @@ func (x *VoiceShortcutCenter) GetVoiceShortcutWithIdentifierCompletion(ctx conte
 	}
 }
 
-// Suggests shortcuts the user may want to add to Siri.
-//
-// SetShortcutSuggestions calls the underlying SetShortcutSuggestions.
-func (x *VoiceShortcutCenter) SetShortcutSuggestions(suggestions *foundation.NSArray[*raw.INShortcut]) {
-	x.inner.SetShortcutSuggestions(suggestions)
+// SetShortcutSuggestions suggests shortcuts the user may want to add to Siri.
+func (x *VoiceShortcutCenter) SetShortcutSuggestions(suggestions []*Shortcut) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortcutSuggestions:"), purego.SliceToNSArray(suggestions, func(_v *Shortcut) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VoiceShortcutCenterable is the interface implemented by [VoiceShortcutCenter], for mocking and DI.
 type VoiceShortcutCenterable interface {
-	Unwrap() *raw.INVoiceShortcutCenter
-	GetAllVoiceShortcutsWithCompletion(ctx context.Context) (*foundation.NSArray[*raw.INVoiceShortcut], error)
-	GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier *foundation.NSUUID) (*VoiceShortcut, error)
-	SetShortcutSuggestions(suggestions *foundation.NSArray[*raw.INShortcut])
+	obj.Object
+	GetAllVoiceShortcutsWithCompletion(ctx context.Context) (obj.Object, error)
+	GetVoiceShortcutWithIdentifierCompletion(ctx context.Context, identifier obj.Object) (*VoiceShortcut, error)
+	SetShortcutSuggestions(suggestions []*Shortcut)
 }
 
 var _ VoiceShortcutCenterable = (*VoiceShortcutCenter)(nil)

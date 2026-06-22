@@ -5,109 +5,89 @@
 package metalkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant MTKTextureLoaderErrorDomain
-// MTKTextureLoaderErrorDomain returns the string constant MTKTextureLoaderErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderErrorDomain())
+// MTKTextureLoaderErrorDomain returns the string constant MTKTextureLoaderErrorDomain, for use as a dictionary key or argument.
+func MTKTextureLoaderErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderErrorDomain")))
 }
 
-// @constant MTKTextureLoaderErrorKey
-// MTKTextureLoaderErrorKey returns the string constant MTKTextureLoaderErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderErrorKey() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderErrorKey())
+// MTKTextureLoaderErrorKey returns the string constant MTKTextureLoaderErrorKey, for use as a dictionary key or argument.
+func MTKTextureLoaderErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderErrorKey")))
 }
 
-// @constant MTKTextureLoaderOptionAllocateMipmaps @abstract Identifier to be used in an options NSDictionary with a boolean NSNumber specifying whether to allocate memory for mipmaps when creating the texture @discussion If the boolean value specified with this string is true, the resulting Metal texture will have been created with mipmaps whose contents are undefined. It is the responsibility of the caller to fill out the contents of the mipmap data unless MTLTextureLoaderOptionGenerateMipmaps is specified. If the file being loaded contains data for mipmaps (such as in a PVR or KTX file) this option does not need to be specified. In those cases the mipmap memory will be allocated and the image data loaded.
-// MTKTextureLoaderOptionAllocateMipmaps returns the string constant MTKTextureLoaderOptionAllocateMipmaps as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionAllocateMipmaps() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionAllocateMipmaps())
+// MTKTextureLoaderOptionAllocateMipmaps returns the string constant MTKTextureLoaderOptionAllocateMipmaps, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionAllocateMipmaps() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionAllocateMipmaps")))
 }
 
-// @constant MTKTextureLoaderOptionGenerateMipmaps @abstract Identifier to be used in an options NSDictionary with a boolean NSNumber specifying whether to generate mipmaps when creating the texture @discussion If the boolean value specified with this string is true, the resulting Metal texture will be created with mipmaps. If the file being loaded contains data for mipmaps (such as in a PVR or KTX file), specifying this option will overwrite the existing mipmap data in the loaded texture. This option can only be used if the pixel format of the texture is color filterable and color renderable. This option implies MTKTextureLoaderOptionAllocateMipmaps. Specifying this option will cause the MTKTextureLoader to submit work to the GPU on behalf of the caller.
-// MTKTextureLoaderOptionGenerateMipmaps returns the string constant MTKTextureLoaderOptionGenerateMipmaps as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionGenerateMipmaps() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionGenerateMipmaps())
+// MTKTextureLoaderOptionGenerateMipmaps returns the string constant MTKTextureLoaderOptionGenerateMipmaps, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionGenerateMipmaps() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionGenerateMipmaps")))
 }
 
-// @constant MTKTextureLoaderOptionSRGB @abstract Identifier to be used in an options NSDictionary with a boolean NSNumber specifying whether to create the texture with an sRGB (gamma corrected) pixel format @discussion If the boolean value specified with this string is true, the texture will be created with an sRGB pixel format regardless of whether the image file specifies that the data has already been gamma corrected. Likewise, if false, the texture will be created with a non-sRGB pixel format regardless of whether the image file specifies that the data has been gamma corrected. To use the sRGB information specified in the file, do not specify this in the options dictionary. @warning When deploying to OS's prior to macOS 10.15 / iOS 13.0, this option is ignored for loading KTX textures.
-// MTKTextureLoaderOptionSRGB returns the string constant MTKTextureLoaderOptionSRGB as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionSRGB() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionSRGB())
+// MTKTextureLoaderOptionSRGB returns the string constant MTKTextureLoaderOptionSRGB, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionSRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionSRGB")))
 }
 
-// @constant MTKTextureLoaderOptionTextureUsage @abstract Identifier to be used with an NSNumber specifying the MTLTextureUsage flags @discussion The resulting Metal texture will be created with the MTLTextureUsage flags indicated by the NSNumber associated with this string.
-// MTKTextureLoaderOptionTextureUsage returns the string constant MTKTextureLoaderOptionTextureUsage as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionTextureUsage() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionTextureUsage())
+// MTKTextureLoaderOptionTextureUsage returns the string constant MTKTextureLoaderOptionTextureUsage, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionTextureUsage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionTextureUsage")))
 }
 
-// @constant MTKTextureLoaderOptionTextureCPUCacheMode @abstract Identifier to be used with an NSNumber specifying the MTLCPUCacheMode @discussion The resulting Metal texture will be created with the MTLCPUCacheMode indicated by the NSNumber associated with this string.
-// MTKTextureLoaderOptionTextureCPUCacheMode returns the string constant MTKTextureLoaderOptionTextureCPUCacheMode as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionTextureCPUCacheMode() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionTextureCPUCacheMode())
+// MTKTextureLoaderOptionTextureCPUCacheMode returns the string constant MTKTextureLoaderOptionTextureCPUCacheMode, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionTextureCPUCacheMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionTextureCPUCacheMode")))
 }
 
-// @constant MTKTextureLoaderOptionTextureStorageMode @abstract Identifier to be used with an NSNumber specifying the MTLStorageMode @discussion The resulting Metal texture will be created with the MTLStorageMode indicated by the NSNumber associated with this string. If this option is omitted, the texture will be created with the default storage mode for Metal textures: MTLStorageModeShared on iOS, and MTLStorageModeManaged on OS X. Specifying this option with MTLTextureStorageModePrivate cause the MTKTextureLoader to submit work to the GPU on behalf of the caller.
-// MTKTextureLoaderOptionTextureStorageMode returns the string constant MTKTextureLoaderOptionTextureStorageMode as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionTextureStorageMode() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionTextureStorageMode())
+// MTKTextureLoaderOptionTextureStorageMode returns the string constant MTKTextureLoaderOptionTextureStorageMode, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionTextureStorageMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionTextureStorageMode")))
 }
 
-// @constant MTKTextureLoaderOptionCubeLayout @abstract Identifier to be used in an options NSDictionary with an MTKTextureLoaderCubeLayout NSString specifying whether to create a cubemap from a 2D image @discussion The NSString value specified with this string must be one option of MTKTextureLoaderCubeLayout. If this option is omitted, the texture loader will not create cubemaps from 2D textures. This option cannot be used with PVR files, KTX files, or MDLTextures, which support cube textures directly.
-// MTKTextureLoaderOptionCubeLayout returns the string constant MTKTextureLoaderOptionCubeLayout as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionCubeLayout() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionCubeLayout())
+// MTKTextureLoaderOptionCubeLayout returns the string constant MTKTextureLoaderOptionCubeLayout, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionCubeLayout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionCubeLayout")))
 }
 
-// @constant MTKTextureLoaderCubeLayoutVertical @abstract Identifier specifying that the texture loader will create a cube texture from six faces arranged vertically within a single 2D image @discussion A texture cube will be created from six faces arranged vertically within a single 2D image. The image height must be six times the image width, with faces arranged in the following order from top to bottom: +X, -X, +Y, -Y, +Z, -Z.
-// MTKTextureLoaderCubeLayoutVertical returns the string constant MTKTextureLoaderCubeLayoutVertical as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderCubeLayoutVertical() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderCubeLayoutVertical())
+// MTKTextureLoaderCubeLayoutVertical returns the string constant MTKTextureLoaderCubeLayoutVertical, for use as a dictionary key or argument.
+func MTKTextureLoaderCubeLayoutVertical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderCubeLayoutVertical")))
 }
 
-// @constant MTKTextureLoaderOptionOrigin @abstract Identifier to be used in an options NSDictionary with an MTKTextureLoaderOrigin NSString specifying whether to flip textures vertically @discussion The NSString value specified with this string must be one option of MTKTextureLoaderOrigin. If this option is omitted, the texture loader will not flip loaded textures. This option cannot be used with block-compressed texture formats, and can only be used with 2D, 2D array, and cube map textures. Each mipmap level and slice of a texture will be flipped.
-// MTKTextureLoaderOptionOrigin returns the string constant MTKTextureLoaderOptionOrigin as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionOrigin() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionOrigin())
+// MTKTextureLoaderOptionOrigin returns the string constant MTKTextureLoaderOptionOrigin, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionOrigin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionOrigin")))
 }
 
-// @constant MTKTextureLoaderOriginTopLeft @abstract Identifier specifying that the texture loader should flip textures whose origin is in the bottom-left corner @discussion The texture will be flipped vertically if metadata in the file being loaded indicates that the source data starts with the bottom-left corner of the texture.
-// MTKTextureLoaderOriginTopLeft returns the string constant MTKTextureLoaderOriginTopLeft as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOriginTopLeft() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOriginTopLeft())
+// MTKTextureLoaderOriginTopLeft returns the string constant MTKTextureLoaderOriginTopLeft, for use as a dictionary key or argument.
+func MTKTextureLoaderOriginTopLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOriginTopLeft")))
 }
 
-// @constant MTKTextureLoaderOriginBottomLeft @abstract Identifier specifying that the texture loader should flip textures whose origin is in the top-left corner @discussion The texture will be flipped vertically if metadata in the file being loaded indicates that the source data starts with the top-left corner of the texture.
-// MTKTextureLoaderOriginBottomLeft returns the string constant MTKTextureLoaderOriginBottomLeft as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOriginBottomLeft() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOriginBottomLeft())
+// MTKTextureLoaderOriginBottomLeft returns the string constant MTKTextureLoaderOriginBottomLeft, for use as a dictionary key or argument.
+func MTKTextureLoaderOriginBottomLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOriginBottomLeft")))
 }
 
-// @constant MTKTextureLoaderOriginFlippedVertically @abstract Identifier specifying that the texture loader should always flip textures @discussion The texture will be flipped vertically regardless of any metadata in the file indicating the placement of the origin in the source data
-// MTKTextureLoaderOriginFlippedVertically returns the string constant MTKTextureLoaderOriginFlippedVertically as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOriginFlippedVertically() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOriginFlippedVertically())
+// MTKTextureLoaderOriginFlippedVertically returns the string constant MTKTextureLoaderOriginFlippedVertically, for use as a dictionary key or argument.
+func MTKTextureLoaderOriginFlippedVertically() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOriginFlippedVertically")))
 }
 
-// @constant MTKTextureLoaderOptionLoadAsArray @abstract Identifier specifying that the texture should be loaded as an array texture when possible. @discussion Type is an NSNumber with a boolean value.
-// MTKTextureLoaderOptionLoadAsArray returns the string constant MTKTextureLoaderOptionLoadAsArray as an objc.ID, for use as a dictionary key or selector argument.
-func MTKTextureLoaderOptionLoadAsArray() objc.ID {
-	return purego.CFConstant(raw.MTKTextureLoaderOptionLoadAsArray())
+// MTKTextureLoaderOptionLoadAsArray returns the string constant MTKTextureLoaderOptionLoadAsArray, for use as a dictionary key or argument.
+func MTKTextureLoaderOptionLoadAsArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKTextureLoaderOptionLoadAsArray")))
 }
 
-// @constant MTKModelErrorDomain
-// MTKModelErrorDomain returns the string constant MTKModelErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTKModelErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MTKModelErrorDomain())
+// MTKModelErrorDomain returns the string constant MTKModelErrorDomain, for use as a dictionary key or argument.
+func MTKModelErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTKModelErrorDomain")))
 }
 
-// @constant MTKModelErrorKey
-// MTKModelErrorKey returns the string constant MTKModelErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTKModelErrorKey() objc.ID {
-	return purego.CFConstant(raw.MTKModelErrorKey())
-}
+// MTKModelErrorKey returns the string constant MTKModelErrorKey, for use as a dictionary key or argument.
+func MTKModelErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTKModelErrorKey"))) }

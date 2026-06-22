@@ -11,52 +11,54 @@ import (
 
 // Options that determine the authorized features of local and remote notifications.
 // Bitmask — values may be combined with |.
-type UNAuthorizationOptions uint64
+type AuthorizationOptions uint64
 
 const (
 	// The ability to update the app’s badge.
-	UNAuthorizationOptionBadge UNAuthorizationOptions = 1
+	AuthorizationOptionBadge AuthorizationOptions = 1
 	// The ability to play sounds.
-	UNAuthorizationOptionSound UNAuthorizationOptions = 2
+	AuthorizationOptionSound AuthorizationOptions = 2
 	// The ability to display alerts.
-	UNAuthorizationOptionAlert UNAuthorizationOptions = 4
+	AuthorizationOptionAlert AuthorizationOptions = 4
 	// The ability to display notifications in a CarPlay environment.
-	UNAuthorizationOptionCarPlay UNAuthorizationOptions = 8
+	AuthorizationOptionCarPlay AuthorizationOptions = 8
 	// The ability to play sounds for critical alerts.
-	UNAuthorizationOptionCriticalAlert UNAuthorizationOptions = 16
+	AuthorizationOptionCriticalAlert AuthorizationOptions = 16
 	// An option indicating the system should display a button for in-app notification settings.
-	UNAuthorizationOptionProvidesAppNotificationSettings UNAuthorizationOptions = 32
+	AuthorizationOptionProvidesAppNotificationSettings AuthorizationOptions = 32
 	// The ability to post noninterrupting notifications provisionally to the Notification Center.
-	UNAuthorizationOptionProvisional UNAuthorizationOptions = 64
+	AuthorizationOptionProvisional AuthorizationOptions = 64
 	// Deprecated: Use time-sensitive entitlement
-	UNAuthorizationOptionTimeSensitive UNAuthorizationOptions = 256
+	AuthorizationOptionTimeSensitive AuthorizationOptions = 256
 )
 
-func (e UNAuthorizationOptions) String() string {
+// String returns the AuthorizationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationOptions) String() string {
 	var parts []string
-	if e&UNAuthorizationOptionBadge != 0 {
-		parts = append(parts, "UNAuthorizationOptionBadge")
+	if e&AuthorizationOptionBadge != 0 {
+		parts = append(parts, "AuthorizationOptionBadge")
 	}
-	if e&UNAuthorizationOptionSound != 0 {
-		parts = append(parts, "UNAuthorizationOptionSound")
+	if e&AuthorizationOptionSound != 0 {
+		parts = append(parts, "AuthorizationOptionSound")
 	}
-	if e&UNAuthorizationOptionAlert != 0 {
-		parts = append(parts, "UNAuthorizationOptionAlert")
+	if e&AuthorizationOptionAlert != 0 {
+		parts = append(parts, "AuthorizationOptionAlert")
 	}
-	if e&UNAuthorizationOptionCarPlay != 0 {
-		parts = append(parts, "UNAuthorizationOptionCarPlay")
+	if e&AuthorizationOptionCarPlay != 0 {
+		parts = append(parts, "AuthorizationOptionCarPlay")
 	}
-	if e&UNAuthorizationOptionCriticalAlert != 0 {
-		parts = append(parts, "UNAuthorizationOptionCriticalAlert")
+	if e&AuthorizationOptionCriticalAlert != 0 {
+		parts = append(parts, "AuthorizationOptionCriticalAlert")
 	}
-	if e&UNAuthorizationOptionProvidesAppNotificationSettings != 0 {
-		parts = append(parts, "UNAuthorizationOptionProvidesAppNotificationSettings")
+	if e&AuthorizationOptionProvidesAppNotificationSettings != 0 {
+		parts = append(parts, "AuthorizationOptionProvidesAppNotificationSettings")
 	}
-	if e&UNAuthorizationOptionProvisional != 0 {
-		parts = append(parts, "UNAuthorizationOptionProvisional")
+	if e&AuthorizationOptionProvisional != 0 {
+		parts = append(parts, "AuthorizationOptionProvisional")
 	}
-	if e&UNAuthorizationOptionTimeSensitive != 0 {
-		parts = append(parts, "UNAuthorizationOptionTimeSensitive")
+	if e&AuthorizationOptionTimeSensitive != 0 {
+		parts = append(parts, "AuthorizationOptionTimeSensitive")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -65,106 +67,112 @@ func (e UNAuthorizationOptions) String() string {
 }
 
 // Constants indicating whether the app is allowed to schedule notifications.
-type UNAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The user hasn’t yet made a choice about whether the app is allowed to schedule notifications.
-	UNAuthorizationStatusNotDetermined UNAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The app isn’t authorized to schedule or receive notifications.
-	UNAuthorizationStatusDenied UNAuthorizationStatus = 1
+	AuthorizationStatusDenied AuthorizationStatus = 1
 	// The app is authorized to schedule or receive notifications.
-	UNAuthorizationStatusAuthorized UNAuthorizationStatus = 2
+	AuthorizationStatusAuthorized AuthorizationStatus = 2
 	// The application is provisionally authorized to post noninterruptive user notifications.
-	UNAuthorizationStatusProvisional UNAuthorizationStatus = 3
+	AuthorizationStatusProvisional AuthorizationStatus = 3
 )
 
-func (e UNAuthorizationStatus) String() string {
+// String returns the AuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case UNAuthorizationStatusNotDetermined:
-		return "UNAuthorizationStatusNotDetermined"
-	case UNAuthorizationStatusDenied:
-		return "UNAuthorizationStatusDenied"
-	case UNAuthorizationStatusAuthorized:
-		return "UNAuthorizationStatusAuthorized"
-	case UNAuthorizationStatusProvisional:
-		return "UNAuthorizationStatusProvisional"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
+	case AuthorizationStatusProvisional:
+		return "AuthorizationStatusProvisional"
 	default:
-		return fmt.Sprintf("UNAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Constants that identify notification errors.
-type UNErrorCode int64
+type ErrorCode int64
 
 const (
-	UNErrorCodeNotificationsNotAllowed           UNErrorCode = 1
-	UNErrorCodeAttachmentInvalidURL              UNErrorCode = 100
-	UNErrorCodeAttachmentUnrecognizedType        UNErrorCode = 101
-	UNErrorCodeAttachmentInvalidFileSize         UNErrorCode = 102
-	UNErrorCodeAttachmentNotInDataStore          UNErrorCode = 103
-	UNErrorCodeAttachmentMoveIntoDataStoreFailed UNErrorCode = 104
-	UNErrorCodeAttachmentCorrupt                 UNErrorCode = 105
-	UNErrorCodeNotificationInvalidNoDate         UNErrorCode = 1400
-	UNErrorCodeNotificationInvalidNoContent      UNErrorCode = 1401
-	UNErrorCodeContentProvidingObjectNotAllowed  UNErrorCode = 1500
-	UNErrorCodeContentProvidingInvalid           UNErrorCode = 1501
-	UNErrorCodeBadgeInputInvalid                 UNErrorCode = 1600
+	ErrorCodeNotificationsNotAllowed           ErrorCode = 1
+	ErrorCodeAttachmentInvalidURL              ErrorCode = 100
+	ErrorCodeAttachmentUnrecognizedType        ErrorCode = 101
+	ErrorCodeAttachmentInvalidFileSize         ErrorCode = 102
+	ErrorCodeAttachmentNotInDataStore          ErrorCode = 103
+	ErrorCodeAttachmentMoveIntoDataStoreFailed ErrorCode = 104
+	ErrorCodeAttachmentCorrupt                 ErrorCode = 105
+	ErrorCodeNotificationInvalidNoDate         ErrorCode = 1400
+	ErrorCodeNotificationInvalidNoContent      ErrorCode = 1401
+	ErrorCodeContentProvidingObjectNotAllowed  ErrorCode = 1500
+	ErrorCodeContentProvidingInvalid           ErrorCode = 1501
+	ErrorCodeBadgeInputInvalid                 ErrorCode = 1600
 )
 
-func (e UNErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case UNErrorCodeNotificationsNotAllowed:
-		return "UNErrorCodeNotificationsNotAllowed"
-	case UNErrorCodeAttachmentInvalidURL:
-		return "UNErrorCodeAttachmentInvalidURL"
-	case UNErrorCodeAttachmentUnrecognizedType:
-		return "UNErrorCodeAttachmentUnrecognizedType"
-	case UNErrorCodeAttachmentInvalidFileSize:
-		return "UNErrorCodeAttachmentInvalidFileSize"
-	case UNErrorCodeAttachmentNotInDataStore:
-		return "UNErrorCodeAttachmentNotInDataStore"
-	case UNErrorCodeAttachmentMoveIntoDataStoreFailed:
-		return "UNErrorCodeAttachmentMoveIntoDataStoreFailed"
-	case UNErrorCodeAttachmentCorrupt:
-		return "UNErrorCodeAttachmentCorrupt"
-	case UNErrorCodeNotificationInvalidNoDate:
-		return "UNErrorCodeNotificationInvalidNoDate"
-	case UNErrorCodeNotificationInvalidNoContent:
-		return "UNErrorCodeNotificationInvalidNoContent"
-	case UNErrorCodeContentProvidingObjectNotAllowed:
-		return "UNErrorCodeContentProvidingObjectNotAllowed"
-	case UNErrorCodeContentProvidingInvalid:
-		return "UNErrorCodeContentProvidingInvalid"
-	case UNErrorCodeBadgeInputInvalid:
-		return "UNErrorCodeBadgeInputInvalid"
+	case ErrorCodeNotificationsNotAllowed:
+		return "ErrorCodeNotificationsNotAllowed"
+	case ErrorCodeAttachmentInvalidURL:
+		return "ErrorCodeAttachmentInvalidURL"
+	case ErrorCodeAttachmentUnrecognizedType:
+		return "ErrorCodeAttachmentUnrecognizedType"
+	case ErrorCodeAttachmentInvalidFileSize:
+		return "ErrorCodeAttachmentInvalidFileSize"
+	case ErrorCodeAttachmentNotInDataStore:
+		return "ErrorCodeAttachmentNotInDataStore"
+	case ErrorCodeAttachmentMoveIntoDataStoreFailed:
+		return "ErrorCodeAttachmentMoveIntoDataStoreFailed"
+	case ErrorCodeAttachmentCorrupt:
+		return "ErrorCodeAttachmentCorrupt"
+	case ErrorCodeNotificationInvalidNoDate:
+		return "ErrorCodeNotificationInvalidNoDate"
+	case ErrorCodeNotificationInvalidNoContent:
+		return "ErrorCodeNotificationInvalidNoContent"
+	case ErrorCodeContentProvidingObjectNotAllowed:
+		return "ErrorCodeContentProvidingObjectNotAllowed"
+	case ErrorCodeContentProvidingInvalid:
+		return "ErrorCodeContentProvidingInvalid"
+	case ErrorCodeBadgeInputInvalid:
+		return "ErrorCodeBadgeInputInvalid"
 	default:
-		return fmt.Sprintf("UNErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // The behaviors you can apply to an action.
 // Bitmask — values may be combined with |.
-type UNNotificationActionOptions uint64
+type NotificationActionOptions uint64
 
 const (
 	// The action can be performed only on an unlocked device.
-	UNNotificationActionOptionAuthenticationRequired UNNotificationActionOptions = 1
+	NotificationActionOptionAuthenticationRequired NotificationActionOptions = 1
 	// The action performs a destructive task.
-	UNNotificationActionOptionDestructive UNNotificationActionOptions = 2
+	NotificationActionOptionDestructive NotificationActionOptions = 2
 	// The action causes the app to launch in the foreground.
-	UNNotificationActionOptionForeground UNNotificationActionOptions = 4
+	NotificationActionOptionForeground NotificationActionOptions = 4
 )
 
-func (e UNNotificationActionOptions) String() string {
+// String returns the NotificationActionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationActionOptions) String() string {
 	var parts []string
-	if e&UNNotificationActionOptionAuthenticationRequired != 0 {
-		parts = append(parts, "UNNotificationActionOptionAuthenticationRequired")
+	if e&NotificationActionOptionAuthenticationRequired != 0 {
+		parts = append(parts, "NotificationActionOptionAuthenticationRequired")
 	}
-	if e&UNNotificationActionOptionDestructive != 0 {
-		parts = append(parts, "UNNotificationActionOptionDestructive")
+	if e&NotificationActionOptionDestructive != 0 {
+		parts = append(parts, "NotificationActionOptionDestructive")
 	}
-	if e&UNNotificationActionOptionForeground != 0 {
-		parts = append(parts, "UNNotificationActionOptionForeground")
+	if e&NotificationActionOptionForeground != 0 {
+		parts = append(parts, "NotificationActionOptionForeground")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -174,27 +182,29 @@ func (e UNNotificationActionOptions) String() string {
 
 // Constants indicating how to handle notifications associated with this category.
 // Bitmask — values may be combined with |.
-type UNNotificationCategoryOptions uint64
+type NotificationCategoryOptions uint64
 
 const (
 	// Send dismiss actions to the UNUserNotificationCenter object’s delegate for handling.
-	UNNotificationCategoryOptionCustomDismissAction UNNotificationCategoryOptions = 1
+	NotificationCategoryOptionCustomDismissAction NotificationCategoryOptions = 1
 	// Show the notification’s title, even if the user has disabled notification previews for the app.
-	UNNotificationCategoryOptionHiddenPreviewsShowTitle UNNotificationCategoryOptions = 4
+	NotificationCategoryOptionHiddenPreviewsShowTitle NotificationCategoryOptions = 4
 	// Show the notification’s subtitle, even if the user has disabled notification previews for the app.
-	UNNotificationCategoryOptionHiddenPreviewsShowSubtitle UNNotificationCategoryOptions = 8
+	NotificationCategoryOptionHiddenPreviewsShowSubtitle NotificationCategoryOptions = 8
 )
 
-func (e UNNotificationCategoryOptions) String() string {
+// String returns the NotificationCategoryOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationCategoryOptions) String() string {
 	var parts []string
-	if e&UNNotificationCategoryOptionCustomDismissAction != 0 {
-		parts = append(parts, "UNNotificationCategoryOptionCustomDismissAction")
+	if e&NotificationCategoryOptionCustomDismissAction != 0 {
+		parts = append(parts, "NotificationCategoryOptionCustomDismissAction")
 	}
-	if e&UNNotificationCategoryOptionHiddenPreviewsShowTitle != 0 {
-		parts = append(parts, "UNNotificationCategoryOptionHiddenPreviewsShowTitle")
+	if e&NotificationCategoryOptionHiddenPreviewsShowTitle != 0 {
+		parts = append(parts, "NotificationCategoryOptionHiddenPreviewsShowTitle")
 	}
-	if e&UNNotificationCategoryOptionHiddenPreviewsShowSubtitle != 0 {
-		parts = append(parts, "UNNotificationCategoryOptionHiddenPreviewsShowSubtitle")
+	if e&NotificationCategoryOptionHiddenPreviewsShowSubtitle != 0 {
+		parts = append(parts, "NotificationCategoryOptionHiddenPreviewsShowSubtitle")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -203,80 +213,86 @@ func (e UNNotificationCategoryOptions) String() string {
 }
 
 // Constants that indicate the importance and delivery timing of a notification.
-type UNNotificationInterruptionLevel uint64
+type NotificationInterruptionLevel uint64
 
 const (
 	// The system adds the notification to the notification list without lighting up the screen or playing a sound.
-	UNNotificationInterruptionLevelPassive UNNotificationInterruptionLevel = 0
+	NotificationInterruptionLevelPassive NotificationInterruptionLevel = 0
 	// The system presents the notification immediately, lights up the screen, and can play a sound.
-	UNNotificationInterruptionLevelActive UNNotificationInterruptionLevel = 1
+	NotificationInterruptionLevelActive NotificationInterruptionLevel = 1
 	// The system presents the notification immediately, lights up the screen, can play a sound, and breaks through system notification controls.
-	UNNotificationInterruptionLevelTimeSensitive UNNotificationInterruptionLevel = 2
+	NotificationInterruptionLevelTimeSensitive NotificationInterruptionLevel = 2
 	// The system presents the notification immediately, lights up the screen, and bypasses the mute switch to play a sound.
-	UNNotificationInterruptionLevelCritical UNNotificationInterruptionLevel = 3
+	NotificationInterruptionLevelCritical NotificationInterruptionLevel = 3
 )
 
-func (e UNNotificationInterruptionLevel) String() string {
+// String returns the NotificationInterruptionLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationInterruptionLevel) String() string {
 	switch e {
-	case UNNotificationInterruptionLevelPassive:
-		return "UNNotificationInterruptionLevelPassive"
-	case UNNotificationInterruptionLevelActive:
-		return "UNNotificationInterruptionLevelActive"
-	case UNNotificationInterruptionLevelTimeSensitive:
-		return "UNNotificationInterruptionLevelTimeSensitive"
-	case UNNotificationInterruptionLevelCritical:
-		return "UNNotificationInterruptionLevelCritical"
+	case NotificationInterruptionLevelPassive:
+		return "NotificationInterruptionLevelPassive"
+	case NotificationInterruptionLevelActive:
+		return "NotificationInterruptionLevelActive"
+	case NotificationInterruptionLevelTimeSensitive:
+		return "NotificationInterruptionLevelTimeSensitive"
+	case NotificationInterruptionLevelCritical:
+		return "NotificationInterruptionLevelCritical"
 	default:
-		return fmt.Sprintf("UNNotificationInterruptionLevel(%d)", int64(e))
+		return fmt.Sprintf("NotificationInterruptionLevel(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the current status of a notification setting.
-type UNNotificationSetting int64
+type NotificationSetting int64
 
 const (
 	// The setting is not available to your app.
-	UNNotificationSettingNotSupported UNNotificationSetting = 0
+	NotificationSettingNotSupported NotificationSetting = 0
 	// The setting is disabled.
-	UNNotificationSettingDisabled UNNotificationSetting = 1
+	NotificationSettingDisabled NotificationSetting = 1
 	// The setting is enabled.
-	UNNotificationSettingEnabled UNNotificationSetting = 2
+	NotificationSettingEnabled NotificationSetting = 2
 )
 
-func (e UNNotificationSetting) String() string {
+// String returns the NotificationSetting constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationSetting) String() string {
 	switch e {
-	case UNNotificationSettingNotSupported:
-		return "UNNotificationSettingNotSupported"
-	case UNNotificationSettingDisabled:
-		return "UNNotificationSettingDisabled"
-	case UNNotificationSettingEnabled:
-		return "UNNotificationSettingEnabled"
+	case NotificationSettingNotSupported:
+		return "NotificationSettingNotSupported"
+	case NotificationSettingDisabled:
+		return "NotificationSettingDisabled"
+	case NotificationSettingEnabled:
+		return "NotificationSettingEnabled"
 	default:
-		return fmt.Sprintf("UNNotificationSetting(%d)", int64(e))
+		return fmt.Sprintf("NotificationSetting(%d)", int64(e))
 	}
 }
 
 // Constants indicating the style previewing a notification’s content.
-type UNShowPreviewsSetting int64
+type ShowPreviewsSetting int64
 
 const (
 	// The notification’s content is always shown, even when the device is locked.
-	UNShowPreviewsSettingAlways UNShowPreviewsSetting = 0
+	ShowPreviewsSettingAlways ShowPreviewsSetting = 0
 	// The notification’s content is shown only when the device is unlocked.
-	UNShowPreviewsSettingWhenAuthenticated UNShowPreviewsSetting = 1
+	ShowPreviewsSettingWhenAuthenticated ShowPreviewsSetting = 1
 	// The notification’s content is never shown, even when the device is unlocked
-	UNShowPreviewsSettingNever UNShowPreviewsSetting = 2
+	ShowPreviewsSettingNever ShowPreviewsSetting = 2
 )
 
-func (e UNShowPreviewsSetting) String() string {
+// String returns the ShowPreviewsSetting constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ShowPreviewsSetting) String() string {
 	switch e {
-	case UNShowPreviewsSettingAlways:
-		return "UNShowPreviewsSettingAlways"
-	case UNShowPreviewsSettingWhenAuthenticated:
-		return "UNShowPreviewsSettingWhenAuthenticated"
-	case UNShowPreviewsSettingNever:
-		return "UNShowPreviewsSettingNever"
+	case ShowPreviewsSettingAlways:
+		return "ShowPreviewsSettingAlways"
+	case ShowPreviewsSettingWhenAuthenticated:
+		return "ShowPreviewsSettingWhenAuthenticated"
+	case ShowPreviewsSettingNever:
+		return "ShowPreviewsSettingNever"
 	default:
-		return fmt.Sprintf("UNShowPreviewsSetting(%d)", int64(e))
+		return fmt.Sprintf("ShowPreviewsSetting(%d)", int64(e))
 	}
 }

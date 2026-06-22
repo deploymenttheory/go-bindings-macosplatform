@@ -5,51 +5,85 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that contains the architectural details of a GPU device.
+// Architecture is an idiomatic wrapper over the Objective-C class MTLArchitecture.
 //
-// Architecture wraps [raw.MTLArchitecture] with a fluent Go API.
+// A class that contains the architectural details of a GPU device.
 type Architecture struct {
-	inner *raw.MTLArchitecture
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLArchitecture].
-func (x *Architecture) Unwrap() *raw.MTLArchitecture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Architecture) ID() objc.ID { return x.inner.Ptr() }
-
-// ArchitectureFromID adopts an existing object pointer as a Architecture (nil for 0).
+// ArchitectureFromID adopts an existing Objective-C object as a Architecture
+// (nil for 0), retaining it and registering a release finalizer.
 func ArchitectureFromID(id objc.ID) *Architecture {
 	if id == 0 {
 		return nil
 	}
-	return &Architecture{inner: raw.MTLArchitectureFromID(id)}
+	x := &Architecture{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewArchitecture creates a new [Architecture].
+// architectureAdopt wraps an Objective-C object that this code just created as a
+// Architecture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func architectureAdopt(id objc.ID) *Architecture {
+	if id == 0 {
+		return nil
+	}
+	x := &Architecture{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Architecture) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Architecture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Architecture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Architecture) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewArchitecture creates a new Architecture.
 func NewArchitecture() *Architecture {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLArchitecture")), objc.RegisterName("new"))
-	return &Architecture{inner: raw.MTLArchitectureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLArchitecture")), objc.RegisterName("new"))
+	return architectureAdopt(_id)
 }
 
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *Architecture) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Architectureable is the interface implemented by [Architecture], for mocking and DI.
 type Architectureable interface {
-	Unwrap() *raw.MTLArchitecture
+	obj.Object
 	Name() string
 }
 

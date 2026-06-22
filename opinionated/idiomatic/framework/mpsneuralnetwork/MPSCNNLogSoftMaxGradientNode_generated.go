@@ -5,69 +5,68 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a MPSCNNLogSoftMaxGradient kernel
+// CNNLogSoftMaxGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNLogSoftMaxGradientNode.
 //
-// CNNLogSoftMaxGradientNode wraps [raw.MPSCNNLogSoftMaxGradientNode] with a fluent Go API.
+// It embeds [NNGradientFilterNode], promoting that type's methods.
+//
+// Node representing a MPSCNNLogSoftMaxGradient kernel
 type CNNLogSoftMaxGradientNode struct {
-	inner *raw.MPSCNNLogSoftMaxGradientNode
+	NNGradientFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNLogSoftMaxGradientNode].
-func (x *CNNLogSoftMaxGradientNode) Unwrap() *raw.MPSCNNLogSoftMaxGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNLogSoftMaxGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNLogSoftMaxGradientNodeFromID adopts an existing object pointer as a CNNLogSoftMaxGradientNode (nil for 0).
+// CNNLogSoftMaxGradientNodeFromID adopts an existing Objective-C object as a CNNLogSoftMaxGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNLogSoftMaxGradientNodeFromID(id objc.ID) *CNNLogSoftMaxGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNLogSoftMaxGradientNode{inner: raw.MPSCNNLogSoftMaxGradientNodeFromID(id)}
-}
-
-// NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState creates a new [CNNLogSoftMaxGradientNode].
-func NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *raw.MPSNNImageNode, sourceImage *raw.MPSNNImageNode, gradientState *raw.MPSNNGradientStateNode) *CNNLogSoftMaxGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLogSoftMaxGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	return &CNNLogSoftMaxGradientNode{inner: raw.MPSCNNLogSoftMaxGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNLogSoftMaxGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLogSoftMaxGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNLogSoftMaxGradientNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNLogSoftMaxGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNLogSoftMaxGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNLogSoftMaxGradientNodeAdopt(id objc.ID) *CNNLogSoftMaxGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNLogSoftMaxGradientNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState creates a new CNNLogSoftMaxGradientNode.
+func NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *CNNLogSoftMaxGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return cNNLogSoftMaxGradientNodeAdopt(_id)
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNLogSoftMaxGradientNode) WithLabel(label string) *CNNLogSoftMaxGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNLogSoftMaxGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *CNNLogSoftMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // CNNLogSoftMaxGradientNodeable is the interface implemented by [CNNLogSoftMaxGradientNode], for mocking and DI.
 type CNNLogSoftMaxGradientNodeable interface {
-	Unwrap() *raw.MPSCNNLogSoftMaxGradientNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLogSoftMaxGradientNode
+	obj.Object
 	WithLabel(label string) *CNNLogSoftMaxGradientNode
 }
 
 var _ CNNLogSoftMaxGradientNodeable = (*CNNLogSoftMaxGradientNode)(nil)
+
+var _ NNGradientFilterNodeProvider = (*CNNLogSoftMaxGradientNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNLogSoftMaxGradientNode)(nil)

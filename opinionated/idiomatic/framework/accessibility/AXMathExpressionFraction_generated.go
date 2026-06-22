@@ -5,64 +5,71 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionFraction wraps [raw.AXMathExpressionFraction] with a fluent Go API.
+// MathExpressionFraction is an idiomatic wrapper over the Objective-C class AXMathExpressionFraction.
+//
+// It embeds [MathExpression], promoting that type's methods.
 type MathExpressionFraction struct {
-	inner *raw.AXMathExpressionFraction
+	MathExpression
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionFraction].
-func (x *MathExpressionFraction) Unwrap() *raw.AXMathExpressionFraction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionFraction) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionFractionFromID adopts an existing object pointer as a MathExpressionFraction (nil for 0).
+// MathExpressionFractionFromID adopts an existing Objective-C object as a MathExpressionFraction
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionFractionFromID(id objc.ID) *MathExpressionFraction {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionFraction{inner: raw.AXMathExpressionFractionFromID(id)}
+	x := &MathExpressionFraction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression creates a new [MathExpressionFraction].
-func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numeratorExpression *raw.AXMathExpression, denimonatorExpression *raw.AXMathExpression) *MathExpressionFraction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionFraction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumeratorExpression:denimonatorExpression:"), numeratorExpression.Ptr(), denimonatorExpression.Ptr())
-	return &MathExpressionFraction{inner: raw.AXMathExpressionFractionFromID(_id)}
+// mathExpressionFractionAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionFraction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionFractionAdopt(id objc.ID) *MathExpressionFraction {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpressionFraction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NumeratorExpression calls the underlying NumeratorExpression.
+// NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression creates a new MathExpressionFraction.
+func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numeratorExpression *MathExpression, denimonatorExpression *MathExpression) *MathExpressionFraction {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionFraction")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumeratorExpression:denimonatorExpression:"), objref.IDOf(numeratorExpression), objref.IDOf(denimonatorExpression))
+	return mathExpressionFractionAdopt(_id)
+}
+
+// NumeratorExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionFraction) NumeratorExpression() *MathExpression {
-	_r := x.inner.NumeratorExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numeratorExpression"))
+	return MathExpressionFromID(_r)
 }
 
-// DenimonatorExpression calls the underlying DenimonatorExpression.
+// DenimonatorExpression wraps the corresponding Objective-C method.
 func (x *MathExpressionFraction) DenimonatorExpression() *MathExpression {
-	_r := x.inner.DenimonatorExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
-}
-
-func (x *MathExpressionFraction) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("denimonatorExpression"))
+	return MathExpressionFromID(_r)
 }
 
 // MathExpressionFractionable is the interface implemented by [MathExpressionFraction], for mocking and DI.
 type MathExpressionFractionable interface {
-	Unwrap() *raw.AXMathExpressionFraction
+	obj.Object
 	NumeratorExpression() *MathExpression
 	DenimonatorExpression() *MathExpression
 }
 
 var _ MathExpressionFractionable = (*MathExpressionFraction)(nil)
+
+var _ MathExpressionProvider = (*MathExpressionFraction)(nil)

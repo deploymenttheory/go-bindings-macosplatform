@@ -11,36 +11,38 @@ import (
 
 // A structure that contains options for filtering results in a search.
 // Bitmask — values may be combined with |.
-type MKAddressFilterOption uint64
+type AddressFilterOption uint64
 
 const (
-	MKAddressFilterOptionCountry               MKAddressFilterOption = 1
-	MKAddressFilterOptionAdministrativeArea    MKAddressFilterOption = 2
-	MKAddressFilterOptionSubAdministrativeArea MKAddressFilterOption = 4
-	MKAddressFilterOptionLocality              MKAddressFilterOption = 8
-	MKAddressFilterOptionSubLocality           MKAddressFilterOption = 16
-	MKAddressFilterOptionPostalCode            MKAddressFilterOption = 32
+	AddressFilterOptionCountry               AddressFilterOption = 1
+	AddressFilterOptionAdministrativeArea    AddressFilterOption = 2
+	AddressFilterOptionSubAdministrativeArea AddressFilterOption = 4
+	AddressFilterOptionLocality              AddressFilterOption = 8
+	AddressFilterOptionSubLocality           AddressFilterOption = 16
+	AddressFilterOptionPostalCode            AddressFilterOption = 32
 )
 
-func (e MKAddressFilterOption) String() string {
+// String returns the AddressFilterOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddressFilterOption) String() string {
 	var parts []string
-	if e&MKAddressFilterOptionCountry != 0 {
-		parts = append(parts, "MKAddressFilterOptionCountry")
+	if e&AddressFilterOptionCountry != 0 {
+		parts = append(parts, "AddressFilterOptionCountry")
 	}
-	if e&MKAddressFilterOptionAdministrativeArea != 0 {
-		parts = append(parts, "MKAddressFilterOptionAdministrativeArea")
+	if e&AddressFilterOptionAdministrativeArea != 0 {
+		parts = append(parts, "AddressFilterOptionAdministrativeArea")
 	}
-	if e&MKAddressFilterOptionSubAdministrativeArea != 0 {
-		parts = append(parts, "MKAddressFilterOptionSubAdministrativeArea")
+	if e&AddressFilterOptionSubAdministrativeArea != 0 {
+		parts = append(parts, "AddressFilterOptionSubAdministrativeArea")
 	}
-	if e&MKAddressFilterOptionLocality != 0 {
-		parts = append(parts, "MKAddressFilterOptionLocality")
+	if e&AddressFilterOptionLocality != 0 {
+		parts = append(parts, "AddressFilterOptionLocality")
 	}
-	if e&MKAddressFilterOptionSubLocality != 0 {
-		parts = append(parts, "MKAddressFilterOptionSubLocality")
+	if e&AddressFilterOptionSubLocality != 0 {
+		parts = append(parts, "AddressFilterOptionSubLocality")
 	}
-	if e&MKAddressFilterOptionPostalCode != 0 {
-		parts = append(parts, "MKAddressFilterOptionPostalCode")
+	if e&AddressFilterOptionPostalCode != 0 {
+		parts = append(parts, "AddressFilterOptionPostalCode")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -48,129 +50,139 @@ func (e MKAddressFilterOption) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MKAddressRepresentationsContextStyle int64
+type AddressRepresentationsContextStyle int64
 
 const (
-	MKAddressRepresentationsContextStyleAutomatic MKAddressRepresentationsContextStyle = 0
-	MKAddressRepresentationsContextStyleShort     MKAddressRepresentationsContextStyle = 1
-	MKAddressRepresentationsContextStyleFull      MKAddressRepresentationsContextStyle = 2
+	AddressRepresentationsContextStyleAutomatic AddressRepresentationsContextStyle = 0
+	AddressRepresentationsContextStyleShort     AddressRepresentationsContextStyle = 1
+	AddressRepresentationsContextStyleFull      AddressRepresentationsContextStyle = 2
 )
 
-func (e MKAddressRepresentationsContextStyle) String() string {
+// String returns the AddressRepresentationsContextStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AddressRepresentationsContextStyle) String() string {
 	switch e {
-	case MKAddressRepresentationsContextStyleAutomatic:
-		return "MKAddressRepresentationsContextStyleAutomatic"
-	case MKAddressRepresentationsContextStyleShort:
-		return "MKAddressRepresentationsContextStyleShort"
-	case MKAddressRepresentationsContextStyleFull:
-		return "MKAddressRepresentationsContextStyleFull"
+	case AddressRepresentationsContextStyleAutomatic:
+		return "AddressRepresentationsContextStyleAutomatic"
+	case AddressRepresentationsContextStyleShort:
+		return "AddressRepresentationsContextStyleShort"
+	case AddressRepresentationsContextStyleFull:
+		return "AddressRepresentationsContextStyleFull"
 	default:
-		return fmt.Sprintf("MKAddressRepresentationsContextStyle(%d)", int64(e))
+		return fmt.Sprintf("AddressRepresentationsContextStyle(%d)", int64(e))
 	}
 }
 
 // Constants that indicates how to interpret the collision frame rectangle of an annotation view.
-type MKAnnotationViewCollisionMode int64
+type AnnotationViewCollisionMode int64
 
 const (
-	MKAnnotationViewCollisionModeRectangle MKAnnotationViewCollisionMode = 0
-	MKAnnotationViewCollisionModeCircle    MKAnnotationViewCollisionMode = 1
-	MKAnnotationViewCollisionModeNone      MKAnnotationViewCollisionMode = 2
+	AnnotationViewCollisionModeRectangle AnnotationViewCollisionMode = 0
+	AnnotationViewCollisionModeCircle    AnnotationViewCollisionMode = 1
+	AnnotationViewCollisionModeNone      AnnotationViewCollisionMode = 2
 )
 
-func (e MKAnnotationViewCollisionMode) String() string {
+// String returns the AnnotationViewCollisionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnnotationViewCollisionMode) String() string {
 	switch e {
-	case MKAnnotationViewCollisionModeRectangle:
-		return "MKAnnotationViewCollisionModeRectangle"
-	case MKAnnotationViewCollisionModeCircle:
-		return "MKAnnotationViewCollisionModeCircle"
-	case MKAnnotationViewCollisionModeNone:
-		return "MKAnnotationViewCollisionModeNone"
+	case AnnotationViewCollisionModeRectangle:
+		return "AnnotationViewCollisionModeRectangle"
+	case AnnotationViewCollisionModeCircle:
+		return "AnnotationViewCollisionModeCircle"
+	case AnnotationViewCollisionModeNone:
+		return "AnnotationViewCollisionModeNone"
 	default:
-		return fmt.Sprintf("MKAnnotationViewCollisionMode(%d)", int64(e))
+		return fmt.Sprintf("AnnotationViewCollisionMode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the drag state of an annotation view.
-type MKAnnotationViewDragState uint64
+type AnnotationViewDragState uint64
 
 const (
-	MKAnnotationViewDragStateNone      MKAnnotationViewDragState = 0
-	MKAnnotationViewDragStateStarting  MKAnnotationViewDragState = 1
-	MKAnnotationViewDragStateDragging  MKAnnotationViewDragState = 2
-	MKAnnotationViewDragStateCanceling MKAnnotationViewDragState = 3
-	MKAnnotationViewDragStateEnding    MKAnnotationViewDragState = 4
+	AnnotationViewDragStateNone      AnnotationViewDragState = 0
+	AnnotationViewDragStateStarting  AnnotationViewDragState = 1
+	AnnotationViewDragStateDragging  AnnotationViewDragState = 2
+	AnnotationViewDragStateCanceling AnnotationViewDragState = 3
+	AnnotationViewDragStateEnding    AnnotationViewDragState = 4
 )
 
-func (e MKAnnotationViewDragState) String() string {
+// String returns the AnnotationViewDragState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AnnotationViewDragState) String() string {
 	switch e {
-	case MKAnnotationViewDragStateNone:
-		return "MKAnnotationViewDragStateNone"
-	case MKAnnotationViewDragStateStarting:
-		return "MKAnnotationViewDragStateStarting"
-	case MKAnnotationViewDragStateDragging:
-		return "MKAnnotationViewDragStateDragging"
-	case MKAnnotationViewDragStateCanceling:
-		return "MKAnnotationViewDragStateCanceling"
-	case MKAnnotationViewDragStateEnding:
-		return "MKAnnotationViewDragStateEnding"
+	case AnnotationViewDragStateNone:
+		return "AnnotationViewDragStateNone"
+	case AnnotationViewDragStateStarting:
+		return "AnnotationViewDragStateStarting"
+	case AnnotationViewDragStateDragging:
+		return "AnnotationViewDragStateDragging"
+	case AnnotationViewDragStateCanceling:
+		return "AnnotationViewDragStateCanceling"
+	case AnnotationViewDragStateEnding:
+		return "AnnotationViewDragStateEnding"
 	default:
-		return fmt.Sprintf("MKAnnotationViewDragState(%d)", int64(e))
+		return fmt.Sprintf("AnnotationViewDragState(%d)", int64(e))
 	}
 }
 
 // Options that modify how the framework selects routes when calculating directions.
-type MKDirectionsRoutePreference int64
+type DirectionsRoutePreference int64
 
 const (
-	MKDirectionsRoutePreferenceAny   MKDirectionsRoutePreference = 0
-	MKDirectionsRoutePreferenceAvoid MKDirectionsRoutePreference = 1
+	DirectionsRoutePreferenceAny   DirectionsRoutePreference = 0
+	DirectionsRoutePreferenceAvoid DirectionsRoutePreference = 1
 )
 
-func (e MKDirectionsRoutePreference) String() string {
+// String returns the DirectionsRoutePreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DirectionsRoutePreference) String() string {
 	switch e {
-	case MKDirectionsRoutePreferenceAny:
-		return "MKDirectionsRoutePreferenceAny"
-	case MKDirectionsRoutePreferenceAvoid:
-		return "MKDirectionsRoutePreferenceAvoid"
+	case DirectionsRoutePreferenceAny:
+		return "DirectionsRoutePreferenceAny"
+	case DirectionsRoutePreferenceAvoid:
+		return "DirectionsRoutePreferenceAvoid"
 	default:
-		return fmt.Sprintf("MKDirectionsRoutePreference(%d)", int64(e))
+		return fmt.Sprintf("DirectionsRoutePreference(%d)", int64(e))
 	}
 }
 
 // Constants that specify the type of conveyance to use.
 // Bitmask — values may be combined with |.
-type MKDirectionsTransportType uint64
+type DirectionsTransportType uint64
 
 const (
 	// Directions suitable for use while driving.
-	MKDirectionsTransportTypeAutomobile MKDirectionsTransportType = 1
+	DirectionsTransportTypeAutomobile DirectionsTransportType = 1
 	// Directions suitable for a pedestrian.
-	MKDirectionsTransportTypeWalking MKDirectionsTransportType = 2
+	DirectionsTransportTypeWalking DirectionsTransportType = 2
 	// Directions suitable for public transportation.
-	MKDirectionsTransportTypeTransit MKDirectionsTransportType = 4
+	DirectionsTransportTypeTransit DirectionsTransportType = 4
 	// Directions suitable for use while cycling.
-	MKDirectionsTransportTypeCycling MKDirectionsTransportType = 8
+	DirectionsTransportTypeCycling DirectionsTransportType = 8
 	// Directions suitable for any transportation option.
-	MKDirectionsTransportTypeAny MKDirectionsTransportType = 268435455
+	DirectionsTransportTypeAny DirectionsTransportType = 268435455
 )
 
-func (e MKDirectionsTransportType) String() string {
+// String returns the DirectionsTransportType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DirectionsTransportType) String() string {
 	var parts []string
-	if e&MKDirectionsTransportTypeAutomobile != 0 {
-		parts = append(parts, "MKDirectionsTransportTypeAutomobile")
+	if e&DirectionsTransportTypeAutomobile != 0 {
+		parts = append(parts, "DirectionsTransportTypeAutomobile")
 	}
-	if e&MKDirectionsTransportTypeWalking != 0 {
-		parts = append(parts, "MKDirectionsTransportTypeWalking")
+	if e&DirectionsTransportTypeWalking != 0 {
+		parts = append(parts, "DirectionsTransportTypeWalking")
 	}
-	if e&MKDirectionsTransportTypeTransit != 0 {
-		parts = append(parts, "MKDirectionsTransportTypeTransit")
+	if e&DirectionsTransportTypeTransit != 0 {
+		parts = append(parts, "DirectionsTransportTypeTransit")
 	}
-	if e&MKDirectionsTransportTypeCycling != 0 {
-		parts = append(parts, "MKDirectionsTransportTypeCycling")
+	if e&DirectionsTransportTypeCycling != 0 {
+		parts = append(parts, "DirectionsTransportTypeCycling")
 	}
-	if e&MKDirectionsTransportTypeAny != 0 {
-		parts = append(parts, "MKDirectionsTransportTypeAny")
+	if e&DirectionsTransportTypeAny != 0 {
+		parts = append(parts, "DirectionsTransportTypeAny")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -179,133 +191,143 @@ func (e MKDirectionsTransportType) String() string {
 }
 
 // The preferred style for units.
-type MKDistanceFormatterUnitStyle uint64
+type DistanceFormatterUnitStyle uint64
 
 const (
-	MKDistanceFormatterUnitStyleDefault     MKDistanceFormatterUnitStyle = 0
-	MKDistanceFormatterUnitStyleAbbreviated MKDistanceFormatterUnitStyle = 1
-	MKDistanceFormatterUnitStyleFull        MKDistanceFormatterUnitStyle = 2
+	DistanceFormatterUnitStyleDefault     DistanceFormatterUnitStyle = 0
+	DistanceFormatterUnitStyleAbbreviated DistanceFormatterUnitStyle = 1
+	DistanceFormatterUnitStyleFull        DistanceFormatterUnitStyle = 2
 )
 
-func (e MKDistanceFormatterUnitStyle) String() string {
+// String returns the DistanceFormatterUnitStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DistanceFormatterUnitStyle) String() string {
 	switch e {
-	case MKDistanceFormatterUnitStyleDefault:
-		return "MKDistanceFormatterUnitStyleDefault"
-	case MKDistanceFormatterUnitStyleAbbreviated:
-		return "MKDistanceFormatterUnitStyleAbbreviated"
-	case MKDistanceFormatterUnitStyleFull:
-		return "MKDistanceFormatterUnitStyleFull"
+	case DistanceFormatterUnitStyleDefault:
+		return "DistanceFormatterUnitStyleDefault"
+	case DistanceFormatterUnitStyleAbbreviated:
+		return "DistanceFormatterUnitStyleAbbreviated"
+	case DistanceFormatterUnitStyleFull:
+		return "DistanceFormatterUnitStyleFull"
 	default:
-		return fmt.Sprintf("MKDistanceFormatterUnitStyle(%d)", int64(e))
+		return fmt.Sprintf("DistanceFormatterUnitStyle(%d)", int64(e))
 	}
 }
 
 // Constants that reflect the type of units to use in the string.
-type MKDistanceFormatterUnits uint64
+type DistanceFormatterUnits uint64
 
 const (
-	MKDistanceFormatterUnitsDefault           MKDistanceFormatterUnits = 0
-	MKDistanceFormatterUnitsMetric            MKDistanceFormatterUnits = 1
-	MKDistanceFormatterUnitsImperial          MKDistanceFormatterUnits = 2
-	MKDistanceFormatterUnitsImperialWithYards MKDistanceFormatterUnits = 3
+	DistanceFormatterUnitsDefault           DistanceFormatterUnits = 0
+	DistanceFormatterUnitsMetric            DistanceFormatterUnits = 1
+	DistanceFormatterUnitsImperial          DistanceFormatterUnits = 2
+	DistanceFormatterUnitsImperialWithYards DistanceFormatterUnits = 3
 )
 
-func (e MKDistanceFormatterUnits) String() string {
+// String returns the DistanceFormatterUnits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DistanceFormatterUnits) String() string {
 	switch e {
-	case MKDistanceFormatterUnitsDefault:
-		return "MKDistanceFormatterUnitsDefault"
-	case MKDistanceFormatterUnitsMetric:
-		return "MKDistanceFormatterUnitsMetric"
-	case MKDistanceFormatterUnitsImperial:
-		return "MKDistanceFormatterUnitsImperial"
-	case MKDistanceFormatterUnitsImperialWithYards:
-		return "MKDistanceFormatterUnitsImperialWithYards"
+	case DistanceFormatterUnitsDefault:
+		return "DistanceFormatterUnitsDefault"
+	case DistanceFormatterUnitsMetric:
+		return "DistanceFormatterUnitsMetric"
+	case DistanceFormatterUnitsImperial:
+		return "DistanceFormatterUnitsImperial"
+	case DistanceFormatterUnitsImperialWithYards:
+		return "DistanceFormatterUnitsImperialWithYards"
 	default:
-		return fmt.Sprintf("MKDistanceFormatterUnits(%d)", int64(e))
+		return fmt.Sprintf("DistanceFormatterUnits(%d)", int64(e))
 	}
 }
 
 // Error constants for the MapKit framework.
-type MKErrorCode uint64
+type ErrorCode uint64
 
 const (
-	MKErrorUnknown            MKErrorCode = 1
-	MKErrorServerFailure      MKErrorCode = 2
-	MKErrorLoadingThrottled   MKErrorCode = 3
-	MKErrorPlacemarkNotFound  MKErrorCode = 4
-	MKErrorDirectionsNotFound MKErrorCode = 5
-	MKErrorDecodingFailed     MKErrorCode = 6
+	ErrorUnknown            ErrorCode = 1
+	ErrorServerFailure      ErrorCode = 2
+	ErrorLoadingThrottled   ErrorCode = 3
+	ErrorPlacemarkNotFound  ErrorCode = 4
+	ErrorDirectionsNotFound ErrorCode = 5
+	ErrorDecodingFailed     ErrorCode = 6
 )
 
-func (e MKErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case MKErrorUnknown:
-		return "MKErrorUnknown"
-	case MKErrorServerFailure:
-		return "MKErrorServerFailure"
-	case MKErrorLoadingThrottled:
-		return "MKErrorLoadingThrottled"
-	case MKErrorPlacemarkNotFound:
-		return "MKErrorPlacemarkNotFound"
-	case MKErrorDirectionsNotFound:
-		return "MKErrorDirectionsNotFound"
-	case MKErrorDecodingFailed:
-		return "MKErrorDecodingFailed"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorServerFailure:
+		return "ErrorServerFailure"
+	case ErrorLoadingThrottled:
+		return "ErrorLoadingThrottled"
+	case ErrorPlacemarkNotFound:
+		return "ErrorPlacemarkNotFound"
+	case ErrorDirectionsNotFound:
+		return "ErrorDirectionsNotFound"
+	case ErrorDecodingFailed:
+		return "ErrorDecodingFailed"
 	default:
-		return fmt.Sprintf("MKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the visibility of different map features.
-type MKFeatureVisibility int64
+type FeatureVisibility int64
 
 const (
 	// A constant indicating that the feature adapts to the current map state.
-	MKFeatureVisibilityAdaptive MKFeatureVisibility = 0
+	FeatureVisibilityAdaptive FeatureVisibility = 0
 	// A constant indicating that the feature is hidden.
-	MKFeatureVisibilityHidden MKFeatureVisibility = 1
+	FeatureVisibilityHidden FeatureVisibility = 1
 	// A constant indicating that the feature is visible.
-	MKFeatureVisibilityVisible MKFeatureVisibility = 2
+	FeatureVisibilityVisible FeatureVisibility = 2
 )
 
-func (e MKFeatureVisibility) String() string {
+// String returns the FeatureVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FeatureVisibility) String() string {
 	switch e {
-	case MKFeatureVisibilityAdaptive:
-		return "MKFeatureVisibilityAdaptive"
-	case MKFeatureVisibilityHidden:
-		return "MKFeatureVisibilityHidden"
-	case MKFeatureVisibilityVisible:
-		return "MKFeatureVisibilityVisible"
+	case FeatureVisibilityAdaptive:
+		return "FeatureVisibilityAdaptive"
+	case FeatureVisibilityHidden:
+		return "FeatureVisibilityHidden"
+	case FeatureVisibilityVisible:
+		return "FeatureVisibilityVisible"
 	default:
-		return fmt.Sprintf("MKFeatureVisibility(%d)", int64(e))
+		return fmt.Sprintf("FeatureVisibility(%d)", int64(e))
 	}
 }
 
 // Options that indicate types of search completions.
 // Bitmask — values may be combined with |.
-type MKLocalSearchCompleterResultType uint64
+type LocalSearchCompleterResultType uint64
 
 const (
 	// Deprecated: Use MKLocalSearchCompleterResultType
-	MKLocalSearchCompleterResultTypeAddress         MKLocalSearchCompleterResultType = 1
-	MKLocalSearchCompleterResultTypePointOfInterest MKLocalSearchCompleterResultType = 2
-	MKLocalSearchCompleterResultTypeQuery           MKLocalSearchCompleterResultType = 4
-	MKLocalSearchCompleterResultTypePhysicalFeature MKLocalSearchCompleterResultType = 8
+	LocalSearchCompleterResultTypeAddress         LocalSearchCompleterResultType = 1
+	LocalSearchCompleterResultTypePointOfInterest LocalSearchCompleterResultType = 2
+	LocalSearchCompleterResultTypeQuery           LocalSearchCompleterResultType = 4
+	LocalSearchCompleterResultTypePhysicalFeature LocalSearchCompleterResultType = 8
 )
 
-func (e MKLocalSearchCompleterResultType) String() string {
+// String returns the LocalSearchCompleterResultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LocalSearchCompleterResultType) String() string {
 	var parts []string
-	if e&MKLocalSearchCompleterResultTypeAddress != 0 {
-		parts = append(parts, "MKLocalSearchCompleterResultTypeAddress")
+	if e&LocalSearchCompleterResultTypeAddress != 0 {
+		parts = append(parts, "LocalSearchCompleterResultTypeAddress")
 	}
-	if e&MKLocalSearchCompleterResultTypePointOfInterest != 0 {
-		parts = append(parts, "MKLocalSearchCompleterResultTypePointOfInterest")
+	if e&LocalSearchCompleterResultTypePointOfInterest != 0 {
+		parts = append(parts, "LocalSearchCompleterResultTypePointOfInterest")
 	}
-	if e&MKLocalSearchCompleterResultTypeQuery != 0 {
-		parts = append(parts, "MKLocalSearchCompleterResultTypeQuery")
+	if e&LocalSearchCompleterResultTypeQuery != 0 {
+		parts = append(parts, "LocalSearchCompleterResultTypeQuery")
 	}
-	if e&MKLocalSearchCompleterResultTypePhysicalFeature != 0 {
-		parts = append(parts, "MKLocalSearchCompleterResultTypePhysicalFeature")
+	if e&LocalSearchCompleterResultTypePhysicalFeature != 0 {
+		parts = append(parts, "LocalSearchCompleterResultTypePhysicalFeature")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -314,46 +336,50 @@ func (e MKLocalSearchCompleterResultType) String() string {
 }
 
 // A value that indicates the importance of the configured region.
-type MKLocalSearchRegionPriority int64
+type LocalSearchRegionPriority int64
 
 const (
 	// A value indicating that the results can originate from outside the specified region.
-	MKLocalSearchRegionPriorityDefault MKLocalSearchRegionPriority = 0
+	LocalSearchRegionPriorityDefault LocalSearchRegionPriority = 0
 	// A value indicating that no results can originate from outside the specified region.
-	MKLocalSearchRegionPriorityRequired MKLocalSearchRegionPriority = 1
+	LocalSearchRegionPriorityRequired LocalSearchRegionPriority = 1
 )
 
-func (e MKLocalSearchRegionPriority) String() string {
+// String returns the LocalSearchRegionPriority constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LocalSearchRegionPriority) String() string {
 	switch e {
-	case MKLocalSearchRegionPriorityDefault:
-		return "MKLocalSearchRegionPriorityDefault"
-	case MKLocalSearchRegionPriorityRequired:
-		return "MKLocalSearchRegionPriorityRequired"
+	case LocalSearchRegionPriorityDefault:
+		return "LocalSearchRegionPriorityDefault"
+	case LocalSearchRegionPriorityRequired:
+		return "LocalSearchRegionPriorityRequired"
 	default:
-		return fmt.Sprintf("MKLocalSearchRegionPriority(%d)", int64(e))
+		return fmt.Sprintf("LocalSearchRegionPriority(%d)", int64(e))
 	}
 }
 
 // Options that indicate types of search results.
 // Bitmask — values may be combined with |.
-type MKLocalSearchResultType uint64
+type LocalSearchResultType uint64
 
 const (
-	MKLocalSearchResultTypeAddress         MKLocalSearchResultType = 1
-	MKLocalSearchResultTypePointOfInterest MKLocalSearchResultType = 2
-	MKLocalSearchResultTypePhysicalFeature MKLocalSearchResultType = 4
+	LocalSearchResultTypeAddress         LocalSearchResultType = 1
+	LocalSearchResultTypePointOfInterest LocalSearchResultType = 2
+	LocalSearchResultTypePhysicalFeature LocalSearchResultType = 4
 )
 
-func (e MKLocalSearchResultType) String() string {
+// String returns the LocalSearchResultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LocalSearchResultType) String() string {
 	var parts []string
-	if e&MKLocalSearchResultTypeAddress != 0 {
-		parts = append(parts, "MKLocalSearchResultTypeAddress")
+	if e&LocalSearchResultTypeAddress != 0 {
+		parts = append(parts, "LocalSearchResultTypeAddress")
 	}
-	if e&MKLocalSearchResultTypePointOfInterest != 0 {
-		parts = append(parts, "MKLocalSearchResultTypePointOfInterest")
+	if e&LocalSearchResultTypePointOfInterest != 0 {
+		parts = append(parts, "LocalSearchResultTypePointOfInterest")
 	}
-	if e&MKLocalSearchResultTypePhysicalFeature != 0 {
-		parts = append(parts, "MKLocalSearchResultTypePhysicalFeature")
+	if e&LocalSearchResultTypePhysicalFeature != 0 {
+		parts = append(parts, "LocalSearchResultTypePhysicalFeature")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -362,208 +388,226 @@ func (e MKLocalSearchResultType) String() string {
 }
 
 // Constants that control the position of badges on LookAround views.
-type MKLookAroundBadgePosition int64
+type LookAroundBadgePosition int64
 
 const (
 	// The value that indicates the top-left badge position.
-	MKLookAroundBadgePositionTopLeading MKLookAroundBadgePosition = 0
+	LookAroundBadgePositionTopLeading LookAroundBadgePosition = 0
 	// The value that indicates the top-right badge position.
-	MKLookAroundBadgePositionTopTrailing MKLookAroundBadgePosition = 1
+	LookAroundBadgePositionTopTrailing LookAroundBadgePosition = 1
 	// The value that indicates the bottom-right badge position.
-	MKLookAroundBadgePositionBottomTrailing MKLookAroundBadgePosition = 2
+	LookAroundBadgePositionBottomTrailing LookAroundBadgePosition = 2
 )
 
-func (e MKLookAroundBadgePosition) String() string {
+// String returns the LookAroundBadgePosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LookAroundBadgePosition) String() string {
 	switch e {
-	case MKLookAroundBadgePositionTopLeading:
-		return "MKLookAroundBadgePositionTopLeading"
-	case MKLookAroundBadgePositionTopTrailing:
-		return "MKLookAroundBadgePositionTopTrailing"
-	case MKLookAroundBadgePositionBottomTrailing:
-		return "MKLookAroundBadgePositionBottomTrailing"
+	case LookAroundBadgePositionTopLeading:
+		return "LookAroundBadgePositionTopLeading"
+	case LookAroundBadgePositionTopTrailing:
+		return "LookAroundBadgePositionTopTrailing"
+	case LookAroundBadgePositionBottomTrailing:
+		return "LookAroundBadgePositionBottomTrailing"
 	default:
-		return fmt.Sprintf("MKLookAroundBadgePosition(%d)", int64(e))
+		return fmt.Sprintf("LookAroundBadgePosition(%d)", int64(e))
 	}
 }
 
 // Values that control the map’s elevation style.
-type MKMapElevationStyle int64
+type MapElevationStyle int64
 
 const (
-	MKMapElevationStyleFlat      MKMapElevationStyle = 0
-	MKMapElevationStyleRealistic MKMapElevationStyle = 1
+	MapElevationStyleFlat      MapElevationStyle = 0
+	MapElevationStyleRealistic MapElevationStyle = 1
 )
 
-func (e MKMapElevationStyle) String() string {
+// String returns the MapElevationStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MapElevationStyle) String() string {
 	switch e {
-	case MKMapElevationStyleFlat:
-		return "MKMapElevationStyleFlat"
-	case MKMapElevationStyleRealistic:
-		return "MKMapElevationStyleRealistic"
+	case MapElevationStyleFlat:
+		return "MapElevationStyleFlat"
+	case MapElevationStyleRealistic:
+		return "MapElevationStyleRealistic"
 	default:
-		return fmt.Sprintf("MKMapElevationStyle(%d)", int64(e))
+		return fmt.Sprintf("MapElevationStyle(%d)", int64(e))
 	}
 }
 
 // The style to use for a map item detail callout presentation.
-type MKMapItemDetailSelectionAccessoryCalloutStyle int64
+type MapItemDetailSelectionAccessoryCalloutStyle int64
 
 const (
-	MKMapItemDetailSelectionAccessoryCalloutStyleAutomatic MKMapItemDetailSelectionAccessoryCalloutStyle = 0
-	MKMapItemDetailSelectionAccessoryCalloutStyleFull      MKMapItemDetailSelectionAccessoryCalloutStyle = 1
-	MKMapItemDetailSelectionAccessoryCalloutStyleCompact   MKMapItemDetailSelectionAccessoryCalloutStyle = 2
+	MapItemDetailSelectionAccessoryCalloutStyleAutomatic MapItemDetailSelectionAccessoryCalloutStyle = 0
+	MapItemDetailSelectionAccessoryCalloutStyleFull      MapItemDetailSelectionAccessoryCalloutStyle = 1
+	MapItemDetailSelectionAccessoryCalloutStyleCompact   MapItemDetailSelectionAccessoryCalloutStyle = 2
 )
 
-func (e MKMapItemDetailSelectionAccessoryCalloutStyle) String() string {
+// String returns the MapItemDetailSelectionAccessoryCalloutStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MapItemDetailSelectionAccessoryCalloutStyle) String() string {
 	switch e {
-	case MKMapItemDetailSelectionAccessoryCalloutStyleAutomatic:
-		return "MKMapItemDetailSelectionAccessoryCalloutStyleAutomatic"
-	case MKMapItemDetailSelectionAccessoryCalloutStyleFull:
-		return "MKMapItemDetailSelectionAccessoryCalloutStyleFull"
-	case MKMapItemDetailSelectionAccessoryCalloutStyleCompact:
-		return "MKMapItemDetailSelectionAccessoryCalloutStyleCompact"
+	case MapItemDetailSelectionAccessoryCalloutStyleAutomatic:
+		return "MapItemDetailSelectionAccessoryCalloutStyleAutomatic"
+	case MapItemDetailSelectionAccessoryCalloutStyleFull:
+		return "MapItemDetailSelectionAccessoryCalloutStyleFull"
+	case MapItemDetailSelectionAccessoryCalloutStyleCompact:
+		return "MapItemDetailSelectionAccessoryCalloutStyleCompact"
 	default:
-		return fmt.Sprintf("MKMapItemDetailSelectionAccessoryCalloutStyle(%d)", int64(e))
+		return fmt.Sprintf("MapItemDetailSelectionAccessoryCalloutStyle(%d)", int64(e))
 	}
 }
 
 // The type of map to display.
-type MKMapType uint64
+type MapType uint64
 
 const (
 	// A street map that shows the position of all roads and some road names.
-	MKMapTypeStandard MKMapType = 0
+	MapTypeStandard MapType = 0
 	// Satellite imagery of the area.
-	MKMapTypeSatellite MKMapType = 1
+	MapTypeSatellite MapType = 1
 	// A satellite image of the area with road and road name information layered on top.
-	MKMapTypeHybrid MKMapType = 2
+	MapTypeHybrid MapType = 2
 	// A satellite image of the area with flyover data where available.
-	MKMapTypeSatelliteFlyover MKMapType = 3
+	MapTypeSatelliteFlyover MapType = 3
 	// A hybrid satellite image with flyover data where available.
-	MKMapTypeHybridFlyover MKMapType = 4
+	MapTypeHybridFlyover MapType = 4
 	// A street map where MapKit emphasizes your data over the underlying map details.
-	MKMapTypeMutedStandard MKMapType = 5
+	MapTypeMutedStandard MapType = 5
 )
 
-func (e MKMapType) String() string {
+// String returns the MapType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MapType) String() string {
 	switch e {
-	case MKMapTypeStandard:
-		return "MKMapTypeStandard"
-	case MKMapTypeSatellite:
-		return "MKMapTypeSatellite"
-	case MKMapTypeHybrid:
-		return "MKMapTypeHybrid"
-	case MKMapTypeSatelliteFlyover:
-		return "MKMapTypeSatelliteFlyover"
-	case MKMapTypeHybridFlyover:
-		return "MKMapTypeHybridFlyover"
-	case MKMapTypeMutedStandard:
-		return "MKMapTypeMutedStandard"
+	case MapTypeStandard:
+		return "MapTypeStandard"
+	case MapTypeSatellite:
+		return "MapTypeSatellite"
+	case MapTypeHybrid:
+		return "MapTypeHybrid"
+	case MapTypeSatelliteFlyover:
+		return "MapTypeSatelliteFlyover"
+	case MapTypeHybridFlyover:
+		return "MapTypeHybridFlyover"
+	case MapTypeMutedStandard:
+		return "MapTypeMutedStandard"
 	default:
-		return fmt.Sprintf("MKMapType(%d)", int64(e))
+		return fmt.Sprintf("MapType(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the position of overlays relative to other content.
-type MKOverlayLevel int64
+type OverlayLevel int64
 
 const (
 	// Place the overlay above roadways but below map labels, shields, or point-of-interest icons.
-	MKOverlayLevelAboveRoads MKOverlayLevel = 0
+	OverlayLevelAboveRoads OverlayLevel = 0
 	// Place the overlay above map labels, shields, or point-of-interest icons but below annotations and 3D projections of buildings.
-	MKOverlayLevelAboveLabels MKOverlayLevel = 1
+	OverlayLevelAboveLabels OverlayLevel = 1
 )
 
-func (e MKOverlayLevel) String() string {
+// String returns the OverlayLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OverlayLevel) String() string {
 	switch e {
-	case MKOverlayLevelAboveRoads:
-		return "MKOverlayLevelAboveRoads"
-	case MKOverlayLevelAboveLabels:
-		return "MKOverlayLevelAboveLabels"
+	case OverlayLevelAboveRoads:
+		return "OverlayLevelAboveRoads"
+	case OverlayLevelAboveLabels:
+		return "OverlayLevelAboveLabels"
 	default:
-		return fmt.Sprintf("MKOverlayLevel(%d)", int64(e))
+		return fmt.Sprintf("OverlayLevel(%d)", int64(e))
 	}
 }
 
 // The supported colors for pin annotations.
-type MKPinAnnotationColor uint64
+type PinAnnotationColor uint64
 
 const (
-	MKPinAnnotationColorRed    MKPinAnnotationColor = 0
-	MKPinAnnotationColorGreen  MKPinAnnotationColor = 1
-	MKPinAnnotationColorPurple MKPinAnnotationColor = 2
+	PinAnnotationColorRed    PinAnnotationColor = 0
+	PinAnnotationColorGreen  PinAnnotationColor = 1
+	PinAnnotationColorPurple PinAnnotationColor = 2
 )
 
-func (e MKPinAnnotationColor) String() string {
+// String returns the PinAnnotationColor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PinAnnotationColor) String() string {
 	switch e {
-	case MKPinAnnotationColorRed:
-		return "MKPinAnnotationColorRed"
-	case MKPinAnnotationColorGreen:
-		return "MKPinAnnotationColorGreen"
-	case MKPinAnnotationColorPurple:
-		return "MKPinAnnotationColorPurple"
+	case PinAnnotationColorRed:
+		return "PinAnnotationColorRed"
+	case PinAnnotationColorGreen:
+		return "PinAnnotationColorGreen"
+	case PinAnnotationColorPurple:
+		return "PinAnnotationColorPurple"
 	default:
-		return fmt.Sprintf("MKPinAnnotationColor(%d)", int64(e))
+		return fmt.Sprintf("PinAnnotationColor(%d)", int64(e))
 	}
 }
 
 // Constants indicating the types of search completions to return.
 //
 // Deprecated: Use MKLocalSearchCompleterResultType
-type MKSearchCompletionFilterType int64
+type SearchCompletionFilterType int64
 
 const (
-	MKSearchCompletionFilterTypeLocationsAndQueries MKSearchCompletionFilterType = 0
-	MKSearchCompletionFilterTypeLocationsOnly       MKSearchCompletionFilterType = 1
+	SearchCompletionFilterTypeLocationsAndQueries SearchCompletionFilterType = 0
+	SearchCompletionFilterTypeLocationsOnly       SearchCompletionFilterType = 1
 )
 
-func (e MKSearchCompletionFilterType) String() string {
+// String returns the SearchCompletionFilterType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SearchCompletionFilterType) String() string {
 	switch e {
-	case MKSearchCompletionFilterTypeLocationsAndQueries:
-		return "MKSearchCompletionFilterTypeLocationsAndQueries"
-	case MKSearchCompletionFilterTypeLocationsOnly:
-		return "MKSearchCompletionFilterTypeLocationsOnly"
+	case SearchCompletionFilterTypeLocationsAndQueries:
+		return "SearchCompletionFilterTypeLocationsAndQueries"
+	case SearchCompletionFilterTypeLocationsOnly:
+		return "SearchCompletionFilterTypeLocationsOnly"
 	default:
-		return fmt.Sprintf("MKSearchCompletionFilterType(%d)", int64(e))
+		return fmt.Sprintf("SearchCompletionFilterType(%d)", int64(e))
 	}
 }
 
 // Values that control how the framework emphasizes map features.
-type MKStandardMapEmphasisStyle int64
+type StandardMapEmphasisStyle int64
 
 const (
-	MKStandardMapEmphasisStyleDefault MKStandardMapEmphasisStyle = 0
-	MKStandardMapEmphasisStyleMuted   MKStandardMapEmphasisStyle = 1
+	StandardMapEmphasisStyleDefault StandardMapEmphasisStyle = 0
+	StandardMapEmphasisStyleMuted   StandardMapEmphasisStyle = 1
 )
 
-func (e MKStandardMapEmphasisStyle) String() string {
+// String returns the StandardMapEmphasisStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StandardMapEmphasisStyle) String() string {
 	switch e {
-	case MKStandardMapEmphasisStyleDefault:
-		return "MKStandardMapEmphasisStyleDefault"
-	case MKStandardMapEmphasisStyleMuted:
-		return "MKStandardMapEmphasisStyleMuted"
+	case StandardMapEmphasisStyleDefault:
+		return "StandardMapEmphasisStyleDefault"
+	case StandardMapEmphasisStyleMuted:
+		return "StandardMapEmphasisStyleMuted"
 	default:
-		return fmt.Sprintf("MKStandardMapEmphasisStyle(%d)", int64(e))
+		return fmt.Sprintf("StandardMapEmphasisStyle(%d)", int64(e))
 	}
 }
 
 // The mode to use for tracking the user’s location on the map.
-type MKUserTrackingMode int64
+type UserTrackingMode int64
 
 const (
 	// The map doesn’t follow the user’s location.
-	MKUserTrackingModeNone MKUserTrackingMode = 0
+	UserTrackingModeNone UserTrackingMode = 0
 	// The map follows the user location.
-	MKUserTrackingModeFollow MKUserTrackingMode = 1
+	UserTrackingModeFollow UserTrackingMode = 1
 )
 
-func (e MKUserTrackingMode) String() string {
+// String returns the UserTrackingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserTrackingMode) String() string {
 	switch e {
-	case MKUserTrackingModeNone:
-		return "MKUserTrackingModeNone"
-	case MKUserTrackingModeFollow:
-		return "MKUserTrackingModeFollow"
+	case UserTrackingModeNone:
+		return "UserTrackingModeNone"
+	case UserTrackingModeFollow:
+		return "UserTrackingModeFollow"
 	default:
-		return fmt.Sprintf("MKUserTrackingMode(%d)", int64(e))
+		return fmt.Sprintf("UserTrackingMode(%d)", int64(e))
 	}
 }

@@ -5,54 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for illuminance.
+// UnitIlluminance is an idiomatic wrapper over the Objective-C class NSUnitIlluminance.
 //
-// UnitIlluminance wraps [raw.NSUnitIlluminance] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for illuminance.
 type UnitIlluminance struct {
-	inner *raw.NSUnitIlluminance
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitIlluminance].
-func (x *UnitIlluminance) Unwrap() *raw.NSUnitIlluminance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitIlluminance) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitIlluminanceFromID adopts an existing object pointer as a UnitIlluminance (nil for 0).
+// UnitIlluminanceFromID adopts an existing Objective-C object as a UnitIlluminance
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitIlluminanceFromID(id objc.ID) *UnitIlluminance {
 	if id == 0 {
 		return nil
 	}
-	return &UnitIlluminance{inner: raw.NSUnitIlluminanceFromID(id)}
-}
-
-// NewUnitIlluminance creates a new [UnitIlluminance].
-func NewUnitIlluminance() *UnitIlluminance {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitIlluminance")), objc.RegisterName("new"))
-	return &UnitIlluminance{inner: raw.NSUnitIlluminanceFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitIlluminance) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitIlluminance {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitIlluminance{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitIlluminance) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitIlluminanceAdopt wraps an Objective-C object that this code just created as a
+// UnitIlluminance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitIlluminanceAdopt(id objc.ID) *UnitIlluminance {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitIlluminance{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitIlluminance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitIlluminance creates a new UnitIlluminance.
+func NewUnitIlluminance() *UnitIlluminance {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitIlluminance")), objc.RegisterName("new"))
+	return unitIlluminanceAdopt(_id)
+}
 
-func (x *UnitIlluminance) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitIlluminance) WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitIlluminanceable is the interface implemented by [UnitIlluminance], for mocking and DI.
 type UnitIlluminanceable interface {
-	Unwrap() *raw.NSUnitIlluminance
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitIlluminance
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance
 }
 
 var _ UnitIlluminanceable = (*UnitIlluminance)(nil)
+
+var _ DimensionProvider = (*UnitIlluminance)(nil)
+
+var _ UnitProvider = (*UnitIlluminance)(nil)

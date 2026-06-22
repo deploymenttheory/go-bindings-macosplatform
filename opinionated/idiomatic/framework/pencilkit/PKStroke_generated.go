@@ -5,128 +5,143 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
+// Stroke is an idiomatic wrapper over the Objective-C class PKStroke.
 //
-// Stroke wraps [raw.PKStroke] with a fluent Go API.
+// A structure that represents the paths, boundaries, and other properties of a stroke drawn on a canvas.
 type Stroke struct {
-	inner *raw.PKStroke
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKStroke].
-func (x *Stroke) Unwrap() *raw.PKStroke { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Stroke) ID() objc.ID { return x.inner.Ptr() }
-
-// StrokeFromID adopts an existing object pointer as a Stroke (nil for 0).
+// StrokeFromID adopts an existing Objective-C object as a Stroke
+// (nil for 0), retaining it and registering a release finalizer.
 func StrokeFromID(id objc.ID) *Stroke {
 	if id == 0 {
 		return nil
 	}
-	return &Stroke{inner: raw.PKStrokeFromID(id)}
+	x := &Stroke{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStrokeWithInkStrokePathTransformMask creates a new [Stroke].
-func NewStrokeWithInkStrokePathTransformMask(ink *raw.PKInk, strokePath *raw.PKStrokePath, transform corefoundation.CGAffineTransform, mask *appkit.NSBezierPath) *Stroke {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStroke")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:strokePath:transform:mask:"), ink.Ptr(), strokePath.Ptr(), transform, mask.Ptr())
-	return &Stroke{inner: raw.PKStrokeFromID(_id)}
+// strokeAdopt wraps an Objective-C object that this code just created as a
+// Stroke (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func strokeAdopt(id objc.ID) *Stroke {
+	if id == 0 {
+		return nil
+	}
+	x := &Stroke{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewStrokeWithInkStrokePathTransformMaskRandomSeed creates a new [Stroke].
-func NewStrokeWithInkStrokePathTransformMaskRandomSeed(ink *raw.PKInk, strokePath *raw.PKStrokePath, transform corefoundation.CGAffineTransform, mask *appkit.NSBezierPath, randomSeed uint32) *Stroke {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStroke")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:"), ink.Ptr(), strokePath.Ptr(), transform, mask.Ptr(), randomSeed)
-	return &Stroke{inner: raw.PKStrokeFromID(_id)}
+// Description returns the object's -description text.
+func (x *Stroke) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The ink used to render this stroke.
-//
-// Ink calls the underlying Ink.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Stroke) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Stroke) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Stroke) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStrokeWithInkStrokePathTransformMask creates a new Stroke.
+func NewStrokeWithInkStrokePathTransformMask(ink *Ink, strokePath *StrokePath, transform corefoundation.CGAffineTransform, mask obj.Object) *Stroke {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStroke")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:strokePath:transform:mask:"), objref.IDOf(ink), objref.IDOf(strokePath), transform, objref.IDOf(mask))
+	return strokeAdopt(_id)
+}
+
+// NewStrokeWithInkStrokePathTransformMaskRandomSeed creates a new Stroke.
+func NewStrokeWithInkStrokePathTransformMaskRandomSeed(ink *Ink, strokePath *StrokePath, transform corefoundation.CGAffineTransform, mask obj.Object, randomSeed uint32) *Stroke {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKStroke")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:strokePath:transform:mask:randomSeed:"), objref.IDOf(ink), objref.IDOf(strokePath), transform, objref.IDOf(mask), randomSeed)
+	return strokeAdopt(_id)
+}
+
+// Ink the ink used to render this stroke.
 func (x *Stroke) Ink() *Ink {
-	_r := x.inner.Ink()
-	if _r == nil {
-		return nil
-	}
-	return &Ink{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ink"))
+	return InkFromID(_r)
 }
 
-// The affine transform of the stroke when rendered.
-//
-// Transform calls the underlying Transform.
+// Transform the affine transform of the stroke when rendered.
 func (x *Stroke) Transform() corefoundation.CGAffineTransform {
-	return x.inner.Transform()
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transform"))
+	return _r
 }
 
-// The B-spline path that describes this stroke.
-//
-// Path calls the underlying Path.
+// Path the B-spline path that describes this stroke.
 func (x *Stroke) Path() *StrokePath {
-	_r := x.inner.Path()
-	if _r == nil {
-		return nil
-	}
-	return &StrokePath{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return StrokePathFromID(_r)
 }
 
-// Mask calls the underlying Mask.
-func (x *Stroke) Mask() *appkit.NSBezierPath {
-	return x.inner.Mask()
+// Mask wraps the corresponding Objective-C method.
+func (x *Stroke) Mask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mask"))
+	return obj.Wrap(_r)
 }
 
-// The bounds of the rendered stroke. This includes the width & ink of the stroke after the transform is applied.
-//
-// RenderBounds calls the underlying RenderBounds.
+// RenderBounds the bounds of the rendered stroke. This includes the width & ink of the stroke after the transform is applied.
 func (x *Stroke) RenderBounds() corefoundation.CGRect {
-	return x.inner.RenderBounds()
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("renderBounds"))
+	return _r
 }
 
-// These are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
+// MaskedPathRanges these are the parametric parameter ranges of points in `strokePath` that intersect the stroke's mask.
 //
 // MaskedPathRanges returns the collection as a Go slice.
 func (x *Stroke) MaskedPathRanges() []*FloatRange {
-	arr := x.inner.MaskedPathRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FloatRange {
-		return &FloatRange{inner: raw.PKFloatRangeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maskedPathRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FloatRange { return FloatRangeFromID(_id) })
 }
 
-// The random seed for drawing strokes that use randomized effects.
-//
-// RandomSeed calls the underlying RandomSeed.
+// RandomSeed the random seed for drawing strokes that use randomized effects.
 func (x *Stroke) RandomSeed() uint32 {
-	return x.inner.RandomSeed()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("randomSeed"))
+	return _r
 }
 
-// The PencilKit version required to use this stroke.
-//
-// RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Stroke) RequiredContentVersion() PKContentVersion {
-	return PKContentVersion(x.inner.RequiredContentVersion())
+// RequiredContentVersion the PencilKit version required to use this stroke.
+func (x *Stroke) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+	return _r
 }
 
 // Strokeable is the interface implemented by [Stroke], for mocking and DI.
 type Strokeable interface {
-	Unwrap() *raw.PKStroke
+	obj.Object
 	Ink() *Ink
 	Transform() corefoundation.CGAffineTransform
 	Path() *StrokePath
-	Mask() *appkit.NSBezierPath
+	Mask() obj.Object
 	RenderBounds() corefoundation.CGRect
 	MaskedPathRanges() []*FloatRange
 	RandomSeed() uint32
-	RequiredContentVersion() PKContentVersion
+	RequiredContentVersion() ContentVersion
 }
 
 var _ Strokeable = (*Stroke)(nil)

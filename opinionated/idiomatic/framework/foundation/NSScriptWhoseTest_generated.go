@@ -5,67 +5,100 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that provides the basis for testing specifiers one at a time or in groups.
+// ScriptWhoseTest is an idiomatic wrapper over the Objective-C class NSScriptWhoseTest.
 //
-// ScriptWhoseTest wraps [raw.NSScriptWhoseTest] with a fluent Go API.
+// ScriptWhoseTest is an abstract base — you do not construct it directly. Construct one of [LogicalTest], [SpecifierTest] and pass it where a ScriptWhoseTest is accepted.
+//
+// An abstract class that provides the basis for testing specifiers one at a time or in groups.
 type ScriptWhoseTest struct {
-	inner *raw.NSScriptWhoseTest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScriptWhoseTest].
-func (x *ScriptWhoseTest) Unwrap() *raw.NSScriptWhoseTest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptWhoseTest) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptWhoseTestFromID adopts an existing object pointer as a ScriptWhoseTest (nil for 0).
+// ScriptWhoseTestFromID adopts an existing Objective-C object as a ScriptWhoseTest
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptWhoseTestFromID(id objc.ID) *ScriptWhoseTest {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptWhoseTest{inner: raw.NSScriptWhoseTestFromID(id)}
-}
-
-// NewScriptWhoseTest creates a new [ScriptWhoseTest].
-func NewScriptWhoseTest() *ScriptWhoseTest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptWhoseTest")), objc.RegisterName("new"))
-	return &ScriptWhoseTest{inner: raw.NSScriptWhoseTestFromID(_id)}
-}
-
-// NewScriptWhoseTestWithCoder creates a new [ScriptWhoseTest].
-func NewScriptWhoseTestWithCoder(inCoder *raw.NSCoder) *ScriptWhoseTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptWhoseTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &ScriptWhoseTest{inner: raw.NSScriptWhoseTestFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptWhoseTest {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ScriptWhoseTest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
-//
-// IsTrue calls the underlying IsTrue.
-func (x *ScriptWhoseTest) IsTrue() bool {
-	return x.inner.IsTrue()
+// scriptWhoseTestAdopt wraps an Objective-C object that this code just created as a
+// ScriptWhoseTest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptWhoseTestAdopt(id objc.ID) *ScriptWhoseTest {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptWhoseTest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ScriptWhoseTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return x.inner }
+// Description returns the object's -description text.
+func (x *ScriptWhoseTest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *ScriptWhoseTest) asObject() *raw.NSObject { return &x.inner.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptWhoseTest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptWhoseTest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ScriptWhoseTest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScriptWhoseTestWithCoder creates a new ScriptWhoseTest.
+func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptWhoseTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return scriptWhoseTestAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// IsTrue returns a Boolean value that indicates whether the test represented by the receiver evaluates to true.
+func (x *ScriptWhoseTest) IsTrue() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrue"))
+	return _r
+}
 
 // ScriptWhoseTestable is the interface implemented by [ScriptWhoseTest], for mocking and DI.
 type ScriptWhoseTestable interface {
-	Unwrap() *raw.NSScriptWhoseTest
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptWhoseTest
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest
 	IsTrue() bool
 }
 
 var _ ScriptWhoseTestable = (*ScriptWhoseTest)(nil)
+
+// isScriptWhoseTest marks ScriptWhoseTest — and, by embedding promotion, its
+// subclasses — as a member of the ScriptWhoseTest hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ScriptWhoseTest) isScriptWhoseTest() {}
+
+var _ ScriptWhoseTestProvider = (*ScriptWhoseTest)(nil)

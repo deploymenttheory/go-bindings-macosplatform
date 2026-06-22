@@ -9,30 +9,32 @@ import (
 )
 
 // The status values for app tracking authorization.
-type ATTrackingManagerAuthorizationStatus uint64
+type TrackingManagerAuthorizationStatus uint64
 
 const (
 	// The value that returns when the app can’t determine the user’s authorization status for access to app-related data for tracking the user or the device. - Note: If you call `ATTrackingManager.trackingAuthorizationStatus` in macOS, the result is always `ATTrackingManager.AuthorizationStatus.notDetermined`.
-	ATTrackingManagerAuthorizationStatusNotDetermined ATTrackingManagerAuthorizationStatus = 0
+	TrackingManagerAuthorizationStatusNotDetermined TrackingManagerAuthorizationStatus = 0
 	// The value that returns if authorization to access app-related data for tracking the user or the device has a restricted status. A restricted condition means the device does not prompt for tracking authorization when ``ATTrackingManager/requestTrackingAuthorizationWithCompletionHandler:`` is called, nor is it displayed when the <doc://com.apple.documentation/documentation/bundleresources/information_property_list/NSUserTrackingUsageDescription> is triggered. Also, on restricted devices, the Allow Apps To Request To Track setting is disabled and cannot be changed. This setting allows users to opt in or out of allowing apps to request user consent to access app-related data that can be used for tracking the user or the device.
-	ATTrackingManagerAuthorizationStatusRestricted ATTrackingManagerAuthorizationStatus = 1
+	TrackingManagerAuthorizationStatusRestricted TrackingManagerAuthorizationStatus = 1
 	// The value that returns if the user denies authorization to access app-related data for tracking the user or the device. The end user has denied the authorization request to access app-related data that can be used for tracking the user or the device.
-	ATTrackingManagerAuthorizationStatusDenied ATTrackingManagerAuthorizationStatus = 2
+	TrackingManagerAuthorizationStatusDenied TrackingManagerAuthorizationStatus = 2
 	// The value that returns if the user authorizes access to app-related data for tracking the user or the device. This setting allows users to opt in or out of allowing apps to request user consent to access app-related data for tracking the user or the device. End users can revoke permission at any time through the Allow Apps to Request to Track privacy setting on the device.
-	ATTrackingManagerAuthorizationStatusAuthorized ATTrackingManagerAuthorizationStatus = 3
+	TrackingManagerAuthorizationStatusAuthorized TrackingManagerAuthorizationStatus = 3
 )
 
-func (e ATTrackingManagerAuthorizationStatus) String() string {
+// String returns the TrackingManagerAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TrackingManagerAuthorizationStatus) String() string {
 	switch e {
-	case ATTrackingManagerAuthorizationStatusNotDetermined:
-		return "ATTrackingManagerAuthorizationStatusNotDetermined"
-	case ATTrackingManagerAuthorizationStatusRestricted:
-		return "ATTrackingManagerAuthorizationStatusRestricted"
-	case ATTrackingManagerAuthorizationStatusDenied:
-		return "ATTrackingManagerAuthorizationStatusDenied"
-	case ATTrackingManagerAuthorizationStatusAuthorized:
-		return "ATTrackingManagerAuthorizationStatusAuthorized"
+	case TrackingManagerAuthorizationStatusNotDetermined:
+		return "TrackingManagerAuthorizationStatusNotDetermined"
+	case TrackingManagerAuthorizationStatusRestricted:
+		return "TrackingManagerAuthorizationStatusRestricted"
+	case TrackingManagerAuthorizationStatusDenied:
+		return "TrackingManagerAuthorizationStatusDenied"
+	case TrackingManagerAuthorizationStatusAuthorized:
+		return "TrackingManagerAuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("ATTrackingManagerAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("TrackingManagerAuthorizationStatus(%d)", int64(e))
 	}
 }

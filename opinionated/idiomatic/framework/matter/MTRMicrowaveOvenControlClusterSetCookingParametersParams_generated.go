@@ -5,164 +5,194 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMicrowaveOvenControlClusterSetCookingParametersParams wraps [raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams] with a fluent Go API.
+// MTRMicrowaveOvenControlClusterSetCookingParametersParams is an idiomatic wrapper over the Objective-C class MTRMicrowaveOvenControlClusterSetCookingParametersParams.
 type MTRMicrowaveOvenControlClusterSetCookingParametersParams struct {
-	inner *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams].
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) Unwrap() *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID adopts an existing object pointer as a MTRMicrowaveOvenControlClusterSetCookingParametersParams (nil for 0).
+// MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID adopts an existing Objective-C object as a MTRMicrowaveOvenControlClusterSetCookingParametersParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID(id objc.ID) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMicrowaveOvenControlClusterSetCookingParametersParams{inner: raw.MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID(id)}
+	x := &MTRMicrowaveOvenControlClusterSetCookingParametersParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMicrowaveOvenControlClusterSetCookingParametersParams creates a new [MTRMicrowaveOvenControlClusterSetCookingParametersParams].
+// mTRMicrowaveOvenControlClusterSetCookingParametersParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRMicrowaveOvenControlClusterSetCookingParametersParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMicrowaveOvenControlClusterSetCookingParametersParamsAdopt(id objc.ID) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMicrowaveOvenControlClusterSetCookingParametersParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRMicrowaveOvenControlClusterSetCookingParametersParams creates a new MTRMicrowaveOvenControlClusterSetCookingParametersParams.
 func NewMTRMicrowaveOvenControlClusterSetCookingParametersParams() *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMicrowaveOvenControlClusterSetCookingParametersParams")), objc.RegisterName("new"))
-	return &MTRMicrowaveOvenControlClusterSetCookingParametersParams{inner: raw.MTRMicrowaveOvenControlClusterSetCookingParametersParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMicrowaveOvenControlClusterSetCookingParametersParams")), objc.RegisterName("new"))
+	return mTRMicrowaveOvenControlClusterSetCookingParametersParamsAdopt(_id)
 }
 
-// WithCookMode sets the cookMode property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookMode(cookMode *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetCookMode(cookMode)
+// WithCookMode sets the property and returns the receiver so calls can be chained.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookMode(cookMode obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookMode:"), objref.IDOf(cookMode))
 	return x
 }
 
-// WithCookTime sets the cookTime property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookTime(cookTime *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetCookTime(cookTime)
+// WithCookTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookTime(cookTime obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookTime:"), objref.IDOf(cookTime))
 	return x
 }
 
-// WithPowerSetting sets the powerSetting property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithPowerSetting(powerSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetPowerSetting(powerSetting)
+// WithPowerSetting sets the property and returns the receiver so calls can be chained.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithPowerSetting(powerSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowerSetting:"), objref.IDOf(powerSetting))
 	return x
 }
 
-// WithStartAfterSetting sets the startAfterSetting property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithStartAfterSetting(startAfterSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetStartAfterSetting(startAfterSetting)
+// WithStartAfterSetting sets the property and returns the receiver so calls can be chained.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithStartAfterSetting(startAfterSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartAfterSetting:"), objref.IDOf(startAfterSetting))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// CookMode calls the underlying CookMode.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() *foundation.NSNumber {
-	return x.inner.CookMode()
+// CookMode wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookMode"))
+	return obj.Wrap(_r)
 }
 
-// SetCookMode calls the underlying SetCookMode.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookMode(cookMode *foundation.NSNumber) {
-	x.inner.SetCookMode(cookMode)
+// SetCookMode wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookMode(cookMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookMode:"), objref.IDOf(cookMode))
 }
 
-// CookTime calls the underlying CookTime.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() *foundation.NSNumber {
-	return x.inner.CookTime()
+// CookTime wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cookTime"))
+	return obj.Wrap(_r)
 }
 
-// SetCookTime calls the underlying SetCookTime.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookTime(cookTime *foundation.NSNumber) {
-	x.inner.SetCookTime(cookTime)
+// SetCookTime wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookTime(cookTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookTime:"), objref.IDOf(cookTime))
 }
 
-// PowerSetting calls the underlying PowerSetting.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() *foundation.NSNumber {
-	return x.inner.PowerSetting()
+// PowerSetting wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("powerSetting"))
+	return obj.Wrap(_r)
 }
 
-// SetPowerSetting calls the underlying SetPowerSetting.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetPowerSetting(powerSetting *foundation.NSNumber) {
-	x.inner.SetPowerSetting(powerSetting)
+// SetPowerSetting wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetPowerSetting(powerSetting obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPowerSetting:"), objref.IDOf(powerSetting))
 }
 
-// StartAfterSetting calls the underlying StartAfterSetting.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() *foundation.NSNumber {
-	return x.inner.StartAfterSetting()
+// StartAfterSetting wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAfterSetting"))
+	return obj.Wrap(_r)
 }
 
-// SetStartAfterSetting calls the underlying SetStartAfterSetting.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetStartAfterSetting(startAfterSetting *foundation.NSNumber) {
-	x.inner.SetStartAfterSetting(startAfterSetting)
+// SetStartAfterSetting wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetStartAfterSetting(startAfterSetting obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartAfterSetting:"), objref.IDOf(startAfterSetting))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRMicrowaveOvenControlClusterSetCookingParametersParamsable is the interface implemented by [MTRMicrowaveOvenControlClusterSetCookingParametersParams], for mocking and DI.
 type MTRMicrowaveOvenControlClusterSetCookingParametersParamsable interface {
-	Unwrap() *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithCookMode(cookMode *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithCookTime(cookTime *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithPowerSetting(powerSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithStartAfterSetting(startAfterSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
-	CookMode() *foundation.NSNumber
-	SetCookMode(cookMode *foundation.NSNumber)
-	CookTime() *foundation.NSNumber
-	SetCookTime(cookTime *foundation.NSNumber)
-	PowerSetting() *foundation.NSNumber
-	SetPowerSetting(powerSetting *foundation.NSNumber)
-	StartAfterSetting() *foundation.NSNumber
-	SetStartAfterSetting(startAfterSetting *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithCookMode(cookMode obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithCookTime(cookTime obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithPowerSetting(powerSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithStartAfterSetting(startAfterSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	CookMode() obj.Object
+	SetCookMode(cookMode obj.Object)
+	CookTime() obj.Object
+	SetCookTime(cookTime obj.Object)
+	PowerSetting() obj.Object
+	SetPowerSetting(powerSetting obj.Object)
+	StartAfterSetting() obj.Object
+	SetStartAfterSetting(startAfterSetting obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRMicrowaveOvenControlClusterSetCookingParametersParamsable = (*MTRMicrowaveOvenControlClusterSetCookingParametersParams)(nil)

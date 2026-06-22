@@ -5,90 +5,86 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that store a prescription for contacts.
+// ContactsPrescription is an idiomatic wrapper over the Objective-C class HKContactsPrescription.
 //
-// ContactsPrescription wraps [raw.HKContactsPrescription] with a fluent Go API.
+// It embeds [VisionPrescription], promoting that type's methods.
+//
+// A sample that store a prescription for contacts.
 type ContactsPrescription struct {
-	inner *raw.HKContactsPrescription
+	VisionPrescription
 }
 
-// Unwrap returns the underlying [raw.HKContactsPrescription].
-func (x *ContactsPrescription) Unwrap() *raw.HKContactsPrescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactsPrescription) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactsPrescriptionFromID adopts an existing object pointer as a ContactsPrescription (nil for 0).
+// ContactsPrescriptionFromID adopts an existing Objective-C object as a ContactsPrescription
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactsPrescriptionFromID(id objc.ID) *ContactsPrescription {
 	if id == 0 {
 		return nil
 	}
-	return &ContactsPrescription{inner: raw.HKContactsPrescriptionFromID(id)}
+	x := &ContactsPrescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewContactsPrescription creates a new [ContactsPrescription].
+// contactsPrescriptionAdopt wraps an Objective-C object that this code just created as a
+// ContactsPrescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactsPrescriptionAdopt(id objc.ID) *ContactsPrescription {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactsPrescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewContactsPrescription creates a new ContactsPrescription.
 func NewContactsPrescription() *ContactsPrescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKContactsPrescription")), objc.RegisterName("new"))
-	return &ContactsPrescription{inner: raw.HKContactsPrescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKContactsPrescription")), objc.RegisterName("new"))
+	return contactsPrescriptionAdopt(_id)
 }
 
-// @property      rightEye @abstract      The right eye lens specification
-//
-// RightEye calls the underlying RightEye.
+// RightEye the right eye lens specification
 func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
-	_r := x.inner.RightEye()
-	if _r == nil {
-		return nil
-	}
-	return &ContactsLensSpecification{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
+	return ContactsLensSpecificationFromID(_r)
 }
 
-// @property      leftEye @abstract      The left eye lens specification
-//
-// LeftEye calls the underlying LeftEye.
+// LeftEye the left eye lens specification
 func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
-	_r := x.inner.LeftEye()
-	if _r == nil {
-		return nil
-	}
-	return &ContactsLensSpecification{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
+	return ContactsLensSpecificationFromID(_r)
 }
 
-// @property      brand @abstract      The prescribed brand after contact lens fitting
-//
-// Brand calls the underlying Brand.
+// Brand the prescribed brand after contact lens fitting
 func (x *ContactsPrescription) Brand() string {
-	_r := x.inner.Brand()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("brand"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *ContactsPrescription) asVisionPrescription() *raw.HKVisionPrescription {
-	return &x.inner.HKVisionPrescription
-}
-
-func (x *ContactsPrescription) asSample() *raw.HKSample {
-	return &x.inner.HKVisionPrescription.HKSample
-}
-
-func (x *ContactsPrescription) asObject() *raw.HKObject {
-	return &x.inner.HKVisionPrescription.HKSample.HKObject
+	return purego.GoString(_r)
 }
 
 // ContactsPrescriptionable is the interface implemented by [ContactsPrescription], for mocking and DI.
 type ContactsPrescriptionable interface {
-	Unwrap() *raw.HKContactsPrescription
+	obj.Object
 	RightEye() *ContactsLensSpecification
 	LeftEye() *ContactsLensSpecification
 	Brand() string
 }
 
 var _ ContactsPrescriptionable = (*ContactsPrescription)(nil)
+
+var _ VisionPrescriptionProvider = (*ContactsPrescription)(nil)
+
+var _ SampleProvider = (*ContactsPrescription)(nil)
+
+var _ ObjectProvider = (*ContactsPrescription)(nil)

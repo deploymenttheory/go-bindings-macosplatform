@@ -5,144 +5,158 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection similar to a dictionary, but with a broader range of available memory semantics.
+// MapTable is an idiomatic wrapper over the Objective-C class NSMapTable.
 //
-// MapTable wraps [raw.NSMapTable] with a fluent Go API.
+// A collection similar to a dictionary, but with a broader range of available memory semantics.
 type MapTable struct {
-	inner *raw.NSMapTable[objc.ID, objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMapTable].
-func (x *MapTable) Unwrap() *raw.NSMapTable[objc.ID, objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapTable) ID() objc.ID { return x.inner.Ptr() }
-
-// MapTableFromID adopts an existing object pointer as a MapTable (nil for 0).
+// MapTableFromID adopts an existing Objective-C object as a MapTable
+// (nil for 0), retaining it and registering a release finalizer.
 func MapTableFromID(id objc.ID) *MapTable {
 	if id == 0 {
 		return nil
 	}
-	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](id)}
-}
-
-// Returns a map table, initialized with the given options.
-//
-// NewMapTableWithKeyOptionsValueOptionsCapacity creates a new [MapTable].
-func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions, initialCapacity uint) *MapTable {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMapTable")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyOptions:valueOptions:capacity:"), raw.NSPointerFunctionsOptions(keyOptions), raw.NSPointerFunctionsOptions(valueOptions), initialCapacity)
-	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
-}
-
-// Returns a map table, initialized with the given functions.
-//
-// NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity creates a new [MapTable].
-func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunctions *raw.NSPointerFunctions, valueFunctions *raw.NSPointerFunctions, initialCapacity uint) *MapTable {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMapTable")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyPointerFunctions:valuePointerFunctions:capacity:"), keyFunctions.Ptr(), valueFunctions.Ptr(), initialCapacity)
-	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MapTable) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MapTable {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MapTable{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a the value associated with a given key.
-//
-// ObjectForKey calls the underlying ObjectForKey.
-func (x *MapTable) ObjectForKey(aKey objc.ID) objc.ID {
-	return x.inner.ObjectForKey(aKey)
+// mapTableAdopt wraps an Objective-C object that this code just created as a
+// MapTable (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapTableAdopt(id objc.ID) *MapTable {
+	if id == 0 {
+		return nil
+	}
+	x := &MapTable{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Removes a given key and its associated value from the map table.
-//
-// RemoveObjectForKey calls the underlying RemoveObjectForKey.
-func (x *MapTable) RemoveObjectForKey(aKey objc.ID) {
-	x.inner.RemoveObjectForKey(aKey)
+// Description returns the object's -description text.
+func (x *MapTable) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Adds a given key-value pair to the map table.
-//
-// SetObjectForKey calls the underlying SetObjectForKey.
-func (x *MapTable) SetObjectForKey(anObject objc.ID, aKey objc.ID) {
-	x.inner.SetObjectForKey(anObject, aKey)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapTable) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns an enumerator object that lets you access each key in the map table.
-//
-// KeyEnumerator calls the underlying KeyEnumerator.
-func (x *MapTable) KeyEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.KeyEnumerator()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapTable) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns an enumerator object that lets you access each value in the map table.
-//
-// ObjectEnumerator calls the underlying ObjectEnumerator.
-func (x *MapTable) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
-	return x.inner.ObjectEnumerator()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapTable) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Empties the map table of its entries.
-//
-// RemoveAllObjects calls the underlying RemoveAllObjects.
+// NewMapTableWithKeyOptionsValueOptionsCapacity returns a map table, initialized with the given options.
+func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions PointerFunctionsOptions, valueOptions PointerFunctionsOptions, initialCapacity int) *MapTable {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyOptions:valueOptions:capacity:"), keyOptions, valueOptions, initialCapacity)
+	return mapTableAdopt(_id)
+}
+
+// NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity returns a map table, initialized with the given functions.
+func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunctions *PointerFunctions, valueFunctions *PointerFunctions, initialCapacity int) *MapTable {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyPointerFunctions:valuePointerFunctions:capacity:"), objref.IDOf(keyFunctions), objref.IDOf(valueFunctions), initialCapacity)
+	return mapTableAdopt(_id)
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MapTable) WithScriptingProperties(scriptingProperties obj.Object) *MapTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// ObjectForKey returns a the value associated with a given key.
+func (x *MapTable) ObjectForKey(aKey obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(aKey))
+	return obj.Wrap(_r)
+}
+
+// RemoveObjectForKey removes a given key and its associated value from the map table.
+func (x *MapTable) RemoveObjectForKey(aKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
+}
+
+// SetObjectForKey adds a given key-value pair to the map table.
+func (x *MapTable) SetObjectForKey(anObject obj.Object, aKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKey:"), objref.IDOf(anObject), objref.IDOf(aKey))
+}
+
+// KeyEnumerator returns an enumerator object that lets you access each key in the map table.
+func (x *MapTable) KeyEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// ObjectEnumerator returns an enumerator object that lets you access each value in the map table.
+func (x *MapTable) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+	return obj.Wrap(_r)
+}
+
+// RemoveAllObjects empties the map table of its entries.
 func (x *MapTable) RemoveAllObjects() {
-	x.inner.RemoveAllObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
-// Returns a dictionary representation of the map table.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *MapTable) DictionaryRepresentation() *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+// DictionaryRepresentation returns a dictionary representation of the map table.
+func (x *MapTable) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// KeyPointerFunctions calls the underlying KeyPointerFunctions.
+// KeyPointerFunctions wraps the corresponding Objective-C method.
 func (x *MapTable) KeyPointerFunctions() *PointerFunctions {
-	_r := x.inner.KeyPointerFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &PointerFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPointerFunctions"))
+	return PointerFunctionsFromID(_r)
 }
 
-// ValuePointerFunctions calls the underlying ValuePointerFunctions.
+// ValuePointerFunctions wraps the corresponding Objective-C method.
 func (x *MapTable) ValuePointerFunctions() *PointerFunctions {
-	_r := x.inner.ValuePointerFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &PointerFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuePointerFunctions"))
+	return PointerFunctionsFromID(_r)
 }
 
-// Count calls the underlying Count.
-func (x *MapTable) Count() uint {
-	return x.inner.Count()
+// Count wraps the corresponding Objective-C method.
+func (x *MapTable) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
-
-func (x *MapTable) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // MapTableable is the interface implemented by [MapTable], for mocking and DI.
 type MapTableable interface {
-	Unwrap() *raw.NSMapTable[objc.ID, objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MapTable
-	ObjectForKey(aKey objc.ID) objc.ID
-	RemoveObjectForKey(aKey objc.ID)
-	SetObjectForKey(anObject objc.ID, aKey objc.ID)
-	KeyEnumerator() *raw.NSEnumerator[objc.ID]
-	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MapTable
+	ObjectForKey(aKey obj.Object) obj.Object
+	RemoveObjectForKey(aKey obj.Object)
+	SetObjectForKey(anObject obj.Object, aKey obj.Object)
+	KeyEnumerator() obj.Object
+	ObjectEnumerator() obj.Object
 	RemoveAllObjects()
-	DictionaryRepresentation() *raw.NSDictionary[objc.ID, objc.ID]
+	DictionaryRepresentation() obj.Object
 	KeyPointerFunctions() *PointerFunctions
 	ValuePointerFunctions() *PointerFunctions
-	Count() uint
+	Count() int
 }
 
 var _ MapTableable = (*MapTable)(nil)

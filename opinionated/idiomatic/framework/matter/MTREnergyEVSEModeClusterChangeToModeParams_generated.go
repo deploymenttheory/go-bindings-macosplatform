@@ -5,107 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEModeClusterChangeToModeParams wraps [raw.MTREnergyEVSEModeClusterChangeToModeParams] with a fluent Go API.
+// MTREnergyEVSEModeClusterChangeToModeParams is an idiomatic wrapper over the Objective-C class MTREnergyEVSEModeClusterChangeToModeParams.
 type MTREnergyEVSEModeClusterChangeToModeParams struct {
-	inner *raw.MTREnergyEVSEModeClusterChangeToModeParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEModeClusterChangeToModeParams].
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEModeClusterChangeToModeParamsFromID adopts an existing object pointer as a MTREnergyEVSEModeClusterChangeToModeParams (nil for 0).
+// MTREnergyEVSEModeClusterChangeToModeParamsFromID adopts an existing Objective-C object as a MTREnergyEVSEModeClusterChangeToModeParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEModeClusterChangeToModeParamsFromID(id objc.ID) *MTREnergyEVSEModeClusterChangeToModeParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEModeClusterChangeToModeParams{inner: raw.MTREnergyEVSEModeClusterChangeToModeParamsFromID(id)}
+	x := &MTREnergyEVSEModeClusterChangeToModeParams{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTREnergyEVSEModeClusterChangeToModeParams creates a new [MTREnergyEVSEModeClusterChangeToModeParams].
+// mTREnergyEVSEModeClusterChangeToModeParamsAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEModeClusterChangeToModeParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEModeClusterChangeToModeParamsAdopt(id objc.ID) *MTREnergyEVSEModeClusterChangeToModeParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEModeClusterChangeToModeParams{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTREnergyEVSEModeClusterChangeToModeParams creates a new MTREnergyEVSEModeClusterChangeToModeParams.
 func NewMTREnergyEVSEModeClusterChangeToModeParams() *MTREnergyEVSEModeClusterChangeToModeParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEModeClusterChangeToModeParams")), objc.RegisterName("new"))
-	return &MTREnergyEVSEModeClusterChangeToModeParams{inner: raw.MTREnergyEVSEModeClusterChangeToModeParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEModeClusterChangeToModeParams")), objc.RegisterName("new"))
+	return mTREnergyEVSEModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the newMode property and returns the receiver for chaining.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithNewMode(newMode *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams {
-	x.inner.SetNewMode(newMode)
+// WithNewMode sets the property and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke).
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// GetNewMode calls the underlying GetNewMode.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
-	return x.inner.GetNewMode()
+// GetNewMode wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+	return obj.Wrap(_r)
 }
 
-// SetNewMode calls the underlying SetNewMode.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
-	x.inner.SetNewMode(newMode)
+// SetNewMode wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
+func (x *MTREnergyEVSEModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTREnergyEVSEModeClusterChangeToModeParamsable is the interface implemented by [MTREnergyEVSEModeClusterChangeToModeParams], for mocking and DI.
 type MTREnergyEVSEModeClusterChangeToModeParamsable interface {
-	Unwrap() *raw.MTREnergyEVSEModeClusterChangeToModeParams
-	WithNewMode(newMode *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEModeClusterChangeToModeParams
-	GetNewMode() *foundation.NSNumber
-	SetNewMode(newMode *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithNewMode(newMode obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams
+	GetNewMode() obj.Object
+	SetNewMode(newMode obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTREnergyEVSEModeClusterChangeToModeParamsable = (*MTREnergyEVSEModeClusterChangeToModeParams)(nil)

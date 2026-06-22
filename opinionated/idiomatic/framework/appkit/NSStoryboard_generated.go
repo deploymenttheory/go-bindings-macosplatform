@@ -5,70 +5,90 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
+// Storyboard is an idiomatic wrapper over the Objective-C class NSStoryboard.
 //
-// Storyboard wraps [raw.NSStoryboard] with a fluent Go API.
+// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
 type Storyboard struct {
-	inner *raw.NSStoryboard
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStoryboard].
-func (x *Storyboard) Unwrap() *raw.NSStoryboard { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Storyboard) ID() objc.ID { return x.inner.Ptr() }
-
-// StoryboardFromID adopts an existing object pointer as a Storyboard (nil for 0).
+// StoryboardFromID adopts an existing Objective-C object as a Storyboard
+// (nil for 0), retaining it and registering a release finalizer.
 func StoryboardFromID(id objc.ID) *Storyboard {
 	if id == 0 {
 		return nil
 	}
-	return &Storyboard{inner: raw.NSStoryboardFromID(id)}
+	x := &Storyboard{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewStoryboard creates a new [Storyboard].
+// storyboardAdopt wraps an Objective-C object that this code just created as a
+// Storyboard (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storyboardAdopt(id objc.ID) *Storyboard {
+	if id == 0 {
+		return nil
+	}
+	x := &Storyboard{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Storyboard) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Storyboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Storyboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Storyboard) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewStoryboard creates a new Storyboard.
 func NewStoryboard() *Storyboard {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStoryboard")), objc.RegisterName("new"))
-	return &Storyboard{inner: raw.NSStoryboardFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStoryboard")), objc.RegisterName("new"))
+	return storyboardAdopt(_id)
 }
 
-// Creates the initial view controller or window controller from a storyboard.
-//
-// InstantiateInitialController calls the underlying InstantiateInitialController.
-func (x *Storyboard) InstantiateInitialController() objc.ID {
-	return x.inner.InstantiateInitialController()
+// InstantiateInitialController creates the initial view controller or window controller from a storyboard.
+func (x *Storyboard) InstantiateInitialController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateInitialController"))
+	return obj.Wrap(_r)
 }
 
-// InstantiateInitialControllerWithCreator calls the underlying InstantiateInitialControllerWithCreator.
-func (x *Storyboard) InstantiateInitialControllerWithCreator(block func(*foundation.NSCoder) objc.ID) objc.ID {
-	return x.inner.InstantiateInitialControllerWithCreator(block)
-}
-
-// Instantiates a specified view controller or window controller from a storyboard.
-//
-// InstantiateControllerWithIdentifier calls the underlying InstantiateControllerWithIdentifier.
-func (x *Storyboard) InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID {
-	return x.inner.InstantiateControllerWithIdentifier(identifier)
-}
-
-// InstantiateControllerWithIdentifierCreator calls the underlying InstantiateControllerWithIdentifierCreator.
-func (x *Storyboard) InstantiateControllerWithIdentifierCreator(identifier *foundation.NSString, block func(*foundation.NSCoder) objc.ID) objc.ID {
-	return x.inner.InstantiateControllerWithIdentifierCreator(identifier, block)
+// InstantiateControllerWithIdentifier instantiates a specified view controller or window controller from a storyboard.
+func (x *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
+	return obj.Wrap(_r)
 }
 
 // Storyboardable is the interface implemented by [Storyboard], for mocking and DI.
 type Storyboardable interface {
-	Unwrap() *raw.NSStoryboard
-	InstantiateInitialController() objc.ID
-	InstantiateInitialControllerWithCreator(block func(*foundation.NSCoder) objc.ID) objc.ID
-	InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID
-	InstantiateControllerWithIdentifierCreator(identifier *foundation.NSString, block func(*foundation.NSCoder) objc.ID) objc.ID
+	obj.Object
+	InstantiateInitialController() obj.Object
+	InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object
 }
 
 var _ Storyboardable = (*Storyboard)(nil)

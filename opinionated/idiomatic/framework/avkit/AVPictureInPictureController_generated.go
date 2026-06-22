@@ -5,177 +5,164 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.
+// PictureInPictureController is an idiomatic wrapper over the Objective-C class AVPictureInPictureController.
 //
-// PictureInPictureController wraps [raw.AVPictureInPictureController] with a fluent Go API.
+// A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.
 type PictureInPictureController struct {
-	inner *raw.AVPictureInPictureController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPictureInPictureController].
-func (x *PictureInPictureController) Unwrap() *raw.AVPictureInPictureController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PictureInPictureController) ID() objc.ID { return x.inner.Ptr() }
-
-// PictureInPictureControllerFromID adopts an existing object pointer as a PictureInPictureController (nil for 0).
+// PictureInPictureControllerFromID adopts an existing Objective-C object as a PictureInPictureController
+// (nil for 0), retaining it and registering a release finalizer.
 func PictureInPictureControllerFromID(id objc.ID) *PictureInPictureController {
 	if id == 0 {
 		return nil
 	}
-	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(id)}
-}
-
-// Creates a Picture in Picture controller with a content source.
-//
-// NewPictureInPictureControllerWithContentSource creates a new [PictureInPictureController].
-func NewPictureInPictureControllerWithContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) *PictureInPictureController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentSource:"), contentSource.Ptr())
-	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(_id)}
-}
-
-// Creates a Picture in Picture controller with a player layer.
-//
-// NewPictureInPictureControllerWithPlayerLayer creates a new [PictureInPictureController].
-func NewPictureInPictureControllerWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *PictureInPictureController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), playerLayer.Ptr())
-	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(_id)}
-}
-
-// The source of the controller’s content.
-//
-// WithContentSource sets the contentSource property and returns the receiver for chaining.
-func (x *PictureInPictureController) WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
-	x.inner.SetContentSource(contentSource.Unwrap())
+	x := &PictureInPictureController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A delegate object for a Picture in Picture controller.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PictureInPictureController) WithDelegate(delegate raw.AVPictureInPictureControllerDelegate) *PictureInPictureController {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A Boolean value that determines whether the controller allows the user to skip media content.
-//
-// WithRequiresLinearPlayback sets the requiresLinearPlayback property and returns the receiver for chaining.
-func (x *PictureInPictureController) WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController {
-	x.inner.SetRequiresLinearPlayback(requiresLinearPlayback)
-	return x
-}
-
-// Starts Picture in Picture, if possible.
-//
-// StartPictureInPicture calls the underlying StartPictureInPicture.
-func (x *PictureInPictureController) StartPictureInPicture() {
-	x.inner.StartPictureInPicture()
-}
-
-// Stops Picture in Picture, if active.
-//
-// StopPictureInPicture calls the underlying StopPictureInPicture.
-func (x *PictureInPictureController) StopPictureInPicture() {
-	x.inner.StopPictureInPicture()
-}
-
-// @property   contentSource @abstract   The receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
-//
-// ContentSource calls the underlying ContentSource.
-func (x *PictureInPictureController) ContentSource() *PictureInPictureControllerContentSource {
-	_r := x.inner.ContentSource()
-	if _r == nil {
+// pictureInPictureControllerAdopt wraps an Objective-C object that this code just created as a
+// PictureInPictureController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pictureInPictureControllerAdopt(id objc.ID) *PictureInPictureController {
+	if id == 0 {
 		return nil
 	}
-	return &PictureInPictureControllerContentSource{inner: _r}
+	x := &PictureInPictureController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetContentSource calls the underlying SetContentSource.
-func (x *PictureInPictureController) SetContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) {
-	x.inner.SetContentSource(contentSource)
+// Description returns the object's -description text.
+func (x *PictureInPictureController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	playerLayer @abstract	The receiver's player layer.
-//
-// PlayerLayer calls the underlying PlayerLayer.
-func (x *PictureInPictureController) PlayerLayer() *avfoundation.AVPlayerLayer {
-	return x.inner.PlayerLayer()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PictureInPictureController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property	delegate @abstract	The receiver's delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *PictureInPictureController) Delegate() raw.AVPictureInPictureControllerDelegate {
-	return x.inner.Delegate()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PictureInPictureController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *PictureInPictureController) SetDelegate(delegate raw.AVPictureInPictureControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PictureInPictureController) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	pictureInPicturePossible @abstract	Whether or not Picture in Picture is currently possible.
-//
-// IsPictureInPicturePossible calls the underlying IsPictureInPicturePossible.
+// NewPictureInPictureControllerWithContentSource creates a Picture in Picture controller with a content source.
+func NewPictureInPictureControllerWithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentSource:"), objref.IDOf(contentSource))
+	return pictureInPictureControllerAdopt(_id)
+}
+
+// NewPictureInPictureControllerWithPlayerLayer creates a Picture in Picture controller with a player layer.
+func NewPictureInPictureControllerWithPlayerLayer(playerLayer obj.Object) *PictureInPictureController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), objref.IDOf(playerLayer))
+	return pictureInPictureControllerAdopt(_id)
+}
+
+// WithContentSource the source of the controller’s content.
+func (x *PictureInPictureController) WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSource:"), objref.IDOf(contentSource))
+	return x
+}
+
+// WithRequiresLinearPlayback a Boolean value that determines whether the controller allows the user to skip media content.
+func (x *PictureInPictureController) WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresLinearPlayback:"), requiresLinearPlayback)
+	return x
+}
+
+// StartPictureInPicture starts Picture in Picture, if possible.
+func (x *PictureInPictureController) StartPictureInPicture() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startPictureInPicture"))
+}
+
+// StopPictureInPicture stops Picture in Picture, if active.
+func (x *PictureInPictureController) StopPictureInPicture() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPictureInPicture"))
+}
+
+// ContentSource the receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
+func (x *PictureInPictureController) ContentSource() *PictureInPictureControllerContentSource {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentSource"))
+	return PictureInPictureControllerContentSourceFromID(_r)
+}
+
+// SetContentSource wraps the corresponding Objective-C method.
+func (x *PictureInPictureController) SetContentSource(contentSource *PictureInPictureControllerContentSource) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSource:"), objref.IDOf(contentSource))
+}
+
+// PlayerLayer the receiver's player layer.
+func (x *PictureInPictureController) PlayerLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerLayer"))
+	return obj.Wrap(_r)
+}
+
+// IsPictureInPicturePossible whether or not Picture in Picture is currently possible.
 func (x *PictureInPictureController) IsPictureInPicturePossible() bool {
-	return x.inner.IsPictureInPicturePossible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPictureInPicturePossible"))
+	return _r
 }
 
-// @property	pictureInPictureActive @abstract	Whether or not Picture in Picture is currently active.
-//
-// IsPictureInPictureActive calls the underlying IsPictureInPictureActive.
+// IsPictureInPictureActive whether or not Picture in Picture is currently active.
 func (x *PictureInPictureController) IsPictureInPictureActive() bool {
-	return x.inner.IsPictureInPictureActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPictureInPictureActive"))
+	return _r
 }
 
-// @property	pictureInPictureSuspended @abstract	Whether or not Picture in Picture is currently suspended.
-//
-// IsPictureInPictureSuspended calls the underlying IsPictureInPictureSuspended.
+// IsPictureInPictureSuspended whether or not Picture in Picture is currently suspended.
 func (x *PictureInPictureController) IsPictureInPictureSuspended() bool {
-	return x.inner.IsPictureInPictureSuspended()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPictureInPictureSuspended"))
+	return _r
 }
 
-// @property	requiresLinearPlayback @abstract	Disables certain user operations (fast forward, forward skip, and scrubbing). @discussion	This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
-//
-// RequiresLinearPlayback calls the underlying RequiresLinearPlayback.
+// RequiresLinearPlayback disables certain user operations (fast forward, forward skip, and scrubbing). This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
 func (x *PictureInPictureController) RequiresLinearPlayback() bool {
-	return x.inner.RequiresLinearPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresLinearPlayback"))
+	return _r
 }
 
-// SetRequiresLinearPlayback calls the underlying SetRequiresLinearPlayback.
+// SetRequiresLinearPlayback wraps the corresponding Objective-C method.
 func (x *PictureInPictureController) SetRequiresLinearPlayback(requiresLinearPlayback bool) {
-	x.inner.SetRequiresLinearPlayback(requiresLinearPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresLinearPlayback:"), requiresLinearPlayback)
 }
 
-// Invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.
-//
-// InvalidatePlaybackState calls the underlying InvalidatePlaybackState.
+// InvalidatePlaybackState invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.
 func (x *PictureInPictureController) InvalidatePlaybackState() {
-	x.inner.InvalidatePlaybackState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatePlaybackState"))
 }
 
 // PictureInPictureControllerable is the interface implemented by [PictureInPictureController], for mocking and DI.
 type PictureInPictureControllerable interface {
-	Unwrap() *raw.AVPictureInPictureController
+	obj.Object
 	WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController
-	WithDelegate(delegate raw.AVPictureInPictureControllerDelegate) *PictureInPictureController
 	WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController
 	StartPictureInPicture()
 	StopPictureInPicture()
 	ContentSource() *PictureInPictureControllerContentSource
-	SetContentSource(contentSource *raw.AVPictureInPictureControllerContentSource)
-	PlayerLayer() *avfoundation.AVPlayerLayer
-	Delegate() raw.AVPictureInPictureControllerDelegate
-	SetDelegate(delegate raw.AVPictureInPictureControllerDelegate)
+	SetContentSource(contentSource *PictureInPictureControllerContentSource)
+	PlayerLayer() obj.Object
 	IsPictureInPicturePossible() bool
 	IsPictureInPictureActive() bool
 	IsPictureInPictureSuspended() bool

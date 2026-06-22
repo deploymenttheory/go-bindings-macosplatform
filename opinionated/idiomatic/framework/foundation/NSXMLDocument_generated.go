@@ -5,400 +5,351 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An XML document as internalized into a logical tree structure.
+// XMLDocument is an idiomatic wrapper over the Objective-C class NSXMLDocument.
 //
-// XMLDocument wraps [raw.NSXMLDocument] with a fluent Go API.
+// It embeds [XMLNode], promoting that type's methods.
+//
+// An XML document as internalized into a logical tree structure.
 type XMLDocument struct {
-	inner *raw.NSXMLDocument
+	XMLNode
 }
 
-// Unwrap returns the underlying [raw.NSXMLDocument].
-func (x *XMLDocument) Unwrap() *raw.NSXMLDocument { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XMLDocument) ID() objc.ID { return x.inner.Ptr() }
-
-// XMLDocumentFromID adopts an existing object pointer as a XMLDocument (nil for 0).
+// XMLDocumentFromID adopts an existing Objective-C object as a XMLDocument
+// (nil for 0), retaining it and registering a release finalizer.
 func XMLDocumentFromID(id objc.ID) *XMLDocument {
 	if id == 0 {
 		return nil
 	}
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(id)}
+	x := &XMLDocument{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewXMLDocument creates a new [XMLDocument].
+// xMLDocumentAdopt wraps an Objective-C object that this code just created as a
+// XMLDocument (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xMLDocumentAdopt(id objc.ID) *XMLDocument {
+	if id == 0 {
+		return nil
+	}
+	x := &XMLDocument{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewXMLDocument creates a new XMLDocument.
 func NewXMLDocument() *XMLDocument {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("new"))
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("new"))
+	return xMLDocumentAdopt(_id)
 }
 
-// @method initWithXMLString:options:error: @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
-//
-// NewXMLDocumentWithXMLStringOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask NSXMLNodeOptions) (*XMLDocument, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
+// NewXMLDocumentWithXMLStringOptionsError returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
+func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask XMLNodeOptions) (result *XMLDocument, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:options:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:options:error:"), purego.NSString(string_), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
+	return xMLDocumentAdopt(_id), nil
 }
 
-// @method initWithContentsOfURL:options:error: @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
-//
-// NewXMLDocumentWithContentsOfURLOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask NSXMLNodeOptions) (*XMLDocument, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
+// NewXMLDocumentWithContentsOfURLOptionsError returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
+func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask XMLNodeOptions) (result *XMLDocument, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), rt.FileURL(url), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
+	return xMLDocumentAdopt(_id), nil
 }
 
-// @method initWithData:options:error: @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
-//
-// NewXMLDocumentWithDataOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask NSXMLNodeOptions) (*XMLDocument, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
+// NewXMLDocumentWithDataOptionsError returns a document created from data. Parse errors are returned in <tt>error</tt>.
+func NewXMLDocumentWithDataOptionsError(data *Data, mask XMLNodeOptions) (result *XMLDocument, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), objref.IDOf(data), mask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
+	return xMLDocumentAdopt(_id), nil
 }
 
-// @method initWithRootElement: @abstract Returns a document with a single child, the root element.
-//
-// NewXMLDocumentWithRootElement creates a new [XMLDocument].
-func NewXMLDocumentWithRootElement(element *raw.NSXMLElement) *XMLDocument {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootElement:"), element.Ptr())
-	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}
+// NewXMLDocumentWithRootElement returns a document with a single child, the root element.
+func NewXMLDocumentWithRootElement(element *XMLElement) *XMLDocument {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXMLDocument")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootElement:"), objref.IDOf(element))
+	return xMLDocumentAdopt(_id)
 }
 
-// @abstract Sets the character encoding to an IANA type.
-//
-// WithCharacterEncoding sets the characterEncoding property and returns the receiver for chaining.
-func (x *XMLDocument) WithCharacterEncoding(characterEncoding string) *XMLDocument {
-	x.inner.SetCharacterEncoding(foundation.NSStringStringWithUTF8String(characterEncoding))
+// WithCharacterEncoding sets the character encoding to an IANA type.
+func (x *XMLDocument) WithCharacterEncoding(characterEncoding StringProvider) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacterEncoding:"), objref.IDOf(characterEncoding))
 	return x
 }
 
-// @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
-//
-// WithStandalone sets the standalone property and returns the receiver for chaining.
+// WithStandalone set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
 func (x *XMLDocument) WithStandalone(standalone bool) *XMLDocument {
-	x.inner.SetStandalone(standalone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandalone:"), standalone)
 	return x
 }
 
-// @abstract The kind of document.
-//
-// WithDocumentContentKind sets the documentContentKind property and returns the receiver for chaining.
-func (x *XMLDocument) WithDocumentContentKind(documentContentKind NSXMLDocumentContentKind) *XMLDocument {
-	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
+// WithDocumentContentKind the kind of document.
+func (x *XMLDocument) WithDocumentContentKind(documentContentKind XMLDocumentContentKind) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentContentKind:"), documentContentKind)
 	return x
 }
 
-// @abstract Set the MIME type, eg text/xml.
-//
-// WithMIMEType sets the mIMEType property and returns the receiver for chaining.
-func (x *XMLDocument) WithMIMEType(mIMEType string) *XMLDocument {
-	x.inner.SetMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
+// WithMIMEType set the MIME type, eg text/xml.
+func (x *XMLDocument) WithMIMEType(mIMEType StringProvider) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMIMEType:"), objref.IDOf(mIMEType))
 	return x
 }
 
-// @abstract Set the associated DTD. This DTD will be output with the document.
-//
-// WithDTD sets the dTD property and returns the receiver for chaining.
+// WithDTD set the associated DTD. This DTD will be output with the document.
 func (x *XMLDocument) WithDTD(dTD *XMLDTD) *XMLDocument {
-	x.inner.SetDTD(dTD.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDTD:"), objref.IDOf(dTD))
 	return x
 }
 
-// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *XMLDocument) WithName(name string) *XMLDocument {
-	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+func (x *XMLDocument) WithName(name StringProvider) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *XMLDocument) WithObjectValue(objectValue objc.ID) *XMLDocument {
-	x.inner.NSXMLNode.SetObjectValue(objectValue)
+// WithObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+func (x *XMLDocument) WithObjectValue(objectValue obj.Object) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
-func (x *XMLDocument) WithStringValue(stringValue string) *XMLDocument {
-	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+// WithStringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+func (x *XMLDocument) WithStringValue(stringValue StringProvider) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return x
 }
 
-// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-//
-// WithURI sets the uRI property and returns the receiver for chaining.
-func (x *XMLDocument) WithURI(uRI string) *XMLDocument {
-	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+// WithURI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+func (x *XMLDocument) WithURI(uRI StringProvider) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XMLDocument) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDocument {
-	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *XMLDocument) WithScriptingProperties(scriptingProperties obj.Object) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// @method setRootElement: @abstract Set the root element. Removes all other children including comments and processing-instructions.
-//
-// SetRootElement calls the underlying SetRootElement.
-func (x *XMLDocument) SetRootElement(root *raw.NSXMLElement) {
-	x.inner.SetRootElement(root)
+// SetRootElement set the root element. Removes all other children including comments and processing-instructions.
+func (x *XMLDocument) SetRootElement(root *XMLElement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootElement:"), objref.IDOf(root))
 }
 
-// @method rootElement @abstract The root element.
-//
-// RootElement calls the underlying RootElement.
+// RootElement the root element.
 func (x *XMLDocument) RootElement() *XMLElement {
-	_r := x.inner.RootElement()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootElement"))
+	return XMLElementFromID(_r)
+}
+
+// InsertChildAtIndex inserts a child at a particular index.
+func (x *XMLDocument) InsertChildAtIndex(child *XMLNode, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
+}
+
+// InsertChildrenAtIndex insert several children at a particular index.
+func (x *XMLDocument) InsertChildrenAtIndex(children []*XMLNode, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
+}
+
+// RemoveChildAtIndex removes a child at a particular index.
+func (x *XMLDocument) RemoveChildAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildAtIndex:"), index)
+}
+
+// SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+func (x *XMLDocument) SetChildren(children []*XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
+}
+
+// AddChild adds a child to the end of the existing children.
+func (x *XMLDocument) AddChild(child *XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
+}
+
+// ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
+func (x *XMLDocument) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
+}
+
+// XMLDataWithOptions the representation of this node as it would appear in an XML document, encoded based on characterEncoding.
+func (x *XMLDocument) XMLDataWithOptions(options XMLNodeOptions) *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XMLDataWithOptions:"), options)
+	return DataFromID(_r)
+}
+
+// ObjectByApplyingXSLTArgumentsError applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
+func (x *XMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *Data, arguments obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectByApplyingXSLT:arguments:error:"), objref.IDOf(xslt), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &XMLElement{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// @method insertChild:atIndex: @abstract Inserts a child at a particular index.
-//
-// InsertChildAtIndex calls the underlying InsertChildAtIndex.
-func (x *XMLDocument) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
-	x.inner.InsertChildAtIndex(child, index)
-}
-
-// @method insertChildren:atIndex: @abstract Insert several children at a particular index.
-//
-// InsertChildrenAtIndex calls the underlying InsertChildrenAtIndex.
-func (x *XMLDocument) InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint) {
-	x.inner.InsertChildrenAtIndex(children, index)
-}
-
-// @method removeChildAtIndex:atIndex: @abstract Removes a child at a particular index.
-//
-// RemoveChildAtIndex calls the underlying RemoveChildAtIndex.
-func (x *XMLDocument) RemoveChildAtIndex(index uint) {
-	x.inner.RemoveChildAtIndex(index)
-}
-
-// @method setChildren: @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
-//
-// SetChildren calls the underlying SetChildren.
-func (x *XMLDocument) SetChildren(children ...XMLNodeProvider) {
-	_ptrs := make([]objc.ID, len(children))
-	for _i, _v := range children {
-		_ptrs[_i] = _v.asXMLNode().Ptr()
+// ObjectByApplyingXSLTStringArgumentsError applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
+func (x *XMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectByApplyingXSLTString:arguments:error:"), purego.NSString(xslt), objref.IDOf(arguments), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *raw.NSArray[*raw.NSXMLNode]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
+	return obj.Wrap(_r), nil
+}
+
+// ObjectByApplyingXSLTAtURLArgumentsError applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
+func (x *XMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectByApplyingXSLTAtURL:arguments:error:"), rt.FileURL(xsltURL), objref.IDOf(argument), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-
-	x.inner.SetChildren(_arg0)
+	return obj.Wrap(_r), nil
 }
 
-// @method addChild: @abstract Adds a child to the end of the existing children.
+// ValidateAndReturnError wraps the corresponding Objective-C method.
 //
-// AddChild calls the underlying AddChild.
-func (x *XMLDocument) AddChild(child *raw.NSXMLNode) {
-	x.inner.AddChild(child)
-}
-
-// @method replaceChildAtIndex:withNode: @abstract Replaces a child at a particular index with another child.
-//
-// ReplaceChildAtIndexWithNode calls the underlying ReplaceChildAtIndexWithNode.
-func (x *XMLDocument) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode) {
-	x.inner.ReplaceChildAtIndexWithNode(index, node)
-}
-
-// @method XMLDataWithOptions: @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
-//
-// XMLDataWithOptions calls the underlying XMLDataWithOptions.
-func (x *XMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *Data {
-	_r := x.inner.XMLDataWithOptions(raw.NSXMLNodeOptions(options))
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
-}
-
-// @method objectByApplyingXSLT:arguments:error: @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
-//
-// ObjectByApplyingXSLTArgumentsError calls the underlying ObjectByApplyingXSLTArgumentsError.
-func (x *XMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
-	return x.inner.ObjectByApplyingXSLTArgumentsError(xslt, arguments)
-}
-
-// @method objectByApplyingXSLTString:arguments:error: @abstract Applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
-//
-// ObjectByApplyingXSLTStringArgumentsError calls the underlying ObjectByApplyingXSLTStringArgumentsError.
-func (x *XMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
-	return x.inner.ObjectByApplyingXSLTStringArgumentsError(foundation.NSStringStringWithUTF8String(xslt), arguments)
-}
-
-// @method objectByApplyingXSLTAtURL:arguments:error: @abstract Applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
-//
-// ObjectByApplyingXSLTAtURLArgumentsError calls the underlying ObjectByApplyingXSLTAtURLArgumentsError.
-func (x *XMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
-	return x.inner.ObjectByApplyingXSLTAtURLArgumentsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(xsltURL)), argument)
-}
-
-// ValidateAndReturnError returns any validation error.
+// ValidateAndReturnError returns an error if the operation did not succeed.
 func (x *XMLDocument) ValidateAndReturnError() error {
-	_, err := x.inner.ValidateAndReturnError()
-	return err
-}
-
-// @abstract Sets the character encoding to an IANA type.
-//
-// CharacterEncoding calls the underlying CharacterEncoding.
-func (x *XMLDocument) CharacterEncoding() *String {
-	_r := x.inner.CharacterEncoding()
-	if _r == nil {
-		return nil
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return nil
 }
 
-// SetCharacterEncoding calls the underlying SetCharacterEncoding.
+// CharacterEncoding sets the character encoding to an IANA type.
+func (x *XMLDocument) CharacterEncoding() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterEncoding"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetCharacterEncoding wraps the corresponding Objective-C method.
 func (x *XMLDocument) SetCharacterEncoding(characterEncoding string) {
-	x.inner.SetCharacterEncoding(foundation.NSStringStringWithUTF8String(characterEncoding))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacterEncoding:"), purego.NSString(characterEncoding))
 }
 
-// @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
-//
-// IsStandalone calls the underlying IsStandalone.
+// IsStandalone set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
 func (x *XMLDocument) IsStandalone() bool {
-	return x.inner.IsStandalone()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStandalone"))
+	return _r
 }
 
-// SetStandalone calls the underlying SetStandalone.
+// SetStandalone wraps the corresponding Objective-C method.
 func (x *XMLDocument) SetStandalone(standalone bool) {
-	x.inner.SetStandalone(standalone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandalone:"), standalone)
 }
 
-// @abstract The kind of document.
-//
-// DocumentContentKind calls the underlying DocumentContentKind.
-func (x *XMLDocument) DocumentContentKind() NSXMLDocumentContentKind {
-	return NSXMLDocumentContentKind(x.inner.DocumentContentKind())
+// DocumentContentKind the kind of document.
+func (x *XMLDocument) DocumentContentKind() XMLDocumentContentKind {
+	_r := objc.Send[XMLDocumentContentKind](objref.IDOf(x), objc.RegisterName("documentContentKind"))
+	return _r
 }
 
-// SetDocumentContentKind calls the underlying SetDocumentContentKind.
-func (x *XMLDocument) SetDocumentContentKind(documentContentKind NSXMLDocumentContentKind) {
-	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
+// SetDocumentContentKind wraps the corresponding Objective-C method.
+func (x *XMLDocument) SetDocumentContentKind(documentContentKind XMLDocumentContentKind) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentContentKind:"), documentContentKind)
 }
 
-// @abstract Set the MIME type, eg text/xml.
-//
-// MIMEType calls the underlying MIMEType.
-func (x *XMLDocument) MIMEType() *String {
-	_r := x.inner.MIMEType()
-	if _r == nil {
-		return nil
+// MIMEType set the MIME type, eg text/xml.
+func (x *XMLDocument) MIMEType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetMIMEType calls the underlying SetMIMEType.
+// SetMIMEType wraps the corresponding Objective-C method.
 func (x *XMLDocument) SetMIMEType(mIMEType string) {
-	x.inner.SetMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMIMEType:"), purego.NSString(mIMEType))
 }
 
-// @abstract Set the associated DTD. This DTD will be output with the document.
-//
-// DTD calls the underlying DTD.
+// DTD set the associated DTD. This DTD will be output with the document.
 func (x *XMLDocument) DTD() *XMLDTD {
-	_r := x.inner.DTD()
-	if _r == nil {
-		return nil
-	}
-	return &XMLDTD{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("DTD"))
+	return XMLDTDFromID(_r)
 }
 
-// SetDTD calls the underlying SetDTD.
-func (x *XMLDocument) SetDTD(dTD *raw.NSXMLDTD) {
-	x.inner.SetDTD(dTD)
+// SetDTD wraps the corresponding Objective-C method.
+func (x *XMLDocument) SetDTD(dTD *XMLDTD) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDTD:"), objref.IDOf(dTD))
 }
 
-// @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
-//
-// XMLData calls the underlying XMLData.
+// XMLData invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
 func (x *XMLDocument) XMLData() *Data {
-	_r := x.inner.XMLData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("XMLData"))
+	return DataFromID(_r)
 }
-
-func (x *XMLDocument) asXMLNode() *raw.NSXMLNode { return &x.inner.NSXMLNode }
-
-func (x *XMLDocument) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObject }
 
 // XMLDocumentable is the interface implemented by [XMLDocument], for mocking and DI.
 type XMLDocumentable interface {
-	Unwrap() *raw.NSXMLDocument
-	WithCharacterEncoding(characterEncoding string) *XMLDocument
+	obj.Object
+	WithCharacterEncoding(characterEncoding StringProvider) *XMLDocument
 	WithStandalone(standalone bool) *XMLDocument
-	WithDocumentContentKind(documentContentKind NSXMLDocumentContentKind) *XMLDocument
-	WithMIMEType(mIMEType string) *XMLDocument
+	WithDocumentContentKind(documentContentKind XMLDocumentContentKind) *XMLDocument
+	WithMIMEType(mIMEType StringProvider) *XMLDocument
 	WithDTD(dTD *XMLDTD) *XMLDocument
-	WithName(name string) *XMLDocument
-	WithObjectValue(objectValue objc.ID) *XMLDocument
-	WithStringValue(stringValue string) *XMLDocument
-	WithURI(uRI string) *XMLDocument
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDocument
-	SetRootElement(root *raw.NSXMLElement)
+	WithName(name StringProvider) *XMLDocument
+	WithObjectValue(objectValue obj.Object) *XMLDocument
+	WithStringValue(stringValue StringProvider) *XMLDocument
+	WithURI(uRI StringProvider) *XMLDocument
+	WithScriptingProperties(scriptingProperties obj.Object) *XMLDocument
+	SetRootElement(root *XMLElement)
 	RootElement() *XMLElement
-	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
-	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
-	RemoveChildAtIndex(index uint)
-	SetChildren(children ...XMLNodeProvider)
-	AddChild(child *raw.NSXMLNode)
-	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
-	XMLDataWithOptions(options NSXMLNodeOptions) *Data
-	ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
-	ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
-	ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
+	InsertChildAtIndex(child *XMLNode, index int)
+	InsertChildrenAtIndex(children []*XMLNode, index int)
+	RemoveChildAtIndex(index int)
+	SetChildren(children []*XMLNode)
+	AddChild(child *XMLNode)
+	ReplaceChildAtIndexWithNode(index int, node *XMLNode)
+	XMLDataWithOptions(options XMLNodeOptions) *Data
+	ObjectByApplyingXSLTArgumentsError(xslt *Data, arguments obj.Object) (result obj.Object, err error)
+	ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments obj.Object) (result obj.Object, err error)
+	ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument obj.Object) (result obj.Object, err error)
 	ValidateAndReturnError() error
-	CharacterEncoding() *String
+	CharacterEncoding() string
 	SetCharacterEncoding(characterEncoding string)
 	IsStandalone() bool
 	SetStandalone(standalone bool)
-	DocumentContentKind() NSXMLDocumentContentKind
-	SetDocumentContentKind(documentContentKind NSXMLDocumentContentKind)
-	MIMEType() *String
+	DocumentContentKind() XMLDocumentContentKind
+	SetDocumentContentKind(documentContentKind XMLDocumentContentKind)
+	MIMEType() string
 	SetMIMEType(mIMEType string)
 	DTD() *XMLDTD
-	SetDTD(dTD *raw.NSXMLDTD)
+	SetDTD(dTD *XMLDTD)
 	XMLData() *Data
 }
 
 var _ XMLDocumentable = (*XMLDocument)(nil)
+
+var _ XMLNodeProvider = (*XMLDocument)(nil)

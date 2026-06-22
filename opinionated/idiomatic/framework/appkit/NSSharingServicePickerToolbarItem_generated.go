@@ -5,256 +5,196 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A toolbar item that displays the macOS share sheet.
+// SharingServicePickerToolbarItem is an idiomatic wrapper over the Objective-C class NSSharingServicePickerToolbarItem.
 //
-// SharingServicePickerToolbarItem wraps [raw.NSSharingServicePickerToolbarItem] with a fluent Go API.
+// It embeds [ToolbarItem], promoting that type's methods.
+//
+// A toolbar item that displays the macOS share sheet.
 type SharingServicePickerToolbarItem struct {
-	inner *raw.NSSharingServicePickerToolbarItem
+	ToolbarItem
 }
 
-// Unwrap returns the underlying [raw.NSSharingServicePickerToolbarItem].
-func (x *SharingServicePickerToolbarItem) Unwrap() *raw.NSSharingServicePickerToolbarItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharingServicePickerToolbarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// SharingServicePickerToolbarItemFromID adopts an existing object pointer as a SharingServicePickerToolbarItem (nil for 0).
+// SharingServicePickerToolbarItemFromID adopts an existing Objective-C object as a SharingServicePickerToolbarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func SharingServicePickerToolbarItemFromID(id objc.ID) *SharingServicePickerToolbarItem {
 	if id == 0 {
 		return nil
 	}
-	return &SharingServicePickerToolbarItem{inner: raw.NSSharingServicePickerToolbarItemFromID(id)}
+	x := &SharingServicePickerToolbarItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSharingServicePickerToolbarItem creates a new [SharingServicePickerToolbarItem].
+// sharingServicePickerToolbarItemAdopt wraps an Objective-C object that this code just created as a
+// SharingServicePickerToolbarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharingServicePickerToolbarItemAdopt(id objc.ID) *SharingServicePickerToolbarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &SharingServicePickerToolbarItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSharingServicePickerToolbarItem creates a new SharingServicePickerToolbarItem.
 func NewSharingServicePickerToolbarItem() *SharingServicePickerToolbarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingServicePickerToolbarItem")), objc.RegisterName("new"))
-	return &SharingServicePickerToolbarItem{inner: raw.NSSharingServicePickerToolbarItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerToolbarItem")), objc.RegisterName("new"))
+	return sharingServicePickerToolbarItemAdopt(_id)
 }
 
-// The custom object from your app that provides the items to share.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) *SharingServicePickerToolbarItem {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The label that appears for this item in the toolbar.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the label that appears for this item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The label that appears when the toolbar item is in the customization palette.
-//
-// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
 func (x *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
 	return x
 }
 
-// The set of labels that the item might display.
-//
-// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+// WithPossibleLabels the set of labels that the item might display.
+func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *SharingServicePickerToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
 	return x
 }
 
-// The tooltip to display when someone hovers over the item in the toolbar.
-//
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// The menu item to use when the toolbar item is in the overflow menu.
-//
-// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
 func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	return x
 }
 
-// An integer tag you can use to identify the toolbar item.
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag an integer tag you can use to identify the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// The object that defines the action method the toolbar item calls when clicked.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithTarget(target objc.ID) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetTarget(target)
+// WithTarget the object that defines the action method the toolbar item calls when clicked.
+func (x *SharingServicePickerToolbarItem) WithTarget(target obj.Object) *SharingServicePickerToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The action method to call when someone clicks on the toolbar item.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithAction(action objc.SEL) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetAction(action)
-	return x
-}
-
-// A Boolean value that indicates whether the item is enabled.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the item is enabled.
 func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// The image to display for the toolbar item.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image to display for the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The title of the toolbar item.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle the title of the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar item has a bordered style.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
 func (x *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
 func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-//
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithStyle(style NSToolbarItemStyle) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
+// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
+func (x *SharingServicePickerToolbarItem) WithStyle(style ToolbarItemStyle) *SharingServicePickerToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-//
-// WithNavigational sets the navigational property and returns the receiver for chaining.
+// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetNavigational(navigational)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
 	return x
 }
 
-// The custom view you use to draw the toolbar item.
-//
-// WithView sets the view property and returns the receiver for chaining.
+// WithView the custom view you use to draw the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
-// Determines whether an item is visible in the toolbar.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden determines whether an item is visible in the toolbar.
 func (x *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// The toolbar item’s minimum size.
-//
-// WithMinSize sets the minSize property and returns the receiver for chaining.
+// WithMinSize the toolbar item’s minimum size.
 func (x *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetMinSize(minSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
 	return x
 }
 
-// The toolbar item’s maximum size.
-//
-// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+// WithMaxSize the toolbar item’s maximum size.
 func (x *SharingServicePickerToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
 	return x
 }
 
-// The display priority associated with the toolbar item.
-//
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority the display priority associated with the toolbar item.
 func (x *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-//
-// WithBadge sets the badge property and returns the receiver for chaining.
+// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (x *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetBadge(badge.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
-// A Boolean value that indicates whether the toolbar automatically validates the item.
-//
-// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
 func (x *SharingServicePickerToolbarItem) WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
 	return x
-}
-
-// Delegate calls the underlying Delegate.
-func (x *SharingServicePickerToolbarItem) Delegate() raw.NSSharingServicePickerToolbarItemDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SharingServicePickerToolbarItem) SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *SharingServicePickerToolbarItem) asToolbarItem() *raw.NSToolbarItem {
-	return &x.inner.NSToolbarItem
 }
 
 // SharingServicePickerToolbarItemable is the interface implemented by [SharingServicePickerToolbarItem], for mocking and DI.
 type SharingServicePickerToolbarItemable interface {
-	Unwrap() *raw.NSSharingServicePickerToolbarItem
-	WithDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) *SharingServicePickerToolbarItem
+	obj.Object
 	WithLabel(label string) *SharingServicePickerToolbarItem
 	WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem
-	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem
+	WithPossibleLabels(possibleLabels obj.Object) *SharingServicePickerToolbarItem
 	WithToolTip(toolTip string) *SharingServicePickerToolbarItem
 	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem
 	WithTag(tag int) *SharingServicePickerToolbarItem
-	WithTarget(target objc.ID) *SharingServicePickerToolbarItem
-	WithAction(action objc.SEL) *SharingServicePickerToolbarItem
+	WithTarget(target obj.Object) *SharingServicePickerToolbarItem
 	WithEnabled(enabled bool) *SharingServicePickerToolbarItem
 	WithImage(image *Image) *SharingServicePickerToolbarItem
 	WithTitle(title string) *SharingServicePickerToolbarItem
 	WithBordered(bordered bool) *SharingServicePickerToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem
-	WithStyle(style NSToolbarItemStyle) *SharingServicePickerToolbarItem
+	WithStyle(style ToolbarItemStyle) *SharingServicePickerToolbarItem
 	WithNavigational(navigational bool) *SharingServicePickerToolbarItem
 	WithView(view ViewProvider) *SharingServicePickerToolbarItem
 	WithHidden(hidden bool) *SharingServicePickerToolbarItem
@@ -263,8 +203,8 @@ type SharingServicePickerToolbarItemable interface {
 	WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem
 	WithBadge(badge *ItemBadge) *SharingServicePickerToolbarItem
 	WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem
-	Delegate() raw.NSSharingServicePickerToolbarItemDelegate
-	SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate)
 }
 
 var _ SharingServicePickerToolbarItemable = (*SharingServicePickerToolbarItem)(nil)
+
+var _ ToolbarItemProvider = (*SharingServicePickerToolbarItem)(nil)

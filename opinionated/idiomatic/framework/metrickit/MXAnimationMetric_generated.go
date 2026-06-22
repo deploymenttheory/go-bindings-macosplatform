@@ -5,60 +5,72 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the responsiveness of animation in the app.
+// AnimationMetric is an idiomatic wrapper over the Objective-C class MXAnimationMetric.
 //
-// AnimationMetric wraps [raw.MXAnimationMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the responsiveness of animation in the app.
 type AnimationMetric struct {
-	inner *raw.MXAnimationMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXAnimationMetric].
-func (x *AnimationMetric) Unwrap() *raw.MXAnimationMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimationMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationMetricFromID adopts an existing object pointer as a AnimationMetric (nil for 0).
+// AnimationMetricFromID adopts an existing Objective-C object as a AnimationMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationMetricFromID(id objc.ID) *AnimationMetric {
 	if id == 0 {
 		return nil
 	}
-	return &AnimationMetric{inner: raw.MXAnimationMetricFromID(id)}
+	x := &AnimationMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAnimationMetric creates a new [AnimationMetric].
+// animationMetricAdopt wraps an Objective-C object that this code just created as a
+// AnimationMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationMetricAdopt(id objc.ID) *AnimationMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimationMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAnimationMetric creates a new AnimationMetric.
 func NewAnimationMetric() *AnimationMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXAnimationMetric")), objc.RegisterName("new"))
-	return &AnimationMetric{inner: raw.MXAnimationMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXAnimationMetric")), objc.RegisterName("new"))
+	return animationMetricAdopt(_id)
 }
 
-// @property      scrollHitchTimeRatio @abstract      Ratio of time the application spent hitching while scrolling. @discussion    Scroll hitches are user perceptible animation issues that occur during scrolling. @discussion    This metric only applies to UIScrollViews. @discussion    Dimensionless.
-//
-// ScrollHitchTimeRatio calls the underlying ScrollHitchTimeRatio.
-func (x *AnimationMetric) ScrollHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	return x.inner.ScrollHitchTimeRatio()
+// ScrollHitchTimeRatio ratio of time the application spent hitching while scrolling. Scroll hitches are user perceptible animation issues that occur during scrolling. This metric only applies to UIScrollViews. Dimensionless.
+func (x *AnimationMetric) ScrollHitchTimeRatio() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollHitchTimeRatio"))
+	return obj.Wrap(_r)
 }
 
-// @property      hitchTimeRatio @abstract      Ratio of time the application spent hitching during tracked animations. @discussion    Hitches are user perceptible frame delays that can occur during animations and scrolling. @discussion    This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. @discussion    This metric is normalized against total animation duration. @discussion    Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. @discussion    Dimensionless.
-//
-// HitchTimeRatio calls the underlying HitchTimeRatio.
-func (x *AnimationMetric) HitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	return x.inner.HitchTimeRatio()
+// HitchTimeRatio ratio of time the application spent hitching during tracked animations. Hitches are user perceptible frame delays that can occur during animations and scrolling. This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. This metric is normalized against total animation duration. Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. Dimensionless.
+func (x *AnimationMetric) HitchTimeRatio() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hitchTimeRatio"))
+	return obj.Wrap(_r)
 }
-
-func (x *AnimationMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // AnimationMetricable is the interface implemented by [AnimationMetric], for mocking and DI.
 type AnimationMetricable interface {
-	Unwrap() *raw.MXAnimationMetric
-	ScrollHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
-	HitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
+	obj.Object
+	ScrollHitchTimeRatio() obj.Object
+	HitchTimeRatio() obj.Object
 }
 
 var _ AnimationMetricable = (*AnimationMetric)(nil)
+
+var _ MetricProvider = (*AnimationMetric)(nil)

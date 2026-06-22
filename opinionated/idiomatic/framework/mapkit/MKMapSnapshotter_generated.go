@@ -5,74 +5,88 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A utility class for capturing a map and its content into an image.
+// MapSnapshotter is an idiomatic wrapper over the Objective-C class MKMapSnapshotter.
 //
-// MapSnapshotter wraps [raw.MKMapSnapshotter] with a fluent Go API.
+// A utility class for capturing a map and its content into an image.
 type MapSnapshotter struct {
-	inner *raw.MKMapSnapshotter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapSnapshotter].
-func (x *MapSnapshotter) Unwrap() *raw.MKMapSnapshotter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapSnapshotter) ID() objc.ID { return x.inner.Ptr() }
-
-// MapSnapshotterFromID adopts an existing object pointer as a MapSnapshotter (nil for 0).
+// MapSnapshotterFromID adopts an existing Objective-C object as a MapSnapshotter
+// (nil for 0), retaining it and registering a release finalizer.
 func MapSnapshotterFromID(id objc.ID) *MapSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	return &MapSnapshotter{inner: raw.MKMapSnapshotterFromID(id)}
+	x := &MapSnapshotter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a snapshotter object based on the specified options.
-//
-// NewMapSnapshotterWithOptions creates a new [MapSnapshotter].
-func NewMapSnapshotterWithOptions(options *raw.MKMapSnapshotOptions) *MapSnapshotter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapSnapshotter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.Ptr())
-	return &MapSnapshotter{inner: raw.MKMapSnapshotterFromID(_id)}
+// mapSnapshotterAdopt wraps an Objective-C object that this code just created as a
+// MapSnapshotter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapSnapshotterAdopt(id objc.ID) *MapSnapshotter {
+	if id == 0 {
+		return nil
+	}
+	x := &MapSnapshotter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Submits the request to create a snapshot and delivers the results to the specified block.
-//
-// StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
-func (x *MapSnapshotter) StartWithCompletionHandler(completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
-	x.inner.StartWithCompletionHandler(completionHandler)
+// Description returns the object's -description text.
+func (x *MapSnapshotter) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Submits the request to create a snapshot and executes the resulting block on the specified queue.
-//
-// StartWithQueueCompletionHandler calls the underlying StartWithQueueCompletionHandler.
-func (x *MapSnapshotter) StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer)) {
-	x.inner.StartWithQueueCompletionHandler(queue, completionHandler)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapSnapshotter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Cancels the request to create a snapshot.
-//
-// Cancel calls the underlying Cancel.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapSnapshotter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MapSnapshotter) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMapSnapshotterWithOptions creates and returns a snapshotter object based on the specified options.
+func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshotter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
+	return mapSnapshotterAdopt(_id)
+}
+
+// Cancel cancels the request to create a snapshot.
 func (x *MapSnapshotter) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// IsLoading calls the underlying IsLoading.
+// IsLoading wraps the corresponding Objective-C method.
 func (x *MapSnapshotter) IsLoading() bool {
-	return x.inner.IsLoading()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+	return _r
 }
 
 // MapSnapshotterable is the interface implemented by [MapSnapshotter], for mocking and DI.
 type MapSnapshotterable interface {
-	Unwrap() *raw.MKMapSnapshotter
-	StartWithCompletionHandler(completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer))
-	StartWithQueueCompletionHandler(queue *foundation.NSObject, completionHandler func(*raw.MKMapSnapshot, unsafe.Pointer))
+	obj.Object
 	Cancel()
 	IsLoading() bool
 }

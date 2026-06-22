@@ -5,151 +5,129 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
+// LeaderboardViewController is an idiomatic wrapper over the Objective-C class GKLeaderboardViewController.
 //
-// LeaderboardViewController wraps [raw.GKLeaderboardViewController] with a fluent Go API.
+// It embeds [GameCenterViewController], promoting that type's methods.
+//
+// The GKLeaderboardViewController class provides a standard user interface that displays leaderboard scores to the player. If the GKGameCenterViewController class is available, you should use it instead.
 type LeaderboardViewController struct {
-	inner *raw.GKLeaderboardViewController
+	GameCenterViewController
 }
 
-// Unwrap returns the underlying [raw.GKLeaderboardViewController].
-func (x *LeaderboardViewController) Unwrap() *raw.GKLeaderboardViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LeaderboardViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// LeaderboardViewControllerFromID adopts an existing object pointer as a LeaderboardViewController (nil for 0).
+// LeaderboardViewControllerFromID adopts an existing Objective-C object as a LeaderboardViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func LeaderboardViewControllerFromID(id objc.ID) *LeaderboardViewController {
 	if id == 0 {
 		return nil
 	}
-	return &LeaderboardViewController{inner: raw.GKLeaderboardViewControllerFromID(id)}
+	x := &LeaderboardViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewLeaderboardViewController creates a new [LeaderboardViewController].
+// leaderboardViewControllerAdopt wraps an Objective-C object that this code just created as a
+// LeaderboardViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func leaderboardViewControllerAdopt(id objc.ID) *LeaderboardViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &LeaderboardViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewLeaderboardViewController creates a new LeaderboardViewController.
 func NewLeaderboardViewController() *LeaderboardViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLeaderboardViewController")), objc.RegisterName("new"))
-	return &LeaderboardViewController{inner: raw.GKLeaderboardViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardViewController")), objc.RegisterName("new"))
+	return leaderboardViewControllerAdopt(_id)
 }
 
-// A time filter used to restrict which scores are displayed to the player.
-//
-// WithTimeScope sets the timeScope property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithTimeScope(timeScope GKLeaderboardTimeScope) *LeaderboardViewController {
-	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
+// WithTimeScope a time filter used to restrict which scores are displayed to the player.
+func (x *LeaderboardViewController) WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
 	return x
 }
 
-// The named leaderboard that is displayed by the view controller.
-//
-// WithCategory sets the category property and returns the receiver for chaining.
+// WithCategory the named leaderboard that is displayed by the view controller.
 func (x *LeaderboardViewController) WithCategory(category string) *LeaderboardViewController {
-	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return x
 }
 
-// The view controller’s delegate.
-//
-// WithLeaderboardDelegate sets the leaderboardDelegate property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) *LeaderboardViewController {
-	x.inner.SetLeaderboardDelegate(leaderboardDelegate)
+// WithViewState sets the property and returns the receiver so calls can be chained.
+func (x *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// The view controller’s delegate.
-//
-// WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetGameCenterDelegate(gameCenterDelegate)
+// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
+func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithViewState(viewState GKGameCenterViewControllerState) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetViewState(raw.GKGameCenterViewControllerState(viewState))
-	return x
-}
-
-// WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
-	return x
-}
-
-// WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
+// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets the leaderboardCategory property and returns the receiver for chaining.
+// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
 func (x *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
 }
 
-// TimeScope calls the underlying TimeScope.
-func (x *LeaderboardViewController) TimeScope() GKLeaderboardTimeScope {
-	return GKLeaderboardTimeScope(x.inner.TimeScope())
+// TimeScope wraps the corresponding Objective-C method.
+func (x *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
+	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("timeScope"))
+	return _r
 }
 
-// SetTimeScope calls the underlying SetTimeScope.
-func (x *LeaderboardViewController) SetTimeScope(timeScope GKLeaderboardTimeScope) {
-	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
+// SetTimeScope wraps the corresponding Objective-C method.
+func (x *LeaderboardViewController) SetTimeScope(timeScope LeaderboardTimeScope) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
 }
 
-// Category calls the underlying Category.
+// Category wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) Category() string {
-	_r := x.inner.Category()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCategory calls the underlying SetCategory.
+// SetCategory wraps the corresponding Objective-C method.
 func (x *LeaderboardViewController) SetCategory(category string) {
-	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
-}
-
-// LeaderboardDelegate calls the underlying LeaderboardDelegate.
-func (x *LeaderboardViewController) LeaderboardDelegate() raw.GKLeaderboardViewControllerDelegate {
-	return x.inner.LeaderboardDelegate()
-}
-
-// SetLeaderboardDelegate calls the underlying SetLeaderboardDelegate.
-func (x *LeaderboardViewController) SetLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) {
-	x.inner.SetLeaderboardDelegate(leaderboardDelegate)
-}
-
-func (x *LeaderboardViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
-	return &x.inner.GKGameCenterViewController
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
 
 // LeaderboardViewControllerable is the interface implemented by [LeaderboardViewController], for mocking and DI.
 type LeaderboardViewControllerable interface {
-	Unwrap() *raw.GKLeaderboardViewController
-	WithTimeScope(timeScope GKLeaderboardTimeScope) *LeaderboardViewController
+	obj.Object
+	WithTimeScope(timeScope LeaderboardTimeScope) *LeaderboardViewController
 	WithCategory(category string) *LeaderboardViewController
-	WithLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) *LeaderboardViewController
-	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *LeaderboardViewController
-	WithViewState(viewState GKGameCenterViewControllerState) *LeaderboardViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *LeaderboardViewController
+	WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController
 	WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController
-	TimeScope() GKLeaderboardTimeScope
-	SetTimeScope(timeScope GKLeaderboardTimeScope)
+	TimeScope() LeaderboardTimeScope
+	SetTimeScope(timeScope LeaderboardTimeScope)
 	Category() string
 	SetCategory(category string)
-	LeaderboardDelegate() raw.GKLeaderboardViewControllerDelegate
-	SetLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate)
 }
 
 var _ LeaderboardViewControllerable = (*LeaderboardViewController)(nil)
+
+var _ GameCenterViewControllerProvider = (*LeaderboardViewController)(nil)

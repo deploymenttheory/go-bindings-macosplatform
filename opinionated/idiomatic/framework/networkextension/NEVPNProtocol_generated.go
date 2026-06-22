@@ -5,346 +5,324 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Settings common to both IKEv2 and IPsec VPN configurations.
+// NEVPNProtocol is an idiomatic wrapper over the Objective-C class NEVPNProtocol.
 //
-// NEVPNProtocol wraps [raw.NEVPNProtocol] with a fluent Go API.
+// NEVPNProtocol is an abstract base — you do not construct it directly. Construct one of [NEDNSProxyProviderProtocol], [NETunnelProviderProtocol], [NEVPNProtocolIPSec] and pass it where a NEVPNProtocol is accepted.
+//
+// Settings common to both IKEv2 and IPsec VPN configurations.
 type NEVPNProtocol struct {
-	inner *raw.NEVPNProtocol
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEVPNProtocol].
-func (x *NEVPNProtocol) Unwrap() *raw.NEVPNProtocol { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEVPNProtocol) ID() objc.ID { return x.inner.Ptr() }
-
-// NEVPNProtocolFromID adopts an existing object pointer as a NEVPNProtocol (nil for 0).
+// NEVPNProtocolFromID adopts an existing Objective-C object as a NEVPNProtocol
+// (nil for 0), retaining it and registering a release finalizer.
 func NEVPNProtocolFromID(id objc.ID) *NEVPNProtocol {
 	if id == 0 {
 		return nil
 	}
-	return &NEVPNProtocol{inner: raw.NEVPNProtocolFromID(id)}
-}
-
-// NewNEVPNProtocol creates a new [NEVPNProtocol].
-func NewNEVPNProtocol() *NEVPNProtocol {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEVPNProtocol")), objc.RegisterName("new"))
-	return &NEVPNProtocol{inner: raw.NEVPNProtocolFromID(_id)}
-}
-
-// The address of the VPN server.
-//
-// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithServerAddress(serverAddress string) *NEVPNProtocol {
-	x.inner.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	x := &NEVPNProtocol{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The user name component of the tunneling protocol authentication credential.
-//
-// WithUsername sets the username property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithUsername(username string) *NEVPNProtocol {
-	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
-	return x
-}
-
-// A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-//
-// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocol {
-	x.inner.SetPasswordReference(passwordReference)
-	return x
-}
-
-// A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-//
-// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocol {
-	x.inner.SetIdentityReference(identityReference)
-	return x
-}
-
-// The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-//
-// WithIdentityData sets the identityData property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithIdentityData(identityData *foundation.NSData) *NEVPNProtocol {
-	x.inner.SetIdentityData(identityData)
-	return x
-}
-
-// The password for the PKCS12 tunneling protocol authentication credentials.
-//
-// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocol {
-	x.inner.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
-	return x
-}
-
-// A Boolean value that indicates whether the VPN disconnects when the device sleeps.
-//
-// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocol {
-	x.inner.SetDisconnectOnSleep(disconnectOnSleep)
-	return x
-}
-
-// The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
-//
-// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocol {
-	x.inner.SetProxySettings(proxySettings.Unwrap())
-	return x
-}
-
-// A Boolean value that indicates whether the system sends most network traffic over the tunnel.
-//
-// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocol {
-	x.inner.SetIncludeAllNetworks(includeAllNetworks)
-	return x
-}
-
-// A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
-//
-// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocol {
-	x.inner.SetExcludeLocalNetworks(excludeLocalNetworks)
-	return x
-}
-
-// A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
-//
-// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocol {
-	x.inner.SetExcludeCellularServices(excludeCellularServices)
-	return x
-}
-
-// A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
-//
-// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocol {
-	x.inner.SetExcludeAPNs(excludeAPNs)
-	return x
-}
-
-// @property excludeDeviceCommunication @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
-//
-// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocol {
-	x.inner.SetExcludeDeviceCommunication(excludeDeviceCommunication)
-	return x
-}
-
-// A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
-//
-// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
-func (x *NEVPNProtocol) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocol {
-	x.inner.SetEnforceRoutes(enforceRoutes)
-	return x
-}
-
-// @property serverAddress @discussion The VPN server. Depending on the protocol, may be an IP address, host name, or URL.
-//
-// ServerAddress calls the underlying ServerAddress.
-func (x *NEVPNProtocol) ServerAddress() string {
-	_r := x.inner.ServerAddress()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetServerAddress calls the underlying SetServerAddress.
-func (x *NEVPNProtocol) SetServerAddress(serverAddress string) {
-	x.inner.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
-}
-
-// @property username @discussion The username component of the VPN authentication credential.
-//
-// Username calls the underlying Username.
-func (x *NEVPNProtocol) Username() string {
-	_r := x.inner.Username()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetUsername calls the underlying SetUsername.
-func (x *NEVPNProtocol) SetUsername(username string) {
-	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
-}
-
-// @property passwordReference @discussion The password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
-//
-// PasswordReference calls the underlying PasswordReference.
-func (x *NEVPNProtocol) PasswordReference() *foundation.NSData {
-	return x.inner.PasswordReference()
-}
-
-// SetPasswordReference calls the underlying SetPasswordReference.
-func (x *NEVPNProtocol) SetPasswordReference(passwordReference *foundation.NSData) {
-	x.inner.SetPasswordReference(passwordReference)
-}
-
-// @property identityReference @discussion The certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
-//
-// IdentityReference calls the underlying IdentityReference.
-func (x *NEVPNProtocol) IdentityReference() *foundation.NSData {
-	return x.inner.IdentityReference()
-}
-
-// SetIdentityReference calls the underlying SetIdentityReference.
-func (x *NEVPNProtocol) SetIdentityReference(identityReference *foundation.NSData) {
-	x.inner.SetIdentityReference(identityReference)
-}
-
-// @property identityData @discussion The PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
-//
-// IdentityData calls the underlying IdentityData.
-func (x *NEVPNProtocol) IdentityData() *foundation.NSData {
-	return x.inner.IdentityData()
-}
-
-// SetIdentityData calls the underlying SetIdentityData.
-func (x *NEVPNProtocol) SetIdentityData(identityData *foundation.NSData) {
-	x.inner.SetIdentityData(identityData)
-}
-
-// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
-//
-// IdentityDataPassword calls the underlying IdentityDataPassword.
-func (x *NEVPNProtocol) IdentityDataPassword() string {
-	_r := x.inner.IdentityDataPassword()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetIdentityDataPassword calls the underlying SetIdentityDataPassword.
-func (x *NEVPNProtocol) SetIdentityDataPassword(identityDataPassword string) {
-	x.inner.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
-}
-
-// @property disconnectOnSleep @discussion If YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
-//
-// DisconnectOnSleep calls the underlying DisconnectOnSleep.
-func (x *NEVPNProtocol) DisconnectOnSleep() bool {
-	return x.inner.DisconnectOnSleep()
-}
-
-// SetDisconnectOnSleep calls the underlying SetDisconnectOnSleep.
-func (x *NEVPNProtocol) SetDisconnectOnSleep(disconnectOnSleep bool) {
-	x.inner.SetDisconnectOnSleep(disconnectOnSleep)
-}
-
-// @property proxySettings @discussion An NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
-//
-// ProxySettings calls the underlying ProxySettings.
-func (x *NEVPNProtocol) ProxySettings() *NEProxySettings {
-	_r := x.inner.ProxySettings()
-	if _r == nil {
+// nEVPNProtocolAdopt wraps an Objective-C object that this code just created as a
+// NEVPNProtocol (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEVPNProtocolAdopt(id objc.ID) *NEVPNProtocol {
+	if id == 0 {
 		return nil
 	}
-	return &NEProxySettings{inner: _r}
+	x := &NEVPNProtocol{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetProxySettings calls the underlying SetProxySettings.
-func (x *NEVPNProtocol) SetProxySettings(proxySettings *raw.NEProxySettings) {
-	x.inner.SetProxySettings(proxySettings)
+// Description returns the object's -description text.
+func (x *NEVPNProtocol) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property includeAllNetworks @discussion If this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
-//
-// IncludeAllNetworks calls the underlying IncludeAllNetworks.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEVPNProtocol) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEVPNProtocol) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *NEVPNProtocol) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// WithServerAddress the address of the VPN server.
+func (x *NEVPNProtocol) WithServerAddress(serverAddress string) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
+	return x
+}
+
+// WithUsername the user name component of the tunneling protocol authentication credential.
+func (x *NEVPNProtocol) WithUsername(username string) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
+	return x
+}
+
+// WithPasswordReference a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
+func (x *NEVPNProtocol) WithPasswordReference(passwordReference obj.Object) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+	return x
+}
+
+// WithIdentityReference a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
+func (x *NEVPNProtocol) WithIdentityReference(identityReference obj.Object) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+	return x
+}
+
+// WithIdentityData the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
+func (x *NEVPNProtocol) WithIdentityData(identityData obj.Object) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+	return x
+}
+
+// WithIdentityDataPassword the password for the PKCS12 tunneling protocol authentication credentials.
+func (x *NEVPNProtocol) WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
+	return x
+}
+
+// WithDisconnectOnSleep a Boolean value that indicates whether the VPN disconnects when the device sleeps.
+func (x *NEVPNProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
+	return x
+}
+
+// WithProxySettings the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
+func (x *NEVPNProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
+	return x
+}
+
+// WithIncludeAllNetworks a Boolean value that indicates whether the system sends most network traffic over the tunnel.
+func (x *NEVPNProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
+	return x
+}
+
+// WithExcludeLocalNetworks a Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
+func (x *NEVPNProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
+	return x
+}
+
+// WithExcludeCellularServices a Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
+func (x *NEVPNProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
+	return x
+}
+
+// WithExcludeAPNs a Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
+func (x *NEVPNProtocol) WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
+	return x
+}
+
+// WithExcludeDeviceCommunication if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
+func (x *NEVPNProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
+	return x
+}
+
+// WithEnforceRoutes a Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
+func (x *NEVPNProtocol) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
+	return x
+}
+
+// ServerAddress the VPN server. Depending on the protocol, may be an IP address, host name, or URL.
+func (x *NEVPNProtocol) ServerAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetServerAddress wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetServerAddress(serverAddress string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
+}
+
+// Username the username component of the VPN authentication credential.
+func (x *NEVPNProtocol) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetUsername wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetUsername(username string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
+}
+
+// PasswordReference the password component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassGenericPassword class.
+func (x *NEVPNProtocol) PasswordReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passwordReference"))
+	return obj.Wrap(_r)
+}
+
+// SetPasswordReference wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetPasswordReference(passwordReference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+}
+
+// IdentityReference the certificate and private key component of the VPN authentication credential. The value is a persistent reference to a keychain item with the kSecClassIdentity class.
+func (x *NEVPNProtocol) IdentityReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityReference"))
+	return obj.Wrap(_r)
+}
+
+// SetIdentityReference wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetIdentityReference(identityReference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+}
+
+// IdentityData the PKCS12 data for the VPN authentication identity. The value is a NSData in PKCS12 format.
+func (x *NEVPNProtocol) IdentityData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityData"))
+	return obj.Wrap(_r)
+}
+
+// SetIdentityData wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetIdentityData(identityData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+}
+
+// IdentityDataPassword the password to be used to decrypt the PKCS12 identity data.
+func (x *NEVPNProtocol) IdentityDataPassword() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityDataPassword"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetIdentityDataPassword wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetIdentityDataPassword(identityDataPassword string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
+}
+
+// DisconnectOnSleep if YES, the VPN connection will be disconnected when the device goes to sleep. The default is NO.
+func (x *NEVPNProtocol) DisconnectOnSleep() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disconnectOnSleep"))
+	return _r
+}
+
+// SetDisconnectOnSleep wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetDisconnectOnSleep(disconnectOnSleep bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
+}
+
+// ProxySettings an NEProxySettings object containing the proxy settings to use for connections routed through the tunnel.
+func (x *NEVPNProtocol) ProxySettings() *NEProxySettings {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxySettings"))
+	return NEProxySettingsFromID(_r)
+}
+
+// SetProxySettings wraps the corresponding Objective-C method.
+func (x *NEVPNProtocol) SetProxySettings(proxySettings *NEProxySettings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
+}
+
+// IncludeAllNetworks if this property is set to YES then all network traffic is routed through the tunnel, with some exclusions. Several of the exclusions can be controlled with the excludeLocalNetworks, excludeCellularServices, excludeAPNs and excludeDeviceCommunication properties. See the documentation for those properties. The following traffic is always excluded from the tunnel: - Traffic necessary for connecting and maintaining the device's network connection, such as DHCP. - Traffic necessary for connecting to captive networks. - Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the excludeCellularServices property for more details. - Network communication with a companion device such as a watchOS device. The default value of this property is NO.
 func (x *NEVPNProtocol) IncludeAllNetworks() bool {
-	return x.inner.IncludeAllNetworks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeAllNetworks"))
+	return _r
 }
 
-// SetIncludeAllNetworks calls the underlying SetIncludeAllNetworks.
+// SetIncludeAllNetworks wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetIncludeAllNetworks(includeAllNetworks bool) {
-	x.inner.SetIncludeAllNetworks(includeAllNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
 }
 
-// @property excludeLocalNetworks @discussion If YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
-//
-// ExcludeLocalNetworks calls the underlying ExcludeLocalNetworks.
+// ExcludeLocalNetworks if YES, all traffic destined for local networks will be excluded from the tunnel. The default is NO on macOS and YES on iOS.
 func (x *NEVPNProtocol) ExcludeLocalNetworks() bool {
-	return x.inner.ExcludeLocalNetworks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludeLocalNetworks"))
+	return _r
 }
 
-// SetExcludeLocalNetworks calls the underlying SetExcludeLocalNetworks.
+// SetExcludeLocalNetworks wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetExcludeLocalNetworks(excludeLocalNetworks bool) {
-	x.inner.SetExcludeLocalNetworks(excludeLocalNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
 }
 
-// @property excludeCellularServices @discussion If includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
-//
-// ExcludeCellularServices calls the underlying ExcludeCellularServices.
+// ExcludeCellularServices if includeAllNetworks is set to YES and this property is set to YES, then internet-routable network traffic for cellular services (VoLTE, Wi-Fi Calling, IMS, MMS, Visual Voicemail, etc.) is excluded from the tunnel. Note that some cellular carriers route cellular services traffic directly to the carrier network, bypassing the internet. Such cellular services traffic is always excluded from the tunnel. The default value of this property is YES.
 func (x *NEVPNProtocol) ExcludeCellularServices() bool {
-	return x.inner.ExcludeCellularServices()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludeCellularServices"))
+	return _r
 }
 
-// SetExcludeCellularServices calls the underlying SetExcludeCellularServices.
+// SetExcludeCellularServices wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetExcludeCellularServices(excludeCellularServices bool) {
-	x.inner.SetExcludeCellularServices(excludeCellularServices)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
 }
 
-// @property excludeAPNs @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
-//
-// ExcludeAPNs calls the underlying ExcludeAPNs.
+// ExcludeAPNs if includeAllNetworks is set to YES and this property is set to YES, then network traffic for the Apple Push Notification service (APNs) is excluded from the tunnel. The default value of this property is YES.
 func (x *NEVPNProtocol) ExcludeAPNs() bool {
-	return x.inner.ExcludeAPNs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludeAPNs"))
+	return _r
 }
 
-// SetExcludeAPNs calls the underlying SetExcludeAPNs.
+// SetExcludeAPNs wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetExcludeAPNs(excludeAPNs bool) {
-	x.inner.SetExcludeAPNs(excludeAPNs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
 }
 
-// @property excludeDeviceCommunication @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
-//
-// ExcludeDeviceCommunication calls the underlying ExcludeDeviceCommunication.
+// ExcludeDeviceCommunication if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
 func (x *NEVPNProtocol) ExcludeDeviceCommunication() bool {
-	return x.inner.ExcludeDeviceCommunication()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludeDeviceCommunication"))
+	return _r
 }
 
-// SetExcludeDeviceCommunication calls the underlying SetExcludeDeviceCommunication.
+// SetExcludeDeviceCommunication wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetExcludeDeviceCommunication(excludeDeviceCommunication bool) {
-	x.inner.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
 }
 
-// @property enforceRoutes @discussion If YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
-//
-// EnforceRoutes calls the underlying EnforceRoutes.
+// EnforceRoutes if YES, route rules for this tunnel will take precendence over any locally-defined routes. The default is NO.
 func (x *NEVPNProtocol) EnforceRoutes() bool {
-	return x.inner.EnforceRoutes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enforceRoutes"))
+	return _r
 }
 
-// SetEnforceRoutes calls the underlying SetEnforceRoutes.
+// SetEnforceRoutes wraps the corresponding Objective-C method.
 func (x *NEVPNProtocol) SetEnforceRoutes(enforceRoutes bool) {
-	x.inner.SetEnforceRoutes(enforceRoutes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
 }
-
-func (x *NEVPNProtocol) asNEVPNProtocol() *raw.NEVPNProtocol { return x.inner }
 
 // NEVPNProtocolable is the interface implemented by [NEVPNProtocol], for mocking and DI.
 type NEVPNProtocolable interface {
-	Unwrap() *raw.NEVPNProtocol
+	obj.Object
 	WithServerAddress(serverAddress string) *NEVPNProtocol
 	WithUsername(username string) *NEVPNProtocol
-	WithPasswordReference(passwordReference *foundation.NSData) *NEVPNProtocol
-	WithIdentityReference(identityReference *foundation.NSData) *NEVPNProtocol
-	WithIdentityData(identityData *foundation.NSData) *NEVPNProtocol
+	WithPasswordReference(passwordReference obj.Object) *NEVPNProtocol
+	WithIdentityReference(identityReference obj.Object) *NEVPNProtocol
+	WithIdentityData(identityData obj.Object) *NEVPNProtocol
 	WithIdentityDataPassword(identityDataPassword string) *NEVPNProtocol
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NEVPNProtocol
 	WithProxySettings(proxySettings *NEProxySettings) *NEVPNProtocol
@@ -358,18 +336,18 @@ type NEVPNProtocolable interface {
 	SetServerAddress(serverAddress string)
 	Username() string
 	SetUsername(username string)
-	PasswordReference() *foundation.NSData
-	SetPasswordReference(passwordReference *foundation.NSData)
-	IdentityReference() *foundation.NSData
-	SetIdentityReference(identityReference *foundation.NSData)
-	IdentityData() *foundation.NSData
-	SetIdentityData(identityData *foundation.NSData)
+	PasswordReference() obj.Object
+	SetPasswordReference(passwordReference obj.Object)
+	IdentityReference() obj.Object
+	SetIdentityReference(identityReference obj.Object)
+	IdentityData() obj.Object
+	SetIdentityData(identityData obj.Object)
 	IdentityDataPassword() string
 	SetIdentityDataPassword(identityDataPassword string)
 	DisconnectOnSleep() bool
 	SetDisconnectOnSleep(disconnectOnSleep bool)
 	ProxySettings() *NEProxySettings
-	SetProxySettings(proxySettings *raw.NEProxySettings)
+	SetProxySettings(proxySettings *NEProxySettings)
 	IncludeAllNetworks() bool
 	SetIncludeAllNetworks(includeAllNetworks bool)
 	ExcludeLocalNetworks() bool
@@ -385,3 +363,10 @@ type NEVPNProtocolable interface {
 }
 
 var _ NEVPNProtocolable = (*NEVPNProtocol)(nil)
+
+// isNEVPNProtocol marks NEVPNProtocol — and, by embedding promotion, its
+// subclasses — as a member of the NEVPNProtocol hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *NEVPNProtocol) isNEVPNProtocol() {}
+
+var _ NEVPNProtocolProvider = (*NEVPNProtocol)(nil)

@@ -5,133 +5,127 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that manages the data-reading tasks associated with loading scene contents from a file or data.
+// SceneSource is an idiomatic wrapper over the Objective-C class SCNSceneSource.
 //
-// SceneSource wraps [raw.SCNSceneSource] with a fluent Go API.
+// An object that manages the data-reading tasks associated with loading scene contents from a file or data.
 type SceneSource struct {
-	inner *raw.SCNSceneSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNSceneSource].
-func (x *SceneSource) Unwrap() *raw.SCNSceneSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SceneSource) ID() objc.ID { return x.inner.Ptr() }
-
-// SceneSourceFromID adopts an existing object pointer as a SceneSource (nil for 0).
+// SceneSourceFromID adopts an existing Objective-C object as a SceneSource
+// (nil for 0), retaining it and registering a release finalizer.
 func SceneSourceFromID(id objc.ID) *SceneSource {
 	if id == 0 {
 		return nil
 	}
-	return &SceneSource{inner: raw.SCNSceneSourceFromID(id)}
+	x := &SceneSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a scene source for reading the scene graph from a specified file.
-//
-// NewSceneSourceWithURLOptions creates a new [SceneSource].
-func NewSceneSourceWithURLOptions(url string, options purego.IDer) *SceneSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.ID())
-	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
-}
-
-// Initializes a scene source for reading the scene graph contained in an NSData object.
-//
-// NewSceneSourceWithDataOptions creates a new [SceneSource].
-func NewSceneSourceWithDataOptions(data *foundation.NSData, options purego.IDer) *SceneSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.ID())
-	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
-}
-
-// Loads the entire scene graph from the scene source and calls the specified block to provide progress information.
-//
-// SceneWithOptionsStatusHandler calls the underlying SceneWithOptionsStatusHandler.
-func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
-	_r := x.inner.SceneWithOptionsStatusHandler(options, func(_a0 float32, _a1 raw.SCNSceneSourceStatus, _a2 unsafe.Pointer, _a3 *bool) {
-		statusHandler(_a0, SCNSceneSourceStatus(_a1), _a2, _a3)
-	})
-	if _r == nil {
+// sceneSourceAdopt wraps an Objective-C object that this code just created as a
+// SceneSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sceneSourceAdopt(id objc.ID) *SceneSource {
+	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: _r}
+	x := &SceneSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Instantiates a scene from the scene source with the specified options.
-//
-// SceneWithOptionsError calls the underlying SceneWithOptionsError.
-func (x *SceneSource) SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error) {
-	_r, _err := x.inner.SceneWithOptionsError(options)
-	if _err != nil {
-		return nil, _err
+// Description returns the object's -description text.
+func (x *SceneSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SceneSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SceneSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SceneSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSceneSourceWithURLOptions initializes a scene source for reading the scene graph from a specified file.
+func NewSceneSourceWithURLOptions(url string, options obj.Object) *SceneSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), objref.IDOf(options))
+	return sceneSourceAdopt(_id)
+}
+
+// NewSceneSourceWithDataOptions initializes a scene source for reading the scene graph contained in an NSData object.
+func NewSceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return sceneSourceAdopt(_id)
+}
+
+// SceneWithOptionsError instantiates a scene from the scene source with the specified options.
+func (x *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sceneWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Scene{inner: _r}, nil
+	return SceneFromID(_r), nil
 }
 
-// Returns metadata about the scene.
-//
-// PropertyForKey calls the underlying PropertyForKey.
-func (x *SceneSource) PropertyForKey(key string) objc.ID {
-	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(key))
+// PropertyForKey returns metadata about the scene.
+func (x *SceneSource) PropertyForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// Loads and returns a specific object in the scene source.
-//
-// EntryWithIdentifierWithClass calls the underlying EntryWithIdentifierWithClass.
-func (x *SceneSource) EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID {
-	return x.inner.EntryWithIdentifierWithClass(foundation.NSStringStringWithUTF8String(uid), entryClass)
+// EntriesPassingTest loads and returns all objects in the scene source that pass the test in a given block.
+func (x *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
+	}))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Returns the identifiers for all objects in the scene source of the specified class.
-//
-// IdentifiersOfEntriesWithClass calls the underlying IdentifiersOfEntriesWithClass.
-func (x *SceneSource) IdentifiersOfEntriesWithClass(entryClass objc.Class) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.IdentifiersOfEntriesWithClass(entryClass)
+// Url the receiver's URL (if any).
+func (x *SceneSource) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// Loads and returns all objects in the scene source that pass the test in a given block.
-//
-// EntriesPassingTest calls the underlying EntriesPassingTest.
-func (x *SceneSource) EntriesPassingTest(predicate func(objc.ID, *foundation.NSString, *bool) bool) *foundation.NSArray[objc.ID] {
-	return x.inner.EntriesPassingTest(predicate)
-}
-
-// @property url @abstract The receiver's URL (if any).
-//
-// Url calls the underlying Url.
-func (x *SceneSource) Url() *foundation.NSURL {
-	return x.inner.Url()
-}
-
-// @property data @abstract The receiver's data (if any).
-//
-// Data calls the underlying Data.
-func (x *SceneSource) Data() *foundation.NSData {
-	return x.inner.Data()
+// Data the receiver's data (if any).
+func (x *SceneSource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // SceneSourceable is the interface implemented by [SceneSource], for mocking and DI.
 type SceneSourceable interface {
-	Unwrap() *raw.SCNSceneSource
-	SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene
-	SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error)
-	PropertyForKey(key string) objc.ID
-	EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID
-	IdentifiersOfEntriesWithClass(entryClass objc.Class) *foundation.NSArray[*foundation.NSString]
-	EntriesPassingTest(predicate func(objc.ID, *foundation.NSString, *bool) bool) *foundation.NSArray[objc.ID]
-	Url() *foundation.NSURL
-	Data() *foundation.NSData
+	obj.Object
+	SceneWithOptionsError(options obj.Object) (result *Scene, err error)
+	PropertyForKey(key string) obj.Object
+	EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object
+	Url() obj.Object
+	Data() obj.Object
 }
 
 var _ SceneSourceable = (*SceneSource)(nil)

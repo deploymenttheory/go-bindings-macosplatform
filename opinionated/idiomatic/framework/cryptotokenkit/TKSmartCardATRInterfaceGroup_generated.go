@@ -5,74 +5,104 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
+// SmartCardATRInterfaceGroup is an idiomatic wrapper over the Objective-C class TKSmartCardATRInterfaceGroup.
 //
-// SmartCardATRInterfaceGroup wraps [raw.TKSmartCardATRInterfaceGroup] with a fluent Go API.
+// A single interface-bytes group for a Smart Card ATR (Answer to Reset).
 type SmartCardATRInterfaceGroup struct {
-	inner *raw.TKSmartCardATRInterfaceGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardATRInterfaceGroup].
-func (x *SmartCardATRInterfaceGroup) Unwrap() *raw.TKSmartCardATRInterfaceGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardATRInterfaceGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardATRInterfaceGroupFromID adopts an existing object pointer as a SmartCardATRInterfaceGroup (nil for 0).
+// SmartCardATRInterfaceGroupFromID adopts an existing Objective-C object as a SmartCardATRInterfaceGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardATRInterfaceGroupFromID(id objc.ID) *SmartCardATRInterfaceGroup {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardATRInterfaceGroup{inner: raw.TKSmartCardATRInterfaceGroupFromID(id)}
+	x := &SmartCardATRInterfaceGroup{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardATRInterfaceGroup creates a new [SmartCardATRInterfaceGroup].
+// smartCardATRInterfaceGroupAdopt wraps an Objective-C object that this code just created as a
+// SmartCardATRInterfaceGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardATRInterfaceGroupAdopt(id objc.ID) *SmartCardATRInterfaceGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardATRInterfaceGroup{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardATRInterfaceGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardATRInterfaceGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardATRInterfaceGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *SmartCardATRInterfaceGroup) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewSmartCardATRInterfaceGroup creates a new SmartCardATRInterfaceGroup.
 func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATRInterfaceGroup")), objc.RegisterName("new"))
-	return &SmartCardATRInterfaceGroup{inner: raw.TKSmartCardATRInterfaceGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardATRInterfaceGroup")), objc.RegisterName("new"))
+	return smartCardATRInterfaceGroupAdopt(_id)
 }
 
-// TA interface byte of ATR group, or nil if TA is not present.
-//
-// TA calls the underlying TA.
-func (x *SmartCardATRInterfaceGroup) TA() *foundation.NSNumber {
-	return x.inner.TA()
+// TA TA interface byte of ATR group, or nil if TA is not present.
+func (x *SmartCardATRInterfaceGroup) TA() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TA"))
+	return obj.Wrap(_r)
 }
 
-// TB interface byte of ATR group, or nil if TB is not present.
-//
-// TB calls the underlying TB.
-func (x *SmartCardATRInterfaceGroup) TB() *foundation.NSNumber {
-	return x.inner.TB()
+// TB TB interface byte of ATR group, or nil if TB is not present.
+func (x *SmartCardATRInterfaceGroup) TB() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TB"))
+	return obj.Wrap(_r)
 }
 
-// TC interface byte of ATR group, or nil if TC is not present.
-//
-// TC calls the underlying TC.
-func (x *SmartCardATRInterfaceGroup) TC() *foundation.NSNumber {
-	return x.inner.TC()
+// TC TC interface byte of ATR group, or nil if TC is not present.
+func (x *SmartCardATRInterfaceGroup) TC() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TC"))
+	return obj.Wrap(_r)
 }
 
-// Protocol number for this group.  First group (global) has protocol unassigned, contains nil.
-//
-// Protocol calls the underlying Protocol.
-func (x *SmartCardATRInterfaceGroup) Protocol() *foundation.NSNumber {
-	return x.inner.Protocol()
+// Protocol protocol number for this group.  First group (global) has protocol unassigned, contains nil.
+func (x *SmartCardATRInterfaceGroup) Protocol() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+	return obj.Wrap(_r)
 }
 
 // SmartCardATRInterfaceGroupable is the interface implemented by [SmartCardATRInterfaceGroup], for mocking and DI.
 type SmartCardATRInterfaceGroupable interface {
-	Unwrap() *raw.TKSmartCardATRInterfaceGroup
-	TA() *foundation.NSNumber
-	TB() *foundation.NSNumber
-	TC() *foundation.NSNumber
-	Protocol() *foundation.NSNumber
+	obj.Object
+	TA() obj.Object
+	TB() obj.Object
+	TC() obj.Object
+	Protocol() obj.Object
 }
 
 var _ SmartCardATRInterfaceGroupable = (*SmartCardATRInterfaceGroup)(nil)

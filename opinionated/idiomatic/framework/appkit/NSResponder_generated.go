@@ -5,672 +5,539 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An abstract class that forms the basis of event and command processing in AppKit.
+// Responder is an idiomatic wrapper over the Objective-C class NSResponder.
 //
-// Responder wraps [raw.NSResponder] with a fluent Go API.
+// Responder is an abstract base — you do not construct it directly. Construct one of [Application], [Drawer], [Popover], [ViewController], [View], [WindowController], [Window] and pass it where a Responder is accepted.
+//
+// An abstract class that forms the basis of event and command processing in AppKit.
 type Responder struct {
-	inner *raw.NSResponder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSResponder].
-func (x *Responder) Unwrap() *raw.NSResponder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Responder) ID() objc.ID { return x.inner.Ptr() }
-
-// ResponderFromID adopts an existing object pointer as a Responder (nil for 0).
+// ResponderFromID adopts an existing Objective-C object as a Responder
+// (nil for 0), retaining it and registering a release finalizer.
 func ResponderFromID(id objc.ID) *Responder {
 	if id == 0 {
 		return nil
 	}
-	return &Responder{inner: raw.NSResponderFromID(id)}
+	x := &Responder{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewResponder creates a new [Responder].
-func NewResponder() *Responder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSResponder")), objc.RegisterName("new"))
-	return &Responder{inner: raw.NSResponderFromID(_id)}
+// responderAdopt wraps an Objective-C object that this code just created as a
+// Responder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func responderAdopt(id objc.ID) *Responder {
+	if id == 0 {
+		return nil
+	}
+	x := &Responder{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Creates a new responder object with data in an unarchiver.
-//
-// NewResponderWithCoder creates a new [Responder].
-func NewResponderWithCoder(coder *foundation.NSCoder) *Responder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSResponder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Responder{inner: raw.NSResponderFromID(_id)}
+// Description returns the object's -description text.
+func (x *Responder) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Responder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Responder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Responder) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewResponderWithCoder creates a new responder object with data in an unarchiver.
+func NewResponderWithCoder(coder obj.Object) *Responder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSResponder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return responderAdopt(_id)
+}
+
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *Responder) WithNextResponder(nextResponder ResponderProvider) *Responder {
-	x.inner.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *Responder) WithMenu(menu *Menu) *Responder {
-	x.inner.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Responder) WithUserActivity(userActivity *foundation.NSUserActivity) *Responder {
-	x.inner.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *Responder) WithUserActivity(userActivity obj.Object) *Responder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *Responder) WithTouchBar(touchBar *TouchBar) *Responder {
-	x.inner.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Attempts to perform the method indicated by an action with a specified argument.
-//
-// TryToPerformWith calls the underlying TryToPerformWith.
-func (x *Responder) TryToPerformWith(action objc.SEL, object objc.ID) bool {
-	return x.inner.TryToPerformWith(action, object)
+// PerformKeyEquivalent handle a key equivalent.
+func (x *Responder) PerformKeyEquivalent(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performKeyEquivalent:"), objref.IDOf(event))
+	return _r
 }
 
-// Handle a key equivalent.
-//
-// PerformKeyEquivalent calls the underlying PerformKeyEquivalent.
-func (x *Responder) PerformKeyEquivalent(event *raw.NSEvent) bool {
-	return x.inner.PerformKeyEquivalent(event)
+// ValidRequestorForSendTypeReturnType overridden by subclasses to determine what services are available.
+func (x *Responder) ValidRequestorForSendTypeReturnType(sendType obj.Object, returnType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validRequestorForSendType:returnType:"), objref.IDOf(sendType), objref.IDOf(returnType))
+	return obj.Wrap(_r)
 }
 
-// Overridden by subclasses to determine what services are available.
-//
-// ValidRequestorForSendTypeReturnType calls the underlying ValidRequestorForSendTypeReturnType.
-func (x *Responder) ValidRequestorForSendTypeReturnType(sendType *foundation.NSString, returnType *foundation.NSString) objc.ID {
-	return x.inner.ValidRequestorForSendTypeReturnType(sendType, returnType)
+// MouseDown informs the receiver that the user has pressed the left mouse button.
+func (x *Responder) MouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed the left mouse button.
-//
-// MouseDown calls the underlying MouseDown.
-func (x *Responder) MouseDown(event *raw.NSEvent) {
-	x.inner.MouseDown(event)
+// RightMouseDown informs the receiver that the user has pressed the right mouse button.
+func (x *Responder) RightMouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed the right mouse button.
-//
-// RightMouseDown calls the underlying RightMouseDown.
-func (x *Responder) RightMouseDown(event *raw.NSEvent) {
-	x.inner.RightMouseDown(event)
+// OtherMouseDown informs the receiver that the user has pressed a mouse button other than the left or right one.
+func (x *Responder) OtherMouseDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed a mouse button other than the left or right one.
-//
-// OtherMouseDown calls the underlying OtherMouseDown.
-func (x *Responder) OtherMouseDown(event *raw.NSEvent) {
-	x.inner.OtherMouseDown(event)
+// MouseUp informs the receiver that the user has released the left mouse button.
+func (x *Responder) MouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released the left mouse button.
-//
-// MouseUp calls the underlying MouseUp.
-func (x *Responder) MouseUp(event *raw.NSEvent) {
-	x.inner.MouseUp(event)
+// RightMouseUp informs the receiver that the user has released the right mouse button.
+func (x *Responder) RightMouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released the right mouse button.
-//
-// RightMouseUp calls the underlying RightMouseUp.
-func (x *Responder) RightMouseUp(event *raw.NSEvent) {
-	x.inner.RightMouseUp(event)
+// OtherMouseUp informs the receiver that the user has released a mouse button other than the left or right button.
+func (x *Responder) OtherMouseUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released a mouse button other than the left or right button.
-//
-// OtherMouseUp calls the underlying OtherMouseUp.
-func (x *Responder) OtherMouseUp(event *raw.NSEvent) {
-	x.inner.OtherMouseUp(event)
+// MouseMoved informs the receiver that the mouse has moved.
+func (x *Responder) MouseMoved(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseMoved:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse has moved.
-//
-// MouseMoved calls the underlying MouseMoved.
-func (x *Responder) MouseMoved(event *raw.NSEvent) {
-	x.inner.MouseMoved(event)
+// MouseDragged informs the receiver that the user has moved the mouse with the left button pressed.
+func (x *Responder) MouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseDragged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with the left button pressed.
-//
-// MouseDragged calls the underlying MouseDragged.
-func (x *Responder) MouseDragged(event *raw.NSEvent) {
-	x.inner.MouseDragged(event)
+// MouseCancelled wraps the corresponding Objective-C method.
+func (x *Responder) MouseCancelled(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseCancelled:"), objref.IDOf(event))
 }
 
-// MouseCancelled calls the underlying MouseCancelled.
-func (x *Responder) MouseCancelled(event *raw.NSEvent) {
-	x.inner.MouseCancelled(event)
+// ScrollWheel informs the receiver that the mouse’s scroll wheel has moved.
+func (x *Responder) ScrollWheel(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollWheel:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse’s scroll wheel has moved.
-//
-// ScrollWheel calls the underlying ScrollWheel.
-func (x *Responder) ScrollWheel(event *raw.NSEvent) {
-	x.inner.ScrollWheel(event)
+// RightMouseDragged informs the receiver that the user has moved the mouse with the right button pressed.
+func (x *Responder) RightMouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightMouseDragged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with the right button pressed.
-//
-// RightMouseDragged calls the underlying RightMouseDragged.
-func (x *Responder) RightMouseDragged(event *raw.NSEvent) {
-	x.inner.RightMouseDragged(event)
+// OtherMouseDragged informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
+func (x *Responder) OtherMouseDragged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherMouseDragged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has moved the mouse with a button other than the left or right button pressed.
-//
-// OtherMouseDragged calls the underlying OtherMouseDragged.
-func (x *Responder) OtherMouseDragged(event *raw.NSEvent) {
-	x.inner.OtherMouseDragged(event)
+// MouseEntered informs the receiver that the cursor has entered a tracking rectangle.
+func (x *Responder) MouseEntered(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the cursor has entered a tracking rectangle.
-//
-// MouseEntered calls the underlying MouseEntered.
-func (x *Responder) MouseEntered(event *raw.NSEvent) {
-	x.inner.MouseEntered(event)
+// MouseExited informs the receiver that the cursor has exited a tracking rectangle.
+func (x *Responder) MouseExited(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the cursor has exited a tracking rectangle.
-//
-// MouseExited calls the underlying MouseExited.
-func (x *Responder) MouseExited(event *raw.NSEvent) {
-	x.inner.MouseExited(event)
+// KeyDown informs the receiver that the user has pressed a key.
+func (x *Responder) KeyDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyDown:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed a key.
-//
-// KeyDown calls the underlying KeyDown.
-func (x *Responder) KeyDown(event *raw.NSEvent) {
-	x.inner.KeyDown(event)
+// KeyUp informs the receiver that the user has released a key.
+func (x *Responder) KeyUp(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyUp:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has released a key.
-//
-// KeyUp calls the underlying KeyUp.
-func (x *Responder) KeyUp(event *raw.NSEvent) {
-	x.inner.KeyUp(event)
+// FlagsChanged informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
+func (x *Responder) FlagsChanged(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flagsChanged:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has pressed or released a modifier key (Shift, Control, and so on).
-//
-// FlagsChanged calls the underlying FlagsChanged.
-func (x *Responder) FlagsChanged(event *raw.NSEvent) {
-	x.inner.FlagsChanged(event)
+// TabletPoint informs the receiver that a tablet-point event has occurred.
+func (x *Responder) TabletPoint(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabletPoint:"), objref.IDOf(event))
 }
 
-// Informs the receiver that a tablet-point event has occurred.
-//
-// TabletPoint calls the underlying TabletPoint.
-func (x *Responder) TabletPoint(event *raw.NSEvent) {
-	x.inner.TabletPoint(event)
+// TabletProximity informs the receiver that a tablet-proximity event has occurred.
+func (x *Responder) TabletProximity(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabletProximity:"), objref.IDOf(event))
 }
 
-// Informs the receiver that a tablet-proximity event has occurred.
-//
-// TabletProximity calls the underlying TabletProximity.
-func (x *Responder) TabletProximity(event *raw.NSEvent) {
-	x.inner.TabletProximity(event)
+// CursorUpdate informs the receiver that the mouse cursor has moved into a cursor rectangle.
+func (x *Responder) CursorUpdate(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursorUpdate:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the mouse cursor has moved into a cursor rectangle.
-//
-// CursorUpdate calls the underlying CursorUpdate.
-func (x *Responder) CursorUpdate(event *raw.NSEvent) {
-	x.inner.CursorUpdate(event)
+// MagnifyWithEvent informs the receiver that the user has begun a pinch gesture.
+func (x *Responder) MagnifyWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magnifyWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a pinch gesture.
-//
-// MagnifyWithEvent calls the underlying MagnifyWithEvent.
-func (x *Responder) MagnifyWithEvent(event *raw.NSEvent) {
-	x.inner.MagnifyWithEvent(event)
+// RotateWithEvent informs the receiver that the user has begun a rotation gesture.
+func (x *Responder) RotateWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a rotation gesture.
-//
-// RotateWithEvent calls the underlying RotateWithEvent.
-func (x *Responder) RotateWithEvent(event *raw.NSEvent) {
-	x.inner.RotateWithEvent(event)
+// SwipeWithEvent informs the receiver that the user has begun a swipe gesture.
+func (x *Responder) SwipeWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("swipeWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a swipe gesture.
-//
-// SwipeWithEvent calls the underlying SwipeWithEvent.
-func (x *Responder) SwipeWithEvent(event *raw.NSEvent) {
-	x.inner.SwipeWithEvent(event)
+// BeginGestureWithEvent informs the receiver that the user has begun a touch gesture.
+func (x *Responder) BeginGestureWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginGestureWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has begun a touch gesture.
-//
-// BeginGestureWithEvent calls the underlying BeginGestureWithEvent.
-func (x *Responder) BeginGestureWithEvent(event *raw.NSEvent) {
-	x.inner.BeginGestureWithEvent(event)
+// EndGestureWithEvent informs the receiver that the user has ended a touch gesture.
+func (x *Responder) EndGestureWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endGestureWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user has ended a touch gesture.
-//
-// EndGestureWithEvent calls the underlying EndGestureWithEvent.
-func (x *Responder) EndGestureWithEvent(event *raw.NSEvent) {
-	x.inner.EndGestureWithEvent(event)
+// SmartMagnifyWithEvent informs the receiver that the user performed a smart zoom gesture.
+func (x *Responder) SmartMagnifyWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("smartMagnifyWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that the user performed a smart zoom gesture.
-//
-// SmartMagnifyWithEvent calls the underlying SmartMagnifyWithEvent.
-func (x *Responder) SmartMagnifyWithEvent(event *raw.NSEvent) {
-	x.inner.SmartMagnifyWithEvent(event)
+// ChangeModeWithEvent informs the responder that performed a double-tap on the side of an Apple Pencil.
+func (x *Responder) ChangeModeWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeModeWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the responder that performed a double-tap on the side of an Apple Pencil.
-//
-// ChangeModeWithEvent calls the underlying ChangeModeWithEvent.
-func (x *Responder) ChangeModeWithEvent(event *raw.NSEvent) {
-	x.inner.ChangeModeWithEvent(event)
+// TouchesBeganWithEvent informs the receiver that new set of touches has been recognized.
+func (x *Responder) TouchesBeganWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesBeganWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that new set of touches has been recognized.
-//
-// TouchesBeganWithEvent calls the underlying TouchesBeganWithEvent.
-func (x *Responder) TouchesBeganWithEvent(event *raw.NSEvent) {
-	x.inner.TouchesBeganWithEvent(event)
+// TouchesMovedWithEvent informs the receiver that one or more touches has moved.
+func (x *Responder) TouchesMovedWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesMovedWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that one or more touches has moved.
-//
-// TouchesMovedWithEvent calls the underlying TouchesMovedWithEvent.
-func (x *Responder) TouchesMovedWithEvent(event *raw.NSEvent) {
-	x.inner.TouchesMovedWithEvent(event)
+// TouchesEndedWithEvent returns that a set of touches have been removed.
+func (x *Responder) TouchesEndedWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesEndedWithEvent:"), objref.IDOf(event))
 }
 
-// Returns that a set of touches have been removed.
-//
-// TouchesEndedWithEvent calls the underlying TouchesEndedWithEvent.
-func (x *Responder) TouchesEndedWithEvent(event *raw.NSEvent) {
-	x.inner.TouchesEndedWithEvent(event)
+// TouchesCancelledWithEvent informs the receiver that tracking of touches has been cancelled for any reason.
+func (x *Responder) TouchesCancelledWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesCancelledWithEvent:"), objref.IDOf(event))
 }
 
-// Informs the receiver that tracking of touches has been cancelled for any reason.
-//
-// TouchesCancelledWithEvent calls the underlying TouchesCancelledWithEvent.
-func (x *Responder) TouchesCancelledWithEvent(event *raw.NSEvent) {
-	x.inner.TouchesCancelledWithEvent(event)
+// QuickLookWithEvent performs a Quick Look on the content at the location specified by the supplied event.
+func (x *Responder) QuickLookWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quickLookWithEvent:"), objref.IDOf(event))
 }
 
-// Performs a Quick Look on the content at the location specified by the supplied event.
-//
-// QuickLookWithEvent calls the underlying QuickLookWithEvent.
-func (x *Responder) QuickLookWithEvent(event *raw.NSEvent) {
-	x.inner.QuickLookWithEvent(event)
+// PressureChangeWithEvent indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
+func (x *Responder) PressureChangeWithEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressureChangeWithEvent:"), objref.IDOf(event))
 }
 
-// Indicates a pressure change as the result of a user input event on a system that supports pressure sensitivity.
-//
-// PressureChangeWithEvent calls the underlying PressureChangeWithEvent.
-func (x *Responder) PressureChangeWithEvent(event *raw.NSEvent) {
-	x.inner.PressureChangeWithEvent(event)
+// ContextMenuKeyDown handle a key event that should present a context menu at the user focus. Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed.
+func (x *Responder) ContextMenuKeyDown(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextMenuKeyDown:"), objref.IDOf(event))
 }
 
-// @method        `contextMenuKeyDown` @abstract      Handle a key event that should present a context menu at the user focus. @discussion    Most applications should not override this method. Instead, you should customize the context menu displayed from a keyboard event by implementing `menuForEvent:` and `selectionAnchorRect`, or `showContextMenuForSelection:`, rather than this method. You should only override this method when you do not want the system-provided default behavior for the context menu hotkey, either for a specific key combination, or for the hotkey in general. For example, if your application already provides a different behavior for control-Return (the default context menu hotkey definition), and you want to preserve that behavior, you should override this method to handle that specific key combination, and then return without calling `super`. Note that the user may customize the hotkey to a different key combination, so in this example, if any other key combination is passed to your method, you would call `super`. An implementation of this method should call `[super contextMenuKeyDown:event]` to pass the request up the responder chain. If the message reaches the application object, NSApplication's implementation of this method will send `showContextMenuForSelection:` to the responder chain. If you do not call `super`, then no further handling of the key event will be performed. @note          In some cases, `showContextMenuForSelection:` will be called without a prior call to `contextMenuKeyDown:`. This occurs when a view receives an Accessibility ShowMenu action, or when the user has created a Cocoa Text key binding to map a different key combination to the `showContextMenuForSelection:` action. @param         event The key down event that matches the system-wide context menu hotkey combination. @seealso       `showContextMenuForSelection:`
-//
-// ContextMenuKeyDown calls the underlying ContextMenuKeyDown.
-func (x *Responder) ContextMenuKeyDown(event *raw.NSEvent) {
-	x.inner.ContextMenuKeyDown(event)
-}
-
-// Handles the case where an event or action message falls off the end of the responder chain.
-//
-// NoResponderFor calls the underlying NoResponderFor.
-func (x *Responder) NoResponderFor(eventSelector objc.SEL) {
-	x.inner.NoResponderFor(eventSelector)
-}
-
-// Notifies the receiver that it’s about to become first responder in its NSWindow.
-//
-// BecomeFirstResponder calls the underlying BecomeFirstResponder.
+// BecomeFirstResponder notifies the receiver that it’s about to become first responder in its NSWindow.
 func (x *Responder) BecomeFirstResponder() bool {
-	return x.inner.BecomeFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("becomeFirstResponder"))
+	return _r
 }
 
-// Notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
-//
-// ResignFirstResponder calls the underlying ResignFirstResponder.
+// ResignFirstResponder notifies the receiver that it’s been asked to relinquish its status as first responder in its window.
 func (x *Responder) ResignFirstResponder() bool {
-	return x.inner.ResignFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resignFirstResponder"))
+	return _r
 }
 
-// Handles a series of key events.
-//
-// InterpretKeyEvents calls the underlying InterpretKeyEvents.
-func (x *Responder) InterpretKeyEvents(eventArray *foundation.NSArray[*raw.NSEvent]) {
-	x.inner.InterpretKeyEvents(eventArray)
+// InterpretKeyEvents handles a series of key events.
+func (x *Responder) InterpretKeyEvents(eventArray []*Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpretKeyEvents:"), purego.SliceToNSArray(eventArray, func(_v *Event) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Clears any unprocessed key events when overridden by subclasses.
-//
-// FlushBufferedKeyEvents calls the underlying FlushBufferedKeyEvents.
+// FlushBufferedKeyEvents clears any unprocessed key events when overridden by subclasses.
 func (x *Responder) FlushBufferedKeyEvents() {
-	x.inner.FlushBufferedKeyEvents()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushBufferedKeyEvents"))
 }
 
-// ShowContextHelp calls the underlying ShowContextHelp.
-func (x *Responder) ShowContextHelp(sender objc.ID) {
-	x.inner.ShowContextHelp(sender)
+// ShowContextHelp wraps the corresponding Objective-C method.
+func (x *Responder) ShowContextHelp(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showContextHelp:"), objref.IDOf(sender))
 }
 
-// Displays context-sensitive help for the receiver if help has been registered.
-//
-// HelpRequested calls the underlying HelpRequested.
-func (x *Responder) HelpRequested(eventPtr *raw.NSEvent) {
-	x.inner.HelpRequested(eventPtr)
+// HelpRequested displays context-sensitive help for the receiver if help has been registered.
+func (x *Responder) HelpRequested(eventPtr *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpRequested:"), objref.IDOf(eventPtr))
 }
 
-// Indicates whether a pen-down event should be treated as an ink event.
-//
-// ShouldBeTreatedAsInkEvent calls the underlying ShouldBeTreatedAsInkEvent.
-func (x *Responder) ShouldBeTreatedAsInkEvent(event *raw.NSEvent) bool {
-	return x.inner.ShouldBeTreatedAsInkEvent(event)
+// ShouldBeTreatedAsInkEvent indicates whether a pen-down event should be treated as an ink event.
+func (x *Responder) ShouldBeTreatedAsInkEvent(event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeTreatedAsInkEvent:"), objref.IDOf(event))
+	return _r
 }
 
-// Implement this method to track gesture scroll events such as a swipe.
-//
-// WantsScrollEventsForSwipeTrackingOnAxis calls the underlying WantsScrollEventsForSwipeTrackingOnAxis.
-func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool {
-	return x.inner.WantsScrollEventsForSwipeTrackingOnAxis(raw.NSEventGestureAxis(axis))
+// WantsScrollEventsForSwipeTrackingOnAxis implement this method to track gesture scroll events such as a swipe.
+func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsScrollEventsForSwipeTrackingOnAxis:"), axis)
+	return _r
 }
 
-// Returns whether to forward elastic scrolling gesture events up the responder.
-//
-// WantsForwardedScrollEventsForAxis calls the underlying WantsForwardedScrollEventsForAxis.
-func (x *Responder) WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool {
-	return x.inner.WantsForwardedScrollEventsForAxis(raw.NSEventGestureAxis(axis))
+// WantsForwardedScrollEventsForAxis returns whether to forward elastic scrolling gesture events up the responder.
+func (x *Responder) WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsForwardedScrollEventsForAxis:"), axis)
+	return _r
 }
 
-// Finds a target for an action method.
-//
-// SupplementalTargetForActionSender calls the underlying SupplementalTargetForActionSender.
-func (x *Responder) SupplementalTargetForActionSender(action objc.SEL, sender objc.ID) objc.ID {
-	return x.inner.SupplementalTargetForActionSender(action, sender)
-}
-
-// NextResponder calls the underlying NextResponder.
+// NextResponder wraps the corresponding Objective-C method.
 func (x *Responder) NextResponder() *Responder {
-	_r := x.inner.NextResponder()
-	if _r == nil {
-		return nil
-	}
-	return &Responder{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextResponder"))
+	return ResponderFromID(_r)
 }
 
-// SetNextResponder calls the underlying SetNextResponder.
-func (x *Responder) SetNextResponder(nextResponder *raw.NSResponder) {
-	x.inner.SetNextResponder(nextResponder)
+// SetNextResponder wraps the corresponding Objective-C method.
+func (x *Responder) SetNextResponder(nextResponder *Responder) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 }
 
-// AcceptsFirstResponder calls the underlying AcceptsFirstResponder.
+// AcceptsFirstResponder wraps the corresponding Objective-C method.
 func (x *Responder) AcceptsFirstResponder() bool {
-	return x.inner.AcceptsFirstResponder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsFirstResponder"))
+	return _r
 }
 
-// Menu calls the underlying Menu.
+// Menu wraps the corresponding Objective-C method.
 func (x *Responder) Menu() *Menu {
-	_r := x.inner.Menu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+	return MenuFromID(_r)
 }
 
-// SetMenu calls the underlying SetMenu.
-func (x *Responder) SetMenu(menu *raw.NSMenu) {
-	x.inner.SetMenu(menu)
+// SetMenu wraps the corresponding Objective-C method.
+func (x *Responder) SetMenu(menu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 }
 
-// UndoManager calls the underlying UndoManager.
-func (x *Responder) UndoManager() *foundation.NSUndoManager {
-	return x.inner.UndoManager()
+// UndoManager wraps the corresponding Objective-C method.
+func (x *Responder) UndoManager() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoManager"))
+	return obj.Wrap(_r)
 }
 
-// Allows controls to determine when they should become first responder.
-//
-// ValidateProposedFirstResponderForEvent calls the underlying ValidateProposedFirstResponderForEvent.
-func (x *Responder) ValidateProposedFirstResponderForEvent(responder *raw.NSResponder, event *raw.NSEvent) bool {
-	return x.inner.ValidateProposedFirstResponderForEvent(responder, event)
+// ValidateProposedFirstResponderForEvent allows controls to determine when they should become first responder.
+func (x *Responder) ValidateProposedFirstResponderForEvent(responder *Responder, event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateProposedFirstResponder:forEvent:"), objref.IDOf(responder), objref.IDOf(event))
+	return _r
 }
 
-// Presents an error alert to the user as a document-modal sheet attached to document window.
-//
-// PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo calls the underlying PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo.
-func (x *Responder) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_, window, delegate, didPresentSelector, contextInfo)
+// PerformTextFinderAction performs all find oriented actions.
+func (x *Responder) PerformTextFinderAction(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performTextFinderAction:"), objref.IDOf(sender))
 }
 
-// Presents an error alert to the user as an application-modal dialog.
-//
-// PresentError calls the underlying PresentError.
-func (x *Responder) PresentError(error_ unsafe.Pointer) bool {
-	return x.inner.PresentError(error_)
+// NewWindowForTab creates a new window to show as a tab in a tabbed window.
+func (x *Responder) NewWindowForTab(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newWindowForTab:"), objref.IDOf(sender))
 }
 
-// Returns a custom version of the supplied error object that’s more suitable for presentation in alert sheets and dialogs.
-//
-// WillPresentError calls the underlying WillPresentError.
-func (x *Responder) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
-	return x.inner.WillPresentError(error_)
+// ShowWritingTools wraps the corresponding Objective-C method.
+func (x *Responder) ShowWritingTools(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showWritingTools:"), objref.IDOf(sender))
 }
 
-// Performs all find oriented actions.
-//
-// PerformTextFinderAction calls the underlying PerformTextFinderAction.
-func (x *Responder) PerformTextFinderAction(sender objc.ID) {
-	x.inner.PerformTextFinderAction(sender)
-}
-
-// Creates a new window to show as a tab in a tabbed window.
-//
-// NewWindowForTab calls the underlying NewWindowForTab.
-func (x *Responder) NewWindowForTab(sender objc.ID) {
-	x.inner.NewWindowForTab(sender)
-}
-
-// ShowWritingTools calls the underlying ShowWritingTools.
-func (x *Responder) ShowWritingTools(sender objc.ID) {
-	x.inner.ShowWritingTools(sender)
-}
-
-// Handle a mnemonic.
-//
-// PerformMnemonic calls the underlying PerformMnemonic.
+// PerformMnemonic handle a mnemonic.
 func (x *Responder) PerformMnemonic(string_ string) bool {
-	return x.inner.PerformMnemonic(foundation.NSStringStringWithUTF8String(string_))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("performMnemonic:"), purego.NSString(string_))
+	return _r
 }
 
-// Updates the state of the given user activity.
-//
-// UpdateUserActivityState calls the underlying UpdateUserActivityState.
-func (x *Responder) UpdateUserActivityState(userActivity *foundation.NSUserActivity) {
-	x.inner.UpdateUserActivityState(userActivity)
+// UpdateUserActivityState updates the state of the given user activity.
+func (x *Responder) UpdateUserActivityState(userActivity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateUserActivityState:"), objref.IDOf(userActivity))
 }
 
-// UserActivity calls the underlying UserActivity.
-func (x *Responder) UserActivity() *foundation.NSUserActivity {
-	return x.inner.UserActivity()
+// UserActivity wraps the corresponding Objective-C method.
+func (x *Responder) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+	return obj.Wrap(_r)
 }
 
-// SetUserActivity calls the underlying SetUserActivity.
-func (x *Responder) SetUserActivity(userActivity *foundation.NSUserActivity) {
-	x.inner.SetUserActivity(userActivity)
+// SetUserActivity wraps the corresponding Objective-C method.
+func (x *Responder) SetUserActivity(userActivity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 }
 
-// Your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
-//
-// MakeTouchBar calls the underlying MakeTouchBar.
+// MakeTouchBar your custom subclass of the NSResponder class should override this method to create and configure your subclass’s default NSTouchBar object.
 func (x *Responder) MakeTouchBar() *TouchBar {
-	_r := x.inner.MakeTouchBar()
-	if _r == nil {
-		return nil
-	}
-	return &TouchBar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeTouchBar"))
+	return TouchBarFromID(_r)
 }
 
-// TouchBar calls the underlying TouchBar.
+// TouchBar wraps the corresponding Objective-C method.
 func (x *Responder) TouchBar() *TouchBar {
-	_r := x.inner.TouchBar()
-	if _r == nil {
-		return nil
-	}
-	return &TouchBar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchBar"))
+	return TouchBarFromID(_r)
 }
 
-// SetTouchBar calls the underlying SetTouchBar.
-func (x *Responder) SetTouchBar(touchBar *raw.NSTouchBar) {
-	x.inner.SetTouchBar(touchBar)
+// SetTouchBar wraps the corresponding Objective-C method.
+func (x *Responder) SetTouchBar(touchBar *TouchBar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 }
 
-// Returns the receiver’s interface style.
-//
-// InterfaceStyle calls the underlying InterfaceStyle.
-func (x *Responder) InterfaceStyle() uint {
-	return x.inner.InterfaceStyle()
+// InterfaceStyle returns the receiver’s interface style.
+func (x *Responder) InterfaceStyle() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interfaceStyle"))
+	return _r
 }
 
-// Sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
-//
-// SetInterfaceStyle calls the underlying SetInterfaceStyle.
-func (x *Responder) SetInterfaceStyle(interfaceStyle uint) {
-	x.inner.SetInterfaceStyle(interfaceStyle)
+// SetInterfaceStyle sets the receiver’s style to the style specified by interfaceStyle, such as NSMacintoshInterfaceStyle or NSWindows95InterfaceStyle.
+func (x *Responder) SetInterfaceStyle(interfaceStyle int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceStyle:"), interfaceStyle)
 }
 
-// Saves the interface-related state of the responder.
-//
-// EncodeRestorableStateWithCoder calls the underlying EncodeRestorableStateWithCoder.
-func (x *Responder) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeRestorableStateWithCoder(coder)
+// EncodeRestorableStateWithCoder saves the interface-related state of the responder.
+func (x *Responder) EncodeRestorableStateWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRestorableStateWithCoder:"), objref.IDOf(coder))
 }
 
-// Saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
-//
-// EncodeRestorableStateWithCoderBackgroundQueue calls the underlying EncodeRestorableStateWithCoderBackgroundQueue.
-func (x *Responder) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
-	x.inner.EncodeRestorableStateWithCoderBackgroundQueue(coder, queue)
+// EncodeRestorableStateWithCoderBackgroundQueue saves the interface-related state of the responder to a keyed archiver either synchronously or asynchronously on the given operation queue.
+func (x *Responder) EncodeRestorableStateWithCoderBackgroundQueue(coder obj.Object, queue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeRestorableStateWithCoder:backgroundQueue:"), objref.IDOf(coder), objref.IDOf(queue))
 }
 
-// Restores the interface-related state of the responder.
-//
-// RestoreStateWithCoder calls the underlying RestoreStateWithCoder.
-func (x *Responder) RestoreStateWithCoder(coder *foundation.NSCoder) {
-	x.inner.RestoreStateWithCoder(coder)
+// RestoreStateWithCoder restores the interface-related state of the responder.
+func (x *Responder) RestoreStateWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreStateWithCoder:"), objref.IDOf(coder))
 }
 
-// Marks the responder’s interface-related state as dirty.
-//
-// InvalidateRestorableState calls the underlying InvalidateRestorableState.
+// InvalidateRestorableState marks the responder’s interface-related state as dirty.
 func (x *Responder) InvalidateRestorableState() {
-	x.inner.InvalidateRestorableState()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateRestorableState"))
 }
-
-func (x *Responder) asResponder() *raw.NSResponder { return x.inner }
 
 // Responderable is the interface implemented by [Responder], for mocking and DI.
 type Responderable interface {
-	Unwrap() *raw.NSResponder
+	obj.Object
 	WithNextResponder(nextResponder ResponderProvider) *Responder
 	WithMenu(menu *Menu) *Responder
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Responder
+	WithUserActivity(userActivity obj.Object) *Responder
 	WithTouchBar(touchBar *TouchBar) *Responder
-	TryToPerformWith(action objc.SEL, object objc.ID) bool
-	PerformKeyEquivalent(event *raw.NSEvent) bool
-	ValidRequestorForSendTypeReturnType(sendType *foundation.NSString, returnType *foundation.NSString) objc.ID
-	MouseDown(event *raw.NSEvent)
-	RightMouseDown(event *raw.NSEvent)
-	OtherMouseDown(event *raw.NSEvent)
-	MouseUp(event *raw.NSEvent)
-	RightMouseUp(event *raw.NSEvent)
-	OtherMouseUp(event *raw.NSEvent)
-	MouseMoved(event *raw.NSEvent)
-	MouseDragged(event *raw.NSEvent)
-	MouseCancelled(event *raw.NSEvent)
-	ScrollWheel(event *raw.NSEvent)
-	RightMouseDragged(event *raw.NSEvent)
-	OtherMouseDragged(event *raw.NSEvent)
-	MouseEntered(event *raw.NSEvent)
-	MouseExited(event *raw.NSEvent)
-	KeyDown(event *raw.NSEvent)
-	KeyUp(event *raw.NSEvent)
-	FlagsChanged(event *raw.NSEvent)
-	TabletPoint(event *raw.NSEvent)
-	TabletProximity(event *raw.NSEvent)
-	CursorUpdate(event *raw.NSEvent)
-	MagnifyWithEvent(event *raw.NSEvent)
-	RotateWithEvent(event *raw.NSEvent)
-	SwipeWithEvent(event *raw.NSEvent)
-	BeginGestureWithEvent(event *raw.NSEvent)
-	EndGestureWithEvent(event *raw.NSEvent)
-	SmartMagnifyWithEvent(event *raw.NSEvent)
-	ChangeModeWithEvent(event *raw.NSEvent)
-	TouchesBeganWithEvent(event *raw.NSEvent)
-	TouchesMovedWithEvent(event *raw.NSEvent)
-	TouchesEndedWithEvent(event *raw.NSEvent)
-	TouchesCancelledWithEvent(event *raw.NSEvent)
-	QuickLookWithEvent(event *raw.NSEvent)
-	PressureChangeWithEvent(event *raw.NSEvent)
-	ContextMenuKeyDown(event *raw.NSEvent)
-	NoResponderFor(eventSelector objc.SEL)
+	PerformKeyEquivalent(event *Event) bool
+	ValidRequestorForSendTypeReturnType(sendType obj.Object, returnType obj.Object) obj.Object
+	MouseDown(event *Event)
+	RightMouseDown(event *Event)
+	OtherMouseDown(event *Event)
+	MouseUp(event *Event)
+	RightMouseUp(event *Event)
+	OtherMouseUp(event *Event)
+	MouseMoved(event *Event)
+	MouseDragged(event *Event)
+	MouseCancelled(event *Event)
+	ScrollWheel(event *Event)
+	RightMouseDragged(event *Event)
+	OtherMouseDragged(event *Event)
+	MouseEntered(event *Event)
+	MouseExited(event *Event)
+	KeyDown(event *Event)
+	KeyUp(event *Event)
+	FlagsChanged(event *Event)
+	TabletPoint(event *Event)
+	TabletProximity(event *Event)
+	CursorUpdate(event *Event)
+	MagnifyWithEvent(event *Event)
+	RotateWithEvent(event *Event)
+	SwipeWithEvent(event *Event)
+	BeginGestureWithEvent(event *Event)
+	EndGestureWithEvent(event *Event)
+	SmartMagnifyWithEvent(event *Event)
+	ChangeModeWithEvent(event *Event)
+	TouchesBeganWithEvent(event *Event)
+	TouchesMovedWithEvent(event *Event)
+	TouchesEndedWithEvent(event *Event)
+	TouchesCancelledWithEvent(event *Event)
+	QuickLookWithEvent(event *Event)
+	PressureChangeWithEvent(event *Event)
+	ContextMenuKeyDown(event *Event)
 	BecomeFirstResponder() bool
 	ResignFirstResponder() bool
-	InterpretKeyEvents(eventArray *foundation.NSArray[*raw.NSEvent])
+	InterpretKeyEvents(eventArray []*Event)
 	FlushBufferedKeyEvents()
-	ShowContextHelp(sender objc.ID)
-	HelpRequested(eventPtr *raw.NSEvent)
-	ShouldBeTreatedAsInkEvent(event *raw.NSEvent) bool
-	WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool
-	WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool
-	SupplementalTargetForActionSender(action objc.SEL, sender objc.ID) objc.ID
+	ShowContextHelp(sender obj.Object)
+	HelpRequested(eventPtr *Event)
+	ShouldBeTreatedAsInkEvent(event *Event) bool
+	WantsScrollEventsForSwipeTrackingOnAxis(axis EventGestureAxis) bool
+	WantsForwardedScrollEventsForAxis(axis EventGestureAxis) bool
 	NextResponder() *Responder
-	SetNextResponder(nextResponder *raw.NSResponder)
+	SetNextResponder(nextResponder *Responder)
 	AcceptsFirstResponder() bool
 	Menu() *Menu
-	SetMenu(menu *raw.NSMenu)
-	UndoManager() *foundation.NSUndoManager
-	ValidateProposedFirstResponderForEvent(responder *raw.NSResponder, event *raw.NSEvent) bool
-	PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer)
-	PresentError(error_ unsafe.Pointer) bool
-	WillPresentError(error_ unsafe.Pointer) unsafe.Pointer
-	PerformTextFinderAction(sender objc.ID)
-	NewWindowForTab(sender objc.ID)
-	ShowWritingTools(sender objc.ID)
+	SetMenu(menu *Menu)
+	UndoManager() obj.Object
+	ValidateProposedFirstResponderForEvent(responder *Responder, event *Event) bool
+	PerformTextFinderAction(sender obj.Object)
+	NewWindowForTab(sender obj.Object)
+	ShowWritingTools(sender obj.Object)
 	PerformMnemonic(string_ string) bool
-	UpdateUserActivityState(userActivity *foundation.NSUserActivity)
-	UserActivity() *foundation.NSUserActivity
-	SetUserActivity(userActivity *foundation.NSUserActivity)
+	UpdateUserActivityState(userActivity obj.Object)
+	UserActivity() obj.Object
+	SetUserActivity(userActivity obj.Object)
 	MakeTouchBar() *TouchBar
 	TouchBar() *TouchBar
-	SetTouchBar(touchBar *raw.NSTouchBar)
-	InterfaceStyle() uint
-	SetInterfaceStyle(interfaceStyle uint)
-	EncodeRestorableStateWithCoder(coder *foundation.NSCoder)
-	EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue)
-	RestoreStateWithCoder(coder *foundation.NSCoder)
+	SetTouchBar(touchBar *TouchBar)
+	InterfaceStyle() int
+	SetInterfaceStyle(interfaceStyle int)
+	EncodeRestorableStateWithCoder(coder obj.Object)
+	EncodeRestorableStateWithCoderBackgroundQueue(coder obj.Object, queue obj.Object)
+	RestoreStateWithCoder(coder obj.Object)
 	InvalidateRestorableState()
 }
 
 var _ Responderable = (*Responder)(nil)
+
+// isResponder marks Responder — and, by embedding promotion, its
+// subclasses — as a member of the Responder hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Responder) isResponder() {}
+
+var _ ResponderProvider = (*Responder)(nil)

@@ -5,165 +5,112 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A mutable video composition instruction subclass.
+// MutableVideoCompositionInstruction is an idiomatic wrapper over the Objective-C class AVMutableVideoCompositionInstruction.
 //
-// MutableVideoCompositionInstruction wraps [raw.AVMutableVideoCompositionInstruction] with a fluent Go API.
+// It embeds [VideoCompositionInstruction], promoting that type's methods.
+//
+// A mutable video composition instruction subclass.
 type MutableVideoCompositionInstruction struct {
-	inner *raw.AVMutableVideoCompositionInstruction
+	VideoCompositionInstruction
 }
 
-// Unwrap returns the underlying [raw.AVMutableVideoCompositionInstruction].
-func (x *MutableVideoCompositionInstruction) Unwrap() *raw.AVMutableVideoCompositionInstruction {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableVideoCompositionInstruction) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableVideoCompositionInstructionFromID adopts an existing object pointer as a MutableVideoCompositionInstruction (nil for 0).
+// MutableVideoCompositionInstructionFromID adopts an existing Objective-C object as a MutableVideoCompositionInstruction
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableVideoCompositionInstructionFromID(id objc.ID) *MutableVideoCompositionInstruction {
 	if id == 0 {
 		return nil
 	}
-	return &MutableVideoCompositionInstruction{inner: raw.AVMutableVideoCompositionInstructionFromID(id)}
+	x := &MutableVideoCompositionInstruction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableVideoCompositionInstruction creates a new [MutableVideoCompositionInstruction].
+// mutableVideoCompositionInstructionAdopt wraps an Objective-C object that this code just created as a
+// MutableVideoCompositionInstruction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableVideoCompositionInstructionAdopt(id objc.ID) *MutableVideoCompositionInstruction {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableVideoCompositionInstruction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableVideoCompositionInstruction creates a new MutableVideoCompositionInstruction.
 func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableVideoCompositionInstruction")), objc.RegisterName("new"))
-	return &MutableVideoCompositionInstruction{inner: raw.AVMutableVideoCompositionInstructionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoCompositionInstruction")), objc.RegisterName("new"))
+	return mutableVideoCompositionInstructionAdopt(_id)
 }
 
-// The time range to which the instruction applies.
-//
-// WithTimeRange sets the timeRange property and returns the receiver for chaining.
-func (x *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction {
-	x.inner.SetTimeRange(timeRange)
+// WithBackgroundColor the background color of the composition.
+func (x *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// Instructions that specify how to layer and compose video frames from source tracks.
-//
-// WithLayerInstructions sets the collection, converting the Go slice to an NSArray.
+// WithLayerInstructions instructions that specify how to layer and compose video frames from source tracks.
 func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetLayerInstructions(foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asVideoCompositionLayerInstruction().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetLayerInstructions(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v VideoCompositionLayerInstructionProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), _arr)
 	return x
 }
 
-// A Boolean value that indicates whether the instruction requires post processing.
-//
-// WithEnablePostProcessing sets the enablePostProcessing property and returns the receiver for chaining.
+// WithEnablePostProcessing a Boolean value that indicates whether the instruction requires post processing.
 func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction {
-	x.inner.SetEnablePostProcessing(enablePostProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
 	return x
 }
 
-// The track identifiers of source sample data that the compositor requires to compose frames for the instruction.
-//
-// WithRequiredSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
-func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRequiredSourceSampleDataTrackIDs(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRequiredSourceSampleDataTrackIDs(_arr)
+// WithRequiredSourceSampleDataTrackIDs the track identifiers of source sample data that the compositor requires to compose frames for the instruction.
+func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), _arr)
 	return x
 }
 
-// Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *MutableVideoCompositionInstruction) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
+// SetBackgroundColor wraps the corresponding Objective-C method.
+func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// SetTimeRange calls the underlying SetTimeRange.
-func (x *MutableVideoCompositionInstruction) SetTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.SetTimeRange(timeRange)
+// SetLayerInstructions wraps the corresponding Objective-C method.
+func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions []*VideoCompositionLayerInstruction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerInstructions:"), purego.SliceToNSArray(layerInstructions, func(_v *VideoCompositionLayerInstruction) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor unsafe.Pointer) {
-	x.inner.SetBackgroundColor(backgroundColor)
-}
-
-// SetLayerInstructions calls the underlying SetLayerInstructions.
-func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions ...VideoCompositionLayerInstructionProvider) {
-	_ptrs := make([]objc.ID, len(layerInstructions))
-	for _i, _v := range layerInstructions {
-		_ptrs[_i] = _v.asVideoCompositionLayerInstruction().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetLayerInstructions(_arg0)
-}
-
-// SetEnablePostProcessing calls the underlying SetEnablePostProcessing.
+// SetEnablePostProcessing wraps the corresponding Objective-C method.
 func (x *MutableVideoCompositionInstruction) SetEnablePostProcessing(enablePostProcessing bool) {
-	x.inner.SetEnablePostProcessing(enablePostProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablePostProcessing:"), enablePostProcessing)
 }
 
-// SetRequiredSourceSampleDataTrackIDs calls the underlying SetRequiredSourceSampleDataTrackIDs.
-func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs)
-}
-
-func (x *MutableVideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction {
-	return &x.inner.AVVideoCompositionInstruction
+// SetRequiredSourceSampleDataTrackIDs wraps the corresponding Objective-C method.
+func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), purego.SliceToNSArray(requiredSourceSampleDataTrackIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MutableVideoCompositionInstructionable is the interface implemented by [MutableVideoCompositionInstruction], for mocking and DI.
 type MutableVideoCompositionInstructionable interface {
-	Unwrap() *raw.AVMutableVideoCompositionInstruction
-	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction
+	obj.Object
+	WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction
 	WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction
 	WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction
-	WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction
-	TimeRange() coremedia.CMTimeRange
-	SetTimeRange(timeRange coremedia.CMTimeRange)
-	SetBackgroundColor(backgroundColor unsafe.Pointer)
-	SetLayerInstructions(layerInstructions ...VideoCompositionLayerInstructionProvider)
+	WithRequiredSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoCompositionInstruction
+	SetBackgroundColor(backgroundColor obj.Object)
+	SetLayerInstructions(layerInstructions []*VideoCompositionLayerInstruction)
 	SetEnablePostProcessing(enablePostProcessing bool)
-	SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber])
+	SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs []obj.Object)
 }
 
 var _ MutableVideoCompositionInstructionable = (*MutableVideoCompositionInstruction)(nil)
+
+var _ VideoCompositionInstructionProvider = (*MutableVideoCompositionInstruction)(nil)

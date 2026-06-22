@@ -5,65 +5,99 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalAttendee wraps [raw.CalAttendee] with a fluent Go API.
+// CalAttendee is an idiomatic wrapper over the Objective-C class CalAttendee.
 type CalAttendee struct {
-	inner *raw.CalAttendee
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalAttendee].
-func (x *CalAttendee) Unwrap() *raw.CalAttendee { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalAttendee) ID() objc.ID { return x.inner.Ptr() }
-
-// CalAttendeeFromID adopts an existing object pointer as a CalAttendee (nil for 0).
+// CalAttendeeFromID adopts an existing Objective-C object as a CalAttendee
+// (nil for 0), retaining it and registering a release finalizer.
 func CalAttendeeFromID(id objc.ID) *CalAttendee {
 	if id == 0 {
 		return nil
 	}
-	return &CalAttendee{inner: raw.CalAttendeeFromID(id)}
+	x := &CalAttendee{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCalAttendee creates a new [CalAttendee].
+// calAttendeeAdopt wraps an Objective-C object that this code just created as a
+// CalAttendee (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calAttendeeAdopt(id objc.ID) *CalAttendee {
+	if id == 0 {
+		return nil
+	}
+	x := &CalAttendee{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalAttendee) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalAttendee) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalAttendee) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CalAttendee) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCalAttendee creates a new CalAttendee.
 func NewCalAttendee() *CalAttendee {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalAttendee")), objc.RegisterName("new"))
-	return &CalAttendee{inner: raw.CalAttendeeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CalAttendee")), objc.RegisterName("new"))
+	return calAttendeeAdopt(_id)
 }
 
-// Address calls the underlying Address.
-func (x *CalAttendee) Address() *foundation.NSURL {
-	return x.inner.Address()
+// Address wraps the corresponding Objective-C method.
+func (x *CalAttendee) Address() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+	return obj.Wrap(_r)
 }
 
-// CommonName calls the underlying CommonName.
+// CommonName wraps the corresponding Objective-C method.
 func (x *CalAttendee) CommonName() string {
-	_r := x.inner.CommonName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Status calls the underlying Status.
+// Status wraps the corresponding Objective-C method.
 func (x *CalAttendee) Status() string {
-	_r := x.inner.Status()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CalAttendeeable is the interface implemented by [CalAttendee], for mocking and DI.
 type CalAttendeeable interface {
-	Unwrap() *raw.CalAttendee
-	Address() *foundation.NSURL
+	obj.Object
+	Address() obj.Object
 	CommonName() string
 	Status() string
 }

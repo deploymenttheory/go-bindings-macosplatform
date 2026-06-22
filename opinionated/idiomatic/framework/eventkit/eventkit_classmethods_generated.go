@@ -5,111 +5,80 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AlarmWithAbsoluteDate calls the underlying EKAlarmAlarmWithAbsoluteDate.
-func AlarmWithAbsoluteDate(date *foundation.NSDate) *Alarm {
-	_r := raw.EKAlarmAlarmWithAbsoluteDate(date)
-	if _r == nil {
-		return nil
-	}
-	return &Alarm{inner: _r}
+// AlarmWithAbsoluteDate creates and returns an alarm with an absolute date.
+func AlarmWithAbsoluteDate(date obj.Object) *Alarm {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithAbsoluteDate:"), objref.IDOf(date))
+	return AlarmFromID(_r)
 }
 
-// AlarmWithRelativeOffset calls the underlying EKAlarmAlarmWithRelativeOffset.
+// AlarmWithRelativeOffset creates and returns an alarm with a relative offset.
 func AlarmWithRelativeOffset(offset float64) *Alarm {
-	_r := raw.EKAlarmAlarmWithRelativeOffset(offset)
-	if _r == nil {
-		return nil
-	}
-	return &Alarm{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithRelativeOffset:"), offset)
+	return AlarmFromID(_r)
 }
 
-// CalendarForEntityTypeEventStore calls the underlying EKCalendarCalendarForEntityTypeEventStore.
-func CalendarForEntityTypeEventStore(entityType EKEntityType, eventStore *raw.EKEventStore) *Calendar {
-	_r := raw.EKCalendarCalendarForEntityTypeEventStore(raw.EKEntityType(entityType), eventStore)
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+// CalendarForEntityTypeEventStore creates a new calendar that can contain the given entity type.
+func CalendarForEntityTypeEventStore(entityType EntityType, eventStore *EventStore) *Calendar {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKCalendar")), objc.RegisterName("calendarForEntityType:eventStore:"), entityType, objref.IDOf(eventStore))
+	return CalendarFromID(_r)
 }
 
-// EventWithEventStore calls the underlying EKEventEventWithEventStore.
-func EventWithEventStore(eventStore *raw.EKEventStore) *Event {
-	_r := raw.EKEventEventWithEventStore(eventStore)
-	if _r == nil {
-		return nil
-	}
-	return &Event{inner: _r}
+// EventWithEventStore creates and returns a new event belonging to a specified event store.
+func EventWithEventStore(eventStore *EventStore) *Event {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKEvent")), objc.RegisterName("eventWithEventStore:"), objref.IDOf(eventStore))
+	return EventFromID(_r)
 }
 
-// AuthorizationStatusForEntityType calls the underlying EKEventStoreAuthorizationStatusForEntityType.
-func AuthorizationStatusForEntityType(entityType EKEntityType) EKAuthorizationStatus {
-	return EKAuthorizationStatus(raw.EKEventStoreAuthorizationStatusForEntityType(raw.EKEntityType(entityType)))
+// AuthorizationStatusForEntityType determines the authorization status for the given entity type.
+func AuthorizationStatusForEntityType(entityType EntityType) AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objc.ID(_class("EKEventStore")), objc.RegisterName("authorizationStatusForEntityType:"), entityType)
+	return _r
 }
 
-// DayOfWeek calls the underlying EKRecurrenceDayOfWeekDayOfWeek.
-func DayOfWeek(dayOfTheWeek EKWeekday) *RecurrenceDayOfWeek {
-	_r := raw.EKRecurrenceDayOfWeekDayOfWeek(raw.EKWeekday(dayOfTheWeek))
-	if _r == nil {
-		return nil
-	}
-	return &RecurrenceDayOfWeek{inner: _r}
+// DayOfWeek creates and returns a day of the week with a given day.
+func DayOfWeek(dayOfTheWeek Weekday) *RecurrenceDayOfWeek {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceDayOfWeek")), objc.RegisterName("dayOfWeek:"), dayOfTheWeek)
+	return RecurrenceDayOfWeekFromID(_r)
 }
 
-// DayOfWeekWeekNumber calls the underlying EKRecurrenceDayOfWeekDayOfWeekWeekNumber.
-func DayOfWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
-	_r := raw.EKRecurrenceDayOfWeekDayOfWeekWeekNumber(raw.EKWeekday(dayOfTheWeek), weekNumber)
-	if _r == nil {
-		return nil
-	}
-	return &RecurrenceDayOfWeek{inner: _r}
+// DayOfWeekWeekNumber creates and returns an autoreleased day of the week with a given day and week number.
+func DayOfWeekWeekNumber(dayOfTheWeek Weekday, weekNumber int) *RecurrenceDayOfWeek {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceDayOfWeek")), objc.RegisterName("dayOfWeek:weekNumber:"), dayOfTheWeek, weekNumber)
+	return RecurrenceDayOfWeekFromID(_r)
 }
 
-// RecurrenceEndWithEndDate calls the underlying EKRecurrenceEndRecurrenceEndWithEndDate.
-func RecurrenceEndWithEndDate(endDate *foundation.NSDate) *RecurrenceEnd {
-	_r := raw.EKRecurrenceEndRecurrenceEndWithEndDate(endDate)
-	if _r == nil {
-		return nil
-	}
-	return &RecurrenceEnd{inner: _r}
+// RecurrenceEndWithEndDate initializes and returns a date-based recurrence end with a given end date.
+func RecurrenceEndWithEndDate(endDate obj.Object) *RecurrenceEnd {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), objref.IDOf(endDate))
+	return RecurrenceEndFromID(_r)
 }
 
-// RecurrenceEndWithOccurrenceCount calls the underlying EKRecurrenceEndRecurrenceEndWithOccurrenceCount.
-func RecurrenceEndWithOccurrenceCount(occurrenceCount uint) *RecurrenceEnd {
-	_r := raw.EKRecurrenceEndRecurrenceEndWithOccurrenceCount(occurrenceCount)
-	if _r == nil {
-		return nil
-	}
-	return &RecurrenceEnd{inner: _r}
+// RecurrenceEndWithOccurrenceCount initializes and returns a count-based recurrence end with a given maximum occurrence count.
+func RecurrenceEndWithOccurrenceCount(occurrenceCount int) *RecurrenceEnd {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithOccurrenceCount:"), occurrenceCount)
+	return RecurrenceEndFromID(_r)
 }
 
-// ReminderWithEventStore calls the underlying EKReminderReminderWithEventStore.
-func ReminderWithEventStore(eventStore *raw.EKEventStore) *Reminder {
-	_r := raw.EKReminderReminderWithEventStore(eventStore)
-	if _r == nil {
-		return nil
-	}
-	return &Reminder{inner: _r}
+// ReminderWithEventStore creates and returns a new reminder in the given event store.
+func ReminderWithEventStore(eventStore *EventStore) *Reminder {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKReminder")), objc.RegisterName("reminderWithEventStore:"), objref.IDOf(eventStore))
+	return ReminderFromID(_r)
 }
 
-// LocationWithTitle calls the underlying EKStructuredLocationLocationWithTitle.
+// LocationWithTitle creates a new structured location with the specified title.
 func LocationWithTitle(title string) *StructuredLocation {
-	_r := raw.EKStructuredLocationLocationWithTitle(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &StructuredLocation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("locationWithTitle:"), purego.NSString(title))
+	return StructuredLocationFromID(_r)
 }
 
-// LocationWithMapItem calls the underlying EKStructuredLocationLocationWithMapItem.
-func LocationWithMapItem(mapItem *mapkit.MKMapItem) *StructuredLocation {
-	_r := raw.EKStructuredLocationLocationWithMapItem(mapItem)
-	if _r == nil {
-		return nil
-	}
-	return &StructuredLocation{inner: _r}
+// LocationWithMapItem creates a new structured location with the specified map item.
+func LocationWithMapItem(mapItem obj.Object) *StructuredLocation {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("locationWithMapItem:"), objref.IDOf(mapItem))
+	return StructuredLocationFromID(_r)
 }

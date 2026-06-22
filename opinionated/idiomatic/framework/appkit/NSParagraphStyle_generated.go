@@ -5,172 +5,210 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The paragraph or ruler attributes for an attributed string.
+// ParagraphStyle is an idiomatic wrapper over the Objective-C class NSParagraphStyle.
 //
-// ParagraphStyle wraps [raw.NSParagraphStyle] with a fluent Go API.
+// ParagraphStyle is an abstract base — you do not construct it directly. Construct one of [MutableParagraphStyle] and pass it where a ParagraphStyle is accepted.
+//
+// The paragraph or ruler attributes for an attributed string.
 type ParagraphStyle struct {
-	inner *raw.NSParagraphStyle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSParagraphStyle].
-func (x *ParagraphStyle) Unwrap() *raw.NSParagraphStyle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParagraphStyle) ID() objc.ID { return x.inner.Ptr() }
-
-// ParagraphStyleFromID adopts an existing object pointer as a ParagraphStyle (nil for 0).
+// ParagraphStyleFromID adopts an existing Objective-C object as a ParagraphStyle
+// (nil for 0), retaining it and registering a release finalizer.
 func ParagraphStyleFromID(id objc.ID) *ParagraphStyle {
 	if id == 0 {
 		return nil
 	}
-	return &ParagraphStyle{inner: raw.NSParagraphStyleFromID(id)}
+	x := &ParagraphStyle{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewParagraphStyle creates a new [ParagraphStyle].
-func NewParagraphStyle() *ParagraphStyle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSParagraphStyle")), objc.RegisterName("new"))
-	return &ParagraphStyle{inner: raw.NSParagraphStyleFromID(_id)}
+// paragraphStyleAdopt wraps an Objective-C object that this code just created as a
+// ParagraphStyle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paragraphStyleAdopt(id objc.ID) *ParagraphStyle {
+	if id == 0 {
+		return nil
+	}
+	x := &ParagraphStyle{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// LineSpacing calls the underlying LineSpacing.
+// Description returns the object's -description text.
+func (x *ParagraphStyle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ParagraphStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ParagraphStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ParagraphStyle) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// LineSpacing wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineSpacing() float64 {
-	return x.inner.LineSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineSpacing"))
+	return _r
 }
 
-// ParagraphSpacing calls the underlying ParagraphSpacing.
+// ParagraphSpacing wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) ParagraphSpacing() float64 {
-	return x.inner.ParagraphSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("paragraphSpacing"))
+	return _r
 }
 
-// HeadIndent calls the underlying HeadIndent.
+// HeadIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HeadIndent() float64 {
-	return x.inner.HeadIndent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("headIndent"))
+	return _r
 }
 
-// TailIndent calls the underlying TailIndent.
+// TailIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) TailIndent() float64 {
-	return x.inner.TailIndent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tailIndent"))
+	return _r
 }
 
-// FirstLineHeadIndent calls the underlying FirstLineHeadIndent.
+// FirstLineHeadIndent wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) FirstLineHeadIndent() float64 {
-	return x.inner.FirstLineHeadIndent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("firstLineHeadIndent"))
+	return _r
 }
 
-// MinimumLineHeight calls the underlying MinimumLineHeight.
+// MinimumLineHeight wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) MinimumLineHeight() float64 {
-	return x.inner.MinimumLineHeight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLineHeight"))
+	return _r
 }
 
-// MaximumLineHeight calls the underlying MaximumLineHeight.
+// MaximumLineHeight wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) MaximumLineHeight() float64 {
-	return x.inner.MaximumLineHeight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLineHeight"))
+	return _r
 }
 
-// LineBreakMode calls the underlying LineBreakMode.
-func (x *ParagraphStyle) LineBreakMode() NSLineBreakMode {
-	return NSLineBreakMode(x.inner.LineBreakMode())
+// LineBreakMode wraps the corresponding Objective-C method.
+func (x *ParagraphStyle) LineBreakMode() LineBreakMode {
+	_r := objc.Send[LineBreakMode](objref.IDOf(x), objc.RegisterName("lineBreakMode"))
+	return _r
 }
 
-// BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *ParagraphStyle) BaseWritingDirection() NSWritingDirection {
-	return NSWritingDirection(x.inner.BaseWritingDirection())
+// BaseWritingDirection wraps the corresponding Objective-C method.
+func (x *ParagraphStyle) BaseWritingDirection() WritingDirection {
+	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("baseWritingDirection"))
+	return _r
 }
 
-// LineHeightMultiple calls the underlying LineHeightMultiple.
+// LineHeightMultiple wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) LineHeightMultiple() float64 {
-	return x.inner.LineHeightMultiple()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineHeightMultiple"))
+	return _r
 }
 
-// ParagraphSpacingBefore calls the underlying ParagraphSpacingBefore.
+// ParagraphSpacingBefore wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) ParagraphSpacingBefore() float64 {
-	return x.inner.ParagraphSpacingBefore()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("paragraphSpacingBefore"))
+	return _r
 }
 
-// HyphenationFactor calls the underlying HyphenationFactor.
+// HyphenationFactor wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HyphenationFactor() float32 {
-	return x.inner.HyphenationFactor()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("hyphenationFactor"))
+	return _r
 }
 
-// UsesDefaultHyphenation calls the underlying UsesDefaultHyphenation.
+// UsesDefaultHyphenation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) UsesDefaultHyphenation() bool {
-	return x.inner.UsesDefaultHyphenation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDefaultHyphenation"))
+	return _r
 }
 
+// TabStops wraps the corresponding Objective-C method.
+//
 // TabStops returns the collection as a Go slice.
 func (x *ParagraphStyle) TabStops() []*TextTab {
-	arr := x.inner.TabStops()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextTab {
-		return &TextTab{inner: raw.NSTextTabFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabStops"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextTab { return TextTabFromID(_id) })
 }
 
-// DefaultTabInterval calls the underlying DefaultTabInterval.
+// DefaultTabInterval wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) DefaultTabInterval() float64 {
-	return x.inner.DefaultTabInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultTabInterval"))
+	return _r
 }
 
+// TextLists wraps the corresponding Objective-C method.
+//
 // TextLists returns the collection as a Go slice.
 func (x *ParagraphStyle) TextLists() []*TextList {
-	arr := x.inner.TextLists()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextList {
-		return &TextList{inner: raw.NSTextListFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLists"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextList { return TextListFromID(_id) })
 }
 
-// AllowsDefaultTighteningForTruncation calls the underlying AllowsDefaultTighteningForTruncation.
+// AllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
-	return x.inner.AllowsDefaultTighteningForTruncation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDefaultTighteningForTruncation"))
+	return _r
 }
 
-// LineBreakStrategy calls the underlying LineBreakStrategy.
-func (x *ParagraphStyle) LineBreakStrategy() NSLineBreakStrategy {
-	return NSLineBreakStrategy(x.inner.LineBreakStrategy())
+// LineBreakStrategy wraps the corresponding Objective-C method.
+func (x *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
+	_r := objc.Send[LineBreakStrategy](objref.IDOf(x), objc.RegisterName("lineBreakStrategy"))
+	return _r
 }
 
-// Alignment calls the underlying Alignment.
-func (x *ParagraphStyle) Alignment() NSTextAlignment {
-	return NSTextAlignment(x.inner.Alignment())
+// Alignment wraps the corresponding Objective-C method.
+func (x *ParagraphStyle) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
-// TighteningFactorForTruncation calls the underlying TighteningFactorForTruncation.
+// TighteningFactorForTruncation wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) TighteningFactorForTruncation() float32 {
-	return x.inner.TighteningFactorForTruncation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("tighteningFactorForTruncation"))
+	return _r
 }
 
+// TextBlocks wraps the corresponding Objective-C method.
+//
 // TextBlocks returns the collection as a Go slice.
 func (x *ParagraphStyle) TextBlocks() []*TextBlock {
-	arr := x.inner.TextBlocks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TextBlock {
-		return &TextBlock{inner: raw.NSTextBlockFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textBlocks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextBlock { return TextBlockFromID(_id) })
 }
 
-// HeaderLevel calls the underlying HeaderLevel.
+// HeaderLevel wraps the corresponding Objective-C method.
 func (x *ParagraphStyle) HeaderLevel() int {
-	return x.inner.HeaderLevel()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("headerLevel"))
+	return _r
 }
-
-func (x *ParagraphStyle) asParagraphStyle() *raw.NSParagraphStyle { return x.inner }
 
 // ParagraphStyleable is the interface implemented by [ParagraphStyle], for mocking and DI.
 type ParagraphStyleable interface {
-	Unwrap() *raw.NSParagraphStyle
+	obj.Object
 	LineSpacing() float64
 	ParagraphSpacing() float64
 	HeadIndent() float64
@@ -178,8 +216,8 @@ type ParagraphStyleable interface {
 	FirstLineHeadIndent() float64
 	MinimumLineHeight() float64
 	MaximumLineHeight() float64
-	LineBreakMode() NSLineBreakMode
-	BaseWritingDirection() NSWritingDirection
+	LineBreakMode() LineBreakMode
+	BaseWritingDirection() WritingDirection
 	LineHeightMultiple() float64
 	ParagraphSpacingBefore() float64
 	HyphenationFactor() float32
@@ -188,11 +226,18 @@ type ParagraphStyleable interface {
 	DefaultTabInterval() float64
 	TextLists() []*TextList
 	AllowsDefaultTighteningForTruncation() bool
-	LineBreakStrategy() NSLineBreakStrategy
-	Alignment() NSTextAlignment
+	LineBreakStrategy() LineBreakStrategy
+	Alignment() TextAlignment
 	TighteningFactorForTruncation() float32
 	TextBlocks() []*TextBlock
 	HeaderLevel() int
 }
 
 var _ ParagraphStyleable = (*ParagraphStyle)(nil)
+
+// isParagraphStyle marks ParagraphStyle — and, by embedding promotion, its
+// subclasses — as a member of the ParagraphStyle hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *ParagraphStyle) isParagraphStyle() {}
+
+var _ ParagraphStyleProvider = (*ParagraphStyle)(nil)

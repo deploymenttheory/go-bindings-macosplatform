@@ -5,75 +5,76 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores a prescription for glasses.
+// GlassesPrescription is an idiomatic wrapper over the Objective-C class HKGlassesPrescription.
 //
-// GlassesPrescription wraps [raw.HKGlassesPrescription] with a fluent Go API.
+// It embeds [VisionPrescription], promoting that type's methods.
+//
+// A sample that stores a prescription for glasses.
 type GlassesPrescription struct {
-	inner *raw.HKGlassesPrescription
+	VisionPrescription
 }
 
-// Unwrap returns the underlying [raw.HKGlassesPrescription].
-func (x *GlassesPrescription) Unwrap() *raw.HKGlassesPrescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GlassesPrescription) ID() objc.ID { return x.inner.Ptr() }
-
-// GlassesPrescriptionFromID adopts an existing object pointer as a GlassesPrescription (nil for 0).
+// GlassesPrescriptionFromID adopts an existing Objective-C object as a GlassesPrescription
+// (nil for 0), retaining it and registering a release finalizer.
 func GlassesPrescriptionFromID(id objc.ID) *GlassesPrescription {
 	if id == 0 {
 		return nil
 	}
-	return &GlassesPrescription{inner: raw.HKGlassesPrescriptionFromID(id)}
+	x := &GlassesPrescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGlassesPrescription creates a new [GlassesPrescription].
+// glassesPrescriptionAdopt wraps an Objective-C object that this code just created as a
+// GlassesPrescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func glassesPrescriptionAdopt(id objc.ID) *GlassesPrescription {
+	if id == 0 {
+		return nil
+	}
+	x := &GlassesPrescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGlassesPrescription creates a new GlassesPrescription.
 func NewGlassesPrescription() *GlassesPrescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKGlassesPrescription")), objc.RegisterName("new"))
-	return &GlassesPrescription{inner: raw.HKGlassesPrescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKGlassesPrescription")), objc.RegisterName("new"))
+	return glassesPrescriptionAdopt(_id)
 }
 
-// @property      rightEye @abstract      The right eye lens specification
-//
-// RightEye calls the underlying RightEye.
+// RightEye the right eye lens specification
 func (x *GlassesPrescription) RightEye() *GlassesLensSpecification {
-	_r := x.inner.RightEye()
-	if _r == nil {
-		return nil
-	}
-	return &GlassesLensSpecification{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightEye"))
+	return GlassesLensSpecificationFromID(_r)
 }
 
-// @property      leftEye @abstract      The left eye lens specification
-//
-// LeftEye calls the underlying LeftEye.
+// LeftEye the left eye lens specification
 func (x *GlassesPrescription) LeftEye() *GlassesLensSpecification {
-	_r := x.inner.LeftEye()
-	if _r == nil {
-		return nil
-	}
-	return &GlassesLensSpecification{inner: _r}
-}
-
-func (x *GlassesPrescription) asVisionPrescription() *raw.HKVisionPrescription {
-	return &x.inner.HKVisionPrescription
-}
-
-func (x *GlassesPrescription) asSample() *raw.HKSample { return &x.inner.HKVisionPrescription.HKSample }
-
-func (x *GlassesPrescription) asObject() *raw.HKObject {
-	return &x.inner.HKVisionPrescription.HKSample.HKObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftEye"))
+	return GlassesLensSpecificationFromID(_r)
 }
 
 // GlassesPrescriptionable is the interface implemented by [GlassesPrescription], for mocking and DI.
 type GlassesPrescriptionable interface {
-	Unwrap() *raw.HKGlassesPrescription
+	obj.Object
 	RightEye() *GlassesLensSpecification
 	LeftEye() *GlassesLensSpecification
 }
 
 var _ GlassesPrescriptionable = (*GlassesPrescription)(nil)
+
+var _ VisionPrescriptionProvider = (*GlassesPrescription)(nil)
+
+var _ SampleProvider = (*GlassesPrescription)(nil)
+
+var _ ObjectProvider = (*GlassesPrescription)(nil)

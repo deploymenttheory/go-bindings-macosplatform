@@ -5,101 +5,133 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A participant in a turn-based match.
+// TurnBasedParticipant is an idiomatic wrapper over the Objective-C class GKTurnBasedParticipant.
 //
-// TurnBasedParticipant wraps [raw.GKTurnBasedParticipant] with a fluent Go API.
+// A participant in a turn-based match.
 type TurnBasedParticipant struct {
-	inner *raw.GKTurnBasedParticipant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKTurnBasedParticipant].
-func (x *TurnBasedParticipant) Unwrap() *raw.GKTurnBasedParticipant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TurnBasedParticipant) ID() objc.ID { return x.inner.Ptr() }
-
-// TurnBasedParticipantFromID adopts an existing object pointer as a TurnBasedParticipant (nil for 0).
+// TurnBasedParticipantFromID adopts an existing Objective-C object as a TurnBasedParticipant
+// (nil for 0), retaining it and registering a release finalizer.
 func TurnBasedParticipantFromID(id objc.ID) *TurnBasedParticipant {
 	if id == 0 {
 		return nil
 	}
-	return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(id)}
-}
-
-// NewTurnBasedParticipant creates a new [TurnBasedParticipant].
-func NewTurnBasedParticipant() *TurnBasedParticipant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedParticipant")), objc.RegisterName("new"))
-	return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(_id)}
-}
-
-// The conclusion or results of a participant in a match.
-//
-// WithMatchOutcome sets the matchOutcome property and returns the receiver for chaining.
-func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) *TurnBasedParticipant {
-	x.inner.SetMatchOutcome(raw.GKTurnBasedMatchOutcome(matchOutcome))
+	x := &TurnBasedParticipant{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Player calls the underlying Player.
-func (x *TurnBasedParticipant) Player() *Player {
-	_r := x.inner.Player()
-	if _r == nil {
+// turnBasedParticipantAdopt wraps an Objective-C object that this code just created as a
+// TurnBasedParticipant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func turnBasedParticipantAdopt(id objc.ID) *TurnBasedParticipant {
+	if id == 0 {
 		return nil
 	}
-	return &Player{inner: _r}
+	x := &TurnBasedParticipant{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// LastTurnDate calls the underlying LastTurnDate.
-func (x *TurnBasedParticipant) LastTurnDate() *foundation.NSDate {
-	return x.inner.LastTurnDate()
+// Description returns the object's -description text.
+func (x *TurnBasedParticipant) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Status calls the underlying Status.
-func (x *TurnBasedParticipant) Status() GKTurnBasedParticipantStatus {
-	return GKTurnBasedParticipantStatus(x.inner.Status())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TurnBasedParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// MatchOutcome calls the underlying MatchOutcome.
-func (x *TurnBasedParticipant) MatchOutcome() GKTurnBasedMatchOutcome {
-	return GKTurnBasedMatchOutcome(x.inner.MatchOutcome())
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TurnBasedParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetMatchOutcome calls the underlying SetMatchOutcome.
-func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) {
-	x.inner.SetMatchOutcome(raw.GKTurnBasedMatchOutcome(matchOutcome))
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TurnBasedParticipant) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// TimeoutDate calls the underlying TimeoutDate.
-func (x *TurnBasedParticipant) TimeoutDate() *foundation.NSDate {
-	return x.inner.TimeoutDate()
+// NewTurnBasedParticipant creates a new TurnBasedParticipant.
+func NewTurnBasedParticipant() *TurnBasedParticipant {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedParticipant")), objc.RegisterName("new"))
+	return turnBasedParticipantAdopt(_id)
 }
 
-// PlayerID calls the underlying PlayerID.
+// WithMatchOutcome the conclusion or results of a participant in a match.
+func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
+	return x
+}
+
+// Player wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return PlayerFromID(_r)
+}
+
+// LastTurnDate wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) LastTurnDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastTurnDate"))
+	return obj.Wrap(_r)
+}
+
+// Status wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
+	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
+}
+
+// MatchOutcome wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
+	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(x), objc.RegisterName("matchOutcome"))
+	return _r
+}
+
+// SetMatchOutcome wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome TurnBasedMatchOutcome) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
+}
+
+// TimeoutDate wraps the corresponding Objective-C method.
+func (x *TurnBasedParticipant) TimeoutDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutDate"))
+	return obj.Wrap(_r)
+}
+
+// PlayerID wraps the corresponding Objective-C method.
 func (x *TurnBasedParticipant) PlayerID() string {
-	_r := x.inner.PlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // TurnBasedParticipantable is the interface implemented by [TurnBasedParticipant], for mocking and DI.
 type TurnBasedParticipantable interface {
-	Unwrap() *raw.GKTurnBasedParticipant
-	WithMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) *TurnBasedParticipant
+	obj.Object
+	WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant
 	Player() *Player
-	LastTurnDate() *foundation.NSDate
-	Status() GKTurnBasedParticipantStatus
-	MatchOutcome() GKTurnBasedMatchOutcome
-	SetMatchOutcome(matchOutcome GKTurnBasedMatchOutcome)
-	TimeoutDate() *foundation.NSDate
+	LastTurnDate() obj.Object
+	Status() TurnBasedParticipantStatus
+	MatchOutcome() TurnBasedMatchOutcome
+	SetMatchOutcome(matchOutcome TurnBasedMatchOutcome)
+	TimeoutDate() obj.Object
 	PlayerID() string
 }
 

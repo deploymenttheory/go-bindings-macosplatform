@@ -5,137 +5,156 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains configuration information about a workout session.
+// WorkoutConfiguration is an idiomatic wrapper over the Objective-C class HKWorkoutConfiguration.
 //
-// WorkoutConfiguration wraps [raw.HKWorkoutConfiguration] with a fluent Go API.
+// An object that contains configuration information about a workout session.
 type WorkoutConfiguration struct {
-	inner *raw.HKWorkoutConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutConfiguration].
-func (x *WorkoutConfiguration) Unwrap() *raw.HKWorkoutConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutConfigurationFromID adopts an existing object pointer as a WorkoutConfiguration (nil for 0).
+// WorkoutConfigurationFromID adopts an existing Objective-C object as a WorkoutConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutConfigurationFromID(id objc.ID) *WorkoutConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutConfiguration{inner: raw.HKWorkoutConfigurationFromID(id)}
-}
-
-// NewWorkoutConfiguration creates a new [WorkoutConfiguration].
-func NewWorkoutConfiguration() *WorkoutConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutConfiguration")), objc.RegisterName("new"))
-	return &WorkoutConfiguration{inner: raw.HKWorkoutConfigurationFromID(_id)}
-}
-
-// The workout session’s activity type.
-//
-// WithActivityType sets the activityType property and returns the receiver for chaining.
-func (x *WorkoutConfiguration) WithActivityType(activityType HKWorkoutActivityType) *WorkoutConfiguration {
-	x.inner.SetActivityType(raw.HKWorkoutActivityType(activityType))
+	x := &WorkoutConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The workout session’s location.
-//
-// WithLocationType sets the locationType property and returns the receiver for chaining.
-func (x *WorkoutConfiguration) WithLocationType(locationType HKWorkoutSessionLocationType) *WorkoutConfiguration {
-	x.inner.SetLocationType(raw.HKWorkoutSessionLocationType(locationType))
-	return x
-}
-
-// The workout session’s swimming location.
-//
-// WithSwimmingLocationType sets the swimmingLocationType property and returns the receiver for chaining.
-func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType) *WorkoutConfiguration {
-	x.inner.SetSwimmingLocationType(raw.HKWorkoutSwimmingLocationType(swimmingLocationType))
-	return x
-}
-
-// The length of the lap for a workout session.
-//
-// WithLapLength sets the lapLength property and returns the receiver for chaining.
-func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
-	x.inner.SetLapLength(lapLength.Unwrap())
-	return x
-}
-
-// @property      activityType @abstract      Indicates the type of workout for the configuration.
-//
-// ActivityType calls the underlying ActivityType.
-func (x *WorkoutConfiguration) ActivityType() HKWorkoutActivityType {
-	return HKWorkoutActivityType(x.inner.ActivityType())
-}
-
-// SetActivityType calls the underlying SetActivityType.
-func (x *WorkoutConfiguration) SetActivityType(activityType HKWorkoutActivityType) {
-	x.inner.SetActivityType(raw.HKWorkoutActivityType(activityType))
-}
-
-// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) for the configuration.
-//
-// LocationType calls the underlying LocationType.
-func (x *WorkoutConfiguration) LocationType() HKWorkoutSessionLocationType {
-	return HKWorkoutSessionLocationType(x.inner.LocationType())
-}
-
-// SetLocationType calls the underlying SetLocationType.
-func (x *WorkoutConfiguration) SetLocationType(locationType HKWorkoutSessionLocationType) {
-	x.inner.SetLocationType(raw.HKWorkoutSessionLocationType(locationType))
-}
-
-// @property      swimmingLocationType @abstract      Indicates the type of swimming location (pool vs. open water) where the workout will take place.
-//
-// SwimmingLocationType calls the underlying SwimmingLocationType.
-func (x *WorkoutConfiguration) SwimmingLocationType() HKWorkoutSwimmingLocationType {
-	return HKWorkoutSwimmingLocationType(x.inner.SwimmingLocationType())
-}
-
-// SetSwimmingLocationType calls the underlying SetSwimmingLocationType.
-func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType) {
-	x.inner.SetSwimmingLocationType(raw.HKWorkoutSwimmingLocationType(swimmingLocationType))
-}
-
-// @property      lapLength @abstract      Indicates the length of the pool, when the workout location type is pool. @discussion    This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
-//
-// LapLength calls the underlying LapLength.
-func (x *WorkoutConfiguration) LapLength() *Quantity {
-	_r := x.inner.LapLength()
-	if _r == nil {
+// workoutConfigurationAdopt wraps an Objective-C object that this code just created as a
+// WorkoutConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutConfigurationAdopt(id objc.ID) *WorkoutConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &Quantity{inner: _r}
+	x := &WorkoutConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetLapLength calls the underlying SetLapLength.
-func (x *WorkoutConfiguration) SetLapLength(lapLength *raw.HKQuantity) {
-	x.inner.SetLapLength(lapLength)
+// Description returns the object's -description text.
+func (x *WorkoutConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WorkoutConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWorkoutConfiguration creates a new WorkoutConfiguration.
+func NewWorkoutConfiguration() *WorkoutConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutConfiguration")), objc.RegisterName("new"))
+	return workoutConfigurationAdopt(_id)
+}
+
+// WithActivityType the workout session’s activity type.
+func (x *WorkoutConfiguration) WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
+	return x
+}
+
+// WithLocationType the workout session’s location.
+func (x *WorkoutConfiguration) WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
+	return x
+}
+
+// WithSwimmingLocationType the workout session’s swimming location.
+func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
+	return x
+}
+
+// WithLapLength the length of the lap for a workout session.
+func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
+	return x
+}
+
+// ActivityType indicates the type of workout for the configuration.
+func (x *WorkoutConfiguration) ActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
+	return _r
+}
+
+// SetActivityType wraps the corresponding Objective-C method.
+func (x *WorkoutConfiguration) SetActivityType(activityType WorkoutActivityType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
+}
+
+// LocationType indicates the type of location (indoors vs. outdoors) for the configuration.
+func (x *WorkoutConfiguration) LocationType() WorkoutSessionLocationType {
+	_r := objc.Send[WorkoutSessionLocationType](objref.IDOf(x), objc.RegisterName("locationType"))
+	return _r
+}
+
+// SetLocationType wraps the corresponding Objective-C method.
+func (x *WorkoutConfiguration) SetLocationType(locationType WorkoutSessionLocationType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationType:"), locationType)
+}
+
+// SwimmingLocationType indicates the type of swimming location (pool vs. open water) where the workout will take place.
+func (x *WorkoutConfiguration) SwimmingLocationType() WorkoutSwimmingLocationType {
+	_r := objc.Send[WorkoutSwimmingLocationType](objref.IDOf(x), objc.RegisterName("swimmingLocationType"))
+	return _r
+}
+
+// SetSwimmingLocationType wraps the corresponding Objective-C method.
+func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSwimmingLocationType:"), swimmingLocationType)
+}
+
+// LapLength indicates the length of the pool, when the workout location type is pool. This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
+func (x *WorkoutConfiguration) LapLength() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lapLength"))
+	return QuantityFromID(_r)
+}
+
+// SetLapLength wraps the corresponding Objective-C method.
+func (x *WorkoutConfiguration) SetLapLength(lapLength *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLapLength:"), objref.IDOf(lapLength))
 }
 
 // WorkoutConfigurationable is the interface implemented by [WorkoutConfiguration], for mocking and DI.
 type WorkoutConfigurationable interface {
-	Unwrap() *raw.HKWorkoutConfiguration
-	WithActivityType(activityType HKWorkoutActivityType) *WorkoutConfiguration
-	WithLocationType(locationType HKWorkoutSessionLocationType) *WorkoutConfiguration
-	WithSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType) *WorkoutConfiguration
+	obj.Object
+	WithActivityType(activityType WorkoutActivityType) *WorkoutConfiguration
+	WithLocationType(locationType WorkoutSessionLocationType) *WorkoutConfiguration
+	WithSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType) *WorkoutConfiguration
 	WithLapLength(lapLength *Quantity) *WorkoutConfiguration
-	ActivityType() HKWorkoutActivityType
-	SetActivityType(activityType HKWorkoutActivityType)
-	LocationType() HKWorkoutSessionLocationType
-	SetLocationType(locationType HKWorkoutSessionLocationType)
-	SwimmingLocationType() HKWorkoutSwimmingLocationType
-	SetSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType)
+	ActivityType() WorkoutActivityType
+	SetActivityType(activityType WorkoutActivityType)
+	LocationType() WorkoutSessionLocationType
+	SetLocationType(locationType WorkoutSessionLocationType)
+	SwimmingLocationType() WorkoutSwimmingLocationType
+	SetSwimmingLocationType(swimmingLocationType WorkoutSwimmingLocationType)
 	LapLength() *Quantity
-	SetLapLength(lapLength *raw.HKQuantity)
+	SetLapLength(lapLength *Quantity)
 }
 
 var _ WorkoutConfigurationable = (*WorkoutConfiguration)(nil)

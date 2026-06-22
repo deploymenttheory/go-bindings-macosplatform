@@ -5,155 +5,141 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that a credential manager app uses to extend AutoFill.
+// CredentialProviderViewController is an idiomatic wrapper over the Objective-C class ASCredentialProviderViewController.
 //
-// CredentialProviderViewController wraps [raw.ASCredentialProviderViewController] with a fluent Go API.
+// A view controller that a credential manager app uses to extend AutoFill.
 type CredentialProviderViewController struct {
-	inner *raw.ASCredentialProviderViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASCredentialProviderViewController].
-func (x *CredentialProviderViewController) Unwrap() *raw.ASCredentialProviderViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CredentialProviderViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// CredentialProviderViewControllerFromID adopts an existing object pointer as a CredentialProviderViewController (nil for 0).
+// CredentialProviderViewControllerFromID adopts an existing Objective-C object as a CredentialProviderViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func CredentialProviderViewControllerFromID(id objc.ID) *CredentialProviderViewController {
 	if id == 0 {
 		return nil
 	}
-	return &CredentialProviderViewController{inner: raw.ASCredentialProviderViewControllerFromID(id)}
+	x := &CredentialProviderViewController{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewCredentialProviderViewController creates a new [CredentialProviderViewController].
+// credentialProviderViewControllerAdopt wraps an Objective-C object that this code just created as a
+// CredentialProviderViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func credentialProviderViewControllerAdopt(id objc.ID) *CredentialProviderViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &CredentialProviderViewController{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CredentialProviderViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CredentialProviderViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CredentialProviderViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CredentialProviderViewController) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewCredentialProviderViewController creates a new CredentialProviderViewController.
 func NewCredentialProviderViewController() *CredentialProviderViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialProviderViewController")), objc.RegisterName("new"))
-	return &CredentialProviderViewController{inner: raw.ASCredentialProviderViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASCredentialProviderViewController")), objc.RegisterName("new"))
+	return credentialProviderViewControllerAdopt(_id)
 }
 
-// Prepares the interface to display a list of credentials from which the user can select.
-//
-// PrepareCredentialListForServiceIdentifiers calls the underlying PrepareCredentialListForServiceIdentifiers.
-func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier]) {
-	x.inner.PrepareCredentialListForServiceIdentifiers(serviceIdentifiers)
+// PrepareCredentialListForServiceIdentifiers prepares the interface to display a list of credentials from which the user can select.
+func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Prepares the interface to display a list of passkey and password credentials from which the user can select.
-//
-// PrepareCredentialListForServiceIdentifiersRequestParameters calls the underlying PrepareCredentialListForServiceIdentifiersRequestParameters.
-func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier], requestParameters *raw.ASPasskeyCredentialRequestParameters) {
-	x.inner.PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers, requestParameters)
+// PrepareCredentialListForServiceIdentifiersRequestParameters prepares the interface to display a list of passkey and password credentials from which the user can select.
+func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers []*CredentialServiceIdentifier, requestParameters *PasskeyCredentialRequestParameters) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareCredentialListForServiceIdentifiers:requestParameters:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }), objref.IDOf(requestParameters))
 }
 
-// Prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
-//
-// PrepareOneTimeCodeCredentialListForServiceIdentifiers calls the underlying PrepareOneTimeCodeCredentialListForServiceIdentifiers.
-func (x *CredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier]) {
-	x.inner.PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers)
+// PrepareOneTimeCodeCredentialListForServiceIdentifiers prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
+func (x *CredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareOneTimeCodeCredentialListForServiceIdentifiers:"), purego.SliceToNSArray(serviceIdentifiers, func(_v *CredentialServiceIdentifier) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Attempts to provide the user-requested credential with no further user interaction.
-//
-// ProvideCredentialWithoutUserInteractionForIdentity calls the underlying ProvideCredentialWithoutUserInteractionForIdentity.
-func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) {
-	x.inner.ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity)
+// ProvideCredentialWithoutUserInteractionForIdentity attempts to provide the user-requested credential with no further user interaction.
+func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *PasswordCredentialIdentity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provideCredentialWithoutUserInteractionForIdentity:"), objref.IDOf(credentialIdentity))
 }
 
-// Attempts to provide the user-requested credential with no further user interaction.
-//
-// ProvideCredentialWithoutUserInteractionForRequest calls the underlying ProvideCredentialWithoutUserInteractionForRequest.
-func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForRequest(credentialRequest raw.ASCredentialRequest) {
-	x.inner.ProvideCredentialWithoutUserInteractionForRequest(credentialRequest)
+// PrepareInterfaceToProvideCredentialForIdentity prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
+func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *PasswordCredentialIdentity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareInterfaceToProvideCredentialForIdentity:"), objref.IDOf(credentialIdentity))
 }
 
-// Prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
-//
-// PrepareInterfaceToProvideCredentialForIdentity calls the underlying PrepareInterfaceToProvideCredentialForIdentity.
-func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) {
-	x.inner.PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity)
-}
-
-// Prepare the view controller to show user interface for providing the requested credential.
-//
-// PrepareInterfaceToProvideCredentialForRequest calls the underlying PrepareInterfaceToProvideCredentialForRequest.
-func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForRequest(credentialRequest raw.ASCredentialRequest) {
-	x.inner.PrepareInterfaceToProvideCredentialForRequest(credentialRequest)
-}
-
-// Prepares the interface to enable the user to configure the extension.
-//
-// PrepareInterfaceForExtensionConfiguration calls the underlying PrepareInterfaceForExtensionConfiguration.
+// PrepareInterfaceForExtensionConfiguration prepares the interface to enable the user to configure the extension.
 func (x *CredentialProviderViewController) PrepareInterfaceForExtensionConfiguration() {
-	x.inner.PrepareInterfaceForExtensionConfiguration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareInterfaceForExtensionConfiguration"))
 }
 
-// Prepare the view controller to show user interface for registering a new passkey.
-//
-// PrepareInterfaceForPasskeyRegistration calls the underlying PrepareInterfaceForPasskeyRegistration.
-func (x *CredentialProviderViewController) PrepareInterfaceForPasskeyRegistration(registrationRequest raw.ASCredentialRequest) {
-	x.inner.PrepareInterfaceForPasskeyRegistration(registrationRequest)
+// PerformPasskeyRegistrationWithoutUserInteractionIfPossible perform a conditional passkey registration, if possible.
+func (x *CredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *PasskeyCredentialRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performPasskeyRegistrationWithoutUserInteractionIfPossible:"), objref.IDOf(registrationRequest))
 }
 
-// Perform a conditional passkey registration, if possible.
-//
-// PerformPasskeyRegistrationWithoutUserInteractionIfPossible calls the underlying PerformPasskeyRegistrationWithoutUserInteractionIfPossible.
-func (x *CredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *raw.ASPasskeyCredentialRequest) {
-	x.inner.PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest)
+// ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName receives a report from the system that a relying party indicated that a passkey’s user name updated.
+func (x *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle obj.Object, newName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.NSString(newName))
 }
 
-// Receives a report from the system that a relying party indicated that a passkey’s user name updated.
-//
-// ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName calls the underlying ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName.
-func (x *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle *foundation.NSData, newName string) {
-	x.inner.ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(foundation.NSStringStringWithUTF8String(relyingParty), userHandle, foundation.NSStringStringWithUTF8String(newName))
+// ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID receives a report from the system that a relying party indicated a passkey credential is invalid.
+func (x *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportUnknownPublicKeyCredentialForRelyingParty:credentialID:"), purego.NSString(relyingParty), objref.IDOf(credentialID))
 }
 
-// Receives a report from the system that a relying party indicated a passkey credential is invalid.
-//
-// ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID calls the underlying ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID.
-func (x *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID *foundation.NSData) {
-	x.inner.ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(foundation.NSStringStringWithUTF8String(relyingParty), credentialID)
+// ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
+func (x *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle obj.Object, acceptedCredentialIDs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:"), purego.NSString(relyingParty), objref.IDOf(userHandle), purego.SliceToNSArray(acceptedCredentialIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
-//
-// ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs calls the underlying ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs.
-func (x *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle *foundation.NSData, acceptedCredentialIDs *foundation.NSArray[*foundation.NSData]) {
-	x.inner.ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(foundation.NSStringStringWithUTF8String(relyingParty), userHandle, acceptedCredentialIDs)
-}
-
-// Receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
-//
-// ReportUnusedPasswordCredentialForDomainUserName calls the underlying ReportUnusedPasswordCredentialForDomainUserName.
+// ReportUnusedPasswordCredentialForDomainUserName receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
 func (x *CredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain string, userName string) {
-	x.inner.ReportUnusedPasswordCredentialForDomainUserName(foundation.NSStringStringWithUTF8String(domain), foundation.NSStringStringWithUTF8String(userName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportUnusedPasswordCredentialForDomain:userName:"), purego.NSString(domain), purego.NSString(userName))
 }
 
 // CredentialProviderViewControllerable is the interface implemented by [CredentialProviderViewController], for mocking and DI.
 type CredentialProviderViewControllerable interface {
-	Unwrap() *raw.ASCredentialProviderViewController
-	PrepareCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier])
-	PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier], requestParameters *raw.ASPasskeyCredentialRequestParameters)
-	PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier])
-	ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity)
-	ProvideCredentialWithoutUserInteractionForRequest(credentialRequest raw.ASCredentialRequest)
-	PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity)
-	PrepareInterfaceToProvideCredentialForRequest(credentialRequest raw.ASCredentialRequest)
+	obj.Object
+	PrepareCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier)
+	PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers []*CredentialServiceIdentifier, requestParameters *PasskeyCredentialRequestParameters)
+	PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers []*CredentialServiceIdentifier)
+	ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *PasswordCredentialIdentity)
+	PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *PasswordCredentialIdentity)
 	PrepareInterfaceForExtensionConfiguration()
-	PrepareInterfaceForPasskeyRegistration(registrationRequest raw.ASCredentialRequest)
-	PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *raw.ASPasskeyCredentialRequest)
-	ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle *foundation.NSData, newName string)
-	ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID *foundation.NSData)
-	ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle *foundation.NSData, acceptedCredentialIDs *foundation.NSArray[*foundation.NSData])
+	PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *PasskeyCredentialRequest)
+	ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle obj.Object, newName string)
+	ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID obj.Object)
+	ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle obj.Object, acceptedCredentialIDs []obj.Object)
 	ReportUnusedPasswordCredentialForDomainUserName(domain string, userName string)
 }
 

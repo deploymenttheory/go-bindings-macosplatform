@@ -5,14 +5,9 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// VZErrorDomain returns the string constant VZErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func VZErrorDomain() objc.ID {
-	if _r := raw.VZErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// VZErrorDomain returns the string constant VZErrorDomain, for use as a dictionary key or argument.
+func VZErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("VZErrorDomain"))) }

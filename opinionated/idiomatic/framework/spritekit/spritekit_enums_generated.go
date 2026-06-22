@@ -10,441 +10,463 @@ import (
 )
 
 // The modes that an action can use to adjust the apparent timing of the action.
-type SKActionTimingMode int64
+type ActionTimingMode int64
 
 const (
 	// Specifies linear pacing. Linear pacing causes an animation to occur evenly over its duration.
-	SKActionTimingLinear SKActionTimingMode = 0
+	ActionTimingLinear ActionTimingMode = 0
 	// Specifies ease-in pacing. Ease-in pacing causes the animation to begin slowly and then speed up as it progresses.
-	SKActionTimingEaseIn SKActionTimingMode = 1
+	ActionTimingEaseIn ActionTimingMode = 1
 	// Specifies ease-out pacing. Ease-out pacing causes the animation to begin quickly and then slow as it completes.
-	SKActionTimingEaseOut SKActionTimingMode = 2
+	ActionTimingEaseOut ActionTimingMode = 2
 	// Specifies ease-in ease-out pacing. An ease-in ease-out animation begins slowly, accelerates through the middle of its duration, and then slows again before completing.
-	SKActionTimingEaseInEaseOut SKActionTimingMode = 3
+	ActionTimingEaseInEaseOut ActionTimingMode = 3
 )
 
-func (e SKActionTimingMode) String() string {
+// String returns the ActionTimingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ActionTimingMode) String() string {
 	switch e {
-	case SKActionTimingLinear:
-		return "SKActionTimingLinear"
-	case SKActionTimingEaseIn:
-		return "SKActionTimingEaseIn"
-	case SKActionTimingEaseOut:
-		return "SKActionTimingEaseOut"
-	case SKActionTimingEaseInEaseOut:
-		return "SKActionTimingEaseInEaseOut"
+	case ActionTimingLinear:
+		return "ActionTimingLinear"
+	case ActionTimingEaseIn:
+		return "ActionTimingEaseIn"
+	case ActionTimingEaseOut:
+		return "ActionTimingEaseOut"
+	case ActionTimingEaseInEaseOut:
+		return "ActionTimingEaseInEaseOut"
 	default:
-		return fmt.Sprintf("SKActionTimingMode(%d)", int64(e))
+		return fmt.Sprintf("ActionTimingMode(%d)", int64(e))
 	}
 }
 
 // Options that specify an attribute’s data type.
-type SKAttributeType int64
+type AttributeType int64
 
 const (
-	SKAttributeTypeNone             SKAttributeType = 0
-	SKAttributeTypeFloat            SKAttributeType = 1
-	SKAttributeTypeVectorFloat2     SKAttributeType = 2
-	SKAttributeTypeVectorFloat3     SKAttributeType = 3
-	SKAttributeTypeVectorFloat4     SKAttributeType = 4
-	SKAttributeTypeHalfFloat        SKAttributeType = 5
-	SKAttributeTypeVectorHalfFloat2 SKAttributeType = 6
-	SKAttributeTypeVectorHalfFloat3 SKAttributeType = 7
-	SKAttributeTypeVectorHalfFloat4 SKAttributeType = 8
+	AttributeTypeNone             AttributeType = 0
+	AttributeTypeFloat            AttributeType = 1
+	AttributeTypeVectorFloat2     AttributeType = 2
+	AttributeTypeVectorFloat3     AttributeType = 3
+	AttributeTypeVectorFloat4     AttributeType = 4
+	AttributeTypeHalfFloat        AttributeType = 5
+	AttributeTypeVectorHalfFloat2 AttributeType = 6
+	AttributeTypeVectorHalfFloat3 AttributeType = 7
+	AttributeTypeVectorHalfFloat4 AttributeType = 8
 )
 
-func (e SKAttributeType) String() string {
+// String returns the AttributeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributeType) String() string {
 	switch e {
-	case SKAttributeTypeNone:
-		return "SKAttributeTypeNone"
-	case SKAttributeTypeFloat:
-		return "SKAttributeTypeFloat"
-	case SKAttributeTypeVectorFloat2:
-		return "SKAttributeTypeVectorFloat2"
-	case SKAttributeTypeVectorFloat3:
-		return "SKAttributeTypeVectorFloat3"
-	case SKAttributeTypeVectorFloat4:
-		return "SKAttributeTypeVectorFloat4"
-	case SKAttributeTypeHalfFloat:
-		return "SKAttributeTypeHalfFloat"
-	case SKAttributeTypeVectorHalfFloat2:
-		return "SKAttributeTypeVectorHalfFloat2"
-	case SKAttributeTypeVectorHalfFloat3:
-		return "SKAttributeTypeVectorHalfFloat3"
-	case SKAttributeTypeVectorHalfFloat4:
-		return "SKAttributeTypeVectorHalfFloat4"
+	case AttributeTypeNone:
+		return "AttributeTypeNone"
+	case AttributeTypeFloat:
+		return "AttributeTypeFloat"
+	case AttributeTypeVectorFloat2:
+		return "AttributeTypeVectorFloat2"
+	case AttributeTypeVectorFloat3:
+		return "AttributeTypeVectorFloat3"
+	case AttributeTypeVectorFloat4:
+		return "AttributeTypeVectorFloat4"
+	case AttributeTypeHalfFloat:
+		return "AttributeTypeHalfFloat"
+	case AttributeTypeVectorHalfFloat2:
+		return "AttributeTypeVectorHalfFloat2"
+	case AttributeTypeVectorHalfFloat3:
+		return "AttributeTypeVectorHalfFloat3"
+	case AttributeTypeVectorHalfFloat4:
+		return "AttributeTypeVectorHalfFloat4"
 	default:
-		return fmt.Sprintf("SKAttributeType(%d)", int64(e))
+		return fmt.Sprintf("AttributeType(%d)", int64(e))
 	}
 }
 
 // The modes that describe how the source and destination pixel colors are used to calculate the new destination color.
-type SKBlendMode int64
+type BlendMode int64
 
 const (
 	// The source and destination colors are blended by multiplying the source alpha value.
-	SKBlendModeAlpha SKBlendMode = 0
+	BlendModeAlpha BlendMode = 0
 	// The source and destination colors are added together.
-	SKBlendModeAdd SKBlendMode = 1
+	BlendModeAdd BlendMode = 1
 	// The source color is subtracted from the destination color.
-	SKBlendModeSubtract SKBlendMode = 2
+	BlendModeSubtract BlendMode = 2
 	// The source color is multiplied by the destination color.
-	SKBlendModeMultiply SKBlendMode = 3
+	BlendModeMultiply BlendMode = 3
 	// The source color is multiplied by the destination color and then doubled.
-	SKBlendModeMultiplyX2 SKBlendMode = 4
+	BlendModeMultiplyX2 BlendMode = 4
 	// The source color is added to the destination color times the inverted source color.
-	SKBlendModeScreen SKBlendMode = 5
+	BlendModeScreen BlendMode = 5
 	// The source color replaces the destination color.
-	SKBlendModeReplace       SKBlendMode = 6
-	SKBlendModeMultiplyAlpha SKBlendMode = 7
+	BlendModeReplace       BlendMode = 6
+	BlendModeMultiplyAlpha BlendMode = 7
 )
 
-func (e SKBlendMode) String() string {
+// String returns the BlendMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BlendMode) String() string {
 	switch e {
-	case SKBlendModeAlpha:
-		return "SKBlendModeAlpha"
-	case SKBlendModeAdd:
-		return "SKBlendModeAdd"
-	case SKBlendModeSubtract:
-		return "SKBlendModeSubtract"
-	case SKBlendModeMultiply:
-		return "SKBlendModeMultiply"
-	case SKBlendModeMultiplyX2:
-		return "SKBlendModeMultiplyX2"
-	case SKBlendModeScreen:
-		return "SKBlendModeScreen"
-	case SKBlendModeReplace:
-		return "SKBlendModeReplace"
-	case SKBlendModeMultiplyAlpha:
-		return "SKBlendModeMultiplyAlpha"
+	case BlendModeAlpha:
+		return "BlendModeAlpha"
+	case BlendModeAdd:
+		return "BlendModeAdd"
+	case BlendModeSubtract:
+		return "BlendModeSubtract"
+	case BlendModeMultiply:
+		return "BlendModeMultiply"
+	case BlendModeMultiplyX2:
+		return "BlendModeMultiplyX2"
+	case BlendModeScreen:
+		return "BlendModeScreen"
+	case BlendModeReplace:
+		return "BlendModeReplace"
+	case BlendModeMultiplyAlpha:
+		return "BlendModeMultiplyAlpha"
 	default:
-		return fmt.Sprintf("SKBlendMode(%d)", int64(e))
+		return fmt.Sprintf("BlendMode(%d)", int64(e))
 	}
 }
 
 // The modes used to interpolate between keyframes in the sequence.
-type SKInterpolationMode int64
+type InterpolationMode int64
 
 const (
 	// Values between two keyframes are interpolated linearly.
-	SKInterpolationModeLinear SKInterpolationMode = 1
+	InterpolationModeLinear InterpolationMode = 1
 	// Values between two keyframes using a spline curve.
-	SKInterpolationModeSpline SKInterpolationMode = 2
+	InterpolationModeSpline InterpolationMode = 2
 	// Values between two keyframes are not interpolated. Instead, the value is that of the most recent keyframe.
-	SKInterpolationModeStep SKInterpolationMode = 3
+	InterpolationModeStep InterpolationMode = 3
 )
 
-func (e SKInterpolationMode) String() string {
+// String returns the InterpolationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InterpolationMode) String() string {
 	switch e {
-	case SKInterpolationModeLinear:
-		return "SKInterpolationModeLinear"
-	case SKInterpolationModeSpline:
-		return "SKInterpolationModeSpline"
-	case SKInterpolationModeStep:
-		return "SKInterpolationModeStep"
+	case InterpolationModeLinear:
+		return "InterpolationModeLinear"
+	case InterpolationModeSpline:
+		return "InterpolationModeSpline"
+	case InterpolationModeStep:
+		return "InterpolationModeStep"
 	default:
-		return fmt.Sprintf("SKInterpolationMode(%d)", int64(e))
+		return fmt.Sprintf("InterpolationMode(%d)", int64(e))
 	}
 }
 
 // Options for aligning text horizontally.
-type SKLabelHorizontalAlignmentMode int64
+type LabelHorizontalAlignmentMode int64
 
 const (
 	// Centers the text horizontally on the node’s origin.
-	SKLabelHorizontalAlignmentModeCenter SKLabelHorizontalAlignmentMode = 0
+	LabelHorizontalAlignmentModeCenter LabelHorizontalAlignmentMode = 0
 	// Positions the text so that the left side of the text is on the node’s origin.
-	SKLabelHorizontalAlignmentModeLeft SKLabelHorizontalAlignmentMode = 1
+	LabelHorizontalAlignmentModeLeft LabelHorizontalAlignmentMode = 1
 	// Positions the text so that the right side of the text is on the node’s origin.
-	SKLabelHorizontalAlignmentModeRight SKLabelHorizontalAlignmentMode = 2
+	LabelHorizontalAlignmentModeRight LabelHorizontalAlignmentMode = 2
 )
 
-func (e SKLabelHorizontalAlignmentMode) String() string {
+// String returns the LabelHorizontalAlignmentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LabelHorizontalAlignmentMode) String() string {
 	switch e {
-	case SKLabelHorizontalAlignmentModeCenter:
-		return "SKLabelHorizontalAlignmentModeCenter"
-	case SKLabelHorizontalAlignmentModeLeft:
-		return "SKLabelHorizontalAlignmentModeLeft"
-	case SKLabelHorizontalAlignmentModeRight:
-		return "SKLabelHorizontalAlignmentModeRight"
+	case LabelHorizontalAlignmentModeCenter:
+		return "LabelHorizontalAlignmentModeCenter"
+	case LabelHorizontalAlignmentModeLeft:
+		return "LabelHorizontalAlignmentModeLeft"
+	case LabelHorizontalAlignmentModeRight:
+		return "LabelHorizontalAlignmentModeRight"
 	default:
-		return fmt.Sprintf("SKLabelHorizontalAlignmentMode(%d)", int64(e))
+		return fmt.Sprintf("LabelHorizontalAlignmentMode(%d)", int64(e))
 	}
 }
 
 // Options for aligning text vertically.
-type SKLabelVerticalAlignmentMode int64
+type LabelVerticalAlignmentMode int64
 
 const (
 	// Positions the text so that the font’s baseline lies on the node’s origin.
-	SKLabelVerticalAlignmentModeBaseline SKLabelVerticalAlignmentMode = 0
+	LabelVerticalAlignmentModeBaseline LabelVerticalAlignmentMode = 0
 	// Centers the text vertically on the node’s origin.
-	SKLabelVerticalAlignmentModeCenter SKLabelVerticalAlignmentMode = 1
+	LabelVerticalAlignmentModeCenter LabelVerticalAlignmentMode = 1
 	// Positions the text so that the top of the text is on the node’s origin.
-	SKLabelVerticalAlignmentModeTop SKLabelVerticalAlignmentMode = 2
+	LabelVerticalAlignmentModeTop LabelVerticalAlignmentMode = 2
 	// Positions the text so that the bottom of the text is on the node’s origin.
-	SKLabelVerticalAlignmentModeBottom SKLabelVerticalAlignmentMode = 3
+	LabelVerticalAlignmentModeBottom LabelVerticalAlignmentMode = 3
 )
 
-func (e SKLabelVerticalAlignmentMode) String() string {
+// String returns the LabelVerticalAlignmentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LabelVerticalAlignmentMode) String() string {
 	switch e {
-	case SKLabelVerticalAlignmentModeBaseline:
-		return "SKLabelVerticalAlignmentModeBaseline"
-	case SKLabelVerticalAlignmentModeCenter:
-		return "SKLabelVerticalAlignmentModeCenter"
-	case SKLabelVerticalAlignmentModeTop:
-		return "SKLabelVerticalAlignmentModeTop"
-	case SKLabelVerticalAlignmentModeBottom:
-		return "SKLabelVerticalAlignmentModeBottom"
+	case LabelVerticalAlignmentModeBaseline:
+		return "LabelVerticalAlignmentModeBaseline"
+	case LabelVerticalAlignmentModeCenter:
+		return "LabelVerticalAlignmentModeCenter"
+	case LabelVerticalAlignmentModeTop:
+		return "LabelVerticalAlignmentModeTop"
+	case LabelVerticalAlignmentModeBottom:
+		return "LabelVerticalAlignmentModeBottom"
 	default:
-		return fmt.Sprintf("SKLabelVerticalAlignmentMode(%d)", int64(e))
+		return fmt.Sprintf("LabelVerticalAlignmentMode(%d)", int64(e))
 	}
 }
 
 // The order to use when the emitter’s particles are rendered.
-type SKParticleRenderOrder uint64
+type ParticleRenderOrder uint64
 
 const (
 	// The particles are rendered from newest to oldest. This is the default value.
-	SKParticleRenderOrderOldestLast SKParticleRenderOrder = 0
+	ParticleRenderOrderOldestLast ParticleRenderOrder = 0
 	// The particles are rendered from oldest to newest.
-	SKParticleRenderOrderOldestFirst SKParticleRenderOrder = 1
+	ParticleRenderOrderOldestFirst ParticleRenderOrder = 1
 	// The particles can be rendered in any order. SpriteKit may choose to reorder the particles to improve rendering performance.
-	SKParticleRenderOrderDontCare SKParticleRenderOrder = 2
+	ParticleRenderOrderDontCare ParticleRenderOrder = 2
 )
 
-func (e SKParticleRenderOrder) String() string {
+// String returns the ParticleRenderOrder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ParticleRenderOrder) String() string {
 	switch e {
-	case SKParticleRenderOrderOldestLast:
-		return "SKParticleRenderOrderOldestLast"
-	case SKParticleRenderOrderOldestFirst:
-		return "SKParticleRenderOrderOldestFirst"
-	case SKParticleRenderOrderDontCare:
-		return "SKParticleRenderOrderDontCare"
+	case ParticleRenderOrderOldestLast:
+		return "ParticleRenderOrderOldestLast"
+	case ParticleRenderOrderOldestFirst:
+		return "ParticleRenderOrderOldestFirst"
+	case ParticleRenderOrderDontCare:
+		return "ParticleRenderOrderDontCare"
 	default:
-		return fmt.Sprintf("SKParticleRenderOrder(%d)", int64(e))
+		return fmt.Sprintf("ParticleRenderOrder(%d)", int64(e))
 	}
 }
 
 // The modes used to determine how the sequence repeats.
-type SKRepeatMode int64
+type RepeatMode int64
 
 const (
 	// When a sample is calculated, the time value is clamped to the range of time values found in the sequence. For example, if the last keyframe’s time value is 0.5, a sample at any time value from 0.5 to 1.0 returns the last keyframe’s value.
-	SKRepeatModeClamp SKRepeatMode = 1
+	RepeatModeClamp RepeatMode = 1
 	// When a sample is calculated, the sequence loops back to the beginning of the sequence. For example, if the last keyframe’s time value is 0.5, then a sample at any time value from 0.5 to 1.0 returns the same value as the sequence did from 0.0 to 0.5.
-	SKRepeatModeLoop SKRepeatMode = 2
+	RepeatModeLoop RepeatMode = 2
 )
 
-func (e SKRepeatMode) String() string {
+// String returns the RepeatMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RepeatMode) String() string {
 	switch e {
-	case SKRepeatModeClamp:
-		return "SKRepeatModeClamp"
-	case SKRepeatModeLoop:
-		return "SKRepeatModeLoop"
+	case RepeatModeClamp:
+		return "RepeatModeClamp"
+	case RepeatModeLoop:
+		return "RepeatModeLoop"
 	default:
-		return fmt.Sprintf("SKRepeatMode(%d)", int64(e))
+		return fmt.Sprintf("RepeatMode(%d)", int64(e))
 	}
 }
 
 // The modes that determine how the scene’s area is mapped to the view that presents it.
-type SKSceneScaleMode int64
+type SceneScaleMode int64
 
 const (
 	// Each axis of the scene is scaled independently so that each axis in the scene exactly maps to the length of that axis in the view.
-	SKSceneScaleModeFill SKSceneScaleMode = 0
+	SceneScaleModeFill SceneScaleMode = 0
 	// The scaling factor of each dimension is calculated and the larger of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire area of the view is filled but may cause parts of the scene to be cropped.
-	SKSceneScaleModeAspectFill SKSceneScaleMode = 1
+	SceneScaleModeAspectFill SceneScaleMode = 1
 	// The scaling factor of each dimension is calculated and the smaller of the two is chosen. Each axis of the scene is scaled by the same scaling factor. This guarantees that the entire scene is visible but may require letterboxing in the view.
-	SKSceneScaleModeAspectFit SKSceneScaleMode = 2
+	SceneScaleModeAspectFit SceneScaleMode = 2
 	// The scene is not scaled to match the view. Instead, the scene is automatically resized so that its dimensions always match those of the view.
-	SKSceneScaleModeResizeFill SKSceneScaleMode = 3
+	SceneScaleModeResizeFill SceneScaleMode = 3
 )
 
-func (e SKSceneScaleMode) String() string {
+// String returns the SceneScaleMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SceneScaleMode) String() string {
 	switch e {
-	case SKSceneScaleModeFill:
-		return "SKSceneScaleModeFill"
-	case SKSceneScaleModeAspectFill:
-		return "SKSceneScaleModeAspectFill"
-	case SKSceneScaleModeAspectFit:
-		return "SKSceneScaleModeAspectFit"
-	case SKSceneScaleModeResizeFill:
-		return "SKSceneScaleModeResizeFill"
+	case SceneScaleModeFill:
+		return "SceneScaleModeFill"
+	case SceneScaleModeAspectFill:
+		return "SceneScaleModeAspectFill"
+	case SceneScaleModeAspectFit:
+		return "SceneScaleModeAspectFit"
+	case SceneScaleModeResizeFill:
+		return "SceneScaleModeResizeFill"
 	default:
-		return fmt.Sprintf("SKSceneScaleMode(%d)", int64(e))
+		return fmt.Sprintf("SceneScaleMode(%d)", int64(e))
 	}
 }
 
 // Texture filtering modes to use when the texture is drawn in a size other than its native size.
-type SKTextureFilteringMode int64
+type TextureFilteringMode int64
 
 const (
 	// Each pixel is drawn using the nearest point in the texture. This mode is faster, but the results are often pixelated.
-	SKTextureFilteringNearest SKTextureFilteringMode = 0
+	TextureFilteringNearest TextureFilteringMode = 0
 	// Each pixel is drawn by using a linear filter of multiple texels in the texture. This mode produces higher quality results but may be slower.
-	SKTextureFilteringLinear SKTextureFilteringMode = 1
+	TextureFilteringLinear TextureFilteringMode = 1
 )
 
-func (e SKTextureFilteringMode) String() string {
+// String returns the TextureFilteringMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureFilteringMode) String() string {
 	switch e {
-	case SKTextureFilteringNearest:
-		return "SKTextureFilteringNearest"
-	case SKTextureFilteringLinear:
-		return "SKTextureFilteringLinear"
+	case TextureFilteringNearest:
+		return "TextureFilteringNearest"
+	case TextureFilteringLinear:
+		return "TextureFilteringLinear"
 	default:
-		return fmt.Sprintf("SKTextureFilteringMode(%d)", int64(e))
+		return fmt.Sprintf("TextureFilteringMode(%d)", int64(e))
 	}
 }
 
 // An enumeration defining how neighboring tiles are automatically placed next to each other.
 // Bitmask — values may be combined with |.
-type SKTileAdjacencyMask uint64
+type TileAdjacencyMask uint64
 
 const (
-	SKTileAdjacencyUp                  SKTileAdjacencyMask = 1
-	SKTileAdjacencyUpperRight          SKTileAdjacencyMask = 2
-	SKTileAdjacencyRight               SKTileAdjacencyMask = 4
-	SKTileAdjacencyLowerRight          SKTileAdjacencyMask = 8
-	SKTileAdjacencyDown                SKTileAdjacencyMask = 16
-	SKTileAdjacencyLowerLeft           SKTileAdjacencyMask = 32
-	SKTileAdjacencyLeft                SKTileAdjacencyMask = 64
-	SKTileAdjacencyUpperLeft           SKTileAdjacencyMask = 128
-	SKTileAdjacencyAll                 SKTileAdjacencyMask = 255
-	SKTileHexFlatAdjacencyUp           SKTileAdjacencyMask = 1
-	SKTileHexFlatAdjacencyUpperRight   SKTileAdjacencyMask = 2
-	SKTileHexFlatAdjacencyLowerRight   SKTileAdjacencyMask = 4
-	SKTileHexFlatAdjacencyDown         SKTileAdjacencyMask = 8
-	SKTileHexFlatAdjacencyLowerLeft    SKTileAdjacencyMask = 16
-	SKTileHexFlatAdjacencyUpperLeft    SKTileAdjacencyMask = 32
-	SKTileHexFlatAdjacencyAll          SKTileAdjacencyMask = 63
-	SKTileHexPointyAdjacencyUpperLeft  SKTileAdjacencyMask = 1
-	SKTileHexPointyAdjacencyUpperRight SKTileAdjacencyMask = 2
-	SKTileHexPointyAdjacencyRight      SKTileAdjacencyMask = 4
-	SKTileHexPointyAdjacencyLowerRight SKTileAdjacencyMask = 8
-	SKTileHexPointyAdjacencyLowerLeft  SKTileAdjacencyMask = 16
-	SKTileHexPointyAdjacencyLeft       SKTileAdjacencyMask = 32
-	SKTileHexPointyAdjacencyAdd        SKTileAdjacencyMask = 63
-	SKTileAdjacencyUpEdge              SKTileAdjacencyMask = 124
-	SKTileAdjacencyUpperRightEdge      SKTileAdjacencyMask = 112
-	SKTileAdjacencyRightEdge           SKTileAdjacencyMask = 241
-	SKTileAdjacencyLowerRightEdge      SKTileAdjacencyMask = 193
-	SKTileAdjacencyDownEdge            SKTileAdjacencyMask = 199
-	SKTileAdjacencyLowerLeftEdge       SKTileAdjacencyMask = 7
-	SKTileAdjacencyLeftEdge            SKTileAdjacencyMask = 31
-	SKTileAdjacencyUpperLeftEdge       SKTileAdjacencyMask = 28
-	SKTileAdjacencyUpperRightCorner    SKTileAdjacencyMask = 223
-	SKTileAdjacencyLowerRightCorner    SKTileAdjacencyMask = 127
-	SKTileAdjacencyLowerLeftCorner     SKTileAdjacencyMask = 253
-	SKTileAdjacencyUpperLeftCorner     SKTileAdjacencyMask = 247
+	TileAdjacencyUp                  TileAdjacencyMask = 1
+	TileAdjacencyUpperRight          TileAdjacencyMask = 2
+	TileAdjacencyRight               TileAdjacencyMask = 4
+	TileAdjacencyLowerRight          TileAdjacencyMask = 8
+	TileAdjacencyDown                TileAdjacencyMask = 16
+	TileAdjacencyLowerLeft           TileAdjacencyMask = 32
+	TileAdjacencyLeft                TileAdjacencyMask = 64
+	TileAdjacencyUpperLeft           TileAdjacencyMask = 128
+	TileAdjacencyAll                 TileAdjacencyMask = 255
+	TileHexFlatAdjacencyUp           TileAdjacencyMask = 1
+	TileHexFlatAdjacencyUpperRight   TileAdjacencyMask = 2
+	TileHexFlatAdjacencyLowerRight   TileAdjacencyMask = 4
+	TileHexFlatAdjacencyDown         TileAdjacencyMask = 8
+	TileHexFlatAdjacencyLowerLeft    TileAdjacencyMask = 16
+	TileHexFlatAdjacencyUpperLeft    TileAdjacencyMask = 32
+	TileHexFlatAdjacencyAll          TileAdjacencyMask = 63
+	TileHexPointyAdjacencyUpperLeft  TileAdjacencyMask = 1
+	TileHexPointyAdjacencyUpperRight TileAdjacencyMask = 2
+	TileHexPointyAdjacencyRight      TileAdjacencyMask = 4
+	TileHexPointyAdjacencyLowerRight TileAdjacencyMask = 8
+	TileHexPointyAdjacencyLowerLeft  TileAdjacencyMask = 16
+	TileHexPointyAdjacencyLeft       TileAdjacencyMask = 32
+	TileHexPointyAdjacencyAdd        TileAdjacencyMask = 63
+	TileAdjacencyUpEdge              TileAdjacencyMask = 124
+	TileAdjacencyUpperRightEdge      TileAdjacencyMask = 112
+	TileAdjacencyRightEdge           TileAdjacencyMask = 241
+	TileAdjacencyLowerRightEdge      TileAdjacencyMask = 193
+	TileAdjacencyDownEdge            TileAdjacencyMask = 199
+	TileAdjacencyLowerLeftEdge       TileAdjacencyMask = 7
+	TileAdjacencyLeftEdge            TileAdjacencyMask = 31
+	TileAdjacencyUpperLeftEdge       TileAdjacencyMask = 28
+	TileAdjacencyUpperRightCorner    TileAdjacencyMask = 223
+	TileAdjacencyLowerRightCorner    TileAdjacencyMask = 127
+	TileAdjacencyLowerLeftCorner     TileAdjacencyMask = 253
+	TileAdjacencyUpperLeftCorner     TileAdjacencyMask = 247
 )
 
-func (e SKTileAdjacencyMask) String() string {
+// String returns the TileAdjacencyMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TileAdjacencyMask) String() string {
 	var parts []string
-	if e&SKTileAdjacencyUp != 0 {
-		parts = append(parts, "SKTileAdjacencyUp")
+	if e&TileAdjacencyUp != 0 {
+		parts = append(parts, "TileAdjacencyUp")
 	}
-	if e&SKTileAdjacencyUpperRight != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperRight")
+	if e&TileAdjacencyUpperRight != 0 {
+		parts = append(parts, "TileAdjacencyUpperRight")
 	}
-	if e&SKTileAdjacencyRight != 0 {
-		parts = append(parts, "SKTileAdjacencyRight")
+	if e&TileAdjacencyRight != 0 {
+		parts = append(parts, "TileAdjacencyRight")
 	}
-	if e&SKTileAdjacencyLowerRight != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerRight")
+	if e&TileAdjacencyLowerRight != 0 {
+		parts = append(parts, "TileAdjacencyLowerRight")
 	}
-	if e&SKTileAdjacencyDown != 0 {
-		parts = append(parts, "SKTileAdjacencyDown")
+	if e&TileAdjacencyDown != 0 {
+		parts = append(parts, "TileAdjacencyDown")
 	}
-	if e&SKTileAdjacencyLowerLeft != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerLeft")
+	if e&TileAdjacencyLowerLeft != 0 {
+		parts = append(parts, "TileAdjacencyLowerLeft")
 	}
-	if e&SKTileAdjacencyLeft != 0 {
-		parts = append(parts, "SKTileAdjacencyLeft")
+	if e&TileAdjacencyLeft != 0 {
+		parts = append(parts, "TileAdjacencyLeft")
 	}
-	if e&SKTileAdjacencyUpperLeft != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperLeft")
+	if e&TileAdjacencyUpperLeft != 0 {
+		parts = append(parts, "TileAdjacencyUpperLeft")
 	}
-	if e&SKTileAdjacencyAll != 0 {
-		parts = append(parts, "SKTileAdjacencyAll")
+	if e&TileAdjacencyAll != 0 {
+		parts = append(parts, "TileAdjacencyAll")
 	}
-	if e&SKTileHexFlatAdjacencyUp != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyUp")
+	if e&TileHexFlatAdjacencyUp != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyUp")
 	}
-	if e&SKTileHexFlatAdjacencyUpperRight != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyUpperRight")
+	if e&TileHexFlatAdjacencyUpperRight != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyUpperRight")
 	}
-	if e&SKTileHexFlatAdjacencyLowerRight != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyLowerRight")
+	if e&TileHexFlatAdjacencyLowerRight != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyLowerRight")
 	}
-	if e&SKTileHexFlatAdjacencyDown != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyDown")
+	if e&TileHexFlatAdjacencyDown != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyDown")
 	}
-	if e&SKTileHexFlatAdjacencyLowerLeft != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyLowerLeft")
+	if e&TileHexFlatAdjacencyLowerLeft != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyLowerLeft")
 	}
-	if e&SKTileHexFlatAdjacencyUpperLeft != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyUpperLeft")
+	if e&TileHexFlatAdjacencyUpperLeft != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyUpperLeft")
 	}
-	if e&SKTileHexFlatAdjacencyAll != 0 {
-		parts = append(parts, "SKTileHexFlatAdjacencyAll")
+	if e&TileHexFlatAdjacencyAll != 0 {
+		parts = append(parts, "TileHexFlatAdjacencyAll")
 	}
-	if e&SKTileHexPointyAdjacencyUpperLeft != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyUpperLeft")
+	if e&TileHexPointyAdjacencyUpperLeft != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyUpperLeft")
 	}
-	if e&SKTileHexPointyAdjacencyUpperRight != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyUpperRight")
+	if e&TileHexPointyAdjacencyUpperRight != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyUpperRight")
 	}
-	if e&SKTileHexPointyAdjacencyRight != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyRight")
+	if e&TileHexPointyAdjacencyRight != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyRight")
 	}
-	if e&SKTileHexPointyAdjacencyLowerRight != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyLowerRight")
+	if e&TileHexPointyAdjacencyLowerRight != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyLowerRight")
 	}
-	if e&SKTileHexPointyAdjacencyLowerLeft != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyLowerLeft")
+	if e&TileHexPointyAdjacencyLowerLeft != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyLowerLeft")
 	}
-	if e&SKTileHexPointyAdjacencyLeft != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyLeft")
+	if e&TileHexPointyAdjacencyLeft != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyLeft")
 	}
-	if e&SKTileHexPointyAdjacencyAdd != 0 {
-		parts = append(parts, "SKTileHexPointyAdjacencyAdd")
+	if e&TileHexPointyAdjacencyAdd != 0 {
+		parts = append(parts, "TileHexPointyAdjacencyAdd")
 	}
-	if e&SKTileAdjacencyUpEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyUpEdge")
+	if e&TileAdjacencyUpEdge != 0 {
+		parts = append(parts, "TileAdjacencyUpEdge")
 	}
-	if e&SKTileAdjacencyUpperRightEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperRightEdge")
+	if e&TileAdjacencyUpperRightEdge != 0 {
+		parts = append(parts, "TileAdjacencyUpperRightEdge")
 	}
-	if e&SKTileAdjacencyRightEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyRightEdge")
+	if e&TileAdjacencyRightEdge != 0 {
+		parts = append(parts, "TileAdjacencyRightEdge")
 	}
-	if e&SKTileAdjacencyLowerRightEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerRightEdge")
+	if e&TileAdjacencyLowerRightEdge != 0 {
+		parts = append(parts, "TileAdjacencyLowerRightEdge")
 	}
-	if e&SKTileAdjacencyDownEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyDownEdge")
+	if e&TileAdjacencyDownEdge != 0 {
+		parts = append(parts, "TileAdjacencyDownEdge")
 	}
-	if e&SKTileAdjacencyLowerLeftEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerLeftEdge")
+	if e&TileAdjacencyLowerLeftEdge != 0 {
+		parts = append(parts, "TileAdjacencyLowerLeftEdge")
 	}
-	if e&SKTileAdjacencyLeftEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyLeftEdge")
+	if e&TileAdjacencyLeftEdge != 0 {
+		parts = append(parts, "TileAdjacencyLeftEdge")
 	}
-	if e&SKTileAdjacencyUpperLeftEdge != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperLeftEdge")
+	if e&TileAdjacencyUpperLeftEdge != 0 {
+		parts = append(parts, "TileAdjacencyUpperLeftEdge")
 	}
-	if e&SKTileAdjacencyUpperRightCorner != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperRightCorner")
+	if e&TileAdjacencyUpperRightCorner != 0 {
+		parts = append(parts, "TileAdjacencyUpperRightCorner")
 	}
-	if e&SKTileAdjacencyLowerRightCorner != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerRightCorner")
+	if e&TileAdjacencyLowerRightCorner != 0 {
+		parts = append(parts, "TileAdjacencyLowerRightCorner")
 	}
-	if e&SKTileAdjacencyLowerLeftCorner != 0 {
-		parts = append(parts, "SKTileAdjacencyLowerLeftCorner")
+	if e&TileAdjacencyLowerLeftCorner != 0 {
+		parts = append(parts, "TileAdjacencyLowerLeftCorner")
 	}
-	if e&SKTileAdjacencyUpperLeftCorner != 0 {
-		parts = append(parts, "SKTileAdjacencyUpperLeftCorner")
+	if e&TileAdjacencyUpperLeftCorner != 0 {
+		parts = append(parts, "TileAdjacencyUpperLeftCorner")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -453,129 +475,137 @@ func (e SKTileAdjacencyMask) String() string {
 }
 
 // The allowed rotations for a given tile.
-type SKTileDefinitionRotation uint64
+type TileDefinitionRotation uint64
 
 const (
-	SKTileDefinitionRotation0   SKTileDefinitionRotation = 0
-	SKTileDefinitionRotation90  SKTileDefinitionRotation = 1
-	SKTileDefinitionRotation180 SKTileDefinitionRotation = 2
-	SKTileDefinitionRotation270 SKTileDefinitionRotation = 3
+	TileDefinitionRotation0   TileDefinitionRotation = 0
+	TileDefinitionRotation90  TileDefinitionRotation = 1
+	TileDefinitionRotation180 TileDefinitionRotation = 2
+	TileDefinitionRotation270 TileDefinitionRotation = 3
 )
 
-func (e SKTileDefinitionRotation) String() string {
+// String returns the TileDefinitionRotation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TileDefinitionRotation) String() string {
 	switch e {
-	case SKTileDefinitionRotation0:
-		return "SKTileDefinitionRotation0"
-	case SKTileDefinitionRotation90:
-		return "SKTileDefinitionRotation90"
-	case SKTileDefinitionRotation180:
-		return "SKTileDefinitionRotation180"
-	case SKTileDefinitionRotation270:
-		return "SKTileDefinitionRotation270"
+	case TileDefinitionRotation0:
+		return "TileDefinitionRotation0"
+	case TileDefinitionRotation90:
+		return "TileDefinitionRotation90"
+	case TileDefinitionRotation180:
+		return "TileDefinitionRotation180"
+	case TileDefinitionRotation270:
+		return "TileDefinitionRotation270"
 	default:
-		return fmt.Sprintf("SKTileDefinitionRotation(%d)", int64(e))
+		return fmt.Sprintf("TileDefinitionRotation(%d)", int64(e))
 	}
 }
 
 // An enumeration defining how tiles are arranged.
-type SKTileSetType uint64
+type TileSetType uint64
 
 const (
-	SKTileSetTypeGrid            SKTileSetType = 0
-	SKTileSetTypeIsometric       SKTileSetType = 1
-	SKTileSetTypeHexagonalFlat   SKTileSetType = 2
-	SKTileSetTypeHexagonalPointy SKTileSetType = 3
+	TileSetTypeGrid            TileSetType = 0
+	TileSetTypeIsometric       TileSetType = 1
+	TileSetTypeHexagonalFlat   TileSetType = 2
+	TileSetTypeHexagonalPointy TileSetType = 3
 )
 
-func (e SKTileSetType) String() string {
+// String returns the TileSetType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TileSetType) String() string {
 	switch e {
-	case SKTileSetTypeGrid:
-		return "SKTileSetTypeGrid"
-	case SKTileSetTypeIsometric:
-		return "SKTileSetTypeIsometric"
-	case SKTileSetTypeHexagonalFlat:
-		return "SKTileSetTypeHexagonalFlat"
-	case SKTileSetTypeHexagonalPointy:
-		return "SKTileSetTypeHexagonalPointy"
+	case TileSetTypeGrid:
+		return "TileSetTypeGrid"
+	case TileSetTypeIsometric:
+		return "TileSetTypeIsometric"
+	case TileSetTypeHexagonalFlat:
+		return "TileSetTypeHexagonalFlat"
+	case TileSetTypeHexagonalPointy:
+		return "TileSetTypeHexagonalPointy"
 	default:
-		return fmt.Sprintf("SKTileSetType(%d)", int64(e))
+		return fmt.Sprintf("TileSetType(%d)", int64(e))
 	}
 }
 
 // For some transitions, the direction in which the transition is performed.
-type SKTransitionDirection int64
+type TransitionDirection int64
 
 const (
 	// The transition goes up.
-	SKTransitionDirectionUp SKTransitionDirection = 0
+	TransitionDirectionUp TransitionDirection = 0
 	// The transition goes down.
-	SKTransitionDirectionDown SKTransitionDirection = 1
+	TransitionDirectionDown TransitionDirection = 1
 	// The transition goes right.
-	SKTransitionDirectionRight SKTransitionDirection = 2
+	TransitionDirectionRight TransitionDirection = 2
 	// The transition goes left.
-	SKTransitionDirectionLeft SKTransitionDirection = 3
+	TransitionDirectionLeft TransitionDirection = 3
 )
 
-func (e SKTransitionDirection) String() string {
+// String returns the TransitionDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TransitionDirection) String() string {
 	switch e {
-	case SKTransitionDirectionUp:
-		return "SKTransitionDirectionUp"
-	case SKTransitionDirectionDown:
-		return "SKTransitionDirectionDown"
-	case SKTransitionDirectionRight:
-		return "SKTransitionDirectionRight"
-	case SKTransitionDirectionLeft:
-		return "SKTransitionDirectionLeft"
+	case TransitionDirectionUp:
+		return "TransitionDirectionUp"
+	case TransitionDirectionDown:
+		return "TransitionDirectionDown"
+	case TransitionDirectionRight:
+		return "TransitionDirectionRight"
+	case TransitionDirectionLeft:
+		return "TransitionDirectionLeft"
 	default:
-		return fmt.Sprintf("SKTransitionDirection(%d)", int64(e))
+		return fmt.Sprintf("TransitionDirection(%d)", int64(e))
 	}
 }
 
 // An enumerated type to identify the type of a uniform object.
-type SKUniformType int64
+type UniformType int64
 
 const (
 	// Indicates that the uniform variable does not currently hold any data. A uniform object has this type until the first time its value is set.
-	SKUniformTypeNone SKUniformType = 0
+	UniformTypeNone UniformType = 0
 	// Indicates that the uniform variable holds a 32-bit floating-point value.
-	SKUniformTypeFloat SKUniformType = 1
+	UniformTypeFloat UniformType = 1
 	// Indicates that the uniform variable holds a vector of two 32-bit floating-point values.
-	SKUniformTypeFloatVector2 SKUniformType = 2
+	UniformTypeFloatVector2 UniformType = 2
 	// Indicates that the uniform variable holds a vector of three 32-bit floating-point values.
-	SKUniformTypeFloatVector3 SKUniformType = 3
+	UniformTypeFloatVector3 UniformType = 3
 	// Indicates that the uniform variable holds a vector of four 32-bit floating-point values.
-	SKUniformTypeFloatVector4 SKUniformType = 4
+	UniformTypeFloatVector4 UniformType = 4
 	// Indicates that the uniform variable holds a 2 x 2 matrix of four 32-bit floating-point values.
-	SKUniformTypeFloatMatrix2 SKUniformType = 5
+	UniformTypeFloatMatrix2 UniformType = 5
 	// Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.
-	SKUniformTypeFloatMatrix3 SKUniformType = 6
+	UniformTypeFloatMatrix3 UniformType = 6
 	// Indicates that the uniform variable holds a 3 x 3 matrix of four 32-bit floating-point values.
-	SKUniformTypeFloatMatrix4 SKUniformType = 7
+	UniformTypeFloatMatrix4 UniformType = 7
 	// Indicates that the uniform variable holds a reference to a SpriteKit texture.
-	SKUniformTypeTexture SKUniformType = 8
+	UniformTypeTexture UniformType = 8
 )
 
-func (e SKUniformType) String() string {
+// String returns the UniformType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UniformType) String() string {
 	switch e {
-	case SKUniformTypeNone:
-		return "SKUniformTypeNone"
-	case SKUniformTypeFloat:
-		return "SKUniformTypeFloat"
-	case SKUniformTypeFloatVector2:
-		return "SKUniformTypeFloatVector2"
-	case SKUniformTypeFloatVector3:
-		return "SKUniformTypeFloatVector3"
-	case SKUniformTypeFloatVector4:
-		return "SKUniformTypeFloatVector4"
-	case SKUniformTypeFloatMatrix2:
-		return "SKUniformTypeFloatMatrix2"
-	case SKUniformTypeFloatMatrix3:
-		return "SKUniformTypeFloatMatrix3"
-	case SKUniformTypeFloatMatrix4:
-		return "SKUniformTypeFloatMatrix4"
-	case SKUniformTypeTexture:
-		return "SKUniformTypeTexture"
+	case UniformTypeNone:
+		return "UniformTypeNone"
+	case UniformTypeFloat:
+		return "UniformTypeFloat"
+	case UniformTypeFloatVector2:
+		return "UniformTypeFloatVector2"
+	case UniformTypeFloatVector3:
+		return "UniformTypeFloatVector3"
+	case UniformTypeFloatVector4:
+		return "UniformTypeFloatVector4"
+	case UniformTypeFloatMatrix2:
+		return "UniformTypeFloatMatrix2"
+	case UniformTypeFloatMatrix3:
+		return "UniformTypeFloatMatrix3"
+	case UniformTypeFloatMatrix4:
+		return "UniformTypeFloatMatrix4"
+	case UniformTypeTexture:
+		return "UniformTypeTexture"
 	default:
-		return fmt.Sprintf("SKUniformType(%d)", int64(e))
+		return fmt.Sprintf("UniformType(%d)", int64(e))
 	}
 }

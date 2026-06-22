@@ -5,167 +5,146 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// An object that produces a matte image for a person it finds in the input image.
+// GeneratePersonSegmentationRequest is an idiomatic wrapper over the Objective-C class VNGeneratePersonSegmentationRequest.
 //
-// GeneratePersonSegmentationRequest wraps [raw.VNGeneratePersonSegmentationRequest] with a fluent Go API.
+// It embeds [StatefulRequest], promoting that type's methods.
+//
+// An object that produces a matte image for a person it finds in the input image.
 type GeneratePersonSegmentationRequest struct {
-	inner *raw.VNGeneratePersonSegmentationRequest
+	StatefulRequest
 }
 
-// Unwrap returns the underlying [raw.VNGeneratePersonSegmentationRequest].
-func (x *GeneratePersonSegmentationRequest) Unwrap() *raw.VNGeneratePersonSegmentationRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GeneratePersonSegmentationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// GeneratePersonSegmentationRequestFromID adopts an existing object pointer as a GeneratePersonSegmentationRequest (nil for 0).
+// GeneratePersonSegmentationRequestFromID adopts an existing Objective-C object as a GeneratePersonSegmentationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func GeneratePersonSegmentationRequestFromID(id objc.ID) *GeneratePersonSegmentationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &GeneratePersonSegmentationRequest{inner: raw.VNGeneratePersonSegmentationRequestFromID(id)}
+	x := &GeneratePersonSegmentationRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGeneratePersonSegmentationRequest creates a new [GeneratePersonSegmentationRequest].
+// generatePersonSegmentationRequestAdopt wraps an Objective-C object that this code just created as a
+// GeneratePersonSegmentationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func generatePersonSegmentationRequestAdopt(id objc.ID) *GeneratePersonSegmentationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &GeneratePersonSegmentationRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGeneratePersonSegmentationRequest creates a new GeneratePersonSegmentationRequest.
 func NewGeneratePersonSegmentationRequest() *GeneratePersonSegmentationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGeneratePersonSegmentationRequest")), objc.RegisterName("new"))
-	return &GeneratePersonSegmentationRequest{inner: raw.VNGeneratePersonSegmentationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNGeneratePersonSegmentationRequest")), objc.RegisterName("new"))
+	return generatePersonSegmentationRequestAdopt(_id)
 }
 
-// Creates a generate person segmentation request with a completion handler.
-//
-// NewGeneratePersonSegmentationRequestWithCompletionHandler creates a new [GeneratePersonSegmentationRequest].
-func NewGeneratePersonSegmentationRequestWithCompletionHandler(completionHandler func(*raw.VNRequest, unsafe.Pointer)) *GeneratePersonSegmentationRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGeneratePersonSegmentationRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), completionHandler)
-	return &GeneratePersonSegmentationRequest{inner: raw.VNGeneratePersonSegmentationRequestFromID(_id)}
-}
-
-// A value that indicates how the request balances accuracy and performance.
-//
-// WithQualityLevel sets the qualityLevel property and returns the receiver for chaining.
-func (x *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
-	x.inner.SetQualityLevel(raw.VNGeneratePersonSegmentationRequestQualityLevel(qualityLevel))
+// WithQualityLevel a value that indicates how the request balances accuracy and performance.
+func (x *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityLevel:"), qualityLevel)
 	return x
 }
 
-// The pixel format of the output image.
-//
-// WithOutputPixelFormat sets the outputPixelFormat property and returns the receiver for chaining.
-func (x *GeneratePersonSegmentationRequest) WithOutputPixelFormat(outputPixelFormat uint) *GeneratePersonSegmentationRequest {
-	x.inner.SetOutputPixelFormat(outputPixelFormat)
+// WithOutputPixelFormat the pixel format of the output image.
+func (x *GeneratePersonSegmentationRequest) WithOutputPixelFormat(outputPixelFormat int) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
 	return x
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *GeneratePersonSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GeneratePersonSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GeneratePersonSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *GeneratePersonSegmentationRequest) WithRevision(revision uint) *GeneratePersonSegmentationRequest {
-	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *GeneratePersonSegmentationRequest) WithRevision(revision int) *GeneratePersonSegmentationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
 }
 
-// Returns a list of output pixel formats that the request supports.
+// SupportedOutputPixelFormats returns a list of output pixel formats that the request supports.
 //
 // SupportedOutputPixelFormats returns the collection as a Go slice.
-func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() ([]*foundation.NSNumber, error) {
-	arr, err := x.inner.SupportedOutputPixelFormatsAndReturnError()
-	if err != nil {
-		return nil, err
+func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() (result []obj.Object, err error) {
+	var _nsErr uintptr
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedOutputPixelFormatsAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if arr == nil {
-		return nil, nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	}), nil
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// @brief The quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.
-//
-// QualityLevel calls the underlying QualityLevel.
-func (x *GeneratePersonSegmentationRequest) QualityLevel() VNGeneratePersonSegmentationRequestQualityLevel {
-	return VNGeneratePersonSegmentationRequestQualityLevel(x.inner.QualityLevel())
+// QualityLevel the quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.
+func (x *GeneratePersonSegmentationRequest) QualityLevel() GeneratePersonSegmentationRequestQualityLevel {
+	_r := objc.Send[GeneratePersonSegmentationRequestQualityLevel](objref.IDOf(x), objc.RegisterName("qualityLevel"))
+	return _r
 }
 
-// SetQualityLevel calls the underlying SetQualityLevel.
-func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) {
-	x.inner.SetQualityLevel(raw.VNGeneratePersonSegmentationRequestQualityLevel(qualityLevel))
+// SetQualityLevel wraps the corresponding Objective-C method.
+func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityLevel:"), qualityLevel)
 }
 
-// @brief Pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
-//
-// OutputPixelFormat calls the underlying OutputPixelFormat.
-func (x *GeneratePersonSegmentationRequest) OutputPixelFormat() uint {
-	return x.inner.OutputPixelFormat()
+// OutputPixelFormat pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
+func (x *GeneratePersonSegmentationRequest) OutputPixelFormat() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputPixelFormat"))
+	return _r
 }
 
-// SetOutputPixelFormat calls the underlying SetOutputPixelFormat.
-func (x *GeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelFormat uint) {
-	x.inner.SetOutputPixelFormat(outputPixelFormat)
-}
-
-func (x *GeneratePersonSegmentationRequest) asStatefulRequest() *raw.VNStatefulRequest {
-	return &x.inner.VNStatefulRequest
-}
-
-func (x *GeneratePersonSegmentationRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest
-}
-
-func (x *GeneratePersonSegmentationRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest
+// SetOutputPixelFormat wraps the corresponding Objective-C method.
+func (x *GeneratePersonSegmentationRequest) SetOutputPixelFormat(outputPixelFormat int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputPixelFormat:"), outputPixelFormat)
 }
 
 // GeneratePersonSegmentationRequestable is the interface implemented by [GeneratePersonSegmentationRequest], for mocking and DI.
 type GeneratePersonSegmentationRequestable interface {
-	Unwrap() *raw.VNGeneratePersonSegmentationRequest
-	WithQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
-	WithOutputPixelFormat(outputPixelFormat uint) *GeneratePersonSegmentationRequest
+	obj.Object
+	WithQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
+	WithOutputPixelFormat(outputPixelFormat int) *GeneratePersonSegmentationRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest
-	WithRevision(revision uint) *GeneratePersonSegmentationRequest
-	SupportedOutputPixelFormats() ([]*foundation.NSNumber, error)
-	QualityLevel() VNGeneratePersonSegmentationRequestQualityLevel
-	SetQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel)
-	OutputPixelFormat() uint
-	SetOutputPixelFormat(outputPixelFormat uint)
+	WithRevision(revision int) *GeneratePersonSegmentationRequest
+	SupportedOutputPixelFormats() ([]obj.Object, error)
+	QualityLevel() GeneratePersonSegmentationRequestQualityLevel
+	SetQualityLevel(qualityLevel GeneratePersonSegmentationRequestQualityLevel)
+	OutputPixelFormat() int
+	SetOutputPixelFormat(outputPixelFormat int)
 }
 
 var _ GeneratePersonSegmentationRequestable = (*GeneratePersonSegmentationRequest)(nil)
+
+var _ StatefulRequestProvider = (*GeneratePersonSegmentationRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GeneratePersonSegmentationRequest)(nil)
+
+var _ RequestProvider = (*GeneratePersonSegmentationRequest)(nil)

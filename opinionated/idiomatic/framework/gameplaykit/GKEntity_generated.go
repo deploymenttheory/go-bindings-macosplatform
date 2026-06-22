@@ -5,91 +5,96 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object relevant to gameplay, with functionality entirely provided by a collection of component objects.
+// Entity is an idiomatic wrapper over the Objective-C class GKEntity.
 //
-// Entity wraps [raw.GKEntity] with a fluent Go API.
+// An object relevant to gameplay, with functionality entirely provided by a collection of component objects.
 type Entity struct {
-	inner *raw.GKEntity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKEntity].
-func (x *Entity) Unwrap() *raw.GKEntity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Entity) ID() objc.ID { return x.inner.Ptr() }
-
-// EntityFromID adopts an existing object pointer as a Entity (nil for 0).
+// EntityFromID adopts an existing Objective-C object as a Entity
+// (nil for 0), retaining it and registering a release finalizer.
 func EntityFromID(id objc.ID) *Entity {
 	if id == 0 {
 		return nil
 	}
-	return &Entity{inner: raw.GKEntityFromID(id)}
+	x := &Entity{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEntity creates a new [Entity].
-func NewEntity() *Entity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKEntity")), objc.RegisterName("new"))
-	return &Entity{inner: raw.GKEntityFromID(_id)}
-}
-
-// Performs periodic updates for each of the entity’s components.
-//
-// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
-func (x *Entity) UpdateWithDeltaTime(seconds float64) {
-	x.inner.UpdateWithDeltaTime(seconds)
-}
-
-// Adds a component to the entity.
-//
-// AddComponent calls the underlying AddComponent.
-func (x *Entity) AddComponent(component *raw.GKComponent) {
-	x.inner.AddComponent(component)
-}
-
-// Removes the component of the specified class from the entity.
-//
-// RemoveComponentForClass calls the underlying RemoveComponentForClass.
-func (x *Entity) RemoveComponentForClass(componentClass objc.Class) {
-	x.inner.RemoveComponentForClass(componentClass)
-}
-
-// Returns the entity’s component for the specified component class.
-//
-// ComponentForClass calls the underlying ComponentForClass.
-func (x *Entity) ComponentForClass(componentClass objc.Class) *Component {
-	_r := x.inner.ComponentForClass(componentClass)
-	if _r == nil {
+// entityAdopt wraps an Objective-C object that this code just created as a
+// Entity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func entityAdopt(id objc.ID) *Entity {
+	if id == 0 {
 		return nil
 	}
-	return &Component{inner: _r}
+	x := &Entity{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
+// Description returns the object's -description text.
+func (x *Entity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Entity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Entity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Entity) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewEntity creates a new Entity.
+func NewEntity() *Entity {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKEntity")), objc.RegisterName("new"))
+	return entityAdopt(_id)
+}
+
+// UpdateWithDeltaTime performs periodic updates for each of the entity’s components.
+func (x *Entity) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+}
+
+// AddComponent adds a component to the entity.
+func (x *Entity) AddComponent(component *Component) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
+}
+
+// Components access the current set of components as an array. Note: this is not the internal array of components, but rather a newly created array of the current component mapping.
 //
 // Components returns the collection as a Go slice.
 func (x *Entity) Components() []*Component {
-	arr := x.inner.Components()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Component {
-		return &Component{inner: raw.GKComponentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Component { return ComponentFromID(_id) })
 }
 
 // Entityable is the interface implemented by [Entity], for mocking and DI.
 type Entityable interface {
-	Unwrap() *raw.GKEntity
+	obj.Object
 	UpdateWithDeltaTime(seconds float64)
-	AddComponent(component *raw.GKComponent)
-	RemoveComponentForClass(componentClass objc.Class)
-	ComponentForClass(componentClass objc.Class) *Component
+	AddComponent(component *Component)
 	Components() []*Component
 }
 

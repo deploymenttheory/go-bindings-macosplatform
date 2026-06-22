@@ -5,119 +5,140 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
+// ContentEditingOutput is an idiomatic wrapper over the Objective-C class PHContentEditingOutput.
 //
-// ContentEditingOutput wraps [raw.PHContentEditingOutput] with a fluent Go API.
+// A container to which you provide the results of editing the photo, video, or Live Photo content of a Photos asset.
 type ContentEditingOutput struct {
-	inner *raw.PHContentEditingOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHContentEditingOutput].
-func (x *ContentEditingOutput) Unwrap() *raw.PHContentEditingOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentEditingOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentEditingOutputFromID adopts an existing object pointer as a ContentEditingOutput (nil for 0).
+// ContentEditingOutputFromID adopts an existing Objective-C object as a ContentEditingOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentEditingOutputFromID(id objc.ID) *ContentEditingOutput {
 	if id == 0 {
 		return nil
 	}
-	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(id)}
-}
-
-// Creates an editing output from the specified editing input.
-//
-// NewContentEditingOutputWithContentEditingInput creates a new [ContentEditingOutput].
-func NewContentEditingOutputWithContentEditingInput(contentEditingInput *raw.PHContentEditingInput) *ContentEditingOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentEditingInput:"), contentEditingInput.Ptr())
-	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(_id)}
-}
-
-// Creates an editing output for use in adding a new asset to the photo library.
-//
-// NewContentEditingOutputWithPlaceholderForCreatedAsset creates a new [ContentEditingOutput].
-func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *raw.PHObjectPlaceholder) *ContentEditingOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlaceholderForCreatedAsset:"), placeholderForCreatedAsset.Ptr())
-	return &ContentEditingOutput{inner: raw.PHContentEditingOutputFromID(_id)}
-}
-
-// An object describing the changes made to the asset.
-//
-// WithAdjustmentData sets the adjustmentData property and returns the receiver for chaining.
-func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
-	x.inner.SetAdjustmentData(adjustmentData.Unwrap())
+	x := &ContentEditingOutput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
-//
-// RenderedContentURLForTypeError calls the underlying RenderedContentURLForTypeError.
-func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error) {
-	return x.inner.RenderedContentURLForTypeError(type_)
-}
-
-// AdjustmentData calls the underlying AdjustmentData.
-func (x *ContentEditingOutput) AdjustmentData() *AdjustmentData {
-	_r := x.inner.AdjustmentData()
-	if _r == nil {
+// contentEditingOutputAdopt wraps an Objective-C object that this code just created as a
+// ContentEditingOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentEditingOutputAdopt(id objc.ID) *ContentEditingOutput {
+	if id == 0 {
 		return nil
 	}
-	return &AdjustmentData{inner: _r}
+	x := &ContentEditingOutput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetAdjustmentData calls the underlying SetAdjustmentData.
-func (x *ContentEditingOutput) SetAdjustmentData(adjustmentData *raw.PHAdjustmentData) {
-	x.inner.SetAdjustmentData(adjustmentData)
+// Description returns the object's -description text.
+func (x *ContentEditingOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// File URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
-//
-// RenderedContentURL calls the underlying RenderedContentURL.
-func (x *ContentEditingOutput) RenderedContentURL() *foundation.NSURL {
-	return x.inner.RenderedContentURL()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentEditingOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns the default type for the rendered content output
-//
-// DefaultRenderedContentType calls the underlying DefaultRenderedContentType.
-func (x *ContentEditingOutput) DefaultRenderedContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.DefaultRenderedContentType()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentEditingOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Returns the supported types for the rendered content output
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ContentEditingOutput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewContentEditingOutputWithContentEditingInput creates an editing output from the specified editing input.
+func NewContentEditingOutputWithContentEditingInput(contentEditingInput *ContentEditingInput) *ContentEditingOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentEditingInput:"), objref.IDOf(contentEditingInput))
+	return contentEditingOutputAdopt(_id)
+}
+
+// NewContentEditingOutputWithPlaceholderForCreatedAsset creates an editing output for use in adding a new asset to the photo library.
+func NewContentEditingOutputWithPlaceholderForCreatedAsset(placeholderForCreatedAsset *ObjectPlaceholder) *ContentEditingOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHContentEditingOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlaceholderForCreatedAsset:"), objref.IDOf(placeholderForCreatedAsset))
+	return contentEditingOutputAdopt(_id)
+}
+
+// WithAdjustmentData an object describing the changes made to the asset.
+func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjustmentData:"), objref.IDOf(adjustmentData))
+	return x
+}
+
+// RenderedContentURLForTypeError returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
+func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object) (result obj.Object, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderedContentURLForType:error:"), objref.IDOf(type_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+// AdjustmentData wraps the corresponding Objective-C method.
+func (x *ContentEditingOutput) AdjustmentData() *AdjustmentData {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentData"))
+	return AdjustmentDataFromID(_r)
+}
+
+// SetAdjustmentData wraps the corresponding Objective-C method.
+func (x *ContentEditingOutput) SetAdjustmentData(adjustmentData *AdjustmentData) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdjustmentData:"), objref.IDOf(adjustmentData))
+}
+
+// RenderedContentURL file URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
+func (x *ContentEditingOutput) RenderedContentURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderedContentURL"))
+	return obj.Wrap(_r)
+}
+
+// DefaultRenderedContentType returns the default type for the rendered content output
+func (x *ContentEditingOutput) DefaultRenderedContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultRenderedContentType"))
+	return obj.Wrap(_r)
+}
+
+// SupportedRenderedContentTypes returns the supported types for the rendered content output
 //
 // SupportedRenderedContentTypes returns the collection as a Go slice.
-func (x *ContentEditingOutput) SupportedRenderedContentTypes() []*uniformtypeidentifiers.UTType {
-	arr := x.inner.SupportedRenderedContentTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *uniformtypeidentifiers.UTType {
-		return uniformtypeidentifiers.UTTypeFromID(purego.Retain(_id))
-	})
+func (x *ContentEditingOutput) SupportedRenderedContentTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedRenderedContentTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ContentEditingOutputable is the interface implemented by [ContentEditingOutput], for mocking and DI.
 type ContentEditingOutputable interface {
-	Unwrap() *raw.PHContentEditingOutput
+	obj.Object
 	WithAdjustmentData(adjustmentData *AdjustmentData) *ContentEditingOutput
-	RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error)
+	RenderedContentURLForTypeError(type_ obj.Object) (result obj.Object, err error)
 	AdjustmentData() *AdjustmentData
-	SetAdjustmentData(adjustmentData *raw.PHAdjustmentData)
-	RenderedContentURL() *foundation.NSURL
-	DefaultRenderedContentType() *uniformtypeidentifiers.UTType
-	SupportedRenderedContentTypes() []*uniformtypeidentifiers.UTType
+	SetAdjustmentData(adjustmentData *AdjustmentData)
+	RenderedContentURL() obj.Object
+	DefaultRenderedContentType() obj.Object
+	SupportedRenderedContentTypes() []obj.Object
 }
 
 var _ ContentEditingOutputable = (*ContentEditingOutput)(nil)

@@ -3,4 +3,16 @@
 //go:build darwin
 
 // Package corebluetooth provides a fluent Go API over the macOS CoreBluetooth framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - Attribute: [Characteristic], [Descriptor], [Service]
+//   - Characteristic: [MutableCharacteristic]
+//   - Descriptor: [MutableDescriptor]
+//   - Manager: [CentralManager], [PeripheralManager]
+//   - Peer: [Central], [Peripheral]
+//   - Service: [MutableService]
 package corebluetooth

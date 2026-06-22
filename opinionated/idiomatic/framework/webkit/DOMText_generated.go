@@ -5,111 +5,115 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMText wraps [raw.DOMText] with a fluent Go API.
+// DOMText is an idiomatic wrapper over the Objective-C class DOMText.
+//
+// DOMText is an abstract base — you do not construct it directly. Construct one of [DOMCDATASection] and pass it where a DOMText is accepted.
 type DOMText struct {
-	inner *raw.DOMText
+	DOMCharacterData
 }
 
-// Unwrap returns the underlying [raw.DOMText].
-func (x *DOMText) Unwrap() *raw.DOMText { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMText) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMTextFromID adopts an existing object pointer as a DOMText (nil for 0).
+// DOMTextFromID adopts an existing Objective-C object as a DOMText
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMTextFromID(id objc.ID) *DOMText {
 	if id == 0 {
 		return nil
 	}
-	return &DOMText{inner: raw.DOMTextFromID(id)}
+	x := &DOMText{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMText creates a new [DOMText].
-func NewDOMText() *DOMText {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMText")), objc.RegisterName("new"))
-	return &DOMText{inner: raw.DOMTextFromID(_id)}
+// dOMTextAdopt wraps an Objective-C object that this code just created as a
+// DOMText (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMTextAdopt(id objc.ID) *DOMText {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMText{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithData(data string) *DOMText {
-	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithNodeValue(nodeValue string) *DOMText {
-	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithPrefix(prefix string) *DOMText {
-	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets the property and returns the receiver so calls can be chained.
 func (x *DOMText) WithTextContent(textContent string) *DOMText {
-	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// SplitText calls the underlying SplitText.
-func (x *DOMText) SplitText(offset uint) *DOMText {
-	_r := x.inner.SplitText(offset)
-	if _r == nil {
-		return nil
-	}
-	return &DOMText{inner: _r}
+// SplitText wraps the corresponding Objective-C method.
+func (x *DOMText) SplitText(offset int) *DOMText {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitText:"), offset)
+	return DOMTextFromID(_r)
 }
 
-// ReplaceWholeText calls the underlying ReplaceWholeText.
+// ReplaceWholeText wraps the corresponding Objective-C method.
 func (x *DOMText) ReplaceWholeText(content string) *DOMText {
-	_r := x.inner.ReplaceWholeText(foundation.NSStringStringWithUTF8String(content))
-	if _r == nil {
-		return nil
-	}
-	return &DOMText{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
+	return DOMTextFromID(_r)
 }
 
-// WholeText calls the underlying WholeText.
+// WholeText wraps the corresponding Objective-C method.
 func (x *DOMText) WholeText() string {
-	_r := x.inner.WholeText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wholeText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMText) asDOMText() *raw.DOMText { return x.inner }
-
-func (x *DOMText) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
-
-func (x *DOMText) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
-
-func (x *DOMText) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
-
-func (x *DOMText) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMTextable is the interface implemented by [DOMText], for mocking and DI.
 type DOMTextable interface {
-	Unwrap() *raw.DOMText
+	obj.Object
 	WithData(data string) *DOMText
 	WithNodeValue(nodeValue string) *DOMText
 	WithPrefix(prefix string) *DOMText
 	WithTextContent(textContent string) *DOMText
-	SplitText(offset uint) *DOMText
+	SplitText(offset int) *DOMText
 	ReplaceWholeText(content string) *DOMText
 	WholeText() string
 }
 
 var _ DOMTextable = (*DOMText)(nil)
+
+// isDOMText marks DOMText — and, by embedding promotion, its
+// subclasses — as a member of the DOMText hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DOMText) isDOMText() {}
+
+var _ DOMTextProvider = (*DOMText)(nil)
+
+var _ DOMCharacterDataProvider = (*DOMText)(nil)
+
+var _ DOMNodeProvider = (*DOMText)(nil)
+
+var _ DOMObjectProvider = (*DOMText)(nil)
+
+var _ WebScriptObjectProvider = (*DOMText)(nil)

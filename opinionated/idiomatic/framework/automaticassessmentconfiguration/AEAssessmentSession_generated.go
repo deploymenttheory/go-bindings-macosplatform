@@ -5,103 +5,107 @@
 package automaticassessmentconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A session that your app uses to protect an assessment.
+// AssessmentSession is an idiomatic wrapper over the Objective-C class AEAssessmentSession.
 //
-// AssessmentSession wraps [raw.AEAssessmentSession] with a fluent Go API.
+// A session that your app uses to protect an assessment.
 type AssessmentSession struct {
-	inner *raw.AEAssessmentSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AEAssessmentSession].
-func (x *AssessmentSession) Unwrap() *raw.AEAssessmentSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssessmentSession) ID() objc.ID { return x.inner.Ptr() }
-
-// AssessmentSessionFromID adopts an existing object pointer as a AssessmentSession (nil for 0).
+// AssessmentSessionFromID adopts an existing Objective-C object as a AssessmentSession
+// (nil for 0), retaining it and registering a release finalizer.
 func AssessmentSessionFromID(id objc.ID) *AssessmentSession {
 	if id == 0 {
 		return nil
 	}
-	return &AssessmentSession{inner: raw.AEAssessmentSessionFromID(id)}
-}
-
-// Creates a new assessment session.
-//
-// NewAssessmentSessionWithConfiguration creates a new [AssessmentSession].
-func NewAssessmentSessionWithConfiguration(configuration *raw.AEAssessmentConfiguration) *AssessmentSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), configuration.Ptr())
-	return &AssessmentSession{inner: raw.AEAssessmentSessionFromID(_id)}
-}
-
-// A delegate to which the session provides state change updates.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AssessmentSession) WithDelegate(delegate raw.AEAssessmentSessionDelegate) *AssessmentSession {
-	x.inner.SetDelegate(delegate)
+	x := &AssessmentSession{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Starts an assessment session.
-//
-// Begin calls the underlying Begin.
-func (x *AssessmentSession) Begin() {
-	x.inner.Begin()
-}
-
-// Ends an assessment session.
-//
-// End calls the underlying End.
-func (x *AssessmentSession) End() {
-	x.inner.End()
-}
-
-// Changes the session to use the specified configuration.
-//
-// UpdateToConfiguration calls the underlying UpdateToConfiguration.
-func (x *AssessmentSession) UpdateToConfiguration(configuration *raw.AEAssessmentConfiguration) {
-	x.inner.UpdateToConfiguration(configuration)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *AssessmentSession) Delegate() raw.AEAssessmentSessionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *AssessmentSession) SetDelegate(delegate raw.AEAssessmentSessionDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Configuration calls the underlying Configuration.
-func (x *AssessmentSession) Configuration() *AssessmentConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
+// assessmentSessionAdopt wraps an Objective-C object that this code just created as a
+// AssessmentSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assessmentSessionAdopt(id objc.ID) *AssessmentSession {
+	if id == 0 {
 		return nil
 	}
-	return &AssessmentConfiguration{inner: _r}
+	x := &AssessmentSession{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// IsActive calls the underlying IsActive.
+// Description returns the object's -description text.
+func (x *AssessmentSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssessmentSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssessmentSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssessmentSession) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssessmentSessionWithConfiguration creates a new assessment session.
+func NewAssessmentSessionWithConfiguration(configuration *AssessmentConfiguration) *AssessmentSession {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:"), objref.IDOf(configuration))
+	return assessmentSessionAdopt(_id)
+}
+
+// Begin starts an assessment session.
+func (x *AssessmentSession) Begin() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("begin"))
+}
+
+// End ends an assessment session.
+func (x *AssessmentSession) End() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+}
+
+// UpdateToConfiguration changes the session to use the specified configuration.
+func (x *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
+}
+
+// Configuration wraps the corresponding Objective-C method.
+func (x *AssessmentSession) Configuration() *AssessmentConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return AssessmentConfigurationFromID(_r)
+}
+
+// IsActive wraps the corresponding Objective-C method.
 func (x *AssessmentSession) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
 // AssessmentSessionable is the interface implemented by [AssessmentSession], for mocking and DI.
 type AssessmentSessionable interface {
-	Unwrap() *raw.AEAssessmentSession
-	WithDelegate(delegate raw.AEAssessmentSessionDelegate) *AssessmentSession
+	obj.Object
 	Begin()
 	End()
-	UpdateToConfiguration(configuration *raw.AEAssessmentConfiguration)
-	Delegate() raw.AEAssessmentSessionDelegate
-	SetDelegate(delegate raw.AEAssessmentSessionDelegate)
+	UpdateToConfiguration(configuration *AssessmentConfiguration)
 	Configuration() *AssessmentConfiguration
 	IsActive() bool
 }

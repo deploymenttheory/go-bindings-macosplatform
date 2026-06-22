@@ -5,66 +5,71 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Information about regions of text that an image-analysis request detects.
+// TextObservation is an idiomatic wrapper over the Objective-C class VNTextObservation.
 //
-// TextObservation wraps [raw.VNTextObservation] with a fluent Go API.
+// It embeds [RectangleObservation], promoting that type's methods.
+//
+// Information about regions of text that an image-analysis request detects.
 type TextObservation struct {
-	inner *raw.VNTextObservation
+	RectangleObservation
 }
 
-// Unwrap returns the underlying [raw.VNTextObservation].
-func (x *TextObservation) Unwrap() *raw.VNTextObservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// TextObservationFromID adopts an existing object pointer as a TextObservation (nil for 0).
+// TextObservationFromID adopts an existing Objective-C object as a TextObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func TextObservationFromID(id objc.ID) *TextObservation {
 	if id == 0 {
 		return nil
 	}
-	return &TextObservation{inner: raw.VNTextObservationFromID(id)}
+	x := &TextObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewTextObservation creates a new [TextObservation].
-func NewTextObservation() *TextObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTextObservation")), objc.RegisterName("new"))
-	return &TextObservation{inner: raw.VNTextObservationFromID(_id)}
-}
-
-// CharacterBoxes returns the collection as a Go slice.
-func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
-	arr := x.inner.CharacterBoxes()
-	if arr == nil {
+// textObservationAdopt wraps an Objective-C object that this code just created as a
+// TextObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textObservationAdopt(id objc.ID) *TextObservation {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RectangleObservation {
-		return &RectangleObservation{inner: raw.VNRectangleObservationFromID(purego.Retain(_id))}
-	})
+	x := &TextObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *TextObservation) asRectangleObservation() *raw.VNRectangleObservation {
-	return &x.inner.VNRectangleObservation
+// NewTextObservation creates a new TextObservation.
+func NewTextObservation() *TextObservation {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNTextObservation")), objc.RegisterName("new"))
+	return textObservationAdopt(_id)
 }
 
-func (x *TextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation {
-	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation
-}
-
-func (x *TextObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation
+// CharacterBoxes wraps the corresponding Objective-C method.
+//
+// CharacterBoxes returns the collection as a Go slice.
+func (x *TextObservation) CharacterBoxes() []*RectangleObservation {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characterBoxes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }
 
 // TextObservationable is the interface implemented by [TextObservation], for mocking and DI.
 type TextObservationable interface {
-	Unwrap() *raw.VNTextObservation
+	obj.Object
 	CharacterBoxes() []*RectangleObservation
 }
 
 var _ TextObservationable = (*TextObservation)(nil)
+
+var _ RectangleObservationProvider = (*TextObservation)(nil)
+
+var _ DetectedObjectObservationProvider = (*TextObservation)(nil)
+
+var _ ObservationProvider = (*TextObservation)(nil)

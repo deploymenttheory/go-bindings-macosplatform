@@ -5,81 +5,73 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// RAWProcessingSubGroupParameter wraps [raw.MERAWProcessingSubGroupParameter] with a fluent Go API.
+// RAWProcessingSubGroupParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingSubGroupParameter.
+//
+// It embeds [RAWProcessingParameter], promoting that type's methods.
 type RAWProcessingSubGroupParameter struct {
-	inner *raw.MERAWProcessingSubGroupParameter
+	RAWProcessingParameter
 }
 
-// Unwrap returns the underlying [raw.MERAWProcessingSubGroupParameter].
-func (x *RAWProcessingSubGroupParameter) Unwrap() *raw.MERAWProcessingSubGroupParameter {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RAWProcessingSubGroupParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// RAWProcessingSubGroupParameterFromID adopts an existing object pointer as a RAWProcessingSubGroupParameter (nil for 0).
+// RAWProcessingSubGroupParameterFromID adopts an existing Objective-C object as a RAWProcessingSubGroupParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func RAWProcessingSubGroupParameterFromID(id objc.ID) *RAWProcessingSubGroupParameter {
 	if id == 0 {
 		return nil
 	}
-	return &RAWProcessingSubGroupParameter{inner: raw.MERAWProcessingSubGroupParameterFromID(id)}
-}
-
-// NewRAWProcessingSubGroupParameterWithNameDescriptionParameters creates a new [RAWProcessingSubGroupParameter].
-func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string, description string, parameters ...RAWProcessingParameterProvider) *RAWProcessingSubGroupParameter {
-	_ptrs := make([]objc.ID, len(parameters))
-	for _i, _v := range parameters {
-		_ptrs[_i] = _v.asRAWProcessingParameter().Ptr()
-	}
-	var _arg2 *foundation.NSArray[*raw.MERAWProcessingParameter]
-	if len(_ptrs) > 0 {
-		_arg2 = foundation.NSArrayFromID[*raw.MERAWProcessingParameter](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg2 = foundation.NSArrayFromID[*raw.MERAWProcessingParameter](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingSubGroupParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:description:parameters:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), _arg2.Ptr())
-	return &RAWProcessingSubGroupParameter{inner: raw.MERAWProcessingSubGroupParameterFromID(_id)}
-}
-
-// A Boolean value that indicates whether the extension enables the parameter.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
-	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	x := &RAWProcessingSubGroupParameter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SubGroupParameters returns the collection as a Go slice.
-func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
-	arr := x.inner.SubGroupParameters()
-	if arr == nil {
+// rAWProcessingSubGroupParameterAdopt wraps an Objective-C object that this code just created as a
+// RAWProcessingSubGroupParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rAWProcessingSubGroupParameterAdopt(id objc.ID) *RAWProcessingSubGroupParameter {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RAWProcessingParameter {
-		return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(purego.Retain(_id))}
-	})
+	x := &RAWProcessingSubGroupParameter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
-	return &x.inner.MERAWProcessingParameter
+// NewRAWProcessingSubGroupParameterWithNameDescriptionParameters creates a new RAWProcessingSubGroupParameter.
+func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string, description string, parameters []*RAWProcessingParameter) *RAWProcessingSubGroupParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingSubGroupParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:description:parameters:"), purego.NSString(name), purego.NSString(description), purego.SliceToNSArray(parameters, func(_v *RAWProcessingParameter) objc.ID { return objref.IDOf(_v) }))
+	return rAWProcessingSubGroupParameterAdopt(_id)
+}
+
+// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
+func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// SubGroupParameters wraps the corresponding Objective-C method.
+//
+// SubGroupParameters returns the collection as a Go slice.
+func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subGroupParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingParameter { return RAWProcessingParameterFromID(_id) })
 }
 
 // RAWProcessingSubGroupParameterable is the interface implemented by [RAWProcessingSubGroupParameter], for mocking and DI.
 type RAWProcessingSubGroupParameterable interface {
-	Unwrap() *raw.MERAWProcessingSubGroupParameter
+	obj.Object
 	WithEnabled(enabled bool) *RAWProcessingSubGroupParameter
 	SubGroupParameters() []*RAWProcessingParameter
 }
 
 var _ RAWProcessingSubGroupParameterable = (*RAWProcessingSubGroupParameter)(nil)
+
+var _ RAWProcessingParameterProvider = (*RAWProcessingSubGroupParameter)(nil)

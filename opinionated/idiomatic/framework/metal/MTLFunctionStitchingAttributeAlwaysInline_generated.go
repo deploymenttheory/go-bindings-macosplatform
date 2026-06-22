@@ -5,43 +5,76 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An attribute to specify that Metal needs to inline all of the function calls when generating the stitched function.
+// FunctionStitchingAttributeAlwaysInline is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingAttributeAlwaysInline.
 //
-// FunctionStitchingAttributeAlwaysInline wraps [raw.MTLFunctionStitchingAttributeAlwaysInline] with a fluent Go API.
+// An attribute to specify that Metal needs to inline all of the function calls when generating the stitched function.
 type FunctionStitchingAttributeAlwaysInline struct {
-	inner *raw.MTLFunctionStitchingAttributeAlwaysInline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionStitchingAttributeAlwaysInline].
-func (x *FunctionStitchingAttributeAlwaysInline) Unwrap() *raw.MTLFunctionStitchingAttributeAlwaysInline {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionStitchingAttributeAlwaysInline) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionStitchingAttributeAlwaysInlineFromID adopts an existing object pointer as a FunctionStitchingAttributeAlwaysInline (nil for 0).
+// FunctionStitchingAttributeAlwaysInlineFromID adopts an existing Objective-C object as a FunctionStitchingAttributeAlwaysInline
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionStitchingAttributeAlwaysInlineFromID(id objc.ID) *FunctionStitchingAttributeAlwaysInline {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionStitchingAttributeAlwaysInline{inner: raw.MTLFunctionStitchingAttributeAlwaysInlineFromID(id)}
+	x := &FunctionStitchingAttributeAlwaysInline{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewFunctionStitchingAttributeAlwaysInline creates a new [FunctionStitchingAttributeAlwaysInline].
+// functionStitchingAttributeAlwaysInlineAdopt wraps an Objective-C object that this code just created as a
+// FunctionStitchingAttributeAlwaysInline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionStitchingAttributeAlwaysInlineAdopt(id objc.ID) *FunctionStitchingAttributeAlwaysInline {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionStitchingAttributeAlwaysInline{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionStitchingAttributeAlwaysInline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionStitchingAttributeAlwaysInline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionStitchingAttributeAlwaysInline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionStitchingAttributeAlwaysInline) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionStitchingAttributeAlwaysInline creates a new FunctionStitchingAttributeAlwaysInline.
 func NewFunctionStitchingAttributeAlwaysInline() *FunctionStitchingAttributeAlwaysInline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingAttributeAlwaysInline")), objc.RegisterName("new"))
-	return &FunctionStitchingAttributeAlwaysInline{inner: raw.MTLFunctionStitchingAttributeAlwaysInlineFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingAttributeAlwaysInline")), objc.RegisterName("new"))
+	return functionStitchingAttributeAlwaysInlineAdopt(_id)
 }
 
 // FunctionStitchingAttributeAlwaysInlineable is the interface implemented by [FunctionStitchingAttributeAlwaysInline], for mocking and DI.
 type FunctionStitchingAttributeAlwaysInlineable interface {
-	Unwrap() *raw.MTLFunctionStitchingAttributeAlwaysInline
+	obj.Object
 }
 
 var _ FunctionStitchingAttributeAlwaysInlineable = (*FunctionStitchingAttributeAlwaysInline)(nil)

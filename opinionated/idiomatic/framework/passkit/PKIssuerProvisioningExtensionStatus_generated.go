@@ -5,97 +5,127 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that indicates whether there are any payment cards available to add as Wallet passes.
+// IssuerProvisioningExtensionStatus is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionStatus.
 //
-// IssuerProvisioningExtensionStatus wraps [raw.PKIssuerProvisioningExtensionStatus] with a fluent Go API.
+// An object that indicates whether there are any payment cards available to add as Wallet passes.
 type IssuerProvisioningExtensionStatus struct {
-	inner *raw.PKIssuerProvisioningExtensionStatus
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionStatus].
-func (x *IssuerProvisioningExtensionStatus) Unwrap() *raw.PKIssuerProvisioningExtensionStatus {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IssuerProvisioningExtensionStatus) ID() objc.ID { return x.inner.Ptr() }
-
-// IssuerProvisioningExtensionStatusFromID adopts an existing object pointer as a IssuerProvisioningExtensionStatus (nil for 0).
+// IssuerProvisioningExtensionStatusFromID adopts an existing Objective-C object as a IssuerProvisioningExtensionStatus
+// (nil for 0), retaining it and registering a release finalizer.
 func IssuerProvisioningExtensionStatusFromID(id objc.ID) *IssuerProvisioningExtensionStatus {
 	if id == 0 {
 		return nil
 	}
-	return &IssuerProvisioningExtensionStatus{inner: raw.PKIssuerProvisioningExtensionStatusFromID(id)}
+	x := &IssuerProvisioningExtensionStatus{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewIssuerProvisioningExtensionStatus creates a new [IssuerProvisioningExtensionStatus].
+// issuerProvisioningExtensionStatusAdopt wraps an Objective-C object that this code just created as a
+// IssuerProvisioningExtensionStatus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func issuerProvisioningExtensionStatusAdopt(id objc.ID) *IssuerProvisioningExtensionStatus {
+	if id == 0 {
+		return nil
+	}
+	x := &IssuerProvisioningExtensionStatus{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IssuerProvisioningExtensionStatus) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IssuerProvisioningExtensionStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IssuerProvisioningExtensionStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *IssuerProvisioningExtensionStatus) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewIssuerProvisioningExtensionStatus creates a new IssuerProvisioningExtensionStatus.
 func NewIssuerProvisioningExtensionStatus() *IssuerProvisioningExtensionStatus {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKIssuerProvisioningExtensionStatus")), objc.RegisterName("new"))
-	return &IssuerProvisioningExtensionStatus{inner: raw.PKIssuerProvisioningExtensionStatusFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionStatus")), objc.RegisterName("new"))
+	return issuerProvisioningExtensionStatusAdopt(_id)
 }
 
-// A Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.
-//
-// WithRequiresAuthentication sets the requiresAuthentication property and returns the receiver for chaining.
+// WithRequiresAuthentication a Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.
 func (x *IssuerProvisioningExtensionStatus) WithRequiresAuthentication(requiresAuthentication bool) *IssuerProvisioningExtensionStatus {
-	x.inner.SetRequiresAuthentication(requiresAuthentication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresAuthentication:"), requiresAuthentication)
 	return x
 }
 
-// A Boolean value that indicates whether a payment card is available to add to an iPhone.
-//
-// WithPassEntriesAvailable sets the passEntriesAvailable property and returns the receiver for chaining.
+// WithPassEntriesAvailable a Boolean value that indicates whether a payment card is available to add to an iPhone.
 func (x *IssuerProvisioningExtensionStatus) WithPassEntriesAvailable(passEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
-	x.inner.SetPassEntriesAvailable(passEntriesAvailable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassEntriesAvailable:"), passEntriesAvailable)
 	return x
 }
 
-// A Boolean value that indicates whether a payment card is available to add to an Apple Watch.
-//
-// WithRemotePassEntriesAvailable sets the remotePassEntriesAvailable property and returns the receiver for chaining.
+// WithRemotePassEntriesAvailable a Boolean value that indicates whether a payment card is available to add to an Apple Watch.
 func (x *IssuerProvisioningExtensionStatus) WithRemotePassEntriesAvailable(remotePassEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
-	x.inner.SetRemotePassEntriesAvailable(remotePassEntriesAvailable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemotePassEntriesAvailable:"), remotePassEntriesAvailable)
 	return x
 }
 
-// RequiresAuthentication calls the underlying RequiresAuthentication.
+// RequiresAuthentication wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) RequiresAuthentication() bool {
-	return x.inner.RequiresAuthentication()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresAuthentication"))
+	return _r
 }
 
-// SetRequiresAuthentication calls the underlying SetRequiresAuthentication.
+// SetRequiresAuthentication wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetRequiresAuthentication(requiresAuthentication bool) {
-	x.inner.SetRequiresAuthentication(requiresAuthentication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresAuthentication:"), requiresAuthentication)
 }
 
-// PassEntriesAvailable calls the underlying PassEntriesAvailable.
+// PassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) PassEntriesAvailable() bool {
-	return x.inner.PassEntriesAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("passEntriesAvailable"))
+	return _r
 }
 
-// SetPassEntriesAvailable calls the underlying SetPassEntriesAvailable.
+// SetPassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetPassEntriesAvailable(passEntriesAvailable bool) {
-	x.inner.SetPassEntriesAvailable(passEntriesAvailable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassEntriesAvailable:"), passEntriesAvailable)
 }
 
-// RemotePassEntriesAvailable calls the underlying RemotePassEntriesAvailable.
+// RemotePassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) RemotePassEntriesAvailable() bool {
-	return x.inner.RemotePassEntriesAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("remotePassEntriesAvailable"))
+	return _r
 }
 
-// SetRemotePassEntriesAvailable calls the underlying SetRemotePassEntriesAvailable.
+// SetRemotePassEntriesAvailable wraps the corresponding Objective-C method.
 func (x *IssuerProvisioningExtensionStatus) SetRemotePassEntriesAvailable(remotePassEntriesAvailable bool) {
-	x.inner.SetRemotePassEntriesAvailable(remotePassEntriesAvailable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemotePassEntriesAvailable:"), remotePassEntriesAvailable)
 }
 
 // IssuerProvisioningExtensionStatusable is the interface implemented by [IssuerProvisioningExtensionStatus], for mocking and DI.
 type IssuerProvisioningExtensionStatusable interface {
-	Unwrap() *raw.PKIssuerProvisioningExtensionStatus
+	obj.Object
 	WithRequiresAuthentication(requiresAuthentication bool) *IssuerProvisioningExtensionStatus
 	WithPassEntriesAvailable(passEntriesAvailable bool) *IssuerProvisioningExtensionStatus
 	WithRemotePassEntriesAvailable(remotePassEntriesAvailable bool) *IssuerProvisioningExtensionStatus

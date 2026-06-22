@@ -6,253 +6,212 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An operation that fetches database changes.
+// FetchDatabaseChangesOperation is an idiomatic wrapper over the Objective-C class CKFetchDatabaseChangesOperation.
 //
-// FetchDatabaseChangesOperation wraps [raw.CKFetchDatabaseChangesOperation] with a fluent Go API.
+// It embeds [DatabaseOperation], promoting that type's methods.
+//
+// An operation that fetches database changes.
 type FetchDatabaseChangesOperation struct {
-	inner *raw.CKFetchDatabaseChangesOperation
+	DatabaseOperation
 }
 
-// Unwrap returns the underlying [raw.CKFetchDatabaseChangesOperation].
-func (x *FetchDatabaseChangesOperation) Unwrap() *raw.CKFetchDatabaseChangesOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchDatabaseChangesOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchDatabaseChangesOperationFromID adopts an existing object pointer as a FetchDatabaseChangesOperation (nil for 0).
+// FetchDatabaseChangesOperationFromID adopts an existing Objective-C object as a FetchDatabaseChangesOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchDatabaseChangesOperationFromID(id objc.ID) *FetchDatabaseChangesOperation {
 	if id == 0 {
 		return nil
 	}
-	return &FetchDatabaseChangesOperation{inner: raw.CKFetchDatabaseChangesOperationFromID(id)}
-}
-
-// NewFetchDatabaseChangesOperation creates a new [FetchDatabaseChangesOperation].
-func NewFetchDatabaseChangesOperation() *FetchDatabaseChangesOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchDatabaseChangesOperation")), objc.RegisterName("new"))
-	return &FetchDatabaseChangesOperation{inner: raw.CKFetchDatabaseChangesOperationFromID(_id)}
-}
-
-// Creates an operation for fetching database changes.
-//
-// NewFetchDatabaseChangesOperationWithPreviousServerChangeToken creates a new [FetchDatabaseChangesOperation].
-func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchDatabaseChangesOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchDatabaseChangesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreviousServerChangeToken:"), previousServerChangeToken.Ptr())
-	return &FetchDatabaseChangesOperation{inner: raw.CKFetchDatabaseChangesOperationFromID(_id)}
-}
-
-// The server change token.
-//
-// WithPreviousServerChangeToken sets the previousServerChangeToken property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
-	x.inner.SetPreviousServerChangeToken(previousServerChangeToken.Unwrap())
+	x := &FetchDatabaseChangesOperation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The maximum number of results that the operation fetches.
-//
-// WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit uint) *FetchDatabaseChangesOperation {
-	x.inner.SetResultsLimit(resultsLimit)
-	return x
-}
-
-// A Boolean value that indicates whether to send repeated requests to the server.
-//
-// WithFetchAllChanges sets the fetchAllChanges property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation {
-	x.inner.SetFetchAllChanges(fetchAllChanges)
-	return x
-}
-
-// The closure to execute with a single record zone change.
-//
-// WithRecordZoneWithIDChangedBlock sets the recordZoneWithIDChangedBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
-	x.inner.SetRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock)
-	return x
-}
-
-// The closure to execute when a record zone no longer exists.
-//
-// WithRecordZoneWithIDWasDeletedBlock sets the recordZoneWithIDWasDeletedBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
-	x.inner.SetRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock)
-	return x
-}
-
-// The closure to execute when CloudKit purges a record zone.
-//
-// WithRecordZoneWithIDWasPurgedBlock sets the recordZoneWithIDWasPurgedBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
-	x.inner.SetRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock)
-	return x
-}
-
-// The closure to execute when a user-invoked account reset deletes a record zone.
-//
-// WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock sets the recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation {
-	x.inner.SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock)
-	return x
-}
-
-// The closure to execute when the change token updates.
-//
-// WithChangeTokenUpdatedBlock sets the changeTokenUpdatedBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(*raw.CKServerChangeToken)) *FetchDatabaseChangesOperation {
-	x.inner.SetChangeTokenUpdatedBlock(changeTokenUpdatedBlock)
-	return x
-}
-
-// The closure to execute when the operation finishes.
-//
-// WithFetchDatabaseChangesCompletionBlock sets the fetchDatabaseChangesCompletionBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation {
-	x.inner.SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock)
-	return x
-}
-
-// The database that the operation uses.
-//
-// WithDatabase sets the database property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
-	return x
-}
-
-// The operation’s configuration.
-//
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
-	return x
-}
-
-// The operation’s group.
-//
-// WithGroup sets the group property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
-	return x
-}
-
-// The closure to execute when the server begins to store callbacks for the long-lived operation.
-//
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
-	return x
-}
-
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
-//
-// WithContainer sets the container property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithContainer(container *Container) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
-	return x
-}
-
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
-//
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
-	return x
-}
-
-// A Boolean value that indicates whether the operation is long-lived.
-//
-// WithLongLived sets the longLived property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
-	return x
-}
-
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
-//
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
-	return x
-}
-
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
-//
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
-func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
-	return x
-}
-
-// The server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
-//
-// PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
-func (x *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
-	_r := x.inner.PreviousServerChangeToken()
-	if _r == nil {
+// fetchDatabaseChangesOperationAdopt wraps an Objective-C object that this code just created as a
+// FetchDatabaseChangesOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchDatabaseChangesOperationAdopt(id objc.ID) *FetchDatabaseChangesOperation {
+	if id == 0 {
 		return nil
 	}
-	return &ServerChangeToken{inner: _r}
+	x := &FetchDatabaseChangesOperation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetPreviousServerChangeToken calls the underlying SetPreviousServerChangeToken.
-func (x *FetchDatabaseChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) {
-	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+// NewFetchDatabaseChangesOperation creates a new FetchDatabaseChangesOperation.
+func NewFetchDatabaseChangesOperation() *FetchDatabaseChangesOperation {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKFetchDatabaseChangesOperation")), objc.RegisterName("new"))
+	return fetchDatabaseChangesOperationAdopt(_id)
 }
 
-// The maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
-//
-// ResultsLimit calls the underlying ResultsLimit.
-func (x *FetchDatabaseChangesOperation) ResultsLimit() uint {
-	return x.inner.ResultsLimit()
+// NewFetchDatabaseChangesOperationWithPreviousServerChangeToken creates an operation for fetching database changes.
+func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchDatabaseChangesOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
+	return fetchDatabaseChangesOperationAdopt(_id)
 }
 
-// SetResultsLimit calls the underlying SetResultsLimit.
-func (x *FetchDatabaseChangesOperation) SetResultsLimit(resultsLimit uint) {
-	x.inner.SetResultsLimit(resultsLimit)
+// WithPreviousServerChangeToken the server change token.
+func (x *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
+	return x
 }
 
-// A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
-//
-// FetchAllChanges calls the underlying FetchAllChanges.
+// WithResultsLimit the maximum number of results that the operation fetches.
+func (x *FetchDatabaseChangesOperation) WithResultsLimit(resultsLimit int) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
+	return x
+}
+
+// WithFetchAllChanges a Boolean value that indicates whether to send repeated requests to the server.
+func (x *FetchDatabaseChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
+	return x
+}
+
+// WithRecordZoneWithIDChangedBlock the closure to execute with a single record zone change.
+func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDChangedBlock(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithRecordZoneWithIDWasDeletedBlock the closure to execute when a record zone no longer exists.
+func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasDeletedBlock(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithRecordZoneWithIDWasPurgedBlock the closure to execute when CloudKit purges a record zone.
+func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordZoneWithIDWasPurgedBlock(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock the closure to execute when a user-invoked account reset deletes a record zone.
+func (x *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) {
+		recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(obj.Wrap(_b0))
+	}))
+	return x
+}
+
+// WithChangeTokenUpdatedBlock the closure to execute when the change token updates.
+func (x *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeTokenUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { changeTokenUpdatedBlock(obj.Wrap(_b0)) }))
+	return x
+}
+
+// WithDatabase the database that the operation uses.
+func (x *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return x
+}
+
+// WithConfiguration the operation’s configuration.
+func (x *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return x
+}
+
+// WithGroup the operation’s group.
+func (x *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (x *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return x
+}
+
+// WithContainer the operation's container.
+func (x *FetchDatabaseChangesOperation) WithContainer(container *Container) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return x
+}
+
+// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
+func (x *FetchDatabaseChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return x
+}
+
+// WithLongLived a Boolean value that indicates whether the operation is long-lived.
+func (x *FetchDatabaseChangesOperation) WithLongLived(longLived bool) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
+func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
+func (x *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return x
+}
+
+// PreviousServerChangeToken the server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
+func (x *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousServerChangeToken"))
+	return ServerChangeTokenFromID(_r)
+}
+
+// SetPreviousServerChangeToken wraps the corresponding Objective-C method.
+func (x *FetchDatabaseChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
+}
+
+// ResultsLimit the maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
+func (x *FetchDatabaseChangesOperation) ResultsLimit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
+	return _r
+}
+
+// SetResultsLimit wraps the corresponding Objective-C method.
+func (x *FetchDatabaseChangesOperation) SetResultsLimit(resultsLimit int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
+}
+
+// FetchAllChanges a Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (x *FetchDatabaseChangesOperation) FetchAllChanges() bool {
-	return x.inner.FetchAllChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fetchAllChanges"))
+	return _r
 }
 
-// SetFetchAllChanges calls the underlying SetFetchAllChanges.
+// SetFetchAllChanges wraps the corresponding Objective-C method.
 func (x *FetchDatabaseChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
-	x.inner.SetFetchAllChanges(fetchAllChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
 }
 
-// The closure to execute with a single record zone change. The closure returns no value and takes the following parameter: - term `zoneID`: The ID of the  record zone that contains changes.
+// SetRecordZoneWithIDChangedBlock wraps the corresponding Objective-C method.
 //
-// RecordZoneWithIDChangedBlock calls the underlying RecordZoneWithIDChangedBlock.
-func (x *FetchDatabaseChangesOperation) RecordZoneWithIDChangedBlock() objc.Block {
-	return x.inner.RecordZoneWithIDChangedBlock()
-}
-
 // SetRecordZoneWithIDChangedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDChangedBlock(ctx context.Context) (*RecordZoneID, error) {
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDChangedBlock(ctx context.Context) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordZoneWithIDChangedBlock(func(_p0 *raw.CKRecordZoneID) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDChangedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,27 +221,21 @@ func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDChangedBlock(ctx cont
 	}
 }
 
-// The closure to execute when a record zone no longer exists. The closure returns no value and takes the following parameter: - term `zoneID`: The deleted record zone's ID.
+// SetRecordZoneWithIDWasDeletedBlock wraps the corresponding Objective-C method.
 //
-// RecordZoneWithIDWasDeletedBlock calls the underlying RecordZoneWithIDWasDeletedBlock.
-func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasDeletedBlock() objc.Block {
-	return x.inner.RecordZoneWithIDWasDeletedBlock()
-}
-
 // SetRecordZoneWithIDWasDeletedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (*RecordZoneID, error) {
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordZoneWithIDWasDeletedBlock(func(_p0 *raw.CKRecordZoneID) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -292,27 +245,21 @@ func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedBlock(ctx c
 	}
 }
 
-// The closure to execute when CloudKit purges a record zone. The closure returns no value and takes the following parameter: - term `zoneID`: The purged record zone's ID.
+// SetRecordZoneWithIDWasPurgedBlock wraps the corresponding Objective-C method.
 //
-// RecordZoneWithIDWasPurgedBlock calls the underlying RecordZoneWithIDWasPurgedBlock.
-func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasPurgedBlock() objc.Block {
-	return x.inner.RecordZoneWithIDWasPurgedBlock()
-}
-
 // SetRecordZoneWithIDWasPurgedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (*RecordZoneID, error) {
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordZoneWithIDWasPurgedBlock(func(_p0 *raw.CKRecordZoneID) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasPurgedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,27 +269,21 @@ func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(ctx co
 	}
 }
 
-// The closure to execute when a user-invoked account reset deletes a record zone. The closure returns no value and takes a single parameter: the deleted record zone's ID. The operation executes this closure, instead of “CKFetchDatabaseChangesOperation/recordZoneWithIDWasDeletedBlock“, after a user action causes CloudKit to delete the record zone. Reupload any locally cached data to iCloud to minimize data loss.
+// SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock wraps the corresponding Objective-C method.
 //
-// RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock calls the underlying RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock.
-func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock() objc.Block {
-	return x.inner.RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock()
-}
-
 // SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (*RecordZoneID, error) {
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (result *RecordZoneID, err error) {
 	type _result struct {
 		val *RecordZoneID
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(func(_p0 *raw.CKRecordZoneID) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -352,27 +293,21 @@ func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedDueToUserEn
 	}
 }
 
-// The closure to execute when the change token updates. The closure executes periodically, and provides a new change token so that you don't need to refetch previously fetched record zone changes in a subsequent operation.
+// SetChangeTokenUpdatedBlock wraps the corresponding Objective-C method.
 //
-// ChangeTokenUpdatedBlock calls the underlying ChangeTokenUpdatedBlock.
-func (x *FetchDatabaseChangesOperation) ChangeTokenUpdatedBlock() objc.Block {
-	return x.inner.ChangeTokenUpdatedBlock()
-}
-
 // SetChangeTokenUpdatedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(ctx context.Context) (*ServerChangeToken, error) {
+func (x *FetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(ctx context.Context) (result *ServerChangeToken, err error) {
 	type _result struct {
 		val *ServerChangeToken
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetChangeTokenUpdatedBlock(func(_p0 *raw.CKServerChangeToken) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &ServerChangeToken{inner: _p0}
-		}
+		_o.val = ServerChangeTokenFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChangeTokenUpdatedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -382,38 +317,17 @@ func (x *FetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(ctx context.C
 	}
 }
 
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameters: - The change token to store and use in subsequent instances of “CKFetchDatabaseChangesOperation“. - A Boolen value that indicates whether this is the final database change. If “CKFetchDatabaseChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchDatabaseChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the database changes. - Note: The change token and error parameters are mutally exclusive — that is, the closure provides one of them but not both. Your app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchDatabaseChangesOperation“. If the server returns a “CKError/Code/changeTokenExpired“ error, the “CKFetchDatabaseChangesOperation/previousServerChangeToken“ value is stale and your app needs to clear its local cache and refetch the database changes, starting with a `nil` change token.
-//
-// FetchDatabaseChangesCompletionBlock calls the underlying FetchDatabaseChangesCompletionBlock.
-func (x *FetchDatabaseChangesOperation) FetchDatabaseChangesCompletionBlock() objc.Block {
-	return x.inner.FetchDatabaseChangesCompletionBlock()
-}
-
-// SetFetchDatabaseChangesCompletionBlock calls the underlying SetFetchDatabaseChangesCompletionBlock.
-func (x *FetchDatabaseChangesOperation) SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) {
-	x.inner.SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock)
-}
-
-func (x *FetchDatabaseChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *FetchDatabaseChangesOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
-}
-
 // FetchDatabaseChangesOperationable is the interface implemented by [FetchDatabaseChangesOperation], for mocking and DI.
 type FetchDatabaseChangesOperationable interface {
-	Unwrap() *raw.CKFetchDatabaseChangesOperation
+	obj.Object
 	WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation
-	WithResultsLimit(resultsLimit uint) *FetchDatabaseChangesOperation
+	WithResultsLimit(resultsLimit int) *FetchDatabaseChangesOperation
 	WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
-	WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
-	WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(*raw.CKServerChangeToken)) *FetchDatabaseChangesOperation
-	WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(obj.Object)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(obj.Object)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(obj.Object)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(obj.Object)) *FetchDatabaseChangesOperation
+	WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation
 	WithDatabase(database *Database) *FetchDatabaseChangesOperation
 	WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation
 	WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation
@@ -424,23 +338,20 @@ type FetchDatabaseChangesOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchDatabaseChangesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchDatabaseChangesOperation
 	PreviousServerChangeToken() *ServerChangeToken
-	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
-	ResultsLimit() uint
-	SetResultsLimit(resultsLimit uint)
+	SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken)
+	ResultsLimit() int
+	SetResultsLimit(resultsLimit int)
 	FetchAllChanges() bool
 	SetFetchAllChanges(fetchAllChanges bool)
-	RecordZoneWithIDChangedBlock() objc.Block
 	SetRecordZoneWithIDChangedBlock(ctx context.Context) (*RecordZoneID, error)
-	RecordZoneWithIDWasDeletedBlock() objc.Block
 	SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (*RecordZoneID, error)
-	RecordZoneWithIDWasPurgedBlock() objc.Block
 	SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (*RecordZoneID, error)
-	RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock() objc.Block
 	SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (*RecordZoneID, error)
-	ChangeTokenUpdatedBlock() objc.Block
 	SetChangeTokenUpdatedBlock(ctx context.Context) (*ServerChangeToken, error)
-	FetchDatabaseChangesCompletionBlock() objc.Block
-	SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer))
 }
 
 var _ FetchDatabaseChangesOperationable = (*FetchDatabaseChangesOperation)(nil)
+
+var _ DatabaseOperationProvider = (*FetchDatabaseChangesOperation)(nil)
+
+var _ OperationProvider = (*FetchDatabaseChangesOperation)(nil)

@@ -5,108 +5,115 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
+// ListFormatter is an idiomatic wrapper over the Objective-C class NSListFormatter.
 //
-// ListFormatter wraps [raw.NSListFormatter] with a fluent Go API.
+// It embeds [Formatter], promoting that type's methods.
+//
+// An object that provides locale-correct formatting of a list of items using the appropriate separator and conjunction.
 type ListFormatter struct {
-	inner *raw.NSListFormatter
+	Formatter
 }
 
-// Unwrap returns the underlying [raw.NSListFormatter].
-func (x *ListFormatter) Unwrap() *raw.NSListFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ListFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// ListFormatterFromID adopts an existing object pointer as a ListFormatter (nil for 0).
+// ListFormatterFromID adopts an existing Objective-C object as a ListFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func ListFormatterFromID(id objc.ID) *ListFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &ListFormatter{inner: raw.NSListFormatterFromID(id)}
+	x := &ListFormatter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewListFormatter creates a new [ListFormatter].
+// listFormatterAdopt wraps an Objective-C object that this code just created as a
+// ListFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func listFormatterAdopt(id objc.ID) *ListFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &ListFormatter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewListFormatter creates a new ListFormatter.
 func NewListFormatter() *ListFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSListFormatter")), objc.RegisterName("new"))
-	return &ListFormatter{inner: raw.NSListFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSListFormatter")), objc.RegisterName("new"))
+	return listFormatterAdopt(_id)
 }
 
-// WithLocale sets the locale property and returns the receiver for chaining.
+// WithLocale sets the property and returns the receiver so calls can be chained.
 func (x *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
-	x.inner.SetLocale(locale.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithItemFormatter sets the itemFormatter property and returns the receiver for chaining.
+// WithItemFormatter sets the property and returns the receiver so calls can be chained.
 func (x *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
-	x.inner.SetItemFormatter(itemFormatter.asFormatter())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ListFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ListFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *ListFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// StringFromItems calls the underlying StringFromItems.
-func (x *ListFormatter) StringFromItems(items *raw.NSArray[objc.ID]) *String {
-	_r := x.inner.StringFromItems(items)
-	if _r == nil {
-		return nil
+// StringFromItems wraps the corresponding Objective-C method.
+func (x *ListFormatter) StringFromItems(items obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromItems:"), objref.IDOf(items))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Locale calls the underlying Locale.
+// Locale wraps the corresponding Objective-C method.
 func (x *ListFormatter) Locale() *Locale {
-	_r := x.inner.Locale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return LocaleFromID(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *ListFormatter) SetLocale(locale *raw.NSLocale) {
-	x.inner.SetLocale(locale)
+// SetLocale wraps the corresponding Objective-C method.
+func (x *ListFormatter) SetLocale(locale *Locale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// ItemFormatter calls the underlying ItemFormatter.
+// ItemFormatter wraps the corresponding Objective-C method.
 func (x *ListFormatter) ItemFormatter() *Formatter {
-	_r := x.inner.ItemFormatter()
-	if _r == nil {
-		return nil
-	}
-	return &Formatter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemFormatter"))
+	return FormatterFromID(_r)
 }
 
-// SetItemFormatter calls the underlying SetItemFormatter.
-func (x *ListFormatter) SetItemFormatter(itemFormatter *raw.NSFormatter) {
-	x.inner.SetItemFormatter(itemFormatter)
+// SetItemFormatter wraps the corresponding Objective-C method.
+func (x *ListFormatter) SetItemFormatter(itemFormatter *Formatter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
 }
-
-func (x *ListFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *ListFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // ListFormatterable is the interface implemented by [ListFormatter], for mocking and DI.
 type ListFormatterable interface {
-	Unwrap() *raw.NSListFormatter
+	obj.Object
 	WithLocale(locale *Locale) *ListFormatter
 	WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ListFormatter
-	StringFromItems(items *raw.NSArray[objc.ID]) *String
+	WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter
+	StringFromItems(items obj.Object) string
 	Locale() *Locale
-	SetLocale(locale *raw.NSLocale)
+	SetLocale(locale *Locale)
 	ItemFormatter() *Formatter
-	SetItemFormatter(itemFormatter *raw.NSFormatter)
+	SetItemFormatter(itemFormatter *Formatter)
 }
 
 var _ ListFormatterable = (*ListFormatter)(nil)
+
+var _ FormatterProvider = (*ListFormatter)(nil)

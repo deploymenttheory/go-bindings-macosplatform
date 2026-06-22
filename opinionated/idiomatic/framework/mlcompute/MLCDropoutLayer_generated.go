@@ -5,78 +5,86 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A layer that deactivates neurons randomly to avoid overfitting.
+// DropoutLayer is an idiomatic wrapper over the Objective-C class MLCDropoutLayer.
 //
-// DropoutLayer wraps [raw.MLCDropoutLayer] with a fluent Go API.
+// It embeds [Layer], promoting that type's methods.
+//
+// A layer that deactivates neurons randomly to avoid overfitting.
 type DropoutLayer struct {
-	inner *raw.MLCDropoutLayer
+	Layer
 }
 
-// Unwrap returns the underlying [raw.MLCDropoutLayer].
-func (x *DropoutLayer) Unwrap() *raw.MLCDropoutLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DropoutLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// DropoutLayerFromID adopts an existing object pointer as a DropoutLayer (nil for 0).
+// DropoutLayerFromID adopts an existing Objective-C object as a DropoutLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func DropoutLayerFromID(id objc.ID) *DropoutLayer {
 	if id == 0 {
 		return nil
 	}
-	return &DropoutLayer{inner: raw.MLCDropoutLayerFromID(id)}
+	x := &DropoutLayer{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDropoutLayer creates a new [DropoutLayer].
+// dropoutLayerAdopt wraps an Objective-C object that this code just created as a
+// DropoutLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dropoutLayerAdopt(id objc.ID) *DropoutLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &DropoutLayer{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDropoutLayer creates a new DropoutLayer.
 func NewDropoutLayer() *DropoutLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCDropoutLayer")), objc.RegisterName("new"))
-	return &DropoutLayer{inner: raw.MLCDropoutLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCDropoutLayer")), objc.RegisterName("new"))
+	return dropoutLayerAdopt(_id)
 }
 
-// A string that helps identify this layer.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that helps identify this layer.
 func (x *DropoutLayer) WithLabel(label string) *DropoutLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-//
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 func (x *DropoutLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   rate @abstract   The probability that each element is dropped
-//
-// Rate calls the underlying Rate.
+// Rate the probability that each element is dropped
 func (x *DropoutLayer) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// @property   seed @abstract   The initial seed used to generate random numbers
-//
-// Seed calls the underlying Seed.
-func (x *DropoutLayer) Seed() uint {
-	return x.inner.Seed()
+// Seed the initial seed used to generate random numbers
+func (x *DropoutLayer) Seed() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
-
-func (x *DropoutLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // DropoutLayerable is the interface implemented by [DropoutLayer], for mocking and DI.
 type DropoutLayerable interface {
-	Unwrap() *raw.MLCDropoutLayer
+	obj.Object
 	WithLabel(label string) *DropoutLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer
 	Rate() float32
-	Seed() uint
+	Seed() int
 }
 
 var _ DropoutLayerable = (*DropoutLayer)(nil)
+
+var _ LayerProvider = (*DropoutLayer)(nil)

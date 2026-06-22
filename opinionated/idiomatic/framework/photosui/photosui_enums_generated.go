@@ -10,86 +10,92 @@ import (
 )
 
 // The enumerated Live Photo content modes.
-type PHLivePhotoViewContentMode int64
+type LivePhotoViewContentMode int64
 
 const (
 	// A mode that resizes the content to fit the view’s bounds, while preserving the content’s aspect ratio.
-	PHLivePhotoViewContentModeAspectFit PHLivePhotoViewContentMode = 0
+	LivePhotoViewContentModeAspectFit LivePhotoViewContentMode = 0
 	// A mode that resizes the content to fill its horizontal or vertical dimension.
-	PHLivePhotoViewContentModeAspectFill PHLivePhotoViewContentMode = 1
+	LivePhotoViewContentModeAspectFill LivePhotoViewContentMode = 1
 )
 
-func (e PHLivePhotoViewContentMode) String() string {
+// String returns the LivePhotoViewContentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LivePhotoViewContentMode) String() string {
 	switch e {
-	case PHLivePhotoViewContentModeAspectFit:
-		return "PHLivePhotoViewContentModeAspectFit"
-	case PHLivePhotoViewContentModeAspectFill:
-		return "PHLivePhotoViewContentModeAspectFill"
+	case LivePhotoViewContentModeAspectFit:
+		return "LivePhotoViewContentModeAspectFit"
+	case LivePhotoViewContentModeAspectFill:
+		return "LivePhotoViewContentModeAspectFill"
 	default:
-		return fmt.Sprintf("PHLivePhotoViewContentMode(%d)", int64(e))
+		return fmt.Sprintf("LivePhotoViewContentMode(%d)", int64(e))
 	}
 }
 
 // Options for how much of the motion and sound content of a Live Photo to play, used in the startPlaybackWithStyle: method and in messages to the view’s delegate object.
-type PHLivePhotoViewPlaybackStyle int64
+type LivePhotoViewPlaybackStyle int64
 
 const (
 	// This value is invalid for use.
-	PHLivePhotoViewPlaybackStyleUndefined PHLivePhotoViewPlaybackStyle = 0
+	LivePhotoViewPlaybackStyleUndefined LivePhotoViewPlaybackStyle = 0
 	// Plays back the entire motion and sound content of the Live Photo, including transition effects at the start and end.
-	PHLivePhotoViewPlaybackStyleFull PHLivePhotoViewPlaybackStyle = 1
+	LivePhotoViewPlaybackStyleFull LivePhotoViewPlaybackStyle = 1
 	// Plays back only a brief section of the motion content of the Live Photo, without sound.
-	PHLivePhotoViewPlaybackStyleHint PHLivePhotoViewPlaybackStyle = 2
+	LivePhotoViewPlaybackStyleHint LivePhotoViewPlaybackStyle = 2
 )
 
-func (e PHLivePhotoViewPlaybackStyle) String() string {
+// String returns the LivePhotoViewPlaybackStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LivePhotoViewPlaybackStyle) String() string {
 	switch e {
-	case PHLivePhotoViewPlaybackStyleUndefined:
-		return "PHLivePhotoViewPlaybackStyleUndefined"
-	case PHLivePhotoViewPlaybackStyleFull:
-		return "PHLivePhotoViewPlaybackStyleFull"
-	case PHLivePhotoViewPlaybackStyleHint:
-		return "PHLivePhotoViewPlaybackStyleHint"
+	case LivePhotoViewPlaybackStyleUndefined:
+		return "LivePhotoViewPlaybackStyleUndefined"
+	case LivePhotoViewPlaybackStyleFull:
+		return "LivePhotoViewPlaybackStyleFull"
+	case LivePhotoViewPlaybackStyleHint:
+		return "LivePhotoViewPlaybackStyleHint"
 	default:
-		return fmt.Sprintf("PHLivePhotoViewPlaybackStyle(%d)", int64(e))
+		return fmt.Sprintf("LivePhotoViewPlaybackStyle(%d)", int64(e))
 	}
 }
 
 // Options that customize the look and behavior of the photos picker.
 // Bitmask — values may be combined with |.
-type PHPickerCapabilities uint64
+type PickerCapabilities uint64
 
 const (
 	// An option that represents no capabilities.
-	PHPickerCapabilitiesNone PHPickerCapabilities = 0
+	PickerCapabilitiesNone PickerCapabilities = 0
 	// A capability that corresponds to the search bar.
-	PHPickerCapabilitiesSearch PHPickerCapabilities = 1
+	PickerCapabilitiesSearch PickerCapabilities = 1
 	// A capability that corresponds to an area in which the selected photos display.
-	PHPickerCapabilitiesStagingArea PHPickerCapabilities = 2
+	PickerCapabilitiesStagingArea PickerCapabilities = 2
 	// A capability that corresponds to a sidebar or the Albums tab.
-	PHPickerCapabilitiesCollectionNavigation PHPickerCapabilities = 4
+	PickerCapabilitiesCollectionNavigation PickerCapabilities = 4
 	// A cabability that represents the Cancel and Add buttons.
-	PHPickerCapabilitiesSelectionActions PHPickerCapabilities = 8
+	PickerCapabilitiesSelectionActions PickerCapabilities = 8
 	// A capability that prompts for confirmation if a person selects a photo that contains nudity.
-	PHPickerCapabilitiesSensitivityAnalysisIntervention PHPickerCapabilities = 16
+	PickerCapabilitiesSensitivityAnalysisIntervention PickerCapabilities = 16
 )
 
-func (e PHPickerCapabilities) String() string {
+// String returns the PickerCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerCapabilities) String() string {
 	var parts []string
-	if e&PHPickerCapabilitiesSearch != 0 {
-		parts = append(parts, "PHPickerCapabilitiesSearch")
+	if e&PickerCapabilitiesSearch != 0 {
+		parts = append(parts, "PickerCapabilitiesSearch")
 	}
-	if e&PHPickerCapabilitiesStagingArea != 0 {
-		parts = append(parts, "PHPickerCapabilitiesStagingArea")
+	if e&PickerCapabilitiesStagingArea != 0 {
+		parts = append(parts, "PickerCapabilitiesStagingArea")
 	}
-	if e&PHPickerCapabilitiesCollectionNavigation != 0 {
-		parts = append(parts, "PHPickerCapabilitiesCollectionNavigation")
+	if e&PickerCapabilitiesCollectionNavigation != 0 {
+		parts = append(parts, "PickerCapabilitiesCollectionNavigation")
 	}
-	if e&PHPickerCapabilitiesSelectionActions != 0 {
-		parts = append(parts, "PHPickerCapabilitiesSelectionActions")
+	if e&PickerCapabilitiesSelectionActions != 0 {
+		parts = append(parts, "PickerCapabilitiesSelectionActions")
 	}
-	if e&PHPickerCapabilitiesSensitivityAnalysisIntervention != 0 {
-		parts = append(parts, "PHPickerCapabilitiesSensitivityAnalysisIntervention")
+	if e&PickerCapabilitiesSensitivityAnalysisIntervention != 0 {
+		parts = append(parts, "PickerCapabilitiesSensitivityAnalysisIntervention")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -98,171 +104,183 @@ func (e PHPickerCapabilities) String() string {
 }
 
 // Constants identifying the mode the system uses when many representations exist for an asset.
-type PHPickerConfigurationAssetRepresentationMode int64
+type PickerConfigurationAssetRepresentationMode int64
 
 const (
 	// A mode that indicates that the system chooses the appropriate asset representation.
-	PHPickerConfigurationAssetRepresentationModeAutomatic PHPickerConfigurationAssetRepresentationMode = 0
+	PickerConfigurationAssetRepresentationModeAutomatic PickerConfigurationAssetRepresentationMode = 0
 	// A mode that uses the current representation to avoid transcoding, if possible.
-	PHPickerConfigurationAssetRepresentationModeCurrent PHPickerConfigurationAssetRepresentationMode = 1
+	PickerConfigurationAssetRepresentationModeCurrent PickerConfigurationAssetRepresentationMode = 1
 	// A mode that uses the most compatible asset representation.
-	PHPickerConfigurationAssetRepresentationModeCompatible PHPickerConfigurationAssetRepresentationMode = 2
+	PickerConfigurationAssetRepresentationModeCompatible PickerConfigurationAssetRepresentationMode = 2
 )
 
-func (e PHPickerConfigurationAssetRepresentationMode) String() string {
+// String returns the PickerConfigurationAssetRepresentationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerConfigurationAssetRepresentationMode) String() string {
 	switch e {
-	case PHPickerConfigurationAssetRepresentationModeAutomatic:
-		return "PHPickerConfigurationAssetRepresentationModeAutomatic"
-	case PHPickerConfigurationAssetRepresentationModeCurrent:
-		return "PHPickerConfigurationAssetRepresentationModeCurrent"
-	case PHPickerConfigurationAssetRepresentationModeCompatible:
-		return "PHPickerConfigurationAssetRepresentationModeCompatible"
+	case PickerConfigurationAssetRepresentationModeAutomatic:
+		return "PickerConfigurationAssetRepresentationModeAutomatic"
+	case PickerConfigurationAssetRepresentationModeCurrent:
+		return "PickerConfigurationAssetRepresentationModeCurrent"
+	case PickerConfigurationAssetRepresentationModeCompatible:
+		return "PickerConfigurationAssetRepresentationModeCompatible"
 	default:
-		return fmt.Sprintf("PHPickerConfigurationAssetRepresentationMode(%d)", int64(e))
+		return fmt.Sprintf("PickerConfigurationAssetRepresentationMode(%d)", int64(e))
 	}
 }
 
 // Options that represent differing selection behavior.
-type PHPickerConfigurationSelection int64
+type PickerConfigurationSelection int64
 
 const (
 	// An option that provides selected photos to the app in the default order after the user confirms the selection.
-	PHPickerConfigurationSelectionDefault PHPickerConfigurationSelection = 0
+	PickerConfigurationSelectionDefault PickerConfigurationSelection = 0
 	// An option that provides selected photos to the app in the chosen order after the user confirms the selection.
-	PHPickerConfigurationSelectionOrdered PHPickerConfigurationSelection = 1
+	PickerConfigurationSelectionOrdered PickerConfigurationSelection = 1
 	// An option that provides the app a person’s selection immediately.
-	PHPickerConfigurationSelectionContinuous PHPickerConfigurationSelection = 2
+	PickerConfigurationSelectionContinuous PickerConfigurationSelection = 2
 	// An option that provides the app a person’s selection immediately and displays selected photos with a numbered badge.
-	PHPickerConfigurationSelectionContinuousAndOrdered PHPickerConfigurationSelection = 3
+	PickerConfigurationSelectionContinuousAndOrdered PickerConfigurationSelection = 3
 )
 
-func (e PHPickerConfigurationSelection) String() string {
+// String returns the PickerConfigurationSelection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerConfigurationSelection) String() string {
 	switch e {
-	case PHPickerConfigurationSelectionDefault:
-		return "PHPickerConfigurationSelectionDefault"
-	case PHPickerConfigurationSelectionOrdered:
-		return "PHPickerConfigurationSelectionOrdered"
-	case PHPickerConfigurationSelectionContinuous:
-		return "PHPickerConfigurationSelectionContinuous"
-	case PHPickerConfigurationSelectionContinuousAndOrdered:
-		return "PHPickerConfigurationSelectionContinuousAndOrdered"
+	case PickerConfigurationSelectionDefault:
+		return "PickerConfigurationSelectionDefault"
+	case PickerConfigurationSelectionOrdered:
+		return "PickerConfigurationSelectionOrdered"
+	case PickerConfigurationSelectionContinuous:
+		return "PickerConfigurationSelectionContinuous"
+	case PickerConfigurationSelectionContinuousAndOrdered:
+		return "PickerConfigurationSelectionContinuousAndOrdered"
 	default:
-		return fmt.Sprintf("PHPickerConfigurationSelection(%d)", int64(e))
+		return fmt.Sprintf("PickerConfigurationSelection(%d)", int64(e))
 	}
 }
 
-type PHPickerMode int64
+type PickerMode int64
 
 const (
 	// Default picker mode.
-	PHPickerModeDefault PHPickerMode = 0
+	PickerModeDefault PickerMode = 0
 	// Compact picker mode (single row).
-	PHPickerModeCompact PHPickerMode = 1
+	PickerModeCompact PickerMode = 1
 )
 
-func (e PHPickerMode) String() string {
+// String returns the PickerMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PickerMode) String() string {
 	switch e {
-	case PHPickerModeDefault:
-		return "PHPickerModeDefault"
-	case PHPickerModeCompact:
-		return "PHPickerModeCompact"
+	case PickerModeDefault:
+		return "PickerModeDefault"
+	case PickerModeCompact:
+		return "PickerModeCompact"
 	default:
-		return fmt.Sprintf("PHPickerMode(%d)", int64(e))
+		return fmt.Sprintf("PickerMode(%d)", int64(e))
 	}
 }
 
 // Defines the source of a project extension.
-type PHProjectCreationSource int64
+type ProjectCreationSource int64
 
 const (
-	PHProjectCreationSourceUndefined         PHProjectCreationSource = 0
-	PHProjectCreationSourceUserSelection     PHProjectCreationSource = 1
-	PHProjectCreationSourceAlbum             PHProjectCreationSource = 2
-	PHProjectCreationSourceMemory            PHProjectCreationSource = 3
-	PHProjectCreationSourceMoment            PHProjectCreationSource = 4
-	PHProjectCreationSourceProject           PHProjectCreationSource = 20
-	PHProjectCreationSourceProjectBook       PHProjectCreationSource = 21
-	PHProjectCreationSourceProjectCalendar   PHProjectCreationSource = 22
-	PHProjectCreationSourceProjectCard       PHProjectCreationSource = 23
-	PHProjectCreationSourceProjectPrintOrder PHProjectCreationSource = 24
-	PHProjectCreationSourceProjectSlideshow  PHProjectCreationSource = 25
-	PHProjectCreationSourceProjectExtension  PHProjectCreationSource = 26
+	ProjectCreationSourceUndefined         ProjectCreationSource = 0
+	ProjectCreationSourceUserSelection     ProjectCreationSource = 1
+	ProjectCreationSourceAlbum             ProjectCreationSource = 2
+	ProjectCreationSourceMemory            ProjectCreationSource = 3
+	ProjectCreationSourceMoment            ProjectCreationSource = 4
+	ProjectCreationSourceProject           ProjectCreationSource = 20
+	ProjectCreationSourceProjectBook       ProjectCreationSource = 21
+	ProjectCreationSourceProjectCalendar   ProjectCreationSource = 22
+	ProjectCreationSourceProjectCard       ProjectCreationSource = 23
+	ProjectCreationSourceProjectPrintOrder ProjectCreationSource = 24
+	ProjectCreationSourceProjectSlideshow  ProjectCreationSource = 25
+	ProjectCreationSourceProjectExtension  ProjectCreationSource = 26
 )
 
-func (e PHProjectCreationSource) String() string {
+// String returns the ProjectCreationSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProjectCreationSource) String() string {
 	switch e {
-	case PHProjectCreationSourceUndefined:
-		return "PHProjectCreationSourceUndefined"
-	case PHProjectCreationSourceUserSelection:
-		return "PHProjectCreationSourceUserSelection"
-	case PHProjectCreationSourceAlbum:
-		return "PHProjectCreationSourceAlbum"
-	case PHProjectCreationSourceMemory:
-		return "PHProjectCreationSourceMemory"
-	case PHProjectCreationSourceMoment:
-		return "PHProjectCreationSourceMoment"
-	case PHProjectCreationSourceProject:
-		return "PHProjectCreationSourceProject"
-	case PHProjectCreationSourceProjectBook:
-		return "PHProjectCreationSourceProjectBook"
-	case PHProjectCreationSourceProjectCalendar:
-		return "PHProjectCreationSourceProjectCalendar"
-	case PHProjectCreationSourceProjectCard:
-		return "PHProjectCreationSourceProjectCard"
-	case PHProjectCreationSourceProjectPrintOrder:
-		return "PHProjectCreationSourceProjectPrintOrder"
-	case PHProjectCreationSourceProjectSlideshow:
-		return "PHProjectCreationSourceProjectSlideshow"
-	case PHProjectCreationSourceProjectExtension:
-		return "PHProjectCreationSourceProjectExtension"
+	case ProjectCreationSourceUndefined:
+		return "ProjectCreationSourceUndefined"
+	case ProjectCreationSourceUserSelection:
+		return "ProjectCreationSourceUserSelection"
+	case ProjectCreationSourceAlbum:
+		return "ProjectCreationSourceAlbum"
+	case ProjectCreationSourceMemory:
+		return "ProjectCreationSourceMemory"
+	case ProjectCreationSourceMoment:
+		return "ProjectCreationSourceMoment"
+	case ProjectCreationSourceProject:
+		return "ProjectCreationSourceProject"
+	case ProjectCreationSourceProjectBook:
+		return "ProjectCreationSourceProjectBook"
+	case ProjectCreationSourceProjectCalendar:
+		return "ProjectCreationSourceProjectCalendar"
+	case ProjectCreationSourceProjectCard:
+		return "ProjectCreationSourceProjectCard"
+	case ProjectCreationSourceProjectPrintOrder:
+		return "ProjectCreationSourceProjectPrintOrder"
+	case ProjectCreationSourceProjectSlideshow:
+		return "ProjectCreationSourceProjectSlideshow"
+	case ProjectCreationSourceProjectExtension:
+		return "ProjectCreationSourceProjectExtension"
 	default:
-		return fmt.Sprintf("PHProjectCreationSource(%d)", int64(e))
+		return fmt.Sprintf("ProjectCreationSource(%d)", int64(e))
 	}
 }
 
 // The intended usage of the section: cover, content, or auxiliary.
-type PHProjectSectionType int64
+type ProjectSectionType int64
 
 const (
-	PHProjectSectionTypeUndefined PHProjectSectionType = 0
-	PHProjectSectionTypeCover     PHProjectSectionType = 1
-	PHProjectSectionTypeContent   PHProjectSectionType = 2
-	PHProjectSectionTypeAuxiliary PHProjectSectionType = 3
+	ProjectSectionTypeUndefined ProjectSectionType = 0
+	ProjectSectionTypeCover     ProjectSectionType = 1
+	ProjectSectionTypeContent   ProjectSectionType = 2
+	ProjectSectionTypeAuxiliary ProjectSectionType = 3
 )
 
-func (e PHProjectSectionType) String() string {
+// String returns the ProjectSectionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProjectSectionType) String() string {
 	switch e {
-	case PHProjectSectionTypeUndefined:
-		return "PHProjectSectionTypeUndefined"
-	case PHProjectSectionTypeCover:
-		return "PHProjectSectionTypeCover"
-	case PHProjectSectionTypeContent:
-		return "PHProjectSectionTypeContent"
-	case PHProjectSectionTypeAuxiliary:
-		return "PHProjectSectionTypeAuxiliary"
+	case ProjectSectionTypeUndefined:
+		return "ProjectSectionTypeUndefined"
+	case ProjectSectionTypeCover:
+		return "ProjectSectionTypeCover"
+	case ProjectSectionTypeContent:
+		return "ProjectSectionTypeContent"
+	case ProjectSectionTypeAuxiliary:
+		return "ProjectSectionTypeAuxiliary"
 	default:
-		return fmt.Sprintf("PHProjectSectionType(%d)", int64(e))
+		return fmt.Sprintf("ProjectSectionType(%d)", int64(e))
 	}
 }
 
 // An enumeration of the type of text element.
-type PHProjectTextElementType int64
+type ProjectTextElementType int64
 
 const (
-	PHProjectTextElementTypeBody     PHProjectTextElementType = 0
-	PHProjectTextElementTypeTitle    PHProjectTextElementType = 1
-	PHProjectTextElementTypeSubtitle PHProjectTextElementType = 2
+	ProjectTextElementTypeBody     ProjectTextElementType = 0
+	ProjectTextElementTypeTitle    ProjectTextElementType = 1
+	ProjectTextElementTypeSubtitle ProjectTextElementType = 2
 )
 
-func (e PHProjectTextElementType) String() string {
+// String returns the ProjectTextElementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProjectTextElementType) String() string {
 	switch e {
-	case PHProjectTextElementTypeBody:
-		return "PHProjectTextElementTypeBody"
-	case PHProjectTextElementTypeTitle:
-		return "PHProjectTextElementTypeTitle"
-	case PHProjectTextElementTypeSubtitle:
-		return "PHProjectTextElementTypeSubtitle"
+	case ProjectTextElementTypeBody:
+		return "ProjectTextElementTypeBody"
+	case ProjectTextElementTypeTitle:
+		return "ProjectTextElementTypeTitle"
+	case ProjectTextElementTypeSubtitle:
+		return "ProjectTextElementTypeSubtitle"
 	default:
-		return fmt.Sprintf("PHProjectTextElementType(%d)", int64(e))
+		return fmt.Sprintf("ProjectTextElementType(%d)", int64(e))
 	}
 }

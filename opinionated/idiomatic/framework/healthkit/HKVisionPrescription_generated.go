@@ -5,72 +5,82 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample that stores a vision prescription.
+// VisionPrescription is an idiomatic wrapper over the Objective-C class HKVisionPrescription.
 //
-// VisionPrescription wraps [raw.HKVisionPrescription] with a fluent Go API.
+// VisionPrescription is an abstract base — you do not construct it directly. Construct one of [ContactsPrescription], [GlassesPrescription] and pass it where a VisionPrescription is accepted.
+//
+// A sample that stores a vision prescription.
 type VisionPrescription struct {
-	inner *raw.HKVisionPrescription
+	Sample
 }
 
-// Unwrap returns the underlying [raw.HKVisionPrescription].
-func (x *VisionPrescription) Unwrap() *raw.HKVisionPrescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VisionPrescription) ID() objc.ID { return x.inner.Ptr() }
-
-// VisionPrescriptionFromID adopts an existing object pointer as a VisionPrescription (nil for 0).
+// VisionPrescriptionFromID adopts an existing Objective-C object as a VisionPrescription
+// (nil for 0), retaining it and registering a release finalizer.
 func VisionPrescriptionFromID(id objc.ID) *VisionPrescription {
 	if id == 0 {
 		return nil
 	}
-	return &VisionPrescription{inner: raw.HKVisionPrescriptionFromID(id)}
+	x := &VisionPrescription{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewVisionPrescription creates a new [VisionPrescription].
-func NewVisionPrescription() *VisionPrescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVisionPrescription")), objc.RegisterName("new"))
-	return &VisionPrescription{inner: raw.HKVisionPrescriptionFromID(_id)}
+// visionPrescriptionAdopt wraps an Objective-C object that this code just created as a
+// VisionPrescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func visionPrescriptionAdopt(id objc.ID) *VisionPrescription {
+	if id == 0 {
+		return nil
+	}
+	x := &VisionPrescription{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      prescriptionType @abstract      A vision prescription type (glasses or contacts)
-//
-// PrescriptionType calls the underlying PrescriptionType.
-func (x *VisionPrescription) PrescriptionType() HKVisionPrescriptionType {
-	return HKVisionPrescriptionType(x.inner.PrescriptionType())
+// PrescriptionType a vision prescription type (glasses or contacts)
+func (x *VisionPrescription) PrescriptionType() VisionPrescriptionType {
+	_r := objc.Send[VisionPrescriptionType](objref.IDOf(x), objc.RegisterName("prescriptionType"))
+	return _r
 }
 
-// @property      dateIssued @abstract      The date the prescription was issued
-//
-// DateIssued calls the underlying DateIssued.
-func (x *VisionPrescription) DateIssued() *foundation.NSDate {
-	return x.inner.DateIssued()
+// DateIssued the date the prescription was issued
+func (x *VisionPrescription) DateIssued() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateIssued"))
+	return obj.Wrap(_r)
 }
 
-// @property      expirationDate @abstract      The date the prescription will expire
-//
-// ExpirationDate calls the underlying ExpirationDate.
-func (x *VisionPrescription) ExpirationDate() *foundation.NSDate {
-	return x.inner.ExpirationDate()
+// ExpirationDate the date the prescription will expire
+func (x *VisionPrescription) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+	return obj.Wrap(_r)
 }
-
-func (x *VisionPrescription) asVisionPrescription() *raw.HKVisionPrescription { return x.inner }
-
-func (x *VisionPrescription) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *VisionPrescription) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // VisionPrescriptionable is the interface implemented by [VisionPrescription], for mocking and DI.
 type VisionPrescriptionable interface {
-	Unwrap() *raw.HKVisionPrescription
-	PrescriptionType() HKVisionPrescriptionType
-	DateIssued() *foundation.NSDate
-	ExpirationDate() *foundation.NSDate
+	obj.Object
+	PrescriptionType() VisionPrescriptionType
+	DateIssued() obj.Object
+	ExpirationDate() obj.Object
 }
 
 var _ VisionPrescriptionable = (*VisionPrescription)(nil)
+
+// isVisionPrescription marks VisionPrescription — and, by embedding promotion, its
+// subclasses — as a member of the VisionPrescription hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *VisionPrescription) isVisionPrescription() {}
+
+var _ VisionPrescriptionProvider = (*VisionPrescription)(nil)
+
+var _ SampleProvider = (*VisionPrescription)(nil)
+
+var _ ObjectProvider = (*VisionPrescription)(nil)

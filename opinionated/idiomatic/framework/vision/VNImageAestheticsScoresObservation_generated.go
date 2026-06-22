@@ -5,63 +5,72 @@
 package vision
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the overall score of aesthetic attributes for an image.
+// ImageAestheticsScoresObservation is an idiomatic wrapper over the Objective-C class VNImageAestheticsScoresObservation.
 //
-// ImageAestheticsScoresObservation wraps [raw.VNImageAestheticsScoresObservation] with a fluent Go API.
+// It embeds [Observation], promoting that type's methods.
+//
+// An object that represents the overall score of aesthetic attributes for an image.
 type ImageAestheticsScoresObservation struct {
-	inner *raw.VNImageAestheticsScoresObservation
+	Observation
 }
 
-// Unwrap returns the underlying [raw.VNImageAestheticsScoresObservation].
-func (x *ImageAestheticsScoresObservation) Unwrap() *raw.VNImageAestheticsScoresObservation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAestheticsScoresObservation) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAestheticsScoresObservationFromID adopts an existing object pointer as a ImageAestheticsScoresObservation (nil for 0).
+// ImageAestheticsScoresObservationFromID adopts an existing Objective-C object as a ImageAestheticsScoresObservation
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAestheticsScoresObservationFromID(id objc.ID) *ImageAestheticsScoresObservation {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAestheticsScoresObservation{inner: raw.VNImageAestheticsScoresObservationFromID(id)}
+	x := &ImageAestheticsScoresObservation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewImageAestheticsScoresObservation creates a new [ImageAestheticsScoresObservation].
+// imageAestheticsScoresObservationAdopt wraps an Objective-C object that this code just created as a
+// ImageAestheticsScoresObservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAestheticsScoresObservationAdopt(id objc.ID) *ImageAestheticsScoresObservation {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAestheticsScoresObservation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewImageAestheticsScoresObservation creates a new ImageAestheticsScoresObservation.
 func NewImageAestheticsScoresObservation() *ImageAestheticsScoresObservation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNImageAestheticsScoresObservation")), objc.RegisterName("new"))
-	return &ImageAestheticsScoresObservation{inner: raw.VNImageAestheticsScoresObservationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNImageAestheticsScoresObservation")), objc.RegisterName("new"))
+	return imageAestheticsScoresObservationAdopt(_id)
 }
 
-// A Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
-//
-// IsUtility calls the underlying IsUtility.
+// IsUtility a Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
 func (x *ImageAestheticsScoresObservation) IsUtility() bool {
-	return x.inner.IsUtility()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUtility"))
+	return _r
 }
 
-// A score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
-//
-// OverallScore calls the underlying OverallScore.
+// OverallScore a score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
 func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
-	return x.inner.OverallScore()
-}
-
-func (x *ImageAestheticsScoresObservation) asObservation() *raw.VNObservation {
-	return &x.inner.VNObservation
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overallScore"))
+	return _r
 }
 
 // ImageAestheticsScoresObservationable is the interface implemented by [ImageAestheticsScoresObservation], for mocking and DI.
 type ImageAestheticsScoresObservationable interface {
-	Unwrap() *raw.VNImageAestheticsScoresObservation
+	obj.Object
 	IsUtility() bool
 	OverallScore() float32
 }
 
 var _ ImageAestheticsScoresObservationable = (*ImageAestheticsScoresObservation)(nil)
+
+var _ ObservationProvider = (*ImageAestheticsScoresObservation)(nil)

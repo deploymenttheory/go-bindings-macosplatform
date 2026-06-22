@@ -5,85 +5,114 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AccessibilityTextMarkerRange wraps [raw.BEAccessibilityTextMarkerRange] with a fluent Go API.
+// AccessibilityTextMarkerRange is an idiomatic wrapper over the Objective-C class BEAccessibilityTextMarkerRange.
 type AccessibilityTextMarkerRange struct {
-	inner *raw.BEAccessibilityTextMarkerRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BEAccessibilityTextMarkerRange].
-func (x *AccessibilityTextMarkerRange) Unwrap() *raw.BEAccessibilityTextMarkerRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessibilityTextMarkerRange) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessibilityTextMarkerRangeFromID adopts an existing object pointer as a AccessibilityTextMarkerRange (nil for 0).
+// AccessibilityTextMarkerRangeFromID adopts an existing Objective-C object as a AccessibilityTextMarkerRange
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessibilityTextMarkerRangeFromID(id objc.ID) *AccessibilityTextMarkerRange {
 	if id == 0 {
 		return nil
 	}
-	return &AccessibilityTextMarkerRange{inner: raw.BEAccessibilityTextMarkerRangeFromID(id)}
+	x := &AccessibilityTextMarkerRange{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAccessibilityTextMarkerRange creates a new [AccessibilityTextMarkerRange].
+// accessibilityTextMarkerRangeAdopt wraps an Objective-C object that this code just created as a
+// AccessibilityTextMarkerRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessibilityTextMarkerRangeAdopt(id objc.ID) *AccessibilityTextMarkerRange {
+	if id == 0 {
+		return nil
+	}
+	x := &AccessibilityTextMarkerRange{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccessibilityTextMarkerRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessibilityTextMarkerRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessibilityTextMarkerRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessibilityTextMarkerRange) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccessibilityTextMarkerRange creates a new AccessibilityTextMarkerRange.
 func NewAccessibilityTextMarkerRange() *AccessibilityTextMarkerRange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BEAccessibilityTextMarkerRange")), objc.RegisterName("new"))
-	return &AccessibilityTextMarkerRange{inner: raw.BEAccessibilityTextMarkerRangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BEAccessibilityTextMarkerRange")), objc.RegisterName("new"))
+	return accessibilityTextMarkerRangeAdopt(_id)
 }
 
-// WithStartMarker sets the startMarker property and returns the receiver for chaining.
+// WithStartMarker sets the property and returns the receiver so calls can be chained.
 func (x *AccessibilityTextMarkerRange) WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
-	x.inner.SetStartMarker(startMarker.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 	return x
 }
 
-// WithEndMarker sets the endMarker property and returns the receiver for chaining.
+// WithEndMarker sets the property and returns the receiver so calls can be chained.
 func (x *AccessibilityTextMarkerRange) WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
-	x.inner.SetEndMarker(endMarker.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
 	return x
 }
 
-// StartMarker calls the underlying StartMarker.
+// StartMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
-	_r := x.inner.StartMarker()
-	if _r == nil {
-		return nil
-	}
-	return &AccessibilityTextMarker{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMarker"))
+	return AccessibilityTextMarkerFromID(_r)
 }
 
-// SetStartMarker calls the underlying SetStartMarker.
-func (x *AccessibilityTextMarkerRange) SetStartMarker(startMarker *raw.BEAccessibilityTextMarker) {
-	x.inner.SetStartMarker(startMarker)
+// SetStartMarker wraps the corresponding Objective-C method.
+func (x *AccessibilityTextMarkerRange) SetStartMarker(startMarker *AccessibilityTextMarker) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 }
 
-// EndMarker calls the underlying EndMarker.
+// EndMarker wraps the corresponding Objective-C method.
 func (x *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
-	_r := x.inner.EndMarker()
-	if _r == nil {
-		return nil
-	}
-	return &AccessibilityTextMarker{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endMarker"))
+	return AccessibilityTextMarkerFromID(_r)
 }
 
-// SetEndMarker calls the underlying SetEndMarker.
-func (x *AccessibilityTextMarkerRange) SetEndMarker(endMarker *raw.BEAccessibilityTextMarker) {
-	x.inner.SetEndMarker(endMarker)
+// SetEndMarker wraps the corresponding Objective-C method.
+func (x *AccessibilityTextMarkerRange) SetEndMarker(endMarker *AccessibilityTextMarker) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
 }
 
 // AccessibilityTextMarkerRangeable is the interface implemented by [AccessibilityTextMarkerRange], for mocking and DI.
 type AccessibilityTextMarkerRangeable interface {
-	Unwrap() *raw.BEAccessibilityTextMarkerRange
+	obj.Object
 	WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange
 	WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange
 	StartMarker() *AccessibilityTextMarker
-	SetStartMarker(startMarker *raw.BEAccessibilityTextMarker)
+	SetStartMarker(startMarker *AccessibilityTextMarker)
 	EndMarker() *AccessibilityTextMarker
-	SetEndMarker(endMarker *raw.BEAccessibilityTextMarker)
+	SetEndMarker(endMarker *AccessibilityTextMarker)
 }
 
 var _ AccessibilityTextMarkerRangeable = (*AccessibilityTextMarkerRange)(nil)

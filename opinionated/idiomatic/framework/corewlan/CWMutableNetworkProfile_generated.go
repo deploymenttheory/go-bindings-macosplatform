@@ -5,76 +5,84 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Encapsulates a mutable network profile entry.
+// MutableNetworkProfile is an idiomatic wrapper over the Objective-C class CWMutableNetworkProfile.
 //
-// MutableNetworkProfile wraps [raw.CWMutableNetworkProfile] with a fluent Go API.
+// It embeds [NetworkProfile], promoting that type's methods.
+//
+// Encapsulates a mutable network profile entry.
 type MutableNetworkProfile struct {
-	inner *raw.CWMutableNetworkProfile
+	NetworkProfile
 }
 
-// Unwrap returns the underlying [raw.CWMutableNetworkProfile].
-func (x *MutableNetworkProfile) Unwrap() *raw.CWMutableNetworkProfile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableNetworkProfile) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableNetworkProfileFromID adopts an existing object pointer as a MutableNetworkProfile (nil for 0).
+// MutableNetworkProfileFromID adopts an existing Objective-C object as a MutableNetworkProfile
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableNetworkProfileFromID(id objc.ID) *MutableNetworkProfile {
 	if id == 0 {
 		return nil
 	}
-	return &MutableNetworkProfile{inner: raw.CWMutableNetworkProfileFromID(id)}
+	x := &MutableNetworkProfile{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMutableNetworkProfile creates a new [MutableNetworkProfile].
+// mutableNetworkProfileAdopt wraps an Objective-C object that this code just created as a
+// MutableNetworkProfile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableNetworkProfileAdopt(id objc.ID) *MutableNetworkProfile {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableNetworkProfile{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMutableNetworkProfile creates a new MutableNetworkProfile.
 func NewMutableNetworkProfile() *MutableNetworkProfile {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWMutableNetworkProfile")), objc.RegisterName("new"))
-	return &MutableNetworkProfile{inner: raw.CWMutableNetworkProfileFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CWMutableNetworkProfile")), objc.RegisterName("new"))
+	return mutableNetworkProfileAdopt(_id)
 }
 
-// The service set identifier (SSID).
-//
-// WithSsidData sets the ssidData property and returns the receiver for chaining.
-func (x *MutableNetworkProfile) WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile {
-	x.inner.SetSsidData(ssidData)
+// WithSsidData the service set identifier (SSID).
+func (x *MutableNetworkProfile) WithSsidData(ssidData obj.Object) *MutableNetworkProfile {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
 	return x
 }
 
-// The security type.
-//
-// WithSecurity sets the security property and returns the receiver for chaining.
-func (x *MutableNetworkProfile) WithSecurity(security CWSecurity) *MutableNetworkProfile {
-	x.inner.SetSecurity(raw.CWSecurity(security))
+// WithSecurity the security type.
+func (x *MutableNetworkProfile) WithSecurity(security Security) *MutableNetworkProfile {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
 	return x
 }
 
-// SetSsidData calls the underlying SetSsidData.
-func (x *MutableNetworkProfile) SetSsidData(ssidData *foundation.NSData) {
-	x.inner.SetSsidData(ssidData)
+// SetSsidData wraps the corresponding Objective-C method.
+func (x *MutableNetworkProfile) SetSsidData(ssidData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsidData:"), objref.IDOf(ssidData))
 }
 
-// SetSecurity calls the underlying SetSecurity.
-func (x *MutableNetworkProfile) SetSecurity(security CWSecurity) {
-	x.inner.SetSecurity(raw.CWSecurity(security))
-}
-
-func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile {
-	return &x.inner.CWNetworkProfile
+// SetSecurity wraps the corresponding Objective-C method.
+func (x *MutableNetworkProfile) SetSecurity(security Security) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), security)
 }
 
 // MutableNetworkProfileable is the interface implemented by [MutableNetworkProfile], for mocking and DI.
 type MutableNetworkProfileable interface {
-	Unwrap() *raw.CWMutableNetworkProfile
-	WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile
-	WithSecurity(security CWSecurity) *MutableNetworkProfile
-	SetSsidData(ssidData *foundation.NSData)
-	SetSecurity(security CWSecurity)
+	obj.Object
+	WithSsidData(ssidData obj.Object) *MutableNetworkProfile
+	WithSecurity(security Security) *MutableNetworkProfile
+	SetSsidData(ssidData obj.Object)
+	SetSecurity(security Security)
 }
 
 var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)
+
+var _ NetworkProfileProvider = (*MutableNetworkProfile)(nil)

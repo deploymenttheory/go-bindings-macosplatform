@@ -5,95 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An auxiliary image used to separate foreground from background with high resolution.
+// PortraitEffectsMatte is an idiomatic wrapper over the Objective-C class AVPortraitEffectsMatte.
 //
-// PortraitEffectsMatte wraps [raw.AVPortraitEffectsMatte] with a fluent Go API.
+// An auxiliary image used to separate foreground from background with high resolution.
 type PortraitEffectsMatte struct {
-	inner *raw.AVPortraitEffectsMatte
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPortraitEffectsMatte].
-func (x *PortraitEffectsMatte) Unwrap() *raw.AVPortraitEffectsMatte { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PortraitEffectsMatte) ID() objc.ID { return x.inner.Ptr() }
-
-// PortraitEffectsMatteFromID adopts an existing object pointer as a PortraitEffectsMatte (nil for 0).
+// PortraitEffectsMatteFromID adopts an existing Objective-C object as a PortraitEffectsMatte
+// (nil for 0), retaining it and registering a release finalizer.
 func PortraitEffectsMatteFromID(id objc.ID) *PortraitEffectsMatte {
 	if id == 0 {
 		return nil
 	}
-	return &PortraitEffectsMatte{inner: raw.AVPortraitEffectsMatteFromID(id)}
+	x := &PortraitEffectsMatte{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPortraitEffectsMatte creates a new [PortraitEffectsMatte].
-func NewPortraitEffectsMatte() *PortraitEffectsMatte {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPortraitEffectsMatte")), objc.RegisterName("new"))
-	return &PortraitEffectsMatte{inner: raw.AVPortraitEffectsMatteFromID(_id)}
-}
-
-// Returns a derivative portrait effects matte after applying the specified EXIF orientation.
-//
-// PortraitEffectsMatteByApplyingExifOrientation calls the underlying PortraitEffectsMatteByApplyingExifOrientation.
-func (x *PortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *PortraitEffectsMatte {
-	_r := x.inner.PortraitEffectsMatteByApplyingExifOrientation(exifOrientation)
-	if _r == nil {
+// portraitEffectsMatteAdopt wraps an Objective-C object that this code just created as a
+// PortraitEffectsMatte (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func portraitEffectsMatteAdopt(id objc.ID) *PortraitEffectsMatte {
+	if id == 0 {
 		return nil
 	}
-	return &PortraitEffectsMatte{inner: _r}
+	x := &PortraitEffectsMatte{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Returns a portrait effects matte by wrapping the replacement pixel buffer.
-//
-// PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError calls the underlying PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError.
-func (x *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*PortraitEffectsMatte, error) {
-	_r, _err := x.inner.PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &PortraitEffectsMatte{inner: _r}, nil
+// Description returns the object's -description text.
+func (x *PortraitEffectsMatte) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// A dictionary of primitive map information used for writing an image file with a portrait effects matte.
-//
-// DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
-func (x *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentationForAuxiliaryDataType(foundation.NSStringStringWithUTF8String(outAuxDataType))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PortraitEffectsMatte) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property pixelFormatType @abstract Specifies the pixel format type of this object's internal matting image. @discussion Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
-//
-// PixelFormatType calls the underlying PixelFormatType.
-func (x *PortraitEffectsMatte) PixelFormatType() uint {
-	return x.inner.PixelFormatType()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PortraitEffectsMatte) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property mattingImage @abstract Provides access to the portrait effects matte's internal image. @discussion The pixel format can be queried using the pixelFormatType property.
-//
-// MattingImage calls the underlying MattingImage.
-func (x *PortraitEffectsMatte) MattingImage() unsafe.Pointer {
-	return x.inner.MattingImage()
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PortraitEffectsMatte) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPortraitEffectsMatte creates a new PortraitEffectsMatte.
+func NewPortraitEffectsMatte() *PortraitEffectsMatte {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPortraitEffectsMatte")), objc.RegisterName("new"))
+	return portraitEffectsMatteAdopt(_id)
+}
+
+// DictionaryRepresentationForAuxiliaryDataType a dictionary of primitive map information used for writing an image file with a portrait effects matte.
+func (x *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
+	return obj.Wrap(_r)
+}
+
+// PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
+func (x *PortraitEffectsMatte) PixelFormatType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
+	return _r
 }
 
 // PortraitEffectsMatteable is the interface implemented by [PortraitEffectsMatte], for mocking and DI.
 type PortraitEffectsMatteable interface {
-	Unwrap() *raw.AVPortraitEffectsMatte
-	PortraitEffectsMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *PortraitEffectsMatte
-	PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*PortraitEffectsMatte, error)
-	DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID]
-	PixelFormatType() uint
-	MattingImage() unsafe.Pointer
+	obj.Object
+	DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object
+	PixelFormatType() int
 }
 
 var _ PortraitEffectsMatteable = (*PortraitEffectsMatte)(nil)

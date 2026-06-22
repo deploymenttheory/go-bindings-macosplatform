@@ -5,114 +5,130 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An annotation that groups two or more distinct annotations into a single entity.
+// ClusterAnnotation is an idiomatic wrapper over the Objective-C class MKClusterAnnotation.
 //
-// ClusterAnnotation wraps [raw.MKClusterAnnotation] with a fluent Go API.
+// An annotation that groups two or more distinct annotations into a single entity.
 type ClusterAnnotation struct {
-	inner *raw.MKClusterAnnotation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKClusterAnnotation].
-func (x *ClusterAnnotation) Unwrap() *raw.MKClusterAnnotation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClusterAnnotation) ID() objc.ID { return x.inner.Ptr() }
-
-// ClusterAnnotationFromID adopts an existing object pointer as a ClusterAnnotation (nil for 0).
+// ClusterAnnotationFromID adopts an existing Objective-C object as a ClusterAnnotation
+// (nil for 0), retaining it and registering a release finalizer.
 func ClusterAnnotationFromID(id objc.ID) *ClusterAnnotation {
 	if id == 0 {
 		return nil
 	}
-	return &ClusterAnnotation{inner: raw.MKClusterAnnotationFromID(id)}
+	x := &ClusterAnnotation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a cluster annotation with the specified individual annotations.
-//
-// NewClusterAnnotationWithMemberAnnotations creates a new [ClusterAnnotation].
-func NewClusterAnnotationWithMemberAnnotations(memberAnnotations ...purego.IDer) *ClusterAnnotation {
-	_ptrs := make([]objc.ID, len(memberAnnotations))
-	for _i, _v := range memberAnnotations {
-		_ptrs[_i] = _v.ID()
+// clusterAnnotationAdopt wraps an Objective-C object that this code just created as a
+// ClusterAnnotation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func clusterAnnotationAdopt(id objc.ID) *ClusterAnnotation {
+	if id == 0 {
+		return nil
 	}
-	var _arg0 *foundation.NSArray[raw.MKAnnotation]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKClusterAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemberAnnotations:"), _arg0.Ptr())
-	return &ClusterAnnotation{inner: raw.MKClusterAnnotationFromID(_id)}
+	x := &ClusterAnnotation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The title string to display for the group of annotations.
-//
-// WithTitle sets the title property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *ClusterAnnotation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ClusterAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ClusterAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ClusterAnnotation) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewClusterAnnotationWithMemberAnnotations creates a cluster annotation with the specified individual annotations.
+func NewClusterAnnotationWithMemberAnnotations(memberAnnotations []obj.Object) *ClusterAnnotation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKClusterAnnotation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemberAnnotations:"), purego.SliceToNSArray(memberAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return clusterAnnotationAdopt(_id)
+}
+
+// WithTitle the title string to display for the group of annotations.
 func (x *ClusterAnnotation) WithTitle(title string) *ClusterAnnotation {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// The subtitle string to display for the group of annotations.
-//
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle the subtitle string to display for the group of annotations.
 func (x *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Title calls the underlying Title.
+// Title wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
+// SetTitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// Subtitle calls the underlying Subtitle.
+// Subtitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
+// SetSubtitle wraps the corresponding Objective-C method.
 func (x *ClusterAnnotation) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// MemberAnnotations calls the underlying MemberAnnotations.
-func (x *ClusterAnnotation) MemberAnnotations() *foundation.NSArray[raw.MKAnnotation] {
-	return x.inner.MemberAnnotations()
+// MemberAnnotations wraps the corresponding Objective-C method.
+func (x *ClusterAnnotation) MemberAnnotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberAnnotations"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ClusterAnnotationable is the interface implemented by [ClusterAnnotation], for mocking and DI.
 type ClusterAnnotationable interface {
-	Unwrap() *raw.MKClusterAnnotation
+	obj.Object
 	WithTitle(title string) *ClusterAnnotation
 	WithSubtitle(subtitle string) *ClusterAnnotation
 	Title() string
 	SetTitle(title string)
 	Subtitle() string
 	SetSubtitle(subtitle string)
-	MemberAnnotations() *foundation.NSArray[raw.MKAnnotation]
+	MemberAnnotations() []obj.Object
 }
 
 var _ ClusterAnnotationable = (*ClusterAnnotation)(nil)

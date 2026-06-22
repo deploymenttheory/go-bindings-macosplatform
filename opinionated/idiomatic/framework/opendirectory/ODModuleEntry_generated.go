@@ -5,149 +5,177 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ModuleEntry wraps [raw.ODModuleEntry] with a fluent Go API.
+// ModuleEntry is an idiomatic wrapper over the Objective-C class ODModuleEntry.
 type ModuleEntry struct {
-	inner *raw.ODModuleEntry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODModuleEntry].
-func (x *ModuleEntry) Unwrap() *raw.ODModuleEntry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModuleEntry) ID() objc.ID { return x.inner.Ptr() }
-
-// ModuleEntryFromID adopts an existing object pointer as a ModuleEntry (nil for 0).
+// ModuleEntryFromID adopts an existing Objective-C object as a ModuleEntry
+// (nil for 0), retaining it and registering a release finalizer.
 func ModuleEntryFromID(id objc.ID) *ModuleEntry {
 	if id == 0 {
 		return nil
 	}
-	return &ModuleEntry{inner: raw.ODModuleEntryFromID(id)}
-}
-
-// NewModuleEntry creates a new [ModuleEntry].
-func NewModuleEntry() *ModuleEntry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ODModuleEntry")), objc.RegisterName("new"))
-	return &ModuleEntry{inner: raw.ODModuleEntryFromID(_id)}
-}
-
-// WithMappings sets the mappings property and returns the receiver for chaining.
-func (x *ModuleEntry) WithMappings(mappings *Mappings) *ModuleEntry {
-	x.inner.SetMappings(mappings.Unwrap())
+	x := &ModuleEntry{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
-func (x *ModuleEntry) WithName(name string) *ModuleEntry {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// WithXpcServiceName sets the xpcServiceName property and returns the receiver for chaining.
-func (x *ModuleEntry) WithXpcServiceName(xpcServiceName string) *ModuleEntry {
-	x.inner.SetXpcServiceName(foundation.NSStringStringWithUTF8String(xpcServiceName))
-	return x
-}
-
-// WithUuidString sets the uuidString property and returns the receiver for chaining.
-func (x *ModuleEntry) WithUuidString(uuidString string) *ModuleEntry {
-	x.inner.SetUuidString(foundation.NSStringStringWithUTF8String(uuidString))
-	return x
-}
-
-// @method setOption:value: @abstract Assigns a particular option for this module. @discussion Options are dictated by the module and can be queried via [module supportedOptions].
-//
-// SetOptionValue calls the underlying SetOptionValue.
-func (x *ModuleEntry) SetOptionValue(optionName string, value objc.ID) {
-	x.inner.SetOptionValue(foundation.NSStringStringWithUTF8String(optionName), value)
-}
-
-// @method option: @abstract Fetches the current setting for the requested option. @discussion Fetches the current setting for the requested option.
-//
-// Option calls the underlying Option.
-func (x *ModuleEntry) Option(optionName string) objc.ID {
-	return x.inner.Option(foundation.NSStringStringWithUTF8String(optionName))
-}
-
-// Mappings calls the underlying Mappings.
-func (x *ModuleEntry) Mappings() *Mappings {
-	_r := x.inner.Mappings()
-	if _r == nil {
+// moduleEntryAdopt wraps an Objective-C object that this code just created as a
+// ModuleEntry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func moduleEntryAdopt(id objc.ID) *ModuleEntry {
+	if id == 0 {
 		return nil
 	}
-	return &Mappings{inner: _r}
+	x := &ModuleEntry{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetMappings calls the underlying SetMappings.
-func (x *ModuleEntry) SetMappings(mappings *raw.ODMappings) {
-	x.inner.SetMappings(mappings)
+// Description returns the object's -description text.
+func (x *ModuleEntry) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SupportedOptions calls the underlying SupportedOptions.
-func (x *ModuleEntry) SupportedOptions() *foundation.NSArray[objc.ID] {
-	return x.inner.SupportedOptions()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModuleEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Name calls the underlying Name.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModuleEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ModuleEntry) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewModuleEntry creates a new ModuleEntry.
+func NewModuleEntry() *ModuleEntry {
+	_id := objc.Send[objc.ID](objc.ID(_class("ODModuleEntry")), objc.RegisterName("new"))
+	return moduleEntryAdopt(_id)
+}
+
+// WithMappings sets the property and returns the receiver so calls can be chained.
+func (x *ModuleEntry) WithMappings(mappings *Mappings) *ModuleEntry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappings:"), objref.IDOf(mappings))
+	return x
+}
+
+// WithName sets the property and returns the receiver so calls can be chained.
+func (x *ModuleEntry) WithName(name string) *ModuleEntry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// WithXpcServiceName sets the property and returns the receiver so calls can be chained.
+func (x *ModuleEntry) WithXpcServiceName(xpcServiceName string) *ModuleEntry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXpcServiceName:"), purego.NSString(xpcServiceName))
+	return x
+}
+
+// WithUuidString sets the property and returns the receiver so calls can be chained.
+func (x *ModuleEntry) WithUuidString(uuidString string) *ModuleEntry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuidString:"), purego.NSString(uuidString))
+	return x
+}
+
+// SetOptionValue assigns a particular option for this module. Options are dictated by the module and can be queried via [module supportedOptions].
+func (x *ModuleEntry) SetOptionValue(optionName string, value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOption:value:"), purego.NSString(optionName), objref.IDOf(value))
+}
+
+// Option fetches the current setting for the requested option. Fetches the current setting for the requested option.
+func (x *ModuleEntry) Option(optionName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("option:"), purego.NSString(optionName))
+	return obj.Wrap(_r)
+}
+
+// Mappings wraps the corresponding Objective-C method.
+func (x *ModuleEntry) Mappings() *Mappings {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mappings"))
+	return MappingsFromID(_r)
+}
+
+// SetMappings wraps the corresponding Objective-C method.
+func (x *ModuleEntry) SetMappings(mappings *Mappings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMappings:"), objref.IDOf(mappings))
+}
+
+// SupportedOptions wraps the corresponding Objective-C method.
+func (x *ModuleEntry) SupportedOptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedOptions"))
+	return obj.Wrap(_r)
+}
+
+// Name wraps the corresponding Objective-C method.
 func (x *ModuleEntry) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *ModuleEntry) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// XpcServiceName calls the underlying XpcServiceName.
+// XpcServiceName wraps the corresponding Objective-C method.
 func (x *ModuleEntry) XpcServiceName() string {
-	_r := x.inner.XpcServiceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("xpcServiceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetXpcServiceName calls the underlying SetXpcServiceName.
+// SetXpcServiceName wraps the corresponding Objective-C method.
 func (x *ModuleEntry) SetXpcServiceName(xpcServiceName string) {
-	x.inner.SetXpcServiceName(foundation.NSStringStringWithUTF8String(xpcServiceName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXpcServiceName:"), purego.NSString(xpcServiceName))
 }
 
-// UuidString calls the underlying UuidString.
+// UuidString wraps the corresponding Objective-C method.
 func (x *ModuleEntry) UuidString() string {
-	_r := x.inner.UuidString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuidString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUuidString calls the underlying SetUuidString.
+// SetUuidString wraps the corresponding Objective-C method.
 func (x *ModuleEntry) SetUuidString(uuidString string) {
-	x.inner.SetUuidString(foundation.NSStringStringWithUTF8String(uuidString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuidString:"), purego.NSString(uuidString))
 }
 
 // ModuleEntryable is the interface implemented by [ModuleEntry], for mocking and DI.
 type ModuleEntryable interface {
-	Unwrap() *raw.ODModuleEntry
+	obj.Object
 	WithMappings(mappings *Mappings) *ModuleEntry
 	WithName(name string) *ModuleEntry
 	WithXpcServiceName(xpcServiceName string) *ModuleEntry
 	WithUuidString(uuidString string) *ModuleEntry
-	SetOptionValue(optionName string, value objc.ID)
-	Option(optionName string) objc.ID
+	SetOptionValue(optionName string, value obj.Object)
+	Option(optionName string) obj.Object
 	Mappings() *Mappings
-	SetMappings(mappings *raw.ODMappings)
-	SupportedOptions() *foundation.NSArray[objc.ID]
+	SetMappings(mappings *Mappings)
+	SupportedOptions() obj.Object
 	Name() string
 	SetName(name string)
 	XpcServiceName() string

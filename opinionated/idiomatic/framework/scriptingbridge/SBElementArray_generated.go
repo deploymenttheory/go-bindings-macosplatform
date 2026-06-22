@@ -5,90 +5,104 @@
 package scriptingbridge
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.
+// ElementArray is an idiomatic wrapper over the Objective-C class SBElementArray.
 //
-// ElementArray wraps [raw.SBElementArray] with a fluent Go API.
+// SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.
 type ElementArray struct {
-	inner *raw.SBElementArray[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SBElementArray].
-func (x *ElementArray) Unwrap() *raw.SBElementArray[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ElementArray) ID() objc.ID { return x.inner.Ptr() }
-
-// ElementArrayFromID adopts an existing object pointer as a ElementArray (nil for 0).
+// ElementArrayFromID adopts an existing Objective-C object as a ElementArray
+// (nil for 0), retaining it and registering a release finalizer.
 func ElementArrayFromID(id objc.ID) *ElementArray {
 	if id == 0 {
 		return nil
 	}
-	return &ElementArray{inner: raw.SBElementArrayFromID[objc.ID](id)}
+	x := &ElementArray{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewElementArray creates a new [ElementArray].
+// elementArrayAdopt wraps an Objective-C object that this code just created as a
+// ElementArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func elementArrayAdopt(id objc.ID) *ElementArray {
+	if id == 0 {
+		return nil
+	}
+	x := &ElementArray{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ElementArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ElementArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ElementArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ElementArray) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewElementArray creates a new ElementArray.
 func NewElementArray() *ElementArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SBElementArray")), objc.RegisterName("new"))
-	return &ElementArray{inner: raw.SBElementArrayFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SBElementArray")), objc.RegisterName("new"))
+	return elementArrayAdopt(_id)
 }
 
-// Returns the object in the array with the given name.
-//
-// ObjectWithName calls the underlying ObjectWithName.
-func (x *ElementArray) ObjectWithName(name string) objc.ID {
-	return x.inner.ObjectWithName(foundation.NSStringStringWithUTF8String(name))
+// ObjectWithName returns the object in the array with the given name.
+func (x *ElementArray) ObjectWithName(name string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithName:"), purego.NSString(name))
+	return obj.Wrap(_r)
 }
 
-// Returns the object in the array with the given identifier.
-//
-// ObjectWithID calls the underlying ObjectWithID.
-func (x *ElementArray) ObjectWithID(identifier objc.ID) objc.ID {
-	return x.inner.ObjectWithID(identifier)
+// ObjectWithID returns the object in the array with the given identifier.
+func (x *ElementArray) ObjectWithID(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithID:"), objref.IDOf(identifier))
+	return obj.Wrap(_r)
 }
 
-// Returns the object at the given location in the receiver.
-//
-// ObjectAtLocation calls the underlying ObjectAtLocation.
-func (x *ElementArray) ObjectAtLocation(location objc.ID) objc.ID {
-	return x.inner.ObjectAtLocation(location)
+// ObjectAtLocation returns the object at the given location in the receiver.
+func (x *ElementArray) ObjectAtLocation(location obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtLocation:"), objref.IDOf(location))
+	return obj.Wrap(_r)
 }
 
-// Returns an array containing the results of sending the specified message to each object in the receiver.
-//
-// ArrayByApplyingSelector calls the underlying ArrayByApplyingSelector.
-func (x *ElementArray) ArrayByApplyingSelector(selector objc.SEL) *foundation.NSArray[objc.ID] {
-	return x.inner.ArrayByApplyingSelector(selector)
-}
-
-// Returns an array containing the results of sending the specified message to each object in the receiver.
-//
-// ArrayByApplyingSelectorWithObject calls the underlying ArrayByApplyingSelectorWithObject.
-func (x *ElementArray) ArrayByApplyingSelectorWithObject(aSelector objc.SEL, argument objc.ID) *foundation.NSArray[objc.ID] {
-	return x.inner.ArrayByApplyingSelectorWithObject(aSelector, argument)
-}
-
-// Forces evaluation of the receiver, causing the real object to be returned immediately.
-//
-// Get calls the underlying Get.
-func (x *ElementArray) Get() *foundation.NSArray[objc.ID] {
-	return x.inner.Get()
+// Get forces evaluation of the receiver, causing the real object to be returned immediately.
+func (x *ElementArray) Get() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("get"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ElementArrayable is the interface implemented by [ElementArray], for mocking and DI.
 type ElementArrayable interface {
-	Unwrap() *raw.SBElementArray[objc.ID]
-	ObjectWithName(name string) objc.ID
-	ObjectWithID(identifier objc.ID) objc.ID
-	ObjectAtLocation(location objc.ID) objc.ID
-	ArrayByApplyingSelector(selector objc.SEL) *foundation.NSArray[objc.ID]
-	ArrayByApplyingSelectorWithObject(aSelector objc.SEL, argument objc.ID) *foundation.NSArray[objc.ID]
-	Get() *foundation.NSArray[objc.ID]
+	obj.Object
+	ObjectWithName(name string) obj.Object
+	ObjectWithID(identifier obj.Object) obj.Object
+	ObjectAtLocation(location obj.Object) obj.Object
+	Get() []obj.Object
 }
 
 var _ ElementArrayable = (*ElementArray)(nil)

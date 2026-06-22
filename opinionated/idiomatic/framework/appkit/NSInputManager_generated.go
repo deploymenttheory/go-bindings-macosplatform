@@ -5,117 +5,149 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// InputManager wraps [raw.NSInputManager] with a fluent Go API.
+// InputManager is an idiomatic wrapper over the Objective-C class NSInputManager.
 type InputManager struct {
-	inner *raw.NSInputManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInputManager].
-func (x *InputManager) Unwrap() *raw.NSInputManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InputManager) ID() objc.ID { return x.inner.Ptr() }
-
-// InputManagerFromID adopts an existing object pointer as a InputManager (nil for 0).
+// InputManagerFromID adopts an existing Objective-C object as a InputManager
+// (nil for 0), retaining it and registering a release finalizer.
 func InputManagerFromID(id objc.ID) *InputManager {
 	if id == 0 {
 		return nil
 	}
-	return &InputManager{inner: raw.NSInputManagerFromID(id)}
+	x := &InputManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewInputManagerWithNameHost creates a new [InputManager].
+// inputManagerAdopt wraps an Objective-C object that this code just created as a
+// InputManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inputManagerAdopt(id objc.ID) *InputManager {
+	if id == 0 {
+		return nil
+	}
+	x := &InputManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InputManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InputManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InputManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *InputManager) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewInputManagerWithNameHost creates a new InputManager.
 func NewInputManagerWithNameHost(inputServerName string, hostName string) *InputManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInputManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:host:"), foundation.NSStringStringWithUTF8String(inputServerName).Ptr(), foundation.NSStringStringWithUTF8String(hostName).Ptr())
-	return &InputManager{inner: raw.NSInputManagerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputManager")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:host:"), purego.NSString(inputServerName), purego.NSString(hostName))
+	return inputManagerAdopt(_id)
 }
 
-// LocalizedInputManagerName calls the underlying LocalizedInputManagerName.
+// LocalizedInputManagerName wraps the corresponding Objective-C method.
 func (x *InputManager) LocalizedInputManagerName() string {
-	_r := x.inner.LocalizedInputManagerName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedInputManagerName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// MarkedTextAbandoned calls the underlying MarkedTextAbandoned.
-func (x *InputManager) MarkedTextAbandoned(cli objc.ID) {
-	x.inner.MarkedTextAbandoned(cli)
+// MarkedTextAbandoned wraps the corresponding Objective-C method.
+func (x *InputManager) MarkedTextAbandoned(cli obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextAbandoned:"), objref.IDOf(cli))
 }
 
-// MarkedTextSelectionChangedClient calls the underlying MarkedTextSelectionChangedClient.
-func (x *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli objc.ID) {
-	x.inner.MarkedTextSelectionChangedClient(newSel, cli)
+// MarkedTextSelectionChangedClient wraps the corresponding Objective-C method.
+func (x *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextSelectionChanged:client:"), newSel, objref.IDOf(cli))
 }
 
-// WantsToInterpretAllKeystrokes calls the underlying WantsToInterpretAllKeystrokes.
+// WantsToInterpretAllKeystrokes wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToInterpretAllKeystrokes() bool {
-	return x.inner.WantsToInterpretAllKeystrokes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToInterpretAllKeystrokes"))
+	return _r
 }
 
-// Language calls the underlying Language.
+// Language wraps the corresponding Objective-C method.
 func (x *InputManager) Language() string {
-	_r := x.inner.Language()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Image calls the underlying Image.
+// Image wraps the corresponding Objective-C method.
 func (x *InputManager) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// Server calls the underlying Server.
+// Server wraps the corresponding Objective-C method.
 func (x *InputManager) Server() *InputServer {
-	_r := x.inner.Server()
-	if _r == nil {
-		return nil
-	}
-	return &InputServer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
+	return InputServerFromID(_r)
 }
 
-// WantsToHandleMouseEvents calls the underlying WantsToHandleMouseEvents.
+// WantsToHandleMouseEvents wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToHandleMouseEvents() bool {
-	return x.inner.WantsToHandleMouseEvents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToHandleMouseEvents"))
+	return _r
 }
 
-// HandleMouseEvent calls the underlying HandleMouseEvent.
-func (x *InputManager) HandleMouseEvent(mouseEvent *raw.NSEvent) bool {
-	return x.inner.HandleMouseEvent(mouseEvent)
+// HandleMouseEvent wraps the corresponding Objective-C method.
+func (x *InputManager) HandleMouseEvent(mouseEvent *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleMouseEvent:"), objref.IDOf(mouseEvent))
+	return _r
 }
 
-// WantsToDelayTextChangeNotifications calls the underlying WantsToDelayTextChangeNotifications.
+// WantsToDelayTextChangeNotifications wraps the corresponding Objective-C method.
 func (x *InputManager) WantsToDelayTextChangeNotifications() bool {
-	return x.inner.WantsToDelayTextChangeNotifications()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToDelayTextChangeNotifications"))
+	return _r
 }
 
 // InputManagerable is the interface implemented by [InputManager], for mocking and DI.
 type InputManagerable interface {
-	Unwrap() *raw.NSInputManager
+	obj.Object
 	LocalizedInputManagerName() string
-	MarkedTextAbandoned(cli objc.ID)
-	MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli objc.ID)
+	MarkedTextAbandoned(cli obj.Object)
+	MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object)
 	WantsToInterpretAllKeystrokes() bool
 	Language() string
 	Image() *Image
 	Server() *InputServer
 	WantsToHandleMouseEvents() bool
-	HandleMouseEvent(mouseEvent *raw.NSEvent) bool
+	HandleMouseEvent(mouseEvent *Event) bool
 	WantsToDelayTextChangeNotifications() bool
 }
 

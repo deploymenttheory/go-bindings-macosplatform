@@ -5,10 +5,11 @@
 package replaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BroadcastHandlerProvider is implemented by BroadcastHandler and any idiomatic type wrapping a RPBroadcastHandler subclass.
+// BroadcastHandlerProvider is accepted wherever a RPBroadcastHandler (or one of its subclasses) is expected.
 type BroadcastHandlerProvider interface {
-	asBroadcastHandler() *raw.RPBroadcastHandler
+	objref.Object
+	isBroadcastHandler()
 }

@@ -5,77 +5,96 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// Text recognized in an image through a text recognition request.
+// RecognizedText is an idiomatic wrapper over the Objective-C class VNRecognizedText.
 //
-// RecognizedText wraps [raw.VNRecognizedText] with a fluent Go API.
+// Text recognized in an image through a text recognition request.
 type RecognizedText struct {
-	inner *raw.VNRecognizedText
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VNRecognizedText].
-func (x *RecognizedText) Unwrap() *raw.VNRecognizedText { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecognizedText) ID() objc.ID { return x.inner.Ptr() }
-
-// RecognizedTextFromID adopts an existing object pointer as a RecognizedText (nil for 0).
+// RecognizedTextFromID adopts an existing Objective-C object as a RecognizedText
+// (nil for 0), retaining it and registering a release finalizer.
 func RecognizedTextFromID(id objc.ID) *RecognizedText {
 	if id == 0 {
 		return nil
 	}
-	return &RecognizedText{inner: raw.VNRecognizedTextFromID(id)}
+	x := &RecognizedText{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewRecognizedText creates a new [RecognizedText].
-func NewRecognizedText() *RecognizedText {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNRecognizedText")), objc.RegisterName("new"))
-	return &RecognizedText{inner: raw.VNRecognizedTextFromID(_id)}
-}
-
-// Calculates the bounding box around the characters in the range of a string.
-//
-// BoundingBoxForRangeError calls the underlying BoundingBoxForRangeError.
-func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error) {
-	_r, _err := x.inner.BoundingBoxForRangeError(range_)
-	if _err != nil {
-		return nil, _err
+// recognizedTextAdopt wraps an Objective-C object that this code just created as a
+// RecognizedText (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recognizedTextAdopt(id objc.ID) *RecognizedText {
+	if id == 0 {
+		return nil
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RectangleObservation{inner: _r}, nil
+	x := &RecognizedText{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @brief        Field that contains recognized text. @discussion   This is the top candidate of the recognized text.
-//
-// String calls the underlying String.
+// Description returns the object's -description text.
+func (x *RecognizedText) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecognizedText) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecognizedText) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
 func (x *RecognizedText) String() string {
-	_r := x.inner.String()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief The level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
-//
-// Confidence calls the underlying Confidence.
+// NewRecognizedText creates a new RecognizedText.
+func NewRecognizedText() *RecognizedText {
+	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedText")), objc.RegisterName("new"))
+	return recognizedTextAdopt(_id)
+}
+
+// BoundingBoxForRangeError calculates the bounding box around the characters in the range of a string.
+func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundingBoxForRange:error:"), range_, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return RectangleObservationFromID(_r), nil
+}
+
+// Confidence the level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
 func (x *RecognizedText) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
 
 // RecognizedTextable is the interface implemented by [RecognizedText], for mocking and DI.
 type RecognizedTextable interface {
-	Unwrap() *raw.VNRecognizedText
-	BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error)
-	String() string
+	obj.Object
+	BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error)
 	Confidence() float32
 }
 

@@ -5,76 +5,58 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Coordinate transform information for use in GLKit rendering effects.
+// EffectPropertyTransform is an idiomatic wrapper over the Objective-C class GLKEffectPropertyTransform.
 //
-// EffectPropertyTransform wraps [raw.GLKEffectPropertyTransform] with a fluent Go API.
+// It embeds [EffectProperty], promoting that type's methods.
+//
+// Coordinate transform information for use in GLKit rendering effects.
 type EffectPropertyTransform struct {
-	inner *raw.GLKEffectPropertyTransform
+	EffectProperty
 }
 
-// Unwrap returns the underlying [raw.GLKEffectPropertyTransform].
-func (x *EffectPropertyTransform) Unwrap() *raw.GLKEffectPropertyTransform { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectPropertyTransform) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectPropertyTransformFromID adopts an existing object pointer as a EffectPropertyTransform (nil for 0).
+// EffectPropertyTransformFromID adopts an existing Objective-C object as a EffectPropertyTransform
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectPropertyTransformFromID(id objc.ID) *EffectPropertyTransform {
 	if id == 0 {
 		return nil
 	}
-	return &EffectPropertyTransform{inner: raw.GLKEffectPropertyTransformFromID(id)}
+	x := &EffectPropertyTransform{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewEffectPropertyTransform creates a new [EffectPropertyTransform].
+// effectPropertyTransformAdopt wraps an Objective-C object that this code just created as a
+// EffectPropertyTransform (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectPropertyTransformAdopt(id objc.ID) *EffectPropertyTransform {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectPropertyTransform{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewEffectPropertyTransform creates a new EffectPropertyTransform.
 func NewEffectPropertyTransform() *EffectPropertyTransform {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKEffectPropertyTransform")), objc.RegisterName("new"))
-	return &EffectPropertyTransform{inner: raw.GLKEffectPropertyTransformFromID(_id)}
-}
-
-// ModelviewMatrix calls the underlying ModelviewMatrix.
-func (x *EffectPropertyTransform) ModelviewMatrix() unsafe.Pointer {
-	return x.inner.ModelviewMatrix()
-}
-
-// SetModelviewMatrix calls the underlying SetModelviewMatrix.
-func (x *EffectPropertyTransform) SetModelviewMatrix(modelviewMatrix unsafe.Pointer) {
-	x.inner.SetModelviewMatrix(modelviewMatrix)
-}
-
-// ProjectionMatrix calls the underlying ProjectionMatrix.
-func (x *EffectPropertyTransform) ProjectionMatrix() unsafe.Pointer {
-	return x.inner.ProjectionMatrix()
-}
-
-// SetProjectionMatrix calls the underlying SetProjectionMatrix.
-func (x *EffectPropertyTransform) SetProjectionMatrix(projectionMatrix unsafe.Pointer) {
-	x.inner.SetProjectionMatrix(projectionMatrix)
-}
-
-// NormalMatrix calls the underlying NormalMatrix.
-func (x *EffectPropertyTransform) NormalMatrix() unsafe.Pointer {
-	return x.inner.NormalMatrix()
-}
-
-func (x *EffectPropertyTransform) asEffectProperty() *raw.GLKEffectProperty {
-	return &x.inner.GLKEffectProperty
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyTransform")), objc.RegisterName("new"))
+	return effectPropertyTransformAdopt(_id)
 }
 
 // EffectPropertyTransformable is the interface implemented by [EffectPropertyTransform], for mocking and DI.
 type EffectPropertyTransformable interface {
-	Unwrap() *raw.GLKEffectPropertyTransform
-	ModelviewMatrix() unsafe.Pointer
-	SetModelviewMatrix(modelviewMatrix unsafe.Pointer)
-	ProjectionMatrix() unsafe.Pointer
-	SetProjectionMatrix(projectionMatrix unsafe.Pointer)
-	NormalMatrix() unsafe.Pointer
+	obj.Object
 }
 
 var _ EffectPropertyTransformable = (*EffectPropertyTransform)(nil)
+
+var _ EffectPropertyProvider = (*EffectPropertyTransform)(nil)

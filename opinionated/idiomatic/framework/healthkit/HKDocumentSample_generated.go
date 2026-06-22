@@ -5,57 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An abstract class that represents a health document in the HealthKit store.
+// DocumentSample is an idiomatic wrapper over the Objective-C class HKDocumentSample.
 //
-// DocumentSample wraps [raw.HKDocumentSample] with a fluent Go API.
+// DocumentSample is an abstract base — you do not construct it directly. Construct one of [CDADocumentSample] and pass it where a DocumentSample is accepted.
+//
+// An abstract class that represents a health document in the HealthKit store.
 type DocumentSample struct {
-	inner *raw.HKDocumentSample
+	Sample
 }
 
-// Unwrap returns the underlying [raw.HKDocumentSample].
-func (x *DocumentSample) Unwrap() *raw.HKDocumentSample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DocumentSample) ID() objc.ID { return x.inner.Ptr() }
-
-// DocumentSampleFromID adopts an existing object pointer as a DocumentSample (nil for 0).
+// DocumentSampleFromID adopts an existing Objective-C object as a DocumentSample
+// (nil for 0), retaining it and registering a release finalizer.
 func DocumentSampleFromID(id objc.ID) *DocumentSample {
 	if id == 0 {
 		return nil
 	}
-	return &DocumentSample{inner: raw.HKDocumentSampleFromID(id)}
+	x := &DocumentSample{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDocumentSample creates a new [DocumentSample].
-func NewDocumentSample() *DocumentSample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDocumentSample")), objc.RegisterName("new"))
-	return &DocumentSample{inner: raw.HKDocumentSampleFromID(_id)}
-}
-
-// DocumentType calls the underlying DocumentType.
-func (x *DocumentSample) DocumentType() *DocumentType {
-	_r := x.inner.DocumentType()
-	if _r == nil {
+// documentSampleAdopt wraps an Objective-C object that this code just created as a
+// DocumentSample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func documentSampleAdopt(id objc.ID) *DocumentSample {
+	if id == 0 {
 		return nil
 	}
-	return &DocumentType{inner: _r}
+	x := &DocumentSample{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *DocumentSample) asDocumentSample() *raw.HKDocumentSample { return x.inner }
-
-func (x *DocumentSample) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *DocumentSample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+// DocumentType wraps the corresponding Objective-C method.
+func (x *DocumentSample) DocumentType() *DocumentType {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentType"))
+	return DocumentTypeFromID(_r)
+}
 
 // DocumentSampleable is the interface implemented by [DocumentSample], for mocking and DI.
 type DocumentSampleable interface {
-	Unwrap() *raw.HKDocumentSample
+	obj.Object
 	DocumentType() *DocumentType
 }
 
 var _ DocumentSampleable = (*DocumentSample)(nil)
+
+// isDocumentSample marks DocumentSample — and, by embedding promotion, its
+// subclasses — as a member of the DocumentSample hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *DocumentSample) isDocumentSample() {}
+
+var _ DocumentSampleProvider = (*DocumentSample)(nil)
+
+var _ SampleProvider = (*DocumentSample)(nil)
+
+var _ ObjectProvider = (*DocumentSample)(nil)

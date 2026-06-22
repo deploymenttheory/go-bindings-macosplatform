@@ -5,41 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents an HTTP Live Streaming asset variant.
+// AssetVariantQualifier is an idiomatic wrapper over the Objective-C class AVAssetVariantQualifier.
 //
-// AssetVariantQualifier wraps [raw.AVAssetVariantQualifier] with a fluent Go API.
+// An object that represents an HTTP Live Streaming asset variant.
 type AssetVariantQualifier struct {
-	inner *raw.AVAssetVariantQualifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariantQualifier].
-func (x *AssetVariantQualifier) Unwrap() *raw.AVAssetVariantQualifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariantQualifier) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantQualifierFromID adopts an existing object pointer as a AssetVariantQualifier (nil for 0).
+// AssetVariantQualifierFromID adopts an existing Objective-C object as a AssetVariantQualifier
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantQualifierFromID(id objc.ID) *AssetVariantQualifier {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariantQualifier{inner: raw.AVAssetVariantQualifierFromID(id)}
+	x := &AssetVariantQualifier{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariantQualifier creates a new [AssetVariantQualifier].
+// assetVariantQualifierAdopt wraps an Objective-C object that this code just created as a
+// AssetVariantQualifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantQualifierAdopt(id objc.ID) *AssetVariantQualifier {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetVariantQualifier{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetVariantQualifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariantQualifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariantQualifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetVariantQualifier) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetVariantQualifier creates a new AssetVariantQualifier.
 func NewAssetVariantQualifier() *AssetVariantQualifier {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantQualifier")), objc.RegisterName("new"))
-	return &AssetVariantQualifier{inner: raw.AVAssetVariantQualifierFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("new"))
+	return assetVariantQualifierAdopt(_id)
 }
 
 // AssetVariantQualifierable is the interface implemented by [AssetVariantQualifier], for mocking and DI.
 type AssetVariantQualifierable interface {
-	Unwrap() *raw.AVAssetVariantQualifier
+	obj.Object
 }
 
 var _ AssetVariantQualifierable = (*AssetVariantQualifier)(nil)

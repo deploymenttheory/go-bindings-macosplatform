@@ -6,71 +6,76 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterGroupKeyManagement wraps [raw.MTRClusterGroupKeyManagement] with a fluent Go API.
+// MTRClusterGroupKeyManagement is an idiomatic wrapper over the Objective-C class MTRClusterGroupKeyManagement.
+//
+// It embeds [MTRGenericCluster], promoting that type's methods.
 type MTRClusterGroupKeyManagement struct {
-	inner *raw.MTRClusterGroupKeyManagement
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterGroupKeyManagement].
-func (x *MTRClusterGroupKeyManagement) Unwrap() *raw.MTRClusterGroupKeyManagement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterGroupKeyManagement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterGroupKeyManagementFromID adopts an existing object pointer as a MTRClusterGroupKeyManagement (nil for 0).
+// MTRClusterGroupKeyManagementFromID adopts an existing Objective-C object as a MTRClusterGroupKeyManagement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterGroupKeyManagementFromID(id objc.ID) *MTRClusterGroupKeyManagement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterGroupKeyManagement{inner: raw.MTRClusterGroupKeyManagementFromID(id)}
+	x := &MTRClusterGroupKeyManagement{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+// mTRClusterGroupKeyManagementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterGroupKeyManagement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterGroupKeyManagementAdopt(id objc.ID) *MTRClusterGroupKeyManagement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterGroupKeyManagement{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterGroupKeyManagement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterGroupKeyManagementAdopt(_id)
+}
+
+// NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue creates a new MTRClusterGroupKeyManagement.
+func NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterGroupKeyManagement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterGroupKeyManagementAdopt(_id)
+}
+
+// KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
-// NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue creates a new [MTRClusterGroupKeyManagement].
-func NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGroupKeyManagement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterGroupKeyManagement{inner: raw.MTRClusterGroupKeyManagementFromID(_id)}
-}
-
-// NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue creates a new [MTRClusterGroupKeyManagement].
-func NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGroupKeyManagement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterGroupKeyManagement{inner: raw.MTRClusterGroupKeyManagementFromID(_id)}
-}
-
-// KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGroupKeyManagement) KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
-}
-
 // KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
+func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupKeyManagementClusterKeySetReadResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -80,28 +85,22 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpecte
 	}
 }
 
-// KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGroupKeyManagement) KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
-}
-
+// KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error) {
+func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySetReadAllIndicesWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -111,23 +110,22 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedVal
 	}
 }
 
+// KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+//
 // KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error) {
+func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySetReadAllIndicesWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -137,83 +135,86 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValuesExp
 	}
 }
 
-// ReadAttributeGroupKeyMapWithParams calls the underlying ReadAttributeGroupKeyMapWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGroupKeyMapWithParams(params)
+// ReadAttributeGroupKeyMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGroupKeyMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeGroupKeyMapWithValueExpectedValueInterval calls the underlying WriteAttributeGroupKeyMapWithValueExpectedValueInterval.
-func (x *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// WriteAttributeGroupKeyMapWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams calls the underlying WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams.
-func (x *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGroupTableWithParams calls the underlying ReadAttributeGroupTableWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGroupTableWithParams(params)
+// ReadAttributeGroupTableWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGroupTableWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxGroupsPerFabricWithParams calls the underlying ReadAttributeMaxGroupsPerFabricWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxGroupsPerFabricWithParams(params)
+// ReadAttributeMaxGroupsPerFabricWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxGroupsPerFabricWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxGroupKeysPerFabricWithParams calls the underlying ReadAttributeMaxGroupKeysPerFabricWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxGroupKeysPerFabricWithParams(params)
+// ReadAttributeMaxGroupKeysPerFabricWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxGroupKeysPerFabricWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGroupKeyManagement) KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
+// KeySetReadWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // KeySetReadWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
+func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupKeyManagementClusterKeySetReadResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupKeyManagementClusterKeySetReadResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySetReadWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -223,28 +224,22 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpecte
 	}
 }
 
-// KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGroupKeyManagement) KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
+// KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+//
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error) {
+func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySetReadAllIndicesWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -252,39 +247,31 @@ func (x *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedVal
 		var _zero *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		return _zero, ctx.Err()
 	}
-}
-
-func (x *MTRClusterGroupKeyManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterGroupKeyManagement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
 }
 
 // MTRClusterGroupKeyManagementable is the interface implemented by [MTRClusterGroupKeyManagement], for mocking and DI.
 type MTRClusterGroupKeyManagementable interface {
-	Unwrap() *raw.MTRClusterGroupKeyManagement
-	KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error)
-	KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
-	KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
-	ReadAttributeGroupKeyMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGroupTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxGroupsPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxGroupKeysPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	KeySetWriteWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupKeyManagementClusterKeySetWriteParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	KeySetReadWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error)
-	KeySetRemoveWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupKeyManagementClusterKeySetRemoveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
+	obj.Object
+	KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error)
+	KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
+	KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
+	ReadAttributeGroupKeyMapWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGroupTableWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxGroupsPerFabricWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxGroupKeysPerFabricWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	KeySetReadWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error)
+	KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, error)
 }
 
 var _ MTRClusterGroupKeyManagementable = (*MTRClusterGroupKeyManagement)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterGroupKeyManagement)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterGroupKeyManagement)(nil)

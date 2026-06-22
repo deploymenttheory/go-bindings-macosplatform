@@ -6,66 +6,83 @@ package webkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// WKWebExtensionMessagePort wraps [raw.WKWebExtensionMessagePort] with a fluent Go API.
+// WKWebExtensionMessagePort is an idiomatic wrapper over the Objective-C class WKWebExtensionMessagePort.
 type WKWebExtensionMessagePort struct {
-	inner *raw.WKWebExtensionMessagePort
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKWebExtensionMessagePort].
-func (x *WKWebExtensionMessagePort) Unwrap() *raw.WKWebExtensionMessagePort { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKWebExtensionMessagePort) ID() objc.ID { return x.inner.Ptr() }
-
-// WKWebExtensionMessagePortFromID adopts an existing object pointer as a WKWebExtensionMessagePort (nil for 0).
+// WKWebExtensionMessagePortFromID adopts an existing Objective-C object as a WKWebExtensionMessagePort
+// (nil for 0), retaining it and registering a release finalizer.
 func WKWebExtensionMessagePortFromID(id objc.ID) *WKWebExtensionMessagePort {
 	if id == 0 {
 		return nil
 	}
-	return &WKWebExtensionMessagePort{inner: raw.WKWebExtensionMessagePortFromID(id)}
+	x := &WKWebExtensionMessagePort{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewWKWebExtensionMessagePort creates a new [WKWebExtensionMessagePort].
+// wKWebExtensionMessagePortAdopt wraps an Objective-C object that this code just created as a
+// WKWebExtensionMessagePort (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKWebExtensionMessagePortAdopt(id objc.ID) *WKWebExtensionMessagePort {
+	if id == 0 {
+		return nil
+	}
+	x := &WKWebExtensionMessagePort{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKWebExtensionMessagePort) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKWebExtensionMessagePort) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKWebExtensionMessagePort) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WKWebExtensionMessagePort) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWKWebExtensionMessagePort creates a new WKWebExtensionMessagePort.
 func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionMessagePort")), objc.RegisterName("new"))
-	return &WKWebExtensionMessagePort{inner: raw.WKWebExtensionMessagePortFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMessagePort")), objc.RegisterName("new"))
+	return wKWebExtensionMessagePortAdopt(_id)
 }
 
-// @abstract The block to be executed when a message is received from the web extension. @discussion An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
-//
-// WithMessageHandler sets the messageHandler property and returns the receiver for chaining.
-func (x *WKWebExtensionMessagePort) WithMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) *WKWebExtensionMessagePort {
-	x.inner.SetMessageHandler(messageHandler)
-	return x
-}
-
-// @abstract The block to be executed when the port disconnects. @discussion An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
-//
-// WithDisconnectHandler sets the disconnectHandler property and returns the receiver for chaining.
-func (x *WKWebExtensionMessagePort) WithDisconnectHandler(disconnectHandler func(unsafe.Pointer)) *WKWebExtensionMessagePort {
-	x.inner.SetDisconnectHandler(disconnectHandler)
-	return x
-}
-
-// @abstract Sends a message to the connected web extension. @param message The JSON-serializable message to be sent. @param completionHandler An optional block to be invoked after the message is sent, taking an optional error. @note The message must be JSON-serializable according to “NSJSONSerialization“.
+// SendMessage sends a message to the connected web extension.
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
-func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message objc.ID) error {
+func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.SendMessageCompletionHandler(message, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMessage:completionHandler:"), objref.IDOf(message), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -74,60 +91,31 @@ func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj
 	}
 }
 
-// @abstract Disconnects the port, terminating all further messages.
-//
-// Disconnect calls the underlying Disconnect.
+// Disconnect disconnects the port, terminating all further messages.
 func (x *WKWebExtensionMessagePort) Disconnect() {
-	x.inner.Disconnect()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
 }
 
-// @abstract Disconnects the port, terminating all further messages with an optional error. @param error An optional error indicating the reason for disconnection.
-//
-// DisconnectWithError calls the underlying DisconnectWithError.
-func (x *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
-	x.inner.DisconnectWithError(error_)
-}
-
-// @abstract The unique identifier for the app to which this port should be connected. @discussion This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
-//
-// ApplicationIdentifier calls the underlying ApplicationIdentifier.
+// ApplicationIdentifier the unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
 func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
-	_r := x.inner.ApplicationIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The block to be executed when a message is received from the web extension. @discussion An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
+// SetDisconnectHandler wraps the corresponding Objective-C method.
 //
-// MessageHandler calls the underlying MessageHandler.
-func (x *WKWebExtensionMessagePort) MessageHandler() objc.Block {
-	return x.inner.MessageHandler()
-}
-
-// SetMessageHandler calls the underlying SetMessageHandler.
-func (x *WKWebExtensionMessagePort) SetMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.SetMessageHandler(messageHandler)
-}
-
-// @abstract The block to be executed when the port disconnects. @discussion An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
-//
-// DisconnectHandler calls the underlying DisconnectHandler.
-func (x *WKWebExtensionMessagePort) DisconnectHandler() objc.Block {
-	return x.inner.DisconnectHandler()
-}
-
 // SetDisconnectHandler blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDisconnectHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -136,25 +124,18 @@ func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) er
 	}
 }
 
-// @abstract Indicates whether the message port is disconnected.
-//
-// IsDisconnected calls the underlying IsDisconnected.
+// IsDisconnected indicates whether the message port is disconnected.
 func (x *WKWebExtensionMessagePort) IsDisconnected() bool {
-	return x.inner.IsDisconnected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDisconnected"))
+	return _r
 }
 
 // WKWebExtensionMessagePortable is the interface implemented by [WKWebExtensionMessagePort], for mocking and DI.
 type WKWebExtensionMessagePortable interface {
-	Unwrap() *raw.WKWebExtensionMessagePort
-	WithMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) *WKWebExtensionMessagePort
-	WithDisconnectHandler(disconnectHandler func(unsafe.Pointer)) *WKWebExtensionMessagePort
-	SendMessage(ctx context.Context, message objc.ID) error
+	obj.Object
+	SendMessage(ctx context.Context, message obj.Object) error
 	Disconnect()
-	DisconnectWithError(error_ unsafe.Pointer)
 	ApplicationIdentifier() string
-	MessageHandler() objc.Block
-	SetMessageHandler(messageHandler func(objc.ID, unsafe.Pointer))
-	DisconnectHandler() objc.Block
 	SetDisconnectHandler(ctx context.Context) error
 	IsDisconnected() bool
 }

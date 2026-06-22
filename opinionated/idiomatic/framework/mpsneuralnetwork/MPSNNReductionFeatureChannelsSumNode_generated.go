@@ -5,101 +5,93 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNReductionFeatureChannelsSumNode wraps [raw.MPSNNReductionFeatureChannelsSumNode] with a fluent Go API.
+// NNReductionFeatureChannelsSumNode is an idiomatic wrapper over the Objective-C class MPSNNReductionFeatureChannelsSumNode.
+//
+// It embeds [NNUnaryReductionNode], promoting that type's methods.
 type NNReductionFeatureChannelsSumNode struct {
-	inner *raw.MPSNNReductionFeatureChannelsSumNode
+	NNUnaryReductionNode
 }
 
-// Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsSumNode].
-func (x *NNReductionFeatureChannelsSumNode) Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNReductionFeatureChannelsSumNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNReductionFeatureChannelsSumNodeFromID adopts an existing object pointer as a NNReductionFeatureChannelsSumNode (nil for 0).
+// NNReductionFeatureChannelsSumNodeFromID adopts an existing Objective-C object as a NNReductionFeatureChannelsSumNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNReductionFeatureChannelsSumNodeFromID(id objc.ID) *NNReductionFeatureChannelsSumNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNReductionFeatureChannelsSumNode{inner: raw.MPSNNReductionFeatureChannelsSumNodeFromID(id)}
+	x := &NNReductionFeatureChannelsSumNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNNReductionFeatureChannelsSumNode creates a new [NNReductionFeatureChannelsSumNode].
+// nNReductionFeatureChannelsSumNodeAdopt wraps an Objective-C object that this code just created as a
+// NNReductionFeatureChannelsSumNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNReductionFeatureChannelsSumNodeAdopt(id objc.ID) *NNReductionFeatureChannelsSumNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNReductionFeatureChannelsSumNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNNReductionFeatureChannelsSumNode creates a new NNReductionFeatureChannelsSumNode.
 func NewNNReductionFeatureChannelsSumNode() *NNReductionFeatureChannelsSumNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReductionFeatureChannelsSumNode")), objc.RegisterName("new"))
-	return &NNReductionFeatureChannelsSumNode{inner: raw.MPSNNReductionFeatureChannelsSumNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNReductionFeatureChannelsSumNode")), objc.RegisterName("new"))
+	return nNReductionFeatureChannelsSumNodeAdopt(_id)
 }
 
-// @abstract   A scale factor to apply to each feature channel sum.
-//
-// WithWeight sets the weight property and returns the receiver for chaining.
+// WithWeight a scale factor to apply to each feature channel sum.
 func (x *NNReductionFeatureChannelsSumNode) WithWeight(weight float32) *NNReductionFeatureChannelsSumNode {
-	x.inner.SetWeight(weight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
 	return x
 }
 
-// @abstract   The clip rectangle to apply to the source image.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+// WithClipRectSource the clip rectangle to apply to the source image.
 func (x *NNReductionFeatureChannelsSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode {
-	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNReductionFeatureChannelsSumNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsSumNode {
-	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string to help identify this object.
 func (x *NNReductionFeatureChannelsSumNode) WithLabel(label string) *NNReductionFeatureChannelsSumNode {
-	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   A scale factor to apply to each feature channel sum.
-//
-// Weight calls the underlying Weight.
+// Weight a scale factor to apply to each feature channel sum.
 func (x *NNReductionFeatureChannelsSumNode) Weight() float32 {
-	return x.inner.Weight()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
 
-// SetWeight calls the underlying SetWeight.
+// SetWeight wraps the corresponding Objective-C method.
 func (x *NNReductionFeatureChannelsSumNode) SetWeight(weight float32) {
-	x.inner.SetWeight(weight)
-}
-
-func (x *NNReductionFeatureChannelsSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode {
-	return &x.inner.MPSNNUnaryReductionNode
-}
-
-func (x *NNReductionFeatureChannelsSumNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
 }
 
 // NNReductionFeatureChannelsSumNodeable is the interface implemented by [NNReductionFeatureChannelsSumNode], for mocking and DI.
 type NNReductionFeatureChannelsSumNodeable interface {
-	Unwrap() *raw.MPSNNReductionFeatureChannelsSumNode
+	obj.Object
 	WithWeight(weight float32) *NNReductionFeatureChannelsSumNode
 	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsSumNode
 	WithLabel(label string) *NNReductionFeatureChannelsSumNode
 	Weight() float32
 	SetWeight(weight float32)
 }
 
 var _ NNReductionFeatureChannelsSumNodeable = (*NNReductionFeatureChannelsSumNode)(nil)
+
+var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsSumNode)(nil)
+
+var _ NNFilterNodeProvider = (*NNReductionFeatureChannelsSumNode)(nil)

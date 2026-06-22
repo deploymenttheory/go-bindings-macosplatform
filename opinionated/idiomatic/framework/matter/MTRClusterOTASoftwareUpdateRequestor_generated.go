@@ -5,80 +5,141 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterOtaSoftwareUpdateRequestor wraps [raw.MTRClusterOtaSoftwareUpdateRequestor] with a fluent Go API.
-type MTRClusterOtaSoftwareUpdateRequestor struct {
-	inner *raw.MTRClusterOtaSoftwareUpdateRequestor
+// MTRClusterOTASoftwareUpdateRequestor is an idiomatic wrapper over the Objective-C class MTRClusterOTASoftwareUpdateRequestor.
+//
+// MTRClusterOTASoftwareUpdateRequestor is an abstract base — you do not construct it directly. Construct one of [MTRClusterOtaSoftwareUpdateRequestor] and pass it where a MTRClusterOTASoftwareUpdateRequestor is accepted.
+type MTRClusterOTASoftwareUpdateRequestor struct {
+	MTRGenericCluster
 }
 
-// Unwrap returns the underlying [raw.MTRClusterOtaSoftwareUpdateRequestor].
-func (x *MTRClusterOtaSoftwareUpdateRequestor) Unwrap() *raw.MTRClusterOtaSoftwareUpdateRequestor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterOtaSoftwareUpdateRequestorFromID adopts an existing object pointer as a MTRClusterOtaSoftwareUpdateRequestor (nil for 0).
-func MTRClusterOtaSoftwareUpdateRequestorFromID(id objc.ID) *MTRClusterOtaSoftwareUpdateRequestor {
+// MTRClusterOTASoftwareUpdateRequestorFromID adopts an existing Objective-C object as a MTRClusterOTASoftwareUpdateRequestor
+// (nil for 0), retaining it and registering a release finalizer.
+func MTRClusterOTASoftwareUpdateRequestorFromID(id objc.ID) *MTRClusterOTASoftwareUpdateRequestor {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterOtaSoftwareUpdateRequestor{inner: raw.MTRClusterOtaSoftwareUpdateRequestorFromID(id)}
+	x := &MTRClusterOTASoftwareUpdateRequestor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue creates a new [MTRClusterOtaSoftwareUpdateRequestor].
-func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOtaSoftwareUpdateRequestor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOtaSoftwareUpdateRequestor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterOtaSoftwareUpdateRequestor{inner: raw.MTRClusterOtaSoftwareUpdateRequestorFromID(_id)}
+// mTRClusterOTASoftwareUpdateRequestorAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterOTASoftwareUpdateRequestor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterOTASoftwareUpdateRequestorAdopt(id objc.ID) *MTRClusterOTASoftwareUpdateRequestor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterOTASoftwareUpdateRequestor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+// NewMTRClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+func NewMTRClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOTASoftwareUpdateRequestor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOTASoftwareUpdateRequestor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterOTASoftwareUpdateRequestorAdopt(_id)
 }
 
-// ReadAttributeDefaultOtaProvidersWithParams calls the underlying ReadAttributeDefaultOtaProvidersWithParams.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDefaultOtaProvidersWithParams(params)
+// ReadAttributeDefaultOTAProvidersWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval calls the underlying WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+// WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams.
-func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+// WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRClusterOTASoftwareUpdateRequestor() *raw.MTRClusterOTASoftwareUpdateRequestor {
-	return &x.inner.MTRClusterOTASoftwareUpdateRequestor
+// ReadAttributeUpdatePossibleWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdatePossibleWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterOTASoftwareUpdateRequestor.MTRGenericCluster
+// ReadAttributeUpdateStateWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdateStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterOTASoftwareUpdateRequestor.MTRGenericCluster.MTRCluster
+// ReadAttributeUpdateStateProgressWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdateStateProgressWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// MTRClusterOtaSoftwareUpdateRequestorable is the interface implemented by [MTRClusterOtaSoftwareUpdateRequestor], for mocking and DI.
-type MTRClusterOtaSoftwareUpdateRequestorable interface {
-	Unwrap() *raw.MTRClusterOtaSoftwareUpdateRequestor
-	AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ReadAttributeDefaultOtaProvidersWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-var _ MTRClusterOtaSoftwareUpdateRequestorable = (*MTRClusterOtaSoftwareUpdateRequestor)(nil)
+// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+func (x *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
+}
+
+// MTRClusterOTASoftwareUpdateRequestorable is the interface implemented by [MTRClusterOTASoftwareUpdateRequestor], for mocking and DI.
+type MTRClusterOTASoftwareUpdateRequestorable interface {
+	obj.Object
+	ReadAttributeDefaultOTAProvidersWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeUpdatePossibleWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeUpdateStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeUpdateStateProgressWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+}
+
+var _ MTRClusterOTASoftwareUpdateRequestorable = (*MTRClusterOTASoftwareUpdateRequestor)(nil)
+
+// isMTRClusterOTASoftwareUpdateRequestor marks MTRClusterOTASoftwareUpdateRequestor — and, by embedding promotion, its
+// subclasses — as a member of the MTRClusterOTASoftwareUpdateRequestor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTRClusterOTASoftwareUpdateRequestor) isMTRClusterOTASoftwareUpdateRequestor() {}
+
+var _ MTRClusterOTASoftwareUpdateRequestorProvider = (*MTRClusterOTASoftwareUpdateRequestor)(nil)
+
+var _ MTRGenericClusterProvider = (*MTRClusterOTASoftwareUpdateRequestor)(nil)
+
+var _ MTRClusterProvider = (*MTRClusterOTASoftwareUpdateRequestor)(nil)

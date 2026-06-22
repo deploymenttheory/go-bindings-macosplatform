@@ -5,62 +5,82 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
+// ProtocolChecker is an idiomatic wrapper over the Objective-C class NSProtocolChecker.
 //
-// ProtocolChecker wraps [raw.NSProtocolChecker] with a fluent Go API.
+// An object that restricts the messages that can be sent to another object (referred to as the checker’s delegate).
 type ProtocolChecker struct {
-	inner *raw.NSProtocolChecker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSProtocolChecker].
-func (x *ProtocolChecker) Unwrap() *raw.NSProtocolChecker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProtocolChecker) ID() objc.ID { return x.inner.Ptr() }
-
-// ProtocolCheckerFromID adopts an existing object pointer as a ProtocolChecker (nil for 0).
+// ProtocolCheckerFromID adopts an existing Objective-C object as a ProtocolChecker
+// (nil for 0), retaining it and registering a release finalizer.
 func ProtocolCheckerFromID(id objc.ID) *ProtocolChecker {
 	if id == 0 {
 		return nil
 	}
-	return &ProtocolChecker{inner: raw.NSProtocolCheckerFromID(id)}
+	x := &ProtocolChecker{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a newly allocated NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
-//
-// NewProtocolCheckerWithTargetProtocol creates a new [ProtocolChecker].
-func NewProtocolCheckerWithTargetProtocol(anObject *raw.NSObject, aProtocol unsafe.Pointer) *ProtocolChecker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProtocolChecker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:protocol:"), anObject.Ptr(), aProtocol)
-	return &ProtocolChecker{inner: raw.NSProtocolCheckerFromID(_id)}
-}
-
-// Protocol calls the underlying Protocol.
-func (x *ProtocolChecker) Protocol() unsafe.Pointer {
-	return x.inner.Protocol()
-}
-
-// Target calls the underlying Target.
-func (x *ProtocolChecker) Target() *Object {
-	_r := x.inner.Target()
-	if _r == nil {
+// protocolCheckerAdopt wraps an Objective-C object that this code just created as a
+// ProtocolChecker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func protocolCheckerAdopt(id objc.ID) *ProtocolChecker {
+	if id == 0 {
 		return nil
 	}
-	return &Object{inner: _r}
+	x := &ProtocolChecker{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *ProtocolChecker) asProxy() *raw.NSProxy { return &x.inner.NSProxy }
+// Description returns the object's -description text.
+func (x *ProtocolChecker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProtocolChecker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProtocolChecker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ProtocolChecker) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewProtocolChecker creates a new ProtocolChecker.
+func NewProtocolChecker() *ProtocolChecker {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("new"))
+	return protocolCheckerAdopt(_id)
+}
+
+// Target wraps the corresponding Objective-C method.
+func (x *ProtocolChecker) Target() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return ObjectFromID(_r)
+}
 
 // ProtocolCheckerable is the interface implemented by [ProtocolChecker], for mocking and DI.
 type ProtocolCheckerable interface {
-	Unwrap() *raw.NSProtocolChecker
-	Protocol() unsafe.Pointer
+	obj.Object
 	Target() *Object
 }
 

@@ -5,79 +5,103 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The device’s orientation relative to a known frame of reference at a point in time.
+// Attitude is an idiomatic wrapper over the Objective-C class CMAttitude.
 //
-// Attitude wraps [raw.CMAttitude] with a fluent Go API.
+// The device’s orientation relative to a known frame of reference at a point in time.
 type Attitude struct {
-	inner *raw.CMAttitude
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMAttitude].
-func (x *Attitude) Unwrap() *raw.CMAttitude { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Attitude) ID() objc.ID { return x.inner.Ptr() }
-
-// AttitudeFromID adopts an existing object pointer as a Attitude (nil for 0).
+// AttitudeFromID adopts an existing Objective-C object as a Attitude
+// (nil for 0), retaining it and registering a release finalizer.
 func AttitudeFromID(id objc.ID) *Attitude {
 	if id == 0 {
 		return nil
 	}
-	return &Attitude{inner: raw.CMAttitudeFromID(id)}
+	x := &Attitude{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAttitude creates a new [Attitude].
+// attitudeAdopt wraps an Objective-C object that this code just created as a
+// Attitude (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attitudeAdopt(id objc.ID) *Attitude {
+	if id == 0 {
+		return nil
+	}
+	x := &Attitude{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Attitude) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Attitude) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Attitude) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Attitude) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAttitude creates a new Attitude.
 func NewAttitude() *Attitude {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMAttitude")), objc.RegisterName("new"))
-	return &Attitude{inner: raw.CMAttitudeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMAttitude")), objc.RegisterName("new"))
+	return attitudeAdopt(_id)
 }
 
-// Yields the change in attitude given a specific attitude.
-//
-// MultiplyByInverseOfAttitude calls the underlying MultiplyByInverseOfAttitude.
-func (x *Attitude) MultiplyByInverseOfAttitude(attitude *raw.CMAttitude) {
-	x.inner.MultiplyByInverseOfAttitude(attitude)
+// MultiplyByInverseOfAttitude yields the change in attitude given a specific attitude.
+func (x *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
 }
 
-// Roll calls the underlying Roll.
+// Roll wraps the corresponding Objective-C method.
 func (x *Attitude) Roll() float64 {
-	return x.inner.Roll()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("roll"))
+	return _r
 }
 
-// Pitch calls the underlying Pitch.
+// Pitch wraps the corresponding Objective-C method.
 func (x *Attitude) Pitch() float64 {
-	return x.inner.Pitch()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+	return _r
 }
 
-// Yaw calls the underlying Yaw.
+// Yaw wraps the corresponding Objective-C method.
 func (x *Attitude) Yaw() float64 {
-	return x.inner.Yaw()
-}
-
-// RotationMatrix calls the underlying RotationMatrix.
-func (x *Attitude) RotationMatrix() raw.CMRotationMatrix {
-	return x.inner.RotationMatrix()
-}
-
-// Quaternion calls the underlying Quaternion.
-func (x *Attitude) Quaternion() raw.CMQuaternion {
-	return x.inner.Quaternion()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("yaw"))
+	return _r
 }
 
 // Attitudeable is the interface implemented by [Attitude], for mocking and DI.
 type Attitudeable interface {
-	Unwrap() *raw.CMAttitude
-	MultiplyByInverseOfAttitude(attitude *raw.CMAttitude)
+	obj.Object
+	MultiplyByInverseOfAttitude(attitude *Attitude)
 	Roll() float64
 	Pitch() float64
 	Yaw() float64
-	RotationMatrix() raw.CMRotationMatrix
-	Quaternion() raw.CMQuaternion
 }
 
 var _ Attitudeable = (*Attitude)(nil)

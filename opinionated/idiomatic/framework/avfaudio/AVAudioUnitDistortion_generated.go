@@ -5,112 +5,105 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that implements a multistage distortion effect.
+// AudioUnitDistortion is an idiomatic wrapper over the Objective-C class AVAudioUnitDistortion.
 //
-// AudioUnitDistortion wraps [raw.AVAudioUnitDistortion] with a fluent Go API.
+// It embeds [AudioUnitEffect], promoting that type's methods.
+//
+// An object that implements a multistage distortion effect.
 type AudioUnitDistortion struct {
-	inner *raw.AVAudioUnitDistortion
+	AudioUnitEffect
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitDistortion].
-func (x *AudioUnitDistortion) Unwrap() *raw.AVAudioUnitDistortion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitDistortion) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitDistortionFromID adopts an existing object pointer as a AudioUnitDistortion (nil for 0).
+// AudioUnitDistortionFromID adopts an existing Objective-C object as a AudioUnitDistortion
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitDistortionFromID(id objc.ID) *AudioUnitDistortion {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitDistortion{inner: raw.AVAudioUnitDistortionFromID(id)}
+	x := &AudioUnitDistortion{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnitDistortion creates a new [AudioUnitDistortion].
+// audioUnitDistortionAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitDistortion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitDistortionAdopt(id objc.ID) *AudioUnitDistortion {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitDistortion{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewAudioUnitDistortion creates a new AudioUnitDistortion.
 func NewAudioUnitDistortion() *AudioUnitDistortion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitDistortion")), objc.RegisterName("new"))
-	return &AudioUnitDistortion{inner: raw.AVAudioUnitDistortionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitDistortion")), objc.RegisterName("new"))
+	return audioUnitDistortionAdopt(_id)
 }
 
-// The gain that the audio unit applies to the signal before distortion, in decibels.
-//
-// WithPreGain sets the preGain property and returns the receiver for chaining.
+// WithPreGain the gain that the audio unit applies to the signal before distortion, in decibels.
 func (x *AudioUnitDistortion) WithPreGain(preGain float32) *AudioUnitDistortion {
-	x.inner.SetPreGain(preGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
 	return x
 }
 
-// The blend of the distorted and dry signals.
-//
-// WithWetDryMix sets the wetDryMix property and returns the receiver for chaining.
+// WithWetDryMix the blend of the distorted and dry signals.
 func (x *AudioUnitDistortion) WithWetDryMix(wetDryMix float32) *AudioUnitDistortion {
-	x.inner.SetWetDryMix(wetDryMix)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 	return x
 }
 
-// The bypass state of the audio unit.
-//
-// WithBypass sets the bypass property and returns the receiver for chaining.
+// WithBypass the bypass state of the audio unit.
 func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
-	x.inner.AVAudioUnitEffect.SetBypass(bypass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Configures the audio distortion unit by loading a distortion preset.
-//
-// LoadFactoryPreset calls the underlying LoadFactoryPreset.
-func (x *AudioUnitDistortion) LoadFactoryPreset(preset AVAudioUnitDistortionPreset) {
-	x.inner.LoadFactoryPreset(raw.AVAudioUnitDistortionPreset(preset))
+// LoadFactoryPreset configures the audio distortion unit by loading a distortion preset.
+func (x *AudioUnitDistortion) LoadFactoryPreset(preset AudioUnitDistortionPreset) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
-// @property preGain @abstract Gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
-//
-// PreGain calls the underlying PreGain.
+// PreGain gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
 func (x *AudioUnitDistortion) PreGain() float32 {
-	return x.inner.PreGain()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preGain"))
+	return _r
 }
 
-// SetPreGain calls the underlying SetPreGain.
+// SetPreGain wraps the corresponding Objective-C method.
 func (x *AudioUnitDistortion) SetPreGain(preGain float32) {
-	x.inner.SetPreGain(preGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreGain:"), preGain)
 }
 
-// @property wetDryMix @abstract Blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
-//
-// WetDryMix calls the underlying WetDryMix.
+// WetDryMix blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
 func (x *AudioUnitDistortion) WetDryMix() float32 {
-	return x.inner.WetDryMix()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("wetDryMix"))
+	return _r
 }
 
-// SetWetDryMix calls the underlying SetWetDryMix.
+// SetWetDryMix wraps the corresponding Objective-C method.
 func (x *AudioUnitDistortion) SetWetDryMix(wetDryMix float32) {
-	x.inner.SetWetDryMix(wetDryMix)
-}
-
-func (x *AudioUnitDistortion) asAudioUnitEffect() *raw.AVAudioUnitEffect {
-	return &x.inner.AVAudioUnitEffect
-}
-
-func (x *AudioUnitDistortion) asAudioUnit() *raw.AVAudioUnit {
-	return &x.inner.AVAudioUnitEffect.AVAudioUnit
-}
-
-func (x *AudioUnitDistortion) asAudioNode() *raw.AVAudioNode {
-	return &x.inner.AVAudioUnitEffect.AVAudioUnit.AVAudioNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWetDryMix:"), wetDryMix)
 }
 
 // AudioUnitDistortionable is the interface implemented by [AudioUnitDistortion], for mocking and DI.
 type AudioUnitDistortionable interface {
-	Unwrap() *raw.AVAudioUnitDistortion
+	obj.Object
 	WithPreGain(preGain float32) *AudioUnitDistortion
 	WithWetDryMix(wetDryMix float32) *AudioUnitDistortion
 	WithBypass(bypass bool) *AudioUnitDistortion
-	LoadFactoryPreset(preset AVAudioUnitDistortionPreset)
+	LoadFactoryPreset(preset AudioUnitDistortionPreset)
 	PreGain() float32
 	SetPreGain(preGain float32)
 	WetDryMix() float32
@@ -118,3 +111,9 @@ type AudioUnitDistortionable interface {
 }
 
 var _ AudioUnitDistortionable = (*AudioUnitDistortion)(nil)
+
+var _ AudioUnitEffectProvider = (*AudioUnitDistortion)(nil)
+
+var _ AudioUnitProvider = (*AudioUnitDistortion)(nil)
+
+var _ AudioNodeProvider = (*AudioUnitDistortion)(nil)

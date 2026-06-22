@@ -5,441 +5,347 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// 3D SceneKit content drawn as a flattened sprite.
+// SK3DNode is an idiomatic wrapper over the Objective-C class SK3DNode.
 //
-// SK3DNode wraps [raw.SK3DNode] with a fluent Go API.
+// It embeds [Node], promoting that type's methods.
+//
+// 3D SceneKit content drawn as a flattened sprite.
 type SK3DNode struct {
-	inner *raw.SK3DNode
+	Node
 }
 
-// Unwrap returns the underlying [raw.SK3DNode].
-func (x *SK3DNode) Unwrap() *raw.SK3DNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SK3DNode) ID() objc.ID { return x.inner.Ptr() }
-
-// SK3DNodeFromID adopts an existing object pointer as a SK3DNode (nil for 0).
+// SK3DNodeFromID adopts an existing Objective-C object as a SK3DNode
+// (nil for 0), retaining it and registering a release finalizer.
 func SK3DNodeFromID(id objc.ID) *SK3DNode {
 	if id == 0 {
 		return nil
 	}
-	return &SK3DNode{inner: raw.SK3DNodeFromID(id)}
+	x := &SK3DNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new 3D node.
-//
-// NewSK3DNodeWithViewportSize creates a new [SK3DNode].
+// sK3DNodeAdopt wraps an Objective-C object that this code just created as a
+// SK3DNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sK3DNodeAdopt(id objc.ID) *SK3DNode {
+	if id == 0 {
+		return nil
+	}
+	x := &SK3DNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSK3DNodeWithViewportSize initializes a new 3D node.
 func NewSK3DNodeWithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SK3DNode")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewportSize:"), viewportSize)
-	return &SK3DNode{inner: raw.SK3DNodeFromID(_id)}
+	return sK3DNodeAdopt(_id)
 }
 
-// Tells you when to initialize a 3D node that has been unarchived.
-//
-// NewSK3DNodeWithCoder creates a new [SK3DNode].
-func NewSK3DNodeWithCoder(aDecoder *foundation.NSCoder) *SK3DNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SK3DNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &SK3DNode{inner: raw.SK3DNodeFromID(_id)}
+// NewSK3DNodeWithCoder tells you when to initialize a 3D node that has been unarchived.
+func NewSK3DNodeWithCoder(aDecoder obj.Object) *SK3DNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SK3DNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return sK3DNodeAdopt(_id)
 }
 
-// The size of the image rendered by the node.
-//
-// WithViewportSize sets the viewportSize property and returns the receiver for chaining.
+// WithViewportSize the size of the image rendered by the node.
 func (x *SK3DNode) WithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode {
-	x.inner.SetViewportSize(viewportSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewportSize:"), viewportSize)
 	return x
 }
 
-// The SceneKit scene to render.
-//
-// WithScnScene sets the scnScene property and returns the receiver for chaining.
-func (x *SK3DNode) WithScnScene(scnScene *scenekit.SCNScene) *SK3DNode {
-	x.inner.SetScnScene(scnScene)
+// WithScnScene the SceneKit scene to render.
+func (x *SK3DNode) WithScnScene(scnScene obj.Object) *SK3DNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScnScene:"), objref.IDOf(scnScene))
 	return x
 }
 
-// The current scene time.
-//
-// WithSceneTime sets the sceneTime property and returns the receiver for chaining.
+// WithSceneTime the current scene time.
 func (x *SK3DNode) WithSceneTime(sceneTime float64) *SK3DNode {
-	x.inner.SetSceneTime(sceneTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSceneTime:"), sceneTime)
 	return x
 }
 
-// A Boolean value that determines whether the scene is playing.
-//
-// WithPlaying sets the playing property and returns the receiver for chaining.
+// WithPlaying a Boolean value that determines whether the scene is playing.
 func (x *SK3DNode) WithPlaying(playing bool) *SK3DNode {
-	x.inner.SetPlaying(playing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaying:"), playing)
 	return x
 }
 
-// A Boolean value that determines whether Scene Kit restarts the scene time after all animations in the scene have played.
-//
-// WithLoops sets the loops property and returns the receiver for chaining.
+// WithLoops a Boolean value that determines whether Scene Kit restarts the scene time after all animations in the scene have played.
 func (x *SK3DNode) WithLoops(loops bool) *SK3DNode {
-	x.inner.SetLoops(loops)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
 	return x
 }
 
-// The Scene Kit node from which the scene’s contents are viewed when rendered.
-//
-// WithPointOfView sets the pointOfView property and returns the receiver for chaining.
-func (x *SK3DNode) WithPointOfView(pointOfView *scenekit.SCNNode) *SK3DNode {
-	x.inner.SetPointOfView(pointOfView)
+// WithPointOfView the Scene Kit node from which the scene’s contents are viewed when rendered.
+func (x *SK3DNode) WithPointOfView(pointOfView obj.Object) *SK3DNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
 	return x
 }
 
-// A Boolean value that determines whether Scene Kit automatically adds lights to a scene.
-//
-// WithAutoenablesDefaultLighting sets the autoenablesDefaultLighting property and returns the receiver for chaining.
+// WithAutoenablesDefaultLighting a Boolean value that determines whether Scene Kit automatically adds lights to a scene.
 func (x *SK3DNode) WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode {
-	x.inner.SetAutoenablesDefaultLighting(autoenablesDefaultLighting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesDefaultLighting:"), autoenablesDefaultLighting)
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the position of the node in its parent’s coordinate system.
 func (x *SK3DNode) WithPosition(position corefoundation.CGPoint) *SK3DNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the height of the node relative to its parent.
 func (x *SK3DNode) WithZPosition(zPosition float64) *SK3DNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *SK3DNode) WithZRotation(zRotation float64) *SK3DNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *SK3DNode) WithXScale(xScale float64) *SK3DNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *SK3DNode) WithYScale(yScale float64) *SK3DNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *SK3DNode) WithSpeed(speed float64) *SK3DNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *SK3DNode) WithAlpha(alpha float64) *SK3DNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *SK3DNode) WithPaused(paused bool) *SK3DNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *SK3DNode) WithHidden(hidden bool) *SK3DNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *SK3DNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the node’s assignable name.
 func (x *SK3DNode) WithName(name string) *SK3DNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody the physics body associated with the node.
 func (x *SK3DNode) WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *SK3DNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData a dictionary containing arbitrary data.
+func (x *SK3DNode) WithUserData(userData obj.Object) *SK3DNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *SK3DNode) WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *SK3DNode) WithConstraints(items ...*raw.SKConstraint) *SK3DNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints a list of constraints to apply to the node.
+func (x *SK3DNode) WithConstraints(items ...*Constraint) *SK3DNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *SK3DNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *SK3DNode) WithAttributeValues(attributeValues obj.Object) *SK3DNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *SK3DNode) WithAccessibilityElement(accessibilityElement bool) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *SK3DNode) WithAccessibilityRole(accessibilityRole string) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *SK3DNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *SK3DNode) WithAccessibilitySubrole(accessibilitySubrole string) *SK3DNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
 func (x *SK3DNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *SK3DNode) WithAccessibilityParent(accessibilityParent objc.ID) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *SK3DNode) WithAccessibilityParent(accessibilityParent obj.Object) *SK3DNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *SK3DNode) WithAccessibilityHelp(accessibilityHelp string) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *SK3DNode) WithAccessibilityLabel(accessibilityLabel string) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *SK3DNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Searches the Scene Kit scene for objects corresponding to a point in the rendered image.
-//
-// HitTestOptions calls the underlying HitTestOptions.
-func (x *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
-	return x.inner.HitTestOptions(point, options)
+// HitTestOptions searches the Scene Kit scene for objects corresponding to a point in the rendered image.
+func (x *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hitTest:options:"), point, objref.IDOf(options))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Projects a point from the 3D world coordinate system of the SceneKit scene to the 2D viewport coordinate system of the SpriteKit node.
-//
-// ProjectPoint calls the underlying ProjectPoint.
-func (x *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
-	return x.inner.ProjectPoint(point)
-}
-
-// Unprojects a point from the SpriteKit node’s 2D viewport coordinate system to the 3D world coordinate system of the SceneKit scene.
-//
-// UnprojectPoint calls the underlying UnprojectPoint.
-func (x *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
-	return x.inner.UnprojectPoint(point)
-}
-
-// The viewport size that the 3D content will be rendered with
-//
-// ViewportSize calls the underlying ViewportSize.
+// ViewportSize the viewport size that the 3D content will be rendered with
 func (x *SK3DNode) ViewportSize() corefoundation.CGSize {
-	return x.inner.ViewportSize()
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("viewportSize"))
+	return _r
 }
 
-// SetViewportSize calls the underlying SetViewportSize.
+// SetViewportSize wraps the corresponding Objective-C method.
 func (x *SK3DNode) SetViewportSize(viewportSize corefoundation.CGSize) {
-	x.inner.SetViewportSize(viewportSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewportSize:"), viewportSize)
 }
 
-// A SceneKit scene
-//
-// ScnScene calls the underlying ScnScene.
-func (x *SK3DNode) ScnScene() *scenekit.SCNScene {
-	return x.inner.ScnScene()
+// ScnScene a SceneKit scene
+func (x *SK3DNode) ScnScene() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scnScene"))
+	return obj.Wrap(_r)
 }
 
-// SetScnScene calls the underlying SetScnScene.
-func (x *SK3DNode) SetScnScene(scnScene *scenekit.SCNScene) {
-	x.inner.SetScnScene(scnScene)
+// SetScnScene wraps the corresponding Objective-C method.
+func (x *SK3DNode) SetScnScene(scnScene obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScnScene:"), objref.IDOf(scnScene))
 }
 
-// @property sceneTime @abstract Specifies the current time to display the scene.
-//
-// SceneTime calls the underlying SceneTime.
+// SceneTime specifies the current time to display the scene.
 func (x *SK3DNode) SceneTime() float64 {
-	return x.inner.SceneTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sceneTime"))
+	return _r
 }
 
-// SetSceneTime calls the underlying SetSceneTime.
+// SetSceneTime wraps the corresponding Objective-C method.
 func (x *SK3DNode) SetSceneTime(sceneTime float64) {
-	x.inner.SetSceneTime(sceneTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSceneTime:"), sceneTime)
 }
 
-// @property playing @abstract Returns YES if the scene is playing, NO otherwise.
-//
-// IsPlaying calls the underlying IsPlaying.
+// IsPlaying returns YES if the scene is playing, NO otherwise.
 func (x *SK3DNode) IsPlaying() bool {
-	return x.inner.IsPlaying()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
+	return _r
 }
 
-// SetPlaying calls the underlying SetPlaying.
+// SetPlaying wraps the corresponding Objective-C method.
 func (x *SK3DNode) SetPlaying(playing bool) {
-	x.inner.SetPlaying(playing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaying:"), playing)
 }
 
-// @property loops @abstract Indicates whether the receiver restarts playback when it reaches the end of its content. Default: YES. @discussion YES when the receiver restarts playback when it finishes, NO otherwise.
-//
-// Loops calls the underlying Loops.
+// Loops indicates whether the receiver restarts playback when it reaches the end of its content. Default: YES. YES when the receiver restarts playback when it finishes, NO otherwise.
 func (x *SK3DNode) Loops() bool {
-	return x.inner.Loops()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loops"))
+	return _r
 }
 
-// SetLoops calls the underlying SetLoops.
+// SetLoops wraps the corresponding Objective-C method.
 func (x *SK3DNode) SetLoops(loops bool) {
-	x.inner.SetLoops(loops)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoops:"), loops)
 }
 
-// @property pointOfView @abstract Specifies the point of view used to render the scene. @discussion A point of view must have either a camera or a spot light attached.
-//
-// PointOfView calls the underlying PointOfView.
-func (x *SK3DNode) PointOfView() *scenekit.SCNNode {
-	return x.inner.PointOfView()
+// PointOfView specifies the point of view used to render the scene. A point of view must have either a camera or a spot light attached.
+func (x *SK3DNode) PointOfView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfView"))
+	return obj.Wrap(_r)
 }
 
-// SetPointOfView calls the underlying SetPointOfView.
-func (x *SK3DNode) SetPointOfView(pointOfView *scenekit.SCNNode) {
-	x.inner.SetPointOfView(pointOfView)
+// SetPointOfView wraps the corresponding Objective-C method.
+func (x *SK3DNode) SetPointOfView(pointOfView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
 }
 
-// @property autoenablesDefaultLighting @abstract Specifies whether the receiver should automatically light up scenes that have no light source. The default is NO. @discussion When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
-//
-// AutoenablesDefaultLighting calls the underlying AutoenablesDefaultLighting.
+// AutoenablesDefaultLighting specifies whether the receiver should automatically light up scenes that have no light source. The default is NO. When enabled, a diffuse light is automatically added and placed while rendering scenes that have no light or only ambient lights.
 func (x *SK3DNode) AutoenablesDefaultLighting() bool {
-	return x.inner.AutoenablesDefaultLighting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoenablesDefaultLighting"))
+	return _r
 }
 
-// SetAutoenablesDefaultLighting calls the underlying SetAutoenablesDefaultLighting.
+// SetAutoenablesDefaultLighting wraps the corresponding Objective-C method.
 func (x *SK3DNode) SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool) {
-	x.inner.SetAutoenablesDefaultLighting(autoenablesDefaultLighting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesDefaultLighting:"), autoenablesDefaultLighting)
 }
-
-func (x *SK3DNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // SK3DNodeable is the interface implemented by [SK3DNode], for mocking and DI.
 type SK3DNodeable interface {
-	Unwrap() *raw.SK3DNode
+	obj.Object
 	WithViewportSize(viewportSize corefoundation.CGSize) *SK3DNode
-	WithScnScene(scnScene *scenekit.SCNScene) *SK3DNode
+	WithScnScene(scnScene obj.Object) *SK3DNode
 	WithSceneTime(sceneTime float64) *SK3DNode
 	WithPlaying(playing bool) *SK3DNode
 	WithLoops(loops bool) *SK3DNode
-	WithPointOfView(pointOfView *scenekit.SCNNode) *SK3DNode
+	WithPointOfView(pointOfView obj.Object) *SK3DNode
 	WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode
 	WithPosition(position corefoundation.CGPoint) *SK3DNode
 	WithZPosition(zPosition float64) *SK3DNode
@@ -453,36 +359,36 @@ type SK3DNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode
 	WithName(name string) *SK3DNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *SK3DNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode
+	WithUserData(userData obj.Object) *SK3DNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *SK3DNode
-	WithConstraints(items ...*raw.SKConstraint) *SK3DNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode
+	WithConstraints(items ...*Constraint) *SK3DNode
+	WithAttributeValues(attributeValues obj.Object) *SK3DNode
 	WithAccessibilityElement(accessibilityElement bool) *SK3DNode
 	WithAccessibilityRole(accessibilityRole string) *SK3DNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SK3DNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *SK3DNode
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SK3DNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *SK3DNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *SK3DNode
 	WithAccessibilityHelp(accessibilityHelp string) *SK3DNode
 	WithAccessibilityLabel(accessibilityLabel string) *SK3DNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode
-	HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult]
-	ProjectPoint(point unsafe.Pointer) unsafe.Pointer
-	UnprojectPoint(point unsafe.Pointer) unsafe.Pointer
+	HitTestOptions(point corefoundation.CGPoint, options obj.Object) []obj.Object
 	ViewportSize() corefoundation.CGSize
 	SetViewportSize(viewportSize corefoundation.CGSize)
-	ScnScene() *scenekit.SCNScene
-	SetScnScene(scnScene *scenekit.SCNScene)
+	ScnScene() obj.Object
+	SetScnScene(scnScene obj.Object)
 	SceneTime() float64
 	SetSceneTime(sceneTime float64)
 	IsPlaying() bool
 	SetPlaying(playing bool)
 	Loops() bool
 	SetLoops(loops bool)
-	PointOfView() *scenekit.SCNNode
-	SetPointOfView(pointOfView *scenekit.SCNNode)
+	PointOfView() obj.Object
+	SetPointOfView(pointOfView obj.Object)
 	AutoenablesDefaultLighting() bool
 	SetAutoenablesDefaultLighting(autoenablesDefaultLighting bool)
 }
 
 var _ SK3DNodeable = (*SK3DNode)(nil)
+
+var _ NodeProvider = (*SK3DNode)(nil)

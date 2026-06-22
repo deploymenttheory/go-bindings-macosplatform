@@ -5,185 +5,122 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNGramMatrixCalculation wraps [raw.MPSNNGramMatrixCalculation] with a fluent Go API.
+// NNGramMatrixCalculation is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculation.
+//
+// It embeds [CNNKernel], promoting that type's methods.
 type NNGramMatrixCalculation struct {
-	inner *raw.MPSNNGramMatrixCalculation
+	CNNKernel
 }
 
-// Unwrap returns the underlying [raw.MPSNNGramMatrixCalculation].
-func (x *NNGramMatrixCalculation) Unwrap() *raw.MPSNNGramMatrixCalculation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGramMatrixCalculation) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGramMatrixCalculationFromID adopts an existing object pointer as a NNGramMatrixCalculation (nil for 0).
+// NNGramMatrixCalculationFromID adopts an existing Objective-C object as a NNGramMatrixCalculation
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGramMatrixCalculationFromID(id objc.ID) *NNGramMatrixCalculation {
 	if id == 0 {
 		return nil
 	}
-	return &NNGramMatrixCalculation{inner: raw.MPSNNGramMatrixCalculationFromID(id)}
+	x := &NNGramMatrixCalculation{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewNNGramMatrixCalculationWithCoderDevice creates a new [NNGramMatrixCalculation].
-func NewNNGramMatrixCalculationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNGramMatrixCalculation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNGramMatrixCalculation{inner: raw.MPSNNGramMatrixCalculationFromID(_id)}
+// nNGramMatrixCalculationAdopt wraps an Objective-C object that this code just created as a
+// NNGramMatrixCalculation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGramMatrixCalculationAdopt(id objc.ID) *NNGramMatrixCalculation {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGramMatrixCalculation{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a MPSNNGramMatrixCalculation kernel. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used. @param      alpha       Scaling factor for the output. @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
-//
-// NewNNGramMatrixCalculationWithDeviceAlpha creates a new [NNGramMatrixCalculation].
-func NewNNGramMatrixCalculationWithDeviceAlpha(device metal.MTLDevice, alpha float32) *NNGramMatrixCalculation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:alpha:"), device, alpha)
-	return &NNGramMatrixCalculation{inner: raw.MPSNNGramMatrixCalculationFromID(_id)}
+// NewNNGramMatrixCalculation creates a new NNGramMatrixCalculation.
+func NewNNGramMatrixCalculation() *NNGramMatrixCalculation {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculation")), objc.RegisterName("new"))
+	return nNGramMatrixCalculationAdopt(_id)
 }
 
-// @abstract   Initializes a MPSNNGramMatrixCalculation kernel with scaling factor alpha = 1.0f. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculation filter will be used. @return     A valid MPSNNGramMatrixCalculation object or nil, if failure.
-//
-// NewNNGramMatrixCalculationWithDevice creates a new [NNGramMatrixCalculation].
-func NewNNGramMatrixCalculationWithDevice(device metal.MTLDevice) *NNGramMatrixCalculation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNGramMatrixCalculation{inner: raw.MPSNNGramMatrixCalculationFromID(_id)}
-}
-
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculation) WithAlpha(alpha float32) *NNGramMatrixCalculation {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
+// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
 func (x *NNGramMatrixCalculation) WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
+// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
 func (x *NNGramMatrixCalculation) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
 	return x
 }
 
-// The number of channels in the destination image to skip before writing output data.
-//
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
+func (x *NNGramMatrixCalculation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-//
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (x *NNGramMatrixCalculation) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-//
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (x *NNGramMatrixCalculation) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNGramMatrixCalculation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculation) WithOptions(options mpscore.MPSKernelOptions) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
-	return x
-}
-
-// The string that identifies the kernel.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel the string that identifies the kernel.
 func (x *NNGramMatrixCalculation) WithLabel(label string) *NNGramMatrixCalculation {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f.
-//
-// Alpha calls the underlying Alpha.
+// Alpha scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculation) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
+// SetAlpha wraps the corresponding Objective-C method.
 func (x *NNGramMatrixCalculation) SetAlpha(alpha float32) {
-	x.inner.SetAlpha(alpha)
-}
-
-func (x *NNGramMatrixCalculation) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *NNGramMatrixCalculation) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // NNGramMatrixCalculationable is the interface implemented by [NNGramMatrixCalculation], for mocking and DI.
 type NNGramMatrixCalculationable interface {
-	Unwrap() *raw.MPSNNGramMatrixCalculation
+	obj.Object
 	WithAlpha(alpha float32) *NNGramMatrixCalculation
 	WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation
 	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculation
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNGramMatrixCalculation
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNGramMatrixCalculation
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculation
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculation
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculation
-	WithOptions(options mpscore.MPSKernelOptions) *NNGramMatrixCalculation
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculation
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNGramMatrixCalculation
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNGramMatrixCalculation
 	WithLabel(label string) *NNGramMatrixCalculation
 	Alpha() float32
 	SetAlpha(alpha float32)
 }
 
 var _ NNGramMatrixCalculationable = (*NNGramMatrixCalculation)(nil)
+
+var _ CNNKernelProvider = (*NNGramMatrixCalculation)(nil)
+
+var _ KernelProvider = (*NNGramMatrixCalculation)(nil)

@@ -5,1113 +5,163 @@
 package glkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// GLKMathDegreesToRadians calls [raw.GLKMathDegreesToRadians] (C function GLKMathDegreesToRadians).
+var _fnGLKMathDegreesToRadians func(float32) float32
+
+// GLKMathDegreesToRadians calls the GLKit framework function GLKMathDegreesToRadians.
 func GLKMathDegreesToRadians(degrees float32) float32 {
-	return raw.GLKMathDegreesToRadians(degrees)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMathDegreesToRadians == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMathDegreesToRadians, _lib, "GLKMathDegreesToRadians")
+	}
+	return _fnGLKMathDegreesToRadians(degrees)
 }
 
-// GLKMathProject calls [raw.GLKMathProject] (C function GLKMathProject).
-func GLKMathProject(object unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer, viewport *int32) unsafe.Pointer {
-	return raw.GLKMathProject(object, model, projection, viewport)
-}
+var _fnGLKMathRadiansToDegrees func(float32) float32
 
-// GLKMathRadiansToDegrees calls [raw.GLKMathRadiansToDegrees] (C function GLKMathRadiansToDegrees).
+// GLKMathRadiansToDegrees calls the GLKit framework function GLKMathRadiansToDegrees.
 func GLKMathRadiansToDegrees(radians float32) float32 {
-	return raw.GLKMathRadiansToDegrees(radians)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMathRadiansToDegrees == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMathRadiansToDegrees, _lib, "GLKMathRadiansToDegrees")
+	}
+	return _fnGLKMathRadiansToDegrees(radians)
 }
 
-// GLKMathUnproject calls [raw.GLKMathUnproject] (C function GLKMathUnproject).
-func GLKMathUnproject(window unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer, viewport *int32, success unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMathUnproject(window, model, projection, viewport, success)
-}
-
-// GLKMatrix3Add calls [raw.GLKMatrix3Add] (C function GLKMatrix3Add).
-func GLKMatrix3Add(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3Add(matrixLeft, matrixRight)
-}
-
-// GLKMatrix3GetColumn calls [raw.GLKMatrix3GetColumn] (C function GLKMatrix3GetColumn).
-func GLKMatrix3GetColumn(matrix unsafe.Pointer, column int) unsafe.Pointer {
-	return raw.GLKMatrix3GetColumn(matrix, column)
-}
-
-// GLKMatrix3GetMatrix2 calls [raw.GLKMatrix3GetMatrix2] (C function GLKMatrix3GetMatrix2).
-func GLKMatrix3GetMatrix2(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3GetMatrix2(matrix)
-}
-
-// GLKMatrix3GetRow calls [raw.GLKMatrix3GetRow] (C function GLKMatrix3GetRow).
-func GLKMatrix3GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
-	return raw.GLKMatrix3GetRow(matrix, row)
-}
-
-// GLKMatrix3Invert calls [raw.GLKMatrix3Invert] (C function GLKMatrix3Invert).
-func GLKMatrix3Invert(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3Invert(matrix, isInvertible)
-}
-
-// GLKMatrix3InvertAndTranspose calls [raw.GLKMatrix3InvertAndTranspose] (C function GLKMatrix3InvertAndTranspose).
-func GLKMatrix3InvertAndTranspose(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3InvertAndTranspose(matrix, isInvertible)
-}
-
-// GLKMatrix3Make calls [raw.GLKMatrix3Make] (C function GLKMatrix3Make).
-func GLKMatrix3Make(m00 float32, m01 float32, m02 float32, m10 float32, m11 float32, m12 float32, m20 float32, m21 float32, m22 float32) unsafe.Pointer {
-	return raw.GLKMatrix3Make(m00, m01, m02, m10, m11, m12, m20, m21, m22)
-}
-
-// GLKMatrix3MakeAndTranspose calls [raw.GLKMatrix3MakeAndTranspose] (C function GLKMatrix3MakeAndTranspose).
-func GLKMatrix3MakeAndTranspose(m00 float32, m01 float32, m02 float32, m10 float32, m11 float32, m12 float32, m20 float32, m21 float32, m22 float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeAndTranspose(m00, m01, m02, m10, m11, m12, m20, m21, m22)
-}
-
-// GLKMatrix3MakeRotation calls [raw.GLKMatrix3MakeRotation] (C function GLKMatrix3MakeRotation).
-func GLKMatrix3MakeRotation(radians float32, x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeRotation(radians, x, y, z)
-}
-
-// GLKMatrix3MakeScale calls [raw.GLKMatrix3MakeScale] (C function GLKMatrix3MakeScale).
-func GLKMatrix3MakeScale(sx float32, sy float32, sz float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeScale(sx, sy, sz)
-}
-
-// GLKMatrix3MakeWithArray calls [raw.GLKMatrix3MakeWithArray] (C function GLKMatrix3MakeWithArray).
-func GLKMatrix3MakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeWithArray(values)
-}
-
-// GLKMatrix3MakeWithArrayAndTranspose calls [raw.GLKMatrix3MakeWithArrayAndTranspose] (C function GLKMatrix3MakeWithArrayAndTranspose).
-func GLKMatrix3MakeWithArrayAndTranspose(values *float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeWithArrayAndTranspose(values)
-}
-
-// GLKMatrix3MakeWithColumns calls [raw.GLKMatrix3MakeWithColumns] (C function GLKMatrix3MakeWithColumns).
-func GLKMatrix3MakeWithColumns(column0 unsafe.Pointer, column1 unsafe.Pointer, column2 unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3MakeWithColumns(column0, column1, column2)
-}
-
-// GLKMatrix3MakeWithQuaternion calls [raw.GLKMatrix3MakeWithQuaternion] (C function GLKMatrix3MakeWithQuaternion).
-func GLKMatrix3MakeWithQuaternion(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3MakeWithQuaternion(quaternion)
-}
-
-// GLKMatrix3MakeWithRows calls [raw.GLKMatrix3MakeWithRows] (C function GLKMatrix3MakeWithRows).
-func GLKMatrix3MakeWithRows(row0 unsafe.Pointer, row1 unsafe.Pointer, row2 unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3MakeWithRows(row0, row1, row2)
-}
-
-// GLKMatrix3MakeXRotation calls [raw.GLKMatrix3MakeXRotation] (C function GLKMatrix3MakeXRotation).
-func GLKMatrix3MakeXRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeXRotation(radians)
-}
-
-// GLKMatrix3MakeYRotation calls [raw.GLKMatrix3MakeYRotation] (C function GLKMatrix3MakeYRotation).
-func GLKMatrix3MakeYRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeYRotation(radians)
-}
-
-// GLKMatrix3MakeZRotation calls [raw.GLKMatrix3MakeZRotation] (C function GLKMatrix3MakeZRotation).
-func GLKMatrix3MakeZRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3MakeZRotation(radians)
-}
-
-// GLKMatrix3Multiply calls [raw.GLKMatrix3Multiply] (C function GLKMatrix3Multiply).
-func GLKMatrix3Multiply(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3Multiply(matrixLeft, matrixRight)
-}
-
-// GLKMatrix3MultiplyVector3 calls [raw.GLKMatrix3MultiplyVector3] (C function GLKMatrix3MultiplyVector3).
-func GLKMatrix3MultiplyVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3MultiplyVector3(matrixLeft, vectorRight)
-}
-
-// GLKMatrix3MultiplyVector3Array calls [raw.GLKMatrix3MultiplyVector3Array] (C function GLKMatrix3MultiplyVector3Array).
-func GLKMatrix3MultiplyVector3Array(matrix unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKMatrix3MultiplyVector3Array(matrix, vectors, vectorCount)
-}
-
-// GLKMatrix3Rotate calls [raw.GLKMatrix3Rotate] (C function GLKMatrix3Rotate).
-func GLKMatrix3Rotate(matrix unsafe.Pointer, radians float32, x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKMatrix3Rotate(matrix, radians, x, y, z)
-}
-
-// GLKMatrix3RotateWithVector3 calls [raw.GLKMatrix3RotateWithVector3] (C function GLKMatrix3RotateWithVector3).
-func GLKMatrix3RotateWithVector3(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3RotateWithVector3(matrix, radians, axisVector)
-}
-
-// GLKMatrix3RotateWithVector4 calls [raw.GLKMatrix3RotateWithVector4] (C function GLKMatrix3RotateWithVector4).
-func GLKMatrix3RotateWithVector4(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3RotateWithVector4(matrix, radians, axisVector)
-}
-
-// GLKMatrix3RotateX calls [raw.GLKMatrix3RotateX] (C function GLKMatrix3RotateX).
-func GLKMatrix3RotateX(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3RotateX(matrix, radians)
-}
-
-// GLKMatrix3RotateY calls [raw.GLKMatrix3RotateY] (C function GLKMatrix3RotateY).
-func GLKMatrix3RotateY(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3RotateY(matrix, radians)
-}
-
-// GLKMatrix3RotateZ calls [raw.GLKMatrix3RotateZ] (C function GLKMatrix3RotateZ).
-func GLKMatrix3RotateZ(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix3RotateZ(matrix, radians)
-}
-
-// GLKMatrix3Scale calls [raw.GLKMatrix3Scale] (C function GLKMatrix3Scale).
-func GLKMatrix3Scale(matrix unsafe.Pointer, sx float32, sy float32, sz float32) unsafe.Pointer {
-	return raw.GLKMatrix3Scale(matrix, sx, sy, sz)
-}
-
-// GLKMatrix3ScaleWithVector3 calls [raw.GLKMatrix3ScaleWithVector3] (C function GLKMatrix3ScaleWithVector3).
-func GLKMatrix3ScaleWithVector3(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3ScaleWithVector3(matrix, scaleVector)
-}
-
-// GLKMatrix3ScaleWithVector4 calls [raw.GLKMatrix3ScaleWithVector4] (C function GLKMatrix3ScaleWithVector4).
-func GLKMatrix3ScaleWithVector4(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3ScaleWithVector4(matrix, scaleVector)
-}
-
-// GLKMatrix3SetColumn calls [raw.GLKMatrix3SetColumn] (C function GLKMatrix3SetColumn).
-func GLKMatrix3SetColumn(matrix unsafe.Pointer, column int, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3SetColumn(matrix, column, vector)
-}
-
-// GLKMatrix3SetRow calls [raw.GLKMatrix3SetRow] (C function GLKMatrix3SetRow).
-func GLKMatrix3SetRow(matrix unsafe.Pointer, row int, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3SetRow(matrix, row, vector)
-}
-
-// GLKMatrix3Subtract calls [raw.GLKMatrix3Subtract] (C function GLKMatrix3Subtract).
-func GLKMatrix3Subtract(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3Subtract(matrixLeft, matrixRight)
-}
-
-// GLKMatrix3Transpose calls [raw.GLKMatrix3Transpose] (C function GLKMatrix3Transpose).
-func GLKMatrix3Transpose(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix3Transpose(matrix)
-}
-
-// GLKMatrix4Add calls [raw.GLKMatrix4Add] (C function GLKMatrix4Add).
-func GLKMatrix4Add(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4Add(matrixLeft, matrixRight)
-}
-
-// GLKMatrix4GetColumn calls [raw.GLKMatrix4GetColumn] (C function GLKMatrix4GetColumn).
-func GLKMatrix4GetColumn(matrix unsafe.Pointer, column int) unsafe.Pointer {
-	return raw.GLKMatrix4GetColumn(matrix, column)
-}
-
-// GLKMatrix4GetMatrix2 calls [raw.GLKMatrix4GetMatrix2] (C function GLKMatrix4GetMatrix2).
-func GLKMatrix4GetMatrix2(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4GetMatrix2(matrix)
-}
-
-// GLKMatrix4GetMatrix3 calls [raw.GLKMatrix4GetMatrix3] (C function GLKMatrix4GetMatrix3).
-func GLKMatrix4GetMatrix3(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4GetMatrix3(matrix)
-}
-
-// GLKMatrix4GetRow calls [raw.GLKMatrix4GetRow] (C function GLKMatrix4GetRow).
-func GLKMatrix4GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
-	return raw.GLKMatrix4GetRow(matrix, row)
-}
-
-// GLKMatrix4Invert calls [raw.GLKMatrix4Invert] (C function GLKMatrix4Invert).
-func GLKMatrix4Invert(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4Invert(matrix, isInvertible)
-}
-
-// GLKMatrix4InvertAndTranspose calls [raw.GLKMatrix4InvertAndTranspose] (C function GLKMatrix4InvertAndTranspose).
-func GLKMatrix4InvertAndTranspose(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4InvertAndTranspose(matrix, isInvertible)
-}
-
-// GLKMatrix4Make calls [raw.GLKMatrix4Make] (C function GLKMatrix4Make).
-func GLKMatrix4Make(m00 float32, m01 float32, m02 float32, m03 float32, m10 float32, m11 float32, m12 float32, m13 float32, m20 float32, m21 float32, m22 float32, m23 float32, m30 float32, m31 float32, m32 float32, m33 float32) unsafe.Pointer {
-	return raw.GLKMatrix4Make(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
-}
-
-// GLKMatrix4MakeAndTranspose calls [raw.GLKMatrix4MakeAndTranspose] (C function GLKMatrix4MakeAndTranspose).
-func GLKMatrix4MakeAndTranspose(m00 float32, m01 float32, m02 float32, m03 float32, m10 float32, m11 float32, m12 float32, m13 float32, m20 float32, m21 float32, m22 float32, m23 float32, m30 float32, m31 float32, m32 float32, m33 float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeAndTranspose(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
-}
-
-// GLKMatrix4MakeFrustum calls [raw.GLKMatrix4MakeFrustum] (C function GLKMatrix4MakeFrustum).
-func GLKMatrix4MakeFrustum(left float32, right float32, bottom float32, top float32, nearZ float32, farZ float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeFrustum(left, right, bottom, top, nearZ, farZ)
-}
-
-// GLKMatrix4MakeLookAt calls [raw.GLKMatrix4MakeLookAt] (C function GLKMatrix4MakeLookAt).
-func GLKMatrix4MakeLookAt(eyeX float32, eyeY float32, eyeZ float32, centerX float32, centerY float32, centerZ float32, upX float32, upY float32, upZ float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
-}
-
-// GLKMatrix4MakeOrtho calls [raw.GLKMatrix4MakeOrtho] (C function GLKMatrix4MakeOrtho).
-func GLKMatrix4MakeOrtho(left float32, right float32, bottom float32, top float32, nearZ float32, farZ float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ)
-}
-
-// GLKMatrix4MakePerspective calls [raw.GLKMatrix4MakePerspective] (C function GLKMatrix4MakePerspective).
-func GLKMatrix4MakePerspective(fovyRadians float32, aspect float32, nearZ float32, farZ float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakePerspective(fovyRadians, aspect, nearZ, farZ)
-}
-
-// GLKMatrix4MakeRotation calls [raw.GLKMatrix4MakeRotation] (C function GLKMatrix4MakeRotation).
-func GLKMatrix4MakeRotation(radians float32, x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeRotation(radians, x, y, z)
-}
-
-// GLKMatrix4MakeScale calls [raw.GLKMatrix4MakeScale] (C function GLKMatrix4MakeScale).
-func GLKMatrix4MakeScale(sx float32, sy float32, sz float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeScale(sx, sy, sz)
-}
-
-// GLKMatrix4MakeTranslation calls [raw.GLKMatrix4MakeTranslation] (C function GLKMatrix4MakeTranslation).
-func GLKMatrix4MakeTranslation(tx float32, ty float32, tz float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeTranslation(tx, ty, tz)
-}
-
-// GLKMatrix4MakeWithArray calls [raw.GLKMatrix4MakeWithArray] (C function GLKMatrix4MakeWithArray).
-func GLKMatrix4MakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeWithArray(values)
-}
-
-// GLKMatrix4MakeWithArrayAndTranspose calls [raw.GLKMatrix4MakeWithArrayAndTranspose] (C function GLKMatrix4MakeWithArrayAndTranspose).
-func GLKMatrix4MakeWithArrayAndTranspose(values *float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeWithArrayAndTranspose(values)
-}
-
-// GLKMatrix4MakeWithColumns calls [raw.GLKMatrix4MakeWithColumns] (C function GLKMatrix4MakeWithColumns).
-func GLKMatrix4MakeWithColumns(column0 unsafe.Pointer, column1 unsafe.Pointer, column2 unsafe.Pointer, column3 unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MakeWithColumns(column0, column1, column2, column3)
-}
-
-// GLKMatrix4MakeWithQuaternion calls [raw.GLKMatrix4MakeWithQuaternion] (C function GLKMatrix4MakeWithQuaternion).
-func GLKMatrix4MakeWithQuaternion(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MakeWithQuaternion(quaternion)
-}
-
-// GLKMatrix4MakeWithRows calls [raw.GLKMatrix4MakeWithRows] (C function GLKMatrix4MakeWithRows).
-func GLKMatrix4MakeWithRows(row0 unsafe.Pointer, row1 unsafe.Pointer, row2 unsafe.Pointer, row3 unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MakeWithRows(row0, row1, row2, row3)
-}
-
-// GLKMatrix4MakeXRotation calls [raw.GLKMatrix4MakeXRotation] (C function GLKMatrix4MakeXRotation).
-func GLKMatrix4MakeXRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeXRotation(radians)
-}
-
-// GLKMatrix4MakeYRotation calls [raw.GLKMatrix4MakeYRotation] (C function GLKMatrix4MakeYRotation).
-func GLKMatrix4MakeYRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeYRotation(radians)
-}
-
-// GLKMatrix4MakeZRotation calls [raw.GLKMatrix4MakeZRotation] (C function GLKMatrix4MakeZRotation).
-func GLKMatrix4MakeZRotation(radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4MakeZRotation(radians)
-}
-
-// GLKMatrix4Multiply calls [raw.GLKMatrix4Multiply] (C function GLKMatrix4Multiply).
-func GLKMatrix4Multiply(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4Multiply(matrixLeft, matrixRight)
-}
-
-// GLKMatrix4MultiplyAndProjectVector3 calls [raw.GLKMatrix4MultiplyAndProjectVector3] (C function GLKMatrix4MultiplyAndProjectVector3).
-func GLKMatrix4MultiplyAndProjectVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MultiplyAndProjectVector3(matrixLeft, vectorRight)
-}
-
-// GLKMatrix4MultiplyAndProjectVector3Array calls [raw.GLKMatrix4MultiplyAndProjectVector3Array] (C function GLKMatrix4MultiplyAndProjectVector3Array).
-func GLKMatrix4MultiplyAndProjectVector3Array(matrix unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKMatrix4MultiplyAndProjectVector3Array(matrix, vectors, vectorCount)
-}
-
-// GLKMatrix4MultiplyVector3 calls [raw.GLKMatrix4MultiplyVector3] (C function GLKMatrix4MultiplyVector3).
-func GLKMatrix4MultiplyVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MultiplyVector3(matrixLeft, vectorRight)
-}
-
-// GLKMatrix4MultiplyVector3Array calls [raw.GLKMatrix4MultiplyVector3Array] (C function GLKMatrix4MultiplyVector3Array).
-func GLKMatrix4MultiplyVector3Array(matrix unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKMatrix4MultiplyVector3Array(matrix, vectors, vectorCount)
-}
-
-// GLKMatrix4MultiplyVector3ArrayWithTranslation calls [raw.GLKMatrix4MultiplyVector3ArrayWithTranslation] (C function GLKMatrix4MultiplyVector3ArrayWithTranslation).
-func GLKMatrix4MultiplyVector3ArrayWithTranslation(matrix unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKMatrix4MultiplyVector3ArrayWithTranslation(matrix, vectors, vectorCount)
-}
-
-// GLKMatrix4MultiplyVector3WithTranslation calls [raw.GLKMatrix4MultiplyVector3WithTranslation] (C function GLKMatrix4MultiplyVector3WithTranslation).
-func GLKMatrix4MultiplyVector3WithTranslation(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MultiplyVector3WithTranslation(matrixLeft, vectorRight)
-}
-
-// GLKMatrix4MultiplyVector4 calls [raw.GLKMatrix4MultiplyVector4] (C function GLKMatrix4MultiplyVector4).
-func GLKMatrix4MultiplyVector4(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4MultiplyVector4(matrixLeft, vectorRight)
-}
-
-// GLKMatrix4MultiplyVector4Array calls [raw.GLKMatrix4MultiplyVector4Array] (C function GLKMatrix4MultiplyVector4Array).
-func GLKMatrix4MultiplyVector4Array(matrix unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKMatrix4MultiplyVector4Array(matrix, vectors, vectorCount)
-}
-
-// GLKMatrix4Rotate calls [raw.GLKMatrix4Rotate] (C function GLKMatrix4Rotate).
-func GLKMatrix4Rotate(matrix unsafe.Pointer, radians float32, x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKMatrix4Rotate(matrix, radians, x, y, z)
-}
-
-// GLKMatrix4RotateWithVector3 calls [raw.GLKMatrix4RotateWithVector3] (C function GLKMatrix4RotateWithVector3).
-func GLKMatrix4RotateWithVector3(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4RotateWithVector3(matrix, radians, axisVector)
-}
-
-// GLKMatrix4RotateWithVector4 calls [raw.GLKMatrix4RotateWithVector4] (C function GLKMatrix4RotateWithVector4).
-func GLKMatrix4RotateWithVector4(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4RotateWithVector4(matrix, radians, axisVector)
-}
-
-// GLKMatrix4RotateX calls [raw.GLKMatrix4RotateX] (C function GLKMatrix4RotateX).
-func GLKMatrix4RotateX(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4RotateX(matrix, radians)
-}
-
-// GLKMatrix4RotateY calls [raw.GLKMatrix4RotateY] (C function GLKMatrix4RotateY).
-func GLKMatrix4RotateY(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4RotateY(matrix, radians)
-}
-
-// GLKMatrix4RotateZ calls [raw.GLKMatrix4RotateZ] (C function GLKMatrix4RotateZ).
-func GLKMatrix4RotateZ(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
-	return raw.GLKMatrix4RotateZ(matrix, radians)
-}
-
-// GLKMatrix4Scale calls [raw.GLKMatrix4Scale] (C function GLKMatrix4Scale).
-func GLKMatrix4Scale(matrix unsafe.Pointer, sx float32, sy float32, sz float32) unsafe.Pointer {
-	return raw.GLKMatrix4Scale(matrix, sx, sy, sz)
-}
-
-// GLKMatrix4ScaleWithVector3 calls [raw.GLKMatrix4ScaleWithVector3] (C function GLKMatrix4ScaleWithVector3).
-func GLKMatrix4ScaleWithVector3(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4ScaleWithVector3(matrix, scaleVector)
-}
-
-// GLKMatrix4ScaleWithVector4 calls [raw.GLKMatrix4ScaleWithVector4] (C function GLKMatrix4ScaleWithVector4).
-func GLKMatrix4ScaleWithVector4(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4ScaleWithVector4(matrix, scaleVector)
-}
-
-// GLKMatrix4SetColumn calls [raw.GLKMatrix4SetColumn] (C function GLKMatrix4SetColumn).
-func GLKMatrix4SetColumn(matrix unsafe.Pointer, column int, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4SetColumn(matrix, column, vector)
-}
-
-// GLKMatrix4SetRow calls [raw.GLKMatrix4SetRow] (C function GLKMatrix4SetRow).
-func GLKMatrix4SetRow(matrix unsafe.Pointer, row int, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4SetRow(matrix, row, vector)
-}
-
-// GLKMatrix4Subtract calls [raw.GLKMatrix4Subtract] (C function GLKMatrix4Subtract).
-func GLKMatrix4Subtract(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4Subtract(matrixLeft, matrixRight)
-}
-
-// GLKMatrix4Translate calls [raw.GLKMatrix4Translate] (C function GLKMatrix4Translate).
-func GLKMatrix4Translate(matrix unsafe.Pointer, tx float32, ty float32, tz float32) unsafe.Pointer {
-	return raw.GLKMatrix4Translate(matrix, tx, ty, tz)
-}
-
-// GLKMatrix4TranslateWithVector3 calls [raw.GLKMatrix4TranslateWithVector3] (C function GLKMatrix4TranslateWithVector3).
-func GLKMatrix4TranslateWithVector3(matrix unsafe.Pointer, translationVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4TranslateWithVector3(matrix, translationVector)
-}
-
-// GLKMatrix4TranslateWithVector4 calls [raw.GLKMatrix4TranslateWithVector4] (C function GLKMatrix4TranslateWithVector4).
-func GLKMatrix4TranslateWithVector4(matrix unsafe.Pointer, translationVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4TranslateWithVector4(matrix, translationVector)
-}
-
-// GLKMatrix4Transpose calls [raw.GLKMatrix4Transpose] (C function GLKMatrix4Transpose).
-func GLKMatrix4Transpose(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrix4Transpose(matrix)
-}
-
-// GLKMatrixStackCreate calls [raw.GLKMatrixStackCreate] (C function GLKMatrixStackCreate).
-func GLKMatrixStackCreate(alloc unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackCreate(alloc)
-}
-
-// GLKMatrixStackGetMatrix2 calls [raw.GLKMatrixStackGetMatrix2] (C function GLKMatrixStackGetMatrix2).
-func GLKMatrixStackGetMatrix2(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix2(stack)
-}
-
-// GLKMatrixStackGetMatrix3 calls [raw.GLKMatrixStackGetMatrix3] (C function GLKMatrixStackGetMatrix3).
-func GLKMatrixStackGetMatrix3(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix3(stack)
-}
-
-// GLKMatrixStackGetMatrix3Inverse calls [raw.GLKMatrixStackGetMatrix3Inverse] (C function GLKMatrixStackGetMatrix3Inverse).
-func GLKMatrixStackGetMatrix3Inverse(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix3Inverse(stack)
-}
-
-// GLKMatrixStackGetMatrix3InverseTranspose calls [raw.GLKMatrixStackGetMatrix3InverseTranspose] (C function GLKMatrixStackGetMatrix3InverseTranspose).
-func GLKMatrixStackGetMatrix3InverseTranspose(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix3InverseTranspose(stack)
-}
-
-// GLKMatrixStackGetMatrix4 calls [raw.GLKMatrixStackGetMatrix4] (C function GLKMatrixStackGetMatrix4).
-func GLKMatrixStackGetMatrix4(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix4(stack)
-}
-
-// GLKMatrixStackGetMatrix4Inverse calls [raw.GLKMatrixStackGetMatrix4Inverse] (C function GLKMatrixStackGetMatrix4Inverse).
-func GLKMatrixStackGetMatrix4Inverse(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix4Inverse(stack)
-}
-
-// GLKMatrixStackGetMatrix4InverseTranspose calls [raw.GLKMatrixStackGetMatrix4InverseTranspose] (C function GLKMatrixStackGetMatrix4InverseTranspose).
-func GLKMatrixStackGetMatrix4InverseTranspose(stack unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKMatrixStackGetMatrix4InverseTranspose(stack)
-}
-
-// GLKMatrixStackGetTypeID calls [raw.GLKMatrixStackGetTypeID] (C function GLKMatrixStackGetTypeID).
-func GLKMatrixStackGetTypeID() uint {
-	return raw.GLKMatrixStackGetTypeID()
-}
-
-// GLKMatrixStackLoadMatrix4 calls [raw.GLKMatrixStackLoadMatrix4] (C function GLKMatrixStackLoadMatrix4).
-func GLKMatrixStackLoadMatrix4(stack unsafe.Pointer, matrix unsafe.Pointer) {
-	raw.GLKMatrixStackLoadMatrix4(stack, matrix)
-}
-
-// GLKMatrixStackMultiplyMatrix4 calls [raw.GLKMatrixStackMultiplyMatrix4] (C function GLKMatrixStackMultiplyMatrix4).
-func GLKMatrixStackMultiplyMatrix4(stack unsafe.Pointer, matrix unsafe.Pointer) {
-	raw.GLKMatrixStackMultiplyMatrix4(stack, matrix)
-}
-
-// GLKMatrixStackMultiplyMatrixStack calls [raw.GLKMatrixStackMultiplyMatrixStack] (C function GLKMatrixStackMultiplyMatrixStack).
-func GLKMatrixStackMultiplyMatrixStack(stackLeft unsafe.Pointer, stackRight unsafe.Pointer) {
-	raw.GLKMatrixStackMultiplyMatrixStack(stackLeft, stackRight)
-}
-
-// GLKMatrixStackPop calls [raw.GLKMatrixStackPop] (C function GLKMatrixStackPop).
-func GLKMatrixStackPop(stack unsafe.Pointer) {
-	raw.GLKMatrixStackPop(stack)
-}
-
-// GLKMatrixStackPush calls [raw.GLKMatrixStackPush] (C function GLKMatrixStackPush).
-func GLKMatrixStackPush(stack unsafe.Pointer) {
-	raw.GLKMatrixStackPush(stack)
-}
-
-// GLKMatrixStackRotate calls [raw.GLKMatrixStackRotate] (C function GLKMatrixStackRotate).
-func GLKMatrixStackRotate(stack unsafe.Pointer, radians float32, x float32, y float32, z float32) {
-	raw.GLKMatrixStackRotate(stack, radians, x, y, z)
-}
-
-// GLKMatrixStackRotateWithVector3 calls [raw.GLKMatrixStackRotateWithVector3] (C function GLKMatrixStackRotateWithVector3).
-func GLKMatrixStackRotateWithVector3(stack unsafe.Pointer, radians float32, axisVector unsafe.Pointer) {
-	raw.GLKMatrixStackRotateWithVector3(stack, radians, axisVector)
-}
-
-// GLKMatrixStackRotateWithVector4 calls [raw.GLKMatrixStackRotateWithVector4] (C function GLKMatrixStackRotateWithVector4).
-func GLKMatrixStackRotateWithVector4(stack unsafe.Pointer, radians float32, axisVector unsafe.Pointer) {
-	raw.GLKMatrixStackRotateWithVector4(stack, radians, axisVector)
-}
-
-// GLKMatrixStackRotateX calls [raw.GLKMatrixStackRotateX] (C function GLKMatrixStackRotateX).
-func GLKMatrixStackRotateX(stack unsafe.Pointer, radians float32) {
-	raw.GLKMatrixStackRotateX(stack, radians)
-}
-
-// GLKMatrixStackRotateY calls [raw.GLKMatrixStackRotateY] (C function GLKMatrixStackRotateY).
-func GLKMatrixStackRotateY(stack unsafe.Pointer, radians float32) {
-	raw.GLKMatrixStackRotateY(stack, radians)
-}
-
-// GLKMatrixStackRotateZ calls [raw.GLKMatrixStackRotateZ] (C function GLKMatrixStackRotateZ).
-func GLKMatrixStackRotateZ(stack unsafe.Pointer, radians float32) {
-	raw.GLKMatrixStackRotateZ(stack, radians)
-}
-
-// GLKMatrixStackScale calls [raw.GLKMatrixStackScale] (C function GLKMatrixStackScale).
-func GLKMatrixStackScale(stack unsafe.Pointer, sx float32, sy float32, sz float32) {
-	raw.GLKMatrixStackScale(stack, sx, sy, sz)
-}
-
-// GLKMatrixStackScaleWithVector3 calls [raw.GLKMatrixStackScaleWithVector3] (C function GLKMatrixStackScaleWithVector3).
-func GLKMatrixStackScaleWithVector3(stack unsafe.Pointer, scaleVector unsafe.Pointer) {
-	raw.GLKMatrixStackScaleWithVector3(stack, scaleVector)
-}
-
-// GLKMatrixStackScaleWithVector4 calls [raw.GLKMatrixStackScaleWithVector4] (C function GLKMatrixStackScaleWithVector4).
-func GLKMatrixStackScaleWithVector4(stack unsafe.Pointer, scaleVector unsafe.Pointer) {
-	raw.GLKMatrixStackScaleWithVector4(stack, scaleVector)
-}
-
-// GLKMatrixStackSize calls [raw.GLKMatrixStackSize] (C function GLKMatrixStackSize).
-func GLKMatrixStackSize(stack unsafe.Pointer) int {
-	return raw.GLKMatrixStackSize(stack)
-}
-
-// GLKMatrixStackTranslate calls [raw.GLKMatrixStackTranslate] (C function GLKMatrixStackTranslate).
-func GLKMatrixStackTranslate(stack unsafe.Pointer, tx float32, ty float32, tz float32) {
-	raw.GLKMatrixStackTranslate(stack, tx, ty, tz)
-}
-
-// GLKMatrixStackTranslateWithVector3 calls [raw.GLKMatrixStackTranslateWithVector3] (C function GLKMatrixStackTranslateWithVector3).
-func GLKMatrixStackTranslateWithVector3(stack unsafe.Pointer, translationVector unsafe.Pointer) {
-	raw.GLKMatrixStackTranslateWithVector3(stack, translationVector)
-}
-
-// GLKMatrixStackTranslateWithVector4 calls [raw.GLKMatrixStackTranslateWithVector4] (C function GLKMatrixStackTranslateWithVector4).
-func GLKMatrixStackTranslateWithVector4(stack unsafe.Pointer, translationVector unsafe.Pointer) {
-	raw.GLKMatrixStackTranslateWithVector4(stack, translationVector)
-}
-
-// GLKQuaternionAdd calls [raw.GLKQuaternionAdd] (C function GLKQuaternionAdd).
-func GLKQuaternionAdd(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionAdd(quaternionLeft, quaternionRight)
-}
-
-// GLKQuaternionAngle calls [raw.GLKQuaternionAngle] (C function GLKQuaternionAngle).
-func GLKQuaternionAngle(quaternion unsafe.Pointer) float32 {
-	return raw.GLKQuaternionAngle(quaternion)
-}
-
-// GLKQuaternionAxis calls [raw.GLKQuaternionAxis] (C function GLKQuaternionAxis).
-func GLKQuaternionAxis(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionAxis(quaternion)
-}
-
-// GLKQuaternionConjugate calls [raw.GLKQuaternionConjugate] (C function GLKQuaternionConjugate).
-func GLKQuaternionConjugate(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionConjugate(quaternion)
-}
-
-// GLKQuaternionInvert calls [raw.GLKQuaternionInvert] (C function GLKQuaternionInvert).
-func GLKQuaternionInvert(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionInvert(quaternion)
-}
-
-// GLKQuaternionLength calls [raw.GLKQuaternionLength] (C function GLKQuaternionLength).
-func GLKQuaternionLength(quaternion unsafe.Pointer) float32 {
-	return raw.GLKQuaternionLength(quaternion)
-}
-
-// GLKQuaternionMake calls [raw.GLKQuaternionMake] (C function GLKQuaternionMake).
-func GLKQuaternionMake(x float32, y float32, z float32, w float32) unsafe.Pointer {
-	return raw.GLKQuaternionMake(x, y, z, w)
-}
-
-// GLKQuaternionMakeWithAngleAndAxis calls [raw.GLKQuaternionMakeWithAngleAndAxis] (C function GLKQuaternionMakeWithAngleAndAxis).
-func GLKQuaternionMakeWithAngleAndAxis(radians float32, x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithAngleAndAxis(radians, x, y, z)
-}
-
-// GLKQuaternionMakeWithAngleAndVector3Axis calls [raw.GLKQuaternionMakeWithAngleAndVector3Axis] (C function GLKQuaternionMakeWithAngleAndVector3Axis).
-func GLKQuaternionMakeWithAngleAndVector3Axis(radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithAngleAndVector3Axis(radians, axisVector)
-}
-
-// GLKQuaternionMakeWithArray calls [raw.GLKQuaternionMakeWithArray] (C function GLKQuaternionMakeWithArray).
-func GLKQuaternionMakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithArray(values)
-}
-
-// GLKQuaternionMakeWithMatrix3 calls [raw.GLKQuaternionMakeWithMatrix3] (C function GLKQuaternionMakeWithMatrix3).
-func GLKQuaternionMakeWithMatrix3(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithMatrix3(matrix)
-}
-
-// GLKQuaternionMakeWithMatrix4 calls [raw.GLKQuaternionMakeWithMatrix4] (C function GLKQuaternionMakeWithMatrix4).
-func GLKQuaternionMakeWithMatrix4(matrix unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithMatrix4(matrix)
-}
-
-// GLKQuaternionMakeWithVector3 calls [raw.GLKQuaternionMakeWithVector3] (C function GLKQuaternionMakeWithVector3).
-func GLKQuaternionMakeWithVector3(vector unsafe.Pointer, scalar float32) unsafe.Pointer {
-	return raw.GLKQuaternionMakeWithVector3(vector, scalar)
-}
-
-// GLKQuaternionMultiply calls [raw.GLKQuaternionMultiply] (C function GLKQuaternionMultiply).
-func GLKQuaternionMultiply(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionMultiply(quaternionLeft, quaternionRight)
-}
-
-// GLKQuaternionNormalize calls [raw.GLKQuaternionNormalize] (C function GLKQuaternionNormalize).
-func GLKQuaternionNormalize(quaternion unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionNormalize(quaternion)
-}
-
-// GLKQuaternionRotateVector3 calls [raw.GLKQuaternionRotateVector3] (C function GLKQuaternionRotateVector3).
-func GLKQuaternionRotateVector3(quaternion unsafe.Pointer, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionRotateVector3(quaternion, vector)
-}
-
-// GLKQuaternionRotateVector3Array calls [raw.GLKQuaternionRotateVector3Array] (C function GLKQuaternionRotateVector3Array).
-func GLKQuaternionRotateVector3Array(quaternion unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKQuaternionRotateVector3Array(quaternion, vectors, vectorCount)
-}
-
-// GLKQuaternionRotateVector4 calls [raw.GLKQuaternionRotateVector4] (C function GLKQuaternionRotateVector4).
-func GLKQuaternionRotateVector4(quaternion unsafe.Pointer, vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionRotateVector4(quaternion, vector)
-}
-
-// GLKQuaternionRotateVector4Array calls [raw.GLKQuaternionRotateVector4Array] (C function GLKQuaternionRotateVector4Array).
-func GLKQuaternionRotateVector4Array(quaternion unsafe.Pointer, vectors unsafe.Pointer, vectorCount uint) {
-	raw.GLKQuaternionRotateVector4Array(quaternion, vectors, vectorCount)
-}
-
-// GLKQuaternionSlerp calls [raw.GLKQuaternionSlerp] (C function GLKQuaternionSlerp).
-func GLKQuaternionSlerp(quaternionStart unsafe.Pointer, quaternionEnd unsafe.Pointer, t float32) unsafe.Pointer {
-	return raw.GLKQuaternionSlerp(quaternionStart, quaternionEnd, t)
-}
-
-// GLKQuaternionSubtract calls [raw.GLKQuaternionSubtract] (C function GLKQuaternionSubtract).
-func GLKQuaternionSubtract(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKQuaternionSubtract(quaternionLeft, quaternionRight)
-}
-
-// GLKVector2Add calls [raw.GLKVector2Add] (C function GLKVector2Add).
-func GLKVector2Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Add(vectorLeft, vectorRight)
-}
-
-// GLKVector2AddScalar calls [raw.GLKVector2AddScalar] (C function GLKVector2AddScalar).
-func GLKVector2AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector2AddScalar(vector, value)
-}
-
-// GLKVector2AllEqualToScalar calls [raw.GLKVector2AllEqualToScalar] (C function GLKVector2AllEqualToScalar).
-func GLKVector2AllEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector2AllEqualToScalar(vector, value)
-}
-
-// GLKVector2AllEqualToVector2 calls [raw.GLKVector2AllEqualToVector2] (C function GLKVector2AllEqualToVector2).
-func GLKVector2AllEqualToVector2(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector2AllEqualToVector2(vectorLeft, vectorRight)
-}
-
-// GLKVector2AllGreaterThanOrEqualToScalar calls [raw.GLKVector2AllGreaterThanOrEqualToScalar] (C function GLKVector2AllGreaterThanOrEqualToScalar).
-func GLKVector2AllGreaterThanOrEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector2AllGreaterThanOrEqualToScalar(vector, value)
-}
-
-// GLKVector2AllGreaterThanOrEqualToVector2 calls [raw.GLKVector2AllGreaterThanOrEqualToVector2] (C function GLKVector2AllGreaterThanOrEqualToVector2).
-func GLKVector2AllGreaterThanOrEqualToVector2(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector2AllGreaterThanOrEqualToVector2(vectorLeft, vectorRight)
-}
-
-// GLKVector2AllGreaterThanScalar calls [raw.GLKVector2AllGreaterThanScalar] (C function GLKVector2AllGreaterThanScalar).
-func GLKVector2AllGreaterThanScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector2AllGreaterThanScalar(vector, value)
-}
-
-// GLKVector2AllGreaterThanVector2 calls [raw.GLKVector2AllGreaterThanVector2] (C function GLKVector2AllGreaterThanVector2).
-func GLKVector2AllGreaterThanVector2(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector2AllGreaterThanVector2(vectorLeft, vectorRight)
-}
-
-// GLKVector2Distance calls [raw.GLKVector2Distance] (C function GLKVector2Distance).
-func GLKVector2Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) float32 {
-	return raw.GLKVector2Distance(vectorStart, vectorEnd)
-}
-
-// GLKVector2Divide calls [raw.GLKVector2Divide] (C function GLKVector2Divide).
-func GLKVector2Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Divide(vectorLeft, vectorRight)
-}
-
-// GLKVector2DivideScalar calls [raw.GLKVector2DivideScalar] (C function GLKVector2DivideScalar).
-func GLKVector2DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector2DivideScalar(vector, value)
-}
-
-// GLKVector2DotProduct calls [raw.GLKVector2DotProduct] (C function GLKVector2DotProduct).
-func GLKVector2DotProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) float32 {
-	return raw.GLKVector2DotProduct(vectorLeft, vectorRight)
-}
-
-// GLKVector2Length calls [raw.GLKVector2Length] (C function GLKVector2Length).
-func GLKVector2Length(vector unsafe.Pointer) float32 {
-	return raw.GLKVector2Length(vector)
-}
-
-// GLKVector2Lerp calls [raw.GLKVector2Lerp] (C function GLKVector2Lerp).
-func GLKVector2Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
-	return raw.GLKVector2Lerp(vectorStart, vectorEnd, t)
-}
-
-// GLKVector2Make calls [raw.GLKVector2Make] (C function GLKVector2Make).
-func GLKVector2Make(x float32, y float32) unsafe.Pointer {
-	return raw.GLKVector2Make(x, y)
-}
-
-// GLKVector2MakeWithArray calls [raw.GLKVector2MakeWithArray] (C function GLKVector2MakeWithArray).
-func GLKVector2MakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKVector2MakeWithArray(values)
-}
-
-// GLKVector2Maximum calls [raw.GLKVector2Maximum] (C function GLKVector2Maximum).
-func GLKVector2Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Maximum(vectorLeft, vectorRight)
-}
-
-// GLKVector2Minimum calls [raw.GLKVector2Minimum] (C function GLKVector2Minimum).
-func GLKVector2Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Minimum(vectorLeft, vectorRight)
-}
-
-// GLKVector2Multiply calls [raw.GLKVector2Multiply] (C function GLKVector2Multiply).
-func GLKVector2Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Multiply(vectorLeft, vectorRight)
-}
-
-// GLKVector2MultiplyScalar calls [raw.GLKVector2MultiplyScalar] (C function GLKVector2MultiplyScalar).
-func GLKVector2MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector2MultiplyScalar(vector, value)
-}
-
-// GLKVector2Negate calls [raw.GLKVector2Negate] (C function GLKVector2Negate).
-func GLKVector2Negate(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Negate(vector)
-}
-
-// GLKVector2Normalize calls [raw.GLKVector2Normalize] (C function GLKVector2Normalize).
-func GLKVector2Normalize(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Normalize(vector)
-}
-
-// GLKVector2Project calls [raw.GLKVector2Project] (C function GLKVector2Project).
-func GLKVector2Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Project(vectorToProject, projectionVector)
-}
-
-// GLKVector2Subtract calls [raw.GLKVector2Subtract] (C function GLKVector2Subtract).
-func GLKVector2Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector2Subtract(vectorLeft, vectorRight)
-}
-
-// GLKVector2SubtractScalar calls [raw.GLKVector2SubtractScalar] (C function GLKVector2SubtractScalar).
-func GLKVector2SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector2SubtractScalar(vector, value)
-}
-
-// GLKVector3Add calls [raw.GLKVector3Add] (C function GLKVector3Add).
-func GLKVector3Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Add(vectorLeft, vectorRight)
-}
-
-// GLKVector3AddScalar calls [raw.GLKVector3AddScalar] (C function GLKVector3AddScalar).
-func GLKVector3AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector3AddScalar(vector, value)
-}
-
-// GLKVector3AllEqualToScalar calls [raw.GLKVector3AllEqualToScalar] (C function GLKVector3AllEqualToScalar).
-func GLKVector3AllEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector3AllEqualToScalar(vector, value)
-}
-
-// GLKVector3AllEqualToVector3 calls [raw.GLKVector3AllEqualToVector3] (C function GLKVector3AllEqualToVector3).
-func GLKVector3AllEqualToVector3(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector3AllEqualToVector3(vectorLeft, vectorRight)
-}
-
-// GLKVector3AllGreaterThanOrEqualToScalar calls [raw.GLKVector3AllGreaterThanOrEqualToScalar] (C function GLKVector3AllGreaterThanOrEqualToScalar).
-func GLKVector3AllGreaterThanOrEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector3AllGreaterThanOrEqualToScalar(vector, value)
-}
-
-// GLKVector3AllGreaterThanOrEqualToVector3 calls [raw.GLKVector3AllGreaterThanOrEqualToVector3] (C function GLKVector3AllGreaterThanOrEqualToVector3).
-func GLKVector3AllGreaterThanOrEqualToVector3(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector3AllGreaterThanOrEqualToVector3(vectorLeft, vectorRight)
-}
-
-// GLKVector3AllGreaterThanScalar calls [raw.GLKVector3AllGreaterThanScalar] (C function GLKVector3AllGreaterThanScalar).
-func GLKVector3AllGreaterThanScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector3AllGreaterThanScalar(vector, value)
-}
-
-// GLKVector3AllGreaterThanVector3 calls [raw.GLKVector3AllGreaterThanVector3] (C function GLKVector3AllGreaterThanVector3).
-func GLKVector3AllGreaterThanVector3(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector3AllGreaterThanVector3(vectorLeft, vectorRight)
-}
-
-// GLKVector3CrossProduct calls [raw.GLKVector3CrossProduct] (C function GLKVector3CrossProduct).
-func GLKVector3CrossProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3CrossProduct(vectorLeft, vectorRight)
-}
-
-// GLKVector3Distance calls [raw.GLKVector3Distance] (C function GLKVector3Distance).
-func GLKVector3Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) float32 {
-	return raw.GLKVector3Distance(vectorStart, vectorEnd)
-}
-
-// GLKVector3Divide calls [raw.GLKVector3Divide] (C function GLKVector3Divide).
-func GLKVector3Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Divide(vectorLeft, vectorRight)
-}
-
-// GLKVector3DivideScalar calls [raw.GLKVector3DivideScalar] (C function GLKVector3DivideScalar).
-func GLKVector3DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector3DivideScalar(vector, value)
-}
-
-// GLKVector3DotProduct calls [raw.GLKVector3DotProduct] (C function GLKVector3DotProduct).
-func GLKVector3DotProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) float32 {
-	return raw.GLKVector3DotProduct(vectorLeft, vectorRight)
-}
-
-// GLKVector3Length calls [raw.GLKVector3Length] (C function GLKVector3Length).
-func GLKVector3Length(vector unsafe.Pointer) float32 {
-	return raw.GLKVector3Length(vector)
-}
-
-// GLKVector3Lerp calls [raw.GLKVector3Lerp] (C function GLKVector3Lerp).
-func GLKVector3Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
-	return raw.GLKVector3Lerp(vectorStart, vectorEnd, t)
-}
-
-// GLKVector3Make calls [raw.GLKVector3Make] (C function GLKVector3Make).
-func GLKVector3Make(x float32, y float32, z float32) unsafe.Pointer {
-	return raw.GLKVector3Make(x, y, z)
-}
-
-// GLKVector3MakeWithArray calls [raw.GLKVector3MakeWithArray] (C function GLKVector3MakeWithArray).
-func GLKVector3MakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKVector3MakeWithArray(values)
-}
-
-// GLKVector3Maximum calls [raw.GLKVector3Maximum] (C function GLKVector3Maximum).
-func GLKVector3Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Maximum(vectorLeft, vectorRight)
-}
-
-// GLKVector3Minimum calls [raw.GLKVector3Minimum] (C function GLKVector3Minimum).
-func GLKVector3Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Minimum(vectorLeft, vectorRight)
-}
-
-// GLKVector3Multiply calls [raw.GLKVector3Multiply] (C function GLKVector3Multiply).
-func GLKVector3Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Multiply(vectorLeft, vectorRight)
-}
-
-// GLKVector3MultiplyScalar calls [raw.GLKVector3MultiplyScalar] (C function GLKVector3MultiplyScalar).
-func GLKVector3MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector3MultiplyScalar(vector, value)
-}
-
-// GLKVector3Negate calls [raw.GLKVector3Negate] (C function GLKVector3Negate).
-func GLKVector3Negate(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Negate(vector)
-}
+var _fnGLKMatrixStackCreate func(objc.ID) objc.ID
 
-// GLKVector3Normalize calls [raw.GLKVector3Normalize] (C function GLKVector3Normalize).
-func GLKVector3Normalize(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Normalize(vector)
+// GLKMatrixStackCreate calls the GLKit framework function GLKMatrixStackCreate.
+func GLKMatrixStackCreate(alloc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackCreate, _lib, "GLKMatrixStackCreate")
+	}
+	_ret := _fnGLKMatrixStackCreate(objref.IDOf(alloc))
+	return obj.Wrap(_ret)
 }
 
-// GLKVector3Project calls [raw.GLKVector3Project] (C function GLKVector3Project).
-func GLKVector3Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Project(vectorToProject, projectionVector)
-}
-
-// GLKVector3Subtract calls [raw.GLKVector3Subtract] (C function GLKVector3Subtract).
-func GLKVector3Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector3Subtract(vectorLeft, vectorRight)
-}
-
-// GLKVector3SubtractScalar calls [raw.GLKVector3SubtractScalar] (C function GLKVector3SubtractScalar).
-func GLKVector3SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector3SubtractScalar(vector, value)
-}
-
-// GLKVector4Add calls [raw.GLKVector4Add] (C function GLKVector4Add).
-func GLKVector4Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Add(vectorLeft, vectorRight)
-}
-
-// GLKVector4AddScalar calls [raw.GLKVector4AddScalar] (C function GLKVector4AddScalar).
-func GLKVector4AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector4AddScalar(vector, value)
-}
-
-// GLKVector4AllEqualToScalar calls [raw.GLKVector4AllEqualToScalar] (C function GLKVector4AllEqualToScalar).
-func GLKVector4AllEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector4AllEqualToScalar(vector, value)
-}
-
-// GLKVector4AllEqualToVector4 calls [raw.GLKVector4AllEqualToVector4] (C function GLKVector4AllEqualToVector4).
-func GLKVector4AllEqualToVector4(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector4AllEqualToVector4(vectorLeft, vectorRight)
-}
-
-// GLKVector4AllGreaterThanOrEqualToScalar calls [raw.GLKVector4AllGreaterThanOrEqualToScalar] (C function GLKVector4AllGreaterThanOrEqualToScalar).
-func GLKVector4AllGreaterThanOrEqualToScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector4AllGreaterThanOrEqualToScalar(vector, value)
-}
-
-// GLKVector4AllGreaterThanOrEqualToVector4 calls [raw.GLKVector4AllGreaterThanOrEqualToVector4] (C function GLKVector4AllGreaterThanOrEqualToVector4).
-func GLKVector4AllGreaterThanOrEqualToVector4(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector4AllGreaterThanOrEqualToVector4(vectorLeft, vectorRight)
-}
-
-// GLKVector4AllGreaterThanScalar calls [raw.GLKVector4AllGreaterThanScalar] (C function GLKVector4AllGreaterThanScalar).
-func GLKVector4AllGreaterThanScalar(vector unsafe.Pointer, value float32) bool {
-	return raw.GLKVector4AllGreaterThanScalar(vector, value)
-}
-
-// GLKVector4AllGreaterThanVector4 calls [raw.GLKVector4AllGreaterThanVector4] (C function GLKVector4AllGreaterThanVector4).
-func GLKVector4AllGreaterThanVector4(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) bool {
-	return raw.GLKVector4AllGreaterThanVector4(vectorLeft, vectorRight)
-}
-
-// GLKVector4CrossProduct calls [raw.GLKVector4CrossProduct] (C function GLKVector4CrossProduct).
-func GLKVector4CrossProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4CrossProduct(vectorLeft, vectorRight)
-}
-
-// GLKVector4Distance calls [raw.GLKVector4Distance] (C function GLKVector4Distance).
-func GLKVector4Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) float32 {
-	return raw.GLKVector4Distance(vectorStart, vectorEnd)
-}
-
-// GLKVector4Divide calls [raw.GLKVector4Divide] (C function GLKVector4Divide).
-func GLKVector4Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Divide(vectorLeft, vectorRight)
-}
-
-// GLKVector4DivideScalar calls [raw.GLKVector4DivideScalar] (C function GLKVector4DivideScalar).
-func GLKVector4DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector4DivideScalar(vector, value)
-}
-
-// GLKVector4DotProduct calls [raw.GLKVector4DotProduct] (C function GLKVector4DotProduct).
-func GLKVector4DotProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) float32 {
-	return raw.GLKVector4DotProduct(vectorLeft, vectorRight)
-}
-
-// GLKVector4Length calls [raw.GLKVector4Length] (C function GLKVector4Length).
-func GLKVector4Length(vector unsafe.Pointer) float32 {
-	return raw.GLKVector4Length(vector)
-}
-
-// GLKVector4Lerp calls [raw.GLKVector4Lerp] (C function GLKVector4Lerp).
-func GLKVector4Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
-	return raw.GLKVector4Lerp(vectorStart, vectorEnd, t)
-}
-
-// GLKVector4Make calls [raw.GLKVector4Make] (C function GLKVector4Make).
-func GLKVector4Make(x float32, y float32, z float32, w float32) unsafe.Pointer {
-	return raw.GLKVector4Make(x, y, z, w)
-}
-
-// GLKVector4MakeWithArray calls [raw.GLKVector4MakeWithArray] (C function GLKVector4MakeWithArray).
-func GLKVector4MakeWithArray(values *float32) unsafe.Pointer {
-	return raw.GLKVector4MakeWithArray(values)
-}
+var _fnGLKMatrixStackGetTypeID func() int
 
-// GLKVector4MakeWithVector3 calls [raw.GLKVector4MakeWithVector3] (C function GLKVector4MakeWithVector3).
-func GLKVector4MakeWithVector3(vector unsafe.Pointer, w float32) unsafe.Pointer {
-	return raw.GLKVector4MakeWithVector3(vector, w)
+// GLKMatrixStackGetTypeID calls the GLKit framework function GLKMatrixStackGetTypeID.
+func GLKMatrixStackGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetTypeID, _lib, "GLKMatrixStackGetTypeID")
+	}
+	return _fnGLKMatrixStackGetTypeID()
 }
 
-// GLKVector4Maximum calls [raw.GLKVector4Maximum] (C function GLKVector4Maximum).
-func GLKVector4Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Maximum(vectorLeft, vectorRight)
-}
-
-// GLKVector4Minimum calls [raw.GLKVector4Minimum] (C function GLKVector4Minimum).
-func GLKVector4Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Minimum(vectorLeft, vectorRight)
-}
-
-// GLKVector4Multiply calls [raw.GLKVector4Multiply] (C function GLKVector4Multiply).
-func GLKVector4Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Multiply(vectorLeft, vectorRight)
-}
-
-// GLKVector4MultiplyScalar calls [raw.GLKVector4MultiplyScalar] (C function GLKVector4MultiplyScalar).
-func GLKVector4MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector4MultiplyScalar(vector, value)
-}
+var _fnGLKMatrixStackMultiplyMatrixStack func(objc.ID, objc.ID)
 
-// GLKVector4Negate calls [raw.GLKVector4Negate] (C function GLKVector4Negate).
-func GLKVector4Negate(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Negate(vector)
+// GLKMatrixStackMultiplyMatrixStack calls the GLKit framework function GLKMatrixStackMultiplyMatrixStack.
+func GLKMatrixStackMultiplyMatrixStack(stackLeft obj.Object, stackRight obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackMultiplyMatrixStack == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackMultiplyMatrixStack, _lib, "GLKMatrixStackMultiplyMatrixStack")
+	}
+	_fnGLKMatrixStackMultiplyMatrixStack(objref.IDOf(stackLeft), objref.IDOf(stackRight))
 }
 
-// GLKVector4Normalize calls [raw.GLKVector4Normalize] (C function GLKVector4Normalize).
-func GLKVector4Normalize(vector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Normalize(vector)
-}
+var _fnGLKMatrixStackPop func(objc.ID)
 
-// GLKVector4Project calls [raw.GLKVector4Project] (C function GLKVector4Project).
-func GLKVector4Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Project(vectorToProject, projectionVector)
+// GLKMatrixStackPop calls the GLKit framework function GLKMatrixStackPop.
+func GLKMatrixStackPop(stack obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackPop == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackPop, _lib, "GLKMatrixStackPop")
+	}
+	_fnGLKMatrixStackPop(objref.IDOf(stack))
 }
 
-// GLKVector4Subtract calls [raw.GLKVector4Subtract] (C function GLKVector4Subtract).
-func GLKVector4Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
-	return raw.GLKVector4Subtract(vectorLeft, vectorRight)
-}
+var _fnGLKMatrixStackPush func(objc.ID)
 
-// GLKVector4SubtractScalar calls [raw.GLKVector4SubtractScalar] (C function GLKVector4SubtractScalar).
-func GLKVector4SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
-	return raw.GLKVector4SubtractScalar(vector, value)
+// GLKMatrixStackPush calls the GLKit framework function GLKMatrixStackPush.
+func GLKMatrixStackPush(stack obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackPush == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackPush, _lib, "GLKMatrixStackPush")
+	}
+	_fnGLKMatrixStackPush(objref.IDOf(stack))
 }
 
-// GLKVertexAttributeParametersFromModelIO calls [raw.GLKVertexAttributeParametersFromModelIO] (C function GLKVertexAttributeParametersFromModelIO).
-func GLKVertexAttributeParametersFromModelIO(vertexFormat modelio.MDLVertexFormat) raw.GLKVertexAttributeParameters {
-	return raw.GLKVertexAttributeParametersFromModelIO(vertexFormat)
-}
+var _fnGLKMatrixStackRotate func(objc.ID, float32, float32, float32, float32)
 
-// NSStringFromGLKMatrix2 calls [raw.NSStringFromGLKMatrix2] (C function NSStringFromGLKMatrix2).
-func NSStringFromGLKMatrix2(matrix unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKMatrix2(matrix)
+// GLKMatrixStackRotate calls the GLKit framework function GLKMatrixStackRotate.
+func GLKMatrixStackRotate(stack obj.Object, radians float32, x float32, y float32, z float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackRotate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotate, _lib, "GLKMatrixStackRotate")
+	}
+	_fnGLKMatrixStackRotate(objref.IDOf(stack), radians, x, y, z)
 }
 
-// NSStringFromGLKMatrix3 calls [raw.NSStringFromGLKMatrix3] (C function NSStringFromGLKMatrix3).
-func NSStringFromGLKMatrix3(matrix unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKMatrix3(matrix)
-}
+var _fnGLKMatrixStackRotateX func(objc.ID, float32)
 
-// NSStringFromGLKMatrix4 calls [raw.NSStringFromGLKMatrix4] (C function NSStringFromGLKMatrix4).
-func NSStringFromGLKMatrix4(matrix unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKMatrix4(matrix)
+// GLKMatrixStackRotateX calls the GLKit framework function GLKMatrixStackRotateX.
+func GLKMatrixStackRotateX(stack obj.Object, radians float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackRotateX == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateX, _lib, "GLKMatrixStackRotateX")
+	}
+	_fnGLKMatrixStackRotateX(objref.IDOf(stack), radians)
 }
 
-// NSStringFromGLKQuaternion calls [raw.NSStringFromGLKQuaternion] (C function NSStringFromGLKQuaternion).
-func NSStringFromGLKQuaternion(quaternion unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKQuaternion(quaternion)
-}
+var _fnGLKMatrixStackRotateY func(objc.ID, float32)
 
-// NSStringFromGLKVector2 calls [raw.NSStringFromGLKVector2] (C function NSStringFromGLKVector2).
-func NSStringFromGLKVector2(vector unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKVector2(vector)
+// GLKMatrixStackRotateY calls the GLKit framework function GLKMatrixStackRotateY.
+func GLKMatrixStackRotateY(stack obj.Object, radians float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackRotateY == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateY, _lib, "GLKMatrixStackRotateY")
+	}
+	_fnGLKMatrixStackRotateY(objref.IDOf(stack), radians)
 }
 
-// NSStringFromGLKVector3 calls [raw.NSStringFromGLKVector3] (C function NSStringFromGLKVector3).
-func NSStringFromGLKVector3(vector unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKVector3(vector)
-}
+var _fnGLKMatrixStackRotateZ func(objc.ID, float32)
 
-// NSStringFromGLKVector4 calls [raw.NSStringFromGLKVector4] (C function NSStringFromGLKVector4).
-func NSStringFromGLKVector4(vector unsafe.Pointer) *foundation.NSString {
-	return raw.NSStringFromGLKVector4(vector)
+// GLKMatrixStackRotateZ calls the GLKit framework function GLKMatrixStackRotateZ.
+func GLKMatrixStackRotateZ(stack obj.Object, radians float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackRotateZ == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackRotateZ, _lib, "GLKMatrixStackRotateZ")
+	}
+	_fnGLKMatrixStackRotateZ(objref.IDOf(stack), radians)
+}
+
+var _fnGLKMatrixStackScale func(objc.ID, float32, float32, float32)
+
+// GLKMatrixStackScale calls the GLKit framework function GLKMatrixStackScale.
+func GLKMatrixStackScale(stack obj.Object, sx float32, sy float32, sz float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackScale == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackScale, _lib, "GLKMatrixStackScale")
+	}
+	_fnGLKMatrixStackScale(objref.IDOf(stack), sx, sy, sz)
+}
+
+var _fnGLKMatrixStackSize func(objc.ID) int
+
+// GLKMatrixStackSize calls the GLKit framework function GLKMatrixStackSize.
+func GLKMatrixStackSize(stack obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackSize == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackSize, _lib, "GLKMatrixStackSize")
+	}
+	return _fnGLKMatrixStackSize(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackTranslate func(objc.ID, float32, float32, float32)
+
+// GLKMatrixStackTranslate calls the GLKit framework function GLKMatrixStackTranslate.
+func GLKMatrixStackTranslate(stack obj.Object, tx float32, ty float32, tz float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackTranslate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackTranslate, _lib, "GLKMatrixStackTranslate")
+	}
+	_fnGLKMatrixStackTranslate(objref.IDOf(stack), tx, ty, tz)
 }

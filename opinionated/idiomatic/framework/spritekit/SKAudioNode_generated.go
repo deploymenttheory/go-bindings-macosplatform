@@ -5,353 +5,283 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A node that plays audio.
+// AudioNode is an idiomatic wrapper over the Objective-C class SKAudioNode.
 //
-// AudioNode wraps [raw.SKAudioNode] with a fluent Go API.
+// It embeds [Node], promoting that type's methods.
+//
+// A node that plays audio.
 type AudioNode struct {
-	inner *raw.SKAudioNode
+	Node
 }
 
-// Unwrap returns the underlying [raw.SKAudioNode].
-func (x *AudioNode) Unwrap() *raw.SKAudioNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioNodeFromID adopts an existing object pointer as a AudioNode (nil for 0).
+// AudioNodeFromID adopts an existing Objective-C object as a AudioNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioNodeFromID(id objc.ID) *AudioNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioNode{inner: raw.SKAudioNodeFromID(id)}
+	x := &AudioNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes an audio node from an AVFoundation audio node.
-//
-// NewAudioNodeWithAVAudioNode creates a new [AudioNode].
-func NewAudioNodeWithAVAudioNode(node *avfaudio.AVAudioNode) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), node.Ptr())
-	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
+// audioNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioNodeAdopt(id objc.ID) *AudioNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Tells you when to initialize an audio node that has been unarchived.
-//
-// NewAudioNodeWithCoder creates a new [AudioNode].
-func NewAudioNodeWithCoder(aDecoder *foundation.NSCoder) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
+// NewAudioNodeWithAVAudioNode initializes an audio node from an AVFoundation audio node.
+func NewAudioNodeWithAVAudioNode(node obj.Object) *AudioNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(node))
+	return audioNodeAdopt(_id)
 }
 
-// Initializes an audio node from an audio asset with the specified filename.
-//
-// NewAudioNodeWithFileNamed creates a new [AudioNode].
+// NewAudioNodeWithCoder tells you when to initialize an audio node that has been unarchived.
+func NewAudioNodeWithCoder(aDecoder obj.Object) *AudioNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return audioNodeAdopt(_id)
+}
+
+// NewAudioNodeWithFileNamed initializes an audio node from an audio asset with the specified filename.
 func NewAudioNodeWithFileNamed(name string) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(name))
+	return audioNodeAdopt(_id)
 }
 
-// Initializes an audio node from an audio asset with the specified URL.
-//
-// NewAudioNodeWithURL creates a new [AudioNode].
+// NewAudioNodeWithURL initializes an audio node from an audio asset with the specified URL.
 func NewAudioNodeWithURL(url string) *AudioNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAudioNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &AudioNode{inner: raw.SKAudioNodeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAudioNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return audioNodeAdopt(_id)
 }
 
-// The audio node’s current audio asset.
-//
-// WithAvAudioNode sets the avAudioNode property and returns the receiver for chaining.
-func (x *AudioNode) WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode {
-	x.inner.SetAvAudioNode(avAudioNode)
+// WithAvAudioNode the audio node’s current audio asset.
+func (x *AudioNode) WithAvAudioNode(avAudioNode obj.Object) *AudioNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvAudioNode:"), objref.IDOf(avAudioNode))
 	return x
 }
 
-// A Boolean value that indicates whether the audio should play in a loop when the node is added to the scene.
-//
-// WithAutoplayLooped sets the autoplayLooped property and returns the receiver for chaining.
+// WithAutoplayLooped a Boolean value that indicates whether the audio should play in a loop when the node is added to the scene.
 func (x *AudioNode) WithAutoplayLooped(autoplayLooped bool) *AudioNode {
-	x.inner.SetAutoplayLooped(autoplayLooped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoplayLooped:"), autoplayLooped)
 	return x
 }
 
-// A Boolean property that indicates whether the node’s audio is altered based on the position of the node.
-//
-// WithPositional sets the positional property and returns the receiver for chaining.
+// WithPositional a Boolean property that indicates whether the node’s audio is altered based on the position of the node.
 func (x *AudioNode) WithPositional(positional bool) *AudioNode {
-	x.inner.SetPositional(positional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
 	return x
 }
 
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
+// WithPosition the position of the node in its parent’s coordinate system.
 func (x *AudioNode) WithPosition(position corefoundation.CGPoint) *AudioNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
 	return x
 }
 
-// The height of the node relative to its parent.
-//
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition the height of the node relative to its parent.
 func (x *AudioNode) WithZPosition(zPosition float64) *AudioNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
-// The Euler rotation about the z axis (in radians).
-//
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation the Euler rotation about the z axis (in radians).
 func (x *AudioNode) WithZRotation(zRotation float64) *AudioNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
-// A scaling factor that multiplies the width of a node and its children.
-//
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale a scaling factor that multiplies the width of a node and its children.
 func (x *AudioNode) WithXScale(xScale float64) *AudioNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
-// A scaling factor that multiplies the height of a node and its children.
-//
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale a scaling factor that multiplies the height of a node and its children.
 func (x *AudioNode) WithYScale(yScale float64) *AudioNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
-// A speed modifier applied to all actions executed by a node and its descendants.
-//
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
 func (x *AudioNode) WithSpeed(speed float64) *AudioNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
-// The transparency value applied to the node’s contents.
-//
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha the transparency value applied to the node’s contents.
 func (x *AudioNode) WithAlpha(alpha float64) *AudioNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// A Boolean value that determines whether actions on the node and its descendants are processed.
-//
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
 func (x *AudioNode) WithPaused(paused bool) *AudioNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
-// A Boolean value that determines whether a node and its descendants are rendered.
-//
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
 func (x *AudioNode) WithHidden(hidden bool) *AudioNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// A Boolean value that indicates whether the node receives touch events.
-//
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
 func (x *AudioNode) WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
-// The node’s assignable name.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName the node’s assignable name.
 func (x *AudioNode) WithName(name string) *AudioNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The physics body associated with the node.
-//
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody the physics body associated with the node.
 func (x *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
-// A dictionary containing arbitrary data.
-//
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *AudioNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData a dictionary containing arbitrary data.
+func (x *AudioNode) WithUserData(userData obj.Object) *AudioNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
-// The reach constraints to apply to the node when executing a reach action.
-//
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
 func (x *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
-// A list of constraints to apply to the node.
-//
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *AudioNode) WithConstraints(items ...*raw.SKConstraint) *AudioNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints a list of constraints to apply to the node.
+func (x *AudioNode) WithConstraints(items ...*Constraint) *AudioNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// The values of each attribute associated with the node’s attached shader.
-//
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *AudioNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues the values of each attribute associated with the node’s attached shader.
+func (x *AudioNode) WithAttributeValues(attributeValues obj.Object) *AudioNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-//
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 func (x *AudioNode) WithAccessibilityElement(accessibilityElement bool) *AudioNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
-// A string value describing the user interface element type; for example, a button.
-//
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
 func (x *AudioNode) WithAccessibilityRole(accessibilityRole string) *AudioNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
-// A string value describing the user interface element name and type; for example, the Buy button.
-//
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
 func (x *AudioNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
-// A string that defines this user interface element’s subrole; for example, a full-screen button.
-//
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
 func (x *AudioNode) WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+// WithAccessibilityFrame the size of this user interface element, in screen points.
 func (x *AudioNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
 	return x
 }
 
-// The user interface element that contains this element.
-//
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *AudioNode) WithAccessibilityParent(accessibilityParent objc.ID) *AudioNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent the user interface element that contains this element.
+func (x *AudioNode) WithAccessibilityParent(accessibilityParent obj.Object) *AudioNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
-// The help description of this user interface element; for example, the text shown in a tooltip.
-//
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
 func (x *AudioNode) WithAccessibilityHelp(accessibilityHelp string) *AudioNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
-// A short description of this user interface element.
-//
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel a short description of this user interface element.
 func (x *AudioNode) WithAccessibilityLabel(accessibilityLabel string) *AudioNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
-// A toggle you implement to indicate to the system whether this user interface element should respond to user input.
-//
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
 func (x *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// Sets or gets the current AVAudioNode used by this instance.
-//
-// AvAudioNode calls the underlying AvAudioNode.
-func (x *AudioNode) AvAudioNode() *avfaudio.AVAudioNode {
-	return x.inner.AvAudioNode()
+// AvAudioNode sets or gets the current AVAudioNode used by this instance.
+func (x *AudioNode) AvAudioNode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("avAudioNode"))
+	return obj.Wrap(_r)
 }
 
-// SetAvAudioNode calls the underlying SetAvAudioNode.
-func (x *AudioNode) SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode) {
-	x.inner.SetAvAudioNode(avAudioNode)
+// SetAvAudioNode wraps the corresponding Objective-C method.
+func (x *AudioNode) SetAvAudioNode(avAudioNode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvAudioNode:"), objref.IDOf(avAudioNode))
 }
 
-// Specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES. @see SKView.paused
-//
-// AutoplayLooped calls the underlying AutoplayLooped.
+// AutoplayLooped specifies whether the node is to automatically play sound when added to a scene. If autoplaysLooped is NO, the node and its sound must be explicitly scheduled and played using the scene's engine. If YES, the node will automatically play sound when added to a scene. Defaults to YES.
 func (x *AudioNode) AutoplayLooped() bool {
-	return x.inner.AutoplayLooped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoplayLooped"))
+	return _r
 }
 
-// SetAutoplayLooped calls the underlying SetAutoplayLooped.
+// SetAutoplayLooped wraps the corresponding Objective-C method.
 func (x *AudioNode) SetAutoplayLooped(autoplayLooped bool) {
-	x.inner.SetAutoplayLooped(autoplayLooped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoplayLooped:"), autoplayLooped)
 }
 
-// Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node. @see AVAudio3DMixing @see SKScene.listener
-//
-// IsPositional calls the underlying IsPositional.
+// IsPositional marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node.
 func (x *AudioNode) IsPositional() bool {
-	return x.inner.IsPositional()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPositional"))
+	return _r
 }
 
-// SetPositional calls the underlying SetPositional.
+// SetPositional wraps the corresponding Objective-C method.
 func (x *AudioNode) SetPositional(positional bool) {
-	x.inner.SetPositional(positional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPositional:"), positional)
 }
-
-func (x *AudioNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // AudioNodeable is the interface implemented by [AudioNode], for mocking and DI.
 type AudioNodeable interface {
-	Unwrap() *raw.SKAudioNode
-	WithAvAudioNode(avAudioNode *avfaudio.AVAudioNode) *AudioNode
+	obj.Object
+	WithAvAudioNode(avAudioNode obj.Object) *AudioNode
 	WithAutoplayLooped(autoplayLooped bool) *AudioNode
 	WithPositional(positional bool) *AudioNode
 	WithPosition(position corefoundation.CGPoint) *AudioNode
@@ -366,21 +296,21 @@ type AudioNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *AudioNode
 	WithName(name string) *AudioNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *AudioNode
+	WithUserData(userData obj.Object) *AudioNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode
-	WithConstraints(items ...*raw.SKConstraint) *AudioNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *AudioNode
+	WithConstraints(items ...*Constraint) *AudioNode
+	WithAttributeValues(attributeValues obj.Object) *AudioNode
 	WithAccessibilityElement(accessibilityElement bool) *AudioNode
 	WithAccessibilityRole(accessibilityRole string) *AudioNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *AudioNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *AudioNode
 	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *AudioNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *AudioNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *AudioNode
 	WithAccessibilityHelp(accessibilityHelp string) *AudioNode
 	WithAccessibilityLabel(accessibilityLabel string) *AudioNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *AudioNode
-	AvAudioNode() *avfaudio.AVAudioNode
-	SetAvAudioNode(avAudioNode *avfaudio.AVAudioNode)
+	AvAudioNode() obj.Object
+	SetAvAudioNode(avAudioNode obj.Object)
 	AutoplayLooped() bool
 	SetAutoplayLooped(autoplayLooped bool)
 	IsPositional() bool
@@ -388,3 +318,5 @@ type AudioNodeable interface {
 }
 
 var _ AudioNodeable = (*AudioNode)(nil)
+
+var _ NodeProvider = (*AudioNode)(nil)

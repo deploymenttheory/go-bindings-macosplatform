@@ -5,103 +5,83 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object that defines a Virtio sound device configuration.
+// VirtioSoundDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceConfiguration.
 //
-// VirtioSoundDeviceConfiguration wraps [raw.VZVirtioSoundDeviceConfiguration] with a fluent Go API.
+// It embeds [AudioDeviceConfiguration], promoting that type's methods.
+//
+// An object that defines a Virtio sound device configuration.
 type VirtioSoundDeviceConfiguration struct {
-	inner *raw.VZVirtioSoundDeviceConfiguration
+	AudioDeviceConfiguration
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSoundDeviceConfiguration].
-func (x *VirtioSoundDeviceConfiguration) Unwrap() *raw.VZVirtioSoundDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSoundDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSoundDeviceConfigurationFromID adopts an existing object pointer as a VirtioSoundDeviceConfiguration (nil for 0).
+// VirtioSoundDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioSoundDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSoundDeviceConfigurationFromID(id objc.ID) *VirtioSoundDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSoundDeviceConfiguration{inner: raw.VZVirtioSoundDeviceConfigurationFromID(id)}
-}
-
-// NewVirtioSoundDeviceConfiguration creates a new [VirtioSoundDeviceConfiguration].
-func NewVirtioSoundDeviceConfiguration() *VirtioSoundDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSoundDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioSoundDeviceConfiguration{inner: raw.VZVirtioSoundDeviceConfigurationFromID(_id)}
-}
-
-// List of audio streams exposed by this device.
-//
-// WithStreams sets the collection, converting the Go slice to an NSArray.
-func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStreams(foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asVirtioSoundDeviceStreamConfiguration().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStreams(_arr)
+	x := &VirtioSoundDeviceConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Streams returns the collection as a Go slice.
-func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
-	arr := x.inner.Streams()
-	if arr == nil {
+// virtioSoundDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioSoundDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSoundDeviceConfigurationAdopt(id objc.ID) *VirtioSoundDeviceConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VirtioSoundDeviceStreamConfiguration {
-		return &VirtioSoundDeviceStreamConfiguration{inner: raw.VZVirtioSoundDeviceStreamConfigurationFromID(purego.Retain(_id))}
+	x := &VirtioSoundDeviceConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewVirtioSoundDeviceConfiguration creates a new VirtioSoundDeviceConfiguration.
+func NewVirtioSoundDeviceConfiguration() *VirtioSoundDeviceConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSoundDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioSoundDeviceConfigurationAdopt(_id)
+}
+
+// WithStreams list of audio streams exposed by this device.
+func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v VirtioSoundDeviceStreamConfigurationProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), _arr)
+	return x
+}
+
+// Streams wraps the corresponding Objective-C method.
+//
+// Streams returns the collection as a Go slice.
+func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streams"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioSoundDeviceStreamConfiguration {
+		return VirtioSoundDeviceStreamConfigurationFromID(_id)
 	})
 }
 
-// SetStreams calls the underlying SetStreams.
-func (x *VirtioSoundDeviceConfiguration) SetStreams(streams ...VirtioSoundDeviceStreamConfigurationProvider) {
-	_ptrs := make([]objc.ID, len(streams))
-	for _i, _v := range streams {
-		_ptrs[_i] = _v.asVirtioSoundDeviceStreamConfiguration().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetStreams(_arg0)
-}
-
-func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration {
-	return &x.inner.VZAudioDeviceConfiguration
+// SetStreams wraps the corresponding Objective-C method.
+func (x *VirtioSoundDeviceConfiguration) SetStreams(streams []*VirtioSoundDeviceStreamConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreams:"), purego.SliceToNSArray(streams, func(_v *VirtioSoundDeviceStreamConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VirtioSoundDeviceConfigurationable is the interface implemented by [VirtioSoundDeviceConfiguration], for mocking and DI.
 type VirtioSoundDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioSoundDeviceConfiguration
+	obj.Object
 	WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration
 	Streams() []*VirtioSoundDeviceStreamConfiguration
-	SetStreams(streams ...VirtioSoundDeviceStreamConfigurationProvider)
+	SetStreams(streams []*VirtioSoundDeviceStreamConfiguration)
 }
 
 var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)
+
+var _ AudioDeviceConfigurationProvider = (*VirtioSoundDeviceConfiguration)(nil)

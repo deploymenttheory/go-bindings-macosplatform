@@ -5,71 +5,80 @@
 package shazamkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents the metadata for a matched reference signature.
+// MatchedMediaItem is an idiomatic wrapper over the Objective-C class SHMatchedMediaItem.
 //
-// MatchedMediaItem wraps [raw.SHMatchedMediaItem] with a fluent Go API.
+// It embeds [MediaItem], promoting that type's methods.
+//
+// An object that represents the metadata for a matched reference signature.
 type MatchedMediaItem struct {
-	inner *raw.SHMatchedMediaItem
+	MediaItem
 }
 
-// Unwrap returns the underlying [raw.SHMatchedMediaItem].
-func (x *MatchedMediaItem) Unwrap() *raw.SHMatchedMediaItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchedMediaItem) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchedMediaItemFromID adopts an existing object pointer as a MatchedMediaItem (nil for 0).
+// MatchedMediaItemFromID adopts an existing Objective-C object as a MatchedMediaItem
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchedMediaItemFromID(id objc.ID) *MatchedMediaItem {
 	if id == 0 {
 		return nil
 	}
-	return &MatchedMediaItem{inner: raw.SHMatchedMediaItemFromID(id)}
+	x := &MatchedMediaItem{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMatchedMediaItem creates a new [MatchedMediaItem].
+// matchedMediaItemAdopt wraps an Objective-C object that this code just created as a
+// MatchedMediaItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchedMediaItemAdopt(id objc.ID) *MatchedMediaItem {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchedMediaItem{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMatchedMediaItem creates a new MatchedMediaItem.
 func NewMatchedMediaItem() *MatchedMediaItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHMatchedMediaItem")), objc.RegisterName("new"))
-	return &MatchedMediaItem{inner: raw.SHMatchedMediaItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SHMatchedMediaItem")), objc.RegisterName("new"))
+	return matchedMediaItemAdopt(_id)
 }
 
-// A multiple for the difference in frequency between the matched audio and the query audio. A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz. No match returns if the frequency skew is too large.
-//
-// FrequencySkew calls the underlying FrequencySkew.
+// FrequencySkew a multiple for the difference in frequency between the matched audio and the query audio. A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz. No match returns if the frequency skew is too large.
 func (x *MatchedMediaItem) FrequencySkew() float32 {
-	return x.inner.FrequencySkew()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frequencySkew"))
+	return _r
 }
 
-// The timecode in the reference recording that matches the start of the query, in seconds. The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
-//
-// MatchOffset calls the underlying MatchOffset.
+// MatchOffset the timecode in the reference recording that matches the start of the query, in seconds. The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
 func (x *MatchedMediaItem) MatchOffset() float64 {
-	return x.inner.MatchOffset()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("matchOffset"))
+	return _r
 }
 
-// The updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
-//
-// PredictedCurrentMatchOffset calls the underlying PredictedCurrentMatchOffset.
+// PredictedCurrentMatchOffset the updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
 func (x *MatchedMediaItem) PredictedCurrentMatchOffset() float64 {
-	return x.inner.PredictedCurrentMatchOffset()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("predictedCurrentMatchOffset"))
+	return _r
 }
 
-// The level of confidence in the match result. The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
-//
-// Confidence calls the underlying Confidence.
+// Confidence the level of confidence in the match result. The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
 func (x *MatchedMediaItem) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
-
-func (x *MatchedMediaItem) asMediaItem() *raw.SHMediaItem { return &x.inner.SHMediaItem }
 
 // MatchedMediaItemable is the interface implemented by [MatchedMediaItem], for mocking and DI.
 type MatchedMediaItemable interface {
-	Unwrap() *raw.SHMatchedMediaItem
+	obj.Object
 	FrequencySkew() float32
 	MatchOffset() float64
 	PredictedCurrentMatchOffset() float64
@@ -77,3 +86,5 @@ type MatchedMediaItemable interface {
 }
 
 var _ MatchedMediaItemable = (*MatchedMediaItem)(nil)
+
+var _ MediaItemProvider = (*MatchedMediaItem)(nil)

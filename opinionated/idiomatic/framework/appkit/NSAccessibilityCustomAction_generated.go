@@ -5,143 +5,113 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A custom action to perform on an accessible object.
+// AccessibilityCustomAction is an idiomatic wrapper over the Objective-C class NSAccessibilityCustomAction.
 //
-// AccessibilityCustomAction wraps [raw.NSAccessibilityCustomAction] with a fluent Go API.
+// A custom action to perform on an accessible object.
 type AccessibilityCustomAction struct {
-	inner *raw.NSAccessibilityCustomAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAccessibilityCustomAction].
-func (x *AccessibilityCustomAction) Unwrap() *raw.NSAccessibilityCustomAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessibilityCustomAction) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessibilityCustomActionFromID adopts an existing object pointer as a AccessibilityCustomAction (nil for 0).
+// AccessibilityCustomActionFromID adopts an existing Objective-C object as a AccessibilityCustomAction
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessibilityCustomActionFromID(id objc.ID) *AccessibilityCustomAction {
 	if id == 0 {
 		return nil
 	}
-	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(id)}
+	x := &AccessibilityCustomAction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a custom action object with the specified name and handler.
-//
-// NewAccessibilityCustomActionWithNameHandler creates a new [AccessibilityCustomAction].
+// accessibilityCustomActionAdopt wraps an Objective-C object that this code just created as a
+// AccessibilityCustomAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessibilityCustomActionAdopt(id objc.ID) *AccessibilityCustomAction {
+	if id == 0 {
+		return nil
+	}
+	x := &AccessibilityCustomAction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccessibilityCustomAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessibilityCustomAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessibilityCustomAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AccessibilityCustomAction) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAccessibilityCustomActionWithNameHandler creates a custom action object with the specified name and handler.
 func NewAccessibilityCustomActionWithNameHandler(name string, handler func() bool) *AccessibilityCustomAction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:handler:"), foundation.NSStringStringWithUTF8String(name).Ptr(), handler)
-	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityCustomAction")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:handler:"), purego.NSString(name), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
+	return accessibilityCustomActionAdopt(_id)
 }
 
-// Creates a custom action object with the specified name, target, and selector.
-//
-// NewAccessibilityCustomActionWithNameTargetSelector creates a new [AccessibilityCustomAction].
-func NewAccessibilityCustomActionWithNameTargetSelector(name string, target foundation.NSObjectProtocol, selector objc.SEL) *AccessibilityCustomAction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:target:selector:"), foundation.NSStringStringWithUTF8String(name).Ptr(), target, selector)
-	return &AccessibilityCustomAction{inner: raw.NSAccessibilityCustomActionFromID(_id)}
-}
-
-// A localized name that describes the action.
-//
-// WithName sets the name property and returns the receiver for chaining.
+// WithName a localized name that describes the action.
 func (x *AccessibilityCustomAction) WithName(name string) *AccessibilityCustomAction {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// The closure that handles the execution of the action.
-//
-// WithHandler sets the handler property and returns the receiver for chaining.
+// WithHandler the closure that handles the execution of the action.
 func (x *AccessibilityCustomAction) WithHandler(handler func() bool) *AccessibilityCustomAction {
-	x.inner.SetHandler(handler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandler:"), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
 	return x
 }
 
-// The object that performs the action through a selector.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *AccessibilityCustomAction) WithTarget(target foundation.NSObjectProtocol) *AccessibilityCustomAction {
-	x.inner.SetTarget(target)
-	return x
-}
-
-// The method to call on the target to perform the action.
-//
-// WithSelector sets the selector property and returns the receiver for chaining.
-func (x *AccessibilityCustomAction) WithSelector(selector objc.SEL) *AccessibilityCustomAction {
-	x.inner.SetSelector(selector)
-	return x
-}
-
-// Name calls the underlying Name.
+// Name wraps the corresponding Objective-C method.
 func (x *AccessibilityCustomAction) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
+// SetName wraps the corresponding Objective-C method.
 func (x *AccessibilityCustomAction) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// Handler calls the underlying Handler.
-func (x *AccessibilityCustomAction) Handler() objc.Block {
-	return x.inner.Handler()
-}
-
-// SetHandler calls the underlying SetHandler.
+// SetHandler wraps the corresponding Objective-C method.
 func (x *AccessibilityCustomAction) SetHandler(handler func() bool) {
-	x.inner.SetHandler(handler)
-}
-
-// Target calls the underlying Target.
-func (x *AccessibilityCustomAction) Target() foundation.NSObjectProtocol {
-	return x.inner.Target()
-}
-
-// SetTarget calls the underlying SetTarget.
-func (x *AccessibilityCustomAction) SetTarget(target foundation.NSObjectProtocol) {
-	x.inner.SetTarget(target)
-}
-
-// Selector calls the underlying Selector.
-func (x *AccessibilityCustomAction) Selector() objc.SEL {
-	return x.inner.Selector()
-}
-
-// SetSelector calls the underlying SetSelector.
-func (x *AccessibilityCustomAction) SetSelector(selector objc.SEL) {
-	x.inner.SetSelector(selector)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandler:"), objc.NewBlock(func(_ objc.Block) bool { return handler() }))
 }
 
 // AccessibilityCustomActionable is the interface implemented by [AccessibilityCustomAction], for mocking and DI.
 type AccessibilityCustomActionable interface {
-	Unwrap() *raw.NSAccessibilityCustomAction
+	obj.Object
 	WithName(name string) *AccessibilityCustomAction
 	WithHandler(handler func() bool) *AccessibilityCustomAction
-	WithTarget(target foundation.NSObjectProtocol) *AccessibilityCustomAction
-	WithSelector(selector objc.SEL) *AccessibilityCustomAction
 	Name() string
 	SetName(name string)
-	Handler() objc.Block
 	SetHandler(handler func() bool)
-	Target() foundation.NSObjectProtocol
-	SetTarget(target foundation.NSObjectProtocol)
-	Selector() objc.SEL
-	SetSelector(selector objc.SEL)
 }
 
 var _ AccessibilityCustomActionable = (*AccessibilityCustomAction)(nil)

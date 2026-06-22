@@ -5,63 +5,91 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides information about segment data.
+// AssetSegmentReport is an idiomatic wrapper over the Objective-C class AVAssetSegmentReport.
 //
-// AssetSegmentReport wraps [raw.AVAssetSegmentReport] with a fluent Go API.
+// An object that provides information about segment data.
 type AssetSegmentReport struct {
-	inner *raw.AVAssetSegmentReport
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetSegmentReport].
-func (x *AssetSegmentReport) Unwrap() *raw.AVAssetSegmentReport { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetSegmentReport) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetSegmentReportFromID adopts an existing object pointer as a AssetSegmentReport (nil for 0).
+// AssetSegmentReportFromID adopts an existing Objective-C object as a AssetSegmentReport
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetSegmentReportFromID(id objc.ID) *AssetSegmentReport {
 	if id == 0 {
 		return nil
 	}
-	return &AssetSegmentReport{inner: raw.AVAssetSegmentReportFromID(id)}
+	x := &AssetSegmentReport{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewAssetSegmentReport creates a new [AssetSegmentReport].
+// assetSegmentReportAdopt wraps an Objective-C object that this code just created as a
+// AssetSegmentReport (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetSegmentReportAdopt(id objc.ID) *AssetSegmentReport {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetSegmentReport{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetSegmentReport) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetSegmentReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetSegmentReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AssetSegmentReport) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAssetSegmentReport creates a new AssetSegmentReport.
 func NewAssetSegmentReport() *AssetSegmentReport {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetSegmentReport")), objc.RegisterName("new"))
-	return &AssetSegmentReport{inner: raw.AVAssetSegmentReportFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentReport")), objc.RegisterName("new"))
+	return assetSegmentReportAdopt(_id)
 }
 
-// @property	segmentType @abstract	A segment type of the segment data.
-//
-// SegmentType calls the underlying SegmentType.
-func (x *AssetSegmentReport) SegmentType() AVAssetSegmentType {
-	return AVAssetSegmentType(x.inner.SegmentType())
+// SegmentType a segment type of the segment data.
+func (x *AssetSegmentReport) SegmentType() AssetSegmentType {
+	_r := objc.Send[AssetSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
+	return _r
 }
 
-// @property	trackReports @abstract	Provides an array of AVAssetSegmentTrackReport in the segment data.
+// TrackReports provides an array of AVAssetSegmentTrackReport in the segment data.
 //
 // TrackReports returns the collection as a Go slice.
 func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
-	arr := x.inner.TrackReports()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetSegmentTrackReport {
-		return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackReports"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetSegmentTrackReport { return AssetSegmentTrackReportFromID(_id) })
 }
 
 // AssetSegmentReportable is the interface implemented by [AssetSegmentReport], for mocking and DI.
 type AssetSegmentReportable interface {
-	Unwrap() *raw.AVAssetSegmentReport
-	SegmentType() AVAssetSegmentType
+	obj.Object
+	SegmentType() AssetSegmentType
 	TrackReports() []*AssetSegmentTrackReport
 }
 

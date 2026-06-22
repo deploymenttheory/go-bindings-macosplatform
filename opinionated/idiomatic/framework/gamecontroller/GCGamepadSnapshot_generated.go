@@ -5,99 +5,95 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A recording of all of the values provided by a GCGamepad object.
+// GamepadSnapshot is an idiomatic wrapper over the Objective-C class GCGamepadSnapshot.
 //
-// GamepadSnapshot wraps [raw.GCGamepadSnapshot] with a fluent Go API.
+// It embeds [Gamepad], promoting that type's methods.
+//
+// A recording of all of the values provided by a GCGamepad object.
 type GamepadSnapshot struct {
-	inner *raw.GCGamepadSnapshot
+	Gamepad
 }
 
-// Unwrap returns the underlying [raw.GCGamepadSnapshot].
-func (x *GamepadSnapshot) Unwrap() *raw.GCGamepadSnapshot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GamepadSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// GamepadSnapshotFromID adopts an existing object pointer as a GamepadSnapshot (nil for 0).
+// GamepadSnapshotFromID adopts an existing Objective-C object as a GamepadSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func GamepadSnapshotFromID(id objc.ID) *GamepadSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(id)}
-}
-
-// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
-//
-// NewGamepadSnapshotWithSnapshotData creates a new [GamepadSnapshot].
-func NewGamepadSnapshotWithSnapshotData(data *foundation.NSData) *GamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), data.Ptr())
-	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(_id)}
-}
-
-// Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
-//
-// NewGamepadSnapshotWithControllerSnapshotData creates a new [GamepadSnapshot].
-func NewGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, data *foundation.NSData) *GamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), controller.Ptr(), data.Ptr())
-	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(_id)}
-}
-
-// The flattened control input values for the snapshot.
-//
-// WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
-func (x *GamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *GamepadSnapshot {
-	x.inner.SetSnapshotData(snapshotData)
+	x := &GamepadSnapshot{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A block called when any element in the profile changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *GamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *GamepadSnapshot {
-	x.inner.GCGamepad.SetValueChangedHandler(valueChangedHandler)
+// gamepadSnapshotAdopt wraps an Objective-C object that this code just created as a
+// GamepadSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gamepadSnapshotAdopt(id objc.ID) *GamepadSnapshot {
+	if id == 0 {
+		return nil
+	}
+	x := &GamepadSnapshot{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot {
-	x.inner.GCGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// NewGamepadSnapshotWithSnapshotData initializes a snapshot object with the flattened data representation obtained from another snapshot.
+func NewGamepadSnapshotWithSnapshotData(data obj.Object) *GamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), objref.IDOf(data))
+	return gamepadSnapshotAdopt(_id)
+}
+
+// NewGamepadSnapshotWithControllerSnapshotData initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
+func NewGamepadSnapshotWithControllerSnapshotData(controller *Controller, data obj.Object) *GamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), objref.IDOf(data))
+	return gamepadSnapshotAdopt(_id)
+}
+
+// WithSnapshotData the flattened control input values for the snapshot.
+func (x *GamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *GamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 	return x
 }
 
-// SnapshotData calls the underlying SnapshotData.
-func (x *GamepadSnapshot) SnapshotData() *foundation.NSData {
-	return x.inner.SnapshotData()
+// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
+func (x *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *GamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return x
 }
 
-// SetSnapshotData calls the underlying SetSnapshotData.
-func (x *GamepadSnapshot) SetSnapshotData(snapshotData *foundation.NSData) {
-	x.inner.SetSnapshotData(snapshotData)
+// SnapshotData wraps the corresponding Objective-C method.
+func (x *GamepadSnapshot) SnapshotData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
+	return obj.Wrap(_r)
 }
 
-func (x *GamepadSnapshot) asGamepad() *raw.GCGamepad { return &x.inner.GCGamepad }
-
-func (x *GamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCGamepad.GCPhysicalInputProfile
+// SetSnapshotData wraps the corresponding Objective-C method.
+func (x *GamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 }
 
 // GamepadSnapshotable is the interface implemented by [GamepadSnapshot], for mocking and DI.
 type GamepadSnapshotable interface {
-	Unwrap() *raw.GCGamepadSnapshot
-	WithSnapshotData(snapshotData *foundation.NSData) *GamepadSnapshot
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *GamepadSnapshot
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot
-	SnapshotData() *foundation.NSData
-	SetSnapshotData(snapshotData *foundation.NSData)
+	obj.Object
+	WithSnapshotData(snapshotData obj.Object) *GamepadSnapshot
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *GamepadSnapshot
+	SnapshotData() obj.Object
+	SetSnapshotData(snapshotData obj.Object)
 }
 
 var _ GamepadSnapshotable = (*GamepadSnapshot)(nil)
+
+var _ GamepadProvider = (*GamepadSnapshot)(nil)
+
+var _ PhysicalInputProfileProvider = (*GamepadSnapshot)(nil)

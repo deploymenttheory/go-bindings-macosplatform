@@ -5,64 +5,95 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMetricData wraps [raw.MTRMetricData] with a fluent Go API.
+// MTRMetricData is an idiomatic wrapper over the Objective-C class MTRMetricData.
 type MTRMetricData struct {
-	inner *raw.MTRMetricData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMetricData].
-func (x *MTRMetricData) Unwrap() *raw.MTRMetricData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMetricData) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMetricDataFromID adopts an existing object pointer as a MTRMetricData (nil for 0).
+// MTRMetricDataFromID adopts an existing Objective-C object as a MTRMetricData
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMetricDataFromID(id objc.ID) *MTRMetricData {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMetricData{inner: raw.MTRMetricDataFromID(id)}
+	x := &MTRMetricData{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMetricData creates a new [MTRMetricData].
+// mTRMetricDataAdopt wraps an Objective-C object that this code just created as a
+// MTRMetricData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMetricDataAdopt(id objc.ID) *MTRMetricData {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMetricData{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMetricData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMetricData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMetricData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRMetricData) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRMetricData creates a new MTRMetricData.
 func NewMTRMetricData() *MTRMetricData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMetricData")), objc.RegisterName("new"))
-	return &MTRMetricData{inner: raw.MTRMetricDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMetricData")), objc.RegisterName("new"))
+	return mTRMetricDataAdopt(_id)
 }
 
-// Value for the metric data. The value may be nil depending on the event emitted.
-//
-// Value calls the underlying Value.
-func (x *MTRMetricData) Value() *foundation.NSNumber {
-	return x.inner.Value()
+// Value value for the metric data. The value may be nil depending on the event emitted.
+func (x *MTRMetricData) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// Error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
-//
-// ErrorCode calls the underlying ErrorCode.
-func (x *MTRMetricData) ErrorCode() *foundation.NSNumber {
-	return x.inner.ErrorCode()
+// ErrorCode error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
+func (x *MTRMetricData) ErrorCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCode"))
+	return obj.Wrap(_r)
 }
 
-// Duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
-//
-// Duration calls the underlying Duration.
-func (x *MTRMetricData) Duration() *foundation.NSNumber {
-	return x.inner.Duration()
+// Duration duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
+func (x *MTRMetricData) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
 }
 
 // MTRMetricDataable is the interface implemented by [MTRMetricData], for mocking and DI.
 type MTRMetricDataable interface {
-	Unwrap() *raw.MTRMetricData
-	Value() *foundation.NSNumber
-	ErrorCode() *foundation.NSNumber
-	Duration() *foundation.NSNumber
+	obj.Object
+	Value() obj.Object
+	ErrorCode() obj.Object
+	Duration() obj.Object
 }
 
 var _ MTRMetricDataable = (*MTRMetricData)(nil)

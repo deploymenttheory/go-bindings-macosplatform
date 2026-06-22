@@ -5,45 +5,53 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AnnotationViewProvider is implemented by AnnotationView and any idiomatic type wrapping a MKAnnotationView subclass.
+// AnnotationViewProvider is accepted wherever a MKAnnotationView (or one of its subclasses) is expected.
 type AnnotationViewProvider interface {
-	asAnnotationView() *raw.MKAnnotationView
+	objref.Object
+	isAnnotationView()
 }
 
-// MapConfigurationProvider is implemented by MapConfiguration and any idiomatic type wrapping a MKMapConfiguration subclass.
+// MapConfigurationProvider is accepted wherever a MKMapConfiguration (or one of its subclasses) is expected.
 type MapConfigurationProvider interface {
-	asMapConfiguration() *raw.MKMapConfiguration
+	objref.Object
+	isMapConfiguration()
 }
 
-// MultiPointProvider is implemented by MultiPoint and any idiomatic type wrapping a MKMultiPoint subclass.
+// MultiPointProvider is accepted wherever a MKMultiPoint (or one of its subclasses) is expected.
 type MultiPointProvider interface {
-	asMultiPoint() *raw.MKMultiPoint
+	objref.Object
+	isMultiPoint()
 }
 
-// OverlayPathRendererProvider is implemented by OverlayPathRenderer and any idiomatic type wrapping a MKOverlayPathRenderer subclass.
+// OverlayPathRendererProvider is accepted wherever a MKOverlayPathRenderer (or one of its subclasses) is expected.
 type OverlayPathRendererProvider interface {
-	asOverlayPathRenderer() *raw.MKOverlayPathRenderer
+	objref.Object
+	isOverlayPathRenderer()
 }
 
-// OverlayRendererProvider is implemented by OverlayRenderer and any idiomatic type wrapping a MKOverlayRenderer subclass.
+// OverlayRendererProvider is accepted wherever a MKOverlayRenderer (or one of its subclasses) is expected.
 type OverlayRendererProvider interface {
-	asOverlayRenderer() *raw.MKOverlayRenderer
+	objref.Object
+	isOverlayRenderer()
 }
 
-// PolylineProvider is implemented by Polyline and any idiomatic type wrapping a MKPolyline subclass.
+// PolylineProvider is accepted wherever a MKPolyline (or one of its subclasses) is expected.
 type PolylineProvider interface {
-	asPolyline() *raw.MKPolyline
+	objref.Object
+	isPolyline()
 }
 
-// PolylineRendererProvider is implemented by PolylineRenderer and any idiomatic type wrapping a MKPolylineRenderer subclass.
+// PolylineRendererProvider is accepted wherever a MKPolylineRenderer (or one of its subclasses) is expected.
 type PolylineRendererProvider interface {
-	asPolylineRenderer() *raw.MKPolylineRenderer
+	objref.Object
+	isPolylineRenderer()
 }
 
-// ShapeProvider is implemented by Shape and any idiomatic type wrapping a MKShape subclass.
+// ShapeProvider is accepted wherever a MKShape (or one of its subclasses) is expected.
 type ShapeProvider interface {
-	asShape() *raw.MKShape
+	objref.Object
+	isShape()
 }

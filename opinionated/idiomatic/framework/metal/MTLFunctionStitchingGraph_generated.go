@@ -5,173 +5,156 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A description of a new stitched function.
+// FunctionStitchingGraph is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingGraph.
 //
-// FunctionStitchingGraph wraps [raw.MTLFunctionStitchingGraph] with a fluent Go API.
+// A description of a new stitched function.
 type FunctionStitchingGraph struct {
-	inner *raw.MTLFunctionStitchingGraph
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionStitchingGraph].
-func (x *FunctionStitchingGraph) Unwrap() *raw.MTLFunctionStitchingGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionStitchingGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionStitchingGraphFromID adopts an existing object pointer as a FunctionStitchingGraph (nil for 0).
+// FunctionStitchingGraphFromID adopts an existing Objective-C object as a FunctionStitchingGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionStitchingGraphFromID(id objc.ID) *FunctionStitchingGraph {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(id)}
+	x := &FunctionStitchingGraph{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a description of a new function call graph.
-//
-// NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes creates a new [FunctionStitchingGraph].
-func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode], outputNode *raw.MTLFunctionStitchingFunctionNode, attributes ...purego.IDer) *FunctionStitchingGraph {
-	_ptrs := make([]objc.ID, len(attributes))
-	for _i, _v := range attributes {
-		_ptrs[_i] = _v.ID()
+// functionStitchingGraphAdopt wraps an Objective-C object that this code just created as a
+// FunctionStitchingGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionStitchingGraphAdopt(id objc.ID) *FunctionStitchingGraph {
+	if id == 0 {
+		return nil
 	}
-	var _arg3 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
-	if len(_ptrs) > 0 {
-		_arg3 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg3 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:"), foundation.NSStringStringWithUTF8String(functionName).Ptr(), nodes.Ptr(), outputNode.Ptr(), _arg3.Ptr())
-	return &FunctionStitchingGraph{inner: raw.MTLFunctionStitchingGraphFromID(_id)}
+	x := &FunctionStitchingGraph{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// The name of the new stitched function.
-//
-// WithFunctionName sets the functionName property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *FunctionStitchingGraph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionStitchingGraph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionStitchingGraph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *FunctionStitchingGraph) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes creates a description of a new function call graph.
+func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes []*FunctionStitchingFunctionNode, outputNode *FunctionStitchingFunctionNode, attributes []obj.Object) *FunctionStitchingGraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:"), purego.NSString(functionName), purego.SliceToNSArray(nodes, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(outputNode), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return functionStitchingGraphAdopt(_id)
+}
+
+// WithFunctionName the name of the new stitched function.
 func (x *FunctionStitchingGraph) WithFunctionName(functionName string) *FunctionStitchingGraph {
-	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 	return x
 }
 
-// The nodes in the function’s call graph.
-//
-// WithNodes sets the collection, converting the Go slice to an NSArray.
-func (x *FunctionStitchingGraph) WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetNodes(foundation.NSArrayFromID[*raw.MTLFunctionStitchingFunctionNode](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MTLFunctionStitchingFunctionNode](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetNodes(_arr)
+// WithNodes the nodes in the function’s call graph.
+func (x *FunctionStitchingGraph) WithNodes(items ...*FunctionStitchingFunctionNode) *FunctionStitchingGraph {
+	_arr := purego.SliceToNSArray(items, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodes:"), _arr)
 	return x
 }
 
-// The node with the output that’s the output of the new stitched function.
-//
-// WithOutputNode sets the outputNode property and returns the receiver for chaining.
+// WithOutputNode the node with the output that’s the output of the new stitched function.
 func (x *FunctionStitchingGraph) WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph {
-	x.inner.SetOutputNode(outputNode.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputNode:"), objref.IDOf(outputNode))
 	return x
 }
 
-// FunctionName calls the underlying FunctionName.
+// FunctionName wraps the corresponding Objective-C method.
 func (x *FunctionStitchingGraph) FunctionName() string {
-	_r := x.inner.FunctionName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFunctionName calls the underlying SetFunctionName.
+// SetFunctionName wraps the corresponding Objective-C method.
 func (x *FunctionStitchingGraph) SetFunctionName(functionName string) {
-	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 }
 
+// Nodes wraps the corresponding Objective-C method.
+//
 // Nodes returns the collection as a Go slice.
 func (x *FunctionStitchingGraph) Nodes() []*FunctionStitchingFunctionNode {
-	arr := x.inner.Nodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FunctionStitchingFunctionNode {
-		return &FunctionStitchingFunctionNode{inner: raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }
 
-// SetNodes calls the underlying SetNodes.
-func (x *FunctionStitchingGraph) SetNodes(nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode]) {
-	x.inner.SetNodes(nodes)
+// SetNodes wraps the corresponding Objective-C method.
+func (x *FunctionStitchingGraph) SetNodes(nodes []*FunctionStitchingFunctionNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodes:"), purego.SliceToNSArray(nodes, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }))
 }
 
-// OutputNode calls the underlying OutputNode.
+// OutputNode wraps the corresponding Objective-C method.
 func (x *FunctionStitchingGraph) OutputNode() *FunctionStitchingFunctionNode {
-	_r := x.inner.OutputNode()
-	if _r == nil {
-		return nil
-	}
-	return &FunctionStitchingFunctionNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputNode"))
+	return FunctionStitchingFunctionNodeFromID(_r)
 }
 
-// SetOutputNode calls the underlying SetOutputNode.
-func (x *FunctionStitchingGraph) SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode) {
-	x.inner.SetOutputNode(outputNode)
+// SetOutputNode wraps the corresponding Objective-C method.
+func (x *FunctionStitchingGraph) SetOutputNode(outputNode *FunctionStitchingFunctionNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputNode:"), objref.IDOf(outputNode))
 }
 
-// Attributes calls the underlying Attributes.
-func (x *FunctionStitchingGraph) Attributes() *foundation.NSArray[raw.MTLFunctionStitchingAttribute] {
-	return x.inner.Attributes()
+// Attributes wraps the corresponding Objective-C method.
+func (x *FunctionStitchingGraph) Attributes() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetAttributes calls the underlying SetAttributes.
-func (x *FunctionStitchingGraph) SetAttributes(attributes ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(attributes))
-	for _i, _v := range attributes {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingAttribute](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetAttributes(_arg0)
+// SetAttributes wraps the corresponding Objective-C method.
+func (x *FunctionStitchingGraph) SetAttributes(attributes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FunctionStitchingGraphable is the interface implemented by [FunctionStitchingGraph], for mocking and DI.
 type FunctionStitchingGraphable interface {
-	Unwrap() *raw.MTLFunctionStitchingGraph
+	obj.Object
 	WithFunctionName(functionName string) *FunctionStitchingGraph
-	WithNodes(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingGraph
+	WithNodes(items ...*FunctionStitchingFunctionNode) *FunctionStitchingGraph
 	WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph
 	FunctionName() string
 	SetFunctionName(functionName string)
 	Nodes() []*FunctionStitchingFunctionNode
-	SetNodes(nodes *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
+	SetNodes(nodes []*FunctionStitchingFunctionNode)
 	OutputNode() *FunctionStitchingFunctionNode
-	SetOutputNode(outputNode *raw.MTLFunctionStitchingFunctionNode)
-	Attributes() *foundation.NSArray[raw.MTLFunctionStitchingAttribute]
-	SetAttributes(attributes ...purego.IDer)
+	SetOutputNode(outputNode *FunctionStitchingFunctionNode)
+	Attributes() []obj.Object
+	SetAttributes(attributes []obj.Object)
 }
 
 var _ FunctionStitchingGraphable = (*FunctionStitchingGraph)(nil)

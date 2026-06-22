@@ -5,173 +5,139 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// A resource that represents a block storage disk partition.
+// BlockDeviceResource is an idiomatic wrapper over the Objective-C class FSBlockDeviceResource.
 //
-// BlockDeviceResource wraps [raw.FSBlockDeviceResource] with a fluent Go API.
+// It embeds [Resource], promoting that type's methods.
+//
+// A resource that represents a block storage disk partition.
 type BlockDeviceResource struct {
-	inner *raw.FSBlockDeviceResource
+	Resource
 }
 
-// Unwrap returns the underlying [raw.FSBlockDeviceResource].
-func (x *BlockDeviceResource) Unwrap() *raw.FSBlockDeviceResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BlockDeviceResource) ID() objc.ID { return x.inner.Ptr() }
-
-// BlockDeviceResourceFromID adopts an existing object pointer as a BlockDeviceResource (nil for 0).
+// BlockDeviceResourceFromID adopts an existing Objective-C object as a BlockDeviceResource
+// (nil for 0), retaining it and registering a release finalizer.
 func BlockDeviceResourceFromID(id objc.ID) *BlockDeviceResource {
 	if id == 0 {
 		return nil
 	}
-	return &BlockDeviceResource{inner: raw.FSBlockDeviceResourceFromID(id)}
+	x := &BlockDeviceResource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewBlockDeviceResource creates a new [BlockDeviceResource].
+// blockDeviceResourceAdopt wraps an Objective-C object that this code just created as a
+// BlockDeviceResource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func blockDeviceResourceAdopt(id objc.ID) *BlockDeviceResource {
+	if id == 0 {
+		return nil
+	}
+	x := &BlockDeviceResource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewBlockDeviceResource creates a new BlockDeviceResource.
 func NewBlockDeviceResource() *BlockDeviceResource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSBlockDeviceResource")), objc.RegisterName("new"))
-	return &BlockDeviceResource{inner: raw.FSBlockDeviceResourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSBlockDeviceResource")), objc.RegisterName("new"))
+	return blockDeviceResourceAdopt(_id)
 }
 
-// Reads data from the resource into a buffer and executes a block afterwards.
+// MetadataFlush synchronously flushes the resource’s buffer cache.
 //
-// ReadIntoStartingAtLengthCompletionHandler calls the underlying ReadIntoStartingAtLengthCompletionHandler.
-func (x *BlockDeviceResource) ReadIntoStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer)) {
-	x.inner.ReadIntoStartingAtLengthCompletionHandler(buffer, offset, length, completionHandler)
-}
-
-// Synchronously reads data from the resource into a buffer.
-//
-// ReadIntoStartingAtLengthError calls the underlying ReadIntoStartingAtLengthError.
-func (x *BlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error) {
-	return x.inner.ReadIntoStartingAtLengthError(buffer, offset, length)
-}
-
-// Writes data from from a buffer to the resource and executes a block afterwards.
-//
-// WriteFromStartingAtLengthCompletionHandler calls the underlying WriteFromStartingAtLengthCompletionHandler.
-func (x *BlockDeviceResource) WriteFromStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer)) {
-	x.inner.WriteFromStartingAtLengthCompletionHandler(buffer, offset, length, completionHandler)
-}
-
-// Synchronously writes data from from a buffer to the resource and executes a block afterwards.
-//
-// WriteFromStartingAtLengthError calls the underlying WriteFromStartingAtLengthError.
-func (x *BlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error) {
-	return x.inner.WriteFromStartingAtLengthError(buffer, offset, length)
-}
-
-// Synchronously reads file system metadata from the resource into a buffer.
-//
-// MetadataReadIntoStartingAtLengthError calls the underlying MetadataReadIntoStartingAtLengthError.
-func (x *BlockDeviceResource) MetadataReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
-	return x.inner.MetadataReadIntoStartingAtLengthError(buffer, offset, length)
-}
-
-// Synchronously writes file system metadata from a buffer to the resource.
-//
-// MetadataWriteFromStartingAtLengthError calls the underlying MetadataWriteFromStartingAtLengthError.
-func (x *BlockDeviceResource) MetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
-	return x.inner.MetadataWriteFromStartingAtLengthError(buffer, offset, length)
-}
-
-// Writes file system metadata from a buffer to a cache, prior to flushing it to the resource.
-//
-// DelayedMetadataWriteFromStartingAtLengthError calls the underlying DelayedMetadataWriteFromStartingAtLengthError.
-func (x *BlockDeviceResource) DelayedMetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error) {
-	return x.inner.DelayedMetadataWriteFromStartingAtLengthError(buffer, offset, length)
-}
-
-// Synchronously flushes the resource’s buffer cache.
-//
-// MetadataFlush returns any validation error.
+// MetadataFlush returns an error if the operation did not succeed.
 func (x *BlockDeviceResource) MetadataFlush() error {
-	_, err := x.inner.MetadataFlushWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataFlushWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Asynchronously flushes the resource’s buffer cache.
+// AsynchronousMetadataFlush asynchronously flushes the resource’s buffer cache.
 //
-// AsynchronousMetadataFlush returns any validation error.
+// AsynchronousMetadataFlush returns an error if the operation did not succeed.
 func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
-	_, err := x.inner.AsynchronousMetadataFlushWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("asynchronousMetadataFlushWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Clears the given ranges within the buffer cache.
-//
-// MetadataClearWithDelayedWritesError calls the underlying MetadataClearWithDelayedWritesError.
-func (x *BlockDeviceResource) MetadataClearWithDelayedWritesError(rangesToClear *foundation.NSArray[*raw.FSMetadataRange], withDelayedWrites bool) (bool, error) {
-	return x.inner.MetadataClearWithDelayedWritesError(rangesToClear, withDelayedWrites)
+// MetadataClearWithDelayedWrites clears the given ranges within the buffer cache.
+func (x *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataClear:withDelayedWrites:error:"), purego.SliceToNSArray(rangesToClear, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), withDelayedWrites, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Synchronously purges the given ranges from the buffer cache.
-//
-// MetadataPurgeError calls the underlying MetadataPurgeError.
-func (x *BlockDeviceResource) MetadataPurgeError(rangesToPurge *foundation.NSArray[*raw.FSMetadataRange]) (bool, error) {
-	return x.inner.MetadataPurgeError(rangesToPurge)
+// MetadataPurge synchronously purges the given ranges from the buffer cache.
+func (x *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataPurge:error:"), purego.SliceToNSArray(rangesToPurge, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// The device name of the resource.
-//
-// BSDName calls the underlying BSDName.
+// BSDName the device name of the resource.
 func (x *BlockDeviceResource) BSDName() string {
-	_r := x.inner.BSDName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("BSDName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsWritable calls the underlying IsWritable.
+// IsWritable wraps the corresponding Objective-C method.
 func (x *BlockDeviceResource) IsWritable() bool {
-	return x.inner.IsWritable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+	return _r
 }
 
-// The logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
-//
-// BlockSize calls the underlying BlockSize.
+// BlockSize the logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
 func (x *BlockDeviceResource) BlockSize() uint64 {
-	return x.inner.BlockSize()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockSize"))
+	return _r
 }
 
-// The block count on this resource.
-//
-// BlockCount calls the underlying BlockCount.
+// BlockCount the block count on this resource.
 func (x *BlockDeviceResource) BlockCount() uint64 {
-	return x.inner.BlockCount()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockCount"))
+	return _r
 }
 
-// The sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
-//
-// PhysicalBlockSize calls the underlying PhysicalBlockSize.
+// PhysicalBlockSize the sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
 func (x *BlockDeviceResource) PhysicalBlockSize() uint64 {
-	return x.inner.PhysicalBlockSize()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("physicalBlockSize"))
+	return _r
 }
-
-func (x *BlockDeviceResource) asResource() *raw.FSResource { return &x.inner.FSResource }
 
 // BlockDeviceResourceable is the interface implemented by [BlockDeviceResource], for mocking and DI.
 type BlockDeviceResourceable interface {
-	Unwrap() *raw.FSBlockDeviceResource
-	ReadIntoStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer))
-	ReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error)
-	WriteFromStartingAtLengthCompletionHandler(buffer unsafe.Pointer, offset int64, length uint, completionHandler func(uint, unsafe.Pointer))
-	WriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (uint, error)
-	MetadataReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error)
-	MetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error)
-	DelayedMetadataWriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length uint) (bool, error)
+	obj.Object
 	MetadataFlush() error
 	AsynchronousMetadataFlush() error
-	MetadataClearWithDelayedWritesError(rangesToClear *foundation.NSArray[*raw.FSMetadataRange], withDelayedWrites bool) (bool, error)
-	MetadataPurgeError(rangesToPurge *foundation.NSArray[*raw.FSMetadataRange]) (bool, error)
+	MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error
+	MetadataPurge(rangesToPurge []*MetadataRange) error
 	BSDName() string
 	IsWritable() bool
 	BlockSize() uint64
@@ -180,3 +146,5 @@ type BlockDeviceResourceable interface {
 }
 
 var _ BlockDeviceResourceable = (*BlockDeviceResource)(nil)
+
+var _ ResourceProvider = (*BlockDeviceResource)(nil)

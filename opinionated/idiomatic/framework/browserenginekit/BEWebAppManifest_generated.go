@@ -5,57 +5,91 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a web app manifest.
+// WebAppManifest is an idiomatic wrapper over the Objective-C class BEWebAppManifest.
 //
-// WebAppManifest wraps [raw.BEWebAppManifest] with a fluent Go API.
+// An object that represents a web app manifest.
 type WebAppManifest struct {
-	inner *raw.BEWebAppManifest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BEWebAppManifest].
-func (x *WebAppManifest) Unwrap() *raw.BEWebAppManifest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebAppManifest) ID() objc.ID { return x.inner.Ptr() }
-
-// WebAppManifestFromID adopts an existing object pointer as a WebAppManifest (nil for 0).
+// WebAppManifestFromID adopts an existing Objective-C object as a WebAppManifest
+// (nil for 0), retaining it and registering a release finalizer.
 func WebAppManifestFromID(id objc.ID) *WebAppManifest {
 	if id == 0 {
 		return nil
 	}
-	return &WebAppManifest{inner: raw.BEWebAppManifestFromID(id)}
+	x := &WebAppManifest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Returns nil if manifestURL is invalid or jsonData cannot be parsed.
-//
-// NewWebAppManifestWithJSONDataManifestURL creates a new [WebAppManifest].
-func NewWebAppManifestWithJSONDataManifestURL(jsonData *foundation.NSData, manifestURL string) *WebAppManifest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BEWebAppManifest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithJSONData:manifestURL:"), jsonData.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(manifestURL)).Ptr())
-	return &WebAppManifest{inner: raw.BEWebAppManifestFromID(_id)}
+// webAppManifestAdopt wraps an Objective-C object that this code just created as a
+// WebAppManifest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webAppManifestAdopt(id objc.ID) *WebAppManifest {
+	if id == 0 {
+		return nil
+	}
+	x := &WebAppManifest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// JsonData calls the underlying JsonData.
-func (x *WebAppManifest) JsonData() *foundation.NSData {
-	return x.inner.JsonData()
+// Description returns the object's -description text.
+func (x *WebAppManifest) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ManifestURL calls the underlying ManifestURL.
-func (x *WebAppManifest) ManifestURL() *foundation.NSURL {
-	return x.inner.ManifestURL()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebAppManifest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebAppManifest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *WebAppManifest) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewWebAppManifestWithJSONDataManifestURL returns nil if manifestURL is invalid or jsonData cannot be parsed.
+func NewWebAppManifestWithJSONDataManifestURL(jsonData obj.Object, manifestURL string) *WebAppManifest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BEWebAppManifest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithJSONData:manifestURL:"), objref.IDOf(jsonData), rt.FileURL(manifestURL))
+	return webAppManifestAdopt(_id)
+}
+
+// JsonData wraps the corresponding Objective-C method.
+func (x *WebAppManifest) JsonData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jsonData"))
+	return obj.Wrap(_r)
+}
+
+// ManifestURL wraps the corresponding Objective-C method.
+func (x *WebAppManifest) ManifestURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manifestURL"))
+	return obj.Wrap(_r)
 }
 
 // WebAppManifestable is the interface implemented by [WebAppManifest], for mocking and DI.
 type WebAppManifestable interface {
-	Unwrap() *raw.BEWebAppManifest
-	JsonData() *foundation.NSData
-	ManifestURL() *foundation.NSURL
+	obj.Object
+	JsonData() obj.Object
+	ManifestURL() obj.Object
 }
 
 var _ WebAppManifestable = (*WebAppManifest)(nil)

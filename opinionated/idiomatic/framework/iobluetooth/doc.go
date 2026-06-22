@@ -3,4 +3,13 @@
 //go:build darwin
 
 // Package iobluetooth provides a fluent Go API over the macOS IOBluetooth framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - IOBluetoothHandsFree: [IOBluetoothHandsFreeAudioGateway], [IOBluetoothHandsFreeDevice]
+//   - IOBluetoothObject: [IOBluetoothDevice], [IOBluetoothL2CAPChannel], [IOBluetoothRFCOMMChannel]
+//   - OBEXSession: [IOBluetoothOBEXSession]
 package iobluetooth

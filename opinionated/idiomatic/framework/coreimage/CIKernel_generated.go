@@ -5,76 +5,89 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A GPU-based image-processing routine used to create custom Core Image filters.
+// Kernel is an idiomatic wrapper over the Objective-C class CIKernel.
 //
-// Kernel wraps [raw.CIKernel] with a fluent Go API.
+// Kernel is an abstract base — you do not construct it directly. Construct one of [ColorKernel], [WarpKernel] and pass it where a Kernel is accepted.
+//
+// A GPU-based image-processing routine used to create custom Core Image filters.
 type Kernel struct {
-	inner *raw.CIKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIKernel].
-func (x *Kernel) Unwrap() *raw.CIKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Kernel) ID() objc.ID { return x.inner.Ptr() }
-
-// KernelFromID adopts an existing object pointer as a Kernel (nil for 0).
+// KernelFromID adopts an existing Objective-C object as a Kernel
+// (nil for 0), retaining it and registering a release finalizer.
 func KernelFromID(id objc.ID) *Kernel {
 	if id == 0 {
 		return nil
 	}
-	return &Kernel{inner: raw.CIKernelFromID(id)}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewKernel creates a new [Kernel].
-func NewKernel() *Kernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIKernel")), objc.RegisterName("new"))
-	return &Kernel{inner: raw.CIKernelFromID(_id)}
-}
-
-// Sets the selector Core Image uses to query the region of interest for image processing with the kernel.
-//
-// SetROISelector calls the underlying SetROISelector.
-func (x *Kernel) SetROISelector(method objc.SEL) {
-	x.inner.SetROISelector(method)
-}
-
-// Creates a new image using the kernel and specified arguments.
-//
-// ApplyWithExtentRoiCallbackArguments calls the underlying ApplyWithExtentRoiCallbackArguments.
-func (x *Kernel) ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *Image {
-	_r := x.inner.ApplyWithExtentRoiCallbackArguments(extent, callback, args)
-	if _r == nil {
+// kernelAdopt wraps an Objective-C object that this code just created as a
+// Kernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func kernelAdopt(id objc.ID) *Kernel {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &Kernel{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Name calls the underlying Name.
+// Description returns the object's -description text.
+func (x *Kernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Kernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Kernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Kernel) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Name wraps the corresponding Objective-C method.
 func (x *Kernel) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Kernel) asKernel() *raw.CIKernel { return x.inner }
 
 // Kernelable is the interface implemented by [Kernel], for mocking and DI.
 type Kernelable interface {
-	Unwrap() *raw.CIKernel
-	SetROISelector(method objc.SEL)
-	ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *Image
+	obj.Object
 	Name() string
 }
 
 var _ Kernelable = (*Kernel)(nil)
+
+// isKernel marks Kernel — and, by embedding promotion, its
+// subclasses — as a member of the Kernel hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Kernel) isKernel() {}
+
+var _ KernelProvider = (*Kernel)(nil)

@@ -9,81 +9,87 @@ import (
 )
 
 // Indicates whether a session should use encryption when communicating with nearby peers.
-type MCEncryptionPreference int64
+type EncryptionPreference int64
 
 const (
 	// The session prefers to use encryption, but accepts unencrypted connections. A connection uses encryption when all the peers choose either MCEncryptionOptional or MCEncryptionRequired. If some peers choose MCEncryptionNone, then the session will not be encrypted. For this reason, if some peers running your app can be configured without encryption, you should always assume that the session is unencrypted.
-	MCEncryptionOptional MCEncryptionPreference = 0
+	EncryptionOptional EncryptionPreference = 0
 	// The session requires encryption.
-	MCEncryptionRequired MCEncryptionPreference = 1
+	EncryptionRequired EncryptionPreference = 1
 	// The session should not be encrypted.
-	MCEncryptionNone MCEncryptionPreference = 2
+	EncryptionNone EncryptionPreference = 2
 )
 
-func (e MCEncryptionPreference) String() string {
+// String returns the EncryptionPreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EncryptionPreference) String() string {
 	switch e {
-	case MCEncryptionOptional:
-		return "MCEncryptionOptional"
-	case MCEncryptionRequired:
-		return "MCEncryptionRequired"
-	case MCEncryptionNone:
-		return "MCEncryptionNone"
+	case EncryptionOptional:
+		return "EncryptionOptional"
+	case EncryptionRequired:
+		return "EncryptionRequired"
+	case EncryptionNone:
+		return "EncryptionNone"
 	default:
-		return fmt.Sprintf("MCEncryptionPreference(%d)", int64(e))
+		return fmt.Sprintf("EncryptionPreference(%d)", int64(e))
 	}
 }
 
 // Error codes found in MCErrorDomain error domain NSError objects returned by methods in the Multipeer Connectivity framework.
-type MCErrorCode int64
+type ErrorCode int64
 
 const (
-	MCErrorUnknown          MCErrorCode = 0
-	MCErrorNotConnected     MCErrorCode = 1
-	MCErrorInvalidParameter MCErrorCode = 2
-	MCErrorUnsupported      MCErrorCode = 3
-	MCErrorTimedOut         MCErrorCode = 4
-	MCErrorCancelled        MCErrorCode = 5
-	MCErrorUnavailable      MCErrorCode = 6
+	ErrorUnknown          ErrorCode = 0
+	ErrorNotConnected     ErrorCode = 1
+	ErrorInvalidParameter ErrorCode = 2
+	ErrorUnsupported      ErrorCode = 3
+	ErrorTimedOut         ErrorCode = 4
+	ErrorCancelled        ErrorCode = 5
+	ErrorUnavailable      ErrorCode = 6
 )
 
-func (e MCErrorCode) String() string {
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
 	switch e {
-	case MCErrorUnknown:
-		return "MCErrorUnknown"
-	case MCErrorNotConnected:
-		return "MCErrorNotConnected"
-	case MCErrorInvalidParameter:
-		return "MCErrorInvalidParameter"
-	case MCErrorUnsupported:
-		return "MCErrorUnsupported"
-	case MCErrorTimedOut:
-		return "MCErrorTimedOut"
-	case MCErrorCancelled:
-		return "MCErrorCancelled"
-	case MCErrorUnavailable:
-		return "MCErrorUnavailable"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorNotConnected:
+		return "ErrorNotConnected"
+	case ErrorInvalidParameter:
+		return "ErrorInvalidParameter"
+	case ErrorUnsupported:
+		return "ErrorUnsupported"
+	case ErrorTimedOut:
+		return "ErrorTimedOut"
+	case ErrorCancelled:
+		return "ErrorCancelled"
+	case ErrorUnavailable:
+		return "ErrorUnavailable"
 	default:
-		return fmt.Sprintf("MCErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Indicates whether delivery of data should be guaranteed.
-type MCSessionSendDataMode int64
+type SessionSendDataMode int64
 
 const (
 	// The framework should guarantee delivery of each message, enqueueing and retransmitting data as needed, and ensuring in-order delivery.
-	MCSessionSendDataReliable MCSessionSendDataMode = 0
+	SessionSendDataReliable SessionSendDataMode = 0
 	// Messages to peers should be sent immediately without socket-level queueing. If a message cannot be sent immediately, it should be dropped. The order of messages is not guaranteed.
-	MCSessionSendDataUnreliable MCSessionSendDataMode = 1
+	SessionSendDataUnreliable SessionSendDataMode = 1
 )
 
-func (e MCSessionSendDataMode) String() string {
+// String returns the SessionSendDataMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SessionSendDataMode) String() string {
 	switch e {
-	case MCSessionSendDataReliable:
-		return "MCSessionSendDataReliable"
-	case MCSessionSendDataUnreliable:
-		return "MCSessionSendDataUnreliable"
+	case SessionSendDataReliable:
+		return "SessionSendDataReliable"
+	case SessionSendDataUnreliable:
+		return "SessionSendDataUnreliable"
 	default:
-		return fmt.Sprintf("MCSessionSendDataMode(%d)", int64(e))
+		return fmt.Sprintf("SessionSendDataMode(%d)", int64(e))
 	}
 }

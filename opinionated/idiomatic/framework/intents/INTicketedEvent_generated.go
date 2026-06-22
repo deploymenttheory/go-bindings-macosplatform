@@ -5,79 +5,108 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The information that describes a ticketed event.
+// TicketedEvent is an idiomatic wrapper over the Objective-C class INTicketedEvent.
 //
-// TicketedEvent wraps [raw.INTicketedEvent] with a fluent Go API.
+// The information that describes a ticketed event.
 type TicketedEvent struct {
-	inner *raw.INTicketedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INTicketedEvent].
-func (x *TicketedEvent) Unwrap() *raw.INTicketedEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TicketedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// TicketedEventFromID adopts an existing object pointer as a TicketedEvent (nil for 0).
+// TicketedEventFromID adopts an existing Objective-C object as a TicketedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func TicketedEventFromID(id objc.ID) *TicketedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &TicketedEvent{inner: raw.INTicketedEventFromID(id)}
+	x := &TicketedEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a ticketed event object with the specified contents and attributes.
-//
-// NewTicketedEventWithCategoryNameEventDurationLocation creates a new [TicketedEvent].
-func NewTicketedEventWithCategoryNameEventDurationLocation(category INTicketedEventCategory, name string, eventDuration *raw.INDateComponentsRange, location *corelocation.CLPlacemark) *TicketedEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), raw.INTicketedEventCategory(category), foundation.NSStringStringWithUTF8String(name).Ptr(), eventDuration.Ptr(), location.Ptr())
-	return &TicketedEvent{inner: raw.INTicketedEventFromID(_id)}
-}
-
-// Category calls the underlying Category.
-func (x *TicketedEvent) Category() INTicketedEventCategory {
-	return INTicketedEventCategory(x.inner.Category())
-}
-
-// Name calls the underlying Name.
-func (x *TicketedEvent) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// EventDuration calls the underlying EventDuration.
-func (x *TicketedEvent) EventDuration() *DateComponentsRange {
-	_r := x.inner.EventDuration()
-	if _r == nil {
+// ticketedEventAdopt wraps an Objective-C object that this code just created as a
+// TicketedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ticketedEventAdopt(id objc.ID) *TicketedEvent {
+	if id == 0 {
 		return nil
 	}
-	return &DateComponentsRange{inner: _r}
+	x := &TicketedEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Location calls the underlying Location.
-func (x *TicketedEvent) Location() *corelocation.CLPlacemark {
-	return x.inner.Location()
+// Description returns the object's -description text.
+func (x *TicketedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TicketedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TicketedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TicketedEvent) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTicketedEventWithCategoryNameEventDurationLocation creates a ticketed event object with the specified contents and attributes.
+func NewTicketedEventWithCategoryNameEventDurationLocation(category TicketedEventCategory, name string, eventDuration *DateComponentsRange, location obj.Object) *TicketedEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), category, purego.NSString(name), objref.IDOf(eventDuration), objref.IDOf(location))
+	return ticketedEventAdopt(_id)
+}
+
+// Category wraps the corresponding Objective-C method.
+func (x *TicketedEvent) Category() TicketedEventCategory {
+	_r := objc.Send[TicketedEventCategory](objref.IDOf(x), objc.RegisterName("category"))
+	return _r
+}
+
+// Name wraps the corresponding Objective-C method.
+func (x *TicketedEvent) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// EventDuration wraps the corresponding Objective-C method.
+func (x *TicketedEvent) EventDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventDuration"))
+	return DateComponentsRangeFromID(_r)
+}
+
+// Location wraps the corresponding Objective-C method.
+func (x *TicketedEvent) Location() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
+	return obj.Wrap(_r)
 }
 
 // TicketedEventable is the interface implemented by [TicketedEvent], for mocking and DI.
 type TicketedEventable interface {
-	Unwrap() *raw.INTicketedEvent
-	Category() INTicketedEventCategory
+	obj.Object
+	Category() TicketedEventCategory
 	Name() string
 	EventDuration() *DateComponentsRange
-	Location() *corelocation.CLPlacemark
+	Location() obj.Object
 }
 
 var _ TicketedEventable = (*TicketedEvent)(nil)

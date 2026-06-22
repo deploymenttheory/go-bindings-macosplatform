@@ -5,50 +5,65 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing metrics about the use of the GPU.
+// GPUMetric is an idiomatic wrapper over the Objective-C class MXGPUMetric.
 //
-// GPUMetric wraps [raw.MXGPUMetric] with a fluent Go API.
+// It embeds [Metric], promoting that type's methods.
+//
+// An object representing metrics about the use of the GPU.
 type GPUMetric struct {
-	inner *raw.MXGPUMetric
+	Metric
 }
 
-// Unwrap returns the underlying [raw.MXGPUMetric].
-func (x *GPUMetric) Unwrap() *raw.MXGPUMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GPUMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// GPUMetricFromID adopts an existing object pointer as a GPUMetric (nil for 0).
+// GPUMetricFromID adopts an existing Objective-C object as a GPUMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func GPUMetricFromID(id objc.ID) *GPUMetric {
 	if id == 0 {
 		return nil
 	}
-	return &GPUMetric{inner: raw.MXGPUMetricFromID(id)}
+	x := &GPUMetric{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGPUMetric creates a new [GPUMetric].
+// gPUMetricAdopt wraps an Objective-C object that this code just created as a
+// GPUMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gPUMetricAdopt(id objc.ID) *GPUMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &GPUMetric{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGPUMetric creates a new GPUMetric.
 func NewGPUMetric() *GPUMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXGPUMetric")), objc.RegisterName("new"))
-	return &GPUMetric{inner: raw.MXGPUMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXGPUMetric")), objc.RegisterName("new"))
+	return gPUMetricAdopt(_id)
 }
 
-// CumulativeGPUTime calls the underlying CumulativeGPUTime.
-func (x *GPUMetric) CumulativeGPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeGPUTime()
+// CumulativeGPUTime wraps the corresponding Objective-C method.
+func (x *GPUMetric) CumulativeGPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeGPUTime"))
+	return obj.Wrap(_r)
 }
-
-func (x *GPUMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // GPUMetricable is the interface implemented by [GPUMetric], for mocking and DI.
 type GPUMetricable interface {
-	Unwrap() *raw.MXGPUMetric
-	CumulativeGPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	obj.Object
+	CumulativeGPUTime() obj.Object
 }
 
 var _ GPUMetricable = (*GPUMetric)(nil)
+
+var _ MetricProvider = (*GPUMetric)(nil)

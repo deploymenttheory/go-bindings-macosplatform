@@ -5,56 +5,67 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A unit of measure for quantities of information.
+// UnitInformationStorage is an idiomatic wrapper over the Objective-C class NSUnitInformationStorage.
 //
-// UnitInformationStorage wraps [raw.NSUnitInformationStorage] with a fluent Go API.
+// It embeds [Dimension], promoting that type's methods.
+//
+// A unit of measure for quantities of information.
 type UnitInformationStorage struct {
-	inner *raw.NSUnitInformationStorage
+	Dimension
 }
 
-// Unwrap returns the underlying [raw.NSUnitInformationStorage].
-func (x *UnitInformationStorage) Unwrap() *raw.NSUnitInformationStorage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitInformationStorage) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitInformationStorageFromID adopts an existing object pointer as a UnitInformationStorage (nil for 0).
+// UnitInformationStorageFromID adopts an existing Objective-C object as a UnitInformationStorage
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitInformationStorageFromID(id objc.ID) *UnitInformationStorage {
 	if id == 0 {
 		return nil
 	}
-	return &UnitInformationStorage{inner: raw.NSUnitInformationStorageFromID(id)}
-}
-
-// NewUnitInformationStorage creates a new [UnitInformationStorage].
-func NewUnitInformationStorage() *UnitInformationStorage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitInformationStorage")), objc.RegisterName("new"))
-	return &UnitInformationStorage{inner: raw.NSUnitInformationStorageFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitInformationStorage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitInformationStorage {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitInformationStorage{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitInformationStorage) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitInformationStorageAdopt wraps an Objective-C object that this code just created as a
+// UnitInformationStorage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitInformationStorageAdopt(id objc.ID) *UnitInformationStorage {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitInformationStorage{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitInformationStorage) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// NewUnitInformationStorage creates a new UnitInformationStorage.
+func NewUnitInformationStorage() *UnitInformationStorage {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("new"))
+	return unitInformationStorageAdopt(_id)
+}
 
-func (x *UnitInformationStorage) asObject() *raw.NSObject {
-	return &x.inner.NSDimension.NSUnit.NSObject
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *UnitInformationStorage) WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // UnitInformationStorageable is the interface implemented by [UnitInformationStorage], for mocking and DI.
 type UnitInformationStorageable interface {
-	Unwrap() *raw.NSUnitInformationStorage
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitInformationStorage
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage
 }
 
 var _ UnitInformationStorageable = (*UnitInformationStorage)(nil)
+
+var _ DimensionProvider = (*UnitInformationStorage)(nil)
+
+var _ UnitProvider = (*UnitInformationStorage)(nil)

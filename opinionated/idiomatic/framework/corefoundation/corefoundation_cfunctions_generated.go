@@ -5,4182 +5,5878 @@
 package corefoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CFAbsoluteTimeAddGregorianUnits calls [raw.CFAbsoluteTimeAddGregorianUnits] (C function CFAbsoluteTimeAddGregorianUnits).
-func CFAbsoluteTimeAddGregorianUnits(at float64, tz unsafe.Pointer, units raw.CFGregorianUnits) float64 {
-	return raw.CFAbsoluteTimeAddGregorianUnits(at, tz, units)
-}
+var _fnCFAbsoluteTimeGetCurrent func() float64
 
-// CFAbsoluteTimeGetCurrent calls [raw.CFAbsoluteTimeGetCurrent] (C function CFAbsoluteTimeGetCurrent).
+// CFAbsoluteTimeGetCurrent calls the CoreFoundation framework function CFAbsoluteTimeGetCurrent.
 func CFAbsoluteTimeGetCurrent() float64 {
-	return raw.CFAbsoluteTimeGetCurrent()
-}
-
-// CFAbsoluteTimeGetDayOfWeek calls [raw.CFAbsoluteTimeGetDayOfWeek] (C function CFAbsoluteTimeGetDayOfWeek).
-func CFAbsoluteTimeGetDayOfWeek(at float64, tz unsafe.Pointer) int {
-	return raw.CFAbsoluteTimeGetDayOfWeek(at, tz)
-}
-
-// CFAbsoluteTimeGetDayOfYear calls [raw.CFAbsoluteTimeGetDayOfYear] (C function CFAbsoluteTimeGetDayOfYear).
-func CFAbsoluteTimeGetDayOfYear(at float64, tz unsafe.Pointer) int {
-	return raw.CFAbsoluteTimeGetDayOfYear(at, tz)
-}
-
-// CFAbsoluteTimeGetDifferenceAsGregorianUnits calls [raw.CFAbsoluteTimeGetDifferenceAsGregorianUnits] (C function CFAbsoluteTimeGetDifferenceAsGregorianUnits).
-func CFAbsoluteTimeGetDifferenceAsGregorianUnits(at1 float64, at2 float64, tz unsafe.Pointer, unitFlags uint) raw.CFGregorianUnits {
-	return raw.CFAbsoluteTimeGetDifferenceAsGregorianUnits(at1, at2, tz, unitFlags)
-}
-
-// CFAbsoluteTimeGetGregorianDate calls [raw.CFAbsoluteTimeGetGregorianDate] (C function CFAbsoluteTimeGetGregorianDate).
-func CFAbsoluteTimeGetGregorianDate(at float64, tz unsafe.Pointer) raw.CFGregorianDate {
-	return raw.CFAbsoluteTimeGetGregorianDate(at, tz)
-}
-
-// CFAbsoluteTimeGetWeekOfYear calls [raw.CFAbsoluteTimeGetWeekOfYear] (C function CFAbsoluteTimeGetWeekOfYear).
-func CFAbsoluteTimeGetWeekOfYear(at float64, tz unsafe.Pointer) int {
-	return raw.CFAbsoluteTimeGetWeekOfYear(at, tz)
-}
-
-// CFAllocatorAllocate calls [raw.CFAllocatorAllocate] (C function CFAllocatorAllocate).
-func CFAllocatorAllocate(allocator unsafe.Pointer, size int, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorAllocate(allocator, size, hint)
-}
-
-// CFAllocatorAllocateBytes calls [raw.CFAllocatorAllocateBytes] (C function CFAllocatorAllocateBytes).
-func CFAllocatorAllocateBytes(allocator unsafe.Pointer, size int, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorAllocateBytes(allocator, size, hint)
-}
-
-// CFAllocatorAllocateTyped calls [raw.CFAllocatorAllocateTyped] (C function CFAllocatorAllocateTyped).
-func CFAllocatorAllocateTyped(allocator unsafe.Pointer, size int, descriptor uint64, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorAllocateTyped(allocator, size, descriptor, hint)
-}
-
-// CFAllocatorCreate calls [raw.CFAllocatorCreate] (C function CFAllocatorCreate).
-func CFAllocatorCreate(allocator unsafe.Pointer, context_ *raw.CFAllocatorContext) unsafe.Pointer {
-	return raw.CFAllocatorCreate(allocator, context_)
-}
-
-// CFAllocatorDeallocate calls [raw.CFAllocatorDeallocate] (C function CFAllocatorDeallocate).
-func CFAllocatorDeallocate(allocator unsafe.Pointer, ptr unsafe.Pointer) {
-	raw.CFAllocatorDeallocate(allocator, ptr)
-}
-
-// CFAllocatorGetContext calls [raw.CFAllocatorGetContext] (C function CFAllocatorGetContext).
-func CFAllocatorGetContext(allocator unsafe.Pointer, context_ *raw.CFAllocatorContext) {
-	raw.CFAllocatorGetContext(allocator, context_)
-}
-
-// CFAllocatorGetDefault calls [raw.CFAllocatorGetDefault] (C function CFAllocatorGetDefault).
-func CFAllocatorGetDefault() unsafe.Pointer {
-	return raw.CFAllocatorGetDefault()
-}
-
-// CFAllocatorGetPreferredSizeForSize calls [raw.CFAllocatorGetPreferredSizeForSize] (C function CFAllocatorGetPreferredSizeForSize).
-func CFAllocatorGetPreferredSizeForSize(allocator unsafe.Pointer, size int, hint uint) int {
-	return raw.CFAllocatorGetPreferredSizeForSize(allocator, size, hint)
-}
-
-// CFAllocatorGetTypeID calls [raw.CFAllocatorGetTypeID] (C function CFAllocatorGetTypeID).
-func CFAllocatorGetTypeID() uint {
-	return raw.CFAllocatorGetTypeID()
-}
-
-// CFAllocatorReallocate calls [raw.CFAllocatorReallocate] (C function CFAllocatorReallocate).
-func CFAllocatorReallocate(allocator unsafe.Pointer, ptr unsafe.Pointer, newsize int, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorReallocate(allocator, ptr, newsize, hint)
-}
-
-// CFAllocatorReallocateBytes calls [raw.CFAllocatorReallocateBytes] (C function CFAllocatorReallocateBytes).
-func CFAllocatorReallocateBytes(allocator unsafe.Pointer, ptr unsafe.Pointer, newsize int, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorReallocateBytes(allocator, ptr, newsize, hint)
-}
-
-// CFAllocatorReallocateTyped calls [raw.CFAllocatorReallocateTyped] (C function CFAllocatorReallocateTyped).
-func CFAllocatorReallocateTyped(allocator unsafe.Pointer, ptr unsafe.Pointer, newsize int, descriptor uint64, hint uint) unsafe.Pointer {
-	return raw.CFAllocatorReallocateTyped(allocator, ptr, newsize, descriptor, hint)
-}
-
-// CFAllocatorSetDefault calls [raw.CFAllocatorSetDefault] (C function CFAllocatorSetDefault).
-func CFAllocatorSetDefault(allocator unsafe.Pointer) {
-	raw.CFAllocatorSetDefault(allocator)
-}
-
-// CFArrayAppendArray calls [raw.CFArrayAppendArray] (C function CFArrayAppendArray).
-func CFArrayAppendArray(theArray unsafe.Pointer, otherArray unsafe.Pointer, otherRange raw.CFRange) {
-	raw.CFArrayAppendArray(theArray, otherArray, otherRange)
-}
-
-// CFArrayAppendValue calls [raw.CFArrayAppendValue] (C function CFArrayAppendValue).
-func CFArrayAppendValue(theArray unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFArrayAppendValue(theArray, value)
-}
-
-// CFArrayApplyFunction calls [raw.CFArrayApplyFunction] (C function CFArrayApplyFunction).
-func CFArrayApplyFunction(theArray unsafe.Pointer, range_ raw.CFRange, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFArrayApplyFunction(theArray, range_, applier, context_)
-}
-
-// CFArrayBSearchValues calls [raw.CFArrayBSearchValues] (C function CFArrayBSearchValues).
-func CFArrayBSearchValues(theArray unsafe.Pointer, range_ raw.CFRange, value unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) int {
-	return raw.CFArrayBSearchValues(theArray, range_, value, comparator, context_)
-}
-
-// CFArrayContainsValue calls [raw.CFArrayContainsValue] (C function CFArrayContainsValue).
-func CFArrayContainsValue(theArray unsafe.Pointer, range_ raw.CFRange, value unsafe.Pointer) uint8 {
-	return raw.CFArrayContainsValue(theArray, range_, value)
-}
-
-// CFArrayCreate calls [raw.CFArrayCreate] (C function CFArrayCreate).
-func CFArrayCreate(allocator unsafe.Pointer, values unsafe.Pointer, numValues int, callBacks *raw.CFArrayCallBacks) unsafe.Pointer {
-	return raw.CFArrayCreate(allocator, values, numValues, callBacks)
-}
-
-// CFArrayCreateCopy calls [raw.CFArrayCreateCopy] (C function CFArrayCreateCopy).
-func CFArrayCreateCopy(allocator unsafe.Pointer, theArray unsafe.Pointer) unsafe.Pointer {
-	return raw.CFArrayCreateCopy(allocator, theArray)
-}
-
-// CFArrayCreateMutable calls [raw.CFArrayCreateMutable] (C function CFArrayCreateMutable).
-func CFArrayCreateMutable(allocator unsafe.Pointer, capacity int, callBacks *raw.CFArrayCallBacks) unsafe.Pointer {
-	return raw.CFArrayCreateMutable(allocator, capacity, callBacks)
-}
-
-// CFArrayCreateMutableCopy calls [raw.CFArrayCreateMutableCopy] (C function CFArrayCreateMutableCopy).
-func CFArrayCreateMutableCopy(allocator unsafe.Pointer, capacity int, theArray unsafe.Pointer) unsafe.Pointer {
-	return raw.CFArrayCreateMutableCopy(allocator, capacity, theArray)
-}
-
-// CFArrayExchangeValuesAtIndices calls [raw.CFArrayExchangeValuesAtIndices] (C function CFArrayExchangeValuesAtIndices).
-func CFArrayExchangeValuesAtIndices(theArray unsafe.Pointer, idx1 int, idx2 int) {
-	raw.CFArrayExchangeValuesAtIndices(theArray, idx1, idx2)
-}
-
-// CFArrayGetCount calls [raw.CFArrayGetCount] (C function CFArrayGetCount).
-func CFArrayGetCount(theArray unsafe.Pointer) int {
-	return raw.CFArrayGetCount(theArray)
-}
-
-// CFArrayGetCountOfValue calls [raw.CFArrayGetCountOfValue] (C function CFArrayGetCountOfValue).
-func CFArrayGetCountOfValue(theArray unsafe.Pointer, range_ raw.CFRange, value unsafe.Pointer) int {
-	return raw.CFArrayGetCountOfValue(theArray, range_, value)
-}
-
-// CFArrayGetFirstIndexOfValue calls [raw.CFArrayGetFirstIndexOfValue] (C function CFArrayGetFirstIndexOfValue).
-func CFArrayGetFirstIndexOfValue(theArray unsafe.Pointer, range_ raw.CFRange, value unsafe.Pointer) int {
-	return raw.CFArrayGetFirstIndexOfValue(theArray, range_, value)
-}
-
-// CFArrayGetLastIndexOfValue calls [raw.CFArrayGetLastIndexOfValue] (C function CFArrayGetLastIndexOfValue).
-func CFArrayGetLastIndexOfValue(theArray unsafe.Pointer, range_ raw.CFRange, value unsafe.Pointer) int {
-	return raw.CFArrayGetLastIndexOfValue(theArray, range_, value)
-}
-
-// CFArrayGetTypeID calls [raw.CFArrayGetTypeID] (C function CFArrayGetTypeID).
-func CFArrayGetTypeID() uint {
-	return raw.CFArrayGetTypeID()
-}
-
-// CFArrayGetValueAtIndex calls [raw.CFArrayGetValueAtIndex] (C function CFArrayGetValueAtIndex).
-func CFArrayGetValueAtIndex(theArray unsafe.Pointer, idx int) unsafe.Pointer {
-	return raw.CFArrayGetValueAtIndex(theArray, idx)
-}
-
-// CFArrayGetValues calls [raw.CFArrayGetValues] (C function CFArrayGetValues).
-func CFArrayGetValues(theArray unsafe.Pointer, range_ raw.CFRange, values unsafe.Pointer) {
-	raw.CFArrayGetValues(theArray, range_, values)
-}
-
-// CFArrayInsertValueAtIndex calls [raw.CFArrayInsertValueAtIndex] (C function CFArrayInsertValueAtIndex).
-func CFArrayInsertValueAtIndex(theArray unsafe.Pointer, idx int, value unsafe.Pointer) {
-	raw.CFArrayInsertValueAtIndex(theArray, idx, value)
-}
-
-// CFArrayRemoveAllValues calls [raw.CFArrayRemoveAllValues] (C function CFArrayRemoveAllValues).
-func CFArrayRemoveAllValues(theArray unsafe.Pointer) {
-	raw.CFArrayRemoveAllValues(theArray)
-}
-
-// CFArrayRemoveValueAtIndex calls [raw.CFArrayRemoveValueAtIndex] (C function CFArrayRemoveValueAtIndex).
-func CFArrayRemoveValueAtIndex(theArray unsafe.Pointer, idx int) {
-	raw.CFArrayRemoveValueAtIndex(theArray, idx)
-}
-
-// CFArrayReplaceValues calls [raw.CFArrayReplaceValues] (C function CFArrayReplaceValues).
-func CFArrayReplaceValues(theArray unsafe.Pointer, range_ raw.CFRange, newValues unsafe.Pointer, newCount int) {
-	raw.CFArrayReplaceValues(theArray, range_, newValues, newCount)
-}
-
-// CFArraySetValueAtIndex calls [raw.CFArraySetValueAtIndex] (C function CFArraySetValueAtIndex).
-func CFArraySetValueAtIndex(theArray unsafe.Pointer, idx int, value unsafe.Pointer) {
-	raw.CFArraySetValueAtIndex(theArray, idx, value)
-}
-
-// CFArraySortValues calls [raw.CFArraySortValues] (C function CFArraySortValues).
-func CFArraySortValues(theArray unsafe.Pointer, range_ raw.CFRange, comparator unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFArraySortValues(theArray, range_, comparator, context_)
-}
-
-// CFAttributedStringBeginEditing calls [raw.CFAttributedStringBeginEditing] (C function CFAttributedStringBeginEditing).
-func CFAttributedStringBeginEditing(aStr unsafe.Pointer) {
-	raw.CFAttributedStringBeginEditing(aStr)
-}
-
-// CFAttributedStringCreate calls [raw.CFAttributedStringCreate] (C function CFAttributedStringCreate).
-func CFAttributedStringCreate(alloc unsafe.Pointer, str unsafe.Pointer, attributes unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAttributedStringCreate(alloc, str, attributes)
-}
-
-// CFAttributedStringCreateCopy calls [raw.CFAttributedStringCreateCopy] (C function CFAttributedStringCreateCopy).
-func CFAttributedStringCreateCopy(alloc unsafe.Pointer, aStr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAttributedStringCreateCopy(alloc, aStr)
-}
-
-// CFAttributedStringCreateMutable calls [raw.CFAttributedStringCreateMutable] (C function CFAttributedStringCreateMutable).
-func CFAttributedStringCreateMutable(alloc unsafe.Pointer, maxLength int) unsafe.Pointer {
-	return raw.CFAttributedStringCreateMutable(alloc, maxLength)
-}
-
-// CFAttributedStringCreateMutableCopy calls [raw.CFAttributedStringCreateMutableCopy] (C function CFAttributedStringCreateMutableCopy).
-func CFAttributedStringCreateMutableCopy(alloc unsafe.Pointer, maxLength int, aStr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAttributedStringCreateMutableCopy(alloc, maxLength, aStr)
-}
-
-// CFAttributedStringCreateWithSubstring calls [raw.CFAttributedStringCreateWithSubstring] (C function CFAttributedStringCreateWithSubstring).
-func CFAttributedStringCreateWithSubstring(alloc unsafe.Pointer, aStr unsafe.Pointer, range_ raw.CFRange) unsafe.Pointer {
-	return raw.CFAttributedStringCreateWithSubstring(alloc, aStr, range_)
-}
-
-// CFAttributedStringEndEditing calls [raw.CFAttributedStringEndEditing] (C function CFAttributedStringEndEditing).
-func CFAttributedStringEndEditing(aStr unsafe.Pointer) {
-	raw.CFAttributedStringEndEditing(aStr)
-}
-
-// CFAttributedStringGetAttribute calls [raw.CFAttributedStringGetAttribute] (C function CFAttributedStringGetAttribute).
-func CFAttributedStringGetAttribute(aStr unsafe.Pointer, loc int, attrName unsafe.Pointer, effectiveRange *raw.CFRange) unsafe.Pointer {
-	return raw.CFAttributedStringGetAttribute(aStr, loc, attrName, effectiveRange)
-}
-
-// CFAttributedStringGetAttributeAndLongestEffectiveRange calls [raw.CFAttributedStringGetAttributeAndLongestEffectiveRange] (C function CFAttributedStringGetAttributeAndLongestEffectiveRange).
-func CFAttributedStringGetAttributeAndLongestEffectiveRange(aStr unsafe.Pointer, loc int, attrName unsafe.Pointer, inRange raw.CFRange, longestEffectiveRange *raw.CFRange) unsafe.Pointer {
-	return raw.CFAttributedStringGetAttributeAndLongestEffectiveRange(aStr, loc, attrName, inRange, longestEffectiveRange)
-}
-
-// CFAttributedStringGetAttributes calls [raw.CFAttributedStringGetAttributes] (C function CFAttributedStringGetAttributes).
-func CFAttributedStringGetAttributes(aStr unsafe.Pointer, loc int, effectiveRange *raw.CFRange) unsafe.Pointer {
-	return raw.CFAttributedStringGetAttributes(aStr, loc, effectiveRange)
-}
-
-// CFAttributedStringGetAttributesAndLongestEffectiveRange calls [raw.CFAttributedStringGetAttributesAndLongestEffectiveRange] (C function CFAttributedStringGetAttributesAndLongestEffectiveRange).
-func CFAttributedStringGetAttributesAndLongestEffectiveRange(aStr unsafe.Pointer, loc int, inRange raw.CFRange, longestEffectiveRange *raw.CFRange) unsafe.Pointer {
-	return raw.CFAttributedStringGetAttributesAndLongestEffectiveRange(aStr, loc, inRange, longestEffectiveRange)
-}
-
-// CFAttributedStringGetBidiLevelsAndResolvedDirections calls [raw.CFAttributedStringGetBidiLevelsAndResolvedDirections] (C function CFAttributedStringGetBidiLevelsAndResolvedDirections).
-func CFAttributedStringGetBidiLevelsAndResolvedDirections(attributedString unsafe.Pointer, range_ raw.CFRange, baseDirection int8, bidiLevels *uint8, baseDirections *uint8) bool {
-	return raw.CFAttributedStringGetBidiLevelsAndResolvedDirections(attributedString, range_, baseDirection, bidiLevels, baseDirections)
-}
-
-// CFAttributedStringGetLength calls [raw.CFAttributedStringGetLength] (C function CFAttributedStringGetLength).
-func CFAttributedStringGetLength(aStr unsafe.Pointer) int {
-	return raw.CFAttributedStringGetLength(aStr)
-}
-
-// CFAttributedStringGetMutableString calls [raw.CFAttributedStringGetMutableString] (C function CFAttributedStringGetMutableString).
-func CFAttributedStringGetMutableString(aStr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAttributedStringGetMutableString(aStr)
-}
-
-// CFAttributedStringGetStatisticalWritingDirections calls [raw.CFAttributedStringGetStatisticalWritingDirections] (C function CFAttributedStringGetStatisticalWritingDirections).
-func CFAttributedStringGetStatisticalWritingDirections(attributedString unsafe.Pointer, range_ raw.CFRange, baseDirection int8, bidiLevels *uint8, baseDirections *uint8) bool {
-	return raw.CFAttributedStringGetStatisticalWritingDirections(attributedString, range_, baseDirection, bidiLevels, baseDirections)
-}
-
-// CFAttributedStringGetString calls [raw.CFAttributedStringGetString] (C function CFAttributedStringGetString).
-func CFAttributedStringGetString(aStr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAttributedStringGetString(aStr)
-}
-
-// CFAttributedStringGetTypeID calls [raw.CFAttributedStringGetTypeID] (C function CFAttributedStringGetTypeID).
-func CFAttributedStringGetTypeID() uint {
-	return raw.CFAttributedStringGetTypeID()
-}
-
-// CFAttributedStringRemoveAttribute calls [raw.CFAttributedStringRemoveAttribute] (C function CFAttributedStringRemoveAttribute).
-func CFAttributedStringRemoveAttribute(aStr unsafe.Pointer, range_ raw.CFRange, attrName unsafe.Pointer) {
-	raw.CFAttributedStringRemoveAttribute(aStr, range_, attrName)
-}
-
-// CFAttributedStringReplaceAttributedString calls [raw.CFAttributedStringReplaceAttributedString] (C function CFAttributedStringReplaceAttributedString).
-func CFAttributedStringReplaceAttributedString(aStr unsafe.Pointer, range_ raw.CFRange, replacement unsafe.Pointer) {
-	raw.CFAttributedStringReplaceAttributedString(aStr, range_, replacement)
-}
-
-// CFAttributedStringReplaceString calls [raw.CFAttributedStringReplaceString] (C function CFAttributedStringReplaceString).
-func CFAttributedStringReplaceString(aStr unsafe.Pointer, range_ raw.CFRange, replacement unsafe.Pointer) {
-	raw.CFAttributedStringReplaceString(aStr, range_, replacement)
-}
-
-// CFAttributedStringSetAttribute calls [raw.CFAttributedStringSetAttribute] (C function CFAttributedStringSetAttribute).
-func CFAttributedStringSetAttribute(aStr unsafe.Pointer, range_ raw.CFRange, attrName unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFAttributedStringSetAttribute(aStr, range_, attrName, value)
-}
-
-// CFAttributedStringSetAttributes calls [raw.CFAttributedStringSetAttributes] (C function CFAttributedStringSetAttributes).
-func CFAttributedStringSetAttributes(aStr unsafe.Pointer, range_ raw.CFRange, replacement unsafe.Pointer, clearOtherAttributes uint8) {
-	raw.CFAttributedStringSetAttributes(aStr, range_, replacement, clearOtherAttributes)
-}
-
-// CFAutorelease calls [raw.CFAutorelease] (C function CFAutorelease).
-func CFAutorelease(arg unsafe.Pointer) unsafe.Pointer {
-	return raw.CFAutorelease(arg)
-}
-
-// CFBagAddValue calls [raw.CFBagAddValue] (C function CFBagAddValue).
-func CFBagAddValue(theBag unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFBagAddValue(theBag, value)
-}
-
-// CFBagApplyFunction calls [raw.CFBagApplyFunction] (C function CFBagApplyFunction).
-func CFBagApplyFunction(theBag unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFBagApplyFunction(theBag, applier, context_)
-}
-
-// CFBagContainsValue calls [raw.CFBagContainsValue] (C function CFBagContainsValue).
-func CFBagContainsValue(theBag unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFBagContainsValue(theBag, value)
-}
-
-// CFBagCreate calls [raw.CFBagCreate] (C function CFBagCreate).
-func CFBagCreate(allocator unsafe.Pointer, values unsafe.Pointer, numValues int, callBacks *raw.CFBagCallBacks) unsafe.Pointer {
-	return raw.CFBagCreate(allocator, values, numValues, callBacks)
-}
-
-// CFBagCreateCopy calls [raw.CFBagCreateCopy] (C function CFBagCreateCopy).
-func CFBagCreateCopy(allocator unsafe.Pointer, theBag unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBagCreateCopy(allocator, theBag)
-}
-
-// CFBagCreateMutable calls [raw.CFBagCreateMutable] (C function CFBagCreateMutable).
-func CFBagCreateMutable(allocator unsafe.Pointer, capacity int, callBacks *raw.CFBagCallBacks) unsafe.Pointer {
-	return raw.CFBagCreateMutable(allocator, capacity, callBacks)
-}
-
-// CFBagCreateMutableCopy calls [raw.CFBagCreateMutableCopy] (C function CFBagCreateMutableCopy).
-func CFBagCreateMutableCopy(allocator unsafe.Pointer, capacity int, theBag unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBagCreateMutableCopy(allocator, capacity, theBag)
-}
-
-// CFBagGetCount calls [raw.CFBagGetCount] (C function CFBagGetCount).
-func CFBagGetCount(theBag unsafe.Pointer) int {
-	return raw.CFBagGetCount(theBag)
-}
-
-// CFBagGetCountOfValue calls [raw.CFBagGetCountOfValue] (C function CFBagGetCountOfValue).
-func CFBagGetCountOfValue(theBag unsafe.Pointer, value unsafe.Pointer) int {
-	return raw.CFBagGetCountOfValue(theBag, value)
-}
-
-// CFBagGetTypeID calls [raw.CFBagGetTypeID] (C function CFBagGetTypeID).
-func CFBagGetTypeID() uint {
-	return raw.CFBagGetTypeID()
-}
-
-// CFBagGetValue calls [raw.CFBagGetValue] (C function CFBagGetValue).
-func CFBagGetValue(theBag unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBagGetValue(theBag, value)
-}
-
-// CFBagGetValueIfPresent calls [raw.CFBagGetValueIfPresent] (C function CFBagGetValueIfPresent).
-func CFBagGetValueIfPresent(theBag unsafe.Pointer, candidate unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFBagGetValueIfPresent(theBag, candidate, value)
-}
-
-// CFBagGetValues calls [raw.CFBagGetValues] (C function CFBagGetValues).
-func CFBagGetValues(theBag unsafe.Pointer, values unsafe.Pointer) {
-	raw.CFBagGetValues(theBag, values)
-}
-
-// CFBagRemoveAllValues calls [raw.CFBagRemoveAllValues] (C function CFBagRemoveAllValues).
-func CFBagRemoveAllValues(theBag unsafe.Pointer) {
-	raw.CFBagRemoveAllValues(theBag)
-}
-
-// CFBagRemoveValue calls [raw.CFBagRemoveValue] (C function CFBagRemoveValue).
-func CFBagRemoveValue(theBag unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFBagRemoveValue(theBag, value)
-}
-
-// CFBagReplaceValue calls [raw.CFBagReplaceValue] (C function CFBagReplaceValue).
-func CFBagReplaceValue(theBag unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFBagReplaceValue(theBag, value)
-}
-
-// CFBagSetValue calls [raw.CFBagSetValue] (C function CFBagSetValue).
-func CFBagSetValue(theBag unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFBagSetValue(theBag, value)
-}
-
-// CFBinaryHeapAddValue calls [raw.CFBinaryHeapAddValue] (C function CFBinaryHeapAddValue).
-func CFBinaryHeapAddValue(heap unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFBinaryHeapAddValue(heap, value)
-}
-
-// CFBinaryHeapApplyFunction calls [raw.CFBinaryHeapApplyFunction] (C function CFBinaryHeapApplyFunction).
-func CFBinaryHeapApplyFunction(heap unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFBinaryHeapApplyFunction(heap, applier, context_)
-}
-
-// CFBinaryHeapContainsValue calls [raw.CFBinaryHeapContainsValue] (C function CFBinaryHeapContainsValue).
-func CFBinaryHeapContainsValue(heap unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFBinaryHeapContainsValue(heap, value)
-}
-
-// CFBinaryHeapCreate calls [raw.CFBinaryHeapCreate] (C function CFBinaryHeapCreate).
-func CFBinaryHeapCreate(allocator unsafe.Pointer, capacity int, callBacks *raw.CFBinaryHeapCallBacks, compareContext *raw.CFBinaryHeapCompareContext) unsafe.Pointer {
-	return raw.CFBinaryHeapCreate(allocator, capacity, callBacks, compareContext)
-}
-
-// CFBinaryHeapCreateCopy calls [raw.CFBinaryHeapCreateCopy] (C function CFBinaryHeapCreateCopy).
-func CFBinaryHeapCreateCopy(allocator unsafe.Pointer, capacity int, heap unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBinaryHeapCreateCopy(allocator, capacity, heap)
-}
-
-// CFBinaryHeapGetCount calls [raw.CFBinaryHeapGetCount] (C function CFBinaryHeapGetCount).
-func CFBinaryHeapGetCount(heap unsafe.Pointer) int {
-	return raw.CFBinaryHeapGetCount(heap)
-}
-
-// CFBinaryHeapGetCountOfValue calls [raw.CFBinaryHeapGetCountOfValue] (C function CFBinaryHeapGetCountOfValue).
-func CFBinaryHeapGetCountOfValue(heap unsafe.Pointer, value unsafe.Pointer) int {
-	return raw.CFBinaryHeapGetCountOfValue(heap, value)
-}
-
-// CFBinaryHeapGetMinimum calls [raw.CFBinaryHeapGetMinimum] (C function CFBinaryHeapGetMinimum).
-func CFBinaryHeapGetMinimum(heap unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBinaryHeapGetMinimum(heap)
-}
-
-// CFBinaryHeapGetMinimumIfPresent calls [raw.CFBinaryHeapGetMinimumIfPresent] (C function CFBinaryHeapGetMinimumIfPresent).
-func CFBinaryHeapGetMinimumIfPresent(heap unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFBinaryHeapGetMinimumIfPresent(heap, value)
-}
-
-// CFBinaryHeapGetTypeID calls [raw.CFBinaryHeapGetTypeID] (C function CFBinaryHeapGetTypeID).
-func CFBinaryHeapGetTypeID() uint {
-	return raw.CFBinaryHeapGetTypeID()
-}
-
-// CFBinaryHeapGetValues calls [raw.CFBinaryHeapGetValues] (C function CFBinaryHeapGetValues).
-func CFBinaryHeapGetValues(heap unsafe.Pointer, values unsafe.Pointer) {
-	raw.CFBinaryHeapGetValues(heap, values)
-}
-
-// CFBinaryHeapRemoveAllValues calls [raw.CFBinaryHeapRemoveAllValues] (C function CFBinaryHeapRemoveAllValues).
-func CFBinaryHeapRemoveAllValues(heap unsafe.Pointer) {
-	raw.CFBinaryHeapRemoveAllValues(heap)
-}
-
-// CFBinaryHeapRemoveMinimumValue calls [raw.CFBinaryHeapRemoveMinimumValue] (C function CFBinaryHeapRemoveMinimumValue).
-func CFBinaryHeapRemoveMinimumValue(heap unsafe.Pointer) {
-	raw.CFBinaryHeapRemoveMinimumValue(heap)
-}
-
-// CFBitVectorContainsBit calls [raw.CFBitVectorContainsBit] (C function CFBitVectorContainsBit).
-func CFBitVectorContainsBit(bv unsafe.Pointer, range_ raw.CFRange, value uint) uint8 {
-	return raw.CFBitVectorContainsBit(bv, range_, value)
-}
-
-// CFBitVectorCreate calls [raw.CFBitVectorCreate] (C function CFBitVectorCreate).
-func CFBitVectorCreate(allocator unsafe.Pointer, bytes_ *uint8, numBits int) unsafe.Pointer {
-	return raw.CFBitVectorCreate(allocator, bytes_, numBits)
-}
-
-// CFBitVectorCreateCopy calls [raw.CFBitVectorCreateCopy] (C function CFBitVectorCreateCopy).
-func CFBitVectorCreateCopy(allocator unsafe.Pointer, bv unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBitVectorCreateCopy(allocator, bv)
-}
-
-// CFBitVectorCreateMutable calls [raw.CFBitVectorCreateMutable] (C function CFBitVectorCreateMutable).
-func CFBitVectorCreateMutable(allocator unsafe.Pointer, capacity int) unsafe.Pointer {
-	return raw.CFBitVectorCreateMutable(allocator, capacity)
-}
-
-// CFBitVectorCreateMutableCopy calls [raw.CFBitVectorCreateMutableCopy] (C function CFBitVectorCreateMutableCopy).
-func CFBitVectorCreateMutableCopy(allocator unsafe.Pointer, capacity int, bv unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBitVectorCreateMutableCopy(allocator, capacity, bv)
-}
-
-// CFBitVectorFlipBitAtIndex calls [raw.CFBitVectorFlipBitAtIndex] (C function CFBitVectorFlipBitAtIndex).
-func CFBitVectorFlipBitAtIndex(bv unsafe.Pointer, idx int) {
-	raw.CFBitVectorFlipBitAtIndex(bv, idx)
-}
-
-// CFBitVectorFlipBits calls [raw.CFBitVectorFlipBits] (C function CFBitVectorFlipBits).
-func CFBitVectorFlipBits(bv unsafe.Pointer, range_ raw.CFRange) {
-	raw.CFBitVectorFlipBits(bv, range_)
-}
-
-// CFBitVectorGetBitAtIndex calls [raw.CFBitVectorGetBitAtIndex] (C function CFBitVectorGetBitAtIndex).
-func CFBitVectorGetBitAtIndex(bv unsafe.Pointer, idx int) uint {
-	return raw.CFBitVectorGetBitAtIndex(bv, idx)
-}
-
-// CFBitVectorGetBits calls [raw.CFBitVectorGetBits] (C function CFBitVectorGetBits).
-func CFBitVectorGetBits(bv unsafe.Pointer, range_ raw.CFRange, bytes_ *uint8) {
-	raw.CFBitVectorGetBits(bv, range_, bytes_)
-}
-
-// CFBitVectorGetCount calls [raw.CFBitVectorGetCount] (C function CFBitVectorGetCount).
-func CFBitVectorGetCount(bv unsafe.Pointer) int {
-	return raw.CFBitVectorGetCount(bv)
-}
-
-// CFBitVectorGetCountOfBit calls [raw.CFBitVectorGetCountOfBit] (C function CFBitVectorGetCountOfBit).
-func CFBitVectorGetCountOfBit(bv unsafe.Pointer, range_ raw.CFRange, value uint) int {
-	return raw.CFBitVectorGetCountOfBit(bv, range_, value)
-}
-
-// CFBitVectorGetFirstIndexOfBit calls [raw.CFBitVectorGetFirstIndexOfBit] (C function CFBitVectorGetFirstIndexOfBit).
-func CFBitVectorGetFirstIndexOfBit(bv unsafe.Pointer, range_ raw.CFRange, value uint) int {
-	return raw.CFBitVectorGetFirstIndexOfBit(bv, range_, value)
-}
-
-// CFBitVectorGetLastIndexOfBit calls [raw.CFBitVectorGetLastIndexOfBit] (C function CFBitVectorGetLastIndexOfBit).
-func CFBitVectorGetLastIndexOfBit(bv unsafe.Pointer, range_ raw.CFRange, value uint) int {
-	return raw.CFBitVectorGetLastIndexOfBit(bv, range_, value)
-}
-
-// CFBitVectorGetTypeID calls [raw.CFBitVectorGetTypeID] (C function CFBitVectorGetTypeID).
-func CFBitVectorGetTypeID() uint {
-	return raw.CFBitVectorGetTypeID()
-}
-
-// CFBitVectorSetAllBits calls [raw.CFBitVectorSetAllBits] (C function CFBitVectorSetAllBits).
-func CFBitVectorSetAllBits(bv unsafe.Pointer, value uint) {
-	raw.CFBitVectorSetAllBits(bv, value)
-}
-
-// CFBitVectorSetBitAtIndex calls [raw.CFBitVectorSetBitAtIndex] (C function CFBitVectorSetBitAtIndex).
-func CFBitVectorSetBitAtIndex(bv unsafe.Pointer, idx int, value uint) {
-	raw.CFBitVectorSetBitAtIndex(bv, idx, value)
-}
-
-// CFBitVectorSetBits calls [raw.CFBitVectorSetBits] (C function CFBitVectorSetBits).
-func CFBitVectorSetBits(bv unsafe.Pointer, range_ raw.CFRange, value uint) {
-	raw.CFBitVectorSetBits(bv, range_, value)
-}
-
-// CFBitVectorSetCount calls [raw.CFBitVectorSetCount] (C function CFBitVectorSetCount).
-func CFBitVectorSetCount(bv unsafe.Pointer, count int) {
-	raw.CFBitVectorSetCount(bv, count)
-}
-
-// CFBooleanGetTypeID calls [raw.CFBooleanGetTypeID] (C function CFBooleanGetTypeID).
-func CFBooleanGetTypeID() uint {
-	return raw.CFBooleanGetTypeID()
-}
-
-// CFBooleanGetValue calls [raw.CFBooleanGetValue] (C function CFBooleanGetValue).
-func CFBooleanGetValue(boolean unsafe.Pointer) uint8 {
-	return raw.CFBooleanGetValue(boolean)
-}
-
-// CFBundleCloseBundleResourceMap calls [raw.CFBundleCloseBundleResourceMap] (C function CFBundleCloseBundleResourceMap).
-func CFBundleCloseBundleResourceMap(bundle unsafe.Pointer, refNum int) {
-	raw.CFBundleCloseBundleResourceMap(bundle, refNum)
-}
-
-// CFBundleCopyAuxiliaryExecutableURL calls [raw.CFBundleCopyAuxiliaryExecutableURL] (C function CFBundleCopyAuxiliaryExecutableURL).
-func CFBundleCopyAuxiliaryExecutableURL(bundle unsafe.Pointer, executableName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyAuxiliaryExecutableURL(bundle, executableName)
-}
-
-// CFBundleCopyBuiltInPlugInsURL calls [raw.CFBundleCopyBuiltInPlugInsURL] (C function CFBundleCopyBuiltInPlugInsURL).
-func CFBundleCopyBuiltInPlugInsURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyBuiltInPlugInsURL(bundle)
-}
-
-// CFBundleCopyBundleLocalizations calls [raw.CFBundleCopyBundleLocalizations] (C function CFBundleCopyBundleLocalizations).
-func CFBundleCopyBundleLocalizations(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyBundleLocalizations(bundle)
-}
-
-// CFBundleCopyBundleURL calls [raw.CFBundleCopyBundleURL] (C function CFBundleCopyBundleURL).
-func CFBundleCopyBundleURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyBundleURL(bundle)
-}
-
-// CFBundleCopyExecutableArchitectures calls [raw.CFBundleCopyExecutableArchitectures] (C function CFBundleCopyExecutableArchitectures).
-func CFBundleCopyExecutableArchitectures(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyExecutableArchitectures(bundle)
-}
-
-// CFBundleCopyExecutableArchitecturesForURL calls [raw.CFBundleCopyExecutableArchitecturesForURL] (C function CFBundleCopyExecutableArchitecturesForURL).
-func CFBundleCopyExecutableArchitecturesForURL(url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyExecutableArchitecturesForURL(url)
-}
-
-// CFBundleCopyExecutableURL calls [raw.CFBundleCopyExecutableURL] (C function CFBundleCopyExecutableURL).
-func CFBundleCopyExecutableURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyExecutableURL(bundle)
-}
-
-// CFBundleCopyInfoDictionaryForURL calls [raw.CFBundleCopyInfoDictionaryForURL] (C function CFBundleCopyInfoDictionaryForURL).
-func CFBundleCopyInfoDictionaryForURL(url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyInfoDictionaryForURL(url)
-}
-
-// CFBundleCopyInfoDictionaryInDirectory calls [raw.CFBundleCopyInfoDictionaryInDirectory] (C function CFBundleCopyInfoDictionaryInDirectory).
-func CFBundleCopyInfoDictionaryInDirectory(bundleURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyInfoDictionaryInDirectory(bundleURL)
-}
-
-// CFBundleCopyLocalizationsForPreferences calls [raw.CFBundleCopyLocalizationsForPreferences] (C function CFBundleCopyLocalizationsForPreferences).
-func CFBundleCopyLocalizationsForPreferences(locArray unsafe.Pointer, prefArray unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyLocalizationsForPreferences(locArray, prefArray)
-}
-
-// CFBundleCopyLocalizationsForURL calls [raw.CFBundleCopyLocalizationsForURL] (C function CFBundleCopyLocalizationsForURL).
-func CFBundleCopyLocalizationsForURL(url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyLocalizationsForURL(url)
-}
-
-// CFBundleCopyLocalizedString calls [raw.CFBundleCopyLocalizedString] (C function CFBundleCopyLocalizedString).
-func CFBundleCopyLocalizedString(bundle unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, tableName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyLocalizedString(bundle, key, value, tableName)
-}
-
-// CFBundleCopyLocalizedStringForLocalizations calls [raw.CFBundleCopyLocalizedStringForLocalizations] (C function CFBundleCopyLocalizedStringForLocalizations).
-func CFBundleCopyLocalizedStringForLocalizations(bundle unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, tableName unsafe.Pointer, localizations unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyLocalizedStringForLocalizations(bundle, key, value, tableName, localizations)
-}
-
-// CFBundleCopyPreferredLocalizationsFromArray calls [raw.CFBundleCopyPreferredLocalizationsFromArray] (C function CFBundleCopyPreferredLocalizationsFromArray).
-func CFBundleCopyPreferredLocalizationsFromArray(locArray unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyPreferredLocalizationsFromArray(locArray)
-}
-
-// CFBundleCopyPrivateFrameworksURL calls [raw.CFBundleCopyPrivateFrameworksURL] (C function CFBundleCopyPrivateFrameworksURL).
-func CFBundleCopyPrivateFrameworksURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyPrivateFrameworksURL(bundle)
-}
-
-// CFBundleCopyResourceURL calls [raw.CFBundleCopyResourceURL] (C function CFBundleCopyResourceURL).
-func CFBundleCopyResourceURL(bundle unsafe.Pointer, resourceName unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURL(bundle, resourceName, resourceType, subDirName)
-}
-
-// CFBundleCopyResourceURLForLocalization calls [raw.CFBundleCopyResourceURLForLocalization] (C function CFBundleCopyResourceURLForLocalization).
-func CFBundleCopyResourceURLForLocalization(bundle unsafe.Pointer, resourceName unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer, localizationName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURLForLocalization(bundle, resourceName, resourceType, subDirName, localizationName)
-}
-
-// CFBundleCopyResourceURLInDirectory calls [raw.CFBundleCopyResourceURLInDirectory] (C function CFBundleCopyResourceURLInDirectory).
-func CFBundleCopyResourceURLInDirectory(bundleURL unsafe.Pointer, resourceName unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURLInDirectory(bundleURL, resourceName, resourceType, subDirName)
-}
-
-// CFBundleCopyResourceURLsOfType calls [raw.CFBundleCopyResourceURLsOfType] (C function CFBundleCopyResourceURLsOfType).
-func CFBundleCopyResourceURLsOfType(bundle unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURLsOfType(bundle, resourceType, subDirName)
-}
-
-// CFBundleCopyResourceURLsOfTypeForLocalization calls [raw.CFBundleCopyResourceURLsOfTypeForLocalization] (C function CFBundleCopyResourceURLsOfTypeForLocalization).
-func CFBundleCopyResourceURLsOfTypeForLocalization(bundle unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer, localizationName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURLsOfTypeForLocalization(bundle, resourceType, subDirName, localizationName)
-}
-
-// CFBundleCopyResourceURLsOfTypeInDirectory calls [raw.CFBundleCopyResourceURLsOfTypeInDirectory] (C function CFBundleCopyResourceURLsOfTypeInDirectory).
-func CFBundleCopyResourceURLsOfTypeInDirectory(bundleURL unsafe.Pointer, resourceType unsafe.Pointer, subDirName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourceURLsOfTypeInDirectory(bundleURL, resourceType, subDirName)
-}
-
-// CFBundleCopyResourcesDirectoryURL calls [raw.CFBundleCopyResourcesDirectoryURL] (C function CFBundleCopyResourcesDirectoryURL).
-func CFBundleCopyResourcesDirectoryURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopyResourcesDirectoryURL(bundle)
-}
-
-// CFBundleCopySharedFrameworksURL calls [raw.CFBundleCopySharedFrameworksURL] (C function CFBundleCopySharedFrameworksURL).
-func CFBundleCopySharedFrameworksURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopySharedFrameworksURL(bundle)
-}
-
-// CFBundleCopySharedSupportURL calls [raw.CFBundleCopySharedSupportURL] (C function CFBundleCopySharedSupportURL).
-func CFBundleCopySharedSupportURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopySharedSupportURL(bundle)
-}
-
-// CFBundleCopySupportFilesDirectoryURL calls [raw.CFBundleCopySupportFilesDirectoryURL] (C function CFBundleCopySupportFilesDirectoryURL).
-func CFBundleCopySupportFilesDirectoryURL(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCopySupportFilesDirectoryURL(bundle)
-}
-
-// CFBundleCreate calls [raw.CFBundleCreate] (C function CFBundleCreate).
-func CFBundleCreate(allocator unsafe.Pointer, bundleURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCreate(allocator, bundleURL)
-}
-
-// CFBundleCreateBundlesFromDirectory calls [raw.CFBundleCreateBundlesFromDirectory] (C function CFBundleCreateBundlesFromDirectory).
-func CFBundleCreateBundlesFromDirectory(allocator unsafe.Pointer, directoryURL unsafe.Pointer, bundleType unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleCreateBundlesFromDirectory(allocator, directoryURL, bundleType)
-}
-
-// CFBundleGetAllBundles calls [raw.CFBundleGetAllBundles] (C function CFBundleGetAllBundles).
-func CFBundleGetAllBundles() unsafe.Pointer {
-	return raw.CFBundleGetAllBundles()
-}
-
-// CFBundleGetBundleWithIdentifier calls [raw.CFBundleGetBundleWithIdentifier] (C function CFBundleGetBundleWithIdentifier).
-func CFBundleGetBundleWithIdentifier(bundleID unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetBundleWithIdentifier(bundleID)
-}
-
-// CFBundleGetDataPointerForName calls [raw.CFBundleGetDataPointerForName] (C function CFBundleGetDataPointerForName).
-func CFBundleGetDataPointerForName(bundle unsafe.Pointer, symbolName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetDataPointerForName(bundle, symbolName)
-}
-
-// CFBundleGetDataPointersForNames calls [raw.CFBundleGetDataPointersForNames] (C function CFBundleGetDataPointersForNames).
-func CFBundleGetDataPointersForNames(bundle unsafe.Pointer, symbolNames unsafe.Pointer, stbl unsafe.Pointer) {
-	raw.CFBundleGetDataPointersForNames(bundle, symbolNames, stbl)
-}
-
-// CFBundleGetDevelopmentRegion calls [raw.CFBundleGetDevelopmentRegion] (C function CFBundleGetDevelopmentRegion).
-func CFBundleGetDevelopmentRegion(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetDevelopmentRegion(bundle)
-}
-
-// CFBundleGetFunctionPointerForName calls [raw.CFBundleGetFunctionPointerForName] (C function CFBundleGetFunctionPointerForName).
-func CFBundleGetFunctionPointerForName(bundle unsafe.Pointer, functionName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetFunctionPointerForName(bundle, functionName)
-}
-
-// CFBundleGetFunctionPointersForNames calls [raw.CFBundleGetFunctionPointersForNames] (C function CFBundleGetFunctionPointersForNames).
-func CFBundleGetFunctionPointersForNames(bundle unsafe.Pointer, functionNames unsafe.Pointer, ftbl unsafe.Pointer) {
-	raw.CFBundleGetFunctionPointersForNames(bundle, functionNames, ftbl)
-}
-
-// CFBundleGetIdentifier calls [raw.CFBundleGetIdentifier] (C function CFBundleGetIdentifier).
-func CFBundleGetIdentifier(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetIdentifier(bundle)
-}
-
-// CFBundleGetInfoDictionary calls [raw.CFBundleGetInfoDictionary] (C function CFBundleGetInfoDictionary).
-func CFBundleGetInfoDictionary(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetInfoDictionary(bundle)
-}
-
-// CFBundleGetLocalInfoDictionary calls [raw.CFBundleGetLocalInfoDictionary] (C function CFBundleGetLocalInfoDictionary).
-func CFBundleGetLocalInfoDictionary(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetLocalInfoDictionary(bundle)
-}
-
-// CFBundleGetMainBundle calls [raw.CFBundleGetMainBundle] (C function CFBundleGetMainBundle).
-func CFBundleGetMainBundle() unsafe.Pointer {
-	return raw.CFBundleGetMainBundle()
-}
-
-// CFBundleGetPackageInfo calls [raw.CFBundleGetPackageInfo] (C function CFBundleGetPackageInfo).
-func CFBundleGetPackageInfo(bundle unsafe.Pointer, packageType *uint, packageCreator *uint) {
-	raw.CFBundleGetPackageInfo(bundle, packageType, packageCreator)
-}
-
-// CFBundleGetPackageInfoInDirectory calls [raw.CFBundleGetPackageInfoInDirectory] (C function CFBundleGetPackageInfoInDirectory).
-func CFBundleGetPackageInfoInDirectory(url unsafe.Pointer, packageType *uint, packageCreator *uint) uint8 {
-	return raw.CFBundleGetPackageInfoInDirectory(url, packageType, packageCreator)
-}
-
-// CFBundleGetPlugIn calls [raw.CFBundleGetPlugIn] (C function CFBundleGetPlugIn).
-func CFBundleGetPlugIn(bundle unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetPlugIn(bundle)
-}
-
-// CFBundleGetTypeID calls [raw.CFBundleGetTypeID] (C function CFBundleGetTypeID).
-func CFBundleGetTypeID() uint {
-	return raw.CFBundleGetTypeID()
-}
-
-// CFBundleGetValueForInfoDictionaryKey calls [raw.CFBundleGetValueForInfoDictionaryKey] (C function CFBundleGetValueForInfoDictionaryKey).
-func CFBundleGetValueForInfoDictionaryKey(bundle unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBundleGetValueForInfoDictionaryKey(bundle, key)
-}
-
-// CFBundleGetVersionNumber calls [raw.CFBundleGetVersionNumber] (C function CFBundleGetVersionNumber).
-func CFBundleGetVersionNumber(bundle unsafe.Pointer) uint {
-	return raw.CFBundleGetVersionNumber(bundle)
-}
-
-// CFBundleIsArchitectureLoadable calls [raw.CFBundleIsArchitectureLoadable] (C function CFBundleIsArchitectureLoadable).
-func CFBundleIsArchitectureLoadable(arch int) uint8 {
-	return raw.CFBundleIsArchitectureLoadable(arch)
-}
-
-// CFBundleIsExecutableLoadable calls [raw.CFBundleIsExecutableLoadable] (C function CFBundleIsExecutableLoadable).
-func CFBundleIsExecutableLoadable(bundle unsafe.Pointer) uint8 {
-	return raw.CFBundleIsExecutableLoadable(bundle)
-}
-
-// CFBundleIsExecutableLoadableForURL calls [raw.CFBundleIsExecutableLoadableForURL] (C function CFBundleIsExecutableLoadableForURL).
-func CFBundleIsExecutableLoadableForURL(url unsafe.Pointer) uint8 {
-	return raw.CFBundleIsExecutableLoadableForURL(url)
-}
-
-// CFBundleIsExecutableLoaded calls [raw.CFBundleIsExecutableLoaded] (C function CFBundleIsExecutableLoaded).
-func CFBundleIsExecutableLoaded(bundle unsafe.Pointer) uint8 {
-	return raw.CFBundleIsExecutableLoaded(bundle)
-}
-
-// CFBundleLoadExecutable calls [raw.CFBundleLoadExecutable] (C function CFBundleLoadExecutable).
-func CFBundleLoadExecutable(bundle unsafe.Pointer) uint8 {
-	return raw.CFBundleLoadExecutable(bundle)
-}
-
-// CFBundleOpenBundleResourceFiles calls [raw.CFBundleOpenBundleResourceFiles] (C function CFBundleOpenBundleResourceFiles).
-func CFBundleOpenBundleResourceFiles(bundle unsafe.Pointer, refNum *int, localizedRefNum *int) int {
-	return raw.CFBundleOpenBundleResourceFiles(bundle, refNum, localizedRefNum)
-}
-
-// CFBundleOpenBundleResourceMap calls [raw.CFBundleOpenBundleResourceMap] (C function CFBundleOpenBundleResourceMap).
-func CFBundleOpenBundleResourceMap(bundle unsafe.Pointer) int {
-	return raw.CFBundleOpenBundleResourceMap(bundle)
-}
-
-// CFBundleUnloadExecutable calls [raw.CFBundleUnloadExecutable] (C function CFBundleUnloadExecutable).
-func CFBundleUnloadExecutable(bundle unsafe.Pointer) {
-	raw.CFBundleUnloadExecutable(bundle)
-}
-
-// CFByteOrderGetCurrent calls [raw.CFByteOrderGetCurrent] (C function CFByteOrderGetCurrent).
-func CFByteOrderGetCurrent() int {
-	return raw.CFByteOrderGetCurrent()
-}
-
-// CFCalendarCopyCurrent calls [raw.CFCalendarCopyCurrent] (C function CFCalendarCopyCurrent).
-func CFCalendarCopyCurrent() unsafe.Pointer {
-	return raw.CFCalendarCopyCurrent()
-}
-
-// CFCalendarCopyLocale calls [raw.CFCalendarCopyLocale] (C function CFCalendarCopyLocale).
-func CFCalendarCopyLocale(calendar unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCalendarCopyLocale(calendar)
-}
-
-// CFCalendarCopyTimeZone calls [raw.CFCalendarCopyTimeZone] (C function CFCalendarCopyTimeZone).
-func CFCalendarCopyTimeZone(calendar unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCalendarCopyTimeZone(calendar)
-}
-
-// CFCalendarCreateWithIdentifier calls [raw.CFCalendarCreateWithIdentifier] (C function CFCalendarCreateWithIdentifier).
-func CFCalendarCreateWithIdentifier(allocator unsafe.Pointer, identifier unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCalendarCreateWithIdentifier(allocator, identifier)
-}
-
-// CFCalendarGetFirstWeekday calls [raw.CFCalendarGetFirstWeekday] (C function CFCalendarGetFirstWeekday).
-func CFCalendarGetFirstWeekday(calendar unsafe.Pointer) int {
-	return raw.CFCalendarGetFirstWeekday(calendar)
-}
-
-// CFCalendarGetIdentifier calls [raw.CFCalendarGetIdentifier] (C function CFCalendarGetIdentifier).
-func CFCalendarGetIdentifier(calendar unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCalendarGetIdentifier(calendar)
-}
-
-// CFCalendarGetMaximumRangeOfUnit calls [raw.CFCalendarGetMaximumRangeOfUnit] (C function CFCalendarGetMaximumRangeOfUnit).
-func CFCalendarGetMaximumRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit) raw.CFRange {
-	return raw.CFCalendarGetMaximumRangeOfUnit(calendar, raw.CFCalendarUnit(unit))
-}
-
-// CFCalendarGetMinimumDaysInFirstWeek calls [raw.CFCalendarGetMinimumDaysInFirstWeek] (C function CFCalendarGetMinimumDaysInFirstWeek).
-func CFCalendarGetMinimumDaysInFirstWeek(calendar unsafe.Pointer) int {
-	return raw.CFCalendarGetMinimumDaysInFirstWeek(calendar)
-}
-
-// CFCalendarGetMinimumRangeOfUnit calls [raw.CFCalendarGetMinimumRangeOfUnit] (C function CFCalendarGetMinimumRangeOfUnit).
-func CFCalendarGetMinimumRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit) raw.CFRange {
-	return raw.CFCalendarGetMinimumRangeOfUnit(calendar, raw.CFCalendarUnit(unit))
-}
-
-// CFCalendarGetOrdinalityOfUnit calls [raw.CFCalendarGetOrdinalityOfUnit] (C function CFCalendarGetOrdinalityOfUnit).
-func CFCalendarGetOrdinalityOfUnit(calendar unsafe.Pointer, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) int {
-	return raw.CFCalendarGetOrdinalityOfUnit(calendar, raw.CFCalendarUnit(smallerUnit), raw.CFCalendarUnit(biggerUnit), at)
-}
-
-// CFCalendarGetRangeOfUnit calls [raw.CFCalendarGetRangeOfUnit] (C function CFCalendarGetRangeOfUnit).
-func CFCalendarGetRangeOfUnit(calendar unsafe.Pointer, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) raw.CFRange {
-	return raw.CFCalendarGetRangeOfUnit(calendar, raw.CFCalendarUnit(smallerUnit), raw.CFCalendarUnit(biggerUnit), at)
-}
-
-// CFCalendarGetTimeRangeOfUnit calls [raw.CFCalendarGetTimeRangeOfUnit] (C function CFCalendarGetTimeRangeOfUnit).
-func CFCalendarGetTimeRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit, at float64, startp *float64, tip *float64) uint8 {
-	return raw.CFCalendarGetTimeRangeOfUnit(calendar, raw.CFCalendarUnit(unit), at, startp, tip)
-}
-
-// CFCalendarGetTypeID calls [raw.CFCalendarGetTypeID] (C function CFCalendarGetTypeID).
-func CFCalendarGetTypeID() uint {
-	return raw.CFCalendarGetTypeID()
-}
-
-// CFCalendarSetFirstWeekday calls [raw.CFCalendarSetFirstWeekday] (C function CFCalendarSetFirstWeekday).
-func CFCalendarSetFirstWeekday(calendar unsafe.Pointer, wkdy int) {
-	raw.CFCalendarSetFirstWeekday(calendar, wkdy)
-}
-
-// CFCalendarSetLocale calls [raw.CFCalendarSetLocale] (C function CFCalendarSetLocale).
-func CFCalendarSetLocale(calendar unsafe.Pointer, locale unsafe.Pointer) {
-	raw.CFCalendarSetLocale(calendar, locale)
-}
-
-// CFCalendarSetMinimumDaysInFirstWeek calls [raw.CFCalendarSetMinimumDaysInFirstWeek] (C function CFCalendarSetMinimumDaysInFirstWeek).
-func CFCalendarSetMinimumDaysInFirstWeek(calendar unsafe.Pointer, mwd int) {
-	raw.CFCalendarSetMinimumDaysInFirstWeek(calendar, mwd)
-}
-
-// CFCalendarSetTimeZone calls [raw.CFCalendarSetTimeZone] (C function CFCalendarSetTimeZone).
-func CFCalendarSetTimeZone(calendar unsafe.Pointer, tz unsafe.Pointer) {
-	raw.CFCalendarSetTimeZone(calendar, tz)
-}
-
-// CFCharacterSetAddCharactersInRange calls [raw.CFCharacterSetAddCharactersInRange] (C function CFCharacterSetAddCharactersInRange).
-func CFCharacterSetAddCharactersInRange(theSet unsafe.Pointer, theRange raw.CFRange) {
-	raw.CFCharacterSetAddCharactersInRange(theSet, theRange)
-}
-
-// CFCharacterSetAddCharactersInString calls [raw.CFCharacterSetAddCharactersInString] (C function CFCharacterSetAddCharactersInString).
-func CFCharacterSetAddCharactersInString(theSet unsafe.Pointer, theString unsafe.Pointer) {
-	raw.CFCharacterSetAddCharactersInString(theSet, theString)
-}
-
-// CFCharacterSetCreateBitmapRepresentation calls [raw.CFCharacterSetCreateBitmapRepresentation] (C function CFCharacterSetCreateBitmapRepresentation).
-func CFCharacterSetCreateBitmapRepresentation(alloc unsafe.Pointer, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateBitmapRepresentation(alloc, theSet)
-}
-
-// CFCharacterSetCreateCopy calls [raw.CFCharacterSetCreateCopy] (C function CFCharacterSetCreateCopy).
-func CFCharacterSetCreateCopy(alloc unsafe.Pointer, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateCopy(alloc, theSet)
-}
-
-// CFCharacterSetCreateInvertedSet calls [raw.CFCharacterSetCreateInvertedSet] (C function CFCharacterSetCreateInvertedSet).
-func CFCharacterSetCreateInvertedSet(alloc unsafe.Pointer, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateInvertedSet(alloc, theSet)
-}
-
-// CFCharacterSetCreateMutable calls [raw.CFCharacterSetCreateMutable] (C function CFCharacterSetCreateMutable).
-func CFCharacterSetCreateMutable(alloc unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateMutable(alloc)
-}
-
-// CFCharacterSetCreateMutableCopy calls [raw.CFCharacterSetCreateMutableCopy] (C function CFCharacterSetCreateMutableCopy).
-func CFCharacterSetCreateMutableCopy(alloc unsafe.Pointer, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateMutableCopy(alloc, theSet)
-}
-
-// CFCharacterSetCreateWithBitmapRepresentation calls [raw.CFCharacterSetCreateWithBitmapRepresentation] (C function CFCharacterSetCreateWithBitmapRepresentation).
-func CFCharacterSetCreateWithBitmapRepresentation(alloc unsafe.Pointer, theData unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateWithBitmapRepresentation(alloc, theData)
-}
-
-// CFCharacterSetCreateWithCharactersInRange calls [raw.CFCharacterSetCreateWithCharactersInRange] (C function CFCharacterSetCreateWithCharactersInRange).
-func CFCharacterSetCreateWithCharactersInRange(alloc unsafe.Pointer, theRange raw.CFRange) unsafe.Pointer {
-	return raw.CFCharacterSetCreateWithCharactersInRange(alloc, theRange)
-}
-
-// CFCharacterSetCreateWithCharactersInString calls [raw.CFCharacterSetCreateWithCharactersInString] (C function CFCharacterSetCreateWithCharactersInString).
-func CFCharacterSetCreateWithCharactersInString(alloc unsafe.Pointer, theString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCharacterSetCreateWithCharactersInString(alloc, theString)
-}
-
-// CFCharacterSetGetPredefined calls [raw.CFCharacterSetGetPredefined] (C function CFCharacterSetGetPredefined).
-func CFCharacterSetGetPredefined(theSetIdentifier CFCharacterSetPredefinedSet) unsafe.Pointer {
-	return raw.CFCharacterSetGetPredefined(raw.CFCharacterSetPredefinedSet(theSetIdentifier))
-}
-
-// CFCharacterSetGetTypeID calls [raw.CFCharacterSetGetTypeID] (C function CFCharacterSetGetTypeID).
-func CFCharacterSetGetTypeID() uint {
-	return raw.CFCharacterSetGetTypeID()
-}
-
-// CFCharacterSetHasMemberInPlane calls [raw.CFCharacterSetHasMemberInPlane] (C function CFCharacterSetHasMemberInPlane).
-func CFCharacterSetHasMemberInPlane(theSet unsafe.Pointer, thePlane int) uint8 {
-	return raw.CFCharacterSetHasMemberInPlane(theSet, thePlane)
-}
-
-// CFCharacterSetIntersect calls [raw.CFCharacterSetIntersect] (C function CFCharacterSetIntersect).
-func CFCharacterSetIntersect(theSet unsafe.Pointer, theOtherSet unsafe.Pointer) {
-	raw.CFCharacterSetIntersect(theSet, theOtherSet)
-}
-
-// CFCharacterSetInvert calls [raw.CFCharacterSetInvert] (C function CFCharacterSetInvert).
-func CFCharacterSetInvert(theSet unsafe.Pointer) {
-	raw.CFCharacterSetInvert(theSet)
-}
-
-// CFCharacterSetIsCharacterMember calls [raw.CFCharacterSetIsCharacterMember] (C function CFCharacterSetIsCharacterMember).
-func CFCharacterSetIsCharacterMember(theSet unsafe.Pointer, theChar uint16) uint8 {
-	return raw.CFCharacterSetIsCharacterMember(theSet, theChar)
-}
-
-// CFCharacterSetIsLongCharacterMember calls [raw.CFCharacterSetIsLongCharacterMember] (C function CFCharacterSetIsLongCharacterMember).
-func CFCharacterSetIsLongCharacterMember(theSet unsafe.Pointer, theChar uint) uint8 {
-	return raw.CFCharacterSetIsLongCharacterMember(theSet, theChar)
-}
-
-// CFCharacterSetIsSupersetOfSet calls [raw.CFCharacterSetIsSupersetOfSet] (C function CFCharacterSetIsSupersetOfSet).
-func CFCharacterSetIsSupersetOfSet(theSet unsafe.Pointer, theOtherset unsafe.Pointer) uint8 {
-	return raw.CFCharacterSetIsSupersetOfSet(theSet, theOtherset)
-}
-
-// CFCharacterSetRemoveCharactersInRange calls [raw.CFCharacterSetRemoveCharactersInRange] (C function CFCharacterSetRemoveCharactersInRange).
-func CFCharacterSetRemoveCharactersInRange(theSet unsafe.Pointer, theRange raw.CFRange) {
-	raw.CFCharacterSetRemoveCharactersInRange(theSet, theRange)
-}
-
-// CFCharacterSetRemoveCharactersInString calls [raw.CFCharacterSetRemoveCharactersInString] (C function CFCharacterSetRemoveCharactersInString).
-func CFCharacterSetRemoveCharactersInString(theSet unsafe.Pointer, theString unsafe.Pointer) {
-	raw.CFCharacterSetRemoveCharactersInString(theSet, theString)
-}
-
-// CFCharacterSetUnion calls [raw.CFCharacterSetUnion] (C function CFCharacterSetUnion).
-func CFCharacterSetUnion(theSet unsafe.Pointer, theOtherSet unsafe.Pointer) {
-	raw.CFCharacterSetUnion(theSet, theOtherSet)
-}
-
-// CFConvertDoubleHostToSwapped calls [raw.CFConvertDoubleHostToSwapped] (C function CFConvertDoubleHostToSwapped).
-func CFConvertDoubleHostToSwapped(arg float64) raw.CFSwappedFloat64 {
-	return raw.CFConvertDoubleHostToSwapped(arg)
-}
-
-// CFConvertDoubleSwappedToHost calls [raw.CFConvertDoubleSwappedToHost] (C function CFConvertDoubleSwappedToHost).
-func CFConvertDoubleSwappedToHost(arg raw.CFSwappedFloat64) float64 {
-	return raw.CFConvertDoubleSwappedToHost(arg)
-}
-
-// CFConvertFloat32HostToSwapped calls [raw.CFConvertFloat32HostToSwapped] (C function CFConvertFloat32HostToSwapped).
-func CFConvertFloat32HostToSwapped(arg float32) raw.CFSwappedFloat32 {
-	return raw.CFConvertFloat32HostToSwapped(arg)
-}
-
-// CFConvertFloat32SwappedToHost calls [raw.CFConvertFloat32SwappedToHost] (C function CFConvertFloat32SwappedToHost).
-func CFConvertFloat32SwappedToHost(arg raw.CFSwappedFloat32) float32 {
-	return raw.CFConvertFloat32SwappedToHost(arg)
-}
-
-// CFConvertFloat64HostToSwapped calls [raw.CFConvertFloat64HostToSwapped] (C function CFConvertFloat64HostToSwapped).
-func CFConvertFloat64HostToSwapped(arg float64) raw.CFSwappedFloat64 {
-	return raw.CFConvertFloat64HostToSwapped(arg)
-}
-
-// CFConvertFloat64SwappedToHost calls [raw.CFConvertFloat64SwappedToHost] (C function CFConvertFloat64SwappedToHost).
-func CFConvertFloat64SwappedToHost(arg raw.CFSwappedFloat64) float64 {
-	return raw.CFConvertFloat64SwappedToHost(arg)
-}
-
-// CFConvertFloatHostToSwapped calls [raw.CFConvertFloatHostToSwapped] (C function CFConvertFloatHostToSwapped).
-func CFConvertFloatHostToSwapped(arg float32) raw.CFSwappedFloat32 {
-	return raw.CFConvertFloatHostToSwapped(arg)
-}
-
-// CFConvertFloatSwappedToHost calls [raw.CFConvertFloatSwappedToHost] (C function CFConvertFloatSwappedToHost).
-func CFConvertFloatSwappedToHost(arg raw.CFSwappedFloat32) float32 {
-	return raw.CFConvertFloatSwappedToHost(arg)
-}
-
-// CFCopyDescription calls [raw.CFCopyDescription] (C function CFCopyDescription).
-func CFCopyDescription(cf unsafe.Pointer) unsafe.Pointer {
-	return raw.CFCopyDescription(cf)
-}
-
-// CFCopyTypeIDDescription calls [raw.CFCopyTypeIDDescription] (C function CFCopyTypeIDDescription).
-func CFCopyTypeIDDescription(type_id uint) unsafe.Pointer {
-	return raw.CFCopyTypeIDDescription(type_id)
-}
-
-// CFDataAppendBytes calls [raw.CFDataAppendBytes] (C function CFDataAppendBytes).
-func CFDataAppendBytes(theData unsafe.Pointer, bytes_ *uint8, length int) {
-	raw.CFDataAppendBytes(theData, bytes_, length)
-}
-
-// CFDataCreate calls [raw.CFDataCreate] (C function CFDataCreate).
-func CFDataCreate(allocator unsafe.Pointer, bytes_ *uint8, length int) unsafe.Pointer {
-	return raw.CFDataCreate(allocator, bytes_, length)
-}
-
-// CFDataCreateCopy calls [raw.CFDataCreateCopy] (C function CFDataCreateCopy).
-func CFDataCreateCopy(allocator unsafe.Pointer, theData unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDataCreateCopy(allocator, theData)
-}
-
-// CFDataCreateMutable calls [raw.CFDataCreateMutable] (C function CFDataCreateMutable).
-func CFDataCreateMutable(allocator unsafe.Pointer, capacity int) unsafe.Pointer {
-	return raw.CFDataCreateMutable(allocator, capacity)
-}
-
-// CFDataCreateMutableCopy calls [raw.CFDataCreateMutableCopy] (C function CFDataCreateMutableCopy).
-func CFDataCreateMutableCopy(allocator unsafe.Pointer, capacity int, theData unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDataCreateMutableCopy(allocator, capacity, theData)
-}
-
-// CFDataCreateWithBytesNoCopy calls [raw.CFDataCreateWithBytesNoCopy] (C function CFDataCreateWithBytesNoCopy).
-func CFDataCreateWithBytesNoCopy(allocator unsafe.Pointer, bytes_ *uint8, length int, bytesDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDataCreateWithBytesNoCopy(allocator, bytes_, length, bytesDeallocator)
-}
-
-// CFDataDeleteBytes calls [raw.CFDataDeleteBytes] (C function CFDataDeleteBytes).
-func CFDataDeleteBytes(theData unsafe.Pointer, range_ raw.CFRange) {
-	raw.CFDataDeleteBytes(theData, range_)
-}
-
-// CFDataFind calls [raw.CFDataFind] (C function CFDataFind).
-func CFDataFind(theData unsafe.Pointer, dataToFind unsafe.Pointer, searchRange raw.CFRange, compareOptions CFDataSearchFlags) raw.CFRange {
-	return raw.CFDataFind(theData, dataToFind, searchRange, raw.CFDataSearchFlags(compareOptions))
-}
-
-// CFDataGetBytePtr calls [raw.CFDataGetBytePtr] (C function CFDataGetBytePtr).
-func CFDataGetBytePtr(theData unsafe.Pointer) *uint8 {
-	return raw.CFDataGetBytePtr(theData)
-}
-
-// CFDataGetBytes calls [raw.CFDataGetBytes] (C function CFDataGetBytes).
-func CFDataGetBytes(theData unsafe.Pointer, range_ raw.CFRange, buffer *uint8) {
-	raw.CFDataGetBytes(theData, range_, buffer)
-}
-
-// CFDataGetLength calls [raw.CFDataGetLength] (C function CFDataGetLength).
-func CFDataGetLength(theData unsafe.Pointer) int {
-	return raw.CFDataGetLength(theData)
-}
-
-// CFDataGetMutableBytePtr calls [raw.CFDataGetMutableBytePtr] (C function CFDataGetMutableBytePtr).
-func CFDataGetMutableBytePtr(theData unsafe.Pointer) *uint8 {
-	return raw.CFDataGetMutableBytePtr(theData)
-}
-
-// CFDataGetTypeID calls [raw.CFDataGetTypeID] (C function CFDataGetTypeID).
-func CFDataGetTypeID() uint {
-	return raw.CFDataGetTypeID()
-}
-
-// CFDataIncreaseLength calls [raw.CFDataIncreaseLength] (C function CFDataIncreaseLength).
-func CFDataIncreaseLength(theData unsafe.Pointer, extraLength int) {
-	raw.CFDataIncreaseLength(theData, extraLength)
-}
-
-// CFDataReplaceBytes calls [raw.CFDataReplaceBytes] (C function CFDataReplaceBytes).
-func CFDataReplaceBytes(theData unsafe.Pointer, range_ raw.CFRange, newBytes *uint8, newLength int) {
-	raw.CFDataReplaceBytes(theData, range_, newBytes, newLength)
-}
-
-// CFDataSetLength calls [raw.CFDataSetLength] (C function CFDataSetLength).
-func CFDataSetLength(theData unsafe.Pointer, length int) {
-	raw.CFDataSetLength(theData, length)
-}
-
-// CFDateCompare calls [raw.CFDateCompare] (C function CFDateCompare).
-func CFDateCompare(theDate unsafe.Pointer, otherDate unsafe.Pointer, context_ unsafe.Pointer) CFComparisonResult {
-	return CFComparisonResult(raw.CFDateCompare(theDate, otherDate, context_))
-}
-
-// CFDateCreate calls [raw.CFDateCreate] (C function CFDateCreate).
-func CFDateCreate(allocator unsafe.Pointer, at float64) unsafe.Pointer {
-	return raw.CFDateCreate(allocator, at)
-}
-
-// CFDateFormatterCopyProperty calls [raw.CFDateFormatterCopyProperty] (C function CFDateFormatterCopyProperty).
-func CFDateFormatterCopyProperty(formatter unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDateFormatterCopyProperty(formatter, key)
-}
-
-// CFDateFormatterCreate calls [raw.CFDateFormatterCreate] (C function CFDateFormatterCreate).
-func CFDateFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, dateStyle CFDateFormatterStyle, timeStyle CFDateFormatterStyle) unsafe.Pointer {
-	return raw.CFDateFormatterCreate(allocator, locale, raw.CFDateFormatterStyle(dateStyle), raw.CFDateFormatterStyle(timeStyle))
-}
-
-// CFDateFormatterCreateDateFormatFromTemplate calls [raw.CFDateFormatterCreateDateFormatFromTemplate] (C function CFDateFormatterCreateDateFormatFromTemplate).
-func CFDateFormatterCreateDateFormatFromTemplate(allocator unsafe.Pointer, tmplate unsafe.Pointer, options uint, locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDateFormatterCreateDateFormatFromTemplate(allocator, tmplate, options, locale)
-}
-
-// CFDateFormatterCreateDateFromString calls [raw.CFDateFormatterCreateDateFromString] (C function CFDateFormatterCreateDateFromString).
-func CFDateFormatterCreateDateFromString(allocator unsafe.Pointer, formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange) unsafe.Pointer {
-	return raw.CFDateFormatterCreateDateFromString(allocator, formatter, string_, rangep)
-}
-
-// CFDateFormatterCreateISO8601Formatter calls [raw.CFDateFormatterCreateISO8601Formatter] (C function CFDateFormatterCreateISO8601Formatter).
-func CFDateFormatterCreateISO8601Formatter(allocator unsafe.Pointer, formatOptions CFISO8601DateFormatOptions) unsafe.Pointer {
-	return raw.CFDateFormatterCreateISO8601Formatter(allocator, raw.CFISO8601DateFormatOptions(formatOptions))
-}
-
-// CFDateFormatterCreateStringWithAbsoluteTime calls [raw.CFDateFormatterCreateStringWithAbsoluteTime] (C function CFDateFormatterCreateStringWithAbsoluteTime).
-func CFDateFormatterCreateStringWithAbsoluteTime(allocator unsafe.Pointer, formatter unsafe.Pointer, at float64) unsafe.Pointer {
-	return raw.CFDateFormatterCreateStringWithAbsoluteTime(allocator, formatter, at)
-}
-
-// CFDateFormatterCreateStringWithDate calls [raw.CFDateFormatterCreateStringWithDate] (C function CFDateFormatterCreateStringWithDate).
-func CFDateFormatterCreateStringWithDate(allocator unsafe.Pointer, formatter unsafe.Pointer, date unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDateFormatterCreateStringWithDate(allocator, formatter, date)
-}
-
-// CFDateFormatterGetAbsoluteTimeFromString calls [raw.CFDateFormatterGetAbsoluteTimeFromString] (C function CFDateFormatterGetAbsoluteTimeFromString).
-func CFDateFormatterGetAbsoluteTimeFromString(formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange, atp *float64) uint8 {
-	return raw.CFDateFormatterGetAbsoluteTimeFromString(formatter, string_, rangep, atp)
-}
-
-// CFDateFormatterGetDateStyle calls [raw.CFDateFormatterGetDateStyle] (C function CFDateFormatterGetDateStyle).
-func CFDateFormatterGetDateStyle(formatter unsafe.Pointer) CFDateFormatterStyle {
-	return CFDateFormatterStyle(raw.CFDateFormatterGetDateStyle(formatter))
-}
-
-// CFDateFormatterGetFormat calls [raw.CFDateFormatterGetFormat] (C function CFDateFormatterGetFormat).
-func CFDateFormatterGetFormat(formatter unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDateFormatterGetFormat(formatter)
-}
-
-// CFDateFormatterGetLocale calls [raw.CFDateFormatterGetLocale] (C function CFDateFormatterGetLocale).
-func CFDateFormatterGetLocale(formatter unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDateFormatterGetLocale(formatter)
-}
-
-// CFDateFormatterGetTimeStyle calls [raw.CFDateFormatterGetTimeStyle] (C function CFDateFormatterGetTimeStyle).
-func CFDateFormatterGetTimeStyle(formatter unsafe.Pointer) CFDateFormatterStyle {
-	return CFDateFormatterStyle(raw.CFDateFormatterGetTimeStyle(formatter))
-}
-
-// CFDateFormatterGetTypeID calls [raw.CFDateFormatterGetTypeID] (C function CFDateFormatterGetTypeID).
-func CFDateFormatterGetTypeID() uint {
-	return raw.CFDateFormatterGetTypeID()
-}
-
-// CFDateFormatterSetFormat calls [raw.CFDateFormatterSetFormat] (C function CFDateFormatterSetFormat).
-func CFDateFormatterSetFormat(formatter unsafe.Pointer, formatString unsafe.Pointer) {
-	raw.CFDateFormatterSetFormat(formatter, formatString)
-}
-
-// CFDateFormatterSetProperty calls [raw.CFDateFormatterSetProperty] (C function CFDateFormatterSetProperty).
-func CFDateFormatterSetProperty(formatter unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFDateFormatterSetProperty(formatter, key, value)
-}
-
-// CFDateGetAbsoluteTime calls [raw.CFDateGetAbsoluteTime] (C function CFDateGetAbsoluteTime).
-func CFDateGetAbsoluteTime(theDate unsafe.Pointer) float64 {
-	return raw.CFDateGetAbsoluteTime(theDate)
-}
-
-// CFDateGetTimeIntervalSinceDate calls [raw.CFDateGetTimeIntervalSinceDate] (C function CFDateGetTimeIntervalSinceDate).
-func CFDateGetTimeIntervalSinceDate(theDate unsafe.Pointer, otherDate unsafe.Pointer) float64 {
-	return raw.CFDateGetTimeIntervalSinceDate(theDate, otherDate)
-}
-
-// CFDateGetTypeID calls [raw.CFDateGetTypeID] (C function CFDateGetTypeID).
-func CFDateGetTypeID() uint {
-	return raw.CFDateGetTypeID()
-}
-
-// CFDictionaryAddValue calls [raw.CFDictionaryAddValue] (C function CFDictionaryAddValue).
-func CFDictionaryAddValue(theDict unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFDictionaryAddValue(theDict, key, value)
-}
-
-// CFDictionaryApplyFunction calls [raw.CFDictionaryApplyFunction] (C function CFDictionaryApplyFunction).
-func CFDictionaryApplyFunction(theDict unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFDictionaryApplyFunction(theDict, applier, context_)
-}
-
-// CFDictionaryContainsKey calls [raw.CFDictionaryContainsKey] (C function CFDictionaryContainsKey).
-func CFDictionaryContainsKey(theDict unsafe.Pointer, key unsafe.Pointer) uint8 {
-	return raw.CFDictionaryContainsKey(theDict, key)
-}
-
-// CFDictionaryContainsValue calls [raw.CFDictionaryContainsValue] (C function CFDictionaryContainsValue).
-func CFDictionaryContainsValue(theDict unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFDictionaryContainsValue(theDict, value)
-}
-
-// CFDictionaryCreate calls [raw.CFDictionaryCreate] (C function CFDictionaryCreate).
-func CFDictionaryCreate(allocator unsafe.Pointer, keys unsafe.Pointer, values unsafe.Pointer, numValues int, keyCallBacks *raw.CFDictionaryKeyCallBacks, valueCallBacks *raw.CFDictionaryValueCallBacks) unsafe.Pointer {
-	return raw.CFDictionaryCreate(allocator, keys, values, numValues, keyCallBacks, valueCallBacks)
-}
-
-// CFDictionaryCreateCopy calls [raw.CFDictionaryCreateCopy] (C function CFDictionaryCreateCopy).
-func CFDictionaryCreateCopy(allocator unsafe.Pointer, theDict unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDictionaryCreateCopy(allocator, theDict)
-}
-
-// CFDictionaryCreateMutable calls [raw.CFDictionaryCreateMutable] (C function CFDictionaryCreateMutable).
-func CFDictionaryCreateMutable(allocator unsafe.Pointer, capacity int, keyCallBacks *raw.CFDictionaryKeyCallBacks, valueCallBacks *raw.CFDictionaryValueCallBacks) unsafe.Pointer {
-	return raw.CFDictionaryCreateMutable(allocator, capacity, keyCallBacks, valueCallBacks)
-}
-
-// CFDictionaryCreateMutableCopy calls [raw.CFDictionaryCreateMutableCopy] (C function CFDictionaryCreateMutableCopy).
-func CFDictionaryCreateMutableCopy(allocator unsafe.Pointer, capacity int, theDict unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDictionaryCreateMutableCopy(allocator, capacity, theDict)
-}
-
-// CFDictionaryGetCount calls [raw.CFDictionaryGetCount] (C function CFDictionaryGetCount).
-func CFDictionaryGetCount(theDict unsafe.Pointer) int {
-	return raw.CFDictionaryGetCount(theDict)
-}
-
-// CFDictionaryGetCountOfKey calls [raw.CFDictionaryGetCountOfKey] (C function CFDictionaryGetCountOfKey).
-func CFDictionaryGetCountOfKey(theDict unsafe.Pointer, key unsafe.Pointer) int {
-	return raw.CFDictionaryGetCountOfKey(theDict, key)
-}
-
-// CFDictionaryGetCountOfValue calls [raw.CFDictionaryGetCountOfValue] (C function CFDictionaryGetCountOfValue).
-func CFDictionaryGetCountOfValue(theDict unsafe.Pointer, value unsafe.Pointer) int {
-	return raw.CFDictionaryGetCountOfValue(theDict, value)
-}
-
-// CFDictionaryGetKeysAndValues calls [raw.CFDictionaryGetKeysAndValues] (C function CFDictionaryGetKeysAndValues).
-func CFDictionaryGetKeysAndValues(theDict unsafe.Pointer, keys unsafe.Pointer, values unsafe.Pointer) {
-	raw.CFDictionaryGetKeysAndValues(theDict, keys, values)
-}
-
-// CFDictionaryGetTypeID calls [raw.CFDictionaryGetTypeID] (C function CFDictionaryGetTypeID).
-func CFDictionaryGetTypeID() uint {
-	return raw.CFDictionaryGetTypeID()
-}
-
-// CFDictionaryGetValue calls [raw.CFDictionaryGetValue] (C function CFDictionaryGetValue).
-func CFDictionaryGetValue(theDict unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.CFDictionaryGetValue(theDict, key)
-}
-
-// CFDictionaryGetValueIfPresent calls [raw.CFDictionaryGetValueIfPresent] (C function CFDictionaryGetValueIfPresent).
-func CFDictionaryGetValueIfPresent(theDict unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFDictionaryGetValueIfPresent(theDict, key, value)
-}
-
-// CFDictionaryRemoveAllValues calls [raw.CFDictionaryRemoveAllValues] (C function CFDictionaryRemoveAllValues).
-func CFDictionaryRemoveAllValues(theDict unsafe.Pointer) {
-	raw.CFDictionaryRemoveAllValues(theDict)
-}
-
-// CFDictionaryRemoveValue calls [raw.CFDictionaryRemoveValue] (C function CFDictionaryRemoveValue).
-func CFDictionaryRemoveValue(theDict unsafe.Pointer, key unsafe.Pointer) {
-	raw.CFDictionaryRemoveValue(theDict, key)
-}
-
-// CFDictionaryReplaceValue calls [raw.CFDictionaryReplaceValue] (C function CFDictionaryReplaceValue).
-func CFDictionaryReplaceValue(theDict unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFDictionaryReplaceValue(theDict, key, value)
-}
-
-// CFDictionarySetValue calls [raw.CFDictionarySetValue] (C function CFDictionarySetValue).
-func CFDictionarySetValue(theDict unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFDictionarySetValue(theDict, key, value)
-}
-
-// CFEqual calls [raw.CFEqual] (C function CFEqual).
-func CFEqual(cf1 unsafe.Pointer, cf2 unsafe.Pointer) uint8 {
-	return raw.CFEqual(cf1, cf2)
-}
-
-// CFErrorCopyDescription calls [raw.CFErrorCopyDescription] (C function CFErrorCopyDescription).
-func CFErrorCopyDescription(err unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorCopyDescription(err)
-}
-
-// CFErrorCopyFailureReason calls [raw.CFErrorCopyFailureReason] (C function CFErrorCopyFailureReason).
-func CFErrorCopyFailureReason(err unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorCopyFailureReason(err)
-}
-
-// CFErrorCopyRecoverySuggestion calls [raw.CFErrorCopyRecoverySuggestion] (C function CFErrorCopyRecoverySuggestion).
-func CFErrorCopyRecoverySuggestion(err unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorCopyRecoverySuggestion(err)
-}
-
-// CFErrorCopyUserInfo calls [raw.CFErrorCopyUserInfo] (C function CFErrorCopyUserInfo).
-func CFErrorCopyUserInfo(err unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorCopyUserInfo(err)
-}
-
-// CFErrorCreate calls [raw.CFErrorCreate] (C function CFErrorCreate).
-func CFErrorCreate(allocator unsafe.Pointer, domain unsafe.Pointer, code int, userInfo unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorCreate(allocator, domain, code, userInfo)
-}
-
-// CFErrorCreateWithUserInfoKeysAndValues calls [raw.CFErrorCreateWithUserInfoKeysAndValues] (C function CFErrorCreateWithUserInfoKeysAndValues).
-func CFErrorCreateWithUserInfoKeysAndValues(allocator unsafe.Pointer, domain unsafe.Pointer, code int, userInfoKeys unsafe.Pointer, userInfoValues unsafe.Pointer, numUserInfoValues int) unsafe.Pointer {
-	return raw.CFErrorCreateWithUserInfoKeysAndValues(allocator, domain, code, userInfoKeys, userInfoValues, numUserInfoValues)
-}
-
-// CFErrorGetCode calls [raw.CFErrorGetCode] (C function CFErrorGetCode).
-func CFErrorGetCode(err unsafe.Pointer) int {
-	return raw.CFErrorGetCode(err)
-}
-
-// CFErrorGetDomain calls [raw.CFErrorGetDomain] (C function CFErrorGetDomain).
-func CFErrorGetDomain(err unsafe.Pointer) unsafe.Pointer {
-	return raw.CFErrorGetDomain(err)
-}
-
-// CFErrorGetTypeID calls [raw.CFErrorGetTypeID] (C function CFErrorGetTypeID).
-func CFErrorGetTypeID() uint {
-	return raw.CFErrorGetTypeID()
-}
-
-// CFFileDescriptorCreate calls [raw.CFFileDescriptorCreate] (C function CFFileDescriptorCreate).
-func CFFileDescriptorCreate(allocator unsafe.Pointer, fd int, closeOnInvalidate uint8, callout unsafe.Pointer, context_ *raw.CFFileDescriptorContext) unsafe.Pointer {
-	return raw.CFFileDescriptorCreate(allocator, fd, closeOnInvalidate, callout, context_)
-}
-
-// CFFileDescriptorCreateRunLoopSource calls [raw.CFFileDescriptorCreateRunLoopSource] (C function CFFileDescriptorCreateRunLoopSource).
-func CFFileDescriptorCreateRunLoopSource(allocator unsafe.Pointer, f unsafe.Pointer, order int) unsafe.Pointer {
-	return raw.CFFileDescriptorCreateRunLoopSource(allocator, f, order)
-}
-
-// CFFileDescriptorDisableCallBacks calls [raw.CFFileDescriptorDisableCallBacks] (C function CFFileDescriptorDisableCallBacks).
-func CFFileDescriptorDisableCallBacks(f unsafe.Pointer, callBackTypes uint) {
-	raw.CFFileDescriptorDisableCallBacks(f, callBackTypes)
-}
-
-// CFFileDescriptorEnableCallBacks calls [raw.CFFileDescriptorEnableCallBacks] (C function CFFileDescriptorEnableCallBacks).
-func CFFileDescriptorEnableCallBacks(f unsafe.Pointer, callBackTypes uint) {
-	raw.CFFileDescriptorEnableCallBacks(f, callBackTypes)
-}
-
-// CFFileDescriptorGetContext calls [raw.CFFileDescriptorGetContext] (C function CFFileDescriptorGetContext).
-func CFFileDescriptorGetContext(f unsafe.Pointer, context_ *raw.CFFileDescriptorContext) {
-	raw.CFFileDescriptorGetContext(f, context_)
-}
-
-// CFFileDescriptorGetNativeDescriptor calls [raw.CFFileDescriptorGetNativeDescriptor] (C function CFFileDescriptorGetNativeDescriptor).
-func CFFileDescriptorGetNativeDescriptor(f unsafe.Pointer) int {
-	return raw.CFFileDescriptorGetNativeDescriptor(f)
-}
-
-// CFFileDescriptorGetTypeID calls [raw.CFFileDescriptorGetTypeID] (C function CFFileDescriptorGetTypeID).
-func CFFileDescriptorGetTypeID() uint {
-	return raw.CFFileDescriptorGetTypeID()
-}
-
-// CFFileDescriptorInvalidate calls [raw.CFFileDescriptorInvalidate] (C function CFFileDescriptorInvalidate).
-func CFFileDescriptorInvalidate(f unsafe.Pointer) {
-	raw.CFFileDescriptorInvalidate(f)
-}
-
-// CFFileDescriptorIsValid calls [raw.CFFileDescriptorIsValid] (C function CFFileDescriptorIsValid).
-func CFFileDescriptorIsValid(f unsafe.Pointer) uint8 {
-	return raw.CFFileDescriptorIsValid(f)
-}
-
-// CFFileSecurityClearProperties calls [raw.CFFileSecurityClearProperties] (C function CFFileSecurityClearProperties).
-func CFFileSecurityClearProperties(fileSec unsafe.Pointer, clearPropertyMask CFFileSecurityClearOptions) uint8 {
-	return raw.CFFileSecurityClearProperties(fileSec, raw.CFFileSecurityClearOptions(clearPropertyMask))
-}
-
-// CFFileSecurityCopyAccessControlList calls [raw.CFFileSecurityCopyAccessControlList] (C function CFFileSecurityCopyAccessControlList).
-func CFFileSecurityCopyAccessControlList(fileSec unsafe.Pointer, accessControlList unsafe.Pointer) uint8 {
-	return raw.CFFileSecurityCopyAccessControlList(fileSec, accessControlList)
-}
-
-// CFFileSecurityCopyGroupUUID calls [raw.CFFileSecurityCopyGroupUUID] (C function CFFileSecurityCopyGroupUUID).
-func CFFileSecurityCopyGroupUUID(fileSec unsafe.Pointer, groupUUID unsafe.Pointer) uint8 {
-	return raw.CFFileSecurityCopyGroupUUID(fileSec, groupUUID)
-}
-
-// CFFileSecurityCopyOwnerUUID calls [raw.CFFileSecurityCopyOwnerUUID] (C function CFFileSecurityCopyOwnerUUID).
-func CFFileSecurityCopyOwnerUUID(fileSec unsafe.Pointer, ownerUUID unsafe.Pointer) uint8 {
-	return raw.CFFileSecurityCopyOwnerUUID(fileSec, ownerUUID)
-}
-
-// CFFileSecurityCreate calls [raw.CFFileSecurityCreate] (C function CFFileSecurityCreate).
-func CFFileSecurityCreate(allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFFileSecurityCreate(allocator)
-}
-
-// CFFileSecurityCreateCopy calls [raw.CFFileSecurityCreateCopy] (C function CFFileSecurityCreateCopy).
-func CFFileSecurityCreateCopy(allocator unsafe.Pointer, fileSec unsafe.Pointer) unsafe.Pointer {
-	return raw.CFFileSecurityCreateCopy(allocator, fileSec)
-}
-
-// CFFileSecurityGetGroup calls [raw.CFFileSecurityGetGroup] (C function CFFileSecurityGetGroup).
-func CFFileSecurityGetGroup(fileSec unsafe.Pointer, group *uint) uint8 {
-	return raw.CFFileSecurityGetGroup(fileSec, group)
-}
-
-// CFFileSecurityGetMode calls [raw.CFFileSecurityGetMode] (C function CFFileSecurityGetMode).
-func CFFileSecurityGetMode(fileSec unsafe.Pointer, mode *uint16) uint8 {
-	return raw.CFFileSecurityGetMode(fileSec, mode)
-}
-
-// CFFileSecurityGetOwner calls [raw.CFFileSecurityGetOwner] (C function CFFileSecurityGetOwner).
-func CFFileSecurityGetOwner(fileSec unsafe.Pointer, owner *uint) uint8 {
-	return raw.CFFileSecurityGetOwner(fileSec, owner)
-}
-
-// CFFileSecurityGetTypeID calls [raw.CFFileSecurityGetTypeID] (C function CFFileSecurityGetTypeID).
-func CFFileSecurityGetTypeID() uint {
-	return raw.CFFileSecurityGetTypeID()
-}
-
-// CFFileSecuritySetAccessControlList calls [raw.CFFileSecuritySetAccessControlList] (C function CFFileSecuritySetAccessControlList).
-func CFFileSecuritySetAccessControlList(fileSec unsafe.Pointer, accessControlList unsafe.Pointer) uint8 {
-	return raw.CFFileSecuritySetAccessControlList(fileSec, accessControlList)
-}
-
-// CFFileSecuritySetGroup calls [raw.CFFileSecuritySetGroup] (C function CFFileSecuritySetGroup).
-func CFFileSecuritySetGroup(fileSec unsafe.Pointer, group uint) uint8 {
-	return raw.CFFileSecuritySetGroup(fileSec, group)
-}
-
-// CFFileSecuritySetGroupUUID calls [raw.CFFileSecuritySetGroupUUID] (C function CFFileSecuritySetGroupUUID).
-func CFFileSecuritySetGroupUUID(fileSec unsafe.Pointer, groupUUID unsafe.Pointer) uint8 {
-	return raw.CFFileSecuritySetGroupUUID(fileSec, groupUUID)
-}
-
-// CFFileSecuritySetMode calls [raw.CFFileSecuritySetMode] (C function CFFileSecuritySetMode).
-func CFFileSecuritySetMode(fileSec unsafe.Pointer, mode uint16) uint8 {
-	return raw.CFFileSecuritySetMode(fileSec, mode)
-}
-
-// CFFileSecuritySetOwner calls [raw.CFFileSecuritySetOwner] (C function CFFileSecuritySetOwner).
-func CFFileSecuritySetOwner(fileSec unsafe.Pointer, owner uint) uint8 {
-	return raw.CFFileSecuritySetOwner(fileSec, owner)
-}
-
-// CFFileSecuritySetOwnerUUID calls [raw.CFFileSecuritySetOwnerUUID] (C function CFFileSecuritySetOwnerUUID).
-func CFFileSecuritySetOwnerUUID(fileSec unsafe.Pointer, ownerUUID unsafe.Pointer) uint8 {
-	return raw.CFFileSecuritySetOwnerUUID(fileSec, ownerUUID)
-}
-
-// CFGetAllocator calls [raw.CFGetAllocator] (C function CFGetAllocator).
-func CFGetAllocator(cf unsafe.Pointer) unsafe.Pointer {
-	return raw.CFGetAllocator(cf)
-}
-
-// CFGetRetainCount calls [raw.CFGetRetainCount] (C function CFGetRetainCount).
-func CFGetRetainCount(cf unsafe.Pointer) int {
-	return raw.CFGetRetainCount(cf)
-}
-
-// CFGetTypeID calls [raw.CFGetTypeID] (C function CFGetTypeID).
-func CFGetTypeID(cf unsafe.Pointer) uint {
-	return raw.CFGetTypeID(cf)
-}
-
-// CFGregorianDateGetAbsoluteTime calls [raw.CFGregorianDateGetAbsoluteTime] (C function CFGregorianDateGetAbsoluteTime).
-func CFGregorianDateGetAbsoluteTime(gdate raw.CFGregorianDate, tz unsafe.Pointer) float64 {
-	return raw.CFGregorianDateGetAbsoluteTime(gdate, tz)
-}
-
-// CFGregorianDateIsValid calls [raw.CFGregorianDateIsValid] (C function CFGregorianDateIsValid).
-func CFGregorianDateIsValid(gdate raw.CFGregorianDate, unitFlags uint) uint8 {
-	return raw.CFGregorianDateIsValid(gdate, unitFlags)
-}
-
-// CFHash calls [raw.CFHash] (C function CFHash).
-func CFHash(cf unsafe.Pointer) uint {
-	return raw.CFHash(cf)
-}
-
-// CFLocaleCopyAvailableLocaleIdentifiers calls [raw.CFLocaleCopyAvailableLocaleIdentifiers] (C function CFLocaleCopyAvailableLocaleIdentifiers).
-func CFLocaleCopyAvailableLocaleIdentifiers() unsafe.Pointer {
-	return raw.CFLocaleCopyAvailableLocaleIdentifiers()
-}
-
-// CFLocaleCopyCommonISOCurrencyCodes calls [raw.CFLocaleCopyCommonISOCurrencyCodes] (C function CFLocaleCopyCommonISOCurrencyCodes).
-func CFLocaleCopyCommonISOCurrencyCodes() unsafe.Pointer {
-	return raw.CFLocaleCopyCommonISOCurrencyCodes()
-}
-
-// CFLocaleCopyCurrent calls [raw.CFLocaleCopyCurrent] (C function CFLocaleCopyCurrent).
-func CFLocaleCopyCurrent() unsafe.Pointer {
-	return raw.CFLocaleCopyCurrent()
-}
-
-// CFLocaleCopyDisplayNameForPropertyValue calls [raw.CFLocaleCopyDisplayNameForPropertyValue] (C function CFLocaleCopyDisplayNameForPropertyValue).
-func CFLocaleCopyDisplayNameForPropertyValue(displayLocale unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCopyDisplayNameForPropertyValue(displayLocale, key, value)
-}
-
-// CFLocaleCopyISOCountryCodes calls [raw.CFLocaleCopyISOCountryCodes] (C function CFLocaleCopyISOCountryCodes).
-func CFLocaleCopyISOCountryCodes() unsafe.Pointer {
-	return raw.CFLocaleCopyISOCountryCodes()
-}
-
-// CFLocaleCopyISOCurrencyCodes calls [raw.CFLocaleCopyISOCurrencyCodes] (C function CFLocaleCopyISOCurrencyCodes).
-func CFLocaleCopyISOCurrencyCodes() unsafe.Pointer {
-	return raw.CFLocaleCopyISOCurrencyCodes()
-}
-
-// CFLocaleCopyISOLanguageCodes calls [raw.CFLocaleCopyISOLanguageCodes] (C function CFLocaleCopyISOLanguageCodes).
-func CFLocaleCopyISOLanguageCodes() unsafe.Pointer {
-	return raw.CFLocaleCopyISOLanguageCodes()
-}
-
-// CFLocaleCopyPreferredLanguages calls [raw.CFLocaleCopyPreferredLanguages] (C function CFLocaleCopyPreferredLanguages).
-func CFLocaleCopyPreferredLanguages() unsafe.Pointer {
-	return raw.CFLocaleCopyPreferredLanguages()
-}
-
-// CFLocaleCreate calls [raw.CFLocaleCreate] (C function CFLocaleCreate).
-func CFLocaleCreate(allocator unsafe.Pointer, localeIdentifier unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreate(allocator, localeIdentifier)
-}
-
-// CFLocaleCreateCanonicalLanguageIdentifierFromString calls [raw.CFLocaleCreateCanonicalLanguageIdentifierFromString] (C function CFLocaleCreateCanonicalLanguageIdentifierFromString).
-func CFLocaleCreateCanonicalLanguageIdentifierFromString(allocator unsafe.Pointer, localeIdentifier unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreateCanonicalLanguageIdentifierFromString(allocator, localeIdentifier)
-}
-
-// CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes calls [raw.CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes] (C function CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes).
-func CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes(allocator unsafe.Pointer, lcode int16, rcode int16) unsafe.Pointer {
-	return raw.CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes(allocator, lcode, rcode)
-}
-
-// CFLocaleCreateCanonicalLocaleIdentifierFromString calls [raw.CFLocaleCreateCanonicalLocaleIdentifierFromString] (C function CFLocaleCreateCanonicalLocaleIdentifierFromString).
-func CFLocaleCreateCanonicalLocaleIdentifierFromString(allocator unsafe.Pointer, localeIdentifier unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreateCanonicalLocaleIdentifierFromString(allocator, localeIdentifier)
-}
-
-// CFLocaleCreateComponentsFromLocaleIdentifier calls [raw.CFLocaleCreateComponentsFromLocaleIdentifier] (C function CFLocaleCreateComponentsFromLocaleIdentifier).
-func CFLocaleCreateComponentsFromLocaleIdentifier(allocator unsafe.Pointer, localeID unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreateComponentsFromLocaleIdentifier(allocator, localeID)
-}
-
-// CFLocaleCreateCopy calls [raw.CFLocaleCreateCopy] (C function CFLocaleCreateCopy).
-func CFLocaleCreateCopy(allocator unsafe.Pointer, locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreateCopy(allocator, locale)
-}
-
-// CFLocaleCreateLocaleIdentifierFromComponents calls [raw.CFLocaleCreateLocaleIdentifierFromComponents] (C function CFLocaleCreateLocaleIdentifierFromComponents).
-func CFLocaleCreateLocaleIdentifierFromComponents(allocator unsafe.Pointer, dictionary unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleCreateLocaleIdentifierFromComponents(allocator, dictionary)
-}
-
-// CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode calls [raw.CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode] (C function CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode).
-func CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode(allocator unsafe.Pointer, lcid uint32) unsafe.Pointer {
-	return raw.CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode(allocator, lcid)
-}
-
-// CFLocaleGetIdentifier calls [raw.CFLocaleGetIdentifier] (C function CFLocaleGetIdentifier).
-func CFLocaleGetIdentifier(locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleGetIdentifier(locale)
-}
-
-// CFLocaleGetLanguageCharacterDirection calls [raw.CFLocaleGetLanguageCharacterDirection] (C function CFLocaleGetLanguageCharacterDirection).
-func CFLocaleGetLanguageCharacterDirection(isoLangCode unsafe.Pointer) CFLocaleLanguageDirection {
-	return CFLocaleLanguageDirection(raw.CFLocaleGetLanguageCharacterDirection(isoLangCode))
-}
-
-// CFLocaleGetLanguageLineDirection calls [raw.CFLocaleGetLanguageLineDirection] (C function CFLocaleGetLanguageLineDirection).
-func CFLocaleGetLanguageLineDirection(isoLangCode unsafe.Pointer) CFLocaleLanguageDirection {
-	return CFLocaleLanguageDirection(raw.CFLocaleGetLanguageLineDirection(isoLangCode))
-}
-
-// CFLocaleGetSystem calls [raw.CFLocaleGetSystem] (C function CFLocaleGetSystem).
-func CFLocaleGetSystem() unsafe.Pointer {
-	return raw.CFLocaleGetSystem()
-}
-
-// CFLocaleGetTypeID calls [raw.CFLocaleGetTypeID] (C function CFLocaleGetTypeID).
-func CFLocaleGetTypeID() uint {
-	return raw.CFLocaleGetTypeID()
-}
-
-// CFLocaleGetValue calls [raw.CFLocaleGetValue] (C function CFLocaleGetValue).
-func CFLocaleGetValue(locale unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.CFLocaleGetValue(locale, key)
-}
-
-// CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier calls [raw.CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier] (C function CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier).
-func CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier(localeIdentifier unsafe.Pointer) uint32 {
-	return raw.CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier(localeIdentifier)
-}
-
-// CFMachPortCreate calls [raw.CFMachPortCreate] (C function CFMachPortCreate).
-func CFMachPortCreate(allocator unsafe.Pointer, callout unsafe.Pointer, context_ *raw.CFMachPortContext, shouldFreeInfo *uint8) unsafe.Pointer {
-	return raw.CFMachPortCreate(allocator, callout, context_, shouldFreeInfo)
-}
-
-// CFMachPortCreateRunLoopSource calls [raw.CFMachPortCreateRunLoopSource] (C function CFMachPortCreateRunLoopSource).
-func CFMachPortCreateRunLoopSource(allocator unsafe.Pointer, port unsafe.Pointer, order int) unsafe.Pointer {
-	return raw.CFMachPortCreateRunLoopSource(allocator, port, order)
-}
-
-// CFMachPortCreateWithPort calls [raw.CFMachPortCreateWithPort] (C function CFMachPortCreateWithPort).
-func CFMachPortCreateWithPort(allocator unsafe.Pointer, portNum uint, callout unsafe.Pointer, context_ *raw.CFMachPortContext, shouldFreeInfo *uint8) unsafe.Pointer {
-	return raw.CFMachPortCreateWithPort(allocator, portNum, callout, context_, shouldFreeInfo)
-}
-
-// CFMachPortGetContext calls [raw.CFMachPortGetContext] (C function CFMachPortGetContext).
-func CFMachPortGetContext(port unsafe.Pointer, context_ *raw.CFMachPortContext) {
-	raw.CFMachPortGetContext(port, context_)
-}
-
-// CFMachPortGetInvalidationCallBack calls [raw.CFMachPortGetInvalidationCallBack] (C function CFMachPortGetInvalidationCallBack).
-func CFMachPortGetInvalidationCallBack(port unsafe.Pointer) unsafe.Pointer {
-	return raw.CFMachPortGetInvalidationCallBack(port)
-}
-
-// CFMachPortGetPort calls [raw.CFMachPortGetPort] (C function CFMachPortGetPort).
-func CFMachPortGetPort(port unsafe.Pointer) uint {
-	return raw.CFMachPortGetPort(port)
-}
-
-// CFMachPortGetTypeID calls [raw.CFMachPortGetTypeID] (C function CFMachPortGetTypeID).
-func CFMachPortGetTypeID() uint {
-	return raw.CFMachPortGetTypeID()
-}
-
-// CFMachPortInvalidate calls [raw.CFMachPortInvalidate] (C function CFMachPortInvalidate).
-func CFMachPortInvalidate(port unsafe.Pointer) {
-	raw.CFMachPortInvalidate(port)
-}
-
-// CFMachPortIsValid calls [raw.CFMachPortIsValid] (C function CFMachPortIsValid).
-func CFMachPortIsValid(port unsafe.Pointer) uint8 {
-	return raw.CFMachPortIsValid(port)
-}
-
-// CFMachPortSetInvalidationCallBack calls [raw.CFMachPortSetInvalidationCallBack] (C function CFMachPortSetInvalidationCallBack).
-func CFMachPortSetInvalidationCallBack(port unsafe.Pointer, callout unsafe.Pointer) {
-	raw.CFMachPortSetInvalidationCallBack(port, callout)
-}
-
-// CFMakeCollectable calls [raw.CFMakeCollectable] (C function CFMakeCollectable).
-func CFMakeCollectable(cf unsafe.Pointer) unsafe.Pointer {
-	return raw.CFMakeCollectable(cf)
-}
-
-// CFMessagePortCreateLocal calls [raw.CFMessagePortCreateLocal] (C function CFMessagePortCreateLocal).
-func CFMessagePortCreateLocal(allocator unsafe.Pointer, name unsafe.Pointer, callout unsafe.Pointer, context_ *raw.CFMessagePortContext, shouldFreeInfo *uint8) unsafe.Pointer {
-	return raw.CFMessagePortCreateLocal(allocator, name, callout, context_, shouldFreeInfo)
-}
-
-// CFMessagePortCreateRemote calls [raw.CFMessagePortCreateRemote] (C function CFMessagePortCreateRemote).
-func CFMessagePortCreateRemote(allocator unsafe.Pointer, name unsafe.Pointer) unsafe.Pointer {
-	return raw.CFMessagePortCreateRemote(allocator, name)
-}
-
-// CFMessagePortCreateRunLoopSource calls [raw.CFMessagePortCreateRunLoopSource] (C function CFMessagePortCreateRunLoopSource).
-func CFMessagePortCreateRunLoopSource(allocator unsafe.Pointer, local unsafe.Pointer, order int) unsafe.Pointer {
-	return raw.CFMessagePortCreateRunLoopSource(allocator, local, order)
-}
-
-// CFMessagePortGetContext calls [raw.CFMessagePortGetContext] (C function CFMessagePortGetContext).
-func CFMessagePortGetContext(ms unsafe.Pointer, context_ *raw.CFMessagePortContext) {
-	raw.CFMessagePortGetContext(ms, context_)
-}
-
-// CFMessagePortGetInvalidationCallBack calls [raw.CFMessagePortGetInvalidationCallBack] (C function CFMessagePortGetInvalidationCallBack).
-func CFMessagePortGetInvalidationCallBack(ms unsafe.Pointer) unsafe.Pointer {
-	return raw.CFMessagePortGetInvalidationCallBack(ms)
-}
-
-// CFMessagePortGetName calls [raw.CFMessagePortGetName] (C function CFMessagePortGetName).
-func CFMessagePortGetName(ms unsafe.Pointer) unsafe.Pointer {
-	return raw.CFMessagePortGetName(ms)
-}
-
-// CFMessagePortGetTypeID calls [raw.CFMessagePortGetTypeID] (C function CFMessagePortGetTypeID).
-func CFMessagePortGetTypeID() uint {
-	return raw.CFMessagePortGetTypeID()
-}
-
-// CFMessagePortInvalidate calls [raw.CFMessagePortInvalidate] (C function CFMessagePortInvalidate).
-func CFMessagePortInvalidate(ms unsafe.Pointer) {
-	raw.CFMessagePortInvalidate(ms)
-}
-
-// CFMessagePortIsRemote calls [raw.CFMessagePortIsRemote] (C function CFMessagePortIsRemote).
-func CFMessagePortIsRemote(ms unsafe.Pointer) uint8 {
-	return raw.CFMessagePortIsRemote(ms)
-}
-
-// CFMessagePortIsValid calls [raw.CFMessagePortIsValid] (C function CFMessagePortIsValid).
-func CFMessagePortIsValid(ms unsafe.Pointer) uint8 {
-	return raw.CFMessagePortIsValid(ms)
-}
-
-// CFMessagePortSendRequest calls [raw.CFMessagePortSendRequest] (C function CFMessagePortSendRequest).
-func CFMessagePortSendRequest(remote unsafe.Pointer, msgid int, data unsafe.Pointer, sendTimeout float64, rcvTimeout float64, replyMode unsafe.Pointer, returnData unsafe.Pointer) int {
-	return raw.CFMessagePortSendRequest(remote, msgid, data, sendTimeout, rcvTimeout, replyMode, returnData)
-}
-
-// CFMessagePortSetDispatchQueue calls [raw.CFMessagePortSetDispatchQueue] (C function CFMessagePortSetDispatchQueue).
-func CFMessagePortSetDispatchQueue(ms unsafe.Pointer, queue unsafe.Pointer) {
-	raw.CFMessagePortSetDispatchQueue(ms, queue)
-}
-
-// CFMessagePortSetInvalidationCallBack calls [raw.CFMessagePortSetInvalidationCallBack] (C function CFMessagePortSetInvalidationCallBack).
-func CFMessagePortSetInvalidationCallBack(ms unsafe.Pointer, callout unsafe.Pointer) {
-	raw.CFMessagePortSetInvalidationCallBack(ms, callout)
-}
-
-// CFMessagePortSetName calls [raw.CFMessagePortSetName] (C function CFMessagePortSetName).
-func CFMessagePortSetName(ms unsafe.Pointer, newName unsafe.Pointer) uint8 {
-	return raw.CFMessagePortSetName(ms, newName)
-}
-
-// CFNotificationCenterAddObserver calls [raw.CFNotificationCenterAddObserver] (C function CFNotificationCenterAddObserver).
-func CFNotificationCenterAddObserver(center unsafe.Pointer, observer unsafe.Pointer, callBack unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer, suspensionBehavior CFNotificationSuspensionBehavior) {
-	raw.CFNotificationCenterAddObserver(center, observer, callBack, name, object, raw.CFNotificationSuspensionBehavior(suspensionBehavior))
-}
-
-// CFNotificationCenterGetDarwinNotifyCenter calls [raw.CFNotificationCenterGetDarwinNotifyCenter] (C function CFNotificationCenterGetDarwinNotifyCenter).
-func CFNotificationCenterGetDarwinNotifyCenter() unsafe.Pointer {
-	return raw.CFNotificationCenterGetDarwinNotifyCenter()
-}
-
-// CFNotificationCenterGetDistributedCenter calls [raw.CFNotificationCenterGetDistributedCenter] (C function CFNotificationCenterGetDistributedCenter).
-func CFNotificationCenterGetDistributedCenter() unsafe.Pointer {
-	return raw.CFNotificationCenterGetDistributedCenter()
-}
-
-// CFNotificationCenterGetLocalCenter calls [raw.CFNotificationCenterGetLocalCenter] (C function CFNotificationCenterGetLocalCenter).
-func CFNotificationCenterGetLocalCenter() unsafe.Pointer {
-	return raw.CFNotificationCenterGetLocalCenter()
-}
-
-// CFNotificationCenterGetTypeID calls [raw.CFNotificationCenterGetTypeID] (C function CFNotificationCenterGetTypeID).
-func CFNotificationCenterGetTypeID() uint {
-	return raw.CFNotificationCenterGetTypeID()
-}
-
-// CFNotificationCenterPostNotification calls [raw.CFNotificationCenterPostNotification] (C function CFNotificationCenterPostNotification).
-func CFNotificationCenterPostNotification(center unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer, userInfo unsafe.Pointer, deliverImmediately uint8) {
-	raw.CFNotificationCenterPostNotification(center, name, object, userInfo, deliverImmediately)
-}
-
-// CFNotificationCenterPostNotificationWithOptions calls [raw.CFNotificationCenterPostNotificationWithOptions] (C function CFNotificationCenterPostNotificationWithOptions).
-func CFNotificationCenterPostNotificationWithOptions(center unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer, userInfo unsafe.Pointer, options uint) {
-	raw.CFNotificationCenterPostNotificationWithOptions(center, name, object, userInfo, options)
-}
-
-// CFNotificationCenterRemoveEveryObserver calls [raw.CFNotificationCenterRemoveEveryObserver] (C function CFNotificationCenterRemoveEveryObserver).
-func CFNotificationCenterRemoveEveryObserver(center unsafe.Pointer, observer unsafe.Pointer) {
-	raw.CFNotificationCenterRemoveEveryObserver(center, observer)
-}
-
-// CFNotificationCenterRemoveObserver calls [raw.CFNotificationCenterRemoveObserver] (C function CFNotificationCenterRemoveObserver).
-func CFNotificationCenterRemoveObserver(center unsafe.Pointer, observer unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer) {
-	raw.CFNotificationCenterRemoveObserver(center, observer, name, object)
-}
-
-// CFNullGetTypeID calls [raw.CFNullGetTypeID] (C function CFNullGetTypeID).
-func CFNullGetTypeID() uint {
-	return raw.CFNullGetTypeID()
-}
-
-// CFNumberCompare calls [raw.CFNumberCompare] (C function CFNumberCompare).
-func CFNumberCompare(number unsafe.Pointer, otherNumber unsafe.Pointer, context_ unsafe.Pointer) CFComparisonResult {
-	return CFComparisonResult(raw.CFNumberCompare(number, otherNumber, context_))
-}
-
-// CFNumberCreate calls [raw.CFNumberCreate] (C function CFNumberCreate).
-func CFNumberCreate(allocator unsafe.Pointer, theType CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberCreate(allocator, raw.CFNumberType(theType), valuePtr)
-}
-
-// CFNumberFormatterCopyProperty calls [raw.CFNumberFormatterCopyProperty] (C function CFNumberFormatterCopyProperty).
-func CFNumberFormatterCopyProperty(formatter unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterCopyProperty(formatter, key)
-}
-
-// CFNumberFormatterCreate calls [raw.CFNumberFormatterCreate] (C function CFNumberFormatterCreate).
-func CFNumberFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, style CFNumberFormatterStyle) unsafe.Pointer {
-	return raw.CFNumberFormatterCreate(allocator, locale, raw.CFNumberFormatterStyle(style))
-}
-
-// CFNumberFormatterCreateNumberFromString calls [raw.CFNumberFormatterCreateNumberFromString] (C function CFNumberFormatterCreateNumberFromString).
-func CFNumberFormatterCreateNumberFromString(allocator unsafe.Pointer, formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange, options uint) unsafe.Pointer {
-	return raw.CFNumberFormatterCreateNumberFromString(allocator, formatter, string_, rangep, options)
-}
-
-// CFNumberFormatterCreateStringWithNumber calls [raw.CFNumberFormatterCreateStringWithNumber] (C function CFNumberFormatterCreateStringWithNumber).
-func CFNumberFormatterCreateStringWithNumber(allocator unsafe.Pointer, formatter unsafe.Pointer, number unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterCreateStringWithNumber(allocator, formatter, number)
-}
-
-// CFNumberFormatterCreateStringWithValue calls [raw.CFNumberFormatterCreateStringWithValue] (C function CFNumberFormatterCreateStringWithValue).
-func CFNumberFormatterCreateStringWithValue(allocator unsafe.Pointer, formatter unsafe.Pointer, numberType CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterCreateStringWithValue(allocator, formatter, raw.CFNumberType(numberType), valuePtr)
-}
-
-// CFNumberFormatterGetDecimalInfoForCurrencyCode calls [raw.CFNumberFormatterGetDecimalInfoForCurrencyCode] (C function CFNumberFormatterGetDecimalInfoForCurrencyCode).
-func CFNumberFormatterGetDecimalInfoForCurrencyCode(currencyCode unsafe.Pointer, defaultFractionDigits *int32, roundingIncrement *float64) uint8 {
-	return raw.CFNumberFormatterGetDecimalInfoForCurrencyCode(currencyCode, defaultFractionDigits, roundingIncrement)
-}
-
-// CFNumberFormatterGetFormat calls [raw.CFNumberFormatterGetFormat] (C function CFNumberFormatterGetFormat).
-func CFNumberFormatterGetFormat(formatter unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterGetFormat(formatter)
-}
-
-// CFNumberFormatterGetLocale calls [raw.CFNumberFormatterGetLocale] (C function CFNumberFormatterGetLocale).
-func CFNumberFormatterGetLocale(formatter unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterGetLocale(formatter)
-}
-
-// CFNumberFormatterGetStyle calls [raw.CFNumberFormatterGetStyle] (C function CFNumberFormatterGetStyle).
-func CFNumberFormatterGetStyle(formatter unsafe.Pointer) CFNumberFormatterStyle {
-	return CFNumberFormatterStyle(raw.CFNumberFormatterGetStyle(formatter))
-}
-
-// CFNumberFormatterGetTypeID calls [raw.CFNumberFormatterGetTypeID] (C function CFNumberFormatterGetTypeID).
-func CFNumberFormatterGetTypeID() uint {
-	return raw.CFNumberFormatterGetTypeID()
-}
-
-// CFNumberFormatterGetValueFromString calls [raw.CFNumberFormatterGetValueFromString] (C function CFNumberFormatterGetValueFromString).
-func CFNumberFormatterGetValueFromString(formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange, numberType CFNumberType, valuePtr unsafe.Pointer) uint8 {
-	return raw.CFNumberFormatterGetValueFromString(formatter, string_, rangep, raw.CFNumberType(numberType), valuePtr)
-}
-
-// CFNumberFormatterSetFormat calls [raw.CFNumberFormatterSetFormat] (C function CFNumberFormatterSetFormat).
-func CFNumberFormatterSetFormat(formatter unsafe.Pointer, formatString unsafe.Pointer) {
-	raw.CFNumberFormatterSetFormat(formatter, formatString)
-}
-
-// CFNumberFormatterSetProperty calls [raw.CFNumberFormatterSetProperty] (C function CFNumberFormatterSetProperty).
-func CFNumberFormatterSetProperty(formatter unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFNumberFormatterSetProperty(formatter, key, value)
-}
-
-// CFNumberGetByteSize calls [raw.CFNumberGetByteSize] (C function CFNumberGetByteSize).
-func CFNumberGetByteSize(number unsafe.Pointer) int {
-	return raw.CFNumberGetByteSize(number)
-}
-
-// CFNumberGetType calls [raw.CFNumberGetType] (C function CFNumberGetType).
-func CFNumberGetType(number unsafe.Pointer) CFNumberType {
-	return CFNumberType(raw.CFNumberGetType(number))
-}
-
-// CFNumberGetTypeID calls [raw.CFNumberGetTypeID] (C function CFNumberGetTypeID).
-func CFNumberGetTypeID() uint {
-	return raw.CFNumberGetTypeID()
-}
-
-// CFNumberGetValue calls [raw.CFNumberGetValue] (C function CFNumberGetValue).
-func CFNumberGetValue(number unsafe.Pointer, theType CFNumberType, valuePtr unsafe.Pointer) uint8 {
-	return raw.CFNumberGetValue(number, raw.CFNumberType(theType), valuePtr)
-}
-
-// CFNumberIsFloatType calls [raw.CFNumberIsFloatType] (C function CFNumberIsFloatType).
-func CFNumberIsFloatType(number unsafe.Pointer) uint8 {
-	return raw.CFNumberIsFloatType(number)
-}
-
-// CFPlugInAddInstanceForFactory calls [raw.CFPlugInAddInstanceForFactory] (C function CFPlugInAddInstanceForFactory).
-func CFPlugInAddInstanceForFactory(factoryID unsafe.Pointer) {
-	raw.CFPlugInAddInstanceForFactory(factoryID)
-}
-
-// CFPlugInCreate calls [raw.CFPlugInCreate] (C function CFPlugInCreate).
-func CFPlugInCreate(allocator unsafe.Pointer, plugInURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInCreate(allocator, plugInURL)
-}
-
-// CFPlugInFindFactoriesForPlugInType calls [raw.CFPlugInFindFactoriesForPlugInType] (C function CFPlugInFindFactoriesForPlugInType).
-func CFPlugInFindFactoriesForPlugInType(typeUUID unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInFindFactoriesForPlugInType(typeUUID)
-}
-
-// CFPlugInFindFactoriesForPlugInTypeInPlugIn calls [raw.CFPlugInFindFactoriesForPlugInTypeInPlugIn] (C function CFPlugInFindFactoriesForPlugInTypeInPlugIn).
-func CFPlugInFindFactoriesForPlugInTypeInPlugIn(typeUUID unsafe.Pointer, plugIn unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInFindFactoriesForPlugInTypeInPlugIn(typeUUID, plugIn)
-}
-
-// CFPlugInGetBundle calls [raw.CFPlugInGetBundle] (C function CFPlugInGetBundle).
-func CFPlugInGetBundle(plugIn unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInGetBundle(plugIn)
-}
-
-// CFPlugInGetTypeID calls [raw.CFPlugInGetTypeID] (C function CFPlugInGetTypeID).
-func CFPlugInGetTypeID() uint {
-	return raw.CFPlugInGetTypeID()
-}
-
-// CFPlugInInstanceCreate calls [raw.CFPlugInInstanceCreate] (C function CFPlugInInstanceCreate).
-func CFPlugInInstanceCreate(allocator unsafe.Pointer, factoryUUID unsafe.Pointer, typeUUID unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInInstanceCreate(allocator, factoryUUID, typeUUID)
-}
-
-// CFPlugInInstanceCreateWithInstanceDataSize calls [raw.CFPlugInInstanceCreateWithInstanceDataSize] (C function CFPlugInInstanceCreateWithInstanceDataSize).
-func CFPlugInInstanceCreateWithInstanceDataSize(allocator unsafe.Pointer, instanceDataSize int, deallocateInstanceFunction unsafe.Pointer, factoryName unsafe.Pointer, getInterfaceFunction unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInInstanceCreateWithInstanceDataSize(allocator, instanceDataSize, deallocateInstanceFunction, factoryName, getInterfaceFunction)
-}
-
-// CFPlugInInstanceGetFactoryName calls [raw.CFPlugInInstanceGetFactoryName] (C function CFPlugInInstanceGetFactoryName).
-func CFPlugInInstanceGetFactoryName(instance unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInInstanceGetFactoryName(instance)
-}
-
-// CFPlugInInstanceGetInstanceData calls [raw.CFPlugInInstanceGetInstanceData] (C function CFPlugInInstanceGetInstanceData).
-func CFPlugInInstanceGetInstanceData(instance unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPlugInInstanceGetInstanceData(instance)
-}
-
-// CFPlugInInstanceGetInterfaceFunctionTable calls [raw.CFPlugInInstanceGetInterfaceFunctionTable] (C function CFPlugInInstanceGetInterfaceFunctionTable).
-func CFPlugInInstanceGetInterfaceFunctionTable(instance unsafe.Pointer, interfaceName unsafe.Pointer, ftbl unsafe.Pointer) uint8 {
-	return raw.CFPlugInInstanceGetInterfaceFunctionTable(instance, interfaceName, ftbl)
-}
-
-// CFPlugInInstanceGetTypeID calls [raw.CFPlugInInstanceGetTypeID] (C function CFPlugInInstanceGetTypeID).
-func CFPlugInInstanceGetTypeID() uint {
-	return raw.CFPlugInInstanceGetTypeID()
-}
-
-// CFPlugInIsLoadOnDemand calls [raw.CFPlugInIsLoadOnDemand] (C function CFPlugInIsLoadOnDemand).
-func CFPlugInIsLoadOnDemand(plugIn unsafe.Pointer) uint8 {
-	return raw.CFPlugInIsLoadOnDemand(plugIn)
-}
-
-// CFPlugInRegisterFactoryFunction calls [raw.CFPlugInRegisterFactoryFunction] (C function CFPlugInRegisterFactoryFunction).
-func CFPlugInRegisterFactoryFunction(factoryUUID unsafe.Pointer, func_ unsafe.Pointer) uint8 {
-	return raw.CFPlugInRegisterFactoryFunction(factoryUUID, func_)
-}
-
-// CFPlugInRegisterFactoryFunctionByName calls [raw.CFPlugInRegisterFactoryFunctionByName] (C function CFPlugInRegisterFactoryFunctionByName).
-func CFPlugInRegisterFactoryFunctionByName(factoryUUID unsafe.Pointer, plugIn unsafe.Pointer, functionName unsafe.Pointer) uint8 {
-	return raw.CFPlugInRegisterFactoryFunctionByName(factoryUUID, plugIn, functionName)
-}
-
-// CFPlugInRegisterPlugInType calls [raw.CFPlugInRegisterPlugInType] (C function CFPlugInRegisterPlugInType).
-func CFPlugInRegisterPlugInType(factoryUUID unsafe.Pointer, typeUUID unsafe.Pointer) uint8 {
-	return raw.CFPlugInRegisterPlugInType(factoryUUID, typeUUID)
-}
-
-// CFPlugInRemoveInstanceForFactory calls [raw.CFPlugInRemoveInstanceForFactory] (C function CFPlugInRemoveInstanceForFactory).
-func CFPlugInRemoveInstanceForFactory(factoryID unsafe.Pointer) {
-	raw.CFPlugInRemoveInstanceForFactory(factoryID)
-}
-
-// CFPlugInSetLoadOnDemand calls [raw.CFPlugInSetLoadOnDemand] (C function CFPlugInSetLoadOnDemand).
-func CFPlugInSetLoadOnDemand(plugIn unsafe.Pointer, flag uint8) {
-	raw.CFPlugInSetLoadOnDemand(plugIn, flag)
-}
-
-// CFPlugInUnregisterFactory calls [raw.CFPlugInUnregisterFactory] (C function CFPlugInUnregisterFactory).
-func CFPlugInUnregisterFactory(factoryUUID unsafe.Pointer) uint8 {
-	return raw.CFPlugInUnregisterFactory(factoryUUID)
-}
-
-// CFPlugInUnregisterPlugInType calls [raw.CFPlugInUnregisterPlugInType] (C function CFPlugInUnregisterPlugInType).
-func CFPlugInUnregisterPlugInType(factoryUUID unsafe.Pointer, typeUUID unsafe.Pointer) uint8 {
-	return raw.CFPlugInUnregisterPlugInType(factoryUUID, typeUUID)
-}
-
-// CFPreferencesAddSuitePreferencesToApp calls [raw.CFPreferencesAddSuitePreferencesToApp] (C function CFPreferencesAddSuitePreferencesToApp).
-func CFPreferencesAddSuitePreferencesToApp(applicationID unsafe.Pointer, suiteID unsafe.Pointer) {
-	raw.CFPreferencesAddSuitePreferencesToApp(applicationID, suiteID)
-}
-
-// CFPreferencesAppSynchronize calls [raw.CFPreferencesAppSynchronize] (C function CFPreferencesAppSynchronize).
-func CFPreferencesAppSynchronize(applicationID unsafe.Pointer) uint8 {
-	return raw.CFPreferencesAppSynchronize(applicationID)
-}
-
-// CFPreferencesAppValueIsForced calls [raw.CFPreferencesAppValueIsForced] (C function CFPreferencesAppValueIsForced).
-func CFPreferencesAppValueIsForced(key unsafe.Pointer, applicationID unsafe.Pointer) uint8 {
-	return raw.CFPreferencesAppValueIsForced(key, applicationID)
-}
-
-// CFPreferencesCopyAppValue calls [raw.CFPreferencesCopyAppValue] (C function CFPreferencesCopyAppValue).
-func CFPreferencesCopyAppValue(key unsafe.Pointer, applicationID unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPreferencesCopyAppValue(key, applicationID)
-}
-
-// CFPreferencesCopyApplicationList calls [raw.CFPreferencesCopyApplicationList] (C function CFPreferencesCopyApplicationList).
-func CFPreferencesCopyApplicationList(userName unsafe.Pointer, hostName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPreferencesCopyApplicationList(userName, hostName)
-}
-
-// CFPreferencesCopyKeyList calls [raw.CFPreferencesCopyKeyList] (C function CFPreferencesCopyKeyList).
-func CFPreferencesCopyKeyList(applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPreferencesCopyKeyList(applicationID, userName, hostName)
-}
-
-// CFPreferencesCopyMultiple calls [raw.CFPreferencesCopyMultiple] (C function CFPreferencesCopyMultiple).
-func CFPreferencesCopyMultiple(keysToFetch unsafe.Pointer, applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPreferencesCopyMultiple(keysToFetch, applicationID, userName, hostName)
-}
-
-// CFPreferencesCopyValue calls [raw.CFPreferencesCopyValue] (C function CFPreferencesCopyValue).
-func CFPreferencesCopyValue(key unsafe.Pointer, applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPreferencesCopyValue(key, applicationID, userName, hostName)
-}
-
-// CFPreferencesGetAppBooleanValue calls [raw.CFPreferencesGetAppBooleanValue] (C function CFPreferencesGetAppBooleanValue).
-func CFPreferencesGetAppBooleanValue(key unsafe.Pointer, applicationID unsafe.Pointer, keyExistsAndHasValidFormat *uint8) uint8 {
-	return raw.CFPreferencesGetAppBooleanValue(key, applicationID, keyExistsAndHasValidFormat)
-}
-
-// CFPreferencesGetAppIntegerValue calls [raw.CFPreferencesGetAppIntegerValue] (C function CFPreferencesGetAppIntegerValue).
-func CFPreferencesGetAppIntegerValue(key unsafe.Pointer, applicationID unsafe.Pointer, keyExistsAndHasValidFormat *uint8) int {
-	return raw.CFPreferencesGetAppIntegerValue(key, applicationID, keyExistsAndHasValidFormat)
-}
-
-// CFPreferencesRemoveSuitePreferencesFromApp calls [raw.CFPreferencesRemoveSuitePreferencesFromApp] (C function CFPreferencesRemoveSuitePreferencesFromApp).
-func CFPreferencesRemoveSuitePreferencesFromApp(applicationID unsafe.Pointer, suiteID unsafe.Pointer) {
-	raw.CFPreferencesRemoveSuitePreferencesFromApp(applicationID, suiteID)
-}
-
-// CFPreferencesSetAppValue calls [raw.CFPreferencesSetAppValue] (C function CFPreferencesSetAppValue).
-func CFPreferencesSetAppValue(key unsafe.Pointer, value unsafe.Pointer, applicationID unsafe.Pointer) {
-	raw.CFPreferencesSetAppValue(key, value, applicationID)
-}
-
-// CFPreferencesSetMultiple calls [raw.CFPreferencesSetMultiple] (C function CFPreferencesSetMultiple).
-func CFPreferencesSetMultiple(keysToSet unsafe.Pointer, keysToRemove unsafe.Pointer, applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) {
-	raw.CFPreferencesSetMultiple(keysToSet, keysToRemove, applicationID, userName, hostName)
-}
-
-// CFPreferencesSetValue calls [raw.CFPreferencesSetValue] (C function CFPreferencesSetValue).
-func CFPreferencesSetValue(key unsafe.Pointer, value unsafe.Pointer, applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) {
-	raw.CFPreferencesSetValue(key, value, applicationID, userName, hostName)
-}
-
-// CFPreferencesSynchronize calls [raw.CFPreferencesSynchronize] (C function CFPreferencesSynchronize).
-func CFPreferencesSynchronize(applicationID unsafe.Pointer, userName unsafe.Pointer, hostName unsafe.Pointer) uint8 {
-	return raw.CFPreferencesSynchronize(applicationID, userName, hostName)
-}
-
-// CFPropertyListCreateDeepCopy calls [raw.CFPropertyListCreateDeepCopy] (C function CFPropertyListCreateDeepCopy).
-func CFPropertyListCreateDeepCopy(allocator unsafe.Pointer, propertyList unsafe.Pointer, mutabilityOption uint) unsafe.Pointer {
-	return raw.CFPropertyListCreateDeepCopy(allocator, propertyList, mutabilityOption)
-}
-
-// CFPropertyListCreateFromStream calls [raw.CFPropertyListCreateFromStream] (C function CFPropertyListCreateFromStream).
-func CFPropertyListCreateFromStream(allocator unsafe.Pointer, stream unsafe.Pointer, streamLength int, mutabilityOption uint, format *CFPropertyListFormat, errorString unsafe.Pointer) unsafe.Pointer {
-	var _format raw.CFPropertyListFormat
-	_ret := raw.CFPropertyListCreateFromStream(allocator, stream, streamLength, mutabilityOption, &_format, errorString)
-	if format != nil {
-		*format = CFPropertyListFormat(_format)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAbsoluteTimeGetCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetCurrent, _lib, "CFAbsoluteTimeGetCurrent")
 	}
-	return _ret
+	return _fnCFAbsoluteTimeGetCurrent()
 }
 
-// CFPropertyListCreateFromXMLData calls [raw.CFPropertyListCreateFromXMLData] (C function CFPropertyListCreateFromXMLData).
-func CFPropertyListCreateFromXMLData(allocator unsafe.Pointer, xmlData unsafe.Pointer, mutabilityOption uint, errorString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPropertyListCreateFromXMLData(allocator, xmlData, mutabilityOption, errorString)
+var _fnCFAbsoluteTimeGetDayOfWeek func(float64, objc.ID) int
+
+// CFAbsoluteTimeGetDayOfWeek calls the CoreFoundation framework function CFAbsoluteTimeGetDayOfWeek.
+func CFAbsoluteTimeGetDayOfWeek(at float64, tz obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAbsoluteTimeGetDayOfWeek == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfWeek, _lib, "CFAbsoluteTimeGetDayOfWeek")
+	}
+	return _fnCFAbsoluteTimeGetDayOfWeek(at, objref.IDOf(tz))
 }
 
-// CFPropertyListCreateXMLData calls [raw.CFPropertyListCreateXMLData] (C function CFPropertyListCreateXMLData).
-func CFPropertyListCreateXMLData(allocator unsafe.Pointer, propertyList unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPropertyListCreateXMLData(allocator, propertyList)
+var _fnCFAbsoluteTimeGetDayOfYear func(float64, objc.ID) int
+
+// CFAbsoluteTimeGetDayOfYear calls the CoreFoundation framework function CFAbsoluteTimeGetDayOfYear.
+func CFAbsoluteTimeGetDayOfYear(at float64, tz obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAbsoluteTimeGetDayOfYear == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfYear, _lib, "CFAbsoluteTimeGetDayOfYear")
+	}
+	return _fnCFAbsoluteTimeGetDayOfYear(at, objref.IDOf(tz))
 }
 
-// CFPropertyListIsValid calls [raw.CFPropertyListIsValid] (C function CFPropertyListIsValid).
-func CFPropertyListIsValid(plist unsafe.Pointer, format CFPropertyListFormat) uint8 {
-	return raw.CFPropertyListIsValid(plist, raw.CFPropertyListFormat(format))
+var _fnCFAbsoluteTimeGetWeekOfYear func(float64, objc.ID) int
+
+// CFAbsoluteTimeGetWeekOfYear calls the CoreFoundation framework function CFAbsoluteTimeGetWeekOfYear.
+func CFAbsoluteTimeGetWeekOfYear(at float64, tz obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAbsoluteTimeGetWeekOfYear == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetWeekOfYear, _lib, "CFAbsoluteTimeGetWeekOfYear")
+	}
+	return _fnCFAbsoluteTimeGetWeekOfYear(at, objref.IDOf(tz))
 }
 
-// CFPropertyListWriteToStream calls [raw.CFPropertyListWriteToStream] (C function CFPropertyListWriteToStream).
-func CFPropertyListWriteToStream(propertyList unsafe.Pointer, stream unsafe.Pointer, format CFPropertyListFormat, errorString unsafe.Pointer) int {
-	return raw.CFPropertyListWriteToStream(propertyList, stream, raw.CFPropertyListFormat(format), errorString)
+var _fnCFAllocatorGetDefault func() objc.ID
+
+// CFAllocatorGetDefault calls the CoreFoundation framework function CFAllocatorGetDefault.
+func CFAllocatorGetDefault() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAllocatorGetDefault == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAllocatorGetDefault, _lib, "CFAllocatorGetDefault")
+	}
+	_ret := _fnCFAllocatorGetDefault()
+	return obj.Wrap(_ret)
 }
 
-// CFRangeMake calls [raw.CFRangeMake] (C function CFRangeMake).
-func CFRangeMake(loc int, len_ int) raw.CFRange {
-	return raw.CFRangeMake(loc, len_)
+var _fnCFAllocatorGetPreferredSizeForSize func(objc.ID, int, int) int
+
+// CFAllocatorGetPreferredSizeForSize calls the CoreFoundation framework function CFAllocatorGetPreferredSizeForSize.
+func CFAllocatorGetPreferredSizeForSize(allocator obj.Object, size int, hint int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAllocatorGetPreferredSizeForSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAllocatorGetPreferredSizeForSize, _lib, "CFAllocatorGetPreferredSizeForSize")
+	}
+	return _fnCFAllocatorGetPreferredSizeForSize(objref.IDOf(allocator), size, hint)
 }
 
-// CFReadStreamClose calls [raw.CFReadStreamClose] (C function CFReadStreamClose).
-func CFReadStreamClose(stream unsafe.Pointer) {
-	raw.CFReadStreamClose(stream)
+var _fnCFAllocatorGetTypeID func() int
+
+// CFAllocatorGetTypeID calls the CoreFoundation framework function CFAllocatorGetTypeID.
+func CFAllocatorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAllocatorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAllocatorGetTypeID, _lib, "CFAllocatorGetTypeID")
+	}
+	return _fnCFAllocatorGetTypeID()
 }
 
-// CFReadStreamCopyDispatchQueue calls [raw.CFReadStreamCopyDispatchQueue] (C function CFReadStreamCopyDispatchQueue).
-func CFReadStreamCopyDispatchQueue(stream unsafe.Pointer) unsafe.Pointer {
-	return raw.CFReadStreamCopyDispatchQueue(stream)
+var _fnCFAllocatorSetDefault func(objc.ID)
+
+// CFAllocatorSetDefault calls the CoreFoundation framework function CFAllocatorSetDefault.
+func CFAllocatorSetDefault(allocator obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAllocatorSetDefault == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAllocatorSetDefault, _lib, "CFAllocatorSetDefault")
+	}
+	_fnCFAllocatorSetDefault(objref.IDOf(allocator))
 }
 
-// CFReadStreamCopyError calls [raw.CFReadStreamCopyError] (C function CFReadStreamCopyError).
-func CFReadStreamCopyError(stream unsafe.Pointer) unsafe.Pointer {
-	return raw.CFReadStreamCopyError(stream)
+var _fnCFArrayCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFArrayCreateCopy calls the CoreFoundation framework function CFArrayCreateCopy.
+func CFArrayCreateCopy(allocator obj.Object, theArray obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayCreateCopy, _lib, "CFArrayCreateCopy")
+	}
+	_ret := _fnCFArrayCreateCopy(objref.IDOf(allocator), objref.IDOf(theArray))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamCopyProperty calls [raw.CFReadStreamCopyProperty] (C function CFReadStreamCopyProperty).
-func CFReadStreamCopyProperty(stream unsafe.Pointer, propertyName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFReadStreamCopyProperty(stream, propertyName)
+var _fnCFArrayCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFArrayCreateMutableCopy calls the CoreFoundation framework function CFArrayCreateMutableCopy.
+func CFArrayCreateMutableCopy(allocator obj.Object, capacity int, theArray obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayCreateMutableCopy, _lib, "CFArrayCreateMutableCopy")
+	}
+	_ret := _fnCFArrayCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(theArray))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamCreateWithBytesNoCopy calls [raw.CFReadStreamCreateWithBytesNoCopy] (C function CFReadStreamCreateWithBytesNoCopy).
-func CFReadStreamCreateWithBytesNoCopy(alloc unsafe.Pointer, bytes_ *uint8, length int, bytesDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFReadStreamCreateWithBytesNoCopy(alloc, bytes_, length, bytesDeallocator)
+var _fnCFArrayExchangeValuesAtIndices func(objc.ID, int, int)
+
+// CFArrayExchangeValuesAtIndices calls the CoreFoundation framework function CFArrayExchangeValuesAtIndices.
+func CFArrayExchangeValuesAtIndices(theArray obj.Object, idx1 int, idx2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayExchangeValuesAtIndices == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayExchangeValuesAtIndices, _lib, "CFArrayExchangeValuesAtIndices")
+	}
+	_fnCFArrayExchangeValuesAtIndices(objref.IDOf(theArray), idx1, idx2)
 }
 
-// CFReadStreamCreateWithFile calls [raw.CFReadStreamCreateWithFile] (C function CFReadStreamCreateWithFile).
-func CFReadStreamCreateWithFile(alloc unsafe.Pointer, fileURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFReadStreamCreateWithFile(alloc, fileURL)
+var _fnCFArrayGetCount func(objc.ID) int
+
+// CFArrayGetCount calls the CoreFoundation framework function CFArrayGetCount.
+func CFArrayGetCount(theArray obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayGetCount, _lib, "CFArrayGetCount")
+	}
+	return _fnCFArrayGetCount(objref.IDOf(theArray))
 }
 
-// CFReadStreamGetBuffer calls [raw.CFReadStreamGetBuffer] (C function CFReadStreamGetBuffer).
-func CFReadStreamGetBuffer(stream unsafe.Pointer, maxBytesToRead int, numBytesRead *int) *uint8 {
-	return raw.CFReadStreamGetBuffer(stream, maxBytesToRead, numBytesRead)
+var _fnCFArrayGetTypeID func() int
+
+// CFArrayGetTypeID calls the CoreFoundation framework function CFArrayGetTypeID.
+func CFArrayGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayGetTypeID, _lib, "CFArrayGetTypeID")
+	}
+	return _fnCFArrayGetTypeID()
 }
 
-// CFReadStreamGetError calls [raw.CFReadStreamGetError] (C function CFReadStreamGetError).
-func CFReadStreamGetError(stream unsafe.Pointer) raw.CFStreamError {
-	return raw.CFReadStreamGetError(stream)
+var _fnCFArrayRemoveAllValues func(objc.ID)
+
+// CFArrayRemoveAllValues calls the CoreFoundation framework function CFArrayRemoveAllValues.
+func CFArrayRemoveAllValues(theArray obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayRemoveAllValues == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayRemoveAllValues, _lib, "CFArrayRemoveAllValues")
+	}
+	_fnCFArrayRemoveAllValues(objref.IDOf(theArray))
 }
 
-// CFReadStreamGetStatus calls [raw.CFReadStreamGetStatus] (C function CFReadStreamGetStatus).
-func CFReadStreamGetStatus(stream unsafe.Pointer) CFStreamStatus {
-	return CFStreamStatus(raw.CFReadStreamGetStatus(stream))
+var _fnCFArrayRemoveValueAtIndex func(objc.ID, int)
+
+// CFArrayRemoveValueAtIndex calls the CoreFoundation framework function CFArrayRemoveValueAtIndex.
+func CFArrayRemoveValueAtIndex(theArray obj.Object, idx int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFArrayRemoveValueAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFArrayRemoveValueAtIndex, _lib, "CFArrayRemoveValueAtIndex")
+	}
+	_fnCFArrayRemoveValueAtIndex(objref.IDOf(theArray), idx)
 }
 
-// CFReadStreamGetTypeID calls [raw.CFReadStreamGetTypeID] (C function CFReadStreamGetTypeID).
-func CFReadStreamGetTypeID() uint {
-	return raw.CFReadStreamGetTypeID()
+var _fnCFAttributedStringBeginEditing func(objc.ID)
+
+// CFAttributedStringBeginEditing calls the CoreFoundation framework function CFAttributedStringBeginEditing.
+func CFAttributedStringBeginEditing(aStr obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringBeginEditing == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringBeginEditing, _lib, "CFAttributedStringBeginEditing")
+	}
+	_fnCFAttributedStringBeginEditing(objref.IDOf(aStr))
 }
 
-// CFReadStreamHasBytesAvailable calls [raw.CFReadStreamHasBytesAvailable] (C function CFReadStreamHasBytesAvailable).
-func CFReadStreamHasBytesAvailable(stream unsafe.Pointer) uint8 {
-	return raw.CFReadStreamHasBytesAvailable(stream)
+var _fnCFAttributedStringCreate func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFAttributedStringCreate calls the CoreFoundation framework function CFAttributedStringCreate.
+func CFAttributedStringCreate(alloc obj.Object, str obj.Object, attributes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreate, _lib, "CFAttributedStringCreate")
+	}
+	_ret := _fnCFAttributedStringCreate(objref.IDOf(alloc), objref.IDOf(str), objref.IDOf(attributes))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamOpen calls [raw.CFReadStreamOpen] (C function CFReadStreamOpen).
-func CFReadStreamOpen(stream unsafe.Pointer) uint8 {
-	return raw.CFReadStreamOpen(stream)
+var _fnCFAttributedStringCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFAttributedStringCreateCopy calls the CoreFoundation framework function CFAttributedStringCreateCopy.
+func CFAttributedStringCreateCopy(alloc obj.Object, aStr obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateCopy, _lib, "CFAttributedStringCreateCopy")
+	}
+	_ret := _fnCFAttributedStringCreateCopy(objref.IDOf(alloc), objref.IDOf(aStr))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamRead calls [raw.CFReadStreamRead] (C function CFReadStreamRead).
-func CFReadStreamRead(stream unsafe.Pointer, buffer *uint8, bufferLength int) int {
-	return raw.CFReadStreamRead(stream, buffer, bufferLength)
+var _fnCFAttributedStringCreateMutable func(objc.ID, int) objc.ID
+
+// CFAttributedStringCreateMutable calls the CoreFoundation framework function CFAttributedStringCreateMutable.
+func CFAttributedStringCreateMutable(alloc obj.Object, maxLength int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateMutable, _lib, "CFAttributedStringCreateMutable")
+	}
+	_ret := _fnCFAttributedStringCreateMutable(objref.IDOf(alloc), maxLength)
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamScheduleWithRunLoop calls [raw.CFReadStreamScheduleWithRunLoop] (C function CFReadStreamScheduleWithRunLoop).
-func CFReadStreamScheduleWithRunLoop(stream unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.CFReadStreamScheduleWithRunLoop(stream, runLoop, runLoopMode)
+var _fnCFAttributedStringCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFAttributedStringCreateMutableCopy calls the CoreFoundation framework function CFAttributedStringCreateMutableCopy.
+func CFAttributedStringCreateMutableCopy(alloc obj.Object, maxLength int, aStr obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringCreateMutableCopy, _lib, "CFAttributedStringCreateMutableCopy")
+	}
+	_ret := _fnCFAttributedStringCreateMutableCopy(objref.IDOf(alloc), maxLength, objref.IDOf(aStr))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamSetClient calls [raw.CFReadStreamSetClient] (C function CFReadStreamSetClient).
-func CFReadStreamSetClient(stream unsafe.Pointer, streamEvents uint, clientCB unsafe.Pointer, clientContext *raw.CFStreamClientContext) uint8 {
-	return raw.CFReadStreamSetClient(stream, streamEvents, clientCB, clientContext)
+var _fnCFAttributedStringEndEditing func(objc.ID)
+
+// CFAttributedStringEndEditing calls the CoreFoundation framework function CFAttributedStringEndEditing.
+func CFAttributedStringEndEditing(aStr obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringEndEditing == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringEndEditing, _lib, "CFAttributedStringEndEditing")
+	}
+	_fnCFAttributedStringEndEditing(objref.IDOf(aStr))
 }
 
-// CFReadStreamSetDispatchQueue calls [raw.CFReadStreamSetDispatchQueue] (C function CFReadStreamSetDispatchQueue).
-func CFReadStreamSetDispatchQueue(stream unsafe.Pointer, q unsafe.Pointer) {
-	raw.CFReadStreamSetDispatchQueue(stream, q)
+var _fnCFAttributedStringGetLength func(objc.ID) int
+
+// CFAttributedStringGetLength calls the CoreFoundation framework function CFAttributedStringGetLength.
+func CFAttributedStringGetLength(aStr obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringGetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetLength, _lib, "CFAttributedStringGetLength")
+	}
+	return _fnCFAttributedStringGetLength(objref.IDOf(aStr))
 }
 
-// CFReadStreamSetProperty calls [raw.CFReadStreamSetProperty] (C function CFReadStreamSetProperty).
-func CFReadStreamSetProperty(stream unsafe.Pointer, propertyName unsafe.Pointer, propertyValue unsafe.Pointer) uint8 {
-	return raw.CFReadStreamSetProperty(stream, propertyName, propertyValue)
+var _fnCFAttributedStringGetMutableString func(objc.ID) objc.ID
+
+// CFAttributedStringGetMutableString calls the CoreFoundation framework function CFAttributedStringGetMutableString.
+func CFAttributedStringGetMutableString(aStr obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringGetMutableString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetMutableString, _lib, "CFAttributedStringGetMutableString")
+	}
+	_ret := _fnCFAttributedStringGetMutableString(objref.IDOf(aStr))
+	return obj.Wrap(_ret)
 }
 
-// CFReadStreamUnscheduleFromRunLoop calls [raw.CFReadStreamUnscheduleFromRunLoop] (C function CFReadStreamUnscheduleFromRunLoop).
-func CFReadStreamUnscheduleFromRunLoop(stream unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.CFReadStreamUnscheduleFromRunLoop(stream, runLoop, runLoopMode)
+var _fnCFAttributedStringGetString func(objc.ID) objc.ID
+
+// CFAttributedStringGetString calls the CoreFoundation framework function CFAttributedStringGetString.
+func CFAttributedStringGetString(aStr obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringGetString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetString, _lib, "CFAttributedStringGetString")
+	}
+	_ret := _fnCFAttributedStringGetString(objref.IDOf(aStr))
+	return obj.Wrap(_ret)
 }
 
-// CFRelease calls [raw.CFRelease] (C function CFRelease).
-func CFRelease(cf unsafe.Pointer) {
-	raw.CFRelease(cf)
+var _fnCFAttributedStringGetTypeID func() int
+
+// CFAttributedStringGetTypeID calls the CoreFoundation framework function CFAttributedStringGetTypeID.
+func CFAttributedStringGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAttributedStringGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAttributedStringGetTypeID, _lib, "CFAttributedStringGetTypeID")
+	}
+	return _fnCFAttributedStringGetTypeID()
 }
 
-// CFRetain calls [raw.CFRetain] (C function CFRetain).
-func CFRetain(cf unsafe.Pointer) unsafe.Pointer {
-	return raw.CFRetain(cf)
+var _fnCFAutorelease func(objc.ID) objc.ID
+
+// CFAutorelease calls the CoreFoundation framework function CFAutorelease.
+func CFAutorelease(arg obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFAutorelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCFAutorelease, _lib, "CFAutorelease")
+	}
+	_ret := _fnCFAutorelease(objref.IDOf(arg))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopAddCommonMode calls [raw.CFRunLoopAddCommonMode] (C function CFRunLoopAddCommonMode).
-func CFRunLoopAddCommonMode(rl unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopAddCommonMode(rl, mode)
+var _fnCFBagCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFBagCreateCopy calls the CoreFoundation framework function CFBagCreateCopy.
+func CFBagCreateCopy(allocator obj.Object, theBag obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBagCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBagCreateCopy, _lib, "CFBagCreateCopy")
+	}
+	_ret := _fnCFBagCreateCopy(objref.IDOf(allocator), objref.IDOf(theBag))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopAddObserver calls [raw.CFRunLoopAddObserver] (C function CFRunLoopAddObserver).
-func CFRunLoopAddObserver(rl unsafe.Pointer, observer unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopAddObserver(rl, observer, mode)
+var _fnCFBagCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFBagCreateMutableCopy calls the CoreFoundation framework function CFBagCreateMutableCopy.
+func CFBagCreateMutableCopy(allocator obj.Object, capacity int, theBag obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBagCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBagCreateMutableCopy, _lib, "CFBagCreateMutableCopy")
+	}
+	_ret := _fnCFBagCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(theBag))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopAddSource calls [raw.CFRunLoopAddSource] (C function CFRunLoopAddSource).
-func CFRunLoopAddSource(rl unsafe.Pointer, source unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopAddSource(rl, source, mode)
+var _fnCFBagGetCount func(objc.ID) int
+
+// CFBagGetCount calls the CoreFoundation framework function CFBagGetCount.
+func CFBagGetCount(theBag obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBagGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBagGetCount, _lib, "CFBagGetCount")
+	}
+	return _fnCFBagGetCount(objref.IDOf(theBag))
 }
 
-// CFRunLoopAddTimer calls [raw.CFRunLoopAddTimer] (C function CFRunLoopAddTimer).
-func CFRunLoopAddTimer(rl unsafe.Pointer, timer unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopAddTimer(rl, timer, mode)
+var _fnCFBagGetTypeID func() int
+
+// CFBagGetTypeID calls the CoreFoundation framework function CFBagGetTypeID.
+func CFBagGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBagGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBagGetTypeID, _lib, "CFBagGetTypeID")
+	}
+	return _fnCFBagGetTypeID()
 }
 
-// CFRunLoopContainsObserver calls [raw.CFRunLoopContainsObserver] (C function CFRunLoopContainsObserver).
-func CFRunLoopContainsObserver(rl unsafe.Pointer, observer unsafe.Pointer, mode unsafe.Pointer) uint8 {
-	return raw.CFRunLoopContainsObserver(rl, observer, mode)
+var _fnCFBagRemoveAllValues func(objc.ID)
+
+// CFBagRemoveAllValues calls the CoreFoundation framework function CFBagRemoveAllValues.
+func CFBagRemoveAllValues(theBag obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBagRemoveAllValues == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBagRemoveAllValues, _lib, "CFBagRemoveAllValues")
+	}
+	_fnCFBagRemoveAllValues(objref.IDOf(theBag))
 }
 
-// CFRunLoopContainsSource calls [raw.CFRunLoopContainsSource] (C function CFRunLoopContainsSource).
-func CFRunLoopContainsSource(rl unsafe.Pointer, source unsafe.Pointer, mode unsafe.Pointer) uint8 {
-	return raw.CFRunLoopContainsSource(rl, source, mode)
+var _fnCFBinaryHeapCreateCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFBinaryHeapCreateCopy calls the CoreFoundation framework function CFBinaryHeapCreateCopy.
+func CFBinaryHeapCreateCopy(allocator obj.Object, capacity int, heap obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBinaryHeapCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapCreateCopy, _lib, "CFBinaryHeapCreateCopy")
+	}
+	_ret := _fnCFBinaryHeapCreateCopy(objref.IDOf(allocator), capacity, objref.IDOf(heap))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopContainsTimer calls [raw.CFRunLoopContainsTimer] (C function CFRunLoopContainsTimer).
-func CFRunLoopContainsTimer(rl unsafe.Pointer, timer unsafe.Pointer, mode unsafe.Pointer) uint8 {
-	return raw.CFRunLoopContainsTimer(rl, timer, mode)
+var _fnCFBinaryHeapGetCount func(objc.ID) int
+
+// CFBinaryHeapGetCount calls the CoreFoundation framework function CFBinaryHeapGetCount.
+func CFBinaryHeapGetCount(heap obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBinaryHeapGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapGetCount, _lib, "CFBinaryHeapGetCount")
+	}
+	return _fnCFBinaryHeapGetCount(objref.IDOf(heap))
 }
 
-// CFRunLoopCopyAllModes calls [raw.CFRunLoopCopyAllModes] (C function CFRunLoopCopyAllModes).
-func CFRunLoopCopyAllModes(rl unsafe.Pointer) unsafe.Pointer {
-	return raw.CFRunLoopCopyAllModes(rl)
+var _fnCFBinaryHeapGetTypeID func() int
+
+// CFBinaryHeapGetTypeID calls the CoreFoundation framework function CFBinaryHeapGetTypeID.
+func CFBinaryHeapGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBinaryHeapGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapGetTypeID, _lib, "CFBinaryHeapGetTypeID")
+	}
+	return _fnCFBinaryHeapGetTypeID()
 }
 
-// CFRunLoopCopyCurrentMode calls [raw.CFRunLoopCopyCurrentMode] (C function CFRunLoopCopyCurrentMode).
-func CFRunLoopCopyCurrentMode(rl unsafe.Pointer) unsafe.Pointer {
-	return raw.CFRunLoopCopyCurrentMode(rl)
+var _fnCFBinaryHeapRemoveAllValues func(objc.ID)
+
+// CFBinaryHeapRemoveAllValues calls the CoreFoundation framework function CFBinaryHeapRemoveAllValues.
+func CFBinaryHeapRemoveAllValues(heap obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBinaryHeapRemoveAllValues == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapRemoveAllValues, _lib, "CFBinaryHeapRemoveAllValues")
+	}
+	_fnCFBinaryHeapRemoveAllValues(objref.IDOf(heap))
 }
 
-// CFRunLoopGetCurrent calls [raw.CFRunLoopGetCurrent] (C function CFRunLoopGetCurrent).
-func CFRunLoopGetCurrent() unsafe.Pointer {
-	return raw.CFRunLoopGetCurrent()
+var _fnCFBinaryHeapRemoveMinimumValue func(objc.ID)
+
+// CFBinaryHeapRemoveMinimumValue calls the CoreFoundation framework function CFBinaryHeapRemoveMinimumValue.
+func CFBinaryHeapRemoveMinimumValue(heap obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBinaryHeapRemoveMinimumValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBinaryHeapRemoveMinimumValue, _lib, "CFBinaryHeapRemoveMinimumValue")
+	}
+	_fnCFBinaryHeapRemoveMinimumValue(objref.IDOf(heap))
 }
 
-// CFRunLoopGetMain calls [raw.CFRunLoopGetMain] (C function CFRunLoopGetMain).
-func CFRunLoopGetMain() unsafe.Pointer {
-	return raw.CFRunLoopGetMain()
+var _fnCFBitVectorCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFBitVectorCreateCopy calls the CoreFoundation framework function CFBitVectorCreateCopy.
+func CFBitVectorCreateCopy(allocator obj.Object, bv obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateCopy, _lib, "CFBitVectorCreateCopy")
+	}
+	_ret := _fnCFBitVectorCreateCopy(objref.IDOf(allocator), objref.IDOf(bv))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopGetNextTimerFireDate calls [raw.CFRunLoopGetNextTimerFireDate] (C function CFRunLoopGetNextTimerFireDate).
-func CFRunLoopGetNextTimerFireDate(rl unsafe.Pointer, mode unsafe.Pointer) float64 {
-	return raw.CFRunLoopGetNextTimerFireDate(rl, mode)
+var _fnCFBitVectorCreateMutable func(objc.ID, int) objc.ID
+
+// CFBitVectorCreateMutable calls the CoreFoundation framework function CFBitVectorCreateMutable.
+func CFBitVectorCreateMutable(allocator obj.Object, capacity int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateMutable, _lib, "CFBitVectorCreateMutable")
+	}
+	_ret := _fnCFBitVectorCreateMutable(objref.IDOf(allocator), capacity)
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopGetTypeID calls [raw.CFRunLoopGetTypeID] (C function CFRunLoopGetTypeID).
-func CFRunLoopGetTypeID() uint {
-	return raw.CFRunLoopGetTypeID()
+var _fnCFBitVectorCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFBitVectorCreateMutableCopy calls the CoreFoundation framework function CFBitVectorCreateMutableCopy.
+func CFBitVectorCreateMutableCopy(allocator obj.Object, capacity int, bv obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorCreateMutableCopy, _lib, "CFBitVectorCreateMutableCopy")
+	}
+	_ret := _fnCFBitVectorCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(bv))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopIsWaiting calls [raw.CFRunLoopIsWaiting] (C function CFRunLoopIsWaiting).
-func CFRunLoopIsWaiting(rl unsafe.Pointer) uint8 {
-	return raw.CFRunLoopIsWaiting(rl)
+var _fnCFBitVectorFlipBitAtIndex func(objc.ID, int)
+
+// CFBitVectorFlipBitAtIndex calls the CoreFoundation framework function CFBitVectorFlipBitAtIndex.
+func CFBitVectorFlipBitAtIndex(bv obj.Object, idx int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorFlipBitAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorFlipBitAtIndex, _lib, "CFBitVectorFlipBitAtIndex")
+	}
+	_fnCFBitVectorFlipBitAtIndex(objref.IDOf(bv), idx)
 }
 
-// CFRunLoopObserverCreate calls [raw.CFRunLoopObserverCreate] (C function CFRunLoopObserverCreate).
-func CFRunLoopObserverCreate(allocator unsafe.Pointer, activities uint, repeats uint8, order int, callout unsafe.Pointer, context_ *raw.CFRunLoopObserverContext) unsafe.Pointer {
-	return raw.CFRunLoopObserverCreate(allocator, activities, repeats, order, callout, context_)
+var _fnCFBitVectorGetBitAtIndex func(objc.ID, int) int
+
+// CFBitVectorGetBitAtIndex calls the CoreFoundation framework function CFBitVectorGetBitAtIndex.
+func CFBitVectorGetBitAtIndex(bv obj.Object, idx int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorGetBitAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetBitAtIndex, _lib, "CFBitVectorGetBitAtIndex")
+	}
+	return _fnCFBitVectorGetBitAtIndex(objref.IDOf(bv), idx)
 }
 
-// CFRunLoopObserverCreateWithHandler calls [raw.CFRunLoopObserverCreateWithHandler] (C function CFRunLoopObserverCreateWithHandler).
-func CFRunLoopObserverCreateWithHandler(allocator unsafe.Pointer, activities uint, repeats uint8, order int, block func(unsafe.Pointer, CFRunLoopActivity)) unsafe.Pointer {
-	return raw.CFRunLoopObserverCreateWithHandler(allocator, activities, repeats, order, func(_a0 unsafe.Pointer, _a1 raw.CFRunLoopActivity) { block(_a0, CFRunLoopActivity(_a1)) })
+var _fnCFBitVectorGetCount func(objc.ID) int
+
+// CFBitVectorGetCount calls the CoreFoundation framework function CFBitVectorGetCount.
+func CFBitVectorGetCount(bv obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetCount, _lib, "CFBitVectorGetCount")
+	}
+	return _fnCFBitVectorGetCount(objref.IDOf(bv))
 }
 
-// CFRunLoopObserverDoesRepeat calls [raw.CFRunLoopObserverDoesRepeat] (C function CFRunLoopObserverDoesRepeat).
-func CFRunLoopObserverDoesRepeat(observer unsafe.Pointer) uint8 {
-	return raw.CFRunLoopObserverDoesRepeat(observer)
+var _fnCFBitVectorGetTypeID func() int
+
+// CFBitVectorGetTypeID calls the CoreFoundation framework function CFBitVectorGetTypeID.
+func CFBitVectorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetTypeID, _lib, "CFBitVectorGetTypeID")
+	}
+	return _fnCFBitVectorGetTypeID()
 }
 
-// CFRunLoopObserverGetActivities calls [raw.CFRunLoopObserverGetActivities] (C function CFRunLoopObserverGetActivities).
-func CFRunLoopObserverGetActivities(observer unsafe.Pointer) uint {
-	return raw.CFRunLoopObserverGetActivities(observer)
+var _fnCFBitVectorSetAllBits func(objc.ID, int)
+
+// CFBitVectorSetAllBits calls the CoreFoundation framework function CFBitVectorSetAllBits.
+func CFBitVectorSetAllBits(bv obj.Object, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorSetAllBits == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorSetAllBits, _lib, "CFBitVectorSetAllBits")
+	}
+	_fnCFBitVectorSetAllBits(objref.IDOf(bv), value)
 }
 
-// CFRunLoopObserverGetContext calls [raw.CFRunLoopObserverGetContext] (C function CFRunLoopObserverGetContext).
-func CFRunLoopObserverGetContext(observer unsafe.Pointer, context_ *raw.CFRunLoopObserverContext) {
-	raw.CFRunLoopObserverGetContext(observer, context_)
+var _fnCFBitVectorSetBitAtIndex func(objc.ID, int, int)
+
+// CFBitVectorSetBitAtIndex calls the CoreFoundation framework function CFBitVectorSetBitAtIndex.
+func CFBitVectorSetBitAtIndex(bv obj.Object, idx int, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorSetBitAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorSetBitAtIndex, _lib, "CFBitVectorSetBitAtIndex")
+	}
+	_fnCFBitVectorSetBitAtIndex(objref.IDOf(bv), idx, value)
 }
 
-// CFRunLoopObserverGetOrder calls [raw.CFRunLoopObserverGetOrder] (C function CFRunLoopObserverGetOrder).
-func CFRunLoopObserverGetOrder(observer unsafe.Pointer) int {
-	return raw.CFRunLoopObserverGetOrder(observer)
+var _fnCFBitVectorSetCount func(objc.ID, int)
+
+// CFBitVectorSetCount calls the CoreFoundation framework function CFBitVectorSetCount.
+func CFBitVectorSetCount(bv obj.Object, count int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBitVectorSetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBitVectorSetCount, _lib, "CFBitVectorSetCount")
+	}
+	_fnCFBitVectorSetCount(objref.IDOf(bv), count)
 }
 
-// CFRunLoopObserverGetTypeID calls [raw.CFRunLoopObserverGetTypeID] (C function CFRunLoopObserverGetTypeID).
-func CFRunLoopObserverGetTypeID() uint {
-	return raw.CFRunLoopObserverGetTypeID()
+var _fnCFBooleanGetTypeID func() int
+
+// CFBooleanGetTypeID calls the CoreFoundation framework function CFBooleanGetTypeID.
+func CFBooleanGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBooleanGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBooleanGetTypeID, _lib, "CFBooleanGetTypeID")
+	}
+	return _fnCFBooleanGetTypeID()
 }
 
-// CFRunLoopObserverInvalidate calls [raw.CFRunLoopObserverInvalidate] (C function CFRunLoopObserverInvalidate).
-func CFRunLoopObserverInvalidate(observer unsafe.Pointer) {
-	raw.CFRunLoopObserverInvalidate(observer)
+var _fnCFBooleanGetValue func(objc.ID) uint8
+
+// CFBooleanGetValue calls the CoreFoundation framework function CFBooleanGetValue.
+func CFBooleanGetValue(boolean obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBooleanGetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBooleanGetValue, _lib, "CFBooleanGetValue")
+	}
+	return _fnCFBooleanGetValue(objref.IDOf(boolean))
 }
 
-// CFRunLoopObserverIsValid calls [raw.CFRunLoopObserverIsValid] (C function CFRunLoopObserverIsValid).
-func CFRunLoopObserverIsValid(observer unsafe.Pointer) uint8 {
-	return raw.CFRunLoopObserverIsValid(observer)
+var _fnCFBundleCloseBundleResourceMap func(objc.ID, int)
+
+// CFBundleCloseBundleResourceMap calls the CoreFoundation framework function CFBundleCloseBundleResourceMap.
+func CFBundleCloseBundleResourceMap(bundle obj.Object, refNum int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCloseBundleResourceMap == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCloseBundleResourceMap, _lib, "CFBundleCloseBundleResourceMap")
+	}
+	_fnCFBundleCloseBundleResourceMap(objref.IDOf(bundle), refNum)
 }
 
-// CFRunLoopPerformBlock calls [raw.CFRunLoopPerformBlock] (C function CFRunLoopPerformBlock).
-func CFRunLoopPerformBlock(rl unsafe.Pointer, mode unsafe.Pointer, block func()) {
-	raw.CFRunLoopPerformBlock(rl, mode, block)
+var _fnCFBundleCopyAuxiliaryExecutableURL func(objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyAuxiliaryExecutableURL calls the CoreFoundation framework function CFBundleCopyAuxiliaryExecutableURL.
+func CFBundleCopyAuxiliaryExecutableURL(bundle obj.Object, executableName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyAuxiliaryExecutableURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyAuxiliaryExecutableURL, _lib, "CFBundleCopyAuxiliaryExecutableURL")
+	}
+	_ret := _fnCFBundleCopyAuxiliaryExecutableURL(objref.IDOf(bundle), objref.IDOf(executableName))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopRemoveObserver calls [raw.CFRunLoopRemoveObserver] (C function CFRunLoopRemoveObserver).
-func CFRunLoopRemoveObserver(rl unsafe.Pointer, observer unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopRemoveObserver(rl, observer, mode)
+var _fnCFBundleCopyBuiltInPlugInsURL func(objc.ID) objc.ID
+
+// CFBundleCopyBuiltInPlugInsURL calls the CoreFoundation framework function CFBundleCopyBuiltInPlugInsURL.
+func CFBundleCopyBuiltInPlugInsURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyBuiltInPlugInsURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBuiltInPlugInsURL, _lib, "CFBundleCopyBuiltInPlugInsURL")
+	}
+	_ret := _fnCFBundleCopyBuiltInPlugInsURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopRemoveSource calls [raw.CFRunLoopRemoveSource] (C function CFRunLoopRemoveSource).
-func CFRunLoopRemoveSource(rl unsafe.Pointer, source unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopRemoveSource(rl, source, mode)
+var _fnCFBundleCopyBundleLocalizations func(objc.ID) objc.ID
+
+// CFBundleCopyBundleLocalizations calls the CoreFoundation framework function CFBundleCopyBundleLocalizations.
+func CFBundleCopyBundleLocalizations(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyBundleLocalizations == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBundleLocalizations, _lib, "CFBundleCopyBundleLocalizations")
+	}
+	_ret := _fnCFBundleCopyBundleLocalizations(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopRemoveTimer calls [raw.CFRunLoopRemoveTimer] (C function CFRunLoopRemoveTimer).
-func CFRunLoopRemoveTimer(rl unsafe.Pointer, timer unsafe.Pointer, mode unsafe.Pointer) {
-	raw.CFRunLoopRemoveTimer(rl, timer, mode)
+var _fnCFBundleCopyBundleURL func(objc.ID) objc.ID
+
+// CFBundleCopyBundleURL calls the CoreFoundation framework function CFBundleCopyBundleURL.
+func CFBundleCopyBundleURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyBundleURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyBundleURL, _lib, "CFBundleCopyBundleURL")
+	}
+	_ret := _fnCFBundleCopyBundleURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopRun calls [raw.CFRunLoopRun] (C function CFRunLoopRun).
+var _fnCFBundleCopyExecutableArchitectures func(objc.ID) objc.ID
+
+// CFBundleCopyExecutableArchitectures calls the CoreFoundation framework function CFBundleCopyExecutableArchitectures.
+func CFBundleCopyExecutableArchitectures(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyExecutableArchitectures == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitectures, _lib, "CFBundleCopyExecutableArchitectures")
+	}
+	_ret := _fnCFBundleCopyExecutableArchitectures(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyExecutableArchitecturesForURL func(objc.ID) objc.ID
+
+// CFBundleCopyExecutableArchitecturesForURL calls the CoreFoundation framework function CFBundleCopyExecutableArchitecturesForURL.
+func CFBundleCopyExecutableArchitecturesForURL(url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyExecutableArchitecturesForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableArchitecturesForURL, _lib, "CFBundleCopyExecutableArchitecturesForURL")
+	}
+	_ret := _fnCFBundleCopyExecutableArchitecturesForURL(objref.IDOf(url))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyExecutableURL func(objc.ID) objc.ID
+
+// CFBundleCopyExecutableURL calls the CoreFoundation framework function CFBundleCopyExecutableURL.
+func CFBundleCopyExecutableURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyExecutableURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyExecutableURL, _lib, "CFBundleCopyExecutableURL")
+	}
+	_ret := _fnCFBundleCopyExecutableURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyInfoDictionaryForURL func(objc.ID) objc.ID
+
+// CFBundleCopyInfoDictionaryForURL calls the CoreFoundation framework function CFBundleCopyInfoDictionaryForURL.
+func CFBundleCopyInfoDictionaryForURL(url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyInfoDictionaryForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryForURL, _lib, "CFBundleCopyInfoDictionaryForURL")
+	}
+	_ret := _fnCFBundleCopyInfoDictionaryForURL(objref.IDOf(url))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyInfoDictionaryInDirectory func(objc.ID) objc.ID
+
+// CFBundleCopyInfoDictionaryInDirectory calls the CoreFoundation framework function CFBundleCopyInfoDictionaryInDirectory.
+func CFBundleCopyInfoDictionaryInDirectory(bundleURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyInfoDictionaryInDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyInfoDictionaryInDirectory, _lib, "CFBundleCopyInfoDictionaryInDirectory")
+	}
+	_ret := _fnCFBundleCopyInfoDictionaryInDirectory(objref.IDOf(bundleURL))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyLocalizationsForPreferences func(objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyLocalizationsForPreferences calls the CoreFoundation framework function CFBundleCopyLocalizationsForPreferences.
+func CFBundleCopyLocalizationsForPreferences(locArray obj.Object, prefArray obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyLocalizationsForPreferences == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForPreferences, _lib, "CFBundleCopyLocalizationsForPreferences")
+	}
+	_ret := _fnCFBundleCopyLocalizationsForPreferences(objref.IDOf(locArray), objref.IDOf(prefArray))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyLocalizationsForURL func(objc.ID) objc.ID
+
+// CFBundleCopyLocalizationsForURL calls the CoreFoundation framework function CFBundleCopyLocalizationsForURL.
+func CFBundleCopyLocalizationsForURL(url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyLocalizationsForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizationsForURL, _lib, "CFBundleCopyLocalizationsForURL")
+	}
+	_ret := _fnCFBundleCopyLocalizationsForURL(objref.IDOf(url))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyLocalizedString func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyLocalizedString calls the CoreFoundation framework function CFBundleCopyLocalizedString.
+func CFBundleCopyLocalizedString(bundle obj.Object, key obj.Object, value obj.Object, tableName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyLocalizedString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizedString, _lib, "CFBundleCopyLocalizedString")
+	}
+	_ret := _fnCFBundleCopyLocalizedString(objref.IDOf(bundle), objref.IDOf(key), objref.IDOf(value), objref.IDOf(tableName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyLocalizedStringForLocalizations func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyLocalizedStringForLocalizations calls the CoreFoundation framework function CFBundleCopyLocalizedStringForLocalizations.
+func CFBundleCopyLocalizedStringForLocalizations(bundle obj.Object, key obj.Object, value obj.Object, tableName obj.Object, localizations obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyLocalizedStringForLocalizations == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyLocalizedStringForLocalizations, _lib, "CFBundleCopyLocalizedStringForLocalizations")
+	}
+	_ret := _fnCFBundleCopyLocalizedStringForLocalizations(objref.IDOf(bundle), objref.IDOf(key), objref.IDOf(value), objref.IDOf(tableName), objref.IDOf(localizations))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyPreferredLocalizationsFromArray func(objc.ID) objc.ID
+
+// CFBundleCopyPreferredLocalizationsFromArray calls the CoreFoundation framework function CFBundleCopyPreferredLocalizationsFromArray.
+func CFBundleCopyPreferredLocalizationsFromArray(locArray obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyPreferredLocalizationsFromArray == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyPreferredLocalizationsFromArray, _lib, "CFBundleCopyPreferredLocalizationsFromArray")
+	}
+	_ret := _fnCFBundleCopyPreferredLocalizationsFromArray(objref.IDOf(locArray))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyPrivateFrameworksURL func(objc.ID) objc.ID
+
+// CFBundleCopyPrivateFrameworksURL calls the CoreFoundation framework function CFBundleCopyPrivateFrameworksURL.
+func CFBundleCopyPrivateFrameworksURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyPrivateFrameworksURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyPrivateFrameworksURL, _lib, "CFBundleCopyPrivateFrameworksURL")
+	}
+	_ret := _fnCFBundleCopyPrivateFrameworksURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURL func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURL calls the CoreFoundation framework function CFBundleCopyResourceURL.
+func CFBundleCopyResourceURL(bundle obj.Object, resourceName obj.Object, resourceType obj.Object, subDirName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURL, _lib, "CFBundleCopyResourceURL")
+	}
+	_ret := _fnCFBundleCopyResourceURL(objref.IDOf(bundle), objref.IDOf(resourceName), objref.IDOf(resourceType), objref.IDOf(subDirName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURLForLocalization func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURLForLocalization calls the CoreFoundation framework function CFBundleCopyResourceURLForLocalization.
+func CFBundleCopyResourceURLForLocalization(bundle obj.Object, resourceName obj.Object, resourceType obj.Object, subDirName obj.Object, localizationName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURLForLocalization == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLForLocalization, _lib, "CFBundleCopyResourceURLForLocalization")
+	}
+	_ret := _fnCFBundleCopyResourceURLForLocalization(objref.IDOf(bundle), objref.IDOf(resourceName), objref.IDOf(resourceType), objref.IDOf(subDirName), objref.IDOf(localizationName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURLInDirectory func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURLInDirectory calls the CoreFoundation framework function CFBundleCopyResourceURLInDirectory.
+func CFBundleCopyResourceURLInDirectory(bundleURL obj.Object, resourceName obj.Object, resourceType obj.Object, subDirName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURLInDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLInDirectory, _lib, "CFBundleCopyResourceURLInDirectory")
+	}
+	_ret := _fnCFBundleCopyResourceURLInDirectory(objref.IDOf(bundleURL), objref.IDOf(resourceName), objref.IDOf(resourceType), objref.IDOf(subDirName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURLsOfType func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURLsOfType calls the CoreFoundation framework function CFBundleCopyResourceURLsOfType.
+func CFBundleCopyResourceURLsOfType(bundle obj.Object, resourceType obj.Object, subDirName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURLsOfType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfType, _lib, "CFBundleCopyResourceURLsOfType")
+	}
+	_ret := _fnCFBundleCopyResourceURLsOfType(objref.IDOf(bundle), objref.IDOf(resourceType), objref.IDOf(subDirName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURLsOfTypeForLocalization func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURLsOfTypeForLocalization calls the CoreFoundation framework function CFBundleCopyResourceURLsOfTypeForLocalization.
+func CFBundleCopyResourceURLsOfTypeForLocalization(bundle obj.Object, resourceType obj.Object, subDirName obj.Object, localizationName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURLsOfTypeForLocalization == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeForLocalization, _lib, "CFBundleCopyResourceURLsOfTypeForLocalization")
+	}
+	_ret := _fnCFBundleCopyResourceURLsOfTypeForLocalization(objref.IDOf(bundle), objref.IDOf(resourceType), objref.IDOf(subDirName), objref.IDOf(localizationName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourceURLsOfTypeInDirectory func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCopyResourceURLsOfTypeInDirectory calls the CoreFoundation framework function CFBundleCopyResourceURLsOfTypeInDirectory.
+func CFBundleCopyResourceURLsOfTypeInDirectory(bundleURL obj.Object, resourceType obj.Object, subDirName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourceURLsOfTypeInDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourceURLsOfTypeInDirectory, _lib, "CFBundleCopyResourceURLsOfTypeInDirectory")
+	}
+	_ret := _fnCFBundleCopyResourceURLsOfTypeInDirectory(objref.IDOf(bundleURL), objref.IDOf(resourceType), objref.IDOf(subDirName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopyResourcesDirectoryURL func(objc.ID) objc.ID
+
+// CFBundleCopyResourcesDirectoryURL calls the CoreFoundation framework function CFBundleCopyResourcesDirectoryURL.
+func CFBundleCopyResourcesDirectoryURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopyResourcesDirectoryURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopyResourcesDirectoryURL, _lib, "CFBundleCopyResourcesDirectoryURL")
+	}
+	_ret := _fnCFBundleCopyResourcesDirectoryURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopySharedFrameworksURL func(objc.ID) objc.ID
+
+// CFBundleCopySharedFrameworksURL calls the CoreFoundation framework function CFBundleCopySharedFrameworksURL.
+func CFBundleCopySharedFrameworksURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopySharedFrameworksURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopySharedFrameworksURL, _lib, "CFBundleCopySharedFrameworksURL")
+	}
+	_ret := _fnCFBundleCopySharedFrameworksURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopySharedSupportURL func(objc.ID) objc.ID
+
+// CFBundleCopySharedSupportURL calls the CoreFoundation framework function CFBundleCopySharedSupportURL.
+func CFBundleCopySharedSupportURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopySharedSupportURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopySharedSupportURL, _lib, "CFBundleCopySharedSupportURL")
+	}
+	_ret := _fnCFBundleCopySharedSupportURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCopySupportFilesDirectoryURL func(objc.ID) objc.ID
+
+// CFBundleCopySupportFilesDirectoryURL calls the CoreFoundation framework function CFBundleCopySupportFilesDirectoryURL.
+func CFBundleCopySupportFilesDirectoryURL(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCopySupportFilesDirectoryURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCopySupportFilesDirectoryURL, _lib, "CFBundleCopySupportFilesDirectoryURL")
+	}
+	_ret := _fnCFBundleCopySupportFilesDirectoryURL(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCreate func(objc.ID, objc.ID) objc.ID
+
+// CFBundleCreate calls the CoreFoundation framework function CFBundleCreate.
+func CFBundleCreate(allocator obj.Object, bundleURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCreate, _lib, "CFBundleCreate")
+	}
+	_ret := _fnCFBundleCreate(objref.IDOf(allocator), objref.IDOf(bundleURL))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleCreateBundlesFromDirectory func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFBundleCreateBundlesFromDirectory calls the CoreFoundation framework function CFBundleCreateBundlesFromDirectory.
+func CFBundleCreateBundlesFromDirectory(allocator obj.Object, directoryURL obj.Object, bundleType obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleCreateBundlesFromDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleCreateBundlesFromDirectory, _lib, "CFBundleCreateBundlesFromDirectory")
+	}
+	_ret := _fnCFBundleCreateBundlesFromDirectory(objref.IDOf(allocator), objref.IDOf(directoryURL), objref.IDOf(bundleType))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetAllBundles func() objc.ID
+
+// CFBundleGetAllBundles calls the CoreFoundation framework function CFBundleGetAllBundles.
+func CFBundleGetAllBundles() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetAllBundles == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetAllBundles, _lib, "CFBundleGetAllBundles")
+	}
+	_ret := _fnCFBundleGetAllBundles()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetBundleWithIdentifier func(objc.ID) objc.ID
+
+// CFBundleGetBundleWithIdentifier calls the CoreFoundation framework function CFBundleGetBundleWithIdentifier.
+func CFBundleGetBundleWithIdentifier(bundleID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetBundleWithIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetBundleWithIdentifier, _lib, "CFBundleGetBundleWithIdentifier")
+	}
+	_ret := _fnCFBundleGetBundleWithIdentifier(objref.IDOf(bundleID))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetDevelopmentRegion func(objc.ID) objc.ID
+
+// CFBundleGetDevelopmentRegion calls the CoreFoundation framework function CFBundleGetDevelopmentRegion.
+func CFBundleGetDevelopmentRegion(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetDevelopmentRegion == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetDevelopmentRegion, _lib, "CFBundleGetDevelopmentRegion")
+	}
+	_ret := _fnCFBundleGetDevelopmentRegion(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetIdentifier func(objc.ID) objc.ID
+
+// CFBundleGetIdentifier calls the CoreFoundation framework function CFBundleGetIdentifier.
+func CFBundleGetIdentifier(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetIdentifier, _lib, "CFBundleGetIdentifier")
+	}
+	_ret := _fnCFBundleGetIdentifier(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetInfoDictionary func(objc.ID) objc.ID
+
+// CFBundleGetInfoDictionary calls the CoreFoundation framework function CFBundleGetInfoDictionary.
+func CFBundleGetInfoDictionary(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetInfoDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetInfoDictionary, _lib, "CFBundleGetInfoDictionary")
+	}
+	_ret := _fnCFBundleGetInfoDictionary(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetLocalInfoDictionary func(objc.ID) objc.ID
+
+// CFBundleGetLocalInfoDictionary calls the CoreFoundation framework function CFBundleGetLocalInfoDictionary.
+func CFBundleGetLocalInfoDictionary(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetLocalInfoDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetLocalInfoDictionary, _lib, "CFBundleGetLocalInfoDictionary")
+	}
+	_ret := _fnCFBundleGetLocalInfoDictionary(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetMainBundle func() objc.ID
+
+// CFBundleGetMainBundle calls the CoreFoundation framework function CFBundleGetMainBundle.
+func CFBundleGetMainBundle() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetMainBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetMainBundle, _lib, "CFBundleGetMainBundle")
+	}
+	_ret := _fnCFBundleGetMainBundle()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetPlugIn func(objc.ID) objc.ID
+
+// CFBundleGetPlugIn calls the CoreFoundation framework function CFBundleGetPlugIn.
+func CFBundleGetPlugIn(bundle obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetPlugIn == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetPlugIn, _lib, "CFBundleGetPlugIn")
+	}
+	_ret := _fnCFBundleGetPlugIn(objref.IDOf(bundle))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetTypeID func() int
+
+// CFBundleGetTypeID calls the CoreFoundation framework function CFBundleGetTypeID.
+func CFBundleGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetTypeID, _lib, "CFBundleGetTypeID")
+	}
+	return _fnCFBundleGetTypeID()
+}
+
+var _fnCFBundleGetValueForInfoDictionaryKey func(objc.ID, objc.ID) objc.ID
+
+// CFBundleGetValueForInfoDictionaryKey calls the CoreFoundation framework function CFBundleGetValueForInfoDictionaryKey.
+func CFBundleGetValueForInfoDictionaryKey(bundle obj.Object, key obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetValueForInfoDictionaryKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetValueForInfoDictionaryKey, _lib, "CFBundleGetValueForInfoDictionaryKey")
+	}
+	_ret := _fnCFBundleGetValueForInfoDictionaryKey(objref.IDOf(bundle), objref.IDOf(key))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFBundleGetVersionNumber func(objc.ID) int
+
+// CFBundleGetVersionNumber calls the CoreFoundation framework function CFBundleGetVersionNumber.
+func CFBundleGetVersionNumber(bundle obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleGetVersionNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleGetVersionNumber, _lib, "CFBundleGetVersionNumber")
+	}
+	return _fnCFBundleGetVersionNumber(objref.IDOf(bundle))
+}
+
+var _fnCFBundleIsArchitectureLoadable func(int) uint8
+
+// CFBundleIsArchitectureLoadable calls the CoreFoundation framework function CFBundleIsArchitectureLoadable.
+func CFBundleIsArchitectureLoadable(arch int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleIsArchitectureLoadable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleIsArchitectureLoadable, _lib, "CFBundleIsArchitectureLoadable")
+	}
+	return _fnCFBundleIsArchitectureLoadable(arch)
+}
+
+var _fnCFBundleIsExecutableLoadable func(objc.ID) uint8
+
+// CFBundleIsExecutableLoadable calls the CoreFoundation framework function CFBundleIsExecutableLoadable.
+func CFBundleIsExecutableLoadable(bundle obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleIsExecutableLoadable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadable, _lib, "CFBundleIsExecutableLoadable")
+	}
+	return _fnCFBundleIsExecutableLoadable(objref.IDOf(bundle))
+}
+
+var _fnCFBundleIsExecutableLoadableForURL func(objc.ID) uint8
+
+// CFBundleIsExecutableLoadableForURL calls the CoreFoundation framework function CFBundleIsExecutableLoadableForURL.
+func CFBundleIsExecutableLoadableForURL(url obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleIsExecutableLoadableForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleIsExecutableLoadableForURL, _lib, "CFBundleIsExecutableLoadableForURL")
+	}
+	return _fnCFBundleIsExecutableLoadableForURL(objref.IDOf(url))
+}
+
+var _fnCFBundleIsExecutableLoaded func(objc.ID) uint8
+
+// CFBundleIsExecutableLoaded calls the CoreFoundation framework function CFBundleIsExecutableLoaded.
+func CFBundleIsExecutableLoaded(bundle obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleIsExecutableLoaded == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleIsExecutableLoaded, _lib, "CFBundleIsExecutableLoaded")
+	}
+	return _fnCFBundleIsExecutableLoaded(objref.IDOf(bundle))
+}
+
+var _fnCFBundleLoadExecutable func(objc.ID) uint8
+
+// CFBundleLoadExecutable calls the CoreFoundation framework function CFBundleLoadExecutable.
+func CFBundleLoadExecutable(bundle obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleLoadExecutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleLoadExecutable, _lib, "CFBundleLoadExecutable")
+	}
+	return _fnCFBundleLoadExecutable(objref.IDOf(bundle))
+}
+
+var _fnCFBundleOpenBundleResourceMap func(objc.ID) int
+
+// CFBundleOpenBundleResourceMap calls the CoreFoundation framework function CFBundleOpenBundleResourceMap.
+func CFBundleOpenBundleResourceMap(bundle obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleOpenBundleResourceMap == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceMap, _lib, "CFBundleOpenBundleResourceMap")
+	}
+	return _fnCFBundleOpenBundleResourceMap(objref.IDOf(bundle))
+}
+
+var _fnCFBundleUnloadExecutable func(objc.ID)
+
+// CFBundleUnloadExecutable calls the CoreFoundation framework function CFBundleUnloadExecutable.
+func CFBundleUnloadExecutable(bundle obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBundleUnloadExecutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBundleUnloadExecutable, _lib, "CFBundleUnloadExecutable")
+	}
+	_fnCFBundleUnloadExecutable(objref.IDOf(bundle))
+}
+
+var _fnCFByteOrderGetCurrent func() int
+
+// CFByteOrderGetCurrent calls the CoreFoundation framework function CFByteOrderGetCurrent.
+func CFByteOrderGetCurrent() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFByteOrderGetCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFByteOrderGetCurrent, _lib, "CFByteOrderGetCurrent")
+	}
+	return _fnCFByteOrderGetCurrent()
+}
+
+var _fnCFCalendarCopyCurrent func() objc.ID
+
+// CFCalendarCopyCurrent calls the CoreFoundation framework function CFCalendarCopyCurrent.
+func CFCalendarCopyCurrent() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarCopyCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyCurrent, _lib, "CFCalendarCopyCurrent")
+	}
+	_ret := _fnCFCalendarCopyCurrent()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCalendarCopyLocale func(objc.ID) objc.ID
+
+// CFCalendarCopyLocale calls the CoreFoundation framework function CFCalendarCopyLocale.
+func CFCalendarCopyLocale(calendar obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarCopyLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyLocale, _lib, "CFCalendarCopyLocale")
+	}
+	_ret := _fnCFCalendarCopyLocale(objref.IDOf(calendar))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCalendarCopyTimeZone func(objc.ID) objc.ID
+
+// CFCalendarCopyTimeZone calls the CoreFoundation framework function CFCalendarCopyTimeZone.
+func CFCalendarCopyTimeZone(calendar obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarCopyTimeZone == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarCopyTimeZone, _lib, "CFCalendarCopyTimeZone")
+	}
+	_ret := _fnCFCalendarCopyTimeZone(objref.IDOf(calendar))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCalendarGetFirstWeekday func(objc.ID) int
+
+// CFCalendarGetFirstWeekday calls the CoreFoundation framework function CFCalendarGetFirstWeekday.
+func CFCalendarGetFirstWeekday(calendar obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarGetFirstWeekday == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarGetFirstWeekday, _lib, "CFCalendarGetFirstWeekday")
+	}
+	return _fnCFCalendarGetFirstWeekday(objref.IDOf(calendar))
+}
+
+var _fnCFCalendarGetMinimumDaysInFirstWeek func(objc.ID) int
+
+// CFCalendarGetMinimumDaysInFirstWeek calls the CoreFoundation framework function CFCalendarGetMinimumDaysInFirstWeek.
+func CFCalendarGetMinimumDaysInFirstWeek(calendar obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarGetMinimumDaysInFirstWeek == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarGetMinimumDaysInFirstWeek, _lib, "CFCalendarGetMinimumDaysInFirstWeek")
+	}
+	return _fnCFCalendarGetMinimumDaysInFirstWeek(objref.IDOf(calendar))
+}
+
+var _fnCFCalendarGetOrdinalityOfUnit func(objc.ID, CFCalendarUnit, CFCalendarUnit, float64) int
+
+// CFCalendarGetOrdinalityOfUnit calls the CoreFoundation framework function CFCalendarGetOrdinalityOfUnit.
+func CFCalendarGetOrdinalityOfUnit(calendar obj.Object, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarGetOrdinalityOfUnit == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarGetOrdinalityOfUnit, _lib, "CFCalendarGetOrdinalityOfUnit")
+	}
+	return _fnCFCalendarGetOrdinalityOfUnit(objref.IDOf(calendar), smallerUnit, biggerUnit, at)
+}
+
+var _fnCFCalendarGetTypeID func() int
+
+// CFCalendarGetTypeID calls the CoreFoundation framework function CFCalendarGetTypeID.
+func CFCalendarGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarGetTypeID, _lib, "CFCalendarGetTypeID")
+	}
+	return _fnCFCalendarGetTypeID()
+}
+
+var _fnCFCalendarSetFirstWeekday func(objc.ID, int)
+
+// CFCalendarSetFirstWeekday calls the CoreFoundation framework function CFCalendarSetFirstWeekday.
+func CFCalendarSetFirstWeekday(calendar obj.Object, wkdy int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarSetFirstWeekday == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarSetFirstWeekday, _lib, "CFCalendarSetFirstWeekday")
+	}
+	_fnCFCalendarSetFirstWeekday(objref.IDOf(calendar), wkdy)
+}
+
+var _fnCFCalendarSetLocale func(objc.ID, objc.ID)
+
+// CFCalendarSetLocale calls the CoreFoundation framework function CFCalendarSetLocale.
+func CFCalendarSetLocale(calendar obj.Object, locale obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarSetLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarSetLocale, _lib, "CFCalendarSetLocale")
+	}
+	_fnCFCalendarSetLocale(objref.IDOf(calendar), objref.IDOf(locale))
+}
+
+var _fnCFCalendarSetMinimumDaysInFirstWeek func(objc.ID, int)
+
+// CFCalendarSetMinimumDaysInFirstWeek calls the CoreFoundation framework function CFCalendarSetMinimumDaysInFirstWeek.
+func CFCalendarSetMinimumDaysInFirstWeek(calendar obj.Object, mwd int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarSetMinimumDaysInFirstWeek == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarSetMinimumDaysInFirstWeek, _lib, "CFCalendarSetMinimumDaysInFirstWeek")
+	}
+	_fnCFCalendarSetMinimumDaysInFirstWeek(objref.IDOf(calendar), mwd)
+}
+
+var _fnCFCalendarSetTimeZone func(objc.ID, objc.ID)
+
+// CFCalendarSetTimeZone calls the CoreFoundation framework function CFCalendarSetTimeZone.
+func CFCalendarSetTimeZone(calendar obj.Object, tz obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCalendarSetTimeZone == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCalendarSetTimeZone, _lib, "CFCalendarSetTimeZone")
+	}
+	_fnCFCalendarSetTimeZone(objref.IDOf(calendar), objref.IDOf(tz))
+}
+
+var _fnCFCharacterSetAddCharactersInString func(objc.ID, objc.ID)
+
+// CFCharacterSetAddCharactersInString calls the CoreFoundation framework function CFCharacterSetAddCharactersInString.
+func CFCharacterSetAddCharactersInString(theSet obj.Object, theString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetAddCharactersInString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetAddCharactersInString, _lib, "CFCharacterSetAddCharactersInString")
+	}
+	_fnCFCharacterSetAddCharactersInString(objref.IDOf(theSet), objref.IDOf(theString))
+}
+
+var _fnCFCharacterSetCreateBitmapRepresentation func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateBitmapRepresentation calls the CoreFoundation framework function CFCharacterSetCreateBitmapRepresentation.
+func CFCharacterSetCreateBitmapRepresentation(alloc obj.Object, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateBitmapRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateBitmapRepresentation, _lib, "CFCharacterSetCreateBitmapRepresentation")
+	}
+	_ret := _fnCFCharacterSetCreateBitmapRepresentation(objref.IDOf(alloc), objref.IDOf(theSet))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateCopy calls the CoreFoundation framework function CFCharacterSetCreateCopy.
+func CFCharacterSetCreateCopy(alloc obj.Object, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateCopy, _lib, "CFCharacterSetCreateCopy")
+	}
+	_ret := _fnCFCharacterSetCreateCopy(objref.IDOf(alloc), objref.IDOf(theSet))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateInvertedSet func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateInvertedSet calls the CoreFoundation framework function CFCharacterSetCreateInvertedSet.
+func CFCharacterSetCreateInvertedSet(alloc obj.Object, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateInvertedSet == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateInvertedSet, _lib, "CFCharacterSetCreateInvertedSet")
+	}
+	_ret := _fnCFCharacterSetCreateInvertedSet(objref.IDOf(alloc), objref.IDOf(theSet))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateMutable func(objc.ID) objc.ID
+
+// CFCharacterSetCreateMutable calls the CoreFoundation framework function CFCharacterSetCreateMutable.
+func CFCharacterSetCreateMutable(alloc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateMutable, _lib, "CFCharacterSetCreateMutable")
+	}
+	_ret := _fnCFCharacterSetCreateMutable(objref.IDOf(alloc))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateMutableCopy func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateMutableCopy calls the CoreFoundation framework function CFCharacterSetCreateMutableCopy.
+func CFCharacterSetCreateMutableCopy(alloc obj.Object, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateMutableCopy, _lib, "CFCharacterSetCreateMutableCopy")
+	}
+	_ret := _fnCFCharacterSetCreateMutableCopy(objref.IDOf(alloc), objref.IDOf(theSet))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateWithBitmapRepresentation func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateWithBitmapRepresentation calls the CoreFoundation framework function CFCharacterSetCreateWithBitmapRepresentation.
+func CFCharacterSetCreateWithBitmapRepresentation(alloc obj.Object, theData obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateWithBitmapRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateWithBitmapRepresentation, _lib, "CFCharacterSetCreateWithBitmapRepresentation")
+	}
+	_ret := _fnCFCharacterSetCreateWithBitmapRepresentation(objref.IDOf(alloc), objref.IDOf(theData))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetCreateWithCharactersInString func(objc.ID, objc.ID) objc.ID
+
+// CFCharacterSetCreateWithCharactersInString calls the CoreFoundation framework function CFCharacterSetCreateWithCharactersInString.
+func CFCharacterSetCreateWithCharactersInString(alloc obj.Object, theString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetCreateWithCharactersInString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetCreateWithCharactersInString, _lib, "CFCharacterSetCreateWithCharactersInString")
+	}
+	_ret := _fnCFCharacterSetCreateWithCharactersInString(objref.IDOf(alloc), objref.IDOf(theString))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetGetPredefined func(CFCharacterSetPredefinedSet) objc.ID
+
+// CFCharacterSetGetPredefined calls the CoreFoundation framework function CFCharacterSetGetPredefined.
+func CFCharacterSetGetPredefined(theSetIdentifier CFCharacterSetPredefinedSet) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetGetPredefined == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetGetPredefined, _lib, "CFCharacterSetGetPredefined")
+	}
+	_ret := _fnCFCharacterSetGetPredefined(theSetIdentifier)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCharacterSetGetTypeID func() int
+
+// CFCharacterSetGetTypeID calls the CoreFoundation framework function CFCharacterSetGetTypeID.
+func CFCharacterSetGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetGetTypeID, _lib, "CFCharacterSetGetTypeID")
+	}
+	return _fnCFCharacterSetGetTypeID()
+}
+
+var _fnCFCharacterSetHasMemberInPlane func(objc.ID, int) uint8
+
+// CFCharacterSetHasMemberInPlane calls the CoreFoundation framework function CFCharacterSetHasMemberInPlane.
+func CFCharacterSetHasMemberInPlane(theSet obj.Object, thePlane int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetHasMemberInPlane == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetHasMemberInPlane, _lib, "CFCharacterSetHasMemberInPlane")
+	}
+	return _fnCFCharacterSetHasMemberInPlane(objref.IDOf(theSet), thePlane)
+}
+
+var _fnCFCharacterSetIntersect func(objc.ID, objc.ID)
+
+// CFCharacterSetIntersect calls the CoreFoundation framework function CFCharacterSetIntersect.
+func CFCharacterSetIntersect(theSet obj.Object, theOtherSet obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetIntersect == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetIntersect, _lib, "CFCharacterSetIntersect")
+	}
+	_fnCFCharacterSetIntersect(objref.IDOf(theSet), objref.IDOf(theOtherSet))
+}
+
+var _fnCFCharacterSetInvert func(objc.ID)
+
+// CFCharacterSetInvert calls the CoreFoundation framework function CFCharacterSetInvert.
+func CFCharacterSetInvert(theSet obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetInvert == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetInvert, _lib, "CFCharacterSetInvert")
+	}
+	_fnCFCharacterSetInvert(objref.IDOf(theSet))
+}
+
+var _fnCFCharacterSetIsCharacterMember func(objc.ID, uint16) uint8
+
+// CFCharacterSetIsCharacterMember calls the CoreFoundation framework function CFCharacterSetIsCharacterMember.
+func CFCharacterSetIsCharacterMember(theSet obj.Object, theChar uint16) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetIsCharacterMember == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetIsCharacterMember, _lib, "CFCharacterSetIsCharacterMember")
+	}
+	return _fnCFCharacterSetIsCharacterMember(objref.IDOf(theSet), theChar)
+}
+
+var _fnCFCharacterSetIsLongCharacterMember func(objc.ID, int) uint8
+
+// CFCharacterSetIsLongCharacterMember calls the CoreFoundation framework function CFCharacterSetIsLongCharacterMember.
+func CFCharacterSetIsLongCharacterMember(theSet obj.Object, theChar int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetIsLongCharacterMember == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetIsLongCharacterMember, _lib, "CFCharacterSetIsLongCharacterMember")
+	}
+	return _fnCFCharacterSetIsLongCharacterMember(objref.IDOf(theSet), theChar)
+}
+
+var _fnCFCharacterSetIsSupersetOfSet func(objc.ID, objc.ID) uint8
+
+// CFCharacterSetIsSupersetOfSet calls the CoreFoundation framework function CFCharacterSetIsSupersetOfSet.
+func CFCharacterSetIsSupersetOfSet(theSet obj.Object, theOtherset obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetIsSupersetOfSet == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetIsSupersetOfSet, _lib, "CFCharacterSetIsSupersetOfSet")
+	}
+	return _fnCFCharacterSetIsSupersetOfSet(objref.IDOf(theSet), objref.IDOf(theOtherset))
+}
+
+var _fnCFCharacterSetRemoveCharactersInString func(objc.ID, objc.ID)
+
+// CFCharacterSetRemoveCharactersInString calls the CoreFoundation framework function CFCharacterSetRemoveCharactersInString.
+func CFCharacterSetRemoveCharactersInString(theSet obj.Object, theString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetRemoveCharactersInString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetRemoveCharactersInString, _lib, "CFCharacterSetRemoveCharactersInString")
+	}
+	_fnCFCharacterSetRemoveCharactersInString(objref.IDOf(theSet), objref.IDOf(theString))
+}
+
+var _fnCFCharacterSetUnion func(objc.ID, objc.ID)
+
+// CFCharacterSetUnion calls the CoreFoundation framework function CFCharacterSetUnion.
+func CFCharacterSetUnion(theSet obj.Object, theOtherSet obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCharacterSetUnion == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCharacterSetUnion, _lib, "CFCharacterSetUnion")
+	}
+	_fnCFCharacterSetUnion(objref.IDOf(theSet), objref.IDOf(theOtherSet))
+}
+
+var _fnCFCopyDescription func(objc.ID) objc.ID
+
+// CFCopyDescription calls the CoreFoundation framework function CFCopyDescription.
+func CFCopyDescription(cf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCopyDescription, _lib, "CFCopyDescription")
+	}
+	_ret := _fnCFCopyDescription(objref.IDOf(cf))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFCopyTypeIDDescription func(int) objc.ID
+
+// CFCopyTypeIDDescription calls the CoreFoundation framework function CFCopyTypeIDDescription.
+func CFCopyTypeIDDescription(type_id int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFCopyTypeIDDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCFCopyTypeIDDescription, _lib, "CFCopyTypeIDDescription")
+	}
+	_ret := _fnCFCopyTypeIDDescription(type_id)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDataCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFDataCreateCopy calls the CoreFoundation framework function CFDataCreateCopy.
+func CFDataCreateCopy(allocator obj.Object, theData obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataCreateCopy, _lib, "CFDataCreateCopy")
+	}
+	_ret := _fnCFDataCreateCopy(objref.IDOf(allocator), objref.IDOf(theData))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDataCreateMutable func(objc.ID, int) objc.ID
+
+// CFDataCreateMutable calls the CoreFoundation framework function CFDataCreateMutable.
+func CFDataCreateMutable(allocator obj.Object, capacity int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataCreateMutable, _lib, "CFDataCreateMutable")
+	}
+	_ret := _fnCFDataCreateMutable(objref.IDOf(allocator), capacity)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDataCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFDataCreateMutableCopy calls the CoreFoundation framework function CFDataCreateMutableCopy.
+func CFDataCreateMutableCopy(allocator obj.Object, capacity int, theData obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataCreateMutableCopy, _lib, "CFDataCreateMutableCopy")
+	}
+	_ret := _fnCFDataCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(theData))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDataGetLength func(objc.ID) int
+
+// CFDataGetLength calls the CoreFoundation framework function CFDataGetLength.
+func CFDataGetLength(theData obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataGetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataGetLength, _lib, "CFDataGetLength")
+	}
+	return _fnCFDataGetLength(objref.IDOf(theData))
+}
+
+var _fnCFDataGetTypeID func() int
+
+// CFDataGetTypeID calls the CoreFoundation framework function CFDataGetTypeID.
+func CFDataGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataGetTypeID, _lib, "CFDataGetTypeID")
+	}
+	return _fnCFDataGetTypeID()
+}
+
+var _fnCFDataIncreaseLength func(objc.ID, int)
+
+// CFDataIncreaseLength calls the CoreFoundation framework function CFDataIncreaseLength.
+func CFDataIncreaseLength(theData obj.Object, extraLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataIncreaseLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataIncreaseLength, _lib, "CFDataIncreaseLength")
+	}
+	_fnCFDataIncreaseLength(objref.IDOf(theData), extraLength)
+}
+
+var _fnCFDataSetLength func(objc.ID, int)
+
+// CFDataSetLength calls the CoreFoundation framework function CFDataSetLength.
+func CFDataSetLength(theData obj.Object, length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDataSetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDataSetLength, _lib, "CFDataSetLength")
+	}
+	_fnCFDataSetLength(objref.IDOf(theData), length)
+}
+
+var _fnCFDateCreate func(objc.ID, float64) objc.ID
+
+// CFDateCreate calls the CoreFoundation framework function CFDateCreate.
+func CFDateCreate(allocator obj.Object, at float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateCreate, _lib, "CFDateCreate")
+	}
+	_ret := _fnCFDateCreate(objref.IDOf(allocator), at)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterCreate func(objc.ID, objc.ID, CFDateFormatterStyle, CFDateFormatterStyle) objc.ID
+
+// CFDateFormatterCreate calls the CoreFoundation framework function CFDateFormatterCreate.
+func CFDateFormatterCreate(allocator obj.Object, locale obj.Object, dateStyle CFDateFormatterStyle, timeStyle CFDateFormatterStyle) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreate, _lib, "CFDateFormatterCreate")
+	}
+	_ret := _fnCFDateFormatterCreate(objref.IDOf(allocator), objref.IDOf(locale), dateStyle, timeStyle)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterCreateDateFormatFromTemplate func(objc.ID, objc.ID, int, objc.ID) objc.ID
+
+// CFDateFormatterCreateDateFormatFromTemplate calls the CoreFoundation framework function CFDateFormatterCreateDateFormatFromTemplate.
+func CFDateFormatterCreateDateFormatFromTemplate(allocator obj.Object, tmplate obj.Object, options int, locale obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterCreateDateFormatFromTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateDateFormatFromTemplate, _lib, "CFDateFormatterCreateDateFormatFromTemplate")
+	}
+	_ret := _fnCFDateFormatterCreateDateFormatFromTemplate(objref.IDOf(allocator), objref.IDOf(tmplate), options, objref.IDOf(locale))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterCreateISO8601Formatter func(objc.ID, CFISO8601DateFormatOptions) objc.ID
+
+// CFDateFormatterCreateISO8601Formatter calls the CoreFoundation framework function CFDateFormatterCreateISO8601Formatter.
+func CFDateFormatterCreateISO8601Formatter(allocator obj.Object, formatOptions CFISO8601DateFormatOptions) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterCreateISO8601Formatter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateISO8601Formatter, _lib, "CFDateFormatterCreateISO8601Formatter")
+	}
+	_ret := _fnCFDateFormatterCreateISO8601Formatter(objref.IDOf(allocator), formatOptions)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterCreateStringWithAbsoluteTime func(objc.ID, objc.ID, float64) objc.ID
+
+// CFDateFormatterCreateStringWithAbsoluteTime calls the CoreFoundation framework function CFDateFormatterCreateStringWithAbsoluteTime.
+func CFDateFormatterCreateStringWithAbsoluteTime(allocator obj.Object, formatter obj.Object, at float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterCreateStringWithAbsoluteTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithAbsoluteTime, _lib, "CFDateFormatterCreateStringWithAbsoluteTime")
+	}
+	_ret := _fnCFDateFormatterCreateStringWithAbsoluteTime(objref.IDOf(allocator), objref.IDOf(formatter), at)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterCreateStringWithDate func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFDateFormatterCreateStringWithDate calls the CoreFoundation framework function CFDateFormatterCreateStringWithDate.
+func CFDateFormatterCreateStringWithDate(allocator obj.Object, formatter obj.Object, date obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterCreateStringWithDate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterCreateStringWithDate, _lib, "CFDateFormatterCreateStringWithDate")
+	}
+	_ret := _fnCFDateFormatterCreateStringWithDate(objref.IDOf(allocator), objref.IDOf(formatter), objref.IDOf(date))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterGetDateStyle func(objc.ID) CFDateFormatterStyle
+
+// CFDateFormatterGetDateStyle calls the CoreFoundation framework function CFDateFormatterGetDateStyle.
+func CFDateFormatterGetDateStyle(formatter obj.Object) CFDateFormatterStyle {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterGetDateStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetDateStyle, _lib, "CFDateFormatterGetDateStyle")
+	}
+	return _fnCFDateFormatterGetDateStyle(objref.IDOf(formatter))
+}
+
+var _fnCFDateFormatterGetFormat func(objc.ID) objc.ID
+
+// CFDateFormatterGetFormat calls the CoreFoundation framework function CFDateFormatterGetFormat.
+func CFDateFormatterGetFormat(formatter obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterGetFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetFormat, _lib, "CFDateFormatterGetFormat")
+	}
+	_ret := _fnCFDateFormatterGetFormat(objref.IDOf(formatter))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterGetLocale func(objc.ID) objc.ID
+
+// CFDateFormatterGetLocale calls the CoreFoundation framework function CFDateFormatterGetLocale.
+func CFDateFormatterGetLocale(formatter obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterGetLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetLocale, _lib, "CFDateFormatterGetLocale")
+	}
+	_ret := _fnCFDateFormatterGetLocale(objref.IDOf(formatter))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDateFormatterGetTimeStyle func(objc.ID) CFDateFormatterStyle
+
+// CFDateFormatterGetTimeStyle calls the CoreFoundation framework function CFDateFormatterGetTimeStyle.
+func CFDateFormatterGetTimeStyle(formatter obj.Object) CFDateFormatterStyle {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterGetTimeStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetTimeStyle, _lib, "CFDateFormatterGetTimeStyle")
+	}
+	return _fnCFDateFormatterGetTimeStyle(objref.IDOf(formatter))
+}
+
+var _fnCFDateFormatterGetTypeID func() int
+
+// CFDateFormatterGetTypeID calls the CoreFoundation framework function CFDateFormatterGetTypeID.
+func CFDateFormatterGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterGetTypeID, _lib, "CFDateFormatterGetTypeID")
+	}
+	return _fnCFDateFormatterGetTypeID()
+}
+
+var _fnCFDateFormatterSetFormat func(objc.ID, objc.ID)
+
+// CFDateFormatterSetFormat calls the CoreFoundation framework function CFDateFormatterSetFormat.
+func CFDateFormatterSetFormat(formatter obj.Object, formatString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterSetFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterSetFormat, _lib, "CFDateFormatterSetFormat")
+	}
+	_fnCFDateFormatterSetFormat(objref.IDOf(formatter), objref.IDOf(formatString))
+}
+
+var _fnCFDateFormatterSetProperty func(objc.ID, objc.ID, objc.ID)
+
+// CFDateFormatterSetProperty calls the CoreFoundation framework function CFDateFormatterSetProperty.
+func CFDateFormatterSetProperty(formatter obj.Object, key obj.Object, value obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateFormatterSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateFormatterSetProperty, _lib, "CFDateFormatterSetProperty")
+	}
+	_fnCFDateFormatterSetProperty(objref.IDOf(formatter), objref.IDOf(key), objref.IDOf(value))
+}
+
+var _fnCFDateGetAbsoluteTime func(objc.ID) float64
+
+// CFDateGetAbsoluteTime calls the CoreFoundation framework function CFDateGetAbsoluteTime.
+func CFDateGetAbsoluteTime(theDate obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateGetAbsoluteTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateGetAbsoluteTime, _lib, "CFDateGetAbsoluteTime")
+	}
+	return _fnCFDateGetAbsoluteTime(objref.IDOf(theDate))
+}
+
+var _fnCFDateGetTimeIntervalSinceDate func(objc.ID, objc.ID) float64
+
+// CFDateGetTimeIntervalSinceDate calls the CoreFoundation framework function CFDateGetTimeIntervalSinceDate.
+func CFDateGetTimeIntervalSinceDate(theDate obj.Object, otherDate obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateGetTimeIntervalSinceDate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateGetTimeIntervalSinceDate, _lib, "CFDateGetTimeIntervalSinceDate")
+	}
+	return _fnCFDateGetTimeIntervalSinceDate(objref.IDOf(theDate), objref.IDOf(otherDate))
+}
+
+var _fnCFDateGetTypeID func() int
+
+// CFDateGetTypeID calls the CoreFoundation framework function CFDateGetTypeID.
+func CFDateGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDateGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDateGetTypeID, _lib, "CFDateGetTypeID")
+	}
+	return _fnCFDateGetTypeID()
+}
+
+var _fnCFDictionaryCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFDictionaryCreateCopy calls the CoreFoundation framework function CFDictionaryCreateCopy.
+func CFDictionaryCreateCopy(allocator obj.Object, theDict obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDictionaryCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreateCopy, _lib, "CFDictionaryCreateCopy")
+	}
+	_ret := _fnCFDictionaryCreateCopy(objref.IDOf(allocator), objref.IDOf(theDict))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDictionaryCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFDictionaryCreateMutableCopy calls the CoreFoundation framework function CFDictionaryCreateMutableCopy.
+func CFDictionaryCreateMutableCopy(allocator obj.Object, capacity int, theDict obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDictionaryCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDictionaryCreateMutableCopy, _lib, "CFDictionaryCreateMutableCopy")
+	}
+	_ret := _fnCFDictionaryCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(theDict))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFDictionaryGetCount func(objc.ID) int
+
+// CFDictionaryGetCount calls the CoreFoundation framework function CFDictionaryGetCount.
+func CFDictionaryGetCount(theDict obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDictionaryGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDictionaryGetCount, _lib, "CFDictionaryGetCount")
+	}
+	return _fnCFDictionaryGetCount(objref.IDOf(theDict))
+}
+
+var _fnCFDictionaryGetTypeID func() int
+
+// CFDictionaryGetTypeID calls the CoreFoundation framework function CFDictionaryGetTypeID.
+func CFDictionaryGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDictionaryGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDictionaryGetTypeID, _lib, "CFDictionaryGetTypeID")
+	}
+	return _fnCFDictionaryGetTypeID()
+}
+
+var _fnCFDictionaryRemoveAllValues func(objc.ID)
+
+// CFDictionaryRemoveAllValues calls the CoreFoundation framework function CFDictionaryRemoveAllValues.
+func CFDictionaryRemoveAllValues(theDict obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFDictionaryRemoveAllValues == nil {
+		ebipurego.RegisterLibFunc(&_fnCFDictionaryRemoveAllValues, _lib, "CFDictionaryRemoveAllValues")
+	}
+	_fnCFDictionaryRemoveAllValues(objref.IDOf(theDict))
+}
+
+var _fnCFEqual func(objc.ID, objc.ID) uint8
+
+// CFEqual calls the CoreFoundation framework function CFEqual.
+func CFEqual(cf1 obj.Object, cf2 obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnCFEqual, _lib, "CFEqual")
+	}
+	return _fnCFEqual(objref.IDOf(cf1), objref.IDOf(cf2))
+}
+
+var _fnCFErrorCopyDescription func(objc.ID) objc.ID
+
+// CFErrorCopyDescription calls the CoreFoundation framework function CFErrorCopyDescription.
+func CFErrorCopyDescription(err obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorCopyDescription, _lib, "CFErrorCopyDescription")
+	}
+	_ret := _fnCFErrorCopyDescription(objref.IDOf(err))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFErrorCopyFailureReason func(objc.ID) objc.ID
+
+// CFErrorCopyFailureReason calls the CoreFoundation framework function CFErrorCopyFailureReason.
+func CFErrorCopyFailureReason(err obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorCopyFailureReason == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorCopyFailureReason, _lib, "CFErrorCopyFailureReason")
+	}
+	_ret := _fnCFErrorCopyFailureReason(objref.IDOf(err))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFErrorCopyRecoverySuggestion func(objc.ID) objc.ID
+
+// CFErrorCopyRecoverySuggestion calls the CoreFoundation framework function CFErrorCopyRecoverySuggestion.
+func CFErrorCopyRecoverySuggestion(err obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorCopyRecoverySuggestion == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorCopyRecoverySuggestion, _lib, "CFErrorCopyRecoverySuggestion")
+	}
+	_ret := _fnCFErrorCopyRecoverySuggestion(objref.IDOf(err))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFErrorCopyUserInfo func(objc.ID) objc.ID
+
+// CFErrorCopyUserInfo calls the CoreFoundation framework function CFErrorCopyUserInfo.
+func CFErrorCopyUserInfo(err obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorCopyUserInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorCopyUserInfo, _lib, "CFErrorCopyUserInfo")
+	}
+	_ret := _fnCFErrorCopyUserInfo(objref.IDOf(err))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFErrorGetCode func(objc.ID) int
+
+// CFErrorGetCode calls the CoreFoundation framework function CFErrorGetCode.
+func CFErrorGetCode(err obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorGetCode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorGetCode, _lib, "CFErrorGetCode")
+	}
+	return _fnCFErrorGetCode(objref.IDOf(err))
+}
+
+var _fnCFErrorGetTypeID func() int
+
+// CFErrorGetTypeID calls the CoreFoundation framework function CFErrorGetTypeID.
+func CFErrorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFErrorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFErrorGetTypeID, _lib, "CFErrorGetTypeID")
+	}
+	return _fnCFErrorGetTypeID()
+}
+
+var _fnCFFileDescriptorCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
+
+// CFFileDescriptorCreateRunLoopSource calls the CoreFoundation framework function CFFileDescriptorCreateRunLoopSource.
+func CFFileDescriptorCreateRunLoopSource(allocator obj.Object, f obj.Object, order int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorCreateRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorCreateRunLoopSource, _lib, "CFFileDescriptorCreateRunLoopSource")
+	}
+	_ret := _fnCFFileDescriptorCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(f), order)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFFileDescriptorDisableCallBacks func(objc.ID, int)
+
+// CFFileDescriptorDisableCallBacks calls the CoreFoundation framework function CFFileDescriptorDisableCallBacks.
+func CFFileDescriptorDisableCallBacks(f obj.Object, callBackTypes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorDisableCallBacks == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorDisableCallBacks, _lib, "CFFileDescriptorDisableCallBacks")
+	}
+	_fnCFFileDescriptorDisableCallBacks(objref.IDOf(f), callBackTypes)
+}
+
+var _fnCFFileDescriptorEnableCallBacks func(objc.ID, int)
+
+// CFFileDescriptorEnableCallBacks calls the CoreFoundation framework function CFFileDescriptorEnableCallBacks.
+func CFFileDescriptorEnableCallBacks(f obj.Object, callBackTypes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorEnableCallBacks == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorEnableCallBacks, _lib, "CFFileDescriptorEnableCallBacks")
+	}
+	_fnCFFileDescriptorEnableCallBacks(objref.IDOf(f), callBackTypes)
+}
+
+var _fnCFFileDescriptorGetNativeDescriptor func(objc.ID) int
+
+// CFFileDescriptorGetNativeDescriptor calls the CoreFoundation framework function CFFileDescriptorGetNativeDescriptor.
+func CFFileDescriptorGetNativeDescriptor(f obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorGetNativeDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorGetNativeDescriptor, _lib, "CFFileDescriptorGetNativeDescriptor")
+	}
+	return _fnCFFileDescriptorGetNativeDescriptor(objref.IDOf(f))
+}
+
+var _fnCFFileDescriptorGetTypeID func() int
+
+// CFFileDescriptorGetTypeID calls the CoreFoundation framework function CFFileDescriptorGetTypeID.
+func CFFileDescriptorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorGetTypeID, _lib, "CFFileDescriptorGetTypeID")
+	}
+	return _fnCFFileDescriptorGetTypeID()
+}
+
+var _fnCFFileDescriptorInvalidate func(objc.ID)
+
+// CFFileDescriptorInvalidate calls the CoreFoundation framework function CFFileDescriptorInvalidate.
+func CFFileDescriptorInvalidate(f obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorInvalidate, _lib, "CFFileDescriptorInvalidate")
+	}
+	_fnCFFileDescriptorInvalidate(objref.IDOf(f))
+}
+
+var _fnCFFileDescriptorIsValid func(objc.ID) uint8
+
+// CFFileDescriptorIsValid calls the CoreFoundation framework function CFFileDescriptorIsValid.
+func CFFileDescriptorIsValid(f obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileDescriptorIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorIsValid, _lib, "CFFileDescriptorIsValid")
+	}
+	return _fnCFFileDescriptorIsValid(objref.IDOf(f))
+}
+
+var _fnCFFileSecurityClearProperties func(objc.ID, CFFileSecurityClearOptions) uint8
+
+// CFFileSecurityClearProperties calls the CoreFoundation framework function CFFileSecurityClearProperties.
+func CFFileSecurityClearProperties(fileSec obj.Object, clearPropertyMask CFFileSecurityClearOptions) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecurityClearProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecurityClearProperties, _lib, "CFFileSecurityClearProperties")
+	}
+	return _fnCFFileSecurityClearProperties(objref.IDOf(fileSec), clearPropertyMask)
+}
+
+var _fnCFFileSecurityCreate func(objc.ID) objc.ID
+
+// CFFileSecurityCreate calls the CoreFoundation framework function CFFileSecurityCreate.
+func CFFileSecurityCreate(allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecurityCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecurityCreate, _lib, "CFFileSecurityCreate")
+	}
+	_ret := _fnCFFileSecurityCreate(objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFFileSecurityCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFFileSecurityCreateCopy calls the CoreFoundation framework function CFFileSecurityCreateCopy.
+func CFFileSecurityCreateCopy(allocator obj.Object, fileSec obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecurityCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecurityCreateCopy, _lib, "CFFileSecurityCreateCopy")
+	}
+	_ret := _fnCFFileSecurityCreateCopy(objref.IDOf(allocator), objref.IDOf(fileSec))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFFileSecurityGetTypeID func() int
+
+// CFFileSecurityGetTypeID calls the CoreFoundation framework function CFFileSecurityGetTypeID.
+func CFFileSecurityGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecurityGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecurityGetTypeID, _lib, "CFFileSecurityGetTypeID")
+	}
+	return _fnCFFileSecurityGetTypeID()
+}
+
+var _fnCFFileSecuritySetGroup func(objc.ID, int) uint8
+
+// CFFileSecuritySetGroup calls the CoreFoundation framework function CFFileSecuritySetGroup.
+func CFFileSecuritySetGroup(fileSec obj.Object, group int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecuritySetGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecuritySetGroup, _lib, "CFFileSecuritySetGroup")
+	}
+	return _fnCFFileSecuritySetGroup(objref.IDOf(fileSec), group)
+}
+
+var _fnCFFileSecuritySetGroupUUID func(objc.ID, objc.ID) uint8
+
+// CFFileSecuritySetGroupUUID calls the CoreFoundation framework function CFFileSecuritySetGroupUUID.
+func CFFileSecuritySetGroupUUID(fileSec obj.Object, groupUUID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecuritySetGroupUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecuritySetGroupUUID, _lib, "CFFileSecuritySetGroupUUID")
+	}
+	return _fnCFFileSecuritySetGroupUUID(objref.IDOf(fileSec), objref.IDOf(groupUUID))
+}
+
+var _fnCFFileSecuritySetMode func(objc.ID, uint16) uint8
+
+// CFFileSecuritySetMode calls the CoreFoundation framework function CFFileSecuritySetMode.
+func CFFileSecuritySetMode(fileSec obj.Object, mode uint16) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecuritySetMode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecuritySetMode, _lib, "CFFileSecuritySetMode")
+	}
+	return _fnCFFileSecuritySetMode(objref.IDOf(fileSec), mode)
+}
+
+var _fnCFFileSecuritySetOwner func(objc.ID, int) uint8
+
+// CFFileSecuritySetOwner calls the CoreFoundation framework function CFFileSecuritySetOwner.
+func CFFileSecuritySetOwner(fileSec obj.Object, owner int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecuritySetOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecuritySetOwner, _lib, "CFFileSecuritySetOwner")
+	}
+	return _fnCFFileSecuritySetOwner(objref.IDOf(fileSec), owner)
+}
+
+var _fnCFFileSecuritySetOwnerUUID func(objc.ID, objc.ID) uint8
+
+// CFFileSecuritySetOwnerUUID calls the CoreFoundation framework function CFFileSecuritySetOwnerUUID.
+func CFFileSecuritySetOwnerUUID(fileSec obj.Object, ownerUUID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFileSecuritySetOwnerUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFileSecuritySetOwnerUUID, _lib, "CFFileSecuritySetOwnerUUID")
+	}
+	return _fnCFFileSecuritySetOwnerUUID(objref.IDOf(fileSec), objref.IDOf(ownerUUID))
+}
+
+var _fnCFGetAllocator func(objc.ID) objc.ID
+
+// CFGetAllocator calls the CoreFoundation framework function CFGetAllocator.
+func CFGetAllocator(cf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFGetAllocator == nil {
+		ebipurego.RegisterLibFunc(&_fnCFGetAllocator, _lib, "CFGetAllocator")
+	}
+	_ret := _fnCFGetAllocator(objref.IDOf(cf))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFGetRetainCount func(objc.ID) int
+
+// CFGetRetainCount calls the CoreFoundation framework function CFGetRetainCount.
+func CFGetRetainCount(cf obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFGetRetainCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFGetRetainCount, _lib, "CFGetRetainCount")
+	}
+	return _fnCFGetRetainCount(objref.IDOf(cf))
+}
+
+var _fnCFGetTypeID func(objc.ID) int
+
+// CFGetTypeID calls the CoreFoundation framework function CFGetTypeID.
+func CFGetTypeID(cf obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFGetTypeID, _lib, "CFGetTypeID")
+	}
+	return _fnCFGetTypeID(objref.IDOf(cf))
+}
+
+var _fnCFHash func(objc.ID) int
+
+// CFHash calls the CoreFoundation framework function CFHash.
+func CFHash(cf obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFHash == nil {
+		ebipurego.RegisterLibFunc(&_fnCFHash, _lib, "CFHash")
+	}
+	return _fnCFHash(objref.IDOf(cf))
+}
+
+var _fnCFLocaleCopyAvailableLocaleIdentifiers func() objc.ID
+
+// CFLocaleCopyAvailableLocaleIdentifiers calls the CoreFoundation framework function CFLocaleCopyAvailableLocaleIdentifiers.
+func CFLocaleCopyAvailableLocaleIdentifiers() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyAvailableLocaleIdentifiers == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyAvailableLocaleIdentifiers, _lib, "CFLocaleCopyAvailableLocaleIdentifiers")
+	}
+	_ret := _fnCFLocaleCopyAvailableLocaleIdentifiers()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyCommonISOCurrencyCodes func() objc.ID
+
+// CFLocaleCopyCommonISOCurrencyCodes calls the CoreFoundation framework function CFLocaleCopyCommonISOCurrencyCodes.
+func CFLocaleCopyCommonISOCurrencyCodes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyCommonISOCurrencyCodes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyCommonISOCurrencyCodes, _lib, "CFLocaleCopyCommonISOCurrencyCodes")
+	}
+	_ret := _fnCFLocaleCopyCommonISOCurrencyCodes()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyCurrent func() objc.ID
+
+// CFLocaleCopyCurrent calls the CoreFoundation framework function CFLocaleCopyCurrent.
+func CFLocaleCopyCurrent() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyCurrent, _lib, "CFLocaleCopyCurrent")
+	}
+	_ret := _fnCFLocaleCopyCurrent()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyISOCountryCodes func() objc.ID
+
+// CFLocaleCopyISOCountryCodes calls the CoreFoundation framework function CFLocaleCopyISOCountryCodes.
+func CFLocaleCopyISOCountryCodes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyISOCountryCodes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOCountryCodes, _lib, "CFLocaleCopyISOCountryCodes")
+	}
+	_ret := _fnCFLocaleCopyISOCountryCodes()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyISOCurrencyCodes func() objc.ID
+
+// CFLocaleCopyISOCurrencyCodes calls the CoreFoundation framework function CFLocaleCopyISOCurrencyCodes.
+func CFLocaleCopyISOCurrencyCodes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyISOCurrencyCodes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOCurrencyCodes, _lib, "CFLocaleCopyISOCurrencyCodes")
+	}
+	_ret := _fnCFLocaleCopyISOCurrencyCodes()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyISOLanguageCodes func() objc.ID
+
+// CFLocaleCopyISOLanguageCodes calls the CoreFoundation framework function CFLocaleCopyISOLanguageCodes.
+func CFLocaleCopyISOLanguageCodes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyISOLanguageCodes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyISOLanguageCodes, _lib, "CFLocaleCopyISOLanguageCodes")
+	}
+	_ret := _fnCFLocaleCopyISOLanguageCodes()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCopyPreferredLanguages func() objc.ID
+
+// CFLocaleCopyPreferredLanguages calls the CoreFoundation framework function CFLocaleCopyPreferredLanguages.
+func CFLocaleCopyPreferredLanguages() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCopyPreferredLanguages == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCopyPreferredLanguages, _lib, "CFLocaleCopyPreferredLanguages")
+	}
+	_ret := _fnCFLocaleCopyPreferredLanguages()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFLocaleCreateCopy calls the CoreFoundation framework function CFLocaleCreateCopy.
+func CFLocaleCreateCopy(allocator obj.Object, locale obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleCreateCopy, _lib, "CFLocaleCreateCopy")
+	}
+	_ret := _fnCFLocaleCreateCopy(objref.IDOf(allocator), objref.IDOf(locale))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleGetLanguageCharacterDirection func(objc.ID) CFLocaleLanguageDirection
+
+// CFLocaleGetLanguageCharacterDirection calls the CoreFoundation framework function CFLocaleGetLanguageCharacterDirection.
+func CFLocaleGetLanguageCharacterDirection(isoLangCode obj.Object) CFLocaleLanguageDirection {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleGetLanguageCharacterDirection == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleGetLanguageCharacterDirection, _lib, "CFLocaleGetLanguageCharacterDirection")
+	}
+	return _fnCFLocaleGetLanguageCharacterDirection(objref.IDOf(isoLangCode))
+}
+
+var _fnCFLocaleGetLanguageLineDirection func(objc.ID) CFLocaleLanguageDirection
+
+// CFLocaleGetLanguageLineDirection calls the CoreFoundation framework function CFLocaleGetLanguageLineDirection.
+func CFLocaleGetLanguageLineDirection(isoLangCode obj.Object) CFLocaleLanguageDirection {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleGetLanguageLineDirection == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleGetLanguageLineDirection, _lib, "CFLocaleGetLanguageLineDirection")
+	}
+	return _fnCFLocaleGetLanguageLineDirection(objref.IDOf(isoLangCode))
+}
+
+var _fnCFLocaleGetSystem func() objc.ID
+
+// CFLocaleGetSystem calls the CoreFoundation framework function CFLocaleGetSystem.
+func CFLocaleGetSystem() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleGetSystem == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleGetSystem, _lib, "CFLocaleGetSystem")
+	}
+	_ret := _fnCFLocaleGetSystem()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFLocaleGetTypeID func() int
+
+// CFLocaleGetTypeID calls the CoreFoundation framework function CFLocaleGetTypeID.
+func CFLocaleGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFLocaleGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFLocaleGetTypeID, _lib, "CFLocaleGetTypeID")
+	}
+	return _fnCFLocaleGetTypeID()
+}
+
+var _fnCFMachPortCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
+
+// CFMachPortCreateRunLoopSource calls the CoreFoundation framework function CFMachPortCreateRunLoopSource.
+func CFMachPortCreateRunLoopSource(allocator obj.Object, port obj.Object, order int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMachPortCreateRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMachPortCreateRunLoopSource, _lib, "CFMachPortCreateRunLoopSource")
+	}
+	_ret := _fnCFMachPortCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(port), order)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFMachPortGetPort func(objc.ID) int
+
+// CFMachPortGetPort calls the CoreFoundation framework function CFMachPortGetPort.
+func CFMachPortGetPort(port obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMachPortGetPort == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMachPortGetPort, _lib, "CFMachPortGetPort")
+	}
+	return _fnCFMachPortGetPort(objref.IDOf(port))
+}
+
+var _fnCFMachPortGetTypeID func() int
+
+// CFMachPortGetTypeID calls the CoreFoundation framework function CFMachPortGetTypeID.
+func CFMachPortGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMachPortGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMachPortGetTypeID, _lib, "CFMachPortGetTypeID")
+	}
+	return _fnCFMachPortGetTypeID()
+}
+
+var _fnCFMachPortInvalidate func(objc.ID)
+
+// CFMachPortInvalidate calls the CoreFoundation framework function CFMachPortInvalidate.
+func CFMachPortInvalidate(port obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMachPortInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMachPortInvalidate, _lib, "CFMachPortInvalidate")
+	}
+	_fnCFMachPortInvalidate(objref.IDOf(port))
+}
+
+var _fnCFMachPortIsValid func(objc.ID) uint8
+
+// CFMachPortIsValid calls the CoreFoundation framework function CFMachPortIsValid.
+func CFMachPortIsValid(port obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMachPortIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMachPortIsValid, _lib, "CFMachPortIsValid")
+	}
+	return _fnCFMachPortIsValid(objref.IDOf(port))
+}
+
+var _fnCFMakeCollectable func(objc.ID) objc.ID
+
+// CFMakeCollectable calls the CoreFoundation framework function CFMakeCollectable.
+func CFMakeCollectable(cf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMakeCollectable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMakeCollectable, _lib, "CFMakeCollectable")
+	}
+	_ret := _fnCFMakeCollectable(objref.IDOf(cf))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFMessagePortCreateRemote func(objc.ID, objc.ID) objc.ID
+
+// CFMessagePortCreateRemote calls the CoreFoundation framework function CFMessagePortCreateRemote.
+func CFMessagePortCreateRemote(allocator obj.Object, name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortCreateRemote == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortCreateRemote, _lib, "CFMessagePortCreateRemote")
+	}
+	_ret := _fnCFMessagePortCreateRemote(objref.IDOf(allocator), objref.IDOf(name))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFMessagePortCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
+
+// CFMessagePortCreateRunLoopSource calls the CoreFoundation framework function CFMessagePortCreateRunLoopSource.
+func CFMessagePortCreateRunLoopSource(allocator obj.Object, local obj.Object, order int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortCreateRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortCreateRunLoopSource, _lib, "CFMessagePortCreateRunLoopSource")
+	}
+	_ret := _fnCFMessagePortCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(local), order)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFMessagePortGetName func(objc.ID) objc.ID
+
+// CFMessagePortGetName calls the CoreFoundation framework function CFMessagePortGetName.
+func CFMessagePortGetName(ms obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortGetName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortGetName, _lib, "CFMessagePortGetName")
+	}
+	_ret := _fnCFMessagePortGetName(objref.IDOf(ms))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFMessagePortGetTypeID func() int
+
+// CFMessagePortGetTypeID calls the CoreFoundation framework function CFMessagePortGetTypeID.
+func CFMessagePortGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortGetTypeID, _lib, "CFMessagePortGetTypeID")
+	}
+	return _fnCFMessagePortGetTypeID()
+}
+
+var _fnCFMessagePortInvalidate func(objc.ID)
+
+// CFMessagePortInvalidate calls the CoreFoundation framework function CFMessagePortInvalidate.
+func CFMessagePortInvalidate(ms obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortInvalidate, _lib, "CFMessagePortInvalidate")
+	}
+	_fnCFMessagePortInvalidate(objref.IDOf(ms))
+}
+
+var _fnCFMessagePortIsRemote func(objc.ID) uint8
+
+// CFMessagePortIsRemote calls the CoreFoundation framework function CFMessagePortIsRemote.
+func CFMessagePortIsRemote(ms obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortIsRemote == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortIsRemote, _lib, "CFMessagePortIsRemote")
+	}
+	return _fnCFMessagePortIsRemote(objref.IDOf(ms))
+}
+
+var _fnCFMessagePortIsValid func(objc.ID) uint8
+
+// CFMessagePortIsValid calls the CoreFoundation framework function CFMessagePortIsValid.
+func CFMessagePortIsValid(ms obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortIsValid, _lib, "CFMessagePortIsValid")
+	}
+	return _fnCFMessagePortIsValid(objref.IDOf(ms))
+}
+
+var _fnCFMessagePortSetName func(objc.ID, objc.ID) uint8
+
+// CFMessagePortSetName calls the CoreFoundation framework function CFMessagePortSetName.
+func CFMessagePortSetName(ms obj.Object, newName obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFMessagePortSetName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFMessagePortSetName, _lib, "CFMessagePortSetName")
+	}
+	return _fnCFMessagePortSetName(objref.IDOf(ms), objref.IDOf(newName))
+}
+
+var _fnCFNotificationCenterGetDarwinNotifyCenter func() objc.ID
+
+// CFNotificationCenterGetDarwinNotifyCenter calls the CoreFoundation framework function CFNotificationCenterGetDarwinNotifyCenter.
+func CFNotificationCenterGetDarwinNotifyCenter() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNotificationCenterGetDarwinNotifyCenter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetDarwinNotifyCenter, _lib, "CFNotificationCenterGetDarwinNotifyCenter")
+	}
+	_ret := _fnCFNotificationCenterGetDarwinNotifyCenter()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNotificationCenterGetDistributedCenter func() objc.ID
+
+// CFNotificationCenterGetDistributedCenter calls the CoreFoundation framework function CFNotificationCenterGetDistributedCenter.
+func CFNotificationCenterGetDistributedCenter() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNotificationCenterGetDistributedCenter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetDistributedCenter, _lib, "CFNotificationCenterGetDistributedCenter")
+	}
+	_ret := _fnCFNotificationCenterGetDistributedCenter()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNotificationCenterGetLocalCenter func() objc.ID
+
+// CFNotificationCenterGetLocalCenter calls the CoreFoundation framework function CFNotificationCenterGetLocalCenter.
+func CFNotificationCenterGetLocalCenter() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNotificationCenterGetLocalCenter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetLocalCenter, _lib, "CFNotificationCenterGetLocalCenter")
+	}
+	_ret := _fnCFNotificationCenterGetLocalCenter()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNotificationCenterGetTypeID func() int
+
+// CFNotificationCenterGetTypeID calls the CoreFoundation framework function CFNotificationCenterGetTypeID.
+func CFNotificationCenterGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNotificationCenterGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNotificationCenterGetTypeID, _lib, "CFNotificationCenterGetTypeID")
+	}
+	return _fnCFNotificationCenterGetTypeID()
+}
+
+var _fnCFNullGetTypeID func() int
+
+// CFNullGetTypeID calls the CoreFoundation framework function CFNullGetTypeID.
+func CFNullGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNullGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNullGetTypeID, _lib, "CFNullGetTypeID")
+	}
+	return _fnCFNullGetTypeID()
+}
+
+var _fnCFNumberFormatterCreate func(objc.ID, objc.ID, CFNumberFormatterStyle) objc.ID
+
+// CFNumberFormatterCreate calls the CoreFoundation framework function CFNumberFormatterCreate.
+func CFNumberFormatterCreate(allocator obj.Object, locale obj.Object, style CFNumberFormatterStyle) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterCreate, _lib, "CFNumberFormatterCreate")
+	}
+	_ret := _fnCFNumberFormatterCreate(objref.IDOf(allocator), objref.IDOf(locale), style)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNumberFormatterCreateStringWithNumber func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFNumberFormatterCreateStringWithNumber calls the CoreFoundation framework function CFNumberFormatterCreateStringWithNumber.
+func CFNumberFormatterCreateStringWithNumber(allocator obj.Object, formatter obj.Object, number obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterCreateStringWithNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterCreateStringWithNumber, _lib, "CFNumberFormatterCreateStringWithNumber")
+	}
+	_ret := _fnCFNumberFormatterCreateStringWithNumber(objref.IDOf(allocator), objref.IDOf(formatter), objref.IDOf(number))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNumberFormatterGetFormat func(objc.ID) objc.ID
+
+// CFNumberFormatterGetFormat calls the CoreFoundation framework function CFNumberFormatterGetFormat.
+func CFNumberFormatterGetFormat(formatter obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterGetFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetFormat, _lib, "CFNumberFormatterGetFormat")
+	}
+	_ret := _fnCFNumberFormatterGetFormat(objref.IDOf(formatter))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNumberFormatterGetLocale func(objc.ID) objc.ID
+
+// CFNumberFormatterGetLocale calls the CoreFoundation framework function CFNumberFormatterGetLocale.
+func CFNumberFormatterGetLocale(formatter obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterGetLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetLocale, _lib, "CFNumberFormatterGetLocale")
+	}
+	_ret := _fnCFNumberFormatterGetLocale(objref.IDOf(formatter))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFNumberFormatterGetStyle func(objc.ID) CFNumberFormatterStyle
+
+// CFNumberFormatterGetStyle calls the CoreFoundation framework function CFNumberFormatterGetStyle.
+func CFNumberFormatterGetStyle(formatter obj.Object) CFNumberFormatterStyle {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterGetStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetStyle, _lib, "CFNumberFormatterGetStyle")
+	}
+	return _fnCFNumberFormatterGetStyle(objref.IDOf(formatter))
+}
+
+var _fnCFNumberFormatterGetTypeID func() int
+
+// CFNumberFormatterGetTypeID calls the CoreFoundation framework function CFNumberFormatterGetTypeID.
+func CFNumberFormatterGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterGetTypeID, _lib, "CFNumberFormatterGetTypeID")
+	}
+	return _fnCFNumberFormatterGetTypeID()
+}
+
+var _fnCFNumberFormatterSetFormat func(objc.ID, objc.ID)
+
+// CFNumberFormatterSetFormat calls the CoreFoundation framework function CFNumberFormatterSetFormat.
+func CFNumberFormatterSetFormat(formatter obj.Object, formatString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberFormatterSetFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberFormatterSetFormat, _lib, "CFNumberFormatterSetFormat")
+	}
+	_fnCFNumberFormatterSetFormat(objref.IDOf(formatter), objref.IDOf(formatString))
+}
+
+var _fnCFNumberGetByteSize func(objc.ID) int
+
+// CFNumberGetByteSize calls the CoreFoundation framework function CFNumberGetByteSize.
+func CFNumberGetByteSize(number obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberGetByteSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberGetByteSize, _lib, "CFNumberGetByteSize")
+	}
+	return _fnCFNumberGetByteSize(objref.IDOf(number))
+}
+
+var _fnCFNumberGetType func(objc.ID) CFNumberType
+
+// CFNumberGetType calls the CoreFoundation framework function CFNumberGetType.
+func CFNumberGetType(number obj.Object) CFNumberType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberGetType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberGetType, _lib, "CFNumberGetType")
+	}
+	return _fnCFNumberGetType(objref.IDOf(number))
+}
+
+var _fnCFNumberGetTypeID func() int
+
+// CFNumberGetTypeID calls the CoreFoundation framework function CFNumberGetTypeID.
+func CFNumberGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberGetTypeID, _lib, "CFNumberGetTypeID")
+	}
+	return _fnCFNumberGetTypeID()
+}
+
+var _fnCFNumberIsFloatType func(objc.ID) uint8
+
+// CFNumberIsFloatType calls the CoreFoundation framework function CFNumberIsFloatType.
+func CFNumberIsFloatType(number obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNumberIsFloatType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNumberIsFloatType, _lib, "CFNumberIsFloatType")
+	}
+	return _fnCFNumberIsFloatType(objref.IDOf(number))
+}
+
+var _fnCFPlugInAddInstanceForFactory func(objc.ID)
+
+// CFPlugInAddInstanceForFactory calls the CoreFoundation framework function CFPlugInAddInstanceForFactory.
+func CFPlugInAddInstanceForFactory(factoryID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInAddInstanceForFactory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInAddInstanceForFactory, _lib, "CFPlugInAddInstanceForFactory")
+	}
+	_fnCFPlugInAddInstanceForFactory(objref.IDOf(factoryID))
+}
+
+var _fnCFPlugInCreate func(objc.ID, objc.ID) objc.ID
+
+// CFPlugInCreate calls the CoreFoundation framework function CFPlugInCreate.
+func CFPlugInCreate(allocator obj.Object, plugInURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInCreate, _lib, "CFPlugInCreate")
+	}
+	_ret := _fnCFPlugInCreate(objref.IDOf(allocator), objref.IDOf(plugInURL))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPlugInFindFactoriesForPlugInType func(objc.ID) objc.ID
+
+// CFPlugInFindFactoriesForPlugInType calls the CoreFoundation framework function CFPlugInFindFactoriesForPlugInType.
+func CFPlugInFindFactoriesForPlugInType(typeUUID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInFindFactoriesForPlugInType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInType, _lib, "CFPlugInFindFactoriesForPlugInType")
+	}
+	_ret := _fnCFPlugInFindFactoriesForPlugInType(objref.IDOf(typeUUID))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPlugInFindFactoriesForPlugInTypeInPlugIn func(objc.ID, objc.ID) objc.ID
+
+// CFPlugInFindFactoriesForPlugInTypeInPlugIn calls the CoreFoundation framework function CFPlugInFindFactoriesForPlugInTypeInPlugIn.
+func CFPlugInFindFactoriesForPlugInTypeInPlugIn(typeUUID obj.Object, plugIn obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInFindFactoriesForPlugInTypeInPlugIn == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInFindFactoriesForPlugInTypeInPlugIn, _lib, "CFPlugInFindFactoriesForPlugInTypeInPlugIn")
+	}
+	_ret := _fnCFPlugInFindFactoriesForPlugInTypeInPlugIn(objref.IDOf(typeUUID), objref.IDOf(plugIn))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPlugInGetBundle func(objc.ID) objc.ID
+
+// CFPlugInGetBundle calls the CoreFoundation framework function CFPlugInGetBundle.
+func CFPlugInGetBundle(plugIn obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInGetBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInGetBundle, _lib, "CFPlugInGetBundle")
+	}
+	_ret := _fnCFPlugInGetBundle(objref.IDOf(plugIn))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPlugInGetTypeID func() int
+
+// CFPlugInGetTypeID calls the CoreFoundation framework function CFPlugInGetTypeID.
+func CFPlugInGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInGetTypeID, _lib, "CFPlugInGetTypeID")
+	}
+	return _fnCFPlugInGetTypeID()
+}
+
+var _fnCFPlugInInstanceGetFactoryName func(objc.ID) objc.ID
+
+// CFPlugInInstanceGetFactoryName calls the CoreFoundation framework function CFPlugInInstanceGetFactoryName.
+func CFPlugInInstanceGetFactoryName(instance obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInInstanceGetFactoryName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInInstanceGetFactoryName, _lib, "CFPlugInInstanceGetFactoryName")
+	}
+	_ret := _fnCFPlugInInstanceGetFactoryName(objref.IDOf(instance))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPlugInInstanceGetTypeID func() int
+
+// CFPlugInInstanceGetTypeID calls the CoreFoundation framework function CFPlugInInstanceGetTypeID.
+func CFPlugInInstanceGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInInstanceGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInInstanceGetTypeID, _lib, "CFPlugInInstanceGetTypeID")
+	}
+	return _fnCFPlugInInstanceGetTypeID()
+}
+
+var _fnCFPlugInIsLoadOnDemand func(objc.ID) uint8
+
+// CFPlugInIsLoadOnDemand calls the CoreFoundation framework function CFPlugInIsLoadOnDemand.
+func CFPlugInIsLoadOnDemand(plugIn obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInIsLoadOnDemand == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInIsLoadOnDemand, _lib, "CFPlugInIsLoadOnDemand")
+	}
+	return _fnCFPlugInIsLoadOnDemand(objref.IDOf(plugIn))
+}
+
+var _fnCFPlugInRegisterFactoryFunctionByName func(objc.ID, objc.ID, objc.ID) uint8
+
+// CFPlugInRegisterFactoryFunctionByName calls the CoreFoundation framework function CFPlugInRegisterFactoryFunctionByName.
+func CFPlugInRegisterFactoryFunctionByName(factoryUUID obj.Object, plugIn obj.Object, functionName obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInRegisterFactoryFunctionByName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInRegisterFactoryFunctionByName, _lib, "CFPlugInRegisterFactoryFunctionByName")
+	}
+	return _fnCFPlugInRegisterFactoryFunctionByName(objref.IDOf(factoryUUID), objref.IDOf(plugIn), objref.IDOf(functionName))
+}
+
+var _fnCFPlugInRegisterPlugInType func(objc.ID, objc.ID) uint8
+
+// CFPlugInRegisterPlugInType calls the CoreFoundation framework function CFPlugInRegisterPlugInType.
+func CFPlugInRegisterPlugInType(factoryUUID obj.Object, typeUUID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInRegisterPlugInType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInRegisterPlugInType, _lib, "CFPlugInRegisterPlugInType")
+	}
+	return _fnCFPlugInRegisterPlugInType(objref.IDOf(factoryUUID), objref.IDOf(typeUUID))
+}
+
+var _fnCFPlugInRemoveInstanceForFactory func(objc.ID)
+
+// CFPlugInRemoveInstanceForFactory calls the CoreFoundation framework function CFPlugInRemoveInstanceForFactory.
+func CFPlugInRemoveInstanceForFactory(factoryID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInRemoveInstanceForFactory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInRemoveInstanceForFactory, _lib, "CFPlugInRemoveInstanceForFactory")
+	}
+	_fnCFPlugInRemoveInstanceForFactory(objref.IDOf(factoryID))
+}
+
+var _fnCFPlugInSetLoadOnDemand func(objc.ID, uint8)
+
+// CFPlugInSetLoadOnDemand calls the CoreFoundation framework function CFPlugInSetLoadOnDemand.
+func CFPlugInSetLoadOnDemand(plugIn obj.Object, flag uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInSetLoadOnDemand == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInSetLoadOnDemand, _lib, "CFPlugInSetLoadOnDemand")
+	}
+	_fnCFPlugInSetLoadOnDemand(objref.IDOf(plugIn), flag)
+}
+
+var _fnCFPlugInUnregisterFactory func(objc.ID) uint8
+
+// CFPlugInUnregisterFactory calls the CoreFoundation framework function CFPlugInUnregisterFactory.
+func CFPlugInUnregisterFactory(factoryUUID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInUnregisterFactory == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInUnregisterFactory, _lib, "CFPlugInUnregisterFactory")
+	}
+	return _fnCFPlugInUnregisterFactory(objref.IDOf(factoryUUID))
+}
+
+var _fnCFPlugInUnregisterPlugInType func(objc.ID, objc.ID) uint8
+
+// CFPlugInUnregisterPlugInType calls the CoreFoundation framework function CFPlugInUnregisterPlugInType.
+func CFPlugInUnregisterPlugInType(factoryUUID obj.Object, typeUUID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPlugInUnregisterPlugInType == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPlugInUnregisterPlugInType, _lib, "CFPlugInUnregisterPlugInType")
+	}
+	return _fnCFPlugInUnregisterPlugInType(objref.IDOf(factoryUUID), objref.IDOf(typeUUID))
+}
+
+var _fnCFPreferencesAddSuitePreferencesToApp func(objc.ID, objc.ID)
+
+// CFPreferencesAddSuitePreferencesToApp calls the CoreFoundation framework function CFPreferencesAddSuitePreferencesToApp.
+func CFPreferencesAddSuitePreferencesToApp(applicationID obj.Object, suiteID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesAddSuitePreferencesToApp == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesAddSuitePreferencesToApp, _lib, "CFPreferencesAddSuitePreferencesToApp")
+	}
+	_fnCFPreferencesAddSuitePreferencesToApp(objref.IDOf(applicationID), objref.IDOf(suiteID))
+}
+
+var _fnCFPreferencesAppSynchronize func(objc.ID) uint8
+
+// CFPreferencesAppSynchronize calls the CoreFoundation framework function CFPreferencesAppSynchronize.
+func CFPreferencesAppSynchronize(applicationID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesAppSynchronize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesAppSynchronize, _lib, "CFPreferencesAppSynchronize")
+	}
+	return _fnCFPreferencesAppSynchronize(objref.IDOf(applicationID))
+}
+
+var _fnCFPreferencesAppValueIsForced func(objc.ID, objc.ID) uint8
+
+// CFPreferencesAppValueIsForced calls the CoreFoundation framework function CFPreferencesAppValueIsForced.
+func CFPreferencesAppValueIsForced(key obj.Object, applicationID obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesAppValueIsForced == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesAppValueIsForced, _lib, "CFPreferencesAppValueIsForced")
+	}
+	return _fnCFPreferencesAppValueIsForced(objref.IDOf(key), objref.IDOf(applicationID))
+}
+
+var _fnCFPreferencesCopyAppValue func(objc.ID, objc.ID) objc.ID
+
+// CFPreferencesCopyAppValue calls the CoreFoundation framework function CFPreferencesCopyAppValue.
+func CFPreferencesCopyAppValue(key obj.Object, applicationID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesCopyAppValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyAppValue, _lib, "CFPreferencesCopyAppValue")
+	}
+	_ret := _fnCFPreferencesCopyAppValue(objref.IDOf(key), objref.IDOf(applicationID))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPreferencesCopyApplicationList func(objc.ID, objc.ID) objc.ID
+
+// CFPreferencesCopyApplicationList calls the CoreFoundation framework function CFPreferencesCopyApplicationList.
+func CFPreferencesCopyApplicationList(userName obj.Object, hostName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesCopyApplicationList == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyApplicationList, _lib, "CFPreferencesCopyApplicationList")
+	}
+	_ret := _fnCFPreferencesCopyApplicationList(objref.IDOf(userName), objref.IDOf(hostName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPreferencesCopyKeyList func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFPreferencesCopyKeyList calls the CoreFoundation framework function CFPreferencesCopyKeyList.
+func CFPreferencesCopyKeyList(applicationID obj.Object, userName obj.Object, hostName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesCopyKeyList == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyKeyList, _lib, "CFPreferencesCopyKeyList")
+	}
+	_ret := _fnCFPreferencesCopyKeyList(objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPreferencesCopyMultiple func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFPreferencesCopyMultiple calls the CoreFoundation framework function CFPreferencesCopyMultiple.
+func CFPreferencesCopyMultiple(keysToFetch obj.Object, applicationID obj.Object, userName obj.Object, hostName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesCopyMultiple == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyMultiple, _lib, "CFPreferencesCopyMultiple")
+	}
+	_ret := _fnCFPreferencesCopyMultiple(objref.IDOf(keysToFetch), objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPreferencesCopyValue func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFPreferencesCopyValue calls the CoreFoundation framework function CFPreferencesCopyValue.
+func CFPreferencesCopyValue(key obj.Object, applicationID obj.Object, userName obj.Object, hostName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesCopyValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesCopyValue, _lib, "CFPreferencesCopyValue")
+	}
+	_ret := _fnCFPreferencesCopyValue(objref.IDOf(key), objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPreferencesRemoveSuitePreferencesFromApp func(objc.ID, objc.ID)
+
+// CFPreferencesRemoveSuitePreferencesFromApp calls the CoreFoundation framework function CFPreferencesRemoveSuitePreferencesFromApp.
+func CFPreferencesRemoveSuitePreferencesFromApp(applicationID obj.Object, suiteID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesRemoveSuitePreferencesFromApp == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesRemoveSuitePreferencesFromApp, _lib, "CFPreferencesRemoveSuitePreferencesFromApp")
+	}
+	_fnCFPreferencesRemoveSuitePreferencesFromApp(objref.IDOf(applicationID), objref.IDOf(suiteID))
+}
+
+var _fnCFPreferencesSetAppValue func(objc.ID, objc.ID, objc.ID)
+
+// CFPreferencesSetAppValue calls the CoreFoundation framework function CFPreferencesSetAppValue.
+func CFPreferencesSetAppValue(key obj.Object, value obj.Object, applicationID obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesSetAppValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesSetAppValue, _lib, "CFPreferencesSetAppValue")
+	}
+	_fnCFPreferencesSetAppValue(objref.IDOf(key), objref.IDOf(value), objref.IDOf(applicationID))
+}
+
+var _fnCFPreferencesSetMultiple func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID)
+
+// CFPreferencesSetMultiple calls the CoreFoundation framework function CFPreferencesSetMultiple.
+func CFPreferencesSetMultiple(keysToSet obj.Object, keysToRemove obj.Object, applicationID obj.Object, userName obj.Object, hostName obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesSetMultiple == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesSetMultiple, _lib, "CFPreferencesSetMultiple")
+	}
+	_fnCFPreferencesSetMultiple(objref.IDOf(keysToSet), objref.IDOf(keysToRemove), objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+}
+
+var _fnCFPreferencesSetValue func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID)
+
+// CFPreferencesSetValue calls the CoreFoundation framework function CFPreferencesSetValue.
+func CFPreferencesSetValue(key obj.Object, value obj.Object, applicationID obj.Object, userName obj.Object, hostName obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesSetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesSetValue, _lib, "CFPreferencesSetValue")
+	}
+	_fnCFPreferencesSetValue(objref.IDOf(key), objref.IDOf(value), objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+}
+
+var _fnCFPreferencesSynchronize func(objc.ID, objc.ID, objc.ID) uint8
+
+// CFPreferencesSynchronize calls the CoreFoundation framework function CFPreferencesSynchronize.
+func CFPreferencesSynchronize(applicationID obj.Object, userName obj.Object, hostName obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPreferencesSynchronize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPreferencesSynchronize, _lib, "CFPreferencesSynchronize")
+	}
+	return _fnCFPreferencesSynchronize(objref.IDOf(applicationID), objref.IDOf(userName), objref.IDOf(hostName))
+}
+
+var _fnCFPropertyListCreateDeepCopy func(objc.ID, objc.ID, int) objc.ID
+
+// CFPropertyListCreateDeepCopy calls the CoreFoundation framework function CFPropertyListCreateDeepCopy.
+func CFPropertyListCreateDeepCopy(allocator obj.Object, propertyList obj.Object, mutabilityOption int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPropertyListCreateDeepCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateDeepCopy, _lib, "CFPropertyListCreateDeepCopy")
+	}
+	_ret := _fnCFPropertyListCreateDeepCopy(objref.IDOf(allocator), objref.IDOf(propertyList), mutabilityOption)
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPropertyListCreateXMLData func(objc.ID, objc.ID) objc.ID
+
+// CFPropertyListCreateXMLData calls the CoreFoundation framework function CFPropertyListCreateXMLData.
+func CFPropertyListCreateXMLData(allocator obj.Object, propertyList obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPropertyListCreateXMLData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateXMLData, _lib, "CFPropertyListCreateXMLData")
+	}
+	_ret := _fnCFPropertyListCreateXMLData(objref.IDOf(allocator), objref.IDOf(propertyList))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFPropertyListIsValid func(objc.ID, CFPropertyListFormat) uint8
+
+// CFPropertyListIsValid calls the CoreFoundation framework function CFPropertyListIsValid.
+func CFPropertyListIsValid(plist obj.Object, format CFPropertyListFormat) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFPropertyListIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFPropertyListIsValid, _lib, "CFPropertyListIsValid")
+	}
+	return _fnCFPropertyListIsValid(objref.IDOf(plist), format)
+}
+
+var _fnCFReadStreamClose func(objc.ID)
+
+// CFReadStreamClose calls the CoreFoundation framework function CFReadStreamClose.
+func CFReadStreamClose(stream obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamClose == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamClose, _lib, "CFReadStreamClose")
+	}
+	_fnCFReadStreamClose(objref.IDOf(stream))
+}
+
+var _fnCFReadStreamCopyError func(objc.ID) objc.ID
+
+// CFReadStreamCopyError calls the CoreFoundation framework function CFReadStreamCopyError.
+func CFReadStreamCopyError(stream obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamCopyError == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamCopyError, _lib, "CFReadStreamCopyError")
+	}
+	_ret := _fnCFReadStreamCopyError(objref.IDOf(stream))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFReadStreamCreateWithFile func(objc.ID, objc.ID) objc.ID
+
+// CFReadStreamCreateWithFile calls the CoreFoundation framework function CFReadStreamCreateWithFile.
+func CFReadStreamCreateWithFile(alloc obj.Object, fileURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamCreateWithFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamCreateWithFile, _lib, "CFReadStreamCreateWithFile")
+	}
+	_ret := _fnCFReadStreamCreateWithFile(objref.IDOf(alloc), objref.IDOf(fileURL))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFReadStreamGetStatus func(objc.ID) CFStreamStatus
+
+// CFReadStreamGetStatus calls the CoreFoundation framework function CFReadStreamGetStatus.
+func CFReadStreamGetStatus(stream obj.Object) CFStreamStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamGetStatus, _lib, "CFReadStreamGetStatus")
+	}
+	return _fnCFReadStreamGetStatus(objref.IDOf(stream))
+}
+
+var _fnCFReadStreamGetTypeID func() int
+
+// CFReadStreamGetTypeID calls the CoreFoundation framework function CFReadStreamGetTypeID.
+func CFReadStreamGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamGetTypeID, _lib, "CFReadStreamGetTypeID")
+	}
+	return _fnCFReadStreamGetTypeID()
+}
+
+var _fnCFReadStreamHasBytesAvailable func(objc.ID) uint8
+
+// CFReadStreamHasBytesAvailable calls the CoreFoundation framework function CFReadStreamHasBytesAvailable.
+func CFReadStreamHasBytesAvailable(stream obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamHasBytesAvailable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamHasBytesAvailable, _lib, "CFReadStreamHasBytesAvailable")
+	}
+	return _fnCFReadStreamHasBytesAvailable(objref.IDOf(stream))
+}
+
+var _fnCFReadStreamOpen func(objc.ID) uint8
+
+// CFReadStreamOpen calls the CoreFoundation framework function CFReadStreamOpen.
+func CFReadStreamOpen(stream obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFReadStreamOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnCFReadStreamOpen, _lib, "CFReadStreamOpen")
+	}
+	return _fnCFReadStreamOpen(objref.IDOf(stream))
+}
+
+var _fnCFRelease func(objc.ID)
+
+// CFRelease calls the CoreFoundation framework function CFRelease.
+func CFRelease(cf obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRelease, _lib, "CFRelease")
+	}
+	_fnCFRelease(objref.IDOf(cf))
+}
+
+var _fnCFRetain func(objc.ID) objc.ID
+
+// CFRetain calls the CoreFoundation framework function CFRetain.
+func CFRetain(cf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRetain, _lib, "CFRetain")
+	}
+	_ret := _fnCFRetain(objref.IDOf(cf))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFRunLoopCopyAllModes func(objc.ID) objc.ID
+
+// CFRunLoopCopyAllModes calls the CoreFoundation framework function CFRunLoopCopyAllModes.
+func CFRunLoopCopyAllModes(rl obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopCopyAllModes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopCopyAllModes, _lib, "CFRunLoopCopyAllModes")
+	}
+	_ret := _fnCFRunLoopCopyAllModes(objref.IDOf(rl))
+	return obj.Wrap(_ret)
+}
+
+var _fnCFRunLoopGetCurrent func() objc.ID
+
+// CFRunLoopGetCurrent calls the CoreFoundation framework function CFRunLoopGetCurrent.
+func CFRunLoopGetCurrent() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopGetCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopGetCurrent, _lib, "CFRunLoopGetCurrent")
+	}
+	_ret := _fnCFRunLoopGetCurrent()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFRunLoopGetMain func() objc.ID
+
+// CFRunLoopGetMain calls the CoreFoundation framework function CFRunLoopGetMain.
+func CFRunLoopGetMain() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopGetMain == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopGetMain, _lib, "CFRunLoopGetMain")
+	}
+	_ret := _fnCFRunLoopGetMain()
+	return obj.Wrap(_ret)
+}
+
+var _fnCFRunLoopGetTypeID func() int
+
+// CFRunLoopGetTypeID calls the CoreFoundation framework function CFRunLoopGetTypeID.
+func CFRunLoopGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopGetTypeID, _lib, "CFRunLoopGetTypeID")
+	}
+	return _fnCFRunLoopGetTypeID()
+}
+
+var _fnCFRunLoopIsWaiting func(objc.ID) uint8
+
+// CFRunLoopIsWaiting calls the CoreFoundation framework function CFRunLoopIsWaiting.
+func CFRunLoopIsWaiting(rl obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopIsWaiting == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopIsWaiting, _lib, "CFRunLoopIsWaiting")
+	}
+	return _fnCFRunLoopIsWaiting(objref.IDOf(rl))
+}
+
+var _fnCFRunLoopObserverDoesRepeat func(objc.ID) uint8
+
+// CFRunLoopObserverDoesRepeat calls the CoreFoundation framework function CFRunLoopObserverDoesRepeat.
+func CFRunLoopObserverDoesRepeat(observer obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverDoesRepeat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverDoesRepeat, _lib, "CFRunLoopObserverDoesRepeat")
+	}
+	return _fnCFRunLoopObserverDoesRepeat(objref.IDOf(observer))
+}
+
+var _fnCFRunLoopObserverGetActivities func(objc.ID) int
+
+// CFRunLoopObserverGetActivities calls the CoreFoundation framework function CFRunLoopObserverGetActivities.
+func CFRunLoopObserverGetActivities(observer obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverGetActivities == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverGetActivities, _lib, "CFRunLoopObserverGetActivities")
+	}
+	return _fnCFRunLoopObserverGetActivities(objref.IDOf(observer))
+}
+
+var _fnCFRunLoopObserverGetOrder func(objc.ID) int
+
+// CFRunLoopObserverGetOrder calls the CoreFoundation framework function CFRunLoopObserverGetOrder.
+func CFRunLoopObserverGetOrder(observer obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverGetOrder == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverGetOrder, _lib, "CFRunLoopObserverGetOrder")
+	}
+	return _fnCFRunLoopObserverGetOrder(objref.IDOf(observer))
+}
+
+var _fnCFRunLoopObserverGetTypeID func() int
+
+// CFRunLoopObserverGetTypeID calls the CoreFoundation framework function CFRunLoopObserverGetTypeID.
+func CFRunLoopObserverGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverGetTypeID, _lib, "CFRunLoopObserverGetTypeID")
+	}
+	return _fnCFRunLoopObserverGetTypeID()
+}
+
+var _fnCFRunLoopObserverInvalidate func(objc.ID)
+
+// CFRunLoopObserverInvalidate calls the CoreFoundation framework function CFRunLoopObserverInvalidate.
+func CFRunLoopObserverInvalidate(observer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverInvalidate, _lib, "CFRunLoopObserverInvalidate")
+	}
+	_fnCFRunLoopObserverInvalidate(objref.IDOf(observer))
+}
+
+var _fnCFRunLoopObserverIsValid func(objc.ID) uint8
+
+// CFRunLoopObserverIsValid calls the CoreFoundation framework function CFRunLoopObserverIsValid.
+func CFRunLoopObserverIsValid(observer obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopObserverIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverIsValid, _lib, "CFRunLoopObserverIsValid")
+	}
+	return _fnCFRunLoopObserverIsValid(objref.IDOf(observer))
+}
+
+var _fnCFRunLoopPerformBlock func(objc.ID, objc.ID, objc.Block)
+
+// CFRunLoopPerformBlock calls the CoreFoundation framework function CFRunLoopPerformBlock.
+func CFRunLoopPerformBlock(rl obj.Object, mode obj.Object, block func()) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopPerformBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopPerformBlock, _lib, "CFRunLoopPerformBlock")
+	}
+	_fnCFRunLoopPerformBlock(objref.IDOf(rl), objref.IDOf(mode), objc.NewBlock(func(_ objc.Block) { block() }))
+}
+
+var _fnCFRunLoopRun func()
+
+// CFRunLoopRun calls the CoreFoundation framework function CFRunLoopRun.
 func CFRunLoopRun() {
-	raw.CFRunLoopRun()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopRun == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopRun, _lib, "CFRunLoopRun")
+	}
+	_fnCFRunLoopRun()
 }
 
-// CFRunLoopRunInMode calls [raw.CFRunLoopRunInMode] (C function CFRunLoopRunInMode).
-func CFRunLoopRunInMode(mode unsafe.Pointer, seconds float64, returnAfterSourceHandled uint8) CFRunLoopRunResult {
-	return CFRunLoopRunResult(raw.CFRunLoopRunInMode(mode, seconds, returnAfterSourceHandled))
+var _fnCFRunLoopSourceGetOrder func(objc.ID) int
+
+// CFRunLoopSourceGetOrder calls the CoreFoundation framework function CFRunLoopSourceGetOrder.
+func CFRunLoopSourceGetOrder(source obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopSourceGetOrder == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceGetOrder, _lib, "CFRunLoopSourceGetOrder")
+	}
+	return _fnCFRunLoopSourceGetOrder(objref.IDOf(source))
 }
 
-// CFRunLoopSourceCreate calls [raw.CFRunLoopSourceCreate] (C function CFRunLoopSourceCreate).
-func CFRunLoopSourceCreate(allocator unsafe.Pointer, order int, context_ *raw.CFRunLoopSourceContext) unsafe.Pointer {
-	return raw.CFRunLoopSourceCreate(allocator, order, context_)
+var _fnCFRunLoopSourceGetTypeID func() int
+
+// CFRunLoopSourceGetTypeID calls the CoreFoundation framework function CFRunLoopSourceGetTypeID.
+func CFRunLoopSourceGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopSourceGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceGetTypeID, _lib, "CFRunLoopSourceGetTypeID")
+	}
+	return _fnCFRunLoopSourceGetTypeID()
 }
 
-// CFRunLoopSourceGetContext calls [raw.CFRunLoopSourceGetContext] (C function CFRunLoopSourceGetContext).
-func CFRunLoopSourceGetContext(source unsafe.Pointer, context_ *raw.CFRunLoopSourceContext) {
-	raw.CFRunLoopSourceGetContext(source, context_)
+var _fnCFRunLoopSourceInvalidate func(objc.ID)
+
+// CFRunLoopSourceInvalidate calls the CoreFoundation framework function CFRunLoopSourceInvalidate.
+func CFRunLoopSourceInvalidate(source obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopSourceInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceInvalidate, _lib, "CFRunLoopSourceInvalidate")
+	}
+	_fnCFRunLoopSourceInvalidate(objref.IDOf(source))
 }
 
-// CFRunLoopSourceGetOrder calls [raw.CFRunLoopSourceGetOrder] (C function CFRunLoopSourceGetOrder).
-func CFRunLoopSourceGetOrder(source unsafe.Pointer) int {
-	return raw.CFRunLoopSourceGetOrder(source)
+var _fnCFRunLoopSourceIsValid func(objc.ID) uint8
+
+// CFRunLoopSourceIsValid calls the CoreFoundation framework function CFRunLoopSourceIsValid.
+func CFRunLoopSourceIsValid(source obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopSourceIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceIsValid, _lib, "CFRunLoopSourceIsValid")
+	}
+	return _fnCFRunLoopSourceIsValid(objref.IDOf(source))
 }
 
-// CFRunLoopSourceGetTypeID calls [raw.CFRunLoopSourceGetTypeID] (C function CFRunLoopSourceGetTypeID).
-func CFRunLoopSourceGetTypeID() uint {
-	return raw.CFRunLoopSourceGetTypeID()
+var _fnCFRunLoopSourceSignal func(objc.ID)
+
+// CFRunLoopSourceSignal calls the CoreFoundation framework function CFRunLoopSourceSignal.
+func CFRunLoopSourceSignal(source obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopSourceSignal == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopSourceSignal, _lib, "CFRunLoopSourceSignal")
+	}
+	_fnCFRunLoopSourceSignal(objref.IDOf(source))
 }
 
-// CFRunLoopSourceInvalidate calls [raw.CFRunLoopSourceInvalidate] (C function CFRunLoopSourceInvalidate).
-func CFRunLoopSourceInvalidate(source unsafe.Pointer) {
-	raw.CFRunLoopSourceInvalidate(source)
+var _fnCFRunLoopStop func(objc.ID)
+
+// CFRunLoopStop calls the CoreFoundation framework function CFRunLoopStop.
+func CFRunLoopStop(rl obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopStop == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopStop, _lib, "CFRunLoopStop")
+	}
+	_fnCFRunLoopStop(objref.IDOf(rl))
 }
 
-// CFRunLoopSourceIsValid calls [raw.CFRunLoopSourceIsValid] (C function CFRunLoopSourceIsValid).
-func CFRunLoopSourceIsValid(source unsafe.Pointer) uint8 {
-	return raw.CFRunLoopSourceIsValid(source)
+var _fnCFRunLoopTimerDoesRepeat func(objc.ID) uint8
+
+// CFRunLoopTimerDoesRepeat calls the CoreFoundation framework function CFRunLoopTimerDoesRepeat.
+func CFRunLoopTimerDoesRepeat(timer obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerDoesRepeat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerDoesRepeat, _lib, "CFRunLoopTimerDoesRepeat")
+	}
+	return _fnCFRunLoopTimerDoesRepeat(objref.IDOf(timer))
 }
 
-// CFRunLoopSourceSignal calls [raw.CFRunLoopSourceSignal] (C function CFRunLoopSourceSignal).
-func CFRunLoopSourceSignal(source unsafe.Pointer) {
-	raw.CFRunLoopSourceSignal(source)
+var _fnCFRunLoopTimerGetInterval func(objc.ID) float64
+
+// CFRunLoopTimerGetInterval calls the CoreFoundation framework function CFRunLoopTimerGetInterval.
+func CFRunLoopTimerGetInterval(timer obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerGetInterval == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerGetInterval, _lib, "CFRunLoopTimerGetInterval")
+	}
+	return _fnCFRunLoopTimerGetInterval(objref.IDOf(timer))
 }
 
-// CFRunLoopStop calls [raw.CFRunLoopStop] (C function CFRunLoopStop).
-func CFRunLoopStop(rl unsafe.Pointer) {
-	raw.CFRunLoopStop(rl)
+var _fnCFRunLoopTimerGetNextFireDate func(objc.ID) float64
+
+// CFRunLoopTimerGetNextFireDate calls the CoreFoundation framework function CFRunLoopTimerGetNextFireDate.
+func CFRunLoopTimerGetNextFireDate(timer obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerGetNextFireDate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerGetNextFireDate, _lib, "CFRunLoopTimerGetNextFireDate")
+	}
+	return _fnCFRunLoopTimerGetNextFireDate(objref.IDOf(timer))
 }
 
-// CFRunLoopTimerCreate calls [raw.CFRunLoopTimerCreate] (C function CFRunLoopTimerCreate).
-func CFRunLoopTimerCreate(allocator unsafe.Pointer, fireDate float64, interval float64, flags uint, order int, callout unsafe.Pointer, context_ *raw.CFRunLoopTimerContext) unsafe.Pointer {
-	return raw.CFRunLoopTimerCreate(allocator, fireDate, interval, flags, order, callout, context_)
+var _fnCFRunLoopTimerGetOrder func(objc.ID) int
+
+// CFRunLoopTimerGetOrder calls the CoreFoundation framework function CFRunLoopTimerGetOrder.
+func CFRunLoopTimerGetOrder(timer obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerGetOrder == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerGetOrder, _lib, "CFRunLoopTimerGetOrder")
+	}
+	return _fnCFRunLoopTimerGetOrder(objref.IDOf(timer))
 }
 
-// CFRunLoopTimerCreateWithHandler calls [raw.CFRunLoopTimerCreateWithHandler] (C function CFRunLoopTimerCreateWithHandler).
-func CFRunLoopTimerCreateWithHandler(allocator unsafe.Pointer, fireDate float64, interval float64, flags uint, order int, block func(unsafe.Pointer)) unsafe.Pointer {
-	return raw.CFRunLoopTimerCreateWithHandler(allocator, fireDate, interval, flags, order, block)
+var _fnCFRunLoopTimerGetTolerance func(objc.ID) float64
+
+// CFRunLoopTimerGetTolerance calls the CoreFoundation framework function CFRunLoopTimerGetTolerance.
+func CFRunLoopTimerGetTolerance(timer obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerGetTolerance == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerGetTolerance, _lib, "CFRunLoopTimerGetTolerance")
+	}
+	return _fnCFRunLoopTimerGetTolerance(objref.IDOf(timer))
 }
 
-// CFRunLoopTimerDoesRepeat calls [raw.CFRunLoopTimerDoesRepeat] (C function CFRunLoopTimerDoesRepeat).
-func CFRunLoopTimerDoesRepeat(timer unsafe.Pointer) uint8 {
-	return raw.CFRunLoopTimerDoesRepeat(timer)
+var _fnCFRunLoopTimerGetTypeID func() int
+
+// CFRunLoopTimerGetTypeID calls the CoreFoundation framework function CFRunLoopTimerGetTypeID.
+func CFRunLoopTimerGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerGetTypeID, _lib, "CFRunLoopTimerGetTypeID")
+	}
+	return _fnCFRunLoopTimerGetTypeID()
 }
 
-// CFRunLoopTimerGetContext calls [raw.CFRunLoopTimerGetContext] (C function CFRunLoopTimerGetContext).
-func CFRunLoopTimerGetContext(timer unsafe.Pointer, context_ *raw.CFRunLoopTimerContext) {
-	raw.CFRunLoopTimerGetContext(timer, context_)
+var _fnCFRunLoopTimerInvalidate func(objc.ID)
+
+// CFRunLoopTimerInvalidate calls the CoreFoundation framework function CFRunLoopTimerInvalidate.
+func CFRunLoopTimerInvalidate(timer obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerInvalidate, _lib, "CFRunLoopTimerInvalidate")
+	}
+	_fnCFRunLoopTimerInvalidate(objref.IDOf(timer))
 }
 
-// CFRunLoopTimerGetInterval calls [raw.CFRunLoopTimerGetInterval] (C function CFRunLoopTimerGetInterval).
-func CFRunLoopTimerGetInterval(timer unsafe.Pointer) float64 {
-	return raw.CFRunLoopTimerGetInterval(timer)
+var _fnCFRunLoopTimerIsValid func(objc.ID) uint8
+
+// CFRunLoopTimerIsValid calls the CoreFoundation framework function CFRunLoopTimerIsValid.
+func CFRunLoopTimerIsValid(timer obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerIsValid, _lib, "CFRunLoopTimerIsValid")
+	}
+	return _fnCFRunLoopTimerIsValid(objref.IDOf(timer))
 }
 
-// CFRunLoopTimerGetNextFireDate calls [raw.CFRunLoopTimerGetNextFireDate] (C function CFRunLoopTimerGetNextFireDate).
-func CFRunLoopTimerGetNextFireDate(timer unsafe.Pointer) float64 {
-	return raw.CFRunLoopTimerGetNextFireDate(timer)
+var _fnCFRunLoopTimerSetNextFireDate func(objc.ID, float64)
+
+// CFRunLoopTimerSetNextFireDate calls the CoreFoundation framework function CFRunLoopTimerSetNextFireDate.
+func CFRunLoopTimerSetNextFireDate(timer obj.Object, fireDate float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerSetNextFireDate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerSetNextFireDate, _lib, "CFRunLoopTimerSetNextFireDate")
+	}
+	_fnCFRunLoopTimerSetNextFireDate(objref.IDOf(timer), fireDate)
 }
 
-// CFRunLoopTimerGetOrder calls [raw.CFRunLoopTimerGetOrder] (C function CFRunLoopTimerGetOrder).
-func CFRunLoopTimerGetOrder(timer unsafe.Pointer) int {
-	return raw.CFRunLoopTimerGetOrder(timer)
+var _fnCFRunLoopTimerSetTolerance func(objc.ID, float64)
+
+// CFRunLoopTimerSetTolerance calls the CoreFoundation framework function CFRunLoopTimerSetTolerance.
+func CFRunLoopTimerSetTolerance(timer obj.Object, tolerance float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopTimerSetTolerance == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerSetTolerance, _lib, "CFRunLoopTimerSetTolerance")
+	}
+	_fnCFRunLoopTimerSetTolerance(objref.IDOf(timer), tolerance)
 }
 
-// CFRunLoopTimerGetTolerance calls [raw.CFRunLoopTimerGetTolerance] (C function CFRunLoopTimerGetTolerance).
-func CFRunLoopTimerGetTolerance(timer unsafe.Pointer) float64 {
-	return raw.CFRunLoopTimerGetTolerance(timer)
+var _fnCFRunLoopWakeUp func(objc.ID)
+
+// CFRunLoopWakeUp calls the CoreFoundation framework function CFRunLoopWakeUp.
+func CFRunLoopWakeUp(rl obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFRunLoopWakeUp == nil {
+		ebipurego.RegisterLibFunc(&_fnCFRunLoopWakeUp, _lib, "CFRunLoopWakeUp")
+	}
+	_fnCFRunLoopWakeUp(objref.IDOf(rl))
 }
 
-// CFRunLoopTimerGetTypeID calls [raw.CFRunLoopTimerGetTypeID] (C function CFRunLoopTimerGetTypeID).
-func CFRunLoopTimerGetTypeID() uint {
-	return raw.CFRunLoopTimerGetTypeID()
+var _fnCFSetCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFSetCreateCopy calls the CoreFoundation framework function CFSetCreateCopy.
+func CFSetCreateCopy(allocator obj.Object, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSetCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSetCreateCopy, _lib, "CFSetCreateCopy")
+	}
+	_ret := _fnCFSetCreateCopy(objref.IDOf(allocator), objref.IDOf(theSet))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopTimerInvalidate calls [raw.CFRunLoopTimerInvalidate] (C function CFRunLoopTimerInvalidate).
-func CFRunLoopTimerInvalidate(timer unsafe.Pointer) {
-	raw.CFRunLoopTimerInvalidate(timer)
+var _fnCFSetCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
+
+// CFSetCreateMutableCopy calls the CoreFoundation framework function CFSetCreateMutableCopy.
+func CFSetCreateMutableCopy(allocator obj.Object, capacity int, theSet obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSetCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSetCreateMutableCopy, _lib, "CFSetCreateMutableCopy")
+	}
+	_ret := _fnCFSetCreateMutableCopy(objref.IDOf(allocator), capacity, objref.IDOf(theSet))
+	return obj.Wrap(_ret)
 }
 
-// CFRunLoopTimerIsValid calls [raw.CFRunLoopTimerIsValid] (C function CFRunLoopTimerIsValid).
-func CFRunLoopTimerIsValid(timer unsafe.Pointer) uint8 {
-	return raw.CFRunLoopTimerIsValid(timer)
+var _fnCFSetGetCount func(objc.ID) int
+
+// CFSetGetCount calls the CoreFoundation framework function CFSetGetCount.
+func CFSetGetCount(theSet obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSetGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSetGetCount, _lib, "CFSetGetCount")
+	}
+	return _fnCFSetGetCount(objref.IDOf(theSet))
 }
 
-// CFRunLoopTimerSetNextFireDate calls [raw.CFRunLoopTimerSetNextFireDate] (C function CFRunLoopTimerSetNextFireDate).
-func CFRunLoopTimerSetNextFireDate(timer unsafe.Pointer, fireDate float64) {
-	raw.CFRunLoopTimerSetNextFireDate(timer, fireDate)
+var _fnCFSetGetTypeID func() int
+
+// CFSetGetTypeID calls the CoreFoundation framework function CFSetGetTypeID.
+func CFSetGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSetGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSetGetTypeID, _lib, "CFSetGetTypeID")
+	}
+	return _fnCFSetGetTypeID()
 }
 
-// CFRunLoopTimerSetTolerance calls [raw.CFRunLoopTimerSetTolerance] (C function CFRunLoopTimerSetTolerance).
-func CFRunLoopTimerSetTolerance(timer unsafe.Pointer, tolerance float64) {
-	raw.CFRunLoopTimerSetTolerance(timer, tolerance)
+var _fnCFSetRemoveAllValues func(objc.ID)
+
+// CFSetRemoveAllValues calls the CoreFoundation framework function CFSetRemoveAllValues.
+func CFSetRemoveAllValues(theSet obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSetRemoveAllValues == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSetRemoveAllValues, _lib, "CFSetRemoveAllValues")
+	}
+	_fnCFSetRemoveAllValues(objref.IDOf(theSet))
 }
 
-// CFRunLoopWakeUp calls [raw.CFRunLoopWakeUp] (C function CFRunLoopWakeUp).
-func CFRunLoopWakeUp(rl unsafe.Pointer) {
-	raw.CFRunLoopWakeUp(rl)
+var _fnCFShow func(objc.ID)
+
+// CFShow calls the CoreFoundation framework function CFShow.
+func CFShow(obj_ obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFShow == nil {
+		ebipurego.RegisterLibFunc(&_fnCFShow, _lib, "CFShow")
+	}
+	_fnCFShow(objref.IDOf(obj_))
 }
 
-// CFSetAddValue calls [raw.CFSetAddValue] (C function CFSetAddValue).
-func CFSetAddValue(theSet unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFSetAddValue(theSet, value)
+var _fnCFShowStr func(objc.ID)
+
+// CFShowStr calls the CoreFoundation framework function CFShowStr.
+func CFShowStr(str obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFShowStr == nil {
+		ebipurego.RegisterLibFunc(&_fnCFShowStr, _lib, "CFShowStr")
+	}
+	_fnCFShowStr(objref.IDOf(str))
 }
 
-// CFSetApplyFunction calls [raw.CFSetApplyFunction] (C function CFSetApplyFunction).
-func CFSetApplyFunction(theSet unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFSetApplyFunction(theSet, applier, context_)
+var _fnCFSocketConnectToAddress func(objc.ID, objc.ID, float64) CFSocketError
+
+// CFSocketConnectToAddress calls the CoreFoundation framework function CFSocketConnectToAddress.
+func CFSocketConnectToAddress(s obj.Object, address obj.Object, timeout float64) CFSocketError {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketConnectToAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketConnectToAddress, _lib, "CFSocketConnectToAddress")
+	}
+	return _fnCFSocketConnectToAddress(objref.IDOf(s), objref.IDOf(address), timeout)
 }
 
-// CFSetContainsValue calls [raw.CFSetContainsValue] (C function CFSetContainsValue).
-func CFSetContainsValue(theSet unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFSetContainsValue(theSet, value)
+var _fnCFSocketCopyAddress func(objc.ID) objc.ID
+
+// CFSocketCopyAddress calls the CoreFoundation framework function CFSocketCopyAddress.
+func CFSocketCopyAddress(s obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketCopyAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketCopyAddress, _lib, "CFSocketCopyAddress")
+	}
+	_ret := _fnCFSocketCopyAddress(objref.IDOf(s))
+	return obj.Wrap(_ret)
 }
 
-// CFSetCreate calls [raw.CFSetCreate] (C function CFSetCreate).
-func CFSetCreate(allocator unsafe.Pointer, values unsafe.Pointer, numValues int, callBacks *raw.CFSetCallBacks) unsafe.Pointer {
-	return raw.CFSetCreate(allocator, values, numValues, callBacks)
+var _fnCFSocketCopyPeerAddress func(objc.ID) objc.ID
+
+// CFSocketCopyPeerAddress calls the CoreFoundation framework function CFSocketCopyPeerAddress.
+func CFSocketCopyPeerAddress(s obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketCopyPeerAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketCopyPeerAddress, _lib, "CFSocketCopyPeerAddress")
+	}
+	_ret := _fnCFSocketCopyPeerAddress(objref.IDOf(s))
+	return obj.Wrap(_ret)
 }
 
-// CFSetCreateCopy calls [raw.CFSetCreateCopy] (C function CFSetCreateCopy).
-func CFSetCreateCopy(allocator unsafe.Pointer, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFSetCreateCopy(allocator, theSet)
+var _fnCFSocketCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
+
+// CFSocketCreateRunLoopSource calls the CoreFoundation framework function CFSocketCreateRunLoopSource.
+func CFSocketCreateRunLoopSource(allocator obj.Object, s obj.Object, order int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketCreateRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketCreateRunLoopSource, _lib, "CFSocketCreateRunLoopSource")
+	}
+	_ret := _fnCFSocketCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(s), order)
+	return obj.Wrap(_ret)
 }
 
-// CFSetCreateMutable calls [raw.CFSetCreateMutable] (C function CFSetCreateMutable).
-func CFSetCreateMutable(allocator unsafe.Pointer, capacity int, callBacks *raw.CFSetCallBacks) unsafe.Pointer {
-	return raw.CFSetCreateMutable(allocator, capacity, callBacks)
+var _fnCFSocketDisableCallBacks func(objc.ID, int)
+
+// CFSocketDisableCallBacks calls the CoreFoundation framework function CFSocketDisableCallBacks.
+func CFSocketDisableCallBacks(s obj.Object, callBackTypes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketDisableCallBacks == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketDisableCallBacks, _lib, "CFSocketDisableCallBacks")
+	}
+	_fnCFSocketDisableCallBacks(objref.IDOf(s), callBackTypes)
 }
 
-// CFSetCreateMutableCopy calls [raw.CFSetCreateMutableCopy] (C function CFSetCreateMutableCopy).
-func CFSetCreateMutableCopy(allocator unsafe.Pointer, capacity int, theSet unsafe.Pointer) unsafe.Pointer {
-	return raw.CFSetCreateMutableCopy(allocator, capacity, theSet)
+var _fnCFSocketEnableCallBacks func(objc.ID, int)
+
+// CFSocketEnableCallBacks calls the CoreFoundation framework function CFSocketEnableCallBacks.
+func CFSocketEnableCallBacks(s obj.Object, callBackTypes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketEnableCallBacks == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketEnableCallBacks, _lib, "CFSocketEnableCallBacks")
+	}
+	_fnCFSocketEnableCallBacks(objref.IDOf(s), callBackTypes)
 }
 
-// CFSetGetCount calls [raw.CFSetGetCount] (C function CFSetGetCount).
-func CFSetGetCount(theSet unsafe.Pointer) int {
-	return raw.CFSetGetCount(theSet)
-}
+var _fnCFSocketGetDefaultNameRegistryPortNumber func() uint16
 
-// CFSetGetCountOfValue calls [raw.CFSetGetCountOfValue] (C function CFSetGetCountOfValue).
-func CFSetGetCountOfValue(theSet unsafe.Pointer, value unsafe.Pointer) int {
-	return raw.CFSetGetCountOfValue(theSet, value)
-}
-
-// CFSetGetTypeID calls [raw.CFSetGetTypeID] (C function CFSetGetTypeID).
-func CFSetGetTypeID() uint {
-	return raw.CFSetGetTypeID()
-}
-
-// CFSetGetValue calls [raw.CFSetGetValue] (C function CFSetGetValue).
-func CFSetGetValue(theSet unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return raw.CFSetGetValue(theSet, value)
-}
-
-// CFSetGetValueIfPresent calls [raw.CFSetGetValueIfPresent] (C function CFSetGetValueIfPresent).
-func CFSetGetValueIfPresent(theSet unsafe.Pointer, candidate unsafe.Pointer, value unsafe.Pointer) uint8 {
-	return raw.CFSetGetValueIfPresent(theSet, candidate, value)
-}
-
-// CFSetGetValues calls [raw.CFSetGetValues] (C function CFSetGetValues).
-func CFSetGetValues(theSet unsafe.Pointer, values unsafe.Pointer) {
-	raw.CFSetGetValues(theSet, values)
-}
-
-// CFSetRemoveAllValues calls [raw.CFSetRemoveAllValues] (C function CFSetRemoveAllValues).
-func CFSetRemoveAllValues(theSet unsafe.Pointer) {
-	raw.CFSetRemoveAllValues(theSet)
-}
-
-// CFSetRemoveValue calls [raw.CFSetRemoveValue] (C function CFSetRemoveValue).
-func CFSetRemoveValue(theSet unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFSetRemoveValue(theSet, value)
-}
-
-// CFSetReplaceValue calls [raw.CFSetReplaceValue] (C function CFSetReplaceValue).
-func CFSetReplaceValue(theSet unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFSetReplaceValue(theSet, value)
-}
-
-// CFSetSetValue calls [raw.CFSetSetValue] (C function CFSetSetValue).
-func CFSetSetValue(theSet unsafe.Pointer, value unsafe.Pointer) {
-	raw.CFSetSetValue(theSet, value)
-}
-
-// CFShow calls [raw.CFShow] (C function CFShow).
-func CFShow(obj unsafe.Pointer) {
-	raw.CFShow(obj)
-}
-
-// CFShowStr calls [raw.CFShowStr] (C function CFShowStr).
-func CFShowStr(str unsafe.Pointer) {
-	raw.CFShowStr(str)
-}
-
-// CFSocketConnectToAddress calls [raw.CFSocketConnectToAddress] (C function CFSocketConnectToAddress).
-func CFSocketConnectToAddress(s unsafe.Pointer, address unsafe.Pointer, timeout float64) CFSocketError {
-	return CFSocketError(raw.CFSocketConnectToAddress(s, address, timeout))
-}
-
-// CFSocketCopyAddress calls [raw.CFSocketCopyAddress] (C function CFSocketCopyAddress).
-func CFSocketCopyAddress(s unsafe.Pointer) unsafe.Pointer {
-	return raw.CFSocketCopyAddress(s)
-}
-
-// CFSocketCopyPeerAddress calls [raw.CFSocketCopyPeerAddress] (C function CFSocketCopyPeerAddress).
-func CFSocketCopyPeerAddress(s unsafe.Pointer) unsafe.Pointer {
-	return raw.CFSocketCopyPeerAddress(s)
-}
-
-// CFSocketCopyRegisteredSocketSignature calls [raw.CFSocketCopyRegisteredSocketSignature] (C function CFSocketCopyRegisteredSocketSignature).
-func CFSocketCopyRegisteredSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature, nameServerAddress unsafe.Pointer) CFSocketError {
-	return CFSocketError(raw.CFSocketCopyRegisteredSocketSignature(nameServerSignature, timeout, name, signature, nameServerAddress))
-}
-
-// CFSocketCopyRegisteredValue calls [raw.CFSocketCopyRegisteredValue] (C function CFSocketCopyRegisteredValue).
-func CFSocketCopyRegisteredValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer, nameServerAddress unsafe.Pointer) CFSocketError {
-	return CFSocketError(raw.CFSocketCopyRegisteredValue(nameServerSignature, timeout, name, value, nameServerAddress))
-}
-
-// CFSocketCreate calls [raw.CFSocketCreate] (C function CFSocketCreate).
-func CFSocketCreate(allocator unsafe.Pointer, protocolFamily int, socketType int, protocol int, callBackTypes uint, callout unsafe.Pointer, context_ *raw.CFSocketContext) unsafe.Pointer {
-	return raw.CFSocketCreate(allocator, protocolFamily, socketType, protocol, callBackTypes, callout, context_)
-}
-
-// CFSocketCreateConnectedToSocketSignature calls [raw.CFSocketCreateConnectedToSocketSignature] (C function CFSocketCreateConnectedToSocketSignature).
-func CFSocketCreateConnectedToSocketSignature(allocator unsafe.Pointer, signature *raw.CFSocketSignature, callBackTypes uint, callout unsafe.Pointer, context_ *raw.CFSocketContext, timeout float64) unsafe.Pointer {
-	return raw.CFSocketCreateConnectedToSocketSignature(allocator, signature, callBackTypes, callout, context_, timeout)
-}
-
-// CFSocketCreateRunLoopSource calls [raw.CFSocketCreateRunLoopSource] (C function CFSocketCreateRunLoopSource).
-func CFSocketCreateRunLoopSource(allocator unsafe.Pointer, s unsafe.Pointer, order int) unsafe.Pointer {
-	return raw.CFSocketCreateRunLoopSource(allocator, s, order)
-}
-
-// CFSocketCreateWithNative calls [raw.CFSocketCreateWithNative] (C function CFSocketCreateWithNative).
-func CFSocketCreateWithNative(allocator unsafe.Pointer, sock int, callBackTypes uint, callout unsafe.Pointer, context_ *raw.CFSocketContext) unsafe.Pointer {
-	return raw.CFSocketCreateWithNative(allocator, sock, callBackTypes, callout, context_)
-}
-
-// CFSocketCreateWithSocketSignature calls [raw.CFSocketCreateWithSocketSignature] (C function CFSocketCreateWithSocketSignature).
-func CFSocketCreateWithSocketSignature(allocator unsafe.Pointer, signature *raw.CFSocketSignature, callBackTypes uint, callout unsafe.Pointer, context_ *raw.CFSocketContext) unsafe.Pointer {
-	return raw.CFSocketCreateWithSocketSignature(allocator, signature, callBackTypes, callout, context_)
-}
-
-// CFSocketDisableCallBacks calls [raw.CFSocketDisableCallBacks] (C function CFSocketDisableCallBacks).
-func CFSocketDisableCallBacks(s unsafe.Pointer, callBackTypes uint) {
-	raw.CFSocketDisableCallBacks(s, callBackTypes)
-}
-
-// CFSocketEnableCallBacks calls [raw.CFSocketEnableCallBacks] (C function CFSocketEnableCallBacks).
-func CFSocketEnableCallBacks(s unsafe.Pointer, callBackTypes uint) {
-	raw.CFSocketEnableCallBacks(s, callBackTypes)
-}
-
-// CFSocketGetContext calls [raw.CFSocketGetContext] (C function CFSocketGetContext).
-func CFSocketGetContext(s unsafe.Pointer, context_ *raw.CFSocketContext) {
-	raw.CFSocketGetContext(s, context_)
-}
-
-// CFSocketGetDefaultNameRegistryPortNumber calls [raw.CFSocketGetDefaultNameRegistryPortNumber] (C function CFSocketGetDefaultNameRegistryPortNumber).
+// CFSocketGetDefaultNameRegistryPortNumber calls the CoreFoundation framework function CFSocketGetDefaultNameRegistryPortNumber.
 func CFSocketGetDefaultNameRegistryPortNumber() uint16 {
-	return raw.CFSocketGetDefaultNameRegistryPortNumber()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketGetDefaultNameRegistryPortNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketGetDefaultNameRegistryPortNumber, _lib, "CFSocketGetDefaultNameRegistryPortNumber")
+	}
+	return _fnCFSocketGetDefaultNameRegistryPortNumber()
 }
 
-// CFSocketGetNative calls [raw.CFSocketGetNative] (C function CFSocketGetNative).
-func CFSocketGetNative(s unsafe.Pointer) int {
-	return raw.CFSocketGetNative(s)
+var _fnCFSocketGetNative func(objc.ID) int
+
+// CFSocketGetNative calls the CoreFoundation framework function CFSocketGetNative.
+func CFSocketGetNative(s obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketGetNative == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketGetNative, _lib, "CFSocketGetNative")
+	}
+	return _fnCFSocketGetNative(objref.IDOf(s))
 }
 
-// CFSocketGetSocketFlags calls [raw.CFSocketGetSocketFlags] (C function CFSocketGetSocketFlags).
-func CFSocketGetSocketFlags(s unsafe.Pointer) uint {
-	return raw.CFSocketGetSocketFlags(s)
+var _fnCFSocketGetSocketFlags func(objc.ID) int
+
+// CFSocketGetSocketFlags calls the CoreFoundation framework function CFSocketGetSocketFlags.
+func CFSocketGetSocketFlags(s obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketGetSocketFlags == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketGetSocketFlags, _lib, "CFSocketGetSocketFlags")
+	}
+	return _fnCFSocketGetSocketFlags(objref.IDOf(s))
 }
 
-// CFSocketGetTypeID calls [raw.CFSocketGetTypeID] (C function CFSocketGetTypeID).
-func CFSocketGetTypeID() uint {
-	return raw.CFSocketGetTypeID()
+var _fnCFSocketGetTypeID func() int
+
+// CFSocketGetTypeID calls the CoreFoundation framework function CFSocketGetTypeID.
+func CFSocketGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketGetTypeID, _lib, "CFSocketGetTypeID")
+	}
+	return _fnCFSocketGetTypeID()
 }
 
-// CFSocketInvalidate calls [raw.CFSocketInvalidate] (C function CFSocketInvalidate).
-func CFSocketInvalidate(s unsafe.Pointer) {
-	raw.CFSocketInvalidate(s)
+var _fnCFSocketInvalidate func(objc.ID)
+
+// CFSocketInvalidate calls the CoreFoundation framework function CFSocketInvalidate.
+func CFSocketInvalidate(s obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketInvalidate, _lib, "CFSocketInvalidate")
+	}
+	_fnCFSocketInvalidate(objref.IDOf(s))
 }
 
-// CFSocketIsValid calls [raw.CFSocketIsValid] (C function CFSocketIsValid).
-func CFSocketIsValid(s unsafe.Pointer) uint8 {
-	return raw.CFSocketIsValid(s)
+var _fnCFSocketIsValid func(objc.ID) uint8
+
+// CFSocketIsValid calls the CoreFoundation framework function CFSocketIsValid.
+func CFSocketIsValid(s obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketIsValid, _lib, "CFSocketIsValid")
+	}
+	return _fnCFSocketIsValid(objref.IDOf(s))
 }
 
-// CFSocketRegisterSocketSignature calls [raw.CFSocketRegisterSocketSignature] (C function CFSocketRegisterSocketSignature).
-func CFSocketRegisterSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature) CFSocketError {
-	return CFSocketError(raw.CFSocketRegisterSocketSignature(nameServerSignature, timeout, name, signature))
+var _fnCFSocketSendData func(objc.ID, objc.ID, objc.ID, float64) CFSocketError
+
+// CFSocketSendData calls the CoreFoundation framework function CFSocketSendData.
+func CFSocketSendData(s obj.Object, address obj.Object, data obj.Object, timeout float64) CFSocketError {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketSendData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketSendData, _lib, "CFSocketSendData")
+	}
+	return _fnCFSocketSendData(objref.IDOf(s), objref.IDOf(address), objref.IDOf(data), timeout)
 }
 
-// CFSocketRegisterValue calls [raw.CFSocketRegisterValue] (C function CFSocketRegisterValue).
-func CFSocketRegisterValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer) CFSocketError {
-	return CFSocketError(raw.CFSocketRegisterValue(nameServerSignature, timeout, name, value))
+var _fnCFSocketSetAddress func(objc.ID, objc.ID) CFSocketError
+
+// CFSocketSetAddress calls the CoreFoundation framework function CFSocketSetAddress.
+func CFSocketSetAddress(s obj.Object, address obj.Object) CFSocketError {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketSetAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketSetAddress, _lib, "CFSocketSetAddress")
+	}
+	return _fnCFSocketSetAddress(objref.IDOf(s), objref.IDOf(address))
 }
 
-// CFSocketSendData calls [raw.CFSocketSendData] (C function CFSocketSendData).
-func CFSocketSendData(s unsafe.Pointer, address unsafe.Pointer, data unsafe.Pointer, timeout float64) CFSocketError {
-	return CFSocketError(raw.CFSocketSendData(s, address, data, timeout))
-}
+var _fnCFSocketSetDefaultNameRegistryPortNumber func(uint16)
 
-// CFSocketSetAddress calls [raw.CFSocketSetAddress] (C function CFSocketSetAddress).
-func CFSocketSetAddress(s unsafe.Pointer, address unsafe.Pointer) CFSocketError {
-	return CFSocketError(raw.CFSocketSetAddress(s, address))
-}
-
-// CFSocketSetDefaultNameRegistryPortNumber calls [raw.CFSocketSetDefaultNameRegistryPortNumber] (C function CFSocketSetDefaultNameRegistryPortNumber).
+// CFSocketSetDefaultNameRegistryPortNumber calls the CoreFoundation framework function CFSocketSetDefaultNameRegistryPortNumber.
 func CFSocketSetDefaultNameRegistryPortNumber(port uint16) {
-	raw.CFSocketSetDefaultNameRegistryPortNumber(port)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketSetDefaultNameRegistryPortNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketSetDefaultNameRegistryPortNumber, _lib, "CFSocketSetDefaultNameRegistryPortNumber")
+	}
+	_fnCFSocketSetDefaultNameRegistryPortNumber(port)
 }
 
-// CFSocketSetSocketFlags calls [raw.CFSocketSetSocketFlags] (C function CFSocketSetSocketFlags).
-func CFSocketSetSocketFlags(s unsafe.Pointer, flags uint) {
-	raw.CFSocketSetSocketFlags(s, flags)
-}
+var _fnCFSocketSetSocketFlags func(objc.ID, int)
 
-// CFSocketUnregister calls [raw.CFSocketUnregister] (C function CFSocketUnregister).
-func CFSocketUnregister(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer) CFSocketError {
-	return CFSocketError(raw.CFSocketUnregister(nameServerSignature, timeout, name))
+// CFSocketSetSocketFlags calls the CoreFoundation framework function CFSocketSetSocketFlags.
+func CFSocketSetSocketFlags(s obj.Object, flags int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSocketSetSocketFlags == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSocketSetSocketFlags, _lib, "CFSocketSetSocketFlags")
+	}
+	_fnCFSocketSetSocketFlags(objref.IDOf(s), flags)
 }
 
-// CFStreamCreateBoundPair calls [raw.CFStreamCreateBoundPair] (C function CFStreamCreateBoundPair).
-func CFStreamCreateBoundPair(alloc unsafe.Pointer, readStream unsafe.Pointer, writeStream unsafe.Pointer, transferBufferSize int) {
-	raw.CFStreamCreateBoundPair(alloc, readStream, writeStream, transferBufferSize)
-}
+var _fnCFStringAppend func(objc.ID, objc.ID)
 
-// CFStreamCreatePairWithPeerSocketSignature calls [raw.CFStreamCreatePairWithPeerSocketSignature] (C function CFStreamCreatePairWithPeerSocketSignature).
-func CFStreamCreatePairWithPeerSocketSignature(alloc unsafe.Pointer, signature *raw.CFSocketSignature, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
-	raw.CFStreamCreatePairWithPeerSocketSignature(alloc, signature, readStream, writeStream)
+// CFStringAppend calls the CoreFoundation framework function CFStringAppend.
+func CFStringAppend(theString obj.Object, appendedString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringAppend == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringAppend, _lib, "CFStringAppend")
+	}
+	_fnCFStringAppend(objref.IDOf(theString), objref.IDOf(appendedString))
 }
 
-// CFStreamCreatePairWithSocket calls [raw.CFStreamCreatePairWithSocket] (C function CFStreamCreatePairWithSocket).
-func CFStreamCreatePairWithSocket(alloc unsafe.Pointer, sock int, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
-	raw.CFStreamCreatePairWithSocket(alloc, sock, readStream, writeStream)
-}
+var _fnCFStringAppendCString func(objc.ID, string, int)
 
-// CFStreamCreatePairWithSocketToHost calls [raw.CFStreamCreatePairWithSocketToHost] (C function CFStreamCreatePairWithSocketToHost).
-func CFStreamCreatePairWithSocketToHost(alloc unsafe.Pointer, host unsafe.Pointer, port uint, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
-	raw.CFStreamCreatePairWithSocketToHost(alloc, host, port, readStream, writeStream)
+// CFStringAppendCString calls the CoreFoundation framework function CFStringAppendCString.
+func CFStringAppendCString(theString obj.Object, cStr string, encoding int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringAppendCString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringAppendCString, _lib, "CFStringAppendCString")
+	}
+	_fnCFStringAppendCString(objref.IDOf(theString), cStr, encoding)
 }
 
-// CFStringAppend calls [raw.CFStringAppend] (C function CFStringAppend).
-func CFStringAppend(theString unsafe.Pointer, appendedString unsafe.Pointer) {
-	raw.CFStringAppend(theString, appendedString)
-}
+var _fnCFStringAppendFormat func(objc.ID, objc.ID, objc.ID)
 
-// CFStringAppendCString calls [raw.CFStringAppendCString] (C function CFStringAppendCString).
-func CFStringAppendCString(theString unsafe.Pointer, cStr string, encoding uint) {
-	raw.CFStringAppendCString(theString, cStr, encoding)
+// CFStringAppendFormat calls the CoreFoundation framework function CFStringAppendFormat.
+func CFStringAppendFormat(theString obj.Object, formatOptions obj.Object, format obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringAppendFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringAppendFormat, _lib, "CFStringAppendFormat")
+	}
+	_fnCFStringAppendFormat(objref.IDOf(theString), objref.IDOf(formatOptions), objref.IDOf(format))
 }
 
-// CFStringAppendCharacters calls [raw.CFStringAppendCharacters] (C function CFStringAppendCharacters).
-func CFStringAppendCharacters(theString unsafe.Pointer, chars *uint16, numChars int) {
-	raw.CFStringAppendCharacters(theString, chars, numChars)
-}
+var _fnCFStringAppendFormatAndArguments func(objc.ID, objc.ID, objc.ID, string)
 
-// CFStringAppendFormat calls [raw.CFStringAppendFormat] (C function CFStringAppendFormat).
-func CFStringAppendFormat(theString unsafe.Pointer, formatOptions unsafe.Pointer, format unsafe.Pointer) {
-	raw.CFStringAppendFormat(theString, formatOptions, format)
+// CFStringAppendFormatAndArguments calls the CoreFoundation framework function CFStringAppendFormatAndArguments.
+func CFStringAppendFormatAndArguments(theString obj.Object, formatOptions obj.Object, format obj.Object, arguments string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringAppendFormatAndArguments == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringAppendFormatAndArguments, _lib, "CFStringAppendFormatAndArguments")
+	}
+	_fnCFStringAppendFormatAndArguments(objref.IDOf(theString), objref.IDOf(formatOptions), objref.IDOf(format), arguments)
 }
 
-// CFStringAppendFormatAndArguments calls [raw.CFStringAppendFormatAndArguments] (C function CFStringAppendFormatAndArguments).
-func CFStringAppendFormatAndArguments(theString unsafe.Pointer, formatOptions unsafe.Pointer, format unsafe.Pointer, arguments string) {
-	raw.CFStringAppendFormatAndArguments(theString, formatOptions, format, arguments)
-}
+var _fnCFStringCapitalize func(objc.ID, objc.ID)
 
-// CFStringAppendPascalString calls [raw.CFStringAppendPascalString] (C function CFStringAppendPascalString).
-func CFStringAppendPascalString(theString unsafe.Pointer, pStr *uint8, encoding uint) {
-	raw.CFStringAppendPascalString(theString, pStr, encoding)
+// CFStringCapitalize calls the CoreFoundation framework function CFStringCapitalize.
+func CFStringCapitalize(theString obj.Object, locale obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCapitalize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCapitalize, _lib, "CFStringCapitalize")
+	}
+	_fnCFStringCapitalize(objref.IDOf(theString), objref.IDOf(locale))
 }
 
-// CFStringCapitalize calls [raw.CFStringCapitalize] (C function CFStringCapitalize).
-func CFStringCapitalize(theString unsafe.Pointer, locale unsafe.Pointer) {
-	raw.CFStringCapitalize(theString, locale)
-}
+var _fnCFStringCompare func(objc.ID, objc.ID, CFStringCompareFlags) CFComparisonResult
 
-// CFStringCompare calls [raw.CFStringCompare] (C function CFStringCompare).
-func CFStringCompare(theString1 unsafe.Pointer, theString2 unsafe.Pointer, compareOptions CFStringCompareFlags) CFComparisonResult {
-	return CFComparisonResult(raw.CFStringCompare(theString1, theString2, raw.CFStringCompareFlags(compareOptions)))
+// CFStringCompare calls the CoreFoundation framework function CFStringCompare.
+func CFStringCompare(theString1 obj.Object, theString2 obj.Object, compareOptions CFStringCompareFlags) CFComparisonResult {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCompare == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCompare, _lib, "CFStringCompare")
+	}
+	return _fnCFStringCompare(objref.IDOf(theString1), objref.IDOf(theString2), compareOptions)
 }
 
-// CFStringCompareWithOptions calls [raw.CFStringCompareWithOptions] (C function CFStringCompareWithOptions).
-func CFStringCompareWithOptions(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions CFStringCompareFlags) CFComparisonResult {
-	return CFComparisonResult(raw.CFStringCompareWithOptions(theString1, theString2, rangeToCompare, raw.CFStringCompareFlags(compareOptions)))
-}
+var _fnCFStringConvertEncodingToIANACharSetName func(int) objc.ID
 
-// CFStringCompareWithOptionsAndLocale calls [raw.CFStringCompareWithOptionsAndLocale] (C function CFStringCompareWithOptionsAndLocale).
-func CFStringCompareWithOptionsAndLocale(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions CFStringCompareFlags, locale unsafe.Pointer) CFComparisonResult {
-	return CFComparisonResult(raw.CFStringCompareWithOptionsAndLocale(theString1, theString2, rangeToCompare, raw.CFStringCompareFlags(compareOptions), locale))
+// CFStringConvertEncodingToIANACharSetName calls the CoreFoundation framework function CFStringConvertEncodingToIANACharSetName.
+func CFStringConvertEncodingToIANACharSetName(encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertEncodingToIANACharSetName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertEncodingToIANACharSetName, _lib, "CFStringConvertEncodingToIANACharSetName")
+	}
+	_ret := _fnCFStringConvertEncodingToIANACharSetName(encoding)
+	return obj.Wrap(_ret)
 }
 
-// CFStringConvertEncodingToIANACharSetName calls [raw.CFStringConvertEncodingToIANACharSetName] (C function CFStringConvertEncodingToIANACharSetName).
-func CFStringConvertEncodingToIANACharSetName(encoding uint) unsafe.Pointer {
-	return raw.CFStringConvertEncodingToIANACharSetName(encoding)
-}
+var _fnCFStringConvertEncodingToNSStringEncoding func(int) int
 
-// CFStringConvertEncodingToNSStringEncoding calls [raw.CFStringConvertEncodingToNSStringEncoding] (C function CFStringConvertEncodingToNSStringEncoding).
-func CFStringConvertEncodingToNSStringEncoding(encoding uint) uint {
-	return raw.CFStringConvertEncodingToNSStringEncoding(encoding)
+// CFStringConvertEncodingToNSStringEncoding calls the CoreFoundation framework function CFStringConvertEncodingToNSStringEncoding.
+func CFStringConvertEncodingToNSStringEncoding(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertEncodingToNSStringEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertEncodingToNSStringEncoding, _lib, "CFStringConvertEncodingToNSStringEncoding")
+	}
+	return _fnCFStringConvertEncodingToNSStringEncoding(encoding)
 }
 
-// CFStringConvertEncodingToWindowsCodepage calls [raw.CFStringConvertEncodingToWindowsCodepage] (C function CFStringConvertEncodingToWindowsCodepage).
-func CFStringConvertEncodingToWindowsCodepage(encoding uint) uint {
-	return raw.CFStringConvertEncodingToWindowsCodepage(encoding)
-}
+var _fnCFStringConvertEncodingToWindowsCodepage func(int) int
 
-// CFStringConvertIANACharSetNameToEncoding calls [raw.CFStringConvertIANACharSetNameToEncoding] (C function CFStringConvertIANACharSetNameToEncoding).
-func CFStringConvertIANACharSetNameToEncoding(theString unsafe.Pointer) uint {
-	return raw.CFStringConvertIANACharSetNameToEncoding(theString)
+// CFStringConvertEncodingToWindowsCodepage calls the CoreFoundation framework function CFStringConvertEncodingToWindowsCodepage.
+func CFStringConvertEncodingToWindowsCodepage(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertEncodingToWindowsCodepage == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertEncodingToWindowsCodepage, _lib, "CFStringConvertEncodingToWindowsCodepage")
+	}
+	return _fnCFStringConvertEncodingToWindowsCodepage(encoding)
 }
 
-// CFStringConvertNSStringEncodingToEncoding calls [raw.CFStringConvertNSStringEncodingToEncoding] (C function CFStringConvertNSStringEncodingToEncoding).
-func CFStringConvertNSStringEncodingToEncoding(encoding uint) uint {
-	return raw.CFStringConvertNSStringEncodingToEncoding(encoding)
-}
+var _fnCFStringConvertIANACharSetNameToEncoding func(objc.ID) int
 
-// CFStringConvertWindowsCodepageToEncoding calls [raw.CFStringConvertWindowsCodepageToEncoding] (C function CFStringConvertWindowsCodepageToEncoding).
-func CFStringConvertWindowsCodepageToEncoding(codepage uint) uint {
-	return raw.CFStringConvertWindowsCodepageToEncoding(codepage)
+// CFStringConvertIANACharSetNameToEncoding calls the CoreFoundation framework function CFStringConvertIANACharSetNameToEncoding.
+func CFStringConvertIANACharSetNameToEncoding(theString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertIANACharSetNameToEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertIANACharSetNameToEncoding, _lib, "CFStringConvertIANACharSetNameToEncoding")
+	}
+	return _fnCFStringConvertIANACharSetNameToEncoding(objref.IDOf(theString))
 }
 
-// CFStringCreateArrayBySeparatingStrings calls [raw.CFStringCreateArrayBySeparatingStrings] (C function CFStringCreateArrayBySeparatingStrings).
-func CFStringCreateArrayBySeparatingStrings(alloc unsafe.Pointer, theString unsafe.Pointer, separatorString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateArrayBySeparatingStrings(alloc, theString, separatorString)
-}
+var _fnCFStringConvertNSStringEncodingToEncoding func(int) int
 
-// CFStringCreateArrayWithFindResults calls [raw.CFStringCreateArrayWithFindResults] (C function CFStringCreateArrayWithFindResults).
-func CFStringCreateArrayWithFindResults(alloc unsafe.Pointer, theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions CFStringCompareFlags) unsafe.Pointer {
-	return raw.CFStringCreateArrayWithFindResults(alloc, theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(compareOptions))
+// CFStringConvertNSStringEncodingToEncoding calls the CoreFoundation framework function CFStringConvertNSStringEncodingToEncoding.
+func CFStringConvertNSStringEncodingToEncoding(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertNSStringEncodingToEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertNSStringEncodingToEncoding, _lib, "CFStringConvertNSStringEncodingToEncoding")
+	}
+	return _fnCFStringConvertNSStringEncodingToEncoding(encoding)
 }
 
-// CFStringCreateByCombiningStrings calls [raw.CFStringCreateByCombiningStrings] (C function CFStringCreateByCombiningStrings).
-func CFStringCreateByCombiningStrings(alloc unsafe.Pointer, theArray unsafe.Pointer, separatorString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateByCombiningStrings(alloc, theArray, separatorString)
-}
+var _fnCFStringConvertWindowsCodepageToEncoding func(int) int
 
-// CFStringCreateCopy calls [raw.CFStringCreateCopy] (C function CFStringCreateCopy).
-func CFStringCreateCopy(alloc unsafe.Pointer, theString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateCopy(alloc, theString)
+// CFStringConvertWindowsCodepageToEncoding calls the CoreFoundation framework function CFStringConvertWindowsCodepageToEncoding.
+func CFStringConvertWindowsCodepageToEncoding(codepage int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringConvertWindowsCodepageToEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringConvertWindowsCodepageToEncoding, _lib, "CFStringConvertWindowsCodepageToEncoding")
+	}
+	return _fnCFStringConvertWindowsCodepageToEncoding(codepage)
 }
 
-// CFStringCreateExternalRepresentation calls [raw.CFStringCreateExternalRepresentation] (C function CFStringCreateExternalRepresentation).
-func CFStringCreateExternalRepresentation(alloc unsafe.Pointer, theString unsafe.Pointer, encoding uint, lossByte uint8) unsafe.Pointer {
-	return raw.CFStringCreateExternalRepresentation(alloc, theString, encoding, lossByte)
-}
+var _fnCFStringCreateArrayBySeparatingStrings func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFStringCreateFromExternalRepresentation calls [raw.CFStringCreateFromExternalRepresentation] (C function CFStringCreateFromExternalRepresentation).
-func CFStringCreateFromExternalRepresentation(alloc unsafe.Pointer, data unsafe.Pointer, encoding uint) unsafe.Pointer {
-	return raw.CFStringCreateFromExternalRepresentation(alloc, data, encoding)
+// CFStringCreateArrayBySeparatingStrings calls the CoreFoundation framework function CFStringCreateArrayBySeparatingStrings.
+func CFStringCreateArrayBySeparatingStrings(alloc obj.Object, theString obj.Object, separatorString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateArrayBySeparatingStrings == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateArrayBySeparatingStrings, _lib, "CFStringCreateArrayBySeparatingStrings")
+	}
+	_ret := _fnCFStringCreateArrayBySeparatingStrings(objref.IDOf(alloc), objref.IDOf(theString), objref.IDOf(separatorString))
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateMutable calls [raw.CFStringCreateMutable] (C function CFStringCreateMutable).
-func CFStringCreateMutable(alloc unsafe.Pointer, maxLength int) unsafe.Pointer {
-	return raw.CFStringCreateMutable(alloc, maxLength)
-}
+var _fnCFStringCreateByCombiningStrings func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFStringCreateMutableCopy calls [raw.CFStringCreateMutableCopy] (C function CFStringCreateMutableCopy).
-func CFStringCreateMutableCopy(alloc unsafe.Pointer, maxLength int, theString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateMutableCopy(alloc, maxLength, theString)
+// CFStringCreateByCombiningStrings calls the CoreFoundation framework function CFStringCreateByCombiningStrings.
+func CFStringCreateByCombiningStrings(alloc obj.Object, theArray obj.Object, separatorString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateByCombiningStrings == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateByCombiningStrings, _lib, "CFStringCreateByCombiningStrings")
+	}
+	_ret := _fnCFStringCreateByCombiningStrings(objref.IDOf(alloc), objref.IDOf(theArray), objref.IDOf(separatorString))
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateMutableWithExternalCharactersNoCopy calls [raw.CFStringCreateMutableWithExternalCharactersNoCopy] (C function CFStringCreateMutableWithExternalCharactersNoCopy).
-func CFStringCreateMutableWithExternalCharactersNoCopy(alloc unsafe.Pointer, chars *uint16, numChars int, capacity int, externalCharactersAllocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateMutableWithExternalCharactersNoCopy(alloc, chars, numChars, capacity, externalCharactersAllocator)
-}
+var _fnCFStringCreateCopy func(objc.ID, objc.ID) objc.ID
 
-// CFStringCreateWithBytes calls [raw.CFStringCreateWithBytes] (C function CFStringCreateWithBytes).
-func CFStringCreateWithBytes(alloc unsafe.Pointer, bytes_ *uint8, numBytes int, encoding uint, isExternalRepresentation uint8) unsafe.Pointer {
-	return raw.CFStringCreateWithBytes(alloc, bytes_, numBytes, encoding, isExternalRepresentation)
+// CFStringCreateCopy calls the CoreFoundation framework function CFStringCreateCopy.
+func CFStringCreateCopy(alloc obj.Object, theString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateCopy, _lib, "CFStringCreateCopy")
+	}
+	_ret := _fnCFStringCreateCopy(objref.IDOf(alloc), objref.IDOf(theString))
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithBytesNoCopy calls [raw.CFStringCreateWithBytesNoCopy] (C function CFStringCreateWithBytesNoCopy).
-func CFStringCreateWithBytesNoCopy(alloc unsafe.Pointer, bytes_ *uint8, numBytes int, encoding uint, isExternalRepresentation uint8, contentsDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateWithBytesNoCopy(alloc, bytes_, numBytes, encoding, isExternalRepresentation, contentsDeallocator)
-}
+var _fnCFStringCreateExternalRepresentation func(objc.ID, objc.ID, int, uint8) objc.ID
 
-// CFStringCreateWithCString calls [raw.CFStringCreateWithCString] (C function CFStringCreateWithCString).
-func CFStringCreateWithCString(alloc unsafe.Pointer, cStr string, encoding uint) unsafe.Pointer {
-	return raw.CFStringCreateWithCString(alloc, cStr, encoding)
+// CFStringCreateExternalRepresentation calls the CoreFoundation framework function CFStringCreateExternalRepresentation.
+func CFStringCreateExternalRepresentation(alloc obj.Object, theString obj.Object, encoding int, lossByte uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateExternalRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateExternalRepresentation, _lib, "CFStringCreateExternalRepresentation")
+	}
+	_ret := _fnCFStringCreateExternalRepresentation(objref.IDOf(alloc), objref.IDOf(theString), encoding, lossByte)
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithCStringNoCopy calls [raw.CFStringCreateWithCStringNoCopy] (C function CFStringCreateWithCStringNoCopy).
-func CFStringCreateWithCStringNoCopy(alloc unsafe.Pointer, cStr string, encoding uint, contentsDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateWithCStringNoCopy(alloc, cStr, encoding, contentsDeallocator)
-}
+var _fnCFStringCreateFromExternalRepresentation func(objc.ID, objc.ID, int) objc.ID
 
-// CFStringCreateWithCharacters calls [raw.CFStringCreateWithCharacters] (C function CFStringCreateWithCharacters).
-func CFStringCreateWithCharacters(alloc unsafe.Pointer, chars *uint16, numChars int) unsafe.Pointer {
-	return raw.CFStringCreateWithCharacters(alloc, chars, numChars)
+// CFStringCreateFromExternalRepresentation calls the CoreFoundation framework function CFStringCreateFromExternalRepresentation.
+func CFStringCreateFromExternalRepresentation(alloc obj.Object, data obj.Object, encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateFromExternalRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateFromExternalRepresentation, _lib, "CFStringCreateFromExternalRepresentation")
+	}
+	_ret := _fnCFStringCreateFromExternalRepresentation(objref.IDOf(alloc), objref.IDOf(data), encoding)
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithCharactersNoCopy calls [raw.CFStringCreateWithCharactersNoCopy] (C function CFStringCreateWithCharactersNoCopy).
-func CFStringCreateWithCharactersNoCopy(alloc unsafe.Pointer, chars *uint16, numChars int, contentsDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateWithCharactersNoCopy(alloc, chars, numChars, contentsDeallocator)
-}
+var _fnCFStringCreateMutable func(objc.ID, int) objc.ID
 
-// CFStringCreateWithFileSystemRepresentation calls [raw.CFStringCreateWithFileSystemRepresentation] (C function CFStringCreateWithFileSystemRepresentation).
-func CFStringCreateWithFileSystemRepresentation(alloc unsafe.Pointer, buffer string) unsafe.Pointer {
-	return raw.CFStringCreateWithFileSystemRepresentation(alloc, buffer)
+// CFStringCreateMutable calls the CoreFoundation framework function CFStringCreateMutable.
+func CFStringCreateMutable(alloc obj.Object, maxLength int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateMutable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateMutable, _lib, "CFStringCreateMutable")
+	}
+	_ret := _fnCFStringCreateMutable(objref.IDOf(alloc), maxLength)
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithFormat calls [raw.CFStringCreateWithFormat] (C function CFStringCreateWithFormat).
-func CFStringCreateWithFormat(alloc unsafe.Pointer, formatOptions unsafe.Pointer, format unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateWithFormat(alloc, formatOptions, format)
-}
+var _fnCFStringCreateMutableCopy func(objc.ID, int, objc.ID) objc.ID
 
-// CFStringCreateWithFormatAndArguments calls [raw.CFStringCreateWithFormatAndArguments] (C function CFStringCreateWithFormatAndArguments).
-func CFStringCreateWithFormatAndArguments(alloc unsafe.Pointer, formatOptions unsafe.Pointer, format unsafe.Pointer, arguments string) unsafe.Pointer {
-	return raw.CFStringCreateWithFormatAndArguments(alloc, formatOptions, format, arguments)
+// CFStringCreateMutableCopy calls the CoreFoundation framework function CFStringCreateMutableCopy.
+func CFStringCreateMutableCopy(alloc obj.Object, maxLength int, theString obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateMutableCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateMutableCopy, _lib, "CFStringCreateMutableCopy")
+	}
+	_ret := _fnCFStringCreateMutableCopy(objref.IDOf(alloc), maxLength, objref.IDOf(theString))
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithPascalString calls [raw.CFStringCreateWithPascalString] (C function CFStringCreateWithPascalString).
-func CFStringCreateWithPascalString(alloc unsafe.Pointer, pStr *uint8, encoding uint) unsafe.Pointer {
-	return raw.CFStringCreateWithPascalString(alloc, pStr, encoding)
-}
+var _fnCFStringCreateWithCString func(objc.ID, string, int) objc.ID
 
-// CFStringCreateWithPascalStringNoCopy calls [raw.CFStringCreateWithPascalStringNoCopy] (C function CFStringCreateWithPascalStringNoCopy).
-func CFStringCreateWithPascalStringNoCopy(alloc unsafe.Pointer, pStr *uint8, encoding uint, contentsDeallocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringCreateWithPascalStringNoCopy(alloc, pStr, encoding, contentsDeallocator)
+// CFStringCreateWithCString calls the CoreFoundation framework function CFStringCreateWithCString.
+func CFStringCreateWithCString(alloc obj.Object, cStr string, encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateWithCString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCString, _lib, "CFStringCreateWithCString")
+	}
+	_ret := _fnCFStringCreateWithCString(objref.IDOf(alloc), cStr, encoding)
+	return obj.Wrap(_ret)
 }
 
-// CFStringCreateWithSubstring calls [raw.CFStringCreateWithSubstring] (C function CFStringCreateWithSubstring).
-func CFStringCreateWithSubstring(alloc unsafe.Pointer, str unsafe.Pointer, range_ raw.CFRange) unsafe.Pointer {
-	return raw.CFStringCreateWithSubstring(alloc, str, range_)
-}
+var _fnCFStringCreateWithCStringNoCopy func(objc.ID, string, int, objc.ID) objc.ID
 
-// CFStringDelete calls [raw.CFStringDelete] (C function CFStringDelete).
-func CFStringDelete(theString unsafe.Pointer, range_ raw.CFRange) {
-	raw.CFStringDelete(theString, range_)
+// CFStringCreateWithCStringNoCopy calls the CoreFoundation framework function CFStringCreateWithCStringNoCopy.
+func CFStringCreateWithCStringNoCopy(alloc obj.Object, cStr string, encoding int, contentsDeallocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateWithCStringNoCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithCStringNoCopy, _lib, "CFStringCreateWithCStringNoCopy")
+	}
+	_ret := _fnCFStringCreateWithCStringNoCopy(objref.IDOf(alloc), cStr, encoding, objref.IDOf(contentsDeallocator))
+	return obj.Wrap(_ret)
 }
 
-// CFStringFind calls [raw.CFStringFind] (C function CFStringFind).
-func CFStringFind(theString unsafe.Pointer, stringToFind unsafe.Pointer, compareOptions CFStringCompareFlags) raw.CFRange {
-	return raw.CFStringFind(theString, stringToFind, raw.CFStringCompareFlags(compareOptions))
-}
+var _fnCFStringCreateWithFileSystemRepresentation func(objc.ID, string) objc.ID
 
-// CFStringFindAndReplace calls [raw.CFStringFindAndReplace] (C function CFStringFindAndReplace).
-func CFStringFindAndReplace(theString unsafe.Pointer, stringToFind unsafe.Pointer, replacementString unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions CFStringCompareFlags) int {
-	return raw.CFStringFindAndReplace(theString, stringToFind, replacementString, rangeToSearch, raw.CFStringCompareFlags(compareOptions))
+// CFStringCreateWithFileSystemRepresentation calls the CoreFoundation framework function CFStringCreateWithFileSystemRepresentation.
+func CFStringCreateWithFileSystemRepresentation(alloc obj.Object, buffer string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateWithFileSystemRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFileSystemRepresentation, _lib, "CFStringCreateWithFileSystemRepresentation")
+	}
+	_ret := _fnCFStringCreateWithFileSystemRepresentation(objref.IDOf(alloc), buffer)
+	return obj.Wrap(_ret)
 }
 
-// CFStringFindCharacterFromSet calls [raw.CFStringFindCharacterFromSet] (C function CFStringFindCharacterFromSet).
-func CFStringFindCharacterFromSet(theString unsafe.Pointer, theSet unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, result *raw.CFRange) uint8 {
-	return raw.CFStringFindCharacterFromSet(theString, theSet, rangeToSearch, raw.CFStringCompareFlags(searchOptions), result)
-}
+var _fnCFStringCreateWithFormat func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFStringFindWithOptions calls [raw.CFStringFindWithOptions] (C function CFStringFindWithOptions).
-func CFStringFindWithOptions(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, result *raw.CFRange) uint8 {
-	return raw.CFStringFindWithOptions(theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(searchOptions), result)
+// CFStringCreateWithFormat calls the CoreFoundation framework function CFStringCreateWithFormat.
+func CFStringCreateWithFormat(alloc obj.Object, formatOptions obj.Object, format obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateWithFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFormat, _lib, "CFStringCreateWithFormat")
+	}
+	_ret := _fnCFStringCreateWithFormat(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(format))
+	return obj.Wrap(_ret)
 }
 
-// CFStringFindWithOptionsAndLocale calls [raw.CFStringFindWithOptionsAndLocale] (C function CFStringFindWithOptionsAndLocale).
-func CFStringFindWithOptionsAndLocale(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, locale unsafe.Pointer, result *raw.CFRange) uint8 {
-	return raw.CFStringFindWithOptionsAndLocale(theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(searchOptions), locale, result)
-}
+var _fnCFStringCreateWithFormatAndArguments func(objc.ID, objc.ID, objc.ID, string) objc.ID
 
-// CFStringFold calls [raw.CFStringFold] (C function CFStringFold).
-func CFStringFold(theString unsafe.Pointer, theFlags CFStringCompareFlags, theLocale unsafe.Pointer) {
-	raw.CFStringFold(theString, raw.CFStringCompareFlags(theFlags), theLocale)
+// CFStringCreateWithFormatAndArguments calls the CoreFoundation framework function CFStringCreateWithFormatAndArguments.
+func CFStringCreateWithFormatAndArguments(alloc obj.Object, formatOptions obj.Object, format obj.Object, arguments string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringCreateWithFormatAndArguments == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringCreateWithFormatAndArguments, _lib, "CFStringCreateWithFormatAndArguments")
+	}
+	_ret := _fnCFStringCreateWithFormatAndArguments(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(format), arguments)
+	return obj.Wrap(_ret)
 }
 
-// CFStringGetBytes calls [raw.CFStringGetBytes] (C function CFStringGetBytes).
-func CFStringGetBytes(theString unsafe.Pointer, range_ raw.CFRange, encoding uint, lossByte uint8, isExternalRepresentation uint8, buffer *uint8, maxBufLen int, usedBufLen *int) int {
-	return raw.CFStringGetBytes(theString, range_, encoding, lossByte, isExternalRepresentation, buffer, maxBufLen, usedBufLen)
-}
+var _fnCFStringFold func(objc.ID, CFStringCompareFlags, objc.ID)
 
-// CFStringGetCString calls [raw.CFStringGetCString] (C function CFStringGetCString).
-func CFStringGetCString(theString unsafe.Pointer, buffer string, bufferSize int, encoding uint) uint8 {
-	return raw.CFStringGetCString(theString, buffer, bufferSize, encoding)
+// CFStringFold calls the CoreFoundation framework function CFStringFold.
+func CFStringFold(theString obj.Object, theFlags CFStringCompareFlags, theLocale obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringFold == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringFold, _lib, "CFStringFold")
+	}
+	_fnCFStringFold(objref.IDOf(theString), theFlags, objref.IDOf(theLocale))
 }
 
-// CFStringGetCStringPtr calls [raw.CFStringGetCStringPtr] (C function CFStringGetCStringPtr).
-func CFStringGetCStringPtr(theString unsafe.Pointer, encoding uint) string {
-	return raw.CFStringGetCStringPtr(theString, encoding)
-}
+var _fnCFStringGetCString func(objc.ID, string, int, int) uint8
 
-// CFStringGetCharacterAtIndex calls [raw.CFStringGetCharacterAtIndex] (C function CFStringGetCharacterAtIndex).
-func CFStringGetCharacterAtIndex(theString unsafe.Pointer, idx int) uint16 {
-	return raw.CFStringGetCharacterAtIndex(theString, idx)
+// CFStringGetCString calls the CoreFoundation framework function CFStringGetCString.
+func CFStringGetCString(theString obj.Object, buffer string, bufferSize int, encoding int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetCString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetCString, _lib, "CFStringGetCString")
+	}
+	return _fnCFStringGetCString(objref.IDOf(theString), buffer, bufferSize, encoding)
 }
 
-// CFStringGetCharacterFromInlineBuffer calls [raw.CFStringGetCharacterFromInlineBuffer] (C function CFStringGetCharacterFromInlineBuffer).
-func CFStringGetCharacterFromInlineBuffer(buf *raw.CFStringInlineBuffer, idx int) uint16 {
-	return raw.CFStringGetCharacterFromInlineBuffer(buf, idx)
-}
+var _fnCFStringGetCStringPtr func(objc.ID, int) string
 
-// CFStringGetCharacters calls [raw.CFStringGetCharacters] (C function CFStringGetCharacters).
-func CFStringGetCharacters(theString unsafe.Pointer, range_ raw.CFRange, buffer *uint16) {
-	raw.CFStringGetCharacters(theString, range_, buffer)
+// CFStringGetCStringPtr calls the CoreFoundation framework function CFStringGetCStringPtr.
+func CFStringGetCStringPtr(theString obj.Object, encoding int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetCStringPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetCStringPtr, _lib, "CFStringGetCStringPtr")
+	}
+	return _fnCFStringGetCStringPtr(objref.IDOf(theString), encoding)
 }
 
-// CFStringGetCharactersPtr calls [raw.CFStringGetCharactersPtr] (C function CFStringGetCharactersPtr).
-func CFStringGetCharactersPtr(theString unsafe.Pointer) *uint16 {
-	return raw.CFStringGetCharactersPtr(theString)
-}
+var _fnCFStringGetCharacterAtIndex func(objc.ID, int) uint16
 
-// CFStringGetDoubleValue calls [raw.CFStringGetDoubleValue] (C function CFStringGetDoubleValue).
-func CFStringGetDoubleValue(str unsafe.Pointer) float64 {
-	return raw.CFStringGetDoubleValue(str)
+// CFStringGetCharacterAtIndex calls the CoreFoundation framework function CFStringGetCharacterAtIndex.
+func CFStringGetCharacterAtIndex(theString obj.Object, idx int) uint16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetCharacterAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetCharacterAtIndex, _lib, "CFStringGetCharacterAtIndex")
+	}
+	return _fnCFStringGetCharacterAtIndex(objref.IDOf(theString), idx)
 }
 
-// CFStringGetFastestEncoding calls [raw.CFStringGetFastestEncoding] (C function CFStringGetFastestEncoding).
-func CFStringGetFastestEncoding(theString unsafe.Pointer) uint {
-	return raw.CFStringGetFastestEncoding(theString)
-}
+var _fnCFStringGetDoubleValue func(objc.ID) float64
 
-// CFStringGetFileSystemRepresentation calls [raw.CFStringGetFileSystemRepresentation] (C function CFStringGetFileSystemRepresentation).
-func CFStringGetFileSystemRepresentation(string_ unsafe.Pointer, buffer string, maxBufLen int) uint8 {
-	return raw.CFStringGetFileSystemRepresentation(string_, buffer, maxBufLen)
+// CFStringGetDoubleValue calls the CoreFoundation framework function CFStringGetDoubleValue.
+func CFStringGetDoubleValue(str obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetDoubleValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetDoubleValue, _lib, "CFStringGetDoubleValue")
+	}
+	return _fnCFStringGetDoubleValue(objref.IDOf(str))
 }
 
-// CFStringGetHyphenationLocationBeforeIndex calls [raw.CFStringGetHyphenationLocationBeforeIndex] (C function CFStringGetHyphenationLocationBeforeIndex).
-func CFStringGetHyphenationLocationBeforeIndex(string_ unsafe.Pointer, location int, limitRange raw.CFRange, options uint, locale unsafe.Pointer, character *uint) int {
-	return raw.CFStringGetHyphenationLocationBeforeIndex(string_, location, limitRange, options, locale, character)
-}
+var _fnCFStringGetFastestEncoding func(objc.ID) int
 
-// CFStringGetIntValue calls [raw.CFStringGetIntValue] (C function CFStringGetIntValue).
-func CFStringGetIntValue(str unsafe.Pointer) int {
-	return raw.CFStringGetIntValue(str)
+// CFStringGetFastestEncoding calls the CoreFoundation framework function CFStringGetFastestEncoding.
+func CFStringGetFastestEncoding(theString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetFastestEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetFastestEncoding, _lib, "CFStringGetFastestEncoding")
+	}
+	return _fnCFStringGetFastestEncoding(objref.IDOf(theString))
 }
 
-// CFStringGetLength calls [raw.CFStringGetLength] (C function CFStringGetLength).
-func CFStringGetLength(theString unsafe.Pointer) int {
-	return raw.CFStringGetLength(theString)
-}
+var _fnCFStringGetFileSystemRepresentation func(objc.ID, string, int) uint8
 
-// CFStringGetLineBounds calls [raw.CFStringGetLineBounds] (C function CFStringGetLineBounds).
-func CFStringGetLineBounds(theString unsafe.Pointer, range_ raw.CFRange, lineBeginIndex *int, lineEndIndex *int, contentsEndIndex *int) {
-	raw.CFStringGetLineBounds(theString, range_, lineBeginIndex, lineEndIndex, contentsEndIndex)
+// CFStringGetFileSystemRepresentation calls the CoreFoundation framework function CFStringGetFileSystemRepresentation.
+func CFStringGetFileSystemRepresentation(string_ obj.Object, buffer string, maxBufLen int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetFileSystemRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetFileSystemRepresentation, _lib, "CFStringGetFileSystemRepresentation")
+	}
+	return _fnCFStringGetFileSystemRepresentation(objref.IDOf(string_), buffer, maxBufLen)
 }
 
-// CFStringGetListOfAvailableEncodings calls [raw.CFStringGetListOfAvailableEncodings] (C function CFStringGetListOfAvailableEncodings).
-func CFStringGetListOfAvailableEncodings() *uint {
-	return raw.CFStringGetListOfAvailableEncodings()
-}
+var _fnCFStringGetIntValue func(objc.ID) int
 
-// CFStringGetLongCharacterForSurrogatePair calls [raw.CFStringGetLongCharacterForSurrogatePair] (C function CFStringGetLongCharacterForSurrogatePair).
-func CFStringGetLongCharacterForSurrogatePair(surrogateHigh uint16, surrogateLow uint16) uint {
-	return raw.CFStringGetLongCharacterForSurrogatePair(surrogateHigh, surrogateLow)
+// CFStringGetIntValue calls the CoreFoundation framework function CFStringGetIntValue.
+func CFStringGetIntValue(str obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetIntValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetIntValue, _lib, "CFStringGetIntValue")
+	}
+	return _fnCFStringGetIntValue(objref.IDOf(str))
 }
 
-// CFStringGetMaximumSizeForEncoding calls [raw.CFStringGetMaximumSizeForEncoding] (C function CFStringGetMaximumSizeForEncoding).
-func CFStringGetMaximumSizeForEncoding(length int, encoding uint) int {
-	return raw.CFStringGetMaximumSizeForEncoding(length, encoding)
-}
+var _fnCFStringGetLength func(objc.ID) int
 
-// CFStringGetMaximumSizeOfFileSystemRepresentation calls [raw.CFStringGetMaximumSizeOfFileSystemRepresentation] (C function CFStringGetMaximumSizeOfFileSystemRepresentation).
-func CFStringGetMaximumSizeOfFileSystemRepresentation(string_ unsafe.Pointer) int {
-	return raw.CFStringGetMaximumSizeOfFileSystemRepresentation(string_)
+// CFStringGetLength calls the CoreFoundation framework function CFStringGetLength.
+func CFStringGetLength(theString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetLength, _lib, "CFStringGetLength")
+	}
+	return _fnCFStringGetLength(objref.IDOf(theString))
 }
 
-// CFStringGetMostCompatibleMacStringEncoding calls [raw.CFStringGetMostCompatibleMacStringEncoding] (C function CFStringGetMostCompatibleMacStringEncoding).
-func CFStringGetMostCompatibleMacStringEncoding(encoding uint) uint {
-	return raw.CFStringGetMostCompatibleMacStringEncoding(encoding)
-}
+var _fnCFStringGetLongCharacterForSurrogatePair func(uint16, uint16) int
 
-// CFStringGetNameOfEncoding calls [raw.CFStringGetNameOfEncoding] (C function CFStringGetNameOfEncoding).
-func CFStringGetNameOfEncoding(encoding uint) unsafe.Pointer {
-	return raw.CFStringGetNameOfEncoding(encoding)
+// CFStringGetLongCharacterForSurrogatePair calls the CoreFoundation framework function CFStringGetLongCharacterForSurrogatePair.
+func CFStringGetLongCharacterForSurrogatePair(surrogateHigh uint16, surrogateLow uint16) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetLongCharacterForSurrogatePair == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetLongCharacterForSurrogatePair, _lib, "CFStringGetLongCharacterForSurrogatePair")
+	}
+	return _fnCFStringGetLongCharacterForSurrogatePair(surrogateHigh, surrogateLow)
 }
 
-// CFStringGetParagraphBounds calls [raw.CFStringGetParagraphBounds] (C function CFStringGetParagraphBounds).
-func CFStringGetParagraphBounds(string_ unsafe.Pointer, range_ raw.CFRange, parBeginIndex *int, parEndIndex *int, contentsEndIndex *int) {
-	raw.CFStringGetParagraphBounds(string_, range_, parBeginIndex, parEndIndex, contentsEndIndex)
-}
+var _fnCFStringGetMaximumSizeForEncoding func(int, int) int
 
-// CFStringGetPascalString calls [raw.CFStringGetPascalString] (C function CFStringGetPascalString).
-func CFStringGetPascalString(theString unsafe.Pointer, buffer *uint8, bufferSize int, encoding uint) uint8 {
-	return raw.CFStringGetPascalString(theString, buffer, bufferSize, encoding)
+// CFStringGetMaximumSizeForEncoding calls the CoreFoundation framework function CFStringGetMaximumSizeForEncoding.
+func CFStringGetMaximumSizeForEncoding(length int, encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetMaximumSizeForEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetMaximumSizeForEncoding, _lib, "CFStringGetMaximumSizeForEncoding")
+	}
+	return _fnCFStringGetMaximumSizeForEncoding(length, encoding)
 }
 
-// CFStringGetPascalStringPtr calls [raw.CFStringGetPascalStringPtr] (C function CFStringGetPascalStringPtr).
-func CFStringGetPascalStringPtr(theString unsafe.Pointer, encoding uint) unsafe.Pointer {
-	return raw.CFStringGetPascalStringPtr(theString, encoding)
-}
+var _fnCFStringGetMaximumSizeOfFileSystemRepresentation func(objc.ID) int
 
-// CFStringGetRangeOfComposedCharactersAtIndex calls [raw.CFStringGetRangeOfComposedCharactersAtIndex] (C function CFStringGetRangeOfComposedCharactersAtIndex).
-func CFStringGetRangeOfComposedCharactersAtIndex(theString unsafe.Pointer, theIndex int) raw.CFRange {
-	return raw.CFStringGetRangeOfComposedCharactersAtIndex(theString, theIndex)
+// CFStringGetMaximumSizeOfFileSystemRepresentation calls the CoreFoundation framework function CFStringGetMaximumSizeOfFileSystemRepresentation.
+func CFStringGetMaximumSizeOfFileSystemRepresentation(string_ obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetMaximumSizeOfFileSystemRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetMaximumSizeOfFileSystemRepresentation, _lib, "CFStringGetMaximumSizeOfFileSystemRepresentation")
+	}
+	return _fnCFStringGetMaximumSizeOfFileSystemRepresentation(objref.IDOf(string_))
 }
 
-// CFStringGetSmallestEncoding calls [raw.CFStringGetSmallestEncoding] (C function CFStringGetSmallestEncoding).
-func CFStringGetSmallestEncoding(theString unsafe.Pointer) uint {
-	return raw.CFStringGetSmallestEncoding(theString)
+var _fnCFStringGetMostCompatibleMacStringEncoding func(int) int
+
+// CFStringGetMostCompatibleMacStringEncoding calls the CoreFoundation framework function CFStringGetMostCompatibleMacStringEncoding.
+func CFStringGetMostCompatibleMacStringEncoding(encoding int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetMostCompatibleMacStringEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetMostCompatibleMacStringEncoding, _lib, "CFStringGetMostCompatibleMacStringEncoding")
+	}
+	return _fnCFStringGetMostCompatibleMacStringEncoding(encoding)
 }
+
+var _fnCFStringGetNameOfEncoding func(int) objc.ID
 
-// CFStringGetSurrogatePairForLongCharacter calls [raw.CFStringGetSurrogatePairForLongCharacter] (C function CFStringGetSurrogatePairForLongCharacter).
-func CFStringGetSurrogatePairForLongCharacter(character uint, surrogates *uint16) uint8 {
-	return raw.CFStringGetSurrogatePairForLongCharacter(character, surrogates)
+// CFStringGetNameOfEncoding calls the CoreFoundation framework function CFStringGetNameOfEncoding.
+func CFStringGetNameOfEncoding(encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetNameOfEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetNameOfEncoding, _lib, "CFStringGetNameOfEncoding")
+	}
+	_ret := _fnCFStringGetNameOfEncoding(encoding)
+	return obj.Wrap(_ret)
 }
 
-// CFStringGetSystemEncoding calls [raw.CFStringGetSystemEncoding] (C function CFStringGetSystemEncoding).
-func CFStringGetSystemEncoding() uint {
-	return raw.CFStringGetSystemEncoding()
+var _fnCFStringGetSmallestEncoding func(objc.ID) int
+
+// CFStringGetSmallestEncoding calls the CoreFoundation framework function CFStringGetSmallestEncoding.
+func CFStringGetSmallestEncoding(theString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetSmallestEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetSmallestEncoding, _lib, "CFStringGetSmallestEncoding")
+	}
+	return _fnCFStringGetSmallestEncoding(objref.IDOf(theString))
 }
 
-// CFStringGetTypeID calls [raw.CFStringGetTypeID] (C function CFStringGetTypeID).
-func CFStringGetTypeID() uint {
-	return raw.CFStringGetTypeID()
+var _fnCFStringGetSystemEncoding func() int
+
+// CFStringGetSystemEncoding calls the CoreFoundation framework function CFStringGetSystemEncoding.
+func CFStringGetSystemEncoding() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetSystemEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetSystemEncoding, _lib, "CFStringGetSystemEncoding")
+	}
+	return _fnCFStringGetSystemEncoding()
 }
+
+var _fnCFStringGetTypeID func() int
 
-// CFStringHasPrefix calls [raw.CFStringHasPrefix] (C function CFStringHasPrefix).
-func CFStringHasPrefix(theString unsafe.Pointer, prefix unsafe.Pointer) uint8 {
-	return raw.CFStringHasPrefix(theString, prefix)
+// CFStringGetTypeID calls the CoreFoundation framework function CFStringGetTypeID.
+func CFStringGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringGetTypeID, _lib, "CFStringGetTypeID")
+	}
+	return _fnCFStringGetTypeID()
 }
 
-// CFStringHasSuffix calls [raw.CFStringHasSuffix] (C function CFStringHasSuffix).
-func CFStringHasSuffix(theString unsafe.Pointer, suffix unsafe.Pointer) uint8 {
-	return raw.CFStringHasSuffix(theString, suffix)
+var _fnCFStringHasPrefix func(objc.ID, objc.ID) uint8
+
+// CFStringHasPrefix calls the CoreFoundation framework function CFStringHasPrefix.
+func CFStringHasPrefix(theString obj.Object, prefix obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringHasPrefix == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringHasPrefix, _lib, "CFStringHasPrefix")
+	}
+	return _fnCFStringHasPrefix(objref.IDOf(theString), objref.IDOf(prefix))
 }
 
-// CFStringInitInlineBuffer calls [raw.CFStringInitInlineBuffer] (C function CFStringInitInlineBuffer).
-func CFStringInitInlineBuffer(str unsafe.Pointer, buf *raw.CFStringInlineBuffer, range_ raw.CFRange) {
-	raw.CFStringInitInlineBuffer(str, buf, range_)
+var _fnCFStringHasSuffix func(objc.ID, objc.ID) uint8
+
+// CFStringHasSuffix calls the CoreFoundation framework function CFStringHasSuffix.
+func CFStringHasSuffix(theString obj.Object, suffix obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringHasSuffix == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringHasSuffix, _lib, "CFStringHasSuffix")
+	}
+	return _fnCFStringHasSuffix(objref.IDOf(theString), objref.IDOf(suffix))
 }
+
+var _fnCFStringInsert func(objc.ID, int, objc.ID)
 
-// CFStringInsert calls [raw.CFStringInsert] (C function CFStringInsert).
-func CFStringInsert(str unsafe.Pointer, idx int, insertedStr unsafe.Pointer) {
-	raw.CFStringInsert(str, idx, insertedStr)
+// CFStringInsert calls the CoreFoundation framework function CFStringInsert.
+func CFStringInsert(str obj.Object, idx int, insertedStr obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringInsert, _lib, "CFStringInsert")
+	}
+	_fnCFStringInsert(objref.IDOf(str), idx, objref.IDOf(insertedStr))
 }
 
-// CFStringIsEncodingAvailable calls [raw.CFStringIsEncodingAvailable] (C function CFStringIsEncodingAvailable).
-func CFStringIsEncodingAvailable(encoding uint) uint8 {
-	return raw.CFStringIsEncodingAvailable(encoding)
+var _fnCFStringIsEncodingAvailable func(int) uint8
+
+// CFStringIsEncodingAvailable calls the CoreFoundation framework function CFStringIsEncodingAvailable.
+func CFStringIsEncodingAvailable(encoding int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringIsEncodingAvailable == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringIsEncodingAvailable, _lib, "CFStringIsEncodingAvailable")
+	}
+	return _fnCFStringIsEncodingAvailable(encoding)
 }
 
-// CFStringIsHyphenationAvailableForLocale calls [raw.CFStringIsHyphenationAvailableForLocale] (C function CFStringIsHyphenationAvailableForLocale).
-func CFStringIsHyphenationAvailableForLocale(locale unsafe.Pointer) uint8 {
-	return raw.CFStringIsHyphenationAvailableForLocale(locale)
+var _fnCFStringIsHyphenationAvailableForLocale func(objc.ID) uint8
+
+// CFStringIsHyphenationAvailableForLocale calls the CoreFoundation framework function CFStringIsHyphenationAvailableForLocale.
+func CFStringIsHyphenationAvailableForLocale(locale obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringIsHyphenationAvailableForLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringIsHyphenationAvailableForLocale, _lib, "CFStringIsHyphenationAvailableForLocale")
+	}
+	return _fnCFStringIsHyphenationAvailableForLocale(objref.IDOf(locale))
 }
+
+var _fnCFStringIsSurrogateHighCharacter func(uint16) uint8
 
-// CFStringIsSurrogateHighCharacter calls [raw.CFStringIsSurrogateHighCharacter] (C function CFStringIsSurrogateHighCharacter).
+// CFStringIsSurrogateHighCharacter calls the CoreFoundation framework function CFStringIsSurrogateHighCharacter.
 func CFStringIsSurrogateHighCharacter(character uint16) uint8 {
-	return raw.CFStringIsSurrogateHighCharacter(character)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringIsSurrogateHighCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringIsSurrogateHighCharacter, _lib, "CFStringIsSurrogateHighCharacter")
+	}
+	return _fnCFStringIsSurrogateHighCharacter(character)
 }
 
-// CFStringIsSurrogateLowCharacter calls [raw.CFStringIsSurrogateLowCharacter] (C function CFStringIsSurrogateLowCharacter).
+var _fnCFStringIsSurrogateLowCharacter func(uint16) uint8
+
+// CFStringIsSurrogateLowCharacter calls the CoreFoundation framework function CFStringIsSurrogateLowCharacter.
 func CFStringIsSurrogateLowCharacter(character uint16) uint8 {
-	return raw.CFStringIsSurrogateLowCharacter(character)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringIsSurrogateLowCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringIsSurrogateLowCharacter, _lib, "CFStringIsSurrogateLowCharacter")
+	}
+	return _fnCFStringIsSurrogateLowCharacter(character)
 }
 
-// CFStringLowercase calls [raw.CFStringLowercase] (C function CFStringLowercase).
-func CFStringLowercase(theString unsafe.Pointer, locale unsafe.Pointer) {
-	raw.CFStringLowercase(theString, locale)
+var _fnCFStringLowercase func(objc.ID, objc.ID)
+
+// CFStringLowercase calls the CoreFoundation framework function CFStringLowercase.
+func CFStringLowercase(theString obj.Object, locale obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringLowercase == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringLowercase, _lib, "CFStringLowercase")
+	}
+	_fnCFStringLowercase(objref.IDOf(theString), objref.IDOf(locale))
 }
 
-// CFStringNormalize calls [raw.CFStringNormalize] (C function CFStringNormalize).
-func CFStringNormalize(theString unsafe.Pointer, theForm CFStringNormalizationForm) {
-	raw.CFStringNormalize(theString, raw.CFStringNormalizationForm(theForm))
+var _fnCFStringNormalize func(objc.ID, CFStringNormalizationForm)
+
+// CFStringNormalize calls the CoreFoundation framework function CFStringNormalize.
+func CFStringNormalize(theString obj.Object, theForm CFStringNormalizationForm) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringNormalize == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringNormalize, _lib, "CFStringNormalize")
+	}
+	_fnCFStringNormalize(objref.IDOf(theString), theForm)
 }
 
-// CFStringPad calls [raw.CFStringPad] (C function CFStringPad).
-func CFStringPad(theString unsafe.Pointer, padString unsafe.Pointer, length int, indexIntoPad int) {
-	raw.CFStringPad(theString, padString, length, indexIntoPad)
+var _fnCFStringPad func(objc.ID, objc.ID, int, int)
+
+// CFStringPad calls the CoreFoundation framework function CFStringPad.
+func CFStringPad(theString obj.Object, padString obj.Object, length int, indexIntoPad int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringPad == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringPad, _lib, "CFStringPad")
+	}
+	_fnCFStringPad(objref.IDOf(theString), objref.IDOf(padString), length, indexIntoPad)
 }
 
-// CFStringReplace calls [raw.CFStringReplace] (C function CFStringReplace).
-func CFStringReplace(theString unsafe.Pointer, range_ raw.CFRange, replacement unsafe.Pointer) {
-	raw.CFStringReplace(theString, range_, replacement)
+var _fnCFStringReplaceAll func(objc.ID, objc.ID)
+
+// CFStringReplaceAll calls the CoreFoundation framework function CFStringReplaceAll.
+func CFStringReplaceAll(theString obj.Object, replacement obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringReplaceAll == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringReplaceAll, _lib, "CFStringReplaceAll")
+	}
+	_fnCFStringReplaceAll(objref.IDOf(theString), objref.IDOf(replacement))
 }
 
-// CFStringReplaceAll calls [raw.CFStringReplaceAll] (C function CFStringReplaceAll).
-func CFStringReplaceAll(theString unsafe.Pointer, replacement unsafe.Pointer) {
-	raw.CFStringReplaceAll(theString, replacement)
+var _fnCFStringTokenizerAdvanceToNextToken func(objc.ID) CFStringTokenizerTokenType
+
+// CFStringTokenizerAdvanceToNextToken calls the CoreFoundation framework function CFStringTokenizerAdvanceToNextToken.
+func CFStringTokenizerAdvanceToNextToken(tokenizer obj.Object) CFStringTokenizerTokenType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTokenizerAdvanceToNextToken == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerAdvanceToNextToken, _lib, "CFStringTokenizerAdvanceToNextToken")
+	}
+	return _fnCFStringTokenizerAdvanceToNextToken(objref.IDOf(tokenizer))
 }
 
-// CFStringSetExternalCharactersNoCopy calls [raw.CFStringSetExternalCharactersNoCopy] (C function CFStringSetExternalCharactersNoCopy).
-func CFStringSetExternalCharactersNoCopy(theString unsafe.Pointer, chars *uint16, length int, capacity int) {
-	raw.CFStringSetExternalCharactersNoCopy(theString, chars, length, capacity)
+var _fnCFStringTokenizerCopyCurrentTokenAttribute func(objc.ID, int) objc.ID
+
+// CFStringTokenizerCopyCurrentTokenAttribute calls the CoreFoundation framework function CFStringTokenizerCopyCurrentTokenAttribute.
+func CFStringTokenizerCopyCurrentTokenAttribute(tokenizer obj.Object, attribute int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTokenizerCopyCurrentTokenAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerCopyCurrentTokenAttribute, _lib, "CFStringTokenizerCopyCurrentTokenAttribute")
+	}
+	_ret := _fnCFStringTokenizerCopyCurrentTokenAttribute(objref.IDOf(tokenizer), attribute)
+	return obj.Wrap(_ret)
 }
 
-// CFStringTokenizerAdvanceToNextToken calls [raw.CFStringTokenizerAdvanceToNextToken] (C function CFStringTokenizerAdvanceToNextToken).
-func CFStringTokenizerAdvanceToNextToken(tokenizer unsafe.Pointer) CFStringTokenizerTokenType {
-	return CFStringTokenizerTokenType(raw.CFStringTokenizerAdvanceToNextToken(tokenizer))
+var _fnCFStringTokenizerGetTypeID func() int
+
+// CFStringTokenizerGetTypeID calls the CoreFoundation framework function CFStringTokenizerGetTypeID.
+func CFStringTokenizerGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTokenizerGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerGetTypeID, _lib, "CFStringTokenizerGetTypeID")
+	}
+	return _fnCFStringTokenizerGetTypeID()
 }
 
-// CFStringTokenizerCopyBestStringLanguage calls [raw.CFStringTokenizerCopyBestStringLanguage] (C function CFStringTokenizerCopyBestStringLanguage).
-func CFStringTokenizerCopyBestStringLanguage(string_ unsafe.Pointer, range_ raw.CFRange) unsafe.Pointer {
-	return raw.CFStringTokenizerCopyBestStringLanguage(string_, range_)
+var _fnCFStringTokenizerGoToTokenAtIndex func(objc.ID, int) CFStringTokenizerTokenType
+
+// CFStringTokenizerGoToTokenAtIndex calls the CoreFoundation framework function CFStringTokenizerGoToTokenAtIndex.
+func CFStringTokenizerGoToTokenAtIndex(tokenizer obj.Object, index int) CFStringTokenizerTokenType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTokenizerGoToTokenAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTokenizerGoToTokenAtIndex, _lib, "CFStringTokenizerGoToTokenAtIndex")
+	}
+	return _fnCFStringTokenizerGoToTokenAtIndex(objref.IDOf(tokenizer), index)
 }
 
-// CFStringTokenizerCopyCurrentTokenAttribute calls [raw.CFStringTokenizerCopyCurrentTokenAttribute] (C function CFStringTokenizerCopyCurrentTokenAttribute).
-func CFStringTokenizerCopyCurrentTokenAttribute(tokenizer unsafe.Pointer, attribute uint) unsafe.Pointer {
-	return raw.CFStringTokenizerCopyCurrentTokenAttribute(tokenizer, attribute)
+var _fnCFStringTrim func(objc.ID, objc.ID)
+
+// CFStringTrim calls the CoreFoundation framework function CFStringTrim.
+func CFStringTrim(theString obj.Object, trimString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTrim == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTrim, _lib, "CFStringTrim")
+	}
+	_fnCFStringTrim(objref.IDOf(theString), objref.IDOf(trimString))
 }
 
-// CFStringTokenizerCreate calls [raw.CFStringTokenizerCreate] (C function CFStringTokenizerCreate).
-func CFStringTokenizerCreate(alloc unsafe.Pointer, string_ unsafe.Pointer, range_ raw.CFRange, options uint, locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFStringTokenizerCreate(alloc, string_, range_, options, locale)
+var _fnCFStringTrimWhitespace func(objc.ID)
+
+// CFStringTrimWhitespace calls the CoreFoundation framework function CFStringTrimWhitespace.
+func CFStringTrimWhitespace(theString obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringTrimWhitespace == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringTrimWhitespace, _lib, "CFStringTrimWhitespace")
+	}
+	_fnCFStringTrimWhitespace(objref.IDOf(theString))
 }
 
-// CFStringTokenizerGetCurrentSubTokens calls [raw.CFStringTokenizerGetCurrentSubTokens] (C function CFStringTokenizerGetCurrentSubTokens).
-func CFStringTokenizerGetCurrentSubTokens(tokenizer unsafe.Pointer, ranges *raw.CFRange, maxRangeLength int, derivedSubTokens unsafe.Pointer) int {
-	return raw.CFStringTokenizerGetCurrentSubTokens(tokenizer, ranges, maxRangeLength, derivedSubTokens)
+var _fnCFStringUppercase func(objc.ID, objc.ID)
+
+// CFStringUppercase calls the CoreFoundation framework function CFStringUppercase.
+func CFStringUppercase(theString obj.Object, locale obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringUppercase == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringUppercase, _lib, "CFStringUppercase")
+	}
+	_fnCFStringUppercase(objref.IDOf(theString), objref.IDOf(locale))
 }
 
-// CFStringTokenizerGetCurrentTokenRange calls [raw.CFStringTokenizerGetCurrentTokenRange] (C function CFStringTokenizerGetCurrentTokenRange).
-func CFStringTokenizerGetCurrentTokenRange(tokenizer unsafe.Pointer) raw.CFRange {
-	return raw.CFStringTokenizerGetCurrentTokenRange(tokenizer)
-}
+var _fnCFSwapInt16 func(uint16) uint16
 
-// CFStringTokenizerGetTypeID calls [raw.CFStringTokenizerGetTypeID] (C function CFStringTokenizerGetTypeID).
-func CFStringTokenizerGetTypeID() uint {
-	return raw.CFStringTokenizerGetTypeID()
-}
-
-// CFStringTokenizerGoToTokenAtIndex calls [raw.CFStringTokenizerGoToTokenAtIndex] (C function CFStringTokenizerGoToTokenAtIndex).
-func CFStringTokenizerGoToTokenAtIndex(tokenizer unsafe.Pointer, index int) CFStringTokenizerTokenType {
-	return CFStringTokenizerTokenType(raw.CFStringTokenizerGoToTokenAtIndex(tokenizer, index))
-}
-
-// CFStringTokenizerSetString calls [raw.CFStringTokenizerSetString] (C function CFStringTokenizerSetString).
-func CFStringTokenizerSetString(tokenizer unsafe.Pointer, string_ unsafe.Pointer, range_ raw.CFRange) {
-	raw.CFStringTokenizerSetString(tokenizer, string_, range_)
-}
-
-// CFStringTransform calls [raw.CFStringTransform] (C function CFStringTransform).
-func CFStringTransform(string_ unsafe.Pointer, range_ *raw.CFRange, transform unsafe.Pointer, reverse uint8) uint8 {
-	return raw.CFStringTransform(string_, range_, transform, reverse)
-}
-
-// CFStringTrim calls [raw.CFStringTrim] (C function CFStringTrim).
-func CFStringTrim(theString unsafe.Pointer, trimString unsafe.Pointer) {
-	raw.CFStringTrim(theString, trimString)
-}
-
-// CFStringTrimWhitespace calls [raw.CFStringTrimWhitespace] (C function CFStringTrimWhitespace).
-func CFStringTrimWhitespace(theString unsafe.Pointer) {
-	raw.CFStringTrimWhitespace(theString)
-}
-
-// CFStringUppercase calls [raw.CFStringUppercase] (C function CFStringUppercase).
-func CFStringUppercase(theString unsafe.Pointer, locale unsafe.Pointer) {
-	raw.CFStringUppercase(theString, locale)
-}
-
-// CFSwapInt16 calls [raw.CFSwapInt16] (C function CFSwapInt16).
+// CFSwapInt16 calls the CoreFoundation framework function CFSwapInt16.
 func CFSwapInt16(arg uint16) uint16 {
-	return raw.CFSwapInt16(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt16 == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt16, _lib, "CFSwapInt16")
+	}
+	return _fnCFSwapInt16(arg)
 }
 
-// CFSwapInt16BigToHost calls [raw.CFSwapInt16BigToHost] (C function CFSwapInt16BigToHost).
+var _fnCFSwapInt16BigToHost func(uint16) uint16
+
+// CFSwapInt16BigToHost calls the CoreFoundation framework function CFSwapInt16BigToHost.
 func CFSwapInt16BigToHost(arg uint16) uint16 {
-	return raw.CFSwapInt16BigToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt16BigToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt16BigToHost, _lib, "CFSwapInt16BigToHost")
+	}
+	return _fnCFSwapInt16BigToHost(arg)
 }
 
-// CFSwapInt16HostToBig calls [raw.CFSwapInt16HostToBig] (C function CFSwapInt16HostToBig).
+var _fnCFSwapInt16HostToBig func(uint16) uint16
+
+// CFSwapInt16HostToBig calls the CoreFoundation framework function CFSwapInt16HostToBig.
 func CFSwapInt16HostToBig(arg uint16) uint16 {
-	return raw.CFSwapInt16HostToBig(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt16HostToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt16HostToBig, _lib, "CFSwapInt16HostToBig")
+	}
+	return _fnCFSwapInt16HostToBig(arg)
 }
 
-// CFSwapInt16HostToLittle calls [raw.CFSwapInt16HostToLittle] (C function CFSwapInt16HostToLittle).
+var _fnCFSwapInt16HostToLittle func(uint16) uint16
+
+// CFSwapInt16HostToLittle calls the CoreFoundation framework function CFSwapInt16HostToLittle.
 func CFSwapInt16HostToLittle(arg uint16) uint16 {
-	return raw.CFSwapInt16HostToLittle(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt16HostToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt16HostToLittle, _lib, "CFSwapInt16HostToLittle")
+	}
+	return _fnCFSwapInt16HostToLittle(arg)
 }
 
-// CFSwapInt16LittleToHost calls [raw.CFSwapInt16LittleToHost] (C function CFSwapInt16LittleToHost).
+var _fnCFSwapInt16LittleToHost func(uint16) uint16
+
+// CFSwapInt16LittleToHost calls the CoreFoundation framework function CFSwapInt16LittleToHost.
 func CFSwapInt16LittleToHost(arg uint16) uint16 {
-	return raw.CFSwapInt16LittleToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt16LittleToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt16LittleToHost, _lib, "CFSwapInt16LittleToHost")
+	}
+	return _fnCFSwapInt16LittleToHost(arg)
 }
 
-// CFSwapInt32 calls [raw.CFSwapInt32] (C function CFSwapInt32).
+var _fnCFSwapInt32 func(uint32) uint32
+
+// CFSwapInt32 calls the CoreFoundation framework function CFSwapInt32.
 func CFSwapInt32(arg uint32) uint32 {
-	return raw.CFSwapInt32(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt32 == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt32, _lib, "CFSwapInt32")
+	}
+	return _fnCFSwapInt32(arg)
 }
 
-// CFSwapInt32BigToHost calls [raw.CFSwapInt32BigToHost] (C function CFSwapInt32BigToHost).
+var _fnCFSwapInt32BigToHost func(uint32) uint32
+
+// CFSwapInt32BigToHost calls the CoreFoundation framework function CFSwapInt32BigToHost.
 func CFSwapInt32BigToHost(arg uint32) uint32 {
-	return raw.CFSwapInt32BigToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt32BigToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt32BigToHost, _lib, "CFSwapInt32BigToHost")
+	}
+	return _fnCFSwapInt32BigToHost(arg)
 }
 
-// CFSwapInt32HostToBig calls [raw.CFSwapInt32HostToBig] (C function CFSwapInt32HostToBig).
+var _fnCFSwapInt32HostToBig func(uint32) uint32
+
+// CFSwapInt32HostToBig calls the CoreFoundation framework function CFSwapInt32HostToBig.
 func CFSwapInt32HostToBig(arg uint32) uint32 {
-	return raw.CFSwapInt32HostToBig(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt32HostToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt32HostToBig, _lib, "CFSwapInt32HostToBig")
+	}
+	return _fnCFSwapInt32HostToBig(arg)
 }
 
-// CFSwapInt32HostToLittle calls [raw.CFSwapInt32HostToLittle] (C function CFSwapInt32HostToLittle).
+var _fnCFSwapInt32HostToLittle func(uint32) uint32
+
+// CFSwapInt32HostToLittle calls the CoreFoundation framework function CFSwapInt32HostToLittle.
 func CFSwapInt32HostToLittle(arg uint32) uint32 {
-	return raw.CFSwapInt32HostToLittle(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt32HostToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt32HostToLittle, _lib, "CFSwapInt32HostToLittle")
+	}
+	return _fnCFSwapInt32HostToLittle(arg)
 }
 
-// CFSwapInt32LittleToHost calls [raw.CFSwapInt32LittleToHost] (C function CFSwapInt32LittleToHost).
+var _fnCFSwapInt32LittleToHost func(uint32) uint32
+
+// CFSwapInt32LittleToHost calls the CoreFoundation framework function CFSwapInt32LittleToHost.
 func CFSwapInt32LittleToHost(arg uint32) uint32 {
-	return raw.CFSwapInt32LittleToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt32LittleToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt32LittleToHost, _lib, "CFSwapInt32LittleToHost")
+	}
+	return _fnCFSwapInt32LittleToHost(arg)
 }
 
-// CFSwapInt64 calls [raw.CFSwapInt64] (C function CFSwapInt64).
+var _fnCFSwapInt64 func(uint64) uint64
+
+// CFSwapInt64 calls the CoreFoundation framework function CFSwapInt64.
 func CFSwapInt64(arg uint64) uint64 {
-	return raw.CFSwapInt64(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt64 == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt64, _lib, "CFSwapInt64")
+	}
+	return _fnCFSwapInt64(arg)
 }
 
-// CFSwapInt64BigToHost calls [raw.CFSwapInt64BigToHost] (C function CFSwapInt64BigToHost).
+var _fnCFSwapInt64BigToHost func(uint64) uint64
+
+// CFSwapInt64BigToHost calls the CoreFoundation framework function CFSwapInt64BigToHost.
 func CFSwapInt64BigToHost(arg uint64) uint64 {
-	return raw.CFSwapInt64BigToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt64BigToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt64BigToHost, _lib, "CFSwapInt64BigToHost")
+	}
+	return _fnCFSwapInt64BigToHost(arg)
 }
 
-// CFSwapInt64HostToBig calls [raw.CFSwapInt64HostToBig] (C function CFSwapInt64HostToBig).
+var _fnCFSwapInt64HostToBig func(uint64) uint64
+
+// CFSwapInt64HostToBig calls the CoreFoundation framework function CFSwapInt64HostToBig.
 func CFSwapInt64HostToBig(arg uint64) uint64 {
-	return raw.CFSwapInt64HostToBig(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt64HostToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt64HostToBig, _lib, "CFSwapInt64HostToBig")
+	}
+	return _fnCFSwapInt64HostToBig(arg)
 }
 
-// CFSwapInt64HostToLittle calls [raw.CFSwapInt64HostToLittle] (C function CFSwapInt64HostToLittle).
+var _fnCFSwapInt64HostToLittle func(uint64) uint64
+
+// CFSwapInt64HostToLittle calls the CoreFoundation framework function CFSwapInt64HostToLittle.
 func CFSwapInt64HostToLittle(arg uint64) uint64 {
-	return raw.CFSwapInt64HostToLittle(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt64HostToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt64HostToLittle, _lib, "CFSwapInt64HostToLittle")
+	}
+	return _fnCFSwapInt64HostToLittle(arg)
 }
 
-// CFSwapInt64LittleToHost calls [raw.CFSwapInt64LittleToHost] (C function CFSwapInt64LittleToHost).
+var _fnCFSwapInt64LittleToHost func(uint64) uint64
+
+// CFSwapInt64LittleToHost calls the CoreFoundation framework function CFSwapInt64LittleToHost.
 func CFSwapInt64LittleToHost(arg uint64) uint64 {
-	return raw.CFSwapInt64LittleToHost(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFSwapInt64LittleToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFSwapInt64LittleToHost, _lib, "CFSwapInt64LittleToHost")
+	}
+	return _fnCFSwapInt64LittleToHost(arg)
 }
 
-// CFTimeZoneCopyAbbreviation calls [raw.CFTimeZoneCopyAbbreviation] (C function CFTimeZoneCopyAbbreviation).
-func CFTimeZoneCopyAbbreviation(tz unsafe.Pointer, at float64) unsafe.Pointer {
-	return raw.CFTimeZoneCopyAbbreviation(tz, at)
+var _fnCFTimeZoneCopyAbbreviation func(objc.ID, float64) objc.ID
+
+// CFTimeZoneCopyAbbreviation calls the CoreFoundation framework function CFTimeZoneCopyAbbreviation.
+func CFTimeZoneCopyAbbreviation(tz obj.Object, at float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopyAbbreviation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviation, _lib, "CFTimeZoneCopyAbbreviation")
+	}
+	_ret := _fnCFTimeZoneCopyAbbreviation(objref.IDOf(tz), at)
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCopyAbbreviationDictionary calls [raw.CFTimeZoneCopyAbbreviationDictionary] (C function CFTimeZoneCopyAbbreviationDictionary).
-func CFTimeZoneCopyAbbreviationDictionary() unsafe.Pointer {
-	return raw.CFTimeZoneCopyAbbreviationDictionary()
+var _fnCFTimeZoneCopyAbbreviationDictionary func() objc.ID
+
+// CFTimeZoneCopyAbbreviationDictionary calls the CoreFoundation framework function CFTimeZoneCopyAbbreviationDictionary.
+func CFTimeZoneCopyAbbreviationDictionary() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopyAbbreviationDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyAbbreviationDictionary, _lib, "CFTimeZoneCopyAbbreviationDictionary")
+	}
+	_ret := _fnCFTimeZoneCopyAbbreviationDictionary()
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCopyDefault calls [raw.CFTimeZoneCopyDefault] (C function CFTimeZoneCopyDefault).
-func CFTimeZoneCopyDefault() unsafe.Pointer {
-	return raw.CFTimeZoneCopyDefault()
+var _fnCFTimeZoneCopyDefault func() objc.ID
+
+// CFTimeZoneCopyDefault calls the CoreFoundation framework function CFTimeZoneCopyDefault.
+func CFTimeZoneCopyDefault() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopyDefault == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyDefault, _lib, "CFTimeZoneCopyDefault")
+	}
+	_ret := _fnCFTimeZoneCopyDefault()
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCopyKnownNames calls [raw.CFTimeZoneCopyKnownNames] (C function CFTimeZoneCopyKnownNames).
-func CFTimeZoneCopyKnownNames() unsafe.Pointer {
-	return raw.CFTimeZoneCopyKnownNames()
+var _fnCFTimeZoneCopyKnownNames func() objc.ID
+
+// CFTimeZoneCopyKnownNames calls the CoreFoundation framework function CFTimeZoneCopyKnownNames.
+func CFTimeZoneCopyKnownNames() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopyKnownNames == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyKnownNames, _lib, "CFTimeZoneCopyKnownNames")
+	}
+	_ret := _fnCFTimeZoneCopyKnownNames()
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCopyLocalizedName calls [raw.CFTimeZoneCopyLocalizedName] (C function CFTimeZoneCopyLocalizedName).
-func CFTimeZoneCopyLocalizedName(tz unsafe.Pointer, style CFTimeZoneNameStyle, locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTimeZoneCopyLocalizedName(tz, raw.CFTimeZoneNameStyle(style), locale)
+var _fnCFTimeZoneCopyLocalizedName func(objc.ID, CFTimeZoneNameStyle, objc.ID) objc.ID
+
+// CFTimeZoneCopyLocalizedName calls the CoreFoundation framework function CFTimeZoneCopyLocalizedName.
+func CFTimeZoneCopyLocalizedName(tz obj.Object, style CFTimeZoneNameStyle, locale obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopyLocalizedName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopyLocalizedName, _lib, "CFTimeZoneCopyLocalizedName")
+	}
+	_ret := _fnCFTimeZoneCopyLocalizedName(objref.IDOf(tz), style, objref.IDOf(locale))
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCopySystem calls [raw.CFTimeZoneCopySystem] (C function CFTimeZoneCopySystem).
-func CFTimeZoneCopySystem() unsafe.Pointer {
-	return raw.CFTimeZoneCopySystem()
+var _fnCFTimeZoneCopySystem func() objc.ID
+
+// CFTimeZoneCopySystem calls the CoreFoundation framework function CFTimeZoneCopySystem.
+func CFTimeZoneCopySystem() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCopySystem == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCopySystem, _lib, "CFTimeZoneCopySystem")
+	}
+	_ret := _fnCFTimeZoneCopySystem()
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCreate calls [raw.CFTimeZoneCreate] (C function CFTimeZoneCreate).
-func CFTimeZoneCreate(allocator unsafe.Pointer, name unsafe.Pointer, data unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTimeZoneCreate(allocator, name, data)
+var _fnCFTimeZoneCreate func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFTimeZoneCreate calls the CoreFoundation framework function CFTimeZoneCreate.
+func CFTimeZoneCreate(allocator obj.Object, name obj.Object, data obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreate, _lib, "CFTimeZoneCreate")
+	}
+	_ret := _fnCFTimeZoneCreate(objref.IDOf(allocator), objref.IDOf(name), objref.IDOf(data))
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCreateWithName calls [raw.CFTimeZoneCreateWithName] (C function CFTimeZoneCreateWithName).
-func CFTimeZoneCreateWithName(allocator unsafe.Pointer, name unsafe.Pointer, tryAbbrev uint8) unsafe.Pointer {
-	return raw.CFTimeZoneCreateWithName(allocator, name, tryAbbrev)
+var _fnCFTimeZoneCreateWithName func(objc.ID, objc.ID, uint8) objc.ID
+
+// CFTimeZoneCreateWithName calls the CoreFoundation framework function CFTimeZoneCreateWithName.
+func CFTimeZoneCreateWithName(allocator obj.Object, name obj.Object, tryAbbrev uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCreateWithName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreateWithName, _lib, "CFTimeZoneCreateWithName")
+	}
+	_ret := _fnCFTimeZoneCreateWithName(objref.IDOf(allocator), objref.IDOf(name), tryAbbrev)
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneCreateWithTimeIntervalFromGMT calls [raw.CFTimeZoneCreateWithTimeIntervalFromGMT] (C function CFTimeZoneCreateWithTimeIntervalFromGMT).
-func CFTimeZoneCreateWithTimeIntervalFromGMT(allocator unsafe.Pointer, ti float64) unsafe.Pointer {
-	return raw.CFTimeZoneCreateWithTimeIntervalFromGMT(allocator, ti)
+var _fnCFTimeZoneCreateWithTimeIntervalFromGMT func(objc.ID, float64) objc.ID
+
+// CFTimeZoneCreateWithTimeIntervalFromGMT calls the CoreFoundation framework function CFTimeZoneCreateWithTimeIntervalFromGMT.
+func CFTimeZoneCreateWithTimeIntervalFromGMT(allocator obj.Object, ti float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneCreateWithTimeIntervalFromGMT == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneCreateWithTimeIntervalFromGMT, _lib, "CFTimeZoneCreateWithTimeIntervalFromGMT")
+	}
+	_ret := _fnCFTimeZoneCreateWithTimeIntervalFromGMT(objref.IDOf(allocator), ti)
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneGetData calls [raw.CFTimeZoneGetData] (C function CFTimeZoneGetData).
-func CFTimeZoneGetData(tz unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTimeZoneGetData(tz)
+var _fnCFTimeZoneGetData func(objc.ID) objc.ID
+
+// CFTimeZoneGetData calls the CoreFoundation framework function CFTimeZoneGetData.
+func CFTimeZoneGetData(tz obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetData, _lib, "CFTimeZoneGetData")
+	}
+	_ret := _fnCFTimeZoneGetData(objref.IDOf(tz))
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneGetDaylightSavingTimeOffset calls [raw.CFTimeZoneGetDaylightSavingTimeOffset] (C function CFTimeZoneGetDaylightSavingTimeOffset).
-func CFTimeZoneGetDaylightSavingTimeOffset(tz unsafe.Pointer, at float64) float64 {
-	return raw.CFTimeZoneGetDaylightSavingTimeOffset(tz, at)
+var _fnCFTimeZoneGetDaylightSavingTimeOffset func(objc.ID, float64) float64
+
+// CFTimeZoneGetDaylightSavingTimeOffset calls the CoreFoundation framework function CFTimeZoneGetDaylightSavingTimeOffset.
+func CFTimeZoneGetDaylightSavingTimeOffset(tz obj.Object, at float64) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetDaylightSavingTimeOffset == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetDaylightSavingTimeOffset, _lib, "CFTimeZoneGetDaylightSavingTimeOffset")
+	}
+	return _fnCFTimeZoneGetDaylightSavingTimeOffset(objref.IDOf(tz), at)
 }
 
-// CFTimeZoneGetName calls [raw.CFTimeZoneGetName] (C function CFTimeZoneGetName).
-func CFTimeZoneGetName(tz unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTimeZoneGetName(tz)
+var _fnCFTimeZoneGetName func(objc.ID) objc.ID
+
+// CFTimeZoneGetName calls the CoreFoundation framework function CFTimeZoneGetName.
+func CFTimeZoneGetName(tz obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetName, _lib, "CFTimeZoneGetName")
+	}
+	_ret := _fnCFTimeZoneGetName(objref.IDOf(tz))
+	return obj.Wrap(_ret)
 }
 
-// CFTimeZoneGetNextDaylightSavingTimeTransition calls [raw.CFTimeZoneGetNextDaylightSavingTimeTransition] (C function CFTimeZoneGetNextDaylightSavingTimeTransition).
-func CFTimeZoneGetNextDaylightSavingTimeTransition(tz unsafe.Pointer, at float64) float64 {
-	return raw.CFTimeZoneGetNextDaylightSavingTimeTransition(tz, at)
+var _fnCFTimeZoneGetNextDaylightSavingTimeTransition func(objc.ID, float64) float64
+
+// CFTimeZoneGetNextDaylightSavingTimeTransition calls the CoreFoundation framework function CFTimeZoneGetNextDaylightSavingTimeTransition.
+func CFTimeZoneGetNextDaylightSavingTimeTransition(tz obj.Object, at float64) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetNextDaylightSavingTimeTransition == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetNextDaylightSavingTimeTransition, _lib, "CFTimeZoneGetNextDaylightSavingTimeTransition")
+	}
+	return _fnCFTimeZoneGetNextDaylightSavingTimeTransition(objref.IDOf(tz), at)
 }
 
-// CFTimeZoneGetSecondsFromGMT calls [raw.CFTimeZoneGetSecondsFromGMT] (C function CFTimeZoneGetSecondsFromGMT).
-func CFTimeZoneGetSecondsFromGMT(tz unsafe.Pointer, at float64) float64 {
-	return raw.CFTimeZoneGetSecondsFromGMT(tz, at)
+var _fnCFTimeZoneGetSecondsFromGMT func(objc.ID, float64) float64
+
+// CFTimeZoneGetSecondsFromGMT calls the CoreFoundation framework function CFTimeZoneGetSecondsFromGMT.
+func CFTimeZoneGetSecondsFromGMT(tz obj.Object, at float64) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetSecondsFromGMT == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetSecondsFromGMT, _lib, "CFTimeZoneGetSecondsFromGMT")
+	}
+	return _fnCFTimeZoneGetSecondsFromGMT(objref.IDOf(tz), at)
 }
 
-// CFTimeZoneGetTypeID calls [raw.CFTimeZoneGetTypeID] (C function CFTimeZoneGetTypeID).
-func CFTimeZoneGetTypeID() uint {
-	return raw.CFTimeZoneGetTypeID()
+var _fnCFTimeZoneGetTypeID func() int
+
+// CFTimeZoneGetTypeID calls the CoreFoundation framework function CFTimeZoneGetTypeID.
+func CFTimeZoneGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneGetTypeID, _lib, "CFTimeZoneGetTypeID")
+	}
+	return _fnCFTimeZoneGetTypeID()
 }
 
-// CFTimeZoneIsDaylightSavingTime calls [raw.CFTimeZoneIsDaylightSavingTime] (C function CFTimeZoneIsDaylightSavingTime).
-func CFTimeZoneIsDaylightSavingTime(tz unsafe.Pointer, at float64) uint8 {
-	return raw.CFTimeZoneIsDaylightSavingTime(tz, at)
+var _fnCFTimeZoneIsDaylightSavingTime func(objc.ID, float64) uint8
+
+// CFTimeZoneIsDaylightSavingTime calls the CoreFoundation framework function CFTimeZoneIsDaylightSavingTime.
+func CFTimeZoneIsDaylightSavingTime(tz obj.Object, at float64) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneIsDaylightSavingTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneIsDaylightSavingTime, _lib, "CFTimeZoneIsDaylightSavingTime")
+	}
+	return _fnCFTimeZoneIsDaylightSavingTime(objref.IDOf(tz), at)
 }
 
-// CFTimeZoneResetSystem calls [raw.CFTimeZoneResetSystem] (C function CFTimeZoneResetSystem).
+var _fnCFTimeZoneResetSystem func()
+
+// CFTimeZoneResetSystem calls the CoreFoundation framework function CFTimeZoneResetSystem.
 func CFTimeZoneResetSystem() {
-	raw.CFTimeZoneResetSystem()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneResetSystem == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneResetSystem, _lib, "CFTimeZoneResetSystem")
+	}
+	_fnCFTimeZoneResetSystem()
 }
 
-// CFTimeZoneSetAbbreviationDictionary calls [raw.CFTimeZoneSetAbbreviationDictionary] (C function CFTimeZoneSetAbbreviationDictionary).
-func CFTimeZoneSetAbbreviationDictionary(dict unsafe.Pointer) {
-	raw.CFTimeZoneSetAbbreviationDictionary(dict)
-}
+var _fnCFTimeZoneSetAbbreviationDictionary func(objc.ID)
 
-// CFTimeZoneSetDefault calls [raw.CFTimeZoneSetDefault] (C function CFTimeZoneSetDefault).
-func CFTimeZoneSetDefault(tz unsafe.Pointer) {
-	raw.CFTimeZoneSetDefault(tz)
+// CFTimeZoneSetAbbreviationDictionary calls the CoreFoundation framework function CFTimeZoneSetAbbreviationDictionary.
+func CFTimeZoneSetAbbreviationDictionary(dict obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneSetAbbreviationDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneSetAbbreviationDictionary, _lib, "CFTimeZoneSetAbbreviationDictionary")
+	}
+	_fnCFTimeZoneSetAbbreviationDictionary(objref.IDOf(dict))
 }
 
-// CFTreeAppendChild calls [raw.CFTreeAppendChild] (C function CFTreeAppendChild).
-func CFTreeAppendChild(tree unsafe.Pointer, newChild unsafe.Pointer) {
-	raw.CFTreeAppendChild(tree, newChild)
-}
+var _fnCFTimeZoneSetDefault func(objc.ID)
 
-// CFTreeApplyFunctionToChildren calls [raw.CFTreeApplyFunctionToChildren] (C function CFTreeApplyFunctionToChildren).
-func CFTreeApplyFunctionToChildren(tree unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFTreeApplyFunctionToChildren(tree, applier, context_)
+// CFTimeZoneSetDefault calls the CoreFoundation framework function CFTimeZoneSetDefault.
+func CFTimeZoneSetDefault(tz obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTimeZoneSetDefault == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTimeZoneSetDefault, _lib, "CFTimeZoneSetDefault")
+	}
+	_fnCFTimeZoneSetDefault(objref.IDOf(tz))
 }
 
-// CFTreeCreate calls [raw.CFTreeCreate] (C function CFTreeCreate).
-func CFTreeCreate(allocator unsafe.Pointer, context_ *raw.CFTreeContext) unsafe.Pointer {
-	return raw.CFTreeCreate(allocator, context_)
-}
+var _fnCFTreeAppendChild func(objc.ID, objc.ID)
 
-// CFTreeFindRoot calls [raw.CFTreeFindRoot] (C function CFTreeFindRoot).
-func CFTreeFindRoot(tree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTreeFindRoot(tree)
+// CFTreeAppendChild calls the CoreFoundation framework function CFTreeAppendChild.
+func CFTreeAppendChild(tree obj.Object, newChild obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeAppendChild == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeAppendChild, _lib, "CFTreeAppendChild")
+	}
+	_fnCFTreeAppendChild(objref.IDOf(tree), objref.IDOf(newChild))
 }
 
-// CFTreeGetChildAtIndex calls [raw.CFTreeGetChildAtIndex] (C function CFTreeGetChildAtIndex).
-func CFTreeGetChildAtIndex(tree unsafe.Pointer, idx int) unsafe.Pointer {
-	return raw.CFTreeGetChildAtIndex(tree, idx)
-}
+var _fnCFTreeFindRoot func(objc.ID) objc.ID
 
-// CFTreeGetChildCount calls [raw.CFTreeGetChildCount] (C function CFTreeGetChildCount).
-func CFTreeGetChildCount(tree unsafe.Pointer) int {
-	return raw.CFTreeGetChildCount(tree)
+// CFTreeFindRoot calls the CoreFoundation framework function CFTreeFindRoot.
+func CFTreeFindRoot(tree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeFindRoot == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeFindRoot, _lib, "CFTreeFindRoot")
+	}
+	_ret := _fnCFTreeFindRoot(objref.IDOf(tree))
+	return obj.Wrap(_ret)
 }
 
-// CFTreeGetChildren calls [raw.CFTreeGetChildren] (C function CFTreeGetChildren).
-func CFTreeGetChildren(tree unsafe.Pointer, children unsafe.Pointer) {
-	raw.CFTreeGetChildren(tree, children)
-}
+var _fnCFTreeGetChildAtIndex func(objc.ID, int) objc.ID
 
-// CFTreeGetContext calls [raw.CFTreeGetContext] (C function CFTreeGetContext).
-func CFTreeGetContext(tree unsafe.Pointer, context_ *raw.CFTreeContext) {
-	raw.CFTreeGetContext(tree, context_)
+// CFTreeGetChildAtIndex calls the CoreFoundation framework function CFTreeGetChildAtIndex.
+func CFTreeGetChildAtIndex(tree obj.Object, idx int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetChildAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetChildAtIndex, _lib, "CFTreeGetChildAtIndex")
+	}
+	_ret := _fnCFTreeGetChildAtIndex(objref.IDOf(tree), idx)
+	return obj.Wrap(_ret)
 }
 
-// CFTreeGetFirstChild calls [raw.CFTreeGetFirstChild] (C function CFTreeGetFirstChild).
-func CFTreeGetFirstChild(tree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTreeGetFirstChild(tree)
-}
+var _fnCFTreeGetChildCount func(objc.ID) int
 
-// CFTreeGetNextSibling calls [raw.CFTreeGetNextSibling] (C function CFTreeGetNextSibling).
-func CFTreeGetNextSibling(tree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTreeGetNextSibling(tree)
+// CFTreeGetChildCount calls the CoreFoundation framework function CFTreeGetChildCount.
+func CFTreeGetChildCount(tree obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetChildCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetChildCount, _lib, "CFTreeGetChildCount")
+	}
+	return _fnCFTreeGetChildCount(objref.IDOf(tree))
 }
 
-// CFTreeGetParent calls [raw.CFTreeGetParent] (C function CFTreeGetParent).
-func CFTreeGetParent(tree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTreeGetParent(tree)
-}
+var _fnCFTreeGetFirstChild func(objc.ID) objc.ID
 
-// CFTreeGetTypeID calls [raw.CFTreeGetTypeID] (C function CFTreeGetTypeID).
-func CFTreeGetTypeID() uint {
-	return raw.CFTreeGetTypeID()
+// CFTreeGetFirstChild calls the CoreFoundation framework function CFTreeGetFirstChild.
+func CFTreeGetFirstChild(tree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetFirstChild == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetFirstChild, _lib, "CFTreeGetFirstChild")
+	}
+	_ret := _fnCFTreeGetFirstChild(objref.IDOf(tree))
+	return obj.Wrap(_ret)
 }
 
-// CFTreeInsertSibling calls [raw.CFTreeInsertSibling] (C function CFTreeInsertSibling).
-func CFTreeInsertSibling(tree unsafe.Pointer, newSibling unsafe.Pointer) {
-	raw.CFTreeInsertSibling(tree, newSibling)
-}
+var _fnCFTreeGetNextSibling func(objc.ID) objc.ID
 
-// CFTreePrependChild calls [raw.CFTreePrependChild] (C function CFTreePrependChild).
-func CFTreePrependChild(tree unsafe.Pointer, newChild unsafe.Pointer) {
-	raw.CFTreePrependChild(tree, newChild)
+// CFTreeGetNextSibling calls the CoreFoundation framework function CFTreeGetNextSibling.
+func CFTreeGetNextSibling(tree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetNextSibling == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetNextSibling, _lib, "CFTreeGetNextSibling")
+	}
+	_ret := _fnCFTreeGetNextSibling(objref.IDOf(tree))
+	return obj.Wrap(_ret)
 }
 
-// CFTreeRemove calls [raw.CFTreeRemove] (C function CFTreeRemove).
-func CFTreeRemove(tree unsafe.Pointer) {
-	raw.CFTreeRemove(tree)
-}
+var _fnCFTreeGetParent func(objc.ID) objc.ID
 
-// CFTreeRemoveAllChildren calls [raw.CFTreeRemoveAllChildren] (C function CFTreeRemoveAllChildren).
-func CFTreeRemoveAllChildren(tree unsafe.Pointer) {
-	raw.CFTreeRemoveAllChildren(tree)
+// CFTreeGetParent calls the CoreFoundation framework function CFTreeGetParent.
+func CFTreeGetParent(tree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetParent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetParent, _lib, "CFTreeGetParent")
+	}
+	_ret := _fnCFTreeGetParent(objref.IDOf(tree))
+	return obj.Wrap(_ret)
 }
 
-// CFTreeSetContext calls [raw.CFTreeSetContext] (C function CFTreeSetContext).
-func CFTreeSetContext(tree unsafe.Pointer, context_ *raw.CFTreeContext) {
-	raw.CFTreeSetContext(tree, context_)
-}
+var _fnCFTreeGetTypeID func() int
 
-// CFTreeSortChildren calls [raw.CFTreeSortChildren] (C function CFTreeSortChildren).
-func CFTreeSortChildren(tree unsafe.Pointer, comparator unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CFTreeSortChildren(tree, comparator, context_)
+// CFTreeGetTypeID calls the CoreFoundation framework function CFTreeGetTypeID.
+func CFTreeGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeGetTypeID, _lib, "CFTreeGetTypeID")
+	}
+	return _fnCFTreeGetTypeID()
 }
 
-// CFURLCanBeDecomposed calls [raw.CFURLCanBeDecomposed] (C function CFURLCanBeDecomposed).
-func CFURLCanBeDecomposed(anURL unsafe.Pointer) uint8 {
-	return raw.CFURLCanBeDecomposed(anURL)
-}
+var _fnCFTreeInsertSibling func(objc.ID, objc.ID)
 
-// CFURLClearResourcePropertyCache calls [raw.CFURLClearResourcePropertyCache] (C function CFURLClearResourcePropertyCache).
-func CFURLClearResourcePropertyCache(url unsafe.Pointer) {
-	raw.CFURLClearResourcePropertyCache(url)
+// CFTreeInsertSibling calls the CoreFoundation framework function CFTreeInsertSibling.
+func CFTreeInsertSibling(tree obj.Object, newSibling obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeInsertSibling == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeInsertSibling, _lib, "CFTreeInsertSibling")
+	}
+	_fnCFTreeInsertSibling(objref.IDOf(tree), objref.IDOf(newSibling))
 }
 
-// CFURLClearResourcePropertyCacheForKey calls [raw.CFURLClearResourcePropertyCacheForKey] (C function CFURLClearResourcePropertyCacheForKey).
-func CFURLClearResourcePropertyCacheForKey(url unsafe.Pointer, key unsafe.Pointer) {
-	raw.CFURLClearResourcePropertyCacheForKey(url, key)
-}
+var _fnCFTreePrependChild func(objc.ID, objc.ID)
 
-// CFURLCopyAbsoluteURL calls [raw.CFURLCopyAbsoluteURL] (C function CFURLCopyAbsoluteURL).
-func CFURLCopyAbsoluteURL(relativeURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyAbsoluteURL(relativeURL)
+// CFTreePrependChild calls the CoreFoundation framework function CFTreePrependChild.
+func CFTreePrependChild(tree obj.Object, newChild obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreePrependChild == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreePrependChild, _lib, "CFTreePrependChild")
+	}
+	_fnCFTreePrependChild(objref.IDOf(tree), objref.IDOf(newChild))
 }
 
-// CFURLCopyFileSystemPath calls [raw.CFURLCopyFileSystemPath] (C function CFURLCopyFileSystemPath).
-func CFURLCopyFileSystemPath(anURL unsafe.Pointer, pathStyle CFURLPathStyle) unsafe.Pointer {
-	return raw.CFURLCopyFileSystemPath(anURL, raw.CFURLPathStyle(pathStyle))
-}
+var _fnCFTreeRemove func(objc.ID)
 
-// CFURLCopyFragment calls [raw.CFURLCopyFragment] (C function CFURLCopyFragment).
-func CFURLCopyFragment(anURL unsafe.Pointer, charactersToLeaveEscaped unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyFragment(anURL, charactersToLeaveEscaped)
+// CFTreeRemove calls the CoreFoundation framework function CFTreeRemove.
+func CFTreeRemove(tree obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeRemove, _lib, "CFTreeRemove")
+	}
+	_fnCFTreeRemove(objref.IDOf(tree))
 }
 
-// CFURLCopyHostName calls [raw.CFURLCopyHostName] (C function CFURLCopyHostName).
-func CFURLCopyHostName(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyHostName(anURL)
-}
+var _fnCFTreeRemoveAllChildren func(objc.ID)
 
-// CFURLCopyLastPathComponent calls [raw.CFURLCopyLastPathComponent] (C function CFURLCopyLastPathComponent).
-func CFURLCopyLastPathComponent(url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyLastPathComponent(url)
+// CFTreeRemoveAllChildren calls the CoreFoundation framework function CFTreeRemoveAllChildren.
+func CFTreeRemoveAllChildren(tree obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFTreeRemoveAllChildren == nil {
+		ebipurego.RegisterLibFunc(&_fnCFTreeRemoveAllChildren, _lib, "CFTreeRemoveAllChildren")
+	}
+	_fnCFTreeRemoveAllChildren(objref.IDOf(tree))
 }
 
-// CFURLCopyNetLocation calls [raw.CFURLCopyNetLocation] (C function CFURLCopyNetLocation).
-func CFURLCopyNetLocation(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyNetLocation(anURL)
-}
+var _fnCFURLCanBeDecomposed func(objc.ID) uint8
 
-// CFURLCopyParameterString calls [raw.CFURLCopyParameterString] (C function CFURLCopyParameterString).
-func CFURLCopyParameterString(anURL unsafe.Pointer, charactersToLeaveEscaped unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyParameterString(anURL, charactersToLeaveEscaped)
+// CFURLCanBeDecomposed calls the CoreFoundation framework function CFURLCanBeDecomposed.
+func CFURLCanBeDecomposed(anURL obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCanBeDecomposed == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCanBeDecomposed, _lib, "CFURLCanBeDecomposed")
+	}
+	return _fnCFURLCanBeDecomposed(objref.IDOf(anURL))
 }
 
-// CFURLCopyPassword calls [raw.CFURLCopyPassword] (C function CFURLCopyPassword).
-func CFURLCopyPassword(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyPassword(anURL)
-}
+var _fnCFURLClearResourcePropertyCache func(objc.ID)
 
-// CFURLCopyPath calls [raw.CFURLCopyPath] (C function CFURLCopyPath).
-func CFURLCopyPath(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyPath(anURL)
+// CFURLClearResourcePropertyCache calls the CoreFoundation framework function CFURLClearResourcePropertyCache.
+func CFURLClearResourcePropertyCache(url obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLClearResourcePropertyCache == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCache, _lib, "CFURLClearResourcePropertyCache")
+	}
+	_fnCFURLClearResourcePropertyCache(objref.IDOf(url))
 }
 
-// CFURLCopyPathExtension calls [raw.CFURLCopyPathExtension] (C function CFURLCopyPathExtension).
-func CFURLCopyPathExtension(url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyPathExtension(url)
-}
+var _fnCFURLClearResourcePropertyCacheForKey func(objc.ID, objc.ID)
 
-// CFURLCopyQueryString calls [raw.CFURLCopyQueryString] (C function CFURLCopyQueryString).
-func CFURLCopyQueryString(anURL unsafe.Pointer, charactersToLeaveEscaped unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyQueryString(anURL, charactersToLeaveEscaped)
+// CFURLClearResourcePropertyCacheForKey calls the CoreFoundation framework function CFURLClearResourcePropertyCacheForKey.
+func CFURLClearResourcePropertyCacheForKey(url obj.Object, key obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLClearResourcePropertyCacheForKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLClearResourcePropertyCacheForKey, _lib, "CFURLClearResourcePropertyCacheForKey")
+	}
+	_fnCFURLClearResourcePropertyCacheForKey(objref.IDOf(url), objref.IDOf(key))
 }
 
-// CFURLCopyResourceSpecifier calls [raw.CFURLCopyResourceSpecifier] (C function CFURLCopyResourceSpecifier).
-func CFURLCopyResourceSpecifier(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyResourceSpecifier(anURL)
-}
+var _fnCFURLCopyAbsoluteURL func(objc.ID) objc.ID
 
-// CFURLCopyScheme calls [raw.CFURLCopyScheme] (C function CFURLCopyScheme).
-func CFURLCopyScheme(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyScheme(anURL)
+// CFURLCopyAbsoluteURL calls the CoreFoundation framework function CFURLCopyAbsoluteURL.
+func CFURLCopyAbsoluteURL(relativeURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyAbsoluteURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyAbsoluteURL, _lib, "CFURLCopyAbsoluteURL")
+	}
+	_ret := _fnCFURLCopyAbsoluteURL(objref.IDOf(relativeURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCopyStrictPath calls [raw.CFURLCopyStrictPath] (C function CFURLCopyStrictPath).
-func CFURLCopyStrictPath(anURL unsafe.Pointer, isAbsolute *uint8) unsafe.Pointer {
-	return raw.CFURLCopyStrictPath(anURL, isAbsolute)
-}
+var _fnCFURLCopyFileSystemPath func(objc.ID, CFURLPathStyle) objc.ID
 
-// CFURLCopyUserName calls [raw.CFURLCopyUserName] (C function CFURLCopyUserName).
-func CFURLCopyUserName(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCopyUserName(anURL)
+// CFURLCopyFileSystemPath calls the CoreFoundation framework function CFURLCopyFileSystemPath.
+func CFURLCopyFileSystemPath(anURL obj.Object, pathStyle CFURLPathStyle) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyFileSystemPath == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyFileSystemPath, _lib, "CFURLCopyFileSystemPath")
+	}
+	_ret := _fnCFURLCopyFileSystemPath(objref.IDOf(anURL), pathStyle)
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateAbsoluteURLWithBytes calls [raw.CFURLCreateAbsoluteURLWithBytes] (C function CFURLCreateAbsoluteURLWithBytes).
-func CFURLCreateAbsoluteURLWithBytes(alloc unsafe.Pointer, relativeURLBytes *uint8, length int, encoding uint, baseURL unsafe.Pointer, useCompatibilityMode uint8) unsafe.Pointer {
-	return raw.CFURLCreateAbsoluteURLWithBytes(alloc, relativeURLBytes, length, encoding, baseURL, useCompatibilityMode)
-}
+var _fnCFURLCopyFragment func(objc.ID, objc.ID) objc.ID
 
-// CFURLCreateBookmarkDataFromAliasRecord calls [raw.CFURLCreateBookmarkDataFromAliasRecord] (C function CFURLCreateBookmarkDataFromAliasRecord).
-func CFURLCreateBookmarkDataFromAliasRecord(allocatorRef unsafe.Pointer, aliasRecordDataRef unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateBookmarkDataFromAliasRecord(allocatorRef, aliasRecordDataRef)
+// CFURLCopyFragment calls the CoreFoundation framework function CFURLCopyFragment.
+func CFURLCopyFragment(anURL obj.Object, charactersToLeaveEscaped obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyFragment == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyFragment, _lib, "CFURLCopyFragment")
+	}
+	_ret := _fnCFURLCopyFragment(objref.IDOf(anURL), objref.IDOf(charactersToLeaveEscaped))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateCopyAppendingPathComponent calls [raw.CFURLCreateCopyAppendingPathComponent] (C function CFURLCreateCopyAppendingPathComponent).
-func CFURLCreateCopyAppendingPathComponent(allocator unsafe.Pointer, url unsafe.Pointer, pathComponent unsafe.Pointer, isDirectory uint8) unsafe.Pointer {
-	return raw.CFURLCreateCopyAppendingPathComponent(allocator, url, pathComponent, isDirectory)
-}
+var _fnCFURLCopyHostName func(objc.ID) objc.ID
 
-// CFURLCreateCopyAppendingPathExtension calls [raw.CFURLCreateCopyAppendingPathExtension] (C function CFURLCreateCopyAppendingPathExtension).
-func CFURLCreateCopyAppendingPathExtension(allocator unsafe.Pointer, url unsafe.Pointer, extension unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateCopyAppendingPathExtension(allocator, url, extension)
+// CFURLCopyHostName calls the CoreFoundation framework function CFURLCopyHostName.
+func CFURLCopyHostName(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyHostName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyHostName, _lib, "CFURLCopyHostName")
+	}
+	_ret := _fnCFURLCopyHostName(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateCopyDeletingLastPathComponent calls [raw.CFURLCreateCopyDeletingLastPathComponent] (C function CFURLCreateCopyDeletingLastPathComponent).
-func CFURLCreateCopyDeletingLastPathComponent(allocator unsafe.Pointer, url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateCopyDeletingLastPathComponent(allocator, url)
-}
+var _fnCFURLCopyLastPathComponent func(objc.ID) objc.ID
 
-// CFURLCreateCopyDeletingPathExtension calls [raw.CFURLCreateCopyDeletingPathExtension] (C function CFURLCreateCopyDeletingPathExtension).
-func CFURLCreateCopyDeletingPathExtension(allocator unsafe.Pointer, url unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateCopyDeletingPathExtension(allocator, url)
+// CFURLCopyLastPathComponent calls the CoreFoundation framework function CFURLCopyLastPathComponent.
+func CFURLCopyLastPathComponent(url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyLastPathComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyLastPathComponent, _lib, "CFURLCopyLastPathComponent")
+	}
+	_ret := _fnCFURLCopyLastPathComponent(objref.IDOf(url))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateData calls [raw.CFURLCreateData] (C function CFURLCreateData).
-func CFURLCreateData(allocator unsafe.Pointer, url unsafe.Pointer, encoding uint, escapeWhitespace uint8) unsafe.Pointer {
-	return raw.CFURLCreateData(allocator, url, encoding, escapeWhitespace)
-}
+var _fnCFURLCopyNetLocation func(objc.ID) objc.ID
 
-// CFURLCreateDataAndPropertiesFromResource calls [raw.CFURLCreateDataAndPropertiesFromResource] (C function CFURLCreateDataAndPropertiesFromResource).
-func CFURLCreateDataAndPropertiesFromResource(alloc unsafe.Pointer, url unsafe.Pointer, resourceData unsafe.Pointer, properties unsafe.Pointer, desiredProperties unsafe.Pointer, errorCode *int) uint8 {
-	return raw.CFURLCreateDataAndPropertiesFromResource(alloc, url, resourceData, properties, desiredProperties, errorCode)
+// CFURLCopyNetLocation calls the CoreFoundation framework function CFURLCopyNetLocation.
+func CFURLCopyNetLocation(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyNetLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyNetLocation, _lib, "CFURLCopyNetLocation")
+	}
+	_ret := _fnCFURLCopyNetLocation(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateFromFSRef calls [raw.CFURLCreateFromFSRef] (C function CFURLCreateFromFSRef).
-func CFURLCreateFromFSRef(allocator unsafe.Pointer, fsRef objc.ID) unsafe.Pointer {
-	return raw.CFURLCreateFromFSRef(allocator, fsRef)
-}
+var _fnCFURLCopyParameterString func(objc.ID, objc.ID) objc.ID
 
-// CFURLCreateFromFileSystemRepresentation calls [raw.CFURLCreateFromFileSystemRepresentation] (C function CFURLCreateFromFileSystemRepresentation).
-func CFURLCreateFromFileSystemRepresentation(allocator unsafe.Pointer, buffer *uint8, bufLen int, isDirectory uint8) unsafe.Pointer {
-	return raw.CFURLCreateFromFileSystemRepresentation(allocator, buffer, bufLen, isDirectory)
+// CFURLCopyParameterString calls the CoreFoundation framework function CFURLCopyParameterString.
+func CFURLCopyParameterString(anURL obj.Object, charactersToLeaveEscaped obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyParameterString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyParameterString, _lib, "CFURLCopyParameterString")
+	}
+	_ret := _fnCFURLCopyParameterString(objref.IDOf(anURL), objref.IDOf(charactersToLeaveEscaped))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateFromFileSystemRepresentationRelativeToBase calls [raw.CFURLCreateFromFileSystemRepresentationRelativeToBase] (C function CFURLCreateFromFileSystemRepresentationRelativeToBase).
-func CFURLCreateFromFileSystemRepresentationRelativeToBase(allocator unsafe.Pointer, buffer *uint8, bufLen int, isDirectory uint8, baseURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateFromFileSystemRepresentationRelativeToBase(allocator, buffer, bufLen, isDirectory, baseURL)
-}
+var _fnCFURLCopyPassword func(objc.ID) objc.ID
 
-// CFURLCreatePropertyFromResource calls [raw.CFURLCreatePropertyFromResource] (C function CFURLCreatePropertyFromResource).
-func CFURLCreatePropertyFromResource(alloc unsafe.Pointer, url unsafe.Pointer, property unsafe.Pointer, errorCode *int) unsafe.Pointer {
-	return raw.CFURLCreatePropertyFromResource(alloc, url, property, errorCode)
+// CFURLCopyPassword calls the CoreFoundation framework function CFURLCopyPassword.
+func CFURLCopyPassword(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyPassword, _lib, "CFURLCopyPassword")
+	}
+	_ret := _fnCFURLCopyPassword(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateResourcePropertiesForKeysFromBookmarkData calls [raw.CFURLCreateResourcePropertiesForKeysFromBookmarkData] (C function CFURLCreateResourcePropertiesForKeysFromBookmarkData).
-func CFURLCreateResourcePropertiesForKeysFromBookmarkData(allocator unsafe.Pointer, resourcePropertiesToReturn unsafe.Pointer, bookmark unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateResourcePropertiesForKeysFromBookmarkData(allocator, resourcePropertiesToReturn, bookmark)
-}
+var _fnCFURLCopyPath func(objc.ID) objc.ID
 
-// CFURLCreateResourcePropertyForKeyFromBookmarkData calls [raw.CFURLCreateResourcePropertyForKeyFromBookmarkData] (C function CFURLCreateResourcePropertyForKeyFromBookmarkData).
-func CFURLCreateResourcePropertyForKeyFromBookmarkData(allocator unsafe.Pointer, resourcePropertyKey unsafe.Pointer, bookmark unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateResourcePropertyForKeyFromBookmarkData(allocator, resourcePropertyKey, bookmark)
+// CFURLCopyPath calls the CoreFoundation framework function CFURLCopyPath.
+func CFURLCopyPath(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyPath == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyPath, _lib, "CFURLCopyPath")
+	}
+	_ret := _fnCFURLCopyPath(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateStringByAddingPercentEscapes calls [raw.CFURLCreateStringByAddingPercentEscapes] (C function CFURLCreateStringByAddingPercentEscapes).
-func CFURLCreateStringByAddingPercentEscapes(allocator unsafe.Pointer, originalString unsafe.Pointer, charactersToLeaveUnescaped unsafe.Pointer, legalURLCharactersToBeEscaped unsafe.Pointer, encoding uint) unsafe.Pointer {
-	return raw.CFURLCreateStringByAddingPercentEscapes(allocator, originalString, charactersToLeaveUnescaped, legalURLCharactersToBeEscaped, encoding)
-}
+var _fnCFURLCopyPathExtension func(objc.ID) objc.ID
 
-// CFURLCreateStringByReplacingPercentEscapes calls [raw.CFURLCreateStringByReplacingPercentEscapes] (C function CFURLCreateStringByReplacingPercentEscapes).
-func CFURLCreateStringByReplacingPercentEscapes(allocator unsafe.Pointer, originalString unsafe.Pointer, charactersToLeaveEscaped unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateStringByReplacingPercentEscapes(allocator, originalString, charactersToLeaveEscaped)
+// CFURLCopyPathExtension calls the CoreFoundation framework function CFURLCopyPathExtension.
+func CFURLCopyPathExtension(url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyPathExtension == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyPathExtension, _lib, "CFURLCopyPathExtension")
+	}
+	_ret := _fnCFURLCopyPathExtension(objref.IDOf(url))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateStringByReplacingPercentEscapesUsingEncoding calls [raw.CFURLCreateStringByReplacingPercentEscapesUsingEncoding] (C function CFURLCreateStringByReplacingPercentEscapesUsingEncoding).
-func CFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator unsafe.Pointer, origString unsafe.Pointer, charsToLeaveEscaped unsafe.Pointer, encoding uint) unsafe.Pointer {
-	return raw.CFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator, origString, charsToLeaveEscaped, encoding)
-}
+var _fnCFURLCopyQueryString func(objc.ID, objc.ID) objc.ID
 
-// CFURLCreateWithBytes calls [raw.CFURLCreateWithBytes] (C function CFURLCreateWithBytes).
-func CFURLCreateWithBytes(allocator unsafe.Pointer, uRLBytes *uint8, length int, encoding uint, baseURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateWithBytes(allocator, uRLBytes, length, encoding, baseURL)
+// CFURLCopyQueryString calls the CoreFoundation framework function CFURLCopyQueryString.
+func CFURLCopyQueryString(anURL obj.Object, charactersToLeaveEscaped obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyQueryString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyQueryString, _lib, "CFURLCopyQueryString")
+	}
+	_ret := _fnCFURLCopyQueryString(objref.IDOf(anURL), objref.IDOf(charactersToLeaveEscaped))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateWithFileSystemPath calls [raw.CFURLCreateWithFileSystemPath] (C function CFURLCreateWithFileSystemPath).
-func CFURLCreateWithFileSystemPath(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle CFURLPathStyle, isDirectory uint8) unsafe.Pointer {
-	return raw.CFURLCreateWithFileSystemPath(allocator, filePath, raw.CFURLPathStyle(pathStyle), isDirectory)
-}
+var _fnCFURLCopyResourceSpecifier func(objc.ID) objc.ID
 
-// CFURLCreateWithFileSystemPathRelativeToBase calls [raw.CFURLCreateWithFileSystemPathRelativeToBase] (C function CFURLCreateWithFileSystemPathRelativeToBase).
-func CFURLCreateWithFileSystemPathRelativeToBase(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle CFURLPathStyle, isDirectory uint8, baseURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateWithFileSystemPathRelativeToBase(allocator, filePath, raw.CFURLPathStyle(pathStyle), isDirectory, baseURL)
+// CFURLCopyResourceSpecifier calls the CoreFoundation framework function CFURLCopyResourceSpecifier.
+func CFURLCopyResourceSpecifier(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyResourceSpecifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourceSpecifier, _lib, "CFURLCopyResourceSpecifier")
+	}
+	_ret := _fnCFURLCopyResourceSpecifier(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLCreateWithString calls [raw.CFURLCreateWithString] (C function CFURLCreateWithString).
-func CFURLCreateWithString(allocator unsafe.Pointer, uRLString unsafe.Pointer, baseURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateWithString(allocator, uRLString, baseURL)
-}
+var _fnCFURLCopyScheme func(objc.ID) objc.ID
 
-// CFURLDestroyResource calls [raw.CFURLDestroyResource] (C function CFURLDestroyResource).
-func CFURLDestroyResource(url unsafe.Pointer, errorCode *int) uint8 {
-	return raw.CFURLDestroyResource(url, errorCode)
+// CFURLCopyScheme calls the CoreFoundation framework function CFURLCopyScheme.
+func CFURLCopyScheme(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyScheme == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyScheme, _lib, "CFURLCopyScheme")
+	}
+	_ret := _fnCFURLCopyScheme(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLEnumeratorCreateForDirectoryURL calls [raw.CFURLEnumeratorCreateForDirectoryURL] (C function CFURLEnumeratorCreateForDirectoryURL).
-func CFURLEnumeratorCreateForDirectoryURL(alloc unsafe.Pointer, directoryURL unsafe.Pointer, option CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLEnumeratorCreateForDirectoryURL(alloc, directoryURL, raw.CFURLEnumeratorOptions(option), propertyKeys)
-}
+var _fnCFURLCopyUserName func(objc.ID) objc.ID
 
-// CFURLEnumeratorCreateForMountedVolumes calls [raw.CFURLEnumeratorCreateForMountedVolumes] (C function CFURLEnumeratorCreateForMountedVolumes).
-func CFURLEnumeratorCreateForMountedVolumes(alloc unsafe.Pointer, option CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLEnumeratorCreateForMountedVolumes(alloc, raw.CFURLEnumeratorOptions(option), propertyKeys)
+// CFURLCopyUserName calls the CoreFoundation framework function CFURLCopyUserName.
+func CFURLCopyUserName(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyUserName == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyUserName, _lib, "CFURLCopyUserName")
+	}
+	_ret := _fnCFURLCopyUserName(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFURLEnumeratorGetDescendentLevel calls [raw.CFURLEnumeratorGetDescendentLevel] (C function CFURLEnumeratorGetDescendentLevel).
-func CFURLEnumeratorGetDescendentLevel(enumerator unsafe.Pointer) int {
-	return raw.CFURLEnumeratorGetDescendentLevel(enumerator)
-}
+var _fnCFURLCreateBookmarkDataFromAliasRecord func(objc.ID, objc.ID) objc.ID
 
-// CFURLEnumeratorGetSourceDidChange calls [raw.CFURLEnumeratorGetSourceDidChange] (C function CFURLEnumeratorGetSourceDidChange).
-func CFURLEnumeratorGetSourceDidChange(enumerator unsafe.Pointer) uint8 {
-	return raw.CFURLEnumeratorGetSourceDidChange(enumerator)
+// CFURLCreateBookmarkDataFromAliasRecord calls the CoreFoundation framework function CFURLCreateBookmarkDataFromAliasRecord.
+func CFURLCreateBookmarkDataFromAliasRecord(allocatorRef obj.Object, aliasRecordDataRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateBookmarkDataFromAliasRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromAliasRecord, _lib, "CFURLCreateBookmarkDataFromAliasRecord")
+	}
+	_ret := _fnCFURLCreateBookmarkDataFromAliasRecord(objref.IDOf(allocatorRef), objref.IDOf(aliasRecordDataRef))
+	return obj.Wrap(_ret)
 }
 
-// CFURLEnumeratorGetTypeID calls [raw.CFURLEnumeratorGetTypeID] (C function CFURLEnumeratorGetTypeID).
-func CFURLEnumeratorGetTypeID() uint {
-	return raw.CFURLEnumeratorGetTypeID()
-}
+var _fnCFURLCreateCopyAppendingPathComponent func(objc.ID, objc.ID, objc.ID, uint8) objc.ID
 
-// CFURLEnumeratorSkipDescendents calls [raw.CFURLEnumeratorSkipDescendents] (C function CFURLEnumeratorSkipDescendents).
-func CFURLEnumeratorSkipDescendents(enumerator unsafe.Pointer) {
-	raw.CFURLEnumeratorSkipDescendents(enumerator)
+// CFURLCreateCopyAppendingPathComponent calls the CoreFoundation framework function CFURLCreateCopyAppendingPathComponent.
+func CFURLCreateCopyAppendingPathComponent(allocator obj.Object, url obj.Object, pathComponent obj.Object, isDirectory uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateCopyAppendingPathComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathComponent, _lib, "CFURLCreateCopyAppendingPathComponent")
+	}
+	_ret := _fnCFURLCreateCopyAppendingPathComponent(objref.IDOf(allocator), objref.IDOf(url), objref.IDOf(pathComponent), isDirectory)
+	return obj.Wrap(_ret)
 }
 
-// CFURLGetBaseURL calls [raw.CFURLGetBaseURL] (C function CFURLGetBaseURL).
-func CFURLGetBaseURL(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLGetBaseURL(anURL)
-}
+var _fnCFURLCreateCopyAppendingPathExtension func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFURLGetByteRangeForComponent calls [raw.CFURLGetByteRangeForComponent] (C function CFURLGetByteRangeForComponent).
-func CFURLGetByteRangeForComponent(url unsafe.Pointer, component CFURLComponentType, rangeIncludingSeparators *raw.CFRange) raw.CFRange {
-	return raw.CFURLGetByteRangeForComponent(url, raw.CFURLComponentType(component), rangeIncludingSeparators)
+// CFURLCreateCopyAppendingPathExtension calls the CoreFoundation framework function CFURLCreateCopyAppendingPathExtension.
+func CFURLCreateCopyAppendingPathExtension(allocator obj.Object, url obj.Object, extension obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateCopyAppendingPathExtension == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyAppendingPathExtension, _lib, "CFURLCreateCopyAppendingPathExtension")
+	}
+	_ret := _fnCFURLCreateCopyAppendingPathExtension(objref.IDOf(allocator), objref.IDOf(url), objref.IDOf(extension))
+	return obj.Wrap(_ret)
 }
 
-// CFURLGetBytes calls [raw.CFURLGetBytes] (C function CFURLGetBytes).
-func CFURLGetBytes(url unsafe.Pointer, buffer *uint8, bufferLength int) int {
-	return raw.CFURLGetBytes(url, buffer, bufferLength)
-}
+var _fnCFURLCreateCopyDeletingLastPathComponent func(objc.ID, objc.ID) objc.ID
 
-// CFURLGetFSRef calls [raw.CFURLGetFSRef] (C function CFURLGetFSRef).
-func CFURLGetFSRef(url unsafe.Pointer, fsRef objc.ID) uint8 {
-	return raw.CFURLGetFSRef(url, fsRef)
+// CFURLCreateCopyDeletingLastPathComponent calls the CoreFoundation framework function CFURLCreateCopyDeletingLastPathComponent.
+func CFURLCreateCopyDeletingLastPathComponent(allocator obj.Object, url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateCopyDeletingLastPathComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingLastPathComponent, _lib, "CFURLCreateCopyDeletingLastPathComponent")
+	}
+	_ret := _fnCFURLCreateCopyDeletingLastPathComponent(objref.IDOf(allocator), objref.IDOf(url))
+	return obj.Wrap(_ret)
 }
 
-// CFURLGetFileSystemRepresentation calls [raw.CFURLGetFileSystemRepresentation] (C function CFURLGetFileSystemRepresentation).
-func CFURLGetFileSystemRepresentation(url unsafe.Pointer, resolveAgainstBase uint8, buffer *uint8, maxBufLen int) uint8 {
-	return raw.CFURLGetFileSystemRepresentation(url, resolveAgainstBase, buffer, maxBufLen)
-}
+var _fnCFURLCreateCopyDeletingPathExtension func(objc.ID, objc.ID) objc.ID
 
-// CFURLGetPortNumber calls [raw.CFURLGetPortNumber] (C function CFURLGetPortNumber).
-func CFURLGetPortNumber(anURL unsafe.Pointer) int {
-	return raw.CFURLGetPortNumber(anURL)
+// CFURLCreateCopyDeletingPathExtension calls the CoreFoundation framework function CFURLCreateCopyDeletingPathExtension.
+func CFURLCreateCopyDeletingPathExtension(allocator obj.Object, url obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateCopyDeletingPathExtension == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateCopyDeletingPathExtension, _lib, "CFURLCreateCopyDeletingPathExtension")
+	}
+	_ret := _fnCFURLCreateCopyDeletingPathExtension(objref.IDOf(allocator), objref.IDOf(url))
+	return obj.Wrap(_ret)
 }
 
-// CFURLGetString calls [raw.CFURLGetString] (C function CFURLGetString).
-func CFURLGetString(anURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLGetString(anURL)
-}
+var _fnCFURLCreateData func(objc.ID, objc.ID, int, uint8) objc.ID
 
-// CFURLGetTypeID calls [raw.CFURLGetTypeID] (C function CFURLGetTypeID).
-func CFURLGetTypeID() uint {
-	return raw.CFURLGetTypeID()
+// CFURLCreateData calls the CoreFoundation framework function CFURLCreateData.
+func CFURLCreateData(allocator obj.Object, url obj.Object, encoding int, escapeWhitespace uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateData, _lib, "CFURLCreateData")
+	}
+	_ret := _fnCFURLCreateData(objref.IDOf(allocator), objref.IDOf(url), encoding, escapeWhitespace)
+	return obj.Wrap(_ret)
 }
 
-// CFURLHasDirectoryPath calls [raw.CFURLHasDirectoryPath] (C function CFURLHasDirectoryPath).
-func CFURLHasDirectoryPath(anURL unsafe.Pointer) uint8 {
-	return raw.CFURLHasDirectoryPath(anURL)
-}
+var _fnCFURLCreateFromFSRef func(objc.ID, objc.ID) objc.ID
 
-// CFURLIsFileReferenceURL calls [raw.CFURLIsFileReferenceURL] (C function CFURLIsFileReferenceURL).
-func CFURLIsFileReferenceURL(url unsafe.Pointer) uint8 {
-	return raw.CFURLIsFileReferenceURL(url)
+// CFURLCreateFromFSRef calls the CoreFoundation framework function CFURLCreateFromFSRef.
+func CFURLCreateFromFSRef(allocator obj.Object, fsRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateFromFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateFromFSRef, _lib, "CFURLCreateFromFSRef")
+	}
+	_ret := _fnCFURLCreateFromFSRef(objref.IDOf(allocator), objref.IDOf(fsRef))
+	return obj.Wrap(_ret)
 }
 
-// CFURLSetTemporaryResourcePropertyForKey calls [raw.CFURLSetTemporaryResourcePropertyForKey] (C function CFURLSetTemporaryResourcePropertyForKey).
-func CFURLSetTemporaryResourcePropertyForKey(url unsafe.Pointer, key unsafe.Pointer, propertyValue unsafe.Pointer) {
-	raw.CFURLSetTemporaryResourcePropertyForKey(url, key, propertyValue)
-}
+var _fnCFURLCreateResourcePropertiesForKeysFromBookmarkData func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFURLStartAccessingSecurityScopedResource calls [raw.CFURLStartAccessingSecurityScopedResource] (C function CFURLStartAccessingSecurityScopedResource).
-func CFURLStartAccessingSecurityScopedResource(url unsafe.Pointer) uint8 {
-	return raw.CFURLStartAccessingSecurityScopedResource(url)
+// CFURLCreateResourcePropertiesForKeysFromBookmarkData calls the CoreFoundation framework function CFURLCreateResourcePropertiesForKeysFromBookmarkData.
+func CFURLCreateResourcePropertiesForKeysFromBookmarkData(allocator obj.Object, resourcePropertiesToReturn obj.Object, bookmark obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateResourcePropertiesForKeysFromBookmarkData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateResourcePropertiesForKeysFromBookmarkData, _lib, "CFURLCreateResourcePropertiesForKeysFromBookmarkData")
+	}
+	_ret := _fnCFURLCreateResourcePropertiesForKeysFromBookmarkData(objref.IDOf(allocator), objref.IDOf(resourcePropertiesToReturn), objref.IDOf(bookmark))
+	return obj.Wrap(_ret)
 }
 
-// CFURLStopAccessingSecurityScopedResource calls [raw.CFURLStopAccessingSecurityScopedResource] (C function CFURLStopAccessingSecurityScopedResource).
-func CFURLStopAccessingSecurityScopedResource(url unsafe.Pointer) {
-	raw.CFURLStopAccessingSecurityScopedResource(url)
-}
+var _fnCFURLCreateResourcePropertyForKeyFromBookmarkData func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFURLWriteDataAndPropertiesToResource calls [raw.CFURLWriteDataAndPropertiesToResource] (C function CFURLWriteDataAndPropertiesToResource).
-func CFURLWriteDataAndPropertiesToResource(url unsafe.Pointer, dataToWrite unsafe.Pointer, propertiesToWrite unsafe.Pointer, errorCode *int) uint8 {
-	return raw.CFURLWriteDataAndPropertiesToResource(url, dataToWrite, propertiesToWrite, errorCode)
+// CFURLCreateResourcePropertyForKeyFromBookmarkData calls the CoreFoundation framework function CFURLCreateResourcePropertyForKeyFromBookmarkData.
+func CFURLCreateResourcePropertyForKeyFromBookmarkData(allocator obj.Object, resourcePropertyKey obj.Object, bookmark obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateResourcePropertyForKeyFromBookmarkData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateResourcePropertyForKeyFromBookmarkData, _lib, "CFURLCreateResourcePropertyForKeyFromBookmarkData")
+	}
+	_ret := _fnCFURLCreateResourcePropertyForKeyFromBookmarkData(objref.IDOf(allocator), objref.IDOf(resourcePropertyKey), objref.IDOf(bookmark))
+	return obj.Wrap(_ret)
 }
 
-// CFUUIDCreate calls [raw.CFUUIDCreate] (C function CFUUIDCreate).
-func CFUUIDCreate(alloc unsafe.Pointer) unsafe.Pointer {
-	return raw.CFUUIDCreate(alloc)
-}
+var _fnCFURLCreateStringByAddingPercentEscapes func(objc.ID, objc.ID, objc.ID, objc.ID, int) objc.ID
 
-// CFUUIDCreateFromString calls [raw.CFUUIDCreateFromString] (C function CFUUIDCreateFromString).
-func CFUUIDCreateFromString(alloc unsafe.Pointer, uuidStr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFUUIDCreateFromString(alloc, uuidStr)
+// CFURLCreateStringByAddingPercentEscapes calls the CoreFoundation framework function CFURLCreateStringByAddingPercentEscapes.
+func CFURLCreateStringByAddingPercentEscapes(allocator obj.Object, originalString obj.Object, charactersToLeaveUnescaped obj.Object, legalURLCharactersToBeEscaped obj.Object, encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateStringByAddingPercentEscapes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByAddingPercentEscapes, _lib, "CFURLCreateStringByAddingPercentEscapes")
+	}
+	_ret := _fnCFURLCreateStringByAddingPercentEscapes(objref.IDOf(allocator), objref.IDOf(originalString), objref.IDOf(charactersToLeaveUnescaped), objref.IDOf(legalURLCharactersToBeEscaped), encoding)
+	return obj.Wrap(_ret)
 }
 
-// CFUUIDCreateFromUUIDBytes calls [raw.CFUUIDCreateFromUUIDBytes] (C function CFUUIDCreateFromUUIDBytes).
-func CFUUIDCreateFromUUIDBytes(alloc unsafe.Pointer, bytes_ raw.CFUUIDBytes) unsafe.Pointer {
-	return raw.CFUUIDCreateFromUUIDBytes(alloc, bytes_)
-}
+var _fnCFURLCreateStringByReplacingPercentEscapes func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFUUIDCreateString calls [raw.CFUUIDCreateString] (C function CFUUIDCreateString).
-func CFUUIDCreateString(alloc unsafe.Pointer, uuid unsafe.Pointer) unsafe.Pointer {
-	return raw.CFUUIDCreateString(alloc, uuid)
+// CFURLCreateStringByReplacingPercentEscapes calls the CoreFoundation framework function CFURLCreateStringByReplacingPercentEscapes.
+func CFURLCreateStringByReplacingPercentEscapes(allocator obj.Object, originalString obj.Object, charactersToLeaveEscaped obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateStringByReplacingPercentEscapes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapes, _lib, "CFURLCreateStringByReplacingPercentEscapes")
+	}
+	_ret := _fnCFURLCreateStringByReplacingPercentEscapes(objref.IDOf(allocator), objref.IDOf(originalString), objref.IDOf(charactersToLeaveEscaped))
+	return obj.Wrap(_ret)
 }
 
-// CFUUIDCreateWithBytes calls [raw.CFUUIDCreateWithBytes] (C function CFUUIDCreateWithBytes).
-func CFUUIDCreateWithBytes(alloc unsafe.Pointer, byte0 uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8, byte7 uint8, byte8 uint8, byte9 uint8, byte10 uint8, byte11 uint8, byte12 uint8, byte13 uint8, byte14 uint8, byte15 uint8) unsafe.Pointer {
-	return raw.CFUUIDCreateWithBytes(alloc, byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
+var _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding func(objc.ID, objc.ID, objc.ID, int) objc.ID
+
+// CFURLCreateStringByReplacingPercentEscapesUsingEncoding calls the CoreFoundation framework function CFURLCreateStringByReplacingPercentEscapesUsingEncoding.
+func CFURLCreateStringByReplacingPercentEscapesUsingEncoding(allocator obj.Object, origString obj.Object, charsToLeaveEscaped obj.Object, encoding int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding, _lib, "CFURLCreateStringByReplacingPercentEscapesUsingEncoding")
+	}
+	_ret := _fnCFURLCreateStringByReplacingPercentEscapesUsingEncoding(objref.IDOf(allocator), objref.IDOf(origString), objref.IDOf(charsToLeaveEscaped), encoding)
+	return obj.Wrap(_ret)
 }
+
+var _fnCFURLCreateWithFileSystemPath func(objc.ID, objc.ID, CFURLPathStyle, uint8) objc.ID
 
-// CFUUIDGetConstantUUIDWithBytes calls [raw.CFUUIDGetConstantUUIDWithBytes] (C function CFUUIDGetConstantUUIDWithBytes).
-func CFUUIDGetConstantUUIDWithBytes(alloc unsafe.Pointer, byte0 uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8, byte7 uint8, byte8 uint8, byte9 uint8, byte10 uint8, byte11 uint8, byte12 uint8, byte13 uint8, byte14 uint8, byte15 uint8) unsafe.Pointer {
-	return raw.CFUUIDGetConstantUUIDWithBytes(alloc, byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
+// CFURLCreateWithFileSystemPath calls the CoreFoundation framework function CFURLCreateWithFileSystemPath.
+func CFURLCreateWithFileSystemPath(allocator obj.Object, filePath obj.Object, pathStyle CFURLPathStyle, isDirectory uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateWithFileSystemPath == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPath, _lib, "CFURLCreateWithFileSystemPath")
+	}
+	_ret := _fnCFURLCreateWithFileSystemPath(objref.IDOf(allocator), objref.IDOf(filePath), pathStyle, isDirectory)
+	return obj.Wrap(_ret)
 }
 
-// CFUUIDGetTypeID calls [raw.CFUUIDGetTypeID] (C function CFUUIDGetTypeID).
-func CFUUIDGetTypeID() uint {
-	return raw.CFUUIDGetTypeID()
+var _fnCFURLCreateWithFileSystemPathRelativeToBase func(objc.ID, objc.ID, CFURLPathStyle, uint8, objc.ID) objc.ID
+
+// CFURLCreateWithFileSystemPathRelativeToBase calls the CoreFoundation framework function CFURLCreateWithFileSystemPathRelativeToBase.
+func CFURLCreateWithFileSystemPathRelativeToBase(allocator obj.Object, filePath obj.Object, pathStyle CFURLPathStyle, isDirectory uint8, baseURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateWithFileSystemPathRelativeToBase == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithFileSystemPathRelativeToBase, _lib, "CFURLCreateWithFileSystemPathRelativeToBase")
+	}
+	_ret := _fnCFURLCreateWithFileSystemPathRelativeToBase(objref.IDOf(allocator), objref.IDOf(filePath), pathStyle, isDirectory, objref.IDOf(baseURL))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFURLCreateWithString func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFUUIDGetUUIDBytes calls [raw.CFUUIDGetUUIDBytes] (C function CFUUIDGetUUIDBytes).
-func CFUUIDGetUUIDBytes(uuid unsafe.Pointer) raw.CFUUIDBytes {
-	return raw.CFUUIDGetUUIDBytes(uuid)
+// CFURLCreateWithString calls the CoreFoundation framework function CFURLCreateWithString.
+func CFURLCreateWithString(allocator obj.Object, uRLString obj.Object, baseURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCreateWithString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCreateWithString, _lib, "CFURLCreateWithString")
+	}
+	_ret := _fnCFURLCreateWithString(objref.IDOf(allocator), objref.IDOf(uRLString), objref.IDOf(baseURL))
+	return obj.Wrap(_ret)
 }
 
-// CFUserNotificationCancel calls [raw.CFUserNotificationCancel] (C function CFUserNotificationCancel).
-func CFUserNotificationCancel(userNotification unsafe.Pointer) int {
-	return raw.CFUserNotificationCancel(userNotification)
+var _fnCFURLEnumeratorCreateForDirectoryURL func(objc.ID, objc.ID, CFURLEnumeratorOptions, objc.ID) objc.ID
+
+// CFURLEnumeratorCreateForDirectoryURL calls the CoreFoundation framework function CFURLEnumeratorCreateForDirectoryURL.
+func CFURLEnumeratorCreateForDirectoryURL(alloc obj.Object, directoryURL obj.Object, option CFURLEnumeratorOptions, propertyKeys obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorCreateForDirectoryURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForDirectoryURL, _lib, "CFURLEnumeratorCreateForDirectoryURL")
+	}
+	_ret := _fnCFURLEnumeratorCreateForDirectoryURL(objref.IDOf(alloc), objref.IDOf(directoryURL), option, objref.IDOf(propertyKeys))
+	return obj.Wrap(_ret)
 }
 
-// CFUserNotificationCheckBoxChecked calls [raw.CFUserNotificationCheckBoxChecked] (C function CFUserNotificationCheckBoxChecked).
-func CFUserNotificationCheckBoxChecked(i int) uint {
-	return raw.CFUserNotificationCheckBoxChecked(i)
+var _fnCFURLEnumeratorCreateForMountedVolumes func(objc.ID, CFURLEnumeratorOptions, objc.ID) objc.ID
+
+// CFURLEnumeratorCreateForMountedVolumes calls the CoreFoundation framework function CFURLEnumeratorCreateForMountedVolumes.
+func CFURLEnumeratorCreateForMountedVolumes(alloc obj.Object, option CFURLEnumeratorOptions, propertyKeys obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorCreateForMountedVolumes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorCreateForMountedVolumes, _lib, "CFURLEnumeratorCreateForMountedVolumes")
+	}
+	_ret := _fnCFURLEnumeratorCreateForMountedVolumes(objref.IDOf(alloc), option, objref.IDOf(propertyKeys))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFURLEnumeratorGetDescendentLevel func(objc.ID) int
 
-// CFUserNotificationCreate calls [raw.CFUserNotificationCreate] (C function CFUserNotificationCreate).
-func CFUserNotificationCreate(allocator unsafe.Pointer, timeout float64, flags uint, error_ *int, dictionary unsafe.Pointer) unsafe.Pointer {
-	return raw.CFUserNotificationCreate(allocator, timeout, flags, error_, dictionary)
+// CFURLEnumeratorGetDescendentLevel calls the CoreFoundation framework function CFURLEnumeratorGetDescendentLevel.
+func CFURLEnumeratorGetDescendentLevel(enumerator obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorGetDescendentLevel == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetDescendentLevel, _lib, "CFURLEnumeratorGetDescendentLevel")
+	}
+	return _fnCFURLEnumeratorGetDescendentLevel(objref.IDOf(enumerator))
 }
 
-// CFUserNotificationCreateRunLoopSource calls [raw.CFUserNotificationCreateRunLoopSource] (C function CFUserNotificationCreateRunLoopSource).
-func CFUserNotificationCreateRunLoopSource(allocator unsafe.Pointer, userNotification unsafe.Pointer, callout unsafe.Pointer, order int) unsafe.Pointer {
-	return raw.CFUserNotificationCreateRunLoopSource(allocator, userNotification, callout, order)
+var _fnCFURLEnumeratorGetSourceDidChange func(objc.ID) uint8
+
+// CFURLEnumeratorGetSourceDidChange calls the CoreFoundation framework function CFURLEnumeratorGetSourceDidChange.
+func CFURLEnumeratorGetSourceDidChange(enumerator obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorGetSourceDidChange == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetSourceDidChange, _lib, "CFURLEnumeratorGetSourceDidChange")
+	}
+	return _fnCFURLEnumeratorGetSourceDidChange(objref.IDOf(enumerator))
 }
+
+var _fnCFURLEnumeratorGetTypeID func() int
 
-// CFUserNotificationDisplayAlert calls [raw.CFUserNotificationDisplayAlert] (C function CFUserNotificationDisplayAlert).
-func CFUserNotificationDisplayAlert(timeout float64, flags uint, iconURL unsafe.Pointer, soundURL unsafe.Pointer, localizationURL unsafe.Pointer, alertHeader unsafe.Pointer, alertMessage unsafe.Pointer, defaultButtonTitle unsafe.Pointer, alternateButtonTitle unsafe.Pointer, otherButtonTitle unsafe.Pointer, responseFlags *uint) int {
-	return raw.CFUserNotificationDisplayAlert(timeout, flags, iconURL, soundURL, localizationURL, alertHeader, alertMessage, defaultButtonTitle, alternateButtonTitle, otherButtonTitle, responseFlags)
+// CFURLEnumeratorGetTypeID calls the CoreFoundation framework function CFURLEnumeratorGetTypeID.
+func CFURLEnumeratorGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetTypeID, _lib, "CFURLEnumeratorGetTypeID")
+	}
+	return _fnCFURLEnumeratorGetTypeID()
 }
 
-// CFUserNotificationDisplayNotice calls [raw.CFUserNotificationDisplayNotice] (C function CFUserNotificationDisplayNotice).
-func CFUserNotificationDisplayNotice(timeout float64, flags uint, iconURL unsafe.Pointer, soundURL unsafe.Pointer, localizationURL unsafe.Pointer, alertHeader unsafe.Pointer, alertMessage unsafe.Pointer, defaultButtonTitle unsafe.Pointer) int {
-	return raw.CFUserNotificationDisplayNotice(timeout, flags, iconURL, soundURL, localizationURL, alertHeader, alertMessage, defaultButtonTitle)
+var _fnCFURLEnumeratorSkipDescendents func(objc.ID)
+
+// CFURLEnumeratorSkipDescendents calls the CoreFoundation framework function CFURLEnumeratorSkipDescendents.
+func CFURLEnumeratorSkipDescendents(enumerator obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorSkipDescendents == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorSkipDescendents, _lib, "CFURLEnumeratorSkipDescendents")
+	}
+	_fnCFURLEnumeratorSkipDescendents(objref.IDOf(enumerator))
 }
+
+var _fnCFURLGetBaseURL func(objc.ID) objc.ID
 
-// CFUserNotificationGetResponseDictionary calls [raw.CFUserNotificationGetResponseDictionary] (C function CFUserNotificationGetResponseDictionary).
-func CFUserNotificationGetResponseDictionary(userNotification unsafe.Pointer) unsafe.Pointer {
-	return raw.CFUserNotificationGetResponseDictionary(userNotification)
+// CFURLGetBaseURL calls the CoreFoundation framework function CFURLGetBaseURL.
+func CFURLGetBaseURL(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLGetBaseURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLGetBaseURL, _lib, "CFURLGetBaseURL")
+	}
+	_ret := _fnCFURLGetBaseURL(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFUserNotificationGetResponseValue calls [raw.CFUserNotificationGetResponseValue] (C function CFUserNotificationGetResponseValue).
-func CFUserNotificationGetResponseValue(userNotification unsafe.Pointer, key unsafe.Pointer, idx int) unsafe.Pointer {
-	return raw.CFUserNotificationGetResponseValue(userNotification, key, idx)
+var _fnCFURLGetFSRef func(objc.ID, objc.ID) uint8
+
+// CFURLGetFSRef calls the CoreFoundation framework function CFURLGetFSRef.
+func CFURLGetFSRef(url obj.Object, fsRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLGetFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLGetFSRef, _lib, "CFURLGetFSRef")
+	}
+	return _fnCFURLGetFSRef(objref.IDOf(url), objref.IDOf(fsRef))
 }
 
-// CFUserNotificationGetTypeID calls [raw.CFUserNotificationGetTypeID] (C function CFUserNotificationGetTypeID).
-func CFUserNotificationGetTypeID() uint {
-	return raw.CFUserNotificationGetTypeID()
+var _fnCFURLGetPortNumber func(objc.ID) int
+
+// CFURLGetPortNumber calls the CoreFoundation framework function CFURLGetPortNumber.
+func CFURLGetPortNumber(anURL obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLGetPortNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLGetPortNumber, _lib, "CFURLGetPortNumber")
+	}
+	return _fnCFURLGetPortNumber(objref.IDOf(anURL))
 }
+
+var _fnCFURLGetString func(objc.ID) objc.ID
 
-// CFUserNotificationPopUpSelection calls [raw.CFUserNotificationPopUpSelection] (C function CFUserNotificationPopUpSelection).
-func CFUserNotificationPopUpSelection(n int) uint {
-	return raw.CFUserNotificationPopUpSelection(n)
+// CFURLGetString calls the CoreFoundation framework function CFURLGetString.
+func CFURLGetString(anURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLGetString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLGetString, _lib, "CFURLGetString")
+	}
+	_ret := _fnCFURLGetString(objref.IDOf(anURL))
+	return obj.Wrap(_ret)
 }
 
-// CFUserNotificationReceiveResponse calls [raw.CFUserNotificationReceiveResponse] (C function CFUserNotificationReceiveResponse).
-func CFUserNotificationReceiveResponse(userNotification unsafe.Pointer, timeout float64, responseFlags *uint) int {
-	return raw.CFUserNotificationReceiveResponse(userNotification, timeout, responseFlags)
+var _fnCFURLGetTypeID func() int
+
+// CFURLGetTypeID calls the CoreFoundation framework function CFURLGetTypeID.
+func CFURLGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLGetTypeID, _lib, "CFURLGetTypeID")
+	}
+	return _fnCFURLGetTypeID()
 }
 
-// CFUserNotificationSecureTextField calls [raw.CFUserNotificationSecureTextField] (C function CFUserNotificationSecureTextField).
-func CFUserNotificationSecureTextField(i int) uint {
-	return raw.CFUserNotificationSecureTextField(i)
+var _fnCFURLHasDirectoryPath func(objc.ID) uint8
+
+// CFURLHasDirectoryPath calls the CoreFoundation framework function CFURLHasDirectoryPath.
+func CFURLHasDirectoryPath(anURL obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLHasDirectoryPath == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLHasDirectoryPath, _lib, "CFURLHasDirectoryPath")
+	}
+	return _fnCFURLHasDirectoryPath(objref.IDOf(anURL))
 }
+
+var _fnCFURLIsFileReferenceURL func(objc.ID) uint8
 
-// CFUserNotificationUpdate calls [raw.CFUserNotificationUpdate] (C function CFUserNotificationUpdate).
-func CFUserNotificationUpdate(userNotification unsafe.Pointer, timeout float64, flags uint, dictionary unsafe.Pointer) int {
-	return raw.CFUserNotificationUpdate(userNotification, timeout, flags, dictionary)
+// CFURLIsFileReferenceURL calls the CoreFoundation framework function CFURLIsFileReferenceURL.
+func CFURLIsFileReferenceURL(url obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLIsFileReferenceURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLIsFileReferenceURL, _lib, "CFURLIsFileReferenceURL")
+	}
+	return _fnCFURLIsFileReferenceURL(objref.IDOf(url))
 }
 
-// CFWriteStreamCanAcceptBytes calls [raw.CFWriteStreamCanAcceptBytes] (C function CFWriteStreamCanAcceptBytes).
-func CFWriteStreamCanAcceptBytes(stream unsafe.Pointer) uint8 {
-	return raw.CFWriteStreamCanAcceptBytes(stream)
+var _fnCFURLSetTemporaryResourcePropertyForKey func(objc.ID, objc.ID, objc.ID)
+
+// CFURLSetTemporaryResourcePropertyForKey calls the CoreFoundation framework function CFURLSetTemporaryResourcePropertyForKey.
+func CFURLSetTemporaryResourcePropertyForKey(url obj.Object, key obj.Object, propertyValue obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLSetTemporaryResourcePropertyForKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLSetTemporaryResourcePropertyForKey, _lib, "CFURLSetTemporaryResourcePropertyForKey")
+	}
+	_fnCFURLSetTemporaryResourcePropertyForKey(objref.IDOf(url), objref.IDOf(key), objref.IDOf(propertyValue))
 }
 
-// CFWriteStreamClose calls [raw.CFWriteStreamClose] (C function CFWriteStreamClose).
-func CFWriteStreamClose(stream unsafe.Pointer) {
-	raw.CFWriteStreamClose(stream)
+var _fnCFURLStartAccessingSecurityScopedResource func(objc.ID) uint8
+
+// CFURLStartAccessingSecurityScopedResource calls the CoreFoundation framework function CFURLStartAccessingSecurityScopedResource.
+func CFURLStartAccessingSecurityScopedResource(url obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLStartAccessingSecurityScopedResource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLStartAccessingSecurityScopedResource, _lib, "CFURLStartAccessingSecurityScopedResource")
+	}
+	return _fnCFURLStartAccessingSecurityScopedResource(objref.IDOf(url))
 }
+
+var _fnCFURLStopAccessingSecurityScopedResource func(objc.ID)
 
-// CFWriteStreamCopyDispatchQueue calls [raw.CFWriteStreamCopyDispatchQueue] (C function CFWriteStreamCopyDispatchQueue).
-func CFWriteStreamCopyDispatchQueue(stream unsafe.Pointer) unsafe.Pointer {
-	return raw.CFWriteStreamCopyDispatchQueue(stream)
+// CFURLStopAccessingSecurityScopedResource calls the CoreFoundation framework function CFURLStopAccessingSecurityScopedResource.
+func CFURLStopAccessingSecurityScopedResource(url obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLStopAccessingSecurityScopedResource == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLStopAccessingSecurityScopedResource, _lib, "CFURLStopAccessingSecurityScopedResource")
+	}
+	_fnCFURLStopAccessingSecurityScopedResource(objref.IDOf(url))
 }
 
-// CFWriteStreamCopyError calls [raw.CFWriteStreamCopyError] (C function CFWriteStreamCopyError).
-func CFWriteStreamCopyError(stream unsafe.Pointer) unsafe.Pointer {
-	return raw.CFWriteStreamCopyError(stream)
+var _fnCFUUIDCreate func(objc.ID) objc.ID
+
+// CFUUIDCreate calls the CoreFoundation framework function CFUUIDCreate.
+func CFUUIDCreate(alloc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDCreate, _lib, "CFUUIDCreate")
+	}
+	_ret := _fnCFUUIDCreate(objref.IDOf(alloc))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFUUIDCreateFromString func(objc.ID, objc.ID) objc.ID
 
-// CFWriteStreamCopyProperty calls [raw.CFWriteStreamCopyProperty] (C function CFWriteStreamCopyProperty).
-func CFWriteStreamCopyProperty(stream unsafe.Pointer, propertyName unsafe.Pointer) unsafe.Pointer {
-	return raw.CFWriteStreamCopyProperty(stream, propertyName)
+// CFUUIDCreateFromString calls the CoreFoundation framework function CFUUIDCreateFromString.
+func CFUUIDCreateFromString(alloc obj.Object, uuidStr obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDCreateFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateFromString, _lib, "CFUUIDCreateFromString")
+	}
+	_ret := _fnCFUUIDCreateFromString(objref.IDOf(alloc), objref.IDOf(uuidStr))
+	return obj.Wrap(_ret)
 }
 
-// CFWriteStreamCreateWithAllocatedBuffers calls [raw.CFWriteStreamCreateWithAllocatedBuffers] (C function CFWriteStreamCreateWithAllocatedBuffers).
-func CFWriteStreamCreateWithAllocatedBuffers(alloc unsafe.Pointer, bufferAllocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CFWriteStreamCreateWithAllocatedBuffers(alloc, bufferAllocator)
+var _fnCFUUIDCreateString func(objc.ID, objc.ID) objc.ID
+
+// CFUUIDCreateString calls the CoreFoundation framework function CFUUIDCreateString.
+func CFUUIDCreateString(alloc obj.Object, uuid obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDCreateString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateString, _lib, "CFUUIDCreateString")
+	}
+	_ret := _fnCFUUIDCreateString(objref.IDOf(alloc), objref.IDOf(uuid))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFUUIDCreateWithBytes func(objc.ID, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) objc.ID
 
-// CFWriteStreamCreateWithBuffer calls [raw.CFWriteStreamCreateWithBuffer] (C function CFWriteStreamCreateWithBuffer).
-func CFWriteStreamCreateWithBuffer(alloc unsafe.Pointer, buffer *uint8, bufferCapacity int) unsafe.Pointer {
-	return raw.CFWriteStreamCreateWithBuffer(alloc, buffer, bufferCapacity)
+// CFUUIDCreateWithBytes calls the CoreFoundation framework function CFUUIDCreateWithBytes.
+func CFUUIDCreateWithBytes(alloc obj.Object, byte0 uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8, byte7 uint8, byte8 uint8, byte9 uint8, byte10 uint8, byte11 uint8, byte12 uint8, byte13 uint8, byte14 uint8, byte15 uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDCreateWithBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDCreateWithBytes, _lib, "CFUUIDCreateWithBytes")
+	}
+	_ret := _fnCFUUIDCreateWithBytes(objref.IDOf(alloc), byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
+	return obj.Wrap(_ret)
 }
 
-// CFWriteStreamCreateWithFile calls [raw.CFWriteStreamCreateWithFile] (C function CFWriteStreamCreateWithFile).
-func CFWriteStreamCreateWithFile(alloc unsafe.Pointer, fileURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFWriteStreamCreateWithFile(alloc, fileURL)
+var _fnCFUUIDGetConstantUUIDWithBytes func(objc.ID, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) objc.ID
+
+// CFUUIDGetConstantUUIDWithBytes calls the CoreFoundation framework function CFUUIDGetConstantUUIDWithBytes.
+func CFUUIDGetConstantUUIDWithBytes(alloc obj.Object, byte0 uint8, byte1 uint8, byte2 uint8, byte3 uint8, byte4 uint8, byte5 uint8, byte6 uint8, byte7 uint8, byte8 uint8, byte9 uint8, byte10 uint8, byte11 uint8, byte12 uint8, byte13 uint8, byte14 uint8, byte15 uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDGetConstantUUIDWithBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDGetConstantUUIDWithBytes, _lib, "CFUUIDGetConstantUUIDWithBytes")
+	}
+	_ret := _fnCFUUIDGetConstantUUIDWithBytes(objref.IDOf(alloc), byte0, byte1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, byte15)
+	return obj.Wrap(_ret)
 }
 
-// CFWriteStreamGetError calls [raw.CFWriteStreamGetError] (C function CFWriteStreamGetError).
-func CFWriteStreamGetError(stream unsafe.Pointer) raw.CFStreamError {
-	return raw.CFWriteStreamGetError(stream)
+var _fnCFUUIDGetTypeID func() int
+
+// CFUUIDGetTypeID calls the CoreFoundation framework function CFUUIDGetTypeID.
+func CFUUIDGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUUIDGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUUIDGetTypeID, _lib, "CFUUIDGetTypeID")
+	}
+	return _fnCFUUIDGetTypeID()
 }
+
+var _fnCFUserNotificationCancel func(objc.ID) int
 
-// CFWriteStreamGetStatus calls [raw.CFWriteStreamGetStatus] (C function CFWriteStreamGetStatus).
-func CFWriteStreamGetStatus(stream unsafe.Pointer) CFStreamStatus {
-	return CFStreamStatus(raw.CFWriteStreamGetStatus(stream))
+// CFUserNotificationCancel calls the CoreFoundation framework function CFUserNotificationCancel.
+func CFUserNotificationCancel(userNotification obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationCancel == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationCancel, _lib, "CFUserNotificationCancel")
+	}
+	return _fnCFUserNotificationCancel(objref.IDOf(userNotification))
 }
 
-// CFWriteStreamGetTypeID calls [raw.CFWriteStreamGetTypeID] (C function CFWriteStreamGetTypeID).
-func CFWriteStreamGetTypeID() uint {
-	return raw.CFWriteStreamGetTypeID()
+var _fnCFUserNotificationCheckBoxChecked func(int) int
+
+// CFUserNotificationCheckBoxChecked calls the CoreFoundation framework function CFUserNotificationCheckBoxChecked.
+func CFUserNotificationCheckBoxChecked(i int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationCheckBoxChecked == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationCheckBoxChecked, _lib, "CFUserNotificationCheckBoxChecked")
+	}
+	return _fnCFUserNotificationCheckBoxChecked(i)
 }
+
+var _fnCFUserNotificationDisplayNotice func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
 
-// CFWriteStreamOpen calls [raw.CFWriteStreamOpen] (C function CFWriteStreamOpen).
-func CFWriteStreamOpen(stream unsafe.Pointer) uint8 {
-	return raw.CFWriteStreamOpen(stream)
+// CFUserNotificationDisplayNotice calls the CoreFoundation framework function CFUserNotificationDisplayNotice.
+func CFUserNotificationDisplayNotice(timeout float64, flags int, iconURL obj.Object, soundURL obj.Object, localizationURL obj.Object, alertHeader obj.Object, alertMessage obj.Object, defaultButtonTitle obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationDisplayNotice == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationDisplayNotice, _lib, "CFUserNotificationDisplayNotice")
+	}
+	return _fnCFUserNotificationDisplayNotice(timeout, flags, objref.IDOf(iconURL), objref.IDOf(soundURL), objref.IDOf(localizationURL), objref.IDOf(alertHeader), objref.IDOf(alertMessage), objref.IDOf(defaultButtonTitle))
 }
 
-// CFWriteStreamScheduleWithRunLoop calls [raw.CFWriteStreamScheduleWithRunLoop] (C function CFWriteStreamScheduleWithRunLoop).
-func CFWriteStreamScheduleWithRunLoop(stream unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.CFWriteStreamScheduleWithRunLoop(stream, runLoop, runLoopMode)
+var _fnCFUserNotificationGetResponseDictionary func(objc.ID) objc.ID
+
+// CFUserNotificationGetResponseDictionary calls the CoreFoundation framework function CFUserNotificationGetResponseDictionary.
+func CFUserNotificationGetResponseDictionary(userNotification obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationGetResponseDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationGetResponseDictionary, _lib, "CFUserNotificationGetResponseDictionary")
+	}
+	_ret := _fnCFUserNotificationGetResponseDictionary(objref.IDOf(userNotification))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFUserNotificationGetResponseValue func(objc.ID, objc.ID, int) objc.ID
 
-// CFWriteStreamSetClient calls [raw.CFWriteStreamSetClient] (C function CFWriteStreamSetClient).
-func CFWriteStreamSetClient(stream unsafe.Pointer, streamEvents uint, clientCB unsafe.Pointer, clientContext *raw.CFStreamClientContext) uint8 {
-	return raw.CFWriteStreamSetClient(stream, streamEvents, clientCB, clientContext)
+// CFUserNotificationGetResponseValue calls the CoreFoundation framework function CFUserNotificationGetResponseValue.
+func CFUserNotificationGetResponseValue(userNotification obj.Object, key obj.Object, idx int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationGetResponseValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationGetResponseValue, _lib, "CFUserNotificationGetResponseValue")
+	}
+	_ret := _fnCFUserNotificationGetResponseValue(objref.IDOf(userNotification), objref.IDOf(key), idx)
+	return obj.Wrap(_ret)
 }
 
-// CFWriteStreamSetDispatchQueue calls [raw.CFWriteStreamSetDispatchQueue] (C function CFWriteStreamSetDispatchQueue).
-func CFWriteStreamSetDispatchQueue(stream unsafe.Pointer, q unsafe.Pointer) {
-	raw.CFWriteStreamSetDispatchQueue(stream, q)
+var _fnCFUserNotificationGetTypeID func() int
+
+// CFUserNotificationGetTypeID calls the CoreFoundation framework function CFUserNotificationGetTypeID.
+func CFUserNotificationGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationGetTypeID, _lib, "CFUserNotificationGetTypeID")
+	}
+	return _fnCFUserNotificationGetTypeID()
 }
 
-// CFWriteStreamSetProperty calls [raw.CFWriteStreamSetProperty] (C function CFWriteStreamSetProperty).
-func CFWriteStreamSetProperty(stream unsafe.Pointer, propertyName unsafe.Pointer, propertyValue unsafe.Pointer) uint8 {
-	return raw.CFWriteStreamSetProperty(stream, propertyName, propertyValue)
+var _fnCFUserNotificationPopUpSelection func(int) int
+
+// CFUserNotificationPopUpSelection calls the CoreFoundation framework function CFUserNotificationPopUpSelection.
+func CFUserNotificationPopUpSelection(n int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationPopUpSelection == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationPopUpSelection, _lib, "CFUserNotificationPopUpSelection")
+	}
+	return _fnCFUserNotificationPopUpSelection(n)
 }
+
+var _fnCFUserNotificationSecureTextField func(int) int
 
-// CFWriteStreamUnscheduleFromRunLoop calls [raw.CFWriteStreamUnscheduleFromRunLoop] (C function CFWriteStreamUnscheduleFromRunLoop).
-func CFWriteStreamUnscheduleFromRunLoop(stream unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.CFWriteStreamUnscheduleFromRunLoop(stream, runLoop, runLoopMode)
+// CFUserNotificationSecureTextField calls the CoreFoundation framework function CFUserNotificationSecureTextField.
+func CFUserNotificationSecureTextField(i int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationSecureTextField == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationSecureTextField, _lib, "CFUserNotificationSecureTextField")
+	}
+	return _fnCFUserNotificationSecureTextField(i)
 }
 
-// CFWriteStreamWrite calls [raw.CFWriteStreamWrite] (C function CFWriteStreamWrite).
-func CFWriteStreamWrite(stream unsafe.Pointer, buffer *uint8, bufferLength int) int {
-	return raw.CFWriteStreamWrite(stream, buffer, bufferLength)
+var _fnCFUserNotificationUpdate func(objc.ID, float64, int, objc.ID) int
+
+// CFUserNotificationUpdate calls the CoreFoundation framework function CFUserNotificationUpdate.
+func CFUserNotificationUpdate(userNotification obj.Object, timeout float64, flags int, dictionary obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFUserNotificationUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnCFUserNotificationUpdate, _lib, "CFUserNotificationUpdate")
+	}
+	return _fnCFUserNotificationUpdate(objref.IDOf(userNotification), timeout, flags, objref.IDOf(dictionary))
 }
+
+var _fnCFWriteStreamCanAcceptBytes func(objc.ID) uint8
 
-// CFXMLCreateStringByEscapingEntities calls [raw.CFXMLCreateStringByEscapingEntities] (C function CFXMLCreateStringByEscapingEntities).
-func CFXMLCreateStringByEscapingEntities(allocator unsafe.Pointer, string_ unsafe.Pointer, entitiesDictionary unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLCreateStringByEscapingEntities(allocator, string_, entitiesDictionary)
+// CFWriteStreamCanAcceptBytes calls the CoreFoundation framework function CFWriteStreamCanAcceptBytes.
+func CFWriteStreamCanAcceptBytes(stream obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamCanAcceptBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCanAcceptBytes, _lib, "CFWriteStreamCanAcceptBytes")
+	}
+	return _fnCFWriteStreamCanAcceptBytes(objref.IDOf(stream))
 }
 
-// CFXMLCreateStringByUnescapingEntities calls [raw.CFXMLCreateStringByUnescapingEntities] (C function CFXMLCreateStringByUnescapingEntities).
-func CFXMLCreateStringByUnescapingEntities(allocator unsafe.Pointer, string_ unsafe.Pointer, entitiesDictionary unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLCreateStringByUnescapingEntities(allocator, string_, entitiesDictionary)
+var _fnCFWriteStreamClose func(objc.ID)
+
+// CFWriteStreamClose calls the CoreFoundation framework function CFWriteStreamClose.
+func CFWriteStreamClose(stream obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamClose == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamClose, _lib, "CFWriteStreamClose")
+	}
+	_fnCFWriteStreamClose(objref.IDOf(stream))
 }
+
+var _fnCFWriteStreamCopyError func(objc.ID) objc.ID
 
-// CFXMLNodeCreate calls [raw.CFXMLNodeCreate] (C function CFXMLNodeCreate).
-func CFXMLNodeCreate(alloc unsafe.Pointer, xmlType CFXMLNodeTypeCode, dataString unsafe.Pointer, additionalInfoPtr unsafe.Pointer, version int) unsafe.Pointer {
-	return raw.CFXMLNodeCreate(alloc, raw.CFXMLNodeTypeCode(xmlType), dataString, additionalInfoPtr, version)
+// CFWriteStreamCopyError calls the CoreFoundation framework function CFWriteStreamCopyError.
+func CFWriteStreamCopyError(stream obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamCopyError == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCopyError, _lib, "CFWriteStreamCopyError")
+	}
+	_ret := _fnCFWriteStreamCopyError(objref.IDOf(stream))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLNodeCreateCopy calls [raw.CFXMLNodeCreateCopy] (C function CFXMLNodeCreateCopy).
-func CFXMLNodeCreateCopy(alloc unsafe.Pointer, origNode unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLNodeCreateCopy(alloc, origNode)
+var _fnCFWriteStreamCreateWithAllocatedBuffers func(objc.ID, objc.ID) objc.ID
+
+// CFWriteStreamCreateWithAllocatedBuffers calls the CoreFoundation framework function CFWriteStreamCreateWithAllocatedBuffers.
+func CFWriteStreamCreateWithAllocatedBuffers(alloc obj.Object, bufferAllocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamCreateWithAllocatedBuffers == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithAllocatedBuffers, _lib, "CFWriteStreamCreateWithAllocatedBuffers")
+	}
+	_ret := _fnCFWriteStreamCreateWithAllocatedBuffers(objref.IDOf(alloc), objref.IDOf(bufferAllocator))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLNodeGetInfoPtr calls [raw.CFXMLNodeGetInfoPtr] (C function CFXMLNodeGetInfoPtr).
-func CFXMLNodeGetInfoPtr(node unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLNodeGetInfoPtr(node)
+var _fnCFWriteStreamCreateWithFile func(objc.ID, objc.ID) objc.ID
+
+// CFWriteStreamCreateWithFile calls the CoreFoundation framework function CFWriteStreamCreateWithFile.
+func CFWriteStreamCreateWithFile(alloc obj.Object, fileURL obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamCreateWithFile == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamCreateWithFile, _lib, "CFWriteStreamCreateWithFile")
+	}
+	_ret := _fnCFWriteStreamCreateWithFile(objref.IDOf(alloc), objref.IDOf(fileURL))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFWriteStreamGetStatus func(objc.ID) CFStreamStatus
 
-// CFXMLNodeGetString calls [raw.CFXMLNodeGetString] (C function CFXMLNodeGetString).
-func CFXMLNodeGetString(node unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLNodeGetString(node)
+// CFWriteStreamGetStatus calls the CoreFoundation framework function CFWriteStreamGetStatus.
+func CFWriteStreamGetStatus(stream obj.Object) CFStreamStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamGetStatus, _lib, "CFWriteStreamGetStatus")
+	}
+	return _fnCFWriteStreamGetStatus(objref.IDOf(stream))
 }
 
-// CFXMLNodeGetTypeCode calls [raw.CFXMLNodeGetTypeCode] (C function CFXMLNodeGetTypeCode).
-func CFXMLNodeGetTypeCode(node unsafe.Pointer) CFXMLNodeTypeCode {
-	return CFXMLNodeTypeCode(raw.CFXMLNodeGetTypeCode(node))
+var _fnCFWriteStreamGetTypeID func() int
+
+// CFWriteStreamGetTypeID calls the CoreFoundation framework function CFWriteStreamGetTypeID.
+func CFWriteStreamGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamGetTypeID, _lib, "CFWriteStreamGetTypeID")
+	}
+	return _fnCFWriteStreamGetTypeID()
 }
 
-// CFXMLNodeGetTypeID calls [raw.CFXMLNodeGetTypeID] (C function CFXMLNodeGetTypeID).
-func CFXMLNodeGetTypeID() uint {
-	return raw.CFXMLNodeGetTypeID()
+var _fnCFWriteStreamOpen func(objc.ID) uint8
+
+// CFWriteStreamOpen calls the CoreFoundation framework function CFWriteStreamOpen.
+func CFWriteStreamOpen(stream obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFWriteStreamOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnCFWriteStreamOpen, _lib, "CFWriteStreamOpen")
+	}
+	return _fnCFWriteStreamOpen(objref.IDOf(stream))
 }
+
+var _fnCFXMLCreateStringByEscapingEntities func(objc.ID, objc.ID, objc.ID) objc.ID
 
-// CFXMLNodeGetVersion calls [raw.CFXMLNodeGetVersion] (C function CFXMLNodeGetVersion).
-func CFXMLNodeGetVersion(node unsafe.Pointer) int {
-	return raw.CFXMLNodeGetVersion(node)
+// CFXMLCreateStringByEscapingEntities calls the CoreFoundation framework function CFXMLCreateStringByEscapingEntities.
+func CFXMLCreateStringByEscapingEntities(allocator obj.Object, string_ obj.Object, entitiesDictionary obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLCreateStringByEscapingEntities == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLCreateStringByEscapingEntities, _lib, "CFXMLCreateStringByEscapingEntities")
+	}
+	_ret := _fnCFXMLCreateStringByEscapingEntities(objref.IDOf(allocator), objref.IDOf(string_), objref.IDOf(entitiesDictionary))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLParserAbort calls [raw.CFXMLParserAbort] (C function CFXMLParserAbort).
-func CFXMLParserAbort(parser unsafe.Pointer, errorCode CFXMLParserStatusCode, errorDescription unsafe.Pointer) {
-	raw.CFXMLParserAbort(parser, raw.CFXMLParserStatusCode(errorCode), errorDescription)
+var _fnCFXMLCreateStringByUnescapingEntities func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// CFXMLCreateStringByUnescapingEntities calls the CoreFoundation framework function CFXMLCreateStringByUnescapingEntities.
+func CFXMLCreateStringByUnescapingEntities(allocator obj.Object, string_ obj.Object, entitiesDictionary obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLCreateStringByUnescapingEntities == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLCreateStringByUnescapingEntities, _lib, "CFXMLCreateStringByUnescapingEntities")
+	}
+	_ret := _fnCFXMLCreateStringByUnescapingEntities(objref.IDOf(allocator), objref.IDOf(string_), objref.IDOf(entitiesDictionary))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLParserCopyErrorDescription calls [raw.CFXMLParserCopyErrorDescription] (C function CFXMLParserCopyErrorDescription).
-func CFXMLParserCopyErrorDescription(parser unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLParserCopyErrorDescription(parser)
+var _fnCFXMLNodeCreateCopy func(objc.ID, objc.ID) objc.ID
+
+// CFXMLNodeCreateCopy calls the CoreFoundation framework function CFXMLNodeCreateCopy.
+func CFXMLNodeCreateCopy(alloc obj.Object, origNode obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLNodeCreateCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLNodeCreateCopy, _lib, "CFXMLNodeCreateCopy")
+	}
+	_ret := _fnCFXMLNodeCreateCopy(objref.IDOf(alloc), objref.IDOf(origNode))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFXMLNodeGetString func(objc.ID) objc.ID
 
-// CFXMLParserCreate calls [raw.CFXMLParserCreate] (C function CFXMLParserCreate).
-func CFXMLParserCreate(allocator unsafe.Pointer, xmlData unsafe.Pointer, dataSource unsafe.Pointer, parseOptions uint, versionOfNodes int, callBacks *raw.CFXMLParserCallBacks, context_ *raw.CFXMLParserContext) unsafe.Pointer {
-	return raw.CFXMLParserCreate(allocator, xmlData, dataSource, parseOptions, versionOfNodes, callBacks, context_)
+// CFXMLNodeGetString calls the CoreFoundation framework function CFXMLNodeGetString.
+func CFXMLNodeGetString(node obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLNodeGetString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLNodeGetString, _lib, "CFXMLNodeGetString")
+	}
+	_ret := _fnCFXMLNodeGetString(objref.IDOf(node))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLParserCreateWithDataFromURL calls [raw.CFXMLParserCreateWithDataFromURL] (C function CFXMLParserCreateWithDataFromURL).
-func CFXMLParserCreateWithDataFromURL(allocator unsafe.Pointer, dataSource unsafe.Pointer, parseOptions uint, versionOfNodes int, callBacks *raw.CFXMLParserCallBacks, context_ *raw.CFXMLParserContext) unsafe.Pointer {
-	return raw.CFXMLParserCreateWithDataFromURL(allocator, dataSource, parseOptions, versionOfNodes, callBacks, context_)
+var _fnCFXMLNodeGetTypeCode func(objc.ID) CFXMLNodeTypeCode
+
+// CFXMLNodeGetTypeCode calls the CoreFoundation framework function CFXMLNodeGetTypeCode.
+func CFXMLNodeGetTypeCode(node obj.Object) CFXMLNodeTypeCode {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLNodeGetTypeCode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLNodeGetTypeCode, _lib, "CFXMLNodeGetTypeCode")
+	}
+	return _fnCFXMLNodeGetTypeCode(objref.IDOf(node))
 }
+
+var _fnCFXMLNodeGetTypeID func() int
 
-// CFXMLParserGetCallBacks calls [raw.CFXMLParserGetCallBacks] (C function CFXMLParserGetCallBacks).
-func CFXMLParserGetCallBacks(parser unsafe.Pointer, callBacks *raw.CFXMLParserCallBacks) {
-	raw.CFXMLParserGetCallBacks(parser, callBacks)
+// CFXMLNodeGetTypeID calls the CoreFoundation framework function CFXMLNodeGetTypeID.
+func CFXMLNodeGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLNodeGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLNodeGetTypeID, _lib, "CFXMLNodeGetTypeID")
+	}
+	return _fnCFXMLNodeGetTypeID()
 }
 
-// CFXMLParserGetContext calls [raw.CFXMLParserGetContext] (C function CFXMLParserGetContext).
-func CFXMLParserGetContext(parser unsafe.Pointer, context_ *raw.CFXMLParserContext) {
-	raw.CFXMLParserGetContext(parser, context_)
+var _fnCFXMLNodeGetVersion func(objc.ID) int
+
+// CFXMLNodeGetVersion calls the CoreFoundation framework function CFXMLNodeGetVersion.
+func CFXMLNodeGetVersion(node obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLNodeGetVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLNodeGetVersion, _lib, "CFXMLNodeGetVersion")
+	}
+	return _fnCFXMLNodeGetVersion(objref.IDOf(node))
 }
+
+var _fnCFXMLParserAbort func(objc.ID, CFXMLParserStatusCode, objc.ID)
 
-// CFXMLParserGetDocument calls [raw.CFXMLParserGetDocument] (C function CFXMLParserGetDocument).
-func CFXMLParserGetDocument(parser unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLParserGetDocument(parser)
+// CFXMLParserAbort calls the CoreFoundation framework function CFXMLParserAbort.
+func CFXMLParserAbort(parser obj.Object, errorCode CFXMLParserStatusCode, errorDescription obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserAbort == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserAbort, _lib, "CFXMLParserAbort")
+	}
+	_fnCFXMLParserAbort(objref.IDOf(parser), errorCode, objref.IDOf(errorDescription))
 }
 
-// CFXMLParserGetLineNumber calls [raw.CFXMLParserGetLineNumber] (C function CFXMLParserGetLineNumber).
-func CFXMLParserGetLineNumber(parser unsafe.Pointer) int {
-	return raw.CFXMLParserGetLineNumber(parser)
+var _fnCFXMLParserCopyErrorDescription func(objc.ID) objc.ID
+
+// CFXMLParserCopyErrorDescription calls the CoreFoundation framework function CFXMLParserCopyErrorDescription.
+func CFXMLParserCopyErrorDescription(parser obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserCopyErrorDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserCopyErrorDescription, _lib, "CFXMLParserCopyErrorDescription")
+	}
+	_ret := _fnCFXMLParserCopyErrorDescription(objref.IDOf(parser))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLParserGetLocation calls [raw.CFXMLParserGetLocation] (C function CFXMLParserGetLocation).
-func CFXMLParserGetLocation(parser unsafe.Pointer) int {
-	return raw.CFXMLParserGetLocation(parser)
+var _fnCFXMLParserGetLineNumber func(objc.ID) int
+
+// CFXMLParserGetLineNumber calls the CoreFoundation framework function CFXMLParserGetLineNumber.
+func CFXMLParserGetLineNumber(parser obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserGetLineNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetLineNumber, _lib, "CFXMLParserGetLineNumber")
+	}
+	return _fnCFXMLParserGetLineNumber(objref.IDOf(parser))
 }
+
+var _fnCFXMLParserGetLocation func(objc.ID) int
 
-// CFXMLParserGetSourceURL calls [raw.CFXMLParserGetSourceURL] (C function CFXMLParserGetSourceURL).
-func CFXMLParserGetSourceURL(parser unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLParserGetSourceURL(parser)
+// CFXMLParserGetLocation calls the CoreFoundation framework function CFXMLParserGetLocation.
+func CFXMLParserGetLocation(parser obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserGetLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetLocation, _lib, "CFXMLParserGetLocation")
+	}
+	return _fnCFXMLParserGetLocation(objref.IDOf(parser))
 }
 
-// CFXMLParserGetStatusCode calls [raw.CFXMLParserGetStatusCode] (C function CFXMLParserGetStatusCode).
-func CFXMLParserGetStatusCode(parser unsafe.Pointer) CFXMLParserStatusCode {
-	return CFXMLParserStatusCode(raw.CFXMLParserGetStatusCode(parser))
+var _fnCFXMLParserGetSourceURL func(objc.ID) objc.ID
+
+// CFXMLParserGetSourceURL calls the CoreFoundation framework function CFXMLParserGetSourceURL.
+func CFXMLParserGetSourceURL(parser obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserGetSourceURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetSourceURL, _lib, "CFXMLParserGetSourceURL")
+	}
+	_ret := _fnCFXMLParserGetSourceURL(objref.IDOf(parser))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFXMLParserGetStatusCode func(objc.ID) CFXMLParserStatusCode
 
-// CFXMLParserGetTypeID calls [raw.CFXMLParserGetTypeID] (C function CFXMLParserGetTypeID).
-func CFXMLParserGetTypeID() uint {
-	return raw.CFXMLParserGetTypeID()
+// CFXMLParserGetStatusCode calls the CoreFoundation framework function CFXMLParserGetStatusCode.
+func CFXMLParserGetStatusCode(parser obj.Object) CFXMLParserStatusCode {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserGetStatusCode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetStatusCode, _lib, "CFXMLParserGetStatusCode")
+	}
+	return _fnCFXMLParserGetStatusCode(objref.IDOf(parser))
 }
 
-// CFXMLParserParse calls [raw.CFXMLParserParse] (C function CFXMLParserParse).
-func CFXMLParserParse(parser unsafe.Pointer) uint8 {
-	return raw.CFXMLParserParse(parser)
+var _fnCFXMLParserGetTypeID func() int
+
+// CFXMLParserGetTypeID calls the CoreFoundation framework function CFXMLParserGetTypeID.
+func CFXMLParserGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserGetTypeID, _lib, "CFXMLParserGetTypeID")
+	}
+	return _fnCFXMLParserGetTypeID()
 }
+
+var _fnCFXMLParserParse func(objc.ID) uint8
 
-// CFXMLTreeCreateFromData calls [raw.CFXMLTreeCreateFromData] (C function CFXMLTreeCreateFromData).
-func CFXMLTreeCreateFromData(allocator unsafe.Pointer, xmlData unsafe.Pointer, dataSource unsafe.Pointer, parseOptions uint, versionOfNodes int) unsafe.Pointer {
-	return raw.CFXMLTreeCreateFromData(allocator, xmlData, dataSource, parseOptions, versionOfNodes)
+// CFXMLParserParse calls the CoreFoundation framework function CFXMLParserParse.
+func CFXMLParserParse(parser obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLParserParse == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLParserParse, _lib, "CFXMLParserParse")
+	}
+	return _fnCFXMLParserParse(objref.IDOf(parser))
 }
 
-// CFXMLTreeCreateFromDataWithError calls [raw.CFXMLTreeCreateFromDataWithError] (C function CFXMLTreeCreateFromDataWithError).
-func CFXMLTreeCreateFromDataWithError(allocator unsafe.Pointer, xmlData unsafe.Pointer, dataSource unsafe.Pointer, parseOptions uint, versionOfNodes int, errorDict unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLTreeCreateFromDataWithError(allocator, xmlData, dataSource, parseOptions, versionOfNodes, errorDict)
+var _fnCFXMLTreeCreateFromData func(objc.ID, objc.ID, objc.ID, int, int) objc.ID
+
+// CFXMLTreeCreateFromData calls the CoreFoundation framework function CFXMLTreeCreateFromData.
+func CFXMLTreeCreateFromData(allocator obj.Object, xmlData obj.Object, dataSource obj.Object, parseOptions int, versionOfNodes int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLTreeCreateFromData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateFromData, _lib, "CFXMLTreeCreateFromData")
+	}
+	_ret := _fnCFXMLTreeCreateFromData(objref.IDOf(allocator), objref.IDOf(xmlData), objref.IDOf(dataSource), parseOptions, versionOfNodes)
+	return obj.Wrap(_ret)
 }
 
-// CFXMLTreeCreateWithDataFromURL calls [raw.CFXMLTreeCreateWithDataFromURL] (C function CFXMLTreeCreateWithDataFromURL).
-func CFXMLTreeCreateWithDataFromURL(allocator unsafe.Pointer, dataSource unsafe.Pointer, parseOptions uint, versionOfNodes int) unsafe.Pointer {
-	return raw.CFXMLTreeCreateWithDataFromURL(allocator, dataSource, parseOptions, versionOfNodes)
+var _fnCFXMLTreeCreateWithDataFromURL func(objc.ID, objc.ID, int, int) objc.ID
+
+// CFXMLTreeCreateWithDataFromURL calls the CoreFoundation framework function CFXMLTreeCreateWithDataFromURL.
+func CFXMLTreeCreateWithDataFromURL(allocator obj.Object, dataSource obj.Object, parseOptions int, versionOfNodes int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLTreeCreateWithDataFromURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateWithDataFromURL, _lib, "CFXMLTreeCreateWithDataFromURL")
+	}
+	_ret := _fnCFXMLTreeCreateWithDataFromURL(objref.IDOf(allocator), objref.IDOf(dataSource), parseOptions, versionOfNodes)
+	return obj.Wrap(_ret)
 }
+
+var _fnCFXMLTreeCreateWithNode func(objc.ID, objc.ID) objc.ID
 
-// CFXMLTreeCreateWithNode calls [raw.CFXMLTreeCreateWithNode] (C function CFXMLTreeCreateWithNode).
-func CFXMLTreeCreateWithNode(allocator unsafe.Pointer, node unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLTreeCreateWithNode(allocator, node)
+// CFXMLTreeCreateWithNode calls the CoreFoundation framework function CFXMLTreeCreateWithNode.
+func CFXMLTreeCreateWithNode(allocator obj.Object, node obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLTreeCreateWithNode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateWithNode, _lib, "CFXMLTreeCreateWithNode")
+	}
+	_ret := _fnCFXMLTreeCreateWithNode(objref.IDOf(allocator), objref.IDOf(node))
+	return obj.Wrap(_ret)
 }
 
-// CFXMLTreeCreateXMLData calls [raw.CFXMLTreeCreateXMLData] (C function CFXMLTreeCreateXMLData).
-func CFXMLTreeCreateXMLData(allocator unsafe.Pointer, xmlTree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLTreeCreateXMLData(allocator, xmlTree)
+var _fnCFXMLTreeCreateXMLData func(objc.ID, objc.ID) objc.ID
+
+// CFXMLTreeCreateXMLData calls the CoreFoundation framework function CFXMLTreeCreateXMLData.
+func CFXMLTreeCreateXMLData(allocator obj.Object, xmlTree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLTreeCreateXMLData == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLTreeCreateXMLData, _lib, "CFXMLTreeCreateXMLData")
+	}
+	_ret := _fnCFXMLTreeCreateXMLData(objref.IDOf(allocator), objref.IDOf(xmlTree))
+	return obj.Wrap(_ret)
 }
+
+var _fnCFXMLTreeGetNode func(objc.ID) objc.ID
 
-// CFXMLTreeGetNode calls [raw.CFXMLTreeGetNode] (C function CFXMLTreeGetNode).
-func CFXMLTreeGetNode(xmlTree unsafe.Pointer) unsafe.Pointer {
-	return raw.CFXMLTreeGetNode(xmlTree)
+// CFXMLTreeGetNode calls the CoreFoundation framework function CFXMLTreeGetNode.
+func CFXMLTreeGetNode(xmlTree obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFXMLTreeGetNode == nil {
+		ebipurego.RegisterLibFunc(&_fnCFXMLTreeGetNode, _lib, "CFXMLTreeGetNode")
+	}
+	_ret := _fnCFXMLTreeGetNode(objref.IDOf(xmlTree))
+	return obj.Wrap(_ret)
 }
 
-// CFStringMakeConstantString calls [raw.CFStringMakeConstantString] (C function __CFStringMakeConstantString).
-func CFStringMakeConstantString(cStr string) unsafe.Pointer {
-	return raw.CFStringMakeConstantString(cStr)
+var _fnCFStringMakeConstantString func(string) objc.ID
+
+// CFStringMakeConstantString calls the CoreFoundation framework function __CFStringMakeConstantString.
+func CFStringMakeConstantString(cStr string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStringMakeConstantString == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStringMakeConstantString, _lib, "__CFStringMakeConstantString")
+	}
+	_ret := _fnCFStringMakeConstantString(cStr)
+	return obj.Wrap(_ret)
 }
+
+var _fnBuiltinConstantP func() int
 
-// BuiltinConstantP calls [raw.BuiltinConstantP] (C function __builtin_constant_p).
+// BuiltinConstantP calls the CoreFoundation framework function __builtin_constant_p.
 func BuiltinConstantP() int {
-	return raw.BuiltinConstantP()
+	_loadOnce.Do(_loadLibrary)
+	if _fnBuiltinConstantP == nil {
+		ebipurego.RegisterLibFunc(&_fnBuiltinConstantP, _lib, "__builtin_constant_p")
+	}
+	return _fnBuiltinConstantP()
 }

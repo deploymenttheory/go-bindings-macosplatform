@@ -5,65 +5,73 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that provides further information about a remote peripheral’s characteristic.
+// Descriptor is an idiomatic wrapper over the Objective-C class CBDescriptor.
 //
-// Descriptor wraps [raw.CBDescriptor] with a fluent Go API.
+// Descriptor is an abstract base — you do not construct it directly. Construct one of [MutableDescriptor] and pass it where a Descriptor is accepted.
+//
+// An object that provides further information about a remote peripheral’s characteristic.
 type Descriptor struct {
-	inner *raw.CBDescriptor
+	Attribute
 }
 
-// Unwrap returns the underlying [raw.CBDescriptor].
-func (x *Descriptor) Unwrap() *raw.CBDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Descriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// DescriptorFromID adopts an existing object pointer as a Descriptor (nil for 0).
+// DescriptorFromID adopts an existing Objective-C object as a Descriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func DescriptorFromID(id objc.ID) *Descriptor {
 	if id == 0 {
 		return nil
 	}
-	return &Descriptor{inner: raw.CBDescriptorFromID(id)}
+	x := &Descriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDescriptor creates a new [Descriptor].
-func NewDescriptor() *Descriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBDescriptor")), objc.RegisterName("new"))
-	return &Descriptor{inner: raw.CBDescriptorFromID(_id)}
-}
-
-// @property characteristic @discussion A back-pointer to the characteristic this descriptor belongs to.
-//
-// Characteristic calls the underlying Characteristic.
-func (x *Descriptor) Characteristic() *Characteristic {
-	_r := x.inner.Characteristic()
-	if _r == nil {
+// descriptorAdopt wraps an Objective-C object that this code just created as a
+// Descriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func descriptorAdopt(id objc.ID) *Descriptor {
+	if id == 0 {
 		return nil
 	}
-	return &Characteristic{inner: _r}
+	x := &Descriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property value @discussion The value of the descriptor. The corresponding value types for the various descriptors are detailed in @link CBUUID.h @/link.
-//
-// Value calls the underlying Value.
-func (x *Descriptor) Value() objc.ID {
-	return x.inner.Value()
+// Characteristic a back-pointer to the characteristic this descriptor belongs to.
+func (x *Descriptor) Characteristic() *Characteristic {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristic"))
+	return CharacteristicFromID(_r)
 }
 
-func (x *Descriptor) asDescriptor() *raw.CBDescriptor { return x.inner }
-
-func (x *Descriptor) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
+// Value the value of the descriptor. The corresponding value types for the various descriptors are detailed in
+func (x *Descriptor) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
+}
 
 // Descriptorable is the interface implemented by [Descriptor], for mocking and DI.
 type Descriptorable interface {
-	Unwrap() *raw.CBDescriptor
+	obj.Object
 	Characteristic() *Characteristic
-	Value() objc.ID
+	Value() obj.Object
 }
 
 var _ Descriptorable = (*Descriptor)(nil)
+
+// isDescriptor marks Descriptor — and, by embedding promotion, its
+// subclasses — as a member of the Descriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *Descriptor) isDescriptor() {}
+
+var _ DescriptorProvider = (*Descriptor)(nil)
+
+var _ AttributeProvider = (*Descriptor)(nil)

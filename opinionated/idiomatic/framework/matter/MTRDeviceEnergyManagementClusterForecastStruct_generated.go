@@ -5,206 +5,247 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterForecastStruct wraps [raw.MTRDeviceEnergyManagementClusterForecastStruct] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterForecastStruct is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterForecastStruct.
 type MTRDeviceEnergyManagementClusterForecastStruct struct {
-	inner *raw.MTRDeviceEnergyManagementClusterForecastStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterForecastStruct].
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterForecastStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterForecastStruct (nil for 0).
+// MTRDeviceEnergyManagementClusterForecastStructFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterForecastStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterForecastStructFromID(id objc.ID) *MTRDeviceEnergyManagementClusterForecastStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterForecastStruct{inner: raw.MTRDeviceEnergyManagementClusterForecastStructFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterForecastStruct{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterForecastStruct creates a new [MTRDeviceEnergyManagementClusterForecastStruct].
+// mTRDeviceEnergyManagementClusterForecastStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterForecastStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterForecastStructAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterForecastStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterForecastStruct{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTRDeviceEnergyManagementClusterForecastStruct creates a new MTRDeviceEnergyManagementClusterForecastStruct.
 func NewMTRDeviceEnergyManagementClusterForecastStruct() *MTRDeviceEnergyManagementClusterForecastStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterForecastStruct")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterForecastStruct{inner: raw.MTRDeviceEnergyManagementClusterForecastStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterForecastStruct")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterForecastStructAdopt(_id)
 }
 
-// WithForecastID sets the forecastID property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetForecastID(forecastID)
+// WithForecastID sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 	return x
 }
 
-// WithActiveSlotNumber sets the activeSlotNumber property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithActiveSlotNumber(activeSlotNumber *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetActiveSlotNumber(activeSlotNumber)
+// WithActiveSlotNumber sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithActiveSlotNumber(activeSlotNumber obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveSlotNumber:"), objref.IDOf(activeSlotNumber))
 	return x
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithStartTime(startTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetStartTime(startTime)
+// WithStartTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithEndTime sets the endTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithEndTime(endTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetEndTime(endTime)
+// WithEndTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithEndTime(endTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return x
 }
 
-// WithEarliestStartTime sets the earliestStartTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithEarliestStartTime(earliestStartTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetEarliestStartTime(earliestStartTime)
+// WithEarliestStartTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithEarliestStartTime(earliestStartTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestStartTime:"), objref.IDOf(earliestStartTime))
 	return x
 }
 
-// WithLatestEndTime sets the latestEndTime property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithLatestEndTime(latestEndTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetLatestEndTime(latestEndTime)
+// WithLatestEndTime sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithLatestEndTime(latestEndTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestEndTime:"), objref.IDOf(latestEndTime))
 	return x
 }
 
-// WithIsPausable sets the isPausable property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithIsPausable(isPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetIsPausable(isPausable)
+// WithIsPausable sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithIsPausable(isPausable obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsPausable:"), objref.IDOf(isPausable))
 	return x
 }
 
-// WithForecastUpdateReason sets the forecastUpdateReason property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct {
-	x.inner.SetForecastUpdateReason(forecastUpdateReason)
+// WithForecastUpdateReason sets the property and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastUpdateReason(forecastUpdateReason obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastUpdateReason:"), objref.IDOf(forecastUpdateReason))
 	return x
 }
 
-// ForecastID calls the underlying ForecastID.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() *foundation.NSNumber {
-	return x.inner.ForecastID()
+// ForecastID wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forecastID"))
+	return obj.Wrap(_r)
 }
 
-// SetForecastID calls the underlying SetForecastID.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastID(forecastID *foundation.NSNumber) {
-	x.inner.SetForecastID(forecastID)
+// SetForecastID wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastID(forecastID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 }
 
-// ActiveSlotNumber calls the underlying ActiveSlotNumber.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() *foundation.NSNumber {
-	return x.inner.ActiveSlotNumber()
+// ActiveSlotNumber wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeSlotNumber"))
+	return obj.Wrap(_r)
 }
 
-// SetActiveSlotNumber calls the underlying SetActiveSlotNumber.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetActiveSlotNumber(activeSlotNumber *foundation.NSNumber) {
-	x.inner.SetActiveSlotNumber(activeSlotNumber)
+// SetActiveSlotNumber wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetActiveSlotNumber(activeSlotNumber obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveSlotNumber:"), objref.IDOf(activeSlotNumber))
 }
 
-// StartTime calls the underlying StartTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
+// StartTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
+// SetStartTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
-// EndTime calls the underlying EndTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() *foundation.NSNumber {
-	return x.inner.EndTime()
+// EndTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTime"))
+	return obj.Wrap(_r)
 }
 
-// SetEndTime calls the underlying SetEndTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEndTime(endTime *foundation.NSNumber) {
-	x.inner.SetEndTime(endTime)
+// SetEndTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEndTime(endTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 }
 
-// EarliestStartTime calls the underlying EarliestStartTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() *foundation.NSNumber {
-	return x.inner.EarliestStartTime()
+// EarliestStartTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("earliestStartTime"))
+	return obj.Wrap(_r)
 }
 
-// SetEarliestStartTime calls the underlying SetEarliestStartTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEarliestStartTime(earliestStartTime *foundation.NSNumber) {
-	x.inner.SetEarliestStartTime(earliestStartTime)
+// SetEarliestStartTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEarliestStartTime(earliestStartTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestStartTime:"), objref.IDOf(earliestStartTime))
 }
 
-// LatestEndTime calls the underlying LatestEndTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() *foundation.NSNumber {
-	return x.inner.LatestEndTime()
+// LatestEndTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latestEndTime"))
+	return obj.Wrap(_r)
 }
 
-// SetLatestEndTime calls the underlying SetLatestEndTime.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetLatestEndTime(latestEndTime *foundation.NSNumber) {
-	x.inner.SetLatestEndTime(latestEndTime)
+// SetLatestEndTime wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetLatestEndTime(latestEndTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLatestEndTime:"), objref.IDOf(latestEndTime))
 }
 
-// IsPausable calls the underlying IsPausable.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() *foundation.NSNumber {
-	return x.inner.IsPausable()
+// IsPausable wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("isPausable"))
+	return obj.Wrap(_r)
 }
 
-// SetIsPausable calls the underlying SetIsPausable.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetIsPausable(isPausable *foundation.NSNumber) {
-	x.inner.SetIsPausable(isPausable)
+// SetIsPausable wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetIsPausable(isPausable obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsPausable:"), objref.IDOf(isPausable))
 }
 
-// Slots calls the underlying Slots.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) Slots() *foundation.NSArray[objc.ID] {
-	return x.inner.Slots()
+// Slots wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) Slots() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slots"))
+	return obj.Wrap(_r)
 }
 
-// SetSlots calls the underlying SetSlots.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots *foundation.NSArray[objc.ID]) {
-	x.inner.SetSlots(slots)
+// SetSlots wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlots:"), objref.IDOf(slots))
 }
 
-// ForecastUpdateReason calls the underlying ForecastUpdateReason.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() *foundation.NSNumber {
-	return x.inner.ForecastUpdateReason()
+// ForecastUpdateReason wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forecastUpdateReason"))
+	return obj.Wrap(_r)
 }
 
-// SetForecastUpdateReason calls the underlying SetForecastUpdateReason.
-func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) {
-	x.inner.SetForecastUpdateReason(forecastUpdateReason)
+// SetForecastUpdateReason wraps the corresponding Objective-C method.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastUpdateReason(forecastUpdateReason obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastUpdateReason:"), objref.IDOf(forecastUpdateReason))
 }
 
 // MTRDeviceEnergyManagementClusterForecastStructable is the interface implemented by [MTRDeviceEnergyManagementClusterForecastStruct], for mocking and DI.
 type MTRDeviceEnergyManagementClusterForecastStructable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct
-	WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithActiveSlotNumber(activeSlotNumber *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithStartTime(startTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithEndTime(endTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithEarliestStartTime(earliestStartTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithLatestEndTime(latestEndTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithIsPausable(isPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	WithForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
-	ForecastID() *foundation.NSNumber
-	SetForecastID(forecastID *foundation.NSNumber)
-	ActiveSlotNumber() *foundation.NSNumber
-	SetActiveSlotNumber(activeSlotNumber *foundation.NSNumber)
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	EndTime() *foundation.NSNumber
-	SetEndTime(endTime *foundation.NSNumber)
-	EarliestStartTime() *foundation.NSNumber
-	SetEarliestStartTime(earliestStartTime *foundation.NSNumber)
-	LatestEndTime() *foundation.NSNumber
-	SetLatestEndTime(latestEndTime *foundation.NSNumber)
-	IsPausable() *foundation.NSNumber
-	SetIsPausable(isPausable *foundation.NSNumber)
-	Slots() *foundation.NSArray[objc.ID]
-	SetSlots(slots *foundation.NSArray[objc.ID])
-	ForecastUpdateReason() *foundation.NSNumber
-	SetForecastUpdateReason(forecastUpdateReason *foundation.NSNumber)
+	obj.Object
+	WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithActiveSlotNumber(activeSlotNumber obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithEndTime(endTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithEarliestStartTime(earliestStartTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithLatestEndTime(latestEndTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithIsPausable(isPausable obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithForecastUpdateReason(forecastUpdateReason obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct
+	ForecastID() obj.Object
+	SetForecastID(forecastID obj.Object)
+	ActiveSlotNumber() obj.Object
+	SetActiveSlotNumber(activeSlotNumber obj.Object)
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	EndTime() obj.Object
+	SetEndTime(endTime obj.Object)
+	EarliestStartTime() obj.Object
+	SetEarliestStartTime(earliestStartTime obj.Object)
+	LatestEndTime() obj.Object
+	SetLatestEndTime(latestEndTime obj.Object)
+	IsPausable() obj.Object
+	SetIsPausable(isPausable obj.Object)
+	Slots() obj.Object
+	SetSlots(slots obj.Object)
+	ForecastUpdateReason() obj.Object
+	SetForecastUpdateReason(forecastUpdateReason obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterForecastStructable = (*MTRDeviceEnergyManagementClusterForecastStruct)(nil)

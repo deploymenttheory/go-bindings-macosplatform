@@ -5,88 +5,89 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that produces a heat map that identifies the parts of an image most likely to draw attention.
+// GenerateAttentionBasedSaliencyImageRequest is an idiomatic wrapper over the Objective-C class VNGenerateAttentionBasedSaliencyImageRequest.
 //
-// GenerateAttentionBasedSaliencyImageRequest wraps [raw.VNGenerateAttentionBasedSaliencyImageRequest] with a fluent Go API.
+// It embeds [ImageBasedRequest], promoting that type's methods.
+//
+// An object that produces a heat map that identifies the parts of an image most likely to draw attention.
 type GenerateAttentionBasedSaliencyImageRequest struct {
-	inner *raw.VNGenerateAttentionBasedSaliencyImageRequest
+	ImageBasedRequest
 }
 
-// Unwrap returns the underlying [raw.VNGenerateAttentionBasedSaliencyImageRequest].
-func (x *GenerateAttentionBasedSaliencyImageRequest) Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenerateAttentionBasedSaliencyImageRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// GenerateAttentionBasedSaliencyImageRequestFromID adopts an existing object pointer as a GenerateAttentionBasedSaliencyImageRequest (nil for 0).
+// GenerateAttentionBasedSaliencyImageRequestFromID adopts an existing Objective-C object as a GenerateAttentionBasedSaliencyImageRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func GenerateAttentionBasedSaliencyImageRequestFromID(id objc.ID) *GenerateAttentionBasedSaliencyImageRequest {
 	if id == 0 {
 		return nil
 	}
-	return &GenerateAttentionBasedSaliencyImageRequest{inner: raw.VNGenerateAttentionBasedSaliencyImageRequestFromID(id)}
+	x := &GenerateAttentionBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGenerateAttentionBasedSaliencyImageRequest creates a new [GenerateAttentionBasedSaliencyImageRequest].
+// generateAttentionBasedSaliencyImageRequestAdopt wraps an Objective-C object that this code just created as a
+// GenerateAttentionBasedSaliencyImageRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func generateAttentionBasedSaliencyImageRequestAdopt(id objc.ID) *GenerateAttentionBasedSaliencyImageRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &GenerateAttentionBasedSaliencyImageRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewGenerateAttentionBasedSaliencyImageRequest creates a new GenerateAttentionBasedSaliencyImageRequest.
 func NewGenerateAttentionBasedSaliencyImageRequest() *GenerateAttentionBasedSaliencyImageRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNGenerateAttentionBasedSaliencyImageRequest")), objc.RegisterName("new"))
-	return &GenerateAttentionBasedSaliencyImageRequest{inner: raw.VNGenerateAttentionBasedSaliencyImageRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VNGenerateAttentionBasedSaliencyImageRequest")), objc.RegisterName("new"))
+	return generateAttentionBasedSaliencyImageRequestAdopt(_id)
 }
 
-// The region of the image in which Vision will perform the request.
-//
-// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+// WithRegionOfInterest the region of the image in which Vision will perform the request.
 func (x *GenerateAttentionBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
 	return x
 }
 
-// A hint to minimize the resource burden of the request.
-//
-// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
 func (x *GenerateAttentionBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
 	return x
 }
 
-// A Boolean signifying that the Vision request should execute exclusively on the CPU.
-//
-// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
 func (x *GenerateAttentionBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
 	return x
 }
 
-// The specific algorithm or implementation revision that’s used to perform the request.
-//
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision uint) *GenerateAttentionBasedSaliencyImageRequest {
-	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
+func (x *GenerateAttentionBasedSaliencyImageRequest) WithRevision(revision int) *GenerateAttentionBasedSaliencyImageRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
 	return x
-}
-
-func (x *GenerateAttentionBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
-	return &x.inner.VNImageBasedRequest
-}
-
-func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest {
-	return &x.inner.VNImageBasedRequest.VNRequest
 }
 
 // GenerateAttentionBasedSaliencyImageRequestable is the interface implemented by [GenerateAttentionBasedSaliencyImageRequest], for mocking and DI.
 type GenerateAttentionBasedSaliencyImageRequestable interface {
-	Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest
+	obj.Object
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateAttentionBasedSaliencyImageRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateAttentionBasedSaliencyImageRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateAttentionBasedSaliencyImageRequest
-	WithRevision(revision uint) *GenerateAttentionBasedSaliencyImageRequest
+	WithRevision(revision int) *GenerateAttentionBasedSaliencyImageRequest
 }
 
 var _ GenerateAttentionBasedSaliencyImageRequestable = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
+
+var _ ImageBasedRequestProvider = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
+
+var _ RequestProvider = (*GenerateAttentionBasedSaliencyImageRequest)(nil)

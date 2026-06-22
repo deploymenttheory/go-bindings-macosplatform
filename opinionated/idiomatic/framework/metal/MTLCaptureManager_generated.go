@@ -5,129 +5,108 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// An instance you use to capture Metal command data in your app.
+// CaptureManager is an idiomatic wrapper over the Objective-C class MTLCaptureManager.
 //
-// CaptureManager wraps [raw.MTLCaptureManager] with a fluent Go API.
+// An instance you use to capture Metal command data in your app.
 type CaptureManager struct {
-	inner *raw.MTLCaptureManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLCaptureManager].
-func (x *CaptureManager) Unwrap() *raw.MTLCaptureManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureManagerFromID adopts an existing object pointer as a CaptureManager (nil for 0).
+// CaptureManagerFromID adopts an existing Objective-C object as a CaptureManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureManagerFromID(id objc.ID) *CaptureManager {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureManager{inner: raw.MTLCaptureManagerFromID(id)}
-}
-
-// NewCaptureManager creates a new [CaptureManager].
-func NewCaptureManager() *CaptureManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLCaptureManager")), objc.RegisterName("new"))
-	return &CaptureManager{inner: raw.MTLCaptureManagerFromID(_id)}
-}
-
-// The capture scope to use when a capture is initiated in Xcode.
-//
-// WithDefaultCaptureScope sets the defaultCaptureScope property and returns the receiver for chaining.
-func (x *CaptureManager) WithDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope) *CaptureManager {
-	x.inner.SetDefaultCaptureScope(defaultCaptureScope)
+	x := &CaptureManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Creates a capture scope for commands submitted to a specific command queue.
-//
-// NewCaptureScopeWithCommandQueue calls the underlying NewCaptureScopeWithCommandQueue.
-func (x *CaptureManager) NewCaptureScopeWithCommandQueue(commandQueue raw.MTLCommandQueue) raw.MTLCaptureScope {
-	return x.inner.NewCaptureScopeWithCommandQueue(commandQueue)
+// captureManagerAdopt wraps an Objective-C object that this code just created as a
+// CaptureManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureManagerAdopt(id objc.ID) *CaptureManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureScopeWithMTL4CommandQueue calls the underlying NewCaptureScopeWithMTL4CommandQueue.
-func (x *CaptureManager) NewCaptureScopeWithMTL4CommandQueue(commandQueue raw.MTL4CommandQueue) raw.MTLCaptureScope {
-	return x.inner.NewCaptureScopeWithMTL4CommandQueue(commandQueue)
+// Description returns the object's -description text.
+func (x *CaptureManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Checks to see whether a particular capture destination is supported.
-//
-// SupportsDestination calls the underlying SupportsDestination.
-func (x *CaptureManager) SupportsDestination(destination MTLCaptureDestination) bool {
-	return x.inner.SupportsDestination(raw.MTLCaptureDestination(destination))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
-//
-// StartCaptureWithDescriptorError calls the underlying StartCaptureWithDescriptorError.
-func (x *CaptureManager) StartCaptureWithDescriptorError(descriptor *raw.MTLCaptureDescriptor) (bool, error) {
-	return x.inner.StartCaptureWithDescriptorError(descriptor)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Starts capturing any of your app’s Metal commands that are executed by the device object.
-//
-// StartCaptureWithDevice calls the underlying StartCaptureWithDevice.
-func (x *CaptureManager) StartCaptureWithDevice(device raw.MTLDevice) {
-	x.inner.StartCaptureWithDevice(device)
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *CaptureManager) String() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Starts capturing any of your app’s Metal commands that are executed by the command queue.
-//
-// StartCaptureWithCommandQueue calls the underlying StartCaptureWithCommandQueue.
-func (x *CaptureManager) StartCaptureWithCommandQueue(commandQueue raw.MTLCommandQueue) {
-	x.inner.StartCaptureWithCommandQueue(commandQueue)
+// NewCaptureManager creates a new CaptureManager.
+func NewCaptureManager() *CaptureManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLCaptureManager")), objc.RegisterName("new"))
+	return captureManagerAdopt(_id)
 }
 
-// Starts capturing any of your app’s Metal commands that are in the specified capture scope.
-//
-// StartCaptureWithScope calls the underlying StartCaptureWithScope.
-func (x *CaptureManager) StartCaptureWithScope(captureScope raw.MTLCaptureScope) {
-	x.inner.StartCaptureWithScope(captureScope)
+// SupportsDestination checks to see whether a particular capture destination is supported.
+func (x *CaptureManager) SupportsDestination(destination CaptureDestination) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDestination:"), destination)
+	return _r
 }
 
-// Stops capturing Metal commands.
-//
-// StopCapture calls the underlying StopCapture.
+// StartCaptureWithDescriptor starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
+func (x *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startCaptureWithDescriptor:error:"), objref.IDOf(descriptor), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// StopCapture stops capturing Metal commands.
 func (x *CaptureManager) StopCapture() {
-	x.inner.StopCapture()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCapture"))
 }
 
-// DefaultCaptureScope calls the underlying DefaultCaptureScope.
-func (x *CaptureManager) DefaultCaptureScope() raw.MTLCaptureScope {
-	return x.inner.DefaultCaptureScope()
-}
-
-// SetDefaultCaptureScope calls the underlying SetDefaultCaptureScope.
-func (x *CaptureManager) SetDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope) {
-	x.inner.SetDefaultCaptureScope(defaultCaptureScope)
-}
-
-// IsCapturing calls the underlying IsCapturing.
+// IsCapturing wraps the corresponding Objective-C method.
 func (x *CaptureManager) IsCapturing() bool {
-	return x.inner.IsCapturing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCapturing"))
+	return _r
 }
 
 // CaptureManagerable is the interface implemented by [CaptureManager], for mocking and DI.
 type CaptureManagerable interface {
-	Unwrap() *raw.MTLCaptureManager
-	WithDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope) *CaptureManager
-	NewCaptureScopeWithCommandQueue(commandQueue raw.MTLCommandQueue) raw.MTLCaptureScope
-	NewCaptureScopeWithMTL4CommandQueue(commandQueue raw.MTL4CommandQueue) raw.MTLCaptureScope
-	SupportsDestination(destination MTLCaptureDestination) bool
-	StartCaptureWithDescriptorError(descriptor *raw.MTLCaptureDescriptor) (bool, error)
-	StartCaptureWithDevice(device raw.MTLDevice)
-	StartCaptureWithCommandQueue(commandQueue raw.MTLCommandQueue)
-	StartCaptureWithScope(captureScope raw.MTLCaptureScope)
+	obj.Object
+	SupportsDestination(destination CaptureDestination) bool
+	StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error
 	StopCapture()
-	DefaultCaptureScope() raw.MTLCaptureScope
-	SetDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope)
 	IsCapturing() bool
 }
 

@@ -5,163 +5,180 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A task scheduler suitable for low priority operations that can run in the background.
+// BackgroundActivityScheduler is an idiomatic wrapper over the Objective-C class NSBackgroundActivityScheduler.
 //
-// BackgroundActivityScheduler wraps [raw.NSBackgroundActivityScheduler] with a fluent Go API.
+// A task scheduler suitable for low priority operations that can run in the background.
 type BackgroundActivityScheduler struct {
-	inner *raw.NSBackgroundActivityScheduler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSBackgroundActivityScheduler].
-func (x *BackgroundActivityScheduler) Unwrap() *raw.NSBackgroundActivityScheduler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BackgroundActivityScheduler) ID() objc.ID { return x.inner.Ptr() }
-
-// BackgroundActivitySchedulerFromID adopts an existing object pointer as a BackgroundActivityScheduler (nil for 0).
+// BackgroundActivitySchedulerFromID adopts an existing Objective-C object as a BackgroundActivityScheduler
+// (nil for 0), retaining it and registering a release finalizer.
 func BackgroundActivitySchedulerFromID(id objc.ID) *BackgroundActivityScheduler {
 	if id == 0 {
 		return nil
 	}
-	return &BackgroundActivityScheduler{inner: raw.NSBackgroundActivitySchedulerFromID(id)}
-}
-
-// Initializes a background activity scheduler object with a specified unique identifier.
-//
-// NewBackgroundActivitySchedulerWithIdentifier creates a new [BackgroundActivityScheduler].
-func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *BackgroundActivityScheduler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBackgroundActivityScheduler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BackgroundActivityScheduler{inner: raw.NSBackgroundActivitySchedulerFromID(_id)}
-}
-
-// A value of type NSQualityOfService, which controls how aggressively the system schedules the activity.
-//
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService NSQualityOfService) *BackgroundActivityScheduler {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+	x := &BackgroundActivityScheduler{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// A Boolean value indicating whether the activity should be rescheduled after it completes.
-//
-// WithRepeats sets the repeats property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithRepeats(repeats bool) *BackgroundActivityScheduler {
-	x.inner.SetRepeats(repeats)
-	return x
-}
-
-// An integer providing a suggested interval between scheduling and invoking the activity.
-//
-// WithInterval sets the interval property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithInterval(interval float64) *BackgroundActivityScheduler {
-	x.inner.SetInterval(interval)
-	return x
-}
-
-// A value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
-//
-// WithTolerance sets the tolerance property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *BackgroundActivityScheduler {
-	x.inner.SetTolerance(tolerance)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BackgroundActivityScheduler {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Begins scheduling the background activity.
-//
-// ScheduleWith calls the underlying ScheduleWith.
-func (x *BackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
-	x.inner.ScheduleWith(block)
-}
-
-// Prevents the background activity from being scheduled again.
-//
-// Invalidate calls the underlying Invalidate.
-func (x *BackgroundActivityScheduler) Invalidate() {
-	x.inner.Invalidate()
-}
-
-// Identifier calls the underlying Identifier.
-func (x *BackgroundActivityScheduler) Identifier() *String {
-	_r := x.inner.Identifier()
-	if _r == nil {
+// backgroundActivitySchedulerAdopt wraps an Objective-C object that this code just created as a
+// BackgroundActivityScheduler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func backgroundActivitySchedulerAdopt(id objc.ID) *BackgroundActivityScheduler {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &BackgroundActivityScheduler{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// QualityOfService calls the underlying QualityOfService.
-func (x *BackgroundActivityScheduler) QualityOfService() NSQualityOfService {
-	return NSQualityOfService(x.inner.QualityOfService())
+// Description returns the object's -description text.
+func (x *BackgroundActivityScheduler) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetQualityOfService calls the underlying SetQualityOfService.
-func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService NSQualityOfService) {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BackgroundActivityScheduler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Repeats calls the underlying Repeats.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BackgroundActivityScheduler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *BackgroundActivityScheduler) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewBackgroundActivitySchedulerWithIdentifier initializes a background activity scheduler object with a specified unique identifier.
+func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *BackgroundActivityScheduler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBackgroundActivityScheduler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return backgroundActivitySchedulerAdopt(_id)
+}
+
+// WithQualityOfService a value of type NSQualityOfService, which controls how aggressively the system schedules the activity.
+func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService QualityOfService) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return x
+}
+
+// WithRepeats a Boolean value indicating whether the activity should be rescheduled after it completes.
+func (x *BackgroundActivityScheduler) WithRepeats(repeats bool) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeats:"), repeats)
+	return x
+}
+
+// WithInterval an integer providing a suggested interval between scheduling and invoking the activity.
+func (x *BackgroundActivityScheduler) WithInterval(interval float64) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterval:"), interval)
+	return x
+}
+
+// WithTolerance a value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
+func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
+	return x
+}
+
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties obj.Object) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Invalidate prevents the background activity from being scheduled again.
+func (x *BackgroundActivityScheduler) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+}
+
+// Identifier wraps the corresponding Objective-C method.
+func (x *BackgroundActivityScheduler) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// QualityOfService wraps the corresponding Objective-C method.
+func (x *BackgroundActivityScheduler) QualityOfService() QualityOfService {
+	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
+	return _r
+}
+
+// SetQualityOfService wraps the corresponding Objective-C method.
+func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService QualityOfService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
+}
+
+// Repeats wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Repeats() bool {
-	return x.inner.Repeats()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("repeats"))
+	return _r
 }
 
-// SetRepeats calls the underlying SetRepeats.
+// SetRepeats wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetRepeats(repeats bool) {
-	x.inner.SetRepeats(repeats)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeats:"), repeats)
 }
 
-// Interval calls the underlying Interval.
+// Interval wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Interval() float64 {
-	return x.inner.Interval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interval"))
+	return _r
 }
 
-// SetInterval calls the underlying SetInterval.
+// SetInterval wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetInterval(interval float64) {
-	x.inner.SetInterval(interval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterval:"), interval)
 }
 
-// Tolerance calls the underlying Tolerance.
+// Tolerance wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) Tolerance() float64 {
-	return x.inner.Tolerance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tolerance"))
+	return _r
 }
 
-// SetTolerance calls the underlying SetTolerance.
+// SetTolerance wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) SetTolerance(tolerance float64) {
-	x.inner.SetTolerance(tolerance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 }
 
-// ShouldDefer calls the underlying ShouldDefer.
+// ShouldDefer wraps the corresponding Objective-C method.
 func (x *BackgroundActivityScheduler) ShouldDefer() bool {
-	return x.inner.ShouldDefer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDefer"))
+	return _r
 }
-
-func (x *BackgroundActivityScheduler) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // BackgroundActivitySchedulerable is the interface implemented by [BackgroundActivityScheduler], for mocking and DI.
 type BackgroundActivitySchedulerable interface {
-	Unwrap() *raw.NSBackgroundActivityScheduler
-	WithQualityOfService(qualityOfService NSQualityOfService) *BackgroundActivityScheduler
+	obj.Object
+	WithQualityOfService(qualityOfService QualityOfService) *BackgroundActivityScheduler
 	WithRepeats(repeats bool) *BackgroundActivityScheduler
 	WithInterval(interval float64) *BackgroundActivityScheduler
 	WithTolerance(tolerance float64) *BackgroundActivityScheduler
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BackgroundActivityScheduler
-	ScheduleWith(block func(objc.Block))
+	WithScriptingProperties(scriptingProperties obj.Object) *BackgroundActivityScheduler
 	Invalidate()
-	Identifier() *String
-	QualityOfService() NSQualityOfService
-	SetQualityOfService(qualityOfService NSQualityOfService)
+	Identifier() string
+	QualityOfService() QualityOfService
+	SetQualityOfService(qualityOfService QualityOfService)
 	Repeats() bool
 	SetRepeats(repeats bool)
 	Interval() float64

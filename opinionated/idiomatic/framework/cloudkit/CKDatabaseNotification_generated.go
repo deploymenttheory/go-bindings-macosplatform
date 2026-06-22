@@ -5,49 +5,65 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A notification that triggers when the contents of a database change.
+// DatabaseNotification is an idiomatic wrapper over the Objective-C class CKDatabaseNotification.
 //
-// DatabaseNotification wraps [raw.CKDatabaseNotification] with a fluent Go API.
+// It embeds [Notification], promoting that type's methods.
+//
+// A notification that triggers when the contents of a database change.
 type DatabaseNotification struct {
-	inner *raw.CKDatabaseNotification
+	Notification
 }
 
-// Unwrap returns the underlying [raw.CKDatabaseNotification].
-func (x *DatabaseNotification) Unwrap() *raw.CKDatabaseNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DatabaseNotification) ID() objc.ID { return x.inner.Ptr() }
-
-// DatabaseNotificationFromID adopts an existing object pointer as a DatabaseNotification (nil for 0).
+// DatabaseNotificationFromID adopts an existing Objective-C object as a DatabaseNotification
+// (nil for 0), retaining it and registering a release finalizer.
 func DatabaseNotificationFromID(id objc.ID) *DatabaseNotification {
 	if id == 0 {
 		return nil
 	}
-	return &DatabaseNotification{inner: raw.CKDatabaseNotificationFromID(id)}
+	x := &DatabaseNotification{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDatabaseNotification creates a new [DatabaseNotification].
+// databaseNotificationAdopt wraps an Objective-C object that this code just created as a
+// DatabaseNotification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func databaseNotificationAdopt(id objc.ID) *DatabaseNotification {
+	if id == 0 {
+		return nil
+	}
+	x := &DatabaseNotification{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDatabaseNotification creates a new DatabaseNotification.
 func NewDatabaseNotification() *DatabaseNotification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabaseNotification")), objc.RegisterName("new"))
-	return &DatabaseNotification{inner: raw.CKDatabaseNotificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabaseNotification")), objc.RegisterName("new"))
+	return databaseNotificationAdopt(_id)
 }
 
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *DatabaseNotification) DatabaseScope() CKDatabaseScope {
-	return CKDatabaseScope(x.inner.DatabaseScope())
+// DatabaseScope wraps the corresponding Objective-C method.
+func (x *DatabaseNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return _r
 }
-
-func (x *DatabaseNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
 
 // DatabaseNotificationable is the interface implemented by [DatabaseNotification], for mocking and DI.
 type DatabaseNotificationable interface {
-	Unwrap() *raw.CKDatabaseNotification
-	DatabaseScope() CKDatabaseScope
+	obj.Object
+	DatabaseScope() DatabaseScope
 }
 
 var _ DatabaseNotificationable = (*DatabaseNotification)(nil)
+
+var _ NotificationProvider = (*DatabaseNotification)(nil)

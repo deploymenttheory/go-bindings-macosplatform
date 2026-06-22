@@ -5,55 +5,65 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AddPassMetadataPreviewProvider is implemented by AddPassMetadataPreview and any idiomatic type wrapping a PKAddPassMetadataPreview subclass.
+// AddPassMetadataPreviewProvider is accepted wherever a PKAddPassMetadataPreview (or one of its subclasses) is expected.
 type AddPassMetadataPreviewProvider interface {
-	asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview
+	objref.Object
+	isAddPassMetadataPreview()
 }
 
-// AddSecureElementPassConfigurationProvider is implemented by AddSecureElementPassConfiguration and any idiomatic type wrapping a PKAddSecureElementPassConfiguration subclass.
+// AddSecureElementPassConfigurationProvider is accepted wherever a PKAddSecureElementPassConfiguration (or one of its subclasses) is expected.
 type AddSecureElementPassConfigurationProvider interface {
-	asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration
+	objref.Object
+	isAddSecureElementPassConfiguration()
 }
 
-// IdentityDocumentMetadataProvider is implemented by IdentityDocumentMetadata and any idiomatic type wrapping a PKIdentityDocumentMetadata subclass.
+// IdentityDocumentMetadataProvider is accepted wherever a PKIdentityDocumentMetadata (or one of its subclasses) is expected.
 type IdentityDocumentMetadataProvider interface {
-	asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata
+	objref.Object
+	isIdentityDocumentMetadata()
 }
 
-// IssuerProvisioningExtensionPassEntryProvider is implemented by IssuerProvisioningExtensionPassEntry and any idiomatic type wrapping a PKIssuerProvisioningExtensionPassEntry subclass.
+// IssuerProvisioningExtensionPassEntryProvider is accepted wherever a PKIssuerProvisioningExtensionPassEntry (or one of its subclasses) is expected.
 type IssuerProvisioningExtensionPassEntryProvider interface {
-	asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry
+	objref.Object
+	isIssuerProvisioningExtensionPassEntry()
 }
 
-// PassProvider is implemented by Pass and any idiomatic type wrapping a PKPass subclass.
+// PassProvider is accepted wherever a PKPass (or one of its subclasses) is expected.
 type PassProvider interface {
-	asPass() *raw.PKPass
+	objref.Object
+	isPass()
 }
 
-// PaymentRequestUpdateProvider is implemented by PaymentRequestUpdate and any idiomatic type wrapping a PKPaymentRequestUpdate subclass.
+// PaymentRequestUpdateProvider is accepted wherever a PKPaymentRequestUpdate (or one of its subclasses) is expected.
 type PaymentRequestUpdateProvider interface {
-	asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate
+	objref.Object
+	isPaymentRequestUpdate()
 }
 
-// PaymentSummaryItemProvider is implemented by PaymentSummaryItem and any idiomatic type wrapping a PKPaymentSummaryItem subclass.
+// PaymentSummaryItemProvider is accepted wherever a PKPaymentSummaryItem (or one of its subclasses) is expected.
 type PaymentSummaryItemProvider interface {
-	asPaymentSummaryItem() *raw.PKPaymentSummaryItem
+	objref.Object
+	isPaymentSummaryItem()
 }
 
-// SecureElementPassProvider is implemented by SecureElementPass and any idiomatic type wrapping a PKSecureElementPass subclass.
+// SecureElementPassProvider is accepted wherever a PKSecureElementPass (or one of its subclasses) is expected.
 type SecureElementPassProvider interface {
-	asSecureElementPass() *raw.PKSecureElementPass
+	objref.Object
+	isSecureElementPass()
 }
 
-// StoredValuePassPropertiesProvider is implemented by StoredValuePassProperties and any idiomatic type wrapping a PKStoredValuePassProperties subclass.
+// StoredValuePassPropertiesProvider is accepted wherever a PKStoredValuePassProperties (or one of its subclasses) is expected.
 type StoredValuePassPropertiesProvider interface {
-	asStoredValuePassProperties() *raw.PKStoredValuePassProperties
+	objref.Object
+	isStoredValuePassProperties()
 }
 
-// TransitPassPropertiesProvider is implemented by TransitPassProperties and any idiomatic type wrapping a PKTransitPassProperties subclass.
+// TransitPassPropertiesProvider is accepted wherever a PKTransitPassProperties (or one of its subclasses) is expected.
 type TransitPassPropertiesProvider interface {
-	asTransitPassProperties() *raw.PKTransitPassProperties
+	objref.Object
+	isTransitPassProperties()
 }

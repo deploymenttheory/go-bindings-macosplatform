@@ -5,410 +5,311 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An instance describing the desired GPU state for a kernel call in a compute pass.
+// ComputePipelineDescriptor is an idiomatic wrapper over the Objective-C class MTLComputePipelineDescriptor.
 //
-// ComputePipelineDescriptor wraps [raw.MTLComputePipelineDescriptor] with a fluent Go API.
+// An instance describing the desired GPU state for a kernel call in a compute pass.
 type ComputePipelineDescriptor struct {
-	inner *raw.MTLComputePipelineDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLComputePipelineDescriptor].
-func (x *ComputePipelineDescriptor) Unwrap() *raw.MTLComputePipelineDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePipelineDescriptorFromID adopts an existing object pointer as a ComputePipelineDescriptor (nil for 0).
+// ComputePipelineDescriptorFromID adopts an existing Objective-C object as a ComputePipelineDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePipelineDescriptorFromID(id objc.ID) *ComputePipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePipelineDescriptor{inner: raw.MTLComputePipelineDescriptorFromID(id)}
+	x := &ComputePipelineDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewComputePipelineDescriptor creates a new [ComputePipelineDescriptor].
+// computePipelineDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ComputePipelineDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePipelineDescriptorAdopt(id objc.ID) *ComputePipelineDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ComputePipelineDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComputePipelineDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePipelineDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePipelineDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *ComputePipelineDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewComputePipelineDescriptor creates a new ComputePipelineDescriptor.
 func NewComputePipelineDescriptor() *ComputePipelineDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLComputePipelineDescriptor")), objc.RegisterName("new"))
-	return &ComputePipelineDescriptor{inner: raw.MTLComputePipelineDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLComputePipelineDescriptor")), objc.RegisterName("new"))
+	return computePipelineDescriptorAdopt(_id)
 }
 
-// A string that identifies the instance.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel a string that identifies the instance.
 func (x *ComputePipelineDescriptor) WithLabel(label string) *ComputePipelineDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// The compute kernel the pipeline calls.
-//
-// WithComputeFunction sets the computeFunction property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor {
-	x.inner.SetComputeFunction(computeFunction)
-	return x
-}
-
-// A Boolean value that indicates whether the threadgroup size is always a multiple of the thread execution width.
-//
-// WithThreadGroupSizeIsMultipleOfThreadExecutionWidth sets the threadGroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
+// WithThreadGroupSizeIsMultipleOfThreadExecutionWidth a Boolean value that indicates whether the threadgroup size is always a multiple of the thread execution width.
 func (x *ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor {
-	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:"), threadGroupSizeIsMultipleOfThreadExecutionWidth)
 	return x
 }
 
-// A property that limits the number of threads you can dispatch in a threadgroup for the compute function.
-//
-// WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor {
-	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
+// WithMaxTotalThreadsPerThreadgroup a property that limits the number of threads you can dispatch in a threadgroup for the compute function.
+func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 	return x
 }
 
-// The organization of input and output data for the next kernel call.
-//
-// WithStageInputDescriptor sets the stageInputDescriptor property and returns the receiver for chaining.
+// WithStageInputDescriptor the organization of input and output data for the next kernel call.
 func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor {
-	x.inner.SetStageInputDescriptor(stageInputDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStageInputDescriptor:"), objref.IDOf(stageInputDescriptor))
 	return x
 }
 
-// A Boolean value that indicates whether you can encode commands that reference the pipeline state object into an indirect command buffer.
-//
-// WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
+// WithSupportIndirectCommandBuffers a Boolean value that indicates whether you can encode commands that reference the pipeline state object into an indirect command buffer.
 func (x *ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 	return x
 }
 
-// The functions with available function pointers for the next kernel call.
-//
-// WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
+// WithLinkedFunctions the functions with available function pointers for the next kernel call.
 func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor {
-	x.inner.SetLinkedFunctions(linkedFunctions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedFunctions:"), objref.IDOf(linkedFunctions))
 	return x
 }
 
-// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
-//
-// WithSupportAddingBinaryFunctions sets the supportAddingBinaryFunctions property and returns the receiver for chaining.
+// WithSupportAddingBinaryFunctions a Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
 func (x *ComputePipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor {
-	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingBinaryFunctions:"), supportAddingBinaryFunctions)
 	return x
 }
 
-// The maximum call stack depth for indirect function calls in compute shaders.
-//
-// WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor {
-	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+// WithMaxCallStackDepth the maximum call stack depth for indirect function calls in compute shaders.
+func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 	return x
 }
 
-// A value that enables or disables shader validation for the pipeline.
-//
-// WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
+// WithShaderValidation a value that enables or disables shader validation for the pipeline.
+func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation ShaderValidation) *ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 	return x
 }
 
-// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *ComputePipelineDescriptor {
-	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
-	return x
-}
-
-// Resets all compute pipeline descriptor properties to their default values.
-//
-// Reset calls the underlying Reset.
+// Reset resets all compute pipeline descriptor properties to their default values.
 func (x *ComputePipelineDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// Label calls the underlying Label.
+// Label a string to help identify this object.
 func (x *ComputePipelineDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
+// SetLabel wraps the corresponding Objective-C method.
 func (x *ComputePipelineDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property computeFunction @abstract The function to use with the MTLComputePipelineState
-//
-// ComputeFunction calls the underlying ComputeFunction.
-func (x *ComputePipelineDescriptor) ComputeFunction() raw.MTLFunction {
-	return x.inner.ComputeFunction()
-}
-
-// SetComputeFunction calls the underlying SetComputeFunction.
-func (x *ComputePipelineDescriptor) SetComputeFunction(computeFunction raw.MTLFunction) {
-	x.inner.SetComputeFunction(computeFunction)
-}
-
-// @property threadGroupSizeIsMultipleOfThreadExecutionWidth @abstract An optimization flag, set if the thread group size will always be a multiple of thread execution width
-//
-// ThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ThreadGroupSizeIsMultipleOfThreadExecutionWidth.
+// ThreadGroupSizeIsMultipleOfThreadExecutionWidth an optimization flag, set if the thread group size will always be a multiple of thread execution width
 func (x *ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
-	return x.inner.ThreadGroupSizeIsMultipleOfThreadExecutionWidth()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth"))
+	return _r
 }
 
-// SetThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying SetThreadGroupSizeIsMultipleOfThreadExecutionWidth.
+// SetThreadGroupSizeIsMultipleOfThreadExecutionWidth wraps the corresponding Objective-C method.
 func (x *ComputePipelineDescriptor) SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) {
-	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:"), threadGroupSizeIsMultipleOfThreadExecutionWidth)
 }
 
-// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
-//
-// MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
-func (x *ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
-	return x.inner.MaxTotalThreadsPerThreadgroup()
+// MaxTotalThreadsPerThreadgroup optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+func (x *ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+	return _r
 }
 
-// SetMaxTotalThreadsPerThreadgroup calls the underlying SetMaxTotalThreadsPerThreadgroup.
-func (x *ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) {
-	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
+// SetMaxTotalThreadsPerThreadgroup wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
 }
 
-// @property computeDataDescriptor @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
-//
-// StageInputDescriptor calls the underlying StageInputDescriptor.
+// StageInputDescriptor an MTLStageInputOutputDescriptor to fetch data from buffers
 func (x *ComputePipelineDescriptor) StageInputDescriptor() *StageInputOutputDescriptor {
-	_r := x.inner.StageInputDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &StageInputOutputDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stageInputDescriptor"))
+	return StageInputOutputDescriptorFromID(_r)
 }
 
-// SetStageInputDescriptor calls the underlying SetStageInputDescriptor.
-func (x *ComputePipelineDescriptor) SetStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor) {
-	x.inner.SetStageInputDescriptor(stageInputDescriptor)
+// SetStageInputDescriptor wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStageInputDescriptor:"), objref.IDOf(stageInputDescriptor))
 }
 
-// @property buffers @abstract Optional properties for each buffer binding used by the compute function.
-//
-// Buffers calls the underlying Buffers.
+// Buffers optional properties for each buffer binding used by the compute function.
 func (x *ComputePipelineDescriptor) Buffers() *PipelineBufferDescriptorArray {
-	_r := x.inner.Buffers()
-	if _r == nil {
-		return nil
-	}
-	return &PipelineBufferDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buffers"))
+	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// @property supportIndirectCommandBuffers @abstract This flag makes this pipeline usable with indirect command buffers.
-//
-// SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
+// SupportIndirectCommandBuffers this flag makes this pipeline usable with indirect command buffers.
 func (x *ComputePipelineDescriptor) SupportIndirectCommandBuffers() bool {
-	return x.inner.SupportIndirectCommandBuffers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportIndirectCommandBuffers"))
+	return _r
 }
 
-// SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
+// SetSupportIndirectCommandBuffers wraps the corresponding Objective-C method.
 func (x *ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
 }
 
-// @property insertLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use insertLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
-//
-// InsertLibraries calls the underlying InsertLibraries.
-func (x *ComputePipelineDescriptor) InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
-	return x.inner.InsertLibraries()
+// InsertLibraries the set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use insertLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+func (x *ComputePipelineDescriptor) InsertLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertLibraries"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetInsertLibraries calls the underlying SetInsertLibraries.
-func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(insertLibraries))
-	for _i, _v := range insertLibraries {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetInsertLibraries(_arg0)
+// SetInsertLibraries wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsertLibraries:"), purego.SliceToNSArray(insertLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property preloadedLibraries @abstract The set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. @discussion Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system. @see MTLDynamicLibrary
-//
-// PreloadedLibraries calls the underlying PreloadedLibraries.
-func (x *ComputePipelineDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
-	return x.inner.PreloadedLibraries()
+// PreloadedLibraries the set of MTLDynamicLibrary to use to resolve external symbols before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use preloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
+func (x *ComputePipelineDescriptor) PreloadedLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadedLibraries"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
-func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(preloadedLibraries))
-	for _i, _v := range preloadedLibraries {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetPreloadedLibraries(_arg0)
+// SetPreloadedLibraries wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property binaryArchives @abstract The set of MTLBinaryArchive to search for compiled code when creating the pipeline state. @discussion Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path. @see MTLBinaryArchive
-//
-// BinaryArchives calls the underlying BinaryArchives.
-func (x *ComputePipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
-	return x.inner.BinaryArchives()
+// BinaryArchives the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
+func (x *ComputePipelineDescriptor) BinaryArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(binaryArchives))
-	for _i, _v := range binaryArchives {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetBinaryArchives(_arg0)
+// SetBinaryArchives wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
-//
-// LinkedFunctions calls the underlying LinkedFunctions.
+// LinkedFunctions the set of functions to be linked with the pipeline state and accessed from the compute function.
 func (x *ComputePipelineDescriptor) LinkedFunctions() *LinkedFunctions {
-	_r := x.inner.LinkedFunctions()
-	if _r == nil {
-		return nil
-	}
-	return &LinkedFunctions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("linkedFunctions"))
+	return LinkedFunctionsFromID(_r)
 }
 
-// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
-//
-// SetLinkedFunctions calls the underlying SetLinkedFunctions.
-func (x *ComputePipelineDescriptor) SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) {
-	x.inner.SetLinkedFunctions(linkedFunctions)
+// SetLinkedFunctions the set of functions to be linked with the pipeline state and accessed from the compute function.
+func (x *ComputePipelineDescriptor) SetLinkedFunctions(linkedFunctions *LinkedFunctions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkedFunctions:"), objref.IDOf(linkedFunctions))
 }
 
-// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SupportAddingBinaryFunctions calls the underlying SupportAddingBinaryFunctions.
+// SupportAddingBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *ComputePipelineDescriptor) SupportAddingBinaryFunctions() bool {
-	return x.inner.SupportAddingBinaryFunctions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportAddingBinaryFunctions"))
+	return _r
 }
 
-// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
-//
-// SetSupportAddingBinaryFunctions calls the underlying SetSupportAddingBinaryFunctions.
+// SetSupportAddingBinaryFunctions this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (x *ComputePipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
-	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAddingBinaryFunctions:"), supportAddingBinaryFunctions)
 }
 
-// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
-//
-// MaxCallStackDepth calls the underlying MaxCallStackDepth.
-func (x *ComputePipelineDescriptor) MaxCallStackDepth() uint {
-	return x.inner.MaxCallStackDepth()
+// MaxCallStackDepth the maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+func (x *ComputePipelineDescriptor) MaxCallStackDepth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCallStackDepth"))
+	return _r
 }
 
-// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
-//
-// SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
-func (x *ComputePipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
-	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+// SetMaxCallStackDepth the maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+func (x *ComputePipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
-//
-// ShaderValidation calls the underlying ShaderValidation.
-func (x *ComputePipelineDescriptor) ShaderValidation() MTLShaderValidation {
-	return MTLShaderValidation(x.inner.ShaderValidation())
+// ShaderValidation toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+func (x *ComputePipelineDescriptor) ShaderValidation() ShaderValidation {
+	_r := objc.Send[ShaderValidation](objref.IDOf(x), objc.RegisterName("shaderValidation"))
+	return _r
 }
 
-// SetShaderValidation calls the underlying SetShaderValidation.
-func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
-	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
-}
-
-// @property requiredThreadsPerThreadgroup @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set. Setting this to a size of 0 in every dimension disables this property
-//
-// RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
-func (x *ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
-	return x.inner.RequiredThreadsPerThreadgroup()
-}
-
-// SetRequiredThreadsPerThreadgroup calls the underlying SetRequiredThreadsPerThreadgroup.
-func (x *ComputePipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) {
-	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
+// SetShaderValidation wraps the corresponding Objective-C method.
+func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation ShaderValidation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShaderValidation:"), shaderValidation)
 }
 
 // ComputePipelineDescriptorable is the interface implemented by [ComputePipelineDescriptor], for mocking and DI.
 type ComputePipelineDescriptorable interface {
-	Unwrap() *raw.MTLComputePipelineDescriptor
+	obj.Object
 	WithLabel(label string) *ComputePipelineDescriptor
-	WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor
 	WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor
-	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor
+	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *ComputePipelineDescriptor
 	WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor
 	WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor
 	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor
-	WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor
-	WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor
-	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *ComputePipelineDescriptor
+	WithMaxCallStackDepth(maxCallStackDepth int) *ComputePipelineDescriptor
+	WithShaderValidation(shaderValidation ShaderValidation) *ComputePipelineDescriptor
 	Reset()
 	Label() string
 	SetLabel(label string)
-	ComputeFunction() raw.MTLFunction
-	SetComputeFunction(computeFunction raw.MTLFunction)
 	ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool
 	SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool)
-	MaxTotalThreadsPerThreadgroup() uint
-	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint)
+	MaxTotalThreadsPerThreadgroup() int
+	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int)
 	StageInputDescriptor() *StageInputOutputDescriptor
-	SetStageInputDescriptor(stageInputDescriptor *raw.MTLStageInputOutputDescriptor)
+	SetStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor)
 	Buffers() *PipelineBufferDescriptorArray
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
-	InsertLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetInsertLibraries(insertLibraries ...purego.IDer)
-	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetPreloadedLibraries(preloadedLibraries ...purego.IDer)
-	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives ...purego.IDer)
+	InsertLibraries() []obj.Object
+	SetInsertLibraries(insertLibraries []obj.Object)
+	PreloadedLibraries() []obj.Object
+	SetPreloadedLibraries(preloadedLibraries []obj.Object)
+	BinaryArchives() []obj.Object
+	SetBinaryArchives(binaryArchives []obj.Object)
 	LinkedFunctions() *LinkedFunctions
-	SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions)
+	SetLinkedFunctions(linkedFunctions *LinkedFunctions)
 	SupportAddingBinaryFunctions() bool
 	SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool)
-	MaxCallStackDepth() uint
-	SetMaxCallStackDepth(maxCallStackDepth uint)
-	ShaderValidation() MTLShaderValidation
-	SetShaderValidation(shaderValidation MTLShaderValidation)
-	RequiredThreadsPerThreadgroup() raw.MTLSize
-	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
+	MaxCallStackDepth() int
+	SetMaxCallStackDepth(maxCallStackDepth int)
+	ShaderValidation() ShaderValidation
+	SetShaderValidation(shaderValidation ShaderValidation)
 }
 
 var _ ComputePipelineDescriptorable = (*ComputePipelineDescriptor)(nil)

@@ -5,67 +5,72 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a user adding a subgroup to a group.
+// ChangeHistoryAddSubgroupToGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryAddSubgroupToGroupEvent.
 //
-// ChangeHistoryAddSubgroupToGroupEvent wraps [raw.CNChangeHistoryAddSubgroupToGroupEvent] with a fluent Go API.
+// It embeds [ChangeHistoryEvent], promoting that type's methods.
+//
+// An object that represents a user adding a subgroup to a group.
 type ChangeHistoryAddSubgroupToGroupEvent struct {
-	inner *raw.CNChangeHistoryAddSubgroupToGroupEvent
+	ChangeHistoryEvent
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryAddSubgroupToGroupEvent].
-func (x *ChangeHistoryAddSubgroupToGroupEvent) Unwrap() *raw.CNChangeHistoryAddSubgroupToGroupEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryAddSubgroupToGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryAddSubgroupToGroupEventFromID adopts an existing object pointer as a ChangeHistoryAddSubgroupToGroupEvent (nil for 0).
+// ChangeHistoryAddSubgroupToGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryAddSubgroupToGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryAddSubgroupToGroupEventFromID(id objc.ID) *ChangeHistoryAddSubgroupToGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryAddSubgroupToGroupEvent{inner: raw.CNChangeHistoryAddSubgroupToGroupEventFromID(id)}
+	x := &ChangeHistoryAddSubgroupToGroupEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryAddSubgroupToGroupEvent creates a new [ChangeHistoryAddSubgroupToGroupEvent].
+// changeHistoryAddSubgroupToGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryAddSubgroupToGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryAddSubgroupToGroupEventAdopt(id objc.ID) *ChangeHistoryAddSubgroupToGroupEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryAddSubgroupToGroupEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewChangeHistoryAddSubgroupToGroupEvent creates a new ChangeHistoryAddSubgroupToGroupEvent.
 func NewChangeHistoryAddSubgroupToGroupEvent() *ChangeHistoryAddSubgroupToGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryAddSubgroupToGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryAddSubgroupToGroupEvent{inner: raw.CNChangeHistoryAddSubgroupToGroupEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryAddSubgroupToGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryAddSubgroupToGroupEventAdopt(_id)
 }
 
-// Subgroup calls the underlying Subgroup.
+// Subgroup wraps the corresponding Objective-C method.
 func (x *ChangeHistoryAddSubgroupToGroupEvent) Subgroup() *Group {
-	_r := x.inner.Subgroup()
-	if _r == nil {
-		return nil
-	}
-	return &Group{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroup"))
+	return GroupFromID(_r)
 }
 
-// Group calls the underlying Group.
+// Group wraps the corresponding Objective-C method.
 func (x *ChangeHistoryAddSubgroupToGroupEvent) Group() *Group {
-	_r := x.inner.Group()
-	if _r == nil {
-		return nil
-	}
-	return &Group{inner: _r}
-}
-
-func (x *ChangeHistoryAddSubgroupToGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return GroupFromID(_r)
 }
 
 // ChangeHistoryAddSubgroupToGroupEventable is the interface implemented by [ChangeHistoryAddSubgroupToGroupEvent], for mocking and DI.
 type ChangeHistoryAddSubgroupToGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryAddSubgroupToGroupEvent
+	obj.Object
 	Subgroup() *Group
 	Group() *Group
 }
 
 var _ ChangeHistoryAddSubgroupToGroupEventable = (*ChangeHistoryAddSubgroupToGroupEvent)(nil)
+
+var _ ChangeHistoryEventProvider = (*ChangeHistoryAddSubgroupToGroupEvent)(nil)

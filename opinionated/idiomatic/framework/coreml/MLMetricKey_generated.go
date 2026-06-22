@@ -5,43 +5,58 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A key for the metrics dictionary in an update context.
+// MetricKey is an idiomatic wrapper over the Objective-C class MLMetricKey.
 //
-// MetricKey wraps [raw.MLMetricKey] with a fluent Go API.
+// It embeds [Key], promoting that type's methods.
+//
+// A key for the metrics dictionary in an update context.
 type MetricKey struct {
-	inner *raw.MLMetricKey
+	Key
 }
 
-// Unwrap returns the underlying [raw.MLMetricKey].
-func (x *MetricKey) Unwrap() *raw.MLMetricKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricKey) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricKeyFromID adopts an existing object pointer as a MetricKey (nil for 0).
+// MetricKeyFromID adopts an existing Objective-C object as a MetricKey
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricKeyFromID(id objc.ID) *MetricKey {
 	if id == 0 {
 		return nil
 	}
-	return &MetricKey{inner: raw.MLMetricKeyFromID(id)}
+	x := &MetricKey{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetricKey creates a new [MetricKey].
+// metricKeyAdopt wraps an Objective-C object that this code just created as a
+// MetricKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricKeyAdopt(id objc.ID) *MetricKey {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricKey{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewMetricKey creates a new MetricKey.
 func NewMetricKey() *MetricKey {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMetricKey")), objc.RegisterName("new"))
-	return &MetricKey{inner: raw.MLMetricKeyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("new"))
+	return metricKeyAdopt(_id)
 }
-
-func (x *MetricKey) asKey() *raw.MLKey { return &x.inner.MLKey }
 
 // MetricKeyable is the interface implemented by [MetricKey], for mocking and DI.
 type MetricKeyable interface {
-	Unwrap() *raw.MLMetricKey
+	obj.Object
 }
 
 var _ MetricKeyable = (*MetricKey)(nil)
+
+var _ KeyProvider = (*MetricKey)(nil)

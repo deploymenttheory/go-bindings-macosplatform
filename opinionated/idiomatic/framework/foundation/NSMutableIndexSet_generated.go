@@ -5,116 +5,101 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A mutable collection of unique integer values that represent indexes in another collection.
+// MutableIndexSet is an idiomatic wrapper over the Objective-C class NSMutableIndexSet.
 //
-// MutableIndexSet wraps [raw.NSMutableIndexSet] with a fluent Go API.
+// It embeds [IndexSet], promoting that type's methods.
+//
+// A mutable collection of unique integer values that represent indexes in another collection.
 type MutableIndexSet struct {
-	inner *raw.NSMutableIndexSet
+	IndexSet
 }
 
-// Unwrap returns the underlying [raw.NSMutableIndexSet].
-func (x *MutableIndexSet) Unwrap() *raw.NSMutableIndexSet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableIndexSet) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableIndexSetFromID adopts an existing object pointer as a MutableIndexSet (nil for 0).
+// MutableIndexSetFromID adopts an existing Objective-C object as a MutableIndexSet
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableIndexSetFromID(id objc.ID) *MutableIndexSet {
 	if id == 0 {
 		return nil
 	}
-	return &MutableIndexSet{inner: raw.NSMutableIndexSetFromID(id)}
-}
-
-// NewMutableIndexSet creates a new [MutableIndexSet].
-func NewMutableIndexSet() *MutableIndexSet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableIndexSet")), objc.RegisterName("new"))
-	return &MutableIndexSet{inner: raw.NSMutableIndexSetFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableIndexSet {
-	x.inner.NSIndexSet.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MutableIndexSet{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Adds the indexes in an index set to the receiver.
-//
-// AddIndexes calls the underlying AddIndexes.
-func (x *MutableIndexSet) AddIndexes(indexSet *raw.NSIndexSet) {
-	x.inner.AddIndexes(indexSet)
+// mutableIndexSetAdopt wraps an Objective-C object that this code just created as a
+// MutableIndexSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableIndexSetAdopt(id objc.ID) *MutableIndexSet {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableIndexSet{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Removes the indexes in an index set from the receiver.
-//
-// RemoveIndexes calls the underlying RemoveIndexes.
-func (x *MutableIndexSet) RemoveIndexes(indexSet *raw.NSIndexSet) {
-	x.inner.RemoveIndexes(indexSet)
+// NewMutableIndexSet creates a new MutableIndexSet.
+func NewMutableIndexSet() *MutableIndexSet {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableIndexSet")), objc.RegisterName("new"))
+	return mutableIndexSetAdopt(_id)
 }
 
-// Removes the receiver’s indexes.
-//
-// RemoveAllIndexes calls the underlying RemoveAllIndexes.
+// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+func (x *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// AddIndexes adds the indexes in an index set to the receiver.
+func (x *MutableIndexSet) AddIndexes(indexSet *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndexes:"), objref.IDOf(indexSet))
+}
+
+// RemoveIndexes removes the indexes in an index set from the receiver.
+func (x *MutableIndexSet) RemoveIndexes(indexSet *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndexes:"), objref.IDOf(indexSet))
+}
+
+// RemoveAllIndexes removes the receiver’s indexes.
 func (x *MutableIndexSet) RemoveAllIndexes() {
-	x.inner.RemoveAllIndexes()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllIndexes"))
 }
 
-// Adds an index to the receiver.
-//
-// AddIndex calls the underlying AddIndex.
-func (x *MutableIndexSet) AddIndex(value uint) {
-	x.inner.AddIndex(value)
+// AddIndex adds an index to the receiver.
+func (x *MutableIndexSet) AddIndex(value int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addIndex:"), value)
 }
 
-// Removes an index from the receiver.
-//
-// RemoveIndex calls the underlying RemoveIndex.
-func (x *MutableIndexSet) RemoveIndex(value uint) {
-	x.inner.RemoveIndex(value)
+// RemoveIndex removes an index from the receiver.
+func (x *MutableIndexSet) RemoveIndex(value int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeIndex:"), value)
 }
 
-// Adds the indexes in an index range to the receiver.
-//
-// AddIndexesInRange calls the underlying AddIndexesInRange.
-func (x *MutableIndexSet) AddIndexesInRange(range_ raw.NSRange) {
-	x.inner.AddIndexesInRange(range_)
+// ShiftIndexesStartingAtIndexBy shifts a group of indexes to the left or the right within the receiver.
+func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index int, delta int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shiftIndexesStartingAtIndex:by:"), index, delta)
 }
-
-// Removes the indexes in an index range from the receiver.
-//
-// RemoveIndexesInRange calls the underlying RemoveIndexesInRange.
-func (x *MutableIndexSet) RemoveIndexesInRange(range_ raw.NSRange) {
-	x.inner.RemoveIndexesInRange(range_)
-}
-
-// Shifts a group of indexes to the left or the right within the receiver.
-//
-// ShiftIndexesStartingAtIndexBy calls the underlying ShiftIndexesStartingAtIndexBy.
-func (x *MutableIndexSet) ShiftIndexesStartingAtIndexBy(index uint, delta int) {
-	x.inner.ShiftIndexesStartingAtIndexBy(index, delta)
-}
-
-func (x *MutableIndexSet) asIndexSet() *raw.NSIndexSet { return &x.inner.NSIndexSet }
-
-func (x *MutableIndexSet) asObject() *raw.NSObject { return &x.inner.NSIndexSet.NSObject }
 
 // MutableIndexSetable is the interface implemented by [MutableIndexSet], for mocking and DI.
 type MutableIndexSetable interface {
-	Unwrap() *raw.NSMutableIndexSet
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableIndexSet
-	AddIndexes(indexSet *raw.NSIndexSet)
-	RemoveIndexes(indexSet *raw.NSIndexSet)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet
+	AddIndexes(indexSet *IndexSet)
+	RemoveIndexes(indexSet *IndexSet)
 	RemoveAllIndexes()
-	AddIndex(value uint)
-	RemoveIndex(value uint)
-	AddIndexesInRange(range_ raw.NSRange)
-	RemoveIndexesInRange(range_ raw.NSRange)
-	ShiftIndexesStartingAtIndexBy(index uint, delta int)
+	AddIndex(value int)
+	RemoveIndex(value int)
+	ShiftIndexesStartingAtIndexBy(index int, delta int)
 }
 
 var _ MutableIndexSetable = (*MutableIndexSet)(nil)
+
+var _ IndexSetProvider = (*MutableIndexSet)(nil)

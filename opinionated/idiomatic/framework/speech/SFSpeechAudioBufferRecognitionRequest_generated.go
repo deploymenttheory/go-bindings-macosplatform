@@ -5,158 +5,133 @@
 package speech
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A request to recognize speech from captured audio content, such as audio from the device’s microphone.
+// SpeechAudioBufferRecognitionRequest is an idiomatic wrapper over the Objective-C class SFSpeechAudioBufferRecognitionRequest.
 //
-// SpeechAudioBufferRecognitionRequest wraps [raw.SFSpeechAudioBufferRecognitionRequest] with a fluent Go API.
+// It embeds [SpeechRecognitionRequest], promoting that type's methods.
+//
+// A request to recognize speech from captured audio content, such as audio from the device’s microphone.
 type SpeechAudioBufferRecognitionRequest struct {
-	inner *raw.SFSpeechAudioBufferRecognitionRequest
+	SpeechRecognitionRequest
 }
 
-// Unwrap returns the underlying [raw.SFSpeechAudioBufferRecognitionRequest].
-func (x *SpeechAudioBufferRecognitionRequest) Unwrap() *raw.SFSpeechAudioBufferRecognitionRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechAudioBufferRecognitionRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechAudioBufferRecognitionRequestFromID adopts an existing object pointer as a SpeechAudioBufferRecognitionRequest (nil for 0).
+// SpeechAudioBufferRecognitionRequestFromID adopts an existing Objective-C object as a SpeechAudioBufferRecognitionRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechAudioBufferRecognitionRequestFromID(id objc.ID) *SpeechAudioBufferRecognitionRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechAudioBufferRecognitionRequest{inner: raw.SFSpeechAudioBufferRecognitionRequestFromID(id)}
+	x := &SpeechAudioBufferRecognitionRequest{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechAudioBufferRecognitionRequest creates a new [SpeechAudioBufferRecognitionRequest].
+// speechAudioBufferRecognitionRequestAdopt wraps an Objective-C object that this code just created as a
+// SpeechAudioBufferRecognitionRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechAudioBufferRecognitionRequestAdopt(id objc.ID) *SpeechAudioBufferRecognitionRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechAudioBufferRecognitionRequest{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewSpeechAudioBufferRecognitionRequest creates a new SpeechAudioBufferRecognitionRequest.
 func NewSpeechAudioBufferRecognitionRequest() *SpeechAudioBufferRecognitionRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechAudioBufferRecognitionRequest")), objc.RegisterName("new"))
-	return &SpeechAudioBufferRecognitionRequest{inner: raw.SFSpeechAudioBufferRecognitionRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechAudioBufferRecognitionRequest")), objc.RegisterName("new"))
+	return speechAudioBufferRecognitionRequestAdopt(_id)
 }
 
-// A value that indicates the type of speech recognition being performed.
-//
-// WithTaskHint sets the taskHint property and returns the receiver for chaining.
-func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
+// WithTaskHint a value that indicates the type of speech recognition being performed.
+func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskHint:"), taskHint)
 	return x
 }
 
-// A Boolean value that indicates whether you want intermediate results returned for each utterance.
-//
-// WithShouldReportPartialResults sets the shouldReportPartialResults property and returns the receiver for chaining.
+// WithShouldReportPartialResults a Boolean value that indicates whether you want intermediate results returned for each utterance.
 func (x *SpeechAudioBufferRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetShouldReportPartialResults(shouldReportPartialResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReportPartialResults:"), shouldReportPartialResults)
 	return x
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary.
-//
-// WithContextualStrings sets the collection, converting the Go slice to an NSArray.
-func (x *SpeechAudioBufferRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechAudioBufferRecognitionRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SFSpeechRecognitionRequest.SetContextualStrings(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SFSpeechRecognitionRequest.SetContextualStrings(_arr)
+// WithContextualStrings an array of phrases that should be recognized, even if they are not in the system vocabulary.
+func (x *SpeechAudioBufferRecognitionRequest) WithContextualStrings(items ...obj.Object) *SpeechAudioBufferRecognitionRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextualStrings:"), _arr)
 	return x
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request.
-//
-// WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
+// WithInteractionIdentifier an identifier string that you use to describe the type of interaction associated with the speech recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionIdentifier:"), purego.NSString(interactionIdentifier))
 	return x
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device.
-//
-// WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
+// WithRequiresOnDeviceRecognition a Boolean value that determines whether a request must keep its audio data on the device.
 func (x *SpeechAudioBufferRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresOnDeviceRecognition:"), requiresOnDeviceRecognition)
 	return x
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results.
-//
-// WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
+// WithAddsPunctuation a Boolean value that indicates whether to add punctuation to speech recognition results.
 func (x *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetAddsPunctuation(addsPunctuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddsPunctuation:"), addsPunctuation)
 	return x
 }
 
-// WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
+// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
 func (x *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return x
 }
 
-// Appends audio in the PCM format to the end of the recognition request.
-//
-// AppendAudioPCMBuffer calls the underlying AppendAudioPCMBuffer.
-func (x *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer) {
-	x.inner.AppendAudioPCMBuffer(audioPCMBuffer)
+// AppendAudioPCMBuffer appends audio in the PCM format to the end of the recognition request.
+func (x *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAudioPCMBuffer:"), objref.IDOf(audioPCMBuffer))
 }
 
-// Appends audio to the end of the recognition request.
-//
-// AppendAudioSampleBuffer calls the underlying AppendAudioSampleBuffer.
-func (x *SpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer) {
-	x.inner.AppendAudioSampleBuffer(sampleBuffer)
+// AppendAudioSampleBuffer appends audio to the end of the recognition request.
+func (x *SpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAudioSampleBuffer:"), objref.IDOf(sampleBuffer))
 }
 
-// Marks the end of audio input for the recognition request.
-//
-// EndAudio calls the underlying EndAudio.
+// EndAudio marks the end of audio input for the recognition request.
 func (x *SpeechAudioBufferRecognitionRequest) EndAudio() {
-	x.inner.EndAudio()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endAudio"))
 }
 
-// The preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
-//
-// NativeAudioFormat calls the underlying NativeAudioFormat.
-func (x *SpeechAudioBufferRecognitionRequest) NativeAudioFormat() *avfaudio.AVAudioFormat {
-	return x.inner.NativeAudioFormat()
-}
-
-func (x *SpeechAudioBufferRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest {
-	return &x.inner.SFSpeechRecognitionRequest
+// NativeAudioFormat the preferred audio format for optimal speech recognition. Use the audio format in this property as a hint for optimal recording, but don't depend on the value remaining unchanged.
+func (x *SpeechAudioBufferRecognitionRequest) NativeAudioFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nativeAudioFormat"))
+	return obj.Wrap(_r)
 }
 
 // SpeechAudioBufferRecognitionRequestable is the interface implemented by [SpeechAudioBufferRecognitionRequest], for mocking and DI.
 type SpeechAudioBufferRecognitionRequestable interface {
-	Unwrap() *raw.SFSpeechAudioBufferRecognitionRequest
-	WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest
+	obj.Object
+	WithTaskHint(taskHint SpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest
 	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest
-	WithContextualStrings(items ...*foundation.NSString) *SpeechAudioBufferRecognitionRequest
+	WithContextualStrings(items ...obj.Object) *SpeechAudioBufferRecognitionRequest
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest
 	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest
-	AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer)
-	AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer)
+	AppendAudioPCMBuffer(audioPCMBuffer obj.Object)
+	AppendAudioSampleBuffer(sampleBuffer obj.Object)
 	EndAudio()
-	NativeAudioFormat() *avfaudio.AVAudioFormat
+	NativeAudioFormat() obj.Object
 }
 
 var _ SpeechAudioBufferRecognitionRequestable = (*SpeechAudioBufferRecognitionRequest)(nil)
+
+var _ SpeechRecognitionRequestProvider = (*SpeechAudioBufferRecognitionRequest)(nil)

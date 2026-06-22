@@ -5,97 +5,107 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A description of a pointer.
+// PointerType is an idiomatic wrapper over the Objective-C class MTLPointerType.
 //
-// PointerType wraps [raw.MTLPointerType] with a fluent Go API.
+// It embeds [Type], promoting that type's methods.
+//
+// A description of a pointer.
 type PointerType struct {
-	inner *raw.MTLPointerType
+	Type
 }
 
-// Unwrap returns the underlying [raw.MTLPointerType].
-func (x *PointerType) Unwrap() *raw.MTLPointerType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointerType) ID() objc.ID { return x.inner.Ptr() }
-
-// PointerTypeFromID adopts an existing object pointer as a PointerType (nil for 0).
+// PointerTypeFromID adopts an existing Objective-C object as a PointerType
+// (nil for 0), retaining it and registering a release finalizer.
 func PointerTypeFromID(id objc.ID) *PointerType {
 	if id == 0 {
 		return nil
 	}
-	return &PointerType{inner: raw.MTLPointerTypeFromID(id)}
+	x := &PointerType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPointerType creates a new [PointerType].
+// pointerTypeAdopt wraps an Objective-C object that this code just created as a
+// PointerType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointerTypeAdopt(id objc.ID) *PointerType {
+	if id == 0 {
+		return nil
+	}
+	x := &PointerType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPointerType creates a new PointerType.
 func NewPointerType() *PointerType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLPointerType")), objc.RegisterName("new"))
-	return &PointerType{inner: raw.MTLPointerTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLPointerType")), objc.RegisterName("new"))
+	return pointerTypeAdopt(_id)
 }
 
-// Provides a description of the underlying struct when the pointer points to a struct.
-//
-// ElementStructType calls the underlying ElementStructType.
+// ElementStructType provides a description of the underlying struct when the pointer points to a struct.
 func (x *PointerType) ElementStructType() *StructType {
-	_r := x.inner.ElementStructType()
-	if _r == nil {
-		return nil
-	}
-	return &StructType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementStructType"))
+	return StructTypeFromID(_r)
 }
 
-// Provides a description of the underlying array when the pointer points to an array.
-//
-// ElementArrayType calls the underlying ElementArrayType.
+// ElementArrayType provides a description of the underlying array when the pointer points to an array.
 func (x *PointerType) ElementArrayType() *ArrayType {
-	_r := x.inner.ElementArrayType()
-	if _r == nil {
-		return nil
-	}
-	return &ArrayType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayType"))
+	return ArrayTypeFromID(_r)
 }
 
-// ElementType calls the underlying ElementType.
-func (x *PointerType) ElementType() MTLDataType {
-	return MTLDataType(x.inner.ElementType())
+// ElementType wraps the corresponding Objective-C method.
+func (x *PointerType) ElementType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("elementType"))
+	return _r
 }
 
-// Access calls the underlying Access.
-func (x *PointerType) Access() MTLBindingAccess {
-	return MTLBindingAccess(x.inner.Access())
+// Access wraps the corresponding Objective-C method.
+func (x *PointerType) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+	return _r
 }
 
-// Alignment calls the underlying Alignment.
-func (x *PointerType) Alignment() uint {
-	return x.inner.Alignment()
+// Alignment wraps the corresponding Objective-C method.
+func (x *PointerType) Alignment() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
-// DataSize calls the underlying DataSize.
-func (x *PointerType) DataSize() uint {
-	return x.inner.DataSize()
+// DataSize wraps the corresponding Objective-C method.
+func (x *PointerType) DataSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
+	return _r
 }
 
-// ElementIsArgumentBuffer calls the underlying ElementIsArgumentBuffer.
+// ElementIsArgumentBuffer wraps the corresponding Objective-C method.
 func (x *PointerType) ElementIsArgumentBuffer() bool {
-	return x.inner.ElementIsArgumentBuffer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("elementIsArgumentBuffer"))
+	return _r
 }
-
-func (x *PointerType) asType() *raw.MTLType { return &x.inner.MTLType }
 
 // PointerTypeable is the interface implemented by [PointerType], for mocking and DI.
 type PointerTypeable interface {
-	Unwrap() *raw.MTLPointerType
+	obj.Object
 	ElementStructType() *StructType
 	ElementArrayType() *ArrayType
-	ElementType() MTLDataType
-	Access() MTLBindingAccess
-	Alignment() uint
-	DataSize() uint
+	ElementType() DataType
+	Access() BindingAccess
+	Alignment() int
+	DataSize() int
 	ElementIsArgumentBuffer() bool
 }
 
 var _ PointerTypeable = (*PointerType)(nil)
+
+var _ TypeProvider = (*PointerType)(nil)

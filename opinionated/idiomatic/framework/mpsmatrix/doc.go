@@ -3,4 +3,15 @@
 //go:build darwin
 
 // Package mpsmatrix provides a fluent Go API over the macOS MPSMatrix framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - MatrixBinaryKernel: [MatrixSoftMaxGradient], [MatrixSolveCholesky], [MatrixSolveLU], [MatrixSolveTriangular], [MatrixVectorMultiplication]
+//   - MatrixRandom: [MatrixRandomMTGP32], [MatrixRandomPhilox]
+//   - MatrixSoftMax: [MatrixLogSoftMax]
+//   - MatrixSoftMaxGradient: [MatrixLogSoftMaxGradient]
+//   - MatrixUnaryKernel: [MatrixDecompositionCholesky], [MatrixDecompositionLU], [MatrixFindTopK], [MatrixSoftMax]
 package mpsmatrix

@@ -5,309 +5,285 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// PDFPage, a subclass of NSObject, defines methods used to render PDF pages and work with annotations, text, and selections.
+// Page is an idiomatic wrapper over the Objective-C class PDFPage.
 //
-// Page wraps [raw.PDFPage] with a fluent Go API.
+// PDFPage, a subclass of NSObject, defines methods used to render PDF pages and work with annotations, text, and selections.
 type Page struct {
-	inner *raw.PDFPage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFPage].
-func (x *Page) Unwrap() *raw.PDFPage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Page) ID() objc.ID { return x.inner.Ptr() }
-
-// PageFromID adopts an existing object pointer as a Page (nil for 0).
+// PageFromID adopts an existing Objective-C object as a Page
+// (nil for 0), retaining it and registering a release finalizer.
 func PageFromID(id objc.ID) *Page {
 	if id == 0 {
 		return nil
 	}
-	return &Page{inner: raw.PDFPageFromID(id)}
+	x := &Page{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewPage creates a new [Page].
+// pageAdopt wraps an Objective-C object that this code just created as a
+// Page (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pageAdopt(id objc.ID) *Page {
+	if id == 0 {
+		return nil
+	}
+	x := &Page{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Page) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Page) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Page) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Page) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPage creates a new Page.
 func NewPage() *Page {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFPage")), objc.RegisterName("new"))
-	return &Page{inner: raw.PDFPageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFPage")), objc.RegisterName("new"))
+	return pageAdopt(_id)
 }
 
-// NewPageWithImageOptions creates a new [Page].
-func NewPageWithImageOptions(image *appkit.NSImage, options purego.IDer) *Page {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFPage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), image.Ptr(), options.ID())
-	return &Page{inner: raw.PDFPageFromID(_id)}
+// NewPageWithImageOptions creates a new Page.
+func NewPageWithImageOptions(image obj.Object, options obj.Object) *Page {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFPage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	return pageAdopt(_id)
 }
 
-// Creates a new PDFPage object and initializes it with the specified NSImage object.
-//
-// NewPageWithImage creates a new [Page].
-func NewPageWithImage(image *appkit.NSImage) *Page {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFPage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:"), image.Ptr())
-	return &Page{inner: raw.PDFPageFromID(_id)}
+// NewPageWithImage creates a new PDFPage object and initializes it with the specified NSImage object.
+func NewPageWithImage(image obj.Object) *Page {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFPage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:"), objref.IDOf(image))
+	return pageAdopt(_id)
 }
 
-// Sets the rotation angle for the page in degrees.
-//
-// WithRotation sets the rotation property and returns the receiver for chaining.
+// WithRotation sets the rotation angle for the page in degrees.
 func (x *Page) WithRotation(rotation int) *Page {
-	x.inner.SetRotation(rotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
-// Returns a Boolean value indicating whether annotations are displayed for the page.
-//
-// WithDisplaysAnnotations sets the displaysAnnotations property and returns the receiver for chaining.
+// WithDisplaysAnnotations returns a Boolean value indicating whether annotations are displayed for the page.
 func (x *Page) WithDisplaysAnnotations(displaysAnnotations bool) *Page {
-	x.inner.SetDisplaysAnnotations(displaysAnnotations)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAnnotations:"), displaysAnnotations)
 	return x
 }
 
-// Returns the bounds for the specified PDF display box.
-//
-// BoundsForBox calls the underlying BoundsForBox.
-func (x *Page) BoundsForBox(box PDFDisplayBox) corefoundation.CGRect {
-	return x.inner.BoundsForBox(raw.PDFDisplayBox(box))
+// BoundsForBox returns the bounds for the specified PDF display box.
+func (x *Page) BoundsForBox(box DisplayBox) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsForBox:"), box)
+	return _r
 }
 
-// Sets the bounds for the specified box.
-//
-// SetBoundsForBox calls the underlying SetBoundsForBox.
-func (x *Page) SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox) {
-	x.inner.SetBoundsForBox(bounds, raw.PDFDisplayBox(box))
+// SetBoundsForBox sets the bounds for the specified box.
+func (x *Page) SetBoundsForBox(bounds corefoundation.CGRect, box DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:forBox:"), bounds, box)
 }
 
-// Adds the specified annotation object to the page.
-//
-// AddAnnotation calls the underlying AddAnnotation.
-func (x *Page) AddAnnotation(annotation *raw.PDFAnnotation) {
-	x.inner.AddAnnotation(annotation)
+// AddAnnotation adds the specified annotation object to the page.
+func (x *Page) AddAnnotation(annotation *Annotation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAnnotation:"), objref.IDOf(annotation))
 }
 
-// Removes the specified annotation from the page.
-//
-// RemoveAnnotation calls the underlying RemoveAnnotation.
-func (x *Page) RemoveAnnotation(annotation *raw.PDFAnnotation) {
-	x.inner.RemoveAnnotation(annotation)
+// RemoveAnnotation removes the specified annotation from the page.
+func (x *Page) RemoveAnnotation(annotation *Annotation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAnnotation:"), objref.IDOf(annotation))
 }
 
-// Returns the annotation, if there is one, at the specified point.
-//
-// AnnotationAtPoint calls the underlying AnnotationAtPoint.
+// AnnotationAtPoint returns the annotation, if there is one, at the specified point.
 func (x *Page) AnnotationAtPoint(point corefoundation.CGPoint) *Annotation {
-	_r := x.inner.AnnotationAtPoint(point)
-	if _r == nil {
-		return nil
-	}
-	return &Annotation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationAtPoint:"), point)
+	return AnnotationFromID(_r)
 }
 
-// TransformForBox calls the underlying TransformForBox.
-func (x *Page) TransformForBox(box PDFDisplayBox) corefoundation.CGAffineTransform {
-	return x.inner.TransformForBox(raw.PDFDisplayBox(box))
+// TransformForBox wraps the corresponding Objective-C method.
+func (x *Page) TransformForBox(box DisplayBox) corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transformForBox:"), box)
+	return _r
 }
 
-// DrawWithBoxToContext calls the underlying DrawWithBoxToContext.
-func (x *Page) DrawWithBoxToContext(box PDFDisplayBox, context_ unsafe.Pointer) {
-	x.inner.DrawWithBoxToContext(raw.PDFDisplayBox(box), context_)
+// DrawWithBoxToContext wraps the corresponding Objective-C method.
+func (x *Page) DrawWithBoxToContext(box DisplayBox, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithBox:toContext:"), box, objref.IDOf(context_))
 }
 
-// TransformContextForBox calls the underlying TransformContextForBox.
-func (x *Page) TransformContextForBox(context_ unsafe.Pointer, box PDFDisplayBox) {
-	x.inner.TransformContextForBox(context_, raw.PDFDisplayBox(box))
+// TransformContextForBox wraps the corresponding Objective-C method.
+func (x *Page) TransformContextForBox(context_ obj.Object, box DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformContext:forBox:"), objref.IDOf(context_), box)
 }
 
-// ThumbnailOfSizeForBox calls the underlying ThumbnailOfSizeForBox.
-func (x *Page) ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayBox) *appkit.NSImage {
-	return x.inner.ThumbnailOfSizeForBox(size, raw.PDFDisplayBox(box))
+// ThumbnailOfSizeForBox wraps the corresponding Objective-C method.
+func (x *Page) ThumbnailOfSizeForBox(size corefoundation.CGSize, box DisplayBox) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailOfSize:forBox:"), size, box)
+	return obj.Wrap(_r)
 }
 
-// Returns the bounds, in page space, of the character at the specified index.
-//
-// CharacterBoundsAtIndex calls the underlying CharacterBoundsAtIndex.
+// CharacterBoundsAtIndex returns the bounds, in page space, of the character at the specified index.
 func (x *Page) CharacterBoundsAtIndex(index int) corefoundation.CGRect {
-	return x.inner.CharacterBoundsAtIndex(index)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("characterBoundsAtIndex:"), index)
+	return _r
 }
 
-// Returns the character index value for the specified point in page space.
-//
-// CharacterIndexAtPoint calls the underlying CharacterIndexAtPoint.
+// CharacterIndexAtPoint returns the character index value for the specified point in page space.
 func (x *Page) CharacterIndexAtPoint(point corefoundation.CGPoint) int {
-	return x.inner.CharacterIndexAtPoint(point)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIndexAtPoint:"), point)
+	return _r
 }
 
-// Returns the text enclosed within the specified rectangle, expressed in page (user) coordinates.
-//
-// SelectionForRect calls the underlying SelectionForRect.
+// SelectionForRect returns the text enclosed within the specified rectangle, expressed in page (user) coordinates.
 func (x *Page) SelectionForRect(rect corefoundation.CGRect) *Selection {
-	_r := x.inner.SelectionForRect(rect)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForRect:"), rect)
+	return SelectionFromID(_r)
 }
 
-// Returns the whole word that includes the specified point.
-//
-// SelectionForWordAtPoint calls the underlying SelectionForWordAtPoint.
+// SelectionForWordAtPoint returns the whole word that includes the specified point.
 func (x *Page) SelectionForWordAtPoint(point corefoundation.CGPoint) *Selection {
-	_r := x.inner.SelectionForWordAtPoint(point)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForWordAtPoint:"), point)
+	return SelectionFromID(_r)
 }
 
-// Returns the whole line of text that includes the specified point.
-//
-// SelectionForLineAtPoint calls the underlying SelectionForLineAtPoint.
+// SelectionForLineAtPoint returns the whole line of text that includes the specified point.
 func (x *Page) SelectionForLineAtPoint(point corefoundation.CGPoint) *Selection {
-	_r := x.inner.SelectionForLineAtPoint(point)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForLineAtPoint:"), point)
+	return SelectionFromID(_r)
 }
 
-// Returns the text between the two specified points in page space.
-//
-// SelectionFromPointToPoint calls the underlying SelectionFromPointToPoint.
+// SelectionFromPointToPoint returns the text between the two specified points in page space.
 func (x *Page) SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint) *Selection {
-	_r := x.inner.SelectionFromPointToPoint(startPoint, endPoint)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPoint:toPoint:"), startPoint, endPoint)
+	return SelectionFromID(_r)
 }
 
-// Returns the text contained within the specified range.
-//
-// SelectionForRange calls the underlying SelectionForRange.
+// SelectionForRange returns the text contained within the specified range.
 func (x *Page) SelectionForRange(range_ foundation.NSRange) *Selection {
-	_r := x.inner.SelectionForRange(range_)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForRange:"), range_)
+	return SelectionFromID(_r)
 }
 
-// Document calls the underlying Document.
+// Document wraps the corresponding Objective-C method.
 func (x *Page) Document() *Document {
-	_r := x.inner.Document()
-	if _r == nil {
-		return nil
-	}
-	return &Document{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+	return DocumentFromID(_r)
 }
 
-// PageRef calls the underlying PageRef.
-func (x *Page) PageRef() unsafe.Pointer {
-	return x.inner.PageRef()
+// PageRef wraps the corresponding Objective-C method.
+func (x *Page) PageRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageRef"))
+	return obj.Wrap(_r)
 }
 
-// Label calls the underlying Label.
+// Label wraps the corresponding Objective-C method.
 func (x *Page) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Rotation calls the underlying Rotation.
+// Rotation wraps the corresponding Objective-C method.
 func (x *Page) Rotation() int {
-	return x.inner.Rotation()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rotation"))
+	return _r
 }
 
-// SetRotation calls the underlying SetRotation.
+// SetRotation wraps the corresponding Objective-C method.
 func (x *Page) SetRotation(rotation int) {
-	x.inner.SetRotation(rotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
 
+// Annotations wraps the corresponding Objective-C method.
+//
 // Annotations returns the collection as a Go slice.
 func (x *Page) Annotations() []*Annotation {
-	arr := x.inner.Annotations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Annotation {
-		return &Annotation{inner: raw.PDFAnnotationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Annotation { return AnnotationFromID(_id) })
 }
 
-// DisplaysAnnotations calls the underlying DisplaysAnnotations.
+// DisplaysAnnotations wraps the corresponding Objective-C method.
 func (x *Page) DisplaysAnnotations() bool {
-	return x.inner.DisplaysAnnotations()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysAnnotations"))
+	return _r
 }
 
-// SetDisplaysAnnotations calls the underlying SetDisplaysAnnotations.
+// SetDisplaysAnnotations wraps the corresponding Objective-C method.
 func (x *Page) SetDisplaysAnnotations(displaysAnnotations bool) {
-	x.inner.SetDisplaysAnnotations(displaysAnnotations)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAnnotations:"), displaysAnnotations)
 }
 
-// NumberOfCharacters calls the underlying NumberOfCharacters.
-func (x *Page) NumberOfCharacters() uint {
-	return x.inner.NumberOfCharacters()
+// NumberOfCharacters wraps the corresponding Objective-C method.
+func (x *Page) NumberOfCharacters() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCharacters"))
+	return _r
 }
 
-// String calls the underlying String.
-func (x *Page) String() string {
-	_r := x.inner.String()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// AttributedString wraps the corresponding Objective-C method.
+func (x *Page) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+	return obj.Wrap(_r)
 }
 
-// AttributedString calls the underlying AttributedString.
-func (x *Page) AttributedString() *foundation.NSAttributedString {
-	return x.inner.AttributedString()
+// DataRepresentation wraps the corresponding Objective-C method.
+func (x *Page) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *Page) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+// DrawWithBox draws the page within the specified box.
+func (x *Page) DrawWithBox(box DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWithBox:"), box)
 }
 
-// Draws the page within the specified box.
-//
-// DrawWithBox calls the underlying DrawWithBox.
-func (x *Page) DrawWithBox(box PDFDisplayBox) {
-	x.inner.DrawWithBox(raw.PDFDisplayBox(box))
-}
-
-// Transforms the current context, given the specified box.
-//
-// TransformContextForBox2 calls the underlying TransformContextForBox2.
-func (x *Page) TransformContextForBox2(box PDFDisplayBox) {
-	x.inner.TransformContextForBox2(raw.PDFDisplayBox(box))
+// TransformContextForBox2 transforms the current context, given the specified box.
+func (x *Page) TransformContextForBox2(box DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformContextForBox:"), box)
 }
 
 // Pageable is the interface implemented by [Page], for mocking and DI.
 type Pageable interface {
-	Unwrap() *raw.PDFPage
+	obj.Object
 	WithRotation(rotation int) *Page
 	WithDisplaysAnnotations(displaysAnnotations bool) *Page
-	BoundsForBox(box PDFDisplayBox) corefoundation.CGRect
-	SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox)
-	AddAnnotation(annotation *raw.PDFAnnotation)
-	RemoveAnnotation(annotation *raw.PDFAnnotation)
+	BoundsForBox(box DisplayBox) corefoundation.CGRect
+	SetBoundsForBox(bounds corefoundation.CGRect, box DisplayBox)
+	AddAnnotation(annotation *Annotation)
+	RemoveAnnotation(annotation *Annotation)
 	AnnotationAtPoint(point corefoundation.CGPoint) *Annotation
-	TransformForBox(box PDFDisplayBox) corefoundation.CGAffineTransform
-	DrawWithBoxToContext(box PDFDisplayBox, context_ unsafe.Pointer)
-	TransformContextForBox(context_ unsafe.Pointer, box PDFDisplayBox)
-	ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayBox) *appkit.NSImage
+	TransformForBox(box DisplayBox) corefoundation.CGAffineTransform
+	DrawWithBoxToContext(box DisplayBox, context_ obj.Object)
+	TransformContextForBox(context_ obj.Object, box DisplayBox)
+	ThumbnailOfSizeForBox(size corefoundation.CGSize, box DisplayBox) obj.Object
 	CharacterBoundsAtIndex(index int) corefoundation.CGRect
 	CharacterIndexAtPoint(point corefoundation.CGPoint) int
 	SelectionForRect(rect corefoundation.CGRect) *Selection
@@ -316,19 +292,18 @@ type Pageable interface {
 	SelectionFromPointToPoint(startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint) *Selection
 	SelectionForRange(range_ foundation.NSRange) *Selection
 	Document() *Document
-	PageRef() unsafe.Pointer
+	PageRef() obj.Object
 	Label() string
 	Rotation() int
 	SetRotation(rotation int)
 	Annotations() []*Annotation
 	DisplaysAnnotations() bool
 	SetDisplaysAnnotations(displaysAnnotations bool)
-	NumberOfCharacters() uint
-	String() string
-	AttributedString() *foundation.NSAttributedString
-	DataRepresentation() *foundation.NSData
-	DrawWithBox(box PDFDisplayBox)
-	TransformContextForBox2(box PDFDisplayBox)
+	NumberOfCharacters() int
+	AttributedString() obj.Object
+	DataRepresentation() obj.Object
+	DrawWithBox(box DisplayBox)
+	TransformContextForBox2(box DisplayBox)
 }
 
 var _ Pageable = (*Page)(nil)

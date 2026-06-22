@@ -5,114 +5,122 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The abstract superclass for objects provided by a metadata capture output.
+// MetadataObject is an idiomatic wrapper over the Objective-C class AVMetadataObject.
 //
-// MetadataObject wraps [raw.AVMetadataObject] with a fluent Go API.
+// MetadataObject is an abstract base — you do not construct it directly. Construct one of [MetadataBodyObject], [MetadataCatHeadObject], [MetadataDogHeadObject], [MetadataFaceObject], [MetadataMachineReadableCodeObject], [MetadataSalientObject] and pass it where a MetadataObject is accepted.
+//
+// The abstract superclass for objects provided by a metadata capture output.
 type MetadataObject struct {
-	inner *raw.AVMetadataObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataObject].
-func (x *MetadataObject) Unwrap() *raw.AVMetadataObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataObjectFromID adopts an existing object pointer as a MetadataObject (nil for 0).
+// MetadataObjectFromID adopts an existing Objective-C object as a MetadataObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataObjectFromID(id objc.ID) *MetadataObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataObject{inner: raw.AVMetadataObjectFromID(id)}
+	x := &MetadataObject{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataObject creates a new [MetadataObject].
-func NewMetadataObject() *MetadataObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataObject")), objc.RegisterName("new"))
-	return &MetadataObject{inner: raw.AVMetadataObjectFromID(_id)}
-}
-
-// @property time @abstract The media time associated with this metadata object. @discussion The value of this property is a CMTime associated with the metadata object. For capture, it is the time at which this object was captured. If this metadata object originates from a CMSampleBuffer, its time matches the sample buffer's presentation time. This property may return kCMTimeInvalid.
-//
-// Time calls the underlying Time.
-func (x *MetadataObject) Time() coremedia.CMTime {
-	return x.inner.Time()
-}
-
-// @property duration @abstract The media duration associated with this metadata object. @discussion The value of this property is a CMTime representing the duration of the metadata object. If this metadata object originates from a CMSampleBuffer, its duration matches the sample buffer's duration. This property may return kCMTimeInvalid.
-//
-// Duration calls the underlying Duration.
-func (x *MetadataObject) Duration() coremedia.CMTime {
-	return x.inner.Duration()
-}
-
-// @property bounds @abstract The bounding rectangle of the receiver. @discussion The value of this property is a CGRect representing the bounding rectangle of the object with respect to the picture in which it resides. The rectangle's origin is top left. If the metadata originates from video, bounds may be expressed as scalar values from 0. - 1. If the original video has been scaled down, the bounds of the metadata object still are meaningful. This property may return CGRectZero if the metadata has no bounds.
-//
-// Bounds calls the underlying Bounds.
-func (x *MetadataObject) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
-}
-
-// @property type @abstract An identifier for the metadata object. @discussion The value of this property is an AVMetadataObjectType representing the type of the metadata object. Clients inspecting a collection of metadata objects can use this property to filter objects with a matching type.
-//
-// Type calls the underlying Type.
-func (x *MetadataObject) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
-		return ""
+// metadataObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataObjectAdopt(id objc.ID) *MetadataObject {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &MetadataObject{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// An identifier associated with a metadata object used to group it with other metadata objects belonging to a common parent. When presented with a collection of “AVMetadataObject“ instances of different types, you may use the objects' “groupID“ to combine them into groups. For example, a human body and face belonging to the same person have the same “groupID“.  If an object's “groupID“ property is set to -1, it is invalid. When set to a value of >=0, it is unique across all object groups.
-//
-// GroupID calls the underlying GroupID.
+// Description returns the object's -description text.
+func (x *MetadataObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MetadataObject) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// Bounds the bounding rectangle of the receiver. The value of this property is a CGRect representing the bounding rectangle of the object with respect to the picture in which it resides. The rectangle's origin is top left. If the metadata originates from video, bounds may be expressed as scalar values from 0. - 1. If the original video has been scaled down, the bounds of the metadata object still are meaningful. This property may return CGRectZero if the metadata has no bounds.
+func (x *MetadataObject) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+	return _r
+}
+
+// Type an identifier for the metadata object. The value of this property is an AVMetadataObjectType representing the type of the metadata object. Clients inspecting a collection of metadata objects can use this property to filter objects with a matching type.
+func (x *MetadataObject) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
+}
+
+// GroupID an identifier associated with a metadata object used to group it with other metadata objects belonging to a common parent. When presented with a collection of “AVMetadataObject“ instances of different types, you may use the objects' “groupID“ to combine them into groups. For example, a human body and face belonging to the same person have the same “groupID“.  If an object's “groupID“ property is set to -1, it is invalid. When set to a value of >=0, it is unique across all object groups.
 func (x *MetadataObject) GroupID() int {
-	return x.inner.GroupID()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupID"))
+	return _r
 }
 
-// A unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
-//
-// ObjectID calls the underlying ObjectID.
+// ObjectID a unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
 func (x *MetadataObject) ObjectID() int {
-	return x.inner.ObjectID()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("objectID"))
+	return _r
 }
 
-// The current focus mode when an object is detected during a Cinematic Video recording. Default is “AVCaptureCinematicVideoFocusMode/AVCaptureCinematicVideoFocusModeNone“.
-//
-// CinematicVideoFocusMode calls the underlying CinematicVideoFocusMode.
-func (x *MetadataObject) CinematicVideoFocusMode() AVCaptureCinematicVideoFocusMode {
-	return AVCaptureCinematicVideoFocusMode(x.inner.CinematicVideoFocusMode())
+// CinematicVideoFocusMode the current focus mode when an object is detected during a Cinematic Video recording. Default is “AVCaptureCinematicVideoFocusMode/AVCaptureCinematicVideoFocusModeNone“.
+func (x *MetadataObject) CinematicVideoFocusMode() CaptureCinematicVideoFocusMode {
+	_r := objc.Send[CaptureCinematicVideoFocusMode](objref.IDOf(x), objc.RegisterName("cinematicVideoFocusMode"))
+	return _r
 }
 
-// A BOOL indicating whether this metadata object represents a fixed focus.
-//
-// IsFixedFocus calls the underlying IsFixedFocus.
+// IsFixedFocus a BOOL indicating whether this metadata object represents a fixed focus.
 func (x *MetadataObject) IsFixedFocus() bool {
-	return x.inner.IsFixedFocus()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedFocus"))
+	return _r
 }
-
-func (x *MetadataObject) asMetadataObject() *raw.AVMetadataObject { return x.inner }
 
 // MetadataObjectable is the interface implemented by [MetadataObject], for mocking and DI.
 type MetadataObjectable interface {
-	Unwrap() *raw.AVMetadataObject
-	Time() coremedia.CMTime
-	Duration() coremedia.CMTime
+	obj.Object
 	Bounds() corefoundation.CGRect
-	Type() string
+	Type() obj.Object
 	GroupID() int
 	ObjectID() int
-	CinematicVideoFocusMode() AVCaptureCinematicVideoFocusMode
+	CinematicVideoFocusMode() CaptureCinematicVideoFocusMode
 	IsFixedFocus() bool
 }
 
 var _ MetadataObjectable = (*MetadataObject)(nil)
+
+// isMetadataObject marks MetadataObject — and, by embedding promotion, its
+// subclasses — as a member of the MetadataObject hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MetadataObject) isMetadataObject() {}
+
+var _ MetadataObjectProvider = (*MetadataObject)(nil)

@@ -5,3648 +5,3756 @@
 package imageio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCGImageMetadataNamespaceExif returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExif as an objc.ID.
-func KCGImageMetadataNamespaceExif() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceExif())
+// KCGImageMetadataNamespaceExif returns the value of the constant kCGImageMetadataNamespaceExif.
+func KCGImageMetadataNamespaceExif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceExif")))
 }
 
-// KCGImageMetadataNamespaceExifAux returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExifAux as an objc.ID.
-func KCGImageMetadataNamespaceExifAux() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceExifAux())
+// KCGImageMetadataNamespaceExifAux returns the value of the constant kCGImageMetadataNamespaceExifAux.
+func KCGImageMetadataNamespaceExifAux() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceExifAux")))
 }
 
-// KCGImageMetadataNamespaceExifEX returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceExifEX as an objc.ID.
-func KCGImageMetadataNamespaceExifEX() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceExifEX())
+// KCGImageMetadataNamespaceExifEX returns the value of the constant kCGImageMetadataNamespaceExifEX.
+func KCGImageMetadataNamespaceExifEX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceExifEX")))
 }
 
-// KCGImageMetadataNamespaceDublinCore returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceDublinCore as an objc.ID.
-func KCGImageMetadataNamespaceDublinCore() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceDublinCore())
+// KCGImageMetadataNamespaceDublinCore returns the value of the constant kCGImageMetadataNamespaceDublinCore.
+func KCGImageMetadataNamespaceDublinCore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceDublinCore")))
 }
 
-// KCGImageMetadataNamespaceIPTCCore returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceIPTCCore as an objc.ID.
-func KCGImageMetadataNamespaceIPTCCore() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceIPTCCore())
+// KCGImageMetadataNamespaceIPTCCore returns the value of the constant kCGImageMetadataNamespaceIPTCCore.
+func KCGImageMetadataNamespaceIPTCCore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceIPTCCore")))
 }
 
-// KCGImageMetadataNamespaceIPTCExtension returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceIPTCExtension as an objc.ID.
-func KCGImageMetadataNamespaceIPTCExtension() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceIPTCExtension())
+// KCGImageMetadataNamespaceIPTCExtension returns the value of the constant kCGImageMetadataNamespaceIPTCExtension.
+func KCGImageMetadataNamespaceIPTCExtension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceIPTCExtension")))
 }
 
-// KCGImageMetadataNamespacePhotoshop returns the value of the CoreFoundation reference constant kCGImageMetadataNamespacePhotoshop as an objc.ID.
-func KCGImageMetadataNamespacePhotoshop() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespacePhotoshop())
+// KCGImageMetadataNamespacePhotoshop returns the value of the constant kCGImageMetadataNamespacePhotoshop.
+func KCGImageMetadataNamespacePhotoshop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespacePhotoshop")))
 }
 
-// KCGImageMetadataNamespaceTIFF returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceTIFF as an objc.ID.
-func KCGImageMetadataNamespaceTIFF() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceTIFF())
+// KCGImageMetadataNamespaceTIFF returns the value of the constant kCGImageMetadataNamespaceTIFF.
+func KCGImageMetadataNamespaceTIFF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceTIFF")))
 }
 
-// KCGImageMetadataNamespaceXMPBasic returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceXMPBasic as an objc.ID.
-func KCGImageMetadataNamespaceXMPBasic() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceXMPBasic())
+// KCGImageMetadataNamespaceXMPBasic returns the value of the constant kCGImageMetadataNamespaceXMPBasic.
+func KCGImageMetadataNamespaceXMPBasic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceXMPBasic")))
 }
 
-// KCGImageMetadataNamespaceXMPRights returns the value of the CoreFoundation reference constant kCGImageMetadataNamespaceXMPRights as an objc.ID.
-func KCGImageMetadataNamespaceXMPRights() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataNamespaceXMPRights())
+// KCGImageMetadataNamespaceXMPRights returns the value of the constant kCGImageMetadataNamespaceXMPRights.
+func KCGImageMetadataNamespaceXMPRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataNamespaceXMPRights")))
 }
 
-// KCGImageMetadataPrefixExif returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExif as an objc.ID.
-func KCGImageMetadataPrefixExif() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixExif()) }
+// KCGImageMetadataPrefixExif returns the value of the constant kCGImageMetadataPrefixExif.
+func KCGImageMetadataPrefixExif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixExif")))
+}
 
-// KCGImageMetadataPrefixExifAux returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExifAux as an objc.ID.
-func KCGImageMetadataPrefixExifAux() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixExifAux())
+// KCGImageMetadataPrefixExifAux returns the value of the constant kCGImageMetadataPrefixExifAux.
+func KCGImageMetadataPrefixExifAux() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixExifAux")))
 }
 
-// KCGImageMetadataPrefixExifEX returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixExifEX as an objc.ID.
-func KCGImageMetadataPrefixExifEX() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixExifEX())
+// KCGImageMetadataPrefixExifEX returns the value of the constant kCGImageMetadataPrefixExifEX.
+func KCGImageMetadataPrefixExifEX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixExifEX")))
 }
 
-// KCGImageMetadataPrefixDublinCore returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixDublinCore as an objc.ID.
-func KCGImageMetadataPrefixDublinCore() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixDublinCore())
+// KCGImageMetadataPrefixDublinCore returns the value of the constant kCGImageMetadataPrefixDublinCore.
+func KCGImageMetadataPrefixDublinCore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixDublinCore")))
 }
 
-// KCGImageMetadataPrefixIPTCCore returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixIPTCCore as an objc.ID.
-func KCGImageMetadataPrefixIPTCCore() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixIPTCCore())
+// KCGImageMetadataPrefixIPTCCore returns the value of the constant kCGImageMetadataPrefixIPTCCore.
+func KCGImageMetadataPrefixIPTCCore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixIPTCCore")))
 }
 
-// KCGImageMetadataPrefixIPTCExtension returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixIPTCExtension as an objc.ID.
-func KCGImageMetadataPrefixIPTCExtension() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixIPTCExtension())
+// KCGImageMetadataPrefixIPTCExtension returns the value of the constant kCGImageMetadataPrefixIPTCExtension.
+func KCGImageMetadataPrefixIPTCExtension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixIPTCExtension")))
 }
 
-// KCGImageMetadataPrefixPhotoshop returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixPhotoshop as an objc.ID.
-func KCGImageMetadataPrefixPhotoshop() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixPhotoshop())
+// KCGImageMetadataPrefixPhotoshop returns the value of the constant kCGImageMetadataPrefixPhotoshop.
+func KCGImageMetadataPrefixPhotoshop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixPhotoshop")))
 }
 
-// KCGImageMetadataPrefixTIFF returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixTIFF as an objc.ID.
-func KCGImageMetadataPrefixTIFF() objc.ID { return purego.CFConstant(raw.KCGImageMetadataPrefixTIFF()) }
+// KCGImageMetadataPrefixTIFF returns the value of the constant kCGImageMetadataPrefixTIFF.
+func KCGImageMetadataPrefixTIFF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixTIFF")))
+}
 
-// KCGImageMetadataPrefixXMPBasic returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixXMPBasic as an objc.ID.
-func KCGImageMetadataPrefixXMPBasic() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixXMPBasic())
+// KCGImageMetadataPrefixXMPBasic returns the value of the constant kCGImageMetadataPrefixXMPBasic.
+func KCGImageMetadataPrefixXMPBasic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixXMPBasic")))
 }
 
-// KCGImageMetadataPrefixXMPRights returns the value of the CoreFoundation reference constant kCGImageMetadataPrefixXMPRights as an objc.ID.
-func KCGImageMetadataPrefixXMPRights() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataPrefixXMPRights())
+// KCGImageMetadataPrefixXMPRights returns the value of the constant kCGImageMetadataPrefixXMPRights.
+func KCGImageMetadataPrefixXMPRights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataPrefixXMPRights")))
 }
 
-// KCGImageMetadataEnumerateRecursively returns the value of the CoreFoundation reference constant kCGImageMetadataEnumerateRecursively as an objc.ID.
-func KCGImageMetadataEnumerateRecursively() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataEnumerateRecursively())
+// KCGImageMetadataEnumerateRecursively returns the value of the constant kCGImageMetadataEnumerateRecursively.
+func KCGImageMetadataEnumerateRecursively() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataEnumerateRecursively")))
 }
 
-// @constant kCFErrorDomainCGImageMetadata @discussion Error domain for all errors originating in ImageIO for CGImageMetadata APIs. Error codes may be interpreted using the list below.
-// KCFErrorDomainCGImageMetadata returns the value of the CoreFoundation reference constant kCFErrorDomainCGImageMetadata as an objc.ID.
-func KCFErrorDomainCGImageMetadata() objc.ID {
-	return purego.CFConstant(raw.KCFErrorDomainCGImageMetadata())
+// KCFErrorDomainCGImageMetadata returns the value of the constant kCFErrorDomainCGImageMetadata.
+func KCFErrorDomainCGImageMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainCGImageMetadata")))
 }
 
-// KCGImageSourceTypeIdentifierHint returns the value of the CoreFoundation reference constant kCGImageSourceTypeIdentifierHint as an objc.ID.
-func KCGImageSourceTypeIdentifierHint() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceTypeIdentifierHint())
+// KCGImageSourceTypeIdentifierHint returns the value of the constant kCGImageSourceTypeIdentifierHint.
+func KCGImageSourceTypeIdentifierHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceTypeIdentifierHint")))
 }
 
-// KCGImageSourceShouldCache returns the value of the CoreFoundation reference constant kCGImageSourceShouldCache as an objc.ID.
-func KCGImageSourceShouldCache() objc.ID { return purego.CFConstant(raw.KCGImageSourceShouldCache()) }
+// KCGImageSourceShouldCache returns the value of the constant kCGImageSourceShouldCache.
+func KCGImageSourceShouldCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceShouldCache")))
+}
 
-// KCGImageSourceShouldCacheImmediately returns the value of the CoreFoundation reference constant kCGImageSourceShouldCacheImmediately as an objc.ID.
-func KCGImageSourceShouldCacheImmediately() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceShouldCacheImmediately())
+// KCGImageSourceShouldCacheImmediately returns the value of the constant kCGImageSourceShouldCacheImmediately.
+func KCGImageSourceShouldCacheImmediately() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceShouldCacheImmediately")))
 }
 
-// KCGImageSourceShouldAllowFloat returns the value of the CoreFoundation reference constant kCGImageSourceShouldAllowFloat as an objc.ID.
-func KCGImageSourceShouldAllowFloat() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceShouldAllowFloat())
+// KCGImageSourceShouldAllowFloat returns the value of the constant kCGImageSourceShouldAllowFloat.
+func KCGImageSourceShouldAllowFloat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceShouldAllowFloat")))
 }
 
-// KCGImageSourceCreateThumbnailFromImageIfAbsent returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailFromImageIfAbsent as an objc.ID.
-func KCGImageSourceCreateThumbnailFromImageIfAbsent() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceCreateThumbnailFromImageIfAbsent())
+// KCGImageSourceCreateThumbnailFromImageIfAbsent returns the value of the constant kCGImageSourceCreateThumbnailFromImageIfAbsent.
+func KCGImageSourceCreateThumbnailFromImageIfAbsent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceCreateThumbnailFromImageIfAbsent")))
 }
 
-// KCGImageSourceCreateThumbnailFromImageAlways returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailFromImageAlways as an objc.ID.
-func KCGImageSourceCreateThumbnailFromImageAlways() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceCreateThumbnailFromImageAlways())
+// KCGImageSourceCreateThumbnailFromImageAlways returns the value of the constant kCGImageSourceCreateThumbnailFromImageAlways.
+func KCGImageSourceCreateThumbnailFromImageAlways() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceCreateThumbnailFromImageAlways")))
 }
 
-// KCGImageSourceThumbnailMaxPixelSize returns the value of the CoreFoundation reference constant kCGImageSourceThumbnailMaxPixelSize as an objc.ID.
-func KCGImageSourceThumbnailMaxPixelSize() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceThumbnailMaxPixelSize())
+// KCGImageSourceThumbnailMaxPixelSize returns the value of the constant kCGImageSourceThumbnailMaxPixelSize.
+func KCGImageSourceThumbnailMaxPixelSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceThumbnailMaxPixelSize")))
 }
 
-// KCGImageSourceCreateThumbnailWithTransform returns the value of the CoreFoundation reference constant kCGImageSourceCreateThumbnailWithTransform as an objc.ID.
-func KCGImageSourceCreateThumbnailWithTransform() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceCreateThumbnailWithTransform())
+// KCGImageSourceCreateThumbnailWithTransform returns the value of the constant kCGImageSourceCreateThumbnailWithTransform.
+func KCGImageSourceCreateThumbnailWithTransform() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceCreateThumbnailWithTransform")))
 }
 
-// KCGImageSourceSubsampleFactor returns the value of the CoreFoundation reference constant kCGImageSourceSubsampleFactor as an objc.ID.
-func KCGImageSourceSubsampleFactor() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceSubsampleFactor())
+// KCGImageSourceSubsampleFactor returns the value of the constant kCGImageSourceSubsampleFactor.
+func KCGImageSourceSubsampleFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceSubsampleFactor")))
 }
 
-// KCGImageSourceDecodeRequest returns the value of the CoreFoundation reference constant kCGImageSourceDecodeRequest as an objc.ID.
-func KCGImageSourceDecodeRequest() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceDecodeRequest())
+// KCGImageSourceDecodeRequest returns the value of the constant kCGImageSourceDecodeRequest.
+func KCGImageSourceDecodeRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceDecodeRequest")))
 }
 
-// KCGImageSourceDecodeToHDR returns the value of the CoreFoundation reference constant kCGImageSourceDecodeToHDR as an objc.ID.
-func KCGImageSourceDecodeToHDR() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeToHDR()) }
+// KCGImageSourceDecodeToHDR returns the value of the constant kCGImageSourceDecodeToHDR.
+func KCGImageSourceDecodeToHDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceDecodeToHDR")))
+}
 
-// KCGImageSourceDecodeToSDR returns the value of the CoreFoundation reference constant kCGImageSourceDecodeToSDR as an objc.ID.
-func KCGImageSourceDecodeToSDR() objc.ID { return purego.CFConstant(raw.KCGImageSourceDecodeToSDR()) }
+// KCGImageSourceDecodeToSDR returns the value of the constant kCGImageSourceDecodeToSDR.
+func KCGImageSourceDecodeToSDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceDecodeToSDR")))
+}
 
-// KCGImageSourceGenerateImageSpecificLumaScaling returns the value of the CoreFoundation reference constant kCGImageSourceGenerateImageSpecificLumaScaling as an objc.ID.
-func KCGImageSourceGenerateImageSpecificLumaScaling() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceGenerateImageSpecificLumaScaling())
+// KCGImageSourceGenerateImageSpecificLumaScaling returns the value of the constant kCGImageSourceGenerateImageSpecificLumaScaling.
+func KCGImageSourceGenerateImageSpecificLumaScaling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceGenerateImageSpecificLumaScaling")))
 }
 
-// KCGImageSourceDecodeRequestOptions returns the value of the CoreFoundation reference constant kCGImageSourceDecodeRequestOptions as an objc.ID.
-func KCGImageSourceDecodeRequestOptions() objc.ID {
-	return purego.CFConstant(raw.KCGImageSourceDecodeRequestOptions())
+// KCGImageSourceDecodeRequestOptions returns the value of the constant kCGImageSourceDecodeRequestOptions.
+func KCGImageSourceDecodeRequestOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageSourceDecodeRequestOptions")))
 }
 
-// KCGComputeHDRStats returns the value of the CoreFoundation reference constant kCGComputeHDRStats as an objc.ID.
-func KCGComputeHDRStats() objc.ID { return purego.CFConstant(raw.KCGComputeHDRStats()) }
+// KCGComputeHDRStats returns the value of the constant kCGComputeHDRStats.
+func KCGComputeHDRStats() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGComputeHDRStats")))
+}
 
-// KCGImageDestinationLossyCompressionQuality returns the value of the CoreFoundation reference constant kCGImageDestinationLossyCompressionQuality as an objc.ID.
-func KCGImageDestinationLossyCompressionQuality() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationLossyCompressionQuality())
+// KCGImageDestinationLossyCompressionQuality returns the value of the constant kCGImageDestinationLossyCompressionQuality.
+func KCGImageDestinationLossyCompressionQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationLossyCompressionQuality")))
 }
 
-// KCGImageDestinationBackgroundColor returns the value of the CoreFoundation reference constant kCGImageDestinationBackgroundColor as an objc.ID.
-func KCGImageDestinationBackgroundColor() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationBackgroundColor())
+// KCGImageDestinationBackgroundColor returns the value of the constant kCGImageDestinationBackgroundColor.
+func KCGImageDestinationBackgroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationBackgroundColor")))
 }
 
-// KCGImageDestinationImageMaxPixelSize returns the value of the CoreFoundation reference constant kCGImageDestinationImageMaxPixelSize as an objc.ID.
-func KCGImageDestinationImageMaxPixelSize() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationImageMaxPixelSize())
+// KCGImageDestinationImageMaxPixelSize returns the value of the constant kCGImageDestinationImageMaxPixelSize.
+func KCGImageDestinationImageMaxPixelSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationImageMaxPixelSize")))
 }
 
-// KCGImageDestinationEmbedThumbnail returns the value of the CoreFoundation reference constant kCGImageDestinationEmbedThumbnail as an objc.ID.
-func KCGImageDestinationEmbedThumbnail() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEmbedThumbnail())
+// KCGImageDestinationEmbedThumbnail returns the value of the constant kCGImageDestinationEmbedThumbnail.
+func KCGImageDestinationEmbedThumbnail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEmbedThumbnail")))
 }
 
-// KCGImageDestinationOptimizeColorForSharing returns the value of the CoreFoundation reference constant kCGImageDestinationOptimizeColorForSharing as an objc.ID.
-func KCGImageDestinationOptimizeColorForSharing() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationOptimizeColorForSharing())
+// KCGImageDestinationOptimizeColorForSharing returns the value of the constant kCGImageDestinationOptimizeColorForSharing.
+func KCGImageDestinationOptimizeColorForSharing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationOptimizeColorForSharing")))
 }
 
-// KCGImageDestinationPreserveGainMap returns the value of the CoreFoundation reference constant kCGImageDestinationPreserveGainMap as an objc.ID.
-func KCGImageDestinationPreserveGainMap() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationPreserveGainMap())
+// KCGImageDestinationPreserveGainMap returns the value of the constant kCGImageDestinationPreserveGainMap.
+func KCGImageDestinationPreserveGainMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationPreserveGainMap")))
 }
 
-// KCGImageDestinationMetadata returns the value of the CoreFoundation reference constant kCGImageDestinationMetadata as an objc.ID.
-func KCGImageDestinationMetadata() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationMetadata())
+// KCGImageDestinationMetadata returns the value of the constant kCGImageDestinationMetadata.
+func KCGImageDestinationMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationMetadata")))
 }
 
-// KCGImageDestinationMergeMetadata returns the value of the CoreFoundation reference constant kCGImageDestinationMergeMetadata as an objc.ID.
-func KCGImageDestinationMergeMetadata() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationMergeMetadata())
+// KCGImageDestinationMergeMetadata returns the value of the constant kCGImageDestinationMergeMetadata.
+func KCGImageDestinationMergeMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationMergeMetadata")))
 }
 
-// KCGImageMetadataShouldExcludeXMP returns the value of the CoreFoundation reference constant kCGImageMetadataShouldExcludeXMP as an objc.ID.
-func KCGImageMetadataShouldExcludeXMP() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataShouldExcludeXMP())
+// KCGImageMetadataShouldExcludeXMP returns the value of the constant kCGImageMetadataShouldExcludeXMP.
+func KCGImageMetadataShouldExcludeXMP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataShouldExcludeXMP")))
 }
 
-// KCGImageMetadataShouldExcludeGPS returns the value of the CoreFoundation reference constant kCGImageMetadataShouldExcludeGPS as an objc.ID.
-func KCGImageMetadataShouldExcludeGPS() objc.ID {
-	return purego.CFConstant(raw.KCGImageMetadataShouldExcludeGPS())
+// KCGImageMetadataShouldExcludeGPS returns the value of the constant kCGImageMetadataShouldExcludeGPS.
+func KCGImageMetadataShouldExcludeGPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageMetadataShouldExcludeGPS")))
 }
 
-// KCGImageDestinationDateTime returns the value of the CoreFoundation reference constant kCGImageDestinationDateTime as an objc.ID.
-func KCGImageDestinationDateTime() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationDateTime())
+// KCGImageDestinationDateTime returns the value of the constant kCGImageDestinationDateTime.
+func KCGImageDestinationDateTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationDateTime")))
 }
 
-// KCGImageDestinationOrientation returns the value of the CoreFoundation reference constant kCGImageDestinationOrientation as an objc.ID.
-func KCGImageDestinationOrientation() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationOrientation())
+// KCGImageDestinationOrientation returns the value of the constant kCGImageDestinationOrientation.
+func KCGImageDestinationOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationOrientation")))
 }
 
-// KCGImagePropertyEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyEncoder as an objc.ID.
-func KCGImagePropertyEncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyEncoder()) }
+// KCGImagePropertyEncoder returns the value of the constant kCGImagePropertyEncoder.
+func KCGImagePropertyEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyEncoder")))
+}
 
-// KCGImagePropertyASTCEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyASTCEncoder as an objc.ID.
-func KCGImagePropertyASTCEncoder() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyASTCEncoder())
+// KCGImagePropertyASTCEncoder returns the value of the constant kCGImagePropertyASTCEncoder.
+func KCGImagePropertyASTCEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyASTCEncoder")))
 }
 
-// KCGImagePropertyPVREncoder returns the value of the CoreFoundation reference constant kCGImagePropertyPVREncoder as an objc.ID.
-func KCGImagePropertyPVREncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPVREncoder()) }
+// KCGImagePropertyPVREncoder returns the value of the constant kCGImagePropertyPVREncoder.
+func KCGImagePropertyPVREncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPVREncoder")))
+}
 
-// KCGImagePropertyBCEncoder returns the value of the CoreFoundation reference constant kCGImagePropertyBCEncoder as an objc.ID.
-func KCGImagePropertyBCEncoder() objc.ID { return purego.CFConstant(raw.KCGImagePropertyBCEncoder()) }
+// KCGImagePropertyBCEncoder returns the value of the constant kCGImagePropertyBCEncoder.
+func KCGImagePropertyBCEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyBCEncoder")))
+}
 
-// KCGImagePropertyBCFormat returns the value of the CoreFoundation reference constant kCGImagePropertyBCFormat as an objc.ID.
-func KCGImagePropertyBCFormat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyBCFormat()) }
+// KCGImagePropertyBCFormat returns the value of the constant kCGImagePropertyBCFormat.
+func KCGImagePropertyBCFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyBCFormat")))
+}
 
-// KCGImagePropertyASTCBlockSize returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize as an objc.ID.
-func KCGImagePropertyASTCBlockSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize())
+// KCGImagePropertyASTCBlockSize returns the value of the constant kCGImagePropertyASTCBlockSize.
+func KCGImagePropertyASTCBlockSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyASTCBlockSize")))
 }
 
-// KCGImagePropertyASTCBlockSize4x4 returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize4x4 as an objc.ID.
-func KCGImagePropertyASTCBlockSize4x4() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize4x4())
+// KCGImagePropertyASTCBlockSize4x4 returns the value of the constant kCGImagePropertyASTCBlockSize4x4.
+func KCGImagePropertyASTCBlockSize4x4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyASTCBlockSize4x4")))
 }
 
-// KCGImagePropertyASTCBlockSize8x8 returns the value of the CoreFoundation reference constant kCGImagePropertyASTCBlockSize8x8 as an objc.ID.
-func KCGImagePropertyASTCBlockSize8x8() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyASTCBlockSize8x8())
+// KCGImagePropertyASTCBlockSize8x8 returns the value of the constant kCGImagePropertyASTCBlockSize8x8.
+func KCGImagePropertyASTCBlockSize8x8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyASTCBlockSize8x8")))
 }
 
-// KCGImageDestinationEncodeRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeRequest as an objc.ID.
-func KCGImageDestinationEncodeRequest() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeRequest())
+// KCGImageDestinationEncodeRequest returns the value of the constant kCGImageDestinationEncodeRequest.
+func KCGImageDestinationEncodeRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeRequest")))
 }
 
-// KCGImageDestinationEncodeToSDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToSDR as an objc.ID.
-func KCGImageDestinationEncodeToSDR() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeToSDR())
+// KCGImageDestinationEncodeToSDR returns the value of the constant kCGImageDestinationEncodeToSDR.
+func KCGImageDestinationEncodeToSDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeToSDR")))
 }
 
-// KCGImageDestinationEncodeToISOHDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToISOHDR as an objc.ID.
-func KCGImageDestinationEncodeToISOHDR() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeToISOHDR())
+// KCGImageDestinationEncodeToISOHDR returns the value of the constant kCGImageDestinationEncodeToISOHDR.
+func KCGImageDestinationEncodeToISOHDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeToISOHDR")))
 }
 
-// KCGImageDestinationEncodeToISOGainmap returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeToISOGainmap as an objc.ID.
-func KCGImageDestinationEncodeToISOGainmap() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeToISOGainmap())
+// KCGImageDestinationEncodeToISOGainmap returns the value of the constant kCGImageDestinationEncodeToISOGainmap.
+func KCGImageDestinationEncodeToISOGainmap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeToISOGainmap")))
 }
 
-// KCGImageDestinationEncodeRequestOptions returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeRequestOptions as an objc.ID.
-func KCGImageDestinationEncodeRequestOptions() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeRequestOptions())
+// KCGImageDestinationEncodeRequestOptions returns the value of the constant kCGImageDestinationEncodeRequestOptions.
+func KCGImageDestinationEncodeRequestOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeRequestOptions")))
 }
 
-// KCGImageDestinationEncodeBaseIsSDR returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBaseIsSDR as an objc.ID.
-func KCGImageDestinationEncodeBaseIsSDR() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeBaseIsSDR())
+// KCGImageDestinationEncodeBaseIsSDR returns the value of the constant kCGImageDestinationEncodeBaseIsSDR.
+func KCGImageDestinationEncodeBaseIsSDR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeBaseIsSDR")))
 }
 
-// KCGImageDestinationEncodeTonemapMode returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeTonemapMode as an objc.ID.
-func KCGImageDestinationEncodeTonemapMode() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeTonemapMode())
+// KCGImageDestinationEncodeTonemapMode returns the value of the constant kCGImageDestinationEncodeTonemapMode.
+func KCGImageDestinationEncodeTonemapMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeTonemapMode")))
 }
 
-// KCGImageDestinationEncodeIsBaseImage returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeIsBaseImage as an objc.ID.
-func KCGImageDestinationEncodeIsBaseImage() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeIsBaseImage())
+// KCGImageDestinationEncodeIsBaseImage returns the value of the constant kCGImageDestinationEncodeIsBaseImage.
+func KCGImageDestinationEncodeIsBaseImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeIsBaseImage")))
 }
 
-// KCGImageDestinationEncodeBaseColorSpace returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBaseColorSpace as an objc.ID.
-func KCGImageDestinationEncodeBaseColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeBaseColorSpace())
+// KCGImageDestinationEncodeBaseColorSpace returns the value of the constant kCGImageDestinationEncodeBaseColorSpace.
+func KCGImageDestinationEncodeBaseColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeBaseColorSpace")))
 }
 
-// KCGImageDestinationEncodeBasePixelFormatRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeBasePixelFormatRequest as an objc.ID.
-func KCGImageDestinationEncodeBasePixelFormatRequest() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeBasePixelFormatRequest())
+// KCGImageDestinationEncodeBasePixelFormatRequest returns the value of the constant kCGImageDestinationEncodeBasePixelFormatRequest.
+func KCGImageDestinationEncodeBasePixelFormatRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeBasePixelFormatRequest")))
 }
 
-// KCGImageDestinationEncodeGenerateGainMapWithBaseImage returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGenerateGainMapWithBaseImage as an objc.ID.
-func KCGImageDestinationEncodeGenerateGainMapWithBaseImage() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeGenerateGainMapWithBaseImage())
+// KCGImageDestinationEncodeGenerateGainMapWithBaseImage returns the value of the constant kCGImageDestinationEncodeGenerateGainMapWithBaseImage.
+func KCGImageDestinationEncodeGenerateGainMapWithBaseImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeGenerateGainMapWithBaseImage")))
 }
 
-// KCGImageDestinationEncodeGainMapPixelFormatRequest returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGainMapPixelFormatRequest as an objc.ID.
-func KCGImageDestinationEncodeGainMapPixelFormatRequest() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeGainMapPixelFormatRequest())
+// KCGImageDestinationEncodeGainMapPixelFormatRequest returns the value of the constant kCGImageDestinationEncodeGainMapPixelFormatRequest.
+func KCGImageDestinationEncodeGainMapPixelFormatRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeGainMapPixelFormatRequest")))
 }
 
-// KCGImageDestinationEncodeGainMapSubsampleFactor returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeGainMapSubsampleFactor as an objc.ID.
-func KCGImageDestinationEncodeGainMapSubsampleFactor() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeGainMapSubsampleFactor())
+// KCGImageDestinationEncodeGainMapSubsampleFactor returns the value of the constant kCGImageDestinationEncodeGainMapSubsampleFactor.
+func KCGImageDestinationEncodeGainMapSubsampleFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeGainMapSubsampleFactor")))
 }
 
-// KCGImageDestinationEncodeAlternateColorSpace returns the value of the CoreFoundation reference constant kCGImageDestinationEncodeAlternateColorSpace as an objc.ID.
-func KCGImageDestinationEncodeAlternateColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImageDestinationEncodeAlternateColorSpace())
+// KCGImageDestinationEncodeAlternateColorSpace returns the value of the constant kCGImageDestinationEncodeAlternateColorSpace.
+func KCGImageDestinationEncodeAlternateColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageDestinationEncodeAlternateColorSpace")))
 }
 
-// KCGImagePropertyTIFFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDictionary as an objc.ID.
-func KCGImagePropertyTIFFDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFDictionary())
+// KCGImagePropertyTIFFDictionary returns the value of the constant kCGImagePropertyTIFFDictionary.
+func KCGImagePropertyTIFFDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFDictionary")))
 }
 
-// KCGImagePropertyGIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyGIFDictionary as an objc.ID.
-func KCGImagePropertyGIFDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFDictionary())
+// KCGImagePropertyGIFDictionary returns the value of the constant kCGImagePropertyGIFDictionary.
+func KCGImagePropertyGIFDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFDictionary")))
 }
 
-// KCGImagePropertyJFIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFDictionary as an objc.ID.
-func KCGImagePropertyJFIFDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFDictionary())
+// KCGImagePropertyJFIFDictionary returns the value of the constant kCGImagePropertyJFIFDictionary.
+func KCGImagePropertyJFIFDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFDictionary")))
 }
 
-// KCGImagePropertyHEIFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyHEIFDictionary as an objc.ID.
-func KCGImagePropertyHEIFDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEIFDictionary())
+// KCGImagePropertyHEIFDictionary returns the value of the constant kCGImagePropertyHEIFDictionary.
+func KCGImagePropertyHEIFDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEIFDictionary")))
 }
 
-// KCGImagePropertyHEICSDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSDictionary as an objc.ID.
-func KCGImagePropertyHEICSDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSDictionary())
+// KCGImagePropertyHEICSDictionary returns the value of the constant kCGImagePropertyHEICSDictionary.
+func KCGImagePropertyHEICSDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSDictionary")))
 }
 
-// KCGImagePropertyExifDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyExifDictionary as an objc.ID.
-func KCGImagePropertyExifDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifDictionary())
+// KCGImagePropertyExifDictionary returns the value of the constant kCGImagePropertyExifDictionary.
+func KCGImagePropertyExifDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifDictionary")))
 }
 
-// KCGImagePropertyPNGDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDictionary as an objc.ID.
-func KCGImagePropertyPNGDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGDictionary())
+// KCGImagePropertyPNGDictionary returns the value of the constant kCGImagePropertyPNGDictionary.
+func KCGImagePropertyPNGDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGDictionary")))
 }
 
-// KCGImagePropertyIPTCDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDictionary as an objc.ID.
-func KCGImagePropertyIPTCDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCDictionary())
+// KCGImagePropertyIPTCDictionary returns the value of the constant kCGImagePropertyIPTCDictionary.
+func KCGImagePropertyIPTCDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCDictionary")))
 }
 
-// KCGImagePropertyGPSDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDictionary as an objc.ID.
-func KCGImagePropertyGPSDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDictionary())
+// KCGImagePropertyGPSDictionary returns the value of the constant kCGImagePropertyGPSDictionary.
+func KCGImagePropertyGPSDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDictionary")))
 }
 
-// KCGImagePropertyRawDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyRawDictionary as an objc.ID.
-func KCGImagePropertyRawDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyRawDictionary())
+// KCGImagePropertyRawDictionary returns the value of the constant kCGImagePropertyRawDictionary.
+func KCGImagePropertyRawDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyRawDictionary")))
 }
 
-// KCGImagePropertyCIFFDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFDictionary as an objc.ID.
-func KCGImagePropertyCIFFDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFDictionary())
+// KCGImagePropertyCIFFDictionary returns the value of the constant kCGImagePropertyCIFFDictionary.
+func KCGImagePropertyCIFFDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFDictionary")))
 }
 
-// KCGImagePropertyMakerCanonDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonDictionary as an objc.ID.
-func KCGImagePropertyMakerCanonDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonDictionary())
+// KCGImagePropertyMakerCanonDictionary returns the value of the constant kCGImagePropertyMakerCanonDictionary.
+func KCGImagePropertyMakerCanonDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonDictionary")))
 }
 
-// KCGImagePropertyMakerNikonDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonDictionary as an objc.ID.
-func KCGImagePropertyMakerNikonDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonDictionary())
+// KCGImagePropertyMakerNikonDictionary returns the value of the constant kCGImagePropertyMakerNikonDictionary.
+func KCGImagePropertyMakerNikonDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonDictionary")))
 }
 
-// KCGImagePropertyMakerMinoltaDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerMinoltaDictionary as an objc.ID.
-func KCGImagePropertyMakerMinoltaDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerMinoltaDictionary())
+// KCGImagePropertyMakerMinoltaDictionary returns the value of the constant kCGImagePropertyMakerMinoltaDictionary.
+func KCGImagePropertyMakerMinoltaDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerMinoltaDictionary")))
 }
 
-// KCGImagePropertyMakerFujiDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerFujiDictionary as an objc.ID.
-func KCGImagePropertyMakerFujiDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerFujiDictionary())
+// KCGImagePropertyMakerFujiDictionary returns the value of the constant kCGImagePropertyMakerFujiDictionary.
+func KCGImagePropertyMakerFujiDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerFujiDictionary")))
 }
 
-// KCGImagePropertyMakerOlympusDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerOlympusDictionary as an objc.ID.
-func KCGImagePropertyMakerOlympusDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerOlympusDictionary())
+// KCGImagePropertyMakerOlympusDictionary returns the value of the constant kCGImagePropertyMakerOlympusDictionary.
+func KCGImagePropertyMakerOlympusDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerOlympusDictionary")))
 }
 
-// KCGImagePropertyMakerPentaxDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerPentaxDictionary as an objc.ID.
-func KCGImagePropertyMakerPentaxDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerPentaxDictionary())
+// KCGImagePropertyMakerPentaxDictionary returns the value of the constant kCGImagePropertyMakerPentaxDictionary.
+func KCGImagePropertyMakerPentaxDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerPentaxDictionary")))
 }
 
-// KCGImageProperty8BIMDictionary returns the value of the CoreFoundation reference constant kCGImageProperty8BIMDictionary as an objc.ID.
-func KCGImageProperty8BIMDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImageProperty8BIMDictionary())
+// KCGImageProperty8BIMDictionary returns the value of the constant kCGImageProperty8BIMDictionary.
+func KCGImageProperty8BIMDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageProperty8BIMDictionary")))
 }
 
-// KCGImagePropertyDNGDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDictionary as an objc.ID.
-func KCGImagePropertyDNGDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDictionary())
+// KCGImagePropertyDNGDictionary returns the value of the constant kCGImagePropertyDNGDictionary.
+func KCGImagePropertyDNGDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDictionary")))
 }
 
-// KCGImagePropertyExifAuxDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxDictionary as an objc.ID.
-func KCGImagePropertyExifAuxDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxDictionary())
+// KCGImagePropertyExifAuxDictionary returns the value of the constant kCGImagePropertyExifAuxDictionary.
+func KCGImagePropertyExifAuxDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxDictionary")))
 }
 
-// KCGImagePropertyOpenEXRDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRDictionary as an objc.ID.
-func KCGImagePropertyOpenEXRDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyOpenEXRDictionary())
+// KCGImagePropertyOpenEXRDictionary returns the value of the constant kCGImagePropertyOpenEXRDictionary.
+func KCGImagePropertyOpenEXRDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyOpenEXRDictionary")))
 }
 
-// KCGImagePropertyMakerAppleDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyMakerAppleDictionary as an objc.ID.
-func KCGImagePropertyMakerAppleDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerAppleDictionary())
+// KCGImagePropertyMakerAppleDictionary returns the value of the constant kCGImagePropertyMakerAppleDictionary.
+func KCGImagePropertyMakerAppleDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerAppleDictionary")))
 }
 
-// KCGImagePropertyFileContentsDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyFileContentsDictionary as an objc.ID.
-func KCGImagePropertyFileContentsDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyFileContentsDictionary())
+// KCGImagePropertyFileContentsDictionary returns the value of the constant kCGImagePropertyFileContentsDictionary.
+func KCGImagePropertyFileContentsDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyFileContentsDictionary")))
 }
 
-// KCGImagePropertyWebPDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyWebPDictionary as an objc.ID.
-func KCGImagePropertyWebPDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPDictionary())
+// KCGImagePropertyWebPDictionary returns the value of the constant kCGImagePropertyWebPDictionary.
+func KCGImagePropertyWebPDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPDictionary")))
 }
 
-// KCGImagePropertyAVISDictionary returns the value of the CoreFoundation reference constant kCGImagePropertyAVISDictionary as an objc.ID.
-func KCGImagePropertyAVISDictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAVISDictionary())
+// KCGImagePropertyAVISDictionary returns the value of the constant kCGImagePropertyAVISDictionary.
+func KCGImagePropertyAVISDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAVISDictionary")))
 }
 
-// KCGImagePropertyTGADictionary returns the value of the CoreFoundation reference constant kCGImagePropertyTGADictionary as an objc.ID.
-func KCGImagePropertyTGADictionary() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTGADictionary())
+// KCGImagePropertyTGADictionary returns the value of the constant kCGImagePropertyTGADictionary.
+func KCGImagePropertyTGADictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTGADictionary")))
 }
 
-// KCGImagePropertyFileSize returns the value of the CoreFoundation reference constant kCGImagePropertyFileSize as an objc.ID.
-func KCGImagePropertyFileSize() objc.ID { return purego.CFConstant(raw.KCGImagePropertyFileSize()) }
+// KCGImagePropertyFileSize returns the value of the constant kCGImagePropertyFileSize.
+func KCGImagePropertyFileSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyFileSize")))
+}
 
-// KCGImagePropertyPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyPixelHeight as an objc.ID.
-func KCGImagePropertyPixelHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPixelHeight())
+// KCGImagePropertyPixelHeight returns the value of the constant kCGImagePropertyPixelHeight.
+func KCGImagePropertyPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPixelHeight")))
 }
 
-// KCGImagePropertyPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyPixelWidth as an objc.ID.
-func KCGImagePropertyPixelWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPixelWidth()) }
+// KCGImagePropertyPixelWidth returns the value of the constant kCGImagePropertyPixelWidth.
+func KCGImagePropertyPixelWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPixelWidth")))
+}
 
-// KCGImagePropertyDPIHeight returns the value of the CoreFoundation reference constant kCGImagePropertyDPIHeight as an objc.ID.
-func KCGImagePropertyDPIHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDPIHeight()) }
+// KCGImagePropertyDPIHeight returns the value of the constant kCGImagePropertyDPIHeight.
+func KCGImagePropertyDPIHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDPIHeight")))
+}
 
-// KCGImagePropertyDPIWidth returns the value of the CoreFoundation reference constant kCGImagePropertyDPIWidth as an objc.ID.
-func KCGImagePropertyDPIWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDPIWidth()) }
+// KCGImagePropertyDPIWidth returns the value of the constant kCGImagePropertyDPIWidth.
+func KCGImagePropertyDPIWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDPIWidth")))
+}
 
-// KCGImagePropertyDepth returns the value of the CoreFoundation reference constant kCGImagePropertyDepth as an objc.ID.
-func KCGImagePropertyDepth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDepth()) }
+// KCGImagePropertyDepth returns the value of the constant kCGImagePropertyDepth.
+func KCGImagePropertyDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDepth")))
+}
 
-// KCGImagePropertyOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyOrientation as an objc.ID.
-func KCGImagePropertyOrientation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyOrientation())
+// KCGImagePropertyOrientation returns the value of the constant kCGImagePropertyOrientation.
+func KCGImagePropertyOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyOrientation")))
 }
 
-// KCGImagePropertyIsFloat returns the value of the CoreFoundation reference constant kCGImagePropertyIsFloat as an objc.ID.
-func KCGImagePropertyIsFloat() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIsFloat()) }
+// KCGImagePropertyIsFloat returns the value of the constant kCGImagePropertyIsFloat.
+func KCGImagePropertyIsFloat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIsFloat")))
+}
 
-// KCGImagePropertyIsIndexed returns the value of the CoreFoundation reference constant kCGImagePropertyIsIndexed as an objc.ID.
-func KCGImagePropertyIsIndexed() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIsIndexed()) }
+// KCGImagePropertyIsIndexed returns the value of the constant kCGImagePropertyIsIndexed.
+func KCGImagePropertyIsIndexed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIsIndexed")))
+}
 
-// KCGImagePropertyHasAlpha returns the value of the CoreFoundation reference constant kCGImagePropertyHasAlpha as an objc.ID.
-func KCGImagePropertyHasAlpha() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHasAlpha()) }
+// KCGImagePropertyHasAlpha returns the value of the constant kCGImagePropertyHasAlpha.
+func KCGImagePropertyHasAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHasAlpha")))
+}
 
-// KCGImagePropertyColorModel returns the value of the CoreFoundation reference constant kCGImagePropertyColorModel as an objc.ID.
-func KCGImagePropertyColorModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyColorModel()) }
+// KCGImagePropertyColorModel returns the value of the constant kCGImagePropertyColorModel.
+func KCGImagePropertyColorModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyColorModel")))
+}
 
-// KCGImagePropertyProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyProfileName as an objc.ID.
-func KCGImagePropertyProfileName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyProfileName())
+// KCGImagePropertyProfileName returns the value of the constant kCGImagePropertyProfileName.
+func KCGImagePropertyProfileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyProfileName")))
 }
 
-// KCGImagePropertyPrimaryImage returns the value of the CoreFoundation reference constant kCGImagePropertyPrimaryImage as an objc.ID.
-func KCGImagePropertyPrimaryImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPrimaryImage())
+// KCGImagePropertyPrimaryImage returns the value of the constant kCGImagePropertyPrimaryImage.
+func KCGImagePropertyPrimaryImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPrimaryImage")))
 }
 
-// KCGImagePropertyColorModelRGB returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelRGB as an objc.ID.
-func KCGImagePropertyColorModelRGB() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyColorModelRGB())
+// KCGImagePropertyColorModelRGB returns the value of the constant kCGImagePropertyColorModelRGB.
+func KCGImagePropertyColorModelRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyColorModelRGB")))
 }
 
-// KCGImagePropertyColorModelGray returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelGray as an objc.ID.
-func KCGImagePropertyColorModelGray() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyColorModelGray())
+// KCGImagePropertyColorModelGray returns the value of the constant kCGImagePropertyColorModelGray.
+func KCGImagePropertyColorModelGray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyColorModelGray")))
 }
 
-// KCGImagePropertyColorModelCMYK returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelCMYK as an objc.ID.
-func KCGImagePropertyColorModelCMYK() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyColorModelCMYK())
+// KCGImagePropertyColorModelCMYK returns the value of the constant kCGImagePropertyColorModelCMYK.
+func KCGImagePropertyColorModelCMYK() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyColorModelCMYK")))
 }
 
-// KCGImagePropertyColorModelLab returns the value of the CoreFoundation reference constant kCGImagePropertyColorModelLab as an objc.ID.
-func KCGImagePropertyColorModelLab() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyColorModelLab())
+// KCGImagePropertyColorModelLab returns the value of the constant kCGImagePropertyColorModelLab.
+func KCGImagePropertyColorModelLab() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyColorModelLab")))
 }
 
-// KCGImagePropertyTIFFCompression returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFCompression as an objc.ID.
-func KCGImagePropertyTIFFCompression() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFCompression())
+// KCGImagePropertyTIFFCompression returns the value of the constant kCGImagePropertyTIFFCompression.
+func KCGImagePropertyTIFFCompression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFCompression")))
 }
 
-// KCGImagePropertyTIFFPhotometricInterpretation returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFPhotometricInterpretation as an objc.ID.
-func KCGImagePropertyTIFFPhotometricInterpretation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFPhotometricInterpretation())
+// KCGImagePropertyTIFFPhotometricInterpretation returns the value of the constant kCGImagePropertyTIFFPhotometricInterpretation.
+func KCGImagePropertyTIFFPhotometricInterpretation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFPhotometricInterpretation")))
 }
 
-// KCGImagePropertyTIFFDocumentName returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDocumentName as an objc.ID.
-func KCGImagePropertyTIFFDocumentName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFDocumentName())
+// KCGImagePropertyTIFFDocumentName returns the value of the constant kCGImagePropertyTIFFDocumentName.
+func KCGImagePropertyTIFFDocumentName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFDocumentName")))
 }
 
-// KCGImagePropertyTIFFImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFImageDescription as an objc.ID.
-func KCGImagePropertyTIFFImageDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFImageDescription())
+// KCGImagePropertyTIFFImageDescription returns the value of the constant kCGImagePropertyTIFFImageDescription.
+func KCGImagePropertyTIFFImageDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFImageDescription")))
 }
 
-// KCGImagePropertyTIFFMake returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFMake as an objc.ID.
-func KCGImagePropertyTIFFMake() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFMake()) }
+// KCGImagePropertyTIFFMake returns the value of the constant kCGImagePropertyTIFFMake.
+func KCGImagePropertyTIFFMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFMake")))
+}
 
-// KCGImagePropertyTIFFModel returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFModel as an objc.ID.
-func KCGImagePropertyTIFFModel() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFModel()) }
+// KCGImagePropertyTIFFModel returns the value of the constant kCGImagePropertyTIFFModel.
+func KCGImagePropertyTIFFModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFModel")))
+}
 
-// KCGImagePropertyTIFFOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFOrientation as an objc.ID.
-func KCGImagePropertyTIFFOrientation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFOrientation())
+// KCGImagePropertyTIFFOrientation returns the value of the constant kCGImagePropertyTIFFOrientation.
+func KCGImagePropertyTIFFOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFOrientation")))
 }
 
-// KCGImagePropertyTIFFXResolution returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFXResolution as an objc.ID.
-func KCGImagePropertyTIFFXResolution() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFXResolution())
+// KCGImagePropertyTIFFXResolution returns the value of the constant kCGImagePropertyTIFFXResolution.
+func KCGImagePropertyTIFFXResolution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFXResolution")))
 }
 
-// KCGImagePropertyTIFFYResolution returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFYResolution as an objc.ID.
-func KCGImagePropertyTIFFYResolution() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFYResolution())
+// KCGImagePropertyTIFFYResolution returns the value of the constant kCGImagePropertyTIFFYResolution.
+func KCGImagePropertyTIFFYResolution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFYResolution")))
 }
 
-// KCGImagePropertyTIFFXPosition returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFXPosition as an objc.ID.
-func KCGImagePropertyTIFFXPosition() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFXPosition())
+// KCGImagePropertyTIFFXPosition returns the value of the constant kCGImagePropertyTIFFXPosition.
+func KCGImagePropertyTIFFXPosition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFXPosition")))
 }
 
-// KCGImagePropertyTIFFYPosition returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFYPosition as an objc.ID.
-func KCGImagePropertyTIFFYPosition() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFYPosition())
+// KCGImagePropertyTIFFYPosition returns the value of the constant kCGImagePropertyTIFFYPosition.
+func KCGImagePropertyTIFFYPosition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFYPosition")))
 }
 
-// KCGImagePropertyTIFFResolutionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFResolutionUnit as an objc.ID.
-func KCGImagePropertyTIFFResolutionUnit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFResolutionUnit())
+// KCGImagePropertyTIFFResolutionUnit returns the value of the constant kCGImagePropertyTIFFResolutionUnit.
+func KCGImagePropertyTIFFResolutionUnit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFResolutionUnit")))
 }
 
-// KCGImagePropertyTIFFSoftware returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFSoftware as an objc.ID.
-func KCGImagePropertyTIFFSoftware() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFSoftware())
+// KCGImagePropertyTIFFSoftware returns the value of the constant kCGImagePropertyTIFFSoftware.
+func KCGImagePropertyTIFFSoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFSoftware")))
 }
 
-// KCGImagePropertyTIFFTransferFunction returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTransferFunction as an objc.ID.
-func KCGImagePropertyTIFFTransferFunction() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFTransferFunction())
+// KCGImagePropertyTIFFTransferFunction returns the value of the constant kCGImagePropertyTIFFTransferFunction.
+func KCGImagePropertyTIFFTransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFTransferFunction")))
 }
 
-// KCGImagePropertyTIFFDateTime returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFDateTime as an objc.ID.
-func KCGImagePropertyTIFFDateTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFDateTime())
+// KCGImagePropertyTIFFDateTime returns the value of the constant kCGImagePropertyTIFFDateTime.
+func KCGImagePropertyTIFFDateTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFDateTime")))
 }
 
-// KCGImagePropertyTIFFArtist returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFArtist as an objc.ID.
-func KCGImagePropertyTIFFArtist() objc.ID { return purego.CFConstant(raw.KCGImagePropertyTIFFArtist()) }
+// KCGImagePropertyTIFFArtist returns the value of the constant kCGImagePropertyTIFFArtist.
+func KCGImagePropertyTIFFArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFArtist")))
+}
 
-// KCGImagePropertyTIFFHostComputer returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFHostComputer as an objc.ID.
-func KCGImagePropertyTIFFHostComputer() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFHostComputer())
+// KCGImagePropertyTIFFHostComputer returns the value of the constant kCGImagePropertyTIFFHostComputer.
+func KCGImagePropertyTIFFHostComputer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFHostComputer")))
 }
 
-// KCGImagePropertyTIFFCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFCopyright as an objc.ID.
-func KCGImagePropertyTIFFCopyright() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFCopyright())
+// KCGImagePropertyTIFFCopyright returns the value of the constant kCGImagePropertyTIFFCopyright.
+func KCGImagePropertyTIFFCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFCopyright")))
 }
 
-// KCGImagePropertyTIFFWhitePoint returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFWhitePoint as an objc.ID.
-func KCGImagePropertyTIFFWhitePoint() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFWhitePoint())
+// KCGImagePropertyTIFFWhitePoint returns the value of the constant kCGImagePropertyTIFFWhitePoint.
+func KCGImagePropertyTIFFWhitePoint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFWhitePoint")))
 }
 
-// KCGImagePropertyTIFFPrimaryChromaticities returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFPrimaryChromaticities as an objc.ID.
-func KCGImagePropertyTIFFPrimaryChromaticities() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFPrimaryChromaticities())
+// KCGImagePropertyTIFFPrimaryChromaticities returns the value of the constant kCGImagePropertyTIFFPrimaryChromaticities.
+func KCGImagePropertyTIFFPrimaryChromaticities() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFPrimaryChromaticities")))
 }
 
-// KCGImagePropertyTIFFTileWidth returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTileWidth as an objc.ID.
-func KCGImagePropertyTIFFTileWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFTileWidth())
+// KCGImagePropertyTIFFTileWidth returns the value of the constant kCGImagePropertyTIFFTileWidth.
+func KCGImagePropertyTIFFTileWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFTileWidth")))
 }
 
-// KCGImagePropertyTIFFTileLength returns the value of the CoreFoundation reference constant kCGImagePropertyTIFFTileLength as an objc.ID.
-func KCGImagePropertyTIFFTileLength() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTIFFTileLength())
+// KCGImagePropertyTIFFTileLength returns the value of the constant kCGImagePropertyTIFFTileLength.
+func KCGImagePropertyTIFFTileLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTIFFTileLength")))
 }
 
-// KCGImagePropertyJFIFVersion returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFVersion as an objc.ID.
-func KCGImagePropertyJFIFVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFVersion())
+// KCGImagePropertyJFIFVersion returns the value of the constant kCGImagePropertyJFIFVersion.
+func KCGImagePropertyJFIFVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFVersion")))
 }
 
-// KCGImagePropertyJFIFXDensity returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFXDensity as an objc.ID.
-func KCGImagePropertyJFIFXDensity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFXDensity())
+// KCGImagePropertyJFIFXDensity returns the value of the constant kCGImagePropertyJFIFXDensity.
+func KCGImagePropertyJFIFXDensity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFXDensity")))
 }
 
-// KCGImagePropertyJFIFYDensity returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFYDensity as an objc.ID.
-func KCGImagePropertyJFIFYDensity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFYDensity())
+// KCGImagePropertyJFIFYDensity returns the value of the constant kCGImagePropertyJFIFYDensity.
+func KCGImagePropertyJFIFYDensity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFYDensity")))
 }
 
-// KCGImagePropertyJFIFDensityUnit returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFDensityUnit as an objc.ID.
-func KCGImagePropertyJFIFDensityUnit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFDensityUnit())
+// KCGImagePropertyJFIFDensityUnit returns the value of the constant kCGImagePropertyJFIFDensityUnit.
+func KCGImagePropertyJFIFDensityUnit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFDensityUnit")))
 }
 
-// KCGImagePropertyJFIFIsProgressive returns the value of the CoreFoundation reference constant kCGImagePropertyJFIFIsProgressive as an objc.ID.
-func KCGImagePropertyJFIFIsProgressive() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyJFIFIsProgressive())
+// KCGImagePropertyJFIFIsProgressive returns the value of the constant kCGImagePropertyJFIFIsProgressive.
+func KCGImagePropertyJFIFIsProgressive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyJFIFIsProgressive")))
 }
 
-// KCGImagePropertyHEICSLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSLoopCount as an objc.ID.
-func KCGImagePropertyHEICSLoopCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSLoopCount())
+// KCGImagePropertyHEICSLoopCount returns the value of the constant kCGImagePropertyHEICSLoopCount.
+func KCGImagePropertyHEICSLoopCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSLoopCount")))
 }
 
-// KCGImagePropertyHEICSDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSDelayTime as an objc.ID.
-func KCGImagePropertyHEICSDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSDelayTime())
+// KCGImagePropertyHEICSDelayTime returns the value of the constant kCGImagePropertyHEICSDelayTime.
+func KCGImagePropertyHEICSDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSDelayTime")))
 }
 
-// KCGImagePropertyHEICSUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSUnclampedDelayTime as an objc.ID.
-func KCGImagePropertyHEICSUnclampedDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSUnclampedDelayTime())
+// KCGImagePropertyHEICSUnclampedDelayTime returns the value of the constant kCGImagePropertyHEICSUnclampedDelayTime.
+func KCGImagePropertyHEICSUnclampedDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSUnclampedDelayTime")))
 }
 
-// KCGImagePropertyHEICSCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSCanvasPixelWidth as an objc.ID.
-func KCGImagePropertyHEICSCanvasPixelWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSCanvasPixelWidth())
+// KCGImagePropertyHEICSCanvasPixelWidth returns the value of the constant kCGImagePropertyHEICSCanvasPixelWidth.
+func KCGImagePropertyHEICSCanvasPixelWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSCanvasPixelWidth")))
 }
 
-// KCGImagePropertyHEICSCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSCanvasPixelHeight as an objc.ID.
-func KCGImagePropertyHEICSCanvasPixelHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSCanvasPixelHeight())
+// KCGImagePropertyHEICSCanvasPixelHeight returns the value of the constant kCGImagePropertyHEICSCanvasPixelHeight.
+func KCGImagePropertyHEICSCanvasPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSCanvasPixelHeight")))
 }
 
-// KCGImagePropertyHEICSFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyHEICSFrameInfoArray as an objc.ID.
-func KCGImagePropertyHEICSFrameInfoArray() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyHEICSFrameInfoArray())
+// KCGImagePropertyHEICSFrameInfoArray returns the value of the constant kCGImagePropertyHEICSFrameInfoArray.
+func KCGImagePropertyHEICSFrameInfoArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHEICSFrameInfoArray")))
 }
 
-// KCGImagePropertyExifExposureTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureTime as an objc.ID.
-func KCGImagePropertyExifExposureTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifExposureTime())
+// KCGImagePropertyExifExposureTime returns the value of the constant kCGImagePropertyExifExposureTime.
+func KCGImagePropertyExifExposureTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifExposureTime")))
 }
 
-// KCGImagePropertyExifFNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifFNumber as an objc.ID.
-func KCGImagePropertyExifFNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFNumber())
+// KCGImagePropertyExifFNumber returns the value of the constant kCGImagePropertyExifFNumber.
+func KCGImagePropertyExifFNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFNumber")))
 }
 
-// KCGImagePropertyExifExposureProgram returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureProgram as an objc.ID.
-func KCGImagePropertyExifExposureProgram() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifExposureProgram())
+// KCGImagePropertyExifExposureProgram returns the value of the constant kCGImagePropertyExifExposureProgram.
+func KCGImagePropertyExifExposureProgram() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifExposureProgram")))
 }
 
-// KCGImagePropertyExifSpectralSensitivity returns the value of the CoreFoundation reference constant kCGImagePropertyExifSpectralSensitivity as an objc.ID.
-func KCGImagePropertyExifSpectralSensitivity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSpectralSensitivity())
+// KCGImagePropertyExifSpectralSensitivity returns the value of the constant kCGImagePropertyExifSpectralSensitivity.
+func KCGImagePropertyExifSpectralSensitivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSpectralSensitivity")))
 }
 
-// KCGImagePropertyExifISOSpeedRatings returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedRatings as an objc.ID.
-func KCGImagePropertyExifISOSpeedRatings() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedRatings())
+// KCGImagePropertyExifISOSpeedRatings returns the value of the constant kCGImagePropertyExifISOSpeedRatings.
+func KCGImagePropertyExifISOSpeedRatings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifISOSpeedRatings")))
 }
 
-// KCGImagePropertyExifOECF returns the value of the CoreFoundation reference constant kCGImagePropertyExifOECF as an objc.ID.
-func KCGImagePropertyExifOECF() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifOECF()) }
+// KCGImagePropertyExifOECF returns the value of the constant kCGImagePropertyExifOECF.
+func KCGImagePropertyExifOECF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifOECF")))
+}
 
-// KCGImagePropertyExifSensitivityType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSensitivityType as an objc.ID.
-func KCGImagePropertyExifSensitivityType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSensitivityType())
+// KCGImagePropertyExifSensitivityType returns the value of the constant kCGImagePropertyExifSensitivityType.
+func KCGImagePropertyExifSensitivityType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSensitivityType")))
 }
 
-// KCGImagePropertyExifStandardOutputSensitivity returns the value of the CoreFoundation reference constant kCGImagePropertyExifStandardOutputSensitivity as an objc.ID.
-func KCGImagePropertyExifStandardOutputSensitivity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifStandardOutputSensitivity())
+// KCGImagePropertyExifStandardOutputSensitivity returns the value of the constant kCGImagePropertyExifStandardOutputSensitivity.
+func KCGImagePropertyExifStandardOutputSensitivity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifStandardOutputSensitivity")))
 }
 
-// KCGImagePropertyExifRecommendedExposureIndex returns the value of the CoreFoundation reference constant kCGImagePropertyExifRecommendedExposureIndex as an objc.ID.
-func KCGImagePropertyExifRecommendedExposureIndex() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifRecommendedExposureIndex())
+// KCGImagePropertyExifRecommendedExposureIndex returns the value of the constant kCGImagePropertyExifRecommendedExposureIndex.
+func KCGImagePropertyExifRecommendedExposureIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifRecommendedExposureIndex")))
 }
 
-// KCGImagePropertyExifISOSpeed returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeed as an objc.ID.
-func KCGImagePropertyExifISOSpeed() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifISOSpeed())
+// KCGImagePropertyExifISOSpeed returns the value of the constant kCGImagePropertyExifISOSpeed.
+func KCGImagePropertyExifISOSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifISOSpeed")))
 }
 
-// KCGImagePropertyExifISOSpeedLatitudeyyy returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedLatitudeyyy as an objc.ID.
-func KCGImagePropertyExifISOSpeedLatitudeyyy() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedLatitudeyyy())
+// KCGImagePropertyExifISOSpeedLatitudeyyy returns the value of the constant kCGImagePropertyExifISOSpeedLatitudeyyy.
+func KCGImagePropertyExifISOSpeedLatitudeyyy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifISOSpeedLatitudeyyy")))
 }
 
-// KCGImagePropertyExifISOSpeedLatitudezzz returns the value of the CoreFoundation reference constant kCGImagePropertyExifISOSpeedLatitudezzz as an objc.ID.
-func KCGImagePropertyExifISOSpeedLatitudezzz() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifISOSpeedLatitudezzz())
+// KCGImagePropertyExifISOSpeedLatitudezzz returns the value of the constant kCGImagePropertyExifISOSpeedLatitudezzz.
+func KCGImagePropertyExifISOSpeedLatitudezzz() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifISOSpeedLatitudezzz")))
 }
 
-// KCGImagePropertyExifVersion returns the value of the CoreFoundation reference constant kCGImagePropertyExifVersion as an objc.ID.
-func KCGImagePropertyExifVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifVersion())
+// KCGImagePropertyExifVersion returns the value of the constant kCGImagePropertyExifVersion.
+func KCGImagePropertyExifVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifVersion")))
 }
 
-// KCGImagePropertyExifDateTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifDateTimeOriginal as an objc.ID.
-func KCGImagePropertyExifDateTimeOriginal() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifDateTimeOriginal())
+// KCGImagePropertyExifDateTimeOriginal returns the value of the constant kCGImagePropertyExifDateTimeOriginal.
+func KCGImagePropertyExifDateTimeOriginal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifDateTimeOriginal")))
 }
 
-// KCGImagePropertyExifDateTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifDateTimeDigitized as an objc.ID.
-func KCGImagePropertyExifDateTimeDigitized() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifDateTimeDigitized())
+// KCGImagePropertyExifDateTimeDigitized returns the value of the constant kCGImagePropertyExifDateTimeDigitized.
+func KCGImagePropertyExifDateTimeDigitized() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifDateTimeDigitized")))
 }
 
-// KCGImagePropertyExifOffsetTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTime as an objc.ID.
-func KCGImagePropertyExifOffsetTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifOffsetTime())
+// KCGImagePropertyExifOffsetTime returns the value of the constant kCGImagePropertyExifOffsetTime.
+func KCGImagePropertyExifOffsetTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifOffsetTime")))
 }
 
-// KCGImagePropertyExifOffsetTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTimeOriginal as an objc.ID.
-func KCGImagePropertyExifOffsetTimeOriginal() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifOffsetTimeOriginal())
+// KCGImagePropertyExifOffsetTimeOriginal returns the value of the constant kCGImagePropertyExifOffsetTimeOriginal.
+func KCGImagePropertyExifOffsetTimeOriginal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifOffsetTimeOriginal")))
 }
 
-// KCGImagePropertyExifOffsetTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifOffsetTimeDigitized as an objc.ID.
-func KCGImagePropertyExifOffsetTimeDigitized() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifOffsetTimeDigitized())
+// KCGImagePropertyExifOffsetTimeDigitized returns the value of the constant kCGImagePropertyExifOffsetTimeDigitized.
+func KCGImagePropertyExifOffsetTimeDigitized() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifOffsetTimeDigitized")))
 }
 
-// KCGImagePropertyExifComponentsConfiguration returns the value of the CoreFoundation reference constant kCGImagePropertyExifComponentsConfiguration as an objc.ID.
-func KCGImagePropertyExifComponentsConfiguration() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifComponentsConfiguration())
+// KCGImagePropertyExifComponentsConfiguration returns the value of the constant kCGImagePropertyExifComponentsConfiguration.
+func KCGImagePropertyExifComponentsConfiguration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifComponentsConfiguration")))
 }
 
-// KCGImagePropertyExifCompressedBitsPerPixel returns the value of the CoreFoundation reference constant kCGImagePropertyExifCompressedBitsPerPixel as an objc.ID.
-func KCGImagePropertyExifCompressedBitsPerPixel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifCompressedBitsPerPixel())
+// KCGImagePropertyExifCompressedBitsPerPixel returns the value of the constant kCGImagePropertyExifCompressedBitsPerPixel.
+func KCGImagePropertyExifCompressedBitsPerPixel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifCompressedBitsPerPixel")))
 }
 
-// KCGImagePropertyExifShutterSpeedValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifShutterSpeedValue as an objc.ID.
-func KCGImagePropertyExifShutterSpeedValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifShutterSpeedValue())
+// KCGImagePropertyExifShutterSpeedValue returns the value of the constant kCGImagePropertyExifShutterSpeedValue.
+func KCGImagePropertyExifShutterSpeedValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifShutterSpeedValue")))
 }
 
-// KCGImagePropertyExifApertureValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifApertureValue as an objc.ID.
-func KCGImagePropertyExifApertureValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifApertureValue())
+// KCGImagePropertyExifApertureValue returns the value of the constant kCGImagePropertyExifApertureValue.
+func KCGImagePropertyExifApertureValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifApertureValue")))
 }
 
-// KCGImagePropertyExifBrightnessValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifBrightnessValue as an objc.ID.
-func KCGImagePropertyExifBrightnessValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifBrightnessValue())
+// KCGImagePropertyExifBrightnessValue returns the value of the constant kCGImagePropertyExifBrightnessValue.
+func KCGImagePropertyExifBrightnessValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifBrightnessValue")))
 }
 
-// KCGImagePropertyExifExposureBiasValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureBiasValue as an objc.ID.
-func KCGImagePropertyExifExposureBiasValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifExposureBiasValue())
+// KCGImagePropertyExifExposureBiasValue returns the value of the constant kCGImagePropertyExifExposureBiasValue.
+func KCGImagePropertyExifExposureBiasValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifExposureBiasValue")))
 }
 
-// KCGImagePropertyExifMaxApertureValue returns the value of the CoreFoundation reference constant kCGImagePropertyExifMaxApertureValue as an objc.ID.
-func KCGImagePropertyExifMaxApertureValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifMaxApertureValue())
+// KCGImagePropertyExifMaxApertureValue returns the value of the constant kCGImagePropertyExifMaxApertureValue.
+func KCGImagePropertyExifMaxApertureValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifMaxApertureValue")))
 }
 
-// KCGImagePropertyExifSubjectDistance returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectDistance as an objc.ID.
-func KCGImagePropertyExifSubjectDistance() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubjectDistance())
+// KCGImagePropertyExifSubjectDistance returns the value of the constant kCGImagePropertyExifSubjectDistance.
+func KCGImagePropertyExifSubjectDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubjectDistance")))
 }
 
-// KCGImagePropertyExifMeteringMode returns the value of the CoreFoundation reference constant kCGImagePropertyExifMeteringMode as an objc.ID.
-func KCGImagePropertyExifMeteringMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifMeteringMode())
+// KCGImagePropertyExifMeteringMode returns the value of the constant kCGImagePropertyExifMeteringMode.
+func KCGImagePropertyExifMeteringMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifMeteringMode")))
 }
 
-// KCGImagePropertyExifLightSource returns the value of the CoreFoundation reference constant kCGImagePropertyExifLightSource as an objc.ID.
-func KCGImagePropertyExifLightSource() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifLightSource())
+// KCGImagePropertyExifLightSource returns the value of the constant kCGImagePropertyExifLightSource.
+func KCGImagePropertyExifLightSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifLightSource")))
 }
 
-// KCGImagePropertyExifFlash returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlash as an objc.ID.
-func KCGImagePropertyExifFlash() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifFlash()) }
+// KCGImagePropertyExifFlash returns the value of the constant kCGImagePropertyExifFlash.
+func KCGImagePropertyExifFlash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFlash")))
+}
 
-// KCGImagePropertyExifFocalLength returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalLength as an objc.ID.
-func KCGImagePropertyExifFocalLength() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFocalLength())
+// KCGImagePropertyExifFocalLength returns the value of the constant kCGImagePropertyExifFocalLength.
+func KCGImagePropertyExifFocalLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFocalLength")))
 }
 
-// KCGImagePropertyExifSubjectArea returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectArea as an objc.ID.
-func KCGImagePropertyExifSubjectArea() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubjectArea())
+// KCGImagePropertyExifSubjectArea returns the value of the constant kCGImagePropertyExifSubjectArea.
+func KCGImagePropertyExifSubjectArea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubjectArea")))
 }
 
-// KCGImagePropertyExifMakerNote returns the value of the CoreFoundation reference constant kCGImagePropertyExifMakerNote as an objc.ID.
-func KCGImagePropertyExifMakerNote() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifMakerNote())
+// KCGImagePropertyExifMakerNote returns the value of the constant kCGImagePropertyExifMakerNote.
+func KCGImagePropertyExifMakerNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifMakerNote")))
 }
 
-// KCGImagePropertyExifUserComment returns the value of the CoreFoundation reference constant kCGImagePropertyExifUserComment as an objc.ID.
-func KCGImagePropertyExifUserComment() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifUserComment())
+// KCGImagePropertyExifUserComment returns the value of the constant kCGImagePropertyExifUserComment.
+func KCGImagePropertyExifUserComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifUserComment")))
 }
 
-// KCGImagePropertyExifSubsecTime returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTime as an objc.ID.
-func KCGImagePropertyExifSubsecTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubsecTime())
+// KCGImagePropertyExifSubsecTime returns the value of the constant kCGImagePropertyExifSubsecTime.
+func KCGImagePropertyExifSubsecTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubsecTime")))
 }
 
-// KCGImagePropertyExifSubsecTimeOriginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeOriginal as an objc.ID.
-func KCGImagePropertyExifSubsecTimeOriginal() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeOriginal())
+// KCGImagePropertyExifSubsecTimeOriginal returns the value of the constant kCGImagePropertyExifSubsecTimeOriginal.
+func KCGImagePropertyExifSubsecTimeOriginal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubsecTimeOriginal")))
 }
 
-// KCGImagePropertyExifSubsecTimeDigitized returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeDigitized as an objc.ID.
-func KCGImagePropertyExifSubsecTimeDigitized() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeDigitized())
+// KCGImagePropertyExifSubsecTimeDigitized returns the value of the constant kCGImagePropertyExifSubsecTimeDigitized.
+func KCGImagePropertyExifSubsecTimeDigitized() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubsecTimeDigitized")))
 }
 
-// KCGImagePropertyExifFlashPixVersion returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlashPixVersion as an objc.ID.
-func KCGImagePropertyExifFlashPixVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFlashPixVersion())
+// KCGImagePropertyExifFlashPixVersion returns the value of the constant kCGImagePropertyExifFlashPixVersion.
+func KCGImagePropertyExifFlashPixVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFlashPixVersion")))
 }
 
-// KCGImagePropertyExifColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyExifColorSpace as an objc.ID.
-func KCGImagePropertyExifColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifColorSpace())
+// KCGImagePropertyExifColorSpace returns the value of the constant kCGImagePropertyExifColorSpace.
+func KCGImagePropertyExifColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifColorSpace")))
 }
 
-// KCGImagePropertyExifPixelXDimension returns the value of the CoreFoundation reference constant kCGImagePropertyExifPixelXDimension as an objc.ID.
-func KCGImagePropertyExifPixelXDimension() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifPixelXDimension())
+// KCGImagePropertyExifPixelXDimension returns the value of the constant kCGImagePropertyExifPixelXDimension.
+func KCGImagePropertyExifPixelXDimension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifPixelXDimension")))
 }
 
-// KCGImagePropertyExifPixelYDimension returns the value of the CoreFoundation reference constant kCGImagePropertyExifPixelYDimension as an objc.ID.
-func KCGImagePropertyExifPixelYDimension() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifPixelYDimension())
+// KCGImagePropertyExifPixelYDimension returns the value of the constant kCGImagePropertyExifPixelYDimension.
+func KCGImagePropertyExifPixelYDimension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifPixelYDimension")))
 }
 
-// KCGImagePropertyExifRelatedSoundFile returns the value of the CoreFoundation reference constant kCGImagePropertyExifRelatedSoundFile as an objc.ID.
-func KCGImagePropertyExifRelatedSoundFile() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifRelatedSoundFile())
+// KCGImagePropertyExifRelatedSoundFile returns the value of the constant kCGImagePropertyExifRelatedSoundFile.
+func KCGImagePropertyExifRelatedSoundFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifRelatedSoundFile")))
 }
 
-// KCGImagePropertyExifFlashEnergy returns the value of the CoreFoundation reference constant kCGImagePropertyExifFlashEnergy as an objc.ID.
-func KCGImagePropertyExifFlashEnergy() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFlashEnergy())
+// KCGImagePropertyExifFlashEnergy returns the value of the constant kCGImagePropertyExifFlashEnergy.
+func KCGImagePropertyExifFlashEnergy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFlashEnergy")))
 }
 
-// KCGImagePropertyExifSpatialFrequencyResponse returns the value of the CoreFoundation reference constant kCGImagePropertyExifSpatialFrequencyResponse as an objc.ID.
-func KCGImagePropertyExifSpatialFrequencyResponse() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSpatialFrequencyResponse())
+// KCGImagePropertyExifSpatialFrequencyResponse returns the value of the constant kCGImagePropertyExifSpatialFrequencyResponse.
+func KCGImagePropertyExifSpatialFrequencyResponse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSpatialFrequencyResponse")))
 }
 
-// KCGImagePropertyExifFocalPlaneXResolution returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneXResolution as an objc.ID.
-func KCGImagePropertyExifFocalPlaneXResolution() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneXResolution())
+// KCGImagePropertyExifFocalPlaneXResolution returns the value of the constant kCGImagePropertyExifFocalPlaneXResolution.
+func KCGImagePropertyExifFocalPlaneXResolution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFocalPlaneXResolution")))
 }
 
-// KCGImagePropertyExifFocalPlaneYResolution returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneYResolution as an objc.ID.
-func KCGImagePropertyExifFocalPlaneYResolution() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneYResolution())
+// KCGImagePropertyExifFocalPlaneYResolution returns the value of the constant kCGImagePropertyExifFocalPlaneYResolution.
+func KCGImagePropertyExifFocalPlaneYResolution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFocalPlaneYResolution")))
 }
 
-// KCGImagePropertyExifFocalPlaneResolutionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalPlaneResolutionUnit as an objc.ID.
-func KCGImagePropertyExifFocalPlaneResolutionUnit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFocalPlaneResolutionUnit())
+// KCGImagePropertyExifFocalPlaneResolutionUnit returns the value of the constant kCGImagePropertyExifFocalPlaneResolutionUnit.
+func KCGImagePropertyExifFocalPlaneResolutionUnit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFocalPlaneResolutionUnit")))
 }
 
-// KCGImagePropertyExifSubjectLocation returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectLocation as an objc.ID.
-func KCGImagePropertyExifSubjectLocation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubjectLocation())
+// KCGImagePropertyExifSubjectLocation returns the value of the constant kCGImagePropertyExifSubjectLocation.
+func KCGImagePropertyExifSubjectLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubjectLocation")))
 }
 
-// KCGImagePropertyExifExposureIndex returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureIndex as an objc.ID.
-func KCGImagePropertyExifExposureIndex() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifExposureIndex())
+// KCGImagePropertyExifExposureIndex returns the value of the constant kCGImagePropertyExifExposureIndex.
+func KCGImagePropertyExifExposureIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifExposureIndex")))
 }
 
-// KCGImagePropertyExifSensingMethod returns the value of the CoreFoundation reference constant kCGImagePropertyExifSensingMethod as an objc.ID.
-func KCGImagePropertyExifSensingMethod() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSensingMethod())
+// KCGImagePropertyExifSensingMethod returns the value of the constant kCGImagePropertyExifSensingMethod.
+func KCGImagePropertyExifSensingMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSensingMethod")))
 }
 
-// KCGImagePropertyExifFileSource returns the value of the CoreFoundation reference constant kCGImagePropertyExifFileSource as an objc.ID.
-func KCGImagePropertyExifFileSource() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFileSource())
+// KCGImagePropertyExifFileSource returns the value of the constant kCGImagePropertyExifFileSource.
+func KCGImagePropertyExifFileSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFileSource")))
 }
 
-// KCGImagePropertyExifSceneType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSceneType as an objc.ID.
-func KCGImagePropertyExifSceneType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSceneType())
+// KCGImagePropertyExifSceneType returns the value of the constant kCGImagePropertyExifSceneType.
+func KCGImagePropertyExifSceneType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSceneType")))
 }
 
-// KCGImagePropertyExifCFAPattern returns the value of the CoreFoundation reference constant kCGImagePropertyExifCFAPattern as an objc.ID.
-func KCGImagePropertyExifCFAPattern() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifCFAPattern())
+// KCGImagePropertyExifCFAPattern returns the value of the constant kCGImagePropertyExifCFAPattern.
+func KCGImagePropertyExifCFAPattern() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifCFAPattern")))
 }
 
-// KCGImagePropertyExifCustomRendered returns the value of the CoreFoundation reference constant kCGImagePropertyExifCustomRendered as an objc.ID.
-func KCGImagePropertyExifCustomRendered() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifCustomRendered())
+// KCGImagePropertyExifCustomRendered returns the value of the constant kCGImagePropertyExifCustomRendered.
+func KCGImagePropertyExifCustomRendered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifCustomRendered")))
 }
 
-// KCGImagePropertyExifExposureMode returns the value of the CoreFoundation reference constant kCGImagePropertyExifExposureMode as an objc.ID.
-func KCGImagePropertyExifExposureMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifExposureMode())
+// KCGImagePropertyExifExposureMode returns the value of the constant kCGImagePropertyExifExposureMode.
+func KCGImagePropertyExifExposureMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifExposureMode")))
 }
 
-// KCGImagePropertyExifWhiteBalance returns the value of the CoreFoundation reference constant kCGImagePropertyExifWhiteBalance as an objc.ID.
-func KCGImagePropertyExifWhiteBalance() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifWhiteBalance())
+// KCGImagePropertyExifWhiteBalance returns the value of the constant kCGImagePropertyExifWhiteBalance.
+func KCGImagePropertyExifWhiteBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifWhiteBalance")))
 }
 
-// KCGImagePropertyExifDigitalZoomRatio returns the value of the CoreFoundation reference constant kCGImagePropertyExifDigitalZoomRatio as an objc.ID.
-func KCGImagePropertyExifDigitalZoomRatio() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifDigitalZoomRatio())
+// KCGImagePropertyExifDigitalZoomRatio returns the value of the constant kCGImagePropertyExifDigitalZoomRatio.
+func KCGImagePropertyExifDigitalZoomRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifDigitalZoomRatio")))
 }
 
-// KCGImagePropertyExifFocalLenIn35mmFilm returns the value of the CoreFoundation reference constant kCGImagePropertyExifFocalLenIn35mmFilm as an objc.ID.
-func KCGImagePropertyExifFocalLenIn35mmFilm() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifFocalLenIn35mmFilm())
+// KCGImagePropertyExifFocalLenIn35mmFilm returns the value of the constant kCGImagePropertyExifFocalLenIn35mmFilm.
+func KCGImagePropertyExifFocalLenIn35mmFilm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifFocalLenIn35mmFilm")))
 }
 
-// KCGImagePropertyExifSceneCaptureType returns the value of the CoreFoundation reference constant kCGImagePropertyExifSceneCaptureType as an objc.ID.
-func KCGImagePropertyExifSceneCaptureType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSceneCaptureType())
+// KCGImagePropertyExifSceneCaptureType returns the value of the constant kCGImagePropertyExifSceneCaptureType.
+func KCGImagePropertyExifSceneCaptureType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSceneCaptureType")))
 }
 
-// KCGImagePropertyExifGainControl returns the value of the CoreFoundation reference constant kCGImagePropertyExifGainControl as an objc.ID.
-func KCGImagePropertyExifGainControl() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifGainControl())
+// KCGImagePropertyExifGainControl returns the value of the constant kCGImagePropertyExifGainControl.
+func KCGImagePropertyExifGainControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifGainControl")))
 }
 
-// KCGImagePropertyExifContrast returns the value of the CoreFoundation reference constant kCGImagePropertyExifContrast as an objc.ID.
-func KCGImagePropertyExifContrast() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifContrast())
+// KCGImagePropertyExifContrast returns the value of the constant kCGImagePropertyExifContrast.
+func KCGImagePropertyExifContrast() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifContrast")))
 }
 
-// KCGImagePropertyExifSaturation returns the value of the CoreFoundation reference constant kCGImagePropertyExifSaturation as an objc.ID.
-func KCGImagePropertyExifSaturation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSaturation())
+// KCGImagePropertyExifSaturation returns the value of the constant kCGImagePropertyExifSaturation.
+func KCGImagePropertyExifSaturation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSaturation")))
 }
 
-// KCGImagePropertyExifSharpness returns the value of the CoreFoundation reference constant kCGImagePropertyExifSharpness as an objc.ID.
-func KCGImagePropertyExifSharpness() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSharpness())
+// KCGImagePropertyExifSharpness returns the value of the constant kCGImagePropertyExifSharpness.
+func KCGImagePropertyExifSharpness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSharpness")))
 }
 
-// KCGImagePropertyExifDeviceSettingDescription returns the value of the CoreFoundation reference constant kCGImagePropertyExifDeviceSettingDescription as an objc.ID.
-func KCGImagePropertyExifDeviceSettingDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifDeviceSettingDescription())
+// KCGImagePropertyExifDeviceSettingDescription returns the value of the constant kCGImagePropertyExifDeviceSettingDescription.
+func KCGImagePropertyExifDeviceSettingDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifDeviceSettingDescription")))
 }
 
-// KCGImagePropertyExifSubjectDistRange returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubjectDistRange as an objc.ID.
-func KCGImagePropertyExifSubjectDistRange() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubjectDistRange())
+// KCGImagePropertyExifSubjectDistRange returns the value of the constant kCGImagePropertyExifSubjectDistRange.
+func KCGImagePropertyExifSubjectDistRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubjectDistRange")))
 }
 
-// KCGImagePropertyExifImageUniqueID returns the value of the CoreFoundation reference constant kCGImagePropertyExifImageUniqueID as an objc.ID.
-func KCGImagePropertyExifImageUniqueID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifImageUniqueID())
+// KCGImagePropertyExifImageUniqueID returns the value of the constant kCGImagePropertyExifImageUniqueID.
+func KCGImagePropertyExifImageUniqueID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifImageUniqueID")))
 }
 
-// KCGImagePropertyExifCameraOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyExifCameraOwnerName as an objc.ID.
-func KCGImagePropertyExifCameraOwnerName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifCameraOwnerName())
+// KCGImagePropertyExifCameraOwnerName returns the value of the constant kCGImagePropertyExifCameraOwnerName.
+func KCGImagePropertyExifCameraOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifCameraOwnerName")))
 }
 
-// KCGImagePropertyExifBodySerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifBodySerialNumber as an objc.ID.
-func KCGImagePropertyExifBodySerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifBodySerialNumber())
+// KCGImagePropertyExifBodySerialNumber returns the value of the constant kCGImagePropertyExifBodySerialNumber.
+func KCGImagePropertyExifBodySerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifBodySerialNumber")))
 }
 
-// KCGImagePropertyExifLensSpecification returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensSpecification as an objc.ID.
-func KCGImagePropertyExifLensSpecification() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifLensSpecification())
+// KCGImagePropertyExifLensSpecification returns the value of the constant kCGImagePropertyExifLensSpecification.
+func KCGImagePropertyExifLensSpecification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifLensSpecification")))
 }
 
-// KCGImagePropertyExifLensMake returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensMake as an objc.ID.
-func KCGImagePropertyExifLensMake() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifLensMake())
+// KCGImagePropertyExifLensMake returns the value of the constant kCGImagePropertyExifLensMake.
+func KCGImagePropertyExifLensMake() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifLensMake")))
 }
 
-// KCGImagePropertyExifLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensModel as an objc.ID.
-func KCGImagePropertyExifLensModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifLensModel())
+// KCGImagePropertyExifLensModel returns the value of the constant kCGImagePropertyExifLensModel.
+func KCGImagePropertyExifLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifLensModel")))
 }
 
-// KCGImagePropertyExifLensSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifLensSerialNumber as an objc.ID.
-func KCGImagePropertyExifLensSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifLensSerialNumber())
+// KCGImagePropertyExifLensSerialNumber returns the value of the constant kCGImagePropertyExifLensSerialNumber.
+func KCGImagePropertyExifLensSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifLensSerialNumber")))
 }
 
-// KCGImagePropertyExifGamma returns the value of the CoreFoundation reference constant kCGImagePropertyExifGamma as an objc.ID.
-func KCGImagePropertyExifGamma() objc.ID { return purego.CFConstant(raw.KCGImagePropertyExifGamma()) }
+// KCGImagePropertyExifGamma returns the value of the constant kCGImagePropertyExifGamma.
+func KCGImagePropertyExifGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifGamma")))
+}
 
-// KCGImagePropertyExifCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifCompositeImage as an objc.ID.
-func KCGImagePropertyExifCompositeImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifCompositeImage())
+// KCGImagePropertyExifCompositeImage returns the value of the constant kCGImagePropertyExifCompositeImage.
+func KCGImagePropertyExifCompositeImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifCompositeImage")))
 }
 
-// KCGImagePropertyExifSourceImageNumberOfCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifSourceImageNumberOfCompositeImage as an objc.ID.
-func KCGImagePropertyExifSourceImageNumberOfCompositeImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSourceImageNumberOfCompositeImage())
+// KCGImagePropertyExifSourceImageNumberOfCompositeImage returns the value of the constant kCGImagePropertyExifSourceImageNumberOfCompositeImage.
+func KCGImagePropertyExifSourceImageNumberOfCompositeImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSourceImageNumberOfCompositeImage")))
 }
 
-// KCGImagePropertyExifSourceExposureTimesOfCompositeImage returns the value of the CoreFoundation reference constant kCGImagePropertyExifSourceExposureTimesOfCompositeImage as an objc.ID.
-func KCGImagePropertyExifSourceExposureTimesOfCompositeImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSourceExposureTimesOfCompositeImage())
+// KCGImagePropertyExifSourceExposureTimesOfCompositeImage returns the value of the constant kCGImagePropertyExifSourceExposureTimesOfCompositeImage.
+func KCGImagePropertyExifSourceExposureTimesOfCompositeImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSourceExposureTimesOfCompositeImage")))
 }
 
-// KCGImagePropertyExifSubsecTimeOrginal returns the value of the CoreFoundation reference constant kCGImagePropertyExifSubsecTimeOrginal as an objc.ID.
-func KCGImagePropertyExifSubsecTimeOrginal() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifSubsecTimeOrginal())
+// KCGImagePropertyExifSubsecTimeOrginal returns the value of the constant kCGImagePropertyExifSubsecTimeOrginal.
+func KCGImagePropertyExifSubsecTimeOrginal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifSubsecTimeOrginal")))
 }
 
-// KCGImagePropertyExifAuxLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensInfo as an objc.ID.
-func KCGImagePropertyExifAuxLensInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxLensInfo())
+// KCGImagePropertyExifAuxLensInfo returns the value of the constant kCGImagePropertyExifAuxLensInfo.
+func KCGImagePropertyExifAuxLensInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxLensInfo")))
 }
 
-// KCGImagePropertyExifAuxLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensModel as an objc.ID.
-func KCGImagePropertyExifAuxLensModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxLensModel())
+// KCGImagePropertyExifAuxLensModel returns the value of the constant kCGImagePropertyExifAuxLensModel.
+func KCGImagePropertyExifAuxLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxLensModel")))
 }
 
-// KCGImagePropertyExifAuxSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxSerialNumber as an objc.ID.
-func KCGImagePropertyExifAuxSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxSerialNumber())
+// KCGImagePropertyExifAuxSerialNumber returns the value of the constant kCGImagePropertyExifAuxSerialNumber.
+func KCGImagePropertyExifAuxSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxSerialNumber")))
 }
 
-// KCGImagePropertyExifAuxLensID returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensID as an objc.ID.
-func KCGImagePropertyExifAuxLensID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxLensID())
+// KCGImagePropertyExifAuxLensID returns the value of the constant kCGImagePropertyExifAuxLensID.
+func KCGImagePropertyExifAuxLensID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxLensID")))
 }
 
-// KCGImagePropertyExifAuxLensSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxLensSerialNumber as an objc.ID.
-func KCGImagePropertyExifAuxLensSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxLensSerialNumber())
+// KCGImagePropertyExifAuxLensSerialNumber returns the value of the constant kCGImagePropertyExifAuxLensSerialNumber.
+func KCGImagePropertyExifAuxLensSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxLensSerialNumber")))
 }
 
-// KCGImagePropertyExifAuxImageNumber returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxImageNumber as an objc.ID.
-func KCGImagePropertyExifAuxImageNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxImageNumber())
+// KCGImagePropertyExifAuxImageNumber returns the value of the constant kCGImagePropertyExifAuxImageNumber.
+func KCGImagePropertyExifAuxImageNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxImageNumber")))
 }
 
-// KCGImagePropertyExifAuxFlashCompensation returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxFlashCompensation as an objc.ID.
-func KCGImagePropertyExifAuxFlashCompensation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxFlashCompensation())
+// KCGImagePropertyExifAuxFlashCompensation returns the value of the constant kCGImagePropertyExifAuxFlashCompensation.
+func KCGImagePropertyExifAuxFlashCompensation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxFlashCompensation")))
 }
 
-// KCGImagePropertyExifAuxOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxOwnerName as an objc.ID.
-func KCGImagePropertyExifAuxOwnerName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxOwnerName())
+// KCGImagePropertyExifAuxOwnerName returns the value of the constant kCGImagePropertyExifAuxOwnerName.
+func KCGImagePropertyExifAuxOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxOwnerName")))
 }
 
-// KCGImagePropertyExifAuxFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyExifAuxFirmware as an objc.ID.
-func KCGImagePropertyExifAuxFirmware() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyExifAuxFirmware())
+// KCGImagePropertyExifAuxFirmware returns the value of the constant kCGImagePropertyExifAuxFirmware.
+func KCGImagePropertyExifAuxFirmware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyExifAuxFirmware")))
 }
 
-// KCGImagePropertyGIFLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyGIFLoopCount as an objc.ID.
-func KCGImagePropertyGIFLoopCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFLoopCount())
+// KCGImagePropertyGIFLoopCount returns the value of the constant kCGImagePropertyGIFLoopCount.
+func KCGImagePropertyGIFLoopCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFLoopCount")))
 }
 
-// KCGImagePropertyGIFDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyGIFDelayTime as an objc.ID.
-func KCGImagePropertyGIFDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFDelayTime())
+// KCGImagePropertyGIFDelayTime returns the value of the constant kCGImagePropertyGIFDelayTime.
+func KCGImagePropertyGIFDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFDelayTime")))
 }
 
-// KCGImagePropertyGIFImageColorMap returns the value of the CoreFoundation reference constant kCGImagePropertyGIFImageColorMap as an objc.ID.
-func KCGImagePropertyGIFImageColorMap() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFImageColorMap())
+// KCGImagePropertyGIFImageColorMap returns the value of the constant kCGImagePropertyGIFImageColorMap.
+func KCGImagePropertyGIFImageColorMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFImageColorMap")))
 }
 
-// KCGImagePropertyGIFHasGlobalColorMap returns the value of the CoreFoundation reference constant kCGImagePropertyGIFHasGlobalColorMap as an objc.ID.
-func KCGImagePropertyGIFHasGlobalColorMap() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFHasGlobalColorMap())
+// KCGImagePropertyGIFHasGlobalColorMap returns the value of the constant kCGImagePropertyGIFHasGlobalColorMap.
+func KCGImagePropertyGIFHasGlobalColorMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFHasGlobalColorMap")))
 }
 
-// KCGImagePropertyGIFUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyGIFUnclampedDelayTime as an objc.ID.
-func KCGImagePropertyGIFUnclampedDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFUnclampedDelayTime())
+// KCGImagePropertyGIFUnclampedDelayTime returns the value of the constant kCGImagePropertyGIFUnclampedDelayTime.
+func KCGImagePropertyGIFUnclampedDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFUnclampedDelayTime")))
 }
 
-// KCGImagePropertyGIFCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyGIFCanvasPixelWidth as an objc.ID.
-func KCGImagePropertyGIFCanvasPixelWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFCanvasPixelWidth())
+// KCGImagePropertyGIFCanvasPixelWidth returns the value of the constant kCGImagePropertyGIFCanvasPixelWidth.
+func KCGImagePropertyGIFCanvasPixelWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFCanvasPixelWidth")))
 }
 
-// KCGImagePropertyGIFCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyGIFCanvasPixelHeight as an objc.ID.
-func KCGImagePropertyGIFCanvasPixelHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFCanvasPixelHeight())
+// KCGImagePropertyGIFCanvasPixelHeight returns the value of the constant kCGImagePropertyGIFCanvasPixelHeight.
+func KCGImagePropertyGIFCanvasPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFCanvasPixelHeight")))
 }
 
-// KCGImagePropertyGIFFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyGIFFrameInfoArray as an objc.ID.
-func KCGImagePropertyGIFFrameInfoArray() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGIFFrameInfoArray())
+// KCGImagePropertyGIFFrameInfoArray returns the value of the constant kCGImagePropertyGIFFrameInfoArray.
+func KCGImagePropertyGIFFrameInfoArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGIFFrameInfoArray")))
 }
 
-// KCGImagePropertyPNGAuthor returns the value of the CoreFoundation reference constant kCGImagePropertyPNGAuthor as an objc.ID.
-func KCGImagePropertyPNGAuthor() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGAuthor()) }
+// KCGImagePropertyPNGAuthor returns the value of the constant kCGImagePropertyPNGAuthor.
+func KCGImagePropertyPNGAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGAuthor")))
+}
 
-// KCGImagePropertyPNGChromaticities returns the value of the CoreFoundation reference constant kCGImagePropertyPNGChromaticities as an objc.ID.
-func KCGImagePropertyPNGChromaticities() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGChromaticities())
+// KCGImagePropertyPNGChromaticities returns the value of the constant kCGImagePropertyPNGChromaticities.
+func KCGImagePropertyPNGChromaticities() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGChromaticities")))
 }
 
-// KCGImagePropertyPNGComment returns the value of the CoreFoundation reference constant kCGImagePropertyPNGComment as an objc.ID.
-func KCGImagePropertyPNGComment() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGComment()) }
+// KCGImagePropertyPNGComment returns the value of the constant kCGImagePropertyPNGComment.
+func KCGImagePropertyPNGComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGComment")))
+}
 
-// KCGImagePropertyPNGCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCopyright as an objc.ID.
-func KCGImagePropertyPNGCopyright() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGCopyright())
+// KCGImagePropertyPNGCopyright returns the value of the constant kCGImagePropertyPNGCopyright.
+func KCGImagePropertyPNGCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGCopyright")))
 }
 
-// KCGImagePropertyPNGCreationTime returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCreationTime as an objc.ID.
-func KCGImagePropertyPNGCreationTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGCreationTime())
+// KCGImagePropertyPNGCreationTime returns the value of the constant kCGImagePropertyPNGCreationTime.
+func KCGImagePropertyPNGCreationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGCreationTime")))
 }
 
-// KCGImagePropertyPNGDescription returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDescription as an objc.ID.
-func KCGImagePropertyPNGDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGDescription())
+// KCGImagePropertyPNGDescription returns the value of the constant kCGImagePropertyPNGDescription.
+func KCGImagePropertyPNGDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGDescription")))
 }
 
-// KCGImagePropertyPNGDisclaimer returns the value of the CoreFoundation reference constant kCGImagePropertyPNGDisclaimer as an objc.ID.
-func KCGImagePropertyPNGDisclaimer() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGDisclaimer())
+// KCGImagePropertyPNGDisclaimer returns the value of the constant kCGImagePropertyPNGDisclaimer.
+func KCGImagePropertyPNGDisclaimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGDisclaimer")))
 }
 
-// KCGImagePropertyPNGGamma returns the value of the CoreFoundation reference constant kCGImagePropertyPNGGamma as an objc.ID.
-func KCGImagePropertyPNGGamma() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGGamma()) }
+// KCGImagePropertyPNGGamma returns the value of the constant kCGImagePropertyPNGGamma.
+func KCGImagePropertyPNGGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGGamma")))
+}
 
-// KCGImagePropertyPNGInterlaceType returns the value of the CoreFoundation reference constant kCGImagePropertyPNGInterlaceType as an objc.ID.
-func KCGImagePropertyPNGInterlaceType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGInterlaceType())
+// KCGImagePropertyPNGInterlaceType returns the value of the constant kCGImagePropertyPNGInterlaceType.
+func KCGImagePropertyPNGInterlaceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGInterlaceType")))
 }
 
-// KCGImagePropertyPNGModificationTime returns the value of the CoreFoundation reference constant kCGImagePropertyPNGModificationTime as an objc.ID.
-func KCGImagePropertyPNGModificationTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGModificationTime())
+// KCGImagePropertyPNGModificationTime returns the value of the constant kCGImagePropertyPNGModificationTime.
+func KCGImagePropertyPNGModificationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGModificationTime")))
 }
 
-// KCGImagePropertyPNGSoftware returns the value of the CoreFoundation reference constant kCGImagePropertyPNGSoftware as an objc.ID.
-func KCGImagePropertyPNGSoftware() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGSoftware())
+// KCGImagePropertyPNGSoftware returns the value of the constant kCGImagePropertyPNGSoftware.
+func KCGImagePropertyPNGSoftware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGSoftware")))
 }
 
-// KCGImagePropertyPNGSource returns the value of the CoreFoundation reference constant kCGImagePropertyPNGSource as an objc.ID.
-func KCGImagePropertyPNGSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGSource()) }
+// KCGImagePropertyPNGSource returns the value of the constant kCGImagePropertyPNGSource.
+func KCGImagePropertyPNGSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGSource")))
+}
 
-// KCGImagePropertyPNGsRGBIntent returns the value of the CoreFoundation reference constant kCGImagePropertyPNGsRGBIntent as an objc.ID.
-func KCGImagePropertyPNGsRGBIntent() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGsRGBIntent())
+// KCGImagePropertyPNGsRGBIntent returns the value of the constant kCGImagePropertyPNGsRGBIntent.
+func KCGImagePropertyPNGsRGBIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGsRGBIntent")))
 }
 
-// KCGImagePropertyPNGTitle returns the value of the CoreFoundation reference constant kCGImagePropertyPNGTitle as an objc.ID.
-func KCGImagePropertyPNGTitle() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGTitle()) }
+// KCGImagePropertyPNGTitle returns the value of the constant kCGImagePropertyPNGTitle.
+func KCGImagePropertyPNGTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGTitle")))
+}
 
-// KCGImagePropertyPNGWarning returns the value of the CoreFoundation reference constant kCGImagePropertyPNGWarning as an objc.ID.
-func KCGImagePropertyPNGWarning() objc.ID { return purego.CFConstant(raw.KCGImagePropertyPNGWarning()) }
+// KCGImagePropertyPNGWarning returns the value of the constant kCGImagePropertyPNGWarning.
+func KCGImagePropertyPNGWarning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGWarning")))
+}
 
-// KCGImagePropertyPNGXPixelsPerMeter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGXPixelsPerMeter as an objc.ID.
-func KCGImagePropertyPNGXPixelsPerMeter() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGXPixelsPerMeter())
+// KCGImagePropertyPNGXPixelsPerMeter returns the value of the constant kCGImagePropertyPNGXPixelsPerMeter.
+func KCGImagePropertyPNGXPixelsPerMeter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGXPixelsPerMeter")))
 }
 
-// KCGImagePropertyPNGYPixelsPerMeter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGYPixelsPerMeter as an objc.ID.
-func KCGImagePropertyPNGYPixelsPerMeter() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGYPixelsPerMeter())
+// KCGImagePropertyPNGYPixelsPerMeter returns the value of the constant kCGImagePropertyPNGYPixelsPerMeter.
+func KCGImagePropertyPNGYPixelsPerMeter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGYPixelsPerMeter")))
 }
 
-// KCGImagePropertyPNGPixelsAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyPNGPixelsAspectRatio as an objc.ID.
-func KCGImagePropertyPNGPixelsAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGPixelsAspectRatio())
+// KCGImagePropertyPNGPixelsAspectRatio returns the value of the constant kCGImagePropertyPNGPixelsAspectRatio.
+func KCGImagePropertyPNGPixelsAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGPixelsAspectRatio")))
 }
 
-// KCGImagePropertyAPNGLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGLoopCount as an objc.ID.
-func KCGImagePropertyAPNGLoopCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGLoopCount())
+// KCGImagePropertyAPNGLoopCount returns the value of the constant kCGImagePropertyAPNGLoopCount.
+func KCGImagePropertyAPNGLoopCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGLoopCount")))
 }
 
-// KCGImagePropertyAPNGDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGDelayTime as an objc.ID.
-func KCGImagePropertyAPNGDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGDelayTime())
+// KCGImagePropertyAPNGDelayTime returns the value of the constant kCGImagePropertyAPNGDelayTime.
+func KCGImagePropertyAPNGDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGDelayTime")))
 }
 
-// KCGImagePropertyAPNGUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGUnclampedDelayTime as an objc.ID.
-func KCGImagePropertyAPNGUnclampedDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGUnclampedDelayTime())
+// KCGImagePropertyAPNGUnclampedDelayTime returns the value of the constant kCGImagePropertyAPNGUnclampedDelayTime.
+func KCGImagePropertyAPNGUnclampedDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGUnclampedDelayTime")))
 }
 
-// KCGImagePropertyAPNGFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGFrameInfoArray as an objc.ID.
-func KCGImagePropertyAPNGFrameInfoArray() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGFrameInfoArray())
+// KCGImagePropertyAPNGFrameInfoArray returns the value of the constant kCGImagePropertyAPNGFrameInfoArray.
+func KCGImagePropertyAPNGFrameInfoArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGFrameInfoArray")))
 }
 
-// KCGImagePropertyAPNGCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGCanvasPixelWidth as an objc.ID.
-func KCGImagePropertyAPNGCanvasPixelWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGCanvasPixelWidth())
+// KCGImagePropertyAPNGCanvasPixelWidth returns the value of the constant kCGImagePropertyAPNGCanvasPixelWidth.
+func KCGImagePropertyAPNGCanvasPixelWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGCanvasPixelWidth")))
 }
 
-// KCGImagePropertyAPNGCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyAPNGCanvasPixelHeight as an objc.ID.
-func KCGImagePropertyAPNGCanvasPixelHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAPNGCanvasPixelHeight())
+// KCGImagePropertyAPNGCanvasPixelHeight returns the value of the constant kCGImagePropertyAPNGCanvasPixelHeight.
+func KCGImagePropertyAPNGCanvasPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAPNGCanvasPixelHeight")))
 }
 
-// KCGImagePropertyWebPLoopCount returns the value of the CoreFoundation reference constant kCGImagePropertyWebPLoopCount as an objc.ID.
-func KCGImagePropertyWebPLoopCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPLoopCount())
+// KCGImagePropertyWebPLoopCount returns the value of the constant kCGImagePropertyWebPLoopCount.
+func KCGImagePropertyWebPLoopCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPLoopCount")))
 }
 
-// KCGImagePropertyWebPDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyWebPDelayTime as an objc.ID.
-func KCGImagePropertyWebPDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPDelayTime())
+// KCGImagePropertyWebPDelayTime returns the value of the constant kCGImagePropertyWebPDelayTime.
+func KCGImagePropertyWebPDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPDelayTime")))
 }
 
-// KCGImagePropertyWebPUnclampedDelayTime returns the value of the CoreFoundation reference constant kCGImagePropertyWebPUnclampedDelayTime as an objc.ID.
-func KCGImagePropertyWebPUnclampedDelayTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPUnclampedDelayTime())
+// KCGImagePropertyWebPUnclampedDelayTime returns the value of the constant kCGImagePropertyWebPUnclampedDelayTime.
+func KCGImagePropertyWebPUnclampedDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPUnclampedDelayTime")))
 }
 
-// KCGImagePropertyWebPFrameInfoArray returns the value of the CoreFoundation reference constant kCGImagePropertyWebPFrameInfoArray as an objc.ID.
-func KCGImagePropertyWebPFrameInfoArray() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPFrameInfoArray())
+// KCGImagePropertyWebPFrameInfoArray returns the value of the constant kCGImagePropertyWebPFrameInfoArray.
+func KCGImagePropertyWebPFrameInfoArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPFrameInfoArray")))
 }
 
-// KCGImagePropertyWebPCanvasPixelWidth returns the value of the CoreFoundation reference constant kCGImagePropertyWebPCanvasPixelWidth as an objc.ID.
-func KCGImagePropertyWebPCanvasPixelWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPCanvasPixelWidth())
+// KCGImagePropertyWebPCanvasPixelWidth returns the value of the constant kCGImagePropertyWebPCanvasPixelWidth.
+func KCGImagePropertyWebPCanvasPixelWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPCanvasPixelWidth")))
 }
 
-// KCGImagePropertyWebPCanvasPixelHeight returns the value of the CoreFoundation reference constant kCGImagePropertyWebPCanvasPixelHeight as an objc.ID.
-func KCGImagePropertyWebPCanvasPixelHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyWebPCanvasPixelHeight())
+// KCGImagePropertyWebPCanvasPixelHeight returns the value of the constant kCGImagePropertyWebPCanvasPixelHeight.
+func KCGImagePropertyWebPCanvasPixelHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWebPCanvasPixelHeight")))
 }
 
-// KCGImagePropertyGPSVersion returns the value of the CoreFoundation reference constant kCGImagePropertyGPSVersion as an objc.ID.
-func KCGImagePropertyGPSVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSVersion()) }
+// KCGImagePropertyGPSVersion returns the value of the constant kCGImagePropertyGPSVersion.
+func KCGImagePropertyGPSVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSVersion")))
+}
 
-// KCGImagePropertyGPSLatitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLatitudeRef as an objc.ID.
-func KCGImagePropertyGPSLatitudeRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSLatitudeRef())
+// KCGImagePropertyGPSLatitudeRef returns the value of the constant kCGImagePropertyGPSLatitudeRef.
+func KCGImagePropertyGPSLatitudeRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSLatitudeRef")))
 }
 
-// KCGImagePropertyGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLatitude as an objc.ID.
-func KCGImagePropertyGPSLatitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSLatitude())
+// KCGImagePropertyGPSLatitude returns the value of the constant kCGImagePropertyGPSLatitude.
+func KCGImagePropertyGPSLatitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSLatitude")))
 }
 
-// KCGImagePropertyGPSLongitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLongitudeRef as an objc.ID.
-func KCGImagePropertyGPSLongitudeRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSLongitudeRef())
+// KCGImagePropertyGPSLongitudeRef returns the value of the constant kCGImagePropertyGPSLongitudeRef.
+func KCGImagePropertyGPSLongitudeRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSLongitudeRef")))
 }
 
-// KCGImagePropertyGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSLongitude as an objc.ID.
-func KCGImagePropertyGPSLongitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSLongitude())
+// KCGImagePropertyGPSLongitude returns the value of the constant kCGImagePropertyGPSLongitude.
+func KCGImagePropertyGPSLongitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSLongitude")))
 }
 
-// KCGImagePropertyGPSAltitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAltitudeRef as an objc.ID.
-func KCGImagePropertyGPSAltitudeRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSAltitudeRef())
+// KCGImagePropertyGPSAltitudeRef returns the value of the constant kCGImagePropertyGPSAltitudeRef.
+func KCGImagePropertyGPSAltitudeRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSAltitudeRef")))
 }
 
-// KCGImagePropertyGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAltitude as an objc.ID.
-func KCGImagePropertyGPSAltitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSAltitude())
+// KCGImagePropertyGPSAltitude returns the value of the constant kCGImagePropertyGPSAltitude.
+func KCGImagePropertyGPSAltitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSAltitude")))
 }
 
-// KCGImagePropertyGPSTimeStamp returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTimeStamp as an objc.ID.
-func KCGImagePropertyGPSTimeStamp() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSTimeStamp())
+// KCGImagePropertyGPSTimeStamp returns the value of the constant kCGImagePropertyGPSTimeStamp.
+func KCGImagePropertyGPSTimeStamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSTimeStamp")))
 }
 
-// KCGImagePropertyGPSSatellites returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSatellites as an objc.ID.
-func KCGImagePropertyGPSSatellites() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSSatellites())
+// KCGImagePropertyGPSSatellites returns the value of the constant kCGImagePropertyGPSSatellites.
+func KCGImagePropertyGPSSatellites() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSSatellites")))
 }
 
-// KCGImagePropertyGPSStatus returns the value of the CoreFoundation reference constant kCGImagePropertyGPSStatus as an objc.ID.
-func KCGImagePropertyGPSStatus() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSStatus()) }
+// KCGImagePropertyGPSStatus returns the value of the constant kCGImagePropertyGPSStatus.
+func KCGImagePropertyGPSStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSStatus")))
+}
 
-// KCGImagePropertyGPSMeasureMode returns the value of the CoreFoundation reference constant kCGImagePropertyGPSMeasureMode as an objc.ID.
-func KCGImagePropertyGPSMeasureMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSMeasureMode())
+// KCGImagePropertyGPSMeasureMode returns the value of the constant kCGImagePropertyGPSMeasureMode.
+func KCGImagePropertyGPSMeasureMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSMeasureMode")))
 }
 
-// KCGImagePropertyGPSDOP returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDOP as an objc.ID.
-func KCGImagePropertyGPSDOP() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSDOP()) }
+// KCGImagePropertyGPSDOP returns the value of the constant kCGImagePropertyGPSDOP.
+func KCGImagePropertyGPSDOP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDOP")))
+}
 
-// KCGImagePropertyGPSSpeedRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSpeedRef as an objc.ID.
-func KCGImagePropertyGPSSpeedRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSSpeedRef())
+// KCGImagePropertyGPSSpeedRef returns the value of the constant kCGImagePropertyGPSSpeedRef.
+func KCGImagePropertyGPSSpeedRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSSpeedRef")))
 }
 
-// KCGImagePropertyGPSSpeed returns the value of the CoreFoundation reference constant kCGImagePropertyGPSSpeed as an objc.ID.
-func KCGImagePropertyGPSSpeed() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSSpeed()) }
+// KCGImagePropertyGPSSpeed returns the value of the constant kCGImagePropertyGPSSpeed.
+func KCGImagePropertyGPSSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSSpeed")))
+}
 
-// KCGImagePropertyGPSTrackRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTrackRef as an objc.ID.
-func KCGImagePropertyGPSTrackRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSTrackRef())
+// KCGImagePropertyGPSTrackRef returns the value of the constant kCGImagePropertyGPSTrackRef.
+func KCGImagePropertyGPSTrackRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSTrackRef")))
 }
 
-// KCGImagePropertyGPSTrack returns the value of the CoreFoundation reference constant kCGImagePropertyGPSTrack as an objc.ID.
-func KCGImagePropertyGPSTrack() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGPSTrack()) }
+// KCGImagePropertyGPSTrack returns the value of the constant kCGImagePropertyGPSTrack.
+func KCGImagePropertyGPSTrack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSTrack")))
+}
 
-// KCGImagePropertyGPSImgDirectionRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSImgDirectionRef as an objc.ID.
-func KCGImagePropertyGPSImgDirectionRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSImgDirectionRef())
+// KCGImagePropertyGPSImgDirectionRef returns the value of the constant kCGImagePropertyGPSImgDirectionRef.
+func KCGImagePropertyGPSImgDirectionRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSImgDirectionRef")))
 }
 
-// KCGImagePropertyGPSImgDirection returns the value of the CoreFoundation reference constant kCGImagePropertyGPSImgDirection as an objc.ID.
-func KCGImagePropertyGPSImgDirection() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSImgDirection())
+// KCGImagePropertyGPSImgDirection returns the value of the constant kCGImagePropertyGPSImgDirection.
+func KCGImagePropertyGPSImgDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSImgDirection")))
 }
 
-// KCGImagePropertyGPSMapDatum returns the value of the CoreFoundation reference constant kCGImagePropertyGPSMapDatum as an objc.ID.
-func KCGImagePropertyGPSMapDatum() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSMapDatum())
+// KCGImagePropertyGPSMapDatum returns the value of the constant kCGImagePropertyGPSMapDatum.
+func KCGImagePropertyGPSMapDatum() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSMapDatum")))
 }
 
-// KCGImagePropertyGPSDestLatitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLatitudeRef as an objc.ID.
-func KCGImagePropertyGPSDestLatitudeRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestLatitudeRef())
+// KCGImagePropertyGPSDestLatitudeRef returns the value of the constant kCGImagePropertyGPSDestLatitudeRef.
+func KCGImagePropertyGPSDestLatitudeRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestLatitudeRef")))
 }
 
-// KCGImagePropertyGPSDestLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLatitude as an objc.ID.
-func KCGImagePropertyGPSDestLatitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestLatitude())
+// KCGImagePropertyGPSDestLatitude returns the value of the constant kCGImagePropertyGPSDestLatitude.
+func KCGImagePropertyGPSDestLatitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestLatitude")))
 }
 
-// KCGImagePropertyGPSDestLongitudeRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLongitudeRef as an objc.ID.
-func KCGImagePropertyGPSDestLongitudeRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestLongitudeRef())
+// KCGImagePropertyGPSDestLongitudeRef returns the value of the constant kCGImagePropertyGPSDestLongitudeRef.
+func KCGImagePropertyGPSDestLongitudeRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestLongitudeRef")))
 }
 
-// KCGImagePropertyGPSDestLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestLongitude as an objc.ID.
-func KCGImagePropertyGPSDestLongitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestLongitude())
+// KCGImagePropertyGPSDestLongitude returns the value of the constant kCGImagePropertyGPSDestLongitude.
+func KCGImagePropertyGPSDestLongitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestLongitude")))
 }
 
-// KCGImagePropertyGPSDestBearingRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestBearingRef as an objc.ID.
-func KCGImagePropertyGPSDestBearingRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestBearingRef())
+// KCGImagePropertyGPSDestBearingRef returns the value of the constant kCGImagePropertyGPSDestBearingRef.
+func KCGImagePropertyGPSDestBearingRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestBearingRef")))
 }
 
-// KCGImagePropertyGPSDestBearing returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestBearing as an objc.ID.
-func KCGImagePropertyGPSDestBearing() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestBearing())
+// KCGImagePropertyGPSDestBearing returns the value of the constant kCGImagePropertyGPSDestBearing.
+func KCGImagePropertyGPSDestBearing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestBearing")))
 }
 
-// KCGImagePropertyGPSDestDistanceRef returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestDistanceRef as an objc.ID.
-func KCGImagePropertyGPSDestDistanceRef() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestDistanceRef())
+// KCGImagePropertyGPSDestDistanceRef returns the value of the constant kCGImagePropertyGPSDestDistanceRef.
+func KCGImagePropertyGPSDestDistanceRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestDistanceRef")))
 }
 
-// KCGImagePropertyGPSDestDistance returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDestDistance as an objc.ID.
-func KCGImagePropertyGPSDestDistance() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDestDistance())
+// KCGImagePropertyGPSDestDistance returns the value of the constant kCGImagePropertyGPSDestDistance.
+func KCGImagePropertyGPSDestDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDestDistance")))
 }
 
-// KCGImagePropertyGPSProcessingMethod returns the value of the CoreFoundation reference constant kCGImagePropertyGPSProcessingMethod as an objc.ID.
-func KCGImagePropertyGPSProcessingMethod() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSProcessingMethod())
+// KCGImagePropertyGPSProcessingMethod returns the value of the constant kCGImagePropertyGPSProcessingMethod.
+func KCGImagePropertyGPSProcessingMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSProcessingMethod")))
 }
 
-// KCGImagePropertyGPSAreaInformation returns the value of the CoreFoundation reference constant kCGImagePropertyGPSAreaInformation as an objc.ID.
-func KCGImagePropertyGPSAreaInformation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSAreaInformation())
+// KCGImagePropertyGPSAreaInformation returns the value of the constant kCGImagePropertyGPSAreaInformation.
+func KCGImagePropertyGPSAreaInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSAreaInformation")))
 }
 
-// KCGImagePropertyGPSDateStamp returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDateStamp as an objc.ID.
-func KCGImagePropertyGPSDateStamp() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDateStamp())
+// KCGImagePropertyGPSDateStamp returns the value of the constant kCGImagePropertyGPSDateStamp.
+func KCGImagePropertyGPSDateStamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDateStamp")))
 }
 
-// KCGImagePropertyGPSDifferental returns the value of the CoreFoundation reference constant kCGImagePropertyGPSDifferental as an objc.ID.
-func KCGImagePropertyGPSDifferental() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSDifferental())
+// KCGImagePropertyGPSDifferental returns the value of the constant kCGImagePropertyGPSDifferental.
+func KCGImagePropertyGPSDifferental() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSDifferental")))
 }
 
-// KCGImagePropertyGPSHPositioningError returns the value of the CoreFoundation reference constant kCGImagePropertyGPSHPositioningError as an objc.ID.
-func KCGImagePropertyGPSHPositioningError() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGPSHPositioningError())
+// KCGImagePropertyGPSHPositioningError returns the value of the constant kCGImagePropertyGPSHPositioningError.
+func KCGImagePropertyGPSHPositioningError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGPSHPositioningError")))
 }
 
-// KCGImagePropertyIPTCObjectTypeReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectTypeReference as an objc.ID.
-func KCGImagePropertyIPTCObjectTypeReference() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCObjectTypeReference())
+// KCGImagePropertyIPTCObjectTypeReference returns the value of the constant kCGImagePropertyIPTCObjectTypeReference.
+func KCGImagePropertyIPTCObjectTypeReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCObjectTypeReference")))
 }
 
-// KCGImagePropertyIPTCObjectAttributeReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectAttributeReference as an objc.ID.
-func KCGImagePropertyIPTCObjectAttributeReference() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCObjectAttributeReference())
+// KCGImagePropertyIPTCObjectAttributeReference returns the value of the constant kCGImagePropertyIPTCObjectAttributeReference.
+func KCGImagePropertyIPTCObjectAttributeReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCObjectAttributeReference")))
 }
 
-// KCGImagePropertyIPTCObjectName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectName as an objc.ID.
-func KCGImagePropertyIPTCObjectName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCObjectName())
+// KCGImagePropertyIPTCObjectName returns the value of the constant kCGImagePropertyIPTCObjectName.
+func KCGImagePropertyIPTCObjectName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCObjectName")))
 }
 
-// KCGImagePropertyIPTCEditStatus returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCEditStatus as an objc.ID.
-func KCGImagePropertyIPTCEditStatus() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCEditStatus())
+// KCGImagePropertyIPTCEditStatus returns the value of the constant kCGImagePropertyIPTCEditStatus.
+func KCGImagePropertyIPTCEditStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCEditStatus")))
 }
 
-// KCGImagePropertyIPTCEditorialUpdate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCEditorialUpdate as an objc.ID.
-func KCGImagePropertyIPTCEditorialUpdate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCEditorialUpdate())
+// KCGImagePropertyIPTCEditorialUpdate returns the value of the constant kCGImagePropertyIPTCEditorialUpdate.
+func KCGImagePropertyIPTCEditorialUpdate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCEditorialUpdate")))
 }
 
-// KCGImagePropertyIPTCUrgency returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCUrgency as an objc.ID.
-func KCGImagePropertyIPTCUrgency() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCUrgency())
+// KCGImagePropertyIPTCUrgency returns the value of the constant kCGImagePropertyIPTCUrgency.
+func KCGImagePropertyIPTCUrgency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCUrgency")))
 }
 
-// KCGImagePropertyIPTCSubjectReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSubjectReference as an objc.ID.
-func KCGImagePropertyIPTCSubjectReference() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCSubjectReference())
+// KCGImagePropertyIPTCSubjectReference returns the value of the constant kCGImagePropertyIPTCSubjectReference.
+func KCGImagePropertyIPTCSubjectReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCSubjectReference")))
 }
 
-// KCGImagePropertyIPTCCategory returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCategory as an objc.ID.
-func KCGImagePropertyIPTCCategory() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCategory())
+// KCGImagePropertyIPTCCategory returns the value of the constant kCGImagePropertyIPTCCategory.
+func KCGImagePropertyIPTCCategory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCategory")))
 }
 
-// KCGImagePropertyIPTCSupplementalCategory returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSupplementalCategory as an objc.ID.
-func KCGImagePropertyIPTCSupplementalCategory() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCSupplementalCategory())
+// KCGImagePropertyIPTCSupplementalCategory returns the value of the constant kCGImagePropertyIPTCSupplementalCategory.
+func KCGImagePropertyIPTCSupplementalCategory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCSupplementalCategory")))
 }
 
-// KCGImagePropertyIPTCFixtureIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCFixtureIdentifier as an objc.ID.
-func KCGImagePropertyIPTCFixtureIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCFixtureIdentifier())
+// KCGImagePropertyIPTCFixtureIdentifier returns the value of the constant kCGImagePropertyIPTCFixtureIdentifier.
+func KCGImagePropertyIPTCFixtureIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCFixtureIdentifier")))
 }
 
-// KCGImagePropertyIPTCKeywords returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCKeywords as an objc.ID.
-func KCGImagePropertyIPTCKeywords() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCKeywords())
+// KCGImagePropertyIPTCKeywords returns the value of the constant kCGImagePropertyIPTCKeywords.
+func KCGImagePropertyIPTCKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCKeywords")))
 }
 
-// KCGImagePropertyIPTCContentLocationCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContentLocationCode as an objc.ID.
-func KCGImagePropertyIPTCContentLocationCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContentLocationCode())
+// KCGImagePropertyIPTCContentLocationCode returns the value of the constant kCGImagePropertyIPTCContentLocationCode.
+func KCGImagePropertyIPTCContentLocationCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContentLocationCode")))
 }
 
-// KCGImagePropertyIPTCContentLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContentLocationName as an objc.ID.
-func KCGImagePropertyIPTCContentLocationName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContentLocationName())
+// KCGImagePropertyIPTCContentLocationName returns the value of the constant kCGImagePropertyIPTCContentLocationName.
+func KCGImagePropertyIPTCContentLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContentLocationName")))
 }
 
-// KCGImagePropertyIPTCReleaseDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReleaseDate as an objc.ID.
-func KCGImagePropertyIPTCReleaseDate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCReleaseDate())
+// KCGImagePropertyIPTCReleaseDate returns the value of the constant kCGImagePropertyIPTCReleaseDate.
+func KCGImagePropertyIPTCReleaseDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCReleaseDate")))
 }
 
-// KCGImagePropertyIPTCReleaseTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReleaseTime as an objc.ID.
-func KCGImagePropertyIPTCReleaseTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCReleaseTime())
+// KCGImagePropertyIPTCReleaseTime returns the value of the constant kCGImagePropertyIPTCReleaseTime.
+func KCGImagePropertyIPTCReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCReleaseTime")))
 }
 
-// KCGImagePropertyIPTCExpirationDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExpirationDate as an objc.ID.
-func KCGImagePropertyIPTCExpirationDate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExpirationDate())
+// KCGImagePropertyIPTCExpirationDate returns the value of the constant kCGImagePropertyIPTCExpirationDate.
+func KCGImagePropertyIPTCExpirationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExpirationDate")))
 }
 
-// KCGImagePropertyIPTCExpirationTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExpirationTime as an objc.ID.
-func KCGImagePropertyIPTCExpirationTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExpirationTime())
+// KCGImagePropertyIPTCExpirationTime returns the value of the constant kCGImagePropertyIPTCExpirationTime.
+func KCGImagePropertyIPTCExpirationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExpirationTime")))
 }
 
-// KCGImagePropertyIPTCSpecialInstructions returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSpecialInstructions as an objc.ID.
-func KCGImagePropertyIPTCSpecialInstructions() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCSpecialInstructions())
+// KCGImagePropertyIPTCSpecialInstructions returns the value of the constant kCGImagePropertyIPTCSpecialInstructions.
+func KCGImagePropertyIPTCSpecialInstructions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCSpecialInstructions")))
 }
 
-// KCGImagePropertyIPTCActionAdvised returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCActionAdvised as an objc.ID.
-func KCGImagePropertyIPTCActionAdvised() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCActionAdvised())
+// KCGImagePropertyIPTCActionAdvised returns the value of the constant kCGImagePropertyIPTCActionAdvised.
+func KCGImagePropertyIPTCActionAdvised() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCActionAdvised")))
 }
 
-// KCGImagePropertyIPTCReferenceService returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceService as an objc.ID.
-func KCGImagePropertyIPTCReferenceService() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceService())
+// KCGImagePropertyIPTCReferenceService returns the value of the constant kCGImagePropertyIPTCReferenceService.
+func KCGImagePropertyIPTCReferenceService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCReferenceService")))
 }
 
-// KCGImagePropertyIPTCReferenceDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceDate as an objc.ID.
-func KCGImagePropertyIPTCReferenceDate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceDate())
+// KCGImagePropertyIPTCReferenceDate returns the value of the constant kCGImagePropertyIPTCReferenceDate.
+func KCGImagePropertyIPTCReferenceDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCReferenceDate")))
 }
 
-// KCGImagePropertyIPTCReferenceNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCReferenceNumber as an objc.ID.
-func KCGImagePropertyIPTCReferenceNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCReferenceNumber())
+// KCGImagePropertyIPTCReferenceNumber returns the value of the constant kCGImagePropertyIPTCReferenceNumber.
+func KCGImagePropertyIPTCReferenceNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCReferenceNumber")))
 }
 
-// KCGImagePropertyIPTCDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDateCreated as an objc.ID.
-func KCGImagePropertyIPTCDateCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCDateCreated())
+// KCGImagePropertyIPTCDateCreated returns the value of the constant kCGImagePropertyIPTCDateCreated.
+func KCGImagePropertyIPTCDateCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCDateCreated")))
 }
 
-// KCGImagePropertyIPTCTimeCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCTimeCreated as an objc.ID.
-func KCGImagePropertyIPTCTimeCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCTimeCreated())
+// KCGImagePropertyIPTCTimeCreated returns the value of the constant kCGImagePropertyIPTCTimeCreated.
+func KCGImagePropertyIPTCTimeCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCTimeCreated")))
 }
 
-// KCGImagePropertyIPTCDigitalCreationDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDigitalCreationDate as an objc.ID.
-func KCGImagePropertyIPTCDigitalCreationDate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCDigitalCreationDate())
+// KCGImagePropertyIPTCDigitalCreationDate returns the value of the constant kCGImagePropertyIPTCDigitalCreationDate.
+func KCGImagePropertyIPTCDigitalCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCDigitalCreationDate")))
 }
 
-// KCGImagePropertyIPTCDigitalCreationTime returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCDigitalCreationTime as an objc.ID.
-func KCGImagePropertyIPTCDigitalCreationTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCDigitalCreationTime())
+// KCGImagePropertyIPTCDigitalCreationTime returns the value of the constant kCGImagePropertyIPTCDigitalCreationTime.
+func KCGImagePropertyIPTCDigitalCreationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCDigitalCreationTime")))
 }
 
-// KCGImagePropertyIPTCOriginatingProgram returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCOriginatingProgram as an objc.ID.
-func KCGImagePropertyIPTCOriginatingProgram() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCOriginatingProgram())
+// KCGImagePropertyIPTCOriginatingProgram returns the value of the constant kCGImagePropertyIPTCOriginatingProgram.
+func KCGImagePropertyIPTCOriginatingProgram() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCOriginatingProgram")))
 }
 
-// KCGImagePropertyIPTCProgramVersion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCProgramVersion as an objc.ID.
-func KCGImagePropertyIPTCProgramVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCProgramVersion())
+// KCGImagePropertyIPTCProgramVersion returns the value of the constant kCGImagePropertyIPTCProgramVersion.
+func KCGImagePropertyIPTCProgramVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCProgramVersion")))
 }
 
-// KCGImagePropertyIPTCObjectCycle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCObjectCycle as an objc.ID.
-func KCGImagePropertyIPTCObjectCycle() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCObjectCycle())
+// KCGImagePropertyIPTCObjectCycle returns the value of the constant kCGImagePropertyIPTCObjectCycle.
+func KCGImagePropertyIPTCObjectCycle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCObjectCycle")))
 }
 
-// KCGImagePropertyIPTCByline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCByline as an objc.ID.
-func KCGImagePropertyIPTCByline() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCByline()) }
+// KCGImagePropertyIPTCByline returns the value of the constant kCGImagePropertyIPTCByline.
+func KCGImagePropertyIPTCByline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCByline")))
+}
 
-// KCGImagePropertyIPTCBylineTitle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCBylineTitle as an objc.ID.
-func KCGImagePropertyIPTCBylineTitle() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCBylineTitle())
+// KCGImagePropertyIPTCBylineTitle returns the value of the constant kCGImagePropertyIPTCBylineTitle.
+func KCGImagePropertyIPTCBylineTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCBylineTitle")))
 }
 
-// KCGImagePropertyIPTCCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCity as an objc.ID.
-func KCGImagePropertyIPTCCity() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCity()) }
+// KCGImagePropertyIPTCCity returns the value of the constant kCGImagePropertyIPTCCity.
+func KCGImagePropertyIPTCCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCity")))
+}
 
-// KCGImagePropertyIPTCSubLocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSubLocation as an objc.ID.
-func KCGImagePropertyIPTCSubLocation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCSubLocation())
+// KCGImagePropertyIPTCSubLocation returns the value of the constant kCGImagePropertyIPTCSubLocation.
+func KCGImagePropertyIPTCSubLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCSubLocation")))
 }
 
-// KCGImagePropertyIPTCProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCProvinceState as an objc.ID.
-func KCGImagePropertyIPTCProvinceState() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCProvinceState())
+// KCGImagePropertyIPTCProvinceState returns the value of the constant kCGImagePropertyIPTCProvinceState.
+func KCGImagePropertyIPTCProvinceState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCProvinceState")))
 }
 
-// KCGImagePropertyIPTCCountryPrimaryLocationCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCountryPrimaryLocationCode as an objc.ID.
-func KCGImagePropertyIPTCCountryPrimaryLocationCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCountryPrimaryLocationCode())
+// KCGImagePropertyIPTCCountryPrimaryLocationCode returns the value of the constant kCGImagePropertyIPTCCountryPrimaryLocationCode.
+func KCGImagePropertyIPTCCountryPrimaryLocationCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCountryPrimaryLocationCode")))
 }
 
-// KCGImagePropertyIPTCCountryPrimaryLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCountryPrimaryLocationName as an objc.ID.
-func KCGImagePropertyIPTCCountryPrimaryLocationName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCountryPrimaryLocationName())
+// KCGImagePropertyIPTCCountryPrimaryLocationName returns the value of the constant kCGImagePropertyIPTCCountryPrimaryLocationName.
+func KCGImagePropertyIPTCCountryPrimaryLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCountryPrimaryLocationName")))
 }
 
-// KCGImagePropertyIPTCOriginalTransmissionReference returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCOriginalTransmissionReference as an objc.ID.
-func KCGImagePropertyIPTCOriginalTransmissionReference() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCOriginalTransmissionReference())
+// KCGImagePropertyIPTCOriginalTransmissionReference returns the value of the constant kCGImagePropertyIPTCOriginalTransmissionReference.
+func KCGImagePropertyIPTCOriginalTransmissionReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCOriginalTransmissionReference")))
 }
 
-// KCGImagePropertyIPTCHeadline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCHeadline as an objc.ID.
-func KCGImagePropertyIPTCHeadline() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCHeadline())
+// KCGImagePropertyIPTCHeadline returns the value of the constant kCGImagePropertyIPTCHeadline.
+func KCGImagePropertyIPTCHeadline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCHeadline")))
 }
 
-// KCGImagePropertyIPTCCredit returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCredit as an objc.ID.
-func KCGImagePropertyIPTCCredit() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCCredit()) }
+// KCGImagePropertyIPTCCredit returns the value of the constant kCGImagePropertyIPTCCredit.
+func KCGImagePropertyIPTCCredit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCredit")))
+}
 
-// KCGImagePropertyIPTCSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCSource as an objc.ID.
-func KCGImagePropertyIPTCSource() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCSource()) }
+// KCGImagePropertyIPTCSource returns the value of the constant kCGImagePropertyIPTCSource.
+func KCGImagePropertyIPTCSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCSource")))
+}
 
-// KCGImagePropertyIPTCCopyrightNotice returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCopyrightNotice as an objc.ID.
-func KCGImagePropertyIPTCCopyrightNotice() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCopyrightNotice())
+// KCGImagePropertyIPTCCopyrightNotice returns the value of the constant kCGImagePropertyIPTCCopyrightNotice.
+func KCGImagePropertyIPTCCopyrightNotice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCopyrightNotice")))
 }
 
-// KCGImagePropertyIPTCContact returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContact as an objc.ID.
-func KCGImagePropertyIPTCContact() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContact())
+// KCGImagePropertyIPTCContact returns the value of the constant kCGImagePropertyIPTCContact.
+func KCGImagePropertyIPTCContact() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContact")))
 }
 
-// KCGImagePropertyIPTCCaptionAbstract returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCaptionAbstract as an objc.ID.
-func KCGImagePropertyIPTCCaptionAbstract() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCaptionAbstract())
+// KCGImagePropertyIPTCCaptionAbstract returns the value of the constant kCGImagePropertyIPTCCaptionAbstract.
+func KCGImagePropertyIPTCCaptionAbstract() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCaptionAbstract")))
 }
 
-// KCGImagePropertyIPTCWriterEditor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCWriterEditor as an objc.ID.
-func KCGImagePropertyIPTCWriterEditor() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCWriterEditor())
+// KCGImagePropertyIPTCWriterEditor returns the value of the constant kCGImagePropertyIPTCWriterEditor.
+func KCGImagePropertyIPTCWriterEditor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCWriterEditor")))
 }
 
-// KCGImagePropertyIPTCImageType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCImageType as an objc.ID.
-func KCGImagePropertyIPTCImageType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCImageType())
+// KCGImagePropertyIPTCImageType returns the value of the constant kCGImagePropertyIPTCImageType.
+func KCGImagePropertyIPTCImageType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCImageType")))
 }
 
-// KCGImagePropertyIPTCImageOrientation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCImageOrientation as an objc.ID.
-func KCGImagePropertyIPTCImageOrientation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCImageOrientation())
+// KCGImagePropertyIPTCImageOrientation returns the value of the constant kCGImagePropertyIPTCImageOrientation.
+func KCGImagePropertyIPTCImageOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCImageOrientation")))
 }
 
-// KCGImagePropertyIPTCLanguageIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCLanguageIdentifier as an objc.ID.
-func KCGImagePropertyIPTCLanguageIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCLanguageIdentifier())
+// KCGImagePropertyIPTCLanguageIdentifier returns the value of the constant kCGImagePropertyIPTCLanguageIdentifier.
+func KCGImagePropertyIPTCLanguageIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCLanguageIdentifier")))
 }
 
-// KCGImagePropertyIPTCStarRating returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCStarRating as an objc.ID.
-func KCGImagePropertyIPTCStarRating() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCStarRating())
+// KCGImagePropertyIPTCStarRating returns the value of the constant kCGImagePropertyIPTCStarRating.
+func KCGImagePropertyIPTCStarRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCStarRating")))
 }
 
-// KCGImagePropertyIPTCCreatorContactInfo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCCreatorContactInfo as an objc.ID.
-func KCGImagePropertyIPTCCreatorContactInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCCreatorContactInfo())
+// KCGImagePropertyIPTCCreatorContactInfo returns the value of the constant kCGImagePropertyIPTCCreatorContactInfo.
+func KCGImagePropertyIPTCCreatorContactInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCCreatorContactInfo")))
 }
 
-// KCGImagePropertyIPTCRightsUsageTerms returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCRightsUsageTerms as an objc.ID.
-func KCGImagePropertyIPTCRightsUsageTerms() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCRightsUsageTerms())
+// KCGImagePropertyIPTCRightsUsageTerms returns the value of the constant kCGImagePropertyIPTCRightsUsageTerms.
+func KCGImagePropertyIPTCRightsUsageTerms() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCRightsUsageTerms")))
 }
 
-// KCGImagePropertyIPTCScene returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCScene as an objc.ID.
-func KCGImagePropertyIPTCScene() objc.ID { return purego.CFConstant(raw.KCGImagePropertyIPTCScene()) }
+// KCGImagePropertyIPTCScene returns the value of the constant kCGImagePropertyIPTCScene.
+func KCGImagePropertyIPTCScene() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCScene")))
+}
 
-// KCGImagePropertyIPTCExtAboutCvTerm returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTerm as an objc.ID.
-func KCGImagePropertyIPTCExtAboutCvTerm() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTerm())
+// KCGImagePropertyIPTCExtAboutCvTerm returns the value of the constant kCGImagePropertyIPTCExtAboutCvTerm.
+func KCGImagePropertyIPTCExtAboutCvTerm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAboutCvTerm")))
 }
 
-// KCGImagePropertyIPTCExtAboutCvTermCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermCvId as an objc.ID.
-func KCGImagePropertyIPTCExtAboutCvTermCvId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermCvId())
+// KCGImagePropertyIPTCExtAboutCvTermCvId returns the value of the constant kCGImagePropertyIPTCExtAboutCvTermCvId.
+func KCGImagePropertyIPTCExtAboutCvTermCvId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAboutCvTermCvId")))
 }
 
-// KCGImagePropertyIPTCExtAboutCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermId as an objc.ID.
-func KCGImagePropertyIPTCExtAboutCvTermId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermId())
+// KCGImagePropertyIPTCExtAboutCvTermId returns the value of the constant kCGImagePropertyIPTCExtAboutCvTermId.
+func KCGImagePropertyIPTCExtAboutCvTermId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAboutCvTermId")))
 }
 
-// KCGImagePropertyIPTCExtAboutCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermName as an objc.ID.
-func KCGImagePropertyIPTCExtAboutCvTermName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermName())
+// KCGImagePropertyIPTCExtAboutCvTermName returns the value of the constant kCGImagePropertyIPTCExtAboutCvTermName.
+func KCGImagePropertyIPTCExtAboutCvTermName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAboutCvTermName")))
 }
 
-// KCGImagePropertyIPTCExtAboutCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAboutCvTermRefinedAbout as an objc.ID.
-func KCGImagePropertyIPTCExtAboutCvTermRefinedAbout() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAboutCvTermRefinedAbout())
+// KCGImagePropertyIPTCExtAboutCvTermRefinedAbout returns the value of the constant kCGImagePropertyIPTCExtAboutCvTermRefinedAbout.
+func KCGImagePropertyIPTCExtAboutCvTermRefinedAbout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAboutCvTermRefinedAbout")))
 }
 
-// KCGImagePropertyIPTCExtAddlModelInfo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAddlModelInfo as an objc.ID.
-func KCGImagePropertyIPTCExtAddlModelInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAddlModelInfo())
+// KCGImagePropertyIPTCExtAddlModelInfo returns the value of the constant kCGImagePropertyIPTCExtAddlModelInfo.
+func KCGImagePropertyIPTCExtAddlModelInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAddlModelInfo")))
 }
 
-// KCGImagePropertyIPTCExtArtworkOrObject returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkOrObject as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkOrObject() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkOrObject())
+// KCGImagePropertyIPTCExtArtworkOrObject returns the value of the constant kCGImagePropertyIPTCExtArtworkOrObject.
+func KCGImagePropertyIPTCExtArtworkOrObject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkOrObject")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCircaDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCircaDateCreated as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCircaDateCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCircaDateCreated())
+// KCGImagePropertyIPTCExtArtworkCircaDateCreated returns the value of the constant kCGImagePropertyIPTCExtArtworkCircaDateCreated.
+func KCGImagePropertyIPTCExtArtworkCircaDateCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCircaDateCreated")))
 }
 
-// KCGImagePropertyIPTCExtArtworkContentDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkContentDescription as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkContentDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkContentDescription())
+// KCGImagePropertyIPTCExtArtworkContentDescription returns the value of the constant kCGImagePropertyIPTCExtArtworkContentDescription.
+func KCGImagePropertyIPTCExtArtworkContentDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkContentDescription")))
 }
 
-// KCGImagePropertyIPTCExtArtworkContributionDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkContributionDescription as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkContributionDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkContributionDescription())
+// KCGImagePropertyIPTCExtArtworkContributionDescription returns the value of the constant kCGImagePropertyIPTCExtArtworkContributionDescription.
+func KCGImagePropertyIPTCExtArtworkContributionDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkContributionDescription")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightNotice returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightNotice as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCopyrightNotice() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightNotice())
+// KCGImagePropertyIPTCExtArtworkCopyrightNotice returns the value of the constant kCGImagePropertyIPTCExtArtworkCopyrightNotice.
+func KCGImagePropertyIPTCExtArtworkCopyrightNotice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCopyrightNotice")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCreator returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCreator as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCreator() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCreator())
+// KCGImagePropertyIPTCExtArtworkCreator returns the value of the constant kCGImagePropertyIPTCExtArtworkCreator.
+func KCGImagePropertyIPTCExtArtworkCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCreator")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCreatorID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCreatorID as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCreatorID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCreatorID())
+// KCGImagePropertyIPTCExtArtworkCreatorID returns the value of the constant kCGImagePropertyIPTCExtArtworkCreatorID.
+func KCGImagePropertyIPTCExtArtworkCreatorID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCreatorID")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightOwnerID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerID as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCopyrightOwnerID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightOwnerID())
+// KCGImagePropertyIPTCExtArtworkCopyrightOwnerID returns the value of the constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerID.
+func KCGImagePropertyIPTCExtArtworkCopyrightOwnerID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCopyrightOwnerID")))
 }
 
-// KCGImagePropertyIPTCExtArtworkCopyrightOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerName as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkCopyrightOwnerName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkCopyrightOwnerName())
+// KCGImagePropertyIPTCExtArtworkCopyrightOwnerName returns the value of the constant kCGImagePropertyIPTCExtArtworkCopyrightOwnerName.
+func KCGImagePropertyIPTCExtArtworkCopyrightOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkCopyrightOwnerName")))
 }
 
-// KCGImagePropertyIPTCExtArtworkLicensorID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkLicensorID as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkLicensorID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkLicensorID())
+// KCGImagePropertyIPTCExtArtworkLicensorID returns the value of the constant kCGImagePropertyIPTCExtArtworkLicensorID.
+func KCGImagePropertyIPTCExtArtworkLicensorID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkLicensorID")))
 }
 
-// KCGImagePropertyIPTCExtArtworkLicensorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkLicensorName as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkLicensorName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkLicensorName())
+// KCGImagePropertyIPTCExtArtworkLicensorName returns the value of the constant kCGImagePropertyIPTCExtArtworkLicensorName.
+func KCGImagePropertyIPTCExtArtworkLicensorName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkLicensorName")))
 }
 
-// KCGImagePropertyIPTCExtArtworkDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkDateCreated as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkDateCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkDateCreated())
+// KCGImagePropertyIPTCExtArtworkDateCreated returns the value of the constant kCGImagePropertyIPTCExtArtworkDateCreated.
+func KCGImagePropertyIPTCExtArtworkDateCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkDateCreated")))
 }
 
-// KCGImagePropertyIPTCExtArtworkPhysicalDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkPhysicalDescription as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkPhysicalDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkPhysicalDescription())
+// KCGImagePropertyIPTCExtArtworkPhysicalDescription returns the value of the constant kCGImagePropertyIPTCExtArtworkPhysicalDescription.
+func KCGImagePropertyIPTCExtArtworkPhysicalDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkPhysicalDescription")))
 }
 
-// KCGImagePropertyIPTCExtArtworkSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSource as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkSource() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSource())
+// KCGImagePropertyIPTCExtArtworkSource returns the value of the constant kCGImagePropertyIPTCExtArtworkSource.
+func KCGImagePropertyIPTCExtArtworkSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkSource")))
 }
 
-// KCGImagePropertyIPTCExtArtworkSourceInventoryNo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSourceInventoryNo as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkSourceInventoryNo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSourceInventoryNo())
+// KCGImagePropertyIPTCExtArtworkSourceInventoryNo returns the value of the constant kCGImagePropertyIPTCExtArtworkSourceInventoryNo.
+func KCGImagePropertyIPTCExtArtworkSourceInventoryNo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkSourceInventoryNo")))
 }
 
-// KCGImagePropertyIPTCExtArtworkSourceInvURL returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkSourceInvURL as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkSourceInvURL() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkSourceInvURL())
+// KCGImagePropertyIPTCExtArtworkSourceInvURL returns the value of the constant kCGImagePropertyIPTCExtArtworkSourceInvURL.
+func KCGImagePropertyIPTCExtArtworkSourceInvURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkSourceInvURL")))
 }
 
-// KCGImagePropertyIPTCExtArtworkStylePeriod returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkStylePeriod as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkStylePeriod() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkStylePeriod())
+// KCGImagePropertyIPTCExtArtworkStylePeriod returns the value of the constant kCGImagePropertyIPTCExtArtworkStylePeriod.
+func KCGImagePropertyIPTCExtArtworkStylePeriod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkStylePeriod")))
 }
 
-// KCGImagePropertyIPTCExtArtworkTitle returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtArtworkTitle as an objc.ID.
-func KCGImagePropertyIPTCExtArtworkTitle() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtArtworkTitle())
+// KCGImagePropertyIPTCExtArtworkTitle returns the value of the constant kCGImagePropertyIPTCExtArtworkTitle.
+func KCGImagePropertyIPTCExtArtworkTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtArtworkTitle")))
 }
 
-// KCGImagePropertyIPTCExtAudioBitrate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioBitrate as an objc.ID.
-func KCGImagePropertyIPTCExtAudioBitrate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioBitrate())
+// KCGImagePropertyIPTCExtAudioBitrate returns the value of the constant kCGImagePropertyIPTCExtAudioBitrate.
+func KCGImagePropertyIPTCExtAudioBitrate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAudioBitrate")))
 }
 
-// KCGImagePropertyIPTCExtAudioBitrateMode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioBitrateMode as an objc.ID.
-func KCGImagePropertyIPTCExtAudioBitrateMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioBitrateMode())
+// KCGImagePropertyIPTCExtAudioBitrateMode returns the value of the constant kCGImagePropertyIPTCExtAudioBitrateMode.
+func KCGImagePropertyIPTCExtAudioBitrateMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAudioBitrateMode")))
 }
 
-// KCGImagePropertyIPTCExtAudioChannelCount returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtAudioChannelCount as an objc.ID.
-func KCGImagePropertyIPTCExtAudioChannelCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtAudioChannelCount())
+// KCGImagePropertyIPTCExtAudioChannelCount returns the value of the constant kCGImagePropertyIPTCExtAudioChannelCount.
+func KCGImagePropertyIPTCExtAudioChannelCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtAudioChannelCount")))
 }
 
-// KCGImagePropertyIPTCExtCircaDateCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCircaDateCreated as an objc.ID.
-func KCGImagePropertyIPTCExtCircaDateCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCircaDateCreated())
+// KCGImagePropertyIPTCExtCircaDateCreated returns the value of the constant kCGImagePropertyIPTCExtCircaDateCreated.
+func KCGImagePropertyIPTCExtCircaDateCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCircaDateCreated")))
 }
 
-// KCGImagePropertyIPTCExtContainerFormat returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormat as an objc.ID.
-func KCGImagePropertyIPTCExtContainerFormat() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormat())
+// KCGImagePropertyIPTCExtContainerFormat returns the value of the constant kCGImagePropertyIPTCExtContainerFormat.
+func KCGImagePropertyIPTCExtContainerFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContainerFormat")))
 }
 
-// KCGImagePropertyIPTCExtContainerFormatIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormatIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtContainerFormatIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormatIdentifier())
+// KCGImagePropertyIPTCExtContainerFormatIdentifier returns the value of the constant kCGImagePropertyIPTCExtContainerFormatIdentifier.
+func KCGImagePropertyIPTCExtContainerFormatIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContainerFormatIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtContainerFormatName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContainerFormatName as an objc.ID.
-func KCGImagePropertyIPTCExtContainerFormatName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContainerFormatName())
+// KCGImagePropertyIPTCExtContainerFormatName returns the value of the constant kCGImagePropertyIPTCExtContainerFormatName.
+func KCGImagePropertyIPTCExtContainerFormatName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContainerFormatName")))
 }
 
-// KCGImagePropertyIPTCExtContributor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributor as an objc.ID.
-func KCGImagePropertyIPTCExtContributor() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributor())
+// KCGImagePropertyIPTCExtContributor returns the value of the constant kCGImagePropertyIPTCExtContributor.
+func KCGImagePropertyIPTCExtContributor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContributor")))
 }
 
-// KCGImagePropertyIPTCExtContributorIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtContributorIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorIdentifier())
+// KCGImagePropertyIPTCExtContributorIdentifier returns the value of the constant kCGImagePropertyIPTCExtContributorIdentifier.
+func KCGImagePropertyIPTCExtContributorIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContributorIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtContributorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorName as an objc.ID.
-func KCGImagePropertyIPTCExtContributorName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorName())
+// KCGImagePropertyIPTCExtContributorName returns the value of the constant kCGImagePropertyIPTCExtContributorName.
+func KCGImagePropertyIPTCExtContributorName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContributorName")))
 }
 
-// KCGImagePropertyIPTCExtContributorRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtContributorRole as an objc.ID.
-func KCGImagePropertyIPTCExtContributorRole() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtContributorRole())
+// KCGImagePropertyIPTCExtContributorRole returns the value of the constant kCGImagePropertyIPTCExtContributorRole.
+func KCGImagePropertyIPTCExtContributorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtContributorRole")))
 }
 
-// KCGImagePropertyIPTCExtCopyrightYear returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCopyrightYear as an objc.ID.
-func KCGImagePropertyIPTCExtCopyrightYear() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCopyrightYear())
+// KCGImagePropertyIPTCExtCopyrightYear returns the value of the constant kCGImagePropertyIPTCExtCopyrightYear.
+func KCGImagePropertyIPTCExtCopyrightYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCopyrightYear")))
 }
 
-// KCGImagePropertyIPTCExtCreator returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreator as an objc.ID.
-func KCGImagePropertyIPTCExtCreator() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreator())
+// KCGImagePropertyIPTCExtCreator returns the value of the constant kCGImagePropertyIPTCExtCreator.
+func KCGImagePropertyIPTCExtCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCreator")))
 }
 
-// KCGImagePropertyIPTCExtCreatorIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtCreatorIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorIdentifier())
+// KCGImagePropertyIPTCExtCreatorIdentifier returns the value of the constant kCGImagePropertyIPTCExtCreatorIdentifier.
+func KCGImagePropertyIPTCExtCreatorIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCreatorIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtCreatorName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorName as an objc.ID.
-func KCGImagePropertyIPTCExtCreatorName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorName())
+// KCGImagePropertyIPTCExtCreatorName returns the value of the constant kCGImagePropertyIPTCExtCreatorName.
+func KCGImagePropertyIPTCExtCreatorName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCreatorName")))
 }
 
-// KCGImagePropertyIPTCExtCreatorRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtCreatorRole as an objc.ID.
-func KCGImagePropertyIPTCExtCreatorRole() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtCreatorRole())
+// KCGImagePropertyIPTCExtCreatorRole returns the value of the constant kCGImagePropertyIPTCExtCreatorRole.
+func KCGImagePropertyIPTCExtCreatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtCreatorRole")))
 }
 
-// KCGImagePropertyIPTCExtControlledVocabularyTerm returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtControlledVocabularyTerm as an objc.ID.
-func KCGImagePropertyIPTCExtControlledVocabularyTerm() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtControlledVocabularyTerm())
+// KCGImagePropertyIPTCExtControlledVocabularyTerm returns the value of the constant kCGImagePropertyIPTCExtControlledVocabularyTerm.
+func KCGImagePropertyIPTCExtControlledVocabularyTerm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtControlledVocabularyTerm")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreen returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreen as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreen() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreen())
+// KCGImagePropertyIPTCExtDataOnScreen returns the value of the constant kCGImagePropertyIPTCExtDataOnScreen.
+func KCGImagePropertyIPTCExtDataOnScreen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreen")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegion as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegion())
+// KCGImagePropertyIPTCExtDataOnScreenRegion returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegion.
+func KCGImagePropertyIPTCExtDataOnScreenRegion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegion")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionD returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionD as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionD() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionD())
+// KCGImagePropertyIPTCExtDataOnScreenRegionD returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionD.
+func KCGImagePropertyIPTCExtDataOnScreenRegionD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionD")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionH returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionH as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionH() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionH())
+// KCGImagePropertyIPTCExtDataOnScreenRegionH returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionH.
+func KCGImagePropertyIPTCExtDataOnScreenRegionH() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionH")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionText returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionText as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionText() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionText())
+// KCGImagePropertyIPTCExtDataOnScreenRegionText returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionText.
+func KCGImagePropertyIPTCExtDataOnScreenRegionText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionText")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionUnit returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionUnit as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionUnit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionUnit())
+// KCGImagePropertyIPTCExtDataOnScreenRegionUnit returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionUnit.
+func KCGImagePropertyIPTCExtDataOnScreenRegionUnit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionUnit")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionW returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionW as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionW() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionW())
+// KCGImagePropertyIPTCExtDataOnScreenRegionW returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionW.
+func KCGImagePropertyIPTCExtDataOnScreenRegionW() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionW")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionX returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionX as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionX() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionX())
+// KCGImagePropertyIPTCExtDataOnScreenRegionX returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionX.
+func KCGImagePropertyIPTCExtDataOnScreenRegionX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionX")))
 }
 
-// KCGImagePropertyIPTCExtDataOnScreenRegionY returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDataOnScreenRegionY as an objc.ID.
-func KCGImagePropertyIPTCExtDataOnScreenRegionY() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDataOnScreenRegionY())
+// KCGImagePropertyIPTCExtDataOnScreenRegionY returns the value of the constant kCGImagePropertyIPTCExtDataOnScreenRegionY.
+func KCGImagePropertyIPTCExtDataOnScreenRegionY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDataOnScreenRegionY")))
 }
 
-// KCGImagePropertyIPTCExtDigitalImageGUID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalImageGUID as an objc.ID.
-func KCGImagePropertyIPTCExtDigitalImageGUID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalImageGUID())
+// KCGImagePropertyIPTCExtDigitalImageGUID returns the value of the constant kCGImagePropertyIPTCExtDigitalImageGUID.
+func KCGImagePropertyIPTCExtDigitalImageGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDigitalImageGUID")))
 }
 
-// KCGImagePropertyIPTCExtDigitalSourceFileType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalSourceFileType as an objc.ID.
-func KCGImagePropertyIPTCExtDigitalSourceFileType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalSourceFileType())
+// KCGImagePropertyIPTCExtDigitalSourceFileType returns the value of the constant kCGImagePropertyIPTCExtDigitalSourceFileType.
+func KCGImagePropertyIPTCExtDigitalSourceFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDigitalSourceFileType")))
 }
 
-// KCGImagePropertyIPTCExtDigitalSourceType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDigitalSourceType as an objc.ID.
-func KCGImagePropertyIPTCExtDigitalSourceType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDigitalSourceType())
+// KCGImagePropertyIPTCExtDigitalSourceType returns the value of the constant kCGImagePropertyIPTCExtDigitalSourceType.
+func KCGImagePropertyIPTCExtDigitalSourceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDigitalSourceType")))
 }
 
-// KCGImagePropertyIPTCExtDopesheet returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheet as an objc.ID.
-func KCGImagePropertyIPTCExtDopesheet() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheet())
+// KCGImagePropertyIPTCExtDopesheet returns the value of the constant kCGImagePropertyIPTCExtDopesheet.
+func KCGImagePropertyIPTCExtDopesheet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDopesheet")))
 }
 
-// KCGImagePropertyIPTCExtDopesheetLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLink as an objc.ID.
-func KCGImagePropertyIPTCExtDopesheetLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLink())
+// KCGImagePropertyIPTCExtDopesheetLink returns the value of the constant kCGImagePropertyIPTCExtDopesheetLink.
+func KCGImagePropertyIPTCExtDopesheetLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDopesheetLink")))
 }
 
-// KCGImagePropertyIPTCExtDopesheetLinkLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLinkLink as an objc.ID.
-func KCGImagePropertyIPTCExtDopesheetLinkLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLinkLink())
+// KCGImagePropertyIPTCExtDopesheetLinkLink returns the value of the constant kCGImagePropertyIPTCExtDopesheetLinkLink.
+func KCGImagePropertyIPTCExtDopesheetLinkLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDopesheetLinkLink")))
 }
 
-// KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier as an objc.ID.
-func KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier())
+// KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier returns the value of the constant kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier.
+func KCGImagePropertyIPTCExtDopesheetLinkLinkQualifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier")))
 }
 
-// KCGImagePropertyIPTCExtEmbdEncRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbdEncRightsExpr as an objc.ID.
-func KCGImagePropertyIPTCExtEmbdEncRightsExpr() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbdEncRightsExpr())
+// KCGImagePropertyIPTCExtEmbdEncRightsExpr returns the value of the constant kCGImagePropertyIPTCExtEmbdEncRightsExpr.
+func KCGImagePropertyIPTCExtEmbdEncRightsExpr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEmbdEncRightsExpr")))
 }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr as an objc.ID.
-func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr())
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr returns the value of the constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr.
+func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr")))
 }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType as an objc.ID.
-func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType())
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType returns the value of the constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType.
+func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType")))
 }
 
-// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID as an objc.ID.
-func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID())
+// KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID returns the value of the constant kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID.
+func KCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID")))
 }
 
-// KCGImagePropertyIPTCExtEpisode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisode as an objc.ID.
-func KCGImagePropertyIPTCExtEpisode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisode())
+// KCGImagePropertyIPTCExtEpisode returns the value of the constant kCGImagePropertyIPTCExtEpisode.
+func KCGImagePropertyIPTCExtEpisode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEpisode")))
 }
 
-// KCGImagePropertyIPTCExtEpisodeIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtEpisodeIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeIdentifier())
+// KCGImagePropertyIPTCExtEpisodeIdentifier returns the value of the constant kCGImagePropertyIPTCExtEpisodeIdentifier.
+func KCGImagePropertyIPTCExtEpisodeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEpisodeIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtEpisodeName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeName as an objc.ID.
-func KCGImagePropertyIPTCExtEpisodeName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeName())
+// KCGImagePropertyIPTCExtEpisodeName returns the value of the constant kCGImagePropertyIPTCExtEpisodeName.
+func KCGImagePropertyIPTCExtEpisodeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEpisodeName")))
 }
 
-// KCGImagePropertyIPTCExtEpisodeNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEpisodeNumber as an objc.ID.
-func KCGImagePropertyIPTCExtEpisodeNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEpisodeNumber())
+// KCGImagePropertyIPTCExtEpisodeNumber returns the value of the constant kCGImagePropertyIPTCExtEpisodeNumber.
+func KCGImagePropertyIPTCExtEpisodeNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEpisodeNumber")))
 }
 
-// KCGImagePropertyIPTCExtEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtEvent as an objc.ID.
-func KCGImagePropertyIPTCExtEvent() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtEvent())
+// KCGImagePropertyIPTCExtEvent returns the value of the constant kCGImagePropertyIPTCExtEvent.
+func KCGImagePropertyIPTCExtEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtEvent")))
 }
 
-// KCGImagePropertyIPTCExtShownEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEvent as an objc.ID.
-func KCGImagePropertyIPTCExtShownEvent() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEvent())
+// KCGImagePropertyIPTCExtShownEvent returns the value of the constant kCGImagePropertyIPTCExtShownEvent.
+func KCGImagePropertyIPTCExtShownEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtShownEvent")))
 }
 
-// KCGImagePropertyIPTCExtShownEventIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEventIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtShownEventIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEventIdentifier())
+// KCGImagePropertyIPTCExtShownEventIdentifier returns the value of the constant kCGImagePropertyIPTCExtShownEventIdentifier.
+func KCGImagePropertyIPTCExtShownEventIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtShownEventIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtShownEventName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtShownEventName as an objc.ID.
-func KCGImagePropertyIPTCExtShownEventName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtShownEventName())
+// KCGImagePropertyIPTCExtShownEventName returns the value of the constant kCGImagePropertyIPTCExtShownEventName.
+func KCGImagePropertyIPTCExtShownEventName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtShownEventName")))
 }
 
-// KCGImagePropertyIPTCExtExternalMetadataLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtExternalMetadataLink as an objc.ID.
-func KCGImagePropertyIPTCExtExternalMetadataLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtExternalMetadataLink())
+// KCGImagePropertyIPTCExtExternalMetadataLink returns the value of the constant kCGImagePropertyIPTCExtExternalMetadataLink.
+func KCGImagePropertyIPTCExtExternalMetadataLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtExternalMetadataLink")))
 }
 
-// KCGImagePropertyIPTCExtFeedIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtFeedIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtFeedIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtFeedIdentifier())
+// KCGImagePropertyIPTCExtFeedIdentifier returns the value of the constant kCGImagePropertyIPTCExtFeedIdentifier.
+func KCGImagePropertyIPTCExtFeedIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtFeedIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtGenre returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenre as an objc.ID.
-func KCGImagePropertyIPTCExtGenre() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenre())
+// KCGImagePropertyIPTCExtGenre returns the value of the constant kCGImagePropertyIPTCExtGenre.
+func KCGImagePropertyIPTCExtGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtGenre")))
 }
 
-// KCGImagePropertyIPTCExtGenreCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvId as an objc.ID.
-func KCGImagePropertyIPTCExtGenreCvId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvId())
+// KCGImagePropertyIPTCExtGenreCvId returns the value of the constant kCGImagePropertyIPTCExtGenreCvId.
+func KCGImagePropertyIPTCExtGenreCvId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtGenreCvId")))
 }
 
-// KCGImagePropertyIPTCExtGenreCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermId as an objc.ID.
-func KCGImagePropertyIPTCExtGenreCvTermId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermId())
+// KCGImagePropertyIPTCExtGenreCvTermId returns the value of the constant kCGImagePropertyIPTCExtGenreCvTermId.
+func KCGImagePropertyIPTCExtGenreCvTermId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtGenreCvTermId")))
 }
 
-// KCGImagePropertyIPTCExtGenreCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermName as an objc.ID.
-func KCGImagePropertyIPTCExtGenreCvTermName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermName())
+// KCGImagePropertyIPTCExtGenreCvTermName returns the value of the constant kCGImagePropertyIPTCExtGenreCvTermName.
+func KCGImagePropertyIPTCExtGenreCvTermName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtGenreCvTermName")))
 }
 
-// KCGImagePropertyIPTCExtGenreCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtGenreCvTermRefinedAbout as an objc.ID.
-func KCGImagePropertyIPTCExtGenreCvTermRefinedAbout() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtGenreCvTermRefinedAbout())
+// KCGImagePropertyIPTCExtGenreCvTermRefinedAbout returns the value of the constant kCGImagePropertyIPTCExtGenreCvTermRefinedAbout.
+func KCGImagePropertyIPTCExtGenreCvTermRefinedAbout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtGenreCvTermRefinedAbout")))
 }
 
-// KCGImagePropertyIPTCExtHeadline returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtHeadline as an objc.ID.
-func KCGImagePropertyIPTCExtHeadline() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtHeadline())
+// KCGImagePropertyIPTCExtHeadline returns the value of the constant kCGImagePropertyIPTCExtHeadline.
+func KCGImagePropertyIPTCExtHeadline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtHeadline")))
 }
 
-// KCGImagePropertyIPTCExtIPTCLastEdited returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtIPTCLastEdited as an objc.ID.
-func KCGImagePropertyIPTCExtIPTCLastEdited() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtIPTCLastEdited())
+// KCGImagePropertyIPTCExtIPTCLastEdited returns the value of the constant kCGImagePropertyIPTCExtIPTCLastEdited.
+func KCGImagePropertyIPTCExtIPTCLastEdited() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtIPTCLastEdited")))
 }
 
-// KCGImagePropertyIPTCExtLinkedEncRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncRightsExpr as an objc.ID.
-func KCGImagePropertyIPTCExtLinkedEncRightsExpr() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncRightsExpr())
+// KCGImagePropertyIPTCExtLinkedEncRightsExpr returns the value of the constant kCGImagePropertyIPTCExtLinkedEncRightsExpr.
+func KCGImagePropertyIPTCExtLinkedEncRightsExpr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLinkedEncRightsExpr")))
 }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExpr returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExpr as an objc.ID.
-func KCGImagePropertyIPTCExtLinkedEncodedRightsExpr() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExpr())
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExpr returns the value of the constant kCGImagePropertyIPTCExtLinkedEncodedRightsExpr.
+func KCGImagePropertyIPTCExtLinkedEncodedRightsExpr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLinkedEncodedRightsExpr")))
 }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExprType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprType as an objc.ID.
-func KCGImagePropertyIPTCExtLinkedEncodedRightsExprType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExprType())
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExprType returns the value of the constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprType.
+func KCGImagePropertyIPTCExtLinkedEncodedRightsExprType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLinkedEncodedRightsExprType")))
 }
 
-// KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID as an objc.ID.
-func KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID())
+// KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID returns the value of the constant kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID.
+func KCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID")))
 }
 
-// KCGImagePropertyIPTCExtLocationCreated returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCreated as an objc.ID.
-func KCGImagePropertyIPTCExtLocationCreated() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCreated())
+// KCGImagePropertyIPTCExtLocationCreated returns the value of the constant kCGImagePropertyIPTCExtLocationCreated.
+func KCGImagePropertyIPTCExtLocationCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationCreated")))
 }
 
-// KCGImagePropertyIPTCExtLocationCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCity as an objc.ID.
-func KCGImagePropertyIPTCExtLocationCity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCity())
+// KCGImagePropertyIPTCExtLocationCity returns the value of the constant kCGImagePropertyIPTCExtLocationCity.
+func KCGImagePropertyIPTCExtLocationCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationCity")))
 }
 
-// KCGImagePropertyIPTCExtLocationCountryCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCountryCode as an objc.ID.
-func KCGImagePropertyIPTCExtLocationCountryCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCountryCode())
+// KCGImagePropertyIPTCExtLocationCountryCode returns the value of the constant kCGImagePropertyIPTCExtLocationCountryCode.
+func KCGImagePropertyIPTCExtLocationCountryCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationCountryCode")))
 }
 
-// KCGImagePropertyIPTCExtLocationCountryName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationCountryName as an objc.ID.
-func KCGImagePropertyIPTCExtLocationCountryName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationCountryName())
+// KCGImagePropertyIPTCExtLocationCountryName returns the value of the constant kCGImagePropertyIPTCExtLocationCountryName.
+func KCGImagePropertyIPTCExtLocationCountryName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationCountryName")))
 }
 
-// KCGImagePropertyIPTCExtLocationGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSAltitude as an objc.ID.
-func KCGImagePropertyIPTCExtLocationGPSAltitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSAltitude())
+// KCGImagePropertyIPTCExtLocationGPSAltitude returns the value of the constant kCGImagePropertyIPTCExtLocationGPSAltitude.
+func KCGImagePropertyIPTCExtLocationGPSAltitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationGPSAltitude")))
 }
 
-// KCGImagePropertyIPTCExtLocationGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSLatitude as an objc.ID.
-func KCGImagePropertyIPTCExtLocationGPSLatitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSLatitude())
+// KCGImagePropertyIPTCExtLocationGPSLatitude returns the value of the constant kCGImagePropertyIPTCExtLocationGPSLatitude.
+func KCGImagePropertyIPTCExtLocationGPSLatitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationGPSLatitude")))
 }
 
-// KCGImagePropertyIPTCExtLocationGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationGPSLongitude as an objc.ID.
-func KCGImagePropertyIPTCExtLocationGPSLongitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationGPSLongitude())
+// KCGImagePropertyIPTCExtLocationGPSLongitude returns the value of the constant kCGImagePropertyIPTCExtLocationGPSLongitude.
+func KCGImagePropertyIPTCExtLocationGPSLongitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationGPSLongitude")))
 }
 
-// KCGImagePropertyIPTCExtLocationIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtLocationIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationIdentifier())
+// KCGImagePropertyIPTCExtLocationIdentifier returns the value of the constant kCGImagePropertyIPTCExtLocationIdentifier.
+func KCGImagePropertyIPTCExtLocationIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtLocationLocationId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationLocationId as an objc.ID.
-func KCGImagePropertyIPTCExtLocationLocationId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationLocationId())
+// KCGImagePropertyIPTCExtLocationLocationId returns the value of the constant kCGImagePropertyIPTCExtLocationLocationId.
+func KCGImagePropertyIPTCExtLocationLocationId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationLocationId")))
 }
 
-// KCGImagePropertyIPTCExtLocationLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationLocationName as an objc.ID.
-func KCGImagePropertyIPTCExtLocationLocationName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationLocationName())
+// KCGImagePropertyIPTCExtLocationLocationName returns the value of the constant kCGImagePropertyIPTCExtLocationLocationName.
+func KCGImagePropertyIPTCExtLocationLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationLocationName")))
 }
 
-// KCGImagePropertyIPTCExtLocationProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationProvinceState as an objc.ID.
-func KCGImagePropertyIPTCExtLocationProvinceState() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationProvinceState())
+// KCGImagePropertyIPTCExtLocationProvinceState returns the value of the constant kCGImagePropertyIPTCExtLocationProvinceState.
+func KCGImagePropertyIPTCExtLocationProvinceState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationProvinceState")))
 }
 
-// KCGImagePropertyIPTCExtLocationSublocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationSublocation as an objc.ID.
-func KCGImagePropertyIPTCExtLocationSublocation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationSublocation())
+// KCGImagePropertyIPTCExtLocationSublocation returns the value of the constant kCGImagePropertyIPTCExtLocationSublocation.
+func KCGImagePropertyIPTCExtLocationSublocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationSublocation")))
 }
 
-// KCGImagePropertyIPTCExtLocationWorldRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationWorldRegion as an objc.ID.
-func KCGImagePropertyIPTCExtLocationWorldRegion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationWorldRegion())
+// KCGImagePropertyIPTCExtLocationWorldRegion returns the value of the constant kCGImagePropertyIPTCExtLocationWorldRegion.
+func KCGImagePropertyIPTCExtLocationWorldRegion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationWorldRegion")))
 }
 
-// KCGImagePropertyIPTCExtLocationShown returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtLocationShown as an objc.ID.
-func KCGImagePropertyIPTCExtLocationShown() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtLocationShown())
+// KCGImagePropertyIPTCExtLocationShown returns the value of the constant kCGImagePropertyIPTCExtLocationShown.
+func KCGImagePropertyIPTCExtLocationShown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtLocationShown")))
 }
 
-// KCGImagePropertyIPTCExtMaxAvailHeight returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtMaxAvailHeight as an objc.ID.
-func KCGImagePropertyIPTCExtMaxAvailHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtMaxAvailHeight())
+// KCGImagePropertyIPTCExtMaxAvailHeight returns the value of the constant kCGImagePropertyIPTCExtMaxAvailHeight.
+func KCGImagePropertyIPTCExtMaxAvailHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtMaxAvailHeight")))
 }
 
-// KCGImagePropertyIPTCExtMaxAvailWidth returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtMaxAvailWidth as an objc.ID.
-func KCGImagePropertyIPTCExtMaxAvailWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtMaxAvailWidth())
+// KCGImagePropertyIPTCExtMaxAvailWidth returns the value of the constant kCGImagePropertyIPTCExtMaxAvailWidth.
+func KCGImagePropertyIPTCExtMaxAvailWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtMaxAvailWidth")))
 }
 
-// KCGImagePropertyIPTCExtModelAge returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtModelAge as an objc.ID.
-func KCGImagePropertyIPTCExtModelAge() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtModelAge())
+// KCGImagePropertyIPTCExtModelAge returns the value of the constant kCGImagePropertyIPTCExtModelAge.
+func KCGImagePropertyIPTCExtModelAge() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtModelAge")))
 }
 
-// KCGImagePropertyIPTCExtOrganisationInImageCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtOrganisationInImageCode as an objc.ID.
-func KCGImagePropertyIPTCExtOrganisationInImageCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtOrganisationInImageCode())
+// KCGImagePropertyIPTCExtOrganisationInImageCode returns the value of the constant kCGImagePropertyIPTCExtOrganisationInImageCode.
+func KCGImagePropertyIPTCExtOrganisationInImageCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtOrganisationInImageCode")))
 }
 
-// KCGImagePropertyIPTCExtOrganisationInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtOrganisationInImageName as an objc.ID.
-func KCGImagePropertyIPTCExtOrganisationInImageName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtOrganisationInImageName())
+// KCGImagePropertyIPTCExtOrganisationInImageName returns the value of the constant kCGImagePropertyIPTCExtOrganisationInImageName.
+func KCGImagePropertyIPTCExtOrganisationInImageName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtOrganisationInImageName")))
 }
 
-// KCGImagePropertyIPTCExtPersonHeard returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeard as an objc.ID.
-func KCGImagePropertyIPTCExtPersonHeard() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeard())
+// KCGImagePropertyIPTCExtPersonHeard returns the value of the constant kCGImagePropertyIPTCExtPersonHeard.
+func KCGImagePropertyIPTCExtPersonHeard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonHeard")))
 }
 
-// KCGImagePropertyIPTCExtPersonHeardIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeardIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtPersonHeardIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeardIdentifier())
+// KCGImagePropertyIPTCExtPersonHeardIdentifier returns the value of the constant kCGImagePropertyIPTCExtPersonHeardIdentifier.
+func KCGImagePropertyIPTCExtPersonHeardIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonHeardIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtPersonHeardName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonHeardName as an objc.ID.
-func KCGImagePropertyIPTCExtPersonHeardName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonHeardName())
+// KCGImagePropertyIPTCExtPersonHeardName returns the value of the constant kCGImagePropertyIPTCExtPersonHeardName.
+func KCGImagePropertyIPTCExtPersonHeardName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonHeardName")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImage as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImage())
+// KCGImagePropertyIPTCExtPersonInImage returns the value of the constant kCGImagePropertyIPTCExtPersonInImage.
+func KCGImagePropertyIPTCExtPersonInImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImage")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageWDetails returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageWDetails as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageWDetails() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageWDetails())
+// KCGImagePropertyIPTCExtPersonInImageWDetails returns the value of the constant kCGImagePropertyIPTCExtPersonInImageWDetails.
+func KCGImagePropertyIPTCExtPersonInImageWDetails() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageWDetails")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageCharacteristic returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCharacteristic as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageCharacteristic() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCharacteristic())
+// KCGImagePropertyIPTCExtPersonInImageCharacteristic returns the value of the constant kCGImagePropertyIPTCExtPersonInImageCharacteristic.
+func KCGImagePropertyIPTCExtPersonInImageCharacteristic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageCharacteristic")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermCvId as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageCvTermCvId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermCvId())
+// KCGImagePropertyIPTCExtPersonInImageCvTermCvId returns the value of the constant kCGImagePropertyIPTCExtPersonInImageCvTermCvId.
+func KCGImagePropertyIPTCExtPersonInImageCvTermCvId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageCvTermCvId")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermId as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageCvTermId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermId())
+// KCGImagePropertyIPTCExtPersonInImageCvTermId returns the value of the constant kCGImagePropertyIPTCExtPersonInImageCvTermId.
+func KCGImagePropertyIPTCExtPersonInImageCvTermId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageCvTermId")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermName as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageCvTermName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermName())
+// KCGImagePropertyIPTCExtPersonInImageCvTermName returns the value of the constant kCGImagePropertyIPTCExtPersonInImageCvTermName.
+func KCGImagePropertyIPTCExtPersonInImageCvTermName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageCvTermName")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout())
+// KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout returns the value of the constant kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout.
+func KCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageDescription as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageDescription())
+// KCGImagePropertyIPTCExtPersonInImageDescription returns the value of the constant kCGImagePropertyIPTCExtPersonInImageDescription.
+func KCGImagePropertyIPTCExtPersonInImageDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageDescription")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageId as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageId())
+// KCGImagePropertyIPTCExtPersonInImageId returns the value of the constant kCGImagePropertyIPTCExtPersonInImageId.
+func KCGImagePropertyIPTCExtPersonInImageId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageId")))
 }
 
-// KCGImagePropertyIPTCExtPersonInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPersonInImageName as an objc.ID.
-func KCGImagePropertyIPTCExtPersonInImageName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPersonInImageName())
+// KCGImagePropertyIPTCExtPersonInImageName returns the value of the constant kCGImagePropertyIPTCExtPersonInImageName.
+func KCGImagePropertyIPTCExtPersonInImageName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPersonInImageName")))
 }
 
-// KCGImagePropertyIPTCExtProductInImage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImage as an objc.ID.
-func KCGImagePropertyIPTCExtProductInImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImage())
+// KCGImagePropertyIPTCExtProductInImage returns the value of the constant kCGImagePropertyIPTCExtProductInImage.
+func KCGImagePropertyIPTCExtProductInImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtProductInImage")))
 }
 
-// KCGImagePropertyIPTCExtProductInImageDescription returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageDescription as an objc.ID.
-func KCGImagePropertyIPTCExtProductInImageDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageDescription())
+// KCGImagePropertyIPTCExtProductInImageDescription returns the value of the constant kCGImagePropertyIPTCExtProductInImageDescription.
+func KCGImagePropertyIPTCExtProductInImageDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtProductInImageDescription")))
 }
 
-// KCGImagePropertyIPTCExtProductInImageGTIN returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageGTIN as an objc.ID.
-func KCGImagePropertyIPTCExtProductInImageGTIN() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageGTIN())
+// KCGImagePropertyIPTCExtProductInImageGTIN returns the value of the constant kCGImagePropertyIPTCExtProductInImageGTIN.
+func KCGImagePropertyIPTCExtProductInImageGTIN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtProductInImageGTIN")))
 }
 
-// KCGImagePropertyIPTCExtProductInImageName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtProductInImageName as an objc.ID.
-func KCGImagePropertyIPTCExtProductInImageName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtProductInImageName())
+// KCGImagePropertyIPTCExtProductInImageName returns the value of the constant kCGImagePropertyIPTCExtProductInImageName.
+func KCGImagePropertyIPTCExtProductInImageName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtProductInImageName")))
 }
 
-// KCGImagePropertyIPTCExtPublicationEvent returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEvent as an objc.ID.
-func KCGImagePropertyIPTCExtPublicationEvent() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEvent())
+// KCGImagePropertyIPTCExtPublicationEvent returns the value of the constant kCGImagePropertyIPTCExtPublicationEvent.
+func KCGImagePropertyIPTCExtPublicationEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPublicationEvent")))
 }
 
-// KCGImagePropertyIPTCExtPublicationEventDate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventDate as an objc.ID.
-func KCGImagePropertyIPTCExtPublicationEventDate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventDate())
+// KCGImagePropertyIPTCExtPublicationEventDate returns the value of the constant kCGImagePropertyIPTCExtPublicationEventDate.
+func KCGImagePropertyIPTCExtPublicationEventDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPublicationEventDate")))
 }
 
-// KCGImagePropertyIPTCExtPublicationEventIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtPublicationEventIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventIdentifier())
+// KCGImagePropertyIPTCExtPublicationEventIdentifier returns the value of the constant kCGImagePropertyIPTCExtPublicationEventIdentifier.
+func KCGImagePropertyIPTCExtPublicationEventIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPublicationEventIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtPublicationEventName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtPublicationEventName as an objc.ID.
-func KCGImagePropertyIPTCExtPublicationEventName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtPublicationEventName())
+// KCGImagePropertyIPTCExtPublicationEventName returns the value of the constant kCGImagePropertyIPTCExtPublicationEventName.
+func KCGImagePropertyIPTCExtPublicationEventName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtPublicationEventName")))
 }
 
-// KCGImagePropertyIPTCExtRating returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRating as an objc.ID.
-func KCGImagePropertyIPTCExtRating() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRating())
+// KCGImagePropertyIPTCExtRating returns the value of the constant kCGImagePropertyIPTCExtRating.
+func KCGImagePropertyIPTCExtRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRating")))
 }
 
-// KCGImagePropertyIPTCExtRatingRatingRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRatingRegion as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRatingRegion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRatingRegion())
+// KCGImagePropertyIPTCExtRatingRatingRegion returns the value of the constant kCGImagePropertyIPTCExtRatingRatingRegion.
+func KCGImagePropertyIPTCExtRatingRatingRegion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRatingRegion")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCity as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionCity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCity())
+// KCGImagePropertyIPTCExtRatingRegionCity returns the value of the constant kCGImagePropertyIPTCExtRatingRegionCity.
+func KCGImagePropertyIPTCExtRatingRegionCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionCity")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionCountryCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCountryCode as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionCountryCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCountryCode())
+// KCGImagePropertyIPTCExtRatingRegionCountryCode returns the value of the constant kCGImagePropertyIPTCExtRatingRegionCountryCode.
+func KCGImagePropertyIPTCExtRatingRegionCountryCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionCountryCode")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionCountryName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionCountryName as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionCountryName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionCountryName())
+// KCGImagePropertyIPTCExtRatingRegionCountryName returns the value of the constant kCGImagePropertyIPTCExtRatingRegionCountryName.
+func KCGImagePropertyIPTCExtRatingRegionCountryName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionCountryName")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSAltitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSAltitude as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionGPSAltitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSAltitude())
+// KCGImagePropertyIPTCExtRatingRegionGPSAltitude returns the value of the constant kCGImagePropertyIPTCExtRatingRegionGPSAltitude.
+func KCGImagePropertyIPTCExtRatingRegionGPSAltitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionGPSAltitude")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSLatitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSLatitude as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionGPSLatitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSLatitude())
+// KCGImagePropertyIPTCExtRatingRegionGPSLatitude returns the value of the constant kCGImagePropertyIPTCExtRatingRegionGPSLatitude.
+func KCGImagePropertyIPTCExtRatingRegionGPSLatitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionGPSLatitude")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionGPSLongitude returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionGPSLongitude as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionGPSLongitude() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionGPSLongitude())
+// KCGImagePropertyIPTCExtRatingRegionGPSLongitude returns the value of the constant kCGImagePropertyIPTCExtRatingRegionGPSLongitude.
+func KCGImagePropertyIPTCExtRatingRegionGPSLongitude() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionGPSLongitude")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionIdentifier())
+// KCGImagePropertyIPTCExtRatingRegionIdentifier returns the value of the constant kCGImagePropertyIPTCExtRatingRegionIdentifier.
+func KCGImagePropertyIPTCExtRatingRegionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionLocationId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionLocationId as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionLocationId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionLocationId())
+// KCGImagePropertyIPTCExtRatingRegionLocationId returns the value of the constant kCGImagePropertyIPTCExtRatingRegionLocationId.
+func KCGImagePropertyIPTCExtRatingRegionLocationId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionLocationId")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionLocationName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionLocationName as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionLocationName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionLocationName())
+// KCGImagePropertyIPTCExtRatingRegionLocationName returns the value of the constant kCGImagePropertyIPTCExtRatingRegionLocationName.
+func KCGImagePropertyIPTCExtRatingRegionLocationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionLocationName")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionProvinceState returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionProvinceState as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionProvinceState() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionProvinceState())
+// KCGImagePropertyIPTCExtRatingRegionProvinceState returns the value of the constant kCGImagePropertyIPTCExtRatingRegionProvinceState.
+func KCGImagePropertyIPTCExtRatingRegionProvinceState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionProvinceState")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionSublocation returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionSublocation as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionSublocation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionSublocation())
+// KCGImagePropertyIPTCExtRatingRegionSublocation returns the value of the constant kCGImagePropertyIPTCExtRatingRegionSublocation.
+func KCGImagePropertyIPTCExtRatingRegionSublocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionSublocation")))
 }
 
-// KCGImagePropertyIPTCExtRatingRegionWorldRegion returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingRegionWorldRegion as an objc.ID.
-func KCGImagePropertyIPTCExtRatingRegionWorldRegion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingRegionWorldRegion())
+// KCGImagePropertyIPTCExtRatingRegionWorldRegion returns the value of the constant kCGImagePropertyIPTCExtRatingRegionWorldRegion.
+func KCGImagePropertyIPTCExtRatingRegionWorldRegion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingRegionWorldRegion")))
 }
 
-// KCGImagePropertyIPTCExtRatingScaleMaxValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingScaleMaxValue as an objc.ID.
-func KCGImagePropertyIPTCExtRatingScaleMaxValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingScaleMaxValue())
+// KCGImagePropertyIPTCExtRatingScaleMaxValue returns the value of the constant kCGImagePropertyIPTCExtRatingScaleMaxValue.
+func KCGImagePropertyIPTCExtRatingScaleMaxValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingScaleMaxValue")))
 }
 
-// KCGImagePropertyIPTCExtRatingScaleMinValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingScaleMinValue as an objc.ID.
-func KCGImagePropertyIPTCExtRatingScaleMinValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingScaleMinValue())
+// KCGImagePropertyIPTCExtRatingScaleMinValue returns the value of the constant kCGImagePropertyIPTCExtRatingScaleMinValue.
+func KCGImagePropertyIPTCExtRatingScaleMinValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingScaleMinValue")))
 }
 
-// KCGImagePropertyIPTCExtRatingSourceLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingSourceLink as an objc.ID.
-func KCGImagePropertyIPTCExtRatingSourceLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingSourceLink())
+// KCGImagePropertyIPTCExtRatingSourceLink returns the value of the constant kCGImagePropertyIPTCExtRatingSourceLink.
+func KCGImagePropertyIPTCExtRatingSourceLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingSourceLink")))
 }
 
-// KCGImagePropertyIPTCExtRatingValue returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingValue as an objc.ID.
-func KCGImagePropertyIPTCExtRatingValue() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingValue())
+// KCGImagePropertyIPTCExtRatingValue returns the value of the constant kCGImagePropertyIPTCExtRatingValue.
+func KCGImagePropertyIPTCExtRatingValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingValue")))
 }
 
-// KCGImagePropertyIPTCExtRatingValueLogoLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRatingValueLogoLink as an objc.ID.
-func KCGImagePropertyIPTCExtRatingValueLogoLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRatingValueLogoLink())
+// KCGImagePropertyIPTCExtRatingValueLogoLink returns the value of the constant kCGImagePropertyIPTCExtRatingValueLogoLink.
+func KCGImagePropertyIPTCExtRatingValueLogoLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRatingValueLogoLink")))
 }
 
-// KCGImagePropertyIPTCExtRegistryID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryID as an objc.ID.
-func KCGImagePropertyIPTCExtRegistryID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryID())
+// KCGImagePropertyIPTCExtRegistryID returns the value of the constant kCGImagePropertyIPTCExtRegistryID.
+func KCGImagePropertyIPTCExtRegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRegistryID")))
 }
 
-// KCGImagePropertyIPTCExtRegistryEntryRole returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryEntryRole as an objc.ID.
-func KCGImagePropertyIPTCExtRegistryEntryRole() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryEntryRole())
+// KCGImagePropertyIPTCExtRegistryEntryRole returns the value of the constant kCGImagePropertyIPTCExtRegistryEntryRole.
+func KCGImagePropertyIPTCExtRegistryEntryRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRegistryEntryRole")))
 }
 
-// KCGImagePropertyIPTCExtRegistryItemID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryItemID as an objc.ID.
-func KCGImagePropertyIPTCExtRegistryItemID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryItemID())
+// KCGImagePropertyIPTCExtRegistryItemID returns the value of the constant kCGImagePropertyIPTCExtRegistryItemID.
+func KCGImagePropertyIPTCExtRegistryItemID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRegistryItemID")))
 }
 
-// KCGImagePropertyIPTCExtRegistryOrganisationID returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtRegistryOrganisationID as an objc.ID.
-func KCGImagePropertyIPTCExtRegistryOrganisationID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtRegistryOrganisationID())
+// KCGImagePropertyIPTCExtRegistryOrganisationID returns the value of the constant kCGImagePropertyIPTCExtRegistryOrganisationID.
+func KCGImagePropertyIPTCExtRegistryOrganisationID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtRegistryOrganisationID")))
 }
 
-// KCGImagePropertyIPTCExtReleaseReady returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtReleaseReady as an objc.ID.
-func KCGImagePropertyIPTCExtReleaseReady() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtReleaseReady())
+// KCGImagePropertyIPTCExtReleaseReady returns the value of the constant kCGImagePropertyIPTCExtReleaseReady.
+func KCGImagePropertyIPTCExtReleaseReady() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtReleaseReady")))
 }
 
-// KCGImagePropertyIPTCExtSeason returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeason as an objc.ID.
-func KCGImagePropertyIPTCExtSeason() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeason())
+// KCGImagePropertyIPTCExtSeason returns the value of the constant kCGImagePropertyIPTCExtSeason.
+func KCGImagePropertyIPTCExtSeason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeason")))
 }
 
-// KCGImagePropertyIPTCExtSeasonIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtSeasonIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonIdentifier())
+// KCGImagePropertyIPTCExtSeasonIdentifier returns the value of the constant kCGImagePropertyIPTCExtSeasonIdentifier.
+func KCGImagePropertyIPTCExtSeasonIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeasonIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtSeasonName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonName as an objc.ID.
-func KCGImagePropertyIPTCExtSeasonName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonName())
+// KCGImagePropertyIPTCExtSeasonName returns the value of the constant kCGImagePropertyIPTCExtSeasonName.
+func KCGImagePropertyIPTCExtSeasonName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeasonName")))
 }
 
-// KCGImagePropertyIPTCExtSeasonNumber returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeasonNumber as an objc.ID.
-func KCGImagePropertyIPTCExtSeasonNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeasonNumber())
+// KCGImagePropertyIPTCExtSeasonNumber returns the value of the constant kCGImagePropertyIPTCExtSeasonNumber.
+func KCGImagePropertyIPTCExtSeasonNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeasonNumber")))
 }
 
-// KCGImagePropertyIPTCExtSeries returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeries as an objc.ID.
-func KCGImagePropertyIPTCExtSeries() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeries())
+// KCGImagePropertyIPTCExtSeries returns the value of the constant kCGImagePropertyIPTCExtSeries.
+func KCGImagePropertyIPTCExtSeries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeries")))
 }
 
-// KCGImagePropertyIPTCExtSeriesIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeriesIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtSeriesIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeriesIdentifier())
+// KCGImagePropertyIPTCExtSeriesIdentifier returns the value of the constant kCGImagePropertyIPTCExtSeriesIdentifier.
+func KCGImagePropertyIPTCExtSeriesIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeriesIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtSeriesName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSeriesName as an objc.ID.
-func KCGImagePropertyIPTCExtSeriesName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSeriesName())
+// KCGImagePropertyIPTCExtSeriesName returns the value of the constant kCGImagePropertyIPTCExtSeriesName.
+func KCGImagePropertyIPTCExtSeriesName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSeriesName")))
 }
 
-// KCGImagePropertyIPTCExtStorylineIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStorylineIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtStorylineIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtStorylineIdentifier())
+// KCGImagePropertyIPTCExtStorylineIdentifier returns the value of the constant kCGImagePropertyIPTCExtStorylineIdentifier.
+func KCGImagePropertyIPTCExtStorylineIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtStorylineIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtStreamReady returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStreamReady as an objc.ID.
-func KCGImagePropertyIPTCExtStreamReady() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtStreamReady())
+// KCGImagePropertyIPTCExtStreamReady returns the value of the constant kCGImagePropertyIPTCExtStreamReady.
+func KCGImagePropertyIPTCExtStreamReady() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtStreamReady")))
 }
 
-// KCGImagePropertyIPTCExtStylePeriod returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtStylePeriod as an objc.ID.
-func KCGImagePropertyIPTCExtStylePeriod() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtStylePeriod())
+// KCGImagePropertyIPTCExtStylePeriod returns the value of the constant kCGImagePropertyIPTCExtStylePeriod.
+func KCGImagePropertyIPTCExtStylePeriod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtStylePeriod")))
 }
 
-// KCGImagePropertyIPTCExtSupplyChainSource returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSource as an objc.ID.
-func KCGImagePropertyIPTCExtSupplyChainSource() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSource())
+// KCGImagePropertyIPTCExtSupplyChainSource returns the value of the constant kCGImagePropertyIPTCExtSupplyChainSource.
+func KCGImagePropertyIPTCExtSupplyChainSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSupplyChainSource")))
 }
 
-// KCGImagePropertyIPTCExtSupplyChainSourceIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSourceIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtSupplyChainSourceIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSourceIdentifier())
+// KCGImagePropertyIPTCExtSupplyChainSourceIdentifier returns the value of the constant kCGImagePropertyIPTCExtSupplyChainSourceIdentifier.
+func KCGImagePropertyIPTCExtSupplyChainSourceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSupplyChainSourceIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtSupplyChainSourceName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtSupplyChainSourceName as an objc.ID.
-func KCGImagePropertyIPTCExtSupplyChainSourceName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtSupplyChainSourceName())
+// KCGImagePropertyIPTCExtSupplyChainSourceName returns the value of the constant kCGImagePropertyIPTCExtSupplyChainSourceName.
+func KCGImagePropertyIPTCExtSupplyChainSourceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtSupplyChainSourceName")))
 }
 
-// KCGImagePropertyIPTCExtTemporalCoverage returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverage as an objc.ID.
-func KCGImagePropertyIPTCExtTemporalCoverage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverage())
+// KCGImagePropertyIPTCExtTemporalCoverage returns the value of the constant kCGImagePropertyIPTCExtTemporalCoverage.
+func KCGImagePropertyIPTCExtTemporalCoverage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTemporalCoverage")))
 }
 
-// KCGImagePropertyIPTCExtTemporalCoverageFrom returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverageFrom as an objc.ID.
-func KCGImagePropertyIPTCExtTemporalCoverageFrom() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverageFrom())
+// KCGImagePropertyIPTCExtTemporalCoverageFrom returns the value of the constant kCGImagePropertyIPTCExtTemporalCoverageFrom.
+func KCGImagePropertyIPTCExtTemporalCoverageFrom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTemporalCoverageFrom")))
 }
 
-// KCGImagePropertyIPTCExtTemporalCoverageTo returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTemporalCoverageTo as an objc.ID.
-func KCGImagePropertyIPTCExtTemporalCoverageTo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTemporalCoverageTo())
+// KCGImagePropertyIPTCExtTemporalCoverageTo returns the value of the constant kCGImagePropertyIPTCExtTemporalCoverageTo.
+func KCGImagePropertyIPTCExtTemporalCoverageTo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTemporalCoverageTo")))
 }
 
-// KCGImagePropertyIPTCExtTranscript returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscript as an objc.ID.
-func KCGImagePropertyIPTCExtTranscript() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscript())
+// KCGImagePropertyIPTCExtTranscript returns the value of the constant kCGImagePropertyIPTCExtTranscript.
+func KCGImagePropertyIPTCExtTranscript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTranscript")))
 }
 
-// KCGImagePropertyIPTCExtTranscriptLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLink as an objc.ID.
-func KCGImagePropertyIPTCExtTranscriptLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLink())
+// KCGImagePropertyIPTCExtTranscriptLink returns the value of the constant kCGImagePropertyIPTCExtTranscriptLink.
+func KCGImagePropertyIPTCExtTranscriptLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTranscriptLink")))
 }
 
-// KCGImagePropertyIPTCExtTranscriptLinkLink returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLinkLink as an objc.ID.
-func KCGImagePropertyIPTCExtTranscriptLinkLink() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLinkLink())
+// KCGImagePropertyIPTCExtTranscriptLinkLink returns the value of the constant kCGImagePropertyIPTCExtTranscriptLinkLink.
+func KCGImagePropertyIPTCExtTranscriptLinkLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTranscriptLinkLink")))
 }
 
-// KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier as an objc.ID.
-func KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier())
+// KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier returns the value of the constant kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier.
+func KCGImagePropertyIPTCExtTranscriptLinkLinkQualifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier")))
 }
 
-// KCGImagePropertyIPTCExtVideoBitrate returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoBitrate as an objc.ID.
-func KCGImagePropertyIPTCExtVideoBitrate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoBitrate())
+// KCGImagePropertyIPTCExtVideoBitrate returns the value of the constant kCGImagePropertyIPTCExtVideoBitrate.
+func KCGImagePropertyIPTCExtVideoBitrate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoBitrate")))
 }
 
-// KCGImagePropertyIPTCExtVideoBitrateMode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoBitrateMode as an objc.ID.
-func KCGImagePropertyIPTCExtVideoBitrateMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoBitrateMode())
+// KCGImagePropertyIPTCExtVideoBitrateMode returns the value of the constant kCGImagePropertyIPTCExtVideoBitrateMode.
+func KCGImagePropertyIPTCExtVideoBitrateMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoBitrateMode")))
 }
 
-// KCGImagePropertyIPTCExtVideoDisplayAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoDisplayAspectRatio as an objc.ID.
-func KCGImagePropertyIPTCExtVideoDisplayAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoDisplayAspectRatio())
+// KCGImagePropertyIPTCExtVideoDisplayAspectRatio returns the value of the constant kCGImagePropertyIPTCExtVideoDisplayAspectRatio.
+func KCGImagePropertyIPTCExtVideoDisplayAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoDisplayAspectRatio")))
 }
 
-// KCGImagePropertyIPTCExtVideoEncodingProfile returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoEncodingProfile as an objc.ID.
-func KCGImagePropertyIPTCExtVideoEncodingProfile() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoEncodingProfile())
+// KCGImagePropertyIPTCExtVideoEncodingProfile returns the value of the constant kCGImagePropertyIPTCExtVideoEncodingProfile.
+func KCGImagePropertyIPTCExtVideoEncodingProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoEncodingProfile")))
 }
 
-// KCGImagePropertyIPTCExtVideoShotType returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotType as an objc.ID.
-func KCGImagePropertyIPTCExtVideoShotType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotType())
+// KCGImagePropertyIPTCExtVideoShotType returns the value of the constant kCGImagePropertyIPTCExtVideoShotType.
+func KCGImagePropertyIPTCExtVideoShotType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoShotType")))
 }
 
-// KCGImagePropertyIPTCExtVideoShotTypeIdentifier returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotTypeIdentifier as an objc.ID.
-func KCGImagePropertyIPTCExtVideoShotTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotTypeIdentifier())
+// KCGImagePropertyIPTCExtVideoShotTypeIdentifier returns the value of the constant kCGImagePropertyIPTCExtVideoShotTypeIdentifier.
+func KCGImagePropertyIPTCExtVideoShotTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoShotTypeIdentifier")))
 }
 
-// KCGImagePropertyIPTCExtVideoShotTypeName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoShotTypeName as an objc.ID.
-func KCGImagePropertyIPTCExtVideoShotTypeName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoShotTypeName())
+// KCGImagePropertyIPTCExtVideoShotTypeName returns the value of the constant kCGImagePropertyIPTCExtVideoShotTypeName.
+func KCGImagePropertyIPTCExtVideoShotTypeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoShotTypeName")))
 }
 
-// KCGImagePropertyIPTCExtVideoStreamsCount returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVideoStreamsCount as an objc.ID.
-func KCGImagePropertyIPTCExtVideoStreamsCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVideoStreamsCount())
+// KCGImagePropertyIPTCExtVideoStreamsCount returns the value of the constant kCGImagePropertyIPTCExtVideoStreamsCount.
+func KCGImagePropertyIPTCExtVideoStreamsCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVideoStreamsCount")))
 }
 
-// KCGImagePropertyIPTCExtVisualColor returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtVisualColor as an objc.ID.
-func KCGImagePropertyIPTCExtVisualColor() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtVisualColor())
+// KCGImagePropertyIPTCExtVisualColor returns the value of the constant kCGImagePropertyIPTCExtVisualColor.
+func KCGImagePropertyIPTCExtVisualColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtVisualColor")))
 }
 
-// KCGImagePropertyIPTCExtWorkflowTag returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTag as an objc.ID.
-func KCGImagePropertyIPTCExtWorkflowTag() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTag())
+// KCGImagePropertyIPTCExtWorkflowTag returns the value of the constant kCGImagePropertyIPTCExtWorkflowTag.
+func KCGImagePropertyIPTCExtWorkflowTag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtWorkflowTag")))
 }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvId as an objc.ID.
-func KCGImagePropertyIPTCExtWorkflowTagCvId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvId())
+// KCGImagePropertyIPTCExtWorkflowTagCvId returns the value of the constant kCGImagePropertyIPTCExtWorkflowTagCvId.
+func KCGImagePropertyIPTCExtWorkflowTagCvId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtWorkflowTagCvId")))
 }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermId returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermId as an objc.ID.
-func KCGImagePropertyIPTCExtWorkflowTagCvTermId() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermId())
+// KCGImagePropertyIPTCExtWorkflowTagCvTermId returns the value of the constant kCGImagePropertyIPTCExtWorkflowTagCvTermId.
+func KCGImagePropertyIPTCExtWorkflowTagCvTermId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtWorkflowTagCvTermId")))
 }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermName returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermName as an objc.ID.
-func KCGImagePropertyIPTCExtWorkflowTagCvTermName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermName())
+// KCGImagePropertyIPTCExtWorkflowTagCvTermName returns the value of the constant kCGImagePropertyIPTCExtWorkflowTagCvTermName.
+func KCGImagePropertyIPTCExtWorkflowTagCvTermName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtWorkflowTagCvTermName")))
 }
 
-// KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout as an objc.ID.
-func KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout())
+// KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout returns the value of the constant kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout.
+func KCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout")))
 }
 
-// KCGImagePropertyIPTCContactInfoCity returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoCity as an objc.ID.
-func KCGImagePropertyIPTCContactInfoCity() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoCity())
+// KCGImagePropertyIPTCContactInfoCity returns the value of the constant kCGImagePropertyIPTCContactInfoCity.
+func KCGImagePropertyIPTCContactInfoCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoCity")))
 }
 
-// KCGImagePropertyIPTCContactInfoCountry returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoCountry as an objc.ID.
-func KCGImagePropertyIPTCContactInfoCountry() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoCountry())
+// KCGImagePropertyIPTCContactInfoCountry returns the value of the constant kCGImagePropertyIPTCContactInfoCountry.
+func KCGImagePropertyIPTCContactInfoCountry() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoCountry")))
 }
 
-// KCGImagePropertyIPTCContactInfoAddress returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoAddress as an objc.ID.
-func KCGImagePropertyIPTCContactInfoAddress() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoAddress())
+// KCGImagePropertyIPTCContactInfoAddress returns the value of the constant kCGImagePropertyIPTCContactInfoAddress.
+func KCGImagePropertyIPTCContactInfoAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoAddress")))
 }
 
-// KCGImagePropertyIPTCContactInfoPostalCode returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoPostalCode as an objc.ID.
-func KCGImagePropertyIPTCContactInfoPostalCode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoPostalCode())
+// KCGImagePropertyIPTCContactInfoPostalCode returns the value of the constant kCGImagePropertyIPTCContactInfoPostalCode.
+func KCGImagePropertyIPTCContactInfoPostalCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoPostalCode")))
 }
 
-// KCGImagePropertyIPTCContactInfoStateProvince returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoStateProvince as an objc.ID.
-func KCGImagePropertyIPTCContactInfoStateProvince() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoStateProvince())
+// KCGImagePropertyIPTCContactInfoStateProvince returns the value of the constant kCGImagePropertyIPTCContactInfoStateProvince.
+func KCGImagePropertyIPTCContactInfoStateProvince() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoStateProvince")))
 }
 
-// KCGImagePropertyIPTCContactInfoEmails returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoEmails as an objc.ID.
-func KCGImagePropertyIPTCContactInfoEmails() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoEmails())
+// KCGImagePropertyIPTCContactInfoEmails returns the value of the constant kCGImagePropertyIPTCContactInfoEmails.
+func KCGImagePropertyIPTCContactInfoEmails() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoEmails")))
 }
 
-// KCGImagePropertyIPTCContactInfoPhones returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoPhones as an objc.ID.
-func KCGImagePropertyIPTCContactInfoPhones() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoPhones())
+// KCGImagePropertyIPTCContactInfoPhones returns the value of the constant kCGImagePropertyIPTCContactInfoPhones.
+func KCGImagePropertyIPTCContactInfoPhones() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoPhones")))
 }
 
-// KCGImagePropertyIPTCContactInfoWebURLs returns the value of the CoreFoundation reference constant kCGImagePropertyIPTCContactInfoWebURLs as an objc.ID.
-func KCGImagePropertyIPTCContactInfoWebURLs() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyIPTCContactInfoWebURLs())
+// KCGImagePropertyIPTCContactInfoWebURLs returns the value of the constant kCGImagePropertyIPTCContactInfoWebURLs.
+func KCGImagePropertyIPTCContactInfoWebURLs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyIPTCContactInfoWebURLs")))
 }
 
-// KCGImageProperty8BIMLayerNames returns the value of the CoreFoundation reference constant kCGImageProperty8BIMLayerNames as an objc.ID.
-func KCGImageProperty8BIMLayerNames() objc.ID {
-	return purego.CFConstant(raw.KCGImageProperty8BIMLayerNames())
+// KCGImageProperty8BIMLayerNames returns the value of the constant kCGImageProperty8BIMLayerNames.
+func KCGImageProperty8BIMLayerNames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageProperty8BIMLayerNames")))
 }
 
-// KCGImageProperty8BIMVersion returns the value of the CoreFoundation reference constant kCGImageProperty8BIMVersion as an objc.ID.
-func KCGImageProperty8BIMVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImageProperty8BIMVersion())
+// KCGImageProperty8BIMVersion returns the value of the constant kCGImageProperty8BIMVersion.
+func KCGImageProperty8BIMVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageProperty8BIMVersion")))
 }
 
-// KCGImagePropertyDNGVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGVersion as an objc.ID.
-func KCGImagePropertyDNGVersion() objc.ID { return purego.CFConstant(raw.KCGImagePropertyDNGVersion()) }
+// KCGImagePropertyDNGVersion returns the value of the constant kCGImagePropertyDNGVersion.
+func KCGImagePropertyDNGVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGVersion")))
+}
 
-// KCGImagePropertyDNGBackwardVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBackwardVersion as an objc.ID.
-func KCGImagePropertyDNGBackwardVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBackwardVersion())
+// KCGImagePropertyDNGBackwardVersion returns the value of the constant kCGImagePropertyDNGBackwardVersion.
+func KCGImagePropertyDNGBackwardVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBackwardVersion")))
 }
 
-// KCGImagePropertyDNGUniqueCameraModel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGUniqueCameraModel as an objc.ID.
-func KCGImagePropertyDNGUniqueCameraModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGUniqueCameraModel())
+// KCGImagePropertyDNGUniqueCameraModel returns the value of the constant kCGImagePropertyDNGUniqueCameraModel.
+func KCGImagePropertyDNGUniqueCameraModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGUniqueCameraModel")))
 }
 
-// KCGImagePropertyDNGLocalizedCameraModel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLocalizedCameraModel as an objc.ID.
-func KCGImagePropertyDNGLocalizedCameraModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGLocalizedCameraModel())
+// KCGImagePropertyDNGLocalizedCameraModel returns the value of the constant kCGImagePropertyDNGLocalizedCameraModel.
+func KCGImagePropertyDNGLocalizedCameraModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGLocalizedCameraModel")))
 }
 
-// KCGImagePropertyDNGCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraSerialNumber as an objc.ID.
-func KCGImagePropertyDNGCameraSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCameraSerialNumber())
+// KCGImagePropertyDNGCameraSerialNumber returns the value of the constant kCGImagePropertyDNGCameraSerialNumber.
+func KCGImagePropertyDNGCameraSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCameraSerialNumber")))
 }
 
-// KCGImagePropertyDNGLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLensInfo as an objc.ID.
-func KCGImagePropertyDNGLensInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGLensInfo())
+// KCGImagePropertyDNGLensInfo returns the value of the constant kCGImagePropertyDNGLensInfo.
+func KCGImagePropertyDNGLensInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGLensInfo")))
 }
 
-// KCGImagePropertyDNGBlackLevel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevel as an objc.ID.
-func KCGImagePropertyDNGBlackLevel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevel())
+// KCGImagePropertyDNGBlackLevel returns the value of the constant kCGImagePropertyDNGBlackLevel.
+func KCGImagePropertyDNGBlackLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBlackLevel")))
 }
 
-// KCGImagePropertyDNGWhiteLevel returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWhiteLevel as an objc.ID.
-func KCGImagePropertyDNGWhiteLevel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGWhiteLevel())
+// KCGImagePropertyDNGWhiteLevel returns the value of the constant kCGImagePropertyDNGWhiteLevel.
+func KCGImagePropertyDNGWhiteLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGWhiteLevel")))
 }
 
-// KCGImagePropertyDNGCalibrationIlluminant1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCalibrationIlluminant1 as an objc.ID.
-func KCGImagePropertyDNGCalibrationIlluminant1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCalibrationIlluminant1())
+// KCGImagePropertyDNGCalibrationIlluminant1 returns the value of the constant kCGImagePropertyDNGCalibrationIlluminant1.
+func KCGImagePropertyDNGCalibrationIlluminant1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCalibrationIlluminant1")))
 }
 
-// KCGImagePropertyDNGCalibrationIlluminant2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCalibrationIlluminant2 as an objc.ID.
-func KCGImagePropertyDNGCalibrationIlluminant2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCalibrationIlluminant2())
+// KCGImagePropertyDNGCalibrationIlluminant2 returns the value of the constant kCGImagePropertyDNGCalibrationIlluminant2.
+func KCGImagePropertyDNGCalibrationIlluminant2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCalibrationIlluminant2")))
 }
 
-// KCGImagePropertyDNGColorMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorMatrix1 as an objc.ID.
-func KCGImagePropertyDNGColorMatrix1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGColorMatrix1())
+// KCGImagePropertyDNGColorMatrix1 returns the value of the constant kCGImagePropertyDNGColorMatrix1.
+func KCGImagePropertyDNGColorMatrix1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGColorMatrix1")))
 }
 
-// KCGImagePropertyDNGColorMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorMatrix2 as an objc.ID.
-func KCGImagePropertyDNGColorMatrix2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGColorMatrix2())
+// KCGImagePropertyDNGColorMatrix2 returns the value of the constant kCGImagePropertyDNGColorMatrix2.
+func KCGImagePropertyDNGColorMatrix2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGColorMatrix2")))
 }
 
-// KCGImagePropertyDNGCameraCalibration1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibration1 as an objc.ID.
-func KCGImagePropertyDNGCameraCalibration1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibration1())
+// KCGImagePropertyDNGCameraCalibration1 returns the value of the constant kCGImagePropertyDNGCameraCalibration1.
+func KCGImagePropertyDNGCameraCalibration1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCameraCalibration1")))
 }
 
-// KCGImagePropertyDNGCameraCalibration2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibration2 as an objc.ID.
-func KCGImagePropertyDNGCameraCalibration2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibration2())
+// KCGImagePropertyDNGCameraCalibration2 returns the value of the constant kCGImagePropertyDNGCameraCalibration2.
+func KCGImagePropertyDNGCameraCalibration2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCameraCalibration2")))
 }
 
-// KCGImagePropertyDNGAsShotNeutral returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotNeutral as an objc.ID.
-func KCGImagePropertyDNGAsShotNeutral() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAsShotNeutral())
+// KCGImagePropertyDNGAsShotNeutral returns the value of the constant kCGImagePropertyDNGAsShotNeutral.
+func KCGImagePropertyDNGAsShotNeutral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAsShotNeutral")))
 }
 
-// KCGImagePropertyDNGAsShotWhiteXY returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotWhiteXY as an objc.ID.
-func KCGImagePropertyDNGAsShotWhiteXY() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAsShotWhiteXY())
+// KCGImagePropertyDNGAsShotWhiteXY returns the value of the constant kCGImagePropertyDNGAsShotWhiteXY.
+func KCGImagePropertyDNGAsShotWhiteXY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAsShotWhiteXY")))
 }
 
-// KCGImagePropertyDNGBaselineExposure returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineExposure as an objc.ID.
-func KCGImagePropertyDNGBaselineExposure() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBaselineExposure())
+// KCGImagePropertyDNGBaselineExposure returns the value of the constant kCGImagePropertyDNGBaselineExposure.
+func KCGImagePropertyDNGBaselineExposure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBaselineExposure")))
 }
 
-// KCGImagePropertyDNGBaselineNoise returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineNoise as an objc.ID.
-func KCGImagePropertyDNGBaselineNoise() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBaselineNoise())
+// KCGImagePropertyDNGBaselineNoise returns the value of the constant kCGImagePropertyDNGBaselineNoise.
+func KCGImagePropertyDNGBaselineNoise() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBaselineNoise")))
 }
 
-// KCGImagePropertyDNGBaselineSharpness returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineSharpness as an objc.ID.
-func KCGImagePropertyDNGBaselineSharpness() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBaselineSharpness())
+// KCGImagePropertyDNGBaselineSharpness returns the value of the constant kCGImagePropertyDNGBaselineSharpness.
+func KCGImagePropertyDNGBaselineSharpness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBaselineSharpness")))
 }
 
-// KCGImagePropertyDNGPrivateData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPrivateData as an objc.ID.
-func KCGImagePropertyDNGPrivateData() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPrivateData())
+// KCGImagePropertyDNGPrivateData returns the value of the constant kCGImagePropertyDNGPrivateData.
+func KCGImagePropertyDNGPrivateData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPrivateData")))
 }
 
-// KCGImagePropertyDNGCameraCalibrationSignature returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCameraCalibrationSignature as an objc.ID.
-func KCGImagePropertyDNGCameraCalibrationSignature() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCameraCalibrationSignature())
+// KCGImagePropertyDNGCameraCalibrationSignature returns the value of the constant kCGImagePropertyDNGCameraCalibrationSignature.
+func KCGImagePropertyDNGCameraCalibrationSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCameraCalibrationSignature")))
 }
 
-// KCGImagePropertyDNGProfileCalibrationSignature returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileCalibrationSignature as an objc.ID.
-func KCGImagePropertyDNGProfileCalibrationSignature() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileCalibrationSignature())
+// KCGImagePropertyDNGProfileCalibrationSignature returns the value of the constant kCGImagePropertyDNGProfileCalibrationSignature.
+func KCGImagePropertyDNGProfileCalibrationSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileCalibrationSignature")))
 }
 
-// KCGImagePropertyDNGNoiseProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNoiseProfile as an objc.ID.
-func KCGImagePropertyDNGNoiseProfile() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGNoiseProfile())
+// KCGImagePropertyDNGNoiseProfile returns the value of the constant kCGImagePropertyDNGNoiseProfile.
+func KCGImagePropertyDNGNoiseProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGNoiseProfile")))
 }
 
-// KCGImagePropertyDNGWarpRectilinear returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWarpRectilinear as an objc.ID.
-func KCGImagePropertyDNGWarpRectilinear() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGWarpRectilinear())
+// KCGImagePropertyDNGWarpRectilinear returns the value of the constant kCGImagePropertyDNGWarpRectilinear.
+func KCGImagePropertyDNGWarpRectilinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGWarpRectilinear")))
 }
 
-// KCGImagePropertyDNGWarpFisheye returns the value of the CoreFoundation reference constant kCGImagePropertyDNGWarpFisheye as an objc.ID.
-func KCGImagePropertyDNGWarpFisheye() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGWarpFisheye())
+// KCGImagePropertyDNGWarpFisheye returns the value of the constant kCGImagePropertyDNGWarpFisheye.
+func KCGImagePropertyDNGWarpFisheye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGWarpFisheye")))
 }
 
-// KCGImagePropertyDNGFixVignetteRadial returns the value of the CoreFoundation reference constant kCGImagePropertyDNGFixVignetteRadial as an objc.ID.
-func KCGImagePropertyDNGFixVignetteRadial() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGFixVignetteRadial())
+// KCGImagePropertyDNGFixVignetteRadial returns the value of the constant kCGImagePropertyDNGFixVignetteRadial.
+func KCGImagePropertyDNGFixVignetteRadial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGFixVignetteRadial")))
 }
 
-// KCGImagePropertyDNGActiveArea returns the value of the CoreFoundation reference constant kCGImagePropertyDNGActiveArea as an objc.ID.
-func KCGImagePropertyDNGActiveArea() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGActiveArea())
+// KCGImagePropertyDNGActiveArea returns the value of the constant kCGImagePropertyDNGActiveArea.
+func KCGImagePropertyDNGActiveArea() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGActiveArea")))
 }
 
-// KCGImagePropertyDNGAnalogBalance returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAnalogBalance as an objc.ID.
-func KCGImagePropertyDNGAnalogBalance() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAnalogBalance())
+// KCGImagePropertyDNGAnalogBalance returns the value of the constant kCGImagePropertyDNGAnalogBalance.
+func KCGImagePropertyDNGAnalogBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAnalogBalance")))
 }
 
-// KCGImagePropertyDNGAntiAliasStrength returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAntiAliasStrength as an objc.ID.
-func KCGImagePropertyDNGAntiAliasStrength() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAntiAliasStrength())
+// KCGImagePropertyDNGAntiAliasStrength returns the value of the constant kCGImagePropertyDNGAntiAliasStrength.
+func KCGImagePropertyDNGAntiAliasStrength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAntiAliasStrength")))
 }
 
-// KCGImagePropertyDNGAsShotICCProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotICCProfile as an objc.ID.
-func KCGImagePropertyDNGAsShotICCProfile() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAsShotICCProfile())
+// KCGImagePropertyDNGAsShotICCProfile returns the value of the constant kCGImagePropertyDNGAsShotICCProfile.
+func KCGImagePropertyDNGAsShotICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAsShotICCProfile")))
 }
 
-// KCGImagePropertyDNGAsShotPreProfileMatrix returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotPreProfileMatrix as an objc.ID.
-func KCGImagePropertyDNGAsShotPreProfileMatrix() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAsShotPreProfileMatrix())
+// KCGImagePropertyDNGAsShotPreProfileMatrix returns the value of the constant kCGImagePropertyDNGAsShotPreProfileMatrix.
+func KCGImagePropertyDNGAsShotPreProfileMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAsShotPreProfileMatrix")))
 }
 
-// KCGImagePropertyDNGAsShotProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGAsShotProfileName as an objc.ID.
-func KCGImagePropertyDNGAsShotProfileName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGAsShotProfileName())
+// KCGImagePropertyDNGAsShotProfileName returns the value of the constant kCGImagePropertyDNGAsShotProfileName.
+func KCGImagePropertyDNGAsShotProfileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGAsShotProfileName")))
 }
 
-// KCGImagePropertyDNGBaselineExposureOffset returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBaselineExposureOffset as an objc.ID.
-func KCGImagePropertyDNGBaselineExposureOffset() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBaselineExposureOffset())
+// KCGImagePropertyDNGBaselineExposureOffset returns the value of the constant kCGImagePropertyDNGBaselineExposureOffset.
+func KCGImagePropertyDNGBaselineExposureOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBaselineExposureOffset")))
 }
 
-// KCGImagePropertyDNGBayerGreenSplit returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBayerGreenSplit as an objc.ID.
-func KCGImagePropertyDNGBayerGreenSplit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBayerGreenSplit())
+// KCGImagePropertyDNGBayerGreenSplit returns the value of the constant kCGImagePropertyDNGBayerGreenSplit.
+func KCGImagePropertyDNGBayerGreenSplit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBayerGreenSplit")))
 }
 
-// KCGImagePropertyDNGBestQualityScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBestQualityScale as an objc.ID.
-func KCGImagePropertyDNGBestQualityScale() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBestQualityScale())
+// KCGImagePropertyDNGBestQualityScale returns the value of the constant kCGImagePropertyDNGBestQualityScale.
+func KCGImagePropertyDNGBestQualityScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBestQualityScale")))
 }
 
-// KCGImagePropertyDNGBlackLevelDeltaH returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelDeltaH as an objc.ID.
-func KCGImagePropertyDNGBlackLevelDeltaH() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelDeltaH())
+// KCGImagePropertyDNGBlackLevelDeltaH returns the value of the constant kCGImagePropertyDNGBlackLevelDeltaH.
+func KCGImagePropertyDNGBlackLevelDeltaH() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBlackLevelDeltaH")))
 }
 
-// KCGImagePropertyDNGBlackLevelDeltaV returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelDeltaV as an objc.ID.
-func KCGImagePropertyDNGBlackLevelDeltaV() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelDeltaV())
+// KCGImagePropertyDNGBlackLevelDeltaV returns the value of the constant kCGImagePropertyDNGBlackLevelDeltaV.
+func KCGImagePropertyDNGBlackLevelDeltaV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBlackLevelDeltaV")))
 }
 
-// KCGImagePropertyDNGBlackLevelRepeatDim returns the value of the CoreFoundation reference constant kCGImagePropertyDNGBlackLevelRepeatDim as an objc.ID.
-func KCGImagePropertyDNGBlackLevelRepeatDim() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGBlackLevelRepeatDim())
+// KCGImagePropertyDNGBlackLevelRepeatDim returns the value of the constant kCGImagePropertyDNGBlackLevelRepeatDim.
+func KCGImagePropertyDNGBlackLevelRepeatDim() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGBlackLevelRepeatDim")))
 }
 
-// KCGImagePropertyDNGCFALayout returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCFALayout as an objc.ID.
-func KCGImagePropertyDNGCFALayout() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCFALayout())
+// KCGImagePropertyDNGCFALayout returns the value of the constant kCGImagePropertyDNGCFALayout.
+func KCGImagePropertyDNGCFALayout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCFALayout")))
 }
 
-// KCGImagePropertyDNGCFAPlaneColor returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCFAPlaneColor as an objc.ID.
-func KCGImagePropertyDNGCFAPlaneColor() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCFAPlaneColor())
+// KCGImagePropertyDNGCFAPlaneColor returns the value of the constant kCGImagePropertyDNGCFAPlaneColor.
+func KCGImagePropertyDNGCFAPlaneColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCFAPlaneColor")))
 }
 
-// KCGImagePropertyDNGChromaBlurRadius returns the value of the CoreFoundation reference constant kCGImagePropertyDNGChromaBlurRadius as an objc.ID.
-func KCGImagePropertyDNGChromaBlurRadius() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGChromaBlurRadius())
+// KCGImagePropertyDNGChromaBlurRadius returns the value of the constant kCGImagePropertyDNGChromaBlurRadius.
+func KCGImagePropertyDNGChromaBlurRadius() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGChromaBlurRadius")))
 }
 
-// KCGImagePropertyDNGColorimetricReference returns the value of the CoreFoundation reference constant kCGImagePropertyDNGColorimetricReference as an objc.ID.
-func KCGImagePropertyDNGColorimetricReference() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGColorimetricReference())
+// KCGImagePropertyDNGColorimetricReference returns the value of the constant kCGImagePropertyDNGColorimetricReference.
+func KCGImagePropertyDNGColorimetricReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGColorimetricReference")))
 }
 
-// KCGImagePropertyDNGCurrentICCProfile returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCurrentICCProfile as an objc.ID.
-func KCGImagePropertyDNGCurrentICCProfile() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCurrentICCProfile())
+// KCGImagePropertyDNGCurrentICCProfile returns the value of the constant kCGImagePropertyDNGCurrentICCProfile.
+func KCGImagePropertyDNGCurrentICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCurrentICCProfile")))
 }
 
-// KCGImagePropertyDNGCurrentPreProfileMatrix returns the value of the CoreFoundation reference constant kCGImagePropertyDNGCurrentPreProfileMatrix as an objc.ID.
-func KCGImagePropertyDNGCurrentPreProfileMatrix() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGCurrentPreProfileMatrix())
+// KCGImagePropertyDNGCurrentPreProfileMatrix returns the value of the constant kCGImagePropertyDNGCurrentPreProfileMatrix.
+func KCGImagePropertyDNGCurrentPreProfileMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGCurrentPreProfileMatrix")))
 }
 
-// KCGImagePropertyDNGDefaultBlackRender returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultBlackRender as an objc.ID.
-func KCGImagePropertyDNGDefaultBlackRender() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDefaultBlackRender())
+// KCGImagePropertyDNGDefaultBlackRender returns the value of the constant kCGImagePropertyDNGDefaultBlackRender.
+func KCGImagePropertyDNGDefaultBlackRender() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDefaultBlackRender")))
 }
 
-// KCGImagePropertyDNGDefaultCropOrigin returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultCropOrigin as an objc.ID.
-func KCGImagePropertyDNGDefaultCropOrigin() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDefaultCropOrigin())
+// KCGImagePropertyDNGDefaultCropOrigin returns the value of the constant kCGImagePropertyDNGDefaultCropOrigin.
+func KCGImagePropertyDNGDefaultCropOrigin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDefaultCropOrigin")))
 }
 
-// KCGImagePropertyDNGDefaultCropSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultCropSize as an objc.ID.
-func KCGImagePropertyDNGDefaultCropSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDefaultCropSize())
+// KCGImagePropertyDNGDefaultCropSize returns the value of the constant kCGImagePropertyDNGDefaultCropSize.
+func KCGImagePropertyDNGDefaultCropSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDefaultCropSize")))
 }
 
-// KCGImagePropertyDNGDefaultScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultScale as an objc.ID.
-func KCGImagePropertyDNGDefaultScale() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDefaultScale())
+// KCGImagePropertyDNGDefaultScale returns the value of the constant kCGImagePropertyDNGDefaultScale.
+func KCGImagePropertyDNGDefaultScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDefaultScale")))
 }
 
-// KCGImagePropertyDNGDefaultUserCrop returns the value of the CoreFoundation reference constant kCGImagePropertyDNGDefaultUserCrop as an objc.ID.
-func KCGImagePropertyDNGDefaultUserCrop() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGDefaultUserCrop())
+// KCGImagePropertyDNGDefaultUserCrop returns the value of the constant kCGImagePropertyDNGDefaultUserCrop.
+func KCGImagePropertyDNGDefaultUserCrop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGDefaultUserCrop")))
 }
 
-// KCGImagePropertyDNGExtraCameraProfiles returns the value of the CoreFoundation reference constant kCGImagePropertyDNGExtraCameraProfiles as an objc.ID.
-func KCGImagePropertyDNGExtraCameraProfiles() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGExtraCameraProfiles())
+// KCGImagePropertyDNGExtraCameraProfiles returns the value of the constant kCGImagePropertyDNGExtraCameraProfiles.
+func KCGImagePropertyDNGExtraCameraProfiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGExtraCameraProfiles")))
 }
 
-// KCGImagePropertyDNGForwardMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGForwardMatrix1 as an objc.ID.
-func KCGImagePropertyDNGForwardMatrix1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGForwardMatrix1())
+// KCGImagePropertyDNGForwardMatrix1 returns the value of the constant kCGImagePropertyDNGForwardMatrix1.
+func KCGImagePropertyDNGForwardMatrix1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGForwardMatrix1")))
 }
 
-// KCGImagePropertyDNGForwardMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGForwardMatrix2 as an objc.ID.
-func KCGImagePropertyDNGForwardMatrix2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGForwardMatrix2())
+// KCGImagePropertyDNGForwardMatrix2 returns the value of the constant kCGImagePropertyDNGForwardMatrix2.
+func KCGImagePropertyDNGForwardMatrix2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGForwardMatrix2")))
 }
 
-// KCGImagePropertyDNGLinearizationTable returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLinearizationTable as an objc.ID.
-func KCGImagePropertyDNGLinearizationTable() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGLinearizationTable())
+// KCGImagePropertyDNGLinearizationTable returns the value of the constant kCGImagePropertyDNGLinearizationTable.
+func KCGImagePropertyDNGLinearizationTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGLinearizationTable")))
 }
 
-// KCGImagePropertyDNGLinearResponseLimit returns the value of the CoreFoundation reference constant kCGImagePropertyDNGLinearResponseLimit as an objc.ID.
-func KCGImagePropertyDNGLinearResponseLimit() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGLinearResponseLimit())
+// KCGImagePropertyDNGLinearResponseLimit returns the value of the constant kCGImagePropertyDNGLinearResponseLimit.
+func KCGImagePropertyDNGLinearResponseLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGLinearResponseLimit")))
 }
 
-// KCGImagePropertyDNGMakerNoteSafety returns the value of the CoreFoundation reference constant kCGImagePropertyDNGMakerNoteSafety as an objc.ID.
-func KCGImagePropertyDNGMakerNoteSafety() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGMakerNoteSafety())
+// KCGImagePropertyDNGMakerNoteSafety returns the value of the constant kCGImagePropertyDNGMakerNoteSafety.
+func KCGImagePropertyDNGMakerNoteSafety() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGMakerNoteSafety")))
 }
 
-// KCGImagePropertyDNGMaskedAreas returns the value of the CoreFoundation reference constant kCGImagePropertyDNGMaskedAreas as an objc.ID.
-func KCGImagePropertyDNGMaskedAreas() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGMaskedAreas())
+// KCGImagePropertyDNGMaskedAreas returns the value of the constant kCGImagePropertyDNGMaskedAreas.
+func KCGImagePropertyDNGMaskedAreas() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGMaskedAreas")))
 }
 
-// KCGImagePropertyDNGNewRawImageDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNewRawImageDigest as an objc.ID.
-func KCGImagePropertyDNGNewRawImageDigest() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGNewRawImageDigest())
+// KCGImagePropertyDNGNewRawImageDigest returns the value of the constant kCGImagePropertyDNGNewRawImageDigest.
+func KCGImagePropertyDNGNewRawImageDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGNewRawImageDigest")))
 }
 
-// KCGImagePropertyDNGNoiseReductionApplied returns the value of the CoreFoundation reference constant kCGImagePropertyDNGNoiseReductionApplied as an objc.ID.
-func KCGImagePropertyDNGNoiseReductionApplied() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGNoiseReductionApplied())
+// KCGImagePropertyDNGNoiseReductionApplied returns the value of the constant kCGImagePropertyDNGNoiseReductionApplied.
+func KCGImagePropertyDNGNoiseReductionApplied() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGNoiseReductionApplied")))
 }
 
-// KCGImagePropertyDNGOpcodeList1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList1 as an objc.ID.
-func KCGImagePropertyDNGOpcodeList1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList1())
+// KCGImagePropertyDNGOpcodeList1 returns the value of the constant kCGImagePropertyDNGOpcodeList1.
+func KCGImagePropertyDNGOpcodeList1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOpcodeList1")))
 }
 
-// KCGImagePropertyDNGOpcodeList2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList2 as an objc.ID.
-func KCGImagePropertyDNGOpcodeList2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList2())
+// KCGImagePropertyDNGOpcodeList2 returns the value of the constant kCGImagePropertyDNGOpcodeList2.
+func KCGImagePropertyDNGOpcodeList2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOpcodeList2")))
 }
 
-// KCGImagePropertyDNGOpcodeList3 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOpcodeList3 as an objc.ID.
-func KCGImagePropertyDNGOpcodeList3() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOpcodeList3())
+// KCGImagePropertyDNGOpcodeList3 returns the value of the constant kCGImagePropertyDNGOpcodeList3.
+func KCGImagePropertyDNGOpcodeList3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOpcodeList3")))
 }
 
-// KCGImagePropertyDNGOriginalBestQualityFinalSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalBestQualityFinalSize as an objc.ID.
-func KCGImagePropertyDNGOriginalBestQualityFinalSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalBestQualityFinalSize())
+// KCGImagePropertyDNGOriginalBestQualityFinalSize returns the value of the constant kCGImagePropertyDNGOriginalBestQualityFinalSize.
+func KCGImagePropertyDNGOriginalBestQualityFinalSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalBestQualityFinalSize")))
 }
 
-// KCGImagePropertyDNGOriginalDefaultCropSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalDefaultCropSize as an objc.ID.
-func KCGImagePropertyDNGOriginalDefaultCropSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalDefaultCropSize())
+// KCGImagePropertyDNGOriginalDefaultCropSize returns the value of the constant kCGImagePropertyDNGOriginalDefaultCropSize.
+func KCGImagePropertyDNGOriginalDefaultCropSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalDefaultCropSize")))
 }
 
-// KCGImagePropertyDNGOriginalDefaultFinalSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalDefaultFinalSize as an objc.ID.
-func KCGImagePropertyDNGOriginalDefaultFinalSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalDefaultFinalSize())
+// KCGImagePropertyDNGOriginalDefaultFinalSize returns the value of the constant kCGImagePropertyDNGOriginalDefaultFinalSize.
+func KCGImagePropertyDNGOriginalDefaultFinalSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalDefaultFinalSize")))
 }
 
-// KCGImagePropertyDNGOriginalRawFileData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileData as an objc.ID.
-func KCGImagePropertyDNGOriginalRawFileData() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileData())
+// KCGImagePropertyDNGOriginalRawFileData returns the value of the constant kCGImagePropertyDNGOriginalRawFileData.
+func KCGImagePropertyDNGOriginalRawFileData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalRawFileData")))
 }
 
-// KCGImagePropertyDNGOriginalRawFileDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileDigest as an objc.ID.
-func KCGImagePropertyDNGOriginalRawFileDigest() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileDigest())
+// KCGImagePropertyDNGOriginalRawFileDigest returns the value of the constant kCGImagePropertyDNGOriginalRawFileDigest.
+func KCGImagePropertyDNGOriginalRawFileDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalRawFileDigest")))
 }
 
-// KCGImagePropertyDNGOriginalRawFileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGOriginalRawFileName as an objc.ID.
-func KCGImagePropertyDNGOriginalRawFileName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGOriginalRawFileName())
+// KCGImagePropertyDNGOriginalRawFileName returns the value of the constant kCGImagePropertyDNGOriginalRawFileName.
+func KCGImagePropertyDNGOriginalRawFileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGOriginalRawFileName")))
 }
 
-// KCGImagePropertyDNGPreviewApplicationName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewApplicationName as an objc.ID.
-func KCGImagePropertyDNGPreviewApplicationName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewApplicationName())
+// KCGImagePropertyDNGPreviewApplicationName returns the value of the constant kCGImagePropertyDNGPreviewApplicationName.
+func KCGImagePropertyDNGPreviewApplicationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewApplicationName")))
 }
 
-// KCGImagePropertyDNGPreviewApplicationVersion returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewApplicationVersion as an objc.ID.
-func KCGImagePropertyDNGPreviewApplicationVersion() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewApplicationVersion())
+// KCGImagePropertyDNGPreviewApplicationVersion returns the value of the constant kCGImagePropertyDNGPreviewApplicationVersion.
+func KCGImagePropertyDNGPreviewApplicationVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewApplicationVersion")))
 }
 
-// KCGImagePropertyDNGPreviewColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewColorSpace as an objc.ID.
-func KCGImagePropertyDNGPreviewColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewColorSpace())
+// KCGImagePropertyDNGPreviewColorSpace returns the value of the constant kCGImagePropertyDNGPreviewColorSpace.
+func KCGImagePropertyDNGPreviewColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewColorSpace")))
 }
 
-// KCGImagePropertyDNGPreviewDateTime returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewDateTime as an objc.ID.
-func KCGImagePropertyDNGPreviewDateTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewDateTime())
+// KCGImagePropertyDNGPreviewDateTime returns the value of the constant kCGImagePropertyDNGPreviewDateTime.
+func KCGImagePropertyDNGPreviewDateTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewDateTime")))
 }
 
-// KCGImagePropertyDNGPreviewSettingsDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewSettingsDigest as an objc.ID.
-func KCGImagePropertyDNGPreviewSettingsDigest() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewSettingsDigest())
+// KCGImagePropertyDNGPreviewSettingsDigest returns the value of the constant kCGImagePropertyDNGPreviewSettingsDigest.
+func KCGImagePropertyDNGPreviewSettingsDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewSettingsDigest")))
 }
 
-// KCGImagePropertyDNGPreviewSettingsName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGPreviewSettingsName as an objc.ID.
-func KCGImagePropertyDNGPreviewSettingsName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGPreviewSettingsName())
+// KCGImagePropertyDNGPreviewSettingsName returns the value of the constant kCGImagePropertyDNGPreviewSettingsName.
+func KCGImagePropertyDNGPreviewSettingsName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGPreviewSettingsName")))
 }
 
-// KCGImagePropertyDNGProfileCopyright returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileCopyright as an objc.ID.
-func KCGImagePropertyDNGProfileCopyright() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileCopyright())
+// KCGImagePropertyDNGProfileCopyright returns the value of the constant kCGImagePropertyDNGProfileCopyright.
+func KCGImagePropertyDNGProfileCopyright() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileCopyright")))
 }
 
-// KCGImagePropertyDNGProfileEmbedPolicy returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileEmbedPolicy as an objc.ID.
-func KCGImagePropertyDNGProfileEmbedPolicy() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileEmbedPolicy())
+// KCGImagePropertyDNGProfileEmbedPolicy returns the value of the constant kCGImagePropertyDNGProfileEmbedPolicy.
+func KCGImagePropertyDNGProfileEmbedPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileEmbedPolicy")))
 }
 
-// KCGImagePropertyDNGProfileHueSatMapData1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapData1 as an objc.ID.
-func KCGImagePropertyDNGProfileHueSatMapData1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapData1())
+// KCGImagePropertyDNGProfileHueSatMapData1 returns the value of the constant kCGImagePropertyDNGProfileHueSatMapData1.
+func KCGImagePropertyDNGProfileHueSatMapData1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileHueSatMapData1")))
 }
 
-// KCGImagePropertyDNGProfileHueSatMapData2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapData2 as an objc.ID.
-func KCGImagePropertyDNGProfileHueSatMapData2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapData2())
+// KCGImagePropertyDNGProfileHueSatMapData2 returns the value of the constant kCGImagePropertyDNGProfileHueSatMapData2.
+func KCGImagePropertyDNGProfileHueSatMapData2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileHueSatMapData2")))
 }
 
-// KCGImagePropertyDNGProfileHueSatMapDims returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapDims as an objc.ID.
-func KCGImagePropertyDNGProfileHueSatMapDims() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapDims())
+// KCGImagePropertyDNGProfileHueSatMapDims returns the value of the constant kCGImagePropertyDNGProfileHueSatMapDims.
+func KCGImagePropertyDNGProfileHueSatMapDims() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileHueSatMapDims")))
 }
 
-// KCGImagePropertyDNGProfileHueSatMapEncoding returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileHueSatMapEncoding as an objc.ID.
-func KCGImagePropertyDNGProfileHueSatMapEncoding() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileHueSatMapEncoding())
+// KCGImagePropertyDNGProfileHueSatMapEncoding returns the value of the constant kCGImagePropertyDNGProfileHueSatMapEncoding.
+func KCGImagePropertyDNGProfileHueSatMapEncoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileHueSatMapEncoding")))
 }
 
-// KCGImagePropertyDNGProfileLookTableData returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableData as an objc.ID.
-func KCGImagePropertyDNGProfileLookTableData() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableData())
+// KCGImagePropertyDNGProfileLookTableData returns the value of the constant kCGImagePropertyDNGProfileLookTableData.
+func KCGImagePropertyDNGProfileLookTableData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileLookTableData")))
 }
 
-// KCGImagePropertyDNGProfileLookTableDims returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableDims as an objc.ID.
-func KCGImagePropertyDNGProfileLookTableDims() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableDims())
+// KCGImagePropertyDNGProfileLookTableDims returns the value of the constant kCGImagePropertyDNGProfileLookTableDims.
+func KCGImagePropertyDNGProfileLookTableDims() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileLookTableDims")))
 }
 
-// KCGImagePropertyDNGProfileLookTableEncoding returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileLookTableEncoding as an objc.ID.
-func KCGImagePropertyDNGProfileLookTableEncoding() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileLookTableEncoding())
+// KCGImagePropertyDNGProfileLookTableEncoding returns the value of the constant kCGImagePropertyDNGProfileLookTableEncoding.
+func KCGImagePropertyDNGProfileLookTableEncoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileLookTableEncoding")))
 }
 
-// KCGImagePropertyDNGProfileName returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileName as an objc.ID.
-func KCGImagePropertyDNGProfileName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileName())
+// KCGImagePropertyDNGProfileName returns the value of the constant kCGImagePropertyDNGProfileName.
+func KCGImagePropertyDNGProfileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileName")))
 }
 
-// KCGImagePropertyDNGProfileToneCurve returns the value of the CoreFoundation reference constant kCGImagePropertyDNGProfileToneCurve as an objc.ID.
-func KCGImagePropertyDNGProfileToneCurve() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGProfileToneCurve())
+// KCGImagePropertyDNGProfileToneCurve returns the value of the constant kCGImagePropertyDNGProfileToneCurve.
+func KCGImagePropertyDNGProfileToneCurve() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGProfileToneCurve")))
 }
 
-// KCGImagePropertyDNGRawDataUniqueID returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawDataUniqueID as an objc.ID.
-func KCGImagePropertyDNGRawDataUniqueID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGRawDataUniqueID())
+// KCGImagePropertyDNGRawDataUniqueID returns the value of the constant kCGImagePropertyDNGRawDataUniqueID.
+func KCGImagePropertyDNGRawDataUniqueID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGRawDataUniqueID")))
 }
 
-// KCGImagePropertyDNGRawImageDigest returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawImageDigest as an objc.ID.
-func KCGImagePropertyDNGRawImageDigest() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGRawImageDigest())
+// KCGImagePropertyDNGRawImageDigest returns the value of the constant kCGImagePropertyDNGRawImageDigest.
+func KCGImagePropertyDNGRawImageDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGRawImageDigest")))
 }
 
-// KCGImagePropertyDNGRawToPreviewGain returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRawToPreviewGain as an objc.ID.
-func KCGImagePropertyDNGRawToPreviewGain() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGRawToPreviewGain())
+// KCGImagePropertyDNGRawToPreviewGain returns the value of the constant kCGImagePropertyDNGRawToPreviewGain.
+func KCGImagePropertyDNGRawToPreviewGain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGRawToPreviewGain")))
 }
 
-// KCGImagePropertyDNGReductionMatrix1 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGReductionMatrix1 as an objc.ID.
-func KCGImagePropertyDNGReductionMatrix1() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGReductionMatrix1())
+// KCGImagePropertyDNGReductionMatrix1 returns the value of the constant kCGImagePropertyDNGReductionMatrix1.
+func KCGImagePropertyDNGReductionMatrix1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGReductionMatrix1")))
 }
 
-// KCGImagePropertyDNGReductionMatrix2 returns the value of the CoreFoundation reference constant kCGImagePropertyDNGReductionMatrix2 as an objc.ID.
-func KCGImagePropertyDNGReductionMatrix2() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGReductionMatrix2())
+// KCGImagePropertyDNGReductionMatrix2 returns the value of the constant kCGImagePropertyDNGReductionMatrix2.
+func KCGImagePropertyDNGReductionMatrix2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGReductionMatrix2")))
 }
 
-// KCGImagePropertyDNGRowInterleaveFactor returns the value of the CoreFoundation reference constant kCGImagePropertyDNGRowInterleaveFactor as an objc.ID.
-func KCGImagePropertyDNGRowInterleaveFactor() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGRowInterleaveFactor())
+// KCGImagePropertyDNGRowInterleaveFactor returns the value of the constant kCGImagePropertyDNGRowInterleaveFactor.
+func KCGImagePropertyDNGRowInterleaveFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGRowInterleaveFactor")))
 }
 
-// KCGImagePropertyDNGShadowScale returns the value of the CoreFoundation reference constant kCGImagePropertyDNGShadowScale as an objc.ID.
-func KCGImagePropertyDNGShadowScale() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGShadowScale())
+// KCGImagePropertyDNGShadowScale returns the value of the constant kCGImagePropertyDNGShadowScale.
+func KCGImagePropertyDNGShadowScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGShadowScale")))
 }
 
-// KCGImagePropertyDNGSubTileBlockSize returns the value of the CoreFoundation reference constant kCGImagePropertyDNGSubTileBlockSize as an objc.ID.
-func KCGImagePropertyDNGSubTileBlockSize() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyDNGSubTileBlockSize())
+// KCGImagePropertyDNGSubTileBlockSize returns the value of the constant kCGImagePropertyDNGSubTileBlockSize.
+func KCGImagePropertyDNGSubTileBlockSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyDNGSubTileBlockSize")))
 }
 
-// KCGImagePropertyCIFFDescription returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFDescription as an objc.ID.
-func KCGImagePropertyCIFFDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFDescription())
+// KCGImagePropertyCIFFDescription returns the value of the constant kCGImagePropertyCIFFDescription.
+func KCGImagePropertyCIFFDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFDescription")))
 }
 
-// KCGImagePropertyCIFFFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFirmware as an objc.ID.
-func KCGImagePropertyCIFFFirmware() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFFirmware())
+// KCGImagePropertyCIFFFirmware returns the value of the constant kCGImagePropertyCIFFFirmware.
+func KCGImagePropertyCIFFFirmware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFFirmware")))
 }
 
-// KCGImagePropertyCIFFOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFOwnerName as an objc.ID.
-func KCGImagePropertyCIFFOwnerName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFOwnerName())
+// KCGImagePropertyCIFFOwnerName returns the value of the constant kCGImagePropertyCIFFOwnerName.
+func KCGImagePropertyCIFFOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFOwnerName")))
 }
 
-// KCGImagePropertyCIFFImageName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageName as an objc.ID.
-func KCGImagePropertyCIFFImageName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFImageName())
+// KCGImagePropertyCIFFImageName returns the value of the constant kCGImagePropertyCIFFImageName.
+func KCGImagePropertyCIFFImageName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFImageName")))
 }
 
-// KCGImagePropertyCIFFImageFileName returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageFileName as an objc.ID.
-func KCGImagePropertyCIFFImageFileName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFImageFileName())
+// KCGImagePropertyCIFFImageFileName returns the value of the constant kCGImagePropertyCIFFImageFileName.
+func KCGImagePropertyCIFFImageFileName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFImageFileName")))
 }
 
-// KCGImagePropertyCIFFReleaseMethod returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFReleaseMethod as an objc.ID.
-func KCGImagePropertyCIFFReleaseMethod() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFReleaseMethod())
+// KCGImagePropertyCIFFReleaseMethod returns the value of the constant kCGImagePropertyCIFFReleaseMethod.
+func KCGImagePropertyCIFFReleaseMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFReleaseMethod")))
 }
 
-// KCGImagePropertyCIFFReleaseTiming returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFReleaseTiming as an objc.ID.
-func KCGImagePropertyCIFFReleaseTiming() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFReleaseTiming())
+// KCGImagePropertyCIFFReleaseTiming returns the value of the constant kCGImagePropertyCIFFReleaseTiming.
+func KCGImagePropertyCIFFReleaseTiming() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFReleaseTiming")))
 }
 
-// KCGImagePropertyCIFFRecordID returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFRecordID as an objc.ID.
-func KCGImagePropertyCIFFRecordID() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFRecordID())
+// KCGImagePropertyCIFFRecordID returns the value of the constant kCGImagePropertyCIFFRecordID.
+func KCGImagePropertyCIFFRecordID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFRecordID")))
 }
 
-// KCGImagePropertyCIFFSelfTimingTime returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFSelfTimingTime as an objc.ID.
-func KCGImagePropertyCIFFSelfTimingTime() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFSelfTimingTime())
+// KCGImagePropertyCIFFSelfTimingTime returns the value of the constant kCGImagePropertyCIFFSelfTimingTime.
+func KCGImagePropertyCIFFSelfTimingTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFSelfTimingTime")))
 }
 
-// KCGImagePropertyCIFFCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFCameraSerialNumber as an objc.ID.
-func KCGImagePropertyCIFFCameraSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFCameraSerialNumber())
+// KCGImagePropertyCIFFCameraSerialNumber returns the value of the constant kCGImagePropertyCIFFCameraSerialNumber.
+func KCGImagePropertyCIFFCameraSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFCameraSerialNumber")))
 }
 
-// KCGImagePropertyCIFFImageSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFImageSerialNumber as an objc.ID.
-func KCGImagePropertyCIFFImageSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFImageSerialNumber())
+// KCGImagePropertyCIFFImageSerialNumber returns the value of the constant kCGImagePropertyCIFFImageSerialNumber.
+func KCGImagePropertyCIFFImageSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFImageSerialNumber")))
 }
 
-// KCGImagePropertyCIFFContinuousDrive returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFContinuousDrive as an objc.ID.
-func KCGImagePropertyCIFFContinuousDrive() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFContinuousDrive())
+// KCGImagePropertyCIFFContinuousDrive returns the value of the constant kCGImagePropertyCIFFContinuousDrive.
+func KCGImagePropertyCIFFContinuousDrive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFContinuousDrive")))
 }
 
-// KCGImagePropertyCIFFFocusMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFocusMode as an objc.ID.
-func KCGImagePropertyCIFFFocusMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFFocusMode())
+// KCGImagePropertyCIFFFocusMode returns the value of the constant kCGImagePropertyCIFFFocusMode.
+func KCGImagePropertyCIFFFocusMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFFocusMode")))
 }
 
-// KCGImagePropertyCIFFMeteringMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFMeteringMode as an objc.ID.
-func KCGImagePropertyCIFFMeteringMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFMeteringMode())
+// KCGImagePropertyCIFFMeteringMode returns the value of the constant kCGImagePropertyCIFFMeteringMode.
+func KCGImagePropertyCIFFMeteringMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFMeteringMode")))
 }
 
-// KCGImagePropertyCIFFShootingMode returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFShootingMode as an objc.ID.
-func KCGImagePropertyCIFFShootingMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFShootingMode())
+// KCGImagePropertyCIFFShootingMode returns the value of the constant kCGImagePropertyCIFFShootingMode.
+func KCGImagePropertyCIFFShootingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFShootingMode")))
 }
 
-// KCGImagePropertyCIFFLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensModel as an objc.ID.
-func KCGImagePropertyCIFFLensModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFLensModel())
+// KCGImagePropertyCIFFLensModel returns the value of the constant kCGImagePropertyCIFFLensModel.
+func KCGImagePropertyCIFFLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFLensModel")))
 }
 
-// KCGImagePropertyCIFFLensMaxMM returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensMaxMM as an objc.ID.
-func KCGImagePropertyCIFFLensMaxMM() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFLensMaxMM())
+// KCGImagePropertyCIFFLensMaxMM returns the value of the constant kCGImagePropertyCIFFLensMaxMM.
+func KCGImagePropertyCIFFLensMaxMM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFLensMaxMM")))
 }
 
-// KCGImagePropertyCIFFLensMinMM returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFLensMinMM as an objc.ID.
-func KCGImagePropertyCIFFLensMinMM() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFLensMinMM())
+// KCGImagePropertyCIFFLensMinMM returns the value of the constant kCGImagePropertyCIFFLensMinMM.
+func KCGImagePropertyCIFFLensMinMM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFLensMinMM")))
 }
 
-// KCGImagePropertyCIFFWhiteBalanceIndex returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFWhiteBalanceIndex as an objc.ID.
-func KCGImagePropertyCIFFWhiteBalanceIndex() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFWhiteBalanceIndex())
+// KCGImagePropertyCIFFWhiteBalanceIndex returns the value of the constant kCGImagePropertyCIFFWhiteBalanceIndex.
+func KCGImagePropertyCIFFWhiteBalanceIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFWhiteBalanceIndex")))
 }
 
-// KCGImagePropertyCIFFFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFFlashExposureComp as an objc.ID.
-func KCGImagePropertyCIFFFlashExposureComp() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFFlashExposureComp())
+// KCGImagePropertyCIFFFlashExposureComp returns the value of the constant kCGImagePropertyCIFFFlashExposureComp.
+func KCGImagePropertyCIFFFlashExposureComp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFFlashExposureComp")))
 }
 
-// KCGImagePropertyCIFFMeasuredEV returns the value of the CoreFoundation reference constant kCGImagePropertyCIFFMeasuredEV as an objc.ID.
-func KCGImagePropertyCIFFMeasuredEV() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyCIFFMeasuredEV())
+// KCGImagePropertyCIFFMeasuredEV returns the value of the constant kCGImagePropertyCIFFMeasuredEV.
+func KCGImagePropertyCIFFMeasuredEV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyCIFFMeasuredEV")))
 }
 
-// KCGImagePropertyMakerNikonISOSetting returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonISOSetting as an objc.ID.
-func KCGImagePropertyMakerNikonISOSetting() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonISOSetting())
+// KCGImagePropertyMakerNikonISOSetting returns the value of the constant kCGImagePropertyMakerNikonISOSetting.
+func KCGImagePropertyMakerNikonISOSetting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonISOSetting")))
 }
 
-// KCGImagePropertyMakerNikonColorMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonColorMode as an objc.ID.
-func KCGImagePropertyMakerNikonColorMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonColorMode())
+// KCGImagePropertyMakerNikonColorMode returns the value of the constant kCGImagePropertyMakerNikonColorMode.
+func KCGImagePropertyMakerNikonColorMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonColorMode")))
 }
 
-// KCGImagePropertyMakerNikonQuality returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonQuality as an objc.ID.
-func KCGImagePropertyMakerNikonQuality() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonQuality())
+// KCGImagePropertyMakerNikonQuality returns the value of the constant kCGImagePropertyMakerNikonQuality.
+func KCGImagePropertyMakerNikonQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonQuality")))
 }
 
-// KCGImagePropertyMakerNikonWhiteBalanceMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonWhiteBalanceMode as an objc.ID.
-func KCGImagePropertyMakerNikonWhiteBalanceMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonWhiteBalanceMode())
+// KCGImagePropertyMakerNikonWhiteBalanceMode returns the value of the constant kCGImagePropertyMakerNikonWhiteBalanceMode.
+func KCGImagePropertyMakerNikonWhiteBalanceMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonWhiteBalanceMode")))
 }
 
-// KCGImagePropertyMakerNikonSharpenMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonSharpenMode as an objc.ID.
-func KCGImagePropertyMakerNikonSharpenMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonSharpenMode())
+// KCGImagePropertyMakerNikonSharpenMode returns the value of the constant kCGImagePropertyMakerNikonSharpenMode.
+func KCGImagePropertyMakerNikonSharpenMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonSharpenMode")))
 }
 
-// KCGImagePropertyMakerNikonFocusMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFocusMode as an objc.ID.
-func KCGImagePropertyMakerNikonFocusMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonFocusMode())
+// KCGImagePropertyMakerNikonFocusMode returns the value of the constant kCGImagePropertyMakerNikonFocusMode.
+func KCGImagePropertyMakerNikonFocusMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonFocusMode")))
 }
 
-// KCGImagePropertyMakerNikonFlashSetting returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFlashSetting as an objc.ID.
-func KCGImagePropertyMakerNikonFlashSetting() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonFlashSetting())
+// KCGImagePropertyMakerNikonFlashSetting returns the value of the constant kCGImagePropertyMakerNikonFlashSetting.
+func KCGImagePropertyMakerNikonFlashSetting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonFlashSetting")))
 }
 
-// KCGImagePropertyMakerNikonISOSelection returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonISOSelection as an objc.ID.
-func KCGImagePropertyMakerNikonISOSelection() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonISOSelection())
+// KCGImagePropertyMakerNikonISOSelection returns the value of the constant kCGImagePropertyMakerNikonISOSelection.
+func KCGImagePropertyMakerNikonISOSelection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonISOSelection")))
 }
 
-// KCGImagePropertyMakerNikonFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFlashExposureComp as an objc.ID.
-func KCGImagePropertyMakerNikonFlashExposureComp() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonFlashExposureComp())
+// KCGImagePropertyMakerNikonFlashExposureComp returns the value of the constant kCGImagePropertyMakerNikonFlashExposureComp.
+func KCGImagePropertyMakerNikonFlashExposureComp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonFlashExposureComp")))
 }
 
-// KCGImagePropertyMakerNikonImageAdjustment returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonImageAdjustment as an objc.ID.
-func KCGImagePropertyMakerNikonImageAdjustment() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonImageAdjustment())
+// KCGImagePropertyMakerNikonImageAdjustment returns the value of the constant kCGImagePropertyMakerNikonImageAdjustment.
+func KCGImagePropertyMakerNikonImageAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonImageAdjustment")))
 }
 
-// KCGImagePropertyMakerNikonLensAdapter returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensAdapter as an objc.ID.
-func KCGImagePropertyMakerNikonLensAdapter() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensAdapter())
+// KCGImagePropertyMakerNikonLensAdapter returns the value of the constant kCGImagePropertyMakerNikonLensAdapter.
+func KCGImagePropertyMakerNikonLensAdapter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonLensAdapter")))
 }
 
-// KCGImagePropertyMakerNikonLensType returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensType as an objc.ID.
-func KCGImagePropertyMakerNikonLensType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensType())
+// KCGImagePropertyMakerNikonLensType returns the value of the constant kCGImagePropertyMakerNikonLensType.
+func KCGImagePropertyMakerNikonLensType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonLensType")))
 }
 
-// KCGImagePropertyMakerNikonLensInfo returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonLensInfo as an objc.ID.
-func KCGImagePropertyMakerNikonLensInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonLensInfo())
+// KCGImagePropertyMakerNikonLensInfo returns the value of the constant kCGImagePropertyMakerNikonLensInfo.
+func KCGImagePropertyMakerNikonLensInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonLensInfo")))
 }
 
-// KCGImagePropertyMakerNikonFocusDistance returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonFocusDistance as an objc.ID.
-func KCGImagePropertyMakerNikonFocusDistance() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonFocusDistance())
+// KCGImagePropertyMakerNikonFocusDistance returns the value of the constant kCGImagePropertyMakerNikonFocusDistance.
+func KCGImagePropertyMakerNikonFocusDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonFocusDistance")))
 }
 
-// KCGImagePropertyMakerNikonDigitalZoom returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonDigitalZoom as an objc.ID.
-func KCGImagePropertyMakerNikonDigitalZoom() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonDigitalZoom())
+// KCGImagePropertyMakerNikonDigitalZoom returns the value of the constant kCGImagePropertyMakerNikonDigitalZoom.
+func KCGImagePropertyMakerNikonDigitalZoom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonDigitalZoom")))
 }
 
-// KCGImagePropertyMakerNikonShootingMode returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonShootingMode as an objc.ID.
-func KCGImagePropertyMakerNikonShootingMode() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonShootingMode())
+// KCGImagePropertyMakerNikonShootingMode returns the value of the constant kCGImagePropertyMakerNikonShootingMode.
+func KCGImagePropertyMakerNikonShootingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonShootingMode")))
 }
 
-// KCGImagePropertyMakerNikonCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonCameraSerialNumber as an objc.ID.
-func KCGImagePropertyMakerNikonCameraSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonCameraSerialNumber())
+// KCGImagePropertyMakerNikonCameraSerialNumber returns the value of the constant kCGImagePropertyMakerNikonCameraSerialNumber.
+func KCGImagePropertyMakerNikonCameraSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonCameraSerialNumber")))
 }
 
-// KCGImagePropertyMakerNikonShutterCount returns the value of the CoreFoundation reference constant kCGImagePropertyMakerNikonShutterCount as an objc.ID.
-func KCGImagePropertyMakerNikonShutterCount() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerNikonShutterCount())
+// KCGImagePropertyMakerNikonShutterCount returns the value of the constant kCGImagePropertyMakerNikonShutterCount.
+func KCGImagePropertyMakerNikonShutterCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerNikonShutterCount")))
 }
 
-// KCGImagePropertyMakerCanonOwnerName returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonOwnerName as an objc.ID.
-func KCGImagePropertyMakerCanonOwnerName() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonOwnerName())
+// KCGImagePropertyMakerCanonOwnerName returns the value of the constant kCGImagePropertyMakerCanonOwnerName.
+func KCGImagePropertyMakerCanonOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonOwnerName")))
 }
 
-// KCGImagePropertyMakerCanonCameraSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonCameraSerialNumber as an objc.ID.
-func KCGImagePropertyMakerCanonCameraSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonCameraSerialNumber())
+// KCGImagePropertyMakerCanonCameraSerialNumber returns the value of the constant kCGImagePropertyMakerCanonCameraSerialNumber.
+func KCGImagePropertyMakerCanonCameraSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonCameraSerialNumber")))
 }
 
-// KCGImagePropertyMakerCanonImageSerialNumber returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonImageSerialNumber as an objc.ID.
-func KCGImagePropertyMakerCanonImageSerialNumber() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonImageSerialNumber())
+// KCGImagePropertyMakerCanonImageSerialNumber returns the value of the constant kCGImagePropertyMakerCanonImageSerialNumber.
+func KCGImagePropertyMakerCanonImageSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonImageSerialNumber")))
 }
 
-// KCGImagePropertyMakerCanonFlashExposureComp returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonFlashExposureComp as an objc.ID.
-func KCGImagePropertyMakerCanonFlashExposureComp() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonFlashExposureComp())
+// KCGImagePropertyMakerCanonFlashExposureComp returns the value of the constant kCGImagePropertyMakerCanonFlashExposureComp.
+func KCGImagePropertyMakerCanonFlashExposureComp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonFlashExposureComp")))
 }
 
-// KCGImagePropertyMakerCanonContinuousDrive returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonContinuousDrive as an objc.ID.
-func KCGImagePropertyMakerCanonContinuousDrive() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonContinuousDrive())
+// KCGImagePropertyMakerCanonContinuousDrive returns the value of the constant kCGImagePropertyMakerCanonContinuousDrive.
+func KCGImagePropertyMakerCanonContinuousDrive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonContinuousDrive")))
 }
 
-// KCGImagePropertyMakerCanonLensModel returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonLensModel as an objc.ID.
-func KCGImagePropertyMakerCanonLensModel() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonLensModel())
+// KCGImagePropertyMakerCanonLensModel returns the value of the constant kCGImagePropertyMakerCanonLensModel.
+func KCGImagePropertyMakerCanonLensModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonLensModel")))
 }
 
-// KCGImagePropertyMakerCanonFirmware returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonFirmware as an objc.ID.
-func KCGImagePropertyMakerCanonFirmware() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonFirmware())
+// KCGImagePropertyMakerCanonFirmware returns the value of the constant kCGImagePropertyMakerCanonFirmware.
+func KCGImagePropertyMakerCanonFirmware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonFirmware")))
 }
 
-// KCGImagePropertyMakerCanonAspectRatioInfo returns the value of the CoreFoundation reference constant kCGImagePropertyMakerCanonAspectRatioInfo as an objc.ID.
-func KCGImagePropertyMakerCanonAspectRatioInfo() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyMakerCanonAspectRatioInfo())
+// KCGImagePropertyMakerCanonAspectRatioInfo returns the value of the constant kCGImagePropertyMakerCanonAspectRatioInfo.
+func KCGImagePropertyMakerCanonAspectRatioInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyMakerCanonAspectRatioInfo")))
 }
 
-// KCGImagePropertyOpenEXRCompression returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRCompression as an objc.ID.
-func KCGImagePropertyOpenEXRCompression() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyOpenEXRCompression())
+// KCGImagePropertyOpenEXRCompression returns the value of the constant kCGImagePropertyOpenEXRCompression.
+func KCGImagePropertyOpenEXRCompression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyOpenEXRCompression")))
 }
 
-// KCGImagePropertyOpenEXRAspectRatio returns the value of the CoreFoundation reference constant kCGImagePropertyOpenEXRAspectRatio as an objc.ID.
-func KCGImagePropertyOpenEXRAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyOpenEXRAspectRatio())
+// KCGImagePropertyOpenEXRAspectRatio returns the value of the constant kCGImagePropertyOpenEXRAspectRatio.
+func KCGImagePropertyOpenEXRAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyOpenEXRAspectRatio")))
 }
 
-// KCGImagePropertyTGACompression returns the value of the CoreFoundation reference constant kCGImagePropertyTGACompression as an objc.ID.
-func KCGImagePropertyTGACompression() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyTGACompression())
+// KCGImagePropertyTGACompression returns the value of the constant kCGImagePropertyTGACompression.
+func KCGImagePropertyTGACompression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyTGACompression")))
 }
 
-// KCGImagePropertyPNGCompressionFilter returns the value of the CoreFoundation reference constant kCGImagePropertyPNGCompressionFilter as an objc.ID.
-func KCGImagePropertyPNGCompressionFilter() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGCompressionFilter())
+// KCGImagePropertyPNGCompressionFilter returns the value of the constant kCGImagePropertyPNGCompressionFilter.
+func KCGImagePropertyPNGCompressionFilter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGCompressionFilter")))
 }
 
-// KCGImagePropertyPNGTransparency returns the value of the CoreFoundation reference constant kCGImagePropertyPNGTransparency as an objc.ID.
-func KCGImagePropertyPNGTransparency() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPNGTransparency())
+// KCGImagePropertyPNGTransparency returns the value of the constant kCGImagePropertyPNGTransparency.
+func KCGImagePropertyPNGTransparency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPNGTransparency")))
 }
 
-// KCGImageAuxiliaryDataTypeDepth returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeDepth as an objc.ID.
-func KCGImageAuxiliaryDataTypeDepth() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeDepth())
+// KCGImageAuxiliaryDataTypeDepth returns the value of the constant kCGImageAuxiliaryDataTypeDepth.
+func KCGImageAuxiliaryDataTypeDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeDepth")))
 }
 
-// KCGImageAuxiliaryDataTypeDisparity returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeDisparity as an objc.ID.
-func KCGImageAuxiliaryDataTypeDisparity() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeDisparity())
+// KCGImageAuxiliaryDataTypeDisparity returns the value of the constant kCGImageAuxiliaryDataTypeDisparity.
+func KCGImageAuxiliaryDataTypeDisparity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeDisparity")))
 }
 
-// KCGImageAuxiliaryDataTypePortraitEffectsMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypePortraitEffectsMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypePortraitEffectsMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypePortraitEffectsMatte())
+// KCGImageAuxiliaryDataTypePortraitEffectsMatte returns the value of the constant kCGImageAuxiliaryDataTypePortraitEffectsMatte.
+func KCGImageAuxiliaryDataTypePortraitEffectsMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypePortraitEffectsMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte())
+// KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte returns the value of the constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte.
+func KCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte())
+// KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte returns the value of the constant kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte.
+func KCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte())
+// KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte returns the value of the constant kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte.
+func KCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte())
+// KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte returns the value of the constant kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte.
+func KCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte as an objc.ID.
-func KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte())
+// KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte returns the value of the constant kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte.
+func KCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte")))
 }
 
-// KCGImageAuxiliaryDataTypeHDRGainMap returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeHDRGainMap as an objc.ID.
-func KCGImageAuxiliaryDataTypeHDRGainMap() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeHDRGainMap())
+// KCGImageAuxiliaryDataTypeHDRGainMap returns the value of the constant kCGImageAuxiliaryDataTypeHDRGainMap.
+func KCGImageAuxiliaryDataTypeHDRGainMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeHDRGainMap")))
 }
 
-// KCGImageAuxiliaryDataTypeISOGainMap returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataTypeISOGainMap as an objc.ID.
-func KCGImageAuxiliaryDataTypeISOGainMap() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataTypeISOGainMap())
+// KCGImageAuxiliaryDataTypeISOGainMap returns the value of the constant kCGImageAuxiliaryDataTypeISOGainMap.
+func KCGImageAuxiliaryDataTypeISOGainMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataTypeISOGainMap")))
 }
 
-// KCGImageAuxiliaryDataInfoData returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoData as an objc.ID.
-func KCGImageAuxiliaryDataInfoData() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoData())
+// KCGImageAuxiliaryDataInfoData returns the value of the constant kCGImageAuxiliaryDataInfoData.
+func KCGImageAuxiliaryDataInfoData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataInfoData")))
 }
 
-// KCGImageAuxiliaryDataInfoDataDescription returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoDataDescription as an objc.ID.
-func KCGImageAuxiliaryDataInfoDataDescription() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoDataDescription())
+// KCGImageAuxiliaryDataInfoDataDescription returns the value of the constant kCGImageAuxiliaryDataInfoDataDescription.
+func KCGImageAuxiliaryDataInfoDataDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataInfoDataDescription")))
 }
 
-// KCGImageAuxiliaryDataInfoMetadata returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoMetadata as an objc.ID.
-func KCGImageAuxiliaryDataInfoMetadata() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoMetadata())
+// KCGImageAuxiliaryDataInfoMetadata returns the value of the constant kCGImageAuxiliaryDataInfoMetadata.
+func KCGImageAuxiliaryDataInfoMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataInfoMetadata")))
 }
 
-// KCGImageAuxiliaryDataInfoColorSpace returns the value of the CoreFoundation reference constant kCGImageAuxiliaryDataInfoColorSpace as an objc.ID.
-func KCGImageAuxiliaryDataInfoColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImageAuxiliaryDataInfoColorSpace())
+// KCGImageAuxiliaryDataInfoColorSpace returns the value of the constant kCGImageAuxiliaryDataInfoColorSpace.
+func KCGImageAuxiliaryDataInfoColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAuxiliaryDataInfoColorSpace")))
 }
 
-// KCGImagePropertyImageCount returns the value of the CoreFoundation reference constant kCGImagePropertyImageCount as an objc.ID.
-func KCGImagePropertyImageCount() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImageCount()) }
+// KCGImagePropertyImageCount returns the value of the constant kCGImagePropertyImageCount.
+func KCGImagePropertyImageCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyImageCount")))
+}
 
-// KCGImagePropertyWidth returns the value of the CoreFoundation reference constant kCGImagePropertyWidth as an objc.ID.
-func KCGImagePropertyWidth() objc.ID { return purego.CFConstant(raw.KCGImagePropertyWidth()) }
+// KCGImagePropertyWidth returns the value of the constant kCGImagePropertyWidth.
+func KCGImagePropertyWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyWidth")))
+}
 
-// KCGImagePropertyHeight returns the value of the CoreFoundation reference constant kCGImagePropertyHeight as an objc.ID.
-func KCGImagePropertyHeight() objc.ID { return purego.CFConstant(raw.KCGImagePropertyHeight()) }
+// KCGImagePropertyHeight returns the value of the constant kCGImagePropertyHeight.
+func KCGImagePropertyHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyHeight")))
+}
 
-// KCGImagePropertyBytesPerRow returns the value of the CoreFoundation reference constant kCGImagePropertyBytesPerRow as an objc.ID.
-func KCGImagePropertyBytesPerRow() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyBytesPerRow())
+// KCGImagePropertyBytesPerRow returns the value of the constant kCGImagePropertyBytesPerRow.
+func KCGImagePropertyBytesPerRow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyBytesPerRow")))
 }
 
-// KCGImagePropertyNamedColorSpace returns the value of the CoreFoundation reference constant kCGImagePropertyNamedColorSpace as an objc.ID.
-func KCGImagePropertyNamedColorSpace() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyNamedColorSpace())
+// KCGImagePropertyNamedColorSpace returns the value of the constant kCGImagePropertyNamedColorSpace.
+func KCGImagePropertyNamedColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyNamedColorSpace")))
 }
 
-// KCGImagePropertyPixelFormat returns the value of the CoreFoundation reference constant kCGImagePropertyPixelFormat as an objc.ID.
-func KCGImagePropertyPixelFormat() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyPixelFormat())
+// KCGImagePropertyPixelFormat returns the value of the constant kCGImagePropertyPixelFormat.
+func KCGImagePropertyPixelFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyPixelFormat")))
 }
 
-// KCGImagePropertyImages returns the value of the CoreFoundation reference constant kCGImagePropertyImages as an objc.ID.
-func KCGImagePropertyImages() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImages()) }
+// KCGImagePropertyImages returns the value of the constant kCGImagePropertyImages.
+func KCGImagePropertyImages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyImages")))
+}
 
-// KCGImagePropertyThumbnailImages returns the value of the CoreFoundation reference constant kCGImagePropertyThumbnailImages as an objc.ID.
-func KCGImagePropertyThumbnailImages() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyThumbnailImages())
+// KCGImagePropertyThumbnailImages returns the value of the constant kCGImagePropertyThumbnailImages.
+func KCGImagePropertyThumbnailImages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyThumbnailImages")))
 }
 
-// KCGImagePropertyAuxiliaryData returns the value of the CoreFoundation reference constant kCGImagePropertyAuxiliaryData as an objc.ID.
-func KCGImagePropertyAuxiliaryData() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAuxiliaryData())
+// KCGImagePropertyAuxiliaryData returns the value of the constant kCGImagePropertyAuxiliaryData.
+func KCGImagePropertyAuxiliaryData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAuxiliaryData")))
 }
 
-// KCGImagePropertyAuxiliaryDataType returns the value of the CoreFoundation reference constant kCGImagePropertyAuxiliaryDataType as an objc.ID.
-func KCGImagePropertyAuxiliaryDataType() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyAuxiliaryDataType())
+// KCGImagePropertyAuxiliaryDataType returns the value of the constant kCGImagePropertyAuxiliaryDataType.
+func KCGImagePropertyAuxiliaryDataType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyAuxiliaryDataType")))
 }
 
-// KCGImagePropertyImageIndex returns the value of the CoreFoundation reference constant kCGImagePropertyImageIndex as an objc.ID.
-func KCGImagePropertyImageIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyImageIndex()) }
+// KCGImagePropertyImageIndex returns the value of the constant kCGImagePropertyImageIndex.
+func KCGImagePropertyImageIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyImageIndex")))
+}
 
-// KCGImagePropertyGroups returns the value of the CoreFoundation reference constant kCGImagePropertyGroups as an objc.ID.
-func KCGImagePropertyGroups() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroups()) }
+// KCGImagePropertyGroups returns the value of the constant kCGImagePropertyGroups.
+func KCGImagePropertyGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroups")))
+}
 
-// KCGImagePropertyGroupIndex returns the value of the CoreFoundation reference constant kCGImagePropertyGroupIndex as an objc.ID.
-func KCGImagePropertyGroupIndex() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupIndex()) }
+// KCGImagePropertyGroupIndex returns the value of the constant kCGImagePropertyGroupIndex.
+func KCGImagePropertyGroupIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupIndex")))
+}
 
-// KCGImagePropertyGroupType returns the value of the CoreFoundation reference constant kCGImagePropertyGroupType as an objc.ID.
-func KCGImagePropertyGroupType() objc.ID { return purego.CFConstant(raw.KCGImagePropertyGroupType()) }
+// KCGImagePropertyGroupType returns the value of the constant kCGImagePropertyGroupType.
+func KCGImagePropertyGroupType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupType")))
+}
 
-// KCGImagePropertyGroupTypeStereoPair returns the value of the CoreFoundation reference constant kCGImagePropertyGroupTypeStereoPair as an objc.ID.
-func KCGImagePropertyGroupTypeStereoPair() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupTypeStereoPair())
+// KCGImagePropertyGroupTypeStereoPair returns the value of the constant kCGImagePropertyGroupTypeStereoPair.
+func KCGImagePropertyGroupTypeStereoPair() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupTypeStereoPair")))
 }
 
-// KCGImagePropertyGroupTypeAlternate returns the value of the CoreFoundation reference constant kCGImagePropertyGroupTypeAlternate as an objc.ID.
-func KCGImagePropertyGroupTypeAlternate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupTypeAlternate())
+// KCGImagePropertyGroupTypeAlternate returns the value of the constant kCGImagePropertyGroupTypeAlternate.
+func KCGImagePropertyGroupTypeAlternate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupTypeAlternate")))
 }
 
-// KCGImagePropertyGroupImagesAlternate returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImagesAlternate as an objc.ID.
-func KCGImagePropertyGroupImagesAlternate() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImagesAlternate())
+// KCGImagePropertyGroupImagesAlternate returns the value of the constant kCGImagePropertyGroupImagesAlternate.
+func KCGImagePropertyGroupImagesAlternate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImagesAlternate")))
 }
 
-// KCGImagePropertyGroupImageIndexLeft returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexLeft as an objc.ID.
-func KCGImagePropertyGroupImageIndexLeft() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexLeft())
+// KCGImagePropertyGroupImageIndexLeft returns the value of the constant kCGImagePropertyGroupImageIndexLeft.
+func KCGImagePropertyGroupImageIndexLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIndexLeft")))
 }
 
-// KCGImagePropertyGroupImageIndexRight returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexRight as an objc.ID.
-func KCGImagePropertyGroupImageIndexRight() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexRight())
+// KCGImagePropertyGroupImageIndexRight returns the value of the constant kCGImagePropertyGroupImageIndexRight.
+func KCGImagePropertyGroupImageIndexRight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIndexRight")))
 }
 
-// KCGImagePropertyGroupImageIndexMonoscopic returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIndexMonoscopic as an objc.ID.
-func KCGImagePropertyGroupImageIndexMonoscopic() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIndexMonoscopic())
+// KCGImagePropertyGroupImageIndexMonoscopic returns the value of the constant kCGImagePropertyGroupImageIndexMonoscopic.
+func KCGImagePropertyGroupImageIndexMonoscopic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIndexMonoscopic")))
 }
 
-// KCGImagePropertyGroupImageIsLeftImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsLeftImage as an objc.ID.
-func KCGImagePropertyGroupImageIsLeftImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIsLeftImage())
+// KCGImagePropertyGroupImageIsLeftImage returns the value of the constant kCGImagePropertyGroupImageIsLeftImage.
+func KCGImagePropertyGroupImageIsLeftImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIsLeftImage")))
 }
 
-// KCGImagePropertyGroupImageIsRightImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsRightImage as an objc.ID.
-func KCGImagePropertyGroupImageIsRightImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIsRightImage())
+// KCGImagePropertyGroupImageIsRightImage returns the value of the constant kCGImagePropertyGroupImageIsRightImage.
+func KCGImagePropertyGroupImageIsRightImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIsRightImage")))
 }
 
-// KCGImagePropertyGroupImageIsMonoscopicImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsMonoscopicImage as an objc.ID.
-func KCGImagePropertyGroupImageIsMonoscopicImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIsMonoscopicImage())
+// KCGImagePropertyGroupImageIsMonoscopicImage returns the value of the constant kCGImagePropertyGroupImageIsMonoscopicImage.
+func KCGImagePropertyGroupImageIsMonoscopicImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIsMonoscopicImage")))
 }
 
-// KCGImagePropertyGroupImageIsAlternateImage returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageIsAlternateImage as an objc.ID.
-func KCGImagePropertyGroupImageIsAlternateImage() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageIsAlternateImage())
+// KCGImagePropertyGroupImageIsAlternateImage returns the value of the constant kCGImagePropertyGroupImageIsAlternateImage.
+func KCGImagePropertyGroupImageIsAlternateImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageIsAlternateImage")))
 }
 
-// KCGImagePropertyGroupImageBaseline returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageBaseline as an objc.ID.
-func KCGImagePropertyGroupImageBaseline() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageBaseline())
+// KCGImagePropertyGroupImageBaseline returns the value of the constant kCGImagePropertyGroupImageBaseline.
+func KCGImagePropertyGroupImageBaseline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageBaseline")))
 }
 
-// KCGImagePropertyGroupImageDisparityAdjustment returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageDisparityAdjustment as an objc.ID.
-func KCGImagePropertyGroupImageDisparityAdjustment() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageDisparityAdjustment())
+// KCGImagePropertyGroupImageDisparityAdjustment returns the value of the constant kCGImagePropertyGroupImageDisparityAdjustment.
+func KCGImagePropertyGroupImageDisparityAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageDisparityAdjustment")))
 }
 
-// KCGImagePropertyGroupImageStereoAggressors returns the value of the CoreFoundation reference constant kCGImagePropertyGroupImageStereoAggressors as an objc.ID.
-func KCGImagePropertyGroupImageStereoAggressors() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupImageStereoAggressors())
+// KCGImagePropertyGroupImageStereoAggressors returns the value of the constant kCGImagePropertyGroupImageStereoAggressors.
+func KCGImagePropertyGroupImageStereoAggressors() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupImageStereoAggressors")))
 }
 
-// KIIOStereoAggressors_Type returns the value of the CoreFoundation reference constant kIIOStereoAggressors_Type as an objc.ID.
-func KIIOStereoAggressors_Type() objc.ID { return purego.CFConstant(raw.KIIOStereoAggressors_Type()) }
+// KIIOStereoAggressors_Type returns the value of the constant kIIOStereoAggressors_Type.
+func KIIOStereoAggressors_Type() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOStereoAggressors_Type")))
+}
 
-// KIIOStereoAggressors_SubTypeURI returns the value of the CoreFoundation reference constant kIIOStereoAggressors_SubTypeURI as an objc.ID.
-func KIIOStereoAggressors_SubTypeURI() objc.ID {
-	return purego.CFConstant(raw.KIIOStereoAggressors_SubTypeURI())
+// KIIOStereoAggressors_SubTypeURI returns the value of the constant kIIOStereoAggressors_SubTypeURI.
+func KIIOStereoAggressors_SubTypeURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOStereoAggressors_SubTypeURI")))
 }
 
-// KIIOStereoAggressors_Severity returns the value of the CoreFoundation reference constant kIIOStereoAggressors_Severity as an objc.ID.
-func KIIOStereoAggressors_Severity() objc.ID {
-	return purego.CFConstant(raw.KIIOStereoAggressors_Severity())
+// KIIOStereoAggressors_Severity returns the value of the constant kIIOStereoAggressors_Severity.
+func KIIOStereoAggressors_Severity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOStereoAggressors_Severity")))
 }
 
-// KCGImagePropertyGroupMonoscopicImageLocation returns the value of the CoreFoundation reference constant kCGImagePropertyGroupMonoscopicImageLocation as an objc.ID.
-func KCGImagePropertyGroupMonoscopicImageLocation() objc.ID {
-	return purego.CFConstant(raw.KCGImagePropertyGroupMonoscopicImageLocation())
+// KCGImagePropertyGroupMonoscopicImageLocation returns the value of the constant kCGImagePropertyGroupMonoscopicImageLocation.
+func KCGImagePropertyGroupMonoscopicImageLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImagePropertyGroupMonoscopicImageLocation")))
 }
 
-// KIIOMonoscopicImageLocation_Unspecified returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Unspecified as an objc.ID.
-func KIIOMonoscopicImageLocation_Unspecified() objc.ID {
-	return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Unspecified())
+// KIIOMonoscopicImageLocation_Unspecified returns the value of the constant kIIOMonoscopicImageLocation_Unspecified.
+func KIIOMonoscopicImageLocation_Unspecified() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMonoscopicImageLocation_Unspecified")))
 }
 
-// KIIOMonoscopicImageLocation_Left returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Left as an objc.ID.
-func KIIOMonoscopicImageLocation_Left() objc.ID {
-	return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Left())
+// KIIOMonoscopicImageLocation_Left returns the value of the constant kIIOMonoscopicImageLocation_Left.
+func KIIOMonoscopicImageLocation_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMonoscopicImageLocation_Left")))
 }
 
-// KIIOMonoscopicImageLocation_Right returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Right as an objc.ID.
-func KIIOMonoscopicImageLocation_Right() objc.ID {
-	return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Right())
+// KIIOMonoscopicImageLocation_Right returns the value of the constant kIIOMonoscopicImageLocation_Right.
+func KIIOMonoscopicImageLocation_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMonoscopicImageLocation_Right")))
 }
 
-// KIIOMonoscopicImageLocation_Center returns the value of the CoreFoundation reference constant kIIOMonoscopicImageLocation_Center as an objc.ID.
-func KIIOMonoscopicImageLocation_Center() objc.ID {
-	return purego.CFConstant(raw.KIIOMonoscopicImageLocation_Center())
+// KIIOMonoscopicImageLocation_Center returns the value of the constant kIIOMonoscopicImageLocation_Center.
+func KIIOMonoscopicImageLocation_Center() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMonoscopicImageLocation_Center")))
 }
 
-// KIIOMetadata_CameraExtrinsicsKey returns the value of the CoreFoundation reference constant kIIOMetadata_CameraExtrinsicsKey as an objc.ID.
-func KIIOMetadata_CameraExtrinsicsKey() objc.ID {
-	return purego.CFConstant(raw.KIIOMetadata_CameraExtrinsicsKey())
+// KIIOMetadata_CameraExtrinsicsKey returns the value of the constant kIIOMetadata_CameraExtrinsicsKey.
+func KIIOMetadata_CameraExtrinsicsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMetadata_CameraExtrinsicsKey")))
 }
 
-// KIIOCameraExtrinsics_CoordinateSystemID returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_CoordinateSystemID as an objc.ID.
-func KIIOCameraExtrinsics_CoordinateSystemID() objc.ID {
-	return purego.CFConstant(raw.KIIOCameraExtrinsics_CoordinateSystemID())
+// KIIOCameraExtrinsics_CoordinateSystemID returns the value of the constant kIIOCameraExtrinsics_CoordinateSystemID.
+func KIIOCameraExtrinsics_CoordinateSystemID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraExtrinsics_CoordinateSystemID")))
 }
 
-// KIIOCameraExtrinsics_Position returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_Position as an objc.ID.
-func KIIOCameraExtrinsics_Position() objc.ID {
-	return purego.CFConstant(raw.KIIOCameraExtrinsics_Position())
+// KIIOCameraExtrinsics_Position returns the value of the constant kIIOCameraExtrinsics_Position.
+func KIIOCameraExtrinsics_Position() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraExtrinsics_Position")))
 }
 
-// KIIOCameraExtrinsics_Rotation returns the value of the CoreFoundation reference constant kIIOCameraExtrinsics_Rotation as an objc.ID.
-func KIIOCameraExtrinsics_Rotation() objc.ID {
-	return purego.CFConstant(raw.KIIOCameraExtrinsics_Rotation())
+// KIIOCameraExtrinsics_Rotation returns the value of the constant kIIOCameraExtrinsics_Rotation.
+func KIIOCameraExtrinsics_Rotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraExtrinsics_Rotation")))
 }
 
-// KIIOMetadata_CameraModelKey returns the value of the CoreFoundation reference constant kIIOMetadata_CameraModelKey as an objc.ID.
-func KIIOMetadata_CameraModelKey() objc.ID {
-	return purego.CFConstant(raw.KIIOMetadata_CameraModelKey())
+// KIIOMetadata_CameraModelKey returns the value of the constant kIIOMetadata_CameraModelKey.
+func KIIOMetadata_CameraModelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOMetadata_CameraModelKey")))
 }
 
-// KIIOCameraModel_ModelType returns the value of the CoreFoundation reference constant kIIOCameraModel_ModelType as an objc.ID.
-func KIIOCameraModel_ModelType() objc.ID { return purego.CFConstant(raw.KIIOCameraModel_ModelType()) }
+// KIIOCameraModel_ModelType returns the value of the constant kIIOCameraModel_ModelType.
+func KIIOCameraModel_ModelType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraModel_ModelType")))
+}
 
-// KIIOCameraModelType_SimplifiedPinhole returns the value of the CoreFoundation reference constant kIIOCameraModelType_SimplifiedPinhole as an objc.ID.
-func KIIOCameraModelType_SimplifiedPinhole() objc.ID {
-	return purego.CFConstant(raw.KIIOCameraModelType_SimplifiedPinhole())
+// KIIOCameraModelType_SimplifiedPinhole returns the value of the constant kIIOCameraModelType_SimplifiedPinhole.
+func KIIOCameraModelType_SimplifiedPinhole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraModelType_SimplifiedPinhole")))
 }
 
-// KIIOCameraModelType_GenericPinhole returns the value of the CoreFoundation reference constant kIIOCameraModelType_GenericPinhole as an objc.ID.
-func KIIOCameraModelType_GenericPinhole() objc.ID {
-	return purego.CFConstant(raw.KIIOCameraModelType_GenericPinhole())
+// KIIOCameraModelType_GenericPinhole returns the value of the constant kIIOCameraModelType_GenericPinhole.
+func KIIOCameraModelType_GenericPinhole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraModelType_GenericPinhole")))
 }
 
-// KIIOCameraModel_Intrinsics returns the value of the CoreFoundation reference constant kIIOCameraModel_Intrinsics as an objc.ID.
-func KIIOCameraModel_Intrinsics() objc.ID { return purego.CFConstant(raw.KIIOCameraModel_Intrinsics()) }
+// KIIOCameraModel_Intrinsics returns the value of the constant kIIOCameraModel_Intrinsics.
+func KIIOCameraModel_Intrinsics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIIOCameraModel_Intrinsics")))
+}
 
-// KCGImageProviderPreferredTileWidth returns the value of the CoreFoundation reference constant kCGImageProviderPreferredTileWidth as an objc.ID.
-func KCGImageProviderPreferredTileWidth() objc.ID {
-	return purego.CFConstant(raw.KCGImageProviderPreferredTileWidth())
+// KCGImageProviderPreferredTileWidth returns the value of the constant kCGImageProviderPreferredTileWidth.
+func KCGImageProviderPreferredTileWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageProviderPreferredTileWidth")))
 }
 
-// KCGImageProviderPreferredTileHeight returns the value of the CoreFoundation reference constant kCGImageProviderPreferredTileHeight as an objc.ID.
-func KCGImageProviderPreferredTileHeight() objc.ID {
-	return purego.CFConstant(raw.KCGImageProviderPreferredTileHeight())
+// KCGImageProviderPreferredTileHeight returns the value of the constant kCGImageProviderPreferredTileHeight.
+func KCGImageProviderPreferredTileHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageProviderPreferredTileHeight")))
 }
 
-// KCGImageAnimationStartIndex returns the value of the CoreFoundation reference constant kCGImageAnimationStartIndex as an objc.ID.
-func KCGImageAnimationStartIndex() objc.ID {
-	return purego.CFConstant(raw.KCGImageAnimationStartIndex())
+// KCGImageAnimationStartIndex returns the value of the constant kCGImageAnimationStartIndex.
+func KCGImageAnimationStartIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAnimationStartIndex")))
 }
 
-// KCGImageAnimationDelayTime returns the value of the CoreFoundation reference constant kCGImageAnimationDelayTime as an objc.ID.
-func KCGImageAnimationDelayTime() objc.ID { return purego.CFConstant(raw.KCGImageAnimationDelayTime()) }
+// KCGImageAnimationDelayTime returns the value of the constant kCGImageAnimationDelayTime.
+func KCGImageAnimationDelayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAnimationDelayTime")))
+}
 
-// KCGImageAnimationLoopCount returns the value of the CoreFoundation reference constant kCGImageAnimationLoopCount as an objc.ID.
-func KCGImageAnimationLoopCount() objc.ID { return purego.CFConstant(raw.KCGImageAnimationLoopCount()) }
+// KCGImageAnimationLoopCount returns the value of the constant kCGImageAnimationLoopCount.
+func KCGImageAnimationLoopCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGImageAnimationLoopCount")))
+}

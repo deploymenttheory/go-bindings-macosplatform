@@ -5,85 +5,74 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The virtual base class for MPS CNN neuron nodes.
+// CNNNeuronNode is an idiomatic wrapper over the Objective-C class MPSCNNNeuronNode.
 //
-// CNNNeuronNode wraps [raw.MPSCNNNeuronNode] with a fluent Go API.
+// CNNNeuronNode is an abstract base — you do not construct it directly. Construct one of [CNNNeuronAbsoluteNode], [CNNNeuronELUNode], [CNNNeuronExponentialNode], [CNNNeuronGeLUNode], [CNNNeuronHardSigmoidNode], [CNNNeuronLinearNode], [CNNNeuronLogarithmNode], [CNNNeuronPReLUNode], [CNNNeuronPowerNode], [CNNNeuronReLUNNode], [CNNNeuronReLUNode], [CNNNeuronSigmoidNode], [CNNNeuronSoftPlusNode], [CNNNeuronSoftSignNode], [CNNNeuronTanHNode] and pass it where a CNNNeuronNode is accepted.
+//
+// The virtual base class for MPS CNN neuron nodes.
 type CNNNeuronNode struct {
-	inner *raw.MPSCNNNeuronNode
+	NNFilterNode
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNeuronNode].
-func (x *CNNNeuronNode) Unwrap() *raw.MPSCNNNeuronNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNeuronNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNeuronNodeFromID adopts an existing object pointer as a CNNNeuronNode (nil for 0).
+// CNNNeuronNodeFromID adopts an existing Objective-C object as a CNNNeuronNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNeuronNodeFromID(id objc.ID) *CNNNeuronNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNeuronNode{inner: raw.MPSCNNNeuronNodeFromID(id)}
-}
-
-// NewCNNNeuronNode creates a new [CNNNeuronNode].
-func NewCNNNeuronNode() *CNNNeuronNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronNode")), objc.RegisterName("new"))
-	return &CNNNeuronNode{inner: raw.MPSCNNNeuronNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNNeuronNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNNeuronNode{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// cNNNeuronNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNNeuronNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNeuronNodeAdopt(id objc.ID) *CNNNeuronNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNeuronNode{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// WithLabel a string to help identify this object.
 func (x *CNNNeuronNode) WithLabel(label string) *CNNNeuronNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract filter parameter a
-//
-// A calls the underlying A.
+// A filter parameter a
 func (x *CNNNeuronNode) A() float32 {
-	return x.inner.A()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+	return _r
 }
 
-// @abstract filter parameter b
-//
-// B calls the underlying B.
+// B filter parameter b
 func (x *CNNNeuronNode) B() float32 {
-	return x.inner.B()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+	return _r
 }
 
-// @abstract filter parameter c
-//
-// C calls the underlying C.
+// C filter parameter c
 func (x *CNNNeuronNode) C() float32 {
-	return x.inner.C()
-}
-
-func (x *CNNNeuronNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+	return _r
 }
 
 // CNNNeuronNodeable is the interface implemented by [CNNNeuronNode], for mocking and DI.
 type CNNNeuronNodeable interface {
-	Unwrap() *raw.MPSCNNNeuronNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronNode
+	obj.Object
 	WithLabel(label string) *CNNNeuronNode
 	A() float32
 	B() float32
@@ -91,3 +80,12 @@ type CNNNeuronNodeable interface {
 }
 
 var _ CNNNeuronNodeable = (*CNNNeuronNode)(nil)
+
+// isCNNNeuronNode marks CNNNeuronNode — and, by embedding promotion, its
+// subclasses — as a member of the CNNNeuronNode hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *CNNNeuronNode) isCNNNeuronNode() {}
+
+var _ CNNNeuronNodeProvider = (*CNNNeuronNode)(nil)
+
+var _ NNFilterNodeProvider = (*CNNNeuronNode)(nil)

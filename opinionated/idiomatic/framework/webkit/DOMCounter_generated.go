@@ -5,76 +5,88 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCounter wraps [raw.DOMCounter] with a fluent Go API.
+// DOMCounter is an idiomatic wrapper over the Objective-C class DOMCounter.
+//
+// It embeds [DOMObject], promoting that type's methods.
 type DOMCounter struct {
-	inner *raw.DOMCounter
+	DOMObject
 }
 
-// Unwrap returns the underlying [raw.DOMCounter].
-func (x *DOMCounter) Unwrap() *raw.DOMCounter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCounter) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCounterFromID adopts an existing object pointer as a DOMCounter (nil for 0).
+// DOMCounterFromID adopts an existing Objective-C object as a DOMCounter
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCounterFromID(id objc.ID) *DOMCounter {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCounter{inner: raw.DOMCounterFromID(id)}
+	x := &DOMCounter{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDOMCounter creates a new [DOMCounter].
+// dOMCounterAdopt wraps an Objective-C object that this code just created as a
+// DOMCounter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCounterAdopt(id objc.ID) *DOMCounter {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCounter{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDOMCounter creates a new DOMCounter.
 func NewDOMCounter() *DOMCounter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCounter")), objc.RegisterName("new"))
-	return &DOMCounter{inner: raw.DOMCounterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCounter")), objc.RegisterName("new"))
+	return dOMCounterAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
+// Identifier wraps the corresponding Objective-C method.
 func (x *DOMCounter) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ListStyle calls the underlying ListStyle.
+// ListStyle wraps the corresponding Objective-C method.
 func (x *DOMCounter) ListStyle() string {
-	_r := x.inner.ListStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Separator calls the underlying Separator.
+// Separator wraps the corresponding Objective-C method.
 func (x *DOMCounter) Separator() string {
-	_r := x.inner.Separator()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("separator"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMCounter) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMCounter) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMCounterable is the interface implemented by [DOMCounter], for mocking and DI.
 type DOMCounterable interface {
-	Unwrap() *raw.DOMCounter
+	obj.Object
 	Identifier() string
 	ListStyle() string
 	Separator() string
 }
 
 var _ DOMCounterable = (*DOMCounter)(nil)
+
+var _ DOMObjectProvider = (*DOMCounter)(nil)
+
+var _ WebScriptObjectProvider = (*DOMCounter)(nil)

@@ -5,65 +5,97 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that encapsulates input for large binary object extensions during registration.
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationInput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
 //
-// AuthorizationPublicKeyCredentialLargeBlobRegistrationInput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput] with a fluent Go API.
+// A type that encapsulates input for large binary object extensions during registration.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput].
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialLargeBlobRegistrationInput (nil for 0).
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(id)}
-}
-
-// NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement creates a new [AuthorizationPublicKeyCredentialLargeBlobRegistrationInput].
-func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement(requirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSupportRequirement:"), raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement(requirement))
-	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_id)}
-}
-
-// WithSupportRequirement sets the supportRequirement property and returns the receiver for chaining.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
-	x.inner.SetSupportRequirement(raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement(supportRequirement))
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// SupportRequirement calls the underlying SupportRequirement.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
-	return ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement(x.inner.SupportRequirement())
+// authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// SetSupportRequirement calls the underlying SetSupportRequirement.
-func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
-	x.inner.SetSupportRequirement(raw.ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement(supportRequirement))
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement creates a new AuthorizationPublicKeyCredentialLargeBlobRegistrationInput.
+func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportRequirement(requirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSupportRequirement:"), requirement)
+	return authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(_id)
+}
+
+// WithSupportRequirement sets the property and returns the receiver so calls can be chained.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
+	return x
+}
+
+// SupportRequirement wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
+	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(x), objc.RegisterName("supportRequirement"))
+	return _r
+}
+
+// SetSupportRequirement wraps the corresponding Objective-C method.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SetSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportRequirement:"), supportRequirement)
 }
 
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobRegistrationInput], for mocking and DI.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput
-	WithSupportRequirement(supportRequirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
-	SupportRequirement() ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement
-	SetSupportRequirement(supportRequirement ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement)
+	obj.Object
+	WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+	SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement
+	SetSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement)
 }
 
 var _ AuthorizationPublicKeyCredentialLargeBlobRegistrationInputable = (*AuthorizationPublicKeyCredentialLargeBlobRegistrationInput)(nil)

@@ -4,45 +4,49 @@
 
 package coreaudiotypes
 
-import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-)
+// A structure that describes an audio codec.
+type AudioClassDescription struct {
+	MType         uint
+	MSubType      uint
+	MManufacturer uint
+}
 
-// AudioBuffer is a type alias for the raw AudioBuffer value-type struct.
-type AudioBuffer = raw.AudioBuffer
+// this struct is used as output from the kAudioFormatProperty_FormatList property
+type AudioFormatListItem struct {
+	MASBD             AudioStreamBasicDescription
+	MChannelLayoutTag uint
+}
 
-// AudioBufferList is a type alias for the raw AudioBufferList value-type struct.
-type AudioBufferList = raw.AudioBufferList
+// A format specification for an audio stream.
+type AudioStreamBasicDescription struct {
+	MSampleRate       float64
+	MFormatID         uint
+	MFormatFlags      uint
+	MBytesPerPacket   uint
+	MFramesPerPacket  uint
+	MBytesPerFrame    uint
+	MChannelsPerFrame uint
+	MBitsPerChannel   uint
+	MReserved         uint
+}
 
-// AudioChannelDescription is a type alias for the raw AudioChannelDescription value-type struct.
-type AudioChannelDescription = raw.AudioChannelDescription
+// A structure to provide a description of the dependencies of one audio packet on other audio packets. For independently decodable packets, the “mPreRollCount“ indicates how many additional packets need to be decoded after this packet in order for the decoder to start returning optimal output, if this is the first packet decoded since the decoder was initialized. For example, if this packet is packet #123 of some given packet stream, and “mIsIndependentlyDecodable“ is 0, or “mIsIndependentlyDecodable“ is 1 and “mPreRollCount“ is non-zero, and the client desires optimal output starting with the output corresponding with packet #123 (because for example the client is an audio player whose user seeks to a starting playback position corresponding with packet #123), the client would scan back, starting at packet #122, searching for an independently decodable packet with a preroll not intersecting packet #123.  If for packet #122 “mIsIndependentlyDecodable“ is 0, or “mIsIndependentlyDecodable“ is 1 but “mPreRollCount“ is 2 or more, the client would still not get optimal output for packet #123 if starting here, so the client continues to scan back. If for packet #121 “mIsIndependentlyDecodable“ is 1 and “mPreRollCount“ is 2 or less, the client would start decoding from this point, but discard the output equivalent of the two extra input packets (desired first output packet - actual first decoded packet, or 122 - 120 == 2).
+type AudioStreamPacketDependencyDescription struct {
+	MIsIndependentlyDecodable uint
+	MPreRollCount             uint
+	MFlags                    uint
+	MReserved                 uint
+}
 
-// AudioChannelLayout is a type alias for the raw AudioChannelLayout value-type struct.
-type AudioChannelLayout = raw.AudioChannelLayout
+// A value that describes a packet in a buffer of audio data.
+type AudioStreamPacketDescription struct {
+	MStartOffset            int64
+	MVariableFramesInPacket uint
+	MDataByteSize           uint
+}
 
-// AudioClassDescription is a type alias for the raw AudioClassDescription value-type struct.
-type AudioClassDescription = raw.AudioClassDescription
-
-// AudioFormatListItem is a type alias for the raw AudioFormatListItem value-type struct.
-type AudioFormatListItem = raw.AudioFormatListItem
-
-// AudioStreamBasicDescription is a type alias for the raw AudioStreamBasicDescription value-type struct.
-type AudioStreamBasicDescription = raw.AudioStreamBasicDescription
-
-// AudioStreamPacketDependencyDescription is a type alias for the raw AudioStreamPacketDependencyDescription value-type struct.
-type AudioStreamPacketDependencyDescription = raw.AudioStreamPacketDependencyDescription
-
-// AudioStreamPacketDescription is a type alias for the raw AudioStreamPacketDescription value-type struct.
-type AudioStreamPacketDescription = raw.AudioStreamPacketDescription
-
-// AudioTimeStamp is a type alias for the raw AudioTimeStamp value-type struct.
-type AudioTimeStamp = raw.AudioTimeStamp
-
-// AudioValueRange is a type alias for the raw AudioValueRange value-type struct.
-type AudioValueRange = raw.AudioValueRange
-
-// AudioValueTranslation is a type alias for the raw AudioValueTranslation value-type struct.
-type AudioValueTranslation = raw.AudioValueTranslation
-
-// SMPTETime is a type alias for the raw SMPTETime value-type struct.
-type SMPTETime = raw.SMPTETime
+// A structure that represents a continuous range of values.
+type AudioValueRange struct {
+	MMinimum float64
+	MMaximum float64
+}

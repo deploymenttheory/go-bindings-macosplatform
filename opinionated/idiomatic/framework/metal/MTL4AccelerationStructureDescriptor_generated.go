@@ -5,60 +5,66 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Base class for Metal 4 acceleration structure descriptors.
+// MTL4AccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTL4AccelerationStructureDescriptor.
 //
-// MTL4AccelerationStructureDescriptor wraps [raw.MTL4AccelerationStructureDescriptor] with a fluent Go API.
+// MTL4AccelerationStructureDescriptor is an abstract base — you do not construct it directly. Construct one of [MTL4IndirectInstanceAccelerationStructureDescriptor], [MTL4InstanceAccelerationStructureDescriptor], [MTL4PrimitiveAccelerationStructureDescriptor] and pass it where a MTL4AccelerationStructureDescriptor is accepted.
+//
+// Base class for Metal 4 acceleration structure descriptors.
 type MTL4AccelerationStructureDescriptor struct {
-	inner *raw.MTL4AccelerationStructureDescriptor
+	AccelerationStructureDescriptor
 }
 
-// Unwrap returns the underlying [raw.MTL4AccelerationStructureDescriptor].
-func (x *MTL4AccelerationStructureDescriptor) Unwrap() *raw.MTL4AccelerationStructureDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4AccelerationStructureDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4AccelerationStructureDescriptorFromID adopts an existing object pointer as a MTL4AccelerationStructureDescriptor (nil for 0).
+// MTL4AccelerationStructureDescriptorFromID adopts an existing Objective-C object as a MTL4AccelerationStructureDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4AccelerationStructureDescriptorFromID(id objc.ID) *MTL4AccelerationStructureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4AccelerationStructureDescriptor{inner: raw.MTL4AccelerationStructureDescriptorFromID(id)}
-}
-
-// NewMTL4AccelerationStructureDescriptor creates a new [MTL4AccelerationStructureDescriptor].
-func NewMTL4AccelerationStructureDescriptor() *MTL4AccelerationStructureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4AccelerationStructureDescriptor")), objc.RegisterName("new"))
-	return &MTL4AccelerationStructureDescriptor{inner: raw.MTL4AccelerationStructureDescriptorFromID(_id)}
-}
-
-// The options that describe how you intend to use the acceleration structure.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
-	x.inner.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))
+	x := &MTL4AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-func (x *MTL4AccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor {
-	return x.inner
+// mTL4AccelerationStructureDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4AccelerationStructureDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4AccelerationStructureDescriptorAdopt(id objc.ID) *MTL4AccelerationStructureDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4AccelerationStructureDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-func (x *MTL4AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
-	return &x.inner.MTLAccelerationStructureDescriptor
+// WithUsage the options that describe how you intend to use the acceleration structure.
+func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
+	return x
 }
 
 // MTL4AccelerationStructureDescriptorable is the interface implemented by [MTL4AccelerationStructureDescriptor], for mocking and DI.
 type MTL4AccelerationStructureDescriptorable interface {
-	Unwrap() *raw.MTL4AccelerationStructureDescriptor
-	WithUsage(usage MTLAccelerationStructureUsage) *MTL4AccelerationStructureDescriptor
+	obj.Object
+	WithUsage(usage AccelerationStructureUsage) *MTL4AccelerationStructureDescriptor
 }
 
 var _ MTL4AccelerationStructureDescriptorable = (*MTL4AccelerationStructureDescriptor)(nil)
+
+// isMTL4AccelerationStructureDescriptor marks MTL4AccelerationStructureDescriptor — and, by embedding promotion, its
+// subclasses — as a member of the MTL4AccelerationStructureDescriptor hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *MTL4AccelerationStructureDescriptor) isMTL4AccelerationStructureDescriptor() {}
+
+var _ MTL4AccelerationStructureDescriptorProvider = (*MTL4AccelerationStructureDescriptor)(nil)
+
+var _ AccelerationStructureDescriptorProvider = (*MTL4AccelerationStructureDescriptor)(nil)

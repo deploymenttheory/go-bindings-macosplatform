@@ -5,122 +5,133 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MACAddress wraps [raw.AVBMACAddress] with a fluent Go API.
+// MACAddress is an idiomatic wrapper over the Objective-C class AVBMACAddress.
 type MACAddress struct {
-	inner *raw.AVBMACAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVBMACAddress].
-func (x *MACAddress) Unwrap() *raw.AVBMACAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MACAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// MACAddressFromID adopts an existing object pointer as a MACAddress (nil for 0).
+// MACAddressFromID adopts an existing Objective-C object as a MACAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func MACAddressFromID(id objc.ID) *MACAddress {
 	if id == 0 {
 		return nil
 	}
-	return &MACAddress{inner: raw.AVBMACAddressFromID(id)}
-}
-
-// @method		initWithBytes: @abstract	This method initializes the receiver to contain the MAC address specified. @param		bytes A pointer to 6 octets of memory containing the MAC address. @result		The initialized receiver.
-//
-// NewMACAddressWithBytes creates a new [MACAddress].
-func NewMACAddressWithBytes(bytes_ *uint8) *MACAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBMACAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:"), bytes_)
-	return &MACAddress{inner: raw.AVBMACAddressFromID(_id)}
-}
-
-// @property	dataRepresentation @abstract	An NSData object containing the bytes of the MAC address.
-//
-// WithDataRepresentation sets the dataRepresentation property and returns the receiver for chaining.
-func (x *MACAddress) WithDataRepresentation(dataRepresentation *foundation.NSData) *MACAddress {
-	x.inner.SetDataRepresentation(dataRepresentation)
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// @property	stringRepresentation @abstract	The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
-//
-// WithStringRepresentation sets the stringRepresentation property and returns the receiver for chaining.
+// mACAddressAdopt wraps an Objective-C object that this code just created as a
+// MACAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mACAddressAdopt(id objc.ID) *MACAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &MACAddress{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MACAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MACAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MACAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MACAddress) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMACAddress creates a new MACAddress.
+func NewMACAddress() *MACAddress {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVBMACAddress")), objc.RegisterName("new"))
+	return mACAddressAdopt(_id)
+}
+
+// WithDataRepresentation an NSData object containing the bytes of the MAC address.
+func (x *MACAddress) WithDataRepresentation(dataRepresentation obj.Object) *MACAddress {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
+	return x
+}
+
+// WithStringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (x *MACAddress) WithStringRepresentation(stringRepresentation string) *MACAddress {
-	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 	return x
 }
 
-// @property	multicast @abstract	Returns if the multicast bit is set in the MAC address.
-//
-// WithMulticast sets the multicast property and returns the receiver for chaining.
+// WithMulticast returns if the multicast bit is set in the MAC address.
 func (x *MACAddress) WithMulticast(multicast bool) *MACAddress {
-	x.inner.SetMulticast(multicast)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
 	return x
 }
 
-// @property	bytes @abstract	The .
-//
-// Bytes calls the underlying Bytes.
-func (x *MACAddress) Bytes() unsafe.Pointer {
-	return x.inner.Bytes()
+// DataRepresentation an NSData object containing the bytes of the MAC address.
+func (x *MACAddress) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @property	dataRepresentation @abstract	An NSData object containing the bytes of the MAC address.
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *MACAddress) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+// SetDataRepresentation wraps the corresponding Objective-C method.
+func (x *MACAddress) SetDataRepresentation(dataRepresentation obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
 }
 
-// SetDataRepresentation calls the underlying SetDataRepresentation.
-func (x *MACAddress) SetDataRepresentation(dataRepresentation *foundation.NSData) {
-	x.inner.SetDataRepresentation(dataRepresentation)
-}
-
-// @property	stringRepresentation @abstract	The colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
-//
-// StringRepresentation calls the underlying StringRepresentation.
+// StringRepresentation the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (x *MACAddress) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStringRepresentation calls the underlying SetStringRepresentation.
+// SetStringRepresentation wraps the corresponding Objective-C method.
 func (x *MACAddress) SetStringRepresentation(stringRepresentation string) {
-	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
 }
 
-// @property	multicast @abstract	Returns if the multicast bit is set in the MAC address.
-//
-// IsMulticast calls the underlying IsMulticast.
+// IsMulticast returns if the multicast bit is set in the MAC address.
 func (x *MACAddress) IsMulticast() bool {
-	return x.inner.IsMulticast()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMulticast"))
+	return _r
 }
 
-// SetMulticast calls the underlying SetMulticast.
+// SetMulticast wraps the corresponding Objective-C method.
 func (x *MACAddress) SetMulticast(multicast bool) {
-	x.inner.SetMulticast(multicast)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMulticast:"), multicast)
 }
 
 // MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
 type MACAddressable interface {
-	Unwrap() *raw.AVBMACAddress
-	WithDataRepresentation(dataRepresentation *foundation.NSData) *MACAddress
+	obj.Object
+	WithDataRepresentation(dataRepresentation obj.Object) *MACAddress
 	WithStringRepresentation(stringRepresentation string) *MACAddress
 	WithMulticast(multicast bool) *MACAddress
-	Bytes() unsafe.Pointer
-	DataRepresentation() *foundation.NSData
-	SetDataRepresentation(dataRepresentation *foundation.NSData)
+	DataRepresentation() obj.Object
+	SetDataRepresentation(dataRepresentation obj.Object)
 	StringRepresentation() string
 	SetStringRepresentation(stringRepresentation string)
 	IsMulticast() bool

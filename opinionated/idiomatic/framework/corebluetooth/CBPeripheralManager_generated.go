@@ -5,174 +5,126 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that manages and advertises peripheral services exposed by this app.
+// PeripheralManager is an idiomatic wrapper over the Objective-C class CBPeripheralManager.
 //
-// PeripheralManager wraps [raw.CBPeripheralManager] with a fluent Go API.
+// It embeds [Manager], promoting that type's methods.
+//
+// An object that manages and advertises peripheral services exposed by this app.
 type PeripheralManager struct {
-	inner *raw.CBPeripheralManager
+	Manager
 }
 
-// Unwrap returns the underlying [raw.CBPeripheralManager].
-func (x *PeripheralManager) Unwrap() *raw.CBPeripheralManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PeripheralManager) ID() objc.ID { return x.inner.Ptr() }
-
-// PeripheralManagerFromID adopts an existing object pointer as a PeripheralManager (nil for 0).
+// PeripheralManagerFromID adopts an existing Objective-C object as a PeripheralManager
+// (nil for 0), retaining it and registering a release finalizer.
 func PeripheralManagerFromID(id objc.ID) *PeripheralManager {
 	if id == 0 {
 		return nil
 	}
-	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(id)}
-}
-
-// NewPeripheralManager creates a new [PeripheralManager].
-func NewPeripheralManager() *PeripheralManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("new"))
-	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
-}
-
-// Initializes the peripheral manager with a specified delegate and dispatch queue.
-//
-// NewPeripheralManagerWithDelegateQueue creates a new [PeripheralManager].
-func NewPeripheralManagerWithDelegateQueue(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject) *PeripheralManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:"), delegate, queue.Ptr())
-	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
-}
-
-// Initializes the peripheral manager with a specified delegate, dispatch queue, and initialization options.
-//
-// NewPeripheralManagerWithDelegateQueueOptions creates a new [PeripheralManager].
-func NewPeripheralManagerWithDelegateQueueOptions(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject, options purego.IDer) *PeripheralManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.ID())
-	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
-}
-
-// The delegate object specified to receive peripheral events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PeripheralManager) WithDelegate(delegate raw.CBPeripheralManagerDelegate) *PeripheralManager {
-	x.inner.SetDelegate(delegate)
+	x := &PeripheralManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Advertises peripheral manager data.
-//
-// StartAdvertising calls the underlying StartAdvertising.
-func (x *PeripheralManager) StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.StartAdvertising(advertisementData)
+// peripheralManagerAdopt wraps an Objective-C object that this code just created as a
+// PeripheralManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func peripheralManagerAdopt(id objc.ID) *PeripheralManager {
+	if id == 0 {
+		return nil
+	}
+	x := &PeripheralManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Stops advertising peripheral manager data.
-//
-// StopAdvertising calls the underlying StopAdvertising.
+// NewPeripheralManager creates a new PeripheralManager.
+func NewPeripheralManager() *PeripheralManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBPeripheralManager")), objc.RegisterName("new"))
+	return peripheralManagerAdopt(_id)
+}
+
+// StartAdvertising advertises peripheral manager data.
+func (x *PeripheralManager) StartAdvertising(advertisementData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAdvertising:"), objref.IDOf(advertisementData))
+}
+
+// StopAdvertising stops advertising peripheral manager data.
 func (x *PeripheralManager) StopAdvertising() {
-	x.inner.StopAdvertising()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAdvertising"))
 }
 
-// Sets the desired connection latency for an existing connection to a central device.
-//
-// SetDesiredConnectionLatencyForCentral calls the underlying SetDesiredConnectionLatencyForCentral.
-func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency CBPeripheralManagerConnectionLatency, central *raw.CBCentral) {
-	x.inner.SetDesiredConnectionLatencyForCentral(raw.CBPeripheralManagerConnectionLatency(latency), central)
+// SetDesiredConnectionLatencyForCentral sets the desired connection latency for an existing connection to a central device.
+func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredConnectionLatency:forCentral:"), latency, objref.IDOf(central))
 }
 
-// Publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
-//
-// AddService calls the underlying AddService.
-func (x *PeripheralManager) AddService(service *raw.CBMutableService) {
-	x.inner.AddService(service)
+// AddService publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
+func (x *PeripheralManager) AddService(service *MutableService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addService:"), objref.IDOf(service))
 }
 
-// Removes a specified published service from the local GATT database.
-//
-// RemoveService calls the underlying RemoveService.
-func (x *PeripheralManager) RemoveService(service *raw.CBMutableService) {
-	x.inner.RemoveService(service)
+// RemoveService removes a specified published service from the local GATT database.
+func (x *PeripheralManager) RemoveService(service *MutableService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeService:"), objref.IDOf(service))
 }
 
-// Removes all published services from the local GATT database.
-//
-// RemoveAllServices calls the underlying RemoveAllServices.
+// RemoveAllServices removes all published services from the local GATT database.
 func (x *PeripheralManager) RemoveAllServices() {
-	x.inner.RemoveAllServices()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllServices"))
 }
 
-// Responds to a read or write request from a connected central.
-//
-// RespondToRequestWithResult calls the underlying RespondToRequestWithResult.
-func (x *PeripheralManager) RespondToRequestWithResult(request *raw.CBATTRequest, result CBATTError) {
-	x.inner.RespondToRequestWithResult(request, raw.CBATTError(result))
+// RespondToRequestWithResult responds to a read or write request from a connected central.
+func (x *PeripheralManager) RespondToRequestWithResult(request *ATTRequest, result ATTError) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("respondToRequest:withResult:"), objref.IDOf(request), result)
 }
 
-// Send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
-//
-// UpdateValueForCharacteristicOnSubscribedCentrals calls the underlying UpdateValueForCharacteristicOnSubscribedCentrals.
-func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool {
-	return x.inner.UpdateValueForCharacteristicOnSubscribedCentrals(value, characteristic, centrals)
+// UpdateValueForCharacteristicOnSubscribedCentrals send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
+func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), objref.IDOf(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// Creates a listener for incoming L2CAP channel connections.
-//
-// PublishL2CAPChannelWithEncryption calls the underlying PublishL2CAPChannelWithEncryption.
+// PublishL2CAPChannelWithEncryption creates a listener for incoming L2CAP channel connections.
 func (x *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
-	x.inner.PublishL2CAPChannelWithEncryption(encryptionRequired)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishL2CAPChannelWithEncryption:"), encryptionRequired)
 }
 
-// Removes a published service from the local system.
-//
-// UnpublishL2CAPChannel calls the underlying UnpublishL2CAPChannel.
+// UnpublishL2CAPChannel removes a published service from the local system.
 func (x *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
-	x.inner.UnpublishL2CAPChannel(pSM)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unpublishL2CAPChannel:"), pSM)
 }
 
-// @property delegate @discussion The delegate object that will receive peripheral events.
-//
-// Delegate calls the underlying Delegate.
-func (x *PeripheralManager) Delegate() raw.CBPeripheralManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PeripheralManager) SetDelegate(delegate raw.CBPeripheralManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property isAdvertising @discussion Whether or not the peripheral is currently advertising data.
-//
-// IsAdvertising calls the underlying IsAdvertising.
+// IsAdvertising whether or not the peripheral is currently advertising data.
 func (x *PeripheralManager) IsAdvertising() bool {
-	return x.inner.IsAdvertising()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdvertising"))
+	return _r
 }
-
-func (x *PeripheralManager) asManager() *raw.CBManager { return &x.inner.CBManager }
 
 // PeripheralManagerable is the interface implemented by [PeripheralManager], for mocking and DI.
 type PeripheralManagerable interface {
-	Unwrap() *raw.CBPeripheralManager
-	WithDelegate(delegate raw.CBPeripheralManagerDelegate) *PeripheralManager
-	StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	obj.Object
+	StartAdvertising(advertisementData obj.Object)
 	StopAdvertising()
-	SetDesiredConnectionLatencyForCentral(latency CBPeripheralManagerConnectionLatency, central *raw.CBCentral)
-	AddService(service *raw.CBMutableService)
-	RemoveService(service *raw.CBMutableService)
+	SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central)
+	AddService(service *MutableService)
+	RemoveService(service *MutableService)
 	RemoveAllServices()
-	RespondToRequestWithResult(request *raw.CBATTRequest, result CBATTError)
-	UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool
+	RespondToRequestWithResult(request *ATTRequest, result ATTError)
+	UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool
 	PublishL2CAPChannelWithEncryption(encryptionRequired bool)
 	UnpublishL2CAPChannel(pSM uint16)
-	Delegate() raw.CBPeripheralManagerDelegate
-	SetDelegate(delegate raw.CBPeripheralManagerDelegate)
 	IsAdvertising() bool
 }
 
 var _ PeripheralManagerable = (*PeripheralManager)(nil)
+
+var _ ManagerProvider = (*PeripheralManager)(nil)

@@ -3,4 +3,12 @@
 //go:build darwin
 
 // Package cinematic provides a fluent Go API over the macOS Cinematic framework.
+//
+// # Types
+//
+// Each base type below lists the concrete types you construct and pass where the
+// base is accepted:
+//
+//   - AssetInfo: [CompositionInfo]
+//   - DetectionTrack: [CustomDetectionTrack], [FixedDetectionTrack]
 package cinematic

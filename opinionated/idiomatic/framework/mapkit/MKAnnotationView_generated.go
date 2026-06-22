@@ -5,482 +5,454 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The visual representation of one of your annotation objects.
+// AnnotationView is an idiomatic wrapper over the Objective-C class MKAnnotationView.
 //
-// AnnotationView wraps [raw.MKAnnotationView] with a fluent Go API.
+// AnnotationView is an abstract base — you do not construct it directly. Construct one of [MarkerAnnotationView], [PinAnnotationView], [UserLocationView] and pass it where a AnnotationView is accepted.
+//
+// The visual representation of one of your annotation objects.
 type AnnotationView struct {
-	inner *raw.MKAnnotationView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKAnnotationView].
-func (x *AnnotationView) Unwrap() *raw.MKAnnotationView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnnotationView) ID() objc.ID { return x.inner.Ptr() }
-
-// AnnotationViewFromID adopts an existing object pointer as a AnnotationView (nil for 0).
+// AnnotationViewFromID adopts an existing Objective-C object as a AnnotationView
+// (nil for 0), retaining it and registering a release finalizer.
 func AnnotationViewFromID(id objc.ID) *AnnotationView {
 	if id == 0 {
 		return nil
 	}
-	return &AnnotationView{inner: raw.MKAnnotationViewFromID(id)}
-}
-
-// Creates and returns a new annotation view.
-//
-// NewAnnotationViewWithAnnotationReuseIdentifier creates a new [AnnotationView].
-func NewAnnotationViewWithAnnotationReuseIdentifier(annotation raw.MKAnnotation, reuseIdentifier string) *AnnotationView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAnnotationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAnnotation:reuseIdentifier:"), annotation, foundation.NSStringStringWithUTF8String(reuseIdentifier).Ptr())
-	return &AnnotationView{inner: raw.MKAnnotationViewFromID(_id)}
-}
-
-// Creates an annotation view using data from the specified unarchiver.
-//
-// NewAnnotationViewWithCoder creates a new [AnnotationView].
-func NewAnnotationViewWithCoder(aDecoder *foundation.NSCoder) *AnnotationView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAnnotationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &AnnotationView{inner: raw.MKAnnotationViewFromID(_id)}
-}
-
-// The annotation object associated with the view.
-//
-// WithAnnotation sets the annotation property and returns the receiver for chaining.
-func (x *AnnotationView) WithAnnotation(annotation raw.MKAnnotation) *AnnotationView {
-	x.inner.SetAnnotation(annotation)
+	x := &AnnotationView{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// The image the annotation view displays.
-//
-// WithImage sets the image property and returns the receiver for chaining.
-func (x *AnnotationView) WithImage(image *appkit.NSImage) *AnnotationView {
-	x.inner.SetImage(image)
-	return x
-}
-
-// The offset (in points) at which to display the view.
-//
-// WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
-func (x *AnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *AnnotationView {
-	x.inner.SetCenterOffset(centerOffset)
-	return x
-}
-
-// An offset that changes the accessory’s default anchor point.
-//
-// WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
-func (x *AnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *AnnotationView {
-	x.inner.SetAccessoryOffset(accessoryOffset)
-	return x
-}
-
-// The offset (in points) at which to place the callout.
-//
-// WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
-func (x *AnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *AnnotationView {
-	x.inner.SetCalloutOffset(calloutOffset)
-	return x
-}
-
-// The offset in points from the middle-left of the annotation view.
-//
-// WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
-func (x *AnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *AnnotationView {
-	x.inner.SetLeftCalloutOffset(leftCalloutOffset)
-	return x
-}
-
-// The offset in points from the middle-right of the annotation view.
-//
-// WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
-func (x *AnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *AnnotationView {
-	x.inner.SetRightCalloutOffset(rightCalloutOffset)
-	return x
-}
-
-// A Boolean value that indicates whether the annotation is in an enabled state.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *AnnotationView) WithEnabled(enabled bool) *AnnotationView {
-	x.inner.SetEnabled(enabled)
-	return x
-}
-
-// A Boolean value that indicates whether the map view highlights the annotation view.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
-func (x *AnnotationView) WithHighlighted(highlighted bool) *AnnotationView {
-	x.inner.SetHighlighted(highlighted)
-	return x
-}
-
-// A Boolean value that indicates whether the annotation view is in a selected state.
-//
-// WithSelected sets the selected property and returns the receiver for chaining.
-func (x *AnnotationView) WithSelected(selected bool) *AnnotationView {
-	x.inner.SetSelected(selected)
-	return x
-}
-
-// A Boolean value that indicates whether the annotation view is able to display extra information in a callout.
-//
-// WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
-func (x *AnnotationView) WithCanShowCallout(canShowCallout bool) *AnnotationView {
-	x.inner.SetCanShowCallout(canShowCallout)
-	return x
-}
-
-// The view to display on the left side of the standard callout.
-//
-// WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
-func (x *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *AnnotationView {
-	x.inner.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
-	return x
-}
-
-// The view to display on the right side of the standard callout.
-//
-// WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
-func (x *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *AnnotationView {
-	x.inner.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
-	return x
-}
-
-// The detail accessory view to use in the standard callout.
-//
-// WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
-func (x *AnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *AnnotationView {
-	x.inner.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
-	return x
-}
-
-// A Boolean value that indicates whether the annotation view is draggable.
-//
-// WithDraggable sets the draggable property and returns the receiver for chaining.
-func (x *AnnotationView) WithDraggable(draggable bool) *AnnotationView {
-	x.inner.SetDraggable(draggable)
-	return x
-}
-
-// The drag state of the annotation view.
-//
-// WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *AnnotationView) WithDragState(dragState MKAnnotationViewDragState) *AnnotationView {
-	x.inner.SetDragState(raw.MKAnnotationViewDragState(dragState))
-	return x
-}
-
-// An identifier that determines whether the annotation view participates in clustering.
-//
-// WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
-func (x *AnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView {
-	x.inner.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
-	return x
-}
-
-// The display priority of the annotation view.
-//
-// WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
-func (x *AnnotationView) WithDisplayPriority(displayPriority float32) *AnnotationView {
-	x.inner.SetDisplayPriority(displayPriority)
-	return x
-}
-
-// The relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
-//
-// WithZPriority sets the zPriority property and returns the receiver for chaining.
-func (x *AnnotationView) WithZPriority(zPriority float32) *AnnotationView {
-	x.inner.SetZPriority(zPriority)
-	return x
-}
-
-// The relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
-//
-// WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
-func (x *AnnotationView) WithSelectedZPriority(selectedZPriority float32) *AnnotationView {
-	x.inner.SetSelectedZPriority(selectedZPriority)
-	return x
-}
-
-// The collision mode to use when interpreting the collision frame rectangle.
-//
-// WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *AnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *AnnotationView {
-	x.inner.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
-	return x
-}
-
-// Notifies the annotation view that the map view is about to display it.
-//
-// PrepareForDisplay calls the underlying PrepareForDisplay.
-func (x *AnnotationView) PrepareForDisplay() {
-	x.inner.PrepareForDisplay()
-}
-
-// Sets the selection state of the annotation view.
-//
-// SetSelectedAnimated calls the underlying SetSelectedAnimated.
-func (x *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
-	x.inner.SetSelectedAnimated(selected, animated)
-}
-
-// Sets the drag state for the annotation view.
-//
-// SetDragStateAnimated calls the underlying SetDragStateAnimated.
-func (x *AnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool) {
-	x.inner.SetDragStateAnimated(raw.MKAnnotationViewDragState(newDragState), animated)
-}
-
-// ReuseIdentifier calls the underlying ReuseIdentifier.
-func (x *AnnotationView) ReuseIdentifier() string {
-	_r := x.inner.ReuseIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Annotation calls the underlying Annotation.
-func (x *AnnotationView) Annotation() raw.MKAnnotation {
-	return x.inner.Annotation()
-}
-
-// SetAnnotation calls the underlying SetAnnotation.
-func (x *AnnotationView) SetAnnotation(annotation raw.MKAnnotation) {
-	x.inner.SetAnnotation(annotation)
-}
-
-// Image calls the underlying Image.
-func (x *AnnotationView) Image() *appkit.NSImage {
-	return x.inner.Image()
-}
-
-// SetImage calls the underlying SetImage.
-func (x *AnnotationView) SetImage(image *appkit.NSImage) {
-	x.inner.SetImage(image)
-}
-
-// CenterOffset calls the underlying CenterOffset.
-func (x *AnnotationView) CenterOffset() corefoundation.CGPoint {
-	return x.inner.CenterOffset()
-}
-
-// SetCenterOffset calls the underlying SetCenterOffset.
-func (x *AnnotationView) SetCenterOffset(centerOffset corefoundation.CGPoint) {
-	x.inner.SetCenterOffset(centerOffset)
-}
-
-// AccessoryOffset calls the underlying AccessoryOffset.
-func (x *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
-	return x.inner.AccessoryOffset()
-}
-
-// SetAccessoryOffset calls the underlying SetAccessoryOffset.
-func (x *AnnotationView) SetAccessoryOffset(accessoryOffset corefoundation.CGPoint) {
-	x.inner.SetAccessoryOffset(accessoryOffset)
-}
-
-// CalloutOffset calls the underlying CalloutOffset.
-func (x *AnnotationView) CalloutOffset() corefoundation.CGPoint {
-	return x.inner.CalloutOffset()
-}
-
-// SetCalloutOffset calls the underlying SetCalloutOffset.
-func (x *AnnotationView) SetCalloutOffset(calloutOffset corefoundation.CGPoint) {
-	x.inner.SetCalloutOffset(calloutOffset)
-}
-
-// LeftCalloutOffset calls the underlying LeftCalloutOffset.
-func (x *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
-	return x.inner.LeftCalloutOffset()
-}
-
-// SetLeftCalloutOffset calls the underlying SetLeftCalloutOffset.
-func (x *AnnotationView) SetLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) {
-	x.inner.SetLeftCalloutOffset(leftCalloutOffset)
-}
-
-// RightCalloutOffset calls the underlying RightCalloutOffset.
-func (x *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
-	return x.inner.RightCalloutOffset()
-}
-
-// SetRightCalloutOffset calls the underlying SetRightCalloutOffset.
-func (x *AnnotationView) SetRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) {
-	x.inner.SetRightCalloutOffset(rightCalloutOffset)
-}
-
-// IsEnabled calls the underlying IsEnabled.
-func (x *AnnotationView) IsEnabled() bool {
-	return x.inner.IsEnabled()
-}
-
-// SetEnabled calls the underlying SetEnabled.
-func (x *AnnotationView) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
-}
-
-// IsHighlighted calls the underlying IsHighlighted.
-func (x *AnnotationView) IsHighlighted() bool {
-	return x.inner.IsHighlighted()
-}
-
-// SetHighlighted calls the underlying SetHighlighted.
-func (x *AnnotationView) SetHighlighted(highlighted bool) {
-	x.inner.SetHighlighted(highlighted)
-}
-
-// IsSelected calls the underlying IsSelected.
-func (x *AnnotationView) IsSelected() bool {
-	return x.inner.IsSelected()
-}
-
-// SetSelected calls the underlying SetSelected.
-func (x *AnnotationView) SetSelected(selected bool) {
-	x.inner.SetSelected(selected)
-}
-
-// CanShowCallout calls the underlying CanShowCallout.
-func (x *AnnotationView) CanShowCallout() bool {
-	return x.inner.CanShowCallout()
-}
-
-// SetCanShowCallout calls the underlying SetCanShowCallout.
-func (x *AnnotationView) SetCanShowCallout(canShowCallout bool) {
-	x.inner.SetCanShowCallout(canShowCallout)
-}
-
-// LeftCalloutAccessoryView calls the underlying LeftCalloutAccessoryView.
-func (x *AnnotationView) LeftCalloutAccessoryView() *appkit.NSView {
-	return x.inner.LeftCalloutAccessoryView()
-}
-
-// SetLeftCalloutAccessoryView calls the underlying SetLeftCalloutAccessoryView.
-func (x *AnnotationView) SetLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) {
-	x.inner.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
-}
-
-// RightCalloutAccessoryView calls the underlying RightCalloutAccessoryView.
-func (x *AnnotationView) RightCalloutAccessoryView() *appkit.NSView {
-	return x.inner.RightCalloutAccessoryView()
-}
-
-// SetRightCalloutAccessoryView calls the underlying SetRightCalloutAccessoryView.
-func (x *AnnotationView) SetRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) {
-	x.inner.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
-}
-
-// DetailCalloutAccessoryView calls the underlying DetailCalloutAccessoryView.
-func (x *AnnotationView) DetailCalloutAccessoryView() *appkit.NSView {
-	return x.inner.DetailCalloutAccessoryView()
-}
-
-// SetDetailCalloutAccessoryView calls the underlying SetDetailCalloutAccessoryView.
-func (x *AnnotationView) SetDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) {
-	x.inner.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
-}
-
-// IsDraggable calls the underlying IsDraggable.
-func (x *AnnotationView) IsDraggable() bool {
-	return x.inner.IsDraggable()
-}
-
-// SetDraggable calls the underlying SetDraggable.
-func (x *AnnotationView) SetDraggable(draggable bool) {
-	x.inner.SetDraggable(draggable)
-}
-
-// DragState calls the underlying DragState.
-func (x *AnnotationView) DragState() MKAnnotationViewDragState {
-	return MKAnnotationViewDragState(x.inner.DragState())
-}
-
-// SetDragState calls the underlying SetDragState.
-func (x *AnnotationView) SetDragState(dragState MKAnnotationViewDragState) {
-	x.inner.SetDragState(raw.MKAnnotationViewDragState(dragState))
-}
-
-// ClusteringIdentifier calls the underlying ClusteringIdentifier.
-func (x *AnnotationView) ClusteringIdentifier() string {
-	_r := x.inner.ClusteringIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetClusteringIdentifier calls the underlying SetClusteringIdentifier.
-func (x *AnnotationView) SetClusteringIdentifier(clusteringIdentifier string) {
-	x.inner.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
-}
-
-// ClusterAnnotationView calls the underlying ClusterAnnotationView.
-func (x *AnnotationView) ClusterAnnotationView() *AnnotationView {
-	_r := x.inner.ClusterAnnotationView()
-	if _r == nil {
+// annotationViewAdopt wraps an Objective-C object that this code just created as a
+// AnnotationView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func annotationViewAdopt(id objc.ID) *AnnotationView {
+	if id == 0 {
 		return nil
 	}
-	return &AnnotationView{inner: _r}
+	x := &AnnotationView{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// DisplayPriority calls the underlying DisplayPriority.
+// Description returns the object's -description text.
+func (x *AnnotationView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnnotationView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnnotationView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *AnnotationView) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewAnnotationViewWithCoder creates an annotation view using data from the specified unarchiver.
+func NewAnnotationViewWithCoder(aDecoder obj.Object) *AnnotationView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAnnotationView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return annotationViewAdopt(_id)
+}
+
+// WithImage the image the annotation view displays.
+func (x *AnnotationView) WithImage(image obj.Object) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return x
+}
+
+// WithCenterOffset the offset (in points) at which to display the view.
+func (x *AnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
+	return x
+}
+
+// WithAccessoryOffset an offset that changes the accessory’s default anchor point.
+func (x *AnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+	return x
+}
+
+// WithCalloutOffset the offset (in points) at which to place the callout.
+func (x *AnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+	return x
+}
+
+// WithLeftCalloutOffset the offset in points from the middle-left of the annotation view.
+func (x *AnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+	return x
+}
+
+// WithRightCalloutOffset the offset in points from the middle-right of the annotation view.
+func (x *AnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+	return x
+}
+
+// WithEnabled a Boolean value that indicates whether the annotation is in an enabled state.
+func (x *AnnotationView) WithEnabled(enabled bool) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// WithHighlighted a Boolean value that indicates whether the map view highlights the annotation view.
+func (x *AnnotationView) WithHighlighted(highlighted bool) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
+	return x
+}
+
+// WithSelected a Boolean value that indicates whether the annotation view is in a selected state.
+func (x *AnnotationView) WithSelected(selected bool) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
+	return x
+}
+
+// WithCanShowCallout a Boolean value that indicates whether the annotation view is able to display extra information in a callout.
+func (x *AnnotationView) WithCanShowCallout(canShowCallout bool) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+	return x
+}
+
+// WithLeftCalloutAccessoryView the view to display on the left side of the standard callout.
+func (x *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+	return x
+}
+
+// WithRightCalloutAccessoryView the view to display on the right side of the standard callout.
+func (x *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+	return x
+}
+
+// WithDetailCalloutAccessoryView the detail accessory view to use in the standard callout.
+func (x *AnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+	return x
+}
+
+// WithDraggable a Boolean value that indicates whether the annotation view is draggable.
+func (x *AnnotationView) WithDraggable(draggable bool) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
+	return x
+}
+
+// WithDragState the drag state of the annotation view.
+func (x *AnnotationView) WithDragState(dragState AnnotationViewDragState) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
+	return x
+}
+
+// WithClusteringIdentifier an identifier that determines whether the annotation view participates in clustering.
+func (x *AnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+	return x
+}
+
+// WithDisplayPriority the display priority of the annotation view.
+func (x *AnnotationView) WithDisplayPriority(displayPriority float32) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
+	return x
+}
+
+// WithZPriority the relative importance of the annotation view when in an unselected state with respect to its ordering along the z-axis.
+func (x *AnnotationView) WithZPriority(zPriority float32) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
+	return x
+}
+
+// WithSelectedZPriority the relative importance of the annotation view when in a selected state with respect to its ordering along the z-axis.
+func (x *AnnotationView) WithSelectedZPriority(selectedZPriority float32) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
+	return x
+}
+
+// WithCollisionMode the collision mode to use when interpreting the collision frame rectangle.
+func (x *AnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisionMode) *AnnotationView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
+	return x
+}
+
+// PrepareForDisplay notifies the annotation view that the map view is about to display it.
+func (x *AnnotationView) PrepareForDisplay() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForDisplay"))
+}
+
+// SetSelectedAnimated sets the selection state of the annotation view.
+func (x *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:animated:"), selected, animated)
+}
+
+// SetDragStateAnimated sets the drag state for the annotation view.
+func (x *AnnotationView) SetDragStateAnimated(newDragState AnnotationViewDragState, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:animated:"), newDragState, animated)
+}
+
+// ReuseIdentifier wraps the corresponding Objective-C method.
+func (x *AnnotationView) ReuseIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reuseIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Image wraps the corresponding Objective-C method.
+func (x *AnnotationView) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return obj.Wrap(_r)
+}
+
+// SetImage wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
+}
+
+// CenterOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) CenterOffset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("centerOffset"))
+	return _r
+}
+
+// SetCenterOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetCenterOffset(centerOffset corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCenterOffset:"), centerOffset)
+}
+
+// AccessoryOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("accessoryOffset"))
+	return _r
+}
+
+// SetAccessoryOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetAccessoryOffset(accessoryOffset corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryOffset:"), accessoryOffset)
+}
+
+// CalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) CalloutOffset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("calloutOffset"))
+	return _r
+}
+
+// SetCalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetCalloutOffset(calloutOffset corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalloutOffset:"), calloutOffset)
+}
+
+// LeftCalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("leftCalloutOffset"))
+	return _r
+}
+
+// SetLeftCalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutOffset:"), leftCalloutOffset)
+}
+
+// RightCalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("rightCalloutOffset"))
+	return _r
+}
+
+// SetRightCalloutOffset wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutOffset:"), rightCalloutOffset)
+}
+
+// IsEnabled wraps the corresponding Objective-C method.
+func (x *AnnotationView) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
+}
+
+// SetEnabled wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetEnabled(enabled bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+}
+
+// IsHighlighted wraps the corresponding Objective-C method.
+func (x *AnnotationView) IsHighlighted() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighlighted"))
+	return _r
+}
+
+// SetHighlighted wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetHighlighted(highlighted bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
+}
+
+// IsSelected wraps the corresponding Objective-C method.
+func (x *AnnotationView) IsSelected() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
+	return _r
+}
+
+// SetSelected wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetSelected(selected bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
+}
+
+// CanShowCallout wraps the corresponding Objective-C method.
+func (x *AnnotationView) CanShowCallout() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canShowCallout"))
+	return _r
+}
+
+// SetCanShowCallout wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetCanShowCallout(canShowCallout bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanShowCallout:"), canShowCallout)
+}
+
+// LeftCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) LeftCalloutAccessoryView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftCalloutAccessoryView"))
+	return obj.Wrap(_r)
+}
+
+// SetLeftCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
+}
+
+// RightCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) RightCalloutAccessoryView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightCalloutAccessoryView"))
+	return obj.Wrap(_r)
+}
+
+// SetRightCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
+}
+
+// DetailCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) DetailCalloutAccessoryView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detailCalloutAccessoryView"))
+	return obj.Wrap(_r)
+}
+
+// SetDetailCalloutAccessoryView wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
+}
+
+// IsDraggable wraps the corresponding Objective-C method.
+func (x *AnnotationView) IsDraggable() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDraggable"))
+	return _r
+}
+
+// SetDraggable wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetDraggable(draggable bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDraggable:"), draggable)
+}
+
+// DragState wraps the corresponding Objective-C method.
+func (x *AnnotationView) DragState() AnnotationViewDragState {
+	_r := objc.Send[AnnotationViewDragState](objref.IDOf(x), objc.RegisterName("dragState"))
+	return _r
+}
+
+// SetDragState wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetDragState(dragState AnnotationViewDragState) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDragState:"), dragState)
+}
+
+// ClusteringIdentifier wraps the corresponding Objective-C method.
+func (x *AnnotationView) ClusteringIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clusteringIdentifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// SetClusteringIdentifier wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetClusteringIdentifier(clusteringIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClusteringIdentifier:"), purego.NSString(clusteringIdentifier))
+}
+
+// ClusterAnnotationView wraps the corresponding Objective-C method.
+func (x *AnnotationView) ClusterAnnotationView() *AnnotationView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clusterAnnotationView"))
+	return AnnotationViewFromID(_r)
+}
+
+// DisplayPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) DisplayPriority() float32 {
-	return x.inner.DisplayPriority()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("displayPriority"))
+	return _r
 }
 
-// SetDisplayPriority calls the underlying SetDisplayPriority.
+// SetDisplayPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) SetDisplayPriority(displayPriority float32) {
-	x.inner.SetDisplayPriority(displayPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPriority:"), displayPriority)
 }
 
-// ZPriority calls the underlying ZPriority.
+// ZPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) ZPriority() float32 {
-	return x.inner.ZPriority()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("zPriority"))
+	return _r
 }
 
-// SetZPriority calls the underlying SetZPriority.
+// SetZPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) SetZPriority(zPriority float32) {
-	x.inner.SetZPriority(zPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPriority:"), zPriority)
 }
 
-// SelectedZPriority calls the underlying SelectedZPriority.
+// SelectedZPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) SelectedZPriority() float32 {
-	return x.inner.SelectedZPriority()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("selectedZPriority"))
+	return _r
 }
 
-// SetSelectedZPriority calls the underlying SetSelectedZPriority.
+// SetSelectedZPriority wraps the corresponding Objective-C method.
 func (x *AnnotationView) SetSelectedZPriority(selectedZPriority float32) {
-	x.inner.SetSelectedZPriority(selectedZPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedZPriority:"), selectedZPriority)
 }
 
-// CollisionMode calls the underlying CollisionMode.
-func (x *AnnotationView) CollisionMode() MKAnnotationViewCollisionMode {
-	return MKAnnotationViewCollisionMode(x.inner.CollisionMode())
+// CollisionMode wraps the corresponding Objective-C method.
+func (x *AnnotationView) CollisionMode() AnnotationViewCollisionMode {
+	_r := objc.Send[AnnotationViewCollisionMode](objref.IDOf(x), objc.RegisterName("collisionMode"))
+	return _r
 }
 
-// SetCollisionMode calls the underlying SetCollisionMode.
-func (x *AnnotationView) SetCollisionMode(collisionMode MKAnnotationViewCollisionMode) {
-	x.inner.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
+// SetCollisionMode wraps the corresponding Objective-C method.
+func (x *AnnotationView) SetCollisionMode(collisionMode AnnotationViewCollisionMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionMode:"), collisionMode)
 }
-
-func (x *AnnotationView) asAnnotationView() *raw.MKAnnotationView { return x.inner }
 
 // AnnotationViewable is the interface implemented by [AnnotationView], for mocking and DI.
 type AnnotationViewable interface {
-	Unwrap() *raw.MKAnnotationView
-	WithAnnotation(annotation raw.MKAnnotation) *AnnotationView
-	WithImage(image *appkit.NSImage) *AnnotationView
+	obj.Object
+	WithImage(image obj.Object) *AnnotationView
 	WithCenterOffset(centerOffset corefoundation.CGPoint) *AnnotationView
 	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *AnnotationView
 	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *AnnotationView
@@ -490,24 +462,22 @@ type AnnotationViewable interface {
 	WithHighlighted(highlighted bool) *AnnotationView
 	WithSelected(selected bool) *AnnotationView
 	WithCanShowCallout(canShowCallout bool) *AnnotationView
-	WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *AnnotationView
-	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *AnnotationView
-	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *AnnotationView
+	WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *AnnotationView
+	WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *AnnotationView
+	WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *AnnotationView
 	WithDraggable(draggable bool) *AnnotationView
-	WithDragState(dragState MKAnnotationViewDragState) *AnnotationView
+	WithDragState(dragState AnnotationViewDragState) *AnnotationView
 	WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView
 	WithDisplayPriority(displayPriority float32) *AnnotationView
 	WithZPriority(zPriority float32) *AnnotationView
 	WithSelectedZPriority(selectedZPriority float32) *AnnotationView
-	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *AnnotationView
+	WithCollisionMode(collisionMode AnnotationViewCollisionMode) *AnnotationView
 	PrepareForDisplay()
 	SetSelectedAnimated(selected bool, animated bool)
-	SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool)
+	SetDragStateAnimated(newDragState AnnotationViewDragState, animated bool)
 	ReuseIdentifier() string
-	Annotation() raw.MKAnnotation
-	SetAnnotation(annotation raw.MKAnnotation)
-	Image() *appkit.NSImage
-	SetImage(image *appkit.NSImage)
+	Image() obj.Object
+	SetImage(image obj.Object)
 	CenterOffset() corefoundation.CGPoint
 	SetCenterOffset(centerOffset corefoundation.CGPoint)
 	AccessoryOffset() corefoundation.CGPoint
@@ -526,16 +496,16 @@ type AnnotationViewable interface {
 	SetSelected(selected bool)
 	CanShowCallout() bool
 	SetCanShowCallout(canShowCallout bool)
-	LeftCalloutAccessoryView() *appkit.NSView
-	SetLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView)
-	RightCalloutAccessoryView() *appkit.NSView
-	SetRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView)
-	DetailCalloutAccessoryView() *appkit.NSView
-	SetDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView)
+	LeftCalloutAccessoryView() obj.Object
+	SetLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object)
+	RightCalloutAccessoryView() obj.Object
+	SetRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object)
+	DetailCalloutAccessoryView() obj.Object
+	SetDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object)
 	IsDraggable() bool
 	SetDraggable(draggable bool)
-	DragState() MKAnnotationViewDragState
-	SetDragState(dragState MKAnnotationViewDragState)
+	DragState() AnnotationViewDragState
+	SetDragState(dragState AnnotationViewDragState)
 	ClusteringIdentifier() string
 	SetClusteringIdentifier(clusteringIdentifier string)
 	ClusterAnnotationView() *AnnotationView
@@ -545,8 +515,15 @@ type AnnotationViewable interface {
 	SetZPriority(zPriority float32)
 	SelectedZPriority() float32
 	SetSelectedZPriority(selectedZPriority float32)
-	CollisionMode() MKAnnotationViewCollisionMode
-	SetCollisionMode(collisionMode MKAnnotationViewCollisionMode)
+	CollisionMode() AnnotationViewCollisionMode
+	SetCollisionMode(collisionMode AnnotationViewCollisionMode)
 }
 
 var _ AnnotationViewable = (*AnnotationView)(nil)
+
+// isAnnotationView marks AnnotationView — and, by embedding promotion, its
+// subclasses — as a member of the AnnotationView hierarchy, sealing its provider
+// interface so only real members satisfy it.
+func (x *AnnotationView) isAnnotationView() {}
+
+var _ AnnotationViewProvider = (*AnnotationView)(nil)

@@ -5,67 +5,72 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
+// CorrelationQuery is an idiomatic wrapper over the Objective-C class HKCorrelationQuery.
 //
-// CorrelationQuery wraps [raw.HKCorrelationQuery] with a fluent Go API.
+// It embeds [Query], promoting that type's methods.
+//
+// A query that performs complex searches based on the correlation’s contents, and returns a snapshot of all matching samples.
 type CorrelationQuery struct {
-	inner *raw.HKCorrelationQuery
+	Query
 }
 
-// Unwrap returns the underlying [raw.HKCorrelationQuery].
-func (x *CorrelationQuery) Unwrap() *raw.HKCorrelationQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CorrelationQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// CorrelationQueryFromID adopts an existing object pointer as a CorrelationQuery (nil for 0).
+// CorrelationQueryFromID adopts an existing Objective-C object as a CorrelationQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func CorrelationQueryFromID(id objc.ID) *CorrelationQuery {
 	if id == 0 {
 		return nil
 	}
-	return &CorrelationQuery{inner: raw.HKCorrelationQueryFromID(id)}
+	x := &CorrelationQuery{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Instantiates and returns a correlation query.
-//
-// NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion creates a new [CorrelationQuery].
-func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationType *raw.HKCorrelationType, predicate *foundation.NSPredicate, samplePredicates purego.IDer, completion func(*raw.HKCorrelationQuery, *foundation.NSArray[*raw.HKCorrelation], unsafe.Pointer)) *CorrelationQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCorrelationQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:samplePredicates:completion:"), correlationType.Ptr(), predicate.Ptr(), samplePredicates.ID(), completion)
-	return &CorrelationQuery{inner: raw.HKCorrelationQueryFromID(_id)}
-}
-
-// CorrelationType calls the underlying CorrelationType.
-func (x *CorrelationQuery) CorrelationType() *CorrelationType {
-	_r := x.inner.CorrelationType()
-	if _r == nil {
+// correlationQueryAdopt wraps an Objective-C object that this code just created as a
+// CorrelationQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func correlationQueryAdopt(id objc.ID) *CorrelationQuery {
+	if id == 0 {
 		return nil
 	}
-	return &CorrelationType{inner: _r}
+	x := &CorrelationQuery{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property      samplePredicates @abstract      A dictionary of predicates for the HKCorrelation's objects @discussion    samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
-//
-// SamplePredicates calls the underlying SamplePredicates.
-func (x *CorrelationQuery) SamplePredicates() *foundation.NSDictionary[*raw.HKSampleType, *foundation.NSPredicate] {
-	return x.inner.SamplePredicates()
+// NewCorrelationQuery creates a new CorrelationQuery.
+func NewCorrelationQuery() *CorrelationQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCorrelationQuery")), objc.RegisterName("new"))
+	return correlationQueryAdopt(_id)
 }
 
-func (x *CorrelationQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// CorrelationType wraps the corresponding Objective-C method.
+func (x *CorrelationQuery) CorrelationType() *CorrelationType {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correlationType"))
+	return CorrelationTypeFromID(_r)
+}
+
+// SamplePredicates a dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
+func (x *CorrelationQuery) SamplePredicates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplePredicates"))
+	return obj.Wrap(_r)
+}
 
 // CorrelationQueryable is the interface implemented by [CorrelationQuery], for mocking and DI.
 type CorrelationQueryable interface {
-	Unwrap() *raw.HKCorrelationQuery
+	obj.Object
 	CorrelationType() *CorrelationType
-	SamplePredicates() *foundation.NSDictionary[*raw.HKSampleType, *foundation.NSPredicate]
+	SamplePredicates() obj.Object
 }
 
 var _ CorrelationQueryable = (*CorrelationQuery)(nil)
+
+var _ QueryProvider = (*CorrelationQuery)(nil)

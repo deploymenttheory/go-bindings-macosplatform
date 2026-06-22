@@ -5,68 +5,95 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A password credential.
+// PasswordCredential is an idiomatic wrapper over the Objective-C class ASPasswordCredential.
 //
-// PasswordCredential wraps [raw.ASPasswordCredential] with a fluent Go API.
+// A password credential.
 type PasswordCredential struct {
-	inner *raw.ASPasswordCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasswordCredential].
-func (x *PasswordCredential) Unwrap() *raw.ASPasswordCredential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasswordCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// PasswordCredentialFromID adopts an existing object pointer as a PasswordCredential (nil for 0).
+// PasswordCredentialFromID adopts an existing Objective-C object as a PasswordCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func PasswordCredentialFromID(id objc.ID) *PasswordCredential {
 	if id == 0 {
 		return nil
 	}
-	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(id)}
+	x := &PasswordCredential{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Initializes a password credential.
-//
-// NewPasswordCredentialWithUserPassword creates a new [PasswordCredential].
+// passwordCredentialAdopt wraps an Objective-C object that this code just created as a
+// PasswordCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passwordCredentialAdopt(id objc.ID) *PasswordCredential {
+	if id == 0 {
+		return nil
+	}
+	x := &PasswordCredential{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasswordCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasswordCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasswordCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *PasswordCredential) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewPasswordCredentialWithUserPassword initializes a password credential.
 func NewPasswordCredentialWithUserPassword(user string, password string) *PasswordCredential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:"), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(password).Ptr())
-	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredential")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:"), purego.NSString(user), purego.NSString(password))
+	return passwordCredentialAdopt(_id)
 }
 
-// @abstract The user name of this credential. @result The user string.
-//
-// User calls the underlying User.
+// User the user name of this credential.
 func (x *PasswordCredential) User() string {
-	_r := x.inner.User()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The password of this credential. @result The password string.
-//
-// Password calls the underlying Password.
+// Password the password of this credential.
 func (x *PasswordCredential) Password() string {
-	_r := x.inner.Password()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PasswordCredentialable is the interface implemented by [PasswordCredential], for mocking and DI.
 type PasswordCredentialable interface {
-	Unwrap() *raw.ASPasswordCredential
+	obj.Object
 	User() string
 	Password() string
 }

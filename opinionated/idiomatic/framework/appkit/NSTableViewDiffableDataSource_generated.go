@@ -6,75 +6,99 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// The object you use to manage data and provide items for a table view.
+// TableViewDiffableDataSource is an idiomatic wrapper over the Objective-C class NSTableViewDiffableDataSource.
 //
-// TableViewDiffableDataSource wraps [raw.NSTableViewDiffableDataSource] with a fluent Go API.
+// The object you use to manage data and provide items for a table view.
 type TableViewDiffableDataSource struct {
-	inner *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTableViewDiffableDataSource].
-func (x *TableViewDiffableDataSource) Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TableViewDiffableDataSource) ID() objc.ID { return x.inner.Ptr() }
-
-// TableViewDiffableDataSourceFromID adopts an existing object pointer as a TableViewDiffableDataSource (nil for 0).
+// TableViewDiffableDataSourceFromID adopts an existing Objective-C object as a TableViewDiffableDataSource
+// (nil for 0), retaining it and registering a release finalizer.
 func TableViewDiffableDataSourceFromID(id objc.ID) *TableViewDiffableDataSource {
 	if id == 0 {
 		return nil
 	}
-	return &TableViewDiffableDataSource{inner: raw.NSTableViewDiffableDataSourceFromID[objc.ID, objc.ID](id)}
-}
-
-// NewTableViewDiffableDataSourceWithTableViewCellProvider creates a new [TableViewDiffableDataSource].
-func NewTableViewDiffableDataSourceWithTableViewCellProvider(tableView *raw.NSTableView, cellProvider objc.Block) *TableViewDiffableDataSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTableViewDiffableDataSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTableView:cellProvider:"), tableView.Ptr(), cellProvider)
-	return &TableViewDiffableDataSource{inner: raw.NSTableViewDiffableDataSourceFromID[objc.ID, objc.ID](_id)}
-}
-
-// WithRowViewProvider sets the rowViewProvider property and returns the receiver for chaining.
-func (x *TableViewDiffableDataSource) WithRowViewProvider(rowViewProvider objc.Block) *TableViewDiffableDataSource {
-	x.inner.SetRowViewProvider(rowViewProvider)
+	x := &TableViewDiffableDataSource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// WithSectionHeaderViewProvider sets the sectionHeaderViewProvider property and returns the receiver for chaining.
-func (x *TableViewDiffableDataSource) WithSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) *TableViewDiffableDataSource {
-	x.inner.SetSectionHeaderViewProvider(sectionHeaderViewProvider)
+// tableViewDiffableDataSourceAdopt wraps an Objective-C object that this code just created as a
+// TableViewDiffableDataSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tableViewDiffableDataSourceAdopt(id objc.ID) *TableViewDiffableDataSource {
+	if id == 0 {
+		return nil
+	}
+	x := &TableViewDiffableDataSource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
 	return x
 }
 
-// WithDefaultRowAnimation sets the defaultRowAnimation property and returns the receiver for chaining.
-func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) *TableViewDiffableDataSource {
-	x.inner.SetDefaultRowAnimation(raw.NSTableViewAnimationOptions(defaultRowAnimation))
+// Description returns the object's -description text.
+func (x *TableViewDiffableDataSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TableViewDiffableDataSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TableViewDiffableDataSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *TableViewDiffableDataSource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewTableViewDiffableDataSource creates a new TableViewDiffableDataSource.
+func NewTableViewDiffableDataSource() *TableViewDiffableDataSource {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTableViewDiffableDataSource")), objc.RegisterName("new"))
+	return tableViewDiffableDataSourceAdopt(_id)
+}
+
+// WithDefaultRowAnimation sets the property and returns the receiver so calls can be chained.
+func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
 	return x
 }
 
-// Snapshot calls the underlying Snapshot.
-func (x *TableViewDiffableDataSource) Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
-	return x.inner.Snapshot()
+// Snapshot wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) Snapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+	return obj.Wrap(_r)
 }
 
-// ApplySnapshotAnimatingDifferences calls the underlying ApplySnapshotAnimatingDifferences.
-func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) {
-	x.inner.ApplySnapshotAnimatingDifferences(snapshot, animatingDifferences)
+// ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
+// ApplySnapshotAnimatingDifferencesCompletion wraps the corresponding Objective-C method.
+//
 // ApplySnapshotAnimatingDifferencesCompletion blocks until the operation completes or ctx is cancelled.
-func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) error {
+func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error {
 	_ch := make(chan error, 1)
-	x.inner.ApplySnapshotAnimatingDifferencesCompletion(snapshot, animatingDifferences, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:completion:"), objref.IDOf(snapshot), animatingDifferences, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -83,75 +107,54 @@ func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletio
 	}
 }
 
-// ItemIdentifierForRow calls the underlying ItemIdentifierForRow.
-func (x *TableViewDiffableDataSource) ItemIdentifierForRow(row int) objc.ID {
-	return x.inner.ItemIdentifierForRow(row)
+// ItemIdentifierForRow wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) ItemIdentifierForRow(row int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifierForRow:"), row)
+	return obj.Wrap(_r)
 }
 
-// RowForItemIdentifier calls the underlying RowForItemIdentifier.
-func (x *TableViewDiffableDataSource) RowForItemIdentifier(identifier objc.ID) int {
-	return x.inner.RowForItemIdentifier(identifier)
+// RowForItemIdentifier wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) RowForItemIdentifier(identifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForItemIdentifier:"), objref.IDOf(identifier))
+	return _r
 }
 
-// SectionIdentifierForRow calls the underlying SectionIdentifierForRow.
-func (x *TableViewDiffableDataSource) SectionIdentifierForRow(row int) objc.ID {
-	return x.inner.SectionIdentifierForRow(row)
+// SectionIdentifierForRow wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) SectionIdentifierForRow(row int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIdentifierForRow:"), row)
+	return obj.Wrap(_r)
 }
 
-// RowForSectionIdentifier calls the underlying RowForSectionIdentifier.
-func (x *TableViewDiffableDataSource) RowForSectionIdentifier(identifier objc.ID) int {
-	return x.inner.RowForSectionIdentifier(identifier)
+// RowForSectionIdentifier wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) RowForSectionIdentifier(identifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForSectionIdentifier:"), objref.IDOf(identifier))
+	return _r
 }
 
-// RowViewProvider calls the underlying RowViewProvider.
-func (x *TableViewDiffableDataSource) RowViewProvider() objc.Block {
-	return x.inner.RowViewProvider()
+// DefaultRowAnimation wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) DefaultRowAnimation() TableViewAnimationOptions {
+	_r := objc.Send[TableViewAnimationOptions](objref.IDOf(x), objc.RegisterName("defaultRowAnimation"))
+	return _r
 }
 
-// SetRowViewProvider calls the underlying SetRowViewProvider.
-func (x *TableViewDiffableDataSource) SetRowViewProvider(rowViewProvider objc.Block) {
-	x.inner.SetRowViewProvider(rowViewProvider)
-}
-
-// SectionHeaderViewProvider calls the underlying SectionHeaderViewProvider.
-func (x *TableViewDiffableDataSource) SectionHeaderViewProvider() objc.Block {
-	return x.inner.SectionHeaderViewProvider()
-}
-
-// SetSectionHeaderViewProvider calls the underlying SetSectionHeaderViewProvider.
-func (x *TableViewDiffableDataSource) SetSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) {
-	x.inner.SetSectionHeaderViewProvider(sectionHeaderViewProvider)
-}
-
-// DefaultRowAnimation calls the underlying DefaultRowAnimation.
-func (x *TableViewDiffableDataSource) DefaultRowAnimation() NSTableViewAnimationOptions {
-	return NSTableViewAnimationOptions(x.inner.DefaultRowAnimation())
-}
-
-// SetDefaultRowAnimation calls the underlying SetDefaultRowAnimation.
-func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) {
-	x.inner.SetDefaultRowAnimation(raw.NSTableViewAnimationOptions(defaultRowAnimation))
+// SetDefaultRowAnimation wraps the corresponding Objective-C method.
+func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
 }
 
 // TableViewDiffableDataSourceable is the interface implemented by [TableViewDiffableDataSource], for mocking and DI.
 type TableViewDiffableDataSourceable interface {
-	Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID]
-	WithRowViewProvider(rowViewProvider objc.Block) *TableViewDiffableDataSource
-	WithSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) *TableViewDiffableDataSource
-	WithDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) *TableViewDiffableDataSource
-	Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
-	ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool)
-	ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) error
-	ItemIdentifierForRow(row int) objc.ID
-	RowForItemIdentifier(identifier objc.ID) int
-	SectionIdentifierForRow(row int) objc.ID
-	RowForSectionIdentifier(identifier objc.ID) int
-	RowViewProvider() objc.Block
-	SetRowViewProvider(rowViewProvider objc.Block)
-	SectionHeaderViewProvider() objc.Block
-	SetSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block)
-	DefaultRowAnimation() NSTableViewAnimationOptions
-	SetDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions)
+	obj.Object
+	WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource
+	Snapshot() obj.Object
+	ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool)
+	ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error
+	ItemIdentifierForRow(row int) obj.Object
+	RowForItemIdentifier(identifier obj.Object) int
+	SectionIdentifierForRow(row int) obj.Object
+	RowForSectionIdentifier(identifier obj.Object) int
+	DefaultRowAnimation() TableViewAnimationOptions
+	SetDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions)
 }
 
 var _ TableViewDiffableDataSourceable = (*TableViewDiffableDataSource)(nil)

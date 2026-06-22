@@ -5,155 +5,128 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A set of material properties that describes a physically realistic shading model for materials.
+// PhysicallyPlausibleScatteringFunction is an idiomatic wrapper over the Objective-C class MDLPhysicallyPlausibleScatteringFunction.
 //
-// PhysicallyPlausibleScatteringFunction wraps [raw.MDLPhysicallyPlausibleScatteringFunction] with a fluent Go API.
+// It embeds [ScatteringFunction], promoting that type's methods.
+//
+// A set of material properties that describes a physically realistic shading model for materials.
 type PhysicallyPlausibleScatteringFunction struct {
-	inner *raw.MDLPhysicallyPlausibleScatteringFunction
+	ScatteringFunction
 }
 
-// Unwrap returns the underlying [raw.MDLPhysicallyPlausibleScatteringFunction].
-func (x *PhysicallyPlausibleScatteringFunction) Unwrap() *raw.MDLPhysicallyPlausibleScatteringFunction {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicallyPlausibleScatteringFunction) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicallyPlausibleScatteringFunctionFromID adopts an existing object pointer as a PhysicallyPlausibleScatteringFunction (nil for 0).
+// PhysicallyPlausibleScatteringFunctionFromID adopts an existing Objective-C object as a PhysicallyPlausibleScatteringFunction
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicallyPlausibleScatteringFunctionFromID(id objc.ID) *PhysicallyPlausibleScatteringFunction {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicallyPlausibleScatteringFunction{inner: raw.MDLPhysicallyPlausibleScatteringFunctionFromID(id)}
-}
-
-// NewPhysicallyPlausibleScatteringFunction creates a new [PhysicallyPlausibleScatteringFunction].
-func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFunction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPhysicallyPlausibleScatteringFunction")), objc.RegisterName("new"))
-	return &PhysicallyPlausibleScatteringFunction{inner: raw.MDLPhysicallyPlausibleScatteringFunctionFromID(_id)}
-}
-
-// A descriptive name for the scattering function.
-//
-// WithName sets the name property and returns the receiver for chaining.
-func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
-	x.inner.MDLScatteringFunction.SetName(foundation.NSStringStringWithUTF8String(name))
+	x := &PhysicallyPlausibleScatteringFunction{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Subsurface calls the underlying Subsurface.
+// physicallyPlausibleScatteringFunctionAdopt wraps an Objective-C object that this code just created as a
+// PhysicallyPlausibleScatteringFunction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicallyPlausibleScatteringFunctionAdopt(id objc.ID) *PhysicallyPlausibleScatteringFunction {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicallyPlausibleScatteringFunction{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewPhysicallyPlausibleScatteringFunction creates a new PhysicallyPlausibleScatteringFunction.
+func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFunction {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLPhysicallyPlausibleScatteringFunction")), objc.RegisterName("new"))
+	return physicallyPlausibleScatteringFunctionAdopt(_id)
+}
+
+// WithName a descriptive name for the scattering function.
+func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
+	return x
+}
+
+// Subsurface wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Subsurface() *MaterialProperty {
-	_r := x.inner.Subsurface()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subsurface"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Metallic calls the underlying Metallic.
+// Metallic wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Metallic() *MaterialProperty {
-	_r := x.inner.Metallic()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metallic"))
+	return MaterialPropertyFromID(_r)
 }
 
-// SpecularAmount calls the underlying SpecularAmount.
+// SpecularAmount wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) SpecularAmount() *MaterialProperty {
-	_r := x.inner.SpecularAmount()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specularAmount"))
+	return MaterialPropertyFromID(_r)
 }
 
-// SpecularTint calls the underlying SpecularTint.
+// SpecularTint wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) SpecularTint() *MaterialProperty {
-	_r := x.inner.SpecularTint()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specularTint"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Roughness calls the underlying Roughness.
+// Roughness wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Roughness() *MaterialProperty {
-	_r := x.inner.Roughness()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roughness"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Anisotropic calls the underlying Anisotropic.
+// Anisotropic wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Anisotropic() *MaterialProperty {
-	_r := x.inner.Anisotropic()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anisotropic"))
+	return MaterialPropertyFromID(_r)
 }
 
-// AnisotropicRotation calls the underlying AnisotropicRotation.
+// AnisotropicRotation wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) AnisotropicRotation() *MaterialProperty {
-	_r := x.inner.AnisotropicRotation()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anisotropicRotation"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Sheen calls the underlying Sheen.
+// Sheen wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Sheen() *MaterialProperty {
-	_r := x.inner.Sheen()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheen"))
+	return MaterialPropertyFromID(_r)
 }
 
-// SheenTint calls the underlying SheenTint.
+// SheenTint wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) SheenTint() *MaterialProperty {
-	_r := x.inner.SheenTint()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheenTint"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Clearcoat calls the underlying Clearcoat.
+// Clearcoat wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) Clearcoat() *MaterialProperty {
-	_r := x.inner.Clearcoat()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearcoat"))
+	return MaterialPropertyFromID(_r)
 }
 
-// ClearcoatGloss calls the underlying ClearcoatGloss.
+// ClearcoatGloss wraps the corresponding Objective-C method.
 func (x *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProperty {
-	_r := x.inner.ClearcoatGloss()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
-}
-
-func (x *PhysicallyPlausibleScatteringFunction) asScatteringFunction() *raw.MDLScatteringFunction {
-	return &x.inner.MDLScatteringFunction
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearcoatGloss"))
+	return MaterialPropertyFromID(_r)
 }
 
 // PhysicallyPlausibleScatteringFunctionable is the interface implemented by [PhysicallyPlausibleScatteringFunction], for mocking and DI.
 type PhysicallyPlausibleScatteringFunctionable interface {
-	Unwrap() *raw.MDLPhysicallyPlausibleScatteringFunction
+	obj.Object
 	WithName(name string) *PhysicallyPlausibleScatteringFunction
 	Subsurface() *MaterialProperty
 	Metallic() *MaterialProperty
@@ -169,3 +142,5 @@ type PhysicallyPlausibleScatteringFunctionable interface {
 }
 
 var _ PhysicallyPlausibleScatteringFunctionable = (*PhysicallyPlausibleScatteringFunction)(nil)
+
+var _ ScatteringFunctionProvider = (*PhysicallyPlausibleScatteringFunction)(nil)

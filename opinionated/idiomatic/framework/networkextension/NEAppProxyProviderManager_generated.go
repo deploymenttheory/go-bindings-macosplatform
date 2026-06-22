@@ -5,282 +5,149 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// An object to create and manage the app proxy provider’s VPN configuration.
+// NEAppProxyProviderManager is an idiomatic wrapper over the Objective-C class NEAppProxyProviderManager.
 //
-// NEAppProxyProviderManager wraps [raw.NEAppProxyProviderManager] with a fluent Go API.
+// It embeds [NETunnelProviderManager], promoting that type's methods.
+//
+// An object to create and manage the app proxy provider’s VPN configuration.
 type NEAppProxyProviderManager struct {
-	inner *raw.NEAppProxyProviderManager
+	NETunnelProviderManager
 }
 
-// Unwrap returns the underlying [raw.NEAppProxyProviderManager].
-func (x *NEAppProxyProviderManager) Unwrap() *raw.NEAppProxyProviderManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEAppProxyProviderManager) ID() objc.ID { return x.inner.Ptr() }
-
-// NEAppProxyProviderManagerFromID adopts an existing object pointer as a NEAppProxyProviderManager (nil for 0).
+// NEAppProxyProviderManagerFromID adopts an existing Objective-C object as a NEAppProxyProviderManager
+// (nil for 0), retaining it and registering a release finalizer.
 func NEAppProxyProviderManagerFromID(id objc.ID) *NEAppProxyProviderManager {
 	if id == 0 {
 		return nil
 	}
-	return &NEAppProxyProviderManager{inner: raw.NEAppProxyProviderManagerFromID(id)}
+	x := &NEAppProxyProviderManager{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewNEAppProxyProviderManager creates a new [NEAppProxyProviderManager].
+// nEAppProxyProviderManagerAdopt wraps an Objective-C object that this code just created as a
+// NEAppProxyProviderManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEAppProxyProviderManagerAdopt(id objc.ID) *NEAppProxyProviderManager {
+	if id == 0 {
+		return nil
+	}
+	x := &NEAppProxyProviderManager{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewNEAppProxyProviderManager creates a new NEAppProxyProviderManager.
 func NewNEAppProxyProviderManager() *NEAppProxyProviderManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEAppProxyProviderManager")), objc.RegisterName("new"))
-	return &NEAppProxyProviderManager{inner: raw.NEAppProxyProviderManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyProviderManager")), objc.RegisterName("new"))
+	return nEAppProxyProviderManagerAdopt(_id)
 }
 
-// The website domains that the system routes connections from the Safari app through a per-app VPN.
-//
-// WithSafariDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetSafariDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetSafariDomains(_arr)
+// WithSafariDomains the website domains that the system routes connections from the Safari app through a per-app VPN.
+func (x *NEAppProxyProviderManager) WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSafariDomains:"), _arr)
 	return x
 }
 
-// The mail servers that the system routes connections from the Mail app through for a per-app VPN.
-//
-// WithMailDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetMailDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetMailDomains(_arr)
+// WithMailDomains the mail servers that the system routes connections from the Mail app through for a per-app VPN.
+func (x *NEAppProxyProviderManager) WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailDomains:"), _arr)
 	return x
 }
 
-// The calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
-//
-// WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetCalendarDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetCalendarDomains(_arr)
+// WithCalendarDomains the calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
+func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarDomains:"), _arr)
 	return x
 }
 
-// The contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
-//
-// WithContactsDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetContactsDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetContactsDomains(_arr)
+// WithContactsDomains the contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
+func (x *NEAppProxyProviderManager) WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactsDomains:"), _arr)
 	return x
 }
 
-// The rules for specific apps in a per-app VPN.
-//
-// WithAppRules sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetAppRules(foundation.NSArrayFromID[*raw.NEAppRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEAppRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetAppRules(_arr)
+// WithAppRules the rules for specific apps in a per-app VPN.
+func (x *NEAppProxyProviderManager) WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppRules:"), _arr)
 	return x
 }
 
-// The domains that the system excludes from a per-app VPN.
-//
-// WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetExcludedDomains(_arr)
+// WithExcludedDomains the domains that the system excludes from a per-app VPN.
+func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), _arr)
 	return x
 }
 
-// The domains that the system routes network traffic through for a per-app VPN.
-//
-// WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.SetAssociatedDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.SetAssociatedDomains(_arr)
+// WithAssociatedDomains the domains that the system routes network traffic through for a per-app VPN.
+func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociatedDomains:"), _arr)
 	return x
 }
 
-// An ordered list of Connect On Demand rules.
-//
-// WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
+// WithOnDemandRules an ordered list of Connect On Demand rules.
 func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asNEOnDemandRule().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandRules(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
 	return x
 }
 
-// A Boolean used to toggle the Connect On Demand capability.
-//
-// WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
+// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
 func (x *NEAppProxyProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager {
-	x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandEnabled(onDemandEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
 	return x
 }
 
-// A string containing the display name of the VPN configuration.
-//
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+// WithLocalizedDescription a string containing the display name of the VPN configuration.
 func (x *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager {
-	x.inner.NETunnelProviderManager.NEVPNManager.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocol sets the protocol property and returns the receiver for chaining.
+// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
-	x.inner.NETunnelProviderManager.NEVPNManager.SetProtocol(protocol.asNEVPNProtocol())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return x
 }
 
-// An NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-//
-// WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
+// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (x *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
-	x.inner.NETunnelProviderManager.NEVPNManager.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return x
 }
 
-// A Boolean used to toggle the enabled state of the VPN configuration.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
 func (x *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProviderManager {
-	x.inner.NETunnelProviderManager.NEVPNManager.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
-}
-
-func (x *NEAppProxyProviderManager) asNETunnelProviderManager() *raw.NETunnelProviderManager {
-	return &x.inner.NETunnelProviderManager
-}
-
-func (x *NEAppProxyProviderManager) asNEVPNManager() *raw.NEVPNManager {
-	return &x.inner.NETunnelProviderManager.NEVPNManager
 }
 
 // NEAppProxyProviderManagerable is the interface implemented by [NEAppProxyProviderManager], for mocking and DI.
 type NEAppProxyProviderManagerable interface {
-	Unwrap() *raw.NEAppProxyProviderManager
-	WithSafariDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
-	WithMailDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
-	WithCalendarDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
-	WithContactsDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
-	WithAppRules(items ...*raw.NEAppRule) *NEAppProxyProviderManager
-	WithExcludedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
-	WithAssociatedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager
+	obj.Object
+	WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager
+	WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager
+	WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager
+	WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager
+	WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager
+	WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager
+	WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager
 	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager
 	WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager
 	WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager
@@ -290,3 +157,7 @@ type NEAppProxyProviderManagerable interface {
 }
 
 var _ NEAppProxyProviderManagerable = (*NEAppProxyProviderManager)(nil)
+
+var _ NETunnelProviderManagerProvider = (*NEAppProxyProviderManager)(nil)
+
+var _ NEVPNManagerProvider = (*NEAppProxyProviderManager)(nil)

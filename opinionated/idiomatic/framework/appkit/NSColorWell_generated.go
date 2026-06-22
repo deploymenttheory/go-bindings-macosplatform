@@ -5,842 +5,674 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// A control that displays a color value and lets the user change that color value.
+// ColorWell is an idiomatic wrapper over the Objective-C class NSColorWell.
 //
-// ColorWell wraps [raw.NSColorWell] with a fluent Go API.
+// It embeds [Control], promoting that type's methods.
+//
+// A control that displays a color value and lets the user change that color value.
 type ColorWell struct {
-	inner *raw.NSColorWell
+	Control
 }
 
-// Unwrap returns the underlying [raw.NSColorWell].
-func (x *ColorWell) Unwrap() *raw.NSColorWell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorWell) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorWellFromID adopts an existing object pointer as a ColorWell (nil for 0).
+// ColorWellFromID adopts an existing Objective-C object as a ColorWell
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorWellFromID(id objc.ID) *ColorWell {
 	if id == 0 {
 		return nil
 	}
-	return &ColorWell{inner: raw.NSColorWellFromID(id)}
+	x := &ColorWell{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewColorWell creates a new [ColorWell].
+// colorWellAdopt wraps an Objective-C object that this code just created as a
+// ColorWell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorWellAdopt(id objc.ID) *ColorWell {
+	if id == 0 {
+		return nil
+	}
+	x := &ColorWell{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewColorWell creates a new ColorWell.
 func NewColorWell() *ColorWell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorWell")), objc.RegisterName("new"))
-	return &ColorWell{inner: raw.NSColorWellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSColorWell")), objc.RegisterName("new"))
+	return colorWellAdopt(_id)
 }
 
-// A Boolean value that determines whether the color well has a border.
-//
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered a Boolean value that determines whether the color well has a border.
 func (x *ColorWell) WithBordered(bordered bool) *ColorWell {
-	x.inner.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
-// The currently selected color for the color well.
-//
-// WithColor sets the color property and returns the receiver for chaining.
+// WithColor the currently selected color for the color well.
 func (x *ColorWell) WithColor(color *Color) *ColorWell {
-	x.inner.SetColor(color.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// The appearance and interaction style to apply to the color well.
-//
-// WithColorWellStyle sets the colorWellStyle property and returns the receiver for chaining.
-func (x *ColorWell) WithColorWellStyle(colorWellStyle NSColorWellStyle) *ColorWell {
-	x.inner.SetColorWellStyle(raw.NSColorWellStyle(colorWellStyle))
+// WithColorWellStyle the appearance and interaction style to apply to the color well.
+func (x *ColorWell) WithColorWellStyle(colorWellStyle ColorWellStyle) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorWellStyle:"), colorWellStyle)
 	return x
 }
 
-// The image to display on the button portion of a color well that adopts the expanded style.
-//
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage the image to display on the button portion of a color well that adopts the expanded style.
 func (x *ColorWell) WithImage(image *Image) *ColorWell {
-	x.inner.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
-// The target object that defines the action you want to perform when someone interacts with the color well.
-//
-// WithPulldownTarget sets the pulldownTarget property and returns the receiver for chaining.
-func (x *ColorWell) WithPulldownTarget(pulldownTarget objc.ID) *ColorWell {
-	x.inner.SetPulldownTarget(pulldownTarget)
+// WithPulldownTarget the target object that defines the action you want to perform when someone interacts with the color well.
+func (x *ColorWell) WithPulldownTarget(pulldownTarget obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPulldownTarget:"), objref.IDOf(pulldownTarget))
 	return x
 }
 
-// The action to perform when someone clicks in the color area of the color well.
-//
-// WithPulldownAction sets the pulldownAction property and returns the receiver for chaining.
-func (x *ColorWell) WithPulldownAction(pulldownAction objc.SEL) *ColorWell {
-	x.inner.SetPulldownAction(pulldownAction)
-	return x
-}
-
-// A Boolean value that determines whether the color picker supports alpha values.
-//
-// WithSupportsAlpha sets the supportsAlpha property and returns the receiver for chaining.
+// WithSupportsAlpha a Boolean value that determines whether the color picker supports alpha values.
 func (x *ColorWell) WithSupportsAlpha(supportsAlpha bool) *ColorWell {
-	x.inner.SetSupportsAlpha(supportsAlpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAlpha:"), supportsAlpha)
 	return x
 }
 
-// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
-//
-// WithMaximumLinearExposure sets the maximumLinearExposure property and returns the receiver for chaining.
+// WithMaximumLinearExposure the maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (x *ColorWell) WithMaximumLinearExposure(maximumLinearExposure float64) *ColorWell {
-	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
 	return x
 }
 
-// The target object that receives action messages from the cell.
-//
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ColorWell) WithTarget(target objc.ID) *ColorWell {
-	x.inner.NSControl.SetTarget(target)
+// WithTarget the target object that receives action messages from the cell.
+func (x *ColorWell) WithTarget(target obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ColorWell) WithAction(action objc.SEL) *ColorWell {
-	x.inner.NSControl.SetAction(action)
-	return x
-}
-
-// The tag identifying the receiver (not the tag of the receiver’s cell).
-//
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
 func (x *ColorWell) WithTag(tag int) *ColorWell {
-	x.inner.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
-// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-//
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 func (x *ColorWell) WithIgnoresMultiClick(ignoresMultiClick bool) *ColorWell {
-	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
-// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-//
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 func (x *ColorWell) WithContinuous(continuous bool) *ColorWell {
-	x.inner.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
-// A Boolean value that indicates whether the receiver reacts to mouse events.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
 func (x *ColorWell) WithEnabled(enabled bool) *ColorWell {
-	x.inner.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// A Boolean value indicating whether the receiver refuses the first responder role.
-//
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
 func (x *ColorWell) WithRefusesFirstResponder(refusesFirstResponder bool) *ColorWell {
-	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
-// A Boolean value that indicates whether the cell is highlighted.
-//
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
 func (x *ColorWell) WithHighlighted(highlighted bool) *ColorWell {
-	x.inner.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
-// The size of the control.
-//
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ColorWell) WithControlSize(controlSize NSControlSize) *ColorWell {
-	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize the size of the control.
+func (x *ColorWell) WithControlSize(controlSize ControlSize) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
-// The receiver’s formatter.
-//
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ColorWell) WithFormatter(formatter *foundation.NSFormatter) *ColorWell {
-	x.inner.NSControl.SetFormatter(formatter)
+// WithFormatter the receiver’s formatter.
+func (x *ColorWell) WithFormatter(formatter obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
-// The value of the receiver’s cell as an Objective-C object.
-//
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ColorWell) WithObjectValue(objectValue objc.ID) *ColorWell {
-	x.inner.NSControl.SetObjectValue(objectValue)
+// WithObjectValue the value of the receiver’s cell as an Objective-C object.
+func (x *ColorWell) WithObjectValue(objectValue obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
-// The value of the receiver’s cell as an NSString object.
-//
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue the value of the receiver’s cell as an NSString object.
 func (x *ColorWell) WithStringValue(stringValue string) *ColorWell {
-	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an attributed string.
-//
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ColorWell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ColorWell {
-	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
+func (x *ColorWell) WithAttributedStringValue(attributedStringValue obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
-// The value of the receiver’s cell as an integer.
-//
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue the value of the receiver’s cell as an integer.
 func (x *ColorWell) WithIntValue(intValue int) *ColorWell {
-	x.inner.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
-// The value of the receiver’s cell as an integer value.
-//
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue the value of the receiver’s cell as an integer value.
 func (x *ColorWell) WithIntegerValue(integerValue int) *ColorWell {
-	x.inner.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
-// The value of the receiver’s cell as a single-precision floating-point number.
-//
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
 func (x *ColorWell) WithFloatValue(floatValue float32) *ColorWell {
-	x.inner.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// The value of the receiver’s cell as a double-precision floating-point number.
-//
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
 func (x *ColorWell) WithDoubleValue(doubleValue float64) *ColorWell {
-	x.inner.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
-// The font used to draw text in the receiver’s cell.
-//
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont the font used to draw text in the receiver’s cell.
 func (x *ColorWell) WithFont(font *Font) *ColorWell {
-	x.inner.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
-// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
-//
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
 func (x *ColorWell) WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell {
-	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
-// The line break mode to use for text in the control’s cell.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ColorWell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ColorWell {
-	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode the line break mode to use for text in the control’s cell.
+func (x *ColorWell) WithLineBreakMode(lineBreakMode LineBreakMode) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
-// The alignment mode of the text in the receiver’s cell.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ColorWell) WithAlignment(alignment NSTextAlignment) *ColorWell {
-	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment the alignment mode of the text in the receiver’s cell.
+func (x *ColorWell) WithAlignment(alignment TextAlignment) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
-// The initial writing direction used to determine the actual writing direction for text.
-//
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ColorWell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ColorWell {
-	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
+func (x *ColorWell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
-// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-//
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 func (x *ColorWell) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ColorWell {
-	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithCell(cell CellProvider) *ColorWell {
-	x.inner.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithSubviews(items ...ViewProvider) *ColorWell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithHidden(hidden bool) *ColorWell {
-	x.inner.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ColorWell {
-	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithAutoresizesSubviews(autoresizesSubviews bool) *ColorWell {
-	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ColorWell) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ColorWell {
-	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
+// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
 func (x *ColorWell) WithFrame(frame corefoundation.CGRect) *ColorWell {
-	x.inner.NSControl.NSView.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 	return x
 }
 
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithFrameRotation(frameRotation float64) *ColorWell {
-	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithFrameCenterRotation(frameCenterRotation float64) *ColorWell {
-	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithBoundsRotation(boundsRotation float64) *ColorWell {
-	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
+// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
 func (x *ColorWell) WithBounds(bounds corefoundation.CGRect) *ColorWell {
-	x.inner.NSControl.NSView.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
 	return x
 }
 
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithCanDrawConcurrently(canDrawConcurrently bool) *ColorWell {
-	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
-// A Boolean value that determines whether the view needs to be redrawn before being displayed.
-//
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
 func (x *ColorWell) WithNeedsDisplay(needsDisplay bool) *ColorWell {
-	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ColorWell {
-	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithWantsRestingTouches(wantsRestingTouches bool) *ColorWell {
-	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ColorWell) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ColorWell {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ColorWell) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ColorWell {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithWantsLayer(wantsLayer bool) *ColorWell {
-	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *ColorWell) WithLayer(layer *quartzcore.CALayer) *ColorWell {
-	x.inner.NSControl.NSView.SetLayer(layer)
+// WithLayer sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithLayer(layer obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ColorWell {
-	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithNeedsLayout(needsLayout bool) *ColorWell {
-	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithAlphaValue(alphaValue float64) *ColorWell {
-	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ColorWell {
-	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ColorWell) WithBackgroundFilters(items ...*coreimage.CIFilter) *ColorWell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithBackgroundFilters(items ...obj.Object) *ColorWell {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ColorWell) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ColorWell {
-	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithCompositingFilter(compositingFilter obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *ColorWell) WithContentFilters(items ...*coreimage.CIFilter) *ColorWell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithContentFilters(items ...obj.Object) *ColorWell {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithShadow(shadow *Shadow) *ColorWell {
-	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithClipsToBounds(clipsToBounds bool) *ColorWell {
-	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ColorWell {
-	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithToolTip(toolTip string) *ColorWell {
-	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ColorWell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ColorWell {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ColorWell {
-	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return x
 }
 
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithNextKeyView(nextKeyView ViewProvider) *ColorWell {
-	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ColorWell) WithFocusRingType(focusRingType NSFocusRingType) *ColorWell {
-	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithFocusRingType(focusRingType FocusRingType) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithGestureRecognizers(items ...GestureRecognizerProvider) *ColorWell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ColorWell) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ColorWell {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
+// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+func (x *ColorWell) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ColorWell {
-	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return x
 }
 
-// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-//
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 func (x *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell {
-	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ColorWell {
-	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ColorWell {
-	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ColorWell {
-	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ColorWell {
-	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ColorWell {
-	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ColorWell {
-	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
 func (x *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
-// The next responder after this one, or nil if it has none.
-//
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder the next responder after this one, or nil if it has none.
 func (x *ColorWell) WithNextResponder(nextResponder ResponderProvider) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
-// Returns the responder’s menu.
-//
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu returns the responder’s menu.
 func (x *ColorWell) WithMenu(menu *Menu) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
-// An object encapsulating a user activity supported by this responder.
-//
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *ColorWell) WithUserActivity(userActivity *foundation.NSUserActivity) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity an object encapsulating a user activity supported by this responder.
+func (x *ColorWell) WithUserActivity(userActivity obj.Object) *ColorWell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// The NSTouchBar object associated with the responder.
-//
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar the NSTouchBar object associated with the responder.
 func (x *ColorWell) WithTouchBar(touchBar *TouchBar) *ColorWell {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// Deactivates the color well.
-//
-// Deactivate calls the underlying Deactivate.
+// Deactivate deactivates the color well.
 func (x *ColorWell) Deactivate() {
-	x.inner.Deactivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
-// Activates the color well, displays the color panel, and synchronizes the two UI elements.
-//
-// Activate calls the underlying Activate.
+// Activate activates the color well, displays the color panel, and synchronizes the two UI elements.
 func (x *ColorWell) Activate(exclusive bool) {
-	x.inner.Activate(exclusive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate:"), exclusive)
 }
 
-// Draws the area inside the color well at the specified location without drawing borders.
-//
-// DrawWellInside calls the underlying DrawWellInside.
+// DrawWellInside draws the area inside the color well at the specified location without drawing borders.
 func (x *ColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
-	x.inner.DrawWellInside(insideRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawWellInside:"), insideRect)
 }
 
-// Changes the currently selected color to the color of the specified object.
-//
-// TakeColorFrom calls the underlying TakeColorFrom.
-func (x *ColorWell) TakeColorFrom(sender objc.ID) {
-	x.inner.TakeColorFrom(sender)
+// TakeColorFrom changes the currently selected color to the color of the specified object.
+func (x *ColorWell) TakeColorFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeColorFrom:"), objref.IDOf(sender))
 }
 
-// IsActive calls the underlying IsActive.
+// IsActive wraps the corresponding Objective-C method.
 func (x *ColorWell) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// IsBordered calls the underlying IsBordered.
+// IsBordered wraps the corresponding Objective-C method.
 func (x *ColorWell) IsBordered() bool {
-	return x.inner.IsBordered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
+	return _r
 }
 
-// SetBordered calls the underlying SetBordered.
+// SetBordered wraps the corresponding Objective-C method.
 func (x *ColorWell) SetBordered(bordered bool) {
-	x.inner.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
-// Color calls the underlying Color.
+// Color wraps the corresponding Objective-C method.
 func (x *ColorWell) Color() *Color {
-	_r := x.inner.Color()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return ColorFromID(_r)
 }
 
-// SetColor calls the underlying SetColor.
-func (x *ColorWell) SetColor(color *raw.NSColor) {
-	x.inner.SetColor(color)
+// SetColor wraps the corresponding Objective-C method.
+func (x *ColorWell) SetColor(color *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// ColorWellStyle calls the underlying ColorWellStyle.
-func (x *ColorWell) ColorWellStyle() NSColorWellStyle {
-	return NSColorWellStyle(x.inner.ColorWellStyle())
+// ColorWellStyle wraps the corresponding Objective-C method.
+func (x *ColorWell) ColorWellStyle() ColorWellStyle {
+	_r := objc.Send[ColorWellStyle](objref.IDOf(x), objc.RegisterName("colorWellStyle"))
+	return _r
 }
 
-// SetColorWellStyle calls the underlying SetColorWellStyle.
-func (x *ColorWell) SetColorWellStyle(colorWellStyle NSColorWellStyle) {
-	x.inner.SetColorWellStyle(raw.NSColorWellStyle(colorWellStyle))
+// SetColorWellStyle wraps the corresponding Objective-C method.
+func (x *ColorWell) SetColorWellStyle(colorWellStyle ColorWellStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorWellStyle:"), colorWellStyle)
 }
 
-// Image calls the underlying Image.
+// Image wraps the corresponding Objective-C method.
 func (x *ColorWell) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// SetImage calls the underlying SetImage.
-func (x *ColorWell) SetImage(image *raw.NSImage) {
-	x.inner.SetImage(image)
+// SetImage wraps the corresponding Objective-C method.
+func (x *ColorWell) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// PulldownTarget calls the underlying PulldownTarget.
-func (x *ColorWell) PulldownTarget() objc.ID {
-	return x.inner.PulldownTarget()
+// PulldownTarget wraps the corresponding Objective-C method.
+func (x *ColorWell) PulldownTarget() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pulldownTarget"))
+	return obj.Wrap(_r)
 }
 
-// SetPulldownTarget calls the underlying SetPulldownTarget.
-func (x *ColorWell) SetPulldownTarget(pulldownTarget objc.ID) {
-	x.inner.SetPulldownTarget(pulldownTarget)
+// SetPulldownTarget wraps the corresponding Objective-C method.
+func (x *ColorWell) SetPulldownTarget(pulldownTarget obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPulldownTarget:"), objref.IDOf(pulldownTarget))
 }
 
-// PulldownAction calls the underlying PulldownAction.
-func (x *ColorWell) PulldownAction() objc.SEL {
-	return x.inner.PulldownAction()
-}
-
-// SetPulldownAction calls the underlying SetPulldownAction.
-func (x *ColorWell) SetPulldownAction(pulldownAction objc.SEL) {
-	x.inner.SetPulldownAction(pulldownAction)
-}
-
-// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
-//
-// SupportsAlpha calls the underlying SupportsAlpha.
+// SupportsAlpha controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
 func (x *ColorWell) SupportsAlpha() bool {
-	return x.inner.SupportsAlpha()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsAlpha"))
+	return _r
 }
 
-// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
-//
-// SetSupportsAlpha calls the underlying SetSupportsAlpha.
+// SetSupportsAlpha controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
 func (x *ColorWell) SetSupportsAlpha(supportsAlpha bool) {
-	x.inner.SetSupportsAlpha(supportsAlpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAlpha:"), supportsAlpha)
 }
 
-// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
-//
-// MaximumLinearExposure calls the underlying MaximumLinearExposure.
+// MaximumLinearExposure the maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (x *ColorWell) MaximumLinearExposure() float64 {
-	return x.inner.MaximumLinearExposure()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearExposure"))
+	return _r
 }
 
-// The maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
-//
-// SetMaximumLinearExposure calls the underlying SetMaximumLinearExposure.
+// SetMaximumLinearExposure the maximum linear exposure a color in this color well can be set to. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked for this well may have a linear exposure applied to it.
 func (x *ColorWell) SetMaximumLinearExposure(maximumLinearExposure float64) {
-	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearExposure:"), maximumLinearExposure)
 }
-
-func (x *ColorWell) asControl() *raw.NSControl { return &x.inner.NSControl }
-
-func (x *ColorWell) asView() *raw.NSView { return &x.inner.NSControl.NSView }
-
-func (x *ColorWell) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
 
 // ColorWellable is the interface implemented by [ColorWell], for mocking and DI.
 type ColorWellable interface {
-	Unwrap() *raw.NSColorWell
+	obj.Object
 	WithBordered(bordered bool) *ColorWell
 	WithColor(color *Color) *ColorWell
-	WithColorWellStyle(colorWellStyle NSColorWellStyle) *ColorWell
+	WithColorWellStyle(colorWellStyle ColorWellStyle) *ColorWell
 	WithImage(image *Image) *ColorWell
-	WithPulldownTarget(pulldownTarget objc.ID) *ColorWell
-	WithPulldownAction(pulldownAction objc.SEL) *ColorWell
+	WithPulldownTarget(pulldownTarget obj.Object) *ColorWell
 	WithSupportsAlpha(supportsAlpha bool) *ColorWell
 	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorWell
-	WithTarget(target objc.ID) *ColorWell
-	WithAction(action objc.SEL) *ColorWell
+	WithTarget(target obj.Object) *ColorWell
 	WithTag(tag int) *ColorWell
 	WithIgnoresMultiClick(ignoresMultiClick bool) *ColorWell
 	WithContinuous(continuous bool) *ColorWell
 	WithEnabled(enabled bool) *ColorWell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ColorWell
 	WithHighlighted(highlighted bool) *ColorWell
-	WithControlSize(controlSize NSControlSize) *ColorWell
-	WithFormatter(formatter *foundation.NSFormatter) *ColorWell
-	WithObjectValue(objectValue objc.ID) *ColorWell
+	WithControlSize(controlSize ControlSize) *ColorWell
+	WithFormatter(formatter obj.Object) *ColorWell
+	WithObjectValue(objectValue obj.Object) *ColorWell
 	WithStringValue(stringValue string) *ColorWell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ColorWell
+	WithAttributedStringValue(attributedStringValue obj.Object) *ColorWell
 	WithIntValue(intValue int) *ColorWell
 	WithIntegerValue(integerValue int) *ColorWell
 	WithFloatValue(floatValue float32) *ColorWell
 	WithDoubleValue(doubleValue float64) *ColorWell
 	WithFont(font *Font) *ColorWell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ColorWell
-	WithAlignment(alignment NSTextAlignment) *ColorWell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ColorWell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ColorWell
+	WithAlignment(alignment TextAlignment) *ColorWell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ColorWell
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ColorWell
 	WithCell(cell CellProvider) *ColorWell
 	WithSubviews(items ...ViewProvider) *ColorWell
 	WithHidden(hidden bool) *ColorWell
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ColorWell
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ColorWell
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ColorWell
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ColorWell
 	WithFrame(frame corefoundation.CGRect) *ColorWell
 	WithFrameRotation(frameRotation float64) *ColorWell
 	WithFrameCenterRotation(frameCenterRotation float64) *ColorWell
@@ -850,27 +682,27 @@ type ColorWellable interface {
 	WithNeedsDisplay(needsDisplay bool) *ColorWell
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ColorWell
 	WithWantsRestingTouches(wantsRestingTouches bool) *ColorWell
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ColorWell
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ColorWell
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ColorWell
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ColorWell
 	WithWantsLayer(wantsLayer bool) *ColorWell
-	WithLayer(layer *quartzcore.CALayer) *ColorWell
+	WithLayer(layer obj.Object) *ColorWell
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ColorWell
 	WithNeedsLayout(needsLayout bool) *ColorWell
 	WithAlphaValue(alphaValue float64) *ColorWell
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ColorWell
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *ColorWell
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ColorWell
-	WithContentFilters(items ...*coreimage.CIFilter) *ColorWell
+	WithBackgroundFilters(items ...obj.Object) *ColorWell
+	WithCompositingFilter(compositingFilter obj.Object) *ColorWell
+	WithContentFilters(items ...obj.Object) *ColorWell
 	WithShadow(shadow *Shadow) *ColorWell
 	WithClipsToBounds(clipsToBounds bool) *ColorWell
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ColorWell
 	WithToolTip(toolTip string) *ColorWell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ColorWell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ColorWell
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ColorWell
 	WithNextKeyView(nextKeyView ViewProvider) *ColorWell
-	WithFocusRingType(focusRingType NSFocusRingType) *ColorWell
+	WithFocusRingType(focusRingType FocusRingType) *ColorWell
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ColorWell
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ColorWell
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ColorWell
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ColorWell
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell
@@ -883,25 +715,23 @@ type ColorWellable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell
 	WithNextResponder(nextResponder ResponderProvider) *ColorWell
 	WithMenu(menu *Menu) *ColorWell
-	WithUserActivity(userActivity *foundation.NSUserActivity) *ColorWell
+	WithUserActivity(userActivity obj.Object) *ColorWell
 	WithTouchBar(touchBar *TouchBar) *ColorWell
 	Deactivate()
 	Activate(exclusive bool)
 	DrawWellInside(insideRect corefoundation.CGRect)
-	TakeColorFrom(sender objc.ID)
+	TakeColorFrom(sender obj.Object)
 	IsActive() bool
 	IsBordered() bool
 	SetBordered(bordered bool)
 	Color() *Color
-	SetColor(color *raw.NSColor)
-	ColorWellStyle() NSColorWellStyle
-	SetColorWellStyle(colorWellStyle NSColorWellStyle)
+	SetColor(color *Color)
+	ColorWellStyle() ColorWellStyle
+	SetColorWellStyle(colorWellStyle ColorWellStyle)
 	Image() *Image
-	SetImage(image *raw.NSImage)
-	PulldownTarget() objc.ID
-	SetPulldownTarget(pulldownTarget objc.ID)
-	PulldownAction() objc.SEL
-	SetPulldownAction(pulldownAction objc.SEL)
+	SetImage(image *Image)
+	PulldownTarget() obj.Object
+	SetPulldownTarget(pulldownTarget obj.Object)
 	SupportsAlpha() bool
 	SetSupportsAlpha(supportsAlpha bool)
 	MaximumLinearExposure() float64
@@ -909,3 +739,9 @@ type ColorWellable interface {
 }
 
 var _ ColorWellable = (*ColorWell)(nil)
+
+var _ ControlProvider = (*ColorWell)(nil)
+
+var _ ViewProvider = (*ColorWell)(nil)
+
+var _ ResponderProvider = (*ColorWell)(nil)

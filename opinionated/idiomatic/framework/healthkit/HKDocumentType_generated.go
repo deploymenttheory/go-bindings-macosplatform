@@ -5,45 +5,60 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A sample type used to create queries for documents.
+// DocumentType is an idiomatic wrapper over the Objective-C class HKDocumentType.
 //
-// DocumentType wraps [raw.HKDocumentType] with a fluent Go API.
+// It embeds [SampleType], promoting that type's methods.
+//
+// A sample type used to create queries for documents.
 type DocumentType struct {
-	inner *raw.HKDocumentType
+	SampleType
 }
 
-// Unwrap returns the underlying [raw.HKDocumentType].
-func (x *DocumentType) Unwrap() *raw.HKDocumentType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DocumentType) ID() objc.ID { return x.inner.Ptr() }
-
-// DocumentTypeFromID adopts an existing object pointer as a DocumentType (nil for 0).
+// DocumentTypeFromID adopts an existing Objective-C object as a DocumentType
+// (nil for 0), retaining it and registering a release finalizer.
 func DocumentTypeFromID(id objc.ID) *DocumentType {
 	if id == 0 {
 		return nil
 	}
-	return &DocumentType{inner: raw.HKDocumentTypeFromID(id)}
+	x := &DocumentType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewDocumentType creates a new [DocumentType].
+// documentTypeAdopt wraps an Objective-C object that this code just created as a
+// DocumentType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func documentTypeAdopt(id objc.ID) *DocumentType {
+	if id == 0 {
+		return nil
+	}
+	x := &DocumentType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewDocumentType creates a new DocumentType.
 func NewDocumentType() *DocumentType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDocumentType")), objc.RegisterName("new"))
-	return &DocumentType{inner: raw.HKDocumentTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKDocumentType")), objc.RegisterName("new"))
+	return documentTypeAdopt(_id)
 }
-
-func (x *DocumentType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *DocumentType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // DocumentTypeable is the interface implemented by [DocumentType], for mocking and DI.
 type DocumentTypeable interface {
-	Unwrap() *raw.HKDocumentType
+	obj.Object
 }
 
 var _ DocumentTypeable = (*DocumentType)(nil)
+
+var _ SampleTypeProvider = (*DocumentType)(nil)
+
+var _ ObjectTypeProvider = (*DocumentType)(nil)

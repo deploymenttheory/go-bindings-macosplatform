@@ -5,105 +5,126 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
+// GeometrySource is an idiomatic wrapper over the Objective-C class SCNGeometrySource.
 //
-// GeometrySource wraps [raw.SCNGeometrySource] with a fluent Go API.
+// A container for vertex data forming part of the definition for a three-dimensional object, or geometry.
 type GeometrySource struct {
-	inner *raw.SCNGeometrySource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNGeometrySource].
-func (x *GeometrySource) Unwrap() *raw.SCNGeometrySource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GeometrySource) ID() objc.ID { return x.inner.Ptr() }
-
-// GeometrySourceFromID adopts an existing object pointer as a GeometrySource (nil for 0).
+// GeometrySourceFromID adopts an existing Objective-C object as a GeometrySource
+// (nil for 0), retaining it and registering a release finalizer.
 func GeometrySourceFromID(id objc.ID) *GeometrySource {
 	if id == 0 {
 		return nil
 	}
-	return &GeometrySource{inner: raw.SCNGeometrySourceFromID(id)}
+	x := &GeometrySource{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewGeometrySource creates a new [GeometrySource].
-func NewGeometrySource() *GeometrySource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNGeometrySource")), objc.RegisterName("new"))
-	return &GeometrySource{inner: raw.SCNGeometrySourceFromID(_id)}
-}
-
-// @property data @abstract The data for the geometry source
-//
-// Data calls the underlying Data.
-func (x *GeometrySource) Data() *foundation.NSData {
-	return x.inner.Data()
-}
-
-// @property semantic @abstract The semantic of the geometry source
-//
-// Semantic calls the underlying Semantic.
-func (x *GeometrySource) Semantic() string {
-	_r := x.inner.Semantic()
-	if _r == nil {
-		return ""
+// geometrySourceAdopt wraps an Objective-C object that this code just created as a
+// GeometrySource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func geometrySourceAdopt(id objc.ID) *GeometrySource {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &GeometrySource{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// @property vectorCount @abstract The number of vectors in the data.
-//
-// VectorCount calls the underlying VectorCount.
+// Description returns the object's -description text.
+func (x *GeometrySource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GeometrySource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GeometrySource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *GeometrySource) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewGeometrySource creates a new GeometrySource.
+func NewGeometrySource() *GeometrySource {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("new"))
+	return geometrySourceAdopt(_id)
+}
+
+// Data the data for the geometry source
+func (x *GeometrySource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+// Semantic the semantic of the geometry source
+func (x *GeometrySource) Semantic() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("semantic"))
+	return obj.Wrap(_r)
+}
+
+// VectorCount the number of vectors in the data.
 func (x *GeometrySource) VectorCount() int {
-	return x.inner.VectorCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorCount"))
+	return _r
 }
 
-// @property floatComponents @abstract A flag that indicates if vector components are floating point values.
-//
-// FloatComponents calls the underlying FloatComponents.
+// FloatComponents a flag that indicates if vector components are floating point values.
 func (x *GeometrySource) FloatComponents() bool {
-	return x.inner.FloatComponents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("floatComponents"))
+	return _r
 }
 
-// @property componentsPerVector @abstract The number of scalar components in each vector.
-//
-// ComponentsPerVector calls the underlying ComponentsPerVector.
+// ComponentsPerVector the number of scalar components in each vector.
 func (x *GeometrySource) ComponentsPerVector() int {
-	return x.inner.ComponentsPerVector()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("componentsPerVector"))
+	return _r
 }
 
-// @property bytesPerComponent @abstract The size of a vector component in bytes.
-//
-// BytesPerComponent calls the underlying BytesPerComponent.
+// BytesPerComponent the size of a vector component in bytes.
 func (x *GeometrySource) BytesPerComponent() int {
-	return x.inner.BytesPerComponent()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerComponent"))
+	return _r
 }
 
-// @property dataOffset @abstract The offset from the beginning of the data. In bytes.
-//
-// DataOffset calls the underlying DataOffset.
+// DataOffset the offset from the beginning of the data. In bytes.
 func (x *GeometrySource) DataOffset() int {
-	return x.inner.DataOffset()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataOffset"))
+	return _r
 }
 
-// @property dataStride @abstract The number of bytes from a vector to the next one in the data.
-//
-// DataStride calls the underlying DataStride.
+// DataStride the number of bytes from a vector to the next one in the data.
 func (x *GeometrySource) DataStride() int {
-	return x.inner.DataStride()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStride"))
+	return _r
 }
 
 // GeometrySourceable is the interface implemented by [GeometrySource], for mocking and DI.
 type GeometrySourceable interface {
-	Unwrap() *raw.SCNGeometrySource
-	Data() *foundation.NSData
-	Semantic() string
+	obj.Object
+	Data() obj.Object
+	Semantic() obj.Object
 	VectorCount() int
 	FloatComponents() bool
 	ComponentsPerVector() int

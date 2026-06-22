@@ -5,302 +5,163 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.
+// Script is an idiomatic wrapper over the Objective-C class CNScript.
 //
-// Script wraps [raw.CNScript] with a fluent Go API.
+// A collection of focus decisions, focus transitions, detections, and detection tracks associated with a movie captured in Cinematic mode and methods to change them.
 type Script struct {
-	inner *raw.CNScript
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNScript].
-func (x *Script) Unwrap() *raw.CNScript { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Script) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptFromID adopts an existing object pointer as a Script (nil for 0).
+// ScriptFromID adopts an existing Objective-C object as a Script
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptFromID(id objc.ID) *Script {
 	if id == 0 {
 		return nil
 	}
-	return &Script{inner: raw.CNScriptFromID(id)}
-}
-
-// NewScript creates a new [Script].
-func NewScript() *Script {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNScript")), objc.RegisterName("new"))
-	return &Script{inner: raw.CNScriptFromID(_id)}
-}
-
-// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
-//
-// WithFNumber sets the fNumber property and returns the receiver for chaining.
-func (x *Script) WithFNumber(fNumber float32) *Script {
-	x.inner.SetFNumber(fNumber)
+	x := &Script{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
 	return x
 }
 
-// Reload the cinematic script with optional changes applied, removing any previous changes made. This can be more efficient than loading the asset from scratch. - Parameters: - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is reloaded as originally recorded.
-//
-// ReloadWithChanges calls the underlying ReloadWithChanges.
-func (x *Script) ReloadWithChanges(changes *raw.CNScriptChanges) {
-	x.inner.ReloadWithChanges(changes)
+// scriptAdopt wraps an Objective-C object that this code just created as a
+// Script (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptAdopt(id objc.ID) *Script {
+	if id == 0 {
+		return nil
+	}
+	x := &Script{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
-//
-// Changes calls the underlying Changes.
+// Description returns the object's -description text.
+func (x *Script) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Script) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Script) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *Script) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewScript creates a new Script.
+func NewScript() *Script {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNScript")), objc.RegisterName("new"))
+	return scriptAdopt(_id)
+}
+
+// WithFNumber the f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
+func (x *Script) WithFNumber(fNumber float32) *Script {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
+	return x
+}
+
+// ReloadWithChanges reload the cinematic script with optional changes applied, removing any previous changes made. This can be more efficient than loading the asset from scratch. - Parameters: - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is reloaded as originally recorded.
+func (x *Script) ReloadWithChanges(changes *ScriptChanges) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadWithChanges:"), objref.IDOf(changes))
+}
+
+// Changes changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
 func (x *Script) Changes() *ScriptChanges {
-	_r := x.inner.Changes()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptChanges{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
+	return ScriptChangesFromID(_r)
 }
 
-// Changes trimmed and time range shifted to start at zero — for use with a similarly trimmed cinematic asset.
-//
-// ChangesTrimmedByTimeRange calls the underlying ChangesTrimmedByTimeRange.
-func (x *Script) ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *ScriptChanges {
-	_r := x.inner.ChangesTrimmedByTimeRange(timeRange)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptChanges{inner: _r}
-}
-
-// The closest frame to the given time within the given tolerance. Returns `nil` if there are none.
-//
-// FrameAtTimeTolerance calls the underlying FrameAtTimeTolerance.
-func (x *Script) FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *ScriptFrame {
-	_r := x.inner.FrameAtTimeTolerance(time_, tolerance)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptFrame{inner: _r}
-}
-
-// All frames within the given time range.
-//
-// FramesInTimeRange calls the underlying FramesInTimeRange.
-func (x *Script) FramesInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNScriptFrame] {
-	return x.inner.FramesInTimeRange(timeRange)
-}
-
-// The closest decision to the given time within the given tolerance. Returns `nil` if there are none.
-//
-// DecisionAtTimeTolerance calls the underlying DecisionAtTimeTolerance.
-func (x *Script) DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *Decision {
-	_r := x.inner.DecisionAtTimeTolerance(time_, tolerance)
-	if _r == nil {
-		return nil
-	}
-	return &Decision{inner: _r}
-}
-
-// All decisions within the given time range.
-//
-// DecisionsInTimeRange calls the underlying DecisionsInTimeRange.
-func (x *Script) DecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
-	return x.inner.DecisionsInTimeRange(timeRange)
-}
-
-// The decision that occurs after the given time. Pass the time of an existing decision to find the next one.
-//
-// DecisionAfterTime calls the underlying DecisionAfterTime.
-func (x *Script) DecisionAfterTime(time_ coremedia.CMTime) *Decision {
-	_r := x.inner.DecisionAfterTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Decision{inner: _r}
-}
-
-// The decision that occurs before the given time. Pass the time of an existing decisions to find the previous one.
-//
-// DecisionBeforeTime calls the underlying DecisionBeforeTime.
-func (x *Script) DecisionBeforeTime(time_ coremedia.CMTime) *Decision {
-	_r := x.inner.DecisionBeforeTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Decision{inner: _r}
-}
-
-// The primary decision that is in effect at the specified time, unless if it's outside the time range of the cinematic script. Also represents the decision that is being transitioned away from if the given time is during a focus transition.
-//
-// PrimaryDecisionAtTime calls the underlying PrimaryDecisionAtTime.
-func (x *Script) PrimaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
-	_r := x.inner.PrimaryDecisionAtTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Decision{inner: _r}
-}
-
-// The secondary decision that is being transitioned towards if the given time is during a focus transition.
-//
-// SecondaryDecisionAtTime calls the underlying SecondaryDecisionAtTime.
-func (x *Script) SecondaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
-	_r := x.inner.SecondaryDecisionAtTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Decision{inner: _r}
-}
-
-// The time range during which the focus transition away from the given decision occurs.
-//
-// TimeRangeOfTransitionAfterDecision calls the underlying TimeRangeOfTransitionAfterDecision.
-func (x *Script) TimeRangeOfTransitionAfterDecision(decision *raw.CNDecision) coremedia.CMTimeRange {
-	return x.inner.TimeRangeOfTransitionAfterDecision(decision)
-}
-
-// The time range during which the focus transition towards the given decision occurs.
-//
-// TimeRangeOfTransitionBeforeDecision calls the underlying TimeRangeOfTransitionBeforeDecision.
-func (x *Script) TimeRangeOfTransitionBeforeDecision(decision *raw.CNDecision) coremedia.CMTimeRange {
-	return x.inner.TimeRangeOfTransitionBeforeDecision(decision)
-}
-
-// All user decisions in the given time range. Includes user decisions made during recording or added to the script.
-//
-// UserDecisionsInTimeRange calls the underlying UserDecisionsInTimeRange.
-func (x *Script) UserDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
-	return x.inner.UserDecisionsInTimeRange(timeRange)
-}
-
-// All base decisions made automatically during recording in the given time range. These apply if no user decision overrides them.
-//
-// BaseDecisionsInTimeRange calls the underlying BaseDecisionsInTimeRange.
-func (x *Script) BaseDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
-	return x.inner.BaseDecisionsInTimeRange(timeRange)
-}
-
-// A detection track representing all detections with the given detectionID over the entire cinematic script.
-//
-// DetectionTrackForID calls the underlying DetectionTrackForID.
+// DetectionTrackForID a detection track representing all detections with the given detectionID over the entire cinematic script.
 func (x *Script) DetectionTrackForID(detectionID int64) *DetectionTrack {
-	_r := x.inner.DetectionTrackForID(detectionID)
-	if _r == nil {
-		return nil
-	}
-	return &DetectionTrack{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionTrackForID:"), detectionID)
+	return DetectionTrackFromID(_r)
 }
 
-// A detection track representing all detections that would be chosen by a given decision.
-//
-// DetectionTrackForDecision calls the underlying DetectionTrackForDecision.
-func (x *Script) DetectionTrackForDecision(decision *raw.CNDecision) *DetectionTrack {
-	_r := x.inner.DetectionTrackForDecision(decision)
-	if _r == nil {
-		return nil
-	}
-	return &DetectionTrack{inner: _r}
+// DetectionTrackForDecision a detection track representing all detections that would be chosen by a given decision.
+func (x *Script) DetectionTrackForDecision(decision *Decision) *DetectionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionTrackForDecision:"), objref.IDOf(decision))
+	return DetectionTrackFromID(_r)
 }
 
-// Add a new user decision. Replaces an existing user decision if the times are identical. Adding a decision can fail if the decision focuses on an detection or group that does not exist or if its time is not within the time range of the cinematic script. - Returns: whether adding was successful
-//
-// AddUserDecision calls the underlying AddUserDecision.
-func (x *Script) AddUserDecision(decision *raw.CNDecision) bool {
-	return x.inner.AddUserDecision(decision)
+// AddUserDecision add a new user decision. Replaces an existing user decision if the times are identical. Adding a decision can fail if the decision focuses on an detection or group that does not exist or if its time is not within the time range of the cinematic script. - Returns: whether adding was successful
+func (x *Script) AddUserDecision(decision *Decision) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addUserDecision:"), objref.IDOf(decision))
+	return _r
 }
 
-// Remove an existing user decision. User decisions added to the script or those made at recording time (by tapping during recording) can be removed. Decisions that are not user decisions cannot be removed. - Returns: whether removal was successful
-//
-// RemoveUserDecision calls the underlying RemoveUserDecision.
-func (x *Script) RemoveUserDecision(decision *raw.CNDecision) bool {
-	return x.inner.RemoveUserDecision(decision)
+// RemoveUserDecision remove an existing user decision. User decisions added to the script or those made at recording time (by tapping during recording) can be removed. Decisions that are not user decisions cannot be removed. - Returns: whether removal was successful
+func (x *Script) RemoveUserDecision(decision *Decision) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeUserDecision:"), objref.IDOf(decision))
+	return _r
 }
 
-// Remove all user decisions and revert to base decisions only.
-//
-// RemoveAllUserDecisions calls the underlying RemoveAllUserDecisions.
+// RemoveAllUserDecisions remove all user decisions and revert to base decisions only.
 func (x *Script) RemoveAllUserDecisions() {
-	x.inner.RemoveAllUserDecisions()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllUserDecisions"))
 }
 
-// Add user created detection track. - Returns: the detectionID assigned to the added track, which can be used for later lookup or decision creation.
-//
-// AddDetectionTrack calls the underlying AddDetectionTrack.
-func (x *Script) AddDetectionTrack(detectionTrack *raw.CNDetectionTrack) int64 {
-	return x.inner.AddDetectionTrack(detectionTrack)
+// AddDetectionTrack add user created detection track. - Returns: the detectionID assigned to the added track, which can be used for later lookup or decision creation.
+func (x *Script) AddDetectionTrack(detectionTrack *DetectionTrack) int64 {
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("addDetectionTrack:"), objref.IDOf(detectionTrack))
+	return _r
 }
 
-// Remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
-//
-// RemoveDetectionTrack calls the underlying RemoveDetectionTrack.
-func (x *Script) RemoveDetectionTrack(detectionTrack *raw.CNDetectionTrack) bool {
-	return x.inner.RemoveDetectionTrack(detectionTrack)
+// RemoveDetectionTrack remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
+func (x *Script) RemoveDetectionTrack(detectionTrack *DetectionTrack) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeDetectionTrack:"), objref.IDOf(detectionTrack))
+	return _r
 }
 
-// The time range of the cinematic asset. All frames, decisions, and detections are within this time range.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *Script) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
-//
-// FNumber calls the underlying FNumber.
+// FNumber the f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
 func (x *Script) FNumber() float32 {
-	return x.inner.FNumber()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
+	return _r
 }
 
-// SetFNumber calls the underlying SetFNumber.
+// SetFNumber wraps the corresponding Objective-C method.
 func (x *Script) SetFNumber(fNumber float32) {
-	x.inner.SetFNumber(fNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 }
 
-// All detection tracks that have been added since recording.
+// AddedDetectionTracks all detection tracks that have been added since recording.
 //
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *Script) AddedDetectionTracks() []*DetectionTrack {
-	arr := x.inner.AddedDetectionTracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DetectionTrack {
-		return &DetectionTrack{inner: raw.CNDetectionTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDetectionTracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DetectionTrack { return DetectionTrackFromID(_id) })
 }
 
 // Scriptable is the interface implemented by [Script], for mocking and DI.
 type Scriptable interface {
-	Unwrap() *raw.CNScript
+	obj.Object
 	WithFNumber(fNumber float32) *Script
-	ReloadWithChanges(changes *raw.CNScriptChanges)
+	ReloadWithChanges(changes *ScriptChanges)
 	Changes() *ScriptChanges
-	ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *ScriptChanges
-	FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *ScriptFrame
-	FramesInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNScriptFrame]
-	DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *Decision
-	DecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision]
-	DecisionAfterTime(time_ coremedia.CMTime) *Decision
-	DecisionBeforeTime(time_ coremedia.CMTime) *Decision
-	PrimaryDecisionAtTime(time_ coremedia.CMTime) *Decision
-	SecondaryDecisionAtTime(time_ coremedia.CMTime) *Decision
-	TimeRangeOfTransitionAfterDecision(decision *raw.CNDecision) coremedia.CMTimeRange
-	TimeRangeOfTransitionBeforeDecision(decision *raw.CNDecision) coremedia.CMTimeRange
-	UserDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision]
-	BaseDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision]
 	DetectionTrackForID(detectionID int64) *DetectionTrack
-	DetectionTrackForDecision(decision *raw.CNDecision) *DetectionTrack
-	AddUserDecision(decision *raw.CNDecision) bool
-	RemoveUserDecision(decision *raw.CNDecision) bool
+	DetectionTrackForDecision(decision *Decision) *DetectionTrack
+	AddUserDecision(decision *Decision) bool
+	RemoveUserDecision(decision *Decision) bool
 	RemoveAllUserDecisions()
-	AddDetectionTrack(detectionTrack *raw.CNDetectionTrack) int64
-	RemoveDetectionTrack(detectionTrack *raw.CNDetectionTrack) bool
-	TimeRange() coremedia.CMTimeRange
+	AddDetectionTrack(detectionTrack *DetectionTrack) int64
+	RemoveDetectionTrack(detectionTrack *DetectionTrack) bool
 	FNumber() float32
 	SetFNumber(fNumber float32)
 	AddedDetectionTracks() []*DetectionTrack

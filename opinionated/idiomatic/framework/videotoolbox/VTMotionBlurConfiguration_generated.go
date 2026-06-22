@@ -5,116 +5,135 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A configuration object to enable motion blur on a frame processing session.
+// MotionBlurConfiguration is an idiomatic wrapper over the Objective-C class VTMotionBlurConfiguration.
 //
-// MotionBlurConfiguration wraps [raw.VTMotionBlurConfiguration] with a fluent Go API.
+// A configuration object to enable motion blur on a frame processing session.
 type MotionBlurConfiguration struct {
-	inner *raw.VTMotionBlurConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTMotionBlurConfiguration].
-func (x *MotionBlurConfiguration) Unwrap() *raw.VTMotionBlurConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MotionBlurConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MotionBlurConfigurationFromID adopts an existing object pointer as a MotionBlurConfiguration (nil for 0).
+// MotionBlurConfigurationFromID adopts an existing Objective-C object as a MotionBlurConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MotionBlurConfigurationFromID(id objc.ID) *MotionBlurConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(id)}
+	x := &MotionBlurConfiguration{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates a new motion blur configuration with specified flow width and height.
-//
-// NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [MotionBlurConfiguration].
-func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTMotionBlurConfigurationQualityPrioritization, revision VTMotionBlurConfigurationRevision) *MotionBlurConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTMotionBlurConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, raw.VTMotionBlurConfigurationQualityPrioritization(qualityPrioritization), raw.VTMotionBlurConfigurationRevision(revision))
-	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(_id)}
-}
-
-// Width of source frame in pixels.
-//
-// FrameWidth calls the underlying FrameWidth.
-func (x *MotionBlurConfiguration) FrameWidth() int {
-	return x.inner.FrameWidth()
-}
-
-// Height of source frame in pixels.
-//
-// FrameHeight calls the underlying FrameHeight.
-func (x *MotionBlurConfiguration) FrameHeight() int {
-	return x.inner.FrameHeight()
-}
-
-// Indicates that you provide optical flow.
-//
-// UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
-func (x *MotionBlurConfiguration) UsePrecomputedFlow() bool {
-	return x.inner.UsePrecomputedFlow()
-}
-
-// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“.
-//
-// QualityPrioritization calls the underlying QualityPrioritization.
-func (x *MotionBlurConfiguration) QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization {
-	return VTMotionBlurConfigurationQualityPrioritization(x.inner.QualityPrioritization())
-}
-
-// The specific algorithm or configuration revision you use to perform the request.
-//
-// Revision calls the underlying Revision.
-func (x *MotionBlurConfiguration) Revision() VTMotionBlurConfigurationRevision {
-	return VTMotionBlurConfigurationRevision(x.inner.Revision())
-}
-
-// Available supported pixel formats for source frames for current configuration.
-//
-// FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *MotionBlurConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
-	arr := x.inner.FrameSupportedPixelFormats()
-	if arr == nil {
+// motionBlurConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MotionBlurConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func motionBlurConfigurationAdopt(id objc.ID) *MotionBlurConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &MotionBlurConfiguration{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-//
-// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
-func (x *MotionBlurConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.SourcePixelBufferAttributes()
+// Description returns the object's -description text.
+func (x *MotionBlurConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MotionBlurConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MotionBlurConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MotionBlurConfiguration) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new motion blur configuration with specified flow width and height.
+func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization MotionBlurConfigurationQualityPrioritization, revision MotionBlurConfigurationRevision) *MotionBlurConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
+	return motionBlurConfigurationAdopt(_id)
+}
+
+// FrameWidth width of source frame in pixels.
+func (x *MotionBlurConfiguration) FrameWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+	return _r
+}
+
+// FrameHeight height of source frame in pixels.
+func (x *MotionBlurConfiguration) FrameHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+	return _r
+}
+
+// UsePrecomputedFlow indicates that you provide optical flow.
+func (x *MotionBlurConfiguration) UsePrecomputedFlow() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usePrecomputedFlow"))
+	return _r
+}
+
+// QualityPrioritization a parameter you use to control quality and performance levels. For more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“.
+func (x *MotionBlurConfiguration) QualityPrioritization() MotionBlurConfigurationQualityPrioritization {
+	_r := objc.Send[MotionBlurConfigurationQualityPrioritization](objref.IDOf(x), objc.RegisterName("qualityPrioritization"))
+	return _r
+}
+
+// Revision the specific algorithm or configuration revision you use to perform the request.
+func (x *MotionBlurConfiguration) Revision() MotionBlurConfigurationRevision {
+	_r := objc.Send[MotionBlurConfigurationRevision](objref.IDOf(x), objc.RegisterName("revision"))
+	return _r
+}
+
+// FrameSupportedPixelFormats available supported pixel formats for source frames for current configuration.
 //
-// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
-func (x *MotionBlurConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DestinationPixelBufferAttributes()
+// FrameSupportedPixelFormats returns the collection as a Go slice.
+func (x *MotionBlurConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (x *MotionBlurConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+	return obj.Wrap(_r)
+}
+
+// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (x *MotionBlurConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+	return obj.Wrap(_r)
 }
 
 // MotionBlurConfigurationable is the interface implemented by [MotionBlurConfiguration], for mocking and DI.
 type MotionBlurConfigurationable interface {
-	Unwrap() *raw.VTMotionBlurConfiguration
+	obj.Object
 	FrameWidth() int
 	FrameHeight() int
 	UsePrecomputedFlow() bool
-	QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization
-	Revision() VTMotionBlurConfigurationRevision
-	FrameSupportedPixelFormats() []*foundation.NSNumber
-	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	QualityPrioritization() MotionBlurConfigurationQualityPrioritization
+	Revision() MotionBlurConfigurationRevision
+	FrameSupportedPixelFormats() []obj.Object
+	SourcePixelBufferAttributes() obj.Object
+	DestinationPixelBufferAttributes() obj.Object
 }
 
 var _ MotionBlurConfigurationable = (*MotionBlurConfiguration)(nil)

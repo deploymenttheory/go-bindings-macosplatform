@@ -5,47 +5,60 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// A type that identifies samples containing electrocardiogram data.
+// ElectrocardiogramType is an idiomatic wrapper over the Objective-C class HKElectrocardiogramType.
 //
-// ElectrocardiogramType wraps [raw.HKElectrocardiogramType] with a fluent Go API.
+// It embeds [SampleType], promoting that type's methods.
+//
+// A type that identifies samples containing electrocardiogram data.
 type ElectrocardiogramType struct {
-	inner *raw.HKElectrocardiogramType
+	SampleType
 }
 
-// Unwrap returns the underlying [raw.HKElectrocardiogramType].
-func (x *ElectrocardiogramType) Unwrap() *raw.HKElectrocardiogramType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ElectrocardiogramType) ID() objc.ID { return x.inner.Ptr() }
-
-// ElectrocardiogramTypeFromID adopts an existing object pointer as a ElectrocardiogramType (nil for 0).
+// ElectrocardiogramTypeFromID adopts an existing Objective-C object as a ElectrocardiogramType
+// (nil for 0), retaining it and registering a release finalizer.
 func ElectrocardiogramTypeFromID(id objc.ID) *ElectrocardiogramType {
 	if id == 0 {
 		return nil
 	}
-	return &ElectrocardiogramType{inner: raw.HKElectrocardiogramTypeFromID(id)}
+	x := &ElectrocardiogramType{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewElectrocardiogramType creates a new [ElectrocardiogramType].
+// electrocardiogramTypeAdopt wraps an Objective-C object that this code just created as a
+// ElectrocardiogramType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func electrocardiogramTypeAdopt(id objc.ID) *ElectrocardiogramType {
+	if id == 0 {
+		return nil
+	}
+	x := &ElectrocardiogramType{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// NewElectrocardiogramType creates a new ElectrocardiogramType.
 func NewElectrocardiogramType() *ElectrocardiogramType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKElectrocardiogramType")), objc.RegisterName("new"))
-	return &ElectrocardiogramType{inner: raw.HKElectrocardiogramTypeFromID(_id)}
-}
-
-func (x *ElectrocardiogramType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *ElectrocardiogramType) asObjectType() *raw.HKObjectType {
-	return &x.inner.HKSampleType.HKObjectType
+	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramType")), objc.RegisterName("new"))
+	return electrocardiogramTypeAdopt(_id)
 }
 
 // ElectrocardiogramTypeable is the interface implemented by [ElectrocardiogramType], for mocking and DI.
 type ElectrocardiogramTypeable interface {
-	Unwrap() *raw.HKElectrocardiogramType
+	obj.Object
 }
 
 var _ ElectrocardiogramTypeable = (*ElectrocardiogramType)(nil)
+
+var _ SampleTypeProvider = (*ElectrocardiogramType)(nil)
+
+var _ ObjectTypeProvider = (*ElectrocardiogramType)(nil)

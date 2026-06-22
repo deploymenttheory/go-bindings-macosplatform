@@ -5,87 +5,116 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Groups together parameters for configuring a counter heap object at creation time.
+// MTL4CounterHeapDescriptor is an idiomatic wrapper over the Objective-C class MTL4CounterHeapDescriptor.
 //
-// MTL4CounterHeapDescriptor wraps [raw.MTL4CounterHeapDescriptor] with a fluent Go API.
+// Groups together parameters for configuring a counter heap object at creation time.
 type MTL4CounterHeapDescriptor struct {
-	inner *raw.MTL4CounterHeapDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CounterHeapDescriptor].
-func (x *MTL4CounterHeapDescriptor) Unwrap() *raw.MTL4CounterHeapDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CounterHeapDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CounterHeapDescriptorFromID adopts an existing object pointer as a MTL4CounterHeapDescriptor (nil for 0).
+// MTL4CounterHeapDescriptorFromID adopts an existing Objective-C object as a MTL4CounterHeapDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CounterHeapDescriptorFromID(id objc.ID) *MTL4CounterHeapDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CounterHeapDescriptor{inner: raw.MTL4CounterHeapDescriptorFromID(id)}
+	x := &MTL4CounterHeapDescriptor{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4CounterHeapDescriptor creates a new [MTL4CounterHeapDescriptor].
+// mTL4CounterHeapDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4CounterHeapDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CounterHeapDescriptorAdopt(id objc.ID) *MTL4CounterHeapDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CounterHeapDescriptor{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4CounterHeapDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CounterHeapDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CounterHeapDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *MTL4CounterHeapDescriptor) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewMTL4CounterHeapDescriptor creates a new MTL4CounterHeapDescriptor.
 func NewMTL4CounterHeapDescriptor() *MTL4CounterHeapDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CounterHeapDescriptor")), objc.RegisterName("new"))
-	return &MTL4CounterHeapDescriptor{inner: raw.MTL4CounterHeapDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CounterHeapDescriptor")), objc.RegisterName("new"))
+	return mTL4CounterHeapDescriptorAdopt(_id)
 }
 
-// Assigns the type of data that the heap contains.
-//
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType assigns the type of data that the heap contains.
 func (x *MTL4CounterHeapDescriptor) WithType(type_ MTL4CounterHeapType) *MTL4CounterHeapDescriptor {
-	x.inner.SetType(raw.MTL4CounterHeapType(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// Assigns the number of entries in the heap.
-//
-// WithCount sets the count property and returns the receiver for chaining.
-func (x *MTL4CounterHeapDescriptor) WithCount(count uint) *MTL4CounterHeapDescriptor {
-	x.inner.SetCount(count)
+// WithCount assigns the number of entries in the heap.
+func (x *MTL4CounterHeapDescriptor) WithCount(count int) *MTL4CounterHeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
 	return x
 }
 
-// Assigns the type of data that the heap contains.
-//
-// Type calls the underlying Type.
+// Type assigns the type of data that the heap contains.
 func (x *MTL4CounterHeapDescriptor) Type() MTL4CounterHeapType {
-	return MTL4CounterHeapType(x.inner.Type())
+	_r := objc.Send[MTL4CounterHeapType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
+// SetType wraps the corresponding Objective-C method.
 func (x *MTL4CounterHeapDescriptor) SetType(type_ MTL4CounterHeapType) {
-	x.inner.SetType(raw.MTL4CounterHeapType(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// Assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
-//
-// Count calls the underlying Count.
-func (x *MTL4CounterHeapDescriptor) Count() uint {
-	return x.inner.Count()
+// Count assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
+func (x *MTL4CounterHeapDescriptor) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// SetCount calls the underlying SetCount.
-func (x *MTL4CounterHeapDescriptor) SetCount(count uint) {
-	x.inner.SetCount(count)
+// SetCount wraps the corresponding Objective-C method.
+func (x *MTL4CounterHeapDescriptor) SetCount(count int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), count)
 }
 
 // MTL4CounterHeapDescriptorable is the interface implemented by [MTL4CounterHeapDescriptor], for mocking and DI.
 type MTL4CounterHeapDescriptorable interface {
-	Unwrap() *raw.MTL4CounterHeapDescriptor
+	obj.Object
 	WithType(type_ MTL4CounterHeapType) *MTL4CounterHeapDescriptor
-	WithCount(count uint) *MTL4CounterHeapDescriptor
+	WithCount(count int) *MTL4CounterHeapDescriptor
 	Type() MTL4CounterHeapType
 	SetType(type_ MTL4CounterHeapType)
-	Count() uint
-	SetCount(count uint)
+	Count() int
+	SetCount(count int)
 }
 
 var _ MTL4CounterHeapDescriptorable = (*MTL4CounterHeapDescriptor)(nil)

@@ -5,53 +5,66 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents MIDI meta event messages.
+// MIDIMetaEvent is an idiomatic wrapper over the Objective-C class AVMIDIMetaEvent.
 //
-// MIDIMetaEvent wraps [raw.AVMIDIMetaEvent] with a fluent Go API.
+// It embeds [MusicEvent], promoting that type's methods.
+//
+// An object that represents MIDI meta event messages.
 type MIDIMetaEvent struct {
-	inner *raw.AVMIDIMetaEvent
+	MusicEvent
 }
 
-// Unwrap returns the underlying [raw.AVMIDIMetaEvent].
-func (x *MIDIMetaEvent) Unwrap() *raw.AVMIDIMetaEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIMetaEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIMetaEventFromID adopts an existing object pointer as a MIDIMetaEvent (nil for 0).
+// MIDIMetaEventFromID adopts an existing Objective-C object as a MIDIMetaEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(id)}
+	x := &MIDIMetaEvent{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// Creates an event with a MIDI meta event type and data.
-//
-// NewMIDIMetaEventWithTypeData creates a new [MIDIMetaEvent].
-func NewMIDIMetaEventWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), raw.AVMIDIMetaEventType(type_), data.Ptr())
-	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(_id)}
+// mIDIMetaEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIMetaEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIMetaEventAdopt(id objc.ID) *MIDIMetaEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIMetaEvent{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
 }
 
-// Type calls the underlying Type.
-func (x *MIDIMetaEvent) Type() AVMIDIMetaEventType {
-	return AVMIDIMetaEventType(x.inner.Type())
+// NewMIDIMetaEventWithTypeData creates an event with a MIDI meta event type and data.
+func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MIDIMetaEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
+	return mIDIMetaEventAdopt(_id)
 }
 
-func (x *MIDIMetaEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+// Type wraps the corresponding Objective-C method.
+func (x *MIDIMetaEvent) Type() MIDIMetaEventType {
+	_r := objc.Send[MIDIMetaEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
 
 // MIDIMetaEventable is the interface implemented by [MIDIMetaEvent], for mocking and DI.
 type MIDIMetaEventable interface {
-	Unwrap() *raw.AVMIDIMetaEvent
-	Type() AVMIDIMetaEventType
+	obj.Object
+	Type() MIDIMetaEventType
 }
 
 var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)
+
+var _ MusicEventProvider = (*MIDIMetaEvent)(nil)

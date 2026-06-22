@@ -5,66 +5,97 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object representing a bucket of data in a histogram.
+// HistogramBucket is an idiomatic wrapper over the Objective-C class MXHistogramBucket.
 //
-// HistogramBucket wraps [raw.MXHistogramBucket] with a fluent Go API.
+// An object representing a bucket of data in a histogram.
 type HistogramBucket struct {
-	inner *raw.MXHistogramBucket[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXHistogramBucket].
-func (x *HistogramBucket) Unwrap() *raw.MXHistogramBucket[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HistogramBucket) ID() objc.ID { return x.inner.Ptr() }
-
-// HistogramBucketFromID adopts an existing object pointer as a HistogramBucket (nil for 0).
+// HistogramBucketFromID adopts an existing Objective-C object as a HistogramBucket
+// (nil for 0), retaining it and registering a release finalizer.
 func HistogramBucketFromID(id objc.ID) *HistogramBucket {
 	if id == 0 {
 		return nil
 	}
-	return &HistogramBucket{inner: raw.MXHistogramBucketFromID[objc.ID](id)}
+	x := &HistogramBucket{}
+	x.Handle = objref.Wrap(purego.Retain(id))
+	objref.Track(x)
+	return x
 }
 
-// NewHistogramBucket creates a new [HistogramBucket].
+// histogramBucketAdopt wraps an Objective-C object that this code just created as a
+// HistogramBucket (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func histogramBucketAdopt(id objc.ID) *HistogramBucket {
+	if id == 0 {
+		return nil
+	}
+	x := &HistogramBucket{}
+	x.Handle = objref.Wrap(id)
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HistogramBucket) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HistogramBucket) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HistogramBucket) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// String returns the object's -description text, so a wrapper prints usefully
+// under fmt.
+func (x *HistogramBucket) String() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// NewHistogramBucket creates a new HistogramBucket.
 func NewHistogramBucket() *HistogramBucket {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXHistogramBucket")), objc.RegisterName("new"))
-	return &HistogramBucket{inner: raw.MXHistogramBucketFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXHistogramBucket")), objc.RegisterName("new"))
+	return histogramBucketAdopt(_id)
 }
 
-// @property      bucketStart @abstract      An NSMeasurement representing the start of a histogram bucket.
-//
-// BucketStart calls the underlying BucketStart.
-func (x *HistogramBucket) BucketStart() *foundation.NSMeasurement[objc.ID] {
-	return x.inner.BucketStart()
+// BucketStart an NSMeasurement representing the start of a histogram bucket.
+func (x *HistogramBucket) BucketStart() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketStart"))
+	return obj.Wrap(_r)
 }
 
-// @property      bucketEnd @abstract      An NSMeasurement representing the end of a histogram bucket.
-//
-// BucketEnd calls the underlying BucketEnd.
-func (x *HistogramBucket) BucketEnd() *foundation.NSMeasurement[objc.ID] {
-	return x.inner.BucketEnd()
+// BucketEnd an NSMeasurement representing the end of a histogram bucket.
+func (x *HistogramBucket) BucketEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnd"))
+	return obj.Wrap(_r)
 }
 
-// @property      bucketCount @abstract      An NSUInteger representing the number of samples in this histogram bucket.
-//
-// BucketCount calls the underlying BucketCount.
-func (x *HistogramBucket) BucketCount() uint {
-	return x.inner.BucketCount()
+// BucketCount an NSUInteger representing the number of samples in this histogram bucket.
+func (x *HistogramBucket) BucketCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bucketCount"))
+	return _r
 }
 
 // HistogramBucketable is the interface implemented by [HistogramBucket], for mocking and DI.
 type HistogramBucketable interface {
-	Unwrap() *raw.MXHistogramBucket[objc.ID]
-	BucketStart() *foundation.NSMeasurement[objc.ID]
-	BucketEnd() *foundation.NSMeasurement[objc.ID]
-	BucketCount() uint
+	obj.Object
+	BucketStart() obj.Object
+	BucketEnd() obj.Object
+	BucketCount() int
 }
 
 var _ HistogramBucketable = (*HistogramBucket)(nil)
