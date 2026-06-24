@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.2](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.1...v0.11.2) (2026-06-24)
+
+
+### Bug Fixes
+
+* - mapper.go: new GoABIType(qt, goType) — walks the typedef chain and returns the C-faithful Go width (int32/uint32) for 32-bit C ints, leaving genuine 64-bit types (long, NSInteger, ssize_t) as int. ([#59](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/59)) ([597e684](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/597e68443b10c5cdda1e1375bcac70cad22e14d1))
+
 ## [0.11.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.0...v0.11.1) (2026-06-24)
 
 
