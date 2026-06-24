@@ -127,14 +127,13 @@ func AXObserverRemoveNotification(observer obj.Object, element obj.Object, notif
 var _fnAXTextMarkerCreate func(objc.ID, unsafe.Pointer, int) objc.ID
 
 // AXTextMarkerCreate calls the HIServices framework function AXTextMarkerCreate.
-func AXTextMarkerCreate(allocator obj.Object, length int) (result obj.Object, bytes_ uint8) {
+func AXTextMarkerCreate(allocator obj.Object, bytes_ unsafe.Pointer, length int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXTextMarkerCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerCreate, _lib, "AXTextMarkerCreate")
 	}
-	var _out0 uint8
-	_ret := _fnAXTextMarkerCreate(objref.IDOf(allocator), unsafe.Pointer(&_out0), length)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnAXTextMarkerCreate(objref.IDOf(allocator), bytes_, length)
+	return obj.Wrap(_ret)
 }
 
 var _fnAXTextMarkerGetLength func(objc.ID) int

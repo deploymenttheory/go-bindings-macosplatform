@@ -107,6 +107,37 @@ func buildCFuncRetSig(retType string, kind objKind, outNames []string, outs []vi
 	return " (" + strings.Join(parts, ", ") + ")"
 }
 
+// isArrayPointerParam reports whether the parameter at index i is a C array
+// passed as the "(T *items, size_t count)" idiom — a single pointer immediately
+// followed by a count parameter. Such a pointer is an INPUT the caller fills, so
+// it is passed through (as an unsafe.Pointer) rather than lifted into a return
+// value the way a true scalar out-parameter (e.g. uint64_t *value) is. Without
+// this, hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count) would wrongly turn
+// its input vcpus array into a returned value.
+func isArrayPointerParam(objcType string, params []meta.Param, i int) bool {
+	if strings.Contains(objcType, "(^") || strings.Count(normaliseObjC(objcType), "*") != 1 {
+		return false
+	}
+	return i+1 < len(params) && isCountParamName(params[i+1].Name)
+}
+
+// isCountParamName reports whether a parameter name denotes an element count or
+// byte length, which marks the preceding pointer as an array rather than an
+// out-parameter.
+func isCountParamName(name string) bool {
+	n := strings.ToLower(name)
+	switch n {
+	case "count", "len", "length", "size", "num", "n":
+		return true
+	}
+	for _, suffix := range []string{"_count", "count", "_len", "_length", "_size", "_num"} {
+		if strings.HasSuffix(n, suffix) {
+			return true
+		}
+	}
+	return false
+}
+
 func emitGenericFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
@@ -137,7 +168,7 @@ func emitGenericFunctionWrappers(
 		fnImports := map[string]string{}
 		ok := true
 		usedNames := make(map[string]int)
-		for _, param := range fn.Params {
+		for i, param := range fn.Params {
 			pName := safeParamName(naming.ParamName(param.Name))
 			if pName == "" {
 				pName = fmt.Sprintf("arg%d", len(sigParts)+len(outs))
@@ -145,6 +176,18 @@ func emitGenericFunctionWrappers(
 			usedNames[pName]++
 			if usedNames[pName] > 1 {
 				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
+			}
+			// A pointer immediately followed by a count parameter is the C
+			// "(array, count)" idiom — an INPUT array the caller fills, not an
+			// out-parameter. (hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count)
+			// reads vcpus; it must not be lifted to a return like a uint64_t* out.)
+			// Pass it through as an unsafe.Pointer.
+			if isArrayPointerParam(param.ObjCType, fn.Params, i) {
+				sigParts = append(sigParts, pName+" unsafe.Pointer")
+				abiParts = append(abiParts, "unsafe.Pointer")
+				callArgs = append(callArgs, pName)
+				fnImports["unsafe"] = "unsafe"
+				continue
 			}
 			// A pointer out-parameter is lifted into an extra return value: declare a
 			// local (named _outN so it never clashes with the readable return name),

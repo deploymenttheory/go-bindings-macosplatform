@@ -13,6 +13,19 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnAECountItems func(unsafe.Pointer, unsafe.Pointer) int16
+
+// AECountItems calls the AE framework function AECountItems.
+func AECountItems(theAEDescList unsafe.Pointer) (result int16, theCount int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECountItems == nil {
+		ebipurego.RegisterLibFunc(&_fnAECountItems, _lib, "AECountItems")
+	}
+	var _out0 int64
+	_ret := _fnAECountItems(theAEDescList, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnAECreateRemoteProcessResolver func(objc.ID, objc.ID) objc.ID
 
 // AECreateRemoteProcessResolver calls the AE framework function AECreateRemoteProcessResolver.

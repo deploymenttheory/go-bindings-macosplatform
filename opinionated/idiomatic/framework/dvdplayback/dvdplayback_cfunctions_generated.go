@@ -698,14 +698,12 @@ func DVDIsValidMediaURL(inRef obj.Object) (result int, outIsValid uint8) {
 var _fnDVDRegisterEventCallBack func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
 
 // DVDRegisterEventCallBack calls the DVDPlayback framework function DVDRegisterEventCallBack.
-func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCodeCount int, inRefCon unsafe.Pointer, outCallBackID unsafe.Pointer) (result int, inCode DVDEventCode) {
+func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCode unsafe.Pointer, inCodeCount int, inRefCon unsafe.Pointer, outCallBackID unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDVDRegisterEventCallBack == nil {
 		ebipurego.RegisterLibFunc(&_fnDVDRegisterEventCallBack, _lib, "DVDRegisterEventCallBack")
 	}
-	var _out0 DVDEventCode
-	_ret := _fnDVDRegisterEventCallBack(inCallBackProc, unsafe.Pointer(&_out0), inCodeCount, inRefCon, outCallBackID)
-	return _ret, _out0
+	return _fnDVDRegisterEventCallBack(inCallBackProc, inCode, inCodeCount, inRefCon, outCallBackID)
 }
 
 var _fnDVDSwitchToDisplay func(uint32, unsafe.Pointer) int

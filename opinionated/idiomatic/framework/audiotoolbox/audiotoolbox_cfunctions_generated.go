@@ -659,15 +659,14 @@ func AudioQueuePrime(inAQ obj.Object, inNumberOfFramesToPrepare int) (result int
 var _fnAudioQueueProcessingTapGetQueueTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
 
 // AudioQueueProcessingTapGetQueueTime calls the AudioToolbox framework function AudioQueueProcessingTapGetQueueTime.
-func AudioQueueProcessingTapGetQueueTime(inAQTap obj.Object) (result int, outQueueSampleTime float64, outQueueFrameCount int) {
+func AudioQueueProcessingTapGetQueueTime(inAQTap obj.Object, outQueueSampleTime unsafe.Pointer) (result int, outQueueFrameCount int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueProcessingTapGetQueueTime == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapGetQueueTime, _lib, "AudioQueueProcessingTapGetQueueTime")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnAudioQueueProcessingTapGetQueueTime(objref.IDOf(inAQTap), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := _fnAudioQueueProcessingTapGetQueueTime(objref.IDOf(inAQTap), outQueueSampleTime, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int

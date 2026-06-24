@@ -257,14 +257,12 @@ func NSColorSpaceFromDepth(depth WindowDepth) obj.Object {
 var _fnNSConvertGlyphsToPackedGlyphs func(unsafe.Pointer, int, MultibyteGlyphPacking, string) int
 
 // NSConvertGlyphsToPackedGlyphs calls the AppKit framework function NSConvertGlyphsToPackedGlyphs.
-func NSConvertGlyphsToPackedGlyphs(count int, packing MultibyteGlyphPacking, packedGlyphs string) (result int, glBuf int) {
+func NSConvertGlyphsToPackedGlyphs(glBuf unsafe.Pointer, count int, packing MultibyteGlyphPacking, packedGlyphs string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSConvertGlyphsToPackedGlyphs == nil {
 		ebipurego.RegisterLibFunc(&_fnNSConvertGlyphsToPackedGlyphs, _lib, "NSConvertGlyphsToPackedGlyphs")
 	}
-	var _out0 int
-	_ret := _fnNSConvertGlyphsToPackedGlyphs(unsafe.Pointer(&_out0), count, packing, packedGlyphs)
-	return _ret, _out0
+	return _fnNSConvertGlyphsToPackedGlyphs(glBuf, count, packing, packedGlyphs)
 }
 
 var _fnNSCopyBits func(int, corefoundation.CGRect, corefoundation.CGPoint)
@@ -706,6 +704,17 @@ func NSRectClip(rect corefoundation.CGRect) {
 	_fnNSRectClip(rect)
 }
 
+var _fnNSRectClipList func(unsafe.Pointer, int)
+
+// NSRectClipList calls the AppKit framework function NSRectClipList.
+func NSRectClipList(rects unsafe.Pointer, count int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectClipList == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectClipList, _lib, "NSRectClipList")
+	}
+	_fnNSRectClipList(rects, count)
+}
+
 var _fnNSRectFill func(corefoundation.CGRect)
 
 // NSRectFill calls the AppKit framework function NSRectFill.
@@ -715,6 +724,28 @@ func NSRectFill(rect corefoundation.CGRect) {
 		ebipurego.RegisterLibFunc(&_fnNSRectFill, _lib, "NSRectFill")
 	}
 	_fnNSRectFill(rect)
+}
+
+var _fnNSRectFillList func(unsafe.Pointer, int)
+
+// NSRectFillList calls the AppKit framework function NSRectFillList.
+func NSRectFillList(rects unsafe.Pointer, count int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillList == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillList, _lib, "NSRectFillList")
+	}
+	_fnNSRectFillList(rects, count)
+}
+
+var _fnNSRectFillListUsingOperation func(unsafe.Pointer, int, CompositingOperation)
+
+// NSRectFillListUsingOperation calls the AppKit framework function NSRectFillListUsingOperation.
+func NSRectFillListUsingOperation(rects unsafe.Pointer, count int, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillListUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillListUsingOperation, _lib, "NSRectFillListUsingOperation")
+	}
+	_fnNSRectFillListUsingOperation(rects, count, op)
 }
 
 var _fnNSRectFillUsingOperation func(corefoundation.CGRect, CompositingOperation)

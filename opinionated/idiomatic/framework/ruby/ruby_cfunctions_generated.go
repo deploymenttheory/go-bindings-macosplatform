@@ -9237,10 +9237,10 @@ func SignalName(arg int) string {
 	return _fnSignalName(arg)
 }
 
-var _fnSnprintf func(string, int, string) int
+var _fnSnprintf func(unsafe.Pointer, int, string) int
 
 // Snprintf calls the Ruby framework function ruby_snprintf.
-func Snprintf(str string, n int, fmt_ string) int {
+func Snprintf(str unsafe.Pointer, n int, fmt_ string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSnprintf == nil {
 		ebipurego.RegisterLibFunc(&_fnSnprintf, _lib, "ruby_snprintf")
@@ -9294,10 +9294,10 @@ func Sysinit(argv string) (argc int32) {
 	return _out0
 }
 
-var _fnVsnprintf func(string, int, string, string) int
+var _fnVsnprintf func(unsafe.Pointer, int, string, string) int
 
 // Vsnprintf calls the Ruby framework function ruby_vsnprintf.
-func Vsnprintf(str string, n int, fmt_ string, ap string) int {
+func Vsnprintf(str unsafe.Pointer, n int, fmt_ string, ap string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVsnprintf == nil {
 		ebipurego.RegisterLibFunc(&_fnVsnprintf, _lib, "ruby_vsnprintf")
@@ -9382,10 +9382,10 @@ func StLocaleInsensitiveStrcasecmp(s1 string, s2 string) int {
 	return _fnStLocaleInsensitiveStrcasecmp(s1, s2)
 }
 
-var _fnStLocaleInsensitiveStrncasecmp func(string, string, int) int
+var _fnStLocaleInsensitiveStrncasecmp func(string, unsafe.Pointer, int) int
 
 // StLocaleInsensitiveStrncasecmp calls the Ruby framework function st_locale_insensitive_strncasecmp.
-func StLocaleInsensitiveStrncasecmp(s1 string, s2 string, n int) int {
+func StLocaleInsensitiveStrncasecmp(s1 string, s2 unsafe.Pointer, n int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStLocaleInsensitiveStrncasecmp == nil {
 		ebipurego.RegisterLibFunc(&_fnStLocaleInsensitiveStrncasecmp, _lib, "st_locale_insensitive_strncasecmp")
