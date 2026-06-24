@@ -54,6 +54,56 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 	return blockDeviceResourceAdopt(_id)
 }
 
+// ReadIntoStartingAtLengthError synchronously reads data from the resource into a buffer.
+func (bdr *BlockDeviceResource) ReadIntoStartingAtLengthError(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(bdr), objc.RegisterName("readInto:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// WriteFromStartingAtLengthError synchronously writes data from from a buffer to the resource and executes a block afterwards.
+func (bdr *BlockDeviceResource) WriteFromStartingAtLengthError(buffer unsafe.Pointer, offset int64, length int) (result int, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(bdr), objc.RegisterName("writeFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// MetadataReadIntoStartingAtLength synchronously reads file system metadata from the resource into a buffer.
+func (bdr *BlockDeviceResource) MetadataReadIntoStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataReadInto:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// MetadataWriteFromStartingAtLength synchronously writes file system metadata from a buffer to the resource.
+func (bdr *BlockDeviceResource) MetadataWriteFromStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataWriteFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// DelayedMetadataWriteFromStartingAtLength writes file system metadata from a buffer to a cache, prior to flushing it to the resource.
+func (bdr *BlockDeviceResource) DelayedMetadataWriteFromStartingAtLength(buffer unsafe.Pointer, offset int64, length int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("delayedMetadataWriteFrom:startingAt:length:error:"), buffer, offset, length, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // MetadataFlush synchronously flushes the resource’s buffer cache.
 //
 // MetadataFlush returns an error if the operation did not succeed.

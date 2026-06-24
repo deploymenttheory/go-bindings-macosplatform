@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -72,6 +73,12 @@ func (ucs *URLCredentialStorage) String() string {
 func NewURLCredentialStorage() *URLCredentialStorage {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLCredentialStorage")), objc.RegisterName("new"))
 	return uRLCredentialStorageAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ucs *URLCredentialStorage) WithObservationInfo(observationInfo unsafe.Pointer) *URLCredentialStorage {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ucs
 }
 
 // WithScriptingProperties sets the scripting properties.

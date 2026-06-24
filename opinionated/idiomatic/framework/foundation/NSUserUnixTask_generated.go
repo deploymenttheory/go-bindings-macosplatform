@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -67,6 +69,12 @@ func (uut *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUni
 // WithStandardError sets the standard error stream.
 func (uut *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
+	return uut
+}
+
+// WithObservationInfo sets the observation info.
+func (uut *UserUnixTask) WithObservationInfo(observationInfo unsafe.Pointer) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return uut
 }
 

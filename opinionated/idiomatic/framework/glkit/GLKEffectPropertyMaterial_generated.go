@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,30 @@ func effectPropertyMaterialAdopt(id objc.ID) *EffectPropertyMaterial {
 func NewEffectPropertyMaterial() *EffectPropertyMaterial {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyMaterial")), objc.RegisterName("new"))
 	return effectPropertyMaterialAdopt(_id)
+}
+
+// WithAmbientColor sets the ambient color of the material.
+func (epm *EffectPropertyMaterial) WithAmbientColor(ambientColor unsafe.Pointer) *EffectPropertyMaterial {
+	objc.Send[objc.ID](objref.IDOf(epm), objc.RegisterName("setAmbientColor:"), ambientColor)
+	return epm
+}
+
+// WithDiffuseColor sets the diffuse color of the material.
+func (epm *EffectPropertyMaterial) WithDiffuseColor(diffuseColor unsafe.Pointer) *EffectPropertyMaterial {
+	objc.Send[objc.ID](objref.IDOf(epm), objc.RegisterName("setDiffuseColor:"), diffuseColor)
+	return epm
+}
+
+// WithSpecularColor sets the specular color of the material.
+func (epm *EffectPropertyMaterial) WithSpecularColor(specularColor unsafe.Pointer) *EffectPropertyMaterial {
+	objc.Send[objc.ID](objref.IDOf(epm), objc.RegisterName("setSpecularColor:"), specularColor)
+	return epm
+}
+
+// WithEmissiveColor sets the emissive color of the material.
+func (epm *EffectPropertyMaterial) WithEmissiveColor(emissiveColor unsafe.Pointer) *EffectPropertyMaterial {
+	objc.Send[objc.ID](objref.IDOf(epm), objc.RegisterName("setEmissiveColor:"), emissiveColor)
+	return epm
 }
 
 // WithShininess sets the shininess of the material, used when calculating specular lighting effects.

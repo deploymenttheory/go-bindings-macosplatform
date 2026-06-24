@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -71,6 +74,12 @@ func NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferA
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputPixelBufferAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return assetWriterInputPixelBufferAdaptorAdopt(_id)
+}
+
+// AppendPixelBufferWithPresentationTime appends a pixel buffer to the adaptor.
+func (awipba *AssetWriterInputPixelBufferAdaptor) AppendPixelBufferWithPresentationTime(pixelBuffer unsafe.Pointer, presentationTime coremedia.CMTime) bool {
+	_r := objc.Send[bool](objref.IDOf(awipba), objc.RegisterName("appendPixelBuffer:withPresentationTime:"), pixelBuffer, presentationTime)
+	return _r
 }
 
 // AssetWriterInput returns the asset writer input to which the receiver should append pixel buffers.

@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,13 @@ func (lasr *LookAroundSceneRequest) IsKind(className string) bool {
 // under fmt.
 func (lasr *LookAroundSceneRequest) String() string {
 	return rt.Description(objref.IDOf(lasr))
+}
+
+// NewLookAroundSceneRequestWithCoordinate creates a LookAround scene at the specified coordinates.
+func NewLookAroundSceneRequestWithCoordinate(coordinate unsafe.Pointer) *LookAroundSceneRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
+	return lookAroundSceneRequestAdopt(_id)
 }
 
 // NewLookAroundSceneRequestWithMapItem creates a LookAround scene with the location described by the specified map item.

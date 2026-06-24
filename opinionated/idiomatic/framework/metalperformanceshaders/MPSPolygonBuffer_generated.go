@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -99,6 +101,12 @@ func (pb *PolygonBuffer) WithMaskBufferOffset(maskBufferOffset int) *PolygonBuff
 func (pb *PolygonBuffer) WithPolygonCount(polygonCount int) *PolygonBuffer {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setPolygonCount:"), polygonCount)
 	return pb
+}
+
+// CopyWithZone create a a copy of this polygon buffer Buffer properties of the polygon buffer such as the vertex buffer, instance, buffer, etc. are set to nil. Copy these buffers and assign them to the new polygon buffer or reassign the existing buffers to the new polygon buffer.
+func (pb *PolygonBuffer) CopyWithZone(zone unsafe.Pointer) *PolygonBuffer {
+	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("copyWithZone:"), zone)
+	return PolygonBufferFromID(_r)
 }
 
 // VertexBufferOffset returns offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.

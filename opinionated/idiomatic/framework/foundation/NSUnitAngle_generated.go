@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func unitAngleAdopt(id objc.ID) *UnitAngle {
 func NewUnitAngle() *UnitAngle {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("new"))
 	return unitAngleAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ua *UnitAngle) WithObservationInfo(observationInfo unsafe.Pointer) *UnitAngle {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ua
 }
 
 // WithScriptingProperties sets the scripting properties.

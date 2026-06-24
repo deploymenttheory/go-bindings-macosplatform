@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -160,6 +162,12 @@ func (ua *UserActivity) WithEligibleForPublicIndexing(eligibleForPublicIndexing 
 // WithPersistentIdentifier sets a unique and persistent value you use to identify the activity.
 func (ua *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setPersistentIdentifier:"), objref.IDOf(persistentIdentifier))
+	return ua
+}
+
+// WithObservationInfo sets the observation info.
+func (ua *UserActivity) WithObservationInfo(observationInfo unsafe.Pointer) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ua
 }
 

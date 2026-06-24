@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -94,6 +96,12 @@ func (id_ *ImageDescriptor) WithFeatureChannels(featureChannels int) *ImageDescr
 func (id_ *ImageDescriptor) WithNumberOfImages(numberOfImages int) *ImageDescriptor {
 	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setNumberOfImages:"), numberOfImages)
 	return id_
+}
+
+// CopyWithZone copies with zone.
+func (id_ *ImageDescriptor) CopyWithZone(zone unsafe.Pointer) *ImageDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("copyWithZone:"), zone)
+	return ImageDescriptorFromID(_r)
 }
 
 // Width returns the width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.

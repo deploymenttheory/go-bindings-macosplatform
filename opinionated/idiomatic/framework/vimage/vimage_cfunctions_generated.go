@@ -5,6 +5,8 @@
 package vimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -20,6 +22,55 @@ func VImageCVImageFormatCopy(format obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopy, _lib, "vImageCVImageFormat_Copy")
 	}
 	_ret := _fnVImageCVImageFormatCopy(objref.IDOf(format))
+	return obj.Wrap(_ret)
+}
+
+var _fnVImageCVImageFormatCopyChannelDescription func(objc.ID, unsafe.Pointer, uint32) int
+
+// VImageCVImageFormatCopyChannelDescription calls the vImage framework function vImageCVImageFormat_CopyChannelDescription.
+func VImageCVImageFormatCopyChannelDescription(format obj.Object, type_ uint32) (result int, desc VImageChannelDescription) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageCVImageFormatCopyChannelDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopyChannelDescription, _lib, "vImageCVImageFormat_CopyChannelDescription")
+	}
+	var _out0 VImageChannelDescription
+	_ret := _fnVImageCVImageFormatCopyChannelDescription(objref.IDOf(format), unsafe.Pointer(&_out0), type_)
+	return _ret, _out0
+}
+
+var _fnVImageCVImageFormatCopyConversionMatrix func(objc.ID, unsafe.Pointer, uint32) int
+
+// VImageCVImageFormatCopyConversionMatrix calls the vImage framework function vImageCVImageFormat_CopyConversionMatrix.
+func VImageCVImageFormatCopyConversionMatrix(format obj.Object, matrix unsafe.Pointer, inType uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageCVImageFormatCopyConversionMatrix == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopyConversionMatrix, _lib, "vImageCVImageFormat_CopyConversionMatrix")
+	}
+	return _fnVImageCVImageFormatCopyConversionMatrix(objref.IDOf(format), matrix, inType)
+}
+
+var _fnVImageCVImageFormatCreate func(uint32, unsafe.Pointer, objc.ID, objc.ID, int) objc.ID
+
+// VImageCVImageFormatCreate calls the vImage framework function vImageCVImageFormat_Create.
+func VImageCVImageFormatCreate(imageFormatType uint32, cvImageBufferChromaLocation obj.Object, baseColorspace obj.Object, alphaIsOneHint int) (result obj.Object, matrix VImageARGBToYpCbCrMatrix) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageCVImageFormatCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreate, _lib, "vImageCVImageFormat_Create")
+	}
+	var _out0 VImageARGBToYpCbCrMatrix
+	_ret := _fnVImageCVImageFormatCreate(imageFormatType, unsafe.Pointer(&_out0), objref.IDOf(cvImageBufferChromaLocation), objref.IDOf(baseColorspace), alphaIsOneHint)
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnVImageCVImageFormatCreateWithCVPixelBuffer func(unsafe.Pointer) objc.ID
+
+// VImageCVImageFormatCreateWithCVPixelBuffer calls the vImage framework function vImageCVImageFormat_CreateWithCVPixelBuffer.
+func VImageCVImageFormatCreateWithCVPixelBuffer(buffer unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageCVImageFormatCreateWithCVPixelBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreateWithCVPixelBuffer, _lib, "vImageCVImageFormat_CreateWithCVPixelBuffer")
+	}
+	_ret := _fnVImageCVImageFormatCreateWithCVPixelBuffer(buffer)
 	return obj.Wrap(_ret)
 }
 
@@ -135,6 +186,17 @@ func VImageCVImageFormatSetColorSpace(format obj.Object, colorspace obj.Object) 
 	return _fnVImageCVImageFormatSetColorSpace(objref.IDOf(format), objref.IDOf(colorspace))
 }
 
+var _fnVImageCVImageFormatSetUserData func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+
+// VImageCVImageFormatSetUserData calls the vImage framework function vImageCVImageFormat_SetUserData.
+func VImageCVImageFormatSetUserData(format obj.Object, userData unsafe.Pointer, userDataReleaseCallback unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageCVImageFormatSetUserData == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatSetUserData, _lib, "vImageCVImageFormat_SetUserData")
+	}
+	return _fnVImageCVImageFormatSetUserData(objref.IDOf(format), userData, userDataReleaseCallback)
+}
+
 var _fnVImageConverterGetNumberOfDestinationBuffers func(objc.ID) int
 
 // VImageConverterGetNumberOfDestinationBuffers calls the vImage framework function vImageConverter_GetNumberOfDestinationBuffers.
@@ -179,6 +241,63 @@ func VImageConverterRetain(converter obj.Object) {
 	_fnVImageConverterRetain(objref.IDOf(converter))
 }
 
+var _fnVImageDestroyGammaFunction func(unsafe.Pointer)
+
+// VImageDestroyGammaFunction calls the vImage framework function vImageDestroyGammaFunction.
+func VImageDestroyGammaFunction(f unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageDestroyGammaFunction == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageDestroyGammaFunction, _lib, "vImageDestroyGammaFunction")
+	}
+	_fnVImageDestroyGammaFunction(f)
+}
+
+var _fnVImageDestroyResamplingFilter func(unsafe.Pointer)
+
+// VImageDestroyResamplingFilter calls the vImage framework function vImageDestroyResamplingFilter.
+func VImageDestroyResamplingFilter(filter unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageDestroyResamplingFilter == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageDestroyResamplingFilter, _lib, "vImageDestroyResamplingFilter")
+	}
+	_fnVImageDestroyResamplingFilter(filter)
+}
+
+var _fnVImageGetPerspectiveWarp func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
+
+// VImageGetPerspectiveWarp calls the vImage framework function vImageGetPerspectiveWarp.
+func VImageGetPerspectiveWarp(srcPoints unsafe.Pointer, destPoints unsafe.Pointer, flags uint32) (result int, transform VImagePerpsectiveTransform) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageGetPerspectiveWarp == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageGetPerspectiveWarp, _lib, "vImageGetPerspectiveWarp")
+	}
+	var _out0 VImagePerpsectiveTransform
+	_ret := _fnVImageGetPerspectiveWarp(srcPoints, destPoints, unsafe.Pointer(&_out0), flags)
+	return _ret, _out0
+}
+
+var _fnVImageGetResamplingFilterExtent func(unsafe.Pointer, uint32) int
+
+// VImageGetResamplingFilterExtent calls the vImage framework function vImageGetResamplingFilterExtent.
+func VImageGetResamplingFilterExtent(filter unsafe.Pointer, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageGetResamplingFilterExtent == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageGetResamplingFilterExtent, _lib, "vImageGetResamplingFilterExtent")
+	}
+	return _fnVImageGetResamplingFilterExtent(filter, flags)
+}
+
+var _fnVImageGetResamplingFilterSize func(float32, unsafe.Pointer, float32, uint32) int
+
+// VImageGetResamplingFilterSize calls the vImage framework function vImageGetResamplingFilterSize.
+func VImageGetResamplingFilterSize(scale float32, kernelFunc unsafe.Pointer, kernelWidth float32, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageGetResamplingFilterSize == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageGetResamplingFilterSize, _lib, "vImageGetResamplingFilterSize")
+	}
+	return _fnVImageGetResamplingFilterSize(scale, kernelFunc, kernelWidth, flags)
+}
+
 var _fnVImageMultidimensionalTableRelease func(objc.ID) int
 
 // VImageMultidimensionalTableRelease calls the vImage framework function vImageMultidimensionalTable_Release.
@@ -199,4 +318,15 @@ func VImageMultidimensionalTableRetain(table obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnVImageMultidimensionalTableRetain, _lib, "vImageMultidimensionalTable_Retain")
 	}
 	return _fnVImageMultidimensionalTableRetain(objref.IDOf(table))
+}
+
+var _fnVImageNewResamplingFilterForFunctionUsingBuffer func(unsafe.Pointer, float32, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
+
+// VImageNewResamplingFilterForFunctionUsingBuffer calls the vImage framework function vImageNewResamplingFilterForFunctionUsingBuffer.
+func VImageNewResamplingFilterForFunctionUsingBuffer(filter unsafe.Pointer, scale float32, kernelFunc unsafe.Pointer, kernelWidth float32, userData unsafe.Pointer, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVImageNewResamplingFilterForFunctionUsingBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnVImageNewResamplingFilterForFunctionUsingBuffer, _lib, "vImageNewResamplingFilterForFunctionUsingBuffer")
+	}
+	return _fnVImageNewResamplingFilterForFunctionUsingBuffer(filter, scale, kernelFunc, kernelWidth, userData, flags)
 }

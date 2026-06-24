@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (lpoir *LocalPointsOfInterestRequest) String() string {
 	return rt.Description(objref.IDOf(lpoir))
 }
 
-// NewLocalPointsOfInterestRequest creates a new LocalPointsOfInterestRequest.
-func NewLocalPointsOfInterestRequest() *LocalPointsOfInterestRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalPointsOfInterestRequest")), objc.RegisterName("new"))
+// NewLocalPointsOfInterestRequestWithCenterCoordinateRadius creates a points of interest search request centered on the provided coordinate with the provided radius.
+func NewLocalPointsOfInterestRequestWithCenterCoordinateRadius(coordinate unsafe.Pointer, radius unsafe.Pointer) *LocalPointsOfInterestRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalPointsOfInterestRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenterCoordinate:radius:"), coordinate, radius)
 	return localPointsOfInterestRequestAdopt(_id)
 }
 

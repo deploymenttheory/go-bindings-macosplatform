@@ -69,10 +69,21 @@ func (md *MutableData) WithLength(length int) *MutableData {
 	return md
 }
 
+// WithObservationInfo sets the observation info.
+func (md *MutableData) WithObservationInfo(observationInfo unsafe.Pointer) *MutableData {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return md
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (md *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return md
+}
+
+// AppendBytesLength appends to the receiver a given number of bytes from a given buffer.
+func (md *MutableData) AppendBytesLength(bytes_ unsafe.Pointer, length int) {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("appendBytes:length:"), bytes_, length)
 }
 
 // AppendData appends the content of another data object to the receiver.

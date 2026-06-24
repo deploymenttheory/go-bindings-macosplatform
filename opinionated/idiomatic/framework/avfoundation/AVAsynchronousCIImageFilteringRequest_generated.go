@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -78,9 +81,20 @@ func (acifr *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filtere
 	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithImage:context:"), objref.IDOf(filteredImage), objref.IDOf(context_))
 }
 
+// FinishWithError notifies AVFoundation that you cannot fulfill the image filtering request.
+func (acifr *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithError:"), error_)
+}
+
 // RenderSize returns width and height for rendering frames.
 func (acifr *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(acifr), objc.RegisterName("renderSize"))
+	return _r
+}
+
+// CompositionTime returns the time for which the frame should be filtered
+func (acifr *AsynchronousCIImageFilteringRequest) CompositionTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(acifr), objc.RegisterName("compositionTime"))
 	return _r
 }
 

@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -89,6 +91,12 @@ func (a *Asset) WithStartTime(startTime float64) *Asset {
 // WithEndTime sets the timestamp for the last timed data sample in the asset.
 func (a *Asset) WithEndTime(endTime float64) *Asset {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setEndTime:"), endTime)
+	return a
+}
+
+// WithUpAxis sets scene up axis Some imported formats specify a scene up axis. By default Y-axis (0, 1, 0) is used but other values are supported.
+func (a *Asset) WithUpAxis(upAxis unsafe.Pointer) *Asset {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUpAxis:"), upAxis)
 	return a
 }
 

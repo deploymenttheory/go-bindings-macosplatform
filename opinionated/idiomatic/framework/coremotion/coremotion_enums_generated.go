@@ -63,6 +63,37 @@ func (e DeviceMotionSensorLocation) String() string {
 	}
 }
 
+// Indicates the calibration accuracy of a magnetic field estimate
+type MagneticFieldCalibrationAccuracy int32
+
+const (
+	// The magnetic field estimate is not calibrated.
+	MagneticFieldCalibrationAccuracyUncalibrated MagneticFieldCalibrationAccuracy = -1
+	// The accuracy of the magnetic field calibration is low.
+	MagneticFieldCalibrationAccuracyLow MagneticFieldCalibrationAccuracy = 0
+	// The accuracy of the magnetic field calibration is medium.
+	MagneticFieldCalibrationAccuracyMedium MagneticFieldCalibrationAccuracy = 1
+	// The accuracy of the magnetic field calibration is high.
+	MagneticFieldCalibrationAccuracyHigh MagneticFieldCalibrationAccuracy = 2
+)
+
+// String returns the MagneticFieldCalibrationAccuracy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MagneticFieldCalibrationAccuracy) String() string {
+	switch e {
+	case MagneticFieldCalibrationAccuracyUncalibrated:
+		return "MagneticFieldCalibrationAccuracyUncalibrated"
+	case MagneticFieldCalibrationAccuracyLow:
+		return "MagneticFieldCalibrationAccuracyLow"
+	case MagneticFieldCalibrationAccuracyMedium:
+		return "MagneticFieldCalibrationAccuracyMedium"
+	case MagneticFieldCalibrationAccuracyHigh:
+		return "MagneticFieldCalibrationAccuracyHigh"
+	default:
+		return fmt.Sprintf("MagneticFieldCalibrationAccuracy(%d)", int64(e))
+	}
+}
+
 // The confidence that the motion data is accurate.
 type MotionActivityConfidence int64
 

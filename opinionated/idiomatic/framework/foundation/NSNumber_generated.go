@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -156,6 +158,12 @@ func NewNumberWithUnsignedInteger(value int) *Number {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnsignedInteger:"), value)
 	return numberAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (n *Number) WithObservationInfo(observationInfo unsafe.Pointer) *Number {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return n
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -54,6 +54,20 @@ func Wrap(id objc.ID) Object {
 	return g
 }
 
+// Adopt returns an Object for an Objective-C object the caller already owns a
+// reference to — for example the result of a create function annotated
+// OS_OBJECT_RETURNS_RETAINED, or any other +1 result. Unlike Wrap it does NOT
+// retain the object; it only arranges the matching release once Go stops using
+// it. Wrapping an already-retained result with Wrap would leak one reference.
+func Adopt(id objc.ID) Object {
+	if id == 0 {
+		return nil
+	}
+	g := &generic{Handle: objref.Wrap(id)}
+	objref.Track(g)
+	return g
+}
+
 func (g *generic) Description() string       { return rt.Description(objref.IDOf(g)) }
 func (g *generic) IsEqual(other Object) bool { return rt.IsEqual(objref.IDOf(g), objref.IDOf(other)) }
 func (g *generic) IsKind(className string) bool {

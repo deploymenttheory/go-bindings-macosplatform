@@ -71,6 +71,13 @@ func (os *OrderedSet) String() string {
 	return rt.Description(objref.IDOf(os))
 }
 
+// NewOrderedSetWithObjectsCount initializes a newly allocated set with a specified number of objects from a given C array of objects.
+func NewOrderedSetWithObjectsCount(objects unsafe.Pointer, cnt int) *OrderedSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:count:"), objects, cnt)
+	return orderedSetAdopt(_id)
+}
+
 // NewOrderedSetWithCoder creates a new OrderedSet.
 func NewOrderedSetWithCoder(coder *Coder) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
@@ -132,6 +139,12 @@ func NewOrderedSetWithSetCopyItems(set obj.Object, flag bool) *OrderedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:copyItems:"), objref.IDOf(set), flag)
 	return orderedSetAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (os *OrderedSet) WithObservationInfo(observationInfo unsafe.Pointer) *OrderedSet {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return os
 }
 
 // WithScriptingProperties sets the scripting properties.

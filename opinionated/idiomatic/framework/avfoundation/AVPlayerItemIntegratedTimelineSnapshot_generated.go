@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +73,12 @@ func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnap
 	return playerItemIntegratedTimelineSnapshotAdopt(_id)
 }
 
+// Duration returns the duration totaling the primary item and scheduled interstitial events. This property returns the duration totaling the primary item and scheduled interstitial events and taking into account the interstitial event's playoutLimit and resumption offset. Before loading the duration of the primary item, the value of this property is kCMTimeInvalid. For livestreams, this value will be kCMTimeIndefinite.
+func (piits *PlayerItemIntegratedTimelineSnapshot) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(piits), objc.RegisterName("duration"))
+	return _r
+}
+
 // CurrentSegment returns the current AVPlayerItemSegment playback is traversing.
 func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
 	_r := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("currentSegment"))
@@ -84,6 +91,12 @@ func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemS
 func (piits *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
 	_arr := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemSegment { return PlayerItemSegmentFromID(_id) })
+}
+
+// CurrentTime returns the current time on the integrated timeline when the snapshot was taken. Returns the current time on the integrated timeline when the snapshot was taken. CurrentTime will not change as playback progresses.
+func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(piits), objc.RegisterName("currentTime"))
+	return _r
 }
 
 // CurrentDate returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.

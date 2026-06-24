@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (ap *AutoreleasePool) String() string {
 func NewAutoreleasePool() *AutoreleasePool {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("new"))
 	return autoreleasePoolAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ap *AutoreleasePool) WithObservationInfo(observationInfo unsafe.Pointer) *AutoreleasePool {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ap
 }
 
 // WithScriptingProperties sets the scripting properties.

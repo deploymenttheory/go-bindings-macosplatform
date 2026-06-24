@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -139,4 +140,9 @@ func (sbar *SampleBufferAudioRenderer) Volume() float32 {
 func (sbar *SampleBufferAudioRenderer) IsMuted() bool {
 	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isMuted"))
 	return _r
+}
+
+// FlushFromSourceTimeCompletionHandler flushes queued sample buffers with presentation time stamps later than or equal to the specified time.
+func (sbar *SampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(sbar), objc.RegisterName("flushFromSourceTime:completionHandler:"), time_, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }

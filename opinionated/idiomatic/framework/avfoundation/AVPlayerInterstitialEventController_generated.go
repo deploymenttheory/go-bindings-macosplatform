@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -70,6 +71,11 @@ func (piec *PlayerInterstitialEventController) WithLocalizedStringsBundle(locali
 func (piec *PlayerInterstitialEventController) WithLocalizedStringsTableName(localizedStringsTableName string) *PlayerInterstitialEventController {
 	objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("setLocalizedStringsTableName:"), purego.NSString(localizedStringsTableName))
 	return piec
+}
+
+// CancelCurrentEventWithResumptionOffset cancels the playback of all currently playing and scheduled interstitial events, and resumes playback of primary content.
+func (piec *PlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("cancelCurrentEventWithResumptionOffset:"), resumptionOffset)
 }
 
 // SkipCurrentEvent causes the playback of the currently playing interstital event to be abandoned.

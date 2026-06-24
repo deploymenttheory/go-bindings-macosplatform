@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,4 +72,16 @@ func (tka *TokenKeyAlgorithm) String() string {
 func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeyAlgorithm")), objc.RegisterName("new"))
 	return tokenKeyAlgorithmAdopt(_id)
+}
+
+// IsAlgorithm returns whether the specified algorithm is the target operation algorithm.
+func (tka *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(tka), objc.RegisterName("isAlgorithm:"), algorithm)
+	return _r
+}
+
+// SupportsAlgorithm whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.
+func (tka *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(tka), objc.RegisterName("supportsAlgorithm:"), algorithm)
+	return _r
 }

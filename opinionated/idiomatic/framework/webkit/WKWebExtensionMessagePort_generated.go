@@ -6,6 +6,7 @@ package webkit
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -95,6 +96,11 @@ func (wwemp *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message
 // Disconnect disconnects the port, terminating all further messages.
 func (wwemp *WKWebExtensionMessagePort) Disconnect() {
 	objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnect"))
+}
+
+// DisconnectWithError disconnects the port, terminating all further messages with an optional error.
+func (wwemp *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("disconnectWithError:"), error_)
 }
 
 // ApplicationIdentifier returns the unique identifier for the app to which this port should be connected. This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.

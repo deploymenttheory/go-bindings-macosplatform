@@ -270,6 +270,54 @@ func SecKeyCopyExternalRepresentation(key obj.Object) (obj.Object, error) {
 	return obj.Wrap(_r), nil
 }
 
+// SecKeyCopyKeyExchangeResult reports an error if the Security framework function SecKeyCopyKeyExchangeResult fails.
+var _fnSecKeyCopyKeyExchangeResult func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func SecKeyCopyKeyExchangeResult(privateKey obj.Object, algorithm unsafe.Pointer, publicKey obj.Object, parameters obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCopyKeyExchangeResult == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCopyKeyExchangeResult, _lib, "SecKeyCopyKeyExchangeResult")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecKeyCopyKeyExchangeResult(objref.IDOf(privateKey), algorithm, objref.IDOf(publicKey), objref.IDOf(parameters), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecKeyCreateDecryptedData reports an error if the Security framework function SecKeyCreateDecryptedData fails.
+var _fnSecKeyCreateDecryptedData func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
+
+func SecKeyCreateDecryptedData(key obj.Object, algorithm unsafe.Pointer, ciphertext obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCreateDecryptedData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCreateDecryptedData, _lib, "SecKeyCreateDecryptedData")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecKeyCreateDecryptedData(objref.IDOf(key), algorithm, objref.IDOf(ciphertext), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecKeyCreateEncryptedData reports an error if the Security framework function SecKeyCreateEncryptedData fails.
+var _fnSecKeyCreateEncryptedData func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
+
+func SecKeyCreateEncryptedData(key obj.Object, algorithm unsafe.Pointer, plaintext obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCreateEncryptedData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCreateEncryptedData, _lib, "SecKeyCreateEncryptedData")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecKeyCreateEncryptedData(objref.IDOf(key), algorithm, objref.IDOf(plaintext), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
 // SecKeyCreateFromData reports an error if the Security framework function SecKeyCreateFromData fails.
 var _fnSecKeyCreateFromData func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
@@ -296,6 +344,22 @@ func SecKeyCreateRandomKey(parameters obj.Object) (obj.Object, error) {
 	}
 	var _cfErr unsafe.Pointer
 	_r := _fnSecKeyCreateRandomKey(objref.IDOf(parameters), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecKeyCreateSignature reports an error if the Security framework function SecKeyCreateSignature fails.
+var _fnSecKeyCreateSignature func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
+
+func SecKeyCreateSignature(key obj.Object, algorithm unsafe.Pointer, dataToSign obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCreateSignature == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCreateSignature, _lib, "SecKeyCreateSignature")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecKeyCreateSignature(objref.IDOf(key), algorithm, objref.IDOf(dataToSign), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -348,6 +412,38 @@ func SecKeyGenerateSymmetric(parameters obj.Object) (obj.Object, error) {
 		return nil, errkit.FromCFError(_cfErr)
 	}
 	return obj.Wrap(_r), nil
+}
+
+// SecKeyUnwrapSymmetric reports an error if the Security framework function SecKeyUnwrapSymmetric fails.
+var _fnSecKeyUnwrapSymmetric func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+func SecKeyUnwrapSymmetric(keyToUnwrap unsafe.Pointer, unwrappingKey obj.Object, parameters obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyUnwrapSymmetric == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyUnwrapSymmetric, _lib, "SecKeyUnwrapSymmetric")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecKeyUnwrapSymmetric(keyToUnwrap, objref.IDOf(unwrappingKey), objref.IDOf(parameters), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecKeyVerifySignature reports an error if the Security framework function SecKeyVerifySignature fails.
+var _fnSecKeyVerifySignature func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uint8
+
+func SecKeyVerifySignature(key obj.Object, algorithm unsafe.Pointer, signedData obj.Object, signature obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyVerifySignature == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyVerifySignature, _lib, "SecKeyVerifySignature")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnSecKeyVerifySignature(objref.IDOf(key), algorithm, objref.IDOf(signedData), objref.IDOf(signature), unsafe.Pointer(&_cfErr))
+	if _ok == 0 {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
 }
 
 // SecKeyWrapSymmetric reports an error if the Security framework function SecKeyWrapSymmetric fails.
@@ -446,6 +542,22 @@ func SecTaskCopyValuesForEntitlements(task obj.Object, entitlements obj.Object) 
 	return obj.Wrap(_r), nil
 }
 
+// SecTransformConnectTransforms reports an error if the Security framework function SecTransformConnectTransforms fails.
+var _fnSecTransformConnectTransforms func(unsafe.Pointer, objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+func SecTransformConnectTransforms(sourceTransformRef unsafe.Pointer, sourceAttributeName obj.Object, destinationTransformRef unsafe.Pointer, destinationAttributeName obj.Object, group unsafe.Pointer) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformConnectTransforms == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformConnectTransforms, _lib, "SecTransformConnectTransforms")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecTransformConnectTransforms(sourceTransformRef, objref.IDOf(sourceAttributeName), destinationTransformRef, objref.IDOf(destinationAttributeName), group, unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
 // SecTransformCreate reports an error if the Security framework function SecTransformCreate fails.
 var _fnSecTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
@@ -476,6 +588,54 @@ func SecTransformCreateFromExternalRepresentation(dictionary obj.Object) (obj.Ob
 		return nil, errkit.FromCFError(_cfErr)
 	}
 	return obj.Wrap(_r), nil
+}
+
+// SecTransformExecute reports an error if the Security framework function SecTransformExecute fails.
+var _fnSecTransformExecute func(unsafe.Pointer, unsafe.Pointer) objc.ID
+
+func SecTransformExecute(transformRef unsafe.Pointer) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformExecute == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformExecute, _lib, "SecTransformExecute")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnSecTransformExecute(transformRef, unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// SecTransformRegister reports an error if the Security framework function SecTransformRegister fails.
+var _fnSecTransformRegister func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+
+func SecTransformRegister(uniqueName obj.Object, createTransformFunction unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformRegister == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformRegister, _lib, "SecTransformRegister")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnSecTransformRegister(objref.IDOf(uniqueName), createTransformFunction, unsafe.Pointer(&_cfErr))
+	if _ok == 0 {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
+// SecTransformSetAttribute reports an error if the Security framework function SecTransformSetAttribute fails.
+var _fnSecTransformSetAttribute func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uint8
+
+func SecTransformSetAttribute(transformRef unsafe.Pointer, key obj.Object, value obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformSetAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttribute, _lib, "SecTransformSetAttribute")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnSecTransformSetAttribute(transformRef, objref.IDOf(key), objref.IDOf(value), unsafe.Pointer(&_cfErr))
+	if _ok == 0 {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
 }
 
 // SecVerifyTransformCreate reports an error if the Security framework function SecVerifyTransformCreate fails.

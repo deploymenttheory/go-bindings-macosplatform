@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLQueryItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:value:"), purego.NSString(name), purego.NSString(value))
 	return uRLQueryItemAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uqi *URLQueryItem) WithObservationInfo(observationInfo unsafe.Pointer) *URLQueryItem {
+	objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uqi
 }
 
 // WithScriptingProperties sets the scripting properties.

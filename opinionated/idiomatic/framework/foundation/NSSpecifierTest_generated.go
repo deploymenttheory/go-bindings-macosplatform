@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -58,6 +60,12 @@ func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *Scrip
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpecifierTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), objref.IDOf(obj1), compOp, objref.IDOf(obj2))
 	return specifierTestAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (st *SpecifierTest) WithObservationInfo(observationInfo unsafe.Pointer) *SpecifierTest {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return st
 }
 
 // WithScriptingProperties sets the scripting properties.

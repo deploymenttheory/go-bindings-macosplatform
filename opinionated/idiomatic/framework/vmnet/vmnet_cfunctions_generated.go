@@ -5,11 +5,63 @@
 package vmnet
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnIpPortForwardingRuleGetDetails func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+
+// IpPortForwardingRuleGetDetails calls the vmnet framework function vmnet_ip_port_forwarding_rule_get_details.
+func IpPortForwardingRuleGetDetails(rule obj.Object, address_family uint8, internal_address unsafe.Pointer) (result Vmnet_return_t, protocol uint8, external_port uint16, internal_port uint16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIpPortForwardingRuleGetDetails == nil {
+		ebipurego.RegisterLibFunc(&_fnIpPortForwardingRuleGetDetails, _lib, "vmnet_ip_port_forwarding_rule_get_details")
+	}
+	var _out0 uint8
+	var _out1 uint16
+	var _out2 uint16
+	_ret := _fnIpPortForwardingRuleGetDetails(objref.IDOf(rule), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), address_family, internal_address, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnNetworkConfigurationAddDhcpReservation func(objc.ID, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+
+// NetworkConfigurationAddDhcpReservation calls the vmnet framework function vmnet_network_configuration_add_dhcp_reservation.
+func NetworkConfigurationAddDhcpReservation(config obj.Object, client unsafe.Pointer, reservation unsafe.Pointer) Vmnet_return_t {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkConfigurationAddDhcpReservation == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationAddDhcpReservation, _lib, "vmnet_network_configuration_add_dhcp_reservation")
+	}
+	return _fnNetworkConfigurationAddDhcpReservation(objref.IDOf(config), client, reservation)
+}
+
+var _fnNetworkConfigurationAddPortForwardingRule func(objc.ID, uint8, uint8, uint16, uint16, unsafe.Pointer) Vmnet_return_t
+
+// NetworkConfigurationAddPortForwardingRule calls the vmnet framework function vmnet_network_configuration_add_port_forwarding_rule.
+func NetworkConfigurationAddPortForwardingRule(config obj.Object, protocol uint8, address_family uint8, internal_port uint16, external_port uint16, internal_address unsafe.Pointer) Vmnet_return_t {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkConfigurationAddPortForwardingRule == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationAddPortForwardingRule, _lib, "vmnet_network_configuration_add_port_forwarding_rule")
+	}
+	return _fnNetworkConfigurationAddPortForwardingRule(objref.IDOf(config), protocol, address_family, internal_port, external_port, internal_address)
+}
+
+var _fnNetworkConfigurationCreate func(Operating_modes_t, unsafe.Pointer) objc.ID
+
+// NetworkConfigurationCreate calls the vmnet framework function vmnet_network_configuration_create.
+func NetworkConfigurationCreate(mode Operating_modes_t) (result obj.Object, status Vmnet_return_t) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkConfigurationCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationCreate, _lib, "vmnet_network_configuration_create")
+	}
+	var _out0 Vmnet_return_t
+	_ret := _fnNetworkConfigurationCreate(mode, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
 
 var _fnNetworkConfigurationDisableDhcp func(objc.ID)
 
@@ -77,6 +129,28 @@ func NetworkConfigurationSetExternalInterface(config obj.Object, interface_name 
 	return _fnNetworkConfigurationSetExternalInterface(objref.IDOf(config), interface_name)
 }
 
+var _fnNetworkConfigurationSetIpv4Subnet func(objc.ID, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+
+// NetworkConfigurationSetIpv4Subnet calls the vmnet framework function vmnet_network_configuration_set_ipv4_subnet.
+func NetworkConfigurationSetIpv4Subnet(config obj.Object, subnet_addr unsafe.Pointer, subnet_mask unsafe.Pointer) Vmnet_return_t {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkConfigurationSetIpv4Subnet == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetIpv4Subnet, _lib, "vmnet_network_configuration_set_ipv4_subnet")
+	}
+	return _fnNetworkConfigurationSetIpv4Subnet(objref.IDOf(config), subnet_addr, subnet_mask)
+}
+
+var _fnNetworkConfigurationSetIpv6Prefix func(objc.ID, unsafe.Pointer, uint8) Vmnet_return_t
+
+// NetworkConfigurationSetIpv6Prefix calls the vmnet framework function vmnet_network_configuration_set_ipv6_prefix.
+func NetworkConfigurationSetIpv6Prefix(config obj.Object, prefix unsafe.Pointer, len_ uint8) Vmnet_return_t {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkConfigurationSetIpv6Prefix == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetIpv6Prefix, _lib, "vmnet_network_configuration_set_ipv6_prefix")
+	}
+	return _fnNetworkConfigurationSetIpv6Prefix(objref.IDOf(config), prefix, len_)
+}
+
 var _fnNetworkConfigurationSetMtu func(objc.ID, uint32) Vmnet_return_t
 
 // NetworkConfigurationSetMtu calls the vmnet framework function vmnet_network_configuration_set_mtu.
@@ -86,4 +160,69 @@ func NetworkConfigurationSetMtu(config obj.Object, mtu uint32) Vmnet_return_t {
 		ebipurego.RegisterLibFunc(&_fnNetworkConfigurationSetMtu, _lib, "vmnet_network_configuration_set_mtu")
 	}
 	return _fnNetworkConfigurationSetMtu(objref.IDOf(config), mtu)
+}
+
+var _fnNetworkCreate func(objc.ID, unsafe.Pointer) objc.ID
+
+// NetworkCreate calls the vmnet framework function vmnet_network_create.
+func NetworkCreate(configuration obj.Object) (result obj.Object, status Vmnet_return_t) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkCreate, _lib, "vmnet_network_create")
+	}
+	var _out0 Vmnet_return_t
+	_ret := _fnNetworkCreate(objref.IDOf(configuration), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnNetworkCreateWithSerialization func(objc.ID, unsafe.Pointer) objc.ID
+
+// NetworkCreateWithSerialization calls the vmnet framework function vmnet_network_create_with_serialization.
+func NetworkCreateWithSerialization(network obj.Object) (result obj.Object, status Vmnet_return_t) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkCreateWithSerialization == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkCreateWithSerialization, _lib, "vmnet_network_create_with_serialization")
+	}
+	var _out0 Vmnet_return_t
+	_ret := _fnNetworkCreateWithSerialization(objref.IDOf(network), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnNetworkGetIpv4Subnet func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// NetworkGetIpv4Subnet calls the vmnet framework function vmnet_network_get_ipv4_subnet.
+func NetworkGetIpv4Subnet(network obj.Object, subnet unsafe.Pointer, mask unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkGetIpv4Subnet == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkGetIpv4Subnet, _lib, "vmnet_network_get_ipv4_subnet")
+	}
+	_fnNetworkGetIpv4Subnet(objref.IDOf(network), subnet, mask)
+}
+
+var _fnNetworkGetIpv6Prefix func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// NetworkGetIpv6Prefix calls the vmnet framework function vmnet_network_get_ipv6_prefix.
+func NetworkGetIpv6Prefix(network obj.Object, prefix unsafe.Pointer) (prefix_len uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkGetIpv6Prefix == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkGetIpv6Prefix, _lib, "vmnet_network_get_ipv6_prefix")
+	}
+	var _out0 uint8
+	_fnNetworkGetIpv6Prefix(objref.IDOf(network), prefix, unsafe.Pointer(&_out0))
+	return _out0
+}
+
+var _fnPortForwardingRuleGetDetails func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) Vmnet_return_t
+
+// PortForwardingRuleGetDetails calls the vmnet framework function vmnet_port_forwarding_rule_get_details.
+func PortForwardingRuleGetDetails(rule obj.Object, internal_address unsafe.Pointer) (result Vmnet_return_t, protocol uint8, external_port uint16, internal_port uint16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPortForwardingRuleGetDetails == nil {
+		ebipurego.RegisterLibFunc(&_fnPortForwardingRuleGetDetails, _lib, "vmnet_port_forwarding_rule_get_details")
+	}
+	var _out0 uint8
+	var _out1 uint16
+	var _out2 uint16
+	_ret := _fnPortForwardingRuleGetDetails(objref.IDOf(rule), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), internal_address, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }

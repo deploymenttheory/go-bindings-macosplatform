@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -104,6 +105,18 @@ func (aig *AssetImageGenerator) WithVideoComposition(videoComposition VideoCompo
 	return aig
 }
 
+// WithRequestedTimeToleranceBefore sets a maximum length of time before the requested time to allow image generation to occur.
+func (aig *AssetImageGenerator) WithRequestedTimeToleranceBefore(requestedTimeToleranceBefore coremedia.CMTime) *AssetImageGenerator {
+	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setRequestedTimeToleranceBefore:"), requestedTimeToleranceBefore)
+	return aig
+}
+
+// WithRequestedTimeToleranceAfter sets a maximum length of time after the requested time to allow image generation to occur.
+func (aig *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) *AssetImageGenerator {
+	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setRequestedTimeToleranceAfter:"), requestedTimeToleranceAfter)
+	return aig
+}
+
 // CancelAllCGImageGeneration cancels all pending image generation requests.
 func (aig *AssetImageGenerator) CancelAllCGImageGeneration() {
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("cancelAllCGImageGeneration"))
@@ -143,4 +156,16 @@ func (aig *AssetImageGenerator) DynamicRangePolicy() obj.Object {
 func (aig *AssetImageGenerator) VideoComposition() *VideoComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
+}
+
+// RequestedTimeToleranceBefore returns the requested time tolerance before.
+func (aig *AssetImageGenerator) RequestedTimeToleranceBefore() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aig), objc.RegisterName("requestedTimeToleranceBefore"))
+	return _r
+}
+
+// RequestedTimeToleranceAfter returns the requested time tolerance after.
+func (aig *AssetImageGenerator) RequestedTimeToleranceAfter() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aig), objc.RegisterName("requestedTimeToleranceAfter"))
+	return _r
 }

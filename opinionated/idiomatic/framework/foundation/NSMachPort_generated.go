@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -58,6 +60,12 @@ func NewMachPortWithMachPortOptions(machPort uint32, f MachPortOptions) *MachPor
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMachPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, f)
 	return machPortAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mp *MachPort) WithObservationInfo(observationInfo unsafe.Pointer) *MachPort {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mp
 }
 
 // WithScriptingProperties sets the scripting properties.

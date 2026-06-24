@@ -82,6 +82,12 @@ func NewUserScriptTaskWithURLError(url string) (result *UserScriptTask, err erro
 	return userScriptTaskAdopt(_id), nil
 }
 
+// WithObservationInfo sets the observation info.
+func (ust *UserScriptTask) WithObservationInfo(observationInfo unsafe.Pointer) *UserScriptTask {
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ust
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

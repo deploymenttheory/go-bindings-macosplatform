@@ -69,6 +69,12 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 	return outputStreamAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (os *OutputStream) WithObservationInfo(observationInfo unsafe.Pointer) *OutputStream {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return os
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (os *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host st
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLProtectionSpace")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProxyHost:port:type:realm:authenticationMethod:"), purego.NSString(host), port, purego.NSString(type_), purego.NSString(realm), purego.NSString(authenticationMethod))
 	return uRLProtectionSpaceAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ups *URLProtectionSpace) WithObservationInfo(observationInfo unsafe.Pointer) *URLProtectionSpace {
+	objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ups
 }
 
 // WithScriptingProperties sets the scripting properties.

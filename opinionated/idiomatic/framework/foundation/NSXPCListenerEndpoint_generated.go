@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (xle *XPCListenerEndpoint) String() string {
 func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCListenerEndpoint")), objc.RegisterName("new"))
 	return xPCListenerEndpointAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (xle *XPCListenerEndpoint) WithObservationInfo(observationInfo unsafe.Pointer) *XPCListenerEndpoint {
+	objc.Send[objc.ID](objref.IDOf(xle), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return xle
 }
 
 // WithScriptingProperties sets the scripting properties.

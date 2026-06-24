@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,12 @@ func NewConditionLockWithCondition(condition int) *ConditionLock {
 // WithName sets the name associated with the receiver.
 func (cl *ConditionLock) WithName(name StringProvider) *ConditionLock {
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setName:"), objref.IDOf(name))
+	return cl
+}
+
+// WithObservationInfo sets the observation info.
+func (cl *ConditionLock) WithObservationInfo(observationInfo unsafe.Pointer) *ConditionLock {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return cl
 }
 

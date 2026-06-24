@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +74,24 @@ func (pio *PlayerItemOutput) String() string {
 func (pio *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
 	objc.Send[objc.ID](objref.IDOf(pio), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return pio
+}
+
+// ItemTimeForHostTime converts a host time, specified in seconds, to the item’s timebase.
+func (pio *PlayerItemOutput) ItemTimeForHostTime(hostTimeInSeconds float64) coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForHostTime:"), hostTimeInSeconds)
+	return _r
+}
+
+// ItemTimeForMachAbsoluteTime converts a Mach host time to the item’s timebase.
+func (pio *PlayerItemOutput) ItemTimeForMachAbsoluteTime(machAbsoluteTime int64) coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForMachAbsoluteTime:"), machAbsoluteTime)
+	return _r
+}
+
+// ItemTimeForCVTimeStamp converts a Core Video timestamp to the item’s timebase.
+func (pio *PlayerItemOutput) ItemTimeForCVTimeStamp(timestamp corevideo.CVTimeStamp) coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pio), objc.RegisterName("itemTimeForCVTimeStamp:"), timestamp)
+	return _r
 }
 
 // SuppressesPlayerRendering wraps the corresponding Objective-C method.

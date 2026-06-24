@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,9 +47,10 @@ func circularRegionAdopt(id objc.ID) *CircularRegion {
 	return x
 }
 
-// NewCircularRegion creates a new CircularRegion.
-func NewCircularRegion() *CircularRegion {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLCircularRegion")), objc.RegisterName("new"))
+// NewCircularRegionWithCenterRadiusIdentifier creates and returns a region object defining a circular geographic area.
+func NewCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *CircularRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLCircularRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:identifier:"), center, radius, purego.NSString(identifier))
 	return circularRegionAdopt(_id)
 }
 

@@ -5,7 +5,10 @@
 package videotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,8 +69,15 @@ func (fpf *FrameProcessorFrame) String() string {
 	return rt.Description(objref.IDOf(fpf))
 }
 
-// NewFrameProcessorFrame creates a new FrameProcessorFrame.
-func NewFrameProcessorFrame() *FrameProcessorFrame {
-	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorFrame")), objc.RegisterName("new"))
+// NewFrameProcessorFrameWithBufferPresentationTimeStamp creates a frame object with a pixel buffer and presentation time.
+func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime) *FrameProcessorFrame {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorFrame")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:presentationTimeStamp:"), buffer, presentationTimeStamp)
 	return frameProcessorFrameAdopt(_id)
+}
+
+// PresentationTimeStamp returns presentation timestamp that you provided when you initialized the object.
+func (fpf *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(fpf), objc.RegisterName("presentationTimeStamp"))
+	return _r
 }

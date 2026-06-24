@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,6 +67,24 @@ func (dt *DetectionTrack) IsKind(className string) bool {
 // under fmt.
 func (dt *DetectionTrack) String() string {
 	return rt.Description(objref.IDOf(dt))
+}
+
+// DetectionAtOrBeforeTime wraps the corresponding Objective-C method.
+func (dt *DetectionTrack) DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionAtOrBeforeTime:"), time_)
+	return DetectionFromID(_r)
+}
+
+// DetectionNearestTime wraps the corresponding Objective-C method.
+func (dt *DetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionNearestTime:"), time_)
+	return DetectionFromID(_r)
+}
+
+// DetectionsInTimeRange gets the array of detections in the detection track within the given time range. Makes sense for discrete detection tracks only.
+func (dt *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) []*Detection {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("detectionsInTimeRange:"), timeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
 // DetectionType returns the type of subject detected by this detection track.

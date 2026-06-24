@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func unitConcentrationMassAdopt(id objc.ID) *UnitConcentrationMass {
 func NewUnitConcentrationMass() *UnitConcentrationMass {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("new"))
 	return unitConcentrationMassAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ucm *UnitConcentrationMass) WithObservationInfo(observationInfo unsafe.Pointer) *UnitConcentrationMass {
+	objc.Send[objc.ID](objref.IDOf(ucm), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ucm
 }
 
 // WithScriptingProperties sets the scripting properties.

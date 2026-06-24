@@ -188,6 +188,10 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit generic function wrappers: %w", err)
 	}
+	// A locally re-declared value struct may have enum-typed fields; mark those
+	// enums referenced before emitEnums so they get a local definition (keeping the
+	// struct's field types hermetic).
+	registerLocalStructEnumRefs(fc, m)
 	// Re-export raw enum types/constants referenced by the generated package so
 	// callers never need the raw import to name an enum or use its constants.
 	// Runs last: it scans the files written above.
@@ -200,7 +204,7 @@ func EmitFrameworkWrappers(
 	// idiomatic Go type aliases so callers never need the raw import to name them.
 	// Runs after emitEnums so takenNames is complete.
 	if err := emitStructTypeAliases(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, takenNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, m, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit struct type aliases: %w", err)
 	}

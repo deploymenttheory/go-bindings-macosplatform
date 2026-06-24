@@ -5,6 +5,8 @@
 package netfs
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -23,6 +25,17 @@ func NetFSCopyURLForRemountingVolume(localPathURL obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnNetFSMountURLCancel func(unsafe.Pointer) int
+
+// NetFSMountURLCancel calls the NetFS framework function NetFSMountURLCancel.
+func NetFSMountURLCancel(requestID unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetFSMountURLCancel == nil {
+		ebipurego.RegisterLibFunc(&_fnNetFSMountURLCancel, _lib, "NetFSMountURLCancel")
+	}
+	return _fnNetFSMountURLCancel(requestID)
+}
+
 var _fnNetFSMountURLProbe func(objc.ID) objc.ID
 
 // NetFSMountURLProbe calls the NetFS framework function NetFSMountURLProbe.
@@ -33,4 +46,15 @@ func NetFSMountURLProbe(hostname obj.Object) obj.Object {
 	}
 	_ret := _fnNetFSMountURLProbe(objref.IDOf(hostname))
 	return obj.Wrap(_ret)
+}
+
+var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int
+
+// NetFSMountURLSync calls the NetFS framework function NetFSMountURLSync.
+func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, open_options obj.Object, mount_options obj.Object, mountpoints unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetFSMountURLSync == nil {
+		ebipurego.RegisterLibFunc(&_fnNetFSMountURLSync, _lib, "NetFSMountURLSync")
+	}
+	return _fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(open_options), objref.IDOf(mount_options), mountpoints)
 }

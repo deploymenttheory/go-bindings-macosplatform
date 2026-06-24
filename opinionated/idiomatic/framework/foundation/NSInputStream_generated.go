@@ -70,6 +70,12 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return inputStreamAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (is *InputStream) WithObservationInfo(observationInfo unsafe.Pointer) *InputStream {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return is
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (is *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

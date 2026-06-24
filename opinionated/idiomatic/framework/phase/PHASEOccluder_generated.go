@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -50,6 +52,18 @@ func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEOccluder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
 	return occluderAdopt(_id)
+}
+
+// WithTransform sets a matrix, in local coordinates, that determines the object’s pose in the scene.
+func (o *Occluder) WithTransform(transform unsafe.Pointer) *Occluder {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setTransform:"), transform)
+	return o
+}
+
+// WithWorldTransform sets a matrix, in scene coordinates, that determines the object’s pose in the scene.
+func (o *Occluder) WithWorldTransform(worldTransform unsafe.Pointer) *Occluder {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setWorldTransform:"), worldTransform)
+	return o
 }
 
 // Shapes returns the shapes.

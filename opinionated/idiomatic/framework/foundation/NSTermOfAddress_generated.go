@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (toa *TermOfAddress) String() string {
 func NewTermOfAddress() *TermOfAddress {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("new"))
 	return termOfAddressAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (toa *TermOfAddress) WithObservationInfo(observationInfo unsafe.Pointer) *TermOfAddress {
+	objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return toa
 }
 
 // WithScriptingProperties sets the scripting properties.

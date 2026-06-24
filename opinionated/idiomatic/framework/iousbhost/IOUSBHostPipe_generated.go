@@ -77,6 +77,56 @@ func (hp *HostPipe) ClearStall() error {
 	return nil
 }
 
+// SendControlRequestDataBytesTransferredCompletionTimeout sends a request on a control endpoint.
+func (hp *HostPipe) SendControlRequestDataBytesTransferredCompletionTimeout(request unsafe.Pointer, data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:data:bytesTransferred:completionTimeout:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// SendControlRequestDataBytesTransferred sends a request on a control endpoint with a default timeout.
+func (hp *HostPipe) SendControlRequestDataBytesTransferred(request unsafe.Pointer, data obj.Object) (bytesTransferred int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:data:bytesTransferred:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
+// SendControlRequest sends a request on a control endpoint without a data phase and a default completion timeout.
+func (hp *HostPipe) SendControlRequest(request unsafe.Pointer) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("sendControlRequest:error:"), request, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on a control endpoint.
+func (hp *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, error_, completionHandler)
+	return _r
+}
+
+// EnqueueControlRequestDataErrorCompletionHandler enqueues a request on a control endpoint with a default completion timeout.
+func (hp *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:error:completionHandler:"), request, objref.IDOf(data), error_, completionHandler)
+	return _r
+}
+
+// EnqueueControlRequestErrorCompletionHandler enqueues a request on a control endpoint without a data phase and a default completion timeout.
+func (hp *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:error:completionHandler:"), request, error_, completionHandler)
+	return _r
+}
+
 // AbortWithOption aborts pending input/output requests.
 func (hp *HostPipe) AbortWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
@@ -108,6 +158,12 @@ func (hp *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data 
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return _out0, nil
+}
+
+// EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler enqueues an input/output request on the pipe.
+func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data obj.Object, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueIORequestWithData:completionTimeout:error:completionHandler:"), objref.IDOf(data), completionTimeout, error_, completionHandler)
+	return _r
 }
 
 // EnableStreams enables streams for the pipe.

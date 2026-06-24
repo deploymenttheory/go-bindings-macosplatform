@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -77,6 +78,12 @@ func NewHTTPCookieStorage() *HTTPCookieStorage {
 // WithCookieAcceptPolicy sets the cookie accept policy preference of the receiver.
 func (hcs *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy HTTPCookieAcceptPolicy) *HTTPCookieStorage {
 	objc.Send[objc.ID](objref.IDOf(hcs), objc.RegisterName("setCookieAcceptPolicy:"), cookieAcceptPolicy)
+	return hcs
+}
+
+// WithObservationInfo sets the observation info.
+func (hcs *HTTPCookieStorage) WithObservationInfo(observationInfo unsafe.Pointer) *HTTPCookieStorage {
+	objc.Send[objc.ID](objref.IDOf(hcs), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return hcs
 }
 

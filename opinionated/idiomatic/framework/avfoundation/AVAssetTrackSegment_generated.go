@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,6 +67,12 @@ func (ats *AssetTrackSegment) IsKind(className string) bool {
 // under fmt.
 func (ats *AssetTrackSegment) String() string {
 	return rt.Description(objref.IDOf(ats))
+}
+
+// TimeMapping returns the time mapping.
+func (ats *AssetTrackSegment) TimeMapping() coremedia.CMTimeMapping {
+	_r := objc.Send[coremedia.CMTimeMapping](objref.IDOf(ats), objc.RegisterName("timeMapping"))
+	return _r
 }
 
 // IsEmpty reports whether the object is empty.

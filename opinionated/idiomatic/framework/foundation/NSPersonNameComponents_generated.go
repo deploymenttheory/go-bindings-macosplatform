@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -111,6 +113,12 @@ func (pnc *PersonNameComponents) WithNickname(nickname StringProvider) *PersonNa
 // WithPhoneticRepresentation sets the phonetic representation name components of the receiver.
 func (pnc *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents {
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setPhoneticRepresentation:"), objref.IDOf(phoneticRepresentation))
+	return pnc
+}
+
+// WithObservationInfo sets the observation info.
+func (pnc *PersonNameComponents) WithObservationInfo(observationInfo unsafe.Pointer) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pnc
 }
 

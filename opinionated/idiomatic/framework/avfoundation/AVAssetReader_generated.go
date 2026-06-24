@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -80,6 +81,12 @@ func NewAssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error)
 	return assetReaderAdopt(_id), nil
 }
 
+// WithTimeRange sets the time range within the asset to read.
+func (ar *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetReader {
+	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("setTimeRange:"), timeRange)
+	return ar
+}
+
 // CanAddOutput determines whether you can add the output to the asset reader.
 func (ar *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
 	_r := objc.Send[bool](objref.IDOf(ar), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
@@ -111,6 +118,12 @@ func (ar *AssetReader) Asset() *Asset {
 // Status returns the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
 func (ar *AssetReader) Status() AssetReaderStatus {
 	_r := objc.Send[AssetReaderStatus](objref.IDOf(ar), objc.RegisterName("status"))
+	return _r
+}
+
+// TimeRange specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read. The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). This property throws an exception if a value is set after reading has started.
+func (ar *AssetReader) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(ar), objc.RegisterName("timeRange"))
 	return _r
 }
 

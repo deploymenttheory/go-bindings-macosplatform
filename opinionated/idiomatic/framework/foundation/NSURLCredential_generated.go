@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,12 @@ func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
 	return uRLCredentialAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uc *URLCredential) WithObservationInfo(observationInfo unsafe.Pointer) *URLCredential {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uc
 }
 
 // WithScriptingProperties sets the scripting properties.

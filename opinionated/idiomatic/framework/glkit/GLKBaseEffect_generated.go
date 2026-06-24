@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -92,10 +94,22 @@ func (be *BaseEffect) WithLightingType(lightingType LightingType) *BaseEffect {
 	return be
 }
 
+// WithLightModelAmbientColor sets the ambient color applied to all primitives rendered by the effect.
+func (be *BaseEffect) WithLightModelAmbientColor(lightModelAmbientColor unsafe.Pointer) *BaseEffect {
+	objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("setLightModelAmbientColor:"), lightModelAmbientColor)
+	return be
+}
+
 // WithTextureOrder sets the order in which textures are applied to rendered primitives.
 func (be *BaseEffect) WithTextureOrder(items ...*EffectPropertyTexture) *BaseEffect {
 	_arr := purego.SliceToNSArray(items, func(_v *EffectPropertyTexture) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("setTextureOrder:"), _arr)
+	return be
+}
+
+// WithConstantColor sets a constant color, used when per-vertex color data is not provided.
+func (be *BaseEffect) WithConstantColor(constantColor unsafe.Pointer) *BaseEffect {
+	objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("setConstantColor:"), constantColor)
 	return be
 }
 

@@ -8,6 +8,7 @@ import (
 	"context"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -101,6 +102,11 @@ func (sbvr *SampleBufferVideoRenderer) Status() QueuedSampleBufferRenderingStatu
 func (sbvr *SampleBufferVideoRenderer) RequiresFlushToResumeDecoding() bool {
 	_r := objc.Send[bool](objref.IDOf(sbvr), objc.RegisterName("requiresFlushToResumeDecoding"))
 	return _r
+}
+
+// ExpectMinimumUpcomingSampleBufferPresentationTime promises, for the purpose of enabling power optimizations, that future sample buffers will have PTS values no less than a specified lower-bound PTS. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS has the potential to lead to dropping that later buffer. For best results, call -expectMinimumUpcomingSampleBufferPresentationTime: regularly, in between calls to -enqueueSampleBuffer:, to advance the lower-bound PTS. Messaging -flush resets such expectations. (For example, it's OK to make this expectation, then in response to a seek back, flush and then enqueue buffers with lower PTS values.)
+func (sbvr *SampleBufferVideoRenderer) ExpectMinimumUpcomingSampleBufferPresentationTime(minimumUpcomingPresentationTime coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("expectMinimumUpcomingSampleBufferPresentationTime:"), minimumUpcomingPresentationTime)
 }
 
 // ExpectMonotonicallyIncreasingUpcomingSampleBufferPresentationTimes promises, for the purpose of enabling power optimizations, that future sample buffers will have monotonically increasing PTS values. Only applicable for forward playback. Sending this message and later calling -enqueueSampleBuffer: with a buffer with a lower PTS than any previously enqueued PTS has the potential to lead to dropped buffers. Messaging -flush resets such expectations.

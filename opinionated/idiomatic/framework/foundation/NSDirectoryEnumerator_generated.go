@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func directoryEnumeratorAdopt(id objc.ID) *DirectoryEnumerator {
 func NewDirectoryEnumerator() *DirectoryEnumerator {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDirectoryEnumerator")), objc.RegisterName("new"))
 	return directoryEnumeratorAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (de *DirectoryEnumerator) WithObservationInfo(observationInfo unsafe.Pointer) *DirectoryEnumerator {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return de
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (usttm *URLSessionTaskTransactionMetrics) String() string {
 func NewURLSessionTaskTransactionMetrics() *URLSessionTaskTransactionMetrics {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskTransactionMetrics")), objc.RegisterName("new"))
 	return uRLSessionTaskTransactionMetricsAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (usttm *URLSessionTaskTransactionMetrics) WithObservationInfo(observationInfo unsafe.Pointer) *URLSessionTaskTransactionMetrics {
+	objc.Send[objc.ID](objref.IDOf(usttm), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return usttm
 }
 
 // WithScriptingProperties sets the scripting properties.

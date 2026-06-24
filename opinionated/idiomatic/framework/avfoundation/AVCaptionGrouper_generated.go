@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -75,4 +76,10 @@ func NewCaptionGrouper() *CaptionGrouper {
 // AddCaption adds a caption to the pending group.
 func (cg *CaptionGrouper) AddCaption(input *Caption) {
 	objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("addCaption:"), objref.IDOf(input))
+}
+
+// FlushAddedCaptionsIntoGroupsUpToTime creates caption groups for the captions you enqueue up to the time.
+func (cg *CaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) []*CaptionGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("flushAddedCaptionsIntoGroupsUpToTime:"), upToTime)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CaptionGroup { return CaptionGroupFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -91,6 +93,12 @@ func (cc *CloneCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpecte
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (cc *CloneCommand) WithScriptErrorString(scriptErrorString StringProvider) *CloneCommand {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return cc
+}
+
+// WithObservationInfo sets the observation info.
+func (cc *CloneCommand) WithObservationInfo(observationInfo unsafe.Pointer) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return cc
 }
 

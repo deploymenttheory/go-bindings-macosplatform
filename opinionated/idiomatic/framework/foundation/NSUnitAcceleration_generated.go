@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func unitAccelerationAdopt(id objc.ID) *UnitAcceleration {
 func NewUnitAcceleration() *UnitAcceleration {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("new"))
 	return unitAccelerationAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ua *UnitAcceleration) WithObservationInfo(observationInfo unsafe.Pointer) *UnitAcceleration {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ua
 }
 
 // WithScriptingProperties sets the scripting properties.

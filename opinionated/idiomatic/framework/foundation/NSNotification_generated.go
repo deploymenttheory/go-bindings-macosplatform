@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewNotificationWithCoder(coder *Coder) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return notificationAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (n *Notification) WithObservationInfo(observationInfo unsafe.Pointer) *Notification {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return n
 }
 
 // WithScriptingProperties sets the scripting properties.

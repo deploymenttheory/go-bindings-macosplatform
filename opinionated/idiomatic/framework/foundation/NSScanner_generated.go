@@ -99,6 +99,12 @@ func (s *Scanner) WithLocale(locale obj.Object) *Scanner {
 	return s
 }
 
+// WithObservationInfo sets the observation info.
+func (s *Scanner) WithObservationInfo(observationInfo unsafe.Pointer) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return s
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (s *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

@@ -136,6 +136,24 @@ func (t *Task) WithQualityOfService(qualityOfService QualityOfService) *Task {
 	return t
 }
 
+// WithLaunchPath sets the launch path.
+func (t *Task) WithLaunchPath(launchPath unsafe.Pointer) *Task {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchPath:"), launchPath)
+	return t
+}
+
+// WithCurrentDirectoryPath sets the current directory path.
+func (t *Task) WithCurrentDirectoryPath(currentDirectoryPath unsafe.Pointer) *Task {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCurrentDirectoryPath:"), currentDirectoryPath)
+	return t
+}
+
+// WithObservationInfo sets the observation info.
+func (t *Task) WithObservationInfo(observationInfo unsafe.Pointer) *Task {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return t
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (t *Task) WithScriptingProperties(scriptingProperties obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

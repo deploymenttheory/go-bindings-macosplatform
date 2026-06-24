@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunction
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMapTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyPointerFunctions:valuePointerFunctions:capacity:"), objref.IDOf(keyFunctions), objref.IDOf(valueFunctions), initialCapacity)
 	return mapTableAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mt *MapTable) WithObservationInfo(observationInfo unsafe.Pointer) *MapTable {
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mt
 }
 
 // WithScriptingProperties sets the scripting properties.

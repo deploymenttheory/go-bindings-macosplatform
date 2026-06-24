@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -67,6 +68,18 @@ func (mmi *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag stri
 // WithLocale sets the locale for a mutable metadata item.
 func (mmi *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return mmi
+}
+
+// WithTime sets the timestamp for a mutable metadata item.
+func (mmi *MutableMetadataItem) WithTime(time_ coremedia.CMTime) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setTime:"), time_)
+	return mmi
+}
+
+// WithDuration sets the duration of a mutable metadata item.
+func (mmi *MutableMetadataItem) WithDuration(duration coremedia.CMTime) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setDuration:"), duration)
 	return mmi
 }
 

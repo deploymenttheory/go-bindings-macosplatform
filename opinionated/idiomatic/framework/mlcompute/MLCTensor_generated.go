@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -87,6 +89,12 @@ func (t *Tensor) SynchronizeData() bool {
 // SynchronizeOptimizerData reports whether synchronizes the optimizer data in host memory.
 func (t *Tensor) SynchronizeOptimizerData() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("synchronizeOptimizerData"))
+	return _r
+}
+
+// CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice copies tensor data from device memory to user-specified memory.
+func (t *Tensor) CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length int, synchronizeWithDevice bool) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:"), bytes_, length, synchronizeWithDevice)
 	return _r
 }
 

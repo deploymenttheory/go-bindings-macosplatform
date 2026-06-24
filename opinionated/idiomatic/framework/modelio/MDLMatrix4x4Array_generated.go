@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -74,6 +76,28 @@ func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
 // Clear wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) Clear() {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("clear"))
+}
+
+// SetFloat4x4ArrayCount wraps the corresponding Objective-C method.
+func (ma *Matrix4x4Array) SetFloat4x4ArrayCount(valuesArray unsafe.Pointer, count int) {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setFloat4x4Array:count:"), valuesArray, count)
+}
+
+// SetDouble4x4ArrayCount wraps the corresponding Objective-C method.
+func (ma *Matrix4x4Array) SetDouble4x4ArrayCount(valuesArray unsafe.Pointer, count int) {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setDouble4x4Array:count:"), valuesArray, count)
+}
+
+// GetFloat4x4ArrayMaxCount wraps the corresponding Objective-C method.
+func (ma *Matrix4x4Array) GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("getFloat4x4Array:maxCount:"), valuesArray, maxCount)
+	return _r
+}
+
+// GetDouble4x4ArrayMaxCount wraps the corresponding Objective-C method.
+func (ma *Matrix4x4Array) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("getDouble4x4Array:maxCount:"), valuesArray, maxCount)
+	return _r
 }
 
 // ElementCount returns the element count.

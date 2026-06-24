@@ -85,6 +85,12 @@ func (ku *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy Decod
 	return ku
 }
 
+// WithObservationInfo sets the observation info.
+func (ku *KeyedUnarchiver) WithObservationInfo(observationInfo unsafe.Pointer) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ku
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ku *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
 	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

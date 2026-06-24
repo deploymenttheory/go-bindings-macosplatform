@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -57,6 +59,18 @@ func TextureCubeWithImagesNamed(names []string) *Texture {
 // TextureCubeWithImagesNamedBundle loads a cube texture from the specified image files in the specified bundle.
 func TextureCubeWithImagesNamedBundle(names []string, bundleOrNil obj.Object) *Texture {
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:bundle:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(bundleOrNil))
+	return TextureFromID(_r)
+}
+
+// IrradianceTextureCubeWithTextureNameDimensions generates an irradiance texture from the specified reflectance cube texture.
+func IrradianceTextureCubeWithTextureNameDimensions(texture *Texture, name string, dimensions unsafe.Pointer) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:"), objref.IDOf(texture), purego.NSString(name), dimensions)
+	return TextureFromID(_r)
+}
+
+// IrradianceTextureCubeWithTextureNameDimensionsRoughness generates an irradiance texture from the specified reflectance cube texture, assuming a surface of the specified roughness.
+func IrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *Texture, name string, dimensions unsafe.Pointer, roughness float32) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:roughness:"), objref.IDOf(texture), purego.NSString(name), dimensions, roughness)
 	return TextureFromID(_r)
 }
 

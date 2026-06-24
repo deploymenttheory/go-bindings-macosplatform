@@ -75,6 +75,16 @@ func NewSequenceRequestHandler() *SequenceRequestHandler {
 	return sequenceRequestHandlerAdopt(_id)
 }
 
+// PerformRequestsOnCVPixelBuffer schedules one or more Vision requests to be performed on a Core Video pixel buffer.
+func (srh *SequenceRequestHandler) PerformRequestsOnCVPixelBuffer(requests []*Request, pixelBuffer unsafe.Pointer) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCVPixelBuffer:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), pixelBuffer, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
 func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
 	var _nsErr uintptr

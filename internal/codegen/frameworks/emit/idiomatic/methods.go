@@ -554,7 +554,7 @@ func buildPlainMethod(
 	for i, p := range method.Params {
 		// A value out-parameter is dropped from the signature and surfaced as an
 		// extra return value; the call receives a pointer to a local.
-		if outGo, isOut := outParamGoType(p.ObjCType, ctx, m, fc, rawPkgAlias); isOut {
+		if outGo, isOut := outParamGoType(p.ObjCType, ctx, m, fc, rawPkgAlias, false); isOut {
 			local := fmt.Sprintf("_out%d", outIndex)
 			outIndex++
 			outName := safeParamName(naming.ParamName(p.Name))

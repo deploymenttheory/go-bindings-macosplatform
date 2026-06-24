@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -65,6 +67,12 @@ func NewCountedSetWithSet(set obj.Object) *CountedSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCountedSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSet:"), objref.IDOf(set))
 	return countedSetAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (cs *CountedSet) WithObservationInfo(observationInfo unsafe.Pointer) *CountedSet {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return cs
 }
 
 // WithScriptingProperties sets the scripting properties.

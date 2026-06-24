@@ -6,6 +6,7 @@ package mediaextension
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +73,12 @@ func NewFileInfo() *FileInfo {
 	return fileInfoAdopt(_id)
 }
 
+// WithDuration sets the duration of the media asset, if available.
+func (fi *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
+	objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("setDuration:"), duration)
+	return fi
+}
+
 // WithFragmentsStatus sets indicates if the media asset contains fragments or is extendable by fragments.
 func (fi *FileInfo) WithFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus) *FileInfo {
 	objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("setFragmentsStatus:"), fragmentsStatus)
@@ -82,6 +89,12 @@ func (fi *FileInfo) WithFragmentsStatus(fragmentsStatus FileInfoFragmentsStatus)
 func (fi *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
 	objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("setSidecarFileName:"), purego.NSString(sidecarFileName))
 	return fi
+}
+
+// Duration returns the duration of the media asset if known, otherwise kCMTimeInvalid.
+func (fi *FileInfo) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(fi), objc.RegisterName("duration"))
+	return _r
 }
 
 // FragmentsStatus indicates if the media asset is capable of being extended by fragments or contains fragments See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.

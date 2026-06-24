@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,6 +85,12 @@ func (pie *PlayerInterstitialEvent) WithIdentifier(identifier string) *PlayerInt
 	return pie
 }
 
+// WithTime sets a time within the timeline of the primary content that playback of interstitial content begins.
+func (pie *PlayerInterstitialEvent) WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setTime:"), time_)
+	return pie
+}
+
 // WithDate sets a date within the date range of the primary content that playback of interstitial content begins.
 func (pie *PlayerInterstitialEvent) WithDate(date obj.Object) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setDate:"), objref.IDOf(date))
@@ -100,6 +107,18 @@ func (pie *PlayerInterstitialEvent) WithTemplateItems(items ...*PlayerItem) *Pla
 // WithRestrictions sets the restrictions the event imposes on the playback of interstitial content.
 func (pie *PlayerInterstitialEvent) WithRestrictions(restrictions PlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setRestrictions:"), restrictions)
+	return pie
+}
+
+// WithResumptionOffset sets a time offset at which playback of primary content resumes after interstitial content finishes.
+func (pie *PlayerInterstitialEvent) WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setResumptionOffset:"), resumptionOffset)
+	return pie
+}
+
+// WithPlayoutLimit sets the time offset at which playback of the interstitial ends.
+func (pie *PlayerInterstitialEvent) WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setPlayoutLimit:"), playoutLimit)
 	return pie
 }
 
@@ -151,9 +170,21 @@ func (pie *PlayerInterstitialEvent) WithContentMayVary(contentMayVary bool) *Pla
 	return pie
 }
 
+// WithSkipControlTimeRange sets the time range within the duration of the interstitial event for which a skip button should be displayed.
+func (pie *PlayerInterstitialEvent) WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setSkipControlTimeRange:"), skipControlTimeRange)
+	return pie
+}
+
 // WithSkipControlLocalizedLabelBundleKey sets the key defined in the AVPlayerInterstitialEventController’s localizedStringsBundle that points to the localized label for the skip button.
 func (pie *PlayerInterstitialEvent) WithSkipControlLocalizedLabelBundleKey(skipControlLocalizedLabelBundleKey string) *PlayerInterstitialEvent {
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setSkipControlLocalizedLabelBundleKey:"), purego.NSString(skipControlLocalizedLabelBundleKey))
+	return pie
+}
+
+// WithPlannedDuration sets the planned duration of the event.
+func (pie *PlayerInterstitialEvent) WithPlannedDuration(plannedDuration coremedia.CMTime) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setPlannedDuration:"), plannedDuration)
 	return pie
 }
 
@@ -170,6 +201,12 @@ func (pie *PlayerInterstitialEvent) Identifier() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// Time returns the time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value equal to kCMTimeInvalid if the event was initialized with a date instead of a time.
+func (pie *PlayerInterstitialEvent) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("time"))
+	return _r
 }
 
 // Date returns the date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
@@ -189,6 +226,18 @@ func (pie *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
 // Restrictions indicates restrictions on the use of end user playback controls that are imposed by the event.
 func (pie *PlayerInterstitialEvent) Restrictions() PlayerInterstitialEventRestrictions {
 	_r := objc.Send[PlayerInterstitialEventRestrictions](objref.IDOf(pie), objc.RegisterName("restrictions"))
+	return _r
+}
+
+// ResumptionOffset specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback; this value is typically suitable for live broadcasts. The default value is kCMTimeZero.
+func (pie *PlayerInterstitialEvent) ResumptionOffset() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("resumptionOffset"))
+	return _r
+}
+
+// PlayoutLimit specifies the offset in time at which playback of the interstitial event should end. Can be any positive numeric value, or invalid. The default value is kCMTimeInvalid, which means there is no limit.
+func (pie *PlayerInterstitialEvent) PlayoutLimit() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("playoutLimit"))
 	return _r
 }
 
@@ -255,6 +304,12 @@ func (pie *PlayerInterstitialEvent) ContentMayVary() bool {
 	return _r
 }
 
+// SkipControlTimeRange returns the time range within the duration of the interstitial event for which a skip button should be displayed. The start of the time range should indicate at which point the skip button should appear. The duration of the time range should indicate how long the skip button should be available. If this value is set to kCMTimePositiveInfinity, then the skip button will be available for the remainder of the interstitial's duration after appearing. If either the start or duration of the time range is kCMTimeInvalid, then the interstitial will NOT be eligible to be skipped.
+func (pie *PlayerInterstitialEvent) SkipControlTimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(pie), objc.RegisterName("skipControlTimeRange"))
+	return _r
+}
+
 // SkipControlLocalizedLabelBundleKey returns the key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (pie *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("skipControlLocalizedLabelBundleKey"))
@@ -262,4 +317,10 @@ func (pie *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string 
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// PlannedDuration indicates the event's planned duration. The default value is kCMTimeInvalid.
+func (pie *PlayerInterstitialEvent) PlannedDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("plannedDuration"))
+	return _r
 }

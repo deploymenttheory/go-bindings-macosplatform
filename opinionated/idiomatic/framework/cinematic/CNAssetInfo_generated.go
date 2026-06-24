@@ -7,6 +7,7 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -99,6 +100,12 @@ func (ai *AssetInfo) CinematicDisparityTrack() obj.Object {
 func (ai *AssetInfo) CinematicMetadataTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicMetadataTrack"))
 	return obj.Wrap(_r)
+}
+
+// TimeRange returns time range over which all cinematic tracks are valid.
+func (ai *AssetInfo) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(ai), objc.RegisterName("timeRange"))
+	return _r
 }
 
 // NaturalSize returns natural size at which cinematic video would be rendered

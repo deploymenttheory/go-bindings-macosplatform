@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -87,6 +89,12 @@ func (o *Outline) WithIsOpen(isOpen bool) *Outline {
 // WithDestination sets returns the destination associated with the outline.
 func (o *Outline) WithDestination(destination *Destination) *Outline {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setDestination:"), objref.IDOf(destination))
+	return o
+}
+
+// WithAction sets returns the action performed when users click the outline.
+func (o *Outline) WithAction(action unsafe.Pointer) *Outline {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setAction:"), action)
 	return o
 }
 

@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -150,6 +154,12 @@ func (mmt *MutableMovieTrack) WithPreferredMediaChunkSize(preferredMediaChunkSiz
 	return mmt
 }
 
+// WithPreferredMediaChunkDuration sets the maximum duration to use for each chunk of sample data written to the file for file types that support media chunk duration.
+func (mmt *MutableMovieTrack) WithPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) *MutableMovieTrack {
+	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("setPreferredMediaChunkDuration:"), preferredMediaChunkDuration)
+	return mmt
+}
+
 // WithPreferredMediaChunkAlignment sets the boundary for media chunk alignment for file types that support media chunk alignment.
 func (mmt *MutableMovieTrack) WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *MutableMovieTrack {
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("setPreferredMediaChunkAlignment:"), preferredMediaChunkAlignment)
@@ -217,10 +227,41 @@ func (mmt *MutableMovieTrack) PreferredMediaChunkSize() int {
 	return _r
 }
 
+// PreferredMediaChunkDuration returns for file types that support media chunk durations, the maximum duration to be used for each chunk of sample data written to the file. The total duration of the samples in a chunk will be no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration. The default media chunk duration is 1.0 second. It is an error to set a chunk duration that is negative or non-numeric.
+func (mmt *MutableMovieTrack) PreferredMediaChunkDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mmt), objc.RegisterName("preferredMediaChunkDuration"))
+	return _r
+}
+
 // PreferredMediaChunkAlignment returns for file types that support media chunk alignment, the boundary for media chunk alignment (in bytes). The default value is 0, which means that no padding should be used to achieve chunk alignment. It is an error to set a negative value for chunk alignment.
 func (mmt *MutableMovieTrack) PreferredMediaChunkAlignment() int {
 	_r := objc.Send[int](objref.IDOf(mmt), objc.RegisterName("preferredMediaChunkAlignment"))
 	return _r
+}
+
+// InsertTimeRangeOfTrackAtTimeCopySampleData inserts a portion of an asset track into the target movie.
+func (mmt *MutableMovieTrack) InsertTimeRangeOfTrackAtTimeCopySampleData(timeRange coremedia.CMTimeRange, track *AssetTrack, startTime coremedia.CMTime, copySampleData bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("insertTimeRange:ofTrack:atTime:copySampleData:error:"), timeRange, objref.IDOf(track), startTime, copySampleData, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertEmptyTimeRange adds an empty time range to a track.
+func (mmt *MutableMovieTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
+}
+
+// RemoveTimeRange removes the specified time range from a track.
+func (mmt *MutableMovieTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("removeTimeRange:"), timeRange)
+}
+
+// ScaleTimeRangeToDuration changes the duration of a time range in a track.
+func (mmt *MutableMovieTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // AddTrackAssociationToTrackType creates a specific type of track association between two tracks.
@@ -236,6 +277,12 @@ func (mmt *MutableMovieTrack) RemoveTrackAssociationToTrackType(movieTrack *Movi
 // ReplaceFormatDescriptionWithFormatDescription replaces the track’s format description with a new format description.
 func (mmt *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(formatDescription obj.Object, newFormatDescription obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(formatDescription), objref.IDOf(newFormatDescription))
+}
+
+// InsertMediaTimeRangeIntoTimeRange inserts a reference to a media time range into a track.
+func (mmt *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {
+	_r := objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("insertMediaTimeRange:intoTimeRange:"), mediaTimeRange, trackTimeRange)
+	return _r
 }
 
 var _ MovieTrackProvider = (*MutableMovieTrack)(nil)

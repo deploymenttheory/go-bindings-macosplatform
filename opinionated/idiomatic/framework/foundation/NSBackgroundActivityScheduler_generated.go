@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -94,6 +96,12 @@ func (bas *BackgroundActivityScheduler) WithInterval(interval float64) *Backgrou
 // WithTolerance sets a value of type NSTimeInterval, which specifies a range of time during which the background activity may occur.
 func (bas *BackgroundActivityScheduler) WithTolerance(tolerance float64) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("setTolerance:"), tolerance)
+	return bas
+}
+
+// WithObservationInfo sets the observation info.
+func (bas *BackgroundActivityScheduler) WithObservationInfo(observationInfo unsafe.Pointer) *BackgroundActivityScheduler {
+	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return bas
 }
 

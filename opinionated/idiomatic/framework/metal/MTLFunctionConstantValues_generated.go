@@ -5,7 +5,10 @@
 package metal
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +73,21 @@ func (fcv *FunctionConstantValues) String() string {
 func NewFunctionConstantValues() *FunctionConstantValues {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionConstantValues")), objc.RegisterName("new"))
 	return functionConstantValuesAdopt(_id)
+}
+
+// SetConstantValueTypeAtIndex sets a value for a function constant at a specific index.
+func (fcv *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ DataType, index int) {
+	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValue:type:atIndex:"), value, type_, index)
+}
+
+// SetConstantValuesTypeWithRange sets values for a group of function constants within a specific index range.
+func (fcv *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ DataType, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValues:type:withRange:"), values, type_, range_)
+}
+
+// SetConstantValueTypeWithName sets a value for a function constant with a specific name.
+func (fcv *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ DataType, name string) {
+	objc.Send[objc.ID](objref.IDOf(fcv), objc.RegisterName("setConstantValue:type:withName:"), value, type_, purego.NSString(name))
 }
 
 // Reset deletes all previously set constant values.

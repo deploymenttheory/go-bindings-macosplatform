@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,6 +82,12 @@ func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLR
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(uRL), cachePolicy, timeoutInterval)
 	return uRLRequestAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ur *URLRequest) WithObservationInfo(observationInfo unsafe.Pointer) *URLRequest {
+	objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ur
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -7,6 +7,7 @@ package cinematic
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -67,10 +68,17 @@ func (d *Detection) String() string {
 	return rt.Description(objref.IDOf(d))
 }
 
-// NewDetection creates a new Detection.
-func NewDetection() *Detection {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNDetection")), objc.RegisterName("new"))
+// NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity initialize a cinematic detection. For playback and edit, most detections are obtained by from the cinematic script rather than being created. However, if you need to add a custom track, you can build an array of detections to create one. Any detections you create will not have a valid detectionID until the custom track is added to the cinematic script. Doing so will return the assigned detectionID. Any detections newly obtained from the cinematic script will have their assigned detectionID. - Parameters: - time: the presentation time of the frame in which the detection occurred - detectionType: the type of object that was detected (face, torso, cat, dog, etc.) - normalizedRect: the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right - focusDisparity: the disparity to use in order to focus on the object (use the static `disparity` method to compute if unknown)
+func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremedia.CMTime, detectionType DetectionType, normalizedRect corefoundation.CGRect, focusDisparity float32) *Detection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNDetection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionType:normalizedRect:focusDisparity:"), time_, detectionType, normalizedRect, focusDisparity)
 	return detectionAdopt(_id)
+}
+
+// Time returns the presentation time of the frame in which the detection occurred.
+func (d *Detection) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(d), objc.RegisterName("time"))
+	return _r
 }
 
 // DetectionType returns the type of object that was detected (face, torso, cat, dog, etc.)

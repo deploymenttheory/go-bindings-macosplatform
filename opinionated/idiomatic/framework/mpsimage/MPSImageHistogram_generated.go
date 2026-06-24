@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -80,6 +82,12 @@ func (ih *ImageHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *Im
 // WithZeroHistogram sets zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
 func (ih *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
 	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
+	return ih
+}
+
+// WithMinPixelThresholdValue sets the minimum pixel threshold value The histogram entries will be incremented only if pixel value is >= minPixelThresholdValue. The minPixelThresholdValue is a floating-point value.  For unsigned normalized textures, the minPixelThresholdValue should be a value between 0.0f and 1.0f (for eg. MTLPixelFormatRGBA8Unorm). For signed normalized textures, the minPixelThresholdValue should be a value between -1.0f and 1.0f (for eg. MTLPixelFormatRGBA8Snorm).  Default: vector_float4(0.0f).
+func (ih *ImageHistogram) WithMinPixelThresholdValue(minPixelThresholdValue unsafe.Pointer) *ImageHistogram {
+	objc.Send[objc.ID](objref.IDOf(ih), objc.RegisterName("setMinPixelThresholdValue:"), minPixelThresholdValue)
 	return ih
 }
 

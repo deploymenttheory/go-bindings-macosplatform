@@ -68,6 +68,74 @@ func (e DecodeFrameFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that provide information about the status of a decode operation.
+// Bitmask — values may be combined with |.
+type DecodeInfoFlags int64
+
+const (
+	// A flag that indicates the decode operation ran asynchronously.
+	KVTDecodeInfo_Asynchronous DecodeInfoFlags = 1
+	// A flag that indicates the decode operation dropped a frame.
+	KVTDecodeInfo_FrameDropped DecodeInfoFlags = 2
+	// A flag that indicates the image buffer is safe to modify.
+	KVTDecodeInfo_ImageBufferModifiable DecodeInfoFlags = 4
+	// A flag that indicates whether the decode process skips leading frames after dropping a synchronization frame.
+	KVTDecodeInfo_SkippedLeadingFrameDropped DecodeInfoFlags = 8
+	KVTDecodeInfo_FrameInterrupted           DecodeInfoFlags = 16
+)
+
+// String returns the DecodeInfoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DecodeInfoFlags) String() string {
+	var parts []string
+	if e&KVTDecodeInfo_Asynchronous != 0 {
+		parts = append(parts, "KVTDecodeInfo_Asynchronous")
+	}
+	if e&KVTDecodeInfo_FrameDropped != 0 {
+		parts = append(parts, "KVTDecodeInfo_FrameDropped")
+	}
+	if e&KVTDecodeInfo_ImageBufferModifiable != 0 {
+		parts = append(parts, "KVTDecodeInfo_ImageBufferModifiable")
+	}
+	if e&KVTDecodeInfo_SkippedLeadingFrameDropped != 0 {
+		parts = append(parts, "KVTDecodeInfo_SkippedLeadingFrameDropped")
+	}
+	if e&KVTDecodeInfo_FrameInterrupted != 0 {
+		parts = append(parts, "KVTDecodeInfo_FrameInterrupted")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Flags that indicate encoder state.
+// Bitmask — values may be combined with |.
+type EncodeInfoFlags int64
+
+const (
+	// A flag that indicates that an encode operation ran asynchronously.
+	KVTEncodeInfo_Asynchronous EncodeInfoFlags = 1
+	// A flag that indicates that a frame dropped during encoding.
+	KVTEncodeInfo_FrameDropped EncodeInfoFlags = 2
+)
+
+// String returns the EncodeInfoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EncodeInfoFlags) String() string {
+	var parts []string
+	if e&KVTEncodeInfo_Asynchronous != 0 {
+		parts = append(parts, "KVTEncodeInfo_Asynchronous")
+	}
+	if e&KVTEncodeInfo_FrameDropped != 0 {
+		parts = append(parts, "KVTEncodeInfo_FrameDropped")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type FrameRateConversionConfigurationQualityPrioritization int64
 
 const (
@@ -186,6 +254,28 @@ func (e MotionBlurParametersSubmissionMode) String() string {
 	default:
 		return fmt.Sprintf("MotionBlurParametersSubmissionMode(%d)", int64(e))
 	}
+}
+
+// Flags to control processing of a frame you pass to the motion-estimation session.
+// Bitmask — values may be combined with |.
+type MotionEstimationFrameFlags int64
+
+const (
+	// A hint to the motion-estimation session that you are going to reuse the currentBuffer as referenceBuffer in the next call to VTMotionEstimationSessionEstimateMotionVectors. Using this flag allows the motion-estimation processor to deliver better performance.
+	KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer MotionEstimationFrameFlags = 1
+)
+
+// String returns the MotionEstimationFrameFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MotionEstimationFrameFlags) String() string {
+	var parts []string
+	if e&KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer != 0 {
+		parts = append(parts, "KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 type OpticalFlowConfigurationQualityPrioritization int64

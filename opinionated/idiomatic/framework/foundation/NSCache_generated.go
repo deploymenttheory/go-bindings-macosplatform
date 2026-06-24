@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -93,6 +95,12 @@ func (c *Cache) WithCountLimit(countLimit int) *Cache {
 // WithEvictsObjectsWithDiscardedContent sets whether the cache will automatically evict discardable-content objects whose content has been discarded.
 func (c *Cache) WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) *Cache {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEvictsObjectsWithDiscardedContent:"), evictsObjectsWithDiscardedContent)
+	return c
+}
+
+// WithObservationInfo sets the observation info.
+func (c *Cache) WithObservationInfo(observationInfo unsafe.Pointer) *Cache {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return c
 }
 

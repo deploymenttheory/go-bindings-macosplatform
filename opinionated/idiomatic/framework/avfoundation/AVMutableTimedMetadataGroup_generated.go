@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +50,12 @@ func mutableTimedMetadataGroupAdopt(id objc.ID) *MutableTimedMetadataGroup {
 func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableTimedMetadataGroup")), objc.RegisterName("new"))
 	return mutableTimedMetadataGroupAdopt(_id)
+}
+
+// WithTimeRange sets the time range of the timed metadata.
+func (mtmg *MutableTimedMetadataGroup) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup {
+	objc.Send[objc.ID](objref.IDOf(mtmg), objc.RegisterName("setTimeRange:"), timeRange)
+	return mtmg
 }
 
 // WithItems sets an array of metadata items in the timed metadata group.

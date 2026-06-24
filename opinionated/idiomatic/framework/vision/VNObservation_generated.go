@@ -6,6 +6,7 @@ package vision
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -77,6 +78,12 @@ func (o *Observation) UUID() obj.Object {
 // Confidence returns the level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
 func (o *Observation) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(o), objc.RegisterName("confidence"))
+	return _r
+}
+
+// TimeRange returns the duration of the observation reporting when first detected and how long it is valid. The duration of the observation when used with a sequence of buffers. If a request does not support a timeRange or the timeRange is not known, the start time and duration will be set to 0.
+func (o *Observation) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(o), objc.RegisterName("timeRange"))
 	return _r
 }
 

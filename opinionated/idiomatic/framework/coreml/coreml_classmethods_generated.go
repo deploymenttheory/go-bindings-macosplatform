@@ -90,6 +90,12 @@ func FeatureValueWithMultiArray(value *MultiArray) *FeatureValue {
 	return FeatureValueFromID(_r)
 }
 
+// FeatureValueWithPixelBuffer creates a feature value that contains an image from a pixel buffer.
+func FeatureValueWithPixelBuffer(value unsafe.Pointer) *FeatureValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithPixelBuffer:"), value)
+	return FeatureValueFromID(_r)
+}
+
 // FeatureValueWithSequence creates a feature value that contains a sequence.
 func FeatureValueWithSequence(sequence *Sequence) *FeatureValue {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithSequence:"), objref.IDOf(sequence))

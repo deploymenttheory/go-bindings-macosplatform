@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -32,6 +34,28 @@ func SCNMatrix4EqualToMatrix4(a quartzcore.CATransform3D, b quartzcore.CATransfo
 		ebipurego.RegisterLibFunc(&_fnSCNMatrix4EqualToMatrix4, _lib, "SCNMatrix4EqualToMatrix4")
 	}
 	return _fnSCNMatrix4EqualToMatrix4(a, b)
+}
+
+var _fnSCNMatrix4FromGLKMatrix4 func(unsafe.Pointer) quartzcore.CATransform3D
+
+// SCNMatrix4FromGLKMatrix4 calls the SceneKit framework function SCNMatrix4FromGLKMatrix4.
+func SCNMatrix4FromGLKMatrix4(mat unsafe.Pointer) quartzcore.CATransform3D {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4FromGLKMatrix4 == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4FromGLKMatrix4, _lib, "SCNMatrix4FromGLKMatrix4")
+	}
+	return _fnSCNMatrix4FromGLKMatrix4(mat)
+}
+
+var _fnSCNMatrix4FromMat4 func(unsafe.Pointer) quartzcore.CATransform3D
+
+// SCNMatrix4FromMat4 calls the SceneKit framework function SCNMatrix4FromMat4.
+func SCNMatrix4FromMat4(m unsafe.Pointer) quartzcore.CATransform3D {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNMatrix4FromMat4 == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNMatrix4FromMat4, _lib, "SCNMatrix4FromMat4")
+	}
+	return _fnSCNMatrix4FromMat4(m)
 }
 
 var _fnSCNMatrix4Invert func(quartzcore.CATransform3D) quartzcore.CATransform3D

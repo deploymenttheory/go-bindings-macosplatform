@@ -5,6 +5,8 @@
 package audiotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -125,6 +127,12 @@ func (auvb *AudioUnitV2Bridge) WithChannelMap(items ...obj.Object) *AudioUnitV2B
 	return auvb
 }
 
+// WithProfileChangedBlock sets a block called when a device notifies that a MIDI-CI profile has been enabled or disabled. Since enabling / disabling MIDI-CI profiles is an asynchronous operation, the host can set this block and the audio unit is expected to call it every time the state of a MIDI-CI profile has changed.
+func (auvb *AudioUnitV2Bridge) WithProfileChangedBlock(profileChangedBlock unsafe.Pointer) *AudioUnitV2Bridge {
+	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setProfileChangedBlock:"), profileChangedBlock)
+	return auvb
+}
+
 // WithInputEnabled sets a flag enabling audio input from the unit.
 func (auvb *AudioUnitV2Bridge) WithInputEnabled(inputEnabled bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setInputEnabled:"), inputEnabled)
@@ -134,6 +142,12 @@ func (auvb *AudioUnitV2Bridge) WithInputEnabled(inputEnabled bool) *AudioUnitV2B
 // WithOutputEnabled sets a flag enabling audio output from the unit.
 func (auvb *AudioUnitV2Bridge) WithOutputEnabled(outputEnabled bool) *AudioUnitV2Bridge {
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setOutputEnabled:"), outputEnabled)
+	return auvb
+}
+
+// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial audio experience.
+func (auvb *AudioUnitV2Bridge) WithIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer) *AudioUnitV2Bridge {
+	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setIntendedSpatialExperience:"), intendedSpatialExperience)
 	return auvb
 }
 

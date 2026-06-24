@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -91,6 +92,11 @@ func (npp *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason N
 	}
 }
 
+// CancelProxyWithError cancels the DNS proxy.
+func (npp *NEDNSProxyProvider) CancelProxyWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(npp), objc.RegisterName("cancelProxyWithError:"), error_)
+}
+
 // HandleNewFlow handles a new flow of DNS traffic.
 func (npp *NEDNSProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
 	_r := objc.Send[bool](objref.IDOf(npp), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
@@ -100,6 +106,12 @@ func (npp *NEDNSProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
 // HandleNewUDPFlowInitialRemoteFlowEndpoint this function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
 func (npp *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(npp), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
+	return _r
+}
+
+// HandleNewUDPFlowInitialRemoteEndpoint handles a new flow of UDP traffic.
+func (npp *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(npp), objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:"), objref.IDOf(flow), remoteEndpoint)
 	return _r
 }
 

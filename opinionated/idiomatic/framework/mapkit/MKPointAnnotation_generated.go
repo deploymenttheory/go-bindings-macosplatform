@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,26 @@ func pointAnnotationAdopt(id objc.ID) *PointAnnotation {
 func NewPointAnnotation() *PointAnnotation {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKPointAnnotation")), objc.RegisterName("new"))
 	return pointAnnotationAdopt(_id)
+}
+
+// NewPointAnnotationWithCoordinate creates a point annotation at the specified coordinate on the map.
+func NewPointAnnotationWithCoordinate(coordinate unsafe.Pointer) *PointAnnotation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointAnnotation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
+	return pointAnnotationAdopt(_id)
+}
+
+// NewPointAnnotationWithCoordinateTitleSubtitle creates a point annotation displaying a title and subtitle string at the specified coordinate on the map.
+func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, title string, subtitle string) *PointAnnotation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointAnnotation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:title:subtitle:"), coordinate, purego.NSString(title), purego.NSString(subtitle))
+	return pointAnnotationAdopt(_id)
+}
+
+// WithCoordinate sets the coordinate point of the annotation.
+func (pa *PointAnnotation) WithCoordinate(coordinate unsafe.Pointer) *PointAnnotation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setCoordinate:"), coordinate)
+	return pa
 }
 
 // WithTitle sets the title of the shape annotation.

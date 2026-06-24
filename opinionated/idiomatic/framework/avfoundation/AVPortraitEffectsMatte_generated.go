@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +73,16 @@ func (pem *PortraitEffectsMatte) String() string {
 func NewPortraitEffectsMatte() *PortraitEffectsMatte {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPortraitEffectsMatte")), objc.RegisterName("new"))
 	return portraitEffectsMatteAdopt(_id)
+}
+
+// PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError returns a portrait effects matte by wrapping the replacement pixel buffer.
+func (pem *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *PortraitEffectsMatte, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(pem), objc.RegisterName("portraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return PortraitEffectsMatteFromID(_r), nil
 }
 
 // DictionaryRepresentationForAuxiliaryDataType a dictionary of primitive map information used for writing an image file with a portrait effects matte.

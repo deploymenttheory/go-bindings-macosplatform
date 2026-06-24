@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewPortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port,
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortCoder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceivePort:sendPort:components:"), objref.IDOf(rcvPort), objref.IDOf(sndPort), objref.IDOf(comps))
 	return portCoderAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (pc *PortCoder) WithObservationInfo(observationInfo unsafe.Pointer) *PortCoder {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return pc
 }
 
 // WithScriptingProperties sets the scripting properties.

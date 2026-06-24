@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,4 +71,16 @@ func (vcrh *VideoCompositionRenderHint) String() string {
 func NewVideoCompositionRenderHint() *VideoCompositionRenderHint {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionRenderHint")), objc.RegisterName("new"))
 	return videoCompositionRenderHintAdopt(_id)
+}
+
+// StartCompositionTime returns the start time of the upcoming composition requests.
+func (vcrh *VideoCompositionRenderHint) StartCompositionTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(vcrh), objc.RegisterName("startCompositionTime"))
+	return _r
+}
+
+// EndCompositionTime returns the end time of the upcoming composition requests.
+func (vcrh *VideoCompositionRenderHint) EndCompositionTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(vcrh), objc.RegisterName("endCompositionTime"))
+	return _r
 }

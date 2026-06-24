@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewOrthographyWithCoder(coder *Coder) *Orthography {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return orthographyAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (o *Orthography) WithObservationInfo(observationInfo unsafe.Pointer) *Orthography {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return o
 }
 
 // WithScriptingProperties sets the scripting properties.

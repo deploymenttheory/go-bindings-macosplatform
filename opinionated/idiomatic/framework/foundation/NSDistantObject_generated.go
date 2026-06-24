@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,11 @@ func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return distantObjectAdopt(_id)
+}
+
+// SetProtocolForProxy sets the methods known to be handled by the receiver to those in a given protocol.
+func (do *DistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setProtocolForProxy:"), proto)
 }
 
 // ConnectionForProxy returns the connection for proxy.

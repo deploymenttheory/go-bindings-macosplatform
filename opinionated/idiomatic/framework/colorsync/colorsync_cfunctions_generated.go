@@ -5,6 +5,8 @@
 package colorsync
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -139,6 +141,54 @@ func ColorSyncDeviceSetCustomProfiles(deviceClass obj.Object, deviceID obj.Objec
 	return _fnColorSyncDeviceSetCustomProfiles(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(profileInfo))
 }
 
+var _fnColorSyncIterateDeviceProfiles func(unsafe.Pointer, unsafe.Pointer)
+
+// ColorSyncIterateDeviceProfiles calls the ColorSync framework function ColorSyncIterateDeviceProfiles.
+func ColorSyncIterateDeviceProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncIterateDeviceProfiles == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncIterateDeviceProfiles, _lib, "ColorSyncIterateDeviceProfiles")
+	}
+	_fnColorSyncIterateDeviceProfiles(callBack, userInfo)
+}
+
+var _fnColorSyncIterateInstalledCMMs func(unsafe.Pointer, unsafe.Pointer)
+
+// ColorSyncIterateInstalledCMMs calls the ColorSync framework function ColorSyncIterateInstalledCMMs.
+func ColorSyncIterateInstalledCMMs(callBack unsafe.Pointer, userInfo unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncIterateInstalledCMMs == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledCMMs, _lib, "ColorSyncIterateInstalledCMMs")
+	}
+	_fnColorSyncIterateInstalledCMMs(callBack, userInfo)
+}
+
+var _fnColorSyncIterateInstalledProfiles func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// ColorSyncIterateInstalledProfiles calls the ColorSync framework function ColorSyncIterateInstalledProfiles.
+func ColorSyncIterateInstalledProfiles(callBack unsafe.Pointer, userInfo unsafe.Pointer, error_ unsafe.Pointer) (seed uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncIterateInstalledProfiles == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfiles, _lib, "ColorSyncIterateInstalledProfiles")
+	}
+	var _out0 uint32
+	_fnColorSyncIterateInstalledProfiles(callBack, unsafe.Pointer(&_out0), userInfo, error_)
+	return _out0
+}
+
+var _fnColorSyncIterateInstalledProfilesWithOptions func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer)
+
+// ColorSyncIterateInstalledProfilesWithOptions calls the ColorSync framework function ColorSyncIterateInstalledProfilesWithOptions.
+func ColorSyncIterateInstalledProfilesWithOptions(callBack unsafe.Pointer, userInfo unsafe.Pointer, options obj.Object, error_ unsafe.Pointer) (seed uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncIterateInstalledProfilesWithOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncIterateInstalledProfilesWithOptions, _lib, "ColorSyncIterateInstalledProfilesWithOptions")
+	}
+	var _out0 uint32
+	_fnColorSyncIterateInstalledProfilesWithOptions(callBack, unsafe.Pointer(&_out0), userInfo, objref.IDOf(options), error_)
+	return _out0
+}
+
 var _fnColorSyncProfileContainsTag func(objc.ID, objc.ID) bool
 
 // ColorSyncProfileContainsTag calls the ColorSync framework function ColorSyncProfileContainsTag.
@@ -210,6 +260,19 @@ func ColorSyncProfileCreateDeviceProfile(deviceClass obj.Object, deviceID obj.Ob
 	return obj.Wrap(_ret)
 }
 
+var _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT func(objc.ID, unsafe.Pointer) objc.ID
+
+// ColorSyncProfileCreateDisplayTransferTablesFromVCGT calls the ColorSync framework function ColorSyncProfileCreateDisplayTransferTablesFromVCGT.
+func ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile obj.Object) (result obj.Object, nSamplesPerChannel int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDisplayTransferTablesFromVCGT, _lib, "ColorSyncProfileCreateDisplayTransferTablesFromVCGT")
+	}
+	var _out0 int
+	_ret := _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT(objref.IDOf(profile), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
 var _fnColorSyncProfileCreateLink func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncProfileCreateLink calls the ColorSync framework function ColorSyncProfileCreateLink.
@@ -268,6 +331,27 @@ func ColorSyncProfileCreateWithName(name obj.Object) obj.Object {
 	}
 	_ret := _fnColorSyncProfileCreateWithName(objref.IDOf(name))
 	return obj.Wrap(_ret)
+}
+
+var _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+
+// ColorSyncProfileGetDisplayTransferFormulaFromVCGT calls the ColorSync framework function ColorSyncProfileGetDisplayTransferFormulaFromVCGT.
+func ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile obj.Object) (ok bool, redMin float32, redMax float32, redGamma float32, greenMin float32, greenMax float32, greenGamma float32, blueMin float32, blueMax float32, blueGamma float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetDisplayTransferFormulaFromVCGT, _lib, "ColorSyncProfileGetDisplayTransferFormulaFromVCGT")
+	}
+	var _out0 float32
+	var _out1 float32
+	var _out2 float32
+	var _out3 float32
+	var _out4 float32
+	var _out5 float32
+	var _out6 float32
+	var _out7 float32
+	var _out8 float32
+	_ret := _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT(objref.IDOf(profile), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
 var _fnColorSyncProfileGetTypeID func() int
@@ -367,6 +451,17 @@ func ColorSyncRegisterDevice(deviceClass obj.Object, deviceID obj.Object, device
 		ebipurego.RegisterLibFunc(&_fnColorSyncRegisterDevice, _lib, "ColorSyncRegisterDevice")
 	}
 	return _fnColorSyncRegisterDevice(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(deviceInfo))
+}
+
+var _fnColorSyncTransformConvert func(objc.ID, int, int, unsafe.Pointer, ColorSyncDataDepth, uint32, int, unsafe.Pointer, ColorSyncDataDepth, uint32, int, objc.ID) bool
+
+// ColorSyncTransformConvert calls the ColorSync framework function ColorSyncTransformConvert.
+func ColorSyncTransformConvert(transform obj.Object, width int, height int, dst unsafe.Pointer, dstDepth ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow int, src unsafe.Pointer, srcDepth ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow int, options obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncTransformConvert == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncTransformConvert, _lib, "ColorSyncTransformConvert")
+	}
+	return _fnColorSyncTransformConvert(objref.IDOf(transform), width, height, dst, dstDepth, dstLayout, dstBytesPerRow, src, srcDepth, srcLayout, srcBytesPerRow, objref.IDOf(options))
 }
 
 var _fnColorSyncTransformCopyProperty func(objc.ID, objc.ID, objc.ID) objc.ID

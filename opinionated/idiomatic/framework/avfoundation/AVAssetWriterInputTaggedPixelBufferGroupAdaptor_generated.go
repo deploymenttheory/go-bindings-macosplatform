@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -71,6 +72,12 @@ func NewAssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourceP
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return assetWriterInputTaggedPixelBufferGroupAdaptorAdopt(_id)
+}
+
+// AppendTaggedPixelBufferGroupWithPresentationTime appends a tagged buffer group to the adaptor.
+func (awitpbga *AssetWriterInputTaggedPixelBufferGroupAdaptor) AppendTaggedPixelBufferGroupWithPresentationTime(taggedPixelBufferGroup obj.Object, presentationTime coremedia.CMTime) bool {
+	_r := objc.Send[bool](objref.IDOf(awitpbga), objc.RegisterName("appendTaggedPixelBufferGroup:withPresentationTime:"), objref.IDOf(taggedPixelBufferGroup), presentationTime)
+	return _r
 }
 
 // AssetWriterInput returns the asset writer input to which the receiver should append tagged buffer groups.

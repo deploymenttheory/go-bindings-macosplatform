@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,13 @@ func NewIPAddressWithIPv6AddressData(ipv6Address obj.Object) *IPAddress {
 func NewIPAddressWithIPv4Address(ipv4Address uint32) *IPAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIPv4Address:"), ipv4Address)
+	return iPAddressAdopt(_id)
+}
+
+// NewIPAddressWithSockAddr this method initializes the receiver to contain the address specified.
+func NewIPAddressWithSockAddr(sockAddr unsafe.Pointer) *IPAddress {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBIPAddress")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSockAddr:"), sockAddr)
 	return iPAddressAdopt(_id)
 }
 

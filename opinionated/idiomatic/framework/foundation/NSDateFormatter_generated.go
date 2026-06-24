@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -272,6 +274,12 @@ func (df *DateFormatter) WithGregorianStartDate(gregorianStartDate DateProvider)
 // WithDoesRelativeDateFormatting sets the does relative date formatting.
 func (df *DateFormatter) WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
+	return df
+}
+
+// WithObservationInfo sets the observation info.
+func (df *DateFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return df
 }
 

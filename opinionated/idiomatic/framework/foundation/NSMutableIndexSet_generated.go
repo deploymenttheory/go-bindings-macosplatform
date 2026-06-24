@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func mutableIndexSetAdopt(id objc.ID) *MutableIndexSet {
 func NewMutableIndexSet() *MutableIndexSet {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableIndexSet")), objc.RegisterName("new"))
 	return mutableIndexSetAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mis *MutableIndexSet) WithObservationInfo(observationInfo unsafe.Pointer) *MutableIndexSet {
+	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mis
 }
 
 // WithScriptingProperties sets the scripting properties.

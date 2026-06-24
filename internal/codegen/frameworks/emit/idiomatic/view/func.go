@@ -36,6 +36,11 @@ type Func struct {
 	Call string
 	// Wrap is the object-result conversion template (one %s); used by FuncObject.
 	Wrap string
+	// Outs are pointer out-parameters lifted from the signature into extra return
+	// values, in declaration order. When non-empty the body renders var decls for
+	// each, passes &local to the call, and returns the function's own result (per
+	// Kind) followed by each out value; RetSig is then the parenthesised tuple.
+	Outs []DispatchOut
 	// FailRet is the error-path return list for FuncOSStatus.
 	FailRet string
 	// OkRet is the success return list for FuncOSStatus.

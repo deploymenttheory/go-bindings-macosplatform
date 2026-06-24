@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewMutableStringWithCapacity(capacity int) *MutableString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), capacity)
 	return mutableStringAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ms *MutableString) WithObservationInfo(observationInfo unsafe.Pointer) *MutableString {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ms
 }
 
 // WithScriptingProperties sets the scripting properties.

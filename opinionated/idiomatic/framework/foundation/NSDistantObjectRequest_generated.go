@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (dor *DistantObjectRequest) String() string {
 func NewDistantObjectRequest() *DistantObjectRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDistantObjectRequest")), objc.RegisterName("new"))
 	return distantObjectRequestAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (dor *DistantObjectRequest) WithObservationInfo(observationInfo unsafe.Pointer) *DistantObjectRequest {
+	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return dor
 }
 
 // WithScriptingProperties sets the scripting properties.

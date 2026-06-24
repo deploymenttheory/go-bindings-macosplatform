@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -89,6 +91,22 @@ func (os *OBEXSession) MaxPacketLength() uint16 {
 // HasOpenOBEXConnection reports whether has a successful connect packet been sent and received? This API tells you so.
 func (os *OBEXSession) HasOpenOBEXConnection() bool {
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasOpenOBEXConnection"))
+	return _r
+}
+
+// SetEventCallback sets the C-API callback used when the session recieves data.
+func (os *OBEXSession) SetEventCallback(inEventCallback unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setEventCallback:"), inEventCallback)
+}
+
+// SetEventRefCon sets the C-API callback refCon used when the session recieves data.
+func (os *OBEXSession) SetEventRefCon(inRefCon unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setEventRefCon:"), inRefCon)
+}
+
+// SendDataToTransportDataLength you must override this to send data over your transport. This does nothing by default, it will return a kOBEXUnsupportedError.
+func (os *OBEXSession) SendDataToTransportDataLength(inDataToSend unsafe.Pointer, inDataLength int) int32 {
+	_r := objc.Send[int32](objref.IDOf(os), objc.RegisterName("sendDataToTransport:dataLength:"), inDataToSend, inDataLength)
 	return _r
 }
 

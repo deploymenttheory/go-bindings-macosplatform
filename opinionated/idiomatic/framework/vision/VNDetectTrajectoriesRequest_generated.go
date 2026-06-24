@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -76,6 +77,12 @@ func (dtr *DetectTrajectoriesRequest) WithMaximumObjectSize(maximumObjectSize fl
 	return dtr
 }
 
+// WithTargetFrameTime sets the requested target frame time for processing trajectory detection.
+func (dtr *DetectTrajectoriesRequest) WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest {
+	objc.Send[objc.ID](objref.IDOf(dtr), objc.RegisterName("setTargetFrameTime:"), targetFrameTime)
+	return dtr
+}
+
 // WithRegionOfInterest sets the region of the image in which Vision will perform the request.
 func (dtr *DetectTrajectoriesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest {
 	objc.Send[objc.ID](objref.IDOf(dtr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
@@ -127,6 +134,12 @@ func (dtr *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
 // MaximumObjectSize returns the maximum object size.
 func (dtr *DetectTrajectoriesRequest) MaximumObjectSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("maximumObjectSize"))
+	return _r
+}
+
+// TargetFrameTime specifies the desired target frame time for processing trajectory detection. This can be used for real-time processing of frames, which requires execution with a specific amount of time. The target frame time is evaluated from frame-to-frame. If processing takes longer than this target frame time for the currect frame, it will attempt to reduce the amount of time taken by reducing the accuracy (down to a set minimum) for the next frame. If a frame takes less time than this target, then accuracy of the next frame will be increased (up to a set maximum). The default value is kCMTimeIndefinite, meaning accuracy stays at the predefined maximum.
+func (dtr *DetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(dtr), objc.RegisterName("targetFrameTime"))
 	return _r
 }
 

@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,25 @@ func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return warpGeometryGridAdopt(_id)
+}
+
+// NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions creates a warp geometry grid of a specific size and warp translation, in pointers to point arrays.
+func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *WarpGeometryGrid {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColumns:rows:sourcePositions:destPositions:"), cols, rows, sourcePositions, destPositions)
+	return warpGeometryGridAdopt(_id)
+}
+
+// GridByReplacingSourcePositions returns a copy of the receiver with the source positions replaced by a specified array.
+func (wgg *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
+	_r := objc.Send[objc.ID](objref.IDOf(wgg), objc.RegisterName("gridByReplacingSourcePositions:"), sourcePositions)
+	return WarpGeometryGridFromID(_r)
+}
+
+// GridByReplacingDestPositions returns a copy of the receiver with the destination positions replaced by a specified array.
+func (wgg *WarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid {
+	_r := objc.Send[objc.ID](objref.IDOf(wgg), objc.RegisterName("gridByReplacingDestPositions:"), destPositions)
+	return WarpGeometryGridFromID(_r)
 }
 
 // NumberOfColumns returns the number of columns.

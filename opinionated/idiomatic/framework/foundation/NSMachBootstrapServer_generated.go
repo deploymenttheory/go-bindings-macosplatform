@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func machBootstrapServerAdopt(id objc.ID) *MachBootstrapServer {
 func NewMachBootstrapServer() *MachBootstrapServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMachBootstrapServer")), objc.RegisterName("new"))
 	return machBootstrapServerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mbs *MachBootstrapServer) WithObservationInfo(observationInfo unsafe.Pointer) *MachBootstrapServer {
+	objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mbs
 }
 
 // WithScriptingProperties sets the scripting properties.

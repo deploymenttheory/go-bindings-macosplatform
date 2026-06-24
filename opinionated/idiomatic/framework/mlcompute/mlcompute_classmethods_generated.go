@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -998,6 +1000,18 @@ func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomI
 func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths []obj.Object, sortedSequences bool, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:"), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, objref.IDOf(data))
 	return TensorFromID(_r)
+}
+
+// DataWithBytesNoCopyLength creates a tensor data instance with the buffer of data and length of bytes you specify.
+func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *TensorData {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithBytesNoCopy:length:"), bytes_, length)
+	return TensorDataFromID(_r)
+}
+
+// DataWithImmutableBytesNoCopyLength creates a tensor data instance with the buffer of immutable data and length of bytes you specify.
+func DataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *TensorData {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithImmutableBytesNoCopy:length:"), bytes_, length)
+	return TensorDataFromID(_r)
 }
 
 // DescriptorWithShapeDataType creates a tensor descriptor with the shape and data type you specify.

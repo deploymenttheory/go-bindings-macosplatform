@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -83,6 +84,12 @@ func (pi *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo 
 // WithAutomaticTerminationSupportEnabled sets the automatic termination support enabled.
 func (pi *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
+	return pi
+}
+
+// WithObservationInfo sets the observation info.
+func (pi *ProcessInfo) WithObservationInfo(observationInfo unsafe.Pointer) *ProcessInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pi
 }
 

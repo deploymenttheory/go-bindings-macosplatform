@@ -72,6 +72,12 @@ func (mf *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormat
 	return mf
 }
 
+// WithObservationInfo sets the observation info.
+func (mf *MassFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *MassFormatter {
+	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mf
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (mf *MassFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

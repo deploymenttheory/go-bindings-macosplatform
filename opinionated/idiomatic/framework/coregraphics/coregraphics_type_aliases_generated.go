@@ -4,10 +4,39 @@
 
 package coregraphics
 
+type CGColorBufferFormat struct {
+	Version          uint32
+	BitmapInfo       CGBitmapInfo
+	BitsPerComponent uint
+	BitsPerPixel     uint
+	BytesPerRow      uint
+}
+
+type CGContentInfo struct {
+	DeepestImageComponent  CGComponent
+	ContentColorModels     CGColorModel
+	HasWideGamut           bool
+	HasTransparency        bool
+	LargestContentHeadroom float32
+}
+
 type CGDeviceColor struct {
 	Red   float32
 	Green float32
 	Blue  float32
+}
+
+type CGEventTapInformation struct {
+	EventTapID         uint32
+	TapPoint           CGEventTapLocation
+	Options            CGEventTapOptions
+	EventsOfInterest   uint64
+	TappingProcess     int
+	ProcessBeingTapped int
+	Enabled            bool
+	MinUsecLatency     float32
+	AvgUsecLatency     float32
+	MaxUsecLatency     float32
 }
 
 // The distance, in pixel units, that an onscreen region moves.

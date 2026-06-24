@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,12 @@ func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL stri
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:MIMEType:expectedContentLength:textEncodingName:"), rt.FileURL(uRL), purego.NSString(mIMEType), length, purego.NSString(name))
 	return uRLResponseAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ur *URLResponse) WithObservationInfo(observationInfo unsafe.Pointer) *URLResponse {
+	objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ur
 }
 
 // WithScriptingProperties sets the scripting properties.

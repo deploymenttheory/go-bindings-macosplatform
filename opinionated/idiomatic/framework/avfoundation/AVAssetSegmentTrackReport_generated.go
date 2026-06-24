@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -82,6 +83,18 @@ func (astr *AssetSegmentTrackReport) TrackID() int32 {
 func (astr *AssetSegmentTrackReport) MediaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(astr), objc.RegisterName("mediaType"))
 	return obj.Wrap(_r)
+}
+
+// EarliestPresentationTimeStamp indicates the earliest presentation timestamp (PTS) for this track. The value is kCMTimeInvalid if there is no information available.
+func (astr *AssetSegmentTrackReport) EarliestPresentationTimeStamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(astr), objc.RegisterName("earliestPresentationTimeStamp"))
+	return _r
+}
+
+// Duration indicates the duration for this track. The value is kCMTimeInvalid if there is no information available.
+func (astr *AssetSegmentTrackReport) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(astr), objc.RegisterName("duration"))
+	return _r
 }
 
 // FirstVideoSampleInformation provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.

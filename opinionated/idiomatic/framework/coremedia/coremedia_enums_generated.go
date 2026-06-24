@@ -6,6 +6,7 @@ package coremedia
 
 import (
 	"fmt"
+	"strings"
 )
 
 // A 64-bit representation of a tag’s category.
@@ -65,6 +66,88 @@ func (e CMTagCategory) String() string {
 	default:
 		return fmt.Sprintf("CMTagCategory(%d)", int64(e))
 	}
+}
+
+// The data type of a tag’s value.
+type CMTagDataType int64
+
+const (
+	// The tag value isn’t associated with any known data type.
+	KCMTagDataType_Invalid CMTagDataType = 0
+	// The tag value is a signed 64-bit integer.
+	KCMTagDataType_SInt64 CMTagDataType = 2
+	// The tag value is a 64-bit floating point number.
+	KCMTagDataType_Float64 CMTagDataType = 3
+	// The tag value is a 64-bit identifier used by the operating system.
+	KCMTagDataType_OSType CMTagDataType = 5
+	// The tag value is a 64-bit wide bitflag field.
+	KCMTagDataType_Flags CMTagDataType = 7
+)
+
+// String returns the CMTagDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMTagDataType) String() string {
+	switch e {
+	case KCMTagDataType_Invalid:
+		return "KCMTagDataType_Invalid"
+	case KCMTagDataType_SInt64:
+		return "KCMTagDataType_SInt64"
+	case KCMTagDataType_Float64:
+		return "KCMTagDataType_Float64"
+	case KCMTagDataType_OSType:
+		return "KCMTagDataType_OSType"
+	case KCMTagDataType_Flags:
+		return "KCMTagDataType_Flags"
+	default:
+		return fmt.Sprintf("CMTagDataType(%d)", int64(e))
+	}
+}
+
+// A structure that defines the flags for a time value.
+// Bitmask — values may be combined with |.
+type CMTimeFlags int64
+
+const (
+	// A flag that indicates a time is valid.
+	KCMTimeFlags_Valid CMTimeFlags = 1
+	// A flag that indicates a previous time calculation rounded the result.
+	KCMTimeFlags_HasBeenRounded CMTimeFlags = 2
+	// A flag that indicates the time is positive infinity.
+	KCMTimeFlags_PositiveInfinity CMTimeFlags = 4
+	// A flag that indicates the time is negative infinity.
+	KCMTimeFlags_NegativeInfinity CMTimeFlags = 8
+	// A flag that indicates the time is indefinite.
+	KCMTimeFlags_Indefinite CMTimeFlags = 16
+	// A flag that indicates the time is positive or negative infinity, or indefinite.
+	KCMTimeFlags_ImpliedValueFlagsMask CMTimeFlags = 28
+)
+
+// String returns the CMTimeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMTimeFlags) String() string {
+	var parts []string
+	if e&KCMTimeFlags_Valid != 0 {
+		parts = append(parts, "KCMTimeFlags_Valid")
+	}
+	if e&KCMTimeFlags_HasBeenRounded != 0 {
+		parts = append(parts, "KCMTimeFlags_HasBeenRounded")
+	}
+	if e&KCMTimeFlags_PositiveInfinity != 0 {
+		parts = append(parts, "KCMTimeFlags_PositiveInfinity")
+	}
+	if e&KCMTimeFlags_NegativeInfinity != 0 {
+		parts = append(parts, "KCMTimeFlags_NegativeInfinity")
+	}
+	if e&KCMTimeFlags_Indefinite != 0 {
+		parts = append(parts, "KCMTimeFlags_Indefinite")
+	}
+	if e&KCMTimeFlags_ImpliedValueFlagsMask != 0 {
+		parts = append(parts, "KCMTimeFlags_ImpliedValueFlagsMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // An enumeration of rounding methods to use when performing time calculations.

@@ -66,6 +66,47 @@ func cfuncRetABI(kind objKind, retType string) string {
 	}
 }
 
+// buildCFuncRetSig assembles the Go return clause for a C-function wrapper. A
+// lone return is unnamed (" int"); a multi-value clause — the function's own
+// result plus any lifted out-parameters — is named (" (result int, vcpu uint64,
+// exit *HvVcpuExitT)") so the godoc reads as documentation (E7). Names mirror the
+// methods path: "result" (or "ok" for bool) for the result, the parameter name
+// for each out, de-duplicated against the Go parameter names. It joins resolved
+// type strings only — the gather phase decided each type.
+func buildCFuncRetSig(retType string, kind objKind, outNames []string, outs []view.DispatchOut, sigParts []string) string {
+	type ret struct{ name, typ string }
+	var rets []ret
+	if retType != "" {
+		name := "result"
+		if kind == kindBool {
+			name = "ok"
+		}
+		rets = append(rets, ret{name, retType})
+	}
+	for i, o := range outs {
+		rets = append(rets, ret{outNames[i], o.GoType})
+	}
+	switch {
+	case len(rets) == 0:
+		return ""
+	case len(rets) == 1 && len(outs) == 0:
+		return " " + rets[0].typ
+	}
+	taken := map[string]bool{}
+	for _, sp := range sigParts {
+		if name, _, ok := strings.Cut(sp, " "); ok {
+			taken[name] = true
+		}
+	}
+	parts := make([]string, len(rets))
+	for i, r := range rets {
+		name := safeReturnName(r.name, taken)
+		taken[name] = true
+		parts[i] = name + " " + r.typ
+	}
+	return " (" + strings.Join(parts, ", ") + ")"
+}
+
 func emitGenericFunctionWrappers(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
@@ -73,8 +114,6 @@ func emitGenericFunctionWrappers(
 	trialNames trialNameMap,
 	takenNames map[string]bool,
 ) error {
-	_ = rawPkgAlias
-	_ = rawPkgPath
 	fw := fc.fw
 	ctx := typemap.Context{Framework: fw.Framework}
 	prefix := naming.GoTypeName(strings.ToLower(fw.Framework))
@@ -93,17 +132,38 @@ func emitGenericFunctionWrappers(
 		// gathered per function and merged only once the wrapper is committed, so a
 		// skipped function never contributes an unused import.
 		var sigParts, abiParts, callArgs []string
+		var outs []view.DispatchOut
+		var outNames []string // readable return names for the signature (E7)
 		fnImports := map[string]string{}
 		ok := true
 		usedNames := make(map[string]int)
 		for _, param := range fn.Params {
 			pName := safeParamName(naming.ParamName(param.Name))
 			if pName == "" {
-				pName = fmt.Sprintf("arg%d", len(sigParts))
+				pName = fmt.Sprintf("arg%d", len(sigParts)+len(outs))
 			}
 			usedNames[pName]++
 			if usedNames[pName] > 1 {
 				pName = fmt.Sprintf("%s%d", pName, usedNames[pName])
+			}
+			// A pointer out-parameter is lifted into an extra return value: declare a
+			// local (named _outN so it never clashes with the readable return name),
+			// pass its address to the call, and return it after the result.
+			if outGo, isOut := outParamGoType(param.ObjCType, ctx, m, fc, rawPkgAlias, true); isOut {
+				local := fmt.Sprintf("_out%d", len(outs))
+				outs = append(outs, view.DispatchOut{
+					GoName: local,
+					GoType: outGo,
+					Zero:   zeroLiteral(outGo),
+				})
+				outNames = append(outNames, pName)
+				callArgs = append(callArgs, "unsafe.Pointer(&"+local+")")
+				abiParts = append(abiParts, "unsafe.Pointer")
+				fnImports["unsafe"] = "unsafe"
+				if strings.Contains(outGo, rawPkgAlias+".") {
+					fnImports[rawPkgAlias] = rawPkgPath
+				}
+				continue
 			}
 			sig, argExpr, imps, pok := idiomaticArg(
 				pName,
@@ -162,10 +222,7 @@ func emitGenericFunctionWrappers(
 		takenNames[goName] = true
 
 		varName := "_fn" + goName
-		retSig := ""
-		if retType != "" {
-			retSig = " " + retType
-		}
+		retSig := buildCFuncRetSig(retType, kind, outNames, outs, sigParts)
 		abiRet := cfuncRetABI(kind, retType)
 		// The wrapper is committed: merge its type imports, and add objc when a
 		// parameter or the return crosses the ABI as an objc.ID.
@@ -190,6 +247,7 @@ func emitGenericFunctionWrappers(
 			Kind:      genericFuncKind(kind),
 			Call:      fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", ")),
 			Wrap:      wrap,
+			Outs:      outs,
 		})
 	}
 

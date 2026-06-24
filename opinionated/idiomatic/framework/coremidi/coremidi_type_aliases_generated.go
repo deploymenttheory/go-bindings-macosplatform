@@ -22,6 +22,23 @@ type MIDICIProfileIDStandard struct {
 	ProfileLevel   uint8
 }
 
+// A structure that describes the transformation of MIDI control change events.
+type MIDIControlTransform struct {
+	ControlType         TransformControlType
+	RemappedControlType TransformControlType
+	ControlNumber       uint16
+	Transform           TransformType
+	Param               int16
+}
+
+// A general I/O error notification.
+type MIDIIOErrorNotification struct {
+	MessageID    NotificationMessageID
+	MessageSize  uint
+	DriverDevice uint
+	ErrorCode    int
+}
+
 // A 128-bit MIDI message.
 type MIDIMessage_128 struct {
 	Word0 uint
@@ -43,8 +60,30 @@ type MIDIMessage_96 struct {
 	Word2 uint
 }
 
+// A message that describes a system state change.
+type MIDINotification struct {
+	MessageID   NotificationMessageID
+	MessageSize uint
+}
+
+// A message that describes the addition or removal of an object.
+type MIDIObjectAddRemoveNotification struct {
+	MessageID   NotificationMessageID
+	MessageSize uint
+	Parent      uint
+	ParentType  ObjectType
+	Child       uint
+	ChildType   ObjectType
+}
+
 // A source or destination in a MIDI thru connection.
 type MIDIThruConnectionEndpoint struct {
 	EndpointRef uint
 	UniqueID    int
+}
+
+// The transformation of a single type of MIDI event.
+type MIDITransform struct {
+	Transform TransformType
+	Param     int16
 }

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func xPCCoderAdopt(id objc.ID) *XPCCoder {
 func NewXPCCoder() *XPCCoder {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCCoder")), objc.RegisterName("new"))
 	return xPCCoderAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (xc *XPCCoder) WithObservationInfo(observationInfo unsafe.Pointer) *XPCCoder {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return xc
 }
 
 // WithScriptingProperties sets the scripting properties.

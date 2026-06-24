@@ -148,6 +148,12 @@ func (s *Script) WithLanguage(language *Language) *Script {
 	return s
 }
 
+// WithLanguageInstance sets the language instance.
+func (s *Script) WithLanguageInstance(languageInstance unsafe.Pointer) *Script {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLanguageInstance:"), languageInstance)
+	return s
+}
+
 // CompileAndReturnError wraps the corresponding Objective-C method.
 func (s *Script) CompileAndReturnError(errorInfo obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))

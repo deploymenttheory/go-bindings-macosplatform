@@ -21,11 +21,12 @@ var templatesFS embed.FS
 // funcMap holds the template helpers. Each is a pure formatting function; none
 // decides a Go type (that is the gather phase's job).
 var funcMap = template.FuncMap{
-	"comment":      comment,
-	"wrap":         wrap,
-	"retOutValues": retOutValues,
-	"retOutZeros":  retOutZeros,
-	"join":         join,
+	"comment":           comment,
+	"wrap":              wrap,
+	"retOutValues":      retOutValues,
+	"retOutZeros":       retOutZeros,
+	"cfuncRetOutValues": cfuncRetOutValues,
+	"join":              join,
 }
 
 var templates = template.Must(

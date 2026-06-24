@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,12 @@ func (ip *ItemProvider) WithSuggestedName(suggestedName StringProvider) *ItemPro
 	return ip
 }
 
+// WithObservationInfo sets the observation info.
+func (ip *ItemProvider) WithObservationInfo(observationInfo unsafe.Pointer) *ItemProvider {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ip
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ip *ItemProvider) WithScriptingProperties(scriptingProperties obj.Object) *ItemProvider {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -106,6 +114,12 @@ func (ip *ItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier string)
 // HasRepresentationConformingToTypeIdentifierFileOptions returns a Boolean value indicating whether an item provider contains a data representation conforming to a specified universal type identifier and to specified open-in-place behavior.
 func (ip *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions ItemProviderFileOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("hasRepresentationConformingToTypeIdentifier:fileOptions:"), purego.NSString(typeIdentifier), fileOptions)
+	return _r
+}
+
+// CanLoadObjectOfClass returns a Boolean value indicating whether an item provider can load objects of a specified class.
+func (ip *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(ip), objc.RegisterName("canLoadObjectOfClass:"), aClass)
 	return _r
 }
 

@@ -70,4 +70,10 @@ func (ntps *NETunnelProviderSession) StopTunnel() {
 	objc.Send[objc.ID](objref.IDOf(ntps), objc.RegisterName("stopTunnel"))
 }
 
+// SendProviderMessageReturnErrorResponseHandler send a message to the Tunnel Provider extension. If the extension is not running, it should be launched to handle the message. If this method can’t start sending the message it reports an error in the returnError parameter. If an error occurs while sending the message or returning the result, nil should be sent to the response handler as notification.
+func (ntps *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(messageData obj.Object, error_ unsafe.Pointer, responseHandler func(obj.Object)) bool {
+	_r := objc.Send[bool](objref.IDOf(ntps), objc.RegisterName("sendProviderMessage:returnError:responseHandler:"), objref.IDOf(messageData), error_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { responseHandler(obj.Wrap(_b0)) }))
+	return _r
+}
+
 var _ NEVPNConnectionProvider = (*NETunnelProviderSession)(nil)

@@ -78,6 +78,18 @@ func NewObjectWithEngine(engine *Engine) *Object {
 	return objectAdopt(_id)
 }
 
+// WithTransform sets a matrix, in local coordinates, that determines the object’s pose in the scene.
+func (o *Object) WithTransform(transform unsafe.Pointer) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setTransform:"), transform)
+	return o
+}
+
+// WithWorldTransform sets a matrix, in scene coordinates, that determines the object’s pose in the scene.
+func (o *Object) WithWorldTransform(worldTransform unsafe.Pointer) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setWorldTransform:"), worldTransform)
+	return o
+}
+
 // AddChild adds the given object as a child.
 func (o *Object) AddChild(child *Object) error {
 	var _nsErr uintptr

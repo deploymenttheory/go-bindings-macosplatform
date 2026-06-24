@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -103,6 +105,12 @@ func (bcf *ByteCountFormatter) WithZeroPadsFractionDigits(zeroPadsFractionDigits
 // WithFormattingContext sets the formatting context.
 func (bcf *ByteCountFormatter) WithFormattingContext(formattingContext FormattingContext) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setFormattingContext:"), formattingContext)
+	return bcf
+}
+
+// WithObservationInfo sets the observation info.
+func (bcf *ByteCountFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return bcf
 }
 

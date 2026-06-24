@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -87,6 +89,90 @@ func NewUniformWithNameFloat(name string, value float32) *Uniform {
 	return uniformAdopt(_id)
 }
 
+// NewUniformWithNameVectorFloat2 creates a new Uniform.
+func NewUniformWithNameVectorFloat2(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat2:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameVectorFloat3 creates a new Uniform.
+func NewUniformWithNameVectorFloat3(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat3:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameVectorFloat4 creates a new Uniform.
+func NewUniformWithNameVectorFloat4(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:vectorFloat4:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameMatrixFloat2x2 creates a new Uniform.
+func NewUniformWithNameMatrixFloat2x2(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat2x2:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameMatrixFloat3x3 creates a new Uniform.
+func NewUniformWithNameMatrixFloat3x3(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat3x3:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameMatrixFloat4x4 creates a new Uniform.
+func NewUniformWithNameMatrixFloat4x4(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:matrixFloat4x4:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatVector2 initializes a new uniform object that holds a vector of two floating-point numbers.
+func NewUniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector2:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatVector3 creates and initializes a new uniform object that holds a vector of three floating-point numbers.
+func NewUniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector3:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatVector4 initializes a new uniform object that holds a vector of four floating-point numbers.
+func NewUniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatVector4:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatMatrix2 initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
+func NewUniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix2:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatMatrix3 initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
+func NewUniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix3:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
+// NewUniformWithNameFloatMatrix4 initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
+func NewUniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:floatMatrix4:"), purego.NSString(name), value)
+	return uniformAdopt(_id)
+}
+
 // WithTextureValue sets the receiver’s value as a SpriteKit texture.
 func (u *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
@@ -96,6 +182,78 @@ func (u *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
 // WithFloatValue sets the receiver’s value as a floating-point value.
 func (u *Uniform) WithFloatValue(floatValue float32) *Uniform {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatValue:"), floatValue)
+	return u
+}
+
+// WithVectorFloat2Value sets the vector float2 value.
+func (u *Uniform) WithVectorFloat2Value(vectorFloat2Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setVectorFloat2Value:"), vectorFloat2Value)
+	return u
+}
+
+// WithVectorFloat3Value sets the vector float3 value.
+func (u *Uniform) WithVectorFloat3Value(vectorFloat3Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setVectorFloat3Value:"), vectorFloat3Value)
+	return u
+}
+
+// WithVectorFloat4Value sets the vector float4 value.
+func (u *Uniform) WithVectorFloat4Value(vectorFloat4Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setVectorFloat4Value:"), vectorFloat4Value)
+	return u
+}
+
+// WithMatrixFloat2x2Value sets the matrix float2x2 value.
+func (u *Uniform) WithMatrixFloat2x2Value(matrixFloat2x2Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setMatrixFloat2x2Value:"), matrixFloat2x2Value)
+	return u
+}
+
+// WithMatrixFloat3x3Value sets the matrix float3x3 value.
+func (u *Uniform) WithMatrixFloat3x3Value(matrixFloat3x3Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setMatrixFloat3x3Value:"), matrixFloat3x3Value)
+	return u
+}
+
+// WithMatrixFloat4x4Value sets the matrix float4x4 value.
+func (u *Uniform) WithMatrixFloat4x4Value(matrixFloat4x4Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setMatrixFloat4x4Value:"), matrixFloat4x4Value)
+	return u
+}
+
+// WithFloatVector2Value sets the receiver’s value as a vector of two floating-point values.
+func (u *Uniform) WithFloatVector2Value(floatVector2Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatVector2Value:"), floatVector2Value)
+	return u
+}
+
+// WithFloatVector3Value sets the receiver’s value as a vector of three floating-point values.
+func (u *Uniform) WithFloatVector3Value(floatVector3Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatVector3Value:"), floatVector3Value)
+	return u
+}
+
+// WithFloatVector4Value sets the receiver’s value as a vector of four floating-point values.
+func (u *Uniform) WithFloatVector4Value(floatVector4Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatVector4Value:"), floatVector4Value)
+	return u
+}
+
+// WithFloatMatrix2Value sets the receiver’s value as a 2 x 2 matrix of floating-point values.
+func (u *Uniform) WithFloatMatrix2Value(floatMatrix2Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatMatrix2Value:"), floatMatrix2Value)
+	return u
+}
+
+// WithFloatMatrix3Value sets the receiver’s value as a 3 x 3 matrix of floating-point values.
+func (u *Uniform) WithFloatMatrix3Value(floatMatrix3Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatMatrix3Value:"), floatMatrix3Value)
+	return u
+}
+
+// WithFloatMatrix4Value sets the receiver’s value as a 4 x 4 matrix of floating-point values.
+func (u *Uniform) WithFloatMatrix4Value(floatMatrix4Value unsafe.Pointer) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatMatrix4Value:"), floatMatrix4Value)
 	return u
 }
 

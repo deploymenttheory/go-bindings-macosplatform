@@ -126,6 +126,12 @@ func (xe *XMLElement) WithURI(uRI StringProvider) *XMLElement {
 	return xe
 }
 
+// WithObservationInfo sets the observation info.
+func (xe *XMLElement) WithObservationInfo(observationInfo unsafe.Pointer) *XMLElement {
+	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return xe
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (xe *XMLElement) WithScriptingProperties(scriptingProperties obj.Object) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

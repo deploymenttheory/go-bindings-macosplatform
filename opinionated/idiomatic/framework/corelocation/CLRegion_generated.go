@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,13 @@ func (r *Region) String() string {
 	return rt.Description(objref.IDOf(r))
 }
 
+// NewRegionCircularRegionWithCenterRadiusIdentifier initializes and returns a region object defining a circular area.
+func NewRegionCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *Region {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCircularRegionWithCenter:radius:identifier:"), center, radius, purego.NSString(identifier))
+	return regionAdopt(_id)
+}
+
 // WithNotifyOnEntry sets a Boolean indicating that notifications are generated upon entry into the region.
 func (r *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
@@ -78,6 +87,12 @@ func (r *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
 func (r *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return r
+}
+
+// ContainsCoordinate returns a Boolean value indicating whether the region contains the specified coordinate.
+func (r *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("containsCoordinate:"), coordinate)
+	return _r
 }
 
 // Identifier returns the identifier.

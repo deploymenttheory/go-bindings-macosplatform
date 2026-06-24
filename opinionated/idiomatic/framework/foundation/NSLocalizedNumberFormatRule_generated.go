@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,12 @@ func (lnfr *LocalizedNumberFormatRule) String() string {
 func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSLocalizedNumberFormatRule")), objc.RegisterName("new"))
 	return localizedNumberFormatRuleAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (lnfr *LocalizedNumberFormatRule) WithObservationInfo(observationInfo unsafe.Pointer) *LocalizedNumberFormatRule {
+	objc.Send[objc.ID](objref.IDOf(lnfr), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return lnfr
 }
 
 // WithScriptingProperties sets the scripting properties.

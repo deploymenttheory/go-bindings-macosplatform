@@ -60,6 +60,12 @@ func NewDataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, 
 	return dataDetectorAdopt(_id), nil
 }
 
+// WithObservationInfo sets the observation info.
+func (dd *DataDetector) WithObservationInfo(observationInfo unsafe.Pointer) *DataDetector {
+	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return dd
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (dd *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

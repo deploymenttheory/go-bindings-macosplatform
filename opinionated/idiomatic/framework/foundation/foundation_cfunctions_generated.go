@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -94,6 +96,41 @@ func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bo
 	return _fnNSContainsRect(aRect, bRect)
 }
 
+var _fnNSCopyHashTableWithZone func(objc.ID, unsafe.Pointer) objc.ID
+
+// NSCopyHashTableWithZone calls the Foundation framework function NSCopyHashTableWithZone.
+func NSCopyHashTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyHashTableWithZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyHashTableWithZone, _lib, "NSCopyHashTableWithZone")
+	}
+	_ret := _fnNSCopyHashTableWithZone(objref.IDOf(table), zone)
+	return obj.Wrap(_ret)
+}
+
+var _fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, int)
+
+// NSCopyMemoryPages calls the Foundation framework function NSCopyMemoryPages.
+func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, bytes_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyMemoryPages == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyMemoryPages, _lib, "NSCopyMemoryPages")
+	}
+	_fnNSCopyMemoryPages(source, dest, bytes_)
+}
+
+var _fnNSCopyObject func(objc.ID, int, unsafe.Pointer) objc.ID
+
+// NSCopyObject calls the Foundation framework function NSCopyObject.
+func NSCopyObject(object obj.Object, extraBytes int, zone unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyObject == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyObject, _lib, "NSCopyObject")
+	}
+	_ret := _fnNSCopyObject(objref.IDOf(object), extraBytes, zone)
+	return obj.Wrap(_ret)
+}
+
 var _fnNSCountHashTable func(objc.ID) int
 
 // NSCountHashTable calls the Foundation framework function NSCountHashTable.
@@ -114,6 +151,17 @@ func NSCountMapTable(table obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnNSCountMapTable, _lib, "NSCountMapTable")
 	}
 	return _fnNSCountMapTable(objref.IDOf(table))
+}
+
+var _fnNSDeallocateMemoryPages func(unsafe.Pointer, int)
+
+// NSDeallocateMemoryPages calls the Foundation framework function NSDeallocateMemoryPages.
+func NSDeallocateMemoryPages(ptr unsafe.Pointer, bytes_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDeallocateMemoryPages == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDeallocateMemoryPages, _lib, "NSDeallocateMemoryPages")
+	}
+	_fnNSDeallocateMemoryPages(ptr, bytes_)
 }
 
 var _fnNSDeallocateObject func(objc.ID)
@@ -234,6 +282,20 @@ func NSFullUserName() string {
 	return purego.GoString(_ret)
 }
 
+var _fnNSGetSizeAndAlignment func(string, unsafe.Pointer, unsafe.Pointer) string
+
+// NSGetSizeAndAlignment calls the Foundation framework function NSGetSizeAndAlignment.
+func NSGetSizeAndAlignment(typePtr string) (result string, sizep int, alignp int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetSizeAndAlignment == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetSizeAndAlignment, _lib, "NSGetSizeAndAlignment")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnNSGetSizeAndAlignment(typePtr, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
 var _fnNSHFSTypeCodeFromFileType func(objc.ID) int
 
 // NSHFSTypeCodeFromFileType calls the Foundation framework function NSHFSTypeCodeFromFileType.
@@ -258,6 +320,39 @@ func NSHFSTypeOfFile(fullFilePath string) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnNSHashInsert func(objc.ID, unsafe.Pointer)
+
+// NSHashInsert calls the Foundation framework function NSHashInsert.
+func NSHashInsert(table obj.Object, pointer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHashInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHashInsert, _lib, "NSHashInsert")
+	}
+	_fnNSHashInsert(objref.IDOf(table), pointer)
+}
+
+var _fnNSHashInsertKnownAbsent func(objc.ID, unsafe.Pointer)
+
+// NSHashInsertKnownAbsent calls the Foundation framework function NSHashInsertKnownAbsent.
+func NSHashInsertKnownAbsent(table obj.Object, pointer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHashInsertKnownAbsent == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHashInsertKnownAbsent, _lib, "NSHashInsertKnownAbsent")
+	}
+	_fnNSHashInsertKnownAbsent(objref.IDOf(table), pointer)
+}
+
+var _fnNSHashRemove func(objc.ID, unsafe.Pointer)
+
+// NSHashRemove calls the Foundation framework function NSHashRemove.
+func NSHashRemove(table obj.Object, pointer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHashRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHashRemove, _lib, "NSHashRemove")
+	}
+	_fnNSHashRemove(objref.IDOf(table), pointer)
 }
 
 var _fnNSHeight func(corefoundation.CGRect) float64
@@ -442,6 +537,50 @@ func NSMakeSize(w float64, h float64) corefoundation.CGSize {
 		ebipurego.RegisterLibFunc(&_fnNSMakeSize, _lib, "NSMakeSize")
 	}
 	return _fnNSMakeSize(w, h)
+}
+
+var _fnNSMapInsert func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// NSMapInsert calls the Foundation framework function NSMapInsert.
+func NSMapInsert(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapInsert, _lib, "NSMapInsert")
+	}
+	_fnNSMapInsert(objref.IDOf(table), key, value)
+}
+
+var _fnNSMapInsertKnownAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// NSMapInsertKnownAbsent calls the Foundation framework function NSMapInsertKnownAbsent.
+func NSMapInsertKnownAbsent(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapInsertKnownAbsent == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapInsertKnownAbsent, _lib, "NSMapInsertKnownAbsent")
+	}
+	_fnNSMapInsertKnownAbsent(objref.IDOf(table), key, value)
+}
+
+var _fnNSMapMember func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+
+// NSMapMember calls the Foundation framework function NSMapMember.
+func NSMapMember(table obj.Object, key unsafe.Pointer, originalKey unsafe.Pointer, value unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapMember == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapMember, _lib, "NSMapMember")
+	}
+	return _fnNSMapMember(objref.IDOf(table), key, originalKey, value)
+}
+
+var _fnNSMapRemove func(objc.ID, unsafe.Pointer)
+
+// NSMapRemove calls the Foundation framework function NSMapRemove.
+func NSMapRemove(table obj.Object, key unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapRemove, _lib, "NSMapRemove")
+	}
+	_fnNSMapRemove(objref.IDOf(table), key)
 }
 
 var _fnNSMaxX func(corefoundation.CGRect) float64
@@ -646,6 +785,17 @@ func NSRectToCGRect(nsrect corefoundation.CGRect) corefoundation.CGRect {
 	return _fnNSRectToCGRect(nsrect)
 }
 
+var _fnNSRecycleZone func(unsafe.Pointer)
+
+// NSRecycleZone calls the Foundation framework function NSRecycleZone.
+func NSRecycleZone(zone unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRecycleZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRecycleZone, _lib, "NSRecycleZone")
+	}
+	_fnNSRecycleZone(zone)
+}
+
 var _fnNSResetHashTable func(objc.ID)
 
 // NSResetHashTable calls the Foundation framework function NSResetHashTable.
@@ -700,6 +850,39 @@ func NSSearchPathForDirectoriesInDomains(directory SearchPathDirectory, domainMa
 	}
 	_ret := _fnNSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
 	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+var _fnNSSetUncaughtExceptionHandler func(unsafe.Pointer)
+
+// NSSetUncaughtExceptionHandler calls the Foundation framework function NSSetUncaughtExceptionHandler.
+func NSSetUncaughtExceptionHandler(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSetUncaughtExceptionHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSetUncaughtExceptionHandler, _lib, "NSSetUncaughtExceptionHandler")
+	}
+	_fnNSSetUncaughtExceptionHandler(arg)
+}
+
+var _fnNSSetZoneName func(unsafe.Pointer, objc.ID)
+
+// NSSetZoneName calls the Foundation framework function NSSetZoneName.
+func NSSetZoneName(zone unsafe.Pointer, name string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSetZoneName == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSetZoneName, _lib, "NSSetZoneName")
+	}
+	_fnNSSetZoneName(zone, purego.NSString(name))
+}
+
+var _fnNSShouldRetainWithZone func(objc.ID, unsafe.Pointer) bool
+
+// NSShouldRetainWithZone calls the Foundation framework function NSShouldRetainWithZone.
+func NSShouldRetainWithZone(anObject obj.Object, requestedZone unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSShouldRetainWithZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSShouldRetainWithZone, _lib, "NSShouldRetainWithZone")
+	}
+	return _fnNSShouldRetainWithZone(objref.IDOf(anObject), requestedZone)
 }
 
 var _fnNSSizeFromCGSize func(corefoundation.CGSize) corefoundation.CGSize
@@ -774,6 +957,21 @@ func NSStringFromPoint(aPoint corefoundation.CGPoint) string {
 		ebipurego.RegisterLibFunc(&_fnNSStringFromPoint, _lib, "NSStringFromPoint")
 	}
 	_ret := _fnNSStringFromPoint(aPoint)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSStringFromProtocol func(unsafe.Pointer) objc.ID
+
+// NSStringFromProtocol calls the Foundation framework function NSStringFromProtocol.
+func NSStringFromProtocol(proto unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromProtocol == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromProtocol, _lib, "NSStringFromProtocol")
+	}
+	_ret := _fnNSStringFromProtocol(proto)
 	if _ret == 0 {
 		return ""
 	}
@@ -1080,6 +1278,32 @@ func NSWidth(aRect corefoundation.CGRect) float64 {
 		ebipurego.RegisterLibFunc(&_fnNSWidth, _lib, "NSWidth")
 	}
 	return _fnNSWidth(aRect)
+}
+
+var _fnNSZoneFree func(unsafe.Pointer, unsafe.Pointer)
+
+// NSZoneFree calls the Foundation framework function NSZoneFree.
+func NSZoneFree(zone unsafe.Pointer, ptr unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneFree == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneFree, _lib, "NSZoneFree")
+	}
+	_fnNSZoneFree(zone, ptr)
+}
+
+var _fnNSZoneName func(unsafe.Pointer) objc.ID
+
+// NSZoneName calls the Foundation framework function NSZoneName.
+func NSZoneName(zone unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneName == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneName, _lib, "NSZoneName")
+	}
+	_ret := _fnNSZoneName(zone)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
 var _fnNXReadNSObjectFromCoder func(objc.ID) objc.ID

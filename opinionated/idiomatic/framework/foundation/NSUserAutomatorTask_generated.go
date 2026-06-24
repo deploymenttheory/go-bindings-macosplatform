@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,12 @@ func NewUserAutomatorTask() *UserAutomatorTask {
 // WithVariables sets the variables required by the Automator workflow.
 func (uat *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
 	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setVariables:"), objref.IDOf(variables))
+	return uat
+}
+
+// WithObservationInfo sets the observation info.
+func (uat *UserAutomatorTask) WithObservationInfo(observationInfo unsafe.Pointer) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return uat
 }
 

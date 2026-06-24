@@ -825,10 +825,10 @@ func CTLineDraw(line unsafe.Pointer, context_ unsafe.Pointer) {
 	_fnCTLineDraw(line, context_)
 }
 
-func CTLineEnumerateCaretOffsets(line unsafe.Pointer, block func(float64, int, bool, unsafe.Pointer)) {
+func CTLineEnumerateCaretOffsets(line unsafe.Pointer, block func(float64, int, bool, *bool)) {
 	var __block_block objc.Block
 	if block != nil {
-		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 float64, blockParam1 int, blockParam2 bool, blockParam3 unsafe.Pointer) {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 float64, blockParam1 int, blockParam2 bool, blockParam3 *bool) {
 			block(blockParam0, blockParam1, blockParam2, blockParam3)
 		})
 		defer __block_block.Release()

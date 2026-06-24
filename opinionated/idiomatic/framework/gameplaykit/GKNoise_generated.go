@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -92,6 +94,12 @@ func (n *Noise) WithGradientColors(gradientColors obj.Object) *Noise {
 	return n
 }
 
+// ValueAtPosition the noise value at the specified sample index of the 2D plane.
+func (n *Noise) ValueAtPosition(position unsafe.Pointer) float32 {
+	_r := objc.Send[float32](objref.IDOf(n), objc.RegisterName("valueAtPosition:"), position)
+	return _r
+}
+
 // ApplyAbsoluteValue replaces all negative values in the noise field with their positive absolute values.
 func (n *Noise) ApplyAbsoluteValue() {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("applyAbsoluteValue"))
@@ -125,6 +133,21 @@ func (n *Noise) RemapValuesToCurveWithControlPoints(controlPoints obj.Object) {
 // RemapValuesToTerracesWithPeaksTerracesInverted replaces values in the noise field by mapping them to a terrace-like curve that passes through the specified control points.
 func (n *Noise) RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues []obj.Object, inverted bool) {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("remapValuesToTerracesWithPeaks:terracesInverted:"), purego.SliceToNSArray(peakInputValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inverted)
+}
+
+// MoveBy translates the entire noise field by the specified x, y, and z offsets.
+func (n *Noise) MoveBy(delta unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("moveBy:"), delta)
+}
+
+// ScaleBy scales the entire noise field by the specified x, y, and z factors.
+func (n *Noise) ScaleBy(factor unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("scaleBy:"), factor)
+}
+
+// RotateBy rotates the entire noise field by the specified x, y, and z angles.
+func (n *Noise) RotateBy(radians unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("rotateBy:"), radians)
 }
 
 // AddWithNoise replaces values in the noise field by adding them to values from the specified noise object.

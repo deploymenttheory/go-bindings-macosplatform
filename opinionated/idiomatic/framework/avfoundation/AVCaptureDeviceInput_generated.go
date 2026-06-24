@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -57,6 +58,12 @@ func NewCaptureDeviceInputWithDeviceError(device *CaptureDevice) (result *Captur
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return captureDeviceInputAdopt(_id), nil
+}
+
+// WithActiveLockedVideoFrameDuration sets the receiver’s locked frame duration (the reciprocal of its frame rate). Setting this property guarantees the intra-frame duration delivered by the device input is precisely the frame duration you request.
+func (cdi *CaptureDeviceInput) WithActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime) *CaptureDeviceInput {
+	objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("setActiveLockedVideoFrameDuration:"), activeLockedVideoFrameDuration)
+	return cdi
 }
 
 // WithMultichannelAudioMode sets the multichannel audio mode to apply when recording audio.
@@ -112,9 +119,21 @@ func (cdi *CaptureDeviceInput) IsLockedVideoFrameDurationSupported() bool {
 	return _r
 }
 
+// ActiveLockedVideoFrameDuration returns the receiver's locked frame duration (the reciprocal of its frame rate). Setting this property guarantees the intra-frame duration delivered by the device input is precisely the frame duration you request. Set this property to run the receiver's associated “AVCaptureDevice“ at precisely your provided frame rate (expressed as a duration). Query “AVCaptureDevice/minSupportedLockedVideoFrameDuration“ to find the minimum value supported by this “AVCaptureDeviceInput“. In order to disable locked video frame duration, set this property to `kCMTimeInvalid`. This property resets itself to `kCMTimeInvalid` when the receiver's attached “AVCaptureDevice/activeFormat“ changes. When you set this property, its value is also reflected in the receiver's “AVCaptureDevice/activeVideoMinFrameDuration“ and “AVCaptureDevice/activeVideoMaxFrameDuration“. - Note: Locked frame duration availability may change depending on the device configuration. For example, locked frame duration is unsupported when “AVCaptureDevice/autoVideoFrameRateEnabled“ or “AVCaptureMovieFileOutput/spatialVideoCaptureEnabled“ is set to `true`. - Note: Only one “AVCaptureDeviceInput“ added to an “AVCaptureMultiCamSession“ can follow an external sync device or run at a locked frame duration. - Note: Setting this property may cause a lengthy reconfiguration of the receiver, similar to setting “AVCaptureDevice/activeFormat“ or “AVCaptureSession/sessionPreset“. - Note: When using this property, set the exposure duration with “AVCaptureDevice/setExposureModeCustomWithDuration:ISO:completionHandler:“ to one half the frame duration (or less) to maintain full dynamic range. - Important: If you set this property to a valid value while the receiver's “AVCaptureDevice/minSupportedLockedVideoFrameDuration“ is `kCMTimeInvalid`, it throws an `NSInvalidArgumentException`. - Important: If you set this property while the receiver's  “lockedVideoFrameDurationSupported“ property returns `false`, it throws an `NSInvalidArgumentException`.
+func (cdi *CaptureDeviceInput) ActiveLockedVideoFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cdi), objc.RegisterName("activeLockedVideoFrameDuration"))
+	return _r
+}
+
 // IsExternalSyncSupported reports whether the device input supports being configured to follow an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
 func (cdi *CaptureDeviceInput) IsExternalSyncSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cdi), objc.RegisterName("isExternalSyncSupported"))
+	return _r
+}
+
+// ActiveExternalSyncVideoFrameDuration returns the receiver's external sync frame duration (the reciprocal of its frame rate) when being driven by an external sync device. Set up your input to follow an external sync device by calling “followExternalSyncDevice:videoFrameDuration:delegate:“. - Note: The value of this readonly property is `kCMTimeInvalid` unless the “AVExternalSyncDevice“ is actively driving the “AVCaptureDeviceInput“. This is reflected by the “AVExternalSyncDevice/status“ being either “AVExternalSyncDeviceStatusActiveSync“ or “AVExternalSyncDeviceStatusFreeRunSync“.
+func (cdi *CaptureDeviceInput) ActiveExternalSyncVideoFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cdi), objc.RegisterName("activeExternalSyncVideoFrameDuration"))
 	return _r
 }
 

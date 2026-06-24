@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string,
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptClassDescription")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSuiteName:className:dictionary:"), purego.NSString(suiteName), purego.NSString(className), objref.IDOf(classDeclaration))
 	return scriptClassDescriptionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (scd *ScriptClassDescription) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptClassDescription {
+	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return scd
 }
 
 // WithScriptingProperties sets the scripting properties.

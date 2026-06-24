@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,24 @@ func (iblcc *IOBluetoothL2CAPChannel) GetIncomingMTU() uint16 {
 // RequestRemoteMTU initiates the process to reconfigure the L2CAP channel with a new outgoing MTU.
 func (iblcc *IOBluetoothL2CAPChannel) RequestRemoteMTU(remoteMTU uint16) int {
 	_r := objc.Send[int](objref.IDOf(iblcc), objc.RegisterName("requestRemoteMTU:"), remoteMTU)
+	return _r
+}
+
+// WriteAsyncTrapLengthRefcon writes async trap length refcon.
+func (iblcc *IOBluetoothL2CAPChannel) WriteAsyncTrapLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(iblcc), objc.RegisterName("writeAsyncTrap:length:refcon:"), data, length, refcon)
+	return _r
+}
+
+// WriteAsyncLengthRefcon writes the given data over the target L2CAP channel asynchronously to the remote device.
+func (iblcc *IOBluetoothL2CAPChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(iblcc), objc.RegisterName("writeAsync:length:refcon:"), data, length, refcon)
+	return _r
+}
+
+// WriteSyncLength writes the given data synchronously over the target L2CAP channel to the remote device.
+func (iblcc *IOBluetoothL2CAPChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
+	_r := objc.Send[int](objref.IDOf(iblcc), objc.RegisterName("writeSync:length:"), data, length)
 	return _r
 }
 

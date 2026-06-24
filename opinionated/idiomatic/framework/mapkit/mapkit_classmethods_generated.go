@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -25,6 +27,12 @@ func FilterExcludingAll() *AddressFilter {
 	return AddressFilterFromID(_r)
 }
 
+// CircleWithCenterCoordinateRadius creates and returns a circle object using the specified coordinate and radius.
+func CircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointer) *Circle {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKCircle")), objc.RegisterName("circleWithCenterCoordinate:radius:"), coord, radius)
+	return CircleFromID(_r)
+}
+
 // CompassButtonWithMapView creates a compass button and associates it with the specified map view.
 func CompassButtonWithMapView(mapView *MapView) *CompassButton {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("compassButtonWithMapView:"), objref.IDOf(mapView))
@@ -37,9 +45,27 @@ func IsDirectionsRequestURL(url string) bool {
 	return _r
 }
 
+// PolylineWithCoordinatesCount creates and returns a geodesic polyline using the specified coordinates.
+func PolylineWithCoordinatesCount(coords unsafe.Pointer, count int) *GeodesicPolyline {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKGeodesicPolyline")), objc.RegisterName("polylineWithCoordinates:count:"), coords, count)
+	return GeodesicPolylineFromID(_r)
+}
+
 // Camera returns a new camera object for you to configure.
 func Camera() *MapCamera {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("camera"))
+	return MapCameraFromID(_r)
+}
+
+// CameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude returns a new camera object using the specified viewing angle information.
+func CameraLookingAtCenterCoordinateFromEyeCoordinateEyeAltitude(centerCoordinate unsafe.Pointer, eyeCoordinate unsafe.Pointer, eyeAltitude unsafe.Pointer) *MapCamera {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("cameraLookingAtCenterCoordinate:fromEyeCoordinate:eyeAltitude:"), centerCoordinate, eyeCoordinate, eyeAltitude)
+	return MapCameraFromID(_r)
+}
+
+// CameraLookingAtCenterCoordinateFromDistancePitchHeading returns a new camera object using the specified distance, pitch, and heading information.
+func CameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate unsafe.Pointer, distance unsafe.Pointer, pitch float64, heading unsafe.Pointer) *MapCamera {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("cameraLookingAtCenterCoordinate:fromDistance:pitch:heading:"), centerCoordinate, distance, pitch, heading)
 	return MapCameraFromID(_r)
 }
 
@@ -130,6 +156,24 @@ func FilterIncludingAllCategories() *PointOfInterestFilter {
 func FilterExcludingAllCategories() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterExcludingAllCategories"))
 	return PointOfInterestFilterFromID(_r)
+}
+
+// PolygonWithCoordinatesCount creates and returns a polygon object from the specified set of coordinates.
+func PolygonWithCoordinatesCount(coords unsafe.Pointer, count int) *Polygon {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithCoordinates:count:"), coords, count)
+	return PolygonFromID(_r)
+}
+
+// PolygonWithCoordinatesCountInteriorPolygons creates and returns a polygon object from the specified set of coordinates and interior polygons.
+func PolygonWithCoordinatesCountInteriorPolygons(coords unsafe.Pointer, count int, interiorPolygons []*Polygon) *Polygon {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithCoordinates:count:interiorPolygons:"), coords, count, purego.SliceToNSArray(interiorPolygons, func(_v *Polygon) objc.ID { return objref.IDOf(_v) }))
+	return PolygonFromID(_r)
+}
+
+// MKPolylinePolylineWithCoordinatesCount creates a polyline object from the specified set of coordinates.
+func MKPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count int) *Polyline {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolyline")), objc.RegisterName("polylineWithCoordinates:count:"), coords, count)
+	return PolylineFromID(_r)
 }
 
 // MapItemDetailWithPresentationStyle detailed information about a place

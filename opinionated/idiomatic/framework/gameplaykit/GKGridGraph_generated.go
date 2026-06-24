@@ -5,8 +5,11 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,10 +48,17 @@ func gridGraphAdopt(id objc.ID) *GridGraph {
 	return x
 }
 
-// NewGridGraph creates a new GridGraph.
-func NewGridGraph() *GridGraph {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKGridGraph")), objc.RegisterName("new"))
+// NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed initializes a graph that describes an integer grid with the specified dimensions.
+func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) *GridGraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGridGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromGridStartingAt:width:height:diagonalsAllowed:"), position, width, height, diagonalsAllowed)
 	return gridGraphAdopt(_id)
+}
+
+// NodeAtGridPosition returns the node in the graph at the specified grid coordinates.
+func (gg *GridGraph) NodeAtGridPosition(position unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("nodeAtGridPosition:"), position)
+	return obj.Wrap(_r)
 }
 
 // ConnectNodeToAdjacentNodes adds the specified node to the graph, connecting it to its nearest neighbors in the grid.

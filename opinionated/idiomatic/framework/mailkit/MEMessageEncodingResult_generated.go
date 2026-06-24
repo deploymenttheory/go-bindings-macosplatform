@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (mer *MessageEncodingResult) String() string {
 	return rt.Description(objref.IDOf(mer))
 }
 
-// NewMessageEncodingResult creates a new MessageEncodingResult.
-func NewMessageEncodingResult() *MessageEncodingResult {
-	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageEncodingResult")), objc.RegisterName("new"))
+// NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.
+func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encodedMessage *EncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageEncodingResult {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageEncodingResult")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEncodedMessage:signingError:encryptionError:"), objref.IDOf(encodedMessage), signingError, encryptionError)
 	return messageEncodingResultAdopt(_id)
 }
 

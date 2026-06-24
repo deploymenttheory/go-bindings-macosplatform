@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (ah *AssertionHandler) String() string {
 func NewAssertionHandler() *AssertionHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("new"))
 	return assertionHandlerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ah *AssertionHandler) WithObservationInfo(observationInfo unsafe.Pointer) *AssertionHandler {
+	objc.Send[objc.ID](objref.IDOf(ah), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ah
 }
 
 // WithScriptingProperties sets the scripting properties.

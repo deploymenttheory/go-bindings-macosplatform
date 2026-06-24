@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -81,6 +82,12 @@ func (bo *BlockOperation) WithQualityOfService(qualityOfService QualityOfService
 // WithName sets the name.
 func (bo *BlockOperation) WithName(name StringProvider) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setName:"), objref.IDOf(name))
+	return bo
+}
+
+// WithObservationInfo sets the observation info.
+func (bo *BlockOperation) WithObservationInfo(observationInfo unsafe.Pointer) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return bo
 }
 

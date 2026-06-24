@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -103,6 +104,12 @@ func (sbr *SampleBufferRequest) WithMode(mode SampleBufferRequestMode) *SampleBu
 	return sbr
 }
 
+// WithOverrideTime sets the deadline for sample data and output PTS for the sample buffer.
+func (sbr *SampleBufferRequest) WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setOverrideTime:"), overrideTime)
+	return sbr
+}
+
 // StartCursor returns the start cursor.
 func (sbr *SampleBufferRequest) StartCursor() *SampleCursor {
 	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("startCursor"))
@@ -136,5 +143,11 @@ func (sbr *SampleBufferRequest) MaxSampleCount() int {
 // Mode returns the mode.
 func (sbr *SampleBufferRequest) Mode() SampleBufferRequestMode {
 	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(sbr), objc.RegisterName("mode"))
+	return _r
+}
+
+// OverrideTime returns the override time.
+func (sbr *SampleBufferRequest) OverrideTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sbr), objc.RegisterName("overrideTime"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,9 +74,33 @@ func NewMapCamera() *MapCamera {
 	return mapCameraAdopt(_id)
 }
 
+// WithCenterCoordinate sets the map coordinate at the center of the map view.
+func (mc *MapCamera) WithCenterCoordinate(centerCoordinate unsafe.Pointer) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setCenterCoordinate:"), centerCoordinate)
+	return mc
+}
+
+// WithCenterCoordinateDistance sets the distance from the center point of the map to the camera, in meters.
+func (mc *MapCamera) WithCenterCoordinateDistance(centerCoordinateDistance unsafe.Pointer) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setCenterCoordinateDistance:"), centerCoordinateDistance)
+	return mc
+}
+
+// WithHeading sets the heading of the camera (in degrees) relative to true north.
+func (mc *MapCamera) WithHeading(heading unsafe.Pointer) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setHeading:"), heading)
+	return mc
+}
+
 // WithPitch sets the viewing angle of the camera, in degrees.
 func (mc *MapCamera) WithPitch(pitch float64) *MapCamera {
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setPitch:"), pitch)
+	return mc
+}
+
+// WithAltitude sets the altitude above the ground, in meters.
+func (mc *MapCamera) WithAltitude(altitude unsafe.Pointer) *MapCamera {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setAltitude:"), altitude)
 	return mc
 }
 

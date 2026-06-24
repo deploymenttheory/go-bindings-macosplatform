@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +73,16 @@ func (ssm *SemanticSegmentationMatte) String() string {
 func NewSemanticSegmentationMatte() *SemanticSegmentationMatte {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVSemanticSegmentationMatte")), objc.RegisterName("new"))
 	return semanticSegmentationMatteAdopt(_id)
+}
+
+// SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError returns a semantic segmentation matte instance that wraps the replacement pixel buffer.
+func (ssm *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *SemanticSegmentationMatte, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("semanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return SemanticSegmentationMatteFromID(_r), nil
 }
 
 // DictionaryRepresentationForAuxiliaryDataType returns a dictionary of primitive map information to use when writing an image file with a semantic segmentation matte.

@@ -102,6 +102,11 @@ func (ckr *ContentKeyRequest) ProcessContentKeyResponse(keyResponse *ContentKeyR
 	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("processContentKeyResponse:"), objref.IDOf(keyResponse))
 }
 
+// ProcessContentKeyResponseError tells the receiver that the app was unable to obtain a content key response.
+func (ckr *ContentKeyRequest) ProcessContentKeyResponseError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(ckr), objc.RegisterName("processContentKeyResponseError:"), error_)
+}
+
 // RespondByRequestingPersistableContentKeyRequestAndReturnError tells the receiver that the app requires a persistable content key request object for processing.
 //
 // RespondByRequestingPersistableContentKeyRequestAndReturnError returns an error if the operation did not succeed.

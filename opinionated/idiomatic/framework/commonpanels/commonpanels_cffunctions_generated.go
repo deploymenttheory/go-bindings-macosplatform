@@ -5,6 +5,8 @@
 package commonpanels
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -81,6 +83,21 @@ func FPShowHideFontPanel() error {
 		ebipurego.RegisterLibFunc(&_fnFPShowHideFontPanel, _lib, "FPShowHideFontPanel")
 	}
 	_rc := _fnFPShowHideFontPanel()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSetFontInfoForSelection func(int, int, unsafe.Pointer, objc.ID) int32
+
+// SetFontInfoForSelection reports an error if the CommonPanels framework function SetFontInfoForSelection fails.
+func SetFontInfoForSelection(iStyleType int, iNumStyles int, iStyles unsafe.Pointer, iFPEventTarget obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetFontInfoForSelection == nil {
+		ebipurego.RegisterLibFunc(&_fnSetFontInfoForSelection, _lib, "SetFontInfoForSelection")
+	}
+	_rc := _fnSetFontInfoForSelection(iStyleType, iNumStyles, iStyles, objref.IDOf(iFPEventTarget))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

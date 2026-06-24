@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,10 +67,24 @@ func (d *Decision) String() string {
 	return rt.Description(objref.IDOf(d))
 }
 
-// NewDecision creates a new Decision.
-func NewDecision() *Decision {
-	_id := objc.Send[objc.ID](objc.ID(_class("CNDecision")), objc.RegisterName("new"))
+// NewDecisionWithTimeDetectionIDStrong make a decision to focus on the detection with the given detectionID. A strong decision keeps focus for as long as possible.
+func NewDecisionWithTimeDetectionIDStrong(time_ coremedia.CMTime, detectionID int64, isStrong bool) *Decision {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNDecision")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionID:strong:"), time_, detectionID, isStrong)
 	return decisionAdopt(_id)
+}
+
+// NewDecisionWithTimeDetectionGroupIDStrong make a decision to focus on the best among those detections with the same detectionGroupID. A strong decision keeps focus for as long as possible.
+func NewDecisionWithTimeDetectionGroupIDStrong(time_ coremedia.CMTime, detectionGroupID int64, isStrong bool) *Decision {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNDecision")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionGroupID:strong:"), time_, detectionGroupID, isStrong)
+	return decisionAdopt(_id)
+}
+
+// Time returns the first presentation time at which the subject should be in focus. The rack focus transition to the subject occurs prior to this time.
+func (d *Decision) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(d), objc.RegisterName("time"))
+	return _r
 }
 
 // DetectionID returns the detectionID of the detection to focus on if this is not a group decision.

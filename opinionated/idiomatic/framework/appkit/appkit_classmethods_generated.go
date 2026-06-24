@@ -36,6 +36,12 @@ func ContentType() obj.Object {
 	return obj.Wrap(_r)
 }
 
+// AlertWithError returns an alert initialized from information in an error object.
+func AlertWithError(error_ unsafe.Pointer) *Alert {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("alertWithError:"), error_)
+	return AlertFromID(_r)
+}
+
 // AlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat creates an alert compatible with alerts created using the NSRunAlertPanel function for display as a warning-style alert.
 func AlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextWithFormat(message string, defaultButton string, alternateButton string, otherButton string, format string) *Alert {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAlert")), objc.RegisterName("alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:"), purego.NSString(message), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton), purego.NSString(format))
@@ -1611,6 +1617,12 @@ func NSEPSImageRepImageRepWithData(epsData obj.Object) *EPSImageRep {
 	return EPSImageRepFromID(_r)
 }
 
+// EventWithEventRef creates and returns a new event object for a Carbon event.
+func EventWithEventRef(eventRef unsafe.Pointer) *Event {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("eventWithEventRef:"), eventRef)
+	return EventFromID(_r)
+}
+
 // EventWithCGEvent creates and returns an event object for a Core Graphics event.
 func EventWithCGEvent(cgEvent obj.Object) *Event {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("eventWithCGEvent:"), objref.IDOf(cgEvent))
@@ -1636,6 +1648,12 @@ func MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNum
 // KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode creates and returns a new event object that describes a key event.
 func KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, keys string, ukeys string, flag bool, code uint16) *Event {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("keyEventWithType:location:modifierFlags:timestamp:windowNumber:context:characters:charactersIgnoringModifiers:isARepeat:keyCode:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), purego.NSString(keys), purego.NSString(ukeys), flag, code)
+	return EventFromID(_r)
+}
+
+// EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData creates and returns a new event object that describes a tracking-rectangle or cursor-update event.
+func EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ EventType, location corefoundation.CGPoint, flags EventModifierFlags, time_ float64, wNum int, unusedPassNil *GraphicsContext, eNum int, tNum int, data unsafe.Pointer) *Event {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("enterExitEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:trackingNumber:userData:"), type_, location, flags, time_, wNum, objref.IDOf(unusedPassNil), eNum, tNum, data)
 	return EventFromID(_r)
 }
 
@@ -2069,6 +2087,12 @@ func SetGraphicsState(gState int) {
 	objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("setGraphicsState:"), gState)
 }
 
+// GraphicsContextWithGraphicsPortFlipped creates a new graphics context from the specified graphics port.
+func GraphicsContextWithGraphicsPortFlipped(graphicsPort unsafe.Pointer, initialFlippedState bool) *GraphicsContext {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithGraphicsPort:flipped:"), graphicsPort, initialFlippedState)
+	return GraphicsContextFromID(_r)
+}
+
 // GraphicsContextWithWindow creates a new graphics context for drawing into a window.
 func GraphicsContextWithWindow(window *Window) *GraphicsContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithWindow:"), objref.IDOf(window))
@@ -2496,6 +2520,11 @@ func PaletteMenuWithColorsTitlesSelectionHandler(colors []*Color, itemTitles []s
 func PaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors []*Color, itemTitles []string, image *Image, onSelectionChange func(obj.Object)) *Menu {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("paletteMenuWithColors:titles:templateImage:selectionHandler:"), purego.SliceToNSArray(colors, func(_v *Color) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(image), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { onSelectionChange(obj.Wrap(_b0)) }))
 	return MenuFromID(_r)
+}
+
+// SetMenuZone sets the zone from which NSMenu objects should be allocated
+func SetMenuZone(zone unsafe.Pointer) {
+	objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("setMenuZone:"), zone)
 }
 
 // SeparatorItem returns a menu item that is used to separate logical groups of menu commands.

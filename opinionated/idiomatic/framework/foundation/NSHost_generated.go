@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (h *Host) String() string {
 func NewHost() *Host {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("new"))
 	return hostAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (h *Host) WithObservationInfo(observationInfo unsafe.Pointer) *Host {
+	objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return h
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -91,6 +91,16 @@ func (hbpdo *HumanBodyPose3DObservation) ParentJointNameForJointName(jointName o
 	return obj.Wrap(_r)
 }
 
+// GetCameraRelativePositionForJointName gets a position relative to the camera for the body joint you specify.
+func (hbpdo *HumanBodyPose3DObservation) GetCameraRelativePositionForJointName(modelPositionOut unsafe.Pointer, jointName obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hbpdo), objc.RegisterName("getCameraRelativePosition:forJointName:error:"), modelPositionOut, objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // HeightEstimation returns technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height. `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
 func (hbpdo *HumanBodyPose3DObservation) HeightEstimation() HumanBodyPose3DObservationHeightEstimation {
 	_r := objc.Send[HumanBodyPose3DObservationHeightEstimation](objref.IDOf(hbpdo), objc.RegisterName("heightEstimation"))

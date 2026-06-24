@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,12 @@ func (mf *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter
 // WithNumberFormatter sets the number formatter.
 func (mf *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
+	return mf
+}
+
+// WithObservationInfo sets the observation info.
+func (mf *MeasurementFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *MeasurementFormatter {
+	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return mf
 }
 

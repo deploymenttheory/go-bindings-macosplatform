@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -59,6 +60,25 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 func (napuf *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
 	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return napuf
+}
+
+// WriteDatagramsSentByFlowEndpoints write datagrams to the flow.
+//
+// WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
+func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints unsafe.Pointer) error {
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByFlowEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), remoteEndpoints, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
 }
 
 // WriteDatagramsSentByEndpoints write datagrams to the flow.

@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +61,31 @@ func NewMutableComposition() *MutableComposition {
 func (mc *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition {
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setNaturalSize:"), naturalSize)
 	return mc
+}
+
+// InsertTimeRangeOfAssetAtTime inserts all the tracks within a given time range of a specified asset into the composition.
+func (mc *MutableComposition) InsertTimeRangeOfAssetAtTime(timeRange coremedia.CMTimeRange, asset *Asset, startTime coremedia.CMTime) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mc), objc.RegisterName("insertTimeRange:ofAsset:atTime:error:"), timeRange, objref.IDOf(asset), startTime, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertEmptyTimeRange adds or extends an empty time range within all tracks of the composition.
+func (mc *MutableComposition) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
+}
+
+// RemoveTimeRange removes a specified time range from all tracks of the composition.
+func (mc *MutableComposition) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTimeRange:"), timeRange)
+}
+
+// ScaleTimeRangeToDuration changes the duration of all tracks in a given time range.
+func (mc *MutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // AddMutableTrackWithMediaTypePreferredTrackID adds an empty track to a composition.

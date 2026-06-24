@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -115,6 +117,12 @@ func (dcf *DateComponentsFormatter) WithIncludesTimeRemainingPhrase(includesTime
 // WithFormattingContext sets the formatting context.
 func (dcf *DateComponentsFormatter) WithFormattingContext(formattingContext FormattingContext) *DateComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setFormattingContext:"), formattingContext)
+	return dcf
+}
+
+// WithObservationInfo sets the observation info.
+func (dcf *DateComponentsFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *DateComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(dcf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return dcf
 }
 

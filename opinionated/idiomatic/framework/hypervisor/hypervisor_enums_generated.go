@@ -31,6 +31,37 @@ func (e Hv_cache_type_t) String() string {
 	}
 }
 
+// The type that describes the event that triggered a guest exit to the host.
+type Hv_exit_reason_t int64
+
+const (
+	// asynchronous exit requested explicitly by hv_vcpus_exit() call
+	HV_EXIT_REASON_CANCELED Hv_exit_reason_t = 0
+	// synchronous exception to a higher EL triggered by the guest
+	HV_EXIT_REASON_EXCEPTION Hv_exit_reason_t = 1
+	// ARM Generic VTimer became pending since the last hv_vcpu_run() call returned. The caller is expected to make the interrupt corresponding to the VTimer pending in the guest's interrupt controller. This exit automatically sets the VTimer mask. The VCPU will not exit with this status again until after the mask is cleared with hv_vcpu_set_vtimer_mask(), which should be called during a trap of the EOI for the guest's VTimer interrupt handler.
+	HV_EXIT_REASON_VTIMER_ACTIVATED Hv_exit_reason_t = 2
+	// Unable to determine exit reason: this should not happen under normal operation.
+	HV_EXIT_REASON_UNKNOWN Hv_exit_reason_t = 3
+)
+
+// String returns the Hv_exit_reason_t constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Hv_exit_reason_t) String() string {
+	switch e {
+	case HV_EXIT_REASON_CANCELED:
+		return "HV_EXIT_REASON_CANCELED"
+	case HV_EXIT_REASON_EXCEPTION:
+		return "HV_EXIT_REASON_EXCEPTION"
+	case HV_EXIT_REASON_VTIMER_ACTIVATED:
+		return "HV_EXIT_REASON_VTIMER_ACTIVATED"
+	case HV_EXIT_REASON_UNKNOWN:
+		return "HV_EXIT_REASON_UNKNOWN"
+	default:
+		return fmt.Sprintf("Hv_exit_reason_t(%d)", int64(e))
+	}
+}
+
 // The type that defines feature registers.
 type Hv_feature_reg_t int64
 

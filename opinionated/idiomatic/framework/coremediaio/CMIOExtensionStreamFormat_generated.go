@@ -6,6 +6,7 @@ package coremediaio
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,9 +67,10 @@ func (esf *ExtensionStreamFormat) String() string {
 	return rt.Description(objref.IDOf(esf))
 }
 
-// NewExtensionStreamFormat creates a new ExtensionStreamFormat.
-func NewExtensionStreamFormat() *ExtensionStreamFormat {
-	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("new"))
+// NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations creates a stream format with a format description and frame durations.
+func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription obj.Object, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations []obj.Object) *ExtensionStreamFormat {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:"), objref.IDOf(formatDescription), maxFrameDuration, minFrameDuration, purego.SliceToNSArray(validFrameDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return extensionStreamFormatAdopt(_id)
 }
 
@@ -76,6 +78,18 @@ func NewExtensionStreamFormat() *ExtensionStreamFormat {
 func (esf *ExtensionStreamFormat) FormatDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(esf), objc.RegisterName("formatDescription"))
 	return obj.Wrap(_r)
+}
+
+// MinFrameDuration returns the minimum frame duration (AKA maximum frame rate).
+func (esf *ExtensionStreamFormat) MinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(esf), objc.RegisterName("minFrameDuration"))
+	return _r
+}
+
+// MaxFrameDuration returns the maximum frame duration (AKA minimum frame rate).
+func (esf *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(esf), objc.RegisterName("maxFrameDuration"))
+	return _r
 }
 
 // ValidFrameDurations returns the valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.

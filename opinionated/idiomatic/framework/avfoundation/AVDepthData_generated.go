@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -76,6 +79,16 @@ func NewDepthData() *DepthData {
 func (dd *DepthData) DepthDataByConvertingToDepthDataType(depthDataType int) *DepthData {
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("depthDataByConvertingToDepthDataType:"), depthDataType)
 	return DepthDataFromID(_r)
+}
+
+// DepthDataByReplacingDepthDataMapWithPixelBufferError returns a derivative depth data object by replacing the depth data map.
+func (dd *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *DepthData, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("depthDataByReplacingDepthDataMapWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return DepthDataFromID(_r), nil
 }
 
 // DictionaryRepresentationForAuxiliaryDataType returns a dictionary representation of the depth data suitable for writing into an image file.

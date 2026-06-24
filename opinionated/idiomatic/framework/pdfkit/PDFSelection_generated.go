@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -73,6 +75,12 @@ func NewSelectionWithDocument(document *Document) *Selection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocument:"), objref.IDOf(document))
 	return selectionAdopt(_id)
+}
+
+// WithColor sets sets the color used for the drawing of a selection in both active and inactive states.
+func (s *Selection) WithColor(color unsafe.Pointer) *Selection {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setColor:"), color)
+	return s
 }
 
 // BoundsForPage returns the bounds of the selection on the specified page.

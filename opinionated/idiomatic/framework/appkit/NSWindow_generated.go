@@ -66,6 +66,13 @@ func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundat
 	return windowAdopt(_id)
 }
 
+// NewWindowWithWindowRef creates a new Window.
+func NewWindowWithWindowRef(windowRef unsafe.Pointer) *Window {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWindowRef:"), windowRef)
+	return windowAdopt(_id)
+}
+
 // WithTitle sets the string that appears in the title bar of the window or the path to the represented file.
 func (w *Window) WithTitle(title string) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setTitle:"), purego.NSString(title))
@@ -472,6 +479,12 @@ func (w *Window) WithOrderedIndex(orderedIndex int) *Window {
 // WithRestorable sets a Boolean value indicating whether the window configuration is preserved between application launches.
 func (w *Window) WithRestorable(restorable bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setRestorable:"), restorable)
+	return w
+}
+
+// WithRestorationClass sets the restoration class associated with the window.
+func (w *Window) WithRestorationClass(restorationClass unsafe.Pointer) *Window {
+	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setRestorationClass:"), restorationClass)
 	return w
 }
 

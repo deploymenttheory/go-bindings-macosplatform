@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -86,6 +88,11 @@ func (ibos *IOBluetoothOBEXSession) RestartTransmission() {
 func (ibos *IOBluetoothOBEXSession) IsSessionTargetAMAC() bool {
 	_r := objc.Send[bool](objref.IDOf(ibos), objc.RegisterName("isSessionTargetAMac"))
 	return _r
+}
+
+// SetOBEXSessionOpenConnectionCallbackRefCon for C API support. Allows you to set the callback to be invoked when the OBEX connection is actually opened.
+func (ibos *IOBluetoothOBEXSession) SetOBEXSessionOpenConnectionCallbackRefCon(inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("setOBEXSessionOpenConnectionCallback:refCon:"), inCallback, inUserRefCon)
 }
 
 var _ OBEXSessionProvider = (*IOBluetoothOBEXSession)(nil)

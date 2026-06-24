@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,9 +86,57 @@ func (ap *AnnotationPopup) WithShouldPrint(shouldPrint bool) *AnnotationPopup {
 	return ap
 }
 
+// WithModificationDate sets returns the modification date of the annotation.
+func (ap *AnnotationPopup) WithModificationDate(modificationDate unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setModificationDate:"), modificationDate)
+	return ap
+}
+
+// WithUserName sets returns the name of the user who created the annotation.
+func (ap *AnnotationPopup) WithUserName(userName unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setUserName:"), userName)
+	return ap
+}
+
+// WithPopup sets returns the pop-up annotation associated with an annotation.
+func (ap *AnnotationPopup) WithPopup(popup unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setPopup:"), popup)
+	return ap
+}
+
+// WithBorder sets sets the border style for the annotation.
+func (ap *AnnotationPopup) WithBorder(border unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setBorder:"), border)
+	return ap
+}
+
+// WithColor sets sets the stroke color for the annotation.
+func (ap *AnnotationPopup) WithColor(color unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setColor:"), color)
+	return ap
+}
+
+// WithContents sets returns the textual content (if any) associated with the annotation.
+func (ap *AnnotationPopup) WithContents(contents unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setContents:"), contents)
+	return ap
+}
+
+// WithAction sets an object that represents an action for a PDF element, such as a link annotation.
+func (ap *AnnotationPopup) WithAction(action unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setAction:"), action)
+	return ap
+}
+
 // WithHighlighted sets a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 func (ap *AnnotationPopup) WithHighlighted(highlighted bool) *AnnotationPopup {
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setHighlighted:"), highlighted)
+	return ap
+}
+
+// WithMouseUpAction sets the mouse up action.
+func (ap *AnnotationPopup) WithMouseUpAction(mouseUpAction unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setMouseUpAction:"), mouseUpAction)
 	return ap
 }
 
@@ -148,6 +198,12 @@ func (ap *AnnotationPopup) WithQuadrilateralPoints(items ...obj.Object) *Annotat
 // WithMarkupType sets the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
 func (ap *AnnotationPopup) WithMarkupType(markupType MarkupType) *AnnotationPopup {
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setMarkupType:"), markupType)
+	return ap
+}
+
+// WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
+func (ap *AnnotationPopup) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
 	return ap
 }
 

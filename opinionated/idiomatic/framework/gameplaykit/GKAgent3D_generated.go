@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,9 +53,21 @@ func NewAgent3D() *Agent3D {
 	return agent3DAdopt(_id)
 }
 
+// WithPosition sets the current position of the agent in 3D space.
+func (ad *Agent3D) WithPosition(position unsafe.Pointer) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setPosition:"), position)
+	return ad
+}
+
 // WithRightHanded sets should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
 func (ad *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
 	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRightHanded:"), rightHanded)
+	return ad
+}
+
+// WithRotation sets the orientation of the agent in 3D space.
+func (ad *Agent3D) WithRotation(rotation unsafe.Pointer) *Agent3D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRotation:"), rotation)
 	return ad
 }
 

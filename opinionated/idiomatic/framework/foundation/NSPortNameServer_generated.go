@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,12 @@ func (pns *PortNameServer) IsKind(className string) bool {
 // under fmt.
 func (pns *PortNameServer) String() string {
 	return rt.Description(objref.IDOf(pns))
+}
+
+// WithObservationInfo sets the observation info.
+func (pns *PortNameServer) WithObservationInfo(observationInfo unsafe.Pointer) *PortNameServer {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return pns
 }
 
 // WithScriptingProperties sets the scripting properties.

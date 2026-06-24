@@ -146,6 +146,12 @@ func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *Data, baseURL st
 	return uRLAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (u *URL) WithObservationInfo(observationInfo unsafe.Pointer) *URL {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return u
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (u *URL) WithScriptingProperties(scriptingProperties obj.Object) *URL {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

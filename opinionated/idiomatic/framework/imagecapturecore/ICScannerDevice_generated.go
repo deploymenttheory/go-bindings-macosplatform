@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,36 @@ func (sd *ScannerDevice) WithTransferMode(transferMode ScannerTransferMode) *Sca
 // WithMaxMemoryBandSize sets the total maximum band size requested when performing a memory-based transfer.
 func (sd *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice {
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
+	return sd
+}
+
+// WithDownloadsDirectory sets the downloads directory.
+func (sd *ScannerDevice) WithDownloadsDirectory(downloadsDirectory unsafe.Pointer) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDownloadsDirectory:"), downloadsDirectory)
+	return sd
+}
+
+// WithDocumentName sets the document’s name.
+func (sd *ScannerDevice) WithDocumentName(documentName unsafe.Pointer) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDocumentName:"), documentName)
+	return sd
+}
+
+// WithDocumentUTI sets the document’s uniform type identifier.
+func (sd *ScannerDevice) WithDocumentUTI(documentUTI unsafe.Pointer) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDocumentUTI:"), documentUTI)
+	return sd
+}
+
+// WithDefaultUsername sets a default username on protected scanners.
+func (sd *ScannerDevice) WithDefaultUsername(defaultUsername unsafe.Pointer) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setDefaultUsername:"), defaultUsername)
+	return sd
+}
+
+// WithAutolaunchApplicationPath sets the file system path of an application to launch automatically when this device is added.
+func (sd *ScannerDevice) WithAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setAutolaunchApplicationPath:"), autolaunchApplicationPath)
 	return sd
 }
 

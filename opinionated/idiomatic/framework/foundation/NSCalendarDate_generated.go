@@ -76,6 +76,12 @@ func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int
 	return calendarDateAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (cd *CalendarDate) WithObservationInfo(observationInfo unsafe.Pointer) *CalendarDate {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return cd
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (cd *CalendarDate) WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

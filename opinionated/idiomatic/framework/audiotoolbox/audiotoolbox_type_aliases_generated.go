@@ -23,11 +23,49 @@ type AUNumVersion struct {
 	MajorRev       uint8
 }
 
+// An event recording the changing of a parameter, possibly including events such as touch and release gestures, at a particular host time.
+type AUParameterAutomationEvent struct {
+	HostTime  uint64
+	Address   uint64
+	Value     float32
+	EventType ParameterAutomationEventType
+	Reserved  uint64
+}
+
+// Represents a mapping between a MIDI message and an audio unit's parameter. The reserved fields in this structure are for future use. In the current implementation, they help align the structure to 64 bit size. Do not use the names of these fields in a host application. They are subject to change.
+type AUParameterMIDIMapping struct {
+	MScope       uint
+	MElement     uint
+	MParameterID uint
+	MFlags       ParameterMIDIMappingFlags
+	MSubRangeMin float32
+	MSubRangeMax float32
+	MStatus      uint8
+	MData1       uint8
+	Reserved1    uint8
+	Reserved2    uint8
+	Reserved3    uint
+}
+
 // An event recording the changing of a parameter at a particular host time.
 type AURecordedParameterEvent struct {
 	HostTime uint64
 	Address  uint64
 	Value    float32
+}
+
+// A structure that you use to configure ducking of other non-voice audio in a voice chat.
+type AUVoiceIOOtherAudioDuckingConfiguration struct {
+	MEnableAdvancedDucking uint8
+	MDuckingLevel          VoiceIOOtherAudioDuckingLevel
+}
+
+// A data structure used by the kAudioFilePropertyByteToPacket and kAudioFilePropertyPacketToByte properties.
+type AudioBytePacketTranslation struct {
+	MByte               int64
+	MPacket             int64
+	MByteOffsetInPacket uint
+	MFlags              AudioBytePacketTranslationFlags
 }
 
 // A structure specifying the number of leading and trailing empty frames to be inserted.
@@ -160,6 +198,21 @@ type CABarBeatTime struct {
 	Subbeat        uint16
 	SubbeatDivisor uint16
 	Reserved       uint16
+}
+
+type CAFAudioDescription struct {
+	MSampleRate       float64
+	MFormatID         uint
+	MFormatFlags      CAFFormatFlags
+	MBytesPerPacket   uint
+	MFramesPerPacket  uint
+	MChannelsPerFrame uint
+	MBitsPerChannel   uint
+}
+
+type CAFAudioFormatListItem struct {
+	MFormat           CAFAudioDescription
+	MChannelLayoutTag uint
 }
 
 type CAFChunkHeader struct {

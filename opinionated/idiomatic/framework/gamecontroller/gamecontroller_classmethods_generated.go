@@ -6,6 +6,7 @@ package gamecontroller
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -18,6 +19,12 @@ import (
 func Controllers() []*Controller {
 	_arr := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("controllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Controller { return ControllerFromID(_id) })
+}
+
+// SupportsHIDDevice returns a Boolean value that indicates whether the framework supports the specified human interface device.
+func SupportsHIDDevice(device unsafe.Pointer) bool {
+	_r := objc.Send[bool](objc.ID(_class("GCController")), objc.RegisterName("supportsHIDDevice:"), device)
+	return _r
 }
 
 // Current returns the most recently used game controller. If a user actuates a game controller input, that controller will become the current one.

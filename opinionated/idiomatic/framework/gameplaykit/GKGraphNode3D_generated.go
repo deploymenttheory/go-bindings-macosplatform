@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,10 +47,17 @@ func graphNode3DAdopt(id objc.ID) *GraphNode3D {
 	return x
 }
 
-// NewGraphNode3D creates a new GraphNode3D.
-func NewGraphNode3D() *GraphNode3D {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKGraphNode3D")), objc.RegisterName("new"))
+// NewGraphNode3DWithPoint initializes a graph node with the specified point.
+func NewGraphNode3DWithPoint(point unsafe.Pointer) *GraphNode3D {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGraphNode3D")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoint:"), point)
 	return graphNode3DAdopt(_id)
+}
+
+// WithPosition sets the position of the node in continuous 2D space.
+func (gnd *GraphNode3D) WithPosition(position unsafe.Pointer) *GraphNode3D {
+	objc.Send[objc.ID](objref.IDOf(gnd), objc.RegisterName("setPosition:"), position)
+	return gnd
 }
 
 var _ GraphNodeProvider = (*GraphNode3D)(nil)

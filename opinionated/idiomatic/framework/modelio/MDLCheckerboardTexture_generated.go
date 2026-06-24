@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,9 +48,10 @@ func checkerboardTextureAdopt(id objc.ID) *CheckerboardTexture {
 	return x
 }
 
-// NewCheckerboardTexture creates a new CheckerboardTexture.
-func NewCheckerboardTexture() *CheckerboardTexture {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLCheckerboardTexture")), objc.RegisterName("new"))
+// NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 initializes a checkerboard texture with the specified colors and other properties.
+func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding TextureChannelEncoding, color1 obj.Object, color2 obj.Object) *CheckerboardTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, purego.NSString(name), dimensions, channelCount, channelEncoding, objref.IDOf(color1), objref.IDOf(color2))
 	return checkerboardTextureAdopt(_id)
 }
 

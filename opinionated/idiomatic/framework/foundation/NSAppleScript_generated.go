@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewAppleScriptWithSource(source string) *AppleScript {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), purego.NSString(source))
 	return appleScriptAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (as *AppleScript) WithObservationInfo(observationInfo unsafe.Pointer) *AppleScript {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return as
 }
 
 // WithScriptingProperties sets the scripting properties.

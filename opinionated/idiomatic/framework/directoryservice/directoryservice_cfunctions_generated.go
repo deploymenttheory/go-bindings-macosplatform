@@ -5,6 +5,8 @@
 package directoryservice
 
 import (
+	"unsafe"
+
 	ebipurego "github.com/ebitengine/purego"
 )
 
@@ -107,6 +109,33 @@ func DsFlushRecord(inRecordReference int) TDirStatus {
 	return _fnDsFlushRecord(inRecordReference)
 }
 
+var _fnDsGetDirNodeCount func(int, unsafe.Pointer) TDirStatus
+
+// DsGetDirNodeCount calls the DirectoryService framework function dsGetDirNodeCount.
+func DsGetDirNodeCount(inDirReference int) (result TDirStatus, outDirectoryNodeCount int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsGetDirNodeCount == nil {
+		ebipurego.RegisterLibFunc(&_fnDsGetDirNodeCount, _lib, "dsGetDirNodeCount")
+	}
+	var _out0 int
+	_ret := _fnDsGetDirNodeCount(inDirReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnDsGetDirNodeCountWithInfo func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
+
+// DsGetDirNodeCountWithInfo calls the DirectoryService framework function dsGetDirNodeCountWithInfo.
+func DsGetDirNodeCountWithInfo(inDirReference int) (result TDirStatus, outDirectoryNodeCount int, outDirectoryNodeChangeToken int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsGetDirNodeCountWithInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnDsGetDirNodeCountWithInfo, _lib, "dsGetDirNodeCountWithInfo")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnDsGetDirNodeCountWithInfo(inDirReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
 var _fnDsIsDirServiceLocalRunning func() TDirStatus
 
 // DsIsDirServiceLocalRunning calls the DirectoryService framework function dsIsDirServiceLocalRunning.
@@ -127,6 +156,32 @@ func DsIsDirServiceRunning() TDirStatus {
 		ebipurego.RegisterLibFunc(&_fnDsIsDirServiceRunning, _lib, "dsIsDirServiceRunning")
 	}
 	return _fnDsIsDirServiceRunning()
+}
+
+var _fnDsOpenDirService func(unsafe.Pointer) TDirStatus
+
+// DsOpenDirService calls the DirectoryService framework function dsOpenDirService.
+func DsOpenDirService() (result TDirStatus, outDirReference int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsOpenDirService == nil {
+		ebipurego.RegisterLibFunc(&_fnDsOpenDirService, _lib, "dsOpenDirService")
+	}
+	var _out0 int
+	_ret := _fnDsOpenDirService(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnDsOpenDirServiceLocal func(unsafe.Pointer, string) TDirStatus
+
+// DsOpenDirServiceLocal calls the DirectoryService framework function dsOpenDirServiceLocal.
+func DsOpenDirServiceLocal(inFilePath string) (result TDirStatus, outDirRef int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsOpenDirServiceLocal == nil {
+		ebipurego.RegisterLibFunc(&_fnDsOpenDirServiceLocal, _lib, "dsOpenDirServiceLocal")
+	}
+	var _out0 int
+	_ret := _fnDsOpenDirServiceLocal(unsafe.Pointer(&_out0), inFilePath)
+	return _ret, _out0
 }
 
 var _fnDsParseAuthAuthority func(string, string, string, string) TDirStatus

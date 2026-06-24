@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -75,6 +76,11 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 // End ends a suspension.
 func (cps *CoordinatedPlaybackSuspension) End() {
 	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("end"))
+}
+
+// EndProposingNewTime ends a suspension and proposes a new playback time to the group.
+func (cps *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("endProposingNewTime:"), time_)
 }
 
 // Reason returns the reason for the suspension. This will be communicated to other participants while coordination is suspended.

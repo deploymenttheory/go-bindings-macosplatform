@@ -70,6 +70,13 @@ func (s *Set) String() string {
 	return rt.Description(objref.IDOf(s))
 }
 
+// NewSetWithObjectsCount initializes a newly allocated set with a specified number of objects from a given C array of objects.
+func NewSetWithObjectsCount(objects unsafe.Pointer, cnt int) *Set {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:count:"), objects, cnt)
+	return setAdopt(_id)
+}
+
 // NewSetWithCoder creates a new Set.
 func NewSetWithCoder(coder *Coder) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("alloc"))
@@ -103,6 +110,12 @@ func NewSetWithArray(array []obj.Object) *Set {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return setAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (s *Set) WithObservationInfo(observationInfo unsafe.Pointer) *Set {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return s
 }
 
 // WithScriptingProperties sets the scripting properties.

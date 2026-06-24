@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -124,6 +126,42 @@ func (isar *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedX
 // WithInhibitKernelOffloadedIO sets a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (isar *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
 	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
+	return isar
+}
+
+// WithModifyTime sets the item's last-modified time. This property represents `mtime`, the last time the item's contents changed.
+func (isar *ItemSetAttributesRequest) WithModifyTime(modifyTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setModifyTime:"), modifyTime)
+	return isar
+}
+
+// WithAddedTime sets the item's added time. This property represents the time the file system added the item to its parent directory.
+func (isar *ItemSetAttributesRequest) WithAddedTime(addedTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setAddedTime:"), addedTime)
+	return isar
+}
+
+// WithChangeTime sets the item's last-changed time. This property represents `ctime`, the last time the item's metadata changed.
+func (isar *ItemSetAttributesRequest) WithChangeTime(changeTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setChangeTime:"), changeTime)
+	return isar
+}
+
+// WithAccessTime sets the item's last-accessed time.
+func (isar *ItemSetAttributesRequest) WithAccessTime(accessTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setAccessTime:"), accessTime)
+	return isar
+}
+
+// WithBirthTime sets the item's creation time.
+func (isar *ItemSetAttributesRequest) WithBirthTime(birthTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setBirthTime:"), birthTime)
+	return isar
+}
+
+// WithBackupTime sets the item's last-backup time.
+func (isar *ItemSetAttributesRequest) WithBackupTime(backupTime unsafe.Pointer) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(isar), objc.RegisterName("setBackupTime:"), backupTime)
 	return isar
 }
 

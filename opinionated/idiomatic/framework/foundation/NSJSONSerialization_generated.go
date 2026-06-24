@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (js *JSONSerialization) String() string {
 func NewJSONSerialization() *JSONSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("new"))
 	return jSONSerializationAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (js *JSONSerialization) WithObservationInfo(observationInfo unsafe.Pointer) *JSONSerialization {
+	objc.Send[objc.ID](objref.IDOf(js), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return js
 }
 
 // WithScriptingProperties sets the scripting properties.

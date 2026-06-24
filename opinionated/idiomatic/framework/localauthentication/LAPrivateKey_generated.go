@@ -5,7 +5,11 @@
 package localauthentication
 
 import (
+	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +74,99 @@ func (pk *PrivateKey) String() string {
 func NewPrivateKey() *PrivateKey {
 	_id := objc.Send[objc.ID](objc.ID(_class("LAPrivateKey")), objc.RegisterName("new"))
 	return privateKeyAdopt(_id)
+}
+
+// SignDataSecKeyAlgorithmCompletion generates a digital signature for the data you supply.
+//
+// SignDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
+func (pk *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("signData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// CanSignUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for signing data with the key.
+func (pk *PrivateKey) CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canSignUsingSecKeyAlgorithm:"), algorithm)
+	return _r
+}
+
+// DecryptDataSecKeyAlgorithmCompletion decrypts the data you supply with a given algorithm.
+//
+// DecryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
+func (pk *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("decryptData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// CanDecryptUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for decrypting data with the key.
+func (pk *PrivateKey) CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canDecryptUsingSecKeyAlgorithm:"), algorithm)
+	return _r
+}
+
+// ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion performs a Diffie-Hellman style key exchange operation.
+//
+// ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion blocks until the operation completes or ctx is cancelled.
+func (pk *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey obj.Object, algorithm unsafe.Pointer, parameters obj.Object) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("exchangeKeysWithPublicKey:secKeyAlgorithm:secKeyParameters:completion:"), objref.IDOf(publicKey), algorithm, objref.IDOf(parameters), _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// CanExchangeKeysUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for performing key exchanges.
+func (pk *PrivateKey) CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canExchangeKeysUsingSecKeyAlgorithm:"), algorithm)
+	return _r
 }
 
 // PublicKey returns offers the public key counterpart of a

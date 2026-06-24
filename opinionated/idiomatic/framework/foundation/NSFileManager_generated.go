@@ -76,6 +76,12 @@ func NewFileManager() *FileManager {
 	return fileManagerAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (fm *FileManager) WithObservationInfo(observationInfo unsafe.Pointer) *FileManager {
+	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fm
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (fm *FileManager) WithScriptingProperties(scriptingProperties obj.Object) *FileManager {
 	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

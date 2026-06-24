@@ -83,6 +83,12 @@ func NewMutableArrayWithContentsOfURL(url string) *MutableArray {
 	return mutableArrayAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (ma *MutableArray) WithObservationInfo(observationInfo unsafe.Pointer) *MutableArray {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ma
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ma *MutableArray) WithScriptingProperties(scriptingProperties obj.Object) *MutableArray {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -154,6 +160,11 @@ func (ma *MutableArray) RemoveObjectsInArray(otherArray []obj.Object) {
 // SetArray sets the receiving array’s elements to those in another given array.
 func (ma *MutableArray) SetArray(otherArray []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+}
+
+// SortUsingFunctionContext sorts the receiver in ascending order as defined by the comparison function compare.
+func (ma *MutableArray) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("sortUsingFunction:context:"), compare, context_)
 }
 
 // InsertObjectsAtIndexes inserts the objects in the provided array into the receiving array at the specified indexes.

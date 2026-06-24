@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +73,12 @@ func NewExternalSyncDevice() *ExternalSyncDevice {
 	return externalSyncDeviceAdopt(_id)
 }
 
+// WithSignalCompensationDelay sets delay to wait before starting the frame capture.
+func (esd *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice {
+	objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("setSignalCompensationDelay:"), signalCompensationDelay)
+	return esd
+}
+
 // Status returns the status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
 func (esd *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
 	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(esd), objc.RegisterName("status"))
@@ -82,6 +89,12 @@ func (esd *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
 func (esd *ExternalSyncDevice) Clock() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("clock"))
 	return obj.Wrap(_r)
+}
+
+// SignalCompensationDelay returns delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
+func (esd *ExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(esd), objc.RegisterName("signalCompensationDelay"))
+	return _r
 }
 
 // UUID returns a unique identifier for an external sync device. Use this property to select a specific external sync device.

@@ -5,8 +5,11 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,9 +48,17 @@ func colorSwatchTextureAdopt(id objc.ID) *ColorSwatchTexture {
 	return x
 }
 
-// NewColorSwatchTexture creates a new ColorSwatchTexture.
-func NewColorSwatchTexture() *ColorSwatchTexture {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLColorSwatchTexture")), objc.RegisterName("new"))
+// NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions initializes a texture that creates a vertical gradient between two color temperatures.
+func NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions(colorTemperature1 float32, colorTemperature2 float32, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorTemperatureGradientFrom:toColorTemperature:name:textureDimensions:"), colorTemperature1, colorTemperature2, purego.NSString(name), textureDimensions)
+	return colorSwatchTextureAdopt(_id)
+}
+
+// NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions initializes a texture that creates a vertical gradient between two colors.
+func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(color1 obj.Object, color2 obj.Object, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorGradientFrom:toColor:name:textureDimensions:"), objref.IDOf(color1), objref.IDOf(color2), purego.NSString(name), textureDimensions)
 	return colorSwatchTextureAdopt(_id)
 }
 

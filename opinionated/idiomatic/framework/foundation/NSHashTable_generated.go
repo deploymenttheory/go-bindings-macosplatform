@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewHashTableWithPointerFunctionsCapacity(functions *PointerFunctions, initi
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:capacity:"), objref.IDOf(functions), initialCapacity)
 	return hashTableAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ht *HashTable) WithObservationInfo(observationInfo unsafe.Pointer) *HashTable {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ht
 }
 
 // WithScriptingProperties sets the scripting properties.

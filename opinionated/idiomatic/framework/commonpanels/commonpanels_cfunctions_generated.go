@@ -5,11 +5,57 @@
 package commonpanels
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnDisposeCalibrateEventUPP func(unsafe.Pointer)
+
+// DisposeCalibrateEventUPP calls the CommonPanels framework function DisposeCalibrateEventUPP.
+func DisposeCalibrateEventUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeCalibrateEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeCalibrateEventUPP, _lib, "DisposeCalibrateEventUPP")
+	}
+	_fnDisposeCalibrateEventUPP(userUPP)
+}
+
+var _fnDisposeCalibrateUPP func(unsafe.Pointer)
+
+// DisposeCalibrateUPP calls the CommonPanels framework function DisposeCalibrateUPP.
+func DisposeCalibrateUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeCalibrateUPP, _lib, "DisposeCalibrateUPP")
+	}
+	_fnDisposeCalibrateUPP(userUPP)
+}
+
+var _fnDisposeCanCalibrateUPP func(unsafe.Pointer)
+
+// DisposeCanCalibrateUPP calls the CommonPanels framework function DisposeCanCalibrateUPP.
+func DisposeCanCalibrateUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeCanCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeCanCalibrateUPP, _lib, "DisposeCanCalibrateUPP")
+	}
+	_fnDisposeCanCalibrateUPP(userUPP)
+}
+
+var _fnDisposeNColorChangedUPP func(unsafe.Pointer)
+
+// DisposeNColorChangedUPP calls the CommonPanels framework function DisposeNColorChangedUPP.
+func DisposeNColorChangedUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeNColorChangedUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeNColorChangedUPP, _lib, "DisposeNColorChangedUPP")
+	}
+	_fnDisposeNColorChangedUPP(userUPP)
+}
 
 var _fnFCCopyCollectionNames func() objc.ID
 
@@ -68,4 +114,17 @@ func FPIsFontPanelVisible() uint8 {
 		ebipurego.RegisterLibFunc(&_fnFPIsFontPanelVisible, _lib, "FPIsFontPanelVisible")
 	}
 	return _fnFPIsFontPanelVisible()
+}
+
+var _fnInvokeCanCalibrateUPP func(int, unsafe.Pointer, unsafe.Pointer) uint8
+
+// InvokeCanCalibrateUPP calls the CommonPanels framework function InvokeCanCalibrateUPP.
+func InvokeCanCalibrateUPP(displayID int, userUPP unsafe.Pointer) (result uint8, errMessage uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeCanCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeCanCalibrateUPP, _lib, "InvokeCanCalibrateUPP")
+	}
+	var _out0 uint8
+	_ret := _fnInvokeCanCalibrateUPP(displayID, unsafe.Pointer(&_out0), userUPP)
+	return _ret, _out0
 }

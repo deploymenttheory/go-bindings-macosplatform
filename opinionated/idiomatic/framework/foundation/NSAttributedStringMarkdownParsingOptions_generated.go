@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -99,6 +101,12 @@ func (asmpo *AttributedStringMarkdownParsingOptions) WithLanguageCode(languageCo
 // WithAppliesSourcePositionAttributes sets a Boolean value that indicates whether parsing applies attributes that indicate the position of attributed text in the original Markdown string.
 func (asmpo *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setAppliesSourcePositionAttributes:"), appliesSourcePositionAttributes)
+	return asmpo
+}
+
+// WithObservationInfo sets the observation info.
+func (asmpo *AttributedStringMarkdownParsingOptions) WithObservationInfo(observationInfo unsafe.Pointer) *AttributedStringMarkdownParsingOptions {
+	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return asmpo
 }
 

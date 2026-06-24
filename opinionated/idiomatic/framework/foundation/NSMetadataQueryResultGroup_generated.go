@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (mqrg *MetadataQueryResultGroup) String() string {
 func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryResultGroup")), objc.RegisterName("new"))
 	return metadataQueryResultGroupAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mqrg *MetadataQueryResultGroup) WithObservationInfo(observationInfo unsafe.Pointer) *MetadataQueryResultGroup {
+	objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mqrg
 }
 
 // WithScriptingProperties sets the scripting properties.

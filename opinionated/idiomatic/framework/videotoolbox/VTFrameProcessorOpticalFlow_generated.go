@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,8 +68,9 @@ func (fpof *FrameProcessorOpticalFlow) String() string {
 	return rt.Description(objref.IDOf(fpof))
 }
 
-// NewFrameProcessorOpticalFlow creates a new FrameProcessorOpticalFlow.
-func NewFrameProcessorOpticalFlow() *FrameProcessorOpticalFlow {
-	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorOpticalFlow")), objc.RegisterName("new"))
+// NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow creates an object with forward and backward optical flow pixel buffers.
+func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *FrameProcessorOpticalFlow {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorOpticalFlow")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithForwardFlow:backwardFlow:"), forwardFlow, backwardFlow)
 	return frameProcessorOpticalFlowAdopt(_id)
 }

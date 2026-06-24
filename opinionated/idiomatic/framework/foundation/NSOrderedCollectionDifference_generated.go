@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,12 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ocd *OrderedCollectionDifference) WithObservationInfo(observationInfo unsafe.Pointer) *OrderedCollectionDifference {
+	objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ocd
 }
 
 // WithScriptingProperties sets the scripting properties.

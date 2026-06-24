@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewMetadataItemWithURL(url string) *MetadataItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMetadataItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return metadataItemAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mi *MetadataItem) WithObservationInfo(observationInfo unsafe.Pointer) *MetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mi
 }
 
 // WithScriptingProperties sets the scripting properties.

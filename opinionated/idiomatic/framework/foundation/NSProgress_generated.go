@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -168,6 +169,12 @@ func (p *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
 // WithFileCompletedCount sets the number of completed files for a file progress object.
 func (p *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
+	return p
+}
+
+// WithObservationInfo sets the observation info.
+func (p *Progress) WithObservationInfo(observationInfo unsafe.Pointer) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return p
 }
 

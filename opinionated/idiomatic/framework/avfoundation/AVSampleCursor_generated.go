@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,6 +87,20 @@ func (sc *SampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
 	return _r
 }
 
+// StepByDecodeTimeWasPinned moves the cursor by a given delta time on the decode timeline.
+func (sc *SampleCursor) StepByDecodeTimeWasPinned(deltaDecodeTime coremedia.CMTime) (result coremedia.CMTime, outWasPinned bool) {
+	var _out0 bool
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("stepByDecodeTime:wasPinned:"), deltaDecodeTime, unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
+// StepByPresentationTimeWasPinned moves the cursor by a given delta time on the presentation timeline.
+func (sc *SampleCursor) StepByPresentationTimeWasPinned(deltaPresentationTime coremedia.CMTime) (result coremedia.CMTime, outWasPinned bool) {
+	var _out0 bool
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("stepByPresentationTime:wasPinned:"), deltaPresentationTime, unsafe.Pointer(&_out0))
+	return _r, _out0
+}
+
 // SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor determines whether a sample earlier in decode order can have a presentation timestamp later than that of the specified sample cursor.
 func (sc *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
@@ -96,10 +113,28 @@ func (sc *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentati
 	return _r
 }
 
+// PresentationTimeStamp returns the presentation timestamp (PTS) of the sample at the current position of the cursor.
+func (sc *SampleCursor) PresentationTimeStamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("presentationTimeStamp"))
+	return _r
+}
+
+// DecodeTimeStamp returns the decode timestamp (DTS) of the sample at the current position of the cursor.
+func (sc *SampleCursor) DecodeTimeStamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("decodeTimeStamp"))
+	return _r
+}
+
 // CopyCurrentSampleFormatDescription returns the format description of the sample at the cursor’s current position.
 func (sc *SampleCursor) CopyCurrentSampleFormatDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("copyCurrentSampleFormatDescription"))
 	return obj.Wrap(_r)
+}
+
+// CurrentSampleDuration indicates the decode duration of the sample at the receiver's current position. If the receiver must be advanced past its current position in order to determine the decode duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.
+func (sc *SampleCursor) CurrentSampleDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("currentSampleDuration"))
+	return _r
 }
 
 // CurrentSampleDependencyAttachments provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.

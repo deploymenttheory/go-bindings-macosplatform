@@ -5,6 +5,8 @@
 package glut
 
 import (
+	"unsafe"
+
 	ebipurego "github.com/ebitengine/purego"
 )
 
@@ -39,6 +41,52 @@ func AttachMenu(button int) {
 		ebipurego.RegisterLibFunc(&_fnAttachMenu, _lib, "glutAttachMenu")
 	}
 	_fnAttachMenu(button)
+}
+
+var _fnBitmapCharacter func(unsafe.Pointer, int)
+
+// BitmapCharacter calls the GLUT framework function glutBitmapCharacter.
+func BitmapCharacter(font unsafe.Pointer, character int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitmapCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnBitmapCharacter, _lib, "glutBitmapCharacter")
+	}
+	_fnBitmapCharacter(font, character)
+}
+
+var _fnBitmapLength func(unsafe.Pointer, unsafe.Pointer) int
+
+// BitmapLength calls the GLUT framework function glutBitmapLength.
+func BitmapLength(font unsafe.Pointer) (result int, string_ uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitmapLength == nil {
+		ebipurego.RegisterLibFunc(&_fnBitmapLength, _lib, "glutBitmapLength")
+	}
+	var _out0 uint8
+	_ret := _fnBitmapLength(font, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnBitmapWidth func(unsafe.Pointer, int) int
+
+// BitmapWidth calls the GLUT framework function glutBitmapWidth.
+func BitmapWidth(font unsafe.Pointer, character int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBitmapWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnBitmapWidth, _lib, "glutBitmapWidth")
+	}
+	return _fnBitmapWidth(font, character)
+}
+
+var _fnButtonBoxFunc func(unsafe.Pointer)
+
+// ButtonBoxFunc calls the GLUT framework function glutButtonBoxFunc.
+func ButtonBoxFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnButtonBoxFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnButtonBoxFunc, _lib, "glutButtonBoxFunc")
+	}
+	_fnButtonBoxFunc(func_)
 }
 
 var _fnChangeToMenuEntry func(int, string, int)
@@ -83,6 +131,17 @@ func CopyColormap(win int) {
 		ebipurego.RegisterLibFunc(&_fnCopyColormap, _lib, "glutCopyColormap")
 	}
 	_fnCopyColormap(win)
+}
+
+var _fnCreateMenu func(unsafe.Pointer) int
+
+// CreateMenu calls the GLUT framework function glutCreateMenu.
+func CreateMenu(arg unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateMenu == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateMenu, _lib, "glutCreateMenu")
+	}
+	return _fnCreateMenu(arg)
 }
 
 var _fnCreateSubWindow func(int, int, int, int, int) int
@@ -151,6 +210,28 @@ func DeviceGet(type_ uint32) int {
 	return _fnDeviceGet(type_)
 }
 
+var _fnDialsFunc func(unsafe.Pointer)
+
+// DialsFunc calls the GLUT framework function glutDialsFunc.
+func DialsFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDialsFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnDialsFunc, _lib, "glutDialsFunc")
+	}
+	_fnDialsFunc(func_)
+}
+
+var _fnDisplayFunc func(unsafe.Pointer)
+
+// DisplayFunc calls the GLUT framework function glutDisplayFunc.
+func DisplayFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisplayFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnDisplayFunc, _lib, "glutDisplayFunc")
+	}
+	_fnDisplayFunc(func_)
+}
+
 var _fnEnterGameMode func() int
 
 // EnterGameMode calls the GLUT framework function glutEnterGameMode.
@@ -160,6 +241,17 @@ func EnterGameMode() int {
 		ebipurego.RegisterLibFunc(&_fnEnterGameMode, _lib, "glutEnterGameMode")
 	}
 	return _fnEnterGameMode()
+}
+
+var _fnEntryFunc func(unsafe.Pointer)
+
+// EntryFunc calls the GLUT framework function glutEntryFunc.
+func EntryFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnEntryFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnEntryFunc, _lib, "glutEntryFunc")
+	}
+	_fnEntryFunc(func_)
 }
 
 var _fnEstablishOverlay func()
@@ -316,6 +408,17 @@ func IconifyWindow() {
 	_fnIconifyWindow()
 }
 
+var _fnIdleFunc func(unsafe.Pointer)
+
+// IdleFunc calls the GLUT framework function glutIdleFunc.
+func IdleFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIdleFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnIdleFunc, _lib, "glutIdleFunc")
+	}
+	_fnIdleFunc(func_)
+}
+
 var _fnIgnoreKeyRepeat func(int)
 
 // IgnoreKeyRepeat calls the GLUT framework function glutIgnoreKeyRepeat.
@@ -325,6 +428,19 @@ func IgnoreKeyRepeat(ignore int) {
 		ebipurego.RegisterLibFunc(&_fnIgnoreKeyRepeat, _lib, "glutIgnoreKeyRepeat")
 	}
 	_fnIgnoreKeyRepeat(ignore)
+}
+
+var _fnInit func(unsafe.Pointer, string)
+
+// Init calls the GLUT framework function glutInit.
+func Init(argv string) (argcp int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInit == nil {
+		ebipurego.RegisterLibFunc(&_fnInit, _lib, "glutInit")
+	}
+	var _out0 int32
+	_fnInit(unsafe.Pointer(&_out0), argv)
+	return _out0
 }
 
 var _fnInitDisplayMode func(int)
@@ -371,6 +487,39 @@ func InitWindowSize(width int, height int) {
 	_fnInitWindowSize(width, height)
 }
 
+var _fnJoystickFunc func(unsafe.Pointer, int)
+
+// JoystickFunc calls the GLUT framework function glutJoystickFunc.
+func JoystickFunc(func_ unsafe.Pointer, pollInterval int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJoystickFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnJoystickFunc, _lib, "glutJoystickFunc")
+	}
+	_fnJoystickFunc(func_, pollInterval)
+}
+
+var _fnKeyboardFunc func(unsafe.Pointer)
+
+// KeyboardFunc calls the GLUT framework function glutKeyboardFunc.
+func KeyboardFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKeyboardFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnKeyboardFunc, _lib, "glutKeyboardFunc")
+	}
+	_fnKeyboardFunc(func_)
+}
+
+var _fnKeyboardUpFunc func(unsafe.Pointer)
+
+// KeyboardUpFunc calls the GLUT framework function glutKeyboardUpFunc.
+func KeyboardUpFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKeyboardUpFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnKeyboardUpFunc, _lib, "glutKeyboardUpFunc")
+	}
+	_fnKeyboardUpFunc(func_)
+}
+
 var _fnLayerGet func(uint32) int
 
 // LayerGet calls the GLUT framework function glutLayerGet.
@@ -402,6 +551,72 @@ func MainLoop() {
 		ebipurego.RegisterLibFunc(&_fnMainLoop, _lib, "glutMainLoop")
 	}
 	_fnMainLoop()
+}
+
+var _fnMenuStateFunc func(unsafe.Pointer)
+
+// MenuStateFunc calls the GLUT framework function glutMenuStateFunc.
+func MenuStateFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMenuStateFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnMenuStateFunc, _lib, "glutMenuStateFunc")
+	}
+	_fnMenuStateFunc(func_)
+}
+
+var _fnMenuStatusFunc func(unsafe.Pointer)
+
+// MenuStatusFunc calls the GLUT framework function glutMenuStatusFunc.
+func MenuStatusFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMenuStatusFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnMenuStatusFunc, _lib, "glutMenuStatusFunc")
+	}
+	_fnMenuStatusFunc(func_)
+}
+
+var _fnMotionFunc func(unsafe.Pointer)
+
+// MotionFunc calls the GLUT framework function glutMotionFunc.
+func MotionFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMotionFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnMotionFunc, _lib, "glutMotionFunc")
+	}
+	_fnMotionFunc(func_)
+}
+
+var _fnMouseFunc func(unsafe.Pointer)
+
+// MouseFunc calls the GLUT framework function glutMouseFunc.
+func MouseFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMouseFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnMouseFunc, _lib, "glutMouseFunc")
+	}
+	_fnMouseFunc(func_)
+}
+
+var _fnOverlayDisplayFunc func(unsafe.Pointer)
+
+// OverlayDisplayFunc calls the GLUT framework function glutOverlayDisplayFunc.
+func OverlayDisplayFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOverlayDisplayFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnOverlayDisplayFunc, _lib, "glutOverlayDisplayFunc")
+	}
+	_fnOverlayDisplayFunc(func_)
+}
+
+var _fnPassiveMotionFunc func(unsafe.Pointer)
+
+// PassiveMotionFunc calls the GLUT framework function glutPassiveMotionFunc.
+func PassiveMotionFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPassiveMotionFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnPassiveMotionFunc, _lib, "glutPassiveMotionFunc")
+	}
+	_fnPassiveMotionFunc(func_)
 }
 
 var _fnPopWindow func()
@@ -512,6 +727,17 @@ func ReportErrors() {
 		ebipurego.RegisterLibFunc(&_fnReportErrors, _lib, "glutReportErrors")
 	}
 	_fnReportErrors()
+}
+
+var _fnReshapeFunc func(unsafe.Pointer)
+
+// ReshapeFunc calls the GLUT framework function glutReshapeFunc.
+func ReshapeFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReshapeFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnReshapeFunc, _lib, "glutReshapeFunc")
+	}
+	_fnReshapeFunc(func_)
 }
 
 var _fnReshapeWindow func(int, int)
@@ -734,6 +960,61 @@ func SolidTorus(innerRadius float64, outerRadius float64, sides int32, rings int
 	_fnSolidTorus(innerRadius, outerRadius, sides, rings)
 }
 
+var _fnSpaceballButtonFunc func(unsafe.Pointer)
+
+// SpaceballButtonFunc calls the GLUT framework function glutSpaceballButtonFunc.
+func SpaceballButtonFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpaceballButtonFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnSpaceballButtonFunc, _lib, "glutSpaceballButtonFunc")
+	}
+	_fnSpaceballButtonFunc(func_)
+}
+
+var _fnSpaceballMotionFunc func(unsafe.Pointer)
+
+// SpaceballMotionFunc calls the GLUT framework function glutSpaceballMotionFunc.
+func SpaceballMotionFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpaceballMotionFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnSpaceballMotionFunc, _lib, "glutSpaceballMotionFunc")
+	}
+	_fnSpaceballMotionFunc(func_)
+}
+
+var _fnSpaceballRotateFunc func(unsafe.Pointer)
+
+// SpaceballRotateFunc calls the GLUT framework function glutSpaceballRotateFunc.
+func SpaceballRotateFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpaceballRotateFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnSpaceballRotateFunc, _lib, "glutSpaceballRotateFunc")
+	}
+	_fnSpaceballRotateFunc(func_)
+}
+
+var _fnSpecialFunc func(unsafe.Pointer)
+
+// SpecialFunc calls the GLUT framework function glutSpecialFunc.
+func SpecialFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpecialFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnSpecialFunc, _lib, "glutSpecialFunc")
+	}
+	_fnSpecialFunc(func_)
+}
+
+var _fnSpecialUpFunc func(unsafe.Pointer)
+
+// SpecialUpFunc calls the GLUT framework function glutSpecialUpFunc.
+func SpecialUpFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpecialUpFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnSpecialUpFunc, _lib, "glutSpecialUpFunc")
+	}
+	_fnSpecialUpFunc(func_)
+}
+
 var _fnStopVideoResizing func()
 
 // StopVideoResizing calls the GLUT framework function glutStopVideoResizing.
@@ -743,6 +1024,41 @@ func StopVideoResizing() {
 		ebipurego.RegisterLibFunc(&_fnStopVideoResizing, _lib, "glutStopVideoResizing")
 	}
 	_fnStopVideoResizing()
+}
+
+var _fnStrokeCharacter func(unsafe.Pointer, int)
+
+// StrokeCharacter calls the GLUT framework function glutStrokeCharacter.
+func StrokeCharacter(font unsafe.Pointer, character int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStrokeCharacter == nil {
+		ebipurego.RegisterLibFunc(&_fnStrokeCharacter, _lib, "glutStrokeCharacter")
+	}
+	_fnStrokeCharacter(font, character)
+}
+
+var _fnStrokeLength func(unsafe.Pointer, unsafe.Pointer) int
+
+// StrokeLength calls the GLUT framework function glutStrokeLength.
+func StrokeLength(font unsafe.Pointer) (result int, string_ uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStrokeLength == nil {
+		ebipurego.RegisterLibFunc(&_fnStrokeLength, _lib, "glutStrokeLength")
+	}
+	var _out0 uint8
+	_ret := _fnStrokeLength(font, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnStrokeWidth func(unsafe.Pointer, int) int
+
+// StrokeWidth calls the GLUT framework function glutStrokeWidth.
+func StrokeWidth(font unsafe.Pointer, character int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStrokeWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnStrokeWidth, _lib, "glutStrokeWidth")
+	}
+	return _fnStrokeWidth(font, character)
 }
 
 var _fnSurfaceTexture func(uint32, uint32, int)
@@ -765,6 +1081,39 @@ func SwapBuffers() {
 		ebipurego.RegisterLibFunc(&_fnSwapBuffers, _lib, "glutSwapBuffers")
 	}
 	_fnSwapBuffers()
+}
+
+var _fnTabletButtonFunc func(unsafe.Pointer)
+
+// TabletButtonFunc calls the GLUT framework function glutTabletButtonFunc.
+func TabletButtonFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTabletButtonFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnTabletButtonFunc, _lib, "glutTabletButtonFunc")
+	}
+	_fnTabletButtonFunc(func_)
+}
+
+var _fnTabletMotionFunc func(unsafe.Pointer)
+
+// TabletMotionFunc calls the GLUT framework function glutTabletMotionFunc.
+func TabletMotionFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTabletMotionFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnTabletMotionFunc, _lib, "glutTabletMotionFunc")
+	}
+	_fnTabletMotionFunc(func_)
+}
+
+var _fnTimerFunc func(int, unsafe.Pointer, int)
+
+// TimerFunc calls the GLUT framework function glutTimerFunc.
+func TimerFunc(millis int, func_ unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTimerFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnTimerFunc, _lib, "glutTimerFunc")
+	}
+	_fnTimerFunc(millis, func_, value)
 }
 
 var _fnUseLayer func(uint32)
@@ -811,6 +1160,28 @@ func VideoResizeGet(param uint32) int {
 	return _fnVideoResizeGet(param)
 }
 
+var _fnVisibilityFunc func(unsafe.Pointer)
+
+// VisibilityFunc calls the GLUT framework function glutVisibilityFunc.
+func VisibilityFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVisibilityFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnVisibilityFunc, _lib, "glutVisibilityFunc")
+	}
+	_fnVisibilityFunc(func_)
+}
+
+var _fnWMCloseFunc func(unsafe.Pointer)
+
+// WMCloseFunc calls the GLUT framework function glutWMCloseFunc.
+func WMCloseFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWMCloseFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnWMCloseFunc, _lib, "glutWMCloseFunc")
+	}
+	_fnWMCloseFunc(func_)
+}
+
 var _fnWarpPointer func(int, int)
 
 // WarpPointer calls the GLUT framework function glutWarpPointer.
@@ -820,6 +1191,17 @@ func WarpPointer(x int, y int) {
 		ebipurego.RegisterLibFunc(&_fnWarpPointer, _lib, "glutWarpPointer")
 	}
 	_fnWarpPointer(x, y)
+}
+
+var _fnWindowStatusFunc func(unsafe.Pointer)
+
+// WindowStatusFunc calls the GLUT framework function glutWindowStatusFunc.
+func WindowStatusFunc(func_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWindowStatusFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnWindowStatusFunc, _lib, "glutWindowStatusFunc")
+	}
+	_fnWindowStatusFunc(func_)
 }
 
 var _fnWireCone func(float64, float64, int32, int32)

@@ -16,13 +16,13 @@ var (
 	_fnGLKMathDegreesToRadians                       func(float32) float32
 	_fnGLKMathProject                                func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) unsafe.Pointer
 	_fnGLKMathRadiansToDegrees                       func(float32) float32
-	_fnGLKMathUnproject                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMathUnproject                              func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32, *bool) unsafe.Pointer
 	_fnGLKMatrix3Add                                 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnGLKMatrix3GetColumn                           func(unsafe.Pointer, int) unsafe.Pointer
 	_fnGLKMatrix3GetMatrix2                          func(unsafe.Pointer) unsafe.Pointer
 	_fnGLKMatrix3GetRow                              func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix3Invert                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix3InvertAndTranspose                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix3Invert                              func(unsafe.Pointer, *bool) unsafe.Pointer
+	_fnGLKMatrix3InvertAndTranspose                  func(unsafe.Pointer, *bool) unsafe.Pointer
 	_fnGLKMatrix3Make                                func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
 	_fnGLKMatrix3MakeAndTranspose                    func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
 	_fnGLKMatrix3MakeRotation                        func(float32, float32, float32, float32) unsafe.Pointer
@@ -56,8 +56,8 @@ var (
 	_fnGLKMatrix4GetMatrix2                          func(unsafe.Pointer) unsafe.Pointer
 	_fnGLKMatrix4GetMatrix3                          func(unsafe.Pointer) unsafe.Pointer
 	_fnGLKMatrix4GetRow                              func(unsafe.Pointer, int) unsafe.Pointer
-	_fnGLKMatrix4Invert                              func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnGLKMatrix4InvertAndTranspose                  func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnGLKMatrix4Invert                              func(unsafe.Pointer, *bool) unsafe.Pointer
+	_fnGLKMatrix4InvertAndTranspose                  func(unsafe.Pointer, *bool) unsafe.Pointer
 	_fnGLKMatrix4Make                                func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
 	_fnGLKMatrix4MakeAndTranspose                    func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
 	_fnGLKMatrix4MakeFrustum                         func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
@@ -248,7 +248,7 @@ func GLKMathRadiansToDegrees(radians float32) float32 {
 	return _fnGLKMathRadiansToDegrees(radians)
 }
 
-func GLKMathUnproject(window unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer, viewport *int32, success unsafe.Pointer) unsafe.Pointer {
+func GLKMathUnproject(window unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer, viewport *int32, success *bool) unsafe.Pointer {
 	return _fnGLKMathUnproject(window, model, projection, viewport, success)
 }
 
@@ -268,11 +268,11 @@ func GLKMatrix3GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
 	return _fnGLKMatrix3GetRow(matrix, row)
 }
 
-func GLKMatrix3Invert(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
+func GLKMatrix3Invert(matrix unsafe.Pointer, isInvertible *bool) unsafe.Pointer {
 	return _fnGLKMatrix3Invert(matrix, isInvertible)
 }
 
-func GLKMatrix3InvertAndTranspose(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
+func GLKMatrix3InvertAndTranspose(matrix unsafe.Pointer, isInvertible *bool) unsafe.Pointer {
 	return _fnGLKMatrix3InvertAndTranspose(matrix, isInvertible)
 }
 
@@ -408,11 +408,11 @@ func GLKMatrix4GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
 	return _fnGLKMatrix4GetRow(matrix, row)
 }
 
-func GLKMatrix4Invert(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
+func GLKMatrix4Invert(matrix unsafe.Pointer, isInvertible *bool) unsafe.Pointer {
 	return _fnGLKMatrix4Invert(matrix, isInvertible)
 }
 
-func GLKMatrix4InvertAndTranspose(matrix unsafe.Pointer, isInvertible unsafe.Pointer) unsafe.Pointer {
+func GLKMatrix4InvertAndTranspose(matrix unsafe.Pointer, isInvertible *bool) unsafe.Pointer {
 	return _fnGLKMatrix4InvertAndTranspose(matrix, isInvertible)
 }
 

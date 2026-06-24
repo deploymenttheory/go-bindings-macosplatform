@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -83,6 +85,12 @@ func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *
 // WithIncludesPeerToPeer sets the includes peer to peer.
 func (ns *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
+	return ns
+}
+
+// WithObservationInfo sets the observation info.
+func (ns *NetService) WithObservationInfo(observationInfo unsafe.Pointer) *NetService {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ns
 }
 

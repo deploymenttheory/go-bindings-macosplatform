@@ -75,6 +75,13 @@ func NewAppleEventDescriptor() *AppleEventDescriptor {
 	return appleEventDescriptorAdopt(_id)
 }
 
+// NewAppleEventDescriptorWithDescriptorTypeBytesLength initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an arbitrary sequence of bytes and a length count).
+func NewAppleEventDescriptorWithDescriptorTypeBytesLength(descriptorType int, bytes_ unsafe.Pointer, byteCount int) *AppleEventDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDescriptorType:bytes:length:"), descriptorType, bytes_, byteCount)
+	return appleEventDescriptorAdopt(_id)
+}
+
 // NewAppleEventDescriptorWithDescriptorTypeData initializes a newly allocated instance as a descriptor with the specified descriptor type and data (from an instance of NSData).
 func NewAppleEventDescriptorWithDescriptorTypeData(descriptorType int, data *Data) *AppleEventDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
@@ -87,6 +94,12 @@ func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransac
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventClass:eventID:targetDescriptor:returnID:transactionID:"), eventClass, eventID, objref.IDOf(targetDescriptor), returnID, transactionID)
 	return appleEventDescriptorAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (aed *AppleEventDescriptor) WithObservationInfo(observationInfo unsafe.Pointer) *AppleEventDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return aed
 }
 
 // WithScriptingProperties sets the scripting properties.

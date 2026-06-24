@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -67,6 +68,12 @@ func (vc *VideoComposition) IsKind(className string) bool {
 // under fmt.
 func (vc *VideoComposition) String() string {
 	return rt.Description(objref.IDOf(vc))
+}
+
+// FrameDuration indicates the interval which the video composition, when enabled, should render composed video frames
+func (vc *VideoComposition) FrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(vc), objc.RegisterName("frameDuration"))
+	return _r
 }
 
 // SourceTrackIDForFrameTiming returns if sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */

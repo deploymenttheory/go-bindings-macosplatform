@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,12 @@ func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, stat
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(hTTPVersion), objref.IDOf(headerFields))
 	return hTTPURLResponseAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (hr *HTTPURLResponse) WithObservationInfo(observationInfo unsafe.Pointer) *HTTPURLResponse {
+	objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return hr
 }
 
 // WithScriptingProperties sets the scripting properties.

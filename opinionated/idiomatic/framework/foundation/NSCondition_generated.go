@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func NewCondition() *Condition {
 // WithName sets the name of the condition.
 func (c *Condition) WithName(name StringProvider) *Condition {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
+	return c
+}
+
+// WithObservationInfo sets the observation info.
+func (c *Condition) WithObservationInfo(observationInfo unsafe.Pointer) *Condition {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return c
 }
 

@@ -5,6 +5,8 @@
 package eventkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,12 @@ func NewStructuredLocation() *StructuredLocation {
 // WithTitle sets the title of the location.
 func (sl *StructuredLocation) WithTitle(title string) *StructuredLocation {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return sl
+}
+
+// WithGeoLocation sets the core location.
+func (sl *StructuredLocation) WithGeoLocation(geoLocation unsafe.Pointer) *StructuredLocation {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setGeoLocation:"), geoLocation)
 	return sl
 }
 

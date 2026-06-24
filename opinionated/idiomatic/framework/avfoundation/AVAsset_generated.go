@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +73,12 @@ func (a *Asset) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
+// Duration indicates the duration of the asset. If
+func (a *Asset) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(a), objc.RegisterName("duration"))
+	return _r
+}
+
 // PreferredRate indicates the natural rate at which the asset is to be played; often but not always 1.0
 func (a *Asset) PreferredRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("preferredRate"))
@@ -93,6 +100,12 @@ func (a *Asset) PreferredTransform() corefoundation.CGAffineTransform {
 // NaturalSize returns the following property is deprecated. Instead, use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType: below.
 func (a *Asset) NaturalSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(a), objc.RegisterName("naturalSize"))
+	return _r
+}
+
+// MinimumTimeOffsetFromLive indicates how close to the latest content in a live stream playback can be sustained. For non-live assets this value is kCMTimeInvalid.
+func (a *Asset) MinimumTimeOffsetFromLive() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(a), objc.RegisterName("minimumTimeOffsetFromLive"))
 	return _r
 }
 
@@ -380,6 +393,12 @@ func (a *Asset) CanContainFragments() bool {
 // ContainsFragments reports whether the asset is extended by at least one fragment. For QuickTime movie files and MPEG-4 files, the value of this property is true if canContainFragments is true and at least one 'moof' box is present after the 'moov' box.
 func (a *Asset) ContainsFragments() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("containsFragments"))
+	return _r
+}
+
+// OverallDurationHint indicates the total duration of fragments that either exist now or may be appended in the future in order to extend the duration of the asset. For QuickTime movie files and MPEG-4 files, the value of this property is obtained from the 'mehd' box of the 'mvex' box, if present. If no total fragment duration hint is available, the value of this property is kCMTimeInvalid.
+func (a *Asset) OverallDurationHint() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(a), objc.RegisterName("overallDurationHint"))
 	return _r
 }
 

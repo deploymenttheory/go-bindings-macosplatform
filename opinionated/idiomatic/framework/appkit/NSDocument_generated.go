@@ -640,6 +640,17 @@ func (d *Document) UpdateChangeCountWithTokenForSaveOperation(changeCountToken o
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateChangeCountWithToken:forSaveOperation:"), objref.IDOf(changeCountToken), saveOperation)
 }
 
+// PresentError presents an error alert to the user as a modal panel.
+func (d *Document) PresentError(error_ unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("presentError:"), error_)
+	return _r
+}
+
+// WillNotPresentError confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
+func (d *Document) WillNotPresentError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("willNotPresentError:"), error_)
+}
+
 // MakeWindowControllers creates the window controller objects that the document uses to display its content.
 func (d *Document) MakeWindowControllers() {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("makeWindowControllers"))

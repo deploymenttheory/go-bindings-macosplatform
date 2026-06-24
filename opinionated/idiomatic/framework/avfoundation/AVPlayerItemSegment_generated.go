@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -75,6 +76,12 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 // SegmentType returns the type of content this segment represents.
 func (pis *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
 	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(pis), objc.RegisterName("segmentType"))
+	return _r
+}
+
+// TimeMapping returns the timeMapping for this segment. The timeMapping source timeRange represents the start and duration in the segment source's timeline (ie: primary item timeline or interstitial event). The target timeRange represents the start point and duration in the integrated timeline. For interstitial events which occupy a single point, the target's duration will be kCMTimeZero.
+func (pis *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
+	_r := objc.Send[coremedia.CMTimeMapping](objref.IDOf(pis), objc.RegisterName("timeMapping"))
 	return _r
 }
 

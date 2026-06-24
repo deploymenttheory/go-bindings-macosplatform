@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,12 @@ func (cd *CameraDevice) WithMediaPresentation(mediaPresentation MediaPresentatio
 // WithPtpEventHandler sets a closure for handling PTP event packets.
 func (cd *CameraDevice) WithPtpEventHandler(ptpEventHandler func(obj.Object)) *CameraDevice {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setPtpEventHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { ptpEventHandler(obj.Wrap(_b0)) }))
+	return cd
+}
+
+// WithAutolaunchApplicationPath sets the file system path of an application to launch automatically when this device is added.
+func (cd *CameraDevice) WithAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer) *CameraDevice {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setAutolaunchApplicationPath:"), autolaunchApplicationPath)
 	return cd
 }
 

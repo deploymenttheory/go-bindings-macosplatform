@@ -5,6 +5,8 @@
 package opengl
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -90,6 +92,20 @@ func CGLGetShareGroup(ctx obj.Object) obj.Object {
 	}
 	_ret := _fnCGLGetShareGroup(objref.IDOf(ctx))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGLGetVersion func(unsafe.Pointer, unsafe.Pointer)
+
+// CGLGetVersion calls the OpenGL framework function CGLGetVersion.
+func CGLGetVersion() (majorvers int32, minorvers int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLGetVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLGetVersion, _lib, "CGLGetVersion")
+	}
+	var _out0 int32
+	var _out1 int32
+	_fnCGLGetVersion(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
 var _fnCGLReleaseContext func(objc.ID)

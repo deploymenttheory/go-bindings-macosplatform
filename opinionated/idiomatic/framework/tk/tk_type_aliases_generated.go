@@ -48,6 +48,12 @@ type XFontSetExtents struct {
 	Max_logical_extent XRectangle
 }
 
+type XIMPreeditCaretCallbackStruct struct {
+	Position  int
+	Direction XIMCaretDirection
+	Style     XIMCaretStyle
+}
+
 type XKeyboardControl struct {
 	Key_click_percent int
 	Bell_percent      int

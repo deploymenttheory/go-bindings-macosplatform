@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -94,6 +96,12 @@ func (ei *ExtensionItem) WithAttachments(items ...*ItemProvider) *ExtensionItem 
 // WithUserInfo sets an optional dictionary of keys and values corresponding to the extension item’s properties.
 func (ei *ExtensionItem) WithUserInfo(userInfo obj.Object) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return ei
+}
+
+// WithObservationInfo sets the observation info.
+func (ei *ExtensionItem) WithObservationInfo(observationInfo unsafe.Pointer) *ExtensionItem {
+	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ei
 }
 

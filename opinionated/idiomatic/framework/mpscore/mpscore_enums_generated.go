@@ -9,6 +9,26 @@ import (
 	"strings"
 )
 
+type DataLayout uint64
+
+const (
+	DataLayoutHeightxWidthxFeatureChannels DataLayout = 0
+	DataLayoutFeatureChannelsxHeightxWidth DataLayout = 1
+)
+
+// String returns the DataLayout constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DataLayout) String() string {
+	switch e {
+	case DataLayoutHeightxWidthxFeatureChannels:
+		return "DataLayoutHeightxWidthxFeatureChannels"
+	case DataLayoutFeatureChannelsxHeightxWidth:
+		return "DataLayoutFeatureChannelsxHeightxWidth"
+	default:
+		return fmt.Sprintf("DataLayout(%d)", int64(e))
+	}
+}
+
 type DataType int64
 
 const (

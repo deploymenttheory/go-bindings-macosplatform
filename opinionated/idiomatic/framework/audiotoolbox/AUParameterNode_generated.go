@@ -5,6 +5,8 @@
 package audiotoolbox
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,11 @@ func (pn *ParameterNode) DisplayNameWithLength(maximumLength int) string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// RemoveParameterObserver remove a specific parameter observer.
+func (pn *ParameterNode) RemoveParameterObserver(token unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("removeParameterObserver:"), token)
 }
 
 // Identifier returns a non-localized, permanent name for a parameter or group. The identifier must be unique for all child nodes under any given parent. From release to release, an audio unit must not change its parameters' identifiers; this will invalidate any hosts' documents that refer to the parameters.

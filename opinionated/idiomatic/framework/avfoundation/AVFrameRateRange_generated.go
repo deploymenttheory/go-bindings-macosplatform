@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -81,5 +82,17 @@ func (frr *FrameRateRange) MinFrameRate() float64 {
 // MaxFrameRate returns a Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
 func (frr *FrameRateRange) MaxFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(frr), objc.RegisterName("maxFrameRate"))
+	return _r
+}
+
+// MaxFrameDuration returns a CMTime indicating the maximum frame duration supported by this range. This read-only property indicates the maximum frame duration supported by this range. It is the reciprocal of minFrameRate, and expresses minFrameRate as a duration.
+func (frr *FrameRateRange) MaxFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(frr), objc.RegisterName("maxFrameDuration"))
+	return _r
+}
+
+// MinFrameDuration returns a CMTime indicating the minimum frame duration supported by this range. This read-only property indicates the minimum frame duration supported by this range. It is the reciprocal of maxFrameRate, and expresses maxFrameRate as a duration.
+func (frr *FrameRateRange) MinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(frr), objc.RegisterName("minFrameDuration"))
 	return _r
 }

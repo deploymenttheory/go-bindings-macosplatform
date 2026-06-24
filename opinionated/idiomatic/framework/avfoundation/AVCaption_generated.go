@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -68,6 +69,13 @@ func (c *Caption) String() string {
 	return rt.Description(objref.IDOf(c))
 }
 
+// NewCaptionWithTextTimeRange creates a caption that contains text and a time range.
+func NewCaptionWithTextTimeRange(text string, timeRange coremedia.CMTimeRange) *Caption {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaption")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:timeRange:"), purego.NSString(text), timeRange)
+	return captionAdopt(_id)
+}
+
 // Text returns the text content of the caption. The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
 func (c *Caption) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("text"))
@@ -75,6 +83,12 @@ func (c *Caption) Text() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// TimeRange returns the time range during which the caption should be presented. Apple iTT format doesn't allow two captions to have overlapped time range except when the two captions are associated with different regions. CEA608 closed caption time ranges can't start with zero, because the decoder needs some transmission time. CEA608 closed caption time ranges should be aligned with the video frame rate because this is how often the commands are delivered.
+func (c *Caption) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(c), objc.RegisterName("timeRange"))
+	return _r
 }
 
 // Region returns the region where the caption is placed. It can be nil when the underlying caption format doesn't support or use regions.

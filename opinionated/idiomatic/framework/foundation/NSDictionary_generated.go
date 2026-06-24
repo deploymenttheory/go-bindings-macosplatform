@@ -131,6 +131,12 @@ func NewDictionaryWithContentsOfURLError(url string) (result *Dictionary, err er
 	return dictionaryAdopt(_id), nil
 }
 
+// WithObservationInfo sets the observation info.
+func (d *Dictionary) WithObservationInfo(observationInfo unsafe.Pointer) *Dictionary {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return d
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (d *Dictionary) WithScriptingProperties(scriptingProperties obj.Object) *Dictionary {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -207,6 +213,11 @@ func (d *Dictionary) WriteToURL(url string) error {
 	return nil
 }
 
+// GetObjectsAndKeysCount returns by reference C arrays of the keys and values in the dictionary.
+func (d *Dictionary) GetObjectsAndKeysCount(objects unsafe.Pointer, keys unsafe.Pointer, count int) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getObjects:andKeys:count:"), objects, keys, count)
+}
+
 // ObjectForKeyedSubscript returns the value associated with a given key.
 func (d *Dictionary) ObjectForKeyedSubscript(key obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
@@ -262,6 +273,11 @@ func (d *Dictionary) DescriptionInStringsFileFormat() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// GetObjectsAndKeys returns by reference C arrays of the keys and values in the dictionary.
+func (d *Dictionary) GetObjectsAndKeys(objects unsafe.Pointer, keys unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getObjects:andKeys:"), objects, keys)
 }
 
 // WriteToFileAtomically writes a property list representation of the contents of the dictionary to a given path.

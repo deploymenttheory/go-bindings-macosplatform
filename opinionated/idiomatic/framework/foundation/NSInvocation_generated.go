@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func (i *Invocation) WithTarget(target obj.Object) *Invocation {
 	return i
 }
 
+// WithObservationInfo sets the observation info.
+func (i *Invocation) WithObservationInfo(observationInfo unsafe.Pointer) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return i
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (i *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -89,6 +97,26 @@ func (i *Invocation) RetainArguments() {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("retainArguments"))
 }
 
+// GetReturnValue gets the invocation’s return value.
+func (i *Invocation) GetReturnValue(retLoc unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("getReturnValue:"), retLoc)
+}
+
+// SetReturnValue sets the receiver’s return value.
+func (i *Invocation) SetReturnValue(retLoc unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setReturnValue:"), retLoc)
+}
+
+// GetArgumentAtIndex returns by indirection the receiver’s argument at a specified index.
+func (i *Invocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("getArgument:atIndex:"), argumentLocation, idx)
+}
+
+// SetArgumentAtIndex sets an argument of the receiver.
+func (i *Invocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setArgument:atIndex:"), argumentLocation, idx)
+}
+
 // Invoke sends the receiver’s message (with arguments) to its target and sets the return value.
 func (i *Invocation) Invoke() {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invoke"))
@@ -97,6 +125,11 @@ func (i *Invocation) Invoke() {
 // InvokeWithTarget sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
 func (i *Invocation) InvokeWithTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
+}
+
+// InvokeUsingIMP wraps the corresponding Objective-C method.
+func (i *Invocation) InvokeUsingIMP(imp unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeUsingIMP:"), imp)
 }
 
 // MethodSignature returns the method signature.

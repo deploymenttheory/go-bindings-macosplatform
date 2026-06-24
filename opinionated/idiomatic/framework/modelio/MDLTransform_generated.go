@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,7 +74,70 @@ func NewTransform() *Transform {
 	return transformAdopt(_id)
 }
 
+// NewTransformWithMatrix initializes a transform object with the specified transform matrix.
+func NewTransformWithMatrix(matrix unsafe.Pointer) *Transform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLTransform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatrix:"), matrix)
+	return transformAdopt(_id)
+}
+
+// NewTransformWithMatrixResetsTransform creates a new Transform.
+func NewTransformWithMatrixResetsTransform(matrix unsafe.Pointer, resetsTransform bool) *Transform {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLTransform")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatrix:resetsTransform:"), matrix, resetsTransform)
+	return transformAdopt(_id)
+}
+
+// WithTranslation sets the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space.
+func (t *Transform) WithTranslation(translation unsafe.Pointer) *Transform {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslation:"), translation)
+	return t
+}
+
+// WithRotation sets the orientation, as a vector of Euler angles in radians, of the transform relative to its parent coordinate space.
+func (t *Transform) WithRotation(rotation unsafe.Pointer) *Transform {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRotation:"), rotation)
+	return t
+}
+
+// WithShear sets the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space.
+func (t *Transform) WithShear(shear unsafe.Pointer) *Transform {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShear:"), shear)
+	return t
+}
+
+// WithScale sets the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space.
+func (t *Transform) WithScale(scale unsafe.Pointer) *Transform {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScale:"), scale)
+	return t
+}
+
 // SetIdentity sets all factors of the transform to those of the identity transformation.
 func (t *Transform) SetIdentity() {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setIdentity"))
+}
+
+// SetMatrixForTime wraps the corresponding Objective-C method.
+func (t *Transform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMatrix:forTime:"), matrix, time_)
+}
+
+// SetTranslationForTime sets the x-, y-, and z-axis offsets of the transform for the specified time sample.
+func (t *Transform) SetTranslationForTime(translation unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslation:forTime:"), translation, time_)
+}
+
+// SetRotationForTime sets the orientation of the transform for the specified time sample.
+func (t *Transform) SetRotationForTime(rotation unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRotation:forTime:"), rotation, time_)
+}
+
+// SetShearForTime sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.
+func (t *Transform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShear:forTime:"), shear, time_)
+}
+
+// SetScaleForTime sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.
+func (t *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScale:forTime:"), scale, time_)
 }

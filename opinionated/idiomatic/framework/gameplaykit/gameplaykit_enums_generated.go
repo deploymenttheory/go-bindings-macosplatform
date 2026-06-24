@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -38,4 +39,35 @@ func (e MeshGraphTriangulationMode) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Options that control how a tree balances its internal structure when adding elements, used with the addElement:boundingRectMin:boundingRectMax:splitStrategy: method.
+type RTreeSplitStrategy int64
+
+const (
+	// An option to split groups of elements in half based on the order they were added to the tree in.
+	RTreeSplitStrategyHalve RTreeSplitStrategy = 0
+	// An option to split groups of elements by finding a line that divides space so that half of the elements are on either side.
+	RTreeSplitStrategyLinear RTreeSplitStrategy = 1
+	// An option to split groups of elements by finding the subgroups that occupy the least area.
+	RTreeSplitStrategyQuadratic RTreeSplitStrategy = 2
+	// An option to split groups of elements by finding the subgroups whose areas overlap the least.
+	RTreeSplitStrategyReduceOverlap RTreeSplitStrategy = 3
+)
+
+// String returns the RTreeSplitStrategy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RTreeSplitStrategy) String() string {
+	switch e {
+	case RTreeSplitStrategyHalve:
+		return "RTreeSplitStrategyHalve"
+	case RTreeSplitStrategyLinear:
+		return "RTreeSplitStrategyLinear"
+	case RTreeSplitStrategyQuadratic:
+		return "RTreeSplitStrategyQuadratic"
+	case RTreeSplitStrategyReduceOverlap:
+		return "RTreeSplitStrategyReduceOverlap"
+	default:
+		return fmt.Sprintf("RTreeSplitStrategy(%d)", int64(e))
+	}
 }

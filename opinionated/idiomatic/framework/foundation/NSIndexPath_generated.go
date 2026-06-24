@@ -75,6 +75,12 @@ func NewIndexPathWithIndex(index int) *IndexPath {
 	return indexPathAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (ip *IndexPath) WithObservationInfo(observationInfo unsafe.Pointer) *IndexPath {
+	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ip
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ip *IndexPath) WithScriptingProperties(scriptingProperties obj.Object) *IndexPath {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

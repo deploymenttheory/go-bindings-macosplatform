@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,24 @@ func NewAttributeValue() *AttributeValue {
 // WithFloatValue sets the receiver’s floating point value.
 func (av *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setFloatValue:"), floatValue)
+	return av
+}
+
+// WithVectorFloat2Value sets the receiver’s value as a vector of two floating-point numbers.
+func (av *AttributeValue) WithVectorFloat2Value(vectorFloat2Value unsafe.Pointer) *AttributeValue {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setVectorFloat2Value:"), vectorFloat2Value)
+	return av
+}
+
+// WithVectorFloat3Value sets the receiver’s value as a vector of three floating point numbers.
+func (av *AttributeValue) WithVectorFloat3Value(vectorFloat3Value unsafe.Pointer) *AttributeValue {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setVectorFloat3Value:"), vectorFloat3Value)
+	return av
+}
+
+// WithVectorFloat4Value sets the receiver’s value as a vector of four floating point numbers.
+func (av *AttributeValue) WithVectorFloat4Value(vectorFloat4Value unsafe.Pointer) *AttributeValue {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setVectorFloat4Value:"), vectorFloat4Value)
 	return av
 }
 

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -84,6 +86,12 @@ func NewUserDefaultsWithUser(username string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaults")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:"), purego.NSString(username))
 	return userDefaultsAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ud *UserDefaults) WithObservationInfo(observationInfo unsafe.Pointer) *UserDefaults {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ud
 }
 
 // WithScriptingProperties sets the scripting properties.

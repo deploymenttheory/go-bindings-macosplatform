@@ -5,8 +5,11 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,6 +76,18 @@ func (l *Light) WithInstance(instance ObjectProvider) *Light {
 func (l *Light) WithHidden(hidden bool) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setHidden:"), hidden)
 	return l
+}
+
+// IrradianceAtPoint returns the radiance of the light as received at a specific point in the same scene.
+func (l *Light) IrradianceAtPoint(point unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:"), point)
+	return obj.Wrap(_r)
+}
+
+// IrradianceAtPointColorSpace returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
+func (l *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:colorSpace:"), point, objref.IDOf(colorSpace))
+	return obj.Wrap(_r)
 }
 
 // LightType returns the light type.

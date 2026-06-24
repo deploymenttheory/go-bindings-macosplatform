@@ -8,6 +8,29 @@ import (
 	"fmt"
 )
 
+// A value that indicates the preferred behavior for a preference setting.
+type CaptionAppearanceBehavior int64
+
+const (
+	// The preference setting should always be used.
+	KMACaptionAppearanceBehaviorUseValue CaptionAppearanceBehavior = 0
+	// The preference setting should be used unless the content media being played has its own custom value for this setting.
+	KMACaptionAppearanceBehaviorUseContentIfAvailable CaptionAppearanceBehavior = 1
+)
+
+// String returns the CaptionAppearanceBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CaptionAppearanceBehavior) String() string {
+	switch e {
+	case KMACaptionAppearanceBehaviorUseValue:
+		return "KMACaptionAppearanceBehaviorUseValue"
+	case KMACaptionAppearanceBehaviorUseContentIfAvailable:
+		return "KMACaptionAppearanceBehaviorUseContentIfAvailable"
+	default:
+		return fmt.Sprintf("CaptionAppearanceBehavior(%d)", int64(e))
+	}
+}
+
 // A value that specifies the type of captions to display.
 type CaptionAppearanceDisplayType int64
 
@@ -55,5 +78,91 @@ func (e CaptionAppearanceDomain) String() string {
 		return "KMACaptionAppearanceDomainUser"
 	default:
 		return fmt.Sprintf("CaptionAppearanceDomain(%d)", int64(e))
+	}
+}
+
+// A value that specifies a font style.
+type CaptionAppearanceFontStyle int64
+
+const (
+	// The default font style for all caption text.
+	KMACaptionAppearanceFontStyleDefault CaptionAppearanceFontStyle = 0
+	// The font style preferred for the monospaced serif font style.
+	KMACaptionAppearanceFontStyleMonospacedWithSerif CaptionAppearanceFontStyle = 1
+	// The font style preferred for the proportional serif font style.
+	KMACaptionAppearanceFontStyleProportionalWithSerif CaptionAppearanceFontStyle = 2
+	// The font style preferred for the monospaced sans serif font style.
+	KMACaptionAppearanceFontStyleMonospacedWithoutSerif CaptionAppearanceFontStyle = 3
+	// The font style preferred for the proportional sans serif font style.
+	KMACaptionAppearanceFontStyleProportionalWithoutSerif CaptionAppearanceFontStyle = 4
+	// The font style preferred for the casual font style.
+	KMACaptionAppearanceFontStyleCasual CaptionAppearanceFontStyle = 5
+	// The font style preferred for the cursive font style.
+	KMACaptionAppearanceFontStyleCursive CaptionAppearanceFontStyle = 6
+	// The font style preferred for the small capital font style.
+	KMACaptionAppearanceFontStyleSmallCapital CaptionAppearanceFontStyle = 7
+)
+
+// String returns the CaptionAppearanceFontStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CaptionAppearanceFontStyle) String() string {
+	switch e {
+	case KMACaptionAppearanceFontStyleDefault:
+		return "KMACaptionAppearanceFontStyleDefault"
+	case KMACaptionAppearanceFontStyleMonospacedWithSerif:
+		return "KMACaptionAppearanceFontStyleMonospacedWithSerif"
+	case KMACaptionAppearanceFontStyleProportionalWithSerif:
+		return "KMACaptionAppearanceFontStyleProportionalWithSerif"
+	case KMACaptionAppearanceFontStyleMonospacedWithoutSerif:
+		return "KMACaptionAppearanceFontStyleMonospacedWithoutSerif"
+	case KMACaptionAppearanceFontStyleProportionalWithoutSerif:
+		return "KMACaptionAppearanceFontStyleProportionalWithoutSerif"
+	case KMACaptionAppearanceFontStyleCasual:
+		return "KMACaptionAppearanceFontStyleCasual"
+	case KMACaptionAppearanceFontStyleCursive:
+		return "KMACaptionAppearanceFontStyleCursive"
+	case KMACaptionAppearanceFontStyleSmallCapital:
+		return "KMACaptionAppearanceFontStyleSmallCapital"
+	default:
+		return fmt.Sprintf("CaptionAppearanceFontStyle(%d)", int64(e))
+	}
+}
+
+// A value that specifies a style for the outside of the text.
+type CaptionAppearanceTextEdgeStyle int64
+
+const (
+	// An edge style has not been specified.
+	KMACaptionAppearanceTextEdgeStyleUndefined CaptionAppearanceTextEdgeStyle = 0
+	// The text should not have a styled edge.
+	KMACaptionAppearanceTextEdgeStyleNone CaptionAppearanceTextEdgeStyle = 1
+	// An edge makes the text appear to rise above the background.
+	KMACaptionAppearanceTextEdgeStyleRaised CaptionAppearanceTextEdgeStyle = 2
+	// An edge makes the text appear pushed in.
+	KMACaptionAppearanceTextEdgeStyleDepressed CaptionAppearanceTextEdgeStyle = 3
+	// A thin outline lies along the edge of the text.
+	KMACaptionAppearanceTextEdgeStyleUniform CaptionAppearanceTextEdgeStyle = 4
+	// An edge makes the text appear to float above the background.
+	KMACaptionAppearanceTextEdgeStyleDropShadow CaptionAppearanceTextEdgeStyle = 5
+)
+
+// String returns the CaptionAppearanceTextEdgeStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CaptionAppearanceTextEdgeStyle) String() string {
+	switch e {
+	case KMACaptionAppearanceTextEdgeStyleUndefined:
+		return "KMACaptionAppearanceTextEdgeStyleUndefined"
+	case KMACaptionAppearanceTextEdgeStyleNone:
+		return "KMACaptionAppearanceTextEdgeStyleNone"
+	case KMACaptionAppearanceTextEdgeStyleRaised:
+		return "KMACaptionAppearanceTextEdgeStyleRaised"
+	case KMACaptionAppearanceTextEdgeStyleDepressed:
+		return "KMACaptionAppearanceTextEdgeStyleDepressed"
+	case KMACaptionAppearanceTextEdgeStyleUniform:
+		return "KMACaptionAppearanceTextEdgeStyleUniform"
+	case KMACaptionAppearanceTextEdgeStyleDropShadow:
+		return "KMACaptionAppearanceTextEdgeStyleDropShadow"
+	default:
+		return fmt.Sprintf("CaptionAppearanceTextEdgeStyle(%d)", int64(e))
 	}
 }

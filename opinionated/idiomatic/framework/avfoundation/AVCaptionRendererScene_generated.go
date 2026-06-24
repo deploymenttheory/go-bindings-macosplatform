@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +71,12 @@ func (crs *CaptionRendererScene) String() string {
 func NewCaptionRendererScene() *CaptionRendererScene {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRendererScene")), objc.RegisterName("new"))
 	return captionRendererSceneAdopt(_id)
+}
+
+// TimeRange returns the time range during which new captions will not be introduced into or existing captions will be retired from the caption scene
+func (crs *CaptionRendererScene) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(crs), objc.RegisterName("timeRange"))
+	return _r
 }
 
 // HasActiveCaptions reports whether the scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.

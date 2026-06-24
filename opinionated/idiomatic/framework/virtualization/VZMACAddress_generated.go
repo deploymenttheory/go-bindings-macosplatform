@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,13 @@ func (ma *MACAddress) IsKind(className string) bool {
 // under fmt.
 func (ma *MACAddress) String() string {
 	return rt.Description(objref.IDOf(ma))
+}
+
+// NewMACAddressWithEthernetAddress creates a MAC address from the specified 48-bit Ethernet address.
+func NewMACAddressWithEthernetAddress(ethernetAddress unsafe.Pointer) *MACAddress {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEthernetAddress:"), ethernetAddress)
+	return mACAddressAdopt(_id)
 }
 
 // NewMACAddressWithString creates a MAC address object from a specially formatted string.

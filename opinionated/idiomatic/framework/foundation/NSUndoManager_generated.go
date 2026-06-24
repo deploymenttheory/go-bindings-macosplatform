@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -88,6 +90,12 @@ func (um *UndoManager) WithLevelsOfUndo(levelsOfUndo int) *UndoManager {
 func (um *UndoManager) WithRunLoopModes(items ...StringProvider) *UndoManager {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setRunLoopModes:"), _arr)
+	return um
+}
+
+// WithObservationInfo sets the observation info.
+func (um *UndoManager) WithObservationInfo(observationInfo unsafe.Pointer) *UndoManager {
+	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return um
 }
 

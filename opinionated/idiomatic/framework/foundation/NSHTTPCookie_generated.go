@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewHTTPCookieWithProperties(properties obj.Object) *HTTPCookie {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), objref.IDOf(properties))
 	return hTTPCookieAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (hc *HTTPCookie) WithObservationInfo(observationInfo unsafe.Pointer) *HTTPCookie {
+	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return hc
 }
 
 // WithScriptingProperties sets the scripting properties.

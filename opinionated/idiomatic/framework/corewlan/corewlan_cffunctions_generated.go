@@ -14,6 +14,21 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCWKeychainCopyEAPIdentity func(objc.ID, unsafe.Pointer) int32
+
+// CWKeychainCopyEAPIdentity reports an error if the CoreWLAN framework function CWKeychainCopyEAPIdentity fails.
+func CWKeychainCopyEAPIdentity(ssidData obj.Object, identity unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainCopyEAPIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentity, _lib, "CWKeychainCopyEAPIdentity")
+	}
+	_rc := _fnCWKeychainCopyEAPIdentity(objref.IDOf(ssidData), identity)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCWKeychainCopyEAPIdentityList func(unsafe.Pointer) int32
 
 // CWKeychainCopyEAPIdentityList reports an error if the CoreWLAN framework function CWKeychainCopyEAPIdentityList fails.
@@ -61,6 +76,21 @@ func CWKeychainCopyPassword(ssidData obj.Object) (obj.Object, error) {
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnCWKeychainCopyWiFiEAPIdentity func(KeychainDomain, objc.ID, unsafe.Pointer) int32
+
+// CWKeychainCopyWiFiEAPIdentity reports an error if the CoreWLAN framework function CWKeychainCopyWiFiEAPIdentity fails.
+func CWKeychainCopyWiFiEAPIdentity(domain KeychainDomain, ssid obj.Object, identity unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainCopyWiFiEAPIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyWiFiEAPIdentity, _lib, "CWKeychainCopyWiFiEAPIdentity")
+	}
+	_rc := _fnCWKeychainCopyWiFiEAPIdentity(domain, objref.IDOf(ssid), identity)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnCWKeychainDeleteEAPUsernameAndPassword func(objc.ID) int32

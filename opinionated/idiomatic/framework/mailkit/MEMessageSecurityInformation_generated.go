@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,17 @@ func (msi *MessageSecurityInformation) String() string {
 	return rt.Description(objref.IDOf(msi))
 }
 
-// NewMessageSecurityInformation creates a new MessageSecurityInformation.
-func NewMessageSecurityInformation() *MessageSecurityInformation {
-	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageSecurityInformation")), objc.RegisterName("new"))
+// NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError creates a message security information object that indicates if a message is encrypted, who signed it, or if an error occurred when decoding the message.
+func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionError(signers []*MessageSigner, isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageSecurityInformation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageSecurityInformation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:"), purego.SliceToNSArray(signers, func(_v *MessageSigner) objc.ID { return objref.IDOf(_v) }), isEncrypted, signingError, encryptionError)
+	return messageSecurityInformationAdopt(_id)
+}
+
+// NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason creates a new MessageSecurityInformation.
+func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionErrorShouldBlockRemoteContentLocalizedRemoteContentBlockingReason(signers []*MessageSigner, isEncrypted bool, signingError unsafe.Pointer, encryptionError unsafe.Pointer, shouldBlockRemoteContent bool, localizedRemoteContentBlockingReason string) *MessageSecurityInformation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageSecurityInformation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSigners:isEncrypted:signingError:encryptionError:shouldBlockRemoteContent:localizedRemoteContentBlockingReason:"), purego.SliceToNSArray(signers, func(_v *MessageSigner) objc.ID { return objref.IDOf(_v) }), isEncrypted, signingError, encryptionError, shouldBlockRemoteContent, purego.NSString(localizedRemoteContentBlockingReason))
 	return messageSecurityInformationAdopt(_id)
 }
 

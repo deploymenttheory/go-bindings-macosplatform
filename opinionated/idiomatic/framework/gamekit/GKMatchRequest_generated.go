@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -131,6 +133,12 @@ func (mr *MatchRequest) WithPlayersToInvite(items ...obj.Object) *MatchRequest {
 // WithQueueName sets the name of the queue that Game Center places the match request in.
 func (mr *MatchRequest) WithQueueName(queueName string) *MatchRequest {
 	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setQueueName:"), purego.NSString(queueName))
+	return mr
+}
+
+// WithProperties sets the criteria for the local player that Game Center uses to find other players when using matchmaking rules.
+func (mr *MatchRequest) WithProperties(properties unsafe.Pointer) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setProperties:"), properties)
 	return mr
 }
 

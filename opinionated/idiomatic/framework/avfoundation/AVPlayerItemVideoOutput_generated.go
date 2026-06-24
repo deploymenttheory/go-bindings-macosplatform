@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -64,6 +65,12 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings obj.Object) *Play
 func (pivo *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
 	objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return pivo
+}
+
+// HasNewPixelBufferForItemTime returns a Boolean value that indicates whether video output is available for the specified item time.
+func (pivo *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
+	_r := objc.Send[bool](objref.IDOf(pivo), objc.RegisterName("hasNewPixelBufferForItemTime:"), itemTime)
+	return _r
 }
 
 // RequestNotificationOfMediaDataChangeWithAdvanceInterval tells the receiver that the video out put client is entering a quiescent state.

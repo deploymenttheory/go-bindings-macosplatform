@@ -6,6 +6,7 @@ package coremediaio
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,9 +67,10 @@ func (esccc *ExtensionStreamCustomClockConfiguration) String() string {
 	return rt.Description(objref.IDOf(esccc))
 }
 
-// NewExtensionStreamCustomClockConfiguration creates a new ExtensionStreamCustomClockConfiguration.
-func NewExtensionStreamCustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("new"))
+// NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing creates a custom clock configuration.
+func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier obj.Object, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:"), purego.NSString(clockName), objref.IDOf(sourceIdentifier), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
 	return extensionStreamCustomClockConfigurationAdopt(_id)
 }
 
@@ -85,6 +87,12 @@ func (esccc *ExtensionStreamCustomClockConfiguration) ClockName() string {
 func (esccc *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(esccc), objc.RegisterName("sourceIdentifier"))
 	return obj.Wrap(_r)
+}
+
+// TimeCallMinimumInterval returns if the clock is queried for its current time more often than this interval, an interpolated value will be returned.
+func (esccc *ExtensionStreamCustomClockConfiguration) TimeCallMinimumInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(esccc), objc.RegisterName("getTimeCallMinimumInterval"))
+	return _r
 }
 
 // NumberOfEventsForRateSmoothing returns the number of events to use for rate smoothing; will be > 0.

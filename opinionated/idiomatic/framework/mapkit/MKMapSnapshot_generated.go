@@ -5,7 +5,10 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +73,12 @@ func (ms *MapSnapshot) String() string {
 func NewMapSnapshot() *MapSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshot")), objc.RegisterName("new"))
 	return mapSnapshotAdopt(_id)
+}
+
+// PointForCoordinate wraps the corresponding Objective-C method.
+func (ms *MapSnapshot) PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ms), objc.RegisterName("pointForCoordinate:"), coordinate)
+	return _r
 }
 
 // Appearance returns the appearance.

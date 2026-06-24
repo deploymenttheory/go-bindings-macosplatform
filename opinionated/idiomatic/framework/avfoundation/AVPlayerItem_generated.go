@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -90,9 +91,27 @@ func NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *Asset, automatica
 	return playerItemAdopt(_id)
 }
 
+// WithConfiguredTimeOffsetFromLive sets a time value that indicates the offset from the live time to start playback, or resume playback after a seek to positive infinity.
+func (pi *PlayerItem) WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setConfiguredTimeOffsetFromLive:"), configuredTimeOffsetFromLive)
+	return pi
+}
+
 // WithAutomaticallyPreservesTimeOffsetFromLive sets a Boolean value that indicates whether the player preserves its time offset from the live time after a buffering operation.
 func (pi *PlayerItem) WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutomaticallyPreservesTimeOffsetFromLive:"), automaticallyPreservesTimeOffsetFromLive)
+	return pi
+}
+
+// WithForwardPlaybackEndTime sets the time at which forward playback ends.
+func (pi *PlayerItem) WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setForwardPlaybackEndTime:"), forwardPlaybackEndTime)
+	return pi
+}
+
+// WithReversePlaybackEndTime sets the time at which reverse playback ends.
+func (pi *PlayerItem) WithReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) *PlayerItem {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setReversePlaybackEndTime:"), reversePlaybackEndTime)
 	return pi
 }
 
@@ -232,6 +251,12 @@ func (pi *PlayerItem) Tracks() []*PlayerItemTrack {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemTrack { return PlayerItemTrackFromID(_id) })
 }
 
+// Duration indicates the duration of the item, not considering either its forwardPlaybackEndTime or reversePlaybackEndTime. This property is observable. The duration of an item can change dynamically during playback. Unless you omit
+func (pi *PlayerItem) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("duration"))
+	return _r
+}
+
 // PresentationSize returns the size of the receiver as presented by the player. Indicates the size at which the visual portion of the item is presented by the player; can be scaled from this size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitrarily for presentation via the frame property of an AVPlayerLayer. The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play. Before the underlying media resource is sufficiently loaded, its value is CGSizeZero. Use key-value observation to obtain a valid presentationSize as soon as it becomes available. (Note that the value of presentationSize may remain CGSizeZero, e.g. for audio-only items.)
 func (pi *PlayerItem) PresentationSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("presentationSize"))
@@ -296,10 +321,38 @@ func (pi *PlayerItem) CanStepBackward() bool {
 	return _r
 }
 
+// ConfiguredTimeOffsetFromLive indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity. For non-live assets this value is kCMTimeInvalid.
+func (pi *PlayerItem) ConfiguredTimeOffsetFromLive() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("configuredTimeOffsetFromLive"))
+	return _r
+}
+
+// RecommendedTimeOffsetFromLive returns a recommended value for configuredTimeOffsetFromLive, based on observed network conditions. For non-live assets this value is kCMTimeInvalid.
+func (pi *PlayerItem) RecommendedTimeOffsetFromLive() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("recommendedTimeOffsetFromLive"))
+	return _r
+}
+
 // AutomaticallyPreservesTimeOffsetFromLive reports whether indicates that after the player spends a period of time buffering media, it will skip forward if necessary to restore the playhead's distance from the live edge of the presentation to what it was when buffering began. If the value of this property is true and the player must buffer media from the network in order to resume playback, the player will seek forward if necessary before resuming playback to restore the position that the playhead had when rebuffering began, relative to the end of the current AVPlayerItem's seekableTimeRange. This behavior applies to media buffering that occurs as a consequence of starting playback, seeking, and recovering from a playback stall. Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably. This property value has no effect if the asset is not a live stream. The default value of this property is false.
 func (pi *PlayerItem) AutomaticallyPreservesTimeOffsetFromLive() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("automaticallyPreservesTimeOffsetFromLive"))
 	return _r
+}
+
+// CurrentTime returns the current time of the item.
+func (pi *PlayerItem) CurrentTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("currentTime"))
+	return _r
+}
+
+// SeekToTimeCompletionHandler sets the current playback time to the specified time.
+func (pi *PlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("seekToTime:completionHandler:"), time_, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler sets the current playback time within a specified time bound and invokes the specified block when the seek operation completes or is interrupted.
+func (pi *PlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:"), time_, toleranceBefore, toleranceAfter, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CancelPendingSeeks cancels any pending seek requests and invokes the corresponding completion handlers if present.
@@ -322,6 +375,18 @@ func (pi *PlayerItem) SeekToDateCompletionHandler(date obj.Object, completionHan
 // StepByCount moves the player item’s current time forward or backward by a specified number of steps.
 func (pi *PlayerItem) StepByCount(stepCount int) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("stepByCount:"), stepCount)
+}
+
+// ForwardPlaybackEndTime returns the end time for forward playback. Specifies the time at which playback should end when the playback rate is positive (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for forward playback is specified. In this case, the effective end time for forward playback is the receiver's duration. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is negative.
+func (pi *PlayerItem) ForwardPlaybackEndTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("forwardPlaybackEndTime"))
+	return _r
+}
+
+// ReversePlaybackEndTime returns the end time for reverse playback. Specifies the time at which playback should end when the playback rate is negative (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for reverse playback is specified. In this case, the effective end time for reverse playback is kCMTimeZero. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is positive.
+func (pi *PlayerItem) ReversePlaybackEndTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pi), objc.RegisterName("reversePlaybackEndTime"))
+	return _r
 }
 
 // SeekableTimeRanges returns this property provides a collection of time ranges that the player item can seek to. The ranges provided might be discontinous. Returns an NSArray of NSValues containing CMTimeRanges.
@@ -569,6 +634,16 @@ func (pi *PlayerItem) RemoveMediaDataCollector(collector *PlayerItemMediaDataCol
 func (pi *PlayerItem) MediaDataCollectors() []*PlayerItemMediaDataCollector {
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("mediaDataCollectors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemMediaDataCollector { return PlayerItemMediaDataCollectorFromID(_id) })
+}
+
+// SeekToTime moves the playback cursor. Use this method to seek to a specified time for the item. The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time:
+func (pi *PlayerItem) SeekToTime(time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("seekToTime:"), time_)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfter moves the playback cursor within a specified time bound. Use this method to seek to a specified time for the item. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime within the seekable ranges. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter:
+func (pi *PlayerItem) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:"), time_, toleranceBefore, toleranceAfter)
 }
 
 // SeekToDate move playhead to a point corresponding to a particular date. For playback content that is associated with a range of dates, move the playhead to point within that range. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. - Parameter date: The new position for the playhead. - Returns: Returns true if the playhead was moved to the supplied date.

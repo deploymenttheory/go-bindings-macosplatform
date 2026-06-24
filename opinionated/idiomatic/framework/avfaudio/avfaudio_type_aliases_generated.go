@@ -30,6 +30,12 @@ type AVAudioConverterPrimeInfo struct {
 	TrailingFrames uint32
 }
 
+// The configuration of ducking non-voice audio.
+type AVAudioVoiceProcessingOtherAudioDuckingConfiguration struct {
+	EnableAdvancedDucking bool
+	DuckingLevel          AudioVoiceProcessingOtherAudioDuckingLevel
+}
+
 type AVBeatRange struct {
 	Start  float64
 	Length float64

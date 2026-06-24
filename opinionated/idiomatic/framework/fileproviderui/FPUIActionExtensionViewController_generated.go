@@ -5,6 +5,8 @@
 package fileproviderui
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,11 @@ func (aevc *ActionExtensionViewController) String() string {
 func NewActionExtensionViewController() *ActionExtensionViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionViewController")), objc.RegisterName("new"))
 	return actionExtensionViewControllerAdopt(_id)
+}
+
+// PrepareForError performs any necessary setup or configuration when an authentication error occurs.
+func (aevc *ActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(aevc), objc.RegisterName("prepareForError:"), error_)
 }
 
 // PrepareForActionWithIdentifierItemIdentifiers performs any necessary setup or configuration for the specified action.

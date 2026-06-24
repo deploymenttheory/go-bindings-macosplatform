@@ -37,6 +37,171 @@ func (e DVDAspectRatio) String() string {
 	}
 }
 
+type DVDAudioFormat int64
+
+const (
+	KDVDAudioUnknownFormat DVDAudioFormat = 0
+	KDVDAudioAC3Format     DVDAudioFormat = 1
+	KDVDAudioMPEG1Format   DVDAudioFormat = 2
+	KDVDAudioMPEG2Format   DVDAudioFormat = 3
+	KDVDAudioPCMFormat     DVDAudioFormat = 4
+	KDVDAudioDTSFormat     DVDAudioFormat = 5
+	KDVDAudioSDDSFormat    DVDAudioFormat = 6
+	KDVDAudioMLPFormat     DVDAudioFormat = 7
+	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
+	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
+)
+
+// String returns the DVDAudioFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDAudioFormat) String() string {
+	switch e {
+	case KDVDAudioUnknownFormat:
+		return "KDVDAudioUnknownFormat"
+	case KDVDAudioAC3Format:
+		return "KDVDAudioAC3Format"
+	case KDVDAudioMPEG1Format:
+		return "KDVDAudioMPEG1Format"
+	case KDVDAudioMPEG2Format:
+		return "KDVDAudioMPEG2Format"
+	case KDVDAudioPCMFormat:
+		return "KDVDAudioPCMFormat"
+	case KDVDAudioDTSFormat:
+		return "KDVDAudioDTSFormat"
+	case KDVDAudioSDDSFormat:
+		return "KDVDAudioSDDSFormat"
+	case KDVDAudioMLPFormat:
+		return "KDVDAudioMLPFormat"
+	case KDVDAudioDDPlusFormat:
+		return "KDVDAudioDDPlusFormat"
+	case KDVDAudioDTSHDFormat:
+		return "KDVDAudioDTSHDFormat"
+	default:
+		return fmt.Sprintf("DVDAudioFormat(%d)", int64(e))
+	}
+}
+
+type DVDEventCode int64
+
+const (
+	KDVDEventTitle                   DVDEventCode = 1
+	KDVDEventPTT                     DVDEventCode = 2
+	KDVDEventValidUOP                DVDEventCode = 3
+	KDVDEventAngle                   DVDEventCode = 4
+	KDVDEventAudioStream             DVDEventCode = 5
+	KDVDEventSubpictureStream        DVDEventCode = 6
+	KDVDEventDisplayMode             DVDEventCode = 7
+	KDVDEventDomain                  DVDEventCode = 8
+	KDVDEventBitrate                 DVDEventCode = 9
+	KDVDEventStill                   DVDEventCode = 10
+	KDVDEventPlayback                DVDEventCode = 11
+	KDVDEventVideoStandard           DVDEventCode = 12
+	KDVDEventStreams                 DVDEventCode = 13
+	KDVDEventScanSpeed               DVDEventCode = 14
+	KDVDEventMenuCalled              DVDEventCode = 15
+	KDVDEventParental                DVDEventCode = 16
+	KDVDEventPGC                     DVDEventCode = 17
+	KDVDEventGPRM                    DVDEventCode = 18
+	KDVDEventRegionMismatch          DVDEventCode = 19
+	KDVDEventTitleTime               DVDEventCode = 20
+	KDVDEventSubpictureStreamNumbers DVDEventCode = 21
+	KDVDEventAudioStreamNumbers      DVDEventCode = 22
+	KDVDEventAngleNumbers            DVDEventCode = 23
+	KDVDEventError                   DVDEventCode = 24
+	KDVDEventCCInfo                  DVDEventCode = 25
+	KDVDEventChapterTime             DVDEventCode = 26
+)
+
+// String returns the DVDEventCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDEventCode) String() string {
+	switch e {
+	case KDVDEventTitle:
+		return "KDVDEventTitle"
+	case KDVDEventPTT:
+		return "KDVDEventPTT"
+	case KDVDEventValidUOP:
+		return "KDVDEventValidUOP"
+	case KDVDEventAngle:
+		return "KDVDEventAngle"
+	case KDVDEventAudioStream:
+		return "KDVDEventAudioStream"
+	case KDVDEventSubpictureStream:
+		return "KDVDEventSubpictureStream"
+	case KDVDEventDisplayMode:
+		return "KDVDEventDisplayMode"
+	case KDVDEventDomain:
+		return "KDVDEventDomain"
+	case KDVDEventBitrate:
+		return "KDVDEventBitrate"
+	case KDVDEventStill:
+		return "KDVDEventStill"
+	case KDVDEventPlayback:
+		return "KDVDEventPlayback"
+	case KDVDEventVideoStandard:
+		return "KDVDEventVideoStandard"
+	case KDVDEventStreams:
+		return "KDVDEventStreams"
+	case KDVDEventScanSpeed:
+		return "KDVDEventScanSpeed"
+	case KDVDEventMenuCalled:
+		return "KDVDEventMenuCalled"
+	case KDVDEventParental:
+		return "KDVDEventParental"
+	case KDVDEventPGC:
+		return "KDVDEventPGC"
+	case KDVDEventGPRM:
+		return "KDVDEventGPRM"
+	case KDVDEventRegionMismatch:
+		return "KDVDEventRegionMismatch"
+	case KDVDEventTitleTime:
+		return "KDVDEventTitleTime"
+	case KDVDEventSubpictureStreamNumbers:
+		return "KDVDEventSubpictureStreamNumbers"
+	case KDVDEventAudioStreamNumbers:
+		return "KDVDEventAudioStreamNumbers"
+	case KDVDEventAngleNumbers:
+		return "KDVDEventAngleNumbers"
+	case KDVDEventError:
+		return "KDVDEventError"
+	case KDVDEventCCInfo:
+		return "KDVDEventCCInfo"
+	case KDVDEventChapterTime:
+		return "KDVDEventChapterTime"
+	default:
+		return fmt.Sprintf("DVDEventCode(%d)", int64(e))
+	}
+}
+
+type DVDFormat int64
+
+const (
+	KDVDFormatUninitialized DVDFormat = 0
+	KDVDFormatNTSC          DVDFormat = 1
+	KDVDFormatPAL           DVDFormat = 2
+	KDVDFormatNTSC_HDTV     DVDFormat = 3
+	KDVDFormatPAL_HDTV      DVDFormat = 4
+)
+
+// String returns the DVDFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDFormat) String() string {
+	switch e {
+	case KDVDFormatUninitialized:
+		return "KDVDFormatUninitialized"
+	case KDVDFormatNTSC:
+		return "KDVDFormatNTSC"
+	case KDVDFormatPAL:
+		return "KDVDFormatPAL"
+	case KDVDFormatNTSC_HDTV:
+		return "KDVDFormatNTSC_HDTV"
+	case KDVDFormatPAL_HDTV:
+		return "KDVDFormatPAL_HDTV"
+	default:
+		return fmt.Sprintf("DVDFormat(%d)", int64(e))
+	}
+}
+
 type DVDMenu int64
 
 const (
@@ -130,6 +295,44 @@ func (e DVDScanRate) String() string {
 		return "KDVDScanRate32x"
 	default:
 		return fmt.Sprintf("DVDScanRate(%d)", int64(e))
+	}
+}
+
+type DVDState int64
+
+const (
+	KDVDStateUnknown      DVDState = 0
+	KDVDStatePlaying      DVDState = 1
+	KDVDStatePlayingStill DVDState = 2
+	KDVDStatePaused       DVDState = 3
+	KDVDStateStopped      DVDState = 4
+	KDVDStateScanning     DVDState = 5
+	KDVDStateIdle         DVDState = 6
+	KDVDStatePlayingSlow  DVDState = 7
+)
+
+// String returns the DVDState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DVDState) String() string {
+	switch e {
+	case KDVDStateUnknown:
+		return "KDVDStateUnknown"
+	case KDVDStatePlaying:
+		return "KDVDStatePlaying"
+	case KDVDStatePlayingStill:
+		return "KDVDStatePlayingStill"
+	case KDVDStatePaused:
+		return "KDVDStatePaused"
+	case KDVDStateStopped:
+		return "KDVDStateStopped"
+	case KDVDStateScanning:
+		return "KDVDStateScanning"
+	case KDVDStateIdle:
+		return "KDVDStateIdle"
+	case KDVDStatePlayingSlow:
+		return "KDVDStatePlayingSlow"
+	default:
+		return fmt.Sprintf("DVDState(%d)", int64(e))
 	}
 }
 

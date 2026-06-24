@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,20 @@ func (p *Path) IsKind(className string) bool {
 // under fmt.
 func (p *Path) String() string {
 	return rt.Description(objref.IDOf(p))
+}
+
+// NewPathWithPointsCountRadiusCyclical initializes a path with the specified array of 2D points.
+func NewPathWithPointsCountRadiusCyclical(points unsafe.Pointer, count int, radius float32, cyclical bool) *Path {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoints:count:radius:cyclical:"), points, count, radius, cyclical)
+	return pathAdopt(_id)
+}
+
+// NewPathWithFloat3PointsCountRadiusCyclical initializes a path with the specified array of 3D points.
+func NewPathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count int, radius float32, cyclical bool) *Path {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFloat3Points:count:radius:cyclical:"), points, count, radius, cyclical)
+	return pathAdopt(_id)
 }
 
 // NewPathWithGraphNodesRadius initializes a path using the positions of the specified graph nodes.

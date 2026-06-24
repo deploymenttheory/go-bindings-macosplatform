@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,11 @@ func (wasr *WebAuthenticationSessionRequest) String() string {
 func NewWebAuthenticationSessionRequest() *WebAuthenticationSessionRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionRequest")), objc.RegisterName("new"))
 	return webAuthenticationSessionRequestAdopt(_id)
+}
+
+// CancelWithError indicates that the browser canceled the authentication attempt.
+func (wasr *WebAuthenticationSessionRequest) CancelWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("cancelWithError:"), error_)
 }
 
 // CompleteWithCallbackURL indicates that the browser successfully completed the authentication attempt.

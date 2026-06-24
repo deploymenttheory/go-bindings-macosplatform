@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +71,12 @@ func (sf *ScriptFrame) String() string {
 func NewScriptFrame() *ScriptFrame {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNScriptFrame")), objc.RegisterName("new"))
 	return scriptFrameAdopt(_id)
+}
+
+// Time returns the presentation time associated with the remaining properties.
+func (sf *ScriptFrame) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sf), objc.RegisterName("time"))
+	return _r
 }
 
 // FocusDisparity returns the disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.

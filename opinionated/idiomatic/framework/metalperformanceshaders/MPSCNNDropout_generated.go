@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -93,6 +95,12 @@ func (cd *CNNDropout) WithLabel(label string) *CNNDropout {
 // ResultStateForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
 func (cd *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+	return obj.Wrap(_r)
+}
+
+// ResultStateBatchForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
+func (cd *CNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:"), sourceImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
 	return obj.Wrap(_r)
 }
 

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewExpressionWithCoder(coder *Coder) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return expressionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (e *Expression) WithObservationInfo(observationInfo unsafe.Pointer) *Expression {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return e
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -69,6 +71,13 @@ func (v_ *Value) String() string {
 	return rt.Description(objref.IDOf(v_))
 }
 
+// NewValueWithBytesObjCType initializes a value object to contain the specified value, interpreted with the specified Objective-C type.
+func NewValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:objCType:"), value, type_)
+	return valueAdopt(_id)
+}
+
 // NewValueWithCoder creates a new Value.
 func NewValueWithCoder(coder *Coder) *Value {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("alloc"))
@@ -76,10 +85,21 @@ func NewValueWithCoder(coder *Coder) *Value {
 	return valueAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (v_ *Value) WithObservationInfo(observationInfo unsafe.Pointer) *Value {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return v_
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (v_ *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return v_
+}
+
+// GetValueSize copies the value into the specified buffer.
+func (v_ *Value) GetValueSize(value unsafe.Pointer, size int) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:size:"), value, size)
 }
 
 // IsEqualToValue returns a Boolean value that indicates whether the value object and another value object are equal.
@@ -92,6 +112,11 @@ func (v_ *Value) IsEqualToValue(value *Value) bool {
 func (v_ *Value) NonretainedObjectValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
+}
+
+// GetValue copies the value into the specified buffer.
+func (v_ *Value) GetValue(value unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getValue:"), value)
 }
 
 // PointValue returns the point value.

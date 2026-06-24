@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -50,6 +51,12 @@ func delegatingPlaybackCoordinatorSeekCommandAdopt(id objc.ID) *DelegatingPlayba
 func NewDelegatingPlaybackCoordinatorSeekCommand() *DelegatingPlaybackCoordinatorSeekCommand {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorSeekCommand")), objc.RegisterName("new"))
 	return delegatingPlaybackCoordinatorSeekCommandAdopt(_id)
+}
+
+// ItemTime returns the time to seek the currentItem to. Playback should never automatically resume after seeking to this time. The coordinator will issue a new PlayCommand when everyone else is ready to resume.
+func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) ItemTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(dpcsc), objc.RegisterName("itemTime"))
+	return _r
 }
 
 // ShouldBufferInAnticipationOfPlayback reports whether indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback, playback is expected to eventually resume at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If true, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.

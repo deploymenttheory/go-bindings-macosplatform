@@ -5,6 +5,8 @@
 package iosurface
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -421,6 +423,19 @@ func IOSurfaceIsInUse(buffer obj.Object) uint8 {
 	return _fnIOSurfaceIsInUse(objref.IDOf(buffer))
 }
 
+var _fnIOSurfaceLock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int
+
+// IOSurfaceLock calls the IOSurface framework function IOSurfaceLock.
+func IOSurfaceLock(buffer obj.Object, options IOSurfaceLockOptions) (result int, seed uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceLock, _lib, "IOSurfaceLock")
+	}
+	var _out0 uint32
+	_ret := _fnIOSurfaceLock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnIOSurfaceLookup func(uint32) objc.ID
 
 // IOSurfaceLookup calls the IOSurface framework function IOSurfaceLookup.
@@ -490,6 +505,19 @@ func IOSurfaceSetOwnershipIdentity(buffer obj.Object, task_id_token int, newLedg
 	return _fnIOSurfaceSetOwnershipIdentity(objref.IDOf(buffer), task_id_token, newLedgerTag, newLedgerOptions)
 }
 
+var _fnIOSurfaceSetPurgeable func(objc.ID, uint32, unsafe.Pointer) int
+
+// IOSurfaceSetPurgeable calls the IOSurface framework function IOSurfaceSetPurgeable.
+func IOSurfaceSetPurgeable(buffer obj.Object, newState uint32) (result int, oldState uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceSetPurgeable == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetPurgeable, _lib, "IOSurfaceSetPurgeable")
+	}
+	var _out0 uint32
+	_ret := _fnIOSurfaceSetPurgeable(objref.IDOf(buffer), newState, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnIOSurfaceSetValue func(objc.ID, objc.ID, objc.ID)
 
 // IOSurfaceSetValue calls the IOSurface framework function IOSurfaceSetValue.
@@ -510,4 +538,17 @@ func IOSurfaceSetValues(buffer obj.Object, keysAndValues obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetValues, _lib, "IOSurfaceSetValues")
 	}
 	_fnIOSurfaceSetValues(objref.IDOf(buffer), objref.IDOf(keysAndValues))
+}
+
+var _fnIOSurfaceUnlock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int
+
+// IOSurfaceUnlock calls the IOSurface framework function IOSurfaceUnlock.
+func IOSurfaceUnlock(buffer obj.Object, options IOSurfaceLockOptions) (result int, seed uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceUnlock, _lib, "IOSurfaceUnlock")
+	}
+	var _out0 uint32
+	_ret := _fnIOSurfaceUnlock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }

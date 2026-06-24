@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -170,6 +172,12 @@ func (mur *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookie
 // WithHTTPShouldUsePipelining sets a Boolean value that indicates whether the request can continue transmitting data before receiving a response from an earlier transmission.
 func (mur *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
+	return mur
+}
+
+// WithObservationInfo sets the observation info.
+func (mur *MutableURLRequest) WithObservationInfo(observationInfo unsafe.Pointer) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return mur
 }
 

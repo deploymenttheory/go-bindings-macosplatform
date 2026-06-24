@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMorphologyPronoun")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPronoun:morphology:dependentMorphology:"), purego.NSString(pronoun), objref.IDOf(morphology), objref.IDOf(dependentMorphology))
 	return morphologyPronounAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mp *MorphologyPronoun) WithObservationInfo(observationInfo unsafe.Pointer) *MorphologyPronoun {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mp
 }
 
 // WithScriptingProperties sets the scripting properties.

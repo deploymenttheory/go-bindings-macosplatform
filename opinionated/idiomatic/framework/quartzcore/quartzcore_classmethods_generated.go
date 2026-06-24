@@ -6,6 +6,7 @@ package quartzcore
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -143,6 +144,12 @@ func AnimationWithKeyPath(path string) *PropertyAnimation {
 func SharedServer() *RemoteLayerServer {
 	_r := objc.Send[objc.ID](objc.ID(_class("CARemoteLayerServer")), objc.RegisterName("sharedServer"))
 	return RemoteLayerServerFromID(_r)
+}
+
+// RendererWithCGLContextOptions creates and returns a CARenderer instance with the render target specified by the Core OpenGL context.
+func RendererWithCGLContextOptions(ctx unsafe.Pointer, dict obj.Object) *Renderer {
+	_r := objc.Send[objc.ID](objc.ID(_class("CARenderer")), objc.RegisterName("rendererWithCGLContext:options:"), ctx, objref.IDOf(dict))
+	return RendererFromID(_r)
 }
 
 // FadeDuration returns the time, in seconds, that newly added images take to “fade-in” to the rendered representation of the tiled layer.

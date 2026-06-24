@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -90,6 +91,18 @@ func (np *NEProvider) Sleep(ctx context.Context) error {
 // Wake handle a wake event.
 func (np *NEProvider) Wake() {
 	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("wake"))
+}
+
+// CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate create a TCP connection.
+func (np *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tLSParameters), objref.IDOf(delegate))
+	return NWTCPConnectionFromID(_r)
+}
+
+// CreateUDPSessionToEndpointFromEndpoint creates a UDP session.
+func (np *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("createUDPSessionToEndpoint:fromEndpoint:"), remoteEndpoint, objref.IDOf(localEndpoint))
+	return NWUDPSessionFromID(_r)
 }
 
 // DisplayMessageCompletionHandler call this method from your NEProvider subclass if you want to display a message to the person using the app.

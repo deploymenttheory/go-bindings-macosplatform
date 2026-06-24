@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -117,6 +118,18 @@ func (lpec *LivePhotoEditingContext) Cancel() {
 func (lpec *LivePhotoEditingContext) FullSizeImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("fullSizeImage"))
 	return obj.Wrap(_r)
+}
+
+// Duration returns the duration of the live photo
+func (lpec *LivePhotoEditingContext) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(lpec), objc.RegisterName("duration"))
+	return _r
+}
+
+// PhotoTime returns the time of the still image within the live photo
+func (lpec *LivePhotoEditingContext) PhotoTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(lpec), objc.RegisterName("photoTime"))
+	return _r
 }
 
 // AudioVolume specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0

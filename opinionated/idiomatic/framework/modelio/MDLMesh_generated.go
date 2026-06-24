@@ -213,6 +213,12 @@ func (m *Mesh) RemoveAttributeNamed(name string) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeAttributeNamed:"), purego.NSString(name))
 }
 
+// GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture of the specified size.
+func (m *Mesh) GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, raysPerSample int, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string, materialPropertyName string) bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("generateAmbientOcclusionTextureWithSize:raysPerSample:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:"), textureSize, raysPerSample, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName), purego.NSString(materialPropertyName))
+	return _r
+}
+
 // GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a material property texture.
 func (m *Mesh) GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string, materialPropertyName string) bool {
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("generateAmbientOcclusionTextureWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:"), bakeQuality, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName), purego.NSString(materialPropertyName))
@@ -228,6 +234,12 @@ func (m *Mesh) GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationF
 // GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed calculates ambient occlusion (AO) information for the mesh and saves it in the mesh as a vertex color attribute.
 func (m *Mesh) GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider []*Object, vertexAttributeName string) bool {
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("generateAmbientOcclusionVertexColorsWithQuality:attenuationFactor:objectsToConsider:vertexAttributeNamed:"), bakeQuality, attenuationFactor, purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName))
+	return _r
+}
+
+// GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calculates static lighting information for the mesh and saves it in the mesh as a material property texture of the specified size.
+func (m *Mesh) GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, lightsToConsider []*Light, objectsToConsider []*Object, vertexAttributeName string, materialPropertyName string) bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("generateLightMapTextureWithTextureSize:lightsToConsider:objectsToConsider:vertexAttributeNamed:materialPropertyNamed:"), textureSize, purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(vertexAttributeName), purego.NSString(materialPropertyName))
 	return _r
 }
 

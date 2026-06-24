@@ -6,6 +6,7 @@ package soundanalysis
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -73,6 +74,13 @@ func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []obj.
 	return timeDurationConstraintAdopt(_id)
 }
 
+// NewTimeDurationConstraintWithDurationRange initializes a range-type constraint. - Parameter durationRange: A continuous range of duration values (represented as CMTime values) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeRange`, and which constrains durations values to the provided range.
+func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRange) *TimeDurationConstraint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDurationRange:"), durationRange)
+	return timeDurationConstraintAdopt(_id)
+}
+
 // Type returns the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
 func (tdc *TimeDurationConstraint) Type() TimeDurationConstraintType {
 	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(tdc), objc.RegisterName("type"))
@@ -85,4 +93,10 @@ func (tdc *TimeDurationConstraint) Type() TimeDurationConstraintType {
 func (tdc *TimeDurationConstraint) EnumeratedDurations() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("enumeratedDurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// DurationRange returns if the constraint type is range, then the range of allowable window durations. - Returns: If the constraint type is range, a CMTimeRange representing the range of allowable window durations. If the constraint type is not range, `kCMTimeRangeInvalid`. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'range'. The constraint type is considered to be 'range' if the `type` property is equal to `SNTimeDurationConstraintTypeRange`.
+func (tdc *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(tdc), objc.RegisterName("durationRange"))
+	return _r
 }

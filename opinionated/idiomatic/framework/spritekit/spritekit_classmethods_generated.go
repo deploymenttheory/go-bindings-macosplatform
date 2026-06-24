@@ -593,6 +593,24 @@ func ValueWithFloat(value float32) *AttributeValue {
 	return AttributeValueFromID(_r)
 }
 
+// ValueWithVectorFloat2 creates and initializes a new attribute value object that holds a vector of two floating point numbers.
+func ValueWithVectorFloat2(value unsafe.Pointer) *AttributeValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("valueWithVectorFloat2:"), value)
+	return AttributeValueFromID(_r)
+}
+
+// ValueWithVectorFloat3 creates and initializes a new attribute value object that holds a vector of three floating point numbers.
+func ValueWithVectorFloat3(value unsafe.Pointer) *AttributeValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("valueWithVectorFloat3:"), value)
+	return AttributeValueFromID(_r)
+}
+
+// ValueWithVectorFloat4 creates and initializes a new attribute value object that holds a vector of four floating point numbers.
+func ValueWithVectorFloat4(value unsafe.Pointer) *AttributeValue {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("valueWithVectorFloat4:"), value)
+	return AttributeValueFromID(_r)
+}
+
 // PositionX creates a constraint that restricts the x-coordinate of a node’s position.
 func PositionX(range_ *Range) *Constraint {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("positionX:"), objref.IDOf(range_))
@@ -668,6 +686,18 @@ func VortexField() *FieldNode {
 // RadialGravityField creates a field node that accelerates physics bodies toward the field node.
 func RadialGravityField() *FieldNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("radialGravityField"))
+	return FieldNodeFromID(_r)
+}
+
+// LinearGravityFieldWithVector creates a field node that accelerates physics bodies in a specific direction.
+func LinearGravityFieldWithVector(direction unsafe.Pointer) *FieldNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("linearGravityFieldWithVector:"), direction)
+	return FieldNodeFromID(_r)
+}
+
+// VelocityFieldWithVector creates a field node that gives physics bodies a constant velocity.
+func VelocityFieldWithVector(direction unsafe.Pointer) *FieldNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKFieldNode")), objc.RegisterName("velocityFieldWithVector:"), direction)
 	return FieldNodeFromID(_r)
 }
 
@@ -1352,6 +1382,78 @@ func UniformWithNameFloat(name string, value float32) *Uniform {
 	return UniformFromID(_r)
 }
 
+// UniformWithNameVectorFloat2 create a shader uniform with a given name, and a float vector2 value
+func UniformWithNameVectorFloat2(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:vectorFloat2:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameVectorFloat3 create a shader uniform with a given name, and a float vector3 value
+func UniformWithNameVectorFloat3(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:vectorFloat3:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameVectorFloat4 create a shader uniform with a given name, and a float vector4 value
+func UniformWithNameVectorFloat4(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:vectorFloat4:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameMatrixFloat2x2 create a shader uniform with a given name, and a 2x2 matrix value
+func UniformWithNameMatrixFloat2x2(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:matrixFloat2x2:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameMatrixFloat3x3 create a shader uniform with a given name, and a 3x3 matrix value
+func UniformWithNameMatrixFloat3x3(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:matrixFloat3x3:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameMatrixFloat4x4 create a shader uniform with a given name, and a 4x4 matrix value
+func UniformWithNameMatrixFloat4x4(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:matrixFloat4x4:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatVector2 creates and initializes a new uniform object that holds a vector of two floating-point numbers.
+func UniformWithNameFloatVector2(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatVector2:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatVector3 creates and initializes a new uniform object that holds a vector of three floating-point numbers.
+func UniformWithNameFloatVector3(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatVector3:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatVector4 creates and initializes a new uniform object that holds a vector of four floating-point numbers.
+func UniformWithNameFloatVector4(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatVector4:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatMatrix2 creates and initializes a new uniform object that holds a 2 x 2 matrix of floating-point numbers.
+func UniformWithNameFloatMatrix2(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatMatrix2:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatMatrix3 creates and initializes a new uniform object that holds a 3 x 3 matrix of floating-point numbers.
+func UniformWithNameFloatMatrix3(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatMatrix3:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
+// UniformWithNameFloatMatrix4 creates and initializes a new uniform object that holds a 4 x 4 matrix of floating-point numbers.
+func UniformWithNameFloatMatrix4(name string, value unsafe.Pointer) *Uniform {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKUniform")), objc.RegisterName("uniformWithName:floatMatrix4:"), purego.NSString(name), value)
+	return UniformFromID(_r)
+}
+
 // VideoNodeWithAVPlayer creates and initializes a video node using an existing video player object.
 func VideoNodeWithAVPlayer(player obj.Object) *VideoNode {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKVideoNode")), objc.RegisterName("videoNodeWithAVPlayer:"), objref.IDOf(player))
@@ -1391,5 +1493,11 @@ func Grid() *WarpGeometryGrid {
 // GridWithColumnsRows creates a warp geometry grid of a specified size.
 func GridWithColumnsRows(cols int, rows int) *WarpGeometryGrid {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("gridWithColumns:rows:"), cols, rows)
+	return WarpGeometryGridFromID(_r)
+}
+
+// GridWithColumnsRowsSourcePositionsDestPositions wraps the corresponding Objective-C method.
+func GridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *WarpGeometryGrid {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("gridWithColumns:rows:sourcePositions:destPositions:"), cols, rows, sourcePositions, destPositions)
 	return WarpGeometryGridFromID(_r)
 }

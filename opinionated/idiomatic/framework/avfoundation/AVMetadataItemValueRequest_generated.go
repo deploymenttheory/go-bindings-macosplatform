@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,11 @@ func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 // RespondWithValue returns the metadata item’s value.
 func (mivr *MetadataItemValueRequest) RespondWithValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithValue:"), objref.IDOf(value))
+}
+
+// RespondWithError returns an error when the system fails to load the value.
+func (mivr *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithError:"), error_)
 }
 
 // MetadataItem returns the metadata item.

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,6 +57,12 @@ func NewMutableCaption() *MutableCaption {
 // WithText sets the caption text.
 func (mc *MutableCaption) WithText(text string) *MutableCaption {
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setText:"), purego.NSString(text))
+	return mc
+}
+
+// WithTimeRange sets the time range over which the system presents the caption.
+func (mc *MutableCaption) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTimeRange:"), timeRange)
 	return mc
 }
 

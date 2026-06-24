@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func messagePortNameServerAdopt(id objc.ID) *MessagePortNameServer {
 func NewMessagePortNameServer() *MessagePortNameServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMessagePortNameServer")), objc.RegisterName("new"))
 	return messagePortNameServerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mpns *MessagePortNameServer) WithObservationInfo(observationInfo unsafe.Pointer) *MessagePortNameServer {
+	objc.Send[objc.ID](objref.IDOf(mpns), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mpns
 }
 
 // WithScriptingProperties sets the scripting properties.

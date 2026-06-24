@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -69,9 +70,10 @@ func (rgr *ReverseGeocodingRequest) String() string {
 	return rt.Description(objref.IDOf(rgr))
 }
 
-// NewReverseGeocodingRequest creates a new ReverseGeocodingRequest.
-func NewReverseGeocodingRequest() *ReverseGeocodingRequest {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKReverseGeocodingRequest")), objc.RegisterName("new"))
+// NewReverseGeocodingRequestWithLocation initializes a new reverse geocoder request object with the provided location.
+func NewReverseGeocodingRequestWithLocation(location unsafe.Pointer) *ReverseGeocodingRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKReverseGeocodingRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:"), location)
 	return reverseGeocodingRequestAdopt(_id)
 }
 

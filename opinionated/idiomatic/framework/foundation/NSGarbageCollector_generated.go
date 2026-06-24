@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,6 +74,12 @@ func NewGarbageCollector() *GarbageCollector {
 	return garbageCollectorAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (gc *GarbageCollector) WithObservationInfo(observationInfo unsafe.Pointer) *GarbageCollector {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return gc
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (gc *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -108,4 +116,14 @@ func (gc *GarbageCollector) CollectIfNeeded() {
 // CollectExhaustively tells the receiver to collect iteratively.
 func (gc *GarbageCollector) CollectExhaustively() {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("collectExhaustively"))
+}
+
+// DisableCollectorForPointer specifies that a given pointer will not be collected.
+func (gc *GarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("disableCollectorForPointer:"), ptr)
+}
+
+// EnableCollectorForPointer specifies that a given pointer may be collected.
+func (gc *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("enableCollectorForPointer:"), ptr)
 }

@@ -144,6 +144,12 @@ func (au *AudioUnit) WithChannelMap(items ...obj.Object) *AudioUnit {
 	return au
 }
 
+// WithProfileChangedBlock sets a block called when a device notifies that a MIDI-CI profile has been enabled or disabled. Since enabling / disabling MIDI-CI profiles is an asynchronous operation, the host can set this block and the audio unit is expected to call it every time the state of a MIDI-CI profile has changed.
+func (au *AudioUnit) WithProfileChangedBlock(profileChangedBlock unsafe.Pointer) *AudioUnit {
+	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setProfileChangedBlock:"), profileChangedBlock)
+	return au
+}
+
 // WithInputEnabled sets a flag enabling audio input from the unit.
 func (au *AudioUnit) WithInputEnabled(inputEnabled bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setInputEnabled:"), inputEnabled)
@@ -153,6 +159,12 @@ func (au *AudioUnit) WithInputEnabled(inputEnabled bool) *AudioUnit {
 // WithOutputEnabled sets a flag enabling audio output from the unit.
 func (au *AudioUnit) WithOutputEnabled(outputEnabled bool) *AudioUnit {
 	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setOutputEnabled:"), outputEnabled)
+	return au
+}
+
+// WithIntendedSpatialExperience sets the AUAudioUnit’s intended spatial audio experience.
+func (au *AudioUnit) WithIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer) *AudioUnit {
+	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setIntendedSpatialExperience:"), intendedSpatialExperience)
 	return au
 }
 

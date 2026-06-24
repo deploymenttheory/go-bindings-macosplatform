@@ -76,6 +76,36 @@ func CopyThemeIdentifier() (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnCreateEvent func(objc.ID, int, int, float64, int, unsafe.Pointer) int32
+
+// CreateEvent reports an error if the HIToolbox framework function CreateEvent fails.
+func CreateEvent(inAllocator obj.Object, inClassID int, inKind int, inWhen float64, inAttributes int, outEvent unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateEvent, _lib, "CreateEvent")
+	}
+	_rc := _fnCreateEvent(objref.IDOf(inAllocator), inClassID, inKind, inWhen, inAttributes, outEvent)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCreateEventWithCGEvent func(objc.ID, objc.ID, int, unsafe.Pointer) int32
+
+// CreateEventWithCGEvent reports an error if the HIToolbox framework function CreateEventWithCGEvent fails.
+func CreateEventWithCGEvent(inAllocator obj.Object, inEvent obj.Object, inAttributes int, outEvent unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateEventWithCGEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateEventWithCGEvent, _lib, "CreateEventWithCGEvent")
+	}
+	_rc := _fnCreateEventWithCGEvent(objref.IDOf(inAllocator), objref.IDOf(inEvent), inAttributes, outEvent)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDisableSecureEventInput func() int32
 
 // DisableSecureEventInput reports an error if the HIToolbox framework function DisableSecureEventInput fails.
@@ -121,6 +151,21 @@ func FlushEventQueue(inQueue obj.Object) error {
 	return nil
 }
 
+var _fnFlushSpecificEventsFromQueue func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// FlushSpecificEventsFromQueue reports an error if the HIToolbox framework function FlushSpecificEventsFromQueue fails.
+func FlushSpecificEventsFromQueue(inQueue obj.Object, inComparator unsafe.Pointer, inCompareData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFlushSpecificEventsFromQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnFlushSpecificEventsFromQueue, _lib, "FlushSpecificEventsFromQueue")
+	}
+	_rc := _fnFlushSpecificEventsFromQueue(objref.IDOf(inQueue), inComparator, inCompareData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnHIObjectAddDelegate func(objc.ID, objc.ID, int) int32
 
 // HIObjectAddDelegate reports an error if the HIToolbox framework function HIObjectAddDelegate fails.
@@ -150,6 +195,36 @@ func HIObjectCopyDelegates(inObject obj.Object) (obj.Object, error) {
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnHIObjectCreate func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// HIObjectCreate reports an error if the HIToolbox framework function HIObjectCreate fails.
+func HIObjectCreate(inClassID obj.Object, inConstructData obj.Object, outObject unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIObjectCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnHIObjectCreate, _lib, "HIObjectCreate")
+	}
+	_rc := _fnHIObjectCreate(objref.IDOf(inClassID), objref.IDOf(inConstructData), outObject)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIObjectCreateFromBundle func(objc.ID, unsafe.Pointer) int32
+
+// HIObjectCreateFromBundle reports an error if the HIToolbox framework function HIObjectCreateFromBundle fails.
+func HIObjectCreateFromBundle(inBundle obj.Object, outObject unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIObjectCreateFromBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnHIObjectCreateFromBundle, _lib, "HIObjectCreateFromBundle")
+	}
+	_rc := _fnHIObjectCreateFromBundle(objref.IDOf(inBundle), outObject)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHIObjectRemoveDelegate func(objc.ID, objc.ID, int) int32
@@ -197,6 +272,36 @@ func HISearchWindowShow(inSearchString obj.Object, inFlags int) error {
 	return nil
 }
 
+var _fnHIThemeBeginFocus func(objc.ID, int, unsafe.Pointer) int32
+
+// HIThemeBeginFocus reports an error if the HIToolbox framework function HIThemeBeginFocus fails.
+func HIThemeBeginFocus(inContext obj.Object, inRing int, inReserved unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeBeginFocus == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeBeginFocus, _lib, "HIThemeBeginFocus")
+	}
+	_rc := _fnHIThemeBeginFocus(objref.IDOf(inContext), inRing, inReserved)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIThemeBrushCreateCGColor func(int16, unsafe.Pointer) int32
+
+// HIThemeBrushCreateCGColor reports an error if the HIToolbox framework function HIThemeBrushCreateCGColor fails.
+func HIThemeBrushCreateCGColor(inBrush int16, outColor unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeBrushCreateCGColor == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeBrushCreateCGColor, _lib, "HIThemeBrushCreateCGColor")
+	}
+	_rc := _fnHIThemeBrushCreateCGColor(inBrush, outColor)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnHIThemeEndFocus func(objc.ID) int32
 
 // HIThemeEndFocus reports an error if the HIToolbox framework function HIThemeEndFocus fails.
@@ -206,6 +311,111 @@ func HIThemeEndFocus(inContext obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnHIThemeEndFocus, _lib, "HIThemeEndFocus")
 	}
 	_rc := _fnHIThemeEndFocus(objref.IDOf(inContext))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIThemeSetFill func(int16, unsafe.Pointer, objc.ID, int) int32
+
+// HIThemeSetFill reports an error if the HIToolbox framework function HIThemeSetFill fails.
+func HIThemeSetFill(inBrush int16, inInfo unsafe.Pointer, inContext obj.Object, inOrientation int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeSetFill == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeSetFill, _lib, "HIThemeSetFill")
+	}
+	_rc := _fnHIThemeSetFill(inBrush, inInfo, objref.IDOf(inContext), inOrientation)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIThemeSetStroke func(int16, unsafe.Pointer, objc.ID, int) int32
+
+// HIThemeSetStroke reports an error if the HIToolbox framework function HIThemeSetStroke fails.
+func HIThemeSetStroke(inBrush int16, inInfo unsafe.Pointer, inContext obj.Object, inOrientation int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeSetStroke == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeSetStroke, _lib, "HIThemeSetStroke")
+	}
+	_rc := _fnHIThemeSetStroke(inBrush, inInfo, objref.IDOf(inContext), inOrientation)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIThemeSetTextFill func(int16, unsafe.Pointer, objc.ID, int) int32
+
+// HIThemeSetTextFill reports an error if the HIToolbox framework function HIThemeSetTextFill fails.
+func HIThemeSetTextFill(inColor int16, inInfo unsafe.Pointer, inContext obj.Object, inOrientation int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeSetTextFill == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeSetTextFill, _lib, "HIThemeSetTextFill")
+	}
+	_rc := _fnHIThemeSetTextFill(inColor, inInfo, objref.IDOf(inContext), inOrientation)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnInstallEventLoopTimer func(objc.ID, float64, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// InstallEventLoopTimer reports an error if the HIToolbox framework function InstallEventLoopTimer fails.
+func InstallEventLoopTimer(inEventLoop obj.Object, inFireDelay float64, inInterval float64, inTimerProc unsafe.Pointer, inTimerData unsafe.Pointer, outTimer unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInstallEventLoopTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnInstallEventLoopTimer, _lib, "InstallEventLoopTimer")
+	}
+	_rc := _fnInstallEventLoopTimer(objref.IDOf(inEventLoop), inFireDelay, inInterval, inTimerProc, inTimerData, outTimer)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnInvokeDataBrowserItemDataUPP func(objc.ID, int, int, unsafe.Pointer, uint8, unsafe.Pointer) int32
+
+// InvokeDataBrowserItemDataUPP reports an error if the HIToolbox framework function InvokeDataBrowserItemDataUPP fails.
+func InvokeDataBrowserItemDataUPP(browser obj.Object, item int, property int, itemData unsafe.Pointer, setValue uint8, userUPP unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeDataBrowserItemDataUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserItemDataUPP, _lib, "InvokeDataBrowserItemDataUPP")
+	}
+	_rc := _fnInvokeDataBrowserItemDataUPP(objref.IDOf(browser), item, property, itemData, setValue, userUPP)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnInvokeEventHandlerUPP func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeEventHandlerUPP reports an error if the HIToolbox framework function InvokeEventHandlerUPP fails.
+func InvokeEventHandlerUPP(inHandlerCallRef obj.Object, inEvent obj.Object, inUserData unsafe.Pointer, userUPP unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeEventHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeEventHandlerUPP, _lib, "InvokeEventHandlerUPP")
+	}
+	_rc := _fnInvokeEventHandlerUPP(objref.IDOf(inHandlerCallRef), objref.IDOf(inEvent), inUserData, userUPP)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnInvokeScrapPromiseKeeperUPP func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeScrapPromiseKeeperUPP reports an error if the HIToolbox framework function InvokeScrapPromiseKeeperUPP fails.
+func InvokeScrapPromiseKeeperUPP(scrap obj.Object, flavorType int, userData unsafe.Pointer, userUPP unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeScrapPromiseKeeperUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeScrapPromiseKeeperUPP, _lib, "InvokeScrapPromiseKeeperUPP")
+	}
+	_rc := _fnInvokeScrapPromiseKeeperUPP(objref.IDOf(scrap), flavorType, userData, userUPP)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -362,6 +572,21 @@ func SetEventLoopTimerNextFireTime(inTimer obj.Object, inNextFire float64) error
 	return nil
 }
 
+var _fnSetEventParameter func(objc.ID, int, int, int, unsafe.Pointer) int32
+
+// SetEventParameter reports an error if the HIToolbox framework function SetEventParameter fails.
+func SetEventParameter(inEvent obj.Object, inName int, inType int, inSize int, inDataPtr unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetEventParameter == nil {
+		ebipurego.RegisterLibFunc(&_fnSetEventParameter, _lib, "SetEventParameter")
+	}
+	_rc := _fnSetEventParameter(objref.IDOf(inEvent), inName, inType, inSize, inDataPtr)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnSetEventTime func(objc.ID, float64) int32
 
 // SetEventTime reports an error if the HIToolbox framework function SetEventTime fails.
@@ -491,6 +716,21 @@ func TSMRemoveDocumentProperty(docID obj.Object, propertyTag int) error {
 		ebipurego.RegisterLibFunc(&_fnTSMRemoveDocumentProperty, _lib, "TSMRemoveDocumentProperty")
 	}
 	_rc := _fnTSMRemoveDocumentProperty(objref.IDOf(docID), propertyTag)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnTSMSetDocumentProperty func(objc.ID, int, int, unsafe.Pointer) int32
+
+// TSMSetDocumentProperty reports an error if the HIToolbox framework function TSMSetDocumentProperty fails.
+func TSMSetDocumentProperty(docID obj.Object, propertyTag int, propertySize int, propertyData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTSMSetDocumentProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnTSMSetDocumentProperty, _lib, "TSMSetDocumentProperty")
+	}
+	_rc := _fnTSMSetDocumentProperty(objref.IDOf(docID), propertyTag, propertySize, propertyData)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

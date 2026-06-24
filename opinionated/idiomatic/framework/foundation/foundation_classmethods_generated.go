@@ -29,6 +29,12 @@ func NullDescriptor() *AppleEventDescriptor {
 	return AppleEventDescriptorFromID(_r)
 }
 
+// DescriptorWithDescriptorTypeBytesLength creates a descriptor initialized with the specified event type that stores the specified data (from a series of bytes).
+func DescriptorWithDescriptorTypeBytesLength(descriptorType int, bytes_ unsafe.Pointer, byteCount int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:bytes:length:"), descriptorType, bytes_, byteCount)
+	return AppleEventDescriptorFromID(_r)
+}
+
 // DescriptorWithDescriptorTypeData creates a descriptor initialized with the specified event type that stores the specified data (from an instance of NSData).
 func DescriptorWithDescriptorTypeData(descriptorType int, data *Data) *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:data:"), descriptorType, objref.IDOf(data))
@@ -152,6 +158,12 @@ func NSArrayArray() obj.Object {
 // ArrayWithObject creates and returns an array containing a given object.
 func ArrayWithObject(anObject obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithObject:"), objref.IDOf(anObject))
+	return obj.Wrap(_r)
+}
+
+// ArrayWithObjectsCount creates and returns an array that includes a given number of objects from a given C array.
+func ArrayWithObjectsCount(objects unsafe.Pointer, cnt int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithObjects:count:"), objects, cnt)
 	return obj.Wrap(_r)
 }
 
@@ -613,6 +625,24 @@ func CurrentConversation() obj.Object {
 // NSDataData creates an empty data object.
 func NSDataData() *Data {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("data"))
+	return DataFromID(_r)
+}
+
+// DataWithBytesLength creates a data object containing a given number of bytes copied from a given buffer.
+func DataWithBytesLength(bytes_ unsafe.Pointer, length int) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytes:length:"), bytes_, length)
+	return DataFromID(_r)
+}
+
+// DataWithBytesNoCopyLength creates a data object that holds a given number of bytes from a given buffer.
+func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:"), bytes_, length)
+	return DataFromID(_r)
+}
+
+// DataWithBytesNoCopyLengthFreeWhenDone creates a data object that holds a given number of bytes from a given buffer.
+func DataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length int, b bool) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:freeWhenDone:"), bytes_, length, b)
 	return DataFromID(_r)
 }
 
@@ -2121,10 +2151,34 @@ func New() *Object {
 	return ObjectFromID(_r)
 }
 
+// AllocWithZone wraps the corresponding Objective-C method.
+func AllocWithZone(zone unsafe.Pointer) *Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("allocWithZone:"), zone)
+	return ObjectFromID(_r)
+}
+
 // Alloc returns the alloc.
 func Alloc() *Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("alloc"))
 	return ObjectFromID(_r)
+}
+
+// CopyWithZone copies with zone.
+func CopyWithZone(zone unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("copyWithZone:"), zone)
+	return obj.Wrap(_r)
+}
+
+// MutableCopyWithZone wraps the corresponding Objective-C method.
+func MutableCopyWithZone(zone unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("mutableCopyWithZone:"), zone)
+	return obj.Wrap(_r)
+}
+
+// ConformsToProtocol wraps the corresponding Objective-C method.
+func ConformsToProtocol(protocol unsafe.Pointer) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSObject")), objc.RegisterName("conformsToProtocol:"), protocol)
+	return _r
 }
 
 // Hash returns the hash.
@@ -2237,6 +2291,12 @@ func NSOrderedSetOrderedSet() obj.Object {
 // OrderedSetWithObject creates and returns a ordered set that contains a single given object.
 func OrderedSetWithObject(object obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
+}
+
+// OrderedSetWithObjectsCount creates and returns a set containing a specified number of objects from a given C array of objects.
+func OrderedSetWithObjectsCount(objects unsafe.Pointer, cnt int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithObjects:count:"), objects, cnt)
 	return obj.Wrap(_r)
 }
 
@@ -2584,9 +2644,21 @@ func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *Data, opt 
 	return _v, _out0
 }
 
+// ProtocolCheckerWithTargetProtocol allocates and initializes an NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
+func ProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Pointer) *ProtocolChecker {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("protocolCheckerWithTarget:protocol:"), objref.IDOf(anObject), aProtocol)
+	return ProtocolCheckerFromID(_r)
+}
+
 // NSProxyAlloc returns a new instance of the receiving class
 func NSProxyAlloc() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProxy")), objc.RegisterName("alloc"))
+	return obj.Wrap(_r)
+}
+
+// NSProxyAllocWithZone returns a new instance of the receiving class
+func NSProxyAllocWithZone(zone unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProxy")), objc.RegisterName("allocWithZone:"), zone)
 	return obj.Wrap(_r)
 }
 
@@ -2692,6 +2764,12 @@ func NSSetSet() obj.Object {
 // SetWithObject creates and returns a set that contains a single given object.
 func SetWithObject(object obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
+}
+
+// SetWithObjectsCount creates and returns a set containing a specified number of objects from a given C array of objects.
+func SetWithObjectsCount(objects unsafe.Pointer, cnt int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithObjects:count:"), objects, cnt)
 	return obj.Wrap(_r)
 }
 
@@ -2895,6 +2973,12 @@ func PathWithComponents(components []string) string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler wraps the corresponding Objective-C method.
+func LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url string, arguments []string, error_ unsafe.Pointer, terminationHandler func(obj.Object)) *Task {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithExecutableURL:arguments:error:terminationHandler:"), rt.FileURL(url), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), error_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
+	return TaskFromID(_r)
 }
 
 // LaunchedTaskWithLaunchPathArguments wraps the corresponding Objective-C method.
@@ -4801,9 +4885,27 @@ func DefaultUserNotificationCenter() *UserNotificationCenter {
 	return UserNotificationCenterFromID(_r)
 }
 
+// ValueWithBytesObjCType creates a value object containing the specified value, interpreted with the specified Objective-C type.
+func ValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithBytes:objCType:"), value, type_)
+	return ValueFromID(_r)
+}
+
+// ValueWithObjCType creates a value object containing the specified value, interpreted with the specified Objective-C type.
+func ValueWithObjCType(value unsafe.Pointer, type_ string) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("value:withObjCType:"), value, type_)
+	return ValueFromID(_r)
+}
+
 // ValueWithNonretainedObject creates a value object containing the specified object.
 func ValueWithNonretainedObject(anObject obj.Object) *Value {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithNonretainedObject:"), objref.IDOf(anObject))
+	return ValueFromID(_r)
+}
+
+// ValueWithPointer creates a value object containing the specified pointer.
+func ValueWithPointer(pointer unsafe.Pointer) *Value {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithPointer:"), pointer)
 	return ValueFromID(_r)
 }
 
@@ -4962,6 +5064,12 @@ func PredefinedNamespaceForPrefix(name string) *XMLNode {
 func CurrentConnection() *XPCConnection {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("currentConnection"))
 	return XPCConnectionFromID(_r)
+}
+
+// InterfaceWithProtocol returns an NSXPCInterface instance for a given protocol.
+func InterfaceWithProtocol(protocol unsafe.Pointer) *XPCInterface {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXPCInterface")), objc.RegisterName("interfaceWithProtocol:"), protocol)
+	return XPCInterfaceFromID(_r)
 }
 
 // ServiceListener returns the singleton listener used to listen for incoming connections in an XPC service.

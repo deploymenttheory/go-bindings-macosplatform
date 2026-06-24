@@ -157,3 +157,19 @@ func ColorSyncProfileUninstall(profile obj.Object) error {
 	}
 	return nil
 }
+
+// ColorSyncProfileVerify reports an error if the ColorSync framework function ColorSyncProfileVerify fails.
+var _fnColorSyncProfileVerify func(objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+
+func ColorSyncProfileVerify(prof obj.Object, errors_ unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileVerify == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileVerify, _lib, "ColorSyncProfileVerify")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnColorSyncProfileVerify(objref.IDOf(prof), errors_, unsafe.Pointer(&_cfErr))
+	if !_ok {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}

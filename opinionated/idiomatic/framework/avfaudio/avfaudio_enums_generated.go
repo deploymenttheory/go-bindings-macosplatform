@@ -628,6 +628,33 @@ func (e AudioUnitReverbPreset) String() string {
 	}
 }
 
+// Constants that define the supported ducking levels.
+type AudioVoiceProcessingOtherAudioDuckingLevel int64
+
+const (
+	AudioVoiceProcessingOtherAudioDuckingLevelDefault AudioVoiceProcessingOtherAudioDuckingLevel = 0
+	AudioVoiceProcessingOtherAudioDuckingLevelMin     AudioVoiceProcessingOtherAudioDuckingLevel = 10
+	AudioVoiceProcessingOtherAudioDuckingLevelMid     AudioVoiceProcessingOtherAudioDuckingLevel = 20
+	AudioVoiceProcessingOtherAudioDuckingLevelMax     AudioVoiceProcessingOtherAudioDuckingLevel = 30
+)
+
+// String returns the AudioVoiceProcessingOtherAudioDuckingLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioVoiceProcessingOtherAudioDuckingLevel) String() string {
+	switch e {
+	case AudioVoiceProcessingOtherAudioDuckingLevelDefault:
+		return "AudioVoiceProcessingOtherAudioDuckingLevelDefault"
+	case AudioVoiceProcessingOtherAudioDuckingLevelMin:
+		return "AudioVoiceProcessingOtherAudioDuckingLevelMin"
+	case AudioVoiceProcessingOtherAudioDuckingLevelMid:
+		return "AudioVoiceProcessingOtherAudioDuckingLevelMid"
+	case AudioVoiceProcessingOtherAudioDuckingLevelMax:
+		return "AudioVoiceProcessingOtherAudioDuckingLevelMax"
+	default:
+		return fmt.Sprintf("AudioVoiceProcessingOtherAudioDuckingLevel(%d)", int64(e))
+	}
+}
+
 // Constants that represents control change event types.
 type MIDIControlChangeMessageType int64
 

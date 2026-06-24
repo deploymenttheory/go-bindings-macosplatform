@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -67,6 +68,18 @@ func (mo *MetadataObject) IsKind(className string) bool {
 // under fmt.
 func (mo *MetadataObject) String() string {
 	return rt.Description(objref.IDOf(mo))
+}
+
+// Time returns the media time associated with this metadata object. The value of this property is a CMTime associated with the metadata object. For capture, it is the time at which this object was captured. If this metadata object originates from a CMSampleBuffer, its time matches the sample buffer's presentation time. This property may return kCMTimeInvalid.
+func (mo *MetadataObject) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mo), objc.RegisterName("time"))
+	return _r
+}
+
+// Duration returns the media duration associated with this metadata object. The value of this property is a CMTime representing the duration of the metadata object. If this metadata object originates from a CMSampleBuffer, its duration matches the sample buffer's duration. This property may return kCMTimeInvalid.
+func (mo *MetadataObject) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mo), objc.RegisterName("duration"))
+	return _r
 }
 
 // Bounds returns the bounding rectangle of the receiver. The value of this property is a CGRect representing the bounding rectangle of the object with respect to the picture in which it resides. The rectangle's origin is top left. If the metadata originates from video, bounds may be expressed as scalar values from 0. - 1. If the original video has been scaled down, the bounds of the metadata object still are meaningful. This property may return CGRectZero if the metadata has no bounds.

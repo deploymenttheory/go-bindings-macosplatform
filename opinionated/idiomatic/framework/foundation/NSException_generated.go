@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), objref.IDOf(aName), purego.NSString(aReason), objref.IDOf(aUserInfo))
 	return exceptionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (e *Exception) WithObservationInfo(observationInfo unsafe.Pointer) *Exception {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return e
 }
 
 // WithScriptingProperties sets the scripting properties.

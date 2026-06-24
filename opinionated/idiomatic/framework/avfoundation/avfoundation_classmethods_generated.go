@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -216,6 +217,12 @@ func AssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferAttr
 func AssetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInputSourcePixelBufferAttributes(input *AssetWriterInput, sourcePixelBufferAttributes obj.Object) *AssetWriterInputTaggedPixelBufferGroupAdaptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputTaggedPixelBufferGroupAdaptor")), objc.RegisterName("assetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:"), objref.IDOf(input), objref.IDOf(sourcePixelBufferAttributes))
 	return AssetWriterInputTaggedPixelBufferGroupAdaptorFromID(_r)
+}
+
+// CaptionConversionValidatorWithCaptionsTimeRangeConversionSettings a convenience initializer to create an object that validates captions for a conversion operation.
+func CaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions []*Caption, timeRange coremedia.CMTimeRange, conversionSettings obj.Object) *CaptionConversionValidator {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionValidator")), objc.RegisterName("captionConversionValidatorWithCaptions:timeRange:conversionSettings:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }), timeRange, objref.IDOf(conversionSettings))
+	return CaptionConversionValidatorFromID(_r)
 }
 
 // CaptionFormatConformerWithConversionSettings a class method that creates a new object with format conversion settings.
@@ -555,6 +562,18 @@ func LayerWithSession(session *CaptureSession) *CaptureVideoPreviewLayer {
 func LayerWithSessionWithNoConnection(session *CaptureSession) *CaptureVideoPreviewLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureVideoPreviewLayer")), objc.RegisterName("layerWithSessionWithNoConnection:"), objref.IDOf(session))
 	return CaptureVideoPreviewLayerFromID(_r)
+}
+
+// CompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange returns a new an object that presents a segment of a media file that the specified URL references.
+func CompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL string, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *CompositionTrackSegment {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("compositionTrackSegmentWithURL:trackID:sourceTimeRange:targetTimeRange:"), rt.FileURL(uRL), trackID, sourceTimeRange, targetTimeRange)
+	return CompositionTrackSegmentFromID(_r)
+}
+
+// CompositionTrackSegmentWithTimeRange returns a new object that presents an empty composition track segment.
+func CompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *CompositionTrackSegment {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("compositionTrackSegmentWithTimeRange:"), timeRange)
+	return CompositionTrackSegmentFromID(_r)
 }
 
 // ContentKeyResponseWithFairPlayStreamingKeyResponseData creates a content key response with an encrypted key response data blob when FairPlay Streaming is the key delivery method.
@@ -1009,6 +1028,24 @@ func SetObservationEnabled(observationEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("AVPlayer")), objc.RegisterName("setObservationEnabled:"), observationEnabled)
 }
 
+// InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes creates an interstitial event, with user-defined attributes, for the specified time.
+func InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *PlayerItem, identifier string, time_ coremedia.CMTime, templateItems []*PlayerItem, restrictions PlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes obj.Object) *PlayerInterstitialEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("interstitialEventWithPrimaryItem:identifier:time:templateItems:restrictions:resumptionOffset:playoutLimit:userDefinedAttributes:"), objref.IDOf(primaryItem), purego.NSString(identifier), time_, purego.SliceToNSArray(templateItems, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }), restrictions, resumptionOffset, playoutLimit, objref.IDOf(userDefinedAttributes))
+	return PlayerInterstitialEventFromID(_r)
+}
+
+// InterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes creates an interstitial event, with user-defined attributes, for the specified date.
+func InterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *PlayerItem, identifier string, date obj.Object, templateItems []*PlayerItem, restrictions PlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes obj.Object) *PlayerInterstitialEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("interstitialEventWithPrimaryItem:identifier:date:templateItems:restrictions:resumptionOffset:playoutLimit:userDefinedAttributes:"), objref.IDOf(primaryItem), purego.NSString(identifier), objref.IDOf(date), purego.SliceToNSArray(templateItems, func(_v *PlayerItem) objc.ID { return objref.IDOf(_v) }), restrictions, resumptionOffset, playoutLimit, objref.IDOf(userDefinedAttributes))
+	return PlayerInterstitialEventFromID(_r)
+}
+
+// InterstitialEventWithPrimaryItemTime creates an interstitial event for the specified time.
+func InterstitialEventWithPrimaryItemTime(primaryItem *PlayerItem, time_ coremedia.CMTime) *PlayerInterstitialEvent {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("interstitialEventWithPrimaryItem:time:"), objref.IDOf(primaryItem), time_)
+	return PlayerInterstitialEventFromID(_r)
+}
+
 // InterstitialEventWithPrimaryItemDate creates an interstitial event for the specified date.
 func InterstitialEventWithPrimaryItemDate(primaryItem *PlayerItem, date obj.Object) *PlayerInterstitialEvent {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEvent")), objc.RegisterName("interstitialEventWithPrimaryItem:date:"), objref.IDOf(primaryItem), objref.IDOf(date))
@@ -1049,6 +1086,12 @@ func PlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *Asset, automatically
 func PlayerLayerWithPlayer(player *Player) *PlayerLayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerLayer")), objc.RegisterName("playerLayerWithPlayer:"), objref.IDOf(player))
 	return PlayerLayerFromID(_r)
+}
+
+// PlayerLooperWithPlayerTemplateItemTimeRange returns player looper that continuously plays the specified time range of a player item.
+func PlayerLooperWithPlayerTemplateItemTimeRange(player *QueuePlayer, itemToLoop *PlayerItem, loopRange coremedia.CMTimeRange) *PlayerLooper {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("playerLooperWithPlayer:templateItem:timeRange:"), objref.IDOf(player), objref.IDOf(itemToLoop), loopRange)
+	return PlayerLooperFromID(_r)
 }
 
 // PlayerLooperWithPlayerTemplateItem creates a player looper that continuously plays the full duration of a player item.

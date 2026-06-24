@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func NewNetServiceBrowser() *NetServiceBrowser {
 // WithIncludesPeerToPeer sets the includes peer to peer.
 func (nsb *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
+	return nsb
+}
+
+// WithObservationInfo sets the observation info.
+func (nsb *NetServiceBrowser) WithObservationInfo(observationInfo unsafe.Pointer) *NetServiceBrowser {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return nsb
 }
 

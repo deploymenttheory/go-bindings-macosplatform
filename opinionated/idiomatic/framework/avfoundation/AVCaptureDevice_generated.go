@@ -83,6 +83,18 @@ func (cd *CaptureDevice) WithActiveFormat(activeFormat *CaptureDeviceFormat) *Ca
 	return cd
 }
 
+// WithActiveVideoMinFrameDuration sets a property indicating the receiver's current active minimum frame duration (the reciprocal of its max frame rate). An AVCaptureDevice's activeVideoMinFrameDuration property is the reciprocal of its active maximum frame rate. To limit the max frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMinFrameDuration to its default value for the given activeFormat. -setActiveVideoMinFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMinFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMinFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMinFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired. When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration throws an NSInvalidArgumentException.
+func (cd *CaptureDevice) WithActiveVideoMinFrameDuration(activeVideoMinFrameDuration coremedia.CMTime) *CaptureDevice {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setActiveVideoMinFrameDuration:"), activeVideoMinFrameDuration)
+	return cd
+}
+
+// WithActiveVideoMaxFrameDuration sets a property indicating the receiver's current active maximum frame duration (the reciprocal of its min frame rate). An AVCaptureDevice's activeVideoMaxFrameDuration property is the reciprocal of its active minimum frame rate. To limit the min frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMaxFrameDuration to its default value for the given activeFormat. -setActiveVideoMaxFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMaxFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMaxFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMaxFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate. When autoVideoFrameRateEnabled is true, setting activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
+func (cd *CaptureDevice) WithActiveVideoMaxFrameDuration(activeVideoMaxFrameDuration coremedia.CMTime) *CaptureDevice {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setActiveVideoMaxFrameDuration:"), activeVideoMaxFrameDuration)
+	return cd
+}
+
 // WithAutoVideoFrameRateEnabled sets a Boolean value that indicates whether the capture device performs automatic video frame rate adjustments.
 func (cd *CaptureDevice) WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled bool) *CaptureDevice {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setAutoVideoFrameRateEnabled:"), autoVideoFrameRateEnabled)
@@ -279,15 +291,39 @@ func (cd *CaptureDevice) ActiveFormat() *CaptureDeviceFormat {
 	return CaptureDeviceFormatFromID(_r)
 }
 
+// ActiveVideoMinFrameDuration returns a property indicating the receiver's current active minimum frame duration (the reciprocal of its max frame rate). An AVCaptureDevice's activeVideoMinFrameDuration property is the reciprocal of its active maximum frame rate. To limit the max frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMinFrameDuration to its default value for the given activeFormat. -setActiveVideoMinFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMinFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMinFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMinFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired. When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration throws an NSInvalidArgumentException.
+func (cd *CaptureDevice) ActiveVideoMinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("activeVideoMinFrameDuration"))
+	return _r
+}
+
+// ActiveVideoMaxFrameDuration returns a property indicating the receiver's current active maximum frame duration (the reciprocal of its min frame rate). An AVCaptureDevice's activeVideoMaxFrameDuration property is the reciprocal of its active minimum frame rate. To limit the min frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMaxFrameDuration to its default value for the given activeFormat. -setActiveVideoMaxFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMaxFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMaxFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMaxFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate. When autoVideoFrameRateEnabled is true, setting activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
+func (cd *CaptureDevice) ActiveVideoMaxFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("activeVideoMaxFrameDuration"))
+	return _r
+}
+
 // IsVideoFrameDurationLocked reports whether the device's video frame rate (expressed as a duration) is currently locked. Returns `true` when an “AVCaptureDeviceInput“ associated with the device has its “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ property set to something other than `kCMTimeInvalid`. See “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ for more information on video frame duration locking.
 func (cd *CaptureDevice) IsVideoFrameDurationLocked() bool {
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isVideoFrameDurationLocked"))
 	return _r
 }
 
+// MinSupportedLockedVideoFrameDuration returns the maximum frame rate (expressed as a minimum duration) that can be set on an input associated with this device. `kCMTimeInvalid` is returned when the device or its current configuration does not support locked frame rate. Use “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ to set the locked frame rate on the input.
+func (cd *CaptureDevice) MinSupportedLockedVideoFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("minSupportedLockedVideoFrameDuration"))
+	return _r
+}
+
 // IsFollowingExternalSyncDevice reports whether the device is following an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
 func (cd *CaptureDevice) IsFollowingExternalSyncDevice() bool {
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFollowingExternalSyncDevice"))
+	return _r
+}
+
+// MinSupportedExternalSyncFrameDuration returns the minimum frame duration that can be passed as the `videoFrameDuration` when directing your device input to follow an external sync device. Use this property as the minimum allowable frame duration to pass to “AVCaptureDeviceInput/follow:externalSyncDevice:videoFrameDuration:delegate:“ when you want to follow an external sync device. This property returns `kCMTimeInvalid` when the device's' current configuration does not support external sync device following.
+func (cd *CaptureDevice) MinSupportedExternalSyncFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("minSupportedExternalSyncFrameDuration"))
 	return _r
 }
 
@@ -723,9 +759,20 @@ func (cd *CaptureDevice) IsStudioLightActive() bool {
 	return _r
 }
 
+// SetCameraLensSmudgeDetectionEnabledDetectionInterval specify whether to enable camera lens smudge detection, and the interval time between each run of detections.
+func (cd *CaptureDevice) SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCameraLensSmudgeDetectionEnabled:detectionInterval:"), cameraLensSmudgeDetectionEnabled, detectionInterval)
+}
+
 // IsCameraLensSmudgeDetectionEnabled reports whether camera lens smudge detection is enabled. You enable lens smudge detection by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property is returns `false`.
 func (cd *CaptureDevice) IsCameraLensSmudgeDetectionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isCameraLensSmudgeDetectionEnabled"))
+	return _r
+}
+
+// CameraLensSmudgeDetectionInterval returns the camera lens smudge detection interval. “cameraLensSmudgeDetectionInterval“ is set by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property returns `kCMTimeInvalid`.
+func (cd *CaptureDevice) CameraLensSmudgeDetectionInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("cameraLensSmudgeDetectionInterval"))
 	return _r
 }
 

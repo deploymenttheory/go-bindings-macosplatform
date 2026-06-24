@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -161,6 +163,36 @@ func GraphWithNodes(nodes []*GraphNode) *Graph {
 	return GraphFromID(_r)
 }
 
+// NodeWithPoint creates a graph node with the specified point.
+func NodeWithPoint(point unsafe.Pointer) *GraphNode2D {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGraphNode2D")), objc.RegisterName("nodeWithPoint:"), point)
+	return GraphNode2DFromID(_r)
+}
+
+// GKGraphNode3DNodeWithPoint creates a graph node with the specified point.
+func GKGraphNode3DNodeWithPoint(point unsafe.Pointer) *GraphNode3D {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGraphNode3D")), objc.RegisterName("nodeWithPoint:"), point)
+	return GraphNode3DFromID(_r)
+}
+
+// GraphFromGridStartingAtWidthHeightDiagonalsAllowed creates a graph that describes an integer grid with the specified dimensions.
+func GraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.Pointer, width int, height int, diagonalsAllowed bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGridGraph")), objc.RegisterName("graphFromGridStartingAt:width:height:diagonalsAllowed:"), position, width, height, diagonalsAllowed)
+	return obj.Wrap(_r)
+}
+
+// NodeWithGridPosition creates a graph node with the specified position on a grid.
+func NodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("nodeWithGridPosition:"), gridPosition)
+	return GridGraphNodeFromID(_r)
+}
+
+// GraphWithBufferRadiusMinCoordinateMaxCoordinate creates a graph to cover the specified area.
+func GraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKMeshGraph")), objc.RegisterName("graphWithBufferRadius:minCoordinate:maxCoordinate:"), bufferRadius, min, max)
+	return obj.Wrap(_r)
+}
+
 // NoiseWithNoiseSource creates a noise object with the specified noise source.
 func NoiseWithNoiseSource(noiseSource *NoiseSource) *Noise {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKNoise")), objc.RegisterName("noiseWithNoiseSource:"), objref.IDOf(noiseSource))
@@ -191,10 +223,28 @@ func NoiseMapWithNoise(noise *Noise) *NoiseMap {
 	return NoiseMapFromID(_r)
 }
 
+// NoiseMapWithNoiseSizeOriginSampleCountSeamless creates a noise map by sampling from the specified noise object.
+func NoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *Noise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("noiseMapWithNoise:size:origin:sampleCount:seamless:"), objref.IDOf(noise), size, origin, sampleCount, seamless)
+	return NoiseMapFromID(_r)
+}
+
 // GraphWithObstaclesBufferRadius creates a graph with the specified list of obstacles.
 func GraphWithObstaclesBufferRadius(obstacles []*PolygonObstacle, bufferRadius float32) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKObstacleGraph")), objc.RegisterName("graphWithObstacles:bufferRadius:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }), bufferRadius)
 	return obj.Wrap(_r)
+}
+
+// PathWithPointsCountRadiusCyclical creates a path with the specified array of 2D points.
+func PathWithPointsCountRadiusCyclical(points unsafe.Pointer, count int, radius float32, cyclical bool) *Path {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("pathWithPoints:count:radius:cyclical:"), points, count, radius, cyclical)
+	return PathFromID(_r)
+}
+
+// PathWithFloat3PointsCountRadiusCyclical creates a path with the specified array of 3D points.
+func PathWithFloat3PointsCountRadiusCyclical(points unsafe.Pointer, count int, radius float32, cyclical bool) *Path {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKPath")), objc.RegisterName("pathWithFloat3Points:count:radius:cyclical:"), points, count, radius, cyclical)
+	return PathFromID(_r)
 }
 
 // PathWithGraphNodesRadius creates a path using the positions of the specified graph nodes.
@@ -207,6 +257,12 @@ func PathWithGraphNodesRadius(graphNodes []*GraphNode, radius float32) *Path {
 func PerlinNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *PerlinNoiseSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKPerlinNoiseSource")), objc.RegisterName("perlinNoiseSourceWithFrequency:octaveCount:persistence:lacunarity:seed:"), frequency, octaveCount, persistence, lacunarity, seed)
 	return PerlinNoiseSourceFromID(_r)
+}
+
+// ObstacleWithPointsCount creates a polygon obstacle with the specified list of vertices.
+func ObstacleWithPointsCount(points unsafe.Pointer, numPoints int) *PolygonObstacle {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKPolygonObstacle")), objc.RegisterName("obstacleWithPoints:count:"), points, numPoints)
+	return PolygonObstacleFromID(_r)
 }
 
 // TreeWithMaxNumberOfChildren creates a new R-tree object.

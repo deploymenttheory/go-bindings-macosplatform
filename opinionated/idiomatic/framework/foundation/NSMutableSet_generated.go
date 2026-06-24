@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -58,6 +60,12 @@ func NewMutableSetWithCapacity(numItems int) *MutableSet {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
 	return mutableSetAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ms *MutableSet) WithObservationInfo(observationInfo unsafe.Pointer) *MutableSet {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ms
 }
 
 // WithScriptingProperties sets the scripting properties.

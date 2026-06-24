@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,18 @@ func effectPropertyTransformAdopt(id objc.ID) *EffectPropertyTransform {
 func NewEffectPropertyTransform() *EffectPropertyTransform {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyTransform")), objc.RegisterName("new"))
 	return effectPropertyTransformAdopt(_id)
+}
+
+// WithModelviewMatrix sets the matrix used to transform position coordinates from world space to eye space.
+func (ept *EffectPropertyTransform) WithModelviewMatrix(modelviewMatrix unsafe.Pointer) *EffectPropertyTransform {
+	objc.Send[objc.ID](objref.IDOf(ept), objc.RegisterName("setModelviewMatrix:"), modelviewMatrix)
+	return ept
+}
+
+// WithProjectionMatrix sets the matrix used to transform position coordinates from eye space to projection space.
+func (ept *EffectPropertyTransform) WithProjectionMatrix(projectionMatrix unsafe.Pointer) *EffectPropertyTransform {
+	objc.Send[objc.ID](objref.IDOf(ept), objc.RegisterName("setProjectionMatrix:"), projectionMatrix)
+	return ept
 }
 
 var _ EffectPropertyProvider = (*EffectPropertyTransform)(nil)

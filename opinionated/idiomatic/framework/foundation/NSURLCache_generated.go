@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -91,6 +92,12 @@ func (uc *URLCache) WithMemoryCapacity(memoryCapacity int) *URLCache {
 // WithDiskCapacity sets the on-disk capacity of the receiver. The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) WithDiskCapacity(diskCapacity int) *URLCache {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setDiskCapacity:"), diskCapacity)
+	return uc
+}
+
+// WithObservationInfo sets the observation info.
+func (uc *URLCache) WithObservationInfo(observationInfo unsafe.Pointer) *URLCache {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return uc
 }
 

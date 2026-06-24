@@ -1237,6 +1237,28 @@ func (e DelegatingPlaybackCoordinatorRateChangeOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that define seek options.
+// Bitmask — values may be combined with |.
+type DelegatingPlaybackCoordinatorSeekOptions uint64
+
+const (
+	// An option that Indicates that the coordinator needs to resume playback as soon as possible, regardless of other participant’s readiness or suspensions.
+	DelegatingPlaybackCoordinatorSeekOptionResumeImmediately DelegatingPlaybackCoordinatorSeekOptions = 1
+)
+
+// String returns the DelegatingPlaybackCoordinatorSeekOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DelegatingPlaybackCoordinatorSeekOptions) String() string {
+	var parts []string
+	if e&DelegatingPlaybackCoordinatorSeekOptionResumeImmediately != 0 {
+		parts = append(parts, "DelegatingPlaybackCoordinatorSeekOptionResumeImmediately")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Values indicating the general accuracy of a depth data map.
 type DepthDataAccuracy int64
 
@@ -1583,6 +1605,27 @@ func (e PlayerItemStatus) String() string {
 		return "PlayerItemStatusFailed"
 	default:
 		return fmt.Sprintf("PlayerItemStatus(%d)", int64(e))
+	}
+}
+
+// Constants that define the ordering of items in a player looper.
+type PlayerLooperItemOrdering int64
+
+const (
+	PlayerLooperItemOrderingLoopingItemsPrecedeExistingItems PlayerLooperItemOrdering = 0
+	PlayerLooperItemOrderingLoopingItemsFollowExistingItems  PlayerLooperItemOrdering = 1
+)
+
+// String returns the PlayerLooperItemOrdering constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PlayerLooperItemOrdering) String() string {
+	switch e {
+	case PlayerLooperItemOrderingLoopingItemsPrecedeExistingItems:
+		return "PlayerLooperItemOrderingLoopingItemsPrecedeExistingItems"
+	case PlayerLooperItemOrderingLoopingItemsFollowExistingItems:
+		return "PlayerLooperItemOrderingLoopingItemsFollowExistingItems"
+	default:
+		return fmt.Sprintf("PlayerLooperItemOrdering(%d)", int64(e))
 	}
 }
 

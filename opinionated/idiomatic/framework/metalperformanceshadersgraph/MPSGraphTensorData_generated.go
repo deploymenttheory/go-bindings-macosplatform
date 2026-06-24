@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,13 @@ func NewGraphTensorDataWithMPSVectorRank(vector obj.Object, rank int) *GraphTens
 func NewGraphTensorDataWithMPSNDArray(ndarray obj.Object) *GraphTensorData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSNDArray:"), objref.IDOf(ndarray))
+	return graphTensorDataAdopt(_id)
+}
+
+// NewGraphTensorDataWithMPSImageBatch initializes a tensor data with an MPS image batch.
+func NewGraphTensorDataWithMPSImageBatch(imageBatch unsafe.Pointer) *GraphTensorData {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSImageBatch:"), imageBatch)
 	return graphTensorDataAdopt(_id)
 }
 

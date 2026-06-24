@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -89,6 +90,84 @@ func (s *Script) Changes() *ScriptChanges {
 	return ScriptChangesFromID(_r)
 }
 
+// ChangesTrimmedByTimeRange changes trimmed and time range shifted to start at zero — for use with a similarly trimmed cinematic asset.
+func (s *Script) ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *ScriptChanges {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("changesTrimmedByTimeRange:"), timeRange)
+	return ScriptChangesFromID(_r)
+}
+
+// FrameAtTimeTolerance the closest frame to the given time within the given tolerance. Returns `nil` if there are none.
+func (s *Script) FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *ScriptFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("frameAtTime:tolerance:"), time_, tolerance)
+	return ScriptFrameFromID(_r)
+}
+
+// FramesInTimeRange all frames within the given time range.
+func (s *Script) FramesInTimeRange(timeRange coremedia.CMTimeRange) []*ScriptFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("framesInTimeRange:"), timeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ScriptFrame { return ScriptFrameFromID(_id) })
+}
+
+// DecisionAtTimeTolerance the closest decision to the given time within the given tolerance. Returns `nil` if there are none.
+func (s *Script) DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decisionAtTime:tolerance:"), time_, tolerance)
+	return DecisionFromID(_r)
+}
+
+// DecisionsInTimeRange all decisions within the given time range.
+func (s *Script) DecisionsInTimeRange(timeRange coremedia.CMTimeRange) []*Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decisionsInTimeRange:"), timeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Decision { return DecisionFromID(_id) })
+}
+
+// DecisionAfterTime the decision that occurs after the given time. Pass the time of an existing decision to find the next one.
+func (s *Script) DecisionAfterTime(time_ coremedia.CMTime) *Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decisionAfterTime:"), time_)
+	return DecisionFromID(_r)
+}
+
+// DecisionBeforeTime the decision that occurs before the given time. Pass the time of an existing decisions to find the previous one.
+func (s *Script) DecisionBeforeTime(time_ coremedia.CMTime) *Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decisionBeforeTime:"), time_)
+	return DecisionFromID(_r)
+}
+
+// PrimaryDecisionAtTime the primary decision that is in effect at the specified time, unless if it's outside the time range of the cinematic script. Also represents the decision that is being transitioned away from if the given time is during a focus transition.
+func (s *Script) PrimaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("primaryDecisionAtTime:"), time_)
+	return DecisionFromID(_r)
+}
+
+// SecondaryDecisionAtTime the secondary decision that is being transitioned towards if the given time is during a focus transition.
+func (s *Script) SecondaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("secondaryDecisionAtTime:"), time_)
+	return DecisionFromID(_r)
+}
+
+// TimeRangeOfTransitionAfterDecision the time range during which the focus transition away from the given decision occurs.
+func (s *Script) TimeRangeOfTransitionAfterDecision(decision *Decision) coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(s), objc.RegisterName("timeRangeOfTransitionAfterDecision:"), objref.IDOf(decision))
+	return _r
+}
+
+// TimeRangeOfTransitionBeforeDecision the time range during which the focus transition towards the given decision occurs.
+func (s *Script) TimeRangeOfTransitionBeforeDecision(decision *Decision) coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(s), objc.RegisterName("timeRangeOfTransitionBeforeDecision:"), objref.IDOf(decision))
+	return _r
+}
+
+// UserDecisionsInTimeRange all user decisions in the given time range. Includes user decisions made during recording or added to the script.
+func (s *Script) UserDecisionsInTimeRange(timeRange coremedia.CMTimeRange) []*Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("userDecisionsInTimeRange:"), timeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Decision { return DecisionFromID(_id) })
+}
+
+// BaseDecisionsInTimeRange all base decisions made automatically during recording in the given time range. These apply if no user decision overrides them.
+func (s *Script) BaseDecisionsInTimeRange(timeRange coremedia.CMTimeRange) []*Decision {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("baseDecisionsInTimeRange:"), timeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Decision { return DecisionFromID(_id) })
+}
+
 // DetectionTrackForID a detection track representing all detections with the given detectionID over the entire cinematic script.
 func (s *Script) DetectionTrackForID(detectionID int64) *DetectionTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("detectionTrackForID:"), detectionID)
@@ -127,6 +206,12 @@ func (s *Script) AddDetectionTrack(detectionTrack *DetectionTrack) int64 {
 // RemoveDetectionTrack remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
 func (s *Script) RemoveDetectionTrack(detectionTrack *DetectionTrack) bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("removeDetectionTrack:"), objref.IDOf(detectionTrack))
+	return _r
+}
+
+// TimeRange returns the time range of the cinematic asset. All frames, decisions, and detections are within this time range.
+func (s *Script) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(s), objc.RegisterName("timeRange"))
 	return _r
 }
 

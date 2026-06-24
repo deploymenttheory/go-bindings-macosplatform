@@ -5,6 +5,8 @@
 package automator
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -58,9 +60,27 @@ func (ssa *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScript
 	return ssa
 }
 
+// WithSelectedInputType sets the type of input, in UTI format, of the input received by the action.
+func (ssa *ShellScriptAction) WithSelectedInputType(selectedInputType unsafe.Pointer) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setSelectedInputType:"), selectedInputType)
+	return ssa
+}
+
+// WithSelectedOutputType sets the type of output, in UTI format, of the output to be produced by the action.
+func (ssa *ShellScriptAction) WithSelectedOutputType(selectedOutputType unsafe.Pointer) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setSelectedOutputType:"), selectedOutputType)
+	return ssa
+}
+
 // WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
 func (ssa *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
 	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setProgressValue:"), progressValue)
+	return ssa
+}
+
+// WithOutput sets the action’s output.
+func (ssa *ShellScriptAction) WithOutput(output unsafe.Pointer) *ShellScriptAction {
+	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setOutput:"), output)
 	return ssa
 }
 

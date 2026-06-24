@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -44,4 +46,10 @@ func BrowseDevicesOptions(outRecord obj.Object, inOptions uint32) int {
 func BrowseDevicesAsSheetForWindowOptionsWindow(outRecord obj.Object, inOptions uint32, inWindow obj.Object) int {
 	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevicesAsSheetForWindow:options:window:"), objref.IDOf(outRecord), inOptions, objref.IDOf(inWindow))
 	return _r
+}
+
+// WithServiceBrowserControllerRef method call to convert an IOBluetoothServiceBrowserControllerRef into an IOBluetoothServiceBrowserController *.
+func WithServiceBrowserControllerRef(serviceBrowserControllerRef unsafe.Pointer) *BluetoothServiceBrowserController {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("withServiceBrowserControllerRef:"), serviceBrowserControllerRef)
+	return BluetoothServiceBrowserControllerFromID(_r)
 }

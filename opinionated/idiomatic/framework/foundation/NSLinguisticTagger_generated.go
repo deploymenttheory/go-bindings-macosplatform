@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,12 @@ func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes []*String, opts int) *L
 // WithString sets the string being analyzed by the linguistic tagger.
 func (lt *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
 	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setString:"), objref.IDOf(string_))
+	return lt
+}
+
+// WithObservationInfo sets the observation info.
+func (lt *LinguisticTagger) WithObservationInfo(observationInfo unsafe.Pointer) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return lt
 }
 

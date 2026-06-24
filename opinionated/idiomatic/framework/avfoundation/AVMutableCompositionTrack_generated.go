@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -97,6 +98,41 @@ func (mct *MutableCompositionTrack) WithSegments(items ...*CompositionTrackSegme
 	_arr := purego.SliceToNSArray(items, func(_v *CompositionTrackSegment) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setSegments:"), _arr)
 	return mct
+}
+
+// InsertTimeRangeOfTrackAtTime inserts a time range of media from a source track into a composition track.
+func (mct *MutableCompositionTrack) InsertTimeRangeOfTrackAtTime(timeRange coremedia.CMTimeRange, track *AssetTrack, startTime coremedia.CMTime) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("insertTimeRange:ofTrack:atTime:error:"), timeRange, objref.IDOf(track), startTime, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertTimeRangesOfTracksAtTime inserts the time ranges of multiple source tracks into a track of a composition.
+func (mct *MutableCompositionTrack) InsertTimeRangesOfTracksAtTime(timeRanges []obj.Object, tracks []*AssetTrack, startTime coremedia.CMTime) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mct), objc.RegisterName("insertTimeRanges:ofTracks:atTime:error:"), purego.SliceToNSArray(timeRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(tracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), startTime, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertEmptyTimeRange adds or extends an empty time range within the track.
+func (mct *MutableCompositionTrack) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
+}
+
+// RemoveTimeRange removes a time range of media from a composition track.
+func (mct *MutableCompositionTrack) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("removeTimeRange:"), timeRange)
+}
+
+// ScaleTimeRangeToDuration changes the duration of a time range of the track.
+func (mct *MutableCompositionTrack) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // ValidateTrackSegments returns a Boolean value that indicates whether a given array of track segments conform to the timing rules for a composition track.

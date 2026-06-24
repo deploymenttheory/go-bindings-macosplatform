@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,6 +87,16 @@ func (avcr *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(tr
 	return TimedMetadataGroupFromID(_r)
 }
 
+// FinishWithComposedVideoFrame finishes the request to compose the frame.
+func (avcr *AsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithComposedVideoFrame:"), composedVideoFrame)
+}
+
+// FinishWithError finishes the request with an error.
+func (avcr *AsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithError:"), error_)
+}
+
 // FinishCancelledRequest cancels the request to compose a video frame.
 func (avcr *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishCancelledRequest"))
@@ -100,10 +113,21 @@ func (avcr *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferG
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithComposedTaggedBufferGroup:"), objref.IDOf(taggedBufferGroup))
 }
 
+// AttachSpatialVideoConfigurationToPixelBuffer associates the pixel buffer with the specified spatial configuration.
+func (avcr *AsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *SpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("attachSpatialVideoConfiguration:toPixelBuffer:"), objref.IDOf(spatialVideoConfiguration), pixelBuffer)
+}
+
 // RenderContext returns the AVVideoCompositionRenderContext making the request
 func (avcr *AsynchronousVideoCompositionRequest) RenderContext() *VideoCompositionRenderContext {
 	_r := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("renderContext"))
 	return VideoCompositionRenderContextFromID(_r)
+}
+
+// CompositionTime returns the time for which the frame should be composed
+func (avcr *AsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(avcr), objc.RegisterName("compositionTime"))
+	return _r
 }
 
 // SourceTrackIDs returns track IDs of all the source video buffers that are available to compose the frame.

@@ -147,6 +147,12 @@ func (fw *FileWrapper) WithFileAttributes(fileAttributes obj.Object) *FileWrappe
 	return fw
 }
 
+// WithObservationInfo sets the observation info.
+func (fw *FileWrapper) WithObservationInfo(observationInfo unsafe.Pointer) *FileWrapper {
+	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fw
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (fw *FileWrapper) WithScriptingProperties(scriptingProperties obj.Object) *FileWrapper {
 	objc.Send[objc.ID](objref.IDOf(fw), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

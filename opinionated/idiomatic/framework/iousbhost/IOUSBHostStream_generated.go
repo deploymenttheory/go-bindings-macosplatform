@@ -88,6 +88,12 @@ func (hs *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (by
 	return _out0, nil
 }
 
+// EnqueueIORequestWithDataErrorCompletionHandler enqueues an input/output request on the stream.
+func (hs *HostStream) EnqueueIORequestWithDataErrorCompletionHandler(data obj.Object, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("enqueueIORequestWithData:error:completionHandler:"), objref.IDOf(data), error_, completionHandler)
+	return _r
+}
+
 // HostPipe returns the IOUSBHostPipe this stream was created from
 func (hs *HostStream) HostPipe() *HostPipe {
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("hostPipe"))

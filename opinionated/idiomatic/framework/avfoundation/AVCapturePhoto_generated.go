@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +71,12 @@ func (cp *CapturePhoto) String() string {
 func NewCapturePhoto() *CapturePhoto {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVCapturePhoto")), objc.RegisterName("new"))
 	return capturePhotoAdopt(_id)
+}
+
+// Timestamp returns the time at which this image was captured, synchronized to the synchronizationClock of the AVCaptureSession The timestamp property indicates the time the image was captured, and is analogous to CMSampleBufferGetPresentationTimeStamp(). If an error was provided in the -captureOutput:didFinishingProcessingPhoto:error: callback, timestamp returns kCMTimeInvalid.
+func (cp *CapturePhoto) Timestamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cp), objc.RegisterName("timestamp"))
+	return _r
 }
 
 // ResolvedSettings returns the AVCaptureResolvedPhotoSettings associated with all photo results for a given -[AVCapturePhotoOutput capturePhotoWithSettings:delegate:] request. Even in the event of an error, the resolved settings are always non nil.

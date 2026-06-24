@@ -31,6 +31,121 @@ func (e AudioUnitBusType) String() string {
 	}
 }
 
+type ParameterAutomationEventType int64
+
+const (
+	ParameterAutomationEventTypeValue   ParameterAutomationEventType = 0
+	ParameterAutomationEventTypeTouch   ParameterAutomationEventType = 1
+	ParameterAutomationEventTypeRelease ParameterAutomationEventType = 2
+)
+
+// String returns the ParameterAutomationEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ParameterAutomationEventType) String() string {
+	switch e {
+	case ParameterAutomationEventTypeValue:
+		return "ParameterAutomationEventTypeValue"
+	case ParameterAutomationEventTypeTouch:
+		return "ParameterAutomationEventTypeTouch"
+	case ParameterAutomationEventTypeRelease:
+		return "ParameterAutomationEventTypeRelease"
+	default:
+		return fmt.Sprintf("ParameterAutomationEventType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type ParameterMIDIMappingFlags int64
+
+const (
+	KAUParameterMIDIMapping_AnyChannelFlag ParameterMIDIMappingFlags = 1
+	KAUParameterMIDIMapping_AnyNoteFlag    ParameterMIDIMappingFlags = 2
+	KAUParameterMIDIMapping_SubRange       ParameterMIDIMappingFlags = 4
+	KAUParameterMIDIMapping_Toggle         ParameterMIDIMappingFlags = 8
+	KAUParameterMIDIMapping_Bipolar        ParameterMIDIMappingFlags = 16
+	KAUParameterMIDIMapping_Bipolar_On     ParameterMIDIMappingFlags = 32
+)
+
+// String returns the ParameterMIDIMappingFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ParameterMIDIMappingFlags) String() string {
+	var parts []string
+	if e&KAUParameterMIDIMapping_AnyChannelFlag != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_AnyChannelFlag")
+	}
+	if e&KAUParameterMIDIMapping_AnyNoteFlag != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_AnyNoteFlag")
+	}
+	if e&KAUParameterMIDIMapping_SubRange != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_SubRange")
+	}
+	if e&KAUParameterMIDIMapping_Toggle != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Toggle")
+	}
+	if e&KAUParameterMIDIMapping_Bipolar != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Bipolar")
+	}
+	if e&KAUParameterMIDIMapping_Bipolar_On != 0 {
+		parts = append(parts, "KAUParameterMIDIMapping_Bipolar_On")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The ducking level to apply to other non-voice audio.
+type VoiceIOOtherAudioDuckingLevel int64
+
+const (
+	// The default ducking level of other non-voice audio in a typical voice chat.
+	KAUVoiceIOOtherAudioDuckingLevelDefault VoiceIOOtherAudioDuckingLevel = 0
+	// The minimum ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMin VoiceIOOtherAudioDuckingLevel = 10
+	// A medium ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMid VoiceIOOtherAudioDuckingLevel = 20
+	// The maximum ducking level of other non-voice audio.
+	KAUVoiceIOOtherAudioDuckingLevelMax VoiceIOOtherAudioDuckingLevel = 30
+)
+
+// String returns the VoiceIOOtherAudioDuckingLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VoiceIOOtherAudioDuckingLevel) String() string {
+	switch e {
+	case KAUVoiceIOOtherAudioDuckingLevelDefault:
+		return "KAUVoiceIOOtherAudioDuckingLevelDefault"
+	case KAUVoiceIOOtherAudioDuckingLevelMin:
+		return "KAUVoiceIOOtherAudioDuckingLevelMin"
+	case KAUVoiceIOOtherAudioDuckingLevelMid:
+		return "KAUVoiceIOOtherAudioDuckingLevelMid"
+	case KAUVoiceIOOtherAudioDuckingLevelMax:
+		return "KAUVoiceIOOtherAudioDuckingLevelMax"
+	default:
+		return fmt.Sprintf("VoiceIOOtherAudioDuckingLevel(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type AudioBytePacketTranslationFlags int64
+
+const (
+	// If set, the result value is an estimate.
+	KBytePacketTranslationFlag_IsEstimate AudioBytePacketTranslationFlags = 1
+)
+
+// String returns the AudioBytePacketTranslationFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioBytePacketTranslationFlags) String() string {
+	var parts []string
+	if e&KBytePacketTranslationFlag_IsEstimate != 0 {
+		parts = append(parts, "KBytePacketTranslationFlag_IsEstimate")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Bitmask — values may be combined with |.
 type AudioComponentInstantiationOptions int64
 
@@ -53,6 +168,38 @@ func (e AudioComponentInstantiationOptions) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+type AudioComponentValidationResult int64
+
+const (
+	KAudioComponentValidationResult_Unknown                AudioComponentValidationResult = 0
+	KAudioComponentValidationResult_Passed                 AudioComponentValidationResult = 1
+	KAudioComponentValidationResult_Failed                 AudioComponentValidationResult = 2
+	KAudioComponentValidationResult_TimedOut               AudioComponentValidationResult = 3
+	KAudioComponentValidationResult_UnauthorizedError_Open AudioComponentValidationResult = 4
+	KAudioComponentValidationResult_UnauthorizedError_Init AudioComponentValidationResult = 5
+)
+
+// String returns the AudioComponentValidationResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioComponentValidationResult) String() string {
+	switch e {
+	case KAudioComponentValidationResult_Unknown:
+		return "KAudioComponentValidationResult_Unknown"
+	case KAudioComponentValidationResult_Passed:
+		return "KAudioComponentValidationResult_Passed"
+	case KAudioComponentValidationResult_Failed:
+		return "KAudioComponentValidationResult_Failed"
+	case KAudioComponentValidationResult_TimedOut:
+		return "KAudioComponentValidationResult_TimedOut"
+	case KAudioComponentValidationResult_UnauthorizedError_Open:
+		return "KAudioComponentValidationResult_UnauthorizedError_Open"
+	case KAudioComponentValidationResult_UnauthorizedError_Init:
+		return "KAudioComponentValidationResult_UnauthorizedError_Init"
+	default:
+		return fmt.Sprintf("AudioComponentValidationResult(%d)", int64(e))
+	}
 }
 
 // Flags for use when opening an audio file.
@@ -80,6 +227,84 @@ func (e AudioFilePermissions) String() string {
 	default:
 		return fmt.Sprintf("AudioFilePermissions(%d)", int64(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type AudioFileStreamParseFlags int64
+
+const (
+	// Pass this flag to the AudioFileStreamParseBytes function to signal a discontinuity in the audio data.
+	KAudioFileStreamParseFlag_Discontinuity AudioFileStreamParseFlags = 1
+)
+
+// String returns the AudioFileStreamParseFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioFileStreamParseFlags) String() string {
+	var parts []string
+	if e&KAudioFileStreamParseFlag_Discontinuity != 0 {
+		parts = append(parts, "KAudioFileStreamParseFlag_Discontinuity")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type AudioFileStreamSeekFlags int64
+
+const (
+	// This flag is returned by the AudioFileStreamSeek function if the byte offset is only an estimate.
+	KAudioFileStreamSeekFlag_OffsetIsEstimated AudioFileStreamSeekFlags = 1
+)
+
+// String returns the AudioFileStreamSeekFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioFileStreamSeekFlags) String() string {
+	var parts []string
+	if e&KAudioFileStreamSeekFlag_OffsetIsEstimated != 0 {
+		parts = append(parts, "KAudioFileStreamSeekFlag_OffsetIsEstimated")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type AudioQueueProcessingTapFlags int64
+
+const (
+	KAudioQueueProcessingTap_PreEffects    AudioQueueProcessingTapFlags = 1
+	KAudioQueueProcessingTap_PostEffects   AudioQueueProcessingTapFlags = 2
+	KAudioQueueProcessingTap_Siphon        AudioQueueProcessingTapFlags = 4
+	KAudioQueueProcessingTap_StartOfStream AudioQueueProcessingTapFlags = 256
+	KAudioQueueProcessingTap_EndOfStream   AudioQueueProcessingTapFlags = 512
+)
+
+// String returns the AudioQueueProcessingTapFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioQueueProcessingTapFlags) String() string {
+	var parts []string
+	if e&KAudioQueueProcessingTap_PreEffects != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_PreEffects")
+	}
+	if e&KAudioQueueProcessingTap_PostEffects != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_PostEffects")
+	}
+	if e&KAudioQueueProcessingTap_Siphon != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_Siphon")
+	}
+	if e&KAudioQueueProcessingTap_StartOfStream != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_StartOfStream")
+	}
+	if e&KAudioQueueProcessingTap_EndOfStream != 0 {
+		parts = append(parts, "KAudioQueueProcessingTap_EndOfStream")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Value options for audio unit parameters.
@@ -401,6 +626,30 @@ func (e CAClockTimeFormat) String() string {
 	default:
 		return fmt.Sprintf("CAClockTimeFormat(%d)", int64(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type CAFFormatFlags int64
+
+const (
+	KCAFLinearPCMFormatFlagIsFloat        CAFFormatFlags = 1
+	KCAFLinearPCMFormatFlagIsLittleEndian CAFFormatFlags = 2
+)
+
+// String returns the CAFFormatFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CAFFormatFlags) String() string {
+	var parts []string
+	if e&KCAFLinearPCMFormatFlagIsFloat != 0 {
+		parts = append(parts, "KCAFLinearPCMFormatFlagIsFloat")
+	}
+	if e&KCAFLinearPCMFormatFlagIsLittleEndian != 0 {
+		parts = append(parts, "KCAFLinearPCMFormatFlagIsLittleEndian")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Flags that configure the behavior of the MusicSequenceFileCreate and MusicSequenceFileCreateData functions.

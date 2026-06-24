@@ -54,7 +54,7 @@ var (
 	_hv_vcpu_create                               func(*uint64, *HvVcpuExitT, objc.ID) int
 	_hv_vcpu_destroy                              func(uint64) int
 	_hv_vcpu_get_exec_time                        func(uint64, *uint64) int
-	_hv_vcpu_get_pending_interrupt                func(uint64, Hv_interrupt_type_t, unsafe.Pointer) int
+	_hv_vcpu_get_pending_interrupt                func(uint64, Hv_interrupt_type_t, *bool) int
 	_hv_vcpu_get_reg                              func(uint64, Hv_reg_t, *uint64) int
 	_hv_vcpu_get_simd_fp_reg                      func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int
 	_hv_vcpu_get_sme_p_reg                        func(uint64, Hv_sme_p_reg_t, *uint8, uint) int
@@ -63,9 +63,9 @@ var (
 	_hv_vcpu_get_sme_za_reg                       func(uint64, *uint8, uint) int
 	_hv_vcpu_get_sme_zt0_reg                      func(uint64, unsafe.Pointer) int
 	_hv_vcpu_get_sys_reg                          func(uint64, Hv_sys_reg_t, *uint64) int
-	_hv_vcpu_get_trap_debug_exceptions            func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_trap_debug_reg_accesses          func(uint64, unsafe.Pointer) int
-	_hv_vcpu_get_vtimer_mask                      func(uint64, unsafe.Pointer) int
+	_hv_vcpu_get_trap_debug_exceptions            func(uint64, *bool) int
+	_hv_vcpu_get_trap_debug_reg_accesses          func(uint64, *bool) int
+	_hv_vcpu_get_vtimer_mask                      func(uint64, *bool) int
 	_hv_vcpu_get_vtimer_offset                    func(uint64, *uint64) int
 	_hv_vcpu_run                                  func(uint64) int
 	_hv_vcpu_set_pending_interrupt                func(uint64, Hv_interrupt_type_t, bool) int
@@ -86,8 +86,8 @@ var (
 	_hv_vm_config_create                          func() unsafe.Pointer
 	_hv_vm_config_get_default_ipa_granule         func(*Hv_ipa_granule_t) int
 	_hv_vm_config_get_default_ipa_size            func(*uint32) int
-	_hv_vm_config_get_el2_enabled                 func(objc.ID, unsafe.Pointer) int
-	_hv_vm_config_get_el2_supported               func(unsafe.Pointer) int
+	_hv_vm_config_get_el2_enabled                 func(objc.ID, *bool) int
+	_hv_vm_config_get_el2_supported               func(*bool) int
 	_hv_vm_config_get_ipa_granule                 func(objc.ID, *Hv_ipa_granule_t) int
 	_hv_vm_config_get_ipa_size                    func(objc.ID, *uint32) int
 	_hv_vm_config_get_max_ipa_size                func(*uint32) int
@@ -314,7 +314,7 @@ func HvVcpuGetExecTime(vcpu uint64, time_ *uint64) int {
 }
 
 // C function: hv_vcpu_get_pending_interrupt
-func HvVcpuGetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending unsafe.Pointer) int {
+func HvVcpuGetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending *bool) int {
 	return _hv_vcpu_get_pending_interrupt(vcpu, type_, pending)
 }
 
@@ -359,17 +359,17 @@ func HvVcpuGetSysReg(vcpu uint64, reg Hv_sys_reg_t, value *uint64) int {
 }
 
 // C function: hv_vcpu_get_trap_debug_exceptions
-func HvVcpuGetTrapDebugExceptions(vcpu uint64, value unsafe.Pointer) int {
+func HvVcpuGetTrapDebugExceptions(vcpu uint64, value *bool) int {
 	return _hv_vcpu_get_trap_debug_exceptions(vcpu, value)
 }
 
 // C function: hv_vcpu_get_trap_debug_reg_accesses
-func HvVcpuGetTrapDebugRegAccesses(vcpu uint64, value unsafe.Pointer) int {
+func HvVcpuGetTrapDebugRegAccesses(vcpu uint64, value *bool) int {
 	return _hv_vcpu_get_trap_debug_reg_accesses(vcpu, value)
 }
 
 // C function: hv_vcpu_get_vtimer_mask
-func HvVcpuGetVtimerMask(vcpu uint64, vtimer_is_masked unsafe.Pointer) int {
+func HvVcpuGetVtimerMask(vcpu uint64, vtimer_is_masked *bool) int {
 	return _hv_vcpu_get_vtimer_mask(vcpu, vtimer_is_masked)
 }
 
@@ -474,12 +474,12 @@ func HvVmConfigGetDefaultIpaSize(ipa_bit_length *uint32) int {
 }
 
 // C function: hv_vm_config_get_el2_enabled
-func HvVmConfigGetEl2Enabled(config *foundation.NSObject, el2_enabled unsafe.Pointer) int {
+func HvVmConfigGetEl2Enabled(config *foundation.NSObject, el2_enabled *bool) int {
 	return _hv_vm_config_get_el2_enabled(config.Ptr(), el2_enabled)
 }
 
 // C function: hv_vm_config_get_el2_supported
-func HvVmConfigGetEl2Supported(el2_supported unsafe.Pointer) int {
+func HvVmConfigGetEl2Supported(el2_supported *bool) int {
 	return _hv_vm_config_get_el2_supported(el2_supported)
 }
 

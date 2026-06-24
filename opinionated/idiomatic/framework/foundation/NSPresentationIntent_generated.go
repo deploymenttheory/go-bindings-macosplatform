@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (pi *PresentationIntent) String() string {
 func NewPresentationIntent() *PresentationIntent {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("new"))
 	return presentationIntentAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (pi *PresentationIntent) WithObservationInfo(observationInfo unsafe.Pointer) *PresentationIntent {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return pi
 }
 
 // WithScriptingProperties sets the scripting properties.

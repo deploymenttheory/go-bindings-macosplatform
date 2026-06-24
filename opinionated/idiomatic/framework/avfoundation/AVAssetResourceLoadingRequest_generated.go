@@ -88,6 +88,11 @@ func (arlr *AssetResourceLoadingRequest) FinishLoading() {
 	objc.Send[objc.ID](objref.IDOf(arlr), objc.RegisterName("finishLoading"))
 }
 
+// FinishLoadingWithError causes the receiver to handle the failure to load a resource for which a resource loader’s delegate took responsibility.
+func (arlr *AssetResourceLoadingRequest) FinishLoadingWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(arlr), objc.RegisterName("finishLoadingWithError:"), error_)
+}
+
 // Request returns an NSURLRequest for the requested resource.
 func (arlr *AssetResourceLoadingRequest) Request() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(arlr), objc.RegisterName("request"))

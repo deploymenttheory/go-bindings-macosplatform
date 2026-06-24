@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -82,6 +85,28 @@ func (sbrs *SampleBufferRenderSynchronizer) WithRate(rate float32) *SampleBuffer
 func (sbrs *SampleBufferRenderSynchronizer) WithDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) *SampleBufferRenderSynchronizer {
 	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setDelaysRateChangeUntilHasSufficientMediaData:"), delaysRateChangeUntilHasSufficientMediaData)
 	return sbrs
+}
+
+// WithIntendedSpatialAudioExperience sets the synchronizer’s intended Spatial Audio experience.
+func (sbrs *SampleBufferRenderSynchronizer) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *SampleBufferRenderSynchronizer {
+	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	return sbrs
+}
+
+// CurrentTime returns the current time of the synchronizer.
+func (sbrs *SampleBufferRenderSynchronizer) CurrentTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sbrs), objc.RegisterName("currentTime"))
+	return _r
+}
+
+// SetRateTime sets the renderer’s time and rate.
+func (sbrs *SampleBufferRenderSynchronizer) SetRateTime(rate float32, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setRate:time:"), rate, time_)
+}
+
+// SetRateTimeAtHostTime sets the playback rate and the relationship between the current time and host time.
+func (sbrs *SampleBufferRenderSynchronizer) SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(sbrs), objc.RegisterName("setRate:time:atHostTime:"), rate, time_, hostTime)
 }
 
 // Timebase returns the synchronizer's rendering timebase, which governs how time stamps are interpreted. By default, this timebase will be driven by the clock of an added AVSampleBufferAudioRenderer. If no AVSampleBufferAudioRenderer has been added, the source clock will be the host time clock (mach_absolute_time with the appropriate timescale conversion; this is the same as Core Animation's CACurrentMediaTime). The timebase is a read-only timebase. Use the rate property and corresponding methods to adjust the timebase.

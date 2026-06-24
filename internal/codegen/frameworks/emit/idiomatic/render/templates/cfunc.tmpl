@@ -14,7 +14,7 @@ if {{.VarName}} == nil {
 ebipurego.RegisterLibFunc(&{{.VarName}}, _lib, {{.CName | printf "%q"}})
 }
 {{range .PreLines}}{{.}}
-{{end}}{{template "cfunc_tail" .}}
+{{end}}{{if .Outs}}{{template "cfunc_outs" .}}{{else}}{{template "cfunc_tail" .}}{{end}}
 }
 
 {{end}}
@@ -45,3 +45,19 @@ return nil, errkit.FromCFError(_cfErr)
 return obj.Wrap(_r), nil
 {{- end -}}
 {{end}}
+
+{{/*
+    cfunc_outs renders a C-function body that lifts pointer out-parameters into
+    extra return values: one var per out-parameter, the bound call (its result
+    bound to _ret unless the function is void), and a return tuple of the result
+    (per Kind) followed by each out local. The out locals' addresses are already
+    in .Call as unsafe.Pointer(&local). Mirrors method.tmpl's tail_outs.
+*/}}
+{{define "cfunc_outs"}}
+{{- range .Outs}}var {{.GoName}} {{.GoType}}
+{{end -}}
+{{- if eq .Kind 0}}{{.Call}}
+{{else}}_ret := {{.Call}}
+{{end -}}
+return {{cfuncRetOutValues .}}
+{{- end}}

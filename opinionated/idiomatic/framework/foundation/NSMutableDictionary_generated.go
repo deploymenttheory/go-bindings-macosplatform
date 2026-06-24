@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -79,6 +81,12 @@ func NewMutableDictionaryWithContentsOfURL(url string) *MutableDictionary {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return mutableDictionaryAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (md *MutableDictionary) WithObservationInfo(observationInfo unsafe.Pointer) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return md
 }
 
 // WithScriptingProperties sets the scripting properties.

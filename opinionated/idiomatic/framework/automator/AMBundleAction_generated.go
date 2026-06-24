@@ -5,6 +5,8 @@
 package automator
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,9 +54,27 @@ func (ba *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
 	return ba
 }
 
+// WithSelectedInputType sets the type of input, in UTI format, of the input received by the action.
+func (ba *BundleAction) WithSelectedInputType(selectedInputType unsafe.Pointer) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setSelectedInputType:"), selectedInputType)
+	return ba
+}
+
+// WithSelectedOutputType sets the type of output, in UTI format, of the output to be produced by the action.
+func (ba *BundleAction) WithSelectedOutputType(selectedOutputType unsafe.Pointer) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setSelectedOutputType:"), selectedOutputType)
+	return ba
+}
+
 // WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
 func (ba *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setProgressValue:"), progressValue)
+	return ba
+}
+
+// WithOutput sets the action’s output.
+func (ba *BundleAction) WithOutput(output unsafe.Pointer) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setOutput:"), output)
 	return ba
 }
 

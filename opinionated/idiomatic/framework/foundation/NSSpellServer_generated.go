@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (ss *SpellServer) String() string {
 func NewSpellServer() *SpellServer {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSpellServer")), objc.RegisterName("new"))
 	return spellServerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ss *SpellServer) WithObservationInfo(observationInfo unsafe.Pointer) *SpellServer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ss
 }
 
 // WithScriptingProperties sets the scripting properties.

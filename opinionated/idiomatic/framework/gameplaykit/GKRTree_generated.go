@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -77,6 +79,22 @@ func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren int) *RTree {
 func (rt_ *RTree) WithQueryReserve(queryReserve int) *RTree {
 	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("setQueryReserve:"), queryReserve)
 	return rt_
+}
+
+// AddElementBoundingRectMinBoundingRectMaxSplitStrategy adds the specified object to the tree.
+func (rt_ *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element obj.Object, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy RTreeSplitStrategy) {
+	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("addElement:boundingRectMin:boundingRectMax:splitStrategy:"), objref.IDOf(element), boundingRectMin, boundingRectMax, splitStrategy)
+}
+
+// RemoveElementBoundingRectMinBoundingRectMax removes the specified object from the tree.
+func (rt_ *RTree) RemoveElementBoundingRectMinBoundingRectMax(element obj.Object, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("removeElement:boundingRectMin:boundingRectMax:"), objref.IDOf(element), boundingRectMin, boundingRectMax)
+}
+
+// ElementsInBoundingRectMinRectMax searches the tree and returns all elements found within the specified bounding region.
+func (rt_ *RTree) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("elementsInBoundingRectMin:rectMax:"), rectMin, rectMax)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // QueryReserve returns amount of array items to reserve before a query. This improves query performance at the cost of memory

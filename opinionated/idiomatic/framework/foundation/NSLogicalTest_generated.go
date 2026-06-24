@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -65,6 +67,12 @@ func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initNotTestWithTest:"), objref.IDOf(subTest))
 	return logicalTestAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (lt *LogicalTest) WithObservationInfo(observationInfo unsafe.Pointer) *LogicalTest {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return lt
 }
 
 // WithScriptingProperties sets the scripting properties.

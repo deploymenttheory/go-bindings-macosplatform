@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -116,6 +117,18 @@ func (cc *CaptureConnection) WithVideoFieldMode(videoFieldMode VideoFieldMode) *
 	return cc
 }
 
+// WithVideoMinFrameDuration sets the smallest time interval the connection can apply between consecutive video frames.
+func (cc *CaptureConnection) WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setVideoMinFrameDuration:"), videoMinFrameDuration)
+	return cc
+}
+
+// WithVideoMaxFrameDuration sets the largest time interval the connection can apply between consecutive video frames.
+func (cc *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setVideoMaxFrameDuration:"), videoMaxFrameDuration)
+	return cc
+}
+
 // IsVideoRotationAngleSupported returns a Boolean value that indicates whether the connection supports a rotation angle.
 func (cc *CaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle float64) bool {
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isVideoRotationAngleSupported:"), videoRotationAngle)
@@ -216,8 +229,20 @@ func (cc *CaptureConnection) IsVideoMinFrameDurationSupported() bool {
 	return _r
 }
 
+// VideoMinFrameDuration indicates the minimum time interval at which the receiver should output consecutive video frames. The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+func (cc *CaptureConnection) VideoMinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cc), objc.RegisterName("videoMinFrameDuration"))
+	return _r
+}
+
 // IsVideoMaxFrameDurationSupported reports whether the connection supports setting the videoMaxFrameDuration property. This property is only applicable to AVCaptureConnection instances involving video. In such connections, the videoMaxFrameDuration property may only be set if -isVideoMaxFrameDurationSupported returns true. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
 func (cc *CaptureConnection) IsVideoMaxFrameDurationSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isVideoMaxFrameDurationSupported"))
+	return _r
+}
+
+// VideoMaxFrameDuration indicates the maximum time interval at which the receiver should output consecutive video frames. The value of this property is a CMTime specifying the maximum duration of each video frame output by the receiver, placing an upper bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the minimum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited minimum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+func (cc *CaptureConnection) VideoMaxFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cc), objc.RegisterName("videoMaxFrameDuration"))
 	return _r
 }

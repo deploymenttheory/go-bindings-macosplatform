@@ -127,6 +127,100 @@ func (e NetworkConnectionPolicy) String() string {
 	}
 }
 
+// The types of state changes the system supports.
+type NotificationMessageID int64
+
+const (
+	// Some aspect of the current MIDI setup changed.
+	KMIDIMsgSetupChanged NotificationMessageID = 1
+	// The system added a device, entity, or endpoint.
+	KMIDIMsgObjectAdded NotificationMessageID = 2
+	// The system removed a device, entity, or endpoint.
+	KMIDIMsgObjectRemoved NotificationMessageID = 3
+	// An object’s property value changed.
+	KMIDIMsgPropertyChanged NotificationMessageID = 4
+	// The system created or disposed of a persistent MIDI Thru connection.
+	KMIDIMsgThruConnectionsChanged NotificationMessageID = 5
+	// The system changed a serial port owner.
+	KMIDIMsgSerialPortOwnerChanged NotificationMessageID = 6
+	// A driver I/O error occurred.
+	KMIDIMsgIOError NotificationMessageID = 7
+)
+
+// String returns the NotificationMessageID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationMessageID) String() string {
+	switch e {
+	case KMIDIMsgSetupChanged:
+		return "KMIDIMsgSetupChanged"
+	case KMIDIMsgObjectAdded:
+		return "KMIDIMsgObjectAdded"
+	case KMIDIMsgObjectRemoved:
+		return "KMIDIMsgObjectRemoved"
+	case KMIDIMsgPropertyChanged:
+		return "KMIDIMsgPropertyChanged"
+	case KMIDIMsgThruConnectionsChanged:
+		return "KMIDIMsgThruConnectionsChanged"
+	case KMIDIMsgSerialPortOwnerChanged:
+		return "KMIDIMsgSerialPortOwnerChanged"
+	case KMIDIMsgIOError:
+		return "KMIDIMsgIOError"
+	default:
+		return fmt.Sprintf("NotificationMessageID(%d)", int64(e))
+	}
+}
+
+// The MIDI object types that the system supports.
+type ObjectType int64
+
+const (
+	// A MIDI object with an undefined type.
+	KMIDIObjectType_Other ObjectType = -1
+	// A MIDI device.
+	KMIDIObjectType_Device ObjectType = 0
+	// A MIDI entity.
+	KMIDIObjectType_Entity ObjectType = 1
+	// A MIDI source.
+	KMIDIObjectType_Source ObjectType = 2
+	// A MIDI destination.
+	KMIDIObjectType_Destination ObjectType = 3
+	// An external device.
+	KMIDIObjectType_ExternalDevice ObjectType = 16
+	// An external entity.
+	KMIDIObjectType_ExternalEntity ObjectType = 17
+	// An external source.
+	KMIDIObjectType_ExternalSource ObjectType = 18
+	// An external destination.
+	KMIDIObjectType_ExternalDestination ObjectType = 19
+)
+
+// String returns the ObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ObjectType) String() string {
+	switch e {
+	case KMIDIObjectType_Other:
+		return "KMIDIObjectType_Other"
+	case KMIDIObjectType_Device:
+		return "KMIDIObjectType_Device"
+	case KMIDIObjectType_Entity:
+		return "KMIDIObjectType_Entity"
+	case KMIDIObjectType_Source:
+		return "KMIDIObjectType_Source"
+	case KMIDIObjectType_Destination:
+		return "KMIDIObjectType_Destination"
+	case KMIDIObjectType_ExternalDevice:
+		return "KMIDIObjectType_ExternalDevice"
+	case KMIDIObjectType_ExternalEntity:
+		return "KMIDIObjectType_ExternalEntity"
+	case KMIDIObjectType_ExternalSource:
+		return "KMIDIObjectType_ExternalSource"
+	case KMIDIObjectType_ExternalDestination:
+		return "KMIDIObjectType_ExternalDestination"
+	default:
+		return fmt.Sprintf("ObjectType(%d)", int64(e))
+	}
+}
+
 // Specifies a MIDI protocol variant.
 type ProtocolID int64
 
@@ -145,6 +239,92 @@ func (e ProtocolID) String() string {
 		return "KMIDIProtocol_2_0"
 	default:
 		return fmt.Sprintf("ProtocolID(%d)", int64(e))
+	}
+}
+
+// A set of values that indicate how to interpret control numbers.
+type TransformControlType int64
+
+const (
+	// A 7-bit control type.
+	KMIDIControlType_7Bit TransformControlType = 0
+	// A 14-bit control type.
+	KMIDIControlType_14Bit TransformControlType = 1
+	// A 7-bit Registered Parameter Number (RPN).
+	KMIDIControlType_7BitRPN TransformControlType = 2
+	// A 14-bit Registered Parameter Number (RPN).
+	KMIDIControlType_14BitRPN TransformControlType = 3
+	// A 7-bit Nonregistered Parameter Number (RPN).
+	KMIDIControlType_7BitNRPN TransformControlType = 4
+	// A 14-bit Nonregistered Parameter Number (RPN).
+	KMIDIControlType_14BitNRPN TransformControlType = 5
+)
+
+// String returns the TransformControlType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TransformControlType) String() string {
+	switch e {
+	case KMIDIControlType_7Bit:
+		return "KMIDIControlType_7Bit"
+	case KMIDIControlType_14Bit:
+		return "KMIDIControlType_14Bit"
+	case KMIDIControlType_7BitRPN:
+		return "KMIDIControlType_7BitRPN"
+	case KMIDIControlType_14BitRPN:
+		return "KMIDIControlType_14BitRPN"
+	case KMIDIControlType_7BitNRPN:
+		return "KMIDIControlType_7BitNRPN"
+	case KMIDIControlType_14BitNRPN:
+		return "KMIDIControlType_14BitNRPN"
+	default:
+		return fmt.Sprintf("TransformControlType(%d)", int64(e))
+	}
+}
+
+// Values that specify the type of MIDI transformation.
+type TransformType int64
+
+const (
+	// No transformation.
+	KMIDITransform_None TransformType = 0
+	// A transformation that filters out an event type.
+	KMIDITransform_FilterOut TransformType = 1
+	// A transformation that changes a specified control number to a supplied parameter value.
+	KMIDITransform_MapControl TransformType = 2
+	// A transform that adds a parameter value.
+	KMIDITransform_Add TransformType = 8
+	// A transform that multiplies by the specified parameter value.
+	KMIDITransform_Scale TransformType = 9
+	// A transform that sets the minimum value to the specified parameter value.
+	KMIDITransform_MinValue TransformType = 10
+	// A transform that sets the maximum value to the specified parameter value.
+	KMIDITransform_MaxValue TransformType = 11
+	// A transform that maps one value to another.
+	KMIDITransform_MapValue TransformType = 12
+)
+
+// String returns the TransformType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TransformType) String() string {
+	switch e {
+	case KMIDITransform_None:
+		return "KMIDITransform_None"
+	case KMIDITransform_FilterOut:
+		return "KMIDITransform_FilterOut"
+	case KMIDITransform_MapControl:
+		return "KMIDITransform_MapControl"
+	case KMIDITransform_Add:
+		return "KMIDITransform_Add"
+	case KMIDITransform_Scale:
+		return "KMIDITransform_Scale"
+	case KMIDITransform_MinValue:
+		return "KMIDITransform_MinValue"
+	case KMIDITransform_MaxValue:
+		return "KMIDITransform_MaxValue"
+	case KMIDITransform_MapValue:
+		return "KMIDITransform_MapValue"
+	default:
+		return fmt.Sprintf("TransformType(%d)", int64(e))
 	}
 }
 

@@ -81,6 +81,12 @@ func NewUUIDWithUUIDString(string_ string) *UUID {
 	return uUIDAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (u *UUID) WithObservationInfo(observationInfo unsafe.Pointer) *UUID {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return u
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (u *UUID) WithScriptingProperties(scriptingProperties obj.Object) *UUID {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

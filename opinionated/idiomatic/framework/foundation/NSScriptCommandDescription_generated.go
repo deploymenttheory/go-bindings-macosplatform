@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,6 +82,12 @@ func NewScriptCommandDescriptionWithCoder(inCoder *Coder) *ScriptCommandDescript
 	return scriptCommandDescriptionAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (scd *ScriptCommandDescription) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptCommandDescription {
+	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return scd
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (scd *ScriptCommandDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription {
 	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -110,6 +118,12 @@ func (scd *ScriptCommandDescription) IsOptionalArgumentWithName(argumentName str
 // CreateCommandInstance creates and returns an instance of the command object described by the receiver.
 func (scd *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("createCommandInstance"))
+	return ScriptCommandFromID(_r)
+}
+
+// CreateCommandInstanceWithZone creates and returns an instance of the command object described by the receiver in the specified memory zone.
+func (scd *ScriptCommandDescription) CreateCommandInstanceWithZone(zone unsafe.Pointer) *ScriptCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("createCommandInstanceWithZone:"), zone)
 	return ScriptCommandFromID(_r)
 }
 

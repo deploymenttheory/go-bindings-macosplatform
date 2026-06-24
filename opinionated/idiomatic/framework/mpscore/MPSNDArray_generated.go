@@ -98,6 +98,12 @@ func (na *NDArray) ArrayViewWithDescriptor(descriptor *NDArrayDescriptor) *NDArr
 	return NDArrayFromID(_r)
 }
 
+// ArrayViewWithShapeStrides make a new representation of a MPSNDArray with given strides and a new shape. This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
+func (na *NDArray) ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *NDArray {
+	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("arrayViewWithShape:strides:"), shape, strides)
+	return NDArrayFromID(_r)
+}
+
 // ArrayViewWithDimensionCountDimensionSizesStrides make a new representation of a MPSNDArray with given strides and a new shape. This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers.
 func (na *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions int) (result *NDArray, dimensionSizes int, dimStrides int) {
 	var _out0 int
@@ -105,6 +111,20 @@ func (na *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDime
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("arrayViewWithDimensionCount:dimensionSizes:strides:"), numberOfDimensions, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	_v := NDArrayFromID(_r)
 	return _v, _out0, _out1
+}
+
+// ReadBytesStrideBytes copy bytes from MPSNDArray into buffer The dimensionality and size of the copy region is given by the size of the MPSNDArray For subregions, use a MPSNDArray view.
+func (na *NDArray) ReadBytesStrideBytes(buffer unsafe.Pointer) (strideBytesPerDimension int64) {
+	var _out0 int64
+	objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("readBytes:strideBytes:"), buffer, unsafe.Pointer(&_out0))
+	return _out0
+}
+
+// WriteBytesStrideBytes copy bytes from a buffer into the MPSNDArray The dimensionality and size of the copy region is given by the size of the MPSNDArray For subregions, use a MPSNDArray view.
+func (na *NDArray) WriteBytesStrideBytes(buffer unsafe.Pointer) (strideBytesPerDimension int64) {
+	var _out0 int64
+	objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("writeBytes:strideBytes:"), buffer, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 // Label returns a used specified string to help identify the array during debugging. May be externally visible to tools like Instruments

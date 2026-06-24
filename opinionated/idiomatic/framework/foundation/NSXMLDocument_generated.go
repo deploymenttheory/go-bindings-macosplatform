@@ -150,6 +150,12 @@ func (xd *XMLDocument) WithURI(uRI StringProvider) *XMLDocument {
 	return xd
 }
 
+// WithObservationInfo sets the observation info.
+func (xd *XMLDocument) WithObservationInfo(observationInfo unsafe.Pointer) *XMLDocument {
+	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return xd
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (xd *XMLDocument) WithScriptingProperties(scriptingProperties obj.Object) *XMLDocument {
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

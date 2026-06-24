@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (sch *ScriptCoercionHandler) String() string {
 func NewScriptCoercionHandler() *ScriptCoercionHandler {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptCoercionHandler")), objc.RegisterName("new"))
 	return scriptCoercionHandlerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (sch *ScriptCoercionHandler) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptCoercionHandler {
+	objc.Send[objc.ID](objref.IDOf(sch), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return sch
 }
 
 // WithScriptingProperties sets the scripting properties.

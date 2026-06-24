@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,9 +47,10 @@ func gridGraphNodeAdopt(id objc.ID) *GridGraphNode {
 	return x
 }
 
-// NewGridGraphNode creates a new GridGraphNode.
-func NewGridGraphNode() *GridGraphNode {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("new"))
+// NewGridGraphNodeWithGridPosition initializes a graph node with the specified position on a grid.
+func NewGridGraphNodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGridPosition:"), gridPosition)
 	return gridGraphNodeAdopt(_id)
 }
 

@@ -5,11 +5,24 @@
 package sharedfilelist
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnLSSharedFileListAddObserver func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// LSSharedFileListAddObserver calls the SharedFileList framework function LSSharedFileListAddObserver.
+func LSSharedFileListAddObserver(inList obj.Object, inRunloop obj.Object, inRunloopMode obj.Object, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListAddObserver == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListAddObserver, _lib, "LSSharedFileListAddObserver")
+	}
+	_fnLSSharedFileListAddObserver(objref.IDOf(inList), objref.IDOf(inRunloop), objref.IDOf(inRunloopMode), callback, context_)
+}
 
 var _fnLSSharedFileListCopyProperty func(objc.ID, objc.ID) objc.ID
 
@@ -21,6 +34,19 @@ func LSSharedFileListCopyProperty(inList obj.Object, inPropertyName obj.Object) 
 	}
 	_ret := _fnLSSharedFileListCopyProperty(objref.IDOf(inList), objref.IDOf(inPropertyName))
 	return obj.Wrap(_ret)
+}
+
+var _fnLSSharedFileListCopySnapshot func(objc.ID, unsafe.Pointer) objc.ID
+
+// LSSharedFileListCopySnapshot calls the SharedFileList framework function LSSharedFileListCopySnapshot.
+func LSSharedFileListCopySnapshot(inList obj.Object) (result obj.Object, outSnapshotSeed int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListCopySnapshot == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCopySnapshot, _lib, "LSSharedFileListCopySnapshot")
+	}
+	var _out0 int
+	_ret := _fnLSSharedFileListCopySnapshot(objref.IDOf(inList), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnLSSharedFileListCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -125,4 +151,15 @@ func LSSharedFileListItemGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetTypeID, _lib, "LSSharedFileListItemGetTypeID")
 	}
 	return _fnLSSharedFileListItemGetTypeID()
+}
+
+var _fnLSSharedFileListRemoveObserver func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// LSSharedFileListRemoveObserver calls the SharedFileList framework function LSSharedFileListRemoveObserver.
+func LSSharedFileListRemoveObserver(inList obj.Object, inRunloop obj.Object, inRunloopMode obj.Object, callback unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListRemoveObserver == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListRemoveObserver, _lib, "LSSharedFileListRemoveObserver")
+	}
+	_fnLSSharedFileListRemoveObserver(objref.IDOf(inList), objref.IDOf(inRunloop), objref.IDOf(inRunloopMode), callback, context_)
 }

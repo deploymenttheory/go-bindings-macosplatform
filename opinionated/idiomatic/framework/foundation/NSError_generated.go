@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), objref.IDOf(domain), code, objref.IDOf(dict))
 	return errorAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (e *Error) WithObservationInfo(observationInfo unsafe.Pointer) *Error {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return e
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,6 +5,9 @@
 package coremidi
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -109,6 +112,19 @@ func MIDI1UPSystemCommon(group uint8, status uint8, byte1 uint8, byte2 uint8) in
 	return _fnMIDI1UPSystemCommon(group, status, byte1, byte2)
 }
 
+var _fnMIDIClientCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// MIDIClientCreate calls the CoreMIDI framework function MIDIClientCreate.
+func MIDIClientCreate(name obj.Object, notifyProc unsafe.Pointer, notifyRefCon unsafe.Pointer) (result int, outClient int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIClientCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIClientCreate, _lib, "MIDIClientCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIClientCreate(objref.IDOf(name), notifyProc, notifyRefCon, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnMIDIDeltaClockstampTicksPerQuarterNoteMessage func(uint16) int
 
 // MIDIDeltaClockstampTicksPerQuarterNoteMessage calls the CoreMIDI framework function MIDIDeltaClockstampTicksPerQuarterNoteMessage.
@@ -118,6 +134,32 @@ func MIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote uint16) i
 		ebipurego.RegisterLibFunc(&_fnMIDIDeltaClockstampTicksPerQuarterNoteMessage, _lib, "MIDIDeltaClockstampTicksPerQuarterNoteMessage")
 	}
 	return _fnMIDIDeltaClockstampTicksPerQuarterNoteMessage(ticksPerQuarterNote)
+}
+
+var _fnMIDIDestinationCreate func(int, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// MIDIDestinationCreate calls the CoreMIDI framework function MIDIDestinationCreate.
+func MIDIDestinationCreate(client int, name obj.Object, readProc unsafe.Pointer, refCon unsafe.Pointer) (result int, outDest int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDestinationCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDestinationCreate, _lib, "MIDIDestinationCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIDestinationCreate(client, objref.IDOf(name), readProc, refCon, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDIDeviceAddEntity func(int, objc.ID, uint8, int, int, unsafe.Pointer) int
+
+// MIDIDeviceAddEntity calls the CoreMIDI framework function MIDIDeviceAddEntity.
+func MIDIDeviceAddEntity(device int, name obj.Object, embedded uint8, numSourceEndpoints int, numDestinationEndpoints int) (result int, newEntity int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceAddEntity == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceAddEntity, _lib, "MIDIDeviceAddEntity")
+	}
+	var _out0 int
+	_ret := _fnMIDIDeviceAddEntity(device, objref.IDOf(name), embedded, numSourceEndpoints, numDestinationEndpoints, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMIDIDeviceGetEntity func(int, int) int
@@ -164,6 +206,32 @@ func MIDIDeviceListGetNumberOfDevices(devList int) int {
 	return _fnMIDIDeviceListGetNumberOfDevices(devList)
 }
 
+var _fnMIDIDeviceNewEntity func(int, objc.ID, ProtocolID, uint8, int, int, unsafe.Pointer) int
+
+// MIDIDeviceNewEntity calls the CoreMIDI framework function MIDIDeviceNewEntity.
+func MIDIDeviceNewEntity(device int, name obj.Object, protocol ProtocolID, embedded uint8, numSourceEndpoints int, numDestinationEndpoints int) (result int, newEntity int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceNewEntity == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceNewEntity, _lib, "MIDIDeviceNewEntity")
+	}
+	var _out0 int
+	_ret := _fnMIDIDeviceNewEntity(device, objref.IDOf(name), protocol, embedded, numSourceEndpoints, numDestinationEndpoints, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDIEndpointGetEntity func(int, unsafe.Pointer) int
+
+// MIDIEndpointGetEntity calls the CoreMIDI framework function MIDIEndpointGetEntity.
+func MIDIEndpointGetEntity(inEndpoint int) (result int, outEntity int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEndpointGetEntity == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEndpointGetEntity, _lib, "MIDIEndpointGetEntity")
+	}
+	var _out0 int
+	_ret := _fnMIDIEndpointGetEntity(inEndpoint, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnMIDIEntityGetDestination func(int, int) int
 
 // MIDIEntityGetDestination calls the CoreMIDI framework function MIDIEntityGetDestination.
@@ -173,6 +241,19 @@ func MIDIEntityGetDestination(entity int, destIndex0 int) int {
 		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetDestination, _lib, "MIDIEntityGetDestination")
 	}
 	return _fnMIDIEntityGetDestination(entity, destIndex0)
+}
+
+var _fnMIDIEntityGetDevice func(int, unsafe.Pointer) int
+
+// MIDIEntityGetDevice calls the CoreMIDI framework function MIDIEntityGetDevice.
+func MIDIEntityGetDevice(inEntity int) (result int, outDevice int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityGetDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetDevice, _lib, "MIDIEntityGetDevice")
+	}
+	var _out0 int
+	_ret := _fnMIDIEntityGetDevice(inEntity, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMIDIEntityGetNumberOfDestinations func(int) int
@@ -206,6 +287,19 @@ func MIDIEntityGetSource(entity int, sourceIndex0 int) int {
 		ebipurego.RegisterLibFunc(&_fnMIDIEntityGetSource, _lib, "MIDIEntityGetSource")
 	}
 	return _fnMIDIEntityGetSource(entity, sourceIndex0)
+}
+
+var _fnMIDIExternalDeviceCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int
+
+// MIDIExternalDeviceCreate calls the CoreMIDI framework function MIDIExternalDeviceCreate.
+func MIDIExternalDeviceCreate(name obj.Object, manufacturer obj.Object, model obj.Object) (result int, outDevice int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIExternalDeviceCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIExternalDeviceCreate, _lib, "MIDIExternalDeviceCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIExternalDeviceCreate(objref.IDOf(name), objref.IDOf(manufacturer), objref.IDOf(model), unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMIDIGetDestination func(int) int
@@ -308,6 +402,19 @@ func MIDIGetSource(sourceIndex0 int) int {
 	return _fnMIDIGetSource(sourceIndex0)
 }
 
+var _fnMIDIInputPortCreate func(int, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// MIDIInputPortCreate calls the CoreMIDI framework function MIDIInputPortCreate.
+func MIDIInputPortCreate(client int, portName obj.Object, readProc unsafe.Pointer, refCon unsafe.Pointer) (result int, outPort int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIInputPortCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIInputPortCreate, _lib, "MIDIInputPortCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIInputPortCreate(client, objref.IDOf(portName), readProc, refCon, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnMIDIJitterReductionClockMessage func(uint16) int
 
 // MIDIJitterReductionClockMessage calls the CoreMIDI framework function MIDIJitterReductionClockMessage.
@@ -352,6 +459,124 @@ func MIDINoOpMessage() int {
 	return _fnMIDINoOpMessage()
 }
 
+var _fnMIDIObjectFindByUniqueID func(int, unsafe.Pointer, unsafe.Pointer) int
+
+// MIDIObjectFindByUniqueID calls the CoreMIDI framework function MIDIObjectFindByUniqueID.
+func MIDIObjectFindByUniqueID(inUniqueID int) (result int, outObject int, outObjectType ObjectType) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectFindByUniqueID == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectFindByUniqueID, _lib, "MIDIObjectFindByUniqueID")
+	}
+	var _out0 int
+	var _out1 ObjectType
+	_ret := _fnMIDIObjectFindByUniqueID(inUniqueID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnMIDIObjectGetIntegerProperty func(int, objc.ID, unsafe.Pointer) int
+
+// MIDIObjectGetIntegerProperty calls the CoreMIDI framework function MIDIObjectGetIntegerProperty.
+func MIDIObjectGetIntegerProperty(obj_ int, propertyID obj.Object) (result int, outValue int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectGetIntegerProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetIntegerProperty, _lib, "MIDIObjectGetIntegerProperty")
+	}
+	var _out0 int
+	_ret := _fnMIDIObjectGetIntegerProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDIOutputPortCreate func(int, objc.ID, unsafe.Pointer) int
+
+// MIDIOutputPortCreate calls the CoreMIDI framework function MIDIOutputPortCreate.
+func MIDIOutputPortCreate(client int, portName obj.Object) (result int, outPort int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIOutputPortCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIOutputPortCreate, _lib, "MIDIOutputPortCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIOutputPortCreate(client, objref.IDOf(portName), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDISetupCreate func(unsafe.Pointer) int
+
+// MIDISetupCreate calls the CoreMIDI framework function MIDISetupCreate.
+func MIDISetupCreate() (result int, outSetup int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupCreate, _lib, "MIDISetupCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDISetupCreate(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDISetupFromData func(objc.ID, unsafe.Pointer) int
+
+// MIDISetupFromData calls the CoreMIDI framework function MIDISetupFromData.
+func MIDISetupFromData(data obj.Object) (result int, outSetup int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupFromData == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupFromData, _lib, "MIDISetupFromData")
+	}
+	var _out0 int
+	_ret := _fnMIDISetupFromData(objref.IDOf(data), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDISetupGetCurrent func(unsafe.Pointer) int
+
+// MIDISetupGetCurrent calls the CoreMIDI framework function MIDISetupGetCurrent.
+func MIDISetupGetCurrent() (result int, outSetup int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupGetCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupGetCurrent, _lib, "MIDISetupGetCurrent")
+	}
+	var _out0 int
+	_ret := _fnMIDISetupGetCurrent(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDISourceCreate func(int, objc.ID, unsafe.Pointer) int
+
+// MIDISourceCreate calls the CoreMIDI framework function MIDISourceCreate.
+func MIDISourceCreate(client int, name obj.Object) (result int, outSrc int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISourceCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISourceCreate, _lib, "MIDISourceCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDISourceCreate(client, objref.IDOf(name), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDISourceCreateWithProtocol func(int, objc.ID, ProtocolID, unsafe.Pointer) int
+
+// MIDISourceCreateWithProtocol calls the CoreMIDI framework function MIDISourceCreateWithProtocol.
+func MIDISourceCreateWithProtocol(client int, name obj.Object, protocol ProtocolID) (result int, outSrc int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISourceCreateWithProtocol == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISourceCreateWithProtocol, _lib, "MIDISourceCreateWithProtocol")
+	}
+	var _out0 int
+	_ret := _fnMIDISourceCreateWithProtocol(client, objref.IDOf(name), protocol, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnMIDIThruConnectionCreate func(objc.ID, objc.ID, unsafe.Pointer) int
+
+// MIDIThruConnectionCreate calls the CoreMIDI framework function MIDIThruConnectionCreate.
+func MIDIThruConnectionCreate(inPersistentOwnerID obj.Object, inConnectionParams obj.Object) (result int, outConnection int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIThruConnectionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionCreate, _lib, "MIDIThruConnectionCreate")
+	}
+	var _out0 int
+	_ret := _fnMIDIThruConnectionCreate(objref.IDOf(inPersistentOwnerID), objref.IDOf(inConnectionParams), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnMIDITicksSinceLastEventMessage func(int) int
 
 // MIDITicksSinceLastEventMessage calls the CoreMIDI framework function MIDITicksSinceLastEventMessage.
@@ -361,4 +586,15 @@ func MIDITicksSinceLastEventMessage(ticksSinceLastEvent int) int {
 		ebipurego.RegisterLibFunc(&_fnMIDITicksSinceLastEventMessage, _lib, "MIDITicksSinceLastEventMessage")
 	}
 	return _fnMIDITicksSinceLastEventMessage(ticksSinceLastEvent)
+}
+
+var _fnBuiltinObjectSize func(unsafe.Pointer, int) int
+
+// BuiltinObjectSize calls the CoreMIDI framework function __builtin_object_size.
+func BuiltinObjectSize(arg unsafe.Pointer, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBuiltinObjectSize == nil {
+		ebipurego.RegisterLibFunc(&_fnBuiltinObjectSize, _lib, "__builtin_object_size")
+	}
+	return _fnBuiltinObjectSize(arg, arg2)
 }

@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -101,6 +102,12 @@ func (oq *OperationQueue) WithQualityOfService(qualityOfService QualityOfService
 // WithUnderlyingQueue sets the underlying queue.
 func (oq *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
+	return oq
+}
+
+// WithObservationInfo sets the observation info.
+func (oq *OperationQueue) WithObservationInfo(observationInfo unsafe.Pointer) *OperationQueue {
+	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return oq
 }
 

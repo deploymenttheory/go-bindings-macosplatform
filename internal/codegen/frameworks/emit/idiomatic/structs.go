@@ -61,10 +61,17 @@ func resolveStructFields(
 // Iterates to a fixpoint so a struct may depend on one resolved later (CGRect on
 // CGPoint/CGSize). The same set gates both the per-framework struct emission and
 // cross-framework references, so a reference never names a struct that was
-// skipped.
+// skipped. An enum-typed field is allowed when the enum is one the same framework
+// emits locally (see ComputeEmittableStructs).
 func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper) map[string]bool {
+	// Per-framework own-enum names (bare), so an enum-typed field is accepted only
+	// when the enum belongs to the same framework as the struct — the only case the
+	// idiomatic package emits a local definition for (registerLocalStructEnumRefs).
+	ownEnumsByFw := make(map[string]map[string]bool, len(frameworks))
 	resolved := make(map[string][]string) // struct Go name → field Go types
+	structFw := make(map[string]string)   // struct Go name → owning framework
 	for _, fw := range frameworks {
+		ownEnumsByFw[fw.Framework] = buildOwnEnumNames(fw)
 		ctx := typemap.Context{Framework: fw.Framework}
 		for name, s := range fw.Structs {
 			if s.Availability.IsUnavailable || len(s.Fields) == 0 {
@@ -79,6 +86,7 @@ func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper
 			}
 			if _, goTypes, ok := resolveStructFields(s, ctx, m); ok {
 				resolved[goName] = goTypes
+				structFw[goName] = fw.Framework
 			}
 		}
 	}
@@ -90,9 +98,14 @@ func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper
 			if emittable[goName] {
 				continue
 			}
+			ownEnums := ownEnumsByFw[structFw[goName]]
 			good := true
 			for _, gt := range goTypes {
-				if goPrimitives[gt] || emittable[gt] {
+				// A field is acceptable when it is a Go primitive, another emittable
+				// struct, or one of this struct's own framework's emitted enums (a
+				// bare name; cross-framework or non-emitted enums are rejected so the
+				// struct never names a type this package does not define).
+				if goPrimitives[gt] || emittable[gt] || ownEnums[gt] {
 					continue
 				}
 				good = false
@@ -110,14 +123,42 @@ func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, m *typemap.Mapper
 	return emittable
 }
 
+// registerLocalStructEnumRefs marks the framework's own enums that appear as
+// fields of an emittable value struct (e.g. hv_vcpu_exit_t's reason field of type
+// Hv_exit_reason_t) as referenced, so emitEnums — which runs before
+// emitStructTypeAliases — emits a local definition and the struct field names a
+// hermetic local type rather than the raw package's.
+func registerLocalStructEnumRefs(fc *frameworkContext, m *typemap.Mapper) {
+	ctx := typemap.Context{Framework: fc.fw.Framework}
+	for name, s := range fc.fw.Structs {
+		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
+			continue
+		}
+		goName := naming.ExportedTypeName(name)
+		if !m.EmittableStructs[goName] {
+			continue
+		}
+		_, goTypes, ok := resolveStructFields(s, ctx, m)
+		if !ok {
+			continue
+		}
+		for _, gt := range goTypes {
+			if fc.ownEnums[gt] {
+				fc.referenced[gt] = true
+			}
+		}
+	}
+}
+
 func emitStructTypeAliases(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
-	fw *meta.FrameworkMeta,
+	fc *frameworkContext,
 	m *typemap.Mapper,
 	takenNames map[string]bool,
 ) error {
 	_ = rawPkgAlias
 	_ = rawPkgPath
+	fw := fc.fw
 	ctx := typemap.Context{Framework: fw.Framework}
 
 	type structDef struct {
@@ -160,7 +201,13 @@ func emitStructTypeAliases(
 		def := defs[goName]
 		fields := make([]view.Field, len(def.fieldNames))
 		for i, fname := range def.fieldNames {
-			fields[i] = view.Field{GoName: capitalizeFirst(fname), GoType: def.fieldTypes[i]}
+			gt := def.fieldTypes[i]
+			// An own-enum field names the local (de-prefixed) enum type emitEnums
+			// emits, not the raw full name, so the reference resolves in-package.
+			if fc.ownEnums[gt] {
+				gt = deprefixEnumName(gt, fc.prefix)
+			}
+			fields[i] = view.Field{GoName: capitalizeFirst(fname), GoType: gt}
 		}
 		structs = append(structs, view.Struct{
 			GoName: goName,

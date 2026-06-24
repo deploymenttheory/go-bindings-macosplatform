@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,12 @@ func NewMutableOrderedSetWithCapacity(numItems int) *MutableOrderedSet {
 	return mutableOrderedSetAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (mos *MutableOrderedSet) WithObservationInfo(observationInfo unsafe.Pointer) *MutableOrderedSet {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mos
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (mos *MutableOrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableOrderedSet {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -90,6 +98,11 @@ func (mos *MutableOrderedSet) ReplaceObjectAtIndexWithObject(idx int, object obj
 // AddObject appends a given object to the end of the mutable ordered set, if it is not already a member.
 func (mos *MutableOrderedSet) AddObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("addObject:"), objref.IDOf(object))
+}
+
+// AddObjectsCount appends the given number of objects from a given C array to the end of the mutable ordered set.
+func (mos *MutableOrderedSet) AddObjectsCount(objects unsafe.Pointer, count int) {
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("addObjects:count:"), objects, count)
 }
 
 // AddObjectsFromArray appends to the end of the mutable ordered set each object contained in a given array that is not already a member.

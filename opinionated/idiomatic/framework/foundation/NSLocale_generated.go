@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewLocaleWithCoder(coder *Coder) *Locale {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return localeAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (l *Locale) WithObservationInfo(observationInfo unsafe.Pointer) *Locale {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return l
 }
 
 // WithScriptingProperties sets the scripting properties.
