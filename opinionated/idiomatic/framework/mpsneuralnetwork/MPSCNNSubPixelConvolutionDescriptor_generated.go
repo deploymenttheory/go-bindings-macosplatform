@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -112,6 +114,12 @@ func (cspcd *CNNSubPixelConvolutionDescriptor) WithDilationRateY(dilationRateY i
 // WithFusedNeuronDescriptor sets this mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
 func (cspcd *CNNSubPixelConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor {
 	objc.Send[objc.ID](objref.IDOf(cspcd), objc.RegisterName("setFusedNeuronDescriptor:"), objref.IDOf(fusedNeuronDescriptor))
+	return cspcd
+}
+
+// WithNeuron sets MPSCNNNeuron filter to be applied as part of convolution. This is applied after BatchNormalization in the end. Default is nil. This is deprecated. You dont need to create MPSCNNNeuron object to fuse with convolution. Use neuron properties in this descriptor.
+func (cspcd *CNNSubPixelConvolutionDescriptor) WithNeuron(neuron unsafe.Pointer) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cspcd), objc.RegisterName("setNeuron:"), neuron)
 	return cspcd
 }
 

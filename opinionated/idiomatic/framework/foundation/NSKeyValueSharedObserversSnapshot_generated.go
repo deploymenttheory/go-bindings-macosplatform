@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (kvsos *KeyValueSharedObserversSnapshot) String() string {
 func NewKeyValueSharedObserversSnapshot() *KeyValueSharedObserversSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyValueSharedObserversSnapshot")), objc.RegisterName("new"))
 	return keyValueSharedObserversSnapshotAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (kvsos *KeyValueSharedObserversSnapshot) WithObservationInfo(observationInfo unsafe.Pointer) *KeyValueSharedObserversSnapshot {
+	objc.Send[objc.ID](objref.IDOf(kvsos), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return kvsos
 }
 
 // WithScriptingProperties sets the scripting properties.

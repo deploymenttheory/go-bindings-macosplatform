@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +64,18 @@ func NewSourceWithEngineShapes(engine *Engine, shapes []*Shape) *Source {
 // WithGain sets the amount of sound the source emanates.
 func (s *Source) WithGain(gain float64) *Source {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGain:"), gain)
+	return s
+}
+
+// WithTransform sets a matrix, in local coordinates, that determines the object’s pose in the scene.
+func (s *Source) WithTransform(transform unsafe.Pointer) *Source {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTransform:"), transform)
+	return s
+}
+
+// WithWorldTransform sets a matrix, in scene coordinates, that determines the object’s pose in the scene.
+func (s *Source) WithWorldTransform(worldTransform unsafe.Pointer) *Source {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWorldTransform:"), worldTransform)
 	return s
 }
 

@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,12 @@ func NewAreaLight() *AreaLight {
 // WithAreaRadius sets the radius, in units of local coordinate space, of the area from which light emanates.
 func (al *AreaLight) WithAreaRadius(areaRadius float32) *AreaLight {
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setAreaRadius:"), areaRadius)
+	return al
+}
+
+// WithSuperEllipticPower sets a vector that controls the roundness of a superelliptical light in the x- and y-axis directions.
+func (al *AreaLight) WithSuperEllipticPower(superEllipticPower unsafe.Pointer) *AreaLight {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setSuperEllipticPower:"), superEllipticPower)
 	return al
 }
 

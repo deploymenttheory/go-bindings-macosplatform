@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (apv *AuthorizationPluginView) String() string {
 	return rt.Description(objref.IDOf(apv))
 }
 
-// NewAuthorizationPluginView creates a new AuthorizationPluginView.
-func NewAuthorizationPluginView() *AuthorizationPluginView {
-	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationPluginView")), objc.RegisterName("new"))
+// NewAuthorizationPluginViewWithCallbacksAndEngineRef initializes a new authorization plug-in view with the specified callbacks and authorization engine handle.
+func NewAuthorizationPluginViewWithCallbacksAndEngineRef(callbacks unsafe.Pointer, engineRef unsafe.Pointer) *AuthorizationPluginView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFAuthorizationPluginView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallbacks:andEngineRef:"), callbacks, engineRef)
 	return authorizationPluginViewAdopt(_id)
 }
 

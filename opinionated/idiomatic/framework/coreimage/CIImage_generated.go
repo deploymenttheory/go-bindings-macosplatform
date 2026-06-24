@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -169,6 +171,34 @@ func NewImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image
 func NewImageWithIOSurfacePlaneFormatOptions(surface obj.Object, plane int, format int, options obj.Object) *Image {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), objref.IDOf(surface), plane, format, objref.IDOf(options))
+	return imageAdopt(_id)
+}
+
+// NewImageWithCVImageBuffer initializes an image object from the contents of a Core Video image buffer.
+func NewImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVImageBuffer:"), imageBuffer)
+	return imageAdopt(_id)
+}
+
+// NewImageWithCVImageBufferOptions initializes an image object from the contents of a Core Video image buffer, using the specified options.
+func NewImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options obj.Object) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVImageBuffer:options:"), imageBuffer, objref.IDOf(options))
+	return imageAdopt(_id)
+}
+
+// NewImageWithCVPixelBuffer initializes an image object from the contents of a Core Video pixel buffer.
+func NewImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:"), pixelBuffer)
+	return imageAdopt(_id)
+}
+
+// NewImageWithCVPixelBufferOptions initializes an image object from the contents of a Core Video pixel buffer using the specified options.
+func NewImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *Image {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
 	return imageAdopt(_id)
 }
 

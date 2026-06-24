@@ -19,3 +19,13 @@ type IOUSBHostIsochronousFrame struct {
 	Reserved      uint32
 	TimeStamp     uint64
 }
+
+// Structure representing a single frame or microframe in an isochronous transfer.
+type IOUSBHostIsochronousTransaction struct {
+	Status        int
+	RequestCount  uint32
+	Offset        uint32
+	CompleteCount uint32
+	TimeStamp     uint64
+	Options       HostIsochronousTransactionOptions
+}

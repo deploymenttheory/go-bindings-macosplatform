@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,12 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, objref.IDOf(address))
 	return socketPortAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (sp *SocketPort) WithObservationInfo(observationInfo unsafe.Pointer) *SocketPort {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return sp
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -13,3 +13,10 @@ type Tcl_Time struct {
 	Sec  int
 	Usec int
 }
+
+type Tcl_Value struct {
+	Type        Tcl_ValueType
+	IntValue    int
+	DoubleValue float64
+	WideValue   int
+}

@@ -60,6 +60,21 @@ func (p *Parameter) WithValue(value float32) *Parameter {
 	return p
 }
 
+// SetValueOriginator sets the parameter’s value, avoiding redundant notifications to the originator.
+func (p *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:"), value, originator)
+}
+
+// SetValueOriginatorAtHostTime sets the parameter’s value, preserving the host time of the gesture that initiated the change.
+func (p *Parameter) SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:atHostTime:"), value, originator, hostTime)
+}
+
+// SetValueOriginatorAtHostTimeEventType set the parameter's value, preserving the host time of the gesture that initiated the change, and associating an event type such as touch/release. In general, this method should only be called from a user interface. It initiates a change to a parameter in a way that captures the gesture such that it can be recorded later -- any AUParameterAutomationObservers will receive the host time and event type associated with the parameter change. From an audio playback engine, a host should schedule automated parameter changes through AUAudioUnit's scheduleParameterBlock. Bridged to the v2 function AudioUnitSetParameter.
+func (p *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType ParameterAutomationEventType) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:atHostTime:eventType:"), value, originator, hostTime, eventType)
+}
+
 // StringFromValue gets the string representation of a parameter value.
 func (p *Parameter) StringFromValue() (result string, value float32) {
 	var _out0 float32

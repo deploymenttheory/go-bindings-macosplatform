@@ -76,6 +76,12 @@ func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExten
 	return authorizationProviderExtensionLoginManagerAdopt(_id)
 }
 
+// WithLoginUserName sets the user name to use when authenticating with the identity provider.
+func (apelm *AuthorizationProviderExtensionLoginManager) WithLoginUserName(loginUserName unsafe.Pointer) *AuthorizationProviderExtensionLoginManager {
+	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("setLoginUserName:"), loginUserName)
+	return apelm
+}
+
 // WithSsoTokens sets the single sign-on response tokens for the current user and extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens obj.Object) *AuthorizationProviderExtensionLoginManager {
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("setSsoTokens:"), objref.IDOf(ssoTokens))

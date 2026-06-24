@@ -126,6 +126,22 @@ func CFURLCopyResourcePropertiesForKeys(url obj.Object, keys obj.Object) (obj.Ob
 	return obj.Wrap(_r), nil
 }
 
+// CFURLCopyResourcePropertyForKey reports an error if the CoreFoundation framework function CFURLCopyResourcePropertyForKey fails.
+var _fnCFURLCopyResourcePropertyForKey func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+
+func CFURLCopyResourcePropertyForKey(url obj.Object, key obj.Object, propertyValueTypeRefPtr unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLCopyResourcePropertyForKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertyForKey, _lib, "CFURLCopyResourcePropertyForKey")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnCFURLCopyResourcePropertyForKey(objref.IDOf(url), objref.IDOf(key), propertyValueTypeRefPtr, unsafe.Pointer(&_cfErr))
+	if _ok == 0 {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
 // CFURLCreateBookmarkData reports an error if the CoreFoundation framework function CFURLCreateBookmarkData fails.
 var _fnCFURLCreateBookmarkData func(objc.ID, objc.ID, CFURLBookmarkCreationOptions, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
@@ -184,6 +200,22 @@ func CFURLCreateFileReferenceURL(allocator obj.Object, url obj.Object) (obj.Obje
 	}
 	var _cfErr unsafe.Pointer
 	_r := _fnCFURLCreateFileReferenceURL(objref.IDOf(allocator), objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	if _cfErr != nil {
+		return nil, errkit.FromCFError(_cfErr)
+	}
+	return obj.Wrap(_r), nil
+}
+
+// CFURLEnumeratorGetNextURL reports an error if the CoreFoundation framework function CFURLEnumeratorGetNextURL fails.
+var _fnCFURLEnumeratorGetNextURL func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+func CFURLEnumeratorGetNextURL(enumerator obj.Object, url unsafe.Pointer) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFURLEnumeratorGetNextURL == nil {
+		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetNextURL, _lib, "CFURLEnumeratorGetNextURL")
+	}
+	var _cfErr unsafe.Pointer
+	_r := _fnCFURLEnumeratorGetNextURL(objref.IDOf(enumerator), url, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

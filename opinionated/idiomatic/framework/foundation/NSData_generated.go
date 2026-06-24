@@ -71,6 +71,27 @@ func (d *Data) String() string {
 	return rt.Description(objref.IDOf(d))
 }
 
+// NewDataWithBytesLength initializes a data object filled with a given number of bytes copied from a given buffer.
+func NewDataWithBytesLength(bytes_ unsafe.Pointer, length int) *Data {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), bytes_, length)
+	return dataAdopt(_id)
+}
+
+// NewDataWithBytesNoCopyLength initializes a data object filled with a given number of bytes of data from a given buffer.
+func NewDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *Data {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:"), bytes_, length)
+	return dataAdopt(_id)
+}
+
+// NewDataWithBytesNoCopyLengthFreeWhenDone initializes a newly allocated data object by adding the given number of bytes from the given buffer.
+func NewDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length int, b bool) *Data {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:freeWhenDone:"), bytes_, length, b)
+	return dataAdopt(_id)
+}
+
 // NewDataWithContentsOfFileOptionsError initializes a data object with the content of the file at a given path.
 func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
@@ -142,6 +163,12 @@ func NewDataWithBase64Encoding(base64String string) *Data {
 	return dataAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (d *Data) WithObservationInfo(observationInfo unsafe.Pointer) *Data {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return d
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (d *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -152,6 +179,11 @@ func (d *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
 func (d *Data) Length() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
 	return _r
+}
+
+// GetBytesLength copies a number of bytes from the start of the data object into a given buffer.
+func (d *Data) GetBytesLength(buffer unsafe.Pointer, length int) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:length:"), buffer, length)
 }
 
 // IsEqualToData returns a Boolean value indicating whether this data object is the same as another.
@@ -225,6 +257,11 @@ func (d *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgori
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return DataFromID(_r), nil
+}
+
+// GetBytes copies a data object’s contents into a given buffer.
+func (d *Data) GetBytes(buffer unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:"), buffer)
 }
 
 // Base64Encoding returns initializes a Base64 encoded string from the string.

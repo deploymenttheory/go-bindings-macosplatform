@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -172,6 +175,12 @@ func (p *Player) WithNetworkResourcePriority(networkResourcePriority PlayerNetwo
 	return p
 }
 
+// WithIntendedSpatialAudioExperience sets the AVPlayer’s intended spatial audio experience.
+func (p *Player) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
+	return p
+}
+
 // WithAllowsCaptureOfClearKeyVideo sets indicates whether the video output of ClearKey Encrypted Video can be captured
 func (p *Player) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
@@ -252,6 +261,12 @@ func (p *Player) ActionAtItemEnd() PlayerActionAtItemEnd {
 	return _r
 }
 
+// CurrentTime returns the current time of the current player item.
+func (p *Player) CurrentTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(p), objc.RegisterName("currentTime"))
+	return _r
+}
+
 // SeekToDate requests that the player seek to a specified date.
 func (p *Player) SeekToDate(date obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToDate:"), objref.IDOf(date))
@@ -260,6 +275,31 @@ func (p *Player) SeekToDate(date obj.Object) {
 // SeekToDateCompletionHandler requests that the player seek to a specified date, and to notify you when the seek is complete.
 func (p *Player) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// SeekToTime requests that the player seek to a specified time.
+func (p *Player) SeekToTime(time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToTime:"), time_)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfter requests that the player seek to a specified time with the amount of accuracy specified by the time tolerance values.
+func (p *Player) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:"), time_, toleranceBefore, toleranceAfter)
+}
+
+// SeekToTimeCompletionHandler requests that the player seek to a specified time, and to notify you when the seek is complete.
+func (p *Player) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToTime:completionHandler:"), time_, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler requests that the player seek to a specified time with the amount of accuracy specified by the time tolerance values, and to notify you when the seek is complete.
+func (p *Player) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:"), time_, toleranceBefore, toleranceAfter, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// SetRateTimeAtHostTime synchronizes the playback rate and time of the current item with an external source.
+func (p *Player) SetRateTimeAtHostTime(rate float32, itemTime coremedia.CMTime, hostClockTime coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setRate:time:atHostTime:"), rate, itemTime, hostClockTime)
 }
 
 // PrerollAtRateCompletionHandler begins loading media data to prime the media pipelines for playback.

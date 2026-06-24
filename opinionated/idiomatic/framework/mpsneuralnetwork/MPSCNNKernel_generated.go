@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -125,6 +127,12 @@ func (ck *CNNKernel) DestinationImageDescriptorForSourceImagesSourceStates(sourc
 // EncodingStorageSizeForSourceImageSourceStatesDestinationImage the size of extra MPS heap storage allocated while the kernel is encoding This is best effort and just describes things that are likely to end up on the MPS heap. It does not describe all allocation done by the -encode call.  It is intended for use with high water calculations for MTLHeap sizing. Allocations are typically for temporary storage needed for multipass algorithms. This interface should not be used to detect multipass algorithms.
 func (ck *CNNKernel) EncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(ck), objc.RegisterName("encodingStorageSizeForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+	return _r
+}
+
+// BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage the size of extra MPS heap storage allocated while the kernel is encoding a batch This is best effort and just describes things that are likely to end up on the MPS heap. It does not describe all allocation done by the -encode call.  It is intended for use with high water calculations for MTLHeap sizing. Allocations are typically for temporary storage needed for multipass algorithms. This interface should not be used to detect multipass algorithms.
+func (ck *CNNKernel) BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(ck), objc.RegisterName("batchEncodingStorageSizeForSourceImage:sourceStates:destinationImage:"), sourceImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
 	return _r
 }
 

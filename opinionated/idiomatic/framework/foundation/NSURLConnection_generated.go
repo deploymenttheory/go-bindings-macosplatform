@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewURLConnectionWithRequestDelegate(request *URLRequest, delegate obj.Objec
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:delegate:"), objref.IDOf(request), objref.IDOf(delegate))
 	return uRLConnectionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uc *URLConnection) WithObservationInfo(observationInfo unsafe.Pointer) *URLConnection {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uc
 }
 
 // WithScriptingProperties sets the scripting properties.

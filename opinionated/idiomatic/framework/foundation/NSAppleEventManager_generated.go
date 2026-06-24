@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (aem *AppleEventManager) String() string {
 func NewAppleEventManager() *AppleEventManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSAppleEventManager")), objc.RegisterName("new"))
 	return appleEventManagerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (aem *AppleEventManager) WithObservationInfo(observationInfo unsafe.Pointer) *AppleEventManager {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return aem
 }
 
 // WithScriptingProperties sets the scripting properties.

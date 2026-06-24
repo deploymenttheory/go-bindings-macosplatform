@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,12 @@ func (lf *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
 // WithItemFormatter sets the item formatter.
 func (lf *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
+	return lf
+}
+
+// WithObservationInfo sets the observation info.
+func (lf *ListFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return lf
 }
 

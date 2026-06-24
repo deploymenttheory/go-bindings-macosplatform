@@ -5,6 +5,8 @@
 package syncservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -92,4 +94,15 @@ func (isrs *ISyncRecordSnapshot) SourceIdentifiersForRelationshipNameWithTargetI
 func (isrs *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordsWithMatchingAttributes:"), objref.IDOf(attributes))
 	return obj.Wrap(_r)
+}
+
+// RecordIdentifierForReferenceIsModified wraps the corresponding Objective-C method.
+func (isrs *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer) (result string, pModified bool) {
+	var _out0 bool
+	_r := objc.Send[objc.ID](objref.IDOf(isrs), objc.RegisterName("recordIdentifierForReference:isModified:"), reference, unsafe.Pointer(&_out0))
+	_v := ""
+	if _r != 0 {
+		_v = purego.GoString(_r)
+	}
+	return _v, _out0
 }

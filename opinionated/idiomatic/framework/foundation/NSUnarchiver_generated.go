@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewUnarchiverForReadingWithData(data *Data) *Unarchiver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), objref.IDOf(data))
 	return unarchiverAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (u *Unarchiver) WithObservationInfo(observationInfo unsafe.Pointer) *Unarchiver {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return u
 }
 
 // WithScriptingProperties sets the scripting properties.

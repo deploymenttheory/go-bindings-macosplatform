@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,10 +68,17 @@ func (es *EnvelopeSegment) String() string {
 	return rt.Description(objref.IDOf(es))
 }
 
-// NewEnvelopeSegment creates a new EnvelopeSegment.
-func NewEnvelopeSegment() *EnvelopeSegment {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeSegment")), objc.RegisterName("new"))
+// NewEnvelopeSegmentWithEndPointCurveType creates a curved portion of an envelope.
+func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType CurveType) *EnvelopeSegment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeSegment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndPoint:curveType:"), endPoint, curveType)
 	return envelopeSegmentAdopt(_id)
+}
+
+// WithEndPoint sets a point that identifies the end of the segment along the envelope.
+func (es *EnvelopeSegment) WithEndPoint(endPoint unsafe.Pointer) *EnvelopeSegment {
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("setEndPoint:"), endPoint)
+	return es
 }
 
 // WithCurveType sets a curve along the envelope that shapes the segment.

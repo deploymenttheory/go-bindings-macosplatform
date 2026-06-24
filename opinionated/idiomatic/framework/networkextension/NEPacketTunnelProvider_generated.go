@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -89,6 +90,23 @@ func (nptp *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, re
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// CancelTunnelWithError stop the network tunnel from the Packet Tunnel Provider.
+func (nptp *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("cancelTunnelWithError:"), error_)
+}
+
+// CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate create a TCP connection through the current tunnel.
+func (nptp *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
+	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("createTCPConnectionThroughTunnelToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tLSParameters), objref.IDOf(delegate))
+	return NWTCPConnectionFromID(_r)
+}
+
+// CreateUDPSessionThroughTunnelToEndpointFromEndpoint creates a UDP session through the current tunnel.
+func (nptp *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
+	_r := objc.Send[objc.ID](objref.IDOf(nptp), objc.RegisterName("createUDPSessionThroughTunnelToEndpoint:fromEndpoint:"), remoteEndpoint, objref.IDOf(localEndpoint))
+	return NWUDPSessionFromID(_r)
 }
 
 // PacketFlow returns an NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.

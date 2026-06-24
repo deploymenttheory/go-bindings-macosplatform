@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,12 @@ func NewPurgeableData() *PurgeableData {
 // WithLength sets the number of bytes contained in the mutable data object.
 func (pd *PurgeableData) WithLength(length int) *PurgeableData {
 	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setLength:"), length)
+	return pd
+}
+
+// WithObservationInfo sets the observation info.
+func (pd *PurgeableData) WithObservationInfo(observationInfo unsafe.Pointer) *PurgeableData {
+	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pd
 }
 

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (ukvs *UbiquitousKeyValueStore) String() string {
 func NewUbiquitousKeyValueStore() *UbiquitousKeyValueStore {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUbiquitousKeyValueStore")), objc.RegisterName("new"))
 	return ubiquitousKeyValueStoreAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ukvs *UbiquitousKeyValueStore) WithObservationInfo(observationInfo unsafe.Pointer) *UbiquitousKeyValueStore {
+	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ukvs
 }
 
 // WithScriptingProperties sets the scripting properties.

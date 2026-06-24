@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit obj.Object) *Me
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDoubleValue:unit:"), doubleValue, objref.IDOf(unit))
 	return measurementAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (m *Measurement) WithObservationInfo(observationInfo unsafe.Pointer) *Measurement {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return m
 }
 
 // WithScriptingProperties sets the scripting properties.

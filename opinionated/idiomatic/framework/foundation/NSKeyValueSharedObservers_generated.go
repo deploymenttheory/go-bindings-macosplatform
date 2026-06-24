@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,10 +74,21 @@ func NewKeyValueSharedObservers() *KeyValueSharedObservers {
 	return keyValueSharedObserversAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (kvso *KeyValueSharedObservers) WithObservationInfo(observationInfo unsafe.Pointer) *KeyValueSharedObservers {
+	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return kvso
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (kvso *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
 	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return kvso
+}
+
+// AddSharedObserverForKeyOptionsContext add a new observer to the collection.
+func (kvso *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *Object, key string, options KeyValueObservingOptions, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("addSharedObserver:forKey:options:context:"), objref.IDOf(observer), purego.NSString(key), options, context_)
 }
 
 // Snapshot returns a momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]

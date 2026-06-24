@@ -380,7 +380,7 @@ var (
 	_fnSparseGetStateSize_Double                       func(SparseIterativeMethod, bool, int, int, int) uint
 	_fnSparseGetStateSize_Float                        func(SparseIterativeMethod, bool, int, int, int) uint
 	_fnSparseGetTranspose                              func(SparseMatrix_Double) SparseMatrix_Double
-	_fnSparseIterate                                   func(SparseIterativeMethod, int, unsafe.Pointer, unsafe.Pointer, objc.Block, DenseMatrix_Double, DenseMatrix_Double, DenseMatrix_Double, SparseOpaquePreconditioner_Double)
+	_fnSparseIterate                                   func(SparseIterativeMethod, int, *bool, unsafe.Pointer, objc.Block, DenseMatrix_Double, DenseMatrix_Double, DenseMatrix_Double, SparseOpaquePreconditioner_Double)
 	_fnSparseLSMR                                      func() SparseIterativeMethod
 	_fnSparseMultiply                                  func(SparseMatrix_Double, DenseMatrix_Double, DenseMatrix_Double)
 	_fnSparseMultiplyAdd                               func(SparseMatrix_Double, DenseMatrix_Double, DenseMatrix_Double)
@@ -392,10 +392,10 @@ var (
 	__DenseMatrixFromVector_Complex_Float              func(DenseVector_Complex_Float) DenseMatrix_Complex_Float
 	__DenseMatrixFromVector_Double                     func(DenseVector_Double) DenseMatrix_Double
 	__DenseMatrixFromVector_Float                      func(DenseVector_Float) DenseMatrix_Float
-	__SparseCGIterate_Complex_Double                   func(*SparseCGOptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
-	__SparseCGIterate_Complex_Float                    func(*SparseCGOptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
-	__SparseCGIterate_Double                           func(*SparseCGOptions, int, string, unsafe.Pointer, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
-	__SparseCGIterate_Float                            func(*SparseCGOptions, int, string, unsafe.Pointer, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
+	__SparseCGIterate_Complex_Double                   func(*SparseCGOptions, int, string, *bool, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
+	__SparseCGIterate_Complex_Float                    func(*SparseCGOptions, int, string, *bool, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
+	__SparseCGIterate_Double                           func(*SparseCGOptions, int, string, *bool, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
+	__SparseCGIterate_Float                            func(*SparseCGOptions, int, string, *bool, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
 	__SparseCGSolve_Complex_Double                     func(*SparseCGOptions, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, objc.Block, *SparseOpaquePreconditioner_Complex_Double) accelerate.SparseIterativeStatus_t
 	__SparseCGSolve_Complex_Float                      func(*SparseCGOptions, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, objc.Block, *SparseOpaquePreconditioner_Complex_Float) accelerate.SparseIterativeStatus_t
 	__SparseCGSolve_Double                             func(*SparseCGOptions, *DenseMatrix_Double, *DenseMatrix_Double, objc.Block, *SparseOpaquePreconditioner_Double) accelerate.SparseIterativeStatus_t
@@ -438,10 +438,10 @@ var (
 	__SparseFromAttributeComplex                       func(SparseAttributesComplex_t) SparseAttributes_t
 	__SparseFromKindComplex                            func(accelerate.SparseKind_t) accelerate.SparseKind_t
 	__SparseFromStructureComplex                       func(SparseMatrixStructureComplex) SparseMatrixStructure
-	__SparseGMRESIterate_Complex_Double                func(*SparseGMRESOptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
-	__SparseGMRESIterate_Complex_Float                 func(*SparseGMRESOptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
-	__SparseGMRESIterate_Double                        func(*SparseGMRESOptions, int, string, unsafe.Pointer, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
-	__SparseGMRESIterate_Float                         func(*SparseGMRESOptions, int, string, unsafe.Pointer, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
+	__SparseGMRESIterate_Complex_Double                func(*SparseGMRESOptions, int, string, *bool, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
+	__SparseGMRESIterate_Complex_Float                 func(*SparseGMRESOptions, int, string, *bool, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
+	__SparseGMRESIterate_Double                        func(*SparseGMRESOptions, int, string, *bool, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
+	__SparseGMRESIterate_Float                         func(*SparseGMRESOptions, int, string, *bool, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
 	__SparseGMRESSolve_Complex_Double                  func(*SparseGMRESOptions, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, objc.Block, *SparseOpaquePreconditioner_Complex_Double) accelerate.SparseIterativeStatus_t
 	__SparseGMRESSolve_Complex_Float                   func(*SparseGMRESOptions, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, objc.Block, *SparseOpaquePreconditioner_Complex_Float) accelerate.SparseIterativeStatus_t
 	__SparseGMRESSolve_Double                          func(*SparseGMRESOptions, *DenseMatrix_Double, *DenseMatrix_Double, objc.Block, *SparseOpaquePreconditioner_Double) accelerate.SparseIterativeStatus_t
@@ -463,10 +463,10 @@ var (
 	__SparseInvalidSubfactor_Complex_Float             func() SparseOpaqueSubfactor_Complex_Float
 	__SparseInvalidSubfactor_Double                    func() SparseOpaqueSubfactor_Double
 	__SparseInvalidSubfactor_Float                     func() SparseOpaqueSubfactor_Float
-	__SparseLSMRIterate_Complex_Double                 func(*SparseLSMROptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
-	__SparseLSMRIterate_Complex_Float                  func(*SparseLSMROptions, int, string, unsafe.Pointer, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
-	__SparseLSMRIterate_Double                         func(*SparseLSMROptions, int, string, unsafe.Pointer, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
-	__SparseLSMRIterate_Float                          func(*SparseLSMROptions, int, string, unsafe.Pointer, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
+	__SparseLSMRIterate_Complex_Double                 func(*SparseLSMROptions, int, string, *bool, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, *SparseOpaquePreconditioner_Complex_Double, objc.Block)
+	__SparseLSMRIterate_Complex_Float                  func(*SparseLSMROptions, int, string, *bool, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, *SparseOpaquePreconditioner_Complex_Float, objc.Block)
+	__SparseLSMRIterate_Double                         func(*SparseLSMROptions, int, string, *bool, *DenseMatrix_Double, *DenseMatrix_Double, *DenseMatrix_Double, *SparseOpaquePreconditioner_Double, objc.Block)
+	__SparseLSMRIterate_Float                          func(*SparseLSMROptions, int, string, *bool, *DenseMatrix_Float, *DenseMatrix_Float, *DenseMatrix_Float, *SparseOpaquePreconditioner_Float, objc.Block)
 	__SparseLSMRSolve_Complex_Double                   func(*SparseLSMROptions, *DenseMatrix_Complex_Double, *DenseMatrix_Complex_Double, objc.Block, *SparseOpaquePreconditioner_Complex_Double) accelerate.SparseIterativeStatus_t
 	__SparseLSMRSolve_Complex_Float                    func(*SparseLSMROptions, *DenseMatrix_Complex_Float, *DenseMatrix_Complex_Float, objc.Block, *SparseOpaquePreconditioner_Complex_Float) accelerate.SparseIterativeStatus_t
 	__SparseLSMRSolve_Double                           func(*SparseLSMROptions, *DenseMatrix_Double, *DenseMatrix_Double, objc.Block, *SparseOpaquePreconditioner_Double) accelerate.SparseIterativeStatus_t
@@ -3599,8 +3599,8 @@ var (
 	_vDSP_biquadm_DestroySetupD          func(unsafe.Pointer)
 	_vDSP_biquadm_ResetState             func(unsafe.Pointer)
 	_vDSP_biquadm_ResetStateD            func(unsafe.Pointer)
-	_vDSP_biquadm_SetActiveFilters       func(unsafe.Pointer, unsafe.Pointer)
-	_vDSP_biquadm_SetActiveFiltersD      func(unsafe.Pointer, unsafe.Pointer)
+	_vDSP_biquadm_SetActiveFilters       func(unsafe.Pointer, *bool)
+	_vDSP_biquadm_SetActiveFiltersD      func(unsafe.Pointer, *bool)
 	_vDSP_biquadm_SetCoefficientsDouble  func(unsafe.Pointer, *float64, uint, uint, uint, uint)
 	_vDSP_biquadm_SetCoefficientsDoubleD func(unsafe.Pointer, *float64, uint, uint, uint, uint)
 	_vDSP_biquadm_SetCoefficientsSingle  func(unsafe.Pointer, *float32, uint, uint, uint, uint)
@@ -6029,7 +6029,7 @@ func SparseGetTranspose(matrix SparseMatrix_Double) SparseMatrix_Double {
 	return _fnSparseGetTranspose(matrix)
 }
 
-func SparseIterate(method SparseIterativeMethod, iteration int, converged unsafe.Pointer, state unsafe.Pointer, applyOperator objc.Block, b DenseMatrix_Double, r DenseMatrix_Double, x DenseMatrix_Double, preconditioner SparseOpaquePreconditioner_Double) {
+func SparseIterate(method SparseIterativeMethod, iteration int, converged *bool, state unsafe.Pointer, applyOperator objc.Block, b DenseMatrix_Double, r DenseMatrix_Double, x DenseMatrix_Double, preconditioner SparseOpaquePreconditioner_Double) {
 	_fnSparseIterate(method, iteration, converged, state, applyOperator, b, r, x, preconditioner)
 }
 
@@ -6082,22 +6082,22 @@ func DenseMatrixFromVectorFloat(x DenseVector_Float) DenseMatrix_Float {
 }
 
 // C function: _SparseCGIterate_Complex_Double
-func SparseCGIterateComplexDouble(options *SparseCGOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
+func SparseCGIterateComplexDouble(options *SparseCGOptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
 	__SparseCGIterate_Complex_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseCGIterate_Complex_Float
-func SparseCGIterateComplexFloat(options *SparseCGOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
+func SparseCGIterateComplexFloat(options *SparseCGOptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
 	__SparseCGIterate_Complex_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseCGIterate_Double
-func SparseCGIterateDouble(options *SparseCGOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
+func SparseCGIterateDouble(options *SparseCGOptions, iteration int, state string, converged *bool, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
 	__SparseCGIterate_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseCGIterate_Float
-func SparseCGIterateFloat(options *SparseCGOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
+func SparseCGIterateFloat(options *SparseCGOptions, iteration int, state string, converged *bool, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
 	__SparseCGIterate_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
@@ -6312,22 +6312,22 @@ func SparseFromStructureComplex(k SparseMatrixStructureComplex) SparseMatrixStru
 }
 
 // C function: _SparseGMRESIterate_Complex_Double
-func SparseGMRESIterateComplexDouble(options *SparseGMRESOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
+func SparseGMRESIterateComplexDouble(options *SparseGMRESOptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
 	__SparseGMRESIterate_Complex_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseGMRESIterate_Complex_Float
-func SparseGMRESIterateComplexFloat(options *SparseGMRESOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
+func SparseGMRESIterateComplexFloat(options *SparseGMRESOptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
 	__SparseGMRESIterate_Complex_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseGMRESIterate_Double
-func SparseGMRESIterateDouble(options *SparseGMRESOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
+func SparseGMRESIterateDouble(options *SparseGMRESOptions, iteration int, state string, converged *bool, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
 	__SparseGMRESIterate_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseGMRESIterate_Float
-func SparseGMRESIterateFloat(options *SparseGMRESOptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
+func SparseGMRESIterateFloat(options *SparseGMRESOptions, iteration int, state string, converged *bool, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
 	__SparseGMRESIterate_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
@@ -6437,22 +6437,22 @@ func SparseInvalidSubfactorFloat() SparseOpaqueSubfactor_Float {
 }
 
 // C function: _SparseLSMRIterate_Complex_Double
-func SparseLSMRIterateComplexDouble(options *SparseLSMROptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
+func SparseLSMRIterateComplexDouble(options *SparseLSMROptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Double, b *DenseMatrix_Complex_Double, r *DenseMatrix_Complex_Double, preconditioner *SparseOpaquePreconditioner_Complex_Double, applyOperator objc.Block) {
 	__SparseLSMRIterate_Complex_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseLSMRIterate_Complex_Float
-func SparseLSMRIterateComplexFloat(options *SparseLSMROptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
+func SparseLSMRIterateComplexFloat(options *SparseLSMROptions, iteration int, state string, converged *bool, x *DenseMatrix_Complex_Float, b *DenseMatrix_Complex_Float, r *DenseMatrix_Complex_Float, preconditioner *SparseOpaquePreconditioner_Complex_Float, applyOperator objc.Block) {
 	__SparseLSMRIterate_Complex_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseLSMRIterate_Double
-func SparseLSMRIterateDouble(options *SparseLSMROptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
+func SparseLSMRIterateDouble(options *SparseLSMROptions, iteration int, state string, converged *bool, x *DenseMatrix_Double, b *DenseMatrix_Double, r *DenseMatrix_Double, preconditioner *SparseOpaquePreconditioner_Double, applyOperator objc.Block) {
 	__SparseLSMRIterate_Double(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 // C function: _SparseLSMRIterate_Float
-func SparseLSMRIterateFloat(options *SparseLSMROptions, iteration int, state string, converged unsafe.Pointer, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
+func SparseLSMRIterateFloat(options *SparseLSMROptions, iteration int, state string, converged *bool, x *DenseMatrix_Float, b *DenseMatrix_Float, r *DenseMatrix_Float, preconditioner *SparseOpaquePreconditioner_Float, applyOperator objc.Block) {
 	__SparseLSMRIterate_Float(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
@@ -16349,12 +16349,12 @@ func VDSPBiquadmResetStateD(__setup unsafe.Pointer) {
 }
 
 // C function: vDSP_biquadm_SetActiveFilters
-func VDSPBiquadmSetActiveFilters(__setup unsafe.Pointer, __filter_states unsafe.Pointer) {
+func VDSPBiquadmSetActiveFilters(__setup unsafe.Pointer, __filter_states *bool) {
 	_vDSP_biquadm_SetActiveFilters(__setup, __filter_states)
 }
 
 // C function: vDSP_biquadm_SetActiveFiltersD
-func VDSPBiquadmSetActiveFiltersD(__setup unsafe.Pointer, __filter_states unsafe.Pointer) {
+func VDSPBiquadmSetActiveFiltersD(__setup unsafe.Pointer, __filter_states *bool) {
 	_vDSP_biquadm_SetActiveFiltersD(__setup, __filter_states)
 }
 

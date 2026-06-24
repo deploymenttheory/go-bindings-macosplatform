@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -123,6 +125,24 @@ func DescriptorWithKernelSizesPaddingStyle(kernelSizes []obj.Object, paddingStyl
 func MPSGraphSingleGateRNNDescriptorDescriptor() *GraphSingleGateRNNDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphSingleGateRNNDescriptor")), objc.RegisterName("descriptor"))
 	return GraphSingleGateRNNDescriptorFromID(_r)
+}
+
+// DescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant creates a stencil operation descriptor with given values.
+func DescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode GraphReductionMode, offsets unsafe.Pointer, strides unsafe.Pointer, dilationRates unsafe.Pointer, explicitPadding unsafe.Pointer, boundaryMode GraphPaddingMode, paddingStyle GraphPaddingStyle, paddingConstant float32) *GraphStencilOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphStencilOpDescriptor")), objc.RegisterName("descriptorWithReductionMode:offsets:strides:dilationRates:explicitPadding:boundaryMode:paddingStyle:paddingConstant:"), reductionMode, offsets, strides, dilationRates, explicitPadding, boundaryMode, paddingStyle, paddingConstant)
+	return GraphStencilOpDescriptorFromID(_r)
+}
+
+// DescriptorWithOffsetsExplicitPadding creates a stencil operation descriptor with default values.
+func DescriptorWithOffsetsExplicitPadding(offsets unsafe.Pointer, explicitPadding unsafe.Pointer) *GraphStencilOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphStencilOpDescriptor")), objc.RegisterName("descriptorWithOffsets:explicitPadding:"), offsets, explicitPadding)
+	return GraphStencilOpDescriptorFromID(_r)
+}
+
+// DescriptorWithExplicitPadding creates a stencil operation descriptor with default values.
+func DescriptorWithExplicitPadding(explicitPadding unsafe.Pointer) *GraphStencilOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphStencilOpDescriptor")), objc.RegisterName("descriptorWithExplicitPadding:"), explicitPadding)
+	return GraphStencilOpDescriptorFromID(_r)
 }
 
 // MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle creates a stencil operation descriptor with default values.

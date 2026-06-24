@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -120,5 +121,11 @@ func (at *AudioTime) SampleTime() int64 {
 // SampleRate returns the sample rate at which sampleTime is being expressed.
 func (at *AudioTime) SampleRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(at), objc.RegisterName("sampleRate"))
+	return _r
+}
+
+// AudioTimeStamp returns the time expressed as an AudioTimeStamp structure. This may be useful for compatibility with lower-level CoreAudio and AudioToolbox API's.
+func (at *AudioTime) AudioTimeStamp() coreaudiotypes.AudioTimeStamp {
+	_r := objc.Send[coreaudiotypes.AudioTimeStamp](objref.IDOf(at), objc.RegisterName("audioTimeStamp"))
 	return _r
 }

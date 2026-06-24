@@ -247,8 +247,8 @@ func (m *Mapper) resolvePointer(n string, ctx Context, imports ImportSet, depth 
 		return "string"
 	}
 
-	// BOOL* → *bool
-	if base == "BOOL" || base == "_Bool" {
+	// BOOL* → *bool (BOOL is _Bool on arm64; C99 spells it "bool" via stdbool.h)
+	if base == "BOOL" || base == "_Bool" || base == "bool" {
 		return "*bool"
 	}
 

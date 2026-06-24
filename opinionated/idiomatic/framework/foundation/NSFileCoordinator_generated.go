@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -81,6 +82,12 @@ func (fc *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvide
 	return fc
 }
 
+// WithObservationInfo sets the observation info.
+func (fc *FileCoordinator) WithObservationInfo(observationInfo unsafe.Pointer) *FileCoordinator {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fc
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (fc *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
 	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -104,6 +111,69 @@ func (fc *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx contex
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// CoordinateReadingItemAtURLOptionsErrorByAccessor initiates a read operation on a single file or directory using the specified options.
+//
+// CoordinateReadingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
+func (fc *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options FileCoordinatorReadingOptions, outError unsafe.Pointer) (result *URL, err error) {
+	type _result struct {
+		val *URL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = URLFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("coordinateReadingItemAtURL:options:error:byAccessor:"), rt.FileURL(url), options, outError, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URL
+		return _zero, ctx.Err()
+	}
+}
+
+// CoordinateWritingItemAtURLOptionsErrorByAccessor initiates a write operation on a single file or directory using the specified options.
+//
+// CoordinateWritingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
+func (fc *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options FileCoordinatorWritingOptions, outError unsafe.Pointer) (result *URL, err error) {
+	type _result struct {
+		val *URL
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _o _result
+		_o.val = URLFromID(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("coordinateWritingItemAtURL:options:error:byAccessor:"), rt.FileURL(url), options, outError, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URL
+		return _zero, ctx.Err()
+	}
+}
+
+// CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor initiates a read operation that contains a follow-up write operation.
+func (fc *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions FileCoordinatorReadingOptions, writingURL string, writingOptions FileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:"), rt.FileURL(readingURL), readingOptions, rt.FileURL(writingURL), writingOptions, outError, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { readerWriter(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor initiates a write operation that involves a secondary write operation.
+func (fc *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 FileCoordinatorWritingOptions, url2 string, options2 FileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("coordinateWritingItemAtURL:options:writingItemAtURL:options:error:byAccessor:"), rt.FileURL(url1), options1, rt.FileURL(url2), options2, outError, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { writer(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor prepare to read or write from multiple files in a single batch operation.
+func (fc *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs []*URL, readingOptions FileCoordinatorReadingOptions, writingURLs []*URL, writingOptions FileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(func())) {
+	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("prepareForReadingItemsAtURLs:options:writingItemsAtURLs:options:error:byAccessor:"), purego.SliceToNSArray(readingURLs, func(_v *URL) objc.ID { return objref.IDOf(_v) }), readingOptions, purego.SliceToNSArray(writingURLs, func(_v *URL) objc.ID { return objref.IDOf(_v) }), writingOptions, outError, objc.NewBlock(func(_ objc.Block, _b0 func()) { batchAccessor(_b0) }))
 }
 
 // ItemAtURLWillMoveToURL announces that your app is moving a file to a new URL.

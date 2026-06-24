@@ -193,6 +193,66 @@ func (n *Node) WithCategoryBitMask(categoryBitMask int) *Node {
 	return n
 }
 
+// WithSimdTransform sets the transform applied to the node relative to its parent. Animatable.
+func (n *Node) WithSimdTransform(simdTransform unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdTransform:"), simdTransform)
+	return n
+}
+
+// WithSimdPosition sets the translation applied to the node. Animatable.
+func (n *Node) WithSimdPosition(simdPosition unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdPosition:"), simdPosition)
+	return n
+}
+
+// WithSimdRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (n *Node) WithSimdRotation(simdRotation unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdRotation:"), simdRotation)
+	return n
+}
+
+// WithSimdOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (n *Node) WithSimdOrientation(simdOrientation unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdOrientation:"), simdOrientation)
+	return n
+}
+
+// WithSimdEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (n *Node) WithSimdEulerAngles(simdEulerAngles unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdEulerAngles:"), simdEulerAngles)
+	return n
+}
+
+// WithSimdScale sets the scale factor applied to the node. Animatable.
+func (n *Node) WithSimdScale(simdScale unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdScale:"), simdScale)
+	return n
+}
+
+// WithSimdPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
+func (n *Node) WithSimdPivot(simdPivot unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdPivot:"), simdPivot)
+	return n
+}
+
+// WithSimdWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (n *Node) WithSimdWorldPosition(simdWorldPosition unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldPosition:"), simdWorldPosition)
+	return n
+}
+
+// WithSimdWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (n *Node) WithSimdWorldOrientation(simdWorldOrientation unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldOrientation:"), simdWorldOrientation)
+	return n
+}
+
+// WithSimdWorldTransform sets the world transform applied to the node.
+func (n *Node) WithSimdWorldTransform(simdWorldTransform unsafe.Pointer) *Node {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setSimdWorldTransform:"), simdWorldTransform)
+	return n
+}
+
 // WithFocusBehavior sets the focus behavior for a node.
 func (n *Node) WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setFocusBehavior:"), focusBehavior)
@@ -412,6 +472,31 @@ func (n *Node) IsPaused() bool {
 func (n *Node) CategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("categoryBitMask"))
 	return _r
+}
+
+// SimdLookAt changes the node’s orientation so that its local forward vector points toward the specified location.
+func (n *Node) SimdLookAt(worldTarget unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLookAt:"), worldTarget)
+}
+
+// SimdLookAtUpLocalFront changes the node’s orientation so that the specified forward vector points toward the specified location.
+func (n *Node) SimdLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLookAt:up:localFront:"), worldTarget, worldUp, localFront)
+}
+
+// SimdLocalTranslateBy changes the node’s position relative to its current position.
+func (n *Node) SimdLocalTranslateBy(translation unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLocalTranslateBy:"), translation)
+}
+
+// SimdLocalRotateBy changes the node’s orientation relative to its current orientation.
+func (n *Node) SimdLocalRotateBy(rotation unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdLocalRotateBy:"), rotation)
+}
+
+// SimdRotateByAroundTarget changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
+func (n *Node) SimdRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("simdRotateBy:aroundTarget:"), worldRotation, worldTarget)
 }
 
 // FocusBehavior returns the focus behavior.

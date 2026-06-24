@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -219,6 +221,12 @@ func (usc *URLSessionConfiguration) WithUsesClassicLoadingMode(usesClassicLoadin
 // WithEnablesEarlyData sets the enables early data.
 func (usc *URLSessionConfiguration) WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration {
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setEnablesEarlyData:"), enablesEarlyData)
+	return usc
+}
+
+// WithObservationInfo sets the observation info.
+func (usc *URLSessionConfiguration) WithObservationInfo(observationInfo unsafe.Pointer) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return usc
 }
 

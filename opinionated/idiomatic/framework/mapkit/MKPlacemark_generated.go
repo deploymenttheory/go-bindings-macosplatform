@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,24 @@ func (p *Placemark) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// NewPlacemark creates a new Placemark.
-func NewPlacemark() *Placemark {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("new"))
+// NewPlacemarkWithCoordinate creates and returns a placemark object using the specified coordinate.
+func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
+	return placemarkAdopt(_id)
+}
+
+// NewPlacemarkWithCoordinateAddressDictionary creates and returns a placemark object using the specified coordinate and Address Book dictionary.
+func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary obj.Object) *Placemark {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, objref.IDOf(addressDictionary))
+	return placemarkAdopt(_id)
+}
+
+// NewPlacemarkWithCoordinatePostalAddress creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.
+func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress obj.Object) *Placemark {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:postalAddress:"), coordinate, objref.IDOf(postalAddress))
 	return placemarkAdopt(_id)
 }
 

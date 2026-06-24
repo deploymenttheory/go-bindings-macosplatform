@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewArchiverForWritingWithMutableData(mdata *MutableData) *Archiver {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(mdata))
 	return archiverAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (a *Archiver) WithObservationInfo(observationInfo unsafe.Pointer) *Archiver {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return a
 }
 
 // WithScriptingProperties sets the scripting properties.

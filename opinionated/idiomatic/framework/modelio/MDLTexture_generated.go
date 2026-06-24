@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,13 @@ func (t *Texture) IsKind(className string) bool {
 // under fmt.
 func (t *Texture) String() string {
 	return rt.Description(objref.IDOf(t))
+}
+
+// NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube initializes a texture object with the specified image data and properties.
+func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData obj.Object, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount int, channelEncoding TextureChannelEncoding, isCube bool) *Texture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), objref.IDOf(pixelData), topLeftOrigin, purego.NSString(name), dimensions, rowStride, channelCount, channelEncoding, isCube)
+	return textureAdopt(_id)
 }
 
 // WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.

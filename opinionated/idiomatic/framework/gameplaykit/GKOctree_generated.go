@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,18 @@ func (o *Octree) String() string {
 func NewOctree() *Octree {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKOctree")), objc.RegisterName("new"))
 	return octreeAdopt(_id)
+}
+
+// AddElementWithPoint adds an object to the tree corresponding to the specified point in 3D space.
+func (o *Octree) AddElementWithPoint(element obj.Object, point unsafe.Pointer) *OctreeNode {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addElement:withPoint:"), objref.IDOf(element), point)
+	return OctreeNodeFromID(_r)
+}
+
+// ElementsAtPoint returns all objects whose corresponding locations overlap the specified point.
+func (o *Octree) ElementsAtPoint(point unsafe.Pointer) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("elementsAtPoint:"), point)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RemoveElement searches for the specified object and removes it from the tree.

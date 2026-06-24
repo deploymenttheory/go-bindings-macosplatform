@@ -117,6 +117,11 @@ func (s *Session) SendDataToAllPeersWithDataMode(data obj.Object, mode SendDataM
 	return nil
 }
 
+// SetDataReceiveHandlerWithContext sets the object that handles data received from other peers connected to the session.
+func (s *Session) SetDataReceiveHandlerWithContext(handler obj.Object, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDataReceiveHandler:withContext:"), objref.IDOf(handler), context_)
+}
+
 // ConnectToPeerWithTimeout creates a connection to another iOS device.
 func (s *Session) ConnectToPeerWithTimeout(peerID string, timeout float64) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectToPeer:withTimeout:"), purego.NSString(peerID), timeout)

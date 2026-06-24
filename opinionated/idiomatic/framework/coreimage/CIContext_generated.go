@@ -99,9 +99,24 @@ func (c *Context) CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info obj
 	return obj.Wrap(_r)
 }
 
+// RenderToBitmapRowBytesBoundsFormatColorSpace renders to the given bitmap.
+func (c *Context) RenderToBitmapRowBytesBoundsFormatColorSpace(image *Image, data unsafe.Pointer, rowBytes int, bounds corefoundation.CGRect, format int, colorSpace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toBitmap:rowBytes:bounds:format:colorSpace:"), objref.IDOf(image), data, rowBytes, bounds, format, objref.IDOf(colorSpace))
+}
+
 // RenderToIOSurfaceBoundsColorSpace renders a region of an image into an IOSurface object.
 func (c *Context) RenderToIOSurfaceBoundsColorSpace(image *Image, surface obj.Object, bounds corefoundation.CGRect, colorSpace obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toIOSurface:bounds:colorSpace:"), objref.IDOf(image), objref.IDOf(surface), bounds, objref.IDOf(colorSpace))
+}
+
+// RenderToCVPixelBuffer renders an image into a pixel buffer.
+func (c *Context) RenderToCVPixelBuffer(image *Image, buffer unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toCVPixelBuffer:"), objref.IDOf(image), buffer)
+}
+
+// RenderToCVPixelBufferBoundsColorSpace renders a region of an image into a pixel buffer.
+func (c *Context) RenderToCVPixelBufferBoundsColorSpace(image *Image, buffer unsafe.Pointer, bounds corefoundation.CGRect, colorSpace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toCVPixelBuffer:bounds:colorSpace:"), objref.IDOf(image), buffer, bounds, objref.IDOf(colorSpace))
 }
 
 // ReclaimResources runs the garbage collector to reclaim any resources that the context no longer requires.
@@ -153,6 +168,11 @@ func (c *Context) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats
 // CalculateHDRStatsForIOSurface given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface’s attachments to store the values.
 func (c *Context) CalculateHDRStatsForIOSurface(surface obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForIOSurface:"), objref.IDOf(surface))
+}
+
+// CalculateHDRStatsForCVPixelBuffer given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffer’s attachments to store the values.
+func (c *Context) CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForCVPixelBuffer:"), buffer)
 }
 
 // CalculateHDRStatsForCGImage given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values.

@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,30 @@ func NewGraphStencilOpDescriptor() *GraphStencilOpDescriptor {
 // WithReductionMode sets the reduction mode to use within the stencil window.
 func (gsod *GraphStencilOpDescriptor) WithReductionMode(reductionMode GraphReductionMode) *GraphStencilOpDescriptor {
 	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setReductionMode:"), reductionMode)
+	return gsod
+}
+
+// WithOffsets sets an array of length four that determines from which offset to start reading the input tensor.
+func (gsod *GraphStencilOpDescriptor) WithOffsets(offsets unsafe.Pointer) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setOffsets:"), offsets)
+	return gsod
+}
+
+// WithStrides sets the property that defines strides for spatial dimensions.
+func (gsod *GraphStencilOpDescriptor) WithStrides(strides unsafe.Pointer) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setStrides:"), strides)
+	return gsod
+}
+
+// WithDilationRates sets the property that defines dilation rates for spatial dimensions.
+func (gsod *GraphStencilOpDescriptor) WithDilationRates(dilationRates unsafe.Pointer) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setDilationRates:"), dilationRates)
+	return gsod
+}
+
+// WithExplicitPadding sets the property that defines padding values for spatial dimensions.
+func (gsod *GraphStencilOpDescriptor) WithExplicitPadding(explicitPadding unsafe.Pointer) *GraphStencilOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gsod), objc.RegisterName("setExplicitPadding:"), explicitPadding)
 	return gsod
 }
 

@@ -5,6 +5,8 @@
 package externalaccessory
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (a *Accessory) String() string {
 func NewAccessory() *Accessory {
 	_id := objc.Send[objc.ID](objc.ID(_class("EAAccessory")), objc.RegisterName("new"))
 	return accessoryAdopt(_id)
+}
+
+// WithDelegate sets the object that acts as the delegate of the accessory.
+func (a *Accessory) WithDelegate(delegate unsafe.Pointer) *Accessory {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setDelegate:"), delegate)
+	return a
 }
 
 // IsConnected reports whether the object is connected.

@@ -142,6 +142,47 @@ func (e AXValueType) String() string {
 }
 
 // Bitmask — values may be combined with |.
+type PasteboardFlavorFlags int64
+
+const (
+	KPasteboardFlavorNoFlags          PasteboardFlavorFlags = 0
+	KPasteboardFlavorSenderOnly       PasteboardFlavorFlags = 1
+	KPasteboardFlavorSenderTranslated PasteboardFlavorFlags = 2
+	KPasteboardFlavorNotSaved         PasteboardFlavorFlags = 4
+	KPasteboardFlavorRequestOnly      PasteboardFlavorFlags = 8
+	KPasteboardFlavorSystemTranslated PasteboardFlavorFlags = 256
+	KPasteboardFlavorPromised         PasteboardFlavorFlags = 512
+)
+
+// String returns the PasteboardFlavorFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PasteboardFlavorFlags) String() string {
+	var parts []string
+	if e&KPasteboardFlavorSenderOnly != 0 {
+		parts = append(parts, "KPasteboardFlavorSenderOnly")
+	}
+	if e&KPasteboardFlavorSenderTranslated != 0 {
+		parts = append(parts, "KPasteboardFlavorSenderTranslated")
+	}
+	if e&KPasteboardFlavorNotSaved != 0 {
+		parts = append(parts, "KPasteboardFlavorNotSaved")
+	}
+	if e&KPasteboardFlavorRequestOnly != 0 {
+		parts = append(parts, "KPasteboardFlavorRequestOnly")
+	}
+	if e&KPasteboardFlavorSystemTranslated != 0 {
+		parts = append(parts, "KPasteboardFlavorSystemTranslated")
+	}
+	if e&KPasteboardFlavorPromised != 0 {
+		parts = append(parts, "KPasteboardFlavorPromised")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PasteboardSyncFlags int64
 
 const (

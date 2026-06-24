@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -78,6 +80,12 @@ func NewAffineTransformWithTransform(transform *AffineTransform) *AffineTransfor
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAffineTransform")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTransform:"), objref.IDOf(transform))
 	return affineTransformAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (at *AffineTransform) WithObservationInfo(observationInfo unsafe.Pointer) *AffineTransform {
+	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return at
 }
 
 // WithScriptingProperties sets the scripting properties.

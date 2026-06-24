@@ -11,6 +11,12 @@ type CMAcceleration struct {
 	Z float64
 }
 
+// Calibrated magnetic field data and an estimate of the accuracy of the calibration.
+type CMCalibratedMagneticField struct {
+	Field    CMMagneticField
+	Accuracy MagneticFieldCalibrationAccuracy
+}
+
 // A structure containing 3-axis magnetometer data
 type CMMagneticField struct {
 	X float64

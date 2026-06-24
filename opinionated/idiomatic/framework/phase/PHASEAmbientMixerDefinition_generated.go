@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,9 +48,17 @@ func ambientMixerDefinitionAdopt(id objc.ID) *AmbientMixerDefinition {
 	return x
 }
 
-// NewAmbientMixerDefinition creates a new AmbientMixerDefinition.
-func NewAmbientMixerDefinition() *AmbientMixerDefinition {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("new"))
+// NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier creates a named ambient mixer with the given channel layout and orientation.
+func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout obj.Object, orientation unsafe.Pointer, identifier string) *AmbientMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:identifier:"), objref.IDOf(layout), orientation, purego.NSString(identifier))
+	return ambientMixerDefinitionAdopt(_id)
+}
+
+// NewAmbientMixerDefinitionWithChannelLayoutOrientation creates an ambient mixer with the given channel layout and orientation.
+func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout obj.Object, orientation unsafe.Pointer) *AmbientMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEAmbientMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:orientation:"), objref.IDOf(layout), orientation)
 	return ambientMixerDefinitionAdopt(_id)
 }
 

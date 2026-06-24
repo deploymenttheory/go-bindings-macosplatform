@@ -72,6 +72,12 @@ func (ef *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFo
 	return ef
 }
 
+// WithObservationInfo sets the observation info.
+func (ef *EnergyFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *EnergyFormatter {
+	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ef
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ef *EnergyFormatter) WithScriptingProperties(scriptingProperties obj.Object) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

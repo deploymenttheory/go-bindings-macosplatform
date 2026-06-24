@@ -6,6 +6,7 @@ package coremediaio
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +67,18 @@ func ProviderPropertiesWithDictionary(propertiesDictionary obj.Object) *Extensio
 func ScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
 	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionScheduledOutput")), objc.RegisterName("scheduledOutputWithSequenceNumber:hostTimeInNanoseconds:"), sequenceNumber, hostTimeInNanoseconds)
 	return ExtensionScheduledOutputFromID(_r)
+}
+
+// CustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing returns a new a custom clock configuration.
+func CustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier obj.Object, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("customClockConfigurationWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:"), purego.NSString(clockName), objref.IDOf(sourceIdentifier), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
+	return ExtensionStreamCustomClockConfigurationFromID(_r)
+}
+
+// StreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations returns a new stream format with a format description and frame durations.
+func StreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription obj.Object, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations []obj.Object) *ExtensionStreamFormat {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("streamFormatWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:"), objref.IDOf(formatDescription), maxFrameDuration, minFrameDuration, purego.SliceToNSArray(validFrameDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return ExtensionStreamFormatFromID(_r)
 }
 
 // StreamPropertiesWithDictionary returns a new properties object that provides the specified properties and default states.

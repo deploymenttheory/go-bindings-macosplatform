@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -58,6 +60,12 @@ func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUnitConverterLinear")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoefficient:constant:"), coefficient, constant)
 	return unitConverterLinearAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ucl *UnitConverterLinear) WithObservationInfo(observationInfo unsafe.Pointer) *UnitConverterLinear {
+	objc.Send[objc.ID](objref.IDOf(ucl), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ucl
 }
 
 // WithScriptingProperties sets the scripting properties.

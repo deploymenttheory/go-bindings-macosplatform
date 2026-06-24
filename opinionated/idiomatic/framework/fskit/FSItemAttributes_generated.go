@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -135,6 +137,42 @@ func (ia *ItemAttributes) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) 
 // WithInhibitKernelOffloadedIO sets a Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 func (ia *ItemAttributes) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
+	return ia
+}
+
+// WithModifyTime sets the item's last-modified time. This property represents `mtime`, the last time the item's contents changed.
+func (ia *ItemAttributes) WithModifyTime(modifyTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setModifyTime:"), modifyTime)
+	return ia
+}
+
+// WithAddedTime sets the item's added time. This property represents the time the file system added the item to its parent directory.
+func (ia *ItemAttributes) WithAddedTime(addedTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setAddedTime:"), addedTime)
+	return ia
+}
+
+// WithChangeTime sets the item's last-changed time. This property represents `ctime`, the last time the item's metadata changed.
+func (ia *ItemAttributes) WithChangeTime(changeTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setChangeTime:"), changeTime)
+	return ia
+}
+
+// WithAccessTime sets the item's last-accessed time.
+func (ia *ItemAttributes) WithAccessTime(accessTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setAccessTime:"), accessTime)
+	return ia
+}
+
+// WithBirthTime sets the item's creation time.
+func (ia *ItemAttributes) WithBirthTime(birthTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setBirthTime:"), birthTime)
+	return ia
+}
+
+// WithBackupTime sets the item's last-backup time.
+func (ia *ItemAttributes) WithBackupTime(backupTime unsafe.Pointer) *ItemAttributes {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setBackupTime:"), backupTime)
 	return ia
 }
 

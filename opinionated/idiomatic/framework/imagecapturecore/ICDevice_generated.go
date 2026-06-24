@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -69,6 +70,12 @@ func (d *Device) IsKind(className string) bool {
 // under fmt.
 func (d *Device) String() string {
 	return rt.Description(objref.IDOf(d))
+}
+
+// WithAutolaunchApplicationPath sets the file system path of an application to launch automatically when this device is added.
+func (d *Device) WithAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer) *Device {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setAutolaunchApplicationPath:"), autolaunchApplicationPath)
+	return d
 }
 
 // RequestOpenSession requests to open a session on the device.

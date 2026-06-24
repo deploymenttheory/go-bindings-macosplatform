@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,6 +82,31 @@ func (ibrc *IOBluetoothRFCOMMChannel) MTU() uint16 {
 func (ibrc *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isTransmissionPaused"))
 	return _r
+}
+
+// WriteLengthSleep sends a block of data in the channel syncronously.
+func (ibrc *IOBluetoothRFCOMMChannel) WriteLengthSleep(data unsafe.Pointer, length uint16, sleep bool) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("write:length:sleep:"), data, length, sleep)
+	return _r
+}
+
+// WriteAsyncLengthRefcon sends a block of data in the channel asynchronously.
+func (ibrc *IOBluetoothRFCOMMChannel) WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeAsync:length:refcon:"), data, length, refcon)
+	return _r
+}
+
+// WriteSyncLength sends a block of data in the channel synchronously.
+func (ibrc *IOBluetoothRFCOMMChannel) WriteSyncLength(data unsafe.Pointer, length uint16) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeSync:length:"), data, length)
+	return _r
+}
+
+// WriteSimpleLengthSleepBytesSent sends a block of data in the channel.
+func (ibrc *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool) (result int, numBytesSent int) {
+	var _out0 int
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("writeSimple:length:sleep:bytesSent:"), data, length, sleep, unsafe.Pointer(&_out0))
+	return _r, _out0
 }
 
 // SetSerialParametersDataBitsParityStopBits changes the parameters of the serial connection.

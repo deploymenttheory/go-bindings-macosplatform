@@ -30,3 +30,29 @@ func (e Tcl_PathType) String() string {
 		return fmt.Sprintf("Tcl_PathType(%d)", int64(e))
 	}
 }
+
+type Tcl_ValueType int64
+
+const (
+	TCL_INT      Tcl_ValueType = 0
+	TCL_DOUBLE   Tcl_ValueType = 1
+	TCL_EITHER   Tcl_ValueType = 2
+	TCL_WIDE_INT Tcl_ValueType = 3
+)
+
+// String returns the Tcl_ValueType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tcl_ValueType) String() string {
+	switch e {
+	case TCL_INT:
+		return "TCL_INT"
+	case TCL_DOUBLE:
+		return "TCL_DOUBLE"
+	case TCL_EITHER:
+		return "TCL_EITHER"
+	case TCL_WIDE_INT:
+		return "TCL_WIDE_INT"
+	default:
+		return fmt.Sprintf("Tcl_ValueType(%d)", int64(e))
+	}
+}

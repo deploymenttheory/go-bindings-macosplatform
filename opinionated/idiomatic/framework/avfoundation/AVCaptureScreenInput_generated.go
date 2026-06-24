@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -59,6 +60,12 @@ func NewCaptureScreenInputWithDisplayID(displayID uint32) *CaptureScreenInput {
 	return captureScreenInputAdopt(_id)
 }
 
+// WithMinFrameDuration sets the screen input’s minimum frame duration.
+func (csi *CaptureScreenInput) WithMinFrameDuration(minFrameDuration coremedia.CMTime) *CaptureScreenInput {
+	objc.Send[objc.ID](objref.IDOf(csi), objc.RegisterName("setMinFrameDuration:"), minFrameDuration)
+	return csi
+}
+
 // WithCropRect sets indicates the bounding rectangle of the screen area to be captured, in pixels.
 func (csi *CaptureScreenInput) WithCropRect(cropRect corefoundation.CGRect) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(csi), objc.RegisterName("setCropRect:"), cropRect)
@@ -87,6 +94,12 @@ func (csi *CaptureScreenInput) WithCapturesCursor(capturesCursor bool) *CaptureS
 func (csi *CaptureScreenInput) WithRemovesDuplicateFrames(removesDuplicateFrames bool) *CaptureScreenInput {
 	objc.Send[objc.ID](objref.IDOf(csi), objc.RegisterName("setRemovesDuplicateFrames:"), removesDuplicateFrames)
 	return csi
+}
+
+// MinFrameDuration returns a property indicating the screen input's minimum frame duration. An AVCaptureScreenInput's minFrameDuration is the reciprocal of its maximum frame rate. This property may be used to request a maximum frame rate at which the input produces video frames. The requested rate may not be achievable due to overall bandwidth, so actual frame rates may be lower.
+func (csi *CaptureScreenInput) MinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(csi), objc.RegisterName("minFrameDuration"))
+	return _r
 }
 
 // CropRect returns a property indicating the bounding rectangle of the screen area to be captured in points. By default, AVCaptureScreenInput captures the entire area of the displayID with which it is associated. To limit the capture rectangle to a subsection of the screen, set the cropRect property, which defines a smaller section of the screen in the screen's coordinate system. The origin (0,0) is the bottom-left corner of the screen.

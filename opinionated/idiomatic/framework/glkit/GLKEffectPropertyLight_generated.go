@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,36 @@ func NewEffectPropertyLight() *EffectPropertyLight {
 // WithEnabled sets a Boolean value that indicates whether calculations should be performed on this light.
 func (epl *EffectPropertyLight) WithEnabled(enabled uint8) *EffectPropertyLight {
 	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setEnabled:"), enabled)
+	return epl
+}
+
+// WithPosition sets the position of the light in world coordinates.
+func (epl *EffectPropertyLight) WithPosition(position unsafe.Pointer) *EffectPropertyLight {
+	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setPosition:"), position)
+	return epl
+}
+
+// WithAmbientColor sets the ambient portion of the light.
+func (epl *EffectPropertyLight) WithAmbientColor(ambientColor unsafe.Pointer) *EffectPropertyLight {
+	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setAmbientColor:"), ambientColor)
+	return epl
+}
+
+// WithDiffuseColor sets the diffuse portion of the light.
+func (epl *EffectPropertyLight) WithDiffuseColor(diffuseColor unsafe.Pointer) *EffectPropertyLight {
+	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setDiffuseColor:"), diffuseColor)
+	return epl
+}
+
+// WithSpecularColor sets the specular portion of the light.
+func (epl *EffectPropertyLight) WithSpecularColor(specularColor unsafe.Pointer) *EffectPropertyLight {
+	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setSpecularColor:"), specularColor)
+	return epl
+}
+
+// WithSpotDirection sets a vector indicating the direction the spotlight is projecting.
+func (epl *EffectPropertyLight) WithSpotDirection(spotDirection unsafe.Pointer) *EffectPropertyLight {
+	objc.Send[objc.ID](objref.IDOf(epl), objc.RegisterName("setSpotDirection:"), spotDirection)
 	return epl
 }
 

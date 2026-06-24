@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,42 @@ func NewAnimatedVector4() *AnimatedVector4 {
 func (av *AnimatedVector4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4 {
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setInterpolation:"), interpolation)
 	return av
+}
+
+// SetFloat4AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) SetFloat4AtTime(value unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setFloat4:atTime:"), value, time_)
+}
+
+// SetDouble4AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) SetDouble4AtTime(value unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDouble4:atTime:"), value, time_)
+}
+
+// ResetWithFloat4ArrayAtTimesCount resets with float4 array at times count.
+func (av *AnimatedVector4) ResetWithFloat4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("resetWithFloat4Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
+	return _out0
+}
+
+// ResetWithDouble4ArrayAtTimesCount resets with double4 array at times count.
+func (av *AnimatedVector4) ResetWithDouble4ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("resetWithDouble4Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
+	return _out0
+}
+
+// GetFloat4ArrayMaxCount wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) GetFloat4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("getFloat4Array:maxCount:"), valuesArray, maxCount)
+	return _r
+}
+
+// GetDouble4ArrayMaxCount wraps the corresponding Objective-C method.
+func (av *AnimatedVector4) GetDouble4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("getDouble4Array:maxCount:"), valuesArray, maxCount)
+	return _r
 }
 
 var _ AnimatedValueProvider = (*AnimatedVector4)(nil)

@@ -5,7 +5,10 @@
 package coremediaio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -42,6 +45,22 @@ func CMIODeviceStopStream(deviceID int, streamID int) error {
 	return nil
 }
 
+var _fnCMIOStreamClockCreate func(objc.ID, objc.ID, unsafe.Pointer, coremedia.CMTime, int, int, unsafe.Pointer) int32
+
+// CMIOStreamClockCreate reports an error if the CoreMediaIO framework function CMIOStreamClockCreate fails.
+func CMIOStreamClockCreate(allocator obj.Object, clockName obj.Object, sourceIdentifier unsafe.Pointer, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing int, numberOfAveragesForRateSmoothing int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamClockCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockCreate, _lib, "CMIOStreamClockCreate")
+	}
+	var _out0 uintptr
+	_rc := _fnCMIOStreamClockCreate(objref.IDOf(allocator), objref.IDOf(clockName), sourceIdentifier, getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
 var _fnCMIOStreamClockInvalidate func(objc.ID) int32
 
 // CMIOStreamClockInvalidate reports an error if the CoreMediaIO framework function CMIOStreamClockInvalidate fails.
@@ -51,6 +70,36 @@ func CMIOStreamClockInvalidate(clock obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockInvalidate, _lib, "CMIOStreamClockInvalidate")
 	}
 	_rc := _fnCMIOStreamClockInvalidate(objref.IDOf(clock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMIOStreamClockPostTimingEvent func(coremedia.CMTime, uint64, uint8, objc.ID) int32
+
+// CMIOStreamClockPostTimingEvent reports an error if the CoreMediaIO framework function CMIOStreamClockPostTimingEvent fails.
+func CMIOStreamClockPostTimingEvent(eventTime coremedia.CMTime, hostTime uint64, resynchronize uint8, clock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamClockPostTimingEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockPostTimingEvent, _lib, "CMIOStreamClockPostTimingEvent")
+	}
+	_rc := _fnCMIOStreamClockPostTimingEvent(eventTime, hostTime, resynchronize, objref.IDOf(clock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMIOStreamCopyBufferQueue func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMIOStreamCopyBufferQueue reports an error if the CoreMediaIO framework function CMIOStreamCopyBufferQueue fails.
+func CMIOStreamCopyBufferQueue(streamID int, queueAlteredProc unsafe.Pointer, queueAlteredRefCon unsafe.Pointer, queue unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOStreamCopyBufferQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOStreamCopyBufferQueue, _lib, "CMIOStreamCopyBufferQueue")
+	}
+	_rc := _fnCMIOStreamCopyBufferQueue(streamID, queueAlteredProc, queueAlteredRefCon, queue)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

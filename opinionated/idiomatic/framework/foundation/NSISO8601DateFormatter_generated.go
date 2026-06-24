@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,12 @@ func (idf *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFo
 // WithFormatOptions sets the format options.
 func (idf *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setFormatOptions:"), formatOptions)
+	return idf
+}
+
+// WithObservationInfo sets the observation info.
+func (idf *ISO8601DateFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *ISO8601DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return idf
 }
 

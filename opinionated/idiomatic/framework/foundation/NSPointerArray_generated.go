@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -86,15 +88,36 @@ func (pa *PointerArray) WithCount(count int) *PointerArray {
 	return pa
 }
 
+// WithObservationInfo sets the observation info.
+func (pa *PointerArray) WithObservationInfo(observationInfo unsafe.Pointer) *PointerArray {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return pa
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (pa *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pa
 }
 
+// AddPointer adds a given pointer to the receiver.
+func (pa *PointerArray) AddPointer(pointer unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("addPointer:"), pointer)
+}
+
 // RemovePointerAtIndex removes the pointer at a given index.
 func (pa *PointerArray) RemovePointerAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("removePointerAtIndex:"), index)
+}
+
+// InsertPointerAtIndex inserts a pointer at a given index.
+func (pa *PointerArray) InsertPointerAtIndex(item unsafe.Pointer, index int) {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("insertPointer:atIndex:"), item, index)
+}
+
+// ReplacePointerAtIndexWithPointer replaces the pointer at a given index.
+func (pa *PointerArray) ReplacePointerAtIndexWithPointer(index int, item unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("replacePointerAtIndex:withPointer:"), index, item)
 }
 
 // Compact removes NULL values from the receiver.

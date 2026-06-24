@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,13 @@ func (cs *ColorSpace) String() string {
 func NewColorSpaceWithICCProfileData(iccData obj.Object) *ColorSpace {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithICCProfileData:"), objref.IDOf(iccData))
+	return colorSpaceAdopt(_id)
+}
+
+// NewColorSpaceWithColorSyncProfile initializes and returns a color space object from the specified ColorSync profile.
+func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColorSyncProfile:"), prof)
 	return colorSpaceAdopt(_id)
 }
 

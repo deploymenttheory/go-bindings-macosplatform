@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,6 +51,12 @@ func assetChangeRequestAdopt(id objc.ID) *AssetChangeRequest {
 // WithCreationDate sets the date and time at which the asset claims to have been originally created.
 func (acr *AssetChangeRequest) WithCreationDate(creationDate obj.Object) *AssetChangeRequest {
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
+	return acr
+}
+
+// WithLocation sets the location information saved with the asset.
+func (acr *AssetChangeRequest) WithLocation(location unsafe.Pointer) *AssetChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setLocation:"), location)
 	return acr
 }
 

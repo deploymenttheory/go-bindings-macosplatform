@@ -82,6 +82,12 @@ func NewRegularExpressionWithPatternOptionsError(pattern string, options Regular
 	return regularExpressionAdopt(_id), nil
 }
 
+// WithObservationInfo sets the observation info.
+func (re *RegularExpression) WithObservationInfo(observationInfo unsafe.Pointer) *RegularExpression {
+	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return re
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (re *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
 	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

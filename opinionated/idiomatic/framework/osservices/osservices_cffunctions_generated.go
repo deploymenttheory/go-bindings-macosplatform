@@ -5,9 +5,236 @@
 package osservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 )
+
+var _fnKCAddCallback func(unsafe.Pointer, uint16, unsafe.Pointer) int32
+
+// KCAddCallback reports an error if the OSServices framework function KCAddCallback fails.
+func KCAddCallback(callbackProc unsafe.Pointer, eventMask uint16, userContext unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCAddCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnKCAddCallback, _lib, "KCAddCallback")
+	}
+	_rc := _fnKCAddCallback(callbackProc, eventMask, userContext)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCCopyItem func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCCopyItem reports an error if the OSServices framework function KCCopyItem fails.
+func KCCopyItem(item unsafe.Pointer, destKeychain unsafe.Pointer, copy_ unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCCopyItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCCopyItem, _lib, "KCCopyItem")
+	}
+	_rc := _fnKCCopyItem(item, destKeychain, copy_)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCDeleteItem func(unsafe.Pointer) int32
+
+// KCDeleteItem reports an error if the OSServices framework function KCDeleteItem fails.
+func KCDeleteItem(item unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCDeleteItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCDeleteItem, _lib, "KCDeleteItem")
+	}
+	_rc := _fnKCDeleteItem(item)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCFindNextItem func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCFindNextItem reports an error if the OSServices framework function KCFindNextItem fails.
+func KCFindNextItem(search unsafe.Pointer, item unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindNextItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindNextItem, _lib, "KCFindNextItem")
+	}
+	_rc := _fnKCFindNextItem(search, item)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCGetDefaultKeychain func(unsafe.Pointer) int32
+
+// KCGetDefaultKeychain reports an error if the OSServices framework function KCGetDefaultKeychain fails.
+func KCGetDefaultKeychain(keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetDefaultKeychain == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetDefaultKeychain, _lib, "KCGetDefaultKeychain")
+	}
+	_rc := _fnKCGetDefaultKeychain(keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCGetIndKeychain func(uint16, unsafe.Pointer) int32
+
+// KCGetIndKeychain reports an error if the OSServices framework function KCGetIndKeychain fails.
+func KCGetIndKeychain(index uint16, keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetIndKeychain == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetIndKeychain, _lib, "KCGetIndKeychain")
+	}
+	_rc := _fnKCGetIndKeychain(index, keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCGetKeychain func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCGetKeychain reports an error if the OSServices framework function KCGetKeychain fails.
+func KCGetKeychain(item unsafe.Pointer, keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetKeychain == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetKeychain, _lib, "KCGetKeychain")
+	}
+	_rc := _fnKCGetKeychain(item, keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCLock func(unsafe.Pointer) int32
+
+// KCLock reports an error if the OSServices framework function KCLock fails.
+func KCLock(keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCLock == nil {
+		ebipurego.RegisterLibFunc(&_fnKCLock, _lib, "KCLock")
+	}
+	_rc := _fnKCLock(keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCNewItem func(int, int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCNewItem reports an error if the OSServices framework function KCNewItem fails.
+func KCNewItem(itemClass int, itemCreator int, length int, data unsafe.Pointer, item unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCNewItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCNewItem, _lib, "KCNewItem")
+	}
+	_rc := _fnKCNewItem(itemClass, itemCreator, length, data, item)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCReleaseItem func(unsafe.Pointer) int32
+
+// KCReleaseItem reports an error if the OSServices framework function KCReleaseItem fails.
+func KCReleaseItem(item unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCReleaseItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCReleaseItem, _lib, "KCReleaseItem")
+	}
+	_rc := _fnKCReleaseItem(item)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCReleaseKeychain func(unsafe.Pointer) int32
+
+// KCReleaseKeychain reports an error if the OSServices framework function KCReleaseKeychain fails.
+func KCReleaseKeychain(keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCReleaseKeychain == nil {
+		ebipurego.RegisterLibFunc(&_fnKCReleaseKeychain, _lib, "KCReleaseKeychain")
+	}
+	_rc := _fnKCReleaseKeychain(keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCReleaseSearch func(unsafe.Pointer) int32
+
+// KCReleaseSearch reports an error if the OSServices framework function KCReleaseSearch fails.
+func KCReleaseSearch(search unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCReleaseSearch == nil {
+		ebipurego.RegisterLibFunc(&_fnKCReleaseSearch, _lib, "KCReleaseSearch")
+	}
+	_rc := _fnKCReleaseSearch(search)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCRemoveCallback func(unsafe.Pointer) int32
+
+// KCRemoveCallback reports an error if the OSServices framework function KCRemoveCallback fails.
+func KCRemoveCallback(callbackProc unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCRemoveCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnKCRemoveCallback, _lib, "KCRemoveCallback")
+	}
+	_rc := _fnKCRemoveCallback(callbackProc)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCSetData func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// KCSetData reports an error if the OSServices framework function KCSetData fails.
+func KCSetData(item unsafe.Pointer, length int, data unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCSetData == nil {
+		ebipurego.RegisterLibFunc(&_fnKCSetData, _lib, "KCSetData")
+	}
+	_rc := _fnKCSetData(item, length, data)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCSetDefaultKeychain func(unsafe.Pointer) int32
+
+// KCSetDefaultKeychain reports an error if the OSServices framework function KCSetDefaultKeychain fails.
+func KCSetDefaultKeychain(keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCSetDefaultKeychain == nil {
+		ebipurego.RegisterLibFunc(&_fnKCSetDefaultKeychain, _lib, "KCSetDefaultKeychain")
+	}
+	_rc := _fnKCSetDefaultKeychain(keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
 
 var _fnKCSetInteractionAllowed func(uint8) int32
 
@@ -18,6 +245,36 @@ func KCSetInteractionAllowed(state uint8) error {
 		ebipurego.RegisterLibFunc(&_fnKCSetInteractionAllowed, _lib, "KCSetInteractionAllowed")
 	}
 	_rc := _fnKCSetInteractionAllowed(state)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCUpdateItem func(unsafe.Pointer) int32
+
+// KCUpdateItem reports an error if the OSServices framework function KCUpdateItem fails.
+func KCUpdateItem(item unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCUpdateItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCUpdateItem, _lib, "KCUpdateItem")
+	}
+	_rc := _fnKCUpdateItem(item)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKcgetkeychainname func(unsafe.Pointer, string) int32
+
+// Kcgetkeychainname reports an error if the OSServices framework function kcgetkeychainname fails.
+func Kcgetkeychainname(keychain unsafe.Pointer, keychainName string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcgetkeychainname == nil {
+		ebipurego.RegisterLibFunc(&_fnKcgetkeychainname, _lib, "kcgetkeychainname")
+	}
+	_rc := _fnKcgetkeychainname(keychain, keychainName)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

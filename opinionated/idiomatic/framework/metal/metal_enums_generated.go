@@ -266,6 +266,45 @@ func (e AccelerationStructureInstanceDescriptorType) String() string {
 	}
 }
 
+// Options for adjusting the behavior of an instanced acceleration structure.
+// Bitmask — values may be combined with |.
+type AccelerationStructureInstanceOptions int64
+
+const (
+	// Specifies the default behavior for resulting acceleration structure.
+	AccelerationStructureInstanceOptionNone AccelerationStructureInstanceOptions = 0
+	// An option that turns off culling for this instance if ray intersector has culling enabled.
+	AccelerationStructureInstanceOptionDisableTriangleCulling AccelerationStructureInstanceOptions = 1
+	// Specifies that the instance specifies front facing triangles in counter-clockwise order.
+	AccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise AccelerationStructureInstanceOptions = 2
+	// Specifies that intersectors should treat the instance as opaque.
+	AccelerationStructureInstanceOptionOpaque AccelerationStructureInstanceOptions = 4
+	// Specifies that intersectors should treat the instance as non-opaque.
+	AccelerationStructureInstanceOptionNonOpaque AccelerationStructureInstanceOptions = 8
+)
+
+// String returns the AccelerationStructureInstanceOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccelerationStructureInstanceOptions) String() string {
+	var parts []string
+	if e&AccelerationStructureInstanceOptionDisableTriangleCulling != 0 {
+		parts = append(parts, "AccelerationStructureInstanceOptionDisableTriangleCulling")
+	}
+	if e&AccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise != 0 {
+		parts = append(parts, "AccelerationStructureInstanceOptionTriangleFrontFacingWindingCounterClockwise")
+	}
+	if e&AccelerationStructureInstanceOptionOpaque != 0 {
+		parts = append(parts, "AccelerationStructureInstanceOptionOpaque")
+	}
+	if e&AccelerationStructureInstanceOptionNonOpaque != 0 {
+		parts = append(parts, "AccelerationStructureInstanceOptionNonOpaque")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Options that affect how Metal builds an acceleration structure and the behavior of that acceleration structure.
 // Bitmask — values may be combined with |.
 type AccelerationStructureUsage uint64
@@ -1616,6 +1655,29 @@ func (e IOCompressionMethod) String() string {
 	}
 }
 
+// Represents the final state of a compression context.
+type IOCompressionStatus int64
+
+const (
+	// Indicates the compression API successfully flushed and destroyed a compression context.
+	IOCompressionStatusComplete IOCompressionStatus = 0
+	// Indicates the compression API had an error while flushing and destroying a compression context.
+	IOCompressionStatusError IOCompressionStatus = 1
+)
+
+// String returns the IOCompressionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IOCompressionStatus) String() string {
+	switch e {
+	case IOCompressionStatusComplete:
+		return "IOCompressionStatusComplete"
+	case IOCompressionStatusError:
+		return "IOCompressionStatusError"
+	default:
+		return fmt.Sprintf("IOCompressionStatus(%d)", int64(e))
+	}
+}
+
 // Designates the priority for a new input/output command queue.
 type IOPriority int64
 
@@ -2942,6 +3004,29 @@ func (e SparsePageSize) String() string {
 		return "SparsePageSize256"
 	default:
 		return fmt.Sprintf("SparsePageSize(%d)", int64(e))
+	}
+}
+
+// Options for sparse texture mapping.
+type SparseTextureMappingMode uint64
+
+const (
+	// A request to map sparse tiles from the heap to a region in the texture.
+	SparseTextureMappingModeMap SparseTextureMappingMode = 0
+	// A request to remove any mappings for a region in the texture.
+	SparseTextureMappingModeUnmap SparseTextureMappingMode = 1
+)
+
+// String returns the SparseTextureMappingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseTextureMappingMode) String() string {
+	switch e {
+	case SparseTextureMappingModeMap:
+		return "SparseTextureMappingModeMap"
+	case SparseTextureMappingModeUnmap:
+		return "SparseTextureMappingModeUnmap"
+	default:
+		return fmt.Sprintf("SparseTextureMappingMode(%d)", int64(e))
 	}
 }
 

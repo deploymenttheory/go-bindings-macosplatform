@@ -5,6 +5,8 @@
 package automator
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,9 +66,27 @@ func (asa *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScript
 	return asa
 }
 
+// WithSelectedInputType sets the type of input, in UTI format, of the input received by the action.
+func (asa *AppleScriptAction) WithSelectedInputType(selectedInputType unsafe.Pointer) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setSelectedInputType:"), selectedInputType)
+	return asa
+}
+
+// WithSelectedOutputType sets the type of output, in UTI format, of the output to be produced by the action.
+func (asa *AppleScriptAction) WithSelectedOutputType(selectedOutputType unsafe.Pointer) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setSelectedOutputType:"), selectedOutputType)
+	return asa
+}
+
 // WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
 func (asa *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setProgressValue:"), progressValue)
+	return asa
+}
+
+// WithOutput sets the action’s output.
+func (asa *AppleScriptAction) WithOutput(output unsafe.Pointer) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setOutput:"), output)
 	return asa
 }
 

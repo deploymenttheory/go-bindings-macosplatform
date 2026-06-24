@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,6 +48,13 @@ func targetedImageRequestAdopt(id objc.ID) *TargetedImageRequest {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// NewTargetedImageRequestWithTargetedCVPixelBufferOptions creates a new request targeting an image in a pixel buffer.
+func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *TargetedImageRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
+	return targetedImageRequestAdopt(_id)
 }
 
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new request targeting a Core Graphics image.

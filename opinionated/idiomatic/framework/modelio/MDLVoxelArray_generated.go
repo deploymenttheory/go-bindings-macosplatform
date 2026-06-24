@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -97,10 +99,21 @@ func (va *VoxelArray) WithHidden(hidden bool) *VoxelArray {
 	return va
 }
 
+// VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell returns a Boolean value indicating whether the voxel array contains voxel data for the specified index.
+func (va *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
+	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:"), index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
+	return _r
+}
+
 // VoxelIndices returns a data object containing all voxels within the voxel array.
 func (va *VoxelArray) VoxelIndices() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voxelIndices"))
 	return obj.Wrap(_r)
+}
+
+// SetVoxelAtIndex sets voxel characteristics at the specified index in the array.
+func (va *VoxelArray) SetVoxelAtIndex(index unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setVoxelAtIndex:"), index)
 }
 
 // SetVoxelsForMeshDivisionsPatchRadius set voxels corresponding to a mesh. Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh.

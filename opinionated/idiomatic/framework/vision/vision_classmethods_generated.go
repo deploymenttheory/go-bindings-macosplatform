@@ -145,6 +145,16 @@ func BoundingCircleForPointsError(points []*Point) (result *Circle, err error) {
 	return CircleFromID(_r), nil
 }
 
+// BoundingCircleForSIMDPointsPointCountError calculates a bounding circle for the specified points.
+func BoundingCircleForSIMDPointsPointCountError(points unsafe.Pointer, pointCount int) (result *Circle, err error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("boundingCircleForSIMDPoints:pointCount:error:"), points, pointCount, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return CircleFromID(_r), nil
+}
+
 // CalculateAreaForContourOrientedArea calculates the area for the specified contour.
 func CalculateAreaForContourOrientedArea(contour *Contour, orientedArea bool) (area float64, err error) {
 	var _out0 float64

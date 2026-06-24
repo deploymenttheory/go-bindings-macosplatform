@@ -400,6 +400,11 @@ func (v_ *View) AddSubviewPositionedRelativeTo(view *View, place WindowOrderingM
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addSubview:positioned:relativeTo:"), objref.IDOf(view), place, objref.IDOf(otherView))
 }
 
+// SortSubviewsUsingFunctionContext wraps the corresponding Objective-C method.
+func (v_ *View) SortSubviewsUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("sortSubviewsUsingFunction:context:"), compare, context_)
+}
+
 // ViewWillMoveToWindow wraps the corresponding Objective-C method.
 func (v_ *View) ViewWillMoveToWindow(newWindow *Window) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillMoveToWindow:"), objref.IDOf(newWindow))
@@ -795,6 +800,12 @@ func (v_ *View) WillOpenMenuWithEvent(menu *Menu, event *Event) {
 // DidCloseMenuWithEvent a contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:. The view should update any visual state in response — such as removing a temporary selection. \param menu The contextual menu that was open on the view \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
 func (v_ *View) DidCloseMenuWithEvent(menu *Menu, event *Event) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("didCloseMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
+}
+
+// AddToolTipRectOwnerUserData adds tool tip rect owner user data.
+func (v_ *View) AddToolTipRectOwnerUserData(rect corefoundation.CGRect, owner obj.Object, data unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("addToolTipRect:owner:userData:"), rect, objref.IDOf(owner), data)
+	return _r
 }
 
 // RemoveToolTip removes tool tip.
@@ -1471,6 +1482,12 @@ func (v_ *View) DiscardCursorRects() {
 // ResetCursorRects resets cursor rects.
 func (v_ *View) ResetCursorRects() {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resetCursorRects"))
+}
+
+// AddTrackingRectOwnerUserDataAssumeInside adds tracking rect owner user data assume inside.
+func (v_ *View) AddTrackingRectOwnerUserDataAssumeInside(rect corefoundation.CGRect, owner obj.Object, data unsafe.Pointer, flag bool) int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("addTrackingRect:owner:userData:assumeInside:"), rect, objref.IDOf(owner), data, flag)
+	return _r
 }
 
 // RemoveTrackingRect removes tracking rect.

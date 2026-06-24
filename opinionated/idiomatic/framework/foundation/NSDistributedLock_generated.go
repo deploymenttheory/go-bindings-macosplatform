@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewDistributedLockWithPath(path string) *DistributedLock {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistributedLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
 	return distributedLockAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (dl *DistributedLock) WithObservationInfo(observationInfo unsafe.Pointer) *DistributedLock {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return dl
 }
 
 // WithScriptingProperties sets the scripting properties.

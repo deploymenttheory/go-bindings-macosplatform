@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,4 +77,9 @@ func NewTask() *Task {
 // LogMessage logs the given string to the initiating client.
 func (t *Task) LogMessage(str string) {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("logMessage:"), purego.NSString(str))
+}
+
+// DidCompleteWithError informs the client that the task completed.
+func (t *Task) DidCompleteWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("didCompleteWithError:"), error_)
 }

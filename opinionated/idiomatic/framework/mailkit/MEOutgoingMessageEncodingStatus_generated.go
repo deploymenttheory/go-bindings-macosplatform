@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (omes *OutgoingMessageEncodingStatus) String() string {
 	return rt.Description(objref.IDOf(omes))
 }
 
-// NewOutgoingMessageEncodingStatus creates a new OutgoingMessageEncodingStatus.
-func NewOutgoingMessageEncodingStatus() *OutgoingMessageEncodingStatus {
-	_id := objc.Send[objc.ID](objc.ID(_class("MEOutgoingMessageEncodingStatus")), objc.RegisterName("new"))
+// NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption creates an object that describes whether the message security handler can encrypt or sign an outgoing message.
+func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddressesFailingEncryption(canSign bool, canEncrypt bool, securityError unsafe.Pointer, addressesFailingEncryption []*EmailAddress) *OutgoingMessageEncodingStatus {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEOutgoingMessageEncodingStatus")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCanSign:canEncrypt:securityError:addressesFailingEncryption:"), canSign, canEncrypt, securityError, purego.SliceToNSArray(addressesFailingEncryption, func(_v *EmailAddress) objc.ID { return objref.IDOf(_v) }))
 	return outgoingMessageEncodingStatusAdopt(_id)
 }
 

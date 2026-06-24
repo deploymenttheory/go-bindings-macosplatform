@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return sortDescriptorAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (sd *SortDescriptor) WithObservationInfo(observationInfo unsafe.Pointer) *SortDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return sd
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,7 +5,11 @@
 package cinematic
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +74,24 @@ func (ot *ObjectTracker) String() string {
 func NewObjectTracker() *ObjectTracker {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNObjectTracker")), objc.RegisterName("new"))
 	return objectTrackerAdopt(_id)
+}
+
+// FindObjectAtPointSourceImage find the bounds of an object at the given point. Can be used to convert a normalized point in an image to a rectangle that can be used to start tracking. - Parameters: - point: location of object in image in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: pixel buffer containing the image - Returns: A prediction, which includes bounds that can be used to start tracking, or `nil` if no discernible object is detected.
+func (ot *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction {
+	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("findObjectAtPoint:sourceImage:"), point, sourceImage)
+	return BoundsPredictionFromID(_r)
+}
+
+// StartTrackingAtWithinSourceImageSourceDisparity start creating a detection track to track an object within the given bounds. - Parameters: - time: the presentation time of the first frame in the detection track - normalizedBounds: the bounds of the object to track in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: whether the object can be tracked - Note: if the object can be tracked, a detection is added to the detection track being built
+func (ot *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(ot), objc.RegisterName("startTrackingAt:within:sourceImage:sourceDisparity:"), time_, normalizedBounds, sourceImage, sourceDisparity)
+	return _r
+}
+
+// ContinueTrackingAtSourceImageSourceDisparity continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
+func (ot *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
+	_r := objc.Send[objc.ID](objref.IDOf(ot), objc.RegisterName("continueTrackingAt:sourceImage:sourceDisparity:"), time_, sourceImage, sourceDisparity)
+	return BoundsPredictionFromID(_r)
 }
 
 // FinishDetectionTrack returns finish constructing the detection track and return it. - Returns: a detection track which tracks the object

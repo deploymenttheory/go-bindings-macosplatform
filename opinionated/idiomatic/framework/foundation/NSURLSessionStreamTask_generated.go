@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -88,6 +89,12 @@ func (usst *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStre
 // WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (usst *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return usst
+}
+
+// WithObservationInfo sets the observation info.
+func (usst *URLSessionStreamTask) WithObservationInfo(observationInfo unsafe.Pointer) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return usst
 }
 

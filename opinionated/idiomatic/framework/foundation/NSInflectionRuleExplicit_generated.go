@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *Inflection
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMorphology:"), objref.IDOf(morphology))
 	return inflectionRuleExplicitAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ire *InflectionRuleExplicit) WithObservationInfo(observationInfo unsafe.Pointer) *InflectionRuleExplicit {
+	objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ire
 }
 
 // WithScriptingProperties sets the scripting properties.

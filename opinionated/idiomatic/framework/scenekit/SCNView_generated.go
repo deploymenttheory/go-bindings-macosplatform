@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -110,9 +112,21 @@ func (v_ *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously 
 	return v_
 }
 
+// WithOpenGLContext sets the OpenGL context that the view uses to render its contents.
+func (v_ *View) WithOpenGLContext(openGLContext unsafe.Pointer) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setOpenGLContext:"), openGLContext)
+	return v_
+}
+
 // WithAntialiasingMode sets the antialiasing mode used for rendering the view’s scene.
 func (v_ *View) WithAntialiasingMode(antialiasingMode AntialiasingMode) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAntialiasingMode:"), antialiasingMode)
+	return v_
+}
+
+// WithPixelFormat sets the view’s OpenGL pixel format.
+func (v_ *View) WithPixelFormat(pixelFormat unsafe.Pointer) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return v_
 }
 

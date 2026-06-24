@@ -5,6 +5,8 @@
 package cfopendirectory
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -65,6 +67,17 @@ func ODQueryScheduleWithRunLoop(query obj.Object, runLoop obj.Object, runLoopMod
 		ebipurego.RegisterLibFunc(&_fnODQueryScheduleWithRunLoop, _lib, "ODQueryScheduleWithRunLoop")
 	}
 	_fnODQueryScheduleWithRunLoop(objref.IDOf(query), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
+var _fnODQuerySetCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// ODQuerySetCallback calls the CFOpenDirectory framework function ODQuerySetCallback.
+func ODQuerySetCallback(query obj.Object, callback unsafe.Pointer, userInfo unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnODQuerySetCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnODQuerySetCallback, _lib, "ODQuerySetCallback")
+	}
+	_fnODQuerySetCallback(objref.IDOf(query), callback, userInfo)
 }
 
 var _fnODQuerySetDispatchQueue func(objc.ID, objc.ID)

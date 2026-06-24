@@ -181,6 +181,21 @@ func DVDGetSPDIFDataOutDeviceCFName(inIndex int) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnDVDGetVideoWindowRef func(unsafe.Pointer) int32
+
+// DVDGetVideoWindowRef reports an error if the DVDPlayback framework function DVDGetVideoWindowRef fails.
+func DVDGetVideoWindowRef(outWindowRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGetVideoWindowRef == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGetVideoWindowRef, _lib, "DVDGetVideoWindowRef")
+	}
+	_rc := _fnDVDGetVideoWindowRef(outWindowRef)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDVDGoBackOneLevel func() int32
 
 // DVDGoBackOneLevel reports an error if the DVDPlayback framework function DVDGoBackOneLevel fails.
@@ -205,6 +220,21 @@ func DVDGoToMenu(inMenu DVDMenu) error {
 		ebipurego.RegisterLibFunc(&_fnDVDGoToMenu, _lib, "DVDGoToMenu")
 	}
 	_rc := _fnDVDGoToMenu(inMenu)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDGotoBookmark func(unsafe.Pointer, int) int32
+
+// DVDGotoBookmark reports an error if the DVDPlayback framework function DVDGotoBookmark fails.
+func DVDGotoBookmark(inBookMarkData unsafe.Pointer, inBookMarkDataSize int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGotoBookmark == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGotoBookmark, _lib, "DVDGotoBookmark")
+	}
+	_rc := _fnDVDGotoBookmark(inBookMarkData, inBookMarkDataSize)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -541,6 +571,36 @@ func DVDSetDriveRegionCode(inCode int, inAuthorization obj.Object) error {
 	return nil
 }
 
+var _fnDVDSetFatalErrorCallBack func(unsafe.Pointer, unsafe.Pointer) int32
+
+// DVDSetFatalErrorCallBack reports an error if the DVDPlayback framework function DVDSetFatalErrorCallBack fails.
+func DVDSetFatalErrorCallBack(inCallBackProc unsafe.Pointer, inRefCon unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetFatalErrorCallBack == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetFatalErrorCallBack, _lib, "DVDSetFatalErrorCallBack")
+	}
+	_rc := _fnDVDSetFatalErrorCallBack(inCallBackProc, inRefCon)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDSetLastPlayBookmark func(unsafe.Pointer, int) int32
+
+// DVDSetLastPlayBookmark reports an error if the DVDPlayback framework function DVDSetLastPlayBookmark fails.
+func DVDSetLastPlayBookmark(inBookMarkData unsafe.Pointer, inBookMarkDataSize int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetLastPlayBookmark == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetLastPlayBookmark, _lib, "DVDSetLastPlayBookmark")
+	}
+	_rc := _fnDVDSetLastPlayBookmark(inBookMarkData, inBookMarkDataSize)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDVDSetSPDIFDataOutDevice func(int) int32
 
 // DVDSetSPDIFDataOutDevice reports an error if the DVDPlayback framework function DVDSetSPDIFDataOutDevice fails.
@@ -646,6 +706,21 @@ func DVDSetVideoWindowID(inVidWindowID int) error {
 	return nil
 }
 
+var _fnDVDSetVideoWindowRef func(unsafe.Pointer) int32
+
+// DVDSetVideoWindowRef reports an error if the DVDPlayback framework function DVDSetVideoWindowRef fails.
+func DVDSetVideoWindowRef(inWindowRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetVideoWindowRef == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetVideoWindowRef, _lib, "DVDSetVideoWindowRef")
+	}
+	_rc := _fnDVDSetVideoWindowRef(inWindowRef)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDVDSleep func() int32
 
 // DVDSleep reports an error if the DVDPlayback framework function DVDSleep fails.
@@ -685,6 +760,21 @@ func DVDStop() error {
 		ebipurego.RegisterLibFunc(&_fnDVDStop, _lib, "DVDStop")
 	}
 	_rc := _fnDVDStop()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDUnregisterEventCallBack func(unsafe.Pointer) int32
+
+// DVDUnregisterEventCallBack reports an error if the DVDPlayback framework function DVDUnregisterEventCallBack fails.
+func DVDUnregisterEventCallBack(inCallBackID unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDUnregisterEventCallBack == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDUnregisterEventCallBack, _lib, "DVDUnregisterEventCallBack")
+	}
+	_rc := _fnDVDUnregisterEventCallBack(inCallBackID)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

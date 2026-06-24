@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,12 @@ func agent2DAdopt(id objc.ID) *Agent2D {
 func NewAgent2D() *Agent2D {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKAgent2D")), objc.RegisterName("new"))
 	return agent2DAdopt(_id)
+}
+
+// WithPosition sets the current position of the agent in 2D space.
+func (ad *Agent2D) WithPosition(position unsafe.Pointer) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setPosition:"), position)
+	return ad
 }
 
 // WithRotation sets the rotation of the agent around the z-axis.

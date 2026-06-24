@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -51,6 +53,12 @@ func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *D
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSymbol:converter:"), purego.NSString(symbol), objref.IDOf(converter))
 	return dimensionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (d *Dimension) WithObservationInfo(observationInfo unsafe.Pointer) *Dimension {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return d
 }
 
 // WithScriptingProperties sets the scripting properties.

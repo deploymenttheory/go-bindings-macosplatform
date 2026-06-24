@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -33,6 +35,19 @@ func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classi
 	}
 	_ret := _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification)
 	return QuantityFromID(_ret)
+}
+
+var _fnHKAppleWalkingSteadinessClassificationForQuantity func(objc.ID, unsafe.Pointer, unsafe.Pointer) bool
+
+// HKAppleWalkingSteadinessClassificationForQuantity calls the HealthKit framework function HKAppleWalkingSteadinessClassificationForQuantity.
+func HKAppleWalkingSteadinessClassificationForQuantity(value *Quantity, errorOut unsafe.Pointer) (ok bool, classificationOut AppleWalkingSteadinessClassification) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKAppleWalkingSteadinessClassificationForQuantity == nil {
+		ebipurego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessClassificationForQuantity, _lib, "HKAppleWalkingSteadinessClassificationForQuantity")
+	}
+	var _out0 AppleWalkingSteadinessClassification
+	_ret := _fnHKAppleWalkingSteadinessClassificationForQuantity(objref.IDOf(value), unsafe.Pointer(&_out0), errorOut)
+	return _ret, _out0
 }
 
 var _fnHKAppleWalkingSteadinessMaximumQuantityForClassification func(AppleWalkingSteadinessClassification) objc.ID

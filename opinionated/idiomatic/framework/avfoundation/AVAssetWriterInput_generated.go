@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -135,6 +136,12 @@ func (awi *AssetWriterInput) WithMarksOutputTrackAsEnabled(marksOutputTrackAsEna
 // WithMediaTimeScale sets the time scale of the track in the output file.
 func (awi *AssetWriterInput) WithMediaTimeScale(mediaTimeScale int32) *AssetWriterInput {
 	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("setMediaTimeScale:"), mediaTimeScale)
+	return awi
+}
+
+// WithPreferredMediaChunkDuration sets the duration to use for each chunk of sample data in the output file.
+func (awi *AssetWriterInput) WithPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) *AssetWriterInput {
+	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("setPreferredMediaChunkDuration:"), preferredMediaChunkDuration)
 	return awi
 }
 
@@ -273,6 +280,12 @@ func (awi *AssetWriterInput) MarksOutputTrackAsEnabled() bool {
 // MediaTimeScale returns for file types that support media time scales, such as QuickTime Movie files, specifies the media time scale to be used. The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. It is an error to set a value other than 0 if the receiver has media type AVMediaTypeAudio. This property cannot be set after writing has started. This property throws an exception if a value is set on an asset writer input with media type AVMediaTypeAudio.
 func (awi *AssetWriterInput) MediaTimeScale() int32 {
 	_r := objc.Send[int32](objref.IDOf(awi), objc.RegisterName("mediaTimeScale"))
+	return _r
+}
+
+// PreferredMediaChunkDuration returns for file types that support media chunk duration, such as QuickTime Movie files, specifies the duration to be used for each chunk of sample data in the output file. Chunk duration can influence the granularity of the I/O performed when reading a media file, e.g. during playback. A larger chunk duration can result in fewer reads from disk, at the potential expense of a higher memory footprint. A "chunk" contains one or more samples. The total duration of the samples in a chunk is no greater than this preferred chunk duration, or the duration of a single sample if the sample's duration is greater than this preferred chunk duration. The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. This property cannot be set after -startWriting has been called on the receiver. This property throws an exception if a duration is set which is non-numeric or non-positive (see CMTIME_IS_NUMERIC).
+func (awi *AssetWriterInput) PreferredMediaChunkDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(awi), objc.RegisterName("preferredMediaChunkDuration"))
 	return _r
 }
 

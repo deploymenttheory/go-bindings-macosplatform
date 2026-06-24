@@ -5,11 +5,26 @@
 package cfnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnCFFTPCreateParsedResourceListing func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+
+// CFFTPCreateParsedResourceListing calls the CFNetwork framework function CFFTPCreateParsedResourceListing.
+func CFFTPCreateParsedResourceListing(alloc obj.Object, bufferLength int, parsed unsafe.Pointer) (result int, buffer uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFFTPCreateParsedResourceListing == nil {
+		ebipurego.RegisterLibFunc(&_fnCFFTPCreateParsedResourceListing, _lib, "CFFTPCreateParsedResourceListing")
+	}
+	var _out0 uint8
+	_ret := _fnCFFTPCreateParsedResourceListing(objref.IDOf(alloc), unsafe.Pointer(&_out0), bufferLength, parsed)
+	return _ret, _out0
+}
 
 var _fnCFHTTPAuthenticationAppliesToRequest func(objc.ID, objc.ID) uint8
 
@@ -123,6 +138,19 @@ func CFHTTPMessageAddAuthentication(request obj.Object, authenticationFailureRes
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageAddAuthentication, _lib, "CFHTTPMessageAddAuthentication")
 	}
 	return _fnCFHTTPMessageAddAuthentication(objref.IDOf(request), objref.IDOf(authenticationFailureResponse), objref.IDOf(username), objref.IDOf(password), objref.IDOf(authenticationScheme), forProxy)
+}
+
+var _fnCFHTTPMessageAppendBytes func(objc.ID, unsafe.Pointer, int) uint8
+
+// CFHTTPMessageAppendBytes calls the CFNetwork framework function CFHTTPMessageAppendBytes.
+func CFHTTPMessageAppendBytes(message obj.Object, numBytes int) (result uint8, newBytes uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFHTTPMessageAppendBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageAppendBytes, _lib, "CFHTTPMessageAppendBytes")
+	}
+	var _out0 uint8
+	_ret := _fnCFHTTPMessageAppendBytes(objref.IDOf(message), unsafe.Pointer(&_out0), numBytes)
+	return _ret, _out0
 }
 
 var _fnCFHTTPMessageCopyAllHeaderFields func(objc.ID) objc.ID
@@ -382,6 +410,45 @@ func CFHostCreateWithName(allocator obj.Object, hostname obj.Object) obj.Object 
 	return obj.Wrap(_ret)
 }
 
+var _fnCFHostGetAddressing func(objc.ID, unsafe.Pointer) objc.ID
+
+// CFHostGetAddressing calls the CFNetwork framework function CFHostGetAddressing.
+func CFHostGetAddressing(theHost obj.Object) (result obj.Object, hasBeenResolved uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFHostGetAddressing == nil {
+		ebipurego.RegisterLibFunc(&_fnCFHostGetAddressing, _lib, "CFHostGetAddressing")
+	}
+	var _out0 uint8
+	_ret := _fnCFHostGetAddressing(objref.IDOf(theHost), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnCFHostGetNames func(objc.ID, unsafe.Pointer) objc.ID
+
+// CFHostGetNames calls the CFNetwork framework function CFHostGetNames.
+func CFHostGetNames(theHost obj.Object) (result obj.Object, hasBeenResolved uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFHostGetNames == nil {
+		ebipurego.RegisterLibFunc(&_fnCFHostGetNames, _lib, "CFHostGetNames")
+	}
+	var _out0 uint8
+	_ret := _fnCFHostGetNames(objref.IDOf(theHost), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnCFHostGetReachability func(objc.ID, unsafe.Pointer) objc.ID
+
+// CFHostGetReachability calls the CFNetwork framework function CFHostGetReachability.
+func CFHostGetReachability(theHost obj.Object) (result obj.Object, hasBeenResolved uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFHostGetReachability == nil {
+		ebipurego.RegisterLibFunc(&_fnCFHostGetReachability, _lib, "CFHostGetReachability")
+	}
+	var _out0 uint8
+	_ret := _fnCFHostGetReachability(objref.IDOf(theHost), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
 var _fnCFHostGetTypeID func() int
 
 // CFHostGetTypeID calls the CFNetwork framework function CFHostGetTypeID.
@@ -413,6 +480,17 @@ func CFHostUnscheduleFromRunLoop(theHost obj.Object, runLoop obj.Object, runLoop
 		ebipurego.RegisterLibFunc(&_fnCFHostUnscheduleFromRunLoop, _lib, "CFHostUnscheduleFromRunLoop")
 	}
 	_fnCFHostUnscheduleFromRunLoop(objref.IDOf(theHost), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
+var _fnCFNetDiagnosticCopyNetworkStatusPassively func(objc.ID, unsafe.Pointer) int
+
+// CFNetDiagnosticCopyNetworkStatusPassively calls the CFNetwork framework function CFNetDiagnosticCopyNetworkStatusPassively.
+func CFNetDiagnosticCopyNetworkStatusPassively(details obj.Object, description unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFNetDiagnosticCopyNetworkStatusPassively == nil {
+		ebipurego.RegisterLibFunc(&_fnCFNetDiagnosticCopyNetworkStatusPassively, _lib, "CFNetDiagnosticCopyNetworkStatusPassively")
+	}
+	return _fnCFNetDiagnosticCopyNetworkStatusPassively(objref.IDOf(details), description)
 }
 
 var _fnCFNetDiagnosticCreateWithStreams func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -793,6 +871,28 @@ func CFReadStreamCreateWithFTPURL(alloc obj.Object, ftpURL obj.Object) obj.Objec
 	}
 	_ret := _fnCFReadStreamCreateWithFTPURL(objref.IDOf(alloc), objref.IDOf(ftpURL))
 	return obj.Wrap(_ret)
+}
+
+var _fnCFStreamCreatePairWithSocketToCFHost func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer)
+
+// CFStreamCreatePairWithSocketToCFHost calls the CFNetwork framework function CFStreamCreatePairWithSocketToCFHost.
+func CFStreamCreatePairWithSocketToCFHost(alloc obj.Object, host obj.Object, port int, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStreamCreatePairWithSocketToCFHost == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToCFHost, _lib, "CFStreamCreatePairWithSocketToCFHost")
+	}
+	_fnCFStreamCreatePairWithSocketToCFHost(objref.IDOf(alloc), objref.IDOf(host), port, readStream, writeStream)
+}
+
+var _fnCFStreamCreatePairWithSocketToNetService func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// CFStreamCreatePairWithSocketToNetService calls the CFNetwork framework function CFStreamCreatePairWithSocketToNetService.
+func CFStreamCreatePairWithSocketToNetService(alloc obj.Object, service obj.Object, readStream unsafe.Pointer, writeStream unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFStreamCreatePairWithSocketToNetService == nil {
+		ebipurego.RegisterLibFunc(&_fnCFStreamCreatePairWithSocketToNetService, _lib, "CFStreamCreatePairWithSocketToNetService")
+	}
+	_fnCFStreamCreatePairWithSocketToNetService(objref.IDOf(alloc), objref.IDOf(service), readStream, writeStream)
 }
 
 var _fnCFWriteStreamCreateWithFTPURL func(objc.ID, objc.ID) objc.ID

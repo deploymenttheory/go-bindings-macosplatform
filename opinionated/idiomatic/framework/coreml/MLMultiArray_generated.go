@@ -87,6 +87,13 @@ func NewMultiArrayWithShapeDataTypeStrides(shape []obj.Object, dataType MultiArr
 	return multiArrayAdopt(_id)
 }
 
+// NewMultiArrayWithPixelBufferShape creates a multiarray sharing the surface of a pixel buffer.
+func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape []obj.Object) *MultiArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:shape:"), pixelBuffer, purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return multiArrayAdopt(_id)
+}
+
 // DataType returns scalar's data type.
 func (ma *MultiArray) DataType() MultiArrayDataType {
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(ma), objc.RegisterName("dataType"))

@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -140,6 +142,12 @@ func (v_ *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
 	return v_
 }
 
+// WithPageOverlayViewProvider sets the page overlay view provider.
+func (v_ *View) WithPageOverlayViewProvider(pageOverlayViewProvider unsafe.Pointer) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPageOverlayViewProvider:"), pageOverlayViewProvider)
+	return v_
+}
+
 // WithScaleFactor sets the scale factor.
 func (v_ *View) WithScaleFactor(scaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScaleFactor:"), scaleFactor)
@@ -167,6 +175,12 @@ func (v_ *View) WithAutoScales(autoScales bool) *View {
 // WithCurrentSelection sets the current selection.
 func (v_ *View) WithCurrentSelection(currentSelection *Selection) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
+	return v_
+}
+
+// WithHighlightedSelections sets the highlighted selections.
+func (v_ *View) WithHighlightedSelections(highlightedSelections unsafe.Pointer) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setHighlightedSelections:"), highlightedSelections)
 	return v_
 }
 

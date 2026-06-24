@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -112,6 +113,18 @@ func (aw *AssetWriter) WithDirectoryForTemporaryFiles(directoryForTemporaryFiles
 	return aw
 }
 
+// WithMovieFragmentInterval sets the interval at which to write movie fragments.
+func (aw *AssetWriter) WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setMovieFragmentInterval:"), movieFragmentInterval)
+	return aw
+}
+
+// WithInitialMovieFragmentInterval sets the interval at which to write the initial movie fragment.
+func (aw *AssetWriter) WithInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setInitialMovieFragmentInterval:"), initialMovieFragmentInterval)
+	return aw
+}
+
 // WithInitialMovieFragmentSequenceNumber sets the sequence number of the initial movie fragment.
 func (aw *AssetWriter) WithInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber int) *AssetWriter {
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setInitialMovieFragmentSequenceNumber:"), initialMovieFragmentSequenceNumber)
@@ -124,9 +137,27 @@ func (aw *AssetWriter) WithProducesCombinableFragments(producesCombinableFragmen
 	return aw
 }
 
+// WithOverallDurationHint sets a hint of the final duration of the output file.
+func (aw *AssetWriter) WithOverallDurationHint(overallDurationHint coremedia.CMTime) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setOverallDurationHint:"), overallDurationHint)
+	return aw
+}
+
 // WithMovieTimeScale sets the time scale of the movie.
 func (aw *AssetWriter) WithMovieTimeScale(movieTimeScale int32) *AssetWriter {
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setMovieTimeScale:"), movieTimeScale)
+	return aw
+}
+
+// WithPreferredOutputSegmentInterval sets the interval of output segments that you prefer.
+func (aw *AssetWriter) WithPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setPreferredOutputSegmentInterval:"), preferredOutputSegmentInterval)
+	return aw
+}
+
+// WithInitialSegmentStartTime sets the start time of the initial segment.
+func (aw *AssetWriter) WithInitialSegmentStartTime(initialSegmentStartTime coremedia.CMTime) *AssetWriter {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("setInitialSegmentStartTime:"), initialSegmentStartTime)
 	return aw
 }
 
@@ -157,6 +188,16 @@ func (aw *AssetWriter) AddInput(input *AssetWriterInput) {
 func (aw *AssetWriter) StartWriting() bool {
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("startWriting"))
 	return _r
+}
+
+// StartSessionAtSourceTime starts an asset-writing session.
+func (aw *AssetWriter) StartSessionAtSourceTime(startTime coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("startSessionAtSourceTime:"), startTime)
+}
+
+// EndSessionAtSourceTime finishes an asset-writing session.
+func (aw *AssetWriter) EndSessionAtSourceTime(endTime coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("endSessionAtSourceTime:"), endTime)
 }
 
 // CancelWriting cancels the creation of the output file.
@@ -224,9 +265,21 @@ func (aw *AssetWriter) Inputs() []*AssetWriterInput {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
+// MovieFragmentInterval returns for file types that support movie fragments, specifies the frequency at which movie fragments should be written. When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
+func (aw *AssetWriter) MovieFragmentInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("movieFragmentInterval"))
+	return _r
+}
+
 // ProducesCombinableFragments reports whether for file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. The default value is false. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to true. This property cannot be set after writing has started.
 func (aw *AssetWriter) ProducesCombinableFragments() bool {
 	_r := objc.Send[bool](objref.IDOf(aw), objc.RegisterName("producesCombinableFragments"))
+	return _r
+}
+
+// OverallDurationHint returns for file types that support movie fragments, provides a hint of the final duration of the file to be written The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
+func (aw *AssetWriter) OverallDurationHint() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("overallDurationHint"))
 	return _r
 }
 
@@ -258,6 +311,12 @@ func (aw *AssetWriter) InputGroups() []*AssetWriterInputGroup {
 // FlushSegment closes the current segment and outputs it to a delegate method.
 func (aw *AssetWriter) FlushSegment() {
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("flushSegment"))
+}
+
+// PreferredOutputSegmentInterval specifies preferred segment interval. The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
+func (aw *AssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aw), objc.RegisterName("preferredOutputSegmentInterval"))
+	return _r
 }
 
 // OutputFileTypeProfile returns the output file type profile.

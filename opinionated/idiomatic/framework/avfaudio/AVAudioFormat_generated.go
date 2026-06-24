@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -98,6 +100,13 @@ func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format Aud
 func NewAudioFormatWithSettings(settings obj.Object) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettings:"), objref.IDOf(settings))
+	return audioFormatAdopt(_id)
+}
+
+// NewAudioFormatWithCMAudioFormatDescription creates an audio format instance from a Core Media audio format description.
+func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer) *AudioFormat {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCMAudioFormatDescription:"), formatDescription)
 	return audioFormatAdopt(_id)
 }
 

@@ -96,10 +96,10 @@ var (
 )
 
 // Animate the sequence of images contained in the file at `url`. Currently supported image formats are GIF and APNG. The `options` dictionary may be used to request additional playback options; see the list of keys above for more information. The block is called on the main queue at time intervals specified by the `delay time` of the image. The animation can be stopped by setting the boolean parameter of the block to true.
-func CGAnimateImageAtURLWithBlock(url unsafe.Pointer, options unsafe.Pointer, block func(uint, unsafe.Pointer, unsafe.Pointer)) int {
+func CGAnimateImageAtURLWithBlock(url unsafe.Pointer, options unsafe.Pointer, block func(uint, unsafe.Pointer, *bool)) int {
 	var __block_block objc.Block
 	if block != nil {
-		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uint, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uint, blockParam1 unsafe.Pointer, blockParam2 *bool) {
 			block(blockParam0, blockParam1, blockParam2)
 		})
 		defer __block_block.Release()
@@ -108,10 +108,10 @@ func CGAnimateImageAtURLWithBlock(url unsafe.Pointer, options unsafe.Pointer, bl
 }
 
 // Animate the sequence of images contained in `data`. Currently supported image formats are GIF and APNG. The `options` dictionary may be used to request additional playback options; see the list of keys above for more information. The block is called on the main queue at time intervals specified by the `delay time` of the image. The animation can be stopped by setting the boolean parameter of the block to true.
-func CGAnimateImageDataWithBlock(data unsafe.Pointer, options unsafe.Pointer, block func(uint, unsafe.Pointer, unsafe.Pointer)) int {
+func CGAnimateImageDataWithBlock(data unsafe.Pointer, options unsafe.Pointer, block func(uint, unsafe.Pointer, *bool)) int {
 	var __block_block objc.Block
 	if block != nil {
-		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uint, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) {
+		__block_block = objc.NewBlock(func(_ objc.Block, blockParam0 uint, blockParam1 unsafe.Pointer, blockParam2 *bool) {
 			block(blockParam0, blockParam1, blockParam2)
 		})
 		defer __block_block.Release()

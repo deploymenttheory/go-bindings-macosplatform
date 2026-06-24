@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -167,6 +169,12 @@ func (cbk *CNNBinaryKernel) DestinationImageDescriptorForSourceImagesSourceState
 // EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage the size of extra MPS heap storage allocated while the kernel is encoding This is best effort and just describes things that are likely to end up on the MPS heap. It does not describe all allocation done by the -encode call.  It is intended for use with high water calculations for MTLHeap sizing. Allocations are typically for temporary storage needed for multipass algorithms. This interface should not be used to detect multipass algorithms.
 func (cbk *CNNBinaryKernel) EncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage obj.Object, secondaryImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("encodingStorageSizeForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), objref.IDOf(primaryImage), objref.IDOf(secondaryImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+	return _r
+}
+
+// BatchEncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage the size of extra MPS heap storage allocated while the kernel is encoding a batch This is best effort and just describes things that are likely to end up on the MPS heap. It does not describe all allocation done by the -encode call.  It is intended for use with high water calculations for MTLHeap sizing. Allocations are typically for temporary storage needed for multipass algorithms. This interface should not be used to detect multipass algorithms.
+func (cbk *CNNBinaryKernel) BatchEncodingStorageSizeForPrimaryImageSecondaryImageSourceStatesDestinationImage(primaryImage unsafe.Pointer, secondaryImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) int {
+	_r := objc.Send[int](objref.IDOf(cbk), objc.RegisterName("batchEncodingStorageSizeForPrimaryImage:secondaryImage:sourceStates:destinationImage:"), primaryImage, secondaryImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
 	return _r
 }
 

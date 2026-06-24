@@ -6,8 +6,10 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,9 +48,17 @@ func compositionTrackSegmentAdopt(id objc.ID) *CompositionTrackSegment {
 	return x
 }
 
-// NewCompositionTrackSegment creates a new CompositionTrackSegment.
-func NewCompositionTrackSegment() *CompositionTrackSegment {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("new"))
+// NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange creates an object that presents a segment of a media file that the specified URL references.
+func NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL string, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *CompositionTrackSegment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:trackID:sourceTimeRange:targetTimeRange:"), rt.FileURL(uRL), trackID, sourceTimeRange, targetTimeRange)
+	return compositionTrackSegmentAdopt(_id)
+}
+
+// NewCompositionTrackSegmentWithTimeRange creates an object that presents an empty composition track segment.
+func NewCompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *CompositionTrackSegment {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeRange:"), timeRange)
 	return compositionTrackSegmentAdopt(_id)
 }
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -85,6 +86,12 @@ func (pc *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsT
 func (pc *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason obj.Object) *CoordinatedPlaybackSuspension {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("beginSuspensionForReason:"), objref.IDOf(suspensionReason))
 	return CoordinatedPlaybackSuspensionFromID(_r)
+}
+
+// ExpectedItemTimeAtHostTime returns a time in the current item’s timeline that the coordinator expects to play at the specified host time.
+func (pc *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pc), objc.RegisterName("expectedItemTimeAtHostTime:"), hostClockTime)
+	return _r
 }
 
 // OtherParticipants returns the playback states of the other participants in the group. Use this property to create UI informing the local user about the state of other participants in the group. - NOTE: The coordinator posts AVPlaybackCoordinatorOtherParticipantsDidChangeNotification when the contents of the array changes.

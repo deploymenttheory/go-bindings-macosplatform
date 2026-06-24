@@ -156,6 +156,14 @@ func idiomaticArg(
 		imps["objref"] = objrefImportPath
 		return "obj.Object", "objref.IDOf(" + pName + ")", imps, true
 	}
+	// A bare host pointer input (e.g. void *addr in hv_vm_map) is passed through
+	// unchanged. cfuncABIType keeps it as unsafe.Pointer, matching the raw binding.
+	// Pointer out-parameters are lifted to return values before idiomaticArg runs,
+	// so an unsafe.Pointer reaching here is a genuine input pointer.
+	if goType == "unsafe.Pointer" {
+		imps["unsafe"] = "unsafe"
+		return "unsafe.Pointer", pName, imps, true
+	}
 	if sigEnum, _, isEnum := localizeEnumType(goType, fc, rawPkgAlias); isEnum {
 		// A Go enum type is an integer; pass it to the call unchanged.
 		return sigEnum, pName, imps, true
@@ -191,12 +199,18 @@ func idiomaticArg(
 // "NSPropertyListFormat *"). It returns the idiomatic Go type of the pointed-to
 // value and true. Object pointers, double pointers, blocks, and NSError (handled
 // as a returned error) are not value out-parameters and return ("", false).
+// allowStructOut lets the generic C-function pass lift a pointer-to-value-struct
+// out-parameter (e.g. hv_vcpu_create's hv_vcpu_exit_t **) into a returned struct
+// or *struct. Methods pass false: their out-param machinery has an error/zero
+// path that only handles scalar, enum, and bool zeros, so a struct out there
+// would emit an invalid "0" zero literal.
 func outParamGoType(
 	objcType string,
 	ctx typemap.Context,
 	m *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
+	allowStructOut bool,
 ) (string, bool) {
 	norm := normaliseObjC(objcType)
 	if strings.Contains(objcType, "(^") || strings.Contains(norm, "**") ||
@@ -209,7 +223,11 @@ func outParamGoType(
 		rawPkgAlias,
 		ctx.GenericParams,
 	)
-	if !strings.HasPrefix(resolved, "*") {
+	// Only a single-level pointer-to-value is a value out-parameter. The raw
+	// mapper collapses "<value> **" to "*<value>" (e.g. hv_vcpu_exit_t ** →
+	// *HvVcpuExitT), so a genuine double pointer to a value still reads as "**…"
+	// here and is rejected.
+	if !strings.HasPrefix(resolved, "*") || strings.HasPrefix(resolved, "**") {
 		return "", false
 	}
 	base := resolved[1:]
@@ -225,6 +243,24 @@ func outParamGoType(
 	if isHermeticScalar(base) {
 		return goSizeType(base), true
 	}
+	// A pointer to a value struct this framework re-declares locally (e.g.
+	// hv_vcpu_exit_t). The local name keeps the idiomatic layer hermetic. The
+	// emittable set (built from resolved Go types) is authoritative — fc.localStruct
+	// relies on a scanner-recorded field GoType that some metadata omits. When the
+	// original ObjC type is a double pointer (hv_vcpu_exit_t **) the callee writes a
+	// pointer it owns, so the out value is the typed pointer (*Struct); a single
+	// pointer fills a caller buffer, so the out value is the struct itself. The raw
+	// mapper collapses the ObjC "**" to one "*", so count asterisks on objcType.
+	if allowStructOut && strings.HasPrefix(base, rawPkgAlias+".") {
+		sname := base[len(rawPkgAlias)+1:]
+		if sname != "" && !strings.ContainsAny(sname, ".*[]") &&
+			fc.ownTypes[sname] && m.EmittableStructs[sname] {
+			if strings.Count(objcType, "*") >= 2 {
+				return "*" + sname, true
+			}
+			return sname, true
+		}
+	}
 	return "", false
 }
 
@@ -237,6 +273,9 @@ func zeroLiteral(goType string) string {
 	case "string":
 		return `""`
 	default:
+		if strings.HasPrefix(goType, "*") {
+			return "nil" // a lifted pointer out-value (e.g. *hvraw.HvVcpuExitT)
+		}
 		return "0" // scalars and enums (named integer types)
 	}
 }
@@ -300,6 +339,13 @@ func idiomaticRet(
 	if goRet == "unsafe.Pointer" && isCFObjectType(objcType, m) {
 		imps["obj"] = objImportPath
 		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imps, true
+	}
+	// An os_object handle returned already retained (OS_OBJECT_RETURNS_RETAINED,
+	// e.g. hv_vm_config_create) is surfaced as obj.Object and ADOPTED — obj.Adopt
+	// takes ownership of the +1 reference without retaining a second time.
+	if goRet == "unsafe.Pointer" && isOSObjectReturn(objcType) {
+		imps["obj"] = objImportPath
+		return "obj.Object", kindObject, "obj.Adopt(%s)", "objc.ID", imps, true
 	}
 	if goRet == "bool" {
 		return "bool", kindBool, "", "bool", imps, true
@@ -438,6 +484,15 @@ func isCFObjectType(objcType string, m *typemap.Mapper) bool {
 		}
 	}
 	return false
+}
+
+// isOSObjectReturn reports whether an Objective-C return type is an os_object
+// handle the function hands back already retained (its declaration carries the
+// OS_OBJECT_RETURNS_RETAINED ownership attribute, e.g. hv_vm_config_t). These
+// typedefs resolve to Objective-C objects, so the idiomatic layer surfaces them
+// as obj.Object — adopting the +1 reference rather than retaining a second time.
+func isOSObjectReturn(objcType string) bool {
+	return strings.Contains(objcType, "OS_OBJECT_RETURNS_RETAINED")
 }
 
 // isObjectGoType reports whether a resolved Go type refers to an Objective-C

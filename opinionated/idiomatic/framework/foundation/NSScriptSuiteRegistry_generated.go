@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (ssr *ScriptSuiteRegistry) String() string {
 func NewScriptSuiteRegistry() *ScriptSuiteRegistry {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("new"))
 	return scriptSuiteRegistryAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (ssr *ScriptSuiteRegistry) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptSuiteRegistry {
+	objc.Send[objc.ID](objref.IDOf(ssr), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ssr
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -85,6 +87,12 @@ func (dif *DateIntervalFormatter) WithDateStyle(dateStyle DateIntervalFormatterS
 // WithTimeStyle sets the time style.
 func (dif *DateIntervalFormatter) WithTimeStyle(timeStyle DateIntervalFormatterStyle) *DateIntervalFormatter {
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setTimeStyle:"), timeStyle)
+	return dif
+}
+
+// WithObservationInfo sets the observation info.
+func (dif *DateIntervalFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *DateIntervalFormatter {
+	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return dif
 }
 

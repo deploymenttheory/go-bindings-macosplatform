@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -68,6 +69,12 @@ func (ro *RecordingOutput) String() string {
 func NewRecordingOutput() *RecordingOutput {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCRecordingOutput")), objc.RegisterName("new"))
 	return recordingOutputAdopt(_id)
+}
+
+// RecordedDuration indicates current duration of recording to the output file.
+func (ro *RecordingOutput) RecordedDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(ro), objc.RegisterName("recordedDuration"))
+	return _r
 }
 
 // RecordedFileSize indicates current size, in bytes, of the data recorded to the output file.

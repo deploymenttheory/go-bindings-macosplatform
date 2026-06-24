@@ -132,6 +132,11 @@ func (mm *MigrationManager) SourceInstancesForEntityMappingNamedDestinationInsta
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
+// CancelMigrationWithError cancels the migration with a given error.
+func (mm *MigrationManager) CancelMigrationWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("cancelMigrationWithError:"), error_)
+}
+
 // UsesStoreSpecificMigrationManager wraps the corresponding Objective-C method.
 func (mm *MigrationManager) UsesStoreSpecificMigrationManager() bool {
 	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("usesStoreSpecificMigrationManager"))

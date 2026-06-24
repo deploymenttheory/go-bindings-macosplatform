@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,8 +68,9 @@ func (mbm *MeshBufferMap) String() string {
 	return rt.Description(objref.IDOf(mbm))
 }
 
-// NewMeshBufferMap creates a new MeshBufferMap.
-func NewMeshBufferMap() *MeshBufferMap {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferMap")), objc.RegisterName("new"))
+// NewMeshBufferMapWithBytesDeallocator initializes a buffer map object to manage access to the specified memory.
+func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MeshBufferMap {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferMap")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:deallocator:"), bytes_, objc.NewBlock(func(_ objc.Block) { deallocator() }))
 	return meshBufferMapAdopt(_id)
 }

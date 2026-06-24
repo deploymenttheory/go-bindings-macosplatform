@@ -150,6 +150,45 @@ func (e CMSSignedAttributes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The constants that indicate the status of the signature and signer information in a signed message.
+type CMSSignerStatus int64
+
+const (
+	// The message was not signed.
+	KCMSSignerUnsigned CMSSignerStatus = 0
+	// The message was signed and both the signature and the signer certificate have been verified.
+	KCMSSignerValid CMSSignerStatus = 1
+	// The message was signed but has detached content. You must call the CMSDecoderSetDetachedContent function before ascertaining the signature status.
+	KCMSSignerNeedsDetachedContent CMSSignerStatus = 2
+	// The message was signed but the signature is invalid.
+	KCMSSignerInvalidSignature CMSSignerStatus = 3
+	// The message was signed but the signer’s certificate could not be verified.
+	KCMSSignerInvalidCert CMSSignerStatus = 4
+	// The specified value for the signer index (signerIndex parameter) is greater than the number of signers of the message minus one (signerIndex > (numSigners – 1)).
+	KCMSSignerInvalidIndex CMSSignerStatus = 5
+)
+
+// String returns the CMSSignerStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMSSignerStatus) String() string {
+	switch e {
+	case KCMSSignerUnsigned:
+		return "KCMSSignerUnsigned"
+	case KCMSSignerValid:
+		return "KCMSSignerValid"
+	case KCMSSignerNeedsDetachedContent:
+		return "KCMSSignerNeedsDetachedContent"
+	case KCMSSignerInvalidSignature:
+		return "KCMSSignerInvalidSignature"
+	case KCMSSignerInvalidCert:
+		return "KCMSSignerInvalidCert"
+	case KCMSSignerInvalidIndex:
+		return "KCMSSignerInvalidIndex"
+	default:
+		return fmt.Sprintf("CMSSignerStatus(%d)", int64(e))
+	}
+}
+
 // The flags that represent the requirements for client-side authentication.
 type SSLAuthenticate int32
 
@@ -174,6 +213,70 @@ func (e SSLAuthenticate) String() string {
 		return "KTryAuthenticate"
 	default:
 		return fmt.Sprintf("SSLAuthenticate(%d)", int64(e))
+	}
+}
+
+// A mechanism for grouping related cipher suites.
+type SSLCiphersuiteGroup int32
+
+const (
+	KSSLCiphersuiteGroupDefault          SSLCiphersuiteGroup = 0
+	KSSLCiphersuiteGroupCompatibility    SSLCiphersuiteGroup = 1
+	KSSLCiphersuiteGroupLegacy           SSLCiphersuiteGroup = 2
+	KSSLCiphersuiteGroupATS              SSLCiphersuiteGroup = 3
+	KSSLCiphersuiteGroupATSCompatibility SSLCiphersuiteGroup = 4
+	KSSLCiphersuiteGroupATSFCP_v2_1      SSLCiphersuiteGroup = 5
+)
+
+// String returns the SSLCiphersuiteGroup constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SSLCiphersuiteGroup) String() string {
+	switch e {
+	case KSSLCiphersuiteGroupDefault:
+		return "KSSLCiphersuiteGroupDefault"
+	case KSSLCiphersuiteGroupCompatibility:
+		return "KSSLCiphersuiteGroupCompatibility"
+	case KSSLCiphersuiteGroupLegacy:
+		return "KSSLCiphersuiteGroupLegacy"
+	case KSSLCiphersuiteGroupATS:
+		return "KSSLCiphersuiteGroupATS"
+	case KSSLCiphersuiteGroupATSCompatibility:
+		return "KSSLCiphersuiteGroupATSCompatibility"
+	case KSSLCiphersuiteGroupATSFCP_v2_1:
+		return "KSSLCiphersuiteGroupATSFCP_v2_1"
+	default:
+		return fmt.Sprintf("SSLCiphersuiteGroup(%d)", int64(e))
+	}
+}
+
+// An enumeration of the states of client certificate exchange.
+type SSLClientCertificateState int32
+
+const (
+	// Indicates that the server hasn’t asked for a certificate and that the client hasn’t sent one.
+	KSSLClientCertNone SSLClientCertificateState = 0
+	// Indicates that the server has asked for a certificate, but the client has not sent it.
+	KSSLClientCertRequested SSLClientCertificateState = 1
+	// Indicates that the server asked for a certificate, the client sent one, and the server validated it. The application can inspect the certificate using the function SSLGetPeerCertificates.
+	KSSLClientCertSent SSLClientCertificateState = 2
+	// Indicates that the client sent a certificate but the certificate failed validation. This value is seen only on the server side. The server application can inspect the certificate using the function SSLGetPeerCertificates.
+	KSSLClientCertRejected SSLClientCertificateState = 3
+)
+
+// String returns the SSLClientCertificateState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SSLClientCertificateState) String() string {
+	switch e {
+	case KSSLClientCertNone:
+		return "KSSLClientCertNone"
+	case KSSLClientCertRequested:
+		return "KSSLClientCertRequested"
+	case KSSLClientCertSent:
+		return "KSSLClientCertSent"
+	case KSSLClientCertRejected:
+		return "KSSLClientCertRejected"
+	default:
+		return fmt.Sprintf("SSLClientCertificateState(%d)", int64(e))
 	}
 }
 
@@ -342,6 +445,41 @@ func (e SSLSessionOption) String() string {
 		return "KSSLSessionOptionEnableSessionTickets"
 	default:
 		return fmt.Sprintf("SSLSessionOption(%d)", int64(e))
+	}
+}
+
+// The flags that represent the state of an SSL session.
+type SSLSessionState int32
+
+const (
+	// No I/O has been performed yet.
+	KSSLIdle SSLSessionState = 0
+	// The SSL handshake is in progress.
+	KSSLHandshake SSLSessionState = 1
+	// The SSL handshake is complete; the connection is ready for normal I/O.
+	KSSLConnected SSLSessionState = 2
+	// The connection closed normally.
+	KSSLClosed SSLSessionState = 3
+	// The connection aborted.
+	KSSLAborted SSLSessionState = 4
+)
+
+// String returns the SSLSessionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SSLSessionState) String() string {
+	switch e {
+	case KSSLIdle:
+		return "KSSLIdle"
+	case KSSLHandshake:
+		return "KSSLHandshake"
+	case KSSLConnected:
+		return "KSSLConnected"
+	case KSSLClosed:
+		return "KSSLClosed"
+	case KSSLAborted:
+		return "KSSLAborted"
+	default:
+		return fmt.Sprintf("SSLSessionState(%d)", int64(e))
 	}
 }
 
@@ -637,6 +775,45 @@ func (e SecExternalFormat) String() string {
 	}
 }
 
+// The import item type.
+type SecExternalItemType int64
+
+const (
+	// Indicates that the caller does not know the type of information being imported or exported.
+	KSecItemTypeUnknown SecExternalItemType = 0
+	// Indicates a private key.
+	KSecItemTypePrivateKey SecExternalItemType = 1
+	// Indicates a public key.
+	KSecItemTypePublicKey SecExternalItemType = 2
+	// Indicates a session key.
+	KSecItemTypeSessionKey SecExternalItemType = 3
+	// Indicates a certificate.
+	KSecItemTypeCertificate SecExternalItemType = 4
+	// Indicates a set of certificates or certificates and private keys.
+	KSecItemTypeAggregate SecExternalItemType = 5
+)
+
+// String returns the SecExternalItemType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecExternalItemType) String() string {
+	switch e {
+	case KSecItemTypeUnknown:
+		return "KSecItemTypeUnknown"
+	case KSecItemTypePrivateKey:
+		return "KSecItemTypePrivateKey"
+	case KSecItemTypePublicKey:
+		return "KSecItemTypePublicKey"
+	case KSecItemTypeSessionKey:
+		return "KSecItemTypeSessionKey"
+	case KSecItemTypeCertificate:
+		return "KSecItemTypeCertificate"
+	case KSecItemTypeAggregate:
+		return "KSecItemTypeAggregate"
+	default:
+		return fmt.Sprintf("SecExternalItemType(%d)", int64(e))
+	}
+}
+
 // Specifies a keychain item’s class code.
 type SecItemClass int64
 
@@ -730,6 +907,86 @@ func (e SecKeyOperationType) String() string {
 	default:
 		return fmt.Sprintf("SecKeyOperationType(%d)", int64(e))
 	}
+}
+
+// Bit masks corresponding to the events that can trigger a keychain callback.
+// Bitmask — values may be combined with |.
+type SecKeychainEventMask int64
+
+const (
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain is locked.
+	KSecLockEventMask SecKeychainEventMask = 2
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain is unlocked.
+	KSecUnlockEventMask SecKeychainEventMask = 4
+	// If the bit specified by this mask is set, your callback function is invoked when an item is added to a keychain.
+	KSecAddEventMask SecKeychainEventMask = 8
+	// If the bit specified by this mask is set, your callback function is invoked when an item is deleted from a keychain.
+	KSecDeleteEventMask SecKeychainEventMask = 16
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain item is updated.
+	KSecUpdateEventMask SecKeychainEventMask = 32
+	// If the bit specified by this mask is set, your callback function is invoked when the keychain password is changed.
+	KSecPasswordChangedEventMask SecKeychainEventMask = 64
+	// If the bit specified by this mask is set, your callback function is invoked when a different keychain is specified as the default.
+	KSecDefaultChangedEventMask SecKeychainEventMask = 512
+	// If the bit specified by this mask is set, your callback function is invoked when a process accesses a keychain item’s data.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecDataAccessEventMask SecKeychainEventMask = 1024
+	// If the bit specified by this mask is set, your callback function is invoked when a keychain list is changed.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecKeychainListChangedMask SecKeychainEventMask = 2048
+	// If the bit specified by this mask is set, your callback function is invoked when there is a change in certificate trust settings.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecTrustSettingsChangedEventMask SecKeychainEventMask = 4096
+	// If all the bits are set, your callback function is invoked whenever any event occurs.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecEveryEventMask SecKeychainEventMask = 4294967295
+)
+
+// String returns the SecKeychainEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecKeychainEventMask) String() string {
+	var parts []string
+	if e&KSecLockEventMask != 0 {
+		parts = append(parts, "KSecLockEventMask")
+	}
+	if e&KSecUnlockEventMask != 0 {
+		parts = append(parts, "KSecUnlockEventMask")
+	}
+	if e&KSecAddEventMask != 0 {
+		parts = append(parts, "KSecAddEventMask")
+	}
+	if e&KSecDeleteEventMask != 0 {
+		parts = append(parts, "KSecDeleteEventMask")
+	}
+	if e&KSecUpdateEventMask != 0 {
+		parts = append(parts, "KSecUpdateEventMask")
+	}
+	if e&KSecPasswordChangedEventMask != 0 {
+		parts = append(parts, "KSecPasswordChangedEventMask")
+	}
+	if e&KSecDefaultChangedEventMask != 0 {
+		parts = append(parts, "KSecDefaultChangedEventMask")
+	}
+	if e&KSecDataAccessEventMask != 0 {
+		parts = append(parts, "KSecDataAccessEventMask")
+	}
+	if e&KSecKeychainListChangedMask != 0 {
+		parts = append(parts, "KSecKeychainListChangedMask")
+	}
+	if e&KSecTrustSettingsChangedEventMask != 0 {
+		parts = append(parts, "KSecTrustSettingsChangedEventMask")
+	}
+	if e&KSecEveryEventMask != 0 {
+		parts = append(parts, "KSecEveryEventMask")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // Bits that define when a keychain should require a passphrase.
@@ -960,6 +1217,67 @@ func (e SecProtocolType) String() string {
 	}
 }
 
+// The keys that describe the metadata attributes of transform attributes.
+//
+// Deprecated: SecTransform is no longer supported
+type SecTransformMetaAttributeType int64
+
+const (
+	// The actual value of the attribute.
+	KSecTransformMetaAttributeValue SecTransformMetaAttributeType = 0
+	// The name of the attribute.
+	KSecTransformMetaAttributeName SecTransformMetaAttributeType = 1
+	// A direct reference to an attribute’s value.
+	KSecTransformMetaAttributeRef SecTransformMetaAttributeType = 2
+	// Indicates whether the attribute value is optional.
+	KSecTransformMetaAttributeRequired SecTransformMetaAttributeType = 3
+	// The attribute requires an outbound connection.
+	KSecTransformMetaAttributeRequiresOutboundConnection SecTransformMetaAttributeType = 4
+	// The attribute defers notifications.
+	KSecTransformMetaAttributeDeferred SecTransformMetaAttributeType = 5
+	// The attribute expects stream operation.
+	KSecTransformMetaAttributeStream SecTransformMetaAttributeType = 6
+	// The transform allows cyclic behavior.
+	KSecTransformMetaAttributeCanCycle SecTransformMetaAttributeType = 7
+	// The attribute is exportable.
+	KSecTransformMetaAttributeExternalize SecTransformMetaAttributeType = 8
+	// The attribute has an outbound connection.
+	KSecTransformMetaAttributeHasOutboundConnections SecTransformMetaAttributeType = 9
+	// The attribute has an inbound connection.
+	KSecTransformMetaAttributeHasInboundConnection SecTransformMetaAttributeType = 10
+)
+
+// String returns the SecTransformMetaAttributeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecTransformMetaAttributeType) String() string {
+	switch e {
+	case KSecTransformMetaAttributeValue:
+		return "KSecTransformMetaAttributeValue"
+	case KSecTransformMetaAttributeName:
+		return "KSecTransformMetaAttributeName"
+	case KSecTransformMetaAttributeRef:
+		return "KSecTransformMetaAttributeRef"
+	case KSecTransformMetaAttributeRequired:
+		return "KSecTransformMetaAttributeRequired"
+	case KSecTransformMetaAttributeRequiresOutboundConnection:
+		return "KSecTransformMetaAttributeRequiresOutboundConnection"
+	case KSecTransformMetaAttributeDeferred:
+		return "KSecTransformMetaAttributeDeferred"
+	case KSecTransformMetaAttributeStream:
+		return "KSecTransformMetaAttributeStream"
+	case KSecTransformMetaAttributeCanCycle:
+		return "KSecTransformMetaAttributeCanCycle"
+	case KSecTransformMetaAttributeExternalize:
+		return "KSecTransformMetaAttributeExternalize"
+	case KSecTransformMetaAttributeHasOutboundConnections:
+		return "KSecTransformMetaAttributeHasOutboundConnections"
+	case KSecTransformMetaAttributeHasInboundConnection:
+		return "KSecTransformMetaAttributeHasInboundConnection"
+	default:
+		return fmt.Sprintf("SecTransformMetaAttributeType(%d)", int64(e))
+	}
+}
+
 // The option flags used to condition a trust evaluation.
 // Bitmask — values may be combined with |.
 type SecTrustOptionFlags int64
@@ -1010,6 +1328,53 @@ func (e SecTrustOptionFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Trust evaluation result codes.
+type SecTrustResultType int64
+
+const (
+	// An indication of an invalid setting or result.
+	KSecTrustResultInvalid SecTrustResultType = 0
+	// The user granted permission to trust the certificate for the purposes designated in the specified policies.
+	KSecTrustResultProceed SecTrustResultType = 1
+	// User confirmation is required before proceeding.
+	KSecTrustResultConfirm SecTrustResultType = 2
+	// The user specified that the certificate should not be trusted.
+	KSecTrustResultDeny SecTrustResultType = 3
+	// The user did not specify a trust setting.
+	KSecTrustResultUnspecified SecTrustResultType = 4
+	// Trust is denied, but recovery may be possible.
+	KSecTrustResultRecoverableTrustFailure SecTrustResultType = 5
+	// Trust is denied and no simple fix is available.
+	KSecTrustResultFatalTrustFailure SecTrustResultType = 6
+	// A value that indicates a failure other than trust evaluation.
+	KSecTrustResultOtherError SecTrustResultType = 7
+)
+
+// String returns the SecTrustResultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecTrustResultType) String() string {
+	switch e {
+	case KSecTrustResultInvalid:
+		return "KSecTrustResultInvalid"
+	case KSecTrustResultProceed:
+		return "KSecTrustResultProceed"
+	case KSecTrustResultConfirm:
+		return "KSecTrustResultConfirm"
+	case KSecTrustResultDeny:
+		return "KSecTrustResultDeny"
+	case KSecTrustResultUnspecified:
+		return "KSecTrustResultUnspecified"
+	case KSecTrustResultRecoverableTrustFailure:
+		return "KSecTrustResultRecoverableTrustFailure"
+	case KSecTrustResultFatalTrustFailure:
+		return "KSecTrustResultFatalTrustFailure"
+	case KSecTrustResultOtherError:
+		return "KSecTrustResultOtherError"
+	default:
+		return fmt.Sprintf("SecTrustResultType(%d)", int64(e))
+	}
 }
 
 // The trust settings domains.
@@ -1096,6 +1461,132 @@ func (e SessionCreationFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Groups that collect ciphersuites of comparable security properties.
+type Tls_ciphersuite_group_t int64
+
+const (
+	Tls_ciphersuite_group_default           Tls_ciphersuite_group_t = 0
+	Tls_ciphersuite_group_compatibility     Tls_ciphersuite_group_t = 1
+	Tls_ciphersuite_group_legacy            Tls_ciphersuite_group_t = 2
+	Tls_ciphersuite_group_ats               Tls_ciphersuite_group_t = 3
+	Tls_ciphersuite_group_ats_compatibility Tls_ciphersuite_group_t = 4
+	Tls_ciphersuite_group_ats_fcp_v2_1      Tls_ciphersuite_group_t = 5
+)
+
+// String returns the Tls_ciphersuite_group_t constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tls_ciphersuite_group_t) String() string {
+	switch e {
+	case Tls_ciphersuite_group_default:
+		return "Tls_ciphersuite_group_default"
+	case Tls_ciphersuite_group_compatibility:
+		return "Tls_ciphersuite_group_compatibility"
+	case Tls_ciphersuite_group_legacy:
+		return "Tls_ciphersuite_group_legacy"
+	case Tls_ciphersuite_group_ats:
+		return "Tls_ciphersuite_group_ats"
+	case Tls_ciphersuite_group_ats_compatibility:
+		return "Tls_ciphersuite_group_ats_compatibility"
+	case Tls_ciphersuite_group_ats_fcp_v2_1:
+		return "Tls_ciphersuite_group_ats_fcp_v2_1"
+	default:
+		return fmt.Sprintf("Tls_ciphersuite_group_t(%d)", int64(e))
+	}
+}
+
+// The collection of valid ciphersuites.
+type Tls_ciphersuite_t int64
+
+const (
+	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 Tls_ciphersuite_t = 10
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA                  Tls_ciphersuite_t = 47
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA                  Tls_ciphersuite_t = 53
+	Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256               Tls_ciphersuite_t = 156
+	Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384               Tls_ciphersuite_t = 157
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256               Tls_ciphersuite_t = 60
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256               Tls_ciphersuite_t = 61
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA         Tls_ciphersuite_t = 49160
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA          Tls_ciphersuite_t = 49161
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA          Tls_ciphersuite_t = 49162
+	Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA           Tls_ciphersuite_t = 49170
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA            Tls_ciphersuite_t = 49171
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA            Tls_ciphersuite_t = 49172
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256       Tls_ciphersuite_t = 49187
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384       Tls_ciphersuite_t = 49188
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256         Tls_ciphersuite_t = 49191
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384         Tls_ciphersuite_t = 49192
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       Tls_ciphersuite_t = 49195
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       Tls_ciphersuite_t = 49196
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256         Tls_ciphersuite_t = 49199
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384         Tls_ciphersuite_t = 49200
+	Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   Tls_ciphersuite_t = 52392
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 Tls_ciphersuite_t = 52393
+	Tls_ciphersuite_AES_128_GCM_SHA256                        Tls_ciphersuite_t = 4865
+	Tls_ciphersuite_AES_256_GCM_SHA384                        Tls_ciphersuite_t = 4866
+	Tls_ciphersuite_CHACHA20_POLY1305_SHA256                  Tls_ciphersuite_t = 4867
+)
+
+// String returns the Tls_ciphersuite_t constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tls_ciphersuite_t) String() string {
+	switch e {
+	case Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA:
+		return "Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA"
+	case Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA:
+		return "Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA"
+	case Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA:
+		return "Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA"
+	case Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256:
+		return "Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256"
+	case Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384:
+		return "Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384"
+	case Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256:
+		return "Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256"
+	case Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256:
+		return "Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+	case Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
+		return "Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+	case Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:
+		return "Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256"
+	case Tls_ciphersuite_AES_128_GCM_SHA256:
+		return "Tls_ciphersuite_AES_128_GCM_SHA256"
+	case Tls_ciphersuite_AES_256_GCM_SHA384:
+		return "Tls_ciphersuite_AES_256_GCM_SHA384"
+	case Tls_ciphersuite_CHACHA20_POLY1305_SHA256:
+		return "Tls_ciphersuite_CHACHA20_POLY1305_SHA256"
+	default:
+		return fmt.Sprintf("Tls_ciphersuite_t(%d)", int64(e))
+	}
 }
 
 // The collection of supported TLS and DTLS versions.

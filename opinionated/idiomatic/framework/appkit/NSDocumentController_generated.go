@@ -225,6 +225,12 @@ func (dc *DocumentController) StandardShareMenuItem() *MenuItem {
 	return MenuItemFromID(_r)
 }
 
+// PresentError presents an error alert to the user as a modal panel.
+func (dc *DocumentController) PresentError(error_ unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentError:"), error_)
+	return _r
+}
+
 // ClearRecentDocuments empties the recent documents list for the application.
 func (dc *DocumentController) ClearRecentDocuments(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("clearRecentDocuments:"), objref.IDOf(sender))

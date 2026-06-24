@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -99,6 +101,12 @@ func (mcp *MorphologyCustomPronoun) WithPossessiveAdjectiveForm(possessiveAdject
 // WithReflexiveForm sets the reflexive pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm StringProvider) *MorphologyCustomPronoun {
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setReflexiveForm:"), objref.IDOf(reflexiveForm))
+	return mcp
+}
+
+// WithObservationInfo sets the observation info.
+func (mcp *MorphologyCustomPronoun) WithObservationInfo(observationInfo unsafe.Pointer) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return mcp
 }
 

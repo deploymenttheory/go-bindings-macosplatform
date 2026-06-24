@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -91,6 +93,12 @@ func NewDateIntervalWithStartDateEndDate(startDate *Date, endDate *Date) *DateIn
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateInterval")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDate:endDate:"), objref.IDOf(startDate), objref.IDOf(endDate))
 	return dateIntervalAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (di *DateInterval) WithObservationInfo(observationInfo unsafe.Pointer) *DateInterval {
+	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return di
 }
 
 // WithScriptingProperties sets the scripting properties.

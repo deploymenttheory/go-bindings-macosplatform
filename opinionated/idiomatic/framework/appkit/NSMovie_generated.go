@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -74,5 +76,12 @@ func NewMovie() *Movie {
 func NewMovieWithCoder(coder obj.Object) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMovie")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return movieAdopt(_id)
+}
+
+// NewMovieWithMovie creates a new Movie.
+func NewMovieWithMovie(movie unsafe.Pointer) *Movie {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMovie")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMovie:"), movie)
 	return movieAdopt(_id)
 }

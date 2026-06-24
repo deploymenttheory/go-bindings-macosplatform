@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -77,6 +78,12 @@ func NewURLSession() *URLSession {
 // WithSessionDescription sets the session description.
 func (us *URLSession) WithSessionDescription(sessionDescription StringProvider) *URLSession {
 	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setSessionDescription:"), objref.IDOf(sessionDescription))
+	return us
+}
+
+// WithObservationInfo sets the observation info.
+func (us *URLSession) WithObservationInfo(observationInfo unsafe.Pointer) *URLSession {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return us
 }
 

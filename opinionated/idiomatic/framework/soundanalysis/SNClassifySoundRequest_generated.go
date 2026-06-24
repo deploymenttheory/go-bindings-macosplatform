@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -97,9 +98,21 @@ func (csr *ClassifySoundRequest) WithOverlapFactor(overlapFactor float64) *Class
 	return csr
 }
 
+// WithWindowDuration sets the duration of the audio buffer the request sends to the underlying sound classifier for each prediction.
+func (csr *ClassifySoundRequest) WithWindowDuration(windowDuration coremedia.CMTime) *ClassifySoundRequest {
+	objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("setWindowDuration:"), windowDuration)
+	return csr
+}
+
 // OverlapFactor returns the overlap factor of the windows of audio data provided to the classifier, if the model operates on fixed audio block sizes. When performing audio analysis on fixed audio block sizes, it is common for the analysis windows to overlap by some factor. Without overlapping the analysis windows (when the overlap factor is 0.0), a sound might be split across two analysis windows, which could negatively affect classification performance. Overlapping the analysis windows by 50% ensures each sound will fall near the center of at least one analysis window. The supported range is [0.0, 1.0), and the default value is 0.5. Increasing the overlap factor increases computational complexity, so values greater than 0.5 should be used with care.
 func (csr *ClassifySoundRequest) OverlapFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(csr), objc.RegisterName("overlapFactor"))
+	return _r
+}
+
+// WindowDuration returns the duration of a single analysis window. When performing classification over an audio stream, a classifier computes each classification result based on a single 'analysis window' of audio. Analysis windows are uniformly-sized time intervals, where the size of any given window is considered that window's 'duration'. Some classifiers can operate over analysis windows which conform to one of several different duration options. Larger window durations allow classification to execute less frequently over larger contexts of audio, potentially improving classification performance. Smaller window durations allow classification to execute more frequently over smaller contexts of audio, producing results with sharper time resolution. Depending on the use-case, a larger or smaller window may be preferable. When configuring the window duration, it is important to respect the capabilities of the classifier. A classifier's supported window durations can be discovered using the `windowDurationConstraint` property. If an unsupported window duration is selected, the window duration will be automatically rounded down to the nearest supported value if possible, else rounded up.
+func (csr *ClassifySoundRequest) WindowDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(csr), objc.RegisterName("windowDuration"))
 	return _r
 }
 

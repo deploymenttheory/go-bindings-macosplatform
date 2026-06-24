@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +53,12 @@ func NewMutableVideoCompositionInstruction() *MutableVideoCompositionInstruction
 	return mutableVideoCompositionInstructionAdopt(_id)
 }
 
+// WithTimeRange sets the time range to which the instruction applies.
+func (mvci *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction {
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setTimeRange:"), timeRange)
+	return mvci
+}
+
 // WithBackgroundColor sets the background color of the composition.
 func (mvci *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
 	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
@@ -76,6 +83,12 @@ func (mvci *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrac
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setRequiredSourceSampleDataTrackIDs:"), _arr)
 	return mvci
+}
+
+// TimeRange indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
+func (mvci *MutableVideoCompositionInstruction) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(mvci), objc.RegisterName("timeRange"))
+	return _r
 }
 
 var _ VideoCompositionInstructionProvider = (*MutableVideoCompositionInstruction)(nil)

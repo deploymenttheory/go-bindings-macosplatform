@@ -72,10 +72,21 @@ func (c *Coder) String() string {
 	return rt.Description(objref.IDOf(c))
 }
 
+// WithObservationInfo sets the observation info.
+func (c *Coder) WithObservationInfo(observationInfo unsafe.Pointer) *Coder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return c
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (c *Coder) WithScriptingProperties(scriptingProperties obj.Object) *Coder {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
+}
+
+// EncodeValueOfObjCTypeAt encodes a value of the given type at the given address.
+func (c *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeValueOfObjCType:at:"), type_, addr)
 }
 
 // EncodeDataObject encodes a given data object.
@@ -87,6 +98,11 @@ func (c *Coder) EncodeDataObject(data *Data) {
 func (c *Coder) DecodeDataObject() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeDataObject"))
 	return DataFromID(_r)
+}
+
+// DecodeValueOfObjCTypeAtSize decodes a single value of a known type from the specified data buffer.
+func (c *Coder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size int) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeValueOfObjCType:at:size:"), type_, data, size)
 }
 
 // VersionForClassName this method is present for historical reasons and is not used with keyed archivers.
@@ -120,6 +136,16 @@ func (c *Coder) EncodeConditionalObject(object obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeConditionalObject:"), objref.IDOf(object))
 }
 
+// EncodeArrayOfObjCTypeCountAt encodes an array of the given Objective-C type, provided the number of items and a pointer.
+func (c *Coder) EncodeArrayOfObjCTypeCountAt(type_ string, count int, array unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeArrayOfObjCType:count:at:"), type_, count, array)
+}
+
+// EncodeBytesLength encodes a buffer of data of an unspecified type.
+func (c *Coder) EncodeBytesLength(byteaddr unsafe.Pointer, length int) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeBytes:length:"), byteaddr, length)
+}
+
 // DecodeObject returns decodes and returns an object that was previously encoded with any of the encode…Object methods.
 func (c *Coder) DecodeObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeObject"))
@@ -136,6 +162,11 @@ func (c *Coder) DecodeTopLevelObjectAndReturnError() (result obj.Object, err err
 	return obj.Wrap(_r), nil
 }
 
+// DecodeArrayOfObjCTypeCountAt decodes an array of count items, whose Objective-C type is given by itemType.
+func (c *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count int, array unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeArrayOfObjCType:count:at:"), itemType, count, array)
+}
+
 // EncodePropertyList encodes a property list.
 func (c *Coder) EncodePropertyList(aPropertyList obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodePropertyList:"), objref.IDOf(aPropertyList))
@@ -145,6 +176,11 @@ func (c *Coder) EncodePropertyList(aPropertyList obj.Object) {
 func (c *Coder) DecodePropertyList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodePropertyList"))
 	return obj.Wrap(_r)
+}
+
+// SetObjectZone this method is present for historical reasons and has no effect.
+func (c *Coder) SetObjectZone(zone unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectZone:"), zone)
 }
 
 // EncodeObjectForKey encodes an object and associates it with the string key.
@@ -297,6 +333,11 @@ func (c *Coder) DecodePropertyListForKey(key string) obj.Object {
 	return obj.Wrap(_r)
 }
 
+// FailWithError signals to this coder that the decode operation has failed.
+func (c *Coder) FailWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("failWithError:"), error_)
+}
+
 // SystemVersion returns the system version.
 func (c *Coder) SystemVersion() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("systemVersion"))
@@ -336,6 +377,11 @@ func (c *Coder) EncodeNXObject(object obj.Object) {
 func (c *Coder) DecodeNXObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeNXObject"))
 	return obj.Wrap(_r)
+}
+
+// DecodeValueOfObjCTypeAt decodes a single value, whose Objective-C type is given by valueType.
+func (c *Coder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeValueOfObjCType:at:"), type_, data)
 }
 
 // EncodePoint encodes a point.

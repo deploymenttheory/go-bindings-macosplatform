@@ -134,6 +134,36 @@ func MIDIEndpointDispose(endpt int) error {
 	return nil
 }
 
+var _fnMIDIEndpointGetRefCons func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// MIDIEndpointGetRefCons reports an error if the CoreMIDI framework function MIDIEndpointGetRefCons fails.
+func MIDIEndpointGetRefCons(endpt int, ref1 unsafe.Pointer, ref2 unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEndpointGetRefCons == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEndpointGetRefCons, _lib, "MIDIEndpointGetRefCons")
+	}
+	_rc := _fnMIDIEndpointGetRefCons(endpt, ref1, ref2)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMIDIEndpointSetRefCons func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// MIDIEndpointSetRefCons reports an error if the CoreMIDI framework function MIDIEndpointSetRefCons fails.
+func MIDIEndpointSetRefCons(endpt int, ref1 unsafe.Pointer, ref2 unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEndpointSetRefCons == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEndpointSetRefCons, _lib, "MIDIEndpointSetRefCons")
+	}
+	_rc := _fnMIDIEndpointSetRefCons(endpt, ref1, ref2)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnMIDIEntityAddOrRemoveEndpoints func(int, int, int) int32
 
 // MIDIEntityAddOrRemoveEndpoints reports an error if the CoreMIDI framework function MIDIEntityAddOrRemoveEndpoints fails.
@@ -329,6 +359,21 @@ func MIDIObjectSetStringProperty(obj_ int, propertyID obj.Object, str obj.Object
 		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _lib, "MIDIObjectSetStringProperty")
 	}
 	_rc := _fnMIDIObjectSetStringProperty(obj_, objref.IDOf(propertyID), objref.IDOf(str))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMIDIPortConnectSource func(int, int, unsafe.Pointer) int32
+
+// MIDIPortConnectSource reports an error if the CoreMIDI framework function MIDIPortConnectSource fails.
+func MIDIPortConnectSource(port int, source int, connRefCon unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIPortConnectSource == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIPortConnectSource, _lib, "MIDIPortConnectSource")
+	}
+	_rc := _fnMIDIPortConnectSource(port, source, connRefCon)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

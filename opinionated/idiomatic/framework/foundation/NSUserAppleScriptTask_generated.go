@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func userAppleScriptTaskAdopt(id objc.ID) *UserAppleScriptTask {
 func NewUserAppleScriptTask() *UserAppleScriptTask {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUserAppleScriptTask")), objc.RegisterName("new"))
 	return userAppleScriptTaskAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uast *UserAppleScriptTask) WithObservationInfo(observationInfo unsafe.Pointer) *UserAppleScriptTask {
+	objc.Send[objc.ID](objref.IDOf(uast), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uast
 }
 
 // WithScriptingProperties sets the scripting properties.

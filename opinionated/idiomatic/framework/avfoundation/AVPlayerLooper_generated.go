@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,9 +67,17 @@ func (pl *PlayerLooper) String() string {
 	return rt.Description(objref.IDOf(pl))
 }
 
-// NewPlayerLooper creates a new PlayerLooper.
-func NewPlayerLooper() *PlayerLooper {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("new"))
+// NewPlayerLooperWithPlayerTemplateItemTimeRange creates a player looper that continuously plays the specified time range of a player item.
+func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *QueuePlayer, itemToLoop *PlayerItem, loopRange coremedia.CMTimeRange) *PlayerLooper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:"), objref.IDOf(player), objref.IDOf(itemToLoop), loopRange)
+	return playerLooperAdopt(_id)
+}
+
+// NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering creates a player looper that continuously plays the full duration of a player item while adhering to the specified ordering of existing items in the queue.
+func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *QueuePlayer, itemToLoop *PlayerItem, loopRange coremedia.CMTimeRange, itemOrdering PlayerLooperItemOrdering) *PlayerLooper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:existingItemsOrdering:"), objref.IDOf(player), objref.IDOf(itemToLoop), loopRange, itemOrdering)
 	return playerLooperAdopt(_id)
 }
 

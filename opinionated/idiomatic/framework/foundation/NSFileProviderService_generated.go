@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -73,6 +74,12 @@ func (fps *FileProviderService) String() string {
 func NewFileProviderService() *FileProviderService {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderService")), objc.RegisterName("new"))
 	return fileProviderServiceAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (fps *FileProviderService) WithObservationInfo(observationInfo unsafe.Pointer) *FileProviderService {
+	objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fps
 }
 
 // WithScriptingProperties sets the scripting properties.

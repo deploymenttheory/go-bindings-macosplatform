@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	ebipurego "github.com/ebitengine/purego"
 )
@@ -18,6 +20,17 @@ func VNElementTypeSize(elementType ElementType) int {
 		ebipurego.RegisterLibFunc(&_fnVNElementTypeSize, _lib, "VNElementTypeSize")
 	}
 	return _fnVNElementTypeSize(elementType)
+}
+
+var _fnVNImagePointForFaceLandmarkPoint func(unsafe.Pointer, corefoundation.CGRect, int, int) corefoundation.CGPoint
+
+// VNImagePointForFaceLandmarkPoint calls the Vision framework function VNImagePointForFaceLandmarkPoint.
+func VNImagePointForFaceLandmarkPoint(faceLandmarkPoint unsafe.Pointer, faceBoundingBox corefoundation.CGRect, imageWidth int, imageHeight int) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNImagePointForFaceLandmarkPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnVNImagePointForFaceLandmarkPoint, _lib, "VNImagePointForFaceLandmarkPoint")
+	}
+	return _fnVNImagePointForFaceLandmarkPoint(faceLandmarkPoint, faceBoundingBox, imageWidth, imageHeight)
 }
 
 var _fnVNImagePointForNormalizedPoint func(corefoundation.CGPoint, int, int) corefoundation.CGPoint
@@ -62,6 +75,17 @@ func VNImageRectForNormalizedRectUsingRegionOfInterest(normalizedRect corefounda
 		ebipurego.RegisterLibFunc(&_fnVNImageRectForNormalizedRectUsingRegionOfInterest, _lib, "VNImageRectForNormalizedRectUsingRegionOfInterest")
 	}
 	return _fnVNImageRectForNormalizedRectUsingRegionOfInterest(normalizedRect, imageWidth, imageHeight, roi)
+}
+
+var _fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint func(unsafe.Pointer, corefoundation.CGRect, int, int) corefoundation.CGPoint
+
+// VNNormalizedFaceBoundingBoxPointForLandmarkPoint calls the Vision framework function VNNormalizedFaceBoundingBoxPointForLandmarkPoint.
+func VNNormalizedFaceBoundingBoxPointForLandmarkPoint(faceLandmarkPoint unsafe.Pointer, faceBoundingBox corefoundation.CGRect, imageWidth int, imageHeight int) corefoundation.CGPoint {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint, _lib, "VNNormalizedFaceBoundingBoxPointForLandmarkPoint")
+	}
+	return _fnVNNormalizedFaceBoundingBoxPointForLandmarkPoint(faceLandmarkPoint, faceBoundingBox, imageWidth, imageHeight)
 }
 
 var _fnVNNormalizedPointForImagePoint func(corefoundation.CGPoint, int, int) corefoundation.CGPoint

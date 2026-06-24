@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -100,6 +102,11 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTT
 // CompleteWithAuthorizationResult call when authorization succeeded with
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult) {
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithAuthorizationResult:"), objref.IDOf(authorizationResult))
+}
+
+// CompleteWithError indicates the requested authorization failed.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithError:"), error_)
 }
 
 // URL returns request URL with all components.

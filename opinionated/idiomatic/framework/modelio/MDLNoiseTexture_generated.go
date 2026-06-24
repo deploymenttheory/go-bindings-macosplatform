@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,9 +47,24 @@ func noiseTextureAdopt(id objc.ID) *NoiseTexture {
 	return x
 }
 
-// NewNoiseTexture creates a new NoiseTexture.
-func NewNoiseTexture() *NoiseTexture {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLNoiseTexture")), objc.RegisterName("new"))
+// NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding initializes a noise texture that creates random directional noise.
+func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding TextureChannelEncoding) *NoiseTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNoiseTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:"), smoothness, purego.NSString(name), textureDimensions, channelEncoding)
+	return noiseTextureAdopt(_id)
+}
+
+// NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale initializes a noise texture that creates random color noise.
+func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding TextureChannelEncoding, grayscale bool) *NoiseTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNoiseTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:"), smoothness, purego.NSString(name), textureDimensions, channelCount, channelEncoding, grayscale)
+	return noiseTextureAdopt(_id)
+}
+
+// NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding create a texture containing cellular noise.
+func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name string, textureDimensions unsafe.Pointer, channelEncoding TextureChannelEncoding) *NoiseTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNoiseTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:"), frequency, purego.NSString(name), textureDimensions, channelEncoding)
 	return noiseTextureAdopt(_id)
 }
 

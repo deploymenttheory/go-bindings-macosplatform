@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (fai *FileAccessIntent) String() string {
 func NewFileAccessIntent() *FileAccessIntent {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSFileAccessIntent")), objc.RegisterName("new"))
 	return fileAccessIntentAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (fai *FileAccessIntent) WithObservationInfo(observationInfo unsafe.Pointer) *FileAccessIntent {
+	objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fai
 }
 
 // WithScriptingProperties sets the scripting properties.

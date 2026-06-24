@@ -11,6 +11,12 @@ type HvVcpuExitExceptionT struct {
 	Physical_address uint64
 }
 
+// Information about an exit from the vCPU to the host.
+type HvVcpuExitT struct {
+	Reason    Hv_exit_reason_t
+	Exception HvVcpuExitExceptionT
+}
+
 type HvVcpuSmeStateT struct {
 	Streaming_sve_mode_enabled bool
 	Za_storage_enabled         bool

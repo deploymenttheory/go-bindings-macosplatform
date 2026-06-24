@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,12 @@ func NewSocketPortNameServer() *SocketPortNameServer {
 // WithDefaultNameServerPortNumber sets returns the port number used to contact the name server.
 func (spns *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer {
 	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setDefaultNameServerPortNumber:"), defaultNameServerPortNumber)
+	return spns
+}
+
+// WithObservationInfo sets the observation info.
+func (spns *SocketPortNameServer) WithObservationInfo(observationInfo unsafe.Pointer) *SocketPortNameServer {
+	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return spns
 }
 

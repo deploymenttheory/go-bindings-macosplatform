@@ -113,6 +113,12 @@ func (mq *MetadataQuery) WithOperationQueue(operationQueue *OperationQueue) *Met
 	return mq
 }
 
+// WithObservationInfo sets the observation info.
+func (mq *MetadataQuery) WithObservationInfo(observationInfo unsafe.Pointer) *MetadataQuery {
+	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mq
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (mq *MetadataQuery) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQuery {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

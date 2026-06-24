@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (pc *ProtocolChecker) String() string {
 	return rt.Description(objref.IDOf(pc))
 }
 
-// NewProtocolChecker creates a new ProtocolChecker.
-func NewProtocolChecker() *ProtocolChecker {
-	_id := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("new"))
+// NewProtocolCheckerWithTargetProtocol initializes a newly allocated NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
+func NewProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Pointer) *ProtocolChecker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:protocol:"), objref.IDOf(anObject), aProtocol)
 	return protocolCheckerAdopt(_id)
 }
 

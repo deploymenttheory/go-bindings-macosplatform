@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func mutableCharacterSetAdopt(id objc.ID) *MutableCharacterSet {
 func NewMutableCharacterSet() *MutableCharacterSet {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("new"))
 	return mutableCharacterSetAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mcs *MutableCharacterSet) WithObservationInfo(observationInfo unsafe.Pointer) *MutableCharacterSet {
+	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mcs
 }
 
 // WithScriptingProperties sets the scripting properties.

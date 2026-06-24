@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -66,10 +67,24 @@ func (cg *CaptionGroup) String() string {
 	return rt.Description(objref.IDOf(cg))
 }
 
-// NewCaptionGroup creates a new CaptionGroup.
-func NewCaptionGroup() *CaptionGroup {
-	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionGroup")), objc.RegisterName("new"))
+// NewCaptionGroupWithCaptionsTimeRange creates a caption group with captions and a time range.
+func NewCaptionGroupWithCaptionsTimeRange(captions []*Caption, timeRange coremedia.CMTimeRange) *CaptionGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }), timeRange)
 	return captionGroupAdopt(_id)
+}
+
+// NewCaptionGroupWithTimeRange creates a caption group with a time range.
+func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeRange:"), timeRange)
+	return captionGroupAdopt(_id)
+}
+
+// TimeRange returns the time range represented by the caption group. If there are no captions in the group (i.e. the value of the captions property is an empty array), then the value of this property represents the time range of a sequence where no captions are present.
+func (cg *CaptionGroup) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(cg), objc.RegisterName("timeRange"))
+	return _r
 }
 
 // Captions returns an array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.

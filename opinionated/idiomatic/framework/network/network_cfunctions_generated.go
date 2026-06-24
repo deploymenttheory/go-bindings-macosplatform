@@ -5,6 +5,8 @@
 package network
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -42,6 +44,17 @@ func NwAdvertiseDescriptorSetNoAutoRename(advertise_descriptor obj.Object, no_au
 		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorSetNoAutoRename, _lib, "nw_advertise_descriptor_set_no_auto_rename")
 	}
 	_fnNwAdvertiseDescriptorSetNoAutoRename(objref.IDOf(advertise_descriptor), no_auto_rename)
+}
+
+var _fnNwAdvertiseDescriptorSetTxtRecord func(objc.ID, unsafe.Pointer, int)
+
+// NwAdvertiseDescriptorSetTxtRecord calls the Network framework function nw_advertise_descriptor_set_txt_record.
+func NwAdvertiseDescriptorSetTxtRecord(advertise_descriptor obj.Object, txt_record unsafe.Pointer, txt_length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwAdvertiseDescriptorSetTxtRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorSetTxtRecord, _lib, "nw_advertise_descriptor_set_txt_record")
+	}
+	_fnNwAdvertiseDescriptorSetTxtRecord(objref.IDOf(advertise_descriptor), txt_record, txt_length)
 }
 
 var _fnNwAdvertiseDescriptorSetTxtRecordObject func(objc.ID, objc.ID)
@@ -850,6 +863,19 @@ func NwFramerAsync(framer obj.Object, async_block func()) {
 	_fnNwFramerAsync(objref.IDOf(framer), async_block)
 }
 
+var _fnNwFramerDeliverInput func(objc.ID, unsafe.Pointer, int, objc.ID, bool)
+
+// NwFramerDeliverInput calls the Network framework function nw_framer_deliver_input.
+func NwFramerDeliverInput(framer obj.Object, input_length int, message obj.Object, is_complete bool) (input_buffer uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerDeliverInput == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerDeliverInput, _lib, "nw_framer_deliver_input")
+	}
+	var _out0 uint8
+	_fnNwFramerDeliverInput(objref.IDOf(framer), unsafe.Pointer(&_out0), input_length, objref.IDOf(message), is_complete)
+	return _out0
+}
+
 var _fnNwFramerDeliverInputNoCopy func(objc.ID, int, objc.ID, bool) bool
 
 // NwFramerDeliverInputNoCopy calls the Network framework function nw_framer_deliver_input_no_copy.
@@ -947,6 +973,19 @@ func NwFramerScheduleWakeup(framer obj.Object, milliseconds uint64) {
 		ebipurego.RegisterLibFunc(&_fnNwFramerScheduleWakeup, _lib, "nw_framer_schedule_wakeup")
 	}
 	_fnNwFramerScheduleWakeup(objref.IDOf(framer), milliseconds)
+}
+
+var _fnNwFramerWriteOutput func(objc.ID, unsafe.Pointer, int)
+
+// NwFramerWriteOutput calls the Network framework function nw_framer_write_output.
+func NwFramerWriteOutput(framer obj.Object, output_length int) (output_buffer uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerWriteOutput == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerWriteOutput, _lib, "nw_framer_write_output")
+	}
+	var _out0 uint8
+	_fnNwFramerWriteOutput(objref.IDOf(framer), unsafe.Pointer(&_out0), output_length)
+	return _out0
 }
 
 var _fnNwFramerWriteOutputData func(objc.ID, objc.ID)
@@ -2324,6 +2363,17 @@ func NwRelayHopAddAdditionalHttpHeaderField(relay_hop obj.Object, field_name str
 	_fnNwRelayHopAddAdditionalHttpHeaderField(objref.IDOf(relay_hop), field_name, field_value)
 }
 
+var _fnNwRelease func(unsafe.Pointer)
+
+// NwRelease calls the Network framework function nw_release.
+func NwRelease(obj_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnNwRelease, _lib, "nw_release")
+	}
+	_fnNwRelease(obj_)
+}
+
 var _fnNwResolutionReportGetEndpointCount func(objc.ID) uint32
 
 // NwResolutionReportGetEndpointCount calls the Network framework function nw_resolution_report_get_endpoint_count.
@@ -2586,6 +2636,19 @@ func NwTxtRecordRemoveKey(txt_record obj.Object, key string) bool {
 		ebipurego.RegisterLibFunc(&_fnNwTxtRecordRemoveKey, _lib, "nw_txt_record_remove_key")
 	}
 	return _fnNwTxtRecordRemoveKey(objref.IDOf(txt_record), key)
+}
+
+var _fnNwTxtRecordSetKey func(objc.ID, string, unsafe.Pointer, int) bool
+
+// NwTxtRecordSetKey calls the Network framework function nw_txt_record_set_key.
+func NwTxtRecordSetKey(txt_record obj.Object, key string, value_len int) (ok bool, value uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTxtRecordSetKey == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTxtRecordSetKey, _lib, "nw_txt_record_set_key")
+	}
+	var _out0 uint8
+	_ret := _fnNwTxtRecordSetKey(objref.IDOf(txt_record), key, unsafe.Pointer(&_out0), value_len)
+	return _ret, _out0
 }
 
 var _fnNwUdpOptionsSetPreferNoChecksum func(objc.ID, bool)

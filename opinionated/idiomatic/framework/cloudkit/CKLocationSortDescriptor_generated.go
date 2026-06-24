@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,13 @@ func (lsd *LocationSortDescriptor) IsKind(className string) bool {
 // under fmt.
 func (lsd *LocationSortDescriptor) String() string {
 	return rt.Description(objref.IDOf(lsd))
+}
+
+// NewLocationSortDescriptorWithKeyRelativeLocation creates a location sort descriptor using the specified key and relative location.
+func NewLocationSortDescriptorWithKeyRelativeLocation(key string, relativeLocation unsafe.Pointer) *LocationSortDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:relativeLocation:"), purego.NSString(key), relativeLocation)
+	return locationSortDescriptorAdopt(_id)
 }
 
 // NewLocationSortDescriptorWithCoder creates a location sort descriptor from a serialized instance.

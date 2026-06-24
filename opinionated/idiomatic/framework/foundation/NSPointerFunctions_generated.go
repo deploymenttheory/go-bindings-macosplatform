@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,42 @@ func NewPointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFun
 	return pointerFunctionsAdopt(_id)
 }
 
+// WithHashFunction sets the hash function.
+func (pf *PointerFunctions) WithHashFunction(hashFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setHashFunction:"), hashFunction)
+	return pf
+}
+
+// WithIsEqualFunction sets the function used to compare pointers.
+func (pf *PointerFunctions) WithIsEqualFunction(isEqualFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setIsEqualFunction:"), isEqualFunction)
+	return pf
+}
+
+// WithSizeFunction sets the function used to determine the size of pointers.
+func (pf *PointerFunctions) WithSizeFunction(sizeFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setSizeFunction:"), sizeFunction)
+	return pf
+}
+
+// WithDescriptionFunction sets the function used to describe elements.
+func (pf *PointerFunctions) WithDescriptionFunction(descriptionFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setDescriptionFunction:"), descriptionFunction)
+	return pf
+}
+
+// WithRelinquishFunction sets the function used to relinquish memory.
+func (pf *PointerFunctions) WithRelinquishFunction(relinquishFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setRelinquishFunction:"), relinquishFunction)
+	return pf
+}
+
+// WithAcquireFunction sets the function used to acquire memory.
+func (pf *PointerFunctions) WithAcquireFunction(acquireFunction unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setAcquireFunction:"), acquireFunction)
+	return pf
+}
+
 // WithUsesStrongWriteBarrier sets specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
 func (pf *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
@@ -82,6 +120,12 @@ func (pf *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bo
 // WithUsesWeakReadAndWriteBarriers sets specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
 func (pf *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
+	return pf
+}
+
+// WithObservationInfo sets the observation info.
+func (pf *PointerFunctions) WithObservationInfo(observationInfo unsafe.Pointer) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pf
 }
 

@@ -5,6 +5,8 @@
 package compositorservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -181,6 +183,17 @@ func CpDrawableMtl4EncodePresent(drawable obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableMtl4EncodePresent, _lib, "cp_drawable_mtl4_encode_present")
 	}
 	_fnCpDrawableMtl4EncodePresent(objref.IDOf(drawable))
+}
+
+var _fnCpDrawableSetDepthRange func(objc.ID, unsafe.Pointer)
+
+// CpDrawableSetDepthRange calls the CompositorServices framework function cp_drawable_set_depth_range.
+func CpDrawableSetDepthRange(drawable obj.Object, depth_range unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableSetDepthRange == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableSetDepthRange, _lib, "cp_drawable_set_depth_range")
+	}
+	_fnCpDrawableSetDepthRange(objref.IDOf(drawable), depth_range)
 }
 
 var _fnCpDrawableSetDeviceAnchor func(objc.ID, objc.ID)
@@ -449,6 +462,17 @@ func CpLayerRendererConfigurationGetSupportsMtl4(configuration *_cp_layer_render
 	return _fnCpLayerRendererConfigurationGetSupportsMtl4(objref.IDOf(configuration))
 }
 
+var _fnCpLayerRendererConfigurationSetDefaultDepthRange func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetDefaultDepthRange calls the CompositorServices framework function cp_layer_renderer_configuration_set_default_depth_range.
+func CpLayerRendererConfigurationSetDefaultDepthRange(configuration *_cp_layer_renderer_configuration, depth_range unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetDefaultDepthRange == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetDefaultDepthRange, _lib, "cp_layer_renderer_configuration_set_default_depth_range")
+	}
+	_fnCpLayerRendererConfigurationSetDefaultDepthRange(objref.IDOf(configuration), depth_range)
+}
+
 var _fnCpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount func(objc.ID, int)
 
 // CpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount calls the CompositorServices framework function cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count.
@@ -660,6 +684,17 @@ func CpLayerRendererWaitUntilRunning(layer_renderer *_cp_layer_renderer) {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererWaitUntilRunning, _lib, "cp_layer_renderer_wait_until_running")
 	}
 	_fnCpLayerRendererWaitUntilRunning(objref.IDOf(layer_renderer))
+}
+
+var _fnCpRelease func(unsafe.Pointer)
+
+// CpRelease calls the CompositorServices framework function cp_release.
+func CpRelease(obj_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCpRelease, _lib, "cp_release")
+	}
+	_fnCpRelease(obj_)
 }
 
 var _fnCpTextureTopologyGetArrayLength func(objc.ID) uint64

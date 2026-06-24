@@ -6,6 +6,7 @@ package corelocation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -87,6 +88,18 @@ func (lm *LocationManager) WithActivityType(activityType ActivityType) *Location
 	return lm
 }
 
+// WithDistanceFilter sets the minimum distance in meters the device must move horizontally before an update event is generated.
+func (lm *LocationManager) WithDistanceFilter(distanceFilter unsafe.Pointer) *LocationManager {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setDistanceFilter:"), distanceFilter)
+	return lm
+}
+
+// WithDesiredAccuracy sets the accuracy of the location data that your app wants to receive.
+func (lm *LocationManager) WithDesiredAccuracy(desiredAccuracy unsafe.Pointer) *LocationManager {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setDesiredAccuracy:"), desiredAccuracy)
+	return lm
+}
+
 // WithPausesLocationUpdatesAutomatically sets a Boolean value that indicates whether the location-manager object may pause location updates.
 func (lm *LocationManager) WithPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) *LocationManager {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setPausesLocationUpdatesAutomatically:"), pausesLocationUpdatesAutomatically)
@@ -96,6 +109,12 @@ func (lm *LocationManager) WithPausesLocationUpdatesAutomatically(pausesLocation
 // WithAllowsBackgroundLocationUpdates sets a Boolean value that indicates whether the app receives location updates when running in the background.
 func (lm *LocationManager) WithAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) *LocationManager {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setAllowsBackgroundLocationUpdates:"), allowsBackgroundLocationUpdates)
+	return lm
+}
+
+// WithHeadingFilter sets the minimum angular change in degrees required to generate new heading events.
+func (lm *LocationManager) WithHeadingFilter(headingFilter unsafe.Pointer) *LocationManager {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setHeadingFilter:"), headingFilter)
 	return lm
 }
 
@@ -174,6 +193,11 @@ func (lm *LocationManager) StopMonitoringSignificantLocationChanges() {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringSignificantLocationChanges"))
 }
 
+// StartMonitoringForRegionDesiredAccuracy starts monitoring for region desired accuracy.
+func (lm *LocationManager) StartMonitoringForRegionDesiredAccuracy(region *Region, accuracy unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringForRegion:desiredAccuracy:"), objref.IDOf(region), accuracy)
+}
+
 // StopMonitoringForRegion stops monitoring for region.
 func (lm *LocationManager) StopMonitoringForRegion(region *Region) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringForRegion:"), objref.IDOf(region))
@@ -207,6 +231,11 @@ func (lm *LocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *B
 // StopRangingBeaconsSatisfyingConstraint stops the delivery of notifications for the specified beacon constraints.
 func (lm *LocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopRangingBeaconsSatisfyingConstraint:"), objref.IDOf(constraint))
+}
+
+// AllowDeferredLocationUpdatesUntilTraveledTimeout wraps the corresponding Objective-C method.
+func (lm *LocationManager) AllowDeferredLocationUpdatesUntilTraveledTimeout(distance unsafe.Pointer, timeout float64) {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("allowDeferredLocationUpdatesUntilTraveled:timeout:"), distance, timeout)
 }
 
 // DisallowDeferredLocationUpdates wraps the corresponding Objective-C method.

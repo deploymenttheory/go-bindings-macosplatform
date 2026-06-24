@@ -97,6 +97,26 @@ func (e LegibleMediaOptionsMenuContents) String() string {
 	return strings.Join(parts, "|")
 }
 
+type LegibleMediaOptionsMenuStateChangeReason int64
+
+const (
+	LegibleMediaOptionsMenuStateChangeReasonNone             LegibleMediaOptionsMenuStateChangeReason = 0
+	LegibleMediaOptionsMenuStateChangeReasonLanguageMismatch LegibleMediaOptionsMenuStateChangeReason = 1
+)
+
+// String returns the LegibleMediaOptionsMenuStateChangeReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LegibleMediaOptionsMenuStateChangeReason) String() string {
+	switch e {
+	case LegibleMediaOptionsMenuStateChangeReasonNone:
+		return "LegibleMediaOptionsMenuStateChangeReasonNone"
+	case LegibleMediaOptionsMenuStateChangeReasonLanguageMismatch:
+		return "LegibleMediaOptionsMenuStateChangeReasonLanguageMismatch"
+	default:
+		return fmt.Sprintf("LegibleMediaOptionsMenuStateChangeReason(%d)", int64(e))
+	}
+}
+
 // Constants that indicate which user interface controls the view displays.
 type PlayerViewControlsStyle int64
 

@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,10 +68,31 @@ func (rd *RenderDestination) String() string {
 	return rt.Description(objref.IDOf(rd))
 }
 
+// NewRenderDestinationWithPixelBuffer creates a render destination based on a Core Video pixel buffer.
+func NewRenderDestinationWithPixelBuffer(pixelBuffer unsafe.Pointer) *RenderDestination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIRenderDestination")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:"), pixelBuffer)
+	return renderDestinationAdopt(_id)
+}
+
+// NewRenderDestinationWithIOSurface creates a render destination based on an IOSurface object.
+func NewRenderDestinationWithIOSurface(surface unsafe.Pointer) *RenderDestination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIRenderDestination")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:"), surface)
+	return renderDestinationAdopt(_id)
+}
+
 // NewRenderDestinationWithGLTextureTargetWidthHeight creates a render destination based on an OpenGL texture.
 func NewRenderDestinationWithGLTextureTargetWidthHeight(texture int, target int, width int, height int) *RenderDestination {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIRenderDestination")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGLTexture:target:width:height:"), texture, target, width, height)
+	return renderDestinationAdopt(_id)
+}
+
+// NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat creates a render destination based on a client-managed buffer.
+func NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.Pointer, width int, height int, bytesPerRow int, format int) *RenderDestination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIRenderDestination")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapData:width:height:bytesPerRow:format:"), data, width, height, bytesPerRow, format)
 	return renderDestinationAdopt(_id)
 }
 

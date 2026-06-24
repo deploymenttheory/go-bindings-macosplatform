@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -44,6 +45,12 @@ func captureFileOutputAdopt(id objc.ID) *CaptureFileOutput {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithMaxRecordedDuration sets the longest duration allowed for the recording.
+func (cfo *CaptureFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cfo), objc.RegisterName("setMaxRecordedDuration:"), maxRecordedDuration)
+	return cfo
 }
 
 // WithMaxRecordedFileSize sets the maximum size, in bytes, of the data that should be recorded by the receiver.
@@ -97,9 +104,21 @@ func (cfo *CaptureFileOutput) IsRecordingPaused() bool {
 	return _r
 }
 
+// RecordedDuration indicates the duration of the media recorded to the current output file. If recording is in progress, this property returns the total time recorded so far.
+func (cfo *CaptureFileOutput) RecordedDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cfo), objc.RegisterName("recordedDuration"))
+	return _r
+}
+
 // RecordedFileSize indicates the size, in bytes, of the data recorded to the current output file. If a recording is in progress, this property returns the size in bytes of the data recorded so far.
 func (cfo *CaptureFileOutput) RecordedFileSize() int64 {
 	_r := objc.Send[int64](objref.IDOf(cfo), objc.RegisterName("recordedFileSize"))
+	return _r
+}
+
+// MaxRecordedDuration specifies the maximum duration of the media that should be recorded by the receiver. This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
+func (cfo *CaptureFileOutput) MaxRecordedDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cfo), objc.RegisterName("maxRecordedDuration"))
 	return _r
 }
 

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -88,5 +89,11 @@ func (pvoc *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object
 // PreferredTransform returns the preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
 func (pvoc *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(pvoc), objc.RegisterName("preferredTransform"))
+	return _r
+}
+
+// ActivationTime returns host time when this configuration became active on the player the vending output is attached to.
+func (pvoc *PlayerVideoOutputConfiguration) ActivationTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(pvoc), objc.RegisterName("activationTime"))
 	return _r
 }

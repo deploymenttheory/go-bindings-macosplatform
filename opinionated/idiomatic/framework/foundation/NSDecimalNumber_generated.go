@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -65,6 +67,12 @@ func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *De
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
 	return decimalNumberAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (dn *DecimalNumber) WithObservationInfo(observationInfo unsafe.Pointer) *DecimalNumber {
+	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return dn
 }
 
 // WithScriptingProperties sets the scripting properties.

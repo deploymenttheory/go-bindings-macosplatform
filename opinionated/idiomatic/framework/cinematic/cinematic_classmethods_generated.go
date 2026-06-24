@@ -6,9 +6,11 @@ package cinematic
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -99,6 +101,12 @@ func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity determine the disparity to use to focus on the object in the rectangle. - Parameters: - disparityBuffer: A pixel buffer from the cinematic disparity track for the frame in which the object occurs. - normalizedRect: The rectangle within the disparity buffer where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right of the disparity buffer. - detectionType: The type of object expected within the rectangle. Pass `CNDetectionTypeUnknown` if unknown. - priorDisparity: The disparity of the object in the prior frame. This helps ensure the object is not mistaken for another that enters the same rectangle. Pass `NAN` if there is no known prior, such as in the first frame in which the object is being tracked.
+func DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect corefoundation.CGRect, sourceDisparity unsafe.Pointer, detectionType DetectionType, priorDisparity float32) float32 {
+	_r := objc.Send[float32](objc.ID(_class("CNDetection")), objc.RegisterName("disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:"), normalizedRect, sourceDisparity, detectionType, priorDisparity)
+	return _r
 }
 
 // CNObjectTrackerIsSupported reports whether the current device supports object detection and tracking.

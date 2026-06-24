@@ -83,6 +83,12 @@ func NewBundleWithURL(url string) *Bundle {
 	return bundleAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (b *Bundle) WithObservationInfo(observationInfo unsafe.Pointer) *Bundle {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return b
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (b *Bundle) WithScriptingProperties(scriptingProperties obj.Object) *Bundle {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

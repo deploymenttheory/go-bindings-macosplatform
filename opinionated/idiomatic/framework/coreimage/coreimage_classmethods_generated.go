@@ -521,6 +521,12 @@ func FilterWithImageDataOptions(data obj.Object, options obj.Object) *Filter {
 	return FilterFromID(_r)
 }
 
+// FilterWithCVPixelBufferPropertiesOptions returns a CIFilter that will in turn return a properly processed CIImage as "outputImage". Note that when using this initializer, you should pass in a CVPixelBufferRef with one of the following Raw pixel format types kCVPixelFormatType_14Bayer_GRBG, kCVPixelFormatType_14Bayer_RGGB, kCVPixelFormatType_14Bayer_BGGR, kCVPixelFormatType_14Bayer_GBRG as well as the root properties attachment from the CMSampleBufferRef.
+func FilterWithCVPixelBufferPropertiesOptions(pixelBuffer unsafe.Pointer, properties obj.Object, options obj.Object) *Filter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIFilter")), objc.RegisterName("filterWithCVPixelBuffer:properties:options:"), pixelBuffer, objref.IDOf(properties), objref.IDOf(options))
+	return FilterFromID(_r)
+}
+
 // SupportedRawCameraModels returns a NSArray containing the names of all supported RAW cameras.
 //
 // SupportedRawCameraModels returns the collection as a Go slice.
@@ -616,6 +622,30 @@ func ImageWithData(data obj.Object) *Image {
 // ImageWithDataOptions creates and returns an image object initialized with the supplied image data, using the specified options.
 func ImageWithDataOptions(data obj.Object, options obj.Object) *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return ImageFromID(_r)
+}
+
+// ImageWithCVImageBuffer creates and returns an image object from the contents of CVImageBuffer object.
+func ImageWithCVImageBuffer(imageBuffer unsafe.Pointer) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVImageBuffer:"), imageBuffer)
+	return ImageFromID(_r)
+}
+
+// ImageWithCVImageBufferOptions creates and returns an image object from the contents of CVImageBuffer object, using the specified options.
+func ImageWithCVImageBufferOptions(imageBuffer unsafe.Pointer, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVImageBuffer:options:"), imageBuffer, objref.IDOf(options))
+	return ImageFromID(_r)
+}
+
+// ImageWithCVPixelBuffer creates and returns an image object from the contents of CVPixelBuffer object.
+func ImageWithCVPixelBuffer(pixelBuffer unsafe.Pointer) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVPixelBuffer:"), pixelBuffer)
+	return ImageFromID(_r)
+}
+
+// ImageWithCVPixelBufferOptions creates and returns an image object from the contents of CVPixelBuffer object, using the specified options.
+func ImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *Image {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
@@ -923,6 +953,12 @@ func FilterWithImageURL(url string) *RAWFilter {
 // FilterWithImageDataIdentifierHint creates a RAW filter from the image data and type hint that you specify.
 func FilterWithImageDataIdentifierHint(data obj.Object, identifierHint string) *RAWFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithImageData:identifierHint:"), objref.IDOf(data), purego.NSString(identifierHint))
+	return RAWFilterFromID(_r)
+}
+
+// FilterWithCVPixelBufferProperties creates a RAW filter from the pixel buffer and its properties that you specify.
+func FilterWithCVPixelBufferProperties(buffer unsafe.Pointer, properties obj.Object) *RAWFilter {
+	_r := objc.Send[objc.ID](objc.ID(_class("CIRAWFilter")), objc.RegisterName("filterWithCVPixelBuffer:properties:"), buffer, objref.IDOf(properties))
 	return RAWFilterFromID(_r)
 }
 

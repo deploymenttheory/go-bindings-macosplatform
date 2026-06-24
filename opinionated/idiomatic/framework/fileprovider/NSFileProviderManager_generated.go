@@ -150,6 +150,25 @@ func (fpm *FileProviderManager) TemporaryDirectoryURLWithError() (result obj.Obj
 	return obj.Wrap(_r), nil
 }
 
+// SignalErrorResolved indicates a resolved error.
+//
+// SignalErrorResolved blocks until the operation completes or ctx is cancelled.
+func (fpm *FileProviderManager) SignalErrorResolved(ctx context.Context, error_ unsafe.Pointer) error {
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("signalErrorResolved:completionHandler:"), error_, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
 // GlobalProgressForKind returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
 func (fpm *FileProviderManager) GlobalProgressForKind(kind obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("globalProgressForKind:"), objref.IDOf(kind))
@@ -297,6 +316,25 @@ func (fpm *FileProviderManager) StateDirectoryURLWithError() (result obj.Object,
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
+}
+
+// RequestDiagnosticCollectionForItemWithIdentifierErrorReason requests a diagnostics collection for use when working directly with Apple to improve sync behavior.
+//
+// RequestDiagnosticCollectionForItemWithIdentifierErrorReason blocks until the operation completes or ctx is cancelled.
+func (fpm *FileProviderManager) RequestDiagnosticCollectionForItemWithIdentifierErrorReason(ctx context.Context, itemIdentifier obj.Object, errorReason unsafe.Pointer) error {
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("requestDiagnosticCollectionForItemWithIdentifier:errorReason:completionHandler:"), objref.IDOf(itemIdentifier), errorReason, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
 }
 
 // ListAvailableTestingOperationsWithError lists all the operations that are ready for scheduling.

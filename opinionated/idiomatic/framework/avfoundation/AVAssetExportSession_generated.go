@@ -8,6 +8,7 @@ import (
 	"context"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -96,6 +97,12 @@ func (aes *AssetExportSession) WithShouldOptimizeForNetworkUse(shouldOptimizeFor
 // WithAllowsParallelizedExport sets a Boolean value that indicates whether the session can parallelize its export operation.
 func (aes *AssetExportSession) WithAllowsParallelizedExport(allowsParallelizedExport bool) *AssetExportSession {
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setAllowsParallelizedExport:"), allowsParallelizedExport)
+	return aes
+}
+
+// WithTimeRange sets the time range of the source asset to export.
+func (aes *AssetExportSession) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetExportSession {
+	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setTimeRange:"), timeRange)
 	return aes
 }
 
@@ -257,6 +264,18 @@ func (aes *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context)
 func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("supportedFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// TimeRange returns the time range.
+func (aes *AssetExportSession) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(aes), objc.RegisterName("timeRange"))
+	return _r
+}
+
+// MaxDuration returns the max duration.
+func (aes *AssetExportSession) MaxDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(aes), objc.RegisterName("maxDuration"))
+	return _r
 }
 
 // EstimatedOutputFileLength returns the estimated output file length.

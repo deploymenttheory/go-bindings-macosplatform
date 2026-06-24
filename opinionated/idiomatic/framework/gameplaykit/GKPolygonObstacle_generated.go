@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,9 +47,10 @@ func polygonObstacleAdopt(id objc.ID) *PolygonObstacle {
 	return x
 }
 
-// NewPolygonObstacle creates a new PolygonObstacle.
-func NewPolygonObstacle() *PolygonObstacle {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKPolygonObstacle")), objc.RegisterName("new"))
+// NewPolygonObstacleWithPointsCount initializes a polygon obstacle with the specified list of vertices.
+func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints int) *PolygonObstacle {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKPolygonObstacle")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoints:count:"), points, numPoints)
 	return polygonObstacleAdopt(_id)
 }
 

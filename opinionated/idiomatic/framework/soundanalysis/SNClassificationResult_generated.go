@@ -6,6 +6,7 @@ package soundanalysis
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,4 +85,10 @@ func (cr *ClassificationResult) ClassificationForIdentifier(identifier string) *
 func (cr *ClassificationResult) Classifications() []*Classification {
 	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("classifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Classification { return ClassificationFromID(_id) })
+}
+
+// TimeRange returns the time range in the client-provided audio stream to which this classification result corresponds Each CMTime contains of a value (audio frame count) and timescale (client sample rate). This enables the client to precisely identify the frame range in the original audio stream to which this result corresponds. Time ranges will often be in the past compared to the frame count of the most recent audio buffer provided to the analyzer, due to the inherent audio buffering operations required to deliver a full block of audio to an MLModel.
+func (cr *ClassificationResult) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(cr), objc.RegisterName("timeRange"))
+	return _r
 }

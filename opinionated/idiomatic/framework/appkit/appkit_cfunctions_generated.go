@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -205,6 +207,19 @@ func NSBeep() {
 	_fnNSBeep()
 }
 
+var _fnNSBestDepth func(objc.ID, int, int, bool, unsafe.Pointer) WindowDepth
+
+// NSBestDepth calls the AppKit framework function NSBestDepth.
+func NSBestDepth(colorSpace obj.Object, bps int, bpp int, planar bool) (result WindowDepth, exactMatch bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSBestDepth == nil {
+		ebipurego.RegisterLibFunc(&_fnNSBestDepth, _lib, "NSBestDepth")
+	}
+	var _out0 bool
+	_ret := _fnNSBestDepth(objref.IDOf(colorSpace), bps, bpp, planar, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnNSBitsPerPixelFromDepth func(WindowDepth) int
 
 // NSBitsPerPixelFromDepth calls the AppKit framework function NSBitsPerPixelFromDepth.
@@ -239,6 +254,19 @@ func NSColorSpaceFromDepth(depth WindowDepth) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnNSConvertGlyphsToPackedGlyphs func(unsafe.Pointer, int, MultibyteGlyphPacking, string) int
+
+// NSConvertGlyphsToPackedGlyphs calls the AppKit framework function NSConvertGlyphsToPackedGlyphs.
+func NSConvertGlyphsToPackedGlyphs(count int, packing MultibyteGlyphPacking, packedGlyphs string) (result int, glBuf int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSConvertGlyphsToPackedGlyphs == nil {
+		ebipurego.RegisterLibFunc(&_fnNSConvertGlyphsToPackedGlyphs, _lib, "NSConvertGlyphsToPackedGlyphs")
+	}
+	var _out0 int
+	_ret := _fnNSConvertGlyphsToPackedGlyphs(unsafe.Pointer(&_out0), count, packing, packedGlyphs)
+	return _ret, _out0
+}
+
 var _fnNSCopyBits func(int, corefoundation.CGRect, corefoundation.CGPoint)
 
 // NSCopyBits calls the AppKit framework function NSCopyBits.
@@ -248,6 +276,32 @@ func NSCopyBits(srcGState int, srcRect corefoundation.CGRect, destPoint corefoun
 		ebipurego.RegisterLibFunc(&_fnNSCopyBits, _lib, "NSCopyBits")
 	}
 	_fnNSCopyBits(srcGState, srcRect, destPoint)
+}
+
+var _fnNSCountWindows func(unsafe.Pointer)
+
+// NSCountWindows calls the AppKit framework function NSCountWindows.
+func NSCountWindows() (count int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCountWindows == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCountWindows, _lib, "NSCountWindows")
+	}
+	var _out0 int64
+	_fnNSCountWindows(unsafe.Pointer(&_out0))
+	return _out0
+}
+
+var _fnNSCountWindowsForContext func(int, unsafe.Pointer)
+
+// NSCountWindowsForContext calls the AppKit framework function NSCountWindowsForContext.
+func NSCountWindowsForContext(context_ int) (count int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCountWindowsForContext == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCountWindowsForContext, _lib, "NSCountWindowsForContext")
+	}
+	var _out0 int64
+	_fnNSCountWindowsForContext(context_, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnNSCreateFileContentsPboardType func(objc.ID) objc.ID
@@ -294,6 +348,17 @@ func NSDottedFrameRect(rect corefoundation.CGRect) {
 		ebipurego.RegisterLibFunc(&_fnNSDottedFrameRect, _lib, "NSDottedFrameRect")
 	}
 	_fnNSDottedFrameRect(rect)
+}
+
+var _fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, unsafe.Pointer)
+
+// NSDrawBitmap calls the AppKit framework function NSDrawBitmap.
+func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object, data unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawBitmap == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawBitmap, _lib, "NSDrawBitmap")
+	}
+	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, objref.IDOf(colorSpaceName), data)
 }
 
 var _fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
@@ -500,6 +565,20 @@ func NSGetInformationalAlertPanel(title string, msgFormat string, defaultButton 
 	return obj.Wrap(_ret)
 }
 
+var _fnNSGetWindowServerMemory func(int, unsafe.Pointer, unsafe.Pointer, objc.ID) int
+
+// NSGetWindowServerMemory calls the AppKit framework function NSGetWindowServerMemory.
+func NSGetWindowServerMemory(context_ int, windowDumpString string) (result int, virtualMemory int64, windowBackingMemory int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetWindowServerMemory == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetWindowServerMemory, _lib, "NSGetWindowServerMemory")
+	}
+	var _out0 int64
+	var _out1 int64
+	_ret := _fnNSGetWindowServerMemory(context_, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), purego.NSString(windowDumpString))
+	return _ret, _out0, _out1
+}
+
 var _fnNSHighlightRect func(corefoundation.CGRect)
 
 // NSHighlightRect calls the AppKit framework function NSHighlightRect.
@@ -542,6 +621,33 @@ func NSNumberOfColorComponents(colorSpaceName obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnNSNumberOfColorComponents, _lib, "NSNumberOfColorComponents")
 	}
 	return _fnNSNumberOfColorComponents(objref.IDOf(colorSpaceName))
+}
+
+var _fnNSOpenGLGetOption func(OpenGLGlobalOption, unsafe.Pointer)
+
+// NSOpenGLGetOption calls the AppKit framework function NSOpenGLGetOption.
+func NSOpenGLGetOption(pname OpenGLGlobalOption) (param int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSOpenGLGetOption == nil {
+		ebipurego.RegisterLibFunc(&_fnNSOpenGLGetOption, _lib, "NSOpenGLGetOption")
+	}
+	var _out0 int32
+	_fnNSOpenGLGetOption(pname, unsafe.Pointer(&_out0))
+	return _out0
+}
+
+var _fnNSOpenGLGetVersion func(unsafe.Pointer, unsafe.Pointer)
+
+// NSOpenGLGetVersion calls the AppKit framework function NSOpenGLGetVersion.
+func NSOpenGLGetVersion() (major int32, minor int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSOpenGLGetVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnNSOpenGLGetVersion, _lib, "NSOpenGLGetVersion")
+	}
+	var _out0 int32
+	var _out1 int32
+	_fnNSOpenGLGetVersion(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
 var _fnNSOpenGLSetOption func(OpenGLGlobalOption, int32)
@@ -730,4 +836,30 @@ func NSUpdateDynamicServices() {
 		ebipurego.RegisterLibFunc(&_fnNSUpdateDynamicServices, _lib, "NSUpdateDynamicServices")
 	}
 	_fnNSUpdateDynamicServices()
+}
+
+var _fnNSWindowList func(int, unsafe.Pointer)
+
+// NSWindowList calls the AppKit framework function NSWindowList.
+func NSWindowList(size int) (list int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSWindowList == nil {
+		ebipurego.RegisterLibFunc(&_fnNSWindowList, _lib, "NSWindowList")
+	}
+	var _out0 int64
+	_fnNSWindowList(size, unsafe.Pointer(&_out0))
+	return _out0
+}
+
+var _fnNSWindowListForContext func(int, int, unsafe.Pointer)
+
+// NSWindowListForContext calls the AppKit framework function NSWindowListForContext.
+func NSWindowListForContext(context_ int, size int) (list int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSWindowListForContext == nil {
+		ebipurego.RegisterLibFunc(&_fnNSWindowListForContext, _lib, "NSWindowListForContext")
+	}
+	var _out0 int64
+	_fnNSWindowListForContext(context_, size, unsafe.Pointer(&_out0))
+	return _out0
 }

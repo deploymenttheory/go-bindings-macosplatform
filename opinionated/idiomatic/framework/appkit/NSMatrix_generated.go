@@ -596,6 +596,11 @@ func (m *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
 	return CellFromID(_r)
 }
 
+// SortUsingFunctionContext sorts the receiver’s cells in ascending order as defined by the specified comparison function.
+func (m *Matrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("sortUsingFunction:context:"), compare, context_)
+}
+
 // SetSelectionFromToAnchorHighlight programmatically selects a range of cells.
 func (m *Matrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setSelectionFrom:to:anchor:highlight:"), startPos, endPos, anchorPos, lit)

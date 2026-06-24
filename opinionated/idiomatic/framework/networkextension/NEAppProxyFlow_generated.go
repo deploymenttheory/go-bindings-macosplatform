@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -113,6 +114,16 @@ func (napf *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndp
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// CloseReadWithError close the flow for further read operations.
+func (napf *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeReadWithError:"), error_)
+}
+
+// CloseWriteWithError close the flow for further write operations.
+func (napf *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeWriteWithError:"), error_)
 }
 
 // SetMetadata sets the flow’s metadata for use by proxy providers.

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,12 @@ func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 // WithRadius sets the radius of the obstacle.
 func (so *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
 	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setRadius:"), radius)
+	return so
+}
+
+// WithPosition sets the position of the obstacle.
+func (so *SphereObstacle) WithPosition(position unsafe.Pointer) *SphereObstacle {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setPosition:"), position)
 	return so
 }
 

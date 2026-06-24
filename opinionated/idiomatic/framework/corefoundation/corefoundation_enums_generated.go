@@ -391,6 +391,37 @@ func (e CFLocaleLanguageDirection) String() string {
 	}
 }
 
+// Suspension flags that indicate how distributed notifications should be handled when the receiving application is in the background.
+type CFNotificationSuspensionBehavior int64
+
+const (
+	// The server will not queue any notifications of the specified name and object while the receiving application is in the background.
+	CFNotificationSuspensionBehaviorDrop CFNotificationSuspensionBehavior = 1
+	// The server will only queue the last notification of the specified name and object; earlier notifications are dropped.
+	CFNotificationSuspensionBehaviorCoalesce CFNotificationSuspensionBehavior = 2
+	// The server will hold all matching notifications until the queue has been filled (queue size determined by the server) at which point the server may flush queued notifications.
+	CFNotificationSuspensionBehaviorHold CFNotificationSuspensionBehavior = 3
+	// The server will deliver notifications of the specified name and object whether or not the application is in the background. When a notification with this suspension behavior is matched, it has the effect of first flushing any queued notifications.
+	CFNotificationSuspensionBehaviorDeliverImmediately CFNotificationSuspensionBehavior = 4
+)
+
+// String returns the CFNotificationSuspensionBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNotificationSuspensionBehavior) String() string {
+	switch e {
+	case CFNotificationSuspensionBehaviorDrop:
+		return "CFNotificationSuspensionBehaviorDrop"
+	case CFNotificationSuspensionBehaviorCoalesce:
+		return "CFNotificationSuspensionBehaviorCoalesce"
+	case CFNotificationSuspensionBehaviorHold:
+		return "CFNotificationSuspensionBehaviorHold"
+	case CFNotificationSuspensionBehaviorDeliverImmediately:
+		return "CFNotificationSuspensionBehaviorDeliverImmediately"
+	default:
+		return fmt.Sprintf("CFNotificationSuspensionBehavior(%d)", int64(e))
+	}
+}
+
 // Type for constants specifying a formatter style.
 type CFNumberFormatterStyle int64
 
@@ -547,6 +578,36 @@ func (e CFPropertyListFormat) String() string {
 		return "KCFPropertyListBinaryFormat_v1_0"
 	default:
 		return fmt.Sprintf("CFPropertyListFormat(%d)", int64(e))
+	}
+}
+
+type CFRunLoopRunResult int64
+
+const (
+	// The running run loop mode has no sources or timers to process.
+	KCFRunLoopRunFinished CFRunLoopRunResult = 1
+	// CFRunLoopStop was called on the run loop.
+	KCFRunLoopRunStopped CFRunLoopRunResult = 2
+	// The specified time interval for running the run loop has passed.
+	KCFRunLoopRunTimedOut CFRunLoopRunResult = 3
+	// A source has been processed. This value is returned only if the run loop was told to run only until a source was processed.
+	KCFRunLoopRunHandledSource CFRunLoopRunResult = 4
+)
+
+// String returns the CFRunLoopRunResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFRunLoopRunResult) String() string {
+	switch e {
+	case KCFRunLoopRunFinished:
+		return "KCFRunLoopRunFinished"
+	case KCFRunLoopRunStopped:
+		return "KCFRunLoopRunStopped"
+	case KCFRunLoopRunTimedOut:
+		return "KCFRunLoopRunTimedOut"
+	case KCFRunLoopRunHandledSource:
+		return "KCFRunLoopRunHandledSource"
+	default:
+		return fmt.Sprintf("CFRunLoopRunResult(%d)", int64(e))
 	}
 }
 
@@ -1013,6 +1074,37 @@ func (e CFURLEnumeratorOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Result codes from the CFURLEnumeratorGetNextURL function.
+type CFURLEnumeratorResult int64
+
+const (
+	// The enumerator was advanced successfully and returned a valid URL.
+	KCFURLEnumeratorSuccess CFURLEnumeratorResult = 1
+	// The enumeration is complete.
+	KCFURLEnumeratorEnd CFURLEnumeratorResult = 2
+	// An error occurred during enumeration. The error parameter of the function is populated with error information.
+	KCFURLEnumeratorError CFURLEnumeratorResult = 3
+	// The recursive post-order enumerator returned the URL for a directory after having returned the URLs for all of the directory’s descendents.
+	KCFURLEnumeratorDirectoryPostOrderSuccess CFURLEnumeratorResult = 4
+)
+
+// String returns the CFURLEnumeratorResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFURLEnumeratorResult) String() string {
+	switch e {
+	case KCFURLEnumeratorSuccess:
+		return "KCFURLEnumeratorSuccess"
+	case KCFURLEnumeratorEnd:
+		return "KCFURLEnumeratorEnd"
+	case KCFURLEnumeratorError:
+		return "KCFURLEnumeratorError"
+	case KCFURLEnumeratorDirectoryPostOrderSuccess:
+		return "KCFURLEnumeratorDirectoryPostOrderSuccess"
+	default:
+		return fmt.Sprintf("CFURLEnumeratorResult(%d)", int64(e))
+	}
+}
+
 // Options you can use to determine how CFURL functions parse a file system path name.
 type CFURLPathStyle int64
 
@@ -1041,6 +1133,41 @@ func (e CFURLPathStyle) String() string {
 		return "KCFURLWindowsPathStyle"
 	default:
 		return fmt.Sprintf("CFURLPathStyle(%d)", int64(e))
+	}
+}
+
+// The entity type identification codes that the parser uses to describe XML entities.
+type CFXMLEntityTypeCode int64
+
+const (
+	// Implies a parsed, internal entity.
+	KCFXMLEntityTypeParameter CFXMLEntityTypeCode = 0
+	// Indicates a parsed, internal entity.
+	KCFXMLEntityTypeParsedInternal CFXMLEntityTypeCode = 1
+	// Indicates a parsed, external entity.
+	KCFXMLEntityTypeParsedExternal CFXMLEntityTypeCode = 2
+	// Indicates an unparsed entity.
+	KCFXMLEntityTypeUnparsed CFXMLEntityTypeCode = 3
+	// Indicates a character entity type.
+	KCFXMLEntityTypeCharacter CFXMLEntityTypeCode = 4
+)
+
+// String returns the CFXMLEntityTypeCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFXMLEntityTypeCode) String() string {
+	switch e {
+	case KCFXMLEntityTypeParameter:
+		return "KCFXMLEntityTypeParameter"
+	case KCFXMLEntityTypeParsedInternal:
+		return "KCFXMLEntityTypeParsedInternal"
+	case KCFXMLEntityTypeParsedExternal:
+		return "KCFXMLEntityTypeParsedExternal"
+	case KCFXMLEntityTypeUnparsed:
+		return "KCFXMLEntityTypeUnparsed"
+	case KCFXMLEntityTypeCharacter:
+		return "KCFXMLEntityTypeCharacter"
+	default:
+		return fmt.Sprintf("CFXMLEntityTypeCode(%d)", int64(e))
 	}
 }
 

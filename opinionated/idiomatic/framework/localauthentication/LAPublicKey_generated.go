@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -98,4 +99,60 @@ func (pk *PublicKey) ExportBytesWithCompletion(ctx context.Context) (result obj.
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// EncryptDataSecKeyAlgorithmCompletion encrypts the data you supply with a given algorithm.
+//
+// EncryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
+func (pk *PublicKey) EncryptDataSecKeyAlgorithmCompletion(ctx context.Context, data obj.Object, algorithm unsafe.Pointer) (result obj.Object, err error) {
+	type _result struct {
+		val obj.Object
+		err error
+	}
+	_ch := make(chan _result, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
+		var _o _result
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
+		_ch <- _o
+	})
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("encryptData:secKeyAlgorithm:completion:"), objref.IDOf(data), algorithm, _block)
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero obj.Object
+		return _zero, ctx.Err()
+	}
+}
+
+// CanEncryptUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for encrypting data with the key.
+func (pk *PublicKey) CanEncryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canEncryptUsingSecKeyAlgorithm:"), algorithm)
+	return _r
+}
+
+// VerifyDataSignatureSecKeyAlgorithmCompletion verifies a digital signature for the data you supply.
+//
+// VerifyDataSignatureSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
+func (pk *PublicKey) VerifyDataSignatureSecKeyAlgorithmCompletion(ctx context.Context, signedData obj.Object, signature obj.Object, algorithm unsafe.Pointer) error {
+	_ch := make(chan error, 1)
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
+		var _err error
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
+		_ch <- _err
+	})
+	objc.Send[objc.ID](objref.IDOf(pk), objc.RegisterName("verifyData:signature:secKeyAlgorithm:completion:"), objref.IDOf(signedData), objref.IDOf(signature), algorithm, _block)
+	select {
+	case err := <-_ch:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+// CanVerifyUsingSecKeyAlgorithm checks whether the algorithm you supply is valid for verifying signatures with the key.
+func (pk *PublicKey) CanVerifyUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(pk), objc.RegisterName("canVerifyUsingSecKeyAlgorithm:"), algorithm)
+	return _r
 }

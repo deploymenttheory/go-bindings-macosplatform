@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (mqavt *MetadataQueryAttributeValueTuple) String() string {
 func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryAttributeValueTuple")), objc.RegisterName("new"))
 	return metadataQueryAttributeValueTupleAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (mqavt *MetadataQueryAttributeValueTuple) WithObservationInfo(observationInfo unsafe.Pointer) *MetadataQueryAttributeValueTuple {
+	objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return mqavt
 }
 
 // WithScriptingProperties sets the scripting properties.

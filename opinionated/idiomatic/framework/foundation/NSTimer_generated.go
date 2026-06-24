@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -82,6 +84,12 @@ func (t *Timer) WithFireDate(fireDate DateProvider) *Timer {
 // WithTolerance sets the tolerance.
 func (t *Timer) WithTolerance(tolerance float64) *Timer {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTolerance:"), tolerance)
+	return t
+}
+
+// WithObservationInfo sets the observation info.
+func (t *Timer) WithObservationInfo(observationInfo unsafe.Pointer) *Timer {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return t
 }
 

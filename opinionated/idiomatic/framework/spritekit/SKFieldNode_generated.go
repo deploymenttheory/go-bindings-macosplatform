@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -92,6 +94,12 @@ func (fn *FieldNode) WithExclusive(exclusive bool) *FieldNode {
 // WithCategoryBitMask sets a mask that defines which categories this field belongs to.
 func (fn *FieldNode) WithCategoryBitMask(categoryBitMask uint32) *FieldNode {
 	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	return fn
+}
+
+// WithDirection sets the direction of a velocity field node.
+func (fn *FieldNode) WithDirection(direction unsafe.Pointer) *FieldNode {
+	objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("setDirection:"), direction)
 	return fn
 }
 

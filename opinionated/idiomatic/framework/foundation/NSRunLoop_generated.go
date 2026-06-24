@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -72,6 +73,12 @@ func (rl *RunLoop) String() string {
 func NewRunLoop() *RunLoop {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("new"))
 	return runLoopAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (rl *RunLoop) WithObservationInfo(observationInfo unsafe.Pointer) *RunLoop {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return rl
 }
 
 // WithScriptingProperties sets the scripting properties.

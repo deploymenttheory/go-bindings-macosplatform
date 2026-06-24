@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -135,6 +137,12 @@ func WithServiceDictionaryDevice(serviceDict obj.Object, device *IOBluetoothDevi
 func WithSDPServiceRecordRef(sdpServiceRecordRef obj.Object) *IOBluetoothSDPServiceRecord {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("withSDPServiceRecordRef:"), objref.IDOf(sdpServiceRecordRef))
 	return IOBluetoothSDPServiceRecordFromID(_r)
+}
+
+// UuidWithBytesLength creates a new IOBluetoothSDPUUID object with the given bytes of the given length.
+func UuidWithBytesLength(bytes_ unsafe.Pointer, length int) *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("uuidWithBytes:length:"), bytes_, length)
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
 // UuidWithData creates a new IOBluetoothSDPUUID object from the given NSData.

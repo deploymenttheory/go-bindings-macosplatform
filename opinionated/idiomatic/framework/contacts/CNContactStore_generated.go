@@ -125,6 +125,12 @@ func (cs *ContactStore) EnumeratorForChangeHistoryFetchRequestError(request *Cha
 	return obj.Wrap(_r), nil
 }
 
+// EnumerateContactsWithFetchRequestErrorUsing returns a Boolean value that indicates whether the enumeration of all contacts matching a contact fetch request executes successfully.
+func (cs *ContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *ContactFetchRequest, error_ unsafe.Pointer, block func(obj.Object, *bool)) bool {
+	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("enumerateContactsWithFetchRequest:error:usingBlock:"), objref.IDOf(fetchRequest), error_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+	return _r
+}
+
 // GroupsMatchingPredicateError fetches all groups matching the specified predicate.
 func (cs *ContactStore) GroupsMatchingPredicateError(predicate obj.Object) (result []*Group, err error) {
 	var _nsErr uintptr

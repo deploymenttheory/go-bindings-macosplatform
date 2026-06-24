@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -87,6 +89,12 @@ func (sec *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.O
 // WithRangeContainerObject sets sets the top-level container object for a range-specifier evaluation to a give object.
 func (sec *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
+	return sec
+}
+
+// WithObservationInfo sets the observation info.
+func (sec *ScriptExecutionContext) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return sec
 }
 

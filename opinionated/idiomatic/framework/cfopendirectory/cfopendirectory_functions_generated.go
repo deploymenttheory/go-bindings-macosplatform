@@ -350,6 +350,22 @@ func ODNodeSetCredentials(node obj.Object, recordType obj.Object, recordName obj
 	return nil
 }
 
+// ODNodeSetCredentialsExtended reports an error if the CFOpenDirectory framework function ODNodeSetCredentialsExtended fails.
+var _fnODNodeSetCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+
+func ODNodeSetCredentialsExtended(node obj.Object, recordType obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnODNodeSetCredentialsExtended == nil {
+		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentialsExtended, _lib, "ODNodeSetCredentialsExtended")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnODNodeSetCredentialsExtended(objref.IDOf(node), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
+	if !_ok {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
 // ODNodeSetCredentialsUsingKerberosCache reports an error if the CFOpenDirectory framework function ODNodeSetCredentialsUsingKerberosCache fails.
 var _fnODNodeSetCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
@@ -782,6 +798,22 @@ func ODRecordSetNodeCredentials(record obj.Object, username obj.Object, password
 	return nil
 }
 
+// ODRecordSetNodeCredentialsExtended reports an error if the CFOpenDirectory framework function ODRecordSetNodeCredentialsExtended fails.
+var _fnODRecordSetNodeCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+
+func ODRecordSetNodeCredentialsExtended(record obj.Object, recordType obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnODRecordSetNodeCredentialsExtended == nil {
+		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentialsExtended, _lib, "ODRecordSetNodeCredentialsExtended")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnODRecordSetNodeCredentialsExtended(objref.IDOf(record), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
+	if !_ok {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
 // ODRecordSetNodeCredentialsUsingKerberosCache reports an error if the CFOpenDirectory framework function ODRecordSetNodeCredentialsUsingKerberosCache fails.
 var _fnODRecordSetNodeCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
@@ -872,6 +904,22 @@ func ODRecordVerifyPassword(record obj.Object, password obj.Object) error {
 	}
 	var _cfErr unsafe.Pointer
 	_ok := _fnODRecordVerifyPassword(objref.IDOf(record), objref.IDOf(password), unsafe.Pointer(&_cfErr))
+	if !_ok {
+		return errkit.FromCFError(_cfErr)
+	}
+	return nil
+}
+
+// ODRecordVerifyPasswordExtended reports an error if the CFOpenDirectory framework function ODRecordVerifyPasswordExtended fails.
+var _fnODRecordVerifyPasswordExtended func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
+
+func ODRecordVerifyPasswordExtended(record obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnODRecordVerifyPasswordExtended == nil {
+		ebipurego.RegisterLibFunc(&_fnODRecordVerifyPasswordExtended, _lib, "ODRecordVerifyPasswordExtended")
+	}
+	var _cfErr unsafe.Pointer
+	_ok := _fnODRecordVerifyPasswordExtended(objref.IDOf(record), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}

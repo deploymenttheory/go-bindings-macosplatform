@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *URLResp
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedURLResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), objref.IDOf(response), objref.IDOf(data), objref.IDOf(userInfo), storagePolicy)
 	return cachedURLResponseAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (cur *CachedURLResponse) WithObservationInfo(observationInfo unsafe.Pointer) *CachedURLResponse {
+	objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return cur
 }
 
 // WithScriptingProperties sets the scripting properties.

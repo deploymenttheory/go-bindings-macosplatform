@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,12 @@ func NewUserNotificationCenter() *UserNotificationCenter {
 func (unc *UserNotificationCenter) WithScheduledNotifications(items ...*UserNotification) *UserNotificationCenter {
 	_arr := purego.SliceToNSArray(items, func(_v *UserNotification) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setScheduledNotifications:"), _arr)
+	return unc
+}
+
+// WithObservationInfo sets the observation info.
+func (unc *UserNotificationCenter) WithObservationInfo(observationInfo unsafe.Pointer) *UserNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return unc
 }
 

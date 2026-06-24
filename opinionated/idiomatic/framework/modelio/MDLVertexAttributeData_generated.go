@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func NewVertexAttributeData() *VertexAttributeData {
 // WithMap sets the map.
 func (vad *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setMap:"), objref.IDOf(map_))
+	return vad
+}
+
+// WithDataStart sets the offset, in bytes, from the start of the data to where vertex attribute information begins.
+func (vad *VertexAttributeData) WithDataStart(dataStart unsafe.Pointer) *VertexAttributeData {
+	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setDataStart:"), dataStart)
 	return vad
 }
 

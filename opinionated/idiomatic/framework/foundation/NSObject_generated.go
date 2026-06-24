@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,12 @@ func (o *Object) String() string {
 	return rt.Description(objref.IDOf(o))
 }
 
+// WithObservationInfo sets the observation info.
+func (o *Object) WithObservationInfo(observationInfo unsafe.Pointer) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return o
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (o *Object) WithScriptingProperties(scriptingProperties obj.Object) *Object {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -115,6 +123,12 @@ func (o *Object) AwakeAfterUsingCoder(coder *Coder) obj.Object {
 func (o *Object) AutoContentAccessingProxy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("autoContentAccessingProxy"))
 	return obj.Wrap(_r)
+}
+
+// AttemptRecoveryFromErrorOptionIndex wraps the corresponding Objective-C method.
+func (o *Object) AttemptRecoveryFromErrorOptionIndex(error_ unsafe.Pointer, recoveryOptionIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("attemptRecoveryFromError:optionIndex:"), error_, recoveryOptionIndex)
+	return _r
 }
 
 // URLResourceDataDidBecomeAvailable wraps the corresponding Objective-C method.
@@ -279,6 +293,21 @@ func (o *Object) ValuesForKeys(keys obj.Object) obj.Object {
 // TakeValuesFromDictionary wraps the corresponding Objective-C method.
 func (o *Object) TakeValuesFromDictionary(properties obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValuesFromDictionary:"), objref.IDOf(properties))
+}
+
+// ObserveValueForKeyPathOfObjectChangeContext wraps the corresponding Objective-C method.
+func (o *Object) ObserveValueForKeyPathOfObjectChangeContext(keyPath string, object obj.Object, change obj.Object, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("observeValueForKeyPath:ofObject:change:context:"), purego.NSString(keyPath), objref.IDOf(object), objref.IDOf(change), context_)
+}
+
+// AddObserverForKeyPathOptionsContext adds observer for key path options context.
+func (o *Object) AddObserverForKeyPathOptionsContext(observer *Object, keyPath string, options KeyValueObservingOptions, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addObserver:forKeyPath:options:context:"), objref.IDOf(observer), purego.NSString(keyPath), options, context_)
+}
+
+// RemoveObserverForKeyPathContext removes observer for key path context.
+func (o *Object) RemoveObserverForKeyPathContext(observer *Object, keyPath string, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeObserver:forKeyPath:context:"), objref.IDOf(observer), purego.NSString(keyPath), context_)
 }
 
 // RemoveObserverForKeyPath removes observer for key path.

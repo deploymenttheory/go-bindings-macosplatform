@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -183,6 +185,12 @@ func (dc *DateComponents) WithLeapMonth(leapMonth bool) *DateComponents {
 // WithRepeatedDay sets the repeated day.
 func (dc *DateComponents) WithRepeatedDay(repeatedDay bool) *DateComponents {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setRepeatedDay:"), repeatedDay)
+	return dc
+}
+
+// WithObservationInfo sets the observation info.
+func (dc *DateComponents) WithObservationInfo(observationInfo unsafe.Pointer) *DateComponents {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return dc
 }
 

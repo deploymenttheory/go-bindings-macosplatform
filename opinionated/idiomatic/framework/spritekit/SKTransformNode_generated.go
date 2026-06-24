@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -214,6 +216,21 @@ func (tn *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *Tran
 func (tn *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
 	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return tn
+}
+
+// SetEulerAngles wraps the corresponding Objective-C method.
+func (tn *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setEulerAngles:"), euler)
+}
+
+// SetRotationMatrix wraps the corresponding Objective-C method.
+func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setRotationMatrix:"), rotationMatrix)
+}
+
+// SetQuaternion wraps the corresponding Objective-C method.
+func (tn *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setQuaternion:"), quaternion)
 }
 
 // XRotation returns the x rotation.

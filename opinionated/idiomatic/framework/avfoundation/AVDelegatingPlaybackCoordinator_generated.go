@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -68,6 +69,11 @@ func (dpc *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(
 // CoordinateRateChangeToRateOptions coordinates a rate change across all participants, waiting for others to become ready, if necessary.
 func (dpc *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
 	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
+}
+
+// CoordinateSeekToTimeOptions coordinates a seek to the specified time for all connected participants.
+func (dpc *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options DelegatingPlaybackCoordinatorSeekOptions) {
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("coordinateSeekToTime:options:"), time_, options)
 }
 
 // TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase tells the coordinator to transition to a new item.

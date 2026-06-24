@@ -99,6 +99,11 @@ func (ogc *OpenGLContext) SetFullScreen() {
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setFullScreen"))
 }
 
+// SetOffScreenWidthHeightRowbytes instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
+func (ogc *OpenGLContext) SetOffScreenWidthHeightRowbytes(baseaddr unsafe.Pointer, width int32, height int32, rowbytes int32) {
+	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("setOffScreen:width:height:rowbytes:"), baseaddr, width, height, rowbytes)
+}
+
 // ClearDrawable disassociates the OpenGL context from its viewport.
 func (ogc *OpenGLContext) ClearDrawable() {
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("clearDrawable"))

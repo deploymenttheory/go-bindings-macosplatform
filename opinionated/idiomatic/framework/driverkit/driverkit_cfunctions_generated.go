@@ -5,11 +5,26 @@
 package driverkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnIOCallOnce func(unsafe.Pointer, func())
+
+// IOCallOnce calls the DriverKit framework function IOCallOnce.
+func IOCallOnce(block func()) (flag IOCallOnceFlag) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOCallOnce == nil {
+		ebipurego.RegisterLibFunc(&_fnIOCallOnce, _lib, "IOCallOnce")
+	}
+	var _out0 IOCallOnceFlag
+	_fnIOCallOnce(unsafe.Pointer(&_out0), block)
+	return _out0
+}
 
 var _fnIODelay func(uint64)
 
@@ -44,6 +59,83 @@ func IOFixedMultiply(a int, b int) int {
 	return _fnIOFixedMultiply(a, b)
 }
 
+var _fnIOFree func(unsafe.Pointer, int)
+
+// IOFree calls the DriverKit framework function IOFree.
+func IOFree(address unsafe.Pointer, length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOFree == nil {
+		ebipurego.RegisterLibFunc(&_fnIOFree, _lib, "IOFree")
+	}
+	_fnIOFree(address, length)
+}
+
+var _fnIOLockAssert func(unsafe.Pointer, IOLockAssertState)
+
+// IOLockAssert calls the DriverKit framework function IOLockAssert.
+func IOLockAssert(lock unsafe.Pointer, type_ IOLockAssertState) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLockAssert == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLockAssert, _lib, "IOLockAssert")
+	}
+	_fnIOLockAssert(lock, type_)
+}
+
+var _fnIOLockFree func(unsafe.Pointer)
+
+// IOLockFree calls the DriverKit framework function IOLockFree.
+func IOLockFree(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLockFree == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLockFree, _lib, "IOLockFree")
+	}
+	_fnIOLockFree(lock)
+}
+
+var _fnIOLockLock func(unsafe.Pointer)
+
+// IOLockLock calls the DriverKit framework function IOLockLock.
+func IOLockLock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLockLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLockLock, _lib, "IOLockLock")
+	}
+	_fnIOLockLock(lock)
+}
+
+var _fnIOLockTryLock func(unsafe.Pointer) bool
+
+// IOLockTryLock calls the DriverKit framework function IOLockTryLock.
+func IOLockTryLock(lock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLockTryLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLockTryLock, _lib, "IOLockTryLock")
+	}
+	return _fnIOLockTryLock(lock)
+}
+
+var _fnIOLockUnlock func(unsafe.Pointer)
+
+// IOLockUnlock calls the DriverKit framework function IOLockUnlock.
+func IOLockUnlock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLockUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLockUnlock, _lib, "IOLockUnlock")
+	}
+	_fnIOLockUnlock(lock)
+}
+
+var _fnIOLogBuffer func(string, unsafe.Pointer, int)
+
+// IOLogBuffer calls the DriverKit framework function IOLogBuffer.
+func IOLogBuffer(title string, buffer unsafe.Pointer, size int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOLogBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnIOLogBuffer, _lib, "IOLogBuffer")
+	}
+	_fnIOLogBuffer(title, buffer, size)
+}
+
 var _fnIOLogv func(string, string) int
 
 // IOLogv calls the DriverKit framework function IOLogv.
@@ -53,6 +145,17 @@ func IOLogv(format string, ap string) int {
 		ebipurego.RegisterLibFunc(&_fnIOLogv, _lib, "IOLogv")
 	}
 	return _fnIOLogv(format, ap)
+}
+
+var _fnIOParseBootArgNumber func(string, unsafe.Pointer, int) bool
+
+// IOParseBootArgNumber calls the DriverKit framework function IOParseBootArgNumber.
+func IOParseBootArgNumber(arg_string string, arg_ptr unsafe.Pointer, max_len int) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOParseBootArgNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnIOParseBootArgNumber, _lib, "IOParseBootArgNumber")
+	}
+	return _fnIOParseBootArgNumber(arg_string, arg_ptr, max_len)
 }
 
 var _fnIOParseBootArgString func(string, string, int) bool
@@ -66,6 +169,160 @@ func IOParseBootArgString(arg_string string, arg_ptr string, strlen int) bool {
 	return _fnIOParseBootArgString(arg_string, arg_ptr, strlen)
 }
 
+var _fnIORWLockFree func(unsafe.Pointer)
+
+// IORWLockFree calls the DriverKit framework function IORWLockFree.
+func IORWLockFree(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORWLockFree == nil {
+		ebipurego.RegisterLibFunc(&_fnIORWLockFree, _lib, "IORWLockFree")
+	}
+	_fnIORWLockFree(lock)
+}
+
+var _fnIORWLockRead func(unsafe.Pointer)
+
+// IORWLockRead calls the DriverKit framework function IORWLockRead.
+func IORWLockRead(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORWLockRead == nil {
+		ebipurego.RegisterLibFunc(&_fnIORWLockRead, _lib, "IORWLockRead")
+	}
+	_fnIORWLockRead(lock)
+}
+
+var _fnIORWLockUnlock func(unsafe.Pointer)
+
+// IORWLockUnlock calls the DriverKit framework function IORWLockUnlock.
+func IORWLockUnlock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORWLockUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORWLockUnlock, _lib, "IORWLockUnlock")
+	}
+	_fnIORWLockUnlock(lock)
+}
+
+var _fnIORWLockWrite func(unsafe.Pointer)
+
+// IORWLockWrite calls the DriverKit framework function IORWLockWrite.
+func IORWLockWrite(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORWLockWrite == nil {
+		ebipurego.RegisterLibFunc(&_fnIORWLockWrite, _lib, "IORWLockWrite")
+	}
+	_fnIORWLockWrite(lock)
+}
+
+var _fnIORecursiveConditionLockFree func(unsafe.Pointer)
+
+// IORecursiveConditionLockFree calls the DriverKit framework function IORecursiveConditionLockFree.
+func IORecursiveConditionLockFree(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveConditionLockFree == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveConditionLockFree, _lib, "IORecursiveConditionLockFree")
+	}
+	_fnIORecursiveConditionLockFree(lock)
+}
+
+var _fnIORecursiveConditionLockHaveLock func(unsafe.Pointer) bool
+
+// IORecursiveConditionLockHaveLock calls the DriverKit framework function IORecursiveConditionLockHaveLock.
+func IORecursiveConditionLockHaveLock(lock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveConditionLockHaveLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveConditionLockHaveLock, _lib, "IORecursiveConditionLockHaveLock")
+	}
+	return _fnIORecursiveConditionLockHaveLock(lock)
+}
+
+var _fnIORecursiveConditionLockLock func(unsafe.Pointer)
+
+// IORecursiveConditionLockLock calls the DriverKit framework function IORecursiveConditionLockLock.
+func IORecursiveConditionLockLock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveConditionLockLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveConditionLockLock, _lib, "IORecursiveConditionLockLock")
+	}
+	_fnIORecursiveConditionLockLock(lock)
+}
+
+var _fnIORecursiveConditionLockTryLock func(unsafe.Pointer) bool
+
+// IORecursiveConditionLockTryLock calls the DriverKit framework function IORecursiveConditionLockTryLock.
+func IORecursiveConditionLockTryLock(lock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveConditionLockTryLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveConditionLockTryLock, _lib, "IORecursiveConditionLockTryLock")
+	}
+	return _fnIORecursiveConditionLockTryLock(lock)
+}
+
+var _fnIORecursiveConditionLockUnlock func(unsafe.Pointer)
+
+// IORecursiveConditionLockUnlock calls the DriverKit framework function IORecursiveConditionLockUnlock.
+func IORecursiveConditionLockUnlock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveConditionLockUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveConditionLockUnlock, _lib, "IORecursiveConditionLockUnlock")
+	}
+	_fnIORecursiveConditionLockUnlock(lock)
+}
+
+var _fnIORecursiveLockFree func(unsafe.Pointer)
+
+// IORecursiveLockFree calls the DriverKit framework function IORecursiveLockFree.
+func IORecursiveLockFree(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveLockFree == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveLockFree, _lib, "IORecursiveLockFree")
+	}
+	_fnIORecursiveLockFree(lock)
+}
+
+var _fnIORecursiveLockHaveLock func(unsafe.Pointer) bool
+
+// IORecursiveLockHaveLock calls the DriverKit framework function IORecursiveLockHaveLock.
+func IORecursiveLockHaveLock(lock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveLockHaveLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveLockHaveLock, _lib, "IORecursiveLockHaveLock")
+	}
+	return _fnIORecursiveLockHaveLock(lock)
+}
+
+var _fnIORecursiveLockLock func(unsafe.Pointer)
+
+// IORecursiveLockLock calls the DriverKit framework function IORecursiveLockLock.
+func IORecursiveLockLock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveLockLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveLockLock, _lib, "IORecursiveLockLock")
+	}
+	_fnIORecursiveLockLock(lock)
+}
+
+var _fnIORecursiveLockTryLock func(unsafe.Pointer) bool
+
+// IORecursiveLockTryLock calls the DriverKit framework function IORecursiveLockTryLock.
+func IORecursiveLockTryLock(lock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveLockTryLock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveLockTryLock, _lib, "IORecursiveLockTryLock")
+	}
+	return _fnIORecursiveLockTryLock(lock)
+}
+
+var _fnIORecursiveLockUnlock func(unsafe.Pointer)
+
+// IORecursiveLockUnlock calls the DriverKit framework function IORecursiveLockUnlock.
+func IORecursiveLockUnlock(lock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIORecursiveLockUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnIORecursiveLockUnlock, _lib, "IORecursiveLockUnlock")
+	}
+	_fnIORecursiveLockUnlock(lock)
+}
+
 var _fnIOSleep func(uint64)
 
 // IOSleep calls the DriverKit framework function IOSleep.
@@ -77,6 +334,32 @@ func IOSleep(ms uint64) {
 	_fnIOSleep(ms)
 }
 
+var _fnIOSysCtlByName func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int
+
+// IOSysCtlByName calls the DriverKit framework function IOSysCtlByName.
+func IOSysCtlByName(name string, oldp unsafe.Pointer, newp unsafe.Pointer, newlen int) (result int, oldlenp int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSysCtlByName == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSysCtlByName, _lib, "IOSysCtlByName")
+	}
+	var _out0 int
+	_ret := _fnIOSysCtlByName(name, oldp, unsafe.Pointer(&_out0), newp, newlen)
+	return _ret, _out0
+}
+
+var _fnIOThreadLocalStorageKeyCreate func(unsafe.Pointer) int
+
+// IOThreadLocalStorageKeyCreate calls the DriverKit framework function IOThreadLocalStorageKeyCreate.
+func IOThreadLocalStorageKeyCreate() (result int, key uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOThreadLocalStorageKeyCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyCreate, _lib, "IOThreadLocalStorageKeyCreate")
+	}
+	var _out0 uint64
+	_ret := _fnIOThreadLocalStorageKeyCreate(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnIOThreadLocalStorageKeyDelete func(uint64) int
 
 // IOThreadLocalStorageKeyDelete calls the DriverKit framework function IOThreadLocalStorageKeyDelete.
@@ -86,6 +369,134 @@ func IOThreadLocalStorageKeyDelete(key uint64) int {
 		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyDelete, _lib, "IOThreadLocalStorageKeyDelete")
 	}
 	return _fnIOThreadLocalStorageKeyDelete(key)
+}
+
+var _fnIOThreadLocalStorageSet func(uint64, unsafe.Pointer) int
+
+// IOThreadLocalStorageSet calls the DriverKit framework function IOThreadLocalStorageSet.
+func IOThreadLocalStorageSet(key uint64, value unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOThreadLocalStorageSet == nil {
+		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageSet, _lib, "IOThreadLocalStorageSet")
+	}
+	return _fnIOThreadLocalStorageSet(key, value)
+}
+
+var _fnOSArrayAppendValue func(unsafe.Pointer, objc.ID) bool
+
+// OSArrayAppendValue calls the DriverKit framework function OSArrayAppendValue.
+func OSArrayAppendValue(value obj.Object) (ok bool, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayAppendValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayAppendValue, _lib, "OSArrayAppendValue")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayAppendValue(unsafe.Pointer(&_out0), objref.IDOf(value))
+	return _ret, _out0
+}
+
+var _fnOSArrayGetCount func(unsafe.Pointer) uint32
+
+// OSArrayGetCount calls the DriverKit framework function OSArrayGetCount.
+func OSArrayGetCount() (result uint32, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayGetCount, _lib, "OSArrayGetCount")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayGetCount(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSArrayGetStringValue func(unsafe.Pointer, int) string
+
+// OSArrayGetStringValue calls the DriverKit framework function OSArrayGetStringValue.
+func OSArrayGetStringValue(index int) (result string, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayGetStringValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayGetStringValue, _lib, "OSArrayGetStringValue")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayGetStringValue(unsafe.Pointer(&_out0), index)
+	return _ret, _out0
+}
+
+var _fnOSArrayGetUInt64Value func(unsafe.Pointer, int) uint64
+
+// OSArrayGetUInt64Value calls the DriverKit framework function OSArrayGetUInt64Value.
+func OSArrayGetUInt64Value(index int) (result uint64, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayGetUInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayGetUInt64Value, _lib, "OSArrayGetUInt64Value")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayGetUInt64Value(unsafe.Pointer(&_out0), index)
+	return _ret, _out0
+}
+
+var _fnOSArrayGetValue func(unsafe.Pointer, int) objc.ID
+
+// OSArrayGetValue calls the DriverKit framework function OSArrayGetValue.
+func OSArrayGetValue(index int) (result obj.Object, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayGetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayGetValue, _lib, "OSArrayGetValue")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayGetValue(unsafe.Pointer(&_out0), index)
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnOSArrayReplaceValue func(unsafe.Pointer, int, objc.ID) bool
+
+// OSArrayReplaceValue calls the DriverKit framework function OSArrayReplaceValue.
+func OSArrayReplaceValue(index int, value obj.Object) (ok bool, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayReplaceValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayReplaceValue, _lib, "OSArrayReplaceValue")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayReplaceValue(unsafe.Pointer(&_out0), index, objref.IDOf(value))
+	return _ret, _out0
+}
+
+var _fnOSArraySetStringValue func(unsafe.Pointer, int, string)
+
+// OSArraySetStringValue calls the DriverKit framework function OSArraySetStringValue.
+func OSArraySetStringValue(index int, value string) (obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArraySetStringValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArraySetStringValue, _lib, "OSArraySetStringValue")
+	}
+	var _out0 int32
+	_fnOSArraySetStringValue(unsafe.Pointer(&_out0), index, value)
+	return _out0
+}
+
+var _fnOSArraySetUInt64Value func(unsafe.Pointer, int, uint64)
+
+// OSArraySetUInt64Value calls the DriverKit framework function OSArraySetUInt64Value.
+func OSArraySetUInt64Value(index int, value uint64) (obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArraySetUInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArraySetUInt64Value, _lib, "OSArraySetUInt64Value")
+	}
+	var _out0 int32
+	_fnOSArraySetUInt64Value(unsafe.Pointer(&_out0), index, value)
+	return _out0
+}
+
+var _fnOSArraySetValue func(unsafe.Pointer, int, objc.ID) bool
+
+// OSArraySetValue calls the DriverKit framework function OSArraySetValue.
+func OSArraySetValue(index int, value obj.Object) (ok bool, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArraySetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArraySetValue, _lib, "OSArraySetValue")
+	}
+	var _out0 int32
+	_ret := _fnOSArraySetValue(unsafe.Pointer(&_out0), index, objref.IDOf(value))
+	return _ret, _out0
 }
 
 var _fnOSCollectionTypeID func(objc.ID) uint64
@@ -121,6 +532,175 @@ func OSCollectionsInitialize() {
 	_fnOSCollectionsInitialize()
 }
 
+var _fnOSCreateObjectFromSerialization func(unsafe.Pointer) objc.ID
+
+// OSCreateObjectFromSerialization calls the DriverKit framework function OSCreateObjectFromSerialization.
+func OSCreateObjectFromSerialization() (result obj.Object, serial int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSCreateObjectFromSerialization == nil {
+		ebipurego.RegisterLibFunc(&_fnOSCreateObjectFromSerialization, _lib, "OSCreateObjectFromSerialization")
+	}
+	var _out0 int32
+	_ret := _fnOSCreateObjectFromSerialization(unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnOSDataAppendBytes func(unsafe.Pointer, unsafe.Pointer, int) bool
+
+// OSDataAppendBytes calls the DriverKit framework function OSDataAppendBytes.
+func OSDataAppendBytes(bytes_ unsafe.Pointer, length int) (ok bool, data int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDataAppendBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDataAppendBytes, _lib, "OSDataAppendBytes")
+	}
+	var _out0 int32
+	_ret := _fnOSDataAppendBytes(unsafe.Pointer(&_out0), bytes_, length)
+	return _ret, _out0
+}
+
+var _fnOSDataGetBytes func(unsafe.Pointer, unsafe.Pointer, int, int) int
+
+// OSDataGetBytes calls the DriverKit framework function OSDataGetBytes.
+func OSDataGetBytes(buffer unsafe.Pointer, offset int, length int) (result int, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDataGetBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDataGetBytes, _lib, "OSDataGetBytes")
+	}
+	var _out0 int32
+	_ret := _fnOSDataGetBytes(unsafe.Pointer(&_out0), buffer, offset, length)
+	return _ret, _out0
+}
+
+var _fnOSDataGetLength func(unsafe.Pointer) int
+
+// OSDataGetLength calls the DriverKit framework function OSDataGetLength.
+func OSDataGetLength() (result int, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDataGetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDataGetLength, _lib, "OSDataGetLength")
+	}
+	var _out0 int32
+	_ret := _fnOSDataGetLength(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSDictionaryGetCount func(unsafe.Pointer) uint32
+
+// OSDictionaryGetCount calls the DriverKit framework function OSDictionaryGetCount.
+func OSDictionaryGetCount() (result uint32, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionaryGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionaryGetCount, _lib, "OSDictionaryGetCount")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionaryGetCount(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSDictionaryGetStringValue func(unsafe.Pointer, string) string
+
+// OSDictionaryGetStringValue calls the DriverKit framework function OSDictionaryGetStringValue.
+func OSDictionaryGetStringValue(key string) (result string, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionaryGetStringValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionaryGetStringValue, _lib, "OSDictionaryGetStringValue")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionaryGetStringValue(unsafe.Pointer(&_out0), key)
+	return _ret, _out0
+}
+
+var _fnOSDictionaryGetUInt64Value func(unsafe.Pointer, string) uint64
+
+// OSDictionaryGetUInt64Value calls the DriverKit framework function OSDictionaryGetUInt64Value.
+func OSDictionaryGetUInt64Value(key string) (result uint64, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionaryGetUInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionaryGetUInt64Value, _lib, "OSDictionaryGetUInt64Value")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionaryGetUInt64Value(unsafe.Pointer(&_out0), key)
+	return _ret, _out0
+}
+
+var _fnOSDictionaryGetValue func(unsafe.Pointer, string) objc.ID
+
+// OSDictionaryGetValue calls the DriverKit framework function OSDictionaryGetValue.
+func OSDictionaryGetValue(key string) (result obj.Object, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionaryGetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionaryGetValue, _lib, "OSDictionaryGetValue")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionaryGetValue(unsafe.Pointer(&_out0), key)
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnOSDictionarySetStringValue func(unsafe.Pointer, string, string)
+
+// OSDictionarySetStringValue calls the DriverKit framework function OSDictionarySetStringValue.
+func OSDictionarySetStringValue(key string, value string) (obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionarySetStringValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionarySetStringValue, _lib, "OSDictionarySetStringValue")
+	}
+	var _out0 int32
+	_fnOSDictionarySetStringValue(unsafe.Pointer(&_out0), key, value)
+	return _out0
+}
+
+var _fnOSDictionarySetUInt64Value func(unsafe.Pointer, string, uint64)
+
+// OSDictionarySetUInt64Value calls the DriverKit framework function OSDictionarySetUInt64Value.
+func OSDictionarySetUInt64Value(key string, value uint64) (obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionarySetUInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionarySetUInt64Value, _lib, "OSDictionarySetUInt64Value")
+	}
+	var _out0 int32
+	_fnOSDictionarySetUInt64Value(unsafe.Pointer(&_out0), key, value)
+	return _out0
+}
+
+var _fnOSDictionarySetValue func(unsafe.Pointer, string, objc.ID) bool
+
+// OSDictionarySetValue calls the DriverKit framework function OSDictionarySetValue.
+func OSDictionarySetValue(key string, value obj.Object) (ok bool, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionarySetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionarySetValue, _lib, "OSDictionarySetValue")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionarySetValue(unsafe.Pointer(&_out0), key, objref.IDOf(value))
+	return _ret, _out0
+}
+
+var _fnOSNumberGetUInt64Value func(unsafe.Pointer) uint64
+
+// OSNumberGetUInt64Value calls the DriverKit framework function OSNumberGetUInt64Value.
+func OSNumberGetUInt64Value() (result uint64, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSNumberGetUInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnOSNumberGetUInt64Value, _lib, "OSNumberGetUInt64Value")
+	}
+	var _out0 int32
+	_ret := _fnOSNumberGetUInt64Value(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSObjectAllocate func(unsafe.Pointer, objc.ID) int
+
+// OSObjectAllocate calls the DriverKit framework function OSObjectAllocate.
+func OSObjectAllocate(pObject obj.Object) (result int, meta int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSObjectAllocate == nil {
+		ebipurego.RegisterLibFunc(&_fnOSObjectAllocate, _lib, "OSObjectAllocate")
+	}
+	var _out0 int32
+	_ret := _fnOSObjectAllocate(unsafe.Pointer(&_out0), objref.IDOf(pObject))
+	return _ret, _out0
+}
+
 var _fnOSObjectLog func(objc.ID)
 
 // OSObjectLog calls the DriverKit framework function OSObjectLog.
@@ -154,6 +734,32 @@ func OSObjectRetain(container obj.Object) {
 	_fnOSObjectRetain(objref.IDOf(container))
 }
 
+var _fnOSStringGetLength func(unsafe.Pointer) int
+
+// OSStringGetLength calls the DriverKit framework function OSStringGetLength.
+func OSStringGetLength() (result int, string_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSStringGetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnOSStringGetLength, _lib, "OSStringGetLength")
+	}
+	var _out0 int32
+	_ret := _fnOSStringGetLength(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSStringGetStringPtr func(unsafe.Pointer) string
+
+// OSStringGetStringPtr calls the DriverKit framework function OSStringGetStringPtr.
+func OSStringGetStringPtr() (result string, obj_ int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSStringGetStringPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnOSStringGetStringPtr, _lib, "OSStringGetStringPtr")
+	}
+	var _out0 int32
+	_ret := _fnOSStringGetStringPtr(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnOSSynchronizeIO func()
 
 // OSSynchronizeIO calls the DriverKit framework function OSSynchronizeIO.
@@ -174,4 +780,26 @@ func BuiltinTrap() {
 		ebipurego.RegisterLibFunc(&_fnBuiltinTrap, _lib, "__builtin_trap")
 	}
 	_fnBuiltinTrap()
+}
+
+var _fnCrc32 func(uint32, unsafe.Pointer, int) uint32
+
+// Crc32 calls the DriverKit framework function crc32.
+func Crc32(crc uint32, buf unsafe.Pointer, size int) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCrc32 == nil {
+		ebipurego.RegisterLibFunc(&_fnCrc32, _lib, "crc32")
+	}
+	return _fnCrc32(crc, buf, size)
+}
+
+var _fnReadRandom func(unsafe.Pointer, int)
+
+// ReadRandom calls the DriverKit framework function read_random.
+func ReadRandom(buffer unsafe.Pointer, numBytes int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReadRandom == nil {
+		ebipurego.RegisterLibFunc(&_fnReadRandom, _lib, "read_random")
+	}
+	_fnReadRandom(buffer, numBytes)
 }

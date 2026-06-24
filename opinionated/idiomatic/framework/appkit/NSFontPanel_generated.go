@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -490,6 +492,12 @@ func (fp *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
 // WithRestorable sets a Boolean value indicating whether the window configuration is preserved between application launches.
 func (fp *FontPanel) WithRestorable(restorable bool) *FontPanel {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorable:"), restorable)
+	return fp
+}
+
+// WithRestorationClass sets the restoration class associated with the window.
+func (fp *FontPanel) WithRestorationClass(restorationClass unsafe.Pointer) *FontPanel {
+	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setRestorationClass:"), restorationClass)
 	return fp
 }
 

@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,12 @@ func (ibd *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *I
 // OpenL2CAPChannelFindExistingNewChannel opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
 func (ibd *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int {
 	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("openL2CAPChannel:findExisting:newChannel:"), psm, findExisting, objref.IDOf(newChannel))
+	return _r
+}
+
+// SendL2CAPEchoRequestLength send an echo request over the L2CAP connection to a remote device.
+func (ibd *IOBluetoothDevice) SendL2CAPEchoRequestLength(data unsafe.Pointer, length uint16) int {
+	_r := objc.Send[int](objref.IDOf(ibd), objc.RegisterName("sendL2CAPEchoRequest:length:"), data, length)
 	return _r
 }
 

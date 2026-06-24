@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +75,30 @@ func NewOutputSettingsAssistant() *OutputSettingsAssistant {
 	return outputSettingsAssistantAdopt(_id)
 }
 
+// WithSourceAudioFormat sets the format of the source audio data.
+func (osa *OutputSettingsAssistant) WithSourceAudioFormat(sourceAudioFormat unsafe.Pointer) *OutputSettingsAssistant {
+	objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("setSourceAudioFormat:"), sourceAudioFormat)
+	return osa
+}
+
+// WithSourceVideoFormat sets the format of the source video data.
+func (osa *OutputSettingsAssistant) WithSourceVideoFormat(sourceVideoFormat unsafe.Pointer) *OutputSettingsAssistant {
+	objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("setSourceVideoFormat:"), sourceVideoFormat)
+	return osa
+}
+
+// WithSourceVideoAverageFrameDuration sets a time value that describes the average frame duration of the video data.
+func (osa *OutputSettingsAssistant) WithSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
+	objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("setSourceVideoAverageFrameDuration:"), sourceVideoAverageFrameDuration)
+	return osa
+}
+
+// WithSourceVideoMinFrameDuration sets a time value that describes the minimum frame duration of the video data.
+func (osa *OutputSettingsAssistant) WithSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
+	objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("setSourceVideoMinFrameDuration:"), sourceVideoMinFrameDuration)
+	return osa
+}
+
 // AudioSettings returns a dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
 func (osa *OutputSettingsAssistant) AudioSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("audioSettings"))
@@ -88,4 +115,16 @@ func (osa *OutputSettingsAssistant) VideoSettings() obj.Object {
 func (osa *OutputSettingsAssistant) OutputFileType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(osa), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)
+}
+
+// SourceVideoAverageFrameDuration returns a CMTime describing the average frame duration (reciprocal of average frame rate) of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+func (osa *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(osa), objc.RegisterName("sourceVideoAverageFrameDuration"))
+	return _r
+}
+
+// SourceVideoMinFrameDuration returns a CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property. The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+func (osa *OutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(osa), objc.RegisterName("sourceVideoMinFrameDuration"))
+	return _r
 }

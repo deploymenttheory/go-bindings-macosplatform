@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,9 +47,10 @@ func circularGeographicConditionAdopt(id objc.ID) *CircularGeographicCondition {
 	return x
 }
 
-// NewCircularGeographicCondition creates a new CircularGeographicCondition.
-func NewCircularGeographicCondition() *CircularGeographicCondition {
-	_id := objc.Send[objc.ID](objc.ID(_class("CLCircularGeographicCondition")), objc.RegisterName("new"))
+// NewCircularGeographicConditionWithCenterRadius creates a new circular geographic condition with the center point and radius you provide.
+func NewCircularGeographicConditionWithCenterRadius(center unsafe.Pointer, radius unsafe.Pointer) *CircularGeographicCondition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLCircularGeographicCondition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:"), center, radius)
 	return circularGeographicConditionAdopt(_id)
 }
 

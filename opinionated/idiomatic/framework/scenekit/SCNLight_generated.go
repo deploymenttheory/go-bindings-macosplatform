@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -247,15 +249,45 @@ func (l *Light) WithProbeUpdateType(probeUpdateType LightProbeUpdateType) *Light
 	return l
 }
 
+// WithProbeExtents sets the probe extents.
+func (l *Light) WithProbeExtents(probeExtents unsafe.Pointer) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setProbeExtents:"), probeExtents)
+	return l
+}
+
+// WithProbeOffset sets the probe offset.
+func (l *Light) WithProbeOffset(probeOffset unsafe.Pointer) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setProbeOffset:"), probeOffset)
+	return l
+}
+
 // WithParallaxCorrectionEnabled sets the parallax correction enabled.
 func (l *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParallaxCorrectionEnabled:"), parallaxCorrectionEnabled)
 	return l
 }
 
+// WithParallaxExtentsFactor sets the parallax extents factor.
+func (l *Light) WithParallaxExtentsFactor(parallaxExtentsFactor unsafe.Pointer) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParallaxExtentsFactor:"), parallaxExtentsFactor)
+	return l
+}
+
+// WithParallaxCenterOffset sets the parallax center offset.
+func (l *Light) WithParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParallaxCenterOffset:"), parallaxCenterOffset)
+	return l
+}
+
 // WithAreaType sets determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
 func (l *Light) WithAreaType(areaType LightAreaType) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAreaType:"), areaType)
+	return l
+}
+
+// WithAreaExtents sets determines the extents of a light of type SCNLightTypeArea. Defaults to (1.0, 1.0, 1.0). The extents are interpreted differently for each type of area light SCNLightAreaTypeLine      : areaExtents.x   = (width) SCNLightAreaTypeRectangle : areaExtents.xy  = (width, height) SCNLightAreaTypePolygon   : ignored (see `areaPolygonVertices`)
+func (l *Light) WithAreaExtents(areaExtents unsafe.Pointer) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAreaExtents:"), areaExtents)
 	return l
 }
 

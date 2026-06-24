@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -358,6 +360,12 @@ func (r *Responder) UndoManager() obj.Object {
 // ValidateProposedFirstResponderForEvent allows controls to determine when they should become first responder.
 func (r *Responder) ValidateProposedFirstResponderForEvent(responder *Responder, event *Event) bool {
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("validateProposedFirstResponder:forEvent:"), objref.IDOf(responder), objref.IDOf(event))
+	return _r
+}
+
+// PresentError presents an error alert to the user as an application-modal dialog.
+func (r *Responder) PresentError(error_ unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("presentError:"), error_)
 	return _r
 }
 

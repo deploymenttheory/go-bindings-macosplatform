@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -116,6 +117,12 @@ func (xc *XPCConnection) WithInterruptionHandler(interruptionHandler func()) *XP
 // WithInvalidationHandler sets an invalidation handler that is called if the connection can not be formed or the connection has terminated and may not be re-established.
 func (xc *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XPCConnection {
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setInvalidationHandler:"), objc.NewBlock(func(_ objc.Block) { invalidationHandler() }))
+	return xc
+}
+
+// WithObservationInfo sets the observation info.
+func (xc *XPCConnection) WithObservationInfo(observationInfo unsafe.Pointer) *XPCConnection {
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return xc
 }
 

@@ -69,6 +69,13 @@ func (irh *ImageRequestHandler) String() string {
 	return rt.Description(objref.IDOf(irh))
 }
 
+// NewImageRequestHandlerWithCVPixelBufferOptions creates a handler for performing requests on a Core Video pixel buffer.
+func NewImageRequestHandlerWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Object) *ImageRequestHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCVPixelBuffer:options:"), pixelBuffer, objref.IDOf(options))
+	return imageRequestHandlerAdopt(_id)
+}
+
 // NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
 func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))

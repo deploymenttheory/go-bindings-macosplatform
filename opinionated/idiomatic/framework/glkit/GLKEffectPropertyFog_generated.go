@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,12 @@ func (epf *EffectPropertyFog) WithEnabled(enabled uint8) *EffectPropertyFog {
 // WithMode sets the algorithm used to compute the density of the fog applied to the fragment color.
 func (epf *EffectPropertyFog) WithMode(mode int32) *EffectPropertyFog {
 	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setMode:"), mode)
+	return epf
+}
+
+// WithColor sets the color of the fog at maximum density.
+func (epf *EffectPropertyFog) WithColor(color unsafe.Pointer) *EffectPropertyFog {
+	objc.Send[objc.ID](objref.IDOf(epf), objc.RegisterName("setColor:"), color)
 	return epf
 }
 

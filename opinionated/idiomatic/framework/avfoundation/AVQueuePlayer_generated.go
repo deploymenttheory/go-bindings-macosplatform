@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -140,6 +142,12 @@ func (qp *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePla
 // WithNetworkResourcePriority sets indicates the priority of this player for network bandwidth resource distribution.
 func (qp *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *QueuePlayer {
 	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	return qp
+}
+
+// WithIntendedSpatialAudioExperience sets the AVPlayer’s intended spatial audio experience.
+func (qp *QueuePlayer) WithIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) *QueuePlayer {
+	objc.Send[objc.ID](objref.IDOf(qp), objc.RegisterName("setIntendedSpatialAudioExperience:"), intendedSpatialAudioExperience)
 	return qp
 }
 

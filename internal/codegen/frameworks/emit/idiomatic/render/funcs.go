@@ -42,6 +42,26 @@ func retOutValues(d view.Dispatch) string {
 	return strings.Join(vals, ", ")
 }
 
+// cfuncRetOutValues renders the success return list for a C-function wrapper that
+// lifts pointer out-parameters: the function's own result (converted per Kind),
+// then each out-parameter's local, in declaration order. There is no error path —
+// a C function's own status (e.g. hv_return_t) is its primary scalar return.
+func cfuncRetOutValues(f view.Func) string {
+	var vals []string
+	switch f.Kind {
+	case view.FuncVoid:
+		// no primary result
+	case view.FuncObject:
+		vals = append(vals, wrap(f.Wrap, "_ret"))
+	default:
+		vals = append(vals, "_ret")
+	}
+	for _, o := range f.Outs {
+		vals = append(vals, o.GoName)
+	}
+	return strings.Join(vals, ", ")
+}
+
 // retOutZeros renders the error-path zero prefix for a method that lifts value
 // out-parameters: the result's zero (if any) then each out-parameter's zero,
 // ending in ", " so the caller can append the error expression. It returns "" if

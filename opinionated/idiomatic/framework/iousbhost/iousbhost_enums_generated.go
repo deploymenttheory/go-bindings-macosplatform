@@ -463,6 +463,27 @@ func (e HostCIPortState) String() string {
 }
 
 // Bitmask — values may be combined with |.
+type HostIsochronousTransactionOptions int64
+
+const (
+	HostIsochronousTransactionOptionsNone HostIsochronousTransactionOptions = 0
+	HostIsochronousTransactionOptionsWrap HostIsochronousTransactionOptions = 1
+)
+
+// String returns the HostIsochronousTransactionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HostIsochronousTransactionOptions) String() string {
+	var parts []string
+	if e&HostIsochronousTransactionOptionsWrap != 0 {
+		parts = append(parts, "HostIsochronousTransactionOptionsWrap")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type HostObjectDestroyOptions uint64
 
 const (

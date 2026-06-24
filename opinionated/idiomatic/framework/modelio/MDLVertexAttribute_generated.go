@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -106,6 +108,12 @@ func (va *VertexAttribute) WithBufferIndex(bufferIndex int) *VertexAttribute {
 // WithTime sets the time the attribute is intended for. morph targets would store their times here
 func (va *VertexAttribute) WithTime(time_ float64) *VertexAttribute {
 	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setTime:"), time_)
+	return va
+}
+
+// WithInitializationValue sets the default value for vertex data for this attribute.
+func (va *VertexAttribute) WithInitializationValue(initializationValue unsafe.Pointer) *VertexAttribute {
+	objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("setInitializationValue:"), initializationValue)
 	return va
 }
 

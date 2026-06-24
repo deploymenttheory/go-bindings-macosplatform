@@ -84,6 +84,12 @@ func NewIndexSetWithIndex(value int) *IndexSet {
 	return indexSetAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (is *IndexSet) WithObservationInfo(observationInfo unsafe.Pointer) *IndexSet {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return is
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (is *IndexSet) WithScriptingProperties(scriptingProperties obj.Object) *IndexSet {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

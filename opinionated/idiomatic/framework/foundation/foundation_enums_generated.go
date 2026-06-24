@@ -3546,6 +3546,31 @@ func (e StringCompareOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for converting string encodings.
+// Bitmask — values may be combined with |.
+type StringEncodingConversionOptions uint64
+
+const (
+	StringEncodingConversionAllowLossy             StringEncodingConversionOptions = 1
+	StringEncodingConversionExternalRepresentation StringEncodingConversionOptions = 2
+)
+
+// String returns the StringEncodingConversionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StringEncodingConversionOptions) String() string {
+	var parts []string
+	if e&StringEncodingConversionAllowLossy != 0 {
+		parts = append(parts, "StringEncodingConversionAllowLossy")
+	}
+	if e&StringEncodingConversionExternalRepresentation != 0 {
+		parts = append(parts, "StringEncodingConversionExternalRepresentation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Constants that specify the termination reason values that the system returns.
 type TaskTerminationReason int64
 

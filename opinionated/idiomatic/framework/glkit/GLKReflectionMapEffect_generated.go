@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,12 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return reflectionMapEffectAdopt(_id)
 }
 
+// WithMatrix sets the reflection matrix to apply to the normals of the submitted vertices.
+func (rme *ReflectionMapEffect) WithMatrix(matrix unsafe.Pointer) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setMatrix:"), matrix)
+	return rme
+}
+
 // WithColorMaterialEnabled sets a Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
 func (rme *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
 	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setColorMaterialEnabled:"), colorMaterialEnabled)
@@ -75,10 +83,22 @@ func (rme *ReflectionMapEffect) WithLightingType(lightingType LightingType) *Ref
 	return rme
 }
 
+// WithLightModelAmbientColor sets the ambient color applied to all primitives rendered by the effect.
+func (rme *ReflectionMapEffect) WithLightModelAmbientColor(lightModelAmbientColor unsafe.Pointer) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setLightModelAmbientColor:"), lightModelAmbientColor)
+	return rme
+}
+
 // WithTextureOrder sets the order in which textures are applied to rendered primitives.
 func (rme *ReflectionMapEffect) WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect {
 	_arr := purego.SliceToNSArray(items, func(_v *EffectPropertyTexture) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setTextureOrder:"), _arr)
+	return rme
+}
+
+// WithConstantColor sets a constant color, used when per-vertex color data is not provided.
+func (rme *ReflectionMapEffect) WithConstantColor(constantColor unsafe.Pointer) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("setConstantColor:"), constantColor)
 	return rme
 }
 

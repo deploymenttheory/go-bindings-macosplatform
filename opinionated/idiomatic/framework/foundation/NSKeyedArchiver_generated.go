@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func (ka *KeyedArchiver) WithOutputFormat(outputFormat PropertyListFormat) *Keye
 // WithRequiresSecureCoding sets indicates whether the archiver requires all archived classes to resist object substitution attacks.
 func (ka *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
+	return ka
+}
+
+// WithObservationInfo sets the observation info.
+func (ka *KeyedArchiver) WithObservationInfo(observationInfo unsafe.Pointer) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ka
 }
 

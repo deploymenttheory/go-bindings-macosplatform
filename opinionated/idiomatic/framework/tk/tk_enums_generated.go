@@ -71,3 +71,76 @@ func (e Tk_Justify) String() string {
 		return fmt.Sprintf("Tk_Justify(%d)", int64(e))
 	}
 }
+
+type XIMCaretDirection int64
+
+const (
+	XIMForwardChar      XIMCaretDirection = 0
+	XIMBackwardChar     XIMCaretDirection = 1
+	XIMForwardWord      XIMCaretDirection = 2
+	XIMBackwardWord     XIMCaretDirection = 3
+	XIMCaretUp          XIMCaretDirection = 4
+	XIMCaretDown        XIMCaretDirection = 5
+	XIMNextLine         XIMCaretDirection = 6
+	XIMPreviousLine     XIMCaretDirection = 7
+	XIMLineStart        XIMCaretDirection = 8
+	XIMLineEnd          XIMCaretDirection = 9
+	XIMAbsolutePosition XIMCaretDirection = 10
+	XIMDontChange       XIMCaretDirection = 11
+)
+
+// String returns the XIMCaretDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XIMCaretDirection) String() string {
+	switch e {
+	case XIMForwardChar:
+		return "XIMForwardChar"
+	case XIMBackwardChar:
+		return "XIMBackwardChar"
+	case XIMForwardWord:
+		return "XIMForwardWord"
+	case XIMBackwardWord:
+		return "XIMBackwardWord"
+	case XIMCaretUp:
+		return "XIMCaretUp"
+	case XIMCaretDown:
+		return "XIMCaretDown"
+	case XIMNextLine:
+		return "XIMNextLine"
+	case XIMPreviousLine:
+		return "XIMPreviousLine"
+	case XIMLineStart:
+		return "XIMLineStart"
+	case XIMLineEnd:
+		return "XIMLineEnd"
+	case XIMAbsolutePosition:
+		return "XIMAbsolutePosition"
+	case XIMDontChange:
+		return "XIMDontChange"
+	default:
+		return fmt.Sprintf("XIMCaretDirection(%d)", int64(e))
+	}
+}
+
+type XIMCaretStyle int64
+
+const (
+	XIMIsInvisible XIMCaretStyle = 0
+	XIMIsPrimary   XIMCaretStyle = 1
+	XIMIsSecondary XIMCaretStyle = 2
+)
+
+// String returns the XIMCaretStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XIMCaretStyle) String() string {
+	switch e {
+	case XIMIsInvisible:
+		return "XIMIsInvisible"
+	case XIMIsPrimary:
+		return "XIMIsPrimary"
+	case XIMIsSecondary:
+		return "XIMIsSecondary"
+	default:
+		return fmt.Sprintf("XIMCaretStyle(%d)", int64(e))
+	}
+}

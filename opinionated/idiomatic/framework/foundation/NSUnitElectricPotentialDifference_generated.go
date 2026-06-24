@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func unitElectricPotentialDifferenceAdopt(id objc.ID) *UnitElectricPotentialDiff
 func NewUnitElectricPotentialDifference() *UnitElectricPotentialDifference {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("new"))
 	return unitElectricPotentialDifferenceAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uepd *UnitElectricPotentialDifference) WithObservationInfo(observationInfo unsafe.Pointer) *UnitElectricPotentialDifference {
+	objc.Send[objc.ID](objref.IDOf(uepd), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uepd
 }
 
 // WithScriptingProperties sets the scripting properties.

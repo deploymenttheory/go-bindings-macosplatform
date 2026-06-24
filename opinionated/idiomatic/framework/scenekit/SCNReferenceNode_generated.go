@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -193,6 +195,66 @@ func (rn *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
 // WithCategoryBitMask sets a mask that defines which categories the node belongs to.
 func (rn *ReferenceNode) WithCategoryBitMask(categoryBitMask int) *ReferenceNode {
 	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	return rn
+}
+
+// WithSimdTransform sets the transform applied to the node relative to its parent. Animatable.
+func (rn *ReferenceNode) WithSimdTransform(simdTransform unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdTransform:"), simdTransform)
+	return rn
+}
+
+// WithSimdPosition sets the translation applied to the node. Animatable.
+func (rn *ReferenceNode) WithSimdPosition(simdPosition unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdPosition:"), simdPosition)
+	return rn
+}
+
+// WithSimdRotation sets the node’s orientation, expressed as a rotation angle about an axis. Animatable.
+func (rn *ReferenceNode) WithSimdRotation(simdRotation unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdRotation:"), simdRotation)
+	return rn
+}
+
+// WithSimdOrientation sets the node’s orientation, expressed as a quaternion. Animatable.
+func (rn *ReferenceNode) WithSimdOrientation(simdOrientation unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdOrientation:"), simdOrientation)
+	return rn
+}
+
+// WithSimdEulerAngles sets the node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
+func (rn *ReferenceNode) WithSimdEulerAngles(simdEulerAngles unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdEulerAngles:"), simdEulerAngles)
+	return rn
+}
+
+// WithSimdScale sets the scale factor applied to the node. Animatable.
+func (rn *ReferenceNode) WithSimdScale(simdScale unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdScale:"), simdScale)
+	return rn
+}
+
+// WithSimdPivot sets the pivot point for the node’s position, rotation, and scale. Animatable.
+func (rn *ReferenceNode) WithSimdPivot(simdPivot unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdPivot:"), simdPivot)
+	return rn
+}
+
+// WithSimdWorldPosition sets the node’s position relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithSimdWorldPosition(simdWorldPosition unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldPosition:"), simdWorldPosition)
+	return rn
+}
+
+// WithSimdWorldOrientation sets the node’s orientation relative to the scene’s world coordinate space.
+func (rn *ReferenceNode) WithSimdWorldOrientation(simdWorldOrientation unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldOrientation:"), simdWorldOrientation)
+	return rn
+}
+
+// WithSimdWorldTransform sets the world transform applied to the node.
+func (rn *ReferenceNode) WithSimdWorldTransform(simdWorldTransform unsafe.Pointer) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSimdWorldTransform:"), simdWorldTransform)
 	return rn
 }
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -46,11 +47,24 @@ func timedMetadataGroupAdopt(id objc.ID) *TimedMetadataGroup {
 	return x
 }
 
+// NewTimedMetadataGroupWithItemsTimeRange creates a timed metadata group initialized with the given metadata items.
+func NewTimedMetadataGroupWithItemsTimeRange(items []*MetadataItem, timeRange coremedia.CMTimeRange) *TimedMetadataGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:timeRange:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), timeRange)
+	return timedMetadataGroupAdopt(_id)
+}
+
 // NewTimedMetadataGroupWithSampleBuffer initializes an instance of AVTimedMetadataGroup with a sample buffer.
 func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetadataGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:"), objref.IDOf(sampleBuffer))
 	return timedMetadataGroupAdopt(_id)
+}
+
+// TimeRange returns the time range.
+func (tmg *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(tmg), objc.RegisterName("timeRange"))
+	return _r
 }
 
 // isTimedMetadataGroup marks TimedMetadataGroup — and, by embedding promotion, its

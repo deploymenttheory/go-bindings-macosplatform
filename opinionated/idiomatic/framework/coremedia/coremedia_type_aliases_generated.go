@@ -4,6 +4,40 @@
 
 package coremedia
 
+// A collection of timing information for a sample in a sample buffer.
+type CMSampleTimingInfo struct {
+	Duration              CMTime
+	PresentationTimeStamp CMTime
+	DecodeTimeStamp       CMTime
+}
+
+// A tag to set additional metadata on media buffers.
+type CMTag struct {
+	Category CMTagCategory
+	DataType CMTagDataType
+	Value    uint64
+}
+
+// A structure that represents time.
+type CMTime struct {
+	Value     int64
+	Timescale int32
+	Flags     CMTimeFlags
+	Epoch     int64
+}
+
+// A structure that maps a segment of a source time range to a target time range.
+type CMTimeMapping struct {
+	Source CMTimeRange
+	Target CMTimeRange
+}
+
+// A structure that represents a time range.
+type CMTimeRange struct {
+	Start    CMTime
+	Duration CMTime
+}
+
 // A structure that represents video dimensions.
 type CMVideoDimensions struct {
 	Width  int32

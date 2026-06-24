@@ -7,6 +7,7 @@ package screencapturekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -82,6 +83,12 @@ func (sc *StreamConfiguration) WithWidth(width int) *StreamConfiguration {
 // WithHeight sets the height of the output.
 func (sc *StreamConfiguration) WithHeight(height int) *StreamConfiguration {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHeight:"), height)
+	return sc
+}
+
+// WithMinimumFrameInterval sets the desired minimum time between frame updates, in seconds.
+func (sc *StreamConfiguration) WithMinimumFrameInterval(minimumFrameInterval coremedia.CMTime) *StreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMinimumFrameInterval:"), minimumFrameInterval)
 	return sc
 }
 
@@ -262,6 +269,12 @@ func (sc *StreamConfiguration) Width() int {
 // Height returns SCStreamProperty for output height as measured in pixels. Default is set to 1080.
 func (sc *StreamConfiguration) Height() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("height"))
+	return _r
+}
+
+// MinimumFrameInterval returns SCStreamProperty that specifies the desired minimum time in seconds between frame updates, allowing you to throttle the rate at which updates are received. The default value is 1/60, meaning that updates are coming in at or up to 60fps. Set this to kCMTimeZero to capture at display's native refresh rate.
+func (sc *StreamConfiguration) MinimumFrameInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(sc), objc.RegisterName("minimumFrameInterval"))
 	return _r
 }
 

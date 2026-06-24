@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -69,6 +71,13 @@ func (a *Annotation) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
+// NewAnnotationWithBoundsForTypeWithProperties creates a PDF annotation with the specified bounds, type, and optional properties.
+func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties obj.Object) *Annotation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, annotationType, objref.IDOf(properties))
+	return annotationAdopt(_id)
+}
+
 // NewAnnotationWithDictionaryForPage creates a new Annotation.
 func NewAnnotationWithDictionaryForPage(dictionary obj.Object, page *Page) *Annotation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("alloc"))
@@ -113,9 +122,57 @@ func (a *Annotation) WithShouldPrint(shouldPrint bool) *Annotation {
 	return a
 }
 
+// WithModificationDate sets returns the modification date of the annotation.
+func (a *Annotation) WithModificationDate(modificationDate unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setModificationDate:"), modificationDate)
+	return a
+}
+
+// WithUserName sets returns the name of the user who created the annotation.
+func (a *Annotation) WithUserName(userName unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setUserName:"), userName)
+	return a
+}
+
+// WithPopup sets returns the pop-up annotation associated with an annotation.
+func (a *Annotation) WithPopup(popup unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPopup:"), popup)
+	return a
+}
+
+// WithBorder sets sets the border style for the annotation.
+func (a *Annotation) WithBorder(border unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setBorder:"), border)
+	return a
+}
+
+// WithColor sets sets the stroke color for the annotation.
+func (a *Annotation) WithColor(color unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setColor:"), color)
+	return a
+}
+
+// WithContents sets returns the textual content (if any) associated with the annotation.
+func (a *Annotation) WithContents(contents unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setContents:"), contents)
+	return a
+}
+
+// WithAction sets an object that represents an action for a PDF element, such as a link annotation.
+func (a *Annotation) WithAction(action unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAction:"), action)
+	return a
+}
+
 // WithHighlighted sets a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 func (a *Annotation) WithHighlighted(highlighted bool) *Annotation {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setHighlighted:"), highlighted)
+	return a
+}
+
+// WithMouseUpAction sets the mouse up action.
+func (a *Annotation) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMouseUpAction:"), mouseUpAction)
 	return a
 }
 
@@ -177,6 +234,12 @@ func (a *Annotation) WithQuadrilateralPoints(items ...obj.Object) *Annotation {
 // WithMarkupType sets the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
 func (a *Annotation) WithMarkupType(markupType MarkupType) *Annotation {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMarkupType:"), markupType)
+	return a
+}
+
+// WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
+func (a *Annotation) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
 	return a
 }
 
@@ -313,6 +376,35 @@ func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
 }
 
+// SetValueForAnnotationKey sets a value in the annotation’s dictionary.
+func (a *Annotation) SetValueForAnnotationKey(value obj.Object, key unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setValue:forAnnotationKey:"), objref.IDOf(value), key)
+	return _r
+}
+
+// SetBooleanForAnnotationKey sets a Boolean value in the annotation’s dictionary.
+func (a *Annotation) SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setBoolean:forAnnotationKey:"), value, key)
+	return _r
+}
+
+// SetRectForAnnotationKey sets a rectangle value in the annotation’s dictionary.
+func (a *Annotation) SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setRect:forAnnotationKey:"), value, key)
+	return _r
+}
+
+// ValueForAnnotationKey returns a deep copy of the key-value pairs of properties for the specified key.
+func (a *Annotation) ValueForAnnotationKey(key unsafe.Pointer) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("valueForAnnotationKey:"), key)
+	return obj.Wrap(_r)
+}
+
+// RemoveValueForAnnotationKey removes a value from the annotation’s dictionary.
+func (a *Annotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeValueForAnnotationKey:"), key)
+}
+
 // Page returns the page.
 func (a *Annotation) Page() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("page"))
@@ -447,11 +539,6 @@ func (a *Annotation) WidgetFieldType() string {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetWidgetFieldType wraps the corresponding Objective-C method.
-func (a *Annotation) SetWidgetFieldType(widgetFieldType string) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), purego.NSString(widgetFieldType))
 }
 
 // WidgetControlType returns the widget control type.

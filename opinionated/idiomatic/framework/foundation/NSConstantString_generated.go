@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,12 @@ func constantStringAdopt(id objc.ID) *ConstantString {
 func NewConstantString() *ConstantString {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSConstantString")), objc.RegisterName("new"))
 	return constantStringAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (cs *ConstantString) WithObservationInfo(observationInfo unsafe.Pointer) *ConstantString {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return cs
 }
 
 // WithScriptingProperties sets the scripting properties.

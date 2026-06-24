@@ -25,6 +25,30 @@ type MTL4TimestampHeapEntry struct {
 	Timestamp uint64
 }
 
+// Groups together arguments for an operation to update a sparse texture mapping.
+type MTL4UpdateSparseTextureMappingOperation struct {
+	Mode          SparseTextureMappingMode
+	TextureRegion MTLRegion
+	TextureLevel  uint
+	TextureSlice  uint
+	HeapOffset    uint
+}
+
+// A description of an instance in an instanced geometry acceleration structure, with the instance including a user identifier and motion data for the instance.
+type MTLAccelerationStructureMotionInstanceDescriptor struct {
+	Options                         AccelerationStructureInstanceOptions
+	Mask                            uint32
+	IntersectionFunctionTableOffset uint32
+	AccelerationStructureIndex      uint32
+	UserID                          uint32
+	MotionTransformsStartIndex      uint32
+	MotionTransformsCount           uint32
+	MotionStartBorderMode           MotionBorderMode
+	MotionEndBorderMode             MotionBorderMode
+	MotionStartTime                 float32
+	MotionEndTime                   float32
+}
+
 // The expected sizes for a ray-tracing acceleration structure.
 type MTLAccelerationStructureSizes struct {
 	AccelerationStructureSize uint
@@ -90,6 +114,21 @@ type MTLDrawPrimitivesIndirectArguments struct {
 	InstanceCount uint32
 	VertexStart   uint32
 	BaseInstance  uint32
+}
+
+// A description of an instance in an acceleration structure that the GPU can populate, with motion data for the instance.
+type MTLIndirectAccelerationStructureMotionInstanceDescriptor struct {
+	Options                         AccelerationStructureInstanceOptions
+	Mask                            uint32
+	IntersectionFunctionTableOffset uint32
+	UserID                          uint32
+	AccelerationStructureID         MTLResourceID
+	MotionTransformsStartIndex      uint32
+	MotionTransformsCount           uint32
+	MotionStartBorderMode           MotionBorderMode
+	MotionEndBorderMode             MotionBorderMode
+	MotionStartTime                 float32
+	MotionEndTime                   float32
 }
 
 // A range of commands in an indirect command buffer.
@@ -167,6 +206,14 @@ type MTLSize struct {
 type MTLSizeAndAlign struct {
 	Size  uint
 	Align uint
+}
+
+// A pattern that modifies the data read or sampled from a texture by rearranging or duplicating the elements of a vector.
+type MTLTextureSwizzleChannels struct {
+	Red   TextureSwizzle
+	Green TextureSwizzle
+	Blue  TextureSwizzle
+	Alpha TextureSwizzle
 }
 
 // An offset applied to a render target index and viewport index.

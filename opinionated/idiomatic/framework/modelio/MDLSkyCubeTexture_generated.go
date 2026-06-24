@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,9 +48,17 @@ func skyCubeTextureAdopt(id objc.ID) *SkyCubeTexture {
 	return x
 }
 
-// NewSkyCubeTexture creates a new SkyCubeTexture.
-func NewSkyCubeTexture() *SkyCubeTexture {
-	_id := objc.Send[objc.ID](objc.ID(_class("MDLSkyCubeTexture")), objc.RegisterName("new"))
+// NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo initializes a sky cube texture object with the specified parameters.
+func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding TextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:"), purego.NSString(name), channelEncoding, textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
+	return skyCubeTextureAdopt(_id)
+}
+
+// NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo creates a new SkyCubeTexture.
+func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding TextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, sunAzimuth float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:sunAzimuth:upperAtmosphereScattering:groundAlbedo:"), purego.NSString(name), channelEncoding, textureDimensions, turbidity, sunElevation, sunAzimuth, upperAtmosphereScattering, groundAlbedo)
 	return skyCubeTextureAdopt(_id)
 }
 
@@ -121,6 +131,12 @@ func (sct *SkyCubeTexture) WithContrast(contrast float32) *SkyCubeTexture {
 // WithSaturation sets the amount of saturation enhancement to apply during tone mapping.
 func (sct *SkyCubeTexture) WithSaturation(saturation float32) *SkyCubeTexture {
 	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setSaturation:"), saturation)
+	return sct
+}
+
+// WithHighDynamicRangeCompression sets two parameters that determine the brightness compression curve for colors in the texture image.
+func (sct *SkyCubeTexture) WithHighDynamicRangeCompression(highDynamicRangeCompression unsafe.Pointer) *SkyCubeTexture {
+	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setHighDynamicRangeCompression:"), highDynamicRangeCompression)
 	return sct
 }
 

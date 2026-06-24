@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -62,6 +63,12 @@ func (cafo *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) 
 // WithAudioSettings sets the settings used to decode or re-encode audio before it is output by the receiver.
 func (cafo *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
 	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
+	return cafo
+}
+
+// WithMaxRecordedDuration sets the longest duration allowed for the recording.
+func (cafo *CaptureAudioFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cafo), objc.RegisterName("setMaxRecordedDuration:"), maxRecordedDuration)
 	return cafo
 }
 

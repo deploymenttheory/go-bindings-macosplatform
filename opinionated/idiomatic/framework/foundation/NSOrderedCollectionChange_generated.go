@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.O
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
 	return orderedCollectionChangeAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (occ *OrderedCollectionChange) WithObservationInfo(observationInfo unsafe.Pointer) *OrderedCollectionChange {
+	objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return occ
 }
 
 // WithScriptingProperties sets the scripting properties.

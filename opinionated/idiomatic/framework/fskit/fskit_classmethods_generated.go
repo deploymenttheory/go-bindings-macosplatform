@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -15,6 +17,30 @@ import (
 func SharedInstance() *Client {
 	_r := objc.Send[objc.ID](objc.ID(_class("FSClient")), objc.RegisterName("sharedInstance"))
 	return ClientFromID(_r)
+}
+
+// ActiveWithStatus returns a active container status instance with the provided error status.
+func ActiveWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("activeWithStatus:"), errorStatus)
+	return ContainerStatusFromID(_r)
+}
+
+// BlockedWithStatus returns a blocked container status instance with the provided error status.
+func BlockedWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("blockedWithStatus:"), errorStatus)
+	return ContainerStatusFromID(_r)
+}
+
+// NotReadyWithStatus returns a not-ready container status instance with the provided error status.
+func NotReadyWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("notReadyWithStatus:"), errorStatus)
+	return ContainerStatusFromID(_r)
+}
+
+// ReadyWithStatus returns a ready container status instance with the provided error status.
+func ReadyWithStatus(errorStatus unsafe.Pointer) *ContainerStatus {
+	_r := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("readyWithStatus:"), errorStatus)
+	return ContainerStatusFromID(_r)
 }
 
 // Active returns a status that represents an active container with no error. This value is a “FSContainerStatus“ with a “state“ that is “active“, and has a “status“ that is `nil`.

@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +54,18 @@ func mutableVideoCompositionAdopt(id objc.ID) *MutableVideoComposition {
 func NewMutableVideoComposition() *MutableVideoComposition {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableVideoComposition")), objc.RegisterName("new"))
 	return mutableVideoCompositionAdopt(_id)
+}
+
+// WithCustomVideoCompositorClass sets the custom compositor class to use.
+func (mvc *MutableVideoComposition) WithCustomVideoCompositorClass(customVideoCompositorClass unsafe.Pointer) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setCustomVideoCompositorClass:"), customVideoCompositorClass)
+	return mvc
+}
+
+// WithFrameDuration sets a time interval for which the video composition should render composed video frames.
+func (mvc *MutableVideoComposition) WithFrameDuration(frameDuration coremedia.CMTime) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setFrameDuration:"), frameDuration)
+	return mvc
 }
 
 // WithSourceTrackIDForFrameTiming sets an identifier of the source track from which the video composition derives frame timing.

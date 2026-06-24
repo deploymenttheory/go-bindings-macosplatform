@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (pls *PropertyListSerialization) String() string {
 func NewPropertyListSerialization() *PropertyListSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("new"))
 	return propertyListSerializationAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (pls *PropertyListSerialization) WithObservationInfo(observationInfo unsafe.Pointer) *PropertyListSerialization {
+	objc.Send[objc.ID](objref.IDOf(pls), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return pls
 }
 
 // WithScriptingProperties sets the scripting properties.

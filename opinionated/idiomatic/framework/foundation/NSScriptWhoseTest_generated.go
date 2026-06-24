@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,12 @@ func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScriptWhoseTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return scriptWhoseTestAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (swt *ScriptWhoseTest) WithObservationInfo(observationInfo unsafe.Pointer) *ScriptWhoseTest {
+	objc.Send[objc.ID](objref.IDOf(swt), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return swt
 }
 
 // WithScriptingProperties sets the scripting properties.

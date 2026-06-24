@@ -101,6 +101,17 @@ func (bs *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int
 	}
 }
 
+// ReadDataOfLengthFromOffsetToDestinationBytesRead reads bytes from a byte source into a buffer.
+func (bs *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesRead(length int, offset int64, dest unsafe.Pointer) (bytesReadOut int, err error) {
+	var _out0 int
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(bs), objc.RegisterName("readDataOfLength:fromOffset:toDestination:bytesRead:error:"), length, offset, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _out0, nil
+}
+
 // AvailableLengthAtOffset gets the number of available bytes from the offset within the byte source.
 func (bs *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
 	_r := objc.Send[int64](objref.IDOf(bs), objc.RegisterName("availableLengthAtOffset:"), offset)

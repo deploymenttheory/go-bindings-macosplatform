@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,6 +85,17 @@ func (cr *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRender
 func (cr *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setBounds:"), bounds)
 	return cr
+}
+
+// CaptionSceneChangesInRange determine render time ranges within an enclosing time range to account for visual changes among captions.
+func (cr *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) []*CaptionRendererScene {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("captionSceneChangesInRange:"), consideredTimeRange)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CaptionRendererScene { return CaptionRendererSceneFromID(_id) })
+}
+
+// RenderInContextForTime draw the captions for the time you specify.
+func (cr *CaptionRenderer) RenderInContextForTime(ctx obj.Object, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("renderInContext:forTime:"), objref.IDOf(ctx), time_)
 }
 
 // Captions returns a NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.

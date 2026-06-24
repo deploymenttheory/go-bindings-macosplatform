@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEnd
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedStringMarkdownSourcePosition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartLine:startColumn:endLine:endColumn:"), startLine, startColumn, endLine, endColumn)
 	return attributedStringMarkdownSourcePositionAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (asmsp *AttributedStringMarkdownSourcePosition) WithObservationInfo(observationInfo unsafe.Pointer) *AttributedStringMarkdownSourcePosition {
+	objc.Send[objc.ID](objref.IDOf(asmsp), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return asmsp
 }
 
 // WithScriptingProperties sets the scripting properties.

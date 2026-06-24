@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -61,6 +63,18 @@ func (l *Listener) WithGain(gain float64) *Listener {
 // WithAutomaticHeadTrackingFlags sets a combination of flags to express automatic headtracking behaviors for this listener.
 func (l *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags AutomaticHeadTrackingFlags) *Listener {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAutomaticHeadTrackingFlags:"), automaticHeadTrackingFlags)
+	return l
+}
+
+// WithTransform sets a matrix, in local coordinates, that determines the object’s pose in the scene.
+func (l *Listener) WithTransform(transform unsafe.Pointer) *Listener {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setTransform:"), transform)
+	return l
+}
+
+// WithWorldTransform sets a matrix, in scene coordinates, that determines the object’s pose in the scene.
+func (l *Listener) WithWorldTransform(worldTransform unsafe.Pointer) *Listener {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setWorldTransform:"), worldTransform)
 	return l
 }
 

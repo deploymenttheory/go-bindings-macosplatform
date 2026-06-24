@@ -5,12 +5,29 @@
 package ae
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnAEProcessMessage func(unsafe.Pointer) int32
+
+// AEProcessMessage reports an error if the AE framework function AEProcessMessage fails.
+func AEProcessMessage(header unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEProcessMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnAEProcessMessage, _lib, "AEProcessMessage")
+	}
+	_rc := _fnAEProcessMessage(header)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
 
 var _fnAEStreamCloseDesc func(objc.ID) int32
 
@@ -147,6 +164,36 @@ func AEStreamSetRecordType(ref obj.Object, newType int) error {
 	return nil
 }
 
+var _fnAEStreamWriteData func(objc.ID, unsafe.Pointer, int) int32
+
+// AEStreamWriteData reports an error if the AE framework function AEStreamWriteData fails.
+func AEStreamWriteData(ref obj.Object, data unsafe.Pointer, length int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamWriteData == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamWriteData, _lib, "AEStreamWriteData")
+	}
+	_rc := _fnAEStreamWriteData(objref.IDOf(ref), data, length)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAEStreamWriteDesc func(objc.ID, int, unsafe.Pointer, int) int32
+
+// AEStreamWriteDesc reports an error if the AE framework function AEStreamWriteDesc fails.
+func AEStreamWriteDesc(ref obj.Object, newType int, data unsafe.Pointer, length int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamWriteDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamWriteDesc, _lib, "AEStreamWriteDesc")
+	}
+	_rc := _fnAEStreamWriteDesc(objref.IDOf(ref), newType, data, length)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAEStreamWriteKey func(objc.ID, int) int32
 
 // AEStreamWriteKey reports an error if the AE framework function AEStreamWriteKey fails.
@@ -156,6 +203,21 @@ func AEStreamWriteKey(ref obj.Object, key int) error {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKey, _lib, "AEStreamWriteKey")
 	}
 	_rc := _fnAEStreamWriteKey(objref.IDOf(ref), key)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAEStreamWriteKeyDesc func(objc.ID, int, int, unsafe.Pointer, int) int32
+
+// AEStreamWriteKeyDesc reports an error if the AE framework function AEStreamWriteKeyDesc fails.
+func AEStreamWriteKeyDesc(ref obj.Object, key int, newType int, data unsafe.Pointer, length int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamWriteKeyDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKeyDesc, _lib, "AEStreamWriteKeyDesc")
+	}
+	_rc := _fnAEStreamWriteKeyDesc(objref.IDOf(ref), key, newType, data, length)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

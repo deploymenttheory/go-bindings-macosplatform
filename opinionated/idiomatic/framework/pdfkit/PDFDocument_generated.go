@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -90,6 +92,12 @@ func NewDocumentWithData(data obj.Object) *Document {
 // WithDocumentAttributes sets the document attributes.
 func (d *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
+	return d
+}
+
+// WithOutlineRoot sets the outline root.
+func (d *Document) WithOutlineRoot(outlineRoot unsafe.Pointer) *Document {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setOutlineRoot:"), outlineRoot)
 	return d
 }
 

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -91,6 +93,12 @@ func (mc *MoveCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpected
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (mc *MoveCommand) WithScriptErrorString(scriptErrorString StringProvider) *MoveCommand {
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return mc
+}
+
+// WithObservationInfo sets the observation info.
+func (mc *MoveCommand) WithObservationInfo(observationInfo unsafe.Pointer) *MoveCommand {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return mc
 }
 

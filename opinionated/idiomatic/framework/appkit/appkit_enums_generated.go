@@ -4280,6 +4280,29 @@ func (e MenuSelectionMode) String() string {
 	}
 }
 
+// A constant for glyph packing.
+//
+// Deprecated: since macOS 10.13.
+type MultibyteGlyphPacking uint64
+
+const (
+	// The native format for macOS.
+	//
+	// Deprecated: since macOS 10.13.
+	NativeShortGlyphPacking MultibyteGlyphPacking = 5
+)
+
+// String returns the MultibyteGlyphPacking constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MultibyteGlyphPacking) String() string {
+	switch e {
+	case NativeShortGlyphPacking:
+		return "NativeShortGlyphPacking"
+	default:
+		return fmt.Sprintf("MultibyteGlyphPacking(%d)", int64(e))
+	}
+}
+
 // Constants that specify context parameters.
 //
 // Deprecated: since macOS 10.14.

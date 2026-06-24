@@ -71,6 +71,13 @@ func (a *Array) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
+// NewArrayWithObjectsCount initializes a newly allocated array to include a given number of objects from a given C array.
+func NewArrayWithObjectsCount(objects unsafe.Pointer, cnt int) *Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:count:"), objects, cnt)
+	return arrayAdopt(_id)
+}
+
 // NewArrayWithCoder creates a new Array.
 func NewArrayWithCoder(coder *Coder) *Array {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
@@ -122,6 +129,12 @@ func NewArrayWithContentsOfURL(url string) *Array {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return arrayAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (a *Array) WithObservationInfo(observationInfo unsafe.Pointer) *Array {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return a
 }
 
 // WithScriptingProperties sets the scripting properties.
@@ -222,6 +235,18 @@ func (a *Array) ObjectEnumerator() obj.Object {
 func (a *Array) ReverseObjectEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reverseObjectEnumerator"))
 	return obj.Wrap(_r)
+}
+
+// SortedArrayUsingFunctionContext returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
+func (a *Array) SortedArrayUsingFunctionContext(comparator unsafe.Pointer, context_ unsafe.Pointer) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayUsingFunction:context:"), comparator, context_)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SortedArrayUsingFunctionContextHint returns a new array that lists the receiving array’s elements in ascending order as defined by the comparison function comparator.
+func (a *Array) SortedArrayUsingFunctionContextHint(comparator unsafe.Pointer, context_ unsafe.Pointer, hint *Data) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayUsingFunction:context:hint:"), comparator, context_, objref.IDOf(hint))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteToURL writes to URL.
@@ -352,6 +377,11 @@ func (a *Array) ArrayByApplyingDifference(difference obj.Object) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// GetObjects copies all the objects contained in the array to aBuffer.
+func (a *Array) GetObjects(objects unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("getObjects:"), objects)
+}
+
 // WriteToFileAtomically writes the contents of the array to a file at a given path.
 func (a *Array) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
@@ -368,6 +398,16 @@ func (a *Array) WriteToURLAtomically(url string, atomically bool) bool {
 func (a *Array) PathsMatchingExtensions(filterTypes []string) []string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("pathsMatchingExtensions:"), purego.SliceToNSArray(filterTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// AddObserverToObjectsAtIndexesForKeyPathOptionsContext registers an observer to receive key value observer notifications for the specified key-path relative to the objects at the indexes.
+func (a *Array) AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *Object, indexes *IndexSet, keyPath string, options KeyValueObservingOptions, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addObserver:toObjectsAtIndexes:forKeyPath:options:context:"), objref.IDOf(observer), objref.IDOf(indexes), purego.NSString(keyPath), options, context_)
+}
+
+// RemoveObserverFromObjectsAtIndexesForKeyPathContext raises an exception.
+func (a *Array) RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *Object, indexes *IndexSet, keyPath string, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeObserver:fromObjectsAtIndexes:forKeyPath:context:"), objref.IDOf(observer), objref.IDOf(indexes), purego.NSString(keyPath), context_)
 }
 
 // RemoveObserverFromObjectsAtIndexesForKeyPath removes anObserver from all key value observer notifications associated with the specified keyPath relative to the array’s objects at indexes.

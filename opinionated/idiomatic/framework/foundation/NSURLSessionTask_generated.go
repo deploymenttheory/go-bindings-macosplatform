@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -101,6 +103,12 @@ func (ust *URLSessionTask) WithPriority(priority float32) *URLSessionTask {
 // WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (ust *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
+	return ust
+}
+
+// WithObservationInfo sets the observation info.
+func (ust *URLSessionTask) WithObservationInfo(observationInfo unsafe.Pointer) *URLSessionTask {
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ust
 }
 

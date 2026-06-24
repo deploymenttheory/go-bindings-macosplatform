@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -129,6 +131,12 @@ func (sias *SearchableItemAttributeSet) WithRelatedUniqueIdentifier(relatedUniqu
 	return sias
 }
 
+// WithWeakRelatedUniqueIdentifier sets the unique identifier for the item to which the activity is related, but not linked.
+func (sias *SearchableItemAttributeSet) WithWeakRelatedUniqueIdentifier(weakRelatedUniqueIdentifier unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setWeakRelatedUniqueIdentifier:"), weakRelatedUniqueIdentifier)
+	return sias
+}
+
 // WithMetadataModificationDate sets the date on which the last metadata attribute was changed.
 func (sias *SearchableItemAttributeSet) WithMetadataModificationDate(metadataModificationDate obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setMetadataModificationDate:"), objref.IDOf(metadataModificationDate))
@@ -158,6 +166,36 @@ func (sias *SearchableItemAttributeSet) WithKeywords(items ...obj.Object) *Searc
 // WithTitle sets the title of the item.
 func (sias *SearchableItemAttributeSet) WithTitle(title string) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return sias
+}
+
+// WithUserCreated sets a value that indicates the user created the item.
+func (sias *SearchableItemAttributeSet) WithUserCreated(userCreated unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCreated:"), userCreated)
+	return sias
+}
+
+// WithUserOwned sets a value that indicates the user purchased or owns the item.
+func (sias *SearchableItemAttributeSet) WithUserOwned(userOwned unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserOwned:"), userOwned)
+	return sias
+}
+
+// WithUserCurated sets a value that indicates the user selected the item.
+func (sias *SearchableItemAttributeSet) WithUserCurated(userCurated unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setUserCurated:"), userCurated)
+	return sias
+}
+
+// WithRankingHint sets a number that indicates the relative importance of the item among other items from the app.
+func (sias *SearchableItemAttributeSet) WithRankingHint(rankingHint unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRankingHint:"), rankingHint)
+	return sias
+}
+
+// WithDomainIdentifier sets an identifier that represents the domain or owner of the item.
+func (sias *SearchableItemAttributeSet) WithDomainIdentifier(domainIdentifier unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDomainIdentifier:"), domainIdentifier)
 	return sias
 }
 
@@ -200,6 +238,24 @@ func (sias *SearchableItemAttributeSet) WithContainerIdentifier(containerIdentif
 // WithContainerOrder sets the order of the item within the container.
 func (sias *SearchableItemAttributeSet) WithContainerOrder(containerOrder obj.Object) *SearchableItemAttributeSet {
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContainerOrder:"), objref.IDOf(containerOrder))
+	return sias
+}
+
+// WithProviderDataTypeIdentifiers sets an array of type identifiers that correspond to data types your delegate object can provide.
+func (sias *SearchableItemAttributeSet) WithProviderDataTypeIdentifiers(providerDataTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderDataTypeIdentifiers:"), providerDataTypeIdentifiers)
+	return sias
+}
+
+// WithProviderFileTypeIdentifiers sets an array of type identifiers that correspond to file types your delegate object can provide.
+func (sias *SearchableItemAttributeSet) WithProviderFileTypeIdentifiers(providerFileTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderFileTypeIdentifiers:"), providerFileTypeIdentifiers)
+	return sias
+}
+
+// WithProviderInPlaceFileTypeIdentifiers sets an array of type identifiers that correspond to in-place file types your delegate object can provide.
+func (sias *SearchableItemAttributeSet) WithProviderInPlaceFileTypeIdentifiers(providerInPlaceFileTypeIdentifiers unsafe.Pointer) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setProviderInPlaceFileTypeIdentifiers:"), providerInPlaceFileTypeIdentifiers)
 	return sias
 }
 

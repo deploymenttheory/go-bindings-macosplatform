@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -67,6 +69,12 @@ func (pncf *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNa
 // WithLocale sets the locale.
 func (pncf *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return pncf
+}
+
+// WithObservationInfo sets the observation info.
+func (pncf *PersonNameComponentsFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *PersonNameComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pncf
 }
 

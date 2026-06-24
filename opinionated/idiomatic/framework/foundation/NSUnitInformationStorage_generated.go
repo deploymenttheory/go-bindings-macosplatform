@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -50,6 +52,12 @@ func unitInformationStorageAdopt(id objc.ID) *UnitInformationStorage {
 func NewUnitInformationStorage() *UnitInformationStorage {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("new"))
 	return unitInformationStorageAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uis *UnitInformationStorage) WithObservationInfo(observationInfo unsafe.Pointer) *UnitInformationStorage {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uis
 }
 
 // WithScriptingProperties sets the scripting properties.

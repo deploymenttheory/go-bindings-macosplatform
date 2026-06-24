@@ -5,7 +5,10 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -56,6 +59,11 @@ func (mp *MultiPoint) WithTitle(title string) *MultiPoint {
 func (mp *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return mp
+}
+
+// GetCoordinatesRange retrieves one or more points associated with the shape and converts them to coordinate values.
+func (mp *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("getCoordinates:range:"), coords, range_)
 }
 
 // LocationAtPointIndex translates a point index into a unit distance along the shape.

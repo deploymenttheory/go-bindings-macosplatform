@@ -89,9 +89,27 @@ func NewActionWithContentsOfURLError(fileURL string) (result *Action, err error)
 	return actionAdopt(_id), nil
 }
 
+// WithSelectedInputType sets the type of input, in UTI format, of the input received by the action.
+func (a *Action) WithSelectedInputType(selectedInputType unsafe.Pointer) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setSelectedInputType:"), selectedInputType)
+	return a
+}
+
+// WithSelectedOutputType sets the type of output, in UTI format, of the output to be produced by the action.
+func (a *Action) WithSelectedOutputType(selectedOutputType unsafe.Pointer) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setSelectedOutputType:"), selectedOutputType)
+	return a
+}
+
 // WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
 func (a *Action) WithProgressValue(progressValue float64) *Action {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setProgressValue:"), progressValue)
+	return a
+}
+
+// WithOutput sets the action’s output.
+func (a *Action) WithOutput(output unsafe.Pointer) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setOutput:"), output)
 	return a
 }
 
@@ -124,6 +142,11 @@ func (a *Action) WillFinishRunning() {
 // DidFinishRunningWithError sent by the action to itself when it has finished running asynchronously.
 func (a *Action) DidFinishRunningWithError(errorInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
+}
+
+// FinishRunningWithError causes the action to stop running and return an error, which, in turn, causes the workflow to stop.
+func (a *Action) FinishRunningWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishRunningWithError:"), error_)
 }
 
 // Stop stops the action from running.

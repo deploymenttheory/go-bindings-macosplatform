@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -77,6 +79,30 @@ func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:"), objref.IDOf(noise))
 	return noiseMapAdopt(_id)
+}
+
+// NewNoiseMapWithNoiseSizeOriginSampleCountSeamless creates a noise map by sampling from the specified noise object.
+func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *Noise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:size:origin:sampleCount:seamless:"), objref.IDOf(noise), size, origin, sampleCount, seamless)
+	return noiseMapAdopt(_id)
+}
+
+// ValueAtPosition returns the value at the specified position in the noise map’s discrete sample grid.
+func (nm *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
+	_r := objc.Send[float32](objref.IDOf(nm), objc.RegisterName("valueAtPosition:"), position)
+	return _r
+}
+
+// InterpolatedValueAtPosition returns the value at the specified position in the noise map, interpolating results for positions not on the discrete sample grid.
+func (nm *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
+	_r := objc.Send[float32](objref.IDOf(nm), objc.RegisterName("interpolatedValueAtPosition:"), position)
+	return _r
+}
+
+// SetValueAtPosition sets the value at the specified position in the noise map.
+func (nm *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(nm), objc.RegisterName("setValue:atPosition:"), value, position)
 }
 
 // IsSeamless reports whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,12 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLSessionWebSocketMessage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
 	return uRLSessionWebSocketMessageAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uswsm *URLSessionWebSocketMessage) WithObservationInfo(observationInfo unsafe.Pointer) *URLSessionWebSocketMessage {
+	objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uswsm
 }
 
 // WithScriptingProperties sets the scripting properties.

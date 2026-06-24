@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -194,6 +196,12 @@ func (uc *URLComponents) WithQueryItems(items ...*URLQueryItem) *URLComponents {
 func (uc *URLComponents) WithPercentEncodedQueryItems(items ...*URLQueryItem) *URLComponents {
 	_arr := purego.SliceToNSArray(items, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setPercentEncodedQueryItems:"), _arr)
+	return uc
+}
+
+// WithObservationInfo sets the observation info.
+func (uc *URLComponents) WithObservationInfo(observationInfo unsafe.Pointer) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return uc
 }
 

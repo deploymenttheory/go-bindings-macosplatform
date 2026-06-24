@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -100,6 +101,26 @@ func (vp *VideoProcessor) AddRequestWithProcessingOptions(request *Request, proc
 func (vp *VideoProcessor) RemoveRequest(request *Request) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// AnalyzeTimeRange analyzes a time range of video content.
+func (vp *VideoProcessor) AnalyzeTimeRange(timeRange coremedia.CMTimeRange) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("analyzeTimeRange:error:"), timeRange, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// AnalyzeWithTimeRange analyzes the specifed time range of the video content.
+func (vp *VideoProcessor) AnalyzeWithTimeRange(timeRange coremedia.CMTimeRange) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("analyzeWithTimeRange:error:"), timeRange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

@@ -108,6 +108,16 @@ func (mdc *MTRDeviceController) CommissionNodeWithIDCommissioningParams(nodeID o
 	return nil
 }
 
+// ContinueCommissioningDeviceIgnoreAttestationFailure call this method after MTRDeviceAttestationDelegate deviceAttestationFailedForController:opaqueDeviceHandle:error: or deviceAttestationCompletedForController:opaqueDeviceHandle:attestationDeviceInfo:error: is called to continue commissioning the device.
+func (mdc *MTRDeviceController) ContinueCommissioningDeviceIgnoreAttestationFailure(opaqueDeviceHandle unsafe.Pointer, ignoreAttestationFailure bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("continueCommissioningDevice:ignoreAttestationFailure:error:"), opaqueDeviceHandle, ignoreAttestationFailure, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // CancelCommissioningForNodeID cancel commissioning for the given node id.  This will shut down any existing commissioning session for that node id.
 func (mdc *MTRDeviceController) CancelCommissioningForNodeID(nodeID obj.Object) error {
 	var _nsErr uintptr

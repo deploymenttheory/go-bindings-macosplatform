@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewURLHandleWithURLCached(anURL string, willCache bool) *URLHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cached:"), rt.FileURL(anURL), willCache)
 	return uRLHandleAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uh *URLHandle) WithObservationInfo(observationInfo unsafe.Pointer) *URLHandle {
+	objc.Send[objc.ID](objref.IDOf(uh), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uh
 }
 
 // WithScriptingProperties sets the scripting properties.

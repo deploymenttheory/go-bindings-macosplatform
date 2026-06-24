@@ -5,6 +5,8 @@
 package launchservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -22,6 +24,76 @@ func AcquireIconRef(theIconRef obj.Object) int16 {
 	return _fnAcquireIconRef(objref.IDOf(theIconRef))
 }
 
+var _fnCompositeIconRef func(objc.ID, objc.ID, unsafe.Pointer) int16
+
+// CompositeIconRef calls the LaunchServices framework function CompositeIconRef.
+func CompositeIconRef(backgroundIconRef obj.Object, foregroundIconRef obj.Object, compositeIconRef unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCompositeIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnCompositeIconRef, _lib, "CompositeIconRef")
+	}
+	return _fnCompositeIconRef(objref.IDOf(backgroundIconRef), objref.IDOf(foregroundIconRef), compositeIconRef)
+}
+
+var _fnGetCustomIconsEnabled func(int16, unsafe.Pointer) int16
+
+// GetCustomIconsEnabled calls the LaunchServices framework function GetCustomIconsEnabled.
+func GetCustomIconsEnabled(vRefNum int16) (result int16, customIconsEnabled uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetCustomIconsEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnGetCustomIconsEnabled, _lib, "GetCustomIconsEnabled")
+	}
+	var _out0 uint8
+	_ret := _fnGetCustomIconsEnabled(vRefNum, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGetIconRef func(int16, int, int, unsafe.Pointer) int16
+
+// GetIconRef calls the LaunchServices framework function GetIconRef.
+func GetIconRef(vRefNum int16, creator int, iconType int, theIconRef unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRef, _lib, "GetIconRef")
+	}
+	return _fnGetIconRef(vRefNum, creator, iconType, theIconRef)
+}
+
+var _fnGetIconRefFromFolder func(int16, int, int, int8, int8, unsafe.Pointer) int16
+
+// GetIconRefFromFolder calls the LaunchServices framework function GetIconRefFromFolder.
+func GetIconRefFromFolder(vRefNum int16, parentFolderID int, folderID int, attributes int8, accessPrivileges int8, theIconRef unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefFromFolder == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefFromFolder, _lib, "GetIconRefFromFolder")
+	}
+	return _fnGetIconRefFromFolder(vRefNum, parentFolderID, folderID, attributes, accessPrivileges, theIconRef)
+}
+
+var _fnGetIconRefFromTypeInfo func(int, int, objc.ID, objc.ID, int, unsafe.Pointer) int16
+
+// GetIconRefFromTypeInfo calls the LaunchServices framework function GetIconRefFromTypeInfo.
+func GetIconRefFromTypeInfo(inCreator int, inType int, inExtension obj.Object, inMIMEType obj.Object, inUsageFlags int, outIconRef unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefFromTypeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefFromTypeInfo, _lib, "GetIconRefFromTypeInfo")
+	}
+	return _fnGetIconRefFromTypeInfo(inCreator, inType, objref.IDOf(inExtension), objref.IDOf(inMIMEType), inUsageFlags, outIconRef)
+}
+
+var _fnGetIconRefOwners func(objc.ID, unsafe.Pointer) int16
+
+// GetIconRefOwners calls the LaunchServices framework function GetIconRefOwners.
+func GetIconRefOwners(theIconRef obj.Object) (result int16, owners uint16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefOwners == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefOwners, _lib, "GetIconRefOwners")
+	}
+	var _out0 uint16
+	_ret := _fnGetIconRefOwners(objref.IDOf(theIconRef), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnIsDataAvailableInIconRef func(int, objc.ID) uint8
 
 // IsDataAvailableInIconRef calls the LaunchServices framework function IsDataAvailableInIconRef.
@@ -33,6 +105,17 @@ func IsDataAvailableInIconRef(inIconKind int, inIconRef obj.Object) uint8 {
 	return _fnIsDataAvailableInIconRef(inIconKind, objref.IDOf(inIconRef))
 }
 
+var _fnIsIconRefComposite func(objc.ID, unsafe.Pointer, unsafe.Pointer) int16
+
+// IsIconRefComposite calls the LaunchServices framework function IsIconRefComposite.
+func IsIconRefComposite(compositeIconRef obj.Object, backgroundIconRef unsafe.Pointer, foregroundIconRef unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsIconRefComposite == nil {
+		ebipurego.RegisterLibFunc(&_fnIsIconRefComposite, _lib, "IsIconRefComposite")
+	}
+	return _fnIsIconRefComposite(objref.IDOf(compositeIconRef), backgroundIconRef, foregroundIconRef)
+}
+
 var _fnIsValidIconRef func(objc.ID) uint8
 
 // IsValidIconRef calls the LaunchServices framework function IsValidIconRef.
@@ -42,6 +125,19 @@ func IsValidIconRef(theIconRef obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnIsValidIconRef, _lib, "IsValidIconRef")
 	}
 	return _fnIsValidIconRef(objref.IDOf(theIconRef))
+}
+
+var _fnLSCanURLAcceptURL func(objc.ID, objc.ID, LSRolesMask, LSAcceptanceFlags, unsafe.Pointer) int
+
+// LSCanURLAcceptURL calls the LaunchServices framework function LSCanURLAcceptURL.
+func LSCanURLAcceptURL(inItemURL obj.Object, inTargetURL obj.Object, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags) (result int, outAcceptsItem uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCanURLAcceptURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCanURLAcceptURL, _lib, "LSCanURLAcceptURL")
+	}
+	var _out0 uint8
+	_ret := _fnLSCanURLAcceptURL(objref.IDOf(inItemURL), objref.IDOf(inTargetURL), inRoleMask, inFlags, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnLSCopyAllHandlersForURLScheme func(objc.ID) objc.ID
@@ -102,6 +198,20 @@ func LSCopyDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSR
 	}
 	_ret := _fnLSCopyDefaultRoleHandlerForContentType(objref.IDOf(inContentType), inRole)
 	return obj.Wrap(_ret)
+}
+
+var _fnLSGetExtensionInfo func(int, unsafe.Pointer, unsafe.Pointer) int
+
+// LSGetExtensionInfo calls the LaunchServices framework function LSGetExtensionInfo.
+func LSGetExtensionInfo(inNameLen int) (result int, inNameBuffer uint16, outExtStartIndex int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSGetExtensionInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnLSGetExtensionInfo, _lib, "LSGetExtensionInfo")
+	}
+	var _out0 uint16
+	var _out1 int
+	_ret := _fnLSGetExtensionInfo(inNameLen, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnLSGetHandlerOptionsForContentType func(objc.ID) LSHandlerOptions

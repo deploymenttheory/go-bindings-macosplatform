@@ -4,6 +4,24 @@
 
 package avfoundation
 
+// A structure that defines a caption dimension.
+type AVCaptionDimension struct {
+	Value float64
+	Units CaptionUnitsType
+}
+
+// A structure that defines the origin point for a caption.
+type AVCaptionPoint struct {
+	X AVCaptionDimension
+	Y AVCaptionDimension
+}
+
+// A structure that defines the height and width of a caption.
+type AVCaptionSize struct {
+	Width  AVCaptionDimension
+	Height AVCaptionDimension
+}
+
 // A structure that defines CIE 1931 xy chromaticity values.
 type AVCaptureWhiteBalanceChromaticityValues struct {
 	X float32

@@ -5,8 +5,21 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	ebipurego "github.com/ebitengine/purego"
 )
+
+var _fnMKMapPointsPerMeterAtLatitude func(unsafe.Pointer) float64
+
+// MKMapPointsPerMeterAtLatitude calls the MapKit framework function MKMapPointsPerMeterAtLatitude.
+func MKMapPointsPerMeterAtLatitude(latitude unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapPointsPerMeterAtLatitude == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapPointsPerMeterAtLatitude, _lib, "MKMapPointsPerMeterAtLatitude")
+	}
+	return _fnMKMapPointsPerMeterAtLatitude(latitude)
+}
 
 var _fnMKRoadWidthAtZoomScale func(float64) float64
 

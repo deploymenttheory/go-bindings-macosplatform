@@ -249,6 +249,43 @@ func (e CGColorConversionInfoTransformType) String() string {
 	}
 }
 
+// Bitmask — values may be combined with |.
+type CGColorModel int64
+
+const (
+	KCGColorModelNoColorant CGColorModel = 0
+	KCGColorModelGray       CGColorModel = 1
+	KCGColorModelRGB        CGColorModel = 2
+	KCGColorModelCMYK       CGColorModel = 4
+	KCGColorModelLab        CGColorModel = 8
+	KCGColorModelDeviceN    CGColorModel = 16
+)
+
+// String returns the CGColorModel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGColorModel) String() string {
+	var parts []string
+	if e&KCGColorModelGray != 0 {
+		parts = append(parts, "KCGColorModelGray")
+	}
+	if e&KCGColorModelRGB != 0 {
+		parts = append(parts, "KCGColorModelRGB")
+	}
+	if e&KCGColorModelCMYK != 0 {
+		parts = append(parts, "KCGColorModelCMYK")
+	}
+	if e&KCGColorModelLab != 0 {
+		parts = append(parts, "KCGColorModelLab")
+	}
+	if e&KCGColorModelDeviceN != 0 {
+		parts = append(parts, "KCGColorModelDeviceN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Handling options for colors that are not located within the destination color space of a graphics context.
 type CGColorRenderingIntent int64
 
@@ -329,6 +366,41 @@ func (e CGColorSpaceModel) String() string {
 		return "KCGColorSpaceModelXYZ"
 	default:
 		return fmt.Sprintf("CGColorSpaceModel(%d)", int64(e))
+	}
+}
+
+type CGComponent int64
+
+const (
+	KCGComponentUnknown      CGComponent = 0
+	KCGComponentInteger8Bit  CGComponent = 1
+	KCGComponentInteger10Bit CGComponent = 6
+	KCGComponentInteger16Bit CGComponent = 2
+	KCGComponentInteger32Bit CGComponent = 3
+	KCGComponentFloat16Bit   CGComponent = 5
+	KCGComponentFloat32Bit   CGComponent = 4
+)
+
+// String returns the CGComponent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGComponent) String() string {
+	switch e {
+	case KCGComponentUnknown:
+		return "KCGComponentUnknown"
+	case KCGComponentInteger8Bit:
+		return "KCGComponentInteger8Bit"
+	case KCGComponentInteger10Bit:
+		return "KCGComponentInteger10Bit"
+	case KCGComponentInteger16Bit:
+		return "KCGComponentInteger16Bit"
+	case KCGComponentInteger32Bit:
+		return "KCGComponentInteger32Bit"
+	case KCGComponentFloat16Bit:
+		return "KCGComponentFloat16Bit"
+	case KCGComponentFloat32Bit:
+		return "KCGComponentFloat32Bit"
+	default:
+		return fmt.Sprintf("CGComponent(%d)", int64(e))
 	}
 }
 
@@ -1370,6 +1442,33 @@ func (e CGPDFBox) String() string {
 	}
 }
 
+// The encoding format of PDF data.
+type CGPDFDataFormat int64
+
+const (
+	// The data stream is not encoded.
+	CGPDFDataFormatRaw CGPDFDataFormat = 0
+	// The data stream is encoded in JPEG format.
+	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
+	// The data stream is encoded in JPEG-2000 format.
+	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
+)
+
+// String returns the CGPDFDataFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGPDFDataFormat) String() string {
+	switch e {
+	case CGPDFDataFormatRaw:
+		return "CGPDFDataFormatRaw"
+	case CGPDFDataFormatJPEGEncoded:
+		return "CGPDFDataFormatJPEGEncoded"
+	case CGPDFDataFormatJPEG2000:
+		return "CGPDFDataFormatJPEG2000"
+	default:
+		return fmt.Sprintf("CGPDFDataFormat(%d)", int64(e))
+	}
+}
+
 // Types of PDF object.
 type CGPDFObjectType int64
 
@@ -1617,6 +1716,33 @@ func (e CGPathDrawingMode) String() string {
 		return "KCGPathEOFillStroke"
 	default:
 		return fmt.Sprintf("CGPathDrawingMode(%d)", int64(e))
+	}
+}
+
+// Different methods for rendering a tiled pattern.
+type CGPatternTiling int64
+
+const (
+	// The pattern cell is not distorted when painted.The spacing between pattern cells may vary by as much as 1 devicepixel.
+	KCGPatternTilingNoDistortion CGPatternTiling = 0
+	// Pattern cells are spaced consistently. Thepattern cell may be distorted by as much as 1 device pixel whenthe pattern is painted.
+	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
+	// Pattern cells are spaced consistently, as with kCGPatternTilingConstantSpacingMinimalDistortion.The pattern cell may be distorted additionally to permit a moreefficient implementation.
+	KCGPatternTilingConstantSpacing CGPatternTiling = 2
+)
+
+// String returns the CGPatternTiling constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGPatternTiling) String() string {
+	switch e {
+	case KCGPatternTilingNoDistortion:
+		return "KCGPatternTilingNoDistortion"
+	case KCGPatternTilingConstantSpacingMinimalDistortion:
+		return "KCGPatternTilingConstantSpacingMinimalDistortion"
+	case KCGPatternTilingConstantSpacing:
+		return "KCGPatternTilingConstantSpacing"
+	default:
+		return fmt.Sprintf("CGPatternTiling(%d)", int64(e))
 	}
 }
 

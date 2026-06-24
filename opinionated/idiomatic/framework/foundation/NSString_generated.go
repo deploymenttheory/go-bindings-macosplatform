@@ -171,6 +171,20 @@ func NewStringWithDataEncoding(data *Data, encoding int) *String {
 	return stringAdopt(_id)
 }
 
+// NewStringWithBytesLengthEncoding returns an initialized NSString object containing a given number of bytes from a given buffer of bytes interpreted in a given encoding.
+func NewStringWithBytesLengthEncoding(bytes_ unsafe.Pointer, len_ int, encoding int) *String {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:encoding:"), bytes_, len_, encoding)
+	return stringAdopt(_id)
+}
+
+// NewStringWithBytesNoCopyLengthEncodingFreeWhenDone returns an initialized NSString object that contains a given number of bytes from a given buffer of bytes interpreted in a given encoding, and optionally frees the buffer.
+func NewStringWithBytesNoCopyLengthEncodingFreeWhenDone(bytes_ unsafe.Pointer, len_ int, encoding int, freeBuffer bool) *String {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:encoding:freeWhenDone:"), bytes_, len_, encoding, freeBuffer)
+	return stringAdopt(_id)
+}
+
 // NewStringWithCStringEncoding returns an
 func NewStringWithCStringEncoding(nullTerminatedCString string, encoding int) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
@@ -233,6 +247,12 @@ func NewStringWithCString(bytes_ string) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCString:"), bytes_)
 	return stringAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (s *String) WithObservationInfo(observationInfo unsafe.Pointer) *String {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return s
 }
 
 // WithScriptingProperties sets the scripting properties.

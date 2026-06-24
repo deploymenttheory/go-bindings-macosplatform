@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -111,6 +113,12 @@ func (xn *XMLDTDNode) WithStringValue(stringValue StringProvider) *XMLDTDNode {
 // WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
 func (xn *XMLDTDNode) WithURI(uRI StringProvider) *XMLDTDNode {
 	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setURI:"), objref.IDOf(uRI))
+	return xn
+}
+
+// WithObservationInfo sets the observation info.
+func (xn *XMLDTDNode) WithObservationInfo(observationInfo unsafe.Pointer) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return xn
 }
 

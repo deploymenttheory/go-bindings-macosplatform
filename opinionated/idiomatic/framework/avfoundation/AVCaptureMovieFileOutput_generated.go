@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +53,12 @@ func NewCaptureMovieFileOutput() *CaptureMovieFileOutput {
 	return captureMovieFileOutputAdopt(_id)
 }
 
+// WithMovieFragmentInterval sets the number of seconds of output that are written per fragment.
+func (cmfo *CaptureMovieFileOutput) WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *CaptureMovieFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setMovieFragmentInterval:"), movieFragmentInterval)
+	return cmfo
+}
+
 // WithMetadata sets the metadata for the output file.
 func (cmfo *CaptureMovieFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureMovieFileOutput {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
@@ -68,6 +75,12 @@ func (cmfo *CaptureMovieFileOutput) WithPrimaryConstituentDeviceSwitchingBehavio
 // WithSpatialVideoCaptureEnabled sets a Boolean value that indicates whether a movie file output captures spatial videos.
 func (cmfo *CaptureMovieFileOutput) WithSpatialVideoCaptureEnabled(spatialVideoCaptureEnabled bool) *CaptureMovieFileOutput {
 	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setSpatialVideoCaptureEnabled:"), spatialVideoCaptureEnabled)
+	return cmfo
+}
+
+// WithMaxRecordedDuration sets the longest duration allowed for the recording.
+func (cmfo *CaptureMovieFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureMovieFileOutput {
+	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setMaxRecordedDuration:"), maxRecordedDuration)
 	return cmfo
 }
 
@@ -103,6 +116,12 @@ func (cmfo *CaptureMovieFileOutput) SetOutputSettingsForConnection(outputSetting
 // SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions sets the camera switching behavior to use during recording.
 func (cmfo *CaptureMovieFileOutput) SetPrimaryConstituentDeviceSwitchingBehaviorForRecordingRestrictedSwitchingBehaviorConditions(switchingBehavior CapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
 	objc.Send[objc.ID](objref.IDOf(cmfo), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions:"), switchingBehavior, restrictedSwitchingBehaviorConditions)
+}
+
+// MovieFragmentInterval specifies the frequency with which movie fragments should be written. When movie fragments are used, a partially written QuickTime movie file whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. A value of kCMTimeInvalid indicates that movie fragments should not be used, but that only a movie atom describing all of the media in the file should be written. The default value of this property is ten seconds. Changing the value of this property will not affect the movie fragment interval of the file currently being written, if there is one. For best writing performance on external storage devices, set the movieFragmentInterval to 10 seconds or greater. If the size of a movie fragment is greater than or equal to 2GB, an interval is added at 2GB mark.
+func (cmfo *CaptureMovieFileOutput) MovieFragmentInterval() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cmfo), objc.RegisterName("movieFragmentInterval"))
+	return _r
 }
 
 // Metadata returns a collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file.

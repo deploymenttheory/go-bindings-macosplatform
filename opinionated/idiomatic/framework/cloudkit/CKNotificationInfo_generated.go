@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,6 +74,78 @@ func NewNotificationInfo() *NotificationInfo {
 	return notificationInfoAdopt(_id)
 }
 
+// WithAlertBody sets the text for the notification's alert. Set this property's value to have the system display the specified string when it receives the corresponding push notification. If you localize your app's content, use the “CKSubscription/NotificationInfo/alertLocalizationKey“ property instead.
+func (ni *NotificationInfo) WithAlertBody(alertBody unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertBody:"), alertBody)
+	return ni
+}
+
+// WithAlertLocalizationKey sets the key that identifies the localized string for the notification's alert. Set this property's value to have the system display a localized string when it receives the corresponding push notification. The system uses the key to find the matching string in your app's `Localizable.string` file. If you specify a value for this property, CloudKit ignores the “CKSubscription/NotificationInfo/alertBody“ property's value. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+func (ni *NotificationInfo) WithAlertLocalizationKey(alertLocalizationKey unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertLocalizationKey:"), alertLocalizationKey)
+	return ni
+}
+
+// WithAlertLocalizationArgs sets the fields for building a notification’s alert.
+func (ni *NotificationInfo) WithAlertLocalizationArgs(alertLocalizationArgs unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertLocalizationArgs:"), alertLocalizationArgs)
+	return ni
+}
+
+// WithTitle sets the notification's title. CloudKit uses this value to set the `title` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more detail about push notification properties.
+func (ni *NotificationInfo) WithTitle(title unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setTitle:"), title)
+	return ni
+}
+
+// WithTitleLocalizationKey sets the key that identifies the localized string for the notification's title. CloudKit uses this value to set the `title-loc-key` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) WithTitleLocalizationKey(titleLocalizationKey unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setTitleLocalizationKey:"), titleLocalizationKey)
+	return ni
+}
+
+// WithTitleLocalizationArgs sets the fields for building a notification’s title.
+func (ni *NotificationInfo) WithTitleLocalizationArgs(titleLocalizationArgs unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setTitleLocalizationArgs:"), titleLocalizationArgs)
+	return ni
+}
+
+// WithSubtitle sets the notification's subtitle. CloudKit uses this value to set the `subtitle` push notification property. If you set “CKSubscription/NotificationInfo/subtitleLocalizationKey“, CloudKit ignores this value. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) WithSubtitle(subtitle unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setSubtitle:"), subtitle)
+	return ni
+}
+
+// WithSubtitleLocalizationKey sets the key that identifies the localized string for the notification's subtitle. CloudKit uses this value to set the `subtitle-loc-key` push notification property. Setting this property overrides any value in “CKSubscription/NotificationInfo/subtitle“. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+func (ni *NotificationInfo) WithSubtitleLocalizationKey(subtitleLocalizationKey unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setSubtitleLocalizationKey:"), subtitleLocalizationKey)
+	return ni
+}
+
+// WithSubtitleLocalizationArgs sets the fields for building a notification’s subtitle.
+func (ni *NotificationInfo) WithSubtitleLocalizationArgs(subtitleLocalizationArgs unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setSubtitleLocalizationArgs:"), subtitleLocalizationArgs)
+	return ni
+}
+
+// WithAlertActionLocalizationKey sets the key that identifies the localized string for the notification's action. Set this property's value to have the system use a localized string for the text of the notification's button that opens your app. The system uses the key to find the matching string in your app's `Localizable.string` file. If this property's value is `nil`, the system displays a single button to dismiss the alert. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+func (ni *NotificationInfo) WithAlertActionLocalizationKey(alertActionLocalizationKey unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertActionLocalizationKey:"), alertActionLocalizationKey)
+	return ni
+}
+
+// WithAlertLaunchImage sets the filename of an image to use as a launch image. If you specify a value, the system uses it to locate an image in the app's bundle, and displays it as a launch image when the user launches the app after receiving a push notification.
+func (ni *NotificationInfo) WithAlertLaunchImage(alertLaunchImage unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setAlertLaunchImage:"), alertLaunchImage)
+	return ni
+}
+
+// WithSoundName sets the filename of the sound file to play when a notification arrives. If you specify a value, the system uses it to locate a sound file in the app's bundle. The sound plays when the system receives a push notification. If the system can't find the specified file, or if you use the string `default`, the system plays the default sound.
+func (ni *NotificationInfo) WithSoundName(soundName unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setSoundName:"), soundName)
+	return ni
+}
+
 // WithDesiredKeys sets the names of fields to include in the push notification’s payload.
 func (ni *NotificationInfo) WithDesiredKeys(items ...obj.Object) *NotificationInfo {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -94,6 +168,12 @@ func (ni *NotificationInfo) WithShouldSendContentAvailable(shouldSendContentAvai
 // WithShouldSendMutableContent sets a Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (ni *NotificationInfo) WithShouldSendMutableContent(shouldSendMutableContent bool) *NotificationInfo {
 	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setShouldSendMutableContent:"), shouldSendMutableContent)
+	return ni
+}
+
+// WithCategory sets the name of the action group that corresponds to this notification. Categories allow you to present custom actions to the user on your push notifications. For more information, see <doc://com.apple.documentation/documentation/uikit/uimutableusernotificationcategory>.
+func (ni *NotificationInfo) WithCategory(category unsafe.Pointer) *NotificationInfo {
+	objc.Send[objc.ID](objref.IDOf(ni), objc.RegisterName("setCategory:"), category)
 	return ni
 }
 

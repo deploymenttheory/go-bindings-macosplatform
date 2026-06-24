@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (tcr *TextCheckingResult) String() string {
 func NewTextCheckingResult() *TextCheckingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("new"))
 	return textCheckingResultAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (tcr *TextCheckingResult) WithObservationInfo(observationInfo unsafe.Pointer) *TextCheckingResult {
+	objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return tcr
 }
 
 // WithScriptingProperties sets the scripting properties.

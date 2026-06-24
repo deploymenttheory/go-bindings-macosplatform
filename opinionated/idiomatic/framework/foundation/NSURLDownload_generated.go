@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func NewURLDownload() *URLDownload {
 // WithDeletesFileUponFailure sets returns whether the receiver deletes partially downloaded files when a download stops prematurely.
 func (ud *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
+	return ud
+}
+
+// WithObservationInfo sets the observation info.
+func (ud *URLDownload) WithObservationInfo(observationInfo unsafe.Pointer) *URLDownload {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ud
 }
 

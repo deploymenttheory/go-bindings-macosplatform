@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -70,6 +71,12 @@ func (asrsi *AssetSegmentReportSampleInformation) String() string {
 func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformation {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentReportSampleInformation")), objc.RegisterName("new"))
 	return assetSegmentReportSampleInformationAdopt(_id)
+}
+
+// PresentationTimeStamp returns the presentation timestamp (PTS) of the sample. This timestamp may be different from the earliestPresentationTimeStamp if the video is encoded using frame reordering.
+func (asrsi *AssetSegmentReportSampleInformation) PresentationTimeStamp() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(asrsi), objc.RegisterName("presentationTimeStamp"))
+	return _r
 }
 
 // Offset returns the offset of the sample in the segment.

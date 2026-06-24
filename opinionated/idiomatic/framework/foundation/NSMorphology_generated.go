@@ -123,6 +123,12 @@ func (m *Morphology) WithDefiniteness(definiteness GrammaticalDefiniteness) *Mor
 	return m
 }
 
+// WithObservationInfo sets the observation info.
+func (m *Morphology) WithObservationInfo(observationInfo unsafe.Pointer) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return m
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (m *Morphology) WithScriptingProperties(scriptingProperties obj.Object) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

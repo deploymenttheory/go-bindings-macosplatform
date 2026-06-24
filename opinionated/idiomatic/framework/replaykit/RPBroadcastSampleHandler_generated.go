@@ -5,6 +5,8 @@
 package replaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,6 +82,11 @@ func (bsh *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applica
 // ProcessSampleBufferWithType processes video and audio data as it becomes available during a live broadcast.
 func (bsh *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
+}
+
+// FinishBroadcastWithError stops the broadcast and passes an error back to the broadcasting app.
+func (bsh *BroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("finishBroadcastWithError:"), error_)
 }
 
 var _ BroadcastHandlerProvider = (*BroadcastSampleHandler)(nil)

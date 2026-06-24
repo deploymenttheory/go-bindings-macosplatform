@@ -11,7 +11,7 @@ import (
 // the render layer disguised as a template helper. Adding a helper means updating
 // this list deliberately.
 func TestFuncMapExact(t *testing.T) {
-	want := []string{"comment", "join", "retOutValues", "retOutZeros", "wrap"}
+	want := []string{"cfuncRetOutValues", "comment", "join", "retOutValues", "retOutZeros", "wrap"}
 	var got []string
 	for k := range funcMap {
 		got = append(got, k)

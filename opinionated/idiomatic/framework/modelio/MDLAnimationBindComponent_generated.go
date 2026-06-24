@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -80,6 +82,12 @@ func (abc *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBi
 func (abc *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setJointPaths:"), _arr)
+	return abc
+}
+
+// WithGeometryBindTransform sets the geometry bind transform.
+func (abc *AnimationBindComponent) WithGeometryBindTransform(geometryBindTransform unsafe.Pointer) *AnimationBindComponent {
+	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setGeometryBindTransform:"), geometryBindTransform)
 	return abc
 }
 

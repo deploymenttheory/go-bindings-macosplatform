@@ -153,6 +153,12 @@ func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *Attribut
 	return attributedStringAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (as *AttributedString) WithObservationInfo(observationInfo unsafe.Pointer) *AttributedString {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return as
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (as *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

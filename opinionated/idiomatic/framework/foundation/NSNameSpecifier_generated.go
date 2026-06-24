@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -105,6 +107,12 @@ func (ns *NameSpecifier) WithContainerClassDescription(containerClassDescription
 // WithEvaluationErrorNumber sets sets the value of the evaluation error.
 func (ns *NameSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
+	return ns
+}
+
+// WithObservationInfo sets the observation info.
+func (ns *NameSpecifier) WithObservationInfo(observationInfo unsafe.Pointer) *NameSpecifier {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return ns
 }
 

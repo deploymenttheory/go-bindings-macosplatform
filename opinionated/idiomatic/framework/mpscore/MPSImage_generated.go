@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -96,6 +98,16 @@ func (i *Image) ResourceSize() int {
 func (i *Image) SetPurgeableState(state PurgeableState) PurgeableState {
 	_r := objc.Send[PurgeableState](objref.IDOf(i), objc.RegisterName("setPurgeableState:"), state)
 	return _r
+}
+
+// ReadBytesDataLayoutImageIndex get the values inside MPSImage and put them in the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
+func (i *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, imageIndex int) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("readBytes:dataLayout:imageIndex:"), dataBytes, dataLayout, imageIndex)
+}
+
+// WriteBytesDataLayoutImageIndex set the values inside MPSImage with the Buffer passed in. Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
+func (i *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout DataLayout, imageIndex int) {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("writeBytes:dataLayout:imageIndex:"), dataBytes, dataLayout, imageIndex)
 }
 
 // Width returns the formal width of the image in pixels.

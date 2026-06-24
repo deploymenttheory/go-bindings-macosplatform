@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -34,6 +36,39 @@ func MPSGetImageType(image *Image) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnMPSImageBatchIncrementReadCount func(unsafe.Pointer, int) int
+
+// MPSImageBatchIncrementReadCount calls the MPSCore framework function MPSImageBatchIncrementReadCount.
+func MPSImageBatchIncrementReadCount(batch unsafe.Pointer, amount int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSImageBatchIncrementReadCount == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSImageBatchIncrementReadCount, _lib, "MPSImageBatchIncrementReadCount")
+	}
+	return _fnMPSImageBatchIncrementReadCount(batch, amount)
+}
+
+var _fnMPSImageBatchIterate func(unsafe.Pointer, objc.Block) int
+
+// MPSImageBatchIterate calls the MPSCore framework function MPSImageBatchIterate.
+func MPSImageBatchIterate(batch unsafe.Pointer, iteratorBlock func(obj.Object, int) int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSImageBatchIterate == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSImageBatchIterate, _lib, "MPSImageBatchIterate")
+	}
+	return _fnMPSImageBatchIterate(batch, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int) int { return iteratorBlock(obj.Wrap(_b0), _b1) }))
+}
+
+var _fnMPSImageBatchResourceSize func(unsafe.Pointer) int
+
+// MPSImageBatchResourceSize calls the MPSCore framework function MPSImageBatchResourceSize.
+func MPSImageBatchResourceSize(batch unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSImageBatchResourceSize == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSImageBatchResourceSize, _lib, "MPSImageBatchResourceSize")
+	}
+	return _fnMPSImageBatchResourceSize(batch)
+}
+
 var _fnMPSSizeofMPSDataType func(DataType) int
 
 // MPSSizeofMPSDataType calls the MPSCore framework function MPSSizeofMPSDataType.
@@ -43,6 +78,28 @@ func MPSSizeofMPSDataType(t DataType) int {
 		ebipurego.RegisterLibFunc(&_fnMPSSizeofMPSDataType, _lib, "MPSSizeofMPSDataType")
 	}
 	return _fnMPSSizeofMPSDataType(t)
+}
+
+var _fnMPSStateBatchIncrementReadCount func(unsafe.Pointer, int) int
+
+// MPSStateBatchIncrementReadCount calls the MPSCore framework function MPSStateBatchIncrementReadCount.
+func MPSStateBatchIncrementReadCount(batch unsafe.Pointer, amount int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSStateBatchIncrementReadCount == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSStateBatchIncrementReadCount, _lib, "MPSStateBatchIncrementReadCount")
+	}
+	return _fnMPSStateBatchIncrementReadCount(batch, amount)
+}
+
+var _fnMPSStateBatchResourceSize func(unsafe.Pointer) int
+
+// MPSStateBatchResourceSize calls the MPSCore framework function MPSStateBatchResourceSize.
+func MPSStateBatchResourceSize(batch unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSStateBatchResourceSize == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSStateBatchResourceSize, _lib, "MPSStateBatchResourceSize")
+	}
+	return _fnMPSStateBatchResourceSize(batch)
 }
 
 var _fnBuiltinClz func(int) int

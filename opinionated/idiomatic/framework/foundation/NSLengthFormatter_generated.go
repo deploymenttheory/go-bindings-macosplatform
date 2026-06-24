@@ -72,6 +72,12 @@ func (lf *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *Leng
 	return lf
 }
 
+// WithObservationInfo sets the observation info.
+func (lf *LengthFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *LengthFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return lf
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (lf *LengthFormatter) WithScriptingProperties(scriptingProperties obj.Object) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

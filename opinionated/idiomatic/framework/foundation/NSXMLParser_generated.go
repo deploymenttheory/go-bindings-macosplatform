@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -114,6 +116,12 @@ func (xp *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj
 // WithShouldResolveExternalEntities sets the should resolve external entities.
 func (xp *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
+	return xp
+}
+
+// WithObservationInfo sets the observation info.
+func (xp *XMLParser) WithObservationInfo(observationInfo unsafe.Pointer) *XMLParser {
+	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return xp
 }
 

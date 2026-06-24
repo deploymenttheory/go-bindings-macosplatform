@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -42,6 +44,12 @@ func simpleCStringAdopt(id objc.ID) *SimpleCString {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithObservationInfo sets the observation info.
+func (scs *SimpleCString) WithObservationInfo(observationInfo unsafe.Pointer) *SimpleCString {
+	objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return scs
 }
 
 // WithScriptingProperties sets the scripting properties.

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -72,6 +74,12 @@ func NewExtensionContext() *ExtensionContext {
 	return extensionContextAdopt(_id)
 }
 
+// WithObservationInfo sets the observation info.
+func (ec *ExtensionContext) WithObservationInfo(observationInfo unsafe.Pointer) *ExtensionContext {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return ec
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
@@ -81,6 +89,11 @@ func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Obje
 // CompleteRequestReturningItemsCompletionHandler tells the host app to complete the app extension request with an array of result items.
 func (ec *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+}
+
+// CancelRequestWithError tells the host app to cancel the app extension request, with a supplied error.
+func (ec *ExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("cancelRequestWithError:"), error_)
 }
 
 // OpenURLCompletionHandler asks the system to open a URL on behalf of the currently running app extension.

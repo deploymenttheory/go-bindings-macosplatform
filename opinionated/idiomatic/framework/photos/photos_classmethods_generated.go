@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -76,6 +78,12 @@ func ChangeRequestForAsset(asset *Asset) *AssetChangeRequest {
 // FetchAssetCollectionsWithLocalIdentifiersOptions retrieves asset collections with the specified unique identifiers.
 func FetchAssetCollectionsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
+	return obj.Wrap(_r)
+}
+
+// FetchAssetCollectionsWithTypeSubtypeOptions retrieves asset collections of the specified type and subtype.
+func FetchAssetCollectionsWithTypeSubtypeOptions(type_ AssetCollectionType, subtype unsafe.Pointer, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithType:subtype:options:"), type_, subtype, objref.IDOf(options))
 	return obj.Wrap(_r)
 }
 

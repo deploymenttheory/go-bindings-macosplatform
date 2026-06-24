@@ -5,6 +5,8 @@
 package systemconfiguration
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -33,6 +35,86 @@ func SCBondInterfaceCopyAvailableMemberInterfaces(prefs obj.Object) obj.Object {
 	}
 	_ret := _fnSCBondInterfaceCopyAvailableMemberInterfaces(objref.IDOf(prefs))
 	return obj.Wrap(_ret)
+}
+
+var _fnSCBondInterfaceCopyStatus func(unsafe.Pointer) objc.ID
+
+// SCBondInterfaceCopyStatus calls the SystemConfiguration framework function SCBondInterfaceCopyStatus.
+func SCBondInterfaceCopyStatus(bond unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceCopyStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyStatus, _lib, "SCBondInterfaceCopyStatus")
+	}
+	_ret := _fnSCBondInterfaceCopyStatus(bond)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCBondInterfaceGetMemberInterfaces func(unsafe.Pointer) objc.ID
+
+// SCBondInterfaceGetMemberInterfaces calls the SystemConfiguration framework function SCBondInterfaceGetMemberInterfaces.
+func SCBondInterfaceGetMemberInterfaces(bond unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceGetMemberInterfaces == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceGetMemberInterfaces, _lib, "SCBondInterfaceGetMemberInterfaces")
+	}
+	_ret := _fnSCBondInterfaceGetMemberInterfaces(bond)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCBondInterfaceGetOptions func(unsafe.Pointer) objc.ID
+
+// SCBondInterfaceGetOptions calls the SystemConfiguration framework function SCBondInterfaceGetOptions.
+func SCBondInterfaceGetOptions(bond unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceGetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceGetOptions, _lib, "SCBondInterfaceGetOptions")
+	}
+	_ret := _fnSCBondInterfaceGetOptions(bond)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCBondInterfaceRemove func(unsafe.Pointer) uint8
+
+// SCBondInterfaceRemove calls the SystemConfiguration framework function SCBondInterfaceRemove.
+func SCBondInterfaceRemove(bond unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceRemove, _lib, "SCBondInterfaceRemove")
+	}
+	return _fnSCBondInterfaceRemove(bond)
+}
+
+var _fnSCBondInterfaceSetLocalizedDisplayName func(unsafe.Pointer, objc.ID) uint8
+
+// SCBondInterfaceSetLocalizedDisplayName calls the SystemConfiguration framework function SCBondInterfaceSetLocalizedDisplayName.
+func SCBondInterfaceSetLocalizedDisplayName(bond unsafe.Pointer, newName obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceSetLocalizedDisplayName == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetLocalizedDisplayName, _lib, "SCBondInterfaceSetLocalizedDisplayName")
+	}
+	return _fnSCBondInterfaceSetLocalizedDisplayName(bond, objref.IDOf(newName))
+}
+
+var _fnSCBondInterfaceSetMemberInterfaces func(unsafe.Pointer, objc.ID) uint8
+
+// SCBondInterfaceSetMemberInterfaces calls the SystemConfiguration framework function SCBondInterfaceSetMemberInterfaces.
+func SCBondInterfaceSetMemberInterfaces(bond unsafe.Pointer, members obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceSetMemberInterfaces == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetMemberInterfaces, _lib, "SCBondInterfaceSetMemberInterfaces")
+	}
+	return _fnSCBondInterfaceSetMemberInterfaces(bond, objref.IDOf(members))
+}
+
+var _fnSCBondInterfaceSetOptions func(unsafe.Pointer, objc.ID) uint8
+
+// SCBondInterfaceSetOptions calls the SystemConfiguration framework function SCBondInterfaceSetOptions.
+func SCBondInterfaceSetOptions(bond unsafe.Pointer, newOptions obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceSetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceSetOptions, _lib, "SCBondInterfaceSetOptions")
+	}
+	return _fnSCBondInterfaceSetOptions(bond, objref.IDOf(newOptions))
 }
 
 var _fnSCBondStatusGetInterfaceStatus func(objc.ID, objc.ID) objc.ID
@@ -102,6 +184,33 @@ func SCDynamicStoreAddValue(store obj.Object, key obj.Object, value obj.Object) 
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreAddValue, _lib, "SCDynamicStoreAddValue")
 	}
 	return _fnSCDynamicStoreAddValue(objref.IDOf(store), objref.IDOf(key), objref.IDOf(value))
+}
+
+var _fnSCDynamicStoreCopyComputerName func(objc.ID, unsafe.Pointer) objc.ID
+
+// SCDynamicStoreCopyComputerName calls the SystemConfiguration framework function SCDynamicStoreCopyComputerName.
+func SCDynamicStoreCopyComputerName(store obj.Object) (result obj.Object, nameEncoding int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCDynamicStoreCopyComputerName == nil {
+		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyComputerName, _lib, "SCDynamicStoreCopyComputerName")
+	}
+	var _out0 int
+	_ret := _fnSCDynamicStoreCopyComputerName(objref.IDOf(store), unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
+}
+
+var _fnSCDynamicStoreCopyConsoleUser func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SCDynamicStoreCopyConsoleUser calls the SystemConfiguration framework function SCDynamicStoreCopyConsoleUser.
+func SCDynamicStoreCopyConsoleUser(store obj.Object) (result obj.Object, uid int, gid int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCDynamicStoreCopyConsoleUser == nil {
+		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyConsoleUser, _lib, "SCDynamicStoreCopyConsoleUser")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnSCDynamicStoreCopyConsoleUser(objref.IDOf(store), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return obj.Wrap(_ret), _out0, _out1
 }
 
 var _fnSCDynamicStoreCopyKeyList func(objc.ID, objc.ID) objc.ID
@@ -407,6 +516,32 @@ func SCErrorString(status int) string {
 	return _fnSCErrorString(status)
 }
 
+var _fnSCNetworkCheckReachabilityByAddress func(unsafe.Pointer, int, unsafe.Pointer) uint8
+
+// SCNetworkCheckReachabilityByAddress calls the SystemConfiguration framework function SCNetworkCheckReachabilityByAddress.
+func SCNetworkCheckReachabilityByAddress(address unsafe.Pointer, addrlen int) (result uint8, flags uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkCheckReachabilityByAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByAddress, _lib, "SCNetworkCheckReachabilityByAddress")
+	}
+	var _out0 uint32
+	_ret := _fnSCNetworkCheckReachabilityByAddress(address, addrlen, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnSCNetworkCheckReachabilityByName func(string, unsafe.Pointer) uint8
+
+// SCNetworkCheckReachabilityByName calls the SystemConfiguration framework function SCNetworkCheckReachabilityByName.
+func SCNetworkCheckReachabilityByName(nodename string) (result uint8, flags uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkCheckReachabilityByName == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkCheckReachabilityByName, _lib, "SCNetworkCheckReachabilityByName")
+	}
+	var _out0 uint32
+	_ret := _fnSCNetworkCheckReachabilityByName(nodename, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnSCNetworkConnectionCopyExtendedStatus func(objc.ID) objc.ID
 
 // SCNetworkConnectionCopyExtendedStatus calls the SystemConfiguration framework function SCNetworkConnectionCopyExtendedStatus.
@@ -453,6 +588,17 @@ func SCNetworkConnectionCopyUserOptions(connection obj.Object) obj.Object {
 	}
 	_ret := _fnSCNetworkConnectionCopyUserOptions(objref.IDOf(connection))
 	return obj.Wrap(_ret)
+}
+
+var _fnSCNetworkConnectionCopyUserPreferences func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+
+// SCNetworkConnectionCopyUserPreferences calls the SystemConfiguration framework function SCNetworkConnectionCopyUserPreferences.
+func SCNetworkConnectionCopyUserPreferences(selectionOptions obj.Object, serviceID unsafe.Pointer, userOptions unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkConnectionCopyUserPreferences == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserPreferences, _lib, "SCNetworkConnectionCopyUserPreferences")
+	}
+	return _fnSCNetworkConnectionCopyUserPreferences(objref.IDOf(selectionOptions), serviceID, userOptions)
 }
 
 var _fnSCNetworkConnectionGetStatus func(objc.ID) SCNetworkConnectionStatus
@@ -542,6 +688,32 @@ func SCNetworkInterfaceCopyAll() obj.Object {
 	}
 	_ret := _fnSCNetworkInterfaceCopyAll()
 	return obj.Wrap(_ret)
+}
+
+var _fnSCNetworkInterfaceCopyMTU func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+
+// SCNetworkInterfaceCopyMTU calls the SystemConfiguration framework function SCNetworkInterfaceCopyMTU.
+func SCNetworkInterfaceCopyMTU(interface_ obj.Object) (result uint8, mtu_cur int32, mtu_min int32, mtu_max int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkInterfaceCopyMTU == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMTU, _lib, "SCNetworkInterfaceCopyMTU")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 int32
+	_ret := _fnSCNetworkInterfaceCopyMTU(objref.IDOf(interface_), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnSCNetworkInterfaceCopyMediaOptions func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) uint8
+
+// SCNetworkInterfaceCopyMediaOptions calls the SystemConfiguration framework function SCNetworkInterfaceCopyMediaOptions.
+func SCNetworkInterfaceCopyMediaOptions(interface_ obj.Object, current unsafe.Pointer, active unsafe.Pointer, available unsafe.Pointer, filter uint8) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkInterfaceCopyMediaOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaOptions, _lib, "SCNetworkInterfaceCopyMediaOptions")
+	}
+	return _fnSCNetworkInterfaceCopyMediaOptions(objref.IDOf(interface_), current, active, available, filter)
 }
 
 var _fnSCNetworkInterfaceCopyMediaSubTypeOptions func(objc.ID, objc.ID) objc.ID
@@ -833,6 +1005,30 @@ func SCNetworkProtocolSetEnabled(protocol obj.Object, enabled uint8) uint8 {
 	return _fnSCNetworkProtocolSetEnabled(objref.IDOf(protocol), enabled)
 }
 
+var _fnSCNetworkReachabilityCreateWithAddress func(objc.ID, unsafe.Pointer) objc.ID
+
+// SCNetworkReachabilityCreateWithAddress calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithAddress.
+func SCNetworkReachabilityCreateWithAddress(allocator obj.Object, address unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkReachabilityCreateWithAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _lib, "SCNetworkReachabilityCreateWithAddress")
+	}
+	_ret := _fnSCNetworkReachabilityCreateWithAddress(objref.IDOf(allocator), address)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCNetworkReachabilityCreateWithAddressPair func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SCNetworkReachabilityCreateWithAddressPair calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithAddressPair.
+func SCNetworkReachabilityCreateWithAddressPair(allocator obj.Object, localAddress unsafe.Pointer, remoteAddress unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkReachabilityCreateWithAddressPair == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _lib, "SCNetworkReachabilityCreateWithAddressPair")
+	}
+	_ret := _fnSCNetworkReachabilityCreateWithAddressPair(objref.IDOf(allocator), localAddress, remoteAddress)
+	return obj.Wrap(_ret)
+}
+
 var _fnSCNetworkReachabilityCreateWithName func(objc.ID, string) objc.ID
 
 // SCNetworkReachabilityCreateWithName calls the SystemConfiguration framework function SCNetworkReachabilityCreateWithName.
@@ -843,6 +1039,19 @@ func SCNetworkReachabilityCreateWithName(allocator obj.Object, nodename string) 
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithName(objref.IDOf(allocator), nodename)
 	return obj.Wrap(_ret)
+}
+
+var _fnSCNetworkReachabilityGetFlags func(objc.ID, unsafe.Pointer) uint8
+
+// SCNetworkReachabilityGetFlags calls the SystemConfiguration framework function SCNetworkReachabilityGetFlags.
+func SCNetworkReachabilityGetFlags(target obj.Object) (result uint8, flags SCNetworkReachabilityFlags) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkReachabilityGetFlags == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityGetFlags, _lib, "SCNetworkReachabilityGetFlags")
+	}
+	var _out0 SCNetworkReachabilityFlags
+	_ret := _fnSCNetworkReachabilityGetFlags(objref.IDOf(target), unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnSCNetworkReachabilityGetTypeID func() int
@@ -1562,4 +1771,84 @@ func SCVLANInterfaceCopyAvailablePhysicalInterfaces() obj.Object {
 	}
 	_ret := _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces()
 	return obj.Wrap(_ret)
+}
+
+var _fnSCVLANInterfaceGetOptions func(unsafe.Pointer) objc.ID
+
+// SCVLANInterfaceGetOptions calls the SystemConfiguration framework function SCVLANInterfaceGetOptions.
+func SCVLANInterfaceGetOptions(vlan unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceGetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetOptions, _lib, "SCVLANInterfaceGetOptions")
+	}
+	_ret := _fnSCVLANInterfaceGetOptions(vlan)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCVLANInterfaceGetPhysicalInterface func(unsafe.Pointer) objc.ID
+
+// SCVLANInterfaceGetPhysicalInterface calls the SystemConfiguration framework function SCVLANInterfaceGetPhysicalInterface.
+func SCVLANInterfaceGetPhysicalInterface(vlan unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceGetPhysicalInterface == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetPhysicalInterface, _lib, "SCVLANInterfaceGetPhysicalInterface")
+	}
+	_ret := _fnSCVLANInterfaceGetPhysicalInterface(vlan)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCVLANInterfaceGetTag func(unsafe.Pointer) objc.ID
+
+// SCVLANInterfaceGetTag calls the SystemConfiguration framework function SCVLANInterfaceGetTag.
+func SCVLANInterfaceGetTag(vlan unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceGetTag == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceGetTag, _lib, "SCVLANInterfaceGetTag")
+	}
+	_ret := _fnSCVLANInterfaceGetTag(vlan)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCVLANInterfaceRemove func(unsafe.Pointer) uint8
+
+// SCVLANInterfaceRemove calls the SystemConfiguration framework function SCVLANInterfaceRemove.
+func SCVLANInterfaceRemove(vlan unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceRemove, _lib, "SCVLANInterfaceRemove")
+	}
+	return _fnSCVLANInterfaceRemove(vlan)
+}
+
+var _fnSCVLANInterfaceSetLocalizedDisplayName func(unsafe.Pointer, objc.ID) uint8
+
+// SCVLANInterfaceSetLocalizedDisplayName calls the SystemConfiguration framework function SCVLANInterfaceSetLocalizedDisplayName.
+func SCVLANInterfaceSetLocalizedDisplayName(vlan unsafe.Pointer, newName obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceSetLocalizedDisplayName == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetLocalizedDisplayName, _lib, "SCVLANInterfaceSetLocalizedDisplayName")
+	}
+	return _fnSCVLANInterfaceSetLocalizedDisplayName(vlan, objref.IDOf(newName))
+}
+
+var _fnSCVLANInterfaceSetOptions func(unsafe.Pointer, objc.ID) uint8
+
+// SCVLANInterfaceSetOptions calls the SystemConfiguration framework function SCVLANInterfaceSetOptions.
+func SCVLANInterfaceSetOptions(vlan unsafe.Pointer, newOptions obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceSetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetOptions, _lib, "SCVLANInterfaceSetOptions")
+	}
+	return _fnSCVLANInterfaceSetOptions(vlan, objref.IDOf(newOptions))
+}
+
+var _fnSCVLANInterfaceSetPhysicalInterfaceAndTag func(unsafe.Pointer, objc.ID, objc.ID) uint8
+
+// SCVLANInterfaceSetPhysicalInterfaceAndTag calls the SystemConfiguration framework function SCVLANInterfaceSetPhysicalInterfaceAndTag.
+func SCVLANInterfaceSetPhysicalInterfaceAndTag(vlan unsafe.Pointer, physical obj.Object, tag obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceSetPhysicalInterfaceAndTag == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceSetPhysicalInterfaceAndTag, _lib, "SCVLANInterfaceSetPhysicalInterfaceAndTag")
+	}
+	return _fnSCVLANInterfaceSetPhysicalInterfaceAndTag(vlan, objref.IDOf(physical), objref.IDOf(tag))
 }

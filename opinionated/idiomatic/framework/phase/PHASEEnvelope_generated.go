@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,9 +68,10 @@ func (e *Envelope) String() string {
 	return rt.Description(objref.IDOf(e))
 }
 
-// NewEnvelope creates a new Envelope.
-func NewEnvelope() *Envelope {
-	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelope")), objc.RegisterName("new"))
+// NewEnvelopeWithStartPointSegments creates an envelope with a start point and segments.
+func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments []*EnvelopeSegment) *Envelope {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelope")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartPoint:segments:"), startPoint, purego.SliceToNSArray(segments, func(_v *EnvelopeSegment) objc.ID { return objref.IDOf(_v) }))
 	return envelopeAdopt(_id)
 }
 

@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -94,6 +96,12 @@ func (c *Connection) WithRootObject(rootObject obj.Object) *Connection {
 // WithIndependentConversationQueueing sets a Boolean value that indicates whether the receiver handles remote messages atomically.
 func (c *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
+	return c
+}
+
+// WithObservationInfo sets the observation info.
+func (c *Connection) WithObservationInfo(observationInfo unsafe.Pointer) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return c
 }
 

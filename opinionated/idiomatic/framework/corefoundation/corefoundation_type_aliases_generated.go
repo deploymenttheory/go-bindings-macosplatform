@@ -66,6 +66,11 @@ type CFUUIDBytes struct {
 	Byte15 uint8
 }
 
+// Contains information describing an XML entity reference.
+type CFXMLEntityReferenceInfo struct {
+	EntityType CFXMLEntityTypeCode
+}
+
 type CGAffineTransform struct {
 	A  float64
 	B  float64

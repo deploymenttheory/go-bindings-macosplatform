@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -91,6 +92,18 @@ func (mi *MetadataItem) ExtendedLanguageTag() string {
 func (mi *MetadataItem) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
+}
+
+// Time returns the time.
+func (mi *MetadataItem) Time() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mi), objc.RegisterName("time"))
+	return _r
+}
+
+// Duration returns the duration.
+func (mi *MetadataItem) Duration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mi), objc.RegisterName("duration"))
+	return _r
 }
 
 // DataType returns the data type.

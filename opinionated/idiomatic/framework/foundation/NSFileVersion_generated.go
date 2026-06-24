@@ -87,6 +87,12 @@ func (fv *FileVersion) WithDiscardable(discardable bool) *FileVersion {
 	return fv
 }
 
+// WithObservationInfo sets the observation info.
+func (fv *FileVersion) WithObservationInfo(observationInfo unsafe.Pointer) *FileVersion {
+	objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fv
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (fv *FileVersion) WithScriptingProperties(scriptingProperties obj.Object) *FileVersion {
 	objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

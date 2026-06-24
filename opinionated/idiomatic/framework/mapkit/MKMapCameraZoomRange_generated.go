@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,8 +68,23 @@ func (mczr *MapCameraZoomRange) String() string {
 	return rt.Description(objref.IDOf(mczr))
 }
 
-// NewMapCameraZoomRange creates a new MapCameraZoomRange.
-func NewMapCameraZoomRange() *MapCameraZoomRange {
-	_id := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("new"))
+// NewMapCameraZoomRangeWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance creates a new MapCameraZoomRange.
+func NewMapCameraZoomRangeWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance(minDistance unsafe.Pointer, maxDistance unsafe.Pointer) *MapCameraZoomRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinCenterCoordinateDistance:maxCenterCoordinateDistance:"), minDistance, maxDistance)
+	return mapCameraZoomRangeAdopt(_id)
+}
+
+// NewMapCameraZoomRangeWithMinCenterCoordinateDistance creates a new MapCameraZoomRange.
+func NewMapCameraZoomRangeWithMinCenterCoordinateDistance(minDistance unsafe.Pointer) *MapCameraZoomRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinCenterCoordinateDistance:"), minDistance)
+	return mapCameraZoomRangeAdopt(_id)
+}
+
+// NewMapCameraZoomRangeWithMaxCenterCoordinateDistance creates a new MapCameraZoomRange.
+func NewMapCameraZoomRangeWithMaxCenterCoordinateDistance(maxDistance unsafe.Pointer) *MapCameraZoomRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMaxCenterCoordinateDistance:"), maxDistance)
 	return mapCameraZoomRangeAdopt(_id)
 }

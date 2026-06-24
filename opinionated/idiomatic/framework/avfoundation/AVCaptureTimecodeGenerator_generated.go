@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -84,6 +85,12 @@ func (ctg *CaptureTimecodeGenerator) WithTimecodeAlignmentOffset(timecodeAlignme
 	return ctg
 }
 
+// WithTimecodeFrameDuration sets the frame duration that the generator will use to generate timecodes.
+func (ctg *CaptureTimecodeGenerator) WithTimecodeFrameDuration(timecodeFrameDuration coremedia.CMTime) *CaptureTimecodeGenerator {
+	objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("setTimecodeFrameDuration:"), timecodeFrameDuration)
+	return ctg
+}
+
 // StartSynchronizationWithTimecodeSource synchronizes the generator with the specified timecode source.
 func (ctg *CaptureTimecodeGenerator) StartSynchronizationWithTimecodeSource(source *CaptureTimecodeSource) {
 	objc.Send[objc.ID](objref.IDOf(ctg), objc.RegisterName("startSynchronizationWithTimecodeSource:"), objref.IDOf(source))
@@ -118,5 +125,11 @@ func (ctg *CaptureTimecodeGenerator) SynchronizationTimeout() float64 {
 // TimecodeAlignmentOffset returns the time offset, in seconds, applied to the generated timecode. This offset allows fine-tuning of time alignment for synchronization with external sources or to accommodate any intentional delay. The default value is 0 seconds.
 func (ctg *CaptureTimecodeGenerator) TimecodeAlignmentOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(ctg), objc.RegisterName("timecodeAlignmentOffset"))
+	return _r
+}
+
+// TimecodeFrameDuration returns the frame duration that the generator will use to generate timecodes.
+func (ctg *CaptureTimecodeGenerator) TimecodeFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(ctg), objc.RegisterName("timecodeFrameDuration"))
 	return _r
 }

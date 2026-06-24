@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (p *Pipe) String() string {
 func NewPipe() *Pipe {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSPipe")), objc.RegisterName("new"))
 	return pipeAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (p *Pipe) WithObservationInfo(observationInfo unsafe.Pointer) *Pipe {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return p
 }
 
 // WithScriptingProperties sets the scripting properties.

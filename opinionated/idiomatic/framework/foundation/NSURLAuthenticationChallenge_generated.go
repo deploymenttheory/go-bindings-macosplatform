@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (uac *URLAuthenticationChallenge) String() string {
 func NewURLAuthenticationChallenge() *URLAuthenticationChallenge {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLAuthenticationChallenge")), objc.RegisterName("new"))
 	return uRLAuthenticationChallengeAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (uac *URLAuthenticationChallenge) WithObservationInfo(observationInfo unsafe.Pointer) *URLAuthenticationChallenge {
+	objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return uac
 }
 
 // WithScriptingProperties sets the scripting properties.

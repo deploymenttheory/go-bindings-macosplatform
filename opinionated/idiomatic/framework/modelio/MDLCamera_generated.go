@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -147,6 +149,36 @@ func (c *Camera) WithSensorAspect(sensorAspect float32) *Camera {
 	return c
 }
 
+// WithSensorEnlargement sets the horizontal and vertical scale factors that determine the active region of the sensor.
+func (c *Camera) WithSensorEnlargement(sensorEnlargement unsafe.Pointer) *Camera {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSensorEnlargement:"), sensorEnlargement)
+	return c
+}
+
+// WithSensorShift sets the horizontal and vertical offsets, in millimeters, of the center of the camera image relative to the center of the simulated lens.
+func (c *Camera) WithSensorShift(sensorShift unsafe.Pointer) *Camera {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSensorShift:"), sensorShift)
+	return c
+}
+
+// WithFlash sets red, green, and blue factors to be used in brightening darker areas of the camera’s image.
+func (c *Camera) WithFlash(flash unsafe.Pointer) *Camera {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFlash:"), flash)
+	return c
+}
+
+// WithExposureCompression sets two parameters that determine the brightness compression curve for colors in the camera’s image.
+func (c *Camera) WithExposureCompression(exposureCompression unsafe.Pointer) *Camera {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setExposureCompression:"), exposureCompression)
+	return c
+}
+
+// WithExposure sets red, green, and blue factors that scale each color channel in the camera’s image.
+func (c *Camera) WithExposure(exposure unsafe.Pointer) *Camera {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setExposure:"), exposure)
+	return c
+}
+
 // WithParent sets the parent object that contains this object.
 func (c *Camera) WithParent(parent ObjectProvider) *Camera {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setParent:"), objref.IDOf(parent))
@@ -163,6 +195,22 @@ func (c *Camera) WithInstance(instance ObjectProvider) *Camera {
 func (c *Camera) WithHidden(hidden bool) *Camera {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHidden:"), hidden)
 	return c
+}
+
+// LookAt orients the camera to face toward the specified point.
+func (c *Camera) LookAt(focusPosition unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("lookAt:"), focusPosition)
+}
+
+// LookAtFrom sets the camera’s position and orients the camera to face toward the specified point.
+func (c *Camera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("lookAt:from:"), focusPosition, cameraPosition)
+}
+
+// BokehKernelWithSize creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.
+func (c *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("bokehKernelWithSize:"), size)
+	return TextureFromID(_r)
 }
 
 // Projection returns the projection.

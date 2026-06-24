@@ -45,8 +45,32 @@ type AudioStreamPacketDescription struct {
 	MDataByteSize           uint
 }
 
+// A structure that represents a timestamp value.
+type AudioTimeStamp struct {
+	MSampleTime    float64
+	MHostTime      uint64
+	MRateScalar    float64
+	MWordClockTime uint64
+	MSMPTETime     SMPTETime
+	MFlags         AudioTimeStampFlags
+	MReserved      uint
+}
+
 // A structure that represents a continuous range of values.
 type AudioValueRange struct {
 	MMinimum float64
 	MMaximum float64
+}
+
+// A structure that defines an SMPTE time value.
+type SMPTETime struct {
+	MSubframes       int16
+	MSubframeDivisor int16
+	MCounter         uint
+	MType            SMPTETimeType
+	MFlags           SMPTETimeFlags
+	MHours           int16
+	MMinutes         int16
+	MSeconds         int16
+	MFrames          int16
 }

@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,12 @@ func (se *SkyboxEffect) String() string {
 func NewSkyboxEffect() *SkyboxEffect {
 	_id := objc.Send[objc.ID](objc.ID(_class("GLKSkyboxEffect")), objc.RegisterName("new"))
 	return skyboxEffectAdopt(_id)
+}
+
+// WithCenter sets the center of the skybox.
+func (se *SkyboxEffect) WithCenter(center unsafe.Pointer) *SkyboxEffect {
+	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setCenter:"), center)
+	return se
 }
 
 // WithXSize sets the width of the skybox.

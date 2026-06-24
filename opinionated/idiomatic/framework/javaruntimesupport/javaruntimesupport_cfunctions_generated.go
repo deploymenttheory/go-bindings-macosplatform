@@ -5,6 +5,9 @@
 package javaruntimesupport
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -44,6 +47,19 @@ func JRSFontAlignStyleForIntegerMeasurement(style uint32) uint32 {
 	return _fnJRSFontAlignStyleForIntegerMeasurement(style)
 }
 
+var _fnJRSFontCreateFallbackFontForCharacters func(objc.ID, unsafe.Pointer, int) objc.ID
+
+// JRSFontCreateFallbackFontForCharacters calls the JavaRuntimeSupport framework function JRSFontCreateFallbackFontForCharacters.
+func JRSFontCreateFallbackFontForCharacters(font obj.Object, length int) (result obj.Object, unichars uint16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontCreateFallbackFontForCharacters == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontCreateFallbackFontForCharacters, _lib, "JRSFontCreateFallbackFontForCharacters")
+	}
+	var _out0 uint16
+	_ret := _fnJRSFontCreateFallbackFontForCharacters(objref.IDOf(font), unsafe.Pointer(&_out0), length)
+	return obj.Wrap(_ret), _out0
+}
+
 var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
 
 // JRSFontGetRenderingStyleForContext calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForContext.
@@ -53,6 +69,17 @@ func JRSFontGetRenderingStyleForContext(context_ obj.Object) uint32 {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _lib, "JRSFontGetRenderingStyleForContext")
 	}
 	return _fnJRSFontGetRenderingStyleForContext(objref.IDOf(context_))
+}
+
+var _fnJRSFontGetRenderingStyleForHints func(unsafe.Pointer, unsafe.Pointer) uint32
+
+// JRSFontGetRenderingStyleForHints calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForHints.
+func JRSFontGetRenderingStyleForHints(fmHint unsafe.Pointer, aaHint unsafe.Pointer) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontGetRenderingStyleForHints == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForHints, _lib, "JRSFontGetRenderingStyleForHints")
+	}
+	return _fnJRSFontGetRenderingStyleForHints(fmHint, aaHint)
 }
 
 var _fnJRSFontSetRenderingStyleOnContext func(objc.ID, uint32)
@@ -88,6 +115,237 @@ func JRSFontStyleUsesFractionalMetrics(style uint32) bool {
 	return _fnJRSFontStyleUsesFractionalMetrics(style)
 }
 
+var _fnJRSUIControlDraw func(unsafe.Pointer, unsafe.Pointer, objc.ID, corefoundation.CGRect)
+
+// JRSUIControlDraw calls the JavaRuntimeSupport framework function JRSUIControlDraw.
+func JRSUIControlDraw(renderer unsafe.Pointer, control unsafe.Pointer, context_ obj.Object, bounds corefoundation.CGRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlDraw == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlDraw, _lib, "JRSUIControlDraw")
+	}
+	_fnJRSUIControlDraw(renderer, control, objref.IDOf(context_), bounds)
+}
+
+var _fnJRSUIControlGetHitPart func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect, corefoundation.CGPoint) int
+
+// JRSUIControlGetHitPart calls the JavaRuntimeSupport framework function JRSUIControlGetHitPart.
+func JRSUIControlGetHitPart(renderer unsafe.Pointer, control unsafe.Pointer, bounds corefoundation.CGRect, point corefoundation.CGPoint) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlGetHitPart == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlGetHitPart, _lib, "JRSUIControlGetHitPart")
+	}
+	return _fnJRSUIControlGetHitPart(renderer, control, bounds, point)
+}
+
+var _fnJRSUIControlGetScrollBarOffsetFor func(unsafe.Pointer, corefoundation.CGRect, float64, float64, float64) float64
+
+// JRSUIControlGetScrollBarOffsetFor calls the JavaRuntimeSupport framework function JRSUIControlGetScrollBarOffsetFor.
+func JRSUIControlGetScrollBarOffsetFor(control unsafe.Pointer, frame corefoundation.CGRect, offset float64, visibleAmount float64, extent float64) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlGetScrollBarOffsetFor == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarOffsetFor, _lib, "JRSUIControlGetScrollBarOffsetFor")
+	}
+	return _fnJRSUIControlGetScrollBarOffsetFor(control, frame, offset, visibleAmount, extent)
+}
+
+var _fnJRSUIControlGetScrollBarPartBounds func(unsafe.Pointer, corefoundation.CGRect, int) corefoundation.CGRect
+
+// JRSUIControlGetScrollBarPartBounds calls the JavaRuntimeSupport framework function JRSUIControlGetScrollBarPartBounds.
+func JRSUIControlGetScrollBarPartBounds(control unsafe.Pointer, frame corefoundation.CGRect, part int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlGetScrollBarPartBounds == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlGetScrollBarPartBounds, _lib, "JRSUIControlGetScrollBarPartBounds")
+	}
+	return _fnJRSUIControlGetScrollBarPartBounds(control, frame, part)
+}
+
+var _fnJRSUIControlRelease func(unsafe.Pointer)
+
+// JRSUIControlRelease calls the JavaRuntimeSupport framework function JRSUIControlRelease.
+func JRSUIControlRelease(control unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlRelease, _lib, "JRSUIControlRelease")
+	}
+	_fnJRSUIControlRelease(control)
+}
+
+var _fnJRSUIControlSetAlignmentHorizontal func(unsafe.Pointer, int)
+
+// JRSUIControlSetAlignmentHorizontal calls the JavaRuntimeSupport framework function JRSUIControlSetAlignmentHorizontal.
+func JRSUIControlSetAlignmentHorizontal(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetAlignmentHorizontal == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentHorizontal, _lib, "JRSUIControlSetAlignmentHorizontal")
+	}
+	_fnJRSUIControlSetAlignmentHorizontal(control, value)
+}
+
+var _fnJRSUIControlSetAlignmentVertical func(unsafe.Pointer, int)
+
+// JRSUIControlSetAlignmentVertical calls the JavaRuntimeSupport framework function JRSUIControlSetAlignmentVertical.
+func JRSUIControlSetAlignmentVertical(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetAlignmentVertical == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetAlignmentVertical, _lib, "JRSUIControlSetAlignmentVertical")
+	}
+	_fnJRSUIControlSetAlignmentVertical(control, value)
+}
+
+var _fnJRSUIControlSetAnimating func(unsafe.Pointer, uint8)
+
+// JRSUIControlSetAnimating calls the JavaRuntimeSupport framework function JRSUIControlSetAnimating.
+func JRSUIControlSetAnimating(control unsafe.Pointer, value uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetAnimating == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetAnimating, _lib, "JRSUIControlSetAnimating")
+	}
+	_fnJRSUIControlSetAnimating(control, value)
+}
+
+var _fnJRSUIControlSetDirection func(unsafe.Pointer, int)
+
+// JRSUIControlSetDirection calls the JavaRuntimeSupport framework function JRSUIControlSetDirection.
+func JRSUIControlSetDirection(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetDirection == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetDirection, _lib, "JRSUIControlSetDirection")
+	}
+	_fnJRSUIControlSetDirection(control, value)
+}
+
+var _fnJRSUIControlSetOrientation func(unsafe.Pointer, int)
+
+// JRSUIControlSetOrientation calls the JavaRuntimeSupport framework function JRSUIControlSetOrientation.
+func JRSUIControlSetOrientation(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetOrientation == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetOrientation, _lib, "JRSUIControlSetOrientation")
+	}
+	_fnJRSUIControlSetOrientation(control, value)
+}
+
+var _fnJRSUIControlSetPresentationState func(unsafe.Pointer, int)
+
+// JRSUIControlSetPresentationState calls the JavaRuntimeSupport framework function JRSUIControlSetPresentationState.
+func JRSUIControlSetPresentationState(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetPresentationState == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetPresentationState, _lib, "JRSUIControlSetPresentationState")
+	}
+	_fnJRSUIControlSetPresentationState(control, value)
+}
+
+var _fnJRSUIControlSetScrollBarPart func(unsafe.Pointer, int)
+
+// JRSUIControlSetScrollBarPart calls the JavaRuntimeSupport framework function JRSUIControlSetScrollBarPart.
+func JRSUIControlSetScrollBarPart(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetScrollBarPart == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetScrollBarPart, _lib, "JRSUIControlSetScrollBarPart")
+	}
+	_fnJRSUIControlSetScrollBarPart(control, value)
+}
+
+var _fnJRSUIControlSetSegmentPosition func(unsafe.Pointer, int)
+
+// JRSUIControlSetSegmentPosition calls the JavaRuntimeSupport framework function JRSUIControlSetSegmentPosition.
+func JRSUIControlSetSegmentPosition(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetSegmentPosition == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetSegmentPosition, _lib, "JRSUIControlSetSegmentPosition")
+	}
+	_fnJRSUIControlSetSegmentPosition(control, value)
+}
+
+var _fnJRSUIControlSetShowArrows func(unsafe.Pointer, uint8)
+
+// JRSUIControlSetShowArrows calls the JavaRuntimeSupport framework function JRSUIControlSetShowArrows.
+func JRSUIControlSetShowArrows(control unsafe.Pointer, value uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetShowArrows == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetShowArrows, _lib, "JRSUIControlSetShowArrows")
+	}
+	_fnJRSUIControlSetShowArrows(control, value)
+}
+
+var _fnJRSUIControlSetSize func(unsafe.Pointer, int)
+
+// JRSUIControlSetSize calls the JavaRuntimeSupport framework function JRSUIControlSetSize.
+func JRSUIControlSetSize(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetSize == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetSize, _lib, "JRSUIControlSetSize")
+	}
+	_fnJRSUIControlSetSize(control, value)
+}
+
+var _fnJRSUIControlSetState func(unsafe.Pointer, int)
+
+// JRSUIControlSetState calls the JavaRuntimeSupport framework function JRSUIControlSetState.
+func JRSUIControlSetState(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetState == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetState, _lib, "JRSUIControlSetState")
+	}
+	_fnJRSUIControlSetState(control, value)
+}
+
+var _fnJRSUIControlSetUserInterfaceLayoutDirection func(unsafe.Pointer, int)
+
+// JRSUIControlSetUserInterfaceLayoutDirection calls the JavaRuntimeSupport framework function JRSUIControlSetUserInterfaceLayoutDirection.
+func JRSUIControlSetUserInterfaceLayoutDirection(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetUserInterfaceLayoutDirection == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetUserInterfaceLayoutDirection, _lib, "JRSUIControlSetUserInterfaceLayoutDirection")
+	}
+	_fnJRSUIControlSetUserInterfaceLayoutDirection(control, value)
+}
+
+var _fnJRSUIControlSetValueByKey func(unsafe.Pointer, objc.ID, objc.ID)
+
+// JRSUIControlSetValueByKey calls the JavaRuntimeSupport framework function JRSUIControlSetValueByKey.
+func JRSUIControlSetValueByKey(control unsafe.Pointer, key obj.Object, value obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetValueByKey == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _lib, "JRSUIControlSetValueByKey")
+	}
+	_fnJRSUIControlSetValueByKey(control, objref.IDOf(key), objref.IDOf(value))
+}
+
+var _fnJRSUIControlSetVariant func(unsafe.Pointer, int)
+
+// JRSUIControlSetVariant calls the JavaRuntimeSupport framework function JRSUIControlSetVariant.
+func JRSUIControlSetVariant(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetVariant == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetVariant, _lib, "JRSUIControlSetVariant")
+	}
+	_fnJRSUIControlSetVariant(control, value)
+}
+
+var _fnJRSUIControlSetWidget func(unsafe.Pointer, int)
+
+// JRSUIControlSetWidget calls the JavaRuntimeSupport framework function JRSUIControlSetWidget.
+func JRSUIControlSetWidget(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetWidget == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetWidget, _lib, "JRSUIControlSetWidget")
+	}
+	_fnJRSUIControlSetWidget(control, value)
+}
+
+var _fnJRSUIControlSetWindowType func(unsafe.Pointer, int)
+
+// JRSUIControlSetWindowType calls the JavaRuntimeSupport framework function JRSUIControlSetWindowType.
+func JRSUIControlSetWindowType(control unsafe.Pointer, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlSetWindowType == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetWindowType, _lib, "JRSUIControlSetWindowType")
+	}
+	_fnJRSUIControlSetWindowType(control, value)
+}
+
 var _fnJRSUIControlShouldScrollToClick func() uint8
 
 // JRSUIControlShouldScrollToClick calls the JavaRuntimeSupport framework function JRSUIControlShouldScrollToClick.
@@ -109,4 +367,15 @@ func JRSUIGetKey(value int) obj.Object {
 	}
 	_ret := _fnJRSUIGetKey(value)
 	return obj.Wrap(_ret)
+}
+
+var _fnJRSUIRendererRelease func(unsafe.Pointer)
+
+// JRSUIRendererRelease calls the JavaRuntimeSupport framework function JRSUIRendererRelease.
+func JRSUIRendererRelease(renderer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIRendererRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIRendererRelease, _lib, "JRSUIRendererRelease")
+	}
+	_fnJRSUIRendererRelease(renderer)
 }

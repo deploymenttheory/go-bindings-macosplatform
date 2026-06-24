@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -82,6 +84,12 @@ func (mv *MapView) WithMapType(mapType MapType) *MapView {
 // WithPreferredConfiguration sets the characteristics of the map view, including the map type and features the map displays.
 func (mv *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView {
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
+	return mv
+}
+
+// WithCenterCoordinate sets the map coordinate at the center of the map view.
+func (mv *MapView) WithCenterCoordinate(centerCoordinate unsafe.Pointer) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:"), centerCoordinate)
 	return mv
 }
 
@@ -199,6 +207,11 @@ func (mv *MapView) WithUserTrackingMode(userTrackingMode UserTrackingMode) *MapV
 	return mv
 }
 
+// SetCenterCoordinateAnimated changes the center coordinate of the map, and optionally animates the change.
+func (mv *MapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCenterCoordinate:animated:"), coordinate, animated)
+}
+
 // SetCameraAnimated changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
 func (mv *MapView) SetCameraAnimated(camera *MapCamera, animated bool) {
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:animated:"), objref.IDOf(camera), animated)
@@ -212,6 +225,12 @@ func (mv *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *MapCameraZoomRang
 // SetCameraBoundaryAnimated sets the camera boundary for the map view, specifying whether to use animation.
 func (mv *MapView) SetCameraBoundaryAnimated(cameraBoundary *MapCameraBoundary, animated bool) {
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:animated:"), objref.IDOf(cameraBoundary), animated)
+}
+
+// ConvertCoordinateToPointToView converts a map coordinate to a point in the specified view.
+func (mv *MapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view obj.Object) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(mv), objc.RegisterName("convertCoordinate:toPointToView:"), coordinate, objref.IDOf(view))
+	return _r
 }
 
 // SetUserTrackingModeAnimated sets the mode to use for tracking the user’s location, with optional animation.

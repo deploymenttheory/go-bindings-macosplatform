@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -100,6 +102,12 @@ func (t *Thread) WithName(name StringProvider) *Thread {
 // WithStackSize sets the stack size.
 func (t *Thread) WithStackSize(stackSize int) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStackSize:"), stackSize)
+	return t
+}
+
+// WithObservationInfo sets the observation info.
+func (t *Thread) WithObservationInfo(observationInfo unsafe.Pointer) *Thread {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return t
 }
 

@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,13 @@ func (pd *Point3D) IsKind(className string) bool {
 // under fmt.
 func (pd *Point3D) String() string {
 	return rt.Description(objref.IDOf(pd))
+}
+
+// NewPoint3DWithPosition creates a point object with the position you specify.
+func NewPoint3DWithPosition(position unsafe.Pointer) *Point3D {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNPoint3D")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPosition:"), position)
+	return point3DAdopt(_id)
 }
 
 // isPoint3D marks Point3D — and, by embedding promotion, its

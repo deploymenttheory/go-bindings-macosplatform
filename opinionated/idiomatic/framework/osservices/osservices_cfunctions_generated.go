@@ -5,6 +5,8 @@
 package osservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -597,6 +599,28 @@ func CurrentProcessorSpeed() int16 {
 	return _fnCurrentProcessorSpeed()
 }
 
+var _fnDisposeKCCallbackUPP func(unsafe.Pointer)
+
+// DisposeKCCallbackUPP calls the OSServices framework function DisposeKCCallbackUPP.
+func DisposeKCCallbackUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeKCCallbackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeKCCallbackUPP, _lib, "DisposeKCCallbackUPP")
+	}
+	_fnDisposeKCCallbackUPP(userUPP)
+}
+
+var _fnDisposeSleepQUPP func(unsafe.Pointer)
+
+// DisposeSleepQUPP calls the OSServices framework function DisposeSleepQUPP.
+func DisposeSleepQUPP(userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeSleepQUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeSleepQUPP, _lib, "DisposeSleepQUPP")
+	}
+	_fnDisposeSleepQUPP(userUPP)
+}
+
 var _fnGetCPUSpeed func() int
 
 // GetCPUSpeed calls the OSServices framework function GetCPUSpeed.
@@ -617,6 +641,106 @@ func KCCountKeychains() uint16 {
 		ebipurego.RegisterLibFunc(&_fnKCCountKeychains, _lib, "KCCountKeychains")
 	}
 	return _fnKCCountKeychains()
+}
+
+var _fnKCFindGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// KCFindGenericPassword calls the OSServices framework function KCFindGenericPassword.
+func KCFindGenericPassword(maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serviceName uint8, accountName uint8, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindGenericPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindGenericPassword, _lib, "KCFindGenericPassword")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	var _out2 int
+	_ret := _fnKCFindGenericPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), maxLength, passwordData, unsafe.Pointer(&_out2), item)
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnKCFindInternetPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// KCFindInternetPassword calls the OSServices framework function KCFindInternetPassword.
+func KCFindInternetPassword(port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindInternetPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindInternetPassword, _lib, "KCFindInternetPassword")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	var _out2 uint8
+	var _out3 int
+	_ret := _fnKCFindInternetPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out3), item)
+	return _ret, _out0, _out1, _out2, _out3
+}
+
+var _fnKCFindInternetPasswordWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// KCFindInternetPasswordWithPath calls the OSServices framework function KCFindInternetPasswordWithPath.
+func KCFindInternetPasswordWithPath(port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8, path uint8, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindInternetPasswordWithPath == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindInternetPasswordWithPath, _lib, "KCFindInternetPasswordWithPath")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	var _out2 uint8
+	var _out3 uint8
+	var _out4 int
+	_ret := _fnKCFindInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out4), item)
+	return _ret, _out0, _out1, _out2, _out3, _out4
+}
+
+var _fnKCGetData func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+
+// KCGetData calls the OSServices framework function KCGetData.
+func KCGetData(item unsafe.Pointer, maxLength int, data unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetData == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetData, _lib, "KCGetData")
+	}
+	var _out0 int
+	_ret := _fnKCGetData(item, maxLength, data, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnKCGetKeychainManagerVersion func(unsafe.Pointer) int
+
+// KCGetKeychainManagerVersion calls the OSServices framework function KCGetKeychainManagerVersion.
+func KCGetKeychainManagerVersion() (result int, returnVers int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetKeychainManagerVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetKeychainManagerVersion, _lib, "KCGetKeychainManagerVersion")
+	}
+	var _out0 int
+	_ret := _fnKCGetKeychainManagerVersion(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnKCGetKeychainName func(unsafe.Pointer, unsafe.Pointer) int
+
+// KCGetKeychainName calls the OSServices framework function KCGetKeychainName.
+func KCGetKeychainName(keychain unsafe.Pointer) (result int, keychainName uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetKeychainName == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetKeychainName, _lib, "KCGetKeychainName")
+	}
+	var _out0 uint8
+	_ret := _fnKCGetKeychainName(keychain, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnKCGetStatus func(unsafe.Pointer, unsafe.Pointer) int
+
+// KCGetStatus calls the OSServices framework function KCGetStatus.
+func KCGetStatus(keychain unsafe.Pointer) (result int, keychainStatus int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetStatus, _lib, "KCGetStatus")
+	}
+	var _out0 int
+	_ret := _fnKCGetStatus(keychain, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnKCIsInteractionAllowed func() uint8
@@ -683,6 +807,18 @@ func WSGetWSTypeIDFromCFType(ref obj.Object) WSTypeID {
 		ebipurego.RegisterLibFunc(&_fnWSGetWSTypeIDFromCFType, _lib, "WSGetWSTypeIDFromCFType")
 	}
 	return _fnWSGetWSTypeIDFromCFType(objref.IDOf(ref))
+}
+
+var _fnWSMethodInvocationCopyParameters func(objc.ID, unsafe.Pointer) objc.ID
+
+// WSMethodInvocationCopyParameters calls the OSServices framework function WSMethodInvocationCopyParameters.
+func WSMethodInvocationCopyParameters(invocation obj.Object, parameterOrder unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSMethodInvocationCopyParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopyParameters, _lib, "WSMethodInvocationCopyParameters")
+	}
+	_ret := _fnWSMethodInvocationCopyParameters(objref.IDOf(invocation), parameterOrder)
+	return obj.Wrap(_ret)
 }
 
 var _fnWSMethodInvocationCopyProperty func(objc.ID, objc.ID) objc.ID
@@ -915,4 +1051,43 @@ func WSProtocolHandlerSetProperty(ref obj.Object, propertyName obj.Object, prope
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _lib, "WSProtocolHandlerSetProperty")
 	}
 	_fnWSProtocolHandlerSetProperty(objref.IDOf(ref), objref.IDOf(propertyName), objref.IDOf(propertyValue))
+}
+
+var _fnKcfindgenericpassword func(string, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// Kcfindgenericpassword calls the OSServices framework function kcfindgenericpassword.
+func Kcfindgenericpassword(serviceName string, accountName string, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcfindgenericpassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKcfindgenericpassword, _lib, "kcfindgenericpassword")
+	}
+	var _out0 int
+	_ret := _fnKcfindgenericpassword(serviceName, accountName, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	return _ret, _out0
+}
+
+var _fnKcfindinternetpassword func(string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// Kcfindinternetpassword calls the OSServices framework function kcfindinternetpassword.
+func Kcfindinternetpassword(serverName string, securityDomain string, accountName string, port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcfindinternetpassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKcfindinternetpassword, _lib, "kcfindinternetpassword")
+	}
+	var _out0 int
+	_ret := _fnKcfindinternetpassword(serverName, securityDomain, accountName, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	return _ret, _out0
+}
+
+var _fnKcfindinternetpasswordwithpath func(string, string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// Kcfindinternetpasswordwithpath calls the OSServices framework function kcfindinternetpasswordwithpath.
+func Kcfindinternetpasswordwithpath(serverName string, securityDomain string, accountName string, path string, port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcfindinternetpasswordwithpath == nil {
+		ebipurego.RegisterLibFunc(&_fnKcfindinternetpasswordwithpath, _lib, "kcfindinternetpasswordwithpath")
+	}
+	var _out0 int
+	_ret := _fnKcfindinternetpasswordwithpath(serverName, securityDomain, accountName, path, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	return _ret, _out0
 }

@@ -92,6 +92,96 @@ func PMCopyPrintSettings(settingSrc obj.Object, settingDest obj.Object) error {
 	return nil
 }
 
+var _fnPMCreateGenericPrinter func(unsafe.Pointer) int32
+
+// PMCreateGenericPrinter reports an error if the PrintCore framework function PMCreateGenericPrinter fails.
+func PMCreateGenericPrinter(printer unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMCreateGenericPrinter == nil {
+		ebipurego.RegisterLibFunc(&_fnPMCreateGenericPrinter, _lib, "PMCreateGenericPrinter")
+	}
+	_rc := _fnPMCreateGenericPrinter(printer)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMCreatePageFormat func(unsafe.Pointer) int32
+
+// PMCreatePageFormat reports an error if the PrintCore framework function PMCreatePageFormat fails.
+func PMCreatePageFormat(pageFormat unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMCreatePageFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnPMCreatePageFormat, _lib, "PMCreatePageFormat")
+	}
+	_rc := _fnPMCreatePageFormat(pageFormat)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMCreatePageFormatWithPMPaper func(unsafe.Pointer, objc.ID) int32
+
+// PMCreatePageFormatWithPMPaper reports an error if the PrintCore framework function PMCreatePageFormatWithPMPaper fails.
+func PMCreatePageFormatWithPMPaper(pageFormat unsafe.Pointer, paper obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMCreatePageFormatWithPMPaper == nil {
+		ebipurego.RegisterLibFunc(&_fnPMCreatePageFormatWithPMPaper, _lib, "PMCreatePageFormatWithPMPaper")
+	}
+	_rc := _fnPMCreatePageFormatWithPMPaper(pageFormat, objref.IDOf(paper))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMCreatePrintSettings func(unsafe.Pointer) int32
+
+// PMCreatePrintSettings reports an error if the PrintCore framework function PMCreatePrintSettings fails.
+func PMCreatePrintSettings(printSettings unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMCreatePrintSettings == nil {
+		ebipurego.RegisterLibFunc(&_fnPMCreatePrintSettings, _lib, "PMCreatePrintSettings")
+	}
+	_rc := _fnPMCreatePrintSettings(printSettings)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMCreateSession func(unsafe.Pointer) int32
+
+// PMCreateSession reports an error if the PrintCore framework function PMCreateSession fails.
+func PMCreateSession(printSession unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMCreateSession == nil {
+		ebipurego.RegisterLibFunc(&_fnPMCreateSession, _lib, "PMCreateSession")
+	}
+	_rc := _fnPMCreateSession(printSession)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMGetPageFormatPaper func(objc.ID, unsafe.Pointer) int32
+
+// PMGetPageFormatPaper reports an error if the PrintCore framework function PMGetPageFormatPaper fails.
+func PMGetPageFormatPaper(format obj.Object, paper unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMGetPageFormatPaper == nil {
+		ebipurego.RegisterLibFunc(&_fnPMGetPageFormatPaper, _lib, "PMGetPageFormatPaper")
+	}
+	_rc := _fnPMGetPageFormatPaper(objref.IDOf(format), paper)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnPMPageFormatCreateDataRepresentation func(objc.ID, unsafe.Pointer, PMDataFormat) int32
 
 // PMPageFormatCreateDataRepresentation reports an error if the PrintCore framework function PMPageFormatCreateDataRepresentation fails.
@@ -106,6 +196,21 @@ func PMPageFormatCreateDataRepresentation(pageFormat obj.Object, format PMDataFo
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnPMPageFormatCreateWithDataRepresentation func(objc.ID, unsafe.Pointer) int32
+
+// PMPageFormatCreateWithDataRepresentation reports an error if the PrintCore framework function PMPageFormatCreateWithDataRepresentation fails.
+func PMPageFormatCreateWithDataRepresentation(data obj.Object, pageFormat unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMPageFormatCreateWithDataRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnPMPageFormatCreateWithDataRepresentation, _lib, "PMPageFormatCreateWithDataRepresentation")
+	}
+	_rc := _fnPMPageFormatCreateWithDataRepresentation(objref.IDOf(data), pageFormat)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnPMPageFormatGetPrinterID func(objc.ID, unsafe.Pointer) int32
@@ -204,6 +309,21 @@ func PMPresetCopyName(preset obj.Object) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnPMPresetCreatePrintSettings func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// PMPresetCreatePrintSettings reports an error if the PrintCore framework function PMPresetCreatePrintSettings fails.
+func PMPresetCreatePrintSettings(preset obj.Object, session obj.Object, printSettings unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMPresetCreatePrintSettings == nil {
+		ebipurego.RegisterLibFunc(&_fnPMPresetCreatePrintSettings, _lib, "PMPresetCreatePrintSettings")
+	}
+	_rc := _fnPMPresetCreatePrintSettings(objref.IDOf(preset), objref.IDOf(session), printSettings)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnPMPresetGetAttributes func(objc.ID, unsafe.Pointer) int32
 
 // PMPresetGetAttributes reports an error if the PrintCore framework function PMPresetGetAttributes fails.
@@ -266,6 +386,21 @@ func PMPrintSettingsCreateDataRepresentation(printSettings obj.Object, format PM
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnPMPrintSettingsCreateWithDataRepresentation func(objc.ID, unsafe.Pointer) int32
+
+// PMPrintSettingsCreateWithDataRepresentation reports an error if the PrintCore framework function PMPrintSettingsCreateWithDataRepresentation fails.
+func PMPrintSettingsCreateWithDataRepresentation(data obj.Object, printSettings unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMPrintSettingsCreateWithDataRepresentation == nil {
+		ebipurego.RegisterLibFunc(&_fnPMPrintSettingsCreateWithDataRepresentation, _lib, "PMPrintSettingsCreateWithDataRepresentation")
+	}
+	_rc := _fnPMPrintSettingsCreateWithDataRepresentation(objref.IDOf(data), printSettings)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnPMPrintSettingsGetJobName func(objc.ID, unsafe.Pointer) int32
@@ -440,6 +575,21 @@ func PMPrinterCopyState(printer obj.Object) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnPMPrinterGetDriverReleaseInfo func(objc.ID, unsafe.Pointer) int32
+
+// PMPrinterGetDriverReleaseInfo reports an error if the PrintCore framework function PMPrinterGetDriverReleaseInfo fails.
+func PMPrinterGetDriverReleaseInfo(printer obj.Object, release unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMPrinterGetDriverReleaseInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnPMPrinterGetDriverReleaseInfo, _lib, "PMPrinterGetDriverReleaseInfo")
+	}
+	_rc := _fnPMPrinterGetDriverReleaseInfo(objref.IDOf(printer), release)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnPMPrinterGetMakeAndModelName func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterGetMakeAndModelName reports an error if the PrintCore framework function PMPrinterGetMakeAndModelName fails.
@@ -557,6 +707,36 @@ func PMPrinterWritePostScriptToURL(printer obj.Object, settings obj.Object, form
 		ebipurego.RegisterLibFunc(&_fnPMPrinterWritePostScriptToURL, _lib, "PMPrinterWritePostScriptToURL")
 	}
 	_rc := _fnPMPrinterWritePostScriptToURL(objref.IDOf(printer), objref.IDOf(settings), objref.IDOf(format), objref.IDOf(mimeType), objref.IDOf(sourceFileURL), objref.IDOf(destinationFileURL))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMRelease func(unsafe.Pointer) int32
+
+// PMRelease reports an error if the PrintCore framework function PMRelease fails.
+func PMRelease(object unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnPMRelease, _lib, "PMRelease")
+	}
+	_rc := _fnPMRelease(object)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMRetain func(unsafe.Pointer) int32
+
+// PMRetain reports an error if the PrintCore framework function PMRetain fails.
+func PMRetain(object unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnPMRetain, _lib, "PMRetain")
+	}
+	_rc := _fnPMRetain(object)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -748,6 +928,36 @@ func PMSessionError(printSession obj.Object) error {
 	return nil
 }
 
+var _fnPMSessionGetCGGraphicsContext func(objc.ID, unsafe.Pointer) int32
+
+// PMSessionGetCGGraphicsContext reports an error if the PrintCore framework function PMSessionGetCGGraphicsContext fails.
+func PMSessionGetCGGraphicsContext(printSession obj.Object, context_ unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMSessionGetCGGraphicsContext == nil {
+		ebipurego.RegisterLibFunc(&_fnPMSessionGetCGGraphicsContext, _lib, "PMSessionGetCGGraphicsContext")
+	}
+	_rc := _fnPMSessionGetCGGraphicsContext(objref.IDOf(printSession), context_)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMSessionGetCurrentPrinter func(objc.ID, unsafe.Pointer) int32
+
+// PMSessionGetCurrentPrinter reports an error if the PrintCore framework function PMSessionGetCurrentPrinter fails.
+func PMSessionGetCurrentPrinter(printSession obj.Object, currentPrinter unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMSessionGetCurrentPrinter == nil {
+		ebipurego.RegisterLibFunc(&_fnPMSessionGetCurrentPrinter, _lib, "PMSessionGetCurrentPrinter")
+	}
+	_rc := _fnPMSessionGetCurrentPrinter(objref.IDOf(printSession), currentPrinter)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnPMSessionGetDataFromSession func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // PMSessionGetDataFromSession reports an error if the PrintCore framework function PMSessionGetDataFromSession fails.
@@ -908,6 +1118,21 @@ func PMSetOrientation(pageFormat obj.Object, orientation uint16, lock uint8) err
 		ebipurego.RegisterLibFunc(&_fnPMSetOrientation, _lib, "PMSetOrientation")
 	}
 	_rc := _fnPMSetOrientation(objref.IDOf(pageFormat), orientation, lock)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnPMSetPageFormatExtendedData func(objc.ID, int, int, unsafe.Pointer) int32
+
+// PMSetPageFormatExtendedData reports an error if the PrintCore framework function PMSetPageFormatExtendedData fails.
+func PMSetPageFormatExtendedData(pageFormat obj.Object, dataID int, size int, extendedData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMSetPageFormatExtendedData == nil {
+		ebipurego.RegisterLibFunc(&_fnPMSetPageFormatExtendedData, _lib, "PMSetPageFormatExtendedData")
+	}
+	_rc := _fnPMSetPageFormatExtendedData(objref.IDOf(pageFormat), dataID, size, extendedData)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

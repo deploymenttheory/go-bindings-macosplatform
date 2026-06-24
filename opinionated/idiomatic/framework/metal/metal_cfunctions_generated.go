@@ -5,8 +5,21 @@
 package metal
 
 import (
+	"unsafe"
+
 	ebipurego "github.com/ebitengine/purego"
 )
+
+var _fnMTLIOCompressionContextAppendData func(unsafe.Pointer, unsafe.Pointer, int)
+
+// MTLIOCompressionContextAppendData calls the Metal framework function MTLIOCompressionContextAppendData.
+func MTLIOCompressionContextAppendData(context_ unsafe.Pointer, data unsafe.Pointer, size int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLIOCompressionContextAppendData == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLIOCompressionContextAppendData, _lib, "MTLIOCompressionContextAppendData")
+	}
+	_fnMTLIOCompressionContextAppendData(context_, data, size)
+}
 
 var _fnMTLIOCompressionContextDefaultChunkSize func() int
 
@@ -17,4 +30,15 @@ func MTLIOCompressionContextDefaultChunkSize() int {
 		ebipurego.RegisterLibFunc(&_fnMTLIOCompressionContextDefaultChunkSize, _lib, "MTLIOCompressionContextDefaultChunkSize")
 	}
 	return _fnMTLIOCompressionContextDefaultChunkSize()
+}
+
+var _fnMTLIOFlushAndDestroyCompressionContext func(unsafe.Pointer) IOCompressionStatus
+
+// MTLIOFlushAndDestroyCompressionContext calls the Metal framework function MTLIOFlushAndDestroyCompressionContext.
+func MTLIOFlushAndDestroyCompressionContext(context_ unsafe.Pointer) IOCompressionStatus {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLIOFlushAndDestroyCompressionContext == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLIOFlushAndDestroyCompressionContext, _lib, "MTLIOFlushAndDestroyCompressionContext")
+	}
+	return _fnMTLIOFlushAndDestroyCompressionContext(context_)
 }

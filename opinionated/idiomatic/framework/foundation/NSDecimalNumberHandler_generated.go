@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -71,6 +73,12 @@ func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflow
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), roundingMode, scale, exact, overflow, underflow, divideByZero)
 	return decimalNumberHandlerAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (dnh *DecimalNumberHandler) WithObservationInfo(observationInfo unsafe.Pointer) *DecimalNumberHandler {
+	objc.Send[objc.ID](objref.IDOf(dnh), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return dnh
 }
 
 // WithScriptingProperties sets the scripting properties.

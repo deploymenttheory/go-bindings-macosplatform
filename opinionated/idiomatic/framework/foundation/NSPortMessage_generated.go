@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,12 @@ func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *
 // WithMsgid sets the msgid.
 func (pm *PortMessage) WithMsgid(msgid uint32) *PortMessage {
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setMsgid:"), msgid)
+	return pm
+}
+
+// WithObservationInfo sets the observation info.
+func (pm *PortMessage) WithObservationInfo(observationInfo unsafe.Pointer) *PortMessage {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return pm
 }
 

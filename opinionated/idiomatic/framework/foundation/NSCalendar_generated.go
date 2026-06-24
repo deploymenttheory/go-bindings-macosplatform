@@ -99,6 +99,12 @@ func (c *Calendar) WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek int) *Calen
 	return c
 }
 
+// WithObservationInfo sets the observation info.
+func (c *Calendar) WithObservationInfo(observationInfo unsafe.Pointer) *Calendar {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return c
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (c *Calendar) WithScriptingProperties(scriptingProperties obj.Object) *Calendar {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

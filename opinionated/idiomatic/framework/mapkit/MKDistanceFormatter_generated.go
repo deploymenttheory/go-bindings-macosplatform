@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -88,6 +90,15 @@ func (df *DistanceFormatter) WithUnits(units DistanceFormatterUnits) *DistanceFo
 func (df *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return df
+}
+
+// StringFromDistance creates a string representation of the specified distance.
+func (df *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
+	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("stringFromDistance:"), distance)
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Locale returns the locale.

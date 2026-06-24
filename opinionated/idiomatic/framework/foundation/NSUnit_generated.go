@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,6 +68,12 @@ func (u *Unit) IsKind(className string) bool {
 // under fmt.
 func (u *Unit) String() string {
 	return rt.Description(objref.IDOf(u))
+}
+
+// WithObservationInfo sets the observation info.
+func (u *Unit) WithObservationInfo(observationInfo unsafe.Pointer) *Unit {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return u
 }
 
 // WithScriptingProperties sets the scripting properties.

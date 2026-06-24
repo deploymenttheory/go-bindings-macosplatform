@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,12 @@ func NewDistributedNotificationCenter() *DistributedNotificationCenter {
 // WithSuspended sets the suspended.
 func (dnc *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setSuspended:"), suspended)
+	return dnc
+}
+
+// WithObservationInfo sets the observation info.
+func (dnc *DistributedNotificationCenter) WithObservationInfo(observationInfo unsafe.Pointer) *DistributedNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return dnc
 }
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -68,6 +69,16 @@ func (mamip *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTi
 func (mamip *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
 	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
 	return mamip
+}
+
+// SetVolumeRampFromStartVolumeToEndVolumeTimeRange sets a volume ramp to apply during a specified time range.
+func (mamip *MutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setVolumeRampFromStartVolume:toEndVolume:timeRange:"), startVolume, endVolume, timeRange)
+}
+
+// SetVolumeAtTime sets the value of the audio volume starting at the specified time.
+func (mamip *MutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mamip), objc.RegisterName("setVolume:atTime:"), volume, time_)
 }
 
 var _ AudioMixInputParametersProvider = (*MutableAudioMixInputParameters)(nil)

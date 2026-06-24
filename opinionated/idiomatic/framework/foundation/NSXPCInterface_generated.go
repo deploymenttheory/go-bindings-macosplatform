@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,18 @@ func (xi *XPCInterface) String() string {
 func NewXPCInterface() *XPCInterface {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCInterface")), objc.RegisterName("new"))
 	return xPCInterfaceAdopt(_id)
+}
+
+// WithProtocol sets the Objective-C protocol that this interface is based on.
+func (xi *XPCInterface) WithProtocol(protocol unsafe.Pointer) *XPCInterface {
+	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setProtocol:"), protocol)
+	return xi
+}
+
+// WithObservationInfo sets the observation info.
+func (xi *XPCInterface) WithObservationInfo(observationInfo unsafe.Pointer) *XPCInterface {
+	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return xi
 }
 
 // WithScriptingProperties sets the scripting properties.

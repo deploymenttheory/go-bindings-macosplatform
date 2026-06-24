@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -54,6 +55,18 @@ func NewDelegatingPlaybackCoordinatorPlayCommand() *DelegatingPlaybackCoordinato
 // Rate returns playback rate. Will always be non-zero.
 func (dpcpc *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(dpcpc), objc.RegisterName("rate"))
+	return _r
+}
+
+// ItemTime returns the itemTime that playback should begin at. The receiver of this command should verify that data is loaded for the requested time and potentially begin loading it before beginning playback. It is not important to load data for time exactly. If data "similar" to time is already loaded, it is acceptable to start playback with the loaded data. Playback should still start with the requested timing. Should the receiver be unable to start with the exact requested timing, playback will be out of sync with the group. If data for the requested time cannot be loaded, or playback stalls later, the command handler may want to indicate this to the coordinator by beginning a suspension with AVCoordinatedPlaybackSuspensionReasonStallRecovery.
+func (dpcpc *DelegatingPlaybackCoordinatorPlayCommand) ItemTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(dpcpc), objc.RegisterName("itemTime"))
+	return _r
+}
+
+// HostClockTime returns this is the host clock time (see CMClockGetHostTimeClock()) defining when playback should start (or should have started) at the given itemTime.
+func (dpcpc *DelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(dpcpc), objc.RegisterName("hostClockTime"))
 	return _r
 }
 

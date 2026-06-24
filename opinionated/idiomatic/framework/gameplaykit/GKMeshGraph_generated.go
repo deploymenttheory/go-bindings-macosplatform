@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,9 +48,10 @@ func meshGraphAdopt(id objc.ID) *MeshGraph {
 	return x
 }
 
-// NewMeshGraph creates a new MeshGraph.
-func NewMeshGraph() *MeshGraph {
-	_id := objc.Send[objc.ID](objc.ID(_class("GKMeshGraph")), objc.RegisterName("new"))
+// NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate initializes a graph to cover the specified area.
+func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *MeshGraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMeshGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:"), bufferRadius, min, max)
 	return meshGraphAdopt(_id)
 }
 

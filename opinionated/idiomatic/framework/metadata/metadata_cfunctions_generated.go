@@ -5,6 +5,8 @@
 package metadata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -373,6 +375,17 @@ func MDQueryGetCountOfResultsWithAttributeValue(query obj.Object, name obj.Objec
 	return _fnMDQueryGetCountOfResultsWithAttributeValue(objref.IDOf(query), objref.IDOf(name), objref.IDOf(value))
 }
 
+var _fnMDQueryGetIndexOfResult func(objc.ID, unsafe.Pointer) int
+
+// MDQueryGetIndexOfResult calls the Metadata framework function MDQueryGetIndexOfResult.
+func MDQueryGetIndexOfResult(query obj.Object, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetIndexOfResult == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetIndexOfResult, _lib, "MDQueryGetIndexOfResult")
+	}
+	return _fnMDQueryGetIndexOfResult(objref.IDOf(query), result)
+}
+
 var _fnMDQueryGetResultCount func(objc.ID) int
 
 // MDQueryGetResultCount calls the Metadata framework function MDQueryGetResultCount.
@@ -448,6 +461,17 @@ func MDQuerySetSearchScope(query obj.Object, scopeDirectories obj.Object, scopeO
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSearchScope, _lib, "MDQuerySetSearchScope")
 	}
 	_fnMDQuerySetSearchScope(objref.IDOf(query), objref.IDOf(scopeDirectories), scopeOptions)
+}
+
+var _fnMDQuerySetSortComparator func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// MDQuerySetSortComparator calls the Metadata framework function MDQuerySetSortComparator.
+func MDQuerySetSortComparator(query obj.Object, comparator unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetSortComparator == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparator, _lib, "MDQuerySetSortComparator")
+	}
+	_fnMDQuerySetSortComparator(objref.IDOf(query), comparator, context_)
 }
 
 var _fnMDQuerySetSortOptionFlagsForAttribute func(objc.ID, objc.ID, uint32) uint8

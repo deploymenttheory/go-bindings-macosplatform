@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -37,4 +39,15 @@ func AVMakeRectWithAspectRatioInsideRect(aspectRatio corefoundation.CGSize, boun
 		ebipurego.RegisterLibFunc(&_fnAVMakeRectWithAspectRatioInsideRect, _lib, "AVMakeRectWithAspectRatioInsideRect")
 	}
 	return _fnAVMakeRectWithAspectRatioInsideRect(aspectRatio, boundingRect)
+}
+
+var _fnAVSampleBufferAttachContentKey func(objc.ID, objc.ID, unsafe.Pointer) bool
+
+// AVSampleBufferAttachContentKey calls the AVFoundation framework function AVSampleBufferAttachContentKey.
+func AVSampleBufferAttachContentKey(sbuf obj.Object, contentKey *ContentKey, outError unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVSampleBufferAttachContentKey == nil {
+		ebipurego.RegisterLibFunc(&_fnAVSampleBufferAttachContentKey, _lib, "AVSampleBufferAttachContentKey")
+	}
+	return _fnAVSampleBufferAttachContentKey(objref.IDOf(sbuf), objref.IDOf(contentKey), outError)
 }

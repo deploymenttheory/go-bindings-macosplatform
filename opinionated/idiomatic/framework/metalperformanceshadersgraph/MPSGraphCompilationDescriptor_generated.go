@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,12 @@ func (gcd *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Objec
 // WithOptimizationProfile sets the optimization profile for the graph optimization.
 func (gcd *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile GraphOptimizationProfile) *GraphCompilationDescriptor {
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setOptimizationProfile:"), optimizationProfile)
+	return gcd
+}
+
+// WithCallables sets the dictionary used during runtime to lookup the MPSGraphExecutable which correspond to the symbolName.
+func (gcd *GraphCompilationDescriptor) WithCallables(callables unsafe.Pointer) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setCallables:"), callables)
 	return gcd
 }
 

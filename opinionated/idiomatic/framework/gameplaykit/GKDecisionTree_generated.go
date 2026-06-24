@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,10 +75,23 @@ func NewDecisionTreeWithExamplesActionsAttributes(examples []obj.Object, actions
 	return decisionTreeAdopt(_id)
 }
 
+// NewDecisionTreeWithURLError initializes a decision tree from the contents of a file
+func NewDecisionTreeWithURLError(url string, error_ unsafe.Pointer) *DecisionTree {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKDecisionTree")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), error_)
+	return decisionTreeAdopt(_id)
+}
+
 // WithRandomSource sets the randomizer to be used when evaluating parts of the tree that branch randomly.
 func (dt *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 	return dt
+}
+
+// ExportToURLError exports a decision tree to the given URL
+func (dt *DecisionTree) ExportToURLError(url string, error_ unsafe.Pointer) bool {
+	_r := objc.Send[bool](objref.IDOf(dt), objc.RegisterName("exportToURL:error:"), rt.FileURL(url), error_)
+	return _r
 }
 
 // RootNode returns the node for the decision tree that all other nodes descend from

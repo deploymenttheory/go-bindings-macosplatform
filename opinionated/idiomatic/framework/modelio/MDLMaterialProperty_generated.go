@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -77,6 +79,34 @@ func NewMaterialPropertyWithNameSemantic(name string, semantic MaterialSemantic)
 func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MaterialSemantic, value float32) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float:"), purego.NSString(name), semantic, value)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticFloat2 initializes a material property with a 2-component vector value.
+func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic MaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float2:"), purego.NSString(name), semantic, value)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticFloat3 initializes a material property with a 3-component vector value.
+func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic MaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float3:"), purego.NSString(name), semantic, value)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticFloat4 initializes a material property with a 4-component vector value.
+func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic MaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float4:"), purego.NSString(name), semantic, value)
+	return materialPropertyAdopt(_id)
+}
+
+// NewMaterialPropertyWithNameSemanticMatrix4x4 initializes a material property with a 4 x 4 matrix value.
+func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic MaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:matrix4x4:"), purego.NSString(name), semantic, value)
 	return materialPropertyAdopt(_id)
 }
 
@@ -153,6 +183,30 @@ func (mp *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
 // WithFloatValue sets the scalar floating-point value for the material property.
 func (mp *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setFloatValue:"), floatValue)
+	return mp
+}
+
+// WithFloat2Value sets the 2-component floating-point vector value for the material property.
+func (mp *MaterialProperty) WithFloat2Value(float2Value unsafe.Pointer) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setFloat2Value:"), float2Value)
+	return mp
+}
+
+// WithFloat3Value sets the 3-component floating-point vector value for the material property.
+func (mp *MaterialProperty) WithFloat3Value(float3Value unsafe.Pointer) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setFloat3Value:"), float3Value)
+	return mp
+}
+
+// WithFloat4Value sets the 4-component floating-point vector value for the material property.
+func (mp *MaterialProperty) WithFloat4Value(float4Value unsafe.Pointer) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setFloat4Value:"), float4Value)
+	return mp
+}
+
+// WithMatrix4x4 sets the 4 x 4 floating-point matrix value for the material property.
+func (mp *MaterialProperty) WithMatrix4x4(matrix4x4 unsafe.Pointer) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setMatrix4x4:"), matrix4x4)
 	return mp
 }
 

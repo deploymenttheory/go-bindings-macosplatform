@@ -100,6 +100,11 @@ func (auba *AudioUnitBusArray) SetBusCount(count int) error {
 	return nil
 }
 
+// RemoveObserverFromAllBussesForKeyPathContext removes a KVO observer for a given property on all busses in the array.
+func (auba *AudioUnitBusArray) RemoveObserverFromAllBussesForKeyPathContext(observer obj.Object, keyPath string, context_ unsafe.Pointer) {
+	objc.Send[objc.ID](objref.IDOf(auba), objc.RegisterName("removeObserverFromAllBusses:forKeyPath:context:"), objref.IDOf(observer), purego.NSString(keyPath), context_)
+}
+
 // Count returns the count.
 func (auba *AudioUnitBusArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(auba), objc.RegisterName("count"))

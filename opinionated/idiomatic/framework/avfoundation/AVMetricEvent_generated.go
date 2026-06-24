@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -72,6 +73,12 @@ func (me *MetricEvent) String() string {
 func (me *MetricEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
 	return obj.Wrap(_r)
+}
+
+// MediaTime returns the time in the media timeline when the event occured.
+func (me *MetricEvent) MediaTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(me), objc.RegisterName("mediaTime"))
+	return _r
 }
 
 // SessionID returns a GUID that identifies the media session. If not available, value is nil.

@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -132,6 +133,12 @@ func (at *AssetTrack) TotalSampleDataLength() int64 {
 	return _r
 }
 
+// TimeRange indicates the timeRange of the track within the overall timeline of the asset; a track with CMTIME_COMPARE_INLINE(timeRange.start, >, kCMTimeZero) will initially present an empty interval.
+func (at *AssetTrack) TimeRange() coremedia.CMTimeRange {
+	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(at), objc.RegisterName("timeRange"))
+	return _r
+}
+
 // NaturalTimeScale indicates a timescale in which time values for the track can be operated upon without extraneous numerical conversion
 func (at *AssetTrack) NaturalTimeScale() int32 {
 	_r := objc.Send[int32](objref.IDOf(at), objc.RegisterName("naturalTimeScale"))
@@ -192,9 +199,27 @@ func (at *AssetTrack) NominalFrameRate() float32 {
 	return _r
 }
 
+// MinFrameDuration indicates the minimum duration of the track's frames; the value will be kCMTimeInvalid if the minimum frame duration is not known or cannot be calculated
+func (at *AssetTrack) MinFrameDuration() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(at), objc.RegisterName("minFrameDuration"))
+	return _r
+}
+
 // RequiresFrameReordering reports whether samples in the track may have different values for their presentation and decode timestamps.
 func (at *AssetTrack) RequiresFrameReordering() bool {
 	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("requiresFrameReordering"))
+	return _r
+}
+
+// SegmentForTrackTime retrieves a segment with a target time range that contains, or is closest to, the specified track time.
+func (at *AssetTrack) SegmentForTrackTime(trackTime coremedia.CMTime) *AssetTrackSegment {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("segmentForTrackTime:"), trackTime)
+	return AssetTrackSegmentFromID(_r)
+}
+
+// SamplePresentationTimeForTrackTime maps the specified track time through the appropriate time mapping and returns the resulting sample presentation time.
+func (at *AssetTrack) SamplePresentationTimeForTrackTime(trackTime coremedia.CMTime) coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(at), objc.RegisterName("samplePresentationTimeForTrackTime:"), trackTime)
 	return _r
 }
 
@@ -298,6 +323,12 @@ func (at *AssetTrack) LoadAssociatedTracksOfType(ctx context.Context, trackAssoc
 func (at *AssetTrack) AvailableTrackAssociationTypes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("availableTrackAssociationTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// MakeSampleCursorWithPresentationTimeStamp creates a sample cursor and positions it at or near the specified presentation timestamp.
+func (at *AssetTrack) MakeSampleCursorWithPresentationTimeStamp(presentationTimeStamp coremedia.CMTime) *SampleCursor {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("makeSampleCursorWithPresentationTimeStamp:"), presentationTimeStamp)
+	return SampleCursorFromID(_r)
 }
 
 // MakeSampleCursorAtFirstSampleInDecodeOrder creates a sample cursor and positions it at the track’s first media sample in decode order.

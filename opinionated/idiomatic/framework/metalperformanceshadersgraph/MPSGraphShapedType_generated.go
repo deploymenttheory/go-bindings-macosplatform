@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,12 @@ func graphShapedTypeAdopt(id objc.ID) *GraphShapedType {
 func NewGraphShapedType() *GraphShapedType {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphShapedType")), objc.RegisterName("new"))
 	return graphShapedTypeAdopt(_id)
+}
+
+// WithShape sets the Shape of the shaped type.
+func (gst *GraphShapedType) WithShape(shape unsafe.Pointer) *GraphShapedType {
+	objc.Send[objc.ID](objref.IDOf(gst), objc.RegisterName("setShape:"), shape)
+	return gst
 }
 
 var _ GraphTypeProvider = (*GraphShapedType)(nil)

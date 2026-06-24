@@ -102,6 +102,12 @@ func (fh *FileHandle) WithWriteabilityHandler(writeabilityHandler func(obj.Objec
 	return fh
 }
 
+// WithObservationInfo sets the observation info.
+func (fh *FileHandle) WithObservationInfo(observationInfo unsafe.Pointer) *FileHandle {
+	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return fh
+}
+
 // WithScriptingProperties sets the scripting properties.
 func (fh *FileHandle) WithScriptingProperties(scriptingProperties obj.Object) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))

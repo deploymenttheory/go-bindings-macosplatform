@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,13 @@ func (mi *MapItem) String() string {
 func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
+	return mapItemAdopt(_id)
+}
+
+// NewMapItemWithLocationAddress creates and returns a map item object using the specified location and address objects.
+func NewMapItemWithLocationAddress(location unsafe.Pointer, address *Address) *MapItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:address:"), location, objref.IDOf(address))
 	return mapItemAdopt(_id)
 }
 

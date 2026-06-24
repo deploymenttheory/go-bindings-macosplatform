@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,42 @@ func NewAnimatedVector2() *AnimatedVector2 {
 func (av *AnimatedVector2) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector2 {
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setInterpolation:"), interpolation)
 	return av
+}
+
+// SetFloat2AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) SetFloat2AtTime(value unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setFloat2:atTime:"), value, time_)
+}
+
+// SetDouble2AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) SetDouble2AtTime(value unsafe.Pointer, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDouble2:atTime:"), value, time_)
+}
+
+// ResetWithFloat2ArrayAtTimesCount resets with float2 array at times count.
+func (av *AnimatedVector2) ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("resetWithFloat2Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
+	return _out0
+}
+
+// ResetWithDouble2ArrayAtTimesCount resets with double2 array at times count.
+func (av *AnimatedVector2) ResetWithDouble2ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("resetWithDouble2Array:atTimes:count:"), valuesArray, unsafe.Pointer(&_out0), count)
+	return _out0
+}
+
+// GetFloat2ArrayMaxCount wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) GetFloat2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("getFloat2Array:maxCount:"), valuesArray, maxCount)
+	return _r
+}
+
+// GetDouble2ArrayMaxCount wraps the corresponding Objective-C method.
+func (av *AnimatedVector2) GetDouble2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	_r := objc.Send[int](objref.IDOf(av), objc.RegisterName("getDouble2Array:maxCount:"), valuesArray, maxCount)
+	return _r
 }
 
 var _ AnimatedValueProvider = (*AnimatedVector2)(nil)

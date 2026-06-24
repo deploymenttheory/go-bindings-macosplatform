@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -78,10 +79,21 @@ func (piit *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegrate
 	return PlayerItemIntegratedTimelineSnapshotFromID(_r)
 }
 
+// CurrentTime returns the current time on the integrated timeline. Returns the current time on the integrated timeline. During playback of interstitial events that occupy a single point, currentTime will not change.
+func (piit *PlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(piit), objc.RegisterName("currentTime"))
+	return _r
+}
+
 // CurrentDate returns the date of current playback, or nil if playback is not mapped to any date.
 func (piit *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("currentDate"))
 	return obj.Wrap(_r)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler seeks to a particular time in the integrated time domain.
+func (piit *PlayerItemIntegratedTimeline) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:"), time_, toleranceBefore, toleranceAfter, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // SeekToDateCompletionHandler seeks to a particular date in the integrated time domain.

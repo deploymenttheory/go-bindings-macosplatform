@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -76,4 +77,16 @@ func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 func (cres *CaptureReactionEffectState) ReactionType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cres), objc.RegisterName("reactionType"))
 	return obj.Wrap(_r)
+}
+
+// StartTime provides the presentation time of the first frame where the effect is being rendered.
+func (cres *CaptureReactionEffectState) StartTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cres), objc.RegisterName("startTime"))
+	return _r
+}
+
+// EndTime provides the presentation time of the frame following the last frame where the effect is seen. Will be kCMTimeInvalid while the effect is in progress, but will be updated to a valid time when the reaction effect completes and the AVCaptureReactionEffectState is removed from -[AVCaptureDevice reactionEffectsInProgress]. (If using NSKeyValueObservingOptionOld, you can access completed effects with valid end times via NSKeyValueChangeOldKey.)
+func (cres *CaptureReactionEffectState) EndTime() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(cres), objc.RegisterName("endTime"))
+	return _r
 }

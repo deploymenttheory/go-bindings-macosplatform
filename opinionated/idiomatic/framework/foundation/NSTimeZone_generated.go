@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -78,6 +80,12 @@ func NewTimeZoneWithNameData(tzName string, aData *Data) *TimeZone {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(tzName), objref.IDOf(aData))
 	return timeZoneAdopt(_id)
+}
+
+// WithObservationInfo sets the observation info.
+func (tz *TimeZone) WithObservationInfo(observationInfo unsafe.Pointer) *TimeZone {
+	objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("setObservationInfo:"), observationInfo)
+	return tz
 }
 
 // WithScriptingProperties sets the scripting properties.

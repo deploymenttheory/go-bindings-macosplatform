@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -120,6 +121,12 @@ func (mm *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *Med
 	return mm
 }
 
+// WithInterleavingPeriod sets a time period indicating the duration for interleaving runs of samples for each track.
+func (mm *MutableMovie) WithInterleavingPeriod(interleavingPeriod coremedia.CMTime) *MutableMovie {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("setInterleavingPeriod:"), interleavingPeriod)
+	return mm
+}
+
 // WithMetadata sets an array of metadata items for all metadata identifiers for which a value is available.
 func (mm *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovie {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
@@ -133,9 +140,40 @@ func (mm *MutableMovie) Timescale() int32 {
 	return _r
 }
 
+// InsertTimeRangeOfAssetAtTimeCopySampleData inserts all of the tracks in a specified time range of an asset into a movie.
+func (mm *MutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleData(timeRange coremedia.CMTimeRange, asset *Asset, startTime coremedia.CMTime, copySampleData bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mm), objc.RegisterName("insertTimeRange:ofAsset:atTime:copySampleData:error:"), timeRange, objref.IDOf(asset), startTime, copySampleData, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// InsertEmptyTimeRange adds an empty time range to a movie.
+func (mm *MutableMovie) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
+}
+
+// RemoveTimeRange removes the specified time range from a movie.
+func (mm *MutableMovie) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("removeTimeRange:"), timeRange)
+}
+
+// ScaleTimeRangeToDuration changes the duration of a time range in a movie.
+func (mm *MutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
+}
+
 // IsModified reports whether a movie has been modified. The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
 func (mm *MutableMovie) IsModified() bool {
 	_r := objc.Send[bool](objref.IDOf(mm), objc.RegisterName("isModified"))
+	return _r
+}
+
+// InterleavingPeriod returns a CMTime that indicates the duration for interleaving runs of samples of each track. The default interleaving period is 0.5 seconds.
+func (mm *MutableMovie) InterleavingPeriod() coremedia.CMTime {
+	_r := objc.Send[coremedia.CMTime](objref.IDOf(mm), objc.RegisterName("interleavingPeriod"))
 	return _r
 }
 

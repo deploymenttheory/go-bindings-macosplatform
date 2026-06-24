@@ -6,6 +6,7 @@ package coreaudiotypes
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Codes that describe error conditions that may occur when performing audio session operations.
@@ -65,5 +66,131 @@ func (e AVAudioSessionErrorCode) String() string {
 		return "AVAudioSessionErrorCodeSessionNotActive"
 	default:
 		return fmt.Sprintf("AVAudioSessionErrorCode(%d)", int64(e))
+	}
+}
+
+// A structure that represents flags for a timestamp.
+// Bitmask — values may be combined with |.
+type AudioTimeStampFlags int64
+
+const (
+	// A flag that indicates no fields are valid.
+	KAudioTimeStampNothingValid AudioTimeStampFlags = 0
+	// A flag that indicates that the sample frame time is valid.
+	KAudioTimeStampSampleTimeValid AudioTimeStampFlags = 1
+	// A flag that indicates that the host time is valid.
+	KAudioTimeStampHostTimeValid AudioTimeStampFlags = 2
+	// A flag that indicates that the rate scalar is valid.
+	KAudioTimeStampRateScalarValid AudioTimeStampFlags = 4
+	// A flag that indicates that the word clock time is valid.
+	KAudioTimeStampWordClockTimeValid AudioTimeStampFlags = 8
+	// A flag that indicates that the SMPTE time is valid.
+	KAudioTimeStampSMPTETimeValid AudioTimeStampFlags = 16
+	// A flag that indicates that the sample frame time and the host time are valid.
+	KAudioTimeStampSampleHostTimeValid AudioTimeStampFlags = 3
+)
+
+// String returns the AudioTimeStampFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioTimeStampFlags) String() string {
+	var parts []string
+	if e&KAudioTimeStampSampleTimeValid != 0 {
+		parts = append(parts, "KAudioTimeStampSampleTimeValid")
+	}
+	if e&KAudioTimeStampHostTimeValid != 0 {
+		parts = append(parts, "KAudioTimeStampHostTimeValid")
+	}
+	if e&KAudioTimeStampRateScalarValid != 0 {
+		parts = append(parts, "KAudioTimeStampRateScalarValid")
+	}
+	if e&KAudioTimeStampWordClockTimeValid != 0 {
+		parts = append(parts, "KAudioTimeStampWordClockTimeValid")
+	}
+	if e&KAudioTimeStampSMPTETimeValid != 0 {
+		parts = append(parts, "KAudioTimeStampSMPTETimeValid")
+	}
+	if e&KAudioTimeStampSampleHostTimeValid != 0 {
+		parts = append(parts, "KAudioTimeStampSampleHostTimeValid")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// A structure that defines SMPTE time flags.
+// Bitmask — values may be combined with |.
+type SMPTETimeFlags int64
+
+const (
+	KSMPTETimeUnknown SMPTETimeFlags = 0
+	KSMPTETimeValid   SMPTETimeFlags = 1
+	KSMPTETimeRunning SMPTETimeFlags = 2
+)
+
+// String returns the SMPTETimeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SMPTETimeFlags) String() string {
+	var parts []string
+	if e&KSMPTETimeValid != 0 {
+		parts = append(parts, "KSMPTETimeValid")
+	}
+	if e&KSMPTETimeRunning != 0 {
+		parts = append(parts, "KSMPTETimeRunning")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that define SMPTE time types.
+type SMPTETimeType int64
+
+const (
+	KSMPTETimeType24       SMPTETimeType = 0
+	KSMPTETimeType25       SMPTETimeType = 1
+	KSMPTETimeType30Drop   SMPTETimeType = 2
+	KSMPTETimeType30       SMPTETimeType = 3
+	KSMPTETimeType2997     SMPTETimeType = 4
+	KSMPTETimeType2997Drop SMPTETimeType = 5
+	KSMPTETimeType60       SMPTETimeType = 6
+	KSMPTETimeType5994     SMPTETimeType = 7
+	KSMPTETimeType60Drop   SMPTETimeType = 8
+	KSMPTETimeType5994Drop SMPTETimeType = 9
+	KSMPTETimeType50       SMPTETimeType = 10
+	KSMPTETimeType2398     SMPTETimeType = 11
+)
+
+// String returns the SMPTETimeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SMPTETimeType) String() string {
+	switch e {
+	case KSMPTETimeType24:
+		return "KSMPTETimeType24"
+	case KSMPTETimeType25:
+		return "KSMPTETimeType25"
+	case KSMPTETimeType30Drop:
+		return "KSMPTETimeType30Drop"
+	case KSMPTETimeType30:
+		return "KSMPTETimeType30"
+	case KSMPTETimeType2997:
+		return "KSMPTETimeType2997"
+	case KSMPTETimeType2997Drop:
+		return "KSMPTETimeType2997Drop"
+	case KSMPTETimeType60:
+		return "KSMPTETimeType60"
+	case KSMPTETimeType5994:
+		return "KSMPTETimeType5994"
+	case KSMPTETimeType60Drop:
+		return "KSMPTETimeType60Drop"
+	case KSMPTETimeType5994Drop:
+		return "KSMPTETimeType5994Drop"
+	case KSMPTETimeType50:
+		return "KSMPTETimeType50"
+	case KSMPTETimeType2398:
+		return "KSMPTETimeType2398"
+	default:
+		return fmt.Sprintf("SMPTETimeType(%d)", int64(e))
 	}
 }

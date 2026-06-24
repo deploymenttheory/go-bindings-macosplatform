@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -75,6 +77,12 @@ func NewRecursiveLock() *RecursiveLock {
 // WithName sets the name associated with the receiver.
 func (rl *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setName:"), objref.IDOf(name))
+	return rl
+}
+
+// WithObservationInfo sets the observation info.
+func (rl *RecursiveLock) WithObservationInfo(observationInfo unsafe.Pointer) *RecursiveLock {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return rl
 }
 

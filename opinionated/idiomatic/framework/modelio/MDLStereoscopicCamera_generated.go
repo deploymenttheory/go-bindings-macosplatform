@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -174,6 +176,36 @@ func (sc *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture 
 // WithSensorAspect sets the ratio of width to height for the camera’s simulated imaging surface.
 func (sc *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSensorAspect:"), sensorAspect)
+	return sc
+}
+
+// WithSensorEnlargement sets the horizontal and vertical scale factors that determine the active region of the sensor.
+func (sc *StereoscopicCamera) WithSensorEnlargement(sensorEnlargement unsafe.Pointer) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSensorEnlargement:"), sensorEnlargement)
+	return sc
+}
+
+// WithSensorShift sets the horizontal and vertical offsets, in millimeters, of the center of the camera image relative to the center of the simulated lens.
+func (sc *StereoscopicCamera) WithSensorShift(sensorShift unsafe.Pointer) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSensorShift:"), sensorShift)
+	return sc
+}
+
+// WithFlash sets red, green, and blue factors to be used in brightening darker areas of the camera’s image.
+func (sc *StereoscopicCamera) WithFlash(flash unsafe.Pointer) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFlash:"), flash)
+	return sc
+}
+
+// WithExposureCompression sets two parameters that determine the brightness compression curve for colors in the camera’s image.
+func (sc *StereoscopicCamera) WithExposureCompression(exposureCompression unsafe.Pointer) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setExposureCompression:"), exposureCompression)
+	return sc
+}
+
+// WithExposure sets red, green, and blue factors that scale each color channel in the camera’s image.
+func (sc *StereoscopicCamera) WithExposure(exposure unsafe.Pointer) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setExposure:"), exposure)
 	return sc
 }
 

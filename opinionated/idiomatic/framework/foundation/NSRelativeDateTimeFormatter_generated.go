@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -79,6 +81,12 @@ func (rdtf *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *Relativ
 // WithLocale sets the locale.
 func (rdtf *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return rdtf
+}
+
+// WithObservationInfo sets the observation info.
+func (rdtf *RelativeDateTimeFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return rdtf
 }
 

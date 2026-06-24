@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -55,6 +57,36 @@ func NewMutableVideoCompositionLayerInstruction() *MutableVideoCompositionLayerI
 func (mvcli *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction {
 	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setTrackID:"), trackID)
 	return mvcli
+}
+
+// SetTransformRampFromStartTransformToEndTransformTimeRange sets a transform ramp to apply during a given time range.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform corefoundation.CGAffineTransform, endTransform corefoundation.CGAffineTransform, timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setTransformRampFromStartTransform:toEndTransform:timeRange:"), startTransform, endTransform, timeRange)
+}
+
+// SetTransformAtTime sets the transform value at a time within the time range of the instruction.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetTransformAtTime(transform corefoundation.CGAffineTransform, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setTransform:atTime:"), transform, time_)
+}
+
+// SetOpacityRampFromStartOpacityToEndOpacityTimeRange sets an opacity ramp to apply during a specified time range.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity float32, endOpacity float32, timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setOpacityRampFromStartOpacity:toEndOpacity:timeRange:"), startOpacity, endOpacity, timeRange)
+}
+
+// SetOpacityAtTime sets the opacity value at a specific time within the time range of the instruction.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetOpacityAtTime(opacity float32, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setOpacity:atTime:"), opacity, time_)
+}
+
+// SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange sets a crop rectangle ramp to apply during the specified time range.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle corefoundation.CGRect, endCropRectangle corefoundation.CGRect, timeRange coremedia.CMTimeRange) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setCropRectangleRampFromStartCropRectangle:toEndCropRectangle:timeRange:"), startCropRectangle, endCropRectangle, timeRange)
+}
+
+// SetCropRectangleAtTime sets the crop rectangle value at a time within the time range of the instruction.
+func (mvcli *MutableVideoCompositionLayerInstruction) SetCropRectangleAtTime(cropRectangle corefoundation.CGRect, time_ coremedia.CMTime) {
+	objc.Send[objc.ID](objref.IDOf(mvcli), objc.RegisterName("setCropRectangle:atTime:"), cropRectangle, time_)
 }
 
 // TrackID indicates the trackID of the source track to which the compositor will apply the instruction.

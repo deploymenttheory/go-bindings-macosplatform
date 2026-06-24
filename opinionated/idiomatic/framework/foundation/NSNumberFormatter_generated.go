@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -445,6 +447,12 @@ func (nf *NumberFormatter) WithAttributedStringForNotANumber(attributedStringFor
 // WithRoundingBehavior sets the rounding behavior.
 func (nf *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
+	return nf
+}
+
+// WithObservationInfo sets the observation info.
+func (nf *NumberFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setObservationInfo:"), observationInfo)
 	return nf
 }
 
