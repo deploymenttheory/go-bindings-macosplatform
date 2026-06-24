@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.10.2...v0.11.0) (2026-06-24)
+
+
+### Features
+
+* **idiomatic:** update function signatures to use *bool for out-parameters ([#55](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/55)) ([4f618c2](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/4f618c2db420db2d50202de2fb67753bc75294c7))
+
 ## [0.10.2](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.10.1...v0.10.2) (2026-06-22)
 
 
