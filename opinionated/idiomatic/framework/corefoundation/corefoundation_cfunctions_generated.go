@@ -24,7 +24,7 @@ func CFAbsoluteTimeGetCurrent() float64 {
 	return _fnCFAbsoluteTimeGetCurrent()
 }
 
-var _fnCFAbsoluteTimeGetDayOfWeek func(float64, objc.ID) int
+var _fnCFAbsoluteTimeGetDayOfWeek func(float64, objc.ID) int32
 
 // CFAbsoluteTimeGetDayOfWeek calls the CoreFoundation framework function CFAbsoluteTimeGetDayOfWeek.
 func CFAbsoluteTimeGetDayOfWeek(at float64, tz obj.Object) int {
@@ -32,10 +32,10 @@ func CFAbsoluteTimeGetDayOfWeek(at float64, tz obj.Object) int {
 	if _fnCFAbsoluteTimeGetDayOfWeek == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfWeek, _lib, "CFAbsoluteTimeGetDayOfWeek")
 	}
-	return _fnCFAbsoluteTimeGetDayOfWeek(at, objref.IDOf(tz))
+	return int(_fnCFAbsoluteTimeGetDayOfWeek(at, objref.IDOf(tz)))
 }
 
-var _fnCFAbsoluteTimeGetDayOfYear func(float64, objc.ID) int
+var _fnCFAbsoluteTimeGetDayOfYear func(float64, objc.ID) int32
 
 // CFAbsoluteTimeGetDayOfYear calls the CoreFoundation framework function CFAbsoluteTimeGetDayOfYear.
 func CFAbsoluteTimeGetDayOfYear(at float64, tz obj.Object) int {
@@ -43,10 +43,10 @@ func CFAbsoluteTimeGetDayOfYear(at float64, tz obj.Object) int {
 	if _fnCFAbsoluteTimeGetDayOfYear == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetDayOfYear, _lib, "CFAbsoluteTimeGetDayOfYear")
 	}
-	return _fnCFAbsoluteTimeGetDayOfYear(at, objref.IDOf(tz))
+	return int(_fnCFAbsoluteTimeGetDayOfYear(at, objref.IDOf(tz)))
 }
 
-var _fnCFAbsoluteTimeGetWeekOfYear func(float64, objc.ID) int
+var _fnCFAbsoluteTimeGetWeekOfYear func(float64, objc.ID) int32
 
 // CFAbsoluteTimeGetWeekOfYear calls the CoreFoundation framework function CFAbsoluteTimeGetWeekOfYear.
 func CFAbsoluteTimeGetWeekOfYear(at float64, tz obj.Object) int {
@@ -54,7 +54,7 @@ func CFAbsoluteTimeGetWeekOfYear(at float64, tz obj.Object) int {
 	if _fnCFAbsoluteTimeGetWeekOfYear == nil {
 		ebipurego.RegisterLibFunc(&_fnCFAbsoluteTimeGetWeekOfYear, _lib, "CFAbsoluteTimeGetWeekOfYear")
 	}
-	return _fnCFAbsoluteTimeGetWeekOfYear(at, objref.IDOf(tz))
+	return int(_fnCFAbsoluteTimeGetWeekOfYear(at, objref.IDOf(tz)))
 }
 
 var _fnCFAllocatorDeallocate func(objc.ID, unsafe.Pointer)
@@ -717,7 +717,7 @@ func CFBitVectorFlipBitAtIndex(bv obj.Object, idx int) {
 	_fnCFBitVectorFlipBitAtIndex(objref.IDOf(bv), idx)
 }
 
-var _fnCFBitVectorGetBitAtIndex func(objc.ID, int) int
+var _fnCFBitVectorGetBitAtIndex func(objc.ID, int) uint32
 
 // CFBitVectorGetBitAtIndex calls the CoreFoundation framework function CFBitVectorGetBitAtIndex.
 func CFBitVectorGetBitAtIndex(bv obj.Object, idx int) int {
@@ -725,7 +725,7 @@ func CFBitVectorGetBitAtIndex(bv obj.Object, idx int) int {
 	if _fnCFBitVectorGetBitAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBitVectorGetBitAtIndex, _lib, "CFBitVectorGetBitAtIndex")
 	}
-	return _fnCFBitVectorGetBitAtIndex(objref.IDOf(bv), idx)
+	return int(_fnCFBitVectorGetBitAtIndex(objref.IDOf(bv), idx))
 }
 
 var _fnCFBitVectorGetCount func(objc.ID) int
@@ -1309,7 +1309,7 @@ func CFBundleGetValueForInfoDictionaryKey(bundle obj.Object, key obj.Object) obj
 	return obj.Wrap(_ret)
 }
 
-var _fnCFBundleGetVersionNumber func(objc.ID) int
+var _fnCFBundleGetVersionNumber func(objc.ID) uint32
 
 // CFBundleGetVersionNumber calls the CoreFoundation framework function CFBundleGetVersionNumber.
 func CFBundleGetVersionNumber(bundle obj.Object) int {
@@ -1317,7 +1317,7 @@ func CFBundleGetVersionNumber(bundle obj.Object) int {
 	if _fnCFBundleGetVersionNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundleGetVersionNumber, _lib, "CFBundleGetVersionNumber")
 	}
-	return _fnCFBundleGetVersionNumber(objref.IDOf(bundle))
+	return int(_fnCFBundleGetVersionNumber(objref.IDOf(bundle)))
 }
 
 var _fnCFBundleIsArchitectureLoadable func(int) uint8
@@ -1375,7 +1375,7 @@ func CFBundleLoadExecutable(bundle obj.Object) uint8 {
 	return _fnCFBundleLoadExecutable(objref.IDOf(bundle))
 }
 
-var _fnCFBundleOpenBundleResourceFiles func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCFBundleOpenBundleResourceFiles func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CFBundleOpenBundleResourceFiles calls the CoreFoundation framework function CFBundleOpenBundleResourceFiles.
 func CFBundleOpenBundleResourceFiles(bundle obj.Object) (result int, refNum int, localizedRefNum int) {
@@ -1385,11 +1385,11 @@ func CFBundleOpenBundleResourceFiles(bundle obj.Object) (result int, refNum int,
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnCFBundleOpenBundleResourceFiles(objref.IDOf(bundle), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCFBundleOpenBundleResourceFiles(objref.IDOf(bundle), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCFBundleOpenBundleResourceMap func(objc.ID) int
+var _fnCFBundleOpenBundleResourceMap func(objc.ID) int32
 
 // CFBundleOpenBundleResourceMap calls the CoreFoundation framework function CFBundleOpenBundleResourceMap.
 func CFBundleOpenBundleResourceMap(bundle obj.Object) int {
@@ -1397,7 +1397,7 @@ func CFBundleOpenBundleResourceMap(bundle obj.Object) int {
 	if _fnCFBundleOpenBundleResourceMap == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundleOpenBundleResourceMap, _lib, "CFBundleOpenBundleResourceMap")
 	}
-	return _fnCFBundleOpenBundleResourceMap(objref.IDOf(bundle))
+	return int(_fnCFBundleOpenBundleResourceMap(objref.IDOf(bundle)))
 }
 
 var _fnCFBundleUnloadExecutable func(objc.ID)
@@ -2468,7 +2468,7 @@ func CFFileDescriptorEnableCallBacks(f obj.Object, callBackTypes int) {
 	_fnCFFileDescriptorEnableCallBacks(objref.IDOf(f), callBackTypes)
 }
 
-var _fnCFFileDescriptorGetNativeDescriptor func(objc.ID) int
+var _fnCFFileDescriptorGetNativeDescriptor func(objc.ID) int32
 
 // CFFileDescriptorGetNativeDescriptor calls the CoreFoundation framework function CFFileDescriptorGetNativeDescriptor.
 func CFFileDescriptorGetNativeDescriptor(f obj.Object) int {
@@ -2476,7 +2476,7 @@ func CFFileDescriptorGetNativeDescriptor(f obj.Object) int {
 	if _fnCFFileDescriptorGetNativeDescriptor == nil {
 		ebipurego.RegisterLibFunc(&_fnCFFileDescriptorGetNativeDescriptor, _lib, "CFFileDescriptorGetNativeDescriptor")
 	}
-	return _fnCFFileDescriptorGetNativeDescriptor(objref.IDOf(f))
+	return int(_fnCFFileDescriptorGetNativeDescriptor(objref.IDOf(f)))
 }
 
 var _fnCFFileDescriptorGetTypeID func() int
@@ -2953,7 +2953,7 @@ func CFMachPortCreateRunLoopSource(allocator obj.Object, port obj.Object, order 
 	return obj.Wrap(_ret)
 }
 
-var _fnCFMachPortGetPort func(objc.ID) int
+var _fnCFMachPortGetPort func(objc.ID) uint32
 
 // CFMachPortGetPort calls the CoreFoundation framework function CFMachPortGetPort.
 func CFMachPortGetPort(port obj.Object) int {
@@ -2961,7 +2961,7 @@ func CFMachPortGetPort(port obj.Object) int {
 	if _fnCFMachPortGetPort == nil {
 		ebipurego.RegisterLibFunc(&_fnCFMachPortGetPort, _lib, "CFMachPortGetPort")
 	}
-	return _fnCFMachPortGetPort(objref.IDOf(port))
+	return int(_fnCFMachPortGetPort(objref.IDOf(port)))
 }
 
 var _fnCFMachPortGetTypeID func() int
@@ -3100,7 +3100,7 @@ func CFMessagePortIsValid(ms obj.Object) uint8 {
 	return _fnCFMessagePortIsValid(objref.IDOf(ms))
 }
 
-var _fnCFMessagePortSendRequest func(objc.ID, int, objc.ID, float64, float64, objc.ID, unsafe.Pointer) int
+var _fnCFMessagePortSendRequest func(objc.ID, int, objc.ID, float64, float64, objc.ID, unsafe.Pointer) int32
 
 // CFMessagePortSendRequest calls the CoreFoundation framework function CFMessagePortSendRequest.
 func CFMessagePortSendRequest(remote obj.Object, msgid int, data obj.Object, sendTimeout float64, rcvTimeout float64, replyMode obj.Object, returnData unsafe.Pointer) int {
@@ -3108,7 +3108,7 @@ func CFMessagePortSendRequest(remote obj.Object, msgid int, data obj.Object, sen
 	if _fnCFMessagePortSendRequest == nil {
 		ebipurego.RegisterLibFunc(&_fnCFMessagePortSendRequest, _lib, "CFMessagePortSendRequest")
 	}
-	return _fnCFMessagePortSendRequest(objref.IDOf(remote), msgid, objref.IDOf(data), sendTimeout, rcvTimeout, objref.IDOf(replyMode), returnData)
+	return int(_fnCFMessagePortSendRequest(objref.IDOf(remote), msgid, objref.IDOf(data), sendTimeout, rcvTimeout, objref.IDOf(replyMode), returnData))
 }
 
 var _fnCFMessagePortSetDispatchQueue func(objc.ID, unsafe.Pointer)
@@ -4872,7 +4872,7 @@ func CFSocketGetDefaultNameRegistryPortNumber() uint16 {
 	return _fnCFSocketGetDefaultNameRegistryPortNumber()
 }
 
-var _fnCFSocketGetNative func(objc.ID) int
+var _fnCFSocketGetNative func(objc.ID) int32
 
 // CFSocketGetNative calls the CoreFoundation framework function CFSocketGetNative.
 func CFSocketGetNative(s obj.Object) int {
@@ -4880,7 +4880,7 @@ func CFSocketGetNative(s obj.Object) int {
 	if _fnCFSocketGetNative == nil {
 		ebipurego.RegisterLibFunc(&_fnCFSocketGetNative, _lib, "CFSocketGetNative")
 	}
-	return _fnCFSocketGetNative(objref.IDOf(s))
+	return int(_fnCFSocketGetNative(objref.IDOf(s)))
 }
 
 var _fnCFSocketGetSocketFlags func(objc.ID) int
@@ -5119,7 +5119,7 @@ func CFStringConvertEncodingToNSStringEncoding(encoding int) int {
 	return _fnCFStringConvertEncodingToNSStringEncoding(encoding)
 }
 
-var _fnCFStringConvertEncodingToWindowsCodepage func(int) int
+var _fnCFStringConvertEncodingToWindowsCodepage func(int) uint32
 
 // CFStringConvertEncodingToWindowsCodepage calls the CoreFoundation framework function CFStringConvertEncodingToWindowsCodepage.
 func CFStringConvertEncodingToWindowsCodepage(encoding int) int {
@@ -5127,10 +5127,10 @@ func CFStringConvertEncodingToWindowsCodepage(encoding int) int {
 	if _fnCFStringConvertEncodingToWindowsCodepage == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringConvertEncodingToWindowsCodepage, _lib, "CFStringConvertEncodingToWindowsCodepage")
 	}
-	return _fnCFStringConvertEncodingToWindowsCodepage(encoding)
+	return int(_fnCFStringConvertEncodingToWindowsCodepage(encoding))
 }
 
-var _fnCFStringConvertIANACharSetNameToEncoding func(objc.ID) int
+var _fnCFStringConvertIANACharSetNameToEncoding func(objc.ID) uint32
 
 // CFStringConvertIANACharSetNameToEncoding calls the CoreFoundation framework function CFStringConvertIANACharSetNameToEncoding.
 func CFStringConvertIANACharSetNameToEncoding(theString obj.Object) int {
@@ -5138,10 +5138,10 @@ func CFStringConvertIANACharSetNameToEncoding(theString obj.Object) int {
 	if _fnCFStringConvertIANACharSetNameToEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringConvertIANACharSetNameToEncoding, _lib, "CFStringConvertIANACharSetNameToEncoding")
 	}
-	return _fnCFStringConvertIANACharSetNameToEncoding(objref.IDOf(theString))
+	return int(_fnCFStringConvertIANACharSetNameToEncoding(objref.IDOf(theString)))
 }
 
-var _fnCFStringConvertNSStringEncodingToEncoding func(int) int
+var _fnCFStringConvertNSStringEncodingToEncoding func(int) uint32
 
 // CFStringConvertNSStringEncodingToEncoding calls the CoreFoundation framework function CFStringConvertNSStringEncodingToEncoding.
 func CFStringConvertNSStringEncodingToEncoding(encoding int) int {
@@ -5149,10 +5149,10 @@ func CFStringConvertNSStringEncodingToEncoding(encoding int) int {
 	if _fnCFStringConvertNSStringEncodingToEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringConvertNSStringEncodingToEncoding, _lib, "CFStringConvertNSStringEncodingToEncoding")
 	}
-	return _fnCFStringConvertNSStringEncodingToEncoding(encoding)
+	return int(_fnCFStringConvertNSStringEncodingToEncoding(encoding))
 }
 
-var _fnCFStringConvertWindowsCodepageToEncoding func(int) int
+var _fnCFStringConvertWindowsCodepageToEncoding func(int) uint32
 
 // CFStringConvertWindowsCodepageToEncoding calls the CoreFoundation framework function CFStringConvertWindowsCodepageToEncoding.
 func CFStringConvertWindowsCodepageToEncoding(codepage int) int {
@@ -5160,7 +5160,7 @@ func CFStringConvertWindowsCodepageToEncoding(codepage int) int {
 	if _fnCFStringConvertWindowsCodepageToEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringConvertWindowsCodepageToEncoding, _lib, "CFStringConvertWindowsCodepageToEncoding")
 	}
-	return _fnCFStringConvertWindowsCodepageToEncoding(codepage)
+	return int(_fnCFStringConvertWindowsCodepageToEncoding(codepage))
 }
 
 var _fnCFStringCreateArrayBySeparatingStrings func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -5453,7 +5453,7 @@ func CFStringGetDoubleValue(str obj.Object) float64 {
 	return _fnCFStringGetDoubleValue(objref.IDOf(str))
 }
 
-var _fnCFStringGetFastestEncoding func(objc.ID) int
+var _fnCFStringGetFastestEncoding func(objc.ID) uint32
 
 // CFStringGetFastestEncoding calls the CoreFoundation framework function CFStringGetFastestEncoding.
 func CFStringGetFastestEncoding(theString obj.Object) int {
@@ -5461,7 +5461,7 @@ func CFStringGetFastestEncoding(theString obj.Object) int {
 	if _fnCFStringGetFastestEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetFastestEncoding, _lib, "CFStringGetFastestEncoding")
 	}
-	return _fnCFStringGetFastestEncoding(objref.IDOf(theString))
+	return int(_fnCFStringGetFastestEncoding(objref.IDOf(theString)))
 }
 
 var _fnCFStringGetFileSystemRepresentation func(objc.ID, string, int) uint8
@@ -5475,7 +5475,7 @@ func CFStringGetFileSystemRepresentation(string_ obj.Object, buffer string, maxB
 	return _fnCFStringGetFileSystemRepresentation(objref.IDOf(string_), buffer, maxBufLen)
 }
 
-var _fnCFStringGetIntValue func(objc.ID) int
+var _fnCFStringGetIntValue func(objc.ID) int32
 
 // CFStringGetIntValue calls the CoreFoundation framework function CFStringGetIntValue.
 func CFStringGetIntValue(str obj.Object) int {
@@ -5483,7 +5483,7 @@ func CFStringGetIntValue(str obj.Object) int {
 	if _fnCFStringGetIntValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetIntValue, _lib, "CFStringGetIntValue")
 	}
-	return _fnCFStringGetIntValue(objref.IDOf(str))
+	return int(_fnCFStringGetIntValue(objref.IDOf(str)))
 }
 
 var _fnCFStringGetLength func(objc.ID) int
@@ -5497,7 +5497,7 @@ func CFStringGetLength(theString obj.Object) int {
 	return _fnCFStringGetLength(objref.IDOf(theString))
 }
 
-var _fnCFStringGetLongCharacterForSurrogatePair func(uint16, uint16) int
+var _fnCFStringGetLongCharacterForSurrogatePair func(uint16, uint16) uint32
 
 // CFStringGetLongCharacterForSurrogatePair calls the CoreFoundation framework function CFStringGetLongCharacterForSurrogatePair.
 func CFStringGetLongCharacterForSurrogatePair(surrogateHigh uint16, surrogateLow uint16) int {
@@ -5505,7 +5505,7 @@ func CFStringGetLongCharacterForSurrogatePair(surrogateHigh uint16, surrogateLow
 	if _fnCFStringGetLongCharacterForSurrogatePair == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetLongCharacterForSurrogatePair, _lib, "CFStringGetLongCharacterForSurrogatePair")
 	}
-	return _fnCFStringGetLongCharacterForSurrogatePair(surrogateHigh, surrogateLow)
+	return int(_fnCFStringGetLongCharacterForSurrogatePair(surrogateHigh, surrogateLow))
 }
 
 var _fnCFStringGetMaximumSizeForEncoding func(int, int) int
@@ -5530,7 +5530,7 @@ func CFStringGetMaximumSizeOfFileSystemRepresentation(string_ obj.Object) int {
 	return _fnCFStringGetMaximumSizeOfFileSystemRepresentation(objref.IDOf(string_))
 }
 
-var _fnCFStringGetMostCompatibleMacStringEncoding func(int) int
+var _fnCFStringGetMostCompatibleMacStringEncoding func(int) uint32
 
 // CFStringGetMostCompatibleMacStringEncoding calls the CoreFoundation framework function CFStringGetMostCompatibleMacStringEncoding.
 func CFStringGetMostCompatibleMacStringEncoding(encoding int) int {
@@ -5538,7 +5538,7 @@ func CFStringGetMostCompatibleMacStringEncoding(encoding int) int {
 	if _fnCFStringGetMostCompatibleMacStringEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetMostCompatibleMacStringEncoding, _lib, "CFStringGetMostCompatibleMacStringEncoding")
 	}
-	return _fnCFStringGetMostCompatibleMacStringEncoding(encoding)
+	return int(_fnCFStringGetMostCompatibleMacStringEncoding(encoding))
 }
 
 var _fnCFStringGetNameOfEncoding func(int) objc.ID
@@ -5566,7 +5566,7 @@ func CFStringGetPascalString(theString obj.Object, bufferSize int, encoding int)
 	return _ret, _out0
 }
 
-var _fnCFStringGetSmallestEncoding func(objc.ID) int
+var _fnCFStringGetSmallestEncoding func(objc.ID) uint32
 
 // CFStringGetSmallestEncoding calls the CoreFoundation framework function CFStringGetSmallestEncoding.
 func CFStringGetSmallestEncoding(theString obj.Object) int {
@@ -5574,7 +5574,7 @@ func CFStringGetSmallestEncoding(theString obj.Object) int {
 	if _fnCFStringGetSmallestEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetSmallestEncoding, _lib, "CFStringGetSmallestEncoding")
 	}
-	return _fnCFStringGetSmallestEncoding(objref.IDOf(theString))
+	return int(_fnCFStringGetSmallestEncoding(objref.IDOf(theString)))
 }
 
 var _fnCFStringGetSurrogatePairForLongCharacter func(int, unsafe.Pointer) uint8
@@ -5590,7 +5590,7 @@ func CFStringGetSurrogatePairForLongCharacter(character int) (result uint8, surr
 	return _ret, _out0
 }
 
-var _fnCFStringGetSystemEncoding func() int
+var _fnCFStringGetSystemEncoding func() uint32
 
 // CFStringGetSystemEncoding calls the CoreFoundation framework function CFStringGetSystemEncoding.
 func CFStringGetSystemEncoding() int {
@@ -5598,7 +5598,7 @@ func CFStringGetSystemEncoding() int {
 	if _fnCFStringGetSystemEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringGetSystemEncoding, _lib, "CFStringGetSystemEncoding")
 	}
-	return _fnCFStringGetSystemEncoding()
+	return int(_fnCFStringGetSystemEncoding())
 }
 
 var _fnCFStringGetTypeID func() int
@@ -7016,7 +7016,7 @@ func CFURLGetFileSystemRepresentation(url obj.Object, resolveAgainstBase uint8, 
 	return _ret, _out0
 }
 
-var _fnCFURLGetPortNumber func(objc.ID) int
+var _fnCFURLGetPortNumber func(objc.ID) int32
 
 // CFURLGetPortNumber calls the CoreFoundation framework function CFURLGetPortNumber.
 func CFURLGetPortNumber(anURL obj.Object) int {
@@ -7024,7 +7024,7 @@ func CFURLGetPortNumber(anURL obj.Object) int {
 	if _fnCFURLGetPortNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLGetPortNumber, _lib, "CFURLGetPortNumber")
 	}
-	return _fnCFURLGetPortNumber(objref.IDOf(anURL))
+	return int(_fnCFURLGetPortNumber(objref.IDOf(anURL)))
 }
 
 var _fnCFURLGetString func(objc.ID) objc.ID
@@ -7189,7 +7189,7 @@ func CFUUIDGetTypeID() int {
 	return _fnCFUUIDGetTypeID()
 }
 
-var _fnCFUserNotificationCancel func(objc.ID) int
+var _fnCFUserNotificationCancel func(objc.ID) int32
 
 // CFUserNotificationCancel calls the CoreFoundation framework function CFUserNotificationCancel.
 func CFUserNotificationCancel(userNotification obj.Object) int {
@@ -7197,7 +7197,7 @@ func CFUserNotificationCancel(userNotification obj.Object) int {
 	if _fnCFUserNotificationCancel == nil {
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationCancel, _lib, "CFUserNotificationCancel")
 	}
-	return _fnCFUserNotificationCancel(objref.IDOf(userNotification))
+	return int(_fnCFUserNotificationCancel(objref.IDOf(userNotification)))
 }
 
 var _fnCFUserNotificationCheckBoxChecked func(int) int
@@ -7236,7 +7236,7 @@ func CFUserNotificationCreateRunLoopSource(allocator obj.Object, userNotificatio
 	return obj.Wrap(_ret)
 }
 
-var _fnCFUserNotificationDisplayAlert func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int
+var _fnCFUserNotificationDisplayAlert func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // CFUserNotificationDisplayAlert calls the CoreFoundation framework function CFUserNotificationDisplayAlert.
 func CFUserNotificationDisplayAlert(timeout float64, flags int, iconURL obj.Object, soundURL obj.Object, localizationURL obj.Object, alertHeader obj.Object, alertMessage obj.Object, defaultButtonTitle obj.Object, alternateButtonTitle obj.Object, otherButtonTitle obj.Object) (result int, responseFlags int) {
@@ -7245,11 +7245,11 @@ func CFUserNotificationDisplayAlert(timeout float64, flags int, iconURL obj.Obje
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationDisplayAlert, _lib, "CFUserNotificationDisplayAlert")
 	}
 	var _out0 int
-	_ret := _fnCFUserNotificationDisplayAlert(timeout, flags, objref.IDOf(iconURL), objref.IDOf(soundURL), objref.IDOf(localizationURL), objref.IDOf(alertHeader), objref.IDOf(alertMessage), objref.IDOf(defaultButtonTitle), objref.IDOf(alternateButtonTitle), objref.IDOf(otherButtonTitle), unsafe.Pointer(&_out0))
+	_ret := int(_fnCFUserNotificationDisplayAlert(timeout, flags, objref.IDOf(iconURL), objref.IDOf(soundURL), objref.IDOf(localizationURL), objref.IDOf(alertHeader), objref.IDOf(alertMessage), objref.IDOf(defaultButtonTitle), objref.IDOf(alternateButtonTitle), objref.IDOf(otherButtonTitle), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCFUserNotificationDisplayNotice func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int
+var _fnCFUserNotificationDisplayNotice func(float64, int, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) int32
 
 // CFUserNotificationDisplayNotice calls the CoreFoundation framework function CFUserNotificationDisplayNotice.
 func CFUserNotificationDisplayNotice(timeout float64, flags int, iconURL obj.Object, soundURL obj.Object, localizationURL obj.Object, alertHeader obj.Object, alertMessage obj.Object, defaultButtonTitle obj.Object) int {
@@ -7257,7 +7257,7 @@ func CFUserNotificationDisplayNotice(timeout float64, flags int, iconURL obj.Obj
 	if _fnCFUserNotificationDisplayNotice == nil {
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationDisplayNotice, _lib, "CFUserNotificationDisplayNotice")
 	}
-	return _fnCFUserNotificationDisplayNotice(timeout, flags, objref.IDOf(iconURL), objref.IDOf(soundURL), objref.IDOf(localizationURL), objref.IDOf(alertHeader), objref.IDOf(alertMessage), objref.IDOf(defaultButtonTitle))
+	return int(_fnCFUserNotificationDisplayNotice(timeout, flags, objref.IDOf(iconURL), objref.IDOf(soundURL), objref.IDOf(localizationURL), objref.IDOf(alertHeader), objref.IDOf(alertMessage), objref.IDOf(defaultButtonTitle)))
 }
 
 var _fnCFUserNotificationGetResponseDictionary func(objc.ID) objc.ID
@@ -7306,7 +7306,7 @@ func CFUserNotificationPopUpSelection(n int) int {
 	return _fnCFUserNotificationPopUpSelection(n)
 }
 
-var _fnCFUserNotificationReceiveResponse func(objc.ID, float64, unsafe.Pointer) int
+var _fnCFUserNotificationReceiveResponse func(objc.ID, float64, unsafe.Pointer) int32
 
 // CFUserNotificationReceiveResponse calls the CoreFoundation framework function CFUserNotificationReceiveResponse.
 func CFUserNotificationReceiveResponse(userNotification obj.Object, timeout float64) (result int, responseFlags int) {
@@ -7315,7 +7315,7 @@ func CFUserNotificationReceiveResponse(userNotification obj.Object, timeout floa
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationReceiveResponse, _lib, "CFUserNotificationReceiveResponse")
 	}
 	var _out0 int
-	_ret := _fnCFUserNotificationReceiveResponse(objref.IDOf(userNotification), timeout, unsafe.Pointer(&_out0))
+	_ret := int(_fnCFUserNotificationReceiveResponse(objref.IDOf(userNotification), timeout, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -7330,7 +7330,7 @@ func CFUserNotificationSecureTextField(i int) int {
 	return _fnCFUserNotificationSecureTextField(i)
 }
 
-var _fnCFUserNotificationUpdate func(objc.ID, float64, int, objc.ID) int
+var _fnCFUserNotificationUpdate func(objc.ID, float64, int, objc.ID) int32
 
 // CFUserNotificationUpdate calls the CoreFoundation framework function CFUserNotificationUpdate.
 func CFUserNotificationUpdate(userNotification obj.Object, timeout float64, flags int, dictionary obj.Object) int {
@@ -7338,7 +7338,7 @@ func CFUserNotificationUpdate(userNotification obj.Object, timeout float64, flag
 	if _fnCFUserNotificationUpdate == nil {
 		ebipurego.RegisterLibFunc(&_fnCFUserNotificationUpdate, _lib, "CFUserNotificationUpdate")
 	}
-	return _fnCFUserNotificationUpdate(objref.IDOf(userNotification), timeout, flags, objref.IDOf(dictionary))
+	return int(_fnCFUserNotificationUpdate(objref.IDOf(userNotification), timeout, flags, objref.IDOf(dictionary)))
 }
 
 var _fnCFWriteStreamCanAcceptBytes func(objc.ID) uint8
@@ -7781,7 +7781,7 @@ func CFStringMakeConstantString(cStr string) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnBuiltinConstantP func() int
+var _fnBuiltinConstantP func() int32
 
 // BuiltinConstantP calls the CoreFoundation framework function __builtin_constant_p.
 func BuiltinConstantP() int {
@@ -7789,5 +7789,5 @@ func BuiltinConstantP() int {
 	if _fnBuiltinConstantP == nil {
 		ebipurego.RegisterLibFunc(&_fnBuiltinConstantP, _lib, "__builtin_constant_p")
 	}
-	return _fnBuiltinConstantP()
+	return int(_fnBuiltinConstantP())
 }

@@ -282,7 +282,7 @@ func CSIdentityGetImageURL(identity obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCSIdentityGetPosixID func(objc.ID) int
+var _fnCSIdentityGetPosixID func(objc.ID) uint32
 
 // CSIdentityGetPosixID calls the OSServices framework function CSIdentityGetPosixID.
 func CSIdentityGetPosixID(identity obj.Object) int {
@@ -290,7 +290,7 @@ func CSIdentityGetPosixID(identity obj.Object) int {
 	if _fnCSIdentityGetPosixID == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityGetPosixID, _lib, "CSIdentityGetPosixID")
 	}
-	return _fnCSIdentityGetPosixID(objref.IDOf(identity))
+	return int(_fnCSIdentityGetPosixID(objref.IDOf(identity)))
 }
 
 var _fnCSIdentityGetPosixName func(objc.ID) objc.ID
@@ -643,7 +643,7 @@ func KCCountKeychains() uint16 {
 	return _fnKCCountKeychains()
 }
 
-var _fnKCFindGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCFindGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCFindGenericPassword calls the OSServices framework function KCFindGenericPassword.
 func KCFindGenericPassword(maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serviceName uint8, accountName uint8, actualLength int) {
@@ -654,11 +654,11 @@ func KCFindGenericPassword(maxLength int, passwordData unsafe.Pointer, item unsa
 	var _out0 uint8
 	var _out1 uint8
 	var _out2 int
-	_ret := _fnKCFindGenericPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), maxLength, passwordData, unsafe.Pointer(&_out2), item)
+	_ret := int(_fnKCFindGenericPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), maxLength, passwordData, unsafe.Pointer(&_out2), item))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnKCFindInternetPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCFindInternetPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCFindInternetPassword calls the OSServices framework function KCFindInternetPassword.
 func KCFindInternetPassword(port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8, actualLength int) {
@@ -670,11 +670,11 @@ func KCFindInternetPassword(port uint16, protocol int, authType int, maxLength i
 	var _out1 uint8
 	var _out2 uint8
 	var _out3 int
-	_ret := _fnKCFindInternetPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out3), item)
+	_ret := int(_fnKCFindInternetPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out3), item))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnKCFindInternetPasswordWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCFindInternetPasswordWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCFindInternetPasswordWithPath calls the OSServices framework function KCFindInternetPasswordWithPath.
 func KCFindInternetPasswordWithPath(port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8, path uint8, actualLength int) {
@@ -687,11 +687,11 @@ func KCFindInternetPasswordWithPath(port uint16, protocol int, authType int, max
 	var _out2 uint8
 	var _out3 uint8
 	var _out4 int
-	_ret := _fnKCFindInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out4), item)
+	_ret := int(_fnKCFindInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out4), item))
 	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
-var _fnKCGetData func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCGetData func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCGetData calls the OSServices framework function KCGetData.
 func KCGetData(item unsafe.Pointer, maxLength int, data unsafe.Pointer) (result int, actualLength int) {
@@ -700,11 +700,11 @@ func KCGetData(item unsafe.Pointer, maxLength int, data unsafe.Pointer) (result 
 		ebipurego.RegisterLibFunc(&_fnKCGetData, _lib, "KCGetData")
 	}
 	var _out0 int
-	_ret := _fnKCGetData(item, maxLength, data, unsafe.Pointer(&_out0))
+	_ret := int(_fnKCGetData(item, maxLength, data, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnKCGetKeychainManagerVersion func(unsafe.Pointer) int
+var _fnKCGetKeychainManagerVersion func(unsafe.Pointer) int32
 
 // KCGetKeychainManagerVersion calls the OSServices framework function KCGetKeychainManagerVersion.
 func KCGetKeychainManagerVersion() (result int, returnVers int) {
@@ -713,11 +713,11 @@ func KCGetKeychainManagerVersion() (result int, returnVers int) {
 		ebipurego.RegisterLibFunc(&_fnKCGetKeychainManagerVersion, _lib, "KCGetKeychainManagerVersion")
 	}
 	var _out0 int
-	_ret := _fnKCGetKeychainManagerVersion(unsafe.Pointer(&_out0))
+	_ret := int(_fnKCGetKeychainManagerVersion(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnKCGetKeychainName func(unsafe.Pointer, unsafe.Pointer) int
+var _fnKCGetKeychainName func(unsafe.Pointer, unsafe.Pointer) int32
 
 // KCGetKeychainName calls the OSServices framework function KCGetKeychainName.
 func KCGetKeychainName(keychain unsafe.Pointer) (result int, keychainName uint8) {
@@ -726,11 +726,11 @@ func KCGetKeychainName(keychain unsafe.Pointer) (result int, keychainName uint8)
 		ebipurego.RegisterLibFunc(&_fnKCGetKeychainName, _lib, "KCGetKeychainName")
 	}
 	var _out0 uint8
-	_ret := _fnKCGetKeychainName(keychain, unsafe.Pointer(&_out0))
+	_ret := int(_fnKCGetKeychainName(keychain, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnKCGetStatus func(unsafe.Pointer, unsafe.Pointer) int
+var _fnKCGetStatus func(unsafe.Pointer, unsafe.Pointer) int32
 
 // KCGetStatus calls the OSServices framework function KCGetStatus.
 func KCGetStatus(keychain unsafe.Pointer) (result int, keychainStatus int) {
@@ -739,7 +739,7 @@ func KCGetStatus(keychain unsafe.Pointer) (result int, keychainStatus int) {
 		ebipurego.RegisterLibFunc(&_fnKCGetStatus, _lib, "KCGetStatus")
 	}
 	var _out0 int
-	_ret := _fnKCGetStatus(keychain, unsafe.Pointer(&_out0))
+	_ret := int(_fnKCGetStatus(keychain, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1053,7 +1053,7 @@ func WSProtocolHandlerSetProperty(ref obj.Object, propertyName obj.Object, prope
 	_fnWSProtocolHandlerSetProperty(objref.IDOf(ref), objref.IDOf(propertyName), objref.IDOf(propertyValue))
 }
 
-var _fnKcfindgenericpassword func(string, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKcfindgenericpassword func(string, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Kcfindgenericpassword calls the OSServices framework function kcfindgenericpassword.
 func Kcfindgenericpassword(serviceName string, accountName string, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
@@ -1062,11 +1062,11 @@ func Kcfindgenericpassword(serviceName string, accountName string, maxLength int
 		ebipurego.RegisterLibFunc(&_fnKcfindgenericpassword, _lib, "kcfindgenericpassword")
 	}
 	var _out0 int
-	_ret := _fnKcfindgenericpassword(serviceName, accountName, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	_ret := int(_fnKcfindgenericpassword(serviceName, accountName, maxLength, passwordData, unsafe.Pointer(&_out0), item))
 	return _ret, _out0
 }
 
-var _fnKcfindinternetpassword func(string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKcfindinternetpassword func(string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Kcfindinternetpassword calls the OSServices framework function kcfindinternetpassword.
 func Kcfindinternetpassword(serverName string, securityDomain string, accountName string, port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
@@ -1075,11 +1075,11 @@ func Kcfindinternetpassword(serverName string, securityDomain string, accountNam
 		ebipurego.RegisterLibFunc(&_fnKcfindinternetpassword, _lib, "kcfindinternetpassword")
 	}
 	var _out0 int
-	_ret := _fnKcfindinternetpassword(serverName, securityDomain, accountName, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	_ret := int(_fnKcfindinternetpassword(serverName, securityDomain, accountName, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item))
 	return _ret, _out0
 }
 
-var _fnKcfindinternetpasswordwithpath func(string, string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnKcfindinternetpasswordwithpath func(string, string, string, string, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Kcfindinternetpasswordwithpath calls the OSServices framework function kcfindinternetpasswordwithpath.
 func Kcfindinternetpasswordwithpath(serverName string, securityDomain string, accountName string, path string, port uint16, protocol int, authType int, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
@@ -1088,6 +1088,6 @@ func Kcfindinternetpasswordwithpath(serverName string, securityDomain string, ac
 		ebipurego.RegisterLibFunc(&_fnKcfindinternetpasswordwithpath, _lib, "kcfindinternetpasswordwithpath")
 	}
 	var _out0 int
-	_ret := _fnKcfindinternetpasswordwithpath(serverName, securityDomain, accountName, path, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item)
+	_ret := int(_fnKcfindinternetpasswordwithpath(serverName, securityDomain, accountName, path, port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out0), item))
 	return _ret, _out0
 }

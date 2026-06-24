@@ -267,6 +267,18 @@ func emitGenericFunctionWrappers(
 		varName := "_fn" + goName
 		retSig := buildCFuncRetSig(retType, kind, outNames, outs, sigParts)
 		abiRet := cfuncRetABI(kind, retType)
+		// Bind the C function at its C-faithful ABI return width (e.g. int32 for a
+		// C int / hv_return_t) so purego marshals the result correctly — the
+		// ergonomic public type widens 32-bit ints to Go int, which leaves junk in
+		// the upper bits. The wrapper converts the result back: int(_fn(...)).
+		rawCall := fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", "))
+		call := rawCall
+		if genericFuncKind(kind) == view.FuncScalar {
+			if abi := m.GoABIType(fn.Return.ObjCType, retType); abi != retType {
+				abiRet = abi
+				call = retType + "(" + rawCall + ")"
+			}
+		}
 		// The wrapper is committed: merge its type imports, and add objc when a
 		// parameter or the return crosses the ABI as an objc.ID.
 		maps.Copy(imports, fnImports)
@@ -288,7 +300,7 @@ func emitGenericFunctionWrappers(
 			SigParams: sigParts,
 			RetSig:    retSig,
 			Kind:      genericFuncKind(kind),
-			Call:      fmt.Sprintf("%s(%s)", varName, strings.Join(callArgs, ", ")),
+			Call:      call,
 			Wrap:      wrap,
 			Outs:      outs,
 		})

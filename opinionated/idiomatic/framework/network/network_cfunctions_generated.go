@@ -742,7 +742,7 @@ func NwErrorCopyCfError(error_ obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnNwErrorGetErrorCode func(objc.ID) int
+var _fnNwErrorGetErrorCode func(objc.ID) int32
 
 // NwErrorGetErrorCode calls the Network framework function nw_error_get_error_code.
 func NwErrorGetErrorCode(error_ obj.Object) int {
@@ -750,7 +750,7 @@ func NwErrorGetErrorCode(error_ obj.Object) int {
 	if _fnNwErrorGetErrorCode == nil {
 		ebipurego.RegisterLibFunc(&_fnNwErrorGetErrorCode, _lib, "nw_error_get_error_code")
 	}
-	return _fnNwErrorGetErrorCode(objref.IDOf(error_))
+	return int(_fnNwErrorGetErrorCode(objref.IDOf(error_)))
 }
 
 var _fnNwEstablishmentReportGetAttemptStartedAfterMilliseconds func(objc.ID) uint64

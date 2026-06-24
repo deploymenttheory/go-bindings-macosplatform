@@ -118,7 +118,7 @@ func DRCDTextBlockCreateArrayFromPackList(packs obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnDRCDTextBlockFlatten func(objc.ID) int
+var _fnDRCDTextBlockFlatten func(objc.ID) uint32
 
 // DRCDTextBlockFlatten calls the DiscRecording framework function DRCDTextBlockFlatten.
 func DRCDTextBlockFlatten(block obj.Object) int {
@@ -126,7 +126,7 @@ func DRCDTextBlockFlatten(block obj.Object) int {
 	if _fnDRCDTextBlockFlatten == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockFlatten, _lib, "DRCDTextBlockFlatten")
 	}
-	return _fnDRCDTextBlockFlatten(objref.IDOf(block))
+	return int(_fnDRCDTextBlockFlatten(objref.IDOf(block)))
 }
 
 var _fnDRCDTextBlockGetProperties func(objc.ID) objc.ID
@@ -560,7 +560,7 @@ func DRFSObjectCopySpecificNames(object unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnDRFSObjectGetFilesystemMask func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDRFSObjectGetFilesystemMask func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // DRFSObjectGetFilesystemMask calls the DiscRecording framework function DRFSObjectGetFilesystemMask.
 func DRFSObjectGetFilesystemMask(object unsafe.Pointer) (result int, explicitMask int, effectiveMask int) {
@@ -570,7 +570,7 @@ func DRFSObjectGetFilesystemMask(object unsafe.Pointer) (result int, explicitMas
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnDRFSObjectGetFilesystemMask(object, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDRFSObjectGetFilesystemMask(object, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -767,7 +767,7 @@ func DRFolderCopyChildren(folder obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnDRFolderCountChildren func(objc.ID) int
+var _fnDRFolderCountChildren func(objc.ID) uint32
 
 // DRFolderCountChildren calls the DiscRecording framework function DRFolderCountChildren.
 func DRFolderCountChildren(folder obj.Object) int {
@@ -775,7 +775,7 @@ func DRFolderCountChildren(folder obj.Object) int {
 	if _fnDRFolderCountChildren == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCountChildren, _lib, "DRFolderCountChildren")
 	}
-	return _fnDRFolderCountChildren(objref.IDOf(folder))
+	return int(_fnDRFolderCountChildren(objref.IDOf(folder)))
 }
 
 var _fnDRFolderCreateRealWithURL func(objc.ID) objc.ID

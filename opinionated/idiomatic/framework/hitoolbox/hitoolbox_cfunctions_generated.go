@@ -50,7 +50,7 @@ func AcquireFirstMatchingEventInQueue(inQueue obj.Object, inNumTypes int, inOpti
 	return obj.Wrap(_ret), _out0
 }
 
-var _fnAddEventTypesToHandler func(objc.ID, int, unsafe.Pointer) int
+var _fnAddEventTypesToHandler func(objc.ID, int, unsafe.Pointer) int32
 
 // AddEventTypesToHandler calls the HIToolbox framework function AddEventTypesToHandler.
 func AddEventTypesToHandler(inHandlerRef obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
@@ -59,7 +59,7 @@ func AddEventTypesToHandler(inHandlerRef obj.Object, inNumTypes int) (result int
 		ebipurego.RegisterLibFunc(&_fnAddEventTypesToHandler, _lib, "AddEventTypesToHandler")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnAddEventTypesToHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0))
+	_ret := int(_fnAddEventTypesToHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1068,7 +1068,7 @@ func FlushEvents(whichMask uint16, stopMask uint16) {
 	_fnFlushEvents(whichMask, stopMask)
 }
 
-var _fnFlushEventsMatchingListFromQueue func(objc.ID, int, unsafe.Pointer) int
+var _fnFlushEventsMatchingListFromQueue func(objc.ID, int, unsafe.Pointer) int32
 
 // FlushEventsMatchingListFromQueue calls the HIToolbox framework function FlushEventsMatchingListFromQueue.
 func FlushEventsMatchingListFromQueue(inQueue obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
@@ -1077,7 +1077,7 @@ func FlushEventsMatchingListFromQueue(inQueue obj.Object, inNumTypes int) (resul
 		ebipurego.RegisterLibFunc(&_fnFlushEventsMatchingListFromQueue, _lib, "FlushEventsMatchingListFromQueue")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnFlushEventsMatchingListFromQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(&_out0))
+	_ret := int(_fnFlushEventsMatchingListFromQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1093,7 +1093,7 @@ func GetApplicationEventTarget() obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnGetApplicationTextEncoding func() int
+var _fnGetApplicationTextEncoding func() uint32
 
 // GetApplicationTextEncoding calls the HIToolbox framework function GetApplicationTextEncoding.
 func GetApplicationTextEncoding() int {
@@ -1101,7 +1101,7 @@ func GetApplicationTextEncoding() int {
 	if _fnGetApplicationTextEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnGetApplicationTextEncoding, _lib, "GetApplicationTextEncoding")
 	}
-	return _fnGetApplicationTextEncoding()
+	return int(_fnGetApplicationTextEncoding())
 }
 
 var _fnGetCFRunLoopFromEventLoop func(objc.ID) objc.ID
@@ -1116,7 +1116,7 @@ func GetCFRunLoopFromEventLoop(inEventLoop obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnGetCurrentButtonState func() int
+var _fnGetCurrentButtonState func() uint32
 
 // GetCurrentButtonState calls the HIToolbox framework function GetCurrentButtonState.
 func GetCurrentButtonState() int {
@@ -1124,7 +1124,7 @@ func GetCurrentButtonState() int {
 	if _fnGetCurrentButtonState == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentButtonState, _lib, "GetCurrentButtonState")
 	}
-	return _fnGetCurrentButtonState()
+	return int(_fnGetCurrentButtonState())
 }
 
 var _fnGetCurrentEvent func() objc.ID
@@ -1139,7 +1139,7 @@ func GetCurrentEvent() obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnGetCurrentEventButtonState func() int
+var _fnGetCurrentEventButtonState func() uint32
 
 // GetCurrentEventButtonState calls the HIToolbox framework function GetCurrentEventButtonState.
 func GetCurrentEventButtonState() int {
@@ -1147,10 +1147,10 @@ func GetCurrentEventButtonState() int {
 	if _fnGetCurrentEventButtonState == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentEventButtonState, _lib, "GetCurrentEventButtonState")
 	}
-	return _fnGetCurrentEventButtonState()
+	return int(_fnGetCurrentEventButtonState())
 }
 
-var _fnGetCurrentEventKeyModifiers func() int
+var _fnGetCurrentEventKeyModifiers func() uint32
 
 // GetCurrentEventKeyModifiers calls the HIToolbox framework function GetCurrentEventKeyModifiers.
 func GetCurrentEventKeyModifiers() int {
@@ -1158,7 +1158,7 @@ func GetCurrentEventKeyModifiers() int {
 	if _fnGetCurrentEventKeyModifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentEventKeyModifiers, _lib, "GetCurrentEventKeyModifiers")
 	}
-	return _fnGetCurrentEventKeyModifiers()
+	return int(_fnGetCurrentEventKeyModifiers())
 }
 
 var _fnGetCurrentEventLoop func() objc.ID
@@ -1196,7 +1196,7 @@ func GetCurrentEventTime() float64 {
 	return _fnGetCurrentEventTime()
 }
 
-var _fnGetCurrentKeyModifiers func() int
+var _fnGetCurrentKeyModifiers func() uint32
 
 // GetCurrentKeyModifiers calls the HIToolbox framework function GetCurrentKeyModifiers.
 func GetCurrentKeyModifiers() int {
@@ -1204,10 +1204,10 @@ func GetCurrentKeyModifiers() int {
 	if _fnGetCurrentKeyModifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentKeyModifiers, _lib, "GetCurrentKeyModifiers")
 	}
-	return _fnGetCurrentKeyModifiers()
+	return int(_fnGetCurrentKeyModifiers())
 }
 
-var _fnGetEventClass func(objc.ID) int
+var _fnGetEventClass func(objc.ID) uint32
 
 // GetEventClass calls the HIToolbox framework function GetEventClass.
 func GetEventClass(inEvent obj.Object) int {
@@ -1215,7 +1215,7 @@ func GetEventClass(inEvent obj.Object) int {
 	if _fnGetEventClass == nil {
 		ebipurego.RegisterLibFunc(&_fnGetEventClass, _lib, "GetEventClass")
 	}
-	return _fnGetEventClass(objref.IDOf(inEvent))
+	return int(_fnGetEventClass(objref.IDOf(inEvent)))
 }
 
 var _fnGetEventDispatcherTarget func() objc.ID
@@ -1230,7 +1230,7 @@ func GetEventDispatcherTarget() obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnGetEventKind func(objc.ID) int
+var _fnGetEventKind func(objc.ID) uint32
 
 // GetEventKind calls the HIToolbox framework function GetEventKind.
 func GetEventKind(inEvent obj.Object) int {
@@ -1238,7 +1238,7 @@ func GetEventKind(inEvent obj.Object) int {
 	if _fnGetEventKind == nil {
 		ebipurego.RegisterLibFunc(&_fnGetEventKind, _lib, "GetEventKind")
 	}
-	return _fnGetEventKind(objref.IDOf(inEvent))
+	return int(_fnGetEventKind(objref.IDOf(inEvent)))
 }
 
 var _fnGetEventMonitorTarget func() objc.ID
@@ -1253,7 +1253,7 @@ func GetEventMonitorTarget() obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnGetEventParameter func(objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnGetEventParameter func(objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // GetEventParameter calls the HIToolbox framework function GetEventParameter.
 func GetEventParameter(inEvent obj.Object, inName int, inDesiredType int, inBufferSize int, outData unsafe.Pointer) (result int, outActualType int, outActualSize int) {
@@ -1263,7 +1263,7 @@ func GetEventParameter(inEvent obj.Object, inName int, inDesiredType int, inBuff
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnGetEventParameter(objref.IDOf(inEvent), inName, inDesiredType, unsafe.Pointer(&_out0), inBufferSize, unsafe.Pointer(&_out1), outData)
+	_ret := int(_fnGetEventParameter(objref.IDOf(inEvent), inName, inDesiredType, unsafe.Pointer(&_out0), inBufferSize, unsafe.Pointer(&_out1), outData))
 	return _ret, _out0, _out1
 }
 
@@ -1324,7 +1324,7 @@ func GetNumEventsInQueue(inQueue obj.Object) int {
 	return _fnGetNumEventsInQueue(objref.IDOf(inQueue))
 }
 
-var _fnGetSymbolicHotKeyMode func() int
+var _fnGetSymbolicHotKeyMode func() uint32
 
 // GetSymbolicHotKeyMode calls the HIToolbox framework function GetSymbolicHotKeyMode.
 func GetSymbolicHotKeyMode() int {
@@ -1332,7 +1332,7 @@ func GetSymbolicHotKeyMode() int {
 	if _fnGetSymbolicHotKeyMode == nil {
 		ebipurego.RegisterLibFunc(&_fnGetSymbolicHotKeyMode, _lib, "GetSymbolicHotKeyMode")
 	}
-	return _fnGetSymbolicHotKeyMode()
+	return int(_fnGetSymbolicHotKeyMode())
 }
 
 var _fnGetSystemUIMode func(unsafe.Pointer, unsafe.Pointer)
@@ -1349,7 +1349,7 @@ func GetSystemUIMode() (outMode int, outOptions int) {
 	return _out0, _out1
 }
 
-var _fnGetThemeMenuItemExtra func(uint16, unsafe.Pointer, unsafe.Pointer) int
+var _fnGetThemeMenuItemExtra func(uint16, unsafe.Pointer, unsafe.Pointer) int32
 
 // GetThemeMenuItemExtra calls the HIToolbox framework function GetThemeMenuItemExtra.
 func GetThemeMenuItemExtra(inItemType uint16) (result int, outHeight int16, outWidth int16) {
@@ -1359,11 +1359,11 @@ func GetThemeMenuItemExtra(inItemType uint16) (result int, outHeight int16, outW
 	}
 	var _out0 int16
 	var _out1 int16
-	_ret := _fnGetThemeMenuItemExtra(inItemType, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnGetThemeMenuItemExtra(inItemType, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnGetThemeMenuSeparatorHeight func(unsafe.Pointer) int
+var _fnGetThemeMenuSeparatorHeight func(unsafe.Pointer) int32
 
 // GetThemeMenuSeparatorHeight calls the HIToolbox framework function GetThemeMenuSeparatorHeight.
 func GetThemeMenuSeparatorHeight() (result int, outHeight int16) {
@@ -1372,11 +1372,11 @@ func GetThemeMenuSeparatorHeight() (result int, outHeight int16) {
 		ebipurego.RegisterLibFunc(&_fnGetThemeMenuSeparatorHeight, _lib, "GetThemeMenuSeparatorHeight")
 	}
 	var _out0 int16
-	_ret := _fnGetThemeMenuSeparatorHeight(unsafe.Pointer(&_out0))
+	_ret := int(_fnGetThemeMenuSeparatorHeight(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnGetThemeMenuTitleExtra func(unsafe.Pointer, uint8) int
+var _fnGetThemeMenuTitleExtra func(unsafe.Pointer, uint8) int32
 
 // GetThemeMenuTitleExtra calls the HIToolbox framework function GetThemeMenuTitleExtra.
 func GetThemeMenuTitleExtra(inIsSquished uint8) (result int, outWidth int16) {
@@ -1385,11 +1385,11 @@ func GetThemeMenuTitleExtra(inIsSquished uint8) (result int, outWidth int16) {
 		ebipurego.RegisterLibFunc(&_fnGetThemeMenuTitleExtra, _lib, "GetThemeMenuTitleExtra")
 	}
 	var _out0 int16
-	_ret := _fnGetThemeMenuTitleExtra(unsafe.Pointer(&_out0), inIsSquished)
+	_ret := int(_fnGetThemeMenuTitleExtra(unsafe.Pointer(&_out0), inIsSquished))
 	return _ret, _out0
 }
 
-var _fnGetThemeMetric func(int, unsafe.Pointer) int
+var _fnGetThemeMetric func(int, unsafe.Pointer) int32
 
 // GetThemeMetric calls the HIToolbox framework function GetThemeMetric.
 func GetThemeMetric(inMetric int) (result int, outMetric int) {
@@ -1398,7 +1398,7 @@ func GetThemeMetric(inMetric int) (result int, outMetric int) {
 		ebipurego.RegisterLibFunc(&_fnGetThemeMetric, _lib, "GetThemeMetric")
 	}
 	var _out0 int
-	_ret := _fnGetThemeMetric(inMetric, unsafe.Pointer(&_out0))
+	_ret := int(_fnGetThemeMetric(inMetric, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1483,7 +1483,7 @@ func HIObjectPrintDebugInfo(inObject obj.Object) {
 	_fnHIObjectPrintDebugInfo(objref.IDOf(inObject))
 }
 
-var _fnHIObjectRegisterSubclass func(objc.ID, objc.ID, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnHIObjectRegisterSubclass func(objc.ID, objc.ID, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIObjectRegisterSubclass calls the HIToolbox framework function HIObjectRegisterSubclass.
 func HIObjectRegisterSubclass(inClassID obj.Object, inBaseClassID obj.Object, inOptions int, inConstructProc unsafe.Pointer, inNumEvents int, inConstructData unsafe.Pointer, outClassRef unsafe.Pointer) (result int, inEventList EventTypeSpec) {
@@ -1492,11 +1492,11 @@ func HIObjectRegisterSubclass(inClassID obj.Object, inBaseClassID obj.Object, in
 		ebipurego.RegisterLibFunc(&_fnHIObjectRegisterSubclass, _lib, "HIObjectRegisterSubclass")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnHIObjectRegisterSubclass(objref.IDOf(inClassID), objref.IDOf(inBaseClassID), inOptions, inConstructProc, inNumEvents, unsafe.Pointer(&_out0), inConstructData, outClassRef)
+	_ret := int(_fnHIObjectRegisterSubclass(objref.IDOf(inClassID), objref.IDOf(inBaseClassID), inOptions, inConstructProc, inNumEvents, unsafe.Pointer(&_out0), inConstructData, outClassRef))
 	return _ret, _out0
 }
 
-var _fnHIThemeGetTextColorForThemeBrush func(int16, uint8, unsafe.Pointer) int
+var _fnHIThemeGetTextColorForThemeBrush func(int16, uint8, unsafe.Pointer) int32
 
 // HIThemeGetTextColorForThemeBrush calls the HIToolbox framework function HIThemeGetTextColorForThemeBrush.
 func HIThemeGetTextColorForThemeBrush(inBrush int16, inWindowIsActive uint8) (result int, outColor int16) {
@@ -1505,11 +1505,11 @@ func HIThemeGetTextColorForThemeBrush(inBrush int16, inWindowIsActive uint8) (re
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTextColorForThemeBrush, _lib, "HIThemeGetTextColorForThemeBrush")
 	}
 	var _out0 int16
-	_ret := _fnHIThemeGetTextColorForThemeBrush(inBrush, inWindowIsActive, unsafe.Pointer(&_out0))
+	_ret := int(_fnHIThemeGetTextColorForThemeBrush(inBrush, inWindowIsActive, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnInstallEventHandler func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnInstallEventHandler func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // InstallEventHandler calls the HIToolbox framework function InstallEventHandler.
 func InstallEventHandler(inTarget obj.Object, inHandler unsafe.Pointer, inNumTypes int, inUserData unsafe.Pointer, outRef unsafe.Pointer) (result int, inList EventTypeSpec) {
@@ -1518,7 +1518,7 @@ func InstallEventHandler(inTarget obj.Object, inHandler unsafe.Pointer, inNumTyp
 		ebipurego.RegisterLibFunc(&_fnInstallEventHandler, _lib, "InstallEventHandler")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnInstallEventHandler(objref.IDOf(inTarget), inHandler, inNumTypes, unsafe.Pointer(&_out0), inUserData, outRef)
+	_ret := int(_fnInstallEventHandler(objref.IDOf(inTarget), inHandler, inNumTypes, unsafe.Pointer(&_out0), inUserData, outRef))
 	return _ret, _out0
 }
 
@@ -1693,7 +1693,7 @@ func InvokeDataBrowserHitTestUPP(browser obj.Object, itemID int, property int, t
 	return _fnInvokeDataBrowserHitTestUPP(objref.IDOf(browser), itemID, property, theRect, mouseRect, userUPP)
 }
 
-var _fnInvokeDataBrowserItemAcceptDragUPP func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnInvokeDataBrowserItemAcceptDragUPP func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // InvokeDataBrowserItemAcceptDragUPP calls the HIToolbox framework function InvokeDataBrowserItemAcceptDragUPP.
 func InvokeDataBrowserItemAcceptDragUPP(browser obj.Object, itemID int, property int, theRect unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int {
@@ -1701,7 +1701,7 @@ func InvokeDataBrowserItemAcceptDragUPP(browser obj.Object, itemID int, property
 	if _fnInvokeDataBrowserItemAcceptDragUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserItemAcceptDragUPP, _lib, "InvokeDataBrowserItemAcceptDragUPP")
 	}
-	return _fnInvokeDataBrowserItemAcceptDragUPP(objref.IDOf(browser), itemID, property, theRect, theDrag, userUPP)
+	return int(_fnInvokeDataBrowserItemAcceptDragUPP(objref.IDOf(browser), itemID, property, theRect, theDrag, userUPP))
 }
 
 var _fnInvokeDataBrowserItemCompareUPP func(objc.ID, int, int, int, unsafe.Pointer) uint8
@@ -2110,7 +2110,7 @@ func IsUserCancelEventRef(event obj.Object) uint8 {
 	return _fnIsUserCancelEventRef(objref.IDOf(event))
 }
 
-var _fnKBGetLayoutType func(int16) int
+var _fnKBGetLayoutType func(int16) uint32
 
 // KBGetLayoutType calls the HIToolbox framework function KBGetLayoutType.
 func KBGetLayoutType(iKeyboardType int16) int {
@@ -2118,7 +2118,7 @@ func KBGetLayoutType(iKeyboardType int16) int {
 	if _fnKBGetLayoutType == nil {
 		ebipurego.RegisterLibFunc(&_fnKBGetLayoutType, _lib, "KBGetLayoutType")
 	}
-	return _fnKBGetLayoutType(iKeyboardType)
+	return int(_fnKBGetLayoutType(iKeyboardType))
 }
 
 var _fnLMGetKbdLast func() uint8
@@ -2176,7 +2176,7 @@ func PopSymbolicHotKeyMode(inToken unsafe.Pointer) {
 	_fnPopSymbolicHotKeyMode(inToken)
 }
 
-var _fnReceiveNextEvent func(int, unsafe.Pointer, float64, uint8, unsafe.Pointer) int
+var _fnReceiveNextEvent func(int, unsafe.Pointer, float64, uint8, unsafe.Pointer) int32
 
 // ReceiveNextEvent calls the HIToolbox framework function ReceiveNextEvent.
 func ReceiveNextEvent(inNumTypes int, inTimeout float64, inPullEvent uint8, outEvent unsafe.Pointer) (result int, inList EventTypeSpec) {
@@ -2185,7 +2185,7 @@ func ReceiveNextEvent(inNumTypes int, inTimeout float64, inPullEvent uint8, outE
 		ebipurego.RegisterLibFunc(&_fnReceiveNextEvent, _lib, "ReceiveNextEvent")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnReceiveNextEvent(inNumTypes, unsafe.Pointer(&_out0), inTimeout, inPullEvent, outEvent)
+	_ret := int(_fnReceiveNextEvent(inNumTypes, unsafe.Pointer(&_out0), inTimeout, inPullEvent, outEvent))
 	return _ret, _out0
 }
 
@@ -2200,7 +2200,7 @@ func ReleaseEvent(inEvent obj.Object) {
 	_fnReleaseEvent(objref.IDOf(inEvent))
 }
 
-var _fnRemoveEventTypesFromHandler func(objc.ID, int, unsafe.Pointer) int
+var _fnRemoveEventTypesFromHandler func(objc.ID, int, unsafe.Pointer) int32
 
 // RemoveEventTypesFromHandler calls the HIToolbox framework function RemoveEventTypesFromHandler.
 func RemoveEventTypesFromHandler(inHandlerRef obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
@@ -2209,7 +2209,7 @@ func RemoveEventTypesFromHandler(inHandlerRef obj.Object, inNumTypes int) (resul
 		ebipurego.RegisterLibFunc(&_fnRemoveEventTypesFromHandler, _lib, "RemoveEventTypesFromHandler")
 	}
 	var _out0 EventTypeSpec
-	_ret := _fnRemoveEventTypesFromHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0))
+	_ret := int(_fnRemoveEventTypesFromHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -2344,7 +2344,7 @@ func TSMGetActiveDocument() obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnTSMGetDocumentProperty func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnTSMGetDocumentProperty func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // TSMGetDocumentProperty calls the HIToolbox framework function TSMGetDocumentProperty.
 func TSMGetDocumentProperty(docID obj.Object, propertyTag int, bufferSize int, propertyBuffer unsafe.Pointer) (result int, actualSize int) {
@@ -2353,6 +2353,6 @@ func TSMGetDocumentProperty(docID obj.Object, propertyTag int, bufferSize int, p
 		ebipurego.RegisterLibFunc(&_fnTSMGetDocumentProperty, _lib, "TSMGetDocumentProperty")
 	}
 	var _out0 int
-	_ret := _fnTSMGetDocumentProperty(objref.IDOf(docID), propertyTag, bufferSize, unsafe.Pointer(&_out0), propertyBuffer)
+	_ret := int(_fnTSMGetDocumentProperty(objref.IDOf(docID), propertyTag, bufferSize, unsafe.Pointer(&_out0), propertyBuffer))
 	return _ret, _out0
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int
+var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int32
 
 // IOBluetoothValidateHardwareWithDescription calls the IOBluetoothUI framework function IOBluetoothValidateHardwareWithDescription.
 func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle obj.Object, descriptionText obj.Object) int {
@@ -19,5 +19,5 @@ func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle obj.Object, de
 	if _fnIOBluetoothValidateHardwareWithDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _lib, "IOBluetoothValidateHardwareWithDescription")
 	}
-	return _fnIOBluetoothValidateHardwareWithDescription(objref.IDOf(cancelButtonTitle), objref.IDOf(descriptionText))
+	return int(_fnIOBluetoothValidateHardwareWithDescription(objref.IDOf(cancelButtonTitle), objref.IDOf(descriptionText)))
 }

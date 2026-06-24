@@ -328,7 +328,7 @@ func AlGetDoublev(param int) (data float64) {
 	return _out0
 }
 
-var _fnAlGetEnumValue func(unsafe.Pointer) int
+var _fnAlGetEnumValue func(unsafe.Pointer) int32
 
 // AlGetEnumValue calls the OpenAL framework function alGetEnumValue.
 func AlGetEnumValue() (result int, ename int8) {
@@ -337,11 +337,11 @@ func AlGetEnumValue() (result int, ename int8) {
 		ebipurego.RegisterLibFunc(&_fnAlGetEnumValue, _lib, "alGetEnumValue")
 	}
 	var _out0 int8
-	_ret := _fnAlGetEnumValue(unsafe.Pointer(&_out0))
+	_ret := int(_fnAlGetEnumValue(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAlGetError func() int
+var _fnAlGetError func() int32
 
 // AlGetError calls the OpenAL framework function alGetError.
 func AlGetError() int {
@@ -349,7 +349,7 @@ func AlGetError() int {
 	if _fnAlGetError == nil {
 		ebipurego.RegisterLibFunc(&_fnAlGetError, _lib, "alGetError")
 	}
-	return _fnAlGetError()
+	return int(_fnAlGetError())
 }
 
 var _fnAlGetFloat func(int) float32
@@ -376,7 +376,7 @@ func AlGetFloatv(param int) (data float32) {
 	return _out0
 }
 
-var _fnAlGetInteger func(int) int
+var _fnAlGetInteger func(int) int32
 
 // AlGetInteger calls the OpenAL framework function alGetInteger.
 func AlGetInteger(param int) int {
@@ -384,7 +384,7 @@ func AlGetInteger(param int) int {
 	if _fnAlGetInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnAlGetInteger, _lib, "alGetInteger")
 	}
-	return _fnAlGetInteger(param)
+	return int(_fnAlGetInteger(param))
 }
 
 var _fnAlGetIntegerv func(int, unsafe.Pointer)
@@ -949,7 +949,7 @@ func AlcDestroyContext(context_ unsafe.Pointer) {
 	_fnAlcDestroyContext(context_)
 }
 
-var _fnAlcGetEnumValue func(unsafe.Pointer, unsafe.Pointer) int
+var _fnAlcGetEnumValue func(unsafe.Pointer, unsafe.Pointer) int32
 
 // AlcGetEnumValue calls the OpenAL framework function alcGetEnumValue.
 func AlcGetEnumValue(device unsafe.Pointer) (result int, enumname int8) {
@@ -958,11 +958,11 @@ func AlcGetEnumValue(device unsafe.Pointer) (result int, enumname int8) {
 		ebipurego.RegisterLibFunc(&_fnAlcGetEnumValue, _lib, "alcGetEnumValue")
 	}
 	var _out0 int8
-	_ret := _fnAlcGetEnumValue(device, unsafe.Pointer(&_out0))
+	_ret := int(_fnAlcGetEnumValue(device, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAlcGetError func(unsafe.Pointer) int
+var _fnAlcGetError func(unsafe.Pointer) int32
 
 // AlcGetError calls the OpenAL framework function alcGetError.
 func AlcGetError(device unsafe.Pointer) int {
@@ -970,7 +970,7 @@ func AlcGetError(device unsafe.Pointer) int {
 	if _fnAlcGetError == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcGetError, _lib, "alcGetError")
 	}
-	return _fnAlcGetError(device)
+	return int(_fnAlcGetError(device))
 }
 
 var _fnAlcGetIntegerv func(unsafe.Pointer, int, int, unsafe.Pointer)

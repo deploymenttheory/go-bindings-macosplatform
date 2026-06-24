@@ -737,7 +737,7 @@ func ClGetContextInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer
 	return _ret, _out0
 }
 
-var _fnClGetDAGNodeAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, int) int
+var _fnClGetDAGNodeAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // ClGetDAGNodeAPPLE calls the OpenCL framework function clGetDAGNodeAPPLE.
 func ClGetDAGNodeAPPLE(d obj.Object, f obj.Object, nargs int) (result int, args int, arg_indices uint32) {
@@ -747,7 +747,7 @@ func ClGetDAGNodeAPPLE(d obj.Object, f obj.Object, nargs int) (result int, args 
 	}
 	var _out0 int
 	var _out1 uint32
-	_ret := _fnClGetDAGNodeAPPLE(objref.IDOf(d), objref.IDOf(f), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nargs)
+	_ret := int(_fnClGetDAGNodeAPPLE(objref.IDOf(d), objref.IDOf(f), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nargs))
 	return _ret, _out0, _out1
 }
 

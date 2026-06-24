@@ -268,7 +268,7 @@ func GLKMatrixStackScaleWithVector4(stack obj.Object, scaleVector unsafe.Pointer
 	_fnGLKMatrixStackScaleWithVector4(objref.IDOf(stack), scaleVector)
 }
 
-var _fnGLKMatrixStackSize func(objc.ID) int
+var _fnGLKMatrixStackSize func(objc.ID) int32
 
 // GLKMatrixStackSize calls the GLKit framework function GLKMatrixStackSize.
 func GLKMatrixStackSize(stack obj.Object) int {
@@ -276,7 +276,7 @@ func GLKMatrixStackSize(stack obj.Object) int {
 	if _fnGLKMatrixStackSize == nil {
 		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackSize, _lib, "GLKMatrixStackSize")
 	}
-	return _fnGLKMatrixStackSize(objref.IDOf(stack))
+	return int(_fnGLKMatrixStackSize(objref.IDOf(stack)))
 }
 
 var _fnGLKMatrixStackTranslate func(objc.ID, float32, float32, float32)

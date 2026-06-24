@@ -32,7 +32,7 @@ func DisposeURLSystemEventUPP(userUPP unsafe.Pointer) {
 	_fnDisposeURLSystemEventUPP(userUPP)
 }
 
-var _fnKCAddGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCAddGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCAddGenericPassword calls the SecurityHI framework function KCAddGenericPassword.
 func KCAddGenericPassword(passwordLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serviceName uint8, accountName uint8) {
@@ -42,11 +42,11 @@ func KCAddGenericPassword(passwordLength int, passwordData unsafe.Pointer, item 
 	}
 	var _out0 uint8
 	var _out1 uint8
-	_ret := _fnKCAddGenericPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), passwordLength, passwordData, item)
+	_ret := int(_fnKCAddGenericPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), passwordLength, passwordData, item))
 	return _ret, _out0, _out1
 }
 
-var _fnKCAddInternetPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCAddInternetPassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCAddInternetPassword calls the SecurityHI framework function KCAddInternetPassword.
 func KCAddInternetPassword(port uint16, protocol int, authType int, passwordLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8) {
@@ -57,11 +57,11 @@ func KCAddInternetPassword(port uint16, protocol int, authType int, passwordLeng
 	var _out0 uint8
 	var _out1 uint8
 	var _out2 uint8
-	_ret := _fnKCAddInternetPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), port, protocol, authType, passwordLength, passwordData, item)
+	_ret := int(_fnKCAddInternetPassword(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), port, protocol, authType, passwordLength, passwordData, item))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnKCAddInternetPasswordWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnKCAddInternetPasswordWithPath func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, int, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // KCAddInternetPasswordWithPath calls the SecurityHI framework function KCAddInternetPasswordWithPath.
 func KCAddInternetPasswordWithPath(port uint16, protocol int, authType int, passwordLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverName uint8, securityDomain uint8, accountName uint8, path uint8) {
@@ -73,11 +73,11 @@ func KCAddInternetPasswordWithPath(port uint16, protocol int, authType int, pass
 	var _out1 uint8
 	var _out2 uint8
 	var _out3 uint8
-	_ret := _fnKCAddInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, passwordLength, passwordData, item)
+	_ret := int(_fnKCAddInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, passwordLength, passwordData, item))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnKCCreateKeychain func(unsafe.Pointer, unsafe.Pointer) int
+var _fnKCCreateKeychain func(unsafe.Pointer, unsafe.Pointer) int32
 
 // KCCreateKeychain calls the SecurityHI framework function KCCreateKeychain.
 func KCCreateKeychain(keychain unsafe.Pointer) (result int, password uint8) {
@@ -86,11 +86,11 @@ func KCCreateKeychain(keychain unsafe.Pointer) (result int, password uint8) {
 		ebipurego.RegisterLibFunc(&_fnKCCreateKeychain, _lib, "KCCreateKeychain")
 	}
 	var _out0 uint8
-	_ret := _fnKCCreateKeychain(unsafe.Pointer(&_out0), keychain)
+	_ret := int(_fnKCCreateKeychain(unsafe.Pointer(&_out0), keychain))
 	return _ret, _out0
 }
 
-var _fnKCUnlock func(unsafe.Pointer, unsafe.Pointer) int
+var _fnKCUnlock func(unsafe.Pointer, unsafe.Pointer) int32
 
 // KCUnlock calls the SecurityHI framework function KCUnlock.
 func KCUnlock(keychain unsafe.Pointer) (result int, password uint8) {
@@ -99,6 +99,6 @@ func KCUnlock(keychain unsafe.Pointer) (result int, password uint8) {
 		ebipurego.RegisterLibFunc(&_fnKCUnlock, _lib, "KCUnlock")
 	}
 	var _out0 uint8
-	_ret := _fnKCUnlock(keychain, unsafe.Pointer(&_out0))
+	_ret := int(_fnKCUnlock(keychain, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }

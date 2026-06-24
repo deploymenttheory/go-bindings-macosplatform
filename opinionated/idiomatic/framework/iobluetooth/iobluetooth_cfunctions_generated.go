@@ -14,7 +14,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnIOBluetoothAddSCOAudioDevice func(objc.ID, objc.ID) int
+var _fnIOBluetoothAddSCOAudioDevice func(objc.ID, objc.ID) int32
 
 // IOBluetoothAddSCOAudioDevice calls the IOBluetooth framework function IOBluetoothAddSCOAudioDevice.
 func IOBluetoothAddSCOAudioDevice(device obj.Object, configDict obj.Object) int {
@@ -22,7 +22,7 @@ func IOBluetoothAddSCOAudioDevice(device obj.Object, configDict obj.Object) int 
 	if _fnIOBluetoothAddSCOAudioDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothAddSCOAudioDevice, _lib, "IOBluetoothAddSCOAudioDevice")
 	}
-	return _fnIOBluetoothAddSCOAudioDevice(objref.IDOf(device), objref.IDOf(configDict))
+	return int(_fnIOBluetoothAddSCOAudioDevice(objref.IDOf(device), objref.IDOf(configDict)))
 }
 
 var _fnIOBluetoothFindNumberOfRegistryEntriesOfClassName func(string) int
@@ -195,7 +195,7 @@ func IOBluetoothRemoveIgnoredHIDDevice(device obj.Object) {
 	_fnIOBluetoothRemoveIgnoredHIDDevice(objref.IDOf(device))
 }
 
-var _fnIOBluetoothRemoveSCOAudioDevice func(objc.ID) int
+var _fnIOBluetoothRemoveSCOAudioDevice func(objc.ID) int32
 
 // IOBluetoothRemoveSCOAudioDevice calls the IOBluetooth framework function IOBluetoothRemoveSCOAudioDevice.
 func IOBluetoothRemoveSCOAudioDevice(device obj.Object) int {
@@ -203,7 +203,7 @@ func IOBluetoothRemoveSCOAudioDevice(device obj.Object) int {
 	if _fnIOBluetoothRemoveSCOAudioDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothRemoveSCOAudioDevice, _lib, "IOBluetoothRemoveSCOAudioDevice")
 	}
-	return _fnIOBluetoothRemoveSCOAudioDevice(objref.IDOf(device))
+	return int(_fnIOBluetoothRemoveSCOAudioDevice(objref.IDOf(device)))
 }
 
 var _fnIOBluetoothUnpackDataList func(int, unsafe.Pointer, string, string) int

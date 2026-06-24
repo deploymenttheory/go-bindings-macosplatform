@@ -396,7 +396,7 @@ func CpLayerRendererCapabilitiesSupportsFoveation(layer_capabilities *_cp_layer_
 	return _fnCpLayerRendererCapabilitiesSupportsFoveation(objref.IDOf(layer_capabilities))
 }
 
-var _fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount func(objc.ID) int
+var _fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount func(objc.ID) int32
 
 // CpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount calls the CompositorServices framework function cp_layer_renderer_configuration_get_drawable_render_context_raster_sample_count.
 func CpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount(configuration *_cp_layer_renderer_configuration) int {
@@ -404,7 +404,7 @@ func CpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount(confi
 	if _fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount, _lib, "cp_layer_renderer_configuration_get_drawable_render_context_raster_sample_count")
 	}
-	return _fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount(objref.IDOf(configuration))
+	return int(_fnCpLayerRendererConfigurationGetDrawableRenderContextRasterSampleCount(objref.IDOf(configuration)))
 }
 
 var _fnCpLayerRendererConfigurationGetFoveationEnabled func(objc.ID) bool
@@ -551,7 +551,7 @@ func CpLayerRendererGetConfiguration(layer_renderer *_cp_layer_renderer) *_cp_la
 	return _cp_layer_renderer_configurationFromID(_ret)
 }
 
-var _fnCpLayerRendererGetMinimumFrameRepeatCount func(objc.ID) int
+var _fnCpLayerRendererGetMinimumFrameRepeatCount func(objc.ID) int32
 
 // CpLayerRendererGetMinimumFrameRepeatCount calls the CompositorServices framework function cp_layer_renderer_get_minimum_frame_repeat_count.
 func CpLayerRendererGetMinimumFrameRepeatCount(layer_renderer *_cp_layer_renderer) int {
@@ -559,7 +559,7 @@ func CpLayerRendererGetMinimumFrameRepeatCount(layer_renderer *_cp_layer_rendere
 	if _fnCpLayerRendererGetMinimumFrameRepeatCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererGetMinimumFrameRepeatCount, _lib, "cp_layer_renderer_get_minimum_frame_repeat_count")
 	}
-	return _fnCpLayerRendererGetMinimumFrameRepeatCount(objref.IDOf(layer_renderer))
+	return int(_fnCpLayerRendererGetMinimumFrameRepeatCount(objref.IDOf(layer_renderer)))
 }
 
 var _fnCpLayerRendererGetProperties func(objc.ID) objc.ID

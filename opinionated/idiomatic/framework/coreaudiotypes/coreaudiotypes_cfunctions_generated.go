@@ -8,7 +8,7 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
-var _fnAudioChannelLayoutTag_GetNumberOfChannels func(int) int
+var _fnAudioChannelLayoutTag_GetNumberOfChannels func(int) uint32
 
 // AudioChannelLayoutTag_GetNumberOfChannels calls the CoreAudioTypes framework function AudioChannelLayoutTag_GetNumberOfChannels.
 func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag int) int {
@@ -16,5 +16,5 @@ func AudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag int) int {
 	if _fnAudioChannelLayoutTag_GetNumberOfChannels == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioChannelLayoutTag_GetNumberOfChannels, _lib, "AudioChannelLayoutTag_GetNumberOfChannels")
 	}
-	return _fnAudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag)
+	return int(_fnAudioChannelLayoutTag_GetNumberOfChannels(inLayoutTag))
 }

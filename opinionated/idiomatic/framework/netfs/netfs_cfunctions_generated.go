@@ -25,7 +25,7 @@ func NetFSCopyURLForRemountingVolume(localPathURL obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnNetFSMountURLCancel func(unsafe.Pointer) int
+var _fnNetFSMountURLCancel func(unsafe.Pointer) int32
 
 // NetFSMountURLCancel calls the NetFS framework function NetFSMountURLCancel.
 func NetFSMountURLCancel(requestID unsafe.Pointer) int {
@@ -33,7 +33,7 @@ func NetFSMountURLCancel(requestID unsafe.Pointer) int {
 	if _fnNetFSMountURLCancel == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLCancel, _lib, "NetFSMountURLCancel")
 	}
-	return _fnNetFSMountURLCancel(requestID)
+	return int(_fnNetFSMountURLCancel(requestID))
 }
 
 var _fnNetFSMountURLProbe func(objc.ID) objc.ID
@@ -48,7 +48,7 @@ func NetFSMountURLProbe(hostname obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int
+var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // NetFSMountURLSync calls the NetFS framework function NetFSMountURLSync.
 func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, open_options obj.Object, mount_options obj.Object, mountpoints unsafe.Pointer) int {
@@ -56,5 +56,5 @@ func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, pa
 	if _fnNetFSMountURLSync == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLSync, _lib, "NetFSMountURLSync")
 	}
-	return _fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(open_options), objref.IDOf(mount_options), mountpoints)
+	return int(_fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(open_options), objref.IDOf(mount_options), mountpoints))
 }

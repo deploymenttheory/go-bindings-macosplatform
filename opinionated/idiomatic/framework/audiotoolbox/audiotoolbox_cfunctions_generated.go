@@ -13,7 +13,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnAUGraphAddNode func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnAUGraphAddNode func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphAddNode calls the AudioToolbox framework function AUGraphAddNode.
 func AUGraphAddNode(inGraph obj.Object) (result int, inDescription AudioComponentDescription, outNode int) {
@@ -23,11 +23,11 @@ func AUGraphAddNode(inGraph obj.Object) (result int, inDescription AudioComponen
 	}
 	var _out0 AudioComponentDescription
 	var _out1 int
-	_ret := _fnAUGraphAddNode(objref.IDOf(inGraph), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAUGraphAddNode(objref.IDOf(inGraph), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnAUGraphCountNodeConnections func(objc.ID, int, unsafe.Pointer) int
+var _fnAUGraphCountNodeConnections func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphCountNodeConnections calls the AudioToolbox framework function AUGraphCountNodeConnections.
 func AUGraphCountNodeConnections(inGraph obj.Object, inNode int) (result int, outNumConnections int) {
@@ -36,11 +36,11 @@ func AUGraphCountNodeConnections(inGraph obj.Object, inNode int) (result int, ou
 		ebipurego.RegisterLibFunc(&_fnAUGraphCountNodeConnections, _lib, "AUGraphCountNodeConnections")
 	}
 	var _out0 int
-	_ret := _fnAUGraphCountNodeConnections(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphCountNodeConnections(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphCountNodeInteractions func(objc.ID, int, unsafe.Pointer) int
+var _fnAUGraphCountNodeInteractions func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphCountNodeInteractions calls the AudioToolbox framework function AUGraphCountNodeInteractions.
 func AUGraphCountNodeInteractions(inGraph obj.Object, inNode int) (result int, outNumInteractions int) {
@@ -49,11 +49,11 @@ func AUGraphCountNodeInteractions(inGraph obj.Object, inNode int) (result int, o
 		ebipurego.RegisterLibFunc(&_fnAUGraphCountNodeInteractions, _lib, "AUGraphCountNodeInteractions")
 	}
 	var _out0 int
-	_ret := _fnAUGraphCountNodeInteractions(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphCountNodeInteractions(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetCPULoad func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphGetCPULoad func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetCPULoad calls the AudioToolbox framework function AUGraphGetCPULoad.
 func AUGraphGetCPULoad(inGraph obj.Object) (result int, outAverageCPULoad float32) {
@@ -62,11 +62,11 @@ func AUGraphGetCPULoad(inGraph obj.Object) (result int, outAverageCPULoad float3
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetCPULoad, _lib, "AUGraphGetCPULoad")
 	}
 	var _out0 float32
-	_ret := _fnAUGraphGetCPULoad(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetCPULoad(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetConnectionInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAUGraphGetConnectionInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphGetConnectionInfo calls the AudioToolbox framework function AUGraphGetConnectionInfo.
 func AUGraphGetConnectionInfo(inGraph obj.Object, inConnectionIndex int) (result int, outSourceNode int, outSourceOutputNumber int, outDestNode int, outDestInputNumber int) {
@@ -78,11 +78,11 @@ func AUGraphGetConnectionInfo(inGraph obj.Object, inConnectionIndex int) (result
 	var _out1 int
 	var _out2 int
 	var _out3 int
-	_ret := _fnAUGraphGetConnectionInfo(objref.IDOf(inGraph), inConnectionIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnAUGraphGetConnectionInfo(objref.IDOf(inGraph), inConnectionIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnAUGraphGetIndNode func(objc.ID, int, unsafe.Pointer) int
+var _fnAUGraphGetIndNode func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphGetIndNode calls the AudioToolbox framework function AUGraphGetIndNode.
 func AUGraphGetIndNode(inGraph obj.Object, inIndex int) (result int, outNode int) {
@@ -91,11 +91,11 @@ func AUGraphGetIndNode(inGraph obj.Object, inIndex int) (result int, outNode int
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetIndNode, _lib, "AUGraphGetIndNode")
 	}
 	var _out0 int
-	_ret := _fnAUGraphGetIndNode(objref.IDOf(inGraph), inIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetIndNode(objref.IDOf(inGraph), inIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetMaxCPULoad func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphGetMaxCPULoad func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetMaxCPULoad calls the AudioToolbox framework function AUGraphGetMaxCPULoad.
 func AUGraphGetMaxCPULoad(inGraph obj.Object) (result int, outMaxLoad float32) {
@@ -104,11 +104,11 @@ func AUGraphGetMaxCPULoad(inGraph obj.Object) (result int, outMaxLoad float32) {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetMaxCPULoad, _lib, "AUGraphGetMaxCPULoad")
 	}
 	var _out0 float32
-	_ret := _fnAUGraphGetMaxCPULoad(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetMaxCPULoad(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetNodeConnections func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAUGraphGetNodeConnections func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphGetNodeConnections calls the AudioToolbox framework function AUGraphGetNodeConnections.
 func AUGraphGetNodeConnections(inGraph obj.Object, inNode int) (result int, outConnections AudioUnitNodeConnection, ioNumConnections int) {
@@ -118,11 +118,11 @@ func AUGraphGetNodeConnections(inGraph obj.Object, inNode int) (result int, outC
 	}
 	var _out0 AudioUnitNodeConnection
 	var _out1 int
-	_ret := _fnAUGraphGetNodeConnections(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAUGraphGetNodeConnections(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnAUGraphGetNodeCount func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphGetNodeCount func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNodeCount calls the AudioToolbox framework function AUGraphGetNodeCount.
 func AUGraphGetNodeCount(inGraph obj.Object) (result int, outNumberOfNodes int) {
@@ -131,11 +131,11 @@ func AUGraphGetNodeCount(inGraph obj.Object) (result int, outNumberOfNodes int) 
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeCount, _lib, "AUGraphGetNodeCount")
 	}
 	var _out0 int
-	_ret := _fnAUGraphGetNodeCount(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetNodeCount(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetNumberOfConnections func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphGetNumberOfConnections func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNumberOfConnections calls the AudioToolbox framework function AUGraphGetNumberOfConnections.
 func AUGraphGetNumberOfConnections(inGraph obj.Object) (result int, outNumConnections int) {
@@ -144,11 +144,11 @@ func AUGraphGetNumberOfConnections(inGraph obj.Object) (result int, outNumConnec
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNumberOfConnections, _lib, "AUGraphGetNumberOfConnections")
 	}
 	var _out0 int
-	_ret := _fnAUGraphGetNumberOfConnections(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetNumberOfConnections(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphGetNumberOfInteractions func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphGetNumberOfInteractions func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphGetNumberOfInteractions calls the AudioToolbox framework function AUGraphGetNumberOfInteractions.
 func AUGraphGetNumberOfInteractions(inGraph obj.Object) (result int, outNumInteractions int) {
@@ -157,11 +157,11 @@ func AUGraphGetNumberOfInteractions(inGraph obj.Object) (result int, outNumInter
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNumberOfInteractions, _lib, "AUGraphGetNumberOfInteractions")
 	}
 	var _out0 int
-	_ret := _fnAUGraphGetNumberOfInteractions(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphGetNumberOfInteractions(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphIsInitialized func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphIsInitialized func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsInitialized calls the AudioToolbox framework function AUGraphIsInitialized.
 func AUGraphIsInitialized(inGraph obj.Object) (result int, outIsInitialized uint8) {
@@ -170,11 +170,11 @@ func AUGraphIsInitialized(inGraph obj.Object) (result int, outIsInitialized uint
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsInitialized, _lib, "AUGraphIsInitialized")
 	}
 	var _out0 uint8
-	_ret := _fnAUGraphIsInitialized(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphIsInitialized(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphIsNodeSubGraph func(objc.ID, int, unsafe.Pointer) int
+var _fnAUGraphIsNodeSubGraph func(objc.ID, int, unsafe.Pointer) int32
 
 // AUGraphIsNodeSubGraph calls the AudioToolbox framework function AUGraphIsNodeSubGraph.
 func AUGraphIsNodeSubGraph(inGraph obj.Object, inNode int) (result int, outFlag uint8) {
@@ -183,11 +183,11 @@ func AUGraphIsNodeSubGraph(inGraph obj.Object, inNode int) (result int, outFlag 
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsNodeSubGraph, _lib, "AUGraphIsNodeSubGraph")
 	}
 	var _out0 uint8
-	_ret := _fnAUGraphIsNodeSubGraph(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphIsNodeSubGraph(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphIsOpen func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphIsOpen func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsOpen calls the AudioToolbox framework function AUGraphIsOpen.
 func AUGraphIsOpen(inGraph obj.Object) (result int, outIsOpen uint8) {
@@ -196,11 +196,11 @@ func AUGraphIsOpen(inGraph obj.Object) (result int, outIsOpen uint8) {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsOpen, _lib, "AUGraphIsOpen")
 	}
 	var _out0 uint8
-	_ret := _fnAUGraphIsOpen(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphIsOpen(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphIsRunning func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphIsRunning func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphIsRunning calls the AudioToolbox framework function AUGraphIsRunning.
 func AUGraphIsRunning(inGraph obj.Object) (result int, outIsRunning uint8) {
@@ -209,11 +209,11 @@ func AUGraphIsRunning(inGraph obj.Object) (result int, outIsRunning uint8) {
 		ebipurego.RegisterLibFunc(&_fnAUGraphIsRunning, _lib, "AUGraphIsRunning")
 	}
 	var _out0 uint8
-	_ret := _fnAUGraphIsRunning(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphIsRunning(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphNewNodeSubGraph func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphNewNodeSubGraph func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphNewNodeSubGraph calls the AudioToolbox framework function AUGraphNewNodeSubGraph.
 func AUGraphNewNodeSubGraph(inGraph obj.Object) (result int, outNode int) {
@@ -222,11 +222,11 @@ func AUGraphNewNodeSubGraph(inGraph obj.Object) (result int, outNode int) {
 		ebipurego.RegisterLibFunc(&_fnAUGraphNewNodeSubGraph, _lib, "AUGraphNewNodeSubGraph")
 	}
 	var _out0 int
-	_ret := _fnAUGraphNewNodeSubGraph(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphNewNodeSubGraph(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAUGraphUpdate func(objc.ID, unsafe.Pointer) int
+var _fnAUGraphUpdate func(objc.ID, unsafe.Pointer) int32
 
 // AUGraphUpdate calls the AudioToolbox framework function AUGraphUpdate.
 func AUGraphUpdate(inGraph obj.Object) (result int, outIsUpdated uint8) {
@@ -235,11 +235,11 @@ func AUGraphUpdate(inGraph obj.Object) (result int, outIsUpdated uint8) {
 		ebipurego.RegisterLibFunc(&_fnAUGraphUpdate, _lib, "AUGraphUpdate")
 	}
 	var _out0 uint8
-	_ret := _fnAUGraphUpdate(objref.IDOf(inGraph), unsafe.Pointer(&_out0))
+	_ret := int(_fnAUGraphUpdate(objref.IDOf(inGraph), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioComponentCount func(unsafe.Pointer) int
+var _fnAudioComponentCount func(unsafe.Pointer) uint32
 
 // AudioComponentCount calls the AudioToolbox framework function AudioComponentCount.
 func AudioComponentCount() (result int, inDesc AudioComponentDescription) {
@@ -248,7 +248,7 @@ func AudioComponentCount() (result int, inDesc AudioComponentDescription) {
 		ebipurego.RegisterLibFunc(&_fnAudioComponentCount, _lib, "AudioComponentCount")
 	}
 	var _out0 AudioComponentDescription
-	_ret := _fnAudioComponentCount(unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioComponentCount(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -265,7 +265,7 @@ func AudioComponentFindNext(inComponent obj.Object) (result obj.Object, inDesc A
 	return obj.Wrap(_ret), _out0
 }
 
-var _fnAudioComponentGetDescription func(objc.ID, unsafe.Pointer) int
+var _fnAudioComponentGetDescription func(objc.ID, unsafe.Pointer) int32
 
 // AudioComponentGetDescription calls the AudioToolbox framework function AudioComponentGetDescription.
 func AudioComponentGetDescription(inComponent obj.Object) (result int, outDesc AudioComponentDescription) {
@@ -274,7 +274,7 @@ func AudioComponentGetDescription(inComponent obj.Object) (result int, outDesc A
 		ebipurego.RegisterLibFunc(&_fnAudioComponentGetDescription, _lib, "AudioComponentGetDescription")
 	}
 	var _out0 AudioComponentDescription
-	_ret := _fnAudioComponentGetDescription(objref.IDOf(inComponent), unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioComponentGetDescription(objref.IDOf(inComponent), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -290,7 +290,7 @@ func AudioComponentGetIcon(comp obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnAudioComponentGetVersion func(objc.ID, unsafe.Pointer) int
+var _fnAudioComponentGetVersion func(objc.ID, unsafe.Pointer) int32
 
 // AudioComponentGetVersion calls the AudioToolbox framework function AudioComponentGetVersion.
 func AudioComponentGetVersion(inComponent obj.Object) (result int, outVersion int) {
@@ -299,7 +299,7 @@ func AudioComponentGetVersion(inComponent obj.Object) (result int, outVersion in
 		ebipurego.RegisterLibFunc(&_fnAudioComponentGetVersion, _lib, "AudioComponentGetVersion")
 	}
 	var _out0 int
-	_ret := _fnAudioComponentGetVersion(objref.IDOf(inComponent), unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioComponentGetVersion(objref.IDOf(inComponent), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -316,7 +316,7 @@ func AudioComponentRegister(inName obj.Object, inVersion int, inFactory unsafe.P
 	return obj.Wrap(_ret), _out0
 }
 
-var _fnAudioComponentValidate func(objc.ID, objc.ID, unsafe.Pointer) int
+var _fnAudioComponentValidate func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // AudioComponentValidate calls the AudioToolbox framework function AudioComponentValidate.
 func AudioComponentValidate(inComponent obj.Object, inValidationParameters obj.Object) (result int, outValidationResult AudioComponentValidationResult) {
@@ -325,11 +325,11 @@ func AudioComponentValidate(inComponent obj.Object, inValidationParameters obj.O
 		ebipurego.RegisterLibFunc(&_fnAudioComponentValidate, _lib, "AudioComponentValidate")
 	}
 	var _out0 AudioComponentValidationResult
-	_ret := _fnAudioComponentValidate(objref.IDOf(inComponent), objref.IDOf(inValidationParameters), unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioComponentValidate(objref.IDOf(inComponent), objref.IDOf(inValidationParameters), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioConverterConvertBuffer func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioConverterConvertBuffer func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioConverterConvertBuffer calls the AudioToolbox framework function AudioConverterConvertBuffer.
 func AudioConverterConvertBuffer(inAudioConverter obj.Object, inInputDataSize int, inInputData unsafe.Pointer, outOutputData unsafe.Pointer) (result int, ioOutputDataSize int) {
@@ -338,11 +338,11 @@ func AudioConverterConvertBuffer(inAudioConverter obj.Object, inInputDataSize in
 		ebipurego.RegisterLibFunc(&_fnAudioConverterConvertBuffer, _lib, "AudioConverterConvertBuffer")
 	}
 	var _out0 int
-	_ret := _fnAudioConverterConvertBuffer(objref.IDOf(inAudioConverter), inInputDataSize, inInputData, unsafe.Pointer(&_out0), outOutputData)
+	_ret := int(_fnAudioConverterConvertBuffer(objref.IDOf(inAudioConverter), inInputDataSize, inInputData, unsafe.Pointer(&_out0), outOutputData))
 	return _ret, _out0
 }
 
-var _fnAudioConverterFillBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioConverterFillBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioConverterFillBuffer calls the AudioToolbox framework function AudioConverterFillBuffer.
 func AudioConverterFillBuffer(inAudioConverter obj.Object, inInputDataProc unsafe.Pointer, inInputDataProcUserData unsafe.Pointer, outOutputData unsafe.Pointer) (result int, ioOutputDataSize int) {
@@ -351,11 +351,11 @@ func AudioConverterFillBuffer(inAudioConverter obj.Object, inInputDataProc unsaf
 		ebipurego.RegisterLibFunc(&_fnAudioConverterFillBuffer, _lib, "AudioConverterFillBuffer")
 	}
 	var _out0 int
-	_ret := _fnAudioConverterFillBuffer(objref.IDOf(inAudioConverter), inInputDataProc, inInputDataProcUserData, unsafe.Pointer(&_out0), outOutputData)
+	_ret := int(_fnAudioConverterFillBuffer(objref.IDOf(inAudioConverter), inInputDataProc, inInputDataProcUserData, unsafe.Pointer(&_out0), outOutputData))
 	return _ret, _out0
 }
 
-var _fnAudioConverterGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioConverterGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioConverterGetProperty calls the AudioToolbox framework function AudioConverterGetProperty.
 func AudioConverterGetProperty(inAudioConverter obj.Object, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -364,11 +364,11 @@ func AudioConverterGetProperty(inAudioConverter obj.Object, inPropertyID int, ou
 		ebipurego.RegisterLibFunc(&_fnAudioConverterGetProperty, _lib, "AudioConverterGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioConverterGetProperty(objref.IDOf(inAudioConverter), inPropertyID, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioConverterGetProperty(objref.IDOf(inAudioConverter), inPropertyID, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioConverterGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioConverterGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioConverterGetPropertyInfo calls the AudioToolbox framework function AudioConverterGetPropertyInfo.
 func AudioConverterGetPropertyInfo(inAudioConverter obj.Object, inPropertyID int) (result int, outSize int, outWritable uint8) {
@@ -378,7 +378,7 @@ func AudioConverterGetPropertyInfo(inAudioConverter obj.Object, inPropertyID int
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnAudioConverterGetPropertyInfo(objref.IDOf(inAudioConverter), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAudioConverterGetPropertyInfo(objref.IDOf(inAudioConverter), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -393,7 +393,7 @@ func AudioConverterPrepare(inFlags int, ioReserved unsafe.Pointer, inCompletionB
 	_fnAudioConverterPrepare(inFlags, ioReserved, objc.NewBlock(func(_ objc.Block, _b0 int) { inCompletionBlock(_b0) }))
 }
 
-var _fnAudioFileCountUserData func(unsafe.Pointer, int, unsafe.Pointer) int
+var _fnAudioFileCountUserData func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // AudioFileCountUserData calls the AudioToolbox framework function AudioFileCountUserData.
 func AudioFileCountUserData(inAudioFile unsafe.Pointer, inUserDataID int) (result int, outNumberItems int) {
@@ -402,11 +402,11 @@ func AudioFileCountUserData(inAudioFile unsafe.Pointer, inUserDataID int) (resul
 		ebipurego.RegisterLibFunc(&_fnAudioFileCountUserData, _lib, "AudioFileCountUserData")
 	}
 	var _out0 int
-	_ret := _fnAudioFileCountUserData(inAudioFile, inUserDataID, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioFileCountUserData(inAudioFile, inUserDataID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetGlobalInfo func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetGlobalInfo func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetGlobalInfo calls the AudioToolbox framework function AudioFileGetGlobalInfo.
 func AudioFileGetGlobalInfo(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer, outPropertyData unsafe.Pointer) (result int, ioDataSize int) {
@@ -415,11 +415,11 @@ func AudioFileGetGlobalInfo(inPropertyID int, inSpecifierSize int, inSpecifier u
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetGlobalInfo, _lib, "AudioFileGetGlobalInfo")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetGlobalInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioFileGetGlobalInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetGlobalInfoSize func(int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetGlobalInfoSize func(int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetGlobalInfoSize calls the AudioToolbox framework function AudioFileGetGlobalInfoSize.
 func AudioFileGetGlobalInfoSize(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer) (result int, outDataSize int) {
@@ -428,11 +428,11 @@ func AudioFileGetGlobalInfoSize(inPropertyID int, inSpecifierSize int, inSpecifi
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetGlobalInfoSize, _lib, "AudioFileGetGlobalInfoSize")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetGlobalInfoSize(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioFileGetGlobalInfoSize(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetProperty func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetProperty func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetProperty calls the AudioToolbox framework function AudioFileGetProperty.
 func AudioFileGetProperty(inAudioFile unsafe.Pointer, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioDataSize int) {
@@ -441,11 +441,11 @@ func AudioFileGetProperty(inAudioFile unsafe.Pointer, inPropertyID int, outPrope
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetProperty, _lib, "AudioFileGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetProperty(inAudioFile, inPropertyID, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioFileGetProperty(inAudioFile, inPropertyID, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetPropertyInfo func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetPropertyInfo func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetPropertyInfo calls the AudioToolbox framework function AudioFileGetPropertyInfo.
 func AudioFileGetPropertyInfo(inAudioFile unsafe.Pointer, inPropertyID int) (result int, outDataSize int, isWritable int) {
@@ -455,11 +455,11 @@ func AudioFileGetPropertyInfo(inAudioFile unsafe.Pointer, inPropertyID int) (res
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnAudioFileGetPropertyInfo(inAudioFile, inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAudioFileGetPropertyInfo(inAudioFile, inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnAudioFileGetUserData func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetUserData func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetUserData calls the AudioToolbox framework function AudioFileGetUserData.
 func AudioFileGetUserData(inAudioFile unsafe.Pointer, inUserDataID int, inIndex int, outUserData unsafe.Pointer) (result int, ioUserDataSize int) {
@@ -468,11 +468,11 @@ func AudioFileGetUserData(inAudioFile unsafe.Pointer, inUserDataID int, inIndex 
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetUserData, _lib, "AudioFileGetUserData")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetUserData(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0), outUserData)
+	_ret := int(_fnAudioFileGetUserData(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0), outUserData))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetUserDataAtOffset func(unsafe.Pointer, int, int, int64, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileGetUserDataAtOffset func(unsafe.Pointer, int, int, int64, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileGetUserDataAtOffset calls the AudioToolbox framework function AudioFileGetUserDataAtOffset.
 func AudioFileGetUserDataAtOffset(inAudioFile unsafe.Pointer, inUserDataID int, inIndex int, inOffset int64, outUserData unsafe.Pointer) (result int, ioUserDataSize int) {
@@ -481,11 +481,11 @@ func AudioFileGetUserDataAtOffset(inAudioFile unsafe.Pointer, inUserDataID int, 
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetUserDataAtOffset, _lib, "AudioFileGetUserDataAtOffset")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetUserDataAtOffset(inAudioFile, inUserDataID, inIndex, inOffset, unsafe.Pointer(&_out0), outUserData)
+	_ret := int(_fnAudioFileGetUserDataAtOffset(inAudioFile, inUserDataID, inIndex, inOffset, unsafe.Pointer(&_out0), outUserData))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetUserDataSize func(unsafe.Pointer, int, int, unsafe.Pointer) int
+var _fnAudioFileGetUserDataSize func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // AudioFileGetUserDataSize calls the AudioToolbox framework function AudioFileGetUserDataSize.
 func AudioFileGetUserDataSize(inAudioFile unsafe.Pointer, inUserDataID int, inIndex int) (result int, outUserDataSize int) {
@@ -494,11 +494,11 @@ func AudioFileGetUserDataSize(inAudioFile unsafe.Pointer, inUserDataID int, inIn
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetUserDataSize, _lib, "AudioFileGetUserDataSize")
 	}
 	var _out0 int
-	_ret := _fnAudioFileGetUserDataSize(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioFileGetUserDataSize(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioFileGetUserDataSize64 func(unsafe.Pointer, int, int, unsafe.Pointer) int
+var _fnAudioFileGetUserDataSize64 func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // AudioFileGetUserDataSize64 calls the AudioToolbox framework function AudioFileGetUserDataSize64.
 func AudioFileGetUserDataSize64(inAudioFile unsafe.Pointer, inUserDataID int, inIndex int) (result int, outUserDataSize uint64) {
@@ -507,11 +507,11 @@ func AudioFileGetUserDataSize64(inAudioFile unsafe.Pointer, inUserDataID int, in
 		ebipurego.RegisterLibFunc(&_fnAudioFileGetUserDataSize64, _lib, "AudioFileGetUserDataSize64")
 	}
 	var _out0 uint64
-	_ret := _fnAudioFileGetUserDataSize64(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioFileGetUserDataSize64(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioFileReadBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileReadBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileReadBytes calls the AudioToolbox framework function AudioFileReadBytes.
 func AudioFileReadBytes(inAudioFile unsafe.Pointer, inUseCache uint8, inStartingByte int64, outBuffer unsafe.Pointer) (result int, ioNumBytes int) {
@@ -520,11 +520,11 @@ func AudioFileReadBytes(inAudioFile unsafe.Pointer, inUseCache uint8, inStarting
 		ebipurego.RegisterLibFunc(&_fnAudioFileReadBytes, _lib, "AudioFileReadBytes")
 	}
 	var _out0 int
-	_ret := _fnAudioFileReadBytes(inAudioFile, inUseCache, inStartingByte, unsafe.Pointer(&_out0), outBuffer)
+	_ret := int(_fnAudioFileReadBytes(inAudioFile, inUseCache, inStartingByte, unsafe.Pointer(&_out0), outBuffer))
 	return _ret, _out0
 }
 
-var _fnAudioFileStreamGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileStreamGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileStreamGetProperty calls the AudioToolbox framework function AudioFileStreamGetProperty.
 func AudioFileStreamGetProperty(inAudioFileStream obj.Object, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -533,11 +533,11 @@ func AudioFileStreamGetProperty(inAudioFileStream obj.Object, inPropertyID int, 
 		ebipurego.RegisterLibFunc(&_fnAudioFileStreamGetProperty, _lib, "AudioFileStreamGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioFileStreamGetProperty(objref.IDOf(inAudioFileStream), inPropertyID, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioFileStreamGetProperty(objref.IDOf(inAudioFileStream), inPropertyID, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioFileStreamGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileStreamGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileStreamGetPropertyInfo calls the AudioToolbox framework function AudioFileStreamGetPropertyInfo.
 func AudioFileStreamGetPropertyInfo(inAudioFileStream obj.Object, inPropertyID int) (result int, outPropertyDataSize int, outWritable uint8) {
@@ -547,11 +547,11 @@ func AudioFileStreamGetPropertyInfo(inAudioFileStream obj.Object, inPropertyID i
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnAudioFileStreamGetPropertyInfo(objref.IDOf(inAudioFileStream), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAudioFileStreamGetPropertyInfo(objref.IDOf(inAudioFileStream), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnAudioFileStreamSeek func(objc.ID, int64, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileStreamSeek func(objc.ID, int64, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileStreamSeek calls the AudioToolbox framework function AudioFileStreamSeek.
 func AudioFileStreamSeek(inAudioFileStream obj.Object, inPacketOffset int64) (result int, outDataByteOffset int64, ioFlags AudioFileStreamSeekFlags) {
@@ -561,11 +561,11 @@ func AudioFileStreamSeek(inAudioFileStream obj.Object, inPacketOffset int64) (re
 	}
 	var _out0 int64
 	var _out1 AudioFileStreamSeekFlags
-	_ret := _fnAudioFileStreamSeek(objref.IDOf(inAudioFileStream), inPacketOffset, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAudioFileStreamSeek(objref.IDOf(inAudioFileStream), inPacketOffset, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnAudioFileWriteBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFileWriteBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileWriteBytes calls the AudioToolbox framework function AudioFileWriteBytes.
 func AudioFileWriteBytes(inAudioFile unsafe.Pointer, inUseCache uint8, inStartingByte int64, inBuffer unsafe.Pointer) (result int, ioNumBytes int) {
@@ -574,11 +574,11 @@ func AudioFileWriteBytes(inAudioFile unsafe.Pointer, inUseCache uint8, inStartin
 		ebipurego.RegisterLibFunc(&_fnAudioFileWriteBytes, _lib, "AudioFileWriteBytes")
 	}
 	var _out0 int
-	_ret := _fnAudioFileWriteBytes(inAudioFile, inUseCache, inStartingByte, unsafe.Pointer(&_out0), inBuffer)
+	_ret := int(_fnAudioFileWriteBytes(inAudioFile, inUseCache, inStartingByte, unsafe.Pointer(&_out0), inBuffer))
 	return _ret, _out0
 }
 
-var _fnAudioFormatGetProperty func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFormatGetProperty func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFormatGetProperty calls the AudioToolbox framework function AudioFormatGetProperty.
 func AudioFormatGetProperty(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -587,11 +587,11 @@ func AudioFormatGetProperty(inPropertyID int, inSpecifierSize int, inSpecifier u
 		ebipurego.RegisterLibFunc(&_fnAudioFormatGetProperty, _lib, "AudioFormatGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioFormatGetProperty(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioFormatGetProperty(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioFormatGetPropertyInfo func(int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioFormatGetPropertyInfo func(int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFormatGetPropertyInfo calls the AudioToolbox framework function AudioFormatGetPropertyInfo.
 func AudioFormatGetPropertyInfo(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer) (result int, outPropertyDataSize int) {
@@ -600,11 +600,11 @@ func AudioFormatGetPropertyInfo(inPropertyID int, inSpecifierSize int, inSpecifi
 		ebipurego.RegisterLibFunc(&_fnAudioFormatGetPropertyInfo, _lib, "AudioFormatGetPropertyInfo")
 	}
 	var _out0 int
-	_ret := _fnAudioFormatGetPropertyInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioFormatGetPropertyInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioQueueGetParameter func(objc.ID, int, unsafe.Pointer) int
+var _fnAudioQueueGetParameter func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueueGetParameter calls the AudioToolbox framework function AudioQueueGetParameter.
 func AudioQueueGetParameter(inAQ obj.Object, inParamID int) (result int, outValue float32) {
@@ -613,11 +613,11 @@ func AudioQueueGetParameter(inAQ obj.Object, inParamID int) (result int, outValu
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetParameter, _lib, "AudioQueueGetParameter")
 	}
 	var _out0 float32
-	_ret := _fnAudioQueueGetParameter(objref.IDOf(inAQ), inParamID, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioQueueGetParameter(objref.IDOf(inAQ), inParamID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioQueueGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioQueueGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioQueueGetProperty calls the AudioToolbox framework function AudioQueueGetProperty.
 func AudioQueueGetProperty(inAQ obj.Object, inID int, outData unsafe.Pointer) (result int, ioDataSize int) {
@@ -626,11 +626,11 @@ func AudioQueueGetProperty(inAQ obj.Object, inID int, outData unsafe.Pointer) (r
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetProperty, _lib, "AudioQueueGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioQueueGetProperty(objref.IDOf(inAQ), inID, outData, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioQueueGetProperty(objref.IDOf(inAQ), inID, outData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioQueueGetPropertySize func(objc.ID, int, unsafe.Pointer) int
+var _fnAudioQueueGetPropertySize func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueueGetPropertySize calls the AudioToolbox framework function AudioQueueGetPropertySize.
 func AudioQueueGetPropertySize(inAQ obj.Object, inID int) (result int, outDataSize int) {
@@ -639,11 +639,11 @@ func AudioQueueGetPropertySize(inAQ obj.Object, inID int) (result int, outDataSi
 		ebipurego.RegisterLibFunc(&_fnAudioQueueGetPropertySize, _lib, "AudioQueueGetPropertySize")
 	}
 	var _out0 int
-	_ret := _fnAudioQueueGetPropertySize(objref.IDOf(inAQ), inID, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioQueueGetPropertySize(objref.IDOf(inAQ), inID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioQueuePrime func(objc.ID, int, unsafe.Pointer) int
+var _fnAudioQueuePrime func(objc.ID, int, unsafe.Pointer) int32
 
 // AudioQueuePrime calls the AudioToolbox framework function AudioQueuePrime.
 func AudioQueuePrime(inAQ obj.Object, inNumberOfFramesToPrepare int) (result int, outNumberOfFramesPrepared int) {
@@ -652,11 +652,11 @@ func AudioQueuePrime(inAQ obj.Object, inNumberOfFramesToPrepare int) (result int
 		ebipurego.RegisterLibFunc(&_fnAudioQueuePrime, _lib, "AudioQueuePrime")
 	}
 	var _out0 int
-	_ret := _fnAudioQueuePrime(objref.IDOf(inAQ), inNumberOfFramesToPrepare, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioQueuePrime(objref.IDOf(inAQ), inNumberOfFramesToPrepare, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioQueueProcessingTapGetQueueTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioQueueProcessingTapGetQueueTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioQueueProcessingTapGetQueueTime calls the AudioToolbox framework function AudioQueueProcessingTapGetQueueTime.
 func AudioQueueProcessingTapGetQueueTime(inAQTap obj.Object, outQueueSampleTime unsafe.Pointer) (result int, outQueueFrameCount int) {
@@ -665,11 +665,11 @@ func AudioQueueProcessingTapGetQueueTime(inAQTap obj.Object, outQueueSampleTime 
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapGetQueueTime, _lib, "AudioQueueProcessingTapGetQueueTime")
 	}
 	var _out0 int
-	_ret := _fnAudioQueueProcessingTapGetQueueTime(objref.IDOf(inAQTap), outQueueSampleTime, unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioQueueProcessingTapGetQueueTime(objref.IDOf(inAQTap), outQueueSampleTime, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int
+var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int32
 
 // AudioServicesCreateSystemSoundID calls the AudioToolbox framework function AudioServicesCreateSystemSoundID.
 func AudioServicesCreateSystemSoundID(inFileURL obj.Object) (result int, outSystemSoundID int) {
@@ -678,11 +678,11 @@ func AudioServicesCreateSystemSoundID(inFileURL obj.Object) (result int, outSyst
 		ebipurego.RegisterLibFunc(&_fnAudioServicesCreateSystemSoundID, _lib, "AudioServicesCreateSystemSoundID")
 	}
 	var _out0 int
-	_ret := _fnAudioServicesCreateSystemSoundID(objref.IDOf(inFileURL), unsafe.Pointer(&_out0))
+	_ret := int(_fnAudioServicesCreateSystemSoundID(objref.IDOf(inFileURL), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnAudioServicesGetProperty func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioServicesGetProperty func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioServicesGetProperty calls the AudioToolbox framework function AudioServicesGetProperty.
 func AudioServicesGetProperty(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -691,11 +691,11 @@ func AudioServicesGetProperty(inPropertyID int, inSpecifierSize int, inSpecifier
 		ebipurego.RegisterLibFunc(&_fnAudioServicesGetProperty, _lib, "AudioServicesGetProperty")
 	}
 	var _out0 int
-	_ret := _fnAudioServicesGetProperty(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnAudioServicesGetProperty(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnAudioServicesGetPropertyInfo func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnAudioServicesGetPropertyInfo func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioServicesGetPropertyInfo calls the AudioToolbox framework function AudioServicesGetPropertyInfo.
 func AudioServicesGetPropertyInfo(inPropertyID int, inSpecifierSize int, inSpecifier unsafe.Pointer) (result int, outPropertyDataSize int, outWritable uint8) {
@@ -705,7 +705,7 @@ func AudioServicesGetPropertyInfo(inPropertyID int, inSpecifierSize int, inSpeci
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnAudioServicesGetPropertyInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnAudioServicesGetPropertyInfo(inPropertyID, inSpecifierSize, inSpecifier, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -776,7 +776,7 @@ func AudioUnitExtensionCopyComponentList(extensionIdentifier obj.Object) obj.Obj
 	return obj.Wrap(_ret)
 }
 
-var _fnCAClockBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCAClockBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CAClockBarBeatTimeToBeats calls the AudioToolbox framework function CAClockBarBeatTimeToBeats.
 func CAClockBarBeatTimeToBeats(inCAClock obj.Object) (result int, inBarBeatTime CABarBeatTime, outBeats float64) {
@@ -786,11 +786,11 @@ func CAClockBarBeatTimeToBeats(inCAClock obj.Object) (result int, inBarBeatTime 
 	}
 	var _out0 CABarBeatTime
 	var _out1 float64
-	_ret := _fnCAClockBarBeatTimeToBeats(objref.IDOf(inCAClock), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCAClockBarBeatTimeToBeats(objref.IDOf(inCAClock), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCAClockBeatsToBarBeatTime func(objc.ID, float64, uint16, unsafe.Pointer) int
+var _fnCAClockBeatsToBarBeatTime func(objc.ID, float64, uint16, unsafe.Pointer) int32
 
 // CAClockBeatsToBarBeatTime calls the AudioToolbox framework function CAClockBeatsToBarBeatTime.
 func CAClockBeatsToBarBeatTime(inCAClock obj.Object, inBeats float64, inSubbeatDivisor uint16) (result int, outBarBeatTime CABarBeatTime) {
@@ -799,11 +799,11 @@ func CAClockBeatsToBarBeatTime(inCAClock obj.Object, inBeats float64, inSubbeatD
 		ebipurego.RegisterLibFunc(&_fnCAClockBeatsToBarBeatTime, _lib, "CAClockBeatsToBarBeatTime")
 	}
 	var _out0 CABarBeatTime
-	_ret := _fnCAClockBeatsToBarBeatTime(objref.IDOf(inCAClock), inBeats, inSubbeatDivisor, unsafe.Pointer(&_out0))
+	_ret := int(_fnCAClockBeatsToBarBeatTime(objref.IDOf(inCAClock), inBeats, inSubbeatDivisor, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCAClockGetPlayRate func(objc.ID, unsafe.Pointer) int
+var _fnCAClockGetPlayRate func(objc.ID, unsafe.Pointer) int32
 
 // CAClockGetPlayRate calls the AudioToolbox framework function CAClockGetPlayRate.
 func CAClockGetPlayRate(inCAClock obj.Object) (result int, outPlayRate float64) {
@@ -812,11 +812,11 @@ func CAClockGetPlayRate(inCAClock obj.Object) (result int, outPlayRate float64) 
 		ebipurego.RegisterLibFunc(&_fnCAClockGetPlayRate, _lib, "CAClockGetPlayRate")
 	}
 	var _out0 float64
-	_ret := _fnCAClockGetPlayRate(objref.IDOf(inCAClock), unsafe.Pointer(&_out0))
+	_ret := int(_fnCAClockGetPlayRate(objref.IDOf(inCAClock), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCAClockGetProperty func(objc.ID, CAClockPropertyID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCAClockGetProperty func(objc.ID, CAClockPropertyID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CAClockGetProperty calls the AudioToolbox framework function CAClockGetProperty.
 func CAClockGetProperty(inCAClock obj.Object, inPropertyID CAClockPropertyID, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -825,11 +825,11 @@ func CAClockGetProperty(inCAClock obj.Object, inPropertyID CAClockPropertyID, ou
 		ebipurego.RegisterLibFunc(&_fnCAClockGetProperty, _lib, "CAClockGetProperty")
 	}
 	var _out0 int
-	_ret := _fnCAClockGetProperty(objref.IDOf(inCAClock), inPropertyID, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnCAClockGetProperty(objref.IDOf(inCAClock), inPropertyID, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnCAClockGetPropertyInfo func(objc.ID, CAClockPropertyID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCAClockGetPropertyInfo func(objc.ID, CAClockPropertyID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CAClockGetPropertyInfo calls the AudioToolbox framework function CAClockGetPropertyInfo.
 func CAClockGetPropertyInfo(inCAClock obj.Object, inPropertyID CAClockPropertyID) (result int, outSize int, outWritable uint8) {
@@ -839,7 +839,7 @@ func CAClockGetPropertyInfo(inCAClock obj.Object, inPropertyID CAClockPropertyID
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnCAClockGetPropertyInfo(objref.IDOf(inCAClock), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCAClockGetPropertyInfo(objref.IDOf(inCAClock), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -865,7 +865,7 @@ func CAShowFile(inObject unsafe.Pointer, inFile unsafe.Pointer) {
 	_fnCAShowFile(inObject, inFile)
 }
 
-var _fnExtAudioFileGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnExtAudioFileGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ExtAudioFileGetProperty calls the AudioToolbox framework function ExtAudioFileGetProperty.
 func ExtAudioFileGetProperty(inExtAudioFile obj.Object, inPropertyID int, outPropertyData unsafe.Pointer) (result int, ioPropertyDataSize int) {
@@ -874,11 +874,11 @@ func ExtAudioFileGetProperty(inExtAudioFile obj.Object, inPropertyID int, outPro
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileGetProperty, _lib, "ExtAudioFileGetProperty")
 	}
 	var _out0 int
-	_ret := _fnExtAudioFileGetProperty(objref.IDOf(inExtAudioFile), inPropertyID, unsafe.Pointer(&_out0), outPropertyData)
+	_ret := int(_fnExtAudioFileGetProperty(objref.IDOf(inExtAudioFile), inPropertyID, unsafe.Pointer(&_out0), outPropertyData))
 	return _ret, _out0
 }
 
-var _fnExtAudioFileGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnExtAudioFileGetPropertyInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ExtAudioFileGetPropertyInfo calls the AudioToolbox framework function ExtAudioFileGetPropertyInfo.
 func ExtAudioFileGetPropertyInfo(inExtAudioFile obj.Object, inPropertyID int) (result int, outSize int, outWritable uint8) {
@@ -888,11 +888,11 @@ func ExtAudioFileGetPropertyInfo(inExtAudioFile obj.Object, inPropertyID int) (r
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnExtAudioFileGetPropertyInfo(objref.IDOf(inExtAudioFile), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnExtAudioFileGetPropertyInfo(objref.IDOf(inExtAudioFile), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnExtAudioFileTell func(objc.ID, unsafe.Pointer) int
+var _fnExtAudioFileTell func(objc.ID, unsafe.Pointer) int32
 
 // ExtAudioFileTell calls the AudioToolbox framework function ExtAudioFileTell.
 func ExtAudioFileTell(inExtAudioFile obj.Object) (result int, outFrameOffset int64) {
@@ -901,7 +901,7 @@ func ExtAudioFileTell(inExtAudioFile obj.Object) (result int, outFrameOffset int
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileTell, _lib, "ExtAudioFileTell")
 	}
 	var _out0 int64
-	_ret := _fnExtAudioFileTell(objref.IDOf(inExtAudioFile), unsafe.Pointer(&_out0))
+	_ret := int(_fnExtAudioFileTell(objref.IDOf(inExtAudioFile), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -916,7 +916,7 @@ func GetAudioUnitParameterDisplayType(flags AudioUnitParameterOptions) AudioUnit
 	return _fnGetAudioUnitParameterDisplayType(flags)
 }
 
-var _fnMusicEventIteratorGetEventInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnMusicEventIteratorGetEventInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // MusicEventIteratorGetEventInfo calls the AudioToolbox framework function MusicEventIteratorGetEventInfo.
 func MusicEventIteratorGetEventInfo(inIterator obj.Object, outEventData unsafe.Pointer) (result int, outTimeStamp float64, outEventType int, outEventDataSize int) {
@@ -927,11 +927,11 @@ func MusicEventIteratorGetEventInfo(inIterator obj.Object, outEventData unsafe.P
 	var _out0 float64
 	var _out1 int
 	var _out2 int
-	_ret := _fnMusicEventIteratorGetEventInfo(objref.IDOf(inIterator), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outEventData, unsafe.Pointer(&_out2))
+	_ret := int(_fnMusicEventIteratorGetEventInfo(objref.IDOf(inIterator), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outEventData, unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnMusicEventIteratorHasCurrentEvent func(objc.ID, unsafe.Pointer) int
+var _fnMusicEventIteratorHasCurrentEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasCurrentEvent calls the AudioToolbox framework function MusicEventIteratorHasCurrentEvent.
 func MusicEventIteratorHasCurrentEvent(inIterator obj.Object) (result int, outHasCurEvent uint8) {
@@ -940,11 +940,11 @@ func MusicEventIteratorHasCurrentEvent(inIterator obj.Object) (result int, outHa
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasCurrentEvent, _lib, "MusicEventIteratorHasCurrentEvent")
 	}
 	var _out0 uint8
-	_ret := _fnMusicEventIteratorHasCurrentEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicEventIteratorHasCurrentEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicEventIteratorHasNextEvent func(objc.ID, unsafe.Pointer) int
+var _fnMusicEventIteratorHasNextEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasNextEvent calls the AudioToolbox framework function MusicEventIteratorHasNextEvent.
 func MusicEventIteratorHasNextEvent(inIterator obj.Object) (result int, outHasNextEvent uint8) {
@@ -953,11 +953,11 @@ func MusicEventIteratorHasNextEvent(inIterator obj.Object) (result int, outHasNe
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasNextEvent, _lib, "MusicEventIteratorHasNextEvent")
 	}
 	var _out0 uint8
-	_ret := _fnMusicEventIteratorHasNextEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicEventIteratorHasNextEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicEventIteratorHasPreviousEvent func(objc.ID, unsafe.Pointer) int
+var _fnMusicEventIteratorHasPreviousEvent func(objc.ID, unsafe.Pointer) int32
 
 // MusicEventIteratorHasPreviousEvent calls the AudioToolbox framework function MusicEventIteratorHasPreviousEvent.
 func MusicEventIteratorHasPreviousEvent(inIterator obj.Object) (result int, outHasPrevEvent uint8) {
@@ -966,11 +966,11 @@ func MusicEventIteratorHasPreviousEvent(inIterator obj.Object) (result int, outH
 		ebipurego.RegisterLibFunc(&_fnMusicEventIteratorHasPreviousEvent, _lib, "MusicEventIteratorHasPreviousEvent")
 	}
 	var _out0 uint8
-	_ret := _fnMusicEventIteratorHasPreviousEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicEventIteratorHasPreviousEvent(objref.IDOf(inIterator), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicPlayerGetBeatsForHostTime func(objc.ID, uint64, unsafe.Pointer) int
+var _fnMusicPlayerGetBeatsForHostTime func(objc.ID, uint64, unsafe.Pointer) int32
 
 // MusicPlayerGetBeatsForHostTime calls the AudioToolbox framework function MusicPlayerGetBeatsForHostTime.
 func MusicPlayerGetBeatsForHostTime(inPlayer obj.Object, inHostTime uint64) (result int, outBeats float64) {
@@ -979,11 +979,11 @@ func MusicPlayerGetBeatsForHostTime(inPlayer obj.Object, inHostTime uint64) (res
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetBeatsForHostTime, _lib, "MusicPlayerGetBeatsForHostTime")
 	}
 	var _out0 float64
-	_ret := _fnMusicPlayerGetBeatsForHostTime(objref.IDOf(inPlayer), inHostTime, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicPlayerGetBeatsForHostTime(objref.IDOf(inPlayer), inHostTime, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicPlayerGetHostTimeForBeats func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicPlayerGetHostTimeForBeats func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicPlayerGetHostTimeForBeats calls the AudioToolbox framework function MusicPlayerGetHostTimeForBeats.
 func MusicPlayerGetHostTimeForBeats(inPlayer obj.Object, inBeats float64) (result int, outHostTime uint64) {
@@ -992,11 +992,11 @@ func MusicPlayerGetHostTimeForBeats(inPlayer obj.Object, inBeats float64) (resul
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetHostTimeForBeats, _lib, "MusicPlayerGetHostTimeForBeats")
 	}
 	var _out0 uint64
-	_ret := _fnMusicPlayerGetHostTimeForBeats(objref.IDOf(inPlayer), inBeats, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicPlayerGetHostTimeForBeats(objref.IDOf(inPlayer), inBeats, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicPlayerGetPlayRateScalar func(objc.ID, unsafe.Pointer) int
+var _fnMusicPlayerGetPlayRateScalar func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerGetPlayRateScalar calls the AudioToolbox framework function MusicPlayerGetPlayRateScalar.
 func MusicPlayerGetPlayRateScalar(inPlayer obj.Object) (result int, outScaleRate float64) {
@@ -1005,11 +1005,11 @@ func MusicPlayerGetPlayRateScalar(inPlayer obj.Object) (result int, outScaleRate
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetPlayRateScalar, _lib, "MusicPlayerGetPlayRateScalar")
 	}
 	var _out0 float64
-	_ret := _fnMusicPlayerGetPlayRateScalar(objref.IDOf(inPlayer), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicPlayerGetPlayRateScalar(objref.IDOf(inPlayer), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicPlayerGetTime func(objc.ID, unsafe.Pointer) int
+var _fnMusicPlayerGetTime func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerGetTime calls the AudioToolbox framework function MusicPlayerGetTime.
 func MusicPlayerGetTime(inPlayer obj.Object) (result int, outTime float64) {
@@ -1018,11 +1018,11 @@ func MusicPlayerGetTime(inPlayer obj.Object) (result int, outTime float64) {
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerGetTime, _lib, "MusicPlayerGetTime")
 	}
 	var _out0 float64
-	_ret := _fnMusicPlayerGetTime(objref.IDOf(inPlayer), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicPlayerGetTime(objref.IDOf(inPlayer), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicPlayerIsPlaying func(objc.ID, unsafe.Pointer) int
+var _fnMusicPlayerIsPlaying func(objc.ID, unsafe.Pointer) int32
 
 // MusicPlayerIsPlaying calls the AudioToolbox framework function MusicPlayerIsPlaying.
 func MusicPlayerIsPlaying(inPlayer obj.Object) (result int, outIsPlaying uint8) {
@@ -1031,11 +1031,11 @@ func MusicPlayerIsPlaying(inPlayer obj.Object) (result int, outIsPlaying uint8) 
 		ebipurego.RegisterLibFunc(&_fnMusicPlayerIsPlaying, _lib, "MusicPlayerIsPlaying")
 	}
 	var _out0 uint8
-	_ret := _fnMusicPlayerIsPlaying(objref.IDOf(inPlayer), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicPlayerIsPlaying(objref.IDOf(inPlayer), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicSequenceBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnMusicSequenceBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // MusicSequenceBarBeatTimeToBeats calls the AudioToolbox framework function MusicSequenceBarBeatTimeToBeats.
 func MusicSequenceBarBeatTimeToBeats(inSequence obj.Object) (result int, inBarBeatTime CABarBeatTime, outBeats float64) {
@@ -1045,11 +1045,11 @@ func MusicSequenceBarBeatTimeToBeats(inSequence obj.Object) (result int, inBarBe
 	}
 	var _out0 CABarBeatTime
 	var _out1 float64
-	_ret := _fnMusicSequenceBarBeatTimeToBeats(objref.IDOf(inSequence), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnMusicSequenceBarBeatTimeToBeats(objref.IDOf(inSequence), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnMusicSequenceBeatsToBarBeatTime func(objc.ID, float64, int, unsafe.Pointer) int
+var _fnMusicSequenceBeatsToBarBeatTime func(objc.ID, float64, int, unsafe.Pointer) int32
 
 // MusicSequenceBeatsToBarBeatTime calls the AudioToolbox framework function MusicSequenceBeatsToBarBeatTime.
 func MusicSequenceBeatsToBarBeatTime(inSequence obj.Object, inBeats float64, inSubbeatDivisor int) (result int, outBarBeatTime CABarBeatTime) {
@@ -1058,11 +1058,11 @@ func MusicSequenceBeatsToBarBeatTime(inSequence obj.Object, inBeats float64, inS
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceBeatsToBarBeatTime, _lib, "MusicSequenceBeatsToBarBeatTime")
 	}
 	var _out0 CABarBeatTime
-	_ret := _fnMusicSequenceBeatsToBarBeatTime(objref.IDOf(inSequence), inBeats, inSubbeatDivisor, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceBeatsToBarBeatTime(objref.IDOf(inSequence), inBeats, inSubbeatDivisor, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicSequenceGetBeatsForSeconds func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicSequenceGetBeatsForSeconds func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicSequenceGetBeatsForSeconds calls the AudioToolbox framework function MusicSequenceGetBeatsForSeconds.
 func MusicSequenceGetBeatsForSeconds(inSequence obj.Object, inSeconds float64) (result int, outBeats float64) {
@@ -1071,7 +1071,7 @@ func MusicSequenceGetBeatsForSeconds(inSequence obj.Object, inSeconds float64) (
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetBeatsForSeconds, _lib, "MusicSequenceGetBeatsForSeconds")
 	}
 	var _out0 float64
-	_ret := _fnMusicSequenceGetBeatsForSeconds(objref.IDOf(inSequence), inSeconds, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceGetBeatsForSeconds(objref.IDOf(inSequence), inSeconds, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1101,7 +1101,7 @@ func MusicSequenceGetSMPTEResolution(inRes int16) (fps int8, ticks uint8) {
 	return _out0, _out1
 }
 
-var _fnMusicSequenceGetSecondsForBeats func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicSequenceGetSecondsForBeats func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicSequenceGetSecondsForBeats calls the AudioToolbox framework function MusicSequenceGetSecondsForBeats.
 func MusicSequenceGetSecondsForBeats(inSequence obj.Object, inBeats float64) (result int, outSeconds float64) {
@@ -1110,11 +1110,11 @@ func MusicSequenceGetSecondsForBeats(inSequence obj.Object, inBeats float64) (re
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetSecondsForBeats, _lib, "MusicSequenceGetSecondsForBeats")
 	}
 	var _out0 float64
-	_ret := _fnMusicSequenceGetSecondsForBeats(objref.IDOf(inSequence), inBeats, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceGetSecondsForBeats(objref.IDOf(inSequence), inBeats, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicSequenceGetSequenceType func(objc.ID, unsafe.Pointer) int
+var _fnMusicSequenceGetSequenceType func(objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetSequenceType calls the AudioToolbox framework function MusicSequenceGetSequenceType.
 func MusicSequenceGetSequenceType(inSequence obj.Object) (result int, outType MusicSequenceType) {
@@ -1123,11 +1123,11 @@ func MusicSequenceGetSequenceType(inSequence obj.Object) (result int, outType Mu
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetSequenceType, _lib, "MusicSequenceGetSequenceType")
 	}
 	var _out0 MusicSequenceType
-	_ret := _fnMusicSequenceGetSequenceType(objref.IDOf(inSequence), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceGetSequenceType(objref.IDOf(inSequence), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicSequenceGetTrackCount func(objc.ID, unsafe.Pointer) int
+var _fnMusicSequenceGetTrackCount func(objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetTrackCount calls the AudioToolbox framework function MusicSequenceGetTrackCount.
 func MusicSequenceGetTrackCount(inSequence obj.Object) (result int, outNumberOfTracks int) {
@@ -1136,11 +1136,11 @@ func MusicSequenceGetTrackCount(inSequence obj.Object) (result int, outNumberOfT
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetTrackCount, _lib, "MusicSequenceGetTrackCount")
 	}
 	var _out0 int
-	_ret := _fnMusicSequenceGetTrackCount(objref.IDOf(inSequence), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceGetTrackCount(objref.IDOf(inSequence), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicSequenceGetTrackIndex func(objc.ID, objc.ID, unsafe.Pointer) int
+var _fnMusicSequenceGetTrackIndex func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // MusicSequenceGetTrackIndex calls the AudioToolbox framework function MusicSequenceGetTrackIndex.
 func MusicSequenceGetTrackIndex(inSequence obj.Object, inTrack obj.Object) (result int, outTrackIndex int) {
@@ -1149,7 +1149,7 @@ func MusicSequenceGetTrackIndex(inSequence obj.Object, inTrack obj.Object) (resu
 		ebipurego.RegisterLibFunc(&_fnMusicSequenceGetTrackIndex, _lib, "MusicSequenceGetTrackIndex")
 	}
 	var _out0 int
-	_ret := _fnMusicSequenceGetTrackIndex(objref.IDOf(inSequence), objref.IDOf(inTrack), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicSequenceGetTrackIndex(objref.IDOf(inSequence), objref.IDOf(inTrack), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1164,7 +1164,7 @@ func MusicSequenceSetSMPTEResolution(fps int8, ticks uint8) int16 {
 	return _fnMusicSequenceSetSMPTEResolution(fps, ticks)
 }
 
-var _fnMusicTrackGetDestMIDIEndpoint func(objc.ID, unsafe.Pointer) int
+var _fnMusicTrackGetDestMIDIEndpoint func(objc.ID, unsafe.Pointer) int32
 
 // MusicTrackGetDestMIDIEndpoint calls the AudioToolbox framework function MusicTrackGetDestMIDIEndpoint.
 func MusicTrackGetDestMIDIEndpoint(inTrack obj.Object) (result int, outEndpoint int) {
@@ -1173,11 +1173,11 @@ func MusicTrackGetDestMIDIEndpoint(inTrack obj.Object) (result int, outEndpoint 
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetDestMIDIEndpoint, _lib, "MusicTrackGetDestMIDIEndpoint")
 	}
 	var _out0 int
-	_ret := _fnMusicTrackGetDestMIDIEndpoint(objref.IDOf(inTrack), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackGetDestMIDIEndpoint(objref.IDOf(inTrack), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackGetDestNode func(objc.ID, unsafe.Pointer) int
+var _fnMusicTrackGetDestNode func(objc.ID, unsafe.Pointer) int32
 
 // MusicTrackGetDestNode calls the AudioToolbox framework function MusicTrackGetDestNode.
 func MusicTrackGetDestNode(inTrack obj.Object) (result int, outNode int) {
@@ -1186,11 +1186,11 @@ func MusicTrackGetDestNode(inTrack obj.Object) (result int, outNode int) {
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetDestNode, _lib, "MusicTrackGetDestNode")
 	}
 	var _out0 int
-	_ret := _fnMusicTrackGetDestNode(objref.IDOf(inTrack), unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackGetDestNode(objref.IDOf(inTrack), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnMusicTrackGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // MusicTrackGetProperty calls the AudioToolbox framework function MusicTrackGetProperty.
 func MusicTrackGetProperty(inTrack obj.Object, inPropertyID int, outData unsafe.Pointer) (result int, ioLength int) {
@@ -1199,11 +1199,11 @@ func MusicTrackGetProperty(inTrack obj.Object, inPropertyID int, outData unsafe.
 		ebipurego.RegisterLibFunc(&_fnMusicTrackGetProperty, _lib, "MusicTrackGetProperty")
 	}
 	var _out0 int
-	_ret := _fnMusicTrackGetProperty(objref.IDOf(inTrack), inPropertyID, outData, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackGetProperty(objref.IDOf(inTrack), inPropertyID, outData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackNewExtendedControlEvent func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicTrackNewExtendedControlEvent func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicTrackNewExtendedControlEvent calls the AudioToolbox framework function MusicTrackNewExtendedControlEvent.
 func MusicTrackNewExtendedControlEvent(inTrack obj.Object, inTimeStamp float64) (result int, inInfo ExtendedControlEvent) {
@@ -1212,11 +1212,11 @@ func MusicTrackNewExtendedControlEvent(inTrack obj.Object, inTimeStamp float64) 
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewExtendedControlEvent, _lib, "MusicTrackNewExtendedControlEvent")
 	}
 	var _out0 ExtendedControlEvent
-	_ret := _fnMusicTrackNewExtendedControlEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackNewExtendedControlEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackNewMIDIChannelEvent func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicTrackNewMIDIChannelEvent func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicTrackNewMIDIChannelEvent calls the AudioToolbox framework function MusicTrackNewMIDIChannelEvent.
 func MusicTrackNewMIDIChannelEvent(inTrack obj.Object, inTimeStamp float64) (result int, inMessage MIDIChannelMessage) {
@@ -1225,11 +1225,11 @@ func MusicTrackNewMIDIChannelEvent(inTrack obj.Object, inTimeStamp float64) (res
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewMIDIChannelEvent, _lib, "MusicTrackNewMIDIChannelEvent")
 	}
 	var _out0 MIDIChannelMessage
-	_ret := _fnMusicTrackNewMIDIChannelEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackNewMIDIChannelEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackNewMIDINoteEvent func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicTrackNewMIDINoteEvent func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicTrackNewMIDINoteEvent calls the AudioToolbox framework function MusicTrackNewMIDINoteEvent.
 func MusicTrackNewMIDINoteEvent(inTrack obj.Object, inTimeStamp float64) (result int, inMessage MIDINoteMessage) {
@@ -1238,11 +1238,11 @@ func MusicTrackNewMIDINoteEvent(inTrack obj.Object, inTimeStamp float64) (result
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewMIDINoteEvent, _lib, "MusicTrackNewMIDINoteEvent")
 	}
 	var _out0 MIDINoteMessage
-	_ret := _fnMusicTrackNewMIDINoteEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackNewMIDINoteEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnMusicTrackNewParameterEvent func(objc.ID, float64, unsafe.Pointer) int
+var _fnMusicTrackNewParameterEvent func(objc.ID, float64, unsafe.Pointer) int32
 
 // MusicTrackNewParameterEvent calls the AudioToolbox framework function MusicTrackNewParameterEvent.
 func MusicTrackNewParameterEvent(inTrack obj.Object, inTimeStamp float64) (result int, inInfo ParameterEvent) {
@@ -1251,7 +1251,7 @@ func MusicTrackNewParameterEvent(inTrack obj.Object, inTimeStamp float64) (resul
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewParameterEvent, _lib, "MusicTrackNewParameterEvent")
 	}
 	var _out0 ParameterEvent
-	_ret := _fnMusicTrackNewParameterEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0))
+	_ret := int(_fnMusicTrackNewParameterEvent(objref.IDOf(inTrack), inTimeStamp, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

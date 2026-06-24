@@ -568,7 +568,7 @@ func ICDScannerInitiateNotificationCallback(pb unsafe.Pointer) int16 {
 	return _fnICDScannerInitiateNotificationCallback(pb)
 }
 
-var _fnICD_ScannerMain func(int, string) int
+var _fnICD_ScannerMain func(int, string) int32
 
 // ICD_ScannerMain calls the ICADevices framework function ICD_ScannerMain.
 func ICD_ScannerMain(argc int, argv string) int {
@@ -576,10 +576,10 @@ func ICD_ScannerMain(argc int, argv string) int {
 	if _fnICD_ScannerMain == nil {
 		ebipurego.RegisterLibFunc(&_fnICD_ScannerMain, _lib, "ICD_ScannerMain")
 	}
-	return _fnICD_ScannerMain(argc, argv)
+	return int(_fnICD_ScannerMain(argc, argv))
 }
 
-var _fnICD_main func(int, string) int
+var _fnICD_main func(int, string) int32
 
 // ICD_main calls the ICADevices framework function ICD_main.
 func ICD_main(argc int, argv string) int {
@@ -587,5 +587,5 @@ func ICD_main(argc int, argv string) int {
 	if _fnICD_main == nil {
 		ebipurego.RegisterLibFunc(&_fnICD_main, _lib, "ICD_main")
 	}
-	return _fnICD_main(argc, argv)
+	return int(_fnICD_main(argc, argv))
 }

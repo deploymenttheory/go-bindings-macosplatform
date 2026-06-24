@@ -678,7 +678,7 @@ func CFNetServiceGetName(theService obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCFNetServiceGetPortNumber func(objc.ID) int
+var _fnCFNetServiceGetPortNumber func(objc.ID) int32
 
 // CFNetServiceGetPortNumber calls the CFNetwork framework function CFNetServiceGetPortNumber.
 func CFNetServiceGetPortNumber(theService obj.Object) int {
@@ -686,7 +686,7 @@ func CFNetServiceGetPortNumber(theService obj.Object) int {
 	if _fnCFNetServiceGetPortNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceGetPortNumber, _lib, "CFNetServiceGetPortNumber")
 	}
-	return _fnCFNetServiceGetPortNumber(objref.IDOf(theService))
+	return int(_fnCFNetServiceGetPortNumber(objref.IDOf(theService)))
 }
 
 var _fnCFNetServiceGetTXTData func(objc.ID) objc.ID

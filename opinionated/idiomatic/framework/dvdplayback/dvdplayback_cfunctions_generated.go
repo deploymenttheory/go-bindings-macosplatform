@@ -13,7 +13,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnDVDGetAngle func(unsafe.Pointer) int
+var _fnDVDGetAngle func(unsafe.Pointer) int32
 
 // DVDGetAngle calls the DVDPlayback framework function DVDGetAngle.
 func DVDGetAngle() (result int, outAngleNum uint16) {
@@ -22,11 +22,11 @@ func DVDGetAngle() (result int, outAngleNum uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAngle, _lib, "DVDGetAngle")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetAngle(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAngle(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAspectRatio func(unsafe.Pointer) int
+var _fnDVDGetAspectRatio func(unsafe.Pointer) int32
 
 // DVDGetAspectRatio calls the DVDPlayback framework function DVDGetAspectRatio.
 func DVDGetAspectRatio() (result int, outRatio DVDAspectRatio) {
@@ -35,11 +35,11 @@ func DVDGetAspectRatio() (result int, outRatio DVDAspectRatio) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAspectRatio, _lib, "DVDGetAspectRatio")
 	}
 	var _out0 DVDAspectRatio
-	_ret := _fnDVDGetAspectRatio(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAspectRatio(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAudioLanguageCode func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetAudioLanguageCode func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetAudioLanguageCode calls the DVDPlayback framework function DVDGetAudioLanguageCode.
 func DVDGetAudioLanguageCode() (result int, outCode int, outExtension int) {
@@ -49,11 +49,11 @@ func DVDGetAudioLanguageCode() (result int, outCode int, outExtension int) {
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnDVDGetAudioLanguageCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetAudioLanguageCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetAudioLanguageCodeByStream func(uint16, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetAudioLanguageCodeByStream func(uint16, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetAudioLanguageCodeByStream calls the DVDPlayback framework function DVDGetAudioLanguageCodeByStream.
 func DVDGetAudioLanguageCodeByStream(inStreamNum uint16) (result int, outCode int, outExtension int) {
@@ -63,11 +63,11 @@ func DVDGetAudioLanguageCodeByStream(inStreamNum uint16) (result int, outCode in
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnDVDGetAudioLanguageCodeByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetAudioLanguageCodeByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetAudioOutputMode func(unsafe.Pointer) int
+var _fnDVDGetAudioOutputMode func(unsafe.Pointer) int32
 
 // DVDGetAudioOutputMode calls the DVDPlayback framework function DVDGetAudioOutputMode.
 func DVDGetAudioOutputMode() (result int, outMode int) {
@@ -76,11 +76,11 @@ func DVDGetAudioOutputMode() (result int, outMode int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAudioOutputMode, _lib, "DVDGetAudioOutputMode")
 	}
 	var _out0 int
-	_ret := _fnDVDGetAudioOutputMode(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAudioOutputMode(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAudioOutputModeCapabilities func(unsafe.Pointer) int
+var _fnDVDGetAudioOutputModeCapabilities func(unsafe.Pointer) int32
 
 // DVDGetAudioOutputModeCapabilities calls the DVDPlayback framework function DVDGetAudioOutputModeCapabilities.
 func DVDGetAudioOutputModeCapabilities() (result int, outModes int) {
@@ -89,11 +89,11 @@ func DVDGetAudioOutputModeCapabilities() (result int, outModes int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAudioOutputModeCapabilities, _lib, "DVDGetAudioOutputModeCapabilities")
 	}
 	var _out0 int
-	_ret := _fnDVDGetAudioOutputModeCapabilities(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAudioOutputModeCapabilities(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAudioStream func(unsafe.Pointer) int
+var _fnDVDGetAudioStream func(unsafe.Pointer) int32
 
 // DVDGetAudioStream calls the DVDPlayback framework function DVDGetAudioStream.
 func DVDGetAudioStream() (result int, outStreamNum uint16) {
@@ -102,11 +102,11 @@ func DVDGetAudioStream() (result int, outStreamNum uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAudioStream, _lib, "DVDGetAudioStream")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetAudioStream(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAudioStream(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAudioStreamFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetAudioStreamFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetAudioStreamFormat calls the DVDPlayback framework function DVDGetAudioStreamFormat.
 func DVDGetAudioStreamFormat() (result int, outFormat DVDAudioFormat, outBitsPerSample int, outSamplesPerSecond int, outChannels int) {
@@ -118,11 +118,11 @@ func DVDGetAudioStreamFormat() (result int, outFormat DVDAudioFormat, outBitsPer
 	var _out1 int
 	var _out2 int
 	var _out3 int
-	_ret := _fnDVDGetAudioStreamFormat(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnDVDGetAudioStreamFormat(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnDVDGetAudioStreamFormatByStream func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetAudioStreamFormatByStream func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetAudioStreamFormatByStream calls the DVDPlayback framework function DVDGetAudioStreamFormatByStream.
 func DVDGetAudioStreamFormatByStream(inStreamNum int) (result int, outFormat DVDAudioFormat, outBitsPerSample int, outSamplesPerSecond int, outChannels int) {
@@ -134,11 +134,11 @@ func DVDGetAudioStreamFormatByStream(inStreamNum int) (result int, outFormat DVD
 	var _out1 int
 	var _out2 int
 	var _out3 int
-	_ret := _fnDVDGetAudioStreamFormatByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnDVDGetAudioStreamFormatByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnDVDGetAudioVolume func(unsafe.Pointer) int
+var _fnDVDGetAudioVolume func(unsafe.Pointer) int32
 
 // DVDGetAudioVolume calls the DVDPlayback framework function DVDGetAudioVolume.
 func DVDGetAudioVolume() (result int, outVolume uint16) {
@@ -147,11 +147,11 @@ func DVDGetAudioVolume() (result int, outVolume uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetAudioVolume, _lib, "DVDGetAudioVolume")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetAudioVolume(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetAudioVolume(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetAudioVolumeInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetAudioVolumeInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetAudioVolumeInfo calls the DVDPlayback framework function DVDGetAudioVolumeInfo.
 func DVDGetAudioVolumeInfo() (result int, outMinVolume uint16, outCurVolume uint16, outMaxVolume uint16) {
@@ -162,11 +162,11 @@ func DVDGetAudioVolumeInfo() (result int, outMinVolume uint16, outCurVolume uint
 	var _out0 uint16
 	var _out1 uint16
 	var _out2 uint16
-	_ret := _fnDVDGetAudioVolumeInfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := int(_fnDVDGetAudioVolumeInfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnDVDGetBookmark func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetBookmark func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetBookmark calls the DVDPlayback framework function DVDGetBookmark.
 func DVDGetBookmark(outBookMarkData unsafe.Pointer) (result int, ioBookMarkDataSize int) {
@@ -175,11 +175,11 @@ func DVDGetBookmark(outBookMarkData unsafe.Pointer) (result int, ioBookMarkDataS
 		ebipurego.RegisterLibFunc(&_fnDVDGetBookmark, _lib, "DVDGetBookmark")
 	}
 	var _out0 int
-	_ret := _fnDVDGetBookmark(outBookMarkData, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetBookmark(outBookMarkData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetButtoninfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetButtoninfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetButtoninfo calls the DVDPlayback framework function DVDGetButtoninfo.
 func DVDGetButtoninfo() (result int, numberOfButtons int, selectedButton int, forcedActivateButton int, userButtonOffset int, numberOfUserButtons int) {
@@ -192,11 +192,11 @@ func DVDGetButtoninfo() (result int, numberOfButtons int, selectedButton int, fo
 	var _out2 int
 	var _out3 int
 	var _out4 int
-	_ret := _fnDVDGetButtoninfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	_ret := int(_fnDVDGetButtoninfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4)))
 	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
-var _fnDVDGetChapter func(unsafe.Pointer) int
+var _fnDVDGetChapter func(unsafe.Pointer) int32
 
 // DVDGetChapter calls the DVDPlayback framework function DVDGetChapter.
 func DVDGetChapter() (result int, outChapterNum uint16) {
@@ -205,11 +205,11 @@ func DVDGetChapter() (result int, outChapterNum uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetChapter, _lib, "DVDGetChapter")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetChapter(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetChapter(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetDiscRegionCode func(unsafe.Pointer) int
+var _fnDVDGetDiscRegionCode func(unsafe.Pointer) int32
 
 // DVDGetDiscRegionCode calls the DVDPlayback framework function DVDGetDiscRegionCode.
 func DVDGetDiscRegionCode() (result int, outCode int) {
@@ -218,11 +218,11 @@ func DVDGetDiscRegionCode() (result int, outCode int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetDiscRegionCode, _lib, "DVDGetDiscRegionCode")
 	}
 	var _out0 int
-	_ret := _fnDVDGetDiscRegionCode(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetDiscRegionCode(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetDriveRegionCode func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetDriveRegionCode func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetDriveRegionCode calls the DVDPlayback framework function DVDGetDriveRegionCode.
 func DVDGetDriveRegionCode() (result int, outCode int, outNumberChangesLeft int16) {
@@ -232,11 +232,11 @@ func DVDGetDriveRegionCode() (result int, outCode int, outNumberChangesLeft int1
 	}
 	var _out0 int
 	var _out1 int16
-	_ret := _fnDVDGetDriveRegionCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetDriveRegionCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetFormatStandard func(unsafe.Pointer) int
+var _fnDVDGetFormatStandard func(unsafe.Pointer) int32
 
 // DVDGetFormatStandard calls the DVDPlayback framework function DVDGetFormatStandard.
 func DVDGetFormatStandard() (result int, outFormat DVDFormat) {
@@ -245,11 +245,11 @@ func DVDGetFormatStandard() (result int, outFormat DVDFormat) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetFormatStandard, _lib, "DVDGetFormatStandard")
 	}
 	var _out0 DVDFormat
-	_ret := _fnDVDGetFormatStandard(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetFormatStandard(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetGPRMValue func(int, unsafe.Pointer) int
+var _fnDVDGetGPRMValue func(int, unsafe.Pointer) int32
 
 // DVDGetGPRMValue calls the DVDPlayback framework function DVDGetGPRMValue.
 func DVDGetGPRMValue(index int) (result int, value int) {
@@ -258,11 +258,11 @@ func DVDGetGPRMValue(index int) (result int, value int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetGPRMValue, _lib, "DVDGetGPRMValue")
 	}
 	var _out0 int
-	_ret := _fnDVDGetGPRMValue(index, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetGPRMValue(index, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetLastPlayBookmark func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetLastPlayBookmark func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetLastPlayBookmark calls the DVDPlayback framework function DVDGetLastPlayBookmark.
 func DVDGetLastPlayBookmark(outBookMarkData unsafe.Pointer) (result int, ioBookMarkDataSize int) {
@@ -271,11 +271,11 @@ func DVDGetLastPlayBookmark(outBookMarkData unsafe.Pointer) (result int, ioBookM
 		ebipurego.RegisterLibFunc(&_fnDVDGetLastPlayBookmark, _lib, "DVDGetLastPlayBookmark")
 	}
 	var _out0 int
-	_ret := _fnDVDGetLastPlayBookmark(outBookMarkData, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetLastPlayBookmark(outBookMarkData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetMediaUniqueID func(unsafe.Pointer) int
+var _fnDVDGetMediaUniqueID func(unsafe.Pointer) int32
 
 // DVDGetMediaUniqueID calls the DVDPlayback framework function DVDGetMediaUniqueID.
 func DVDGetMediaUniqueID() (result int, outDiscID uint8) {
@@ -284,11 +284,11 @@ func DVDGetMediaUniqueID() (result int, outDiscID uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetMediaUniqueID, _lib, "DVDGetMediaUniqueID")
 	}
 	var _out0 uint8
-	_ret := _fnDVDGetMediaUniqueID(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetMediaUniqueID(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetMenuLanguageCode func(unsafe.Pointer) int
+var _fnDVDGetMenuLanguageCode func(unsafe.Pointer) int32
 
 // DVDGetMenuLanguageCode calls the DVDPlayback framework function DVDGetMenuLanguageCode.
 func DVDGetMenuLanguageCode() (result int, outCode int) {
@@ -297,11 +297,11 @@ func DVDGetMenuLanguageCode() (result int, outCode int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetMenuLanguageCode, _lib, "DVDGetMenuLanguageCode")
 	}
 	var _out0 int
-	_ret := _fnDVDGetMenuLanguageCode(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetMenuLanguageCode(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetNativeVideoSize func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetNativeVideoSize func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetNativeVideoSize calls the DVDPlayback framework function DVDGetNativeVideoSize.
 func DVDGetNativeVideoSize() (result int, outWidth uint16, outHeight uint16) {
@@ -311,11 +311,11 @@ func DVDGetNativeVideoSize() (result int, outWidth uint16, outHeight uint16) {
 	}
 	var _out0 uint16
 	var _out1 uint16
-	_ret := _fnDVDGetNativeVideoSize(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetNativeVideoSize(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetNumAngles func(unsafe.Pointer) int
+var _fnDVDGetNumAngles func(unsafe.Pointer) int32
 
 // DVDGetNumAngles calls the DVDPlayback framework function DVDGetNumAngles.
 func DVDGetNumAngles() (result int, outNumAngles uint16) {
@@ -324,11 +324,11 @@ func DVDGetNumAngles() (result int, outNumAngles uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetNumAngles, _lib, "DVDGetNumAngles")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetNumAngles(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetNumAngles(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetNumAudioStreams func(unsafe.Pointer) int
+var _fnDVDGetNumAudioStreams func(unsafe.Pointer) int32
 
 // DVDGetNumAudioStreams calls the DVDPlayback framework function DVDGetNumAudioStreams.
 func DVDGetNumAudioStreams() (result int, outNumStreams uint16) {
@@ -337,11 +337,11 @@ func DVDGetNumAudioStreams() (result int, outNumStreams uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetNumAudioStreams, _lib, "DVDGetNumAudioStreams")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetNumAudioStreams(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetNumAudioStreams(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetNumChapters func(uint16, unsafe.Pointer) int
+var _fnDVDGetNumChapters func(uint16, unsafe.Pointer) int32
 
 // DVDGetNumChapters calls the DVDPlayback framework function DVDGetNumChapters.
 func DVDGetNumChapters(inTitleNum uint16) (result int, outNumChapters uint16) {
@@ -350,11 +350,11 @@ func DVDGetNumChapters(inTitleNum uint16) (result int, outNumChapters uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetNumChapters, _lib, "DVDGetNumChapters")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetNumChapters(inTitleNum, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetNumChapters(inTitleNum, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetNumSubPictureStreams func(unsafe.Pointer) int
+var _fnDVDGetNumSubPictureStreams func(unsafe.Pointer) int32
 
 // DVDGetNumSubPictureStreams calls the DVDPlayback framework function DVDGetNumSubPictureStreams.
 func DVDGetNumSubPictureStreams() (result int, outNumStreams uint16) {
@@ -363,11 +363,11 @@ func DVDGetNumSubPictureStreams() (result int, outNumStreams uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetNumSubPictureStreams, _lib, "DVDGetNumSubPictureStreams")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetNumSubPictureStreams(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetNumSubPictureStreams(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetNumTitles func(unsafe.Pointer) int
+var _fnDVDGetNumTitles func(unsafe.Pointer) int32
 
 // DVDGetNumTitles calls the DVDPlayback framework function DVDGetNumTitles.
 func DVDGetNumTitles() (result int, outNumTitles uint16) {
@@ -376,11 +376,11 @@ func DVDGetNumTitles() (result int, outNumTitles uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetNumTitles, _lib, "DVDGetNumTitles")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetNumTitles(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetNumTitles(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetSPDIFDataOutDevice func(unsafe.Pointer) int
+var _fnDVDGetSPDIFDataOutDevice func(unsafe.Pointer) int32
 
 // DVDGetSPDIFDataOutDevice calls the DVDPlayback framework function DVDGetSPDIFDataOutDevice.
 func DVDGetSPDIFDataOutDevice() (result int, outIndex int) {
@@ -389,11 +389,11 @@ func DVDGetSPDIFDataOutDevice() (result int, outIndex int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDevice, _lib, "DVDGetSPDIFDataOutDevice")
 	}
 	var _out0 int
-	_ret := _fnDVDGetSPDIFDataOutDevice(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetSPDIFDataOutDevice(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetSPDIFDataOutDeviceCount func(unsafe.Pointer) int
+var _fnDVDGetSPDIFDataOutDeviceCount func(unsafe.Pointer) int32
 
 // DVDGetSPDIFDataOutDeviceCount calls the DVDPlayback framework function DVDGetSPDIFDataOutDeviceCount.
 func DVDGetSPDIFDataOutDeviceCount() (result int, outCount int) {
@@ -402,11 +402,11 @@ func DVDGetSPDIFDataOutDeviceCount() (result int, outCount int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetSPDIFDataOutDeviceCount, _lib, "DVDGetSPDIFDataOutDeviceCount")
 	}
 	var _out0 int
-	_ret := _fnDVDGetSPDIFDataOutDeviceCount(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetSPDIFDataOutDeviceCount(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetScanRate func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetScanRate func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetScanRate calls the DVDPlayback framework function DVDGetScanRate.
 func DVDGetScanRate() (result int, outRate DVDScanRate, outDirection DVDScanDirection) {
@@ -416,11 +416,11 @@ func DVDGetScanRate() (result int, outRate DVDScanRate, outDirection DVDScanDire
 	}
 	var _out0 DVDScanRate
 	var _out1 DVDScanDirection
-	_ret := _fnDVDGetScanRate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetScanRate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetState func(unsafe.Pointer) int
+var _fnDVDGetState func(unsafe.Pointer) int32
 
 // DVDGetState calls the DVDPlayback framework function DVDGetState.
 func DVDGetState() (result int, outState DVDState) {
@@ -429,11 +429,11 @@ func DVDGetState() (result int, outState DVDState) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetState, _lib, "DVDGetState")
 	}
 	var _out0 DVDState
-	_ret := _fnDVDGetState(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetState(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetSubPictureLanguageCode func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetSubPictureLanguageCode func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetSubPictureLanguageCode calls the DVDPlayback framework function DVDGetSubPictureLanguageCode.
 func DVDGetSubPictureLanguageCode() (result int, outCode int, outExtension int) {
@@ -443,11 +443,11 @@ func DVDGetSubPictureLanguageCode() (result int, outCode int, outExtension int) 
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnDVDGetSubPictureLanguageCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetSubPictureLanguageCode(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetSubPictureLanguageCodeByStream func(uint16, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetSubPictureLanguageCodeByStream func(uint16, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetSubPictureLanguageCodeByStream calls the DVDPlayback framework function DVDGetSubPictureLanguageCodeByStream.
 func DVDGetSubPictureLanguageCodeByStream(inStreamNum uint16) (result int, outCode int, outExtension int) {
@@ -457,11 +457,11 @@ func DVDGetSubPictureLanguageCodeByStream(inStreamNum uint16) (result int, outCo
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnDVDGetSubPictureLanguageCodeByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetSubPictureLanguageCodeByStream(inStreamNum, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetSubPictureStream func(unsafe.Pointer) int
+var _fnDVDGetSubPictureStream func(unsafe.Pointer) int32
 
 // DVDGetSubPictureStream calls the DVDPlayback framework function DVDGetSubPictureStream.
 func DVDGetSubPictureStream() (result int, outStreamNum uint16) {
@@ -470,11 +470,11 @@ func DVDGetSubPictureStream() (result int, outStreamNum uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetSubPictureStream, _lib, "DVDGetSubPictureStream")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetSubPictureStream(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetSubPictureStream(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetTime func(int16, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDGetTime func(int16, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDGetTime calls the DVDPlayback framework function DVDGetTime.
 func DVDGetTime(inTimeCode int16) (result int, outTime int, outFrames uint16) {
@@ -484,11 +484,11 @@ func DVDGetTime(inTimeCode int16) (result int, outTime int, outFrames uint16) {
 	}
 	var _out0 int
 	var _out1 uint16
-	_ret := _fnDVDGetTime(inTimeCode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDGetTime(inTimeCode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDGetTimeEventRate func(unsafe.Pointer) int
+var _fnDVDGetTimeEventRate func(unsafe.Pointer) int32
 
 // DVDGetTimeEventRate calls the DVDPlayback framework function DVDGetTimeEventRate.
 func DVDGetTimeEventRate() (result int, outMilliseconds int) {
@@ -497,11 +497,11 @@ func DVDGetTimeEventRate() (result int, outMilliseconds int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetTimeEventRate, _lib, "DVDGetTimeEventRate")
 	}
 	var _out0 int
-	_ret := _fnDVDGetTimeEventRate(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetTimeEventRate(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetTitle func(unsafe.Pointer) int
+var _fnDVDGetTitle func(unsafe.Pointer) int32
 
 // DVDGetTitle calls the DVDPlayback framework function DVDGetTitle.
 func DVDGetTitle() (result int, outTitleNum uint16) {
@@ -510,11 +510,11 @@ func DVDGetTitle() (result int, outTitleNum uint16) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetTitle, _lib, "DVDGetTitle")
 	}
 	var _out0 uint16
-	_ret := _fnDVDGetTitle(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetTitle(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetVideoDisplay func(unsafe.Pointer) int
+var _fnDVDGetVideoDisplay func(unsafe.Pointer) int32
 
 // DVDGetVideoDisplay calls the DVDPlayback framework function DVDGetVideoDisplay.
 func DVDGetVideoDisplay() (result int, outDisplay uint32) {
@@ -523,11 +523,11 @@ func DVDGetVideoDisplay() (result int, outDisplay uint32) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetVideoDisplay, _lib, "DVDGetVideoDisplay")
 	}
 	var _out0 uint32
-	_ret := _fnDVDGetVideoDisplay(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetVideoDisplay(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDGetVideoWindowID func(unsafe.Pointer) int
+var _fnDVDGetVideoWindowID func(unsafe.Pointer) int32
 
 // DVDGetVideoWindowID calls the DVDPlayback framework function DVDGetVideoWindowID.
 func DVDGetVideoWindowID() (result int, outVidWindowID int) {
@@ -536,11 +536,11 @@ func DVDGetVideoWindowID() (result int, outVidWindowID int) {
 		ebipurego.RegisterLibFunc(&_fnDVDGetVideoWindowID, _lib, "DVDGetVideoWindowID")
 	}
 	var _out0 int
-	_ret := _fnDVDGetVideoWindowID(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDGetVideoWindowID(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDHasMedia func(unsafe.Pointer) int
+var _fnDVDHasMedia func(unsafe.Pointer) int32
 
 // DVDHasMedia calls the DVDPlayback framework function DVDHasMedia.
 func DVDHasMedia() (result int, outHasMedia uint8) {
@@ -549,11 +549,11 @@ func DVDHasMedia() (result int, outHasMedia uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDHasMedia, _lib, "DVDHasMedia")
 	}
 	var _out0 uint8
-	_ret := _fnDVDHasMedia(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDHasMedia(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDHasMenu func(DVDMenu, unsafe.Pointer) int
+var _fnDVDHasMenu func(DVDMenu, unsafe.Pointer) int32
 
 // DVDHasMenu calls the DVDPlayback framework function DVDHasMenu.
 func DVDHasMenu(inMenu DVDMenu) (result int, outHasMenu uint8) {
@@ -562,11 +562,11 @@ func DVDHasMenu(inMenu DVDMenu) (result int, outHasMenu uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDHasMenu, _lib, "DVDHasMenu")
 	}
 	var _out0 uint8
-	_ret := _fnDVDHasMenu(inMenu, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDHasMenu(inMenu, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDHasNextChapter func(unsafe.Pointer) int
+var _fnDVDHasNextChapter func(unsafe.Pointer) int32
 
 // DVDHasNextChapter calls the DVDPlayback framework function DVDHasNextChapter.
 func DVDHasNextChapter() (result int, outHasChapter uint8) {
@@ -575,11 +575,11 @@ func DVDHasNextChapter() (result int, outHasChapter uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDHasNextChapter, _lib, "DVDHasNextChapter")
 	}
 	var _out0 uint8
-	_ret := _fnDVDHasNextChapter(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDHasNextChapter(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDHasPreviousChapter func(unsafe.Pointer) int
+var _fnDVDHasPreviousChapter func(unsafe.Pointer) int32
 
 // DVDHasPreviousChapter calls the DVDPlayback framework function DVDHasPreviousChapter.
 func DVDHasPreviousChapter() (result int, outHasChapter uint8) {
@@ -588,11 +588,11 @@ func DVDHasPreviousChapter() (result int, outHasChapter uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDHasPreviousChapter, _lib, "DVDHasPreviousChapter")
 	}
 	var _out0 uint8
-	_ret := _fnDVDHasPreviousChapter(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDHasPreviousChapter(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDIsDisplayingSubPicture func(unsafe.Pointer) int
+var _fnDVDIsDisplayingSubPicture func(unsafe.Pointer) int32
 
 // DVDIsDisplayingSubPicture calls the DVDPlayback framework function DVDIsDisplayingSubPicture.
 func DVDIsDisplayingSubPicture() (result int, outDisplayingSubPicture uint8) {
@@ -601,11 +601,11 @@ func DVDIsDisplayingSubPicture() (result int, outDisplayingSubPicture uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsDisplayingSubPicture, _lib, "DVDIsDisplayingSubPicture")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsDisplayingSubPicture(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsDisplayingSubPicture(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDIsMuted func(unsafe.Pointer) int
+var _fnDVDIsMuted func(unsafe.Pointer) int32
 
 // DVDIsMuted calls the DVDPlayback framework function DVDIsMuted.
 func DVDIsMuted() (result int, outIsMuted uint8) {
@@ -614,11 +614,11 @@ func DVDIsMuted() (result int, outIsMuted uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsMuted, _lib, "DVDIsMuted")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsMuted(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsMuted(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDIsOnMenu func(unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDIsOnMenu func(unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDIsOnMenu calls the DVDPlayback framework function DVDIsOnMenu.
 func DVDIsOnMenu() (result int, outOnMenu uint8, outMenu DVDMenu) {
@@ -628,11 +628,11 @@ func DVDIsOnMenu() (result int, outOnMenu uint8, outMenu DVDMenu) {
 	}
 	var _out0 uint8
 	var _out1 DVDMenu
-	_ret := _fnDVDIsOnMenu(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnDVDIsOnMenu(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnDVDIsPaused func(unsafe.Pointer) int
+var _fnDVDIsPaused func(unsafe.Pointer) int32
 
 // DVDIsPaused calls the DVDPlayback framework function DVDIsPaused.
 func DVDIsPaused() (result int, outIsPaused uint8) {
@@ -641,11 +641,11 @@ func DVDIsPaused() (result int, outIsPaused uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsPaused, _lib, "DVDIsPaused")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsPaused(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsPaused(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDIsPlaying func(unsafe.Pointer) int
+var _fnDVDIsPlaying func(unsafe.Pointer) int32
 
 // DVDIsPlaying calls the DVDPlayback framework function DVDIsPlaying.
 func DVDIsPlaying() (result int, outIsPlaying uint8) {
@@ -654,7 +654,7 @@ func DVDIsPlaying() (result int, outIsPlaying uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsPlaying, _lib, "DVDIsPlaying")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsPlaying(unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsPlaying(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -669,7 +669,7 @@ func DVDIsRegisteredEventCallBack(inCallBackID unsafe.Pointer) uint8 {
 	return _fnDVDIsRegisteredEventCallBack(inCallBackID)
 }
 
-var _fnDVDIsSupportedDisplay func(uint32, unsafe.Pointer) int
+var _fnDVDIsSupportedDisplay func(uint32, unsafe.Pointer) int32
 
 // DVDIsSupportedDisplay calls the DVDPlayback framework function DVDIsSupportedDisplay.
 func DVDIsSupportedDisplay(inDisplay uint32) (result int, outSupported uint8) {
@@ -678,11 +678,11 @@ func DVDIsSupportedDisplay(inDisplay uint32) (result int, outSupported uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsSupportedDisplay, _lib, "DVDIsSupportedDisplay")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsSupportedDisplay(inDisplay, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsSupportedDisplay(inDisplay, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDIsValidMediaURL func(objc.ID, unsafe.Pointer) int
+var _fnDVDIsValidMediaURL func(objc.ID, unsafe.Pointer) int32
 
 // DVDIsValidMediaURL calls the DVDPlayback framework function DVDIsValidMediaURL.
 func DVDIsValidMediaURL(inRef obj.Object) (result int, outIsValid uint8) {
@@ -691,11 +691,11 @@ func DVDIsValidMediaURL(inRef obj.Object) (result int, outIsValid uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDIsValidMediaURL, _lib, "DVDIsValidMediaURL")
 	}
 	var _out0 uint8
-	_ret := _fnDVDIsValidMediaURL(objref.IDOf(inRef), unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDIsValidMediaURL(objref.IDOf(inRef), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnDVDRegisterEventCallBack func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnDVDRegisterEventCallBack func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // DVDRegisterEventCallBack calls the DVDPlayback framework function DVDRegisterEventCallBack.
 func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCode unsafe.Pointer, inCodeCount int, inRefCon unsafe.Pointer, outCallBackID unsafe.Pointer) int {
@@ -703,10 +703,10 @@ func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCode unsafe.Point
 	if _fnDVDRegisterEventCallBack == nil {
 		ebipurego.RegisterLibFunc(&_fnDVDRegisterEventCallBack, _lib, "DVDRegisterEventCallBack")
 	}
-	return _fnDVDRegisterEventCallBack(inCallBackProc, inCode, inCodeCount, inRefCon, outCallBackID)
+	return int(_fnDVDRegisterEventCallBack(inCallBackProc, inCode, inCodeCount, inRefCon, outCallBackID))
 }
 
-var _fnDVDSwitchToDisplay func(uint32, unsafe.Pointer) int
+var _fnDVDSwitchToDisplay func(uint32, unsafe.Pointer) int32
 
 // DVDSwitchToDisplay calls the DVDPlayback framework function DVDSwitchToDisplay.
 func DVDSwitchToDisplay(newDisplay uint32) (result int, outSupported uint8) {
@@ -715,6 +715,6 @@ func DVDSwitchToDisplay(newDisplay uint32) (result int, outSupported uint8) {
 		ebipurego.RegisterLibFunc(&_fnDVDSwitchToDisplay, _lib, "DVDSwitchToDisplay")
 	}
 	var _out0 uint8
-	_ret := _fnDVDSwitchToDisplay(newDisplay, unsafe.Pointer(&_out0))
+	_ret := int(_fnDVDSwitchToDisplay(newDisplay, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }

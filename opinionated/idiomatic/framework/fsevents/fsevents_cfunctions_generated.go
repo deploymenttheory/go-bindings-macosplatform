@@ -57,7 +57,7 @@ func FSEventStreamFlushSync(streamRef obj.Object) {
 	_fnFSEventStreamFlushSync(objref.IDOf(streamRef))
 }
 
-var _fnFSEventStreamGetDeviceBeingWatched func(objc.ID) int
+var _fnFSEventStreamGetDeviceBeingWatched func(objc.ID) int32
 
 // FSEventStreamGetDeviceBeingWatched calls the FSEvents framework function FSEventStreamGetDeviceBeingWatched.
 func FSEventStreamGetDeviceBeingWatched(streamRef obj.Object) int {
@@ -65,7 +65,7 @@ func FSEventStreamGetDeviceBeingWatched(streamRef obj.Object) int {
 	if _fnFSEventStreamGetDeviceBeingWatched == nil {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamGetDeviceBeingWatched, _lib, "FSEventStreamGetDeviceBeingWatched")
 	}
-	return _fnFSEventStreamGetDeviceBeingWatched(objref.IDOf(streamRef))
+	return int(_fnFSEventStreamGetDeviceBeingWatched(objref.IDOf(streamRef)))
 }
 
 var _fnFSEventStreamGetLatestEventId func(objc.ID) uint64

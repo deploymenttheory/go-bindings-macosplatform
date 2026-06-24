@@ -84,7 +84,7 @@ func AEGetObjectAccessor(desiredClass int, containerType int, accessor unsafe.Po
 	return _fnAEGetObjectAccessor(desiredClass, containerType, accessor, accessorRefcon, isSysHandler)
 }
 
-var _fnAEGetRegisteredMachPort func() int
+var _fnAEGetRegisteredMachPort func() uint32
 
 // AEGetRegisteredMachPort calls the AE framework function AEGetRegisteredMachPort.
 func AEGetRegisteredMachPort() int {
@@ -92,7 +92,7 @@ func AEGetRegisteredMachPort() int {
 	if _fnAEGetRegisteredMachPort == nil {
 		ebipurego.RegisterLibFunc(&_fnAEGetRegisteredMachPort, _lib, "AEGetRegisteredMachPort")
 	}
-	return _fnAEGetRegisteredMachPort()
+	return int(_fnAEGetRegisteredMachPort())
 }
 
 var _fnAEGetSpecialHandler func(int, unsafe.Pointer, uint8) int16

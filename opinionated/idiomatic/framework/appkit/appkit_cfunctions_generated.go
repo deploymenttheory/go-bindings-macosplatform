@@ -185,7 +185,7 @@ func NSApplicationLoad() bool {
 	return _fnNSApplicationLoad()
 }
 
-var _fnNSApplicationMain func(int, string) int
+var _fnNSApplicationMain func(int, string) int32
 
 // NSApplicationMain calls the AppKit framework function NSApplicationMain.
 func NSApplicationMain(argc int, argv string) int {
@@ -193,7 +193,7 @@ func NSApplicationMain(argc int, argv string) int {
 	if _fnNSApplicationMain == nil {
 		ebipurego.RegisterLibFunc(&_fnNSApplicationMain, _lib, "NSApplicationMain")
 	}
-	return _fnNSApplicationMain(argc, argv)
+	return int(_fnNSApplicationMain(argc, argv))
 }
 
 var _fnNSBeep func()

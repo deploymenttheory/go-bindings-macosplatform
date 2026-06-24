@@ -24,7 +24,7 @@ func OSAAddStorageType(scriptData unsafe.Pointer, dscType int) int16 {
 	return _fnOSAAddStorageType(scriptData, dscType)
 }
 
-var _fnOSACopyScriptingDefinitionFromURL func(objc.ID, int, unsafe.Pointer) int
+var _fnOSACopyScriptingDefinitionFromURL func(objc.ID, int, unsafe.Pointer) int32
 
 // OSACopyScriptingDefinitionFromURL calls the OpenScripting framework function OSACopyScriptingDefinitionFromURL.
 func OSACopyScriptingDefinitionFromURL(url obj.Object, modeFlags int, sdef unsafe.Pointer) int {
@@ -32,7 +32,7 @@ func OSACopyScriptingDefinitionFromURL(url obj.Object, modeFlags int, sdef unsaf
 	if _fnOSACopyScriptingDefinitionFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyScriptingDefinitionFromURL, _lib, "OSACopyScriptingDefinitionFromURL")
 	}
-	return _fnOSACopyScriptingDefinitionFromURL(objref.IDOf(url), modeFlags, sdef)
+	return int(_fnOSACopyScriptingDefinitionFromURL(objref.IDOf(url), modeFlags, sdef))
 }
 
 var _fnOSAGetStorageType func(unsafe.Pointer, unsafe.Pointer) int16

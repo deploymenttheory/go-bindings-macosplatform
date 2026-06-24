@@ -130,6 +130,39 @@ func (m *Mapper) GoReturnType(qt string, ctx Context, imports ImportSet) string 
 	return m.resolveDepth(normalise(qt), ctx, imports, 0)
 }
 
+// GoABIType returns the Go type to use in the BOUND C-function (purego) signature
+// for a value whose ergonomic Go type is goType. It is faithful to the C ABI
+// width: primitiveGoTypes widens the 32-bit C ints (int/unsigned, and typedefs
+// that resolve to them such as hv_return_t → mach_error_t → kern_return_t → int)
+// to Go int/uint for an ergonomic public API, but purego must bind the true width
+// (int32/uint32) or it reads junk in the value's upper 32 bits. For every other
+// type the ABI type equals the ergonomic type. The wrapper converts between them.
+func (m *Mapper) GoABIType(qt, goType string) string {
+	if goType != "int" && goType != "uint" {
+		return goType
+	}
+	n := normalise(qt)
+	for i := 0; i < 12 && n != ""; i++ {
+		switch n {
+		case "int", "signed", "signed int":
+			return "int32"
+		case "unsigned", "unsigned int":
+			return "uint32"
+		}
+		// A genuinely 64-bit primitive widened to int/uint (long, NSInteger,
+		// ssize_t, CFIndex, …) already matches the Go int width — keep it.
+		if _, isPrim := primitiveGoTypes[n]; isPrim {
+			return goType
+		}
+		target, ok := m.TypedefIndex[n]
+		if !ok || target == n {
+			return goType
+		}
+		n = normalise(target)
+	}
+	return goType
+}
+
 // primitiveGoTypes maps scalar C/ObjC type spellings (booleans, integers,
 // floats, ObjC handles, raw/char pointers) to their Go types.
 var primitiveGoTypes = map[string]string{
