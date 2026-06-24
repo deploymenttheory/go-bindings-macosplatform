@@ -81,7 +81,7 @@ func DADiskCopyDescription(disk obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnDADiskCopyIOMedia func(objc.ID) int
+var _fnDADiskCopyIOMedia func(objc.ID) uint32
 
 // DADiskCopyIOMedia calls the DiskArbitration framework function DADiskCopyIOMedia.
 func DADiskCopyIOMedia(disk obj.Object) int {
@@ -89,7 +89,7 @@ func DADiskCopyIOMedia(disk obj.Object) int {
 	if _fnDADiskCopyIOMedia == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyIOMedia, _lib, "DADiskCopyIOMedia")
 	}
-	return _fnDADiskCopyIOMedia(objref.IDOf(disk))
+	return int(_fnDADiskCopyIOMedia(objref.IDOf(disk)))
 }
 
 var _fnDADiskCopyWholeDisk func(objc.ID) objc.ID
@@ -162,7 +162,7 @@ func DADiskGetBSDName(disk obj.Object) string {
 	return _fnDADiskGetBSDName(objref.IDOf(disk))
 }
 
-var _fnDADiskGetOptions func(objc.ID) int
+var _fnDADiskGetOptions func(objc.ID) uint32
 
 // DADiskGetOptions calls the DiskArbitration framework function DADiskGetOptions.
 func DADiskGetOptions(disk obj.Object) int {
@@ -170,7 +170,7 @@ func DADiskGetOptions(disk obj.Object) int {
 	if _fnDADiskGetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskGetOptions, _lib, "DADiskGetOptions")
 	}
-	return _fnDADiskGetOptions(objref.IDOf(disk))
+	return int(_fnDADiskGetOptions(objref.IDOf(disk)))
 }
 
 var _fnDADiskGetTypeID func() int
@@ -228,7 +228,7 @@ func DADiskRename(disk obj.Object, name obj.Object, options int, callback unsafe
 	_fnDADiskRename(objref.IDOf(disk), objref.IDOf(name), options, callback, context_)
 }
 
-var _fnDADiskSetOptions func(objc.ID, int, uint8) int
+var _fnDADiskSetOptions func(objc.ID, int, uint8) int32
 
 // DADiskSetOptions calls the DiskArbitration framework function DADiskSetOptions.
 func DADiskSetOptions(disk obj.Object, options int, value uint8) int {
@@ -236,7 +236,7 @@ func DADiskSetOptions(disk obj.Object, options int, value uint8) int {
 	if _fnDADiskSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnDADiskSetOptions, _lib, "DADiskSetOptions")
 	}
-	return _fnDADiskSetOptions(objref.IDOf(disk), options, value)
+	return int(_fnDADiskSetOptions(objref.IDOf(disk), options, value))
 }
 
 var _fnDADiskUnclaim func(objc.ID)
@@ -273,7 +273,7 @@ func DADissenterCreate(allocator obj.Object, status int, string_ obj.Object) obj
 	return obj.Wrap(_ret)
 }
 
-var _fnDADissenterGetStatus func(objc.ID) int
+var _fnDADissenterGetStatus func(objc.ID) int32
 
 // DADissenterGetStatus calls the DiskArbitration framework function DADissenterGetStatus.
 func DADissenterGetStatus(dissenter obj.Object) int {
@@ -281,7 +281,7 @@ func DADissenterGetStatus(dissenter obj.Object) int {
 	if _fnDADissenterGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnDADissenterGetStatus, _lib, "DADissenterGetStatus")
 	}
-	return _fnDADissenterGetStatus(objref.IDOf(dissenter))
+	return int(_fnDADissenterGetStatus(objref.IDOf(dissenter)))
 }
 
 var _fnDADissenterGetStatusString func(objc.ID) objc.ID

@@ -61,7 +61,7 @@ func LSSharedFileListCreate(inAllocator obj.Object, inListType obj.Object, listO
 	return obj.Wrap(_ret)
 }
 
-var _fnLSSharedFileListGetSeedValue func(objc.ID) int
+var _fnLSSharedFileListGetSeedValue func(objc.ID) uint32
 
 // LSSharedFileListGetSeedValue calls the SharedFileList framework function LSSharedFileListGetSeedValue.
 func LSSharedFileListGetSeedValue(inList obj.Object) int {
@@ -69,7 +69,7 @@ func LSSharedFileListGetSeedValue(inList obj.Object) int {
 	if _fnLSSharedFileListGetSeedValue == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListGetSeedValue, _lib, "LSSharedFileListGetSeedValue")
 	}
-	return _fnLSSharedFileListGetSeedValue(objref.IDOf(inList))
+	return int(_fnLSSharedFileListGetSeedValue(objref.IDOf(inList)))
 }
 
 var _fnLSSharedFileListGetTypeID func() int
@@ -131,7 +131,7 @@ func LSSharedFileListItemCopyProperty(inItem obj.Object, inPropertyName obj.Obje
 	return obj.Wrap(_ret)
 }
 
-var _fnLSSharedFileListItemGetID func(objc.ID) int
+var _fnLSSharedFileListItemGetID func(objc.ID) uint32
 
 // LSSharedFileListItemGetID calls the SharedFileList framework function LSSharedFileListItemGetID.
 func LSSharedFileListItemGetID(inItem obj.Object) int {
@@ -139,7 +139,7 @@ func LSSharedFileListItemGetID(inItem obj.Object) int {
 	if _fnLSSharedFileListItemGetID == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetID, _lib, "LSSharedFileListItemGetID")
 	}
-	return _fnLSSharedFileListItemGetID(objref.IDOf(inItem))
+	return int(_fnLSSharedFileListItemGetID(objref.IDOf(inItem)))
 }
 
 var _fnLSSharedFileListItemGetTypeID func() int

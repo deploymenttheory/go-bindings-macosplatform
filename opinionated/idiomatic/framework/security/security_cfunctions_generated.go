@@ -13,7 +13,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnCMSDecoderCopySignerSigningTime func(objc.ID, int, unsafe.Pointer) int
+var _fnCMSDecoderCopySignerSigningTime func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerSigningTime calls the Security framework function CMSDecoderCopySignerSigningTime.
 func CMSDecoderCopySignerSigningTime(cmsDecoder obj.Object, signerIndex int) (result int, signingTime float64) {
@@ -22,11 +22,11 @@ func CMSDecoderCopySignerSigningTime(cmsDecoder obj.Object, signerIndex int) (re
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerSigningTime, _lib, "CMSDecoderCopySignerSigningTime")
 	}
 	var _out0 float64
-	_ret := _fnCMSDecoderCopySignerSigningTime(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSDecoderCopySignerSigningTime(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSDecoderCopySignerStatus func(objc.ID, int, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSDecoderCopySignerStatus func(objc.ID, int, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerStatus calls the Security framework function CMSDecoderCopySignerStatus.
 func CMSDecoderCopySignerStatus(cmsDecoder obj.Object, signerIndex int, policyOrArray obj.Object, evaluateSecTrust uint8, secTrustOut unsafe.Pointer) (result int, signerStatusOut CMSSignerStatus, certVerifyResultCodeOut int) {
@@ -36,11 +36,11 @@ func CMSDecoderCopySignerStatus(cmsDecoder obj.Object, signerIndex int, policyOr
 	}
 	var _out0 CMSSignerStatus
 	var _out1 int
-	_ret := _fnCMSDecoderCopySignerStatus(objref.IDOf(cmsDecoder), signerIndex, objref.IDOf(policyOrArray), evaluateSecTrust, unsafe.Pointer(&_out0), secTrustOut, unsafe.Pointer(&_out1))
+	_ret := int(_fnCMSDecoderCopySignerStatus(objref.IDOf(cmsDecoder), signerIndex, objref.IDOf(policyOrArray), evaluateSecTrust, unsafe.Pointer(&_out0), secTrustOut, unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCMSDecoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int
+var _fnCMSDecoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerTimestamp calls the Security framework function CMSDecoderCopySignerTimestamp.
 func CMSDecoderCopySignerTimestamp(cmsDecoder obj.Object, signerIndex int) (result int, timestamp float64) {
@@ -49,11 +49,11 @@ func CMSDecoderCopySignerTimestamp(cmsDecoder obj.Object, signerIndex int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestamp, _lib, "CMSDecoderCopySignerTimestamp")
 	}
 	var _out0 float64
-	_ret := _fnCMSDecoderCopySignerTimestamp(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSDecoderCopySignerTimestamp(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSDecoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int
+var _fnCMSDecoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerTimestampWithPolicy calls the Security framework function CMSDecoderCopySignerTimestampWithPolicy.
 func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder obj.Object, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
@@ -62,11 +62,11 @@ func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder obj.Object, timeStampPol
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampWithPolicy, _lib, "CMSDecoderCopySignerTimestampWithPolicy")
 	}
 	var _out0 float64
-	_ret := _fnCMSDecoderCopySignerTimestampWithPolicy(objref.IDOf(cmsDecoder), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSDecoderCopySignerTimestampWithPolicy(objref.IDOf(cmsDecoder), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSDecoderGetNumSigners func(objc.ID, unsafe.Pointer) int
+var _fnCMSDecoderGetNumSigners func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderGetNumSigners calls the Security framework function CMSDecoderGetNumSigners.
 func CMSDecoderGetNumSigners(cmsDecoder obj.Object) (result int, numSignersOut int) {
@@ -75,7 +75,7 @@ func CMSDecoderGetNumSigners(cmsDecoder obj.Object) (result int, numSignersOut i
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderGetNumSigners, _lib, "CMSDecoderGetNumSigners")
 	}
 	var _out0 int
-	_ret := _fnCMSDecoderGetNumSigners(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSDecoderGetNumSigners(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -90,7 +90,7 @@ func CMSDecoderGetTypeID() int {
 	return _fnCMSDecoderGetTypeID()
 }
 
-var _fnCMSDecoderIsContentEncrypted func(objc.ID, unsafe.Pointer) int
+var _fnCMSDecoderIsContentEncrypted func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderIsContentEncrypted calls the Security framework function CMSDecoderIsContentEncrypted.
 func CMSDecoderIsContentEncrypted(cmsDecoder obj.Object) (result int, isEncryptedOut uint8) {
@@ -99,11 +99,11 @@ func CMSDecoderIsContentEncrypted(cmsDecoder obj.Object) (result int, isEncrypte
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderIsContentEncrypted, _lib, "CMSDecoderIsContentEncrypted")
 	}
 	var _out0 uint8
-	_ret := _fnCMSDecoderIsContentEncrypted(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSDecoderIsContentEncrypted(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSEncoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int
+var _fnCMSEncoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSEncoderCopySignerTimestamp calls the Security framework function CMSEncoderCopySignerTimestamp.
 func CMSEncoderCopySignerTimestamp(cmsEncoder obj.Object, signerIndex int) (result int, timestamp float64) {
@@ -112,11 +112,11 @@ func CMSEncoderCopySignerTimestamp(cmsEncoder obj.Object, signerIndex int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestamp, _lib, "CMSEncoderCopySignerTimestamp")
 	}
 	var _out0 float64
-	_ret := _fnCMSEncoderCopySignerTimestamp(objref.IDOf(cmsEncoder), signerIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSEncoderCopySignerTimestamp(objref.IDOf(cmsEncoder), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSEncoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int
+var _fnCMSEncoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // CMSEncoderCopySignerTimestampWithPolicy calls the Security framework function CMSEncoderCopySignerTimestampWithPolicy.
 func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder obj.Object, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
@@ -125,11 +125,11 @@ func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder obj.Object, timeStampPol
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestampWithPolicy, _lib, "CMSEncoderCopySignerTimestampWithPolicy")
 	}
 	var _out0 float64
-	_ret := _fnCMSEncoderCopySignerTimestampWithPolicy(objref.IDOf(cmsEncoder), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSEncoderCopySignerTimestampWithPolicy(objref.IDOf(cmsEncoder), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSEncoderGetCertificateChainMode func(objc.ID, unsafe.Pointer) int
+var _fnCMSEncoderGetCertificateChainMode func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderGetCertificateChainMode calls the Security framework function CMSEncoderGetCertificateChainMode.
 func CMSEncoderGetCertificateChainMode(cmsEncoder obj.Object) (result int, chainModeOut CMSCertificateChainMode) {
@@ -138,11 +138,11 @@ func CMSEncoderGetCertificateChainMode(cmsEncoder obj.Object) (result int, chain
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderGetCertificateChainMode, _lib, "CMSEncoderGetCertificateChainMode")
 	}
 	var _out0 CMSCertificateChainMode
-	_ret := _fnCMSEncoderGetCertificateChainMode(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSEncoderGetCertificateChainMode(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSEncoderGetHasDetachedContent func(objc.ID, unsafe.Pointer) int
+var _fnCMSEncoderGetHasDetachedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderGetHasDetachedContent calls the Security framework function CMSEncoderGetHasDetachedContent.
 func CMSEncoderGetHasDetachedContent(cmsEncoder obj.Object) (result int, detachedContentOut uint8) {
@@ -151,7 +151,7 @@ func CMSEncoderGetHasDetachedContent(cmsEncoder obj.Object) (result int, detache
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderGetHasDetachedContent, _lib, "CMSEncoderGetHasDetachedContent")
 	}
 	var _out0 uint8
-	_ret := _fnCMSEncoderGetHasDetachedContent(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSEncoderGetHasDetachedContent(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -574,7 +574,7 @@ func SSLContextGetTypeID() int {
 	return _fnSSLContextGetTypeID()
 }
 
-var _fnSSLCopyRequestedPeerName func(objc.ID, string, unsafe.Pointer) int
+var _fnSSLCopyRequestedPeerName func(objc.ID, string, unsafe.Pointer) int32
 
 // SSLCopyRequestedPeerName calls the Security framework function SSLCopyRequestedPeerName.
 func SSLCopyRequestedPeerName(context_ obj.Object, peerName string) (result int, peerNameLen int) {
@@ -583,11 +583,11 @@ func SSLCopyRequestedPeerName(context_ obj.Object, peerName string) (result int,
 		ebipurego.RegisterLibFunc(&_fnSSLCopyRequestedPeerName, _lib, "SSLCopyRequestedPeerName")
 	}
 	var _out0 int
-	_ret := _fnSSLCopyRequestedPeerName(objref.IDOf(context_), peerName, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLCopyRequestedPeerName(objref.IDOf(context_), peerName, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLCopyRequestedPeerNameLength func(objc.ID, unsafe.Pointer) int
+var _fnSSLCopyRequestedPeerNameLength func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyRequestedPeerNameLength calls the Security framework function SSLCopyRequestedPeerNameLength.
 func SSLCopyRequestedPeerNameLength(ctx obj.Object) (result int, peerNameLen int) {
@@ -596,7 +596,7 @@ func SSLCopyRequestedPeerNameLength(ctx obj.Object) (result int, peerNameLen int
 		ebipurego.RegisterLibFunc(&_fnSSLCopyRequestedPeerNameLength, _lib, "SSLCopyRequestedPeerNameLength")
 	}
 	var _out0 int
-	_ret := _fnSSLCopyRequestedPeerNameLength(objref.IDOf(ctx), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLCopyRequestedPeerNameLength(objref.IDOf(ctx), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -612,7 +612,7 @@ func SSLCreateContext(alloc obj.Object, protocolSide SSLProtocolSide, connection
 	return obj.Wrap(_ret)
 }
 
-var _fnSSLGetAllowsAnyRoot func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetAllowsAnyRoot func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsAnyRoot calls the Security framework function SSLGetAllowsAnyRoot.
 func SSLGetAllowsAnyRoot(context_ obj.Object) (result int, anyRoot uint8) {
@@ -621,11 +621,11 @@ func SSLGetAllowsAnyRoot(context_ obj.Object) (result int, anyRoot uint8) {
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsAnyRoot, _lib, "SSLGetAllowsAnyRoot")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetAllowsAnyRoot(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetAllowsAnyRoot(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetAllowsExpiredCerts func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetAllowsExpiredCerts func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsExpiredCerts calls the Security framework function SSLGetAllowsExpiredCerts.
 func SSLGetAllowsExpiredCerts(context_ obj.Object) (result int, allowsExpired uint8) {
@@ -634,11 +634,11 @@ func SSLGetAllowsExpiredCerts(context_ obj.Object) (result int, allowsExpired ui
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsExpiredCerts, _lib, "SSLGetAllowsExpiredCerts")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetAllowsExpiredCerts(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetAllowsExpiredCerts(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetAllowsExpiredRoots func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetAllowsExpiredRoots func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetAllowsExpiredRoots calls the Security framework function SSLGetAllowsExpiredRoots.
 func SSLGetAllowsExpiredRoots(context_ obj.Object) (result int, allowsExpired uint8) {
@@ -647,11 +647,11 @@ func SSLGetAllowsExpiredRoots(context_ obj.Object) (result int, allowsExpired ui
 		ebipurego.RegisterLibFunc(&_fnSSLGetAllowsExpiredRoots, _lib, "SSLGetAllowsExpiredRoots")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetAllowsExpiredRoots(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetAllowsExpiredRoots(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetBufferedReadSize func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetBufferedReadSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetBufferedReadSize calls the Security framework function SSLGetBufferedReadSize.
 func SSLGetBufferedReadSize(context_ obj.Object) (result int, bufferSize int) {
@@ -660,11 +660,11 @@ func SSLGetBufferedReadSize(context_ obj.Object) (result int, bufferSize int) {
 		ebipurego.RegisterLibFunc(&_fnSSLGetBufferedReadSize, _lib, "SSLGetBufferedReadSize")
 	}
 	var _out0 int
-	_ret := _fnSSLGetBufferedReadSize(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetBufferedReadSize(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetClientCertificateState func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetClientCertificateState func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetClientCertificateState calls the Security framework function SSLGetClientCertificateState.
 func SSLGetClientCertificateState(context_ obj.Object) (result int, clientState SSLClientCertificateState) {
@@ -673,11 +673,11 @@ func SSLGetClientCertificateState(context_ obj.Object) (result int, clientState 
 		ebipurego.RegisterLibFunc(&_fnSSLGetClientCertificateState, _lib, "SSLGetClientCertificateState")
 	}
 	var _out0 SSLClientCertificateState
-	_ret := _fnSSLGetClientCertificateState(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetClientCertificateState(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetDatagramWriteSize func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetDatagramWriteSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetDatagramWriteSize calls the Security framework function SSLGetDatagramWriteSize.
 func SSLGetDatagramWriteSize(dtlsContext obj.Object) (result int, bufSize int) {
@@ -686,11 +686,11 @@ func SSLGetDatagramWriteSize(dtlsContext obj.Object) (result int, bufSize int) {
 		ebipurego.RegisterLibFunc(&_fnSSLGetDatagramWriteSize, _lib, "SSLGetDatagramWriteSize")
 	}
 	var _out0 int
-	_ret := _fnSSLGetDatagramWriteSize(objref.IDOf(dtlsContext), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetDatagramWriteSize(objref.IDOf(dtlsContext), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetDiffieHellmanParams func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSSLGetDiffieHellmanParams func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetDiffieHellmanParams calls the Security framework function SSLGetDiffieHellmanParams.
 func SSLGetDiffieHellmanParams(context_ obj.Object, dhParams unsafe.Pointer) (result int, dhParamsLen int) {
@@ -699,11 +699,11 @@ func SSLGetDiffieHellmanParams(context_ obj.Object, dhParams unsafe.Pointer) (re
 		ebipurego.RegisterLibFunc(&_fnSSLGetDiffieHellmanParams, _lib, "SSLGetDiffieHellmanParams")
 	}
 	var _out0 int
-	_ret := _fnSSLGetDiffieHellmanParams(objref.IDOf(context_), dhParams, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetDiffieHellmanParams(objref.IDOf(context_), dhParams, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetEnableCertVerify func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetEnableCertVerify func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetEnableCertVerify calls the Security framework function SSLGetEnableCertVerify.
 func SSLGetEnableCertVerify(context_ obj.Object) (result int, enableVerify uint8) {
@@ -712,11 +712,11 @@ func SSLGetEnableCertVerify(context_ obj.Object) (result int, enableVerify uint8
 		ebipurego.RegisterLibFunc(&_fnSSLGetEnableCertVerify, _lib, "SSLGetEnableCertVerify")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetEnableCertVerify(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetEnableCertVerify(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetEnabledCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSSLGetEnabledCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetEnabledCiphers calls the Security framework function SSLGetEnabledCiphers.
 func SSLGetEnabledCiphers(context_ obj.Object) (result int, ciphers uint16, numCiphers int) {
@@ -726,11 +726,11 @@ func SSLGetEnabledCiphers(context_ obj.Object) (result int, ciphers uint16, numC
 	}
 	var _out0 uint16
 	var _out1 int
-	_ret := _fnSSLGetEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnSSLGetEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnSSLGetMaxDatagramRecordSize func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetMaxDatagramRecordSize func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetMaxDatagramRecordSize calls the Security framework function SSLGetMaxDatagramRecordSize.
 func SSLGetMaxDatagramRecordSize(dtlsContext obj.Object) (result int, maxSize int) {
@@ -739,11 +739,11 @@ func SSLGetMaxDatagramRecordSize(dtlsContext obj.Object) (result int, maxSize in
 		ebipurego.RegisterLibFunc(&_fnSSLGetMaxDatagramRecordSize, _lib, "SSLGetMaxDatagramRecordSize")
 	}
 	var _out0 int
-	_ret := _fnSSLGetMaxDatagramRecordSize(objref.IDOf(dtlsContext), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetMaxDatagramRecordSize(objref.IDOf(dtlsContext), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetNegotiatedCipher func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetNegotiatedCipher func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNegotiatedCipher calls the Security framework function SSLGetNegotiatedCipher.
 func SSLGetNegotiatedCipher(context_ obj.Object) (result int, cipherSuite uint16) {
@@ -752,11 +752,11 @@ func SSLGetNegotiatedCipher(context_ obj.Object) (result int, cipherSuite uint16
 		ebipurego.RegisterLibFunc(&_fnSSLGetNegotiatedCipher, _lib, "SSLGetNegotiatedCipher")
 	}
 	var _out0 uint16
-	_ret := _fnSSLGetNegotiatedCipher(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetNegotiatedCipher(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetNegotiatedProtocolVersion func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetNegotiatedProtocolVersion func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNegotiatedProtocolVersion calls the Security framework function SSLGetNegotiatedProtocolVersion.
 func SSLGetNegotiatedProtocolVersion(context_ obj.Object) (result int, protocol SSLProtocol) {
@@ -765,11 +765,11 @@ func SSLGetNegotiatedProtocolVersion(context_ obj.Object) (result int, protocol 
 		ebipurego.RegisterLibFunc(&_fnSSLGetNegotiatedProtocolVersion, _lib, "SSLGetNegotiatedProtocolVersion")
 	}
 	var _out0 SSLProtocol
-	_ret := _fnSSLGetNegotiatedProtocolVersion(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetNegotiatedProtocolVersion(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetNumberEnabledCiphers func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetNumberEnabledCiphers func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNumberEnabledCiphers calls the Security framework function SSLGetNumberEnabledCiphers.
 func SSLGetNumberEnabledCiphers(context_ obj.Object) (result int, numCiphers int) {
@@ -778,11 +778,11 @@ func SSLGetNumberEnabledCiphers(context_ obj.Object) (result int, numCiphers int
 		ebipurego.RegisterLibFunc(&_fnSSLGetNumberEnabledCiphers, _lib, "SSLGetNumberEnabledCiphers")
 	}
 	var _out0 int
-	_ret := _fnSSLGetNumberEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetNumberEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetNumberSupportedCiphers func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetNumberSupportedCiphers func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetNumberSupportedCiphers calls the Security framework function SSLGetNumberSupportedCiphers.
 func SSLGetNumberSupportedCiphers(context_ obj.Object) (result int, numCiphers int) {
@@ -791,11 +791,11 @@ func SSLGetNumberSupportedCiphers(context_ obj.Object) (result int, numCiphers i
 		ebipurego.RegisterLibFunc(&_fnSSLGetNumberSupportedCiphers, _lib, "SSLGetNumberSupportedCiphers")
 	}
 	var _out0 int
-	_ret := _fnSSLGetNumberSupportedCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetNumberSupportedCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetPeerDomainName func(objc.ID, string, unsafe.Pointer) int
+var _fnSSLGetPeerDomainName func(objc.ID, string, unsafe.Pointer) int32
 
 // SSLGetPeerDomainName calls the Security framework function SSLGetPeerDomainName.
 func SSLGetPeerDomainName(context_ obj.Object, peerName string) (result int, peerNameLen int) {
@@ -804,11 +804,11 @@ func SSLGetPeerDomainName(context_ obj.Object, peerName string) (result int, pee
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerDomainName, _lib, "SSLGetPeerDomainName")
 	}
 	var _out0 int
-	_ret := _fnSSLGetPeerDomainName(objref.IDOf(context_), peerName, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetPeerDomainName(objref.IDOf(context_), peerName, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetPeerDomainNameLength func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetPeerDomainNameLength func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetPeerDomainNameLength calls the Security framework function SSLGetPeerDomainNameLength.
 func SSLGetPeerDomainNameLength(context_ obj.Object) (result int, peerNameLen int) {
@@ -817,11 +817,11 @@ func SSLGetPeerDomainNameLength(context_ obj.Object) (result int, peerNameLen in
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerDomainNameLength, _lib, "SSLGetPeerDomainNameLength")
 	}
 	var _out0 int
-	_ret := _fnSSLGetPeerDomainNameLength(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetPeerDomainNameLength(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetPeerID func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSSLGetPeerID func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetPeerID calls the Security framework function SSLGetPeerID.
 func SSLGetPeerID(context_ obj.Object, peerID unsafe.Pointer) (result int, peerIDLen int) {
@@ -830,11 +830,11 @@ func SSLGetPeerID(context_ obj.Object, peerID unsafe.Pointer) (result int, peerI
 		ebipurego.RegisterLibFunc(&_fnSSLGetPeerID, _lib, "SSLGetPeerID")
 	}
 	var _out0 int
-	_ret := _fnSSLGetPeerID(objref.IDOf(context_), peerID, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetPeerID(objref.IDOf(context_), peerID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetProtocolVersion func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetProtocolVersion func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersion calls the Security framework function SSLGetProtocolVersion.
 func SSLGetProtocolVersion(context_ obj.Object) (result int, protocol SSLProtocol) {
@@ -843,11 +843,11 @@ func SSLGetProtocolVersion(context_ obj.Object) (result int, protocol SSLProtoco
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersion, _lib, "SSLGetProtocolVersion")
 	}
 	var _out0 SSLProtocol
-	_ret := _fnSSLGetProtocolVersion(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetProtocolVersion(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetProtocolVersionEnabled func(objc.ID, SSLProtocol, unsafe.Pointer) int
+var _fnSSLGetProtocolVersionEnabled func(objc.ID, SSLProtocol, unsafe.Pointer) int32
 
 // SSLGetProtocolVersionEnabled calls the Security framework function SSLGetProtocolVersionEnabled.
 func SSLGetProtocolVersionEnabled(context_ obj.Object, protocol SSLProtocol) (result int, enable uint8) {
@@ -856,11 +856,11 @@ func SSLGetProtocolVersionEnabled(context_ obj.Object, protocol SSLProtocol) (re
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionEnabled, _lib, "SSLGetProtocolVersionEnabled")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetProtocolVersionEnabled(objref.IDOf(context_), protocol, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetProtocolVersionEnabled(objref.IDOf(context_), protocol, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetProtocolVersionMax func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetProtocolVersionMax func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersionMax calls the Security framework function SSLGetProtocolVersionMax.
 func SSLGetProtocolVersionMax(context_ obj.Object) (result int, maxVersion SSLProtocol) {
@@ -869,11 +869,11 @@ func SSLGetProtocolVersionMax(context_ obj.Object) (result int, maxVersion SSLPr
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionMax, _lib, "SSLGetProtocolVersionMax")
 	}
 	var _out0 SSLProtocol
-	_ret := _fnSSLGetProtocolVersionMax(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetProtocolVersionMax(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetProtocolVersionMin func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetProtocolVersionMin func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetProtocolVersionMin calls the Security framework function SSLGetProtocolVersionMin.
 func SSLGetProtocolVersionMin(context_ obj.Object) (result int, minVersion SSLProtocol) {
@@ -882,11 +882,11 @@ func SSLGetProtocolVersionMin(context_ obj.Object) (result int, minVersion SSLPr
 		ebipurego.RegisterLibFunc(&_fnSSLGetProtocolVersionMin, _lib, "SSLGetProtocolVersionMin")
 	}
 	var _out0 SSLProtocol
-	_ret := _fnSSLGetProtocolVersionMin(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetProtocolVersionMin(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetRsaBlinding func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetRsaBlinding func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetRsaBlinding calls the Security framework function SSLGetRsaBlinding.
 func SSLGetRsaBlinding(context_ obj.Object) (result int, blinding uint8) {
@@ -895,11 +895,11 @@ func SSLGetRsaBlinding(context_ obj.Object) (result int, blinding uint8) {
 		ebipurego.RegisterLibFunc(&_fnSSLGetRsaBlinding, _lib, "SSLGetRsaBlinding")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetRsaBlinding(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetRsaBlinding(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetSessionOption func(objc.ID, SSLSessionOption, unsafe.Pointer) int
+var _fnSSLGetSessionOption func(objc.ID, SSLSessionOption, unsafe.Pointer) int32
 
 // SSLGetSessionOption calls the Security framework function SSLGetSessionOption.
 func SSLGetSessionOption(context_ obj.Object, option SSLSessionOption) (result int, value uint8) {
@@ -908,11 +908,11 @@ func SSLGetSessionOption(context_ obj.Object, option SSLSessionOption) (result i
 		ebipurego.RegisterLibFunc(&_fnSSLGetSessionOption, _lib, "SSLGetSessionOption")
 	}
 	var _out0 uint8
-	_ret := _fnSSLGetSessionOption(objref.IDOf(context_), option, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetSessionOption(objref.IDOf(context_), option, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetSessionState func(objc.ID, unsafe.Pointer) int
+var _fnSSLGetSessionState func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetSessionState calls the Security framework function SSLGetSessionState.
 func SSLGetSessionState(context_ obj.Object) (result int, state SSLSessionState) {
@@ -921,11 +921,11 @@ func SSLGetSessionState(context_ obj.Object) (result int, state SSLSessionState)
 		ebipurego.RegisterLibFunc(&_fnSSLGetSessionState, _lib, "SSLGetSessionState")
 	}
 	var _out0 SSLSessionState
-	_ret := _fnSSLGetSessionState(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLGetSessionState(objref.IDOf(context_), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLGetSupportedCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSSLGetSupportedCiphers func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLGetSupportedCiphers calls the Security framework function SSLGetSupportedCiphers.
 func SSLGetSupportedCiphers(context_ obj.Object) (result int, ciphers uint16, numCiphers int) {
@@ -935,11 +935,11 @@ func SSLGetSupportedCiphers(context_ obj.Object) (result int, ciphers uint16, nu
 	}
 	var _out0 uint16
 	var _out1 int
-	_ret := _fnSSLGetSupportedCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnSSLGetSupportedCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnSSLRead func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnSSLRead func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SSLRead calls the Security framework function SSLRead.
 func SSLRead(context_ obj.Object, data unsafe.Pointer, dataLength int) (result int, processed int) {
@@ -948,11 +948,11 @@ func SSLRead(context_ obj.Object, data unsafe.Pointer, dataLength int) (result i
 		ebipurego.RegisterLibFunc(&_fnSSLRead, _lib, "SSLRead")
 	}
 	var _out0 int
-	_ret := _fnSSLRead(objref.IDOf(context_), data, dataLength, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLRead(objref.IDOf(context_), data, dataLength, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSSLSetEnabledCiphers func(objc.ID, unsafe.Pointer, int) int
+var _fnSSLSetEnabledCiphers func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetEnabledCiphers calls the Security framework function SSLSetEnabledCiphers.
 func SSLSetEnabledCiphers(context_ obj.Object, numCiphers int) (result int, ciphers uint16) {
@@ -961,11 +961,11 @@ func SSLSetEnabledCiphers(context_ obj.Object, numCiphers int) (result int, ciph
 		ebipurego.RegisterLibFunc(&_fnSSLSetEnabledCiphers, _lib, "SSLSetEnabledCiphers")
 	}
 	var _out0 uint16
-	_ret := _fnSSLSetEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), numCiphers)
+	_ret := int(_fnSSLSetEnabledCiphers(objref.IDOf(context_), unsafe.Pointer(&_out0), numCiphers))
 	return _ret, _out0
 }
 
-var _fnSSLWrite func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnSSLWrite func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SSLWrite calls the Security framework function SSLWrite.
 func SSLWrite(context_ obj.Object, data unsafe.Pointer, dataLength int) (result int, processed int) {
@@ -974,7 +974,7 @@ func SSLWrite(context_ obj.Object, data unsafe.Pointer, dataLength int) (result 
 		ebipurego.RegisterLibFunc(&_fnSSLWrite, _lib, "SSLWrite")
 	}
 	var _out0 int
-	_ret := _fnSSLWrite(objref.IDOf(context_), data, dataLength, unsafe.Pointer(&_out0))
+	_ret := int(_fnSSLWrite(objref.IDOf(context_), data, dataLength, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -990,7 +990,7 @@ func SecACLCopyAuthorizations(acl obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnSecACLCopyContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecACLCopyContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLCopyContents calls the Security framework function SecACLCopyContents.
 func SecACLCopyContents(acl obj.Object, applicationList unsafe.Pointer, description unsafe.Pointer) (result int, promptSelector SecKeychainPromptSelector) {
@@ -999,11 +999,11 @@ func SecACLCopyContents(acl obj.Object, applicationList unsafe.Pointer, descript
 		ebipurego.RegisterLibFunc(&_fnSecACLCopyContents, _lib, "SecACLCopyContents")
 	}
 	var _out0 SecKeychainPromptSelector
-	_ret := _fnSecACLCopyContents(objref.IDOf(acl), applicationList, description, unsafe.Pointer(&_out0))
+	_ret := int(_fnSecACLCopyContents(objref.IDOf(acl), applicationList, description, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecACLCopySimpleContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecACLCopySimpleContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLCopySimpleContents calls the Security framework function SecACLCopySimpleContents.
 func SecACLCopySimpleContents(acl obj.Object, applicationList unsafe.Pointer, description unsafe.Pointer) (result int, promptSelector CssmAclKeychainPromptSelector) {
@@ -1012,11 +1012,11 @@ func SecACLCopySimpleContents(acl obj.Object, applicationList unsafe.Pointer, de
 		ebipurego.RegisterLibFunc(&_fnSecACLCopySimpleContents, _lib, "SecACLCopySimpleContents")
 	}
 	var _out0 CssmAclKeychainPromptSelector
-	_ret := _fnSecACLCopySimpleContents(objref.IDOf(acl), applicationList, description, unsafe.Pointer(&_out0))
+	_ret := int(_fnSecACLCopySimpleContents(objref.IDOf(acl), applicationList, description, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecACLCreateFromSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecACLCreateFromSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLCreateFromSimpleContents calls the Security framework function SecACLCreateFromSimpleContents.
 func SecACLCreateFromSimpleContents(access obj.Object, applicationList obj.Object, description obj.Object, newAcl unsafe.Pointer) (result int, promptSelector CssmAclKeychainPromptSelector) {
@@ -1025,11 +1025,11 @@ func SecACLCreateFromSimpleContents(access obj.Object, applicationList obj.Objec
 		ebipurego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _lib, "SecACLCreateFromSimpleContents")
 	}
 	var _out0 CssmAclKeychainPromptSelector
-	_ret := _fnSecACLCreateFromSimpleContents(objref.IDOf(access), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(&_out0), newAcl)
+	_ret := int(_fnSecACLCreateFromSimpleContents(objref.IDOf(access), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(&_out0), newAcl))
 	return _ret, _out0
 }
 
-var _fnSecACLGetAuthorizations func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecACLGetAuthorizations func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLGetAuthorizations calls the Security framework function SecACLGetAuthorizations.
 func SecACLGetAuthorizations(acl obj.Object, tags unsafe.Pointer) (result int, tagCount uint32) {
@@ -1038,7 +1038,7 @@ func SecACLGetAuthorizations(acl obj.Object, tags unsafe.Pointer) (result int, t
 		ebipurego.RegisterLibFunc(&_fnSecACLGetAuthorizations, _lib, "SecACLGetAuthorizations")
 	}
 	var _out0 uint32
-	_ret := _fnSecACLGetAuthorizations(objref.IDOf(acl), tags, unsafe.Pointer(&_out0))
+	_ret := int(_fnSecACLGetAuthorizations(objref.IDOf(acl), tags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1053,7 +1053,7 @@ func SecACLGetTypeID() int {
 	return _fnSecACLGetTypeID()
 }
 
-var _fnSecACLSetAuthorizations func(objc.ID, unsafe.Pointer, uint32) int
+var _fnSecACLSetAuthorizations func(objc.ID, unsafe.Pointer, uint32) int32
 
 // SecACLSetAuthorizations calls the Security framework function SecACLSetAuthorizations.
 func SecACLSetAuthorizations(acl obj.Object, tags unsafe.Pointer, tagCount uint32) int {
@@ -1061,10 +1061,10 @@ func SecACLSetAuthorizations(acl obj.Object, tags unsafe.Pointer, tagCount uint3
 	if _fnSecACLSetAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetAuthorizations, _lib, "SecACLSetAuthorizations")
 	}
-	return _fnSecACLSetAuthorizations(objref.IDOf(acl), tags, tagCount)
+	return int(_fnSecACLSetAuthorizations(objref.IDOf(acl), tags, tagCount))
 }
 
-var _fnSecACLSetSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int
+var _fnSecACLSetSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecACLSetSimpleContents calls the Security framework function SecACLSetSimpleContents.
 func SecACLSetSimpleContents(acl obj.Object, applicationList obj.Object, description obj.Object) (result int, promptSelector CssmAclKeychainPromptSelector) {
@@ -1073,7 +1073,7 @@ func SecACLSetSimpleContents(acl obj.Object, applicationList obj.Object, descrip
 		ebipurego.RegisterLibFunc(&_fnSecACLSetSimpleContents, _lib, "SecACLSetSimpleContents")
 	}
 	var _out0 CssmAclKeychainPromptSelector
-	_ret := _fnSecACLSetSimpleContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecACLSetSimpleContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1100,7 +1100,7 @@ func SecAccessCopyMatchingACLList(accessRef obj.Object, authorizationTag obj.Obj
 	return obj.Wrap(_ret)
 }
 
-var _fnSecAccessCopyOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecAccessCopyOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecAccessCopyOwnerAndACL calls the Security framework function SecAccessCopyOwnerAndACL.
 func SecAccessCopyOwnerAndACL(accessRef obj.Object, aclList unsafe.Pointer) (result int, userId int, groupId int, ownerType int) {
@@ -1111,7 +1111,7 @@ func SecAccessCopyOwnerAndACL(accessRef obj.Object, aclList unsafe.Pointer) (res
 	var _out0 int
 	var _out1 int
 	var _out2 int
-	_ret := _fnSecAccessCopyOwnerAndACL(objref.IDOf(accessRef), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), aclList)
+	_ret := int(_fnSecAccessCopyOwnerAndACL(objref.IDOf(accessRef), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), aclList))
 	return _ret, _out0, _out1, _out2
 }
 
@@ -1234,7 +1234,7 @@ func SecCertificateCreateWithData(allocator obj.Object, data obj.Object) obj.Obj
 	return obj.Wrap(_ret)
 }
 
-var _fnSecCertificateGetCLHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecCertificateGetCLHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetCLHandle calls the Security framework function SecCertificateGetCLHandle.
 func SecCertificateGetCLHandle(certificate obj.Object) (result int, clHandle int) {
@@ -1243,11 +1243,11 @@ func SecCertificateGetCLHandle(certificate obj.Object) (result int, clHandle int
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetCLHandle, _lib, "SecCertificateGetCLHandle")
 	}
 	var _out0 int
-	_ret := _fnSecCertificateGetCLHandle(objref.IDOf(certificate), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecCertificateGetCLHandle(objref.IDOf(certificate), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecCertificateGetType func(objc.ID, unsafe.Pointer) int
+var _fnSecCertificateGetType func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateGetType calls the Security framework function SecCertificateGetType.
 func SecCertificateGetType(certificate obj.Object) (result int, certificateType uint32) {
@@ -1256,7 +1256,7 @@ func SecCertificateGetType(certificate obj.Object) (result int, certificateType 
 		ebipurego.RegisterLibFunc(&_fnSecCertificateGetType, _lib, "SecCertificateGetType")
 	}
 	var _out0 uint32
-	_ret := _fnSecCertificateGetType(objref.IDOf(certificate), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecCertificateGetType(objref.IDOf(certificate), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1350,7 +1350,7 @@ func SecGroupTransformGetTypeID() int {
 	return _fnSecGroupTransformGetTypeID()
 }
 
-var _fnSecHostCreateGuest func(int, uint32, objc.ID, objc.ID, SecCSFlags, unsafe.Pointer) int
+var _fnSecHostCreateGuest func(int, uint32, objc.ID, objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecHostCreateGuest calls the Security framework function SecHostCreateGuest.
 func SecHostCreateGuest(host int, status uint32, path obj.Object, attributes obj.Object, flags SecCSFlags) (result int, newGuest int) {
@@ -1359,11 +1359,11 @@ func SecHostCreateGuest(host int, status uint32, path obj.Object, attributes obj
 		ebipurego.RegisterLibFunc(&_fnSecHostCreateGuest, _lib, "SecHostCreateGuest")
 	}
 	var _out0 int
-	_ret := _fnSecHostCreateGuest(host, status, objref.IDOf(path), objref.IDOf(attributes), flags, unsafe.Pointer(&_out0))
+	_ret := int(_fnSecHostCreateGuest(host, status, objref.IDOf(path), objref.IDOf(attributes), flags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecHostSelectedGuest func(SecCSFlags, unsafe.Pointer) int
+var _fnSecHostSelectedGuest func(SecCSFlags, unsafe.Pointer) int32
 
 // SecHostSelectedGuest calls the Security framework function SecHostSelectedGuest.
 func SecHostSelectedGuest(flags SecCSFlags) (result int, guestRef int) {
@@ -1372,7 +1372,7 @@ func SecHostSelectedGuest(flags SecCSFlags) (result int, guestRef int) {
 		ebipurego.RegisterLibFunc(&_fnSecHostSelectedGuest, _lib, "SecHostSelectedGuest")
 	}
 	var _out0 int
-	_ret := _fnSecHostSelectedGuest(flags, unsafe.Pointer(&_out0))
+	_ret := int(_fnSecHostSelectedGuest(flags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1457,7 +1457,7 @@ func SecKeyGetBlockSize(key obj.Object) int {
 	return _fnSecKeyGetBlockSize(objref.IDOf(key))
 }
 
-var _fnSecKeyGetCSPHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecKeyGetCSPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeyGetCSPHandle calls the Security framework function SecKeyGetCSPHandle.
 func SecKeyGetCSPHandle(keyRef obj.Object) (result int, cspHandle int) {
@@ -1466,7 +1466,7 @@ func SecKeyGetCSPHandle(keyRef obj.Object) (result int, cspHandle int) {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGetCSPHandle, _lib, "SecKeyGetCSPHandle")
 	}
 	var _out0 int
-	_ret := _fnSecKeyGetCSPHandle(objref.IDOf(keyRef), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeyGetCSPHandle(objref.IDOf(keyRef), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1492,7 +1492,7 @@ func SecKeyIsAlgorithmSupported(key obj.Object, operation SecKeyOperationType, a
 	return _fnSecKeyIsAlgorithmSupported(objref.IDOf(key), operation, algorithm)
 }
 
-var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCopySettings calls the Security framework function SecKeychainCopySettings.
 func SecKeychainCopySettings(keychain obj.Object) (result int, outSettings SecKeychainSettings) {
@@ -1501,11 +1501,11 @@ func SecKeychainCopySettings(keychain obj.Object) (result int, outSettings SecKe
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCopySettings, _lib, "SecKeychainCopySettings")
 	}
 	var _out0 SecKeychainSettings
-	_ret := _fnSecKeychainCopySettings(objref.IDOf(keychain), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainCopySettings(objref.IDOf(keychain), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainFindGenericPassword func(objc.ID, int, string, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecKeychainFindGenericPassword func(objc.ID, int, string, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainFindGenericPassword calls the Security framework function SecKeychainFindGenericPassword.
 func SecKeychainFindGenericPassword(keychainOrArray obj.Object, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
@@ -1514,11 +1514,11 @@ func SecKeychainFindGenericPassword(keychainOrArray obj.Object, serviceNameLengt
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindGenericPassword, _lib, "SecKeychainFindGenericPassword")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainFindGenericPassword(objref.IDOf(keychainOrArray), serviceNameLength, serviceName, accountNameLength, accountName, unsafe.Pointer(&_out0), passwordData, itemRef)
+	_ret := int(_fnSecKeychainFindGenericPassword(objref.IDOf(keychainOrArray), serviceNameLength, serviceName, accountNameLength, accountName, unsafe.Pointer(&_out0), passwordData, itemRef))
 	return _ret, _out0
 }
 
-var _fnSecKeychainFindInternetPassword func(objc.ID, int, string, int, string, int, string, int, string, uint16, SecProtocolType, SecAuthenticationType, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecKeychainFindInternetPassword func(objc.ID, int, string, int, string, int, string, int, string, uint16, SecProtocolType, SecAuthenticationType, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainFindInternetPassword calls the Security framework function SecKeychainFindInternetPassword.
 func SecKeychainFindInternetPassword(keychainOrArray obj.Object, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
@@ -1527,11 +1527,11 @@ func SecKeychainFindInternetPassword(keychainOrArray obj.Object, serverNameLengt
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindInternetPassword, _lib, "SecKeychainFindInternetPassword")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainFindInternetPassword(objref.IDOf(keychainOrArray), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, unsafe.Pointer(&_out0), passwordData, itemRef)
+	_ret := int(_fnSecKeychainFindInternetPassword(objref.IDOf(keychainOrArray), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, unsafe.Pointer(&_out0), passwordData, itemRef))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetCSPHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainGetCSPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetCSPHandle calls the Security framework function SecKeychainGetCSPHandle.
 func SecKeychainGetCSPHandle(keychain obj.Object) (result int, cspHandle int) {
@@ -1540,11 +1540,11 @@ func SecKeychainGetCSPHandle(keychain obj.Object) (result int, cspHandle int) {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetCSPHandle, _lib, "SecKeychainGetCSPHandle")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainGetCSPHandle(objref.IDOf(keychain), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetCSPHandle(objref.IDOf(keychain), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetDLDBHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetDLDBHandle calls the Security framework function SecKeychainGetDLDBHandle.
 func SecKeychainGetDLDBHandle(keychain obj.Object) (result int, dldbHandle CssmDlDbHandle) {
@@ -1553,11 +1553,11 @@ func SecKeychainGetDLDBHandle(keychain obj.Object) (result int, dldbHandle CssmD
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetDLDBHandle, _lib, "SecKeychainGetDLDBHandle")
 	}
 	var _out0 CssmDlDbHandle
-	_ret := _fnSecKeychainGetDLDBHandle(objref.IDOf(keychain), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetDLDBHandle(objref.IDOf(keychain), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetPath func(objc.ID, unsafe.Pointer, string) int
+var _fnSecKeychainGetPath func(objc.ID, unsafe.Pointer, string) int32
 
 // SecKeychainGetPath calls the Security framework function SecKeychainGetPath.
 func SecKeychainGetPath(keychain obj.Object, pathName string) (result int, ioPathLength int) {
@@ -1566,11 +1566,11 @@ func SecKeychainGetPath(keychain obj.Object, pathName string) (result int, ioPat
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetPath, _lib, "SecKeychainGetPath")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainGetPath(objref.IDOf(keychain), unsafe.Pointer(&_out0), pathName)
+	_ret := int(_fnSecKeychainGetPath(objref.IDOf(keychain), unsafe.Pointer(&_out0), pathName))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetPreferenceDomain func(unsafe.Pointer) int
+var _fnSecKeychainGetPreferenceDomain func(unsafe.Pointer) int32
 
 // SecKeychainGetPreferenceDomain calls the Security framework function SecKeychainGetPreferenceDomain.
 func SecKeychainGetPreferenceDomain() (result int, domain SecPreferencesDomain) {
@@ -1579,11 +1579,11 @@ func SecKeychainGetPreferenceDomain() (result int, domain SecPreferencesDomain) 
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetPreferenceDomain, _lib, "SecKeychainGetPreferenceDomain")
 	}
 	var _out0 SecPreferencesDomain
-	_ret := _fnSecKeychainGetPreferenceDomain(unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetPreferenceDomain(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetStatus func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainGetStatus func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetStatus calls the Security framework function SecKeychainGetStatus.
 func SecKeychainGetStatus(keychain obj.Object) (result int, keychainStatus int) {
@@ -1592,7 +1592,7 @@ func SecKeychainGetStatus(keychain obj.Object) (result int, keychainStatus int) 
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetStatus, _lib, "SecKeychainGetStatus")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainGetStatus(objref.IDOf(keychain), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetStatus(objref.IDOf(keychain), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1607,7 +1607,7 @@ func SecKeychainGetTypeID() int {
 	return _fnSecKeychainGetTypeID()
 }
 
-var _fnSecKeychainGetUserInteractionAllowed func(unsafe.Pointer) int
+var _fnSecKeychainGetUserInteractionAllowed func(unsafe.Pointer) int32
 
 // SecKeychainGetUserInteractionAllowed calls the Security framework function SecKeychainGetUserInteractionAllowed.
 func SecKeychainGetUserInteractionAllowed() (result int, state uint8) {
@@ -1616,11 +1616,11 @@ func SecKeychainGetUserInteractionAllowed() (result int, state uint8) {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetUserInteractionAllowed, _lib, "SecKeychainGetUserInteractionAllowed")
 	}
 	var _out0 uint8
-	_ret := _fnSecKeychainGetUserInteractionAllowed(unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetUserInteractionAllowed(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainGetVersion func(unsafe.Pointer) int
+var _fnSecKeychainGetVersion func(unsafe.Pointer) int32
 
 // SecKeychainGetVersion calls the Security framework function SecKeychainGetVersion.
 func SecKeychainGetVersion() (result int, returnVers int) {
@@ -1629,11 +1629,11 @@ func SecKeychainGetVersion() (result int, returnVers int) {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetVersion, _lib, "SecKeychainGetVersion")
 	}
 	var _out0 int
-	_ret := _fnSecKeychainGetVersion(unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainGetVersion(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecKeychainItemCopyContent func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSecKeychainItemCopyContent func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainItemCopyContent calls the Security framework function SecKeychainItemCopyContent.
 func SecKeychainItemCopyContent(itemRef obj.Object, attrList unsafe.Pointer, outData unsafe.Pointer) (result int, itemClass SecItemClass, length int) {
@@ -1643,11 +1643,11 @@ func SecKeychainItemCopyContent(itemRef obj.Object, attrList unsafe.Pointer, out
 	}
 	var _out0 SecItemClass
 	var _out1 int
-	_ret := _fnSecKeychainItemCopyContent(objref.IDOf(itemRef), unsafe.Pointer(&_out0), attrList, unsafe.Pointer(&_out1), outData)
+	_ret := int(_fnSecKeychainItemCopyContent(objref.IDOf(itemRef), unsafe.Pointer(&_out0), attrList, unsafe.Pointer(&_out1), outData))
 	return _ret, _out0, _out1
 }
 
-var _fnSecKeychainItemCreateFromContent func(SecItemClass, unsafe.Pointer, int, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) int
+var _fnSecKeychainItemCreateFromContent func(SecItemClass, unsafe.Pointer, int, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCreateFromContent calls the Security framework function SecKeychainItemCreateFromContent.
 func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList unsafe.Pointer, length int, data unsafe.Pointer, keychainRef obj.Object, initialAccess obj.Object, itemRef unsafe.Pointer) int {
@@ -1655,10 +1655,10 @@ func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList unsafe.Po
 	if _fnSecKeychainItemCreateFromContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreateFromContent, _lib, "SecKeychainItemCreateFromContent")
 	}
-	return _fnSecKeychainItemCreateFromContent(itemClass, attrList, length, data, objref.IDOf(keychainRef), objref.IDOf(initialAccess), itemRef)
+	return int(_fnSecKeychainItemCreateFromContent(itemClass, attrList, length, data, objref.IDOf(keychainRef), objref.IDOf(initialAccess), itemRef))
 }
 
-var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemGetDLDBHandle calls the Security framework function SecKeychainItemGetDLDBHandle.
 func SecKeychainItemGetDLDBHandle(keyItemRef obj.Object) (result int, dldbHandle CssmDlDbHandle) {
@@ -1667,7 +1667,7 @@ func SecKeychainItemGetDLDBHandle(keyItemRef obj.Object) (result int, dldbHandle
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _lib, "SecKeychainItemGetDLDBHandle")
 	}
 	var _out0 CssmDlDbHandle
-	_ret := _fnSecKeychainItemGetDLDBHandle(objref.IDOf(keyItemRef), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainItemGetDLDBHandle(objref.IDOf(keyItemRef), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1682,7 +1682,7 @@ func SecKeychainItemGetTypeID() int {
 	return _fnSecKeychainItemGetTypeID()
 }
 
-var _fnSecKeychainItemModifyAttributesAndData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnSecKeychainItemModifyAttributesAndData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SecKeychainItemModifyAttributesAndData calls the Security framework function SecKeychainItemModifyAttributesAndData.
 func SecKeychainItemModifyAttributesAndData(itemRef obj.Object, attrList unsafe.Pointer, length int, data unsafe.Pointer) int {
@@ -1690,10 +1690,10 @@ func SecKeychainItemModifyAttributesAndData(itemRef obj.Object, attrList unsafe.
 	if _fnSecKeychainItemModifyAttributesAndData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemModifyAttributesAndData, _lib, "SecKeychainItemModifyAttributesAndData")
 	}
-	return _fnSecKeychainItemModifyAttributesAndData(objref.IDOf(itemRef), attrList, length, data)
+	return int(_fnSecKeychainItemModifyAttributesAndData(objref.IDOf(itemRef), attrList, length, data))
 }
 
-var _fnSecKeychainItemModifyContent func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnSecKeychainItemModifyContent func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SecKeychainItemModifyContent calls the Security framework function SecKeychainItemModifyContent.
 func SecKeychainItemModifyContent(itemRef obj.Object, attrList unsafe.Pointer, length int, data unsafe.Pointer) int {
@@ -1701,7 +1701,7 @@ func SecKeychainItemModifyContent(itemRef obj.Object, attrList unsafe.Pointer, l
 	if _fnSecKeychainItemModifyContent == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemModifyContent, _lib, "SecKeychainItemModifyContent")
 	}
-	return _fnSecKeychainItemModifyContent(objref.IDOf(itemRef), attrList, length, data)
+	return int(_fnSecKeychainItemModifyContent(objref.IDOf(itemRef), attrList, length, data))
 }
 
 var _fnSecKeychainSearchGetTypeID func() int
@@ -1715,7 +1715,7 @@ func SecKeychainSearchGetTypeID() int {
 	return _fnSecKeychainSearchGetTypeID()
 }
 
-var _fnSecKeychainSetSettings func(objc.ID, unsafe.Pointer) int
+var _fnSecKeychainSetSettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainSetSettings calls the Security framework function SecKeychainSetSettings.
 func SecKeychainSetSettings(keychain obj.Object) (result int, newSettings SecKeychainSettings) {
@@ -1724,7 +1724,7 @@ func SecKeychainSetSettings(keychain obj.Object) (result int, newSettings SecKey
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSettings, _lib, "SecKeychainSetSettings")
 	}
 	var _out0 SecKeychainSettings
-	_ret := _fnSecKeychainSetSettings(objref.IDOf(keychain), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecKeychainSetSettings(objref.IDOf(keychain), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1800,7 +1800,7 @@ func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties obj.O
 	return obj.Wrap(_ret)
 }
 
-var _fnSecPolicyGetTPHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecPolicyGetTPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicyGetTPHandle calls the Security framework function SecPolicyGetTPHandle.
 func SecPolicyGetTPHandle(policyRef obj.Object) (result int, tpHandle int) {
@@ -1809,7 +1809,7 @@ func SecPolicyGetTPHandle(policyRef obj.Object) (result int, tpHandle int) {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyGetTPHandle, _lib, "SecPolicyGetTPHandle")
 	}
 	var _out0 int
-	_ret := _fnSecPolicyGetTPHandle(objref.IDOf(policyRef), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecPolicyGetTPHandle(objref.IDOf(policyRef), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1835,7 +1835,7 @@ func SecPolicySearchGetTypeID() int {
 	return _fnSecPolicySearchGetTypeID()
 }
 
-var _fnSecRandomCopyBytes func(objc.ID, int, unsafe.Pointer) int
+var _fnSecRandomCopyBytes func(objc.ID, int, unsafe.Pointer) int32
 
 // SecRandomCopyBytes calls the Security framework function SecRandomCopyBytes.
 func SecRandomCopyBytes(rnd obj.Object, count int, bytes_ unsafe.Pointer) int {
@@ -1843,7 +1843,7 @@ func SecRandomCopyBytes(rnd obj.Object, count int, bytes_ unsafe.Pointer) int {
 	if _fnSecRandomCopyBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRandomCopyBytes, _lib, "SecRandomCopyBytes")
 	}
-	return _fnSecRandomCopyBytes(objref.IDOf(rnd), count, bytes_)
+	return int(_fnSecRandomCopyBytes(objref.IDOf(rnd), count, bytes_))
 }
 
 var _fnSecRequirementGetTypeID func() int
@@ -2070,7 +2070,7 @@ func SecTrustCopyResult(trust obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnSecTrustEvaluate func(objc.ID, unsafe.Pointer) int
+var _fnSecTrustEvaluate func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustEvaluate calls the Security framework function SecTrustEvaluate.
 func SecTrustEvaluate(trust obj.Object) (result int, result_ SecTrustResultType) {
@@ -2079,7 +2079,7 @@ func SecTrustEvaluate(trust obj.Object) (result int, result_ SecTrustResultType)
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluate, _lib, "SecTrustEvaluate")
 	}
 	var _out0 SecTrustResultType
-	_ret := _fnSecTrustEvaluate(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecTrustEvaluate(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -2117,7 +2117,7 @@ func SecTrustGetCertificateCount(trust obj.Object) int {
 	return _fnSecTrustGetCertificateCount(objref.IDOf(trust))
 }
 
-var _fnSecTrustGetCssmResultCode func(objc.ID, unsafe.Pointer) int
+var _fnSecTrustGetCssmResultCode func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetCssmResultCode calls the Security framework function SecTrustGetCssmResultCode.
 func SecTrustGetCssmResultCode(trust obj.Object) (result int, resultCode int) {
@@ -2126,11 +2126,11 @@ func SecTrustGetCssmResultCode(trust obj.Object) (result int, resultCode int) {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetCssmResultCode, _lib, "SecTrustGetCssmResultCode")
 	}
 	var _out0 int
-	_ret := _fnSecTrustGetCssmResultCode(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecTrustGetCssmResultCode(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecTrustGetNetworkFetchAllowed func(objc.ID, unsafe.Pointer) int
+var _fnSecTrustGetNetworkFetchAllowed func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetNetworkFetchAllowed calls the Security framework function SecTrustGetNetworkFetchAllowed.
 func SecTrustGetNetworkFetchAllowed(trust obj.Object) (result int, allowFetch uint8) {
@@ -2139,11 +2139,11 @@ func SecTrustGetNetworkFetchAllowed(trust obj.Object) (result int, allowFetch ui
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetNetworkFetchAllowed, _lib, "SecTrustGetNetworkFetchAllowed")
 	}
 	var _out0 uint8
-	_ret := _fnSecTrustGetNetworkFetchAllowed(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecTrustGetNetworkFetchAllowed(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecTrustGetTPHandle func(objc.ID, unsafe.Pointer) int
+var _fnSecTrustGetTPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetTPHandle calls the Security framework function SecTrustGetTPHandle.
 func SecTrustGetTPHandle(trust obj.Object) (result int, handle int) {
@@ -2152,11 +2152,11 @@ func SecTrustGetTPHandle(trust obj.Object) (result int, handle int) {
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetTPHandle, _lib, "SecTrustGetTPHandle")
 	}
 	var _out0 int
-	_ret := _fnSecTrustGetTPHandle(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecTrustGetTPHandle(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnSecTrustGetTrustResult func(objc.ID, unsafe.Pointer) int
+var _fnSecTrustGetTrustResult func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetTrustResult calls the Security framework function SecTrustGetTrustResult.
 func SecTrustGetTrustResult(trust obj.Object) (result int, result_ SecTrustResultType) {
@@ -2165,7 +2165,7 @@ func SecTrustGetTrustResult(trust obj.Object) (result int, result_ SecTrustResul
 		ebipurego.RegisterLibFunc(&_fnSecTrustGetTrustResult, _lib, "SecTrustGetTrustResult")
 	}
 	var _out0 SecTrustResultType
-	_ret := _fnSecTrustGetTrustResult(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_ret := int(_fnSecTrustGetTrustResult(objref.IDOf(trust), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -2213,7 +2213,7 @@ func SecTrustedApplicationGetTypeID() int {
 	return _fnSecTrustedApplicationGetTypeID()
 }
 
-var _fnSessionGetInfo func(int, unsafe.Pointer, unsafe.Pointer) int
+var _fnSessionGetInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // SessionGetInfo calls the Security framework function SessionGetInfo.
 func SessionGetInfo(session int) (result int, sessionId int, attributes SessionAttributeBits) {
@@ -2223,7 +2223,7 @@ func SessionGetInfo(session int) (result int, sessionId int, attributes SessionA
 	}
 	var _out0 int
 	var _out1 SessionAttributeBits
-	_ret := _fnSessionGetInfo(session, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnSessionGetInfo(session, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 

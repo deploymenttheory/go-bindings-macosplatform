@@ -81,7 +81,7 @@ func Tk_CanvasEventuallyRedraw(canvas unsafe.Pointer, x1 int, y1 int, x2 int, y2
 	_fnTk_CanvasEventuallyRedraw(canvas, x1, y1, x2, y2)
 }
 
-var _fnTk_CanvasPsOutline func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_CanvasPsOutline func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_CanvasPsOutline calls the Tk framework function Tk_CanvasPsOutline.
 func Tk_CanvasPsOutline(canvas unsafe.Pointer, item unsafe.Pointer, outline unsafe.Pointer) int {
@@ -89,7 +89,7 @@ func Tk_CanvasPsOutline(canvas unsafe.Pointer, item unsafe.Pointer, outline unsa
 	if _fnTk_CanvasPsOutline == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_CanvasPsOutline, _lib, "Tk_CanvasPsOutline")
 	}
-	return _fnTk_CanvasPsOutline(canvas, item, outline)
+	return int(_fnTk_CanvasPsOutline(canvas, item, outline))
 }
 
 var _fnTk_CanvasPsY func(unsafe.Pointer, float64) float64
@@ -150,7 +150,7 @@ func Tk_CanvasWindowCoords(canvas unsafe.Pointer, x float64, y float64) (screenX
 	return _out0, _out1
 }
 
-var _fnTk_ChangeOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_ChangeOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_ChangeOutlineGC calls the Tk framework function Tk_ChangeOutlineGC.
 func Tk_ChangeOutlineGC(canvas unsafe.Pointer, item unsafe.Pointer, outline unsafe.Pointer) int {
@@ -158,7 +158,7 @@ func Tk_ChangeOutlineGC(canvas unsafe.Pointer, item unsafe.Pointer, outline unsa
 	if _fnTk_ChangeOutlineGC == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_ChangeOutlineGC, _lib, "Tk_ChangeOutlineGC")
 	}
-	return _fnTk_ChangeOutlineGC(canvas, item, outline)
+	return int(_fnTk_ChangeOutlineGC(canvas, item, outline))
 }
 
 var _fnTk_ChangeWindowAttributes func(unsafe.Pointer, int, unsafe.Pointer)
@@ -172,7 +172,7 @@ func Tk_ChangeWindowAttributes(tkwin unsafe.Pointer, valueMask int, attsPtr unsa
 	_fnTk_ChangeWindowAttributes(tkwin, valueMask, attsPtr)
 }
 
-var _fnTk_CharBbox func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_CharBbox func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_CharBbox calls the Tk framework function Tk_CharBbox.
 func Tk_CharBbox(layout unsafe.Pointer, index int) (result int, xPtr int32, yPtr int32, widthPtr int32, heightPtr int32) {
@@ -184,7 +184,7 @@ func Tk_CharBbox(layout unsafe.Pointer, index int) (result int, xPtr int32, yPtr
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	_ret := _fnTk_CharBbox(layout, index, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnTk_CharBbox(layout, index, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
@@ -199,7 +199,7 @@ func Tk_ClearSelection(tkwin unsafe.Pointer, selection int) {
 	_fnTk_ClearSelection(tkwin, selection)
 }
 
-var _fnTk_ConfigOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_ConfigOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_ConfigOutlineGC calls the Tk framework function Tk_ConfigOutlineGC.
 func Tk_ConfigOutlineGC(gcValues unsafe.Pointer, canvas unsafe.Pointer, item unsafe.Pointer, outline unsafe.Pointer) int {
@@ -207,7 +207,7 @@ func Tk_ConfigOutlineGC(gcValues unsafe.Pointer, canvas unsafe.Pointer, item uns
 	if _fnTk_ConfigOutlineGC == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_ConfigOutlineGC, _lib, "Tk_ConfigOutlineGC")
 	}
-	return _fnTk_ConfigOutlineGC(gcValues, canvas, item, outline)
+	return int(_fnTk_ConfigOutlineGC(gcValues, canvas, item, outline))
 }
 
 var _fnTk_ConfigureWindow func(unsafe.Pointer, int, unsafe.Pointer)
@@ -456,7 +456,7 @@ func Tk_DisplayName(tkwin unsafe.Pointer) string {
 	return _fnTk_DisplayName(tkwin)
 }
 
-var _fnTk_DistanceToTextLayout func(unsafe.Pointer, int, int) int
+var _fnTk_DistanceToTextLayout func(unsafe.Pointer, int, int) int32
 
 // Tk_DistanceToTextLayout calls the Tk framework function Tk_DistanceToTextLayout.
 func Tk_DistanceToTextLayout(layout unsafe.Pointer, x int, y int) int {
@@ -464,7 +464,7 @@ func Tk_DistanceToTextLayout(layout unsafe.Pointer, x int, y int) int {
 	if _fnTk_DistanceToTextLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_DistanceToTextLayout, _lib, "Tk_DistanceToTextLayout")
 	}
-	return _fnTk_DistanceToTextLayout(layout, x, y)
+	return int(_fnTk_DistanceToTextLayout(layout, x, y))
 }
 
 var _fnTk_DitherPhoto func(unsafe.Pointer, int, int, int, int)
@@ -548,7 +548,7 @@ func Tk_Fill3DRectangle(tkwin unsafe.Pointer, drawable int, border unsafe.Pointe
 	_fnTk_Fill3DRectangle(tkwin, drawable, border, x, y, width, height, borderWidth, relief)
 }
 
-var _fnTk_FontId func(unsafe.Pointer) int
+var _fnTk_FontId func(unsafe.Pointer) int32
 
 // Tk_FontId calls the Tk framework function Tk_FontId.
 func Tk_FontId(font unsafe.Pointer) int {
@@ -556,7 +556,7 @@ func Tk_FontId(font unsafe.Pointer) int {
 	if _fnTk_FontId == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_FontId, _lib, "Tk_FontId")
 	}
-	return _fnTk_FontId(font)
+	return int(_fnTk_FontId(font))
 }
 
 var _fnTk_Free3DBorder func(unsafe.Pointer)
@@ -671,7 +671,7 @@ func Tk_GetAtomName(tkwin unsafe.Pointer, atom int) string {
 	return _fnTk_GetAtomName(tkwin, atom)
 }
 
-var _fnTk_GetElementBorderWidth func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int
+var _fnTk_GetElementBorderWidth func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) int32
 
 // Tk_GetElementBorderWidth calls the Tk framework function Tk_GetElementBorderWidth.
 func Tk_GetElementBorderWidth(style unsafe.Pointer, element unsafe.Pointer, recordPtr string, tkwin unsafe.Pointer) int {
@@ -679,7 +679,7 @@ func Tk_GetElementBorderWidth(style unsafe.Pointer, element unsafe.Pointer, reco
 	if _fnTk_GetElementBorderWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetElementBorderWidth, _lib, "Tk_GetElementBorderWidth")
 	}
-	return _fnTk_GetElementBorderWidth(style, element, recordPtr, tkwin)
+	return int(_fnTk_GetElementBorderWidth(style, element, recordPtr, tkwin))
 }
 
 var _fnTk_GetElementBox func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -698,7 +698,7 @@ func Tk_GetElementBox(style unsafe.Pointer, element unsafe.Pointer, recordPtr st
 	return _out0, _out1, _out2, _out3
 }
 
-var _fnTk_GetElementId func(string) int
+var _fnTk_GetElementId func(string) int32
 
 // Tk_GetElementId calls the Tk framework function Tk_GetElementId.
 func Tk_GetElementId(name string) int {
@@ -706,7 +706,7 @@ func Tk_GetElementId(name string) int {
 	if _fnTk_GetElementId == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetElementId, _lib, "Tk_GetElementId")
 	}
-	return _fnTk_GetElementId(name)
+	return int(_fnTk_GetElementId(name))
 }
 
 var _fnTk_GetElementSize func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, unsafe.Pointer, unsafe.Pointer)
@@ -734,7 +734,7 @@ func Tk_GetFontMetrics(font unsafe.Pointer, fmPtr unsafe.Pointer) {
 	_fnTk_GetFontMetrics(font, fmPtr)
 }
 
-var _fnTk_GetNumMainWindows func() int
+var _fnTk_GetNumMainWindows func() int32
 
 // Tk_GetNumMainWindows calls the Tk framework function Tk_GetNumMainWindows.
 func Tk_GetNumMainWindows() int {
@@ -742,7 +742,7 @@ func Tk_GetNumMainWindows() int {
 	if _fnTk_GetNumMainWindows == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetNumMainWindows, _lib, "Tk_GetNumMainWindows")
 	}
-	return _fnTk_GetNumMainWindows()
+	return int(_fnTk_GetNumMainWindows())
 }
 
 var _fnTk_GetOption func(unsafe.Pointer, string, string) string
@@ -819,7 +819,7 @@ func Tk_ImageChanged(master unsafe.Pointer, x int, y int, width int, height int,
 	_fnTk_ImageChanged(master, x, y, width, height, imageWidth, imageHeight)
 }
 
-var _fnTk_InternAtom func(unsafe.Pointer, string) int
+var _fnTk_InternAtom func(unsafe.Pointer, string) int32
 
 // Tk_InternAtom calls the Tk framework function Tk_InternAtom.
 func Tk_InternAtom(tkwin unsafe.Pointer, name string) int {
@@ -827,10 +827,10 @@ func Tk_InternAtom(tkwin unsafe.Pointer, name string) int {
 	if _fnTk_InternAtom == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_InternAtom, _lib, "Tk_InternAtom")
 	}
-	return _fnTk_InternAtom(tkwin, name)
+	return int(_fnTk_InternAtom(tkwin, name))
 }
 
-var _fnTk_IntersectTextLayout func(unsafe.Pointer, int, int, int, int) int
+var _fnTk_IntersectTextLayout func(unsafe.Pointer, int, int, int, int) int32
 
 // Tk_IntersectTextLayout calls the Tk framework function Tk_IntersectTextLayout.
 func Tk_IntersectTextLayout(layout unsafe.Pointer, x int, y int, width int, height int) int {
@@ -838,7 +838,7 @@ func Tk_IntersectTextLayout(layout unsafe.Pointer, x int, y int, width int, heig
 	if _fnTk_IntersectTextLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_IntersectTextLayout, _lib, "Tk_IntersectTextLayout")
 	}
-	return _fnTk_IntersectTextLayout(layout, x, y, width, height)
+	return int(_fnTk_IntersectTextLayout(layout, x, y, width, height))
 }
 
 var _fnTk_MainLoop func()
@@ -896,7 +896,7 @@ func Tk_MapWindow(tkwin unsafe.Pointer) {
 	_fnTk_MapWindow(tkwin)
 }
 
-var _fnTk_MeasureChars func(unsafe.Pointer, string, int, int, int, unsafe.Pointer) int
+var _fnTk_MeasureChars func(unsafe.Pointer, string, int, int, int, unsafe.Pointer) int32
 
 // Tk_MeasureChars calls the Tk framework function Tk_MeasureChars.
 func Tk_MeasureChars(tkfont unsafe.Pointer, source string, numBytes int, maxPixels int, flags int) (result int, lengthPtr int32) {
@@ -905,7 +905,7 @@ func Tk_MeasureChars(tkfont unsafe.Pointer, source string, numBytes int, maxPixe
 		ebipurego.RegisterLibFunc(&_fnTk_MeasureChars, _lib, "Tk_MeasureChars")
 	}
 	var _out0 int32
-	_ret := _fnTk_MeasureChars(tkfont, source, numBytes, maxPixels, flags, unsafe.Pointer(&_out0))
+	_ret := int(_fnTk_MeasureChars(tkfont, source, numBytes, maxPixels, flags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1087,7 +1087,7 @@ func Tk_PhotoExpand_Panic(handle unsafe.Pointer, width int, height int) {
 	_fnTk_PhotoExpand_Panic(handle, width, height)
 }
 
-var _fnTk_PhotoGetImage func(unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_PhotoGetImage func(unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_PhotoGetImage calls the Tk framework function Tk_PhotoGetImage.
 func Tk_PhotoGetImage(handle unsafe.Pointer, blockPtr unsafe.Pointer) int {
@@ -1095,7 +1095,7 @@ func Tk_PhotoGetImage(handle unsafe.Pointer, blockPtr unsafe.Pointer) int {
 	if _fnTk_PhotoGetImage == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_PhotoGetImage, _lib, "Tk_PhotoGetImage")
 	}
-	return _fnTk_PhotoGetImage(handle, blockPtr)
+	return int(_fnTk_PhotoGetImage(handle, blockPtr))
 }
 
 var _fnTk_PhotoGetSize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -1167,7 +1167,7 @@ func Tk_PhotoSetSize_Panic(handle unsafe.Pointer, width int, height int) {
 	_fnTk_PhotoSetSize_Panic(handle, width, height)
 }
 
-var _fnTk_PointToChar func(unsafe.Pointer, int, int) int
+var _fnTk_PointToChar func(unsafe.Pointer, int, int) int32
 
 // Tk_PointToChar calls the Tk framework function Tk_PointToChar.
 func Tk_PointToChar(layout unsafe.Pointer, x int, y int) int {
@@ -1175,7 +1175,7 @@ func Tk_PointToChar(layout unsafe.Pointer, x int, y int) int {
 	if _fnTk_PointToChar == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_PointToChar, _lib, "Tk_PointToChar")
 	}
-	return _fnTk_PointToChar(layout, x, y)
+	return int(_fnTk_PointToChar(layout, x, y))
 }
 
 var _fnTk_PostscriptY func(float64, unsafe.Pointer) float64
@@ -1200,7 +1200,7 @@ func Tk_RedrawImage(image unsafe.Pointer, imageX int, imageY int, width int, hei
 	_fnTk_RedrawImage(image, imageX, imageY, width, height, drawable, drawableX, drawableY)
 }
 
-var _fnTk_RegisterStyledElement func(unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_RegisterStyledElement func(unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_RegisterStyledElement calls the Tk framework function Tk_RegisterStyledElement.
 func Tk_RegisterStyledElement(engine unsafe.Pointer, templatePtr unsafe.Pointer) int {
@@ -1208,10 +1208,10 @@ func Tk_RegisterStyledElement(engine unsafe.Pointer, templatePtr unsafe.Pointer)
 	if _fnTk_RegisterStyledElement == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_RegisterStyledElement, _lib, "Tk_RegisterStyledElement")
 	}
-	return _fnTk_RegisterStyledElement(engine, templatePtr)
+	return int(_fnTk_RegisterStyledElement(engine, templatePtr))
 }
 
-var _fnTk_ResetOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnTk_ResetOutlineGC func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tk_ResetOutlineGC calls the Tk framework function Tk_ResetOutlineGC.
 func Tk_ResetOutlineGC(canvas unsafe.Pointer, item unsafe.Pointer, outline unsafe.Pointer) int {
@@ -1219,7 +1219,7 @@ func Tk_ResetOutlineGC(canvas unsafe.Pointer, item unsafe.Pointer, outline unsaf
 	if _fnTk_ResetOutlineGC == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_ResetOutlineGC, _lib, "Tk_ResetOutlineGC")
 	}
-	return _fnTk_ResetOutlineGC(canvas, item, outline)
+	return int(_fnTk_ResetOutlineGC(canvas, item, outline))
 }
 
 var _fnTk_ResizeWindow func(unsafe.Pointer, int, int)
@@ -1233,7 +1233,7 @@ func Tk_ResizeWindow(tkwin unsafe.Pointer, width int, height int) {
 	_fnTk_ResizeWindow(tkwin, width, height)
 }
 
-var _fnTk_RestackWindow func(unsafe.Pointer, int, unsafe.Pointer) int
+var _fnTk_RestackWindow func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // Tk_RestackWindow calls the Tk framework function Tk_RestackWindow.
 func Tk_RestackWindow(tkwin unsafe.Pointer, aboveBelow int, other unsafe.Pointer) int {
@@ -1241,7 +1241,7 @@ func Tk_RestackWindow(tkwin unsafe.Pointer, aboveBelow int, other unsafe.Pointer
 	if _fnTk_RestackWindow == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_RestackWindow, _lib, "Tk_RestackWindow")
 	}
-	return _fnTk_RestackWindow(tkwin, aboveBelow, other)
+	return int(_fnTk_RestackWindow(tkwin, aboveBelow, other))
 }
 
 var _fnTk_RestoreSavedOptions func(unsafe.Pointer)
@@ -1431,7 +1431,7 @@ func Tk_SetWindowColormap(tkwin unsafe.Pointer, colormap int) {
 	_fnTk_SetWindowColormap(tkwin, colormap)
 }
 
-var _fnTk_SetWindowVisual func(unsafe.Pointer, unsafe.Pointer, int, int) int
+var _fnTk_SetWindowVisual func(unsafe.Pointer, unsafe.Pointer, int, int) int32
 
 // Tk_SetWindowVisual calls the Tk framework function Tk_SetWindowVisual.
 func Tk_SetWindowVisual(tkwin unsafe.Pointer, visual unsafe.Pointer, depth int, colormap int) int {
@@ -1439,7 +1439,7 @@ func Tk_SetWindowVisual(tkwin unsafe.Pointer, visual unsafe.Pointer, depth int, 
 	if _fnTk_SetWindowVisual == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_SetWindowVisual, _lib, "Tk_SetWindowVisual")
 	}
-	return _fnTk_SetWindowVisual(tkwin, visual, depth, colormap)
+	return int(_fnTk_SetWindowVisual(tkwin, visual, depth, colormap))
 }
 
 var _fnTk_SizeOfImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -1456,7 +1456,7 @@ func Tk_SizeOfImage(image unsafe.Pointer) (widthPtr int32, heightPtr int32) {
 	return _out0, _out1
 }
 
-var _fnTk_StrictMotif func(unsafe.Pointer) int
+var _fnTk_StrictMotif func(unsafe.Pointer) int32
 
 // Tk_StrictMotif calls the Tk framework function Tk_StrictMotif.
 func Tk_StrictMotif(tkwin unsafe.Pointer) int {
@@ -1464,10 +1464,10 @@ func Tk_StrictMotif(tkwin unsafe.Pointer) int {
 	if _fnTk_StrictMotif == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_StrictMotif, _lib, "Tk_StrictMotif")
 	}
-	return _fnTk_StrictMotif(tkwin)
+	return int(_fnTk_StrictMotif(tkwin))
 }
 
-var _fnTk_TextWidth func(unsafe.Pointer, string, int) int
+var _fnTk_TextWidth func(unsafe.Pointer, string, int) int32
 
 // Tk_TextWidth calls the Tk framework function Tk_TextWidth.
 func Tk_TextWidth(font unsafe.Pointer, str string, numBytes int) int {
@@ -1475,7 +1475,7 @@ func Tk_TextWidth(font unsafe.Pointer, str string, numBytes int) int {
 	if _fnTk_TextWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_TextWidth, _lib, "Tk_TextWidth")
 	}
-	return _fnTk_TextWidth(font, str, numBytes)
+	return int(_fnTk_TextWidth(font, str, numBytes))
 }
 
 var _fnTk_UndefineCursor func(unsafe.Pointer)

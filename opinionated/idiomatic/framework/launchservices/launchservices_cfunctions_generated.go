@@ -127,7 +127,7 @@ func IsValidIconRef(theIconRef obj.Object) uint8 {
 	return _fnIsValidIconRef(objref.IDOf(theIconRef))
 }
 
-var _fnLSCanURLAcceptURL func(objc.ID, objc.ID, LSRolesMask, LSAcceptanceFlags, unsafe.Pointer) int
+var _fnLSCanURLAcceptURL func(objc.ID, objc.ID, LSRolesMask, LSAcceptanceFlags, unsafe.Pointer) int32
 
 // LSCanURLAcceptURL calls the LaunchServices framework function LSCanURLAcceptURL.
 func LSCanURLAcceptURL(inItemURL obj.Object, inTargetURL obj.Object, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags) (result int, outAcceptsItem uint8) {
@@ -136,7 +136,7 @@ func LSCanURLAcceptURL(inItemURL obj.Object, inTargetURL obj.Object, inRoleMask 
 		ebipurego.RegisterLibFunc(&_fnLSCanURLAcceptURL, _lib, "LSCanURLAcceptURL")
 	}
 	var _out0 uint8
-	_ret := _fnLSCanURLAcceptURL(objref.IDOf(inItemURL), objref.IDOf(inTargetURL), inRoleMask, inFlags, unsafe.Pointer(&_out0))
+	_ret := int(_fnLSCanURLAcceptURL(objref.IDOf(inItemURL), objref.IDOf(inTargetURL), inRoleMask, inFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -200,7 +200,7 @@ func LSCopyDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSR
 	return obj.Wrap(_ret)
 }
 
-var _fnLSGetExtensionInfo func(int, unsafe.Pointer, unsafe.Pointer) int
+var _fnLSGetExtensionInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // LSGetExtensionInfo calls the LaunchServices framework function LSGetExtensionInfo.
 func LSGetExtensionInfo(inNameLen int) (result int, inNameBuffer uint16, outExtStartIndex int) {
@@ -210,7 +210,7 @@ func LSGetExtensionInfo(inNameLen int) (result int, inNameBuffer uint16, outExtS
 	}
 	var _out0 uint16
 	var _out1 int
-	_ret := _fnLSGetExtensionInfo(inNameLen, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnLSGetExtensionInfo(inNameLen, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -281,7 +281,7 @@ func UTCreateStringForOSType(inOSType int) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnUTGetOSTypeFromString func(objc.ID) int
+var _fnUTGetOSTypeFromString func(objc.ID) uint32
 
 // UTGetOSTypeFromString calls the LaunchServices framework function UTGetOSTypeFromString.
 func UTGetOSTypeFromString(inString obj.Object) int {
@@ -289,7 +289,7 @@ func UTGetOSTypeFromString(inString obj.Object) int {
 	if _fnUTGetOSTypeFromString == nil {
 		ebipurego.RegisterLibFunc(&_fnUTGetOSTypeFromString, _lib, "UTGetOSTypeFromString")
 	}
-	return _fnUTGetOSTypeFromString(objref.IDOf(inString))
+	return int(_fnUTGetOSTypeFromString(objref.IDOf(inString)))
 }
 
 var _fnUTTypeConformsTo func(objc.ID, objc.ID) uint8

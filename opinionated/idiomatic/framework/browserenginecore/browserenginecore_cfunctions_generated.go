@@ -8,7 +8,7 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
-var _fnBeMemoryInlineJitRestrictWithWitnessSupported func() int
+var _fnBeMemoryInlineJitRestrictWithWitnessSupported func() int32
 
 // BeMemoryInlineJitRestrictWithWitnessSupported calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_with_witness_supported.
 func BeMemoryInlineJitRestrictWithWitnessSupported() int {
@@ -16,5 +16,5 @@ func BeMemoryInlineJitRestrictWithWitnessSupported() int {
 	if _fnBeMemoryInlineJitRestrictWithWitnessSupported == nil {
 		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictWithWitnessSupported, _lib, "be_memory_inline_jit_restrict_with_witness_supported")
 	}
-	return _fnBeMemoryInlineJitRestrictWithWitnessSupported()
+	return int(_fnBeMemoryInlineJitRestrictWithWitnessSupported())
 }

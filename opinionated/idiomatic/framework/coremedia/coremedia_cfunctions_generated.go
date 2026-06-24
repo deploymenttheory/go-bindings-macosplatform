@@ -14,7 +14,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-var _fnCMAudioDeviceClockGetAudioDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMAudioDeviceClockGetAudioDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMAudioDeviceClockGetAudioDevice calls the CoreMedia framework function CMAudioDeviceClockGetAudioDevice.
 func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Pointer) (result int, deviceIDOut int, trackingDefaultDeviceOut uint8) {
@@ -24,11 +24,11 @@ func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Poin
 	}
 	var _out0 int
 	var _out1 uint8
-	_ret := _fnCMAudioDeviceClockGetAudioDevice(objref.IDOf(clock), deviceUIDOut, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMAudioDeviceClockGetAudioDevice(objref.IDOf(clock), deviceUIDOut, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData calls the CoreMedia framework function CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData.
 func CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(allocator obj.Object, soundDescriptionData unsafe.Pointer, size int, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
@@ -36,7 +36,7 @@ func CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(allocator o
 	if _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData, _lib, "CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData")
 	}
-	return _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(objref.IDOf(allocator), soundDescriptionData, size, flavor, formatDescriptionOut)
+	return int(_fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(objref.IDOf(allocator), soundDescriptionData, size, flavor, formatDescriptionOut))
 }
 
 var _fnCMAudioFormatDescriptionEqual func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) uint8
@@ -63,7 +63,7 @@ func CMBlockBufferGetDataLength(theBuffer obj.Object) int {
 	return _fnCMBlockBufferGetDataLength(objref.IDOf(theBuffer))
 }
 
-var _fnCMBlockBufferGetDataPointer func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, string) int
+var _fnCMBlockBufferGetDataPointer func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, string) int32
 
 // CMBlockBufferGetDataPointer calls the CoreMedia framework function CMBlockBufferGetDataPointer.
 func CMBlockBufferGetDataPointer(theBuffer obj.Object, offset int, dataPointerOut string) (result int, lengthAtOffsetOut int, totalLengthOut int) {
@@ -73,7 +73,7 @@ func CMBlockBufferGetDataPointer(theBuffer obj.Object, offset int, dataPointerOu
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnCMBlockBufferGetDataPointer(objref.IDOf(theBuffer), offset, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), dataPointerOut)
+	_ret := int(_fnCMBlockBufferGetDataPointer(objref.IDOf(theBuffer), offset, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), dataPointerOut))
 	return _ret, _out0, _out1
 }
 
@@ -187,7 +187,7 @@ func CMBufferQueueTestTrigger(queue obj.Object, triggerToken obj.Object) uint8 {
 	return _fnCMBufferQueueTestTrigger(objref.IDOf(queue), objref.IDOf(triggerToken))
 }
 
-var _fnCMClockGetAnchorTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMClockGetAnchorTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMClockGetAnchorTime calls the CoreMedia framework function CMClockGetAnchorTime.
 func CMClockGetAnchorTime(clock obj.Object) (result int, clockTimeOut CMTime, referenceClockTimeOut CMTime) {
@@ -197,7 +197,7 @@ func CMClockGetAnchorTime(clock obj.Object) (result int, clockTimeOut CMTime, re
 	}
 	var _out0 CMTime
 	var _out1 CMTime
-	_ret := _fnCMClockGetAnchorTime(objref.IDOf(clock), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMClockGetAnchorTime(objref.IDOf(clock), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -246,7 +246,7 @@ func CMClockMightDrift(clock obj.Object, otherClock obj.Object) uint8 {
 	return _fnCMClockMightDrift(objref.IDOf(clock), objref.IDOf(otherClock))
 }
 
-var _fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData calls the CoreMedia framework function CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData.
 func CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(allocator obj.Object, closedCaptionDescriptionData unsafe.Pointer, size int, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
@@ -254,7 +254,7 @@ func CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescription
 	if _fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData, _lib, "CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData")
 	}
-	return _fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(objref.IDOf(allocator), closedCaptionDescriptionData, size, flavor, formatDescriptionOut)
+	return int(_fnCMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(objref.IDOf(allocator), closedCaptionDescriptionData, size, flavor, formatDescriptionOut))
 }
 
 var _fnCMCopyDictionaryOfAttachments func(objc.ID, unsafe.Pointer, uint32) objc.ID
@@ -326,7 +326,7 @@ func CMFormatDescriptionGetExtensions(desc obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCMFormatDescriptionGetMediaSubType func(objc.ID) int
+var _fnCMFormatDescriptionGetMediaSubType func(objc.ID) uint32
 
 // CMFormatDescriptionGetMediaSubType calls the CoreMedia framework function CMFormatDescriptionGetMediaSubType.
 func CMFormatDescriptionGetMediaSubType(desc obj.Object) int {
@@ -334,10 +334,10 @@ func CMFormatDescriptionGetMediaSubType(desc obj.Object) int {
 	if _fnCMFormatDescriptionGetMediaSubType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetMediaSubType, _lib, "CMFormatDescriptionGetMediaSubType")
 	}
-	return _fnCMFormatDescriptionGetMediaSubType(objref.IDOf(desc))
+	return int(_fnCMFormatDescriptionGetMediaSubType(objref.IDOf(desc)))
 }
 
-var _fnCMFormatDescriptionGetMediaType func(objc.ID) int
+var _fnCMFormatDescriptionGetMediaType func(objc.ID) uint32
 
 // CMFormatDescriptionGetMediaType calls the CoreMedia framework function CMFormatDescriptionGetMediaType.
 func CMFormatDescriptionGetMediaType(desc obj.Object) int {
@@ -345,7 +345,7 @@ func CMFormatDescriptionGetMediaType(desc obj.Object) int {
 	if _fnCMFormatDescriptionGetMediaType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetMediaType, _lib, "CMFormatDescriptionGetMediaType")
 	}
-	return _fnCMFormatDescriptionGetMediaType(objref.IDOf(desc))
+	return int(_fnCMFormatDescriptionGetMediaType(objref.IDOf(desc)))
 }
 
 var _fnCMFormatDescriptionGetTypeID func() int
@@ -510,7 +510,7 @@ func CMMetadataDataTypeRegistryGetDataTypeDescription(dataType obj.Object) obj.O
 	return obj.Wrap(_ret)
 }
 
-var _fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData calls the CoreMedia framework function CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData.
 func CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(allocator obj.Object, metadataDescriptionData unsafe.Pointer, size int, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
@@ -518,7 +518,7 @@ func CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(alloc
 	if _fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData, _lib, "CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData")
 	}
-	return _fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(objref.IDOf(allocator), metadataDescriptionData, size, flavor, formatDescriptionOut)
+	return int(_fnCMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(objref.IDOf(allocator), metadataDescriptionData, size, flavor, formatDescriptionOut))
 }
 
 var _fnCMMetadataFormatDescriptionGetIdentifiers func(unsafe.Pointer) objc.ID
@@ -578,7 +578,7 @@ func CMRemoveAttachment(target unsafe.Pointer, key obj.Object) {
 	_fnCMRemoveAttachment(target, objref.IDOf(key))
 }
 
-var _fnCMSampleBufferCreate func(objc.ID, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferCreate func(objc.ID, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreate calls the CoreMedia framework function CMSampleBufferCreate.
 func CMSampleBufferCreate(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription obj.Object, numSamples int, numSampleTimingEntries int, numSampleSizeEntries int, sampleBufferOut unsafe.Pointer) (result int, sampleTimingArray CMSampleTimingInfo, sampleSizeArray int) {
@@ -588,11 +588,11 @@ func CMSampleBufferCreate(allocator obj.Object, dataBuffer obj.Object, dataReady
 	}
 	var _out0 CMSampleTimingInfo
 	var _out1 int
-	_ret := _fnCMSampleBufferCreate(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, makeDataReadyCallback, makeDataReadyRefcon, objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut)
+	_ret := int(_fnCMSampleBufferCreate(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, makeDataReadyCallback, makeDataReadyRefcon, objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut))
 	return _ret, _out0, _out1
 }
 
-var _fnCMSampleBufferCreateCopyWithNewTiming func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferCreateCopyWithNewTiming func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreateCopyWithNewTiming calls the CoreMedia framework function CMSampleBufferCreateCopyWithNewTiming.
 func CMSampleBufferCreateCopyWithNewTiming(allocator obj.Object, originalSBuf obj.Object, numSampleTimingEntries int, sampleBufferOut unsafe.Pointer) (result int, sampleTimingArray CMSampleTimingInfo) {
@@ -601,11 +601,11 @@ func CMSampleBufferCreateCopyWithNewTiming(allocator obj.Object, originalSBuf ob
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateCopyWithNewTiming, _lib, "CMSampleBufferCreateCopyWithNewTiming")
 	}
 	var _out0 CMSampleTimingInfo
-	_ret := _fnCMSampleBufferCreateCopyWithNewTiming(objref.IDOf(allocator), objref.IDOf(originalSBuf), numSampleTimingEntries, unsafe.Pointer(&_out0), sampleBufferOut)
+	_ret := int(_fnCMSampleBufferCreateCopyWithNewTiming(objref.IDOf(allocator), objref.IDOf(originalSBuf), numSampleTimingEntries, unsafe.Pointer(&_out0), sampleBufferOut))
 	return _ret, _out0
 }
 
-var _fnCMSampleBufferCreateForImageBuffer func(objc.ID, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferCreateForImageBuffer func(objc.ID, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreateForImageBuffer calls the CoreMedia framework function CMSampleBufferCreateForImageBuffer.
 func CMSampleBufferCreateForImageBuffer(allocator obj.Object, imageBuffer unsafe.Pointer, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription unsafe.Pointer, sampleBufferOut unsafe.Pointer) (result int, sampleTiming CMSampleTimingInfo) {
@@ -614,11 +614,11 @@ func CMSampleBufferCreateForImageBuffer(allocator obj.Object, imageBuffer unsafe
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateForImageBuffer, _lib, "CMSampleBufferCreateForImageBuffer")
 	}
 	var _out0 CMSampleTimingInfo
-	_ret := _fnCMSampleBufferCreateForImageBuffer(objref.IDOf(allocator), imageBuffer, dataReady, makeDataReadyCallback, makeDataReadyRefcon, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut)
+	_ret := int(_fnCMSampleBufferCreateForImageBuffer(objref.IDOf(allocator), imageBuffer, dataReady, makeDataReadyCallback, makeDataReadyRefcon, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut))
 	return _ret, _out0
 }
 
-var _fnCMSampleBufferCreateReady func(objc.ID, objc.ID, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferCreateReady func(objc.ID, objc.ID, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreateReady calls the CoreMedia framework function CMSampleBufferCreateReady.
 func CMSampleBufferCreateReady(allocator obj.Object, dataBuffer obj.Object, formatDescription obj.Object, numSamples int, numSampleTimingEntries int, numSampleSizeEntries int, sampleBufferOut unsafe.Pointer) (result int, sampleTimingArray CMSampleTimingInfo, sampleSizeArray int) {
@@ -628,11 +628,11 @@ func CMSampleBufferCreateReady(allocator obj.Object, dataBuffer obj.Object, form
 	}
 	var _out0 CMSampleTimingInfo
 	var _out1 int
-	_ret := _fnCMSampleBufferCreateReady(objref.IDOf(allocator), objref.IDOf(dataBuffer), objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut)
+	_ret := int(_fnCMSampleBufferCreateReady(objref.IDOf(allocator), objref.IDOf(dataBuffer), objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut))
 	return _ret, _out0, _out1
 }
 
-var _fnCMSampleBufferCreateReadyWithImageBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferCreateReadyWithImageBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreateReadyWithImageBuffer calls the CoreMedia framework function CMSampleBufferCreateReadyWithImageBuffer.
 func CMSampleBufferCreateReadyWithImageBuffer(allocator obj.Object, imageBuffer unsafe.Pointer, formatDescription unsafe.Pointer, sampleBufferOut unsafe.Pointer) (result int, sampleTiming CMSampleTimingInfo) {
@@ -641,7 +641,7 @@ func CMSampleBufferCreateReadyWithImageBuffer(allocator obj.Object, imageBuffer 
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateReadyWithImageBuffer, _lib, "CMSampleBufferCreateReadyWithImageBuffer")
 	}
 	var _out0 CMSampleTimingInfo
-	_ret := _fnCMSampleBufferCreateReadyWithImageBuffer(objref.IDOf(allocator), imageBuffer, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut)
+	_ret := int(_fnCMSampleBufferCreateReadyWithImageBuffer(objref.IDOf(allocator), imageBuffer, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut))
 	return _ret, _out0
 }
 
@@ -691,7 +691,7 @@ func CMSampleBufferGetNumSamples(sbuf obj.Object) int {
 	return _fnCMSampleBufferGetNumSamples(objref.IDOf(sbuf))
 }
 
-var _fnCMSampleBufferGetOutputSampleTimingInfoArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferGetOutputSampleTimingInfoArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferGetOutputSampleTimingInfoArray calls the CoreMedia framework function CMSampleBufferGetOutputSampleTimingInfoArray.
 func CMSampleBufferGetOutputSampleTimingInfoArray(sbuf obj.Object, timingArrayEntries int) (result int, timingArrayOut CMSampleTimingInfo, timingArrayEntriesNeededOut int) {
@@ -701,7 +701,7 @@ func CMSampleBufferGetOutputSampleTimingInfoArray(sbuf obj.Object, timingArrayEn
 	}
 	var _out0 CMSampleTimingInfo
 	var _out1 int
-	_ret := _fnCMSampleBufferGetOutputSampleTimingInfoArray(objref.IDOf(sbuf), timingArrayEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMSampleBufferGetOutputSampleTimingInfoArray(objref.IDOf(sbuf), timingArrayEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -728,7 +728,7 @@ func CMSampleBufferGetSampleSize(sbuf obj.Object, sampleIndex int) int {
 	return _fnCMSampleBufferGetSampleSize(objref.IDOf(sbuf), sampleIndex)
 }
 
-var _fnCMSampleBufferGetSampleSizeArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferGetSampleSizeArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferGetSampleSizeArray calls the CoreMedia framework function CMSampleBufferGetSampleSizeArray.
 func CMSampleBufferGetSampleSizeArray(sbuf obj.Object, sizeArrayEntries int) (result int, sizeArrayOut int, sizeArrayEntriesNeededOut int) {
@@ -738,11 +738,11 @@ func CMSampleBufferGetSampleSizeArray(sbuf obj.Object, sizeArrayEntries int) (re
 	}
 	var _out0 int
 	var _out1 int
-	_ret := _fnCMSampleBufferGetSampleSizeArray(objref.IDOf(sbuf), sizeArrayEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMSampleBufferGetSampleSizeArray(objref.IDOf(sbuf), sizeArrayEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCMSampleBufferGetSampleTimingInfo func(objc.ID, int, unsafe.Pointer) int
+var _fnCMSampleBufferGetSampleTimingInfo func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSampleBufferGetSampleTimingInfo calls the CoreMedia framework function CMSampleBufferGetSampleTimingInfo.
 func CMSampleBufferGetSampleTimingInfo(sbuf obj.Object, sampleIndex int) (result int, timingInfoOut CMSampleTimingInfo) {
@@ -751,11 +751,11 @@ func CMSampleBufferGetSampleTimingInfo(sbuf obj.Object, sampleIndex int) (result
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetSampleTimingInfo, _lib, "CMSampleBufferGetSampleTimingInfo")
 	}
 	var _out0 CMSampleTimingInfo
-	_ret := _fnCMSampleBufferGetSampleTimingInfo(objref.IDOf(sbuf), sampleIndex, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMSampleBufferGetSampleTimingInfo(objref.IDOf(sbuf), sampleIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMSampleBufferGetSampleTimingInfoArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSampleBufferGetSampleTimingInfoArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferGetSampleTimingInfoArray calls the CoreMedia framework function CMSampleBufferGetSampleTimingInfoArray.
 func CMSampleBufferGetSampleTimingInfoArray(sbuf obj.Object, numSampleTimingEntries int) (result int, timingArrayOut CMSampleTimingInfo, timingArrayEntriesNeededOut int) {
@@ -765,7 +765,7 @@ func CMSampleBufferGetSampleTimingInfoArray(sbuf obj.Object, numSampleTimingEntr
 	}
 	var _out0 CMSampleTimingInfo
 	var _out1 int
-	_ret := _fnCMSampleBufferGetSampleTimingInfoArray(objref.IDOf(sbuf), numSampleTimingEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMSampleBufferGetSampleTimingInfoArray(objref.IDOf(sbuf), numSampleTimingEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -882,7 +882,7 @@ func CMSimpleQueueGetTypeID() int {
 	return _fnCMSimpleQueueGetTypeID()
 }
 
-var _fnCMSwapBigEndianClosedCaptionDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianClosedCaptionDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianClosedCaptionDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianClosedCaptionDescriptionToHost.
 func CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionSize int) (result int, closedCaptionDescriptionData uint8) {
@@ -891,11 +891,11 @@ func CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionSize 
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianClosedCaptionDescriptionToHost, _lib, "CMSwapBigEndianClosedCaptionDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianClosedCaptionDescriptionToHost(unsafe.Pointer(&_out0), closedCaptionDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianClosedCaptionDescriptionToHost(unsafe.Pointer(&_out0), closedCaptionDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapBigEndianImageDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianImageDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianImageDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianImageDescriptionToHost.
 func CMSwapBigEndianImageDescriptionToHost(imageDescriptionSize int) (result int, imageDescriptionData uint8) {
@@ -904,11 +904,11 @@ func CMSwapBigEndianImageDescriptionToHost(imageDescriptionSize int) (result int
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianImageDescriptionToHost, _lib, "CMSwapBigEndianImageDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianImageDescriptionToHost(unsafe.Pointer(&_out0), imageDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianImageDescriptionToHost(unsafe.Pointer(&_out0), imageDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapBigEndianMetadataDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianMetadataDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianMetadataDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianMetadataDescriptionToHost.
 func CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionSize int) (result int, metadataDescriptionData uint8) {
@@ -917,11 +917,11 @@ func CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionSize int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianMetadataDescriptionToHost, _lib, "CMSwapBigEndianMetadataDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianMetadataDescriptionToHost(unsafe.Pointer(&_out0), metadataDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianMetadataDescriptionToHost(unsafe.Pointer(&_out0), metadataDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapBigEndianSoundDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianSoundDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianSoundDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianSoundDescriptionToHost.
 func CMSwapBigEndianSoundDescriptionToHost(soundDescriptionSize int) (result int, soundDescriptionData uint8) {
@@ -930,11 +930,11 @@ func CMSwapBigEndianSoundDescriptionToHost(soundDescriptionSize int) (result int
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianSoundDescriptionToHost, _lib, "CMSwapBigEndianSoundDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianSoundDescriptionToHost(unsafe.Pointer(&_out0), soundDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianSoundDescriptionToHost(unsafe.Pointer(&_out0), soundDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapBigEndianTextDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianTextDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianTextDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianTextDescriptionToHost.
 func CMSwapBigEndianTextDescriptionToHost(textDescriptionSize int) (result int, textDescriptionData uint8) {
@@ -943,11 +943,11 @@ func CMSwapBigEndianTextDescriptionToHost(textDescriptionSize int) (result int, 
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianTextDescriptionToHost, _lib, "CMSwapBigEndianTextDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianTextDescriptionToHost(unsafe.Pointer(&_out0), textDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianTextDescriptionToHost(unsafe.Pointer(&_out0), textDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapBigEndianTimeCodeDescriptionToHost func(unsafe.Pointer, int) int
+var _fnCMSwapBigEndianTimeCodeDescriptionToHost func(unsafe.Pointer, int) int32
 
 // CMSwapBigEndianTimeCodeDescriptionToHost calls the CoreMedia framework function CMSwapBigEndianTimeCodeDescriptionToHost.
 func CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionSize int) (result int, timeCodeDescriptionData uint8) {
@@ -956,11 +956,11 @@ func CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionSize int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSwapBigEndianTimeCodeDescriptionToHost, _lib, "CMSwapBigEndianTimeCodeDescriptionToHost")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapBigEndianTimeCodeDescriptionToHost(unsafe.Pointer(&_out0), timeCodeDescriptionSize)
+	_ret := int(_fnCMSwapBigEndianTimeCodeDescriptionToHost(unsafe.Pointer(&_out0), timeCodeDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianClosedCaptionDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianClosedCaptionDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianClosedCaptionDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianClosedCaptionDescriptionToBig.
 func CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionSize int) (result int, closedCaptionDescriptionData uint8) {
@@ -969,11 +969,11 @@ func CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionSize 
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianClosedCaptionDescriptionToBig, _lib, "CMSwapHostEndianClosedCaptionDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianClosedCaptionDescriptionToBig(unsafe.Pointer(&_out0), closedCaptionDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianClosedCaptionDescriptionToBig(unsafe.Pointer(&_out0), closedCaptionDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianImageDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianImageDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianImageDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianImageDescriptionToBig.
 func CMSwapHostEndianImageDescriptionToBig(imageDescriptionSize int) (result int, imageDescriptionData uint8) {
@@ -982,11 +982,11 @@ func CMSwapHostEndianImageDescriptionToBig(imageDescriptionSize int) (result int
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianImageDescriptionToBig, _lib, "CMSwapHostEndianImageDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianImageDescriptionToBig(unsafe.Pointer(&_out0), imageDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianImageDescriptionToBig(unsafe.Pointer(&_out0), imageDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianMetadataDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianMetadataDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianMetadataDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianMetadataDescriptionToBig.
 func CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionSize int) (result int, metadataDescriptionData uint8) {
@@ -995,11 +995,11 @@ func CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionSize int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianMetadataDescriptionToBig, _lib, "CMSwapHostEndianMetadataDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianMetadataDescriptionToBig(unsafe.Pointer(&_out0), metadataDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianMetadataDescriptionToBig(unsafe.Pointer(&_out0), metadataDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianSoundDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianSoundDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianSoundDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianSoundDescriptionToBig.
 func CMSwapHostEndianSoundDescriptionToBig(soundDescriptionSize int) (result int, soundDescriptionData uint8) {
@@ -1008,11 +1008,11 @@ func CMSwapHostEndianSoundDescriptionToBig(soundDescriptionSize int) (result int
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianSoundDescriptionToBig, _lib, "CMSwapHostEndianSoundDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianSoundDescriptionToBig(unsafe.Pointer(&_out0), soundDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianSoundDescriptionToBig(unsafe.Pointer(&_out0), soundDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianTextDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianTextDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianTextDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianTextDescriptionToBig.
 func CMSwapHostEndianTextDescriptionToBig(textDescriptionSize int) (result int, textDescriptionData uint8) {
@@ -1021,11 +1021,11 @@ func CMSwapHostEndianTextDescriptionToBig(textDescriptionSize int) (result int, 
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianTextDescriptionToBig, _lib, "CMSwapHostEndianTextDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianTextDescriptionToBig(unsafe.Pointer(&_out0), textDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianTextDescriptionToBig(unsafe.Pointer(&_out0), textDescriptionSize))
 	return _ret, _out0
 }
 
-var _fnCMSwapHostEndianTimeCodeDescriptionToBig func(unsafe.Pointer, int) int
+var _fnCMSwapHostEndianTimeCodeDescriptionToBig func(unsafe.Pointer, int) int32
 
 // CMSwapHostEndianTimeCodeDescriptionToBig calls the CoreMedia framework function CMSwapHostEndianTimeCodeDescriptionToBig.
 func CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionSize int) (result int, timeCodeDescriptionData uint8) {
@@ -1034,7 +1034,7 @@ func CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionSize int) (resu
 		ebipurego.RegisterLibFunc(&_fnCMSwapHostEndianTimeCodeDescriptionToBig, _lib, "CMSwapHostEndianTimeCodeDescriptionToBig")
 	}
 	var _out0 uint8
-	_ret := _fnCMSwapHostEndianTimeCodeDescriptionToBig(unsafe.Pointer(&_out0), timeCodeDescriptionSize)
+	_ret := int(_fnCMSwapHostEndianTimeCodeDescriptionToBig(unsafe.Pointer(&_out0), timeCodeDescriptionSize))
 	return _ret, _out0
 }
 
@@ -1049,7 +1049,7 @@ func CMSyncGetRelativeRate(ofClockOrTimebase unsafe.Pointer, relativeToClockOrTi
 	return _fnCMSyncGetRelativeRate(ofClockOrTimebase, relativeToClockOrTimebase)
 }
 
-var _fnCMSyncGetRelativeRateAndAnchorTime func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMSyncGetRelativeRateAndAnchorTime func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSyncGetRelativeRateAndAnchorTime calls the CoreMedia framework function CMSyncGetRelativeRateAndAnchorTime.
 func CMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase unsafe.Pointer, relativeToClockOrTimebase unsafe.Pointer) (result int, outRelativeRate float64, outOfClockOrTimebaseAnchorTime CMTime, outRelativeToClockOrTimebaseAnchorTime CMTime) {
@@ -1060,7 +1060,7 @@ func CMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase unsafe.Pointer, relati
 	var _out0 float64
 	var _out1 CMTime
 	var _out2 CMTime
-	_ret := _fnCMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase, relativeToClockOrTimebase, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := int(_fnCMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase, relativeToClockOrTimebase, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
@@ -1075,7 +1075,7 @@ func CMSyncMightDrift(clockOrTimebase1 unsafe.Pointer, clockOrTimebase2 unsafe.P
 	return _fnCMSyncMightDrift(clockOrTimebase1, clockOrTimebase2)
 }
 
-var _fnCMTagCollectionAddTagsFromArray func(objc.ID, unsafe.Pointer, int) int
+var _fnCMTagCollectionAddTagsFromArray func(objc.ID, unsafe.Pointer, int) int32
 
 // CMTagCollectionAddTagsFromArray calls the CoreMedia framework function CMTagCollectionAddTagsFromArray.
 func CMTagCollectionAddTagsFromArray(tagCollection obj.Object, tags unsafe.Pointer, tagCount int) int {
@@ -1083,7 +1083,7 @@ func CMTagCollectionAddTagsFromArray(tagCollection obj.Object, tags unsafe.Point
 	if _fnCMTagCollectionAddTagsFromArray == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTagsFromArray, _lib, "CMTagCollectionAddTagsFromArray")
 	}
-	return _fnCMTagCollectionAddTagsFromArray(objref.IDOf(tagCollection), tags, tagCount)
+	return int(_fnCMTagCollectionAddTagsFromArray(objref.IDOf(tagCollection), tags, tagCount))
 }
 
 var _fnCMTagCollectionApply func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -1166,7 +1166,7 @@ func CMTagCollectionCopyDescription(allocator obj.Object, tagCollection obj.Obje
 	return obj.Wrap(_ret)
 }
 
-var _fnCMTagCollectionCopyTagsOfCategories func(objc.ID, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMTagCollectionCopyTagsOfCategories func(objc.ID, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMTagCollectionCopyTagsOfCategories calls the CoreMedia framework function CMTagCollectionCopyTagsOfCategories.
 func CMTagCollectionCopyTagsOfCategories(allocator obj.Object, tagCollection obj.Object, categories unsafe.Pointer, categoriesCount int, collectionWithTagsOfCategories unsafe.Pointer) int {
@@ -1174,7 +1174,7 @@ func CMTagCollectionCopyTagsOfCategories(allocator obj.Object, tagCollection obj
 	if _fnCMTagCollectionCopyTagsOfCategories == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyTagsOfCategories, _lib, "CMTagCollectionCopyTagsOfCategories")
 	}
-	return _fnCMTagCollectionCopyTagsOfCategories(objref.IDOf(allocator), objref.IDOf(tagCollection), categories, categoriesCount, collectionWithTagsOfCategories)
+	return int(_fnCMTagCollectionCopyTagsOfCategories(objref.IDOf(allocator), objref.IDOf(tagCollection), categories, categoriesCount, collectionWithTagsOfCategories))
 }
 
 var _fnCMTagCollectionCountTagsWithFilterFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
@@ -1188,7 +1188,7 @@ func CMTagCollectionCountTagsWithFilterFunction(tagCollection obj.Object, filter
 	return _fnCMTagCollectionCountTagsWithFilterFunction(objref.IDOf(tagCollection), filterApplier, context_)
 }
 
-var _fnCMTagCollectionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMTagCollectionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMTagCollectionCreate calls the CoreMedia framework function CMTagCollectionCreate.
 func CMTagCollectionCreate(allocator obj.Object, tags unsafe.Pointer, tagCount int, newCollectionOut unsafe.Pointer) int {
@@ -1196,7 +1196,7 @@ func CMTagCollectionCreate(allocator obj.Object, tags unsafe.Pointer, tagCount i
 	if _fnCMTagCollectionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCreate, _lib, "CMTagCollectionCreate")
 	}
-	return _fnCMTagCollectionCreate(objref.IDOf(allocator), tags, tagCount, newCollectionOut)
+	return int(_fnCMTagCollectionCreate(objref.IDOf(allocator), tags, tagCount, newCollectionOut))
 }
 
 var _fnCMTagCollectionGetCount func(objc.ID) int
@@ -1221,7 +1221,7 @@ func CMTagCollectionGetCountOfCategory(tagCollection obj.Object, category CMTagC
 	return _fnCMTagCollectionGetCountOfCategory(objref.IDOf(tagCollection), category)
 }
 
-var _fnCMTagCollectionGetTags func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMTagCollectionGetTags func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMTagCollectionGetTags calls the CoreMedia framework function CMTagCollectionGetTags.
 func CMTagCollectionGetTags(tagCollection obj.Object, tagBuffer unsafe.Pointer, tagBufferCount int) (result int, numberOfTagsCopied int) {
@@ -1230,11 +1230,11 @@ func CMTagCollectionGetTags(tagCollection obj.Object, tagBuffer unsafe.Pointer, 
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetTags, _lib, "CMTagCollectionGetTags")
 	}
 	var _out0 int
-	_ret := _fnCMTagCollectionGetTags(objref.IDOf(tagCollection), tagBuffer, tagBufferCount, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMTagCollectionGetTags(objref.IDOf(tagCollection), tagBuffer, tagBufferCount, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMTagCollectionGetTagsWithCategory func(objc.ID, CMTagCategory, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMTagCollectionGetTagsWithCategory func(objc.ID, CMTagCategory, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMTagCollectionGetTagsWithCategory calls the CoreMedia framework function CMTagCollectionGetTagsWithCategory.
 func CMTagCollectionGetTagsWithCategory(tagCollection obj.Object, category CMTagCategory, tagBuffer unsafe.Pointer, tagBufferCount int) (result int, numberOfTagsCopied int) {
@@ -1243,11 +1243,11 @@ func CMTagCollectionGetTagsWithCategory(tagCollection obj.Object, category CMTag
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetTagsWithCategory, _lib, "CMTagCollectionGetTagsWithCategory")
 	}
 	var _out0 int
-	_ret := _fnCMTagCollectionGetTagsWithCategory(objref.IDOf(tagCollection), category, tagBuffer, tagBufferCount, unsafe.Pointer(&_out0))
+	_ret := int(_fnCMTagCollectionGetTagsWithCategory(objref.IDOf(tagCollection), category, tagBuffer, tagBufferCount, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMTagCollectionGetTagsWithFilterFunction func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMTagCollectionGetTagsWithFilterFunction func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMTagCollectionGetTagsWithFilterFunction calls the CoreMedia framework function CMTagCollectionGetTagsWithFilterFunction.
 func CMTagCollectionGetTagsWithFilterFunction(tagCollection obj.Object, tagBuffer unsafe.Pointer, tagBufferCount int, filter unsafe.Pointer, context_ unsafe.Pointer) (result int, numberOfTagsCopied int) {
@@ -1256,7 +1256,7 @@ func CMTagCollectionGetTagsWithFilterFunction(tagCollection obj.Object, tagBuffe
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetTagsWithFilterFunction, _lib, "CMTagCollectionGetTagsWithFilterFunction")
 	}
 	var _out0 int
-	_ret := _fnCMTagCollectionGetTagsWithFilterFunction(objref.IDOf(tagCollection), tagBuffer, tagBufferCount, unsafe.Pointer(&_out0), filter, context_)
+	_ret := int(_fnCMTagCollectionGetTagsWithFilterFunction(objref.IDOf(tagCollection), tagBuffer, tagBufferCount, unsafe.Pointer(&_out0), filter, context_))
 	return _ret, _out0
 }
 
@@ -1363,7 +1363,7 @@ func CMTaggedBufferGroupGetTypeID() int {
 	return _fnCMTaggedBufferGroupGetTypeID()
 }
 
-var _fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData calls the CoreMedia framework function CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData.
 func CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(allocator obj.Object, textDescriptionData unsafe.Pointer, size int, flavor unsafe.Pointer, mediaType int, formatDescriptionOut unsafe.Pointer) int {
@@ -1371,10 +1371,10 @@ func CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(allocator obj
 	if _fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData, _lib, "CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData")
 	}
-	return _fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(objref.IDOf(allocator), textDescriptionData, size, flavor, mediaType, formatDescriptionOut)
+	return int(_fnCMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(objref.IDOf(allocator), textDescriptionData, size, flavor, mediaType, formatDescriptionOut))
 }
 
-var _fnCMTextFormatDescriptionGetDefaultStyle func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMTextFormatDescriptionGetDefaultStyle func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMTextFormatDescriptionGetDefaultStyle calls the CoreMedia framework function CMTextFormatDescriptionGetDefaultStyle.
 func CMTextFormatDescriptionGetDefaultStyle(desc obj.Object) (result int, localFontIDOut uint16, boldOut uint8, italicOut uint8, underlineOut uint8, fontSizeOut float64, colorComponentsOut float64) {
@@ -1388,11 +1388,11 @@ func CMTextFormatDescriptionGetDefaultStyle(desc obj.Object) (result int, localF
 	var _out3 uint8
 	var _out4 float64
 	var _out5 float64
-	_ret := _fnCMTextFormatDescriptionGetDefaultStyle(objref.IDOf(desc), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
+	_ret := int(_fnCMTextFormatDescriptionGetDefaultStyle(objref.IDOf(desc), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5)))
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnCMTextFormatDescriptionGetDisplayFlags func(objc.ID, unsafe.Pointer) int
+var _fnCMTextFormatDescriptionGetDisplayFlags func(objc.ID, unsafe.Pointer) int32
 
 // CMTextFormatDescriptionGetDisplayFlags calls the CoreMedia framework function CMTextFormatDescriptionGetDisplayFlags.
 func CMTextFormatDescriptionGetDisplayFlags(desc obj.Object) (result int, displayFlagsOut uint32) {
@@ -1401,11 +1401,11 @@ func CMTextFormatDescriptionGetDisplayFlags(desc obj.Object) (result int, displa
 		ebipurego.RegisterLibFunc(&_fnCMTextFormatDescriptionGetDisplayFlags, _lib, "CMTextFormatDescriptionGetDisplayFlags")
 	}
 	var _out0 uint32
-	_ret := _fnCMTextFormatDescriptionGetDisplayFlags(objref.IDOf(desc), unsafe.Pointer(&_out0))
+	_ret := int(_fnCMTextFormatDescriptionGetDisplayFlags(objref.IDOf(desc), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnCMTextFormatDescriptionGetJustification func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMTextFormatDescriptionGetJustification func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMTextFormatDescriptionGetJustification calls the CoreMedia framework function CMTextFormatDescriptionGetJustification.
 func CMTextFormatDescriptionGetJustification(desc obj.Object) (result int, horizontaJustificationlOut int8, verticalJustificationOut int8) {
@@ -1415,11 +1415,11 @@ func CMTextFormatDescriptionGetJustification(desc obj.Object) (result int, horiz
 	}
 	var _out0 int8
 	var _out1 int8
-	_ret := _fnCMTextFormatDescriptionGetJustification(objref.IDOf(desc), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMTextFormatDescriptionGetJustification(objref.IDOf(desc), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData calls the CoreMedia framework function CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData.
 func CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(allocator obj.Object, timeCodeDescriptionData unsafe.Pointer, size int, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
@@ -1427,7 +1427,7 @@ func CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(alloc
 	if _fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData, _lib, "CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData")
 	}
-	return _fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(objref.IDOf(allocator), timeCodeDescriptionData, size, flavor, formatDescriptionOut)
+	return int(_fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(objref.IDOf(allocator), timeCodeDescriptionData, size, flavor, formatDescriptionOut))
 }
 
 var _fnCMTimeCodeFormatDescriptionGetFrameQuanta func(unsafe.Pointer) uint32
@@ -1570,7 +1570,7 @@ func CMTimebaseGetRate(timebase obj.Object) float64 {
 	return _fnCMTimebaseGetRate(objref.IDOf(timebase))
 }
 
-var _fnCMTimebaseGetTimeAndRate func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMTimebaseGetTimeAndRate func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMTimebaseGetTimeAndRate calls the CoreMedia framework function CMTimebaseGetTimeAndRate.
 func CMTimebaseGetTimeAndRate(timebase obj.Object) (result int, timeOut CMTime, rateOut float64) {
@@ -1580,7 +1580,7 @@ func CMTimebaseGetTimeAndRate(timebase obj.Object) (result int, timeOut CMTime, 
 	}
 	var _out0 CMTime
 	var _out1 float64
-	_ret := _fnCMTimebaseGetTimeAndRate(objref.IDOf(timebase), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnCMTimebaseGetTimeAndRate(objref.IDOf(timebase), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -1607,7 +1607,7 @@ func CMTimebaseGetUltimateMasterClock(timebase obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData func(objc.ID, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData func(objc.ID, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData calls the CoreMedia framework function CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData.
 func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator obj.Object, imageDescriptionData unsafe.Pointer, size int, stringEncoding int, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
@@ -1615,10 +1615,10 @@ func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator o
 	if _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData, _lib, "CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData")
 	}
-	return _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(objref.IDOf(allocator), imageDescriptionData, size, stringEncoding, flavor, formatDescriptionOut)
+	return int(_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(objref.IDOf(allocator), imageDescriptionData, size, stringEncoding, flavor, formatDescriptionOut))
 }
 
-var _fnCMVideoFormatDescriptionCreateFromH264ParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnCMVideoFormatDescriptionCreateFromH264ParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionCreateFromH264ParameterSets calls the CoreMedia framework function CMVideoFormatDescriptionCreateFromH264ParameterSets.
 func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator obj.Object, parameterSetCount int, parameterSetPointers unsafe.Pointer, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) (result int, parameterSetSizes int) {
@@ -1627,11 +1627,11 @@ func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator obj.Object, p
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionCreateFromH264ParameterSets, _lib, "CMVideoFormatDescriptionCreateFromH264ParameterSets")
 	}
 	var _out0 int
-	_ret := _fnCMVideoFormatDescriptionCreateFromH264ParameterSets(objref.IDOf(allocator), parameterSetCount, parameterSetPointers, unsafe.Pointer(&_out0), nALUnitHeaderLength, formatDescriptionOut)
+	_ret := int(_fnCMVideoFormatDescriptionCreateFromH264ParameterSets(objref.IDOf(allocator), parameterSetCount, parameterSetPointers, unsafe.Pointer(&_out0), nALUnitHeaderLength, formatDescriptionOut))
 	return _ret, _out0
 }
 
-var _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int
+var _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionCreateFromHEVCParameterSets calls the CoreMedia framework function CMVideoFormatDescriptionCreateFromHEVCParameterSets.
 func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator obj.Object, parameterSetCount int, parameterSetPointers unsafe.Pointer, nALUnitHeaderLength int, extensions obj.Object, formatDescriptionOut unsafe.Pointer) (result int, parameterSetSizes int) {
@@ -1640,7 +1640,7 @@ func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator obj.Object, p
 		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets, _lib, "CMVideoFormatDescriptionCreateFromHEVCParameterSets")
 	}
 	var _out0 int
-	_ret := _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(objref.IDOf(allocator), parameterSetCount, parameterSetPointers, unsafe.Pointer(&_out0), nALUnitHeaderLength, objref.IDOf(extensions), formatDescriptionOut)
+	_ret := int(_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(objref.IDOf(allocator), parameterSetCount, parameterSetPointers, unsafe.Pointer(&_out0), nALUnitHeaderLength, objref.IDOf(extensions), formatDescriptionOut))
 	return _ret, _out0
 }
 
@@ -1667,7 +1667,7 @@ func CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() obj.Object
 	return obj.Wrap(_ret)
 }
 
-var _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionGetH264ParameterSetAtIndex calls the CoreMedia framework function CMVideoFormatDescriptionGetH264ParameterSetAtIndex.
 func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nALUnitHeaderLengthOut int32) {
@@ -1679,11 +1679,11 @@ func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc obj.Object, pa
 	var _out1 int
 	var _out2 int
 	var _out3 int32
-	_ret := _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex(objref.IDOf(videoDesc), parameterSetIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex(objref.IDOf(videoDesc), parameterSetIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMVideoFormatDescriptionGetHEVCParameterSetAtIndex calls the CoreMedia framework function CMVideoFormatDescriptionGetHEVCParameterSetAtIndex.
 func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc obj.Object, parameterSetIndex int) (result int, parameterSetPointerOut uint8, parameterSetSizeOut int, parameterSetCountOut int, nALUnitHeaderLengthOut int32) {
@@ -1695,7 +1695,7 @@ func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc obj.Object, pa
 	var _out1 int
 	var _out2 int
 	var _out3 int32
-	_ret := _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex(objref.IDOf(videoDesc), parameterSetIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex(objref.IDOf(videoDesc), parameterSetIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 

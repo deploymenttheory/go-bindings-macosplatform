@@ -296,7 +296,7 @@ func NSGetSizeAndAlignment(typePtr string) (result string, sizep int, alignp int
 	return _ret, _out0, _out1
 }
 
-var _fnNSHFSTypeCodeFromFileType func(objc.ID) int
+var _fnNSHFSTypeCodeFromFileType func(objc.ID) uint32
 
 // NSHFSTypeCodeFromFileType calls the Foundation framework function NSHFSTypeCodeFromFileType.
 func NSHFSTypeCodeFromFileType(fileTypeString string) int {
@@ -304,7 +304,7 @@ func NSHFSTypeCodeFromFileType(fileTypeString string) int {
 	if _fnNSHFSTypeCodeFromFileType == nil {
 		ebipurego.RegisterLibFunc(&_fnNSHFSTypeCodeFromFileType, _lib, "NSHFSTypeCodeFromFileType")
 	}
-	return _fnNSHFSTypeCodeFromFileType(purego.NSString(fileTypeString))
+	return int(_fnNSHFSTypeCodeFromFileType(purego.NSString(fileTypeString)))
 }
 
 var _fnNSHFSTypeOfFile func(objc.ID) objc.ID
@@ -1008,7 +1008,7 @@ func NSStringFromSize(aSize corefoundation.CGSize) string {
 	return purego.GoString(_ret)
 }
 
-var _fnNSSwapBigIntToHost func(int) int
+var _fnNSSwapBigIntToHost func(int) uint32
 
 // NSSwapBigIntToHost calls the Foundation framework function NSSwapBigIntToHost.
 func NSSwapBigIntToHost(x int) int {
@@ -1016,7 +1016,7 @@ func NSSwapBigIntToHost(x int) int {
 	if _fnNSSwapBigIntToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapBigIntToHost, _lib, "NSSwapBigIntToHost")
 	}
-	return _fnNSSwapBigIntToHost(x)
+	return int(_fnNSSwapBigIntToHost(x))
 }
 
 var _fnNSSwapBigLongLongToHost func(uint64) uint64
@@ -1052,7 +1052,7 @@ func NSSwapBigShortToHost(x uint16) uint16 {
 	return _fnNSSwapBigShortToHost(x)
 }
 
-var _fnNSSwapHostIntToBig func(int) int
+var _fnNSSwapHostIntToBig func(int) uint32
 
 // NSSwapHostIntToBig calls the Foundation framework function NSSwapHostIntToBig.
 func NSSwapHostIntToBig(x int) int {
@@ -1060,10 +1060,10 @@ func NSSwapHostIntToBig(x int) int {
 	if _fnNSSwapHostIntToBig == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostIntToBig, _lib, "NSSwapHostIntToBig")
 	}
-	return _fnNSSwapHostIntToBig(x)
+	return int(_fnNSSwapHostIntToBig(x))
 }
 
-var _fnNSSwapHostIntToLittle func(int) int
+var _fnNSSwapHostIntToLittle func(int) uint32
 
 // NSSwapHostIntToLittle calls the Foundation framework function NSSwapHostIntToLittle.
 func NSSwapHostIntToLittle(x int) int {
@@ -1071,7 +1071,7 @@ func NSSwapHostIntToLittle(x int) int {
 	if _fnNSSwapHostIntToLittle == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapHostIntToLittle, _lib, "NSSwapHostIntToLittle")
 	}
-	return _fnNSSwapHostIntToLittle(x)
+	return int(_fnNSSwapHostIntToLittle(x))
 }
 
 var _fnNSSwapHostLongLongToBig func(uint64) uint64
@@ -1140,7 +1140,7 @@ func NSSwapHostShortToLittle(x uint16) uint16 {
 	return _fnNSSwapHostShortToLittle(x)
 }
 
-var _fnNSSwapInt func(int) int
+var _fnNSSwapInt func(int) uint32
 
 // NSSwapInt calls the Foundation framework function NSSwapInt.
 func NSSwapInt(inv int) int {
@@ -1148,10 +1148,10 @@ func NSSwapInt(inv int) int {
 	if _fnNSSwapInt == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapInt, _lib, "NSSwapInt")
 	}
-	return _fnNSSwapInt(inv)
+	return int(_fnNSSwapInt(inv))
 }
 
-var _fnNSSwapLittleIntToHost func(int) int
+var _fnNSSwapLittleIntToHost func(int) uint32
 
 // NSSwapLittleIntToHost calls the Foundation framework function NSSwapLittleIntToHost.
 func NSSwapLittleIntToHost(x int) int {
@@ -1159,7 +1159,7 @@ func NSSwapLittleIntToHost(x int) int {
 	if _fnNSSwapLittleIntToHost == nil {
 		ebipurego.RegisterLibFunc(&_fnNSSwapLittleIntToHost, _lib, "NSSwapLittleIntToHost")
 	}
-	return _fnNSSwapLittleIntToHost(x)
+	return int(_fnNSSwapLittleIntToHost(x))
 }
 
 var _fnNSSwapLittleLongLongToHost func(uint64) uint64

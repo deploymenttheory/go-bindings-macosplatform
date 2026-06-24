@@ -494,7 +494,7 @@ func SCDynamicStoreSetValue(store obj.Object, key obj.Object, value obj.Object) 
 	return _fnSCDynamicStoreSetValue(objref.IDOf(store), objref.IDOf(key), objref.IDOf(value))
 }
 
-var _fnSCError func() int
+var _fnSCError func() int32
 
 // SCError calls the SystemConfiguration framework function SCError.
 func SCError() int {
@@ -502,7 +502,7 @@ func SCError() int {
 	if _fnSCError == nil {
 		ebipurego.RegisterLibFunc(&_fnSCError, _lib, "SCError")
 	}
-	return _fnSCError()
+	return int(_fnSCError())
 }
 
 var _fnSCErrorString func(int) string

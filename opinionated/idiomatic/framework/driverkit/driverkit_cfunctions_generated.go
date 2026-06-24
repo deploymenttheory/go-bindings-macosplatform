@@ -37,7 +37,7 @@ func IODelay(us uint64) {
 	_fnIODelay(us)
 }
 
-var _fnIOFixedDivide func(int, int) int
+var _fnIOFixedDivide func(int, int) int32
 
 // IOFixedDivide calls the DriverKit framework function IOFixedDivide.
 func IOFixedDivide(a int, b int) int {
@@ -45,10 +45,10 @@ func IOFixedDivide(a int, b int) int {
 	if _fnIOFixedDivide == nil {
 		ebipurego.RegisterLibFunc(&_fnIOFixedDivide, _lib, "IOFixedDivide")
 	}
-	return _fnIOFixedDivide(a, b)
+	return int(_fnIOFixedDivide(a, b))
 }
 
-var _fnIOFixedMultiply func(int, int) int
+var _fnIOFixedMultiply func(int, int) int32
 
 // IOFixedMultiply calls the DriverKit framework function IOFixedMultiply.
 func IOFixedMultiply(a int, b int) int {
@@ -56,7 +56,7 @@ func IOFixedMultiply(a int, b int) int {
 	if _fnIOFixedMultiply == nil {
 		ebipurego.RegisterLibFunc(&_fnIOFixedMultiply, _lib, "IOFixedMultiply")
 	}
-	return _fnIOFixedMultiply(a, b)
+	return int(_fnIOFixedMultiply(a, b))
 }
 
 var _fnIOFree func(unsafe.Pointer, int)
@@ -136,7 +136,7 @@ func IOLogBuffer(title string, buffer unsafe.Pointer, size int) {
 	_fnIOLogBuffer(title, buffer, size)
 }
 
-var _fnIOLogv func(string, string) int
+var _fnIOLogv func(string, string) int32
 
 // IOLogv calls the DriverKit framework function IOLogv.
 func IOLogv(format string, ap string) int {
@@ -144,7 +144,7 @@ func IOLogv(format string, ap string) int {
 	if _fnIOLogv == nil {
 		ebipurego.RegisterLibFunc(&_fnIOLogv, _lib, "IOLogv")
 	}
-	return _fnIOLogv(format, ap)
+	return int(_fnIOLogv(format, ap))
 }
 
 var _fnIOParseBootArgNumber func(string, unsafe.Pointer, int) bool
@@ -334,7 +334,7 @@ func IOSleep(ms uint64) {
 	_fnIOSleep(ms)
 }
 
-var _fnIOSysCtlByName func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int
+var _fnIOSysCtlByName func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // IOSysCtlByName calls the DriverKit framework function IOSysCtlByName.
 func IOSysCtlByName(name string, oldp unsafe.Pointer, newp unsafe.Pointer, newlen int) (result int, oldlenp int) {
@@ -343,11 +343,11 @@ func IOSysCtlByName(name string, oldp unsafe.Pointer, newp unsafe.Pointer, newle
 		ebipurego.RegisterLibFunc(&_fnIOSysCtlByName, _lib, "IOSysCtlByName")
 	}
 	var _out0 int
-	_ret := _fnIOSysCtlByName(name, oldp, unsafe.Pointer(&_out0), newp, newlen)
+	_ret := int(_fnIOSysCtlByName(name, oldp, unsafe.Pointer(&_out0), newp, newlen))
 	return _ret, _out0
 }
 
-var _fnIOThreadLocalStorageKeyCreate func(unsafe.Pointer) int
+var _fnIOThreadLocalStorageKeyCreate func(unsafe.Pointer) int32
 
 // IOThreadLocalStorageKeyCreate calls the DriverKit framework function IOThreadLocalStorageKeyCreate.
 func IOThreadLocalStorageKeyCreate() (result int, key uint64) {
@@ -356,11 +356,11 @@ func IOThreadLocalStorageKeyCreate() (result int, key uint64) {
 		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyCreate, _lib, "IOThreadLocalStorageKeyCreate")
 	}
 	var _out0 uint64
-	_ret := _fnIOThreadLocalStorageKeyCreate(unsafe.Pointer(&_out0))
+	_ret := int(_fnIOThreadLocalStorageKeyCreate(unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnIOThreadLocalStorageKeyDelete func(uint64) int
+var _fnIOThreadLocalStorageKeyDelete func(uint64) int32
 
 // IOThreadLocalStorageKeyDelete calls the DriverKit framework function IOThreadLocalStorageKeyDelete.
 func IOThreadLocalStorageKeyDelete(key uint64) int {
@@ -368,10 +368,10 @@ func IOThreadLocalStorageKeyDelete(key uint64) int {
 	if _fnIOThreadLocalStorageKeyDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageKeyDelete, _lib, "IOThreadLocalStorageKeyDelete")
 	}
-	return _fnIOThreadLocalStorageKeyDelete(key)
+	return int(_fnIOThreadLocalStorageKeyDelete(key))
 }
 
-var _fnIOThreadLocalStorageSet func(uint64, unsafe.Pointer) int
+var _fnIOThreadLocalStorageSet func(uint64, unsafe.Pointer) int32
 
 // IOThreadLocalStorageSet calls the DriverKit framework function IOThreadLocalStorageSet.
 func IOThreadLocalStorageSet(key uint64, value unsafe.Pointer) int {
@@ -379,7 +379,7 @@ func IOThreadLocalStorageSet(key uint64, value unsafe.Pointer) int {
 	if _fnIOThreadLocalStorageSet == nil {
 		ebipurego.RegisterLibFunc(&_fnIOThreadLocalStorageSet, _lib, "IOThreadLocalStorageSet")
 	}
-	return _fnIOThreadLocalStorageSet(key, value)
+	return int(_fnIOThreadLocalStorageSet(key, value))
 }
 
 var _fnOSArrayAppendValue func(unsafe.Pointer, objc.ID) bool
@@ -688,7 +688,7 @@ func OSNumberGetUInt64Value() (result uint64, obj_ int32) {
 	return _ret, _out0
 }
 
-var _fnOSObjectAllocate func(unsafe.Pointer, objc.ID) int
+var _fnOSObjectAllocate func(unsafe.Pointer, objc.ID) int32
 
 // OSObjectAllocate calls the DriverKit framework function OSObjectAllocate.
 func OSObjectAllocate(pObject obj.Object) (result int, meta int32) {
@@ -697,7 +697,7 @@ func OSObjectAllocate(pObject obj.Object) (result int, meta int32) {
 		ebipurego.RegisterLibFunc(&_fnOSObjectAllocate, _lib, "OSObjectAllocate")
 	}
 	var _out0 int32
-	_ret := _fnOSObjectAllocate(unsafe.Pointer(&_out0), objref.IDOf(pObject))
+	_ret := int(_fnOSObjectAllocate(unsafe.Pointer(&_out0), objref.IDOf(pObject)))
 	return _ret, _out0
 }
 

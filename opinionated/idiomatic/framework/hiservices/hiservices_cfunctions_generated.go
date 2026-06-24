@@ -560,7 +560,7 @@ func GetNextProcess(pPSN unsafe.Pointer) int16 {
 	return _fnGetNextProcess(pPSN)
 }
 
-var _fnGetProcessPID func(unsafe.Pointer, unsafe.Pointer) int
+var _fnGetProcessPID func(unsafe.Pointer, unsafe.Pointer) int32
 
 // GetProcessPID calls the HIServices framework function GetProcessPID.
 func GetProcessPID(psn unsafe.Pointer) (result int, pid int) {
@@ -569,7 +569,7 @@ func GetProcessPID(psn unsafe.Pointer) (result int, pid int) {
 		ebipurego.RegisterLibFunc(&_fnGetProcessPID, _lib, "GetProcessPID")
 	}
 	var _out0 int
-	_ret := _fnGetProcessPID(psn, unsafe.Pointer(&_out0))
+	_ret := int(_fnGetProcessPID(psn, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -714,7 +714,7 @@ func HIShapeIsRectangular(inShape obj.Object) uint8 {
 	return _fnHIShapeIsRectangular(objref.IDOf(inShape))
 }
 
-var _fnICAddProfile func(objc.ID, int, unsafe.Pointer) int
+var _fnICAddProfile func(objc.ID, int, unsafe.Pointer) int32
 
 // ICAddProfile calls the HIServices framework function ICAddProfile.
 func ICAddProfile(inst obj.Object, prototypeID int) (result int, newID int) {
@@ -723,11 +723,11 @@ func ICAddProfile(inst obj.Object, prototypeID int) (result int, newID int) {
 		ebipurego.RegisterLibFunc(&_fnICAddProfile, _lib, "ICAddProfile")
 	}
 	var _out0 int
-	_ret := _fnICAddProfile(objref.IDOf(inst), prototypeID, unsafe.Pointer(&_out0))
+	_ret := int(_fnICAddProfile(objref.IDOf(inst), prototypeID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICCountMapEntries func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnICCountMapEntries func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICCountMapEntries calls the HIServices framework function ICCountMapEntries.
 func ICCountMapEntries(inst obj.Object) (result int, entries string, count int64) {
@@ -737,11 +737,11 @@ func ICCountMapEntries(inst obj.Object) (result int, entries string, count int64
 	}
 	var _out0 string
 	var _out1 int64
-	_ret := _fnICCountMapEntries(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnICCountMapEntries(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnICCountPref func(objc.ID, unsafe.Pointer) int
+var _fnICCountPref func(objc.ID, unsafe.Pointer) int32
 
 // ICCountPref calls the HIServices framework function ICCountPref.
 func ICCountPref(inst obj.Object) (result int, count int64) {
@@ -750,11 +750,11 @@ func ICCountPref(inst obj.Object) (result int, count int64) {
 		ebipurego.RegisterLibFunc(&_fnICCountPref, _lib, "ICCountPref")
 	}
 	var _out0 int64
-	_ret := _fnICCountPref(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICCountPref(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICCountProfiles func(objc.ID, unsafe.Pointer) int
+var _fnICCountProfiles func(objc.ID, unsafe.Pointer) int32
 
 // ICCountProfiles calls the HIServices framework function ICCountProfiles.
 func ICCountProfiles(inst obj.Object) (result int, count int64) {
@@ -763,11 +763,11 @@ func ICCountProfiles(inst obj.Object) (result int, count int64) {
 		ebipurego.RegisterLibFunc(&_fnICCountProfiles, _lib, "ICCountProfiles")
 	}
 	var _out0 int64
-	_ret := _fnICCountProfiles(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICCountProfiles(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICDeleteMapEntry func(objc.ID, unsafe.Pointer, int) int
+var _fnICDeleteMapEntry func(objc.ID, unsafe.Pointer, int) int32
 
 // ICDeleteMapEntry calls the HIServices framework function ICDeleteMapEntry.
 func ICDeleteMapEntry(inst obj.Object, pos int) (result int, entries string) {
@@ -776,11 +776,11 @@ func ICDeleteMapEntry(inst obj.Object, pos int) (result int, entries string) {
 		ebipurego.RegisterLibFunc(&_fnICDeleteMapEntry, _lib, "ICDeleteMapEntry")
 	}
 	var _out0 string
-	_ret := _fnICDeleteMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), pos)
+	_ret := int(_fnICDeleteMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), pos))
 	return _ret, _out0
 }
 
-var _fnICDeletePref func(objc.ID, unsafe.Pointer) int
+var _fnICDeletePref func(objc.ID, unsafe.Pointer) int32
 
 // ICDeletePref calls the HIServices framework function ICDeletePref.
 func ICDeletePref(inst obj.Object) (result int, key uint8) {
@@ -789,11 +789,11 @@ func ICDeletePref(inst obj.Object) (result int, key uint8) {
 		ebipurego.RegisterLibFunc(&_fnICDeletePref, _lib, "ICDeletePref")
 	}
 	var _out0 uint8
-	_ret := _fnICDeletePref(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICDeletePref(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICEditPreferences func(objc.ID, unsafe.Pointer) int
+var _fnICEditPreferences func(objc.ID, unsafe.Pointer) int32
 
 // ICEditPreferences calls the HIServices framework function ICEditPreferences.
 func ICEditPreferences(inst obj.Object) (result int, key uint8) {
@@ -802,11 +802,11 @@ func ICEditPreferences(inst obj.Object) (result int, key uint8) {
 		ebipurego.RegisterLibFunc(&_fnICEditPreferences, _lib, "ICEditPreferences")
 	}
 	var _out0 uint8
-	_ret := _fnICEditPreferences(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICEditPreferences(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICFindPrefHandle func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnICFindPrefHandle func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICFindPrefHandle calls the HIServices framework function ICFindPrefHandle.
 func ICFindPrefHandle(inst obj.Object) (result int, key uint8, attr int, prefh string) {
@@ -817,11 +817,11 @@ func ICFindPrefHandle(inst obj.Object) (result int, key uint8, attr int, prefh s
 	var _out0 uint8
 	var _out1 int
 	var _out2 string
-	_ret := _fnICFindPrefHandle(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := int(_fnICFindPrefHandle(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnICGetConfigName func(objc.ID, uint8, unsafe.Pointer) int
+var _fnICGetConfigName func(objc.ID, uint8, unsafe.Pointer) int32
 
 // ICGetConfigName calls the HIServices framework function ICGetConfigName.
 func ICGetConfigName(inst obj.Object, longname uint8) (result int, name uint8) {
@@ -830,11 +830,11 @@ func ICGetConfigName(inst obj.Object, longname uint8) (result int, name uint8) {
 		ebipurego.RegisterLibFunc(&_fnICGetConfigName, _lib, "ICGetConfigName")
 	}
 	var _out0 uint8
-	_ret := _fnICGetConfigName(objref.IDOf(inst), longname, unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetConfigName(objref.IDOf(inst), longname, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetCurrentProfile func(objc.ID, unsafe.Pointer) int
+var _fnICGetCurrentProfile func(objc.ID, unsafe.Pointer) int32
 
 // ICGetCurrentProfile calls the HIServices framework function ICGetCurrentProfile.
 func ICGetCurrentProfile(inst obj.Object) (result int, currentID int) {
@@ -843,11 +843,11 @@ func ICGetCurrentProfile(inst obj.Object) (result int, currentID int) {
 		ebipurego.RegisterLibFunc(&_fnICGetCurrentProfile, _lib, "ICGetCurrentProfile")
 	}
 	var _out0 int
-	_ret := _fnICGetCurrentProfile(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetCurrentProfile(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetDefaultPref func(objc.ID, unsafe.Pointer, unsafe.Pointer) int
+var _fnICGetDefaultPref func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICGetDefaultPref calls the HIServices framework function ICGetDefaultPref.
 func ICGetDefaultPref(inst obj.Object) (result int, key uint8, prefH string) {
@@ -857,11 +857,11 @@ func ICGetDefaultPref(inst obj.Object) (result int, key uint8, prefH string) {
 	}
 	var _out0 uint8
 	var _out1 string
-	_ret := _fnICGetDefaultPref(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := int(_fnICGetDefaultPref(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnICGetIndPref func(objc.ID, int, unsafe.Pointer) int
+var _fnICGetIndPref func(objc.ID, int, unsafe.Pointer) int32
 
 // ICGetIndPref calls the HIServices framework function ICGetIndPref.
 func ICGetIndPref(inst obj.Object, index int) (result int, key uint8) {
@@ -870,11 +870,11 @@ func ICGetIndPref(inst obj.Object, index int) (result int, key uint8) {
 		ebipurego.RegisterLibFunc(&_fnICGetIndPref, _lib, "ICGetIndPref")
 	}
 	var _out0 uint8
-	_ret := _fnICGetIndPref(objref.IDOf(inst), index, unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetIndPref(objref.IDOf(inst), index, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetIndProfile func(objc.ID, int, unsafe.Pointer) int
+var _fnICGetIndProfile func(objc.ID, int, unsafe.Pointer) int32
 
 // ICGetIndProfile calls the HIServices framework function ICGetIndProfile.
 func ICGetIndProfile(inst obj.Object, index int) (result int, thisID int) {
@@ -883,11 +883,11 @@ func ICGetIndProfile(inst obj.Object, index int) (result int, thisID int) {
 		ebipurego.RegisterLibFunc(&_fnICGetIndProfile, _lib, "ICGetIndProfile")
 	}
 	var _out0 int
-	_ret := _fnICGetIndProfile(objref.IDOf(inst), index, unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetIndProfile(objref.IDOf(inst), index, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetPerm func(objc.ID, unsafe.Pointer) int
+var _fnICGetPerm func(objc.ID, unsafe.Pointer) int32
 
 // ICGetPerm calls the HIServices framework function ICGetPerm.
 func ICGetPerm(inst obj.Object) (result int, perm uint8) {
@@ -896,11 +896,11 @@ func ICGetPerm(inst obj.Object) (result int, perm uint8) {
 		ebipurego.RegisterLibFunc(&_fnICGetPerm, _lib, "ICGetPerm")
 	}
 	var _out0 uint8
-	_ret := _fnICGetPerm(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetPerm(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetPref func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnICGetPref func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICGetPref calls the HIServices framework function ICGetPref.
 func ICGetPref(inst obj.Object, buf unsafe.Pointer) (result int, key uint8, attr int, size int64) {
@@ -911,11 +911,11 @@ func ICGetPref(inst obj.Object, buf unsafe.Pointer) (result int, key uint8, attr
 	var _out0 uint8
 	var _out1 int
 	var _out2 int64
-	_ret := _fnICGetPref(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), buf, unsafe.Pointer(&_out2))
+	_ret := int(_fnICGetPref(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), buf, unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnICGetProfileName func(objc.ID, int, unsafe.Pointer) int
+var _fnICGetProfileName func(objc.ID, int, unsafe.Pointer) int32
 
 // ICGetProfileName calls the HIServices framework function ICGetProfileName.
 func ICGetProfileName(inst obj.Object, thisID int) (result int, name uint8) {
@@ -924,11 +924,11 @@ func ICGetProfileName(inst obj.Object, thisID int) (result int, name uint8) {
 		ebipurego.RegisterLibFunc(&_fnICGetProfileName, _lib, "ICGetProfileName")
 	}
 	var _out0 uint8
-	_ret := _fnICGetProfileName(objref.IDOf(inst), thisID, unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetProfileName(objref.IDOf(inst), thisID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetSeed func(objc.ID, unsafe.Pointer) int
+var _fnICGetSeed func(objc.ID, unsafe.Pointer) int32
 
 // ICGetSeed calls the HIServices framework function ICGetSeed.
 func ICGetSeed(inst obj.Object) (result int, seed int64) {
@@ -937,11 +937,11 @@ func ICGetSeed(inst obj.Object) (result int, seed int64) {
 		ebipurego.RegisterLibFunc(&_fnICGetSeed, _lib, "ICGetSeed")
 	}
 	var _out0 int64
-	_ret := _fnICGetSeed(objref.IDOf(inst), unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetSeed(objref.IDOf(inst), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICGetVersion func(objc.ID, int, unsafe.Pointer) int
+var _fnICGetVersion func(objc.ID, int, unsafe.Pointer) int32
 
 // ICGetVersion calls the HIServices framework function ICGetVersion.
 func ICGetVersion(inst obj.Object, whichVersion int) (result int, version int) {
@@ -950,11 +950,11 @@ func ICGetVersion(inst obj.Object, whichVersion int) (result int, version int) {
 		ebipurego.RegisterLibFunc(&_fnICGetVersion, _lib, "ICGetVersion")
 	}
 	var _out0 int
-	_ret := _fnICGetVersion(objref.IDOf(inst), whichVersion, unsafe.Pointer(&_out0))
+	_ret := int(_fnICGetVersion(objref.IDOf(inst), whichVersion, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnICLaunchURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
+var _fnICLaunchURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICLaunchURL calls the HIServices framework function ICLaunchURL.
 func ICLaunchURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hint uint8, selStart int64, selEnd int64) {
@@ -965,11 +965,11 @@ func ICLaunchURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hi
 	var _out0 uint8
 	var _out1 int64
 	var _out2 int64
-	_ret := _fnICLaunchURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := int(_fnICLaunchURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnICParseURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnICParseURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICParseURL calls the HIServices framework function ICParseURL.
 func ICParseURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hint uint8, selStart int64, selEnd int64, url string) {
@@ -981,11 +981,11 @@ func ICParseURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hin
 	var _out1 int64
 	var _out2 int64
 	var _out3 string
-	_ret := _fnICParseURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	_ret := int(_fnICParseURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnICSetPref func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int) int
+var _fnICSetPref func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int) int32
 
 // ICSetPref calls the HIServices framework function ICSetPref.
 func ICSetPref(inst obj.Object, attr int, buf unsafe.Pointer, size int) (result int, key uint8) {
@@ -994,11 +994,11 @@ func ICSetPref(inst obj.Object, attr int, buf unsafe.Pointer, size int) (result 
 		ebipurego.RegisterLibFunc(&_fnICSetPref, _lib, "ICSetPref")
 	}
 	var _out0 uint8
-	_ret := _fnICSetPref(objref.IDOf(inst), unsafe.Pointer(&_out0), attr, buf, size)
+	_ret := int(_fnICSetPref(objref.IDOf(inst), unsafe.Pointer(&_out0), attr, buf, size))
 	return _ret, _out0
 }
 
-var _fnICSetPrefHandle func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnICSetPrefHandle func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // ICSetPrefHandle calls the HIServices framework function ICSetPrefHandle.
 func ICSetPrefHandle(inst obj.Object, attr int) (result int, key uint8, prefh string) {
@@ -1008,11 +1008,11 @@ func ICSetPrefHandle(inst obj.Object, attr int) (result int, key uint8, prefh st
 	}
 	var _out0 uint8
 	var _out1 string
-	_ret := _fnICSetPrefHandle(objref.IDOf(inst), unsafe.Pointer(&_out0), attr, unsafe.Pointer(&_out1))
+	_ret := int(_fnICSetPrefHandle(objref.IDOf(inst), unsafe.Pointer(&_out0), attr, unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
-var _fnICSetProfileName func(objc.ID, int, unsafe.Pointer) int
+var _fnICSetProfileName func(objc.ID, int, unsafe.Pointer) int32
 
 // ICSetProfileName calls the HIServices framework function ICSetProfileName.
 func ICSetProfileName(inst obj.Object, thisID int) (result int, name uint8) {
@@ -1021,7 +1021,7 @@ func ICSetProfileName(inst obj.Object, thisID int) (result int, name uint8) {
 		ebipurego.RegisterLibFunc(&_fnICSetProfileName, _lib, "ICSetProfileName")
 	}
 	var _out0 uint8
-	_ret := _fnICSetProfileName(objref.IDOf(inst), thisID, unsafe.Pointer(&_out0))
+	_ret := int(_fnICSetProfileName(objref.IDOf(inst), thisID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1058,7 +1058,7 @@ func KillProcess(inProcess unsafe.Pointer) int16 {
 	return _fnKillProcess(inProcess)
 }
 
-var _fnPasteboardGetItemCount func(objc.ID, unsafe.Pointer) int
+var _fnPasteboardGetItemCount func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardGetItemCount calls the HIServices framework function PasteboardGetItemCount.
 func PasteboardGetItemCount(inPasteboard obj.Object) (result int, outItemCount int) {
@@ -1067,11 +1067,11 @@ func PasteboardGetItemCount(inPasteboard obj.Object) (result int, outItemCount i
 		ebipurego.RegisterLibFunc(&_fnPasteboardGetItemCount, _lib, "PasteboardGetItemCount")
 	}
 	var _out0 int
-	_ret := _fnPasteboardGetItemCount(objref.IDOf(inPasteboard), unsafe.Pointer(&_out0))
+	_ret := int(_fnPasteboardGetItemCount(objref.IDOf(inPasteboard), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnPasteboardGetItemFlavorFlags func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) int
+var _fnPasteboardGetItemFlavorFlags func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // PasteboardGetItemFlavorFlags calls the HIServices framework function PasteboardGetItemFlavorFlags.
 func PasteboardGetItemFlavorFlags(inPasteboard obj.Object, inItem unsafe.Pointer, inFlavorType obj.Object) (result int, outFlags PasteboardFlavorFlags) {
@@ -1080,7 +1080,7 @@ func PasteboardGetItemFlavorFlags(inPasteboard obj.Object, inItem unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnPasteboardGetItemFlavorFlags, _lib, "PasteboardGetItemFlavorFlags")
 	}
 	var _out0 PasteboardFlavorFlags
-	_ret := _fnPasteboardGetItemFlavorFlags(objref.IDOf(inPasteboard), inItem, objref.IDOf(inFlavorType), unsafe.Pointer(&_out0))
+	_ret := int(_fnPasteboardGetItemFlavorFlags(objref.IDOf(inPasteboard), inItem, objref.IDOf(inFlavorType), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -1153,7 +1153,7 @@ func ShowHideProcess(psn unsafe.Pointer, visible uint8) int16 {
 	return _fnShowHideProcess(psn, visible)
 }
 
-var _fnTranslationGetTranslationFlags func(objc.ID, unsafe.Pointer) int
+var _fnTranslationGetTranslationFlags func(objc.ID, unsafe.Pointer) int32
 
 // TranslationGetTranslationFlags calls the HIServices framework function TranslationGetTranslationFlags.
 func TranslationGetTranslationFlags(inTranslation obj.Object) (result int, outTranslationFlags int) {
@@ -1162,7 +1162,7 @@ func TranslationGetTranslationFlags(inTranslation obj.Object) (result int, outTr
 		ebipurego.RegisterLibFunc(&_fnTranslationGetTranslationFlags, _lib, "TranslationGetTranslationFlags")
 	}
 	var _out0 int
-	_ret := _fnTranslationGetTranslationFlags(objref.IDOf(inTranslation), unsafe.Pointer(&_out0))
+	_ret := int(_fnTranslationGetTranslationFlags(objref.IDOf(inTranslation), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

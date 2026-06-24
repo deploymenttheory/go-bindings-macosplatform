@@ -71,7 +71,7 @@ func IOSurfaceCreate(properties obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnIOSurfaceCreateMachPort func(objc.ID) int
+var _fnIOSurfaceCreateMachPort func(objc.ID) uint32
 
 // IOSurfaceCreateMachPort calls the IOSurface framework function IOSurfaceCreateMachPort.
 func IOSurfaceCreateMachPort(buffer obj.Object) int {
@@ -79,7 +79,7 @@ func IOSurfaceCreateMachPort(buffer obj.Object) int {
 	if _fnIOSurfaceCreateMachPort == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreateMachPort, _lib, "IOSurfaceCreateMachPort")
 	}
-	return _fnIOSurfaceCreateMachPort(objref.IDOf(buffer))
+	return int(_fnIOSurfaceCreateMachPort(objref.IDOf(buffer)))
 }
 
 var _fnIOSurfaceDecrementUseCount func(objc.ID)
@@ -269,7 +269,7 @@ func IOSurfaceGetNumberOfComponentsOfPlane(buffer obj.Object, planeIndex int) in
 	return _fnIOSurfaceGetNumberOfComponentsOfPlane(objref.IDOf(buffer), planeIndex)
 }
 
-var _fnIOSurfaceGetPixelFormat func(objc.ID) int
+var _fnIOSurfaceGetPixelFormat func(objc.ID) uint32
 
 // IOSurfaceGetPixelFormat calls the IOSurface framework function IOSurfaceGetPixelFormat.
 func IOSurfaceGetPixelFormat(buffer obj.Object) int {
@@ -277,7 +277,7 @@ func IOSurfaceGetPixelFormat(buffer obj.Object) int {
 	if _fnIOSurfaceGetPixelFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetPixelFormat, _lib, "IOSurfaceGetPixelFormat")
 	}
-	return _fnIOSurfaceGetPixelFormat(objref.IDOf(buffer))
+	return int(_fnIOSurfaceGetPixelFormat(objref.IDOf(buffer)))
 }
 
 var _fnIOSurfaceGetPlaneCount func(objc.ID) int
@@ -423,7 +423,7 @@ func IOSurfaceIsInUse(buffer obj.Object) uint8 {
 	return _fnIOSurfaceIsInUse(objref.IDOf(buffer))
 }
 
-var _fnIOSurfaceLock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int
+var _fnIOSurfaceLock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int32
 
 // IOSurfaceLock calls the IOSurface framework function IOSurfaceLock.
 func IOSurfaceLock(buffer obj.Object, options IOSurfaceLockOptions) (result int, seed uint32) {
@@ -432,7 +432,7 @@ func IOSurfaceLock(buffer obj.Object, options IOSurfaceLockOptions) (result int,
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLock, _lib, "IOSurfaceLock")
 	}
 	var _out0 uint32
-	_ret := _fnIOSurfaceLock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0))
+	_ret := int(_fnIOSurfaceLock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -494,7 +494,7 @@ func IOSurfaceRemoveValue(buffer obj.Object, key obj.Object) {
 	_fnIOSurfaceRemoveValue(objref.IDOf(buffer), objref.IDOf(key))
 }
 
-var _fnIOSurfaceSetOwnershipIdentity func(objc.ID, int, int, uint32) int
+var _fnIOSurfaceSetOwnershipIdentity func(objc.ID, int, int, uint32) int32
 
 // IOSurfaceSetOwnershipIdentity calls the IOSurface framework function IOSurfaceSetOwnershipIdentity.
 func IOSurfaceSetOwnershipIdentity(buffer obj.Object, task_id_token int, newLedgerTag int, newLedgerOptions uint32) int {
@@ -502,10 +502,10 @@ func IOSurfaceSetOwnershipIdentity(buffer obj.Object, task_id_token int, newLedg
 	if _fnIOSurfaceSetOwnershipIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetOwnershipIdentity, _lib, "IOSurfaceSetOwnershipIdentity")
 	}
-	return _fnIOSurfaceSetOwnershipIdentity(objref.IDOf(buffer), task_id_token, newLedgerTag, newLedgerOptions)
+	return int(_fnIOSurfaceSetOwnershipIdentity(objref.IDOf(buffer), task_id_token, newLedgerTag, newLedgerOptions))
 }
 
-var _fnIOSurfaceSetPurgeable func(objc.ID, uint32, unsafe.Pointer) int
+var _fnIOSurfaceSetPurgeable func(objc.ID, uint32, unsafe.Pointer) int32
 
 // IOSurfaceSetPurgeable calls the IOSurface framework function IOSurfaceSetPurgeable.
 func IOSurfaceSetPurgeable(buffer obj.Object, newState uint32) (result int, oldState uint32) {
@@ -514,7 +514,7 @@ func IOSurfaceSetPurgeable(buffer obj.Object, newState uint32) (result int, oldS
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetPurgeable, _lib, "IOSurfaceSetPurgeable")
 	}
 	var _out0 uint32
-	_ret := _fnIOSurfaceSetPurgeable(objref.IDOf(buffer), newState, unsafe.Pointer(&_out0))
+	_ret := int(_fnIOSurfaceSetPurgeable(objref.IDOf(buffer), newState, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -540,7 +540,7 @@ func IOSurfaceSetValues(buffer obj.Object, keysAndValues obj.Object) {
 	_fnIOSurfaceSetValues(objref.IDOf(buffer), objref.IDOf(keysAndValues))
 }
 
-var _fnIOSurfaceUnlock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int
+var _fnIOSurfaceUnlock func(objc.ID, IOSurfaceLockOptions, unsafe.Pointer) int32
 
 // IOSurfaceUnlock calls the IOSurface framework function IOSurfaceUnlock.
 func IOSurfaceUnlock(buffer obj.Object, options IOSurfaceLockOptions) (result int, seed uint32) {
@@ -549,6 +549,6 @@ func IOSurfaceUnlock(buffer obj.Object, options IOSurfaceLockOptions) (result in
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceUnlock, _lib, "IOSurfaceUnlock")
 	}
 	var _out0 uint32
-	_ret := _fnIOSurfaceUnlock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0))
+	_ret := int(_fnIOSurfaceUnlock(objref.IDOf(buffer), options, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }

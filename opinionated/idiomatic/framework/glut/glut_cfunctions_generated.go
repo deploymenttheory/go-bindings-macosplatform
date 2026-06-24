@@ -54,7 +54,7 @@ func BitmapCharacter(font unsafe.Pointer, character int) {
 	_fnBitmapCharacter(font, character)
 }
 
-var _fnBitmapLength func(unsafe.Pointer, unsafe.Pointer) int
+var _fnBitmapLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // BitmapLength calls the GLUT framework function glutBitmapLength.
 func BitmapLength(font unsafe.Pointer) (result int, string_ uint8) {
@@ -63,11 +63,11 @@ func BitmapLength(font unsafe.Pointer) (result int, string_ uint8) {
 		ebipurego.RegisterLibFunc(&_fnBitmapLength, _lib, "glutBitmapLength")
 	}
 	var _out0 uint8
-	_ret := _fnBitmapLength(font, unsafe.Pointer(&_out0))
+	_ret := int(_fnBitmapLength(font, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnBitmapWidth func(unsafe.Pointer, int) int
+var _fnBitmapWidth func(unsafe.Pointer, int) int32
 
 // BitmapWidth calls the GLUT framework function glutBitmapWidth.
 func BitmapWidth(font unsafe.Pointer, character int) int {
@@ -75,7 +75,7 @@ func BitmapWidth(font unsafe.Pointer, character int) int {
 	if _fnBitmapWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnBitmapWidth, _lib, "glutBitmapWidth")
 	}
-	return _fnBitmapWidth(font, character)
+	return int(_fnBitmapWidth(font, character))
 }
 
 var _fnButtonBoxFunc func(unsafe.Pointer)
@@ -133,7 +133,7 @@ func CopyColormap(win int) {
 	_fnCopyColormap(win)
 }
 
-var _fnCreateMenu func(unsafe.Pointer) int
+var _fnCreateMenu func(unsafe.Pointer) int32
 
 // CreateMenu calls the GLUT framework function glutCreateMenu.
 func CreateMenu(arg unsafe.Pointer) int {
@@ -141,10 +141,10 @@ func CreateMenu(arg unsafe.Pointer) int {
 	if _fnCreateMenu == nil {
 		ebipurego.RegisterLibFunc(&_fnCreateMenu, _lib, "glutCreateMenu")
 	}
-	return _fnCreateMenu(arg)
+	return int(_fnCreateMenu(arg))
 }
 
-var _fnCreateSubWindow func(int, int, int, int, int) int
+var _fnCreateSubWindow func(int, int, int, int, int) int32
 
 // CreateSubWindow calls the GLUT framework function glutCreateSubWindow.
 func CreateSubWindow(win int, x int, y int, width int, height int) int {
@@ -152,10 +152,10 @@ func CreateSubWindow(win int, x int, y int, width int, height int) int {
 	if _fnCreateSubWindow == nil {
 		ebipurego.RegisterLibFunc(&_fnCreateSubWindow, _lib, "glutCreateSubWindow")
 	}
-	return _fnCreateSubWindow(win, x, y, width, height)
+	return int(_fnCreateSubWindow(win, x, y, width, height))
 }
 
-var _fnCreateWindow func(string) int
+var _fnCreateWindow func(string) int32
 
 // CreateWindow calls the GLUT framework function glutCreateWindow.
 func CreateWindow(title string) int {
@@ -163,7 +163,7 @@ func CreateWindow(title string) int {
 	if _fnCreateWindow == nil {
 		ebipurego.RegisterLibFunc(&_fnCreateWindow, _lib, "glutCreateWindow")
 	}
-	return _fnCreateWindow(title)
+	return int(_fnCreateWindow(title))
 }
 
 var _fnDestroyMenu func(int)
@@ -199,7 +199,7 @@ func DetachMenu(button int) {
 	_fnDetachMenu(button)
 }
 
-var _fnDeviceGet func(uint32) int
+var _fnDeviceGet func(uint32) int32
 
 // DeviceGet calls the GLUT framework function glutDeviceGet.
 func DeviceGet(type_ uint32) int {
@@ -207,7 +207,7 @@ func DeviceGet(type_ uint32) int {
 	if _fnDeviceGet == nil {
 		ebipurego.RegisterLibFunc(&_fnDeviceGet, _lib, "glutDeviceGet")
 	}
-	return _fnDeviceGet(type_)
+	return int(_fnDeviceGet(type_))
 }
 
 var _fnDialsFunc func(unsafe.Pointer)
@@ -232,7 +232,7 @@ func DisplayFunc(func_ unsafe.Pointer) {
 	_fnDisplayFunc(func_)
 }
 
-var _fnEnterGameMode func() int
+var _fnEnterGameMode func() int32
 
 // EnterGameMode calls the GLUT framework function glutEnterGameMode.
 func EnterGameMode() int {
@@ -240,7 +240,7 @@ func EnterGameMode() int {
 	if _fnEnterGameMode == nil {
 		ebipurego.RegisterLibFunc(&_fnEnterGameMode, _lib, "glutEnterGameMode")
 	}
-	return _fnEnterGameMode()
+	return int(_fnEnterGameMode())
 }
 
 var _fnEntryFunc func(unsafe.Pointer)
@@ -265,7 +265,7 @@ func EstablishOverlay() {
 	_fnEstablishOverlay()
 }
 
-var _fnExtensionSupported func(string) int
+var _fnExtensionSupported func(string) int32
 
 // ExtensionSupported calls the GLUT framework function glutExtensionSupported.
 func ExtensionSupported(name string) int {
@@ -273,7 +273,7 @@ func ExtensionSupported(name string) int {
 	if _fnExtensionSupported == nil {
 		ebipurego.RegisterLibFunc(&_fnExtensionSupported, _lib, "glutExtensionSupported")
 	}
-	return _fnExtensionSupported(name)
+	return int(_fnExtensionSupported(name))
 }
 
 var _fnForceJoystickFunc func()
@@ -298,7 +298,7 @@ func FullScreen() {
 	_fnFullScreen()
 }
 
-var _fnGameModeGet func(uint32) int
+var _fnGameModeGet func(uint32) int32
 
 // GameModeGet calls the GLUT framework function glutGameModeGet.
 func GameModeGet(mode uint32) int {
@@ -306,7 +306,7 @@ func GameModeGet(mode uint32) int {
 	if _fnGameModeGet == nil {
 		ebipurego.RegisterLibFunc(&_fnGameModeGet, _lib, "glutGameModeGet")
 	}
-	return _fnGameModeGet(mode)
+	return int(_fnGameModeGet(mode))
 }
 
 var _fnGameModeString func(string)
@@ -320,7 +320,7 @@ func GameModeString(string_ string) {
 	_fnGameModeString(string_)
 }
 
-var _fnGet func(uint32) int
+var _fnGet func(uint32) int32
 
 // Get calls the GLUT framework function glutGet.
 func Get(type_ uint32) int {
@@ -328,7 +328,7 @@ func Get(type_ uint32) int {
 	if _fnGet == nil {
 		ebipurego.RegisterLibFunc(&_fnGet, _lib, "glutGet")
 	}
-	return _fnGet(type_)
+	return int(_fnGet(type_))
 }
 
 var _fnGetColor func(int, int) float32
@@ -342,7 +342,7 @@ func GetColor(ndx int, component int) float32 {
 	return _fnGetColor(ndx, component)
 }
 
-var _fnGetMenu func() int
+var _fnGetMenu func() int32
 
 // GetMenu calls the GLUT framework function glutGetMenu.
 func GetMenu() int {
@@ -350,10 +350,10 @@ func GetMenu() int {
 	if _fnGetMenu == nil {
 		ebipurego.RegisterLibFunc(&_fnGetMenu, _lib, "glutGetMenu")
 	}
-	return _fnGetMenu()
+	return int(_fnGetMenu())
 }
 
-var _fnGetModifiers func() int
+var _fnGetModifiers func() int32
 
 // GetModifiers calls the GLUT framework function glutGetModifiers.
 func GetModifiers() int {
@@ -361,10 +361,10 @@ func GetModifiers() int {
 	if _fnGetModifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnGetModifiers, _lib, "glutGetModifiers")
 	}
-	return _fnGetModifiers()
+	return int(_fnGetModifiers())
 }
 
-var _fnGetWindow func() int
+var _fnGetWindow func() int32
 
 // GetWindow calls the GLUT framework function glutGetWindow.
 func GetWindow() int {
@@ -372,7 +372,7 @@ func GetWindow() int {
 	if _fnGetWindow == nil {
 		ebipurego.RegisterLibFunc(&_fnGetWindow, _lib, "glutGetWindow")
 	}
-	return _fnGetWindow()
+	return int(_fnGetWindow())
 }
 
 var _fnHideOverlay func()
@@ -520,7 +520,7 @@ func KeyboardUpFunc(func_ unsafe.Pointer) {
 	_fnKeyboardUpFunc(func_)
 }
 
-var _fnLayerGet func(uint32) int
+var _fnLayerGet func(uint32) int32
 
 // LayerGet calls the GLUT framework function glutLayerGet.
 func LayerGet(type_ uint32) int {
@@ -528,7 +528,7 @@ func LayerGet(type_ uint32) int {
 	if _fnLayerGet == nil {
 		ebipurego.RegisterLibFunc(&_fnLayerGet, _lib, "glutLayerGet")
 	}
-	return _fnLayerGet(type_)
+	return int(_fnLayerGet(type_))
 }
 
 var _fnLeaveGameMode func()
@@ -1037,7 +1037,7 @@ func StrokeCharacter(font unsafe.Pointer, character int) {
 	_fnStrokeCharacter(font, character)
 }
 
-var _fnStrokeLength func(unsafe.Pointer, unsafe.Pointer) int
+var _fnStrokeLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // StrokeLength calls the GLUT framework function glutStrokeLength.
 func StrokeLength(font unsafe.Pointer) (result int, string_ uint8) {
@@ -1046,11 +1046,11 @@ func StrokeLength(font unsafe.Pointer) (result int, string_ uint8) {
 		ebipurego.RegisterLibFunc(&_fnStrokeLength, _lib, "glutStrokeLength")
 	}
 	var _out0 uint8
-	_ret := _fnStrokeLength(font, unsafe.Pointer(&_out0))
+	_ret := int(_fnStrokeLength(font, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
-var _fnStrokeWidth func(unsafe.Pointer, int) int
+var _fnStrokeWidth func(unsafe.Pointer, int) int32
 
 // StrokeWidth calls the GLUT framework function glutStrokeWidth.
 func StrokeWidth(font unsafe.Pointer, character int) int {
@@ -1058,7 +1058,7 @@ func StrokeWidth(font unsafe.Pointer, character int) int {
 	if _fnStrokeWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnStrokeWidth, _lib, "glutStrokeWidth")
 	}
-	return _fnStrokeWidth(font, character)
+	return int(_fnStrokeWidth(font, character))
 }
 
 var _fnSurfaceTexture func(uint32, uint32, int)
@@ -1149,7 +1149,7 @@ func VideoResize(x int, y int, width int, height int) {
 	_fnVideoResize(x, y, width, height)
 }
 
-var _fnVideoResizeGet func(uint32) int
+var _fnVideoResizeGet func(uint32) int32
 
 // VideoResizeGet calls the GLUT framework function glutVideoResizeGet.
 func VideoResizeGet(param uint32) int {
@@ -1157,7 +1157,7 @@ func VideoResizeGet(param uint32) int {
 	if _fnVideoResizeGet == nil {
 		ebipurego.RegisterLibFunc(&_fnVideoResizeGet, _lib, "glutVideoResizeGet")
 	}
-	return _fnVideoResizeGet(param)
+	return int(_fnVideoResizeGet(param))
 }
 
 var _fnVisibilityFunc func(unsafe.Pointer)

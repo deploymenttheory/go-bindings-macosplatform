@@ -31,7 +31,7 @@ func SSRandomFloatBetween(a float64, b float64) float64 {
 	return _fnSSRandomFloatBetween(a, b)
 }
 
-var _fnSSRandomIntBetween func(int, int) int
+var _fnSSRandomIntBetween func(int, int) int32
 
 // SSRandomIntBetween calls the ScreenSaver framework function SSRandomIntBetween.
 func SSRandomIntBetween(a int, b int) int {
@@ -39,7 +39,7 @@ func SSRandomIntBetween(a int, b int) int {
 	if _fnSSRandomIntBetween == nil {
 		ebipurego.RegisterLibFunc(&_fnSSRandomIntBetween, _lib, "SSRandomIntBetween")
 	}
-	return _fnSSRandomIntBetween(a, b)
+	return int(_fnSSRandomIntBetween(a, b))
 }
 
 var _fnSSRandomPointForSizeWithinRect func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGPoint

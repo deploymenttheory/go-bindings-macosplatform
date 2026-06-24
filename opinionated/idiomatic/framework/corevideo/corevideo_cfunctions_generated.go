@@ -153,7 +153,7 @@ func CVBufferSetAttachments(buffer obj.Object, theAttachments obj.Object, attach
 	_fnCVBufferSetAttachments(objref.IDOf(buffer), objref.IDOf(theAttachments), attachmentMode)
 }
 
-var _fnCVColorPrimariesGetIntegerCodePointForString func(objc.ID) int
+var _fnCVColorPrimariesGetIntegerCodePointForString func(objc.ID) int32
 
 // CVColorPrimariesGetIntegerCodePointForString calls the CoreVideo framework function CVColorPrimariesGetIntegerCodePointForString.
 func CVColorPrimariesGetIntegerCodePointForString(colorPrimariesString obj.Object) int {
@@ -161,7 +161,7 @@ func CVColorPrimariesGetIntegerCodePointForString(colorPrimariesString obj.Objec
 	if _fnCVColorPrimariesGetIntegerCodePointForString == nil {
 		ebipurego.RegisterLibFunc(&_fnCVColorPrimariesGetIntegerCodePointForString, _lib, "CVColorPrimariesGetIntegerCodePointForString")
 	}
-	return _fnCVColorPrimariesGetIntegerCodePointForString(objref.IDOf(colorPrimariesString))
+	return int(_fnCVColorPrimariesGetIntegerCodePointForString(objref.IDOf(colorPrimariesString)))
 }
 
 var _fnCVColorPrimariesGetStringForIntegerCodePoint func(int) objc.ID
@@ -1024,7 +1024,7 @@ func CVPixelBufferGetIOSurface(pixelBuffer unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) int
+var _fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) uint32
 
 // CVPixelBufferGetPixelFormatType calls the CoreVideo framework function CVPixelBufferGetPixelFormatType.
 func CVPixelBufferGetPixelFormatType(pixelBuffer unsafe.Pointer) int {
@@ -1032,7 +1032,7 @@ func CVPixelBufferGetPixelFormatType(pixelBuffer unsafe.Pointer) int {
 	if _fnCVPixelBufferGetPixelFormatType == nil {
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferGetPixelFormatType, _lib, "CVPixelBufferGetPixelFormatType")
 	}
-	return _fnCVPixelBufferGetPixelFormatType(pixelBuffer)
+	return int(_fnCVPixelBufferGetPixelFormatType(pixelBuffer))
 }
 
 var _fnCVPixelBufferGetPlaneCount func(unsafe.Pointer) int
@@ -1283,7 +1283,7 @@ func CVPixelFormatTypeCopyFourCharCodeString(pixelFormat int) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCVTransferFunctionGetIntegerCodePointForString func(objc.ID) int
+var _fnCVTransferFunctionGetIntegerCodePointForString func(objc.ID) int32
 
 // CVTransferFunctionGetIntegerCodePointForString calls the CoreVideo framework function CVTransferFunctionGetIntegerCodePointForString.
 func CVTransferFunctionGetIntegerCodePointForString(transferFunctionString obj.Object) int {
@@ -1291,7 +1291,7 @@ func CVTransferFunctionGetIntegerCodePointForString(transferFunctionString obj.O
 	if _fnCVTransferFunctionGetIntegerCodePointForString == nil {
 		ebipurego.RegisterLibFunc(&_fnCVTransferFunctionGetIntegerCodePointForString, _lib, "CVTransferFunctionGetIntegerCodePointForString")
 	}
-	return _fnCVTransferFunctionGetIntegerCodePointForString(objref.IDOf(transferFunctionString))
+	return int(_fnCVTransferFunctionGetIntegerCodePointForString(objref.IDOf(transferFunctionString)))
 }
 
 var _fnCVTransferFunctionGetStringForIntegerCodePoint func(int) objc.ID
@@ -1306,7 +1306,7 @@ func CVTransferFunctionGetStringForIntegerCodePoint(transferFunctionCodePoint in
 	return obj.Wrap(_ret)
 }
 
-var _fnCVYCbCrMatrixGetIntegerCodePointForString func(objc.ID) int
+var _fnCVYCbCrMatrixGetIntegerCodePointForString func(objc.ID) int32
 
 // CVYCbCrMatrixGetIntegerCodePointForString calls the CoreVideo framework function CVYCbCrMatrixGetIntegerCodePointForString.
 func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString obj.Object) int {
@@ -1314,7 +1314,7 @@ func CVYCbCrMatrixGetIntegerCodePointForString(yCbCrMatrixString obj.Object) int
 	if _fnCVYCbCrMatrixGetIntegerCodePointForString == nil {
 		ebipurego.RegisterLibFunc(&_fnCVYCbCrMatrixGetIntegerCodePointForString, _lib, "CVYCbCrMatrixGetIntegerCodePointForString")
 	}
-	return _fnCVYCbCrMatrixGetIntegerCodePointForString(objref.IDOf(yCbCrMatrixString))
+	return int(_fnCVYCbCrMatrixGetIntegerCodePointForString(objref.IDOf(yCbCrMatrixString)))
 }
 
 var _fnCVYCbCrMatrixGetStringForIntegerCodePoint func(int) objc.ID

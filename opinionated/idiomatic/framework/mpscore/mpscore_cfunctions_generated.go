@@ -102,7 +102,7 @@ func MPSStateBatchResourceSize(batch unsafe.Pointer) int {
 	return _fnMPSStateBatchResourceSize(batch)
 }
 
-var _fnBuiltinClz func(int) int
+var _fnBuiltinClz func(int) int32
 
 // BuiltinClz calls the MPSCore framework function __builtin_clz.
 func BuiltinClz(arg int) int {
@@ -110,5 +110,5 @@ func BuiltinClz(arg int) int {
 	if _fnBuiltinClz == nil {
 		ebipurego.RegisterLibFunc(&_fnBuiltinClz, _lib, "__builtin_clz")
 	}
-	return _fnBuiltinClz(arg)
+	return int(_fnBuiltinClz(arg))
 }

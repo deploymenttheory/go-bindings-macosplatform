@@ -74,7 +74,7 @@ func VImageCVImageFormatCreateWithCVPixelBuffer(buffer unsafe.Pointer) obj.Objec
 	return obj.Wrap(_ret)
 }
 
-var _fnVImageCVImageFormatGetAlphaHint func(objc.ID) int
+var _fnVImageCVImageFormatGetAlphaHint func(objc.ID) int32
 
 // VImageCVImageFormatGetAlphaHint calls the vImage framework function vImageCVImageFormat_GetAlphaHint.
 func VImageCVImageFormatGetAlphaHint(format obj.Object) int {
@@ -82,7 +82,7 @@ func VImageCVImageFormatGetAlphaHint(format obj.Object) int {
 	if _fnVImageCVImageFormatGetAlphaHint == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatGetAlphaHint, _lib, "vImageCVImageFormat_GetAlphaHint")
 	}
-	return _fnVImageCVImageFormatGetAlphaHint(objref.IDOf(format))
+	return int(_fnVImageCVImageFormatGetAlphaHint(objref.IDOf(format)))
 }
 
 var _fnVImageCVImageFormatGetChannelCount func(objc.ID) uint32

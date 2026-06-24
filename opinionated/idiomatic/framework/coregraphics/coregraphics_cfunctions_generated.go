@@ -2613,7 +2613,7 @@ func CGContextTranslateCTM(c obj.Object, tx float64, ty float64) {
 	_fnCGContextTranslateCTM(objref.IDOf(c), tx, ty)
 }
 
-var _fnCGCursorIsDrawnInFramebuffer func() int
+var _fnCGCursorIsDrawnInFramebuffer func() int32
 
 // CGCursorIsDrawnInFramebuffer calls the CoreGraphics framework function CGCursorIsDrawnInFramebuffer.
 func CGCursorIsDrawnInFramebuffer() int {
@@ -2621,10 +2621,10 @@ func CGCursorIsDrawnInFramebuffer() int {
 	if _fnCGCursorIsDrawnInFramebuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGCursorIsDrawnInFramebuffer, _lib, "CGCursorIsDrawnInFramebuffer")
 	}
-	return _fnCGCursorIsDrawnInFramebuffer()
+	return int(_fnCGCursorIsDrawnInFramebuffer())
 }
 
-var _fnCGCursorIsVisible func() int
+var _fnCGCursorIsVisible func() int32
 
 // CGCursorIsVisible calls the CoreGraphics framework function CGCursorIsVisible.
 func CGCursorIsVisible() int {
@@ -2632,7 +2632,7 @@ func CGCursorIsVisible() int {
 	if _fnCGCursorIsVisible == nil {
 		ebipurego.RegisterLibFunc(&_fnCGCursorIsVisible, _lib, "CGCursorIsVisible")
 	}
-	return _fnCGCursorIsVisible()
+	return int(_fnCGCursorIsVisible())
 }
 
 var _fnCGDataConsumerCreateWithCFData func(objc.ID) objc.ID
@@ -2917,7 +2917,7 @@ func CGDisplayFade(token uint32, duration float32, startBlend float32, endBlend 
 	return _fnCGDisplayFade(token, duration, startBlend, endBlend, redBlend, greenBlend, blueBlend, synchronous)
 }
 
-var _fnCGDisplayFadeOperationInProgress func() int
+var _fnCGDisplayFadeOperationInProgress func() int32
 
 // CGDisplayFadeOperationInProgress calls the CoreGraphics framework function CGDisplayFadeOperationInProgress.
 func CGDisplayFadeOperationInProgress() int {
@@ -2925,7 +2925,7 @@ func CGDisplayFadeOperationInProgress() int {
 	if _fnCGDisplayFadeOperationInProgress == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayFadeOperationInProgress, _lib, "CGDisplayFadeOperationInProgress")
 	}
-	return _fnCGDisplayFadeOperationInProgress()
+	return int(_fnCGDisplayFadeOperationInProgress())
 }
 
 var _fnCGDisplayGammaTableCapacity func(uint32) uint32
@@ -2973,7 +2973,7 @@ func CGDisplayIDToOpenGLDisplayMask(display uint32) uint32 {
 	return _fnCGDisplayIDToOpenGLDisplayMask(display)
 }
 
-var _fnCGDisplayIOServicePort func(uint32) int
+var _fnCGDisplayIOServicePort func(uint32) uint32
 
 // CGDisplayIOServicePort calls the CoreGraphics framework function CGDisplayIOServicePort.
 func CGDisplayIOServicePort(display uint32) int {
@@ -2981,10 +2981,10 @@ func CGDisplayIOServicePort(display uint32) int {
 	if _fnCGDisplayIOServicePort == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIOServicePort, _lib, "CGDisplayIOServicePort")
 	}
-	return _fnCGDisplayIOServicePort(display)
+	return int(_fnCGDisplayIOServicePort(display))
 }
 
-var _fnCGDisplayIsActive func(uint32) int
+var _fnCGDisplayIsActive func(uint32) int32
 
 // CGDisplayIsActive calls the CoreGraphics framework function CGDisplayIsActive.
 func CGDisplayIsActive(display uint32) int {
@@ -2992,10 +2992,10 @@ func CGDisplayIsActive(display uint32) int {
 	if _fnCGDisplayIsActive == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsActive, _lib, "CGDisplayIsActive")
 	}
-	return _fnCGDisplayIsActive(display)
+	return int(_fnCGDisplayIsActive(display))
 }
 
-var _fnCGDisplayIsAlwaysInMirrorSet func(uint32) int
+var _fnCGDisplayIsAlwaysInMirrorSet func(uint32) int32
 
 // CGDisplayIsAlwaysInMirrorSet calls the CoreGraphics framework function CGDisplayIsAlwaysInMirrorSet.
 func CGDisplayIsAlwaysInMirrorSet(display uint32) int {
@@ -3003,10 +3003,10 @@ func CGDisplayIsAlwaysInMirrorSet(display uint32) int {
 	if _fnCGDisplayIsAlwaysInMirrorSet == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsAlwaysInMirrorSet, _lib, "CGDisplayIsAlwaysInMirrorSet")
 	}
-	return _fnCGDisplayIsAlwaysInMirrorSet(display)
+	return int(_fnCGDisplayIsAlwaysInMirrorSet(display))
 }
 
-var _fnCGDisplayIsAsleep func(uint32) int
+var _fnCGDisplayIsAsleep func(uint32) int32
 
 // CGDisplayIsAsleep calls the CoreGraphics framework function CGDisplayIsAsleep.
 func CGDisplayIsAsleep(display uint32) int {
@@ -3014,10 +3014,10 @@ func CGDisplayIsAsleep(display uint32) int {
 	if _fnCGDisplayIsAsleep == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsAsleep, _lib, "CGDisplayIsAsleep")
 	}
-	return _fnCGDisplayIsAsleep(display)
+	return int(_fnCGDisplayIsAsleep(display))
 }
 
-var _fnCGDisplayIsBuiltin func(uint32) int
+var _fnCGDisplayIsBuiltin func(uint32) int32
 
 // CGDisplayIsBuiltin calls the CoreGraphics framework function CGDisplayIsBuiltin.
 func CGDisplayIsBuiltin(display uint32) int {
@@ -3025,10 +3025,10 @@ func CGDisplayIsBuiltin(display uint32) int {
 	if _fnCGDisplayIsBuiltin == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsBuiltin, _lib, "CGDisplayIsBuiltin")
 	}
-	return _fnCGDisplayIsBuiltin(display)
+	return int(_fnCGDisplayIsBuiltin(display))
 }
 
-var _fnCGDisplayIsCaptured func(uint32) int
+var _fnCGDisplayIsCaptured func(uint32) int32
 
 // CGDisplayIsCaptured calls the CoreGraphics framework function CGDisplayIsCaptured.
 func CGDisplayIsCaptured(display uint32) int {
@@ -3036,10 +3036,10 @@ func CGDisplayIsCaptured(display uint32) int {
 	if _fnCGDisplayIsCaptured == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsCaptured, _lib, "CGDisplayIsCaptured")
 	}
-	return _fnCGDisplayIsCaptured(display)
+	return int(_fnCGDisplayIsCaptured(display))
 }
 
-var _fnCGDisplayIsInHWMirrorSet func(uint32) int
+var _fnCGDisplayIsInHWMirrorSet func(uint32) int32
 
 // CGDisplayIsInHWMirrorSet calls the CoreGraphics framework function CGDisplayIsInHWMirrorSet.
 func CGDisplayIsInHWMirrorSet(display uint32) int {
@@ -3047,10 +3047,10 @@ func CGDisplayIsInHWMirrorSet(display uint32) int {
 	if _fnCGDisplayIsInHWMirrorSet == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsInHWMirrorSet, _lib, "CGDisplayIsInHWMirrorSet")
 	}
-	return _fnCGDisplayIsInHWMirrorSet(display)
+	return int(_fnCGDisplayIsInHWMirrorSet(display))
 }
 
-var _fnCGDisplayIsInMirrorSet func(uint32) int
+var _fnCGDisplayIsInMirrorSet func(uint32) int32
 
 // CGDisplayIsInMirrorSet calls the CoreGraphics framework function CGDisplayIsInMirrorSet.
 func CGDisplayIsInMirrorSet(display uint32) int {
@@ -3058,10 +3058,10 @@ func CGDisplayIsInMirrorSet(display uint32) int {
 	if _fnCGDisplayIsInMirrorSet == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsInMirrorSet, _lib, "CGDisplayIsInMirrorSet")
 	}
-	return _fnCGDisplayIsInMirrorSet(display)
+	return int(_fnCGDisplayIsInMirrorSet(display))
 }
 
-var _fnCGDisplayIsMain func(uint32) int
+var _fnCGDisplayIsMain func(uint32) int32
 
 // CGDisplayIsMain calls the CoreGraphics framework function CGDisplayIsMain.
 func CGDisplayIsMain(display uint32) int {
@@ -3069,10 +3069,10 @@ func CGDisplayIsMain(display uint32) int {
 	if _fnCGDisplayIsMain == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsMain, _lib, "CGDisplayIsMain")
 	}
-	return _fnCGDisplayIsMain(display)
+	return int(_fnCGDisplayIsMain(display))
 }
 
-var _fnCGDisplayIsOnline func(uint32) int
+var _fnCGDisplayIsOnline func(uint32) int32
 
 // CGDisplayIsOnline calls the CoreGraphics framework function CGDisplayIsOnline.
 func CGDisplayIsOnline(display uint32) int {
@@ -3080,10 +3080,10 @@ func CGDisplayIsOnline(display uint32) int {
 	if _fnCGDisplayIsOnline == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsOnline, _lib, "CGDisplayIsOnline")
 	}
-	return _fnCGDisplayIsOnline(display)
+	return int(_fnCGDisplayIsOnline(display))
 }
 
-var _fnCGDisplayIsStereo func(uint32) int
+var _fnCGDisplayIsStereo func(uint32) int32
 
 // CGDisplayIsStereo calls the CoreGraphics framework function CGDisplayIsStereo.
 func CGDisplayIsStereo(display uint32) int {
@@ -3091,7 +3091,7 @@ func CGDisplayIsStereo(display uint32) int {
 	if _fnCGDisplayIsStereo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayIsStereo, _lib, "CGDisplayIsStereo")
 	}
-	return _fnCGDisplayIsStereo(display)
+	return int(_fnCGDisplayIsStereo(display))
 }
 
 var _fnCGDisplayMirrorsDisplay func(uint32) uint32
@@ -3426,7 +3426,7 @@ func CGDisplayUnitNumber(display uint32) uint32 {
 	return _fnCGDisplayUnitNumber(display)
 }
 
-var _fnCGDisplayUsesOpenGLAcceleration func(uint32) int
+var _fnCGDisplayUsesOpenGLAcceleration func(uint32) int32
 
 // CGDisplayUsesOpenGLAcceleration calls the CoreGraphics framework function CGDisplayUsesOpenGLAcceleration.
 func CGDisplayUsesOpenGLAcceleration(display uint32) int {
@@ -3434,7 +3434,7 @@ func CGDisplayUsesOpenGLAcceleration(display uint32) int {
 	if _fnCGDisplayUsesOpenGLAcceleration == nil {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayUsesOpenGLAcceleration, _lib, "CGDisplayUsesOpenGLAcceleration")
 	}
-	return _fnCGDisplayUsesOpenGLAcceleration(display)
+	return int(_fnCGDisplayUsesOpenGLAcceleration(display))
 }
 
 var _fnCGDisplayVendorNumber func(uint32) uint32
@@ -4240,7 +4240,7 @@ func CGFontCreateWithPlatformFont(platformFontReference unsafe.Pointer) obj.Obje
 	return obj.Wrap(_ret)
 }
 
-var _fnCGFontGetAscent func(objc.ID) int
+var _fnCGFontGetAscent func(objc.ID) int32
 
 // CGFontGetAscent calls the CoreGraphics framework function CGFontGetAscent.
 func CGFontGetAscent(font obj.Object) int {
@@ -4248,10 +4248,10 @@ func CGFontGetAscent(font obj.Object) int {
 	if _fnCGFontGetAscent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetAscent, _lib, "CGFontGetAscent")
 	}
-	return _fnCGFontGetAscent(objref.IDOf(font))
+	return int(_fnCGFontGetAscent(objref.IDOf(font)))
 }
 
-var _fnCGFontGetCapHeight func(objc.ID) int
+var _fnCGFontGetCapHeight func(objc.ID) int32
 
 // CGFontGetCapHeight calls the CoreGraphics framework function CGFontGetCapHeight.
 func CGFontGetCapHeight(font obj.Object) int {
@@ -4259,10 +4259,10 @@ func CGFontGetCapHeight(font obj.Object) int {
 	if _fnCGFontGetCapHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetCapHeight, _lib, "CGFontGetCapHeight")
 	}
-	return _fnCGFontGetCapHeight(objref.IDOf(font))
+	return int(_fnCGFontGetCapHeight(objref.IDOf(font)))
 }
 
-var _fnCGFontGetDescent func(objc.ID) int
+var _fnCGFontGetDescent func(objc.ID) int32
 
 // CGFontGetDescent calls the CoreGraphics framework function CGFontGetDescent.
 func CGFontGetDescent(font obj.Object) int {
@@ -4270,7 +4270,7 @@ func CGFontGetDescent(font obj.Object) int {
 	if _fnCGFontGetDescent == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetDescent, _lib, "CGFontGetDescent")
 	}
-	return _fnCGFontGetDescent(objref.IDOf(font))
+	return int(_fnCGFontGetDescent(objref.IDOf(font)))
 }
 
 var _fnCGFontGetFontBBox func(objc.ID) corefoundation.CGRect
@@ -4319,7 +4319,7 @@ func CGFontGetItalicAngle(font obj.Object) float64 {
 	return _fnCGFontGetItalicAngle(objref.IDOf(font))
 }
 
-var _fnCGFontGetLeading func(objc.ID) int
+var _fnCGFontGetLeading func(objc.ID) int32
 
 // CGFontGetLeading calls the CoreGraphics framework function CGFontGetLeading.
 func CGFontGetLeading(font obj.Object) int {
@@ -4327,7 +4327,7 @@ func CGFontGetLeading(font obj.Object) int {
 	if _fnCGFontGetLeading == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetLeading, _lib, "CGFontGetLeading")
 	}
-	return _fnCGFontGetLeading(objref.IDOf(font))
+	return int(_fnCGFontGetLeading(objref.IDOf(font)))
 }
 
 var _fnCGFontGetNumberOfGlyphs func(objc.ID) int
@@ -4363,7 +4363,7 @@ func CGFontGetTypeID() int {
 	return _fnCGFontGetTypeID()
 }
 
-var _fnCGFontGetUnitsPerEm func(objc.ID) int
+var _fnCGFontGetUnitsPerEm func(objc.ID) int32
 
 // CGFontGetUnitsPerEm calls the CoreGraphics framework function CGFontGetUnitsPerEm.
 func CGFontGetUnitsPerEm(font obj.Object) int {
@@ -4371,10 +4371,10 @@ func CGFontGetUnitsPerEm(font obj.Object) int {
 	if _fnCGFontGetUnitsPerEm == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetUnitsPerEm, _lib, "CGFontGetUnitsPerEm")
 	}
-	return _fnCGFontGetUnitsPerEm(objref.IDOf(font))
+	return int(_fnCGFontGetUnitsPerEm(objref.IDOf(font)))
 }
 
-var _fnCGFontGetXHeight func(objc.ID) int
+var _fnCGFontGetXHeight func(objc.ID) int32
 
 // CGFontGetXHeight calls the CoreGraphics framework function CGFontGetXHeight.
 func CGFontGetXHeight(font obj.Object) int {
@@ -4382,7 +4382,7 @@ func CGFontGetXHeight(font obj.Object) int {
 	if _fnCGFontGetXHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnCGFontGetXHeight, _lib, "CGFontGetXHeight")
 	}
-	return _fnCGFontGetXHeight(objref.IDOf(font))
+	return int(_fnCGFontGetXHeight(objref.IDOf(font)))
 }
 
 var _fnCGFontRelease func(objc.ID)
@@ -5826,7 +5826,7 @@ func CGPDFDocumentGetPage(document obj.Object, pageNumber int) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCGPDFDocumentGetRotationAngle func(objc.ID, int) int
+var _fnCGPDFDocumentGetRotationAngle func(objc.ID, int) int32
 
 // CGPDFDocumentGetRotationAngle calls the CoreGraphics framework function CGPDFDocumentGetRotationAngle.
 func CGPDFDocumentGetRotationAngle(document obj.Object, page int) int {
@@ -5834,7 +5834,7 @@ func CGPDFDocumentGetRotationAngle(document obj.Object, page int) int {
 	if _fnCGPDFDocumentGetRotationAngle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDocumentGetRotationAngle, _lib, "CGPDFDocumentGetRotationAngle")
 	}
-	return _fnCGPDFDocumentGetRotationAngle(objref.IDOf(document), page)
+	return int(_fnCGPDFDocumentGetRotationAngle(objref.IDOf(document), page))
 }
 
 var _fnCGPDFDocumentGetTrimBox func(objc.ID, int) corefoundation.CGRect
@@ -6054,7 +6054,7 @@ func CGPDFPageGetPageNumber(page obj.Object) int {
 	return _fnCGPDFPageGetPageNumber(objref.IDOf(page))
 }
 
-var _fnCGPDFPageGetRotationAngle func(objc.ID) int
+var _fnCGPDFPageGetRotationAngle func(objc.ID) int32
 
 // CGPDFPageGetRotationAngle calls the CoreGraphics framework function CGPDFPageGetRotationAngle.
 func CGPDFPageGetRotationAngle(page obj.Object) int {
@@ -6062,7 +6062,7 @@ func CGPDFPageGetRotationAngle(page obj.Object) int {
 	if _fnCGPDFPageGetRotationAngle == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFPageGetRotationAngle, _lib, "CGPDFPageGetRotationAngle")
 	}
-	return _fnCGPDFPageGetRotationAngle(objref.IDOf(page))
+	return int(_fnCGPDFPageGetRotationAngle(objref.IDOf(page)))
 }
 
 var _fnCGPDFPageGetTypeID func() int

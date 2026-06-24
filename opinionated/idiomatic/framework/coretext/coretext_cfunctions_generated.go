@@ -801,7 +801,7 @@ func CTFontGetOpticalBoundsForGlyphs(font obj.Object, boundingRects unsafe.Point
 	return _ret, _out0
 }
 
-var _fnCTFontGetPlatformFont func(objc.ID, unsafe.Pointer) int
+var _fnCTFontGetPlatformFont func(objc.ID, unsafe.Pointer) uint32
 
 // CTFontGetPlatformFont calls the CoreText framework function CTFontGetPlatformFont.
 func CTFontGetPlatformFont(font obj.Object, attributes unsafe.Pointer) int {
@@ -809,7 +809,7 @@ func CTFontGetPlatformFont(font obj.Object, attributes unsafe.Pointer) int {
 	if _fnCTFontGetPlatformFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontGetPlatformFont, _lib, "CTFontGetPlatformFont")
 	}
-	return _fnCTFontGetPlatformFont(objref.IDOf(font), attributes)
+	return int(_fnCTFontGetPlatformFont(objref.IDOf(font), attributes))
 }
 
 var _fnCTFontGetSize func(objc.ID) float64
@@ -834,7 +834,7 @@ func CTFontGetSlantAngle(font obj.Object) float64 {
 	return _fnCTFontGetSlantAngle(objref.IDOf(font))
 }
 
-var _fnCTFontGetStringEncoding func(objc.ID) int
+var _fnCTFontGetStringEncoding func(objc.ID) uint32
 
 // CTFontGetStringEncoding calls the CoreText framework function CTFontGetStringEncoding.
 func CTFontGetStringEncoding(font obj.Object) int {
@@ -842,7 +842,7 @@ func CTFontGetStringEncoding(font obj.Object) int {
 	if _fnCTFontGetStringEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontGetStringEncoding, _lib, "CTFontGetStringEncoding")
 	}
-	return _fnCTFontGetStringEncoding(objref.IDOf(font))
+	return int(_fnCTFontGetStringEncoding(objref.IDOf(font)))
 }
 
 var _fnCTFontGetSymbolicTraits func(objc.ID) CTFontSymbolicTraits
@@ -900,7 +900,7 @@ func CTFontGetUnderlineThickness(font obj.Object) float64 {
 	return _fnCTFontGetUnderlineThickness(objref.IDOf(font))
 }
 
-var _fnCTFontGetUnitsPerEm func(objc.ID) int
+var _fnCTFontGetUnitsPerEm func(objc.ID) uint32
 
 // CTFontGetUnitsPerEm calls the CoreText framework function CTFontGetUnitsPerEm.
 func CTFontGetUnitsPerEm(font obj.Object) int {
@@ -908,7 +908,7 @@ func CTFontGetUnitsPerEm(font obj.Object) int {
 	if _fnCTFontGetUnitsPerEm == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontGetUnitsPerEm, _lib, "CTFontGetUnitsPerEm")
 	}
-	return _fnCTFontGetUnitsPerEm(objref.IDOf(font))
+	return int(_fnCTFontGetUnitsPerEm(objref.IDOf(font)))
 }
 
 var _fnCTFontGetVerticalTranslationsForGlyphs func(objc.ID, unsafe.Pointer, unsafe.Pointer, int)

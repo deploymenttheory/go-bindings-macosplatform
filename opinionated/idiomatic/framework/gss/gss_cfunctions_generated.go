@@ -299,7 +299,7 @@ func SetSecContextOption(context_handle unsafe.Pointer, object unsafe.Pointer, v
 	return _ret, _out0
 }
 
-var _fnUserok func(unsafe.Pointer, string) int
+var _fnUserok func(unsafe.Pointer, string) int32
 
 // Userok calls the GSS framework function gss_userok.
 func Userok(name unsafe.Pointer, user string) int {
@@ -307,7 +307,7 @@ func Userok(name unsafe.Pointer, user string) int {
 	if _fnUserok == nil {
 		ebipurego.RegisterLibFunc(&_fnUserok, _lib, "gss_userok")
 	}
-	return _fnUserok(name, user)
+	return int(_fnUserok(name, user))
 }
 
 var _fnVerifyMic func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32

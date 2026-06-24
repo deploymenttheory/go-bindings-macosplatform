@@ -263,7 +263,7 @@ func IOUSBHostCIMessageStatusFromIOReturn(status int) HostCIMessageStatus {
 	return _fnIOUSBHostCIMessageStatusFromIOReturn(status)
 }
 
-var _fnIOUSBHostCIMessageStatusToIOReturn func(HostCIMessageStatus) int
+var _fnIOUSBHostCIMessageStatusToIOReturn func(HostCIMessageStatus) int32
 
 // IOUSBHostCIMessageStatusToIOReturn calls the IOUSBHost framework function IOUSBHostCIMessageStatusToIOReturn.
 func IOUSBHostCIMessageStatusToIOReturn(status HostCIMessageStatus) int {
@@ -271,7 +271,7 @@ func IOUSBHostCIMessageStatusToIOReturn(status HostCIMessageStatus) int {
 	if _fnIOUSBHostCIMessageStatusToIOReturn == nil {
 		ebipurego.RegisterLibFunc(&_fnIOUSBHostCIMessageStatusToIOReturn, _lib, "IOUSBHostCIMessageStatusToIOReturn")
 	}
-	return _fnIOUSBHostCIMessageStatusToIOReturn(status)
+	return int(_fnIOUSBHostCIMessageStatusToIOReturn(status))
 }
 
 var _fnIOUSBHostCIMessageStatusToString func(HostCIMessageStatus) string
