@@ -2465,7 +2465,7 @@ func Cgbequb() (result int, __m int, __n int, __kl int, __ku int, __ab CLPKCompl
 var _fnCgbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cgbmv calls the vecLib framework function cgbmv_.
-func Cgbmv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, m int32, n int32, kl int32, ku int32, lda int32, incx int32, incy int32) {
+func Cgbmv(trans string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, kl int32, ku int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCgbmv, _lib, "cgbmv_")
@@ -2476,9 +2476,8 @@ func Cgbmv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointe
 	var _out3 int32
 	var _out4 int32
 	var _out5 int32
-	var _out6 int32
-	_ret := _fnCgbmv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), alpha, a, unsafe.Pointer(&_out4), x, unsafe.Pointer(&_out5), beta, y, unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	_ret := _fnCgbmv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), alpha, a, unsafe.Pointer(&_out3), x, unsafe.Pointer(&_out4), beta, y, unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
 var _fnCgbrfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -3143,7 +3142,7 @@ func Cgelsy() (result int, __m int, __n int, __nrhs int, __a CLPKComplex, __lda 
 var _fnCgemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cgemm calls the vecLib framework function cgemm_.
-func Cgemm(transa string, transb string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, k int32, lda int32, ldb int32, ldc int32) {
+func Cgemm(transa string, transb string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCgemm, _lib, "cgemm_")
@@ -3153,15 +3152,14 @@ func Cgemm(transa string, transb string, alpha unsafe.Pointer, a unsafe.Pointer,
 	var _out2 int32
 	var _out3 int32
 	var _out4 int32
-	var _out5 int32
-	_ret := _fnCgemm(transa, transb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), alpha, a, unsafe.Pointer(&_out3), b, unsafe.Pointer(&_out4), beta, c__, unsafe.Pointer(&_out5))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	_ret := _fnCgemm(transa, transb, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnCgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cgemv calls the vecLib framework function cgemv_.
-func Cgemv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, m int32, n int32, lda int32, incx int32, incy int32) {
+func Cgemv(trans string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCgemv, _lib, "cgemv_")
@@ -3170,9 +3168,8 @@ func Cgemv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointe
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnCgemv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), x, unsafe.Pointer(&_out3), beta, y, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnCgemv(trans, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), x, unsafe.Pointer(&_out2), beta, y, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnCgeql2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -3299,7 +3296,7 @@ func Cgeqrf() (result int, __m int, __n int, __a CLPKComplex, __lda int, __tau C
 var _fnCgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cgerc calls the vecLib framework function cgerc_.
-func Cgerc(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, m int32, n int32, incx int32, incy int32, lda int32) {
+func Cgerc(m unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCgerc == nil {
 		ebipurego.RegisterLibFunc(&_fnCgerc, _lib, "cgerc_")
@@ -3308,9 +3305,8 @@ func Cgerc(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Po
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnCgerc(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, x, unsafe.Pointer(&_out2), y, unsafe.Pointer(&_out3), a, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnCgerc(m, unsafe.Pointer(&_out0), alpha, x, unsafe.Pointer(&_out1), y, unsafe.Pointer(&_out2), a, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnCgerfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -3383,7 +3379,7 @@ func Cgerqf() (result int, __m int, __n int, __a CLPKComplex, __lda int, __tau C
 var _fnCgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cgeru calls the vecLib framework function cgeru_.
-func Cgeru(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, m int32, n int32, incx int32, incy int32, lda int32) {
+func Cgeru(m unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCgeru == nil {
 		ebipurego.RegisterLibFunc(&_fnCgeru, _lib, "cgeru_")
@@ -3392,9 +3388,8 @@ func Cgeru(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Po
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnCgeru(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, x, unsafe.Pointer(&_out2), y, unsafe.Pointer(&_out3), a, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnCgeru(m, unsafe.Pointer(&_out0), alpha, x, unsafe.Pointer(&_out1), y, unsafe.Pointer(&_out2), a, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnCgesc2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -4331,10 +4326,10 @@ func Chbgvx(__jobz string, __range string, __uplo string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17, _out18, _out19, _out20, _out21, _out22
 }
 
-var _fnChbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnChbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chbmv calls the vecLib framework function chbmv_.
-func Chbmv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32, incy int32) {
+func Chbmv(uplo unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnChbmv, _lib, "chbmv_")
@@ -4638,7 +4633,7 @@ func Chegvx(__jobz string, __range string, __uplo string) (result int, __itype i
 var _fnChemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chemm calls the vecLib framework function chemm_.
-func Chemm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32, ldc int32) {
+func Chemm(side string, uplo string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChemm == nil {
 		ebipurego.RegisterLibFunc(&_fnChemm, _lib, "chemm_")
@@ -4647,15 +4642,14 @@ func Chemm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b u
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnChemm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnChemm(side, uplo, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2), beta, c__, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnChemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnChemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chemv calls the vecLib framework function chemv_.
-func Chemv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
+func Chemv(uplo unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChemv == nil {
 		ebipurego.RegisterLibFunc(&_fnChemv, _lib, "chemv_")
@@ -4668,10 +4662,10 @@ func Chemv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnCher2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cher2 calls the vecLib framework function cher2_.
-func Cher2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
+func Cher2(uplo unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCher2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCher2, _lib, "cher2_")
@@ -4684,10 +4678,10 @@ func Cher2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnCher2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCher2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cher2k calls the vecLib framework function cher2k_.
-func Cher2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, beta float32, ldc int32) {
+func Cher2k(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, beta float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCher2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCher2k, _lib, "cher2k_")
@@ -4702,10 +4696,10 @@ func Cher2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnCher func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cher calls the vecLib framework function cher_.
-func Cher(uplo string, x unsafe.Pointer, a unsafe.Pointer) (result int, n int32, alpha float32, incx int32, lda int32) {
+func Cher(uplo unsafe.Pointer, x unsafe.Pointer, a unsafe.Pointer) (result int, n int32, alpha float32, incx int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCher == nil {
 		ebipurego.RegisterLibFunc(&_fnCher, _lib, "cher_")
@@ -4746,10 +4740,10 @@ func Cherfs(__uplo string) (result int, __n int, __nrhs int, __a CLPKComplex, __
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnCherk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCherk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Cherk calls the vecLib framework function cherk_.
-func Cherk(uplo string, trans string, a unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, alpha float32, lda int32, beta float32, ldc int32) {
+func Cherk(uplo string, trans unsafe.Pointer, a unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, alpha float32, lda int32, beta float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCherk == nil {
 		ebipurego.RegisterLibFunc(&_fnCherk, _lib, "cherk_")
@@ -4978,10 +4972,10 @@ func Chgeqz(__job string, __compq string, __compz string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16
 }
 
-var _fnChlaTranstype func(string, int, unsafe.Pointer)
+var _fnChlaTranstype func(unsafe.Pointer, int, unsafe.Pointer)
 
 // ChlaTranstype calls the vecLib framework function chla_transtype__.
-func ChlaTranstype(__ret_val string, __ret_val_len int) (__trans int) {
+func ChlaTranstype(__ret_val unsafe.Pointer, __ret_val_len int) (__trans int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChlaTranstype == nil {
 		ebipurego.RegisterLibFunc(&_fnChlaTranstype, _lib, "chla_transtype__")
@@ -5177,10 +5171,10 @@ func Chpgvx(__jobz string, __range string, __uplo string) (result int, __itype i
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17
 }
 
-var _fnChpmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnChpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chpmv calls the vecLib framework function chpmv_.
-func Chpmv(uplo string, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
+func Chpmv(uplo unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnChpmv, _lib, "chpmv_")
@@ -5192,10 +5186,10 @@ func Chpmv(uplo string, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointe
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnChpr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnChpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chpr2 calls the vecLib framework function chpr2_.
-func Chpr2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
+func Chpr2(uplo unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChpr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnChpr2, _lib, "chpr2_")
@@ -5207,10 +5201,10 @@ func Chpr2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnChpr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnChpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Chpr calls the vecLib framework function chpr_.
-func Chpr(uplo string, x unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, alpha float32, incx int32) {
+func Chpr(uplo unsafe.Pointer, x unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, alpha float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnChpr == nil {
 		ebipurego.RegisterLibFunc(&_fnChpr, _lib, "chpr_")
@@ -8612,7 +8606,7 @@ func Csyequb(__uplo string) (result int, __n int, __a CLPKComplex, __lda int, __
 var _fnCsymm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Csymm calls the vecLib framework function csymm_.
-func Csymm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32, ldc int32) {
+func Csymm(side string, uplo string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCsymm, _lib, "csymm_")
@@ -8621,9 +8615,8 @@ func Csymm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b u
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnCsymm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnCsymm(side, uplo, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2), beta, c__, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnCsymv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -8647,10 +8640,10 @@ func Csymv(__uplo string) (result int, __n int, __alpha CLPKComplex, __a CLPKCom
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnCsyr2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCsyr2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Csyr2k calls the vecLib framework function csyr2k_.
-func Csyr2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
+func Csyr2k(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCsyr2k, _lib, "csyr2k_")
@@ -8710,10 +8703,10 @@ func Csyrfs(__uplo string) (result int, __n int, __nrhs int, __a CLPKComplex, __
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnCsyrk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCsyrk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Csyrk calls the vecLib framework function csyrk_.
-func Csyrk(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldc int32) {
+func Csyrk(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCsyrk, _lib, "csyrk_")
@@ -8872,10 +8865,10 @@ func Ctbcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnCtbmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtbmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctbmv calls the vecLib framework function ctbmv_.
-func Ctbmv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
+func Ctbmv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtbmv, _lib, "ctbmv_")
@@ -8914,10 +8907,10 @@ func Ctbrfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13
 }
 
-var _fnCtbsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtbsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctbsv calls the vecLib framework function ctbsv_.
-func Ctbsv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
+func Ctbsv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtbsv, _lib, "ctbsv_")
@@ -9276,10 +9269,10 @@ func Ctpcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnCtpmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtpmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctpmv calls the vecLib framework function ctpmv_.
-func Ctpmv(uplo string, trans string, diag string, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
+func Ctpmv(uplo string, trans string, diag unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtpmv, _lib, "ctpmv_")
@@ -9314,10 +9307,10 @@ func Ctprfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
 }
 
-var _fnCtpsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtpsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctpsv calls the vecLib framework function ctpsv_.
-func Ctpsv(uplo string, trans string, diag string, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
+func Ctpsv(uplo string, trans string, diag unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtpsv, _lib, "ctpsv_")
@@ -9461,7 +9454,7 @@ func Ctrexc(__compq string) (result int, __n int, __t CLPKComplex, __ldt int, __
 var _fnCtrmm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctrmm calls the vecLib framework function ctrmm_.
-func Ctrmm(side string, uplo string, transa string, diag string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32) {
+func Ctrmm(side string, uplo string, transa string, diag string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, n int32, lda int32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCtrmm, _lib, "ctrmm_")
@@ -9469,15 +9462,14 @@ func Ctrmm(side string, uplo string, transa string, diag string, alpha unsafe.Po
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	_ret := _fnCtrmm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnCtrmm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
-var _fnCtrmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtrmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctrmv calls the vecLib framework function ctrmv_.
-func Ctrmv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
+func Ctrmv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtrmv, _lib, "ctrmv_")
@@ -9542,7 +9534,7 @@ func Ctrsen(__job string, __compq string) (result int, __select int, __n int, __
 var _fnCtrsm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctrsm calls the vecLib framework function ctrsm_.
-func Ctrsm(side string, uplo string, transa string, diag string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32) {
+func Ctrsm(side string, uplo string, transa string, diag string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, n int32, lda int32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCtrsm, _lib, "ctrsm_")
@@ -9550,9 +9542,8 @@ func Ctrsm(side string, uplo string, transa string, diag string, alpha unsafe.Po
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	_ret := _fnCtrsm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnCtrsm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnCtrsna func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -9583,10 +9574,10 @@ func Ctrsna(__job string, __howmny string) (result int, __select int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnCtrsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnCtrsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ctrsv calls the vecLib framework function ctrsv_.
-func Ctrsv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
+func Ctrsv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCtrsv, _lib, "ctrsv_")
@@ -10541,7 +10532,7 @@ func Dgbequb() (result int, __m int, __n int, __kl int, __ku int, __ab float64, 
 var _fnDgbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dgbmv calls the vecLib framework function dgbmv_.
-func Dgbmv(trans string) (result int, m int32, n int32, kl int32, ku int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
+func Dgbmv(trans string, m unsafe.Pointer) (result int, n int32, kl int32, ku int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDgbmv, _lib, "dgbmv_")
@@ -10549,17 +10540,16 @@ func Dgbmv(trans string) (result int, m int32, n int32, kl int32, ku int32, alph
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
+	var _out3 float64
 	var _out4 float64
-	var _out5 float64
-	var _out6 int32
-	var _out7 float64
-	var _out8 int32
+	var _out5 int32
+	var _out6 float64
+	var _out7 int32
+	var _out8 float64
 	var _out9 float64
-	var _out10 float64
-	var _out11 int32
-	_ret := _fnDgbmv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10), unsafe.Pointer(&_out11))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
+	var _out10 int32
+	_ret := _fnDgbmv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10
 }
 
 var _fnDgbrfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -11248,33 +11238,10 @@ func Dgelsy() (result int, __m int, __n int, __nrhs int, __a float64, __lda int,
 var _fnDgemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dgemm calls the vecLib framework function dgemm_.
-func Dgemm(transa string, transb string) (result int, m int32, n int32, k int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
+func Dgemm(transa string, transb string, m unsafe.Pointer) (result int, n int32, k int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnDgemm, _lib, "dgemm_")
-	}
-	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	var _out3 float64
-	var _out4 float64
-	var _out5 int32
-	var _out6 float64
-	var _out7 int32
-	var _out8 float64
-	var _out9 float64
-	var _out10 int32
-	_ret := _fnDgemm(transa, transb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10
-}
-
-var _fnDgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-
-// Dgemv calls the vecLib framework function dgemv_.
-func Dgemv(trans string) (result int, m int32, n int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnDgemv == nil {
-		ebipurego.RegisterLibFunc(&_fnDgemv, _lib, "dgemv_")
 	}
 	var _out0 int32
 	var _out1 int32
@@ -11286,8 +11253,29 @@ func Dgemv(trans string) (result int, m int32, n int32, alpha float64, a float64
 	var _out7 float64
 	var _out8 float64
 	var _out9 int32
-	_ret := _fnDgemv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
+	_ret := _fnDgemm(transa, transb, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
+}
+
+var _fnDgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// Dgemv calls the vecLib framework function dgemv_.
+func Dgemv(trans string, m unsafe.Pointer) (result int, n int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDgemv == nil {
+		ebipurego.RegisterLibFunc(&_fnDgemv, _lib, "dgemv_")
+	}
+	var _out0 int32
+	var _out1 float64
+	var _out2 float64
+	var _out3 int32
+	var _out4 float64
+	var _out5 int32
+	var _out6 float64
+	var _out7 float64
+	var _out8 int32
+	_ret := _fnDgemv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
 var _fnDgeql2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -11412,22 +11400,21 @@ func Dgeqrf() (result int, __m int, __n int, __a float64, __lda int, __tau float
 var _fnDger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dger calls the vecLib framework function dger_.
-func Dger() (result int, m int32, n int32, alpha float64, x float64, incx int32, y float64, incy int32, a float64, lda int32) {
+func Dger(m unsafe.Pointer) (result int, n int32, alpha float64, x float64, incx int32, y float64, incy int32, a float64, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDger == nil {
 		ebipurego.RegisterLibFunc(&_fnDger, _lib, "dger_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 int32
-	var _out5 float64
-	var _out6 int32
-	var _out7 float64
-	var _out8 int32
-	_ret := _fnDger(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
+	var _out3 int32
+	var _out4 float64
+	var _out5 int32
+	var _out6 float64
+	var _out7 int32
+	_ret := _fnDger(m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
 var _fnDgerfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -17203,10 +17190,10 @@ func Dsbgvx(__jobz string, __range string, __uplo string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17, _out18, _out19, _out20, _out21
 }
 
-var _fnDsbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsbmv calls the vecLib framework function dsbmv_.
-func Dsbmv(uplo string) (result int, n int32, k int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
+func Dsbmv(uplo unsafe.Pointer) (result int, n int32, k int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDsbmv, _lib, "dsbmv_")
@@ -17503,10 +17490,10 @@ func Dspgvx(__jobz string, __range string, __uplo string) (result int, __itype i
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16
 }
 
-var _fnDspmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dspmv calls the vecLib framework function dspmv_.
-func Dspmv(uplo string) (result int, n int32, alpha float64, ap float64, x float64, incx int32, beta float64, y float64, incy int32) {
+func Dspmv(uplo unsafe.Pointer) (result int, n int32, alpha float64, ap float64, x float64, incx int32, beta float64, y float64, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDspmv, _lib, "dspmv_")
@@ -17547,10 +17534,10 @@ func Dsposv(__uplo string) (result int, __n int, __nrhs int, __a float64, __lda 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
 }
 
-var _fnDspr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dspr2 calls the vecLib framework function dspr2_.
-func Dspr2(uplo string) (result int, n int32, alpha float64, x float64, incx int32, y float64, incy int32, ap float64) {
+func Dspr2(uplo unsafe.Pointer) (result int, n int32, alpha float64, x float64, incx int32, y float64, incy int32, ap float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnDspr2, _lib, "dspr2_")
@@ -17566,10 +17553,10 @@ func Dspr2(uplo string) (result int, n int32, alpha float64, x float64, incx int
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
 }
 
-var _fnDspr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dspr calls the vecLib framework function dspr_.
-func Dspr(uplo string) (result int, n int32, alpha float64, x float64, incx int32, ap float64) {
+func Dspr(uplo unsafe.Pointer) (result int, n int32, alpha float64, x float64, incx int32, ap float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDspr == nil {
 		ebipurego.RegisterLibFunc(&_fnDspr, _lib, "dspr_")
@@ -18271,29 +18258,28 @@ func Dsygvx(__jobz string, __range string, __uplo string) (result int, __itype i
 var _fnDsymm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsymm calls the vecLib framework function dsymm_.
-func Dsymm(side string, uplo string) (result int, m int32, n int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
+func Dsymm(side string, uplo string, m unsafe.Pointer) (result int, n int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnDsymm, _lib, "dsymm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 int32
-	var _out5 float64
-	var _out6 int32
+	var _out3 int32
+	var _out4 float64
+	var _out5 int32
+	var _out6 float64
 	var _out7 float64
-	var _out8 float64
-	var _out9 int32
-	_ret := _fnDsymm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
+	var _out8 int32
+	_ret := _fnDsymm(side, uplo, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnDsymv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsymv calls the vecLib framework function dsymv_.
-func Dsymv(uplo string) (result int, n int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
+func Dsymv(uplo unsafe.Pointer) (result int, n int32, alpha float64, a float64, lda int32, x float64, incx int32, beta float64, y float64, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnDsymv, _lib, "dsymv_")
@@ -18311,10 +18297,10 @@ func Dsymv(uplo string) (result int, n int32, alpha float64, a float64, lda int3
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnDsyr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsyr2 calls the vecLib framework function dsyr2_.
-func Dsyr2(uplo string) (result int, n int32, alpha float64, x float64, incx int32, y float64, incy int32, a float64, lda int32) {
+func Dsyr2(uplo unsafe.Pointer) (result int, n int32, alpha float64, x float64, incx int32, y float64, incy int32, a float64, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnDsyr2, _lib, "dsyr2_")
@@ -18331,10 +18317,10 @@ func Dsyr2(uplo string) (result int, n int32, alpha float64, x float64, incx int
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnDsyr2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsyr2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsyr2k calls the vecLib framework function dsyr2k_.
-func Dsyr2k(uplo string, trans string) (result int, n int32, k int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
+func Dsyr2k(uplo string, trans unsafe.Pointer) (result int, n int32, k int32, alpha float64, a float64, lda int32, b float64, ldb int32, beta float64, c__ float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnDsyr2k, _lib, "dsyr2k_")
@@ -18353,10 +18339,10 @@ func Dsyr2k(uplo string, trans string) (result int, n int32, k int32, alpha floa
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
 }
 
-var _fnDsyr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsyr calls the vecLib framework function dsyr_.
-func Dsyr(uplo string) (result int, n int32, alpha float64, x float64, incx int32, a float64, lda int32) {
+func Dsyr(uplo unsafe.Pointer) (result int, n int32, alpha float64, x float64, incx int32, a float64, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnDsyr, _lib, "dsyr_")
@@ -18399,10 +18385,10 @@ func Dsyrfs(__uplo string) (result int, __n int, __nrhs int, __a float64, __lda 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnDsyrk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDsyrk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dsyrk calls the vecLib framework function dsyrk_.
-func Dsyrk(uplo string, trans string) (result int, n int32, k int32, alpha float64, a float64, lda int32, beta float64, c__ float64, ldc int32) {
+func Dsyrk(uplo string, trans unsafe.Pointer) (result int, n int32, k int32, alpha float64, a float64, lda int32, beta float64, c__ float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnDsyrk, _lib, "dsyrk_")
@@ -18605,10 +18591,10 @@ func Dtbcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnDtbmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtbmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtbmv calls the vecLib framework function dtbmv_.
-func Dtbmv(uplo string, trans string, diag string) (result int, n int32, k int32, a float64, lda int32, x float64, incx int32) {
+func Dtbmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, k int32, a float64, lda int32, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtbmv, _lib, "dtbmv_")
@@ -18649,10 +18635,10 @@ func Dtbrfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13
 }
 
-var _fnDtbsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtbsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtbsv calls the vecLib framework function dtbsv_.
-func Dtbsv(uplo string, trans string, diag string) (result int, n int32, k int32, a float64, lda int32, x float64, incx int32) {
+func Dtbsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, k int32, a float64, lda int32, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtbsv, _lib, "dtbsv_")
@@ -19021,10 +19007,10 @@ func Dtpcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnDtpmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtpmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtpmv calls the vecLib framework function dtpmv_.
-func Dtpmv(uplo string, trans string, diag string) (result int, n int32, ap float64, x float64, incx int32) {
+func Dtpmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, ap float64, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtpmv, _lib, "dtpmv_")
@@ -19061,10 +19047,10 @@ func Dtprfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
 }
 
-var _fnDtpsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtpsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtpsv calls the vecLib framework function dtpsv_.
-func Dtpsv(uplo string, trans string, diag string) (result int, n int32, ap float64, x float64, incx int32) {
+func Dtpsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, ap float64, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtpsv, _lib, "dtpsv_")
@@ -19210,26 +19196,25 @@ func Dtrexc(__compq string) (result int, __n int, __t float64, __ldt int, __q fl
 var _fnDtrmm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtrmm calls the vecLib framework function dtrmm_.
-func Dtrmm(side string, uplo string, transa string, diag string) (result int, m int32, n int32, alpha float64, a float64, lda int32, b float64, ldb int32) {
+func Dtrmm(side string, uplo string, transa string, diag string, m unsafe.Pointer) (result int, n int32, alpha float64, a float64, lda int32, b float64, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnDtrmm, _lib, "dtrmm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 int32
-	var _out5 float64
-	var _out6 int32
-	_ret := _fnDtrmm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	var _out3 int32
+	var _out4 float64
+	var _out5 int32
+	_ret := _fnDtrmm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnDtrmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtrmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtrmv calls the vecLib framework function dtrmv_.
-func Dtrmv(uplo string, trans string, diag string) (result int, n int32, a float64, lda int32, x float64, incx int32) {
+func Dtrmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, a float64, lda int32, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtrmv, _lib, "dtrmv_")
@@ -19299,20 +19284,19 @@ func Dtrsen(__job string, __compq string) (result int, __select int, __n int, __
 var _fnDtrsm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtrsm calls the vecLib framework function dtrsm_.
-func Dtrsm(side string, uplo string, transa string, diag string) (result int, m int32, n int32, alpha float64, a float64, lda int32, b float64, ldb int32) {
+func Dtrsm(side string, uplo string, transa string, diag string, m unsafe.Pointer) (result int, n int32, alpha float64, a float64, lda int32, b float64, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnDtrsm, _lib, "dtrsm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 int32
-	var _out5 float64
-	var _out6 int32
-	_ret := _fnDtrsm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	var _out3 int32
+	var _out4 float64
+	var _out5 int32
+	_ret := _fnDtrsm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
 var _fnDtrsna func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -19343,10 +19327,10 @@ func Dtrsna(__job string, __howmny string) (result int, __select int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnDtrsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnDtrsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Dtrsv calls the vecLib framework function dtrsv_.
-func Dtrsv(uplo string, trans string, diag string) (result int, n int32, a float64, lda int32, x float64, incx int32) {
+func Dtrsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, a float64, lda int32, x float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnDtrsv, _lib, "dtrsv_")
@@ -20347,7 +20331,7 @@ func Sgbequb() (result int, __m int, __n int, __kl int, __ku int, __ab float32, 
 var _fnSgbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sgbmv calls the vecLib framework function sgbmv_.
-func Sgbmv(trans string) (result int, m int32, n int32, kl int32, ku int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
+func Sgbmv(trans string, m unsafe.Pointer) (result int, n int32, kl int32, ku int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnSgbmv, _lib, "sgbmv_")
@@ -20355,17 +20339,16 @@ func Sgbmv(trans string) (result int, m int32, n int32, kl int32, ku int32, alph
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
+	var _out3 float32
 	var _out4 float32
-	var _out5 float32
-	var _out6 int32
-	var _out7 float32
-	var _out8 int32
+	var _out5 int32
+	var _out6 float32
+	var _out7 int32
+	var _out8 float32
 	var _out9 float32
-	var _out10 float32
-	var _out11 int32
-	_ret := _fnSgbmv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10), unsafe.Pointer(&_out11))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
+	var _out10 int32
+	_ret := _fnSgbmv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10
 }
 
 var _fnSgbrfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -21054,33 +21037,10 @@ func Sgelsy() (result int, __m int, __n int, __nrhs int, __a float32, __lda int,
 var _fnSgemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sgemm calls the vecLib framework function sgemm_.
-func Sgemm(transa string, transb string) (result int, m int32, n int32, k int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
+func Sgemm(transa string, transb string, m unsafe.Pointer) (result int, n int32, k int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnSgemm, _lib, "sgemm_")
-	}
-	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	var _out3 float32
-	var _out4 float32
-	var _out5 int32
-	var _out6 float32
-	var _out7 int32
-	var _out8 float32
-	var _out9 float32
-	var _out10 int32
-	_ret := _fnSgemm(transa, transb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9), unsafe.Pointer(&_out10))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10
-}
-
-var _fnSgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-
-// Sgemv calls the vecLib framework function sgemv_.
-func Sgemv(trans string) (result int, m int32, n int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnSgemv == nil {
-		ebipurego.RegisterLibFunc(&_fnSgemv, _lib, "sgemv_")
 	}
 	var _out0 int32
 	var _out1 int32
@@ -21092,8 +21052,29 @@ func Sgemv(trans string) (result int, m int32, n int32, alpha float32, a float32
 	var _out7 float32
 	var _out8 float32
 	var _out9 int32
-	_ret := _fnSgemv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
+	_ret := _fnSgemm(transa, transb, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
+}
+
+var _fnSgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+
+// Sgemv calls the vecLib framework function sgemv_.
+func Sgemv(trans string, m unsafe.Pointer) (result int, n int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSgemv == nil {
+		ebipurego.RegisterLibFunc(&_fnSgemv, _lib, "sgemv_")
+	}
+	var _out0 int32
+	var _out1 float32
+	var _out2 float32
+	var _out3 int32
+	var _out4 float32
+	var _out5 int32
+	var _out6 float32
+	var _out7 float32
+	var _out8 int32
+	_ret := _fnSgemv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
 var _fnSgeql2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -21218,22 +21199,21 @@ func Sgeqrf() (result int, __m int, __n int, __a float32, __lda int, __tau float
 var _fnSger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sger calls the vecLib framework function sger_.
-func Sger() (result int, m int32, n int32, alpha float32, x float32, incx int32, y float32, incy int32, a float32, lda int32) {
+func Sger(m unsafe.Pointer) (result int, n int32, alpha float32, x float32, incx int32, y float32, incy int32, a float32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSger == nil {
 		ebipurego.RegisterLibFunc(&_fnSger, _lib, "sger_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 int32
-	var _out5 float32
-	var _out6 int32
-	var _out7 float32
-	var _out8 int32
-	_ret := _fnSger(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
+	var _out3 int32
+	var _out4 float32
+	var _out5 int32
+	var _out6 float32
+	var _out7 int32
+	_ret := _fnSger(m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
 var _fnSgerfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -27476,10 +27456,10 @@ func Ssbgvx(__jobz string, __range string, __uplo string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17, _out18, _out19, _out20, _out21
 }
 
-var _fnSsbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssbmv calls the vecLib framework function ssbmv_.
-func Ssbmv(uplo string) (result int, n int32, k int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
+func Ssbmv(uplo unsafe.Pointer) (result int, n int32, k int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnSsbmv, _lib, "ssbmv_")
@@ -27734,10 +27714,10 @@ func Sspgvx(__jobz string, __range string, __uplo string) (result int, __itype i
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16
 }
 
-var _fnSspmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sspmv calls the vecLib framework function sspmv_.
-func Sspmv(uplo string) (result int, n int32, alpha float32, ap float32, x float32, incx int32, beta float32, y float32, incy int32) {
+func Sspmv(uplo unsafe.Pointer) (result int, n int32, alpha float32, ap float32, x float32, incx int32, beta float32, y float32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnSspmv, _lib, "sspmv_")
@@ -27754,10 +27734,10 @@ func Sspmv(uplo string) (result int, n int32, alpha float32, ap float32, x float
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnSspr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sspr2 calls the vecLib framework function sspr2_.
-func Sspr2(uplo string) (result int, n int32, alpha float32, x float32, incx int32, y float32, incy int32, ap float32) {
+func Sspr2(uplo unsafe.Pointer) (result int, n int32, alpha float32, x float32, incx int32, y float32, incy int32, ap float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnSspr2, _lib, "sspr2_")
@@ -27773,10 +27753,10 @@ func Sspr2(uplo string) (result int, n int32, alpha float32, x float32, incx int
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
 }
 
-var _fnSspr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Sspr calls the vecLib framework function sspr_.
-func Sspr(uplo string) (result int, n int32, alpha float32, x float32, incx int32, ap float32) {
+func Sspr(uplo unsafe.Pointer) (result int, n int32, alpha float32, x float32, incx int32, ap float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSspr == nil {
 		ebipurego.RegisterLibFunc(&_fnSspr, _lib, "sspr_")
@@ -28478,29 +28458,28 @@ func Ssygvx(__jobz string, __range string, __uplo string) (result int, __itype i
 var _fnSsymm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssymm calls the vecLib framework function ssymm_.
-func Ssymm(side string, uplo string) (result int, m int32, n int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
+func Ssymm(side string, uplo string, m unsafe.Pointer) (result int, n int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnSsymm, _lib, "ssymm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 int32
-	var _out5 float32
-	var _out6 int32
+	var _out3 int32
+	var _out4 float32
+	var _out5 int32
+	var _out6 float32
 	var _out7 float32
-	var _out8 float32
-	var _out9 int32
-	_ret := _fnSsymm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8), unsafe.Pointer(&_out9))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
+	var _out8 int32
+	_ret := _fnSsymm(side, uplo, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6), unsafe.Pointer(&_out7), unsafe.Pointer(&_out8))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnSsymv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssymv calls the vecLib framework function ssymv_.
-func Ssymv(uplo string) (result int, n int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
+func Ssymv(uplo unsafe.Pointer) (result int, n int32, alpha float32, a float32, lda int32, x float32, incx int32, beta float32, y float32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnSsymv, _lib, "ssymv_")
@@ -28518,10 +28497,10 @@ func Ssymv(uplo string) (result int, n int32, alpha float32, a float32, lda int3
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnSsyr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssyr2 calls the vecLib framework function ssyr2_.
-func Ssyr2(uplo string) (result int, n int32, alpha float32, x float32, incx int32, y float32, incy int32, a float32, lda int32) {
+func Ssyr2(uplo unsafe.Pointer) (result int, n int32, alpha float32, x float32, incx int32, y float32, incy int32, a float32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnSsyr2, _lib, "ssyr2_")
@@ -28538,10 +28517,10 @@ func Ssyr2(uplo string) (result int, n int32, alpha float32, x float32, incx int
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnSsyr2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsyr2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssyr2k calls the vecLib framework function ssyr2k_.
-func Ssyr2k(uplo string, trans string) (result int, n int32, k int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
+func Ssyr2k(uplo string, trans unsafe.Pointer) (result int, n int32, k int32, alpha float32, a float32, lda int32, b float32, ldb int32, beta float32, c__ float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnSsyr2k, _lib, "ssyr2k_")
@@ -28560,10 +28539,10 @@ func Ssyr2k(uplo string, trans string) (result int, n int32, k int32, alpha floa
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
 }
 
-var _fnSsyr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssyr calls the vecLib framework function ssyr_.
-func Ssyr(uplo string) (result int, n int32, alpha float32, x float32, incx int32, a float32, lda int32) {
+func Ssyr(uplo unsafe.Pointer) (result int, n int32, alpha float32, x float32, incx int32, a float32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnSsyr, _lib, "ssyr_")
@@ -28606,10 +28585,10 @@ func Ssyrfs(__uplo string) (result int, __n int, __nrhs int, __a float32, __lda 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnSsyrk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnSsyrk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ssyrk calls the vecLib framework function ssyrk_.
-func Ssyrk(uplo string, trans string) (result int, n int32, k int32, alpha float32, a float32, lda int32, beta float32, c__ float32, ldc int32) {
+func Ssyrk(uplo string, trans unsafe.Pointer) (result int, n int32, k int32, alpha float32, a float32, lda int32, beta float32, c__ float32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnSsyrk, _lib, "ssyrk_")
@@ -28812,10 +28791,10 @@ func Stbcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnStbmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStbmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Stbmv calls the vecLib framework function stbmv_.
-func Stbmv(uplo string, trans string, diag string) (result int, n int32, k int32, a float32, lda int32, x float32, incx int32) {
+func Stbmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, k int32, a float32, lda int32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnStbmv, _lib, "stbmv_")
@@ -28856,10 +28835,10 @@ func Stbrfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13
 }
 
-var _fnStbsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStbsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Stbsv calls the vecLib framework function stbsv_.
-func Stbsv(uplo string, trans string, diag string) (result int, n int32, k int32, a float32, lda int32, x float32, incx int32) {
+func Stbsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, k int32, a float32, lda int32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnStbsv, _lib, "stbsv_")
@@ -29228,10 +29207,10 @@ func Stpcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnStpmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStpmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Stpmv calls the vecLib framework function stpmv_.
-func Stpmv(uplo string, trans string, diag string) (result int, n int32, ap float32, x float32, incx int32) {
+func Stpmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, ap float32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnStpmv, _lib, "stpmv_")
@@ -29268,10 +29247,10 @@ func Stprfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
 }
 
-var _fnStpsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStpsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Stpsv calls the vecLib framework function stpsv_.
-func Stpsv(uplo string, trans string, diag string) (result int, n int32, ap float32, x float32, incx int32) {
+func Stpsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, ap float32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnStpsv, _lib, "stpsv_")
@@ -29417,26 +29396,25 @@ func Strexc(__compq string) (result int, __n int, __t float32, __ldt int, __q fl
 var _fnStrmm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Strmm calls the vecLib framework function strmm_.
-func Strmm(side string, uplo string, transa string, diag string) (result int, m int32, n int32, alpha float32, a float32, lda int32, b float32, ldb int32) {
+func Strmm(side string, uplo string, transa string, diag string, m unsafe.Pointer) (result int, n int32, alpha float32, a float32, lda int32, b float32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnStrmm, _lib, "strmm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 int32
-	var _out5 float32
-	var _out6 int32
-	_ret := _fnStrmm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	var _out3 int32
+	var _out4 float32
+	var _out5 int32
+	_ret := _fnStrmm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnStrmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStrmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Strmv calls the vecLib framework function strmv_.
-func Strmv(uplo string, trans string, diag string) (result int, n int32, a float32, lda int32, x float32, incx int32) {
+func Strmv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, a float32, lda int32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnStrmv, _lib, "strmv_")
@@ -29506,20 +29484,19 @@ func Strsen(__job string, __compq string) (result int, __select int, __n int, __
 var _fnStrsm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Strsm calls the vecLib framework function strsm_.
-func Strsm(side string, uplo string, transa string, diag string) (result int, m int32, n int32, alpha float32, a float32, lda int32, b float32, ldb int32) {
+func Strsm(side string, uplo string, transa string, diag string, m unsafe.Pointer) (result int, n int32, alpha float32, a float32, lda int32, b float32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnStrsm, _lib, "strsm_")
 	}
 	var _out0 int32
-	var _out1 int32
+	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 int32
-	var _out5 float32
-	var _out6 int32
-	_ret := _fnStrsm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	var _out3 int32
+	var _out4 float32
+	var _out5 int32
+	_ret := _fnStrsm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
 var _fnStrsna func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -29550,10 +29527,10 @@ func Strsna(__job string, __howmny string) (result int, __select int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnStrsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnStrsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Strsv calls the vecLib framework function strsv_.
-func Strsv(uplo string, trans string, diag string) (result int, n int32, a float32, lda int32, x float32, incx int32) {
+func Strsv(uplo string, trans string, diag unsafe.Pointer) (result int, n int32, a float32, lda int32, x float32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnStrsv, _lib, "strsv_")
@@ -37285,7 +37262,7 @@ func Zgbequb() (result int, __m int, __n int, __kl int, __ku int, __ab CLPKDoubl
 var _fnZgbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zgbmv calls the vecLib framework function zgbmv_.
-func Zgbmv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, m int32, n int32, kl int32, ku int32, lda int32, incx int32, incy int32) {
+func Zgbmv(trans string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, kl int32, ku int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZgbmv, _lib, "zgbmv_")
@@ -37296,9 +37273,8 @@ func Zgbmv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointe
 	var _out3 int32
 	var _out4 int32
 	var _out5 int32
-	var _out6 int32
-	_ret := _fnZgbmv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), alpha, a, unsafe.Pointer(&_out4), x, unsafe.Pointer(&_out5), beta, y, unsafe.Pointer(&_out6))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
+	_ret := _fnZgbmv(trans, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), alpha, a, unsafe.Pointer(&_out3), x, unsafe.Pointer(&_out4), beta, y, unsafe.Pointer(&_out5))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
 var _fnZgbrfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -37963,7 +37939,7 @@ func Zgelsy() (result int, __m int, __n int, __nrhs int, __a CLPKDoublecomplex, 
 var _fnZgemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zgemm calls the vecLib framework function zgemm_.
-func Zgemm(transa string, transb string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, k int32, lda int32, ldb int32, ldc int32) {
+func Zgemm(transa string, transb string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnZgemm, _lib, "zgemm_")
@@ -37973,15 +37949,14 @@ func Zgemm(transa string, transb string, alpha unsafe.Pointer, a unsafe.Pointer,
 	var _out2 int32
 	var _out3 int32
 	var _out4 int32
-	var _out5 int32
-	_ret := _fnZgemm(transa, transb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), alpha, a, unsafe.Pointer(&_out3), b, unsafe.Pointer(&_out4), beta, c__, unsafe.Pointer(&_out5))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	_ret := _fnZgemm(transa, transb, m, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnZgemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zgemv calls the vecLib framework function zgemv_.
-func Zgemv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, m int32, n int32, lda int32, incx int32, incy int32) {
+func Zgemv(trans string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnZgemv, _lib, "zgemv_")
@@ -37990,9 +37965,8 @@ func Zgemv(trans string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointe
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnZgemv(trans, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), x, unsafe.Pointer(&_out3), beta, y, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnZgemv(trans, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), x, unsafe.Pointer(&_out2), beta, y, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnZgeql2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -38119,7 +38093,7 @@ func Zgeqrf() (result int, __m int, __n int, __a CLPKDoublecomplex, __lda int, _
 var _fnZgerc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zgerc calls the vecLib framework function zgerc_.
-func Zgerc(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, m int32, n int32, incx int32, incy int32, lda int32) {
+func Zgerc(m unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZgerc == nil {
 		ebipurego.RegisterLibFunc(&_fnZgerc, _lib, "zgerc_")
@@ -38128,9 +38102,8 @@ func Zgerc(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Po
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnZgerc(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, x, unsafe.Pointer(&_out2), y, unsafe.Pointer(&_out3), a, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnZgerc(m, unsafe.Pointer(&_out0), alpha, x, unsafe.Pointer(&_out1), y, unsafe.Pointer(&_out2), a, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnZgerfs func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -38203,7 +38176,7 @@ func Zgerqf() (result int, __m int, __n int, __a CLPKDoublecomplex, __lda int, _
 var _fnZgeru func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zgeru calls the vecLib framework function zgeru_.
-func Zgeru(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, m int32, n int32, incx int32, incy int32, lda int32) {
+func Zgeru(m unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZgeru == nil {
 		ebipurego.RegisterLibFunc(&_fnZgeru, _lib, "zgeru_")
@@ -38212,9 +38185,8 @@ func Zgeru(alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Po
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnZgeru(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, x, unsafe.Pointer(&_out2), y, unsafe.Pointer(&_out3), a, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnZgeru(m, unsafe.Pointer(&_out0), alpha, x, unsafe.Pointer(&_out1), y, unsafe.Pointer(&_out2), a, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnZgesc2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -39151,10 +39123,10 @@ func Zhbgvx(__jobz string, __range string, __uplo string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17, _out18, _out19, _out20, _out21, _out22
 }
 
-var _fnZhbmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZhbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhbmv calls the vecLib framework function zhbmv_.
-func Zhbmv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32, incy int32) {
+func Zhbmv(uplo unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZhbmv, _lib, "zhbmv_")
@@ -39458,7 +39430,7 @@ func Zhegvx(__jobz string, __range string, __uplo string) (result int, __itype i
 var _fnZhemm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhemm calls the vecLib framework function zhemm_.
-func Zhemm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32, ldc int32) {
+func Zhemm(side string, uplo string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhemm == nil {
 		ebipurego.RegisterLibFunc(&_fnZhemm, _lib, "zhemm_")
@@ -39467,15 +39439,14 @@ func Zhemm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b u
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnZhemm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnZhemm(side, uplo, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2), beta, c__, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnZhemv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZhemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhemv calls the vecLib framework function zhemv_.
-func Zhemv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
+func Zhemv(uplo unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, lda int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhemv == nil {
 		ebipurego.RegisterLibFunc(&_fnZhemv, _lib, "zhemv_")
@@ -39488,10 +39459,10 @@ func Zhemv(uplo string, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnZher2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZher2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zher2 calls the vecLib framework function zher2_.
-func Zher2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
+func Zher2(uplo unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, a unsafe.Pointer) (result int, n int32, incx int32, incy int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZher2 == nil {
 		ebipurego.RegisterLibFunc(&_fnZher2, _lib, "zher2_")
@@ -39504,10 +39475,10 @@ func Zher2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer
 	return _ret, _out0, _out1, _out2, _out3
 }
 
-var _fnZher2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZher2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zher2k calls the vecLib framework function zher2k_.
-func Zher2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, beta float64, ldc int32) {
+func Zher2k(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, beta float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZher2k == nil {
 		ebipurego.RegisterLibFunc(&_fnZher2k, _lib, "zher2k_")
@@ -39522,10 +39493,10 @@ func Zher2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnZher func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zher calls the vecLib framework function zher_.
-func Zher(uplo string, x unsafe.Pointer, a unsafe.Pointer) (result int, n int32, alpha float64, incx int32, lda int32) {
+func Zher(uplo unsafe.Pointer, x unsafe.Pointer, a unsafe.Pointer) (result int, n int32, alpha float64, incx int32, lda int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZher == nil {
 		ebipurego.RegisterLibFunc(&_fnZher, _lib, "zher_")
@@ -39566,10 +39537,10 @@ func Zherfs(__uplo string) (result int, __n int, __nrhs int, __a CLPKDoublecompl
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnZherk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZherk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zherk calls the vecLib framework function zherk_.
-func Zherk(uplo string, trans string, a unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, alpha float64, lda int32, beta float64, ldc int32) {
+func Zherk(uplo string, trans unsafe.Pointer, a unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, alpha float64, lda int32, beta float64, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZherk == nil {
 		ebipurego.RegisterLibFunc(&_fnZherk, _lib, "zherk_")
@@ -39984,10 +39955,10 @@ func Zhpgvx(__jobz string, __range string, __uplo string) (result int, __itype i
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15, _out16, _out17
 }
 
-var _fnZhpmv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZhpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhpmv calls the vecLib framework function zhpmv_.
-func Zhpmv(uplo string, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
+func Zhpmv(uplo unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, beta unsafe.Pointer, y unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZhpmv, _lib, "zhpmv_")
@@ -39999,10 +39970,10 @@ func Zhpmv(uplo string, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointe
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnZhpr2 func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZhpr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhpr2 calls the vecLib framework function zhpr2_.
-func Zhpr2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
+func Zhpr2(uplo unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, incx int32, incy int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhpr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnZhpr2, _lib, "zhpr2_")
@@ -40014,10 +39985,10 @@ func Zhpr2(uplo string, alpha unsafe.Pointer, x unsafe.Pointer, y unsafe.Pointer
 	return _ret, _out0, _out1, _out2
 }
 
-var _fnZhpr func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZhpr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zhpr calls the vecLib framework function zhpr_.
-func Zhpr(uplo string, x unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, alpha float64, incx int32) {
+func Zhpr(uplo unsafe.Pointer, x unsafe.Pointer, ap unsafe.Pointer) (result int, n int32, alpha float64, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZhpr == nil {
 		ebipurego.RegisterLibFunc(&_fnZhpr, _lib, "zhpr_")
@@ -43389,7 +43360,7 @@ func Zsyequb(__uplo string) (result int, __n int, __a CLPKDoublecomplex, __lda i
 var _fnZsymm func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zsymm calls the vecLib framework function zsymm_.
-func Zsymm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32, ldc int32) {
+func Zsymm(side string, uplo string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnZsymm, _lib, "zsymm_")
@@ -43398,9 +43369,8 @@ func Zsymm(side string, uplo string, alpha unsafe.Pointer, a unsafe.Pointer, b u
 	var _out1 int32
 	var _out2 int32
 	var _out3 int32
-	var _out4 int32
-	_ret := _fnZsymm(side, uplo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3), beta, c__, unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnZsymm(side, uplo, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2), beta, c__, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnZsymv func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -43424,10 +43394,10 @@ func Zsymv(__uplo string) (result int, __n int, __alpha CLPKDoublecomplex, __a C
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
-var _fnZsyr2k func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZsyr2k func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zsyr2k calls the vecLib framework function zsyr2k_.
-func Zsyr2k(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
+func Zsyr2k(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldb int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnZsyr2k, _lib, "zsyr2k_")
@@ -43487,10 +43457,10 @@ func Zsyrfs(__uplo string) (result int, __n int, __nrhs int, __a CLPKDoublecompl
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnZsyrk func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZsyrk func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Zsyrk calls the vecLib framework function zsyrk_.
-func Zsyrk(uplo string, trans string, alpha unsafe.Pointer, a unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldc int32) {
+func Zsyrk(uplo string, trans unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, beta unsafe.Pointer, c__ unsafe.Pointer) (result int, n int32, k int32, lda int32, ldc int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnZsyrk, _lib, "zsyrk_")
@@ -43649,10 +43619,10 @@ func Ztbcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
 }
 
-var _fnZtbmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtbmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztbmv calls the vecLib framework function ztbmv_.
-func Ztbmv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
+func Ztbmv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtbmv, _lib, "ztbmv_")
@@ -43691,10 +43661,10 @@ func Ztbrfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13
 }
 
-var _fnZtbsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtbsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztbsv calls the vecLib framework function ztbsv_.
-func Ztbsv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
+func Ztbsv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, k int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtbsv, _lib, "ztbsv_")
@@ -44053,10 +44023,10 @@ func Ztpcon(__norm string, __uplo string, __diag string) (result int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
-var _fnZtpmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtpmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztpmv calls the vecLib framework function ztpmv_.
-func Ztpmv(uplo string, trans string, diag string, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
+func Ztpmv(uplo string, trans string, diag unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtpmv, _lib, "ztpmv_")
@@ -44091,10 +44061,10 @@ func Ztprfs(__uplo string, __trans string, __diag string) (result int, __n int, 
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11
 }
 
-var _fnZtpsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtpsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztpsv calls the vecLib framework function ztpsv_.
-func Ztpsv(uplo string, trans string, diag string, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
+func Ztpsv(uplo string, trans string, diag unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer) (result int, n int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtpsv, _lib, "ztpsv_")
@@ -44238,7 +44208,7 @@ func Ztrexc(__compq string) (result int, __n int, __t CLPKDoublecomplex, __ldt i
 var _fnZtrmm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztrmm calls the vecLib framework function ztrmm_.
-func Ztrmm(side string, uplo string, transa string, diag string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32) {
+func Ztrmm(side string, uplo string, transa string, diag string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, n int32, lda int32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnZtrmm, _lib, "ztrmm_")
@@ -44246,15 +44216,14 @@ func Ztrmm(side string, uplo string, transa string, diag string, alpha unsafe.Po
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	_ret := _fnZtrmm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnZtrmm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
-var _fnZtrmv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtrmv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztrmv calls the vecLib framework function ztrmv_.
-func Ztrmv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
+func Ztrmv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtrmv, _lib, "ztrmv_")
@@ -44319,7 +44288,7 @@ func Ztrsen(__job string, __compq string) (result int, __select int, __n int, __
 var _fnZtrsm func(string, string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztrsm calls the vecLib framework function ztrsm_.
-func Ztrsm(side string, uplo string, transa string, diag string, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, m int32, n int32, lda int32, ldb int32) {
+func Ztrsm(side string, uplo string, transa string, diag string, m unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer) (result int, n int32, lda int32, ldb int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnZtrsm, _lib, "ztrsm_")
@@ -44327,9 +44296,8 @@ func Ztrsm(side string, uplo string, transa string, diag string, alpha unsafe.Po
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	_ret := _fnZtrsm(side, uplo, transa, diag, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), alpha, a, unsafe.Pointer(&_out2), b, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnZtrsm(side, uplo, transa, diag, m, unsafe.Pointer(&_out0), alpha, a, unsafe.Pointer(&_out1), b, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnZtrsna func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -44360,10 +44328,10 @@ func Ztrsna(__job string, __howmny string) (result int, __select int, __n int, _
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9, _out10, _out11, _out12, _out13, _out14, _out15
 }
 
-var _fnZtrsv func(string, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
+var _fnZtrsv func(string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // Ztrsv calls the vecLib framework function ztrsv_.
-func Ztrsv(uplo string, trans string, diag string, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
+func Ztrsv(uplo string, trans string, diag unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer) (result int, n int32, lda int32, incx int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnZtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnZtrsv, _lib, "ztrsv_")

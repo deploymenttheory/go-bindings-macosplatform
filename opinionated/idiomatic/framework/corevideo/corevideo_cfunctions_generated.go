@@ -201,14 +201,12 @@ func CVDisplayLinkCreateWithCGDisplay(displayID uint32, displayLinkOut unsafe.Po
 var _fnCVDisplayLinkCreateWithCGDisplays func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CVDisplayLinkCreateWithCGDisplays calls the CoreVideo framework function CVDisplayLinkCreateWithCGDisplays.
-func CVDisplayLinkCreateWithCGDisplays(count int, displayLinkOut unsafe.Pointer) (result int32, displayArray uint32) {
+func CVDisplayLinkCreateWithCGDisplays(displayArray unsafe.Pointer, count int, displayLinkOut unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVDisplayLinkCreateWithCGDisplays == nil {
 		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkCreateWithCGDisplays, _lib, "CVDisplayLinkCreateWithCGDisplays")
 	}
-	var _out0 uint32
-	_ret := _fnCVDisplayLinkCreateWithCGDisplays(unsafe.Pointer(&_out0), count, displayLinkOut)
-	return _ret, _out0
+	return _fnCVDisplayLinkCreateWithCGDisplays(displayArray, count, displayLinkOut)
 }
 
 var _fnCVDisplayLinkCreateWithOpenGLDisplayMask func(uint32, unsafe.Pointer) int32

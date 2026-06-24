@@ -278,15 +278,14 @@ func HvGicGetRedistributorSize() (result int, redistributor_size int) {
 var _fnHvGicGetSpiInterruptRange func(unsafe.Pointer, unsafe.Pointer) int
 
 // HvGicGetSpiInterruptRange calls the Hypervisor framework function hv_gic_get_spi_interrupt_range.
-func HvGicGetSpiInterruptRange() (result int, spi_intid_base uint32, spi_intid_count uint32) {
+func HvGicGetSpiInterruptRange(spi_intid_base unsafe.Pointer) (result int, spi_intid_count uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetSpiInterruptRange == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetSpiInterruptRange, _lib, "hv_gic_get_spi_interrupt_range")
 	}
 	var _out0 uint32
-	var _out1 uint32
-	_ret := _fnHvGicGetSpiInterruptRange(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	_ret := _fnHvGicGetSpiInterruptRange(spi_intid_base, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnHvGicReset func() int
@@ -564,14 +563,12 @@ func HvVcpuGetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer)
 var _fnHvVcpuGetSmePReg func(uint64, Hv_sme_p_reg_t, unsafe.Pointer, int) int
 
 // HvVcpuGetSmePReg calls the Hypervisor framework function hv_vcpu_get_sme_p_reg.
-func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, length int) (result int, value uint8) {
+func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmePReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmePReg, _lib, "hv_vcpu_get_sme_p_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuGetSmePReg(vcpu, reg, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuGetSmePReg(vcpu, reg, value, length)
 }
 
 var _fnHvVcpuGetSmeState func(uint64, unsafe.Pointer) int
@@ -590,27 +587,23 @@ func HvVcpuGetSmeState(vcpu uint64) (result int, sme_state HvVcpuSmeStateT) {
 var _fnHvVcpuGetSmeZReg func(uint64, Hv_sme_z_reg_t, unsafe.Pointer, int) int
 
 // HvVcpuGetSmeZReg calls the Hypervisor framework function hv_vcpu_get_sme_z_reg.
-func HvVcpuGetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, length int) (result int, value uint8) {
+func HvVcpuGetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeZReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeZReg, _lib, "hv_vcpu_get_sme_z_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuGetSmeZReg(vcpu, reg, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuGetSmeZReg(vcpu, reg, value, length)
 }
 
 var _fnHvVcpuGetSmeZaReg func(uint64, unsafe.Pointer, int) int
 
 // HvVcpuGetSmeZaReg calls the Hypervisor framework function hv_vcpu_get_sme_za_reg.
-func HvVcpuGetSmeZaReg(vcpu uint64, length int) (result int, value uint8) {
+func HvVcpuGetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeZaReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeZaReg, _lib, "hv_vcpu_get_sme_za_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuGetSmeZaReg(vcpu, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuGetSmeZaReg(vcpu, value, length)
 }
 
 var _fnHvVcpuGetSmeZt0Reg func(uint64, unsafe.Pointer) int
@@ -736,14 +729,12 @@ func HvVcpuSetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer)
 var _fnHvVcpuSetSmePReg func(uint64, Hv_sme_p_reg_t, unsafe.Pointer, int) int
 
 // HvVcpuSetSmePReg calls the Hypervisor framework function hv_vcpu_set_sme_p_reg.
-func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, length int) (result int, value uint8) {
+func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmePReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmePReg, _lib, "hv_vcpu_set_sme_p_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuSetSmePReg(vcpu, reg, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuSetSmePReg(vcpu, reg, value, length)
 }
 
 var _fnHvVcpuSetSmeState func(uint64, unsafe.Pointer) int
@@ -762,27 +753,23 @@ func HvVcpuSetSmeState(vcpu uint64) (result int, sme_state HvVcpuSmeStateT) {
 var _fnHvVcpuSetSmeZReg func(uint64, Hv_sme_z_reg_t, unsafe.Pointer, int) int
 
 // HvVcpuSetSmeZReg calls the Hypervisor framework function hv_vcpu_set_sme_z_reg.
-func HvVcpuSetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, length int) (result int, value uint8) {
+func HvVcpuSetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeZReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeZReg, _lib, "hv_vcpu_set_sme_z_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuSetSmeZReg(vcpu, reg, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuSetSmeZReg(vcpu, reg, value, length)
 }
 
 var _fnHvVcpuSetSmeZaReg func(uint64, unsafe.Pointer, int) int
 
 // HvVcpuSetSmeZaReg calls the Hypervisor framework function hv_vcpu_set_sme_za_reg.
-func HvVcpuSetSmeZaReg(vcpu uint64, length int) (result int, value uint8) {
+func HvVcpuSetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeZaReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeZaReg, _lib, "hv_vcpu_set_sme_za_reg")
 	}
-	var _out0 uint8
-	_ret := _fnHvVcpuSetSmeZaReg(vcpu, unsafe.Pointer(&_out0), length)
-	return _ret, _out0
+	return _fnHvVcpuSetSmeZaReg(vcpu, value, length)
 }
 
 var _fnHvVcpuSetSmeZt0Reg func(uint64, unsafe.Pointer) int
@@ -854,14 +841,12 @@ func HvVcpuSetVtimerOffset(vcpu uint64, vtimer_offset uint64) int {
 var _fnHvVcpusExit func(unsafe.Pointer, uint32) int
 
 // HvVcpusExit calls the Hypervisor framework function hv_vcpus_exit.
-func HvVcpusExit(vcpu_count uint32) (result int, vcpus uint64) {
+func HvVcpusExit(vcpus unsafe.Pointer, vcpu_count uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpusExit == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpusExit, _lib, "hv_vcpus_exit")
 	}
-	var _out0 uint64
-	_ret := _fnHvVcpusExit(unsafe.Pointer(&_out0), vcpu_count)
-	return _ret, _out0
+	return _fnHvVcpusExit(vcpus, vcpu_count)
 }
 
 var _fnHvVmAllocate func(unsafe.Pointer, int, uint64) int

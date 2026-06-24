@@ -113,10 +113,10 @@ func Tcl_AttemptDbCkalloc(size int, file string, line int) string {
 	return _fnTcl_AttemptDbCkalloc(size, file, line)
 }
 
-var _fnTcl_AttemptDbCkrealloc func(string, int, string, int) string
+var _fnTcl_AttemptDbCkrealloc func(unsafe.Pointer, int, string, int) string
 
 // Tcl_AttemptDbCkrealloc calls the Tcl framework function Tcl_AttemptDbCkrealloc.
-func Tcl_AttemptDbCkrealloc(ptr string, size int, file string, line int) string {
+func Tcl_AttemptDbCkrealloc(ptr unsafe.Pointer, size int, file string, line int) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_AttemptDbCkrealloc == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_AttemptDbCkrealloc, _lib, "Tcl_AttemptDbCkrealloc")
@@ -124,15 +124,26 @@ func Tcl_AttemptDbCkrealloc(ptr string, size int, file string, line int) string 
 	return _fnTcl_AttemptDbCkrealloc(ptr, size, file, line)
 }
 
-var _fnTcl_AttemptRealloc func(string, int) string
+var _fnTcl_AttemptRealloc func(unsafe.Pointer, int) string
 
 // Tcl_AttemptRealloc calls the Tcl framework function Tcl_AttemptRealloc.
-func Tcl_AttemptRealloc(ptr string, size int) string {
+func Tcl_AttemptRealloc(ptr unsafe.Pointer, size int) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_AttemptRealloc == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_AttemptRealloc, _lib, "Tcl_AttemptRealloc")
 	}
 	return _fnTcl_AttemptRealloc(ptr, size)
+}
+
+var _fnTcl_AttemptSetObjLength func(unsafe.Pointer, int) int
+
+// Tcl_AttemptSetObjLength calls the Tcl framework function Tcl_AttemptSetObjLength.
+func Tcl_AttemptSetObjLength(objPtr unsafe.Pointer, length int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AttemptSetObjLength == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AttemptSetObjLength, _lib, "Tcl_AttemptSetObjLength")
+	}
+	return _fnTcl_AttemptSetObjLength(objPtr, length)
 }
 
 var _fnTcl_Backslash func(string, unsafe.Pointer) int8
@@ -249,10 +260,10 @@ func Tcl_ConditionWait(condPtr unsafe.Pointer, mutexPtr unsafe.Pointer) (timePtr
 	return _out0
 }
 
-var _fnTcl_ConvertCountedElement func(string, int, string, int) int
+var _fnTcl_ConvertCountedElement func(unsafe.Pointer, int, string, int) int
 
 // Tcl_ConvertCountedElement calls the Tcl framework function Tcl_ConvertCountedElement.
-func Tcl_ConvertCountedElement(src string, length int, dst string, flags int) int {
+func Tcl_ConvertCountedElement(src unsafe.Pointer, length int, dst string, flags int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_ConvertCountedElement == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_ConvertCountedElement, _lib, "Tcl_ConvertCountedElement")
@@ -371,6 +382,17 @@ func Tcl_CutChannel(channel obj.Object) {
 	_fnTcl_CutChannel(objref.IDOf(channel))
 }
 
+var _fnTcl_DStringSetLength func(unsafe.Pointer, int)
+
+// Tcl_DStringSetLength calls the Tcl framework function Tcl_DStringSetLength.
+func Tcl_DStringSetLength(dsPtr unsafe.Pointer, length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DStringSetLength == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DStringSetLength, _lib, "Tcl_DStringSetLength")
+	}
+	_fnTcl_DStringSetLength(dsPtr, length)
+}
+
 var _fnTcl_DbCkalloc func(int, string, int) string
 
 // Tcl_DbCkalloc calls the Tcl framework function Tcl_DbCkalloc.
@@ -393,10 +415,10 @@ func Tcl_DbCkfree(ptr string, file string, line int) int {
 	return _fnTcl_DbCkfree(ptr, file, line)
 }
 
-var _fnTcl_DbCkrealloc func(string, int, string, int) string
+var _fnTcl_DbCkrealloc func(unsafe.Pointer, int, string, int) string
 
 // Tcl_DbCkrealloc calls the Tcl framework function Tcl_DbCkrealloc.
-func Tcl_DbCkrealloc(ptr string, size int, file string, line int) string {
+func Tcl_DbCkrealloc(ptr unsafe.Pointer, size int, file string, line int) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_DbCkrealloc == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_DbCkrealloc, _lib, "Tcl_DbCkrealloc")
@@ -1069,10 +1091,10 @@ func Tcl_NotifyChannel(channel obj.Object, mask int) {
 	_fnTcl_NotifyChannel(objref.IDOf(channel), mask)
 }
 
-var _fnTcl_NumUtfChars func(string, int) int
+var _fnTcl_NumUtfChars func(unsafe.Pointer, int) int
 
 // Tcl_NumUtfChars calls the Tcl framework function Tcl_NumUtfChars.
-func Tcl_NumUtfChars(src string, length int) int {
+func Tcl_NumUtfChars(src unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_NumUtfChars == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_NumUtfChars, _lib, "Tcl_NumUtfChars")
@@ -1157,10 +1179,10 @@ func Tcl_ReadRaw(chan_ obj.Object, dst string, bytesToRead int) int {
 	return _fnTcl_ReadRaw(objref.IDOf(chan_), dst, bytesToRead)
 }
 
-var _fnTcl_Realloc func(string, int) string
+var _fnTcl_Realloc func(unsafe.Pointer, int) string
 
 // Tcl_Realloc calls the Tcl framework function Tcl_Realloc.
-func Tcl_Realloc(ptr string, size int) string {
+func Tcl_Realloc(ptr unsafe.Pointer, size int) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_Realloc == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_Realloc, _lib, "Tcl_Realloc")
@@ -1201,10 +1223,10 @@ func Tcl_Release(clientData unsafe.Pointer) {
 	_fnTcl_Release(clientData)
 }
 
-var _fnTcl_ScanCountedElement func(string, int, unsafe.Pointer) int
+var _fnTcl_ScanCountedElement func(unsafe.Pointer, int, unsafe.Pointer) int
 
 // Tcl_ScanCountedElement calls the Tcl framework function Tcl_ScanCountedElement.
-func Tcl_ScanCountedElement(str string, length int) (result int, flagPtr int32) {
+func Tcl_ScanCountedElement(str unsafe.Pointer, length int) (result int, flagPtr int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_ScanCountedElement == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_ScanCountedElement, _lib, "Tcl_ScanCountedElement")
@@ -1337,6 +1359,17 @@ func Tcl_SetMaxBlockTime() (timePtr Tcl_Time) {
 	var _out0 Tcl_Time
 	_fnTcl_SetMaxBlockTime(unsafe.Pointer(&_out0))
 	return _out0
+}
+
+var _fnTcl_SetObjLength func(unsafe.Pointer, int)
+
+// Tcl_SetObjLength calls the Tcl framework function Tcl_SetObjLength.
+func Tcl_SetObjLength(objPtr unsafe.Pointer, length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetObjLength == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetObjLength, _lib, "Tcl_SetObjLength")
+	}
+	_fnTcl_SetObjLength(objPtr, length)
 }
 
 var _fnTcl_SetPanicProc func(unsafe.Pointer)
@@ -1530,10 +1563,10 @@ func Tcl_TruncateChannel(chan_ obj.Object, length int) int {
 	return _fnTcl_TruncateChannel(objref.IDOf(chan_), length)
 }
 
-var _fnTcl_Ungets func(objc.ID, string, int, int) int
+var _fnTcl_Ungets func(objc.ID, unsafe.Pointer, int, int) int
 
 // Tcl_Ungets calls the Tcl framework function Tcl_Ungets.
-func Tcl_Ungets(chan_ obj.Object, str string, len_ int, atHead int) int {
+func Tcl_Ungets(chan_ obj.Object, str unsafe.Pointer, len_ int, atHead int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_Ungets == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_Ungets, _lib, "Tcl_Ungets")
@@ -1796,10 +1829,10 @@ func Tcl_UtfBackslash(src string, dst string) (result int, readPtr int32) {
 	return _ret, _out0
 }
 
-var _fnTcl_UtfCharComplete func(string, int) int
+var _fnTcl_UtfCharComplete func(unsafe.Pointer, int) int
 
 // Tcl_UtfCharComplete calls the Tcl framework function Tcl_UtfCharComplete.
-func Tcl_UtfCharComplete(src string, length int) int {
+func Tcl_UtfCharComplete(src unsafe.Pointer, length int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UtfCharComplete == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UtfCharComplete, _lib, "Tcl_UtfCharComplete")
@@ -1829,10 +1862,10 @@ func Tcl_UtfFindLast(src string, ch int) string {
 	return _fnTcl_UtfFindLast(src, ch)
 }
 
-var _fnTcl_UtfNcasecmp func(string, string, int) int
+var _fnTcl_UtfNcasecmp func(string, unsafe.Pointer, int) int
 
 // Tcl_UtfNcasecmp calls the Tcl framework function Tcl_UtfNcasecmp.
-func Tcl_UtfNcasecmp(s1 string, s2 string, n int) int {
+func Tcl_UtfNcasecmp(s1 string, s2 unsafe.Pointer, n int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UtfNcasecmp == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UtfNcasecmp, _lib, "Tcl_UtfNcasecmp")
@@ -1840,10 +1873,10 @@ func Tcl_UtfNcasecmp(s1 string, s2 string, n int) int {
 	return _fnTcl_UtfNcasecmp(s1, s2, n)
 }
 
-var _fnTcl_UtfNcmp func(string, string, int) int
+var _fnTcl_UtfNcmp func(string, unsafe.Pointer, int) int
 
 // Tcl_UtfNcmp calls the Tcl framework function Tcl_UtfNcmp.
-func Tcl_UtfNcmp(s1 string, s2 string, n int) int {
+func Tcl_UtfNcmp(s1 string, s2 unsafe.Pointer, n int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UtfNcmp == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UtfNcmp, _lib, "Tcl_UtfNcmp")

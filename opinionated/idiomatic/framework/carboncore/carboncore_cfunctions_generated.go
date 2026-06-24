@@ -526,7 +526,7 @@ func ConvertFromPStringToUnicode(iTextToUnicodeInfo obj.Object, iOutputBufLen in
 var _fnConvertFromTextToUnicode func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // ConvertFromTextToUnicode calls the CarbonCore framework function ConvertFromTextToUnicode.
-func ConvertFromTextToUnicode(iTextToUnicodeInfo obj.Object, iSourceLen int, iSourceStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOutputBufLen int) (result int, iOffsetArray int, oOffsetCount int, oOffsetArray int, oSourceRead int, oUnicodeLen int, oUnicodeStr uint16) {
+func ConvertFromTextToUnicode(iTextToUnicodeInfo obj.Object, iSourceLen int, iSourceStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int) (result int, oOffsetCount int, oOffsetArray int, oSourceRead int, oUnicodeLen int, oUnicodeStr uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromTextToUnicode == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromTextToUnicode, _lib, "ConvertFromTextToUnicode")
@@ -535,10 +535,9 @@ func ConvertFromTextToUnicode(iTextToUnicodeInfo obj.Object, iSourceLen int, iSo
 	var _out1 int
 	var _out2 int
 	var _out3 int
-	var _out4 int
-	var _out5 uint16
-	_ret := _fnConvertFromTextToUnicode(objref.IDOf(iTextToUnicodeInfo), iSourceLen, iSourceStr, iControlFlags, iOffsetCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iOutputBufLen, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	var _out4 uint16
+	_ret := _fnConvertFromTextToUnicode(objref.IDOf(iTextToUnicodeInfo), iSourceLen, iSourceStr, iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), iOutputBufLen, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnConvertFromUnicodeToPString func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int
@@ -558,7 +557,7 @@ func ConvertFromUnicodeToPString(iUnicodeToTextInfo obj.Object, iUnicodeLen int)
 var _fnConvertFromUnicodeToScriptCodeRun func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
 
 // ConvertFromUnicodeToScriptCodeRun calls the CarbonCore framework function ConvertFromUnicodeToScriptCodeRun.
-func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOutputBufLen int, oOutputStr unsafe.Pointer, iScriptRunBufLen int) (result int, iUnicodeStr uint16, iOffsetArray int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oScriptRunOutLen int, oScriptCodeRuns ScriptCodeRun) {
+func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iScriptRunBufLen int) (result int, iUnicodeStr uint16, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oScriptRunOutLen int, oScriptCodeRuns ScriptCodeRun) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromUnicodeToScriptCodeRun == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromUnicodeToScriptCodeRun, _lib, "ConvertFromUnicodeToScriptCodeRun")
@@ -569,16 +568,15 @@ func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLe
 	var _out3 int
 	var _out4 int
 	var _out5 int
-	var _out6 int
-	var _out7 ScriptCodeRun
-	_ret := _fnConvertFromUnicodeToScriptCodeRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), iOutputBufLen, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), oOutputStr, iScriptRunBufLen, unsafe.Pointer(&_out6), unsafe.Pointer(&_out7))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
+	var _out6 ScriptCodeRun
+	_ret := _fnConvertFromUnicodeToScriptCodeRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iOutputBufLen, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), oOutputStr, iScriptRunBufLen, unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
 }
 
 var _fnConvertFromUnicodeToText func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 
 // ConvertFromUnicodeToText calls the CarbonCore framework function ConvertFromUnicodeToText.
-func ConvertFromUnicodeToText(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOutputBufLen int, oOutputStr unsafe.Pointer) (result int, iUnicodeStr uint16, iOffsetArray int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int) {
+func ConvertFromUnicodeToText(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer) (result int, iUnicodeStr uint16, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromUnicodeToText == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromUnicodeToText, _lib, "ConvertFromUnicodeToText")
@@ -588,15 +586,14 @@ func ConvertFromUnicodeToText(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iC
 	var _out2 int
 	var _out3 int
 	var _out4 int
-	var _out5 int
-	_ret := _fnConvertFromUnicodeToText(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), iOutputBufLen, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), oOutputStr)
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	_ret := _fnConvertFromUnicodeToText(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iOutputBufLen, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), oOutputStr)
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnConvertFromUnicodeToTextRun func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int
 
 // ConvertFromUnicodeToTextRun calls the CarbonCore framework function ConvertFromUnicodeToTextRun.
-func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOutputBufLen int, oOutputStr unsafe.Pointer, iEncodingRunBufLen int) (result int, iUnicodeStr uint16, iOffsetArray int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oEncodingRunOutLen int, oEncodingRuns TextEncodingRun) {
+func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iEncodingRunBufLen int) (result int, iUnicodeStr uint16, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oEncodingRunOutLen int, oEncodingRuns TextEncodingRun) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromUnicodeToTextRun == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromUnicodeToTextRun, _lib, "ConvertFromUnicodeToTextRun")
@@ -607,10 +604,9 @@ func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int,
 	var _out3 int
 	var _out4 int
 	var _out5 int
-	var _out6 int
-	var _out7 TextEncodingRun
-	_ret := _fnConvertFromUnicodeToTextRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), iOutputBufLen, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), oOutputStr, iEncodingRunBufLen, unsafe.Pointer(&_out6), unsafe.Pointer(&_out7))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7
+	var _out6 TextEncodingRun
+	_ret := _fnConvertFromUnicodeToTextRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, unsafe.Pointer(&_out0), iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iOutputBufLen, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), oOutputStr, iEncodingRunBufLen, unsafe.Pointer(&_out5), unsafe.Pointer(&_out6))
+	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6
 }
 
 var _fnCopyCollection func(objc.ID, objc.ID) objc.ID
@@ -3879,6 +3875,17 @@ func PtrAndHand(ptr1 unsafe.Pointer, size int) (result int16, hand2 string) {
 	var _out0 string
 	_ret := _fnPtrAndHand(ptr1, unsafe.Pointer(&_out0), size)
 	return _ret, _out0
+}
+
+var _fnPtrToHand func(unsafe.Pointer, unsafe.Pointer, int) int16
+
+// PtrToHand calls the CarbonCore framework function PtrToHand.
+func PtrToHand(srcPtr unsafe.Pointer, dstHndl unsafe.Pointer, size int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPtrToHand == nil {
+		ebipurego.RegisterLibFunc(&_fnPtrToHand, _lib, "PtrToHand")
+	}
+	return _fnPtrToHand(srcPtr, dstHndl, size)
 }
 
 var _fnPtrToXHand func(unsafe.Pointer, unsafe.Pointer, int) int16

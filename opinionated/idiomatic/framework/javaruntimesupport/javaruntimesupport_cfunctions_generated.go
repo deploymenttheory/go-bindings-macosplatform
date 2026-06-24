@@ -50,14 +50,13 @@ func JRSFontAlignStyleForIntegerMeasurement(style uint32) uint32 {
 var _fnJRSFontCreateFallbackFontForCharacters func(objc.ID, unsafe.Pointer, int) objc.ID
 
 // JRSFontCreateFallbackFontForCharacters calls the JavaRuntimeSupport framework function JRSFontCreateFallbackFontForCharacters.
-func JRSFontCreateFallbackFontForCharacters(font obj.Object, length int) (result obj.Object, unichars uint16) {
+func JRSFontCreateFallbackFontForCharacters(font obj.Object, unichars unsafe.Pointer, length int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontCreateFallbackFontForCharacters == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontCreateFallbackFontForCharacters, _lib, "JRSFontCreateFallbackFontForCharacters")
 	}
-	var _out0 uint16
-	_ret := _fnJRSFontCreateFallbackFontForCharacters(objref.IDOf(font), unsafe.Pointer(&_out0), length)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnJRSFontCreateFallbackFontForCharacters(objref.IDOf(font), unichars, length)
+	return obj.Wrap(_ret)
 }
 
 var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
