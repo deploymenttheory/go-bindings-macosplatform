@@ -60,12 +60,6 @@ func (uswsm *URLSessionWebSocketMessage) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(uswsm), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (uswsm *URLSessionWebSocketMessage) String() string {
-	return rt.Description(objref.IDOf(uswsm))
-}
-
 // NewURLSessionWebSocketMessageWithData creates a new URLSessionWebSocketMessage.
 func NewURLSessionWebSocketMessageWithData(data *Data) *URLSessionWebSocketMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLSessionWebSocketMessage")), objc.RegisterName("alloc"))
@@ -102,4 +96,13 @@ func (uswsm *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
 func (uswsm *URLSessionWebSocketMessage) Data() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("data"))
 	return DataFromID(_r)
+}
+
+// String returns the string.
+func (uswsm *URLSessionWebSocketMessage) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }

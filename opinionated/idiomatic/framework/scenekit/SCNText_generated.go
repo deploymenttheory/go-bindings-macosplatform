@@ -181,6 +181,12 @@ func (t *Text) ExtrusionDepth() float64 {
 	return _r
 }
 
+// String returns the text to be represented. The text must be an instance of NSString or NSAttributedString. The default value is nil.
+func (t *Text) String() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
+	return obj.Wrap(_r)
+}
+
 // Font returns the font used to represent the text. The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
 func (t *Text) Font() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))

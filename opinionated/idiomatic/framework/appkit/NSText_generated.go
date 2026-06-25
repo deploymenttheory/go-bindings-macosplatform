@@ -627,6 +627,15 @@ func (t *Text) ToggleRuler(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
 }
 
+// String returns the string.
+func (t *Text) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 // IsEditable reports whether the object is editable.
 func (t *Text) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isEditable"))

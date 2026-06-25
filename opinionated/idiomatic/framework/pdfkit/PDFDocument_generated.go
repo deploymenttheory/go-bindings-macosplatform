@@ -63,12 +63,6 @@ func (d *Document) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (d *Document) String() string {
-	return rt.Description(objref.IDOf(d))
-}
-
 // NewDocument creates a new Document.
 func NewDocument() *Document {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("new"))
@@ -299,6 +293,15 @@ func (d *Document) AccessPermissions() AccessPermissions {
 func (d *Document) PermissionsStatus() DocumentPermissions {
 	_r := objc.Send[DocumentPermissions](objref.IDOf(d), objc.RegisterName("permissionsStatus"))
 	return _r
+}
+
+// String returns the string.
+func (d *Document) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // PageCount returns the page count.

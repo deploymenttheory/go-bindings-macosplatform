@@ -65,12 +65,6 @@ func (as *AttributedString) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (as *AttributedString) String() string {
-	return rt.Description(objref.IDOf(as))
-}
-
 // NewAttributedStringWithString creates a new AttributedString.
 func NewAttributedStringWithString(str string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
@@ -163,6 +157,15 @@ func (as *AttributedString) WithObservationInfo(observationInfo unsafe.Pointer) 
 func (as *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return as
+}
+
+// String returns the string.
+func (as *AttributedString) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // IsEqualToAttributedString returns a Boolean value that indicates whether the attributed string is equal to the specified string.

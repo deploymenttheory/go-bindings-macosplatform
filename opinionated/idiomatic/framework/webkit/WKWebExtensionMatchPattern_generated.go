@@ -61,12 +61,6 @@ func (wwemp *WKWebExtensionMatchPattern) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(wwemp), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (wwemp *WKWebExtensionMatchPattern) String() string {
-	return rt.Description(objref.IDOf(wwemp))
-}
-
 // NewWKWebExtensionMatchPatternWithStringError returns a pattern object for the specified pattern string.
 func NewWKWebExtensionMatchPatternWithStringError(string_ string) (result *WKWebExtensionMatchPattern, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
@@ -111,6 +105,15 @@ func (wwemp *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionM
 func (wwemp *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(wwemp), objc.RegisterName("matchesPattern:options:"), objref.IDOf(pattern), options)
 	return _r
+}
+
+// String returns the original pattern string.
+func (wwemp *WKWebExtensionMatchPattern) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwemp), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Scheme returns the scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.

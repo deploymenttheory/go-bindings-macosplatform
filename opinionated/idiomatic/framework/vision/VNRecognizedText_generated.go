@@ -64,12 +64,6 @@ func (rt_ *RecognizedText) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (rt_ *RecognizedText) String() string {
-	return rt.Description(objref.IDOf(rt_))
-}
-
 // NewRecognizedText creates a new RecognizedText.
 func NewRecognizedText() *RecognizedText {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNRecognizedText")), objc.RegisterName("new"))
@@ -84,6 +78,15 @@ func (rt_ *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return RectangleObservationFromID(_r), nil
+}
+
+// String returns field that contains recognized text. This is the top candidate of the recognized text.
+func (rt_ *RecognizedText) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Confidence returns the level of confidence normalized to [0.0, 1.0] where 1.0 is most confident

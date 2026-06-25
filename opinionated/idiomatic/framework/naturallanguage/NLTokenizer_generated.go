@@ -61,12 +61,6 @@ func (t *Tokenizer) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (t *Tokenizer) String() string {
-	return rt.Description(objref.IDOf(t))
-}
-
 // NewTokenizerWithUnit creates a tokenizer with the specified unit.
 func NewTokenizerWithUnit(unit TokenUnit) *Tokenizer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLTokenizer")), objc.RegisterName("alloc"))
@@ -107,4 +101,13 @@ func (t *Tokenizer) TokensForRange(range_ foundation.NSRange) []obj.Object {
 func (t *Tokenizer) Unit() TokenUnit {
 	_r := objc.Send[TokenUnit](objref.IDOf(t), objc.RegisterName("unit"))
 	return _r
+}
+
+// String returns the string.
+func (t *Tokenizer) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }

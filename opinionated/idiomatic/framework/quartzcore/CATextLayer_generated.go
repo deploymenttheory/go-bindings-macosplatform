@@ -409,6 +409,12 @@ func (tl *TextLayer) WithConstraints(items ...*Constraint) *TextLayer {
 	return tl
 }
 
+// String returns the string.
+func (tl *TextLayer) String() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("string"))
+	return obj.Wrap(_r)
+}
+
 // Font returns the font.
 func (tl *TextLayer) Font() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("font"))

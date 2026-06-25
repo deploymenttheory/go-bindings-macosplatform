@@ -60,16 +60,19 @@ func (cer *ContextualEmbeddingResult) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(cer), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (cer *ContextualEmbeddingResult) String() string {
-	return rt.Description(objref.IDOf(cer))
-}
-
 // NewContextualEmbeddingResult creates a new ContextualEmbeddingResult.
 func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbeddingResult")), objc.RegisterName("new"))
 	return contextualEmbeddingResultAdopt(_id)
+}
+
+// String returns a copy of the input string used to generate the embedding vectors.
+func (cer *ContextualEmbeddingResult) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cer), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Language returns the language that the framework identified or used when processing the input string.
