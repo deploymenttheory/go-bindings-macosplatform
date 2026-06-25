@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.12.0...v0.12.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* **codegen/externs:** emit ObjC class pointer externs as typed accessors ([#65](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/65)) ([8d83b9d](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/8d83b9d17f61e9b7b3d44198d32727a559bb99c0))
+
 ## [0.12.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.3...v0.12.0) (2026-06-25)
 
 
