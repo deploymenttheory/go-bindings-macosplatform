@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.3](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.2...v0.11.3) (2026-06-25)
+
+
+### Bug Fixes
+
+* **idiomatic-codegen:** The idiomatic codegen synthesizes an fmt/obj stringer String() (returning -description) for every framework-root class, and dropped any ([#61](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/61)) ([6f0d301](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/6f0d301f19a6a490826812af0c2930ce18b5aac1))
+
 ## [0.11.2](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.1...v0.11.2) (2026-06-24)
 
 
