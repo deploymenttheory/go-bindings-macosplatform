@@ -17,6 +17,12 @@ type ScanConfig struct {
 	// ExtraIncludeDirs lists additional directories (relative to the SDK root,
 	// slash-separated) whose headers count as belonging to this framework.
 	ExtraIncludeDirs []string `json:"extra_include_dirs,omitempty"`
+	// HeaderOverride is the SDK-relative slash-separated path to the entry
+	// header to pass to clang, for frameworks that do not ship a conventional
+	// <Framework>.framework/Headers/<Framework>.h umbrella (e.g. IOKit, which
+	// only exposes individual headers). When set it overrides the default
+	// umbrella path computed by FrameworkHeader.
+	HeaderOverride string `json:"header_override,omitempty"`
 }
 
 // defaultScanConfigs is the built-in per-framework scan configuration. The
