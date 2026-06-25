@@ -88,7 +88,7 @@ func (o *AVCaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
 	o.Ptr().Send(_aVCaptionRendererSelSetBounds, bounds)
 }
 
-// @method		captionPreviewForProfileID:extendedLanguageTag:renderSize: @abstract		Generate a caption preview attributed string for the specified profile ID. @discussion	Returns an attributed string containing a preview of captions rendered using the specified profile ID. @param			profileID The identifier of the accessibility profile to use for caption appearance. Profile IDs can be obtained from MACaptionAppearanceCopyProfileIDs(). This determines font, color, background, and other visual characteristics. @param			extendedLanguageTag The IETF BCP 47 (RFC 4646) language identifier that will be used to generate the localized caption preview text.  If nil, the system language will be used. @param			renderSize The size of the layer into which the captions will be rendered. This determines the layout and positioning of the caption text. @result		An NSAttributedString containing the caption preview. @discussion	It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread.
+// Generate a caption preview attributed string for the specified profile ID.
 func AVCaptionRendererCaptionPreviewForProfileIDExtendedLanguageTagRenderSize(profileID *foundation.NSString, extendedLanguageTag *foundation.NSString, renderSize corefoundation.CGSize) *foundation.NSAttributedString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsAVCaptionRenderer), _aVCaptionRendererSelCaptionPreviewForProfileIDExtendedLanguageTagRenderSize, profileID.Ptr(), extendedLanguageTag.Ptr(), renderSize)
 	if _ret != 0 {

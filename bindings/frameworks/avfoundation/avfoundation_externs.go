@@ -7,14 +7,22 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Posted when the collection of arrays of timed metadata groups representing chapters of an AVAsset change and when any of the contents of the timed metadata groups change, but only for changes that occur after the status of the value of @"availableChapterLocales" has reached AVKeyValueStatusLoaded.
-func AVAssetChapterMetadataGroupsDidChangeNotification() uintptr {
+func AVAssetChapterMetadataGroupsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetChapterMetadataGroupsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted after the value of @"containsFragments" has already been loaded and the AVFragmentedAsset is added to an AVFragmentedAssetMinder, either when 1) fragments are detected in the asset on disk after it had previously contained none or when 2) no fragments are detected in the asset on disk after it had previously contained one or more.
@@ -25,44 +33,86 @@ func AVAssetContainsFragmentsDidChangeNotification() uintptr {
 
 // The media selection for this download. The value for this key should be an AVMediaSelection. By default, media selections for AVAssetDownloadTask will be automatically selected.
 // Deprecated: Use AVAssetDownloadConfiguration:mediaSelections instead
-func AVAssetDownloadTaskMediaSelectionKey() uintptr {
+func AVAssetDownloadTaskMediaSelectionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskMediaSelectionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Download the specified media selections with or without support for multichannel playback. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer multichannel by downloading the most capable multichannel rendition available in additon to stereo.
 // Deprecated: Use AVAssetDownloadConfiguration:variantQualifiers with predicateForChannelCount instead
-func AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey() uintptr {
+func AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskMediaSelectionPrefersMultichannelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The lowest media bitrate greater than or equal to this value will be selected. Value should be a NSNumber in bps. If no suitable media bitrate is found, the highest media bitrate will be selected. The value for this key should be a NSNumber. By default, the highest media bitrate will be selected for download.
 // Deprecated: Use AVAssetDownloadConfiguration:variantQualifiers with assetVariantQualifierWithPredicate using desired comparison value against averageBitRate/peakBitRate instead
-func AVAssetDownloadTaskMinimumRequiredMediaBitrateKey() uintptr {
+func AVAssetDownloadTaskMinimumRequiredMediaBitrateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskMinimumRequiredMediaBitrateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The lowest media presentation size greater than or equal to this value will be selected. If no suitable media presentation size is found, the highest media presentation size will be selected. The value for this key should be a NSValue of CGSize. By default, the highest media presentation size will be selected for download.
 // Deprecated: Use AVAssetDownloadConfiguration:variantQualifiers with predicateForPresentationWidth and predicateForPresentationHeight instead
-func AVAssetDownloadTaskMinimumRequiredPresentationSizeKey() uintptr {
+func AVAssetDownloadTaskMinimumRequiredPresentationSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskMinimumRequiredPresentationSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Download the specified media selections with or without HDR content. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer HDR content.
 // Deprecated: Use AVAssetDownloadConfiguration:variantQualifiers with assetVariantQualifierWithPredicate using [NSPredicate predicateWithFormat:@'videoAttributes.videoRange == %@', AVVideoRangePQ]
-func AVAssetDownloadTaskPrefersHDRKey() uintptr {
+func AVAssetDownloadTaskPrefersHDRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskPrefersHDRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Download the specified media selections in lossless audio representation. The value for this key should be an NSNumber representing a BOOL. By default AVAssetDownloadTask will prefer lossy audio representation.
 // Deprecated: Use AVAssetDownloadConfiguration:variantQualifiers with assetVariantQualifierWithPredicate using [NSPredicate predicateWithFormat:@'%d in audioAttributes.formatIDs', kAudioFormatAppleLossless]
-func AVAssetDownloadTaskPrefersLosslessAudioKey() uintptr {
+func AVAssetDownloadTaskPrefersLosslessAudioKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDownloadTaskPrefersLosslessAudioKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Used to mark assets have the default priority. They will be the first to be purged.
@@ -71,7 +121,11 @@ func AVAssetDownloadedAssetEvictionPriorityDefault() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Used to mark assets with the highest priority. They will be the last to be purged.
@@ -80,13 +134,24 @@ func AVAssetDownloadedAssetEvictionPriorityImportant() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the duration of an AVFragmentedAsset changes while it's being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"duration" has reached AVKeyValueStatusLoaded.
-func AVAssetDurationDidChangeNotification() uintptr {
+func AVAssetDurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetDurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPreset1280x720() uintptr {
@@ -154,14 +219,28 @@ func AVAssetExportPresetAppleM4ViPod() uintptr {
 	return ptr
 }
 
-func AVAssetExportPresetAppleProRes422LPCM() uintptr {
+func AVAssetExportPresetAppleProRes422LPCM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleProRes422LPCM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetAppleProRes4444LPCM() uintptr {
+func AVAssetExportPresetAppleProRes4444LPCM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetAppleProRes4444LPCM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetHEVC1920x1080() uintptr {
@@ -184,14 +263,28 @@ func AVAssetExportPresetHEVC3840x2160WithAlpha() uintptr {
 	return ptr
 }
 
-func AVAssetExportPresetHEVC4320x2160() uintptr {
+func AVAssetExportPresetHEVC4320x2160() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC4320x2160")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetHEVC7680x4320() uintptr {
+func AVAssetExportPresetHEVC7680x4320() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetHEVC7680x4320")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetHEVCHighestQuality() uintptr {
@@ -219,14 +312,28 @@ func AVAssetExportPresetMVHEVC1440x1440() uintptr {
 	return ptr
 }
 
-func AVAssetExportPresetMVHEVC4320x4320() uintptr {
+func AVAssetExportPresetMVHEVC4320x4320() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetMVHEVC4320x4320")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAssetExportPresetMVHEVC7680x7680() uintptr {
+func AVAssetExportPresetMVHEVC7680x7680() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetExportPresetMVHEVC7680x7680")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAssetExportPresetMVHEVC960x960() uintptr {
@@ -273,9 +380,16 @@ func AVAssetImageGeneratorDynamicRangePolicyMatchSource() uintptr {
 }
 
 // Posted when the collection of media selection groups provided by an AVAsset changes and when any of the contents of its media selection groups change, but only for changes that occur after the status of the value of @"availableMediaCharacteristicsWithMediaSelectionOptions" has reached AVKeyValueStatusLoaded.
-func AVAssetMediaSelectionGroupsDidChangeNotification() uintptr {
+func AVAssetMediaSelectionGroupsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetMediaSelectionGroupsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether the asset is Apple Immersive Video. Clients may use this property to switch into specific display and control modes for Apple Immersive Video playback.
@@ -284,7 +398,11 @@ func AVAssetPlaybackConfigurationOptionAppleImmersiveVideo() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether the asset calls for the use of a non-rectilinear projection for rendering video. Clients may use this property to determine whether to configure a non-rectilinear projection when displaying video.
@@ -293,7 +411,11 @@ func AVAssetPlaybackConfigurationOptionNonRectilinearProjection() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether or not the asset can be rendered as spatial video. Clients may use this property to determine whether to configure spatial video rendering.
@@ -302,7 +424,11 @@ func AVAssetPlaybackConfigurationOptionSpatialVideo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether or not the asset can rendered as stereo video and is also in a multiview compression format. Clients may use this property to determine whether to configure stereo video rendering.
@@ -311,7 +437,11 @@ func AVAssetPlaybackConfigurationOptionStereoMultiviewVideo() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether or not the asset can be rendered as stereo video. Clients may use this property to determine whether to configure stereo video rendering.
@@ -320,32 +450,64 @@ func AVAssetPlaybackConfigurationOptionStereoVideo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey @abstract		Specifies whether the content key request should require a persistable key to be returned from the key vendor. Value should be a NSNumber created with +[NSNumber numberWithBool:].
 // Deprecated: Use -[AVPersistableContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:] instead
-func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() uintptr {
+func AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the array of segments of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"segments" has reached AVKeyValueStatusLoaded.
-func AVAssetTrackSegmentsDidChangeNotification() uintptr {
+func AVAssetTrackSegmentsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetTrackSegmentsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the timeRange of an AVFragmentedAssetTrack changes while the associated instance of AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only for changes that occur after the status of the value of @"timeRange" has reached AVKeyValueStatusLoaded.
-func AVAssetTrackTimeRangeDidChangeNotification() uintptr {
+func AVAssetTrackTimeRangeDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetTrackTimeRangeDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the collection of track associations of an AVAssetTrack changes, but only for changes that occur after the status of the value of @"availableTrackAssociationTypes" has reached AVKeyValueStatusLoaded.
-func AVAssetTrackTrackAssociationsDidChangeNotification() uintptr {
+func AVAssetTrackTrackAssociationsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVAssetTrackTrackAssociationsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the asset on disk is defragmented while an AVFragmentedAsset is being minded by an AVFragmentedAssetMinder, but only if the defragmentation occurs after the status of the value of @"canContainFragments" has reached AVKeyValueStatusLoaded. After this notification is posted, the value of the asset properties canContainFragments and containsFragments will both be NO.
@@ -377,7 +539,11 @@ func AVAudioTimePitchAlgorithmSpectral() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioTimePitchAlgorithmTimeDomain() *foundation.NSString {
@@ -385,7 +551,11 @@ func AVAudioTimePitchAlgorithmTimeDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioTimePitchAlgorithmVarispeed() *foundation.NSString {
@@ -393,7 +563,11 @@ func AVAudioTimePitchAlgorithmVarispeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      AVCaptionConversionAdjustmentTypeTimeRange @abstract      Indicates a timing adjustment.
@@ -402,7 +576,11 @@ func AVCaptionConversionAdjustmentTypeTimeRange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      AVCaptionConversionWarningTypeExcessMediaData @abstract      Indicates that one or more captions in the validator's captions array exceed the capacity for media data of the media type and subtype specified by the conversion settings.
@@ -411,7 +589,11 @@ func AVCaptionConversionWarningTypeExcessMediaData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVCaptionMediaSubTypeKey @abstract	Indicates the output media subtype of a caption conversion operation. For example, [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608]. @discussion Both numeric and string forms of media subtypes are accepted for caption conversions, so you could, for example, use @"c608" instead of [NSNumber numberWithInt:kCMClosedCaptionFormatType_CEA608].
@@ -420,7 +602,11 @@ func AVCaptionMediaSubTypeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVCaptionMediaTypeKey @abstract	Indicates the output media type of a caption conversion operation. For example, AVMediaTypeClosedCaption.
@@ -429,7 +615,11 @@ func AVCaptionMediaTypeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant   AVCaptionTimeCodeFrameDurationKey @abstract	Frame duration used for the time code. @discussion Some formats, such as TTML, use time code notation to indicate the timing of a caption. Use the property to specify the frame rate of the time code. For example, if the time code steps for every 1001 / 30000 seconds, the value should be CMTime(value: 1001, scale: 30000).
@@ -438,7 +628,11 @@ func AVCaptionTimeCodeFrameDurationKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVCaptionUseDropFrameTimeCodeKey @abstract	Indicates whether to use drop frame time code. @discussion Some formats, such as SCC, use time code notation to indicate the timing of a caption. Use the property to specify whether to use the drop frame time code or non-drop frame time code. When the value for this key is a NSNumber indicating the BOOL YES, the receiver will use the drop frame time code. When the value for this key is a NSNumber indicating the BOOL NO, the receiver will use the non-drop frame time code. The default is NO.
@@ -447,7 +641,11 @@ func AVCaptionUseDropFrameTimeCodeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVCaptureDeviceTypeBuiltInMicrophone A deprecated synonym for AVCaptureDeviceTypeMicrophone. Please use AVCaptureDeviceTypeMicrophone instead.
@@ -687,21 +885,42 @@ func AVCaptureSessionWasInterruptedNotification() uintptr {
 }
 
 // Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects.
-func AVContentKeyRequestProtocolVersionsKey() uintptr {
+func AVContentKeyRequestProtocolVersionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestProtocolVersionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Value is an NSData containing a 16-byte seed to randomize the user's deviceID contained in the SPC blob during FairPlay key exchange This property must be used in conjunction with AVContentKeyRequestShouldRandomizeDeviceIdentifierKey. Use a RND function to generate a 16 byte seed. This seed will be used to randomize the user's anonymized device ID if AVContentKeyRequestShouldRandomizeDeviceIdentifierKey is true. Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites.
-func AVContentKeyRequestRandomDeviceIdentifierSeedKey() uintptr {
+func AVContentKeyRequestRandomDeviceIdentifierSeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestRandomDeviceIdentifierSeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Request secure token to have extended validation data. The value for the key should be previously created offline key using -[AVContentKeyRequest persistableContentKeyFromKeyVendorResponse:options:error:].
-func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() uintptr {
+func AVContentKeyRequestRequiresValidationDataInSecureTokenKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestRequiresValidationDataInSecureTokenKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the content key request should be retried because an obsolete key response was set on the previous content key request.
@@ -710,7 +929,11 @@ func AVContentKeyRequestRetryReasonReceivedObsoleteContentKey() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the content key request should be retried because a key response with expired lease was set on the previous content key request.
@@ -719,7 +942,11 @@ func AVContentKeyRequestRetryReasonReceivedResponseWithExpiredLease() *foundatio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the content key request should be retried because the key response was not set soon enough either due the initial request/response was taking too long, or a lease was expiring in the meantime.
@@ -728,13 +955,24 @@ func AVContentKeyRequestRetryReasonTimedOut() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Value is an Boolean indicating whether the user's deviceID contained in the SPC blob during FairPlay key exchange should be randomized using a system generated seed Content providers use the SPC to distinguish the playback device from other devices, typically to enforce per-screen business rule limits. If the app developer, in cooperation with the content vendor, does not require to distinguish the playback device, they can further enhance user privacy by making this identifier non-constant, using this option. In either case, apps are not allowed to store or use the FairPlay anonymized device ID for anything other than to enforce business rule limits. App developers must use the AppTrackingTransparency framework to disclose to users if the application or the related FairPlay Key Server collect data about end users and share it with other companies for purposes of tracking across apps and web sites. When true, the system generates a random seed with which the device id will be randomized. To override the seed used; use this property in conjunction with AVContentKeyRequestRandomDeviceIdentifierSeedKey to provide a seed generated by your application.
-func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() uintptr {
+func AVContentKeyRequestShouldRandomizeDeviceIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVContentKeyRequestShouldRandomizeDeviceIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies the versions of the content protection protocol supported by the application; as an NSArray of one or more NSNumber objects. If this option is not set, an appropriate protocol version will be selected based on sideband information such as an associated HLS playlist. If such information is not available, a protocol version of 1 is assumed
@@ -743,7 +981,11 @@ func AVContentKeySessionServerPlaybackContextOptionProtocolVersions() *foundatio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
@@ -752,7 +994,11 @@ func AVContentKeySessionServerPlaybackContextOptionServerChallenge() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Used to specify a token that could be used to authorize playback of associated content key recipients.
@@ -761,7 +1007,11 @@ func AVContentKeySystemAuthorizationToken() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Used to specify clear key as the method of key delivery.
@@ -770,7 +1020,11 @@ func AVContentKeySystemClearKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Used to specify FairPlay Streaming (FPS) as the method of key delivery.
@@ -779,7 +1033,11 @@ func AVContentKeySystemFairPlayStreaming() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The participant's audio session was interrupted.
@@ -827,59 +1085,136 @@ func AVCoreAnimationBeginTimeAtZero() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func AVErrorDeviceKey() uintptr {
+func AVErrorDeviceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorDeviceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorDiscontinuityFlagsKey() uintptr {
+func AVErrorDiscontinuityFlagsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorDiscontinuityFlagsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorFileSizeKey() uintptr {
+func AVErrorFileSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorFileSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorFileTypeKey() uintptr {
+func AVErrorFileTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorFileTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorMediaSubTypeKey() uintptr {
+func AVErrorMediaSubTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorMediaSubTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorMediaTypeKey() uintptr {
+func AVErrorMediaTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorMediaTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorPIDKey() uintptr {
+func AVErrorPIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorPIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorPersistentTrackIDKey() uintptr {
+func AVErrorPersistentTrackIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorPersistentTrackIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorPresentationTimeStampKey() uintptr {
+func AVErrorPresentationTimeStampKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorPresentationTimeStampKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorRecordingSuccessfullyFinishedKey() uintptr {
+func AVErrorRecordingSuccessfullyFinishedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorRecordingSuccessfullyFinishedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVErrorTimeKey() uintptr {
+func AVErrorTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVErrorTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp". Files are identified with the .3gp, .3gpp, and .sdv extensions.
@@ -888,7 +1223,11 @@ func AVFileType3GPP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the 3GPP file format. The value of this UTI is @"public.3gpp2". Files are identified with the .3g2, .3gp2 extensions.
@@ -897,7 +1236,11 @@ func AVFileType3GPP2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the AC-3 audio file format. The value of this UTI is @"public.ac3-audio". Files are identified with the .ac3 extension.
@@ -906,7 +1249,11 @@ func AVFileTypeAC3() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Apple Haptics Audio Pattern file format. The value of this UTI is @"public.haptics-content". Files are identified with the .ahap extension.
@@ -915,7 +1262,11 @@ func AVFileTypeAHAP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the AIFC audio file format. The value of this UTI is @"public.aifc-audio". Files are identified with the .aifc and .cdda extensions.
@@ -924,7 +1275,11 @@ func AVFileTypeAIFC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the AIFF audio file format. The value of this UTI is @"public.aiff-audio". Files are identified with the .aif and .aiff extensions.
@@ -933,7 +1288,11 @@ func AVFileTypeAIFF() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the adaptive multi-rate audio file format. The value of this UTI is @"org.3gpp.adaptive-multi-rate-audio". Files are identified with the .amr extension.
@@ -942,7 +1301,11 @@ func AVFileTypeAMR() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the high efficiency image file format containing H.264 compressed images. The value of this UTI is @"public.avci". Files are identified with the .avci extension.
@@ -951,7 +1314,11 @@ func AVFileTypeAVCI() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The value of this UTI is @"com.apple.m4a-audio". Files are identified with the .m4a extension.
@@ -960,7 +1327,11 @@ func AVFileTypeAppleM4A() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The value of this UTI is @"com.apple.m4v-video". Files are identified with the .m4v extension.
@@ -969,7 +1340,11 @@ func AVFileTypeAppleM4V() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Apple iTT caption file format The value of this UTI is @"com.apple.itunes-timed-text". Files are identified with the .itt extension.
@@ -978,7 +1353,11 @@ func AVFileTypeAppleiTT() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the CoreAudio file format. The value of this UTI is @"com.apple.coreaudio-format". Files are identified with the .caf extension.
@@ -987,7 +1366,11 @@ func AVFileTypeCoreAudioFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Digital Imaging and Communications in Medicine (DICOM) file format. The value of this UTI is @"org.nema.dicom". Files are identified with the .dcm extension.
@@ -996,7 +1379,11 @@ func AVFileTypeDICOM() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Adobe digital negative file format. The value of this UTI is @"com.adobe.raw-image". Files are identified with the .dng extension.
@@ -1005,7 +1392,11 @@ func AVFileTypeDNG() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the enhanced AC-3 audio file format. The value of this UTI is @"public.enhanced-ac3-audio". Files are identified with the .eac3 extension.
@@ -1014,7 +1405,11 @@ func AVFileTypeEnhancedAC3() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the high efficiency image file format containing HEVC compressed images. The value of this UTI is @"public.heic". Files are identified with the .heic extension.
@@ -1023,7 +1418,11 @@ func AVFileTypeHEIC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the high efficiency image file format containing images compressed with any codec. The value of this UTI is @"public.heif". Files are identified with the .heif extension.
@@ -1032,7 +1431,11 @@ func AVFileTypeHEIF() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the JPEG (JFIF) format. The value of this UTI is @"public.jpeg". Files are identified with the .jpg or .jpeg extension.
@@ -1041,7 +1444,11 @@ func AVFileTypeJPEG() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the MPEG-4 file format. The value of this UTI is @"public.mpeg-4". Files are identified with the .mp4 extension.
@@ -1050,7 +1457,11 @@ func AVFileTypeMPEG4() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the MPEG layer 3 audio file format. The value of this UTI is @"public.mp3". Files are identified with the .mp3 extension.
@@ -1059,7 +1470,11 @@ func AVFileTypeMPEGLayer3() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Apple HTTP Live Streaming profile The profile that is suitable for Apple HTTP Live Streaming.
@@ -1068,7 +1483,11 @@ func AVFileTypeProfileMPEG4AppleHLS() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // CMAF compliant profile The profile that is compliance with CMAF format.
@@ -1077,7 +1496,11 @@ func AVFileTypeProfileMPEG4CMAFCompliant() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the QuickTime audio file format The value of this UTI is @"com.apple.quicktime-audio". Files are identified with the .qta extension.
@@ -1086,7 +1509,11 @@ func AVFileTypeQuickTimeAudio() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the QuickTime movie file format. The value of this UTI is @"com.apple.quicktime-movie". Files are identified with the .mov and .qt extensions.
@@ -1095,7 +1522,11 @@ func AVFileTypeQuickTimeMovie() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Scenarist closed caption file format The value of this UTI is @"com.scenarist.closed-caption". Files are identified with the .scc extension.
@@ -1104,7 +1535,11 @@ func AVFileTypeSCC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the Sun/NeXT audio file format. The value of this UTI is @"public.au-audio". Files are identified with the .au and .snd extensions.
@@ -1113,7 +1548,11 @@ func AVFileTypeSunAU() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the tagged image file format. The value of this UTI is @"public.tiff". Files are identified with the .tiff or .tif extension.
@@ -1122,7 +1561,11 @@ func AVFileTypeTIFF() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for the WAVE audio file format. The value of this UTI is @"com.microsoft.waveform-audio". Files are identified with the .wav, .wave, and .bwf extensions.
@@ -1131,7 +1574,11 @@ func AVFileTypeWAVE() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVFoundationErrorDomain() *foundation.NSString {
@@ -1139,7 +1586,11 @@ func AVFoundationErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant       AVFragmentedMovieContainsMovieFragmentsDidChangeNotification @abstract       Posted after the value of @"containsMovieFragments" has already been loaded and the AVFragmentedMovie is added to an AVFragmentedMovieMinder, either when 1) movie fragments are detected in the movie file on disk after it had previously contained none or when 2) no movie fragments are detected in the movie file on disk after it had previously contained one or more.
@@ -1185,7 +1636,11 @@ func AVLayerVideoGravityResize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVLayerVideoGravityResizeAspect @abstract		Preserve aspect ratio; fit within layer bounds. @discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
@@ -1194,7 +1649,11 @@ func AVLayerVideoGravityResizeAspect() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVLayerVideoGravityResizeAspectFill @abstract		Preserve aspect ratio; fill layer bounds. @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
@@ -1203,7 +1662,11 @@ func AVLayerVideoGravityResizeAspectFill() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes audible content. AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1212,7 +1675,11 @@ func AVMediaCharacteristicAudible() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that the stereoscopic video track carries additional information related to the stereoscopic video. This is not an indication that the encoded video carries stereoscopic views. It instead indicates that it carries additional information that may influence the interpretation of those views and contribute to a better experience. The value of this characteristic is @“com.apple.quicktime.video.stereo-metadata". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
@@ -1221,7 +1688,11 @@ func AVMediaCharacteristicCarriesVideoStereoMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track contains an alpha channel. To determine whether alpha is straight or pre-multiplied, look for the format description extension with key kCMFormatDescriptionExtension_AlphaChannelMode.
@@ -1230,7 +1701,11 @@ func AVMediaCharacteristicContainsAlphaChannel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track contains HDR video. HDR video contains extended dynamic range that requires explicit support when compositing. The value of this characteristic is @“public.contains-hdr-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
@@ -1239,7 +1714,11 @@ func AVMediaCharacteristicContainsHDRVideo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option presents only forced subtitles. Media options with forced-only subtitles are typically selected when 1) the user has not selected a legible option with an accessibility characteristic or an auxiliary purpose and 2) its locale matches the locale of the selected audible media selection option. The value of this characteristic is @"public.subtitles.forced-only". Note for content authors: the presence of this characteristic for a legible media option may be inferred from the format description of the associated track that presents the subtitle media, if the format description carries sufficient information to indicate the presence or absence of forced and non-forced subtitles. If the format description does not carry this information, the legible media option can be explicitly tagged with the characteristic. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1248,7 +1727,11 @@ func AVMediaCharacteristicContainsOnlyForcedSubtitles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track contains stereoscopic video captured in a multiview compression format. Stereoscopic video contains two views with one view for the left eye and one view for the right eye. Multiview video contains more than one view (not necessarily stereoscopic) in the same compressed video sample. The combination of stereoscopic and multiview indicates that multiview carriage is used to carry at least two stereoscopic views. It does not imply that there might not be more than two views. Access to the two stereo views may require opt-in to retrieve both views. Accessing only one of the left or right stereoscopic views as a fallback for playback or compositing where stereoscopic rendering is not supported may itself not be supported. The value of this characteristic is @“public.contains-stereo-multiview-video". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
@@ -1257,7 +1740,11 @@ func AVMediaCharacteristicContainsStereoMultiviewVideo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - describes music and - describes sound other than spoken dialog, such as sound effects and significant silences, occurring in program audio. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicTranscribesSpokenDialogForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track without music and without sound other than spoken dialog -- lacking even significant silences -- can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.describes-music-and-sound". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesMusicAndSoundForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1266,7 +1753,11 @@ func AVMediaCharacteristicDescribesMusicAndSoundForAccessibility() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option provides descriptions of the visual portion of the presentation that are sufficient to comprehend essential information that it depicts, such as action and setting. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.accessibility.describes-video". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDescribesVideoForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1275,7 +1766,11 @@ func AVMediaCharacteristicDescribesVideoForAccessibility() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, created by substituting most or all of the dialog in a previous mix of audio content with dialog spoken in its designated language. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.dubbed". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
@@ -1284,7 +1779,11 @@ func AVMediaCharacteristicDubbedTranslation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option provides legible content in the language of its specified locale that has been edited for ease of reading. The value of this characteristic is @"public.easy-to-read". Closed caption tracks that carry "easy reader" captions (per the CEA-608 specification) should be tagged with this characteristic. Subtitle tracks can also be tagged with this characteristic, where appropriate. Note for content authors: for QuickTime movie and .m4v files a track is considered to have the characteristic AVMediaCharacteristicEasyToRead only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1293,7 +1792,11 @@ func AVMediaCharacteristicEasyToRead() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes audio that has been prepared or otherwise processed to heighten the intelligibility of speech. The value of this characteristic is @"public.accessibility.enhances-speech-intelligibility". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicEnhancesSpeechIntelligibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1302,7 +1805,11 @@ func AVMediaCharacteristicEnhancesSpeechIntelligibility() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's frame-based. Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1311,7 +1818,11 @@ func AVMediaCharacteristicFrameBased() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates the video track carries information related to the horizontal field of view. This media characteristic is currently synthesized if the CMVideoFormatDescription includes a kCMFormatDescriptionExtension_HorizontalFieldOfView extension. This is not an indication that the field of view is expanded beyond or more narrow than typical horizontal fields of view. The value of this characteristic is @“public.indicates-horizontal-field-of-view". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
@@ -1320,7 +1831,11 @@ func AVMediaCharacteristicIndicatesHorizontalFieldOfView() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates the video track carries information related to how it should be projected for display. This media characteristic is currently synthesized if the CMVideoFormatDescription specifies a non-rectilinear projection. To determine which kind of projection is indicated, look for the format description extension with key kCMFormatDescriptionExtension_ProjectionKind. The value of this characteristic is @“public.indicates-non-rectilinear-projection". Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
@@ -1329,7 +1844,11 @@ func AVMediaCharacteristicIndicatesNonRectilinearProjection() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as auxiliary to the presentation of the asset. The value of this characteristic is @"public.auxiliary-content". Example: an option that presents audio media containing commentary on the presentation would typically have this characteristic. Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicIsAuxiliaryContent if it's explicitly tagged with that characteristic or if, as a member of an alternate track group, its associated track is excluded from autoselection. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1338,7 +1857,11 @@ func AVMediaCharacteristicIsAuxiliaryContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as intrinsic to the presentation of the asset. Example: an option that presents the main program audio for the presentation, regardless of locale, would typically have this characteristic. The value of this characteristic is @"public.main-program-content". Note for content authors: the presence of this characteristic for a media option is inferred; any option that does not have the characteristic AVMediaCharacteristicIsAuxiliaryContent is considered to have the characteristic AVMediaCharacteristicIsMainProgramContent. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1347,7 +1870,11 @@ func AVMediaCharacteristicIsMainProgramContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes content that's marked by the content author as original to the principal production of the media, as opposed to supplementary or derivative content created by means of language translation or by other means. The value of this characteristic is @"public.original-content". Example: an option that presents audio media with dialog in the principal language of the production may be tagged with this characteristic; audio media containing dialog dubbed in a language other than the principal language of the production typically would not be tagged with this characteristic. Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1356,7 +1883,11 @@ func AVMediaCharacteristicIsOriginalContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language or dialect translation of originally or previously produced content, intended to be used as a substitute for that content by users who prefer its designated language. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
@@ -1365,7 +1896,11 @@ func AVMediaCharacteristicLanguageTranslation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content. AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1374,7 +1909,11 @@ func AVMediaCharacteristicLegible() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track was generated in an automated fashion by a machine. This media characteristic can be used to distinguish machine generated content from human authored content. The value of this characteristic is @“public.machine-generated". Note for content authors: for QuickTime movie and .m4v files and for HTTP Live Streaming, a media option is considered to have the characteristic AVMediaCharacteristicIsOriginalContent only if it's explicitly tagged with the characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1383,7 +1922,11 @@ func AVMediaCharacteristicMachineGenerated() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes haptic content that's marked by the content author as providing minimal tactile stimulation. Example: an option that presents low strength haptics feedback when user is actively attending the device, would typically have this characteristic. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.haptics.minimal". Note for content authors: for QuickTime movie and MPEG-4 files a track is considered to have the characteristic AVMediaCharacteristicTactileMinimal only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
@@ -1392,7 +1935,11 @@ func AVMediaCharacteristicTactileMinimal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes legible content in the language of its specified locale that: - transcribes spoken dialog and - identifies speakers whenever other visual cues are insufficient for a viewer to determine who is speaking. Legible tracks provided for accessibility purposes are typically tagged both with this characteristic as well as with AVMediaCharacteristicDescribesMusicAndSoundForAccessibility. A legible track provided for accessibility purposes that's associated with an audio track that has no spoken dialog can be tagged with this characteristic, because it trivially meets these requirements. The value of this characteristic is @"public.accessibility.transcribes-spoken-dialog". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicTranscribesSpokenDialogForAccessibility only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1401,7 +1948,11 @@ func AVMediaCharacteristicTranscribesSpokenDialogForAccessibility() *foundation.
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track uses a wide gamut color space and therefore may make use of colors that cannot be accurately represented otherwise. A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
@@ -1410,7 +1961,11 @@ func AVMediaCharacteristicUsesWideGamutColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option includes visual content. AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual. Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
@@ -1419,7 +1974,11 @@ func AVMediaCharacteristicVisual() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A media characteristic that indicates that a track or media selection option contains a language translation of originally or previously produced content, created by adding, in its designated language, a verbal interpretation of dialog and translations of other important information to a new mix of the audio content. Tracks to which this characteristic is assigned should typically also be assigned the characteristic AVMediaCharacteristicLanguageTranslation. See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:]. The value of this characteristic is @"public.translation.voice-over". Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic. See the discussion of the tagging of tracks with media characteristics below.
@@ -1428,7 +1987,11 @@ func AVMediaCharacteristicVoiceOverTranslation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeAudio() *foundation.NSString {
@@ -1436,7 +1999,11 @@ func AVMediaTypeAudio() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // This media type is used only to identify the track type. An Auxiliary Picture track is not intended to be displayed; as such, the track_in_movie flag in TrackHeaderBox of these tracks will be 0. A track with this media type contain video samples the media type of the format description of which is AVMediaTypeVideo.
@@ -1445,7 +2012,11 @@ func AVMediaTypeAuxiliaryPicture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeClosedCaption() *foundation.NSString {
@@ -1453,7 +2024,11 @@ func AVMediaTypeClosedCaption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeDepthData() *foundation.NSString {
@@ -1461,7 +2036,11 @@ func AVMediaTypeDepthData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeHaptic() *foundation.NSString {
@@ -1469,7 +2048,11 @@ func AVMediaTypeHaptic() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeMetadata() *foundation.NSString {
@@ -1477,7 +2060,11 @@ func AVMediaTypeMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeMuxed() *foundation.NSString {
@@ -1485,7 +2072,11 @@ func AVMediaTypeMuxed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeSubtitle() *foundation.NSString {
@@ -1493,7 +2084,11 @@ func AVMediaTypeSubtitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeText() *foundation.NSString {
@@ -1501,7 +2096,11 @@ func AVMediaTypeText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeTimecode() *foundation.NSString {
@@ -1509,7 +2108,11 @@ func AVMediaTypeTimecode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMediaTypeVideo() *foundation.NSString {
@@ -1517,7 +2120,11 @@ func AVMediaTypeVideo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyAlbumAndTrack() *foundation.NSString {
@@ -1525,7 +2132,11 @@ func AVMetadata3GPUserDataKeyAlbumAndTrack() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyAuthor() *foundation.NSString {
@@ -1533,7 +2144,11 @@ func AVMetadata3GPUserDataKeyAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyCollection() *foundation.NSString {
@@ -1541,7 +2156,11 @@ func AVMetadata3GPUserDataKeyCollection() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyCopyright() *foundation.NSString {
@@ -1549,7 +2168,11 @@ func AVMetadata3GPUserDataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyDescription() *foundation.NSString {
@@ -1557,7 +2180,11 @@ func AVMetadata3GPUserDataKeyDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyGenre() *foundation.NSString {
@@ -1565,7 +2192,11 @@ func AVMetadata3GPUserDataKeyGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyKeywordList() *foundation.NSString {
@@ -1573,7 +2204,11 @@ func AVMetadata3GPUserDataKeyKeywordList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyLocation() *foundation.NSString {
@@ -1581,7 +2216,11 @@ func AVMetadata3GPUserDataKeyLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyMediaClassification() *foundation.NSString {
@@ -1589,7 +2228,11 @@ func AVMetadata3GPUserDataKeyMediaClassification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyMediaRating() *foundation.NSString {
@@ -1597,7 +2240,11 @@ func AVMetadata3GPUserDataKeyMediaRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyPerformer() *foundation.NSString {
@@ -1605,7 +2252,11 @@ func AVMetadata3GPUserDataKeyPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyRecordingYear() *foundation.NSString {
@@ -1613,7 +2264,11 @@ func AVMetadata3GPUserDataKeyRecordingYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyThumbnail() *foundation.NSString {
@@ -1621,7 +2276,11 @@ func AVMetadata3GPUserDataKeyThumbnail() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyTitle() *foundation.NSString {
@@ -1629,7 +2288,11 @@ func AVMetadata3GPUserDataKeyTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadata3GPUserDataKeyUserRating() *foundation.NSString {
@@ -1637,7 +2300,11 @@ func AVMetadata3GPUserDataKeyUserRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierAccessibilityDescription() *foundation.NSString {
@@ -1645,7 +2312,11 @@ func AVMetadataCommonIdentifierAccessibilityDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierAlbumName() *foundation.NSString {
@@ -1653,7 +2324,11 @@ func AVMetadataCommonIdentifierAlbumName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierArtist() *foundation.NSString {
@@ -1661,7 +2336,11 @@ func AVMetadataCommonIdentifierArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierArtwork() *foundation.NSString {
@@ -1669,7 +2348,11 @@ func AVMetadataCommonIdentifierArtwork() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierAssetIdentifier() *foundation.NSString {
@@ -1677,7 +2360,11 @@ func AVMetadataCommonIdentifierAssetIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierAuthor() *foundation.NSString {
@@ -1685,7 +2372,11 @@ func AVMetadataCommonIdentifierAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierContributor() *foundation.NSString {
@@ -1693,7 +2384,11 @@ func AVMetadataCommonIdentifierContributor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierCopyrights() *foundation.NSString {
@@ -1701,7 +2396,11 @@ func AVMetadataCommonIdentifierCopyrights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierCreationDate() *foundation.NSString {
@@ -1709,7 +2408,11 @@ func AVMetadataCommonIdentifierCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierCreator() *foundation.NSString {
@@ -1717,7 +2420,11 @@ func AVMetadataCommonIdentifierCreator() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierDescription() *foundation.NSString {
@@ -1725,7 +2432,11 @@ func AVMetadataCommonIdentifierDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierFormat() *foundation.NSString {
@@ -1733,7 +2444,11 @@ func AVMetadataCommonIdentifierFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierLanguage() *foundation.NSString {
@@ -1741,7 +2456,11 @@ func AVMetadataCommonIdentifierLanguage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierLastModifiedDate() *foundation.NSString {
@@ -1749,7 +2468,11 @@ func AVMetadataCommonIdentifierLastModifiedDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierLocation() *foundation.NSString {
@@ -1757,7 +2480,11 @@ func AVMetadataCommonIdentifierLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierMake() *foundation.NSString {
@@ -1765,7 +2492,11 @@ func AVMetadataCommonIdentifierMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierModel() *foundation.NSString {
@@ -1773,7 +2504,11 @@ func AVMetadataCommonIdentifierModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierPublisher() *foundation.NSString {
@@ -1781,7 +2516,11 @@ func AVMetadataCommonIdentifierPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierRelation() *foundation.NSString {
@@ -1789,7 +2528,11 @@ func AVMetadataCommonIdentifierRelation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierSoftware() *foundation.NSString {
@@ -1797,7 +2540,11 @@ func AVMetadataCommonIdentifierSoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierSource() *foundation.NSString {
@@ -1805,7 +2552,11 @@ func AVMetadataCommonIdentifierSource() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierSubject() *foundation.NSString {
@@ -1813,7 +2564,11 @@ func AVMetadataCommonIdentifierSubject() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierTitle() *foundation.NSString {
@@ -1821,7 +2576,11 @@ func AVMetadataCommonIdentifierTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonIdentifierType() *foundation.NSString {
@@ -1829,7 +2588,11 @@ func AVMetadataCommonIdentifierType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyAccessibilityDescription() *foundation.NSString {
@@ -1837,7 +2600,11 @@ func AVMetadataCommonKeyAccessibilityDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyAlbumName() *foundation.NSString {
@@ -1845,7 +2612,11 @@ func AVMetadataCommonKeyAlbumName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyArtist() *foundation.NSString {
@@ -1853,7 +2624,11 @@ func AVMetadataCommonKeyArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyArtwork() *foundation.NSString {
@@ -1861,7 +2636,11 @@ func AVMetadataCommonKeyArtwork() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyAuthor() *foundation.NSString {
@@ -1869,7 +2648,11 @@ func AVMetadataCommonKeyAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyContributor() *foundation.NSString {
@@ -1877,7 +2660,11 @@ func AVMetadataCommonKeyContributor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyCopyrights() *foundation.NSString {
@@ -1885,7 +2672,11 @@ func AVMetadataCommonKeyCopyrights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyCreationDate() *foundation.NSString {
@@ -1893,7 +2684,11 @@ func AVMetadataCommonKeyCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyCreator() *foundation.NSString {
@@ -1901,7 +2696,11 @@ func AVMetadataCommonKeyCreator() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyDescription() *foundation.NSString {
@@ -1909,7 +2708,11 @@ func AVMetadataCommonKeyDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyFormat() *foundation.NSString {
@@ -1917,7 +2720,11 @@ func AVMetadataCommonKeyFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyIdentifier() *foundation.NSString {
@@ -1925,7 +2732,11 @@ func AVMetadataCommonKeyIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyLanguage() *foundation.NSString {
@@ -1933,7 +2744,11 @@ func AVMetadataCommonKeyLanguage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyLastModifiedDate() *foundation.NSString {
@@ -1941,7 +2756,11 @@ func AVMetadataCommonKeyLastModifiedDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyLocation() *foundation.NSString {
@@ -1949,7 +2768,11 @@ func AVMetadataCommonKeyLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyMake() *foundation.NSString {
@@ -1957,7 +2780,11 @@ func AVMetadataCommonKeyMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyModel() *foundation.NSString {
@@ -1965,7 +2792,11 @@ func AVMetadataCommonKeyModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyPublisher() *foundation.NSString {
@@ -1973,7 +2804,11 @@ func AVMetadataCommonKeyPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyRelation() *foundation.NSString {
@@ -1981,7 +2816,11 @@ func AVMetadataCommonKeyRelation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeySoftware() *foundation.NSString {
@@ -1989,7 +2828,11 @@ func AVMetadataCommonKeySoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeySource() *foundation.NSString {
@@ -1997,7 +2840,11 @@ func AVMetadataCommonKeySource() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeySubject() *foundation.NSString {
@@ -2005,7 +2852,11 @@ func AVMetadataCommonKeySubject() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyTitle() *foundation.NSString {
@@ -2013,7 +2864,11 @@ func AVMetadataCommonKeyTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataCommonKeyType() *foundation.NSString {
@@ -2021,7 +2876,11 @@ func AVMetadataCommonKeyType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
@@ -2030,7 +2889,11 @@ func AVMetadataExtraAttributeBaseURIKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // More information about the item; specific to the item keySpace & key. For example, this key is used with the following ID3 tags: TXXX, WXXX, APIC, GEOB: carries the Description PRIV: carries the Owner Identifier
@@ -2039,7 +2902,11 @@ func AVMetadataExtraAttributeInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
@@ -2048,7 +2915,11 @@ func AVMetadataExtraAttributeValueURIKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // HTTP Live Streaming metadata
@@ -2057,7 +2928,11 @@ func AVMetadataFormatHLSMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataFormatID3Metadata() *foundation.NSString {
@@ -2065,7 +2940,11 @@ func AVMetadataFormatID3Metadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataFormatISOUserData() *foundation.NSString {
@@ -2073,7 +2952,11 @@ func AVMetadataFormatISOUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataFormatQuickTimeMetadata() *foundation.NSString {
@@ -2081,7 +2964,11 @@ func AVMetadataFormatQuickTimeMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataFormatQuickTimeUserData() *foundation.NSString {
@@ -2089,7 +2976,11 @@ func AVMetadataFormatQuickTimeUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
@@ -2098,7 +2989,11 @@ func AVMetadataFormatUnknown() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataFormatiTunesMetadata() *foundation.NSString {
@@ -2106,7 +3001,11 @@ func AVMetadataFormatiTunesMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyAlbumSortOrder() *foundation.NSString {
@@ -2114,7 +3013,11 @@ func AVMetadataID3MetadataKeyAlbumSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyAlbumTitle() *foundation.NSString {
@@ -2122,7 +3025,11 @@ func AVMetadataID3MetadataKeyAlbumTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyAttachedPicture() *foundation.NSString {
@@ -2130,7 +3037,11 @@ func AVMetadataID3MetadataKeyAttachedPicture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyAudioEncryption() *foundation.NSString {
@@ -2138,7 +3049,11 @@ func AVMetadataID3MetadataKeyAudioEncryption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyAudioSeekPointIndex() *foundation.NSString {
@@ -2146,7 +3061,11 @@ func AVMetadataID3MetadataKeyAudioSeekPointIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyBand() *foundation.NSString {
@@ -2154,7 +3073,11 @@ func AVMetadataID3MetadataKeyBand() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyBeatsPerMinute() *foundation.NSString {
@@ -2162,7 +3085,11 @@ func AVMetadataID3MetadataKeyBeatsPerMinute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyComments() *foundation.NSString {
@@ -2170,7 +3097,11 @@ func AVMetadataID3MetadataKeyComments() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyCommercial() *foundation.NSString {
@@ -2178,7 +3109,11 @@ func AVMetadataID3MetadataKeyCommercial() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyCommercialInformation() *foundation.NSString {
@@ -2186,7 +3121,11 @@ func AVMetadataID3MetadataKeyCommercialInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.11.
@@ -2195,7 +3134,11 @@ func AVMetadataID3MetadataKeyCommerical() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyComposer() *foundation.NSString {
@@ -2203,7 +3146,11 @@ func AVMetadataID3MetadataKeyComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyConductor() *foundation.NSString {
@@ -2211,7 +3158,11 @@ func AVMetadataID3MetadataKeyConductor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyContentGroupDescription() *foundation.NSString {
@@ -2219,7 +3170,11 @@ func AVMetadataID3MetadataKeyContentGroupDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyContentType() *foundation.NSString {
@@ -2227,7 +3182,11 @@ func AVMetadataID3MetadataKeyContentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyCopyright() *foundation.NSString {
@@ -2235,7 +3194,11 @@ func AVMetadataID3MetadataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyCopyrightInformation() *foundation.NSString {
@@ -2243,7 +3206,11 @@ func AVMetadataID3MetadataKeyCopyrightInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyDate() *foundation.NSString {
@@ -2251,7 +3218,11 @@ func AVMetadataID3MetadataKeyDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEncodedBy() *foundation.NSString {
@@ -2259,7 +3230,11 @@ func AVMetadataID3MetadataKeyEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEncodedWith() *foundation.NSString {
@@ -2267,7 +3242,11 @@ func AVMetadataID3MetadataKeyEncodedWith() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEncodingTime() *foundation.NSString {
@@ -2275,7 +3254,11 @@ func AVMetadataID3MetadataKeyEncodingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEncryption() *foundation.NSString {
@@ -2283,7 +3266,11 @@ func AVMetadataID3MetadataKeyEncryption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEqualization() *foundation.NSString {
@@ -2291,7 +3278,11 @@ func AVMetadataID3MetadataKeyEqualization() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEqualization2() *foundation.NSString {
@@ -2299,7 +3290,11 @@ func AVMetadataID3MetadataKeyEqualization2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyEventTimingCodes() *foundation.NSString {
@@ -2307,7 +3302,11 @@ func AVMetadataID3MetadataKeyEventTimingCodes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyFileOwner() *foundation.NSString {
@@ -2315,7 +3314,11 @@ func AVMetadataID3MetadataKeyFileOwner() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyFileType() *foundation.NSString {
@@ -2323,7 +3326,11 @@ func AVMetadataID3MetadataKeyFileType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyGeneralEncapsulatedObject() *foundation.NSString {
@@ -2331,7 +3338,11 @@ func AVMetadataID3MetadataKeyGeneralEncapsulatedObject() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyGroupIdentifier() *foundation.NSString {
@@ -2339,7 +3350,11 @@ func AVMetadataID3MetadataKeyGroupIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInitialKey() *foundation.NSString {
@@ -2347,7 +3362,11 @@ func AVMetadataID3MetadataKeyInitialKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInternationalStandardRecordingCode() *foundation.NSString {
@@ -2355,7 +3374,11 @@ func AVMetadataID3MetadataKeyInternationalStandardRecordingCode() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInternetRadioStationName() *foundation.NSString {
@@ -2363,7 +3386,11 @@ func AVMetadataID3MetadataKeyInternetRadioStationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInternetRadioStationOwner() *foundation.NSString {
@@ -2371,7 +3398,11 @@ func AVMetadataID3MetadataKeyInternetRadioStationOwner() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInvolvedPeopleList_v23() *foundation.NSString {
@@ -2379,7 +3410,11 @@ func AVMetadataID3MetadataKeyInvolvedPeopleList_v23() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyInvolvedPeopleList_v24() *foundation.NSString {
@@ -2387,7 +3422,11 @@ func AVMetadataID3MetadataKeyInvolvedPeopleList_v24() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyLanguage() *foundation.NSString {
@@ -2395,7 +3434,11 @@ func AVMetadataID3MetadataKeyLanguage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyLeadPerformer() *foundation.NSString {
@@ -2403,7 +3446,11 @@ func AVMetadataID3MetadataKeyLeadPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyLength() *foundation.NSString {
@@ -2411,7 +3458,11 @@ func AVMetadataID3MetadataKeyLength() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyLink() *foundation.NSString {
@@ -2419,7 +3470,11 @@ func AVMetadataID3MetadataKeyLink() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyLyricist() *foundation.NSString {
@@ -2427,7 +3482,11 @@ func AVMetadataID3MetadataKeyLyricist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyMPEGLocationLookupTable() *foundation.NSString {
@@ -2435,7 +3494,11 @@ func AVMetadataID3MetadataKeyMPEGLocationLookupTable() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyMediaType() *foundation.NSString {
@@ -2443,7 +3506,11 @@ func AVMetadataID3MetadataKeyMediaType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyModifiedBy() *foundation.NSString {
@@ -2451,7 +3518,11 @@ func AVMetadataID3MetadataKeyModifiedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyMood() *foundation.NSString {
@@ -2459,7 +3530,11 @@ func AVMetadataID3MetadataKeyMood() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyMusicCDIdentifier() *foundation.NSString {
@@ -2467,7 +3542,11 @@ func AVMetadataID3MetadataKeyMusicCDIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyMusicianCreditsList() *foundation.NSString {
@@ -2475,7 +3554,11 @@ func AVMetadataID3MetadataKeyMusicianCreditsList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOfficialArtistWebpage() *foundation.NSString {
@@ -2483,7 +3566,11 @@ func AVMetadataID3MetadataKeyOfficialArtistWebpage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOfficialAudioFileWebpage() *foundation.NSString {
@@ -2491,7 +3578,11 @@ func AVMetadataID3MetadataKeyOfficialAudioFileWebpage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOfficialAudioSourceWebpage() *foundation.NSString {
@@ -2499,7 +3590,11 @@ func AVMetadataID3MetadataKeyOfficialAudioSourceWebpage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage() *foundation.NSString {
@@ -2507,7 +3602,11 @@ func AVMetadataID3MetadataKeyOfficialInternetRadioStationHomepage() *foundation.
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOfficialPublisherWebpage() *foundation.NSString {
@@ -2515,7 +3614,11 @@ func AVMetadataID3MetadataKeyOfficialPublisherWebpage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalAlbumTitle() *foundation.NSString {
@@ -2523,7 +3626,11 @@ func AVMetadataID3MetadataKeyOriginalAlbumTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalArtist() *foundation.NSString {
@@ -2531,7 +3638,11 @@ func AVMetadataID3MetadataKeyOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalFilename() *foundation.NSString {
@@ -2539,7 +3650,11 @@ func AVMetadataID3MetadataKeyOriginalFilename() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalLyricist() *foundation.NSString {
@@ -2547,7 +3662,11 @@ func AVMetadataID3MetadataKeyOriginalLyricist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalReleaseTime() *foundation.NSString {
@@ -2555,7 +3674,11 @@ func AVMetadataID3MetadataKeyOriginalReleaseTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOriginalReleaseYear() *foundation.NSString {
@@ -2563,7 +3686,11 @@ func AVMetadataID3MetadataKeyOriginalReleaseYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyOwnership() *foundation.NSString {
@@ -2571,7 +3698,11 @@ func AVMetadataID3MetadataKeyOwnership() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPartOfASet() *foundation.NSString {
@@ -2579,7 +3710,11 @@ func AVMetadataID3MetadataKeyPartOfASet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPayment() *foundation.NSString {
@@ -2587,7 +3722,11 @@ func AVMetadataID3MetadataKeyPayment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPerformerSortOrder() *foundation.NSString {
@@ -2595,7 +3734,11 @@ func AVMetadataID3MetadataKeyPerformerSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPlayCounter() *foundation.NSString {
@@ -2603,7 +3746,11 @@ func AVMetadataID3MetadataKeyPlayCounter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPlaylistDelay() *foundation.NSString {
@@ -2611,7 +3758,11 @@ func AVMetadataID3MetadataKeyPlaylistDelay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPopularimeter() *foundation.NSString {
@@ -2619,7 +3770,11 @@ func AVMetadataID3MetadataKeyPopularimeter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPositionSynchronization() *foundation.NSString {
@@ -2627,7 +3782,11 @@ func AVMetadataID3MetadataKeyPositionSynchronization() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPrivate() *foundation.NSString {
@@ -2635,7 +3794,11 @@ func AVMetadataID3MetadataKeyPrivate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyProducedNotice() *foundation.NSString {
@@ -2643,7 +3806,11 @@ func AVMetadataID3MetadataKeyProducedNotice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyPublisher() *foundation.NSString {
@@ -2651,7 +3818,11 @@ func AVMetadataID3MetadataKeyPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyRecommendedBufferSize() *foundation.NSString {
@@ -2659,7 +3830,11 @@ func AVMetadataID3MetadataKeyRecommendedBufferSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyRecordingDates() *foundation.NSString {
@@ -2667,7 +3842,11 @@ func AVMetadataID3MetadataKeyRecordingDates() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyRecordingTime() *foundation.NSString {
@@ -2675,7 +3854,11 @@ func AVMetadataID3MetadataKeyRecordingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyRelativeVolumeAdjustment() *foundation.NSString {
@@ -2683,7 +3866,11 @@ func AVMetadataID3MetadataKeyRelativeVolumeAdjustment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyRelativeVolumeAdjustment2() *foundation.NSString {
@@ -2691,7 +3878,11 @@ func AVMetadataID3MetadataKeyRelativeVolumeAdjustment2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyReleaseTime() *foundation.NSString {
@@ -2699,7 +3890,11 @@ func AVMetadataID3MetadataKeyReleaseTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyReverb() *foundation.NSString {
@@ -2707,7 +3902,11 @@ func AVMetadataID3MetadataKeyReverb() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySeek() *foundation.NSString {
@@ -2715,7 +3914,11 @@ func AVMetadataID3MetadataKeySeek() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySetSubtitle() *foundation.NSString {
@@ -2723,7 +3926,11 @@ func AVMetadataID3MetadataKeySetSubtitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySignature() *foundation.NSString {
@@ -2731,7 +3938,11 @@ func AVMetadataID3MetadataKeySignature() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySize() *foundation.NSString {
@@ -2739,7 +3950,11 @@ func AVMetadataID3MetadataKeySize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySubTitle() *foundation.NSString {
@@ -2747,7 +3962,11 @@ func AVMetadataID3MetadataKeySubTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySynchronizedLyric() *foundation.NSString {
@@ -2755,7 +3974,11 @@ func AVMetadataID3MetadataKeySynchronizedLyric() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeySynchronizedTempoCodes() *foundation.NSString {
@@ -2763,7 +3986,11 @@ func AVMetadataID3MetadataKeySynchronizedTempoCodes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTaggingTime() *foundation.NSString {
@@ -2771,7 +3998,11 @@ func AVMetadataID3MetadataKeyTaggingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTermsOfUse() *foundation.NSString {
@@ -2779,7 +4010,11 @@ func AVMetadataID3MetadataKeyTermsOfUse() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTime() *foundation.NSString {
@@ -2787,7 +4022,11 @@ func AVMetadataID3MetadataKeyTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTitleDescription() *foundation.NSString {
@@ -2795,7 +4034,11 @@ func AVMetadataID3MetadataKeyTitleDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTitleSortOrder() *foundation.NSString {
@@ -2803,7 +4046,11 @@ func AVMetadataID3MetadataKeyTitleSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyTrackNumber() *foundation.NSString {
@@ -2811,7 +4058,11 @@ func AVMetadataID3MetadataKeyTrackNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyUniqueFileIdentifier() *foundation.NSString {
@@ -2819,7 +4070,11 @@ func AVMetadataID3MetadataKeyUniqueFileIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyUnsynchronizedLyric() *foundation.NSString {
@@ -2827,7 +4082,11 @@ func AVMetadataID3MetadataKeyUnsynchronizedLyric() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyUserText() *foundation.NSString {
@@ -2835,7 +4094,11 @@ func AVMetadataID3MetadataKeyUserText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyUserURL() *foundation.NSString {
@@ -2843,7 +4106,11 @@ func AVMetadataID3MetadataKeyUserURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataID3MetadataKeyYear() *foundation.NSString {
@@ -2851,7 +4118,11 @@ func AVMetadataID3MetadataKeyYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataISOUserDataKeyAccessibilityDescription() *foundation.NSString {
@@ -2859,7 +4130,11 @@ func AVMetadataISOUserDataKeyAccessibilityDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataISOUserDataKeyCopyright() *foundation.NSString {
@@ -2867,7 +4142,11 @@ func AVMetadataISOUserDataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // ISO User data key for the content creation date/time. The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
@@ -2876,7 +4155,11 @@ func AVMetadataISOUserDataKeyDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataISOUserDataKeyTaggedCharacteristic() *foundation.NSString {
@@ -2884,7 +4167,11 @@ func AVMetadataISOUserDataKeyTaggedCharacteristic() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIcyMetadataKeyStreamTitle() *foundation.NSString {
@@ -2892,7 +4179,11 @@ func AVMetadataIcyMetadataKeyStreamTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIcyMetadataKeyStreamURL() *foundation.NSString {
@@ -2900,7 +4191,11 @@ func AVMetadataIcyMetadataKeyStreamURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataAlbumAndTrack() *foundation.NSString {
@@ -2908,7 +4203,11 @@ func AVMetadataIdentifier3GPUserDataAlbumAndTrack() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataAuthor() *foundation.NSString {
@@ -2916,7 +4215,11 @@ func AVMetadataIdentifier3GPUserDataAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataCollection() *foundation.NSString {
@@ -2924,7 +4227,11 @@ func AVMetadataIdentifier3GPUserDataCollection() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataCopyright() *foundation.NSString {
@@ -2932,7 +4239,11 @@ func AVMetadataIdentifier3GPUserDataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataDescription() *foundation.NSString {
@@ -2940,7 +4251,11 @@ func AVMetadataIdentifier3GPUserDataDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataGenre() *foundation.NSString {
@@ -2948,7 +4263,11 @@ func AVMetadataIdentifier3GPUserDataGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataKeywordList() *foundation.NSString {
@@ -2956,7 +4275,11 @@ func AVMetadataIdentifier3GPUserDataKeywordList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataLocation() *foundation.NSString {
@@ -2964,7 +4287,11 @@ func AVMetadataIdentifier3GPUserDataLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataMediaClassification() *foundation.NSString {
@@ -2972,7 +4299,11 @@ func AVMetadataIdentifier3GPUserDataMediaClassification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataMediaRating() *foundation.NSString {
@@ -2980,7 +4311,11 @@ func AVMetadataIdentifier3GPUserDataMediaRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataPerformer() *foundation.NSString {
@@ -2988,7 +4323,11 @@ func AVMetadataIdentifier3GPUserDataPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataRecordingYear() *foundation.NSString {
@@ -2996,7 +4335,11 @@ func AVMetadataIdentifier3GPUserDataRecordingYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataThumbnail() *foundation.NSString {
@@ -3004,7 +4347,11 @@ func AVMetadataIdentifier3GPUserDataThumbnail() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataTitle() *foundation.NSString {
@@ -3012,7 +4359,11 @@ func AVMetadataIdentifier3GPUserDataTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifier3GPUserDataUserRating() *foundation.NSString {
@@ -3020,7 +4371,11 @@ func AVMetadataIdentifier3GPUserDataUserRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataAlbumSortOrder() *foundation.NSString {
@@ -3028,7 +4383,11 @@ func AVMetadataIdentifierID3MetadataAlbumSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataAlbumTitle() *foundation.NSString {
@@ -3036,7 +4395,11 @@ func AVMetadataIdentifierID3MetadataAlbumTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataAttachedPicture() *foundation.NSString {
@@ -3044,7 +4407,11 @@ func AVMetadataIdentifierID3MetadataAttachedPicture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataAudioEncryption() *foundation.NSString {
@@ -3052,7 +4419,11 @@ func AVMetadataIdentifierID3MetadataAudioEncryption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataAudioSeekPointIndex() *foundation.NSString {
@@ -3060,7 +4431,11 @@ func AVMetadataIdentifierID3MetadataAudioSeekPointIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataBand() *foundation.NSString {
@@ -3068,7 +4443,11 @@ func AVMetadataIdentifierID3MetadataBand() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataBeatsPerMinute() *foundation.NSString {
@@ -3076,7 +4455,11 @@ func AVMetadataIdentifierID3MetadataBeatsPerMinute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataComments() *foundation.NSString {
@@ -3084,7 +4467,11 @@ func AVMetadataIdentifierID3MetadataComments() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataCommercial() *foundation.NSString {
@@ -3092,7 +4479,11 @@ func AVMetadataIdentifierID3MetadataCommercial() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataCommercialInformation() *foundation.NSString {
@@ -3100,7 +4491,11 @@ func AVMetadataIdentifierID3MetadataCommercialInformation() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported
@@ -3109,7 +4504,11 @@ func AVMetadataIdentifierID3MetadataCommerical() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataComposer() *foundation.NSString {
@@ -3117,7 +4516,11 @@ func AVMetadataIdentifierID3MetadataComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataConductor() *foundation.NSString {
@@ -3125,7 +4528,11 @@ func AVMetadataIdentifierID3MetadataConductor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataContentGroupDescription() *foundation.NSString {
@@ -3133,7 +4540,11 @@ func AVMetadataIdentifierID3MetadataContentGroupDescription() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataContentType() *foundation.NSString {
@@ -3141,7 +4552,11 @@ func AVMetadataIdentifierID3MetadataContentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataCopyright() *foundation.NSString {
@@ -3149,7 +4564,11 @@ func AVMetadataIdentifierID3MetadataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataCopyrightInformation() *foundation.NSString {
@@ -3157,7 +4576,11 @@ func AVMetadataIdentifierID3MetadataCopyrightInformation() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataDate() *foundation.NSString {
@@ -3165,7 +4588,11 @@ func AVMetadataIdentifierID3MetadataDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEncodedBy() *foundation.NSString {
@@ -3173,7 +4600,11 @@ func AVMetadataIdentifierID3MetadataEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEncodedWith() *foundation.NSString {
@@ -3181,7 +4612,11 @@ func AVMetadataIdentifierID3MetadataEncodedWith() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEncodingTime() *foundation.NSString {
@@ -3189,7 +4624,11 @@ func AVMetadataIdentifierID3MetadataEncodingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEncryption() *foundation.NSString {
@@ -3197,7 +4636,11 @@ func AVMetadataIdentifierID3MetadataEncryption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEqualization() *foundation.NSString {
@@ -3205,7 +4648,11 @@ func AVMetadataIdentifierID3MetadataEqualization() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEqualization2() *foundation.NSString {
@@ -3213,7 +4660,11 @@ func AVMetadataIdentifierID3MetadataEqualization2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataEventTimingCodes() *foundation.NSString {
@@ -3221,7 +4672,11 @@ func AVMetadataIdentifierID3MetadataEventTimingCodes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataFileOwner() *foundation.NSString {
@@ -3229,7 +4684,11 @@ func AVMetadataIdentifierID3MetadataFileOwner() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataFileType() *foundation.NSString {
@@ -3237,7 +4696,11 @@ func AVMetadataIdentifierID3MetadataFileType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject() *foundation.NSString {
@@ -3245,7 +4708,11 @@ func AVMetadataIdentifierID3MetadataGeneralEncapsulatedObject() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataGroupIdentifier() *foundation.NSString {
@@ -3253,7 +4720,11 @@ func AVMetadataIdentifierID3MetadataGroupIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInitialKey() *foundation.NSString {
@@ -3261,7 +4732,11 @@ func AVMetadataIdentifierID3MetadataInitialKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode() *foundation.NSString {
@@ -3269,7 +4744,11 @@ func AVMetadataIdentifierID3MetadataInternationalStandardRecordingCode() *founda
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInternetRadioStationName() *foundation.NSString {
@@ -3277,7 +4756,11 @@ func AVMetadataIdentifierID3MetadataInternetRadioStationName() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInternetRadioStationOwner() *foundation.NSString {
@@ -3285,7 +4768,11 @@ func AVMetadataIdentifierID3MetadataInternetRadioStationOwner() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23() *foundation.NSString {
@@ -3293,7 +4780,11 @@ func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v23() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24() *foundation.NSString {
@@ -3301,7 +4792,11 @@ func AVMetadataIdentifierID3MetadataInvolvedPeopleList_v24() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataLanguage() *foundation.NSString {
@@ -3309,7 +4804,11 @@ func AVMetadataIdentifierID3MetadataLanguage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataLeadPerformer() *foundation.NSString {
@@ -3317,7 +4816,11 @@ func AVMetadataIdentifierID3MetadataLeadPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataLength() *foundation.NSString {
@@ -3325,7 +4828,11 @@ func AVMetadataIdentifierID3MetadataLength() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataLink() *foundation.NSString {
@@ -3333,7 +4840,11 @@ func AVMetadataIdentifierID3MetadataLink() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataLyricist() *foundation.NSString {
@@ -3341,7 +4852,11 @@ func AVMetadataIdentifierID3MetadataLyricist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataMPEGLocationLookupTable() *foundation.NSString {
@@ -3349,7 +4864,11 @@ func AVMetadataIdentifierID3MetadataMPEGLocationLookupTable() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataMediaType() *foundation.NSString {
@@ -3357,7 +4876,11 @@ func AVMetadataIdentifierID3MetadataMediaType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataModifiedBy() *foundation.NSString {
@@ -3365,7 +4888,11 @@ func AVMetadataIdentifierID3MetadataModifiedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataMood() *foundation.NSString {
@@ -3373,7 +4900,11 @@ func AVMetadataIdentifierID3MetadataMood() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataMusicCDIdentifier() *foundation.NSString {
@@ -3381,7 +4912,11 @@ func AVMetadataIdentifierID3MetadataMusicCDIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataMusicianCreditsList() *foundation.NSString {
@@ -3389,7 +4924,11 @@ func AVMetadataIdentifierID3MetadataMusicianCreditsList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOfficialArtistWebpage() *foundation.NSString {
@@ -3397,7 +4936,11 @@ func AVMetadataIdentifierID3MetadataOfficialArtistWebpage() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage() *foundation.NSString {
@@ -3405,7 +4948,11 @@ func AVMetadataIdentifierID3MetadataOfficialAudioFileWebpage() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage() *foundation.NSString {
@@ -3413,7 +4960,11 @@ func AVMetadataIdentifierID3MetadataOfficialAudioSourceWebpage() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage() *foundation.NSString {
@@ -3421,7 +4972,11 @@ func AVMetadataIdentifierID3MetadataOfficialInternetRadioStationHomepage() *foun
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOfficialPublisherWebpage() *foundation.NSString {
@@ -3429,7 +4984,11 @@ func AVMetadataIdentifierID3MetadataOfficialPublisherWebpage() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalAlbumTitle() *foundation.NSString {
@@ -3437,7 +4996,11 @@ func AVMetadataIdentifierID3MetadataOriginalAlbumTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalArtist() *foundation.NSString {
@@ -3445,7 +5008,11 @@ func AVMetadataIdentifierID3MetadataOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalFilename() *foundation.NSString {
@@ -3453,7 +5020,11 @@ func AVMetadataIdentifierID3MetadataOriginalFilename() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalLyricist() *foundation.NSString {
@@ -3461,7 +5032,11 @@ func AVMetadataIdentifierID3MetadataOriginalLyricist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalReleaseTime() *foundation.NSString {
@@ -3469,7 +5044,11 @@ func AVMetadataIdentifierID3MetadataOriginalReleaseTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOriginalReleaseYear() *foundation.NSString {
@@ -3477,7 +5056,11 @@ func AVMetadataIdentifierID3MetadataOriginalReleaseYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataOwnership() *foundation.NSString {
@@ -3485,7 +5068,11 @@ func AVMetadataIdentifierID3MetadataOwnership() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPartOfASet() *foundation.NSString {
@@ -3493,7 +5080,11 @@ func AVMetadataIdentifierID3MetadataPartOfASet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPayment() *foundation.NSString {
@@ -3501,7 +5092,11 @@ func AVMetadataIdentifierID3MetadataPayment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPerformerSortOrder() *foundation.NSString {
@@ -3509,7 +5104,11 @@ func AVMetadataIdentifierID3MetadataPerformerSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPlayCounter() *foundation.NSString {
@@ -3517,7 +5116,11 @@ func AVMetadataIdentifierID3MetadataPlayCounter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPlaylistDelay() *foundation.NSString {
@@ -3525,7 +5128,11 @@ func AVMetadataIdentifierID3MetadataPlaylistDelay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPopularimeter() *foundation.NSString {
@@ -3533,7 +5140,11 @@ func AVMetadataIdentifierID3MetadataPopularimeter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPositionSynchronization() *foundation.NSString {
@@ -3541,7 +5152,11 @@ func AVMetadataIdentifierID3MetadataPositionSynchronization() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPrivate() *foundation.NSString {
@@ -3549,7 +5164,11 @@ func AVMetadataIdentifierID3MetadataPrivate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataProducedNotice() *foundation.NSString {
@@ -3557,7 +5176,11 @@ func AVMetadataIdentifierID3MetadataProducedNotice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataPublisher() *foundation.NSString {
@@ -3565,7 +5188,11 @@ func AVMetadataIdentifierID3MetadataPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataRecommendedBufferSize() *foundation.NSString {
@@ -3573,7 +5200,11 @@ func AVMetadataIdentifierID3MetadataRecommendedBufferSize() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataRecordingDates() *foundation.NSString {
@@ -3581,7 +5212,11 @@ func AVMetadataIdentifierID3MetadataRecordingDates() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataRecordingTime() *foundation.NSString {
@@ -3589,7 +5224,11 @@ func AVMetadataIdentifierID3MetadataRecordingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment() *foundation.NSString {
@@ -3597,7 +5236,11 @@ func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2() *foundation.NSString {
@@ -3605,7 +5248,11 @@ func AVMetadataIdentifierID3MetadataRelativeVolumeAdjustment2() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataReleaseTime() *foundation.NSString {
@@ -3613,7 +5260,11 @@ func AVMetadataIdentifierID3MetadataReleaseTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataReverb() *foundation.NSString {
@@ -3621,7 +5272,11 @@ func AVMetadataIdentifierID3MetadataReverb() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSeek() *foundation.NSString {
@@ -3629,7 +5284,11 @@ func AVMetadataIdentifierID3MetadataSeek() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSetSubtitle() *foundation.NSString {
@@ -3637,7 +5296,11 @@ func AVMetadataIdentifierID3MetadataSetSubtitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSignature() *foundation.NSString {
@@ -3645,7 +5308,11 @@ func AVMetadataIdentifierID3MetadataSignature() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSize() *foundation.NSString {
@@ -3653,7 +5320,11 @@ func AVMetadataIdentifierID3MetadataSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSubTitle() *foundation.NSString {
@@ -3661,7 +5332,11 @@ func AVMetadataIdentifierID3MetadataSubTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSynchronizedLyric() *foundation.NSString {
@@ -3669,7 +5344,11 @@ func AVMetadataIdentifierID3MetadataSynchronizedLyric() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataSynchronizedTempoCodes() *foundation.NSString {
@@ -3677,7 +5356,11 @@ func AVMetadataIdentifierID3MetadataSynchronizedTempoCodes() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTaggingTime() *foundation.NSString {
@@ -3685,7 +5368,11 @@ func AVMetadataIdentifierID3MetadataTaggingTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTermsOfUse() *foundation.NSString {
@@ -3693,7 +5380,11 @@ func AVMetadataIdentifierID3MetadataTermsOfUse() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTime() *foundation.NSString {
@@ -3701,7 +5392,11 @@ func AVMetadataIdentifierID3MetadataTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTitleDescription() *foundation.NSString {
@@ -3709,7 +5404,11 @@ func AVMetadataIdentifierID3MetadataTitleDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTitleSortOrder() *foundation.NSString {
@@ -3717,7 +5416,11 @@ func AVMetadataIdentifierID3MetadataTitleSortOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataTrackNumber() *foundation.NSString {
@@ -3725,7 +5428,11 @@ func AVMetadataIdentifierID3MetadataTrackNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataUniqueFileIdentifier() *foundation.NSString {
@@ -3733,7 +5440,11 @@ func AVMetadataIdentifierID3MetadataUniqueFileIdentifier() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataUnsynchronizedLyric() *foundation.NSString {
@@ -3741,7 +5452,11 @@ func AVMetadataIdentifierID3MetadataUnsynchronizedLyric() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataUserText() *foundation.NSString {
@@ -3749,7 +5464,11 @@ func AVMetadataIdentifierID3MetadataUserText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataUserURL() *foundation.NSString {
@@ -3757,7 +5476,11 @@ func AVMetadataIdentifierID3MetadataUserURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierID3MetadataYear() *foundation.NSString {
@@ -3765,7 +5488,11 @@ func AVMetadataIdentifierID3MetadataYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierISOUserDataAccessibilityDescription() *foundation.NSString {
@@ -3773,7 +5500,11 @@ func AVMetadataIdentifierISOUserDataAccessibilityDescription() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierISOUserDataCopyright() *foundation.NSString {
@@ -3781,7 +5512,11 @@ func AVMetadataIdentifierISOUserDataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierISOUserDataDate() *foundation.NSString {
@@ -3789,7 +5524,11 @@ func AVMetadataIdentifierISOUserDataDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierISOUserDataTaggedCharacteristic() *foundation.NSString {
@@ -3797,7 +5536,11 @@ func AVMetadataIdentifierISOUserDataTaggedCharacteristic() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierIcyMetadataStreamTitle() *foundation.NSString {
@@ -3805,7 +5548,11 @@ func AVMetadataIdentifierIcyMetadataStreamTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierIcyMetadataStreamURL() *foundation.NSString {
@@ -3813,7 +5560,11 @@ func AVMetadataIdentifierIcyMetadataStreamURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData The static presentation metadata, Apple Immersive Media Embedded (AIME), for Apple Immersive Video that originates from ImmersiveMediaSupport framework's VenueDescriptor.aimeData.
@@ -3822,7 +5573,11 @@ func AVMetadataIdentifierQuickTimeMetadataAIMEData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription() *foundation.NSString {
@@ -3830,7 +5585,11 @@ func AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAlbum() *foundation.NSString {
@@ -3838,7 +5597,11 @@ func AVMetadataIdentifierQuickTimeMetadataAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArranger() *foundation.NSString {
@@ -3846,7 +5609,11 @@ func AVMetadataIdentifierQuickTimeMetadataArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArtist() *foundation.NSString {
@@ -3854,7 +5621,11 @@ func AVMetadataIdentifierQuickTimeMetadataArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataArtwork() *foundation.NSString {
@@ -3862,7 +5633,11 @@ func AVMetadataIdentifierQuickTimeMetadataArtwork() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataAuthor() *foundation.NSString {
@@ -3870,7 +5645,11 @@ func AVMetadataIdentifierQuickTimeMetadataAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode. Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
@@ -3879,7 +5658,11 @@ func AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
@@ -3888,7 +5671,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent() *fou
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime() *foundation.NSString {
@@ -3896,7 +5683,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraFrameReadoutTime() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
@@ -3905,7 +5696,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCameraIdentifier() *foundation.NSString {
@@ -3913,7 +5708,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraIdentifier() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
@@ -3922,7 +5721,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
@@ -3931,7 +5734,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraLensModel() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
@@ -3940,7 +5747,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle() *foundation.
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
@@ -3949,7 +5760,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
@@ -3958,7 +5773,11 @@ func AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
@@ -3967,7 +5786,11 @@ func AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCollectionUser() *foundation.NSString {
@@ -3975,7 +5798,11 @@ func AVMetadataIdentifierQuickTimeMetadataCollectionUser() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataComment() *foundation.NSString {
@@ -3983,7 +5810,11 @@ func AVMetadataIdentifierQuickTimeMetadataComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataComposer() *foundation.NSString {
@@ -3991,7 +5822,11 @@ func AVMetadataIdentifierQuickTimeMetadataComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataContentIdentifier() *foundation.NSString {
@@ -3999,7 +5834,11 @@ func AVMetadataIdentifierQuickTimeMetadataContentIdentifier() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCopyright() *foundation.NSString {
@@ -4007,7 +5846,11 @@ func AVMetadataIdentifierQuickTimeMetadataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCreationDate() *foundation.NSString {
@@ -4015,7 +5858,11 @@ func AVMetadataIdentifierQuickTimeMetadataCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataCredits() *foundation.NSString {
@@ -4023,7 +5870,11 @@ func AVMetadataIdentifierQuickTimeMetadataCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDescription() *foundation.NSString {
@@ -4031,7 +5882,11 @@ func AVMetadataIdentifierQuickTimeMetadataDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedCatBody() *foundation.NSString {
@@ -4039,7 +5894,11 @@ func AVMetadataIdentifierQuickTimeMetadataDetectedCatBody() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedDogBody() *foundation.NSString {
@@ -4047,7 +5906,11 @@ func AVMetadataIdentifierQuickTimeMetadataDetectedDogBody() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedFace() *foundation.NSString {
@@ -4055,7 +5918,11 @@ func AVMetadataIdentifierQuickTimeMetadataDetectedFace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody() *foundation.NSString {
@@ -4063,7 +5930,11 @@ func AVMetadataIdentifierQuickTimeMetadataDetectedHumanBody() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject() *foundation.NSString {
@@ -4071,7 +5942,11 @@ func AVMetadataIdentifierQuickTimeMetadataDetectedSalientObject() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirectionFacing() *foundation.NSString {
@@ -4079,7 +5954,11 @@ func AVMetadataIdentifierQuickTimeMetadataDirectionFacing() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirectionMotion() *foundation.NSString {
@@ -4087,7 +5966,11 @@ func AVMetadataIdentifierQuickTimeMetadataDirectionMotion() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDirector() *foundation.NSString {
@@ -4095,7 +5978,11 @@ func AVMetadataIdentifierQuickTimeMetadataDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataDisplayName() *foundation.NSString {
@@ -4103,7 +5990,11 @@ func AVMetadataIdentifierQuickTimeMetadataDisplayName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataEncodedBy() *foundation.NSString {
@@ -4111,7 +6002,11 @@ func AVMetadataIdentifierQuickTimeMetadataEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
@@ -4120,7 +6015,11 @@ func AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent() *foundat
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataGenre() *foundation.NSString {
@@ -4128,7 +6027,11 @@ func AVMetadataIdentifierQuickTimeMetadataGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataInformation() *foundation.NSString {
@@ -4136,7 +6039,11 @@ func AVMetadataIdentifierQuickTimeMetadataInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataIsMontage() *foundation.NSString {
@@ -4144,7 +6051,11 @@ func AVMetadataIdentifierQuickTimeMetadataIsMontage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataKeywords() *foundation.NSString {
@@ -4152,7 +6063,11 @@ func AVMetadataIdentifierQuickTimeMetadataKeywords() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher. If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
@@ -4161,7 +6076,11 @@ func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that scored the Live Photo movie for vitality.
@@ -4170,7 +6089,11 @@ func AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion() *fou
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationBody() *foundation.NSString {
@@ -4178,7 +6101,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationBody() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationDate() *foundation.NSString {
@@ -4186,7 +6113,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
@@ -4195,7 +6126,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters() *
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationISO6709() *foundation.NSString {
@@ -4203,7 +6138,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationISO6709() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationName() *foundation.NSString {
@@ -4211,7 +6150,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationNote() *foundation.NSString {
@@ -4219,7 +6162,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationNote() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataLocationRole() *foundation.NSString {
@@ -4227,7 +6174,11 @@ func AVMetadataIdentifierQuickTimeMetadataLocationRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataMake() *foundation.NSString {
@@ -4235,7 +6186,11 @@ func AVMetadataIdentifierQuickTimeMetadataMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataModel() *foundation.NSString {
@@ -4243,7 +6198,11 @@ func AVMetadataIdentifierQuickTimeMetadataModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataOriginalArtist() *foundation.NSString {
@@ -4251,7 +6210,11 @@ func AVMetadataIdentifierQuickTimeMetadataOriginalArtist() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPerformer() *foundation.NSString {
@@ -4259,7 +6222,11 @@ func AVMetadataIdentifierQuickTimeMetadataPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPhonogramRights() *foundation.NSString {
@@ -4267,7 +6234,11 @@ func AVMetadataIdentifierQuickTimeMetadataPhonogramRights() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform() *foundation.NSString {
@@ -4275,7 +6246,11 @@ func AVMetadataIdentifierQuickTimeMetadataPreferredAffineTransform() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData The presentation timed metadata for Apple Immerisve Video. Value is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
@@ -4284,7 +6259,11 @@ func AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia() *foundati
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataProducer() *foundation.NSString {
@@ -4292,7 +6271,11 @@ func AVMetadataIdentifierQuickTimeMetadataProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataPublisher() *foundation.NSString {
@@ -4300,7 +6283,11 @@ func AVMetadataIdentifierQuickTimeMetadataPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataRatingUser() *foundation.NSString {
@@ -4308,7 +6295,11 @@ func AVMetadataIdentifierQuickTimeMetadataRatingUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataSoftware() *foundation.NSString {
@@ -4316,7 +6307,11 @@ func AVMetadataIdentifierQuickTimeMetadataSoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_Float32. The video may be scored by a heuristic which considers factors such as exposure and focus. The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
@@ -4325,7 +6320,11 @@ func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore() *foun
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UInt32. The version of the algorithm that provided the spatial over capture quality score.
@@ -4334,7 +6333,11 @@ func AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataTitle() *foundation.NSString {
@@ -4342,7 +6345,11 @@ func AVMetadataIdentifierQuickTimeMetadataTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataVideoOrientation() *foundation.NSString {
@@ -4350,7 +6357,11 @@ func AVMetadataIdentifierQuickTimeMetadataVideoOrientation() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
@@ -4359,7 +6370,11 @@ func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices() *foun
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
@@ -4368,7 +6383,11 @@ func AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors()
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataYear() *foundation.NSString {
@@ -4376,7 +6395,11 @@ func AVMetadataIdentifierQuickTimeMetadataYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeMetadataiXML() *foundation.NSString {
@@ -4384,7 +6407,11 @@ func AVMetadataIdentifierQuickTimeMetadataiXML() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription() *foundation.NSString {
@@ -4392,7 +6419,11 @@ func AVMetadataIdentifierQuickTimeUserDataAccessibilityDescription() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAlbum() *foundation.NSString {
@@ -4400,7 +6431,11 @@ func AVMetadataIdentifierQuickTimeUserDataAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataArranger() *foundation.NSString {
@@ -4408,7 +6443,11 @@ func AVMetadataIdentifierQuickTimeUserDataArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataArtist() *foundation.NSString {
@@ -4416,7 +6455,11 @@ func AVMetadataIdentifierQuickTimeUserDataArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataAuthor() *foundation.NSString {
@@ -4424,7 +6467,11 @@ func AVMetadataIdentifierQuickTimeUserDataAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataChapter() *foundation.NSString {
@@ -4432,7 +6479,11 @@ func AVMetadataIdentifierQuickTimeUserDataChapter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataComment() *foundation.NSString {
@@ -4440,7 +6491,11 @@ func AVMetadataIdentifierQuickTimeUserDataComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataComposer() *foundation.NSString {
@@ -4448,7 +6503,11 @@ func AVMetadataIdentifierQuickTimeUserDataComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCopyright() *foundation.NSString {
@@ -4456,7 +6515,11 @@ func AVMetadataIdentifierQuickTimeUserDataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCreationDate() *foundation.NSString {
@@ -4464,7 +6527,11 @@ func AVMetadataIdentifierQuickTimeUserDataCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataCredits() *foundation.NSString {
@@ -4472,7 +6539,11 @@ func AVMetadataIdentifierQuickTimeUserDataCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDescription() *foundation.NSString {
@@ -4480,7 +6551,11 @@ func AVMetadataIdentifierQuickTimeUserDataDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDirector() *foundation.NSString {
@@ -4488,7 +6563,11 @@ func AVMetadataIdentifierQuickTimeUserDataDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataDisclaimer() *foundation.NSString {
@@ -4496,7 +6575,11 @@ func AVMetadataIdentifierQuickTimeUserDataDisclaimer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataEncodedBy() *foundation.NSString {
@@ -4504,7 +6587,11 @@ func AVMetadataIdentifierQuickTimeUserDataEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataFullName() *foundation.NSString {
@@ -4512,7 +6599,11 @@ func AVMetadataIdentifierQuickTimeUserDataFullName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataGenre() *foundation.NSString {
@@ -4520,7 +6611,11 @@ func AVMetadataIdentifierQuickTimeUserDataGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataHostComputer() *foundation.NSString {
@@ -4528,7 +6623,11 @@ func AVMetadataIdentifierQuickTimeUserDataHostComputer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataInformation() *foundation.NSString {
@@ -4536,7 +6635,11 @@ func AVMetadataIdentifierQuickTimeUserDataInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataKeywords() *foundation.NSString {
@@ -4544,7 +6647,11 @@ func AVMetadataIdentifierQuickTimeUserDataKeywords() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataLocationISO6709() *foundation.NSString {
@@ -4552,7 +6659,11 @@ func AVMetadataIdentifierQuickTimeUserDataLocationISO6709() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataMake() *foundation.NSString {
@@ -4560,7 +6671,11 @@ func AVMetadataIdentifierQuickTimeUserDataMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataModel() *foundation.NSString {
@@ -4568,7 +6683,11 @@ func AVMetadataIdentifierQuickTimeUserDataModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalArtist() *foundation.NSString {
@@ -4576,7 +6695,11 @@ func AVMetadataIdentifierQuickTimeUserDataOriginalArtist() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalFormat() *foundation.NSString {
@@ -4584,7 +6707,11 @@ func AVMetadataIdentifierQuickTimeUserDataOriginalFormat() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataOriginalSource() *foundation.NSString {
@@ -4592,7 +6719,11 @@ func AVMetadataIdentifierQuickTimeUserDataOriginalSource() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPerformers() *foundation.NSString {
@@ -4600,7 +6731,11 @@ func AVMetadataIdentifierQuickTimeUserDataPerformers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPhonogramRights() *foundation.NSString {
@@ -4608,7 +6743,11 @@ func AVMetadataIdentifierQuickTimeUserDataPhonogramRights() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataProducer() *foundation.NSString {
@@ -4616,7 +6755,11 @@ func AVMetadataIdentifierQuickTimeUserDataProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataProduct() *foundation.NSString {
@@ -4624,7 +6767,11 @@ func AVMetadataIdentifierQuickTimeUserDataProduct() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataPublisher() *foundation.NSString {
@@ -4632,7 +6779,11 @@ func AVMetadataIdentifierQuickTimeUserDataPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataSoftware() *foundation.NSString {
@@ -4640,7 +6791,11 @@ func AVMetadataIdentifierQuickTimeUserDataSoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements() *foundation.NSString {
@@ -4648,7 +6803,11 @@ func AVMetadataIdentifierQuickTimeUserDataSpecialPlaybackRequirements() *foundat
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic() *foundation.NSString {
@@ -4656,7 +6815,11 @@ func AVMetadataIdentifierQuickTimeUserDataTaggedCharacteristic() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTrack() *foundation.NSString {
@@ -4664,7 +6827,11 @@ func AVMetadataIdentifierQuickTimeUserDataTrack() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataTrackName() *foundation.NSString {
@@ -4672,7 +6839,11 @@ func AVMetadataIdentifierQuickTimeUserDataTrackName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataURLLink() *foundation.NSString {
@@ -4680,7 +6851,11 @@ func AVMetadataIdentifierQuickTimeUserDataURLLink() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataWarning() *foundation.NSString {
@@ -4688,7 +6863,11 @@ func AVMetadataIdentifierQuickTimeUserDataWarning() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifierQuickTimeUserDataWriter() *foundation.NSString {
@@ -4696,7 +6875,11 @@ func AVMetadataIdentifierQuickTimeUserDataWriter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAccountKind() *foundation.NSString {
@@ -4704,7 +6887,11 @@ func AVMetadataIdentifieriTunesMetadataAccountKind() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAcknowledgement() *foundation.NSString {
@@ -4712,7 +6899,11 @@ func AVMetadataIdentifieriTunesMetadataAcknowledgement() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAlbum() *foundation.NSString {
@@ -4720,7 +6911,11 @@ func AVMetadataIdentifieriTunesMetadataAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAlbumArtist() *foundation.NSString {
@@ -4728,7 +6923,11 @@ func AVMetadataIdentifieriTunesMetadataAlbumArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAppleID() *foundation.NSString {
@@ -4736,7 +6935,11 @@ func AVMetadataIdentifieriTunesMetadataAppleID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataArranger() *foundation.NSString {
@@ -4744,7 +6947,11 @@ func AVMetadataIdentifieriTunesMetadataArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataArtDirector() *foundation.NSString {
@@ -4752,7 +6959,11 @@ func AVMetadataIdentifieriTunesMetadataArtDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataArtist() *foundation.NSString {
@@ -4760,7 +6971,11 @@ func AVMetadataIdentifieriTunesMetadataArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataArtistID() *foundation.NSString {
@@ -4768,7 +6983,11 @@ func AVMetadataIdentifieriTunesMetadataArtistID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataAuthor() *foundation.NSString {
@@ -4776,7 +6995,11 @@ func AVMetadataIdentifieriTunesMetadataAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataBeatsPerMin() *foundation.NSString {
@@ -4784,7 +7007,11 @@ func AVMetadataIdentifieriTunesMetadataBeatsPerMin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataComposer() *foundation.NSString {
@@ -4792,7 +7019,11 @@ func AVMetadataIdentifieriTunesMetadataComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataConductor() *foundation.NSString {
@@ -4800,7 +7031,11 @@ func AVMetadataIdentifieriTunesMetadataConductor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataContentRating() *foundation.NSString {
@@ -4808,7 +7043,11 @@ func AVMetadataIdentifieriTunesMetadataContentRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataCopyright() *foundation.NSString {
@@ -4816,7 +7055,11 @@ func AVMetadataIdentifieriTunesMetadataCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataCoverArt() *foundation.NSString {
@@ -4824,7 +7067,11 @@ func AVMetadataIdentifieriTunesMetadataCoverArt() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataCredits() *foundation.NSString {
@@ -4832,7 +7079,11 @@ func AVMetadataIdentifieriTunesMetadataCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataDescription() *foundation.NSString {
@@ -4840,7 +7091,11 @@ func AVMetadataIdentifieriTunesMetadataDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataDirector() *foundation.NSString {
@@ -4848,7 +7103,11 @@ func AVMetadataIdentifieriTunesMetadataDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataDiscCompilation() *foundation.NSString {
@@ -4856,7 +7115,11 @@ func AVMetadataIdentifieriTunesMetadataDiscCompilation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataDiscNumber() *foundation.NSString {
@@ -4864,7 +7127,11 @@ func AVMetadataIdentifieriTunesMetadataDiscNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataEQ() *foundation.NSString {
@@ -4872,7 +7139,11 @@ func AVMetadataIdentifieriTunesMetadataEQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataEncodedBy() *foundation.NSString {
@@ -4880,7 +7151,11 @@ func AVMetadataIdentifieriTunesMetadataEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataEncodingTool() *foundation.NSString {
@@ -4888,7 +7163,11 @@ func AVMetadataIdentifieriTunesMetadataEncodingTool() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataExecProducer() *foundation.NSString {
@@ -4896,7 +7175,11 @@ func AVMetadataIdentifieriTunesMetadataExecProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataGenreID() *foundation.NSString {
@@ -4904,7 +7187,11 @@ func AVMetadataIdentifieriTunesMetadataGenreID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataGrouping() *foundation.NSString {
@@ -4912,7 +7199,11 @@ func AVMetadataIdentifieriTunesMetadataGrouping() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataLinerNotes() *foundation.NSString {
@@ -4920,7 +7211,11 @@ func AVMetadataIdentifieriTunesMetadataLinerNotes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataLyrics() *foundation.NSString {
@@ -4928,7 +7223,11 @@ func AVMetadataIdentifieriTunesMetadataLyrics() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataOnlineExtras() *foundation.NSString {
@@ -4936,7 +7235,11 @@ func AVMetadataIdentifieriTunesMetadataOnlineExtras() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataOriginalArtist() *foundation.NSString {
@@ -4944,7 +7247,11 @@ func AVMetadataIdentifieriTunesMetadataOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataPerformer() *foundation.NSString {
@@ -4952,7 +7259,11 @@ func AVMetadataIdentifieriTunesMetadataPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataPhonogramRights() *foundation.NSString {
@@ -4960,7 +7271,11 @@ func AVMetadataIdentifieriTunesMetadataPhonogramRights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataPlaylistID() *foundation.NSString {
@@ -4968,7 +7283,11 @@ func AVMetadataIdentifieriTunesMetadataPlaylistID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataPredefinedGenre() *foundation.NSString {
@@ -4976,7 +7295,11 @@ func AVMetadataIdentifieriTunesMetadataPredefinedGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataProducer() *foundation.NSString {
@@ -4984,7 +7307,11 @@ func AVMetadataIdentifieriTunesMetadataProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataPublisher() *foundation.NSString {
@@ -4992,7 +7319,11 @@ func AVMetadataIdentifieriTunesMetadataPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataRecordCompany() *foundation.NSString {
@@ -5000,7 +7331,11 @@ func AVMetadataIdentifieriTunesMetadataRecordCompany() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataReleaseDate() *foundation.NSString {
@@ -5008,7 +7343,11 @@ func AVMetadataIdentifieriTunesMetadataReleaseDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataSoloist() *foundation.NSString {
@@ -5016,7 +7355,11 @@ func AVMetadataIdentifieriTunesMetadataSoloist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataSongID() *foundation.NSString {
@@ -5024,7 +7367,11 @@ func AVMetadataIdentifieriTunesMetadataSongID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataSongName() *foundation.NSString {
@@ -5032,7 +7379,11 @@ func AVMetadataIdentifieriTunesMetadataSongName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataSoundEngineer() *foundation.NSString {
@@ -5040,7 +7391,11 @@ func AVMetadataIdentifieriTunesMetadataSoundEngineer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataThanks() *foundation.NSString {
@@ -5048,7 +7403,11 @@ func AVMetadataIdentifieriTunesMetadataThanks() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataTrackNumber() *foundation.NSString {
@@ -5056,7 +7415,11 @@ func AVMetadataIdentifieriTunesMetadataTrackNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataTrackSubTitle() *foundation.NSString {
@@ -5064,7 +7427,11 @@ func AVMetadataIdentifieriTunesMetadataTrackSubTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataUserComment() *foundation.NSString {
@@ -5072,7 +7439,11 @@ func AVMetadataIdentifieriTunesMetadataUserComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataIdentifieriTunesMetadataUserGenre() *foundation.NSString {
@@ -5080,7 +7451,11 @@ func AVMetadataIdentifieriTunesMetadataUserGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
@@ -5089,7 +7464,11 @@ func AVMetadataKeySpaceAudioFile() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceCommon() *foundation.NSString {
@@ -5097,7 +7476,11 @@ func AVMetadataKeySpaceCommon() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
@@ -5106,7 +7489,11 @@ func AVMetadataKeySpaceHLSDateRange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceID3() *foundation.NSString {
@@ -5114,7 +7501,11 @@ func AVMetadataKeySpaceID3() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceISOUserData() *foundation.NSString {
@@ -5122,7 +7513,11 @@ func AVMetadataKeySpaceISOUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Icecast/ShoutCAST streaming metadata
@@ -5131,7 +7526,11 @@ func AVMetadataKeySpaceIcy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceQuickTimeMetadata() *foundation.NSString {
@@ -5139,7 +7538,11 @@ func AVMetadataKeySpaceQuickTimeMetadata() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceQuickTimeUserData() *foundation.NSString {
@@ -5147,7 +7550,11 @@ func AVMetadataKeySpaceQuickTimeUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataKeySpaceiTunes() *foundation.NSString {
@@ -5155,7 +7562,11 @@ func AVMetadataKeySpaceiTunes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeAztecCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeAztecCode. @discussion AVMetadataMachineReadableCodeObject objects generated from Aztec codes return this constant as their type.
@@ -5164,7 +7575,11 @@ func AVMetadataObjectTypeAztecCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCatBody @abstract An identifier for an instance of AVMetadataCatBodyObject. @discussion AVMetadataCatBodyObject objects return this constant as their type.
@@ -5191,7 +7606,11 @@ func AVMetadataObjectTypeCode128Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCode39Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 codes return this constant as their type.
@@ -5200,7 +7619,11 @@ func AVMetadataObjectTypeCode39Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCode39Mod43Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode39Mod43Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 39 mod 43 codes return this constant as their type.
@@ -5209,7 +7632,11 @@ func AVMetadataObjectTypeCode39Mod43Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeCode93Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeCode93Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Code 93 codes return this constant as their type.
@@ -5218,7 +7645,11 @@ func AVMetadataObjectTypeCode93Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeDataMatrixCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeDataMatrixCode. @discussion AVMetadataMachineReadableCodeObject objects generated from DataMatrix codes return this constant as their type.
@@ -5227,7 +7658,11 @@ func AVMetadataObjectTypeDataMatrixCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeDogBody @abstract An identifier for an instance of AVMetadataDogBodyObject. @discussion AVMetadataDogBodyObject objects return this constant as their type.
@@ -5248,7 +7683,11 @@ func AVMetadataObjectTypeEAN13Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeEAN8Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeEAN8Code. @discussion AVMetadataMachineReadableCodeObject objects generated from EAN-8 codes return this constant as their type.
@@ -5257,7 +7696,11 @@ func AVMetadataObjectTypeEAN8Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeFace @abstract An identifier for an instance of AVMetadataFaceObject. @discussion AVMetadataFaceObject objects return this constant as their type.
@@ -5266,7 +7709,11 @@ func AVMetadataObjectTypeFace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeGS1DataBarCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeGS1DataBarCode. @discussion AVMetadataMachineReadableCodeObject objects generated from GS1DataBar codes return this constant as their type.
@@ -5305,7 +7752,11 @@ func AVMetadataObjectTypeITF14Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeInterleaved2of5Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeInterleaved2of5Code. @discussion AVMetadataMachineReadableCodeObject objects generated from Interleaved 2 of 5 codes return this constant as their type.
@@ -5314,7 +7765,11 @@ func AVMetadataObjectTypeInterleaved2of5Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeMicroPDF417Code @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeMicroPDF417Code. @discussion AVMetadataMachineReadableCodeObject objects generated from MicroPDF417 codes return this constant as their type.
@@ -5335,7 +7790,11 @@ func AVMetadataObjectTypePDF417Code() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeQRCode @abstract An identifier for an instance of AVMetadataMachineReadableCodeObject having a type AVMetadataObjectTypeQRCode. @discussion AVMetadataMachineReadableCodeObject objects generated from QR codes return this constant as their type.
@@ -5344,7 +7803,11 @@ func AVMetadataObjectTypeQRCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVMetadataObjectTypeSalientObject @abstract An identifier for an instance of AVMetadataSalientObject. @discussion AVMetadataSalientObject objects return this constant as their type.
@@ -5359,7 +7822,11 @@ func AVMetadataObjectTypeUPCECode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyAccessibilityDescription() *foundation.NSString {
@@ -5367,7 +7834,11 @@ func AVMetadataQuickTimeMetadataKeyAccessibilityDescription() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyAlbum() *foundation.NSString {
@@ -5375,7 +7846,11 @@ func AVMetadataQuickTimeMetadataKeyAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyArranger() *foundation.NSString {
@@ -5383,7 +7858,11 @@ func AVMetadataQuickTimeMetadataKeyArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyArtist() *foundation.NSString {
@@ -5391,7 +7870,11 @@ func AVMetadataQuickTimeMetadataKeyArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyArtwork() *foundation.NSString {
@@ -5399,7 +7882,11 @@ func AVMetadataQuickTimeMetadataKeyArtwork() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyAuthor() *foundation.NSString {
@@ -5407,7 +7894,11 @@ func AVMetadataQuickTimeMetadataKeyAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm"). This is track-level metadata for video track that is associated with the camera.
@@ -5416,7 +7907,11 @@ func AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime() *foundation.NSString {
@@ -5424,7 +7919,11 @@ func AVMetadataQuickTimeMetadataKeyCameraFrameReadoutTime() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
@@ -5433,7 +7932,11 @@ func AVMetadataQuickTimeMetadataKeyCameraISOSensitivity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCameraIdentifier() *foundation.NSString {
@@ -5441,7 +7944,11 @@ func AVMetadataQuickTimeMetadataKeyCameraIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8"). This is track-level metadata for video track that is associated with the camera.
@@ -5450,7 +7957,11 @@ func AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78"). This is track-level metadata for video track that is associated with the camera.
@@ -5459,7 +7970,11 @@ func AVMetadataQuickTimeMetadataKeyCameraLensModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
@@ -5468,7 +7983,11 @@ func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
@@ -5477,7 +7996,11 @@ func AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
@@ -5486,7 +8009,11 @@ func AVMetadataQuickTimeMetadataKeyCameraWhiteBalance() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0). This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
@@ -5495,7 +8022,11 @@ func AVMetadataQuickTimeMetadataKeyCinematicVideoIntent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCollectionUser() *foundation.NSString {
@@ -5503,7 +8034,11 @@ func AVMetadataQuickTimeMetadataKeyCollectionUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyComment() *foundation.NSString {
@@ -5511,7 +8046,11 @@ func AVMetadataQuickTimeMetadataKeyComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyComposer() *foundation.NSString {
@@ -5519,7 +8058,11 @@ func AVMetadataQuickTimeMetadataKeyComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyContentIdentifier() *foundation.NSString {
@@ -5527,7 +8070,11 @@ func AVMetadataQuickTimeMetadataKeyContentIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCopyright() *foundation.NSString {
@@ -5535,7 +8082,11 @@ func AVMetadataQuickTimeMetadataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCreationDate() *foundation.NSString {
@@ -5543,7 +8094,11 @@ func AVMetadataQuickTimeMetadataKeyCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyCredits() *foundation.NSString {
@@ -5551,7 +8106,11 @@ func AVMetadataQuickTimeMetadataKeyCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyDescription() *foundation.NSString {
@@ -5559,7 +8118,11 @@ func AVMetadataQuickTimeMetadataKeyDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyDirectionFacing() *foundation.NSString {
@@ -5567,7 +8130,11 @@ func AVMetadataQuickTimeMetadataKeyDirectionFacing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyDirectionMotion() *foundation.NSString {
@@ -5575,7 +8142,11 @@ func AVMetadataQuickTimeMetadataKeyDirectionMotion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyDirector() *foundation.NSString {
@@ -5583,7 +8154,11 @@ func AVMetadataQuickTimeMetadataKeyDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyDisplayName() *foundation.NSString {
@@ -5591,7 +8166,11 @@ func AVMetadataQuickTimeMetadataKeyDisplayName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyEncodedBy() *foundation.NSString {
@@ -5599,7 +8178,11 @@ func AVMetadataQuickTimeMetadataKeyEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0). Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
@@ -5608,7 +8191,11 @@ func AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyGenre() *foundation.NSString {
@@ -5616,7 +8203,11 @@ func AVMetadataQuickTimeMetadataKeyGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyInformation() *foundation.NSString {
@@ -5624,7 +8215,11 @@ func AVMetadataQuickTimeMetadataKeyInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyIsMontage() *foundation.NSString {
@@ -5632,7 +8227,11 @@ func AVMetadataQuickTimeMetadataKeyIsMontage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyKeywords() *foundation.NSString {
@@ -5640,7 +8239,11 @@ func AVMetadataQuickTimeMetadataKeyKeywords() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationBody() *foundation.NSString {
@@ -5648,7 +8251,11 @@ func AVMetadataQuickTimeMetadataKeyLocationBody() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationDate() *foundation.NSString {
@@ -5656,7 +8263,11 @@ func AVMetadataQuickTimeMetadataKeyLocationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationISO6709() *foundation.NSString {
@@ -5664,7 +8275,11 @@ func AVMetadataQuickTimeMetadataKeyLocationISO6709() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationName() *foundation.NSString {
@@ -5672,7 +8287,11 @@ func AVMetadataQuickTimeMetadataKeyLocationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationNote() *foundation.NSString {
@@ -5680,7 +8299,11 @@ func AVMetadataQuickTimeMetadataKeyLocationNote() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyLocationRole() *foundation.NSString {
@@ -5688,7 +8311,11 @@ func AVMetadataQuickTimeMetadataKeyLocationRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyMake() *foundation.NSString {
@@ -5696,7 +8323,11 @@ func AVMetadataQuickTimeMetadataKeyMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyModel() *foundation.NSString {
@@ -5704,7 +8335,11 @@ func AVMetadataQuickTimeMetadataKeyModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyOriginalArtist() *foundation.NSString {
@@ -5712,7 +8347,11 @@ func AVMetadataQuickTimeMetadataKeyOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyPerformer() *foundation.NSString {
@@ -5720,7 +8359,11 @@ func AVMetadataQuickTimeMetadataKeyPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyPhonogramRights() *foundation.NSString {
@@ -5728,7 +8371,11 @@ func AVMetadataQuickTimeMetadataKeyPhonogramRights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyProducer() *foundation.NSString {
@@ -5736,7 +8383,11 @@ func AVMetadataQuickTimeMetadataKeyProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyPublisher() *foundation.NSString {
@@ -5744,7 +8395,11 @@ func AVMetadataQuickTimeMetadataKeyPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyRatingUser() *foundation.NSString {
@@ -5752,7 +8407,11 @@ func AVMetadataQuickTimeMetadataKeyRatingUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeySoftware() *foundation.NSString {
@@ -5760,7 +8419,11 @@ func AVMetadataQuickTimeMetadataKeySoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyTitle() *foundation.NSString {
@@ -5768,7 +8431,11 @@ func AVMetadataQuickTimeMetadataKeyTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
@@ -5777,7 +8444,11 @@ func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices() *foundation.
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
@@ -5786,7 +8457,11 @@ func AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors() *found
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyYear() *foundation.NSString {
@@ -5794,7 +8469,11 @@ func AVMetadataQuickTimeMetadataKeyYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeMetadataKeyiXML() *foundation.NSString {
@@ -5802,7 +8481,11 @@ func AVMetadataQuickTimeMetadataKeyiXML() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyAccessibilityDescription() *foundation.NSString {
@@ -5810,7 +8493,11 @@ func AVMetadataQuickTimeUserDataKeyAccessibilityDescription() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyAlbum() *foundation.NSString {
@@ -5818,7 +8505,11 @@ func AVMetadataQuickTimeUserDataKeyAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyArranger() *foundation.NSString {
@@ -5826,7 +8517,11 @@ func AVMetadataQuickTimeUserDataKeyArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyArtist() *foundation.NSString {
@@ -5834,7 +8529,11 @@ func AVMetadataQuickTimeUserDataKeyArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyAuthor() *foundation.NSString {
@@ -5842,7 +8541,11 @@ func AVMetadataQuickTimeUserDataKeyAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyChapter() *foundation.NSString {
@@ -5850,7 +8553,11 @@ func AVMetadataQuickTimeUserDataKeyChapter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyComment() *foundation.NSString {
@@ -5858,7 +8565,11 @@ func AVMetadataQuickTimeUserDataKeyComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyComposer() *foundation.NSString {
@@ -5866,7 +8577,11 @@ func AVMetadataQuickTimeUserDataKeyComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyCopyright() *foundation.NSString {
@@ -5874,7 +8589,11 @@ func AVMetadataQuickTimeUserDataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyCreationDate() *foundation.NSString {
@@ -5882,7 +8601,11 @@ func AVMetadataQuickTimeUserDataKeyCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyCredits() *foundation.NSString {
@@ -5890,7 +8613,11 @@ func AVMetadataQuickTimeUserDataKeyCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyDescription() *foundation.NSString {
@@ -5898,7 +8625,11 @@ func AVMetadataQuickTimeUserDataKeyDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyDirector() *foundation.NSString {
@@ -5906,7 +8637,11 @@ func AVMetadataQuickTimeUserDataKeyDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyDisclaimer() *foundation.NSString {
@@ -5914,7 +8649,11 @@ func AVMetadataQuickTimeUserDataKeyDisclaimer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyEncodedBy() *foundation.NSString {
@@ -5922,7 +8661,11 @@ func AVMetadataQuickTimeUserDataKeyEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyFullName() *foundation.NSString {
@@ -5930,7 +8673,11 @@ func AVMetadataQuickTimeUserDataKeyFullName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyGenre() *foundation.NSString {
@@ -5938,7 +8685,11 @@ func AVMetadataQuickTimeUserDataKeyGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyHostComputer() *foundation.NSString {
@@ -5946,7 +8697,11 @@ func AVMetadataQuickTimeUserDataKeyHostComputer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyInformation() *foundation.NSString {
@@ -5954,7 +8709,11 @@ func AVMetadataQuickTimeUserDataKeyInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyKeywords() *foundation.NSString {
@@ -5962,7 +8721,11 @@ func AVMetadataQuickTimeUserDataKeyKeywords() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyLocationISO6709() *foundation.NSString {
@@ -5970,7 +8733,11 @@ func AVMetadataQuickTimeUserDataKeyLocationISO6709() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyMake() *foundation.NSString {
@@ -5978,7 +8745,11 @@ func AVMetadataQuickTimeUserDataKeyMake() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyModel() *foundation.NSString {
@@ -5986,7 +8757,11 @@ func AVMetadataQuickTimeUserDataKeyModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalArtist() *foundation.NSString {
@@ -5994,7 +8769,11 @@ func AVMetadataQuickTimeUserDataKeyOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalFormat() *foundation.NSString {
@@ -6002,7 +8781,11 @@ func AVMetadataQuickTimeUserDataKeyOriginalFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyOriginalSource() *foundation.NSString {
@@ -6010,7 +8793,11 @@ func AVMetadataQuickTimeUserDataKeyOriginalSource() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyPerformers() *foundation.NSString {
@@ -6018,7 +8805,11 @@ func AVMetadataQuickTimeUserDataKeyPerformers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyPhonogramRights() *foundation.NSString {
@@ -6026,7 +8817,11 @@ func AVMetadataQuickTimeUserDataKeyPhonogramRights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyProducer() *foundation.NSString {
@@ -6034,7 +8829,11 @@ func AVMetadataQuickTimeUserDataKeyProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyProduct() *foundation.NSString {
@@ -6042,7 +8841,11 @@ func AVMetadataQuickTimeUserDataKeyProduct() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyPublisher() *foundation.NSString {
@@ -6050,7 +8853,11 @@ func AVMetadataQuickTimeUserDataKeyPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeySoftware() *foundation.NSString {
@@ -6058,7 +8865,11 @@ func AVMetadataQuickTimeUserDataKeySoftware() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements() *foundation.NSString {
@@ -6066,7 +8877,11 @@ func AVMetadataQuickTimeUserDataKeySpecialPlaybackRequirements() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyTaggedCharacteristic() *foundation.NSString {
@@ -6074,7 +8889,11 @@ func AVMetadataQuickTimeUserDataKeyTaggedCharacteristic() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyTrack() *foundation.NSString {
@@ -6082,7 +8901,11 @@ func AVMetadataQuickTimeUserDataKeyTrack() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyTrackName() *foundation.NSString {
@@ -6090,7 +8913,11 @@ func AVMetadataQuickTimeUserDataKeyTrackName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyURLLink() *foundation.NSString {
@@ -6098,7 +8925,11 @@ func AVMetadataQuickTimeUserDataKeyURLLink() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyWarning() *foundation.NSString {
@@ -6106,7 +8937,11 @@ func AVMetadataQuickTimeUserDataKeyWarning() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataQuickTimeUserDataKeyWriter() *foundation.NSString {
@@ -6114,7 +8949,11 @@ func AVMetadataQuickTimeUserDataKeyWriter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAccountKind() *foundation.NSString {
@@ -6122,7 +8961,11 @@ func AVMetadataiTunesMetadataKeyAccountKind() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAcknowledgement() *foundation.NSString {
@@ -6130,7 +8973,11 @@ func AVMetadataiTunesMetadataKeyAcknowledgement() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAlbum() *foundation.NSString {
@@ -6138,7 +8985,11 @@ func AVMetadataiTunesMetadataKeyAlbum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAlbumArtist() *foundation.NSString {
@@ -6146,7 +8997,11 @@ func AVMetadataiTunesMetadataKeyAlbumArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAppleID() *foundation.NSString {
@@ -6154,7 +9009,11 @@ func AVMetadataiTunesMetadataKeyAppleID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyArranger() *foundation.NSString {
@@ -6162,7 +9021,11 @@ func AVMetadataiTunesMetadataKeyArranger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyArtDirector() *foundation.NSString {
@@ -6170,7 +9033,11 @@ func AVMetadataiTunesMetadataKeyArtDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyArtist() *foundation.NSString {
@@ -6178,7 +9045,11 @@ func AVMetadataiTunesMetadataKeyArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyArtistID() *foundation.NSString {
@@ -6186,7 +9057,11 @@ func AVMetadataiTunesMetadataKeyArtistID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyAuthor() *foundation.NSString {
@@ -6194,7 +9069,11 @@ func AVMetadataiTunesMetadataKeyAuthor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyBeatsPerMin() *foundation.NSString {
@@ -6202,7 +9081,11 @@ func AVMetadataiTunesMetadataKeyBeatsPerMin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyComposer() *foundation.NSString {
@@ -6210,7 +9093,11 @@ func AVMetadataiTunesMetadataKeyComposer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyConductor() *foundation.NSString {
@@ -6218,7 +9105,11 @@ func AVMetadataiTunesMetadataKeyConductor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyContentRating() *foundation.NSString {
@@ -6226,7 +9117,11 @@ func AVMetadataiTunesMetadataKeyContentRating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyCopyright() *foundation.NSString {
@@ -6234,7 +9129,11 @@ func AVMetadataiTunesMetadataKeyCopyright() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyCoverArt() *foundation.NSString {
@@ -6242,7 +9141,11 @@ func AVMetadataiTunesMetadataKeyCoverArt() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyCredits() *foundation.NSString {
@@ -6250,7 +9153,11 @@ func AVMetadataiTunesMetadataKeyCredits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyDescription() *foundation.NSString {
@@ -6258,7 +9165,11 @@ func AVMetadataiTunesMetadataKeyDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyDirector() *foundation.NSString {
@@ -6266,7 +9177,11 @@ func AVMetadataiTunesMetadataKeyDirector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyDiscCompilation() *foundation.NSString {
@@ -6274,7 +9189,11 @@ func AVMetadataiTunesMetadataKeyDiscCompilation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyDiscNumber() *foundation.NSString {
@@ -6282,7 +9201,11 @@ func AVMetadataiTunesMetadataKeyDiscNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyEQ() *foundation.NSString {
@@ -6290,7 +9213,11 @@ func AVMetadataiTunesMetadataKeyEQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyEncodedBy() *foundation.NSString {
@@ -6298,7 +9225,11 @@ func AVMetadataiTunesMetadataKeyEncodedBy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyEncodingTool() *foundation.NSString {
@@ -6306,7 +9237,11 @@ func AVMetadataiTunesMetadataKeyEncodingTool() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyExecProducer() *foundation.NSString {
@@ -6314,7 +9249,11 @@ func AVMetadataiTunesMetadataKeyExecProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyGenreID() *foundation.NSString {
@@ -6322,7 +9261,11 @@ func AVMetadataiTunesMetadataKeyGenreID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyGrouping() *foundation.NSString {
@@ -6330,7 +9273,11 @@ func AVMetadataiTunesMetadataKeyGrouping() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyLinerNotes() *foundation.NSString {
@@ -6338,7 +9285,11 @@ func AVMetadataiTunesMetadataKeyLinerNotes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyLyrics() *foundation.NSString {
@@ -6346,7 +9297,11 @@ func AVMetadataiTunesMetadataKeyLyrics() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyOnlineExtras() *foundation.NSString {
@@ -6354,7 +9309,11 @@ func AVMetadataiTunesMetadataKeyOnlineExtras() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyOriginalArtist() *foundation.NSString {
@@ -6362,7 +9321,11 @@ func AVMetadataiTunesMetadataKeyOriginalArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyPerformer() *foundation.NSString {
@@ -6370,7 +9333,11 @@ func AVMetadataiTunesMetadataKeyPerformer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyPhonogramRights() *foundation.NSString {
@@ -6378,7 +9345,11 @@ func AVMetadataiTunesMetadataKeyPhonogramRights() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyPlaylistID() *foundation.NSString {
@@ -6386,7 +9357,11 @@ func AVMetadataiTunesMetadataKeyPlaylistID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyPredefinedGenre() *foundation.NSString {
@@ -6394,7 +9369,11 @@ func AVMetadataiTunesMetadataKeyPredefinedGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyProducer() *foundation.NSString {
@@ -6402,7 +9381,11 @@ func AVMetadataiTunesMetadataKeyProducer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyPublisher() *foundation.NSString {
@@ -6410,7 +9393,11 @@ func AVMetadataiTunesMetadataKeyPublisher() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyRecordCompany() *foundation.NSString {
@@ -6418,7 +9405,11 @@ func AVMetadataiTunesMetadataKeyRecordCompany() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyReleaseDate() *foundation.NSString {
@@ -6426,7 +9417,11 @@ func AVMetadataiTunesMetadataKeyReleaseDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeySoloist() *foundation.NSString {
@@ -6434,7 +9429,11 @@ func AVMetadataiTunesMetadataKeySoloist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeySongID() *foundation.NSString {
@@ -6442,7 +9441,11 @@ func AVMetadataiTunesMetadataKeySongID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeySongName() *foundation.NSString {
@@ -6450,7 +9453,11 @@ func AVMetadataiTunesMetadataKeySongName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeySoundEngineer() *foundation.NSString {
@@ -6458,7 +9465,11 @@ func AVMetadataiTunesMetadataKeySoundEngineer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyThanks() *foundation.NSString {
@@ -6466,7 +9477,11 @@ func AVMetadataiTunesMetadataKeyThanks() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyTrackNumber() *foundation.NSString {
@@ -6474,7 +9489,11 @@ func AVMetadataiTunesMetadataKeyTrackNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyTrackSubTitle() *foundation.NSString {
@@ -6482,7 +9501,11 @@ func AVMetadataiTunesMetadataKeyTrackSubTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyUserComment() *foundation.NSString {
@@ -6490,7 +9513,11 @@ func AVMetadataiTunesMetadataKeyUserComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVMetadataiTunesMetadataKeyUserGenre() *foundation.NSString {
@@ -6498,7 +9525,11 @@ func AVMetadataiTunesMetadataKeyUserGenre() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVMovieReferenceRestrictionsKey @abstract Indicates the restrictions used by the movie when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. See AVAsset.h for the declaration of the AVAssetReferenceRestrictions enum. @discussion Some movies can contain references to media data stored outside the movie's container, for example in another file. This key can be used to specify a policy to use when these references are encountered. If a movie contains one or more references of a type that is forbidden by the reference restrictions, loading of movie properties will fail. In addition, such a movie cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
@@ -6563,7 +9594,11 @@ func AVOutputSettingsPresetHEVC4320x2160() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetHEVC7680x4320() *foundation.NSString {
@@ -6571,7 +9606,11 @@ func AVOutputSettingsPresetHEVC7680x4320() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetMVHEVC1440x1440() uintptr {
@@ -6584,7 +9623,11 @@ func AVOutputSettingsPresetMVHEVC4320x4320() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetMVHEVC7680x7680() *foundation.NSString {
@@ -6592,7 +9635,11 @@ func AVOutputSettingsPresetMVHEVC7680x7680() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVOutputSettingsPresetMVHEVC960x960() uintptr {
@@ -6617,7 +9664,11 @@ func AVPlayerEligibleForHDRPlaybackDidChangeNotification() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification @abstract	A notification which is posted when the snapshot objects provided by this timeline would be out of sync with the current timeline state. See keys below.
@@ -6626,7 +9677,11 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged() *foundation.NSString {
@@ -6634,13 +9689,24 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonCurrentSegmentChanged() *
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey @abstract Indicates the reason for the snapshot out of sync notification.
-func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() uintptr {
+func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged() *foundation.NSString {
@@ -6648,7 +9714,11 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonLoadedTimeRangesChanged()
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged() *foundation.NSString {
@@ -6656,7 +9726,11 @@ func AVPlayerIntegratedTimelineSnapshotsOutOfSyncReasonSegmentsChanged() *founda
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Event playback should occur before starting primary playback, regardless of initial primary playback position.
@@ -6665,7 +9739,11 @@ func AVPlayerInterstitialEventJoinCue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Event playback should occur after primary playback ends without error, either at the end of the primary asset or at the client-specified forward playback end time.
@@ -6674,19 +9752,37 @@ func AVPlayerInterstitialEventLeaveCue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the NSError in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification if AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey in the same payload points to a value of AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey() uintptr {
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the AVPlayerInterstitial event that had its asset list response status changed in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that is posted whenever an AVPlayerInterstitialEvent's asset list response status changes. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey, with a value that indicates the AVPlayerInterstitialEvent for which the asset response status has changed. 2. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey, with a value of type AVPlayerInterstitialEventAssetListResponseStatus, indicating the changed asset response status. 3. AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey, with a value of type NSError that carries additional information about the failure to read the asset list. This key is only present when the new AVPlayerInterstitialEventAssetListResponseStatus is AVPlayerInterstitialEventAssetListResponseStatusUnavailable.
@@ -6695,13 +9791,24 @@ func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotificatio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the asset list response status in the payload of the AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEventAssetListResponseStatus.
-func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey() uintptr {
+func AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that's posted whenever the currentEvent of an AVPlayerInterstitialEventMonitor changes.
@@ -6710,13 +9817,24 @@ func AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification() *founda
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the AVPlayerInterstitial event that had its skippable event state changed in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that's posted whenever the currentEventSkippableState of an AVPlayerInterstitialEventMonitor changes.
@@ -6725,25 +9843,50 @@ func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotifica
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the skip label of the event in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSString that's the localized skip label if a localizedStringsBundle is set on the AVPlayerInterstitialEventController and a skipControlLocalizedLabelBundleKey on the AVPlayerInterstitialEvent whose skippable event state changed. Note that this key will not be present if there is no localizedStringsBundle set, or if the currentEventSkippableState changed to AVPlayerInterstitialEventSkippableEventStateNotSkippable.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey() uintptr {
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the skippable event state in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification. The value corresponding to this key is an NSNumber containing type AVPlayerInterstitialEventSkippableEventState.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey() uintptr {
+func AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the AVPlayerInterstitialEvent that was skipped in the payload of the AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that's posted whenever an event was skipped via skip control.
@@ -6752,7 +9895,11 @@ func AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification() *foundati
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that's posted whenever the value of events of an AVPlayerInterstitialEventMonitor is changed.
@@ -6761,19 +9908,37 @@ func AVPlayerInterstitialEventMonitorEventsDidChangeNotification() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key to indicate whether the event that finished playing was fully played out in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type NSNumber with a BOOL value.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the AVPlayerInterstitialEvent that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that is posted whenever an AVPlayerInterstitialEvent finished playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey, with a value that indicates the AVPlayerInterstitialEvent that finished playing. 2. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey, with a value that indicates how long that AVPlayerInterstitialEvent played out for. 3. AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey, with a value that indicates whether the AVPlayerInterstitialEvent was fully played out. Note that cancelling an AVPlayerInterstitialEvent after playback started but prior to playback finishing will also trigger this event.
@@ -6782,25 +9947,50 @@ func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification() *f
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the playout time of the event that finished playing in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification. The value corresponding to this key is of type CMTime as a NSDictionary.
-func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey() uintptr {
+func AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key to indicate whether the event that was unscheduled was due to an error. The value corresponding to this key is of type NSError. This key only exists in the payload of AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification if the interstitial event was unscheduled due to an error.
-func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey() uintptr {
+func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The dictionary key for the AVPlayerInterstitialEvent that was unscheduled in the payload of the AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification. The value corresponding to this key is of type AVPlayerInterstitialEvent.
-func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() uintptr {
+func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that is posted whenever an AVPlayerInterstitialEvent with loaded assets was unscheduled prior to playing. Carries a userInfo dictionary that can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey, with a value that indicates which AVPlayerInterstitialEvent was unscheduled. 2. AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey, with an NSError value. This key will only be present if the AVPlayerInterstitialEvent was unscheduled due to an error.
@@ -6809,7 +9999,11 @@ func AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A notification that is posted whenever a daterange-schedule request completes. The userInfo dictionary can contain the following keys and values: 1. AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey, whose value is an NSString identifying the schedule. 2. AVPlayerInterstitialEventMonitorScheduleRequestResponseKey, whose value is an NSData carrying the JSON response. Absent if request failed. 3. AVPlayerInterstitialEventMonitorScheduleRequestErrorKey, whose value is an NSError.
@@ -6818,25 +10012,50 @@ func AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification() *fou
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSError. Absent if the request succeeded
-func AVPlayerInterstitialEventMonitorScheduleRequestErrorKey() uintptr {
+func AVPlayerInterstitialEventMonitorScheduleRequestErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorScheduleRequestErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSString.
-func AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey() uintptr {
+func AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorScheduleRequestIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // userInfo dictionary key for the AVPlayerInterstitialEventMonitorScheduleRequestCompletedNotification. Value is NSData. Absent if the request failed.
-func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() uintptr {
+func AVPlayerInterstitialEventMonitorScheduleRequestResponseKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerInterstitialEventMonitorScheduleRequestResponseKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // No cue specified; event playback should start at event time (or date).
@@ -6845,7 +10064,11 @@ func AVPlayerInterstitialEventNoCue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemDidPlayToEndTimeNotification() *foundation.NSString {
@@ -6853,12 +10076,23 @@ func AVPlayerItemDidPlayToEndTimeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVPlayerItemFailedToPlayToEndTimeErrorKey() uintptr {
+func AVPlayerItemFailedToPlayToEndTimeErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVPlayerItemFailedToPlayToEndTimeErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemFailedToPlayToEndTimeNotification() *foundation.NSString {
@@ -6866,7 +10100,11 @@ func AVPlayerItemFailedToPlayToEndTimeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
@@ -6886,7 +10124,11 @@ func AVPlayerItemMediaSelectionDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemNewAccessLogEntryNotification() *foundation.NSString {
@@ -6894,7 +10136,11 @@ func AVPlayerItemNewAccessLogEntryNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemNewErrorLogEntryNotification() *foundation.NSString {
@@ -6902,7 +10148,11 @@ func AVPlayerItemNewErrorLogEntryNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemPlaybackStalledNotification() *foundation.NSString {
@@ -6910,7 +10160,11 @@ func AVPlayerItemPlaybackStalledNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification() *foundation.NSString {
@@ -6918,7 +10172,11 @@ func AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification() *foundatio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerItemTimeJumpedNotification() *foundation.NSString {
@@ -6926,7 +10184,11 @@ func AVPlayerItemTimeJumpedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates a time jump was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerItemTimeJumpedNotification that a time jump originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the current time changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
@@ -6947,7 +10209,11 @@ func AVPlayerRateDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates a rate change was caused by another participant connected through AVPlayerPlaybackCoordinator. Informs the receiver of an AVPlayerRateDidChangeNotification about a rate change originated from another AVCoordinatedPlaybackParticipant connected through AVPlayerPlaybackCoordinator. This can be used to inform UI showing why the playback rate changed. The type of the value for this key is an AVCoordinatedPlaybackParticipant, which is part of the AVPlayerPlaybackCoordinator.otherParticipants array.
@@ -6977,7 +10243,11 @@ func AVPlayerRateDidChangeReasonPlayheadReachedLiveEdge() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() *foundation.NSString {
@@ -6985,7 +10255,11 @@ func AVPlayerRateDidChangeReasonReversePlaybackReachedStartOfSeekableRange() *fo
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVPlayerRateDidChangeReasonSetRateCalled() uintptr {
@@ -7004,7 +10278,11 @@ func AVPlayerWaitingDuringInterstitialEventReason() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the player is waiting for another participant connected through its AVPlayerPlaybackCoordinator. The player is waiting for playback because its connected AVPlayerPlaybackCoordinator requires information from one of the other participants before playback can start.
@@ -7019,7 +10297,11 @@ func AVPlayerWaitingToMinimizeStallsReason() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the player is monitoring the playback buffer fill rate to determine if playback is likely to complete without interruptions. The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason. Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
@@ -7028,7 +10310,11 @@ func AVPlayerWaitingWhileEvaluatingBufferingRateReason() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the AVPlayer is waiting because its currentItem is nil The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
@@ -7037,7 +10323,11 @@ func AVPlayerWaitingWithNoItemToPlayReason() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVRouteDetectorMultipleRoutesDetectedDidChangeNotification @abstract	Posted when the value of multipleRoutesDetected changes.
@@ -7047,9 +10337,16 @@ func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() uintptr {
 }
 
 // @constant		AVSampleBufferAudioRendererFlushTimeKey @abstract		The presentation timestamp of the first enqueued sample that was flushed. @discussion The value of this key is an NSValue wrapping a CMTime.
-func AVSampleBufferAudioRendererFlushTimeKey() uintptr {
+func AVSampleBufferAudioRendererFlushTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVSampleBufferAudioRendererFlushTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification @abstract		A notification that indicates the hardware configuration does not match the enqueued data format. @discussion The output configuration of the playback hardware might change during the playback session if other clients play content with different format. In such cases, if the media content format does not match the hardware configuration it would produce suboptimal rendering of the enqueued media data. When the framework detects such mismatch it will issue this notification, so the client can flush the renderer and re-enqueue the sample buffers from the current media playhead, which will configure the hardware based on the format of newly enqueued sample buffers.
@@ -7058,7 +10355,11 @@ func AVSampleBufferAudioRendererOutputConfigurationDidChangeNotification() *foun
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification @abstract		A notification that fires whenever the receiver's enqueued media data has been flushed for a reason other than a call to the -flush method. @discussion The renderer may flush enqueued media data when the user routes playback to a new destination.  The renderer may also flush enqueued media data when the playback rate of the attached AVSampleBufferRenderSynchronizer is changed (e.g. 1.0 -> 2.0 or 1.0 -> 0.0 -> 2.0), however no flush will occur for normal pauses (non-zero -> 0.0) and resumes (0.0 -> same non-zero rate as before). When an automatic flush occurs, the attached render synchronizer's timebase will remain running at its current rate.  It is typically best to respond to this notification by enqueueing media data with timestamps starting at the timebase's current time.  To the listener, this will sound similar to muting the audio for a short period of time.  If it is more desirable to ensure that all audio is played than to keep the timeline moving, you may also stop the synchronizer, set the synchronizer's current time to the value of AVSampleBufferAudioRendererFlushTimeKey, start reenqueueing sample buffers with timestamps starting at that time, and restart the synchronizer.  To the listener, this will sound similar to pausing the audio for a short period of time. This notification is delivered on an arbitrary thread.  If sample buffers are being enqueued with the renderer concurrently with the receipt of this notification, it is possible that one or more sample buffers will remain enqueued in the renderer.  This is generally undesirable, because the sample buffers that remain will likely have timestamps far ahead of the timebase's current time and so won't be rendered for some time.  The best practice is to invoke the -flush method, in a manner that is serialized with enqueueing sample buffers, after receiving this notification and before resuming the enqueueing of sample buffers.
@@ -7067,7 +10368,11 @@ func AVSampleBufferAudioRendererWasFlushedAutomaticallyNotification() *foundatio
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSampleBufferDisplayLayerFailedToDecodeNotification() uintptr {
@@ -7085,7 +10390,11 @@ func AVSampleBufferDisplayLayerOutputObscuredDueToInsufficientExternalProtection
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() uintptr {
@@ -7104,7 +10413,11 @@ func AVSampleBufferRenderSynchronizerRateDidChangeNotification() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSampleBufferVideoRendererDidFailToDecodeNotification() uintptr {
@@ -7128,7 +10441,11 @@ func AVSemanticSegmentationMatteTypeGlasses() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSemanticSegmentationMatteTypeHair A matting image segmenting all hair from all persons in the visible field-of-view of an image.
@@ -7137,7 +10454,11 @@ func AVSemanticSegmentationMatteTypeHair() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSemanticSegmentationMatteTypeSkin A matting image segmenting all skin from all persons in the visible field-of-view of an image.
@@ -7146,7 +10467,11 @@ func AVSemanticSegmentationMatteTypeSkin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSemanticSegmentationMatteTypeTeeth A matting image segmenting all teeth from all persons in the visible field-of-view of an image.
@@ -7155,7 +10480,11 @@ func AVSemanticSegmentationMatteTypeTeeth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVSpatialCaptureDiscomfortReasonNotEnoughLight The lighting of the current scene is not bright enough; the playback experience will likely be uncomfortable due to noise differences between the two cameras.
@@ -7171,15 +10500,29 @@ func AVSpatialCaptureDiscomfortReasonSubjectTooClose() uintptr {
 }
 
 // A UTI for streaming key delivery content keys The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
-func AVStreamingKeyDeliveryContentKeyType() uintptr {
+func AVStreamingKeyDeliveryContentKeyType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVStreamingKeyDeliveryContentKeyType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A UTI for persistent streaming key delivery content keys The value of this UTI is @"com.apple.streamingkeydelivery.persistentcontentkey".
-func AVStreamingKeyDeliveryPersistentContentKeyType() uintptr {
+func AVStreamingKeyDeliveryPersistentContentKeyType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVStreamingKeyDeliveryPersistentContentKeyType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between an audio track with another audio track that contains the same content but is typically encoded in a different format that's more widely supported, used to nominate a track that should be used in place of an unsupported track. Associations of type AVTrackAssociationTypeAudioFallback are supported only between audio tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has content that's less widely supported, and the input parameter should be an instance of AVAssetWriterInput with a corresponding track that has content that's more widely supported. Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout. This would ensure that all clients are capable of playing back some form of the audio.
@@ -7188,7 +10531,11 @@ func AVTrackAssociationTypeAudioFallback() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a track with another track that contains chapter information. The track containing chapter information may be a text track, a video track, or a timed metadata track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
@@ -7197,7 +10544,11 @@ func AVTrackAssociationTypeChapterList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a subtitle track typically containing both forced and non-forced subtitles with another subtitle track that contains only forced subtitles, for use when the user indicates that only essential subtitles should be displayed. When such an association is established, the forced subtitles in both tracks are expected to present the same content in the same language but may have different timing. Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
@@ -7206,7 +10557,11 @@ func AVTrackAssociationTypeForcedSubtitlesOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a metadata track and the track that's described or annotated via the contents of the metadata track. This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
@@ -7215,7 +10570,11 @@ func AVTrackAssociationTypeMetadataReferent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a metadata track and another track where the metadata provides additional information for rendering of that track. This track association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType, AVMediaTypeMetadata, while the input parameter should be an instance of AVAssetWriterInput for the target track that would be rendered (for example, a video track).
@@ -7224,7 +10583,11 @@ func AVTrackAssociationTypeRenderMetadataSource() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a pair of tracks that specifies that, when the first of the pair is selected, the second of the pair should be considered an appropriate default for selection also. Example: a subtitle track in the same language as an audio track may be associated with that audio track using AVTrackAssociationTypeSelectionFollower, to indicate that selection of the subtitle track, in the absence of a directive for subtitle selection from the user, can "follow" the selection of the audio track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver. In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
@@ -7233,7 +10596,11 @@ func AVTrackAssociationTypeSelectionFollower() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates an association between a track with another track that contains timecode information. The track containing timecode information should be a timecode track. This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
@@ -7242,55 +10609,115 @@ func AVTrackAssociationTypeTimecode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether network requests on behalf of this asset are allowed to use the cellular interface. Default is YES.
-func AVURLAssetAllowsCellularAccessKey() uintptr {
+func AVURLAssetAllowsCellularAccessKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetAllowsCellularAccessKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether network requests on behalf of this asset are allowed to use the constrained interface (e.g. interfaces marked as being in data saver mode). Default is YES.
-func AVURLAssetAllowsConstrainedNetworkAccessKey() uintptr {
+func AVURLAssetAllowsConstrainedNetworkAccessKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetAllowsConstrainedNetworkAccessKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether network requests on behalf of this asset are allowed to use the expensive interface (e.g. cellular, tethered, constrained). Default is YES.
-func AVURLAssetAllowsExpensiveNetworkAccessKey() uintptr {
+func AVURLAssetAllowsExpensiveNetworkAccessKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetAllowsExpensiveNetworkAccessKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // HTTP cookies that the AVURLAsset may send with HTTP requests Standard cross-site policy still applies: cookies will only be sent to domains to which they apply. By default, an AVURLAsset will only have access to cookies in the client's default cookie storage that apply to the AVURLAsset's URL. You can supplement the cookies available to the asset via use of this initialization option HTTP cookies do not apply to non-HTTP(S) URLS. In HLS, many HTTP requests (e.g., media, crypt key, variant index) might be issued to different paths or hosts. In both of these cases, HTTP requests will be missing any cookies that do not apply to the AVURLAsset's URL. This init option allows the AVURLAsset to use additional HTTP cookies for those HTTP(S) requests.
-func AVURLAssetHTTPCookiesKey() uintptr {
+func AVURLAssetHTTPCookiesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetHTTPCookiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies the value of the User-Agent header to add to HTTP requests made by this asset. Value is an NSString Default value is the systems's default User-Agent.
-func AVURLAssetHTTPUserAgentKey() uintptr {
+func AVURLAssetHTTPUserAgentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetHTTPUserAgentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates the MIME type that should be used to identify the format of the media resource. When a value for this key is provided, only the specified MIME type is considered in determining how to handle or parse the media resource. Any other information that may be available, such as the URL path extension or a server-provided MIME type, is ignored.
-func AVURLAssetOverrideMIMETypeKey() uintptr {
+func AVURLAssetOverrideMIMETypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetOverrideMIMETypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether the asset should be prepared to indicate a precise duration and provide precise random access by time. The value for this key is a boolean NSNumber. If nil is passed as the value of the options parameter to -[AVURLAsset initWithURL:options:], or if a dictionary that lacks a value for the key AVURLAssetPreferPreciseDurationAndTimingKey is passed instead, a default value of NO is assumed. If the asset is intended to be played only, because AVPlayer will support approximate random access by time when full precision isn't available, the default value of NO will suffice. Pass YES if longer loading times are acceptable in cases in which precise timing is required. If the asset is intended to be inserted into an AVMutableComposition, precise random access is typically desirable and the value of YES is recommended. Note that such precision may require additional parsing of the resource in advance of operations that make use of any portion of it, depending on the specifics of its container format. Many container formats provide sufficient summary information for precise timing and do not require additional parsing to prepare for it; QuickTime movie files and MPEG-4 files are examples of such formats. Other formats do not provide sufficient summary information, and precise random access for them is possible only after a preliminary examination of a file's contents. If you pass YES for an asset that you intend to play via an instance of AVPlayerItem and you are prepared for playback to commence before the value of -[AVPlayerItem duration] becomes available, you can omit the key @"duration" from the array of AVAsset keys you pass to -[AVPlayerItem initWithAsset:automaticallyLoadedAssetKeys:] in order to prevent AVPlayerItem from automatically loading the value of duration while the item becomes ready to play. If precise duration and timing is not possible for the timed media resource referenced by the asset's URL, AVAsset.providesPreciseDurationAndTiming will be NO even if precise timing is requested via the use of this key.
-func AVURLAssetPreferPreciseDurationAndTimingKey() uintptr {
+func AVURLAssetPreferPreciseDurationAndTimingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetPreferPreciseDurationAndTimingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Specifies a UUID to append as the value of the query parameter "_HLS_primary_id" to selected HTTP requests issued on behalf of the asset. Supported for HLS assets only. Value is an NSUUID. Its UUID string value will be used as the query parameter. If you create AVURLAssets for the templateItems of AVPlayerInterstitialEvents and you want the instances of AVURLAsset that you create to be used during interstitial playback rather than equivalent AVURLAssets with the same URL, you must provide a value for this key that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVPlayerInterstitialEventController.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets.
-func AVURLAssetPrimarySessionIdentifierKey() uintptr {
+func AVURLAssetPrimarySessionIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetPrimarySessionIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates the restrictions used by the asset when resolving references to external media data. The value of this key is an NSNumber wrapping an AVAssetReferenceRestrictions enum value or the logical combination of multiple such values. Some assets can contain references to media data stored outside the asset's container file, for example in another file. This key can be used to specify a policy to use when these references are encountered. If an asset contains one or more references of a type that is forbidden by the reference restrictions, loading of asset properties will fail. In addition, such an asset cannot be used with other AVFoundation modules, such as AVPlayerItem or AVAssetExportSession.
@@ -7300,9 +10727,16 @@ func AVURLAssetReferenceRestrictionsKey() uintptr {
 }
 
 // Indicates whether additional projected media signaling in the asset should be parsed and resolved as format description extensions. Default is NO.
-func AVURLAssetShouldParseExternalSphericalTagsKey() uintptr {
+func AVURLAssetShouldParseExternalSphericalTagsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetShouldParseExternalSphericalTagsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether alias data references in the asset should be parsed and resolved. Default is NO. Although the majority of QuickTime movie files contain all of the media data they require, some contain references to media stored in other files. While AVFoundation and CoreMedia typically employ a URL reference for this purpose, older implementations such as QuickTime 7 have commonly employed a Macintosh alias instead, as documented in the QuickTime File Format specification. If your application must work with legacy QuickTime movie files containing alias-based references to media data stored in other files, the use of this AVURLAsset initialization option is appropriate. If you provide a value for AVURLAssetReferenceRestrictionsKey, restrictions will be observed for resolved alias references just as they are for URL references. For more details about alias resolution, consult documentation of the bookmark-related interfaces of NSURL.
@@ -7312,21 +10746,42 @@ func AVURLAssetShouldSupportAliasDataReferencesKey() uintptr {
 }
 
 // Specifies the attribution of the URLs requested by this asset. Value is an NSNumber whose value is an NSURLRequestAttribution (see NSURLRequest.h). Default value is NSURLRequestAttributionDeveloper. All NSURLRequests issed on behalf of this AVURLAsset will be attributed with this value and follow the App Privacy Policy accordingly.
-func AVURLAssetURLRequestAttributionKey() uintptr {
+func AVURLAssetURLRequestAttributionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVURLAssetURLRequestAttributionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoAllowFrameReorderingKey @abstract Enables or disables frame reordering. @discussion In order to achieve the best compression while maintaining image quality, some video encoders can reorder frames.  This means that the order in which the frames will be emitted and stored (the decode order) will be different from the order in which they are presented to the video encoder (the display order). Encoding using frame reordering requires more system resources than encoding without frame reordering, so encoding performance should be taken into account when deciding whether to enable frame reordering.  This is especially important when encoding video data from a real-time source, such as AVCaptureVideoDataOutput.  In this situation, using a value of @NO for AVVideoAllowFrameReorderingKey may yield the best results. The default is @YES, which means that the encoder decides whether to enable frame reordering.
-func AVVideoAllowFrameReorderingKey() uintptr {
+func AVVideoAllowFrameReorderingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoAllowFrameReorderingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoAllowWideColorKey @abstract	Indicates whether the client can process wide color @discussion Clients who wish to process wide color content should set the value of this key to @YES, or specify AVVideoColorPropertiesKey. The default value, @NO, permits implicit color conversions to occur to a non-wide gamut color space.
-func AVVideoAllowWideColorKey() uintptr {
+func AVVideoAllowWideColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoAllowWideColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoApertureModeCleanAperture @abstract	Both pixel aspect ratio and clean aperture will be applied. @discussion An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
@@ -7335,7 +10790,11 @@ func AVVideoApertureModeCleanAperture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoApertureModeEncodedPixels @abstract	Neither pixel aspect ratio nor clean aperture will be applied. @discussion The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
@@ -7344,7 +10803,11 @@ func AVVideoApertureModeEncodedPixels() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoApertureModeProductionAperture @abstract	Only pixel aspect ratio will be applied. @discussion The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
@@ -7353,84 +10816,186 @@ func AVVideoApertureModeProductionAperture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoAppleProRAWBitDepthKey() uintptr {
+func AVVideoAppleProRAWBitDepthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoAppleProRAWBitDepthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoAverageBitRateKey() uintptr {
+func AVVideoAverageBitRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoAverageBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoAverageNonDroppableFrameRateKey @abstract The desired average number of non-droppable frames to be encoded for each second of video. @discussion Some video encoders can produce a flexible mixture of non-droppable frames and droppable frames.  The difference between these types is that it is necessary for a video decoder to decode a non-droppable frame in order to successfully decode subsequent frames, whereas droppable frames are optional and can be skipped without impact on decode of subsequent frames.  Having a proportion of droppable frames in a sequence has advantages for temporal scalability: at playback time more or fewer frames may be decoded depending on the play rate.  This property requests that the encoder emit an overall proportion of non-droppable and droppable frames so that there are the specified number of non-droppable frames per second. For example, to specify that the encoder should include an average of 30 non-droppable frames for each second of video: [myVideoSettings setObject:@30 forKey:AVVideoAverageNonDroppableFrameRateKey];
-func AVVideoAverageNonDroppableFrameRateKey() uintptr {
+func AVVideoAverageNonDroppableFrameRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoAverageNonDroppableFrameRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoCleanApertureHeightKey() uintptr {
+func AVVideoCleanApertureHeightKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCleanApertureHeightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoCleanApertureHorizontalOffsetKey() uintptr {
+func AVVideoCleanApertureHorizontalOffsetKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCleanApertureHorizontalOffsetKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoCleanApertureKey @abstract	Defines the region within the video dimensions that will be displayed during playback @discussion The value for this key is an NSDictionary containing AVVideoCleanAperture*Key keys.  AVVideoCleanApertureWidthKey and AVVideoCleanApertureHeightKey define a clean rectangle which is centered on the video frame.  To offset this rectangle from center, use AVVideoCleanApertureHorizontalOffsetKey and AVVideoCleanApertureVerticalOffsetKey.  A positive value for AVVideoCleanApertureHorizontalOffsetKey moves the clean aperture region to the right, and a positive value for AVVideoCleanApertureVerticalOffsetKey moves the clean aperture region down. If no clean aperture region is specified, the entire frame will be displayed during playback. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
-func AVVideoCleanApertureKey() uintptr {
+func AVVideoCleanApertureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCleanApertureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoCleanApertureVerticalOffsetKey() uintptr {
+func AVVideoCleanApertureVerticalOffsetKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCleanApertureVerticalOffsetKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoCleanApertureWidthKey() uintptr {
+func AVVideoCleanApertureWidthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCleanApertureWidthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func AVVideoCodecAppleProRes422() uintptr {
+func AVVideoCodecAppleProRes422() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecAppleProRes422")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func AVVideoCodecAppleProRes4444() uintptr {
+func AVVideoCodecAppleProRes4444() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecAppleProRes4444")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func AVVideoCodecH264() uintptr {
+func AVVideoCodecH264() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecH264")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func AVVideoCodecHEVC() uintptr {
+func AVVideoCodecHEVC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecHEVC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func AVVideoCodecJPEG() uintptr {
+func AVVideoCodecJPEG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecJPEG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoCodecKey() uintptr {
+func AVVideoCodecKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCodecKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes422() *foundation.NSString {
@@ -7438,7 +11003,11 @@ func AVVideoCodecTypeAppleProRes422() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes422HQ() *foundation.NSString {
@@ -7446,7 +11015,11 @@ func AVVideoCodecTypeAppleProRes422HQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes422LT() *foundation.NSString {
@@ -7454,7 +11027,11 @@ func AVVideoCodecTypeAppleProRes422LT() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes422Proxy() *foundation.NSString {
@@ -7462,7 +11039,11 @@ func AVVideoCodecTypeAppleProRes422Proxy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes4444() *foundation.NSString {
@@ -7470,7 +11051,11 @@ func AVVideoCodecTypeAppleProRes4444() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProRes4444XQ() *foundation.NSString {
@@ -7478,7 +11063,11 @@ func AVVideoCodecTypeAppleProRes4444XQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProResRAW() *foundation.NSString {
@@ -7486,7 +11075,11 @@ func AVVideoCodecTypeAppleProResRAW() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeAppleProResRAWHQ() *foundation.NSString {
@@ -7494,7 +11087,11 @@ func AVVideoCodecTypeAppleProResRAWHQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeH264() *foundation.NSString {
@@ -7502,7 +11099,11 @@ func AVVideoCodecTypeH264() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeHEVC() *foundation.NSString {
@@ -7510,7 +11111,11 @@ func AVVideoCodecTypeHEVC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeHEVCWithAlpha() *foundation.NSString {
@@ -7518,7 +11123,11 @@ func AVVideoCodecTypeHEVCWithAlpha() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeJPEG() *foundation.NSString {
@@ -7526,7 +11135,11 @@ func AVVideoCodecTypeJPEG() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVVideoCodecTypeJPEGXL() *foundation.NSString {
@@ -7534,42 +11147,95 @@ func AVVideoCodecTypeJPEGXL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimariesKey() uintptr {
+func AVVideoColorPrimariesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimariesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimaries_EBU_3213() uintptr {
+func AVVideoColorPrimaries_EBU_3213() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimaries_EBU_3213")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimaries_ITU_R_2020() uintptr {
+func AVVideoColorPrimaries_ITU_R_2020() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimaries_ITU_R_2020")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimaries_ITU_R_709_2() uintptr {
+func AVVideoColorPrimaries_ITU_R_709_2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimaries_ITU_R_709_2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimaries_P3_D65() uintptr {
+func AVVideoColorPrimaries_P3_D65() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimaries_P3_D65")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPrimaries_SMPTE_C() uintptr {
+func AVVideoColorPrimaries_SMPTE_C() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPrimaries_SMPTE_C")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoColorPropertiesKey() uintptr {
+func AVVideoColorPropertiesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoColorPropertiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // AVVideoComposition may generate HDR metadata and attach it to the rendered frame. HDR metadata generation is influenced by the color space of the rendered frame, device, and HDR metadata format platform support. Any previously attached HDR metadata of the same metadata format will be overwritten.
@@ -7578,7 +11244,11 @@ func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Default. Pass the HDR metadata through, if present on the composed frame.
@@ -7587,148 +11257,341 @@ func AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoCompressionPropertiesKey @abstract The value for this key is an instance of NSDictionary, containing properties to be passed down to the video encoder. @discussion Package the below keys in an instance of NSDictionary and use it as the value for AVVideoCompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTCompressionProperties.h. Most keys can only be used for certain encoders.  Look at individual keys for details.
-func AVVideoCompressionPropertiesKey() uintptr {
+func AVVideoCompressionPropertiesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoCompressionPropertiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoDecompressionPropertiesKey @abstract The value for this key is an instance of NSDictionary, containing properties to be passed down to the video decoder. @discussion Package the below keys in an instance of NSDictionary and use it as the value for AVVideoDecompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTDecompressionProperties.h. Most keys can only be used for certain decoders.  Look at individual keys for details.
-func AVVideoDecompressionPropertiesKey() uintptr {
+func AVVideoDecompressionPropertiesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoDecompressionPropertiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVVideoEncoderSpecificationKey @abstract The video encoder specification includes options for choosing a specific video encoder. @discussion The value for this key is a dictionary containing kVTVideoEncoderSpecification_* keys specified in the VideoToolbox framework.  This key should be specified at the top level of an AVVideoSettings dictionary.
-func AVVideoEncoderSpecificationKey() uintptr {
+func AVVideoEncoderSpecificationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoEncoderSpecificationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoExpectedSourceFrameRateKey @abstract Indicates the expected source frame rate, if known. @discussion The frame rate is measured in frames per second. This is not used to control the frame rate; it is provided as a hint to the video encoder so that it can set up internal configuration before compression begins. The actual frame rate will depend on frame durations and may vary. This should be set if an AutoLevel AVVideoProfileLevelKey is used, or if the source content has a high frame rate (higher than 30 fps). The encoder might have to drop frames to satisfy bit stream requirements if this key is not specified.
-func AVVideoExpectedSourceFrameRateKey() uintptr {
+func AVVideoExpectedSourceFrameRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoExpectedSourceFrameRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoH264EntropyModeCABAC() uintptr {
+func AVVideoH264EntropyModeCABAC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoH264EntropyModeCABAC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoH264EntropyModeCAVLC() uintptr {
+func AVVideoH264EntropyModeCAVLC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoH264EntropyModeCAVLC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoH264EntropyModeKey @abstract The entropy encoding mode for H.264 compression. @discussion If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC).  CABAC generally gives better compression at the expense of higher computational overhead.  The default value is encoder-specific and may change depending on other encoder settings.  Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
-func AVVideoH264EntropyModeKey() uintptr {
+func AVVideoH264EntropyModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoH264EntropyModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoHeightKey() uintptr {
+func AVVideoHeightKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoHeightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoMaxKeyFrameIntervalDurationKey() uintptr {
+func AVVideoMaxKeyFrameIntervalDurationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoMaxKeyFrameIntervalDurationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoMaxKeyFrameIntervalKey() uintptr {
+func AVVideoMaxKeyFrameIntervalKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoMaxKeyFrameIntervalKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoPixelAspectRatioHorizontalSpacingKey() uintptr {
+func AVVideoPixelAspectRatioHorizontalSpacingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoPixelAspectRatioHorizontalSpacingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	AVVideoPixelAspectRatioKey @abstract	The aspect ratio of the pixels in the video frame @discussion The value for this key is an NSDictionary containing AVVideoPixelAspectRatio*Key keys.  If no value is specified for this key, the default value for the codec is used.  Usually this is 1:1, meaning square pixels. Note that prior to macOS 10.9 and iOS 7.0, this key could only be specified as part of the dictionary given for AVVideoCompressionPropertiesKey.  As of macOS 10.9 and iOS 7.0, the top level of an AVVideoSettings dictionary is the preferred place to specify this key.
-func AVVideoPixelAspectRatioKey() uintptr {
+func AVVideoPixelAspectRatioKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoPixelAspectRatioKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoPixelAspectRatioVerticalSpacingKey() uintptr {
+func AVVideoPixelAspectRatioVerticalSpacingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoPixelAspectRatioVerticalSpacingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Baseline30() uintptr {
+func AVVideoProfileLevelH264Baseline30() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Baseline30")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Baseline31() uintptr {
+func AVVideoProfileLevelH264Baseline31() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Baseline31")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Baseline41() uintptr {
+func AVVideoProfileLevelH264Baseline41() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Baseline41")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264BaselineAutoLevel() uintptr {
+func AVVideoProfileLevelH264BaselineAutoLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264BaselineAutoLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264High40() uintptr {
+func AVVideoProfileLevelH264High40() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264High40")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264High41() uintptr {
+func AVVideoProfileLevelH264High41() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264High41")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264HighAutoLevel() uintptr {
+func AVVideoProfileLevelH264HighAutoLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264HighAutoLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Main30() uintptr {
+func AVVideoProfileLevelH264Main30() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Main30")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Main31() uintptr {
+func AVVideoProfileLevelH264Main31() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Main31")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Main32() uintptr {
+func AVVideoProfileLevelH264Main32() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Main32")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264Main41() uintptr {
+func AVVideoProfileLevelH264Main41() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264Main41")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelH264MainAutoLevel() uintptr {
+func AVVideoProfileLevelH264MainAutoLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelH264MainAutoLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoProfileLevelKey() uintptr {
+func AVVideoProfileLevelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoProfileLevelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoQualityKey() uintptr {
+func AVVideoQualityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoQualityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the video range as HLG
@@ -7737,7 +11600,11 @@ func AVVideoRangeHLG() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the video range as PQ
@@ -7746,7 +11613,11 @@ func AVVideoRangePQ() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates that the video range as SDR
@@ -7755,95 +11626,225 @@ func AVVideoRangeSDR() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoScalingModeFit() uintptr {
+func AVVideoScalingModeFit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoScalingModeFit")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoScalingModeKey() uintptr {
+func AVVideoScalingModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoScalingModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoScalingModeResize() uintptr {
+func AVVideoScalingModeResize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoScalingModeResize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoScalingModeResizeAspect() uintptr {
+func AVVideoScalingModeResizeAspect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoScalingModeResizeAspect")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoScalingModeResizeAspectFill() uintptr {
+func AVVideoScalingModeResizeAspectFill() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoScalingModeResizeAspectFill")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunctionKey() uintptr {
+func AVVideoTransferFunctionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunctionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_IEC_sRGB() uintptr {
+func AVVideoTransferFunction_IEC_sRGB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_IEC_sRGB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_ITU_R_2100_HLG() uintptr {
+func AVVideoTransferFunction_ITU_R_2100_HLG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_ITU_R_2100_HLG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_ITU_R_709_2() uintptr {
+func AVVideoTransferFunction_ITU_R_709_2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_ITU_R_709_2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_Linear() uintptr {
+func AVVideoTransferFunction_Linear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_Linear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_SMPTE_240M_1995() uintptr {
+func AVVideoTransferFunction_SMPTE_240M_1995() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_SMPTE_240M_1995")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoTransferFunction_SMPTE_ST_2084_PQ() uintptr {
+func AVVideoTransferFunction_SMPTE_ST_2084_PQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoTransferFunction_SMPTE_ST_2084_PQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoWidthKey() uintptr {
+func AVVideoWidthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoWidthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoYCbCrMatrixKey() uintptr {
+func AVVideoYCbCrMatrixKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrixKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoYCbCrMatrix_ITU_R_2020() uintptr {
+func AVVideoYCbCrMatrix_ITU_R_2020() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrix_ITU_R_2020")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoYCbCrMatrix_ITU_R_601_4() uintptr {
+func AVVideoYCbCrMatrix_ITU_R_601_4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrix_ITU_R_601_4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoYCbCrMatrix_ITU_R_709_2() uintptr {
+func AVVideoYCbCrMatrix_ITU_R_709_2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrix_ITU_R_709_2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVVideoYCbCrMatrix_SMPTE_240M_1995() uintptr {
+func AVVideoYCbCrMatrix_SMPTE_240M_1995() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfoundationLib, "AVVideoYCbCrMatrix_SMPTE_240M_1995")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -7,396 +7,929 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @const      IKFilterBrowserDefaultInputImage @abstract   IKFilterBrowserDefaultInputImage - Allows you to set a custom image to be used as the inputImage for the filter preview. @discussion CIImage* - You can also set the inputImage among other parameters during the IKFilterBrowserWillPreviewFilterNotification. This image will be set before the notification is called. Setting the image to nil falls back to the image suplied by the framework.
-func IKFilterBrowserDefaultInputImage() uintptr {
+func IKFilterBrowserDefaultInputImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserDefaultInputImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserExcludeCategories @abstract   IKFilterBrowserExcludeCategories @discussion NSArray - The categories in this array will not be displayed in the browser
-func IKFilterBrowserExcludeCategories() uintptr {
+func IKFilterBrowserExcludeCategories() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserExcludeCategories")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserExcludeFilters @abstract   IKFilterBrowserExcludeFilters @discussion NSArray - The filters in this array will not be displayed in the browser
-func IKFilterBrowserExcludeFilters() uintptr {
+func IKFilterBrowserExcludeFilters() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserExcludeFilters")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserFilterDoubleClickNotification @abstract   IKFilterBrowserFilterDoubleClickNotification @discussion Send when the user made a double click on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
-func IKFilterBrowserFilterDoubleClickNotification() uintptr {
+func IKFilterBrowserFilterDoubleClickNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserFilterDoubleClickNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserFilterSelectedNotification @abstract   IKFilterBrowserFilterSelectedNotification @discussion Send when the user clicked on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
-func IKFilterBrowserFilterSelectedNotification() uintptr {
+func IKFilterBrowserFilterSelectedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserFilterSelectedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserShowCategories @abstract   IKFilterBrowserShowCategories @discussion BOOL - Determines if the filter browser should show the category list
-func IKFilterBrowserShowCategories() uintptr {
+func IKFilterBrowserShowCategories() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserShowCategories")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserShowPreview @abstract   IKFilterBrowserShowPreview @discussion BOOL - Determines if the filter browser should show the preview well
-func IKFilterBrowserShowPreview() uintptr {
+func IKFilterBrowserShowPreview() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserShowPreview")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKFilterBrowserWillPreviewFilterNotification @abstract   IKFilterBrowserWillPreviewFilterNotification @discussion Send before a filter is previewed allowing for setting parameters of that filter. The selected CIFilter object is send as the object in the notification
-func IKFilterBrowserWillPreviewFilterNotification() uintptr {
+func IKFilterBrowserWillPreviewFilterNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKFilterBrowserWillPreviewFilterNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserBackgroundColorKey() uintptr {
+func IKImageBrowserBackgroundColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserBackgroundColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCGImageRepresentationType() uintptr {
+func IKImageBrowserCGImageRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCGImageRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCGImageSourceRepresentationType() uintptr {
+func IKImageBrowserCGImageSourceRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCGImageSourceRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellBackgroundLayer() uintptr {
+func IKImageBrowserCellBackgroundLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellBackgroundLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellForegroundLayer() uintptr {
+func IKImageBrowserCellForegroundLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellForegroundLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellPlaceHolderLayer() uintptr {
+func IKImageBrowserCellPlaceHolderLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellPlaceHolderLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellSelectionLayer() uintptr {
+func IKImageBrowserCellSelectionLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellSelectionLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellsHighlightedTitleAttributesKey() uintptr {
+func IKImageBrowserCellsHighlightedTitleAttributesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellsHighlightedTitleAttributesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellsOutlineColorKey() uintptr {
+func IKImageBrowserCellsOutlineColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellsOutlineColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellsSubtitleAttributesKey() uintptr {
+func IKImageBrowserCellsSubtitleAttributesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellsSubtitleAttributesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserCellsTitleAttributesKey() uintptr {
+func IKImageBrowserCellsTitleAttributesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserCellsTitleAttributesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupBackgroundColorKey() uintptr {
+func IKImageBrowserGroupBackgroundColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupBackgroundColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupFooterLayer() uintptr {
+func IKImageBrowserGroupFooterLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupFooterLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupHeaderLayer() uintptr {
+func IKImageBrowserGroupHeaderLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupHeaderLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupRangeKey() uintptr {
+func IKImageBrowserGroupRangeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupRangeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupStyleKey() uintptr {
+func IKImageBrowserGroupStyleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupStyleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserGroupTitleKey() uintptr {
+func IKImageBrowserGroupTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserGroupTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserIconRefPathRepresentationType() uintptr {
+func IKImageBrowserIconRefPathRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserIconRefPathRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserIconRefRepresentationType() uintptr {
+func IKImageBrowserIconRefRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserIconRefRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserNSBitmapImageRepresentationType() uintptr {
+func IKImageBrowserNSBitmapImageRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserNSBitmapImageRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserNSDataRepresentationType() uintptr {
+func IKImageBrowserNSDataRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserNSDataRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserNSImageRepresentationType() uintptr {
+func IKImageBrowserNSImageRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserNSImageRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserNSURLRepresentationType() uintptr {
+func IKImageBrowserNSURLRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserNSURLRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserPDFPageRepresentationType() uintptr {
+func IKImageBrowserPDFPageRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserPDFPageRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserPathRepresentationType() uintptr {
+func IKImageBrowserPathRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserPathRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserQCCompositionPathRepresentationType() uintptr {
+func IKImageBrowserQCCompositionPathRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserQCCompositionPathRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserQCCompositionRepresentationType() uintptr {
+func IKImageBrowserQCCompositionRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserQCCompositionRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserQTMoviePathRepresentationType() uintptr {
+func IKImageBrowserQTMoviePathRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserQTMoviePathRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserQTMovieRepresentationType() uintptr {
+func IKImageBrowserQTMovieRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserQTMovieRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserQuickLookPathRepresentationType() uintptr {
+func IKImageBrowserQuickLookPathRepresentationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserQuickLookPathRepresentationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKImageBrowserSelectionColorKey() uintptr {
+func IKImageBrowserSelectionColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKImageBrowserSelectionColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKOverlayTypeBackground() uintptr {
+func IKOverlayTypeBackground() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKOverlayTypeBackground")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKOverlayTypeImage() uintptr {
+func IKOverlayTypeImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKOverlayTypeImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerAllowsEditingKey() uintptr {
+func IKPictureTakerAllowsEditingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerAllowsEditingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerAllowsFileChoosingKey() uintptr {
+func IKPictureTakerAllowsFileChoosingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerAllowsFileChoosingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerAllowsVideoCaptureKey() uintptr {
+func IKPictureTakerAllowsVideoCaptureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerAllowsVideoCaptureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerCropAreaSizeKey() uintptr {
+func IKPictureTakerCropAreaSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerCropAreaSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerImageTransformsKey() uintptr {
+func IKPictureTakerImageTransformsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerImageTransformsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerInformationalTextKey() uintptr {
+func IKPictureTakerInformationalTextKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerInformationalTextKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerOutputImageMaxSizeKey() uintptr {
+func IKPictureTakerOutputImageMaxSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerOutputImageMaxSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerRemainOpenAfterValidateKey() uintptr {
+func IKPictureTakerRemainOpenAfterValidateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerRemainOpenAfterValidateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowAddressBookPicture() uintptr {
+func IKPictureTakerShowAddressBookPicture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowAddressBookPicture")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowAddressBookPictureKey() uintptr {
+func IKPictureTakerShowAddressBookPictureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowAddressBookPictureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowEffectsKey() uintptr {
+func IKPictureTakerShowEffectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowEffectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowEmptyPicture() uintptr {
+func IKPictureTakerShowEmptyPicture() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowEmptyPicture")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowEmptyPictureKey() uintptr {
+func IKPictureTakerShowEmptyPictureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowEmptyPictureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerShowRecentPictureKey() uintptr {
+func IKPictureTakerShowRecentPictureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerShowRecentPictureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKPictureTakerUpdateRecentPictureKey() uintptr {
+func IKPictureTakerUpdateRecentPictureKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKPictureTakerUpdateRecentPictureKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowAudioFile() uintptr {
+func IKSlideshowAudioFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowAudioFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowModeImages() uintptr {
+func IKSlideshowModeImages() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowModeImages")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowModeOther() uintptr {
+func IKSlideshowModeOther() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowModeOther")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowModePDF() uintptr {
+func IKSlideshowModePDF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowModePDF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowPDFDisplayBox() uintptr {
+func IKSlideshowPDFDisplayBox() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowPDFDisplayBox")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowPDFDisplayMode() uintptr {
+func IKSlideshowPDFDisplayMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowPDFDisplayMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowPDFDisplaysAsBook() uintptr {
+func IKSlideshowPDFDisplaysAsBook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowPDFDisplaysAsBook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowScreen() uintptr {
+func IKSlideshowScreen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowScreen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowStartIndex() uintptr {
+func IKSlideshowStartIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowStartIndex")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowStartPaused() uintptr {
+func IKSlideshowStartPaused() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowStartPaused")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKSlideshowWrapAround() uintptr {
+func IKSlideshowWrapAround() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKSlideshowWrapAround")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeAnnotate() uintptr {
+func IKToolModeAnnotate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeAnnotate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeCrop() uintptr {
+func IKToolModeCrop() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeCrop")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeMove() uintptr {
+func IKToolModeMove() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeMove")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeNone() uintptr {
+func IKToolModeNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeRotate() uintptr {
+func IKToolModeRotate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeRotate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeSelect() uintptr {
+func IKToolModeSelect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeSelect")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeSelectEllipse() uintptr {
+func IKToolModeSelectEllipse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeSelectEllipse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeSelectLasso() uintptr {
+func IKToolModeSelectLasso() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeSelectLasso")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IKToolModeSelectRect() uintptr {
+func IKToolModeSelectRect() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IKToolModeSelectRect")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUIFlavorAllowFallback @abstract   IKUIFlavorAllowFallback @discussion Allow the filter to provide a view with controls of a different size and set than requested, if it cannot provide a view for the requested flavor.
@@ -405,7 +938,11 @@ func IKUIFlavorAllowFallback() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUISizeFlavor @abstract   IKUISizeFlavor @discussion Key to request the desired size of controls in a filter UIView - defined values are IKUISizeMini, IKUISizeSmall and IKUISizeRegular.
@@ -414,7 +951,11 @@ func IKUISizeFlavor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUISizeMini @abstract   IKUISizeMini @discussion Constant for requesting controls in mini size.
@@ -423,7 +964,11 @@ func IKUISizeMini() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUISizeRegular @abstract   IKUISizeRegular @discussion Constant for requesting controls in regular or normal size.
@@ -432,7 +977,11 @@ func IKUISizeRegular() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUISizeSmall @abstract   IKUISizeSmall @discussion Constant for requesting controls in small size.
@@ -441,7 +990,11 @@ func IKUISizeSmall() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      IKUImaxSize @abstract   IKUImaxSize @discussion Maximum allowed dimensions of the view for the filter UI. If width or height is zero it means that that dimension of the view is not restricted.
@@ -450,25 +1003,57 @@ func IKUImaxSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IK_ApertureBundleIdentifier() uintptr {
+func IK_ApertureBundleIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IK_ApertureBundleIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IK_MailBundleIdentifier() uintptr {
+func IK_MailBundleIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IK_MailBundleIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IK_PhotosBundleIdentifier() uintptr {
+func IK_PhotosBundleIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IK_PhotosBundleIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IK_iPhotoBundleIdentifier() uintptr {
+func IK_iPhotoBundleIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagekitLib, "IK_iPhotoBundleIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -24,7 +25,11 @@ func Nw_content_context_default_message() *foundation.NSObject {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSObject)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSObjectFromID(id)
 }
 
 func Nw_content_context_default_stream() *foundation.NSObject {
@@ -32,7 +37,11 @@ func Nw_content_context_default_stream() *foundation.NSObject {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSObject)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSObjectFromID(id)
 }
 
 func Nw_content_context_final_send() *foundation.NSObject {
@@ -40,7 +49,11 @@ func Nw_content_context_final_send() *foundation.NSObject {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSObject)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSObjectFromID(id)
 }
 
 func Nw_data_transfer_report_all_paths() uint {
@@ -72,7 +85,11 @@ func Nw_privacy_context_default_context() *foundation.NSObject {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSObject)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSObjectFromID(id)
 }
 
 func KNWErrorDomainDNS() uintptr {

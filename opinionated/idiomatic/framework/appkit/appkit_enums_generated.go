@@ -6508,6 +6508,7 @@ func (e TextLayoutFragmentState) String() string {
 type TextLayoutManagerSegmentOptions uint64
 
 const (
+	// The value that represents the empty options set.
 	TextLayoutManagerSegmentOptionsNone                    TextLayoutManagerSegmentOptions = 0
 	TextLayoutManagerSegmentOptionsRangeNotRequired        TextLayoutManagerSegmentOptions = 1
 	TextLayoutManagerSegmentOptionsMiddleFragmentsExcluded TextLayoutManagerSegmentOptions = 2

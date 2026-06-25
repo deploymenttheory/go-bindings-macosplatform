@@ -3272,10 +3272,10 @@ func RbFindFile(arg int) int {
 	return _fnRbFindFile(arg)
 }
 
-var _fnRbFindFileExt func(unsafe.Pointer, unsafe.Pointer) int32
+var _fnRbFindFileExt func(unsafe.Pointer, string) int32
 
 // RbFindFileExt calls the Ruby framework function rb_find_file_ext.
-func RbFindFileExt(arg2 unsafe.Pointer) (result int, arg int) {
+func RbFindFileExt(arg2 string) (result int, arg int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnRbFindFileExt == nil {
 		ebipurego.RegisterLibFunc(&_fnRbFindFileExt, _lib, "rb_find_file_ext")
@@ -3285,10 +3285,10 @@ func RbFindFileExt(arg2 unsafe.Pointer) (result int, arg int) {
 	return _ret, _out0
 }
 
-var _fnRbFindFileExtSafe func(unsafe.Pointer, unsafe.Pointer, int) int32
+var _fnRbFindFileExtSafe func(unsafe.Pointer, string, int) int32
 
 // RbFindFileExtSafe calls the Ruby framework function rb_find_file_ext_safe.
-func RbFindFileExtSafe(arg2 unsafe.Pointer, arg3 int) (result int, arg int) {
+func RbFindFileExtSafe(arg2 string, arg3 int) (result int, arg int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnRbFindFileExtSafe == nil {
 		ebipurego.RegisterLibFunc(&_fnRbFindFileExtSafe, _lib, "rb_find_file_ext_safe")

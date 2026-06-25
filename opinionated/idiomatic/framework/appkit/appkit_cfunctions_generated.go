@@ -351,12 +351,14 @@ func NSDottedFrameRect(rect corefoundation.CGRect) {
 var _fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, unsafe.Pointer)
 
 // NSDrawBitmap calls the AppKit framework function NSDrawBitmap.
-func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object, data unsafe.Pointer) {
+func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object) (data uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawBitmap == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawBitmap, _lib, "NSDrawBitmap")
 	}
-	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, objref.IDOf(colorSpaceName), data)
+	var _out0 uint8
+	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, objref.IDOf(colorSpaceName), unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)

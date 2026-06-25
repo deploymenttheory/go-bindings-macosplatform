@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func NSAbortModalException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAbortPrintingException() *foundation.NSString {
@@ -24,7 +29,11 @@ func NSAbortPrintingException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, generic icon.
@@ -62,7 +71,11 @@ func NSAccessibilityActivationPointAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAllowedValuesAttribute() *foundation.NSString {
@@ -70,7 +83,11 @@ func NSAccessibilityAllowedValuesAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAlternateUIVisibleAttribute() uintptr {
@@ -118,7 +135,11 @@ func NSAccessibilityApplicationActivatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityApplicationDeactivatedNotification() *foundation.NSString {
@@ -126,7 +147,11 @@ func NSAccessibilityApplicationDeactivatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityApplicationHiddenNotification() *foundation.NSString {
@@ -134,7 +159,11 @@ func NSAccessibilityApplicationHiddenNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityApplicationRole() *foundation.NSString {
@@ -142,7 +171,11 @@ func NSAccessibilityApplicationRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityApplicationShownNotification() *foundation.NSString {
@@ -150,7 +183,11 @@ func NSAccessibilityApplicationShownNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityArticleSearchKey() uintptr {
@@ -163,7 +200,11 @@ func NSAccessibilityAscendingSortDirectionValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAttachmentTextAttribute() *foundation.NSString {
@@ -171,7 +212,11 @@ func NSAccessibilityAttachmentTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAttributedStringForRangeParameterizedAttribute() *foundation.NSString {
@@ -179,7 +224,11 @@ func NSAccessibilityAttributedStringForRangeParameterizedAttribute() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAutoInteractableAttribute() *foundation.NSString {
@@ -187,7 +236,11 @@ func NSAccessibilityAutoInteractableAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityAutocorrectedTextAttribute() uintptr {
@@ -205,7 +258,11 @@ func NSAccessibilityBackgroundColorTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityBlockQuoteLevelAttribute() uintptr {
@@ -233,7 +290,11 @@ func NSAccessibilityBoundsForRangeParameterizedAttribute() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityBrowserRole() *foundation.NSString {
@@ -241,7 +302,11 @@ func NSAccessibilityBrowserRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityBusyIndicatorRole() *foundation.NSString {
@@ -249,7 +314,11 @@ func NSAccessibilityBusyIndicatorRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityButtonRole() *foundation.NSString {
@@ -257,7 +326,11 @@ func NSAccessibilityButtonRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityButtonSearchKey() uintptr {
@@ -270,7 +343,11 @@ func NSAccessibilityCancelAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCancelButtonAttribute() *foundation.NSString {
@@ -278,7 +355,11 @@ func NSAccessibilityCancelButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCellForColumnAndRowParameterizedAttribute() uintptr {
@@ -296,7 +377,11 @@ func NSAccessibilityCenterTabStopMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCentimetersUnitValue() *foundation.NSString {
@@ -304,7 +389,11 @@ func NSAccessibilityCentimetersUnitValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCheckBoxRole() *foundation.NSString {
@@ -312,7 +401,11 @@ func NSAccessibilityCheckBoxRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCheckBoxSearchKey() uintptr {
@@ -325,7 +418,11 @@ func NSAccessibilityChildrenAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityChildrenInNavigationOrderAttribute() uintptr {
@@ -338,7 +435,11 @@ func NSAccessibilityClearButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCloseButtonAttribute() *foundation.NSString {
@@ -346,7 +447,11 @@ func NSAccessibilityCloseButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCloseButtonSubrole() *foundation.NSString {
@@ -354,7 +459,11 @@ func NSAccessibilityCloseButtonSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCollectionListSubrole() uintptr {
@@ -367,7 +476,11 @@ func NSAccessibilityColorWellRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityColumnCountAttribute() uintptr {
@@ -390,7 +503,11 @@ func NSAccessibilityColumnRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityColumnTitlesAttribute() *foundation.NSString {
@@ -398,7 +515,11 @@ func NSAccessibilityColumnTitlesAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityColumnsAttribute() *foundation.NSString {
@@ -406,7 +527,11 @@ func NSAccessibilityColumnsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityComboBoxRole() *foundation.NSString {
@@ -414,7 +539,11 @@ func NSAccessibilityComboBoxRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityConfirmAction() *foundation.NSString {
@@ -422,7 +551,11 @@ func NSAccessibilityConfirmAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityContainsProtectedContentAttribute() uintptr {
@@ -440,7 +573,11 @@ func NSAccessibilityContentsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityControlSearchKey() uintptr {
@@ -453,7 +590,11 @@ func NSAccessibilityCreatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityCriticalValueAttribute() uintptr {
@@ -471,7 +612,11 @@ func NSAccessibilityDateTimeAreaRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDateTimeComponentsAttribute() *foundation.NSString {
@@ -479,7 +624,11 @@ func NSAccessibilityDateTimeComponentsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDecimalTabStopMarkerTypeValue() *foundation.NSString {
@@ -487,7 +636,11 @@ func NSAccessibilityDecimalTabStopMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDecrementAction() *foundation.NSString {
@@ -495,7 +648,11 @@ func NSAccessibilityDecrementAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDecrementArrowSubrole() *foundation.NSString {
@@ -503,7 +660,11 @@ func NSAccessibilityDecrementArrowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDecrementButtonAttribute() *foundation.NSString {
@@ -511,7 +672,11 @@ func NSAccessibilityDecrementButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDecrementPageSubrole() *foundation.NSString {
@@ -519,7 +684,11 @@ func NSAccessibilityDecrementPageSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDefaultButtonAttribute() *foundation.NSString {
@@ -527,7 +696,11 @@ func NSAccessibilityDefaultButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDefinitionListSubrole() uintptr {
@@ -540,7 +713,11 @@ func NSAccessibilityDeleteAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDescendingSortDirectionValue() *foundation.NSString {
@@ -548,7 +725,11 @@ func NSAccessibilityDescendingSortDirectionValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDescriptionAttribute() *foundation.NSString {
@@ -556,7 +737,11 @@ func NSAccessibilityDescriptionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDescriptionListSubrole() uintptr {
@@ -569,7 +754,11 @@ func NSAccessibilityDialogSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDifferentTypeSearchKey() uintptr {
@@ -582,7 +771,11 @@ func NSAccessibilityDisclosedByRowAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDisclosedRowsAttribute() *foundation.NSString {
@@ -590,7 +783,11 @@ func NSAccessibilityDisclosedRowsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDisclosingAttribute() *foundation.NSString {
@@ -598,7 +795,11 @@ func NSAccessibilityDisclosingAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDisclosureLevelAttribute() *foundation.NSString {
@@ -606,7 +807,11 @@ func NSAccessibilityDisclosureLevelAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDisclosureTriangleRole() uintptr {
@@ -619,7 +824,11 @@ func NSAccessibilityDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDraggingDestinationDragAcceptedNotification() uintptr {
@@ -657,7 +866,11 @@ func NSAccessibilityDrawerCreatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityDrawerRole() *foundation.NSString {
@@ -665,7 +878,11 @@ func NSAccessibilityDrawerRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityEditedAttribute() *foundation.NSString {
@@ -673,7 +890,11 @@ func NSAccessibilityEditedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityEmbeddedImageDescriptionAttribute() uintptr {
@@ -686,12 +907,23 @@ func NSAccessibilityEnabledAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSAccessibilityErrorCodeExceptionInfo() uintptr {
+func NSAccessibilityErrorCodeExceptionInfo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSAccessibilityErrorCodeExceptionInfo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Exceptions are no longer appropriate for indicating errors in accessibility API. Unexpected values should be handled through appropriate type checking.
@@ -705,7 +937,11 @@ func NSAccessibilityExpandedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityExtrasMenuBarAttribute() uintptr {
@@ -718,7 +954,11 @@ func NSAccessibilityFilenameAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFirstLineIndentMarkerTypeValue() *foundation.NSString {
@@ -726,7 +966,11 @@ func NSAccessibilityFirstLineIndentMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFloatingWindowSubrole() *foundation.NSString {
@@ -734,7 +978,11 @@ func NSAccessibilityFloatingWindowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFocusedAttribute() *foundation.NSString {
@@ -742,7 +990,11 @@ func NSAccessibilityFocusedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFocusedUIElementAttribute() *foundation.NSString {
@@ -750,7 +1002,11 @@ func NSAccessibilityFocusedUIElementAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFocusedUIElementChangedNotification() *foundation.NSString {
@@ -758,7 +1014,11 @@ func NSAccessibilityFocusedUIElementChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFocusedWindowAttribute() *foundation.NSString {
@@ -766,7 +1026,11 @@ func NSAccessibilityFocusedWindowAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFocusedWindowChangedNotification() *foundation.NSString {
@@ -774,7 +1038,11 @@ func NSAccessibilityFocusedWindowChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFontBoldAttribute() uintptr {
@@ -797,7 +1065,11 @@ func NSAccessibilityFontFamilyKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFontItalicAttribute() uintptr {
@@ -810,7 +1082,11 @@ func NSAccessibilityFontNameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFontSizeKey() *foundation.NSString {
@@ -818,7 +1094,11 @@ func NSAccessibilityFontSizeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFontTextAttribute() *foundation.NSString {
@@ -826,7 +1106,11 @@ func NSAccessibilityFontTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityForegroundColorTextAttribute() *foundation.NSString {
@@ -834,7 +1118,11 @@ func NSAccessibilityForegroundColorTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFrameSearchKey() uintptr {
@@ -847,7 +1135,11 @@ func NSAccessibilityFrontmostAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityFullScreenButtonAttribute() uintptr {
@@ -875,7 +1167,11 @@ func NSAccessibilityGroupRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityGrowAreaAttribute() *foundation.NSString {
@@ -883,7 +1179,11 @@ func NSAccessibilityGrowAreaAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityGrowAreaRole() *foundation.NSString {
@@ -891,7 +1191,11 @@ func NSAccessibilityGrowAreaRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHandleRole() uintptr {
@@ -909,7 +1213,11 @@ func NSAccessibilityHeadIndentMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHeaderAttribute() *foundation.NSString {
@@ -917,7 +1225,11 @@ func NSAccessibilityHeaderAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHeadingLevel1SearchKey() uintptr {
@@ -975,7 +1287,11 @@ func NSAccessibilityHelpAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHelpTagCreatedNotification() *foundation.NSString {
@@ -983,7 +1299,11 @@ func NSAccessibilityHelpTagCreatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHelpTagRole() *foundation.NSString {
@@ -991,7 +1311,11 @@ func NSAccessibilityHelpTagRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHiddenAttribute() *foundation.NSString {
@@ -999,7 +1323,11 @@ func NSAccessibilityHiddenAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHorizontalOrientationValue() *foundation.NSString {
@@ -1007,7 +1335,11 @@ func NSAccessibilityHorizontalOrientationValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHorizontalScrollBarAttribute() *foundation.NSString {
@@ -1015,7 +1347,11 @@ func NSAccessibilityHorizontalScrollBarAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityHorizontalUnitDescriptionAttribute() uintptr {
@@ -1038,7 +1374,11 @@ func NSAccessibilityImageRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityInchesUnitValue() *foundation.NSString {
@@ -1046,7 +1386,11 @@ func NSAccessibilityInchesUnitValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIncrementAction() *foundation.NSString {
@@ -1054,7 +1398,11 @@ func NSAccessibilityIncrementAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIncrementArrowSubrole() *foundation.NSString {
@@ -1062,7 +1410,11 @@ func NSAccessibilityIncrementArrowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIncrementButtonAttribute() *foundation.NSString {
@@ -1070,7 +1422,11 @@ func NSAccessibilityIncrementButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIncrementPageSubrole() *foundation.NSString {
@@ -1078,7 +1434,11 @@ func NSAccessibilityIncrementPageSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIncrementorRole() *foundation.NSString {
@@ -1086,7 +1446,11 @@ func NSAccessibilityIncrementorRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIndexAttribute() *foundation.NSString {
@@ -1094,7 +1458,11 @@ func NSAccessibilityIndexAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityIndexForChildUIElementAttribute() uintptr {
@@ -1112,7 +1480,11 @@ func NSAccessibilityInsertionPointLineNumberAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityItalicFontSearchKey() uintptr {
@@ -1130,7 +1502,11 @@ func NSAccessibilityLabelUIElementsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLabelValueAttribute() *foundation.NSString {
@@ -1138,7 +1514,11 @@ func NSAccessibilityLabelValueAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLandmarkSearchKey() uintptr {
@@ -1186,7 +1566,11 @@ func NSAccessibilityLeftTabStopMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLevelIndicatorRole() uintptr {
@@ -1199,7 +1583,11 @@ func NSAccessibilityLineForIndexParameterizedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLinkRole() *foundation.NSString {
@@ -1207,7 +1595,11 @@ func NSAccessibilityLinkRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLinkSearchKey() uintptr {
@@ -1220,7 +1612,11 @@ func NSAccessibilityLinkTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityLinkedUIElementsAttribute() *foundation.NSString {
@@ -1228,7 +1624,11 @@ func NSAccessibilityLinkedUIElementsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityListItemIndexTextAttribute() uintptr {
@@ -1256,7 +1656,11 @@ func NSAccessibilityListRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityListSearchKey() uintptr {
@@ -1274,7 +1678,11 @@ func NSAccessibilityMainAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMainWindowAttribute() *foundation.NSString {
@@ -1282,7 +1690,11 @@ func NSAccessibilityMainWindowAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMainWindowChangedNotification() *foundation.NSString {
@@ -1290,7 +1702,11 @@ func NSAccessibilityMainWindowChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMarkedMisspelledTextAttribute() uintptr {
@@ -1303,7 +1719,11 @@ func NSAccessibilityMarkerGroupUIElementAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMarkerTypeAttribute() *foundation.NSString {
@@ -1311,7 +1731,11 @@ func NSAccessibilityMarkerTypeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMarkerTypeDescriptionAttribute() *foundation.NSString {
@@ -1319,7 +1743,11 @@ func NSAccessibilityMarkerTypeDescriptionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
@@ -1328,7 +1756,11 @@ func NSAccessibilityMarkerUIElementsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMarkerValuesAttribute() *foundation.NSString {
@@ -1336,7 +1768,11 @@ func NSAccessibilityMarkerValuesAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
@@ -1356,7 +1792,11 @@ func NSAccessibilityMatteRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMaxValueAttribute() *foundation.NSString {
@@ -1364,7 +1804,11 @@ func NSAccessibilityMaxValueAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMenuBarAttribute() *foundation.NSString {
@@ -1372,7 +1816,11 @@ func NSAccessibilityMenuBarAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMenuBarItemRole() uintptr {
@@ -1385,7 +1833,11 @@ func NSAccessibilityMenuBarRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMenuButtonRole() *foundation.NSString {
@@ -1393,7 +1845,11 @@ func NSAccessibilityMenuButtonRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMenuItemRole() *foundation.NSString {
@@ -1401,7 +1857,11 @@ func NSAccessibilityMenuItemRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMenuRole() *foundation.NSString {
@@ -1409,7 +1869,11 @@ func NSAccessibilityMenuRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMinValueAttribute() *foundation.NSString {
@@ -1417,7 +1881,11 @@ func NSAccessibilityMinValueAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMinimizeButtonAttribute() *foundation.NSString {
@@ -1425,7 +1893,11 @@ func NSAccessibilityMinimizeButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMinimizeButtonSubrole() *foundation.NSString {
@@ -1433,7 +1905,11 @@ func NSAccessibilityMinimizeButtonSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMinimizedAttribute() *foundation.NSString {
@@ -1441,7 +1917,11 @@ func NSAccessibilityMinimizedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMisspelledTextAttribute() *foundation.NSString {
@@ -1449,7 +1929,11 @@ func NSAccessibilityMisspelledTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMisspelledWordSearchKey() uintptr {
@@ -1462,7 +1946,11 @@ func NSAccessibilityModalAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityMovedNotification() *foundation.NSString {
@@ -1470,7 +1958,11 @@ func NSAccessibilityMovedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityNextContentsAttribute() *foundation.NSString {
@@ -1478,7 +1970,11 @@ func NSAccessibilityNextContentsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityNumberOfCharactersAttribute() *foundation.NSString {
@@ -1486,7 +1982,11 @@ func NSAccessibilityNumberOfCharactersAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityOrderedByRowAttribute() uintptr {
@@ -1499,7 +1999,11 @@ func NSAccessibilityOrientationAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityOutlineRole() *foundation.NSString {
@@ -1507,7 +2011,11 @@ func NSAccessibilityOutlineRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityOutlineRowSubrole() *foundation.NSString {
@@ -1515,7 +2023,11 @@ func NSAccessibilityOutlineRowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityOutlineSearchKey() uintptr {
@@ -1528,7 +2040,11 @@ func NSAccessibilityOverflowButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPageRole() uintptr {
@@ -1541,7 +2057,11 @@ func NSAccessibilityParentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPathAttribute() uintptr {
@@ -1554,7 +2074,11 @@ func NSAccessibilityPicasUnitValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPickAction() *foundation.NSString {
@@ -1562,7 +2086,11 @@ func NSAccessibilityPickAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPlaceholderValueAttribute() uintptr {
@@ -1580,7 +2108,11 @@ func NSAccessibilityPointsUnitValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPopUpButtonRole() *foundation.NSString {
@@ -1588,7 +2120,11 @@ func NSAccessibilityPopUpButtonRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPopoverRole() uintptr {
@@ -1601,7 +2137,11 @@ func NSAccessibilityPositionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPressAction() *foundation.NSString {
@@ -1609,7 +2149,11 @@ func NSAccessibilityPressAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPreviousContentsAttribute() *foundation.NSString {
@@ -1617,7 +2161,11 @@ func NSAccessibilityPreviousContentsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityPriorityKey() uintptr {
@@ -1630,7 +2178,11 @@ func NSAccessibilityProgressIndicatorRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityProxyAttribute() *foundation.NSString {
@@ -1638,7 +2190,11 @@ func NSAccessibilityProxyAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRTFForRangeParameterizedAttribute() *foundation.NSString {
@@ -1646,7 +2202,11 @@ func NSAccessibilityRTFForRangeParameterizedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRadioButtonRole() *foundation.NSString {
@@ -1654,7 +2214,11 @@ func NSAccessibilityRadioButtonRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRadioGroupRole() *foundation.NSString {
@@ -1662,7 +2226,11 @@ func NSAccessibilityRadioGroupRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRadioGroupSearchKey() uintptr {
@@ -1675,7 +2243,11 @@ func NSAccessibilityRaiseAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRangeForIndexParameterizedAttribute() *foundation.NSString {
@@ -1683,7 +2255,11 @@ func NSAccessibilityRangeForIndexParameterizedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRangeForLineParameterizedAttribute() *foundation.NSString {
@@ -1691,7 +2267,11 @@ func NSAccessibilityRangeForLineParameterizedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRangeForPositionParameterizedAttribute() *foundation.NSString {
@@ -1699,7 +2279,11 @@ func NSAccessibilityRangeForPositionParameterizedAttribute() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRatingIndicatorSubrole() uintptr {
@@ -1712,7 +2296,11 @@ func NSAccessibilityRelevanceIndicatorRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRequiredAttribute() uintptr {
@@ -1725,7 +2313,11 @@ func NSAccessibilityResizedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityResultsForSearchPredicateParameterizedAttribute() uintptr {
@@ -1738,7 +2330,11 @@ func NSAccessibilityRightTabStopMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRoleAttribute() *foundation.NSString {
@@ -1746,7 +2342,11 @@ func NSAccessibilityRoleAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRoleDescriptionAttribute() *foundation.NSString {
@@ -1754,7 +2354,11 @@ func NSAccessibilityRoleDescriptionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRowCollapsedNotification() uintptr {
@@ -1772,7 +2376,11 @@ func NSAccessibilityRowCountChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRowExpandedNotification() uintptr {
@@ -1795,7 +2403,11 @@ func NSAccessibilityRowRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRowsAttribute() *foundation.NSString {
@@ -1803,7 +2415,11 @@ func NSAccessibilityRowsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRulerMarkerRole() *foundation.NSString {
@@ -1811,7 +2427,11 @@ func NSAccessibilityRulerMarkerRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityRulerRole() *foundation.NSString {
@@ -1819,7 +2439,11 @@ func NSAccessibilityRulerRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySameTypeSearchKey() uintptr {
@@ -1842,7 +2466,11 @@ func NSAccessibilityScrollAreaRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityScrollBarRole() *foundation.NSString {
@@ -1850,7 +2478,11 @@ func NSAccessibilityScrollBarRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityScrollToVisibleAction() uintptr {
@@ -1863,7 +2495,11 @@ func NSAccessibilitySearchButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySearchCurrentElementKey() uintptr {
@@ -1896,7 +2532,11 @@ func NSAccessibilitySearchFieldSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySearchIdentifiersKey() uintptr {
@@ -1909,7 +2549,11 @@ func NSAccessibilitySearchMenuAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySearchResultDescriptionOverrideKey() uintptr {
@@ -1952,7 +2596,11 @@ func NSAccessibilitySecureTextFieldSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedAttribute() *foundation.NSString {
@@ -1960,7 +2608,11 @@ func NSAccessibilitySelectedAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedCellsAttribute() uintptr {
@@ -1978,7 +2630,11 @@ func NSAccessibilitySelectedChildrenAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedChildrenChangedNotification() *foundation.NSString {
@@ -1986,7 +2642,11 @@ func NSAccessibilitySelectedChildrenChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedChildrenMovedNotification() uintptr {
@@ -1999,7 +2659,11 @@ func NSAccessibilitySelectedColumnsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedColumnsChangedNotification() *foundation.NSString {
@@ -2007,7 +2671,11 @@ func NSAccessibilitySelectedColumnsChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedRowsAttribute() *foundation.NSString {
@@ -2015,7 +2683,11 @@ func NSAccessibilitySelectedRowsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedRowsChangedNotification() *foundation.NSString {
@@ -2023,7 +2695,11 @@ func NSAccessibilitySelectedRowsChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedTextAttribute() *foundation.NSString {
@@ -2031,7 +2707,11 @@ func NSAccessibilitySelectedTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedTextChangedNotification() *foundation.NSString {
@@ -2039,7 +2719,11 @@ func NSAccessibilitySelectedTextChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedTextRangeAttribute() *foundation.NSString {
@@ -2047,7 +2731,11 @@ func NSAccessibilitySelectedTextRangeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySelectedTextRangesAttribute() uintptr {
@@ -2060,7 +2748,11 @@ func NSAccessibilityServesAsTitleForUIElementsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityShadowTextAttribute() *foundation.NSString {
@@ -2068,7 +2760,11 @@ func NSAccessibilityShadowTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySharedCharacterRangeAttribute() *foundation.NSString {
@@ -2076,7 +2772,11 @@ func NSAccessibilitySharedCharacterRangeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySharedFocusElementsAttribute() uintptr {
@@ -2089,7 +2789,11 @@ func NSAccessibilitySharedTextUIElementsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySheetCreatedNotification() *foundation.NSString {
@@ -2097,7 +2801,11 @@ func NSAccessibilitySheetCreatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySheetRole() *foundation.NSString {
@@ -2105,7 +2813,11 @@ func NSAccessibilitySheetRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityShowAlternateUIAction() uintptr {
@@ -2123,7 +2835,11 @@ func NSAccessibilityShowMenuAction() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityShownMenuAttribute() *foundation.NSString {
@@ -2131,7 +2847,11 @@ func NSAccessibilityShownMenuAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySizeAttribute() *foundation.NSString {
@@ -2139,7 +2859,11 @@ func NSAccessibilitySizeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySliderRole() *foundation.NSString {
@@ -2147,7 +2871,11 @@ func NSAccessibilitySliderRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.6.
@@ -2166,7 +2894,11 @@ func NSAccessibilitySortDirectionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySplitGroupRole() *foundation.NSString {
@@ -2174,7 +2906,11 @@ func NSAccessibilitySplitGroupRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySplitterRole() *foundation.NSString {
@@ -2182,7 +2918,11 @@ func NSAccessibilitySplitterRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySplittersAttribute() *foundation.NSString {
@@ -2190,7 +2930,11 @@ func NSAccessibilitySplittersAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStandardWindowSubrole() *foundation.NSString {
@@ -2198,7 +2942,11 @@ func NSAccessibilityStandardWindowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStaticTextRole() *foundation.NSString {
@@ -2206,7 +2954,11 @@ func NSAccessibilityStaticTextRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStaticTextSearchKey() uintptr {
@@ -2219,7 +2971,11 @@ func NSAccessibilityStrikethroughColorTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStrikethroughTextAttribute() *foundation.NSString {
@@ -2227,7 +2983,11 @@ func NSAccessibilityStrikethroughTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStringForRangeParameterizedAttribute() *foundation.NSString {
@@ -2235,7 +2995,11 @@ func NSAccessibilityStringForRangeParameterizedAttribute() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityStyleChangeSearchKey() uintptr {
@@ -2248,7 +3012,11 @@ func NSAccessibilityStyleRangeForIndexParameterizedAttribute() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySubroleAttribute() *foundation.NSString {
@@ -2256,7 +3024,11 @@ func NSAccessibilitySubroleAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySuggestionSubrole() uintptr {
@@ -2269,7 +3041,11 @@ func NSAccessibilitySuperscriptTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySwitchSubrole() uintptr {
@@ -2282,7 +3058,11 @@ func NSAccessibilitySystemDialogSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySystemFloatingWindowSubrole() *foundation.NSString {
@@ -2290,7 +3070,11 @@ func NSAccessibilitySystemFloatingWindowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilitySystemWideRole() *foundation.NSString {
@@ -2298,7 +3082,11 @@ func NSAccessibilitySystemWideRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTabButtonSubrole() uintptr {
@@ -2311,7 +3099,11 @@ func NSAccessibilityTabGroupRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTableRole() *foundation.NSString {
@@ -2319,7 +3111,11 @@ func NSAccessibilityTableRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTableRowSubrole() *foundation.NSString {
@@ -2327,7 +3123,11 @@ func NSAccessibilityTableRowSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTableSameLevelSearchKey() uintptr {
@@ -2345,7 +3145,11 @@ func NSAccessibilityTabsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTailIndentMarkerTypeValue() *foundation.NSString {
@@ -2353,7 +3157,11 @@ func NSAccessibilityTailIndentMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTextAlignmentAttribute() uintptr {
@@ -2366,7 +3174,11 @@ func NSAccessibilityTextAreaRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTextAttachmentSubrole() *foundation.NSString {
@@ -2374,7 +3186,11 @@ func NSAccessibilityTextAttachmentSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTextCompletionAttribute() uintptr {
@@ -2387,7 +3203,11 @@ func NSAccessibilityTextFieldRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTextFieldSearchKey() uintptr {
@@ -2415,7 +3235,11 @@ func NSAccessibilityTextLinkSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTextStateChangeTypeKey() uintptr {
@@ -2438,7 +3262,11 @@ func NSAccessibilityTitleAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTitleChangedNotification() *foundation.NSString {
@@ -2446,7 +3274,11 @@ func NSAccessibilityTitleChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTitleUIElementAttribute() *foundation.NSString {
@@ -2454,7 +3286,11 @@ func NSAccessibilityTitleUIElementAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityToggleSubrole() uintptr {
@@ -2467,7 +3303,11 @@ func NSAccessibilityToolbarButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityToolbarButtonSubrole() *foundation.NSString {
@@ -2475,7 +3315,11 @@ func NSAccessibilityToolbarButtonSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityToolbarRole() *foundation.NSString {
@@ -2483,7 +3327,11 @@ func NSAccessibilityToolbarRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityTopLevelUIElementAttribute() *foundation.NSString {
@@ -2491,7 +3339,11 @@ func NSAccessibilityTopLevelUIElementAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUIElementDestroyedNotification() *foundation.NSString {
@@ -2499,7 +3351,11 @@ func NSAccessibilityUIElementDestroyedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute() uintptr {
@@ -2517,7 +3373,11 @@ func NSAccessibilityURLAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnderlineColorTextAttribute() *foundation.NSString {
@@ -2525,7 +3385,11 @@ func NSAccessibilityUnderlineColorTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnderlineSearchKey() uintptr {
@@ -2538,7 +3402,11 @@ func NSAccessibilityUnderlineTextAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnitDescriptionAttribute() *foundation.NSString {
@@ -2546,7 +3414,11 @@ func NSAccessibilityUnitDescriptionAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnitsAttribute() *foundation.NSString {
@@ -2554,7 +3426,11 @@ func NSAccessibilityUnitsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnitsChangedNotification() uintptr {
@@ -2567,7 +3443,11 @@ func NSAccessibilityUnknownMarkerTypeValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnknownOrientationValue() *foundation.NSString {
@@ -2575,7 +3455,11 @@ func NSAccessibilityUnknownOrientationValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnknownRole() *foundation.NSString {
@@ -2583,7 +3467,11 @@ func NSAccessibilityUnknownRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnknownSortDirectionValue() *foundation.NSString {
@@ -2591,7 +3479,11 @@ func NSAccessibilityUnknownSortDirectionValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnknownSubrole() *foundation.NSString {
@@ -2599,7 +3491,11 @@ func NSAccessibilityUnknownSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnknownUnitValue() *foundation.NSString {
@@ -2607,7 +3503,11 @@ func NSAccessibilityUnknownUnitValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityUnvisitedLinkSearchKey() uintptr {
@@ -2620,7 +3520,11 @@ func NSAccessibilityValueAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityValueChangedNotification() *foundation.NSString {
@@ -2628,7 +3532,11 @@ func NSAccessibilityValueChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityValueDescriptionAttribute() uintptr {
@@ -2641,7 +3549,11 @@ func NSAccessibilityValueIndicatorRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVerticalOrientationValue() *foundation.NSString {
@@ -2649,7 +3561,11 @@ func NSAccessibilityVerticalOrientationValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVerticalScrollBarAttribute() *foundation.NSString {
@@ -2657,7 +3573,11 @@ func NSAccessibilityVerticalScrollBarAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVerticalUnitDescriptionAttribute() uintptr {
@@ -2680,7 +3600,11 @@ func NSAccessibilityVisibleCharacterRangeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVisibleChildrenAttribute() *foundation.NSString {
@@ -2688,7 +3612,11 @@ func NSAccessibilityVisibleChildrenAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVisibleColumnsAttribute() *foundation.NSString {
@@ -2696,7 +3624,11 @@ func NSAccessibilityVisibleColumnsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVisibleNameKey() *foundation.NSString {
@@ -2704,7 +3636,11 @@ func NSAccessibilityVisibleNameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVisibleRowsAttribute() *foundation.NSString {
@@ -2712,7 +3648,11 @@ func NSAccessibilityVisibleRowsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityVisitedAttribute() uintptr {
@@ -2740,7 +3680,11 @@ func NSAccessibilityWindowAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowCreatedNotification() *foundation.NSString {
@@ -2748,7 +3692,11 @@ func NSAccessibilityWindowCreatedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowDeminiaturizedNotification() *foundation.NSString {
@@ -2756,7 +3704,11 @@ func NSAccessibilityWindowDeminiaturizedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowMiniaturizedNotification() *foundation.NSString {
@@ -2764,7 +3716,11 @@ func NSAccessibilityWindowMiniaturizedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowMovedNotification() *foundation.NSString {
@@ -2772,7 +3728,11 @@ func NSAccessibilityWindowMovedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowResizedNotification() *foundation.NSString {
@@ -2780,7 +3740,11 @@ func NSAccessibilityWindowResizedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowRole() *foundation.NSString {
@@ -2788,7 +3752,11 @@ func NSAccessibilityWindowRole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityWindowsAttribute() *foundation.NSString {
@@ -2796,7 +3764,11 @@ func NSAccessibilityWindowsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityZoomButtonAttribute() *foundation.NSString {
@@ -2804,7 +3776,11 @@ func NSAccessibilityZoomButtonAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAccessibilityZoomButtonSubrole() *foundation.NSString {
@@ -2812,7 +3788,11 @@ func NSAccessibilityZoomButtonSubrole() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAdaptiveImageGlyphAttributeName() *foundation.NSString {
@@ -2820,7 +3800,11 @@ func NSAdaptiveImageGlyphAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAlignmentBinding() *foundation.NSString {
@@ -2828,7 +3812,11 @@ func NSAlignmentBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAllRomanInputSourcesLocaleIdentifier() uintptr {
@@ -2841,7 +3829,11 @@ func NSAllowsEditingMultipleValuesSelectionBindingOption() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAllowsNullArgumentBindingOption() *foundation.NSString {
@@ -2849,7 +3841,11 @@ func NSAllowsNullArgumentBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAlternateImageBinding() *foundation.NSString {
@@ -2857,7 +3853,11 @@ func NSAlternateImageBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAlternateTitleBinding() *foundation.NSString {
@@ -2865,7 +3865,11 @@ func NSAlternateTitleBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAlwaysPresentsApplicationModalAlertsBindingOption() *foundation.NSString {
@@ -2873,7 +3877,11 @@ func NSAlwaysPresentsApplicationModalAlertsBindingOption() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAnimateBinding() *foundation.NSString {
@@ -2881,7 +3889,11 @@ func NSAnimateBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAnimationDelayBinding() *foundation.NSString {
@@ -2889,7 +3901,11 @@ func NSAnimationDelayBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAnimationProgressMark() *foundation.NSString {
@@ -2897,7 +3913,11 @@ func NSAnimationProgressMark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAnimationProgressMarkNotification() *foundation.NSString {
@@ -2905,7 +3925,11 @@ func NSAnimationProgressMarkNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAnimationTriggerOrderIn() uintptr {
@@ -2923,12 +3947,23 @@ func NSAntialiasThresholdChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSApp() uintptr {
+func NSApp() *NSApplication {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSApp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSApplicationFromID(id)
 }
 
 func NSAppKitIgnoredException() *foundation.NSString {
@@ -2936,7 +3971,11 @@ func NSAppKitIgnoredException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAppKitVersionNumber() float64 {
@@ -2952,7 +3991,11 @@ func NSAppKitVirtualMemoryException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAppearanceDocumentAttribute() uintptr {
@@ -3011,7 +4054,11 @@ func NSApplicationDidBecomeActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Upon receiving this notification, you can query the NSApplication for its occlusion state. Note that this only notifies about changes in the state of the occlusion, not when the occlusion region changes. You can use this notification to increase responsiveness and save power, by halting any expensive calculations that the user can not see.
@@ -3025,7 +4072,11 @@ func NSApplicationDidChangeScreenParametersNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationDidFinishLaunchingNotification() *foundation.NSString {
@@ -3033,7 +4084,11 @@ func NSApplicationDidFinishLaunchingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationDidFinishRestoringWindowsNotification() uintptr {
@@ -3046,7 +4101,11 @@ func NSApplicationDidHideNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationDidResignActiveNotification() *foundation.NSString {
@@ -3054,7 +4113,11 @@ func NSApplicationDidResignActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationDidUnhideNotification() *foundation.NSString {
@@ -3062,7 +4125,11 @@ func NSApplicationDidUnhideNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationDidUpdateNotification() *foundation.NSString {
@@ -3070,7 +4137,11 @@ func NSApplicationDidUpdateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.6.
@@ -3123,7 +4194,11 @@ func NSApplicationWillBecomeActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillFinishLaunchingNotification() *foundation.NSString {
@@ -3131,7 +4206,11 @@ func NSApplicationWillFinishLaunchingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillHideNotification() *foundation.NSString {
@@ -3139,7 +4218,11 @@ func NSApplicationWillHideNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillResignActiveNotification() *foundation.NSString {
@@ -3147,7 +4230,11 @@ func NSApplicationWillResignActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillTerminateNotification() *foundation.NSString {
@@ -3155,7 +4242,11 @@ func NSApplicationWillTerminateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillUnhideNotification() *foundation.NSString {
@@ -3163,7 +4254,11 @@ func NSApplicationWillUnhideNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSApplicationWillUpdateNotification() *foundation.NSString {
@@ -3171,7 +4266,11 @@ func NSApplicationWillUpdateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSArgumentBinding() *foundation.NSString {
@@ -3179,7 +4278,11 @@ func NSArgumentBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAttachmentAttributeName() *foundation.NSString {
@@ -3187,7 +4290,11 @@ func NSAttachmentAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAttributedStringBinding() *foundation.NSString {
@@ -3195,7 +4302,11 @@ func NSAttributedStringBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSAuthorDocumentAttribute() *foundation.NSString {
@@ -3203,7 +4314,11 @@ func NSAuthorDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBackgroundColorAttributeName() *foundation.NSString {
@@ -3211,7 +4326,11 @@ func NSBackgroundColorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBackgroundColorDocumentAttribute() *foundation.NSString {
@@ -3219,7 +4338,11 @@ func NSBackgroundColorDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBackingPropertyOldColorSpaceKey() uintptr {
@@ -3237,7 +4360,11 @@ func NSBadBitmapParametersException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBadComparisonException() *foundation.NSString {
@@ -3245,7 +4372,11 @@ func NSBadComparisonException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBadRTFColorTableException() *foundation.NSString {
@@ -3253,7 +4384,11 @@ func NSBadRTFColorTableException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBadRTFDirectiveException() *foundation.NSString {
@@ -3261,7 +4396,11 @@ func NSBadRTFDirectiveException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBadRTFFontTableException() *foundation.NSString {
@@ -3269,7 +4408,11 @@ func NSBadRTFFontTableException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBadRTFStyleSheetException() *foundation.NSString {
@@ -3277,7 +4420,11 @@ func NSBadRTFStyleSheetException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBaseURLDocumentOption() *foundation.NSString {
@@ -3285,7 +4432,11 @@ func NSBaseURLDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBaselineOffsetAttributeName() *foundation.NSString {
@@ -3293,7 +4444,11 @@ func NSBaselineOffsetAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBlack() float64 {
@@ -3309,7 +4464,11 @@ func NSBottomMarginDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBrowserColumnConfigurationDidChangeNotification() *foundation.NSString {
@@ -3317,7 +4476,11 @@ func NSBrowserColumnConfigurationDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSBrowserIllegalDelegateException() *foundation.NSString {
@@ -3325,7 +4488,11 @@ func NSBrowserIllegalDelegateException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.6.
@@ -3339,7 +4506,11 @@ func NSCalibratedRGBColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCalibratedWhiteColorSpace() *foundation.NSString {
@@ -3347,7 +4518,11 @@ func NSCalibratedWhiteColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCategoryDocumentAttribute() uintptr {
@@ -3360,7 +4535,11 @@ func NSCharacterEncodingDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCharacterEncodingDocumentOption() *foundation.NSString {
@@ -3368,7 +4547,11 @@ func NSCharacterEncodingDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: This attribute is bound to a specific implementation of ATS feature and not generically supported by wide range of fonts. The majority of characters accessed through this API are now encoded in the Unicode standard. Use the CTFont feature API for fine control over character shape choices.
@@ -3382,7 +4565,11 @@ func NSCocoaVersionDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCollectionElementKindInterItemGapIndicator() uintptr {
@@ -3405,7 +4592,11 @@ func NSColorListDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSColorListIOException() *foundation.NSString {
@@ -3413,7 +4604,11 @@ func NSColorListIOException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSColorListNotEditableException() *foundation.NSString {
@@ -3421,7 +4616,11 @@ func NSColorListNotEditableException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSColorPanelColorDidChangeNotification() *foundation.NSString {
@@ -3429,7 +4628,11 @@ func NSColorPanelColorDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -3443,7 +4646,11 @@ func NSComboBoxSelectionDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSComboBoxSelectionIsChangingNotification() *foundation.NSString {
@@ -3451,7 +4658,11 @@ func NSComboBoxSelectionIsChangingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSComboBoxWillDismissNotification() *foundation.NSString {
@@ -3459,7 +4670,11 @@ func NSComboBoxWillDismissNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSComboBoxWillPopUpNotification() *foundation.NSString {
@@ -3467,7 +4682,11 @@ func NSComboBoxWillPopUpNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCommentDocumentAttribute() *foundation.NSString {
@@ -3475,7 +4694,11 @@ func NSCommentDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCompanyDocumentAttribute() *foundation.NSString {
@@ -3483,7 +4706,11 @@ func NSCompanyDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSConditionallySetsEditableBindingOption() *foundation.NSString {
@@ -3491,7 +4718,11 @@ func NSConditionallySetsEditableBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSConditionallySetsEnabledBindingOption() *foundation.NSString {
@@ -3499,7 +4730,11 @@ func NSConditionallySetsEnabledBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSConditionallySetsHiddenBindingOption() *foundation.NSString {
@@ -3507,7 +4742,11 @@ func NSConditionallySetsHiddenBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentArrayBinding() *foundation.NSString {
@@ -3515,7 +4754,11 @@ func NSContentArrayBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentArrayForMultipleSelectionBinding() *foundation.NSString {
@@ -3523,7 +4766,11 @@ func NSContentArrayForMultipleSelectionBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentBinding() *foundation.NSString {
@@ -3531,7 +4778,11 @@ func NSContentBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentDictionaryBinding() uintptr {
@@ -3544,7 +4795,11 @@ func NSContentHeightBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentObjectBinding() *foundation.NSString {
@@ -3552,7 +4807,11 @@ func NSContentObjectBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentObjectsBinding() *foundation.NSString {
@@ -3560,7 +4819,11 @@ func NSContentObjectsBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentPlacementTagBindingOption() uintptr {
@@ -3573,7 +4836,11 @@ func NSContentSetBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentValuesBinding() *foundation.NSString {
@@ -3581,7 +4848,11 @@ func NSContentValuesBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContentWidthBinding() *foundation.NSString {
@@ -3589,7 +4860,11 @@ func NSContentWidthBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContextHelpModeDidActivateNotification() *foundation.NSString {
@@ -3597,7 +4872,11 @@ func NSContextHelpModeDidActivateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContextHelpModeDidDeactivateNotification() *foundation.NSString {
@@ -3605,7 +4884,11 @@ func NSContextHelpModeDidDeactivateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSContinuouslyUpdatesValueBindingOption() *foundation.NSString {
@@ -3613,7 +4896,11 @@ func NSContinuouslyUpdatesValueBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSControlTextDidBeginEditingNotification() *foundation.NSString {
@@ -3621,7 +4908,11 @@ func NSControlTextDidBeginEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSControlTextDidChangeNotification() *foundation.NSString {
@@ -3629,7 +4920,11 @@ func NSControlTextDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSControlTextDidEndEditingNotification() *foundation.NSString {
@@ -3637,7 +4932,11 @@ func NSControlTextDidEndEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Changes to the accent color can be manually observed by implementing -viewDidChangeEffectiveAppearance in a NSView subclass, or by Key-Value Observing the -effectiveAppearance property on NSApplication. Views are automatically redisplayed when the accent color changes.
@@ -3651,7 +4950,11 @@ func NSConvertedDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCopyrightDocumentAttribute() *foundation.NSString {
@@ -3659,7 +4962,11 @@ func NSCopyrightDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCreatesSortDescriptorBindingOption() *foundation.NSString {
@@ -3667,7 +4974,11 @@ func NSCreatesSortDescriptorBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCreationTimeDocumentAttribute() *foundation.NSString {
@@ -3675,7 +4986,11 @@ func NSCreationTimeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCriticalValueBinding() *foundation.NSString {
@@ -3683,7 +4998,11 @@ func NSCriticalValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCursorAttributeName() *foundation.NSString {
@@ -3691,7 +5010,11 @@ func NSCursorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCustomColorSpace() *foundation.NSString {
@@ -3699,7 +5022,11 @@ func NSCustomColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDarkGray() float64 {
@@ -3715,7 +5042,11 @@ func NSDataBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDefaultAttributesDocumentAttribute() *foundation.NSString {
@@ -3723,7 +5054,11 @@ func NSDefaultAttributesDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDefaultAttributesDocumentOption() *foundation.NSString {
@@ -3731,7 +5066,11 @@ func NSDefaultAttributesDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDefaultFontExcludedDocumentAttribute() *foundation.NSString {
@@ -3739,7 +5078,11 @@ func NSDefaultFontExcludedDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDefaultTabIntervalDocumentAttribute() *foundation.NSString {
@@ -3747,7 +5090,11 @@ func NSDefaultTabIntervalDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDefinitionPresentationTypeDictionaryApplication() uintptr {
@@ -3770,7 +5117,11 @@ func NSDeletesObjectsOnRemoveBindingsOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceBitsPerSample() *foundation.NSString {
@@ -3778,7 +5129,11 @@ func NSDeviceBitsPerSample() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.6.
@@ -3792,7 +5147,11 @@ func NSDeviceCMYKColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceColorSpaceName() *foundation.NSString {
@@ -3800,7 +5159,11 @@ func NSDeviceColorSpaceName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceIsPrinter() *foundation.NSString {
@@ -3808,7 +5171,11 @@ func NSDeviceIsPrinter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceIsScreen() *foundation.NSString {
@@ -3816,7 +5183,11 @@ func NSDeviceIsScreen() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceRGBColorSpace() *foundation.NSString {
@@ -3824,7 +5195,11 @@ func NSDeviceRGBColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceResolution() *foundation.NSString {
@@ -3832,7 +5207,11 @@ func NSDeviceResolution() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceSize() *foundation.NSString {
@@ -3840,7 +5219,11 @@ func NSDeviceSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceWhiteColorSpace() *foundation.NSString {
@@ -3848,7 +5231,11 @@ func NSDeviceWhiteColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDirectionalEdgeInsetsZero() NSDirectionalEdgeInsets {
@@ -3870,7 +5257,11 @@ func NSDisplayNameBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDisplayPatternBindingOption() *foundation.NSString {
@@ -3878,7 +5269,11 @@ func NSDisplayPatternBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDisplayPatternTitleBinding() *foundation.NSString {
@@ -3886,7 +5281,11 @@ func NSDisplayPatternTitleBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDisplayPatternValueBinding() *foundation.NSString {
@@ -3894,7 +5293,11 @@ func NSDisplayPatternValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDocFormatTextDocumentType() *foundation.NSString {
@@ -3902,7 +5305,11 @@ func NSDocFormatTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDocumentEditedBinding() *foundation.NSString {
@@ -3910,7 +5317,11 @@ func NSDocumentEditedBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDocumentTypeDocumentAttribute() *foundation.NSString {
@@ -3918,7 +5329,11 @@ func NSDocumentTypeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDocumentTypeDocumentOption() *foundation.NSString {
@@ -3926,7 +5341,11 @@ func NSDocumentTypeDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDoubleClickArgumentBinding() *foundation.NSString {
@@ -3934,7 +5353,11 @@ func NSDoubleClickArgumentBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDoubleClickTargetBinding() *foundation.NSString {
@@ -3942,7 +5365,11 @@ func NSDoubleClickTargetBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
@@ -3956,7 +5383,11 @@ func NSDraggingException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDraggingImageComponentIconKey() uintptr {
@@ -3998,7 +5429,11 @@ func NSEditableBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSEditorDocumentAttribute() *foundation.NSString {
@@ -4006,7 +5441,11 @@ func NSEditorDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSEnabledBinding() *foundation.NSString {
@@ -4014,7 +5453,11 @@ func NSEnabledBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSEventTrackingRunLoopMode() *foundation.NSString {
@@ -4022,7 +5465,11 @@ func NSEventTrackingRunLoopMode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSExcludedElementsDocumentAttribute() *foundation.NSString {
@@ -4030,7 +5477,11 @@ func NSExcludedElementsDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSExcludedKeysBinding() uintptr {
@@ -4044,7 +5495,11 @@ func NSExpansionAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFileContentsPboardType() *foundation.NSString {
@@ -4052,7 +5507,11 @@ func NSFileContentsPboardType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFileTypeDocumentAttribute() uintptr {
@@ -4088,7 +5547,11 @@ func NSFilterPredicateBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFindPanelCaseInsensitiveSearch() uintptr {
@@ -4117,7 +5580,11 @@ func NSFontAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontBinding() *foundation.NSString {
@@ -4125,7 +5592,11 @@ func NSFontBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontBoldBinding() *foundation.NSString {
@@ -4133,7 +5604,11 @@ func NSFontBoldBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontCascadeListAttribute() *foundation.NSString {
@@ -4141,7 +5616,11 @@ func NSFontCascadeListAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontCharacterSetAttribute() *foundation.NSString {
@@ -4149,7 +5628,11 @@ func NSFontCharacterSetAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontCollectionActionKey() uintptr {
@@ -4258,7 +5741,11 @@ func NSFontFaceAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontFamilyAttribute() *foundation.NSString {
@@ -4266,7 +5753,11 @@ func NSFontFamilyAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontFamilyNameBinding() *foundation.NSString {
@@ -4274,7 +5765,11 @@ func NSFontFamilyNameBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontFeatureSelectorIdentifierKey() uintptr {
@@ -4297,7 +5792,11 @@ func NSFontFixedAdvanceAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontIdentityMatrix() *float64 {
@@ -4313,7 +5812,11 @@ func NSFontItalicBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontMatrixAttribute() *foundation.NSString {
@@ -4321,7 +5824,11 @@ func NSFontMatrixAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontNameAttribute() *foundation.NSString {
@@ -4329,7 +5836,11 @@ func NSFontNameAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontNameBinding() *foundation.NSString {
@@ -4337,7 +5848,11 @@ func NSFontNameBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
@@ -4357,7 +5872,11 @@ func NSFontSetChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontSizeAttribute() *foundation.NSString {
@@ -4365,7 +5884,11 @@ func NSFontSizeAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontSizeBinding() *foundation.NSString {
@@ -4373,7 +5896,11 @@ func NSFontSizeBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontSlantTrait() *foundation.NSString {
@@ -4381,7 +5908,11 @@ func NSFontSlantTrait() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontSymbolicTrait() *foundation.NSString {
@@ -4389,7 +5920,11 @@ func NSFontSymbolicTrait() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontTextStyleBody() uintptr {
@@ -4452,7 +5987,11 @@ func NSFontTraitsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontUnavailableException() *foundation.NSString {
@@ -4460,7 +5999,11 @@ func NSFontUnavailableException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAttribute() *foundation.NSString {
@@ -4468,7 +6011,11 @@ func NSFontVariationAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAxisDefaultValueKey() *foundation.NSString {
@@ -4476,7 +6023,11 @@ func NSFontVariationAxisDefaultValueKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAxisIdentifierKey() *foundation.NSString {
@@ -4484,7 +6035,11 @@ func NSFontVariationAxisIdentifierKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAxisMaximumValueKey() *foundation.NSString {
@@ -4492,7 +6047,11 @@ func NSFontVariationAxisMaximumValueKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAxisMinimumValueKey() *foundation.NSString {
@@ -4500,7 +6059,11 @@ func NSFontVariationAxisMinimumValueKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVariationAxisNameKey() *foundation.NSString {
@@ -4508,7 +6071,11 @@ func NSFontVariationAxisNameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontVisibleNameAttribute() *foundation.NSString {
@@ -4516,7 +6083,11 @@ func NSFontVisibleNameAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontWeightBlack() float64 {
@@ -4588,7 +6159,11 @@ func NSFontWeightTrait() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFontWeightUltraLight() float64 {
@@ -4636,7 +6211,11 @@ func NSFontWidthTrait() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSForegroundColorAttributeName() *foundation.NSString {
@@ -4644,7 +6223,11 @@ func NSForegroundColorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFullScreenModeAllScreens() uintptr {
@@ -4678,7 +6261,11 @@ func NSGlyphInfoAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSGraphicsContextDestinationAttributeName() *foundation.NSString {
@@ -4686,7 +6273,11 @@ func NSGraphicsContextDestinationAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSGraphicsContextPDFFormat() *foundation.NSString {
@@ -4694,7 +6285,11 @@ func NSGraphicsContextPDFFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSGraphicsContextPSFormat() *foundation.NSString {
@@ -4702,7 +6297,11 @@ func NSGraphicsContextPSFormat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSGraphicsContextRepresentationFormatAttributeName() *foundation.NSString {
@@ -4710,7 +6309,11 @@ func NSGraphicsContextRepresentationFormatAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSGridViewSizeForContent() float64 {
@@ -4732,7 +6335,11 @@ func NSHTMLTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSHandlesContentAsCompoundValueBindingOption() *foundation.NSString {
@@ -4740,7 +6347,11 @@ func NSHandlesContentAsCompoundValueBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSHeaderTitleBinding() *foundation.NSString {
@@ -4748,7 +6359,11 @@ func NSHeaderTitleBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSHiddenBinding() *foundation.NSString {
@@ -4756,7 +6371,11 @@ func NSHiddenBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSHyphenationFactorDocumentAttribute() *foundation.NSString {
@@ -4764,7 +6383,11 @@ func NSHyphenationFactorDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSIllegalSelectorException() *foundation.NSString {
@@ -4772,7 +6395,11 @@ func NSIllegalSelectorException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageBinding() *foundation.NSString {
@@ -4780,7 +6407,11 @@ func NSImageBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageCacheException() *foundation.NSString {
@@ -4788,7 +6419,11 @@ func NSImageCacheException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageColorSyncProfileData() *foundation.NSString {
@@ -4796,7 +6431,11 @@ func NSImageColorSyncProfileData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageCompressionFactor() *foundation.NSString {
@@ -4804,7 +6443,11 @@ func NSImageCompressionFactor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageCompressionMethod() *foundation.NSString {
@@ -4812,7 +6455,11 @@ func NSImageCompressionMethod() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageCurrentFrame() *foundation.NSString {
@@ -4820,7 +6467,11 @@ func NSImageCurrentFrame() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageCurrentFrameDuration() *foundation.NSString {
@@ -4828,7 +6479,11 @@ func NSImageCurrentFrameDuration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageDitherTransparency() *foundation.NSString {
@@ -4836,7 +6491,11 @@ func NSImageDitherTransparency() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageEXIFData() *foundation.NSString {
@@ -4844,7 +6503,11 @@ func NSImageEXIFData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageFallbackBackgroundColor() uintptr {
@@ -4857,7 +6520,11 @@ func NSImageFrameCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageGamma() *foundation.NSString {
@@ -4865,7 +6532,11 @@ func NSImageGamma() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageHintCTM() uintptr {
@@ -4888,7 +6559,11 @@ func NSImageIPTCData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageInterlaced() *foundation.NSString {
@@ -4896,7 +6571,11 @@ func NSImageInterlaced() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageLoopCount() *foundation.NSString {
@@ -4904,7 +6583,11 @@ func NSImageLoopCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameActionTemplate() *foundation.NSString {
@@ -4912,7 +6595,11 @@ func NSImageNameActionTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameAddTemplate() *foundation.NSString {
@@ -4920,7 +6607,11 @@ func NSImageNameAddTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameAdvanced() uintptr {
@@ -4938,7 +6629,11 @@ func NSImageNameBluetoothTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameBonjour() uintptr {
@@ -4951,7 +6646,11 @@ func NSImageNameBookmarksTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameCaution() uintptr {
@@ -4969,7 +6668,11 @@ func NSImageNameColumnViewTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameComputer() uintptr {
@@ -5033,7 +6736,11 @@ func NSImageNameGoBackTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameGoForwardTemplate() *foundation.NSString {
@@ -5041,7 +6748,11 @@ func NSImageNameGoForwardTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameGoLeftTemplate() *foundation.NSString {
@@ -5049,7 +6760,11 @@ func NSImageNameGoLeftTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameGoRightTemplate() *foundation.NSString {
@@ -5057,7 +6772,11 @@ func NSImageNameGoRightTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameHomeTemplate() *foundation.NSString {
@@ -5065,7 +6784,11 @@ func NSImageNameHomeTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameIChatTheaterTemplate() uintptr {
@@ -5078,7 +6801,11 @@ func NSImageNameIconViewTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameInfo() uintptr {
@@ -5101,7 +6828,11 @@ func NSImageNameListViewTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameLockLockedTemplate() *foundation.NSString {
@@ -5109,7 +6840,11 @@ func NSImageNameLockLockedTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameLockUnlockedTemplate() *foundation.NSString {
@@ -5117,7 +6852,11 @@ func NSImageNameLockUnlockedTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameMenuMixedStateTemplate() uintptr {
@@ -5150,7 +6889,11 @@ func NSImageNamePathTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNamePreferencesGeneral() uintptr {
@@ -5163,7 +6906,11 @@ func NSImageNameQuickLookTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameRefreshFreestandingTemplate() uintptr {
@@ -5176,7 +6923,11 @@ func NSImageNameRefreshTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameRemoveTemplate() *foundation.NSString {
@@ -5184,7 +6935,11 @@ func NSImageNameRemoveTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameRevealFreestandingTemplate() uintptr {
@@ -5202,7 +6957,11 @@ func NSImageNameShareTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameSlideshowTemplate() *foundation.NSString {
@@ -5210,7 +6969,11 @@ func NSImageNameSlideshowTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameSmartBadgeTemplate() uintptr {
@@ -5248,7 +7011,11 @@ func NSImageNameStopProgressTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAddDetailTemplate() *foundation.NSString {
@@ -5256,7 +7023,11 @@ func NSImageNameTouchBarAddDetailTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAddTemplate() *foundation.NSString {
@@ -5264,7 +7035,11 @@ func NSImageNameTouchBarAddTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAlarmTemplate() *foundation.NSString {
@@ -5272,7 +7047,11 @@ func NSImageNameTouchBarAlarmTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioInputMuteTemplate() *foundation.NSString {
@@ -5280,7 +7059,11 @@ func NSImageNameTouchBarAudioInputMuteTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioInputTemplate() *foundation.NSString {
@@ -5288,7 +7071,11 @@ func NSImageNameTouchBarAudioInputTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioOutputMuteTemplate() *foundation.NSString {
@@ -5296,7 +7083,11 @@ func NSImageNameTouchBarAudioOutputMuteTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioOutputVolumeHighTemplate() *foundation.NSString {
@@ -5304,7 +7095,11 @@ func NSImageNameTouchBarAudioOutputVolumeHighTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioOutputVolumeLowTemplate() *foundation.NSString {
@@ -5312,7 +7107,11 @@ func NSImageNameTouchBarAudioOutputVolumeLowTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioOutputVolumeMediumTemplate() *foundation.NSString {
@@ -5320,7 +7119,11 @@ func NSImageNameTouchBarAudioOutputVolumeMediumTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarAudioOutputVolumeOffTemplate() *foundation.NSString {
@@ -5328,7 +7131,11 @@ func NSImageNameTouchBarAudioOutputVolumeOffTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarBookmarksTemplate() *foundation.NSString {
@@ -5336,7 +7143,11 @@ func NSImageNameTouchBarBookmarksTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarColorPickerFill() *foundation.NSString {
@@ -5344,7 +7155,11 @@ func NSImageNameTouchBarColorPickerFill() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarColorPickerFont() *foundation.NSString {
@@ -5352,7 +7167,11 @@ func NSImageNameTouchBarColorPickerFont() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarColorPickerStroke() *foundation.NSString {
@@ -5360,7 +7179,11 @@ func NSImageNameTouchBarColorPickerStroke() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarCommunicationAudioTemplate() *foundation.NSString {
@@ -5368,7 +7191,11 @@ func NSImageNameTouchBarCommunicationAudioTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarCommunicationVideoTemplate() *foundation.NSString {
@@ -5376,7 +7203,11 @@ func NSImageNameTouchBarCommunicationVideoTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarComposeTemplate() *foundation.NSString {
@@ -5384,7 +7215,11 @@ func NSImageNameTouchBarComposeTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarDeleteTemplate() *foundation.NSString {
@@ -5392,7 +7227,11 @@ func NSImageNameTouchBarDeleteTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarDownloadTemplate() *foundation.NSString {
@@ -5400,7 +7239,11 @@ func NSImageNameTouchBarDownloadTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarEnterFullScreenTemplate() *foundation.NSString {
@@ -5408,7 +7251,11 @@ func NSImageNameTouchBarEnterFullScreenTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarExitFullScreenTemplate() *foundation.NSString {
@@ -5416,7 +7263,11 @@ func NSImageNameTouchBarExitFullScreenTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarFastForwardTemplate() *foundation.NSString {
@@ -5424,7 +7275,11 @@ func NSImageNameTouchBarFastForwardTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarFolderCopyToTemplate() *foundation.NSString {
@@ -5432,7 +7287,11 @@ func NSImageNameTouchBarFolderCopyToTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarFolderMoveToTemplate() *foundation.NSString {
@@ -5440,7 +7299,11 @@ func NSImageNameTouchBarFolderMoveToTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarFolderTemplate() *foundation.NSString {
@@ -5448,7 +7311,11 @@ func NSImageNameTouchBarFolderTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarGetInfoTemplate() *foundation.NSString {
@@ -5456,7 +7323,11 @@ func NSImageNameTouchBarGetInfoTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarGoBackTemplate() *foundation.NSString {
@@ -5464,7 +7335,11 @@ func NSImageNameTouchBarGoBackTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarGoDownTemplate() *foundation.NSString {
@@ -5472,7 +7347,11 @@ func NSImageNameTouchBarGoDownTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarGoForwardTemplate() *foundation.NSString {
@@ -5480,7 +7359,11 @@ func NSImageNameTouchBarGoForwardTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarGoUpTemplate() *foundation.NSString {
@@ -5488,7 +7371,11 @@ func NSImageNameTouchBarGoUpTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarHistoryTemplate() *foundation.NSString {
@@ -5496,7 +7383,11 @@ func NSImageNameTouchBarHistoryTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarIconViewTemplate() *foundation.NSString {
@@ -5504,7 +7395,11 @@ func NSImageNameTouchBarIconViewTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarListViewTemplate() *foundation.NSString {
@@ -5512,7 +7407,11 @@ func NSImageNameTouchBarListViewTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarMailTemplate() *foundation.NSString {
@@ -5520,7 +7419,11 @@ func NSImageNameTouchBarMailTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarNewFolderTemplate() *foundation.NSString {
@@ -5528,7 +7431,11 @@ func NSImageNameTouchBarNewFolderTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarNewMessageTemplate() *foundation.NSString {
@@ -5536,7 +7443,11 @@ func NSImageNameTouchBarNewMessageTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarOpenInBrowserTemplate() *foundation.NSString {
@@ -5544,7 +7455,11 @@ func NSImageNameTouchBarOpenInBrowserTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarPauseTemplate() *foundation.NSString {
@@ -5552,7 +7467,11 @@ func NSImageNameTouchBarPauseTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarPlayPauseTemplate() *foundation.NSString {
@@ -5560,7 +7479,11 @@ func NSImageNameTouchBarPlayPauseTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarPlayTemplate() *foundation.NSString {
@@ -5568,7 +7491,11 @@ func NSImageNameTouchBarPlayTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarPlayheadTemplate() uintptr {
@@ -5581,7 +7508,11 @@ func NSImageNameTouchBarQuickLookTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRecordStartTemplate() *foundation.NSString {
@@ -5589,7 +7520,11 @@ func NSImageNameTouchBarRecordStartTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRecordStopTemplate() *foundation.NSString {
@@ -5597,7 +7532,11 @@ func NSImageNameTouchBarRecordStopTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRefreshTemplate() *foundation.NSString {
@@ -5605,7 +7544,11 @@ func NSImageNameTouchBarRefreshTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRemoveTemplate() *foundation.NSString {
@@ -5613,7 +7556,11 @@ func NSImageNameTouchBarRemoveTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRewindTemplate() *foundation.NSString {
@@ -5621,7 +7568,11 @@ func NSImageNameTouchBarRewindTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRotateLeftTemplate() *foundation.NSString {
@@ -5629,7 +7580,11 @@ func NSImageNameTouchBarRotateLeftTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarRotateRightTemplate() *foundation.NSString {
@@ -5637,7 +7592,11 @@ func NSImageNameTouchBarRotateRightTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSearchTemplate() *foundation.NSString {
@@ -5645,7 +7604,11 @@ func NSImageNameTouchBarSearchTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarShareTemplate() *foundation.NSString {
@@ -5653,7 +7616,11 @@ func NSImageNameTouchBarShareTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSidebarTemplate() *foundation.NSString {
@@ -5661,7 +7628,11 @@ func NSImageNameTouchBarSidebarTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipAhead15SecondsTemplate() *foundation.NSString {
@@ -5669,7 +7640,11 @@ func NSImageNameTouchBarSkipAhead15SecondsTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipAhead30SecondsTemplate() *foundation.NSString {
@@ -5677,7 +7652,11 @@ func NSImageNameTouchBarSkipAhead30SecondsTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipAheadTemplate() *foundation.NSString {
@@ -5685,7 +7664,11 @@ func NSImageNameTouchBarSkipAheadTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipBack15SecondsTemplate() *foundation.NSString {
@@ -5693,7 +7676,11 @@ func NSImageNameTouchBarSkipBack15SecondsTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipBack30SecondsTemplate() *foundation.NSString {
@@ -5701,7 +7688,11 @@ func NSImageNameTouchBarSkipBack30SecondsTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipBackTemplate() *foundation.NSString {
@@ -5709,7 +7700,11 @@ func NSImageNameTouchBarSkipBackTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipToEndTemplate() *foundation.NSString {
@@ -5717,7 +7712,11 @@ func NSImageNameTouchBarSkipToEndTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSkipToStartTemplate() *foundation.NSString {
@@ -5725,7 +7724,11 @@ func NSImageNameTouchBarSkipToStartTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarSlideshowTemplate() *foundation.NSString {
@@ -5733,7 +7736,11 @@ func NSImageNameTouchBarSlideshowTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTagIconTemplate() *foundation.NSString {
@@ -5741,7 +7748,11 @@ func NSImageNameTouchBarTagIconTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextBoldTemplate() *foundation.NSString {
@@ -5749,7 +7760,11 @@ func NSImageNameTouchBarTextBoldTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextBoxTemplate() *foundation.NSString {
@@ -5757,7 +7772,11 @@ func NSImageNameTouchBarTextBoxTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextCenterAlignTemplate() *foundation.NSString {
@@ -5765,7 +7784,11 @@ func NSImageNameTouchBarTextCenterAlignTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextItalicTemplate() *foundation.NSString {
@@ -5773,7 +7796,11 @@ func NSImageNameTouchBarTextItalicTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextJustifiedAlignTemplate() *foundation.NSString {
@@ -5781,7 +7808,11 @@ func NSImageNameTouchBarTextJustifiedAlignTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextLeftAlignTemplate() *foundation.NSString {
@@ -5789,7 +7820,11 @@ func NSImageNameTouchBarTextLeftAlignTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextListTemplate() *foundation.NSString {
@@ -5797,7 +7832,11 @@ func NSImageNameTouchBarTextListTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextRightAlignTemplate() *foundation.NSString {
@@ -5805,7 +7844,11 @@ func NSImageNameTouchBarTextRightAlignTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextStrikethroughTemplate() *foundation.NSString {
@@ -5813,7 +7856,11 @@ func NSImageNameTouchBarTextStrikethroughTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarTextUnderlineTemplate() *foundation.NSString {
@@ -5821,7 +7868,11 @@ func NSImageNameTouchBarTextUnderlineTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarUserAddTemplate() *foundation.NSString {
@@ -5829,7 +7880,11 @@ func NSImageNameTouchBarUserAddTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarUserGroupTemplate() *foundation.NSString {
@@ -5837,7 +7892,11 @@ func NSImageNameTouchBarUserGroupTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarUserTemplate() *foundation.NSString {
@@ -5845,7 +7904,11 @@ func NSImageNameTouchBarUserTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarVolumeDownTemplate() *foundation.NSString {
@@ -5853,7 +7916,11 @@ func NSImageNameTouchBarVolumeDownTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTouchBarVolumeUpTemplate() *foundation.NSString {
@@ -5861,7 +7928,11 @@ func NSImageNameTouchBarVolumeUpTemplate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageNameTrashEmpty() uintptr {
@@ -5899,7 +7970,11 @@ func NSImageProgressive() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageRGBColorTable() *foundation.NSString {
@@ -5907,7 +7982,11 @@ func NSImageRGBColorTable() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSImageRepRegistryDidChangeNotification() *foundation.NSString {
@@ -5915,7 +7994,11 @@ func NSImageRepRegistryDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSIncludedKeysBinding() uintptr {
@@ -5944,7 +8027,11 @@ func NSInsertsNullPlaceholderBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
@@ -5953,7 +8040,11 @@ func NSInterfaceStyleDefault() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSInvokesSeparatelyWithArrayObjectsBindingOption() *foundation.NSString {
@@ -5961,7 +8052,11 @@ func NSInvokesSeparatelyWithArrayObjectsBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSIsIndeterminateBinding() *foundation.NSString {
@@ -5969,7 +8064,11 @@ func NSIsIndeterminateBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSKernAttributeName() *foundation.NSString {
@@ -5977,7 +8076,11 @@ func NSKernAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSKeywordsDocumentAttribute() *foundation.NSString {
@@ -5985,7 +8088,11 @@ func NSKeywordsDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSLabelBinding() *foundation.NSString {
@@ -5993,7 +8100,11 @@ func NSLabelBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSLeftMarginDocumentAttribute() *foundation.NSString {
@@ -6001,7 +8112,11 @@ func NSLeftMarginDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSLigatureAttributeName() *foundation.NSString {
@@ -6009,7 +8124,11 @@ func NSLigatureAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSLightGray() float64 {
@@ -6025,7 +8144,11 @@ func NSLinkAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSLocalizedKeyDictionaryBinding() uintptr {
@@ -6038,7 +8161,11 @@ func NSMacSimpleTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSManagedObjectContextBinding() *foundation.NSString {
@@ -6046,7 +8173,11 @@ func NSManagedObjectContextBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSManagerDocumentAttribute() uintptr {
@@ -6059,7 +8190,11 @@ func NSMarkedClauseSegmentAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMaxValueBinding() *foundation.NSString {
@@ -6067,7 +8202,11 @@ func NSMaxValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMaxWidthBinding() *foundation.NSString {
@@ -6075,7 +8214,11 @@ func NSMaxWidthBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMaximumRecentsBinding() *foundation.NSString {
@@ -6083,7 +8226,11 @@ func NSMaximumRecentsBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidAddItemNotification() *foundation.NSString {
@@ -6091,7 +8238,11 @@ func NSMenuDidAddItemNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidBeginTrackingNotification() *foundation.NSString {
@@ -6099,7 +8250,11 @@ func NSMenuDidBeginTrackingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidChangeItemNotification() *foundation.NSString {
@@ -6107,7 +8262,11 @@ func NSMenuDidChangeItemNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidEndTrackingNotification() *foundation.NSString {
@@ -6115,7 +8274,11 @@ func NSMenuDidEndTrackingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidRemoveItemNotification() *foundation.NSString {
@@ -6123,7 +8286,11 @@ func NSMenuDidRemoveItemNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuDidSendActionNotification() *foundation.NSString {
@@ -6131,7 +8298,11 @@ func NSMenuDidSendActionNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMenuItemImportFromDeviceIdentifier() uintptr {
@@ -6144,7 +8315,11 @@ func NSMenuWillSendActionNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMinValueBinding() *foundation.NSString {
@@ -6152,7 +8327,11 @@ func NSMinValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMinWidthBinding() *foundation.NSString {
@@ -6160,7 +8339,11 @@ func NSMinWidthBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMixedStateImageBinding() *foundation.NSString {
@@ -6168,7 +8351,11 @@ func NSMixedStateImageBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSModalPanelRunLoopMode() *foundation.NSString {
@@ -6176,7 +8363,11 @@ func NSModalPanelRunLoopMode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSModificationTimeDocumentAttribute() *foundation.NSString {
@@ -6184,7 +8375,11 @@ func NSModificationTimeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -6204,7 +8399,11 @@ func NSMultipleValuesPlaceholderBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSNamedColorSpace() *foundation.NSString {
@@ -6212,7 +8411,11 @@ func NSNamedColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSNibLoadingException() *foundation.NSString {
@@ -6220,7 +8423,11 @@ func NSNibLoadingException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
@@ -6246,7 +8453,11 @@ func NSNoSelectionPlaceholderBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -6260,7 +8471,11 @@ func NSNotApplicablePlaceholderBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSNullPlaceholderBindingOption() *foundation.NSString {
@@ -6268,7 +8483,11 @@ func NSNullPlaceholderBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: This attribute is not supported with TextKit 2
@@ -6277,7 +8496,11 @@ func NSObliquenessAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSObservedKeyPathKey() *foundation.NSString {
@@ -6285,7 +8508,11 @@ func NSObservedKeyPathKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSObservedObjectKey() *foundation.NSString {
@@ -6293,7 +8520,11 @@ func NSObservedObjectKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOffStateImageBinding() *foundation.NSString {
@@ -6301,7 +8532,11 @@ func NSOffStateImageBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOfficeOpenXMLTextDocumentType() uintptr {
@@ -6314,7 +8549,11 @@ func NSOnStateImageBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOpenDocumentTextDocumentType() uintptr {
@@ -6327,7 +8566,11 @@ func NSOptionsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewColumnDidMoveNotification() *foundation.NSString {
@@ -6335,7 +8578,11 @@ func NSOutlineViewColumnDidMoveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewColumnDidResizeNotification() *foundation.NSString {
@@ -6343,7 +8590,11 @@ func NSOutlineViewColumnDidResizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewDisclosureButtonKey() uintptr {
@@ -6356,7 +8607,11 @@ func NSOutlineViewItemDidCollapseNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewItemDidExpandNotification() *foundation.NSString {
@@ -6364,7 +8619,11 @@ func NSOutlineViewItemDidExpandNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewItemWillCollapseNotification() *foundation.NSString {
@@ -6372,7 +8631,11 @@ func NSOutlineViewItemWillCollapseNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewItemWillExpandNotification() *foundation.NSString {
@@ -6380,7 +8643,11 @@ func NSOutlineViewItemWillExpandNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewSelectionDidChangeNotification() *foundation.NSString {
@@ -6388,7 +8655,11 @@ func NSOutlineViewSelectionDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewSelectionIsChangingNotification() *foundation.NSString {
@@ -6396,7 +8667,11 @@ func NSOutlineViewSelectionIsChangingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSOutlineViewShowHideButtonKey() uintptr {
@@ -6421,7 +8696,11 @@ func NSPPDIncludeNotFoundException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPPDIncludeStackOverflowException() *foundation.NSString {
@@ -6429,7 +8708,11 @@ func NSPPDIncludeStackOverflowException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPPDIncludeStackUnderflowException() *foundation.NSString {
@@ -6437,7 +8720,11 @@ func NSPPDIncludeStackUnderflowException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPPDParseException() *foundation.NSString {
@@ -6445,7 +8732,11 @@ func NSPPDParseException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPaperSizeDocumentAttribute() *foundation.NSString {
@@ -6453,7 +8744,11 @@ func NSPaperSizeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSParagraphStyleAttributeName() *foundation.NSString {
@@ -6461,7 +8756,11 @@ func NSParagraphStyleAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPasteboardCommunicationException() *foundation.NSString {
@@ -6469,79 +8768,167 @@ func NSPasteboardCommunicationException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a calendar event. @returns array of DDMatchCalendarEvent values
-func NSPasteboardDetectionPatternCalendarEvent() uintptr {
+func NSPasteboardDetectionPatternCalendarEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternCalendarEvent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains an email address. @returns array of DDMatchEmailAddress values
-func NSPasteboardDetectionPatternEmailAddress() uintptr {
+func NSPasteboardDetectionPatternEmailAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternEmailAddress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a flight number. @returns array of DDMatchFlightNumber values
-func NSPasteboardDetectionPatternFlightNumber() uintptr {
+func NSPasteboardDetectionPatternFlightNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternFlightNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a URL. @returns array of DDMatchLink values
-func NSPasteboardDetectionPatternLink() uintptr {
+func NSPasteboardDetectionPatternLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternLink")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains an amount of money. @returns array of DDMatchMoneyAmount values
-func NSPasteboardDetectionPatternMoneyAmount() uintptr {
+func NSPasteboardDetectionPatternMoneyAmount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternMoneyAmount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that consists of a numeric value. @returns NSNumber value
-func NSPasteboardDetectionPatternNumber() uintptr {
+func NSPasteboardDetectionPatternNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a phone number. @returns array of DDMatchPhoneNumber values
-func NSPasteboardDetectionPatternPhoneNumber() uintptr {
+func NSPasteboardDetectionPatternPhoneNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternPhoneNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a postal address. @returns array of DDMatchPostalAddress values
-func NSPasteboardDetectionPatternPostalAddress() uintptr {
+func NSPasteboardDetectionPatternPostalAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternPostalAddress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string suitable for use as a web search term. @returns NSString value, suitable for implementing "Paste and Search"
-func NSPasteboardDetectionPatternProbableWebSearch() uintptr {
+func NSPasteboardDetectionPatternProbableWebSearch() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternProbableWebSearch")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that consists of a web URL. @returns NSString value, suitable for implementing "Paste and Go"
-func NSPasteboardDetectionPatternProbableWebURL() uintptr {
+func NSPasteboardDetectionPatternProbableWebURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternProbableWebURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A pattern that indicates the pasteboard detects a string that contains a parcel tracking number and carrier. @returns array of DDMatchShipmentTrackingNumber values
-func NSPasteboardDetectionPatternShipmentTrackingNumber() uintptr {
+func NSPasteboardDetectionPatternShipmentTrackingNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardDetectionPatternShipmentTrackingNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A metadata type that returns the content type if the pasteboard detects a reference to a file. @returns UTType value for the detected content type of the file URL, if a file URL type is present.
-func NSPasteboardMetadataTypeContentType() uintptr {
+func NSPasteboardMetadataTypeContentType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_appkitLib, "NSPasteboardMetadataTypeContentType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPasteboardNameDrag() uintptr {
@@ -6670,7 +9057,11 @@ func NSPatternColorSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.6.
@@ -6684,7 +9075,11 @@ func NSPlainTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPopUpButtonCellWillPopUpNotification() *foundation.NSString {
@@ -6692,7 +9087,11 @@ func NSPopUpButtonCellWillPopUpNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPopUpButtonWillPopUpNotification() *foundation.NSString {
@@ -6700,7 +9099,11 @@ func NSPopUpButtonWillPopUpNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPopoverCloseReasonDetachToWindow() uintptr {
@@ -6754,7 +9157,11 @@ func NSPredicateBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPredicateFormatBindingOption() *foundation.NSString {
@@ -6762,7 +9169,11 @@ func NSPredicateFormatBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPreferredScrollerStyleDidChangeNotification() uintptr {
@@ -6775,7 +9186,11 @@ func NSPrefixSpacesDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintAllPages() *foundation.NSString {
@@ -6783,7 +9198,11 @@ func NSPrintAllPages() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintAllPresetsJobStyleHint() uintptr {
@@ -6796,7 +9215,11 @@ func NSPrintBottomMargin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintCancelJob() *foundation.NSString {
@@ -6804,7 +9227,11 @@ func NSPrintCancelJob() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintCopies() *foundation.NSString {
@@ -6812,7 +9239,11 @@ func NSPrintCopies() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintDetailedErrorReporting() *foundation.NSString {
@@ -6820,7 +9251,11 @@ func NSPrintDetailedErrorReporting() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintFaxNumber() *foundation.NSString {
@@ -6828,7 +9263,11 @@ func NSPrintFaxNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintFirstPage() *foundation.NSString {
@@ -6836,7 +9275,11 @@ func NSPrintFirstPage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: NSPrintInfo does not recognize this attribute
@@ -6850,7 +9293,11 @@ func NSPrintHeaderAndFooter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintHorizontalPagination() *foundation.NSString {
@@ -6858,7 +9305,11 @@ func NSPrintHorizontalPagination() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintHorizontallyCentered() *foundation.NSString {
@@ -6866,7 +9317,11 @@ func NSPrintHorizontallyCentered() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintJobDisposition() *foundation.NSString {
@@ -6874,7 +9329,11 @@ func NSPrintJobDisposition() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of an empty dictionary
@@ -6898,7 +9357,11 @@ func NSPrintLastPage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintLeftMargin() *foundation.NSString {
@@ -6906,7 +9369,11 @@ func NSPrintLeftMargin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: NSPrintInfo does not recognize this attribute
@@ -6920,7 +9387,11 @@ func NSPrintMustCollate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintNoPresetsJobStyleHint() uintptr {
@@ -6933,7 +9404,11 @@ func NSPrintOperationExistsException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintOrientation() *foundation.NSString {
@@ -6941,7 +9416,11 @@ func NSPrintOrientation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPackageException() *foundation.NSString {
@@ -6949,7 +9428,11 @@ func NSPrintPackageException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPagesAcross() *foundation.NSString {
@@ -6957,7 +9440,11 @@ func NSPrintPagesAcross() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPagesDown() *foundation.NSString {
@@ -6965,7 +9452,11 @@ func NSPrintPagesDown() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: NSPrintInfo does not recognize this attribute. -[NSPrintInfo setUpPrintOperationDefaultValues] sets a default value of 1
@@ -6995,7 +9486,11 @@ func NSPrintPaperName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPaperSize() *foundation.NSString {
@@ -7003,7 +9498,11 @@ func NSPrintPaperSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPhotoJobStyleHint() *foundation.NSString {
@@ -7011,7 +9510,11 @@ func NSPrintPhotoJobStyleHint() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPreviewJob() *foundation.NSString {
@@ -7019,7 +9522,11 @@ func NSPrintPreviewJob() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPrinter() *foundation.NSString {
@@ -7027,7 +9534,11 @@ func NSPrintPrinter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintPrinterName() *foundation.NSString {
@@ -7035,7 +9546,11 @@ func NSPrintPrinterName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintReversePageOrder() *foundation.NSString {
@@ -7043,7 +9558,11 @@ func NSPrintReversePageOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintRightMargin() *foundation.NSString {
@@ -7051,7 +9570,11 @@ func NSPrintRightMargin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintSaveJob() *foundation.NSString {
@@ -7059,7 +9582,11 @@ func NSPrintSaveJob() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use NSPrintJobSavingURL instead
@@ -7073,7 +9600,11 @@ func NSPrintScalingFactor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintSelectionOnly() uintptr {
@@ -7086,7 +9617,11 @@ func NSPrintSpoolJob() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintTime() *foundation.NSString {
@@ -7094,7 +9629,11 @@ func NSPrintTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintTopMargin() *foundation.NSString {
@@ -7102,7 +9641,11 @@ func NSPrintTopMargin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintVerticalPagination() *foundation.NSString {
@@ -7110,7 +9653,11 @@ func NSPrintVerticalPagination() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintVerticallyCentered() *foundation.NSString {
@@ -7118,7 +9665,11 @@ func NSPrintVerticallyCentered() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSPrintingCommunicationException() *foundation.NSString {
@@ -7126,7 +9677,11 @@ func NSPrintingCommunicationException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -7140,7 +9695,11 @@ func NSRTFDTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -7154,7 +9713,11 @@ func NSRTFPropertyStackOverflowException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRTFTextDocumentType() *foundation.NSString {
@@ -7162,7 +9725,11 @@ func NSRTFTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRaisesForNotApplicableKeysBindingOption() *foundation.NSString {
@@ -7170,7 +9737,11 @@ func NSRaisesForNotApplicableKeysBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSReadOnlyDocumentAttribute() *foundation.NSString {
@@ -7178,7 +9749,11 @@ func NSReadOnlyDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRecentSearchesBinding() *foundation.NSString {
@@ -7186,7 +9761,11 @@ func NSRecentSearchesBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRepresentedFilenameBinding() *foundation.NSString {
@@ -7194,7 +9773,11 @@ func NSRepresentedFilenameBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRightMarginDocumentAttribute() *foundation.NSString {
@@ -7202,7 +9785,11 @@ func NSRightMarginDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRowHeightBinding() *foundation.NSString {
@@ -7210,7 +9797,11 @@ func NSRowHeightBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateComparisonModifier() *foundation.NSString {
@@ -7218,7 +9809,11 @@ func NSRuleEditorPredicateComparisonModifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateCompoundType() *foundation.NSString {
@@ -7226,7 +9821,11 @@ func NSRuleEditorPredicateCompoundType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateCustomSelector() *foundation.NSString {
@@ -7234,7 +9833,11 @@ func NSRuleEditorPredicateCustomSelector() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateLeftExpression() *foundation.NSString {
@@ -7242,7 +9845,11 @@ func NSRuleEditorPredicateLeftExpression() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateOperatorType() *foundation.NSString {
@@ -7250,7 +9857,11 @@ func NSRuleEditorPredicateOperatorType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateOptions() *foundation.NSString {
@@ -7258,7 +9869,11 @@ func NSRuleEditorPredicateOptions() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorPredicateRightExpression() *foundation.NSString {
@@ -7266,7 +9881,11 @@ func NSRuleEditorPredicateRightExpression() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRuleEditorRowsDidChangeNotification() *foundation.NSString {
@@ -7274,7 +9893,11 @@ func NSRuleEditorRowsDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
@@ -7344,7 +9967,11 @@ func NSSelectedIdentifierBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedIndexBinding() *foundation.NSString {
@@ -7352,7 +9979,11 @@ func NSSelectedIndexBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedLabelBinding() *foundation.NSString {
@@ -7360,7 +9991,11 @@ func NSSelectedLabelBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedObjectBinding() *foundation.NSString {
@@ -7368,7 +10003,11 @@ func NSSelectedObjectBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedObjectsBinding() *foundation.NSString {
@@ -7376,7 +10015,11 @@ func NSSelectedObjectsBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedTagBinding() *foundation.NSString {
@@ -7384,7 +10027,11 @@ func NSSelectedTagBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedValueBinding() *foundation.NSString {
@@ -7392,7 +10039,11 @@ func NSSelectedValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectedValuesBinding() *foundation.NSString {
@@ -7400,7 +10051,11 @@ func NSSelectedValuesBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectionIndexPathsBinding() *foundation.NSString {
@@ -7408,7 +10063,11 @@ func NSSelectionIndexPathsBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectionIndexesBinding() *foundation.NSString {
@@ -7416,7 +10075,11 @@ func NSSelectionIndexesBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectorNameBindingOption() *foundation.NSString {
@@ -7424,7 +10087,11 @@ func NSSelectorNameBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSelectsAllWhenSettingContentBindingOption() *foundation.NSString {
@@ -7432,7 +10099,11 @@ func NSSelectsAllWhenSettingContentBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSShadowAttributeName() *foundation.NSString {
@@ -7440,7 +10111,11 @@ func NSShadowAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSharingServiceNameAddToAperture() uintptr {
@@ -7585,7 +10260,11 @@ func NSSortDescriptorsBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSoundPboardType() *foundation.NSString {
@@ -7593,7 +10272,11 @@ func NSSoundPboardType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSourceTextScalingDocumentAttribute() *foundation.NSString {
@@ -7601,7 +10284,11 @@ func NSSourceTextScalingDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSourceTextScalingDocumentOption() *foundation.NSString {
@@ -7609,7 +10296,11 @@ func NSSourceTextScalingDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSpeechCharacterModeProperty() uintptr {
@@ -7877,7 +10568,11 @@ func NSSpellingStateAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // This constant can be used with any sizing related \c NSSplitViewController properties to get the default system behavior.
@@ -7894,7 +10589,11 @@ func NSSplitViewDidResizeSubviewsNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // This constant can be used with any sizing related \c NSSplitViewItem properties to unset their values.
@@ -7911,7 +10610,11 @@ func NSSplitViewWillResizeSubviewsNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSStrikethroughColorAttributeName() *foundation.NSString {
@@ -7919,7 +10622,11 @@ func NSStrikethroughColorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSStrikethroughStyleAttributeName() *foundation.NSString {
@@ -7927,7 +10634,11 @@ func NSStrikethroughStyleAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -7941,7 +10652,11 @@ func NSStrokeColorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSStrokeWidthAttributeName() *foundation.NSString {
@@ -7949,7 +10664,11 @@ func NSStrokeWidthAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSubjectDocumentAttribute() *foundation.NSString {
@@ -7957,7 +10676,11 @@ func NSSubjectDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSSuperscriptAttributeName() *foundation.NSString {
@@ -7965,7 +10688,11 @@ func NSSuperscriptAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.9.
@@ -7974,7 +10701,11 @@ func NSSystemColorsDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTIFFException() *foundation.NSString {
@@ -7982,7 +10713,11 @@ func NSTIFFException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -7996,7 +10731,11 @@ func NSTabColumnTerminatorsAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTableViewColumnDidMoveNotification() *foundation.NSString {
@@ -8004,7 +10743,11 @@ func NSTableViewColumnDidMoveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTableViewColumnDidResizeNotification() *foundation.NSString {
@@ -8012,7 +10755,11 @@ func NSTableViewColumnDidResizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTableViewRowViewKey() uintptr {
@@ -8025,7 +10772,11 @@ func NSTableViewSelectionDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTableViewSelectionIsChangingNotification() *foundation.NSString {
@@ -8033,7 +10784,11 @@ func NSTableViewSelectionIsChangingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -8047,7 +10802,11 @@ func NSTargetBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTargetTextScalingDocumentOption() *foundation.NSString {
@@ -8055,7 +10814,11 @@ func NSTargetTextScalingDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextAlternativesAttributeName() uintptr {
@@ -8128,7 +10891,11 @@ func NSTextColorBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentStorageUnsupportedAttributeAddedNotification() uintptr {
@@ -8141,7 +10908,11 @@ func NSTextContentTypeAddressCity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeAddressCityAndState() *foundation.NSString {
@@ -8149,7 +10920,11 @@ func NSTextContentTypeAddressCityAndState() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeAddressState() *foundation.NSString {
@@ -8157,7 +10932,11 @@ func NSTextContentTypeAddressState() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeBirthdate() *foundation.NSString {
@@ -8165,7 +10944,11 @@ func NSTextContentTypeBirthdate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeBirthdateDay() *foundation.NSString {
@@ -8173,7 +10956,11 @@ func NSTextContentTypeBirthdateDay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeBirthdateMonth() *foundation.NSString {
@@ -8181,7 +10968,11 @@ func NSTextContentTypeBirthdateMonth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeBirthdateYear() *foundation.NSString {
@@ -8189,7 +10980,11 @@ func NSTextContentTypeBirthdateYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCountryName() *foundation.NSString {
@@ -8197,7 +10992,11 @@ func NSTextContentTypeCountryName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardExpiration() *foundation.NSString {
@@ -8205,7 +11004,11 @@ func NSTextContentTypeCreditCardExpiration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardExpirationMonth() *foundation.NSString {
@@ -8213,7 +11016,11 @@ func NSTextContentTypeCreditCardExpirationMonth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardExpirationYear() *foundation.NSString {
@@ -8221,7 +11028,11 @@ func NSTextContentTypeCreditCardExpirationYear() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardFamilyName() *foundation.NSString {
@@ -8229,7 +11040,11 @@ func NSTextContentTypeCreditCardFamilyName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardGivenName() *foundation.NSString {
@@ -8237,7 +11052,11 @@ func NSTextContentTypeCreditCardGivenName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardMiddleName() *foundation.NSString {
@@ -8245,7 +11064,11 @@ func NSTextContentTypeCreditCardMiddleName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardName() *foundation.NSString {
@@ -8253,7 +11076,11 @@ func NSTextContentTypeCreditCardName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardNumber() *foundation.NSString {
@@ -8261,7 +11088,11 @@ func NSTextContentTypeCreditCardNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardSecurityCode() *foundation.NSString {
@@ -8269,7 +11100,11 @@ func NSTextContentTypeCreditCardSecurityCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeCreditCardType() *foundation.NSString {
@@ -8277,7 +11112,11 @@ func NSTextContentTypeCreditCardType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeDateTime() *foundation.NSString {
@@ -8285,7 +11124,11 @@ func NSTextContentTypeDateTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeEmailAddress() *foundation.NSString {
@@ -8293,7 +11136,11 @@ func NSTextContentTypeEmailAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeFamilyName() *foundation.NSString {
@@ -8301,7 +11148,11 @@ func NSTextContentTypeFamilyName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeFlightNumber() *foundation.NSString {
@@ -8309,7 +11160,11 @@ func NSTextContentTypeFlightNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeFullStreetAddress() *foundation.NSString {
@@ -8317,7 +11172,11 @@ func NSTextContentTypeFullStreetAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeGivenName() *foundation.NSString {
@@ -8325,7 +11184,11 @@ func NSTextContentTypeGivenName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeJobTitle() *foundation.NSString {
@@ -8333,7 +11196,11 @@ func NSTextContentTypeJobTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeLocation() *foundation.NSString {
@@ -8341,7 +11208,11 @@ func NSTextContentTypeLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeMiddleName() *foundation.NSString {
@@ -8349,7 +11220,11 @@ func NSTextContentTypeMiddleName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeName() *foundation.NSString {
@@ -8357,7 +11232,11 @@ func NSTextContentTypeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeNamePrefix() *foundation.NSString {
@@ -8365,7 +11244,11 @@ func NSTextContentTypeNamePrefix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeNameSuffix() *foundation.NSString {
@@ -8373,7 +11256,11 @@ func NSTextContentTypeNameSuffix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeNewPassword() *foundation.NSString {
@@ -8381,7 +11268,11 @@ func NSTextContentTypeNewPassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeNickname() *foundation.NSString {
@@ -8389,7 +11280,11 @@ func NSTextContentTypeNickname() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeOneTimeCode() *foundation.NSString {
@@ -8397,7 +11292,11 @@ func NSTextContentTypeOneTimeCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeOrganizationName() *foundation.NSString {
@@ -8405,7 +11304,11 @@ func NSTextContentTypeOrganizationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypePassword() *foundation.NSString {
@@ -8413,7 +11316,11 @@ func NSTextContentTypePassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypePostalCode() *foundation.NSString {
@@ -8421,7 +11328,11 @@ func NSTextContentTypePostalCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeShipmentTrackingNumber() *foundation.NSString {
@@ -8429,7 +11340,11 @@ func NSTextContentTypeShipmentTrackingNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeStreetAddressLine1() *foundation.NSString {
@@ -8437,7 +11352,11 @@ func NSTextContentTypeStreetAddressLine1() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeStreetAddressLine2() *foundation.NSString {
@@ -8445,7 +11364,11 @@ func NSTextContentTypeStreetAddressLine2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeSublocality() *foundation.NSString {
@@ -8453,7 +11376,11 @@ func NSTextContentTypeSublocality() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeTelephoneNumber() *foundation.NSString {
@@ -8461,7 +11388,11 @@ func NSTextContentTypeTelephoneNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeURL() *foundation.NSString {
@@ -8469,7 +11400,11 @@ func NSTextContentTypeURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextContentTypeUsername() *foundation.NSString {
@@ -8477,7 +11412,11 @@ func NSTextContentTypeUsername() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextDidBeginEditingNotification() *foundation.NSString {
@@ -8485,7 +11424,11 @@ func NSTextDidBeginEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextDidChangeNotification() *foundation.NSString {
@@ -8493,7 +11436,11 @@ func NSTextDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextDidEndEditingNotification() *foundation.NSString {
@@ -8501,7 +11448,11 @@ func NSTextDidEndEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextEffectAttributeName() *foundation.NSString {
@@ -8509,7 +11460,11 @@ func NSTextEffectAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextEffectLetterpressStyle() *foundation.NSString {
@@ -8517,7 +11472,11 @@ func NSTextEffectLetterpressStyle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextEncodingNameDocumentAttribute() *foundation.NSString {
@@ -8525,7 +11484,11 @@ func NSTextEncodingNameDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextEncodingNameDocumentOption() *foundation.NSString {
@@ -8533,7 +11496,11 @@ func NSTextEncodingNameDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextFinderCaseInsensitiveKey() uintptr {
@@ -8551,7 +11518,11 @@ func NSTextHighlightColorSchemeAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemeBlue() *foundation.NSString {
@@ -8559,7 +11530,11 @@ func NSTextHighlightColorSchemeBlue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemeDefault() *foundation.NSString {
@@ -8567,7 +11542,11 @@ func NSTextHighlightColorSchemeDefault() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemeMint() *foundation.NSString {
@@ -8575,7 +11554,11 @@ func NSTextHighlightColorSchemeMint() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemeOrange() *foundation.NSString {
@@ -8583,7 +11566,11 @@ func NSTextHighlightColorSchemeOrange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemePink() *foundation.NSString {
@@ -8591,7 +11578,11 @@ func NSTextHighlightColorSchemePink() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightColorSchemePurple() *foundation.NSString {
@@ -8599,7 +11590,11 @@ func NSTextHighlightColorSchemePurple() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightStyleAttributeName() *foundation.NSString {
@@ -8607,7 +11602,11 @@ func NSTextHighlightStyleAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextHighlightStyleDefault() *foundation.NSString {
@@ -8615,7 +11614,11 @@ func NSTextHighlightStyleDefault() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextInputContextKeyboardSelectionDidChangeNotification() uintptr {
@@ -8628,7 +11631,11 @@ func NSTextKit1ListMarkerFormatDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextLayoutSectionOrientation() *foundation.NSString {
@@ -8636,7 +11643,11 @@ func NSTextLayoutSectionOrientation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextLayoutSectionRange() *foundation.NSString {
@@ -8644,7 +11655,11 @@ func NSTextLayoutSectionRange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextLayoutSectionsAttribute() *foundation.NSString {
@@ -8652,7 +11667,11 @@ func NSTextLayoutSectionsAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextLineTooLongException() *foundation.NSString {
@@ -8660,7 +11679,11 @@ func NSTextLineTooLongException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerBox() *foundation.NSString {
@@ -8668,7 +11691,11 @@ func NSTextListMarkerBox() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerCheck() *foundation.NSString {
@@ -8676,7 +11703,11 @@ func NSTextListMarkerCheck() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerCircle() *foundation.NSString {
@@ -8684,7 +11715,11 @@ func NSTextListMarkerCircle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerDecimal() *foundation.NSString {
@@ -8692,7 +11727,11 @@ func NSTextListMarkerDecimal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerDiamond() *foundation.NSString {
@@ -8700,7 +11739,11 @@ func NSTextListMarkerDiamond() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerDisc() *foundation.NSString {
@@ -8708,7 +11751,11 @@ func NSTextListMarkerDisc() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerHyphen() *foundation.NSString {
@@ -8716,7 +11763,11 @@ func NSTextListMarkerHyphen() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerLowercaseAlpha() *foundation.NSString {
@@ -8724,7 +11775,11 @@ func NSTextListMarkerLowercaseAlpha() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerLowercaseHexadecimal() *foundation.NSString {
@@ -8732,7 +11787,11 @@ func NSTextListMarkerLowercaseHexadecimal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerLowercaseLatin() *foundation.NSString {
@@ -8740,7 +11799,11 @@ func NSTextListMarkerLowercaseLatin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerLowercaseRoman() *foundation.NSString {
@@ -8748,7 +11811,11 @@ func NSTextListMarkerLowercaseRoman() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerOctal() *foundation.NSString {
@@ -8756,7 +11823,11 @@ func NSTextListMarkerOctal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerSquare() *foundation.NSString {
@@ -8764,7 +11835,11 @@ func NSTextListMarkerSquare() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerUppercaseAlpha() *foundation.NSString {
@@ -8772,7 +11847,11 @@ func NSTextListMarkerUppercaseAlpha() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerUppercaseHexadecimal() *foundation.NSString {
@@ -8780,7 +11859,11 @@ func NSTextListMarkerUppercaseHexadecimal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerUppercaseLatin() *foundation.NSString {
@@ -8788,7 +11871,11 @@ func NSTextListMarkerUppercaseLatin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextListMarkerUppercaseRoman() *foundation.NSString {
@@ -8796,7 +11883,11 @@ func NSTextListMarkerUppercaseRoman() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextMovementUserInfoKey() uintptr {
@@ -8809,7 +11900,11 @@ func NSTextNoSelectionException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextReadException() *foundation.NSString {
@@ -8817,7 +11912,11 @@ func NSTextReadException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextScalingDocumentAttribute() *foundation.NSString {
@@ -8825,7 +11924,11 @@ func NSTextScalingDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextSizeMultiplierDocumentOption() *foundation.NSString {
@@ -8833,7 +11936,11 @@ func NSTextSizeMultiplierDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextStorageDidProcessEditingNotification() *foundation.NSString {
@@ -8841,7 +11948,11 @@ func NSTextStorageDidProcessEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextStorageWillProcessEditingNotification() *foundation.NSString {
@@ -8849,7 +11960,11 @@ func NSTextStorageWillProcessEditingNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextViewDidChangeSelectionNotification() *foundation.NSString {
@@ -8857,7 +11972,11 @@ func NSTextViewDidChangeSelectionNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextViewDidChangeTypingAttributesNotification() *foundation.NSString {
@@ -8865,7 +11984,11 @@ func NSTextViewDidChangeTypingAttributesNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextViewDidSwitchToNSLayoutManagerNotification() uintptr {
@@ -8878,7 +12001,11 @@ func NSTextViewWillChangeNotifyingTextViewNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTextViewWillSwitchToNSLayoutManagerNotification() uintptr {
@@ -8891,7 +12018,11 @@ func NSTextWriteException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTimeoutDocumentOption() *foundation.NSString {
@@ -8899,7 +12030,11 @@ func NSTimeoutDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTitleBinding() *foundation.NSString {
@@ -8907,7 +12042,11 @@ func NSTitleBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTitleDocumentAttribute() *foundation.NSString {
@@ -8915,7 +12054,11 @@ func NSTitleDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSToolTipAttributeName() *foundation.NSString {
@@ -8923,7 +12066,11 @@ func NSToolTipAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSToolTipBinding() *foundation.NSString {
@@ -8931,7 +12078,11 @@ func NSToolTipBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
@@ -9016,7 +12167,11 @@ func NSToolbarToggleInspectorItemIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked.
@@ -9025,7 +12180,11 @@ func NSToolbarToggleSidebarItemIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Notifications
@@ -9045,7 +12204,11 @@ func NSTopMarginDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTouchBarItemIdentifierCandidateList() uintptr {
@@ -9063,7 +12226,11 @@ func NSTouchBarItemIdentifierFixedSpaceLarge() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTouchBarItemIdentifierFixedSpaceSmall() *foundation.NSString {
@@ -9071,7 +12238,11 @@ func NSTouchBarItemIdentifierFixedSpaceSmall() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTouchBarItemIdentifierFlexibleSpace() *foundation.NSString {
@@ -9079,7 +12250,11 @@ func NSTouchBarItemIdentifierFlexibleSpace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTouchBarItemIdentifierOtherItemsProxy() *foundation.NSString {
@@ -9087,7 +12262,11 @@ func NSTouchBarItemIdentifierOtherItemsProxy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTouchBarItemIdentifierTextAlignment() uintptr {
@@ -9120,7 +12299,11 @@ func NSTrackingAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSTransparentBinding() uintptr {
@@ -9153,7 +12336,11 @@ func NSTypedStreamVersionException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -9176,7 +12363,11 @@ func NSUnderlineColorAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use NSStrikethroughStyleAttributeName instead
@@ -9193,7 +12384,11 @@ func NSUnderlineStyleAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSUserActivityDocumentURLKey() uintptr {
@@ -9218,7 +12413,11 @@ func NSValidatesImmediatelyBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValueBinding() *foundation.NSString {
@@ -9226,7 +12425,11 @@ func NSValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValuePathBinding() *foundation.NSString {
@@ -9234,7 +12437,11 @@ func NSValuePathBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValueTransformerBindingOption() *foundation.NSString {
@@ -9242,7 +12449,11 @@ func NSValueTransformerBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValueTransformerNameBindingOption() *foundation.NSString {
@@ -9250,7 +12461,11 @@ func NSValueTransformerNameBindingOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValueURLBinding() *foundation.NSString {
@@ -9258,7 +12473,11 @@ func NSValueURLBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: This attribute is not supported with TextKit 2
@@ -9267,7 +12486,11 @@ func NSVerticalGlyphFormAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationEffectKey() *foundation.NSString {
@@ -9275,7 +12498,11 @@ func NSViewAnimationEffectKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationEndFrameKey() *foundation.NSString {
@@ -9283,7 +12510,11 @@ func NSViewAnimationEndFrameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationFadeInEffect() *foundation.NSString {
@@ -9291,7 +12522,11 @@ func NSViewAnimationFadeInEffect() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationFadeOutEffect() *foundation.NSString {
@@ -9299,7 +12534,11 @@ func NSViewAnimationFadeOutEffect() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationStartFrameKey() *foundation.NSString {
@@ -9307,7 +12546,11 @@ func NSViewAnimationStartFrameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewAnimationTargetKey() *foundation.NSString {
@@ -9315,7 +12558,11 @@ func NSViewAnimationTargetKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
@@ -9324,7 +12571,11 @@ func NSViewBoundsDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewDidUpdateTrackingAreasNotification() uintptr {
@@ -9343,7 +12594,11 @@ func NSViewFrameDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use NSOpenGLView instead.
@@ -9357,7 +12612,11 @@ func NSViewModeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -9382,7 +12641,11 @@ func NSViewSizeDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSViewZoomDocumentAttribute() *foundation.NSString {
@@ -9390,7 +12653,11 @@ func NSViewZoomDocumentAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVisibleBinding() *foundation.NSString {
@@ -9398,7 +12665,11 @@ func NSVisibleBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceAge() *foundation.NSString {
@@ -9406,7 +12677,11 @@ func NSVoiceAge() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceDemoText() *foundation.NSString {
@@ -9414,7 +12689,11 @@ func NSVoiceDemoText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceGender() *foundation.NSString {
@@ -9422,7 +12701,11 @@ func NSVoiceGender() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceGenderFemale() *foundation.NSString {
@@ -9430,7 +12713,11 @@ func NSVoiceGenderFemale() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceGenderMale() *foundation.NSString {
@@ -9438,7 +12725,11 @@ func NSVoiceGenderMale() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceGenderNeuter() *foundation.NSString {
@@ -9446,7 +12737,11 @@ func NSVoiceGenderNeuter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceGenderNeutral() uintptr {
@@ -9459,7 +12754,11 @@ func NSVoiceIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceIndividuallySpokenCharacters() uintptr {
@@ -9483,7 +12782,11 @@ func NSVoiceName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSVoiceSupportedCharacters() uintptr {
@@ -9496,7 +12799,11 @@ func NSWarningValueBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWebArchiveTextDocumentType() *foundation.NSString {
@@ -9504,7 +12811,11 @@ func NSWebArchiveTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWebPreferencesDocumentOption() *foundation.NSString {
@@ -9512,7 +12823,11 @@ func NSWebPreferencesDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWebResourceLoadDelegateDocumentOption() *foundation.NSString {
@@ -9520,7 +12835,11 @@ func NSWebResourceLoadDelegateDocumentOption() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWhite() float64 {
@@ -9536,7 +12855,11 @@ func NSWidthBinding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidBecomeKeyNotification() *foundation.NSString {
@@ -9544,7 +12867,11 @@ func NSWindowDidBecomeKeyNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidBecomeMainNotification() *foundation.NSString {
@@ -9552,7 +12879,11 @@ func NSWindowDidBecomeMainNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \c NSWindowDidChangeBackingPropertiesNotification is posted on 10.7.3 and later, when a window's \c backingScaleFactor and/or its \c colorSpace changes.  When running on a system version where this new notification is available, applications should use it instead of \c NSWindowDidChangeScreenProfileNotification to watch for changes to either of these backing store properties.  Many applications won't have any need to watch for this notification, but those that perform sophisticated color handling or manually manage their own caches of window-resolution-and/or/colorspace-appropriate bitmapped images will find this notification useful, as a prompt to invalidate their caches or schedule other reassessment for the new resolution and/or color space as needed.  The notification's userInfo dictionary specifies the window's previous \c backingScaleFactor and \c colorSpace.  You can compare these with the window's new \c backingScaleFactor and \c colorSpace at the time of the notification, to determine which of these two properties (potentially both) changed.
@@ -9572,7 +12903,11 @@ func NSWindowDidChangeScreenNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \c NSWindowDidChangeScreenProfileNotification is posted when a window's display's color profile changes, or when the window moves to a display that has a different color profile.  When running on 10.7.3 or later, this notification is still posted for compatibility, but modern applications should instead watch for \c NSWindowDidChangeBackingPropertiesNotification, which is posted for both color space and resolution changes, and facilitates handling both in a single update and redisplay pass.
@@ -9581,7 +12916,11 @@ func NSWindowDidChangeScreenProfileNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidDeminiaturizeNotification() *foundation.NSString {
@@ -9589,7 +12928,11 @@ func NSWindowDidDeminiaturizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \c NSWindowDidEndLiveResizeNotification is sent after the user ends a live resize operation via a mouseUp in the resize corner.  The notification will be sent after the final window size change.    Note that this notification is sent once for a sequence of window resize operations
@@ -9603,7 +12946,11 @@ func NSWindowDidEndSheetNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidEnterFullScreenNotification() uintptr {
@@ -9631,7 +12978,11 @@ func NSWindowDidExposeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidMiniaturizeNotification() *foundation.NSString {
@@ -9639,7 +12990,11 @@ func NSWindowDidMiniaturizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidMoveNotification() *foundation.NSString {
@@ -9647,7 +13002,11 @@ func NSWindowDidMoveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidResignKeyNotification() *foundation.NSString {
@@ -9655,7 +13014,11 @@ func NSWindowDidResignKeyNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidResignMainNotification() *foundation.NSString {
@@ -9663,7 +13026,11 @@ func NSWindowDidResignMainNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidResizeNotification() *foundation.NSString {
@@ -9671,7 +13038,11 @@ func NSWindowDidResizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowDidUpdateNotification() *foundation.NSString {
@@ -9679,7 +13050,11 @@ func NSWindowDidUpdateNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowServerCommunicationException() *foundation.NSString {
@@ -9687,7 +13062,11 @@ func NSWindowServerCommunicationException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowWillBeginSheetNotification() *foundation.NSString {
@@ -9695,7 +13074,11 @@ func NSWindowWillBeginSheetNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowWillCloseNotification() *foundation.NSString {
@@ -9703,7 +13086,11 @@ func NSWindowWillCloseNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowWillEnterFullScreenNotification() uintptr {
@@ -9731,7 +13118,11 @@ func NSWindowWillMiniaturizeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWindowWillMoveNotification() *foundation.NSString {
@@ -9739,7 +13130,11 @@ func NSWindowWillMoveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \c NSWindowWillStartLiveResizeNotification is sent when the user starts a live resize operation via a mouseDown in the resize corner.  The notification will be sent before the window size is changed.  Note that this notification is sent once for a sequence of window resize operations
@@ -9753,7 +13148,11 @@ func NSWordMLTextDocumentType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWordTablesReadException() *foundation.NSString {
@@ -9761,7 +13160,11 @@ func NSWordTablesReadException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWordTablesWriteException() *foundation.NSString {
@@ -9769,7 +13172,11 @@ func NSWordTablesWriteException() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification() uintptr {
@@ -9857,7 +13264,11 @@ func NSWorkspaceDidLaunchApplicationNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceDidMountNotification() *foundation.NSString {
@@ -9865,7 +13276,11 @@ func NSWorkspaceDidMountNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.11.
@@ -9884,7 +13299,11 @@ func NSWorkspaceDidTerminateApplicationNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceDidUnhideApplicationNotification() uintptr {
@@ -9897,7 +13316,11 @@ func NSWorkspaceDidUnmountNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceDidWakeNotification() *foundation.NSString {
@@ -9905,7 +13328,11 @@ func NSWorkspaceDidWakeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use -[NSWorkspace duplicateURLs:completionHandler:] instead.
@@ -9977,7 +13404,11 @@ func NSWorkspaceSessionDidBecomeActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceSessionDidResignActiveNotification() *foundation.NSString {
@@ -9985,7 +13416,11 @@ func NSWorkspaceSessionDidResignActiveNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceVolumeLocalizedNameKey() uintptr {
@@ -10013,7 +13448,11 @@ func NSWorkspaceWillLaunchApplicationNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceWillPowerOffNotification() *foundation.NSString {
@@ -10021,7 +13460,11 @@ func NSWorkspaceWillPowerOffNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceWillSleepNotification() *foundation.NSString {
@@ -10029,7 +13472,11 @@ func NSWorkspaceWillSleepNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWorkspaceWillUnmountNotification() *foundation.NSString {
@@ -10037,7 +13484,11 @@ func NSWorkspaceWillUnmountNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWritingDirectionAttributeName() *foundation.NSString {
@@ -10045,7 +13496,11 @@ func NSWritingDirectionAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSWritingToolsExclusionAttributeName() *foundation.NSString {
@@ -10053,5 +13508,9 @@ func NSWritingToolsExclusionAttributeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

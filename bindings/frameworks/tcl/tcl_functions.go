@@ -21,7 +21,7 @@ var (
 	_fnTcl_AppendAllObjTypes                  func(*Tcl_Interp, *Tcl_Obj) int
 	_fnTcl_AppendElement                      func(*Tcl_Interp, string)
 	_fnTcl_AppendExportList                   func(*Tcl_Interp, *Tcl_Namespace, *Tcl_Obj) int
-	_fnTcl_AppendFormatToObj                  func(*Tcl_Interp, *Tcl_Obj, string, int, unsafe.Pointer) int
+	_fnTcl_AppendFormatToObj                  func(*Tcl_Interp, *Tcl_Obj, string, int, *Tcl_Obj) int
 	_fnTcl_AppendLimitedToObj                 func(*Tcl_Obj, string, int, int, string)
 	_fnTcl_AppendObjToErrorInfo               func(*Tcl_Interp, *Tcl_Obj)
 	_fnTcl_AppendObjToObj                     func(*Tcl_Obj, *Tcl_Obj)
@@ -68,16 +68,16 @@ var (
 	_fnTcl_Close                              func(*Tcl_Interp, unsafe.Pointer) int
 	_fnTcl_CommandComplete                    func(string) int
 	_fnTcl_CommandTraceInfo                   func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
-	_fnTcl_Concat                             func(int, unsafe.Pointer) string
-	_fnTcl_ConcatObj                          func(int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_Concat                             func(int, string) string
+	_fnTcl_ConcatObj                          func(int, *Tcl_Obj) *Tcl_Obj
 	_fnTcl_ConditionFinalize                  func(unsafe.Pointer)
 	_fnTcl_ConditionNotify                    func(unsafe.Pointer)
 	_fnTcl_ConditionWait                      func(unsafe.Pointer, unsafe.Pointer, *Tcl_Time)
 	_fnTcl_ConvertCountedElement              func(string, int, string, int) int
 	_fnTcl_ConvertElement                     func(string, string, int) int
 	_fnTcl_ConvertToType                      func(*Tcl_Interp, *Tcl_Obj, *Tcl_ObjType) int
-	_fnTcl_CreateAlias                        func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
-	_fnTcl_CreateAliasObj                     func(*Tcl_Interp, string, *Tcl_Interp, string, int, unsafe.Pointer) int
+	_fnTcl_CreateAlias                        func(*Tcl_Interp, string, *Tcl_Interp, string, int, string) int
+	_fnTcl_CreateAliasObj                     func(*Tcl_Interp, string, *Tcl_Interp, string, int, *Tcl_Obj) int
 	_fnTcl_CreateChannel                      func(*Tcl_ChannelType, string, unsafe.Pointer, int) unsafe.Pointer
 	_fnTcl_CreateChannelHandler               func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 	_fnTcl_CreateCloseHandler                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -119,7 +119,7 @@ var (
 	_fnTcl_DbNewByteArrayObj                  func(*uint8, int, string, int) *Tcl_Obj
 	_fnTcl_DbNewDictObj                       func(string, int) *Tcl_Obj
 	_fnTcl_DbNewDoubleObj                     func(float64, string, int) *Tcl_Obj
-	_fnTcl_DbNewListObj                       func(int, unsafe.Pointer, string, int) *Tcl_Obj
+	_fnTcl_DbNewListObj                       func(int, *Tcl_Obj, string, int) *Tcl_Obj
 	_fnTcl_DbNewLongObj                       func(int, string, int) *Tcl_Obj
 	_fnTcl_DbNewObj                           func(string, int) *Tcl_Obj
 	_fnTcl_DbNewStringObj                     func(string, int, string, int) *Tcl_Obj
@@ -148,9 +148,9 @@ var (
 	_fnTcl_DictObjGet                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
 	_fnTcl_DictObjNext                        func(*Tcl_DictSearch, *Tcl_Obj, *Tcl_Obj, *int32)
 	_fnTcl_DictObjPut                         func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_DictObjPutKeyList                  func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer, *Tcl_Obj) int
+	_fnTcl_DictObjPutKeyList                  func(*Tcl_Interp, *Tcl_Obj, int, *Tcl_Obj, *Tcl_Obj) int
 	_fnTcl_DictObjRemove                      func(*Tcl_Interp, *Tcl_Obj, *Tcl_Obj) int
-	_fnTcl_DictObjRemoveKeyList               func(*Tcl_Interp, *Tcl_Obj, int, unsafe.Pointer) int
+	_fnTcl_DictObjRemoveKeyList               func(*Tcl_Interp, *Tcl_Obj, int, *Tcl_Obj) int
 	_fnTcl_DictObjSize                        func(*Tcl_Interp, *Tcl_Obj, *int32) int
 	_fnTcl_DiscardInterpState                 func(unsafe.Pointer)
 	_fnTcl_DiscardResult                      func(*Tcl_SavedResult)
@@ -167,7 +167,7 @@ var (
 	_fnTcl_EvalFile                           func(*Tcl_Interp, string) int
 	_fnTcl_EvalObj                            func(*Tcl_Interp, *Tcl_Obj) int
 	_fnTcl_EvalObjEx                          func(*Tcl_Interp, *Tcl_Obj, int) int
-	_fnTcl_EvalObjv                           func(*Tcl_Interp, int, unsafe.Pointer, int) int
+	_fnTcl_EvalObjv                           func(*Tcl_Interp, int, *Tcl_Obj, int) int
 	_fnTcl_EvalTokens                         func(*Tcl_Interp, *Tcl_Token, int) *Tcl_Obj
 	_fnTcl_EvalTokensStandard                 func(*Tcl_Interp, *Tcl_Token, int) int
 	_fnTcl_EventuallyFree                     func(unsafe.Pointer, unsafe.Pointer)
@@ -209,7 +209,7 @@ var (
 	_fnTcl_FSGetTranslatedPath                func(*Tcl_Interp, *Tcl_Obj) *Tcl_Obj
 	_fnTcl_FSGetTranslatedStringPath          func(*Tcl_Interp, *Tcl_Obj) string
 	_fnTcl_FSJoinPath                         func(*Tcl_Obj, int) *Tcl_Obj
-	_fnTcl_FSJoinToPath                       func(*Tcl_Obj, int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_FSJoinToPath                       func(*Tcl_Obj, int, *Tcl_Obj) *Tcl_Obj
 	_fnTcl_FSLink                             func(*Tcl_Obj, *Tcl_Obj, int) *Tcl_Obj
 	_fnTcl_FSListVolumes                      func() *Tcl_Obj
 	_fnTcl_FSLoadFile                         func(*Tcl_Interp, *Tcl_Obj, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
@@ -237,7 +237,7 @@ var (
 	_fnTcl_FirstHashEntry                     func(*Tcl_HashTable, *Tcl_HashSearch) *Tcl_HashEntry
 	_fnTcl_Flush                              func(unsafe.Pointer) int
 	_fnTcl_ForgetImport                       func(*Tcl_Interp, *Tcl_Namespace, string) int
-	_fnTcl_Format                             func(*Tcl_Interp, string, int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_Format                             func(*Tcl_Interp, string, int, *Tcl_Obj) *Tcl_Obj
 	_fnTcl_Free                               func(string)
 	_fnTcl_FreeEncoding                       func(unsafe.Pointer)
 	_fnTcl_FreeParse                          func(*Tcl_Parse)
@@ -352,7 +352,7 @@ var (
 	_fnTcl_IsSafe                             func(*Tcl_Interp) int
 	_fnTcl_IsShared                           func(*Tcl_Obj) int
 	_fnTcl_IsStandardChannel                  func(unsafe.Pointer) int
-	_fnTcl_JoinPath                           func(int, unsafe.Pointer, *Tcl_DString) string
+	_fnTcl_JoinPath                           func(int, string, *Tcl_DString) string
 	_fnTcl_JoinThread                         func(unsafe.Pointer, *int32) int
 	_fnTcl_LimitAddHandler                    func(*Tcl_Interp, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnTcl_LimitCheck                         func(*Tcl_Interp) int
@@ -376,7 +376,7 @@ var (
 	_fnTcl_ListObjGetElements                 func(*Tcl_Interp, *Tcl_Obj, *int32, *Tcl_Obj) int
 	_fnTcl_ListObjIndex                       func(*Tcl_Interp, *Tcl_Obj, int, *Tcl_Obj) int
 	_fnTcl_ListObjLength                      func(*Tcl_Interp, *Tcl_Obj, *int32) int
-	_fnTcl_ListObjReplace                     func(*Tcl_Interp, *Tcl_Obj, int, int, int, unsafe.Pointer) int
+	_fnTcl_ListObjReplace                     func(*Tcl_Interp, *Tcl_Obj, int, int, int, *Tcl_Obj) int
 	_fnTcl_LogCommandInfo                     func(*Tcl_Interp, string, string, int)
 	_fnTcl_MacOSXOpenBundleResources          func(*Tcl_Interp, string, int, int, string) int
 	_fnTcl_MacOSXOpenVersionedBundleResources func(*Tcl_Interp, string, string, int, int, string) int
@@ -384,7 +384,7 @@ var (
 	_fnTcl_MakeFileChannel                    func(unsafe.Pointer, int) unsafe.Pointer
 	_fnTcl_MakeSafe                           func(*Tcl_Interp) int
 	_fnTcl_MakeTcpClientChannel               func(unsafe.Pointer) unsafe.Pointer
-	_fnTcl_Merge                              func(int, unsafe.Pointer) string
+	_fnTcl_Merge                              func(int, string) string
 	_fnTcl_MutexFinalize                      func(unsafe.Pointer)
 	_fnTcl_MutexLock                          func(unsafe.Pointer)
 	_fnTcl_MutexUnlock                        func(unsafe.Pointer)
@@ -394,7 +394,7 @@ var (
 	_fnTcl_NewDictObj                         func() *Tcl_Obj
 	_fnTcl_NewDoubleObj                       func(float64) *Tcl_Obj
 	_fnTcl_NewIntObj                          func(int) *Tcl_Obj
-	_fnTcl_NewListObj                         func(int, unsafe.Pointer) *Tcl_Obj
+	_fnTcl_NewListObj                         func(int, *Tcl_Obj) *Tcl_Obj
 	_fnTcl_NewLongObj                         func(int) *Tcl_Obj
 	_fnTcl_NewObj                             func() *Tcl_Obj
 	_fnTcl_NewStringObj                       func(string, int) *Tcl_Obj
@@ -425,11 +425,11 @@ var (
 	_fnTcl_PkgProvideEx                       func(*Tcl_Interp, string, string, unsafe.Pointer) int
 	_fnTcl_PkgRequire                         func(*Tcl_Interp, string, string, int) string
 	_fnTcl_PkgRequireEx                       func(*Tcl_Interp, string, string, int, unsafe.Pointer) string
-	_fnTcl_PkgRequireProc                     func(*Tcl_Interp, string, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnTcl_PkgRequireProc                     func(*Tcl_Interp, string, int, *Tcl_Obj, unsafe.Pointer) int
 	_fnTcl_PosixError                         func(*Tcl_Interp) string
 	_fnTcl_Preserve                           func(unsafe.Pointer)
 	_fnTcl_PrintDouble                        func(*Tcl_Interp, float64, string)
-	_fnTcl_ProcObjCmd                         func(unsafe.Pointer, *Tcl_Interp, int, unsafe.Pointer) int
+	_fnTcl_ProcObjCmd                         func(unsafe.Pointer, *Tcl_Interp, int, *Tcl_Obj) int
 	_fnTcl_PutEnv                             func(string) int
 	_fnTcl_QueryTimeProc                      func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnTcl_QueueEvent                         func(*Tcl_Event, Tcl_QueuePosition)
@@ -485,7 +485,7 @@ var (
 	_fnTcl_SetErrorCodeVA                     func(*Tcl_Interp, string)
 	_fnTcl_SetExitProc                        func(unsafe.Pointer) unsafe.Pointer
 	_fnTcl_SetIntObj                          func(*Tcl_Obj, int)
-	_fnTcl_SetListObj                         func(*Tcl_Obj, int, unsafe.Pointer)
+	_fnTcl_SetListObj                         func(*Tcl_Obj, int, *Tcl_Obj)
 	_fnTcl_SetLongObj                         func(*Tcl_Obj, int)
 	_fnTcl_SetMainLoop                        func(unsafe.Pointer)
 	_fnTcl_SetMaxBlockTime                    func(*Tcl_Time)
@@ -591,7 +591,7 @@ var (
 	_fnTcl_WriteChars                         func(unsafe.Pointer, string, int) int
 	_fnTcl_WriteObj                           func(unsafe.Pointer, *Tcl_Obj) int
 	_fnTcl_WriteRaw                           func(unsafe.Pointer, string, int) int
-	_fnTcl_WrongNumArgs                       func(*Tcl_Interp, int, unsafe.Pointer, string)
+	_fnTcl_WrongNumArgs                       func(*Tcl_Interp, int, *Tcl_Obj, string)
 )
 
 func TclFreeObj(objPtr *Tcl_Obj) {
@@ -646,7 +646,7 @@ func Tcl_AppendExportList(interp *Tcl_Interp, nsPtr *Tcl_Namespace, objPtr *Tcl_
 	return _fnTcl_AppendExportList(interp, nsPtr, objPtr)
 }
 
-func Tcl_AppendFormatToObj(interp *Tcl_Interp, objPtr *Tcl_Obj, format string, objc int, objv unsafe.Pointer) int {
+func Tcl_AppendFormatToObj(interp *Tcl_Interp, objPtr *Tcl_Obj, format string, objc int, objv *Tcl_Obj) int {
 	return _fnTcl_AppendFormatToObj(interp, objPtr, format, objc, objv)
 }
 
@@ -834,11 +834,11 @@ func Tcl_CommandTraceInfo(interp *Tcl_Interp, varName string, flags int, procPtr
 	return _fnTcl_CommandTraceInfo(interp, varName, flags, procPtr, prevClientData)
 }
 
-func Tcl_Concat(argc int, argv unsafe.Pointer) string {
+func Tcl_Concat(argc int, argv string) string {
 	return _fnTcl_Concat(argc, argv)
 }
 
-func Tcl_ConcatObj(objc int, objv unsafe.Pointer) *Tcl_Obj {
+func Tcl_ConcatObj(objc int, objv *Tcl_Obj) *Tcl_Obj {
 	return _fnTcl_ConcatObj(objc, objv)
 }
 
@@ -866,11 +866,11 @@ func Tcl_ConvertToType(interp *Tcl_Interp, objPtr *Tcl_Obj, typePtr *Tcl_ObjType
 	return _fnTcl_ConvertToType(interp, objPtr, typePtr)
 }
 
-func Tcl_CreateAlias(slave *Tcl_Interp, slaveCmd string, target *Tcl_Interp, targetCmd string, argc int, argv unsafe.Pointer) int {
+func Tcl_CreateAlias(slave *Tcl_Interp, slaveCmd string, target *Tcl_Interp, targetCmd string, argc int, argv string) int {
 	return _fnTcl_CreateAlias(slave, slaveCmd, target, targetCmd, argc, argv)
 }
 
-func Tcl_CreateAliasObj(slave *Tcl_Interp, slaveCmd string, target *Tcl_Interp, targetCmd string, objc int, objv unsafe.Pointer) int {
+func Tcl_CreateAliasObj(slave *Tcl_Interp, slaveCmd string, target *Tcl_Interp, targetCmd string, objc int, objv *Tcl_Obj) int {
 	return _fnTcl_CreateAliasObj(slave, slaveCmd, target, targetCmd, objc, objv)
 }
 
@@ -1038,7 +1038,7 @@ func Tcl_DbNewDoubleObj(doubleValue float64, file string, line int) *Tcl_Obj {
 	return _fnTcl_DbNewDoubleObj(doubleValue, file, line)
 }
 
-func Tcl_DbNewListObj(objc int, objv unsafe.Pointer, file string, line int) *Tcl_Obj {
+func Tcl_DbNewListObj(objc int, objv *Tcl_Obj, file string, line int) *Tcl_Obj {
 	return _fnTcl_DbNewListObj(objc, objv, file, line)
 }
 
@@ -1154,7 +1154,7 @@ func Tcl_DictObjPut(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyPtr *Tcl_Obj, value
 	return _fnTcl_DictObjPut(interp, dictPtr, keyPtr, valuePtr)
 }
 
-func Tcl_DictObjPutKeyList(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyc int, keyv unsafe.Pointer, valuePtr *Tcl_Obj) int {
+func Tcl_DictObjPutKeyList(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyc int, keyv *Tcl_Obj, valuePtr *Tcl_Obj) int {
 	return _fnTcl_DictObjPutKeyList(interp, dictPtr, keyc, keyv, valuePtr)
 }
 
@@ -1162,7 +1162,7 @@ func Tcl_DictObjRemove(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyPtr *Tcl_Obj) in
 	return _fnTcl_DictObjRemove(interp, dictPtr, keyPtr)
 }
 
-func Tcl_DictObjRemoveKeyList(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyc int, keyv unsafe.Pointer) int {
+func Tcl_DictObjRemoveKeyList(interp *Tcl_Interp, dictPtr *Tcl_Obj, keyc int, keyv *Tcl_Obj) int {
 	return _fnTcl_DictObjRemoveKeyList(interp, dictPtr, keyc, keyv)
 }
 
@@ -1230,7 +1230,7 @@ func Tcl_EvalObjEx(interp *Tcl_Interp, objPtr *Tcl_Obj, flags int) int {
 	return _fnTcl_EvalObjEx(interp, objPtr, flags)
 }
 
-func Tcl_EvalObjv(interp *Tcl_Interp, objc int, objv unsafe.Pointer, flags int) int {
+func Tcl_EvalObjv(interp *Tcl_Interp, objc int, objv *Tcl_Obj, flags int) int {
 	return _fnTcl_EvalObjv(interp, objc, objv, flags)
 }
 
@@ -1398,7 +1398,7 @@ func Tcl_FSJoinPath(listObj *Tcl_Obj, elements int) *Tcl_Obj {
 	return _fnTcl_FSJoinPath(listObj, elements)
 }
 
-func Tcl_FSJoinToPath(pathPtr *Tcl_Obj, objc int, objv unsafe.Pointer) *Tcl_Obj {
+func Tcl_FSJoinToPath(pathPtr *Tcl_Obj, objc int, objv *Tcl_Obj) *Tcl_Obj {
 	return _fnTcl_FSJoinToPath(pathPtr, objc, objv)
 }
 
@@ -1510,7 +1510,7 @@ func Tcl_ForgetImport(interp *Tcl_Interp, nsPtr *Tcl_Namespace, pattern string) 
 	return _fnTcl_ForgetImport(interp, nsPtr, pattern)
 }
 
-func Tcl_Format(interp *Tcl_Interp, format string, objc int, objv unsafe.Pointer) *Tcl_Obj {
+func Tcl_Format(interp *Tcl_Interp, format string, objc int, objv *Tcl_Obj) *Tcl_Obj {
 	return _fnTcl_Format(interp, format, objc, objv)
 }
 
@@ -1970,7 +1970,7 @@ func Tcl_IsStandardChannel(channel unsafe.Pointer) int {
 	return _fnTcl_IsStandardChannel(channel)
 }
 
-func Tcl_JoinPath(argc int, argv unsafe.Pointer, resultPtr *Tcl_DString) string {
+func Tcl_JoinPath(argc int, argv string, resultPtr *Tcl_DString) string {
 	return _fnTcl_JoinPath(argc, argv, resultPtr)
 }
 
@@ -2066,7 +2066,7 @@ func Tcl_ListObjLength(interp *Tcl_Interp, listPtr *Tcl_Obj, lengthPtr *int32) i
 	return _fnTcl_ListObjLength(interp, listPtr, lengthPtr)
 }
 
-func Tcl_ListObjReplace(interp *Tcl_Interp, listPtr *Tcl_Obj, first int, count int, objc int, objv unsafe.Pointer) int {
+func Tcl_ListObjReplace(interp *Tcl_Interp, listPtr *Tcl_Obj, first int, count int, objc int, objv *Tcl_Obj) int {
 	return _fnTcl_ListObjReplace(interp, listPtr, first, count, objc, objv)
 }
 
@@ -2098,7 +2098,7 @@ func Tcl_MakeTcpClientChannel(tcpSocket unsafe.Pointer) unsafe.Pointer {
 	return _fnTcl_MakeTcpClientChannel(tcpSocket)
 }
 
-func Tcl_Merge(argc int, argv unsafe.Pointer) string {
+func Tcl_Merge(argc int, argv string) string {
 	return _fnTcl_Merge(argc, argv)
 }
 
@@ -2138,7 +2138,7 @@ func Tcl_NewIntObj(intValue int) *Tcl_Obj {
 	return _fnTcl_NewIntObj(intValue)
 }
 
-func Tcl_NewListObj(objc int, objv unsafe.Pointer) *Tcl_Obj {
+func Tcl_NewListObj(objc int, objv *Tcl_Obj) *Tcl_Obj {
 	return _fnTcl_NewListObj(objc, objv)
 }
 
@@ -2262,7 +2262,7 @@ func Tcl_PkgRequireEx(interp *Tcl_Interp, name string, version string, exact int
 	return _fnTcl_PkgRequireEx(interp, name, version, exact, clientDataPtr)
 }
 
-func Tcl_PkgRequireProc(interp *Tcl_Interp, name string, objc int, objv unsafe.Pointer, clientDataPtr unsafe.Pointer) int {
+func Tcl_PkgRequireProc(interp *Tcl_Interp, name string, objc int, objv *Tcl_Obj, clientDataPtr unsafe.Pointer) int {
 	return _fnTcl_PkgRequireProc(interp, name, objc, objv, clientDataPtr)
 }
 
@@ -2278,7 +2278,7 @@ func Tcl_PrintDouble(interp *Tcl_Interp, value float64, dst string) {
 	_fnTcl_PrintDouble(interp, value, dst)
 }
 
-func Tcl_ProcObjCmd(clientData unsafe.Pointer, interp *Tcl_Interp, objc int, objv unsafe.Pointer) int {
+func Tcl_ProcObjCmd(clientData unsafe.Pointer, interp *Tcl_Interp, objc int, objv *Tcl_Obj) int {
 	return _fnTcl_ProcObjCmd(clientData, interp, objc, objv)
 }
 
@@ -2502,7 +2502,7 @@ func Tcl_SetIntObj(objPtr *Tcl_Obj, intValue int) {
 	_fnTcl_SetIntObj(objPtr, intValue)
 }
 
-func Tcl_SetListObj(objPtr *Tcl_Obj, objc int, objv unsafe.Pointer) {
+func Tcl_SetListObj(objPtr *Tcl_Obj, objc int, objv *Tcl_Obj) {
 	_fnTcl_SetListObj(objPtr, objc, objv)
 }
 
@@ -2926,6 +2926,6 @@ func Tcl_WriteRaw(chan_ unsafe.Pointer, src string, srcLen int) int {
 	return _fnTcl_WriteRaw(chan_, src, srcLen)
 }
 
-func Tcl_WrongNumArgs(interp *Tcl_Interp, objc int, objv unsafe.Pointer, message string) {
+func Tcl_WrongNumArgs(interp *Tcl_Interp, objc int, objv *Tcl_Obj, message string) {
 	_fnTcl_WrongNumArgs(interp, objc, objv, message)
 }

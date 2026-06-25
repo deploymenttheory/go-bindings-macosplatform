@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 )
@@ -27,7 +28,11 @@ func NSAppleEventManagerWillProcessFirstEventNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSAppleEventTimeOutDefault() uintptr {
@@ -66,14 +71,28 @@ func NSAppleScriptErrorRange() uintptr {
 }
 
 // NSArgumentDomain identifies a search list entry containing the commandline arguments the application was launched with, if any. Arguments must be formatted as '-key plistvalue'. NSArgumentDomain is automatically included in all search lists, after forced defaults, but before all other entries. This can be useful for testing purposes.
-func NSArgumentDomain() uintptr {
+func NSArgumentDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSArgumentDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSAssertionHandlerKey() uintptr {
+func NSAssertionHandlerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSAssertionHandlerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSAverageKeyValueOperator() *NSString {
@@ -81,13 +100,24 @@ func NSAverageKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSBuddhistCalendar() uintptr {
+func NSBuddhistCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSBuddhistCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSBundleDidLoadNotification() *NSString {
@@ -95,7 +125,11 @@ func NSBundleDidLoadNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarDayChangedNotification() *NSString {
@@ -103,7 +137,11 @@ func NSCalendarDayChangedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierBangla() *NSString {
@@ -111,7 +149,11 @@ func NSCalendarIdentifierBangla() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierBuddhist() *NSString {
@@ -119,7 +161,11 @@ func NSCalendarIdentifierBuddhist() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierChinese() *NSString {
@@ -127,7 +173,11 @@ func NSCalendarIdentifierChinese() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierCoptic() *NSString {
@@ -135,7 +185,11 @@ func NSCalendarIdentifierCoptic() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierDangi() *NSString {
@@ -143,7 +197,11 @@ func NSCalendarIdentifierDangi() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierEthiopicAmeteAlem() *NSString {
@@ -151,7 +209,11 @@ func NSCalendarIdentifierEthiopicAmeteAlem() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierEthiopicAmeteMihret() *NSString {
@@ -159,7 +221,11 @@ func NSCalendarIdentifierEthiopicAmeteMihret() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierGregorian() *NSString {
@@ -167,7 +233,11 @@ func NSCalendarIdentifierGregorian() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierGujarati() *NSString {
@@ -175,7 +245,11 @@ func NSCalendarIdentifierGujarati() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierHebrew() *NSString {
@@ -183,7 +257,11 @@ func NSCalendarIdentifierHebrew() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierISO8601() *NSString {
@@ -191,7 +269,11 @@ func NSCalendarIdentifierISO8601() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierIndian() *NSString {
@@ -199,7 +281,11 @@ func NSCalendarIdentifierIndian() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierIslamic() *NSString {
@@ -207,7 +293,11 @@ func NSCalendarIdentifierIslamic() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierIslamicCivil() *NSString {
@@ -215,7 +305,11 @@ func NSCalendarIdentifierIslamicCivil() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierIslamicTabular() *NSString {
@@ -223,7 +317,11 @@ func NSCalendarIdentifierIslamicTabular() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierIslamicUmmAlQura() *NSString {
@@ -231,7 +329,11 @@ func NSCalendarIdentifierIslamicUmmAlQura() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierJapanese() *NSString {
@@ -239,7 +341,11 @@ func NSCalendarIdentifierJapanese() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierKannada() *NSString {
@@ -247,7 +353,11 @@ func NSCalendarIdentifierKannada() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierMalayalam() *NSString {
@@ -255,7 +365,11 @@ func NSCalendarIdentifierMalayalam() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierMarathi() *NSString {
@@ -263,7 +377,11 @@ func NSCalendarIdentifierMarathi() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierOdia() *NSString {
@@ -271,7 +389,11 @@ func NSCalendarIdentifierOdia() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierPersian() *NSString {
@@ -279,7 +401,11 @@ func NSCalendarIdentifierPersian() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierRepublicOfChina() *NSString {
@@ -287,7 +413,11 @@ func NSCalendarIdentifierRepublicOfChina() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierTamil() *NSString {
@@ -295,7 +425,11 @@ func NSCalendarIdentifierTamil() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierTelugu() *NSString {
@@ -303,7 +437,11 @@ func NSCalendarIdentifierTelugu() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierVietnamese() *NSString {
@@ -311,7 +449,11 @@ func NSCalendarIdentifierVietnamese() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCalendarIdentifierVikram() *NSString {
@@ -319,7 +461,11 @@ func NSCalendarIdentifierVikram() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCharacterConversionException() *NSString {
@@ -327,13 +473,24 @@ func NSCharacterConversionException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSChineseCalendar() uintptr {
+func NSChineseCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSChineseCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSClassDescriptionNeededForClassNotification() *NSString {
@@ -341,7 +498,11 @@ func NSClassDescriptionNeededForClassNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSCocoaErrorDomain() *NSString {
@@ -349,7 +510,11 @@ func NSCocoaErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSXPCConnection instead
@@ -375,7 +540,11 @@ func NSCountKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -389,7 +558,11 @@ func NSCurrentLocaleDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -409,7 +582,11 @@ func NSDebugDescriptionErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -423,7 +600,11 @@ func NSDecimalNumberDivideByZeroException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDecimalNumberExactnessException() *NSString {
@@ -431,7 +612,11 @@ func NSDecimalNumberExactnessException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDecimalNumberOverflowException() *NSString {
@@ -439,7 +624,11 @@ func NSDecimalNumberOverflowException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDecimalNumberUnderflowException() *NSString {
@@ -447,7 +636,11 @@ func NSDecimalNumberUnderflowException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -461,7 +654,11 @@ func NSDefaultRunLoopMode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDestinationInvalidException() *NSString {
@@ -469,7 +666,11 @@ func NSDestinationInvalidException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Programs no longer transition to single-threaded mode from threaded environments
@@ -478,7 +679,11 @@ func NSDidBecomeSingleThreadedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDistinctUnionOfArraysKeyValueOperator() *NSString {
@@ -486,7 +691,11 @@ func NSDistinctUnionOfArraysKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDistinctUnionOfObjectsKeyValueOperator() *NSString {
@@ -494,7 +703,11 @@ func NSDistinctUnionOfObjectsKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSDistinctUnionOfSetsKeyValueOperator() *NSString {
@@ -502,7 +715,11 @@ func NSDistinctUnionOfSetsKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -521,64 +738,141 @@ func NSEdgeInsetsZero() NSEdgeInsets {
 
 // @const NSErrorFailingURLStringKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail. @discussion This constant is deprecated in Mac OS X 10.6, and is superseded by NSURLErrorFailingURLStringErrorKey.  Both constants refer to the same value for backward-compatibility, but the new symbol name has a better prefix.
 // Deprecated: Use NSURLErrorFailingURLErrorKey instead
-func NSErrorFailingURLStringKey() uintptr {
+func NSErrorFailingURLStringKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSErrorFailingURLStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSExtensionItemAttachmentsKey() uintptr {
+func NSExtensionItemAttachmentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttachmentsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSExtensionItemAttributedContentTextKey() uintptr {
+func NSExtensionItemAttributedContentTextKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttributedContentTextKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSExtensionItemAttributedTitleKey() uintptr {
+func NSExtensionItemAttributedTitleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemAttributedTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSExtensionItemsAndErrorsKey() uintptr {
+func NSExtensionItemsAndErrorsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionItemsAndErrorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSExtensionJavaScriptPreprocessingResultsKey() uintptr {
+func NSExtensionJavaScriptPreprocessingResultsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSExtensionJavaScriptPreprocessingResultsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSFTPPropertyActiveTransferModeKey() uintptr {
+func NSFTPPropertyActiveTransferModeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyActiveTransferModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSFTPPropertyFTPProxy() uintptr {
+func NSFTPPropertyFTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyFTPProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSFTPPropertyFileOffsetKey() uintptr {
+func NSFTPPropertyFileOffsetKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyFileOffsetKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSFTPPropertyUserLoginKey() uintptr {
+func NSFTPPropertyUserLoginKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyUserLoginKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSFTPPropertyUserPasswordKey() uintptr {
+func NSFTPPropertyUserPasswordKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFTPPropertyUserPasswordKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSXPCConnection instead
@@ -592,7 +886,11 @@ func NSFileAppendOnly() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileBusy() *NSString {
@@ -600,7 +898,11 @@ func NSFileBusy() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileCreationDate() *NSString {
@@ -608,7 +910,11 @@ func NSFileCreationDate() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileDeviceIdentifier() *NSString {
@@ -616,7 +922,11 @@ func NSFileDeviceIdentifier() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileExtensionHidden() *NSString {
@@ -624,7 +934,11 @@ func NSFileExtensionHidden() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileGroupOwnerAccountID() *NSString {
@@ -632,7 +946,11 @@ func NSFileGroupOwnerAccountID() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileGroupOwnerAccountName() *NSString {
@@ -640,7 +958,11 @@ func NSFileGroupOwnerAccountName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHFSCreatorCode() *NSString {
@@ -648,7 +970,11 @@ func NSFileHFSCreatorCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHFSTypeCode() *NSString {
@@ -656,7 +982,11 @@ func NSFileHFSTypeCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHandleConnectionAcceptedNotification() *NSString {
@@ -664,7 +994,11 @@ func NSFileHandleConnectionAcceptedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHandleDataAvailableNotification() *NSString {
@@ -672,23 +1006,48 @@ func NSFileHandleDataAvailableNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSFileHandleNotificationDataItem() uintptr {
+func NSFileHandleNotificationDataItem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationDataItem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSFileHandleNotificationFileHandleItem() uintptr {
+func NSFileHandleNotificationFileHandleItem() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationFileHandleItem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Not supported
-func NSFileHandleNotificationMonitorModes() uintptr {
+func NSFileHandleNotificationMonitorModes() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSFileHandleNotificationMonitorModes")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHandleOperationException() *NSString {
@@ -696,7 +1055,11 @@ func NSFileHandleOperationException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHandleReadCompletionNotification() *NSString {
@@ -704,7 +1067,11 @@ func NSFileHandleReadCompletionNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileHandleReadToEndOfFileCompletionNotification() *NSString {
@@ -712,7 +1079,11 @@ func NSFileHandleReadToEndOfFileCompletionNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileImmutable() *NSString {
@@ -720,7 +1091,11 @@ func NSFileImmutable() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() uintptr {
@@ -733,7 +1108,11 @@ func NSFileModificationDate() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileOwnerAccountID() *NSString {
@@ -741,7 +1120,11 @@ func NSFileOwnerAccountID() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileOwnerAccountName() *NSString {
@@ -749,7 +1132,11 @@ func NSFileOwnerAccountName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFilePathErrorKey() *NSString {
@@ -757,7 +1144,11 @@ func NSFilePathErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFilePosixPermissions() *NSString {
@@ -765,7 +1156,11 @@ func NSFilePosixPermissions() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileProtectionComplete() *NSString {
@@ -773,7 +1168,11 @@ func NSFileProtectionComplete() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileProtectionCompleteUnlessOpen() *NSString {
@@ -781,7 +1180,11 @@ func NSFileProtectionCompleteUnlessOpen() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
@@ -789,7 +1192,11 @@ func NSFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileProtectionKey() *NSString {
@@ -797,7 +1204,11 @@ func NSFileProtectionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileProtectionNone() *NSString {
@@ -805,7 +1216,11 @@ func NSFileProtectionNone() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileReferenceCount() *NSString {
@@ -813,7 +1228,11 @@ func NSFileReferenceCount() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileSize() *NSString {
@@ -821,7 +1240,11 @@ func NSFileSize() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileSystemFileNumber() *NSString {
@@ -829,7 +1252,11 @@ func NSFileSystemFileNumber() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileSystemFreeNodes() *NSString {
@@ -837,7 +1264,11 @@ func NSFileSystemFreeNodes() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileSystemNumber() *NSString {
@@ -845,7 +1276,11 @@ func NSFileSystemNumber() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileType() *NSString {
@@ -853,7 +1288,11 @@ func NSFileType() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeBlockSpecial() *NSString {
@@ -861,7 +1300,11 @@ func NSFileTypeBlockSpecial() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeCharacterSpecial() *NSString {
@@ -869,7 +1312,11 @@ func NSFileTypeCharacterSpecial() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeDirectory() *NSString {
@@ -877,7 +1324,11 @@ func NSFileTypeDirectory() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeRegular() *NSString {
@@ -885,7 +1336,11 @@ func NSFileTypeRegular() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeSocket() *NSString {
@@ -893,7 +1348,11 @@ func NSFileTypeSocket() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeSymbolicLink() *NSString {
@@ -901,7 +1360,11 @@ func NSFileTypeSymbolicLink() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFileTypeUnknown() *NSString {
@@ -909,7 +1372,11 @@ func NSFileTypeUnknown() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSFoundationVersionNumber() float64 {
@@ -925,13 +1392,24 @@ func NSGenericException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // NSGlobalDomain identifies a domain shared between all applications for a given user. NSGlobalDomain is automatically included in all search lists, after the entries for the search list's domain.
-func NSGlobalDomain() uintptr {
+func NSGlobalDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGlobalDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSGrammarCorrections() uintptr {
@@ -950,9 +1428,16 @@ func NSGrammarUserDescription() uintptr {
 }
 
 // Deprecated: since macOS 10.10.
-func NSGregorianCalendar() uintptr {
+func NSGregorianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSGregorianCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieComment @discussion Key for cookie comment text
@@ -961,7 +1446,11 @@ func NSHTTPCookieComment() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieCommentURL @discussion Key for cookie comment URL
@@ -970,7 +1459,11 @@ func NSHTTPCookieCommentURL() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieDiscard @discussion Key for cookie discard (session-only) flag
@@ -979,7 +1472,11 @@ func NSHTTPCookieDiscard() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieDomain @discussion Key for cookie domain
@@ -988,7 +1485,11 @@ func NSHTTPCookieDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieExpires @discussion Key for cookie expiration date
@@ -997,7 +1498,11 @@ func NSHTTPCookieExpires() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieManagerAcceptPolicyChangedNotification @discussion Name of notification that should be posted to the distributed notification center whenever the accept cookies preference is changed
@@ -1007,7 +1512,11 @@ func NSHTTPCookieManagerAcceptPolicyChangedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieManagerCookiesChangedNotification @abstract Notification sent when the set of cookies changes
@@ -1016,7 +1525,11 @@ func NSHTTPCookieManagerCookiesChangedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieMaximumAge @discussion Key for cookie maximum age (an alternate way of specifying the expiration)
@@ -1025,7 +1538,11 @@ func NSHTTPCookieMaximumAge() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieName @discussion Key for cookie name
@@ -1034,7 +1551,11 @@ func NSHTTPCookieName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieOriginURL @discussion Key for cookie origin URL
@@ -1043,7 +1564,11 @@ func NSHTTPCookieOriginURL() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookiePath @discussion Key for cookie path
@@ -1052,7 +1577,11 @@ func NSHTTPCookiePath() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookiePort @discussion Key for cookie ports
@@ -1061,7 +1590,11 @@ func NSHTTPCookiePort() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieSameSiteLax @discussion String constant "lax" to be used as a value for the property key NSHTTPCookieSameSite
@@ -1070,7 +1603,11 @@ func NSHTTPCookieSameSiteLax() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieSameSitePolicy @discussion Key for cookie same site
@@ -1079,7 +1616,11 @@ func NSHTTPCookieSameSitePolicy() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieSameSiteStrict @discussion String constant "strict" to be used as a value for the property key NSHTTPCookieSameSite
@@ -1088,7 +1629,11 @@ func NSHTTPCookieSameSiteStrict() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieSecure @discussion Key for cookie secure flag
@@ -1097,7 +1642,11 @@ func NSHTTPCookieSecure() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieSetByJavaScript @discussion An NSString object indicating that the cookie is set via JavaScript.
@@ -1106,7 +1655,11 @@ func NSHTTPCookieSetByJavaScript() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieValue @discussion Key for cookie value
@@ -1115,7 +1668,11 @@ func NSHTTPCookieValue() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSHTTPCookieVersion @discussion Key for cookie version
@@ -1124,49 +1681,102 @@ func NSHTTPCookieVersion() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyErrorPageDataKey() uintptr {
+func NSHTTPPropertyErrorPageDataKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyErrorPageDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyHTTPProxy() uintptr {
+func NSHTTPPropertyHTTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyHTTPProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyRedirectionHeadersKey() uintptr {
+func NSHTTPPropertyRedirectionHeadersKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyRedirectionHeadersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyServerHTTPVersionKey() uintptr {
+func NSHTTPPropertyServerHTTPVersionKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyServerHTTPVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyStatusCodeKey() uintptr {
+func NSHTTPPropertyStatusCodeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyStatusCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.4.
-func NSHTTPPropertyStatusReasonKey() uintptr {
+func NSHTTPPropertyStatusReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHTTPPropertyStatusReasonKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSHebrewCalendar() uintptr {
+func NSHebrewCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSHebrewCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSHelpAnchorErrorKey() *NSString {
@@ -1174,7 +1784,11 @@ func NSHelpAnchorErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -1184,9 +1798,16 @@ func NSHourNameDesignations() uintptr {
 }
 
 // Deprecated: since macOS 10.10.
-func NSISO8601Calendar() uintptr {
+func NSISO8601Calendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSISO8601Calendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSImageURLAttributeName() uintptr {
@@ -1199,13 +1820,24 @@ func NSInconsistentArchiveException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSIndianCalendar() uintptr {
+func NSIndianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIndianCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInflectionAgreementArgumentAttributeName() uintptr {
@@ -1228,7 +1860,11 @@ func NSInflectionConceptsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInflectionReferentConceptAttributeName() uintptr {
@@ -1302,7 +1938,11 @@ func NSInternalInconsistencyException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -1316,7 +1956,11 @@ func NSInvalidArchiveOperationException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvalidArgumentException() *NSString {
@@ -1324,7 +1968,11 @@ func NSInvalidArgumentException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvalidReceivePortException() *NSString {
@@ -1332,7 +1980,11 @@ func NSInvalidReceivePortException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvalidSendPortException() *NSString {
@@ -1340,7 +1992,11 @@ func NSInvalidSendPortException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvalidUnarchiveOperationException() *NSString {
@@ -1348,7 +2004,11 @@ func NSInvalidUnarchiveOperationException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvocationOperationCancelledException() *NSString {
@@ -1356,7 +2016,11 @@ func NSInvocationOperationCancelledException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSInvocationOperationVoidResultException() *NSString {
@@ -1364,7 +2028,11 @@ func NSInvocationOperationVoidResultException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSIsNilTransformerName() *NSString {
@@ -1372,7 +2040,11 @@ func NSIsNilTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSIsNotNilTransformerName() *NSString {
@@ -1380,35 +2052,74 @@ func NSIsNotNilTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSIslamicCalendar() uintptr {
+func NSIslamicCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIslamicCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSIslamicCivilCalendar() uintptr {
+func NSIslamicCivilCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSIslamicCivilCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSItemProviderErrorDomain() uintptr {
+func NSItemProviderErrorDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSItemProviderErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSItemProviderPreferredImageSizeKey() uintptr {
+func NSItemProviderPreferredImageSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSItemProviderPreferredImageSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSJapaneseCalendar() uintptr {
+func NSJapaneseCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSJapaneseCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSKeyValueChangeIndexesKey() *NSString {
@@ -1416,7 +2127,11 @@ func NSKeyValueChangeIndexesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSKeyValueChangeKindKey() *NSString {
@@ -1424,7 +2139,11 @@ func NSKeyValueChangeKindKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSKeyValueChangeNewKey() *NSString {
@@ -1432,7 +2151,11 @@ func NSKeyValueChangeNewKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSKeyValueChangeNotificationIsPriorKey() *NSString {
@@ -1440,7 +2163,11 @@ func NSKeyValueChangeNotificationIsPriorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSKeyValueChangeOldKey() *NSString {
@@ -1448,12 +2175,23 @@ func NSKeyValueChangeOldKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSKeyedArchiveRootObjectKey() uintptr {
+func NSKeyedArchiveRootObjectKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSKeyedArchiveRootObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -1462,7 +2200,11 @@ func NSKeyedUnarchiveFromDataTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLanguageIdentifierAttributeName() uintptr {
@@ -1482,7 +2224,11 @@ func NSLinguisticTagAdjective() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1491,7 +2237,11 @@ func NSLinguisticTagAdverb() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1500,7 +2250,11 @@ func NSLinguisticTagClassifier() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1509,7 +2263,11 @@ func NSLinguisticTagCloseParenthesis() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1518,7 +2276,11 @@ func NSLinguisticTagCloseQuote() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1527,7 +2289,11 @@ func NSLinguisticTagConjunction() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1536,7 +2302,11 @@ func NSLinguisticTagDash() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1545,7 +2315,11 @@ func NSLinguisticTagDeterminer() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1554,7 +2328,11 @@ func NSLinguisticTagIdiom() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1563,7 +2341,11 @@ func NSLinguisticTagInterjection() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1572,7 +2354,11 @@ func NSLinguisticTagNoun() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1581,7 +2367,11 @@ func NSLinguisticTagNumber() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1590,7 +2380,11 @@ func NSLinguisticTagOpenParenthesis() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1599,7 +2393,11 @@ func NSLinguisticTagOpenQuote() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1608,7 +2406,11 @@ func NSLinguisticTagOrganizationName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1617,7 +2419,11 @@ func NSLinguisticTagOther() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1626,7 +2432,11 @@ func NSLinguisticTagOtherPunctuation() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1635,7 +2445,11 @@ func NSLinguisticTagOtherWhitespace() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1644,7 +2458,11 @@ func NSLinguisticTagOtherWord() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1653,7 +2471,11 @@ func NSLinguisticTagParagraphBreak() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1662,7 +2484,11 @@ func NSLinguisticTagParticle() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1671,7 +2497,11 @@ func NSLinguisticTagPersonalName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1680,7 +2510,11 @@ func NSLinguisticTagPlaceName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1689,7 +2523,11 @@ func NSLinguisticTagPreposition() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1698,7 +2536,11 @@ func NSLinguisticTagPronoun() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1707,7 +2549,11 @@ func NSLinguisticTagPunctuation() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1716,7 +2562,11 @@ func NSLinguisticTagSchemeLanguage() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1725,7 +2575,11 @@ func NSLinguisticTagSchemeLemma() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1734,7 +2588,11 @@ func NSLinguisticTagSchemeLexicalClass() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1743,7 +2601,11 @@ func NSLinguisticTagSchemeNameType() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1752,7 +2614,11 @@ func NSLinguisticTagSchemeNameTypeOrLexicalClass() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1761,7 +2627,11 @@ func NSLinguisticTagSchemeScript() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1770,7 +2640,11 @@ func NSLinguisticTagSchemeTokenType() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1779,7 +2653,11 @@ func NSLinguisticTagSentenceTerminator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1788,7 +2666,11 @@ func NSLinguisticTagVerb() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1797,7 +2679,11 @@ func NSLinguisticTagWhitespace() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1806,7 +2692,11 @@ func NSLinguisticTagWord() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSLinguisticTagger API should be replaced with NaturalLanguage.framework API
@@ -1815,7 +2705,11 @@ func NSLinguisticTagWordJoiner() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSListItemDelimiterAttributeName() uintptr {
@@ -1823,9 +2717,16 @@ func NSListItemDelimiterAttributeName() uintptr {
 	return ptr
 }
 
-func NSLoadedClasses() uintptr {
+func NSLoadedClasses() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSLoadedClasses")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalNotificationCenterType() *NSString {
@@ -1833,7 +2734,11 @@ func NSLocalNotificationCenterType() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleAlternateQuotationBeginDelimiterKey() *NSString {
@@ -1841,7 +2746,11 @@ func NSLocaleAlternateQuotationBeginDelimiterKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleAlternateQuotationEndDelimiterKey() *NSString {
@@ -1849,7 +2758,11 @@ func NSLocaleAlternateQuotationEndDelimiterKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCalendar() *NSString {
@@ -1857,7 +2770,11 @@ func NSLocaleCalendar() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCollationIdentifier() *NSString {
@@ -1865,7 +2782,11 @@ func NSLocaleCollationIdentifier() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCollatorIdentifier() *NSString {
@@ -1873,7 +2794,11 @@ func NSLocaleCollatorIdentifier() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCountryCode() *NSString {
@@ -1881,7 +2806,11 @@ func NSLocaleCountryCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCurrencyCode() *NSString {
@@ -1889,7 +2818,11 @@ func NSLocaleCurrencyCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleCurrencySymbol() *NSString {
@@ -1897,7 +2830,11 @@ func NSLocaleCurrencySymbol() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleDecimalSeparator() *NSString {
@@ -1905,7 +2842,11 @@ func NSLocaleDecimalSeparator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleExemplarCharacterSet() *NSString {
@@ -1913,7 +2854,11 @@ func NSLocaleExemplarCharacterSet() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleGroupingSeparator() *NSString {
@@ -1921,7 +2866,11 @@ func NSLocaleGroupingSeparator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleIdentifier() *NSString {
@@ -1929,7 +2878,11 @@ func NSLocaleIdentifier() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleLanguageCode() *NSString {
@@ -1937,7 +2890,11 @@ func NSLocaleLanguageCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleMeasurementSystem() *NSString {
@@ -1945,7 +2902,11 @@ func NSLocaleMeasurementSystem() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleQuotationBeginDelimiterKey() *NSString {
@@ -1953,7 +2914,11 @@ func NSLocaleQuotationBeginDelimiterKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleQuotationEndDelimiterKey() *NSString {
@@ -1961,7 +2926,11 @@ func NSLocaleQuotationEndDelimiterKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleScriptCode() *NSString {
@@ -1969,7 +2938,11 @@ func NSLocaleScriptCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleUsesMetricSystem() *NSString {
@@ -1977,7 +2950,11 @@ func NSLocaleUsesMetricSystem() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocaleVariantCode() *NSString {
@@ -1985,7 +2962,11 @@ func NSLocaleVariantCode() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalizedDescriptionKey() *NSString {
@@ -1993,7 +2974,11 @@ func NSLocalizedDescriptionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalizedFailureErrorKey() *NSString {
@@ -2001,7 +2986,11 @@ func NSLocalizedFailureErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalizedFailureReasonErrorKey() *NSString {
@@ -2009,7 +2998,11 @@ func NSLocalizedFailureReasonErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalizedNumberFormatAttributeName() uintptr {
@@ -2022,7 +3015,11 @@ func NSLocalizedRecoveryOptionsErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSLocalizedRecoverySuggestionErrorKey() *NSString {
@@ -2030,7 +3027,11 @@ func NSLocalizedRecoverySuggestionErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMachErrorDomain() *NSString {
@@ -2038,7 +3039,11 @@ func NSMachErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMallocException() *NSString {
@@ -2046,7 +3051,11 @@ func NSMallocException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMarkdownSourcePositionAttributeName() uintptr {
@@ -2059,7 +3068,11 @@ func NSMaximumKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemAcquisitionMakeKey() uintptr {
@@ -2217,14 +3230,28 @@ func NSMetadataItemContentModificationDateKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemContentTypeKey() uintptr {
+func NSMetadataItemContentTypeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemContentTypeTreeKey() uintptr {
+func NSMetadataItemContentTypeTreeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemContentTypeTreeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemContributorsKey() uintptr {
@@ -2272,9 +3299,16 @@ func NSMetadataItemDirectorKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemDisplayNameKey() uintptr {
+func NSMetadataItemDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemDisplayNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemDownloadedDateKey() uintptr {
@@ -2352,24 +3386,52 @@ func NSMetadataItemFNumberKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemFSContentChangeDateKey() uintptr {
+func NSMetadataItemFSContentChangeDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSContentChangeDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFSCreationDateKey() uintptr {
+func NSMetadataItemFSCreationDateKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSCreationDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFSNameKey() uintptr {
+func NSMetadataItemFSNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataItemFSSizeKey() uintptr {
+func NSMetadataItemFSSizeKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemFSSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemFinderCommentKey() uintptr {
@@ -2522,9 +3584,16 @@ func NSMetadataItemIsLikelyJunkKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemIsUbiquitousKey() uintptr {
+func NSMetadataItemIsUbiquitousKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemIsUbiquitousKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemKeySignatureKey() uintptr {
@@ -2652,9 +3721,16 @@ func NSMetadataItemParticipantsKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemPathKey() uintptr {
+func NSMetadataItemPathKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemPerformersKey() uintptr {
@@ -2812,9 +3888,16 @@ func NSMetadataItemTotalBitRateKey() uintptr {
 	return ptr
 }
 
-func NSMetadataItemURLKey() uintptr {
+func NSMetadataItemURLKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataItemURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataItemVersionKey() uintptr {
@@ -2837,9 +3920,16 @@ func NSMetadataItemWhiteBalanceKey() uintptr {
 	return ptr
 }
 
-func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() uintptr {
+func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryDidFinishGatheringNotification() *NSString {
@@ -2847,7 +3937,11 @@ func NSMetadataQueryDidFinishGatheringNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryDidStartGatheringNotification() *NSString {
@@ -2855,7 +3949,11 @@ func NSMetadataQueryDidStartGatheringNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryDidUpdateNotification() *NSString {
@@ -2863,7 +3961,11 @@ func NSMetadataQueryDidUpdateNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryGatheringProgressNotification() *NSString {
@@ -2871,7 +3973,11 @@ func NSMetadataQueryGatheringProgressNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryIndexedLocalComputerScope() uintptr {
@@ -2894,34 +4000,76 @@ func NSMetadataQueryNetworkScope() uintptr {
 	return ptr
 }
 
-func NSMetadataQueryResultContentRelevanceAttribute() uintptr {
+func NSMetadataQueryResultContentRelevanceAttribute() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryResultContentRelevanceAttribute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUbiquitousDataScope() uintptr {
+func NSMetadataQueryUbiquitousDataScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUbiquitousDataScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUbiquitousDocumentsScope() uintptr {
+func NSMetadataQueryUbiquitousDocumentsScope() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUbiquitousDocumentsScope")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUpdateAddedItemsKey() uintptr {
+func NSMetadataQueryUpdateAddedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateAddedItemsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUpdateChangedItemsKey() uintptr {
+func NSMetadataQueryUpdateChangedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateChangedItemsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataQueryUpdateRemovedItemsKey() uintptr {
+func NSMetadataQueryUpdateRemovedItemsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataQueryUpdateRemovedItemsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMetadataQueryUserHomeScope() uintptr {
@@ -2929,135 +4077,317 @@ func NSMetadataQueryUserHomeScope() uintptr {
 	return ptr
 }
 
-func NSMetadataUbiquitousItemContainerDisplayNameKey() uintptr {
+func NSMetadataUbiquitousItemContainerDisplayNameKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemContainerDisplayNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadRequestedKey() uintptr {
+func NSMetadataUbiquitousItemDownloadRequestedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadRequestedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadingErrorKey() uintptr {
+func NSMetadataUbiquitousItemDownloadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadingStatusCurrent() uintptr {
+func NSMetadataUbiquitousItemDownloadingStatusCurrent() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusCurrent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadingStatusDownloaded() uintptr {
+func NSMetadataUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusDownloaded")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadingStatusKey() uintptr {
+func NSMetadataUbiquitousItemDownloadingStatusKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemDownloadingStatusNotDownloaded() uintptr {
+func NSMetadataUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemDownloadingStatusNotDownloaded")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemHasUnresolvedConflictsKey() uintptr {
+func NSMetadataUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemHasUnresolvedConflictsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSMetadataUbiquitousItemDownloadingStatusKey instead
-func NSMetadataUbiquitousItemIsDownloadedKey() uintptr {
+func NSMetadataUbiquitousItemIsDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsDownloadedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemIsDownloadingKey() uintptr {
+func NSMetadataUbiquitousItemIsDownloadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsDownloadingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemIsExternalDocumentKey() uintptr {
+func NSMetadataUbiquitousItemIsExternalDocumentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsExternalDocumentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemIsSharedKey() uintptr {
+func NSMetadataUbiquitousItemIsSharedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsSharedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemIsUploadedKey() uintptr {
+func NSMetadataUbiquitousItemIsUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsUploadedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemIsUploadingKey() uintptr {
+func NSMetadataUbiquitousItemIsUploadingKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemIsUploadingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemPercentDownloadedKey() uintptr {
+func NSMetadataUbiquitousItemPercentDownloadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemPercentDownloadedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemPercentUploadedKey() uintptr {
+func NSMetadataUbiquitousItemPercentUploadedKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemPercentUploadedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemURLInLocalContainerKey() uintptr {
+func NSMetadataUbiquitousItemURLInLocalContainerKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemURLInLocalContainerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousItemUploadingErrorKey() uintptr {
+func NSMetadataUbiquitousItemUploadingErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousItemUploadingErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey() uintptr {
+func NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemCurrentUserRoleKey() uintptr {
+func NSMetadataUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemCurrentUserRoleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey() uintptr {
+func NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemOwnerNameComponentsKey() uintptr {
+func NSMetadataUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemOwnerNameComponentsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemPermissionsReadOnly() uintptr {
+func NSMetadataUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemPermissionsReadOnly")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemPermissionsReadWrite() uintptr {
+func NSMetadataUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemPermissionsReadWrite")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemRoleOwner() uintptr {
+func NSMetadataUbiquitousSharedItemRoleOwner() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemRoleOwner")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSMetadataUbiquitousSharedItemRoleParticipant() uintptr {
+func NSMetadataUbiquitousSharedItemRoleParticipant() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSMetadataUbiquitousSharedItemRoleParticipant")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSMinimumKeyValueOperator() *NSString {
@@ -3065,7 +4395,11 @@ func NSMinimumKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -3084,7 +4418,11 @@ func NSMultipleUnderlyingErrorsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSNegateBooleanTransformerName() *NSString {
@@ -3092,7 +4430,11 @@ func NSNegateBooleanTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -3184,7 +4526,11 @@ func NSOSStatusErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSObjectHashCallBacks() NSHashTableCallBacks {
@@ -3200,7 +4546,11 @@ func NSObjectInaccessibleException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSObjectMapKeyCallBacks() NSMapTableKeyCallBacks {
@@ -3224,7 +4574,11 @@ func NSObjectNotAvailableException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSOldStyleException() *NSString {
@@ -3232,12 +4586,23 @@ func NSOldStyleException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSOperationNotSupportedForKeyException() uintptr {
+func NSOperationNotSupportedForKeyException() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSOperationNotSupportedForKeyException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSOwnedObjectIdentityHashCallBacks() NSHashTableCallBacks {
@@ -3277,7 +4642,11 @@ func NSPOSIXErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSParseErrorException() *NSString {
@@ -3285,53 +4654,120 @@ func NSParseErrorException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.10.
-func NSPersianCalendar() uintptr {
+func NSPersianCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersianCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentDelimiter() uintptr {
+func NSPersonNameComponentDelimiter() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentDelimiter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentFamilyName() uintptr {
+func NSPersonNameComponentFamilyName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentFamilyName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentGivenName() uintptr {
+func NSPersonNameComponentGivenName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentGivenName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentKey() uintptr {
+func NSPersonNameComponentKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentMiddleName() uintptr {
+func NSPersonNameComponentMiddleName() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentMiddleName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentNickname() uintptr {
+func NSPersonNameComponentNickname() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentNickname")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentPrefix() uintptr {
+func NSPersonNameComponentPrefix() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentPrefix")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSPersonNameComponentSuffix() uintptr {
+func NSPersonNameComponentSuffix() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSPersonNameComponentSuffix")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSPointerToStructHashCallBacks() NSHashTableCallBacks {
@@ -3347,7 +4783,11 @@ func NSPortDidBecomeInvalidNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSPortReceiveException() *NSString {
@@ -3355,7 +4795,11 @@ func NSPortReceiveException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSPortSendException() *NSString {
@@ -3363,7 +4807,11 @@ func NSPortSendException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSPortTimeoutException() *NSString {
@@ -3371,7 +4819,11 @@ func NSPortTimeoutException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -3385,7 +4837,11 @@ func NSPresentationIntentAttributeName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -3399,7 +4855,11 @@ func NSProcessInfoPowerStateDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProcessInfoThermalStateDidChangeNotification() *NSString {
@@ -3407,7 +4867,11 @@ func NSProcessInfoThermalStateDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressEstimatedTimeRemainingKey() *NSString {
@@ -3415,7 +4879,11 @@ func NSProgressEstimatedTimeRemainingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileAnimationImageKey() uintptr {
@@ -3433,7 +4901,11 @@ func NSProgressFileCompletedCountKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileIconKey() uintptr {
@@ -3446,7 +4918,11 @@ func NSProgressFileOperationKindCopying() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindDecompressingAfterDownloading() *NSString {
@@ -3454,7 +4930,11 @@ func NSProgressFileOperationKindDecompressingAfterDownloading() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindDownloading() *NSString {
@@ -3462,7 +4942,11 @@ func NSProgressFileOperationKindDownloading() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindDuplicating() *NSString {
@@ -3470,7 +4954,11 @@ func NSProgressFileOperationKindDuplicating() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindKey() *NSString {
@@ -3478,7 +4966,11 @@ func NSProgressFileOperationKindKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindReceiving() *NSString {
@@ -3486,7 +4978,11 @@ func NSProgressFileOperationKindReceiving() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileOperationKindUploading() *NSString {
@@ -3494,7 +4990,11 @@ func NSProgressFileOperationKindUploading() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileTotalCountKey() *NSString {
@@ -3502,7 +5002,11 @@ func NSProgressFileTotalCountKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressFileURLKey() *NSString {
@@ -3510,7 +5014,11 @@ func NSProgressFileURLKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressKindFile() *NSString {
@@ -3518,7 +5026,11 @@ func NSProgressKindFile() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSProgressThroughputKey() *NSString {
@@ -3526,7 +5038,11 @@ func NSProgressThroughputKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSRangeException() *NSString {
@@ -3534,7 +5050,11 @@ func NSRangeException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSRecoveryAttempterErrorKey() *NSString {
@@ -3542,13 +5062,24 @@ func NSRecoveryAttempterErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // NSRegistrationDomain identifies a search list entry containing all defaults set with -registerDefaults:, if any. NSRegistrationDomain is automatically included as the final entry of all search lists.
-func NSRegistrationDomain() uintptr {
+func NSRegistrationDomain() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRegistrationDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSReplacementIndexAttributeName() uintptr {
@@ -3557,9 +5088,16 @@ func NSReplacementIndexAttributeName() uintptr {
 }
 
 // Deprecated: since macOS 10.10.
-func NSRepublicOfChinaCalendar() uintptr {
+func NSRepublicOfChinaCalendar() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSRepublicOfChinaCalendar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSRunLoopCommonModes() *NSString {
@@ -3567,7 +5105,11 @@ func NSRunLoopCommonModes() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSSecureUnarchiveFromDataTransformerName() *NSString {
@@ -3575,7 +5117,11 @@ func NSSecureUnarchiveFromDataTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -3607,7 +5153,11 @@ func NSStreamDataWrittenToMemoryStreamKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamFileCurrentOffsetKey() *NSString {
@@ -3615,7 +5165,11 @@ func NSStreamFileCurrentOffsetKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceType() *NSString {
@@ -3623,7 +5177,11 @@ func NSStreamNetworkServiceType() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceTypeBackground() *NSString {
@@ -3631,7 +5189,11 @@ func NSStreamNetworkServiceTypeBackground() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceTypeCallSignaling() *NSString {
@@ -3639,7 +5201,11 @@ func NSStreamNetworkServiceTypeCallSignaling() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceTypeVideo() *NSString {
@@ -3647,7 +5213,11 @@ func NSStreamNetworkServiceTypeVideo() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceTypeVoIP() *NSString {
@@ -3655,7 +5225,11 @@ func NSStreamNetworkServiceTypeVoIP() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamNetworkServiceTypeVoice() *NSString {
@@ -3663,7 +5237,11 @@ func NSStreamNetworkServiceTypeVoice() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSErrorDomain() *NSString {
@@ -3671,7 +5249,11 @@ func NSStreamSOCKSErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyConfigurationKey() *NSString {
@@ -3679,7 +5261,11 @@ func NSStreamSOCKSProxyConfigurationKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyHostKey() *NSString {
@@ -3687,7 +5273,11 @@ func NSStreamSOCKSProxyHostKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyPasswordKey() *NSString {
@@ -3695,7 +5285,11 @@ func NSStreamSOCKSProxyPasswordKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyPortKey() *NSString {
@@ -3703,7 +5297,11 @@ func NSStreamSOCKSProxyPortKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyUserKey() *NSString {
@@ -3711,7 +5309,11 @@ func NSStreamSOCKSProxyUserKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyVersion4() *NSString {
@@ -3719,7 +5321,11 @@ func NSStreamSOCKSProxyVersion4() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyVersion5() *NSString {
@@ -3727,7 +5333,11 @@ func NSStreamSOCKSProxyVersion5() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSOCKSProxyVersionKey() *NSString {
@@ -3735,7 +5345,11 @@ func NSStreamSOCKSProxyVersionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSSLErrorDomain() *NSString {
@@ -3743,7 +5357,11 @@ func NSStreamSocketSSLErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelKey() *NSString {
@@ -3751,7 +5369,11 @@ func NSStreamSocketSecurityLevelKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelNegotiatedSSL() *NSString {
@@ -3759,7 +5381,11 @@ func NSStreamSocketSecurityLevelNegotiatedSSL() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelNone() *NSString {
@@ -3767,7 +5393,11 @@ func NSStreamSocketSecurityLevelNone() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelSSLv2() *NSString {
@@ -3775,7 +5405,11 @@ func NSStreamSocketSecurityLevelSSLv2() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelSSLv3() *NSString {
@@ -3783,7 +5417,11 @@ func NSStreamSocketSecurityLevelSSLv3() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStreamSocketSecurityLevelTLSv1() *NSString {
@@ -3791,7 +5429,11 @@ func NSStreamSocketSecurityLevelTLSv1() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionAllowLossyKey() *NSString {
@@ -3799,7 +5441,11 @@ func NSStringEncodingDetectionAllowLossyKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionDisallowedEncodingsKey() *NSString {
@@ -3807,7 +5453,11 @@ func NSStringEncodingDetectionDisallowedEncodingsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionFromWindowsKey() *NSString {
@@ -3815,7 +5465,11 @@ func NSStringEncodingDetectionFromWindowsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionLikelyLanguageKey() *NSString {
@@ -3823,7 +5477,11 @@ func NSStringEncodingDetectionLikelyLanguageKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionLossySubstitutionKey() *NSString {
@@ -3831,7 +5489,11 @@ func NSStringEncodingDetectionLossySubstitutionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionSuggestedEncodingsKey() *NSString {
@@ -3839,7 +5501,11 @@ func NSStringEncodingDetectionSuggestedEncodingsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *NSString {
@@ -3847,7 +5513,11 @@ func NSStringEncodingDetectionUseOnlySuggestedEncodingsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringEncodingErrorKey() *NSString {
@@ -3855,7 +5525,11 @@ func NSStringEncodingErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformFullwidthToHalfwidth() *NSString {
@@ -3863,7 +5537,11 @@ func NSStringTransformFullwidthToHalfwidth() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformHiraganaToKatakana() *NSString {
@@ -3871,7 +5549,11 @@ func NSStringTransformHiraganaToKatakana() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToArabic() *NSString {
@@ -3879,7 +5561,11 @@ func NSStringTransformLatinToArabic() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToCyrillic() *NSString {
@@ -3887,7 +5573,11 @@ func NSStringTransformLatinToCyrillic() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToGreek() *NSString {
@@ -3895,7 +5585,11 @@ func NSStringTransformLatinToGreek() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToHangul() *NSString {
@@ -3903,7 +5597,11 @@ func NSStringTransformLatinToHangul() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToHebrew() *NSString {
@@ -3911,7 +5609,11 @@ func NSStringTransformLatinToHebrew() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToHiragana() *NSString {
@@ -3919,7 +5621,11 @@ func NSStringTransformLatinToHiragana() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToKatakana() *NSString {
@@ -3927,7 +5633,11 @@ func NSStringTransformLatinToKatakana() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformLatinToThai() *NSString {
@@ -3935,7 +5645,11 @@ func NSStringTransformLatinToThai() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformMandarinToLatin() *NSString {
@@ -3943,7 +5657,11 @@ func NSStringTransformMandarinToLatin() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformStripCombiningMarks() *NSString {
@@ -3951,7 +5669,11 @@ func NSStringTransformStripCombiningMarks() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformStripDiacritics() *NSString {
@@ -3959,7 +5681,11 @@ func NSStringTransformStripDiacritics() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformToLatin() *NSString {
@@ -3967,7 +5693,11 @@ func NSStringTransformToLatin() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformToUnicodeName() *NSString {
@@ -3975,7 +5705,11 @@ func NSStringTransformToUnicodeName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSStringTransformToXMLHex() *NSString {
@@ -3983,7 +5717,11 @@ func NSStringTransformToXMLHex() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSSumKeyValueOperator() *NSString {
@@ -3991,7 +5729,11 @@ func NSSumKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSSystemClockDidChangeNotification() *NSString {
@@ -3999,7 +5741,11 @@ func NSSystemClockDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSSystemTimeZoneDidChangeNotification() *NSString {
@@ -4007,7 +5753,11 @@ func NSSystemTimeZoneDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTaskDidTerminateNotification() *NSString {
@@ -4015,7 +5765,11 @@ func NSTaskDidTerminateNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingAirlineKey() *NSString {
@@ -4023,7 +5777,11 @@ func NSTextCheckingAirlineKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingCityKey() *NSString {
@@ -4031,7 +5789,11 @@ func NSTextCheckingCityKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingCountryKey() *NSString {
@@ -4039,7 +5801,11 @@ func NSTextCheckingCountryKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingFlightKey() *NSString {
@@ -4047,7 +5813,11 @@ func NSTextCheckingFlightKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingJobTitleKey() *NSString {
@@ -4055,7 +5825,11 @@ func NSTextCheckingJobTitleKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingNameKey() *NSString {
@@ -4063,7 +5837,11 @@ func NSTextCheckingNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingOrganizationKey() *NSString {
@@ -4071,7 +5849,11 @@ func NSTextCheckingOrganizationKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingPhoneKey() *NSString {
@@ -4079,7 +5861,11 @@ func NSTextCheckingPhoneKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingStateKey() *NSString {
@@ -4087,7 +5873,11 @@ func NSTextCheckingStateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingStreetKey() *NSString {
@@ -4095,7 +5885,11 @@ func NSTextCheckingStreetKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSTextCheckingZIPKey() *NSString {
@@ -4103,7 +5897,11 @@ func NSTextCheckingZIPKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -4124,7 +5922,11 @@ func NSThreadWillExitNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
@@ -4133,7 +5935,11 @@ func NSThumbnail1024x1024SizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.
@@ -4153,7 +5959,11 @@ func NSURLAddedToDirectoryDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLApplicationIsScriptableKey() uintptr {
@@ -4166,55 +5976,115 @@ func NSURLAttributeModificationDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodClientCertificate @abstract SSL Client certificate.  Applies to any protocol.
-func NSURLAuthenticationMethodClientCertificate() uintptr {
+func NSURLAuthenticationMethodClientCertificate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodClientCertificate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodDefault @abstract The default authentication method for a protocol
-func NSURLAuthenticationMethodDefault() uintptr {
+func NSURLAuthenticationMethodDefault() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodDefault")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodHTMLForm @abstract HTML form authentication. Applies to any protocol.
-func NSURLAuthenticationMethodHTMLForm() uintptr {
+func NSURLAuthenticationMethodHTMLForm() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTMLForm")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodHTTPBasic @abstract HTTP basic authentication. Equivalent to NSURLAuthenticationMethodDefault for http.
-func NSURLAuthenticationMethodHTTPBasic() uintptr {
+func NSURLAuthenticationMethodHTTPBasic() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTTPBasic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodHTTPDigest @abstract HTTP digest authentication.
-func NSURLAuthenticationMethodHTTPDigest() uintptr {
+func NSURLAuthenticationMethodHTTPDigest() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodHTTPDigest")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodNTLM @abstract NTLM authentication.
-func NSURLAuthenticationMethodNTLM() uintptr {
+func NSURLAuthenticationMethodNTLM() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodNTLM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodNegotiate @abstract Negotiate authentication.
-func NSURLAuthenticationMethodNegotiate() uintptr {
+func NSURLAuthenticationMethodNegotiate() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodNegotiate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLAuthenticationMethodServerTrust @abstract SecTrustRef validation required.  Applies to any protocol.
-func NSURLAuthenticationMethodServerTrust() uintptr {
+func NSURLAuthenticationMethodServerTrust() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLAuthenticationMethodServerTrust")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLCanonicalPathKey() *NSString {
@@ -4222,7 +6092,11 @@ func NSURLCanonicalPathKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLContentAccessDateKey() *NSString {
@@ -4230,7 +6104,11 @@ func NSURLContentAccessDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLContentModificationDateKey() *NSString {
@@ -4238,7 +6116,11 @@ func NSURLContentModificationDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLContentTypeKey() *NSString {
@@ -4246,7 +6128,11 @@ func NSURLContentTypeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLCreationDateKey() *NSString {
@@ -4254,7 +6140,11 @@ func NSURLCreationDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLCredentialStorageChangedNotification @abstract This notification is sent on the main thread whenever the set of stored credentials changes.
@@ -4264,12 +6154,23 @@ func NSURLCredentialStorageChangedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSURLCredentialStorageRemoveSynchronizableCredentials() uintptr {
+func NSURLCredentialStorageRemoveSynchronizableCredentials() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLCredentialStorageRemoveSynchronizableCredentials")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLCustomIconKey() *NSString {
@@ -4277,7 +6178,11 @@ func NSURLCustomIconKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLDirectoryEntryCountKey() *NSString {
@@ -4285,7 +6190,11 @@ func NSURLDirectoryEntryCountKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLDocumentIdentifierKey() *NSString {
@@ -4293,7 +6202,11 @@ func NSURLDocumentIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLEffectiveIconKey() *NSString {
@@ -4301,13 +6214,24 @@ func NSURLEffectiveIconKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLErrorBackgroundTaskCancelledReasonKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSNumber corresponding to the reason why a background NSURLSessionTask was cancelled
-func NSURLErrorBackgroundTaskCancelledReasonKey() uintptr {
+func NSURLErrorBackgroundTaskCancelledReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorBackgroundTaskCancelledReasonKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLErrorDomain() *NSString {
@@ -4315,26 +6239,51 @@ func NSURLErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLErrorFailingURLErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the URL which caused a load to fail.
-func NSURLErrorFailingURLErrorKey() uintptr {
+func NSURLErrorFailingURLErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLErrorFailingURLPeerTrustErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the SecTrustRef object representing the state of a failed SSL handshake.
-func NSURLErrorFailingURLPeerTrustErrorKey() uintptr {
+func NSURLErrorFailingURLPeerTrustErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLPeerTrustErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLErrorFailingURLStringErrorKey @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail. @discussion This constant supersedes NSErrorFailingURLStringKey, which was deprecated in Mac OS X 10.6.  Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
 // Deprecated: Use NSURLErrorFailingURLErrorKey instead
-func NSURLErrorFailingURLStringErrorKey() uintptr {
+func NSURLErrorFailingURLStringErrorKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLErrorFailingURLStringErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLErrorKey() *NSString {
@@ -4342,7 +6291,11 @@ func NSURLErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLErrorNetworkUnavailableReasonKey @abstract The NSErrorUserInfoKey used to store and retrieve the NSNumber object corresponding to the reason why the network is unavailable when the task failed due to unsatisfiable network constraints.  See the NSURLErrorNetworkUnavailableReason enum for details.
@@ -4351,7 +6304,11 @@ func NSURLErrorNetworkUnavailableReasonKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileAllocatedSizeKey() *NSString {
@@ -4359,7 +6316,11 @@ func NSURLFileAllocatedSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileContentIdentifierKey() *NSString {
@@ -4367,7 +6328,11 @@ func NSURLFileContentIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileIdentifierKey() *NSString {
@@ -4375,7 +6340,11 @@ func NSURLFileIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileProtectionComplete() *NSString {
@@ -4383,7 +6352,11 @@ func NSURLFileProtectionComplete() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileProtectionCompleteUnlessOpen() *NSString {
@@ -4391,7 +6364,11 @@ func NSURLFileProtectionCompleteUnlessOpen() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
@@ -4399,7 +6376,11 @@ func NSURLFileProtectionCompleteUntilFirstUserAuthentication() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileProtectionKey() *NSString {
@@ -4407,7 +6388,11 @@ func NSURLFileProtectionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileProtectionNone() *NSString {
@@ -4415,7 +6400,11 @@ func NSURLFileProtectionNone() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceIdentifierKey() *NSString {
@@ -4423,7 +6412,11 @@ func NSURLFileResourceIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeBlockSpecial() *NSString {
@@ -4431,7 +6424,11 @@ func NSURLFileResourceTypeBlockSpecial() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeCharacterSpecial() *NSString {
@@ -4439,7 +6436,11 @@ func NSURLFileResourceTypeCharacterSpecial() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeDirectory() *NSString {
@@ -4447,7 +6448,11 @@ func NSURLFileResourceTypeDirectory() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeKey() *NSString {
@@ -4455,7 +6460,11 @@ func NSURLFileResourceTypeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeNamedPipe() *NSString {
@@ -4463,7 +6472,11 @@ func NSURLFileResourceTypeNamedPipe() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeRegular() *NSString {
@@ -4471,7 +6484,11 @@ func NSURLFileResourceTypeRegular() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeSocket() *NSString {
@@ -4479,7 +6496,11 @@ func NSURLFileResourceTypeSocket() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeSymbolicLink() *NSString {
@@ -4487,7 +6508,11 @@ func NSURLFileResourceTypeSymbolicLink() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileResourceTypeUnknown() *NSString {
@@ -4495,12 +6520,23 @@ func NSURLFileResourceTypeUnknown() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSURLFileScheme() uintptr {
+func NSURLFileScheme() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLFileScheme")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileSecurityKey() *NSString {
@@ -4508,7 +6544,11 @@ func NSURLFileSecurityKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLFileSizeKey() *NSString {
@@ -4516,7 +6556,11 @@ func NSURLFileSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLGenerationIdentifierKey() *NSString {
@@ -4524,7 +6568,11 @@ func NSURLGenerationIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLHasHiddenExtensionKey() *NSString {
@@ -4532,7 +6580,11 @@ func NSURLHasHiddenExtensionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsAliasFileKey() *NSString {
@@ -4540,7 +6592,11 @@ func NSURLIsAliasFileKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsApplicationKey() *NSString {
@@ -4548,7 +6604,11 @@ func NSURLIsApplicationKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsDirectoryKey() *NSString {
@@ -4556,7 +6616,11 @@ func NSURLIsDirectoryKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsExcludedFromBackupKey() *NSString {
@@ -4564,7 +6628,11 @@ func NSURLIsExcludedFromBackupKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsExecutableKey() *NSString {
@@ -4572,7 +6640,11 @@ func NSURLIsExecutableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsHiddenKey() *NSString {
@@ -4580,7 +6652,11 @@ func NSURLIsHiddenKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsMountTriggerKey() *NSString {
@@ -4588,7 +6664,11 @@ func NSURLIsMountTriggerKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsPackageKey() *NSString {
@@ -4596,7 +6676,11 @@ func NSURLIsPackageKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsPurgeableKey() *NSString {
@@ -4604,7 +6688,11 @@ func NSURLIsPurgeableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsReadableKey() *NSString {
@@ -4612,7 +6700,11 @@ func NSURLIsReadableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsRegularFileKey() *NSString {
@@ -4620,7 +6712,11 @@ func NSURLIsRegularFileKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsSparseKey() *NSString {
@@ -4628,7 +6724,11 @@ func NSURLIsSparseKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsSymbolicLinkKey() *NSString {
@@ -4636,7 +6736,11 @@ func NSURLIsSymbolicLinkKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsSystemImmutableKey() *NSString {
@@ -4644,7 +6748,11 @@ func NSURLIsSystemImmutableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsUbiquitousItemKey() *NSString {
@@ -4652,7 +6760,11 @@ func NSURLIsUbiquitousItemKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsUserImmutableKey() *NSString {
@@ -4660,7 +6772,11 @@ func NSURLIsUserImmutableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsVolumeKey() *NSString {
@@ -4668,7 +6784,11 @@ func NSURLIsVolumeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLIsWritableKey() *NSString {
@@ -4676,7 +6796,11 @@ func NSURLIsWritableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLKeysOfUnsetValuesKey() *NSString {
@@ -4684,7 +6808,11 @@ func NSURLKeysOfUnsetValuesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLabelColorKey() *NSString {
@@ -4692,7 +6820,11 @@ func NSURLLabelColorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLabelNumberKey() *NSString {
@@ -4700,7 +6832,11 @@ func NSURLLabelNumberKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLinkCountKey() *NSString {
@@ -4708,7 +6844,11 @@ func NSURLLinkCountKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLocalizedLabelKey() *NSString {
@@ -4716,7 +6856,11 @@ func NSURLLocalizedLabelKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLocalizedNameKey() *NSString {
@@ -4724,7 +6868,11 @@ func NSURLLocalizedNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLLocalizedTypeDescriptionKey() *NSString {
@@ -4732,7 +6880,11 @@ func NSURLLocalizedTypeDescriptionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLMayHaveExtendedAttributesKey() *NSString {
@@ -4740,7 +6892,11 @@ func NSURLMayHaveExtendedAttributesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLMayShareFileContentKey() *NSString {
@@ -4748,7 +6904,11 @@ func NSURLMayShareFileContentKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLNameKey() *NSString {
@@ -4756,7 +6916,11 @@ func NSURLNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLParentDirectoryURLKey() *NSString {
@@ -4764,7 +6928,11 @@ func NSURLParentDirectoryURLKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLPathKey() *NSString {
@@ -4772,7 +6940,11 @@ func NSURLPathKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLPreferredIOBlockSizeKey() *NSString {
@@ -4780,51 +6952,104 @@ func NSURLPreferredIOBlockSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceFTP @abstract The protocol for FTP
 // Deprecated: FTP is deprecated and only supported in the classic loading mode
-func NSURLProtectionSpaceFTP() uintptr {
+func NSURLProtectionSpaceFTP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceFTP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceFTPProxy @abstract The proxy type for ftp proxies
 // Deprecated: FTP is deprecated and only supported in the classic loading mode
-func NSURLProtectionSpaceFTPProxy() uintptr {
+func NSURLProtectionSpaceFTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceFTPProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceHTTP @abstract The protocol for HTTP
-func NSURLProtectionSpaceHTTP() uintptr {
+func NSURLProtectionSpaceHTTP() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceHTTPProxy @abstract The proxy type for http proxies
-func NSURLProtectionSpaceHTTPProxy() uintptr {
+func NSURLProtectionSpaceHTTPProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceHTTPS @abstract The protocol for HTTPS
-func NSURLProtectionSpaceHTTPS() uintptr {
+func NSURLProtectionSpaceHTTPS() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceHTTPSProxy @abstract The proxy type for https proxies
-func NSURLProtectionSpaceHTTPSProxy() uintptr {
+func NSURLProtectionSpaceHTTPSProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceHTTPSProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // @const NSURLProtectionSpaceSOCKSProxy @abstract The proxy type for SOCKS proxies
-func NSURLProtectionSpaceSOCKSProxy() uintptr {
+func NSURLProtectionSpaceSOCKSProxy() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLProtectionSpaceSOCKSProxy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLQuarantinePropertiesKey() uintptr {
@@ -4832,9 +7057,16 @@ func NSURLQuarantinePropertiesKey() uintptr {
 	return ptr
 }
 
-func NSURLSessionDownloadTaskResumeData() uintptr {
+func NSURLSessionDownloadTaskResumeData() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionDownloadTaskResumeData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLSessionTaskPriorityDefault() uintptr {
@@ -4861,9 +7093,16 @@ func NSURLSessionTransferSizeUnknown() int64 {
 }
 
 // Key in the userInfo dictionary of an NSError received during a failed upload.
-func NSURLSessionUploadTaskResumeData() uintptr {
+func NSURLSessionUploadTaskResumeData() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSURLSessionUploadTaskResumeData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLTagNamesKey() uintptr {
@@ -4877,7 +7116,11 @@ func NSURLThumbnailDictionaryKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use the QuickLookThumbnailing framework and extension point instead
@@ -4891,7 +7134,11 @@ func NSURLTotalFileAllocatedSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLTotalFileSizeKey() *NSString {
@@ -4899,7 +7146,11 @@ func NSURLTotalFileSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSURLContentTypeKey instead
@@ -4908,7 +7159,11 @@ func NSURLTypeIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemContainerDisplayNameKey() *NSString {
@@ -4916,7 +7171,11 @@ func NSURLUbiquitousItemContainerDisplayNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadRequestedKey() *NSString {
@@ -4924,7 +7183,11 @@ func NSURLUbiquitousItemDownloadRequestedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadingErrorKey() *NSString {
@@ -4932,7 +7195,11 @@ func NSURLUbiquitousItemDownloadingErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadingStatusCurrent() *NSString {
@@ -4940,7 +7207,11 @@ func NSURLUbiquitousItemDownloadingStatusCurrent() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadingStatusDownloaded() *NSString {
@@ -4948,7 +7219,11 @@ func NSURLUbiquitousItemDownloadingStatusDownloaded() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadingStatusKey() *NSString {
@@ -4956,7 +7231,11 @@ func NSURLUbiquitousItemDownloadingStatusKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
@@ -4964,7 +7243,11 @@ func NSURLUbiquitousItemDownloadingStatusNotDownloaded() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemHasUnresolvedConflictsKey() *NSString {
@@ -4972,7 +7255,11 @@ func NSURLUbiquitousItemHasUnresolvedConflictsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSURLUbiquitousItemDownloadingStatusKey instead
@@ -4981,7 +7268,11 @@ func NSURLUbiquitousItemIsDownloadedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsDownloadingKey() *NSString {
@@ -4989,7 +7280,11 @@ func NSURLUbiquitousItemIsDownloadingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsExcludedFromSyncKey() *NSString {
@@ -4997,7 +7292,11 @@ func NSURLUbiquitousItemIsExcludedFromSyncKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsSharedKey() *NSString {
@@ -5005,7 +7304,11 @@ func NSURLUbiquitousItemIsSharedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsSyncPausedKey() *NSString {
@@ -5013,7 +7316,11 @@ func NSURLUbiquitousItemIsSyncPausedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsUploadedKey() *NSString {
@@ -5021,7 +7328,11 @@ func NSURLUbiquitousItemIsUploadedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemIsUploadingKey() *NSString {
@@ -5029,7 +7340,11 @@ func NSURLUbiquitousItemIsUploadingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSMetadataUbiquitousItemPercentDownloadedKey instead
@@ -5038,7 +7353,11 @@ func NSURLUbiquitousItemPercentDownloadedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: Use NSMetadataUbiquitousItemPercentUploadedKey instead
@@ -5047,7 +7366,11 @@ func NSURLUbiquitousItemPercentUploadedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemSupportedSyncControlsKey() *NSString {
@@ -5055,7 +7378,11 @@ func NSURLUbiquitousItemSupportedSyncControlsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousItemUploadingErrorKey() *NSString {
@@ -5063,7 +7390,11 @@ func NSURLUbiquitousItemUploadingErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
@@ -5071,7 +7402,11 @@ func NSURLUbiquitousSharedItemCurrentUserPermissionsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemCurrentUserRoleKey() *NSString {
@@ -5079,7 +7414,11 @@ func NSURLUbiquitousSharedItemCurrentUserRoleKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
@@ -5087,7 +7426,11 @@ func NSURLUbiquitousSharedItemMostRecentEditorNameComponentsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
@@ -5095,7 +7438,11 @@ func NSURLUbiquitousSharedItemOwnerNameComponentsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemPermissionsReadOnly() *NSString {
@@ -5103,7 +7450,11 @@ func NSURLUbiquitousSharedItemPermissionsReadOnly() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemPermissionsReadWrite() *NSString {
@@ -5111,7 +7462,11 @@ func NSURLUbiquitousSharedItemPermissionsReadWrite() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemRoleOwner() *NSString {
@@ -5119,7 +7474,11 @@ func NSURLUbiquitousSharedItemRoleOwner() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLUbiquitousSharedItemRoleParticipant() *NSString {
@@ -5127,7 +7486,11 @@ func NSURLUbiquitousSharedItemRoleParticipant() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeAvailableCapacityForImportantUsageKey() *NSString {
@@ -5135,7 +7498,11 @@ func NSURLVolumeAvailableCapacityForImportantUsageKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *NSString {
@@ -5143,7 +7510,11 @@ func NSURLVolumeAvailableCapacityForOpportunisticUsageKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeAvailableCapacityKey() *NSString {
@@ -5151,7 +7522,11 @@ func NSURLVolumeAvailableCapacityKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeCreationDateKey() *NSString {
@@ -5159,7 +7534,11 @@ func NSURLVolumeCreationDateKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIdentifierKey() *NSString {
@@ -5167,7 +7546,11 @@ func NSURLVolumeIdentifierKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsAutomountedKey() *NSString {
@@ -5175,7 +7558,11 @@ func NSURLVolumeIsAutomountedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsBrowsableKey() *NSString {
@@ -5183,7 +7570,11 @@ func NSURLVolumeIsBrowsableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsEjectableKey() *NSString {
@@ -5191,7 +7582,11 @@ func NSURLVolumeIsEjectableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsEncryptedKey() *NSString {
@@ -5199,7 +7594,11 @@ func NSURLVolumeIsEncryptedKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsInternalKey() *NSString {
@@ -5207,7 +7606,11 @@ func NSURLVolumeIsInternalKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsJournalingKey() *NSString {
@@ -5215,7 +7618,11 @@ func NSURLVolumeIsJournalingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsLocalKey() *NSString {
@@ -5223,7 +7630,11 @@ func NSURLVolumeIsLocalKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsReadOnlyKey() *NSString {
@@ -5231,7 +7642,11 @@ func NSURLVolumeIsReadOnlyKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsRemovableKey() *NSString {
@@ -5239,7 +7654,11 @@ func NSURLVolumeIsRemovableKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeIsRootFileSystemKey() *NSString {
@@ -5247,7 +7666,11 @@ func NSURLVolumeIsRootFileSystemKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeLocalizedFormatDescriptionKey() *NSString {
@@ -5255,7 +7678,11 @@ func NSURLVolumeLocalizedFormatDescriptionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeLocalizedNameKey() *NSString {
@@ -5263,7 +7690,11 @@ func NSURLVolumeLocalizedNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeMaximumFileSizeKey() *NSString {
@@ -5271,7 +7702,11 @@ func NSURLVolumeMaximumFileSizeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeMountFromLocationKey() *NSString {
@@ -5279,7 +7714,11 @@ func NSURLVolumeMountFromLocationKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeNameKey() *NSString {
@@ -5287,7 +7726,11 @@ func NSURLVolumeNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeResourceCountKey() *NSString {
@@ -5295,7 +7738,11 @@ func NSURLVolumeResourceCountKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSubtypeKey() *NSString {
@@ -5303,7 +7750,11 @@ func NSURLVolumeSubtypeKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsAccessPermissionsKey() *NSString {
@@ -5311,7 +7762,11 @@ func NSURLVolumeSupportsAccessPermissionsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsAdvisoryFileLockingKey() *NSString {
@@ -5319,7 +7774,11 @@ func NSURLVolumeSupportsAdvisoryFileLockingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsCasePreservedNamesKey() *NSString {
@@ -5327,7 +7786,11 @@ func NSURLVolumeSupportsCasePreservedNamesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsCaseSensitiveNamesKey() *NSString {
@@ -5335,7 +7798,11 @@ func NSURLVolumeSupportsCaseSensitiveNamesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsCompressionKey() *NSString {
@@ -5343,7 +7810,11 @@ func NSURLVolumeSupportsCompressionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsExclusiveRenamingKey() *NSString {
@@ -5351,7 +7822,11 @@ func NSURLVolumeSupportsExclusiveRenamingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsExtendedSecurityKey() *NSString {
@@ -5359,7 +7834,11 @@ func NSURLVolumeSupportsExtendedSecurityKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsFileCloningKey() *NSString {
@@ -5367,7 +7846,11 @@ func NSURLVolumeSupportsFileCloningKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsFileProtectionKey() *NSString {
@@ -5375,7 +7858,11 @@ func NSURLVolumeSupportsFileProtectionKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsHardLinksKey() *NSString {
@@ -5383,7 +7870,11 @@ func NSURLVolumeSupportsHardLinksKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsImmutableFilesKey() *NSString {
@@ -5391,7 +7882,11 @@ func NSURLVolumeSupportsImmutableFilesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsJournalingKey() *NSString {
@@ -5399,7 +7894,11 @@ func NSURLVolumeSupportsJournalingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsPersistentIDsKey() *NSString {
@@ -5407,7 +7906,11 @@ func NSURLVolumeSupportsPersistentIDsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsRenamingKey() *NSString {
@@ -5415,7 +7918,11 @@ func NSURLVolumeSupportsRenamingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsRootDirectoryDatesKey() *NSString {
@@ -5423,7 +7930,11 @@ func NSURLVolumeSupportsRootDirectoryDatesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsSparseFilesKey() *NSString {
@@ -5431,7 +7942,11 @@ func NSURLVolumeSupportsSparseFilesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsSwapRenamingKey() *NSString {
@@ -5439,7 +7954,11 @@ func NSURLVolumeSupportsSwapRenamingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsSymbolicLinksKey() *NSString {
@@ -5447,7 +7966,11 @@ func NSURLVolumeSupportsSymbolicLinksKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsVolumeSizesKey() *NSString {
@@ -5455,7 +7978,11 @@ func NSURLVolumeSupportsVolumeSizesKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeSupportsZeroRunsKey() *NSString {
@@ -5463,7 +7990,11 @@ func NSURLVolumeSupportsZeroRunsKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeTotalCapacityKey() *NSString {
@@ -5471,7 +8002,11 @@ func NSURLVolumeTotalCapacityKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeTypeNameKey() *NSString {
@@ -5479,7 +8014,11 @@ func NSURLVolumeTypeNameKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeURLForRemountingKey() *NSString {
@@ -5487,7 +8026,11 @@ func NSURLVolumeURLForRemountingKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeURLKey() *NSString {
@@ -5495,7 +8038,11 @@ func NSURLVolumeURLKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSURLVolumeUUIDStringKey() *NSString {
@@ -5503,17 +8050,35 @@ func NSURLVolumeUUIDStringKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSUbiquitousKeyValueStoreChangeReasonKey() uintptr {
+func NSUbiquitousKeyValueStoreChangeReasonKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreChangeReasonKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSUbiquitousKeyValueStoreChangedKeysKey() uintptr {
+func NSUbiquitousKeyValueStoreChangedKeysKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUbiquitousKeyValueStoreChangedKeysKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *NSString {
@@ -5521,7 +8086,11 @@ func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUbiquityIdentityDidChangeNotification() *NSString {
@@ -5529,7 +8098,11 @@ func NSUbiquityIdentityDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.14.
@@ -5538,7 +8111,11 @@ func NSUnarchiveFromDataTransformerName() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndefinedKeyException() *NSString {
@@ -5546,7 +8123,11 @@ func NSUndefinedKeyException() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUnderlyingErrorKey() *NSString {
@@ -5554,7 +8135,11 @@ func NSUnderlyingErrorKey() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerCheckpointNotification() *NSString {
@@ -5562,7 +8147,11 @@ func NSUndoManagerCheckpointNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerDidCloseUndoGroupNotification() *NSString {
@@ -5570,7 +8159,11 @@ func NSUndoManagerDidCloseUndoGroupNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerDidOpenUndoGroupNotification() *NSString {
@@ -5578,7 +8171,11 @@ func NSUndoManagerDidOpenUndoGroupNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerDidRedoChangeNotification() *NSString {
@@ -5586,7 +8183,11 @@ func NSUndoManagerDidRedoChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerDidUndoChangeNotification() *NSString {
@@ -5594,12 +8195,23 @@ func NSUndoManagerDidUndoChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSUndoManagerGroupIsDiscardableKey() uintptr {
+func NSUndoManagerGroupIsDiscardableKey() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUndoManagerGroupIsDiscardableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerWillCloseUndoGroupNotification() *NSString {
@@ -5607,7 +8219,11 @@ func NSUndoManagerWillCloseUndoGroupNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerWillRedoChangeNotification() *NSString {
@@ -5615,7 +8231,11 @@ func NSUndoManagerWillRedoChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUndoManagerWillUndoChangeNotification() *NSString {
@@ -5623,7 +8243,11 @@ func NSUndoManagerWillUndoChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUnionOfArraysKeyValueOperator() *NSString {
@@ -5631,7 +8255,11 @@ func NSUnionOfArraysKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUnionOfObjectsKeyValueOperator() *NSString {
@@ -5639,7 +8267,11 @@ func NSUnionOfObjectsKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSUnionOfSetsKeyValueOperator() *NSString {
@@ -5647,12 +8279,23 @@ func NSUnionOfSetsKeyValueOperator() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
-func NSUserActivityTypeBrowsingWeb() uintptr {
+func NSUserActivityTypeBrowsingWeb() *NSString {
 	ptr, _ := purego.Dlsym(_foundationLib, "NSUserActivityTypeBrowsingWeb")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.
@@ -5661,7 +8304,11 @@ func NSUserDefaultsDidChangeNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
@@ -5682,7 +8329,11 @@ func NSWillBecomeMultiThreadedNotification() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 func NSXMLParserErrorDomain() *NSString {
@@ -5690,7 +8341,11 @@ func NSXMLParserErrorDomain() *NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.5.

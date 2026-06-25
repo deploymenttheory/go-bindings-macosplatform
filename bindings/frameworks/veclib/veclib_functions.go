@@ -3835,8 +3835,8 @@ var (
 	_vDSP_vfracD             func(*float64, int, *float64, int, uint)
 	_vDSP_vgathr             func(*float32, *uint, int, *float32, int, uint)
 	_vDSP_vgathrD            func(*float64, *uint, int, *float64, int, uint)
-	_vDSP_vgathra            func(unsafe.Pointer, int, *float32, int, uint)
-	_vDSP_vgathraD           func(unsafe.Pointer, int, *float64, int, uint)
+	_vDSP_vgathra            func(*float32, int, *float32, int, uint)
+	_vDSP_vgathraD           func(*float64, int, *float64, int, uint)
 	_vDSP_vgen               func(*float32, *float32, *float32, int, uint)
 	_vDSP_vgenD              func(*float64, *float64, *float64, int, uint)
 	_vDSP_vgenp              func(*float32, int, *float32, int, *float32, int, uint, uint)
@@ -17513,12 +17513,12 @@ func VDSPVgathrD(__A *float64, __B *uint, __IB int, __C *float64, __IC int, __N 
 }
 
 // C function: vDSP_vgathra
-func VDSPVgathra(__A unsafe.Pointer, __IA int, __C *float32, __IC int, __N uint) {
+func VDSPVgathra(__A *float32, __IA int, __C *float32, __IC int, __N uint) {
 	_vDSP_vgathra(__A, __IA, __C, __IC, __N)
 }
 
 // C function: vDSP_vgathraD
-func VDSPVgathraD(__A unsafe.Pointer, __IA int, __C *float64, __IC int, __N uint) {
+func VDSPVgathraD(__A *float64, __IA int, __C *float64, __IC int, __N uint) {
 	_vDSP_vgathraD(__A, __IA, __C, __IC, __N)
 }
 

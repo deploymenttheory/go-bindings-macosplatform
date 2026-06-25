@@ -65,7 +65,11 @@ func EmitExterns(
 			continue
 		}
 
-		emitExternTyped(w, ext, goType, dylibVarName, mapper.IsEnumType(goType))
+		fromIDCall, isClassPtr := mapper.ObjCClassFromID(goType)
+		if !isClassPtr {
+			fromIDCall = ""
+		}
+		emitExternTyped(w, ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall)
 	}
 
 	return imports, nil
@@ -107,18 +111,26 @@ func isUnexportedXPkg(goType string) bool {
 	return len(after) > 0 && after[0] >= 'a' && after[0] <= 'z'
 }
 
-func emitExternTyped(w io.Writer, ext meta.Extern, goType, dylibVarName string, isEnum bool) {
+func emitExternTyped(w io.Writer, ext meta.Extern, goType, dylibVarName string, isEnum bool, fromIDCall string) {
 	if ext.Doc != "" {
 		fmt.Fprintf(w, "// %s\n", ext.Doc)
 	}
 	emitDeprecatedComment(w, ext.Availability)
 	fmt.Fprintf(w, "func %s() %s {\n", exportedExternName(ext.Name), goType)
 	fmt.Fprintf(w, "\tptr, _ := purego.Dlsym(%s, %q)\n", dylibVarName, ext.Name)
-	if goType == "string" {
-		// char* extern — return as Go string
+	switch {
+	case fromIDCall != "":
+		// ObjC object extern: the symbol holds a pointer-sized ObjC object reference.
+		// Read it as objc.ID, then wrap via the typed FromID constructor.
+		fmt.Fprintf(w, "\tif ptr == 0 { return nil }\n")
+		fmt.Fprintf(w, "\tid := *(*objc.ID)(unsafe.Pointer(ptr))\n")
+		fmt.Fprintf(w, "\tif id == 0 { return nil }\n")
+		fmt.Fprintf(w, "\treturn %s\n", fromIDCall)
+	case goType == "string":
+		// char* extern — return as Go string.
 		fmt.Fprintf(w, "\tif ptr == 0 { return \"\" }\n")
 		fmt.Fprintf(w, "\treturn unsafe.String((*byte)(unsafe.Pointer(ptr)), strlen(ptr))\n")
-	} else {
+	default:
 		zero := zeroValue(goType)
 		if isEnum {
 			zero = "0" // enum types are integers — TypeName{} is invalid

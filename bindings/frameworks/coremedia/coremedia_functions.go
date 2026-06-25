@@ -584,8 +584,8 @@ var (
 	_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) int
 	// @function	CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData @abstract	Creates a CMVideoFormatDescription from a big-endian ImageDescription data structure. @param	allocator						Allocator to use for allocating the CMVideoFormatDescription object. May be NULL. @param	imageDescriptionData			ImageDescription data structure in big-endian byte ordering. @param	size							Size of ImageDescription data structure. @param	stringEncoding					Pass CFStringGetSystemEncoding() or GetApplicationTextEncoding(). @param	flavor							kCMImageDescriptionFlavor constant or NULL for QuickTimeMovie flavor. @param	formatDescriptionOut			Receives new CMVideoFormatDescription.
 	_fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData func(unsafe.Pointer, *uint8, uint, uint, unsafe.Pointer, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreateFromH264ParameterSets             func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer) int
-	_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets             func(unsafe.Pointer, uint, unsafe.Pointer, *uint, int, unsafe.Pointer, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionCreateFromH264ParameterSets             func(unsafe.Pointer, uint, *uint8, *uint, int, unsafe.Pointer) int
+	_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets             func(unsafe.Pointer, uint, *uint8, *uint, int, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMVideoFormatDescriptionGetCleanAperture                        func(unsafe.Pointer, uint8) corefoundation.CGRect
 	_fnCMVideoFormatDescriptionGetDimensions                           func(unsafe.Pointer) CMVideoDimensions
 	_fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers  func() unsafe.Pointer
@@ -2334,11 +2334,11 @@ func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator u
 	return _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator, imageDescriptionData, size, stringEncoding, flavor, formatDescriptionOut)
 }
 
-func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers unsafe.Pointer, parameterSetSizes *uint, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) int {
+func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) int {
 	return _fnCMVideoFormatDescriptionCreateFromH264ParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, formatDescriptionOut)
 }
 
-func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers unsafe.Pointer, parameterSetSizes *uint, nALUnitHeaderLength int, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
+func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nALUnitHeaderLength int, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
 	return _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, extensions, formatDescriptionOut)
 }
 

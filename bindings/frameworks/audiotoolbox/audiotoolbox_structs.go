@@ -398,7 +398,7 @@ type AudioQueueBuffer struct {
 	MAudioDataByteSize         uint
 	MUserData                  unsafe.Pointer
 	MPacketDescriptionCapacity uint
-	MPacketDescriptions        unsafe.Pointer
+	MPacketDescriptions        *coreaudiotypes.AudioStreamPacketDescription
 	MPacketDescriptionCount    uint
 }
 

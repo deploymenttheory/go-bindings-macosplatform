@@ -46,3 +46,13 @@ func AXTechnologyHoverText() obj.Object {
 
 // AXTechnologyZoom returns the string constant AXTechnologyZoom, for use as a dictionary key or argument.
 func AXTechnologyZoom() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AXTechnologyZoom"))) }
+
+// AXPrefersHorizontalTextLayoutDidChangeNotification returns the string constant AXPrefersHorizontalTextLayoutDidChangeNotification, for use as a dictionary key or argument.
+func AXPrefersHorizontalTextLayoutDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXPrefersHorizontalTextLayoutDidChangeNotification")))
+}
+
+// AXAnimatedImagesEnabledDidChangeNotification returns the string constant AXAnimatedImagesEnabledDidChangeNotification, for use as a dictionary key or argument.
+func AXAnimatedImagesEnabledDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AXAnimatedImagesEnabledDidChangeNotification")))
+}

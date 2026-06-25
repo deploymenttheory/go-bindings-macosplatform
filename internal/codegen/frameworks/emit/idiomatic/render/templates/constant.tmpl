@@ -8,11 +8,18 @@
 */}}
 {{define "constants"}}{{range .}}{{template "constant" .}}{{end}}{{end}}
 {{define "constant"}}
-{{- if eq .Kind 0}}// {{.GoName}} returns the value of the constant {{.ExternName}}.
+{{- if eq .Kind "cfref"}}// {{.GoName}} returns the value of the constant {{.ExternName}}.
 func {{.GoName}}() obj.Object { return obj.Wrap(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
-{{else if eq .Kind 1}}// {{.GoName}} returns the string constant {{.ExternName}}.
+{{else if eq .Kind "nsstring"}}// {{.GoName}} returns the string constant {{.ExternName}}.
 func {{.GoName}}() *String { return StringFromID(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
-{{else}}// {{.GoName}} returns the string constant {{.ExternName}}, for use as a dictionary key or argument.
+{{else if eq .Kind "objcid"}}// {{.GoName}} returns the string constant {{.ExternName}}, for use as a dictionary key or argument.
 func {{.GoName}}() obj.Object { return obj.Wrap(purego.CFConstant(_symbol({{.ExternName | printf "%q"}}))) }
+{{else if eq .Kind "objcclass"}}// {{.GoName}} returns the {{.ExternName}} ObjC object as an idiomatic {{.GoTypeName}}.
+func {{.GoName}}() *{{.GoTypeName}} {
+	addr := _symbol({{.ExternName | printf "%q"}})
+	if addr == 0 { return nil }
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return {{.GoTypeName}}FromID(id)
+}
 {{end}}
 {{end}}

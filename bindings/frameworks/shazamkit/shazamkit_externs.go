@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -17,7 +18,11 @@ func SHErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemAppleMusicID() *foundation.NSString {
@@ -25,7 +30,11 @@ func SHMediaItemAppleMusicID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemAppleMusicURL() *foundation.NSString {
@@ -33,7 +42,11 @@ func SHMediaItemAppleMusicURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemArtist() *foundation.NSString {
@@ -41,7 +54,11 @@ func SHMediaItemArtist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemArtworkURL() *foundation.NSString {
@@ -49,7 +66,11 @@ func SHMediaItemArtworkURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemConfidence() *foundation.NSString {
@@ -57,7 +78,11 @@ func SHMediaItemConfidence() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The date when the media item was created
@@ -66,7 +91,11 @@ func SHMediaItemCreationDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemExplicitContent() *foundation.NSString {
@@ -74,7 +103,11 @@ func SHMediaItemExplicitContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemFrequencySkew() *foundation.NSString {
@@ -82,13 +115,24 @@ func SHMediaItemFrequencySkew() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key to access the frequency skew ranges property of a media item.
-func SHMediaItemFrequencySkewRanges() uintptr {
+func SHMediaItemFrequencySkewRanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemFrequencySkewRanges")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemGenres() *foundation.NSString {
@@ -96,7 +140,11 @@ func SHMediaItemGenres() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemISRC() *foundation.NSString {
@@ -104,7 +152,11 @@ func SHMediaItemISRC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemMatchOffset() *foundation.NSString {
@@ -112,7 +164,11 @@ func SHMediaItemMatchOffset() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemShazamID() *foundation.NSString {
@@ -120,7 +176,11 @@ func SHMediaItemShazamID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemSubtitle() *foundation.NSString {
@@ -128,13 +188,24 @@ func SHMediaItemSubtitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key to access the time ranges property of a media item.
-func SHMediaItemTimeRanges() uintptr {
+func SHMediaItemTimeRanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_shazamkitLib, "SHMediaItemTimeRanges")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemTitle() *foundation.NSString {
@@ -142,7 +213,11 @@ func SHMediaItemTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemVideoURL() *foundation.NSString {
@@ -150,7 +225,11 @@ func SHMediaItemVideoURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SHMediaItemWebURL() *foundation.NSString {
@@ -158,5 +237,9 @@ func SHMediaItemWebURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

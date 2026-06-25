@@ -349,7 +349,7 @@
       },
       "suspended": {
         "doc": "A Boolean value that indicates whether the device is in a suspended state.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/suspended-2ja7h"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensiondeviceproperties/suspended-eru0"
       },
       "transportType": {
         "doc": "The transport type of the device, such as USB or HDMI.",
@@ -519,7 +519,7 @@
     "CMIOExtensionStreamProperties": {
       "activeFormatIndex": {
         "doc": "The index of the active format.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-8czm7"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/activeformatindex-83u7z"
       },
       "frameDuration": {
         "doc": "The duration of the frame.",
@@ -535,7 +535,7 @@
       },
       "sinkBufferQueueSize": {
         "doc": "The buffer queue size.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-9b80c"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbufferqueuesize-4kpug"
       },
       "sinkBufferUnderrunCount": {
         "doc": "The buffer underrun count.",
@@ -543,7 +543,7 @@
       },
       "sinkBuffersRequiredForStartup": {
         "doc": "The number of buffers the stream requires for startup.",
-        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-1bgyq"
+        "url": "https://developer.apple.com/documentation/coremediaio/cmioextensionstreamproperties/sinkbuffersrequiredforstartup-4b5te"
       },
       "sinkEndOfData": {
         "doc": "A value that indicates whether the stream has reached its end.",

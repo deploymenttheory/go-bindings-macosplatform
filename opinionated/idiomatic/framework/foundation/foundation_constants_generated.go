@@ -8,6 +8,21 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// NSItemProviderPreferredImageSizeKey returns the string constant NSItemProviderPreferredImageSizeKey.
+func NSItemProviderPreferredImageSizeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSItemProviderPreferredImageSizeKey")))
+}
+
+// NSExtensionJavaScriptPreprocessingResultsKey returns the string constant NSExtensionJavaScriptPreprocessingResultsKey.
+func NSExtensionJavaScriptPreprocessingResultsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSExtensionJavaScriptPreprocessingResultsKey")))
+}
+
+// NSItemProviderErrorDomain returns the string constant NSItemProviderErrorDomain.
+func NSItemProviderErrorDomain() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSItemProviderErrorDomain")))
+}
+
 // NSStringTransformLatinToKatakana returns the string constant NSStringTransformLatinToKatakana.
 func NSStringTransformLatinToKatakana() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSStringTransformLatinToKatakana")))
@@ -202,6 +217,9 @@ func NSProgressFileCompletedCountKey() *String {
 func NSBundleDidLoadNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSBundleDidLoadNotification")))
 }
+
+// NSLoadedClasses returns the string constant NSLoadedClasses.
+func NSLoadedClasses() *String { return StringFromID(purego.CFConstant(_symbol("NSLoadedClasses"))) }
 
 // NSSystemClockDidChangeNotification returns the string constant NSSystemClockDidChangeNotification.
 func NSSystemClockDidChangeNotification() *String {
@@ -456,6 +474,97 @@ func NSLocaleAlternateQuotationEndDelimiterKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSLocaleAlternateQuotationEndDelimiterKey")))
 }
 
+// NSGregorianCalendar returns the string constant NSGregorianCalendar.
+func NSGregorianCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSGregorianCalendar")))
+}
+
+// NSBuddhistCalendar returns the string constant NSBuddhistCalendar.
+func NSBuddhistCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSBuddhistCalendar")))
+}
+
+// NSChineseCalendar returns the string constant NSChineseCalendar.
+func NSChineseCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSChineseCalendar")))
+}
+
+// NSHebrewCalendar returns the string constant NSHebrewCalendar.
+func NSHebrewCalendar() *String { return StringFromID(purego.CFConstant(_symbol("NSHebrewCalendar"))) }
+
+// NSIslamicCalendar returns the string constant NSIslamicCalendar.
+func NSIslamicCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSIslamicCalendar")))
+}
+
+// NSIslamicCivilCalendar returns the string constant NSIslamicCivilCalendar.
+func NSIslamicCivilCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSIslamicCivilCalendar")))
+}
+
+// NSJapaneseCalendar returns the string constant NSJapaneseCalendar.
+func NSJapaneseCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSJapaneseCalendar")))
+}
+
+// NSRepublicOfChinaCalendar returns the string constant NSRepublicOfChinaCalendar.
+func NSRepublicOfChinaCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSRepublicOfChinaCalendar")))
+}
+
+// NSPersianCalendar returns the string constant NSPersianCalendar.
+func NSPersianCalendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersianCalendar")))
+}
+
+// NSIndianCalendar returns the string constant NSIndianCalendar.
+func NSIndianCalendar() *String { return StringFromID(purego.CFConstant(_symbol("NSIndianCalendar"))) }
+
+// NSISO8601Calendar returns the string constant NSISO8601Calendar.
+func NSISO8601Calendar() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSISO8601Calendar")))
+}
+
+// NSPersonNameComponentKey returns the string constant NSPersonNameComponentKey.
+func NSPersonNameComponentKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentKey")))
+}
+
+// NSPersonNameComponentGivenName returns the string constant NSPersonNameComponentGivenName.
+func NSPersonNameComponentGivenName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentGivenName")))
+}
+
+// NSPersonNameComponentFamilyName returns the string constant NSPersonNameComponentFamilyName.
+func NSPersonNameComponentFamilyName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentFamilyName")))
+}
+
+// NSPersonNameComponentMiddleName returns the string constant NSPersonNameComponentMiddleName.
+func NSPersonNameComponentMiddleName() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentMiddleName")))
+}
+
+// NSPersonNameComponentPrefix returns the string constant NSPersonNameComponentPrefix.
+func NSPersonNameComponentPrefix() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentPrefix")))
+}
+
+// NSPersonNameComponentSuffix returns the string constant NSPersonNameComponentSuffix.
+func NSPersonNameComponentSuffix() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentSuffix")))
+}
+
+// NSPersonNameComponentNickname returns the string constant NSPersonNameComponentNickname.
+func NSPersonNameComponentNickname() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentNickname")))
+}
+
+// NSPersonNameComponentDelimiter returns the string constant NSPersonNameComponentDelimiter.
+func NSPersonNameComponentDelimiter() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSPersonNameComponentDelimiter")))
+}
+
 // NSGenericException returns the string constant NSGenericException.
 func NSGenericException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSGenericException")))
@@ -527,6 +636,11 @@ func NSOldStyleException() *String {
 // NSInconsistentArchiveException returns the string constant NSInconsistentArchiveException.
 func NSInconsistentArchiveException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSInconsistentArchiveException")))
+}
+
+// NSAssertionHandlerKey returns the string constant NSAssertionHandlerKey.
+func NSAssertionHandlerKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSAssertionHandlerKey")))
 }
 
 // NSDecimalNumberExactnessException returns the string constant NSDecimalNumberExactnessException.
@@ -666,6 +780,79 @@ func NSFileHandleConnectionAcceptedNotification() *String {
 func NSFileHandleDataAvailableNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSFileHandleDataAvailableNotification")))
 }
+
+// NSFileHandleNotificationDataItem returns the string constant NSFileHandleNotificationDataItem.
+func NSFileHandleNotificationDataItem() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleNotificationDataItem")))
+}
+
+// NSFileHandleNotificationFileHandleItem returns the string constant NSFileHandleNotificationFileHandleItem.
+func NSFileHandleNotificationFileHandleItem() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleNotificationFileHandleItem")))
+}
+
+// NSFileHandleNotificationMonitorModes returns the string constant NSFileHandleNotificationMonitorModes.
+func NSFileHandleNotificationMonitorModes() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFileHandleNotificationMonitorModes")))
+}
+
+// NSHTTPPropertyStatusCodeKey returns the string constant NSHTTPPropertyStatusCodeKey.
+func NSHTTPPropertyStatusCodeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyStatusCodeKey")))
+}
+
+// NSHTTPPropertyStatusReasonKey returns the string constant NSHTTPPropertyStatusReasonKey.
+func NSHTTPPropertyStatusReasonKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyStatusReasonKey")))
+}
+
+// NSHTTPPropertyServerHTTPVersionKey returns the string constant NSHTTPPropertyServerHTTPVersionKey.
+func NSHTTPPropertyServerHTTPVersionKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyServerHTTPVersionKey")))
+}
+
+// NSHTTPPropertyRedirectionHeadersKey returns the string constant NSHTTPPropertyRedirectionHeadersKey.
+func NSHTTPPropertyRedirectionHeadersKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyRedirectionHeadersKey")))
+}
+
+// NSHTTPPropertyErrorPageDataKey returns the string constant NSHTTPPropertyErrorPageDataKey.
+func NSHTTPPropertyErrorPageDataKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyErrorPageDataKey")))
+}
+
+// NSHTTPPropertyHTTPProxy returns the string constant NSHTTPPropertyHTTPProxy.
+func NSHTTPPropertyHTTPProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSHTTPPropertyHTTPProxy")))
+}
+
+// NSFTPPropertyUserLoginKey returns the string constant NSFTPPropertyUserLoginKey.
+func NSFTPPropertyUserLoginKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFTPPropertyUserLoginKey")))
+}
+
+// NSFTPPropertyUserPasswordKey returns the string constant NSFTPPropertyUserPasswordKey.
+func NSFTPPropertyUserPasswordKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFTPPropertyUserPasswordKey")))
+}
+
+// NSFTPPropertyActiveTransferModeKey returns the string constant NSFTPPropertyActiveTransferModeKey.
+func NSFTPPropertyActiveTransferModeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFTPPropertyActiveTransferModeKey")))
+}
+
+// NSFTPPropertyFileOffsetKey returns the string constant NSFTPPropertyFileOffsetKey.
+func NSFTPPropertyFileOffsetKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFTPPropertyFileOffsetKey")))
+}
+
+// NSFTPPropertyFTPProxy returns the string constant NSFTPPropertyFTPProxy.
+func NSFTPPropertyFTPProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSFTPPropertyFTPProxy")))
+}
+
+// NSURLFileScheme returns the string constant NSURLFileScheme.
+func NSURLFileScheme() *String { return StringFromID(purego.CFConstant(_symbol("NSURLFileScheme"))) }
 
 // NSURLKeysOfUnsetValuesKey returns the string constant NSURLKeysOfUnsetValuesKey.
 func NSURLKeysOfUnsetValuesKey() *String {
@@ -1707,6 +1894,11 @@ func NSInvalidUnarchiveOperationException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSInvalidUnarchiveOperationException")))
 }
 
+// NSKeyedArchiveRootObjectKey returns the string constant NSKeyedArchiveRootObjectKey.
+func NSKeyedArchiveRootObjectKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSKeyedArchiveRootObjectKey")))
+}
+
 // NSInvocationOperationVoidResultException returns the string constant NSInvocationOperationVoidResultException.
 func NSInvocationOperationVoidResultException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSInvocationOperationVoidResultException")))
@@ -1927,17 +2119,133 @@ func NSSystemTimeZoneDidChangeNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSSystemTimeZoneDidChangeNotification")))
 }
 
+// NSURLProtectionSpaceHTTP returns the string constant NSURLProtectionSpaceHTTP.
+func NSURLProtectionSpaceHTTP() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceHTTP")))
+}
+
+// NSURLProtectionSpaceHTTPS returns the string constant NSURLProtectionSpaceHTTPS.
+func NSURLProtectionSpaceHTTPS() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceHTTPS")))
+}
+
+// NSURLProtectionSpaceFTP returns the string constant NSURLProtectionSpaceFTP.
+func NSURLProtectionSpaceFTP() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceFTP")))
+}
+
+// NSURLProtectionSpaceHTTPProxy returns the string constant NSURLProtectionSpaceHTTPProxy.
+func NSURLProtectionSpaceHTTPProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceHTTPProxy")))
+}
+
+// NSURLProtectionSpaceHTTPSProxy returns the string constant NSURLProtectionSpaceHTTPSProxy.
+func NSURLProtectionSpaceHTTPSProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceHTTPSProxy")))
+}
+
+// NSURLProtectionSpaceFTPProxy returns the string constant NSURLProtectionSpaceFTPProxy.
+func NSURLProtectionSpaceFTPProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceFTPProxy")))
+}
+
+// NSURLProtectionSpaceSOCKSProxy returns the string constant NSURLProtectionSpaceSOCKSProxy.
+func NSURLProtectionSpaceSOCKSProxy() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLProtectionSpaceSOCKSProxy")))
+}
+
+// NSURLAuthenticationMethodDefault returns the string constant NSURLAuthenticationMethodDefault.
+func NSURLAuthenticationMethodDefault() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodDefault")))
+}
+
+// NSURLAuthenticationMethodHTTPBasic returns the string constant NSURLAuthenticationMethodHTTPBasic.
+func NSURLAuthenticationMethodHTTPBasic() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodHTTPBasic")))
+}
+
+// NSURLAuthenticationMethodHTTPDigest returns the string constant NSURLAuthenticationMethodHTTPDigest.
+func NSURLAuthenticationMethodHTTPDigest() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodHTTPDigest")))
+}
+
+// NSURLAuthenticationMethodHTMLForm returns the string constant NSURLAuthenticationMethodHTMLForm.
+func NSURLAuthenticationMethodHTMLForm() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodHTMLForm")))
+}
+
+// NSURLAuthenticationMethodNTLM returns the string constant NSURLAuthenticationMethodNTLM.
+func NSURLAuthenticationMethodNTLM() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodNTLM")))
+}
+
+// NSURLAuthenticationMethodNegotiate returns the string constant NSURLAuthenticationMethodNegotiate.
+func NSURLAuthenticationMethodNegotiate() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodNegotiate")))
+}
+
+// NSURLAuthenticationMethodClientCertificate returns the string constant NSURLAuthenticationMethodClientCertificate.
+func NSURLAuthenticationMethodClientCertificate() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodClientCertificate")))
+}
+
+// NSURLAuthenticationMethodServerTrust returns the string constant NSURLAuthenticationMethodServerTrust.
+func NSURLAuthenticationMethodServerTrust() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLAuthenticationMethodServerTrust")))
+}
+
 // NSURLCredentialStorageChangedNotification returns the string constant NSURLCredentialStorageChangedNotification.
 func NSURLCredentialStorageChangedNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLCredentialStorageChangedNotification")))
 }
 
+// NSURLCredentialStorageRemoveSynchronizableCredentials returns the string constant NSURLCredentialStorageRemoveSynchronizableCredentials.
+func NSURLCredentialStorageRemoveSynchronizableCredentials() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLCredentialStorageRemoveSynchronizableCredentials")))
+}
+
 // NSURLErrorDomain returns the string constant NSURLErrorDomain.
 func NSURLErrorDomain() *String { return StringFromID(purego.CFConstant(_symbol("NSURLErrorDomain"))) }
+
+// NSURLErrorFailingURLErrorKey returns the string constant NSURLErrorFailingURLErrorKey.
+func NSURLErrorFailingURLErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLErrorFailingURLErrorKey")))
+}
+
+// NSURLErrorFailingURLStringErrorKey returns the string constant NSURLErrorFailingURLStringErrorKey.
+func NSURLErrorFailingURLStringErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLErrorFailingURLStringErrorKey")))
+}
+
+// NSErrorFailingURLStringKey returns the string constant NSErrorFailingURLStringKey.
+func NSErrorFailingURLStringKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSErrorFailingURLStringKey")))
+}
+
+// NSURLErrorFailingURLPeerTrustErrorKey returns the string constant NSURLErrorFailingURLPeerTrustErrorKey.
+func NSURLErrorFailingURLPeerTrustErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLErrorFailingURLPeerTrustErrorKey")))
+}
+
+// NSURLErrorBackgroundTaskCancelledReasonKey returns the string constant NSURLErrorBackgroundTaskCancelledReasonKey.
+func NSURLErrorBackgroundTaskCancelledReasonKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLErrorBackgroundTaskCancelledReasonKey")))
+}
 
 // NSURLErrorNetworkUnavailableReasonKey returns the string constant NSURLErrorNetworkUnavailableReasonKey.
 func NSURLErrorNetworkUnavailableReasonKey() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSURLErrorNetworkUnavailableReasonKey")))
+}
+
+// NSGlobalDomain returns the string constant NSGlobalDomain.
+func NSGlobalDomain() *String { return StringFromID(purego.CFConstant(_symbol("NSGlobalDomain"))) }
+
+// NSArgumentDomain returns the string constant NSArgumentDomain.
+func NSArgumentDomain() *String { return StringFromID(purego.CFConstant(_symbol("NSArgumentDomain"))) }
+
+// NSRegistrationDomain returns the string constant NSRegistrationDomain.
+func NSRegistrationDomain() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSRegistrationDomain")))
 }
 
 // NSUserDefaultsDidChangeNotification returns the string constant NSUserDefaultsDidChangeNotification.
@@ -1978,6 +2286,26 @@ func NSSecureUnarchiveFromDataTransformerName() *String {
 // NSXMLParserErrorDomain returns the string constant NSXMLParserErrorDomain.
 func NSXMLParserErrorDomain() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSXMLParserErrorDomain")))
+}
+
+// NSExtensionItemsAndErrorsKey returns the string constant NSExtensionItemsAndErrorsKey.
+func NSExtensionItemsAndErrorsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSExtensionItemsAndErrorsKey")))
+}
+
+// NSExtensionItemAttributedTitleKey returns the string constant NSExtensionItemAttributedTitleKey.
+func NSExtensionItemAttributedTitleKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSExtensionItemAttributedTitleKey")))
+}
+
+// NSExtensionItemAttributedContentTextKey returns the string constant NSExtensionItemAttributedContentTextKey.
+func NSExtensionItemAttributedContentTextKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSExtensionItemAttributedContentTextKey")))
+}
+
+// NSExtensionItemAttachmentsKey returns the string constant NSExtensionItemAttachmentsKey.
+func NSExtensionItemAttachmentsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSExtensionItemAttachmentsKey")))
 }
 
 // NSLinguisticTagSchemeTokenType returns the string constant NSLinguisticTagSchemeTokenType.
@@ -2170,6 +2498,186 @@ func NSLinguisticTagOrganizationName() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSLinguisticTagOrganizationName")))
 }
 
+// NSMetadataItemFSNameKey returns the string constant NSMetadataItemFSNameKey.
+func NSMetadataItemFSNameKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFSNameKey")))
+}
+
+// NSMetadataItemDisplayNameKey returns the string constant NSMetadataItemDisplayNameKey.
+func NSMetadataItemDisplayNameKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemDisplayNameKey")))
+}
+
+// NSMetadataItemURLKey returns the string constant NSMetadataItemURLKey.
+func NSMetadataItemURLKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemURLKey")))
+}
+
+// NSMetadataItemPathKey returns the string constant NSMetadataItemPathKey.
+func NSMetadataItemPathKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemPathKey")))
+}
+
+// NSMetadataItemFSSizeKey returns the string constant NSMetadataItemFSSizeKey.
+func NSMetadataItemFSSizeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFSSizeKey")))
+}
+
+// NSMetadataItemFSCreationDateKey returns the string constant NSMetadataItemFSCreationDateKey.
+func NSMetadataItemFSCreationDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFSCreationDateKey")))
+}
+
+// NSMetadataItemFSContentChangeDateKey returns the string constant NSMetadataItemFSContentChangeDateKey.
+func NSMetadataItemFSContentChangeDateKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemFSContentChangeDateKey")))
+}
+
+// NSMetadataItemContentTypeKey returns the string constant NSMetadataItemContentTypeKey.
+func NSMetadataItemContentTypeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContentTypeKey")))
+}
+
+// NSMetadataItemContentTypeTreeKey returns the string constant NSMetadataItemContentTypeTreeKey.
+func NSMetadataItemContentTypeTreeKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemContentTypeTreeKey")))
+}
+
+// NSMetadataItemIsUbiquitousKey returns the string constant NSMetadataItemIsUbiquitousKey.
+func NSMetadataItemIsUbiquitousKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataItemIsUbiquitousKey")))
+}
+
+// NSMetadataUbiquitousItemHasUnresolvedConflictsKey returns the string constant NSMetadataUbiquitousItemHasUnresolvedConflictsKey.
+func NSMetadataUbiquitousItemHasUnresolvedConflictsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemHasUnresolvedConflictsKey")))
+}
+
+// NSMetadataUbiquitousItemIsDownloadedKey returns the string constant NSMetadataUbiquitousItemIsDownloadedKey.
+func NSMetadataUbiquitousItemIsDownloadedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsDownloadedKey")))
+}
+
+// NSMetadataUbiquitousItemDownloadingStatusKey returns the string constant NSMetadataUbiquitousItemDownloadingStatusKey.
+func NSMetadataUbiquitousItemDownloadingStatusKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadingStatusKey")))
+}
+
+// NSMetadataUbiquitousItemDownloadingStatusNotDownloaded returns the string constant NSMetadataUbiquitousItemDownloadingStatusNotDownloaded.
+func NSMetadataUbiquitousItemDownloadingStatusNotDownloaded() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadingStatusNotDownloaded")))
+}
+
+// NSMetadataUbiquitousItemDownloadingStatusDownloaded returns the string constant NSMetadataUbiquitousItemDownloadingStatusDownloaded.
+func NSMetadataUbiquitousItemDownloadingStatusDownloaded() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadingStatusDownloaded")))
+}
+
+// NSMetadataUbiquitousItemDownloadingStatusCurrent returns the string constant NSMetadataUbiquitousItemDownloadingStatusCurrent.
+func NSMetadataUbiquitousItemDownloadingStatusCurrent() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadingStatusCurrent")))
+}
+
+// NSMetadataUbiquitousItemIsDownloadingKey returns the string constant NSMetadataUbiquitousItemIsDownloadingKey.
+func NSMetadataUbiquitousItemIsDownloadingKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsDownloadingKey")))
+}
+
+// NSMetadataUbiquitousItemIsUploadedKey returns the string constant NSMetadataUbiquitousItemIsUploadedKey.
+func NSMetadataUbiquitousItemIsUploadedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsUploadedKey")))
+}
+
+// NSMetadataUbiquitousItemIsUploadingKey returns the string constant NSMetadataUbiquitousItemIsUploadingKey.
+func NSMetadataUbiquitousItemIsUploadingKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsUploadingKey")))
+}
+
+// NSMetadataUbiquitousItemPercentDownloadedKey returns the string constant NSMetadataUbiquitousItemPercentDownloadedKey.
+func NSMetadataUbiquitousItemPercentDownloadedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemPercentDownloadedKey")))
+}
+
+// NSMetadataUbiquitousItemPercentUploadedKey returns the string constant NSMetadataUbiquitousItemPercentUploadedKey.
+func NSMetadataUbiquitousItemPercentUploadedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemPercentUploadedKey")))
+}
+
+// NSMetadataUbiquitousItemDownloadingErrorKey returns the string constant NSMetadataUbiquitousItemDownloadingErrorKey.
+func NSMetadataUbiquitousItemDownloadingErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadingErrorKey")))
+}
+
+// NSMetadataUbiquitousItemUploadingErrorKey returns the string constant NSMetadataUbiquitousItemUploadingErrorKey.
+func NSMetadataUbiquitousItemUploadingErrorKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemUploadingErrorKey")))
+}
+
+// NSMetadataUbiquitousItemDownloadRequestedKey returns the string constant NSMetadataUbiquitousItemDownloadRequestedKey.
+func NSMetadataUbiquitousItemDownloadRequestedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemDownloadRequestedKey")))
+}
+
+// NSMetadataUbiquitousItemIsExternalDocumentKey returns the string constant NSMetadataUbiquitousItemIsExternalDocumentKey.
+func NSMetadataUbiquitousItemIsExternalDocumentKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsExternalDocumentKey")))
+}
+
+// NSMetadataUbiquitousItemContainerDisplayNameKey returns the string constant NSMetadataUbiquitousItemContainerDisplayNameKey.
+func NSMetadataUbiquitousItemContainerDisplayNameKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemContainerDisplayNameKey")))
+}
+
+// NSMetadataUbiquitousItemURLInLocalContainerKey returns the string constant NSMetadataUbiquitousItemURLInLocalContainerKey.
+func NSMetadataUbiquitousItemURLInLocalContainerKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemURLInLocalContainerKey")))
+}
+
+// NSMetadataUbiquitousItemIsSharedKey returns the string constant NSMetadataUbiquitousItemIsSharedKey.
+func NSMetadataUbiquitousItemIsSharedKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousItemIsSharedKey")))
+}
+
+// NSMetadataUbiquitousSharedItemCurrentUserRoleKey returns the string constant NSMetadataUbiquitousSharedItemCurrentUserRoleKey.
+func NSMetadataUbiquitousSharedItemCurrentUserRoleKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemCurrentUserRoleKey")))
+}
+
+// NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey returns the string constant NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey.
+func NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemCurrentUserPermissionsKey")))
+}
+
+// NSMetadataUbiquitousSharedItemOwnerNameComponentsKey returns the string constant NSMetadataUbiquitousSharedItemOwnerNameComponentsKey.
+func NSMetadataUbiquitousSharedItemOwnerNameComponentsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemOwnerNameComponentsKey")))
+}
+
+// NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey returns the string constant NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey.
+func NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemMostRecentEditorNameComponentsKey")))
+}
+
+// NSMetadataUbiquitousSharedItemRoleOwner returns the string constant NSMetadataUbiquitousSharedItemRoleOwner.
+func NSMetadataUbiquitousSharedItemRoleOwner() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemRoleOwner")))
+}
+
+// NSMetadataUbiquitousSharedItemRoleParticipant returns the string constant NSMetadataUbiquitousSharedItemRoleParticipant.
+func NSMetadataUbiquitousSharedItemRoleParticipant() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemRoleParticipant")))
+}
+
+// NSMetadataUbiquitousSharedItemPermissionsReadOnly returns the string constant NSMetadataUbiquitousSharedItemPermissionsReadOnly.
+func NSMetadataUbiquitousSharedItemPermissionsReadOnly() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemPermissionsReadOnly")))
+}
+
+// NSMetadataUbiquitousSharedItemPermissionsReadWrite returns the string constant NSMetadataUbiquitousSharedItemPermissionsReadWrite.
+func NSMetadataUbiquitousSharedItemPermissionsReadWrite() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataUbiquitousSharedItemPermissionsReadWrite")))
+}
+
 // NSMetadataQueryDidStartGatheringNotification returns the string constant NSMetadataQueryDidStartGatheringNotification.
 func NSMetadataQueryDidStartGatheringNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidStartGatheringNotification")))
@@ -2190,9 +2698,59 @@ func NSMetadataQueryDidUpdateNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryDidUpdateNotification")))
 }
 
+// NSMetadataQueryUpdateAddedItemsKey returns the string constant NSMetadataQueryUpdateAddedItemsKey.
+func NSMetadataQueryUpdateAddedItemsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUpdateAddedItemsKey")))
+}
+
+// NSMetadataQueryUpdateChangedItemsKey returns the string constant NSMetadataQueryUpdateChangedItemsKey.
+func NSMetadataQueryUpdateChangedItemsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUpdateChangedItemsKey")))
+}
+
+// NSMetadataQueryUpdateRemovedItemsKey returns the string constant NSMetadataQueryUpdateRemovedItemsKey.
+func NSMetadataQueryUpdateRemovedItemsKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUpdateRemovedItemsKey")))
+}
+
+// NSMetadataQueryResultContentRelevanceAttribute returns the string constant NSMetadataQueryResultContentRelevanceAttribute.
+func NSMetadataQueryResultContentRelevanceAttribute() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryResultContentRelevanceAttribute")))
+}
+
+// NSMetadataQueryUbiquitousDocumentsScope returns the string constant NSMetadataQueryUbiquitousDocumentsScope.
+func NSMetadataQueryUbiquitousDocumentsScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUbiquitousDocumentsScope")))
+}
+
+// NSMetadataQueryUbiquitousDataScope returns the string constant NSMetadataQueryUbiquitousDataScope.
+func NSMetadataQueryUbiquitousDataScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryUbiquitousDataScope")))
+}
+
+// NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope returns the string constant NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope.
+func NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope")))
+}
+
 // NSUbiquitousKeyValueStoreDidChangeExternallyNotification returns the string constant NSUbiquitousKeyValueStoreDidChangeExternallyNotification.
 func NSUbiquitousKeyValueStoreDidChangeExternallyNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUbiquitousKeyValueStoreDidChangeExternallyNotification")))
+}
+
+// NSUbiquitousKeyValueStoreChangeReasonKey returns the string constant NSUbiquitousKeyValueStoreChangeReasonKey.
+func NSUbiquitousKeyValueStoreChangeReasonKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSUbiquitousKeyValueStoreChangeReasonKey")))
+}
+
+// NSUbiquitousKeyValueStoreChangedKeysKey returns the string constant NSUbiquitousKeyValueStoreChangedKeysKey.
+func NSUbiquitousKeyValueStoreChangedKeysKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSUbiquitousKeyValueStoreChangedKeysKey")))
+}
+
+// NSUndoManagerGroupIsDiscardableKey returns the string constant NSUndoManagerGroupIsDiscardableKey.
+func NSUndoManagerGroupIsDiscardableKey() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerGroupIsDiscardableKey")))
 }
 
 // NSUndoManagerCheckpointNotification returns the string constant NSUndoManagerCheckpointNotification.
@@ -2235,6 +2793,21 @@ func NSUndoManagerDidCloseUndoGroupNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSUndoManagerDidCloseUndoGroupNotification")))
 }
 
+// NSURLSessionDownloadTaskResumeData returns the string constant NSURLSessionDownloadTaskResumeData.
+func NSURLSessionDownloadTaskResumeData() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLSessionDownloadTaskResumeData")))
+}
+
+// NSURLSessionUploadTaskResumeData returns the string constant NSURLSessionUploadTaskResumeData.
+func NSURLSessionUploadTaskResumeData() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSURLSessionUploadTaskResumeData")))
+}
+
+// NSUserActivityTypeBrowsingWeb returns the string constant NSUserActivityTypeBrowsingWeb.
+func NSUserActivityTypeBrowsingWeb() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSUserActivityTypeBrowsingWeb")))
+}
+
 // NSLocalNotificationCenterType returns the string constant NSLocalNotificationCenterType.
 func NSLocalNotificationCenterType() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSLocalNotificationCenterType")))
@@ -2253,4 +2826,9 @@ func NSAppleEventManagerWillProcessFirstEventNotification() *String {
 // NSClassDescriptionNeededForClassNotification returns the string constant NSClassDescriptionNeededForClassNotification.
 func NSClassDescriptionNeededForClassNotification() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSClassDescriptionNeededForClassNotification")))
+}
+
+// NSOperationNotSupportedForKeyException returns the string constant NSOperationNotSupportedForKeyException.
+func NSOperationNotSupportedForKeyException() *String {
+	return StringFromID(purego.CFConstant(_symbol("NSOperationNotSupportedForKeyException")))
 }

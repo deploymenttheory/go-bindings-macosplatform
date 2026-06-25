@@ -4,25 +4,58 @@
 package replaykit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func RPApplicationInfoBundleIdentifierKey() uintptr {
+func RPApplicationInfoBundleIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPApplicationInfoBundleIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func RPRecordingErrorDomain() uintptr {
+func RPRecordingErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPRecordingErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func RPVideoSampleOrientationKey() uintptr {
+func RPVideoSampleOrientationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "RPVideoSampleOrientationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCStreamErrorDomain() uintptr {
+func SCStreamErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_replaykitLib, "SCStreamErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func ASAuthorizationAppleIDProviderCredentialRevokedNotification() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationErrorDomain() *foundation.NSString {
@@ -24,7 +29,11 @@ func ASAuthorizationErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationOperationImplicit() *foundation.NSString {
@@ -32,7 +41,11 @@ func ASAuthorizationOperationImplicit() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationOperationLogin() *foundation.NSString {
@@ -40,7 +53,11 @@ func ASAuthorizationOperationLogin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationOperationLogout() *foundation.NSString {
@@ -48,7 +65,11 @@ func ASAuthorizationOperationLogout() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationOperationRefresh() *foundation.NSString {
@@ -56,7 +77,11 @@ func ASAuthorizationOperationRefresh() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract Operation which is invoked when the extension configuration is removed from the system.
@@ -65,7 +90,11 @@ func ASAuthorizationProviderAuthorizationOperationConfigurationRemoved() *founda
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract Operation which is invoked when a request is sent direct to the extension instead of loaded in an ASWebAuthenticationSession.
@@ -74,7 +103,11 @@ func ASAuthorizationProviderAuthorizationOperationDirectRequest() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A encryption algorithm that uses NIST P-256 elliptic curve key agreement, ConcatKDF key derivation with a 256-bit digest, and the Advanced Encryption Standard cipher in Galois/Counter Mode with a key length of 256 bits.
@@ -121,7 +154,11 @@ func ASAuthorizationPublicKeyCredentialAttestationKindDirect() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindEnterprise() *foundation.NSString {
@@ -129,7 +166,11 @@ func ASAuthorizationPublicKeyCredentialAttestationKindEnterprise() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindIndirect() *foundation.NSString {
@@ -137,7 +178,11 @@ func ASAuthorizationPublicKeyCredentialAttestationKindIndirect() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialAttestationKindNone() *foundation.NSString {
@@ -145,7 +190,11 @@ func ASAuthorizationPublicKeyCredentialAttestationKindNone() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged() *foundation.NSString {
@@ -153,7 +202,11 @@ func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged() *found
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred() *foundation.NSString {
@@ -161,7 +214,11 @@ func ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred() *foundat
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired() *foundation.NSString {
@@ -169,7 +226,11 @@ func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired() *foundati
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged() *foundation.NSString {
@@ -177,7 +238,11 @@ func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged() *
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred() *foundation.NSString {
@@ -185,7 +250,11 @@ func ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred() *fo
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired() *foundation.NSString {
@@ -193,7 +262,11 @@ func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired() *fou
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationScopeEmail() *foundation.NSString {
@@ -201,7 +274,11 @@ func ASAuthorizationScopeEmail() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationScopeFullName() *foundation.NSString {
@@ -209,7 +286,11 @@ func ASAuthorizationScopeFullName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() uintptr {
@@ -232,7 +313,11 @@ func ASCredentialIdentityStoreErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASExtensionErrorDomain() *foundation.NSString {
@@ -240,7 +325,11 @@ func ASExtensionErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ASWebAuthenticationSessionErrorDomain() *foundation.NSString {
@@ -248,5 +337,9 @@ func ASWebAuthenticationSessionErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

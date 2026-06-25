@@ -4,8 +4,6 @@
 package networkextension
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -49,9 +47,12 @@ func (o *NEIPv6Route) InitWithDestinationAddressNetworkPrefixLength(address *fou
 }
 
 // A convenience method for creating the default IPv4 route.
-func NEIPv6RouteDefaultRoute() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNEIPv6Route), _nEIPv6RouteSelDefaultRoute)
-	return _ret
+func NEIPv6RouteDefaultRoute() *NEIPv6Route {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNEIPv6Route), _nEIPv6RouteSelDefaultRoute)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NEIPv6RouteFromID(_ret)
 }
 
 // @property destinationAddress @discussion An IPv6 address represented as a string.

@@ -202,8 +202,8 @@ func (ap *AnnotationPopup) WithMarkupType(markupType MarkupType) *AnnotationPopu
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (ap *AnnotationPopup) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationPopup {
-	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (ap *AnnotationPopup) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return ap
 }
 

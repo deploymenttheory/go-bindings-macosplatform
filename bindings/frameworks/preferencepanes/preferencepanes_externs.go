@@ -4,45 +4,106 @@
 package preferencepanes
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func NSPrefPaneHelpMenuAnchorKey() uintptr {
+func NSPrefPaneHelpMenuAnchorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPrefPaneHelpMenuAnchorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPrefPaneHelpMenuInfoPListKey() uintptr {
+func NSPrefPaneHelpMenuInfoPListKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPrefPaneHelpMenuInfoPListKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPrefPaneHelpMenuTitleKey() uintptr {
+func NSPrefPaneHelpMenuTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPrefPaneHelpMenuTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPreferencePaneCancelUnselectNotification() uintptr {
+func NSPreferencePaneCancelUnselectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePaneCancelUnselectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPreferencePaneDoUnselectNotification() uintptr {
+func NSPreferencePaneDoUnselectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePaneDoUnselectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPreferencePaneSwitchToPaneNotification() uintptr {
+func NSPreferencePaneSwitchToPaneNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePaneSwitchToPaneNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPreferencePaneUpdateHelpMenuNotification() uintptr {
+func NSPreferencePaneUpdateHelpMenuNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePaneUpdateHelpMenuNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPreferencePrefPaneIsAvailableNotification() uintptr {
+func NSPreferencePrefPaneIsAvailableNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_preferencepanesLib, "NSPreferencePrefPaneIsAvailableNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -7,378 +7,815 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @const		DRAbstractFile @discussion	DRFile pointing to the abstract file for ISO and Joliet volumes. The file must be in the root directory.
-func DRAbstractFile() uintptr {
+func DRAbstractFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAbstractFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRAccessDate @discussion	NSDate containing the item's last-accessed date.
-func DRAccessDate() uintptr {
+func DRAccessDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAccessDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRAllFilesystems @discussion	The key for accessing the name or properties for the file in all filesystems together. When this key is used to refer to a name, it refers to the base name (which has no naming restrictions).
-func DRAllFilesystems() uintptr {
+func DRAllFilesystems() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAllFilesystems")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRApplicationIdentifier @discussion	NSString indicating the application identifier for ISO, Joliet and UDF volumes.
-func DRApplicationIdentifier() uintptr {
+func DRApplicationIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRApplicationIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRAttributeModificationDate @discussion	NSDate containing the item's attribute modification date.
-func DRAttributeModificationDate() uintptr {
+func DRAttributeModificationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAttributeModificationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRAudioFourChannelKey @discussion	For CD-DA audio tracks only. This key points to a BOOL value indicating whether the track data has four channels, as opposed to the two channels of normal stereo.  If this key is not present, the engine will use a default value of NO and standard two-channel stereo is assumed. Note that while four-channel is technically allowed in the Red Book, it never caught on and is probably being replaced by SACD, so you probably shouldn't attempt to use it. On the media, this key corresponds to bit 3 of the control field in sub-channel Q.
-func DRAudioFourChannelKey() uintptr {
+func DRAudioFourChannelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAudioFourChannelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRAudioPreEmphasisKey @discussion	For CD-DA audio tracks only. This key points to a BOOL value indicating whether the track includes pre-emphasis of 50/15us.  If this key is not present, the engine will use a default value of NO.  On the media, this key corresponds to bit 0 of the control field in sub-channel Q.
-func DRAudioPreEmphasisKey() uintptr {
+func DRAudioPreEmphasisKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRAudioPreEmphasisKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBackupDate @discussion	NSDate containing the item's backup date.
-func DRBackupDate() uintptr {
+func DRBackupDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBackupDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBibliographicFile @discussion	DRFile pointing to the bibliographic file for ISO and Joliet volumes. The file must be in the root directory.
-func DRBibliographicFile() uintptr {
+func DRBibliographicFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBibliographicFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBlockSize @discussion	NSNumber indicating the block size of the track. Currently always 2048.  Do not change.
-func DRBlockSize() uintptr {
+func DRBlockSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBlockSize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBlockSizeKey @discussion	NSNumber containing the size in bytes of each track block. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
-func DRBlockSizeKey() uintptr {
+func DRBlockSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBlockSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBlockTypeKey @discussion	NSNumber containing the type of each track block. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
-func DRBlockTypeKey() uintptr {
+func DRBlockTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBlockTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const          DRBurnAppendableKey @discussion     The burn property whose value is a BOOL indicating if the disc will still be appendable after the burn. If this key is not present, the burn will default to a value of <i>NO</i> and the disc will be marked as not appendable.
-func DRBurnAppendableKey() uintptr {
+func DRBurnAppendableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnAppendableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnCompletionActionEject @discussion		An NSString value for @link DRBurnCompletionActionKey DRBurnCompletionActionKey @/link indicating that the burn object should eject the disc from the drive when the burn completes.
-func DRBurnCompletionActionEject() uintptr {
+func DRBurnCompletionActionEject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnCompletionActionEject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const          DRBurnCompletionActionKey @discussion     The burn property whose value is an NSString containing one of the completion actions possible for the disc handling. If this key is not present, the burn will default to a value of @link DRBurnCompletionActionEject DRBurnCompletionActionEject @/link and the disc will be ejected.
-func DRBurnCompletionActionKey() uintptr {
+func DRBurnCompletionActionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnCompletionActionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnCompletionActionMount @discussion		An NSString value for @link DRBurnCompletionActionKey DRBurnCompletionActionKey @/link indicating that the burn object should mount the disc on the desktop when the burn completes.
-func DRBurnCompletionActionMount() uintptr {
+func DRBurnCompletionActionMount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnCompletionActionMount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBurnDoubleLayerL0DataZoneBlocksKey @discussion	The burn property key whose value is an NSNumber containing the number of blocks desired for the layer 0 data zone on a double layer writable disc. The size of the layer 0 data zone dictates where the transition point is from layer 0 to layer 1. If this key is present, the data zone size will be set prior to the start of the burn using the value for this key. If it is not present, the default layer 0 data zone will be used (half the available blocks on an empty disc). The transition point can be specified two ways. If the value specified in this key is greater than 1.0, then it will designate an absolute block number for the transition point. In this case, the block number should be a multiple of 16 and at least 40000h per specification. If the value is less than 1.0, it will specify the percentage of the burn that should reside on layer 0. A typical value is 0.5, designating half the burn for each layer. A value of 0.0 or 1.0 will not change the layer 0 transition point.
-func DRBurnDoubleLayerL0DataZoneBlocksKey() uintptr {
+func DRBurnDoubleLayerL0DataZoneBlocksKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnDoubleLayerL0DataZoneBlocksKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnFailureActionEject @discussion		An NSString value for @link DRBurnFailureActionKey DRBurnFailureActionKey @/link indicating that the burn object should eject the disc from the drive if the burn fails.
-func DRBurnFailureActionEject() uintptr {
+func DRBurnFailureActionEject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnFailureActionEject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnFailureActionKey @discussion		The burn property whose value is an NSString containing a one of the failure actions possible for the disc handling. If this key is not present, the burn will default to a value of @link DRBurnFailureActionEject DRBurnFailureActionEject @/link and the disc will be ejected.
-func DRBurnFailureActionKey() uintptr {
+func DRBurnFailureActionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnFailureActionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnFailureActionNone @discussion		An NSString value for @link DRBurnFailureActionKey DRBurnFailureActionKey @/link indicating that the burn object should do nothing with the disc if the burn fails.
-func DRBurnFailureActionNone() uintptr {
+func DRBurnFailureActionNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnFailureActionNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const          DRBurnOverwriteDiscKey @discussion     The burn property whose value is a BOOL indicating if the disc will be overwritten from block zero for the burn. If this key is not present, the burn will default to a value of <i>NO</i> and the disc will be appended.
-func DRBurnOverwriteDiscKey() uintptr {
+func DRBurnOverwriteDiscKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnOverwriteDiscKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const          DRBurnRequestedSpeedKey @discussion     The burn property whose value is an NSNumber containing the speed at which the burn should run, expressed as a float value of kilobytes per second. If this key is not present, the speed will default to @link //apple_ref/occ/data/DRDeviceBurnSpeedMax DRDeviceBurnSpeedMax @/link.
-func DRBurnRequestedSpeedKey() uintptr {
+func DRBurnRequestedSpeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnRequestedSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRBurnStatusChangedNotification @discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when the status of the burn operation has changed. The object associated with this notification is the DRBurn object sending it and the userInfo contains the same dictionary as returned by @link //apple_ref/occ/instm/DRBurn/status status @/link which details the current state of the burn.
-func DRBurnStatusChangedNotification() uintptr {
+func DRBurnStatusChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStatusChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyBDDAO @discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the DAO (disc-at-once) burn strategy for BD (Blu-ray).  This strategy applies <b>only</b> to BDs.
-func DRBurnStrategyBDDAO() uintptr {
+func DRBurnStrategyBDDAO() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyBDDAO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyCDSAO @discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the SAO (session-at-once) burn strategy for CD.
-func DRBurnStrategyCDSAO() uintptr {
+func DRBurnStrategyCDSAO() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyCDSAO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyCDTAO @discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the TAO (track-at-once) burn strategy for CD.
-func DRBurnStrategyCDTAO() uintptr {
+func DRBurnStrategyCDTAO() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyCDTAO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyDVDDAO @discussion		An NSString value for @link DRBurnStrategyKey DRBurnStrategyKey @/link representing the DAO (disc-at-once) burn strategy for DVD.  This strategy applies <b>only</b> to DVDs; it is invalid when burning to CD media.
-func DRBurnStrategyDVDDAO() uintptr {
+func DRBurnStrategyDVDDAO() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyDVDDAO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyIsRequiredKey @discussion		The burn property whose value is a BOOL indicating whether the burn strategy/strategies listed for @link DRBurnStrategyKey DRBurnStrategyKey @/link are the only strategies allowed.  If this key is not present, the burn will default to a value of <i>NO</i>. If this value is set to <i>YES</i>, and the device does not support the type(s) of burn requested, the burn will fail with @link //apple_ref/c/econst/kDRDeviceBurnStrategyNotAvailableErr kDRDeviceBurnStrategyNotAvailableErr @/link. If this value is set to <i>NO</i>, and the device does not support the type(s) of burn requested, the engine will choose an alternate burn strategy automatically - one that will provide an equivalent disc.
-func DRBurnStrategyIsRequiredKey() uintptr {
+func DRBurnStrategyIsRequiredKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyIsRequiredKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnStrategyKey @discussion		The burn property whose value is an NSString, or array of NSStrings, indicating the burn strategy or strategies that are suggested.  If this key is not present, the burn engine picks an appropriate burn strategy automatically. Most clients will not need to specify a specific burn strategy. When more than one strategy is suggested, the burn engine will attempt to use the first strategy in the list which is available. A burn strategy will never be used if it cannot write the required data: for example, TAO cannot be used to write CD-Text. The presence of this key by itself is just a suggestion, and if the burn engine cannot fulfill the request it will burn using whatever strategy is available.  To make the suggestion into a requirement, add @link DRBurnStrategyIsRequiredKey DRBurnStrategyIsRequiredKey @/link with a value of <i>YES</i>.
-func DRBurnStrategyKey() uintptr {
+func DRBurnStrategyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnStrategyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnTestingKey @discussion		The burn property whose value is a BOOL indicating if the burn will run as a test burn. When this is set and the burn object is sent @link writeLayout: writeLayout: @/link, the entire burn process proceeds as if data would be written to the disc, but the laser is not turned on to full power, so the physical disc is not modified. If this key is not present or the selected burning device does not support test burning, the burn will default to a value of <i>NO</i> and a normal burn will occur.
-func DRBurnTestingKey() uintptr {
+func DRBurnTestingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnTestingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnUnderrunProtectionKey @discussion		The burn property whose value is a BOOL indicating if burn underrun protection will be on or off for devices which support it. For those devices which support it, burn underrun protection is enabled by default. If the device supports burn underrun protection and this key is not present, the burn will default to a value of <i>YES</i> and burn underrun protection will be enabled.
-func DRBurnUnderrunProtectionKey() uintptr {
+func DRBurnUnderrunProtectionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnUnderrunProtectionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRBurnVerifyDiscKey @discussion     The burn property whose value is a BOOL indicating if the disc will be verified after being burned. If this key is not present, the burn will default to a value of <i>YES</i> and the disc will be verified.
-func DRBurnVerifyDiscKey() uintptr {
+func DRBurnVerifyDiscKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRBurnVerifyDiscKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextArrangerKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc arranger.
-func DRCDTextArrangerKey() uintptr {
+func DRCDTextArrangerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextArrangerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextCharacterCodeKey @discussion	Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the Red Book character set value for the text of the block.  This value is <b>not</b> a CFStringEncoding or NSStringEncoding, and should not be used as such. This property should remain constant once the block is created. If this property is changed after the block is created, the results are undefined.
-func DRCDTextCharacterCodeKey() uintptr {
+func DRCDTextCharacterCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextCharacterCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextClosedKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing disc information.  The format of this data is arbitrary and is up to the content provider.  This information is private and players should not display it to the user of the disc.
-func DRCDTextClosedKey() uintptr {
+func DRCDTextClosedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextClosedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextComposerKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc composer.
-func DRCDTextComposerKey() uintptr {
+func DRCDTextComposerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextComposerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextCopyrightAssertedForNamesKey @discussion	Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the names in the block.  (@link DRCDTextPerformerKey DRCDTextPerformerKey @/link, @link DRCDTextSongwriterKey DRCDTextSongwriterKey @/link, @link DRCDTextComposerKey DRCDTextComposerKey @/link, @link DRCDTextArrangerKey DRCDTextArrangerKey @/link) If this value is not specified, no copyright is asserted for these items.
-func DRCDTextCopyrightAssertedForNamesKey() uintptr {
+func DRCDTextCopyrightAssertedForNamesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextCopyrightAssertedForNamesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextCopyrightAssertedForSpecialMessagesKey @discussion	Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the messages in the block (@link DRCDTextSpecialMessageKey DRCDTextSpecialMessageKey @/link). If this value is not specified, no copyright is asserted for these items.
-func DRCDTextCopyrightAssertedForSpecialMessagesKey() uintptr {
+func DRCDTextCopyrightAssertedForSpecialMessagesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextCopyrightAssertedForSpecialMessagesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextCopyrightAssertedForTitlesKey @discussion	Optional property key for a CD-Text block.  The value for this property is an NSNumber, containing a BOOL value indicating whether copyright is asserted on the titles of the disc and tracks.  (@link DRCDTextTitleKey DRCDTextTitleKey @/link) If this value is not specified, no copyright is asserted for these items.
-func DRCDTextCopyrightAssertedForTitlesKey() uintptr {
+func DRCDTextCopyrightAssertedForTitlesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextCopyrightAssertedForTitlesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextDiscIdentKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing disc ID information, such as the catalog number and name of the record company, point of sale code, year of sales, etc.  Each item shall be separated by a slash ("/"). This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
-func DRCDTextDiscIdentKey() uintptr {
+func DRCDTextDiscIdentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextDiscIdentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextGenreCodeKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSNumber, containing the numeric code for the disc genre as enumerated above. This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
-func DRCDTextGenreCodeKey() uintptr {
+func DRCDTextGenreCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextGenreCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextGenreKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the description of the disc genre. This key is only valid for the disc (array index 0) and is ignored when set in the dictionaries for tracks.
-func DRCDTextGenreKey() uintptr {
+func DRCDTextGenreKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextGenreKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRCDTextKey @discussion		This key points to a @link //apple_ref/occ/cl/DRCDTextBlock DRCDTextBlock @/link, or array of @link //apple_ref/occ/cl/DRCDTextBlock DRCDTextBlocks @/link containing the CD-Text information for the disc.  If this key is not present, the burn will not write CD-Text. Before using this key, you should to make sure that the device supports CD-Text by checking the value of @link //apple_ref/occ/data/DRDeviceCanWriteCDTextKey DRDeviceCanWriteCDTextKey @/link in the device's write capabilities dictionary. If this value is set to <i>YES</i>, and the device does not support writing CD-Text, the burn will fail with @link //apple_ref/c/econst/kDRDeviceCantWriteCDTextErr kDRDeviceCantWriteCDTextErr @/link.
-func DRCDTextKey() uintptr {
+func DRCDTextKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextLanguageKey @discussion	Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the numeric code for the language.  This value is the Red Book language code value for the text of the block. The language may be changed after the block is created.
-func DRCDTextLanguageKey() uintptr {
+func DRCDTextLanguageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextLanguageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextMCNISRCKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing either 13 bytes of MCN (for the disc) or 12 bytes of ISRC (for tracks). This information can also be specified in the burn and track properties.  CD-Text simply provides an alternative, possibly redundant way to encode this information. If the MCN or ISRC was specified in the properties for the burn or track, this value should be the same.  See the descriptions of @link //apple_ref/occ/data/DRMediaCatalogNumberKey DRMediaCatalogNumberKey @/link and @link //apple_ref/occ/data/DRTrackISRCKey DRTrackISRCKey @/link for more details on the precise format of the data.
-func DRCDTextMCNISRCKey() uintptr {
+func DRCDTextMCNISRCKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextMCNISRCKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextNSStringEncodingKey @discussion	Required property key for a CD-Text block.  The value for this property is an NSNumber, containing the NSStringEncoding for the text of the block. This property should remain constant once the block is created.  If this property is changed after the block is created, the results are undefined.
-func DRCDTextNSStringEncodingKey() uintptr {
+func DRCDTextNSStringEncodingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextNSStringEncodingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextPerformerKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc performer.
-func DRCDTextPerformerKey() uintptr {
+func DRCDTextPerformerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextPerformerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextSizeKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing information about the number of packs and languages associated with each block. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
-func DRCDTextSizeKey() uintptr {
+func DRCDTextSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextSongwriterKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc songwriter.
-func DRCDTextSongwriterKey() uintptr {
+func DRCDTextSongwriterKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextSongwriterKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextSpecialMessageKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing a text message which may be displayed to the user by some players.
-func DRCDTextSpecialMessageKey() uintptr {
+func DRCDTextSpecialMessageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextSpecialMessageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextTOC2Key @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing additional table-of-contents information. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
-func DRCDTextTOC2Key() uintptr {
+func DRCDTextTOC2Key() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextTOC2Key")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextTOCKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSData, containing table-of-contents information. This key is provided for output purposes only, when reading CD-Text from an existing disc.  It is ignored when specified in a burn.
-func DRCDTextTOCKey() uintptr {
+func DRCDTextTOCKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextTOCKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCDTextTitleKey @discussion	One of the keys for the track dictionaries in a CD-Text block.  The value for this key is an NSString, containing the track/disc title.
-func DRCDTextTitleKey() uintptr {
+func DRCDTextTitleKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCDTextTitleKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRContentModificationDate @discussion	NSDate containing the item's content modification date.
-func DRContentModificationDate() uintptr {
+func DRContentModificationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRContentModificationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCopyrightFile @discussion	DRFile pointing to the copyright file for ISO and Joliet volumes. The file must be in the root directory.
-func DRCopyrightFile() uintptr {
+func DRCopyrightFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCopyrightFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRCreationDate @discussion	NSDate containing the item's creation date.
-func DRCreationDate() uintptr {
+func DRCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRCreationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDVDCopyrightInfoKey @discussion	For DVD tracks only.  NSData containing the DVD copyright info structure sent through the SEND DVD STRUCTURE command.  The contents of this will be sent directly to the drive.
-func DRDVDCopyrightInfoKey() uintptr {
+func DRDVDCopyrightInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDVDCopyrightInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDVDTimestampKey @discussion	For DVD tracks only.  NSData containing the DVD timestamp structure sent through the SEND DVD STRUCTURE command.  The contents of this will be sent directly to the drive.
-func DRDVDTimestampKey() uintptr {
+func DRDVDTimestampKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDVDTimestampKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDataFormKey @discussion	NSNumber containing the data form of each block in the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
-func DRDataFormKey() uintptr {
+func DRDataFormKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDataFormKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDataPreparer @discussion	NSString indicating the data preparer for ISO and Joliet volumes.
-func DRDataPreparer() uintptr {
+func DRDataPreparer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDataPreparer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDefaultDate @discussion	NSDate containing the default date to use for any unspecified dates in the filesystem. The current date and time is used if unspecified.
-func DRDefaultDate() uintptr {
+func DRDefaultDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDefaultDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	 	DRDeviceAppearedNotification @discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when a device is added to the system. This notification is registered for only by name. The object associated with this notification is the the device that has appeared. The userInfo is the same dictionary returned by @link //apple_ref/occ/instm/DRDevice/info info @/link for that device.
-func DRDeviceAppearedNotification() uintptr {
+func DRDeviceAppearedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceAppearedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceBurnSpeedBD1x	4496.0 KB/sec.
@@ -412,1465 +849,3173 @@ func DRDeviceBurnSpeedMax() uintptr {
 }
 
 // @const		DRDeviceBurnSpeedsKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSArray containing the possible burn speeds available to use. This key may not be present if no media is inserted.
-func DRDeviceBurnSpeedsKey() uintptr {
+func DRDeviceBurnSpeedsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceBurnSpeedsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanTestWriteCDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can perform a test burn to CD media.
-func DRDeviceCanTestWriteCDKey() uintptr {
+func DRDeviceCanTestWriteCDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanTestWriteCDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanTestWriteDVDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can perform a test burn to DVD media.
-func DRDeviceCanTestWriteDVDKey() uintptr {
+func DRDeviceCanTestWriteDVDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanTestWriteDVDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanUnderrunProtectCDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports burn underrun protection when writing to CD media.
-func DRDeviceCanUnderrunProtectCDKey() uintptr {
+func DRDeviceCanUnderrunProtectCDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanUnderrunProtectCDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanUnderrunProtectDVDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports burn underrun protection when writing to DVD media.
-func DRDeviceCanUnderrunProtectDVDKey() uintptr {
+func DRDeviceCanUnderrunProtectDVDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanUnderrunProtectDVDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteBDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to some type of BD (Blu-ray) based media.
-func DRDeviceCanWriteBDKey() uintptr {
+func DRDeviceCanWriteBDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteBDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteBDREKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to BD-RE media.
-func DRDeviceCanWriteBDREKey() uintptr {
+func DRDeviceCanWriteBDREKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteBDREKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteBDRKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to BD-R media.
-func DRDeviceCanWriteBDRKey() uintptr {
+func DRDeviceCanWriteBDRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteBDRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to some type of CD based media.
-func DRDeviceCanWriteCDKey() uintptr {
+func DRDeviceCanWriteCDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDRKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to CD-R media.
-func DRDeviceCanWriteCDRKey() uintptr {
+func DRDeviceCanWriteCDRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDRWKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to CD-RW media.
-func DRDeviceCanWriteCDRWKey() uintptr {
+func DRDeviceCanWriteCDRWKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDRWKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDRawKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports a raw mode burn strategy for CD. Raw mode is sometimes incorrectly referred to as DAO (disc-at-once).
-func DRDeviceCanWriteCDRawKey() uintptr {
+func DRDeviceCanWriteCDRawKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDRawKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDSAOKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports a SAO (session-at-once) burn strategy for CD.
-func DRDeviceCanWriteCDSAOKey() uintptr {
+func DRDeviceCanWriteCDSAOKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDSAOKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDTAOKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports a TAO (track-at-once) burn strategy for CD.
-func DRDeviceCanWriteCDTAOKey() uintptr {
+func DRDeviceCanWriteCDTAOKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDTAOKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteCDTextKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write CD-Text information to media.
-func DRDeviceCanWriteCDTextKey() uintptr {
+func DRDeviceCanWriteCDTextKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteCDTextKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDDAOKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device supports a DAO (disc-at-once) burn strategy on DVD media.
-func DRDeviceCanWriteDVDDAOKey() uintptr {
+func DRDeviceCanWriteDVDDAOKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDDAOKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to some type of DVD based media.
-func DRDeviceCanWriteDVDKey() uintptr {
+func DRDeviceCanWriteDVDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDPlusRDoubleLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD+R DL media.
-func DRDeviceCanWriteDVDPlusRDoubleLayerKey() uintptr {
+func DRDeviceCanWriteDVDPlusRDoubleLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDPlusRDoubleLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDPlusRKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD+R media.
-func DRDeviceCanWriteDVDPlusRKey() uintptr {
+func DRDeviceCanWriteDVDPlusRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDPlusRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDPlusRWDoubleLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD+RW DL media.
-func DRDeviceCanWriteDVDPlusRWDoubleLayerKey() uintptr {
+func DRDeviceCanWriteDVDPlusRWDoubleLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDPlusRWDoubleLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDPlusRWKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD+RW media.
-func DRDeviceCanWriteDVDPlusRWKey() uintptr {
+func DRDeviceCanWriteDVDPlusRWKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDPlusRWKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDRAMKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD-RAM media.
-func DRDeviceCanWriteDVDRAMKey() uintptr {
+func DRDeviceCanWriteDVDRAMKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDRAMKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDRDualLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD-R DL media.
-func DRDeviceCanWriteDVDRDualLayerKey() uintptr {
+func DRDeviceCanWriteDVDRDualLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDRDualLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDRKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD-R media.
-func DRDeviceCanWriteDVDRKey() uintptr {
+func DRDeviceCanWriteDVDRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDRWDualLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD-RW DL media.
-func DRDeviceCanWriteDVDRWDualLayerKey() uintptr {
+func DRDeviceCanWriteDVDRWDualLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDRWDualLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteDVDRWKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to DVD-RW media.
-func DRDeviceCanWriteDVDRWKey() uintptr {
+func DRDeviceCanWriteDVDRWKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteDVDRWKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to some type of HDDVD based media.
-func DRDeviceCanWriteHDDVDKey() uintptr {
+func DRDeviceCanWriteHDDVDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDRAMKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to HD DVD-RAM media.
-func DRDeviceCanWriteHDDVDRAMKey() uintptr {
+func DRDeviceCanWriteHDDVDRAMKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDRAMKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDRDualLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to HD DVD-R DL media.
-func DRDeviceCanWriteHDDVDRDualLayerKey() uintptr {
+func DRDeviceCanWriteHDDVDRDualLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDRDualLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDRKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to HD DVD-R media.
-func DRDeviceCanWriteHDDVDRKey() uintptr {
+func DRDeviceCanWriteHDDVDRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDRWDualLayerKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to HD DVD-RW DL media.
-func DRDeviceCanWriteHDDVDRWDualLayerKey() uintptr {
+func DRDeviceCanWriteHDDVDRWDualLayerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDRWDualLayerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteHDDVDRWKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to HD DVD-RW media.
-func DRDeviceCanWriteHDDVDRWKey() uintptr {
+func DRDeviceCanWriteHDDVDRWKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteHDDVDRWKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteISRCKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write ISRC to CD media.
-func DRDeviceCanWriteISRCKey() uintptr {
+func DRDeviceCanWriteISRCKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteISRCKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCanWriteIndexPointsKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write index points to CD media.
-func DRDeviceCanWriteIndexPointsKey() uintptr {
+func DRDeviceCanWriteIndexPointsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteIndexPointsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const 		DRDeviceCanWriteKey @discussion	One of the keys in the @link DRDeviceWriteCapabilitiesKey DRDeviceWriteCapabilitiesKey @/link dictionary. NSNumber containing a boolean value indicating whether the device can write to some type of media.
-func DRDeviceCanWriteKey() uintptr {
+func DRDeviceCanWriteKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCanWriteKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceCurrentWriteSpeedKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSNumber containing the current burning speed of this device.
-func DRDeviceCurrentWriteSpeedKey() uintptr {
+func DRDeviceCurrentWriteSpeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceCurrentWriteSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceDisappearedNotification @discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when a device is removed from the system. The object associated with this notification is the the device that has disappeared. The userInfo is the same dictionary returned by @link //apple_ref/occ/instm/DRDevice/info info @/link for that device.
-func DRDeviceDisappearedNotification() uintptr {
+func DRDeviceDisappearedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceDisappearedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceFirmwareRevisionKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString containing the firmeware revision extracted from the device.
-func DRDeviceFirmwareRevisionKey() uintptr {
+func DRDeviceFirmwareRevisionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceFirmwareRevisionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceIORegistryEntryPathKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString containing the path of the device in the IO Registry.
-func DRDeviceIORegistryEntryPathKey() uintptr {
+func DRDeviceIORegistryEntryPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceIORegistryEntryPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceIsBusyKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSNumber containing a boolean value indicating whether the device is busy or not.
-func DRDeviceIsBusyKey() uintptr {
+func DRDeviceIsBusyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceIsBusyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceIsTrayOpenKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSNumber containing a boolean value indicating whether the device's tray is open or not.
-func DRDeviceIsTrayOpenKey() uintptr {
+func DRDeviceIsTrayOpenKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceIsTrayOpenKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceLoadingMechanismCanEjectKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSNumber describing if the loading mechanism of the drive can eject.
-func DRDeviceLoadingMechanismCanEjectKey() uintptr {
+func DRDeviceLoadingMechanismCanEjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceLoadingMechanismCanEjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceLoadingMechanismCanInjectKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSNumber describing if the loading mechanism of the drive can inject.
-func DRDeviceLoadingMechanismCanInjectKey() uintptr {
+func DRDeviceLoadingMechanismCanInjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceLoadingMechanismCanInjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceLoadingMechanismCanOpenKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSNumber describing if the loading mechanism of the drive can open.
-func DRDeviceLoadingMechanismCanOpenKey() uintptr {
+func DRDeviceLoadingMechanismCanOpenKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceLoadingMechanismCanOpenKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMaximumWriteSpeedKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSNumber containing the maximum burning speed of this device.
-func DRDeviceMaximumWriteSpeedKey() uintptr {
+func DRDeviceMaximumWriteSpeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMaximumWriteSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaBSDNameKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSString containing the BSD /dev node name assigned to the media in the device.
-func DRDeviceMediaBSDNameKey() uintptr {
+func DRDeviceMediaBSDNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaBSDNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaBlocksFreeKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the amount of space available (in blocks) on the media to be written to. If the media already contains data and this value will be less than the normal maximum size of the disc. This value will normally only be used if the intent is to append data onto an open disc.
-func DRDeviceMediaBlocksFreeKey() uintptr {
+func DRDeviceMediaBlocksFreeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaBlocksFreeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaBlocksOverwritableKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the total amount of writable space available (in blocks) on the media to be written to - if that media can be overwritten. Media that can be overwitten is designated through the @link DRDeviceMediaIsOverwritableKey DRDeviceMediaIsOverwritableKey @/link. The overwritable space is the amount of space on the disc that would be available if any data currently on the disc is first erased.
-func DRDeviceMediaBlocksOverwritableKey() uintptr {
+func DRDeviceMediaBlocksOverwritableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaBlocksOverwritableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaBlocksUsedKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the amount of space currently used (in blocks) for exising data.
-func DRDeviceMediaBlocksUsedKey() uintptr {
+func DRDeviceMediaBlocksUsedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaBlocksUsedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceMediaClassBD @discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media is some type of BD (Blu-ray) based media.
-func DRDeviceMediaClassBD() uintptr {
+func DRDeviceMediaClassBD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassBD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceMediaClassCD @discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media is some type of CD based media.
-func DRDeviceMediaClassCD() uintptr {
+func DRDeviceMediaClassCD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassCD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceMediaClassDVD @discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media is some type of DVD based media.
-func DRDeviceMediaClassDVD() uintptr {
+func DRDeviceMediaClassDVD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassDVD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceMediaClassHDDVD @discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link. Indicates the media is some type of HD DVD based media.
-func DRDeviceMediaClassHDDVD() uintptr {
+func DRDeviceMediaClassHDDVD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassHDDVD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceMediaClassKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSString containing the class of media present in the drive.
-func DRDeviceMediaClassKey() uintptr {
+func DRDeviceMediaClassKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	DRDeviceMediaClassUnknown @discussion	One possible value of the @link DRDeviceMediaClassKey DRDeviceMediaClassKey @/link.  Indicates the media class is unknown.
-func DRDeviceMediaClassUnknown() uintptr {
+func DRDeviceMediaClassUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaClassUnknown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaDoubleLayerL0DataZoneBlocksKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the amount of space available (in blocks) on layer 0 of a double layer piece of media.
-func DRDeviceMediaDoubleLayerL0DataZoneBlocksKey() uintptr {
+func DRDeviceMediaDoubleLayerL0DataZoneBlocksKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaDoubleLayerL0DataZoneBlocksKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaFreeSpaceKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. MSF value of the amount of space available on the media to be written to. If the media already contains data and this value will be less than the normal maximum size of the disc. This value will normally only be used if the intent is to append data onto an open disc.
-func DRDeviceMediaFreeSpaceKey() uintptr {
+func DRDeviceMediaFreeSpaceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaFreeSpaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaInfoKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSDictionary of information describing the media currently in the device. This key may not be present if no media is inserted.
-func DRDeviceMediaInfoKey() uintptr {
+func DRDeviceMediaInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaIsAppendableKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing a boolean value indicating that data can be appended to the exisiting data (if any).
-func DRDeviceMediaIsAppendableKey() uintptr {
+func DRDeviceMediaIsAppendableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaIsAppendableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaIsBlankKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing a boolean value indicating whether data has previously been written to the media.
-func DRDeviceMediaIsBlankKey() uintptr {
+func DRDeviceMediaIsBlankKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaIsBlankKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaIsErasableKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing a boolean value indicating whether this media can be erased.
-func DRDeviceMediaIsErasableKey() uintptr {
+func DRDeviceMediaIsErasableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaIsErasableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaIsOverwritableKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing a boolean value indicating that the data on the disc (if any) can be overwritten. Rewritable media can always be erased, and then rewritten in its entirety, so it is always considered overwritable. Write-once media, if its blank, can also be written in its entirety and is also considered overwritable. Write-once media, that has been partially written, can never again enter a state where it is entirely writable and will have lost its overwritable designation.
-func DRDeviceMediaIsOverwritableKey() uintptr {
+func DRDeviceMediaIsOverwritableKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaIsOverwritableKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaIsReservedKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing a boolean value indicating whether the media is reserved for exclusive use by the current process.
-func DRDeviceMediaIsReservedKey() uintptr {
+func DRDeviceMediaIsReservedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaIsReservedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaOverwritableSpaceKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. MSF value of the amount of writable space available on the media to be written to - if that media can be overwritten. Media that can be overwitten is designated through the @link DRDeviceMediaIsOverwritableKey DRDeviceMediaIsOverwritableKey @/link. The overwritable space is the amount of space on the disc that would be available if any data currently on the disc is first erased.
-func DRDeviceMediaOverwritableSpaceKey() uintptr {
+func DRDeviceMediaOverwritableSpaceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaOverwritableSpaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaSessionCountKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the current number of sessions present on the media.
-func DRDeviceMediaSessionCountKey() uintptr {
+func DRDeviceMediaSessionCountKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaSessionCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaStateInTransition @discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link. The media is transitioning from one state to another (i.e., being spun up/down).
-func DRDeviceMediaStateInTransition() uintptr {
+func DRDeviceMediaStateInTransition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaStateInTransition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaStateKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSString describing the state of the media.
-func DRDeviceMediaStateKey() uintptr {
+func DRDeviceMediaStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaStateMediaPresent @discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link. Device contains media of some type.
-func DRDeviceMediaStateMediaPresent() uintptr {
+func DRDeviceMediaStateMediaPresent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaStateMediaPresent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaStateNone @discussion	One of the possible values for the @link DRDeviceMediaStateKey DRDeviceMediaStateKey @/link. No media is present in the device.
-func DRDeviceMediaStateNone() uintptr {
+func DRDeviceMediaStateNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaStateNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTrackCountKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSNumber containing the number of tracks present on the media.
-func DRDeviceMediaTrackCountKey() uintptr {
+func DRDeviceMediaTrackCountKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTrackCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeBDR @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a BD-R.
-func DRDeviceMediaTypeBDR() uintptr {
+func DRDeviceMediaTypeBDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeBDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeBDRE @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a BD-RE.
-func DRDeviceMediaTypeBDRE() uintptr {
+func DRDeviceMediaTypeBDRE() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeBDRE")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeBDROM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a BD-ROM.
-func DRDeviceMediaTypeBDROM() uintptr {
+func DRDeviceMediaTypeBDROM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeBDROM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeCDR @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a CD-R.
-func DRDeviceMediaTypeCDR() uintptr {
+func DRDeviceMediaTypeCDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeCDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeCDROM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a CD-ROM.
-func DRDeviceMediaTypeCDROM() uintptr {
+func DRDeviceMediaTypeCDROM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeCDROM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeCDRW @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a CD-RW.
-func DRDeviceMediaTypeCDRW() uintptr {
+func DRDeviceMediaTypeCDRW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeCDRW")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDPlusR @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD+R.
-func DRDeviceMediaTypeDVDPlusR() uintptr {
+func DRDeviceMediaTypeDVDPlusR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDPlusR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDPlusRDoubleLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD+R Double Layer.
-func DRDeviceMediaTypeDVDPlusRDoubleLayer() uintptr {
+func DRDeviceMediaTypeDVDPlusRDoubleLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDPlusRDoubleLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDPlusRW @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD+RW.
-func DRDeviceMediaTypeDVDPlusRW() uintptr {
+func DRDeviceMediaTypeDVDPlusRW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDPlusRW")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDPlusRWDoubleLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD+RW Double Layer.
-func DRDeviceMediaTypeDVDPlusRWDoubleLayer() uintptr {
+func DRDeviceMediaTypeDVDPlusRWDoubleLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDPlusRWDoubleLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDR @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-R.
-func DRDeviceMediaTypeDVDR() uintptr {
+func DRDeviceMediaTypeDVDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDRAM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-RAM.
-func DRDeviceMediaTypeDVDRAM() uintptr {
+func DRDeviceMediaTypeDVDRAM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDRAM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDRDualLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-R DL.
-func DRDeviceMediaTypeDVDRDualLayer() uintptr {
+func DRDeviceMediaTypeDVDRDualLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDRDualLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDROM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-ROM.
-func DRDeviceMediaTypeDVDROM() uintptr {
+func DRDeviceMediaTypeDVDROM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDROM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDRW @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-RW.
-func DRDeviceMediaTypeDVDRW() uintptr {
+func DRDeviceMediaTypeDVDRW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDRW")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeDVDRWDualLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a DVD-RW DL.
-func DRDeviceMediaTypeDVDRWDualLayer() uintptr {
+func DRDeviceMediaTypeDVDRWDualLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeDVDRWDualLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDR @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-R.
-func DRDeviceMediaTypeHDDVDR() uintptr {
+func DRDeviceMediaTypeHDDVDR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDRAM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-RAM.
-func DRDeviceMediaTypeHDDVDRAM() uintptr {
+func DRDeviceMediaTypeHDDVDRAM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDRAM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDRDualLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-R DL.
-func DRDeviceMediaTypeHDDVDRDualLayer() uintptr {
+func DRDeviceMediaTypeHDDVDRDualLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDRDualLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDROM @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-ROM.
-func DRDeviceMediaTypeHDDVDROM() uintptr {
+func DRDeviceMediaTypeHDDVDROM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDROM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDRW @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-RW.
-func DRDeviceMediaTypeHDDVDRW() uintptr {
+func DRDeviceMediaTypeHDDVDRW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDRW")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeHDDVDRWDualLayer @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. Media is a HD DVD-RW DL.
-func DRDeviceMediaTypeHDDVDRWDualLayer() uintptr {
+func DRDeviceMediaTypeHDDVDRWDualLayer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeHDDVDRWDualLayer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. NSString containing the type of media inserted in the device.
-func DRDeviceMediaTypeKey() uintptr {
+func DRDeviceMediaTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaTypeUnknown @discussion	One of the possible values of the @link DRDeviceMediaTypeKey DRDeviceMediaTypeKey @/link. The type of the media cannot be determined.
-func DRDeviceMediaTypeUnknown() uintptr {
+func DRDeviceMediaTypeUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaTypeUnknown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceMediaUsedSpaceKey @discussion	One of the keys in the @link DRDeviceMediaInfoKey DRDeviceMediaInfoKey @/link dictionary. MSF value of the amount of space currently used for exising data.
-func DRDeviceMediaUsedSpaceKey() uintptr {
+func DRDeviceMediaUsedSpaceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceMediaUsedSpaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectATAPI @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link. Device is connected on an ATAPI interface.
-func DRDevicePhysicalInterconnectATAPI() uintptr {
+func DRDevicePhysicalInterconnectATAPI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectATAPI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectFibreChannel @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link. Device is connected through a Fibre Channel interface.
-func DRDevicePhysicalInterconnectFibreChannel() uintptr {
+func DRDevicePhysicalInterconnectFibreChannel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectFibreChannel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectFireWire @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link. Device is connected through a Firewire interface.
-func DRDevicePhysicalInterconnectFireWire() uintptr {
+func DRDevicePhysicalInterconnectFireWire() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectFireWire")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString describing the connection of the device to the computer.
-func DRDevicePhysicalInterconnectKey() uintptr {
+func DRDevicePhysicalInterconnectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectLocationExternal @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectLocationKey DRDevicePhysicalInterconnectLocationKey @/link. Device is connected to the machine externally.
-func DRDevicePhysicalInterconnectLocationExternal() uintptr {
+func DRDevicePhysicalInterconnectLocationExternal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectLocationExternal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectLocationInternal @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectLocationKey DRDevicePhysicalInterconnectLocationKey @/link. Device is connected to the machine internally.
-func DRDevicePhysicalInterconnectLocationInternal() uintptr {
+func DRDevicePhysicalInterconnectLocationInternal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectLocationInternal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectLocationKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString describing the location of the device (e.g. internal/external).
-func DRDevicePhysicalInterconnectLocationKey() uintptr {
+func DRDevicePhysicalInterconnectLocationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectLocationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectLocationUnknown @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectLocationKey DRDevicePhysicalInterconnectLocationKey @/link. It's not known how the device is connected.
-func DRDevicePhysicalInterconnectLocationUnknown() uintptr {
+func DRDevicePhysicalInterconnectLocationUnknown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectLocationUnknown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectSCSI @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link. Device is connected on a SCSI interface.
-func DRDevicePhysicalInterconnectSCSI() uintptr {
+func DRDevicePhysicalInterconnectSCSI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectSCSI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDevicePhysicalInterconnectUSB @discussion	One of the possible values of the @link DRDevicePhysicalInterconnectKey DRDevicePhysicalInterconnectKey @/link. Device is connected through a USB interface.
-func DRDevicePhysicalInterconnectUSB() uintptr {
+func DRDevicePhysicalInterconnectUSB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDevicePhysicalInterconnectUSB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceProductNameKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString containing the product name extracted from the device.
-func DRDeviceProductNameKey() uintptr {
+func DRDeviceProductNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceProductNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const	 	DRDeviceStatusChangedNotification @discussion	Posted by a @link //apple_ref/occ/cl/DRNotificationCenter DRNotificationCenter @/link when the media in a device changes state. This can include being ejected, inserted, becoming busy, etc. The object for this notification is the device who's media is changing state. The userInfo for this notification is the same dictionary returned by @link //apple_ref/occ/instm/DRDevice/status status @/link for that device.
-func DRDeviceStatusChangedNotification() uintptr {
+func DRDeviceStatusChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceStatusChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceSupportLevelAppleShipping @discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates this device is shipping in some Apple machine.
-func DRDeviceSupportLevelAppleShipping() uintptr {
+func DRDeviceSupportLevelAppleShipping() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelAppleShipping")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceSupportLevelAppleSupported @discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates this device has been tested by Apple for support.
-func DRDeviceSupportLevelAppleSupported() uintptr {
+func DRDeviceSupportLevelAppleSupported() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelAppleSupported")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceSupportLevelKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString describing the support level the device enjoys from the engine.
-func DRDeviceSupportLevelKey() uintptr {
+func DRDeviceSupportLevelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceSupportLevelNone @discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates this device is not supported.
-func DRDeviceSupportLevelNone() uintptr {
+func DRDeviceSupportLevelNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceSupportLevelUnsupported @discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates the device is unsupported, but the engine will try to use it anyway.
-func DRDeviceSupportLevelUnsupported() uintptr {
+func DRDeviceSupportLevelUnsupported() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelUnsupported")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceSupportLevelVendorSupported @discussion	One of the values for @link DRDeviceSupportLevelKey DRDeviceSupportLevelKey @/link. This value indicates this device has been tested by a third party for support.
-func DRDeviceSupportLevelVendorSupported() uintptr {
+func DRDeviceSupportLevelVendorSupported() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceSupportLevelVendorSupported")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceTrackInfoKey @discussion One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSDictionary containing NSDictionaries describing the tracks.  @link //apple_ref/occ/cl/DRTrack DRTracks @/link from the @link DRDeviceTrackRefsKey DRDeviceTrackRefsKey @/link are used as keys into this dictionary.
-func DRDeviceTrackInfoKey() uintptr {
+func DRDeviceTrackInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceTrackInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceTrackRefsKey @discussion One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/status status @/link method. NSArray containing a list of @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects describing any tracks that are already on the disc.
-func DRDeviceTrackRefsKey() uintptr {
+func DRDeviceTrackRefsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceTrackRefsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceVendorNameKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSString containing the vendor name extracted from the device.
-func DRDeviceVendorNameKey() uintptr {
+func DRDeviceVendorNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceVendorNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRDeviceWriteBufferSizeKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSNumber containing the size of the write buffer of the device.
-func DRDeviceWriteBufferSizeKey() uintptr {
+func DRDeviceWriteBufferSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceWriteBufferSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRDeviceWriteCapabilitiesKey @discussion	One of the keys in the dictionary returned by the @link //apple_ref/occ/instm/DRDevice/info info @/link method. NSDictionary containing the capabilities of the device for writing different kinds of media.
-func DRDeviceWriteCapabilitiesKey() uintptr {
+func DRDeviceWriteCapabilitiesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRDeviceWriteCapabilitiesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DREffectiveDate @discussion	NSDate containing the item's effective date.
-func DREffectiveDate() uintptr {
+func DREffectiveDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DREffectiveDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func DREraseStatusChangedNotification() uintptr {
+func DREraseStatusChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DREraseStatusChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DREraseTypeComplete @discussion	An NString value for the @link DREraseTypeKey DREraseTypeKey @/link. Configures the erase object to perform a complete erase, erasing every byte on the disk. This operation is slow (on the order of 30 minutes) to complete.
-func DREraseTypeComplete() uintptr {
+func DREraseTypeComplete() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DREraseTypeComplete")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DREraseTypeKey @discussion	The key for the erase's properties dictionary storing the type of erase to perform
-func DREraseTypeKey() uintptr {
+func DREraseTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DREraseTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func DREraseTypeQuick() uintptr {
+func DREraseTypeQuick() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DREraseTypeQuick")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusAdditionalSenseStringKey @discussion	An NSString describing the RBC additional sense code and additional sense code qualifier pair returned by the device. If no sense is reported, this key will not be present.
-func DRErrorStatusAdditionalSenseStringKey() uintptr {
+func DRErrorStatusAdditionalSenseStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusAdditionalSenseStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusErrorInfoStringKey @discussion	An NSString describing extended error information in a user appropriate manner.
-func DRErrorStatusErrorInfoStringKey() uintptr {
+func DRErrorStatusErrorInfoStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusErrorInfoStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusErrorKey @discussion	An NSNumber containing the OS error code for the error.
-func DRErrorStatusErrorKey() uintptr {
+func DRErrorStatusErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusErrorStringKey @discussion	An NSString describing the error in a user appropriate manner.
-func DRErrorStatusErrorStringKey() uintptr {
+func DRErrorStatusErrorStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusErrorStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusKey @discussion	The key in the status dictionary for the error dictionary.
-func DRErrorStatusKey() uintptr {
+func DRErrorStatusKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusSenseCodeStringKey @discussion	An NSString describing the RBC sense code returned by the device. If no sense is reported, this key will not be present.
-func DRErrorStatusSenseCodeStringKey() uintptr {
+func DRErrorStatusSenseCodeStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusSenseCodeStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRErrorStatusSenseKey @discussion	An NSData object containing the raw RBC sense information structure reported by the device. If no sense is reported, this key will not be present.
-func DRErrorStatusSenseKey() uintptr {
+func DRErrorStatusSenseKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRErrorStatusSenseKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRExpirationDate @discussion	NSDate containing the item's expiration date.
-func DRExpirationDate() uintptr {
+func DRExpirationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRExpirationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRFreeBlocksKey @discussion	NSNumber containing the length, in blocks, which is still available in a writable track.
-func DRFreeBlocksKey() uintptr {
+func DRFreeBlocksKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRFreeBlocksKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRHFSPlus @discussion	The key for accessing the HFS+ name/properties for the file. HFS+ names can be up to 255 decomposed unicode characters long.
-func DRHFSPlus() uintptr {
+func DRHFSPlus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRHFSPlus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRHFSPlusCatalogNodeID @discussion	NSNumber containing item's catalog node ID (HFS+ only). Currently, this value if set is only a suggestion. The burn engine will attempt to use this node ID, but may use another value if it needs to resolve conflicts.  Default behavior is to allocate node IDs incrementally from @link //apple_ref/c/econst/kHFSFirstUserCatalogNodeID kHFSFirstUserCatalogNodeID @/link.
-func DRHFSPlusCatalogNodeID() uintptr {
+func DRHFSPlusCatalogNodeID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRHFSPlusCatalogNodeID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRHFSPlusTextEncodingHint @discussion	NSNumber containing the item's text encoding hint (HFS+ only). This value is used by the MacOS to help when converting the natively UTF-16 filename into an 8-bit-per-character representation (such as MacRoman, Shift-JIS, or UTF8).  If not set, default behavior is to call @link //apple_ref/c/func/CFStringGetMostCompatibleMacStringEncoding CFStringGetMostCompatibleMacStringEncoding @/link(@link //apple_ref/c/func/CFStringGetSmallestEncoding CFStringGetSmallestEncoding @/link()).
-func DRHFSPlusTextEncodingHint() uintptr {
+func DRHFSPlusTextEncodingHint() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRHFSPlusTextEncodingHint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISO9660 @discussion	The key for accessing the ISO-9660 properties for the file. This key is used to refer specifically to the properties for the file. This key cannot be used to refer to the name of the file; it is ambiguous, since the name may be in either level 1 or level 2 format.
-func DRISO9660() uintptr {
+func DRISO9660() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISO9660")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISO9660LevelOne @discussion	The key for accessing the ISO-9660 level 1 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 1.  When used for a property, it is equivalent in use to the @link DRISO9660 DRISO9660 @/link key and acts as a synonym for that key. ISO9660 level 1 names are in the form typically known as 8.3 - eight characters of name and three characters of extension (if it's a file; directories can't have extensions).  Character set is limited to A-Z, 0-9, and _.
-func DRISO9660LevelOne() uintptr {
+func DRISO9660LevelOne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISO9660LevelOne")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISO9660LevelTwo @discussion	The key for accessing the ISO-9660 level 2 name for the file. This key is used to refer specifically to the name generated for ISO-9660 if the ISO level is set to 2.  When used for a property, it is equivalent in use to the @link DRISO9660 DRISO9660 @/link key and acts as a synonym for that key. ISO9660 level 2 names can be 32 chars long, are limited to a subset of the 7-bit ASCII chars (capital letters, numbers, space, punctuation), and are only allowed one "." character.
-func DRISO9660LevelTwo() uintptr {
+func DRISO9660LevelTwo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISO9660LevelTwo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISO9660VersionNumber @discussion	NSNumber containing the ISO9660 version number for the object. Default value is 1.
-func DRISO9660VersionNumber() uintptr {
+func DRISO9660VersionNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISO9660VersionNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISOLevel @discussion	NSNumber containing the ISO level of the ISO-9660 filesystem on the track. Currently should be 1 or 2.
-func DRISOLevel() uintptr {
+func DRISOLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISOLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISOMacExtensions @discussion	NSBoolean indicating whether the track should have Mac extensions.
-func DRISOMacExtensions() uintptr {
+func DRISOMacExtensions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISOMacExtensions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRISORockRidgeExtensions @discussion	NSBoolean indicating whether the track should have RockRidge (POSIX) extensions.
-func DRISORockRidgeExtensions() uintptr {
+func DRISORockRidgeExtensions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRISORockRidgeExtensions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRIndexPointsKey @discussion	For CD tracks only. This key points to an NSArray of NSNumbers, indicating the index points inside the track.  Each index point is specified as a number of blocks (frames) relative to the start of the track.  There are 75 blocks in one second of CD audio.  No more than 98 index points may be specified for a track. Not all drives are capable of writing index points, and not all consumer CD players report or use them.  If this key is present in any track and the drive cannot write index points, the burn will fail with @link //apple_ref/c/econst/kDRDeviceCantWriteIndexPointsErr kDRDeviceCantWriteIndexPointsErr @/link.
-func DRIndexPointsKey() uintptr {
+func DRIndexPointsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRIndexPointsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRInvisible @discussion	NSBoolean indicating whether the item is invisibile or not.
-func DRInvisible() uintptr {
+func DRInvisible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRInvisible")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRJoliet @discussion	The key for accessing the Joliet name/properties for the file. Joliet names can be 64 precomposed unicode characters long, but are only allowed one "." character and many punctuation characters are illegal.
-func DRJoliet() uintptr {
+func DRJoliet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRJoliet")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRLinkTypeFinderAlias @discussion	A Finder alias.
-func DRLinkTypeFinderAlias() uintptr {
+func DRLinkTypeFinderAlias() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRLinkTypeFinderAlias")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRLinkTypeHardLink @discussion	A hard link.
-func DRLinkTypeHardLink() uintptr {
+func DRLinkTypeHardLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRLinkTypeHardLink")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRLinkTypeSymbolicLink @discussion	A symbolic link.
-func DRLinkTypeSymbolicLink() uintptr {
+func DRLinkTypeSymbolicLink() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRLinkTypeSymbolicLink")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacExtendedFinderFlags @discussion	NSNumber containing the item's extended Finder flags (MacOS only).
-func DRMacExtendedFinderFlags() uintptr {
+func DRMacExtendedFinderFlags() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacExtendedFinderFlags")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacFileCreator @discussion	NSData containing the OSType for the file creator (MacOS only).
-func DRMacFileCreator() uintptr {
+func DRMacFileCreator() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacFileCreator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacFileType @discussion	NSData containing the OSType for the file type (MacOS only).
-func DRMacFileType() uintptr {
+func DRMacFileType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacFileType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacFinderFlags @discussion	NSNumber containing the item's Finder flags (MacOS only). The invisible bit is ignored - use DRInvisible instead.
-func DRMacFinderFlags() uintptr {
+func DRMacFinderFlags() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacFinderFlags")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacFinderHideExtension @discussion	A BOOL indicating whether the extension should be hidden in the Finder or not. The default is false and only applies to files.
-func DRMacFinderHideExtension() uintptr {
+func DRMacFinderHideExtension() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacFinderHideExtension")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacIconLocation @discussion	NSData containing a Point (not NSPoint) for the item's icon location in its parent folder (MacOS only).
-func DRMacIconLocation() uintptr {
+func DRMacIconLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacIconLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacScrollPosition @discussion	NSData containing a Point (not NSPoint) for the folder's scroll position (MacOS only).
-func DRMacScrollPosition() uintptr {
+func DRMacScrollPosition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacScrollPosition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacWindowBounds @discussion	NSData containing a Rect (not NSRect) for the window bounds for a folder (MacOS only).
-func DRMacWindowBounds() uintptr {
+func DRMacWindowBounds() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacWindowBounds")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMacWindowView @discussion	NSNumber containing the folder's window view type (MacOS only).
-func DRMacWindowView() uintptr {
+func DRMacWindowView() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMacWindowView")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRMaxBurnSpeedKey @discussion	NSNumber containing the maximum burn speed at which data can be produced. The speed is represented in KB/s (1 KB = 1000 bytes).  This key can only be used to limit the speed at which the burn runs.
-func DRMaxBurnSpeedKey() uintptr {
+func DRMaxBurnSpeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMaxBurnSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRMediaCatalogNumberKey @discussion		The burn property whose value is an NSData containing exactly 13 bytes of data, which will be written to the disc as the Media Catalog Number. If this key is not present, it will default to all zeroes, indicating that a MCN is not supplied. This value is the UPC/EAN product number, and should conform to the specifications of the UCC and EAN.  See <a href="http://www.ean-int.org/">http://www.ean-int.org/</a> and <a href="http://www.uc-council.org/">http://www.uc-council.org/</a> for more details on the UPC/EAN standard.
-func DRMediaCatalogNumberKey() uintptr {
+func DRMediaCatalogNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRMediaCatalogNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRNextWritableAddressKey @discussion	NSNumber containing the LBA of the next writable address in the track. This key is not present in closed tracks.
-func DRNextWritableAddressKey() uintptr {
+func DRNextWritableAddressKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRNextWritableAddressKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPosixFileMode @discussion	NSNumber containing the item's POSIX file mode.
-func DRPosixFileMode() uintptr {
+func DRPosixFileMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPosixFileMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPosixGID @discussion	NSNumber containing the item's POSIX GID.
-func DRPosixGID() uintptr {
+func DRPosixGID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPosixGID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPosixUID @discussion	NSNumber containing the item's POSIX UID.
-func DRPosixUID() uintptr {
+func DRPosixUID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPosixUID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPreGapIsRequiredKey @discussion	For CD tracks only. NSNumber indicating whether the pregap listed for the track is required.  If this key is not present, the track will behave as though the key were <i>NO</i>. If this key's value is set to <i>YES</i> and the device does not support the exact pregap length, the burn will fail with a return value of @link //apple_ref/c/econst/kDRDevicePregapLengthNotAvailableErr kDRDevicePregapLengthNotAvailableErr @/link. If this key's value is set to <i>YES</i> and the device does not support any of the suggested pregap length, the engine will choose an alternate pregap length.
-func DRPreGapIsRequiredKey() uintptr {
+func DRPreGapIsRequiredKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPreGapIsRequiredKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPreGapLengthKey @discussion	For CD tracks only.  NSNumber containing the length of silence or data at the beginning of the track.  This defaults to 2 seconds of silence. If this key is present, the track producer will be asked for the pregap data first. If the producer implements the proper selector, then it's the responsibility of the producer to provide data for the pregap, otherwise that length of silence will be produced by Disc Recording.
-func DRPreGapLengthKey() uintptr {
+func DRPreGapLengthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPreGapLengthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRPublisher @discussion	NSString indicating the publisher for ISO and Joliet volumes.
-func DRPublisher() uintptr {
+func DRPublisher() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRPublisher")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRRecordingDate @discussion	NSDate containing the item's recording date.
-func DRRecordingDate() uintptr {
+func DRRecordingDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRRecordingDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSCMSCopyrightFree @discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that the track has no copying restrictions.  Copies of this track should also be copyright free.
-func DRSCMSCopyrightFree() uintptr {
+func DRSCMSCopyrightFree() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSCMSCopyrightFree")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSCMSCopyrightProtectedCopy @discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that the track is a first-generation copy of an original that was subject to copy protection.  No further digital copying should be allowed.
-func DRSCMSCopyrightProtectedCopy() uintptr {
+func DRSCMSCopyrightProtectedCopy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSCMSCopyrightProtectedCopy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSCMSCopyrightProtectedOriginal @discussion	One possible value for the @link DRSerialCopyManagementStateKey DRSerialCopyManagementStateKey @/link.  Indicates that the track is an original subject to copyright protection.  Digital copying of this track should be allowed, but copies should be marked with SCMS.
-func DRSCMSCopyrightProtectedOriginal() uintptr {
+func DRSCMSCopyrightProtectedOriginal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSCMSCopyrightProtectedOriginal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSerialCopyManagementStateKey @discussion	For CD tracks only.  This key points to an NSString value indicating the SCMS state of the track.  If this key is not present, no SCMS data is written. Not all drives are capable of writing SCMS.  If this key is present in any track and the drive cannot write SCMS, the burn will fail with @link //apple_ref/c/econst/kDRDeviceCantWriteSCMSErr kDRDeviceCantWriteSCMSErr @/link.
-func DRSerialCopyManagementStateKey() uintptr {
+func DRSerialCopyManagementStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSerialCopyManagementStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSessionFormatKey @discussion	NSNumber containing the session format of the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
-func DRSessionFormatKey() uintptr {
+func DRSessionFormatKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSessionFormatKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSessionNumberKey @discussion	NSNumber containing the physical session number of a track.
-func DRSessionNumberKey() uintptr {
+func DRSessionNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSessionNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusCurrentSessionKey @discussion	A key for the burn status dictionary. NSNumber indicating the current session being burned.
-func DRStatusCurrentSessionKey() uintptr {
+func DRStatusCurrentSessionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusCurrentSessionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusCurrentSpeedKey @discussion	A key for the burn status dictionary. NSNumber indicating the current burn speed.
-func DRStatusCurrentSpeedKey() uintptr {
+func DRStatusCurrentSpeedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusCurrentSpeedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusCurrentTrackKey @discussion	A key for the status dictionaries. NSNumber indicating the current track being burned.
-func DRStatusCurrentTrackKey() uintptr {
+func DRStatusCurrentTrackKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusCurrentTrackKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusEraseTypeKey @discussion	A key for the erase status dictionary. NSString indicating the type of erase operation.
-func DRStatusEraseTypeKey() uintptr {
+func DRStatusEraseTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusEraseTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusPercentCompleteKey @discussion	A key for the status dictionaries. NSNumber containing the percent complete of the operation expressed as a floating point number from 0 to 1.
-func DRStatusPercentCompleteKey() uintptr {
+func DRStatusPercentCompleteKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusPercentCompleteKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusProgressCurrentKPS @abstract	The current burn speed in kilobytes per second. @discussion This is an optional key within the @link DRStatusProgressInfoKey DRStatusProgressInfoKey @/link dictionary. The value of this key, if present, is a NSNumber object containing the write speed of the burn.
-func DRStatusProgressCurrentKPS() uintptr {
+func DRStatusProgressCurrentKPS() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusProgressCurrentKPS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusProgressCurrentXFactor @abstract	The current burn speed in a media appropriate x-factor @discussion This is an optional key within the @link DRStatusProgressInfoKey DRStatusProgressInfoKey @/link dictionary. The value of this key, if present, is a NSNumber object containing the appropriate x-factor for the media.
-func DRStatusProgressCurrentXFactor() uintptr {
+func DRStatusProgressCurrentXFactor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusProgressCurrentXFactor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusProgressInfoKey @abstract	A dictionary of extended progress information. @discussion A key for the status dictionary. The value of this key is a reference to a NSDictionary object containing extended progress information.
-func DRStatusProgressInfoKey() uintptr {
+func DRStatusProgressInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusProgressInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateDone @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the operation is finished and it succeeded.
-func DRStatusStateDone() uintptr {
+func DRStatusStateDone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateDone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateErasing @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the erase status dictionary. Indicates the erase is currently in progress.
-func DRStatusStateErasing() uintptr {
+func DRStatusStateErasing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateErasing")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateFailed @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the operation is finished and it failed.
-func DRStatusStateFailed() uintptr {
+func DRStatusStateFailed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateFailed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateFinishing @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is finishing up (closing the last session, writing the TOC, etc).
-func DRStatusStateFinishing() uintptr {
+func DRStatusStateFinishing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateFinishing")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateKey @discussion	A key for the status dictionaries. NSString indicating the current state of the operation.
-func DRStatusStateKey() uintptr {
+func DRStatusStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateNone @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the operation has not yet begun.
-func DRStatusStateNone() uintptr {
+func DRStatusStateNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStatePreparing @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the operation is preparing to begin.
-func DRStatusStatePreparing() uintptr {
+func DRStatusStatePreparing() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStatePreparing")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateSessionClose @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is closing a session on disc. The exact session being closing is contained in @link DRStatusCurrentSessionKey DRStatusCurrentSessionKey @/link.
-func DRStatusStateSessionClose() uintptr {
+func DRStatusStateSessionClose() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateSessionClose")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateSessionOpen @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is opening a session on disc. The exact session being opened is contained in @link DRStatusCurrentSessionKey DRStatusCurrentSessionKey @/link.
-func DRStatusStateSessionOpen() uintptr {
+func DRStatusStateSessionOpen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateSessionOpen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateTrackClose @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is closing a track on disc. The exact track being closed is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
-func DRStatusStateTrackClose() uintptr {
+func DRStatusStateTrackClose() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateTrackClose")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateTrackOpen @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is opening a track on disc. The exact track being opened is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
-func DRStatusStateTrackOpen() uintptr {
+func DRStatusStateTrackOpen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateTrackOpen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateTrackWrite @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link in the burn status dictionary. Indicates the burn is writing a track on disc. The exact track being written is contained in @link DRStatusCurrentTrackKey DRStatusCurrentTrackKey @/link.
-func DRStatusStateTrackWrite() uintptr {
+func DRStatusStateTrackWrite() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateTrackWrite")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusStateVerifying @discussion	One possible value for @link DRStatusStateKey DRStatusStateKey @/link. Indicates the operation is verifying what it did.
-func DRStatusStateVerifying() uintptr {
+func DRStatusStateVerifying() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusStateVerifying")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusTotalSessionsKey @discussion	A key for the status dictionaries. NSNumber indicating the total number of sessions being burned.
-func DRStatusTotalSessionsKey() uintptr {
+func DRStatusTotalSessionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusTotalSessionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const DRStatusTotalTracksKey @discussion	A key for the status dictionaries. NSNumber indicating the total number of tracks in the current session being burned.
-func DRStatusTotalTracksKey() uintptr {
+func DRStatusTotalTracksKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRStatusTotalTracksKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const          DRSubchannelDataFormKey @discussion     The property whose value is the data mode of the subchannel data sent to the drive. If this key is not present, the track will default to a value of @link DRSubchannelDataFormNone DRSubchannelDataFormNone @/link and no subchannel information will be requested from the producer. Subchannel data is returned from the producer in the same production method that produces normal user data. Normally a producer returns user data in chunks of @link DRBlockSizeKey DRBlockSizeKey @/link size. When subchannel data is also produced, the producer is expected to return user data of DRBlockSizeKey in length with an additonal 96 bytes of subchannel data. Depending on the data form specified in this key, the format of this 96 bytes is either in raw or pack format. When subchannel data is requested from the producer, the @link DRFlagSubchannelDataRequested DRFlagSubchannelDataRequested @/link flag is set in the <i>flags</i> parameter of producePreGapForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: or produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: and blockSize is increased by 96 bytes.
-func DRSubchannelDataFormKey() uintptr {
+func DRSubchannelDataFormKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSubchannelDataFormKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		DRSubchannelDataFormNone @discussion 	A value for @link DRSubchannelDataFormKey DRSubchannelDataFormKey @/link indicating that the subchannel data will not be provided by the producer.
-func DRSubchannelDataFormNone() uintptr {
+func DRSubchannelDataFormNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSubchannelDataFormNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRSubchannelDataFormPack @discussion		A value for @link DRSubchannelDataFormKey DRSubchannelDataFormKey @/link indicating that the producer will be asked to provide pack format subchannel data for the track. If this form is selected, the drive will perform P and Q parity calculations on each pack and interleave the packs before writing them to disc. This corresponds to a subchannel data form of 0xC0.
-func DRSubchannelDataFormPack() uintptr {
+func DRSubchannelDataFormPack() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSubchannelDataFormPack")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRSubchannelDataFormRaw @discussion		A value for @link DRSubchannelDataFormKey DRSubchannelDataFormKey @/link indicating that the producer will be asked to provide raw format subchannel data for the track. If this form is selected, the producer must have performed P and Q parity calculations for each pack and done proper interleaving of the subchannel data. The drive will fill in the P-Q subchannel information and write the R-W subchannel data as is to the disc. This corresponds to a subchannel data form of 0x40.
-func DRSubchannelDataFormRaw() uintptr {
+func DRSubchannelDataFormRaw() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSubchannelDataFormRaw")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSuppressMacSpecificFiles @discussion	NSBoolean indicating whether the track should suppress Mac-specific files from non-HFS filesystems.
-func DRSuppressMacSpecificFiles() uintptr {
+func DRSuppressMacSpecificFiles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSuppressMacSpecificFiles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			DRSynchronousBehaviorKey @discussion		The burn property whose value is a BOOL indicating if burn operations will behave synchronously.  If this key is not present, it will default to a value of <i>NO</i> and burn operations will behave asynchronously. Synchronous operations do not post status notifications, and will not return until they are completed.  Status can still be queried at any time, and will remain valid even after the burn operation has finished.
-func DRSynchronousBehaviorKey() uintptr {
+func DRSynchronousBehaviorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSynchronousBehaviorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRSystemIdentifier @discussion	NSString indicating the system identifier for ISO and Joliet volumes.
-func DRSystemIdentifier() uintptr {
+func DRSystemIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRSystemIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackISRCKey @discussion	For CD-DA audio tracks only.  This key points to an NSData containing exactly 12 bytes, which will be written to the disc as the International Standard Recording Code (ISRC).  If this key is not present, no ISRC is written. The use of this value should conform to the specifications of the IFPI. See <a href="http://www.ifpi.org/isrc/">http://www.ifpi.org/isrc/</a> for more details on the ISRC standard. Not all drives are capable of the write modes necessary to write the ISRC. If this key is present in any track and the drive cannot write the ISRC, the burn will fail with @link //apple_ref/c/econst/kDRDeviceCantWriteISRCErr kDRDeviceCantWriteISRCErr @/link.
-func DRTrackISRCKey() uintptr {
+func DRTrackISRCKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackISRCKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackIsEmptyKey @discussion	NSNumber containing a BOOL value and indicates whether the track is empty.
-func DRTrackIsEmptyKey() uintptr {
+func DRTrackIsEmptyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackIsEmptyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackLengthKey @discussion	NSNumber representing the length of the track
-func DRTrackLengthKey() uintptr {
+func DRTrackLengthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackLengthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackModeKey @discussion	NSNumber containing the track mode of the track. See the Mt. Fuji (INF-8090i) specification for CD/DVD devices for possible values for this property.
-func DRTrackModeKey() uintptr {
+func DRTrackModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackNumberKey @discussion	NSNumber containing the physical track number of a track.
-func DRTrackNumberKey() uintptr {
+func DRTrackNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackPacketSizeKey @discussion	NSNumber containing the number of blocks per packet for the disc. It will only be present if the disc contains fixed packets. This key will contain 16 for DVD media, and typically contains either 16 or 32 for CD media.
-func DRTrackPacketSizeKey() uintptr {
+func DRTrackPacketSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackPacketSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackPacketTypeFixed @discussion	If this is the value of the @link DRTrackPacketTypeKey DRTrackPacketTypeKey @/link then the disc is writen with fixed sized packets.  When this value is present the DRPacketSizeKey will also be present.
-func DRTrackPacketTypeFixed() uintptr {
+func DRTrackPacketTypeFixed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackPacketTypeFixed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackPacketTypeKey @discussion	NSString indicating the kind of packets being written.
-func DRTrackPacketTypeKey() uintptr {
+func DRTrackPacketTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackPacketTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackPacketTypeVariable @discussion	If this is the value of the @link DRTrackPacketTypeKey DRTrackPacketTypeKey @/link then the disc is written with sequential variable sized packets.  The presence of this value indicates the lack of the DRPacketSizeKey.
-func DRTrackPacketTypeVariable() uintptr {
+func DRTrackPacketTypeVariable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackPacketTypeVariable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackStartAddressKey @discussion	NSNumber containing the LBA of the start address for the track.
-func DRTrackStartAddressKey() uintptr {
+func DRTrackStartAddressKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackStartAddressKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackTypeClosed @discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track has been written and is closed.
-func DRTrackTypeClosed() uintptr {
+func DRTrackTypeClosed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackTypeClosed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackTypeIncomplete @discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is not invisible or reserved and is available for writing.
-func DRTrackTypeIncomplete() uintptr {
+func DRTrackTypeIncomplete() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackTypeIncomplete")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackTypeInvisible @discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is invisible and available to writing. If it is packet written and not closed, DRPacketTypeKey will be present, along with DRTrackPacketType and DRTrackPacketSize keys.
-func DRTrackTypeInvisible() uintptr {
+func DRTrackTypeInvisible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackTypeInvisible")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackTypeKey @discussion	NSString indicating the type of track. Possible values are: @link DRTrackTypeInvisible DRTrackTypeInvisible @/link, @link DRTrackTypeIncomplete DRTrackTypeIncomplete @/link, @link DRTrackTypeReserved DRTrackTypeReserved @/link or @link DRTrackTypeClosed DRTrackTypeClosed @/link.
-func DRTrackTypeKey() uintptr {
+func DRTrackTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRTrackTypeReserved @discussion	If this is the value of the @link DRTrackTypeKey DRTrackTypeKey @/link then the track is reserved for writing.
-func DRTrackTypeReserved() uintptr {
+func DRTrackTypeReserved() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRTrackTypeReserved")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDF @discussion	The key for accessing the UDF name/properties for the file.
-func DRUDF() uintptr {
+func DRUDF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFApplicationIdentifierSuffix @discussion	Optional key. NSData object of up to 8 bytes in length, for application use. The presence of this key requires the @link //apple_ref/occ/data/DRApplicationIdentifier DRApplicationIdentifier @/link key.
-func DRUDFApplicationIdentifierSuffix() uintptr {
+func DRUDFApplicationIdentifierSuffix() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFApplicationIdentifierSuffix")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFExtendedFilePermissions @abstract	NSNumber indicating the extended UDF file permissions of this file. @discussion	Bit 0: Change attributes for others (low order bit) Bit 1: Delete permissions for others Bit 2: Change attributes for group Bit 3: Delete permissions for group Bit 4: Change attributes for owner Bit 5: Delete permissions for owner Bit 6 & 7: Reserved If this key is not present, @link DRPosixFileMode DRPosixFileMode @/link will be used with the above bits being set to the corresponding write bit for owner, group, and others. If @link DRPosixFileMode DRPosixFileMode @/link is not present, the file mode from the file on disc will be used, again using the write bit for these permissions.
-func DRUDFExtendedFilePermissions() uintptr {
+func DRUDFExtendedFilePermissions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFExtendedFilePermissions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFInterchangeLevel @discussion	Optional key. NSNumber containing the volume interchange level. See the UDF specs for details.
-func DRUDFInterchangeLevel() uintptr {
+func DRUDFInterchangeLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFInterchangeLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFMaxInterchangeLevel @discussion	Optional key. NSNumber containing the maximum volume interchange level number. See the UDF specs for details.
-func DRUDFMaxInterchangeLevel() uintptr {
+func DRUDFMaxInterchangeLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFMaxInterchangeLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFMaxVolumeSequenceNumber @discussion	Optional key. NSNumber containing the maximum volume sequence number. See the UDF specs for details.
-func DRUDFMaxVolumeSequenceNumber() uintptr {
+func DRUDFMaxVolumeSequenceNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFMaxVolumeSequenceNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFPrimaryVolumeDescriptorNumber @discussion	Optional key. NSNumber containing the primary volume sequence number. See the UDF specs for details.
-func DRUDFPrimaryVolumeDescriptorNumber() uintptr {
+func DRUDFPrimaryVolumeDescriptorNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFPrimaryVolumeDescriptorNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFRealTimeFile @discussion	NSNumber indicating whether the file is a UDF Real-Time file.
-func DRUDFRealTimeFile() uintptr {
+func DRUDFRealTimeFile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFRealTimeFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVersion102 @discussion	This value is used in @link DRUDFWriteVersion DRUDFWriteVersion @/link.
-func DRUDFVersion102() uintptr {
+func DRUDFVersion102() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVersion102")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVersion150 @discussion	This value is used in @link DRUDFWriteVersion DRUDFWriteVersion @/link.
-func DRUDFVersion150() uintptr {
+func DRUDFVersion150() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVersion150")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVolumeSequenceNumber @discussion	Optional key. NSNumber containing the volume sequence number. See the UDF specs for details.
-func DRUDFVolumeSequenceNumber() uintptr {
+func DRUDFVolumeSequenceNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVolumeSequenceNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVolumeSetIdentifier @discussion	Optional key. The Volume Set Identifier for the UDF volume set. If this key is not present, @link //apple_ref/occ/data/DRVolumeSet DRVolumeSet @/link will be used if present. The Volume Set Identifier is composed of the Volume Set Timestamp, the Implementation Use, and a the string contained in this property.
-func DRUDFVolumeSetIdentifier() uintptr {
+func DRUDFVolumeSetIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVolumeSetIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVolumeSetImplementationUse @discussion	Optional key. An NSData object (8 bytes in length) for implementation use data. See the UDF specs for details.
-func DRUDFVolumeSetImplementationUse() uintptr {
+func DRUDFVolumeSetImplementationUse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVolumeSetImplementationUse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFVolumeSetTimestamp @discussion	Optional key. An NSDate object for the volume set timestamp. See the UDF specs for details.
-func DRUDFVolumeSetTimestamp() uintptr {
+func DRUDFVolumeSetTimestamp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFVolumeSetTimestamp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRUDFWriteVersion @discussion	Optional key. This property key defines the version for the UDF structures written to disk. Values are definde in UDF Version types.
-func DRUDFWriteVersion() uintptr {
+func DRUDFWriteVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRUDFWriteVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVerificationTypeChecksum @discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link. The engine will verify the track data with an internally calculated checksum.
-func DRVerificationTypeChecksum() uintptr {
+func DRVerificationTypeChecksum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVerificationTypeChecksum")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVerificationTypeKey @discussion	NSString indicating the type of verification to be performed. If this is not present, the track will not be verified.
-func DRVerificationTypeKey() uintptr {
+func DRVerificationTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVerificationTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVerificationTypeNone @discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link. No verification is desired, so verification will be skipped.
-func DRVerificationTypeNone() uintptr {
+func DRVerificationTypeNone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVerificationTypeNone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVerificationTypeProduceAgain @discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link. The engine will simply begin another production cycle and start calling @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: produceDataForTrack:intoBuffer:length:atAddress:blockSize:ioFlags: @/link again.
-func DRVerificationTypeProduceAgain() uintptr {
+func DRVerificationTypeProduceAgain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVerificationTypeProduceAgain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVerificationTypeReceiveData @discussion	One of the possible values of the @link DRVerificationTypeKey DRVerificationTypeKey @/link. The engine will begin reading data from the disc and calling @link //apple_ref/occ/intfm/DRTrackDataProduction/verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: verifyDataForTrack:inBuffer:length:atAddress:blockSize:ioFlags: @/link.
-func DRVerificationTypeReceiveData() uintptr {
+func DRVerificationTypeReceiveData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVerificationTypeReceiveData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeCheckedDate @discussion		NSDate containing the volume-checked date for HFS+ volumes. DRDefaultDate is used if unspecified.
-func DRVolumeCheckedDate() uintptr {
+func DRVolumeCheckedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeCheckedDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeCreationDate @discussion	NSDate containing the volume creation date. DRDefaultDate is used if unspecified.
-func DRVolumeCreationDate() uintptr {
+func DRVolumeCreationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeCreationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeEffectiveDate @discussion	NSDate containing the date and time at which the volume is effective for ISO and Joliet volumes.
-func DRVolumeEffectiveDate() uintptr {
+func DRVolumeEffectiveDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeEffectiveDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeExpirationDate @discussion	NSDate containing the volume expiration date for ISO and Joliet volumes.
-func DRVolumeExpirationDate() uintptr {
+func DRVolumeExpirationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeExpirationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeModificationDate @discussion	NSDate containing the volume modification date. DRDefaultDate is used if unspecified.
-func DRVolumeModificationDate() uintptr {
+func DRVolumeModificationDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeModificationDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const		DRVolumeSet @discussion	NSString indicating the volume set name for ISO and Joliet volumes.
-func DRVolumeSet() uintptr {
+func DRVolumeSet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_discrecordingLib, "DRVolumeSet")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant	kDRAbstractFile @abstract	(ISO/Joliet) The key for indicating the abstract file. @discussion	Value is a @link //apple_ref/c/tdef/DRFileRef DRFileRef @/link (which must be in the root directory).

@@ -41,24 +41,28 @@ type Constant struct {
 	CommentBlock string
 	// Kind selects how the symbol's value is produced and typed.
 	Kind ConstKind
+	// GoTypeName is the idiomatic wrapper type name; set only for ConstObjcClass.
+	GoTypeName string
 }
 
-// ConstKind says how a Constant accessor produces and types its value. The
-// rendered Go for ConstObjcID currently matches ConstCFRef (an obj.Object
-// wrapper); the distinction is preserved so the doc line and a future objc.ID
-// form can differ.
-type ConstKind int
+// ConstKind says how a Constant accessor produces and types its value.
+// It is a string so templates can compare against readable labels rather than
+// opaque integers.
+type ConstKind string
 
 const (
 	// ConstCFRef is a CoreFoundation reference value (const CF<T>Ref) returned as
 	// an obj.Object.
-	ConstCFRef ConstKind = iota
+	ConstCFRef ConstKind = "cfref"
 	// ConstNSString is an NSString* global returned as the package-local *String
 	// wrapper (Foundation only).
-	ConstNSString
+	ConstNSString ConstKind = "nsstring"
 	// ConstObjcID is an NSString* global in a non-Foundation package, returned as
 	// an obj.Object usable as a dictionary key or argument.
-	ConstObjcID
+	ConstObjcID ConstKind = "objcid"
+	// ConstObjcClass is a same-framework ObjC class pointer global returned as
+	// the idiomatic wrapper type for that class.
+	ConstObjcClass ConstKind = "objcclass"
 )
 
 // ErrorSentinel is a named error value for one member of a framework's

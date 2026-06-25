@@ -4,8 +4,6 @@
 package avfaudio
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
@@ -90,19 +88,19 @@ func (o *AVAudioPCMBuffer) Stride() uint {
 }
 
 // @property floatChannelData @abstract Access the buffer's float audio samples. @discussion floatChannelData returns pointers to the buffer's audio samples if the buffer's format is 32-bit float, or nil if it is another format. The returned pointer is to format.channelCount pointers to float. Each of these pointers is to "frameLength" valid samples, which are spaced by "stride" samples. If format.interleaved is false (as with the standard deinterleaved float format), then the pointers will be to separate chunks of memory. "stride" is 1. If format.interleaved is true, then the pointers will refer into the same chunk of interleaved samples, each offset by 1 frame. "stride" is the number of interleaved channels.
-func (o *AVAudioPCMBuffer) FloatChannelData() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioPCMBufferSelFloatChannelData)
+func (o *AVAudioPCMBuffer) FloatChannelData() *float32 {
+	_ret := objc.Send[*float32](o.Ptr(), _aVAudioPCMBufferSelFloatChannelData)
 	return _ret
 }
 
 // @property int16ChannelData @abstract Access the buffer's int16_t audio samples. @discussion int16ChannelData returns the buffer's audio samples if the buffer's format has 2-byte integer samples, or nil if it is another format. See the discussion of floatChannelData.
-func (o *AVAudioPCMBuffer) Int16ChannelData() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioPCMBufferSelInt16ChannelData)
+func (o *AVAudioPCMBuffer) Int16ChannelData() *int16 {
+	_ret := objc.Send[*int16](o.Ptr(), _aVAudioPCMBufferSelInt16ChannelData)
 	return _ret
 }
 
 // @property int32ChannelData @abstract Access the buffer's int32_t audio samples. @discussion int32ChannelData returns the buffer's audio samples if the buffer's format has 4-byte integer samples, or nil if it is another format. See the discussion of floatChannelData.
-func (o *AVAudioPCMBuffer) Int32ChannelData() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _aVAudioPCMBufferSelInt32ChannelData)
+func (o *AVAudioPCMBuffer) Int32ChannelData() *int32 {
+	_ret := objc.Send[*int32](o.Ptr(), _aVAudioPCMBufferSelInt32ChannelData)
 	return _ret
 }

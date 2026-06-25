@@ -72,9 +72,9 @@ func (a *Annotation) String() string {
 }
 
 // NewAnnotationWithBoundsForTypeWithProperties creates a PDF annotation with the specified bounds, type, and optional properties.
-func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties obj.Object) *Annotation {
+func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType obj.Object, properties obj.Object) *Annotation {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, annotationType, objref.IDOf(properties))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, objref.IDOf(annotationType), objref.IDOf(properties))
 	return annotationAdopt(_id)
 }
 
@@ -238,8 +238,8 @@ func (a *Annotation) WithMarkupType(markupType MarkupType) *Annotation {
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (a *Annotation) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (a *Annotation) WithWidgetFieldType(widgetFieldType obj.Object) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return a
 }
 
@@ -377,32 +377,32 @@ func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
 }
 
 // SetValueForAnnotationKey sets a value in the annotation’s dictionary.
-func (a *Annotation) SetValueForAnnotationKey(value obj.Object, key unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setValue:forAnnotationKey:"), objref.IDOf(value), key)
+func (a *Annotation) SetValueForAnnotationKey(value obj.Object, key obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setValue:forAnnotationKey:"), objref.IDOf(value), objref.IDOf(key))
 	return _r
 }
 
 // SetBooleanForAnnotationKey sets a Boolean value in the annotation’s dictionary.
-func (a *Annotation) SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setBoolean:forAnnotationKey:"), value, key)
+func (a *Annotation) SetBooleanForAnnotationKey(value bool, key obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setBoolean:forAnnotationKey:"), value, objref.IDOf(key))
 	return _r
 }
 
 // SetRectForAnnotationKey sets a rectangle value in the annotation’s dictionary.
-func (a *Annotation) SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setRect:forAnnotationKey:"), value, key)
+func (a *Annotation) SetRectForAnnotationKey(value corefoundation.CGRect, key obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setRect:forAnnotationKey:"), value, objref.IDOf(key))
 	return _r
 }
 
 // ValueForAnnotationKey returns a deep copy of the key-value pairs of properties for the specified key.
-func (a *Annotation) ValueForAnnotationKey(key unsafe.Pointer) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("valueForAnnotationKey:"), key)
+func (a *Annotation) ValueForAnnotationKey(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("valueForAnnotationKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // RemoveValueForAnnotationKey removes a value from the annotation’s dictionary.
-func (a *Annotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeValueForAnnotationKey:"), key)
+func (a *Annotation) RemoveValueForAnnotationKey(key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeValueForAnnotationKey:"), objref.IDOf(key))
 }
 
 // Page returns the page.

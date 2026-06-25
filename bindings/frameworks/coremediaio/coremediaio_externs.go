@@ -7,20 +7,35 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @constant CMIOExtensionInfoDictionaryKey @abstract The CoreMediaIO extension info dictionary key.
-func CMIOExtensionInfoDictionaryKey() uintptr {
+func CMIOExtensionInfoDictionaryKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremediaioLib, "CMIOExtensionInfoDictionaryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionMachServiceNameKey @abstract A key contained in the Info.plist that specifies the mach service name.
-func CMIOExtensionMachServiceNameKey() uintptr {
+func CMIOExtensionMachServiceNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremediaioLib, "CMIOExtensionMachServiceNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceCanBeDefaultInputDevice @abstract The key for the device property that specifies if a device can be the default input device. @discussion The property state for CMIOExtensionPropertyDeviceCanBeDefaultInputDevice is a number representing a boolean value.
@@ -29,7 +44,11 @@ func CMIOExtensionPropertyDeviceCanBeDefaultInputDevice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice @abstract The key for the device property that specifies if a device can be the default output device. @discussion The property state for CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice is a number representing a boolean value.
@@ -38,7 +57,11 @@ func CMIOExtensionPropertyDeviceCanBeDefaultOutputDevice() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceIsSuspended @abstract The key for the device property IsSuspended, this key indicates if the device is currently suspended. @discussion For example, the user might close the clamshell of the device. While suspended the device still responds to all requests just as if it were active, but the stream(s) will not provide any data. The property state for CMIOExtensionPropertyDeviceIsSuspended is a number as boolean with a readonly attribute.
@@ -47,7 +70,11 @@ func CMIOExtensionPropertyDeviceIsSuspended() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceLatency @abstract The key for the readonly device property indicating the number of frames of latency in the CMIOExtensionDevice. @discussion The property state for CMIOExtensionPropertyDeviceLatency is a number containing the number of frames of latency in the CMIOExtensionDevice. Note that input and output latency may differ. Further, the CMIOExtensionDevice's CMIOExtensionStreams may have additional latency so they should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIODevicePropertyLatency property.
@@ -56,7 +83,11 @@ func CMIOExtensionPropertyDeviceLatency() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID @abstract The key for the device property linked CoreAudio device UID. @discussion The property state for CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID is a string with a readonly attribute.
@@ -65,7 +96,11 @@ func CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceModel @abstract The key for the device property model. @discussion The property state for CMIOExtensionPropertyDeviceModel is a string with a readonly attribute.
@@ -74,7 +109,11 @@ func CMIOExtensionPropertyDeviceModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyDeviceTransportType @abstract The key for the device property transport type. @discussion The property state for CMIOExtensionPropertyDeviceTransportType is a number whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h> and with a readonly attribute.
@@ -83,7 +122,11 @@ func CMIOExtensionPropertyDeviceTransportType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyProviderManufacturer @abstract The key for the provider property manufacturer. @discussion The property state for CMIOExtensionPropertyProviderManufacturer is a string with a readonly attribute.
@@ -92,7 +135,11 @@ func CMIOExtensionPropertyProviderManufacturer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyProviderName @abstract The key for the provider property name. @discussion The property state for CMIOExtensionPropertyProviderName is a string with a readonly attribute.
@@ -101,7 +148,11 @@ func CMIOExtensionPropertyProviderName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamActiveFormatIndex @abstract The key for the stream property active format index. @discussion The property state for CMIOExtensionPropertyStreamActiveFormatIndex is a number.
@@ -110,7 +161,11 @@ func CMIOExtensionPropertyStreamActiveFormatIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamFrameDuration @abstract The key for the stream property frame duration. @discussion The property state for CMIOExtensionPropertyStreamFrameDuration needs to be a dictionary representing a CMTime struct that is consistent with the frame duration specification provided by the current active format.
@@ -119,7 +174,11 @@ func CMIOExtensionPropertyStreamFrameDuration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamLatency @abstract The key for the readonly stream property indicating the number of frames of latency in the CMIOExtensionStream. @discussion The property state for CMIOExtensionPropertyStreamLatency is a number containing the number of frames of latency in the CMIOExtensionStream. Note that the owning CMIOExtensionDevice may have additional latency so it should be queried as well. If both the device and the stream say they have latency, then the total latency for the stream is the device latency summed with the stream latency. This property translates to the kCMIOStreamPropertyLatency property.
@@ -128,7 +187,11 @@ func CMIOExtensionPropertyStreamLatency() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamMaxFrameDuration @abstract The key for the stream property maximum frame duration. @discussion The property state for CMIOExtensionPropertyStreamMaxFrameDuration needs to be a dictionary representing a CMTime struct.
@@ -137,7 +200,11 @@ func CMIOExtensionPropertyStreamMaxFrameDuration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamSinkBufferQueueSize @abstract The key for the sink stream property buffer queue size. @discussion The property state for CMIOExtensionPropertyStreamSinkBufferQueueSize is a number. This property translates to the kCMIOStreamPropertyOutputBufferQueueSize property.
@@ -146,7 +213,11 @@ func CMIOExtensionPropertyStreamSinkBufferQueueSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamSinkBufferUnderrunCount @abstract The key for the sink stream property buffer underrun count. @discussion A number that is incremented every time a stream's buffers are not being serviced fast enough. The property state for CMIOExtensionPropertyStreamSinkBufferUnderrunCount is a number with a readonly attribute. This property translates to the kCMIOStreamPropertyOutputBufferUnderrunCount property.
@@ -155,7 +226,11 @@ func CMIOExtensionPropertyStreamSinkBufferUnderrunCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup @abstract The key for the sink stream property for number of buffers required for startup. @discussion The property state for CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup is a number. This property translates to the kCMIOStreamPropertyOutputBuffersRequiredForStartup property.
@@ -164,7 +239,11 @@ func CMIOExtensionPropertyStreamSinkBuffersRequiredForStartup() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CMIOExtensionPropertyStreamSinkEndOfData @abstract The key for the sink stream property end of data. @discussion The property state for CMIOExtensionPropertyStreamSinkEndOfData is a number, 1 means that the stream has reached the end and a value of 0 means that more data is (or will be) available. This property translates to the kCMIOStreamPropertyEndOfData property.
@@ -173,5 +252,9 @@ func CMIOExtensionPropertyStreamSinkEndOfData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -202,8 +202,8 @@ func (al *AnnotationLine) WithMarkupType(markupType MarkupType) *AnnotationLine 
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (al *AnnotationLine) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationLine {
-	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (al *AnnotationLine) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationLine {
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return al
 }
 

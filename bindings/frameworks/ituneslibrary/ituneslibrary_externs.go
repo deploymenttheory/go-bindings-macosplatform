@@ -4,112 +4,264 @@
 package ituneslibrary
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func ITLibMediaEntityPropertyPersistentID() uintptr {
+func ITLibMediaEntityPropertyPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaEntityPropertyPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAddedDate() uintptr {
+func ITLibMediaItemPropertyAddedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAddedDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumArtist() uintptr {
+func ITLibMediaItemPropertyAlbumArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumArtist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumDiscCount() uintptr {
+func ITLibMediaItemPropertyAlbumDiscCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumDiscCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumDiscNumber() uintptr {
+func ITLibMediaItemPropertyAlbumDiscNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumDiscNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumIsCompilation() uintptr {
+func ITLibMediaItemPropertyAlbumIsCompilation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumIsCompilation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumIsGapless() uintptr {
+func ITLibMediaItemPropertyAlbumIsGapless() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumIsGapless")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumRating() uintptr {
+func ITLibMediaItemPropertyAlbumRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumRating")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumRatingComputed() uintptr {
+func ITLibMediaItemPropertyAlbumRatingComputed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumRatingComputed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumTitle() uintptr {
+func ITLibMediaItemPropertyAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyAlbumTrackCount() uintptr {
+func ITLibMediaItemPropertyAlbumTrackCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyAlbumTrackCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyArtistName() uintptr {
+func ITLibMediaItemPropertyArtistName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyArtistName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyArtwork() uintptr {
+func ITLibMediaItemPropertyArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyArtwork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyBeatsPerMinute() uintptr {
+func ITLibMediaItemPropertyBeatsPerMinute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyBeatsPerMinute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyBitRate() uintptr {
+func ITLibMediaItemPropertyBitRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyBitRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyCategory() uintptr {
+func ITLibMediaItemPropertyCategory() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyCategory")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyComments() uintptr {
+func ITLibMediaItemPropertyComments() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyComments")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyComposer() uintptr {
+func ITLibMediaItemPropertyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyComposer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyContentRating() uintptr {
+func ITLibMediaItemPropertyContentRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyContentRating")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyDescription() uintptr {
+func ITLibMediaItemPropertyDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyDescription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyFileSize() uintptr {
+func ITLibMediaItemPropertyFileSize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyFileSize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ITLibMediaItemPropertyFileType() uintptr {
@@ -117,224 +269,532 @@ func ITLibMediaItemPropertyFileType() uintptr {
 	return ptr
 }
 
-func ITLibMediaItemPropertyGenre() uintptr {
+func ITLibMediaItemPropertyGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyGenre")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyGrouping() uintptr {
+func ITLibMediaItemPropertyGrouping() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyGrouping")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyHasArtwork() uintptr {
+func ITLibMediaItemPropertyHasArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyHasArtwork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyIsDRMProtected() uintptr {
+func ITLibMediaItemPropertyIsDRMProtected() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyIsDRMProtected")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyIsPurchased() uintptr {
+func ITLibMediaItemPropertyIsPurchased() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyIsPurchased")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyIsUserDisabled() uintptr {
+func ITLibMediaItemPropertyIsUserDisabled() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyIsUserDisabled")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyIsVideo() uintptr {
+func ITLibMediaItemPropertyIsVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyIsVideo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyKind() uintptr {
+func ITLibMediaItemPropertyKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyKind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyLastPlayDate() uintptr {
+func ITLibMediaItemPropertyLastPlayDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyLastPlayDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyLocation() uintptr {
+func ITLibMediaItemPropertyLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyLocationType() uintptr {
+func ITLibMediaItemPropertyLocationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyLocationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyLyricsContentRating() uintptr {
+func ITLibMediaItemPropertyLyricsContentRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyLyricsContentRating")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyMediaKind() uintptr {
+func ITLibMediaItemPropertyMediaKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyMediaKind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyModifiedDate() uintptr {
+func ITLibMediaItemPropertyModifiedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyModifiedDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyMovementCount() uintptr {
+func ITLibMediaItemPropertyMovementCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyMovementCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyMovementName() uintptr {
+func ITLibMediaItemPropertyMovementName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyMovementName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyMovementNumber() uintptr {
+func ITLibMediaItemPropertyMovementNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyMovementNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyPlayCount() uintptr {
+func ITLibMediaItemPropertyPlayCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyPlayCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyPlayStatus() uintptr {
+func ITLibMediaItemPropertyPlayStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyPlayStatus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyRating() uintptr {
+func ITLibMediaItemPropertyRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyRating")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyRatingComputed() uintptr {
+func ITLibMediaItemPropertyRatingComputed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyRatingComputed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyReleaseDate() uintptr {
+func ITLibMediaItemPropertyReleaseDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyReleaseDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySampleRate() uintptr {
+func ITLibMediaItemPropertySampleRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySampleRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySize() uintptr {
+func ITLibMediaItemPropertySize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySkipDate() uintptr {
+func ITLibMediaItemPropertySkipDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySkipDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySortAlbumArtist() uintptr {
+func ITLibMediaItemPropertySortAlbumArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySortAlbumArtist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySortAlbumTitle() uintptr {
+func ITLibMediaItemPropertySortAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySortAlbumTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySortArtistName() uintptr {
+func ITLibMediaItemPropertySortArtistName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySortArtistName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySortComposer() uintptr {
+func ITLibMediaItemPropertySortComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySortComposer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertySortTitle() uintptr {
+func ITLibMediaItemPropertySortTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertySortTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyStartTime() uintptr {
+func ITLibMediaItemPropertyStartTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyStartTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyStopTime() uintptr {
+func ITLibMediaItemPropertyStopTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyStopTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyTitle() uintptr {
+func ITLibMediaItemPropertyTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyTotalTime() uintptr {
+func ITLibMediaItemPropertyTotalTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyTotalTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyTrackNumber() uintptr {
+func ITLibMediaItemPropertyTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyTrackNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyUserSkipCount() uintptr {
+func ITLibMediaItemPropertyUserSkipCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyUserSkipCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoEpisode() uintptr {
+func ITLibMediaItemPropertyVideoEpisode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoEpisode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoEpisodeOrder() uintptr {
+func ITLibMediaItemPropertyVideoEpisodeOrder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoEpisodeOrder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoHeight() uintptr {
+func ITLibMediaItemPropertyVideoHeight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoHeight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoIsHD() uintptr {
+func ITLibMediaItemPropertyVideoIsHD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoIsHD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoSeason() uintptr {
+func ITLibMediaItemPropertyVideoSeason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoSeason")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoSeries() uintptr {
+func ITLibMediaItemPropertyVideoSeries() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoSeries")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoSortSeries() uintptr {
+func ITLibMediaItemPropertyVideoSortSeries() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoSortSeries")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVideoWidth() uintptr {
+func ITLibMediaItemPropertyVideoWidth() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVideoWidth")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ITLibMediaItemPropertyVoiceOverLanguage() uintptr {
@@ -342,48 +802,104 @@ func ITLibMediaItemPropertyVoiceOverLanguage() uintptr {
 	return ptr
 }
 
-func ITLibMediaItemPropertyVolumeAdjustment() uintptr {
+func ITLibMediaItemPropertyVolumeAdjustment() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVolumeAdjustment")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyVolumeNormalizationEnergy() uintptr {
+func ITLibMediaItemPropertyVolumeNormalizationEnergy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyVolumeNormalizationEnergy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyWork() uintptr {
+func ITLibMediaItemPropertyWork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyWork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ITLibMediaItemPropertyYear() uintptr {
+func ITLibMediaItemPropertyYear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibMediaItemPropertyYear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyAllItems. See allItemsPlaylist.
-func ITLibPlaylistPropertyAllItemsPlaylist() uintptr {
+func ITLibPlaylistPropertyAllItemsPlaylist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyAllItemsPlaylist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyDistinguisedKind.
-func ITLibPlaylistPropertyDistinguisedKind() uintptr {
+func ITLibPlaylistPropertyDistinguisedKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyDistinguisedKind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyItems.
-func ITLibPlaylistPropertyItems() uintptr {
+func ITLibPlaylistPropertyItems() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyItems")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyFolder.
-func ITLibPlaylistPropertyKind() uintptr {
+func ITLibPlaylistPropertyKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyKind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyMaster.
@@ -394,15 +910,29 @@ func ITLibPlaylistPropertyMaster() uintptr {
 }
 
 // @constant ITLibPlaylistPropertyName. @abstract Retrieves the name or title of the playlist. See @link name @/link.
-func ITLibPlaylistPropertyName() uintptr {
+func ITLibPlaylistPropertyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyParentPersistentID.
-func ITLibPlaylistPropertyParentPersistentID() uintptr {
+func ITLibPlaylistPropertyParentPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyParentPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant ITLibPlaylistPropertyPrimary.
@@ -412,9 +942,16 @@ func ITLibPlaylistPropertyPrimary() uintptr {
 }
 
 // @constant ITLibPlaylistPropertyVisible.
-func ITLibPlaylistPropertyVisible() uintptr {
+func ITLibPlaylistPropertyVisible() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_ituneslibraryLib, "ITLibPlaylistPropertyVisible")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant		ITLibraryDidChangeNotification @abstract		This notification is sent to NSDistributedNotificationCenter when a change has occurred in the library. The client should call [ITLibrary -reloadData] if it wants a new view of the library contents. @note			This is not a fine-grained notification.  This API does not support per-object change notifications.

@@ -104,6 +104,18 @@ func NEFilterNewFlowVerdictPauseVerdict() *NEFilterNewFlowVerdict {
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
+// DefaultRoute returns a convenience method for creating the default IPv4 route.
+func DefaultRoute() *NEIPv4Route {
+	_r := objc.Send[objc.ID](objc.ID(_class("NEIPv4Route")), objc.RegisterName("defaultRoute"))
+	return NEIPv4RouteFromID(_r)
+}
+
+// NEIPv6RouteDefaultRoute returns a convenience method for creating the default IPv4 route.
+func NEIPv6RouteDefaultRoute() *NEIPv6Route {
+	_r := objc.Send[objc.ID](objc.ID(_class("NEIPv6Route")), objc.RegisterName("defaultRoute"))
+	return NEIPv6RouteFromID(_r)
+}
+
 // StartSystemExtensionMode starts the Network Extension machinery from inside a System Extension.
 func StartSystemExtensionMode() {
 	objc.Send[objc.ID](objc.ID(_class("NEProvider")), objc.RegisterName("startSystemExtensionMode"))

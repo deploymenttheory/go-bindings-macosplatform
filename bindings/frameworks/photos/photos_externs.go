@@ -7,34 +7,70 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func PHContentEditingInputCancelledKey() uintptr {
+func PHContentEditingInputCancelledKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHContentEditingInputCancelledKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHContentEditingInputErrorKey() uintptr {
+func PHContentEditingInputErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHContentEditingInputErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHContentEditingInputResultIsInCloudKey() uintptr {
+func PHContentEditingInputResultIsInCloudKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHContentEditingInputResultIsInCloudKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHImageCancelledKey() uintptr {
+func PHImageCancelledKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageCancelledKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHImageErrorKey() uintptr {
+func PHImageErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PHImageManagerMaximumSize() corefoundation.CGSize {
@@ -45,19 +81,40 @@ func PHImageManagerMaximumSize() corefoundation.CGSize {
 	return *(*corefoundation.CGSize)(unsafe.Pointer(ptr))
 }
 
-func PHImageResultIsDegradedKey() uintptr {
+func PHImageResultIsDegradedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageResultIsDegradedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHImageResultIsInCloudKey() uintptr {
+func PHImageResultIsInCloudKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageResultIsInCloudKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHImageResultRequestIDKey() uintptr {
+func PHImageResultRequestIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHImageResultRequestIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The error domain for all Live Photo Editing errors (Deprecated).
@@ -67,26 +124,54 @@ func PHLivePhotoEditingErrorDomain() uintptr {
 	return ptr
 }
 
-func PHLivePhotoInfoCancelledKey() uintptr {
+func PHLivePhotoInfoCancelledKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLivePhotoInfoCancelledKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // These keys may be found in the info dictionary delivered to a live photo request result handler block.
-func PHLivePhotoInfoErrorKey() uintptr {
+func PHLivePhotoInfoErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLivePhotoInfoErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PHLivePhotoInfoIsDegradedKey() uintptr {
+func PHLivePhotoInfoIsDegradedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLivePhotoInfoIsDegradedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indicates whether processing should happen at playback time If set to NO (the default) the live photo will always be rendered before playback If set to YES, the editing context might still choose to render first for performance reasons This option is ignored by the saveLivePhotoToOutput method
-func PHLivePhotoShouldRenderAtPlaybackTime() uintptr {
+func PHLivePhotoShouldRenderAtPlaybackTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_photosLib, "PHLivePhotoShouldRenderAtPlaybackTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // DEPRECATED: If the local object cannot be resolved from a global identifier, PHLocalIdentifierNotFound is provided in that array slot.
@@ -102,7 +187,11 @@ func PHLocalIdentifiersErrorKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PHPhotosErrorDomain() *foundation.NSString {
@@ -110,5 +199,9 @@ func PHPhotosErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

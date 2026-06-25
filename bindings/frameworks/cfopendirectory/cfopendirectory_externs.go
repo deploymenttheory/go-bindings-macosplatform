@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func KODAttributeTypeAccessControlEntry() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAddressLine1() *foundation.NSString {
@@ -24,7 +29,11 @@ func KODAttributeTypeAddressLine1() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAddressLine2() *foundation.NSString {
@@ -32,7 +41,11 @@ func KODAttributeTypeAddressLine2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAddressLine3() *foundation.NSString {
@@ -40,7 +53,11 @@ func KODAttributeTypeAddressLine3() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAdminLimits() *foundation.NSString {
@@ -48,7 +65,11 @@ func KODAttributeTypeAdminLimits() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAdvertisedServices() *foundation.NSString {
@@ -56,7 +77,11 @@ func KODAttributeTypeAdvertisedServices() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAlias() *foundation.NSString {
@@ -64,7 +89,11 @@ func KODAttributeTypeAlias() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAllAttributes() *foundation.NSString {
@@ -72,7 +101,11 @@ func KODAttributeTypeAllAttributes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAllTypes() *foundation.NSString {
@@ -80,7 +113,11 @@ func KODAttributeTypeAllTypes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAltSecurityIdentities() *foundation.NSString {
@@ -88,7 +125,11 @@ func KODAttributeTypeAltSecurityIdentities() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAreaCode() *foundation.NSString {
@@ -96,7 +137,11 @@ func KODAttributeTypeAreaCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAttrListRefCount() *foundation.NSString {
@@ -104,7 +149,11 @@ func KODAttributeTypeAttrListRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAttrListRefs() *foundation.NSString {
@@ -112,7 +161,11 @@ func KODAttributeTypeAttrListRefs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAttrListValueRefCount() *foundation.NSString {
@@ -120,7 +173,11 @@ func KODAttributeTypeAttrListValueRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAttrListValueRefs() *foundation.NSString {
@@ -128,7 +185,11 @@ func KODAttributeTypeAttrListValueRefs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAuthCredential() *foundation.NSString {
@@ -136,7 +197,11 @@ func KODAttributeTypeAuthCredential() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAuthMethod() *foundation.NSString {
@@ -144,7 +209,11 @@ func KODAttributeTypeAuthMethod() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAuthenticationAuthority() *foundation.NSString {
@@ -152,7 +221,11 @@ func KODAttributeTypeAuthenticationAuthority() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAuthenticationHint() *foundation.NSString {
@@ -160,7 +233,11 @@ func KODAttributeTypeAuthenticationHint() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAuthorityRevocationList() *foundation.NSString {
@@ -168,7 +245,11 @@ func KODAttributeTypeAuthorityRevocationList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAutomaticSearchPath() *foundation.NSString {
@@ -176,7 +257,11 @@ func KODAttributeTypeAutomaticSearchPath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeAutomountInformation() *foundation.NSString {
@@ -184,7 +269,11 @@ func KODAttributeTypeAutomountInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeBirthday() *foundation.NSString {
@@ -192,7 +281,11 @@ func KODAttributeTypeBirthday() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeBootParams() *foundation.NSString {
@@ -200,7 +293,11 @@ func KODAttributeTypeBootParams() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeBuildVersion() *foundation.NSString {
@@ -208,7 +305,11 @@ func KODAttributeTypeBuildVersion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeBuilding() *foundation.NSString {
@@ -216,7 +317,11 @@ func KODAttributeTypeBuilding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCACertificate() *foundation.NSString {
@@ -224,7 +329,11 @@ func KODAttributeTypeCACertificate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCapacity() *foundation.NSString {
@@ -232,7 +341,11 @@ func KODAttributeTypeCapacity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCertificateRevocationList() *foundation.NSString {
@@ -240,7 +353,11 @@ func KODAttributeTypeCertificateRevocationList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCity() *foundation.NSString {
@@ -248,7 +365,11 @@ func KODAttributeTypeCity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeComment() *foundation.NSString {
@@ -256,7 +377,11 @@ func KODAttributeTypeComment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCompany() *foundation.NSString {
@@ -264,7 +389,11 @@ func KODAttributeTypeCompany() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeComputers() *foundation.NSString {
@@ -272,7 +401,11 @@ func KODAttributeTypeComputers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeConfigAvailable() *foundation.NSString {
@@ -280,7 +413,11 @@ func KODAttributeTypeConfigAvailable() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeConfigFile() *foundation.NSString {
@@ -288,7 +425,11 @@ func KODAttributeTypeConfigFile() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeContactGUID() *foundation.NSString {
@@ -296,7 +437,11 @@ func KODAttributeTypeContactGUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeContactPerson() *foundation.NSString {
@@ -304,7 +449,11 @@ func KODAttributeTypeContactPerson() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCopyTimestamp() *foundation.NSString {
@@ -312,7 +461,11 @@ func KODAttributeTypeCopyTimestamp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCoreFWVersion() *foundation.NSString {
@@ -320,7 +473,11 @@ func KODAttributeTypeCoreFWVersion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCountry() *foundation.NSString {
@@ -328,7 +485,11 @@ func KODAttributeTypeCountry() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCreationTimestamp() *foundation.NSString {
@@ -336,7 +497,11 @@ func KODAttributeTypeCreationTimestamp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCrossCertificatePair() *foundation.NSString {
@@ -344,7 +509,11 @@ func KODAttributeTypeCrossCertificatePair() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeCustomSearchPath() *foundation.NSString {
@@ -352,7 +521,11 @@ func KODAttributeTypeCustomSearchPath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDNSDomain() *foundation.NSString {
@@ -360,7 +533,11 @@ func KODAttributeTypeDNSDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDNSName() *foundation.NSString {
@@ -368,7 +545,11 @@ func KODAttributeTypeDNSName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDNSNameServer() *foundation.NSString {
@@ -376,7 +557,11 @@ func KODAttributeTypeDNSNameServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDataStamp() *foundation.NSString {
@@ -384,7 +569,11 @@ func KODAttributeTypeDataStamp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDateRecordCreated() *foundation.NSString {
@@ -392,7 +581,11 @@ func KODAttributeTypeDateRecordCreated() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDepartment() *foundation.NSString {
@@ -400,7 +593,11 @@ func KODAttributeTypeDepartment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDirRefCount() *foundation.NSString {
@@ -408,7 +605,11 @@ func KODAttributeTypeDirRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeDirRefs() *foundation.NSString {
@@ -416,7 +617,11 @@ func KODAttributeTypeDirRefs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeEMailAddress() *foundation.NSString {
@@ -424,7 +629,11 @@ func KODAttributeTypeEMailAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeEMailContacts() *foundation.NSString {
@@ -432,7 +641,11 @@ func KODAttributeTypeEMailContacts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeENetAddress() *foundation.NSString {
@@ -440,7 +653,11 @@ func KODAttributeTypeENetAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeExpire() *foundation.NSString {
@@ -448,7 +665,11 @@ func KODAttributeTypeExpire() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeFWVersion() *foundation.NSString {
@@ -456,7 +677,11 @@ func KODAttributeTypeFWVersion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeFaxNumber() *foundation.NSString {
@@ -464,7 +689,11 @@ func KODAttributeTypeFaxNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeFirstName() *foundation.NSString {
@@ -472,7 +701,11 @@ func KODAttributeTypeFirstName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeFullName() *foundation.NSString {
@@ -480,7 +713,11 @@ func KODAttributeTypeFullName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeFunctionalState() *foundation.NSString {
@@ -488,7 +725,11 @@ func KODAttributeTypeFunctionalState() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeGUID() *foundation.NSString {
@@ -496,7 +737,11 @@ func KODAttributeTypeGUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeGroup() *foundation.NSString {
@@ -504,7 +749,11 @@ func KODAttributeTypeGroup() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeGroupMembers() *foundation.NSString {
@@ -512,7 +761,11 @@ func KODAttributeTypeGroupMembers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeGroupMembership() *foundation.NSString {
@@ -520,7 +773,11 @@ func KODAttributeTypeGroupMembership() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeGroupServices() *foundation.NSString {
@@ -528,7 +785,11 @@ func KODAttributeTypeGroupServices() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHTML() *foundation.NSString {
@@ -536,7 +797,11 @@ func KODAttributeTypeHTML() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHardwareUUID() *foundation.NSString {
@@ -544,7 +809,11 @@ func KODAttributeTypeHardwareUUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHomeDirectory() *foundation.NSString {
@@ -552,7 +821,11 @@ func KODAttributeTypeHomeDirectory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHomeDirectoryQuota() *foundation.NSString {
@@ -560,7 +833,11 @@ func KODAttributeTypeHomeDirectoryQuota() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHomeDirectorySoftQuota() *foundation.NSString {
@@ -568,7 +845,11 @@ func KODAttributeTypeHomeDirectorySoftQuota() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHomeLocOwner() *foundation.NSString {
@@ -576,7 +857,11 @@ func KODAttributeTypeHomeLocOwner() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeHomePhoneNumber() *foundation.NSString {
@@ -584,7 +869,11 @@ func KODAttributeTypeHomePhoneNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeIMHandle() *foundation.NSString {
@@ -592,7 +881,11 @@ func KODAttributeTypeIMHandle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeIPAddress() *foundation.NSString {
@@ -600,7 +893,11 @@ func KODAttributeTypeIPAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeIPAddressAndENetAddress() *foundation.NSString {
@@ -608,7 +905,11 @@ func KODAttributeTypeIPAddressAndENetAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeIPv6Address() *foundation.NSString {
@@ -616,7 +917,11 @@ func KODAttributeTypeIPv6Address() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeInternetAlias() *foundation.NSString {
@@ -624,7 +929,11 @@ func KODAttributeTypeInternetAlias() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeJPEGPhoto() *foundation.NSString {
@@ -632,7 +941,11 @@ func KODAttributeTypeJPEGPhoto() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeJobTitle() *foundation.NSString {
@@ -640,7 +953,11 @@ func KODAttributeTypeJobTitle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeKDCAuthKey() *foundation.NSString {
@@ -648,7 +965,11 @@ func KODAttributeTypeKDCAuthKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeKDCConfigData() *foundation.NSString {
@@ -656,7 +977,11 @@ func KODAttributeTypeKDCConfigData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeKerberosRealm() *foundation.NSString {
@@ -664,7 +989,11 @@ func KODAttributeTypeKerberosRealm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeKerberosServices() *foundation.NSString {
@@ -672,7 +1001,11 @@ func KODAttributeTypeKerberosServices() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeKeywords() *foundation.NSString {
@@ -680,7 +1013,11 @@ func KODAttributeTypeKeywords() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLDAPReadReplicas() *foundation.NSString {
@@ -688,7 +1025,11 @@ func KODAttributeTypeLDAPReadReplicas() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLDAPSearchBaseSuffix() *foundation.NSString {
@@ -696,7 +1037,11 @@ func KODAttributeTypeLDAPSearchBaseSuffix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLDAPWriteReplicas() *foundation.NSString {
@@ -704,7 +1049,11 @@ func KODAttributeTypeLDAPWriteReplicas() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLastName() *foundation.NSString {
@@ -712,7 +1061,11 @@ func KODAttributeTypeLastName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLocalOnlySearchPath() *foundation.NSString {
@@ -720,7 +1073,11 @@ func KODAttributeTypeLocalOnlySearchPath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLocaleRelay() *foundation.NSString {
@@ -728,7 +1085,11 @@ func KODAttributeTypeLocaleRelay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLocaleSubnets() *foundation.NSString {
@@ -736,7 +1097,11 @@ func KODAttributeTypeLocaleSubnets() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeLocation() *foundation.NSString {
@@ -744,7 +1109,11 @@ func KODAttributeTypeLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMCXFlags() *foundation.NSString {
@@ -752,7 +1121,11 @@ func KODAttributeTypeMCXFlags() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMCXSettings() *foundation.NSString {
@@ -760,7 +1133,11 @@ func KODAttributeTypeMCXSettings() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMIME() *foundation.NSString {
@@ -768,7 +1145,11 @@ func KODAttributeTypeMIME() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMailAttribute() *foundation.NSString {
@@ -776,7 +1157,11 @@ func KODAttributeTypeMailAttribute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMapCoordinates() *foundation.NSString {
@@ -784,7 +1169,11 @@ func KODAttributeTypeMapCoordinates() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMapGUID() *foundation.NSString {
@@ -792,7 +1181,11 @@ func KODAttributeTypeMapGUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMapURI() *foundation.NSString {
@@ -800,7 +1193,11 @@ func KODAttributeTypeMapURI() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMetaAmbiguousName() *foundation.NSString {
@@ -808,7 +1205,11 @@ func KODAttributeTypeMetaAmbiguousName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMetaAugmentedAttributes() *foundation.NSString {
@@ -816,7 +1217,11 @@ func KODAttributeTypeMetaAugmentedAttributes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMetaAutomountMap() *foundation.NSString {
@@ -824,7 +1229,11 @@ func KODAttributeTypeMetaAutomountMap() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMetaNodeLocation() *foundation.NSString {
@@ -832,7 +1241,11 @@ func KODAttributeTypeMetaNodeLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMetaRecordName() *foundation.NSString {
@@ -840,7 +1253,11 @@ func KODAttributeTypeMetaRecordName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMiddleName() *foundation.NSString {
@@ -848,7 +1265,11 @@ func KODAttributeTypeMiddleName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeMobileNumber() *foundation.NSString {
@@ -856,7 +1277,11 @@ func KODAttributeTypeMobileNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeModificationTimestamp() *foundation.NSString {
@@ -864,7 +1289,11 @@ func KODAttributeTypeModificationTimestamp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNFSHomeDirectory() *foundation.NSString {
@@ -872,7 +1301,11 @@ func KODAttributeTypeNFSHomeDirectory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNTDomainComputerAccount() *foundation.NSString {
@@ -880,7 +1313,11 @@ func KODAttributeTypeNTDomainComputerAccount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNamePrefix() *foundation.NSString {
@@ -888,7 +1325,11 @@ func KODAttributeTypeNamePrefix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNameSuffix() *foundation.NSString {
@@ -896,7 +1337,11 @@ func KODAttributeTypeNameSuffix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNativeOnly() *foundation.NSString {
@@ -904,7 +1349,11 @@ func KODAttributeTypeNativeOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNestedGroups() *foundation.NSString {
@@ -912,7 +1361,11 @@ func KODAttributeTypeNestedGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNetGroupTriplet() *foundation.NSString {
@@ -920,7 +1373,11 @@ func KODAttributeTypeNetGroupTriplet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNetGroups() *foundation.NSString {
@@ -928,7 +1385,11 @@ func KODAttributeTypeNetGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNetworkInterfaces() *foundation.NSString {
@@ -936,7 +1397,11 @@ func KODAttributeTypeNetworkInterfaces() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNetworkNumber() *foundation.NSString {
@@ -944,7 +1409,11 @@ func KODAttributeTypeNetworkNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNickName() *foundation.NSString {
@@ -952,7 +1421,11 @@ func KODAttributeTypeNickName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNodeOptions() *foundation.NSString {
@@ -960,7 +1433,11 @@ func KODAttributeTypeNodeOptions() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNodePath() *foundation.NSString {
@@ -968,7 +1445,11 @@ func KODAttributeTypeNodePath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNodeRefCount() *foundation.NSString {
@@ -976,7 +1457,11 @@ func KODAttributeTypeNodeRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNodeRefs() *foundation.NSString {
@@ -984,7 +1469,11 @@ func KODAttributeTypeNodeRefs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNodeSASLRealm() *foundation.NSString {
@@ -992,7 +1481,11 @@ func KODAttributeTypeNodeSASLRealm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNote() *foundation.NSString {
@@ -1000,7 +1493,11 @@ func KODAttributeTypeNote() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeNumTableList() *foundation.NSString {
@@ -1008,7 +1505,11 @@ func KODAttributeTypeNumTableList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOperatingSystem() *foundation.NSString {
@@ -1016,7 +1517,11 @@ func KODAttributeTypeOperatingSystem() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOperatingSystemVersion() *foundation.NSString {
@@ -1024,7 +1529,11 @@ func KODAttributeTypeOperatingSystemVersion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOrganizationInfo() *foundation.NSString {
@@ -1032,7 +1541,11 @@ func KODAttributeTypeOrganizationInfo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOrganizationName() *foundation.NSString {
@@ -1040,7 +1553,11 @@ func KODAttributeTypeOrganizationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOriginalHomeDirectory() *foundation.NSString {
@@ -1048,7 +1565,11 @@ func KODAttributeTypeOriginalHomeDirectory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOriginalNFSHomeDirectory() *foundation.NSString {
@@ -1056,7 +1577,11 @@ func KODAttributeTypeOriginalNFSHomeDirectory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOriginalNodeName() *foundation.NSString {
@@ -1064,7 +1589,11 @@ func KODAttributeTypeOriginalNodeName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOwner() *foundation.NSString {
@@ -1072,7 +1601,11 @@ func KODAttributeTypeOwner() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeOwnerGUID() *foundation.NSString {
@@ -1080,7 +1613,11 @@ func KODAttributeTypeOwnerGUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePGPPublicKey() *foundation.NSString {
@@ -1088,7 +1625,11 @@ func KODAttributeTypePGPPublicKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePIDValue() *foundation.NSString {
@@ -1096,7 +1637,11 @@ func KODAttributeTypePIDValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePagerNumber() *foundation.NSString {
@@ -1104,7 +1649,11 @@ func KODAttributeTypePagerNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeParentLocales() *foundation.NSString {
@@ -1112,7 +1661,11 @@ func KODAttributeTypeParentLocales() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePassword() *foundation.NSString {
@@ -1120,7 +1673,11 @@ func KODAttributeTypePassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePasswordPlus() *foundation.NSString {
@@ -1128,7 +1685,11 @@ func KODAttributeTypePasswordPlus() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePasswordPolicyOptions() *foundation.NSString {
@@ -1136,7 +1697,11 @@ func KODAttributeTypePasswordPolicyOptions() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePasswordServerList() *foundation.NSString {
@@ -1144,7 +1709,11 @@ func KODAttributeTypePasswordServerList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePasswordServerLocation() *foundation.NSString {
@@ -1152,7 +1721,11 @@ func KODAttributeTypePasswordServerLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePhoneContacts() *foundation.NSString {
@@ -1160,7 +1733,11 @@ func KODAttributeTypePhoneContacts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePhoneNumber() *foundation.NSString {
@@ -1168,7 +1745,11 @@ func KODAttributeTypePhoneNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePicture() *foundation.NSString {
@@ -1176,7 +1757,11 @@ func KODAttributeTypePicture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePlugInInfo() *foundation.NSString {
@@ -1184,7 +1769,11 @@ func KODAttributeTypePlugInInfo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePluginIndex() *foundation.NSString {
@@ -1192,7 +1781,11 @@ func KODAttributeTypePluginIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePort() *foundation.NSString {
@@ -1200,7 +1793,11 @@ func KODAttributeTypePort() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePostalAddress() *foundation.NSString {
@@ -1208,7 +1805,11 @@ func KODAttributeTypePostalAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePostalAddressContacts() *foundation.NSString {
@@ -1216,7 +1817,11 @@ func KODAttributeTypePostalAddressContacts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePostalCode() *foundation.NSString {
@@ -1224,7 +1829,11 @@ func KODAttributeTypePostalCode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePresetUserIsAdmin() *foundation.NSString {
@@ -1232,7 +1841,11 @@ func KODAttributeTypePresetUserIsAdmin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrimaryComputerGUID() *foundation.NSString {
@@ -1240,7 +1853,11 @@ func KODAttributeTypePrimaryComputerGUID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrimaryComputerList() *foundation.NSString {
@@ -1248,7 +1865,11 @@ func KODAttributeTypePrimaryComputerList() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrimaryGroupID() *foundation.NSString {
@@ -1256,7 +1877,11 @@ func KODAttributeTypePrimaryGroupID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrimaryLocale() *foundation.NSString {
@@ -1264,7 +1889,11 @@ func KODAttributeTypePrimaryLocale() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrimaryNTDomain() *foundation.NSString {
@@ -1272,7 +1901,11 @@ func KODAttributeTypePrimaryNTDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrintServiceInfoText() *foundation.NSString {
@@ -1280,7 +1913,11 @@ func KODAttributeTypePrintServiceInfoText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrintServiceInfoXML() *foundation.NSString {
@@ -1288,7 +1925,11 @@ func KODAttributeTypePrintServiceInfoXML() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrintServiceUserData() *foundation.NSString {
@@ -1296,7 +1937,11 @@ func KODAttributeTypePrintServiceUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinter1284DeviceID() *foundation.NSString {
@@ -1304,7 +1949,11 @@ func KODAttributeTypePrinter1284DeviceID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterLPRHost() *foundation.NSString {
@@ -1312,7 +1961,11 @@ func KODAttributeTypePrinterLPRHost() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterLPRQueue() *foundation.NSString {
@@ -1320,7 +1973,11 @@ func KODAttributeTypePrinterLPRQueue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterMakeAndModel() *foundation.NSString {
@@ -1328,7 +1985,11 @@ func KODAttributeTypePrinterMakeAndModel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterType() *foundation.NSString {
@@ -1336,7 +1997,11 @@ func KODAttributeTypePrinterType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterURI() *foundation.NSString {
@@ -1344,7 +2009,11 @@ func KODAttributeTypePrinterURI() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePrinterXRISupported() *foundation.NSString {
@@ -1352,7 +2021,11 @@ func KODAttributeTypePrinterXRISupported() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeProcessName() *foundation.NSString {
@@ -1360,7 +2033,11 @@ func KODAttributeTypeProcessName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeProfiles() *foundation.NSString {
@@ -1368,7 +2045,11 @@ func KODAttributeTypeProfiles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeProfilesTimestamp() *foundation.NSString {
@@ -1376,7 +2057,11 @@ func KODAttributeTypeProfilesTimestamp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeProtocolNumber() *foundation.NSString {
@@ -1384,7 +2069,11 @@ func KODAttributeTypeProtocolNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeProtocols() *foundation.NSString {
@@ -1392,7 +2081,11 @@ func KODAttributeTypeProtocols() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypePwdAgingPolicy() *foundation.NSString {
@@ -1400,7 +2093,11 @@ func KODAttributeTypePwdAgingPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRPCNumber() *foundation.NSString {
@@ -1408,7 +2105,11 @@ func KODAttributeTypeRPCNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeReadOnlyNode() *foundation.NSString {
@@ -1416,7 +2117,11 @@ func KODAttributeTypeReadOnlyNode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRealUserID() *foundation.NSString {
@@ -1424,7 +2129,11 @@ func KODAttributeTypeRealUserID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRecRefCount() *foundation.NSString {
@@ -1432,7 +2141,11 @@ func KODAttributeTypeRecRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRecRefs() *foundation.NSString {
@@ -1440,7 +2153,11 @@ func KODAttributeTypeRecRefs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRecordName() *foundation.NSString {
@@ -1448,7 +2165,11 @@ func KODAttributeTypeRecordName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRecordType() *foundation.NSString {
@@ -1456,7 +2177,11 @@ func KODAttributeTypeRecordType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRelationships() *foundation.NSString {
@@ -1464,7 +2189,11 @@ func KODAttributeTypeRelationships() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeRelativeDNPrefix() *foundation.NSString {
@@ -1472,7 +2201,11 @@ func KODAttributeTypeRelativeDNPrefix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeResourceInfo() *foundation.NSString {
@@ -1480,7 +2213,11 @@ func KODAttributeTypeResourceInfo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeResourceType() *foundation.NSString {
@@ -1488,7 +2225,11 @@ func KODAttributeTypeResourceType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBAcctFlags() *foundation.NSString {
@@ -1496,7 +2237,11 @@ func KODAttributeTypeSMBAcctFlags() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBGroupRID() *foundation.NSString {
@@ -1504,7 +2249,11 @@ func KODAttributeTypeSMBGroupRID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBHome() *foundation.NSString {
@@ -1512,7 +2261,11 @@ func KODAttributeTypeSMBHome() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBHomeDrive() *foundation.NSString {
@@ -1520,7 +2273,11 @@ func KODAttributeTypeSMBHomeDrive() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBKickoffTime() *foundation.NSString {
@@ -1528,7 +2285,11 @@ func KODAttributeTypeSMBKickoffTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBLogoffTime() *foundation.NSString {
@@ -1536,7 +2297,11 @@ func KODAttributeTypeSMBLogoffTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBLogonTime() *foundation.NSString {
@@ -1544,7 +2309,11 @@ func KODAttributeTypeSMBLogonTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBPWDLastSet() *foundation.NSString {
@@ -1552,7 +2321,11 @@ func KODAttributeTypeSMBPWDLastSet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBPrimaryGroupSID() *foundation.NSString {
@@ -1560,7 +2333,11 @@ func KODAttributeTypeSMBPrimaryGroupSID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBProfilePath() *foundation.NSString {
@@ -1568,7 +2345,11 @@ func KODAttributeTypeSMBProfilePath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBRID() *foundation.NSString {
@@ -1576,7 +2357,11 @@ func KODAttributeTypeSMBRID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBSID() *foundation.NSString {
@@ -1584,7 +2369,11 @@ func KODAttributeTypeSMBSID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBScriptPath() *foundation.NSString {
@@ -1592,7 +2381,11 @@ func KODAttributeTypeSMBScriptPath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSMBUserWorkstations() *foundation.NSString {
@@ -1600,7 +2393,11 @@ func KODAttributeTypeSMBUserWorkstations() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSchema() *foundation.NSString {
@@ -1608,7 +2405,11 @@ func KODAttributeTypeSchema() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSearchPath() *foundation.NSString {
@@ -1616,7 +2417,11 @@ func KODAttributeTypeSearchPath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSearchPolicy() *foundation.NSString {
@@ -1624,7 +2429,11 @@ func KODAttributeTypeSearchPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeServiceType() *foundation.NSString {
@@ -1632,7 +2441,11 @@ func KODAttributeTypeServiceType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeServicesLocator() *foundation.NSString {
@@ -1640,7 +2453,11 @@ func KODAttributeTypeServicesLocator() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSetupAdvertising() *foundation.NSString {
@@ -1648,7 +2465,11 @@ func KODAttributeTypeSetupAdvertising() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSetupAutoRegister() *foundation.NSString {
@@ -1656,7 +2477,11 @@ func KODAttributeTypeSetupAutoRegister() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSetupLocation() *foundation.NSString {
@@ -1664,7 +2489,11 @@ func KODAttributeTypeSetupLocation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSetupOccupation() *foundation.NSString {
@@ -1672,7 +2501,11 @@ func KODAttributeTypeSetupOccupation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeStandardOnly() *foundation.NSString {
@@ -1680,7 +2513,11 @@ func KODAttributeTypeStandardOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeState() *foundation.NSString {
@@ -1688,7 +2525,11 @@ func KODAttributeTypeState() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeStreet() *foundation.NSString {
@@ -1696,7 +2537,11 @@ func KODAttributeTypeStreet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeSubNodes() *foundation.NSString {
@@ -1704,7 +2549,11 @@ func KODAttributeTypeSubNodes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeTimePackage() *foundation.NSString {
@@ -1712,7 +2561,11 @@ func KODAttributeTypeTimePackage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeTimeToLive() *foundation.NSString {
@@ -1720,7 +2573,11 @@ func KODAttributeTypeTimeToLive() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeTotalRefCount() *foundation.NSString {
@@ -1728,7 +2585,11 @@ func KODAttributeTypeTotalRefCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeTotalSize() *foundation.NSString {
@@ -1736,7 +2597,11 @@ func KODAttributeTypeTotalSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeTrustInformation() *foundation.NSString {
@@ -1744,7 +2609,11 @@ func KODAttributeTypeTrustInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeURL() *foundation.NSString {
@@ -1752,7 +2621,11 @@ func KODAttributeTypeURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeUniqueID() *foundation.NSString {
@@ -1760,7 +2633,11 @@ func KODAttributeTypeUniqueID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeUserCertificate() *foundation.NSString {
@@ -1768,7 +2645,11 @@ func KODAttributeTypeUserCertificate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeUserPKCS12Data() *foundation.NSString {
@@ -1776,7 +2657,11 @@ func KODAttributeTypeUserPKCS12Data() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeUserSMIMECertificate() *foundation.NSString {
@@ -1784,7 +2669,11 @@ func KODAttributeTypeUserSMIMECertificate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeUserShell() *foundation.NSString {
@@ -1792,7 +2681,11 @@ func KODAttributeTypeUserShell() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVFSDumpFreq() *foundation.NSString {
@@ -1800,7 +2693,11 @@ func KODAttributeTypeVFSDumpFreq() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVFSLinkDir() *foundation.NSString {
@@ -1808,7 +2705,11 @@ func KODAttributeTypeVFSLinkDir() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVFSOpts() *foundation.NSString {
@@ -1816,7 +2717,11 @@ func KODAttributeTypeVFSOpts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVFSPassNo() *foundation.NSString {
@@ -1824,7 +2729,11 @@ func KODAttributeTypeVFSPassNo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVFSType() *foundation.NSString {
@@ -1832,7 +2741,11 @@ func KODAttributeTypeVFSType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeVersion() *foundation.NSString {
@@ -1840,7 +2753,11 @@ func KODAttributeTypeVersion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeWeblogURI() *foundation.NSString {
@@ -1848,7 +2765,11 @@ func KODAttributeTypeWeblogURI() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAttributeTypeXMLPlist() *foundation.NSString {
@@ -1856,7 +2777,11 @@ func KODAttributeTypeXMLPlist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationType2WayRandom() *foundation.NSString {
@@ -1864,7 +2789,11 @@ func KODAuthenticationType2WayRandom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationType2WayRandomChangePasswd() *foundation.NSString {
@@ -1872,7 +2801,11 @@ func KODAuthenticationType2WayRandomChangePasswd() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeAPOP() *foundation.NSString {
@@ -1880,7 +2813,11 @@ func KODAuthenticationTypeAPOP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeCRAM_MD5() *foundation.NSString {
@@ -1888,7 +2825,11 @@ func KODAuthenticationTypeCRAM_MD5() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeChangePasswd() *foundation.NSString {
@@ -1896,7 +2837,11 @@ func KODAuthenticationTypeChangePasswd() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeClearText() *foundation.NSString {
@@ -1904,7 +2849,11 @@ func KODAuthenticationTypeClearText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeClearTextReadOnly() *foundation.NSString {
@@ -1912,7 +2861,11 @@ func KODAuthenticationTypeClearTextReadOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeCrypt() *foundation.NSString {
@@ -1920,7 +2873,11 @@ func KODAuthenticationTypeCrypt() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeDIGEST_MD5() *foundation.NSString {
@@ -1928,7 +2885,11 @@ func KODAuthenticationTypeDIGEST_MD5() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeDeleteUser() *foundation.NSString {
@@ -1936,7 +2897,11 @@ func KODAuthenticationTypeDeleteUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetEffectivePolicy() *foundation.NSString {
@@ -1944,7 +2909,11 @@ func KODAuthenticationTypeGetEffectivePolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetGlobalPolicy() *foundation.NSString {
@@ -1952,7 +2921,11 @@ func KODAuthenticationTypeGetGlobalPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetKerberosPrincipal() *foundation.NSString {
@@ -1960,7 +2933,11 @@ func KODAuthenticationTypeGetKerberosPrincipal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetPolicy() *foundation.NSString {
@@ -1968,7 +2945,11 @@ func KODAuthenticationTypeGetPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetUserData() *foundation.NSString {
@@ -1976,7 +2957,11 @@ func KODAuthenticationTypeGetUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeGetUserName() *foundation.NSString {
@@ -1984,7 +2969,11 @@ func KODAuthenticationTypeGetUserName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeKerberosTickets() *foundation.NSString {
@@ -1992,7 +2981,11 @@ func KODAuthenticationTypeKerberosTickets() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 12.0.
@@ -2001,7 +2994,11 @@ func KODAuthenticationTypeMPPEMasterKeys() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeMPPEPrimaryKeys() *foundation.NSString {
@@ -2009,7 +3006,11 @@ func KODAuthenticationTypeMPPEPrimaryKeys() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeMSCHAP2() *foundation.NSString {
@@ -2017,7 +3018,11 @@ func KODAuthenticationTypeMSCHAP2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNTLMv2() *foundation.NSString {
@@ -2025,7 +3030,11 @@ func KODAuthenticationTypeNTLMv2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNTLMv2WithSessionKey() *foundation.NSString {
@@ -2033,7 +3042,11 @@ func KODAuthenticationTypeNTLMv2WithSessionKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNewUser() *foundation.NSString {
@@ -2041,7 +3054,11 @@ func KODAuthenticationTypeNewUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNewUserWithPolicy() *foundation.NSString {
@@ -2049,7 +3066,11 @@ func KODAuthenticationTypeNewUserWithPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNodeNativeClearTextOK() *foundation.NSString {
@@ -2057,7 +3078,11 @@ func KODAuthenticationTypeNodeNativeClearTextOK() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeNodeNativeNoClearText() *foundation.NSString {
@@ -2065,7 +3090,11 @@ func KODAuthenticationTypeNodeNativeNoClearText() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeReadSecureHash() *foundation.NSString {
@@ -2073,7 +3102,11 @@ func KODAuthenticationTypeReadSecureHash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMBNTv2UserSessionKey() *foundation.NSString {
@@ -2081,7 +3114,11 @@ func KODAuthenticationTypeSMBNTv2UserSessionKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMBWorkstationCredentialSessionKey() *foundation.NSString {
@@ -2089,7 +3126,11 @@ func KODAuthenticationTypeSMBWorkstationCredentialSessionKey() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMB_LM_Key() *foundation.NSString {
@@ -2097,7 +3138,11 @@ func KODAuthenticationTypeSMB_LM_Key() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMB_NT_Key() *foundation.NSString {
@@ -2105,7 +3150,11 @@ func KODAuthenticationTypeSMB_NT_Key() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMB_NT_UserSessionKey() *foundation.NSString {
@@ -2113,7 +3162,11 @@ func KODAuthenticationTypeSMB_NT_UserSessionKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSMB_NT_WithUserSessionKey() *foundation.NSString {
@@ -2121,7 +3174,11 @@ func KODAuthenticationTypeSMB_NT_WithUserSessionKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSecureHash() *foundation.NSString {
@@ -2129,7 +3186,11 @@ func KODAuthenticationTypeSecureHash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetCertificateHashAsCurrent() *foundation.NSString {
@@ -2137,7 +3198,11 @@ func KODAuthenticationTypeSetCertificateHashAsCurrent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetGlobalPolicy() *foundation.NSString {
@@ -2145,7 +3210,11 @@ func KODAuthenticationTypeSetGlobalPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetLMHash() *foundation.NSString {
@@ -2153,7 +3222,11 @@ func KODAuthenticationTypeSetLMHash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetNTHash() *foundation.NSString {
@@ -2161,7 +3234,11 @@ func KODAuthenticationTypeSetNTHash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetPassword() *foundation.NSString {
@@ -2169,7 +3246,11 @@ func KODAuthenticationTypeSetPassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetPasswordAsCurrent() *foundation.NSString {
@@ -2177,7 +3258,11 @@ func KODAuthenticationTypeSetPasswordAsCurrent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetPolicy() *foundation.NSString {
@@ -2185,7 +3270,11 @@ func KODAuthenticationTypeSetPolicy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetPolicyAsCurrent() *foundation.NSString {
@@ -2193,7 +3282,11 @@ func KODAuthenticationTypeSetPolicyAsCurrent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetUserData() *foundation.NSString {
@@ -2201,7 +3294,11 @@ func KODAuthenticationTypeSetUserData() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetUserName() *foundation.NSString {
@@ -2209,7 +3306,11 @@ func KODAuthenticationTypeSetUserName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeSetWorkstationPassword() *foundation.NSString {
@@ -2217,7 +3318,11 @@ func KODAuthenticationTypeSetWorkstationPassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeWithAuthorizationRef() *foundation.NSString {
@@ -2225,7 +3330,11 @@ func KODAuthenticationTypeWithAuthorizationRef() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODAuthenticationTypeWriteSecureHash() *foundation.NSString {
@@ -2233,7 +3342,11 @@ func KODAuthenticationTypeWriteSecureHash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODBackOffSeconds() *foundation.NSString {
@@ -2241,7 +3354,11 @@ func KODBackOffSeconds() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODErrorDomainFramework() uintptr {
@@ -2289,7 +3406,11 @@ func KODPolicyAttributeCreationTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeCurrentDate() *foundation.NSString {
@@ -2297,7 +3418,11 @@ func KODPolicyAttributeCurrentDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeCurrentDayOfWeek() *foundation.NSString {
@@ -2305,7 +3430,11 @@ func KODPolicyAttributeCurrentDayOfWeek() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeCurrentTime() *foundation.NSString {
@@ -2313,7 +3442,11 @@ func KODPolicyAttributeCurrentTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeCurrentTimeOfDay() *foundation.NSString {
@@ -2321,7 +3454,11 @@ func KODPolicyAttributeCurrentTimeOfDay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeDaysUntilExpiration() *foundation.NSString {
@@ -2329,7 +3466,11 @@ func KODPolicyAttributeDaysUntilExpiration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeEnableAtTimeOfDay() *foundation.NSString {
@@ -2337,7 +3478,11 @@ func KODPolicyAttributeEnableAtTimeOfDay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeEnableOnDate() *foundation.NSString {
@@ -2345,7 +3490,11 @@ func KODPolicyAttributeEnableOnDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeEnableOnDayOfWeek() *foundation.NSString {
@@ -2353,7 +3502,11 @@ func KODPolicyAttributeEnableOnDayOfWeek() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeExpiresAtTimeOfDay() *foundation.NSString {
@@ -2361,7 +3514,11 @@ func KODPolicyAttributeExpiresAtTimeOfDay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeExpiresEveryNDays() *foundation.NSString {
@@ -2369,7 +3526,11 @@ func KODPolicyAttributeExpiresEveryNDays() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeExpiresOnDate() *foundation.NSString {
@@ -2377,7 +3538,11 @@ func KODPolicyAttributeExpiresOnDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeExpiresOnDayOfWeek() *foundation.NSString {
@@ -2385,7 +3550,11 @@ func KODPolicyAttributeExpiresOnDayOfWeek() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeFailedAuthentications() *foundation.NSString {
@@ -2393,7 +3562,11 @@ func KODPolicyAttributeFailedAuthentications() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeLastAuthenticationTime() *foundation.NSString {
@@ -2401,7 +3574,11 @@ func KODPolicyAttributeLastAuthenticationTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeLastFailedAuthenticationTime() *foundation.NSString {
@@ -2409,7 +3586,11 @@ func KODPolicyAttributeLastFailedAuthenticationTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeLastPasswordChangeTime() *foundation.NSString {
@@ -2417,7 +3598,11 @@ func KODPolicyAttributeLastPasswordChangeTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeMaximumFailedAuthentications() *foundation.NSString {
@@ -2425,7 +3610,11 @@ func KODPolicyAttributeMaximumFailedAuthentications() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeNewPasswordRequiredTime() *foundation.NSString {
@@ -2433,7 +3622,11 @@ func KODPolicyAttributeNewPasswordRequiredTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributePassword() *foundation.NSString {
@@ -2441,7 +3634,11 @@ func KODPolicyAttributePassword() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributePasswordHashes() *foundation.NSString {
@@ -2449,7 +3646,11 @@ func KODPolicyAttributePasswordHashes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributePasswordHistory() *foundation.NSString {
@@ -2457,7 +3658,11 @@ func KODPolicyAttributePasswordHistory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributePasswordHistoryDepth() *foundation.NSString {
@@ -2465,7 +3670,11 @@ func KODPolicyAttributePasswordHistoryDepth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeRecordName() *foundation.NSString {
@@ -2473,7 +3682,11 @@ func KODPolicyAttributeRecordName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyAttributeRecordType() *foundation.NSString {
@@ -2481,7 +3694,11 @@ func KODPolicyAttributeRecordType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyCategoryAuthentication() *foundation.NSString {
@@ -2489,7 +3706,11 @@ func KODPolicyCategoryAuthentication() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyCategoryPasswordChange() *foundation.NSString {
@@ -2497,7 +3718,11 @@ func KODPolicyCategoryPasswordChange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyCategoryPasswordContent() *foundation.NSString {
@@ -2505,7 +3730,11 @@ func KODPolicyCategoryPasswordContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyContent() *foundation.NSString {
@@ -2513,7 +3742,11 @@ func KODPolicyKeyContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyContentDescription() *foundation.NSString {
@@ -2521,7 +3754,11 @@ func KODPolicyKeyContentDescription() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyEvaluationDetails() *foundation.NSString {
@@ -2529,7 +3766,11 @@ func KODPolicyKeyEvaluationDetails() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyIdentifier() *foundation.NSString {
@@ -2537,7 +3778,11 @@ func KODPolicyKeyIdentifier() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyParameters() *foundation.NSString {
@@ -2545,7 +3790,11 @@ func KODPolicyKeyParameters() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyKeyPolicySatisfied() *foundation.NSString {
@@ -2553,7 +3802,11 @@ func KODPolicyKeyPolicySatisfied() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypeAccountExpiresOnDate() *foundation.NSString {
@@ -2561,7 +3814,11 @@ func KODPolicyTypeAccountExpiresOnDate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypeAccountMaximumFailedLogins() *foundation.NSString {
@@ -2569,7 +3826,11 @@ func KODPolicyTypeAccountMaximumFailedLogins() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypeAccountMaximumMinutesOfNonUse() *foundation.NSString {
@@ -2577,7 +3838,11 @@ func KODPolicyTypeAccountMaximumMinutesOfNonUse() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypeAccountMaximumMinutesUntilDisabled() *foundation.NSString {
@@ -2585,7 +3850,11 @@ func KODPolicyTypeAccountMaximumMinutesUntilDisabled() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypeAccountMinutesUntilFailedLoginReset() *foundation.NSString {
@@ -2593,7 +3862,11 @@ func KODPolicyTypeAccountMinutesUntilFailedLoginReset() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordCannotBeAccountName() *foundation.NSString {
@@ -2601,7 +3874,11 @@ func KODPolicyTypePasswordCannotBeAccountName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordChangeRequired() *foundation.NSString {
@@ -2609,7 +3886,11 @@ func KODPolicyTypePasswordChangeRequired() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordHistory() *foundation.NSString {
@@ -2617,7 +3898,11 @@ func KODPolicyTypePasswordHistory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordMaximumAgeInMinutes() *foundation.NSString {
@@ -2625,7 +3910,11 @@ func KODPolicyTypePasswordMaximumAgeInMinutes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordMaximumNumberOfCharacters() *foundation.NSString {
@@ -2633,7 +3922,11 @@ func KODPolicyTypePasswordMaximumNumberOfCharacters() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordMinimumNumberOfCharacters() *foundation.NSString {
@@ -2641,7 +3934,11 @@ func KODPolicyTypePasswordMinimumNumberOfCharacters() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordRequiresAlpha() *foundation.NSString {
@@ -2649,7 +3946,11 @@ func KODPolicyTypePasswordRequiresAlpha() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordRequiresMixedCase() *foundation.NSString {
@@ -2657,7 +3958,11 @@ func KODPolicyTypePasswordRequiresMixedCase() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordRequiresNumeric() *foundation.NSString {
@@ -2665,7 +3970,11 @@ func KODPolicyTypePasswordRequiresNumeric() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordRequiresSymbol() *foundation.NSString {
@@ -2673,7 +3982,11 @@ func KODPolicyTypePasswordRequiresSymbol() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODPolicyTypePasswordSelfModification() *foundation.NSString {
@@ -2681,7 +3994,11 @@ func KODPolicyTypePasswordSelfModification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAFPServer() *foundation.NSString {
@@ -2689,7 +4006,11 @@ func KODRecordTypeAFPServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAliases() *foundation.NSString {
@@ -2697,7 +4018,11 @@ func KODRecordTypeAliases() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAttributeTypes() *foundation.NSString {
@@ -2705,7 +4030,11 @@ func KODRecordTypeAttributeTypes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAugments() *foundation.NSString {
@@ -2713,7 +4042,11 @@ func KODRecordTypeAugments() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAutoServerSetup() *foundation.NSString {
@@ -2721,7 +4054,11 @@ func KODRecordTypeAutoServerSetup() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAutomount() *foundation.NSString {
@@ -2729,7 +4066,11 @@ func KODRecordTypeAutomount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeAutomountMap() *foundation.NSString {
@@ -2737,7 +4078,11 @@ func KODRecordTypeAutomountMap() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeBootp() *foundation.NSString {
@@ -2745,7 +4090,11 @@ func KODRecordTypeBootp() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeCertificateAuthorities() *foundation.NSString {
@@ -2753,7 +4102,11 @@ func KODRecordTypeCertificateAuthorities() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeComputerGroups() *foundation.NSString {
@@ -2761,7 +4114,11 @@ func KODRecordTypeComputerGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeComputerLists() *foundation.NSString {
@@ -2769,7 +4126,11 @@ func KODRecordTypeComputerLists() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeComputers() *foundation.NSString {
@@ -2777,7 +4138,11 @@ func KODRecordTypeComputers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeConfiguration() *foundation.NSString {
@@ -2785,7 +4150,11 @@ func KODRecordTypeConfiguration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeEthernets() *foundation.NSString {
@@ -2793,7 +4162,11 @@ func KODRecordTypeEthernets() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeFTPServer() *foundation.NSString {
@@ -2801,7 +4174,11 @@ func KODRecordTypeFTPServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeFileMakerServers() *foundation.NSString {
@@ -2809,7 +4186,11 @@ func KODRecordTypeFileMakerServers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeGroups() *foundation.NSString {
@@ -2817,7 +4198,11 @@ func KODRecordTypeGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeHostServices() *foundation.NSString {
@@ -2825,7 +4210,11 @@ func KODRecordTypeHostServices() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeHosts() *foundation.NSString {
@@ -2833,7 +4222,11 @@ func KODRecordTypeHosts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeLDAPServer() *foundation.NSString {
@@ -2841,7 +4234,11 @@ func KODRecordTypeLDAPServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeLocations() *foundation.NSString {
@@ -2849,7 +4246,11 @@ func KODRecordTypeLocations() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeMounts() *foundation.NSString {
@@ -2857,7 +4258,11 @@ func KODRecordTypeMounts() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeNFS() *foundation.NSString {
@@ -2865,7 +4270,11 @@ func KODRecordTypeNFS() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeNetDomains() *foundation.NSString {
@@ -2873,7 +4282,11 @@ func KODRecordTypeNetDomains() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeNetGroups() *foundation.NSString {
@@ -2881,7 +4294,11 @@ func KODRecordTypeNetGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeNetworks() *foundation.NSString {
@@ -2889,7 +4306,11 @@ func KODRecordTypeNetworks() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePeople() *foundation.NSString {
@@ -2897,7 +4318,11 @@ func KODRecordTypePeople() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePresetComputerGroups() *foundation.NSString {
@@ -2905,7 +4330,11 @@ func KODRecordTypePresetComputerGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePresetComputerLists() *foundation.NSString {
@@ -2913,7 +4342,11 @@ func KODRecordTypePresetComputerLists() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePresetComputers() *foundation.NSString {
@@ -2921,7 +4354,11 @@ func KODRecordTypePresetComputers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePresetGroups() *foundation.NSString {
@@ -2929,7 +4366,11 @@ func KODRecordTypePresetGroups() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePresetUsers() *foundation.NSString {
@@ -2937,7 +4378,11 @@ func KODRecordTypePresetUsers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePrintService() *foundation.NSString {
@@ -2945,7 +4390,11 @@ func KODRecordTypePrintService() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePrintServiceUser() *foundation.NSString {
@@ -2953,7 +4402,11 @@ func KODRecordTypePrintServiceUser() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypePrinters() *foundation.NSString {
@@ -2961,7 +4414,11 @@ func KODRecordTypePrinters() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeProtocols() *foundation.NSString {
@@ -2969,7 +4426,11 @@ func KODRecordTypeProtocols() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeQTSServer() *foundation.NSString {
@@ -2977,7 +4438,11 @@ func KODRecordTypeQTSServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeQueryInformation() *foundation.NSString {
@@ -2985,7 +4450,11 @@ func KODRecordTypeQueryInformation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeRPC() *foundation.NSString {
@@ -2993,7 +4462,11 @@ func KODRecordTypeRPC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeRecordTypes() *foundation.NSString {
@@ -3001,7 +4474,11 @@ func KODRecordTypeRecordTypes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeResources() *foundation.NSString {
@@ -3009,7 +4486,11 @@ func KODRecordTypeResources() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeSMBServer() *foundation.NSString {
@@ -3017,7 +4498,11 @@ func KODRecordTypeSMBServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeServer() *foundation.NSString {
@@ -3025,7 +4510,11 @@ func KODRecordTypeServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeServices() *foundation.NSString {
@@ -3033,7 +4522,11 @@ func KODRecordTypeServices() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeSharePoints() *foundation.NSString {
@@ -3041,7 +4534,11 @@ func KODRecordTypeSharePoints() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeUsers() *foundation.NSString {
@@ -3049,7 +4546,11 @@ func KODRecordTypeUsers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODRecordTypeWebServer() *foundation.NSString {
@@ -3057,7 +4558,11 @@ func KODRecordTypeWebServer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KODSessionDefault() uintptr {

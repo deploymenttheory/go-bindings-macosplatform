@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -52,7 +53,11 @@ func ICCameraDeviceCanAcceptPTPCommands() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanDeleteAllFiles @discussion Indicates that the camera can delete all files in a single operation while it is connected.
@@ -61,7 +66,11 @@ func ICCameraDeviceCanDeleteAllFiles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanDeleteOneFile @discussion Indicates that the camera can delete a file at a time while it is connected.
@@ -70,7 +79,11 @@ func ICCameraDeviceCanDeleteOneFile() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanReceiveFile @discussion Indicates that the host can upload files to the camera.
@@ -79,7 +92,11 @@ func ICCameraDeviceCanReceiveFile() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanSyncClock @discussion Indicates that the camera can synchronize its date and time with that of the host computer.
@@ -88,7 +105,11 @@ func ICCameraDeviceCanSyncClock() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanTakePicture @discussion Indicates that the camera can capture a picture while it is connected, if the client sends a 'requestTakePicture' message to it.
@@ -97,7 +118,11 @@ func ICCameraDeviceCanTakePicture() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera @discussion Indicates that the camera can capture a picture while it is connected, if the user presses the shutter release on the camera.
@@ -106,7 +131,11 @@ func ICCameraDeviceCanTakePictureUsingShutterReleaseOnCamera() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICCameraDeviceSupportsHEIF @discussion Indicates that the camera supports HEIF transcoding, and can change the presentation of converted assets and original assets on the fly.
@@ -115,7 +144,11 @@ func ICCameraDeviceSupportsHEIF() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteAfterSuccessfulDownload @abstract   ICDeleteAfterSuccessfulDownload @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, the file will be deleted from the device after it is succcessfully downloaded.
@@ -124,7 +157,11 @@ func ICDeleteAfterSuccessfulDownload() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteCanceled @discussion The value for this key should be an NSArray<ICCameraItem*>*
@@ -133,7 +170,11 @@ func ICDeleteCanceled() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteErrorDeviceMissing @discussion The value for this key should be an ICCameraItem*
@@ -142,7 +183,11 @@ func ICDeleteErrorCanceled() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteErrorDeviceMissing @discussion The value for this key should be an ICCameraItem*
@@ -151,7 +196,11 @@ func ICDeleteErrorDeviceMissing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteErrorFileMissing @discussion The value for this key should be an ICCameraItem*
@@ -160,7 +209,11 @@ func ICDeleteErrorFileMissing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteErrorReadOnly @discussion The value for this key should be an ICCameraItem*
@@ -169,7 +222,11 @@ func ICDeleteErrorReadOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteFailed @discussion The value for this key should be an NSArray<ICCameraItem*>*
@@ -178,7 +235,11 @@ func ICDeleteFailed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeleteSuccessful @discussion The value for this key should be an NSArray<ICCameraItem*>*
@@ -187,7 +248,11 @@ func ICDeleteSuccessful() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeviceCanEjectOrDisconnect @abstract   Indicates either the device is mounted as a mass-storage volume and can be ejected or the it is a remote device with an active connection that can be disconnected.
@@ -196,7 +261,11 @@ func ICDeviceCanEjectOrDisconnect() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeviceLocationDescriptionBluetooth @abstract   This description is returned for locationDescription property of a device connected via Bluetooth.
@@ -205,7 +274,11 @@ func ICDeviceLocationDescriptionBluetooth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeviceLocationDescriptionFireWire @abstract   This description is returned for locationDescription property of a device connected to a FireWire port.
@@ -214,7 +287,11 @@ func ICDeviceLocationDescriptionFireWire() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeviceLocationDescriptionMassStorage @abstract   This description is returned for locationDescription property of a device that is mounted as a mass-storage volume.
@@ -223,7 +300,11 @@ func ICDeviceLocationDescriptionMassStorage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDeviceLocationDescriptionUSB @abstract   This description is returned for locationDescription property of a device connected to a USB port.
@@ -232,7 +313,11 @@ func ICDeviceLocationDescriptionUSB() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDownloadSidecarFiles @abstract   ICDownloadSidecarFiles @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, all sidecar files will be downloaded along with the media file.
@@ -241,7 +326,11 @@ func ICDownloadSidecarFiles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICDownloadsDirectoryURL @abstract   ICDownloadsDirectoryURL @discussion The value for this key should be an NSURL object referencing a writable directory. The downloaded files will be saved in that directory.
@@ -250,7 +339,11 @@ func ICDownloadsDirectoryURL() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ICEnumerationChronologicalOrder() *foundation.NSString {
@@ -258,7 +351,11 @@ func ICEnumerationChronologicalOrder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @ICEXIFOrientationType @abstract Type representing EXIF Orientation tag value @discussion The meaning of this value is defined by the EXIF specification. Here is what the letter F would look like if it were tagged correctly and displayed by a program that ignores the orientation tag (thus showing the stored image): 1             2             3             4 8888888       8888888            88       88 88                 88            88       88 8888             8888          8888       8888 88                 88            88       88 88                 88       8888888       8888888 5             6             7             8 8888888888    88                    88    8888888888 88  88        88  88            88  88        88  88 88            8888888888    8888888888            88
@@ -267,7 +364,11 @@ func ICErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ICImageSourceShouldCache() *foundation.NSString {
@@ -275,7 +376,11 @@ func ICImageSourceShouldCache() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const ICCameraItemThumbnailOption @enum ICImageSourceShouldCache Use of this key will override any custom thumbnail size requested, ignoring the ICImageSourceThumbnailMaxPixelSize option entirely. @enum ICImageSourceThumbnailMaxPixelSize Use of this key will be ignored if ICImageSourceShouldCache has also been passed in.  Custom thumbnail requests will never be cached. @discussion Only the embedded EXIF thumbnail, or a created thumbnail of EXIF standard size (160x120) will be cached. Use of the ICImageSourceShouldCache flag is discouraged, as the framework shall not act as a backing store out of convienence. If use of this flag is required, it is highly recommeded to only keep the image cached within the framework temporarily, using the method -[ICCameraItem flushThumbnailCache] to evict the thumbnail. Multiple calls to both cache the EXIF thumbnail, and subsequently retrieve a larger thumbnail will work as defined.
@@ -284,7 +389,11 @@ func ICImageSourceThumbnailMaxPixelSize() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICLocalizedStatusNotificationKey @abstract   Key for a localized notification string.
@@ -299,12 +408,23 @@ func ICOverwrite() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ICRunLoopMode() uintptr {
+func ICRunLoopMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_imagecapturecoreLib, "ICRunLoopMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICSaveAsFilename @abstract   ICSaveAsFilename @discussion The value for this key should be an NSString object containing the name to be used for the downloaded file.
@@ -313,7 +433,11 @@ func ICSaveAsFilename() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICSavedAncillaryFiles @abstract   ICSavedAncillaryFiles @discussion The value for this key will be an NSArray object containing names of files associated with the primary file that is downloaded. The options dictionary returned in didDownloadFile:error:options:contextInfo: may have this key.
@@ -322,7 +446,11 @@ func ICSavedAncillaryFiles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICSavedFilename @abstract   ICSavedFilename @discussion The value for this key will be an NSString object containing the actual name of the saved file. The options dictionary returned in didDownloadFile:error:options:contextInfo: will have this key.
@@ -331,7 +459,11 @@ func ICSavedFilename() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICScannerStatusRequestsOverviewScan @abstract   ICScannerStatusRequestsOverviewScan @discussion A non-localized notification string to indicate that the scanner is requesting an overview scan to be performed.
@@ -364,7 +496,11 @@ func ICStatusNotificationKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICTransportTypeBluetooth @abstract   Indicates that the device uses Bluetooth transport.
@@ -385,7 +521,11 @@ func ICTransportTypeMassStorage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICTransportTypeProximity @abstract   Indicates that the device transport is based on proximity instead of a predefined phyiscal layer.
@@ -394,7 +534,11 @@ func ICTransportTypeProximity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICTransportTypeTCPIP @abstract   Indicates that the device uses TCP/IP transport. These devices are discovered using Bonjour.
@@ -403,7 +547,11 @@ func ICTransportTypeTCPIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICTransportTypeUSB @abstract   Indicates that the device uses USB transport.
@@ -412,7 +560,11 @@ func ICTransportTypeUSB() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ICTruncateAfterSuccessfulDownload @discussion The value for this key should be an NSNumber object representing a boolean value. If this value is YES, and the file is a JPG converted from HEIC on device, the padding will be stripped from the end of the file.  Note that the file size property of the ICCameraItem object will not be updated to reflect the newly truncated image.  This option has no effect for images coming from devices without the ability to convert from HEIC to JPG.
@@ -421,5 +573,9 @@ func ICTruncateAfterSuccessfulDownload() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -61,9 +61,9 @@ func (o *MXMetricManager) RemoveSubscriber(subscriber MXMetricManagerSubscriber)
 }
 
 // Starts to measure an extended launch task with the given task identifier.
-func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
+func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelExtendLaunchMeasurementForTaskIDError, taskID, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelExtendLaunchMeasurementForTaskIDError, taskID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -71,9 +71,9 @@ func MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID unsafe.Pointer)
 }
 
 // Signals the end of an extended launch task.
-func MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
+func MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelFinishExtendedLaunchMeasurementForTaskIDError, taskID, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](objc.ID(_clsMXMetricManager), _mXMetricManagerSelFinishExtendedLaunchMeasurementForTaskIDError, taskID.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

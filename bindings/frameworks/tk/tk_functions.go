@@ -170,7 +170,7 @@ var (
 	_fnTk_GetRootCoords                   func(unsafe.Pointer, *int32, *int32)
 	_fnTk_GetScreenMM                     func(*tcl.Tcl_Interp, unsafe.Pointer, string, *float64) int
 	_fnTk_GetScrollInfo                   func(*tcl.Tcl_Interp, int, string, *float64, *int32) int
-	_fnTk_GetScrollInfoObj                func(*tcl.Tcl_Interp, int, unsafe.Pointer, *float64, *int32) int
+	_fnTk_GetScrollInfoObj                func(*tcl.Tcl_Interp, int, *tcl.Tcl_Obj, *float64, *int32) int
 	_fnTk_GetSelection                    func(*tcl.Tcl_Interp, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int
 	_fnTk_GetStyle                        func(*tcl.Tcl_Interp, string) unsafe.Pointer
 	_fnTk_GetStyleEngine                  func(string) unsafe.Pointer
@@ -260,7 +260,7 @@ var (
 	_fnTk_SetInternalBorder               func(unsafe.Pointer, int)
 	_fnTk_SetInternalBorderEx             func(unsafe.Pointer, int, int, int, int)
 	_fnTk_SetMinimumRequestSize           func(unsafe.Pointer, int, int)
-	_fnTk_SetOptions                      func(*tcl.Tcl_Interp, string, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int32) int
+	_fnTk_SetOptions                      func(*tcl.Tcl_Interp, string, unsafe.Pointer, int, *tcl.Tcl_Obj, unsafe.Pointer, unsafe.Pointer, *int32) int
 	_fnTk_SetTSOrigin                     func(unsafe.Pointer, unsafe.Pointer, int, int)
 	_fnTk_SetWindowBackground             func(unsafe.Pointer, uint)
 	_fnTk_SetWindowBackgroundPixmap       func(unsafe.Pointer, int)
@@ -924,7 +924,7 @@ func Tk_GetScrollInfo(interp *tcl.Tcl_Interp, argc int, argv string, dblPtr *flo
 	return _fnTk_GetScrollInfo(interp, argc, argv, dblPtr, intPtr)
 }
 
-func Tk_GetScrollInfoObj(interp *tcl.Tcl_Interp, objc int, objv unsafe.Pointer, dblPtr *float64, intPtr *int32) int {
+func Tk_GetScrollInfoObj(interp *tcl.Tcl_Interp, objc int, objv *tcl.Tcl_Obj, dblPtr *float64, intPtr *int32) int {
 	return _fnTk_GetScrollInfoObj(interp, objc, objv, dblPtr, intPtr)
 }
 
@@ -1284,7 +1284,7 @@ func Tk_SetMinimumRequestSize(tkwin unsafe.Pointer, minWidth int, minHeight int)
 	_fnTk_SetMinimumRequestSize(tkwin, minWidth, minHeight)
 }
 
-func Tk_SetOptions(interp *tcl.Tcl_Interp, recordPtr string, optionTable unsafe.Pointer, objc int, objv unsafe.Pointer, tkwin unsafe.Pointer, savePtr unsafe.Pointer, maskPtr *int32) int {
+func Tk_SetOptions(interp *tcl.Tcl_Interp, recordPtr string, optionTable unsafe.Pointer, objc int, objv *tcl.Tcl_Obj, tkwin unsafe.Pointer, savePtr unsafe.Pointer, maskPtr *int32) int {
 	return _fnTk_SetOptions(interp, recordPtr, optionTable, objc, objv, tkwin, savePtr, maskPtr)
 }
 

@@ -319,8 +319,8 @@ var (
 	_rb_filesystem_str_new               func(string, int) uint
 	_rb_filesystem_str_new_cstr          func(string) uint
 	_rb_find_file                        func(uint) uint
-	_rb_find_file_ext                    func(*uint, unsafe.Pointer) int
-	_rb_find_file_ext_safe               func(*uint, unsafe.Pointer, int) int
+	_rb_find_file_ext                    func(*uint, string) int
+	_rb_find_file_ext_safe               func(*uint, string, int) int
 	_rb_find_file_safe                   func(uint, int) uint
 	_rb_fix2int                          func(uint) int
 	_rb_fix2long                         func(uint) int
@@ -2480,12 +2480,12 @@ func RbFindFile(arg uint) uint {
 }
 
 // C function: rb_find_file_ext
-func RbFindFileExt(arg *uint, arg2 unsafe.Pointer) int {
+func RbFindFileExt(arg *uint, arg2 string) int {
 	return _rb_find_file_ext(arg, arg2)
 }
 
 // C function: rb_find_file_ext_safe
-func RbFindFileExtSafe(arg *uint, arg2 unsafe.Pointer, arg3 int) int {
+func RbFindFileExtSafe(arg *uint, arg2 string, arg3 int) int {
 	return _rb_find_file_ext_safe(arg, arg2, arg3)
 }
 

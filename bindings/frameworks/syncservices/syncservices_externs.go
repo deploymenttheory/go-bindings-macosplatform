@@ -4,149 +4,322 @@
 package syncservices
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Deprecated: since macOS 10.7.
-func ISyncAvailabilityChangedNotification() uintptr {
+func ISyncAvailabilityChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncAvailabilityChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertyActionKey() uintptr {
+func ISyncChangePropertyActionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertyActionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertyClear() uintptr {
+func ISyncChangePropertyClear() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertyClear")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertyNameKey() uintptr {
+func ISyncChangePropertyNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertyNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertySet() uintptr {
+func ISyncChangePropertySet() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertySet")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertyValueIsDefaultKey() uintptr {
+func ISyncChangePropertyValueIsDefaultKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertyValueIsDefaultKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncChangePropertyValueKey() uintptr {
+func ISyncChangePropertyValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncChangePropertyValueKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncClientTypeApplication() uintptr {
+func ISyncClientTypeApplication() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncClientTypeApplication")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncClientTypeDevice() uintptr {
+func ISyncClientTypeDevice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncClientTypeDevice")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncClientTypePeer() uintptr {
+func ISyncClientTypePeer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncClientTypePeer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncClientTypeServer() uintptr {
+func ISyncClientTypeServer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncClientTypeServer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncErrorDomain() uintptr {
+func ISyncErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidArgumentsException() uintptr {
+func ISyncInvalidArgumentsException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidArgumentsException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidEntityException() uintptr {
+func ISyncInvalidEntityException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidEntityException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidRecordException() uintptr {
+func ISyncInvalidRecordException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidRecordException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidRecordIdentifiersKey() uintptr {
+func ISyncInvalidRecordIdentifiersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidRecordIdentifiersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidRecordReasonsKey() uintptr {
+func ISyncInvalidRecordReasonsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidRecordReasonsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidRecordsKey() uintptr {
+func ISyncInvalidRecordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidRecordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncInvalidSchemaException() uintptr {
+func ISyncInvalidSchemaException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncInvalidSchemaException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncRecordEntityNameKey() uintptr {
+func ISyncRecordEntityNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncRecordEntityNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncServerUnavailableException() uintptr {
+func ISyncServerUnavailableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncServerUnavailableException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncSessionCancelledException() uintptr {
+func ISyncSessionCancelledException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncSessionCancelledException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncSessionUnavailableException() uintptr {
+func ISyncSessionUnavailableException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncSessionUnavailableException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.7.
-func ISyncUnsupportedEntityException() uintptr {
+func ISyncUnsupportedEntityException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_syncservicesLib, "ISyncUnsupportedEntityException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

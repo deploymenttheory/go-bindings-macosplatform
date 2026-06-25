@@ -79,6 +79,175 @@ func GCProductCategoryKeyboard() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCProductCategoryKeyboard")))
 }
 
+// GCInputButtonA returns the string constant GCInputButtonA, for use as a dictionary key or argument.
+func GCInputButtonA() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonA"))) }
+
+// GCInputButtonB returns the string constant GCInputButtonB, for use as a dictionary key or argument.
+func GCInputButtonB() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonB"))) }
+
+// GCInputButtonX returns the string constant GCInputButtonX, for use as a dictionary key or argument.
+func GCInputButtonX() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonX"))) }
+
+// GCInputButtonY returns the string constant GCInputButtonY, for use as a dictionary key or argument.
+func GCInputButtonY() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonY"))) }
+
+// GCInputDirectionPad returns the string constant GCInputDirectionPad, for use as a dictionary key or argument.
+func GCInputDirectionPad() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDirectionPad")))
+}
+
+// GCInputThumbstick returns the string constant GCInputThumbstick, for use as a dictionary key or argument.
+func GCInputThumbstick() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputThumbstick"))) }
+
+// GCInputLeftThumbstick returns the string constant GCInputLeftThumbstick, for use as a dictionary key or argument.
+func GCInputLeftThumbstick() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftThumbstick")))
+}
+
+// GCInputRightThumbstick returns the string constant GCInputRightThumbstick, for use as a dictionary key or argument.
+func GCInputRightThumbstick() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightThumbstick")))
+}
+
+// GCInputThumbstickButton returns the string constant GCInputThumbstickButton, for use as a dictionary key or argument.
+func GCInputThumbstickButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputThumbstickButton")))
+}
+
+// GCInputLeftThumbstickButton returns the string constant GCInputLeftThumbstickButton, for use as a dictionary key or argument.
+func GCInputLeftThumbstickButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftThumbstickButton")))
+}
+
+// GCInputRightThumbstickButton returns the string constant GCInputRightThumbstickButton, for use as a dictionary key or argument.
+func GCInputRightThumbstickButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightThumbstickButton")))
+}
+
+// GCInputGripButton returns the string constant GCInputGripButton, for use as a dictionary key or argument.
+func GCInputGripButton() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputGripButton"))) }
+
+// GCInputLeftShoulder returns the string constant GCInputLeftShoulder, for use as a dictionary key or argument.
+func GCInputLeftShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftShoulder")))
+}
+
+// GCInputRightShoulder returns the string constant GCInputRightShoulder, for use as a dictionary key or argument.
+func GCInputRightShoulder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightShoulder")))
+}
+
+// GCInputLeftBumper returns the string constant GCInputLeftBumper, for use as a dictionary key or argument.
+func GCInputLeftBumper() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftBumper"))) }
+
+// GCInputRightBumper returns the string constant GCInputRightBumper, for use as a dictionary key or argument.
+func GCInputRightBumper() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightBumper")))
+}
+
+// GCInputTrigger returns the string constant GCInputTrigger, for use as a dictionary key or argument.
+func GCInputTrigger() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputTrigger"))) }
+
+// GCInputLeftTrigger returns the string constant GCInputLeftTrigger, for use as a dictionary key or argument.
+func GCInputLeftTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftTrigger")))
+}
+
+// GCInputRightTrigger returns the string constant GCInputRightTrigger, for use as a dictionary key or argument.
+func GCInputRightTrigger() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightTrigger")))
+}
+
+// GCInputLeftSideButton returns the string constant GCInputLeftSideButton, for use as a dictionary key or argument.
+func GCInputLeftSideButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftSideButton")))
+}
+
+// GCInputRightSideButton returns the string constant GCInputRightSideButton, for use as a dictionary key or argument.
+func GCInputRightSideButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightSideButton")))
+}
+
+// GCInputButtonHome returns the string constant GCInputButtonHome, for use as a dictionary key or argument.
+func GCInputButtonHome() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonHome"))) }
+
+// GCInputButtonMenu returns the string constant GCInputButtonMenu, for use as a dictionary key or argument.
+func GCInputButtonMenu() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonMenu"))) }
+
+// GCInputButtonOptions returns the string constant GCInputButtonOptions, for use as a dictionary key or argument.
+func GCInputButtonOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonOptions")))
+}
+
+// GCInputButtonShare returns the string constant GCInputButtonShare, for use as a dictionary key or argument.
+func GCInputButtonShare() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputButtonShare")))
+}
+
+// GCInputXboxPaddleOne returns the string constant GCInputXboxPaddleOne, for use as a dictionary key or argument.
+func GCInputXboxPaddleOne() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputXboxPaddleOne")))
+}
+
+// GCInputXboxPaddleTwo returns the string constant GCInputXboxPaddleTwo, for use as a dictionary key or argument.
+func GCInputXboxPaddleTwo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputXboxPaddleTwo")))
+}
+
+// GCInputXboxPaddleThree returns the string constant GCInputXboxPaddleThree, for use as a dictionary key or argument.
+func GCInputXboxPaddleThree() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputXboxPaddleThree")))
+}
+
+// GCInputXboxPaddleFour returns the string constant GCInputXboxPaddleFour, for use as a dictionary key or argument.
+func GCInputXboxPaddleFour() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputXboxPaddleFour")))
+}
+
+// GCInputDualShockTouchpadOne returns the string constant GCInputDualShockTouchpadOne, for use as a dictionary key or argument.
+func GCInputDualShockTouchpadOne() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDualShockTouchpadOne")))
+}
+
+// GCInputDualShockTouchpadTwo returns the string constant GCInputDualShockTouchpadTwo, for use as a dictionary key or argument.
+func GCInputDualShockTouchpadTwo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDualShockTouchpadTwo")))
+}
+
+// GCInputDualShockTouchpadButton returns the string constant GCInputDualShockTouchpadButton, for use as a dictionary key or argument.
+func GCInputDualShockTouchpadButton() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputDualShockTouchpadButton")))
+}
+
+// GCInputSteeringWheel returns the string constant GCInputSteeringWheel, for use as a dictionary key or argument.
+func GCInputSteeringWheel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputSteeringWheel")))
+}
+
+// GCInputShifter returns the string constant GCInputShifter, for use as a dictionary key or argument.
+func GCInputShifter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputShifter"))) }
+
+// GCInputPedalAccelerator returns the string constant GCInputPedalAccelerator, for use as a dictionary key or argument.
+func GCInputPedalAccelerator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputPedalAccelerator")))
+}
+
+// GCInputPedalBrake returns the string constant GCInputPedalBrake, for use as a dictionary key or argument.
+func GCInputPedalBrake() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputPedalBrake"))) }
+
+// GCInputPedalClutch returns the string constant GCInputPedalClutch, for use as a dictionary key or argument.
+func GCInputPedalClutch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputPedalClutch")))
+}
+
+// GCInputLeftPaddle returns the string constant GCInputLeftPaddle, for use as a dictionary key or argument.
+func GCInputLeftPaddle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCInputLeftPaddle"))) }
+
+// GCInputRightPaddle returns the string constant GCInputRightPaddle, for use as a dictionary key or argument.
+func GCInputRightPaddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("GCInputRightPaddle")))
+}
+
 // GCKeyA returns the string constant GCKeyA, for use as a dictionary key or argument.
 func GCKeyA() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("GCKeyA"))) }
 

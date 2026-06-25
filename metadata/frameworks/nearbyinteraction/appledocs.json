@@ -276,7 +276,7 @@
       },
       "distance": {
         "doc": "The distance from the user’s device to the peer device in meters.",
-        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/distance-9atp7"
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/distance-676dm"
       },
       "horizontalAngle": {
         "doc": "An angle in radians that indicates the azimuthal direction to the nearby object.",

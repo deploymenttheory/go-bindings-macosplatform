@@ -7,36 +7,72 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used controller. This is a good time to swap out UI to match the new current controller, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCController that became the current controller. For example: - (void)controllerDidBecomeCurrent:(NSNotification *)note { GCController *controller = note.object; ... } @see NSNotificationCenter @see GCController.controllers
-func GCControllerDidBecomeCurrentNotification() uintptr {
+func GCControllerDidBecomeCurrentNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCControllerDidBecomeCurrentNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCControllerDidConnectNotification for observing connections of controllers. Use GCControllerDidDisconnectNotification for observing disconnections of controllers. Connections and disconnections of controllers will also be reflected in the controllers array of the GCController class. The 'object' property of the notification will contain the GCController that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... } @see NSNotificationCenter @see GCController.controllers
-func GCControllerDidConnectNotification() uintptr {
+func GCControllerDidConnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCControllerDidConnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCControllerDidDisconnectNotification() uintptr {
+func GCControllerDidDisconnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCControllerDidDisconnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCControllerDidStopBeingCurrentNotification() uintptr {
+func GCControllerDidStopBeingCurrentNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCControllerDidStopBeingCurrentNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use this constant with NSNotificationCenter to listen to controller user customization events. When a user customizes the button mappings or other settings of a controller this notification will be posted. This is a good time to swap out UI to match the new user settings. Users can modify game controller settings through the Settings app on iOS, tvOS, and macOS. The 'object' property of the notification will contain the GCController that was customized. For example: - (void)controllerDidConnect:(NSNotification *)note { GCController *controller = note.object; .... } @see NSNotificationCenter @see GCController.controllers
-func GCControllerUserCustomizationsDidChangeNotification() uintptr {
+func GCControllerUserCustomizationsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCControllerUserCustomizationsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use the -[GCController controllerWithExtendedGamepad] method instead
@@ -67,7 +103,11 @@ func GCHapticsLocalityAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityDefault() *foundation.NSString {
@@ -75,7 +115,11 @@ func GCHapticsLocalityDefault() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityHandles() *foundation.NSString {
@@ -83,7 +127,11 @@ func GCHapticsLocalityHandles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityLeftHandle() *foundation.NSString {
@@ -91,7 +139,11 @@ func GCHapticsLocalityLeftHandle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityLeftTrigger() *foundation.NSString {
@@ -99,7 +151,11 @@ func GCHapticsLocalityLeftTrigger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityRightHandle() *foundation.NSString {
@@ -107,7 +163,11 @@ func GCHapticsLocalityRightHandle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityRightTrigger() *foundation.NSString {
@@ -115,7 +175,11 @@ func GCHapticsLocalityRightTrigger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCHapticsLocalityTriggers() *foundation.NSString {
@@ -123,289 +187,671 @@ func GCHapticsLocalityTriggers() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonA() uintptr {
+func GCInputButtonA() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonA")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonB() uintptr {
+func GCInputButtonB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonHome() uintptr {
+func GCInputButtonHome() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonHome")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonMenu() uintptr {
+func GCInputButtonMenu() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonMenu")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonOptions() uintptr {
+func GCInputButtonOptions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonOptions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonShare() uintptr {
+func GCInputButtonShare() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonShare")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonX() uintptr {
+func GCInputButtonX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputButtonY() uintptr {
+func GCInputButtonY() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputButtonY")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputDirectionPad() uintptr {
+func GCInputDirectionPad() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDirectionPad")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional secondary directional input surface for the directional gamepad. This input is guaranteed to be an 8-way digital dpad with physical Up, Down, Left, Right butttons. @note For the 2021 2nd generation Siri Remote, this represents pressing on the outer ring of the touch surface.
-func GCInputDirectionalCardinalDpad() uintptr {
+func GCInputDirectionalCardinalDpad() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDirectionalCardinalDpad")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An optional button for the directional gamepad. This input represents the center button of the cardinal dpad. @note For the 2021 2nd generation Siri Remote, this represents pressing anywhere on the inner ring of the touch surface.
-func GCInputDirectionalCenterButton() uintptr {
+func GCInputDirectionalCenterButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDirectionalCenterButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The primary directional input surface for the directional gamepad @note Equivalent to microgamepad.dpad @note For the 2021 2nd generation Siri Remote, this represents touching anywhere on the entire touch surface - including the inner and outer rings.
-func GCInputDirectionalDpad() uintptr {
+func GCInputDirectionalDpad() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDirectionalDpad")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The button corresponding to pressing anywhere on the primary directional input surface for the directional gamepad @note Equivalent to microgamepad.buttonA @note For the 2021 2nd generation Siri Remote, this represents pressing anywhere the entire touch surface - including the inner and outer rings.
-func GCInputDirectionalTouchSurfaceButton() uintptr {
+func GCInputDirectionalTouchSurfaceButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDirectionalTouchSurfaceButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputDualShockTouchpadButton() uintptr {
+func GCInputDualShockTouchpadButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDualShockTouchpadButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A set of strings commonly used to access DualShock buttons @example controller.physicalInputProfile.dpads[GCInputDualShockTouchpadOne] @see GCController.h @see GCPhysicalInputProfile.h
-func GCInputDualShockTouchpadOne() uintptr {
+func GCInputDualShockTouchpadOne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDualShockTouchpadOne")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputDualShockTouchpadTwo() uintptr {
+func GCInputDualShockTouchpadTwo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputDualShockTouchpadTwo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputGripButton() uintptr {
+func GCInputGripButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputGripButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Identifies the button element located at the top-left/right of a gamepad, between the left/right shoulder button and the gamepad's horizontal center.
-func GCInputLeftBumper() uintptr {
+func GCInputLeftBumper() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftBumper")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftPaddle() uintptr {
+func GCInputLeftPaddle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftPaddle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftShoulder() uintptr {
+func GCInputLeftShoulder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftShoulder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftSideButton() uintptr {
+func GCInputLeftSideButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftSideButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftThumbstick() uintptr {
+func GCInputLeftThumbstick() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftThumbstick")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftThumbstickButton() uintptr {
+func GCInputLeftThumbstickButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftThumbstickButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputLeftTrigger() uintptr {
+func GCInputLeftTrigger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputLeftTrigger")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The primary button for the microgamepad @note For the 1st generation and 2nd generation Siri Remotes, this represents pressing anywhere on the touch surface.
-func GCInputMicroGamepadButtonA() uintptr {
+func GCInputMicroGamepadButtonA() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputMicroGamepadButtonA")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The primary menu button for the microgamepad @note Equivalent to microgamepad.buttonMenu @note For the 1st generation Siri Remote, this represents pressing the play/pause button. For the 2nd generation Siri Remote, this represents pressing the back button. @note You should avoid polling this button every frame. tvOS will run a gesture recognizer on events before forwarding them to your application that can reduce the window to poll button changes. Instead, register a pressedChangedHandler or a valueChangedHandler.
-func GCInputMicroGamepadButtonMenu() uintptr {
+func GCInputMicroGamepadButtonMenu() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputMicroGamepadButtonMenu")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The secondary button for the microgamepad @note Equivalent to microgamepad.buttonX @note For the 1st and 2nd generation Siri Remotes, this represents pressing the play/pause button.
-func GCInputMicroGamepadButtonX() uintptr {
+func GCInputMicroGamepadButtonX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputMicroGamepadButtonX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The primary directional input surface for the directional gamepad @note Equivalent to microgamepad.dpad @note For the 1st generation and 2nd generation Siri Remotes, this represents touching anywhere on the entire touch surface.
-func GCInputMicroGamepadDpad() uintptr {
+func GCInputMicroGamepadDpad() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputMicroGamepadDpad")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputPedalAccelerator() uintptr {
+func GCInputPedalAccelerator() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputPedalAccelerator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputPedalBrake() uintptr {
+func GCInputPedalBrake() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputPedalBrake")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputPedalClutch() uintptr {
+func GCInputPedalClutch() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputPedalClutch")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightBumper() uintptr {
+func GCInputRightBumper() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightBumper")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightPaddle() uintptr {
+func GCInputRightPaddle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightPaddle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightShoulder() uintptr {
+func GCInputRightShoulder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightShoulder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightSideButton() uintptr {
+func GCInputRightSideButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightSideButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightThumbstick() uintptr {
+func GCInputRightThumbstick() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightThumbstick")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightThumbstickButton() uintptr {
+func GCInputRightThumbstickButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightThumbstickButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputRightTrigger() uintptr {
+func GCInputRightTrigger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputRightTrigger")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputShifter() uintptr {
+func GCInputShifter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputShifter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A set of strings commonly used by racing wheels.
-func GCInputSteeringWheel() uintptr {
+func GCInputSteeringWheel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputSteeringWheel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputThumbstick() uintptr {
+func GCInputThumbstick() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputThumbstick")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputThumbstickButton() uintptr {
+func GCInputThumbstickButton() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputThumbstickButton")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputTrigger() uintptr {
+func GCInputTrigger() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputTrigger")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputXboxPaddleFour() uintptr {
+func GCInputXboxPaddleFour() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputXboxPaddleFour")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A set of strings commonly used to access Xbox buttons @example controller.physicalInputProfile.buttons[GCInputButtonPaddleOne] @see GCController.h @see GCPhysicalInputProfile.h
-func GCInputXboxPaddleOne() uintptr {
+func GCInputXboxPaddleOne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputXboxPaddleOne")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputXboxPaddleThree() uintptr {
+func GCInputXboxPaddleThree() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputXboxPaddleThree")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCInputXboxPaddleTwo() uintptr {
+func GCInputXboxPaddleTwo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCInputXboxPaddleTwo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyA() uintptr {
+func GCKeyA() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyA")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyApplication() uintptr {
+func GCKeyApplication() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyApplication")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyB() uintptr {
+func GCKeyB() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyBackslash() uintptr {
+func GCKeyBackslash() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyBackslash")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyC() uintptr {
+func GCKeyC() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyCapsLock() uintptr {
+func GCKeyCapsLock() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCapsLock")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyCloseBracket() uintptr {
+func GCKeyCloseBracket() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyCloseBracket")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCKeyCodeApplication() int {
@@ -1480,672 +1926,1603 @@ func GCKeyCodeZero() int {
 	return *(*int)(unsafe.Pointer(ptr))
 }
 
-func GCKeyComma() uintptr {
+func GCKeyComma() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyComma")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyD() uintptr {
+func GCKeyD() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyDeleteForward() uintptr {
+func GCKeyDeleteForward() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyDeleteForward")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyDeleteOrBackspace() uintptr {
+func GCKeyDeleteOrBackspace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyDeleteOrBackspace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyDownArrow() uintptr {
+func GCKeyDownArrow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyDownArrow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyE() uintptr {
+func GCKeyE() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyE")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyEight() uintptr {
+func GCKeyEight() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyEight")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyEnd() uintptr {
+func GCKeyEnd() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyEnd")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyEqualSign() uintptr {
+func GCKeyEqualSign() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyEqualSign")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyEscape() uintptr {
+func GCKeyEscape() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyEscape")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF() uintptr {
+func GCKeyF() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF1() uintptr {
+func GCKeyF1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF1")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF10() uintptr {
+func GCKeyF10() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF10")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF11() uintptr {
+func GCKeyF11() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF11")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF12() uintptr {
+func GCKeyF12() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF12")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF13() uintptr {
+func GCKeyF13() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF13")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF14() uintptr {
+func GCKeyF14() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF14")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF15() uintptr {
+func GCKeyF15() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF15")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF16() uintptr {
+func GCKeyF16() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF16")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF17() uintptr {
+func GCKeyF17() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF17")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF18() uintptr {
+func GCKeyF18() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF18")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF19() uintptr {
+func GCKeyF19() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF19")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF2() uintptr {
+func GCKeyF2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF20() uintptr {
+func GCKeyF20() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF20")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF3() uintptr {
+func GCKeyF3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF3")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF4() uintptr {
+func GCKeyF4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF5() uintptr {
+func GCKeyF5() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF5")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF6() uintptr {
+func GCKeyF6() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF6")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF7() uintptr {
+func GCKeyF7() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF7")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF8() uintptr {
+func GCKeyF8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyF9() uintptr {
+func GCKeyF9() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyF9")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyFive() uintptr {
+func GCKeyFive() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyFive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyFour() uintptr {
+func GCKeyFour() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyFour")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyG() uintptr {
+func GCKeyG() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyGraveAccentAndTilde() uintptr {
+func GCKeyGraveAccentAndTilde() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyGraveAccentAndTilde")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyH() uintptr {
+func GCKeyH() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyH")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyHome() uintptr {
+func GCKeyHome() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyHome")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyHyphen() uintptr {
+func GCKeyHyphen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyHyphen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyI() uintptr {
+func GCKeyI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInsert() uintptr {
+func GCKeyInsert() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInsert")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational1() uintptr {
+func GCKeyInternational1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational1")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational2() uintptr {
+func GCKeyInternational2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational3() uintptr {
+func GCKeyInternational3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational3")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational4() uintptr {
+func GCKeyInternational4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational5() uintptr {
+func GCKeyInternational5() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational5")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational6() uintptr {
+func GCKeyInternational6() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational6")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational7() uintptr {
+func GCKeyInternational7() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational7")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational8() uintptr {
+func GCKeyInternational8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyInternational9() uintptr {
+func GCKeyInternational9() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyInternational9")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyJ() uintptr {
+func GCKeyJ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyJ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyK() uintptr {
+func GCKeyK() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyK")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad0() uintptr {
+func GCKeyKeypad0() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad0")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad1() uintptr {
+func GCKeyKeypad1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad1")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad2() uintptr {
+func GCKeyKeypad2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad3() uintptr {
+func GCKeyKeypad3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad3")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad4() uintptr {
+func GCKeyKeypad4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad5() uintptr {
+func GCKeyKeypad5() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad5")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad6() uintptr {
+func GCKeyKeypad6() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad6")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad7() uintptr {
+func GCKeyKeypad7() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad7")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad8() uintptr {
+func GCKeyKeypad8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypad9() uintptr {
+func GCKeyKeypad9() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypad9")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadAsterisk() uintptr {
+func GCKeyKeypadAsterisk() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadAsterisk")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadEnter() uintptr {
+func GCKeyKeypadEnter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadEnter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadEqualSign() uintptr {
+func GCKeyKeypadEqualSign() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadEqualSign")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadHyphen() uintptr {
+func GCKeyKeypadHyphen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadHyphen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadNumLock() uintptr {
+func GCKeyKeypadNumLock() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadNumLock")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadPeriod() uintptr {
+func GCKeyKeypadPeriod() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadPeriod")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadPlus() uintptr {
+func GCKeyKeypadPlus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadPlus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyKeypadSlash() uintptr {
+func GCKeyKeypadSlash() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyKeypadSlash")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyL() uintptr {
+func GCKeyL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG1() uintptr {
+func GCKeyLANG1() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG1")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG2() uintptr {
+func GCKeyLANG2() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG3() uintptr {
+func GCKeyLANG3() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG3")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG4() uintptr {
+func GCKeyLANG4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG5() uintptr {
+func GCKeyLANG5() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG5")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG6() uintptr {
+func GCKeyLANG6() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG6")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG7() uintptr {
+func GCKeyLANG7() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG7")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG8() uintptr {
+func GCKeyLANG8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLANG9() uintptr {
+func GCKeyLANG9() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLANG9")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLeftAlt() uintptr {
+func GCKeyLeftAlt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLeftAlt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLeftArrow() uintptr {
+func GCKeyLeftArrow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLeftArrow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLeftControl() uintptr {
+func GCKeyLeftControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLeftControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLeftGUI() uintptr {
+func GCKeyLeftGUI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLeftGUI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyLeftShift() uintptr {
+func GCKeyLeftShift() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyLeftShift")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyM() uintptr {
+func GCKeyM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyN() uintptr {
+func GCKeyN() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyN")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyNine() uintptr {
+func GCKeyNine() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyNine")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyNonUSBackslash() uintptr {
+func GCKeyNonUSBackslash() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyNonUSBackslash")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyNonUSPound() uintptr {
+func GCKeyNonUSPound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyNonUSPound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyO() uintptr {
+func GCKeyO() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyOne() uintptr {
+func GCKeyOne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyOne")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyOpenBracket() uintptr {
+func GCKeyOpenBracket() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyOpenBracket")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyP() uintptr {
+func GCKeyP() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPageDown() uintptr {
+func GCKeyPageDown() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPageDown")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPageUp() uintptr {
+func GCKeyPageUp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPageUp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPause() uintptr {
+func GCKeyPause() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPause")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPeriod() uintptr {
+func GCKeyPeriod() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPeriod")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPower() uintptr {
+func GCKeyPower() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPower")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyPrintScreen() uintptr {
+func GCKeyPrintScreen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyPrintScreen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyQ() uintptr {
+func GCKeyQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyQuote() uintptr {
+func GCKeyQuote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyQuote")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyR() uintptr {
+func GCKeyR() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyReturnOrEnter() uintptr {
+func GCKeyReturnOrEnter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyReturnOrEnter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyRightAlt() uintptr {
+func GCKeyRightAlt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyRightAlt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyRightArrow() uintptr {
+func GCKeyRightArrow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyRightArrow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyRightControl() uintptr {
+func GCKeyRightControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyRightControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyRightGUI() uintptr {
+func GCKeyRightGUI() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyRightGUI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyRightShift() uintptr {
+func GCKeyRightShift() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyRightShift")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyS() uintptr {
+func GCKeyS() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyScrollLock() uintptr {
+func GCKeyScrollLock() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyScrollLock")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeySemicolon() uintptr {
+func GCKeySemicolon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeySemicolon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeySeven() uintptr {
+func GCKeySeven() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeySeven")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeySix() uintptr {
+func GCKeySix() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeySix")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeySlash() uintptr {
+func GCKeySlash() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeySlash")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeySpacebar() uintptr {
+func GCKeySpacebar() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeySpacebar")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyT() uintptr {
+func GCKeyT() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyT")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyTab() uintptr {
+func GCKeyTab() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyTab")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyThree() uintptr {
+func GCKeyThree() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyThree")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyTwo() uintptr {
+func GCKeyTwo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyTwo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyU() uintptr {
+func GCKeyU() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyU")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyUpArrow() uintptr {
+func GCKeyUpArrow() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyUpArrow")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyV() uintptr {
+func GCKeyV() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyV")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyW() uintptr {
+func GCKeyW() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyW")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyX() uintptr {
+func GCKeyX() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyX")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyY() uintptr {
+func GCKeyY() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyY")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyZ() uintptr {
+func GCKeyZ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyZ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyZero() uintptr {
+func GCKeyZero() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyZero")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use these constants with NSNotificationCenter to listen to connection and disconnection events Use GCKeyboardDidConnectNotification for observing keyboard connection Use GCKeyboardDidDisconnectNotification for observing keyboard disconnection The 'object' property of the notification will contain the GCKeyboard that was connected or disconnected. @see NSNotificationCetner @note All connected keyboards are coalesced into one keyboard object, so notification about connection/disconnection will only be delivered once until last keyboard disconnects.
-func GCKeyboardDidConnectNotification() uintptr {
+func GCKeyboardDidConnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyboardDidConnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCKeyboardDidDisconnectNotification() uintptr {
+func GCKeyboardDidDisconnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCKeyboardDidDisconnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use these constants with NSNotificationCenter to listen to a controller becoming the most recently used mouse. This is a good time to swap out UI to match the new current mouse, and unregister any handlers with the old current controller. The 'object' property of the notification will contain the GCMouse that became the current one. For example: - (void)mouseDidBecomeCurrent:(NSNotification *)note { GCMouse *mouse = note.object; ... } @see NSNotificationCenter @see GCMouse.mice @see GCMouse.current
-func GCMouseDidBecomeCurrentNotification() uintptr {
+func GCMouseDidBecomeCurrentNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCMouseDidBecomeCurrentNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCMouseDidConnectNotification for observing connections of mice. Use GCMouserDidDisconnectNotification for observing disconnections of mice. Connections and disconnections of mice will also be reflected in the mice array of the GCMouse class. The 'object' property of the notification will contain the GCMouse that was connected or disconnected. For example: - (void)controllerDidConnect:(NSNotification *)note { GCMouse *mouse = note.object; .... } @see NSNotificationCenter @see GCMouse.mice
-func GCMouseDidConnectNotification() uintptr {
+func GCMouseDidConnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCMouseDidConnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCMouseDidDisconnectNotification() uintptr {
+func GCMouseDidDisconnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCMouseDidDisconnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCMouseDidStopBeingCurrentNotification() uintptr {
+func GCMouseDidStopBeingCurrentNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCMouseDidStopBeingCurrentNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GCPoint2Zero() GCPoint2 {
@@ -2156,89 +3533,201 @@ func GCPoint2Zero() GCPoint2 {
 	return *(*GCPoint2)(unsafe.Pointer(ptr))
 }
 
-func GCProductCategoryArcadeStick() uintptr {
+func GCProductCategoryArcadeStick() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryArcadeStick")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // If multiple remotes have been combined into one, the device will have the GCProductCategoryCoalescedRemote product category. @discussion By default, the Game Controller framework will try to coalesce, or combine, the physical Apple TV Remote and the virtual Control Center remote and treat them as a single GCDevice instance. By setting GCSupportsMultipleMicroGamepads in your app's plist to true, you can disable this behavior.
-func GCProductCategoryCoalescedRemote() uintptr {
+func GCProductCategoryCoalescedRemote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryCoalescedRemote")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Users can use Apple TV Remote controls in Control Center on an iOS or iPadOS device.
-func GCProductCategoryControlCenterRemote() uintptr {
+func GCProductCategoryControlCenterRemote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryControlCenterRemote")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryDualSense() uintptr {
+func GCProductCategoryDualSense() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryDualSense")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryDualShock4() uintptr {
+func GCProductCategoryDualShock4() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryDualShock4")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryHID() uintptr {
+func GCProductCategoryHID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryHID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryKeyboard() uintptr {
+func GCProductCategoryKeyboard() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryKeyboard")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryMFi() uintptr {
+func GCProductCategoryMFi() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryMFi")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryMouse() uintptr {
+func GCProductCategoryMouse() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryMouse")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The Siri Remote (1st generation), or Apple TV Remote (1st generation), was first introduced in 2015. It features a Touch surface for touch navigation, and supports device motion.
-func GCProductCategorySiriRemote1stGen() uintptr {
+func GCProductCategorySiriRemote1stGen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategorySiriRemote1stGen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The Siri Remote (2nd generation), or Apple TV Remote (2nd generation), was first introduced in 2021. It features a touch-enabled clickpad for navigation.
-func GCProductCategorySiriRemote2ndGen() uintptr {
+func GCProductCategorySiriRemote2ndGen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategorySiriRemote2ndGen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The category for game controller products that support 6DoF tracking on visionOS.
-func GCProductCategorySpatialController() uintptr {
+func GCProductCategorySpatialController() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategorySpatialController")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The Universal Electronics remote is an infrared and Bluetooth Low Energy remote designed to work with the Apple TV.
-func GCProductCategoryUniversalElectronicsRemote() uintptr {
+func GCProductCategoryUniversalElectronicsRemote() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryUniversalElectronicsRemote")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCProductCategoryXboxOne() uintptr {
+func GCProductCategoryXboxOne() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCProductCategoryXboxOne")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Use these constants with NSNotificationCenter to listen to connection and disconnection events. Use GCRacingWheelDidConnectNotification for observing connections of racing wheels. Use GCRacingWheelDidDisconnectNotification for observing disconnections of racing wheels. Connections and disconnections of racing wheels will also be reflected in the connectedRacingWheels array of the GCRacingWheel class. The 'object' property of the notification will contain the GCRacingWheel that was connected or disconnected. For example: - (void)wheelDidConnect:(NSNotification *)note { GCRacingWheel *controller = note.object; .... } @see NSNotificationCenter @see GCRacingWheel.connectedRacingWheels
-func GCRacingWheelDidConnectNotification() uintptr {
+func GCRacingWheelDidConnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCRacingWheelDidConnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func GCRacingWheelDidDisconnectNotification() uintptr {
+func GCRacingWheelDidDisconnectNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamecontrollerLib, "GCRacingWheelDidDisconnectNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

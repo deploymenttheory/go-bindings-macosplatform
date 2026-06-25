@@ -2618,7 +2618,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the I/O node’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-6i8ld"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-57kv"
       }
     },
     "AVAudioInputNode": {
@@ -2833,8 +2833,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/isplaying"
       },
       "scheduleBuffer(_:atTime:options:completionCallbackType:completionHandler:)": {
-        "doc": "Schedules playing samples from an audio buffer.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-3ewd3"
+        "doc": "Schedules playing samples from a read-only audio buffer.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioplayernode/schedulebuffer(_:attime:options:completioncallbacktype:completionhandler:)-81qje"
       }
     },
     "AVAudioRecorder": {
@@ -3334,7 +3334,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the audio unit’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-66uo7"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-6c2ze"
       }
     },
     "AVAudioUnitComponent": {

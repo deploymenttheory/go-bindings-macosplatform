@@ -7,6 +7,9 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Deprecated: Use MusicSubscription.subscriptionUpdates from MusicKit.
@@ -24,27 +27,55 @@ func SKDownloadTimeRemainingUnknown() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func SKErrorDomain() uintptr {
+func SKErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported.
-func SKReceiptPropertyIsExpired() uintptr {
+func SKReceiptPropertyIsExpired() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKReceiptPropertyIsExpired")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported.
-func SKReceiptPropertyIsRevoked() uintptr {
+func SKReceiptPropertyIsRevoked() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKReceiptPropertyIsRevoked")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: No longer supported.
-func SKReceiptPropertyIsVolumePurchase() uintptr {
+func SKReceiptPropertyIsVolumePurchase() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_storekitLib, "SKReceiptPropertyIsVolumePurchase")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SKStoreProductParameterAdvertisingPartnerToken() uintptr {

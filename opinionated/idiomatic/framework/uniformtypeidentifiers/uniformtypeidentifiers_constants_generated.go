@@ -5,8 +5,11 @@
 package uniformtypeidentifiers
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
 // UTTagClassFilenameExtension returns the string constant UTTagClassFilenameExtension, for use as a dictionary key or argument.
@@ -17,4 +20,1404 @@ func UTTagClassFilenameExtension() obj.Object {
 // UTTagClassMIMEType returns the string constant UTTagClassMIMEType, for use as a dictionary key or argument.
 func UTTagClassMIMEType() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("UTTagClassMIMEType")))
+}
+
+// UTTypeItem returns the UTTypeItem ObjC object as an idiomatic Type.
+func UTTypeItem() *Type {
+	addr := _symbol("UTTypeItem")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeContent returns the UTTypeContent ObjC object as an idiomatic Type.
+func UTTypeContent() *Type {
+	addr := _symbol("UTTypeContent")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCompositeContent returns the UTTypeCompositeContent ObjC object as an idiomatic Type.
+func UTTypeCompositeContent() *Type {
+	addr := _symbol("UTTypeCompositeContent")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeDiskImage returns the UTTypeDiskImage ObjC object as an idiomatic Type.
+func UTTypeDiskImage() *Type {
+	addr := _symbol("UTTypeDiskImage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeData returns the UTTypeData ObjC object as an idiomatic Type.
+func UTTypeData() *Type {
+	addr := _symbol("UTTypeData")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeDirectory returns the UTTypeDirectory ObjC object as an idiomatic Type.
+func UTTypeDirectory() *Type {
+	addr := _symbol("UTTypeDirectory")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeResolvable returns the UTTypeResolvable ObjC object as an idiomatic Type.
+func UTTypeResolvable() *Type {
+	addr := _symbol("UTTypeResolvable")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSymbolicLink returns the UTTypeSymbolicLink ObjC object as an idiomatic Type.
+func UTTypeSymbolicLink() *Type {
+	addr := _symbol("UTTypeSymbolicLink")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeExecutable returns the UTTypeExecutable ObjC object as an idiomatic Type.
+func UTTypeExecutable() *Type {
+	addr := _symbol("UTTypeExecutable")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMountPoint returns the UTTypeMountPoint ObjC object as an idiomatic Type.
+func UTTypeMountPoint() *Type {
+	addr := _symbol("UTTypeMountPoint")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAliasFile returns the UTTypeAliasFile ObjC object as an idiomatic Type.
+func UTTypeAliasFile() *Type {
+	addr := _symbol("UTTypeAliasFile")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeURLBookmarkData returns the UTTypeURLBookmarkData ObjC object as an idiomatic Type.
+func UTTypeURLBookmarkData() *Type {
+	addr := _symbol("UTTypeURLBookmarkData")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeURL returns the UTTypeURL ObjC object as an idiomatic Type.
+func UTTypeURL() *Type {
+	addr := _symbol("UTTypeURL")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeFileURL returns the UTTypeFileURL ObjC object as an idiomatic Type.
+func UTTypeFileURL() *Type {
+	addr := _symbol("UTTypeFileURL")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeText returns the UTTypeText ObjC object as an idiomatic Type.
+func UTTypeText() *Type {
+	addr := _symbol("UTTypeText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePlainText returns the UTTypePlainText ObjC object as an idiomatic Type.
+func UTTypePlainText() *Type {
+	addr := _symbol("UTTypePlainText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUTF8PlainText returns the UTTypeUTF8PlainText ObjC object as an idiomatic Type.
+func UTTypeUTF8PlainText() *Type {
+	addr := _symbol("UTTypeUTF8PlainText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUTF16ExternalPlainText returns the UTTypeUTF16ExternalPlainText ObjC object as an idiomatic Type.
+func UTTypeUTF16ExternalPlainText() *Type {
+	addr := _symbol("UTTypeUTF16ExternalPlainText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUTF16PlainText returns the UTTypeUTF16PlainText ObjC object as an idiomatic Type.
+func UTTypeUTF16PlainText() *Type {
+	addr := _symbol("UTTypeUTF16PlainText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeDelimitedText returns the UTTypeDelimitedText ObjC object as an idiomatic Type.
+func UTTypeDelimitedText() *Type {
+	addr := _symbol("UTTypeDelimitedText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCommaSeparatedText returns the UTTypeCommaSeparatedText ObjC object as an idiomatic Type.
+func UTTypeCommaSeparatedText() *Type {
+	addr := _symbol("UTTypeCommaSeparatedText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeTabSeparatedText returns the UTTypeTabSeparatedText ObjC object as an idiomatic Type.
+func UTTypeTabSeparatedText() *Type {
+	addr := _symbol("UTTypeTabSeparatedText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUTF8TabSeparatedText returns the UTTypeUTF8TabSeparatedText ObjC object as an idiomatic Type.
+func UTTypeUTF8TabSeparatedText() *Type {
+	addr := _symbol("UTTypeUTF8TabSeparatedText")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeRTF returns the UTTypeRTF ObjC object as an idiomatic Type.
+func UTTypeRTF() *Type {
+	addr := _symbol("UTTypeRTF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeHTML returns the UTTypeHTML ObjC object as an idiomatic Type.
+func UTTypeHTML() *Type {
+	addr := _symbol("UTTypeHTML")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeXML returns the UTTypeXML ObjC object as an idiomatic Type.
+func UTTypeXML() *Type {
+	addr := _symbol("UTTypeXML")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeYAML returns the UTTypeYAML ObjC object as an idiomatic Type.
+func UTTypeYAML() *Type {
+	addr := _symbol("UTTypeYAML")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCSS returns the UTTypeCSS ObjC object as an idiomatic Type.
+func UTTypeCSS() *Type {
+	addr := _symbol("UTTypeCSS")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSourceCode returns the UTTypeSourceCode ObjC object as an idiomatic Type.
+func UTTypeSourceCode() *Type {
+	addr := _symbol("UTTypeSourceCode")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAssemblyLanguageSource returns the UTTypeAssemblyLanguageSource ObjC object as an idiomatic Type.
+func UTTypeAssemblyLanguageSource() *Type {
+	addr := _symbol("UTTypeAssemblyLanguageSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCSource returns the UTTypeCSource ObjC object as an idiomatic Type.
+func UTTypeCSource() *Type {
+	addr := _symbol("UTTypeCSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeObjectiveCSource returns the UTTypeObjectiveCSource ObjC object as an idiomatic Type.
+func UTTypeObjectiveCSource() *Type {
+	addr := _symbol("UTTypeObjectiveCSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSwiftSource returns the UTTypeSwiftSource ObjC object as an idiomatic Type.
+func UTTypeSwiftSource() *Type {
+	addr := _symbol("UTTypeSwiftSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCPlusPlusSource returns the UTTypeCPlusPlusSource ObjC object as an idiomatic Type.
+func UTTypeCPlusPlusSource() *Type {
+	addr := _symbol("UTTypeCPlusPlusSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeObjectiveCPlusPlusSource returns the UTTypeObjectiveCPlusPlusSource ObjC object as an idiomatic Type.
+func UTTypeObjectiveCPlusPlusSource() *Type {
+	addr := _symbol("UTTypeObjectiveCPlusPlusSource")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCHeader returns the UTTypeCHeader ObjC object as an idiomatic Type.
+func UTTypeCHeader() *Type {
+	addr := _symbol("UTTypeCHeader")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCPlusPlusHeader returns the UTTypeCPlusPlusHeader ObjC object as an idiomatic Type.
+func UTTypeCPlusPlusHeader() *Type {
+	addr := _symbol("UTTypeCPlusPlusHeader")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeScript returns the UTTypeScript ObjC object as an idiomatic Type.
+func UTTypeScript() *Type {
+	addr := _symbol("UTTypeScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAppleScript returns the UTTypeAppleScript ObjC object as an idiomatic Type.
+func UTTypeAppleScript() *Type {
+	addr := _symbol("UTTypeAppleScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeOSAScript returns the UTTypeOSAScript ObjC object as an idiomatic Type.
+func UTTypeOSAScript() *Type {
+	addr := _symbol("UTTypeOSAScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeOSAScriptBundle returns the UTTypeOSAScriptBundle ObjC object as an idiomatic Type.
+func UTTypeOSAScriptBundle() *Type {
+	addr := _symbol("UTTypeOSAScriptBundle")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeJavaScript returns the UTTypeJavaScript ObjC object as an idiomatic Type.
+func UTTypeJavaScript() *Type {
+	addr := _symbol("UTTypeJavaScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeShellScript returns the UTTypeShellScript ObjC object as an idiomatic Type.
+func UTTypeShellScript() *Type {
+	addr := _symbol("UTTypeShellScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePerlScript returns the UTTypePerlScript ObjC object as an idiomatic Type.
+func UTTypePerlScript() *Type {
+	addr := _symbol("UTTypePerlScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePythonScript returns the UTTypePythonScript ObjC object as an idiomatic Type.
+func UTTypePythonScript() *Type {
+	addr := _symbol("UTTypePythonScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeRubyScript returns the UTTypeRubyScript ObjC object as an idiomatic Type.
+func UTTypeRubyScript() *Type {
+	addr := _symbol("UTTypeRubyScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePHPScript returns the UTTypePHPScript ObjC object as an idiomatic Type.
+func UTTypePHPScript() *Type {
+	addr := _symbol("UTTypePHPScript")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMakefile returns the UTTypeMakefile ObjC object as an idiomatic Type.
+func UTTypeMakefile() *Type {
+	addr := _symbol("UTTypeMakefile")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeJSON returns the UTTypeJSON ObjC object as an idiomatic Type.
+func UTTypeJSON() *Type {
+	addr := _symbol("UTTypeJSON")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePropertyList returns the UTTypePropertyList ObjC object as an idiomatic Type.
+func UTTypePropertyList() *Type {
+	addr := _symbol("UTTypePropertyList")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeXMLPropertyList returns the UTTypeXMLPropertyList ObjC object as an idiomatic Type.
+func UTTypeXMLPropertyList() *Type {
+	addr := _symbol("UTTypeXMLPropertyList")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeBinaryPropertyList returns the UTTypeBinaryPropertyList ObjC object as an idiomatic Type.
+func UTTypeBinaryPropertyList() *Type {
+	addr := _symbol("UTTypeBinaryPropertyList")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePDF returns the UTTypePDF ObjC object as an idiomatic Type.
+func UTTypePDF() *Type {
+	addr := _symbol("UTTypePDF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeRTFD returns the UTTypeRTFD ObjC object as an idiomatic Type.
+func UTTypeRTFD() *Type {
+	addr := _symbol("UTTypeRTFD")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeFlatRTFD returns the UTTypeFlatRTFD ObjC object as an idiomatic Type.
+func UTTypeFlatRTFD() *Type {
+	addr := _symbol("UTTypeFlatRTFD")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeWebArchive returns the UTTypeWebArchive ObjC object as an idiomatic Type.
+func UTTypeWebArchive() *Type {
+	addr := _symbol("UTTypeWebArchive")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeImage returns the UTTypeImage ObjC object as an idiomatic Type.
+func UTTypeImage() *Type {
+	addr := _symbol("UTTypeImage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeJPEG returns the UTTypeJPEG ObjC object as an idiomatic Type.
+func UTTypeJPEG() *Type {
+	addr := _symbol("UTTypeJPEG")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeTIFF returns the UTTypeTIFF ObjC object as an idiomatic Type.
+func UTTypeTIFF() *Type {
+	addr := _symbol("UTTypeTIFF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeGIF returns the UTTypeGIF ObjC object as an idiomatic Type.
+func UTTypeGIF() *Type {
+	addr := _symbol("UTTypeGIF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePNG returns the UTTypePNG ObjC object as an idiomatic Type.
+func UTTypePNG() *Type {
+	addr := _symbol("UTTypePNG")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeICNS returns the UTTypeICNS ObjC object as an idiomatic Type.
+func UTTypeICNS() *Type {
+	addr := _symbol("UTTypeICNS")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeBMP returns the UTTypeBMP ObjC object as an idiomatic Type.
+func UTTypeBMP() *Type {
+	addr := _symbol("UTTypeBMP")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeICO returns the UTTypeICO ObjC object as an idiomatic Type.
+func UTTypeICO() *Type {
+	addr := _symbol("UTTypeICO")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeRAWImage returns the UTTypeRAWImage ObjC object as an idiomatic Type.
+func UTTypeRAWImage() *Type {
+	addr := _symbol("UTTypeRAWImage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSVG returns the UTTypeSVG ObjC object as an idiomatic Type.
+func UTTypeSVG() *Type {
+	addr := _symbol("UTTypeSVG")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeLivePhoto returns the UTTypeLivePhoto ObjC object as an idiomatic Type.
+func UTTypeLivePhoto() *Type {
+	addr := _symbol("UTTypeLivePhoto")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeHEIF returns the UTTypeHEIF ObjC object as an idiomatic Type.
+func UTTypeHEIF() *Type {
+	addr := _symbol("UTTypeHEIF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeHEIC returns the UTTypeHEIC ObjC object as an idiomatic Type.
+func UTTypeHEIC() *Type {
+	addr := _symbol("UTTypeHEIC")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeHEICS returns the UTTypeHEICS ObjC object as an idiomatic Type.
+func UTTypeHEICS() *Type {
+	addr := _symbol("UTTypeHEICS")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeWebP returns the UTTypeWebP ObjC object as an idiomatic Type.
+func UTTypeWebP() *Type {
+	addr := _symbol("UTTypeWebP")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeEXR returns the UTTypeEXR ObjC object as an idiomatic Type.
+func UTTypeEXR() *Type {
+	addr := _symbol("UTTypeEXR")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeDNG returns the UTTypeDNG ObjC object as an idiomatic Type.
+func UTTypeDNG() *Type {
+	addr := _symbol("UTTypeDNG")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeJPEGXL returns the UTTypeJPEGXL ObjC object as an idiomatic Type.
+func UTTypeJPEGXL() *Type {
+	addr := _symbol("UTTypeJPEGXL")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTType3DContent returns the UTType3DContent ObjC object as an idiomatic Type.
+func UTType3DContent() *Type {
+	addr := _symbol("UTType3DContent")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUSD returns the UTTypeUSD ObjC object as an idiomatic Type.
+func UTTypeUSD() *Type {
+	addr := _symbol("UTTypeUSD")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUSDZ returns the UTTypeUSDZ ObjC object as an idiomatic Type.
+func UTTypeUSDZ() *Type {
+	addr := _symbol("UTTypeUSDZ")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeRealityFile returns the UTTypeRealityFile ObjC object as an idiomatic Type.
+func UTTypeRealityFile() *Type {
+	addr := _symbol("UTTypeRealityFile")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSceneKitScene returns the UTTypeSceneKitScene ObjC object as an idiomatic Type.
+func UTTypeSceneKitScene() *Type {
+	addr := _symbol("UTTypeSceneKitScene")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeARReferenceObject returns the UTTypeARReferenceObject ObjC object as an idiomatic Type.
+func UTTypeARReferenceObject() *Type {
+	addr := _symbol("UTTypeARReferenceObject")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAudiovisualContent returns the UTTypeAudiovisualContent ObjC object as an idiomatic Type.
+func UTTypeAudiovisualContent() *Type {
+	addr := _symbol("UTTypeAudiovisualContent")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMovie returns the UTTypeMovie ObjC object as an idiomatic Type.
+func UTTypeMovie() *Type {
+	addr := _symbol("UTTypeMovie")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeVideo returns the UTTypeVideo ObjC object as an idiomatic Type.
+func UTTypeVideo() *Type {
+	addr := _symbol("UTTypeVideo")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAudio returns the UTTypeAudio ObjC object as an idiomatic Type.
+func UTTypeAudio() *Type {
+	addr := _symbol("UTTypeAudio")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeQuickTimeMovie returns the UTTypeQuickTimeMovie ObjC object as an idiomatic Type.
+func UTTypeQuickTimeMovie() *Type {
+	addr := _symbol("UTTypeQuickTimeMovie")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMPEG returns the UTTypeMPEG ObjC object as an idiomatic Type.
+func UTTypeMPEG() *Type {
+	addr := _symbol("UTTypeMPEG")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMPEG2Video returns the UTTypeMPEG2Video ObjC object as an idiomatic Type.
+func UTTypeMPEG2Video() *Type {
+	addr := _symbol("UTTypeMPEG2Video")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMPEG2TransportStream returns the UTTypeMPEG2TransportStream ObjC object as an idiomatic Type.
+func UTTypeMPEG2TransportStream() *Type {
+	addr := _symbol("UTTypeMPEG2TransportStream")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMP3 returns the UTTypeMP3 ObjC object as an idiomatic Type.
+func UTTypeMP3() *Type {
+	addr := _symbol("UTTypeMP3")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMPEG4Movie returns the UTTypeMPEG4Movie ObjC object as an idiomatic Type.
+func UTTypeMPEG4Movie() *Type {
+	addr := _symbol("UTTypeMPEG4Movie")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMPEG4Audio returns the UTTypeMPEG4Audio ObjC object as an idiomatic Type.
+func UTTypeMPEG4Audio() *Type {
+	addr := _symbol("UTTypeMPEG4Audio")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAppleProtectedMPEG4Audio returns the UTTypeAppleProtectedMPEG4Audio ObjC object as an idiomatic Type.
+func UTTypeAppleProtectedMPEG4Audio() *Type {
+	addr := _symbol("UTTypeAppleProtectedMPEG4Audio")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAppleProtectedMPEG4Video returns the UTTypeAppleProtectedMPEG4Video ObjC object as an idiomatic Type.
+func UTTypeAppleProtectedMPEG4Video() *Type {
+	addr := _symbol("UTTypeAppleProtectedMPEG4Video")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAVI returns the UTTypeAVI ObjC object as an idiomatic Type.
+func UTTypeAVI() *Type {
+	addr := _symbol("UTTypeAVI")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAIFF returns the UTTypeAIFF ObjC object as an idiomatic Type.
+func UTTypeAIFF() *Type {
+	addr := _symbol("UTTypeAIFF")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeWAV returns the UTTypeWAV ObjC object as an idiomatic Type.
+func UTTypeWAV() *Type {
+	addr := _symbol("UTTypeWAV")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMIDI returns the UTTypeMIDI ObjC object as an idiomatic Type.
+func UTTypeMIDI() *Type {
+	addr := _symbol("UTTypeMIDI")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePlaylist returns the UTTypePlaylist ObjC object as an idiomatic Type.
+func UTTypePlaylist() *Type {
+	addr := _symbol("UTTypePlaylist")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeM3UPlaylist returns the UTTypeM3UPlaylist ObjC object as an idiomatic Type.
+func UTTypeM3UPlaylist() *Type {
+	addr := _symbol("UTTypeM3UPlaylist")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeFolder returns the UTTypeFolder ObjC object as an idiomatic Type.
+func UTTypeFolder() *Type {
+	addr := _symbol("UTTypeFolder")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeVolume returns the UTTypeVolume ObjC object as an idiomatic Type.
+func UTTypeVolume() *Type {
+	addr := _symbol("UTTypeVolume")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePackage returns the UTTypePackage ObjC object as an idiomatic Type.
+func UTTypePackage() *Type {
+	addr := _symbol("UTTypePackage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeBundle returns the UTTypeBundle ObjC object as an idiomatic Type.
+func UTTypeBundle() *Type {
+	addr := _symbol("UTTypeBundle")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePluginBundle returns the UTTypePluginBundle ObjC object as an idiomatic Type.
+func UTTypePluginBundle() *Type {
+	addr := _symbol("UTTypePluginBundle")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSpotlightImporter returns the UTTypeSpotlightImporter ObjC object as an idiomatic Type.
+func UTTypeSpotlightImporter() *Type {
+	addr := _symbol("UTTypeSpotlightImporter")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeQuickLookGenerator returns the UTTypeQuickLookGenerator ObjC object as an idiomatic Type.
+func UTTypeQuickLookGenerator() *Type {
+	addr := _symbol("UTTypeQuickLookGenerator")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeXPCService returns the UTTypeXPCService ObjC object as an idiomatic Type.
+func UTTypeXPCService() *Type {
+	addr := _symbol("UTTypeXPCService")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeFramework returns the UTTypeFramework ObjC object as an idiomatic Type.
+func UTTypeFramework() *Type {
+	addr := _symbol("UTTypeFramework")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeApplication returns the UTTypeApplication ObjC object as an idiomatic Type.
+func UTTypeApplication() *Type {
+	addr := _symbol("UTTypeApplication")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeApplicationBundle returns the UTTypeApplicationBundle ObjC object as an idiomatic Type.
+func UTTypeApplicationBundle() *Type {
+	addr := _symbol("UTTypeApplicationBundle")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeApplicationExtension returns the UTTypeApplicationExtension ObjC object as an idiomatic Type.
+func UTTypeApplicationExtension() *Type {
+	addr := _symbol("UTTypeApplicationExtension")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeUnixExecutable returns the UTTypeUnixExecutable ObjC object as an idiomatic Type.
+func UTTypeUnixExecutable() *Type {
+	addr := _symbol("UTTypeUnixExecutable")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeEXE returns the UTTypeEXE ObjC object as an idiomatic Type.
+func UTTypeEXE() *Type {
+	addr := _symbol("UTTypeEXE")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSystemPreferencesPane returns the UTTypeSystemPreferencesPane ObjC object as an idiomatic Type.
+func UTTypeSystemPreferencesPane() *Type {
+	addr := _symbol("UTTypeSystemPreferencesPane")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeArchive returns the UTTypeArchive ObjC object as an idiomatic Type.
+func UTTypeArchive() *Type {
+	addr := _symbol("UTTypeArchive")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeGZIP returns the UTTypeGZIP ObjC object as an idiomatic Type.
+func UTTypeGZIP() *Type {
+	addr := _symbol("UTTypeGZIP")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeBZ2 returns the UTTypeBZ2 ObjC object as an idiomatic Type.
+func UTTypeBZ2() *Type {
+	addr := _symbol("UTTypeBZ2")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeZIP returns the UTTypeZIP ObjC object as an idiomatic Type.
+func UTTypeZIP() *Type {
+	addr := _symbol("UTTypeZIP")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAppleArchive returns the UTTypeAppleArchive ObjC object as an idiomatic Type.
+func UTTypeAppleArchive() *Type {
+	addr := _symbol("UTTypeAppleArchive")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeTarArchive returns the UTTypeTarArchive ObjC object as an idiomatic Type.
+func UTTypeTarArchive() *Type {
+	addr := _symbol("UTTypeTarArchive")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeSpreadsheet returns the UTTypeSpreadsheet ObjC object as an idiomatic Type.
+func UTTypeSpreadsheet() *Type {
+	addr := _symbol("UTTypeSpreadsheet")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePresentation returns the UTTypePresentation ObjC object as an idiomatic Type.
+func UTTypePresentation() *Type {
+	addr := _symbol("UTTypePresentation")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeDatabase returns the UTTypeDatabase ObjC object as an idiomatic Type.
+func UTTypeDatabase() *Type {
+	addr := _symbol("UTTypeDatabase")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeMessage returns the UTTypeMessage ObjC object as an idiomatic Type.
+func UTTypeMessage() *Type {
+	addr := _symbol("UTTypeMessage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeContact returns the UTTypeContact ObjC object as an idiomatic Type.
+func UTTypeContact() *Type {
+	addr := _symbol("UTTypeContact")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeVCard returns the UTTypeVCard ObjC object as an idiomatic Type.
+func UTTypeVCard() *Type {
+	addr := _symbol("UTTypeVCard")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeToDoItem returns the UTTypeToDoItem ObjC object as an idiomatic Type.
+func UTTypeToDoItem() *Type {
+	addr := _symbol("UTTypeToDoItem")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeCalendarEvent returns the UTTypeCalendarEvent ObjC object as an idiomatic Type.
+func UTTypeCalendarEvent() *Type {
+	addr := _symbol("UTTypeCalendarEvent")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeEmailMessage returns the UTTypeEmailMessage ObjC object as an idiomatic Type.
+func UTTypeEmailMessage() *Type {
+	addr := _symbol("UTTypeEmailMessage")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeInternetLocation returns the UTTypeInternetLocation ObjC object as an idiomatic Type.
+func UTTypeInternetLocation() *Type {
+	addr := _symbol("UTTypeInternetLocation")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeInternetShortcut returns the UTTypeInternetShortcut ObjC object as an idiomatic Type.
+func UTTypeInternetShortcut() *Type {
+	addr := _symbol("UTTypeInternetShortcut")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeFont returns the UTTypeFont ObjC object as an idiomatic Type.
+func UTTypeFont() *Type {
+	addr := _symbol("UTTypeFont")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeBookmark returns the UTTypeBookmark ObjC object as an idiomatic Type.
+func UTTypeBookmark() *Type {
+	addr := _symbol("UTTypeBookmark")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypePKCS12 returns the UTTypePKCS12 ObjC object as an idiomatic Type.
+func UTTypePKCS12() *Type {
+	addr := _symbol("UTTypePKCS12")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeX509Certificate returns the UTTypeX509Certificate ObjC object as an idiomatic Type.
+func UTTypeX509Certificate() *Type {
+	addr := _symbol("UTTypeX509Certificate")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeEPUB returns the UTTypeEPUB ObjC object as an idiomatic Type.
+func UTTypeEPUB() *Type {
+	addr := _symbol("UTTypeEPUB")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeLog returns the UTTypeLog ObjC object as an idiomatic Type.
+func UTTypeLog() *Type {
+	addr := _symbol("UTTypeLog")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeAHAP returns the UTTypeAHAP ObjC object as an idiomatic Type.
+func UTTypeAHAP() *Type {
+	addr := _symbol("UTTypeAHAP")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeGeoJSON returns the UTTypeGeoJSON ObjC object as an idiomatic Type.
+func UTTypeGeoJSON() *Type {
+	addr := _symbol("UTTypeGeoJSON")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
+}
+
+// UTTypeLinkPresentationMetadata returns the UTTypeLinkPresentationMetadata ObjC object as an idiomatic Type.
+func UTTypeLinkPresentationMetadata() *Type {
+	addr := _symbol("UTTypeLinkPresentationMetadata")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return TypeFromID(id)
 }

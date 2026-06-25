@@ -583,7 +583,7 @@
       },
       "supportedHandleTypes": {
         "doc": "The supported handle types.",
-        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/supportedhandletypes-995uh"
+        "url": "https://developer.apple.com/documentation/callkit/cxproviderconfiguration/supportedhandletypes-kd6i"
       },
       "supportsVideo": {
         "doc": "A Boolean value that indicates whether the provider supports video in addition to audio.",

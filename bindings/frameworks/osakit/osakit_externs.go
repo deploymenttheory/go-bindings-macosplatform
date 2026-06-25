@@ -4,100 +4,238 @@
 package osakit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func OSAScriptErrorAppAddressKey() uintptr {
+func OSAScriptErrorAppAddressKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorAppAddressKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorAppName() uintptr {
+func OSAScriptErrorAppName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorAppName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorAppNameKey() uintptr {
+func OSAScriptErrorAppNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorAppNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorBriefMessage() uintptr {
+func OSAScriptErrorBriefMessage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorBriefMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorBriefMessageKey() uintptr {
+func OSAScriptErrorBriefMessageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorBriefMessageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorExpectedTypeKey() uintptr {
+func OSAScriptErrorExpectedTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorExpectedTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorMessage() uintptr {
+func OSAScriptErrorMessage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorMessageKey() uintptr {
+func OSAScriptErrorMessageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorMessageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorNumber() uintptr {
+func OSAScriptErrorNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorNumberKey() uintptr {
+func OSAScriptErrorNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorOffendingObjectKey() uintptr {
+func OSAScriptErrorOffendingObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorOffendingObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorPartialResultKey() uintptr {
+func OSAScriptErrorPartialResultKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorPartialResultKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorRange() uintptr {
+func OSAScriptErrorRange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorRange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAScriptErrorRangeKey() uintptr {
+func OSAScriptErrorRangeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAScriptErrorRangeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAStorageApplicationBundleType() uintptr {
+func OSAStorageApplicationBundleType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageApplicationBundleType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAStorageApplicationType() uintptr {
+func OSAStorageApplicationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageApplicationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAStorageScriptBundleType() uintptr {
+func OSAStorageScriptBundleType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageScriptBundleType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAStorageScriptType() uintptr {
+func OSAStorageScriptType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageScriptType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSAStorageTextType() uintptr {
+func OSAStorageTextType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_osakitLib, "OSAStorageTextType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

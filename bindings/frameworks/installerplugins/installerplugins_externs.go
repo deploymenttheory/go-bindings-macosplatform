@@ -4,23 +4,49 @@
 package installerplugins
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @const 		InstallerState_Choice_CustomLocation @abstract   Key for accessing choice custom location.  The value for this key is a full path to the install location. @discussion Certain choices can be relocated to a different location than the target.  If this choice has been relocated, this value for this key when used in a choicesDictionary will be the alternate location (selected by the user).
-func InstallerState_Choice_CustomLocation() uintptr {
+func InstallerState_Choice_CustomLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_installerpluginsLib, "InstallerState_Choice_CustomLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const 		InstallerState_Choice_Identifier @abstract   Key for accessing the choice identifier from the choiceDictionary.  The value for this key is an NSString. @discussion Use this key with dictionary retrieved from choiceDictionaries to access the identifier for a given choice. This identifier is either the package identifier attached to the choice, or the choice identifier in a distribution script.
-func InstallerState_Choice_Identifier() uintptr {
+func InstallerState_Choice_Identifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_installerpluginsLib, "InstallerState_Choice_Identifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const 		InstallerState_Choice_Installed @abstract   Key for accessing if a choice was chosen to be installed.  The value for this key is an NSNumber. @discussion Use this key with the dictionary retrieved from choiceDictionaries to determine if the given choice was installed (or will be installed, if installStarted is false).
-func InstallerState_Choice_Installed() uintptr {
+func InstallerState_Choice_Installed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_installerpluginsLib, "InstallerState_Choice_Installed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

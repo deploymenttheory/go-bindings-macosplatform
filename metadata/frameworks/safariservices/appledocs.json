@@ -66,26 +66,6 @@
       "url": "https://developer.apple.com/documentation/safariservices/sfsafariextensionhandling"
     }
   },
-  "enums": {
-    "SFErrorCode": {
-      "doc": "Messages that describe a content blocker or Safari app extension error.",
-      "url": "https://developer.apple.com/documentation/safariservices/sferrorcode",
-      "members": {
-        "SFErrorLoadingInterrupted": {
-          "doc": "There was an error loading the content blocker extension.",
-          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/loadinginterrupted"
-        },
-        "SFErrorNoAttachmentFound": {
-          "doc": "The Content Blocker extension returned an NSExtensionItem that did not include an attachment.",
-          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/noattachmentfound"
-        },
-        "SFErrorNoExtensionFound": {
-          "doc": "A Content Blocker or Safari app extension with the specified bundle identifier was not found, or the bundle identifier specified an extension that was not owned by you.",
-          "url": "https://developer.apple.com/documentation/safariservices/sferrorcode/noextensionfound"
-        }
-      }
-    }
-  },
   "methods": {
     "SFContentBlockerManager": {
       "+getStateOfContentBlockerWithIdentifier:completionHandler:": {

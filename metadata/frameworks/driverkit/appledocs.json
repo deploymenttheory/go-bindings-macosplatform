@@ -37,8 +37,14 @@
       "doc": "A private structure for an interrupt dispatch source.",
       "url": "https://developer.apple.com/documentation/driverkit/iointerruptdispatchsourcepayload"
     },
+    "IONamedValue": {
+      "url": "https://developer.apple.com/documentation/driverkit/ionamedvalue"
+    },
     "IONormDistReportValues": {
       "url": "https://developer.apple.com/documentation/driverkit/ionormdistreportvalues"
+    },
+    "IOPhysicalRange": {
+      "url": "https://developer.apple.com/documentation/driverkit/iophysicalrange"
     },
     "IORPC": {
       "url": "https://developer.apple.com/documentation/driverkit/iorpc"
@@ -101,6 +107,9 @@
     "IOUserClientMethodDispatch": {
       "doc": "A structure that specifies how to validate the arguments passed to a client method function.",
       "url": "https://developer.apple.com/documentation/driverkit/iouserclientmethoddispatch"
+    },
+    "IOVirtualRange": {
+      "url": "https://developer.apple.com/documentation/driverkit/iovirtualrange"
     },
     "OSClassDescription": {
       "url": "https://developer.apple.com/documentation/driverkit/osclassdescription"

@@ -4,125 +4,277 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // The attribute data describes the degree to which a surface’s appearance changes in appearance when rotated about its normal vector.
-func MDLVertexAttributeAnisotropy() uintptr {
+func MDLVertexAttributeAnisotropy() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeAnisotropy")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The normal to a curve at a vertex position
-func MDLVertexAttributeBinormal() uintptr {
+func MDLVertexAttributeBinormal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeBinormal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The vector completing a tangent basis at a vertex
-func MDLVertexAttributeBitangent() uintptr {
+func MDLVertexAttributeBitangent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeBitangent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Color of a vertex
-func MDLVertexAttributeColor() uintptr {
+func MDLVertexAttributeColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeColor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A crease value along an edge to be applied during subdivision. A zero value indicates an edge is smooth, one is sharply creased.
-func MDLVertexAttributeEdgeCrease() uintptr {
+func MDLVertexAttributeEdgeCrease() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeEdgeCrease")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Indices of joints in an animation rig corresponding to weighting information
-func MDLVertexAttributeJointIndices() uintptr {
+func MDLVertexAttributeJointIndices() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeJointIndices")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Weights corresponding to joints for the purpose of blending animation
-func MDLVertexAttributeJointWeights() uintptr {
+func MDLVertexAttributeJointWeights() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeJointWeights")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The direction of a normal at a vertex
-func MDLVertexAttributeNormal() uintptr {
+func MDLVertexAttributeNormal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeNormal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A value indicating the degree to which a vertex is occluded by surrounding geometry
-func MDLVertexAttributeOcclusionValue() uintptr {
+func MDLVertexAttributeOcclusionValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeOcclusionValue")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The position of a vertex
-func MDLVertexAttributePosition() uintptr {
+func MDLVertexAttributePosition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributePosition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The u direction of a shading basis at a vertex
-func MDLVertexAttributeShadingBasisU() uintptr {
+func MDLVertexAttributeShadingBasisU() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeShadingBasisU")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The v direction of a shading basis at a vertex
-func MDLVertexAttributeShadingBasisV() uintptr {
+func MDLVertexAttributeShadingBasisV() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeShadingBasisV")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Stencil values for subdivision at a vertex
-func MDLVertexAttributeSubdivisionStencil() uintptr {
+func MDLVertexAttributeSubdivisionStencil() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeSubdivisionStencil")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A vector tangent to a vertex
-func MDLVertexAttributeTangent() uintptr {
+func MDLVertexAttributeTangent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeTangent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Texture coordinate mapping at a vertex
-func MDLVertexAttributeTextureCoordinate() uintptr {
+func MDLVertexAttributeTextureCoordinate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "MDLVertexAttributeTextureCoordinate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTType3dObject() uintptr {
+func KUTType3dObject() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTType3dObject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTTypeAlembic() uintptr {
+func KUTTypeAlembic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypeAlembic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTTypePolygon() uintptr {
+func KUTTypePolygon() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypePolygon")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTTypeStereolithography() uintptr {
+func KUTTypeStereolithography() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypeStereolithography")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTTypeUniversalSceneDescription() uintptr {
+func KUTTypeUniversalSceneDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypeUniversalSceneDescription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KUTTypeUniversalSceneDescriptionMobile() uintptr {
+func KUTTypeUniversalSceneDescriptionMobile() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_modelioLib, "kUTTypeUniversalSceneDescriptionMobile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "framework": "IOKit",
+  "source": "developer.apple.com DocC render API",
+  "structs": {
+    "IOAsyncCompletionContent": {
+      "url": "https://developer.apple.com/documentation/iokit/ioasynccompletioncontent"
+    },
+    "IONamedValue": {
+      "url": "https://developer.apple.com/documentation/iokit/ionamedvalue"
+    },
+    "IOPhysicalRange": {
+      "url": "https://developer.apple.com/documentation/iokit/iophysicalrange"
+    },
+    "IOServiceInterestContent": {
+      "url": "https://developer.apple.com/documentation/iokit/ioserviceinterestcontent"
+    },
+    "IOServiceInterestContent64": {
+      "url": "https://developer.apple.com/documentation/iokit/ioserviceinterestcontent64"
+    },
+    "IOVirtualRange": {
+      "url": "https://developer.apple.com/documentation/iokit/iovirtualrange"
+    },
+    "OSNotificationHeader": {
+      "url": "https://developer.apple.com/documentation/iokit/osnotificationheader"
+    },
+    "OSNotificationHeader64": {
+      "url": "https://developer.apple.com/documentation/iokit/osnotificationheader64"
+    }
+  }
+}

@@ -4,12 +4,24 @@
 package accessibility
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func AXAnimatedImagesEnabledDidChangeNotification() uintptr {
+func AXAnimatedImagesEnabledDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXAnimatedImagesEnabledDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AXPrefersActionSliderAlternativeDidChangeNotification() uintptr {
@@ -17,9 +29,16 @@ func AXPrefersActionSliderAlternativeDidChangeNotification() uintptr {
 	return ptr
 }
 
-func AXPrefersHorizontalTextLayoutDidChangeNotification() uintptr {
+func AXPrefersHorizontalTextLayoutDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXPrefersHorizontalTextLayoutDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification() uintptr {
@@ -37,42 +56,98 @@ func AXShowBordersEnabledStatusDidChangeNotification() uintptr {
 	return ptr
 }
 
-func AXTechnologyAutomation() uintptr {
+func AXTechnologyAutomation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyAutomation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologyFullKeyboardAccess() uintptr {
+func AXTechnologyFullKeyboardAccess() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyFullKeyboardAccess")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologyHoverText() uintptr {
+func AXTechnologyHoverText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyHoverText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologySpeakScreen() uintptr {
+func AXTechnologySpeakScreen() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologySpeakScreen")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologySwitchControl() uintptr {
+func AXTechnologySwitchControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologySwitchControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologyVoiceControl() uintptr {
+func AXTechnologyVoiceControl() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyVoiceControl")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologyVoiceOver() uintptr {
+func AXTechnologyVoiceOver() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyVoiceOver")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AXTechnologyZoom() uintptr {
+func AXTechnologyZoom() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accessibilityLib, "AXTechnologyZoom")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

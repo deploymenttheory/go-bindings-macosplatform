@@ -971,8 +971,8 @@
     },
     "MLModel": {
       "availableComputeDevices": {
-        "doc": "The list of available compute devices that the model’s prediction can use.",
-        "url": "https://developer.apple.com/documentation/coreml/mlmodel/availablecomputedevices-42uzt"
+        "doc": "The list of available compute devices that the model’s prediction methods use.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/availablecomputedevices-6klyt"
       },
       "compileModel(at:completionHandler:)": {
         "doc": "Compile a model for a device.",
@@ -1040,7 +1040,7 @@
       },
       "optimizationHints": {
         "doc": "A group of hints for CoreML to optimize",
-        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/optimizationhints-1oq0g"
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/optimizationhints-81u6f"
       },
       "parameters": {
         "doc": "A dictionary of configuration settings your app can override when loading a model.",

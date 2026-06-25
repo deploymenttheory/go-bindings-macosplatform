@@ -7,104 +7,226 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Deprecated: since macOS 10.8.
-func CalAlarmActionDisplay() uintptr {
+func CalAlarmActionDisplay() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAlarmActionDisplay")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalAlarmActionEmail() uintptr {
+func CalAlarmActionEmail() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAlarmActionEmail")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalAlarmActionProcedure() uintptr {
+func CalAlarmActionProcedure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAlarmActionProcedure")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalAlarmActionSound() uintptr {
+func CalAlarmActionSound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAlarmActionSound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalAttendeeStatusAccepted() uintptr {
+func CalAttendeeStatusAccepted() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAttendeeStatusAccepted")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalAttendeeStatusDeclined() uintptr {
+func CalAttendeeStatusDeclined() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAttendeeStatusDeclined")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalAttendeeStatusNeedsAction() uintptr {
+func CalAttendeeStatusNeedsAction() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAttendeeStatusNeedsAction")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalAttendeeStatusTentative() uintptr {
+func CalAttendeeStatusTentative() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalAttendeeStatusTentative")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarStoreErrorDomain() uintptr {
+func CalCalendarStoreErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarStoreErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeBirthday() uintptr {
+func CalCalendarTypeBirthday() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeBirthday")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeCalDAV() uintptr {
+func CalCalendarTypeCalDAV() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeCalDAV")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeExchange() uintptr {
+func CalCalendarTypeExchange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeExchange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeIMAP() uintptr {
+func CalCalendarTypeIMAP() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeIMAP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeLocal() uintptr {
+func CalCalendarTypeLocal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeLocal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarTypeSubscription() uintptr {
+func CalCalendarTypeSubscription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarTypeSubscription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarsChangedExternallyNotification() uintptr {
+func CalCalendarsChangedExternallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarsChangedExternallyNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalCalendarsChangedNotification() uintptr {
+func CalCalendarsChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalCalendarsChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
@@ -116,53 +238,116 @@ func CalDefaultRecurrenceInterval() uint {
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
-func CalDeletedRecordsKey() uintptr {
+func CalDeletedRecordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalDeletedRecordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalEventsChangedExternallyNotification() uintptr {
+func CalEventsChangedExternallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalEventsChangedExternallyNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalEventsChangedNotification() uintptr {
+func CalEventsChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalEventsChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalInsertedRecordsKey() uintptr {
+func CalInsertedRecordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalInsertedRecordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalSenderProcessIDKey() uintptr {
+func CalSenderProcessIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalSenderProcessIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalTasksChangedExternallyNotification() uintptr {
+func CalTasksChangedExternallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalTasksChangedExternallyNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalTasksChangedNotification() uintptr {
+func CalTasksChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalTasksChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CalUpdatedRecordsKey() uintptr {
+func CalUpdatedRecordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalUpdatedRecordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.8.
-func CalUserUIDKey() uintptr {
+func CalUserUIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_calendarstoreLib, "CalUserUIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

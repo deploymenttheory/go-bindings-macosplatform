@@ -4,857 +4,1856 @@
 package uniformtypeidentifiers
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // \brief The tag class for filename extensions such as \c "txt". The leading period character is not part of the filename extension and should not be included in the tag.
-func UTTagClassFilenameExtension() uintptr {
+func UTTagClassFilenameExtension() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTagClassFilenameExtension")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \brief The tag class for MIME types such as \c "text/plain".
-func UTTagClassMIMEType() uintptr {
+func UTTagClassMIMEType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTagClassMIMEType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // \brief A base type for 3D content. UTI: public.3d-content conforms to: public.content
-func UTType3DContent() uintptr {
+func UTType3DContent() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTType3DContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Apple Haptics Audio Pattern file. UTI: com.apple.haptics.ahap
-func UTTypeAHAP() uintptr {
+func UTTypeAHAP() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAHAP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The AIFF audio format UTI: public.aiff-audio conforms to: public.aifc-audio
-func UTTypeAIFF() uintptr {
+func UTTypeAIFF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAIFF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An AR reference object. UTI: com.apple.arobject conforms to: public.data
-func UTTypeARReferenceObject() uintptr {
+func UTTypeARReferenceObject() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeARReferenceObject")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The AVI movie format. UTI: public.avi conforms to: public.movie
-func UTTypeAVI() uintptr {
+func UTTypeAVI() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAVI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A fully-formed alias file. UTI: com.apple.alias-file conforms to: public.data, com.apple.resolvable
-func UTTypeAliasFile() uintptr {
+func UTTypeAliasFile() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAliasFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Apple Archive. UTI: com.apple.archive conforms to: public.data, public.archive
-func UTTypeAppleArchive() uintptr {
+func UTTypeAppleArchive() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAppleArchive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The Apple protected MPEG4 format (.m4p, iTunes music store format.) UTI: com.apple.protected-mpeg-4-audio conforms to: public.audio
-func UTTypeAppleProtectedMPEG4Audio() uintptr {
+func UTTypeAppleProtectedMPEG4Audio() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAppleProtectedMPEG4Audio")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Apple protected MPEG-4 movie. UTI: com.apple.protected-mpeg-4-video conforms to: com.apple.m4v-video
-func UTTypeAppleProtectedMPEG4Video() uintptr {
+func UTTypeAppleProtectedMPEG4Video() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAppleProtectedMPEG4Video")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An AppleScript text-based script (.applescript). UTI: com.apple.applescript.text conforms to: public.script
-func UTTypeAppleScript() uintptr {
+func UTTypeAppleScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAppleScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The base type for macOS and iOS applications. UTI: com.apple.application conforms to: public.executable
-func UTTypeApplication() uintptr {
+func UTTypeApplication() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeApplication")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A bundled application. UTI: com.apple.application-bundle conforms to: com.apple.application, com.apple.bundle, com.apple.package
-func UTTypeApplicationBundle() uintptr {
+func UTTypeApplicationBundle() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeApplicationBundle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An application extension (.appex). UTI: com.apple.application-and-system-extension conforms to: com.apple.xpc-service
-func UTTypeApplicationExtension() uintptr {
+func UTTypeApplicationExtension() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeApplicationExtension")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief an archive of files and directories UTI: public.archive
-func UTTypeArchive() uintptr {
+func UTTypeArchive() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeArchive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Assembly language source (.s) UTI: public.assembly-source conforms to: public.source-code
-func UTTypeAssemblyLanguageSource() uintptr {
+func UTTypeAssemblyLanguageSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAssemblyLanguageSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Pure audio data with no video data. UTI: public.audio conforms to: public.audiovisual-content
-func UTTypeAudio() uintptr {
+func UTTypeAudio() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAudio")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Any audio and/or video content. UTI: public.audiovisual-content conforms to: public.data, public.content
-func UTTypeAudiovisualContent() uintptr {
+func UTTypeAudiovisualContent() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeAudiovisualContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Windows bitmap. UTI: com.microsoft.bmp conforms to: public.image
-func UTTypeBMP() uintptr {
+func UTTypeBMP() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeBMP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A bzip2 archive. UTI: public.bzip2-archive conforms to: public.data, public.archive
-func UTTypeBZ2() uintptr {
+func UTTypeBZ2() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeBZ2")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A binary property list. UTI: com.apple.binary-property-list conforms to: com.apple.property-list
-func UTTypeBinaryPropertyList() uintptr {
+func UTTypeBinaryPropertyList() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeBinaryPropertyList")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A bookmark. UTI: public.bookmark \sa UTTypeURLBookmarkData
-func UTTypeBookmark() uintptr {
+func UTTypeBookmark() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeBookmark")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A directory conforming to one of the \c CFBundle layouts. Bundles differ from packages in that a bundle has an internal file hierarchy that \c CFBundle can read, while packages are displayed to the user as if they were regular files. A single file system object can be both a package and a bundle. UTI: com.apple.bundle conforms to: public.directory
-func UTTypeBundle() uintptr {
+func UTTypeBundle() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeBundle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A C header. UTI: public.c-header conforms to: public.source-code
-func UTTypeCHeader() uintptr {
+func UTTypeCHeader() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCHeader")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A C++ header. UTI: public.c-plus-plus-header conforms to: public.source-code
-func UTTypeCPlusPlusHeader() uintptr {
+func UTTypeCPlusPlusHeader() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCPlusPlusHeader")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief C++ source code (.cp, etc.) UTI: public.c-plus-plus-source conforms to: public.source-code
-func UTTypeCPlusPlusSource() uintptr {
+func UTTypeCPlusPlusSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCPlusPlusSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Cascading Style Sheets (CSS) UTI: public.css conforms to: public.text
-func UTTypeCSS() uintptr {
+func UTTypeCSS() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCSS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief C source code (.c) UTI: public.c-source conforms to: public.source-code
-func UTTypeCSource() uintptr {
+func UTTypeCSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A calendar event. UTI: public.calendar-event
-func UTTypeCalendarEvent() uintptr {
+func UTTypeCalendarEvent() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCalendarEvent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Text containing comma-separated values (.csv). UTI: public.comma-separated-values-text conforms to: public.delimited-values-text
-func UTTypeCommaSeparatedText() uintptr {
+func UTTypeCommaSeparatedText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCommaSeparatedText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for content formats supporting mixed embedded content (i.e., compound documents). UTI: public.composite-content conforms to: public.content
-func UTTypeCompositeContent() uintptr {
+func UTTypeCompositeContent() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeCompositeContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief contact information, e.g. for a person, group, organization UTI: public.contact
-func UTTypeContact() uintptr {
+func UTTypeContact() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeContact")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for anything containing user-viewable document content (documents, pasteboard data, and document packages.) Types describing files or packages must also conform to \c UTTypeData or \c UTTypePackage in order for the system to bind documents to them. UTI: public.content
-func UTTypeContent() uintptr {
+func UTTypeContent() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Adobe DNG (digital negative) image. UTI: com.adobe.raw-image conforms to: public.image
-func UTTypeDNG() uintptr {
+func UTTypeDNG() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeDNG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for any sort of simple byte stream, including files and in-memory data. UTI: public.data conforms to: public.item
-func UTTypeData() uintptr {
+func UTTypeData() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A database store. UTI: public.database
-func UTTypeDatabase() uintptr {
+func UTTypeDatabase() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeDatabase")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Text containing delimited values. UTI: public.delimited-values-text conforms to: public.text
-func UTTypeDelimitedText() uintptr {
+func UTTypeDelimitedText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeDelimitedText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A file system directory (includes packages \em and folders.) UTI: public.directory conforms to: public.item
-func UTTypeDirectory() uintptr {
+func UTTypeDirectory() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeDirectory")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A data item mountable as a volume UTI: public.disk-image
-func UTTypeDiskImage() uintptr {
+func UTTypeDiskImage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeDiskImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The EPUB format. UTI: org.idpf.epub-container conforms to: public.data, public.composite-content
-func UTTypeEPUB() uintptr {
+func UTTypeEPUB() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeEPUB")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Windows executable (.exe). UTI: com.microsoft.windows-executable conforms to: public.data, public.executable
-func UTTypeEXE() uintptr {
+func UTTypeEXE() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeEXE")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An EXR image. UTI: com.ilm.openexr-image conforms to: public.image
-func UTTypeEXR() uintptr {
+func UTTypeEXR() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeEXR")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An e-mail message. UTI: public.email-message conforms to: public.message
-func UTTypeEmailMessage() uintptr {
+func UTTypeEmailMessage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeEmailMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An executable item. UTI: public.executable conforms to: public.item
-func UTTypeExecutable() uintptr {
+func UTTypeExecutable() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeExecutable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A URL with the scheme \c "file:". UTI: public.file-url conforms to: public.url
-func UTTypeFileURL() uintptr {
+func UTTypeFileURL() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeFileURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A flattened RTFD document (formatted for the pasteboard.) UTI: com.apple.flat-rtfd conforms to: public.data, public.composite-content
-func UTTypeFlatRTFD() uintptr {
+func UTTypeFlatRTFD() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeFlatRTFD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A user-browsable directory (i.e. not a package.) UTI: public.folder conforms to: public.directory
-func UTTypeFolder() uintptr {
+func UTTypeFolder() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeFolder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for fonts. UTI: public.font
-func UTTypeFont() uintptr {
+func UTTypeFont() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeFont")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A macOS or iOS framework bundle. UTI: com.apple.framework conforms to: com.apple.bundle
-func UTTypeFramework() uintptr {
+func UTTypeFramework() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeFramework")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A GIF image. UTI: com.compuserve.gif conforms to: public.image
-func UTTypeGIF() uintptr {
+func UTTypeGIF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeGIF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A GNU zip archive. UTI: org.gnu.gnu-zip-archive conforms to: public.data, public.archive
-func UTTypeGZIP() uintptr {
+func UTTypeGZIP() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeGZIP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A GeoJSON file. UTI: public.geojson
-func UTTypeGeoJSON() uintptr {
+func UTTypeGeoJSON() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeGeoJSON")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A High Efficiency Image Coding image. UTI: public.heic conforms to: public.heif-standard
-func UTTypeHEIC() uintptr {
+func UTTypeHEIC() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeHEIC")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A High Efficiency Image Coding Image Sequence. UTI: public.heics conforms to: public.heif-standard
-func UTTypeHEICS() uintptr {
+func UTTypeHEICS() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeHEICS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A High Efficiency Image File Format image. UTI: public.heif conforms to: public.heif-standard
-func UTTypeHEIF() uintptr {
+func UTTypeHEIF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeHEIF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Any version of HTML. UTI: public.html conforms to: public.text
-func UTTypeHTML() uintptr {
+func UTTypeHTML() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeHTML")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Apple icon data UTI: com.apple.icns conforms to: public.image
-func UTTypeICNS() uintptr {
+func UTTypeICNS() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeICNS")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Windows icon data UTI: com.microsoft.ico conforms to: public.image
-func UTTypeICO() uintptr {
+func UTTypeICO() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeICO")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for abstract image data. UTI: public.image conforms to: public.data, public.content
-func UTTypeImage() uintptr {
+func UTTypeImage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for Apple Internet location files. UTI: com.apple.internet-location conforms to: public.data
-func UTTypeInternetLocation() uintptr {
+func UTTypeInternetLocation() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeInternetLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Microsoft Internet shortcut files (.url). UTI: com.apple.internet-location conforms to: public.data
-func UTTypeInternetShortcut() uintptr {
+func UTTypeInternetShortcut() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeInternetShortcut")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A generic base type for most things (files, directories.) UTI: public.item
-func UTTypeItem() uintptr {
+func UTTypeItem() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeItem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A JPEG image. UTI: public.jpeg conforms to: public.image
-func UTTypeJPEG() uintptr {
+func UTTypeJPEG() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeJPEG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A JPEG-XL encoded image. UTI: public.jpeg-xl conforms to: public.image
-func UTTypeJPEGXL() uintptr {
+func UTTypeJPEGXL() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeJPEGXL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief JavaScript object notation (JSON) data UTI: public.json conforms to: public.text \note JSON almost (but doesn't quite) conforms to com.netscape.javascript-source.
-func UTTypeJSON() uintptr {
+func UTTypeJSON() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeJSON")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief JavaScript source code UTI: com.netscape.javascript-source conforms to: public.source-code, public.executable
-func UTTypeJavaScript() uintptr {
+func UTTypeJavaScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeJavaScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Serialized LinkPresentation metadata. UTI: com.apple.linkpresentation.metadata conforms to: public.data
-func UTTypeLinkPresentationMetadata() uintptr {
+func UTTypeLinkPresentationMetadata() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeLinkPresentationMetadata")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Live Photo. UTI: com.apple.live-photo
-func UTTypeLivePhoto() uintptr {
+func UTTypeLivePhoto() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeLivePhoto")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for console logs. UTI: public.log
-func UTTypeLog() uintptr {
+func UTTypeLog() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeLog")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An M3U or M3U8 playlist UTI: public.m3u-playlist conforms to: public.text, public.playlist
-func UTTypeM3UPlaylist() uintptr {
+func UTTypeM3UPlaylist() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeM3UPlaylist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The MIDI audio format. UTI: public.midi-audio conforms to: public.audio
-func UTTypeMIDI() uintptr {
+func UTTypeMIDI() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMIDI")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief MP3 audio. UTI: public.mp3 conforms to: public.audio
-func UTTypeMP3() uintptr {
+func UTTypeMP3() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMP3")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An MPEG-1 or MPEG-2 movie. UTI: public.mpeg conforms to: public.movie
-func UTTypeMPEG() uintptr {
+func UTTypeMPEG() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMPEG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The MPEG-2 Transport Stream movie format. UTI: public.mpeg-2-transport-stream conforms to: public.movie
-func UTTypeMPEG2TransportStream() uintptr {
+func UTTypeMPEG2TransportStream() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMPEG2TransportStream")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An MPEG-2 video. UTI: public.mpeg-2-video conforms to: public.video
-func UTTypeMPEG2Video() uintptr {
+func UTTypeMPEG2Video() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMPEG2Video")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An MPEG-4 audio layer file. UTI: public.mpeg-4-audio conforms to: public.mpeg-4, public.audio
-func UTTypeMPEG4Audio() uintptr {
+func UTTypeMPEG4Audio() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMPEG4Audio")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief MPEG-4 movie UTI: public.mpeg-4 conforms to: public.movie
-func UTTypeMPEG4Movie() uintptr {
+func UTTypeMPEG4Movie() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMPEG4Movie")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A makefile. UTI: public.make-source conforms to: public.script
-func UTTypeMakefile() uintptr {
+func UTTypeMakefile() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMakefile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for messages (email, IM, etc.) UTI: public.message
-func UTTypeMessage() uintptr {
+func UTTypeMessage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMessage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A volume mount point (resolvable, resolves to the root directory of a volume.) UTI: com.apple.mount-point conforms to: public.item, com.apple.resolvable
-func UTTypeMountPoint() uintptr {
+func UTTypeMountPoint() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMountPoint")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A media format which may contain both video and audio. This type corresponds to what users would label a "movie". UTI: public.movie conforms to: public.audiovisual-content
-func UTTypeMovie() uintptr {
+func UTTypeMovie() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeMovie")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Open Scripting Architecture binary script (.scpt). UTI: com.apple.applescript.script conforms to: public.data, public.script
-func UTTypeOSAScript() uintptr {
+func UTTypeOSAScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeOSAScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Open Scripting Architecture script bundle (.scptd). UTI: com.apple.applescript.script-bundle conforms to: com.apple.bundle, com.apple.package, public.script
-func UTTypeOSAScriptBundle() uintptr {
+func UTTypeOSAScriptBundle() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeOSAScriptBundle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Objective-C++ source code. UTI: public.objective-c-plus-plus-source conforms to: public.source-code
-func UTTypeObjectiveCPlusPlusSource() uintptr {
+func UTTypeObjectiveCPlusPlusSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeObjectiveCPlusPlusSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Objective-C source code (.m) UTI: public.objective-c-source conforms to: public.source-code
-func UTTypeObjectiveCSource() uintptr {
+func UTTypeObjectiveCSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeObjectiveCSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An Adobe PDF document. UTI: com.adobe.pdf conforms to: public.data, public.composite-content
-func UTTypePDF() uintptr {
+func UTTypePDF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePDF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A PHP script. UTI: public.php-script conforms to: public.shell-script
-func UTTypePHPScript() uintptr {
+func UTTypePHPScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePHPScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief PKCS#12 data. UTI: com.rsa.pkcs-12 conforms to: public.data
-func UTTypePKCS12() uintptr {
+func UTTypePKCS12() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePKCS12")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A PNG image. UTI: public.png conforms to: public.image
-func UTTypePNG() uintptr {
+func UTTypePNG() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePNG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A packaged directory. Bundles differ from packages in that a bundle has an internal file hierarchy that \c CFBundle can read, while packages are displayed to the user as if they were regular files. A single file system object can be both a package and a bundle. UTI: com.apple.package conforms to: public.directory
-func UTTypePackage() uintptr {
+func UTTypePackage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePackage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Perl script. UTI: public.perl-script conforms to: public.shell-script
-func UTTypePerlScript() uintptr {
+func UTTypePerlScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePerlScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Text with no markup and an unspecified encoding. UTI: public.plain-text conforms to: public.text
-func UTTypePlainText() uintptr {
+func UTTypePlainText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePlainText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The base type for playlists. UTI: public.playlist
-func UTTypePlaylist() uintptr {
+func UTTypePlaylist() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePlaylist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The base type for bundle-based plugins. UTI: com.apple.plugin conforms to: com.apple.bundle, com.apple.package
-func UTTypePluginBundle() uintptr {
+func UTTypePluginBundle() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePluginBundle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for presentation documents. UTI: public.presentation conforms to: public.composite-content
-func UTTypePresentation() uintptr {
+func UTTypePresentation() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePresentation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for property lists. UTI: com.apple.property-list conforms to: public.data
-func UTTypePropertyList() uintptr {
+func UTTypePropertyList() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePropertyList")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Python script. UTI: public.python-script conforms to: public.shell-script
-func UTTypePythonScript() uintptr {
+func UTTypePythonScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypePythonScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A QuickLook preview generator bundle. UTI: com.apple.quicklook-generator conforms to: com.apple.plugin
-func UTTypeQuickLookGenerator() uintptr {
+func UTTypeQuickLookGenerator() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeQuickLookGenerator")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A QuickTime movie. UTI: com.apple.quicktime-movie conforms to: public.movie
-func UTTypeQuickTimeMovie() uintptr {
+func UTTypeQuickTimeMovie() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeQuickTimeMovie")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for raw image data (.raw). UTI: public.camera-raw-image conforms to: public.image
-func UTTypeRAWImage() uintptr {
+func UTTypeRAWImage() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeRAWImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Rich Text Format data. UTI: public.rtf conforms to: public.text
-func UTTypeRTF() uintptr {
+func UTTypeRTF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeRTF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Rich Text Format Directory document (RTF with content embedding in its on-disk format.) UTI: com.apple.rtfd conforms to: com.apple.package, public.composite-content
-func UTTypeRTFD() uintptr {
+func UTTypeRTFD() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeRTFD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Reality File. UTI: com.apple.reality conforms to: public.data
-func UTTypeRealityFile() uintptr {
+func UTTypeRealityFile() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeRealityFile")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Symbolic link and alias file types conform to this type. UTI: com.apple.resolvable
-func UTTypeResolvable() uintptr {
+func UTTypeResolvable() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeResolvable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Ruby script. UTI: public.ruby-script conforms to: public.shell-script
-func UTTypeRubyScript() uintptr {
+func UTTypeRubyScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeRubyScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Scalable Vector Graphics image. UTI: public.svg-image conforms to: public.image
-func UTTypeSVG() uintptr {
+func UTTypeSVG() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSVG")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A SceneKit serialized scene. UTI: com.apple.scenekit.scene conforms to: public.3d-content, public.data
-func UTTypeSceneKitScene() uintptr {
+func UTTypeSceneKitScene() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSceneKitScene")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for any scripting language source. UTI: public.script conforms to: public.source-code
-func UTTypeScript() uintptr {
+func UTTypeScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The base type for shell scripts. UTI: public.shell-script conforms to: public.script
-func UTTypeShellScript() uintptr {
+func UTTypeShellScript() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeShellScript")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Abstract type for source code of any language. UTI: public.source-code conforms to: public.plain-text
-func UTTypeSourceCode() uintptr {
+func UTTypeSourceCode() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSourceCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A Spotlight metadata importer bundle. UTI: com.apple.metadata-importer conforms to: com.apple.plugin
-func UTTypeSpotlightImporter() uintptr {
+func UTTypeSpotlightImporter() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSpotlightImporter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A base type for spreadsheet documents. UTI: public.spreadsheet conforms to: public.content
-func UTTypeSpreadsheet() uintptr {
+func UTTypeSpreadsheet() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSpreadsheet")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Swift source code (.swift) UTI: public.swift-source conforms to: public.source-code
-func UTTypeSwiftSource() uintptr {
+func UTTypeSwiftSource() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSwiftSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A symbolic link. UTI: public.symlink conforms to: public.item, com.apple.resolvable
-func UTTypeSymbolicLink() uintptr {
+func UTTypeSymbolicLink() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSymbolicLink")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A System Preferences pane. UTI: com.apple.systempreference.prefpane conforms to: com.apple.package, com.apple.bundle
-func UTTypeSystemPreferencesPane() uintptr {
+func UTTypeSystemPreferencesPane() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeSystemPreferencesPane")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A TIFF image. UTI: public.tiff conforms to: public.image
-func UTTypeTIFF() uintptr {
+func UTTypeTIFF() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeTIFF")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Text containing tab-separated values. UTI: public.tab-separated-values-text conforms to: public.delimited-values-text
-func UTTypeTabSeparatedText() uintptr {
+func UTTypeTabSeparatedText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeTabSeparatedText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A tar Archive. UTI: public.tar-archive conforms to: public.data, public.archive
-func UTTypeTarArchive() uintptr {
+func UTTypeTarArchive() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeTarArchive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The base type for all text-encoded data, including text with markup (HTML, RTF, etc.). UTI: public.text conforms to: public.data, public.content
-func UTTypeText() uintptr {
+func UTTypeText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A to-do item. UTI: public.to-do-item
-func UTTypeToDoItem() uintptr {
+func UTTypeToDoItem() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeToDoItem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Any URL. UTI: public.url conforms to: public.data
-func UTTypeURL() uintptr {
+func UTTypeURL() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A URL bookmark. UTI: com.apple.bookmark conforms to: public.data, com.apple.resolvable
-func UTTypeURLBookmarkData() uintptr {
+func UTTypeURLBookmarkData() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeURLBookmarkData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Universal Scene Description content. UTI: com.pixar.universal-scene-description conforms to: public.3d-content, public.data
-func UTTypeUSD() uintptr {
+func UTTypeUSD() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUSD")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Universal Scene Description Package content. UTI: com.pixar.universal-scene-description-mobile conforms to: public.3d-content, public.data
-func UTTypeUSDZ() uintptr {
+func UTTypeUSDZ() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUSDZ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Plain text encoded as UTF-16 with a BOM, or if a BOM is not present, using "external representation" byte order (big-endian). UTI: public.utf16-external-plain-text conforms to: public.plain-text
-func UTTypeUTF16ExternalPlainText() uintptr {
+func UTTypeUTF16ExternalPlainText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUTF16ExternalPlainText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Plain text encoded as UTF-16, in native byte order, with an optional BOM. UTI: public.utf16-plain-text conforms to: public.plain-text
-func UTTypeUTF16PlainText() uintptr {
+func UTTypeUTF16PlainText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUTF16PlainText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Plain text encoded as UTF-8. UTI: public.utf8-plain-text conforms to: public.plain-text
-func UTTypeUTF8PlainText() uintptr {
+func UTTypeUTF8PlainText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUTF8PlainText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief UTF-8 encoded text containing tab-separated values. UTI: public.utf8-tab-separated-values-text conforms to: public.tab-separated-values-text, public.utf8-plain-text
-func UTTypeUTF8TabSeparatedText() uintptr {
+func UTTypeUTF8TabSeparatedText() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUTF8TabSeparatedText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A UNIX executable (flat file.) UTI: public.unix-executable conforms to: public.data, public.executable
-func UTTypeUnixExecutable() uintptr {
+func UTTypeUnixExecutable() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeUnixExecutable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A vCard file. UTI: public.vcard conforms to: public.text, public.contact
-func UTTypeVCard() uintptr {
+func UTTypeVCard() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeVCard")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Pure video data with no audio data. UTI: public.video conforms to: public.movie
-func UTTypeVideo() uintptr {
+func UTTypeVideo() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeVideo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The root folder of a volume or mount point. UTI: public.volume conforms to: public.folder
-func UTTypeVolume() uintptr {
+func UTTypeVolume() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeVolume")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The Microsoft waveform audio format (.wav). UTI: com.microsoft.waveform-audio conforms to: public.audio
-func UTTypeWAV() uintptr {
+func UTTypeWAV() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeWAV")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The WebKit webarchive format. UTI: com.apple.webarchive conforms to: public.data, public.composite-content
-func UTTypeWebArchive() uintptr {
+func UTTypeWebArchive() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeWebArchive")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief The WebP image format. UTI: org.webmproject.webp conforms to: public.image
-func UTTypeWebP() uintptr {
+func UTTypeWebP() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeWebP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An X.509 certificate. UTI: public.x509-certificate conforms to: public.data
-func UTTypeX509Certificate() uintptr {
+func UTTypeX509Certificate() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeX509Certificate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Generic XML. UTI: public.xml conforms to: public.text
-func UTTypeXML() uintptr {
+func UTTypeXML() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeXML")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An XML property list. UTI: com.apple.xml-property-list conforms to: public.xml, com.apple.property-list
-func UTTypeXMLPropertyList() uintptr {
+func UTTypeXMLPropertyList() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeXMLPropertyList")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief An XPC service bundle. UTI: com.apple.xpc-service conforms to: com.apple.bundle, com.apple.package
-func UTTypeXPCService() uintptr {
+func UTTypeXPCService() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeXPCService")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief Yet Another Markup Language. UTI: public.yaml conforms to: public.text
-func UTTypeYAML() uintptr {
+func UTTypeYAML() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeYAML")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }
 
 // \brief A zip archive. UTI: public.zip-archive conforms to: com.pkware.zip-archive
-func UTTypeZIP() uintptr {
+func UTTypeZIP() *UTType {
 	ptr, _ := purego.Dlsym(_uniformtypeidentifiersLib, "UTTypeZIP")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return UTTypeFromID(id)
 }

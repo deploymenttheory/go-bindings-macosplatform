@@ -402,7 +402,7 @@
       },
       "maximumStreamCount": {
         "doc": "The maximum number of streams the content capture picker allows.",
-        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/maximumstreamcount-66khx"
+        "url": "https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker/maximumstreamcount-2kuaa"
       },
       "setConfiguration(_:for:)": {
         "doc": "Sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.",

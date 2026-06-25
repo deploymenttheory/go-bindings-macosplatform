@@ -4,7 +4,12 @@
 package contacts
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 func CNContactBirthdayKey() uintptr {
@@ -132,14 +137,28 @@ func CNContactPreviousFamilyNameKey() uintptr {
 	return ptr
 }
 
-func CNContactPropertyAttribute() uintptr {
+func CNContactPropertyAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPropertyAttribute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func CNContactPropertyNotFetchedExceptionName() uintptr {
+func CNContactPropertyNotFetchedExceptionName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNContactPropertyNotFetchedExceptionName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNContactRelationsKey() uintptr {
@@ -188,33 +207,68 @@ func CNContainerTypeKey() uintptr {
 	return ptr
 }
 
-func CNErrorDomain() uintptr {
+func CNErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When available an array of one or more NSString objects for which the error code applies.
-func CNErrorUserInfoAffectedRecordIdentifiersKey() uintptr {
+func CNErrorUserInfoAffectedRecordIdentifiersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNErrorUserInfoAffectedRecordIdentifiersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When available an array of one or more CNContact, CNGroup, CNContainer, CNSaveRequest, or CNFetchRequest objects for which the error code applies.
-func CNErrorUserInfoAffectedRecordsKey() uintptr {
+func CNErrorUserInfoAffectedRecordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNErrorUserInfoAffectedRecordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An array of key paths associated with a given error. For validation errors this will contain key paths to specific object properties.
-func CNErrorUserInfoKeyPathsKey() uintptr {
+func CNErrorUserInfoKeyPathsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNErrorUserInfoKeyPathsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An array of NSErrors for CNErrorCodeValidationMultipleErrors.
-func CNErrorUserInfoValidationErrorsKey() uintptr {
+func CNErrorUserInfoValidationErrorsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNErrorUserInfoValidationErrorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNGroupIdentifierKey() uintptr {
@@ -1387,9 +1441,16 @@ func CNLabelOther() uintptr {
 	return ptr
 }
 
-func CNLabelPhoneNumberAppleWatch() uintptr {
+func CNLabelPhoneNumberAppleWatch() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNLabelPhoneNumberAppleWatch")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNLabelPhoneNumberHomeFax() uintptr {
@@ -1457,9 +1518,16 @@ func CNPostalAddressISOCountryCodeKey() uintptr {
 	return ptr
 }
 
-func CNPostalAddressLocalizedPropertyNameAttribute() uintptr {
+func CNPostalAddressLocalizedPropertyNameAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressLocalizedPropertyNameAttribute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNPostalAddressPostalCodeKey() uintptr {
@@ -1467,9 +1535,16 @@ func CNPostalAddressPostalCodeKey() uintptr {
 	return ptr
 }
 
-func CNPostalAddressPropertyAttribute() uintptr {
+func CNPostalAddressPropertyAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_contactsLib, "CNPostalAddressPropertyAttribute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func CNPostalAddressStateKey() uintptr {

@@ -7,18 +7,33 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func SFAuthorizationPluginViewUserNameKey() uintptr {
+func SFAuthorizationPluginViewUserNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_securityinterfaceLib, "SFAuthorizationPluginViewUserNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SFAuthorizationPluginViewUserShortNameKey() uintptr {
+func SFAuthorizationPluginViewUserShortNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_securityinterfaceLib, "SFAuthorizationPluginViewUserShortNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SFCertificateViewDisclosureStateDidChange() *foundation.NSString {
@@ -26,10 +41,21 @@ func SFCertificateViewDisclosureStateDidChange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SFDisplayViewException() uintptr {
+func SFDisplayViewException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_securityinterfaceLib, "SFDisplayViewException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

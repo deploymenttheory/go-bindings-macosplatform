@@ -7,34 +7,70 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 )
 
-func SCNConsistencyElementIDErrorKey() uintptr {
+func SCNConsistencyElementIDErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNConsistencyElementIDErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNConsistencyElementTypeErrorKey() uintptr {
+func SCNConsistencyElementTypeErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNConsistencyElementTypeErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNConsistencyLineNumberErrorKey() uintptr {
+func SCNConsistencyLineNumberErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNConsistencyLineNumberErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNDetailedErrorsKey() uintptr {
+func SCNDetailedErrorsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNDetailedErrorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNErrorDomain() uintptr {
+func SCNErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticBoneIndices() uintptr {
@@ -52,7 +88,11 @@ func SCNGeometrySourceSemanticColor() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticEdgeCrease() uintptr {
@@ -65,7 +105,11 @@ func SCNGeometrySourceSemanticNormal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticTangent() *foundation.NSString {
@@ -73,7 +117,11 @@ func SCNGeometrySourceSemanticTangent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticTexcoord() *foundation.NSString {
@@ -81,7 +129,11 @@ func SCNGeometrySourceSemanticTexcoord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticVertex() *foundation.NSString {
@@ -89,7 +141,11 @@ func SCNGeometrySourceSemanticVertex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNGeometrySourceSemanticVertexCrease() uintptr {
@@ -102,7 +158,11 @@ func SCNHitTestBackFaceCullingKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestBoundingBoxOnlyKey() *foundation.NSString {
@@ -110,7 +170,11 @@ func SCNHitTestBoundingBoxOnlyKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestClipToZRangeKey() *foundation.NSString {
@@ -118,7 +182,11 @@ func SCNHitTestClipToZRangeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestFirstFoundOnlyKey() *foundation.NSString {
@@ -126,7 +194,11 @@ func SCNHitTestFirstFoundOnlyKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestIgnoreChildNodesKey() *foundation.NSString {
@@ -134,7 +206,11 @@ func SCNHitTestIgnoreChildNodesKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestIgnoreHiddenNodesKey() uintptr {
@@ -147,7 +223,11 @@ func SCNHitTestOptionCategoryBitMask() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestOptionIgnoreLightArea() *foundation.NSString {
@@ -155,7 +235,11 @@ func SCNHitTestOptionIgnoreLightArea() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestOptionSearchMode() *foundation.NSString {
@@ -163,7 +247,11 @@ func SCNHitTestOptionSearchMode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestRootNodeKey() *foundation.NSString {
@@ -171,7 +259,11 @@ func SCNHitTestRootNodeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNHitTestSortResultsKey() *foundation.NSString {
@@ -179,7 +271,11 @@ func SCNHitTestSortResultsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNLightAttenuationEndKey The distance at which the attenuation ends (Omni or Spot light types only). Animatable as "attenuationEnd". Defaults to 0.
@@ -236,7 +332,11 @@ func SCNLightTypeAmbient() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeArea() *foundation.NSString {
@@ -244,7 +344,11 @@ func SCNLightTypeArea() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeDirectional() *foundation.NSString {
@@ -252,7 +356,11 @@ func SCNLightTypeDirectional() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeIES() *foundation.NSString {
@@ -260,7 +368,11 @@ func SCNLightTypeIES() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeOmni() *foundation.NSString {
@@ -268,7 +380,11 @@ func SCNLightTypeOmni() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeProbe() *foundation.NSString {
@@ -276,7 +392,11 @@ func SCNLightTypeProbe() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightTypeSpot() *foundation.NSString {
@@ -284,7 +404,11 @@ func SCNLightTypeSpot() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelBlinn() *foundation.NSString {
@@ -292,7 +416,11 @@ func SCNLightingModelBlinn() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelConstant() *foundation.NSString {
@@ -300,7 +428,11 @@ func SCNLightingModelConstant() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelLambert() *foundation.NSString {
@@ -308,7 +440,11 @@ func SCNLightingModelLambert() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelPhong() *foundation.NSString {
@@ -316,7 +452,11 @@ func SCNLightingModelPhong() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelPhysicallyBased() *foundation.NSString {
@@ -324,7 +464,11 @@ func SCNLightingModelPhysicallyBased() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNLightingModelShadowOnly() *foundation.NSString {
@@ -332,7 +476,11 @@ func SCNLightingModelShadowOnly() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNMatrix4Identity() quartzcore.CATransform3D {
@@ -344,24 +492,52 @@ func SCNMatrix4Identity() quartzcore.CATransform3D {
 }
 
 // @group Rendering arguments @discussion These keys are used for the 'semantic' argument of -[SCNProgram setSemantic:forSymbol:options:] Transforms are SCNMatrix4 wrapped in NSValues.
-func SCNModelTransform() uintptr {
+func SCNModelTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNModelTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNModelViewProjectionTransform() uintptr {
+func SCNModelViewProjectionTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNModelViewProjectionTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNModelViewTransform() uintptr {
+func SCNModelViewTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNModelViewTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func SCNNormalTransform() uintptr {
+func SCNNormalTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNNormalTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNParticlePropertyAngle() uintptr {
@@ -454,7 +630,11 @@ func SCNPhysicsShapeOptionCollisionMargin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNPhysicsShapeScaleKey() uintptr {
@@ -518,7 +698,11 @@ func SCNPreferLowPowerDeviceKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNViewOptionPreferredDevice Specifies the preferred Metal device to be used by the renderer. @discussion The value is directly a id <MTLDevice>.
@@ -527,7 +711,11 @@ func SCNPreferredDeviceKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer. @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
@@ -536,7 +724,11 @@ func SCNPreferredRenderingAPIKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @group Semantic options @abstract Valid keys for the option parameter of setSemantic:forSymbol:options:
@@ -545,9 +737,16 @@ func SCNProgramMappingChannelKey() uintptr {
 	return ptr
 }
 
-func SCNProjectionTransform() uintptr {
+func SCNProjectionTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNProjectionTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNSceneEndTimeAttributeKey() *foundation.NSString {
@@ -555,7 +754,11 @@ func SCNSceneEndTimeAttributeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneExportDestinationURL @abstract Specifies the final destination (as a NSURL) of the scene being exported. @discussion The destination URL is required if the scene is exported to a temporary directory and then moved to a final destination. This enables the exported document to get correct relative paths to referenced images.
@@ -569,7 +772,11 @@ func SCNSceneFrameRateAttributeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAnimationImportPolicyDoNotPlay @abstract Only keep animations in the SCNSceneSource and don't add to the animatable elements of the scene.
@@ -603,27 +810,55 @@ func SCNSceneSourceAnimationImportPolicyPlayUsingSceneTimeBase() uintptr {
 }
 
 // The file's author. The corresponding value is an NSString.
-func SCNSceneSourceAssetAuthorKey() uintptr {
+func SCNSceneSourceAssetAuthorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetAuthorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @group Contributor dictionary keys Authoring tool used to create the file. The corresponding value is an NSString.
-func SCNSceneSourceAssetAuthoringToolKey() uintptr {
+func SCNSceneSourceAssetAuthoringToolKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetAuthoringToolKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @group Scene source properties File contributors. The values are dictionaries populated with keys documented in the "Contributor dictionary keys" group.
-func SCNSceneSourceAssetContributorsKey() uintptr {
+func SCNSceneSourceAssetContributorsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetContributorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When the file was created. The value is a NSDate instance.
-func SCNSceneSourceAssetCreatedDateKey() uintptr {
+func SCNSceneSourceAssetCreatedDateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetCreatedDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceAssetDirectoryURLsKey @abstract Pass an array of directory URLs where SceneKit should look for resources @discussion By default, SceneKit will look for the external resources it cannot find in the parent directory of the imported file. You can add additional directories by setting an array of URLs for this key when calling sceneWithOptions:error:. This is recommended if you want to construct your scene source from a data object, not from an URL, and need to load resources whose paths are not absolute.
@@ -632,37 +867,76 @@ func SCNSceneSourceAssetDirectoryURLsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // When the file was last modified. The value is a NSDate instance.
-func SCNSceneSourceAssetModifiedDateKey() uintptr {
+func SCNSceneSourceAssetModifiedDateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetModifiedDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The unit used in the file. The value is a dictionary populated with keys documented in the "Unit dictionary keys" group.
-func SCNSceneSourceAssetUnitKey() uintptr {
+func SCNSceneSourceAssetUnitKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetUnitKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A NSNumber encapsulating a floating-point value indicating how many meters the unit is. For example, if the name is \@"centimeter", then this will be 0.01.
-func SCNSceneSourceAssetUnitMeterKey() uintptr {
+func SCNSceneSourceAssetUnitMeterKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetUnitMeterKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @group Unit dictionary keys The name (NSString) of the unit
-func SCNSceneSourceAssetUnitNameKey() uintptr {
+func SCNSceneSourceAssetUnitNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetUnitNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The up axis of the file. If the file is oriented Y-up, for example, then this is the string \@"0.0 1.0 0.0"
-func SCNSceneSourceAssetUpAxisKey() uintptr {
+func SCNSceneSourceAssetUpAxisKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNSceneSourceAssetUpAxisKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceCheckConsistencyKey @abstract Pass YES in order to perform the document validation. @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to check the document for consistency. If the document doesn't pass the consistency check it is then not loaded and an error is returned. This is slower, but for security reasons it should be set to YES if you are not sure the files you load are valid and have not been tampered with.
@@ -671,7 +945,11 @@ func SCNSceneSourceCheckConsistencyKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceConvertToYUpKey @abstract Pass YES if a scene should be converted to Y up if it currently has a different up axis. @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
@@ -680,7 +958,11 @@ func SCNSceneSourceConvertToYUpKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceConvertUnitsToMetersKey @abstract Pass the units you want the scene to be converted to (in meter). @discussion Use this with a floating value encapsulated in a NSNumber. The default value is nil which means no conversion done. Passing a non-zero value will convert the scene coordinates so that 1 unit corresponds to N meters. For example pass 0.01 for 1 unit == 1 centimeter, pass 0.3048 for 1 unit == 1 foot... For better physics simulation it is recommended to use 1 unit equals to 1 meter. This option has no effect for SCN files or if the asset is already compressed by Xcode (use the compression options instead).
@@ -689,7 +971,11 @@ func SCNSceneSourceConvertUnitsToMetersKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceCreateNormalsIfAbsentKey @abstract Enable to try to guess acceptable normals for the vertices if none are given in the file @discussion Use this with a boolean value encapsulated in a NSNumber. The default value is NO.
@@ -698,7 +984,11 @@ func SCNSceneSourceCreateNormalsIfAbsentKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceFlattenSceneKey @abstract Pass YES to flatten the scene graph when possible. @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will attempt to reduce the scene graph by merging the geometries. This option is suitable to preview a 3D scene efficiently and when manipulating the scene graph is not needed.
@@ -707,7 +997,11 @@ func SCNSceneSourceFlattenSceneKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceLoadingOptionPreserveOriginalTopology @abstract Pass YES to make SceneKit preserve the original topology instead of triangulating at load time. This can be useful to get better results when subdividing a geometry. @discussion Defaults to YES starting macOS 10.15, iOS 13, tvOS 13 and watchOS 6. Defaults to NO in previous versions.
@@ -716,7 +1010,11 @@ func SCNSceneSourceLoadingOptionPreserveOriginalTopology() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceOverrideAssetURLsKey @abstract Pass YES in order to override assets URLs with the directory URLs passed via SCNSceneSourceAssetDirectoryURLsKey. @discussion By default, SceneKit will look for the external resources using the paths/urls as described in the imported file. You can force SceneKit to only search for extern resources within the directories specified by the SCNSceneSourceAssetDirectoryURLsKey key. This can be useful to load a file and its resources from a specific bundle for instance.
@@ -725,7 +1023,11 @@ func SCNSceneSourceOverrideAssetURLsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceStrictConformanceKey @abstract Pass YES to interpret the 3D format of the file in a strict way. @discussion This option defaults to NO. In this case SceneKit will try to read any additional metadata present in the file to enable additional features and make the rendering as close as possible to the original intent. If you pass YES, SceneKit will instead only consider features which are part of the file format specification.
@@ -734,7 +1036,11 @@ func SCNSceneSourceStrictConformanceKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant SCNSceneSourceUseSafeModeKey @abstract Pass YES in order to enable the safe mode. @discussion This option can be set in the options dictionary of the SCNScene and SCNSceneSource loading methods. The value for this option should be a boolean NSNumber. If its boolean value is YES (the default is NO), SceneKit will forbid network accesses, prevent the loading of resources from arbitrary directories, and will not execute any code present in the loaded files.
@@ -744,7 +1050,11 @@ func SCNSceneSourceUseSafeModeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNSceneStartTimeAttributeKey() *foundation.NSString {
@@ -752,7 +1062,11 @@ func SCNSceneStartTimeAttributeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func SCNSceneUpAxisAttributeKey() uintptr {
@@ -800,7 +1114,14 @@ func SCNVector4Zero() SCNVector4 {
 	return *(*SCNVector4)(unsafe.Pointer(ptr))
 }
 
-func SCNViewTransform() uintptr {
+func SCNViewTransform() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_scenekitLib, "SCNViewTransform")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

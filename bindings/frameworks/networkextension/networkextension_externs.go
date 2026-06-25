@@ -4,49 +4,103 @@
 package networkextension
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @const NEAppProxyErrorDomain The NEAppProxyFlow error domain
-func NEAppProxyErrorDomain() uintptr {
+func NEAppProxyErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEAppProxyErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEDNSProxyConfigurationDidChangeNotification Name of the NSNotification that is posted when the DNS proxy configuration changes.
-func NEDNSProxyConfigurationDidChangeNotification() uintptr {
+func NEDNSProxyConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEDNSProxyConfigurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEDNSProxyManagerErrorDomain The DNS proxy error domain
-func NEDNSProxyErrorDomain() uintptr {
+func NEDNSProxyErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEDNSProxyErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEDNSSettingsConfigurationDidChangeNotification Name of the NSNotification that is posted when the DNS settings configuration changes.
-func NEDNSSettingsConfigurationDidChangeNotification() uintptr {
+func NEDNSSettingsConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEDNSSettingsConfigurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEDNSSettingsManagerErrorDomain The DNS settings error domain
-func NEDNSSettingsErrorDomain() uintptr {
+func NEDNSSettingsErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEDNSSettingsErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEFilterConfigurationDidChangeNotification Name of the NSNotification that is posted when the filter configuration changes.
-func NEFilterConfigurationDidChangeNotification() uintptr {
+func NEFilterConfigurationDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEFilterConfigurationDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NEFilterErrorDomain The filter error domain
-func NEFilterErrorDomain() uintptr {
+func NEFilterErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_networkextensionLib, "NEFilterErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const NERelayClientErrorDomain The NERelay error domain as detected by the client

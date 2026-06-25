@@ -1564,10 +1564,10 @@ func Krb5FreeErrorMessage(arg obj.Object, arg2 string) {
 	_fnKrb5FreeErrorMessage(objref.IDOf(arg), arg2)
 }
 
-var _fnKrb5FreeHostRealm func(objc.ID, unsafe.Pointer) int32
+var _fnKrb5FreeHostRealm func(objc.ID, string) int32
 
 // Krb5FreeHostRealm calls the Kerberos framework function krb5_free_host_realm.
-func Krb5FreeHostRealm(arg obj.Object, arg2 unsafe.Pointer) int {
+func Krb5FreeHostRealm(arg obj.Object, arg2 string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5FreeHostRealm == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5FreeHostRealm, _lib, "krb5_free_host_realm")
@@ -2144,10 +2144,10 @@ func ProfileGetSubsectionNames(profile obj.Object, names string, ret_names strin
 	return _fnProfileGetSubsectionNames(objref.IDOf(profile), names, ret_names)
 }
 
-var _fnProfileGetValues func(objc.ID, unsafe.Pointer, string) int
+var _fnProfileGetValues func(objc.ID, string, string) int
 
 // ProfileGetValues calls the Kerberos framework function profile_get_values.
-func ProfileGetValues(profile obj.Object, names unsafe.Pointer, ret_values string) int {
+func ProfileGetValues(profile obj.Object, names string, ret_values string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetValues == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetValues, _lib, "profile_get_values")
@@ -2216,10 +2216,10 @@ func ProfileIterator(iter_p unsafe.Pointer, ret_name string, ret_value string) i
 	return _fnProfileIterator(iter_p, ret_name, ret_value)
 }
 
-var _fnProfileIteratorCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
+var _fnProfileIteratorCreate func(objc.ID, string, int, unsafe.Pointer) int
 
 // ProfileIteratorCreate calls the Kerberos framework function profile_iterator_create.
-func ProfileIteratorCreate(profile obj.Object, names unsafe.Pointer, flags int, ret_iter unsafe.Pointer) int {
+func ProfileIteratorCreate(profile obj.Object, names string, flags int, ret_iter unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIteratorCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIteratorCreate, _lib, "profile_iterator_create")

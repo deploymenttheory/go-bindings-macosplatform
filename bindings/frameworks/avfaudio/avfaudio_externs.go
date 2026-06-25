@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -23,35 +24,77 @@ func AVAudioApplicationMuteStateKey() uintptr {
 	return ptr
 }
 
-func AVAudioBitRateStrategy_Constant() uintptr {
+func AVAudioBitRateStrategy_Constant() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioBitRateStrategy_Constant")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAudioBitRateStrategy_LongTermAverage() uintptr {
+func AVAudioBitRateStrategy_LongTermAverage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioBitRateStrategy_LongTermAverage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAudioBitRateStrategy_Variable() uintptr {
+func AVAudioBitRateStrategy_Variable() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioBitRateStrategy_Variable")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAudioBitRateStrategy_VariableConstrained() uintptr {
+func AVAudioBitRateStrategy_VariableConstrained() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioBitRateStrategy_VariableConstrained")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVAudioEngineConfigurationChangeNotification @abstract A notification generated on engine configuration changes when rendering to/from an audio device. Register for this notification on your engine instances, as follows: ``` [[NSNotificationCenter defaultCenter] addObserver: myObject selector:    @selector(handleInterruption:) name:        AVAudioEngineConfigurationChangeNotification object:      engine]; ``` When the engine's I/O unit observes a change to the audio input or output hardware's channel count or sample rate, the engine stops itself (see `AVAudioEngine(stop)`), and issues this notification. The nodes remain attached and connected with previously set formats. However, the app must reestablish connections if the connection formats need to change (e.g. in an input node chain, connections must follow the hardware sample rate, while in an output only chain, the output node supports rate conversion). Note that the engine must not be deallocated from within the client's notification handler because the callback happens on an internal dispatch queue and can deadlock while trying to synchronously teardown the engine.
-func AVAudioEngineConfigurationChangeNotification() uintptr {
+func AVAudioEngineConfigurationChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioEngineConfigurationChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVAudioFileTypeKey() uintptr {
+func AVAudioFileTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioFileTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSequencerInfoDictionaryKeyAlbum() uintptr {
@@ -165,9 +208,16 @@ func AVAudioSequencerInfoDictionaryKeyYear() uintptr {
 }
 
 // Only present in begin interruption events, where the interruption is a direct result of the application being suspended by the operating sytem. Value is a boolean NSNumber, where a true value indicates that the interruption is the result of the application being suspended, rather than being interrupted by another audio session. Starting in iOS 10, the system will deactivate the audio session of most apps in response to the app process being suspended. When the app starts running again, it will receive the notification that its session has been deactivated by the system. Note that the notification is necessarily delayed in time, due to the fact that the application was suspended at the time the session was deactivated by the system and the notification can only be delivered once the app is running again.
-func AVAudioSessionInterruptionWasSuspendedKey() uintptr {
+func AVAudioSessionInterruptionWasSuspendedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVAudioSessionInterruptionWasSuspendedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionLocationLower() *foundation.NSString {
@@ -175,7 +225,11 @@ func AVAudioSessionLocationLower() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionLocationUpper() *foundation.NSString {
@@ -183,7 +237,11 @@ func AVAudioSessionLocationUpper() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationBack() *foundation.NSString {
@@ -191,7 +249,11 @@ func AVAudioSessionOrientationBack() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationBottom() *foundation.NSString {
@@ -199,7 +261,11 @@ func AVAudioSessionOrientationBottom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationFront() *foundation.NSString {
@@ -207,7 +273,11 @@ func AVAudioSessionOrientationFront() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationLeft() *foundation.NSString {
@@ -215,7 +285,11 @@ func AVAudioSessionOrientationLeft() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationRight() *foundation.NSString {
@@ -223,7 +297,11 @@ func AVAudioSessionOrientationRight() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionOrientationTop() *foundation.NSString {
@@ -231,7 +309,11 @@ func AVAudioSessionOrientationTop() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionPolarPatternCardioid() *foundation.NSString {
@@ -239,7 +321,11 @@ func AVAudioSessionPolarPatternCardioid() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionPolarPatternOmnidirectional() *foundation.NSString {
@@ -247,7 +333,11 @@ func AVAudioSessionPolarPatternOmnidirectional() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVAudioSessionPolarPatternSubcardioid() *foundation.NSString {
@@ -255,7 +345,11 @@ func AVAudioSessionPolarPatternSubcardioid() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant AVAudioUnitComponentManagerRegistrationsChangedNotification @abstract A notification generated when AVAudioUnitComponentManager updates its list of components. @discussion Register for this notification on the shared AVAudioUnitComponentManager instance, as follows: ``` [[NSNotificationCenter defaultCenter] addObserver: myObject selector:    @selector(registrationsChanged:) name:        AVAudioUnitComponentManagerRegistrationsChangedNotification object:      [AVAudioUnitComponentManager sharedAudioUnitComponentManager]]; ```
@@ -324,54 +418,124 @@ func AVAudioUnitTypePanner() uintptr {
 	return ptr
 }
 
-func AVChannelLayoutKey() uintptr {
+func AVChannelLayoutKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVChannelLayoutKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderASPFrequencyKey() uintptr {
+func AVEncoderASPFrequencyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderASPFrequencyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderAudioQualityForVBRKey() uintptr {
+func AVEncoderAudioQualityForVBRKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderAudioQualityForVBRKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderAudioQualityKey() uintptr {
+func AVEncoderAudioQualityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderAudioQualityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderBitDepthHintKey() uintptr {
+func AVEncoderBitDepthHintKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderBitDepthHintKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderBitRateKey() uintptr {
+func AVEncoderBitRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderBitRatePerChannelKey() uintptr {
+func AVEncoderBitRatePerChannelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderBitRatePerChannelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderBitRateStrategyKey() uintptr {
+func AVEncoderBitRateStrategyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderBitRateStrategyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderContentSourceKey() uintptr {
+func AVEncoderContentSourceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderContentSourceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVEncoderDynamicRangeControlConfigurationKey() uintptr {
+func AVEncoderDynamicRangeControlConfigurationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVEncoderDynamicRangeControlConfigurationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVExtendedNoteOnEventDefaultInstrument() uint {
@@ -382,64 +546,148 @@ func AVExtendedNoteOnEventDefaultInstrument() uint {
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
-func AVFormatIDKey() uintptr {
+func AVFormatIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVFormatIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVLinearPCMBitDepthKey() uintptr {
+func AVLinearPCMBitDepthKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVLinearPCMBitDepthKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVLinearPCMIsBigEndianKey() uintptr {
+func AVLinearPCMIsBigEndianKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVLinearPCMIsBigEndianKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVLinearPCMIsFloatKey() uintptr {
+func AVLinearPCMIsFloatKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVLinearPCMIsFloatKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVLinearPCMIsNonInterleaved() uintptr {
+func AVLinearPCMIsNonInterleaved() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVLinearPCMIsNonInterleaved")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVNumberOfChannelsKey() uintptr {
+func AVNumberOfChannelsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVNumberOfChannelsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateConverterAlgorithmKey() uintptr {
+func AVSampleRateConverterAlgorithmKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateConverterAlgorithmKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateConverterAlgorithm_Mastering() uintptr {
+func AVSampleRateConverterAlgorithm_Mastering() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateConverterAlgorithm_Mastering")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateConverterAlgorithm_MinimumPhase() uintptr {
+func AVSampleRateConverterAlgorithm_MinimumPhase() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateConverterAlgorithm_MinimumPhase")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateConverterAlgorithm_Normal() uintptr {
+func AVSampleRateConverterAlgorithm_Normal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateConverterAlgorithm_Normal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateConverterAudioQualityKey() uintptr {
+func AVSampleRateConverterAudioQualityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateConverterAudioQualityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSampleRateKey() uintptr {
+func AVSampleRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSampleRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSpeechSynthesisAvailableVoicesDidChangeNotification() *foundation.NSString {
@@ -447,17 +695,35 @@ func AVSpeechSynthesisAvailableVoicesDidChangeNotification() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSpeechSynthesisIPANotationAttribute() uintptr {
+func AVSpeechSynthesisIPANotationAttribute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSpeechSynthesisIPANotationAttribute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func AVSpeechSynthesisVoiceIdentifierAlex() uintptr {
+func AVSpeechSynthesisVoiceIdentifierAlex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_avfaudioLib, "AVSpeechSynthesisVoiceIdentifierAlex")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func AVSpeechUtteranceDefaultSpeechRate() uintptr {

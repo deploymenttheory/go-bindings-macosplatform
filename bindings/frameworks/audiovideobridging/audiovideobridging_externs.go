@@ -7,12 +7,22 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @constant	AVBErrorDomain @abstract	The string defining the error domain for AudioVideoBridging errors.
-func AVBErrorDomain() uintptr {
+func AVBErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_audiovideobridgingLib, "AVBErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract	This NULL EUI-64. The IEEE defines this as FF-FF-FF-FF-FF-FF-FF-FF.

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -20,9 +21,9 @@ func MakeLogHandleWithCategory(category string) obj.Object {
 }
 
 // ExtendLaunchMeasurementForTaskID starts to measure an extended launch task with the given task identifier.
-func ExtendLaunchMeasurementForTaskID(taskID unsafe.Pointer) error {
+func ExtendLaunchMeasurementForTaskID(taskID obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("extendLaunchMeasurementForTaskID:error:"), taskID, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("extendLaunchMeasurementForTaskID:error:"), objref.IDOf(taskID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -30,9 +31,9 @@ func ExtendLaunchMeasurementForTaskID(taskID unsafe.Pointer) error {
 }
 
 // FinishExtendedLaunchMeasurementForTaskID signals the end of an extended launch task.
-func FinishExtendedLaunchMeasurementForTaskID(taskID unsafe.Pointer) error {
+func FinishExtendedLaunchMeasurementForTaskID(taskID obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("finishExtendedLaunchMeasurementForTaskID:error:"), taskID, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("finishExtendedLaunchMeasurementForTaskID:error:"), objref.IDOf(taskID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

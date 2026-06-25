@@ -170,7 +170,7 @@
       },
       "init(type:color:width:azimuth:identifier:)": {
         "doc": "Create a new inking tool item.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:azimuth:identifier:)-y8h5"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickerinkingitem/init(type:color:width:azimuth:identifier:)-7gkxh"
       },
       "init(type:color:width:identifier:)": {
         "doc": "Create a new inking tool item.",

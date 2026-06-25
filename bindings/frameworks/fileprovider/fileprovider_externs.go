@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -17,7 +18,11 @@ func NSFileProviderDomainDidChange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFileProviderErrorDomain() *foundation.NSString {
@@ -25,7 +30,11 @@ func NSFileProviderErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSFileProviderErrorItemKey() uintptr {
@@ -38,7 +47,11 @@ func NSFileProviderErrorNonExistentItemIdentifierKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A special value for favorite ranks, to use when no rank was set when the item was favorited.
@@ -52,7 +65,11 @@ func NSFileProviderInitialPageSortedByDate() *foundation.NSData {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSData)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSDataFromID(id)
 }
 
 func NSFileProviderInitialPageSortedByName() *foundation.NSData {
@@ -60,7 +77,11 @@ func NSFileProviderInitialPageSortedByName() *foundation.NSData {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSData)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSDataFromID(id)
 }
 
 func NSFileProviderMaterializedSetDidChange() *foundation.NSString {
@@ -68,7 +89,11 @@ func NSFileProviderMaterializedSetDidChange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Posted when the pending set has changed. Interested clients can then use the pending set enumerator returned by -enumeratorForPendingItems to enumerate changes on the pending set. Note, this notification starts to be posted only after `+[NSFileProviderManager getDomainsWithCompletionHandler:]` is called.
@@ -77,7 +102,11 @@ func NSFileProviderPendingSetDidChange() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The root of the hierarchical enumeration, i.e the container enumerated when the user starts browsing your file provider.

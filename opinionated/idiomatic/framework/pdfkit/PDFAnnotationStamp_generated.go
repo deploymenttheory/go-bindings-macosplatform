@@ -202,8 +202,8 @@ func (as *AnnotationStamp) WithMarkupType(markupType MarkupType) *AnnotationStam
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (as *AnnotationStamp) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationStamp {
-	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (as *AnnotationStamp) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationStamp {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return as
 }
 

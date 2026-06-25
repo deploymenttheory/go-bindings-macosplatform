@@ -4,8 +4,6 @@
 package metal
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -63,8 +61,8 @@ func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSi
 }
 
 // Creates a rate map descriptor with a set of layer descriptors.
-func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers(screenSize MTLSize, layerCount uint, layers unsafe.Pointer) *MTLRasterizationRateMapDescriptor {
-	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers, screenSize, layerCount, layers)
+func MTLRasterizationRateMapDescriptorRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers(screenSize MTLSize, layerCount uint, layers *MTLRasterizationRateLayerDescriptor) *MTLRasterizationRateMapDescriptor {
+	_ret := objc.Send[objc.ID](objc.ID(_clsMTLRasterizationRateMapDescriptor), _mTLRasterizationRateMapDescriptorSelRasterizationRateMapDescriptorWithScreenSizeLayerCountLayers, screenSize, layerCount, layers.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -4,35 +4,75 @@
 package social
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Deprecated: since macOS 10.13.
-func SLServiceTypeFacebook() uintptr {
+func SLServiceTypeFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func SLServiceTypeLinkedIn() uintptr {
+func SLServiceTypeLinkedIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeLinkedIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func SLServiceTypeSinaWeibo() uintptr {
+func SLServiceTypeSinaWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeSinaWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func SLServiceTypeTencentWeibo() uintptr {
+func SLServiceTypeTencentWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeTencentWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 10.13.
-func SLServiceTypeTwitter() uintptr {
+func SLServiceTypeTwitter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_socialLib, "SLServiceTypeTwitter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

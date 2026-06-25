@@ -218,7 +218,7 @@
     "SFAcousticFeature": {
       "acousticFeatureValuePerFrame": {
         "doc": "An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.",
-        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/acousticfeaturevalueperframe-gsz5"
+        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/acousticfeaturevalueperframe-5krkk"
       },
       "frameDuration": {
         "doc": "The duration of the audio frame.",

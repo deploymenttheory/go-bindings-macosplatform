@@ -32749,27 +32749,29 @@ func VDSPVgathrD(__IB int, __IC int, __N int) (__A float64, __B int, __C float64
 var _fnVDSPVgathra func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathra calls the vecLib framework function vDSP_vgathra.
-func VDSPVgathra(__A unsafe.Pointer, __IA int, __IC int, __N int) (__C float32) {
+func VDSPVgathra(__IA int, __IC int, __N int) (__A float32, __C float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathra == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathra, _lib, "vDSP_vgathra")
 	}
 	var _out0 float32
-	_fnVDSPVgathra(__A, __IA, unsafe.Pointer(&_out0), __IC, __N)
-	return _out0
+	var _out1 float32
+	_fnVDSPVgathra(unsafe.Pointer(&_out0), __IA, unsafe.Pointer(&_out1), __IC, __N)
+	return _out0, _out1
 }
 
 var _fnVDSPVgathraD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathraD calls the vecLib framework function vDSP_vgathraD.
-func VDSPVgathraD(__A unsafe.Pointer, __IA int, __IC int, __N int) (__C float64) {
+func VDSPVgathraD(__IA int, __IC int, __N int) (__A float64, __C float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathraD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathraD, _lib, "vDSP_vgathraD")
 	}
 	var _out0 float64
-	_fnVDSPVgathraD(__A, __IA, unsafe.Pointer(&_out0), __IC, __N)
-	return _out0
+	var _out1 float64
+	_fnVDSPVgathraD(unsafe.Pointer(&_out0), __IA, unsafe.Pointer(&_out1), __IC, __N)
+	return _out0, _out1
 }
 
 var _fnVDSPVgen func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)

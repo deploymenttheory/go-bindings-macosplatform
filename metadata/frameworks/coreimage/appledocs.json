@@ -384,6 +384,10 @@
         "doc": "Renders a region of an image to a rectangle in the context destination.",
         "url": "https://developer.apple.com/documentation/coreimage/cicontext/draw(_:in:from:)"
       },
+      "-estimateRender:fromRect:toDestination:atPoint:error:": {
+        "doc": "Returns a task with estimated resource statistics for a render, without executing the render.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/estimaterender(_:from:to:at:)"
+      },
       "-init": {
         "doc": "Initializes a context without a specific rendering destination, using default options.",
         "url": "https://developer.apple.com/documentation/coreimage/cicontext/init()"

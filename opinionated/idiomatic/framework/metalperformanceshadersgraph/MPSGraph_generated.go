@@ -1189,13 +1189,13 @@ func (g *Graph) L2NormPooling4DGradientWithGradientTensorSourceTensorDescriptorN
 	return GraphTensorFromID(_r)
 }
 
-// DequantizeTensorLUTTensorName creates a lookup-table based quantization operation and returns the result tensor.
+// DequantizeTensorLUTTensorName creates a lookup-table based dequantize operation and returns the result tensor.
 func (g *Graph) DequantizeTensorLUTTensorName(tensor *GraphTensor, lUTTensor *GraphTensor, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("dequantizeTensor:LUTTensor:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), purego.NSString(name))
 	return GraphTensorFromID(_r)
 }
 
-// DequantizeTensorLUTTensorAxisName creates a vector lookup-table based quantization operation and returns the result tensor.
+// DequantizeTensorLUTTensorAxisName creates a vector lookup-table based dequantize operation and returns the result tensor.
 func (g *Graph) DequantizeTensorLUTTensorAxisName(tensor *GraphTensor, lUTTensor *GraphTensor, axis int, name string) *GraphTensor {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("dequantizeTensor:LUTTensor:axis:name:"), objref.IDOf(tensor), objref.IDOf(lUTTensor), axis, purego.NSString(name))
 	return GraphTensorFromID(_r)

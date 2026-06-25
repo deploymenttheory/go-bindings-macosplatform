@@ -4,29 +4,62 @@
 package widgetkit
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // A string that the system passes to the app on launch from a Live Activity that doesn't provide a URL. In many cases, you use  <doc://com.apple.documentation/documentation/swiftui/view/widgeturl(_:)> to allow users to tap a Live Activity and open a screen in the app with functionality that best fits the Live Activity. If you don't use the `widgetURL(_:)` modifier to provide a URL, the system launches your app and passes `NSUserActivityTypeLiveActivity` as the <doc://com.apple.documentation/documentation/foundation/nsuseractivity/1409611-activitytype> of <doc://com.apple.documentation/documentation/foundation/nsuseractivity> upon launch. Check for this value on launch to open a screen in your app that fits the context of the active Live Activity.
-func NSUserActivityTypeLiveActivity() uintptr {
+func NSUserActivityTypeLiveActivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_widgetkitLib, "NSUserActivityTypeLiveActivity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key you use to access the activity ID if the widget represents a Live Activity.
-func WGWidgetUserInfoKeyActivityID() uintptr {
+func WGWidgetUserInfoKeyActivityID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_widgetkitLib, "WGWidgetUserInfoKeyActivityID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key you use to access the widget's family.
-func WGWidgetUserInfoKeyFamily() uintptr {
+func WGWidgetUserInfoKeyFamily() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_widgetkitLib, "WGWidgetUserInfoKeyFamily")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A key you use to access the widget's kind. The value matches the `kind` property specified in the widget’s configuration.
-func WGWidgetUserInfoKeyKind() uintptr {
+func WGWidgetUserInfoKeyKind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_widgetkitLib, "WGWidgetUserInfoKeyKind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

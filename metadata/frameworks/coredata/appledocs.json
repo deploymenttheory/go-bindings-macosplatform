@@ -2010,7 +2010,7 @@
       },
       "didMigrateHandler": {
         "doc": "The handler to execute after the stage runs.",
-        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/didmigratehandler-36uhx"
+        "url": "https://developer.apple.com/documentation/coredata/nscustommigrationstage/didmigratehandler-2zbss"
       },
       "init(migratingFrom:to:)": {
         "doc": "Creates a custom migration stage with the specified source and destination model references.",
@@ -2481,8 +2481,8 @@
         "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/didsaveobjectsnotification"
       },
       "fetch(_:)": {
-        "doc": "Returns an array of items of the specified type that meet the fetch request’s critieria.",
-        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/fetch(_:)-4xeoz"
+        "doc": "Returns an array of objects that meet the criteria of the specified fetch request.",
+        "url": "https://developer.apple.com/documentation/coredata/nsmanagedobjectcontext/fetch(_:)-38ys1"
       },
       "hasChanges": {
         "doc": "A Boolean value that indicates whether the context has uncommitted changes.",
@@ -2782,7 +2782,7 @@
       },
       "databaseScope": {
         "doc": "The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.",
-        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/databasescope-2784h"
+        "url": "https://developer.apple.com/documentation/coredata/nspersistentcloudkitcontaineroptions/databasescope-4c72t"
       }
     },
     "NSPersistentContainer": {

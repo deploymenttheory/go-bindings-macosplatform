@@ -2134,7 +2134,7 @@
       },
       "rect": {
         "doc": "The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.",
-        "url": "https://developer.apple.com/documentation/webkit/wkpdfconfiguration/rect-2a0vp"
+        "url": "https://developer.apple.com/documentation/webkit/wkpdfconfiguration/rect-3xww9"
       }
     },
     "WKPreferences": {
@@ -2590,6 +2590,10 @@
       }
     },
     "WKWebExtensionController": {
+      "WKWebExtensionControllerConfiguration": {
+        "doc": "A WKWebExtensionControllerConfiguration object with which to initialize a web extension controller.",
+        "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/configuration-swift.class"
+      },
       "allExtensionDataTypes": {
         "doc": "Returns a set of all available extension data types.",
         "url": "https://developer.apple.com/documentation/webkit/wkwebextensioncontroller/allextensiondatatypes"

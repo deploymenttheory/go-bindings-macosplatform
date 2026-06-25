@@ -4,100 +4,217 @@
 package accounts
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Deprecated: Public notification deprecated. Internal clients, see private header for replacement
-func ACAccountStoreDidChangeNotification() uintptr {
+func ACAccountStoreDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountStoreDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACAccountTypeIdentifierFacebook() uintptr {
+func ACAccountTypeIdentifierFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountTypeIdentifierFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use LinkedIn SDK instead
-func ACAccountTypeIdentifierLinkedIn() uintptr {
+func ACAccountTypeIdentifierLinkedIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountTypeIdentifierLinkedIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Sina Weibo SDK instead
-func ACAccountTypeIdentifierSinaWeibo() uintptr {
+func ACAccountTypeIdentifierSinaWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountTypeIdentifierSinaWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Tencent Weibo SDK instead
-func ACAccountTypeIdentifierTencentWeibo() uintptr {
+func ACAccountTypeIdentifierTencentWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountTypeIdentifierTencentWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Twitter SDK instead
-func ACAccountTypeIdentifierTwitter() uintptr {
+func ACAccountTypeIdentifierTwitter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACAccountTypeIdentifierTwitter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ACErrorDomain() uintptr {
+func ACErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookAppIdKey() uintptr {
+func ACFacebookAppIdKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookAppIdKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookAudienceEveryone() uintptr {
+func ACFacebookAudienceEveryone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookAudienceEveryone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookAudienceFriends() uintptr {
+func ACFacebookAudienceFriends() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookAudienceFriends")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookAudienceKey() uintptr {
+func ACFacebookAudienceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookAudienceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookAudienceOnlyMe() uintptr {
+func ACFacebookAudienceOnlyMe() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookAudienceOnlyMe")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Facebook SDK instead
-func ACFacebookPermissionsKey() uintptr {
+func ACFacebookPermissionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACFacebookPermissionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use LinkedIn SDK instead
-func ACLinkedInAppIdKey() uintptr {
+func ACLinkedInAppIdKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACLinkedInAppIdKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use LinkedIn SDK instead
-func ACLinkedInPermissionsKey() uintptr {
+func ACLinkedInPermissionsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACLinkedInPermissionsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use Tencent Weibo SDK instead
-func ACTencentWeiboAppIdKey() uintptr {
+func ACTencentWeiboAppIdKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_accountsLib, "ACTencentWeiboAppIdKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

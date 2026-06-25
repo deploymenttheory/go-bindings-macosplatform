@@ -332,11 +332,11 @@
     "PHPickerViewController": {
       "configuration": {
         "doc": "The configuration you specify when creating the picker.",
-        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/configuration-17a8p"
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/configuration-3vf53"
       },
       "delegate": {
         "doc": "The picker’s delegate object.",
-        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/delegate-3zqmt"
+        "url": "https://developer.apple.com/documentation/photosui/phpickerviewcontroller/delegate-8dlnb"
       },
       "init(configuration:)": {
         "doc": "Creates a new picker view controller with the configuration you specify.",
