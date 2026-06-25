@@ -58,9 +58,11 @@ func ({{.RecvVar}} *{{.GoTypeName}}) IsKind(className string) bool {
 return rt.IsKind(objref.IDOf({{.RecvVar}}), className)
 }
 
+{{if not .HasOwnString}}
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func ({{.RecvVar}} *{{.GoTypeName}}) String() string {
 return rt.Description(objref.IDOf({{.RecvVar}}))
 }
+{{end}}
 {{end}}{{end}}

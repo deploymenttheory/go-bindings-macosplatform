@@ -62,12 +62,6 @@ func (uc *URLComponents) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(uc), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (uc *URLComponents) String() string {
-	return rt.Description(objref.IDOf(uc))
-}
-
 // NewURLComponents creates a new URLComponents.
 func NewURLComponents() *URLComponents {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("new"))
@@ -221,6 +215,15 @@ func (uc *URLComponents) URLRelativeToURL(baseURL string) *URL {
 func (uc *URLComponents) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("URL"))
 	return URLFromID(_r)
+}
+
+// String returns the string.
+func (uc *URLComponents) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Scheme returns the scheme.

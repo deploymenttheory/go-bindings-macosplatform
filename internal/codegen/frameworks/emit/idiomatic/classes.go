@@ -27,6 +27,10 @@ type classHeaderView struct {
 	// objref.Handle directly and carries the obj.Object methods + String that
 	// every subclass then promotes.
 	EmbedsRoot bool
+	// HasOwnString is true when the class declares a genuine method named String
+	// (a real `string` property, e.g. VNRecognizedText.string). It overrides the
+	// synthesized fmt stringer, which is then suppressed to avoid a duplicate.
+	HasOwnString bool
 }
 
 // classSealView is the template data for class_seal.tmpl.
@@ -280,14 +284,22 @@ func emitClassFile(
 	if isAbstract {
 		subLinks = directSubclassLinks(className, fc, prefix)
 	}
+	hasOwnString := false
+	for i := range methods {
+		if methods[i].goName == "String" {
+			hasOwnString = true
+			break
+		}
+	}
 	renderTemplate(&body, "class_header", classHeaderView{
-		DocComment: buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, cls.Doc),
-		GoTypeName: goTypeName,
-		RecvVar:    receiverName(goTypeName),
-		ClassName:  className,
-		AdoptName:  adoptHelperName(goTypeName),
-		BaseType:   baseType,
-		EmbedsRoot: embedsRoot,
+		DocComment:   buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, cls.Doc),
+		GoTypeName:   goTypeName,
+		RecvVar:      receiverName(goTypeName),
+		ClassName:    className,
+		AdoptName:    adoptHelperName(goTypeName),
+		BaseType:     baseType,
+		EmbedsRoot:   embedsRoot,
+		HasOwnString: hasOwnString,
 	})
 
 	for _, c := range ctors {
@@ -411,12 +423,19 @@ func classFileImports(
 
 // isReservedMemberName reports whether a generated Go method or setter name
 // collides with a name the wrapper already provides through embedding: the
-// obj.Object surface (Description/IsEqual/IsKind), the fmt String method, or the
-// objref.Handle field. Such a member is dropped — the embedded base supplies it,
-// promoted to every subclass (spec edge case #14, E13).
+// obj.Object surface (Description/IsEqual/IsKind) or the objref.Handle field.
+// Such a member is dropped — the embedded base supplies it, promoted to every
+// subclass (spec edge case #14, E13).
+//
+// "String" is deliberately NOT reserved here: the synthesized fmt stringer only
+// returns -description, but a genuine same-named property carries distinct data
+// (e.g. VNRecognizedText.string is the recognized text). Such a property is
+// emitted and overrides the stringer — for a framework root the synthesized
+// String() is suppressed via classHeaderView.HasOwnString to avoid a duplicate;
+// a subclass's emitted String() simply shadows the promoted one.
 func isReservedMemberName(name string) bool {
 	switch name {
-	case "Description", "IsEqual", "IsKind", "String", "Handle":
+	case "Description", "IsEqual", "IsKind", "Handle":
 		return true
 	}
 	return false

@@ -64,12 +64,6 @@ func (s *Selection) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (s *Selection) String() string {
-	return rt.Description(objref.IDOf(s))
-}
-
 // NewSelectionWithDocument returns an empty PDFSelection object.
 func NewSelectionWithDocument(document *Document) *Selection {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFSelection")), objc.RegisterName("alloc"))
@@ -150,6 +144,15 @@ func (s *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active 
 func (s *Selection) Pages() []*Page {
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("pages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
+}
+
+// String returns the string.
+func (s *Selection) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // AttributedString returns the attributed string.

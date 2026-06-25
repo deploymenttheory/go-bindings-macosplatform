@@ -62,12 +62,6 @@ func (s *Scanner) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (s *Scanner) String() string {
-	return rt.Description(objref.IDOf(s))
-}
-
 // NewScannerWithString creates a new Scanner.
 func NewScannerWithString(string_ string) *Scanner {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("alloc"))
@@ -109,6 +103,15 @@ func (s *Scanner) WithObservationInfo(observationInfo unsafe.Pointer) *Scanner {
 func (s *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return s
+}
+
+// String returns the string.
+func (s *Scanner) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // ScanLocation returns the scan location.

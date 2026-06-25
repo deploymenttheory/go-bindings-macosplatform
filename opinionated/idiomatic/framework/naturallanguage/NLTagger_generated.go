@@ -61,12 +61,6 @@ func (t *Tagger) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (t *Tagger) String() string {
-	return rt.Description(objref.IDOf(t))
-}
-
 // NewTaggerWithTagSchemes creates a linguistic tagger instance using the specified tag schemes and options.
 func NewTaggerWithTagSchemes(tagSchemes []obj.Object) *Tagger {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("alloc"))
@@ -136,6 +130,15 @@ func (t *Tagger) GazetteersForTagScheme(tagScheme obj.Object) []*Gazetteer {
 func (t *Tagger) TagSchemes() []obj.Object {
 	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tagSchemes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// String returns the string.
+func (t *Tagger) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // DominantLanguage returns the dominant language.

@@ -62,12 +62,6 @@ func (p *Page) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (p *Page) String() string {
-	return rt.Description(objref.IDOf(p))
-}
-
 // NewPage creates a new Page.
 func NewPage() *Page {
 	_id := objc.Send[objc.ID](objc.ID(_class("PDFPage")), objc.RegisterName("new"))
@@ -236,6 +230,15 @@ func (p *Page) DisplaysAnnotations() bool {
 func (p *Page) NumberOfCharacters() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("numberOfCharacters"))
 	return _r
+}
+
+// String returns the string.
+func (p *Page) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // AttributedString returns the attributed string.

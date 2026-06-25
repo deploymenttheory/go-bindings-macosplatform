@@ -62,12 +62,6 @@ func (ma *MACAddress) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (ma *MACAddress) String() string {
-	return rt.Description(objref.IDOf(ma))
-}
-
 // NewMACAddressWithEthernetAddress creates a MAC address from the specified 48-bit Ethernet address.
 func NewMACAddressWithEthernetAddress(ethernetAddress unsafe.Pointer) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("alloc"))
@@ -80,6 +74,15 @@ func NewMACAddressWithString(string_ string) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
 	return mACAddressAdopt(_id)
+}
+
+// String returns the address represented as a string. The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
+func (ma *MACAddress) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // IsBroadcastAddress reports whether the address is the broadcast address.

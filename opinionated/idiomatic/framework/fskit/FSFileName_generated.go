@@ -60,12 +60,6 @@ func (fn *FileName) IsKind(className string) bool {
 	return rt.IsKind(objref.IDOf(fn), className)
 }
 
-// String returns the object's -description text, so a wrapper prints usefully
-// under fmt.
-func (fn *FileName) String() string {
-	return rt.Description(objref.IDOf(fn))
-}
-
 // NewFileNameWithCString initializes a filename from a null-terminated character sequence.
 func NewFileNameWithCString(name string) *FileName {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
@@ -98,4 +92,13 @@ func NewFileNameWithString(name string) *FileName {
 func (fn *FileName) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("data"))
 	return obj.Wrap(_r)
+}
+
+// String returns the filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
+func (fn *FileName) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
