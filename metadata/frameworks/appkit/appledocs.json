@@ -3573,7 +3573,13 @@
     },
     "NSTextContentManagerEnumerationOptions": {
       "doc": "Values that control the order in which the framework enumerates text elements.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextcontentmanagerenumerationoptions"
+      "url": "https://developer.apple.com/documentation/appkit/nstextcontentmanagerenumerationoptions",
+      "members": {
+        "NSTextContentManagerEnumerationOptionsNone": {
+          "doc": "The value that represents no custom enumeration handling.",
+          "url": "https://developer.apple.com/documentation/appkit/nstextcontentmanagerenumerationoptions/nstextcontentmanagerenumerationoptionsnone"
+        }
+      }
     },
     "NSTextCursorAccessoryPlacement": {
       "url": "https://developer.apple.com/documentation/appkit/nstextcursoraccessoryplacement"
@@ -3599,7 +3605,13 @@
     },
     "NSTextLayoutFragmentEnumerationOptions": {
       "doc": "Values that describe options for enumerating text layout fragments.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentenumerationoptions"
+      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentenumerationoptions",
+      "members": {
+        "NSTextLayoutFragmentEnumerationOptionsNone": {
+          "doc": "The value that represents no selected enumeration options.",
+          "url": "https://developer.apple.com/documentation/appkit/nstextlayoutfragmentenumerationoptions/nstextlayoutfragmentenumerationoptionsnone"
+        }
+      }
     },
     "NSTextLayoutFragmentState": {
       "doc": "Values that describe the possible layout states.",
@@ -3607,7 +3619,13 @@
     },
     "NSTextLayoutManagerSegmentOptions": {
       "doc": "Values that describe where and how the framework extends segments of a selection.",
-      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmentoptions"
+      "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmentoptions",
+      "members": {
+        "NSTextLayoutManagerSegmentOptionsNone": {
+          "doc": "The value that represents the empty options set.",
+          "url": "https://developer.apple.com/documentation/appkit/nstextlayoutmanagersegmentoptions/nstextlayoutmanagersegmentoptionsnone"
+        }
+      }
     },
     "NSTextLayoutManagerSegmentType": {
       "doc": "Values that describe the rendering of selection boundaries.",
@@ -14112,6 +14130,10 @@
       "-relocateViewportToTextLocation:": {
         "doc": "Relocates the viewport to the location you specify.",
         "url": "https://developer.apple.com/documentation/appkit/nstextviewportlayoutcontroller/relocateviewport(to:)"
+      },
+      "-renderingSurfaceForKey:": {
+        "doc": "Returns a rendering surface corresponding to the specified key.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextviewportlayoutcontroller/renderingsurfaceforkey:"
       }
     },
     "NSTintConfiguration": {
@@ -19964,8 +19986,8 @@
     },
     "NSImageView": {
       "addSymbolEffect(_:options:animated:)": {
-        "doc": "Adds a discrete symbol effect to the image view with the specified options and animation.",
-        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-4p7p7"
+        "doc": "Adds a discrete, indefinite symbol effect to the image view with the specified options and animation.",
+        "url": "https://developer.apple.com/documentation/appkit/nsimageview/addsymboleffect(_:options:animated:)-66ckm"
       },
       "allowsCutCopyPaste": {
         "doc": "A Boolean value indicating whether the image view lets the user cut, copy, and paste the image contents.",
@@ -20016,8 +20038,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsimageview/removeallsymboleffects(options:animated:)"
       },
       "removeSymbolEffect(ofType:options:animated:)": {
-        "doc": "Removes the symbol effect that matches the specified discrete effect type, using the specified options and animation setting.",
-        "url": "https://developer.apple.com/documentation/appkit/nsimageview/removesymboleffect(oftype:options:animated:)-8tk6g"
+        "doc": "Removes the symbol effect that matches the specified indefinite effect type, using the specified options and animation setting.",
+        "url": "https://developer.apple.com/documentation/appkit/nsimageview/removesymboleffect(oftype:options:animated:)-8bszd"
       },
       "setSymbolImage(_:contentTransition:options:)": {
         "doc": "Sets a symbol image using the specified content-transition effect and options.",
@@ -20796,8 +20818,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/itemcount"
       },
       "stringValue": {
-        "doc": "The string representation of the badge as it would appear when the badge is displayed.",
-        "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/stringvalue-32sbt"
+        "doc": "The string representation of the badge when it displays.",
+        "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/stringvalue-fc9f"
       },
       "type": {
         "doc": "The type of items the badge displays.",
@@ -21481,7 +21503,7 @@
       },
       "accessBehavior": {
         "doc": "The current pasteboard access behavior. The user can customize this behavior per-app in System Settings for any app that has triggered a pasteboard access alert in the past.",
-        "url": "https://developer.apple.com/documentation/appkit/nspasteboard/accessbehavior-9k4t4"
+        "url": "https://developer.apple.com/documentation/appkit/nspasteboard/accessbehavior-86972"
       },
       "changeCount": {
         "doc": "The receiver’s change count.",
@@ -24266,8 +24288,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiatecontroller(identifier:creator:)-7ddcf"
       },
       "instantiateInitialController(creator:)": {
-        "doc": "Creates the initial view controller from the storyboard and initializes it using your custom code.",
-        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-pi04"
+        "doc": "Creates the initial window controller from the storyboard and initializes it using your custom code.",
+        "url": "https://developer.apple.com/documentation/appkit/nsstoryboard/instantiateinitialcontroller(creator:)-529r1"
       },
       "mainStoryboard": {
         "doc": "The app’s main storyboard.",
@@ -25140,6 +25162,10 @@
       "delegate": {
         "doc": "The delegate for the content storage object.",
         "url": "https://developer.apple.com/documentation/appkit/nstextcontentstorage/delegate"
+      },
+      "includesTextListMarkers": {
+        "doc": "When true, NSTextContentStorage assumes the paragraph with NSTextList includes the text list marker string.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextcontentstorage/includestextlistmarkers"
       }
     },
     "NSTextElement": {
@@ -25532,6 +25558,10 @@
       "NSTextListOptions": {
         "doc": "Values that available options for text list items.",
         "url": "https://developer.apple.com/documentation/appkit/nstextlist/options"
+      },
+      "includesTextListMarkers": {
+        "doc": "A Boolean value that indicates whether TextKit includes text list markers in the contents.",
+        "url": "https://developer.apple.com/documentation/appkit/nstextlist/includestextlistmarkers"
       },
       "listOptions": {
         "doc": "Returns the list options mask value of the receiver.",

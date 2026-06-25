@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func ABAddressBookErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func ABMultiValueIdentifiersErrorKey() *foundation.NSString {
@@ -24,580 +29,1389 @@ func ABMultiValueIdentifiersErrorKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAIMHomeLabel() uintptr {
+func KABAIMHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAIMHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAIMInstantProperty() uintptr {
+func KABAIMInstantProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAIMInstantProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAIMMobileMeLabel() uintptr {
+func KABAIMMobileMeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAIMMobileMeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAIMWorkLabel() uintptr {
+func KABAIMWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAIMWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressCityKey() uintptr {
+func KABAddressCityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressCityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressCountryCodeKey() uintptr {
+func KABAddressCountryCodeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressCountryCodeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressCountryKey() uintptr {
+func KABAddressCountryKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressCountryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressHomeLabel() uintptr {
+func KABAddressHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressProperty() uintptr {
+func KABAddressProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressStateKey() uintptr {
+func KABAddressStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressStreetKey() uintptr {
+func KABAddressStreetKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressStreetKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressWorkLabel() uintptr {
+func KABAddressWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAddressZIPKey() uintptr {
+func KABAddressZIPKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAddressZIPKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAlternateBirthdayComponentsProperty() uintptr {
+func KABAlternateBirthdayComponentsProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAlternateBirthdayComponentsProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAnniversaryLabel() uintptr {
+func KABAnniversaryLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAnniversaryLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABAssistantLabel() uintptr {
+func KABAssistantLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABAssistantLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABBirthdayComponentsProperty() uintptr {
+func KABBirthdayComponentsProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABBirthdayComponentsProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABBirthdayProperty() uintptr {
+func KABBirthdayProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABBirthdayProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABBrotherLabel() uintptr {
+func KABBrotherLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABBrotherLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABCalendarURIsProperty() uintptr {
+func KABCalendarURIsProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABCalendarURIsProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABChildLabel() uintptr {
+func KABChildLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABChildLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABCreationDateProperty() uintptr {
+func KABCreationDateProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABCreationDateProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABDatabaseChangedExternallyNotification() uintptr {
+func KABDatabaseChangedExternallyNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABDatabaseChangedExternallyNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABDatabaseChangedNotification() uintptr {
+func KABDatabaseChangedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABDatabaseChangedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABDeletedRecords() uintptr {
+func KABDeletedRecords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABDeletedRecords")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABDepartmentProperty() uintptr {
+func KABDepartmentProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABDepartmentProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABEmailHomeLabel() uintptr {
+func KABEmailHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABEmailHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABEmailMobileMeLabel() uintptr {
+func KABEmailMobileMeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABEmailMobileMeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABEmailProperty() uintptr {
+func KABEmailProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABEmailProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABEmailWorkLabel() uintptr {
+func KABEmailWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABEmailWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABFatherLabel() uintptr {
+func KABFatherLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABFatherLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABFirstNamePhoneticProperty() uintptr {
+func KABFirstNamePhoneticProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABFirstNamePhoneticProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABFirstNameProperty() uintptr {
+func KABFirstNameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABFirstNameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABFriendLabel() uintptr {
+func KABFriendLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABFriendLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABGroupNameProperty() uintptr {
+func KABGroupNameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABGroupNameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABHomeLabel() uintptr {
+func KABHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABHomePageLabel() uintptr {
+func KABHomePageLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABHomePageLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABHomePageProperty() uintptr {
+func KABHomePageProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABHomePageProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABICQHomeLabel() uintptr {
+func KABICQHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABICQHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABICQInstantProperty() uintptr {
+func KABICQInstantProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABICQInstantProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABICQWorkLabel() uintptr {
+func KABICQWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABICQWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInsertedRecords() uintptr {
+func KABInsertedRecords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInsertedRecords")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageProperty() uintptr {
+func KABInstantMessageProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceAIM() uintptr {
+func KABInstantMessageServiceAIM() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceAIM")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceFacebook() uintptr {
+func KABInstantMessageServiceFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceGaduGadu() uintptr {
+func KABInstantMessageServiceGaduGadu() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceGaduGadu")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceGoogleTalk() uintptr {
+func KABInstantMessageServiceGoogleTalk() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceGoogleTalk")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceICQ() uintptr {
+func KABInstantMessageServiceICQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceICQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceJabber() uintptr {
+func KABInstantMessageServiceJabber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceJabber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceKey() uintptr {
+func KABInstantMessageServiceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceMSN() uintptr {
+func KABInstantMessageServiceMSN() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceMSN")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceQQ() uintptr {
+func KABInstantMessageServiceQQ() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceQQ")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceSkype() uintptr {
+func KABInstantMessageServiceSkype() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceSkype")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageServiceYahoo() uintptr {
+func KABInstantMessageServiceYahoo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageServiceYahoo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABInstantMessageUsernameKey() uintptr {
+func KABInstantMessageUsernameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABInstantMessageUsernameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABJabberHomeLabel() uintptr {
+func KABJabberHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABJabberHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABJabberInstantProperty() uintptr {
+func KABJabberInstantProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABJabberInstantProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABJabberWorkLabel() uintptr {
+func KABJabberWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABJabberWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABJobTitleProperty() uintptr {
+func KABJobTitleProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABJobTitleProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABLastNamePhoneticProperty() uintptr {
+func KABLastNamePhoneticProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABLastNamePhoneticProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABLastNameProperty() uintptr {
+func KABLastNameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABLastNameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMSNHomeLabel() uintptr {
+func KABMSNHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMSNHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMSNInstantProperty() uintptr {
+func KABMSNInstantProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMSNInstantProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMSNWorkLabel() uintptr {
+func KABMSNWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMSNWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMaidenNameProperty() uintptr {
+func KABMaidenNameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMaidenNameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABManagerLabel() uintptr {
+func KABManagerLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABManagerLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMiddleNamePhoneticProperty() uintptr {
+func KABMiddleNamePhoneticProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMiddleNamePhoneticProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMiddleNameProperty() uintptr {
+func KABMiddleNameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMiddleNameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMobileMeLabel() uintptr {
+func KABMobileMeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMobileMeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABModificationDateProperty() uintptr {
+func KABModificationDateProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABModificationDateProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABMotherLabel() uintptr {
+func KABMotherLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABMotherLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABNicknameProperty() uintptr {
+func KABNicknameProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABNicknameProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABNoteProperty() uintptr {
+func KABNoteProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABNoteProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABOrganizationPhoneticProperty() uintptr {
+func KABOrganizationPhoneticProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABOrganizationPhoneticProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABOrganizationProperty() uintptr {
+func KABOrganizationProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABOrganizationProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABOtherDateComponentsProperty() uintptr {
+func KABOtherDateComponentsProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABOtherDateComponentsProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABOtherDatesProperty() uintptr {
+func KABOtherDatesProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABOtherDatesProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABOtherLabel() uintptr {
+func KABOtherLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABOtherLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABParentLabel() uintptr {
+func KABParentLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABParentLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPartnerLabel() uintptr {
+func KABPartnerLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPartnerLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPersonFlags() uintptr {
+func KABPersonFlags() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPersonFlags")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneHomeFAXLabel() uintptr {
+func KABPhoneHomeFAXLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneHomeFAXLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneHomeLabel() uintptr {
+func KABPhoneHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneMainLabel() uintptr {
+func KABPhoneMainLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneMainLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneMobileLabel() uintptr {
+func KABPhoneMobileLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneMobileLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhonePagerLabel() uintptr {
+func KABPhonePagerLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhonePagerLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneProperty() uintptr {
+func KABPhoneProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneWorkFAXLabel() uintptr {
+func KABPhoneWorkFAXLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneWorkFAXLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneWorkLabel() uintptr {
+func KABPhoneWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABPhoneiPhoneLabel() uintptr {
+func KABPhoneiPhoneLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABPhoneiPhoneLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABRelatedNamesProperty() uintptr {
+func KABRelatedNamesProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABRelatedNamesProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSisterLabel() uintptr {
+func KABSisterLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSisterLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileProperty() uintptr {
+func KABSocialProfileProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceFacebook() uintptr {
+func KABSocialProfileServiceFacebook() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceFacebook")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceFlickr() uintptr {
+func KABSocialProfileServiceFlickr() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceFlickr")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceKey() uintptr {
+func KABSocialProfileServiceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceLinkedIn() uintptr {
+func KABSocialProfileServiceLinkedIn() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceLinkedIn")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceMySpace() uintptr {
+func KABSocialProfileServiceMySpace() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceMySpace")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceSinaWeibo() uintptr {
+func KABSocialProfileServiceSinaWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceSinaWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceTencentWeibo() uintptr {
+func KABSocialProfileServiceTencentWeibo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceTencentWeibo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceTwitter() uintptr {
+func KABSocialProfileServiceTwitter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceTwitter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileServiceYelp() uintptr {
+func KABSocialProfileServiceYelp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileServiceYelp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileURLKey() uintptr {
+func KABSocialProfileURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileUserIdentifierKey() uintptr {
+func KABSocialProfileUserIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileUserIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSocialProfileUsernameKey() uintptr {
+func KABSocialProfileUsernameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSocialProfileUsernameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSpouseLabel() uintptr {
+func KABSpouseLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSpouseLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABSuffixProperty() uintptr {
+func KABSuffixProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABSuffixProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABTitleProperty() uintptr {
+func KABTitleProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABTitleProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABUIDProperty() uintptr {
+func KABUIDProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABUIDProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABURLsProperty() uintptr {
+func KABURLsProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABURLsProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABUpdatedRecords() uintptr {
+func KABUpdatedRecords() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABUpdatedRecords")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABWorkLabel() uintptr {
+func KABWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABYahooHomeLabel() uintptr {
+func KABYahooHomeLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABYahooHomeLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABYahooInstantProperty() uintptr {
+func KABYahooInstantProperty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABYahooInstantProperty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func KABYahooWorkLabel() uintptr {
+func KABYahooWorkLabel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_addressbookLib, "kABYahooWorkLabel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

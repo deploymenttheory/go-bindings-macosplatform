@@ -7,13 +7,21 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func MKAnnotationCalloutInfoDidChangeNotification() uintptr {
+func MKAnnotationCalloutInfoDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mapkitLib, "MKAnnotationCalloutInfoDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKErrorDomain() uintptr {
@@ -125,7 +133,11 @@ func MKPointOfInterestCategoryATM() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryAirport() *foundation.NSString {
@@ -133,7 +145,11 @@ func MKPointOfInterestCategoryAirport() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryAmusementPark() *foundation.NSString {
@@ -141,7 +157,11 @@ func MKPointOfInterestCategoryAmusementPark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryAnimalService() *foundation.NSString {
@@ -149,7 +169,11 @@ func MKPointOfInterestCategoryAnimalService() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryAquarium() *foundation.NSString {
@@ -157,7 +181,11 @@ func MKPointOfInterestCategoryAquarium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryAutomotiveRepair() *foundation.NSString {
@@ -165,7 +193,11 @@ func MKPointOfInterestCategoryAutomotiveRepair() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBakery() *foundation.NSString {
@@ -173,7 +205,11 @@ func MKPointOfInterestCategoryBakery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBank() *foundation.NSString {
@@ -181,7 +217,11 @@ func MKPointOfInterestCategoryBank() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBaseball() *foundation.NSString {
@@ -189,7 +229,11 @@ func MKPointOfInterestCategoryBaseball() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBasketball() *foundation.NSString {
@@ -197,7 +241,11 @@ func MKPointOfInterestCategoryBasketball() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBeach() *foundation.NSString {
@@ -205,7 +253,11 @@ func MKPointOfInterestCategoryBeach() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBeauty() *foundation.NSString {
@@ -213,7 +265,11 @@ func MKPointOfInterestCategoryBeauty() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBowling() *foundation.NSString {
@@ -221,7 +277,11 @@ func MKPointOfInterestCategoryBowling() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryBrewery() *foundation.NSString {
@@ -229,7 +289,11 @@ func MKPointOfInterestCategoryBrewery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryCafe() *foundation.NSString {
@@ -237,7 +301,11 @@ func MKPointOfInterestCategoryCafe() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryCampground() *foundation.NSString {
@@ -245,7 +313,11 @@ func MKPointOfInterestCategoryCampground() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryCarRental() *foundation.NSString {
@@ -253,7 +325,11 @@ func MKPointOfInterestCategoryCarRental() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryCastle() *foundation.NSString {
@@ -261,7 +337,11 @@ func MKPointOfInterestCategoryCastle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryConventionCenter() *foundation.NSString {
@@ -269,7 +349,11 @@ func MKPointOfInterestCategoryConventionCenter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryDistillery() *foundation.NSString {
@@ -277,7 +361,11 @@ func MKPointOfInterestCategoryDistillery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryEVCharger() *foundation.NSString {
@@ -285,7 +373,11 @@ func MKPointOfInterestCategoryEVCharger() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFairground() *foundation.NSString {
@@ -293,7 +385,11 @@ func MKPointOfInterestCategoryFairground() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFireStation() *foundation.NSString {
@@ -301,7 +397,11 @@ func MKPointOfInterestCategoryFireStation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFishing() *foundation.NSString {
@@ -309,7 +409,11 @@ func MKPointOfInterestCategoryFishing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFitnessCenter() *foundation.NSString {
@@ -317,7 +421,11 @@ func MKPointOfInterestCategoryFitnessCenter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFoodMarket() *foundation.NSString {
@@ -325,7 +433,11 @@ func MKPointOfInterestCategoryFoodMarket() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryFortress() *foundation.NSString {
@@ -333,7 +445,11 @@ func MKPointOfInterestCategoryFortress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryGasStation() *foundation.NSString {
@@ -341,7 +457,11 @@ func MKPointOfInterestCategoryGasStation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryGoKart() *foundation.NSString {
@@ -349,7 +469,11 @@ func MKPointOfInterestCategoryGoKart() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryGolf() *foundation.NSString {
@@ -357,7 +481,11 @@ func MKPointOfInterestCategoryGolf() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryHiking() *foundation.NSString {
@@ -365,7 +493,11 @@ func MKPointOfInterestCategoryHiking() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryHospital() *foundation.NSString {
@@ -373,7 +505,11 @@ func MKPointOfInterestCategoryHospital() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryHotel() *foundation.NSString {
@@ -381,7 +517,11 @@ func MKPointOfInterestCategoryHotel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryKayaking() *foundation.NSString {
@@ -389,7 +529,11 @@ func MKPointOfInterestCategoryKayaking() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryLandmark() *foundation.NSString {
@@ -397,7 +541,11 @@ func MKPointOfInterestCategoryLandmark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryLaundry() *foundation.NSString {
@@ -405,7 +553,11 @@ func MKPointOfInterestCategoryLaundry() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryLibrary() *foundation.NSString {
@@ -413,7 +565,11 @@ func MKPointOfInterestCategoryLibrary() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMailbox() *foundation.NSString {
@@ -421,7 +577,11 @@ func MKPointOfInterestCategoryMailbox() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMarina() *foundation.NSString {
@@ -429,7 +589,11 @@ func MKPointOfInterestCategoryMarina() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMiniGolf() *foundation.NSString {
@@ -437,7 +601,11 @@ func MKPointOfInterestCategoryMiniGolf() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMovieTheater() *foundation.NSString {
@@ -445,7 +613,11 @@ func MKPointOfInterestCategoryMovieTheater() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMuseum() *foundation.NSString {
@@ -453,7 +625,11 @@ func MKPointOfInterestCategoryMuseum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryMusicVenue() *foundation.NSString {
@@ -461,7 +637,11 @@ func MKPointOfInterestCategoryMusicVenue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryNationalMonument() *foundation.NSString {
@@ -469,7 +649,11 @@ func MKPointOfInterestCategoryNationalMonument() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryNationalPark() *foundation.NSString {
@@ -477,7 +661,11 @@ func MKPointOfInterestCategoryNationalPark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryNightlife() *foundation.NSString {
@@ -485,7 +673,11 @@ func MKPointOfInterestCategoryNightlife() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPark() *foundation.NSString {
@@ -493,7 +685,11 @@ func MKPointOfInterestCategoryPark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryParking() *foundation.NSString {
@@ -501,7 +697,11 @@ func MKPointOfInterestCategoryParking() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPharmacy() *foundation.NSString {
@@ -509,7 +709,11 @@ func MKPointOfInterestCategoryPharmacy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPlanetarium() *foundation.NSString {
@@ -517,7 +721,11 @@ func MKPointOfInterestCategoryPlanetarium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPolice() *foundation.NSString {
@@ -525,7 +733,11 @@ func MKPointOfInterestCategoryPolice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPostOffice() *foundation.NSString {
@@ -533,7 +745,11 @@ func MKPointOfInterestCategoryPostOffice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryPublicTransport() *foundation.NSString {
@@ -541,7 +757,11 @@ func MKPointOfInterestCategoryPublicTransport() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryRVPark() *foundation.NSString {
@@ -549,7 +769,11 @@ func MKPointOfInterestCategoryRVPark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryRestaurant() *foundation.NSString {
@@ -557,7 +781,11 @@ func MKPointOfInterestCategoryRestaurant() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryRestroom() *foundation.NSString {
@@ -565,7 +793,11 @@ func MKPointOfInterestCategoryRestroom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryRockClimbing() *foundation.NSString {
@@ -573,7 +805,11 @@ func MKPointOfInterestCategoryRockClimbing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySchool() *foundation.NSString {
@@ -581,7 +817,11 @@ func MKPointOfInterestCategorySchool() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySkatePark() *foundation.NSString {
@@ -589,7 +829,11 @@ func MKPointOfInterestCategorySkatePark() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySkating() *foundation.NSString {
@@ -597,7 +841,11 @@ func MKPointOfInterestCategorySkating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySkiing() *foundation.NSString {
@@ -605,7 +853,11 @@ func MKPointOfInterestCategorySkiing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySoccer() *foundation.NSString {
@@ -613,7 +865,11 @@ func MKPointOfInterestCategorySoccer() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySpa() *foundation.NSString {
@@ -621,7 +877,11 @@ func MKPointOfInterestCategorySpa() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryStadium() *foundation.NSString {
@@ -629,7 +889,11 @@ func MKPointOfInterestCategoryStadium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryStore() *foundation.NSString {
@@ -637,7 +901,11 @@ func MKPointOfInterestCategoryStore() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySurfing() *foundation.NSString {
@@ -645,7 +913,11 @@ func MKPointOfInterestCategorySurfing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategorySwimming() *foundation.NSString {
@@ -653,7 +925,11 @@ func MKPointOfInterestCategorySwimming() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryTennis() *foundation.NSString {
@@ -661,7 +937,11 @@ func MKPointOfInterestCategoryTennis() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryTheater() *foundation.NSString {
@@ -669,7 +949,11 @@ func MKPointOfInterestCategoryTheater() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryUniversity() *foundation.NSString {
@@ -677,7 +961,11 @@ func MKPointOfInterestCategoryUniversity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryVolleyball() *foundation.NSString {
@@ -685,7 +973,11 @@ func MKPointOfInterestCategoryVolleyball() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryWinery() *foundation.NSString {
@@ -693,7 +985,11 @@ func MKPointOfInterestCategoryWinery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointOfInterestCategoryZoo() *foundation.NSString {
@@ -701,7 +997,11 @@ func MKPointOfInterestCategoryZoo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MKPointsOfInterestRequestMaxRadius() uintptr {

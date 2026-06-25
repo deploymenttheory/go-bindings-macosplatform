@@ -7,23 +7,45 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func NSSystemExtensionUsageDescriptionKey() uintptr {
+func NSSystemExtensionUsageDescriptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_systemextensionsLib, "NSSystemExtensionUsageDescriptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSBundleUsageDescriptionKey() uintptr {
+func OSBundleUsageDescriptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_systemextensionsLib, "OSBundleUsageDescriptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func OSRelatedKernelExtensionKey() uintptr {
+func OSRelatedKernelExtensionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_systemextensionsLib, "OSRelatedKernelExtensionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func OSSystemExtensionErrorDomain() *foundation.NSString {
@@ -31,5 +53,9 @@ func OSSystemExtensionErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

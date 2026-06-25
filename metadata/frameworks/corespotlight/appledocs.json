@@ -395,8 +395,8 @@
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-3hv5"
       },
       "init(appEntity:priority:)": {
-        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity.",
-        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7h9s"
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7xlow"
       },
       "isUpdate": {
         "doc": "A Boolean value that indicates whether to treat the item as an update instead of a new item.",
@@ -1043,6 +1043,10 @@
       "redEyeOn": {
         "doc": "A value that indicates if the camera used red-eye reduction when capturing the image.",
         "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/redeyeon"
+      },
+      "relatedAppEntityIdentifier": {
+        "doc": "The identifier of the related indexed entity for this searchable item’s attribute set.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/relatedappentityidentifier"
       },
       "relatedUniqueIdentifier": {
         "doc": "The unique identifier for the item to which the activity is related.",

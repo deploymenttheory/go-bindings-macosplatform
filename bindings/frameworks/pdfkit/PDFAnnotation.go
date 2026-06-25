@@ -151,8 +151,8 @@ func PDFAnnotationFromID(id objc.ID) *PDFAnnotation {
 }
 
 // Creates a PDF annotation with the specified bounds, type, and optional properties.
-func (o *PDFAnnotation) InitWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *PDFAnnotation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBoundsForTypeWithProperties, bounds, annotationType, properties.Ptr())
+func (o *PDFAnnotation) InitWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType *foundation.NSString, properties *foundation.NSDictionary[objc.ID, objc.ID]) *PDFAnnotation {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelInitWithBoundsForTypeWithProperties, bounds, annotationType.Ptr(), properties.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -165,32 +165,32 @@ func (o *PDFAnnotation) DrawWithBoxInContext(box PDFDisplayBox, context_ unsafe.
 }
 
 // Sets a value in the annotation’s dictionary.
-func (o *PDFAnnotation) SetValueForAnnotationKey(value objc.ID, key unsafe.Pointer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetValueForAnnotationKey, value, key)
+func (o *PDFAnnotation) SetValueForAnnotationKey(value objc.ID, key *foundation.NSString) bool {
+	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetValueForAnnotationKey, value, key.Ptr())
 	return _ret
 }
 
 // Sets a Boolean value in the annotation’s dictionary.
-func (o *PDFAnnotation) SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetBooleanForAnnotationKey, value, key)
+func (o *PDFAnnotation) SetBooleanForAnnotationKey(value bool, key *foundation.NSString) bool {
+	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetBooleanForAnnotationKey, value, key.Ptr())
 	return _ret
 }
 
 // Sets a rectangle value in the annotation’s dictionary.
-func (o *PDFAnnotation) SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool {
-	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetRectForAnnotationKey, value, key)
+func (o *PDFAnnotation) SetRectForAnnotationKey(value corefoundation.CGRect, key *foundation.NSString) bool {
+	_ret := objc.Send[bool](o.Ptr(), _pDFAnnotationSelSetRectForAnnotationKey, value, key.Ptr())
 	return _ret
 }
 
 // Returns a deep copy of the key-value pairs of properties for the specified key.
-func (o *PDFAnnotation) ValueForAnnotationKey(key unsafe.Pointer) objc.ID {
-	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelValueForAnnotationKey, key)
+func (o *PDFAnnotation) ValueForAnnotationKey(key *foundation.NSString) objc.ID {
+	_ret := objc.Send[objc.ID](o.Ptr(), _pDFAnnotationSelValueForAnnotationKey, key.Ptr())
 	return _ret
 }
 
 // Removes a value from the annotation’s dictionary.
-func (o *PDFAnnotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
-	o.Ptr().Send(_pDFAnnotationSelRemoveValueForAnnotationKey, key)
+func (o *PDFAnnotation) RemoveValueForAnnotationKey(key *foundation.NSString) {
+	o.Ptr().Send(_pDFAnnotationSelRemoveValueForAnnotationKey, key.Ptr())
 }
 
 func (o *PDFAnnotation) Page() *PDFPage {

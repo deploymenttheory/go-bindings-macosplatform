@@ -7,28 +7,57 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func DOMEventException() uintptr {
+func DOMEventException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "DOMEventException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func DOMException() uintptr {
+func DOMException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "DOMException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func DOMRangeException() uintptr {
+func DOMRangeException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "DOMRangeException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func DOMXPathException() uintptr {
+func DOMXPathException() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "DOMXPathException")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract Indicates which local files WebKit can access when loading content. @discussion If NSReadAccessURLDocumentOption references a single file, only that file may be loaded by WebKit. If NSReadAccessURLDocumentOption references a directory, files inside that directory may be loaded by WebKit.
@@ -38,9 +67,16 @@ func NSReadAccessURLDocumentOption() uintptr {
 }
 
 // @constant WKErrorDomain Indicates a WebKit error.
-func WKErrorDomain() uintptr {
+func WKErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() uintptr {
@@ -78,7 +114,11 @@ func WKWebExtensionContextNotificationUserInfoKeyMatchPatterns() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionContextNotificationUserInfoKeyPermissions() *foundation.NSString {
@@ -86,7 +126,11 @@ func WKWebExtensionContextNotificationUserInfoKeyPermissions() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() uintptr {
@@ -119,7 +163,11 @@ func WKWebExtensionDataTypeLocal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionDataTypeSession() *foundation.NSString {
@@ -127,7 +175,11 @@ func WKWebExtensionDataTypeSession() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionDataTypeSynchronized() *foundation.NSString {
@@ -135,7 +187,11 @@ func WKWebExtensionDataTypeSynchronized() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionErrorDomain() uintptr {
@@ -158,7 +214,11 @@ func WKWebExtensionPermissionActiveTab() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionAlarms() *foundation.NSString {
@@ -166,7 +226,11 @@ func WKWebExtensionPermissionAlarms() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionClipboardWrite() *foundation.NSString {
@@ -174,7 +238,11 @@ func WKWebExtensionPermissionClipboardWrite() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionContextMenus() *foundation.NSString {
@@ -182,7 +250,11 @@ func WKWebExtensionPermissionContextMenus() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionCookies() *foundation.NSString {
@@ -190,7 +262,11 @@ func WKWebExtensionPermissionCookies() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequest() *foundation.NSString {
@@ -198,7 +274,11 @@ func WKWebExtensionPermissionDeclarativeNetRequest() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequestFeedback() *foundation.NSString {
@@ -206,7 +286,11 @@ func WKWebExtensionPermissionDeclarativeNetRequestFeedback() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess() *foundation.NSString {
@@ -214,7 +298,11 @@ func WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess() *foundation.N
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionMenus() *foundation.NSString {
@@ -222,7 +310,11 @@ func WKWebExtensionPermissionMenus() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionNativeMessaging() *foundation.NSString {
@@ -230,7 +322,11 @@ func WKWebExtensionPermissionNativeMessaging() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionScripting() *foundation.NSString {
@@ -238,7 +334,11 @@ func WKWebExtensionPermissionScripting() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionStorage() *foundation.NSString {
@@ -246,7 +346,11 @@ func WKWebExtensionPermissionStorage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionTabs() *foundation.NSString {
@@ -254,7 +358,11 @@ func WKWebExtensionPermissionTabs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionUnlimitedStorage() *foundation.NSString {
@@ -262,7 +370,11 @@ func WKWebExtensionPermissionUnlimitedStorage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionWebNavigation() *foundation.NSString {
@@ -270,7 +382,11 @@ func WKWebExtensionPermissionWebNavigation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WKWebExtensionPermissionWebRequest() *foundation.NSString {
@@ -278,68 +394,142 @@ func WKWebExtensionPermissionWebRequest() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeCookies Cookies.
-func WKWebsiteDataTypeCookies() uintptr {
+func WKWebsiteDataTypeCookies() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeCookies")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeDiskCache On-disk caches.
-func WKWebsiteDataTypeDiskCache() uintptr {
+func WKWebsiteDataTypeDiskCache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeDiskCache")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeFetchCache On-disk Fetch caches.
-func WKWebsiteDataTypeFetchCache() uintptr {
+func WKWebsiteDataTypeFetchCache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeFetchCache")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeFileSystem File system storage.
-func WKWebsiteDataTypeFileSystem() uintptr {
+func WKWebsiteDataTypeFileSystem() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeFileSystem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeHashSalt Hash salt for deviceId
-func WKWebsiteDataTypeHashSalt() uintptr {
+func WKWebsiteDataTypeHashSalt() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeHashSalt")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeIndexedDBDatabases IndexedDB databases.
-func WKWebsiteDataTypeIndexedDBDatabases() uintptr {
+func WKWebsiteDataTypeIndexedDBDatabases() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeIndexedDBDatabases")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeLocalStorage HTML local storage.
-func WKWebsiteDataTypeLocalStorage() uintptr {
+func WKWebsiteDataTypeLocalStorage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeLocalStorage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeMediaKeys MediaKeys storage
-func WKWebsiteDataTypeMediaKeys() uintptr {
+func WKWebsiteDataTypeMediaKeys() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeMediaKeys")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeMemoryCache In-memory caches.
-func WKWebsiteDataTypeMemoryCache() uintptr {
+func WKWebsiteDataTypeMemoryCache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeMemoryCache")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeOfflineWebApplicationCache HTML offline web application caches.
 // Deprecated: WebApplicationCache is no longer supported
-func WKWebsiteDataTypeOfflineWebApplicationCache() uintptr {
+func WKWebsiteDataTypeOfflineWebApplicationCache() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeOfflineWebApplicationCache")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeScreenTime Screen Time information
@@ -349,27 +539,55 @@ func WKWebsiteDataTypeScreenTime() uintptr {
 }
 
 // @constant WKWebsiteDataTypeSearchFieldRecentSearches Search field history.
-func WKWebsiteDataTypeSearchFieldRecentSearches() uintptr {
+func WKWebsiteDataTypeSearchFieldRecentSearches() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeSearchFieldRecentSearches")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeServiceWorkerRegistrations Service worker registrations.
-func WKWebsiteDataTypeServiceWorkerRegistrations() uintptr {
+func WKWebsiteDataTypeServiceWorkerRegistrations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeServiceWorkerRegistrations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeSessionStorage HTML session storage.
-func WKWebsiteDataTypeSessionStorage() uintptr {
+func WKWebsiteDataTypeSessionStorage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeSessionStorage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WKWebsiteDataTypeWebSQLDatabases WebSQL databases.
-func WKWebsiteDataTypeWebSQLDatabases() uintptr {
+func WKWebsiteDataTypeWebSQLDatabases() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WKWebsiteDataTypeWebSQLDatabases")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebActionButtonKey() *foundation.NSString {
@@ -377,7 +595,11 @@ func WebActionButtonKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebActionElementKey() *foundation.NSString {
@@ -385,7 +607,11 @@ func WebActionElementKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebActionModifierFlagsKey() *foundation.NSString {
@@ -393,7 +619,11 @@ func WebActionModifierFlagsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebActionNavigationTypeKey() *foundation.NSString {
@@ -401,7 +631,11 @@ func WebActionNavigationTypeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebActionOriginalURLKey() *foundation.NSString {
@@ -409,7 +643,11 @@ func WebActionOriginalURLKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const WebArchivePboardType @abstract The pasteboard type constant used when adding or accessing a WebArchive on the pasteboard.
@@ -418,7 +656,11 @@ func WebArchivePboardType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementDOMNodeKey() *foundation.NSString {
@@ -426,7 +668,11 @@ func WebElementDOMNodeKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementFrameKey() *foundation.NSString {
@@ -434,7 +680,11 @@ func WebElementFrameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementImageAltStringKey() *foundation.NSString {
@@ -442,7 +692,11 @@ func WebElementImageAltStringKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementImageKey() *foundation.NSString {
@@ -450,7 +704,11 @@ func WebElementImageKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementImageRectKey() *foundation.NSString {
@@ -458,7 +716,11 @@ func WebElementImageRectKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementImageURLKey() *foundation.NSString {
@@ -466,7 +728,11 @@ func WebElementImageURLKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementIsSelectedKey() *foundation.NSString {
@@ -474,7 +740,11 @@ func WebElementIsSelectedKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementLinkLabelKey() *foundation.NSString {
@@ -482,7 +752,11 @@ func WebElementLinkLabelKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementLinkTargetFrameKey() *foundation.NSString {
@@ -490,7 +764,11 @@ func WebElementLinkTargetFrameKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementLinkTitleKey() *foundation.NSString {
@@ -498,7 +776,11 @@ func WebElementLinkTitleKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebElementLinkURLKey() *foundation.NSString {
@@ -506,7 +788,11 @@ func WebElementLinkURLKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryAllItemsRemovedNotification() *foundation.NSString {
@@ -514,7 +800,11 @@ func WebHistoryAllItemsRemovedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryItemChangedNotification() *foundation.NSString {
@@ -522,7 +812,11 @@ func WebHistoryItemChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryItemsAddedNotification() *foundation.NSString {
@@ -530,7 +824,11 @@ func WebHistoryItemsAddedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryItemsKey() *foundation.NSString {
@@ -538,7 +836,11 @@ func WebHistoryItemsKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryItemsRemovedNotification() *foundation.NSString {
@@ -546,7 +848,11 @@ func WebHistoryItemsRemovedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistoryLoadedNotification() *foundation.NSString {
@@ -554,7 +860,11 @@ func WebHistoryLoadedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebHistorySavedNotification() *foundation.NSString {
@@ -562,7 +872,11 @@ func WebHistorySavedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebKitErrorDomain() *foundation.NSString {
@@ -570,22 +884,47 @@ func WebKitErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebKitErrorMIMETypeKey() uintptr {
+func WebKitErrorMIMETypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebKitErrorMIMETypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebKitErrorPlugInNameKey() uintptr {
+func WebKitErrorPlugInNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebKitErrorPlugInNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebKitErrorPlugInPageURLStringKey() uintptr {
+func WebKitErrorPlugInPageURLStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebKitErrorPlugInPageURLStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WebPlugInAttributesKey REQUIRED. The dictionary containing the names and values of all attributes of the HTML element associated with the plug-in AND the names and values of all parameters to be passed to the plug-in (e.g. PARAM elements within an APPLET element). In the case of a conflict between names, the attributes of an element take precedence over any PARAMs.  All of the keys and values in this NSDictionary must be NSStrings.
@@ -594,7 +933,11 @@ func WebPlugInAttributesKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WebPlugInBaseURLKey REQUIRED. The base URL of the document containing the plug-in's view.
@@ -603,7 +946,11 @@ func WebPlugInBaseURLKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WebPlugInContainer OPTIONAL. An object that conforms to the WebPlugInContainer informal protocol. This object is used for callbacks from the plug-in to the app. if this argument is nil, no callbacks will occur.
@@ -612,7 +959,11 @@ func WebPlugInContainerKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WebPlugInContainingElementKey The DOMElement that was used to specify the plug-in.  May be nil.
@@ -621,7 +972,11 @@ func WebPlugInContainingElementKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant WebPlugInShouldLoadMainResourceKey REQUIRED. NSNumber (BOOL) indicating whether the plug-in should load its own main resource (the "src" URL, in most cases). If YES, the plug-in should load its own main resource. If NO, the plug-in should use the data provided by WebKit. See -webPlugInMainResourceReceivedData: in WebPluginPrivate.h. For compatibility with older versions of WebKit, the plug-in should assume that the value for WebPlugInShouldLoadMainResourceKey is NO if it is absent from the arguments dictionary.
@@ -630,7 +985,11 @@ func WebPlugInShouldLoadMainResourceKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebPreferencesChangedNotification() *foundation.NSString {
@@ -638,32 +997,71 @@ func WebPreferencesChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebViewDidBeginEditingNotification() uintptr {
+func WebViewDidBeginEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewDidBeginEditingNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebViewDidChangeNotification() uintptr {
+func WebViewDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebViewDidChangeSelectionNotification() uintptr {
+func WebViewDidChangeSelectionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewDidChangeSelectionNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebViewDidChangeTypingStyleNotification() uintptr {
+func WebViewDidChangeTypingStyleNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewDidChangeTypingStyleNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func WebViewDidEndEditingNotification() uintptr {
+func WebViewDidEndEditingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_webkitLib, "WebViewDidEndEditingNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebViewProgressEstimateChangedNotification() *foundation.NSString {
@@ -671,7 +1069,11 @@ func WebViewProgressEstimateChangedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebViewProgressFinishedNotification() *foundation.NSString {
@@ -679,7 +1081,11 @@ func WebViewProgressFinishedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func WebViewProgressStartedNotification() *foundation.NSString {
@@ -687,5 +1093,9 @@ func WebViewProgressStartedNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

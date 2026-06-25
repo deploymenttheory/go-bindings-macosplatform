@@ -12,19 +12,40 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func NSAddedPersistentStoresKey() uintptr {
+func NSAddedPersistentStoresKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSAddedPersistentStoresKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSAffectedObjectsErrorKey() uintptr {
+func NSAffectedObjectsErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSAffectedObjectsErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSAffectedStoresErrorKey() uintptr {
+func NSAffectedStoresErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSAffectedStoresErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
@@ -33,19 +54,40 @@ func NSBinaryExternalRecordType() uintptr {
 	return ptr
 }
 
-func NSBinaryStoreInsecureDecodingCompatibilityOption() uintptr {
+func NSBinaryStoreInsecureDecodingCompatibilityOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSBinaryStoreInsecureDecodingCompatibilityOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSBinaryStoreSecureDecodingClasses() uintptr {
+func NSBinaryStoreSecureDecodingClasses() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSBinaryStoreSecureDecodingClasses")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSBinaryStoreType() uintptr {
+func NSBinaryStoreType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSBinaryStoreType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() *foundation.NSString {
@@ -53,12 +95,23 @@ func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() *foundation.NSS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSCoreDataCoreSpotlightExporter() uintptr {
+func NSCoreDataCoreSpotlightExporter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSCoreDataCoreSpotlightExporter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSCoreDataVersionNumber() float64 {
@@ -69,19 +122,40 @@ func NSCoreDataVersionNumber() float64 {
 	return *(*float64)(unsafe.Pointer(ptr))
 }
 
-func NSDeletedObjectIDsKey() uintptr {
+func NSDeletedObjectIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSDeletedObjectIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSDeletedObjectsKey() uintptr {
+func NSDeletedObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSDeletedObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSDetailedErrorsKey() uintptr {
+func NSDetailedErrorsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSDetailedErrorsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
@@ -116,74 +190,172 @@ func NSExternalRecordsFileFormatOption() uintptr {
 	return ptr
 }
 
-func NSIgnorePersistentStoreVersioningOption() uintptr {
+func NSIgnorePersistentStoreVersioningOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSIgnorePersistentStoreVersioningOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInMemoryStoreType() uintptr {
+func NSInMemoryStoreType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInMemoryStoreType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInferMappingModelAutomaticallyOption() uintptr {
+func NSInferMappingModelAutomaticallyOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInferMappingModelAutomaticallyOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInsertedObjectIDsKey() uintptr {
+func NSInsertedObjectIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInsertedObjectIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInsertedObjectsKey() uintptr {
+func NSInsertedObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInsertedObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInvalidatedAllObjectsKey() uintptr {
+func NSInvalidatedAllObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInvalidatedAllObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInvalidatedObjectIDsKey() uintptr {
+func NSInvalidatedObjectIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInvalidatedObjectIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSInvalidatedObjectsKey() uintptr {
+func NSInvalidatedObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSInvalidatedObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextDidMergeChangesObjectIDsNotification() uintptr {
+func NSManagedObjectContextDidMergeChangesObjectIDsNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextDidMergeChangesObjectIDsNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextDidSaveNotification() uintptr {
+func NSManagedObjectContextDidSaveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextDidSaveNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextDidSaveObjectIDsNotification() uintptr {
+func NSManagedObjectContextDidSaveObjectIDsNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextDidSaveObjectIDsNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextObjectsDidChangeNotification() uintptr {
+func NSManagedObjectContextObjectsDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextObjectsDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextQueryGenerationKey() uintptr {
+func NSManagedObjectContextQueryGenerationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextQueryGenerationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSManagedObjectContextWillSaveNotification() uintptr {
+func NSManagedObjectContextWillSaveNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSManagedObjectContextWillSaveNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSMergeByPropertyObjectTrumpMergePolicy() objc.ID {
@@ -202,39 +374,88 @@ func NSMergeByPropertyStoreTrumpMergePolicy() objc.ID {
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
-func NSMigratePersistentStoresAutomaticallyOption() uintptr {
+func NSMigratePersistentStoresAutomaticallyOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigratePersistentStoresAutomaticallyOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationDestinationObjectKey() uintptr {
+func NSMigrationDestinationObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationDestinationObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationEntityMappingKey() uintptr {
+func NSMigrationEntityMappingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationEntityMappingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationEntityPolicyKey() uintptr {
+func NSMigrationEntityPolicyKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationEntityPolicyKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationManagerKey() uintptr {
+func NSMigrationManagerKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationManagerKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationPropertyMappingKey() uintptr {
+func NSMigrationPropertyMappingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationPropertyMappingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSMigrationSourceObjectKey() uintptr {
+func NSMigrationSourceObjectKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSMigrationSourceObjectKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
@@ -267,152 +488,348 @@ func NSPersistentCloudKitContainerEventUserInfoKey() uintptr {
 	return ptr
 }
 
-func NSPersistentHistoryTokenKey() uintptr {
+func NSPersistentHistoryTokenKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentHistoryTokenKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentHistoryTrackingKey() uintptr {
+func NSPersistentHistoryTrackingKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentHistoryTrackingKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreConnectionPoolMaxSizeKey() uintptr {
+func NSPersistentStoreConnectionPoolMaxSizeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreConnectionPoolMaxSizeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreCoordinatorStoresDidChangeNotification() uintptr {
+func NSPersistentStoreCoordinatorStoresDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreCoordinatorStoresDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreCoordinatorStoresWillChangeNotification() uintptr {
+func NSPersistentStoreCoordinatorStoresWillChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreCoordinatorStoresWillChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreCoordinatorWillRemoveStoreNotification() uintptr {
+func NSPersistentStoreCoordinatorWillRemoveStoreNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreCoordinatorWillRemoveStoreNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreDeferredLightweightMigrationOptionKey() uintptr {
+func NSPersistentStoreDeferredLightweightMigrationOptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreDeferredLightweightMigrationOptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreDidImportUbiquitousContentChangesNotification() uintptr {
+func NSPersistentStoreDidImportUbiquitousContentChangesNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreDidImportUbiquitousContentChangesNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreForceDestroyOption() uintptr {
+func NSPersistentStoreForceDestroyOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreForceDestroyOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreModelVersionChecksumKey() uintptr {
+func NSPersistentStoreModelVersionChecksumKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreModelVersionChecksumKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreOSCompatibility() uintptr {
+func NSPersistentStoreOSCompatibility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreOSCompatibility")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreRebuildFromUbiquitousContentOption() uintptr {
+func NSPersistentStoreRebuildFromUbiquitousContentOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreRebuildFromUbiquitousContentOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreRemoteChangeNotification() uintptr {
+func NSPersistentStoreRemoteChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreRemoteChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreRemoteChangeNotificationPostOptionKey() uintptr {
+func NSPersistentStoreRemoteChangeNotificationPostOptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreRemoteChangeNotificationPostOptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreRemoveUbiquitousMetadataOption() uintptr {
+func NSPersistentStoreRemoveUbiquitousMetadataOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreRemoveUbiquitousMetadataOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreSaveConflictsErrorKey() uintptr {
+func NSPersistentStoreSaveConflictsErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreSaveConflictsErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreStagedMigrationManagerOptionKey() uintptr {
+func NSPersistentStoreStagedMigrationManagerOptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreStagedMigrationManagerOptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreTimeoutOption() uintptr {
+func NSPersistentStoreTimeoutOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreTimeoutOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSPersistentStoreURLKey() uintptr {
+func NSPersistentStoreURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreUbiquitousContainerIdentifierKey() uintptr {
+func NSPersistentStoreUbiquitousContainerIdentifierKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreUbiquitousContainerIdentifierKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreUbiquitousContentNameKey() uintptr {
+func NSPersistentStoreUbiquitousContentNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreUbiquitousContentNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreUbiquitousContentURLKey() uintptr {
+func NSPersistentStoreUbiquitousContentURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreUbiquitousContentURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreUbiquitousPeerTokenOption() uintptr {
+func NSPersistentStoreUbiquitousPeerTokenOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreUbiquitousPeerTokenOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Please see the release notes and Core Data documentation.
-func NSPersistentStoreUbiquitousTransitionTypeKey() uintptr {
+func NSPersistentStoreUbiquitousTransitionTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSPersistentStoreUbiquitousTransitionTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSReadOnlyPersistentStoreOption() uintptr {
+func NSReadOnlyPersistentStoreOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSReadOnlyPersistentStoreOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSRefreshedObjectIDsKey() uintptr {
+func NSRefreshedObjectIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSRefreshedObjectIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSRefreshedObjectsKey() uintptr {
+func NSRefreshedObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSRefreshedObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSRemovedPersistentStoresKey() uintptr {
+func NSRemovedPersistentStoresKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSRemovedPersistentStoresKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSRollbackMergePolicy() objc.ID {
@@ -423,39 +840,88 @@ func NSRollbackMergePolicy() objc.ID {
 	return *(*objc.ID)(unsafe.Pointer(ptr))
 }
 
-func NSSQLiteAnalyzeOption() uintptr {
+func NSSQLiteAnalyzeOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSSQLiteAnalyzeOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSSQLiteErrorDomain() uintptr {
+func NSSQLiteErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSSQLiteErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSSQLiteManualVacuumOption() uintptr {
+func NSSQLiteManualVacuumOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSSQLiteManualVacuumOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSSQLitePragmasOption() uintptr {
+func NSSQLitePragmasOption() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSSQLitePragmasOption")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSSQLiteStoreType() uintptr {
+func NSSQLiteStoreType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSSQLiteStoreType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSStoreModelVersionHashesKey() uintptr {
+func NSStoreModelVersionHashesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStoreModelVersionHashesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSStoreModelVersionIdentifiersKey() uintptr {
+func NSStoreModelVersionIdentifiersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStoreModelVersionIdentifiersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
@@ -464,9 +930,16 @@ func NSStorePathKey() uintptr {
 	return ptr
 }
 
-func NSStoreTypeKey() uintptr {
+func NSStoreTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStoreTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.
@@ -475,24 +948,52 @@ func NSStoreUUIDInPathKey() uintptr {
 	return ptr
 }
 
-func NSStoreUUIDKey() uintptr {
+func NSStoreUUIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSStoreUUIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSUUIDChangedPersistentStoresKey() uintptr {
+func NSUUIDChangedPersistentStoresKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSUUIDChangedPersistentStoresKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSUpdatedObjectIDsKey() uintptr {
+func NSUpdatedObjectIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSUpdatedObjectIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSUpdatedObjectsKey() uintptr {
+func NSUpdatedObjectsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSUpdatedObjectsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSValidateXMLStoreOption() uintptr {
@@ -500,24 +1001,52 @@ func NSValidateXMLStoreOption() uintptr {
 	return ptr
 }
 
-func NSValidationKeyErrorKey() uintptr {
+func NSValidationKeyErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSValidationKeyErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSValidationObjectErrorKey() uintptr {
+func NSValidationObjectErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSValidationObjectErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSValidationPredicateErrorKey() uintptr {
+func NSValidationPredicateErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSValidationPredicateErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func NSValidationValueErrorKey() uintptr {
+func NSValidationValueErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coredataLib, "NSValidationValueErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Spotlight integration is deprecated. Use CoreSpotlight integration instead.

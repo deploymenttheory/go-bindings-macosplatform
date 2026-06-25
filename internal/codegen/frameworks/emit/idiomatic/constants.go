@@ -31,6 +31,7 @@ func emitConstants(
 	fw *meta.FrameworkMeta,
 	m *typemap.Mapper,
 	handFuncs, takenNames map[string]bool,
+	trialNames trialNameMap,
 ) error {
 	ctx := typemap.Context{Framework: fw.Framework}
 	// Mirror EmitExterns' name reservations: an extern is skipped when its C name
@@ -48,8 +49,9 @@ func emitConstants(
 	seenGoNames := make(map[string]bool)
 	// Constants are grouped to preserve the original emission order: all
 	// CoreFoundation references first, then Foundation *String constants, then
-	// non-Foundation objc.ID string constants.
-	var cfRefs, strItems, strIDs []view.Constant
+	// non-Foundation objc.ID string constants, then same-framework ObjC class
+	// pointer globals.
+	var cfRefs, strItems, strIDs, classItems []view.Constant
 
 	for _, ext := range fw.Externs {
 		if ext.Availability.IsUnavailable || seen[ext.Name] || funcNames[ext.Name] {
@@ -70,6 +72,7 @@ func emitConstants(
 		// need for an NSAboutPanelOptionKey / NSPasteboardType dictionary key.
 		isFoundationString := pkgName == foundationPkgName && externIsNSString(ext, m, ctx)
 		isObjcIDString, typedString := false, false
+		isObjcClass, objcIdiomaticType := false, ""
 		if pkgName != foundationPkgName {
 			rawGoType := ext.GoType
 			if rawGoType == "" {
@@ -85,9 +88,22 @@ func emitConstants(
 				// NSAboutPanelOptionKey`) so it emitted a uintptr symbol-address
 				// accessor; CFConstant dereferences it to the NSString objc.ID.
 				isObjcIDString = true
+			default:
+				// Same-framework ObjC class pointer: *ClassName with no package
+				// qualifier and no generics. Look up the idiomatic trial name so
+				// the accessor returns the wrapper type, not a raw pointer.
+				if after, ok := strings.CutPrefix(rawGoType, "*"); ok &&
+					!strings.Contains(after, "*") &&
+					!strings.Contains(after, ".") &&
+					!strings.Contains(after, "[") {
+					if idiomaticName, found := trialNames[after]; found {
+						isObjcClass = true
+						objcIdiomaticType = idiomaticName
+					}
+				}
 			}
 		}
-		if !isCFRefExtern(ext.ObjCType) && !isFoundationString && !isObjcIDString {
+		if !isCFRefExtern(ext.ObjCType) && !isFoundationString && !isObjcIDString && !isObjcClass {
 			continue
 		}
 		if takenNames[goName] || handFuncs[goName] {
@@ -121,6 +137,17 @@ func emitConstants(
 					Kind:         view.ConstNSString,
 				},
 			)
+		case isObjcClass:
+			classItems = append(
+				classItems,
+				view.Constant{
+					GoName:       goName,
+					ExternName:   ext.Name,
+					CommentBlock: comment,
+					Kind:         view.ConstObjcClass,
+					GoTypeName:   objcIdiomaticType,
+				},
+			)
 		default: // isObjcIDString
 			strIDs = append(
 				strIDs,
@@ -134,10 +161,11 @@ func emitConstants(
 		}
 	}
 
-	constants := make([]view.Constant, 0, len(cfRefs)+len(strItems)+len(strIDs))
+	constants := make([]view.Constant, 0, len(cfRefs)+len(strItems)+len(strIDs)+len(classItems))
 	constants = append(constants, cfRefs...)
 	constants = append(constants, strItems...)
 	constants = append(constants, strIDs...)
+	constants = append(constants, classItems...)
 	if len(constants) == 0 {
 		return nil
 	}
@@ -152,10 +180,15 @@ func emitConstants(
 	// Imports computed from the resolved constants, not by scanning the rendered
 	// text: every accessor calls purego.CFConstant; the obj wrapper is used only
 	// by the CF-reference and objc.ID-string accessors (the *String accessor uses
-	// StringFromID instead).
+	// StringFromID instead). ObjC class pointer accessors additionally need objc
+	// and unsafe to dereference the symbol address.
 	imports := map[string]string{"purego": pureobjcImportPath}
 	if len(cfRefs) > 0 || len(strIDs) > 0 {
 		imports["obj"] = objImportPath
+	}
+	if len(classItems) > 0 {
+		imports["objc"] = objcImportPath
+		imports["unsafe"] = "unsafe"
 	}
 
 	fname := pkgName + "_constants_generated.go"

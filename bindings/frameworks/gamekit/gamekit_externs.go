@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func GKErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GKExchangeTimeoutDefault() float64 {
@@ -47,7 +52,11 @@ func GKPlayerAuthenticationDidChangeNotificationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Notification will be posted whenever the player details changes. The object of the notification will be the player.
@@ -56,7 +65,11 @@ func GKPlayerDidChangeNotificationName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
@@ -66,9 +79,16 @@ func GKPlayerIDNoLongerAvailable() uintptr {
 }
 
 // Deprecated: No longer supported
-func GKSessionErrorDomain() uintptr {
+func GKSessionErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKSessionErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func GKTurnTimeoutDefault() float64 {
@@ -88,7 +108,14 @@ func GKTurnTimeoutNone() float64 {
 }
 
 // Deprecated: No longer supported
-func GKVoiceChatServiceErrorDomain() uintptr {
+func GKVoiceChatServiceErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_gamekitLib, "GKVoiceChatServiceErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

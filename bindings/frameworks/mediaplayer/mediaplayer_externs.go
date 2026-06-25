@@ -4,62 +4,144 @@
 package mediaplayer
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func MPErrorDomain() uintptr {
+func MPErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles() uintptr {
+func MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicDescribesMusicAndSound() uintptr {
+func MPLanguageOptionCharacteristicDescribesMusicAndSound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicDescribesMusicAndSound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicDescribesVideo() uintptr {
+func MPLanguageOptionCharacteristicDescribesVideo() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicDescribesVideo")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicDubbedTranslation() uintptr {
+func MPLanguageOptionCharacteristicDubbedTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicDubbedTranslation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicEasyToRead() uintptr {
+func MPLanguageOptionCharacteristicEasyToRead() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicEasyToRead")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicIsAuxiliaryContent() uintptr {
+func MPLanguageOptionCharacteristicIsAuxiliaryContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicIsAuxiliaryContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicIsMainProgramContent() uintptr {
+func MPLanguageOptionCharacteristicIsMainProgramContent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicIsMainProgramContent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicLanguageTranslation() uintptr {
+func MPLanguageOptionCharacteristicLanguageTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicLanguageTranslation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicTranscribesSpokenDialog() uintptr {
+func MPLanguageOptionCharacteristicTranscribesSpokenDialog() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicTranscribesSpokenDialog")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPLanguageOptionCharacteristicVoiceOverTranslation() uintptr {
+func MPLanguageOptionCharacteristicVoiceOverTranslation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPLanguageOptionCharacteristicVoiceOverTranslation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MPMediaEntityPropertyPersistentID() uintptr {
@@ -67,359 +149,856 @@ func MPMediaEntityPropertyPersistentID() uintptr {
 	return ptr
 }
 
-func MPMediaItemPropertyAlbumArtist() uintptr {
+func MPMediaItemPropertyAlbumArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumArtist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAlbumArtistPersistentID() uintptr {
+func MPMediaItemPropertyAlbumArtistPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumArtistPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAlbumPersistentID() uintptr {
+func MPMediaItemPropertyAlbumPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAlbumTitle() uintptr {
+func MPMediaItemPropertyAlbumTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAlbumTrackCount() uintptr {
+func MPMediaItemPropertyAlbumTrackCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumTrackCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAlbumTrackNumber() uintptr {
+func MPMediaItemPropertyAlbumTrackNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAlbumTrackNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyArtist() uintptr {
+func MPMediaItemPropertyArtist() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyArtist")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyArtistPersistentID() uintptr {
+func MPMediaItemPropertyArtistPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyArtistPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyArtwork() uintptr {
+func MPMediaItemPropertyArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyArtwork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyAssetURL() uintptr {
+func MPMediaItemPropertyAssetURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyAssetURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyBeatsPerMinute() uintptr {
+func MPMediaItemPropertyBeatsPerMinute() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyBeatsPerMinute")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyBookmarkTime() uintptr {
+func MPMediaItemPropertyBookmarkTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyBookmarkTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyComments() uintptr {
+func MPMediaItemPropertyComments() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyComments")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyComposer() uintptr {
+func MPMediaItemPropertyComposer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyComposer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyComposerPersistentID() uintptr {
+func MPMediaItemPropertyComposerPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyComposerPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyDateAdded() uintptr {
+func MPMediaItemPropertyDateAdded() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyDateAdded")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyDiscCount() uintptr {
+func MPMediaItemPropertyDiscCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyDiscCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyDiscNumber() uintptr {
+func MPMediaItemPropertyDiscNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyDiscNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyGenre() uintptr {
+func MPMediaItemPropertyGenre() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyGenre")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyGenrePersistentID() uintptr {
+func MPMediaItemPropertyGenrePersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyGenrePersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyHasProtectedAsset() uintptr {
+func MPMediaItemPropertyHasProtectedAsset() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyHasProtectedAsset")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyIsCloudItem() uintptr {
+func MPMediaItemPropertyIsCloudItem() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyIsCloudItem")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyIsCompilation() uintptr {
+func MPMediaItemPropertyIsCompilation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyIsCompilation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyIsExplicit() uintptr {
+func MPMediaItemPropertyIsExplicit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyIsExplicit")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyIsPreorder() uintptr {
+func MPMediaItemPropertyIsPreorder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyIsPreorder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyLastPlayedDate() uintptr {
+func MPMediaItemPropertyLastPlayedDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyLastPlayedDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyLyrics() uintptr {
+func MPMediaItemPropertyLyrics() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyLyrics")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyMediaType() uintptr {
+func MPMediaItemPropertyMediaType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyMediaType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPersistentID() uintptr {
+func MPMediaItemPropertyPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPlayCount() uintptr {
+func MPMediaItemPropertyPlayCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPlayCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPlaybackDuration() uintptr {
+func MPMediaItemPropertyPlaybackDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPlaybackDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPlaybackStoreID() uintptr {
+func MPMediaItemPropertyPlaybackStoreID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPlaybackStoreID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPodcastPersistentID() uintptr {
+func MPMediaItemPropertyPodcastPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPodcastPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyPodcastTitle() uintptr {
+func MPMediaItemPropertyPodcastTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyPodcastTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyRating() uintptr {
+func MPMediaItemPropertyRating() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyRating")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyReleaseDate() uintptr {
+func MPMediaItemPropertyReleaseDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyReleaseDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertySkipCount() uintptr {
+func MPMediaItemPropertySkipCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertySkipCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyTitle() uintptr {
+func MPMediaItemPropertyTitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyTitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaItemPropertyUserGrouping() uintptr {
+func MPMediaItemPropertyUserGrouping() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaItemPropertyUserGrouping")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaybackIsPreparedToPlayDidChangeNotification() uintptr {
+func MPMediaPlaybackIsPreparedToPlayDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaybackIsPreparedToPlayDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyAuthorDisplayName() uintptr {
+func MPMediaPlaylistPropertyAuthorDisplayName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyAuthorDisplayName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyCloudGlobalID() uintptr {
+func MPMediaPlaylistPropertyCloudGlobalID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyCloudGlobalID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyDescriptionText() uintptr {
+func MPMediaPlaylistPropertyDescriptionText() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyDescriptionText")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyName() uintptr {
+func MPMediaPlaylistPropertyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyPersistentID() uintptr {
+func MPMediaPlaylistPropertyPersistentID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyPersistentID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertyPlaylistAttributes() uintptr {
+func MPMediaPlaylistPropertyPlaylistAttributes() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertyPlaylistAttributes")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPMediaPlaylistPropertySeedItems() uintptr {
+func MPMediaPlaylistPropertySeedItems() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPMediaPlaylistPropertySeedItems")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoCollectionIdentifier() uintptr {
+func MPNowPlayingInfoCollectionIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoCollectionIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // 1:1 (square) animated artwork for the current media item.
-func MPNowPlayingInfoProperty1x1AnimatedArtwork() uintptr {
+func MPNowPlayingInfoProperty1x1AnimatedArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoProperty1x1AnimatedArtwork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // 3:4 (tall) animated artwork for the current media item.
-func MPNowPlayingInfoProperty3x4AnimatedArtwork() uintptr {
+func MPNowPlayingInfoProperty3x4AnimatedArtwork() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoProperty3x4AnimatedArtwork")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyAdTimeRanges() uintptr {
+func MPNowPlayingInfoPropertyAdTimeRanges() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyAdTimeRanges")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyAssetURL() uintptr {
+func MPNowPlayingInfoPropertyAssetURL() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyAssetURL")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyAvailableLanguageOptions() uintptr {
+func MPNowPlayingInfoPropertyAvailableLanguageOptions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyAvailableLanguageOptions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyChapterCount() uintptr {
+func MPNowPlayingInfoPropertyChapterCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyChapterCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyChapterNumber() uintptr {
+func MPNowPlayingInfoPropertyChapterNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyChapterNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyCreditsStartTime() uintptr {
+func MPNowPlayingInfoPropertyCreditsStartTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyCreditsStartTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyCurrentLanguageOptions() uintptr {
+func MPNowPlayingInfoPropertyCurrentLanguageOptions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyCurrentLanguageOptions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyCurrentPlaybackDate() uintptr {
+func MPNowPlayingInfoPropertyCurrentPlaybackDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyCurrentPlaybackDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyDefaultPlaybackRate() uintptr {
+func MPNowPlayingInfoPropertyDefaultPlaybackRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyDefaultPlaybackRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyElapsedPlaybackTime() uintptr {
+func MPNowPlayingInfoPropertyElapsedPlaybackTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyElapsedPlaybackTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyExcludeFromSuggestions() uintptr {
+func MPNowPlayingInfoPropertyExcludeFromSuggestions() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyExcludeFromSuggestions")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyExternalContentIdentifier() uintptr {
+func MPNowPlayingInfoPropertyExternalContentIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyExternalContentIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyExternalUserProfileIdentifier() uintptr {
+func MPNowPlayingInfoPropertyExternalUserProfileIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyExternalUserProfileIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyInternationalStandardRecordingCode() uintptr {
+func MPNowPlayingInfoPropertyInternationalStandardRecordingCode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyInternationalStandardRecordingCode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyIsLiveStream() uintptr {
+func MPNowPlayingInfoPropertyIsLiveStream() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyIsLiveStream")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyMediaType() uintptr {
+func MPNowPlayingInfoPropertyMediaType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyMediaType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyPlaybackProgress() uintptr {
+func MPNowPlayingInfoPropertyPlaybackProgress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyPlaybackProgress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyPlaybackQueueCount() uintptr {
+func MPNowPlayingInfoPropertyPlaybackQueueCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyPlaybackQueueCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyPlaybackQueueIndex() uintptr {
+func MPNowPlayingInfoPropertyPlaybackQueueIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyPlaybackQueueIndex")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyPlaybackRate() uintptr {
+func MPNowPlayingInfoPropertyPlaybackRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyPlaybackRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MPNowPlayingInfoPropertyServiceIdentifier() uintptr {
+func MPNowPlayingInfoPropertyServiceIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_mediaplayerLib, "MPNowPlayingInfoPropertyServiceIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

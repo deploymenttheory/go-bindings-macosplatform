@@ -29,10 +29,10 @@ func AuthorizationCopyPrivilegedReference(authorization unsafe.Pointer, flags Au
 	return nil
 }
 
-var _fnAuthorizationExecuteWithPrivileges func(objc.ID, string, AuthorizationFlags, unsafe.Pointer, unsafe.Pointer) int32
+var _fnAuthorizationExecuteWithPrivileges func(objc.ID, string, AuthorizationFlags, string, unsafe.Pointer) int32
 
 // AuthorizationExecuteWithPrivileges reports an error if the Security framework function AuthorizationExecuteWithPrivileges fails.
-func AuthorizationExecuteWithPrivileges(authorization obj.Object, pathToTool string, options AuthorizationFlags, arguments unsafe.Pointer, communicationsPipe unsafe.Pointer) error {
+func AuthorizationExecuteWithPrivileges(authorization obj.Object, pathToTool string, options AuthorizationFlags, arguments string, communicationsPipe unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationExecuteWithPrivileges == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationExecuteWithPrivileges, _lib, "AuthorizationExecuteWithPrivileges")

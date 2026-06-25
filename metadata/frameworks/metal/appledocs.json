@@ -4328,6 +4328,22 @@
           "doc": "An 8-bit signed integer data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/int8"
         },
+        "MTLTensorDataTypeMetalFloat4E2M1": {
+          "doc": "A 4-bit floating point format data type with 2 exponent bits, 1 mantissa bit and 1 sign bit.",
+          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat4e2m1"
+        },
+        "MTLTensorDataTypeMetalFloat8E4M3": {
+          "doc": "An 8-bit floating point format data type with 4 exponent bits, 3 mantissa bits and 1 sign bit.",
+          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8e4m3"
+        },
+        "MTLTensorDataTypeMetalFloat8E5M2": {
+          "doc": "An 8-bit floating point format data type with 5 exponent bits, 2 mantissa bits and 1 sign bit.",
+          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8e5m2"
+        },
+        "MTLTensorDataTypeMetalFloat8UE8M0": {
+          "doc": "An 8-bit floating point format data type with 8 exponent bits.",
+          "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/metalfloat8ue8m0"
+        },
         "MTLTensorDataTypeNone": {
           "doc": "An invalid data type.",
           "url": "https://developer.apple.com/documentation/metal/mtltensordatatype/none"

@@ -200,8 +200,8 @@ func (ac *AnnotationCircle) WithMarkupType(markupType MarkupType) *AnnotationCir
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (ac *AnnotationCircle) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationCircle {
-	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (ac *AnnotationCircle) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationCircle {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return ac
 }
 

@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
 // NSCalibratedWhiteColorSpace returns the string constant NSCalibratedWhiteColorSpace, for use as a dictionary key or argument.
@@ -6558,4 +6561,14 @@ func NSTypeIdentifierPhoneNumberText() obj.Object {
 // NSTypeIdentifierTransitInformationText returns the string constant NSTypeIdentifierTransitInformationText, for use as a dictionary key or argument.
 func NSTypeIdentifierTransitInformationText() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierTransitInformationText")))
+}
+
+// NSApp returns the NSApp ObjC object as an idiomatic Application.
+func NSApp() *Application {
+	addr := _symbol("NSApp")
+	if addr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(addr))
+	return ApplicationFromID(id)
 }

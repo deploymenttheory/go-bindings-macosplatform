@@ -4,7 +4,12 @@
 package coremidi
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @constant		MIDICIDeviceObjectKey @brief			Value is an MIDIUMPEndpoint.
@@ -43,19 +48,40 @@ func MIDICIProfileWasUpdatedNotification() uintptr {
 	return ptr
 }
 
-func MIDINetworkBonjourServiceType() uintptr {
+func MIDINetworkBonjourServiceType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDINetworkBonjourServiceType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MIDINetworkNotificationContactsDidChange() uintptr {
+func MIDINetworkNotificationContactsDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDINetworkNotificationContactsDidChange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MIDINetworkNotificationSessionDidChange() uintptr {
+func MIDINetworkNotificationSessionDidChange() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_coremidiLib, "MIDINetworkNotificationSessionDidChange")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      MIDIUMPEndpointObjectKey @brief         Value is a MIDIUMPEndpoint

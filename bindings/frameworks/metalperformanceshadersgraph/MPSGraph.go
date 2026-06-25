@@ -2396,7 +2396,7 @@ func (o *MPSGraph) DequantizeTensorScaleTensorDataTypeName(tensor *MPSGraphTenso
 	return MPSGraphTensorFromID(_ret)
 }
 
-// Creates a lookup-table based quantization operation and returns the result tensor.
+// Creates a lookup-table based dequantize operation and returns the result tensor.
 func (o *MPSGraph) DequantizeTensorLUTTensorName(tensor *MPSGraphTensor, lUTTensor *MPSGraphTensor, name *foundation.NSString) *MPSGraphTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorName, tensor.Ptr(), lUTTensor.Ptr(), name.Ptr())
 	if _ret != 0 {
@@ -2405,7 +2405,7 @@ func (o *MPSGraph) DequantizeTensorLUTTensorName(tensor *MPSGraphTensor, lUTTens
 	return MPSGraphTensorFromID(_ret)
 }
 
-// Creates a vector lookup-table based quantization operation and returns the result tensor.
+// Creates a vector lookup-table based dequantize operation and returns the result tensor.
 func (o *MPSGraph) DequantizeTensorLUTTensorAxisName(tensor *MPSGraphTensor, lUTTensor *MPSGraphTensor, axis int, name *foundation.NSString) *MPSGraphTensor {
 	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorAxisName, tensor.Ptr(), lUTTensor.Ptr(), axis, name.Ptr())
 	if _ret != 0 {

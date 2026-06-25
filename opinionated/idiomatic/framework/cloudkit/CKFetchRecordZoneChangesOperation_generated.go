@@ -94,7 +94,7 @@ func (frzco *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChang
 	return frzco
 }
 
-// WithRecordWithIDWasDeletedBlock sets the block to execute when a record no longer exists.
+// WithRecordWithIDWasDeletedBlock sets the closure to execute when a record no longer exists.
 func (frzco *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
 		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))

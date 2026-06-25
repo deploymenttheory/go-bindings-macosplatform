@@ -55,7 +55,7 @@ var (
 	_fnNSDisableScreenUpdates func()
 	_fnNSDottedFrameRect      func(corefoundation.CGRect)
 	// Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
-	_fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, unsafe.Pointer)
+	_fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, *uint8)
 	_fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
 	// Deprecated: Doesn't return anything useful since 10.0
 	_fnNSDrawColorTiledRects func(corefoundation.CGRect, corefoundation.CGRect, *foundation.NSRectEdge, objc.ID, int) corefoundation.CGRect
@@ -103,8 +103,8 @@ var (
 	_fnNSRectFill                             func(corefoundation.CGRect)
 	_fnNSRectFillList                         func(*corefoundation.CGRect, int)
 	_fnNSRectFillListUsingOperation           func(*corefoundation.CGRect, int, NSCompositingOperation)
-	_fnNSRectFillListWithColors               func(*corefoundation.CGRect, unsafe.Pointer, int)
-	_fnNSRectFillListWithColorsUsingOperation func(*corefoundation.CGRect, unsafe.Pointer, int, NSCompositingOperation)
+	_fnNSRectFillListWithColors               func(*corefoundation.CGRect, objc.ID, int)
+	_fnNSRectFillListWithColorsUsingOperation func(*corefoundation.CGRect, objc.ID, int, NSCompositingOperation)
 	_fnNSRectFillListWithGrays                func(*corefoundation.CGRect, *float64, int)
 	_fnNSRectFillUsingOperation               func(corefoundation.CGRect, NSCompositingOperation)
 	// Apps should use -setServicesProvider.
@@ -299,7 +299,7 @@ func NSDottedFrameRect(rect corefoundation.CGRect) {
 }
 
 // Deprecated: Use -[NSBitmapImageRep colorAtX:y:] to interrogate pixel values.  If necessary, use -[NSView cacheDisplayInRect:toBitmapImageRep:] to snapshot a view hierarchy into an NSBitmapImageRep.
-func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName *foundation.NSString, data unsafe.Pointer) {
+func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName *foundation.NSString, data *uint8) {
 	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, colorSpaceName.Ptr(), data)
 }
 
@@ -470,12 +470,12 @@ func NSRectFillListUsingOperation(rects *corefoundation.CGRect, count int, op NS
 	_fnNSRectFillListUsingOperation(rects, count, op)
 }
 
-func NSRectFillListWithColors(rects *corefoundation.CGRect, colors unsafe.Pointer, num int) {
-	_fnNSRectFillListWithColors(rects, colors, num)
+func NSRectFillListWithColors(rects *corefoundation.CGRect, colors *NSColor, num int) {
+	_fnNSRectFillListWithColors(rects, colors.Ptr(), num)
 }
 
-func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors unsafe.Pointer, num int, op NSCompositingOperation) {
-	_fnNSRectFillListWithColorsUsingOperation(rects, colors, num, op)
+func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors *NSColor, num int, op NSCompositingOperation) {
+	_fnNSRectFillListWithColorsUsingOperation(rects, colors.Ptr(), num, op)
 }
 
 func NSRectFillListWithGrays(rects *corefoundation.CGRect, grays *float64, num int) {

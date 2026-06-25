@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -21,7 +22,11 @@ func PKContactFieldEmailAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKContactFieldName() *foundation.NSString {
@@ -29,7 +34,11 @@ func PKContactFieldName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKContactFieldPhoneNumber() *foundation.NSString {
@@ -37,7 +46,11 @@ func PKContactFieldPhoneNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKContactFieldPhoneticName() *foundation.NSString {
@@ -45,7 +58,11 @@ func PKContactFieldPhoneticName() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKContactFieldPostalAddress() *foundation.NSString {
@@ -53,7 +70,11 @@ func PKContactFieldPostalAddress() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKDisbursementErrorContactFieldUserInfoKey() *foundation.NSString {
@@ -61,12 +82,23 @@ func PKDisbursementErrorContactFieldUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PKDisbursementErrorDomain() uintptr {
+func PKDisbursementErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKDisbursementErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKEncryptionSchemeECC_V2() *foundation.NSString {
@@ -74,7 +106,11 @@ func PKEncryptionSchemeECC_V2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKEncryptionSchemeRSA_V2() *foundation.NSString {
@@ -82,7 +118,11 @@ func PKEncryptionSchemeRSA_V2() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKMerchantCategoryCodeNone() int16 {
@@ -93,9 +133,16 @@ func PKMerchantCategoryCodeNone() int16 {
 	return *(*int16)(unsafe.Pointer(ptr))
 }
 
-func PKPassKitErrorDomain() uintptr {
+func PKPassKitErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPassKitErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryAddedPassesUserInfoKey() *foundation.NSString {
@@ -103,7 +150,11 @@ func PKPassLibraryAddedPassesUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryDidChangeNotification() *foundation.NSString {
@@ -111,7 +162,11 @@ func PKPassLibraryDidChangeNotification() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryPassTypeIdentifierUserInfoKey() *foundation.NSString {
@@ -119,7 +174,11 @@ func PKPassLibraryPassTypeIdentifierUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryRecoveredPassesUserInfoKey() *foundation.NSString {
@@ -127,7 +186,11 @@ func PKPassLibraryRecoveredPassesUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryRemotePaymentPassesDidChangeNotification() *foundation.NSString {
@@ -135,7 +198,11 @@ func PKPassLibraryRemotePaymentPassesDidChangeNotification() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryRemovedPassInfosUserInfoKey() *foundation.NSString {
@@ -143,7 +210,11 @@ func PKPassLibraryRemovedPassInfosUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibraryReplacementPassesUserInfoKey() *foundation.NSString {
@@ -151,7 +222,11 @@ func PKPassLibraryReplacementPassesUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPassLibrarySerialNumberUserInfoKey() *foundation.NSString {
@@ -159,7 +234,11 @@ func PKPassLibrarySerialNumberUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentErrorContactFieldUserInfoKey() *foundation.NSString {
@@ -167,12 +246,23 @@ func PKPaymentErrorContactFieldUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func PKPaymentErrorDomain() uintptr {
+func PKPaymentErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_passkitLib, "PKPaymentErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentErrorPostalAddressUserInfoKey() *foundation.NSString {
@@ -180,7 +270,11 @@ func PKPaymentErrorPostalAddressUserInfoKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkAmex() *foundation.NSString {
@@ -188,7 +282,11 @@ func PKPaymentNetworkAmex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkBancomat() *foundation.NSString {
@@ -196,7 +294,11 @@ func PKPaymentNetworkBancomat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkBancontact() *foundation.NSString {
@@ -204,7 +306,11 @@ func PKPaymentNetworkBancontact() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkBankAxept() *foundation.NSString {
@@ -212,7 +318,11 @@ func PKPaymentNetworkBankAxept() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkBarcode() *foundation.NSString {
@@ -220,7 +330,11 @@ func PKPaymentNetworkBarcode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use PKPaymentNetworkCartesBancaires instead.
@@ -229,7 +343,11 @@ func PKPaymentNetworkCarteBancaire() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use PKPaymentNetworkCartesBancaires instead.
@@ -238,7 +356,11 @@ func PKPaymentNetworkCarteBancaires() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkCartesBancaires() *foundation.NSString {
@@ -246,7 +368,11 @@ func PKPaymentNetworkCartesBancaires() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkChinaUnionPay() *foundation.NSString {
@@ -254,7 +380,11 @@ func PKPaymentNetworkChinaUnionPay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkConecs() *foundation.NSString {
@@ -262,7 +392,11 @@ func PKPaymentNetworkConecs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkDankort() *foundation.NSString {
@@ -270,7 +404,11 @@ func PKPaymentNetworkDankort() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkDiscover() *foundation.NSString {
@@ -278,7 +416,11 @@ func PKPaymentNetworkDiscover() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkEftpos() *foundation.NSString {
@@ -286,7 +428,11 @@ func PKPaymentNetworkEftpos() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkElCorteIngles() *foundation.NSString {
@@ -294,7 +440,11 @@ func PKPaymentNetworkElCorteIngles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkElectron() *foundation.NSString {
@@ -302,7 +452,11 @@ func PKPaymentNetworkElectron() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkElo() *foundation.NSString {
@@ -310,7 +464,11 @@ func PKPaymentNetworkElo() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkGirocard() *foundation.NSString {
@@ -318,7 +476,11 @@ func PKPaymentNetworkGirocard() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkHimyan() *foundation.NSString {
@@ -326,7 +488,11 @@ func PKPaymentNetworkHimyan() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkIDCredit() *foundation.NSString {
@@ -334,7 +500,11 @@ func PKPaymentNetworkIDCredit() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkInterac() *foundation.NSString {
@@ -342,7 +512,11 @@ func PKPaymentNetworkInterac() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkJCB() *foundation.NSString {
@@ -350,7 +524,11 @@ func PKPaymentNetworkJCB() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkJaywan() *foundation.NSString {
@@ -358,7 +536,11 @@ func PKPaymentNetworkJaywan() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMada() *foundation.NSString {
@@ -366,7 +548,11 @@ func PKPaymentNetworkMada() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMaestro() *foundation.NSString {
@@ -374,7 +560,11 @@ func PKPaymentNetworkMaestro() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMasterCard() *foundation.NSString {
@@ -382,7 +572,11 @@ func PKPaymentNetworkMasterCard() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMeeza() *foundation.NSString {
@@ -390,7 +584,11 @@ func PKPaymentNetworkMeeza() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMir() *foundation.NSString {
@@ -398,7 +596,11 @@ func PKPaymentNetworkMir() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkMyDebit() *foundation.NSString {
@@ -406,7 +608,11 @@ func PKPaymentNetworkMyDebit() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkNAPAS() *foundation.NSString {
@@ -414,7 +620,11 @@ func PKPaymentNetworkNAPAS() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkNanaco() *foundation.NSString {
@@ -422,7 +632,11 @@ func PKPaymentNetworkNanaco() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use PKPaymentNetworkBancomat instead.
@@ -431,7 +645,11 @@ func PKPaymentNetworkPagoBancomat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkPostFinance() *foundation.NSString {
@@ -439,7 +657,11 @@ func PKPaymentNetworkPostFinance() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkPrivateLabel() *foundation.NSString {
@@ -447,7 +669,11 @@ func PKPaymentNetworkPrivateLabel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkQuicPay() *foundation.NSString {
@@ -455,7 +681,11 @@ func PKPaymentNetworkQuicPay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkSuica() *foundation.NSString {
@@ -463,7 +693,11 @@ func PKPaymentNetworkSuica() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkTmoney() *foundation.NSString {
@@ -471,7 +705,11 @@ func PKPaymentNetworkTmoney() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkVPay() *foundation.NSString {
@@ -479,7 +717,11 @@ func PKPaymentNetworkVPay() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkVisa() *foundation.NSString {
@@ -487,7 +729,11 @@ func PKPaymentNetworkVisa() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKPaymentNetworkWaon() *foundation.NSString {
@@ -495,7 +741,11 @@ func PKPaymentNetworkWaon() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKShareSecureElementPassErrorDomain() uintptr {
@@ -508,7 +758,11 @@ func PKStoredValuePassBalanceTypeCash() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func PKStoredValuePassBalanceTypeLoyaltyPoints() *foundation.NSString {
@@ -516,5 +770,9 @@ func PKStoredValuePassBalanceTypeLoyaltyPoints() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

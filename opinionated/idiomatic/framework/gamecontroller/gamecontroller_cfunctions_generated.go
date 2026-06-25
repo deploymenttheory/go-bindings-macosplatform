@@ -52,6 +52,42 @@ func GCGamepadSnapShotDataV100FromNSData(data obj.Object) (ok bool, snapshotData
 	return _ret, _out0
 }
 
+var _fnGCInputArcadeButtonName func(int, int) objc.ID
+
+// GCInputArcadeButtonName calls the GameController framework function GCInputArcadeButtonName.
+func GCInputArcadeButtonName(row int, column int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGCInputArcadeButtonName == nil {
+		ebipurego.RegisterLibFunc(&_fnGCInputArcadeButtonName, _lib, "GCInputArcadeButtonName")
+	}
+	_ret := _fnGCInputArcadeButtonName(row, column)
+	return obj.Wrap(_ret)
+}
+
+var _fnGCInputBackLeftButton func(int) objc.ID
+
+// GCInputBackLeftButton calls the GameController framework function GCInputBackLeftButton.
+func GCInputBackLeftButton(position int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGCInputBackLeftButton == nil {
+		ebipurego.RegisterLibFunc(&_fnGCInputBackLeftButton, _lib, "GCInputBackLeftButton")
+	}
+	_ret := _fnGCInputBackLeftButton(position)
+	return obj.Wrap(_ret)
+}
+
+var _fnGCInputBackRightButton func(int) objc.ID
+
+// GCInputBackRightButton calls the GameController framework function GCInputBackRightButton.
+func GCInputBackRightButton(position int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGCInputBackRightButton == nil {
+		ebipurego.RegisterLibFunc(&_fnGCInputBackRightButton, _lib, "GCInputBackRightButton")
+	}
+	_ret := _fnGCInputBackRightButton(position)
+	return obj.Wrap(_ret)
+}
+
 var _fnGCMicroGamepadSnapShotDataV100FromNSData func(unsafe.Pointer, objc.ID) bool
 
 // GCMicroGamepadSnapShotDataV100FromNSData calls the GameController framework function GCMicroGamepadSnapShotDataV100FromNSData.

@@ -95,7 +95,7 @@ func (gcd *GraphCompilationDescriptor) DisableTypeInference() {
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("disableTypeInference"))
 }
 
-// ConvertLayoutToNHWC turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
+// ConvertLayoutToNHWC turns on Automatic Layout Conversion (for conv like operations) for GPU.
 func (gcd *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("convertLayoutToNHWC"))
 }

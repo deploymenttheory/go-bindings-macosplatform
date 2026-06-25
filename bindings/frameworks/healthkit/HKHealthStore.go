@@ -135,7 +135,7 @@ func (o *HKHealthStore) HandleAuthorizationForExtensionWithCompletion(completion
 	o.Ptr().Send(_hKHealthStoreSelHandleAuthorizationForExtensionWithCompletion, __block_completion)
 }
 
-// Returns the earliest date permitted for samples.
+// Returns the earliest date that the framework permits your app to save or read samples.
 func (o *HKHealthStore) EarliestPermittedSampleDate() *foundation.NSDate {
 	_ret := objc.Send[objc.ID](o.Ptr(), _hKHealthStoreSelEarliestPermittedSampleDate)
 	if _ret != 0 {

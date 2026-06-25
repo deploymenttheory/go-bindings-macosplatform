@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -17,7 +18,11 @@ func VNAnimalBodyPoseObservationJointNameLeftBackElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftBackKnee() *foundation.NSString {
@@ -25,7 +30,11 @@ func VNAnimalBodyPoseObservationJointNameLeftBackKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftBackPaw() *foundation.NSString {
@@ -33,7 +42,11 @@ func VNAnimalBodyPoseObservationJointNameLeftBackPaw() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftEarBottom() *foundation.NSString {
@@ -41,7 +54,11 @@ func VNAnimalBodyPoseObservationJointNameLeftEarBottom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftEarMiddle() *foundation.NSString {
@@ -49,7 +66,11 @@ func VNAnimalBodyPoseObservationJointNameLeftEarMiddle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftEarTop() *foundation.NSString {
@@ -57,7 +78,11 @@ func VNAnimalBodyPoseObservationJointNameLeftEarTop() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftEye() *foundation.NSString {
@@ -65,7 +90,11 @@ func VNAnimalBodyPoseObservationJointNameLeftEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftFrontElbow() *foundation.NSString {
@@ -73,7 +102,11 @@ func VNAnimalBodyPoseObservationJointNameLeftFrontElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftFrontKnee() *foundation.NSString {
@@ -81,7 +114,11 @@ func VNAnimalBodyPoseObservationJointNameLeftFrontKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameLeftFrontPaw() *foundation.NSString {
@@ -89,7 +126,11 @@ func VNAnimalBodyPoseObservationJointNameLeftFrontPaw() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameNeck() *foundation.NSString {
@@ -97,7 +138,11 @@ func VNAnimalBodyPoseObservationJointNameNeck() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameNose() *foundation.NSString {
@@ -105,7 +150,11 @@ func VNAnimalBodyPoseObservationJointNameNose() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightBackElbow() *foundation.NSString {
@@ -113,7 +162,11 @@ func VNAnimalBodyPoseObservationJointNameRightBackElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightBackKnee() *foundation.NSString {
@@ -121,7 +174,11 @@ func VNAnimalBodyPoseObservationJointNameRightBackKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightBackPaw() *foundation.NSString {
@@ -129,7 +186,11 @@ func VNAnimalBodyPoseObservationJointNameRightBackPaw() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightEarBottom() *foundation.NSString {
@@ -137,7 +198,11 @@ func VNAnimalBodyPoseObservationJointNameRightEarBottom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightEarMiddle() *foundation.NSString {
@@ -145,7 +210,11 @@ func VNAnimalBodyPoseObservationJointNameRightEarMiddle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightEarTop() *foundation.NSString {
@@ -153,7 +222,11 @@ func VNAnimalBodyPoseObservationJointNameRightEarTop() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightEye() *foundation.NSString {
@@ -161,7 +234,11 @@ func VNAnimalBodyPoseObservationJointNameRightEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightFrontElbow() *foundation.NSString {
@@ -169,7 +246,11 @@ func VNAnimalBodyPoseObservationJointNameRightFrontElbow() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightFrontKnee() *foundation.NSString {
@@ -177,7 +258,11 @@ func VNAnimalBodyPoseObservationJointNameRightFrontKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameRightFrontPaw() *foundation.NSString {
@@ -185,7 +270,11 @@ func VNAnimalBodyPoseObservationJointNameRightFrontPaw() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameTailBottom() *foundation.NSString {
@@ -193,7 +282,11 @@ func VNAnimalBodyPoseObservationJointNameTailBottom() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameTailMiddle() *foundation.NSString {
@@ -201,7 +294,11 @@ func VNAnimalBodyPoseObservationJointNameTailMiddle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointNameTailTop() *foundation.NSString {
@@ -209,7 +306,11 @@ func VNAnimalBodyPoseObservationJointNameTailTop() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameAll() *foundation.NSString {
@@ -217,7 +318,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameForelegs() *foundation.NSString {
@@ -225,7 +330,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameForelegs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameHead() *foundation.NSString {
@@ -233,7 +342,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameHead() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameHindlegs() *foundation.NSString {
@@ -241,7 +354,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameHindlegs() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameTail() *foundation.NSString {
@@ -249,7 +366,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameTail() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalBodyPoseObservationJointsGroupNameTrunk() *foundation.NSString {
@@ -257,7 +378,11 @@ func VNAnimalBodyPoseObservationJointsGroupNameTrunk() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalIdentifierCat() *foundation.NSString {
@@ -265,7 +390,11 @@ func VNAnimalIdentifierCat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNAnimalIdentifierDog() *foundation.NSString {
@@ -273,7 +402,11 @@ func VNAnimalIdentifierDog() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyAztec() *foundation.NSString {
@@ -281,7 +414,11 @@ func VNBarcodeSymbologyAztec() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCodabar() *foundation.NSString {
@@ -289,7 +426,11 @@ func VNBarcodeSymbologyCodabar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode128() *foundation.NSString {
@@ -297,7 +438,11 @@ func VNBarcodeSymbologyCode128() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode39() *foundation.NSString {
@@ -305,7 +450,11 @@ func VNBarcodeSymbologyCode39() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode39Checksum() *foundation.NSString {
@@ -313,7 +462,11 @@ func VNBarcodeSymbologyCode39Checksum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode39FullASCII() *foundation.NSString {
@@ -321,7 +474,11 @@ func VNBarcodeSymbologyCode39FullASCII() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode39FullASCIIChecksum() *foundation.NSString {
@@ -329,7 +486,11 @@ func VNBarcodeSymbologyCode39FullASCIIChecksum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode93() *foundation.NSString {
@@ -337,7 +498,11 @@ func VNBarcodeSymbologyCode93() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyCode93i() *foundation.NSString {
@@ -345,7 +510,11 @@ func VNBarcodeSymbologyCode93i() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyDataMatrix() *foundation.NSString {
@@ -353,7 +522,11 @@ func VNBarcodeSymbologyDataMatrix() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyEAN13() *foundation.NSString {
@@ -361,7 +534,11 @@ func VNBarcodeSymbologyEAN13() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyEAN8() *foundation.NSString {
@@ -369,7 +546,11 @@ func VNBarcodeSymbologyEAN8() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyGS1DataBar() *foundation.NSString {
@@ -377,7 +558,11 @@ func VNBarcodeSymbologyGS1DataBar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyGS1DataBarExpanded() *foundation.NSString {
@@ -385,7 +570,11 @@ func VNBarcodeSymbologyGS1DataBarExpanded() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyGS1DataBarLimited() *foundation.NSString {
@@ -393,7 +582,11 @@ func VNBarcodeSymbologyGS1DataBarLimited() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyI2of5() *foundation.NSString {
@@ -401,7 +594,11 @@ func VNBarcodeSymbologyI2of5() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyI2of5Checksum() *foundation.NSString {
@@ -409,7 +606,11 @@ func VNBarcodeSymbologyI2of5Checksum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyITF14() *foundation.NSString {
@@ -417,7 +618,11 @@ func VNBarcodeSymbologyITF14() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyMSIPlessey() *foundation.NSString {
@@ -425,7 +630,11 @@ func VNBarcodeSymbologyMSIPlessey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyMicroPDF417() *foundation.NSString {
@@ -433,7 +642,11 @@ func VNBarcodeSymbologyMicroPDF417() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyMicroQR() *foundation.NSString {
@@ -441,7 +654,11 @@ func VNBarcodeSymbologyMicroQR() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyPDF417() *foundation.NSString {
@@ -449,7 +666,11 @@ func VNBarcodeSymbologyPDF417() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyQR() *foundation.NSString {
@@ -457,7 +678,11 @@ func VNBarcodeSymbologyQR() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNBarcodeSymbologyUPCE() *foundation.NSString {
@@ -465,7 +690,11 @@ func VNBarcodeSymbologyUPCE() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -474,7 +703,11 @@ func VNBodyLandmarkKeyLeftAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -483,7 +716,11 @@ func VNBodyLandmarkKeyLeftEar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -492,7 +729,11 @@ func VNBodyLandmarkKeyLeftElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -501,7 +742,11 @@ func VNBodyLandmarkKeyLeftEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -510,7 +755,11 @@ func VNBodyLandmarkKeyLeftHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -519,7 +768,11 @@ func VNBodyLandmarkKeyLeftKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -528,7 +781,11 @@ func VNBodyLandmarkKeyLeftShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -537,7 +794,11 @@ func VNBodyLandmarkKeyLeftWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -546,7 +807,11 @@ func VNBodyLandmarkKeyNeck() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -555,7 +820,11 @@ func VNBodyLandmarkKeyNose() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -564,7 +833,11 @@ func VNBodyLandmarkKeyRightAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -573,7 +846,11 @@ func VNBodyLandmarkKeyRightEar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -582,7 +859,11 @@ func VNBodyLandmarkKeyRightElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -591,7 +872,11 @@ func VNBodyLandmarkKeyRightEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -600,7 +885,11 @@ func VNBodyLandmarkKeyRightHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -609,7 +898,11 @@ func VNBodyLandmarkKeyRightKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -618,7 +911,11 @@ func VNBodyLandmarkKeyRightShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -627,7 +924,11 @@ func VNBodyLandmarkKeyRightWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -636,7 +937,11 @@ func VNBodyLandmarkKeyRoot() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -645,7 +950,11 @@ func VNBodyLandmarkRegionKeyFace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -654,7 +963,11 @@ func VNBodyLandmarkRegionKeyLeftArm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -663,7 +976,11 @@ func VNBodyLandmarkRegionKeyLeftLeg() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -672,7 +989,11 @@ func VNBodyLandmarkRegionKeyRightArm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -681,7 +1002,11 @@ func VNBodyLandmarkRegionKeyRightLeg() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -690,7 +1015,11 @@ func VNBodyLandmarkRegionKeyTorso() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief The stage of a request where the main functionality is being performed. @discussion All requests will have this compute stage.
@@ -699,7 +1028,11 @@ func VNComputeStageMain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief A compute stage for additional analysis and/or conversion of the data produced by the `VNComputeStageMain`. @discussion This is an optional compute stage that some requests may expose.
@@ -708,12 +1041,23 @@ func VNComputeStagePostProcessing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func VNErrorDomain() uintptr {
+func VNErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_visionLib, "VNErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameCenterHead() *foundation.NSString {
@@ -721,7 +1065,11 @@ func VNHumanBodyPose3DObservationJointNameCenterHead() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameCenterShoulder() *foundation.NSString {
@@ -729,7 +1077,11 @@ func VNHumanBodyPose3DObservationJointNameCenterShoulder() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftAnkle() *foundation.NSString {
@@ -737,7 +1089,11 @@ func VNHumanBodyPose3DObservationJointNameLeftAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftElbow() *foundation.NSString {
@@ -745,7 +1101,11 @@ func VNHumanBodyPose3DObservationJointNameLeftElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftHip() *foundation.NSString {
@@ -753,7 +1113,11 @@ func VNHumanBodyPose3DObservationJointNameLeftHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftKnee() *foundation.NSString {
@@ -761,7 +1125,11 @@ func VNHumanBodyPose3DObservationJointNameLeftKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftShoulder() *foundation.NSString {
@@ -769,7 +1137,11 @@ func VNHumanBodyPose3DObservationJointNameLeftShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameLeftWrist() *foundation.NSString {
@@ -777,7 +1149,11 @@ func VNHumanBodyPose3DObservationJointNameLeftWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightAnkle() *foundation.NSString {
@@ -785,7 +1161,11 @@ func VNHumanBodyPose3DObservationJointNameRightAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightElbow() *foundation.NSString {
@@ -793,7 +1173,11 @@ func VNHumanBodyPose3DObservationJointNameRightElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightHip() *foundation.NSString {
@@ -801,7 +1185,11 @@ func VNHumanBodyPose3DObservationJointNameRightHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightKnee() *foundation.NSString {
@@ -809,7 +1197,11 @@ func VNHumanBodyPose3DObservationJointNameRightKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightShoulder() *foundation.NSString {
@@ -817,7 +1209,11 @@ func VNHumanBodyPose3DObservationJointNameRightShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRightWrist() *foundation.NSString {
@@ -825,7 +1221,11 @@ func VNHumanBodyPose3DObservationJointNameRightWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameRoot() *foundation.NSString {
@@ -833,7 +1233,11 @@ func VNHumanBodyPose3DObservationJointNameRoot() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameSpine() *foundation.NSString {
@@ -841,7 +1245,11 @@ func VNHumanBodyPose3DObservationJointNameSpine() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointNameTopHead() *foundation.NSString {
@@ -849,7 +1257,11 @@ func VNHumanBodyPose3DObservationJointNameTopHead() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameAll() *foundation.NSString {
@@ -857,7 +1269,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameHead() *foundation.NSString {
@@ -865,7 +1281,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameHead() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameLeftArm() *foundation.NSString {
@@ -873,7 +1293,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameLeftArm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameLeftLeg() *foundation.NSString {
@@ -881,7 +1305,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameLeftLeg() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameRightArm() *foundation.NSString {
@@ -889,7 +1317,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameRightArm() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameRightLeg() *foundation.NSString {
@@ -897,7 +1329,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameRightLeg() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPose3DObservationJointsGroupNameTorso() *foundation.NSString {
@@ -905,7 +1341,11 @@ func VNHumanBodyPose3DObservationJointsGroupNameTorso() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftAnkle() *foundation.NSString {
@@ -913,7 +1353,11 @@ func VNHumanBodyPoseObservationJointNameLeftAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftEar() *foundation.NSString {
@@ -921,7 +1365,11 @@ func VNHumanBodyPoseObservationJointNameLeftEar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftElbow() *foundation.NSString {
@@ -929,7 +1377,11 @@ func VNHumanBodyPoseObservationJointNameLeftElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftEye() *foundation.NSString {
@@ -937,7 +1389,11 @@ func VNHumanBodyPoseObservationJointNameLeftEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftHip() *foundation.NSString {
@@ -945,7 +1401,11 @@ func VNHumanBodyPoseObservationJointNameLeftHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftKnee() *foundation.NSString {
@@ -953,7 +1413,11 @@ func VNHumanBodyPoseObservationJointNameLeftKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftShoulder() *foundation.NSString {
@@ -961,7 +1425,11 @@ func VNHumanBodyPoseObservationJointNameLeftShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameLeftWrist() *foundation.NSString {
@@ -969,7 +1437,11 @@ func VNHumanBodyPoseObservationJointNameLeftWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameNeck() *foundation.NSString {
@@ -977,7 +1449,11 @@ func VNHumanBodyPoseObservationJointNameNeck() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameNose() *foundation.NSString {
@@ -985,7 +1461,11 @@ func VNHumanBodyPoseObservationJointNameNose() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightAnkle() *foundation.NSString {
@@ -993,7 +1473,11 @@ func VNHumanBodyPoseObservationJointNameRightAnkle() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightEar() *foundation.NSString {
@@ -1001,7 +1485,11 @@ func VNHumanBodyPoseObservationJointNameRightEar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightElbow() *foundation.NSString {
@@ -1009,7 +1497,11 @@ func VNHumanBodyPoseObservationJointNameRightElbow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightEye() *foundation.NSString {
@@ -1017,7 +1509,11 @@ func VNHumanBodyPoseObservationJointNameRightEye() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightHip() *foundation.NSString {
@@ -1025,7 +1521,11 @@ func VNHumanBodyPoseObservationJointNameRightHip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightKnee() *foundation.NSString {
@@ -1033,7 +1533,11 @@ func VNHumanBodyPoseObservationJointNameRightKnee() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightShoulder() *foundation.NSString {
@@ -1041,7 +1545,11 @@ func VNHumanBodyPoseObservationJointNameRightShoulder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRightWrist() *foundation.NSString {
@@ -1049,7 +1557,11 @@ func VNHumanBodyPoseObservationJointNameRightWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointNameRoot() *foundation.NSString {
@@ -1057,7 +1569,11 @@ func VNHumanBodyPoseObservationJointNameRoot() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameAll() *foundation.NSString {
@@ -1065,7 +1581,11 @@ func VNHumanBodyPoseObservationJointsGroupNameAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameFace() *foundation.NSString {
@@ -1073,7 +1593,11 @@ func VNHumanBodyPoseObservationJointsGroupNameFace() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameLeftArm() *foundation.NSString {
@@ -1081,7 +1605,11 @@ func VNHumanBodyPoseObservationJointsGroupNameLeftArm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameLeftLeg() *foundation.NSString {
@@ -1089,7 +1617,11 @@ func VNHumanBodyPoseObservationJointsGroupNameLeftLeg() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameRightArm() *foundation.NSString {
@@ -1097,7 +1629,11 @@ func VNHumanBodyPoseObservationJointsGroupNameRightArm() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameRightLeg() *foundation.NSString {
@@ -1105,7 +1641,11 @@ func VNHumanBodyPoseObservationJointsGroupNameRightLeg() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanBodyPoseObservationJointsGroupNameTorso() *foundation.NSString {
@@ -1113,7 +1653,11 @@ func VNHumanBodyPoseObservationJointsGroupNameTorso() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameIndexDIP() *foundation.NSString {
@@ -1121,7 +1665,11 @@ func VNHumanHandPoseObservationJointNameIndexDIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameIndexMCP() *foundation.NSString {
@@ -1129,7 +1677,11 @@ func VNHumanHandPoseObservationJointNameIndexMCP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameIndexPIP() *foundation.NSString {
@@ -1137,7 +1689,11 @@ func VNHumanHandPoseObservationJointNameIndexPIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameIndexTip() *foundation.NSString {
@@ -1145,7 +1701,11 @@ func VNHumanHandPoseObservationJointNameIndexTip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameLittleDIP() *foundation.NSString {
@@ -1153,7 +1713,11 @@ func VNHumanHandPoseObservationJointNameLittleDIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameLittleMCP() *foundation.NSString {
@@ -1161,7 +1725,11 @@ func VNHumanHandPoseObservationJointNameLittleMCP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameLittlePIP() *foundation.NSString {
@@ -1169,7 +1737,11 @@ func VNHumanHandPoseObservationJointNameLittlePIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameLittleTip() *foundation.NSString {
@@ -1177,7 +1749,11 @@ func VNHumanHandPoseObservationJointNameLittleTip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameMiddleDIP() *foundation.NSString {
@@ -1185,7 +1761,11 @@ func VNHumanHandPoseObservationJointNameMiddleDIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameMiddleMCP() *foundation.NSString {
@@ -1193,7 +1773,11 @@ func VNHumanHandPoseObservationJointNameMiddleMCP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameMiddlePIP() *foundation.NSString {
@@ -1201,7 +1785,11 @@ func VNHumanHandPoseObservationJointNameMiddlePIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameMiddleTip() *foundation.NSString {
@@ -1209,7 +1797,11 @@ func VNHumanHandPoseObservationJointNameMiddleTip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameRingDIP() *foundation.NSString {
@@ -1217,7 +1809,11 @@ func VNHumanHandPoseObservationJointNameRingDIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameRingMCP() *foundation.NSString {
@@ -1225,7 +1821,11 @@ func VNHumanHandPoseObservationJointNameRingMCP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameRingPIP() *foundation.NSString {
@@ -1233,7 +1833,11 @@ func VNHumanHandPoseObservationJointNameRingPIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameRingTip() *foundation.NSString {
@@ -1241,7 +1845,11 @@ func VNHumanHandPoseObservationJointNameRingTip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameThumbCMC() *foundation.NSString {
@@ -1249,7 +1857,11 @@ func VNHumanHandPoseObservationJointNameThumbCMC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameThumbIP() *foundation.NSString {
@@ -1257,7 +1869,11 @@ func VNHumanHandPoseObservationJointNameThumbIP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameThumbMP() *foundation.NSString {
@@ -1265,7 +1881,11 @@ func VNHumanHandPoseObservationJointNameThumbMP() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameThumbTip() *foundation.NSString {
@@ -1273,7 +1893,11 @@ func VNHumanHandPoseObservationJointNameThumbTip() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointNameWrist() *foundation.NSString {
@@ -1281,7 +1905,11 @@ func VNHumanHandPoseObservationJointNameWrist() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameAll() *foundation.NSString {
@@ -1289,7 +1917,11 @@ func VNHumanHandPoseObservationJointsGroupNameAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameIndexFinger() *foundation.NSString {
@@ -1297,7 +1929,11 @@ func VNHumanHandPoseObservationJointsGroupNameIndexFinger() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameLittleFinger() *foundation.NSString {
@@ -1305,7 +1941,11 @@ func VNHumanHandPoseObservationJointsGroupNameLittleFinger() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameMiddleFinger() *foundation.NSString {
@@ -1313,7 +1953,11 @@ func VNHumanHandPoseObservationJointsGroupNameMiddleFinger() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameRingFinger() *foundation.NSString {
@@ -1321,7 +1965,11 @@ func VNHumanHandPoseObservationJointsGroupNameRingFinger() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNHumanHandPoseObservationJointsGroupNameThumb() *foundation.NSString {
@@ -1329,7 +1977,11 @@ func VNHumanHandPoseObservationJointsGroupNameThumb() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNImageOptionCIContext() *foundation.NSString {
@@ -1337,7 +1989,11 @@ func VNImageOptionCIContext() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief VNImageOptionCameraIntrinsics  Specifies the camera intrinsics as an NSData or CFData representing a matrix_float3x3. See kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix for details @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents: fx	0	ox 0	fy	oy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. ox and oy are the coordinates of the principal point. The origin is the upper left of the frame. @note When using a CMSampleBuffer as an input and that sample buffer has camera intrinsics attached to it, Vision will use the camera intrinsic from there unless overwritten by passing in as an explicit option which will take precedence.
@@ -1346,7 +2002,11 @@ func VNImageOptionCameraIntrinsics() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNImageOptionProperties() *foundation.NSString {
@@ -1354,7 +2014,11 @@ func VNImageOptionProperties() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief	The normalized identity rect of { {0, 0}, {1, 1} }.
@@ -1371,7 +2035,11 @@ func VNRecognizedPoint3DGroupKeyAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNRecognizedPointGroupKeyAll() *foundation.NSString {
@@ -1379,7 +2047,11 @@ func VNRecognizedPointGroupKeyAll() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -1388,7 +2060,11 @@ func VNVideoProcessingOptionFrameCadence() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: since macOS 11.0.
@@ -1397,7 +2073,11 @@ func VNVideoProcessingOptionTimeInterval() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func VNVisionVersionNumber() float64 {

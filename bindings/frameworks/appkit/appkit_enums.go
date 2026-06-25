@@ -6863,6 +6863,7 @@ func (e NSTextBlockVerticalAlignment) String() string {
 type NSTextContentManagerEnumerationOptions uint64
 
 const (
+	// The value that represents no custom enumeration handling.
 	NSTextContentManagerEnumerationOptionsNone    NSTextContentManagerEnumerationOptions = 0
 	NSTextContentManagerEnumerationOptionsReverse NSTextContentManagerEnumerationOptions = 1
 )
@@ -7081,6 +7082,7 @@ func (e NSTextInsertionIndicatorDisplayMode) String() string {
 type NSTextLayoutFragmentEnumerationOptions uint64
 
 const (
+	// The value that represents no selected enumeration options.
 	NSTextLayoutFragmentEnumerationOptionsNone                     NSTextLayoutFragmentEnumerationOptions = 0
 	NSTextLayoutFragmentEnumerationOptionsReverse                  NSTextLayoutFragmentEnumerationOptions = 1
 	NSTextLayoutFragmentEnumerationOptionsEstimatesSize            NSTextLayoutFragmentEnumerationOptions = 2
@@ -7137,6 +7139,7 @@ func (e NSTextLayoutFragmentState) String() string {
 type NSTextLayoutManagerSegmentOptions uint64
 
 const (
+	// The value that represents the empty options set.
 	NSTextLayoutManagerSegmentOptionsNone                    NSTextLayoutManagerSegmentOptions = 0
 	NSTextLayoutManagerSegmentOptionsRangeNotRequired        NSTextLayoutManagerSegmentOptions = 1
 	NSTextLayoutManagerSegmentOptionsMiddleFragmentsExcluded NSTextLayoutManagerSegmentOptions = 2

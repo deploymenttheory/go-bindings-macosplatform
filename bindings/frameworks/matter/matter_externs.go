@@ -7,83 +7,189 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func MTRArrayValueType() uintptr {
+func MTRArrayValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRArrayValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRAttributePathKey() uintptr {
+func MTRAttributePathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRAttributePathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRBooleanValueType() uintptr {
+func MTRBooleanValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRBooleanValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRCommandPathKey() uintptr {
+func MTRCommandPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRCommandPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRContextTagKey() uintptr {
+func MTRContextTagKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRContextTagKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDataKey() uintptr {
+func MTRDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDataVersionKey() uintptr {
+func MTRDataVersionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDataVersionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationControllerCompressedFabricIDKey() uintptr {
+func MTRDeviceControllerRegistrationControllerCompressedFabricIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationControllerCompressedFabricIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationControllerContextKey() uintptr {
+func MTRDeviceControllerRegistrationControllerContextKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationControllerContextKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationControllerIsRunningKey() uintptr {
+func MTRDeviceControllerRegistrationControllerIsRunningKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationControllerIsRunningKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationControllerNodeIDKey() uintptr {
+func MTRDeviceControllerRegistrationControllerNodeIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationControllerNodeIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationDeviceInternalStateKey() uintptr {
+func MTRDeviceControllerRegistrationDeviceInternalStateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationDeviceInternalStateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationNodeIDKey() uintptr {
+func MTRDeviceControllerRegistrationNodeIDKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationNodeIDKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDeviceControllerRegistrationNodeIDsKey() uintptr {
+func MTRDeviceControllerRegistrationNodeIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDeviceControllerRegistrationNodeIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRDoubleValueType() uintptr {
+func MTRDoubleValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRDoubleValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTRErrorDomain() *foundation.NSString {
@@ -91,52 +197,119 @@ func MTRErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRErrorKey() uintptr {
+func MTRErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventIsHistoricalKey() uintptr {
+func MTREventIsHistoricalKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventIsHistoricalKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventNumberKey() uintptr {
+func MTREventNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventPathKey() uintptr {
+func MTREventPathKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventPathKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventPriorityKey() uintptr {
+func MTREventPriorityKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventPriorityKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventSystemUpTimeKey() uintptr {
+func MTREventSystemUpTimeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventSystemUpTimeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventTimeTypeKey() uintptr {
+func MTREventTimeTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventTimeTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTREventTimestampDateKey() uintptr {
+func MTREventTimestampDateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTREventTimestampDateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRFloatValueType() uintptr {
+func MTRFloatValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRFloatValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTRInteractionErrorDomain() *foundation.NSString {
@@ -144,27 +317,59 @@ func MTRInteractionErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRNullValueType() uintptr {
+func MTRNullValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRNullValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTROctetStringValueType() uintptr {
+func MTROctetStringValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTROctetStringValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRPreviousDataKey() uintptr {
+func MTRPreviousDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRPreviousDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRSignedIntegerValueType() uintptr {
+func MTRSignedIntegerValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRSignedIntegerValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTRSizeThreadExtendedPANID() uint {
@@ -216,27 +421,62 @@ func MTRSizeThreadPSKc() uint {
 	return *(*uint)(unsafe.Pointer(ptr))
 }
 
-func MTRStructureValueType() uintptr {
+func MTRStructureValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRStructureValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRTypeKey() uintptr {
+func MTRTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRUTF8StringValueType() uintptr {
+func MTRUTF8StringValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRUTF8StringValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRUnsignedIntegerValueType() uintptr {
+func MTRUnsignedIntegerValueType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRUnsignedIntegerValueType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTRValueKey() uintptr {
+func MTRValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_matterLib, "MTRValueKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

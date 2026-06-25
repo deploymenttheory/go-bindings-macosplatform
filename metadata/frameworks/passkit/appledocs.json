@@ -1545,8 +1545,8 @@
         "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportednetworks"
       },
       "supportedRegions": {
-        "doc": "An array of two-letter region codes that describes the regions to support.",
-        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportedregions-j9ug"
+        "doc": "An array of regions that describe the locations to support.",
+        "url": "https://developer.apple.com/documentation/passkit/pkdisbursementrequest/supportedregions-1cl0f"
       }
     },
     "PKIdentityAnyOfDescriptor": {
@@ -1572,7 +1572,7 @@
       },
       "serverEnvironmentIdentifier": {
         "doc": "An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.",
-        "url": "https://developer.apple.com/documentation/passkit/pkidentitydocumentmetadata/serverenvironmentidentifier"
+        "url": "https://developer.apple.com/documentation/PassKit/PKIdentityDocumentMetadata/serverEnvironmentIdentifier"
       },
       "sharingInstanceIdentifier": {
         "doc": "A unique identifier that refers to an instance of sharing credentials to a person’s device that another user, device, or the web initiates.",
@@ -2347,8 +2347,8 @@
         "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/balancetype-swift.struct"
       },
       "amount": {
-        "doc": "The current balance in money or points.",
-        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2vfd3"
+        "doc": "The current balance of a stored-value pass in money or points.",
+        "url": "https://developer.apple.com/documentation/passkit/pkstoredvaluepassbalance/amount-2nwf5"
       },
       "balanceType": {
         "doc": "The type of value that the balance represents, such as money or points.",

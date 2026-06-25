@@ -7,6 +7,9 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 func SharedWithYouCoreVersionNumber() float64 {
@@ -26,7 +29,14 @@ func SharedWithYouCoreVersionString() []unsafe.Pointer {
 }
 
 // @abstract String identifier used to initialize a UTType to represent the type of the array of SWCollaborationOptionsGroups when registering to and reading from the NSItemProvider
-func UTCollaborationOptionsTypeIdentifier() uintptr {
+func UTCollaborationOptionsTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_sharedwithyoucoreLib, "UTCollaborationOptionsTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

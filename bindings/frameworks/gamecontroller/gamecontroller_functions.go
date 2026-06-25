@@ -4,8 +4,6 @@
 package gamecontroller
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -22,9 +20,9 @@ var (
 	// Deprecated: Use GCExtendedGamepad instead
 	_fnGCGamepadSnapShotDataV100FromNSData func(*GCGamepadSnapShotDataV100, objc.ID) bool
 	// Gets the name of an arcade button at a certain position.
-	_fnGCInputArcadeButtonName func(int, int) unsafe.Pointer
-	_fnGCInputBackLeftButton   func(int) unsafe.Pointer
-	_fnGCInputBackRightButton  func(int) unsafe.Pointer
+	_fnGCInputArcadeButtonName func(int, int) objc.ID
+	_fnGCInputBackLeftButton   func(int) objc.ID
+	_fnGCInputBackRightButton  func(int) objc.ID
 	// Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.
 	// Deprecated: Use the -[GCController controllerWithMicroGamepad] method instead
 	_fnGCMicroGamepadSnapShotDataV100FromNSData func(*GCMicroGamepadSnapShotDataV100, objc.ID) bool
@@ -70,16 +68,28 @@ func GCGamepadSnapShotDataV100FromNSData(snapshotData *GCGamepadSnapShotDataV100
 }
 
 // Gets the name of an arcade button at a certain position.
-func GCInputArcadeButtonName(row int, column int) unsafe.Pointer {
-	return _fnGCInputArcadeButtonName(row, column)
+func GCInputArcadeButtonName(row int, column int) *foundation.NSString {
+	_ret := _fnGCInputArcadeButtonName(row, column)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
-func GCInputBackLeftButton(position int) unsafe.Pointer {
-	return _fnGCInputBackLeftButton(position)
+func GCInputBackLeftButton(position int) *foundation.NSString {
+	_ret := _fnGCInputBackLeftButton(position)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
-func GCInputBackRightButton(position int) unsafe.Pointer {
-	return _fnGCInputBackRightButton(position)
+func GCInputBackRightButton(position int) *foundation.NSString {
+	_ret := _fnGCInputBackRightButton(position)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return foundation.NSStringFromID(_ret)
 }
 
 // Fills out a v100 snapshot from any compatible NSData source @return NO if data is nil, snapshotData is nil or the contents of data does not contain a compatible snapshot. YES for all other cases.

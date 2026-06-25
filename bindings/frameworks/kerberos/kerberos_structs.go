@@ -534,7 +534,7 @@ type Credentials struct{}
 
 // C struct: error_table
 type ErrorTable struct {
-	Messages unsafe.Pointer
+	Messages string
 	Base     int32
 	Count    int32
 }

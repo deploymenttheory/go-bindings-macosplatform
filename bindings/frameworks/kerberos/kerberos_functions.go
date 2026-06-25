@@ -192,7 +192,7 @@ var (
 	// Deprecated: Use GSS.framework
 	_krb5_address_order func(unsafe.Pointer, *Krb5Address, *Krb5Address) int
 	// Deprecated: Use GSS.framework
-	_krb5_address_search func(unsafe.Pointer, *Krb5Address, unsafe.Pointer) uint
+	_krb5_address_search func(unsafe.Pointer, *Krb5Address, *Krb5Address) uint
 	// Deprecated: Use GSS.framework
 	_krb5_aname_to_localname func(unsafe.Pointer, *Krb5PrincipalData, int, string) int
 	// Deprecated: Use GSS.framework
@@ -364,9 +364,9 @@ var (
 	// Deprecated: Use GSS.framework
 	_krb5_clear_error_message func(unsafe.Pointer)
 	// Deprecated: Use GSS.framework
-	_krb5_copy_addresses func(unsafe.Pointer, unsafe.Pointer, *Krb5Address) int
+	_krb5_copy_addresses func(unsafe.Pointer, *Krb5Address, *Krb5Address) int
 	// Deprecated: Use GSS.framework
-	_krb5_copy_authdata func(unsafe.Pointer, unsafe.Pointer, *Krb5Authdata) int
+	_krb5_copy_authdata func(unsafe.Pointer, *Krb5Authdata, *Krb5Authdata) int
 	// Deprecated: Use GSS.framework
 	_krb5_copy_authenticator func(unsafe.Pointer, *Krb5Authenticator, *Krb5Authenticator) int
 	// Deprecated: Use GSS.framework
@@ -434,7 +434,7 @@ var (
 	// Deprecated: Use GSS.framework
 	_krb5_free_error_message func(unsafe.Pointer, string)
 	// Deprecated: Use GSS.framework
-	_krb5_free_host_realm func(unsafe.Pointer, unsafe.Pointer) int
+	_krb5_free_host_realm func(unsafe.Pointer, string) int
 	// Deprecated: Use GSS.framework
 	_krb5_free_keyblock func(unsafe.Pointer, *Krb5Keyblock)
 	// Deprecated: Use GSS.framework
@@ -680,13 +680,13 @@ var (
 	_profile_get_relation_names                   func(unsafe.Pointer, string, string) int
 	_profile_get_string                           func(unsafe.Pointer, string, string, string, string, string) int
 	_profile_get_subsection_names                 func(unsafe.Pointer, string, string) int
-	_profile_get_values                           func(unsafe.Pointer, unsafe.Pointer, string) int
+	_profile_get_values                           func(unsafe.Pointer, string, string) int
 	_profile_init                                 func(*string, unsafe.Pointer) int
 	_profile_init_path                            func(string, unsafe.Pointer) int
 	_profile_is_modified                          func(unsafe.Pointer, *int32) int
 	_profile_is_writable                          func(unsafe.Pointer, *int32) int
 	_profile_iterator                             func(unsafe.Pointer, string, string) int
-	_profile_iterator_create                      func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int
+	_profile_iterator_create                      func(unsafe.Pointer, string, int, unsafe.Pointer) int
 	_profile_iterator_free                        func(unsafe.Pointer)
 	_profile_release                              func(unsafe.Pointer)
 	_profile_release_string                       func(string)
@@ -1318,7 +1318,7 @@ func Krb5AddressOrder(arg unsafe.Pointer, arg2 *Krb5Address, arg3 *Krb5Address) 
 
 // C function: krb5_address_search
 // Deprecated: Use GSS.framework
-func Krb5AddressSearch(arg unsafe.Pointer, arg2 *Krb5Address, arg3 unsafe.Pointer) uint {
+func Krb5AddressSearch(arg unsafe.Pointer, arg2 *Krb5Address, arg3 *Krb5Address) uint {
 	return _krb5_address_search(arg, arg2, arg3)
 }
 
@@ -1834,13 +1834,13 @@ func Krb5ClearErrorMessage(arg unsafe.Pointer) {
 
 // C function: krb5_copy_addresses
 // Deprecated: Use GSS.framework
-func Krb5CopyAddresses(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 *Krb5Address) int {
+func Krb5CopyAddresses(arg unsafe.Pointer, arg2 *Krb5Address, arg3 *Krb5Address) int {
 	return _krb5_copy_addresses(arg, arg2, arg3)
 }
 
 // C function: krb5_copy_authdata
 // Deprecated: Use GSS.framework
-func Krb5CopyAuthdata(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 *Krb5Authdata) int {
+func Krb5CopyAuthdata(arg unsafe.Pointer, arg2 *Krb5Authdata, arg3 *Krb5Authdata) int {
 	return _krb5_copy_authdata(arg, arg2, arg3)
 }
 
@@ -2044,7 +2044,7 @@ func Krb5FreeErrorMessage(arg unsafe.Pointer, arg2 string) {
 
 // C function: krb5_free_host_realm
 // Deprecated: Use GSS.framework
-func Krb5FreeHostRealm(arg unsafe.Pointer, arg2 unsafe.Pointer) int {
+func Krb5FreeHostRealm(arg unsafe.Pointer, arg2 string) int {
 	return _krb5_free_host_realm(arg, arg2)
 }
 
@@ -2814,7 +2814,7 @@ func ProfileGetSubsectionNames(profile unsafe.Pointer, names string, ret_names s
 }
 
 // C function: profile_get_values
-func ProfileGetValues(profile unsafe.Pointer, names unsafe.Pointer, ret_values string) int {
+func ProfileGetValues(profile unsafe.Pointer, names string, ret_values string) int {
 	return _profile_get_values(profile, names, ret_values)
 }
 
@@ -2844,7 +2844,7 @@ func ProfileIterator(iter_p unsafe.Pointer, ret_name string, ret_value string) i
 }
 
 // C function: profile_iterator_create
-func ProfileIteratorCreate(profile unsafe.Pointer, names unsafe.Pointer, flags int, ret_iter unsafe.Pointer) int {
+func ProfileIteratorCreate(profile unsafe.Pointer, names string, flags int, ret_iter unsafe.Pointer) int {
 	return _profile_iterator_create(profile, names, flags, ret_iter)
 }
 

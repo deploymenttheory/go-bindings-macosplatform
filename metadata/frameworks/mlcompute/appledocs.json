@@ -1944,11 +1944,11 @@
     "MLCEmbeddingDescriptor": {
       "embeddingCount": {
         "doc": "The size of the dictionary.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingcount-77gxz"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingcount-5vs5t"
       },
       "embeddingDimension": {
         "doc": "The dimension of embedding vectors.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingdimension-3u8w7"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingdimension-1u9g"
       },
       "init(embeddingCount:embeddingDimension:)": {
         "doc": "Creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.",
@@ -1964,11 +1964,11 @@
       },
       "pNorm": {
         "doc": "The p of the Lp norm.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/pnorm-8vhw1"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/pnorm-8mto8"
       },
       "paddingIndex": {
         "doc": "An unsigned integer value that, if set, causes the layer to initialize the embedding vector at that index to zero.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/paddingindex-pb1e"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/paddingindex-50o5o"
       },
       "scalesGradientByFrequency": {
         "doc": "A Boolean that indicates whether the layer scales gradients by the inverse of the frequency of words in batch before the weight update.",
@@ -2247,12 +2247,12 @@
         "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/gammaparameter"
       },
       "init(normalizedShape:beta:gamma:varianceEpsilon:)": {
-        "doc": "Creates a normalization layer with a shape, optional beta and gamma tensors, and variance epsilon you specify.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/init(normalizedshape:beta:gamma:varianceepsilon:)-28e6g"
+        "doc": "Creates a normalization layer with a shape, beta and gamma tensors, and variance epsilon you specify.",
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/init(normalizedshape:beta:gamma:varianceepsilon:)-5i2aa"
       },
       "normalizedShape": {
         "doc": "The shape of the axes where normalization occurs.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/normalizedshape-2cz6k"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlclayernormalizationlayer/normalizedshape-8ujvv"
       },
       "varianceEpsilon": {
         "doc": "The variance epsilon you use for numerical stability.",
@@ -2552,7 +2552,7 @@
       },
       "poolingType": {
         "doc": "The pooling operation type.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/poolingtype-4ni07"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/poolingtype-9daku"
       },
       "strideInX": {
         "doc": "The stride of the kernel in x.",
@@ -2616,7 +2616,7 @@
       },
       "shape": {
         "doc": "An array that contains the size of each dimension.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/shape-840ax"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/shape-8k50y"
       }
     },
     "MLCSGDOptimizer": {
@@ -2642,7 +2642,7 @@
     "MLCSliceLayer": {
       "end": {
         "doc": "The end vector.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/end-8z0wi"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/end-9xw91"
       },
       "init(start:end:stride:)": {
         "doc": "Creates a slice layer with the start, end, and stride you specify.",
@@ -2650,7 +2650,7 @@
       },
       "start": {
         "doc": "The start vector.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/start-6dnjn"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/start-6wsh6"
       },
       "stride": {
         "doc": "The stride vector.",
@@ -2682,7 +2682,7 @@
       },
       "splitSectionLengths": {
         "doc": "An array that contains the lengths of each split section.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/splitsectionlengths-32abw"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcsplitlayer/splitsectionlengths-5abch"
       }
     },
     "MLCTensor": {
@@ -2784,7 +2784,7 @@
       },
       "sequenceLengths": {
         "doc": "An array that contains the variable lengths of sequences stored in the tensor.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/sequencelengths-3jdab"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/sequencelengths-3ntsa"
       },
       "shape": {
         "doc": "An array that contains the size in each dimension.",

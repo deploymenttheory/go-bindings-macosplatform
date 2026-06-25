@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -24,7 +25,11 @@ func IOUSBHostDevicePropertyKeyContainerID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostDevicePropertyKeyCurrentConfiguration() *foundation.NSString {
@@ -32,7 +37,11 @@ func IOUSBHostDevicePropertyKeyCurrentConfiguration() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostDevicePropertyKeySerialNumberString() *foundation.NSString {
@@ -40,7 +49,11 @@ func IOUSBHostDevicePropertyKeySerialNumberString() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostDevicePropertyKeyVendorString() *foundation.NSString {
@@ -48,7 +61,11 @@ func IOUSBHostDevicePropertyKeyVendorString() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief       NSErrorDomain for IOUSBHostFamily. Error codes are IOKit IOReturn codes. @constant    IOUSBHostErrorDomain domain for IOUSBHostFamily errors
@@ -57,7 +74,11 @@ func IOUSBHostErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostInterfacePropertyKeyAlternateSetting() *foundation.NSString {
@@ -65,7 +86,11 @@ func IOUSBHostInterfacePropertyKeyAlternateSetting() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyConfigurationValue() *foundation.NSString {
@@ -73,7 +98,11 @@ func IOUSBHostMatchingPropertyKeyConfigurationValue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyDeviceClass() *foundation.NSString {
@@ -81,7 +110,11 @@ func IOUSBHostMatchingPropertyKeyDeviceClass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyDeviceProtocol() *foundation.NSString {
@@ -89,7 +122,11 @@ func IOUSBHostMatchingPropertyKeyDeviceProtocol() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyDeviceReleaseNumber() *foundation.NSString {
@@ -97,7 +134,11 @@ func IOUSBHostMatchingPropertyKeyDeviceReleaseNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyDeviceSubClass() *foundation.NSString {
@@ -105,7 +146,11 @@ func IOUSBHostMatchingPropertyKeyDeviceSubClass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyInterfaceClass() *foundation.NSString {
@@ -113,7 +158,11 @@ func IOUSBHostMatchingPropertyKeyInterfaceClass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyInterfaceNumber() *foundation.NSString {
@@ -121,7 +170,11 @@ func IOUSBHostMatchingPropertyKeyInterfaceNumber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyInterfaceProtocol() *foundation.NSString {
@@ -129,7 +182,11 @@ func IOUSBHostMatchingPropertyKeyInterfaceProtocol() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyInterfaceSubClass() *foundation.NSString {
@@ -137,7 +194,11 @@ func IOUSBHostMatchingPropertyKeyInterfaceSubClass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyProductID() *foundation.NSString {
@@ -145,7 +206,11 @@ func IOUSBHostMatchingPropertyKeyProductID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyProductIDArray() *foundation.NSString {
@@ -153,7 +218,11 @@ func IOUSBHostMatchingPropertyKeyProductIDArray() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyProductIDMask() *foundation.NSString {
@@ -161,7 +230,11 @@ func IOUSBHostMatchingPropertyKeyProductIDMask() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeySpeed() *foundation.NSString {
@@ -169,7 +242,11 @@ func IOUSBHostMatchingPropertyKeySpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostMatchingPropertyKeyVendorID() *foundation.NSString {
@@ -177,7 +254,11 @@ func IOUSBHostMatchingPropertyKeyVendorID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostPropertyKeyLocationID() *foundation.NSString {
@@ -185,7 +266,11 @@ func IOUSBHostPropertyKeyLocationID() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IOUSBHostVersionNumber() float64 {

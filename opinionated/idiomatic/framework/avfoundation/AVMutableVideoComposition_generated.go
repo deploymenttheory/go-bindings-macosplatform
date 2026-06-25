@@ -92,7 +92,7 @@ func (mvc *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompos
 	return mvc
 }
 
-// WithSourceSampleDataTrackIDs sets the identifiers of source sample data tracks in the composition that the object requires to compose frames.
+// WithSourceSampleDataTrackIDs sets the identifiers of source sample data tracks in the composition that the compositor requires to compose frames.
 func (mvc *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setSourceSampleDataTrackIDs:"), _arr)

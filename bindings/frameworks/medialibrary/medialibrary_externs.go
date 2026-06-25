@@ -4,372 +4,888 @@
 package medialibrary
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func MLApertureAllPhotosTypeIdentifier() uintptr {
+func MLApertureAllPhotosTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureAllPhotosTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureAllProjectsTypeIdentifier() uintptr {
+func MLApertureAllProjectsTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureAllProjectsTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFacebookAlbumTypeIdentifier() uintptr {
+func MLApertureFacebookAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFacebookAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFacebookGroupTypeIdentifier() uintptr {
+func MLApertureFacebookGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFacebookGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFacesAlbumTypeIdentifier() uintptr {
+func MLApertureFacesAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFacesAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFlaggedTypeIdentifier() uintptr {
+func MLApertureFlaggedTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFlaggedTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFlickrAlbumTypeIdentifier() uintptr {
+func MLApertureFlickrAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFlickrAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFlickrGroupTypeIdentifier() uintptr {
+func MLApertureFlickrGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFlickrGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureFolderAlbumTypeIdentifier() uintptr {
+func MLApertureFolderAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureFolderAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureLastImportAlbumTypeIdentifier() uintptr {
+func MLApertureLastImportAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureLastImportAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureLastNMonthsAlbumTypeIdentifier() uintptr {
+func MLApertureLastNMonthsAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureLastNMonthsAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureLastViewedEventAlbumTypeIdentifier() uintptr {
+func MLApertureLastViewedEventAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureLastViewedEventAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureLightTableTypeIdentifier() uintptr {
+func MLApertureLightTableTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureLightTableTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePhotoStreamAlbumTypeIdentifier() uintptr {
+func MLAperturePhotoStreamAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePhotoStreamAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePlacesAlbumTypeIdentifier() uintptr {
+func MLAperturePlacesAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePlacesAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePlacesCityAlbumTypeIdentifier() uintptr {
+func MLAperturePlacesCityAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePlacesCityAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePlacesCountryAlbumTypeIdentifier() uintptr {
+func MLAperturePlacesCountryAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePlacesCountryAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePlacesPointOfInterestAlbumTypeIdentifier() uintptr {
+func MLAperturePlacesPointOfInterestAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePlacesPointOfInterestAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLAperturePlacesProvinceAlbumTypeIdentifier() uintptr {
+func MLAperturePlacesProvinceAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLAperturePlacesProvinceAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureProjectAlbumTypeIdentifier() uintptr {
+func MLApertureProjectAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureProjectAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureProjectFolderAlbumTypeIdentifier() uintptr {
+func MLApertureProjectFolderAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureProjectFolderAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureRootGroupTypeIdentifier() uintptr {
+func MLApertureRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureSlideShowTypeIdentifier() uintptr {
+func MLApertureSlideShowTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureSlideShowTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureSmugMugAlbumTypeIdentifier() uintptr {
+func MLApertureSmugMugAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureSmugMugAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureSmugMugGroupTypeIdentifier() uintptr {
+func MLApertureSmugMugGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureSmugMugGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureUserAlbumTypeIdentifier() uintptr {
+func MLApertureUserAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureUserAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLApertureUserSmartAlbumTypeIdentifier() uintptr {
+func MLApertureUserSmartAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLApertureUserSmartAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutEventCalendarGroupTypeIdentifier() uintptr {
+func MLFinalCutEventCalendarGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutEventCalendarGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutEventGroupTypeIdentifier() uintptr {
+func MLFinalCutEventGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutEventGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutEventLibraryGroupTypeIdentifier() uintptr {
+func MLFinalCutEventLibraryGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutEventLibraryGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutFolderGroupTypeIdentifier() uintptr {
+func MLFinalCutFolderGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutFolderGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutProjectGroupTypeIdentifier() uintptr {
+func MLFinalCutProjectGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutProjectGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFinalCutRootGroupTypeIdentifier() uintptr {
+func MLFinalCutRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFinalCutRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFolderGroupTypeIdentifier() uintptr {
+func MLFolderGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFolderGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLFolderRootGroupTypeIdentifier() uintptr {
+func MLFolderRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLFolderRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLGarageBandFolderGroupTypeIdentifier() uintptr {
+func MLGarageBandFolderGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLGarageBandFolderGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLGarageBandRootGroupTypeIdentifier() uintptr {
+func MLGarageBandRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLGarageBandRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLLogicBouncesGroupTypeIdentifier() uintptr {
+func MLLogicBouncesGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLLogicBouncesGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLLogicProjectTypeIdentifier() uintptr {
+func MLLogicProjectTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLLogicProjectTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLLogicProjectsGroupTypeIdentifier() uintptr {
+func MLLogicProjectsGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLLogicProjectsGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLLogicRootGroupTypeIdentifier() uintptr {
+func MLLogicRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLLogicRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadAppFoldersKey() uintptr {
+func MLMediaLoadAppFoldersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadAppFoldersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadAppleLoops() uintptr {
+func MLMediaLoadAppleLoops() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadAppleLoops")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadExcludeSourcesKey() uintptr {
+func MLMediaLoadExcludeSourcesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadExcludeSourcesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadFoldersKey() uintptr {
+func MLMediaLoadFoldersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadFoldersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadIncludeSourcesKey() uintptr {
+func MLMediaLoadIncludeSourcesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadIncludeSourcesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadMoviesFolder() uintptr {
+func MLMediaLoadMoviesFolder() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadMoviesFolder")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaLoadSourceTypesKey() uintptr {
+func MLMediaLoadSourceTypesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaLoadSourceTypesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectAlbumKey() uintptr {
+func MLMediaObjectAlbumKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectAlbumKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectArtistKey() uintptr {
+func MLMediaObjectArtistKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectArtistKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectBitRateKey() uintptr {
+func MLMediaObjectBitRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectBitRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectChannelCountKey() uintptr {
+func MLMediaObjectChannelCountKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectChannelCountKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectCommentsKey() uintptr {
+func MLMediaObjectCommentsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectCommentsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectDurationKey() uintptr {
+func MLMediaObjectDurationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectDurationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectGenreKey() uintptr {
+func MLMediaObjectGenreKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectGenreKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectKeywordsKey() uintptr {
+func MLMediaObjectKeywordsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectKeywordsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectKindKey() uintptr {
+func MLMediaObjectKindKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectKindKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectProtectedKey() uintptr {
+func MLMediaObjectProtectedKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectProtectedKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectResolutionStringKey() uintptr {
+func MLMediaObjectResolutionStringKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectResolutionStringKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectSampleRateKey() uintptr {
+func MLMediaObjectSampleRateKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectSampleRateKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaObjectTrackNumberKey() uintptr {
+func MLMediaObjectTrackNumberKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaObjectTrackNumberKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceApertureIdentifier() uintptr {
+func MLMediaSourceApertureIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceApertureIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceAppDefinedFoldersIdentifier() uintptr {
+func MLMediaSourceAppDefinedFoldersIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceAppDefinedFoldersIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceCustomFoldersIdentifier() uintptr {
+func MLMediaSourceCustomFoldersIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceCustomFoldersIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceFinalCutIdentifier() uintptr {
+func MLMediaSourceFinalCutIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceFinalCutIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceGarageBandIdentifier() uintptr {
+func MLMediaSourceGarageBandIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceGarageBandIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceLogicIdentifier() uintptr {
+func MLMediaSourceLogicIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceLogicIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceMoviesFolderIdentifier() uintptr {
+func MLMediaSourceMoviesFolderIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceMoviesFolderIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourcePhotoBoothIdentifier() uintptr {
+func MLMediaSourcePhotoBoothIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourcePhotoBoothIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourcePhotosIdentifier() uintptr {
+func MLMediaSourcePhotosIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourcePhotosIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceiMovieIdentifier() uintptr {
+func MLMediaSourceiMovieIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceiMovieIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceiPhotoIdentifier() uintptr {
+func MLMediaSourceiPhotoIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceiPhotoIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLMediaSourceiTunesIdentifier() uintptr {
+func MLMediaSourceiTunesIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLMediaSourceiTunesIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
@@ -552,184 +1068,429 @@ func MLPhotosYearGroupTypeIdentifier() uintptr {
 	return ptr
 }
 
-func MLiMovieEventCalendarGroupTypeIdentifier() uintptr {
+func MLiMovieEventCalendarGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieEventCalendarGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiMovieEventGroupTypeIdentifier() uintptr {
+func MLiMovieEventGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieEventGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiMovieEventLibraryGroupTypeIdentifier() uintptr {
+func MLiMovieEventLibraryGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieEventLibraryGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiMovieFolderGroupTypeIdentifier() uintptr {
+func MLiMovieFolderGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieFolderGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiMovieProjectGroupTypeIdentifier() uintptr {
+func MLiMovieProjectGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieProjectGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiMovieRootGroupTypeIdentifier() uintptr {
+func MLiMovieRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiMovieRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiPhotoAlbumTypeIdentifier() uintptr {
+func MLiPhotoAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoEventAlbumTypeIdentifier() uintptr {
+func MLiPhotoEventAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoEventAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoEventsFolderTypeIdentifier() uintptr {
+func MLiPhotoEventsFolderTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoEventsFolderTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFacebookAlbumTypeIdentifier() uintptr {
+func MLiPhotoFacebookAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFacebookAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFacebookGroupTypeIdentifier() uintptr {
+func MLiPhotoFacebookGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFacebookGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFacesAlbumTypeIdentifier() uintptr {
+func MLiPhotoFacesAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFacesAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFlaggedAlbumTypeIdentifier() uintptr {
+func MLiPhotoFlaggedAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFlaggedAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFlickrAlbumTypeIdentifier() uintptr {
+func MLiPhotoFlickrAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFlickrAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFlickrGroupTypeIdentifier() uintptr {
+func MLiPhotoFlickrGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFlickrGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoFolderAlbumTypeIdentifier() uintptr {
+func MLiPhotoFolderAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoFolderAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoLastImportAlbumTypeIdentifier() uintptr {
+func MLiPhotoLastImportAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoLastImportAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoLastNMonthsAlbumTypeIdentifier() uintptr {
+func MLiPhotoLastNMonthsAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoLastNMonthsAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoLastViewedEventAlbumTypeIdentifier() uintptr {
+func MLiPhotoLastViewedEventAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoLastViewedEventAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoLibraryAlbumTypeIdentifier() uintptr {
+func MLiPhotoLibraryAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoLibraryAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPhotoStreamAlbumTypeIdentifier() uintptr {
+func MLiPhotoPhotoStreamAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPhotoStreamAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPlacesAlbumTypeIdentifier() uintptr {
+func MLiPhotoPlacesAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPlacesAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPlacesCityAlbumTypeIdentifier() uintptr {
+func MLiPhotoPlacesCityAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPlacesCityAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPlacesCountryAlbumTypeIdentifier() uintptr {
+func MLiPhotoPlacesCountryAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPlacesCountryAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier() uintptr {
+func MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoPlacesProvinceAlbumTypeIdentifier() uintptr {
+func MLiPhotoPlacesProvinceAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoPlacesProvinceAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiPhotoRootGroupTypeIdentifier() uintptr {
+func MLiPhotoRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoSlideShowAlbumTypeIdentifier() uintptr {
+func MLiPhotoSlideShowAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoSlideShowAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoSmartAlbumTypeIdentifier() uintptr {
+func MLiPhotoSmartAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoSmartAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiPhotoSubscribedAlbumTypeIdentifier() uintptr {
+func MLiPhotoSubscribedAlbumTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiPhotoSubscribedAlbumTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiTunesAudioBooksPlaylistTypeIdentifier() uintptr {
+func MLiTunesAudioBooksPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesAudioBooksPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesFolderPlaylistTypeIdentifier() uintptr {
+func MLiTunesFolderPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesFolderPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesGeniusPlaylistTypeIdentifier() uintptr {
+func MLiTunesGeniusPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesGeniusPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesMoviesPlaylistTypeIdentifier() uintptr {
+func MLiTunesMoviesPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesMoviesPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiTunesMusicPlaylistTypeIdentifier() uintptr {
+func MLiTunesMusicPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesMusicPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
@@ -738,42 +1499,91 @@ func MLiTunesMusicVideosPlaylistTypeIdentifier() uintptr {
 	return ptr
 }
 
-func MLiTunesPlaylistTypeIdentifier() uintptr {
+func MLiTunesPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiTunesPodcastPlaylistTypeIdentifier() uintptr {
+func MLiTunesPodcastPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesPodcastPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiTunesPurchasedPlaylistTypeIdentifier() uintptr {
+func MLiTunesPurchasedPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesPurchasedPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MLiTunesRootGroupTypeIdentifier() uintptr {
+func MLiTunesRootGroupTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesRootGroupTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesSavedGeniusPlaylistTypeIdentifier() uintptr {
+func MLiTunesSavedGeniusPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesSavedGeniusPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesSmartPlaylistTypeIdentifier() uintptr {
+func MLiTunesSmartPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesSmartPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesTVShowsPlaylistTypeIdentifier() uintptr {
+func MLiTunesTVShowsPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesTVShowsPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
@@ -783,7 +1593,14 @@ func MLiTunesVideoPlaylistTypeIdentifier() uintptr {
 }
 
 // Deprecated: MediaLibrary.framework will be removed in a future OS version. Use Photos.framework or iTunesLibrary.framework instead.
-func MLiTunesiTunesUPlaylistTypeIdentifier() uintptr {
+func MLiTunesiTunesUPlaylistTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_medialibraryLib, "MLiTunesiTunesUPlaylistTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

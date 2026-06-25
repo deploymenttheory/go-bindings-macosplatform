@@ -4,49 +4,110 @@
 package opendirectory
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func ODFrameworkErrorDomain() uintptr {
+func ODFrameworkErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODFrameworkErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ODSessionProxyAddress @abstract   the address to connect to via proxy, used when making the options dictionary @discussion the address to connect to via proxy, used when making the options dictionary
-func ODSessionProxyAddress() uintptr {
+func ODSessionProxyAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODSessionProxyAddress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ODSessionProxyPassword @abstract   the password to connect with via proxy, used when making the options dictionary @discussion the password to connect with via proxy, used when making the options dictionary
-func ODSessionProxyPassword() uintptr {
+func ODSessionProxyPassword() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODSessionProxyPassword")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ODSessionProxyPort @abstract   the port to connect to via proxy, used when making the options dictionary @discussion the port to connect to via proxy, used when making the options dictionary.  This parameter is optional and should not be passed normally.
-func ODSessionProxyPort() uintptr {
+func ODSessionProxyPort() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODSessionProxyPort")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const      ODSessionProxyUsername @abstract   the username to connect with via proxy, used when making the options dictionary @discussion the username to connect with via proxy, used when making the options dictionary
-func ODSessionProxyUsername() uintptr {
+func ODSessionProxyUsername() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODSessionProxyUsername")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ODTrustTypeAnonymous() uintptr {
+func ODTrustTypeAnonymous() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODTrustTypeAnonymous")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ODTrustTypeJoined() uintptr {
+func ODTrustTypeJoined() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODTrustTypeJoined")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func ODTrustTypeUsingCredentials() uintptr {
+func ODTrustTypeUsingCredentials() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_opendirectoryLib, "ODTrustTypeUsingCredentials")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

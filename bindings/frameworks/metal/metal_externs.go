@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func MTL4CommandQueueErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLBinaryArchiveDomain() *foundation.NSString {
@@ -24,7 +29,11 @@ func MTLBinaryArchiveDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLCaptureErrorDomain() *foundation.NSString {
@@ -32,7 +41,11 @@ func MTLCaptureErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLCommandBufferEncoderInfoErrorKey() *foundation.NSString {
@@ -40,7 +53,11 @@ func MTLCommandBufferEncoderInfoErrorKey() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLCommandBufferErrorDomain() *foundation.NSString {
@@ -48,97 +65,227 @@ func MTLCommandBufferErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterClipperInvocations() uintptr {
+func MTLCommonCounterClipperInvocations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterClipperInvocations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterClipperPrimitivesOut() uintptr {
+func MTLCommonCounterClipperPrimitivesOut() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterClipperPrimitivesOut")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterComputeKernelInvocations() uintptr {
+func MTLCommonCounterComputeKernelInvocations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterComputeKernelInvocations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterFragmentCycles() uintptr {
+func MTLCommonCounterFragmentCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterFragmentCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterFragmentInvocations() uintptr {
+func MTLCommonCounterFragmentInvocations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterFragmentInvocations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterFragmentsPassed() uintptr {
+func MTLCommonCounterFragmentsPassed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterFragmentsPassed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterPostTessellationVertexCycles() uintptr {
+func MTLCommonCounterPostTessellationVertexCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterPostTessellationVertexCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterPostTessellationVertexInvocations() uintptr {
+func MTLCommonCounterPostTessellationVertexInvocations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterPostTessellationVertexInvocations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterRenderTargetWriteCycles() uintptr {
+func MTLCommonCounterRenderTargetWriteCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterRenderTargetWriteCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterSetStageUtilization() uintptr {
+func MTLCommonCounterSetStageUtilization() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterSetStageUtilization")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterSetStatistic() uintptr {
+func MTLCommonCounterSetStatistic() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterSetStatistic")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterSetTimestamp() uintptr {
+func MTLCommonCounterSetTimestamp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterSetTimestamp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterTessellationCycles() uintptr {
+func MTLCommonCounterTessellationCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterTessellationCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterTessellationInputPatches() uintptr {
+func MTLCommonCounterTessellationInputPatches() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterTessellationInputPatches")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterTimestamp() uintptr {
+func MTLCommonCounterTimestamp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterTimestamp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterTotalCycles() uintptr {
+func MTLCommonCounterTotalCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterTotalCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterVertexCycles() uintptr {
+func MTLCommonCounterVertexCycles() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterVertexCycles")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func MTLCommonCounterVertexInvocations() uintptr {
+func MTLCommonCounterVertexInvocations() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_metalLib, "MTLCommonCounterVertexInvocations")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLCounterErrorDomain() *foundation.NSString {
@@ -146,7 +293,11 @@ func MTLCounterErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLDeviceErrorDomain() *foundation.NSString {
@@ -154,7 +305,11 @@ func MTLDeviceErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @brief This notification is posted when the user has requested that applications cease using a particular device.  Applications should assume that the device will be removed (terminated) imminently.  Additionally, the device will be removed from the internal device array prior to this notification being posted.  Applications should immediately begin the process of releasing all resources created on the given device, as well as any references to the device itself.
@@ -180,7 +335,11 @@ func MTLDynamicLibraryDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLIOErrorDomain() *foundation.NSString {
@@ -188,7 +347,11 @@ func MTLIOErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLLibraryErrorDomain() *foundation.NSString {
@@ -196,7 +359,11 @@ func MTLLibraryErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func MTLLogStateErrorDomain() *foundation.NSString {
@@ -204,7 +371,11 @@ func MTLLogStateErrorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // An error domain for errors that pertain to creating a tensor.
@@ -213,7 +384,11 @@ func MTLTensorDomain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSDeviceCertificationiPhonePerformanceGaming() int {
@@ -229,7 +404,11 @@ func NSProcessInfoPerformanceProfileDidChangeNotification() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func NSProcessPerformanceProfileDefault() int {

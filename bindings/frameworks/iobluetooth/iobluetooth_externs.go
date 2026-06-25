@@ -4,147 +4,348 @@
 package iobluetooth
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func IOBluetoothHandsFreeCallDirection() uintptr {
+func IOBluetoothHandsFreeCallDirection() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallDirection")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallIndex() uintptr {
+func IOBluetoothHandsFreeCallIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallIndex")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallMode() uintptr {
+func IOBluetoothHandsFreeCallMode() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallMode")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallMultiparty() uintptr {
+func IOBluetoothHandsFreeCallMultiparty() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallMultiparty")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallName() uintptr {
+func IOBluetoothHandsFreeCallName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallNumber() uintptr {
+func IOBluetoothHandsFreeCallNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallStatus() uintptr {
+func IOBluetoothHandsFreeCallStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallStatus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeCallType() uintptr {
+func IOBluetoothHandsFreeCallType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeCallType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorBattChg() uintptr {
+func IOBluetoothHandsFreeIndicatorBattChg() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorBattChg")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorCall() uintptr {
+func IOBluetoothHandsFreeIndicatorCall() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorCall")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorCallHeld() uintptr {
+func IOBluetoothHandsFreeIndicatorCallHeld() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorCallHeld")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorCallSetup() uintptr {
+func IOBluetoothHandsFreeIndicatorCallSetup() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorCallSetup")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorRoam() uintptr {
+func IOBluetoothHandsFreeIndicatorRoam() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorRoam")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorService() uintptr {
+func IOBluetoothHandsFreeIndicatorService() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorService")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHandsFreeIndicatorSignal() uintptr {
+func IOBluetoothHandsFreeIndicatorSignal() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHandsFreeIndicatorSignal")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHostControllerPoweredOffNotification() uintptr {
+func IOBluetoothHostControllerPoweredOffNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHostControllerPoweredOffNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothHostControllerPoweredOnNotification() uintptr {
+func IOBluetoothHostControllerPoweredOnNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothHostControllerPoweredOnNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothL2CAPChannelPublishedNotification() uintptr {
+func IOBluetoothL2CAPChannelPublishedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothL2CAPChannelPublishedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothL2CAPChannelTerminatedNotification() uintptr {
+func IOBluetoothL2CAPChannelTerminatedNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothL2CAPChannelTerminatedNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUEncoding() uintptr {
+func IOBluetoothPDUEncoding() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUEncoding")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUOriginatingAddress() uintptr {
+func IOBluetoothPDUOriginatingAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUOriginatingAddress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUOriginatingAddressType() uintptr {
+func IOBluetoothPDUOriginatingAddressType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUOriginatingAddressType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUProtocolID() uintptr {
+func IOBluetoothPDUProtocolID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUProtocolID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUServicCenterAddress() uintptr {
+func IOBluetoothPDUServicCenterAddress() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUServicCenterAddress")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUServiceCenterAddressType() uintptr {
+func IOBluetoothPDUServiceCenterAddressType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUServiceCenterAddressType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUTimestamp() uintptr {
+func IOBluetoothPDUTimestamp() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUTimestamp")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUType() uintptr {
+func IOBluetoothPDUType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func IOBluetoothPDUUserData() uintptr {
+func IOBluetoothPDUUserData() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_iobluetoothLib, "IOBluetoothPDUUserData")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const			kFTSListingNameKey @abstract		NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.

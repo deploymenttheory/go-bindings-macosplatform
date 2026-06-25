@@ -54,7 +54,7 @@ func (o *MPSGraphCompilationDescriptor) DisableTypeInference() {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelDisableTypeInference)
 }
 
-// Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
+// Turns on Automatic Layout Conversion (for conv like operations) for GPU.
 func (o *MPSGraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	o.Ptr().Send(_mPSGraphCompilationDescriptorSelConvertLayoutToNHWC)
 }

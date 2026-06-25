@@ -4,8 +4,6 @@
 package networkextension
 
 import (
-	"unsafe"
-
 	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -49,9 +47,12 @@ func (o *NEIPv4Route) InitWithDestinationAddressSubnetMask(address *foundation.N
 }
 
 // A convenience method for creating the default IPv4 route.
-func NEIPv4RouteDefaultRoute() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](objc.ID(_clsNEIPv4Route), _nEIPv4RouteSelDefaultRoute)
-	return _ret
+func NEIPv4RouteDefaultRoute() *NEIPv4Route {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNEIPv4Route), _nEIPv4RouteSelDefaultRoute)
+	if _ret != 0 {
+		_ret.Send(objc.RegisterName("retain"))
+	}
+	return NEIPv4RouteFromID(_ret)
 }
 
 // @property destinationAddress @discussion An IPv4 address represented as a dotted decimal string.

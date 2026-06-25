@@ -200,8 +200,8 @@ func (ai *AnnotationInk) WithMarkupType(markupType MarkupType) *AnnotationInk {
 }
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
-func (ai *AnnotationInk) WithWidgetFieldType(widgetFieldType unsafe.Pointer) *AnnotationInk {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setWidgetFieldType:"), widgetFieldType)
+func (ai *AnnotationInk) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationInk {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return ai
 }
 

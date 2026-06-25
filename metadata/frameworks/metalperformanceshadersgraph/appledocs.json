@@ -1107,11 +1107,11 @@
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraph/depthwiseconvolution3d(_:weights:descriptor:name:)"
       },
       "-dequantizeTensor:LUTTensor:axis:name:": {
-        "doc": "Creates a vector lookup-table based quantization operation and returns the result tensor.",
+        "doc": "Creates a vector lookup-table based dequantize operation and returns the result tensor.",
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraph/dequantize(_:luttensor:axis:name:)"
       },
       "-dequantizeTensor:LUTTensor:name:": {
-        "doc": "Creates a lookup-table based quantization operation and returns the result tensor.",
+        "doc": "Creates a lookup-table based dequantize operation and returns the result tensor.",
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraph/dequantize(_:luttensor:name:)"
       },
       "-dequantizeTensor:scale:zeroPoint:dataType:name:": {
@@ -2189,7 +2189,7 @@
     },
     "MPSGraphCompilationDescriptor": {
       "-convertLayoutToNHWC": {
-        "doc": "Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.",
+        "doc": "Turns on Automatic Layout Conversion (for conv like operations) for GPU.",
         "url": "https://developer.apple.com/documentation/metalperformanceshadersgraph/mpsgraphcompilationdescriptor/convertlayouttonhwc()"
       },
       "-disableAutoLayoutConversion": {

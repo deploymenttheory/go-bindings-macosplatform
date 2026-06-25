@@ -4,7 +4,12 @@
 package corebluetooth
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // @constant CBAdvertisementDataIsConnectable @discussion An NSNumber (Boolean) indicating whether or not the advertising event type was connectable. This can be used to determine whether or not a peripheral is connectable in that instant.
@@ -14,15 +19,29 @@ func CBAdvertisementDataIsConnectable() uintptr {
 }
 
 // @constant CBAdvertisementDataLocalNameKey @discussion A <code>NSString</code> containing the local name of a peripheral.
-func CBAdvertisementDataLocalNameKey() uintptr {
+func CBAdvertisementDataLocalNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBAdvertisementDataLocalNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CBAdvertisementDataManufacturerDataKey @discussion A <code>NSData</code> object containing the manufacturer data of a peripheral.
-func CBAdvertisementDataManufacturerDataKey() uintptr {
+func CBAdvertisementDataManufacturerDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBAdvertisementDataManufacturerDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CBAdvertisementDataOverflowServiceUUIDsKey @discussion A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs that were found in the "overflow" area of the advertising data. Due to the nature of the data stored in this area, UUIDs listed here are "best effort" and may not always be accurate. @see        startAdvertising:
@@ -32,15 +51,29 @@ func CBAdvertisementDataOverflowServiceUUIDsKey() uintptr {
 }
 
 // @constant CBAdvertisementDataServiceDataKey @discussion A dictionary containing service-specific advertisement data. Keys are <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs. Values are <code>NSData</code> objects.
-func CBAdvertisementDataServiceDataKey() uintptr {
+func CBAdvertisementDataServiceDataKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBAdvertisementDataServiceDataKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CBAdvertisementDataServiceUUIDsKey @discussion A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs.
-func CBAdvertisementDataServiceUUIDsKey() uintptr {
+func CBAdvertisementDataServiceUUIDsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBAdvertisementDataServiceUUIDsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant CBAdvertisementDataSolicitedServiceUUIDsKey @discussion A list of one or more <code>CBUUID</code> objects, representing <code>CBService</code> UUIDs.
@@ -50,9 +83,16 @@ func CBAdvertisementDataSolicitedServiceUUIDsKey() uintptr {
 }
 
 // @constant CBAdvertisementDataTxPowerLevelKey @discussion A <code>NSNumber</code> containing the transmit power of a peripheral.
-func CBAdvertisementDataTxPowerLevelKey() uintptr {
+func CBAdvertisementDataTxPowerLevelKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBAdvertisementDataTxPowerLevelKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const  CBCentralManagerOptionRestoreIdentifierKey @discussion An NSString containing a unique identifier (UID) for the <code>CBCentralManager</code> that is being instantiated. This UID is used by the system to identify a specific <code>CBCentralManager</code> instance for restoration and, therefore, must remain the same for subsequent application executions in order for the manager to be restored. @see		initWithDelegate:queue:options: @seealso	centralManager:willRestoreState:
@@ -86,9 +126,16 @@ func CBCentralManagerRestoredStateScanServicesKey() uintptr {
 }
 
 // @const CBCentralManagerScanOptionAllowDuplicatesKey @discussion An NSNumber (Boolean) indicating that the scan should run without duplicate filtering. By default, multiple discoveries of the same peripheral are coalesced into a single discovery event. Specifying this option will cause a discovery event to be generated every time the peripheral is seen, which may be many times per second. This can be useful in specific situations, such as making a connection based on a peripheral's RSSI, but may have an adverse affect on battery-life and application performance. @see        scanForPeripheralsWithServices:options:
-func CBCentralManagerScanOptionAllowDuplicatesKey() uintptr {
+func CBCentralManagerScanOptionAllowDuplicatesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBCentralManagerScanOptionAllowDuplicatesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBCentralManagerScanOptionSolicitedServiceUUIDsKey @discussion An NSArray of <code>CBUUID</code> objects respresenting service UUIDs. Causes the scan to also look for peripherals soliciting any of the services contained in the list. @see        scanForPeripheralsWithServices:options:
@@ -110,9 +157,16 @@ func CBConnectPeripheralOptionNotifyOnConnectionKey() uintptr {
 }
 
 // @const CBConnectPeripheralOptionNotifyOnDisconnectionKey @discussion An NSNumber (Boolean) indicating that the system should display a disconnection alert for a given peripheral, if the application is suspended at the time of the disconnection. This is useful for applications that have not specified the <code>bluetooth-central</code> background mode and cannot display their own alert. If more than one application has requested notification for a given peripheral, the one that was most recently in the foreground will receive the alert. @see        connectPeripheral:
-func CBConnectPeripheralOptionNotifyOnDisconnectionKey() uintptr {
+func CBConnectPeripheralOptionNotifyOnDisconnectionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBConnectPeripheralOptionNotifyOnDisconnectionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBConnectPeripheralOptionNotifyOnNotificationKey @discussion An NSNumber (Boolean) indicating that the system should display an alert for all notifications received from a given peripheral, if the application is suspended at the time. This is useful for applications that have not specified the <code>bluetooth-central</code> background mode and cannot display their own alert. If more than one application has requested notification for a given peripheral, the one that was most recently in the foreground will receive the alert. @see        connectPeripheral:
@@ -127,9 +181,16 @@ func CBConnectPeripheralOptionStartDelayKey() uintptr {
 	return ptr
 }
 
-func CBErrorDomain() uintptr {
+func CBErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const  CBPeripheralManagerOptionRestoreIdentifierKey @discussion An NSString containing a unique identifier (UID) for the <code>CBPeripheralManager</code> that is being instantiated. This UID is used by the system to identify a specific <code>CBPeripheralManager</code> instance for restoration and, therefore, must remain the same for subsequent application executions in order for the manager to be restored. @see		initWithDelegate:queue:options: @seealso	centralManager:willRestoreState:
@@ -157,45 +218,94 @@ func CBPeripheralManagerRestoredStateServicesKey() uintptr {
 }
 
 // @const CBUUIDCharacteristicAggregateFormatString @discussion The string representation of the UUID for the aggregate descriptor.
-func CBUUIDCharacteristicAggregateFormatString() uintptr {
+func CBUUIDCharacteristicAggregateFormatString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicAggregateFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDCharacteristicExtendedPropertiesString @discussion The string representation of the UUID for the extended properties descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
-func CBUUIDCharacteristicExtendedPropertiesString() uintptr {
+func CBUUIDCharacteristicExtendedPropertiesString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicExtendedPropertiesString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDCharacteristicFormatString @discussion The string representation of the UUID for the presentation format descriptor. The corresponding value for this descriptor is an <code>NSData</code> object.
-func CBUUIDCharacteristicFormatString() uintptr {
+func CBUUIDCharacteristicFormatString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicFormatString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDCharacteristicObservationScheduleString @discussion Data representing the observation schedule for a characteristic.
-func CBUUIDCharacteristicObservationScheduleString() uintptr {
+func CBUUIDCharacteristicObservationScheduleString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicObservationScheduleString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDCharacteristicUserDescriptionString @discussion The string representation of the UUID for the user description descriptor. The corresponding value for this descriptor is an <code>NSString</code> object.
-func CBUUIDCharacteristicUserDescriptionString() uintptr {
+func CBUUIDCharacteristicUserDescriptionString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicUserDescriptionString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDCharacteristicValidRangeString @discussion Data representing the valid min/max values accepted for a characteristic.
-func CBUUIDCharacteristicValidRangeString() uintptr {
+func CBUUIDCharacteristicValidRangeString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDCharacteristicValidRangeString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDClientCharacteristicConfigurationString @discussion The string representation of the UUID for the client configuration descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
-func CBUUIDClientCharacteristicConfigurationString() uintptr {
+func CBUUIDClientCharacteristicConfigurationString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDClientCharacteristicConfigurationString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @const CBUUIDL2CAPPSMCharacteristicString @discussion The PSM (a little endian uint16_t) of an L2CAP Channel associated with the GATT service containing this characteristic.  Servers can publish this characteristic with the UUID ABDD3056-28FA-441D-A470-55A75A52553A
@@ -205,7 +315,14 @@ func CBUUIDL2CAPPSMCharacteristicString() uintptr {
 }
 
 // @const CBUUIDServerCharacteristicConfigurationString @discussion The string representation of the UUID for the server configuration descriptor. The corresponding value for this descriptor is an <code>NSNumber</code> object.
-func CBUUIDServerCharacteristicConfigurationString() uintptr {
+func CBUUIDServerCharacteristicConfigurationString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_corebluetoothLib, "CBUUIDServerCharacteristicConfigurationString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

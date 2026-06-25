@@ -518,7 +518,7 @@
       },
       "languageHints": {
         "doc": "A dictionary that maps languages to their probabilities in the language identification process.",
-        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehints-3gy00"
+        "url": "https://developer.apple.com/documentation/naturallanguage/nllanguagerecognizer/languagehints-7dwgv"
       },
       "languageHypotheses(withMaximum:)": {
         "doc": "Generates the probabilities of possible languages for the processed text.",

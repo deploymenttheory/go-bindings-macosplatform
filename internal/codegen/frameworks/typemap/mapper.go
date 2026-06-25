@@ -107,10 +107,15 @@ func normalise(qt string) string {
 		"_Nonnull", "_Nullable", "_Null_unspecified",
 		"__kindof", "__unsafe_unretained", "__autoreleasing",
 		"__strong", "__weak", "_Nullable_result",
-		"WK_SWIFT_UI_ACTOR", "__covariant",
+		"WK_SWIFT_UI_ACTOR", "NS_SWIFT_UI_ACTOR", "NS_REFINED_FOR_SWIFT", "__covariant",
 	} {
 		qt = strings.ReplaceAll(qt, qual, "")
 	}
+	// Normalise pointer-to-const ("T *const", "T * const") to a plain pointer
+	// ("T *"). In Go there is no const qualifier on pointers, so both forms map
+	// to the same *T type. This must run after qualifier removal so that
+	// "T * _Nonnull const" collapses correctly.
+	qt = strings.ReplaceAll(qt, "*const", "*")
 	// Collapse multiple spaces.
 	for strings.Contains(qt, "  ") {
 		qt = strings.ReplaceAll(qt, "  ", " ")
@@ -766,6 +771,33 @@ func (m *Mapper) isBlocked(srcFramework, dstFramework string) bool {
 		return blocked[dstFramework]
 	}
 	return false
+}
+
+// ObjCClassFromID reports whether goType represents a pointer to an ObjC class
+// (*ClassName or *pkg.ClassName) whose value lives behind a Dlsym'd global
+// variable. When true, fromIDCall is the qualified <ClassName>FromID(id)
+// expression the extern emitter should use to wrap the dereferenced objc.ID.
+// Generic instantiations (containing "[") are excluded because their FromID
+// constructors require an explicit type parameter.
+func (m *Mapper) ObjCClassFromID(goType string) (fromIDCall string, ok bool) {
+	if m.OwnerIndex == nil || !strings.HasPrefix(goType, "*") {
+		return "", false
+	}
+	base := goType[1:]
+	if strings.Contains(base, "[") {
+		return "", false
+	}
+	var pkgPrefix, className string
+	if dotIdx := strings.LastIndex(base, "."); dotIdx >= 0 {
+		pkgPrefix = base[:dotIdx+1]
+		className = base[dotIdx+1:]
+	} else {
+		className = base
+	}
+	if _, exists := m.OwnerIndex[className]; !exists {
+		return "", false
+	}
+	return pkgPrefix + className + "FromID(id)", true
 }
 
 // IsEnumType reports whether a Go type string (possibly cross-package qualified)

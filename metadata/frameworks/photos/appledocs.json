@@ -617,6 +617,10 @@
           "doc": "The collection list is a folder containing albums or other folders.",
           "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/regularfolder"
         },
+        "PHCollectionListSubtypeRootFolder": {
+          "doc": "The collection list that contains the top-level user collections, there is always one root folder in the library and does not allow PHCollectionEditOperationRename or PHCollectionEditOperationDelete",
+          "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/rootfolder"
+        },
         "PHCollectionListSubtypeSmartFolderEvents": {
           "doc": "The collection list is a smart folder containing one or more Events synced from iPhoto.",
           "url": "https://developer.apple.com/documentation/photos/phcollectionlistsubtype/smartfolderevents"
@@ -1717,8 +1721,8 @@
     },
     "PHChange": {
       "changeDetails(for:)": {
-        "doc": "Returns detailed change information for the specified asset or collection.",
-        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-536rd"
+        "doc": "Returns detailed change information for a fetch result.",
+        "url": "https://developer.apple.com/documentation/photos/phchange/changedetails(for:)-2fne7"
       }
     },
     "PHCloudIdentifier": {

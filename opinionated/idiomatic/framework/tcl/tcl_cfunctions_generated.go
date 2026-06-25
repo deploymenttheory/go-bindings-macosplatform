@@ -214,10 +214,10 @@ func Tcl_CommandComplete(cmd string) int {
 	return int(_fnTcl_CommandComplete(cmd))
 }
 
-var _fnTcl_Concat func(int, unsafe.Pointer) string
+var _fnTcl_Concat func(int, string) string
 
 // Tcl_Concat calls the Tcl framework function Tcl_Concat.
-func Tcl_Concat(argc int, argv unsafe.Pointer) string {
+func Tcl_Concat(argc int, argv string) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_Concat == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_Concat, _lib, "Tcl_Concat")
@@ -1036,10 +1036,10 @@ func Tcl_MakeTcpClientChannel(tcpSocket unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnTcl_Merge func(int, unsafe.Pointer) string
+var _fnTcl_Merge func(int, string) string
 
 // Tcl_Merge calls the Tcl framework function Tcl_Merge.
-func Tcl_Merge(argc int, argv unsafe.Pointer) string {
+func Tcl_Merge(argc int, argv string) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_Merge == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_Merge, _lib, "Tcl_Merge")

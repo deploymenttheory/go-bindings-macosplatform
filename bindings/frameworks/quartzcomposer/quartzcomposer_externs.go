@@ -4,340 +4,814 @@
 package quartzcomposer
 
 import (
+	"unsafe"
+
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func QCCompositionAttributeBuiltInKey() uintptr {
+func QCCompositionAttributeBuiltInKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeBuiltInKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeCategoryKey() uintptr {
+func QCCompositionAttributeCategoryKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeCategoryKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeCopyrightKey() uintptr {
+func QCCompositionAttributeCopyrightKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeCopyrightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeDescriptionKey() uintptr {
+func QCCompositionAttributeDescriptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeDescriptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeHasConsumersKey() uintptr {
+func QCCompositionAttributeHasConsumersKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeHasConsumersKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeIsTimeDependentKey() uintptr {
+func QCCompositionAttributeIsTimeDependentKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeIsTimeDependentKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionAttributeNameKey() uintptr {
+func QCCompositionAttributeNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionAttributeNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionCategoryDistortion() uintptr {
+func QCCompositionCategoryDistortion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionCategoryDistortion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionCategoryStylize() uintptr {
+func QCCompositionCategoryStylize() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionCategoryStylize")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionCategoryUtility() uintptr {
+func QCCompositionCategoryUtility() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionCategoryUtility")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputAudioPeakKey() uintptr {
+func QCCompositionInputAudioPeakKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputAudioPeakKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputAudioSpectrumKey() uintptr {
+func QCCompositionInputAudioSpectrumKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputAudioSpectrumKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputDestinationImageKey() uintptr {
+func QCCompositionInputDestinationImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputDestinationImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputImageKey() uintptr {
+func QCCompositionInputImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputPaceKey() uintptr {
+func QCCompositionInputPaceKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputPaceKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputPreviewModeKey() uintptr {
+func QCCompositionInputPreviewModeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputPreviewModeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputPrimaryColorKey() uintptr {
+func QCCompositionInputPrimaryColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputPrimaryColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputRSSArticleDurationKey() uintptr {
+func QCCompositionInputRSSArticleDurationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputRSSArticleDurationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputRSSFeedURLKey() uintptr {
+func QCCompositionInputRSSFeedURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputRSSFeedURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputScreenImageKey() uintptr {
+func QCCompositionInputScreenImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputScreenImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputSecondaryColorKey() uintptr {
+func QCCompositionInputSecondaryColorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputSecondaryColorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputSourceImageKey() uintptr {
+func QCCompositionInputSourceImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputSourceImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputTrackInfoKey() uintptr {
+func QCCompositionInputTrackInfoKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputTrackInfoKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputTrackPositionKey() uintptr {
+func QCCompositionInputTrackPositionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputTrackPositionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputTrackSignalKey() uintptr {
+func QCCompositionInputTrackSignalKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputTrackSignalKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputXKey() uintptr {
+func QCCompositionInputXKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputXKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionInputYKey() uintptr {
+func QCCompositionInputYKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionInputYKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionOutputImageKey() uintptr {
+func QCCompositionOutputImageKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionOutputImageKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionOutputWebPageURLKey() uintptr {
+func QCCompositionOutputWebPageURLKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionOutputWebPageURLKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionPickerPanelDidSelectCompositionNotification() uintptr {
+func QCCompositionPickerPanelDidSelectCompositionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionPickerPanelDidSelectCompositionNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionPickerViewDidSelectCompositionNotification() uintptr {
+func QCCompositionPickerViewDidSelectCompositionNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionPickerViewDidSelectCompositionNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolGraphicAnimation() uintptr {
+func QCCompositionProtocolGraphicAnimation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolGraphicAnimation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolGraphicTransition() uintptr {
+func QCCompositionProtocolGraphicTransition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolGraphicTransition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolImageFilter() uintptr {
+func QCCompositionProtocolImageFilter() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolImageFilter")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolMusicVisualizer() uintptr {
+func QCCompositionProtocolMusicVisualizer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolMusicVisualizer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolRSSVisualizer() uintptr {
+func QCCompositionProtocolRSSVisualizer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolRSSVisualizer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionProtocolScreenSaver() uintptr {
+func QCCompositionProtocolScreenSaver() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionProtocolScreenSaver")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCCompositionRepositoryDidUpdateNotification() uintptr {
+func QCCompositionRepositoryDidUpdateNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCCompositionRepositoryDidUpdateNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInAttributeCategoriesKey() uintptr {
+func QCPlugInAttributeCategoriesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInAttributeCategoriesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInAttributeCopyrightKey() uintptr {
+func QCPlugInAttributeCopyrightKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInAttributeCopyrightKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInAttributeDescriptionKey() uintptr {
+func QCPlugInAttributeDescriptionKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInAttributeDescriptionKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInAttributeExamplesKey() uintptr {
+func QCPlugInAttributeExamplesKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInAttributeExamplesKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInAttributeNameKey() uintptr {
+func QCPlugInAttributeNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInAttributeNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInExecutionArgumentEventKey() uintptr {
+func QCPlugInExecutionArgumentEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInExecutionArgumentEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInExecutionArgumentMouseLocationKey() uintptr {
+func QCPlugInExecutionArgumentMouseLocationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInExecutionArgumentMouseLocationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInPixelFormatARGB8() uintptr {
+func QCPlugInPixelFormatARGB8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInPixelFormatARGB8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInPixelFormatBGRA8() uintptr {
+func QCPlugInPixelFormatBGRA8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInPixelFormatBGRA8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInPixelFormatI8() uintptr {
+func QCPlugInPixelFormatI8() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInPixelFormatI8")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInPixelFormatIf() uintptr {
+func QCPlugInPixelFormatIf() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInPixelFormatIf")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPlugInPixelFormatRGBAf() uintptr {
+func QCPlugInPixelFormatRGBAf() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPlugInPixelFormatRGBAf")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeDefaultValueKey() uintptr {
+func QCPortAttributeDefaultValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeDefaultValueKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeMaximumValueKey() uintptr {
+func QCPortAttributeMaximumValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeMaximumValueKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeMenuItemsKey() uintptr {
+func QCPortAttributeMenuItemsKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeMenuItemsKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeMinimumValueKey() uintptr {
+func QCPortAttributeMinimumValueKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeMinimumValueKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeNameKey() uintptr {
+func QCPortAttributeNameKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeNameKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortAttributeTypeKey() uintptr {
+func QCPortAttributeTypeKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortAttributeTypeKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeBoolean() uintptr {
+func QCPortTypeBoolean() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeBoolean")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeColor() uintptr {
+func QCPortTypeColor() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeColor")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeImage() uintptr {
+func QCPortTypeImage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeImage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeIndex() uintptr {
+func QCPortTypeIndex() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeIndex")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeNumber() uintptr {
+func QCPortTypeNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeString() uintptr {
+func QCPortTypeString() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeString")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCPortTypeStructure() uintptr {
+func QCPortTypeStructure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCPortTypeStructure")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCRendererEventKey() uintptr {
+func QCRendererEventKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCRendererEventKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCRendererMouseLocationKey() uintptr {
+func QCRendererMouseLocationKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCRendererMouseLocationKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCViewDidStartRenderingNotification() uintptr {
+func QCViewDidStartRenderingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCViewDidStartRenderingNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func QCViewDidStopRenderingNotification() uintptr {
+func QCViewDidStopRenderingNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_quartzcomposerLib, "QCViewDidStopRenderingNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

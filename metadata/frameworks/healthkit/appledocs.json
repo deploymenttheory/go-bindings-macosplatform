@@ -2359,7 +2359,7 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/disablebackgrounddelivery(for:withcompletion:)"
       },
       "-earliestPermittedSampleDate": {
-        "doc": "Returns the earliest date permitted for samples.",
+        "doc": "Returns the earliest date that the framework permits your app to save or read samples.",
         "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/earliestpermittedsampledate()"
       },
       "-enableBackgroundDeliveryForType:frequency:withCompletion:": {
@@ -2377,6 +2377,10 @@
       "-fitzpatrickSkinTypeWithError:": {
         "doc": "Reads the user’s Fitzpatrick Skin Type from the HealthKit store.",
         "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/fitzpatrickskintype()"
+      },
+      "-getEarliestAuthorizedSampleDateForTypes:completion:": {
+        "doc": "Returns the earliest date that the person permits your app to read samples for the given data types.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkhealthstore/getearliestauthorizedsampledate(for:completion:)"
       },
       "-getRequestStatusForAuthorizationToShareTypes:readTypes:completion:": {
         "doc": "Indicates whether the system presents the user with a permission sheet if your app requests authorization for the provided types.",
@@ -4085,8 +4089,8 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduletype-swift.enum"
       },
       "doseQuantity": {
-        "doc": "The dose quantity the person reports as taken.",
-        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/dosequantity-52hxr"
+        "doc": "The quantity of the medication taken.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/dosequantity-4cb5m"
       },
       "logStatus": {
         "doc": "The log status the system assigns to this dose event.",
@@ -4109,8 +4113,8 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddate"
       },
       "scheduledDoseQuantity": {
-        "doc": "The quantity of the medication scheduled to be taken.",
-        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddosequantity-477ge"
+        "doc": "The dose quantity a person is expected to take based on their medication schedule.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduleddosequantity-7ffhr"
       },
       "unit": {
         "doc": "The unit that the system associates with the medication when the person logs the dose.",

@@ -52,7 +52,7 @@ func NewTextContentStorage() *TextContentStorage {
 	return textContentStorageAdopt(_id)
 }
 
-// WithIncludesTextListMarkers sets the includes text list markers.
+// WithIncludesTextListMarkers sets when true, NSTextContentStorage assumes the paragraph with NSTextList includes the text list marker string.
 func (tcs *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 	return tcs

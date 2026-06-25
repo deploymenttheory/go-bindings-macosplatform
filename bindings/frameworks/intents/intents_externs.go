@@ -7,23 +7,45 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func INAnswerCallIntentIdentifier() uintptr {
+func INAnswerCallIntentIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INAnswerCallIntentIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func INHangUpCallIntentIdentifier() uintptr {
+func INHangUpCallIntentIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INHangUpCallIntentIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func INIntentErrorDomain() uintptr {
+func INIntentErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_intentsLib, "INIntentErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelHome() *foundation.NSString {
@@ -31,7 +53,11 @@ func INPersonHandleLabelHome() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelHomeFax() *foundation.NSString {
@@ -39,7 +65,11 @@ func INPersonHandleLabelHomeFax() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelMain() *foundation.NSString {
@@ -47,7 +77,11 @@ func INPersonHandleLabelMain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelMobile() *foundation.NSString {
@@ -55,7 +89,11 @@ func INPersonHandleLabelMobile() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelOther() *foundation.NSString {
@@ -63,7 +101,11 @@ func INPersonHandleLabelOther() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelPager() *foundation.NSString {
@@ -71,7 +113,11 @@ func INPersonHandleLabelPager() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelSchool() *foundation.NSString {
@@ -79,7 +125,11 @@ func INPersonHandleLabelSchool() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelWork() *foundation.NSString {
@@ -87,7 +137,11 @@ func INPersonHandleLabelWork() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabelWorkFax() *foundation.NSString {
@@ -95,7 +149,11 @@ func INPersonHandleLabelWorkFax() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonHandleLabeliPhone() *foundation.NSString {
@@ -103,7 +161,11 @@ func INPersonHandleLabeliPhone() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonRelationshipDaughter() *foundation.NSString {
@@ -111,7 +173,11 @@ func INPersonRelationshipDaughter() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func INPersonRelationshipSon() *foundation.NSString {
@@ -119,7 +185,11 @@ func INPersonRelationshipSon() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func IntentsVersionNumber() float64 {

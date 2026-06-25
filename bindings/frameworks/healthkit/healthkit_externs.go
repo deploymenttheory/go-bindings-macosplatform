@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
@@ -16,7 +17,11 @@ func HKCategoryTypeIdentifierAbdominalCramps() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierAcne() *foundation.NSString {
@@ -24,7 +29,11 @@ func HKCategoryTypeIdentifierAcne() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierAppetiteChanges() *foundation.NSString {
@@ -32,7 +41,11 @@ func HKCategoryTypeIdentifierAppetiteChanges() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierAppleStandHour() *foundation.NSString {
@@ -40,7 +53,11 @@ func HKCategoryTypeIdentifierAppleStandHour() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierAppleWalkingSteadinessEvent() *foundation.NSString {
@@ -48,7 +65,11 @@ func HKCategoryTypeIdentifierAppleWalkingSteadinessEvent() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierAudioExposureEvent() *foundation.NSString {
@@ -56,7 +77,11 @@ func HKCategoryTypeIdentifierAudioExposureEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierBladderIncontinence() *foundation.NSString {
@@ -64,7 +89,11 @@ func HKCategoryTypeIdentifierBladderIncontinence() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierBleedingAfterPregnancy() *foundation.NSString {
@@ -72,7 +101,11 @@ func HKCategoryTypeIdentifierBleedingAfterPregnancy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierBleedingDuringPregnancy() *foundation.NSString {
@@ -80,7 +113,11 @@ func HKCategoryTypeIdentifierBleedingDuringPregnancy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierBloating() *foundation.NSString {
@@ -88,7 +125,11 @@ func HKCategoryTypeIdentifierBloating() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierBreastPain() *foundation.NSString {
@@ -96,7 +137,11 @@ func HKCategoryTypeIdentifierBreastPain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierCervicalMucusQuality() *foundation.NSString {
@@ -104,7 +149,11 @@ func HKCategoryTypeIdentifierCervicalMucusQuality() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierChestTightnessOrPain() *foundation.NSString {
@@ -112,7 +161,11 @@ func HKCategoryTypeIdentifierChestTightnessOrPain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierChills() *foundation.NSString {
@@ -120,7 +173,11 @@ func HKCategoryTypeIdentifierChills() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierConstipation() *foundation.NSString {
@@ -128,7 +185,11 @@ func HKCategoryTypeIdentifierConstipation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierContraceptive() *foundation.NSString {
@@ -136,7 +197,11 @@ func HKCategoryTypeIdentifierContraceptive() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierCoughing() *foundation.NSString {
@@ -144,7 +209,11 @@ func HKCategoryTypeIdentifierCoughing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierDiarrhea() *foundation.NSString {
@@ -152,7 +221,11 @@ func HKCategoryTypeIdentifierDiarrhea() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierDizziness() *foundation.NSString {
@@ -160,7 +233,11 @@ func HKCategoryTypeIdentifierDizziness() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierDrySkin() *foundation.NSString {
@@ -168,7 +245,11 @@ func HKCategoryTypeIdentifierDrySkin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent() *foundation.NSString {
@@ -176,7 +257,11 @@ func HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierFainting() *foundation.NSString {
@@ -184,7 +269,11 @@ func HKCategoryTypeIdentifierFainting() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierFatigue() *foundation.NSString {
@@ -192,7 +281,11 @@ func HKCategoryTypeIdentifierFatigue() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierFever() *foundation.NSString {
@@ -200,7 +293,11 @@ func HKCategoryTypeIdentifierFever() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierGeneralizedBodyAche() *foundation.NSString {
@@ -208,7 +305,11 @@ func HKCategoryTypeIdentifierGeneralizedBodyAche() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHairLoss() *foundation.NSString {
@@ -216,7 +317,11 @@ func HKCategoryTypeIdentifierHairLoss() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHandwashingEvent() *foundation.NSString {
@@ -224,7 +329,11 @@ func HKCategoryTypeIdentifierHandwashingEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHeadache() *foundation.NSString {
@@ -232,7 +341,11 @@ func HKCategoryTypeIdentifierHeadache() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHeadphoneAudioExposureEvent() *foundation.NSString {
@@ -240,7 +353,11 @@ func HKCategoryTypeIdentifierHeadphoneAudioExposureEvent() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHeartburn() *foundation.NSString {
@@ -248,7 +365,11 @@ func HKCategoryTypeIdentifierHeartburn() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHighHeartRateEvent() *foundation.NSString {
@@ -256,7 +377,11 @@ func HKCategoryTypeIdentifierHighHeartRateEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHotFlashes() *foundation.NSString {
@@ -264,7 +389,11 @@ func HKCategoryTypeIdentifierHotFlashes() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierHypertensionEvent() *foundation.NSString {
@@ -272,7 +401,11 @@ func HKCategoryTypeIdentifierHypertensionEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierInfrequentMenstrualCycles() *foundation.NSString {
@@ -280,7 +413,11 @@ func HKCategoryTypeIdentifierInfrequentMenstrualCycles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierIntermenstrualBleeding() *foundation.NSString {
@@ -288,7 +425,11 @@ func HKCategoryTypeIdentifierIntermenstrualBleeding() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierIrregularHeartRhythmEvent() *foundation.NSString {
@@ -296,7 +437,11 @@ func HKCategoryTypeIdentifierIrregularHeartRhythmEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierIrregularMenstrualCycles() *foundation.NSString {
@@ -304,7 +449,11 @@ func HKCategoryTypeIdentifierIrregularMenstrualCycles() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLactation() *foundation.NSString {
@@ -312,7 +461,11 @@ func HKCategoryTypeIdentifierLactation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLossOfSmell() *foundation.NSString {
@@ -320,7 +473,11 @@ func HKCategoryTypeIdentifierLossOfSmell() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLossOfTaste() *foundation.NSString {
@@ -328,7 +485,11 @@ func HKCategoryTypeIdentifierLossOfTaste() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLowCardioFitnessEvent() *foundation.NSString {
@@ -336,7 +497,11 @@ func HKCategoryTypeIdentifierLowCardioFitnessEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLowHeartRateEvent() *foundation.NSString {
@@ -344,7 +509,11 @@ func HKCategoryTypeIdentifierLowHeartRateEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierLowerBackPain() *foundation.NSString {
@@ -352,7 +521,11 @@ func HKCategoryTypeIdentifierLowerBackPain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierMemoryLapse() *foundation.NSString {
@@ -360,7 +533,11 @@ func HKCategoryTypeIdentifierMemoryLapse() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierMenstrualFlow() *foundation.NSString {
@@ -368,7 +545,11 @@ func HKCategoryTypeIdentifierMenstrualFlow() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierMindfulSession() *foundation.NSString {
@@ -376,7 +557,11 @@ func HKCategoryTypeIdentifierMindfulSession() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierMoodChanges() *foundation.NSString {
@@ -384,7 +569,11 @@ func HKCategoryTypeIdentifierMoodChanges() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierNausea() *foundation.NSString {
@@ -392,7 +581,11 @@ func HKCategoryTypeIdentifierNausea() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierNightSweats() *foundation.NSString {
@@ -400,7 +593,11 @@ func HKCategoryTypeIdentifierNightSweats() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierOvulationTestResult() *foundation.NSString {
@@ -408,7 +605,11 @@ func HKCategoryTypeIdentifierOvulationTestResult() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierPelvicPain() *foundation.NSString {
@@ -416,7 +617,11 @@ func HKCategoryTypeIdentifierPelvicPain() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierPersistentIntermenstrualBleeding() *foundation.NSString {
@@ -424,7 +629,11 @@ func HKCategoryTypeIdentifierPersistentIntermenstrualBleeding() *foundation.NSSt
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierPregnancy() *foundation.NSString {
@@ -432,7 +641,11 @@ func HKCategoryTypeIdentifierPregnancy() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierPregnancyTestResult() *foundation.NSString {
@@ -440,7 +653,11 @@ func HKCategoryTypeIdentifierPregnancyTestResult() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierProgesteroneTestResult() *foundation.NSString {
@@ -448,7 +665,11 @@ func HKCategoryTypeIdentifierProgesteroneTestResult() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierProlongedMenstrualPeriods() *foundation.NSString {
@@ -456,7 +677,11 @@ func HKCategoryTypeIdentifierProlongedMenstrualPeriods() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat() *foundation.NSString {
@@ -464,7 +689,11 @@ func HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierRunnyNose() *foundation.NSString {
@@ -472,7 +701,11 @@ func HKCategoryTypeIdentifierRunnyNose() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSexualActivity() *foundation.NSString {
@@ -480,7 +713,11 @@ func HKCategoryTypeIdentifierSexualActivity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierShortnessOfBreath() *foundation.NSString {
@@ -488,7 +725,11 @@ func HKCategoryTypeIdentifierShortnessOfBreath() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSinusCongestion() *foundation.NSString {
@@ -496,7 +737,11 @@ func HKCategoryTypeIdentifierSinusCongestion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSkippedHeartbeat() *foundation.NSString {
@@ -504,7 +749,11 @@ func HKCategoryTypeIdentifierSkippedHeartbeat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSleepAnalysis() *foundation.NSString {
@@ -512,7 +761,11 @@ func HKCategoryTypeIdentifierSleepAnalysis() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSleepApneaEvent() *foundation.NSString {
@@ -520,7 +773,11 @@ func HKCategoryTypeIdentifierSleepApneaEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSleepChanges() *foundation.NSString {
@@ -528,7 +785,11 @@ func HKCategoryTypeIdentifierSleepChanges() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierSoreThroat() *foundation.NSString {
@@ -536,7 +797,11 @@ func HKCategoryTypeIdentifierSoreThroat() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierToothbrushingEvent() *foundation.NSString {
@@ -544,7 +809,11 @@ func HKCategoryTypeIdentifierToothbrushingEvent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierVaginalDryness() *foundation.NSString {
@@ -552,7 +821,11 @@ func HKCategoryTypeIdentifierVaginalDryness() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierVomiting() *foundation.NSString {
@@ -560,7 +833,11 @@ func HKCategoryTypeIdentifierVomiting() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCategoryTypeIdentifierWheezing() *foundation.NSString {
@@ -568,7 +845,11 @@ func HKCategoryTypeIdentifierWheezing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierActivityMoveMode() *foundation.NSString {
@@ -576,7 +857,11 @@ func HKCharacteristicTypeIdentifierActivityMoveMode() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierBiologicalSex() *foundation.NSString {
@@ -584,7 +869,11 @@ func HKCharacteristicTypeIdentifierBiologicalSex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierBloodType() *foundation.NSString {
@@ -592,7 +881,11 @@ func HKCharacteristicTypeIdentifierBloodType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierDateOfBirth() *foundation.NSString {
@@ -600,7 +893,11 @@ func HKCharacteristicTypeIdentifierDateOfBirth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierFitzpatrickSkinType() *foundation.NSString {
@@ -608,7 +905,11 @@ func HKCharacteristicTypeIdentifierFitzpatrickSkinType() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCharacteristicTypeIdentifierWheelchairUse() *foundation.NSString {
@@ -616,7 +917,11 @@ func HKCharacteristicTypeIdentifierWheelchairUse() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of allergies or intolerances.
@@ -625,7 +930,11 @@ func HKClinicalTypeIdentifierAllergyRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records that represent clinical notes.
@@ -634,7 +943,11 @@ func HKClinicalTypeIdentifierClinicalNoteRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of a condition, problem, or diagnosis.
@@ -643,7 +956,11 @@ func HKClinicalTypeIdentifierConditionRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records containing information about the user’s insurance coverage.
@@ -652,7 +969,11 @@ func HKClinicalTypeIdentifierCoverageRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of vaccine administration.
@@ -661,7 +982,11 @@ func HKClinicalTypeIdentifierImmunizationRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of lab results.
@@ -670,7 +995,11 @@ func HKClinicalTypeIdentifierLabResultRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of medication prescription, intake, or administration.
@@ -679,7 +1008,11 @@ func HKClinicalTypeIdentifierMedicationRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of clinical procedures.
@@ -688,7 +1021,11 @@ func HKClinicalTypeIdentifierProcedureRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A type identifier for records of vital signs.
@@ -697,7 +1034,11 @@ func HKClinicalTypeIdentifierVitalSignRecord() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCorrelationTypeIdentifierBloodPressure() *foundation.NSString {
@@ -705,7 +1046,11 @@ func HKCorrelationTypeIdentifierBloodPressure() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKCorrelationTypeIdentifierFood() *foundation.NSString {
@@ -713,78 +1058,166 @@ func HKCorrelationTypeIdentifierFood() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKDataTypeIdentifierHeartbeatSeries() uintptr {
+func HKDataTypeIdentifierHeartbeatSeries() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDataTypeIdentifierHeartbeatSeries")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A state of mind type that records the user's mental health
-func HKDataTypeIdentifierStateOfMind() uintptr {
+func HKDataTypeIdentifierStateOfMind() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDataTypeIdentifierStateOfMind")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The user annotated medication type that represents a medication concept.
-func HKDataTypeIdentifierUserAnnotatedMedicationConcept() uintptr {
+func HKDataTypeIdentifierUserAnnotatedMedicationConcept() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDataTypeIdentifierUserAnnotatedMedicationConcept")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDetailedCDAValidationErrorKey @discussion    This may be used with the validationError parameter of CDADocumentSampleWithData:startDate:endDate:device:metadata:validationError: to obtain a detailed description of the validation errors encountered when creating a CDA document.
-func HKDetailedCDAValidationErrorKey() uintptr {
+func HKDetailedCDAValidationErrorKey() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDetailedCDAValidationErrorKey")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyFirmwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a firmware version. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyFirmwareVersion() uintptr {
+func HKDevicePropertyKeyFirmwareVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyFirmwareVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyHardwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a hardware version. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyHardwareVersion() uintptr {
+func HKDevicePropertyKeyHardwareVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyHardwareVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyLocalIdentifier @abstract      Used with predicateForObjectsWithDeviceProperty to specify a local identifier. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyLocalIdentifier() uintptr {
+func HKDevicePropertyKeyLocalIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyLocalIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyManufacturer @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device manufacturer. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyManufacturer() uintptr {
+func HKDevicePropertyKeyManufacturer() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyManufacturer")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyModel @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device model. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyModel() uintptr {
+func HKDevicePropertyKeyModel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyModel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyName @abstract      Used with predicateForObjectsWithDeviceProperty to specify a device name. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyName() uintptr {
+func HKDevicePropertyKeyName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeySoftwareVersion @abstract      Used with predicateForObjectsWithDeviceProperty to specify a software version. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeySoftwareVersion() uintptr {
+func HKDevicePropertyKeySoftwareVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeySoftwareVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKDevicePropertyKeyUDIDeviceIdentifier @abstract      Used with predicateForObjectsWithDeviceProperty to specify a UDI device identifier. @discussion    The expected value type is an NSString.
-func HKDevicePropertyKeyUDIDeviceIdentifier() uintptr {
+func HKDevicePropertyKeyUDIDeviceIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKDevicePropertyKeyUDIDeviceIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKDocumentTypeIdentifierCDA() *foundation.NSString {
@@ -792,12 +1225,23 @@ func HKDocumentTypeIdentifierCDA() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKErrorDomain() uintptr {
+func HKErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @abstract      The "DSTU2" release: http://hl7.org/fhir/DSTU2/
@@ -884,13 +1328,24 @@ func HKHealthConceptDomainMedication() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // A medication dose event type that represents a single dose administration for a medication.
-func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() uintptr {
+func HKMedicationDoseEventTypeIdentifierMedicationDoseEvent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMedicationDoseEventTypeIdentifierMedicationDoseEvent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication comes in capsule form, such as a hard-shell capsule or softgel.
@@ -899,7 +1354,11 @@ func HKMedicationGeneralFormCapsule() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as a cream.
@@ -908,7 +1367,11 @@ func HKMedicationGeneralFormCream() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is administered through a device, such as an infusion pump for controlled fluid delivery.
@@ -917,7 +1380,11 @@ func HKMedicationGeneralFormDevice() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is taken as drops, for example eye drops or ear drops.
@@ -926,7 +1393,11 @@ func HKMedicationGeneralFormDrops() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as a foam.
@@ -935,7 +1406,11 @@ func HKMedicationGeneralFormFoam() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as a gel.
@@ -944,7 +1419,11 @@ func HKMedicationGeneralFormGel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is delivered through an inhaler.
@@ -953,7 +1432,11 @@ func HKMedicationGeneralFormInhaler() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is given as an injection.
@@ -962,7 +1445,11 @@ func HKMedicationGeneralFormInjection() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is taken as a liquid, such as a syrup.
@@ -971,7 +1458,11 @@ func HKMedicationGeneralFormLiquid() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as a lotion.
@@ -980,7 +1471,11 @@ func HKMedicationGeneralFormLotion() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as an ointment.
@@ -989,7 +1484,11 @@ func HKMedicationGeneralFormOintment() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied as a patch worn on the skin.
@@ -998,7 +1497,11 @@ func HKMedicationGeneralFormPatch() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is taken as a powder.
@@ -1007,7 +1510,11 @@ func HKMedicationGeneralFormPowder() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is delivered as a spray, for example a nasal spray or throat spray.
@@ -1016,7 +1523,11 @@ func HKMedicationGeneralFormSpray() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is delivered as a suppository.
@@ -1025,7 +1536,11 @@ func HKMedicationGeneralFormSuppository() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication comes in tablet form, such as a pill or caplet.
@@ -1034,7 +1549,11 @@ func HKMedicationGeneralFormTablet() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The medication is applied topically in a form that wasn't specified.
@@ -1043,7 +1562,11 @@ func HKMedicationGeneralFormTopical() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The system doesn't know the general form of the medication.
@@ -1052,473 +1575,1023 @@ func HKMedicationGeneralFormUnknown() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyActivityType @abstract      Represents the activity type related to the sample @discussion    The expected value type is an NSNumber containing a HKWorkoutActivityType value.
-func HKMetadataKeyActivityType() uintptr {
+func HKMetadataKeyActivityType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyActivityType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAlgorithmVersion @abstract      The version of the algorithm used to generate the sample. @discussion    The key for an NSNumber containing an NSInteger indicating the version of the algorithm used to generate the sample.
-func HKMetadataKeyAlgorithmVersion() uintptr {
+func HKMetadataKeyAlgorithmVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAlgorithmVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAlpineSlopeGrade @abstract      Represents the grade of a ski run. @discussion    Alpine slope grade is measured in percent where 100% grade is a 45 degree slope. The expected value type is an HKQuantity object compatible with percent unit. This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-func HKMetadataKeyAlpineSlopeGrade() uintptr {
+func HKMetadataKeyAlpineSlopeGrade() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAlpineSlopeGrade")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAppleDeviceCalibrated @abstract      Represents the calibration status of the devices used to generate this sample. @discussion    The expected value is a boolean NSNumber indicating whether the sample value was estimated using a sufficient set of device calibration data. The calibration status of a device may vary per data type. This key is read-only.
-func HKMetadataKeyAppleDeviceCalibrated() uintptr {
+func HKMetadataKeyAppleDeviceCalibrated() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAppleDeviceCalibrated")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAppleECGAlgorithmVersion @abstract      Represents the ECG algorithm version that was used to generate a particular HKElectrocardiogram. @discussion    The expected value type is an an NSNumber containing a HKAppleECGAlgorithmVersion value.
-func HKMetadataKeyAppleECGAlgorithmVersion() uintptr {
+func HKMetadataKeyAppleECGAlgorithmVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAppleECGAlgorithmVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAppleFitnessPlusCatalogIdentifier @abstract      Contains the catalog identifier of the Fitness+ workout. @discussion    This key only exists if the workout was completed in Fitness+. The expected value type is an NSString containing the Fitness+ catalog identifier.
-func HKMetadataKeyAppleFitnessPlusCatalogIdentifier() uintptr {
+func HKMetadataKeyAppleFitnessPlusCatalogIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAppleFitnessPlusCatalogIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAppleFitnessPlusSession @abstract      Represents whether or not a workout is a Fitness+ workout. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyAppleFitnessPlusSession() uintptr {
+func HKMetadataKeyAppleFitnessPlusSession() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAppleFitnessPlusSession")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAudioExposureDuration @abstract      Represents the duration of time that is covered by audio samples. @discussion    The expected value type is an HKQuantity object compatible with a time unit. This key may be set on headphone audio exposure event samples to indicate the duration of time that the user was actually exposed to audio through their headphones.
-func HKMetadataKeyAudioExposureDuration() uintptr {
+func HKMetadataKeyAudioExposureDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAudioExposureDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAudioExposureLevel @abstract      Represents the audio level associated with an audio event. @discussion    The expected value is an HKQuantity whose value is the audio level associated with the event measured in dBASPL units.
-func HKMetadataKeyAudioExposureLevel() uintptr {
+func HKMetadataKeyAudioExposureLevel() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAudioExposureLevel")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAverageMETs @abstract      Represents the average METs, or Metabolic Equivalent of Task during a workout. @discussion    The expected value type is an HKQuantity expressed in a METs (kcal/(kg*hr)) unit. This key may be set on an HKWorkout object to represent the average workout intensity represented as METs over the entire workout duration.
-func HKMetadataKeyAverageMETs() uintptr {
+func HKMetadataKeyAverageMETs() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAverageMETs")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyAverageSpeed @abstract      Represents the average speed for a workout segment or distance sample. @discussion    This represents the average speed when moving so it may not match the value of distance/time for a distance sample. The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-func HKMetadataKeyAverageSpeed() uintptr {
+func HKMetadataKeyAverageSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyAverageSpeed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyBarometricPressure @abstract      Represents the barometric pressure recorded at the time of a sample. @discussion    The expected value type is an HKQuantity representing a value in units of pressure (atmospheres, pascals, millimeters of Mercury).
-func HKMetadataKeyBarometricPressure() uintptr {
+func HKMetadataKeyBarometricPressure() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyBarometricPressure")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyBloodGlucoseMealTime @abstract      Indicates the relative timing of a blood glucose reading to a meal. @discussion    This timing, as well as other factors like meal composition, can be used by medical professionals to determine the acceptable value range for a blood glucose reading. For use cases requiring the capture of precise timing and composition information, developers should record additional dietary samples, such as HKQuantityTypeIdentifierDietaryCarbohydrates. The expected value type is an NSNumber containing a HKBloodGlucoseMealTime value.
-func HKMetadataKeyBloodGlucoseMealTime() uintptr {
+func HKMetadataKeyBloodGlucoseMealTime() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyBloodGlucoseMealTime")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyBodyTemperatureSensorLocation @abstract      Represents the location where a particular body temperature reading was taken. @discussion    The expected value type is an NSNumber containing a HKBodyTemperatureSensorLocation value.
-func HKMetadataKeyBodyTemperatureSensorLocation() uintptr {
+func HKMetadataKeyBodyTemperatureSensorLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyBodyTemperatureSensorLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyCoachedWorkout @abstract      Represents whether or not a workout was performed with a coach or personal trainer. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyCoachedWorkout() uintptr {
+func HKMetadataKeyCoachedWorkout() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyCoachedWorkout")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyCrossTrainerDistance @abstract      Represents the distance covered during a cross trainer workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during a cross trainer workout.
-func HKMetadataKeyCrossTrainerDistance() uintptr {
+func HKMetadataKeyCrossTrainerDistance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyCrossTrainerDistance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyCyclingFunctionalThresholdPowerTestType @abstract      Represents the test used to determine a Cycling Functional Threshold Power value. @discussion    The expected value type is an NSNumber containing a HKCyclingFunctionalThresholdPowerTestType value.
-func HKMetadataKeyCyclingFunctionalThresholdPowerTestType() uintptr {
+func HKMetadataKeyCyclingFunctionalThresholdPowerTestType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyCyclingFunctionalThresholdPowerTestType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyDateOfEarliestDataUsedForEstimate @abstract      Represents how far back an estimation algorithm incorporated data from. @discussion    The expected value is an NSDate indicating the earliest date of data used to produce an estimated value for an HKSample.
-func HKMetadataKeyDateOfEarliestDataUsedForEstimate() uintptr {
+func HKMetadataKeyDateOfEarliestDataUsedForEstimate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDateOfEarliestDataUsedForEstimate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyDeviceManufacturerName @abstract      Represents the name of the manufacturer of the device that took the reading. @discussion    The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-func HKMetadataKeyDeviceManufacturerName() uintptr {
+func HKMetadataKeyDeviceManufacturerName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDeviceManufacturerName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyDeviceName @abstract      Represents the name of the device that took the reading. @discussion    The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-func HKMetadataKeyDeviceName() uintptr {
+func HKMetadataKeyDeviceName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDeviceName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyDevicePlacementSide @abstract      Represents the detected placement of the device during the bout of walking @discussion    The expected value type is an NSNumber containing a HKDevicePlacementSide value.  This key is expected to be written for Walking Aymmetry Percentage.
-func HKMetadataKeyDevicePlacementSide() uintptr {
+func HKMetadataKeyDevicePlacementSide() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDevicePlacementSide")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyUDIProductionIdentifier @abstract      Represents the serial number of the device that created the HKObject. @discussion    The expected value type is NSString.
-func HKMetadataKeyDeviceSerialNumber() uintptr {
+func HKMetadataKeyDeviceSerialNumber() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDeviceSerialNumber")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyDigitalSignature @abstract      Represents a digital signature validating the origin of an HKObject's value. @discussion    Intended to provide data integrity for sample data produced by trusted (tamper resistant) measuring devices. The digital signature format should be CMS (Cryptographic Message Syntax specified in IETF RFC 5652). It should be a “Signed-data” type signature containing the data items to be signed (e.g., timestamp, value, etc.) using ASN.1 encoding with DER (Distinguished Encoding Rules). The entire enveloping signature should be further encoded using base64. Recommended digest is SHA256, and recommended cipher is FIPS PUB 186-4 Digital Signature Standard Elliptic Curve P-256. See documentation for details.
-func HKMetadataKeyDigitalSignature() uintptr {
+func HKMetadataKeyDigitalSignature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyDigitalSignature")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyElevationAscended @abstract      Represents the cumulative elevation ascent during a workout. @discussion    The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
-func HKMetadataKeyElevationAscended() uintptr {
+func HKMetadataKeyElevationAscended() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyElevationAscended")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyElevationDescended @abstract      Represents the cumulative elevation descent during a workout. @discussion    The expected value type is an HKQuantity object compatible with length unit. This key may be set on a workout, workout segments or distance samples.
-func HKMetadataKeyElevationDescended() uintptr {
+func HKMetadataKeyElevationDescended() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyElevationDescended")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyExternalUUID @abstract      Represents a unique identifier for an HKObject that is set by its source. Uniqueness of objects with the same value of this key is not enforced by HealthKit. @discussion    The expected value type is NSString.
-func HKMetadataKeyExternalUUID() uintptr {
+func HKMetadataKeyExternalUUID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyExternalUUID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyFitnessMachineDuration @abstract      Represents the workout duration as displayed by a GymKit connected fitness machine. @discussion    The expected value type is an HKQuantity object compatible with a time unit. This key may be set on an HKWorkout object to represent the duration of the workout as displayed by a GymKit connected fitness machine.
-func HKMetadataKeyFitnessMachineDuration() uintptr {
+func HKMetadataKeyFitnessMachineDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyFitnessMachineDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyFoodType @abstract      Represents the type of food that was consumed when creating an HKObject. @discussion    This should be a short string representing the type of food, such as 'Banana'. The expected value type is NSString.
-func HKMetadataKeyFoodType() uintptr {
+func HKMetadataKeyFoodType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyFoodType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyGlassesPrescriptionDescription @abstract      Represents the description that may be associated with a HKGlassesPrescription. @discussion    Glasses are often customized for different purposes like reading or distance. Prescriptions received by an eye care professional can provide different ocular functions. Users may also customize their glasses for different scenarios. The value of the metadata is a NSString that describes the purpose of a HKGlassesPrescription.
-func HKMetadataKeyGlassesPrescriptionDescription() uintptr {
+func HKMetadataKeyGlassesPrescriptionDescription() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyGlassesPrescriptionDescription")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyGroupFitness @abstract      Represents whether or not a workout was performed as part of a group fitness class. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyGroupFitness() uintptr {
+func HKMetadataKeyGroupFitness() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyGroupFitness")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeadphoneGain @abstract      Represents the headphone gain associated with a Headphone audio exposure event. @discussion    The expected value is an HKQuantity whose value is the gain associated with the event measured in decibels in A-weighted Sound Pressure Level units.
-func HKMetadataKeyHeadphoneGain() uintptr {
+func HKMetadataKeyHeadphoneGain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeadphoneGain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateEventThreshold @abstract      Represents the threshold heart rate that triggered a heart rate event. @discussion    The expected value is an HKQuantity object with a compatible unit (e.g. count/min). This key will be set on heart rate event samples of type HKCategoryTypeIdentifierHighHeartRateEvent and HKCategoryTypeIdentifierLowHeartRateEvent.
-func HKMetadataKeyHeartRateEventThreshold() uintptr {
+func HKMetadataKeyHeartRateEventThreshold() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateEventThreshold")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateMotionContext @abstract      Represents the context in which a particular heart rate reading was taken. @discussion    The expected value type is an NSNumber containing a HKHeartRateMotionContext value. The value is active (HKHeartRateMotionContextActive) if the user is in motion or working out, sedentary if the user is still (HKHeartRateMotionContextSedentary), or not set (HKHeartRateMotionContextNotSet) otherwise.
-func HKMetadataKeyHeartRateMotionContext() uintptr {
+func HKMetadataKeyHeartRateMotionContext() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateMotionContext")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateRecoveryActivityDuration @abstract      Represents the duration of activity which preceded a Heart Rate Recovery value @discussion    The expected value type is an HKQuantity object compatible with a time unit.
-func HKMetadataKeyHeartRateRecoveryActivityDuration() uintptr {
+func HKMetadataKeyHeartRateRecoveryActivityDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateRecoveryActivityDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateRecoveryActivityType @abstract      Represents the activity which preceded a Heart Rate Recovery value @discussion    The expected value type is an NSNumber containing a HKWorkoutActivityType value.
-func HKMetadataKeyHeartRateRecoveryActivityType() uintptr {
+func HKMetadataKeyHeartRateRecoveryActivityType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateRecoveryActivityType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate @abstract      Represents the maximum heart rate observed during the corresponding Heart Rate Recovery sample interval @discussion    The expected value type is an HKQuantity object compatible with "count/min" unit (eg "BPM").
-func HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate() uintptr {
+func HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateRecoveryTestType @abstract      Represents the test used to determine a Heart Rate Recovery value @discussion    The expected value type is an NSNumber containing a HKHeartRateRecoveryTestType value.
-func HKMetadataKeyHeartRateRecoveryTestType() uintptr {
+func HKMetadataKeyHeartRateRecoveryTestType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateRecoveryTestType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyHeartRateSensorLocation @abstract      Represents the location where a particular heart rate reading was taken. @discussion    The expected value type is an NSNumber containing a HKHeartRateSensorLocation value.
-func HKMetadataKeyHeartRateSensorLocation() uintptr {
+func HKMetadataKeyHeartRateSensorLocation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyHeartRateSensorLocation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyIndoorBikeDistance @abstract      Represents the distance covered during an indoor bike workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the distance covered during an indoor bike workout.
-func HKMetadataKeyIndoorBikeDistance() uintptr {
+func HKMetadataKeyIndoorBikeDistance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyIndoorBikeDistance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyIndoorWorkout @abstract      Represents whether or not a workout was performed indoors as opposed to outdoors. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyIndoorWorkout() uintptr {
+func HKMetadataKeyIndoorWorkout() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyIndoorWorkout")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyInsulinDeliveryReason @abstract      Represents the medical reason for the delivery of an insulin dose. This is a required metadata key for samples of type HKQuantityTypeIdentifierInsulinDelivery. @discussion    The expected value type is an NSNumber containing a HKInsulinDeliveryReason value.
-func HKMetadataKeyInsulinDeliveryReason() uintptr {
+func HKMetadataKeyInsulinDeliveryReason() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyInsulinDeliveryReason")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyLapLength @abstract      Represents the length of a lap recorded during a workout. @discussion    The expected value type is an HKQuantity object compatible with a length unit. This key may be set on an HKWorkout object to represent the length of a lap.
-func HKMetadataKeyLapLength() uintptr {
+func HKMetadataKeyLapLength() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyLapLength")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyLowCardioFitnessEventThreshold @abstract      Can be used to store a snapshot of the threshold used to classify VO2Max values as "low" @discussion    This key should be used to store an HKQuantity, with a unit of `ml/kg·min`, representing the low fitness threshold.
-func HKMetadataKeyLowCardioFitnessEventThreshold() uintptr {
+func HKMetadataKeyLowCardioFitnessEventThreshold() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyLowCardioFitnessEventThreshold")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyMaximumLightIntensity @abstract      Represents maximum intensity of light for an outdoor time sample. @discussion    The expected value type is an HKQuantity expressed in HKUnit Lux.
-func HKMetadataKeyMaximumLightIntensity() uintptr {
+func HKMetadataKeyMaximumLightIntensity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyMaximumLightIntensity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyMaximumSpeed @abstract      Represents the maximum speed for a workout segment or distance sample. @discussion    The expected value type is an HKQuantity object compatible with a speed unit (e.g. m/s). This key may be set on quantity samples of type HKQuantityTypeIdentifierDistanceDownhillSnowSports or a workout segment representing a skiing run.
-func HKMetadataKeyMaximumSpeed() uintptr {
+func HKMetadataKeyMaximumSpeed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyMaximumSpeed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyMenstrualCycleStart @abstract      Indicates whether or not the sample represents the start of a menstrual cycle. This is a required metadata key for category samples of type HKCategoryTypeIdentifierMenstrualFlow. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyMenstrualCycleStart() uintptr {
+func HKMetadataKeyMenstrualCycleStart() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyMenstrualCycleStart")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyPhysicalEffortEstimationType @abstract      Represents the estimation type used to create the Physical Effort Sample @discussion    The expected value type is an NSNumber containing a HKPhysicalEffortEstimationType value.
-func HKMetadataKeyPhysicalEffortEstimationType() uintptr {
+func HKMetadataKeyPhysicalEffortEstimationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyPhysicalEffortEstimationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyQuantityClampedToLowerBound @abstract      Indicates the quantity was clamped to a lower bound. @discussion    Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some lower bound
-func HKMetadataKeyQuantityClampedToLowerBound() uintptr {
+func HKMetadataKeyQuantityClampedToLowerBound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyQuantityClampedToLowerBound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyQuantityClampedToUpperBound @abstract      Indicates the quantity was clamped to an upper bound. @discussion    Value is a BOOL indicating whether or not the quantity value in the sample has been clamped to some upper bound
-func HKMetadataKeyQuantityClampedToUpperBound() uintptr {
+func HKMetadataKeyQuantityClampedToUpperBound() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyQuantityClampedToUpperBound")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyReferenceRangeLowerLimit @abstract      Represents the lower limit of the reference range for a lab result. @discussion    The expected value type is an NSNumber.
-func HKMetadataKeyReferenceRangeLowerLimit() uintptr {
+func HKMetadataKeyReferenceRangeLowerLimit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyReferenceRangeLowerLimit")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyReferenceRangeUpperLimit @abstract      Represents the upper limit of the reference range for a lab result. @discussion    The expected value type is an NSNumber.
-func HKMetadataKeyReferenceRangeUpperLimit() uintptr {
+func HKMetadataKeyReferenceRangeUpperLimit() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyReferenceRangeUpperLimit")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySWOLFScore @abstract      Represents sum of strokes per length and time for the length. Calculated for each lap event and segment event during swimming workout. @discussion    The expected value type is an NSNumber containing a score. This key may be set on an HKWorkout object to represent the SWOLF Score during the whole workout.
-func HKMetadataKeySWOLFScore() uintptr {
+func HKMetadataKeySWOLFScore() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySWOLFScore")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySessionEstimate @abstract      Represents a per-session estimate prior to longitudinal smoothing applied to the value stored in the associated HKQuantitySample. @discussion    The expected value type is an HKQuantity object with a unit compatible with the associated HKQuantitySample.
-func HKMetadataKeySessionEstimate() uintptr {
+func HKMetadataKeySessionEstimate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySessionEstimate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySexualActivityProtectionUsed @abstract      Represents whether or not protection was used during sexual activity. This can be used to track either protection from STIs or protection from pregnancy. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeySexualActivityProtectionUsed() uintptr {
+func HKMetadataKeySexualActivityProtectionUsed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySexualActivityProtectionUsed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySwimmingLocationType @abstract      Represents the location type of a swimming workout. @discussion    The expected value type is an NSNumber containing an HKWorkoutSwimmingLocationType value. This key may be set on an HKWorkout object to represent the swimming location type.
-func HKMetadataKeySwimmingLocationType() uintptr {
+func HKMetadataKeySwimmingLocationType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySwimmingLocationType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySwimmingStrokeStyle @abstract      Represents the predominant stroke style during a lap of a swimming workout. @discussion    The expected value type is an NSNumber containing an HKSwimmingStrokeStyle value. This key may be set on an HKWorkoutEvent object with the type HKWorkoutEventTypeLap to represent the predominant style used during the lap.
-func HKMetadataKeySwimmingStrokeStyle() uintptr {
+func HKMetadataKeySwimmingStrokeStyle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySwimmingStrokeStyle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySyncIdentifier @abstract      Represents an identifier for an HKObject that is set by its source and is used by HealthKit to uniquely identify an object. @discussion    Saving a HKObject with a HKMetadataKeySyncIdentifier will replace an existing HKObject with the same HKMetadataKeySyncIdentifier value if the new HKObject has a greater HKMetadataKeySyncVersion. The new sample will be added to all HKWorkouts or HKCorrelations containing the replaced sample. HKMetadataKeySyncVersion must be provided if HKMetadataKeySyncIdentifier is provided. The expected value type is NSString.
-func HKMetadataKeySyncIdentifier() uintptr {
+func HKMetadataKeySyncIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySyncIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeySyncVersion @abstract      Represents the version of the HKObject that is set by its source and is used by HealthKit to identify an object's version. @discussion    HKMetadataKeySyncVersion may not be provided if HKMetadataKeySyncIdentifier is not provided. The expected value type is NSNumber.
-func HKMetadataKeySyncVersion() uintptr {
+func HKMetadataKeySyncVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeySyncVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyTimeZone @abstract      Represents the time zone that the user was in when the HKObject was created. @discussion    The expected value type is an NSString compatible with NSTimeZone's +timeZoneWithName:.
-func HKMetadataKeyTimeZone() uintptr {
+func HKMetadataKeyTimeZone() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyTimeZone")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyUDIDeviceIdentifier @abstract      Represents the device identifier portion of a device's UDI (Unique Device Identifier). @discussion    The device identifier can be used to reference the GUDID (Globally Unique Device Identifier Database). The expected value type is NSString. * Note that the use of this key is now discouraged in favor of the HKDevice class.
-func HKMetadataKeyUDIDeviceIdentifier() uintptr {
+func HKMetadataKeyUDIDeviceIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyUDIDeviceIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyUDIProductionIdentifier @abstract      Represents the production identifier portion of a device's UDI (Unique Device Identifier). @discussion    While part of a device's UDI, the production identifier is not saved in the FDA's GUDID (Globally Unique Device Identifier Database) and its use in HealthKit is now discouraged for user privacy reasons. Apps should consider handling this independently of HealthKit APIs if needed. The expected value type is NSString.
-func HKMetadataKeyUDIProductionIdentifier() uintptr {
+func HKMetadataKeyUDIProductionIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyUDIProductionIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyUserMotionContext @abstract      Represents the user's motion when a particular sample was taken. @discussion    The expected value type is an NSNumber containing a HKUserMotionContext value. The value is active (HKUserMotionContextActive) if the user is in motion or working out, stationary if the user is still (HKUserMotionContextStationary), or not set (HKUserMotionContextNotSet) otherwise.
-func HKMetadataKeyUserMotionContext() uintptr {
+func HKMetadataKeyUserMotionContext() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyUserMotionContext")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyVO2MaxTestType @abstract      Represents the test used to create VO2 Max Sample @discussion    The expected value type is an NSNumber containing a HKVO2MaxTestType value.
-func HKMetadataKeyVO2MaxTestType() uintptr {
+func HKMetadataKeyVO2MaxTestType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyVO2MaxTestType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyVO2MaxValue @abstract      Represents a VO2Max value that can be associated with, for example, Cardio Fitness Events @discussion    This key should be used to store an HKQuantity with a unit of `ml/kg·min`
-func HKMetadataKeyVO2MaxValue() uintptr {
+func HKMetadataKeyVO2MaxValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyVO2MaxValue")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWasTakenInLab @abstract      Represents whether or not the reading was taken in a lab. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyWasTakenInLab() uintptr {
+func HKMetadataKeyWasTakenInLab() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWasTakenInLab")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWasUserEntered @abstract      Represents whether or not the reading was entered by the user. @discussion    The expected value type is an NSNumber containing a BOOL value.
-func HKMetadataKeyWasUserEntered() uintptr {
+func HKMetadataKeyWasUserEntered() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWasUserEntered")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWaterSalinity @abstract      Represents the water salinity for an underwater depth or water temperature sample. @discussion    The expected value type is an NSNumber containing a HKWaterSalinity value.
-func HKMetadataKeyWaterSalinity() uintptr {
+func HKMetadataKeyWaterSalinity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWaterSalinity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWeatherCondition @abstract      Represents the weather condition during the sample. @discussion    The expected value type is an NSNumber containing an HKWeatherCondition value. This key may be set on an HKWorkout object to represent the overall weather condition during the workout.
-func HKMetadataKeyWeatherCondition() uintptr {
+func HKMetadataKeyWeatherCondition() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWeatherCondition")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWeatherHumidity @abstract      Represents the weather humidity during the sample. @discussion    The expected value type is an HKQuantity expressed in percent. This key may be set on an HKWorkout object to represent the overall humidity during the workout.
-func HKMetadataKeyWeatherHumidity() uintptr {
+func HKMetadataKeyWeatherHumidity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWeatherHumidity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWeatherTemperature @abstract      Represents the weather temperature during the sample. @discussion    The expected value type is an HKQuantity expressed in a temperature unit. This key may be set on an HKWorkout object to represent the overall temperature during the workout.
-func HKMetadataKeyWeatherTemperature() uintptr {
+func HKMetadataKeyWeatherTemperature() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWeatherTemperature")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKMetadataKeyWorkoutBrandName @abstract      Represents the brand name of a particular workout. @discussion    The expected value type is NSString.
-func HKMetadataKeyWorkoutBrandName() uintptr {
+func HKMetadataKeyWorkoutBrandName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKMetadataKeyWorkoutBrandName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathAverage() uintptr {
+func HKPredicateKeyPathAverage() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathAverage")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathAverageHeartRate() uintptr {
+func HKPredicateKeyPathAverageHeartRate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathAverageHeartRate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant  HKPredicateKeyPathCDAAuthorName
-func HKPredicateKeyPathCDAAuthorName() uintptr {
+func HKPredicateKeyPathCDAAuthorName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCDAAuthorName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant  HKPredicateKeyPathCDACustodianName
-func HKPredicateKeyPathCDACustodianName() uintptr {
+func HKPredicateKeyPathCDACustodianName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCDACustodianName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant  HKPredicateKeyPathCDAPatientName
-func HKPredicateKeyPathCDAPatientName() uintptr {
+func HKPredicateKeyPathCDAPatientName() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCDAPatientName")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant  HKPredicateKeyPathCDATitle
-func HKPredicateKeyPathCDATitle() uintptr {
+func HKPredicateKeyPathCDATitle() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCDATitle")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant     HKPredicateKeyPathCategoryValue
-func HKPredicateKeyPathCategoryValue() uintptr {
+func HKPredicateKeyPathCategoryValue() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCategoryValue")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier() uintptr {
@@ -1531,237 +2604,552 @@ func HKPredicateKeyPathClinicalRecordFHIRResourceType() uintptr {
 	return ptr
 }
 
-func HKPredicateKeyPathCorrelation() uintptr {
+func HKPredicateKeyPathCorrelation() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCorrelation")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathCount() uintptr {
+func HKPredicateKeyPathCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathDateComponents() uintptr {
+func HKPredicateKeyPathDateComponents() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathDateComponents")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathDevice() uintptr {
+func HKPredicateKeyPathDevice() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathDevice")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathECGClassification() uintptr {
+func HKPredicateKeyPathECGClassification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathECGClassification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathECGSymptomsStatus() uintptr {
+func HKPredicateKeyPathECGSymptomsStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathECGSymptomsStatus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathEndDate() uintptr {
+func HKPredicateKeyPathEndDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathEndDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates that query by the dose event's medication log origin.
-func HKPredicateKeyPathLogOrigin() uintptr {
+func HKPredicateKeyPathLogOrigin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathLogOrigin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMax() uintptr {
+func HKPredicateKeyPathMax() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMax")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates that query by the dose event's medication concept identifier.
-func HKPredicateKeyPathMedicationConceptIdentifier() uintptr {
+func HKPredicateKeyPathMedicationConceptIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMedicationConceptIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMetadata() uintptr {
+func HKPredicateKeyPathMetadata() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMetadata")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMin() uintptr {
+func HKPredicateKeyPathMin() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMin")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMostRecent() uintptr {
+func HKPredicateKeyPathMostRecent() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMostRecent")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMostRecentDuration() uintptr {
+func HKPredicateKeyPathMostRecentDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMostRecentDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMostRecentEndDate() uintptr {
+func HKPredicateKeyPathMostRecentEndDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMostRecentEndDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathMostRecentStartDate() uintptr {
+func HKPredicateKeyPathMostRecentStartDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathMostRecentStartDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathQuantity() uintptr {
+func HKPredicateKeyPathQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates that query by the dose event's scheduled date.
-func HKPredicateKeyPathScheduledDate() uintptr {
+func HKPredicateKeyPathScheduledDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathScheduledDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathSource() uintptr {
+func HKPredicateKeyPathSource() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathSource")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathSourceRevision() uintptr {
+func HKPredicateKeyPathSourceRevision() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathSourceRevision")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathStartDate() uintptr {
+func HKPredicateKeyPathStartDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathStartDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates that query by a dose event’s log status.
-func HKPredicateKeyPathStatus() uintptr {
+func HKPredicateKeyPathStatus() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathStatus")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathSum() uintptr {
+func HKPredicateKeyPathSum() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathSum")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathUUID() uintptr {
+func HKPredicateKeyPathUUID() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathUUID")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkout() uintptr {
+func HKPredicateKeyPathWorkout() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkout")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivity() uintptr {
+func HKPredicateKeyPathWorkoutActivity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityAverageQuantity() uintptr {
+func HKPredicateKeyPathWorkoutActivityAverageQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityAverageQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityDuration() uintptr {
+func HKPredicateKeyPathWorkoutActivityDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityEndDate() uintptr {
+func HKPredicateKeyPathWorkoutActivityEndDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityEndDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityMaximumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutActivityMaximumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityMaximumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityMinimumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutActivityMinimumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityMinimumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityStartDate() uintptr {
+func HKPredicateKeyPathWorkoutActivityStartDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityStartDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivitySumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutActivitySumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivitySumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutActivityType() uintptr {
+func HKPredicateKeyPathWorkoutActivityType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutActivityType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutAverageQuantity() uintptr {
+func HKPredicateKeyPathWorkoutAverageQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutAverageQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutDuration() uintptr {
+func HKPredicateKeyPathWorkoutDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutEffortRelationship() uintptr {
+func HKPredicateKeyPathWorkoutEffortRelationship() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutEffortRelationship")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutMaximumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutMaximumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutMaximumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutMinimumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutMinimumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutMinimumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutSumQuantity() uintptr {
+func HKPredicateKeyPathWorkoutSumQuantity() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutSumQuantity")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for the desired distance type
-func HKPredicateKeyPathWorkoutTotalDistance() uintptr {
+func HKPredicateKeyPathWorkoutTotalDistance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutTotalDistance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierActiveEnergyBurned
-func HKPredicateKeyPathWorkoutTotalEnergyBurned() uintptr {
+func HKPredicateKeyPathWorkoutTotalEnergyBurned() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutTotalEnergyBurned")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierFlightsClimbed
-func HKPredicateKeyPathWorkoutTotalFlightsClimbed() uintptr {
+func HKPredicateKeyPathWorkoutTotalFlightsClimbed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutTotalFlightsClimbed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // Deprecated: Use predicateForWorkoutActivitiesWithOperatorType:quantityType:sumQuantity: passing the HKQuantityType for HKQuantityTypeIdentifierSwimmingStrokeCount
-func HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount() uintptr {
+func HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKPredicateKeyPathWorkoutType() uintptr {
+func HKPredicateKeyPathWorkoutType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKPredicateKeyPathWorkoutType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierActiveEnergyBurned() *foundation.NSString {
@@ -1769,7 +3157,11 @@ func HKQuantityTypeIdentifierActiveEnergyBurned() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleExerciseTime() *foundation.NSString {
@@ -1777,7 +3169,11 @@ func HKQuantityTypeIdentifierAppleExerciseTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleMoveTime() *foundation.NSString {
@@ -1785,7 +3181,11 @@ func HKQuantityTypeIdentifierAppleMoveTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances() *foundation.NSString {
@@ -1793,7 +3193,11 @@ func HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances() *foundation.NS
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleSleepingWristTemperature() *foundation.NSString {
@@ -1801,7 +3205,11 @@ func HKQuantityTypeIdentifierAppleSleepingWristTemperature() *foundation.NSStrin
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleStandTime() *foundation.NSString {
@@ -1809,7 +3217,11 @@ func HKQuantityTypeIdentifierAppleStandTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAppleWalkingSteadiness() *foundation.NSString {
@@ -1817,7 +3229,11 @@ func HKQuantityTypeIdentifierAppleWalkingSteadiness() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierAtrialFibrillationBurden() *foundation.NSString {
@@ -1825,7 +3241,11 @@ func HKQuantityTypeIdentifierAtrialFibrillationBurden() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBasalBodyTemperature() *foundation.NSString {
@@ -1833,7 +3253,11 @@ func HKQuantityTypeIdentifierBasalBodyTemperature() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBasalEnergyBurned() *foundation.NSString {
@@ -1841,7 +3265,11 @@ func HKQuantityTypeIdentifierBasalEnergyBurned() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBloodAlcoholContent() *foundation.NSString {
@@ -1849,7 +3277,11 @@ func HKQuantityTypeIdentifierBloodAlcoholContent() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBloodGlucose() *foundation.NSString {
@@ -1857,7 +3289,11 @@ func HKQuantityTypeIdentifierBloodGlucose() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBloodPressureDiastolic() *foundation.NSString {
@@ -1865,7 +3301,11 @@ func HKQuantityTypeIdentifierBloodPressureDiastolic() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBloodPressureSystolic() *foundation.NSString {
@@ -1873,7 +3313,11 @@ func HKQuantityTypeIdentifierBloodPressureSystolic() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBodyFatPercentage() *foundation.NSString {
@@ -1881,7 +3325,11 @@ func HKQuantityTypeIdentifierBodyFatPercentage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBodyMass() *foundation.NSString {
@@ -1889,7 +3337,11 @@ func HKQuantityTypeIdentifierBodyMass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBodyMassIndex() *foundation.NSString {
@@ -1897,7 +3349,11 @@ func HKQuantityTypeIdentifierBodyMassIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierBodyTemperature() *foundation.NSString {
@@ -1905,7 +3361,11 @@ func HKQuantityTypeIdentifierBodyTemperature() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierCrossCountrySkiingSpeed() *foundation.NSString {
@@ -1913,7 +3373,11 @@ func HKQuantityTypeIdentifierCrossCountrySkiingSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierCyclingCadence() *foundation.NSString {
@@ -1921,7 +3385,11 @@ func HKQuantityTypeIdentifierCyclingCadence() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierCyclingFunctionalThresholdPower() *foundation.NSString {
@@ -1929,7 +3397,11 @@ func HKQuantityTypeIdentifierCyclingFunctionalThresholdPower() *foundation.NSStr
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierCyclingPower() *foundation.NSString {
@@ -1937,7 +3409,11 @@ func HKQuantityTypeIdentifierCyclingPower() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierCyclingSpeed() *foundation.NSString {
@@ -1945,7 +3421,11 @@ func HKQuantityTypeIdentifierCyclingSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryBiotin() *foundation.NSString {
@@ -1953,7 +3433,11 @@ func HKQuantityTypeIdentifierDietaryBiotin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryCaffeine() *foundation.NSString {
@@ -1961,7 +3445,11 @@ func HKQuantityTypeIdentifierDietaryCaffeine() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryCalcium() *foundation.NSString {
@@ -1969,7 +3457,11 @@ func HKQuantityTypeIdentifierDietaryCalcium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryCarbohydrates() *foundation.NSString {
@@ -1977,7 +3469,11 @@ func HKQuantityTypeIdentifierDietaryCarbohydrates() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryChloride() *foundation.NSString {
@@ -1985,7 +3481,11 @@ func HKQuantityTypeIdentifierDietaryChloride() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryCholesterol() *foundation.NSString {
@@ -1993,7 +3493,11 @@ func HKQuantityTypeIdentifierDietaryCholesterol() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryChromium() *foundation.NSString {
@@ -2001,7 +3505,11 @@ func HKQuantityTypeIdentifierDietaryChromium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryCopper() *foundation.NSString {
@@ -2009,7 +3517,11 @@ func HKQuantityTypeIdentifierDietaryCopper() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryEnergyConsumed() *foundation.NSString {
@@ -2017,7 +3529,11 @@ func HKQuantityTypeIdentifierDietaryEnergyConsumed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFatMonounsaturated() *foundation.NSString {
@@ -2025,7 +3541,11 @@ func HKQuantityTypeIdentifierDietaryFatMonounsaturated() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFatPolyunsaturated() *foundation.NSString {
@@ -2033,7 +3553,11 @@ func HKQuantityTypeIdentifierDietaryFatPolyunsaturated() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFatSaturated() *foundation.NSString {
@@ -2041,7 +3565,11 @@ func HKQuantityTypeIdentifierDietaryFatSaturated() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFatTotal() *foundation.NSString {
@@ -2049,7 +3577,11 @@ func HKQuantityTypeIdentifierDietaryFatTotal() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFiber() *foundation.NSString {
@@ -2057,7 +3589,11 @@ func HKQuantityTypeIdentifierDietaryFiber() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryFolate() *foundation.NSString {
@@ -2065,7 +3601,11 @@ func HKQuantityTypeIdentifierDietaryFolate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryIodine() *foundation.NSString {
@@ -2073,7 +3613,11 @@ func HKQuantityTypeIdentifierDietaryIodine() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryIron() *foundation.NSString {
@@ -2081,7 +3625,11 @@ func HKQuantityTypeIdentifierDietaryIron() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryMagnesium() *foundation.NSString {
@@ -2089,7 +3637,11 @@ func HKQuantityTypeIdentifierDietaryMagnesium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryManganese() *foundation.NSString {
@@ -2097,7 +3649,11 @@ func HKQuantityTypeIdentifierDietaryManganese() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryMolybdenum() *foundation.NSString {
@@ -2105,7 +3661,11 @@ func HKQuantityTypeIdentifierDietaryMolybdenum() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryNiacin() *foundation.NSString {
@@ -2113,7 +3673,11 @@ func HKQuantityTypeIdentifierDietaryNiacin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryPantothenicAcid() *foundation.NSString {
@@ -2121,7 +3685,11 @@ func HKQuantityTypeIdentifierDietaryPantothenicAcid() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryPhosphorus() *foundation.NSString {
@@ -2129,7 +3697,11 @@ func HKQuantityTypeIdentifierDietaryPhosphorus() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryPotassium() *foundation.NSString {
@@ -2137,7 +3709,11 @@ func HKQuantityTypeIdentifierDietaryPotassium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryProtein() *foundation.NSString {
@@ -2145,7 +3721,11 @@ func HKQuantityTypeIdentifierDietaryProtein() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryRiboflavin() *foundation.NSString {
@@ -2153,7 +3733,11 @@ func HKQuantityTypeIdentifierDietaryRiboflavin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietarySelenium() *foundation.NSString {
@@ -2161,7 +3745,11 @@ func HKQuantityTypeIdentifierDietarySelenium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietarySodium() *foundation.NSString {
@@ -2169,7 +3757,11 @@ func HKQuantityTypeIdentifierDietarySodium() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietarySugar() *foundation.NSString {
@@ -2177,7 +3769,11 @@ func HKQuantityTypeIdentifierDietarySugar() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryThiamin() *foundation.NSString {
@@ -2185,7 +3781,11 @@ func HKQuantityTypeIdentifierDietaryThiamin() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminA() *foundation.NSString {
@@ -2193,7 +3793,11 @@ func HKQuantityTypeIdentifierDietaryVitaminA() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminB12() *foundation.NSString {
@@ -2201,7 +3805,11 @@ func HKQuantityTypeIdentifierDietaryVitaminB12() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminB6() *foundation.NSString {
@@ -2209,7 +3817,11 @@ func HKQuantityTypeIdentifierDietaryVitaminB6() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminC() *foundation.NSString {
@@ -2217,7 +3829,11 @@ func HKQuantityTypeIdentifierDietaryVitaminC() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminD() *foundation.NSString {
@@ -2225,7 +3841,11 @@ func HKQuantityTypeIdentifierDietaryVitaminD() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminE() *foundation.NSString {
@@ -2233,7 +3853,11 @@ func HKQuantityTypeIdentifierDietaryVitaminE() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryVitaminK() *foundation.NSString {
@@ -2241,7 +3865,11 @@ func HKQuantityTypeIdentifierDietaryVitaminK() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryWater() *foundation.NSString {
@@ -2249,7 +3877,11 @@ func HKQuantityTypeIdentifierDietaryWater() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDietaryZinc() *foundation.NSString {
@@ -2257,7 +3889,11 @@ func HKQuantityTypeIdentifierDietaryZinc() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceCrossCountrySkiing() *foundation.NSString {
@@ -2265,7 +3901,11 @@ func HKQuantityTypeIdentifierDistanceCrossCountrySkiing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceCycling() *foundation.NSString {
@@ -2273,7 +3913,11 @@ func HKQuantityTypeIdentifierDistanceCycling() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceDownhillSnowSports() *foundation.NSString {
@@ -2281,7 +3925,11 @@ func HKQuantityTypeIdentifierDistanceDownhillSnowSports() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistancePaddleSports() *foundation.NSString {
@@ -2289,7 +3937,11 @@ func HKQuantityTypeIdentifierDistancePaddleSports() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceRowing() *foundation.NSString {
@@ -2297,7 +3949,11 @@ func HKQuantityTypeIdentifierDistanceRowing() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceSkatingSports() *foundation.NSString {
@@ -2305,7 +3961,11 @@ func HKQuantityTypeIdentifierDistanceSkatingSports() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceSwimming() *foundation.NSString {
@@ -2313,7 +3973,11 @@ func HKQuantityTypeIdentifierDistanceSwimming() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceWalkingRunning() *foundation.NSString {
@@ -2321,7 +3985,11 @@ func HKQuantityTypeIdentifierDistanceWalkingRunning() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierDistanceWheelchair() *foundation.NSString {
@@ -2329,7 +3997,11 @@ func HKQuantityTypeIdentifierDistanceWheelchair() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierElectrodermalActivity() *foundation.NSString {
@@ -2337,7 +4009,11 @@ func HKQuantityTypeIdentifierElectrodermalActivity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierEnvironmentalAudioExposure() *foundation.NSString {
@@ -2345,7 +4021,11 @@ func HKQuantityTypeIdentifierEnvironmentalAudioExposure() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierEnvironmentalSoundReduction() *foundation.NSString {
@@ -2353,7 +4033,11 @@ func HKQuantityTypeIdentifierEnvironmentalSoundReduction() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierEstimatedWorkoutEffortScore() *foundation.NSString {
@@ -2361,7 +4045,11 @@ func HKQuantityTypeIdentifierEstimatedWorkoutEffortScore() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierFlightsClimbed() *foundation.NSString {
@@ -2369,7 +4057,11 @@ func HKQuantityTypeIdentifierFlightsClimbed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierForcedExpiratoryVolume1() *foundation.NSString {
@@ -2377,7 +4069,11 @@ func HKQuantityTypeIdentifierForcedExpiratoryVolume1() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierForcedVitalCapacity() *foundation.NSString {
@@ -2385,7 +4081,11 @@ func HKQuantityTypeIdentifierForcedVitalCapacity() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierHeadphoneAudioExposure() *foundation.NSString {
@@ -2393,7 +4093,11 @@ func HKQuantityTypeIdentifierHeadphoneAudioExposure() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierHeartRate() *foundation.NSString {
@@ -2401,7 +4105,11 @@ func HKQuantityTypeIdentifierHeartRate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() *foundation.NSString {
@@ -2409,7 +4117,11 @@ func HKQuantityTypeIdentifierHeartRateRecoveryOneMinute() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() *foundation.NSString {
@@ -2417,7 +4129,11 @@ func HKQuantityTypeIdentifierHeartRateVariabilitySDNN() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierHeight() *foundation.NSString {
@@ -2425,7 +4141,11 @@ func HKQuantityTypeIdentifierHeight() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierInhalerUsage() *foundation.NSString {
@@ -2433,7 +4153,11 @@ func HKQuantityTypeIdentifierInhalerUsage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierInsulinDelivery() *foundation.NSString {
@@ -2441,7 +4165,11 @@ func HKQuantityTypeIdentifierInsulinDelivery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierLeanBodyMass() *foundation.NSString {
@@ -2449,7 +4177,11 @@ func HKQuantityTypeIdentifierLeanBodyMass() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierNikeFuel() *foundation.NSString {
@@ -2457,7 +4189,11 @@ func HKQuantityTypeIdentifierNikeFuel() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierNumberOfAlcoholicBeverages() *foundation.NSString {
@@ -2465,7 +4201,11 @@ func HKQuantityTypeIdentifierNumberOfAlcoholicBeverages() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierNumberOfTimesFallen() *foundation.NSString {
@@ -2473,7 +4213,11 @@ func HKQuantityTypeIdentifierNumberOfTimesFallen() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierOxygenSaturation() *foundation.NSString {
@@ -2481,7 +4225,11 @@ func HKQuantityTypeIdentifierOxygenSaturation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierPaddleSportsSpeed() *foundation.NSString {
@@ -2489,7 +4237,11 @@ func HKQuantityTypeIdentifierPaddleSportsSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierPeakExpiratoryFlowRate() *foundation.NSString {
@@ -2497,7 +4249,11 @@ func HKQuantityTypeIdentifierPeakExpiratoryFlowRate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierPeripheralPerfusionIndex() *foundation.NSString {
@@ -2505,7 +4261,11 @@ func HKQuantityTypeIdentifierPeripheralPerfusionIndex() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierPhysicalEffort() *foundation.NSString {
@@ -2513,7 +4273,11 @@ func HKQuantityTypeIdentifierPhysicalEffort() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierPushCount() *foundation.NSString {
@@ -2521,7 +4285,11 @@ func HKQuantityTypeIdentifierPushCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRespiratoryRate() *foundation.NSString {
@@ -2529,7 +4297,11 @@ func HKQuantityTypeIdentifierRespiratoryRate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRestingHeartRate() *foundation.NSString {
@@ -2537,7 +4309,11 @@ func HKQuantityTypeIdentifierRestingHeartRate() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRowingSpeed() *foundation.NSString {
@@ -2545,7 +4321,11 @@ func HKQuantityTypeIdentifierRowingSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRunningGroundContactTime() *foundation.NSString {
@@ -2553,7 +4333,11 @@ func HKQuantityTypeIdentifierRunningGroundContactTime() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRunningPower() *foundation.NSString {
@@ -2561,7 +4345,11 @@ func HKQuantityTypeIdentifierRunningPower() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRunningSpeed() *foundation.NSString {
@@ -2569,7 +4357,11 @@ func HKQuantityTypeIdentifierRunningSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRunningStrideLength() *foundation.NSString {
@@ -2577,7 +4369,11 @@ func HKQuantityTypeIdentifierRunningStrideLength() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierRunningVerticalOscillation() *foundation.NSString {
@@ -2585,7 +4381,11 @@ func HKQuantityTypeIdentifierRunningVerticalOscillation() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierSixMinuteWalkTestDistance() *foundation.NSString {
@@ -2593,7 +4393,11 @@ func HKQuantityTypeIdentifierSixMinuteWalkTestDistance() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierStairAscentSpeed() *foundation.NSString {
@@ -2601,7 +4405,11 @@ func HKQuantityTypeIdentifierStairAscentSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierStairDescentSpeed() *foundation.NSString {
@@ -2609,7 +4417,11 @@ func HKQuantityTypeIdentifierStairDescentSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierStepCount() *foundation.NSString {
@@ -2617,7 +4429,11 @@ func HKQuantityTypeIdentifierStepCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierSwimmingStrokeCount() *foundation.NSString {
@@ -2625,7 +4441,11 @@ func HKQuantityTypeIdentifierSwimmingStrokeCount() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierTimeInDaylight() *foundation.NSString {
@@ -2633,7 +4453,11 @@ func HKQuantityTypeIdentifierTimeInDaylight() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierUVExposure() *foundation.NSString {
@@ -2641,7 +4465,11 @@ func HKQuantityTypeIdentifierUVExposure() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierUnderwaterDepth() *foundation.NSString {
@@ -2649,7 +4477,11 @@ func HKQuantityTypeIdentifierUnderwaterDepth() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierVO2Max() *foundation.NSString {
@@ -2657,7 +4489,11 @@ func HKQuantityTypeIdentifierVO2Max() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWaistCircumference() *foundation.NSString {
@@ -2665,7 +4501,11 @@ func HKQuantityTypeIdentifierWaistCircumference() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWalkingAsymmetryPercentage() *foundation.NSString {
@@ -2673,7 +4513,11 @@ func HKQuantityTypeIdentifierWalkingAsymmetryPercentage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWalkingDoubleSupportPercentage() *foundation.NSString {
@@ -2681,7 +4525,11 @@ func HKQuantityTypeIdentifierWalkingDoubleSupportPercentage() *foundation.NSStri
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWalkingHeartRateAverage() *foundation.NSString {
@@ -2689,7 +4537,11 @@ func HKQuantityTypeIdentifierWalkingHeartRateAverage() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWalkingSpeed() *foundation.NSString {
@@ -2697,7 +4549,11 @@ func HKQuantityTypeIdentifierWalkingSpeed() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWalkingStepLength() *foundation.NSString {
@@ -2705,7 +4561,11 @@ func HKQuantityTypeIdentifierWalkingStepLength() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWaterTemperature() *foundation.NSString {
@@ -2713,7 +4573,11 @@ func HKQuantityTypeIdentifierWaterTemperature() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKQuantityTypeIdentifierWorkoutEffortScore() *foundation.NSString {
@@ -2721,17 +4585,35 @@ func HKQuantityTypeIdentifierWorkoutEffortScore() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKSampleSortIdentifierEndDate() uintptr {
+func HKSampleSortIdentifierEndDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKSampleSortIdentifierEndDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKSampleSortIdentifierStartDate() uintptr {
+func HKSampleSortIdentifierStartDate() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKSampleSortIdentifierStartDate")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKScoredAssessmentTypeIdentifierGAD7() *foundation.NSString {
@@ -2739,7 +4621,11 @@ func HKScoredAssessmentTypeIdentifierGAD7() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKScoredAssessmentTypeIdentifierPHQ9() *foundation.NSString {
@@ -2747,7 +4633,11 @@ func HKScoredAssessmentTypeIdentifierPHQ9() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func HKSourceRevisionAnyOperatingSystem() foundation.NSOperatingSystemVersion {
@@ -2758,32 +4648,67 @@ func HKSourceRevisionAnyOperatingSystem() foundation.NSOperatingSystemVersion {
 	return *(*foundation.NSOperatingSystemVersion)(unsafe.Pointer(ptr))
 }
 
-func HKSourceRevisionAnyProductType() uintptr {
+func HKSourceRevisionAnyProductType() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKSourceRevisionAnyProductType")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKSourceRevisionAnyVersion() uintptr {
+func HKSourceRevisionAnyVersion() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKSourceRevisionAnyVersion")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates for whether or not a medication has a schedule. Use to predicate against the “HKUserAnnotatedMedication/hasSchedule“ property of a medication.
-func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() uintptr {
+func HKUserAnnotatedMedicationPredicateKeyPathHasSchedule() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKUserAnnotatedMedicationPredicateKeyPathHasSchedule")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // The key path you use to create predicates for the medication's archived status. Use to predicate against the “HKUserAnnotatedMedication/isArchived“ property of a medication.
-func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() uintptr {
+func HKUserAnnotatedMedicationPredicateKeyPathIsArchived() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKUserAnnotatedMedicationPredicateKeyPathIsArchived")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKUserPreferencesDidChangeNotification @abstract      A notification posted every time the user updates their preferred units. @discussion    Each HKHealthStore posts a HKUserPreferencesDidChangeNotification notification when the preferred unit for a HKQuantityType is changed by the user. To guarantee your listener will only receive a single notification when this occurs, it is necessary to provide an HKHealthStore instance for the object parameter of NSNotificationCenter's addObserver methods.
-func HKUserPreferencesDidChangeNotification() uintptr {
+func HKUserPreferencesDidChangeNotification() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKUserPreferencesDidChangeNotification")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeCOVID19 @abstract      Represents the COVID-19 credential type for a verifiable record.
@@ -2798,7 +4723,11 @@ func HKVerifiableClinicalRecordCredentialTypeImmunization() *foundation.NSString
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeLaboratory @abstract      Represents the laboratory credential type for a verifiable record.
@@ -2807,7 +4736,11 @@ func HKVerifiableClinicalRecordCredentialTypeLaboratory() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordCredentialTypeRecovery @abstract      Represents the recovery credential type for a verifiable record.
@@ -2816,7 +4749,11 @@ func HKVerifiableClinicalRecordCredentialTypeRecovery() *foundation.NSString {
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate @abstract      Represents a EU Digital COVID Certificate source type for a verifiable record.
@@ -2825,7 +4762,11 @@ func HKVerifiableClinicalRecordSourceTypeEUDigitalCOVIDCertificate() *foundation
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 // @constant      HKVerifiableClinicalRecordSourceTypeSMARTHealthCard @abstract      Represents a SMART Health Card source type for a verifiable record.
@@ -2834,45 +4775,105 @@ func HKVerifiableClinicalRecordSourceTypeSMARTHealthCard() *foundation.NSString 
 	if ptr == 0 {
 		return nil
 	}
-	return *(**foundation.NSString)(unsafe.Pointer(ptr))
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKVisionPrescriptionTypeIdentifier() uintptr {
+func HKVisionPrescriptionTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKVisionPrescriptionTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutRouteTypeIdentifier() uintptr {
+func HKWorkoutRouteTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutRouteTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutSortIdentifierDuration() uintptr {
+func HKWorkoutSortIdentifierDuration() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutSortIdentifierDuration")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutSortIdentifierTotalDistance() uintptr {
+func HKWorkoutSortIdentifierTotalDistance() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutSortIdentifierTotalDistance")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutSortIdentifierTotalEnergyBurned() uintptr {
+func HKWorkoutSortIdentifierTotalEnergyBurned() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutSortIdentifierTotalEnergyBurned")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutSortIdentifierTotalFlightsClimbed() uintptr {
+func HKWorkoutSortIdentifierTotalFlightsClimbed() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutSortIdentifierTotalFlightsClimbed")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutSortIdentifierTotalSwimmingStrokeCount() uintptr {
+func HKWorkoutSortIdentifierTotalSwimmingStrokeCount() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutSortIdentifierTotalSwimmingStrokeCount")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
-func HKWorkoutTypeIdentifier() uintptr {
+func HKWorkoutTypeIdentifier() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_healthkitLib, "HKWorkoutTypeIdentifier")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }

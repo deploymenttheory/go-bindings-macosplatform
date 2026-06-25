@@ -261,7 +261,7 @@ func SubRipTextBottomRegion() *CaptionRegion {
 	return CaptionRegionFromID(_r)
 }
 
-// CaptionPreviewForProfileIDExtendedLanguageTagRenderSize generate a caption preview attributed string for the specified profile ID. Returns an attributed string containing a preview of captions rendered using the specified profile ID. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread.
+// CaptionPreviewForProfileIDExtendedLanguageTagRenderSize generate a caption preview attributed string for the specified profile ID.
 func CaptionPreviewForProfileIDExtendedLanguageTagRenderSize(profileID string, extendedLanguageTag string, renderSize corefoundation.CGSize) obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRenderer")), objc.RegisterName("captionPreviewForProfileID:extendedLanguageTag:renderSize:"), purego.NSString(profileID), purego.NSString(extendedLanguageTag), renderSize)
 	return obj.Wrap(_r)

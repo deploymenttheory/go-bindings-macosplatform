@@ -7,11 +7,21 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-func MCErrorDomain() uintptr {
+func MCErrorDomain() *foundation.NSString {
 	ptr, _ := purego.Dlsym(_multipeerconnectivityLib, "MCErrorDomain")
-	return ptr
+	if ptr == 0 {
+		return nil
+	}
+	id := *(*objc.ID)(unsafe.Pointer(ptr))
+	if id == 0 {
+		return nil
+	}
+	return foundation.NSStringFromID(id)
 }
 
 func KMCSessionMaximumNumberOfPeers() uint {

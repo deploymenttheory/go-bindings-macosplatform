@@ -3189,7 +3189,7 @@
       },
       "postQuantumKeyExchangeMethods": {
         "doc": "A list of the quantum-secure key exchange methods the Security Association uses.",
-        "url": "https://developer.apple.com/documentation/networkextension/nevpnikev2securityassociationparameters/postquantumkeyexchangemethods-3173s"
+        "url": "https://developer.apple.com/documentation/networkextension/nevpnikev2securityassociationparameters/postquantumkeyexchangemethods-56672"
       }
     },
     "NEVPNManager": {

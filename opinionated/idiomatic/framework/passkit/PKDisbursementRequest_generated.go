@@ -124,7 +124,7 @@ func (dr *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *
 	return dr
 }
 
-// WithSupportedRegions sets an array of two-letter region codes that describes the regions to support.
+// WithSupportedRegions sets an array of regions that describe the locations to support.
 func (dr *DisbursementRequest) WithSupportedRegions(items ...obj.Object) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSupportedRegions:"), _arr)

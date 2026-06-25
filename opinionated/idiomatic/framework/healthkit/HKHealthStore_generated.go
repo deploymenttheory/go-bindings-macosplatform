@@ -93,7 +93,7 @@ func (hs *HealthStore) AuthorizationStatusForType(type_ *ObjectType) Authorizati
 	return _r
 }
 
-// EarliestPermittedSampleDate returns the earliest date permitted for samples.
+// EarliestPermittedSampleDate returns the earliest date that the framework permits your app to save or read samples.
 func (hs *HealthStore) EarliestPermittedSampleDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("earliestPermittedSampleDate"))
 	return obj.Wrap(_r)

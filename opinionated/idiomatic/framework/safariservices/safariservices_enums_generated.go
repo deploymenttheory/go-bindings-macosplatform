@@ -8,15 +8,11 @@ import (
 	"fmt"
 )
 
-// Messages that describe a content blocker or Safari app extension error.
 type ErrorCode int64
 
 const (
-	// A Content Blocker or Safari app extension with the specified bundle identifier was not found, or the bundle identifier specified an extension that was not owned by you.
-	ErrorNoExtensionFound ErrorCode = 1
-	// The Content Blocker extension returned an NSExtensionItem that did not include an attachment.
-	ErrorNoAttachmentFound ErrorCode = 2
-	// There was an error loading the content blocker extension.
+	ErrorNoExtensionFound   ErrorCode = 1
+	ErrorNoAttachmentFound  ErrorCode = 2
 	ErrorLoadingInterrupted ErrorCode = 3
 )
 

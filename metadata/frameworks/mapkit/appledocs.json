@@ -1677,12 +1677,12 @@
         "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/colors"
       },
       "locations": {
-        "doc": "An array of location indices corresponding to their respective colors.",
-        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/locations-50knt"
+        "doc": "An array of location indexes that correspond to their respective colors.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/locations-7k6qz"
       },
       "setColors(_:locations:)": {
-        "doc": "Sets the iOS colors and corresponding unit distance values to create gradients.",
-        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/setcolors(_:locations:)-3xrou"
+        "doc": "Sets the macOS colors and corresponding unit distance values to create gradients.",
+        "url": "https://developer.apple.com/documentation/mapkit/mkgradientpolylinerenderer/setcolors(_:locations:)-1tuft"
       }
     },
     "MKHybridMapConfiguration": {
