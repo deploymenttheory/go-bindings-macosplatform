@@ -1,5 +1,8 @@
 {
   "Foundation": {
     "extra_include_dirs": ["usr/include/objc"]
+  },
+  "IOKit": {
+    "header_override": "System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h"
   }
 }

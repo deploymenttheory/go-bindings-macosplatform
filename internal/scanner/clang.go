@@ -176,9 +176,15 @@ func DetectSubFrameworkNames(bundlePath string) []string {
 // FrameworkHeader returns the path to the umbrella header for a framework.
 // framework may be "Name" (top-level) or "Parent/Child" (sub-framework).
 // Falls back to the C library header path for known Apple C libraries.
+// A per-framework ScanConfig.HeaderOverride (SDK-relative slash path) takes
+// precedence over the default <Framework>.h naming convention, allowing
+// frameworks that ship no conventional umbrella (e.g. IOKit) to be scanned.
 func FrameworkHeader(sdkPath, framework string) string {
 	if IsCLibrary(sdkPath, framework) {
 		return CLibraryHeader(sdkPath, framework)
+	}
+	if cfg, ok := scanConfigs[framework]; ok && cfg.HeaderOverride != "" {
+		return filepath.Join(sdkPath, filepath.FromSlash(cfg.HeaderOverride))
 	}
 	name := framework
 	if IsSubFramework(framework) {
