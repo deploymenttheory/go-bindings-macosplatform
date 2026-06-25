@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.3...v0.12.0) (2026-06-25)
+
+
+### Features
+
+* **scanner:** add HeaderOverride support for frameworks without conventional umbrella headers ([#63](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/63)) ([767783f](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/767783fcfe4858e3badac4d30bb14d71c0f47708))
+
 ## [0.11.3](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.11.2...v0.11.3) (2026-06-25)
 
 
