@@ -68,7 +68,7 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 			if err != nil {
 				data = []byte("{}")
 			}
-			_, _ = rt.InvokeBlock[uintptr](reply, bytesToNSData(data))
+			_, _ = rt.InvokeBlock[uintptr](reply, shared.BytesToNSData(data))
 		},
 		// addRule: takes a rule as JSON-in-NSData.
 		"addRule:": func(_ rt.ID, _ rt.SEL, ruleData rt.ID) {
@@ -76,10 +76,12 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 				return
 			}
 			var r shared.Rule
-			if json.Unmarshal(nsDataBytes(ruleData), &r) == nil {
-				eng.Add(&r)
-				_ = eng.Save()
+			if err := json.Unmarshal(shared.NSDataBytes(ruleData), &r); err != nil {
+				log.Printf("daemon: addRule: discarding malformed rule: %v", err)
+				return
 			}
+			eng.Add(&r)
+			saveOrLog(eng, "addRule:")
 		},
 		// deleteRuleForKey:rule: removes the rule (key, uuid).
 		"deleteRuleForKey:rule:": func(_ rt.ID, _ rt.SEL, key, uuid rt.ID) {
@@ -87,7 +89,7 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 				return
 			}
 			if eng.Delete(rt.GoString(key), rt.GoString(uuid)) {
-				_ = eng.Save()
+				saveOrLog(eng, "deleteRuleForKey:rule:")
 			}
 		},
 		// toggleRuleForKey:rule:state: enables/disables a rule (state: 1 = disabled).
@@ -97,7 +99,7 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 			}
 			disabled := rt.Send[int64](state, rt.RegisterName("integerValue")) != 0
 			if eng.Toggle(rt.GoString(key), rt.GoString(uuid), disabled) {
-				_ = eng.Save()
+				saveOrLog(eng, "toggleRuleForKey:rule:state:")
 			}
 		},
 		// uninstallWithReply: acknowledges (no-op teardown for the port).
@@ -107,11 +109,20 @@ func daemonHandlers(eng *rules.Engine, managed bool) map[string]any {
 	}
 }
 
+// saveOrLog persists the engine after a mutation, logging (not failing) on error:
+// an XPC handler has no caller to return the error to, and a failed flush should
+// not take down the daemon.
+func saveOrLog(eng *rules.Engine, selector string) {
+	if err := eng.Save(); err != nil {
+		log.Printf("daemon: %s: save failed: %v", selector, err)
+	}
+}
+
 // boolNumber wraps a Go bool as an NSNumber for reply blocks.
 func boolNumber(v bool) rt.ID {
 	n := int64(0)
 	if v {
 		n = 1
 	}
-	return rt.Send[rt.ID](classID("NSNumber"), rt.RegisterName("numberWithBool:"), n)
+	return rt.Send[rt.ID](shared.ClassID("NSNumber"), rt.RegisterName("numberWithBool:"), n)
 }

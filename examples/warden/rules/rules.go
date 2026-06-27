@@ -18,7 +18,7 @@ import (
 // mutates it in response to app requests and user alert decisions.
 type Engine struct {
 	mu    sync.RWMutex
-	path  string                     // JSON persistence path ("" = memory only)
+	path  string                    // JSON persistence path ("" = memory only)
 	rules map[string][]*shared.Rule // process key → rules
 }
 
@@ -67,7 +67,7 @@ func (e *Engine) Save() error {
 // RuleStateAllow, RuleStateBlock, or RuleStateNotFound when no rule matches
 // (the caller then prompts the user). Endpoint-specific rules win over
 // process-wide ones because they are matched first.
-func (e *Engine) Find(key, remoteAddr, remotePort string) int {
+func (e *Engine) Find(key, remoteAddr, remotePort string) shared.RuleState {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	candidates := e.rules[key]

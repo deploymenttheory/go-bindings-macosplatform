@@ -21,12 +21,11 @@ type Rule struct {
 
 	// Endpoint match. Empty EndpointAddr means "any endpoint".
 	EndpointAddr string       `json:"endpointAddr,omitempty"`
-	EndpointHost string       `json:"endpointHost,omitempty"`
 	EndpointPort string       `json:"endpointPort,omitempty"`
 	EndpointType EndpointType `json:"endpointType,omitempty"`
 
 	// Verdict + lifecycle.
-	Action     int        `json:"action"` // RuleStateAllow / RuleStateBlock
+	Action     RuleState  `json:"action"` // RuleStateAllow / RuleStateBlock
 	Type       int        `json:"type,omitempty"`
 	Protocol   int        `json:"protocol,omitempty"`
 	IsDisabled bool       `json:"isDisabled,omitempty"`

@@ -19,6 +19,7 @@ package main
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -33,56 +34,86 @@ import (
 // uses the team-prefixed identifier embedded in the signed app.
 const extensionBundleID = "com.example.warden.extension"
 
+// errUsage signals that arguments were malformed; main prints usage and exits 2.
+var errUsage = errors.New("usage")
+
 func main() {
-	if len(os.Args) < 2 {
-		usage()
+	if err := run(os.Args[1:]); err != nil {
+		if errors.Is(err, errUsage) {
+			fmt.Fprint(os.Stderr, usageText)
+			os.Exit(2)
+		}
+		fmt.Fprintln(os.Stderr, "warden:", err)
+		os.Exit(1)
 	}
-	switch os.Args[1] {
+}
+
+// run dispatches one CLI command. Each branch returns an error rather than exiting,
+// so main is the single place that decides exit codes.
+func run(args []string) error {
+	if len(args) < 1 {
+		return errUsage
+	}
+	switch args[0] {
 	case "activate":
-		app.ActivateExtension(extensionBundleID)
+		if err := app.ActivateExtension(extensionBundleID); err != nil {
+			return err
+		}
 		fmt.Println("submitted system-extension activation request for", extensionBundleID)
+		return nil
 	case "deactivate":
-		app.DeactivateExtension(extensionBundleID)
+		if err := app.DeactivateExtension(extensionBundleID); err != nil {
+			return err
+		}
 		fmt.Println("submitted system-extension deactivation request")
+		return nil
 	case "list":
-		listRules()
+		return listRules()
 	case "allow":
-		addRule(shared.RuleStateAllow)
+		return addRule(shared.RuleStateAllow, args[1:])
 	case "block":
-		addRule(shared.RuleStateBlock)
+		return addRule(shared.RuleStateBlock, args[1:])
 	case "delete":
-		if len(os.Args) < 4 {
-			usage()
+		if len(args) < 3 {
+			return errUsage
 		}
-		c := app.Connect()
-		defer c.Close()
-		c.DeleteRule(os.Args[2], os.Args[3])
-		fmt.Println("delete requested")
+		return deleteRule(args[1], args[2])
 	case "apply":
-		if len(os.Args) < 3 {
-			usage()
+		if len(args) < 2 {
+			return errUsage
 		}
-		applyConfig(os.Args[2])
+		return applyConfig(args[1])
 	case "export":
-		if len(os.Args) < 3 {
-			usage()
+		if len(args) < 2 {
+			return errUsage
 		}
-		exportConfig(os.Args[2])
+		return exportConfig(args[1])
 	default:
-		usage()
+		return errUsage
 	}
 }
 
 // daemonStore adapts the XPC client to config.RuleStore so the declarative
 // reconciler drives the live daemon. All() returns a one-shot snapshot fetched
-// before reconciliation; Add/Delete are sent to the daemon over XPC.
+// before reconciliation; Add/Delete are sent to the daemon over XPC. config.RuleStore
+// has no error return, so the first Add failure is captured in err for the caller
+// to surface after Apply.
 type daemonStore struct {
 	c        app.Client
 	snapshot []*shared.Rule
+	err      error
 }
 
-func (d *daemonStore) All() []*shared.Rule          { return d.snapshot }
-func (d *daemonStore) Add(r *shared.Rule)           { _ = d.c.AddRule(r) }
+func (d *daemonStore) All() []*shared.Rule { return d.snapshot }
+
+func (d *daemonStore) Add(r *shared.Rule) {
+	if err := d.c.AddRule(r); err != nil && d.err == nil {
+		d.err = err
+	}
+}
+
+// Delete reports true to mean "delete request sent": the XPC call is one-way, so
+// the reconciler counts it as actioned (see Client.DeleteRule).
 func (d *daemonStore) Delete(key, uuid string) bool { d.c.DeleteRule(key, uuid); return true }
 
 func flatten(m map[string][]*shared.Rule) []*shared.Rule {
@@ -93,111 +124,139 @@ func flatten(m map[string][]*shared.Rule) []*shared.Rule {
 	return out
 }
 
-func applyConfig(file string) {
+func deleteRule(key, uuid string) error {
+	c, err := app.Connect()
+	if err != nil {
+		return err
+	}
+	defer c.Close()
+	c.DeleteRule(key, uuid)
+	fmt.Println("delete requested")
+	return nil
+}
+
+func applyConfig(file string) error {
 	cfg, err := config.Load(file)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
-	c := app.Connect()
+	c, err := app.Connect()
+	if err != nil {
+		return err
+	}
 	defer c.Close()
 	current, err := c.GetRules()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
 	store := &daemonStore{c: c, snapshot: flatten(current)}
 	added, deleted := config.Apply(cfg, store)
+	if store.err != nil {
+		return store.err
+	}
 	fmt.Printf("applied %s: +%d -%d rules\n", file, added, deleted)
+	return nil
 }
 
-func exportConfig(file string) {
-	c := app.Connect()
+func exportConfig(file string) error {
+	c, err := app.Connect()
+	if err != nil {
+		return err
+	}
 	defer c.Close()
 	current, err := c.GetRules()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
-	cfg := config.FromRules(flatten(current))
+	rules := flatten(current)
+	cfg := config.FromRules(rules)
 	format := config.FormatYAML
 	if strings.HasSuffix(strings.ToLower(file), ".json") {
 		format = config.FormatJSON
 	}
 	data, err := cfg.Marshal(format)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
 	if err := os.WriteFile(file, data, 0o644); err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return fmt.Errorf("write %s: %w", file, err)
 	}
-	fmt.Printf("exported %d rules to %s\n", len(flatten(current)), file)
+	fmt.Printf("exported %d rules to %s\n", len(rules), file)
+	return nil
 }
 
-func listRules() {
-	c := app.Connect()
+func listRules() error {
+	c, err := app.Connect()
+	if err != nil {
+		return err
+	}
 	defer c.Close()
 	rules, err := c.GetRules()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
 	if len(rules) == 0 {
 		fmt.Println("(no rules)")
-		return
+		return nil
 	}
 	for key, list := range rules {
 		fmt.Printf("● %s\n", key)
 		for _, r := range list {
-			verdict := "allow"
-			if r.Action == shared.RuleStateBlock {
-				verdict = "block"
-			}
 			ep := r.EndpointAddr
 			if ep == "" {
 				ep = "*"
 			}
-			fmt.Printf("    %s  %s → %s  (%s)\n", verdict, ep, r.EndpointPort, r.UUID)
+			fmt.Printf("    %s  %s → %s  (%s)\n", r.Action, ep, r.EndpointPort, r.UUID)
 		}
 	}
+	return nil
 }
 
-func addRule(action int) {
-	if len(os.Args) < 3 {
-		usage()
+// addRule adds an allow/block rule for args[0] (process path), optionally scoped to
+// args[1] (endpoint host).
+func addRule(action shared.RuleState, args []string) error {
+	if len(args) < 1 {
+		return errUsage
 	}
-	path := os.Args[2]
+	path := args[0]
 	host := ""
-	if len(os.Args) >= 4 {
-		host = os.Args[3]
+	if len(args) >= 2 {
+		host = args[1]
+	}
+	uuid, err := newUUID()
+	if err != nil {
+		return err
 	}
 	r := &shared.Rule{
-		UUID:         newUUID(),
+		UUID:         uuid,
 		Key:          path,
 		Path:         path,
 		EndpointAddr: host,
 		Action:       action,
 		Creation:     time.Now(),
 	}
-	c := app.Connect()
+	c, err := app.Connect()
+	if err != nil {
+		return err
+	}
 	defer c.Close()
 	if err := c.AddRule(r); err != nil {
-		fmt.Fprintln(os.Stderr, "error:", err)
-		os.Exit(1)
+		return err
 	}
 	fmt.Printf("added rule %s for %s\n", r.UUID, path)
+	return nil
 }
 
-func newUUID() string {
+func newUUID() (string, error) {
 	var b [16]byte
-	_, _ = rand.Read(b[:])
-	return hex.EncodeToString(b[:])
+	if _, err := rand.Read(b[:]); err != nil {
+		return "", fmt.Errorf("generate uuid: %w", err)
+	}
+	return hex.EncodeToString(b[:]), nil
 }
 
-func usage() {
-	fmt.Fprint(os.Stderr, `usage: warden <command>
+// usageText is printed to stderr when a command is missing or malformed.
+const usageText = `usage: warden <command>
 
   activate                 submit the system-extension activation request
   deactivate               submit the deactivation request
@@ -207,6 +266,4 @@ func usage() {
   delete <key> <uuid>      delete a rule
   apply <file>             reconcile the firewall to a JSON/YAML config (idempotent)
   export <file>            write current rules as a JSON/YAML config (.json or .yaml)
-`)
-	os.Exit(2)
-}
+`
