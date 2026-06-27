@@ -34,8 +34,8 @@ new outbound flow
       → rules.Engine.Find(processKey, remoteAddr, port)
           allow → NEFilterNewFlowVerdict allowVerdict
           block → NEFilterNewFlowVerdict dropVerdict
-          none  → DefaultAllow verdict (Warden is policy-driven; where LuLu would
-                  prompt the user, Warden applies the configured default)
+          none  → defaultAllowPolicy verdict (Warden is policy-driven; where LuLu
+                  would prompt the user, Warden applies the configured default)
 app ──XPC──► daemon (XPCDaemonProtocol): get/add/delete/toggle rules
             (mutations rejected in config-managed mode)
 ```

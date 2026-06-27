@@ -14,7 +14,7 @@
 //   - key:               Create, Read, Delete (an EC private key)
 //   - identity:          formed from a certificate + its matching key, then Read
 //
-// Everything it creates it cleans up, including on failure. //go:build darwin.
+// Everything it creates it cleans up, including on failure.
 package main
 
 import (
@@ -40,7 +40,9 @@ import (
 // file keychain do not.
 const errSecMissingEntitlement = -34018
 
-func isEntitlement(err error) bool {
+// isMissingEntitlement reports whether err is the keychain "missing entitlement"
+// status, which an unsigned binary expectedly hits when creating keys/identities.
+func isMissingEntitlement(err error) bool {
 	var ke *keychain.Error
 	return errors.As(err, &ke) && ke.Status == errSecMissingEntitlement
 }
@@ -55,168 +57,272 @@ const (
 )
 
 func main() {
-	cleanup()
-
-	genericPassword()
-	internetPassword()
-	certificate()
-	key()
-	identity()
-
-	fmt.Println("\nPASS: keychain CRUD across item classes")
+	if err := run(); err != nil {
+		fmt.Fprintf(os.Stderr, "FAIL: %v\n", err)
+		os.Exit(1)
+	}
 }
 
-func genericPassword() {
+// run drives every item-class demo in turn, returning the first failure. Cleanup
+// runs before it starts (clearing a prior interrupted run) and again on the way
+// out, so the keychain is left as it was found whether run succeeds or fails.
+func run() error {
+	cleanup()       // clear leftovers from a prior interrupted run
+	defer cleanup() // best-effort: remove anything left behind on early return
+
+	steps := []struct {
+		name string
+		fn   func() error
+	}{
+		{"generic password", genericPassword},
+		{"internet password", internetPassword},
+		{"certificate", certificate},
+		{"key", key},
+		{"identity", identity},
+	}
+	for _, step := range steps {
+		if err := step.fn(); err != nil {
+			return fmt.Errorf("%s: %w", step.name, err)
+		}
+	}
+
+	fmt.Println("\nPASS: keychain CRUD across item classes")
+	return nil
+}
+
+// genericPassword runs the full CRUD + List cycle for a generic password.
+func genericPassword() error {
 	fmt.Println("● generic password")
 
-	must("create", keychain.CreateGenericPassword(keychain.GenericPassword{
+	if err := keychain.CreateGenericPassword(keychain.GenericPassword{
 		Service: service, Account: account, Label: label, Secret: []byte("s3cr3t-original"),
-	}))
+	}); err != nil {
+		return fmt.Errorf("create: %w", err)
+	}
 
 	got, found, err := keychain.ReadGenericPassword(service, account)
-	must("read", err)
+	if err != nil {
+		return fmt.Errorf("read: %w", err)
+	}
 	if !found || string(got.Secret) != "s3cr3t-original" {
-		fail("read", fmt.Errorf("got %q found=%v", got.Secret, found))
+		return fmt.Errorf("read: got %q found=%v", got.Secret, found)
 	}
 	fmt.Printf("  ✓ read secret=%q\n", got.Secret)
 
-	must("update", keychain.UpdateGenericPassword(keychain.GenericPassword{
+	if err := keychain.UpdateGenericPassword(keychain.GenericPassword{
 		Service: service, Account: account, Secret: []byte("s3cr3t-rotated"),
-	}))
+	}); err != nil {
+		return fmt.Errorf("update: %w", err)
+	}
 	got, _, err = keychain.ReadGenericPassword(service, account)
-	must("read-after-update", err)
+	if err != nil {
+		return fmt.Errorf("read-after-update: %w", err)
+	}
 	if string(got.Secret) != "s3cr3t-rotated" {
-		fail("update", fmt.Errorf("secret did not rotate: %q", got.Secret))
+		return fmt.Errorf("update: secret did not rotate: %q", got.Secret)
 	}
 	fmt.Printf("  ✓ updated secret=%q\n", got.Secret)
 
 	all, err := keychain.ListGenericPasswords()
-	must("list", err)
+	if err != nil {
+		return fmt.Errorf("list: %w", err)
+	}
 	if !containsService(all, service) {
-		fail("list", fmt.Errorf("created item not present among %d listed", len(all)))
+		return fmt.Errorf("list: created item not present among %d listed", len(all))
 	}
 	fmt.Printf("  ✓ listed (%d items; ours present, no secrets exported)\n", len(all))
 
-	must("delete", keychain.DeleteGenericPassword(service, account))
-	if _, found, _ := keychain.ReadGenericPassword(service, account); found {
-		fail("delete", fmt.Errorf("still present after delete"))
+	if err := keychain.DeleteGenericPassword(service, account); err != nil {
+		return fmt.Errorf("delete: %w", err)
+	}
+	if _, found, err := keychain.ReadGenericPassword(service, account); err != nil {
+		return fmt.Errorf("delete-verify: %w", err)
+	} else if found {
+		return errors.New("delete: still present after delete")
 	}
 	fmt.Println("  ✓ deleted")
+	return nil
 }
 
-func internetPassword() {
+// internetPassword runs Create, Read, Delete for an internet password.
+func internetPassword() error {
 	fmt.Println("● internet password")
-	must("create", keychain.CreateInternetPassword(keychain.InternetPassword{
+
+	if err := keychain.CreateInternetPassword(keychain.InternetPassword{
 		Server: server, Account: account, Label: label, Secret: []byte("https-secret"),
-	}))
+	}); err != nil {
+		return fmt.Errorf("create: %w", err)
+	}
 	got, found, err := keychain.ReadInternetPassword(server, account)
-	must("read", err)
+	if err != nil {
+		return fmt.Errorf("read: %w", err)
+	}
 	if !found || string(got.Secret) != "https-secret" {
-		fail("read", fmt.Errorf("got %q found=%v", got.Secret, found))
+		return fmt.Errorf("read: got %q found=%v", got.Secret, found)
 	}
 	fmt.Printf("  ✓ read secret=%q\n", got.Secret)
-	must("delete", keychain.DeleteInternetPassword(server, account))
+
+	if err := keychain.DeleteInternetPassword(server, account); err != nil {
+		return fmt.Errorf("delete: %w", err)
+	}
 	fmt.Println("  ✓ deleted")
+	return nil
 }
 
-func certificate() {
+// certificate runs Create, Read, Delete for a self-signed certificate.
+func certificate() error {
 	fmt.Println("● certificate")
-	der := selfSignedDER(newECKey(), label)
+	priv, err := newECKey()
+	if err != nil {
+		return err
+	}
+	der, err := selfSignedDER(priv, label)
+	if err != nil {
+		return err
+	}
 
-	must("create", keychain.CreateCertificate(keychain.Certificate{Label: label, DER: der}))
+	if err := keychain.CreateCertificate(keychain.Certificate{Label: label, DER: der}); err != nil {
+		return fmt.Errorf("create: %w", err)
+	}
 
 	got, found, err := keychain.ReadCertificate(label)
-	must("read", err)
+	if err != nil {
+		return fmt.Errorf("read: %w", err)
+	}
 	if !found || !bytes.Equal(got.DER, der) {
-		fail("read", fmt.Errorf("DER mismatch or not found (found=%v, %d bytes)", found, len(got.DER)))
+		return fmt.Errorf("read: DER mismatch or not found (found=%v, %d bytes)", found, len(got.DER))
 	}
 	fmt.Printf("  ✓ read DER (%d bytes) matches\n", len(got.DER))
 
-	must("delete", keychain.DeleteCertificate(label))
-	if _, found, _ := keychain.ReadCertificate(label); found {
-		fail("delete", fmt.Errorf("still present after delete"))
+	if err := keychain.DeleteCertificate(label); err != nil {
+		return fmt.Errorf("delete: %w", err)
+	}
+	if _, found, err := keychain.ReadCertificate(label); err != nil {
+		return fmt.Errorf("delete-verify: %w", err)
+	} else if found {
+		return errors.New("delete: still present after delete")
 	}
 	fmt.Println("  ✓ deleted")
+	return nil
 }
 
-func key() {
+// key runs Create, Read, Delete for an EC private key. On an unsigned binary the
+// Create is expected to fail for lack of a code-signing entitlement; the demo then
+// falls back to read-only enumeration so the call path is still exercised.
+func key() error {
 	fmt.Println("● key")
-	priv := newECKey()
+	priv, err := newECKey()
+	if err != nil {
+		return err
+	}
+	material, err := ecX963(priv)
+	if err != nil {
+		return err
+	}
 
 	switch err := keychain.CreateKey(keychain.Key{
-		Label: keyLabel, Type: keychain.KeyEC, Data: ecX963(priv),
+		Label: keyLabel, Type: keychain.KeyEC, Data: material,
 	}); {
-	case isEntitlement(err):
-		// Expected for an unsigned binary; the call path is still exercised.
+	case isMissingEntitlement(err):
 		keys, lerr := keychain.ListKeys()
-		must("list", lerr)
+		if lerr != nil {
+			return fmt.Errorf("list: %w", lerr)
+		}
 		fmt.Printf("  ⓘ Create needs a code-signing entitlement (unsigned binary); enumerated %d existing key(s)\n", len(keys))
-		return
-	default:
-		must("create", err)
+		return nil
+	case err != nil:
+		return fmt.Errorf("create: %w", err)
 	}
 
 	got, found, err := keychain.ReadKey(keyLabel)
-	must("read", err)
+	if err != nil {
+		return fmt.Errorf("read: %w", err)
+	}
 	if !found {
-		fail("read", fmt.Errorf("key not found after create"))
+		return errors.New("read: key not found after create")
 	}
 	fmt.Printf("  ✓ read label=%q applicationLabel=%s\n", got.Label, hex.EncodeToString(got.ApplicationLabel))
 
-	must("delete", keychain.DeleteKey(keyLabel))
-	if _, found, _ := keychain.ReadKey(keyLabel); found {
-		fail("delete", fmt.Errorf("key still present after delete"))
+	if err := keychain.DeleteKey(keyLabel); err != nil {
+		return fmt.Errorf("delete: %w", err)
+	}
+	if _, found, err := keychain.ReadKey(keyLabel); err != nil {
+		return fmt.Errorf("delete-verify: %w", err)
+	} else if found {
+		return errors.New("delete: key still present after delete")
 	}
 	fmt.Println("  ✓ deleted")
+	return nil
 }
 
-func identity() {
+// identity forms an identity from a certificate and its matching key, then reads
+// it back. Like key, it falls back to read-only enumeration on an unsigned binary.
+func identity() error {
 	fmt.Println("● identity (formed from a certificate + its matching key)")
-	priv := newECKey()
-
-	switch err := keychain.CreateKey(keychain.Key{
-		Label: idLabel, Type: keychain.KeyEC, Data: ecX963(priv),
-	}); {
-	case isEntitlement(err):
-		ids, lerr := keychain.ListIdentities()
-		must("list", lerr)
-		fmt.Printf("  ⓘ forming an identity needs a code-signing entitlement (unsigned binary); enumerated %d existing identity(ies)\n", len(ids))
-		return
-	default:
-		must("add key", err)
+	priv, err := newECKey()
+	if err != nil {
+		return err
+	}
+	material, err := ecX963(priv)
+	if err != nil {
+		return err
 	}
 
-	must("add cert", keychain.CreateCertificate(keychain.Certificate{
-		Label: idLabel, DER: selfSignedDER(priv, idLabel),
-	}))
+	switch err := keychain.CreateKey(keychain.Key{
+		Label: idLabel, Type: keychain.KeyEC, Data: material,
+	}); {
+	case isMissingEntitlement(err):
+		ids, lerr := keychain.ListIdentities()
+		if lerr != nil {
+			return fmt.Errorf("list: %w", lerr)
+		}
+		fmt.Printf("  ⓘ forming an identity needs a code-signing entitlement (unsigned binary); enumerated %d existing identity(ies)\n", len(ids))
+		return nil
+	case err != nil:
+		return fmt.Errorf("add key: %w", err)
+	}
+
+	der, err := selfSignedDER(priv, idLabel)
+	if err != nil {
+		return err
+	}
+	if err := keychain.CreateCertificate(keychain.Certificate{Label: idLabel, DER: der}); err != nil {
+		return fmt.Errorf("add cert: %w", err)
+	}
 
 	id, found, err := keychain.ReadIdentity(idLabel)
-	must("read", err)
+	if err != nil {
+		return fmt.Errorf("read: %w", err)
+	}
 	if !found {
-		fail("read", fmt.Errorf("identity did not form from cert + key"))
+		return errors.New("read: identity did not form from cert + key")
 	}
 	fmt.Printf("  ✓ identity formed, label=%q\n", id.Label)
 
-	must("delete", keychain.DeleteIdentity(idLabel))
+	if err := keychain.DeleteIdentity(idLabel); err != nil {
+		return fmt.Errorf("delete: %w", err)
+	}
 	// Deleting the identity removes the certificate; remove the key too.
 	_ = keychain.DeleteKey(idLabel)
 	fmt.Println("  ✓ deleted")
+	return nil
 }
 
 // ── certificate/key material helpers ─────────────────────────────────────────
 
-func newECKey() *ecdsa.PrivateKey {
+// newECKey generates a fresh P-256 private key.
+func newECKey() (*ecdsa.PrivateKey, error) {
 	priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
-		fail("gen key", err)
+		return nil, fmt.Errorf("generate EC key: %w", err)
 	}
-	return priv
+	return priv, nil
 }
 
 // selfSignedDER mints a throwaway self-signed certificate for priv and returns
 // its DER. macOS derives the certificate's kSecAttrLabel from the subject CN, so
 // the CN is set to the label the example queries by.
-func selfSignedDER(priv *ecdsa.PrivateKey, cn string) []byte {
+func selfSignedDER(priv *ecdsa.PrivateKey, cn string) ([]byte, error) {
 	tmpl := x509.Certificate{
 		SerialNumber: big.NewInt(time.Now().UnixNano()),
 		Subject:      pkix.Name{CommonName: cn},
@@ -225,22 +331,23 @@ func selfSignedDER(priv *ecdsa.PrivateKey, cn string) []byte {
 	}
 	der, err := x509.CreateCertificate(rand.Reader, &tmpl, &tmpl, &priv.PublicKey, priv)
 	if err != nil {
-		fail("create cert", err)
+		return nil, fmt.Errorf("create certificate: %w", err)
 	}
-	return der
+	return der, nil
 }
 
 // ecX963 encodes an EC private key in the ANSI X9.63 form SecKeyCreateWithData
 // expects: the uncompressed public point (0x04 || X || Y) followed by the
 // private scalar K.
-func ecX963(priv *ecdsa.PrivateKey) []byte {
+func ecX963(priv *ecdsa.PrivateKey) ([]byte, error) {
 	k, err := priv.ECDH()
 	if err != nil {
-		fail("ecdh", err)
+		return nil, fmt.Errorf("convert key to ECDH form: %w", err)
 	}
-	return append(k.PublicKey().Bytes(), k.Bytes()...)
+	return append(k.PublicKey().Bytes(), k.Bytes()...), nil
 }
 
+// containsService reports whether any listed item has the given service.
 func containsService(items []keychain.GenericPassword, svc string) bool {
 	for _, it := range items {
 		if it.Service == svc {
@@ -250,7 +357,9 @@ func containsService(items []keychain.GenericPassword, svc string) bool {
 	return false
 }
 
-// cleanup removes anything a previous interrupted run may have left behind.
+// cleanup removes anything a previous interrupted run may have left behind. Errors
+// are intentionally ignored: each delete is best-effort and a missing item is the
+// normal case.
 func cleanup() {
 	_ = keychain.DeleteGenericPassword(service, account)
 	_ = keychain.DeleteInternetPassword(server, account)
@@ -259,16 +368,4 @@ func cleanup() {
 	_ = keychain.DeleteIdentity(idLabel)
 	_ = keychain.DeleteCertificate(idLabel)
 	_ = keychain.DeleteKey(idLabel)
-}
-
-func must(op string, err error) {
-	if err != nil {
-		fail(op, err)
-	}
-}
-
-func fail(op string, err error) {
-	fmt.Fprintf(os.Stderr, "FAIL (%s): %v\n", op, err)
-	cleanup()
-	os.Exit(1)
 }

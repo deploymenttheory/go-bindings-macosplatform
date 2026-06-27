@@ -8,7 +8,7 @@
 version: "1"
 
 # Verdict for flows with no matching rule. (Informational here; the extension's
-# DefaultAllow controls live behaviour.)
+# defaultAllowPolicy constant controls live behaviour.)
 defaultAction: block
 
 rules:

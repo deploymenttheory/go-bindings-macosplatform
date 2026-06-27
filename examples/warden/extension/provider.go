@@ -18,61 +18,60 @@ import (
 // its NSExtensionPrincipalClass — the system instantiates it to filter flows.
 const ProviderClassName = "WardenFilterDataProvider"
 
-// engine is the rule store the flow handler consults. DefaultAllow is the verdict
-// for a flow with no matching rule: Warden prompts the user via XPC; this port
-// applies a configurable default and logs (a real build would call out to the app).
-var (
-	engine       *rules.Engine
-	DefaultAllow = true
-)
+// defaultAllowPolicy is the verdict applied to a flow that matches no rule. Warden
+// is policy-driven (it does not prompt), so the unmatched default is fixed here; a
+// declarative config can still block such flows by setting defaultAction: block.
+const defaultAllowPolicy = true
 
 // RegisterProvider registers the NEFilterDataProvider subclass whose flow handler
-// consults eng. The system extension runtime later instantiates ProviderClassName
-// and drives startFilter / handleNewFlow on it.
-func RegisterProvider(eng *rules.Engine) error {
-	engine = eng
+// consults eng. defaultAllow is the verdict for a flow with no matching rule —
+// where LuLu prompts the user, this policy-driven port applies a configured default.
+// The system extension runtime later instantiates ProviderClassName and drives
+// startFilter / handleNewFlow on it.
+//
+// The handlers are closures over eng/defaultAllow rather than package globals (the
+// same shape daemon.go uses), so the provider carries no mutable package state.
+func RegisterProvider(eng *rules.Engine, defaultAllow bool) error {
+	// startFilter signals the system the filter is ready. No up-front filtering
+	// rules are installed, so every flow reaches handleNewFlow.
+	startFilter := func(_ rt.ID, _ rt.SEL, completion rt.Block) {
+		_, _ = rt.InvokeBlock[uintptr](completion, rt.ID(0)) // nil NSError → success
+	}
+	// stopFilter acknowledges teardown.
+	stopFilter := func(_ rt.ID, _ rt.SEL, _ int, completion rt.Block) {
+		_, _ = rt.InvokeBlock[uintptr](completion)
+	}
+	// handleNewFlow is the core firewall decision, called for every new flow:
+	// attribute the flow to a process, look up the rule verdict, and return an
+	// allow/drop NEFilterNewFlowVerdict. Equivalent to Warden's -handleNewFlow:.
+	handleNewFlow := func(_ rt.ID, _ rt.SEL, flow rt.ID) rt.ID {
+		addr, port := remoteEndpoint(flow)
+		key := ProcessPath(flowPID(flow))
+		if key == "" {
+			key = "unknown"
+		}
+		switch eng.Find(key, addr, port) {
+		case shared.RuleStateAllow:
+			return allowVerdict()
+		case shared.RuleStateBlock:
+			return dropVerdict()
+		default:
+			if defaultAllow {
+				return allowVerdict()
+			}
+			return dropVerdict()
+		}
+	}
+
 	_, err := rt.NewDelegate(
 		ProviderClassName,
 		rt.GetClass("NEFilterDataProvider"),
 		nil,
-		rt.DelegateHandler{Selector: "startFilterWithCompletionHandler:", Fn: impStartFilter},
-		rt.DelegateHandler{Selector: "stopFilterWithReason:completionHandler:", Fn: impStopFilter},
-		rt.DelegateHandler{Selector: "handleNewFlow:", Fn: impHandleNewFlow},
+		rt.DelegateHandler{Selector: "startFilterWithCompletionHandler:", Fn: startFilter},
+		rt.DelegateHandler{Selector: "stopFilterWithReason:completionHandler:", Fn: stopFilter},
+		rt.DelegateHandler{Selector: "handleNewFlow:", Fn: handleNewFlow},
 	)
 	return err
-}
-
-// impStartFilter signals the system the filter is ready. No up-front filtering
-// rules are installed; every flow reaches handleNewFlow.
-func impStartFilter(_ rt.ID, _ rt.SEL, completion rt.Block) {
-	_, _ = rt.InvokeBlock[uintptr](completion, rt.ID(0)) // nil NSError → success
-}
-
-// impStopFilter acknowledges teardown.
-func impStopFilter(_ rt.ID, _ rt.SEL, _ int, completion rt.Block) {
-	_, _ = rt.InvokeBlock[uintptr](completion)
-}
-
-// impHandleNewFlow is the core firewall decision, called for every new flow:
-// attribute the flow to a process, look up the rule verdict, and return an
-// allow/drop NEFilterNewFlowVerdict. Equivalent to Warden's -handleNewFlow:.
-func impHandleNewFlow(_ rt.ID, _ rt.SEL, flow rt.ID) rt.ID {
-	addr, port := remoteEndpoint(flow)
-	key := ProcessPath(flowPID(flow))
-	if key == "" {
-		key = "unknown"
-	}
-	switch engine.Find(key, addr, port) {
-	case shared.RuleStateAllow:
-		return allowVerdict()
-	case shared.RuleStateBlock:
-		return dropVerdict()
-	default:
-		if DefaultAllow {
-			return allowVerdict()
-		}
-		return dropVerdict()
-	}
 }
 
 // remoteEndpoint reads the destination host and port from a socket flow's
@@ -107,9 +106,9 @@ func flowPID(flow rt.ID) int32 {
 
 // allowVerdict / dropVerdict build the corresponding NEFilterNewFlowVerdict.
 func allowVerdict() rt.ID {
-	return rt.Send[rt.ID](classID("NEFilterNewFlowVerdict"), rt.RegisterName("allowVerdict"))
+	return rt.Send[rt.ID](shared.ClassID("NEFilterNewFlowVerdict"), rt.RegisterName("allowVerdict"))
 }
 
 func dropVerdict() rt.ID {
-	return rt.Send[rt.ID](classID("NEFilterNewFlowVerdict"), rt.RegisterName("dropVerdict"))
+	return rt.Send[rt.ID](shared.ClassID("NEFilterNewFlowVerdict"), rt.RegisterName("dropVerdict"))
 }

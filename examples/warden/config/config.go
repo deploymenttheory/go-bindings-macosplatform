@@ -14,8 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 	"gopkg.in/yaml.v3"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 // Config is a declarative firewall configuration. It can be authored in JSON or
@@ -124,7 +125,7 @@ func (c *Config) Validate() error {
 }
 
 // actionState maps "allow"/"block" to the corresponding rule state.
-func actionState(s string) (int, error) {
+func actionState(s string) (shared.RuleState, error) {
 	switch strings.ToLower(s) {
 	case "allow":
 		return shared.RuleStateAllow, nil
@@ -228,18 +229,21 @@ func Apply(cfg *Config, store RuleStore) (added, deleted int) {
 // FromRules builds a Config document from an existing rule set (the inverse of
 // Desired), so a running firewall's managed rules can be exported and re-edited.
 func FromRules(rules []*shared.Rule) *Config {
-	byPath := map[string]*RuleSpec{}
-	var order []string
+	// specKey groups rules into one RuleSpec per (process path, verdict); a struct
+	// key is clearer and collision-proof versus joining the fields into a string.
+	type specKey struct {
+		path   string
+		action string
+	}
+	byKey := map[specKey]*RuleSpec{}
+	var order []specKey
 	for _, r := range rules {
-		action := "allow"
-		if r.Action == shared.RuleStateBlock {
-			action = "block"
-		}
-		spec, ok := byPath[r.Path+"\x00"+action]
+		key := specKey{path: r.Path, action: r.Action.String()}
+		spec, ok := byKey[key]
 		if !ok {
-			order = append(order, r.Path+"\x00"+action)
-			spec = &RuleSpec{Name: r.Name, Path: r.Path, Action: action}
-			byPath[r.Path+"\x00"+action] = spec
+			order = append(order, key)
+			spec = &RuleSpec{Name: r.Name, Path: r.Path, Action: key.action}
+			byKey[key] = spec
 		}
 		if r.EndpointAddr != "" || r.EndpointPort != "" {
 			spec.Endpoints = append(spec.Endpoints, EndpointSpec{Host: r.EndpointAddr, Port: r.EndpointPort})
@@ -247,7 +251,7 @@ func FromRules(rules []*shared.Rule) *Config {
 	}
 	cfg := &Config{Version: "1"}
 	for _, k := range order {
-		cfg.Rules = append(cfg.Rules, *byPath[k])
+		cfg.Rules = append(cfg.Rules, *byKey[k])
 	}
 	return cfg
 }

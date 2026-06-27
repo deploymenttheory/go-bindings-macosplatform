@@ -9,6 +9,7 @@ import (
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/config"
 	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 // reconcileInterval is how often a config-governed daemon re-applies its config
@@ -47,7 +48,7 @@ func Run(rulesPath, configPath string) error {
 			}
 		}()
 	}
-	if err := RegisterProvider(eng); err != nil {
+	if err := RegisterProvider(eng, defaultAllowPolicy); err != nil {
 		return err
 	}
 	if err := StartDaemon(eng, managed); err != nil {
@@ -56,8 +57,8 @@ func Run(rulesPath, configPath string) error {
 
 	// Enter NE system-extension mode and run the run loop (callbacks/flows are
 	// delivered on it).
-	rt.Send[rt.ID](classID("NEProvider"), rt.RegisterName("startSystemExtensionMode"))
-	runLoop := rt.Send[rt.ID](classID("NSRunLoop"), rt.RegisterName("currentRunLoop"))
+	rt.Send[rt.ID](shared.ClassID("NEProvider"), rt.RegisterName("startSystemExtensionMode"))
+	runLoop := rt.Send[rt.ID](shared.ClassID("NSRunLoop"), rt.RegisterName("currentRunLoop"))
 	rt.Send[rt.ID](runLoop, rt.RegisterName("run"))
 	return nil
 }

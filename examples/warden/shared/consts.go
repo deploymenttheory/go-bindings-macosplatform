@@ -5,12 +5,29 @@
 // Warden's Shared/ directory (Rule, consts, XPCDaemonProto, XPCUserProto).
 package shared
 
-// Rule states: the verdict a rule encodes for a flow.
+// RuleState is the verdict a rule encodes for a flow. It is a named type rather
+// than a bare int so the zero value (RuleStateBlock) is explicit at every call
+// site and the compiler rejects accidental mixing with unrelated integers.
+type RuleState int
+
 const (
-	RuleStateNotFound = -1 // no matching rule
-	RuleStateBlock    = 0  // deny the flow
-	RuleStateAllow    = 1  // permit the flow
+	RuleStateNotFound RuleState = -1 // no matching rule
+	RuleStateBlock    RuleState = 0  // deny the flow
+	RuleStateAllow    RuleState = 1  // permit the flow
 )
+
+// String renders a verdict as "allow"/"block" (and "not-found" for the sentinel),
+// so callers can log a rule's action without re-deriving the mapping.
+func (s RuleState) String() string {
+	switch s {
+	case RuleStateAllow:
+		return "allow"
+	case RuleStateBlock:
+		return "block"
+	default:
+		return "not-found"
+	}
+}
 
 // EndpointType classifies how a rule's endpoint address is matched.
 type EndpointType int
